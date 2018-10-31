@@ -434,7 +434,23 @@ namespace Core.Erp.Data.Inventario
 
                         }
                     }
-                    
+                    // composision
+                    if (info.lst_producto_composicion != null)
+                    {
+                        foreach (var item in info.lst_producto_composicion)
+                        {
+                            Context.in_Producto_Composicion.Add(new in_Producto_Composicion
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdProductoPadre = info.IdProducto,
+                                IdProductoHijo=item.IdProductoHijo,
+                                Cantidad=item.Cantidad,
+                                IdUnidadMedida = item.IdUnidadMedida
+
+                            });
+
+                        }
+                    }
 
                     var parametros = Context.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     if (parametros.P_se_crea_lote_0_al_crear_producto_matriz == true)
@@ -507,7 +523,24 @@ namespace Core.Erp.Data.Inventario
 
                                 }
                             }
-                            
+                            // composision
+                            if (info.lst_producto_composicion != null)
+                            {
+                                foreach (var item in info.lst_producto_composicion)
+                                {
+                                    Context.in_Producto_Composicion.Add(new in_Producto_Composicion
+                                    {
+                                        IdEmpresa = info.IdEmpresa,
+                                        IdProductoPadre = info.IdProducto,
+                                        IdProductoHijo = item.IdProductoHijo,
+                                        Cantidad = item.Cantidad,
+                                        IdUnidadMedida=item.IdUnidadMedida
+
+                                    });
+
+                                }
+                            }
+
                         }
                     }
                     
@@ -516,7 +549,7 @@ namespace Core.Erp.Data.Inventario
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw;
             }

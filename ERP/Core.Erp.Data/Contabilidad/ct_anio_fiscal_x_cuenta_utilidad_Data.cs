@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Contabilidad
                 ct_anio_fiscal_x_cuenta_utilidad_Info info = new ct_anio_fiscal_x_cuenta_utilidad_Info();
                 using (Entities_contabilidad Context = new Entities_contabilidad())
                 {
-                    ct_anio_fiscal_x_cuenta_utilidad Entity = Context.ct_anio_fiscal_x_cuenta_utilidad.FirstOrDefault(q => q.IdanioFiscal == IdanioFiscal && q.IdEmpresa == IdEmpresa);
+                    ct_anio_fiscal_x_cuenta_utilidad Entity = Context.ct_anio_fiscal_x_cuenta_utilidad.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdanioFiscal == IdanioFiscal);
                     if (Entity == null) return null;
                     info = new ct_anio_fiscal_x_cuenta_utilidad_Info
                     {
@@ -62,7 +62,8 @@ namespace Core.Erp.Data.Contabilidad
             {
                 using (Entities_contabilidad Context = new Entities_contabilidad())
                 {
-                    Context.Database.ExecuteSqlCommand("delete ct_anio_fiscal_x_cuenta_utilidad where IdCtaCble = '" + IdanioFiscal + "' and IdEmpresa_cta = " + IdEmpresa);
+                    Context.Database.ExecuteSqlCommand("delete ct_anio_fiscal_x_cuenta_utilidad where IdEmpresa_cta = '" + IdEmpresa + "' and IdCtaCble = " + IdanioFiscal);
+
                 }
                 return true;
             }

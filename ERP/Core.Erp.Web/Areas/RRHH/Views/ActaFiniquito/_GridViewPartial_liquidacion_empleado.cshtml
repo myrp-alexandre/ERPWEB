@@ -65,7 +65,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "EstadoContrato")) != "ECT_LIQ")
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdActaFiniquito = DataBinder.Eval(tc.DataItem, "IdActaFiniquito") }) + "&nbsp;" +
@@ -118,23 +118,14 @@
             column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "c2";
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EstadoBool";
-            column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
-            column.EditorProperties().CheckBox(sp =>
-            {
-
-            });
-        });
+       
         settings.Columns.Add(column =>
         {
             column.Caption = "#";
             column.Width = Unit.Percentage(10);
             column.SetDataItemTemplateContent(container =>
             {
-                if (Convert.ToString(DataBinder.Eval(container.DataItem, "Estado")) == "A")
+                if (Convert.ToString(DataBinder.Eval(container.DataItem, "EstadoContrato")) != "ECT_LIQ")
                 {
                     Html.DevExpress().HyperLink(hyperlink =>
                     {

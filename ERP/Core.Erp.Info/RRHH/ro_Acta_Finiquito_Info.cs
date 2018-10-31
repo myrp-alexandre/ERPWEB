@@ -47,6 +47,7 @@ namespace Core.Erp.Info.RRHH
         public string ca_descripcion { get; set; }
         public string Contrato { get; set; }
         public string pe_nombre_completo { get; set; }
+        public string EstadoContrato { get; set; }
 
         public List<ro_Acta_Finiquito_Detalle_Info> lst_detalle { get; set; }
 
