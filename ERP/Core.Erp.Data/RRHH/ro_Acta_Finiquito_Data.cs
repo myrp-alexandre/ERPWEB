@@ -31,7 +31,7 @@ namespace Core.Erp.Data.RRHH
                                  FechaSalida = q.FechaSalida,
                                  Ingresos = q.Ingresos,
                                  Egresos = q.Egresos,
-                                 Estado = q.EstadoActa,
+                                 EstadoContrato = q.EstadoContrato,
                                  Contrato_tipo = q.CodCatalogo,
 
                                  EstadoBool = q.EstadoActa == "A" ? true : false
