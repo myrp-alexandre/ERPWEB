@@ -332,6 +332,8 @@
           <Property Name="Fecha_UltMod" Type="datetime" />
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
           <Property Name="Direccion_Destino" Type="varchar" MaxLength="300" />
@@ -4297,6 +4299,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <NavigationProperty Name="fa_cliente_contactos" Relationship="Model_facturacion.FK_fa_guia_remision_fa_cliente_contactos" FromRole="fa_guia_remision" ToRole="fa_cliente_contactos" />
           <NavigationProperty Name="fa_factura_x_fa_guia_remision" Relationship="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_guia_remision" FromRole="fa_guia_remision" ToRole="fa_factura_x_fa_guia_remision" />
           <NavigationProperty Name="fa_guia_remision_det" Relationship="Model_facturacion.FK_fa_guia_remision_det_fa_guia_remision" FromRole="fa_guia_remision" ToRole="fa_guia_remision_det" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_fa_guia_remision_fa_catalogo">
           <End Type="Model_facturacion.fa_catalogo" Role="fa_catalogo" Multiplicity="0..1" />
@@ -5310,6 +5314,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwfa_notaCreDeb_x_
           <EntitySetMapping Name="fa_guia_remision">
             <EntityTypeMapping TypeName="Model_facturacion.fa_guia_remision">
               <MappingFragment StoreEntitySet="fa_guia_remision">
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
                 <ScalarProperty Name="aprobada_enviar_sri" ColumnName="aprobada_enviar_sri" />
                 <ScalarProperty Name="IdCatalogo_traslado" ColumnName="IdCatalogo_traslado" />
                 <ScalarProperty Name="Num_declaracion_aduanera" ColumnName="Num_declaracion_aduanera" />
