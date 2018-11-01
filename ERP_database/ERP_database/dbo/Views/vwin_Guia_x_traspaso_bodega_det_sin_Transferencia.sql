@@ -1,0 +1,9 @@
+﻿CREATE VIEW vwin_Guia_x_traspaso_bodega_det_sin_Transferencia
+AS
+select ISNULL(ROW_NUMBER() OVER(ORDER BY vwin_Guia_x_traspaso_bodega_x_ordencompra_local_det.IdEmpresa),0) AS IdRow, * from vwin_Guia_x_traspaso_bodega_x_ordencompra_local_det
+where not exists(
+select A.IdEmpresa_guia from in_transferencia_det_x_in_Guia_x_traspaso_bodega_det A
+where vwin_Guia_x_traspaso_bodega_x_ordencompra_local_det.IdEmpresa = A.IdEmpresa_guia
+AND vwin_Guia_x_traspaso_bodega_x_ordencompra_local_det.IdGuia = A.IdGuia_guia
+AND vwin_Guia_x_traspaso_bodega_x_ordencompra_local_det.secuencia = A.Secuencia_guia
+)

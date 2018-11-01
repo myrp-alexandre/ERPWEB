@@ -53,7 +53,6 @@
         </div>
     </div>
     <div class="row">
-
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
@@ -62,7 +61,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fec_Inicio_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechai" })
+                        @Html.DevExpress().DateEditFor(q => q.Fec_Inicio_Acumulacion, settings =>
+                       {
+                           settings.Name = "Fec_Inicio_Acumulacion";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fec_Inicio_Acumulacion, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -74,7 +81,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fec_Fin_Acumulacion, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fechaf" })
+                        @Html.DevExpress().DateEditFor(q => q.Fec_Fin_Acumulacion, settings =>
+                       {
+                           settings.Name = "Fec_Fin_Acumulacion";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fec_Fin_Acumulacion, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -91,23 +106,3 @@
             @Scripts.Render("~/bundles/jqueryval")
         }
         }
-
-        <script>
-
-            $(function () {
-
-                $('#fechai').datepicker({
-                    autoclose: true
-                })
-            })
-
-            $(function () {
-
-                $('#fechaf').datepicker({
-                    autoclose: true
-                })
-            })
-
-
-
-        </script>

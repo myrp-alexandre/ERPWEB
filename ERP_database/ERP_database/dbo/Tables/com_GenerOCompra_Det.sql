@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[com_GenerOCompra_Det] (
+    [IdEmpresa]           INT          NOT NULL,
+    [IdTransaccion]       NUMERIC (18) NOT NULL,
+    [IdDetTrans]          INT          NOT NULL,
+    [IdProveedor]         NUMERIC (18) NULL,
+    [CodObra]             VARCHAR (20) NOT NULL,
+    [IdOrdenTaller]       NUMERIC (18) NOT NULL,
+    [Motivo]              VARCHAR (20) NOT NULL,
+    [IdProducto]          NUMERIC (18) NOT NULL,
+    [Cantidad]            FLOAT (53)   NOT NULL,
+    [Kg]                  FLOAT (53)   NOT NULL,
+    [IdEstadoAprob]       VARCHAR (25) NOT NULL,
+    [FechaRequer]         DATETIME     NOT NULL,
+    [IdListadoMateriales] NUMERIC (18) NULL,
+    [IdDetalle]           INT          NULL,
+    [precio]              FLOAT (53)   NULL,
+    [oc_IdEmpresa]        INT          NULL,
+    [oc_IdOrdenCompra]    NUMERIC (18) NULL,
+    [usuariosolicitante]  VARCHAR (50) NULL,
+    CONSTRAINT [PK_com_GenerOCompra_Det] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdTransaccion] ASC, [IdDetTrans] ASC),
+    CONSTRAINT [FK_com_GenerOCompra_Det_com_GenerOCompra] FOREIGN KEY ([IdEmpresa], [IdTransaccion]) REFERENCES [dbo].[com_GenerOCompra] ([IdEmpresa], [IdTransaccion]),
+    CONSTRAINT [FK_com_GenerOCompra_Det_cp_proveedor] FOREIGN KEY ([IdEmpresa], [IdProveedor]) REFERENCES [dbo].[cp_proveedor] ([IdEmpresa], [IdProveedor]),
+    CONSTRAINT [FK_com_GenerOCompra_Det_in_Producto] FOREIGN KEY ([IdEmpresa], [IdProducto]) REFERENCES [dbo].[in_Producto] ([IdEmpresa], [IdProducto])
+);
+

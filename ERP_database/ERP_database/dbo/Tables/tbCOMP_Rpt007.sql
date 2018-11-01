@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[tbCOMP_Rpt007] (
+    [IdEmpresa]        INT           NULL,
+    [Nom_Empresa]      VARCHAR (100) NULL,
+    [IdSucursal]       INT           NULL,
+    [Nom_Sucursal]     VARCHAR (100) NULL,
+    [Fecha_Corte]      DATETIME      NULL,
+    [IdMes1_anio]      INT           NULL,
+    [IdMes2_anio]      INT           NULL,
+    [IdMes3_anio]      INT           NULL,
+    [IdMes4_anio]      INT           NULL,
+    [Nom_Mes1_anio]    VARCHAR (20)  NULL,
+    [Nom_Mes2_anio]    VARCHAR (20)  NULL,
+    [Nom_Mes3_anio]    VARCHAR (20)  NULL,
+    [Nom_Mes4_anio]    VARCHAR (20)  NULL,
+    [Cant_Mes1_anio]   INT           NULL,
+    [Cant_Mes2_anio]   INT           NULL,
+    [Cant_Mes3_anio]   INT           NULL,
+    [Cant_Mes4_anio]   INT           NULL,
+    [Prom_cant_x_comp] INT           NULL,
+    [IdProducto]       NUMERIC (18)  NULL,
+    [Cod_Producto]     VARCHAR (100) NULL,
+    [nom_producto]     VARCHAR (200) NULL,
+    [stock_min]        INT           NULL,
+    [stock_a_la_fecha] INT           NULL,
+    [Alerta]           INT           NULL,
+    [varianza]         FLOAT (53)    NULL
+);
+

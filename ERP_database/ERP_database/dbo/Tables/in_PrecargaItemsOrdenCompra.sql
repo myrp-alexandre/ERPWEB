@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[in_PrecargaItemsOrdenCompra] (
+    [IdEmpresa]         INT            NOT NULL,
+    [IdSucursal]        INT            NOT NULL,
+    [IdPrecarga]        NUMERIC (18)   NOT NULL,
+    [IdCentroCosto]     VARCHAR (20)   NULL,
+    [IdOrdenTaller]     INT            NOT NULL,
+    [IdProveedor]       NUMERIC (18)   NOT NULL,
+    [pre_fecha]         DATETIME       NOT NULL,
+    [pre_subtotal]      FLOAT (53)     NOT NULL,
+    [pre_iva]           FLOAT (53)     NOT NULL,
+    [pre_descuento]     FLOAT (53)     NOT NULL,
+    [pre_pordesc]       SMALLINT       NOT NULL,
+    [pre_total]         FLOAT (53)     NOT NULL,
+    [pre_Base_conIva]   FLOAT (53)     NOT NULL,
+    [pre_Base_sinIva]   FLOAT (53)     NOT NULL,
+    [pre_observacion]   VARCHAR (1000) NOT NULL,
+    [Fechreg]           DATETIME       NOT NULL,
+    [Estado]            CHAR (1)       NOT NULL,
+    [pre_NumDocumento]  VARCHAR (50)   NULL,
+    [pre_PesoTotal]     FLOAT (53)     NULL,
+    [pre_fecha_emision] DATETIME       NULL,
+    CONSTRAINT [PK_in_PrecargaItemsOrdenCompra] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdSucursal] ASC, [IdPrecarga] ASC),
+    CONSTRAINT [FK_in_PrecargaItemsOrdenCompra_cp_proveedor] FOREIGN KEY ([IdEmpresa], [IdProveedor]) REFERENCES [dbo].[cp_proveedor] ([IdEmpresa], [IdProveedor]),
+    CONSTRAINT [FK_in_PrecargaItemsOrdenCompra_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
+);
+

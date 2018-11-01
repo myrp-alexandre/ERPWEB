@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[cxc_conciliacion] (
+    [IdEmpresa]            INT           NOT NULL,
+    [IdSucursal]           INT           NOT NULL,
+    [IdConciliacion]       NUMERIC (18)  NOT NULL,
+    [Fecha]                DATE          NOT NULL,
+    [Observacion]          VARCHAR (250) NOT NULL,
+    [IdCliente]            NUMERIC (18)  NULL,
+    [Estado]               CHAR (1)      NOT NULL,
+    [IdUsuario]            VARCHAR (20)  NOT NULL,
+    [Fecha_Transaccion]    DATETIME      NOT NULL,
+    [IdUsuarioUltModi]     VARCHAR (20)  NULL,
+    [Fecha_UltMod]         DATETIME      NULL,
+    [IdUsuarioUltAnu]      VARCHAR (20)  NULL,
+    [Fecha_UltAnu]         DATETIME      NULL,
+    [MotivoAnulacion]      VARCHAR (100) NULL,
+    [nom_pc]               VARCHAR (25)  NOT NULL,
+    [ip]                   VARCHAR (25)  NOT NULL,
+    [IdEmpresa_cbte_cble]  INT           NULL,
+    [IdTipoCbte_cbte_cble] INT           NULL,
+    [IdCbteCble_cbte_cble] NUMERIC (18)  NULL,
+    CONSTRAINT [PK_cxc_conciliacion] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdSucursal] ASC, [IdConciliacion] ASC),
+    CONSTRAINT [FK_cxc_conciliacion_ct_cbtecble] FOREIGN KEY ([IdEmpresa_cbte_cble], [IdTipoCbte_cbte_cble], [IdCbteCble_cbte_cble]) REFERENCES [dbo].[ct_cbtecble] ([IdEmpresa], [IdTipoCbte], [IdCbteCble]),
+    CONSTRAINT [FK_cxc_conciliacion_fa_cliente] FOREIGN KEY ([IdEmpresa], [IdCliente]) REFERENCES [dbo].[fa_cliente] ([IdEmpresa], [IdCliente])
+);
+
