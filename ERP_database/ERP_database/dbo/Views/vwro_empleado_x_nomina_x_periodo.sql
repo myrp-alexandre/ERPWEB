@@ -1,0 +1,3 @@
+﻿create view vwro_empleado_x_nomina_x_periodo as 
+select IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdEmpleado,IdPeriodo from ro_rol_detalle
+group by IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdEmpleado,IdPeriodo
