@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.Banco;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -190,6 +191,138 @@ namespace Core.Erp.Data.Banco
                 throw;
             }
         }
+
+
+        #region metodo baja demanda
+
+        public List<ba_TipoFlujo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<ba_TipoFlujo_Info> Lista = new List<ba_TipoFlujo_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+
+            return Lista;
+        }
+
+        public List<ba_TipoFlujo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string Tipo)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<ba_TipoFlujo_Info> Lista = new List<ba_TipoFlujo_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter, Tipo);
+
+            return Lista;
+        }
+        public List<ba_TipoFlujo_Info> get_list(int IdEmpresa, int skip, int take, string filter, string  Tipo)
+        {
+            try
+            {
+                List<ba_TipoFlujo_Info> Lista;
+
+                using (Entities_banco Context = new Entities_banco())
+                {
+                        Lista = (from p in Context.ba_TipoFlujo
+                                 where p.IdEmpresa == IdEmpresa
+                                 && p.Tipo == Tipo
+                                 && (p.Tipo.ToString() + " " + p.Descricion ).Contains(filter)
+                                 select new ba_TipoFlujo_Info
+                                 {
+                                     IdEmpresa = p.IdEmpresa,
+                                     cod_flujo = p.cod_flujo,
+                                     Descricion = p.Descricion,
+                                     Estado = p.Estado ,
+                                     IdTipoFlujo = p.IdTipoFlujo,
+                                     IdTipoFlujoPadre = p.IdTipoFlujoPadre,
+                                     Tipo = p.Tipo
+                                 })
+                                    .OrderBy(p => p.Tipo)
+                                    .Skip(skip)
+                                    .Take(take)
+                                    .ToList();
+              
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ba_TipoFlujo_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info_demanda(IdEmpresa, Convert.ToDecimal(args.Value));
+        }
+
+        public ba_TipoFlujo_Info get_info_demanda(int IdEmpresa, decimal IdTipoFlujo)
+        {
+            ba_TipoFlujo_Info info = new ba_TipoFlujo_Info();
+            using (Entities_banco Contex = new Entities_banco())
+            {
+                info = (from q in Contex.ba_TipoFlujo
+                        select new ba_TipoFlujo_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            cod_flujo = q.cod_flujo,
+                            Descricion = q.Descricion,
+                            IdTipoFlujo = q.IdTipoFlujo,
+                            IdTipoFlujoPadre = q.IdTipoFlujoPadre,
+                            Tipo = q.Tipo,
+                            Estado = q.Estado
+                        }).FirstOrDefault();
+            }
+            return info;
+        }
+
+        public List<ba_TipoFlujo_Info> get_list(int IdEmpresa, int skip, int take, string filter)
+        {
+            try
+            {
+                List<ba_TipoFlujo_Info> Lista = new List<ba_TipoFlujo_Info>();
+                Entities_banco Context = new Entities_banco();
+                var lst = (from
+                          p in Context.ba_TipoFlujo
+                           where
+                            p.IdEmpresa == IdEmpresa
+                            && (p.IdTipoFlujo.ToString() + " " + p.Descricion).Contains(filter)
+                           select new
+                           {
+                               p.IdEmpresa,
+                               p.IdTipoFlujo,
+                               p.cod_flujo ,
+                               p.Descricion ,
+                               p.IdTipoFlujoPadre ,
+                               p.Tipo ,
+                               p.Estado 
+
+                           })
+                             .OrderBy(p => p.IdTipoFlujo)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+                foreach (var q in lst)
+                {
+                    Lista.Add(new ba_TipoFlujo_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdTipoFlujo = q.IdTipoFlujo,
+                        Descricion = q.Descricion
+                    });
+                }
+                Context.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        #endregion
 
 
     }

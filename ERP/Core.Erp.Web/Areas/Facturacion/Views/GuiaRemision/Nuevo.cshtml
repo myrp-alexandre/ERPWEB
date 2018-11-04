@@ -84,180 +84,167 @@
 
     }
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
-                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IdSucursal">Sucursal*</label>
+                        @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                        @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                    </div>
 
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdPuntoVta">Punto de venta*</label>
-                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_punto_venta, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @id = "IdPuntoVta" })
-                    @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IdPuntoVta">Punto de venta*</label>
+                        @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_punto_venta, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @id = "IdPuntoVta" })
+                        @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-11">
+                    <div class="form-group">
+                        <label for="IdCliente">Cliente*</label>
+                        @Html.Partial("_CmbCliente_Guia", Model.IdCliente)
+                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label for="IdCliente"></label>
+                        <a type="button" class="btn btn-primary form-control " href="@Url.Action("Nuevo","Cliente",new { Area = "Facturacion", IdEmpresa = Model.IdEmpresa },null)" target="_blank">+</a>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="IdClienteContacto">Contacto</label>
+                        @Html.DropDownListFor(q => q.IdContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdContacto" })
+                        @Html.ValidationMessageFor(q => q.IdContacto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="vt_serie1">Establecimiento*</label>
+                        @Html.TextBoxFor(q => q.Serie1, new { @class = "form-control", @id = "Serie1" })
+                        @Html.ValidationMessageFor(q => q.Serie1, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="vt_serie2">Pto. Emisión*</label>
+                        @Html.TextBoxFor(q => q.Serie2, new { @class = "form-control", @id = "Serie2" })
+                        @Html.ValidationMessageFor(q => q.Serie2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="vt_NumFactura"># Documento*</label>
+                        @Html.TextBoxFor(q => q.NumGuia_Preimpresa, new { @class = "form-control", @id = "NumGuia_Preimpresa" })
+                        @Html.ValidationMessageFor(q => q.NumGuia_Preimpresa, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdVendedor">Transportista*</label>
-                    @Html.DropDownListFor(q => q.IdTransportista, new SelectList(ViewBag.lst_transportista, "IdTransportista", "Nombre"), new { @class = "form-control", @id = "IdTransportista" })
-                    @Html.ValidationMessageFor(q => q.IdTransportista, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="vt_serie1">Placa*</label>
-                    @Html.TextBoxFor(q => q.placa, new { @class = "form-control", @id = "placa" })
-                    @Html.ValidationMessageFor(q => q.placa, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-7">
-                <div class="form-group">
-                    <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_Guia", Model.IdCliente)
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label for="IdClienteContacto">Contacto</label>
-                    @Html.DropDownListFor(q => q.IdContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres"), new { @class = "form-control", @id = "IdContacto" })
-                    @Html.ValidationMessageFor(q => q.IdContacto, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-        </div>
-    </div>
+            <div class="col-md-6">
 
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="vt_serie1">Establecimiento*</label>
-                    @Html.TextBoxFor(q => q.Serie1, new { @class = "form-control", @id = "Serie1" })
-                    @Html.ValidationMessageFor(q => q.Serie1, "", new { @class = "text-danger" })
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IdVendedor">Transportista*</label>
+                        @Html.DropDownListFor(q => q.IdTransportista, new SelectList(ViewBag.lst_transportista, "IdTransportista", "Nombre"), new { @class = "form-control", @id = "IdTransportista" })
+                        @Html.ValidationMessageFor(q => q.IdTransportista, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="vt_serie2">Pto. Emisión*</label>
-                    @Html.TextBoxFor(q => q.Serie2, new { @class = "form-control", @id = "Serie2" })
-                    @Html.ValidationMessageFor(q => q.Serie2, "", new { @class = "text-danger" })
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="vt_serie1">Placa*</label>
+                        @Html.TextBoxFor(q => q.placa, new { @class = "form-control", @id = "placa" })
+                        @Html.ValidationMessageFor(q => q.placa, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="vt_NumFactura"># Documento*</label>
-                    @Html.TextBoxFor(q => q.NumGuia_Preimpresa, new { @class = "form-control", @id = "NumGuia_Preimpresa" })
-                    @Html.ValidationMessageFor(q => q.NumGuia_Preimpresa, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="gi_fecha">Fecha</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="gi_fecha">Fecha</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            @Html.DevExpress().DateEditFor(q=> q.gi_fecha, settings =>
+                        {
+                            settings.Name = "gi_fecha";
+                            settings.Properties.UseMaskBehavior = true;
+                            settings.Properties.EditFormat = EditFormat.Date;
+                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.gi_fecha, "", new { @class = "text-danger" })
                         </div>
-                        @Html.DevExpress().DateEditFor(q=> q.gi_fecha, settings =>
-                    {
-                        settings.Name = "gi_fecha";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.gi_fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label for="pf_observacion">Dirección origen</label>
+                        @Html.TextBoxFor(q => q.Direccion_Origen, new { @class = "form-control", @id = "Direccion_Origen" })
+                        @Html.ValidationMessageFor(q => q.Direccion_Origen, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Inicio traslado</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            @Html.DevExpress().DateEditFor(q=> q.gi_FechaInicioTraslado, settings =>
+                        {
+                            settings.Name = "gi_FechaInicioTraslado";
+                            settings.Properties.UseMaskBehavior = true;
+                            settings.Properties.EditFormat = EditFormat.Date;
+                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.gi_FechaInicioTraslado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label for="pf_observacion">Dirección destino</label>
+                        @Html.TextBoxFor(q => q.Direccion_Destino, new { @class = "form-control", @id = "Direccion_Destino" })
+                        @Html.ValidationMessageFor(q => q.Direccion_Destino, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="gi_FechaFinTraslado">Fin traslado</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            @Html.DevExpress().DateEditFor(q=> q.gi_FechaFinTraslado, settings =>
+                        {
+                            settings.Name = "gi_FechaFinTraslado";
+                            settings.Properties.UseMaskBehavior = true;
+                            settings.Properties.EditFormat = EditFormat.Date;
+                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.gi_FechaFinTraslado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="IdClienteContacto">Tipo de traslado</label>
+                        @Html.DropDownListFor(q => q.IdCatalogo_traslado, new SelectList(ViewBag.lst_tipo_traslado, "IdCatalogo", "Nombre"), new { @class = "form-control", @id = "IdContacto" })
+                        @Html.ValidationMessageFor(q => q.IdCatalogo_traslado, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label for="pf_observacion">Direcion origen</label>
-                    @Html.TextBoxFor(q => q.Direccion_Origen, new { @class = "form-control", @id = "Direccion_Origen" })
-                    @Html.ValidationMessageFor(q => q.Direccion_Origen, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="">Inicio traslado</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q=> q.gi_FechaInicioTraslado, settings =>
-                    {
-                        settings.Name = "gi_FechaInicioTraslado";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.gi_FechaInicioTraslado, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label for="pf_observacion">Direcion destino</label>
-                    @Html.TextBoxFor(q => q.Direccion_Destino, new { @class = "form-control", @id = "Direccion_Destino" })
-                    @Html.ValidationMessageFor(q => q.Direccion_Destino, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="gi_FechaFinTraslado">Fin traslado</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q=> q.gi_FechaFinTraslado, settings =>
-                    {
-                        settings.Name = "gi_FechaFinTraslado";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.gi_FechaFinTraslado, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label for="IdClienteContacto">Tipo de traslado</label>
-                    @Html.DropDownListFor(q => q.IdCatalogo_traslado, new SelectList(ViewBag.lst_tipo_traslado, "IdCatalogo", "Nombre"), new { @class = "form-control", @id = "IdContacto" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogo_traslado, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -277,7 +264,7 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#detalle_guia" aria-controls="informacion_general" role="tab" data-toggle="tab">Detalle guia</a>
+                <a href="#detalle_guia" aria-controls="informacion_general" role="tab" data-toggle="tab">Detalle guía</a>
             </li>
             <li>
                 <a href="#tab_documentos_relacionados" aria-controls="contactos_telefonos" role="tab" data-toggle="tab">Documentos relacionados</a>
@@ -327,7 +314,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Facturas sin guias</h4>
+                    <h4 class="modal-title">Facturas sin guías</h4>
                 </div>
                 <div class="modal-body">
                     @Html.Action("GridViewPartial_FacturasSinGuia")

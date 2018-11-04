@@ -9251,6 +9251,7 @@
     <Content Include="Areas\Reportes\Views\RRHHReportes\ExportPartial.cshtml" />
     <Content Include="Areas\Caja\Views\Caja\_GridViewPartial_caja.cshtml" />
     <Content Include="Areas\Contabilidad\Views\AnioFiscal\_CmbCuenta_Anio.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\_CmbFlujo_Deudas.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
