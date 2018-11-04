@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.Banco;
 using Core.Erp.Info.Banco;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,6 +78,23 @@ namespace Core.Erp.Bus.Banco
 
                 throw;
             }
+        }
+
+        public List<ba_TipoFlujo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            return odata.get_list_bajo_demanda(args, IdEmpresa);
+
+        }
+
+        public ba_TipoFlujo_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            return odata.get_info_bajo_demanda(args, IdEmpresa);
+        }
+
+        public List<ba_TipoFlujo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string Tipo)
+        {
+            return odata.get_list_bajo_demanda(args, IdEmpresa, Tipo);
+
         }
 
     }

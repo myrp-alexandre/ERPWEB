@@ -15,6 +15,8 @@ using DevExpress.Web;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
+using Core.Erp.Info.Banco;
+using Core.Erp.Bus.Banco;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -60,6 +62,22 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         #endregion
 
+        #region Metodos ComboBox bajo demanda flujo
+        ba_TipoFlujo_Bus bus_tipo = new ba_TipoFlujo_Bus();
+        public ActionResult CmbFlujo_Deudas()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbFlujo_Deudas", model);
+        }
+        public List<ba_TipoFlujo_Info> get_list_bajo_demandaFlujo(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_tipo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public ba_TipoFlujo_Info get_info_bajo_demandaFlujo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_tipo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
         #region Metodos ComboBox bajo demanda de producto
         public ActionResult CmbProducto_deudas()
         {
