@@ -1,4 +1,5 @@
-﻿--exec [web].[SPCXC_005] 1,1,9999,1,9999,'2018/12/31',0
+﻿
+--exec [web].[SPCXC_005] 1,1,9999,1,9999,'2018/12/31',0
 CREATE PROCEDURE [web].[SPCXC_005]
 (
 @IdEmpresa int,
@@ -43,8 +44,10 @@ GROUP BY cxc_cobro_det.IdEmpresa, cxc_cobro_det.IdSucursal, cxc_cobro_det.IdBode
 ) AS NC on c.IdEmpresa = NC.IdEmpresa AND c.IdSucursal = NC.IdSucursal AND c.IdBodega = NC.IdBodega_Cbte AND c.IdCbteVta = NC.IdCbte_vta_nota and NC.dc_TipoDocumento = c.vt_tipoDoc 
 
 WHERE c.Estado = 'A' and c.IdEmpresa = @IdEmpresa and c.IdCliente between @IdClienteIni and @IdClienteFin and c.IdContacto between @IdContactoIni and @IdContactoFin and c.vt_fecha <= @FechaCorte
-and ROUND(D.Total - ISNULL(cobro.ValorPago,0),2) > IIF(@MostrarSaldo0 = 1, -1, 0)
+and ROUND(D.Total - ISNULL(cobro.ValorPago,0),2) > IIF(@MostrarSaldo0 = 1, -999999999, 0)
+
 UNION ALL
+
 SELECT        c.IdEmpresa, c.IdSucursal, c.IdBodega, c.IdNota, c.CodDocumentoTipo, ISNULL(c.NumNota_Impresa,'INT-'+CAST(C.IdNota AS VARCHAR(10))), c.IdCliente, c.IdContacto, tb_persona.pe_nombreCompleto AS NomCliente, tb_ciudad.Descripcion_Ciudad +' ' +fa_cliente_contactos.Direccion AS NomContacto,
  c.no_fecha, c.no_fecha_venc, d.Subtotal, d.IVA, D.Total, isnull(cobro.ValorPago,0) as Cobrado, ISNULL(NC.ValorPago,0) as NotaCredito, ROUND(D.Total - ISNULL(NC.ValorPago,0) -  ISNULL(cobro.ValorPago,0),2) AS Saldo
 FROM            tb_ciudad RIGHT OUTER JOIN
@@ -77,4 +80,4 @@ and cxc_cobro_tipo.IdMotivo_tipo_cobro = 'NTCR'
 GROUP BY cxc_cobro_det.IdEmpresa, cxc_cobro_det.IdSucursal, cxc_cobro_det.IdBodega_Cbte, cxc_cobro_det.IdCbte_vta_nota, cxc_cobro_det.dc_TipoDocumento
 ) AS NC on c.IdEmpresa = NC.IdEmpresa AND c.IdSucursal = NC.IdSucursal AND c.IdBodega = NC.IdBodega_Cbte AND c.IdNota = NC.IdCbte_vta_nota and NC.dc_TipoDocumento = c.CodDocumentoTipo 
 WHERE c.Estado = 'A' and c.CreDeb = 'D' and c.IdEmpresa = @IdEmpresa and c.IdCliente between @IdClienteIni and @IdClienteFin and c.IdContacto between @IdContactoIni and @IdContactoFin and c.no_fecha <= @FechaCorte
-and ROUND(D.Total - ISNULL(cobro.ValorPago,0),2) > IIF(@MostrarSaldo0 = 1, -1, 0)
+and ROUND(D.Total - ISNULL(cobro.ValorPago,0),2) > IIF(@MostrarSaldo0 = 1, -9999999, 0)

@@ -1,5 +1,5 @@
 ﻿
-create procedure [web].[SPROL_015]
+CREATE procedure [web].[SPROL_015]
 (
 @FechaInicio date,
 @FechaFin date,
@@ -7,11 +7,11 @@ create procedure [web].[SPROL_015]
 
 as begin
 select emp.IdEmpresa, Valores.IdEmpleado,emp.IdNominaTipo, emp.IdNominaTipoLiqui,emp.pe_cedulaRuc, emp.pe_nombreCompleto, 
-sum(Valores.Decimocuarto)Decimocuarto, sum(Valores.DecimoTercero)DecimoTercero,sum( Valores.Vacaciones)Vacaciones
+sum(Valores.Decimocuarto)/3 Decimocuarto, sum(Valores.DecimoTercero)/3 DecimoTercero,sum( Valores.Vacaciones)/3Vacaciones
 
 from
 (
-SELECT        r_detalle.IdEmpresa, r_detalle.IdNominaTipo, r_detalle.IdNominaTipoLiqui, r_detalle.IdPeriodo, r_detalle.IdEmpleado, r_detalle.IdRubro,
+SELECT        r_detalle.IdEmpresa, r_detalle.IdNominaTipo, r_detalle.IdNominaTipoLiqui, r_detalle.IdPeriodo, r_detalle.IdEmpleado,
 rubros.ru_descripcion, pers.pe_nombreCompleto, pers.pe_cedulaRuc, period.pe_FechaIni, period.pe_FechaFin
 FROM            dbo.ro_rol_detalle_x_rubro_acumulado AS r_detalle INNER JOIN
                          dbo.ro_rol AS rol ON r_detalle.IdEmpresa = rol.IdEmpresa AND r_detalle.IdNominaTipo = rol.IdNominaTipo AND r_detalle.IdNominaTipoLiqui = rol.IdNominaTipoLiqui AND r_detalle.IdPeriodo = rol.IdPeriodo INNER JOIN
@@ -24,10 +24,15 @@ FROM            dbo.ro_rol_detalle_x_rubro_acumulado AS r_detalle INNER JOIN
                          dbo.tb_persona AS pers ON emp.IdPersona = pers.IdPersona
 						 where r_detalle.IdRubro in(199,200,295)
 						 and r_detalle.IdEmpresa=@IdEmpresa
+						 AND emp.IdEmpresa=@IdEmpresa
+						 AND r_detalle.IdEmpleado=emp.IdEmpleado
 						 and period.pe_FechaIni between @FechaInicio and @FechaFin
-						 and emp.em_status!='EST_ACT'
+						 and emp.em_status='EST_ACT'
 						 AND emp.em_estado='A'
 
+						 GROUP BY
+						  r_detalle.IdEmpresa, r_detalle.IdNominaTipo, r_detalle.IdNominaTipoLiqui, r_detalle.IdPeriodo, r_detalle.IdEmpleado,
+rubros.ru_descripcion, pers.pe_nombreCompleto, pers.pe_cedulaRuc, period.pe_FechaIni, period.pe_FechaFin
 )
 emp
 inner join (
@@ -42,7 +47,7 @@ FROM (
 		and ro_rol_detalle_x_rubro_acumulado.IdRubro=ro_rubro_tipo.IdRubro
 		and ro_rol_detalle_x_rubro_acumulado.IdEmpresa=@IdEmpresa
 		and ro_rubro_tipo.IdEmpresa=@IdEmpresa
-		--and ro_rol_detalle_x_rubro_acumulado.IdRubro in(199,200,295)
+		and ro_rol_detalle_x_rubro_acumulado.IdRubro in(199,200,295)
 
 
 ) as valores
@@ -58,7 +63,7 @@ PIVOT
  and emp.IdNominaTipo=Valores.IdNominaTipo
  and emp.IdNominaTipoLiqui=Valores.IdNominaTipoLiqui
  and emp.IdPeriodo=Valores.IdPeriodo
- --and emp.IdRubro=Valores.IdRubro
+
 
  group by
   emp.IdEmpresa, Valores.IdEmpleado,emp.IdNominaTipo, emp.IdNominaTipoLiqui,emp.pe_cedulaRuc, emp.pe_nombreCompleto

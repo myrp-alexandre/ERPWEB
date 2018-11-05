@@ -96,8 +96,8 @@ FROM          dbo.ro_empleado AS emp INNER JOIN
 emp
 inner join (
 (
- SELECT  IdEmpresa,IdEmpleado,IdCalendadrio, es_fechaRegistro, ISNULL( [ING1],'00:00:00')time_entrada1 ,ISNULL([ING2],'00:00:00')time_entrada2,
- ISNULL([SAL1],'00:00:00')time_salida1,ISNULL([SAL2],'00:00:00')time_salida2
+ SELECT  IdEmpresa,IdEmpleado,IdCalendadrio, es_fechaRegistro, ISNULL( [IN1],'00:00:00')time_entrada1 ,ISNULL([IN2],'00:00:00')time_entrada2,
+ ISNULL([OUT1],'00:00:00')time_salida1,ISNULL([OUT2],'00:00:00')time_salida2
 FROM (
     SELECT 
         IdEmpresa,IdEmpleado,IdCalendadrio,es_fechaRegistro,IdTipoMarcaciones, es_Hora
@@ -106,7 +106,7 @@ FROM (
 PIVOT
 (
    max([es_Hora])
-    FOR [IdTipoMarcaciones] IN ([ING1],[ING2],[SAL1],[SAL2])
+    FOR [IdTipoMarcaciones] IN ([IN1],[IN2],[OUT1],[OUT2])
 )AS pvt)
 )
  marc

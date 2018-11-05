@@ -1,6 +1,4 @@
-﻿--EXEC spINV_aprobacion_ing_egr 1,1,1,9,5
-
-CREATE PROCEDURE [dbo].[spINV_aprobacion_ing_egr]
+﻿CREATE PROCEDURE [dbo].[spINV_aprobacion_ing_egr]
 (
 @IdEmpresa int,
 @IdSucursal int,
@@ -33,7 +31,7 @@ AND IdMovi_inven_tipo = @IdMovi_inven_tipo
 
 SET @IdNumMovi_apro = ISNULL(@IdNumMovi_apro,1)
 END
-
+/*
 BEGIN --CORRECCION DE COSTO
 PRINT 'CORRECCION DE COSTO'
 SELECT @signo = signo, @fecha = cm_fecha
@@ -58,7 +56,7 @@ IF(@signo = '-')
 		) C where in_Ing_Egr_Inven_det.IdEmpresa = c.IdEmpresa and in_Ing_Egr_Inven_det.IdSucursal = C.IdSucursal and in_Ing_Egr_Inven_det.IdMovi_inven_tipo = c.IdMovi_inven_tipo and in_Ing_Egr_Inven_det.IdNumMovi = c.IdNumMovi and in_Ing_Egr_Inven_det.Secuencia = c.Secuencia
 	END
 END
-
+*/
 BEGIN --CONVERSION DE UNIDAD DE MEDIDA
 PRINT 'CONVERSION DE UNIDAD DE MEDIDA'
 update in_Ing_Egr_Inven_det set mv_costo = C.costo_convertido, dm_cantidad = C.cantidad_convertida
@@ -178,7 +176,7 @@ PRINT 'VALIDO PARAMETROS PARA CONTABILIZACION'
 SELECT @Genera_Diario_Contable = Genera_Diario_Contable, @IdTipoCbte = IdTipoCbte FROM in_movi_inven_tipo
 WHERE IdEmpresa = @IdEmpresa AND IdMovi_inven_tipo = @IdMovi_inven_tipo
 
-IF(@Genera_Diario_Contable = 'N')
+IF(@Genera_Diario_Contable = '0')
 	RETURN @IdNumMovi_apro
 
 SELECT @Cuenta_costo_de = P_Al_Conta_CtaCosto_Buscar_en, @Cuenta_inventario_de = P_Al_Conta_CtaInven_Buscar_en 
@@ -235,7 +233,7 @@ END
 
 BEGIN --GENERA DETALLE DE DIARIO EN TABLA TEMPORAL
 PRINT 'GENERA DETALLE DE DIARIO EN TABLA TEMPORAL'
-IF(@Cuenta_costo_de = 'X_CATEGORIA')
+IF(@Cuenta_costo_de = 'CONT_X_CAT_LIN')
 	BEGIN
 		INSERT INTO #in_movi_inven_x_cbte_cble(IdEmpresa, IdSucursal, IdBodega, IdMovi_inven_tipo, IdNumMovi, secuencia_inv, IdEmpresa_ct, IdTipoCbte, IdCbteCble,  IdCtaCble, dc_valor)
 		SELECT        A.IdEmpresa, A.IdSucursal, A.IdBodega, A.IdMovi_inven_tipo, A.IdNumMovi, A.Secuencia, @IdEmpresa, @IdTipoCbte, @IdCbteCble, C.IdCtaCtble_Costo, ABS(ROUND(A.dm_cantidad * A.mv_costo,2))
@@ -245,7 +243,7 @@ IF(@Cuenta_costo_de = 'X_CATEGORIA')
 		WHERE        (A.IdEmpresa = @IdEmpresa) AND (A.IdSucursal = @IdSucursal) AND (A.IdBodega = @IdBodega) AND (A.IdMovi_inven_tipo = @IdMovi_inven_tipo) AND (A.IdNumMovi = @IdNumMovi_apro)
 		AND A.mv_costo != 0
 	END
-IF(@Cuenta_inventario_de = 'X_CATEGORIA')
+IF(@Cuenta_inventario_de = 'CONT_X_CAT_LIN')
 	BEGIN
 		INSERT INTO #in_movi_inven_x_cbte_cble(IdEmpresa, IdSucursal, IdBodega, IdMovi_inven_tipo, IdNumMovi, secuencia_inv, IdEmpresa_ct, IdTipoCbte, IdCbteCble,  IdCtaCble, dc_valor)
 		SELECT        A.IdEmpresa, A.IdSucursal, A.IdBodega, A.IdMovi_inven_tipo, A.IdNumMovi, A.Secuencia, @IdEmpresa, @IdTipoCbte, @IdCbteCble, C.IdCtaCtble_Inve, ABS(ROUND(A.dm_cantidad * A.mv_costo,2))*-1

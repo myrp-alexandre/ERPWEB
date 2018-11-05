@@ -116,16 +116,6 @@ BEGIN
 									AND REV.IdNumMovi_inv = in_movi_inve_detalle.IdNumMovi
 								)
 								--BORRO CABECERA DE MOVIMIENTO
-								DELETE fa_factura_x_in_movi_inve
-								WHERE EXISTS(
-									SELECT REV.IdEmpresa_inv FROM in_spSys_inv_Reversar_aprobacion_in_movi_inven REV
-									WHERE REV.IdEmpresa_inv = fa_factura_x_in_movi_inve.inv_IdEmpresa
-									AND REV.IdSucursal_inv = fa_factura_x_in_movi_inve.inv_IdSucursal
-									AND REV.IdBodega_inv = fa_factura_x_in_movi_inve.inv_IdBodega
-									AND REV.IdMovi_inven_tipo_inv = fa_factura_x_in_movi_inve.inv_IdMovi_inven_tipo
-									AND REV.IdNumMovi_inv = fa_factura_x_in_movi_inve.inv_IdNumMovi
-								)
-								--BORRO CABECERA DE MOVIMIENTO
 								DELETE in_movi_inve
 								WHERE EXISTS(
 									SELECT REV.IdEmpresa_inv FROM in_spSys_inv_Reversar_aprobacion_in_movi_inven REV

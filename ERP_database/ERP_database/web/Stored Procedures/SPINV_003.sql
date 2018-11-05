@@ -31,7 +31,7 @@ BEGIN --INSERTO EN TABLA PK DE PRODUCTOS A MOSTRAR
 	where in_producto_x_tb_bodega.IdEmpresa = @IdEmpresa
 	AND IdSucursal between @IdSucursal_ini and @IdSucursal_fin
 	AND IdBodega BETWEEN @IdBodega_ini and @IdBodega_fin
-	and in_producto_x_tb_bodega.IdProducto between @IdProducto_ini and @IdProducto_fin
+	and isnull(in_Producto.IdProducto_padre,0) between @IdProducto_ini and @IdProducto_fin
 	and in_Producto.IdMarca between @IdMarcaIni and @IdMarcaFin
 END
 
@@ -99,6 +99,7 @@ BEGIN
 	DELETE web.in_SPINV_003 
 	WHERE Stock = 0
 END
+
 
 SELECT sp.IdEmpresa, sp.IdSucursal, sp.IdBodega, sp.IdProducto, sp.Stock, sp.Costo_promedio, sp.Costo_total, s.Su_Descripcion, b.bo_Descripcion, p.pr_codigo, p.pr_descripcion, p.lote_num_lote, p.lote_fecha_vcto, c.IdCategoria, c.ca_Categoria, 
                   l.IdLinea, l.nom_linea, g.IdGrupo, g.nom_grupo, sg.IdSubgrupo, sg.nom_subgrupo, pr.IdPresentacion, pr.nom_presentacion, sp.IdMarca, mar.Descripcion AS NomMarca

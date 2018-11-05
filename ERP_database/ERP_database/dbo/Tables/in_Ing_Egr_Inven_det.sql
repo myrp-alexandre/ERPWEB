@@ -36,11 +36,12 @@
     CONSTRAINT [FK_in_Ing_Egr_Inven_det_ct_centro_costo_sub_centro_costo] FOREIGN KEY ([IdEmpresa], [IdCentroCosto], [IdCentroCosto_sub_centro_costo]) REFERENCES [dbo].[ct_centro_costo_sub_centro_costo] ([IdEmpresa], [IdCentroCosto], [IdCentroCosto_sub_centro_costo]),
     CONSTRAINT [FK_in_Ing_Egr_Inven_det_ct_punto_cargo] FOREIGN KEY ([IdEmpresa], [IdPunto_cargo]) REFERENCES [dbo].[ct_punto_cargo] ([IdEmpresa], [IdPunto_cargo]),
     CONSTRAINT [FK_in_Ing_Egr_Inven_det_in_Ing_Egr_Inven] FOREIGN KEY ([IdEmpresa], [IdSucursal], [IdMovi_inven_tipo], [IdNumMovi]) REFERENCES [dbo].[in_Ing_Egr_Inven] ([IdEmpresa], [IdSucursal], [IdMovi_inven_tipo], [IdNumMovi]),
-    CONSTRAINT [FK_in_Ing_Egr_Inven_det_in_Ing_Egr_Inven_estado_apro] FOREIGN KEY ([IdEstadoAproba]) REFERENCES [dbo].[in_Ing_Egr_Inven_estado_apro] ([IdEstadoAproba]),
     CONSTRAINT [FK_in_Ing_Egr_Inven_det_in_movi_inve_detalle] FOREIGN KEY ([IdEmpresa_inv], [IdSucursal_inv], [IdBodega_inv], [IdMovi_inven_tipo_inv], [IdNumMovi_inv], [secuencia_inv]) REFERENCES [dbo].[in_movi_inve_detalle] ([IdEmpresa], [IdSucursal], [IdBodega], [IdMovi_inven_tipo], [IdNumMovi], [Secuencia]),
     CONSTRAINT [FK_in_Ing_Egr_Inven_det_in_Producto] FOREIGN KEY ([IdEmpresa], [IdProducto]) REFERENCES [dbo].[in_Producto] ([IdEmpresa], [IdProducto]),
     CONSTRAINT [FK_in_Ing_Egr_Inven_det_in_UnidadMedida2] FOREIGN KEY ([IdUnidadMedida]) REFERENCES [dbo].[in_UnidadMedida] ([IdUnidadMedida]),
     CONSTRAINT [FK_in_Ing_Egr_Inven_det_in_UnidadMedida3] FOREIGN KEY ([IdUnidadMedida_sinConversion]) REFERENCES [dbo].[in_UnidadMedida] ([IdUnidadMedida]),
     CONSTRAINT [FK_in_Ing_Egr_Inven_det_tb_bodega] FOREIGN KEY ([IdEmpresa], [IdSucursal], [IdBodega]) REFERENCES [dbo].[tb_bodega] ([IdEmpresa], [IdSucursal], [IdBodega])
 );
+
+
 

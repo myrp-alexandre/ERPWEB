@@ -17,10 +17,10 @@ AS
 --@IdPEriodo numeric,
 --@IdUsuario varchar(50),
 --@observacion varchar(500)
---set @IdEmpresa =2
+--set @IdEmpresa =1
 --set @IdNomina =1
 --set @IdNominaTipo =2
---set @IdPEriodo= 201809
+--set @IdPEriodo= 201801
 --set @IdUsuario ='admin'
 --set @observacion= 'PERIODO'+CAST( @IdPEriodo AS varchar(15))
 
@@ -80,6 +80,7 @@ where cont.IdEmpresa=@IdEmpresa
 and cont.IdNomina=@IdNomina
 and cont.EstadoContrato='ECT_ACT'
 and (emp.em_status='EST_ACT')
+and CAST( cont.FechaInicio as date)<=@Ff
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando sueldo por días trabajados-------------------------------------------------------------------------------------------<
@@ -100,7 +101,7 @@ where cont.IdEmpresa=@IdEmpresa
 and cont.IdNomina=@IdNomina
 and cont.EstadoContrato='ECT_ACT'
 and (emp.em_status='EST_ACT')
-
+and CAST( cont.FechaInicio as date)<=@Ff
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -127,6 +128,7 @@ and nov.FechaPago between @Fi and @Ff
 and nov.Estado='A'
 and nov.EstadoCobro='PEN'
 and (emp.em_status='EST_ACT')
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by nov.IdEmpresa,nov.IdEmpleado,nov.IdRubro,rub.ru_orden,rub.ru_descripcion, emp.IdPuntoCargo
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -150,6 +152,7 @@ and pred.FechaPago between @Fi and @Ff
 and pred.Estado='A'
 and pred.EstadoPago='PEN'
 and (emp.em_status='EST_ACT')
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------buscando rubros fijos e insertando al rol detalle-------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -170,7 +173,7 @@ and rub_fij.IdNomina_tipo=@IdNomina
 and rub_fij.IdNomina_TipoLiqui=@IdNominaTipo
 --and rub_fij.Estado='A'
 and (emp.em_status='EST_ACT')
-
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando aporte personal------------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -218,6 +221,7 @@ where acum.IdEmpresa= @IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
 and acum.IdRubro='296')
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,rol_det.IdNominaTipo,rol_det.IdNominaTipoLiqui,rol_det.IdPeriodo,rub.ru_orden
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -272,6 +276,7 @@ and acum.IdRubro='289'
 and acum.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa)
 AND emp.IdEmpresa=@IdEmpresa
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by emp.IdEmpresa,emp.IdEmpleado, emp.em_fechaSalida, cont.FechaInicio, cont.FechaFin, emp.em_status
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -424,6 +429,7 @@ and acum.IdEmpleado=emp.IdEmpleado
 and acum.IdRubro='296'
 and emp.idempresa=@idempresa
 and acum.IdEmpresa=@IdEmpresa)
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,rol_det.IdNominaTipo,rol_det.IdNominaTipoLiqui,rol_det.IdPeriodo
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -451,6 +457,7 @@ and acum.IdEmpleado=emp.IdEmpleado
 and acum.IdRubro='290'
 and acum.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa)
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,rol_det.IdNominaTipo,rol_det.IdNominaTipoLiqui,rol_det.IdPeriodo
 
 
@@ -475,6 +482,7 @@ and acum.IdEmpleado=emp.IdEmpleado
 and acum.IdRubro='289'
 and acum.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa)
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by emp.IdEmpresa,emp.IdEmpleado, emp.em_fechaSalida, cont.FechaInicio, cont.FechaFin, emp.em_status
 
 
@@ -496,6 +504,7 @@ and rol_det.IdNominaTipo=@IdNomina
 and rol_det.IdNominaTipoLiqui=@IdNominaTipo
 and rol_det.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='I' and rub.rub_aplica_IESS=1
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,rol_det.IdNominaTipo,rol_det.IdNominaTipoLiqui,rol_det.IdPeriodo
 
 
@@ -533,6 +542,7 @@ where acum.IdEmpresa= @IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
 and acum.IdRubro='296')
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,rol_det.IdNominaTipo,rol_det.IdNominaTipoLiqui,rol_det.IdPeriodo
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -559,6 +569,7 @@ where acum.IdEmpresa= @IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
 and acum.IdRubro='290')
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,rol_det.IdNominaTipo,rol_det.IdNominaTipoLiqui,rol_det.IdPeriodo
 
 
@@ -582,6 +593,7 @@ where acum.IdEmpresa= @IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
 and acum.IdRubro='289')
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by emp.IdEmpresa,emp.IdEmpleado, emp.em_fechaSalida, cont.FechaInicio, cont.FechaFin, emp.em_status
 
 
@@ -603,6 +615,7 @@ and rol_det.IdNominaTipo=@IdNomina
 and rol_det.IdNominaTipoLiqui=@IdNominaTipo
 and rol_det.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='I' and rub.rub_aplica_IESS=1
+and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,rol_det.IdNominaTipo,rol_det.IdNominaTipoLiqui,rol_det.IdPeriodo
 
 

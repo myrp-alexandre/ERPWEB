@@ -20,7 +20,8 @@
     [ip]                 VARCHAR (50)  NULL,
     CONSTRAINT [PK_ct_centro_costo] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdCentroCosto] ASC),
     CONSTRAINT [FK_ct_centro_costo_ct_centro_costo] FOREIGN KEY ([IdEmpresa], [IdCentroCostoPadre]) REFERENCES [dbo].[ct_centro_costo] ([IdEmpresa], [IdCentroCosto]),
-    CONSTRAINT [FK_ct_centro_costo_ct_centro_costo_nivel] FOREIGN KEY ([IdEmpresa], [IdNivel]) REFERENCES [dbo].[ct_centro_costo_nivel] ([IdEmpresa], [IdNivel]),
     CONSTRAINT [FK_ct_centro_costo_ct_plancta] FOREIGN KEY ([IdEmpresa], [IdCtaCble]) REFERENCES [dbo].[ct_plancta] ([IdEmpresa], [IdCtaCble])
 );
+
+
 
