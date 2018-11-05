@@ -1239,7 +1239,7 @@
     <Build Include="dbo\Tables\imp_partida_arancelaria.sql" />
     <Build Include="web\Views\vwct_RevisionContableFacturas.sql" />
     <Build Include="web\Stored Procedures\SPROL_015.sql" />
-    <Build Include="web\Views\VWROL_016_1.sql" />
+    <Build Include="web\Views\VWROL_016.sql" />
     <Build Include="EntidadRegulatoria\Views\vwfa_nota_debito_impuestos.sql" />
     <Build Include="EntidadRegulatoria\Views\vwfa_nota_debito_detalle.sql" />
     <Build Include="EntidadRegulatoria\Views\vwfa_nota_debito.sql" />
