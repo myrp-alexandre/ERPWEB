@@ -100,6 +100,9 @@
             <li>
                 <a href="#tb_info_adicional" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Información adicional</a>
             </li>
+            <li>
+                <a href="#tb_info_foto" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Foto del empleado</a>
+            </li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="padding-top: 20px">
@@ -642,7 +645,34 @@
                 </div>
             </div>
 
+            <div role="tabpanel" class="tab-pane" id="tb_info_foto">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
 
+
+                            @Html.DevExpress().BinaryImage(
+                            settings =>
+                            {
+                                settings.Name = "em_foto";
+                                settings.CallbackRouteValues = new { Controller = "Empleado", Action = "get_imagen" };
+                            }).Bind((Model.em_foto).ToArray()).GetHtml()
+
+
+                            @Html.DevExpress().UploadControl(settings =>
+                       {
+
+                           settings.Name = "UploadControl";
+                           settings.CallbackRouteValues = new { Controller = "Empleado", Action = "UploadControlUpload" };
+                           settings.ShowUploadButton = true;
+                           settings.ShowProgressPanel = true;
+                       }).GetHtml()
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
     </div>

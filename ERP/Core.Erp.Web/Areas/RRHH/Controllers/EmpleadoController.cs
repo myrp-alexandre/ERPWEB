@@ -9,6 +9,8 @@ using Core.Erp.Info.RRHH;
 using Core.Erp.Info.General;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Contabilidad;
+using DevExpress.Web;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class EmpleadoController : Controller
@@ -59,24 +61,29 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 string mensaje = "";
                 mensaje = Validar(info);
                 if(mensaje!="")
-                    {
+                {
+                    if (info.em_foto == null)
+                        info.em_foto = new byte[0];
                     ViewBag.mensaje = mensaje;
                     cargar_combos();
                     return View(info);
                 }
-                    info.IdEmpresa = GetIdEmpresa();
+                info.IdEmpresa = GetIdEmpresa();
+                info.em_foto = Empleado_imagen.em_foto;
                 if (!bus_empleado.guardarDB(info))
                 {
+                    if (info.em_foto == null)
+                        info.em_foto = new byte[0];
                     cargar_combos();
                     return View(info);
                 }
-                
-               return RedirectToAction("Index");
-               
+                Empleado_imagen.em_foto = null;
+                return RedirectToAction("Index");
             }
             catch (Exception)
             {
-
+                if (info.em_foto == null)
+                    info.em_foto = new byte[0];
                 throw;
             }
         }
@@ -87,6 +94,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                 cargar_combos();
                 ro_empleado_Info info = new ro_empleado_Info();
+                info.em_foto = new byte[0];
+
                 return View(info);
 
             }
@@ -105,22 +114,29 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 mensaje = Validar(info);
                 if (mensaje != "")
                 {
+                    if (info.em_foto == null)
+                        info.em_foto = new byte[0];
                     ViewBag.mensaje = mensaje;
                     cargar_combos();
                     return View(info);
                 }
                 info.IdEmpresa = GetIdEmpresa();
+                info.em_foto = Empleado_imagen.em_foto;
                 if (!bus_empleado.modificarDB(info))
                 {
+                    if (info.em_foto == null)
+                        info.em_foto = new byte[0];
                     cargar_combos();
                     return View(info);
                 }
-
+                Empleado_imagen.em_foto = null;
                 return RedirectToAction("Index");
 
             }
             catch (Exception)
             {
+                if (info.em_foto == null)
+                    info.em_foto = new byte[0];
 
                 throw;
             }
@@ -131,7 +147,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 cargar_combos();
-                return View(bus_empleado.get_info(GetIdEmpresa(), Idempleado));
+                ro_empleado_Info info = new ro_empleado_Info();
+                info = bus_empleado.get_info(GetIdEmpresa(), Idempleado);
+                if (info.em_foto == null)
+                    info.em_foto = new byte[0];
+                return View(info);
 
             }
             catch (Exception)
@@ -150,21 +170,28 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 mensaje = Validar(info);
                 if (mensaje != "")
                 {
+                    if (info.em_foto == null)
+                        info.em_foto = new byte[0];
                     ViewBag.mensaje = mensaje;
                     cargar_combos();
                     return View(info);
                 }
                 info.IdEmpresa = GetIdEmpresa();
+                info.em_foto = Empleado_imagen.em_foto;
                 if (!bus_empleado.anularDB(info))
                 {
+                    if (info.em_foto == null)
+                        info.em_foto = new byte[0];
                     cargar_combos();
                     return View(info);
                 }
-
+                Empleado_imagen.em_foto = null;
                 return RedirectToAction("Index");
             }
             catch (Exception)
             {
+                if (info.em_foto == null)
+                    info.em_foto = new byte[0];
 
                 throw;
             }
@@ -175,7 +202,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = GetIdEmpresa();
                 cargar_combos();
-                return View(bus_empleado.get_info(IdEmpresa, Idempleado));
+                ro_empleado_Info info = new ro_empleado_Info();
+                info = bus_empleado.get_info(GetIdEmpresa(), Idempleado);
+                if (info.em_foto == null)
+                    info.em_foto = new byte[0];
+                return View(info);
 
             }
             catch (Exception)
@@ -288,6 +319,45 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
 
                 throw;
+            }
+        }
+
+
+        const string UploadDirectory = "~/Content/imagenes/";
+
+        public UploadedFile UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControl", Empleado_imagen.UploadValidationSettings, Empleado_imagen.FileUploadComplete);
+
+            byte[] model = Empleado_imagen.em_foto;
+            UploadedFile file = new UploadedFile();
+            return file;
+        }
+
+        public ActionResult get_imagen()
+        {
+
+            byte[] model = Empleado_imagen.em_foto;
+            if (model == null)
+                model = new byte[0];
+            return PartialView("_Empleado_imagen", model);
+        }
+
+    }
+    public class Empleado_imagen
+    {
+        public static byte[] em_foto { get; set; }
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".jpg", ".jpeg" },
+            MaxFileSize = 4000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+
+            if (e.UploadedFile.IsValid)
+            {
+                em_foto = e.UploadedFile.FileBytes;
             }
         }
     }
