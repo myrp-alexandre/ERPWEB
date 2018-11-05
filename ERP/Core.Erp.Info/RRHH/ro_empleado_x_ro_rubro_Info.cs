@@ -20,7 +20,7 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo rubro es obligatorio")]
         public string IdRubro { get; set; }
         [Required(ErrorMessage = "El campo valor es obligatorio")]
-        public decimal Valor { get; set; }
+        public double Valor { get; set; }
         public string Estado { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

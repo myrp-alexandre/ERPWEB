@@ -19,7 +19,6 @@ namespace Core.Erp.Data
             this.ro_Acta_Finiquito_Detalle = new HashSet<ro_Acta_Finiquito_Detalle>();
             this.ro_Config_Param_contable = new HashSet<ro_Config_Param_contable>();
             this.ro_empleado_novedad_det = new HashSet<ro_empleado_novedad_det>();
-            this.ro_empleado_x_ro_rubro = new HashSet<ro_empleado_x_ro_rubro>();
             this.ro_empleado_x_rubro_acumulado = new HashSet<ro_empleado_x_rubro_acumulado>();
             this.ro_prestamo = new HashSet<ro_prestamo>();
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
@@ -29,6 +28,7 @@ namespace Core.Erp.Data
             this.ro_rubros_calculados3 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados4 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados5 = new HashSet<ro_rubros_calculados>();
+            this.ro_empleado_x_ro_rubro = new HashSet<ro_empleado_x_ro_rubro>();
         }
     
         public int IdEmpresa { get; set; }
@@ -65,7 +65,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_Acta_Finiquito_Detalle> ro_Acta_Finiquito_Detalle { get; set; }
         public virtual ICollection<ro_Config_Param_contable> ro_Config_Param_contable { get; set; }
         public virtual ICollection<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
-        public virtual ICollection<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
         public virtual ICollection<ro_empleado_x_rubro_acumulado> ro_empleado_x_rubro_acumulado { get; set; }
         public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
@@ -75,5 +74,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados3 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados4 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados5 { get; set; }
+        public virtual ICollection<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
     }
 }

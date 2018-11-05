@@ -20,7 +20,7 @@ namespace Core.Erp.Data
         public int IdNomina_Tipo { get; set; }
         public int IdNomina_TipoLiqui { get; set; }
         public string IdRubro { get; set; }
-        public decimal Valor { get; set; }
+        public double Valor { get; set; }
         public string Estado { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
@@ -28,9 +28,9 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string MotiAnula { get; set; }
+        public Nullable<System.DateTime> FechaInicio { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
     
         public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }

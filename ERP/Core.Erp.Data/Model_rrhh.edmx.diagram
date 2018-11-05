@@ -24,7 +24,6 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_Novedad" Width="1.5" PointX="14.25" PointY="55.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_novedad_det" Width="1.5" PointX="22.5" PointY="56.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_horario" Width="1.5" PointX="20.25" PointY="49" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_ro_rubro" Width="1.5" PointX="14.25" PointY="67.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_ro_tipoNomina" Width="1.5" PointX="11.25" PointY="57.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_rubro_acumulado" Width="1.5" PointX="17.25" PointY="58.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_titulos" Width="1.5" PointX="11.25" PointY="106.5" IsExpanded="true" />
@@ -57,7 +56,6 @@
         <EntityTypeShape EntityType="Model_rrhh.vwRo_ActaFiniquito" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_Novedad" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_ro_rubro" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_rubro_acumulado" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_titulos" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleados_consulta" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
@@ -95,7 +93,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_DocumentoxEmp_ro_empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_empleado" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_tipoNomina_ro_empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_rubro_acumulado" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_titulos_ro_empleado" ManuallyRouted="false" />
@@ -111,8 +108,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_Nomina_Tipoliqui" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_novedad_det_ro_rubro_tipo" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_horario_ro_horario" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_Nomina_Tipoliqui" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_rubro_tipo" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_tipoNomina_ro_Nomina_Tipo" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_rubro_acumulado_ro_rubro_tipo" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Historico_Liquidacion_Vacaciones_Det_ro_Historico_Liquidacion_Vacaciones" ManuallyRouted="false" />
@@ -165,6 +160,11 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_permiso_x_empleado" Width="1.5" PointX="11.25" PointY="74.875" />
         <AssociationConnector Association="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado1" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_ro_rubro" Width="1.5" PointX="15.75" PointY="48.25" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_Nomina_Tipoliqui" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_rubro_tipo" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_ro_rubro" Width="1.5" PointX="11.375" PointY="13.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

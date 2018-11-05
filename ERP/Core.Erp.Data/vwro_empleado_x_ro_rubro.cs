@@ -26,7 +26,9 @@ namespace Core.Erp.Data
         public string ru_descripcion { get; set; }
         public string Descripcion { get; set; }
         public string DescripcionProcesoNomina { get; set; }
-        public decimal Valor { get; set; }
+        public double Valor { get; set; }
         public int IdRubroFijo { get; set; }
+        public Nullable<System.DateTime> FechaInicio { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
     }
 }

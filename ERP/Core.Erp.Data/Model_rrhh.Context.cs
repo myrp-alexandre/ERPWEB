@@ -46,7 +46,6 @@ namespace Core.Erp.Data
         public DbSet<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
         public DbSet<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
         public DbSet<ro_empleado_x_horario> ro_empleado_x_horario { get; set; }
-        public DbSet<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
         public DbSet<ro_empleado_x_ro_tipoNomina> ro_empleado_x_ro_tipoNomina { get; set; }
         public DbSet<ro_empleado_x_rubro_acumulado> ro_empleado_x_rubro_acumulado { get; set; }
         public DbSet<ro_empleado_x_titulos> ro_empleado_x_titulos { get; set; }
@@ -79,7 +78,6 @@ namespace Core.Erp.Data
         public DbSet<vwRo_ActaFiniquito> vwRo_ActaFiniquito { get; set; }
         public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
         public DbSet<vwro_empleado_Novedad> vwro_empleado_Novedad { get; set; }
-        public DbSet<vwro_empleado_x_ro_rubro> vwro_empleado_x_ro_rubro { get; set; }
         public DbSet<vwro_empleado_x_rubro_acumulado> vwro_empleado_x_rubro_acumulado { get; set; }
         public DbSet<vwro_empleado_x_titulos> vwro_empleado_x_titulos { get; set; }
         public DbSet<vwro_empleados_consulta> vwro_empleados_consulta { get; set; }
@@ -105,6 +103,8 @@ namespace Core.Erp.Data
         public DbSet<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
         public DbSet<vwro_marcaciones_x_empleado> vwro_marcaciones_x_empleado { get; set; }
         public DbSet<ro_permiso_x_empleado> ro_permiso_x_empleado { get; set; }
+        public DbSet<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
+        public DbSet<vwro_empleado_x_ro_rubro> vwro_empleado_x_ro_rubro { get; set; }
     
         public virtual int spRo_Cierre_Rol(Nullable<int> idEmpresa, Nullable<int> idPeriodo, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui)
         {
