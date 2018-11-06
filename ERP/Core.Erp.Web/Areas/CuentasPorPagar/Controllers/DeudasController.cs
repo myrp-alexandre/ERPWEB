@@ -436,14 +436,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         public ActionResult Anular(int IdEmpresa= 0 , int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
         {
+           
+
+            cp_orden_giro_Info model = bus_orden_giro.get_info(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             #endregion
-
-            cp_orden_giro_Info model = bus_orden_giro.get_info(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
             if (model == null)
                 return RedirectToAction("Index");
             if (model.info_comrobante.lst_ct_cbtecble_det == null)
