@@ -177,20 +177,21 @@ namespace Core.Erp.Data.General
             return Lista;
         }
 
-        public tb_banco_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        public tb_banco_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
-            decimal id;
-            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+            int id;
+            if (args.Value == null || !int.TryParse(args.Value.ToString(), out id))
                 return null;
-            return get_info_demanda(IdEmpresa, Convert.ToDecimal(args.Value));
+            return get_info_demanda(Convert.ToInt32(args.Value));
         }
 
-        public tb_banco_Info get_info_demanda(int IdEmpresa, decimal IdTipoFlujo)
+        public tb_banco_Info get_info_demanda(int IdBanco)
         {
             tb_banco_Info info = new tb_banco_Info();
             using (Entities_general Contex = new Entities_general())
             {
                 info = (from q in Contex.tb_banco
+                        where q.IdBanco == IdBanco
                         select new tb_banco_Info
                         {
                             IdBanco = q.IdBanco,

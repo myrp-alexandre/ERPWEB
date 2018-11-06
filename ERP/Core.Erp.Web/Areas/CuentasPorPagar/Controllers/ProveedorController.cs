@@ -11,6 +11,7 @@ using Core.Erp.Bus.General;
 using Core.Erp.Info.Helps;
 using DevExpress.Web;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.General;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -26,6 +27,23 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_proveedor_clase_Bus bus_clase = new cp_proveedor_clase_Bus();
         tb_banco_Bus bus_banco = new tb_banco_Bus();
         #endregion
+
+        #region Metodos ComboBox bajo demanda banco
+        public ActionResult CmbBanco_Proveedor()
+        {
+            int model = new int();
+            return PartialView("_CmbBanco_Proveedor", model);
+        }
+        public List<tb_banco_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_banco.get_list_bajo_demanda(args);
+        }
+        public tb_banco_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_banco.get_info_bajo_demanda(args);
+        }
+        #endregion
+
 
         #region Index
         public ActionResult Index()

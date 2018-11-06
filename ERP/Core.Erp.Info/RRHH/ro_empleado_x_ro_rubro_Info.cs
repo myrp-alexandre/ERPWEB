@@ -23,6 +23,8 @@ namespace Core.Erp.Info.RRHH
         public double Valor { get; set; }
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
+        public bool es_indifinido { get; set; }
+
         public string Estado { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

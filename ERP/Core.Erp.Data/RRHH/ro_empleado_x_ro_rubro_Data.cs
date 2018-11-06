@@ -33,7 +33,8 @@ namespace Core.Erp.Data.RRHH
                                  ru_descripcion=q.ru_descripcion,
                                  pe_cedulaRuc=q.pe_cedulaRuc,
                                  FechaFin=q.FechaFin,
-                                 FechaInicio=q.FechaInicio
+                                 FechaInicio=q.FechaInicio,
+                                 es_indifinido=q.es_indifinido
 
 
                              }).ToList();
@@ -71,7 +72,8 @@ namespace Core.Erp.Data.RRHH
                         Valor = Entity.Valor,
                         IdRubro = Entity.IdRubro,
                         FechaInicio=Entity.FechaInicio,
-                        FechaFin=Entity.FechaFin
+                        FechaFin=Entity.FechaFin,
+                        es_indifinido=info.es_indifinido
                     };
                 }
 
@@ -99,7 +101,8 @@ namespace Core.Erp.Data.RRHH
                         Valor = info.Valor,
                         IdRubro = info.IdRubro,
                         FechaInicio=info.FechaInicio,
-                        FechaFin=info.FechaFin
+                        FechaFin=info.FechaFin,
+                        es_indifinido =info.es_indifinido
                     };
                     Context.ro_empleado_x_ro_rubro.Add(Entity);
                     Context.SaveChanges();
@@ -151,6 +154,7 @@ namespace Core.Erp.Data.RRHH
                     Entity.Valor = info.Valor;
                     Entity.FechaFin = info.FechaFin;
                     Entity.FechaInicio = info.FechaInicio;
+                    Entity.es_indifinido = info.es_indifinido;
                     Context.SaveChanges();
                 }
 

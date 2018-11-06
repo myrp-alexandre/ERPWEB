@@ -260,22 +260,35 @@ namespace Core.Erp.Data.Banco
 
         public ba_TipoFlujo_Info get_info_demanda(int IdEmpresa, decimal IdTipoFlujo)
         {
-            ba_TipoFlujo_Info info = new ba_TipoFlujo_Info();
-            using (Entities_banco Contex = new Entities_banco())
+            try
             {
-                info = (from q in Contex.ba_TipoFlujo
-                        select new ba_TipoFlujo_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            cod_flujo = q.cod_flujo,
-                            Descricion = q.Descricion,
-                            IdTipoFlujo = q.IdTipoFlujo,
-                            IdTipoFlujoPadre = q.IdTipoFlujoPadre,
-                            Tipo = q.Tipo,
-                            Estado = q.Estado
-                        }).FirstOrDefault();
+            ba_TipoFlujo_Info info = new ba_TipoFlujo_Info();
+                using (Entities_banco Context = new Entities_banco())
+                {
+
+                    ba_TipoFlujo Entity = Context.ba_TipoFlujo.Where(q => q.IdEmpresa == IdEmpresa && q.IdTipoFlujo == IdTipoFlujo).FirstOrDefault();
+                    if (Entity == null) return null;
+
+                    info = new ba_TipoFlujo_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        cod_flujo = Entity.cod_flujo,
+                        Descricion = Entity.Descricion,
+                        IdTipoFlujo = Entity.IdTipoFlujo,
+                        IdTipoFlujoPadre = Entity.IdTipoFlujoPadre,
+                        Tipo = Entity.Tipo,
+                        Estado = Entity.Estado
+                    };
+                }
+
+                return info;
+
             }
-            return info;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<ba_TipoFlujo_Info> get_list(int IdEmpresa, int skip, int take, string filter)
@@ -298,7 +311,6 @@ namespace Core.Erp.Data.Banco
                                p.IdTipoFlujoPadre ,
                                p.Tipo ,
                                p.Estado 
-
                            })
                              .OrderBy(p => p.IdTipoFlujo)
                              .Skip(skip)

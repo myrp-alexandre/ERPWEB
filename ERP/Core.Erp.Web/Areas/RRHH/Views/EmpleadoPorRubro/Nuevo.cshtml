@@ -74,6 +74,7 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -83,7 +84,23 @@
                     @Html.ValidationMessageFor(q => q.Valor, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="col-md-2">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="rub_concep"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.es_indifinido, settings =>
+                   {
+                       settings.Name = "es_indifinido";
+                       settings.Text = "Indifinido";
+                       settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_fechas();}";
+
+                   }).GetHtml()
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2" id="col_FechaInicio">
                 <div class="form-group">
                     <label for="Fecha">Fecha inicio</label>
                     <div class="input-group date">
@@ -103,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2" id="col_FechaFin">
                 <div class="form-group">
                     <label for="Fecha">Fecha fin</label>
                     <div class="input-group date">
@@ -170,6 +187,23 @@
             });
         };
 
+    function mostrar_fechas() {
+        GridViewPartial_tarea_det_adjunto.PerformCallback();
+    };
 
+    function mostrar_fechas() {
+        var es_indifinido = es_indifinido.GetChecked();
+        if (es_indifinido == true) {
+            $("#col_FechaFin").show();
+            $("#col_FechaInicio").show();
+
+        }
+        else {
+            $("#col_FechaFin").hide();
+            $("#col_FechaInicio").hide();
+        }
+    };
+
+   
 
 </script>

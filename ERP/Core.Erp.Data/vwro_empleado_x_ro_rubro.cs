@@ -30,5 +30,6 @@ namespace Core.Erp.Data
         public int IdRubroFijo { get; set; }
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
+        public bool es_indifinido { get; set; }
     }
 }
