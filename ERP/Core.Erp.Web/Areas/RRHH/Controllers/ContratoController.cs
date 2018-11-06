@@ -109,6 +109,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 ro_contrato_Info info = new ro_contrato_Info();
+                info.IdNomina = 1;
                 info.FechaInicio = DateTime.Now.Date;
                 info.FechaFin = DateTime.Now.Date;
                 cargar_combo();

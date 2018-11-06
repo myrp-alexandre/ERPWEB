@@ -96,8 +96,10 @@
 
 <script>
 
+    cargar_tipo_liquidacion_nomina();
 
-       $("#IdNomina_Tipo").change(function () {
+    $("#IdNomina_Tipo").change(function () {
+        
            $("#IdNomina_TipoLiqui").empty();
              cargar_tipo_liquidacion_nomina();
 
@@ -120,6 +122,7 @@
                     $.each(data, function (i, row) {
                         $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
                     });
+                    $("#IdNomina_TipoLiqui").val(2);
                 },
                 error: function (error) {
                 }

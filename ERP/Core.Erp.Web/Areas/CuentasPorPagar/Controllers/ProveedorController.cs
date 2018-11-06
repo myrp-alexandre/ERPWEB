@@ -24,6 +24,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
         cp_codigo_SRI_Bus bus_codigo = new cp_codigo_SRI_Bus();
         cp_proveedor_clase_Bus bus_clase = new cp_proveedor_clase_Bus();
+        tb_banco_Bus bus_banco = new tb_banco_Bus();
         #endregion
 
         #region Index
@@ -46,6 +47,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         private void cargar_combos(int IdEmpresa, string IdTipoSRI = "")
         {
+            var lst_banco = bus_banco.get_list(false);
+            ViewBag.lst_banco = lst_banco;
             var lst_tipo_cta = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIP_CTA_AC), false);
             ViewBag.lst_tipo_cta = lst_tipo_cta;
             var lst_tipo_doc = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODOC), false);

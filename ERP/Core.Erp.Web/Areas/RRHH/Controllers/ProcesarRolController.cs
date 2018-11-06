@@ -82,7 +82,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 cargar_combos(0, 0);
-                 ro_rol_Info info = new  ro_rol_Info();
+                 ro_rol_Info info = new  ro_rol_Info
+                 {
+                     IdNomina_Tipo = 1
+                 };
                 return View(info);
 
             }

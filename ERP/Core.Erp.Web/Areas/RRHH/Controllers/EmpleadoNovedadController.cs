@@ -91,8 +91,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_empleado_novedad_Info model = new ro_empleado_novedad_Info
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
-                Fecha = DateTime.Now
-            };
+                Fecha = DateTime.Now,
+                    IdNomina_Tipo = 1
+        };
             model.lst_novedad_det = new List<ro_empleado_novedad_det_Info>();
             lst_novedad_det.set_list(model.lst_novedad_det);
             cargar_combos(0);
