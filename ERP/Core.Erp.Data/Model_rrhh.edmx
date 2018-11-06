@@ -499,6 +499,7 @@
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
           <Property Name="FechaInicio" Type="date" />
           <Property Name="FechaFin" Type="date" />
+          <Property Name="es_indifinido" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ro_empleado_x_ro_tipoNomina">
           <Key>
@@ -1456,6 +1457,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_ro_rubro
             <PropertyRef Name="DescripcionProcesoNomina" />
             <PropertyRef Name="Valor" />
             <PropertyRef Name="IdRubroFijo" />
+            <PropertyRef Name="es_indifinido" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdNomina_Tipo" Type="int" Nullable="false" />
@@ -1473,6 +1475,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_ro_rubro
           <Property Name="IdRubroFijo" Type="int" Nullable="false" />
           <Property Name="FechaInicio" Type="date" />
           <Property Name="FechaFin" Type="date" />
+          <Property Name="es_indifinido" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwro_empleado_x_rubro_acumulado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3507,7 +3510,8 @@ FROM [dbo].[vwro_empleado_Novedad] AS [vwro_empleado_Novedad]</DefiningQuery>
 [vwro_empleado_x_ro_rubro].[Valor] AS [Valor], 
 [vwro_empleado_x_ro_rubro].[IdRubroFijo] AS [IdRubroFijo], 
 [vwro_empleado_x_ro_rubro].[FechaInicio] AS [FechaInicio], 
-[vwro_empleado_x_ro_rubro].[FechaFin] AS [FechaFin]
+[vwro_empleado_x_ro_rubro].[FechaFin] AS [FechaFin], 
+[vwro_empleado_x_ro_rubro].[es_indifinido] AS [es_indifinido]
 FROM [dbo].[vwro_empleado_x_ro_rubro] AS [vwro_empleado_x_ro_rubro]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_empleado_x_rubro_acumulado" EntityType="Self.vwro_empleado_x_rubro_acumulado" store:Type="Views" store:Schema="dbo">
@@ -7473,6 +7477,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <End Role="ro_permiso_x_empleado" EntitySet="ro_permiso_x_empleado" />
           </AssociationSet>
           <EntitySet Name="ro_empleado_x_ro_rubro" EntityType="Model_rrhh.ro_empleado_x_ro_rubro" />
+          <EntitySet Name="vwro_empleado_x_ro_rubro" EntityType="Model_rrhh.vwro_empleado_x_ro_rubro" />
           <AssociationSet Name="FK_ro_empleado_x_ro_rubro_ro_empleado" Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_empleado_x_ro_rubro" EntitySet="ro_empleado_x_ro_rubro" />
@@ -7485,7 +7490,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_empleado_x_ro_rubro" EntitySet="ro_empleado_x_ro_rubro" />
           </AssociationSet>
-          <EntitySet Name="vwro_empleado_x_ro_rubro" EntityType="Model_rrhh.vwro_empleado_x_ro_rubro" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -7945,9 +7949,44 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaInicio" Type="DateTime" Precision="0" />
           <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="es_indifinido" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado" FromRole="ro_empleado_x_ro_rubro" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_Nomina_Tipoliqui" FromRole="ro_empleado_x_ro_rubro" ToRole="ro_Nomina_Tipoliqui" />
           <NavigationProperty Name="ro_rubro_tipo" Relationship="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_rubro_tipo" FromRole="ro_empleado_x_ro_rubro" ToRole="ro_rubro_tipo" />
+        </EntityType>
+        <EntityType Name="vwro_empleado_x_ro_rubro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNomina_Tipo" />
+            <PropertyRef Name="IdNomina_TipoLiqui" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="IdRubroFijo" />
+            <PropertyRef Name="es_indifinido" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="IdRubroFijo" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Precision="0" />
+          <Property Name="es_indifinido" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_ro_empleado_x_ro_rubro_ro_empleado">
           <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
@@ -7993,38 +8032,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwro_empleado_x_ro_rubro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdNomina_Tipo" />
-            <PropertyRef Name="IdNomina_TipoLiqui" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="ru_descripcion" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="DescripcionProcesoNomina" />
-            <PropertyRef Name="Valor" />
-            <PropertyRef Name="IdRubroFijo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="IdRubroFijo" Type="Int32" Nullable="false" />
-          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
-          <Property Name="FechaFin" Type="DateTime" Precision="0" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9767,6 +9774,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <EntitySetMapping Name="ro_empleado_x_ro_rubro">
             <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_x_ro_rubro">
               <MappingFragment StoreEntitySet="ro_empleado_x_ro_rubro">
+                <ScalarProperty Name="es_indifinido" ColumnName="es_indifinido" />
                 <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
@@ -9790,6 +9798,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <EntitySetMapping Name="vwro_empleado_x_ro_rubro">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_x_ro_rubro">
               <MappingFragment StoreEntitySet="vwro_empleado_x_ro_rubro">
+                <ScalarProperty Name="es_indifinido" ColumnName="es_indifinido" />
                 <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="IdRubroFijo" ColumnName="IdRubroFijo" />
