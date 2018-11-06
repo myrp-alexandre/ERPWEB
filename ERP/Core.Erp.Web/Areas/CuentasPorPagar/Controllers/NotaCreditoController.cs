@@ -182,10 +182,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 model.info_comrobante.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
             Lis_ct_cbtecble_det_List_nc.set_list(model.info_comrobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
 
-             list_op_seleccionadas = bus_orden_pago_cancelaciones.Get_list_Cancelacion_x_CXP(IdEmpresa,IdTipoCbte_Nota,IdCbteCble_Nota);
+            list_op_seleccionadas = bus_orden_pago_cancelaciones.Get_list_Cancelacion_x_CXP(IdEmpresa,IdTipoCbte_Nota,IdCbteCble_Nota);
             if (list_op_seleccionadas == null)
                 list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
                 Session["list_op_seleccionadas"] = list_op_seleccionadas;
+
             cargar_combos(IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
             cargar_combos_detalle();
             return View(model);
@@ -236,22 +237,26 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         public ActionResult Anular(int IdEmpresa = 0 , int IdTipoCbte_Nota = 0, decimal IdCbteCble_Nota = 0)
         {
-            (Session["ct_cbtecble_det_Info"]) = null;
             Session["list_op_por_proveedor"] = null;
             Session["list_op_seleccionadas"] = null;
+
             cp_nota_DebCre_Info model = bus_orden_giro.get_info(IdEmpresa, IdTipoCbte_Nota, IdCbteCble_Nota);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+
             if (model == null)
                 return RedirectToAction("Index");
             if (model.info_comrobante.lst_ct_cbtecble_det == null)
                 model.info_comrobante.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
-            Session["ct_cbtecble_det_Info"] = model.info_comrobante.lst_ct_cbtecble_det;
+            Lis_ct_cbtecble_det_List_nc.set_list(model.info_comrobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
+
             list_op_seleccionadas = bus_orden_pago_cancelaciones.Get_list_Cancelacion_x_CXP(IdEmpresa, IdTipoCbte_Nota, IdCbteCble_Nota);
             if (list_op_seleccionadas == null)
                 list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
             Session["list_op_seleccionadas"] = list_op_seleccionadas;
-            cargar_combos(IdEmpresa, model.IdProveedor, model.IdTipoNota);
+
+            cargar_combos(IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
             cargar_combos_detalle();
-            return View(model);
+            return View(model); ;
         }
         [HttpPost]
         public ActionResult Anular(cp_nota_DebCre_Info model)
