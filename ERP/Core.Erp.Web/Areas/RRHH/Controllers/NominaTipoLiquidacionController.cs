@@ -61,7 +61,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 cargar_combos();
-                ro_Nomina_Tipoliqui_Info info = new ro_Nomina_Tipoliqui_Info();
+                ro_Nomina_Tipoliqui_Info info = new ro_Nomina_Tipoliqui_Info
+                {
+                    IdNomina_Tipo = 1
+                };
                 return View(info);
 
             }

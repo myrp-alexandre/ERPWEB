@@ -103,6 +103,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 ro_empleado_x_ro_rubro_Info model = new ro_empleado_x_ro_rubro_Info
                 {
+                    IdNomina_Tipo = 1,
                     FechaInicio=DateTime.Now.Date,
                     FechaFin = DateTime.Now.AddMonths(3)
                 };

@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.General;
 using Core.Erp.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 
@@ -69,6 +70,17 @@ namespace Core.Erp.Bus.General
 
                 throw;
             }
+        }
+
+        public List<tb_banco_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+
+        {
+            return odata.get_list_bajo_demanda(args);
+        }
+        public tb_banco_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+
+        {
+            return odata.get_info_bajo_demanda(args);
         }
     }
 }

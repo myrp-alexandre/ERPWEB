@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -161,6 +162,86 @@ namespace Core.Erp.Data.General
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+
+        public List<tb_banco_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<tb_banco_Info> Lista = new List<tb_banco_Info>();
+            Lista = get_list( skip, take, args.Filter);
+
+            return Lista;
+        }
+
+        public tb_banco_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            int id;
+            if (args.Value == null || !int.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info_demanda(Convert.ToInt32(args.Value));
+        }
+
+        public tb_banco_Info get_info_demanda(int IdBanco)
+        {
+            tb_banco_Info info = new tb_banco_Info();
+            using (Entities_general Contex = new Entities_general())
+            {
+                info = (from q in Contex.tb_banco
+                        where q.IdBanco == IdBanco
+                        select new tb_banco_Info
+                        {
+                            IdBanco = q.IdBanco,
+                            ba_descripcion = q.ba_descripcion,
+                            CodigoLegal = q.CodigoLegal,
+                            TieneFormatoTransferencia = q.TieneFormatoTransferencia,
+                            Estado = q.Estado
+                        }).FirstOrDefault();
+            }
+            return info;
+        }
+
+        public List<tb_banco_Info> get_list( int skip, int take, string filter)
+        {
+            try
+            {
+                List<tb_banco_Info> Lista = new List<tb_banco_Info>();
+                Entities_general Context = new Entities_general();
+                var lst = (from
+                          p in Context.tb_banco
+                           where  (p.IdBanco.ToString() + " " + p.ba_descripcion).Contains(filter)
+                           select new
+                           {
+                               p.IdBanco,
+                               p.ba_descripcion,
+                               p.CodigoLegal,
+                               p.TieneFormatoTransferencia,
+                               p.Estado
+
+                           })
+                             .OrderBy(p => p.IdBanco)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+                foreach (var q in lst)
+                {
+                    Lista.Add(new tb_banco_Info
+                    {
+                        IdBanco = q.IdBanco,
+                        ba_descripcion = q.ba_descripcion,
+                        CodigoLegal = q.CodigoLegal,
+                        TieneFormatoTransferencia = q.TieneFormatoTransferencia,
+                        Estado = q.Estado
+                    });
+                }
+                Context.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
