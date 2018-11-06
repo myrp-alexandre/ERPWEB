@@ -271,12 +271,12 @@ namespace Core.Erp.Bus.CuentasPorPagar
             try
             {
                 string mensaje = "";
-                if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.co_fechaOg, cl_enumeradores.eModulo.CONTA, ref mensaje))
+                if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.co_FechaFactura, cl_enumeradores.eModulo.CONTA, ref mensaje))
                 {
                     return mensaje;
                 }
 
-                if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.co_fechaOg, cl_enumeradores.eModulo.CXP, ref mensaje))
+                if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.co_FechaFactura, cl_enumeradores.eModulo.CXP, ref mensaje))
                 {
                     return mensaje;
                 }
