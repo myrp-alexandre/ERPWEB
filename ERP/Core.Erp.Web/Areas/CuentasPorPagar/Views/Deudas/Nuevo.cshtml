@@ -23,6 +23,8 @@
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
+    @Html.HiddenFor(q => q.co_fechaOg)
+
     <div class="row">
         <div class="col-md-6">
             <div class="col-md-6">
@@ -198,7 +200,7 @@
             <li class="active">
                 <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos contables</a>
             </li>
-           <li>
+            <li>
                 <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Detalle de ingreso</a>
             </li>
             <li>
@@ -312,7 +314,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
                 <div class="row">
                     <div class="col-md-12">
@@ -326,132 +328,132 @@
                 </div>
             </div>
 
-                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_pago">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="info_forma_pago.codigo_pago_sri">Forma Pago*</label>
-                                    @Html.DevExpress().ComboBoxFor(q => q.info_forma_pago.codigo_pago_sri, settings =>
-                               {
-                                   settings.Name = "info_forma_pago.codigo_pago_sri";
-                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                   settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("formas_pago_sri", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_pago">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="info_forma_pago.codigo_pago_sri">Forma Pago*</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.info_forma_pago.codigo_pago_sri, settings =>
+                           {
+                               settings.Name = "info_forma_pago.codigo_pago_sri";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                               settings.Properties.Columns.Add("formas_pago_sri", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
 
 
-                                   //Campo ID
-                                   settings.Properties.ValueField = "codigo_pago_sri";
-                                   settings.Properties.ValueType = typeof(string);
-                                   settings.Properties.TextField = "formas_pago_sri";
-                                   //Boton para seleccionar ningun registro
-                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               //Campo ID
+                               settings.Properties.ValueField = "codigo_pago_sri";
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "formas_pago_sri";
+                               //Boton para seleccionar ningun registro
+                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
-                               }).BindList(ViewBag.lst_forma_pago).GetHtml()
-                                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                                </div>
+                           }).BindList(ViewBag.lst_forma_pago).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="PagoLocExt">Pago local o exterior</label>
-                                    @Html.DropDownListFor(q => q.PagoLocExt, new SelectList(ViewBag.lst_pagos, "Key", "Value"), new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.PagoLocExt, "", new { @class = "text-danger" })
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="PagoLocExt">Pago local o exterior</label>
+                                @Html.DropDownListFor(q => q.PagoLocExt, new SelectList(ViewBag.lst_pagos, "Key", "Value"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.PagoLocExt, "", new { @class = "text-danger" })
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="PaisPago">País efectua el pago*</label>
-                                    @Html.DropDownListFor(q => q.PaisPago, new SelectList(ViewBag.lst_paises, "Codigo", "Pais"), new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.PaisPago, "", new { @class = "text-danger" })
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="PaisPago">País efectua el pago*</label>
+                                @Html.DropDownListFor(q => q.PaisPago, new SelectList(ViewBag.lst_paises, "Codigo", "Pais"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.PaisPago, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label for="ConvenioTributacion_bool">@Html.CheckBoxFor(q => q.ConvenioTributacion_bool) Aplica convenio de doble tributación en el pago</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label for="PagoSujetoRetencion_bool">@Html.CheckBoxFor(q => q.PagoSujetoRetencion_bool) Pago sujeto a retención en aplicación en la norma legal</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_cuotas">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <div class="form-group">
-                                    <label for="Num_cuotas">#cuotas</label>
-                                    @Html.TextBoxFor(q => q.info_cuota.Num_cuotas, new { @class = "form-control", @id = "Num_cuotas" })
-                                    @Html.ValidationMessageFor(q => q.info_cuota.Num_cuotas, "", new { @class = "text-danger" })
+                                    <label for="ConvenioTributacion_bool">@Html.CheckBoxFor(q => q.ConvenioTributacion_bool) Aplica convenio de doble tributación en el pago</label>
                                 </div>
                             </div>
-
-                            <div class="col-md-3">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <div class="form-group">
-                                    <label for="Dias_plazo">Días plazo</label>
-                                    @Html.TextBoxFor(q => q.info_cuota.Dias_plazo, new { @class = "form-control", @id = "Dias_plazo" })
-                                    @Html.ValidationMessageFor(q => q.info_cuota.Dias_plazo, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="Total_a_pagar">Total pagar</label>
-                                    @Html.TextBoxFor(q => q.info_cuota.Total_a_pagar, new { @class = "form-control", @id = "Total_a_pagar" })
-                                    @Html.ValidationMessageFor(q => q.info_cuota.Total_a_pagar, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="co_FechaContabilizacion">Fecha Primera cuota*</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        @Html.DevExpress().DateEditFor(q => q.info_cuota.Fecha_inicio, settings =>
-                                       {
-                                           settings.Name = "Fecha_inicio";
-                                           settings.Properties.UseMaskBehavior = true;
-                                           settings.Properties.EditFormat = EditFormat.Date;
-                                           settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                           settings.Properties.ClientSideEvents.DateChanged = "function(s,e){get_cuotas();}";
-                                       }).GetHtml()
-                                        @Html.ValidationMessageFor(q => q.info_cuota.Fecha_inicio, "", new { @class = "text-danger" })
-                                    </div>
+                                    <label for="PagoSujetoRetencion_bool">@Html.CheckBoxFor(q => q.PagoSujetoRetencion_bool) Pago sujeto a retención en aplicación en la norma legal</label>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="co_observacion">Detalle de cuotas</label>
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_cuotas">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Num_cuotas">#cuotas</label>
+                                @Html.TextBoxFor(q => q.info_cuota.Num_cuotas, new { @class = "form-control", @id = "Num_cuotas" })
+                                @Html.ValidationMessageFor(q => q.info_cuota.Num_cuotas, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                                    @Html.Action("GridViewPartial_documento_cuotas_det")
-
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Dias_plazo">Días plazo</label>
+                                @Html.TextBoxFor(q => q.info_cuota.Dias_plazo, new { @class = "form-control", @id = "Dias_plazo" })
+                                @Html.ValidationMessageFor(q => q.info_cuota.Dias_plazo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Total_a_pagar">Total pagar</label>
+                                @Html.TextBoxFor(q => q.info_cuota.Total_a_pagar, new { @class = "form-control", @id = "Total_a_pagar" })
+                                @Html.ValidationMessageFor(q => q.info_cuota.Total_a_pagar, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="co_FechaContabilizacion">Fecha Primera cuota*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.info_cuota.Fecha_inicio, settings =>
+                                   {
+                                       settings.Name = "Fecha_inicio";
+                                       settings.Properties.UseMaskBehavior = true;
+                                       settings.Properties.EditFormat = EditFormat.Date;
+                                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){get_cuotas();}";
+                                   }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.info_cuota.Fecha_inicio, "", new { @class = "text-danger" })
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="co_observacion">Detalle de cuotas</label>
+
+                                @Html.Action("GridViewPartial_documento_cuotas_det")
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -716,7 +718,7 @@
 
             var datos = {
                 IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: sucursal            
+            IdSucursal: sucursal
         }
 
         $.ajax({
