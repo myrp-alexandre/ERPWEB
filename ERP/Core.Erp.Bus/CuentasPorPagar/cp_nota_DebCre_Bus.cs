@@ -1,19 +1,16 @@
-﻿using System;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.General;
+using Core.Erp.Data.CuentasPorPagar;
+using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Erp.Info.CuentasPorPagar;
-using Core.Erp.Data.CuentasPorPagar;
-using Core.Erp.Info.Contabilidad;
-using Core.Erp.Bus.Contabilidad;
-using Core.Erp.Info.General;
-using Core.Erp.Bus.General;
-using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Bus.CuentasPorPagar
 {
-   public class cp_nota_DebCre_Bus
+    public class cp_nota_DebCre_Bus
     {
         cp_nota_DebCre_Data data = new cp_nota_DebCre_Data();
         ct_cbtecble_Bus bus_contabilidad = new ct_cbtecble_Bus();
@@ -23,6 +20,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         tb_sis_Documento_Tipo_Talonario_Info info_talonario=new tb_sis_Documento_Tipo_Talonario_Info();
         cp_orden_pago_cancelaciones_Data data_cancelacion = new cp_orden_pago_cancelaciones_Data();
         cp_orden_pago_cancelaciones_Info info_cancelacion = new cp_orden_pago_cancelaciones_Info();
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         public List<cp_nota_DebCre_Info> get_lst(int IdEmpresa, DateTime fi, DateTime ff)
         {
             try
@@ -226,9 +224,18 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
-
-
                 string mensaje = "";
+                if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.cn_fecha, cl_enumeradores.eModulo.CONTA, ref mensaje))
+                {
+                    return mensaje;
+                }
+
+                if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.cn_fecha, cl_enumeradores.eModulo.CXP, ref mensaje))
+                {
+                    return mensaje;
+                }
+
+                
                 if (info.IdSucursal == 0 )
                 {
                     mensaje = "Selecciona la sucursal";

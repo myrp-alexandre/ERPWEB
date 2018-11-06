@@ -3,6 +3,7 @@ using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Data.General;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
     public class cp_retencion_Bus
     {
 
-        #region MyRegion
+        #region Variables
         cp_retencion_Data odata = new cp_retencion_Data();
         cp_orden_giro_Data o_data_orden_giro = new cp_orden_giro_Data();
         cp_retencion_Info info_retencion = new cp_retencion_Info();
@@ -22,7 +23,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_retencion_x_ct_cbtecble_Info info_comp_x_retencion = new cp_retencion_x_ct_cbtecble_Info();
         cp_retencion_x_ct_cbtecble_Data data_comp_x_retencion = new cp_retencion_x_ct_cbtecble_Data();
         ct_cbtecble_det_Bus bus_comprobante_det = new ct_cbtecble_det_Bus();
-
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         cp_retencion_det_Data data_retencion_der = new cp_retencion_det_Data();
         #endregion
         public List<cp_retencion_Info> get_list(int IdEmpresa, DateTime Fechaini, DateTime FechaFin)
@@ -266,30 +267,36 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
-
-
                 string mensaje = "";
-               
-               
-                
+
+                if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.fecha, cl_enumeradores.eModulo.CONTA, ref mensaje))
+                {
+                    return mensaje;
+                }
+
+                if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.fecha, cl_enumeradores.eModulo.CXP, ref mensaje))
+                {
+                    return mensaje;
+                }
+
                 if (info.co_serie == "" | info.co_serie == null)
                 {
-                    mensaje = "Ingrese seri del documento";
+                    mensaje = "Ingrese la serie del documento";
                     return mensaje;
                 }
                 if (info.serie1 == "" | info.serie1 == null)
                 {
-                    mensaje = "Ingrese seri de la retención";
+                    mensaje = "Ingrese serie de la retención";
                     return mensaje;
                 }
                 if (info.serie2 == "" | info.serie2 == null)
                 {
-                    mensaje = "Ingrese seri de la retención";
+                    mensaje = "Ingrese serie de la retención";
                     return mensaje;
                 }
                 if (info.NumRetencion == "" | info.NumRetencion == null)
                 {
-                    mensaje = "No existe numero de la retención";
+                    mensaje = "No existe talonario de retención";
                     return mensaje;
                 }
                 if (info.co_factura == "" | info.co_factura == null)
@@ -298,7 +305,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     return mensaje;
                 }
                
-               if(info.info_comprobante.lst_ct_cbtecble_det==null)
+               if(info.info_comprobante.lst_ct_cbtecble_det == null)
                 {
                     mensaje = "No existe detalle";
                 }

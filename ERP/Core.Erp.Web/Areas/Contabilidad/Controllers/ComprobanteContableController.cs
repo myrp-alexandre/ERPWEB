@@ -19,6 +19,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         ct_cbtecble_det_Bus bus_comprobante_detalle = new ct_cbtecble_det_Bus();
         ct_cbtecble_det_List list_ct_cbtecble_det = new ct_cbtecble_det_List();
         string mensaje = string.Empty;
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
 
         #region Index
@@ -48,6 +49,11 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         #region Metodos
         private bool validar(ct_cbtecble_Info i_validar, ref string msg)
         {
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.CONTA, ref msg))
+            {
+                return false;
+            }
+
             if (i_validar.lst_ct_cbtecble_det.Count == 0)
             {
                 mensaje = "Debe ingresar registros en el detalle";

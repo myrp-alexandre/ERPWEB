@@ -72,7 +72,7 @@ namespace Core.Erp.Data.Facturacion
                         dev_IdEmpresa = Entity.dev_IdEmpresa,
                         dev_IdDev_Inven = Entity.dev_IdDev_Inven,
                         CodNota = Entity.CodNota,
-                        CreDeb = Entity.CreDeb,
+                        CreDeb = Entity.CreDeb.Trim(),
                         CodDocumentoTipo = Entity.CodDocumentoTipo,
                         Serie1 = Entity.Serie1,
                         Serie2 = Entity.Serie2,
@@ -171,7 +171,7 @@ namespace Core.Erp.Data.Facturacion
                         IdNota = info.IdNota = get_id(info.IdEmpresa, info.IdSucursal, info.IdBodega),
                         IdPuntoVta = info.IdPuntoVta,
                         CodNota = info.CodNota,
-                        CreDeb = info.CreDeb,
+                        CreDeb = info.CreDeb.Trim(),
                         CodDocumentoTipo = info.CodDocumentoTipo,
                         Serie1 = info.Serie1,
                         Serie2 = info.Serie2,
@@ -256,9 +256,9 @@ namespace Core.Erp.Data.Facturacion
                     #endregion
 
                     #region Contabilidad
-                    if (parametros != null && parametros.IdTipoCbteCble_NC != null && parametros.IdTipoCbteCble_ND != null)
+                    if (parametros != null)
                     {
-                        ct_cbtecble_Info diario = armar_diario(info, info.CreDeb == "C" ? (int)parametros.IdTipoCbteCble_NC : (int)parametros.IdTipoCbteCble_ND, cliente.IdCtaCble_cxc_Credito, info.IdCtaCble_TipoNota);
+                        ct_cbtecble_Info diario = armar_diario(info, info.CreDeb.Trim() == "C" ? (int)parametros.IdTipoCbteCble_NC : (int)parametros.IdTipoCbteCble_ND, cliente.IdCtaCble_cxc_Credito, info.IdCtaCble_TipoNota);
                         if (diario != null)
                         {
                             if (odata_ct.guardarDB(diario))
@@ -283,7 +283,7 @@ namespace Core.Erp.Data.Facturacion
                     #endregion
 
                     #region Cobranza
-                    if (info.CreDeb == "C" && info.lst_cruce.Count != 0)
+                    if (info.CreDeb.Trim() == "C" && info.lst_cruce.Count != 0)
                     {
                         cxc_cobro_Info cobro = armar_cobro(info);
                         if (cobro != null)
@@ -336,7 +336,7 @@ namespace Core.Erp.Data.Facturacion
 
                     entity.IdPuntoVta = info.IdPuntoVta;
                     //entity.CodNota = info.CodNota;
-                    entity.CreDeb = info.CreDeb;
+                    entity.CreDeb = info.CreDeb.Trim();
                     entity.CodDocumentoTipo = info.CodDocumentoTipo;
                     entity.Serie1 = info.Serie1;
                     entity.Serie2 = info.Serie2;
@@ -461,7 +461,7 @@ namespace Core.Erp.Data.Facturacion
                     #endregion
 
                     #region Cobranza
-                    if (info.CreDeb == "C" && info.lst_cruce.Count != 0)
+                    if (info.CreDeb.Trim() == "C" && info.lst_cruce.Count != 0)
                     {
                         cxc_cobro_Info cobro = armar_cobro(info);                                                
                         if (cobro != null)
