@@ -31,7 +31,9 @@ namespace Core.Erp.Data.RRHH
                                  Descripcion=q.Descripcion,
                                  DescripcionProcesoNomina=q.DescripcionProcesoNomina,
                                  ru_descripcion=q.ru_descripcion,
-                                 pe_cedulaRuc=q.pe_cedulaRuc
+                                 pe_cedulaRuc=q.pe_cedulaRuc,
+                                 FechaFin=q.FechaFin,
+                                 FechaInicio=q.FechaInicio
 
 
                              }).ToList();
@@ -67,7 +69,9 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_Tipo = Entity.IdNomina_Tipo,
                         IdNomina_TipoLiqui = Entity.IdNomina_TipoLiqui,
                         Valor = Entity.Valor,
-                        IdRubro = Entity.IdRubro
+                        IdRubro = Entity.IdRubro,
+                        FechaInicio=Entity.FechaInicio,
+                        FechaFin=Entity.FechaFin
                     };
                 }
 
@@ -93,7 +97,9 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_Tipo = info.IdNomina_Tipo,
                         IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
                         Valor = info.Valor,
-                        IdRubro = info.IdRubro
+                        IdRubro = info.IdRubro,
+                        FechaInicio=info.FechaInicio,
+                        FechaFin=info.FechaFin
                     };
                     Context.ro_empleado_x_ro_rubro.Add(Entity);
                     Context.SaveChanges();
@@ -143,6 +149,8 @@ namespace Core.Erp.Data.RRHH
                     Entity.IdNomina_Tipo = info.IdNomina_Tipo;
                     Entity.IdNomina_TipoLiqui = info.IdNomina_TipoLiqui;
                     Entity.Valor = info.Valor;
+                    Entity.FechaFin = info.FechaFin;
+                    Entity.FechaInicio = info.FechaInicio;
                     Context.SaveChanges();
                 }
 
