@@ -70,11 +70,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_detalle.p_IdCategoriaAF.Value = model.IdCategoriaAF;
                 model_detalle.p_fecha_corte.Value = model.fecha_fin;
                 model_detalle.p_Estado_Proceso.Value = model.Estado_Proceso;
-                model_detalle.p_IdUsuario.Value = model.IdUsuario;
+                model_detalle.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 cargar_combos(model);
 
-                model_detalle.usuario = SessionFixed.IdUsuario.ToString();
-                model_detalle.empresa = SessionFixed.NomEmpresa.ToString();
+                model_detalle.usuario = SessionFixed.IdUsuario;
+                model_detalle.empresa = SessionFixed.NomEmpresa;
                 ViewBag.report = model_detalle;
             }
             else
@@ -85,11 +85,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model_resumen.p_IdCategoriaAF.Value = model.IdCategoriaAF;
                 model_resumen.p_fecha_corte.Value = model.fecha_fin;
                 model_resumen.p_Estado_Proceso.Value = model.Estado_Proceso;
-                model_resumen.p_IdUsuario.Value = model.IdUsuario;
+                model_resumen.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 cargar_combos(model);
 
-                model_resumen.usuario = SessionFixed.IdUsuario.ToString();
-                model_resumen.empresa = SessionFixed.NomEmpresa.ToString();
+                model_resumen.usuario = SessionFixed.IdUsuario;
+                model_resumen.empresa = SessionFixed.NomEmpresa;
                 ViewBag.report = model_resumen;
             }
             cargar_combos(model);
