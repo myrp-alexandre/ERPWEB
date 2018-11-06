@@ -14,7 +14,6 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdProveedor)
     @Html.HiddenFor(q => q.IdPersona)
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -387,26 +386,26 @@
 }
 <script>
 
-        $("#pe_apellido").keyup(function () {
-            actualizar_nombre_completo();
-        });
-        $("#pe_nombre").keyup(function () {
-            actualizar_nombre_completo();
-        });
-        $("#pe_razonSocial").keyup(function () {
-            actualizar_nombre_completo();
-        });
+    $("#pe_apellido").keyup(function () {
+        actualizar_nombre_completo();
+    });
+    $("#pe_nombre").keyup(function () {
+        actualizar_nombre_completo();
+    });
+    $("#pe_razonSocial").keyup(function () {
+        actualizar_nombre_completo();
+    });
 
-        function actualizar_nombre_completo() {
-            var apellido = $("#pe_apellido").val();
-            var nombre = $("#pe_nombre").val();
-            var razon_social = $("#pe_razonSocial").val();
+    function actualizar_nombre_completo() {
+        var apellido = $("#pe_apellido").val();
+        var nombre = $("#pe_nombre").val();
+        var razon_social = $("#pe_razonSocial").val();
 
-            if (razon_social == "") {
-                var nombre_completo = apellido + ' ' + nombre;
-                $("#pe_nombreCompleto").val(nombre_completo)
-            } else {
-                $("#pe_nombreCompleto").val(razon_social)
-            }
+        if (razon_social == "") {
+            var nombre_completo = apellido + ' ' + nombre;
+            $("#pe_nombreCompleto").val(nombre_completo)
+        } else {
+            $("#pe_nombreCompleto").val(razon_social)
         }
+    }
 </script>

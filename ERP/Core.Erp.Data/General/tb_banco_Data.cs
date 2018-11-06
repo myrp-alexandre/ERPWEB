@@ -195,10 +195,7 @@ namespace Core.Erp.Data.General
                         select new tb_banco_Info
                         {
                             IdBanco = q.IdBanco,
-                            ba_descripcion = q.ba_descripcion,
-                            CodigoLegal = q.CodigoLegal,
-                            TieneFormatoTransferencia = q.TieneFormatoTransferencia,
-                            Estado = q.Estado
+                            ba_descripcion = q.ba_descripcion
                         }).FirstOrDefault();
             }
             return info;

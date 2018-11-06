@@ -78,6 +78,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return bus_tipo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
+
         #region Metodos ComboBox bajo demanda de producto
         public ActionResult CmbProducto_deudas()
         {

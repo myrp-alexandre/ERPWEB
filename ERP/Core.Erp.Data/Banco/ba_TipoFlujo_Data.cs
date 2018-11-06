@@ -265,20 +265,15 @@ namespace Core.Erp.Data.Banco
             ba_TipoFlujo_Info info = new ba_TipoFlujo_Info();
                 using (Entities_banco Context = new Entities_banco())
                 {
-
-                    ba_TipoFlujo Entity = Context.ba_TipoFlujo.Where(q => q.IdEmpresa == IdEmpresa && q.IdTipoFlujo == IdTipoFlujo).FirstOrDefault();
-                    if (Entity == null) return null;
-
-                    info = new ba_TipoFlujo_Info
+                    info =(from q in Context.ba_TipoFlujo
+                           where q.IdEmpresa == IdEmpresa
+                           &&  q.IdTipoFlujo == IdTipoFlujo
+                           select new ba_TipoFlujo_Info
                     {
-                        IdEmpresa = Entity.IdEmpresa,
-                        cod_flujo = Entity.cod_flujo,
-                        Descricion = Entity.Descricion,
-                        IdTipoFlujo = Entity.IdTipoFlujo,
-                        IdTipoFlujoPadre = Entity.IdTipoFlujoPadre,
-                        Tipo = Entity.Tipo,
-                        Estado = Entity.Estado
-                    };
+                        Descricion = q.Descricion,
+                        IdTipoFlujo = q.IdTipoFlujo
+
+                    }).FirstOrDefault();
                 }
 
                 return info;
