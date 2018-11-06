@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.Helps;
+
 namespace Core.Erp.Bus.CuentasPorPagar
 {
    public class cp_orden_giro_Bus
@@ -19,6 +21,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_parametros_Info info_parametro = new cp_parametros_Info();
         cp_parametros_Bus bus_parametro = new cp_parametros_Bus();
         cp_orden_giro_pagos_sri_Bus bus_forma_pago = new cp_orden_giro_pagos_sri_Bus();
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         public List<cp_orden_giro_Info> get_lst(int IdEmpresa,int IdSucursal, DateTime fi, DateTime ff)
         {
             try
@@ -267,9 +270,18 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
-
-
                 string mensaje = "";
+                if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.co_fechaOg, cl_enumeradores.eModulo.CONTA, ref mensaje))
+                {
+                    return mensaje;
+                }
+
+                if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.co_fechaOg, cl_enumeradores.eModulo.CXP, ref mensaje))
+                {
+                    return mensaje;
+                }
+
+
                 if (info.IdSucursal == 0 | info.IdSucursal == null)
                 {
                     mensaje = "Selecciona la sucursal";
