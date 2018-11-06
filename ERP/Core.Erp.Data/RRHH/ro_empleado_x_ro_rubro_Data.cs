@@ -73,7 +73,7 @@ namespace Core.Erp.Data.RRHH
                         IdRubro = Entity.IdRubro,
                         FechaInicio=Entity.FechaInicio,
                         FechaFin=Entity.FechaFin,
-                        es_indifinido=info.es_indifinido
+                        es_indifinido= Entity.es_indifinido
                     };
                 }
 

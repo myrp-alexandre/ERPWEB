@@ -28,7 +28,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -62,8 +61,8 @@
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
                    settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                   settings.Properties.Columns.Add("ru_tipo", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(10);
 
                    //Campo ID
                    settings.Properties.ValueField = "IdRubro";
@@ -90,7 +89,23 @@
                     @Html.ValidationMessageFor(q => q.Valor, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="col-md-2">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="rub_concep"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.es_indifinido, settings =>
+                   {
+                       settings.Name = "es_indifinido";
+                       settings.Text = "Indifinido";
+                       settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_fechas();}";
+
+                   }).GetHtml()
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2" id="col_FechaInicio">
                 <div class="form-group">
                     <label for="Fecha">Fecha inicio</label>
                     <div class="input-group date">
@@ -110,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2" id="col_FechaFin">
                 <div class="form-group">
                     <label for="Fecha">Fecha fin</label>
                     <div class="input-group date">
@@ -142,17 +157,20 @@
     }
 }
 
-
 <script>
-       $("#IdNomina_Tipo").change(function () {
+
+    cargar_tipo_liquidacion_nomina();
+
+    $("#IdNomina_Tipo").change(function () {
+
            $("#IdNomina_TipoLiqui").empty();
              cargar_tipo_liquidacion_nomina();
+
         });
         function cargar_tipo_liquidacion_nomina() {
             var datos = {
                 IdNomina: $("#IdNomina_Tipo").val()
             }
-
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
@@ -167,11 +185,28 @@
                     $.each(data, function (i, row) {
                         $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
                     });
+                    $("#IdNomina_TipoLiqui").val(2);
                 },
                 error: function (error) {
                 }
             });
         };
+
+    function mostrar_fechas() {
+        GridViewPartial_tarea_det_adjunto.PerformCallback();
+    };
+
+    function mostrar_fechas() {
+        if (es_indifinido.GetValue()) {
+            $("#col_FechaFin").show();
+            $("#col_FechaInicio").show();
+
+        }
+        else {
+            $("#col_FechaFin").hide();
+            $("#col_FechaInicio").hide();
+        }
+    };
 
 
 

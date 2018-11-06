@@ -1214,6 +1214,9 @@
     <Compile Include="ro_tipo_gastos_personales.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_tipo_gastos_personales_tabla_valores_x_anio.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_Tipo_Prestamo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>

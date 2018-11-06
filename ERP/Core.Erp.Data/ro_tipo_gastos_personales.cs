@@ -17,6 +17,7 @@ namespace Core.Erp.Data
         public ro_tipo_gastos_personales()
         {
             this.ro_empleado_proyeccion_gastos_det = new HashSet<ro_empleado_proyeccion_gastos_det>();
+            this.ro_tipo_gastos_personales_tabla_valores_x_anio = new HashSet<ro_tipo_gastos_personales_tabla_valores_x_anio>();
         }
     
         public string IdTipoGasto { get; set; }
@@ -25,5 +26,6 @@ namespace Core.Erp.Data
         public int orden { get; set; }
     
         public virtual ICollection<ro_empleado_proyeccion_gastos_det> ro_empleado_proyeccion_gastos_det { get; set; }
+        public virtual ICollection<ro_tipo_gastos_personales_tabla_valores_x_anio> ro_tipo_gastos_personales_tabla_valores_x_anio { get; set; }
     }
 }

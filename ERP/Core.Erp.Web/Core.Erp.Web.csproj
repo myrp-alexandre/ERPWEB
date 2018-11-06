@@ -413,6 +413,8 @@
     <Compile Include="Areas\RRHH\Controllers\RdepController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubroController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubrosCalculadosController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\TipoGatosPersonalesController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\TipoGatosPersonalesAnualController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TipoPrestamoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TurnoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\VacacionesController.cs" />
@@ -9253,6 +9255,11 @@
     <Content Include="Areas\Contabilidad\Views\AnioFiscal\_CmbCuenta_Anio.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\_CmbFlujo_Deudas.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\_CmbBanco_Proveedor.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonales\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonales\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonales\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonales\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonales\_GridViewPartial_gastos_personales.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
@@ -9336,6 +9343,7 @@
     <Folder Include="Areas\RRHH\Views\EmpleadoDocumento\" />
     <Folder Include="Areas\RRHH\Views\EmpleadoHistorialSueldo\" />
     <Folder Include="Areas\RRHH\Views\PeriodosPorNomina\" />
+    <Folder Include="Areas\RRHH\Views\TipoGatosPersonalesAnual\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
