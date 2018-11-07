@@ -1174,12 +1174,7 @@
     <Build Include="Security\Academico.sql" />
     <Build Include="Security\CAH.sql" />
     <Build Include="Security\CG.sql" />
-    <Build Include="Security\Edehsa.sql" />
     <Build Include="Security\EntidadRegulatoria.sql" />
-    <Build Include="Security\Fj_servindustrias.sql" />
-    <Build Include="Security\Grafinpren.sql" />
-    <Build Include="Security\Naturisa.sql" />
-    <Build Include="Security\Talento_humano.sql" />
     <Build Include="Security\web.sql" />
     <Build Include="web\Views\VWIMP_002_gastos.sql" />
     <Build Include="web\Views\VWIMP_002.sql" />
