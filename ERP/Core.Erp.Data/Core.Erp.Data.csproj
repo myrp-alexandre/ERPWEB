@@ -1278,6 +1278,7 @@
     <Compile Include="RRHH\ro_Solicitud_Vacaciones_x_empleado_Data.cs" />
     <Compile Include="RRHH\ro_tabla_Impu_Renta_Data.cs" />
     <Compile Include="RRHH\ro_tipo_gastos_personales_Data.cs" />
+    <Compile Include="RRHH\ro_tipo_gastos_personales_maxim_x_anio_Data.cs" />
     <Compile Include="RRHH\ro_tipo_prestamo_Data.cs" />
     <Compile Include="RRHH\ro_turno_Data.cs" />
     <Compile Include="SeguridadAcceso\seg_Menu_Data.cs" />
