@@ -18,7 +18,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[61] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[59] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -84,22 +84,32 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "ro_Nomina_Tipoliqui"
+         Begin Table = "ro_Nomina_Tipo"
             Begin Extent = 
-               Top = 238
-               Left = 728
-               Bottom = 389
-               Right = 964
+               Top = 332
+               Left = 319
+               Bottom = 462
+               Right = 501
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "ro_Nomina_Tipo"
+         Begin Table = "tb_persona"
             Begin Extent = 
-               Top = 272
-               Left = 410
-               Bottom = 402
-               Right = 592
+               Top = 29
+               Left = 1000
+               Bottom = 307
+               Right = 1232
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_Nomina_Tipoliqui"
+            Begin Extent = 
+               Top = 260
+               Left = 536
+               Bottom = 411
+               Right = 772
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -112,7 +122,17 @@ Begin DesignProperties =
                Right = 243
             End
             DisplayFlags = 280
-            TopColumn = 21
+            TopColumn = 0
+         End
+         Begin Table = "ro_empleado"
+            Begin Extent = 
+               Top = 0
+               Left = 618
+               Bottom = 211
+               Right = 907
+            End
+            DisplayFlags = 280
+            TopColumn = 0
          End
          Begin Table = "ro_empleado_x_ro_rubro"
             Begin Extent = 
@@ -120,26 +140,6 @@ Begin DesignProperties =
                Left = 321
                Bottom = 199
                Right = 518
-            End
-            DisplayFlags = 280
-            TopColumn = 11
-         End
-         Begin Table = "ro_empleado"
-            Begin Extent = 
-               Top = 1
-               Left = 520
-               Bottom = 212
-               Right = 809
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "tb_persona"
-            Begin Extent = 
-               Top = 0
-               Left = 955
-               Bottom = 278
-               Right = 1187
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -151,9 +151,11 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 15
+      Begin ColumnWidths = 14
          Width = 284
     ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_x_ro_rubro';
+
+
 
 
 
@@ -167,7 +169,6 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'     Width
          Width = 1500
          Width = 1500
          Width = 2865
-         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -194,6 +195,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'     Width
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_x_ro_rubro';
+
+
 
 
 

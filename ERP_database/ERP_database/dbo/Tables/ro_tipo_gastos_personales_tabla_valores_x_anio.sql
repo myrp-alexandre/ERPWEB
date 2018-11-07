@@ -9,12 +9,14 @@
     [Fecha_Transac]   DATETIME      NULL,
     [IdUsuarioUltMod] VARCHAR (20)  NULL,
     [Fecha_UltMod]    DATETIME      NULL,
-    [IdUsuarioUltAnu] VARCHAR (20)  NULL,
-    [Fecha_UltAnu]    DATETIME      NULL,
     [nom_pc]          VARCHAR (50)  NULL,
     [ip]              VARCHAR (25)  NULL,
+    [IdUsuarioUltAnu] VARCHAR (20)  NULL,
+    [Fecha_UltAnu]    DATETIME      NULL,
     [MotiAnula]       VARCHAR (200) NULL,
     CONSTRAINT [PK_ro_tipo_gastos_personales_tabla_valores_x_anio] PRIMARY KEY CLUSTERED ([IdGasto] ASC, [IdTipoGasto] ASC, [AnioFiscal] ASC),
     CONSTRAINT [FK_ro_tipo_gastos_personales_tabla_valores_x_anio_ro_tipo_gastos_personales] FOREIGN KEY ([IdTipoGasto]) REFERENCES [dbo].[ro_tipo_gastos_personales] ([IdTipoGasto])
 );
+
+
 
