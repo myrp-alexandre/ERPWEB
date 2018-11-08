@@ -224,7 +224,6 @@ namespace Core.Erp.Data.Banco
                 {
                         Lista = (from p in Context.ba_TipoFlujo
                                  where p.IdEmpresa == IdEmpresa
-                                 && p.Tipo == Tipo
                                  && (p.Tipo.ToString() + " " + p.Descricion ).Contains(filter)
                                  select new ba_TipoFlujo_Info
                                  {
