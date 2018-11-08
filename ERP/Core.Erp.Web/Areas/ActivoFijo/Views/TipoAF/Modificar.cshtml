@@ -44,14 +44,14 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="Af_anio_depreciacion">Años de depreciación*</label>
+                    <label for="Af_anio_depreciacion">Años de depreciación</label>
                     @Html.TextBoxFor(q => q.Af_anio_depreciacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Af_anio_depreciacion, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="Af_Porcentaje_depre">Porcentaje de depreciación*</label>
+                    <label for="Af_Porcentaje_depre">Porcentaje de depreciación</label>
                     @Html.TextBoxFor(q => q.Af_Porcentaje_depre, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Af_Porcentaje_depre, "", new { @class = "text-danger" })
                 </div>
@@ -62,7 +62,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCble_Activo">Cuenta contable activo</label>
+                    <label for="IdCtaCble_Activo">Cuenta contable activo*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Activo, settings =>
        {
            settings.Name = "IdCtaCble_Activo";
@@ -90,7 +90,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCble_Dep_Acum">Cuenta contable depreciación acumulada</label>
+                    <label for="IdCtaCble_Dep_Acum">Cuenta contable depreciación acumulada*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Dep_Acum, settings =>
        {
            settings.Name = "IdCtaCble_Dep_Acum";
@@ -118,7 +118,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCble_Gastos_Depre">Cuenta contable gastos de depreciación</label>
+                    <label for="IdCtaCble_Gastos_Depre">Cuenta contable gastos de depreciación*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Gastos_Depre, settings =>
        {
            settings.Name = "IdCtaCble_Gastos_Depre";

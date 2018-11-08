@@ -16,6 +16,7 @@ namespace Core.Erp.Info.Banco
         [Required(ErrorMessage = ("el campo descripción es obligatorio"))]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]
         public string Descripcion { get; set; }
+        [Required(ErrorMessage = ("el campo cuenta es obligatorio"))]
         public string IdCtaCble { get; set; }
         public string IdCentroCosto { get; set; }
         public string Estado { get; set; }

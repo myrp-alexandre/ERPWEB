@@ -356,6 +356,13 @@
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuentas">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="IdBanco_acreditacion">Banco</label>
+                                @Html.Partial("_CmbBanco_Proveedor", Model.IdBanco_acreditacion)
+                                @Html.ValidationMessageFor(q => q.IdBanco_acreditacion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="IdEstadoCivil">Tipo de cuenta</label>

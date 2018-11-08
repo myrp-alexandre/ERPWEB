@@ -31,7 +31,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string IdCtaCble_Anticipo { get; set; }
         public string IdCtaCble_Gasto { get; set; }
         [Required(ErrorMessage = "El campo clase proveedor es obligatorio")]
-
         public int IdClaseProveedor { get; set; }
         public string MotivoAnulacion { get; set; }
         public string IdTipoCta_acreditacion_cat { get; set; }

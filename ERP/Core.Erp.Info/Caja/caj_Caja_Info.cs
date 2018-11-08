@@ -18,6 +18,7 @@ namespace Core.Erp.Info.Caja
         [Required(ErrorMessage = ("el campo descripción es obligatorio"))]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]
         public string ca_Descripcion { get; set; }
+        [Required(ErrorMessage = ("el campo cuenta es obligatorio"))]
         public string IdCtaCble { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

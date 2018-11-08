@@ -20,8 +20,11 @@ namespace Core.Erp.Info.ActivoFijo
         public double Af_Porcentaje_depre { get; set; }
         [Required(ErrorMessage = ("el campo año es obligatorio"))]
         public int Af_anio_depreciacion { get; set; }
+        [Required(ErrorMessage = "El campo cuenta contable  es obligatoria")]
         public string IdCtaCble_Activo { get; set; }
+        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
         public string IdCtaCble_Dep_Acum { get; set; }
+        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
         public string IdCtaCble_Gastos_Depre { get; set; }
         public string IdCentroCosto_Activo { get; set; }
         public string IdCentroCosto_Dep_Acum { get; set; }

@@ -20,6 +20,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string descripcion_clas_prove { get; set; }
         public string IdCtaCble_Anticipo { get; set; }
         public string IdCtaCble_gasto { get; set; }
+        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
         public string IdCtaCble_CXP { get; set; }
         public string IdCentroCosto { get; set; }
         public string IdCentroCosto_sub_centro_costo { get; set; }
