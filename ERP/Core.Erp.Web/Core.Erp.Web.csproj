@@ -625,6 +625,12 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_006_sin_comision_Rpt.Designer.cs">
       <DependentUpon>CXC_006_sin_comision_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_001_detalle_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_001_detalle_Rpt.Designer.cs">
+      <DependentUpon>CXP_001_detalle_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9375,6 +9381,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

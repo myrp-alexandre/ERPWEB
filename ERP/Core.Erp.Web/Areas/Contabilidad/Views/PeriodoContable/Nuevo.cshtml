@@ -47,12 +47,23 @@
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="">Fecha inicial</label>
+                    <label for="pe_FechaIni">Fecha inicial</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.pe_FechaIni, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_FechaIni" })
+
+                        @Html.DevExpress().DateEditFor(q=> q.pe_FechaIni, settings =>
+                   {
+                       settings.Name = "pe_FechaIni";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){fechas();}";
+
+                   }).GetHtml()
                         @Html.ValidationMessageFor(q => q.pe_FechaIni, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -64,7 +75,18 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.pe_FechaFin, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_FechaFin" })
+
+                        @Html.DevExpress().DateEditFor(q=> q.pe_FechaFin, settings =>
+                   {
+                       settings.Name = "pe_FechaFin";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){fechas();}";
+
+                   }).GetHtml()
                         @Html.ValidationMessageFor(q => q.pe_FechaFin, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -96,26 +118,12 @@
 <script>
     $(function () {
         actualizar_periodo();
-        //Date picker
-        $('#pe_FechaIni').datepicker({
-            autoclose: true
-        })
-
-        $('#pe_FechaFin').datepicker({
-            autoclose: true
-        })
-    })
-
+        fechas();
+    });
     $("#pe_mes").change(function () {
         actualizar_periodo();
     });
     $("#IdanioFiscal").change(function () {
-        actualizar_periodo();
-    });
-    $("#pe_FechaIni").change(function () {
-        actualizar_periodo();
-    });
-    $("#pe_FechaFin").change(function () {
         actualizar_periodo();
     });
 
@@ -128,13 +136,12 @@
         var periodo = anio + p;
         $("#IdPeriodo").val(periodo)
 
-        var d = new Date($("#pe_FechaFin").val());
-        fecha = 0 + "/" + Number(mes) + "/" + Number(anio);
-        $("#pe_FechaFin").val(fecha)
+        var d = new Date(pe_FechaFin.GetValue());
+        fecha = anio + "/" + mes + "/" + 1;
+        pe_FechaFin.GetValue(fecha)
 
         fechaI = anio + "/" + mes + "/" + 1;
-        $("#pe_FechaIni").val(moment(fechaI).format("DD/MM/YYYY"))
-
+        pe_FechaIni.GetValue(moment(fechaI).format("DD/MM/YYYY"))
 
     }
 </script>
