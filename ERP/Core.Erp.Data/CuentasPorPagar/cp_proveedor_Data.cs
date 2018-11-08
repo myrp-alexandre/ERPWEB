@@ -91,7 +91,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         idCredito_Predeter = Entity.idCredito_Predeter,
                         IdBanco_acreditacion = Entity.IdBanco_acreditacion,
                         IdCentroCosot = Entity.IdCentroCosot,
-                        IdCtaCble_Anticipo = Entity.IdCtaCble_Anticipo,
                         IdCtaCble_CXP = Entity.IdCtaCble_CXP,
                         IdCtaCble_Gasto = Entity.IdCtaCble_Gasto,
                         IdPunto_cargo = Entity.IdPunto_cargo,
@@ -173,7 +172,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         idCredito_Predeter = info.idCredito_Predeter,
                         IdBanco_acreditacion = info.IdBanco_acreditacion,
                         IdCentroCosot = info.IdCentroCosot,
-                        IdCtaCble_Anticipo = info.IdCtaCble_Anticipo,
                         IdCtaCble_CXP = info.IdCtaCble_CXP,
                         IdCtaCble_Gasto = info.IdCtaCble_Gasto,
                         IdPunto_cargo = info.IdPunto_cargo,
@@ -224,7 +222,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                     Entity.idCredito_Predeter = info.idCredito_Predeter;
                     Entity.IdBanco_acreditacion = info.IdBanco_acreditacion;
                     Entity.IdCentroCosot = info.IdCentroCosot;
-                    Entity.IdCtaCble_Anticipo = (info.IdCtaCble_Anticipo)== "== Seleccione =="?null: info.IdCtaCble_Anticipo;
                     Entity.IdCtaCble_CXP = (info.IdCtaCble_CXP)== "== Seleccione =="?null: info.IdCtaCble_CXP;
                     Entity.IdCtaCble_Gasto =  (info.IdCtaCble_Gasto) == "== Seleccione ==" ? null : info.IdCtaCble_Gasto;
                     Entity.IdPunto_cargo = info.IdPunto_cargo;

@@ -23,7 +23,9 @@ namespace Core.Erp.Info.Inventario
         public string ca_Categoria { get; set; }
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
+        [Required(ErrorMessage = "El campo cuenta contable es obligatorio")]
         public string IdCtaCtble_Inve { get; set; }
+        [Required(ErrorMessage = "El campo cuenta contable es obligatorio")]
         public string IdCtaCtble_Costo { get; set; }
         public string IdCtaCble_venta { get; set; }
 

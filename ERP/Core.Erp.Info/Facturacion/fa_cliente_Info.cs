@@ -20,8 +20,8 @@ namespace Core.Erp.Info.Facturacion
         public string IdTipoCredito { get; set; }
         [Required(ErrorMessage = "El campo plazo es obligatorio")]
         public int cl_plazo { get; set; }
+        [Required(ErrorMessage = "El campo cuenta contable es obligatorio")]
         public string IdCtaCble_cxc { get; set; }
-        public string IdCtaCble_Anti { get; set; }
 
         [Required(ErrorMessage = "El campo cupo es obligatorio")]
         public double cl_Cupo { get; set; }

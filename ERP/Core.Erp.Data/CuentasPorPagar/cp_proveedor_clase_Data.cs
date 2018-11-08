@@ -69,7 +69,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdClaseProveedor = Entity.IdClaseProveedor,
                         cod_clase_proveedor = Entity.cod_clase_proveedor,
                         descripcion_clas_prove = Entity.descripcion_clas_prove,
-                        IdCtaCble_Anticipo = Entity.IdCtaCble_Anticipo,
                         IdCtaCble_CXP = Entity.IdCtaCble_CXP,
                         IdCtaCble_gasto = Entity.IdCtaCble_gasto,
                         Estado = Entity.Estado
@@ -118,7 +117,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdClaseProveedor = info.IdClaseProveedor = get_id(info.IdEmpresa),
                         cod_clase_proveedor = info.cod_clase_proveedor,
                         descripcion_clas_prove = info.descripcion_clas_prove,
-                        IdCtaCble_Anticipo = info.IdCtaCble_Anticipo,
                         IdCtaCble_CXP = info.IdCtaCble_CXP,
                         IdCtaCble_gasto = info.IdCtaCble_gasto,
                         Estado = info.Estado = "A"
@@ -145,7 +143,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         return false;
                     Entity.cod_clase_proveedor = info.cod_clase_proveedor;
                     Entity.descripcion_clas_prove = info.descripcion_clas_prove;
-                    Entity.IdCtaCble_Anticipo = info.IdCtaCble_Anticipo;
                     Entity.IdCtaCble_CXP = info.IdCtaCble_CXP;
                     Entity.IdCtaCble_gasto = info.IdCtaCble_gasto;
 

@@ -219,7 +219,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="IdCtaCble_cxc">Cuenta contable cxc</label>
+                            <label for="IdCtaCble_cxc">Cuenta contable cxc*</label>
                             @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_cxc, settings =>
                                    {
                                        settings.Name = "IdCtaCble_cxc";
@@ -266,32 +266,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="IdCtaCble_Anti">Cuenta contable anticipo</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Anti, settings =>
-                                   {
-                                       settings.Name = "IdCtaCble_Anti";
-                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                       settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                       settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                       settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-                                       //Campo ID
-                                       settings.Properties.ValueField = "IdCtaCble";
-                                       settings.Properties.ValueType = typeof(string);
-                                       settings.Properties.TextField = "pc_Cuenta";
-                                       //Boton para seleccionar ningun registro
-                                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                       settings.Properties.NullText = "== Seleccione ==";
-                                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                   }).BindList(ViewBag.lst_cuentas).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdCtaCble_Anti, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
+           </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_vendedor">
 

@@ -26,7 +26,6 @@ namespace Core.Erp.Data.Facturacion
                                      Cod_cliente_tipo = q.Cod_cliente_tipo,
                                      Descripcion_tip_cliente = q.Descripcion_tip_cliente,
                                      estado = q.estado,
-                                     IdCtaCble_CXC_Anticipo = q.IdCtaCble_CXC_Anticipo,
                                      IdCtaCble_CXC_Con = q.IdCtaCble_CXC_Con,
                                      IdCtaCble_CXC_Cred = q.IdCtaCble_CXC_Cred,
 
@@ -43,7 +42,6 @@ namespace Core.Erp.Data.Facturacion
                                      Cod_cliente_tipo = q.Cod_cliente_tipo,
                                      Descripcion_tip_cliente = q.Descripcion_tip_cliente,
                                      estado = q.estado,
-                                     IdCtaCble_CXC_Anticipo = q.IdCtaCble_CXC_Anticipo,
                                      IdCtaCble_CXC_Con = q.IdCtaCble_CXC_Con,
                                      IdCtaCble_CXC_Cred = q.IdCtaCble_CXC_Cred,
 
@@ -73,7 +71,6 @@ namespace Core.Erp.Data.Facturacion
                         Idtipo_cliente = Entity.Idtipo_cliente,
                         Cod_cliente_tipo = Entity.Cod_cliente_tipo,
                         Descripcion_tip_cliente = Entity.Descripcion_tip_cliente,
-                        IdCtaCble_CXC_Anticipo = Entity.IdCtaCble_CXC_Anticipo,
                         IdCtaCble_CXC_Con = Entity.IdCtaCble_CXC_Con,
                         IdCtaCble_CXC_Cred = Entity.IdCtaCble_CXC_Cred,
                         estado = Entity.estado
@@ -122,7 +119,6 @@ namespace Core.Erp.Data.Facturacion
                         Idtipo_cliente = info.Idtipo_cliente=get_id(info.IdEmpresa),
                         Cod_cliente_tipo = info.Cod_cliente_tipo,
                         Descripcion_tip_cliente = info.Descripcion_tip_cliente,
-                        IdCtaCble_CXC_Anticipo = info.IdCtaCble_CXC_Anticipo,
                         IdCtaCble_CXC_Con = info.IdCtaCble_CXC_Con,
                         IdCtaCble_CXC_Cred = info.IdCtaCble_CXC_Cred,
                         estado = info.estado="A",
@@ -155,7 +151,6 @@ namespace Core.Erp.Data.Facturacion
                     Entity.Descripcion_tip_cliente = info.Descripcion_tip_cliente;
                     Entity.IdCtaCble_CXC_Con = info.IdCtaCble_CXC_Con;
                     Entity.IdCtaCble_CXC_Cred = info.IdCtaCble_CXC_Cred;
-                    Entity.IdCtaCble_CXC_Anticipo = info.IdCtaCble_CXC_Anticipo;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
