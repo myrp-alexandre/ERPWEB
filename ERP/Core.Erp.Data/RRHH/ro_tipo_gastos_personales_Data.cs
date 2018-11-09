@@ -23,7 +23,6 @@ namespace Core.Erp.Data.RRHH
                                  {
                                      IdTipoGasto = q.IdTipoGasto,
                                      nom_tipo_gasto = q.nom_tipo_gasto,
-                                     orden = q.orden,
                                      estado = q.estado
                                  }).ToList();
                
