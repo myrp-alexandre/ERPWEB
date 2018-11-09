@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 List<ro_tipo_gastos_personales_Info> model = bus_gastos.get_list();
-                return PartialView("_GridViewPartial_division", model);
+                return PartialView("_GridViewPartial_gastos_personales", model);
             }
             catch (Exception)
             {
