@@ -50,7 +50,7 @@
         {
             column.FieldName = "IdCtaCble";
             column.Caption = "Cuenta contable";
-            column.Width = Unit.Percentage(60);
+            column.Width = Unit.Percentage(40);
             column.EditorProperties().ComboBox(p =>
             {
                 p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
@@ -64,7 +64,7 @@
         {
             column.FieldName = "dc_Valor_debe";
             column.Caption = "Debe";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -75,7 +75,7 @@
         {
             column.FieldName = "dc_Valor_haber";
             column.Caption = "Haber";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;

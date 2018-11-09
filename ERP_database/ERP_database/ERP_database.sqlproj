@@ -1252,6 +1252,7 @@
     <Build Include="dbo\Views\XXXCARTERA.sql" />
     <Build Include="dbo\Stored Procedures\spsys_fa_reversar_anulacion_factura.sql" />
     <Build Include="dbo\Stored Procedures\spsys_actualizar_costo_ingresos.sql" />
+    <Build Include="web\Views\VWCXP_001_detalle.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />
