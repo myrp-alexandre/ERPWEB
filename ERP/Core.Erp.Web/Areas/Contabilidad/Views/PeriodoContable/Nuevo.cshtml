@@ -61,7 +61,7 @@
                        settings.Properties.EditFormatString = "dd/MM/yyyy";
                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){fechas();}";
+                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){actualizar_periodo();}";
 
                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.pe_FechaIni, "", new { @class = "text-danger" })
@@ -84,7 +84,7 @@
                        settings.Properties.EditFormatString = "dd/MM/yyyy";
                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){fechas();}";
+                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){actualizar_periodo();}";
 
                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.pe_FechaFin, "", new { @class = "text-danger" })
@@ -118,7 +118,6 @@
 <script>
     $(function () {
         actualizar_periodo();
-        fechas();
     });
     $("#pe_mes").change(function () {
         actualizar_periodo();
@@ -136,12 +135,12 @@
         var periodo = anio + p;
         $("#IdPeriodo").val(periodo)
 
-        var d = new Date(pe_FechaFin.GetValue());
-        fecha = anio + "/" + mes + "/" + 1;
-        pe_FechaFin.GetValue(fecha)
+        var date = new Date(anio + '-' + mes + '-'+1);
+        pe_FechaIni.SetValue(date)
+        var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        pe_FechaFin.SetValue(ultimoDia)
 
-        fechaI = anio + "/" + mes + "/" + 1;
-        pe_FechaIni.GetValue(moment(fechaI).format("DD/MM/YYYY"))
+        
 
     }
 </script>

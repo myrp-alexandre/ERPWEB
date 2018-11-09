@@ -9265,7 +9265,12 @@
     <Content Include="Areas\RRHH\Views\TipoGatosPersonales\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\TipoGatosPersonales\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\TipoGatosPersonales\Anular.cshtml" />
-    <Content Include="Areas\RRHH\Views\TipoGatosPersonales\_GridViewPartial_gastos_personales.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonales\_GridViewPartial_tipo_gastos_personales.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonalesAnual\_GridViewPartial_tipo_gastos_personal_anual.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonalesAnual\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonalesAnual\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonalesAnual\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\TipoGatosPersonalesAnual\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9350,7 +9355,6 @@
     <Folder Include="Areas\RRHH\Views\EmpleadoDocumento\" />
     <Folder Include="Areas\RRHH\Views\EmpleadoHistorialSueldo\" />
     <Folder Include="Areas\RRHH\Views\PeriodosPorNomina\" />
-    <Folder Include="Areas\RRHH\Views\TipoGatosPersonalesAnual\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
