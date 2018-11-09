@@ -10,17 +10,27 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "Division", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.Descripcion)
-    @Html.HiddenFor(q => q.IdDivision)
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTipoGasto)
 
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="ca_descripcion">Código*</label>
+                    @Html.TextBoxFor(q => q.IdTipoGasto, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.IdTipoGasto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="Nombre">Descripción*</label>
-                    @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control", disabled = "disabled" })
-                    @Html.ValidationMessageFor(m => m.Descripcion, "", new { @class = "text-danger" })
+                    <label for="ca_descripcion">Nombre gasto*</label>
+                    @Html.TextBoxFor(q => q.nom_tipo_gasto, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.nom_tipo_gasto, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
