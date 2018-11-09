@@ -265,9 +265,9 @@
             this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.StylePriority.UsePadding = false;
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
-            this.xrTableCell2.Text = "Fecha:";
+            this.xrTableCell2.Text = "Fecha de impresión:";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell2.Weight = 0.53333333333333366D;
+            this.xrTableCell2.Weight = 1.28D;
             // 
             // lbl_fecha
             // 
@@ -280,7 +280,7 @@
             this.lbl_fecha.StylePriority.UsePadding = false;
             this.lbl_fecha.StylePriority.UseTextAlignment = false;
             this.lbl_fecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_fecha.Weight = 2.6666666666666665D;
+            this.lbl_fecha.Weight = 1.9200000000000002D;
             // 
             // xrTableCell29
             // 
