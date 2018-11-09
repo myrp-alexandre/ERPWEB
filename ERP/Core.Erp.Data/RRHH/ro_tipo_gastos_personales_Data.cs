@@ -121,7 +121,7 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_tipo_gastos_personales Entity = Context.ro_tipo_gastos_personales.FirstOrDefault(q => q.nom_tipo_gasto == info.nom_tipo_gasto);
+                    ro_tipo_gastos_personales Entity = Context.ro_tipo_gastos_personales.FirstOrDefault(q => q.IdTipoGasto == info.IdTipoGasto);
                     if (Entity == null)
                         return false;
                     Entity.estado = info.estado = "I";
