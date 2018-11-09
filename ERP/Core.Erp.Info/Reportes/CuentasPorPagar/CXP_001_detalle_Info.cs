@@ -8,6 +8,7 @@ namespace Core.Erp.Info.Reportes.CuentasPorPagar
 {
    public class CXP_001_detalle_Info
     {
+
         public int IdEmpresa { get; set; }
         public decimal IdCbteCble_Ogiro { get; set; }
         public int IdTipoCbte_Ogiro { get; set; }
@@ -25,5 +26,6 @@ namespace Core.Erp.Info.Reportes.CuentasPorPagar
         public double ValorIva { get; set; }
         public double Total { get; set; }
         public string Descripcion { get; set; }
+        public string pr_descripcion { get; set; }
     }
 }
