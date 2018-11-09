@@ -10,7 +10,7 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
-    public class TipoGatosPersonalesController : Controller
+    public class TipoGastosPersonalesController : Controller
     {
         ro_tipo_gastos_personales_Bus bus_gastos = new ro_tipo_gastos_personales_Bus();
         // GET: RRHH/Division
@@ -20,13 +20,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_gastos_personales()
+        public ActionResult GridViewPartial_tipo_gastos_personales()
         {
             try
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 List<ro_tipo_gastos_personales_Info> model = bus_gastos.get_list();
-                return PartialView("_GridViewPartial_gastos_personales", model);
+                return PartialView("_GridViewPartial_tipo_gastos_personales", model);
             }
             catch (Exception)
             {

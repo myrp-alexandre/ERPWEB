@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
-    public class TipoGatosPersonalesAnualController : Controller
+    public class TipoGastosPersonalesAnualController : Controller
     {
         // GET: RRHH/TipoGatosPersonalesAnual
         public ActionResult Index()

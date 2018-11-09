@@ -12,9 +12,10 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Linq;
-
+    
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
@@ -92,8 +93,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_rol_detalle_generar_op> vwro_rol_detalle_generar_op { get; set; }
         public DbSet<vwro_rol> vwro_rol { get; set; }
         public DbSet<ro_tabla_Impu_Renta> ro_tabla_Impu_Renta { get; set; }
-        public DbSet<ro_empleado_proyeccion_gastos> ro_empleado_proyeccion_gastos { get; set; }
-        public DbSet<ro_empleado_proyeccion_gastos_det> ro_empleado_proyeccion_gastos_det { get; set; }
         public DbSet<vwro_empleado_x_Proyeccion_Gastos_Personales> vwro_empleado_x_Proyeccion_Gastos_Personales { get; set; }
         public DbSet<vwrdep_IngrEgr_x_Empleado> vwrdep_IngrEgr_x_Empleado { get; set; }
         public DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
@@ -104,6 +103,8 @@ namespace Core.Erp.Data
         public DbSet<ro_permiso_x_empleado> ro_permiso_x_empleado { get; set; }
         public DbSet<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
         public DbSet<vwro_empleado_x_ro_rubro> vwro_empleado_x_ro_rubro { get; set; }
+        public DbSet<ro_empleado_proyeccion_gastos> ro_empleado_proyeccion_gastos { get; set; }
+        public DbSet<ro_empleado_proyeccion_gastos_det> ro_empleado_proyeccion_gastos_det { get; set; }
         public DbSet<ro_tipo_gastos_personales> ro_tipo_gastos_personales { get; set; }
         public DbSet<ro_tipo_gastos_personales_tabla_valores_x_anio> ro_tipo_gastos_personales_tabla_valores_x_anio { get; set; }
     

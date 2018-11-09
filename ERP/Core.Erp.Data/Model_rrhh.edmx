@@ -1183,14 +1183,19 @@
           </Key>
           <Property Name="IdTipoGasto" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="nom_tipo_gasto" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="estado" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="orden" Type="int" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="ro_tipo_gastos_personales_tabla_valores_x_anio">
           <Key>
             <PropertyRef Name="IdGasto" />
             <PropertyRef Name="IdTipoGasto" />
-            <PropertyRef Name="AnioFiscal" />
           </Key>
           <Property Name="IdGasto" Type="int" Nullable="false" />
           <Property Name="IdTipoGasto" Type="varchar" MaxLength="10" Nullable="false" />
@@ -1204,8 +1209,6 @@
           <Property Name="Fecha_UltMod" Type="datetime" />
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
-          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
-          <Property Name="ip" Type="varchar" MaxLength="25" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="ro_Tipo_Prestamo">
@@ -2517,18 +2520,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwro_rol_detalle_generar
             <Dependent Role="ro_empleado_x_horario">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdHorario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales">
-          <End Role="ro_tipo_gastos_personales" Type="Self.ro_tipo_gastos_personales" Multiplicity="1" />
-          <End Role="ro_empleado_proyeccion_gastos_det" Type="Self.ro_empleado_proyeccion_gastos_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_tipo_gastos_personales">
-              <PropertyRef Name="IdTipoGasto" />
-            </Principal>
-            <Dependent Role="ro_empleado_proyeccion_gastos_det">
-              <PropertyRef Name="IdTipoGasto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4027,10 +4018,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <End Role="ro_horario" EntitySet="ro_horario" />
             <End Role="ro_empleado_x_horario" EntitySet="ro_empleado_x_horario" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" Association="Self.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales">
-            <End Role="ro_tipo_gastos_personales" EntitySet="ro_tipo_gastos_personales" />
-            <End Role="ro_empleado_proyeccion_gastos_det" EntitySet="ro_empleado_proyeccion_gastos_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_ro_empleado_x_ro_rubro_ro_empleado" Association="Self.FK_ro_empleado_x_ro_rubro_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_empleado_x_ro_rubro" EntitySet="ro_empleado_x_ro_rubro" />
@@ -4665,11 +4652,11 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <NavigationProperty Name="ro_prestamo" Relationship="Self.FK_ro_prestamo_ro_empleado" FromRole="ro_empleado" ToRole="ro_prestamo" />
           <NavigationProperty Name="ro_rol_detalle" Relationship="Self.FK_ro_rol_detalle_ro_empleado" FromRole="ro_empleado" ToRole="ro_rol_detalle" />
           <NavigationProperty Name="ro_Solicitud_Vacaciones_x_empleado" Relationship="Self.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_Solicitud_Vacaciones_x_empleado" />
-          <NavigationProperty Name="ro_empleado_proyeccion_gastos" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_proyeccion_gastos" />
           <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_marcaciones_x_empleado" />
           <NavigationProperty Name="ro_permiso_x_empleado" Relationship="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_permiso_x_empleado" />
           <NavigationProperty Name="ro_permiso_x_empleado1" Relationship="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado1" FromRole="ro_empleado" ToRole="ro_permiso_x_empleado" />
           <NavigationProperty Name="ro_empleado_x_ro_rubro" Relationship="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_ro_rubro" />
+          <NavigationProperty Name="ro_empleado_proyeccion_gastos" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_proyeccion_gastos" />
         </EntityType>
         <EntityType Name="ro_empleado_Novedad">
           <Key>
@@ -7472,16 +7459,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           </FunctionImport>
           <EntitySet Name="vwro_rol" EntityType="Model_rrhh.vwro_rol" />
           <EntitySet Name="ro_tabla_Impu_Renta" EntityType="Model_rrhh.ro_tabla_Impu_Renta" />
-          <EntitySet Name="ro_empleado_proyeccion_gastos" EntityType="Model_rrhh.ro_empleado_proyeccion_gastos" />
-          <EntitySet Name="ro_empleado_proyeccion_gastos_det" EntityType="Model_rrhh.ro_empleado_proyeccion_gastos_det" />
-          <AssociationSet Name="FK_ro_empleado_proyeccion_gastos_ro_empleado" Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado">
-            <End Role="ro_empleado" EntitySet="ro_empleado" />
-            <End Role="ro_empleado_proyeccion_gastos" EntitySet="ro_empleado_proyeccion_gastos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos" Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos">
-            <End Role="ro_empleado_proyeccion_gastos" EntitySet="ro_empleado_proyeccion_gastos" />
-            <End Role="ro_empleado_proyeccion_gastos_det" EntitySet="ro_empleado_proyeccion_gastos_det" />
-          </AssociationSet>
           <EntitySet Name="vwro_empleado_x_Proyeccion_Gastos_Personales" EntityType="Model_rrhh.vwro_empleado_x_Proyeccion_Gastos_Personales" />
           <EntitySet Name="vwrdep_IngrEgr_x_Empleado" EntityType="Model_rrhh.vwrdep_IngrEgr_x_Empleado" />
           <EntitySet Name="vwRo_Solicitud_Vacaciones" EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" />
@@ -7524,10 +7501,16 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_empleado_x_ro_rubro" EntitySet="ro_empleado_x_ro_rubro" />
           </AssociationSet>
+          <EntitySet Name="ro_empleado_proyeccion_gastos" EntityType="Model_rrhh.ro_empleado_proyeccion_gastos" />
+          <EntitySet Name="ro_empleado_proyeccion_gastos_det" EntityType="Model_rrhh.ro_empleado_proyeccion_gastos_det" />
           <EntitySet Name="ro_tipo_gastos_personales" EntityType="Model_rrhh.ro_tipo_gastos_personales" />
           <EntitySet Name="ro_tipo_gastos_personales_tabla_valores_x_anio" EntityType="Model_rrhh.ro_tipo_gastos_personales_tabla_valores_x_anio" />
-          <AssociationSet Name="FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" Association="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales">
-            <End Role="ro_tipo_gastos_personales" EntitySet="ro_tipo_gastos_personales" />
+          <AssociationSet Name="FK_ro_empleado_proyeccion_gastos_ro_empleado" Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_empleado_proyeccion_gastos" EntitySet="ro_empleado_proyeccion_gastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos" Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos">
+            <End Role="ro_empleado_proyeccion_gastos" EntitySet="ro_empleado_proyeccion_gastos" />
             <End Role="ro_empleado_proyeccion_gastos_det" EntitySet="ro_empleado_proyeccion_gastos_det" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_tipo_gastos_personales_tabla_valores_x_anio_ro_tipo_gastos_personales" Association="Model_rrhh.FK_ro_tipo_gastos_personales_tabla_valores_x_anio_ro_tipo_gastos_personales">
@@ -7588,70 +7571,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="ImpFraccionBasica" Type="Double" />
           <Property Name="Por_ImpFraccion_Exce" Type="Double" />
         </EntityType>
-        <EntityType Name="ro_empleado_proyeccion_gastos">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdTransaccion" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTransaccion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="AnioFiscal" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" FromRole="ro_empleado_proyeccion_gastos" ToRole="ro_empleado" />
-          <NavigationProperty Name="ro_empleado_proyeccion_gastos_det" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos" FromRole="ro_empleado_proyeccion_gastos" ToRole="ro_empleado_proyeccion_gastos_det" />
-        </EntityType>
-        <EntityType Name="ro_empleado_proyeccion_gastos_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdTransaccion" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTransaccion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoGasto" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_empleado_proyeccion_gastos" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos" FromRole="ro_empleado_proyeccion_gastos_det" ToRole="ro_empleado_proyeccion_gastos" />
-          <NavigationProperty Name="ro_tipo_gastos_personales" Relationship="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" FromRole="ro_empleado_proyeccion_gastos_det" ToRole="ro_tipo_gastos_personales" />
-        </EntityType>
-        <Association Name="FK_ro_empleado_proyeccion_gastos_ro_empleado">
-          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_empleado_proyeccion_gastos" Role="ro_empleado_proyeccion_gastos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ro_empleado_proyeccion_gastos">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos">
-          <End Type="Model_rrhh.ro_empleado_proyeccion_gastos" Role="ro_empleado_proyeccion_gastos" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_empleado_proyeccion_gastos_det" Role="ro_empleado_proyeccion_gastos_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado_proyeccion_gastos">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTransaccion" />
-            </Principal>
-            <Dependent Role="ro_empleado_proyeccion_gastos_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTransaccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="vwro_empleado_x_Proyeccion_Gastos_Personales">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -8054,22 +7973,61 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ro_empleado_proyeccion_gastos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTransaccion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="AnioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" FromRole="ro_empleado_proyeccion_gastos" ToRole="ro_empleado" />
+          <NavigationProperty Name="ro_empleado_proyeccion_gastos_det" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos" FromRole="ro_empleado_proyeccion_gastos" ToRole="ro_empleado_proyeccion_gastos_det" />
+        </EntityType>
+        <EntityType Name="ro_empleado_proyeccion_gastos_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTransaccion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoGasto" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_empleado_proyeccion_gastos" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos" FromRole="ro_empleado_proyeccion_gastos_det" ToRole="ro_empleado_proyeccion_gastos" />
+        </EntityType>
         <EntityType Name="ro_tipo_gastos_personales">
           <Key>
             <PropertyRef Name="IdTipoGasto" />
           </Key>
           <Property Name="IdTipoGasto" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="nom_tipo_gasto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="orden" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ro_empleado_proyeccion_gastos_det" Relationship="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" FromRole="ro_tipo_gastos_personales" ToRole="ro_empleado_proyeccion_gastos_det" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ro_tipo_gastos_personales_tabla_valores_x_anio" Relationship="Model_rrhh.FK_ro_tipo_gastos_personales_tabla_valores_x_anio_ro_tipo_gastos_personales" FromRole="ro_tipo_gastos_personales" ToRole="ro_tipo_gastos_personales_tabla_valores_x_anio" />
         </EntityType>
         <EntityType Name="ro_tipo_gastos_personales_tabla_valores_x_anio">
           <Key>
             <PropertyRef Name="IdGasto" />
             <PropertyRef Name="IdTipoGasto" />
-            <PropertyRef Name="AnioFiscal" />
           </Key>
           <Property Name="IdGasto" Type="Int32" Nullable="false" />
           <Property Name="IdTipoGasto" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -8083,20 +8041,34 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ro_tipo_gastos_personales" Relationship="Model_rrhh.FK_ro_tipo_gastos_personales_tabla_valores_x_anio_ro_tipo_gastos_personales" FromRole="ro_tipo_gastos_personales_tabla_valores_x_anio" ToRole="ro_tipo_gastos_personales" />
         </EntityType>
-        <Association Name="FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales">
-          <End Type="Model_rrhh.ro_tipo_gastos_personales" Role="ro_tipo_gastos_personales" Multiplicity="1" />
+        <Association Name="FK_ro_empleado_proyeccion_gastos_ro_empleado">
+          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_empleado_proyeccion_gastos" Role="ro_empleado_proyeccion_gastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_empleado_proyeccion_gastos">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos">
+          <End Type="Model_rrhh.ro_empleado_proyeccion_gastos" Role="ro_empleado_proyeccion_gastos" Multiplicity="1" />
           <End Type="Model_rrhh.ro_empleado_proyeccion_gastos_det" Role="ro_empleado_proyeccion_gastos_det" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ro_tipo_gastos_personales">
-              <PropertyRef Name="IdTipoGasto" />
+            <Principal Role="ro_empleado_proyeccion_gastos">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTransaccion" />
             </Principal>
             <Dependent Role="ro_empleado_proyeccion_gastos_det">
-              <PropertyRef Name="IdTipoGasto" />
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTransaccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9625,37 +9597,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ro_empleado_proyeccion_gastos">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_proyeccion_gastos">
-              <MappingFragment StoreEntitySet="ro_empleado_proyeccion_gastos">
-                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="AnioFiscal" ColumnName="AnioFiscal" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ro_empleado_proyeccion_gastos_det">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_proyeccion_gastos_det">
-              <MappingFragment StoreEntitySet="ro_empleado_proyeccion_gastos_det">
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="IdTipoGasto" ColumnName="IdTipoGasto" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwro_empleado_x_Proyeccion_Gastos_Personales">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_x_Proyeccion_Gastos_Personales">
               <MappingFragment StoreEntitySet="vwro_empleado_x_Proyeccion_Gastos_Personales">
@@ -9888,10 +9829,47 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ro_empleado_proyeccion_gastos">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_proyeccion_gastos">
+              <MappingFragment StoreEntitySet="ro_empleado_proyeccion_gastos">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="AnioFiscal" ColumnName="AnioFiscal" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_empleado_proyeccion_gastos_det">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_proyeccion_gastos_det">
+              <MappingFragment StoreEntitySet="ro_empleado_proyeccion_gastos_det">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IdTipoGasto" ColumnName="IdTipoGasto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ro_tipo_gastos_personales">
             <EntityTypeMapping TypeName="Model_rrhh.ro_tipo_gastos_personales">
               <MappingFragment StoreEntitySet="ro_tipo_gastos_personales">
-                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="nom_tipo_gasto" ColumnName="nom_tipo_gasto" />
                 <ScalarProperty Name="IdTipoGasto" ColumnName="IdTipoGasto" />
@@ -9902,8 +9880,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <EntityTypeMapping TypeName="Model_rrhh.ro_tipo_gastos_personales_tabla_valores_x_anio">
               <MappingFragment StoreEntitySet="ro_tipo_gastos_personales_tabla_valores_x_anio">
                 <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
                 <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
                 <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
                 <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
