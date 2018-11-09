@@ -891,6 +891,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_001_detalle' does 
             <PropertyRef Name="ValorIva" />
             <PropertyRef Name="Total" />
             <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="pr_descripcion" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCbteCble_Ogiro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -909,6 +910,7 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_001_detalle' does 
           <Property Name="ValorIva" Type="float" Nullable="false" />
           <Property Name="Total" Type="float" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3768,7 +3770,8 @@ FROM [web].[VWCXP_001] AS [VWCXP_001]</DefiningQuery>
 [VWCXP_001_detalle].[PorIva] AS [PorIva], 
 [VWCXP_001_detalle].[ValorIva] AS [ValorIva], 
 [VWCXP_001_detalle].[Total] AS [Total], 
-[VWCXP_001_detalle].[Descripcion] AS [Descripcion]
+[VWCXP_001_detalle].[Descripcion] AS [Descripcion], 
+[VWCXP_001_detalle].[pr_descripcion] AS [pr_descripcion]
 FROM [web].[VWCXP_001_detalle] AS [VWCXP_001_detalle]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWCXP_002" EntityType="Self.VWCXP_002" store:Type="Views" store:Schema="web">
@@ -8742,6 +8745,7 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
             <PropertyRef Name="ValorIva" />
             <PropertyRef Name="Total" />
             <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="pr_descripcion" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
@@ -8760,6 +8764,7 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
           <Property Name="ValorIva" Type="Double" Nullable="false" />
           <Property Name="Total" Type="Double" Nullable="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -11330,6 +11335,7 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
           <EntitySetMapping Name="VWCXP_001_detalle">
             <EntityTypeMapping TypeName="Model_reportes.VWCXP_001_detalle">
               <MappingFragment StoreEntitySet="VWCXP_001_detalle">
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="ValorIva" ColumnName="ValorIva" />

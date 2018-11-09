@@ -38,7 +38,8 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  pr_codigo2 = q.pr_codigo2,
                                  Subtotal = q.Subtotal,
                                  Total = q.Total,
-                                 ValorIva = q.ValorIva
+                                 ValorIva = q.ValorIva,
+                                 pr_descripcion = q.pr_descripcion
 
 
                              }).ToList();

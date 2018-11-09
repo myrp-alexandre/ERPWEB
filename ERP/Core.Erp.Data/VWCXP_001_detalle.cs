@@ -31,5 +31,6 @@ namespace Core.Erp.Data
         public double ValorIva { get; set; }
         public double Total { get; set; }
         public string Descripcion { get; set; }
+        public string pr_descripcion { get; set; }
     }
 }

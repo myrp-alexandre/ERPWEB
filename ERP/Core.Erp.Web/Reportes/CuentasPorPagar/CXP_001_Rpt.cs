@@ -40,5 +40,14 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
 
         }
+
+        private void Subreporte_detalle_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdTipoCbte_Ogiro"].Value = p_IdTipoCbte_Ogiro.Value == null ? 0 : Convert.ToInt32(p_IdTipoCbte_Ogiro.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdCbteCble_Ogiro"].Value = p_IdCbteCble_Ogiro.Value == null ? 0 : Convert.ToDecimal(p_IdCbteCble_Ogiro.Value);
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+
+        }
     }
 }
