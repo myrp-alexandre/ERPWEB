@@ -42,6 +42,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var model = bus_gastos.get_info(info.IdTipoGasto);
+                    if(model!=null){
+                        ViewBag.mensaje = "El codigo ya se encuentra registrado";
+                        return View(model);
+                    }
                     if (!bus_gastos.guardarDB(info))
                         return View(info);
                     else

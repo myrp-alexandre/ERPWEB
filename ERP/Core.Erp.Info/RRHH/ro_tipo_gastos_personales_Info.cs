@@ -17,6 +17,14 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = ("El nombre del gasto es obligatorio"))]
         public string nom_tipo_gasto { get; set; }
         public string estado { get; set; }
-        public int orden { get; set; }
+       
+        public string IdUsuario { get; set; }
+        public Nullable<System.DateTime> Fecha_Transac { get; set; }
+        public string IdUsuarioUltMod { get; set; }
+        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
+        public string IdUsuarioUltAnu { get; set; }
+        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        public string MotiAnula { get; set; }
+        public bool EstadoBool { get; set; }
     }
 }

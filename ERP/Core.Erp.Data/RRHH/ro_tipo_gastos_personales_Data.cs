@@ -23,7 +23,9 @@ namespace Core.Erp.Data.RRHH
                                  {
                                      IdTipoGasto = q.IdTipoGasto,
                                      nom_tipo_gasto = q.nom_tipo_gasto,
-                                     estado = q.estado
+                                     estado = q.estado,
+                                     EstadoBool = q.estado == "A" ? true : false
+
                                  }).ToList();
                
                 }
@@ -74,7 +76,10 @@ namespace Core.Erp.Data.RRHH
                     ro_tipo_gastos_personales Entity = new ro_tipo_gastos_personales
                     {
                         IdTipoGasto = info.IdTipoGasto,
-                        nom_tipo_gasto = info.nom_tipo_gasto
+                        nom_tipo_gasto = info.nom_tipo_gasto,
+                        estado=info.estado="A",
+                        Fecha_Transac=DateTime.Now,
+                        IdUsuario=info.IdUsuario
                     };
                     Context.ro_tipo_gastos_personales.Add(Entity);
                     Context.SaveChanges();

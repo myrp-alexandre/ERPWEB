@@ -6,12 +6,20 @@
     {
         Response.Redirect("~/Account/Login");
     }
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Nuevo", "Division", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "TipoGastosPersonales", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-      <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">

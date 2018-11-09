@@ -6,7 +6,7 @@
         settings.CallbackRouteValues = new { Controller = "TipoGastosPersonales", Action = "GridViewPartial_tipo_gastos_personales" };
 
 
-        settings.KeyFieldName = "IdTipoGastos";
+        settings.KeyFieldName = "IdTipoGasto";
 
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
@@ -68,8 +68,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdDivision = DataBinder.Eval(tc.DataItem, "IdDivision") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdDivision = DataBinder.Eval(tc.DataItem, "IdDivision") },
+                Html.ActionLink("Modificar", "Modificar", new { IdTipoGasto = DataBinder.Eval(tc.DataItem, "IdTipoGasto") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdTipoGasto = DataBinder.Eval(tc.DataItem, "IdTipoGasto") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -84,8 +84,8 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdDivision","ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Descripcion","División").Width = Unit.Percentage(80);
+        settings.Columns.Add("IdTipoGasto", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("nom_tipo_gasto", "Descripci").Width = Unit.Percentage(80);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
