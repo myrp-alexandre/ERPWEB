@@ -34,8 +34,9 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             this.DataSource = lst_rpt;
         }
 
-        private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void Subreporte_resumen_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
+
             ((XRSubreport)sender).ReportSource.DataSource = lst_resumen;
             ((XRSubreport)sender).ReportSource.FillDataSource();
         }
