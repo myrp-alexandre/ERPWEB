@@ -23,6 +23,7 @@ namespace Core.Erp.Data.Importacion
                              && q.li_fecha <= Fecha_fin
                              select new imp_liquidacion_Info
                              {
+                                 IdEmpresa=q.IdEmpresa,
                                  IdLiquidacion = q.IdLiquidacion,
                                  IdOrdenCompra_ext = q.IdOrdenCompra_ext,
                                  oe_observacion = q.oe_observacion,

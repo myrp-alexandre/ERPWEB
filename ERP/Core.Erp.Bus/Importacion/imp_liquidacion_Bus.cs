@@ -208,7 +208,6 @@ namespace Core.Erp.Bus.Importacion
         {
             try
             {
-                imp_liquidacion_Bus bus_liquidacion = new imp_liquidacion_Bus();
                 odata = new imp_liquidacion_Data();
                 info.info_comrobante = new Info.Contabilidad.ct_cbtecble_Info();
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
@@ -234,7 +233,7 @@ namespace Core.Erp.Bus.Importacion
                 info.info_comrobante.IdCbteCble = (info.IdCbteCble_ct) == null ? 0 : Convert.ToInt32(info.IdCbteCble_ct);
 
                 bus_contabilidad.anularDB(info.info_comrobante);
-                bus_liquidacion.Anular(info);
+                odata.AnularDB(info);
               
                 return true;
             }
