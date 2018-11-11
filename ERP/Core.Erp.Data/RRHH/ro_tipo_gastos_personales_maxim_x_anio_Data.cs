@@ -114,7 +114,8 @@ namespace Core.Erp.Data.RRHH
                         Monto_max = info.Monto_max,
                         estado = info.estado = "A",
                         Fecha_Transac = DateTime.Now,
-                        IdUsuario = info.IdUsuario
+                        IdUsuario = info.IdUsuario,
+                        observacion=""
                     };
                     Context.ro_tipo_gastos_personales_tabla_valores_x_anio.Add(Entity);
                     Context.SaveChanges();
@@ -139,6 +140,8 @@ namespace Core.Erp.Data.RRHH
                         return false;
                     Entity.AnioFiscal = info.AnioFiscal;
                     Entity.Monto_max = info.Monto_max;
+                    Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
+
                     Context.SaveChanges();
                 }
 
@@ -161,6 +164,7 @@ namespace Core.Erp.Data.RRHH
                     if (Entity == null)
                         return false;
                     Entity.estado = info.estado = "I";
+                    Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Context.SaveChanges();
                 }
 

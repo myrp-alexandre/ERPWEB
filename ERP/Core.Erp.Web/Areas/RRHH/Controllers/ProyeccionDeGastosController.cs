@@ -231,7 +231,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 ro_tipo_gastos_personales_Bus bus_tipo_gasto = new ro_tipo_gastos_personales_Bus();
-                var list_tipo_gasto = bus_tipo_gasto.get_list();
+                var list_tipo_gasto = bus_tipo_gasto.get_list(false);
                 ViewBag.list_tipo_gasto = list_tipo_gasto;
             }
             catch (Exception)

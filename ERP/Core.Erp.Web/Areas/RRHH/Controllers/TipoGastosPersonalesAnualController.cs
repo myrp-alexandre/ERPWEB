@@ -43,6 +43,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                info.IdUsuario = SessionFixed.IdUsuario;
                 if (ModelState.IsValid)
                 {
                     var model = bus_gastos.si_existe(info.IdTipoGasto, info.AnioFiscal);
@@ -70,7 +71,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                ro_tipo_gastos_personales_maxim_x_anio_Info info = new ro_tipo_gastos_personales_maxim_x_anio_Info();
+                cargar_combo();
+                   ro_tipo_gastos_personales_maxim_x_anio_Info info = new ro_tipo_gastos_personales_maxim_x_anio_Info();
                 info.AnioFiscal = DateTime.Now.Year;
                 ViewBag.IdTipoGasto = IdTipoGasto;
                 return View(info);
@@ -88,15 +90,24 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                info.IdUsuarioUltMod = SessionFixed.IdUsuario;
+
                 if (ModelState.IsValid)
                 {
                     if (!bus_gastos.modificarDB(info))
+                    {
+                        cargar_combo();
                         return View(info);
+                    }
                     else
                         return RedirectToAction("Index");
                 }
                 else
+                {
+                    cargar_combo();
+
                     return View(info);
+                }
 
             }
             catch (Exception)
@@ -109,6 +120,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                cargar_combo();
+
 
                 return View(bus_gastos.get_info(IdTipoGasto));
 
@@ -125,9 +138,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                info.IdUsuarioUltAnu = SessionFixed.IdUsuario;
 
                 if (!bus_gastos.anularDB(info))
+                {
+                    cargar_combo();
+
                     return View(info);
+                }
                 else
                     return RedirectToAction("Index");
             }
@@ -141,6 +159,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                cargar_combo();
 
                 return View(bus_gastos.get_info(IdTipoGasto));
 
