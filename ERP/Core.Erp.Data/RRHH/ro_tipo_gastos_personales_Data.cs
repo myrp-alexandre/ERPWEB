@@ -9,7 +9,7 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_tipo_gastos_personales_Data
     {
-        public List<ro_tipo_gastos_personales_Info> get_list()
+        public List<ro_tipo_gastos_personales_Info> get_list(bool mostrar_anulados)
         {
             try
             {
@@ -17,6 +17,7 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
+                    if(mostrar_anulados)
                     
                         Lista = (from q in Context.ro_tipo_gastos_personales
                                  select new ro_tipo_gastos_personales_Info
@@ -27,7 +28,18 @@ namespace Core.Erp.Data.RRHH
                                      EstadoBool = q.estado == "A" ? true : false
 
                                  }).ToList();
-               
+                    else
+                        Lista = (from q in Context.ro_tipo_gastos_personales
+                                 where q.estado=="A"
+                                 select new ro_tipo_gastos_personales_Info
+                                 {
+                                     IdTipoGasto = q.IdTipoGasto,
+                                     nom_tipo_gasto = q.nom_tipo_gasto,
+                                     estado = q.estado,
+                                     EstadoBool = q.estado == "A" ? true : false
+
+                                 }).ToList();
+
                 }
 
                 return Lista;

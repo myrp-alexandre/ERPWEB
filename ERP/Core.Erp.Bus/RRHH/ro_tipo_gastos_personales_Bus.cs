@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.RRHH
   public  class ro_tipo_gastos_personales_Bus
     {
         ro_tipo_gastos_personales_Data odata = new ro_tipo_gastos_personales_Data();
-        public List<ro_tipo_gastos_personales_Info> get_list()
+        public List<ro_tipo_gastos_personales_Info> get_list(bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list();
+                return odata.get_list(mostrar_anulados);
             }
             catch (Exception)
             {

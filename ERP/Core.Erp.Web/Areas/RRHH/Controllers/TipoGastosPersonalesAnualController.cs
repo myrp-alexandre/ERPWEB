@@ -13,7 +13,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
     {
         ro_tipo_gastos_personales_maxim_x_anio_Bus bus_gastos = new ro_tipo_gastos_personales_maxim_x_anio_Bus();
 
-        // GET: RRHH/Division
+        #region Variables
+        ro_tipo_gastos_personales_Bus bus_tipo_gasto = new ro_tipo_gastos_personales_Bus();
+        #endregion
         public ActionResult Index()
         {
             return View();
@@ -69,6 +71,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 ro_tipo_gastos_personales_maxim_x_anio_Info info = new ro_tipo_gastos_personales_maxim_x_anio_Info();
+                info.AnioFiscal = DateTime.Now.Year;
                 ViewBag.IdTipoGasto = IdTipoGasto;
                 return View(info);
 
@@ -141,6 +144,20 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                 return View(bus_gastos.get_info(IdTipoGasto));
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void cargar_combo()
+        {
+            try
+            {
+                var list_tipo_gasto = bus_tipo_gasto.get_list(false);
+                ViewBag.list_tipo_gasto = list_tipo_gasto;
             }
             catch (Exception)
             {

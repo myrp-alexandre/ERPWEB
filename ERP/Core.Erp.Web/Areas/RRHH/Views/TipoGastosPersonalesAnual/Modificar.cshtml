@@ -15,9 +15,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label for="nom_tipo_gasto">División</label>
+                    <label for="nom_tipo_gasto">Tipo de gasto</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoGasto, settings =>
                {
                    settings.Name = "IdTipoGasto";
@@ -33,8 +33,9 @@
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
                    settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.ReadOnly = true;
 
-               }).BindList(ViewBag.lista_division).GetHtml()
+               }).BindList(ViewBag.list_tipo_gasto).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdTipoGasto, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -42,7 +43,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="AnioFiscal">Año fiscal*</label>
                     @Html.TextBoxFor(q => q.AnioFiscal, new { @class = "form-control", @disabled="disabled" })
@@ -53,7 +54,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="Monto_max">Valor maximo deducible*</label>
                     @Html.TextBoxFor(q => q.Monto_max, new { @class = "form-control" })
