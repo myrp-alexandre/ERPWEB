@@ -20,13 +20,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_tipo_gastos_personales()
+        public ActionResult GridViewPartial_tipo_gastos_personal_anual(string IdTipoGasto)
         {
             try
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                List<ro_tipo_gastos_personales_maxim_x_anio_Info> model = bus_gastos.get_list();
-                return PartialView("_GridViewPartial_tipo_gastos_personales", model);
+                List<ro_tipo_gastos_personales_maxim_x_anio_Info> model = bus_gastos.get_list(IdTipoGasto);
+                ViewBag.IdTipoGasto = IdTipoGasto;
+                return PartialView("_GridViewPartial_tipo_gastos_personal_anual", model);
             }
             catch (Exception)
             {
@@ -42,10 +43,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var model = bus_gastos.get_info(info.IdTipoGasto);
+                    var model = bus_gastos.si_existe(info.IdTipoGasto, info.AnioFiscal);
                     if (model != null)
                     {
-                        ViewBag.mensaje = "El codigo ya se encuentra registrado";
+                        ViewBag.mensaje = "El codigo ya se encuentra registrado para este año fiscal";
                         return View(model);
                     }
                     if (!bus_gastos.guardarDB(info))
@@ -63,11 +64,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(string IdTipoGasto)
         {
             try
             {
                 ro_tipo_gastos_personales_maxim_x_anio_Info info = new ro_tipo_gastos_personales_maxim_x_anio_Info();
+                ViewBag.IdTipoGasto = IdTipoGasto;
                 return View(info);
 
             }

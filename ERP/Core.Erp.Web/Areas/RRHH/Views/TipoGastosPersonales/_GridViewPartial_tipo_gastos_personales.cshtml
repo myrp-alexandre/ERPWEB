@@ -107,7 +107,7 @@
                 {
                     var keyValue = DataBinder.Eval(container.DataItem, "IdTipoGasto");
                     hyperlink.Properties.Text = "Ver valores";
-                    hyperlink.NavigateUrl = Url.Action("Index", "TipoGastosPersonalesAnual", new { IdTipoCatalogo = keyValue });
+                    hyperlink.NavigateUrl = Url.Action("Index", "TipoGastosPersonalesAnual", new { IdTipoGasto = keyValue });
                 }).Render();
             });
         });

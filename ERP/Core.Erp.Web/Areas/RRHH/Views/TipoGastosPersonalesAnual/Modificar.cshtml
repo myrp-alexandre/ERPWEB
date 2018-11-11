@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.RRHH.ro_tipo_gastos_personales_Info
+﻿@model Core.Erp.Info.RRHH.ro_tipo_gastos_personales_maxim_x_anio_Info
 @{
     ViewBag.Title = "Modificar tipo de gasto";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -15,11 +15,38 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="nom_tipo_gasto">División</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoGasto, settings =>
+               {
+                   settings.Name = "IdTipoGasto";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdTipoGasto", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("nom_tipo_gasto", "Descripcion").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdTipoGasto";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "nom_tipo_gasto";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lista_division).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoGasto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="ca_descripcion">Código*</label>
-                    @Html.TextBoxFor(q => q.IdTipoGasto, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.IdTipoGasto, "", new { @class = "text-danger" })
+                    <label for="AnioFiscal">Año fiscal*</label>
+                    @Html.TextBoxFor(q => q.AnioFiscal, new { @class = "form-control", @disabled="disabled" })
+                    @Html.ValidationMessageFor(m => m.AnioFiscal, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -28,9 +55,9 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="ca_descripcion">Nombre gasto*</label>
-                    @Html.TextBoxFor(q => q.nom_tipo_gasto, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.nom_tipo_gasto, "", new { @class = "text-danger" })
+                    <label for="Monto_max">Valor maximo deducible*</label>
+                    @Html.TextBoxFor(q => q.Monto_max, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Monto_max, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

@@ -2,8 +2,8 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_tipo_gastos_personal_anual";
-        settings.CallbackRouteValues = new { Controller = "TipoGastosPersonalesAnual", Action = "GridViewPartial_tipo_gastos_personal_anual" };
+        settings.Name = "GridViewPartial_tipo_gastos_personales";
+        settings.CallbackRouteValues = new { Controller = "TipoGastosPersonalesAnual", Action = "GridViewPartial_tipo_gastos_personales" };
 
 
         settings.KeyFieldName = "IdTipoGastos";
@@ -68,8 +68,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdDivision = DataBinder.Eval(tc.DataItem, "IdDivision") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdDivision = DataBinder.Eval(tc.DataItem, "IdDivision") },
+                Html.ActionLink("Modificar", "Modificar", new { IdGasto = DataBinder.Eval(tc.DataItem, "IdGasto") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdGasto = DataBinder.Eval(tc.DataItem, "IdGasto") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -77,15 +77,18 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdTipoGasto =ViewBag.IdTipoGasto }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdDivision","ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Descripcion","División").Width = Unit.Percentage(80);
+        settings.Columns.Add("IdGasto", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdTipoGasto", "Tipo").Width = Unit.Percentage(40);
+        settings.Columns.Add("AnioFiscal", "Año").Width = Unit.Percentage(20);
+        settings.Columns.Add("Monto_max", "Valor maximo").Width = Unit.Percentage(20);
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
