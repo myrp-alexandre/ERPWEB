@@ -18,7 +18,6 @@ namespace Core.Erp.Data
         {
             this.ro_nomina_x_horas_extras = new HashSet<ro_nomina_x_horas_extras>();
             this.ro_participacion_utilidad = new HashSet<ro_participacion_utilidad>();
-            this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_rol = new HashSet<ro_rol>();
         }
     
@@ -34,7 +33,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_nomina_x_horas_extras> ro_nomina_x_horas_extras { get; set; }
         public virtual ICollection<ro_participacion_utilidad> ro_participacion_utilidad { get; set; }
         public virtual ro_periodo ro_periodo { get; set; }
-        public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_rol> ro_rol { get; set; }
     }
 }

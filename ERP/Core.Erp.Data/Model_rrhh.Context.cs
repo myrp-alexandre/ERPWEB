@@ -9,13 +9,13 @@
 
 namespace Core.Erp.Data
 {
-    
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Linq;
-
+    
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
@@ -102,12 +102,14 @@ namespace Core.Erp.Data
         public DbSet<ro_tipo_gastos_personales> ro_tipo_gastos_personales { get; set; }
         public DbSet<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
         public DbSet<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
-        public DbSet<ro_rol> ro_rol { get; set; }
-        public DbSet<ro_rol_detalle> ro_rol_detalle { get; set; }
-        public DbSet<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
         public DbSet<vwro_empleado_Novedad> vwro_empleado_Novedad { get; set; }
         public DbSet<vwro_Empleado_Novedades> vwro_Empleado_Novedades { get; set; }
         public DbSet<ro_tipo_gastos_personales_tabla_valores_x_anio> ro_tipo_gastos_personales_tabla_valores_x_anio { get; set; }
+        public DbSet<ro_archivos_bancos_generacion> ro_archivos_bancos_generacion { get; set; }
+        public DbSet<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }
+        public DbSet<ro_rol> ro_rol { get; set; }
+        public DbSet<ro_rol_detalle> ro_rol_detalle { get; set; }
+        public DbSet<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
     
         public virtual int spRo_Cierre_Rol(Nullable<int> idEmpresa, Nullable<int> idPeriodo, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui)
         {
