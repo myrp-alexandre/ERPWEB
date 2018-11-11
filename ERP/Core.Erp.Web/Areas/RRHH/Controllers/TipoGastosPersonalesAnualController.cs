@@ -16,8 +16,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #region Variables
         ro_tipo_gastos_personales_Bus bus_tipo_gasto = new ro_tipo_gastos_personales_Bus();
         #endregion
-        public ActionResult Index()
+        public ActionResult Index(string IdTipoGasto)
         {
+            ViewBag.IdTipoGasto = IdTipoGasto;
             return View();
         }
 
@@ -43,6 +44,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                ViewBag.IdTipoGasto = info.IdTipoGasto;
                 info.IdUsuario = SessionFixed.IdUsuario;
                 if (ModelState.IsValid)
                 {
@@ -116,14 +118,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult Modificar(string IdTipoGasto)
+        public ActionResult Modificar(int IdGasto)
         {
             try
             {
                 cargar_combo();
 
 
-                return View(bus_gastos.get_info(IdTipoGasto));
+                return View(bus_gastos.get_info(IdGasto));
 
             }
             catch (Exception)
@@ -155,13 +157,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult Anular(string IdTipoGasto)
+        public ActionResult Anular(int IdGasto)
         {
             try
             {
                 cargar_combo();
 
-                return View(bus_gastos.get_info(IdTipoGasto));
+                return View(bus_gastos.get_info(IdGasto));
 
             }
             catch (Exception)

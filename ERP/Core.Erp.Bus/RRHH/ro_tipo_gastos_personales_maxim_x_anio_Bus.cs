@@ -24,11 +24,11 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public ro_tipo_gastos_personales_maxim_x_anio_Info get_info(string IdTipoGasto)
+        public ro_tipo_gastos_personales_maxim_x_anio_Info get_info(int IdGasto)
         {
             try
             {
-                return odata.get_info(IdTipoGasto);
+                return odata.get_info(IdGasto);
             }
             catch (Exception)
             {

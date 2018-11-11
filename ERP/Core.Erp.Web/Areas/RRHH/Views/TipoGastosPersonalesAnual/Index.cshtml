@@ -11,5 +11,5 @@
 
 @using (Html.BeginForm())
 {
-    @Html.Action("GridViewPartial_tipo_gastos_personal_anual")
+    @Html.Action("GridViewPartial_tipo_gastos_personal_anual", new {ViewBag.IdTipoGasto })
 }

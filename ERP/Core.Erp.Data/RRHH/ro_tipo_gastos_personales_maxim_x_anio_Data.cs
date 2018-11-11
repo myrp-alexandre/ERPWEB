@@ -22,6 +22,7 @@ namespace Core.Erp.Data.RRHH
                              where q.IdTipoGasto==IdTipoGasto
                              select new ro_tipo_gastos_personales_maxim_x_anio_Info
                              {
+                                 IdGasto=q.IdGasto,
                                  IdTipoGasto = q.IdTipoGasto,
                                  AnioFiscal = q.AnioFiscal,
                                  estado = q.estado,
@@ -41,7 +42,7 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-        public ro_tipo_gastos_personales_maxim_x_anio_Info get_info(string IdTipoGasto)
+        public ro_tipo_gastos_personales_maxim_x_anio_Info get_info(int IdGasto)
         {
             try
             {
@@ -49,11 +50,12 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_tipo_gastos_personales_tabla_valores_x_anio Entity = Context.ro_tipo_gastos_personales_tabla_valores_x_anio.FirstOrDefault(q => q.IdTipoGasto == IdTipoGasto);
+                    ro_tipo_gastos_personales_tabla_valores_x_anio Entity = Context.ro_tipo_gastos_personales_tabla_valores_x_anio.FirstOrDefault(q => q.IdGasto == IdGasto);
                     if (Entity == null) return null;
 
                     info = new ro_tipo_gastos_personales_maxim_x_anio_Info
                     {
+                        IdGasto=Entity.IdGasto,
                         IdTipoGasto = Entity.IdTipoGasto,
                         AnioFiscal = Entity.AnioFiscal,
                         estado = Entity.estado,
@@ -109,13 +111,14 @@ namespace Core.Erp.Data.RRHH
                 {
                     ro_tipo_gastos_personales_tabla_valores_x_anio Entity = new ro_tipo_gastos_personales_tabla_valores_x_anio
                     {
+                        IdGasto=info.IdGasto=get_id(),
                         IdTipoGasto = info.IdTipoGasto,
                         AnioFiscal = info.AnioFiscal,
                         Monto_max = info.Monto_max,
                         estado = info.estado = "A",
                         Fecha_Transac = DateTime.Now,
                         IdUsuario = info.IdUsuario,
-                        observacion=""
+                        observacion=info.observacion=" "
                     };
                     Context.ro_tipo_gastos_personales_tabla_valores_x_anio.Add(Entity);
                     Context.SaveChanges();
@@ -176,5 +179,30 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+        public int get_id()
+        {
+            try
+            {
+                int ID = 1;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    var lst = from q in Context.ro_tipo_gastos_personales_tabla_valores_x_anio
+                              select q;
+
+                    if (lst.Count() > 0)
+                        ID = lst.Max(q => q.IdGasto) + 1;
+                }
+
+                return ID;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
