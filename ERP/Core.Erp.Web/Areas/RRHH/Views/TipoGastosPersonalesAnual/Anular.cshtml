@@ -11,6 +11,7 @@
 @using (Html.BeginForm("Anular", "TipoGastosPersonalesAnual", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdTipoGasto)
+    @Html.HiddenFor(q => q.IdGasto)
 
 
     <div class="row">

@@ -11,6 +11,7 @@
 @using (Html.BeginForm("Modificar", "TipoGastosPersonalesAnual", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdTipoGasto)
+    @Html.HiddenFor(q => q.IdGasto)
 
 
     <div class="row">
@@ -46,7 +47,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="AnioFiscal">Año fiscal*</label>
-                    @Html.TextBoxFor(q => q.AnioFiscal, new { @class = "form-control", @disabled="disabled" })
+                    @Html.TextBoxFor(q => q.AnioFiscal, new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(m => m.AnioFiscal, "", new { @class = "text-danger" })
                 </div>
             </div>

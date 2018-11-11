@@ -27,6 +27,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                cargar_combo();
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 List<ro_tipo_gastos_personales_maxim_x_anio_Info> model = bus_gastos.get_list(IdTipoGasto);
                 ViewBag.IdTipoGasto = IdTipoGasto;
@@ -57,7 +58,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     if (!bus_gastos.guardarDB(info))
                         return View(info);
                     else
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", new { IdTipoGasto = info.IdTipoGasto });
                 }
                 else
                     return View(info);
@@ -93,6 +94,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 info.IdUsuarioUltMod = SessionFixed.IdUsuario;
+                ViewBag.IdTipoGasto = info.IdTipoGasto;
 
                 if (ModelState.IsValid)
                 {
@@ -102,7 +104,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                         return View(info);
                     }
                     else
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", new { IdTipoGasto =info.IdTipoGasto});
                 }
                 else
                 {
@@ -141,6 +143,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 info.IdUsuarioUltAnu = SessionFixed.IdUsuario;
+                ViewBag.IdTipoGasto = info.IdTipoGasto;
 
                 if (!bus_gastos.anularDB(info))
                 {
@@ -149,7 +152,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     return View(info);
                 }
                 else
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { IdTipoGasto = info.IdTipoGasto });
             }
             catch (Exception)
             {

@@ -141,7 +141,6 @@ namespace Core.Erp.Data.RRHH
                     ro_tipo_gastos_personales_tabla_valores_x_anio Entity = Context.ro_tipo_gastos_personales_tabla_valores_x_anio.FirstOrDefault(q => q.IdTipoGasto == info.IdTipoGasto&& q.IdGasto==info.IdGasto);
                     if (Entity == null)
                         return false;
-                    Entity.AnioFiscal = info.AnioFiscal;
                     Entity.Monto_max = info.Monto_max;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
 

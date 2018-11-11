@@ -85,7 +85,20 @@
             c.Width = Unit.Pixel(150);
         });
         settings.Columns.Add("IdGasto", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdTipoGasto", "Tipo").Width = Unit.Percentage(40);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdTipoGasto";
+            column.Caption = "Tipo";
+            column.Width = Unit.Percentage(40);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("nom_tipo_gasto", "Gasto").Width = Unit.Percentage(20);
+                p.ValueField = "IdTipoGasto";
+                p.ValueType = typeof(string);
+                p.DataSource = ViewBag.list_tipo_gasto;
+                p.Width = Unit.Percentage(100);
+            });
+        });
         settings.Columns.Add("AnioFiscal", "Año").Width = Unit.Percentage(20);
         settings.Columns.Add("Monto_max", "Valor maximo").Width = Unit.Percentage(20);
 
