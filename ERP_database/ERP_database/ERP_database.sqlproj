@@ -449,12 +449,10 @@
     <Build Include="dbo\Views\vwin_UnidadMedida.sql" />
     <Build Include="dbo\Views\vwfa_Documento_Tipo_x_Secuencia_Talonario.sql" />
     <Build Include="dbo\Views\vwCOMP_Rpt001.sql" />
-    <Build Include="dbo\Views\vwRo_Archivos_Bancos_Generacion.sql" />
     <Build Include="Naturisa\Views\vwCOMP_NATU_Rpt001.sql" />
     <Build Include="dbo\Views\vwin_UnidadMedida_Equivalencia.sql" />
     <Build Include="dbo\Views\vwFa_Documentos_x_Relacionar_NC_ND.sql" />
     <Build Include="dbo\Views\vwCOMP_Rpt002.sql" />
-    <Build Include="dbo\Views\vwRo_Archivos_Bancos_Generacion_det.sql" />
     <Build Include="dbo\Views\vwin_VistaParaContabilizarInventario.sql" />
     <Build Include="dbo\Views\vwfa_fa_guia_remision_x_empresa.sql" />
     <Build Include="dbo\Views\vwCOMP_Rpt003.sql" />
@@ -656,7 +654,6 @@
     <Build Include="dbo\Views\vwACTF_Rpt012.sql" />
     <Build Include="web\Views\VWINV_002.sql" />
     <Build Include="Fj_servindustrias\Views\vwfa_tarifario_facturacion_x_cliente.sql" />
-    <Build Include="dbo\Views\vwRo_Archivos_Bancos_Generacion_total_archivo.sql" />
     <Build Include="dbo\Views\vwcp_orden_pago_det.sql" />
     <Build Include="dbo\Views\vwCONTA_Rpt002.sql" />
     <Build Include="dbo\Views\vwACTF_Rpt014.sql" />
@@ -774,7 +771,6 @@
     <Build Include="dbo\Views\vwro_empleado_Novedad.sql" />
     <Build Include="web\Views\VWBAN_005.sql" />
     <Build Include="dbo\Views\vwba_Cbte_Ban_detallePagos.sql" />
-    <Build Include="dbo\Views\vwro_Empleado_Novedades_Rubros.sql" />
     <Build Include="dbo\Views\vwFAC_Rpt013.sql" />
     <Build Include="dbo\Views\vwct_grupo_x_Tipo_Gasto.sql" />
     <Build Include="dbo\Views\vwro_empleado_x_ro_rubro.sql" />
@@ -1125,7 +1121,6 @@
     <Build Include="dbo\Stored Procedures\spRo_Calculo_Dias_Trabajados_detalle.sql" />
     <Build Include="dbo\Stored Procedures\spRo_Cierre_Rol.sql" />
     <Build Include="dbo\Stored Procedures\spRo_Nomina_Tipoliqui_x_Sueldo.sql" />
-    <Build Include="dbo\Stored Procedures\spRO_Novedades_no_cobradas.sql" />
     <Build Include="dbo\Stored Procedures\spRo_ObtenerPeriodoAnterior.sql" />
     <Build Include="dbo\Stored Procedures\spRo_ObtenerPeriodoDespues.sql" />
     <Build Include="dbo\Stored Procedures\spRo_procesa_Rol.sql" />
@@ -1144,7 +1139,6 @@
     <Build Include="dbo\Stored Procedures\spin_Producto_validar_anulacion.sql" />
     <Build Include="dbo\Stored Procedures\spROL_Rpt005.sql" />
     <Build Include="dbo\Stored Procedures\spROL_Rpt016.sql" />
-    <Build Include="dbo\Stored Procedures\spROL_Rpt020.sql" />
     <Build Include="dbo\Stored Procedures\spROL_Valor_Ganado_Vacaciones.sql" />
     <Build Include="dbo\Stored Procedures\spROL_Valor_Pendiente_pago.sql" />
     <Build Include="dbo\Stored Procedures\spROL_Valor_Pendiente_pago_x_Empleado_Acta_Finiquito.sql" />

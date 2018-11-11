@@ -15,11 +15,12 @@ namespace Core.Erp.Data
     public partial class ro_rol_detalle
     {
         public int IdEmpresa { get; set; }
+        public decimal IdRol { get; set; }
+        public decimal IdEmpleado { get; set; }
+        public string IdRubro { get; set; }
         public int IdNominaTipo { get; set; }
         public int IdNominaTipoLiqui { get; set; }
         public int IdPeriodo { get; set; }
-        public decimal IdEmpleado { get; set; }
-        public string IdRubro { get; set; }
         public int Orden { get; set; }
         public double Valor { get; set; }
         public Nullable<bool> rub_visible_reporte { get; set; }

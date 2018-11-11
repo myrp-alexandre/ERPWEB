@@ -891,7 +891,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_001_detalle' does 
             <PropertyRef Name="ValorIva" />
             <PropertyRef Name="Total" />
             <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="pr_descripcion" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCbteCble_Ogiro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -910,7 +909,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_001_detalle' does 
           <Property Name="ValorIva" Type="float" Nullable="false" />
           <Property Name="Total" Type="float" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWCXP_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2470,10 +2468,8 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_003' does not have
             <PropertyRef Name="ca_descripcion" />
             <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="DescripcionProcesoNomina" />
-            <PropertyRef Name="Descripcion" />
             <PropertyRef Name="ru_descripcion" />
             <PropertyRef Name="EstadoCobro" />
-            <PropertyRef Name="TotalValor" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -2488,11 +2484,9 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_003' does not have
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DescripcionProcesoNomina" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Observacion" Type="varchar" MaxLength="200" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rub_Acuerdo_Descuento" Type="varchar(max)" />
           <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EstadoCobro" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="TotalValor" Type="float" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_004' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2781,7 +2775,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.VWROL_009' does not have
           <Property Name="IdDepartamento" Type="int" Nullable="false" />
           <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
-          <Property Name="Num_Horas" Type="float" />
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -3770,8 +3763,7 @@ FROM [web].[VWCXP_001] AS [VWCXP_001]</DefiningQuery>
 [VWCXP_001_detalle].[PorIva] AS [PorIva], 
 [VWCXP_001_detalle].[ValorIva] AS [ValorIva], 
 [VWCXP_001_detalle].[Total] AS [Total], 
-[VWCXP_001_detalle].[Descripcion] AS [Descripcion], 
-[VWCXP_001_detalle].[pr_descripcion] AS [pr_descripcion]
+[VWCXP_001_detalle].[Descripcion] AS [Descripcion]
 FROM [web].[VWCXP_001_detalle] AS [VWCXP_001_detalle]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWCXP_002" EntityType="Self.VWCXP_002" store:Type="Views" store:Schema="web">
@@ -4701,11 +4693,9 @@ FROM [web].[VWROL_002] AS [VWROL_002]</DefiningQuery>
 [VWROL_003].[pe_cedulaRuc] AS [pe_cedulaRuc], 
 [VWROL_003].[DescripcionProcesoNomina] AS [DescripcionProcesoNomina], 
 [VWROL_003].[Observacion] AS [Observacion], 
-[VWROL_003].[Descripcion] AS [Descripcion], 
 [VWROL_003].[rub_Acuerdo_Descuento] AS [rub_Acuerdo_Descuento], 
 [VWROL_003].[ru_descripcion] AS [ru_descripcion], 
-[VWROL_003].[EstadoCobro] AS [EstadoCobro], 
-[VWROL_003].[TotalValor] AS [TotalValor]
+[VWROL_003].[EstadoCobro] AS [EstadoCobro]
 FROM [web].[VWROL_003] AS [VWROL_003]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWROL_004" EntityType="Self.VWROL_004" store:Type="Views" store:Schema="web">
@@ -4866,7 +4856,6 @@ FROM [web].[VWROL_008] AS [VWROL_008]</DefiningQuery>
 [VWROL_009].[IdDepartamento] AS [IdDepartamento], 
 [VWROL_009].[pe_apellido] AS [pe_apellido], 
 [VWROL_009].[pe_nombre] AS [pe_nombre], 
-[VWROL_009].[Num_Horas] AS [Num_Horas], 
 [VWROL_009].[ca_descripcion] AS [ca_descripcion]
 FROM [web].[VWROL_009] AS [VWROL_009]</DefiningQuery>
           </EntitySet>
@@ -7047,42 +7036,6 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
           <Property Name="ru_orden" Type="Int32" Nullable="false" />
           <Property Name="em_ruc" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="VWROL_003">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdPersona" />
-            <PropertyRef Name="IdNovedad" />
-            <PropertyRef Name="FechaPago" />
-            <PropertyRef Name="Valor" />
-            <PropertyRef Name="Fecha_Transac" />
-            <PropertyRef Name="ca_descripcion" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="DescripcionProcesoNomina" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="ru_descripcion" />
-            <PropertyRef Name="EstadoCobro" />
-            <PropertyRef Name="TotalValor" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdPersona" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdNovedad" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ca_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DescripcionProcesoNomina" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="rub_Acuerdo_Descuento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ru_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="EstadoCobro" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TotalValor" Type="Double" Nullable="false" />
-        </EntityType>
         <EntityType Name="VWROL_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7327,40 +7280,6 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
           <Property Name="descuento_quincena" Type="Boolean" Nullable="false" />
           <Property Name="descuento_men_quin" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="VWROL_009">
-          <Key>
-            <PropertyRef Name="CedulaRuc" />
-            <PropertyRef Name="NombreCompleto" />
-            <PropertyRef Name="FechaPago" />
-            <PropertyRef Name="Valor" />
-            <PropertyRef Name="EstadoCobro" />
-            <PropertyRef Name="RubroDescripcion" />
-            <PropertyRef Name="Division" />
-            <PropertyRef Name="Departamento" />
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdDepartamento" />
-            <PropertyRef Name="ca_descripcion" />
-          </Key>
-          <Property Name="CedulaRuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NombreCompleto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdRubro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="EstadoCobro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RubroDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Division" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Departamento" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdDivision" Type="Int32" />
-          <Property Name="CodigoEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Num_Horas" Type="Double" />
-          <Property Name="ca_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="VWROL_010">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7512,13 +7431,11 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
           <EntitySet Name="VWINV_008" EntityType="Self.VWINV_008" />
           <EntitySet Name="VWROL_001" EntityType="Self.VWROL_001" />
           <EntitySet Name="VWROL_002" EntityType="Self.VWROL_002" />
-          <EntitySet Name="VWROL_003" EntityType="Self.VWROL_003" />
           <EntitySet Name="VWROL_004" EntityType="Self.VWROL_004" />
           <EntitySet Name="VWROL_005" EntityType="Self.VWROL_005" />
           <EntitySet Name="VWROL_006" EntityType="Self.VWROL_006" />
           <EntitySet Name="VWROL_007" EntityType="Self.VWROL_007" />
           <EntitySet Name="VWROL_008" EntityType="Self.VWROL_008" />
-          <EntitySet Name="VWROL_009" EntityType="Self.VWROL_009" />
           <EntitySet Name="VWROL_010" EntityType="Self.VWROL_010" />
           <EntitySet Name="VWROL_011" EntityType="Self.VWROL_011" />
           <EntitySet Name="VWROL_014" EntityType="Self.VWROL_014" />
@@ -7770,6 +7687,8 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="MostrarSinMovimiento" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <EntitySet Name="VWROL_003" EntityType="Model_reportes.VWROL_003" />
+          <EntitySet Name="VWROL_009" EntityType="Model_reportes.VWROL_009" />
           <EntitySet Name="VWCXP_001_detalle" EntityType="Model_reportes.VWCXP_001_detalle" />
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
@@ -8727,6 +8646,71 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
           <Property Type="String" Name="IdPresentacion" Nullable="false" MaxLength="25" />
           <Property Type="String" Name="nom_presentacion" Nullable="false" MaxLength="150" />
         </ComplexType>
+        <EntityType Name="VWROL_003">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdNovedad" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Fecha_Transac" />
+            <PropertyRef Name="ca_descripcion" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="EstadoCobro" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="rub_Acuerdo_Descuento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoCobro" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VWROL_009">
+          <Key>
+            <PropertyRef Name="CedulaRuc" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="EstadoCobro" />
+            <PropertyRef Name="RubroDescripcion" />
+            <PropertyRef Name="Division" />
+            <PropertyRef Name="Departamento" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdDepartamento" />
+            <PropertyRef Name="ca_descripcion" />
+          </Key>
+          <Property Name="CedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="EstadoCobro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RubroDescripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Division" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Departamento" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdDivision" Type="Int32" />
+          <Property Name="CodigoEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="VWCXP_001_detalle">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -8745,7 +8729,6 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
             <PropertyRef Name="ValorIva" />
             <PropertyRef Name="Total" />
             <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="pr_descripcion" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
@@ -8764,7 +8747,6 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
           <Property Name="ValorIva" Type="Double" Nullable="false" />
           <Property Name="Total" Type="Double" Nullable="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -10137,30 +10119,6 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VWROL_003">
-            <EntityTypeMapping TypeName="Model_reportes.VWROL_003">
-              <MappingFragment StoreEntitySet="VWROL_003">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
-                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="rub_Acuerdo_Descuento" ColumnName="rub_Acuerdo_Descuento" />
-                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
-                <ScalarProperty Name="EstadoCobro" ColumnName="EstadoCobro" />
-                <ScalarProperty Name="TotalValor" ColumnName="TotalValor" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VWROL_004">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_004">
               <MappingFragment StoreEntitySet="VWROL_004">
@@ -10308,30 +10266,6 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
                 <ScalarProperty Name="descuento_mensual" ColumnName="descuento_mensual" />
                 <ScalarProperty Name="descuento_quincena" ColumnName="descuento_quincena" />
                 <ScalarProperty Name="descuento_men_quin" ColumnName="descuento_men_quin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VWROL_009">
-            <EntityTypeMapping TypeName="Model_reportes.VWROL_009">
-              <MappingFragment StoreEntitySet="VWROL_009">
-                <ScalarProperty Name="CedulaRuc" ColumnName="CedulaRuc" />
-                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="EstadoCobro" ColumnName="EstadoCobro" />
-                <ScalarProperty Name="RubroDescripcion" ColumnName="RubroDescripcion" />
-                <ScalarProperty Name="Division" ColumnName="Division" />
-                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
-                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="Num_Horas" ColumnName="Num_Horas" />
-                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -11332,10 +11266,54 @@ FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWROL_003">
+            <EntityTypeMapping TypeName="Model_reportes.VWROL_003">
+              <MappingFragment StoreEntitySet="VWROL_003">
+                <ScalarProperty Name="EstadoCobro" ColumnName="EstadoCobro" />
+                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
+                <ScalarProperty Name="rub_Acuerdo_Descuento" ColumnName="rub_Acuerdo_Descuento" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWROL_009">
+            <EntityTypeMapping TypeName="Model_reportes.VWROL_009">
+              <MappingFragment StoreEntitySet="VWROL_009">
+                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
+                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="RubroDescripcion" ColumnName="RubroDescripcion" />
+                <ScalarProperty Name="EstadoCobro" ColumnName="EstadoCobro" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="CedulaRuc" ColumnName="CedulaRuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VWCXP_001_detalle">
             <EntityTypeMapping TypeName="Model_reportes.VWCXP_001_detalle">
               <MappingFragment StoreEntitySet="VWCXP_001_detalle">
-                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="ValorIva" ColumnName="ValorIva" />

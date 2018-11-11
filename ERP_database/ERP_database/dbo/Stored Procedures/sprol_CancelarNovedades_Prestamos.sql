@@ -14,11 +14,11 @@ declare
 select @FechaInicio=pe_FechaIni,@fechaFin=pe_FechaFin from ro_periodo where IdPeriodo=@IdPeriodo and @IdEmpresa=@IdEmpresa
 update ro_empleado_novedad_det set EstadoCobro='CAN'
 FROM            dbo.ro_rol_detalle AS rol INNER JOIN
-                         dbo.ro_empleado_novedad_det AS novedad ON rol.IdEmpresa = novedad.IdEmpresa AND rol.IdNominaTipo = novedad.IdNomina_tipo AND rol.IdNominaTipoLiqui = novedad.IdNomina_Tipo_Liq AND 
+                         dbo.ro_empleado_novedad AS novedad ON rol.IdEmpresa = novedad.IdEmpresa AND rol.IdNominaTipo = novedad.IdNomina_tipo AND rol.IdNominaTipoLiqui = novedad.IdNomina_Tipo_Liq AND 
                          rol.IdEmpleado = novedad.IdEmpleado AND rol.IdRubro = novedad.IdRubro
 						 WHERE FechaPago between @FechaInicio and @fechaFin
 						 and IdNomina_tipo=@IdNomina
-						 and IdNomina_Tipo_Liq=@IdNominaTipo
+						 and IdNomina_TipoLiqui=@IdNominaTipo
 						 and novedad.IdEmpresa=@IdEmpresa
 						 and exists (select * from ro_rol_detalle r
 						 where r.IdEmpresa=novedad.IdEmpresa
@@ -27,6 +27,9 @@ FROM            dbo.ro_rol_detalle AS rol INNER JOIN
 						 and r.IdNominaTipoLiqui=novedad.IdNomina_Tipo_Liq
 						 and r.IdRubro=novedad.IdRubro
 						 and r.IdPeriodo=@IdPeriodo)
+
+
+
 						 update ro_prestamo_detalle set EstadoPago='CAN'
 						 FROM            dbo.ro_prestamo_detalle INNER JOIN
                          dbo.ro_prestamo ON dbo.ro_prestamo_detalle.IdEmpresa = dbo.ro_prestamo.IdEmpresa AND dbo.ro_prestamo_detalle.IdPrestamo = dbo.ro_prestamo.IdPrestamo

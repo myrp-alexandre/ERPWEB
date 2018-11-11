@@ -30,7 +30,6 @@ namespace Core.Erp.Data
         public int IdDepartamento { get; set; }
         public string pe_apellido { get; set; }
         public string pe_nombre { get; set; }
-        public Nullable<double> Num_Horas { get; set; }
         public string ca_descripcion { get; set; }
     }
 }

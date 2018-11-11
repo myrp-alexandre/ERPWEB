@@ -19,18 +19,13 @@ namespace Core.Erp.Data.RRHH
                 {
                     Lista = (from q in Context.ro_empleado_novedad_det
                              where q.IdEmpresa == IdEmpresa
-                                   & q.IdEmpleado==IdEmpleado
                                    && q.IdNovedad==IdNovedad
                              select new ro_empleado_novedad_det_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdNovedad = q.IdNovedad,
-                                 IdNomina_tipo = q.IdNomina_tipo,
-                                 IdNomina_Tipo_Liq = q.IdNomina_Tipo_Liq,
-                                 IdEmpleado = q.IdEmpleado,
                                  FechaPago = q.FechaPago,
                                  Observacion = q.Observacion,
-                                 Estado = q.Estado,
                                  Valor = q.Valor,
                                  IdRubro = q.IdRubro ,
                                  Secuencia=q.Secuencia                               
@@ -58,19 +53,13 @@ namespace Core.Erp.Data.RRHH
                              join p in Context.ro_rubro_tipo
                              on new { q.IdEmpresa, q.IdRubro} equals new {p.IdEmpresa, p.IdRubro}
                                  where q.IdEmpresa == IdEmpresa
-                                   & q.IdEmpleado == IdEmpleado
-                                   && q.Estado == "A"
                                    && q.EstadoCobro=="PEN"
                              select new ro_empleado_novedad_det_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdNovedad = q.IdNovedad,
-                                 IdNomina_tipo = q.IdNomina_tipo,
-                                 IdNomina_Tipo_Liq = q.IdNomina_Tipo_Liq,
-                                 IdEmpleado = q.IdEmpleado,
                                  FechaPago = q.FechaPago,
                                  Observacion = q.Observacion,
-                                 Estado = q.Estado,
                                  Valor = q.Valor,
                                  IdRubro = q.IdRubro,
                                  Secuencia = q.Secuencia,
@@ -96,19 +85,14 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_empleado_novedad_det Entity = Context.ro_empleado_novedad_det.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdEmpleado==IdEmpleado && q.IdNovedad == IdNovedad && q.Secuencia==Secuencia);
+                    ro_empleado_novedad_det Entity = Context.ro_empleado_novedad_det.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdNovedad == IdNovedad && q.Secuencia==Secuencia);
                     if (Entity == null) return null;
 
                     info = new ro_empleado_novedad_det_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdNovedad = Entity.IdNovedad,
-                        IdNomina_tipo = Entity.IdNomina_tipo,
-                        IdNomina_Tipo_Liq = Entity.IdNomina_Tipo_Liq,
-                        IdEmpleado = Entity.IdEmpleado,
                         FechaPago = Entity.FechaPago,
-                        Num_Horas = Entity.Num_Horas,
-                        Estado = Entity.Estado,
                     };
                 }
 
@@ -132,15 +116,11 @@ namespace Core.Erp.Data.RRHH
                         {
                             IdEmpresa = item.IdEmpresa,
                             IdNovedad = item.IdNovedad ,
-                            IdNomina_tipo = item.IdNomina_tipo,
-                            IdNomina_Tipo_Liq = item.IdNomina_Tipo_Liq,
-                            IdEmpleado = item.IdEmpleado,
                             FechaPago = item.FechaPago,
                             IdRubro=item.IdRubro,
                             Valor=item.Valor,
                             Observacion=item.Observacion,
                             EstadoCobro = item.EstadoCobro="PEN",
-                            Estado = item.Estado = "A",
                     };
                         Context.ro_empleado_novedad_det.Add(Entity);
                     }
@@ -201,7 +181,6 @@ namespace Core.Erp.Data.RRHH
                 {
                     var lst = from q in Context.ro_empleado_novedad_det
                               where q.IdEmpresa == IdEmpresa
-                              && q.IdEmpleado == IdEmpleado
                               && q.IdRubro==IdRubro
                               && q.FechaPago>=Fi
                               && q.FechaPago <=Ff

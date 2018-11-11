@@ -10,7 +10,12 @@ declare
 select @IdEmplado=IdEmpleado from ro_Acta_Finiquito where IdEmpresa=@IdEmpresa and IdActaFiniquito=@IdActaFiniquito
 BEGIN
 update ro_empleado_novedad_det set EstadoCobro='CAN'
-where IdEmpresa=@IdEmpresa and IdEmpleado=@IdEmplado 
+from ro_empleado_Novedad c, ro_empleado_novedad_det d
+
+where c.IdEmpresa=d.IdEmpresa
+and c.IdNovedad=d.IdNovedad
+
+and c.IdEmpresa=@IdEmpresa and IdEmpleado=@IdEmplado 
 
  update ro_empleado set em_estado='I', em_status='EST_LIQ'
 where IdEmpresa=@IdEmpresa and IdEmpleado=@IdEmplado 

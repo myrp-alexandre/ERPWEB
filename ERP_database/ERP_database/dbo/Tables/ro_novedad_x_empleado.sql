@@ -10,7 +10,8 @@
     [IdNomina_Tipo]          INT           NOT NULL,
     [IdNomina_TipoLiqui]     INT           NOT NULL,
     [IdRubro]                VARCHAR (10)  NOT NULL,
-    CONSTRAINT [PK_ro_Novedad_x_Empleado] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdTransaccion] ASC, [IdEmpresa_Emp_Novedad] ASC, [IdNovedad_Emp_Novedad] ASC, [IdEmpleado_Emp_Novedad] ASC),
-    CONSTRAINT [FK_ro_Novedad_x_Empleado_ro_Empleado_Novedad] FOREIGN KEY ([IdEmpresa_Emp_Novedad], [IdNovedad_Emp_Novedad], [IdEmpleado_Emp_Novedad]) REFERENCES [dbo].[ro_empleado_Novedad] ([IdEmpresa], [IdNovedad], [IdEmpleado])
+    CONSTRAINT [PK_ro_Novedad_x_Empleado] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdTransaccion] ASC, [IdEmpresa_Emp_Novedad] ASC, [IdNovedad_Emp_Novedad] ASC, [IdEmpleado_Emp_Novedad] ASC)
 );
+
+
 

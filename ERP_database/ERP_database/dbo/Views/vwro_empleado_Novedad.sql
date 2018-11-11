@@ -1,7 +1,7 @@
 ﻿CREATE VIEW dbo.vwro_empleado_Novedad
 AS
 SELECT        dbo.ro_empleado_Novedad.IdEmpresa, dbo.ro_empleado_Novedad.IdNovedad, dbo.ro_empleado_Novedad.IdEmpleado, dbo.ro_empleado_Novedad.IdNomina_Tipo, dbo.ro_empleado_Novedad.IdNomina_TipoLiqui, 
-                         dbo.ro_empleado_Novedad.Fecha, dbo.ro_empleado_Novedad.TotalValor, dbo.ro_empleado_Novedad.Fecha_PrimerPago, dbo.ro_empleado_Novedad.NumCoutas, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, 
+                         dbo.ro_empleado_Novedad.Fecha, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, 
                          dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_nombreCompleto, dbo.ro_Nomina_Tipo.Descripcion, dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, dbo.ro_empleado_Novedad.Estado, 
                          dbo.ro_empleado_Novedad.Observacion
 FROM            dbo.ro_empleado INNER JOIN

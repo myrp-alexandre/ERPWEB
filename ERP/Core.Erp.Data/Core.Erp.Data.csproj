@@ -928,19 +928,19 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Model_rrhh.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Model_rrhh.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Model_rrhh.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Model_rrhh.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Model_rrhh.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Model_rrhh.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Model_seguridad_acceso.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1905,6 +1905,9 @@
     <Compile Include="vwro_empleado_Novedad.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwro_Empleado_Novedades.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwro_empleado_x_Proyeccion_Gastos_Personales.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -2068,16 +2071,16 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_rrhh.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Model_seguridad_acceso.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_seguridad_acceso.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="Model_reportes.edmx.diagram">
       <DependentUpon>Model_reportes.edmx</DependentUpon>
     </None>
     <None Include="Model_rrhh.edmx.diagram">
       <DependentUpon>Model_rrhh.edmx</DependentUpon>
     </None>
-    <EntityDeploy Include="Model_seguridad_acceso.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model_seguridad_acceso.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="Model_seguridad_acceso.edmx.diagram">
       <DependentUpon>Model_seguridad_acceso.edmx</DependentUpon>
     </None>
@@ -2215,13 +2218,13 @@
       <LastGenOutput>Model_reportes.cs</LastGenOutput>
     </Content>
     <Content Include="Model_rrhh.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_rrhh.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model_rrhh.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model_rrhh.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_rrhh.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model_rrhh.cs</LastGenOutput>
     </Content>
     <Content Include="Model_seguridad_acceso.Context.tt">

@@ -17,12 +17,15 @@ namespace Core.Erp.Data
         public ro_rol()
         {
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
+            this.ro_rol_detalle_x_rubro_acumulado = new HashSet<ro_rol_detalle_x_rubro_acumulado>();
         }
     
         public int IdEmpresa { get; set; }
+        public decimal IdRol { get; set; }
         public int IdNominaTipo { get; set; }
         public int IdNominaTipoLiqui { get; set; }
         public int IdPeriodo { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
         public string Descripcion { get; set; }
         public string Observacion { get; set; }
         public string Cerrado { get; set; }
@@ -41,5 +44,6 @@ namespace Core.Erp.Data
         public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
         public virtual ro_periodo_x_ro_Nomina_TipoLiqui ro_periodo_x_ro_Nomina_TipoLiqui { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
+        public virtual ICollection<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
     }
 }

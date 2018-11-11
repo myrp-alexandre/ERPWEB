@@ -114,22 +114,22 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion,			TipoMovimiento,				IdCentroCosto		,IdCentroCosto_sub_centro_costo			,IdPunto_cargo)
 
 select 
-@IdEmpresa				,@IdNomina				,@IdNominaTipo				,@IdPEriodo			,nov.IdEmpleado		,nov.IdRubro		,rub.ru_orden	,sum(nov.Valor)
+@IdEmpresa				,@IdNomina				,@IdNominaTipo				,@IdPEriodo			,novc.IdEmpleado		,nov.IdRubro		,rub.ru_orden	,sum(nov.Valor)
 ,1						,rub.ru_descripcion		, null						, null				,null									,emp.IdPuntoCargo
 FROM   dbo.ro_empleado AS emp INNER JOIN
 dbo.ro_empleado_Novedad AS novc ON emp.IdEmpresa = novc.IdEmpresa AND emp.IdEmpleado = novc.IdEmpleado INNER JOIN
-dbo.ro_empleado_novedad_det AS nov ON novc.IdEmpresa = nov.IdEmpresa AND novc.IdNovedad = nov.IdNovedad AND novc.IdEmpleado = nov.IdEmpleado INNER JOIN
+dbo.ro_empleado_novedad_det AS nov ON novc.IdEmpresa = nov.IdEmpresa AND novc.IdNovedad = nov.IdNovedad AND novc.IdEmpleado = novc.IdEmpleado INNER JOIN
 dbo.ro_rubro_tipo AS rub ON nov.IdEmpresa = rub.IdEmpresa AND nov.IdRubro = rub.IdRubro
 and nov.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa
-and nov.IdNomina_tipo=@IdNomina
-and nov.IdNomina_Tipo_Liq=@IdNominaTipo
+and novc.IdNomina_tipo=@IdNomina
+and novc.IdNomina_TipoLiqui=@IdNominaTipo
 and nov.FechaPago between @Fi and @Ff
-and nov.Estado='A'
+and novc.Estado='A'
 and nov.EstadoCobro='PEN'
 and (emp.em_status='EST_ACT')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
-group by nov.IdEmpresa,nov.IdEmpleado,nov.IdRubro,rub.ru_orden,rub.ru_descripcion, emp.IdPuntoCargo
+group by novc.IdEmpresa,novc.IdEmpleado,nov.IdRubro,rub.ru_orden,rub.ru_descripcion, emp.IdPuntoCargo
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------buscando cuota de prestamos e insertando al rol detalle-------------------------------------------------------------------------<

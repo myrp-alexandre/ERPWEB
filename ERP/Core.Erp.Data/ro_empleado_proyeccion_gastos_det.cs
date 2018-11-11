@@ -22,5 +22,6 @@ namespace Core.Erp.Data
         public string Observacion { get; set; }
     
         public virtual ro_empleado_proyeccion_gastos ro_empleado_proyeccion_gastos { get; set; }
+        public virtual ro_tipo_gastos_personales ro_tipo_gastos_personales { get; set; }
     }
 }

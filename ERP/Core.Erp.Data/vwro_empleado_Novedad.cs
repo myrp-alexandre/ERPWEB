@@ -20,9 +20,6 @@ namespace Core.Erp.Data
         public int IdNomina_Tipo { get; set; }
         public int IdNomina_TipoLiqui { get; set; }
         public System.DateTime Fecha { get; set; }
-        public double TotalValor { get; set; }
-        public Nullable<System.DateTime> Fecha_PrimerPago { get; set; }
-        public Nullable<int> NumCoutas { get; set; }
         public string pe_apellido { get; set; }
         public string pe_nombre { get; set; }
         public string pe_cedulaRuc { get; set; }

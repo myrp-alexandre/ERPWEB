@@ -65,11 +65,11 @@ delete ro_Comprobantes_Contables
 
 update ro_empleado_novedad_det set EstadoCobro='PEN'
 FROM            dbo.ro_rol_detalle AS rol INNER JOIN
-                         dbo.ro_empleado_novedad_det AS novedad ON rol.IdEmpresa = novedad.IdEmpresa AND rol.IdNominaTipo = novedad.IdNomina_tipo AND rol.IdNominaTipoLiqui = novedad.IdNomina_Tipo_Liq AND 
+                         dbo.ro_empleado_novedad AS novedad ON rol.IdEmpresa = novedad.IdEmpresa AND rol.IdNominaTipo = novedad.IdNomina_tipo AND rol.IdNominaTipoLiqui = novedad.IdNomina_Tipo_Liq AND 
                          rol.IdEmpleado = novedad.IdEmpleado AND rol.IdRubro = novedad.IdRubro
 						 WHERE FechaPago between @fechai and @fechaf
 						 and IdNomina_tipo=@IdNomina_Tipo
-						 and IdNomina_Tipo_Liq=@IdNomina_TipoLiqui
+						 and IdNomina_TipoLiqui=@IdNomina_TipoLiqui
 						 and novedad.IdEmpresa=@IdEmpresa
 						 and exists (select * from ro_rol_detalle r
 						 where r.IdEmpresa=novedad.IdEmpresa

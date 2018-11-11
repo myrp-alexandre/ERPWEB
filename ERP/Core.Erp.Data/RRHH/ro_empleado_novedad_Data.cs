@@ -31,15 +31,12 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina_TipoLiqui = q.IdNomina_TipoLiqui,
                                      IdEmpleado = q.IdEmpleado,
                                      Fecha = q.Fecha,
-                                     Fecha_PrimerPago = q.Fecha_PrimerPago,
                                      Estado = q.Estado,
                                      Descripcion = q.Descripcion,
                                      DescripcionProcesoNomina = q.DescripcionProcesoNomina,
                                      pe_cedulaRuc = q.pe_cedulaRuc,
                                      pe_nombreCompleto = q.pe_apellido + " " + q.pe_nombre,
                                      Observacion = q.Observacion,
-                                     TotalValor = q.TotalValor,
-
                                      EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
 
@@ -72,7 +69,6 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_TipoLiqui = Entity.IdNomina_TipoLiqui,
                         IdEmpleado = Entity.IdEmpleado,
                         Fecha = Entity.Fecha,
-                        Fecha_PrimerPago = Entity.Fecha_PrimerPago,
                         Estado = Entity.Estado,
                         Observacion=Entity.Observacion
                     };
@@ -125,8 +121,7 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_TipoLiqui=info.IdNomina_TipoLiqui,
                         IdEmpleado=info.IdEmpleado,
                         Fecha=info.Fecha.Date,
-                        TotalValor=info.TotalValor,
-                        Fecha_PrimerPago=info.Fecha_PrimerPago,
+                        
                         Observacion=info.Observacion,                     
                         Estado = info.Estado = "A",
                         IdUsuario = info.IdUsuario,
@@ -156,8 +151,6 @@ namespace Core.Erp.Data.RRHH
                     Entity.IdNomina_TipoLiqui = info.IdNomina_TipoLiqui;
                     Entity.Observacion =( info.Observacion)==null?"": info.Observacion;
                     Entity.Fecha = info.Fecha.Date;
-                    Entity.NumCoutas = info.NumCoutas;
-                    Entity.TotalValor = info.TotalValor;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();

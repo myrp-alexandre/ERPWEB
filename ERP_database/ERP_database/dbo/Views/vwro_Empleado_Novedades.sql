@@ -1,33 +1,19 @@
 ﻿CREATE VIEW dbo.vwro_Empleado_Novedades
 AS
-SELECT        dbo.ro_empleado_novedad_det.IdEmpresa, dbo.ro_empleado_novedad_det.IdNovedad, dbo.ro_empleado_novedad_det.IdEmpleado, dbo.ro_empleado_novedad_det.Secuencia AS IdTransaccion, 
-                         dbo.ro_empleado_Novedad.Fecha, dbo.ro_empleado_Novedad.TotalValor, dbo.ro_empleado_Novedad.IdUsuario, dbo.ro_empleado_Novedad.Fecha_Transac, dbo.ro_empleado_Novedad.IdUsuarioUltMod, 
-                         dbo.ro_empleado_Novedad.Fecha_UltAnu, dbo.ro_empleado_Novedad.IdUsuarioUltAnu, dbo.ro_empleado_Novedad.nom_pc, dbo.ro_empleado_Novedad.ip, dbo.ro_empleado_Novedad.MotiAnula, 
-                         dbo.ro_empleado_Novedad.Estado, dbo.ro_empleado_Novedad.IdCentroCosto, dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, dbo.ro_empleado_Novedad.IdNomina_Tipo, 
-                         dbo.ro_empleado_Novedad.IdNomina_TipoLiqui, dbo.ro_rubro_tipo.ru_descripcion, dbo.tb_persona.pe_nombreCompleto, dbo.ro_empleado_novedad_det.IdRubro, dbo.ro_empleado_novedad_det.Observacion, 
-                         dbo.ro_empleado_novedad_det.Valor, dbo.ro_empleado_novedad_det.EstadoCobro, dbo.ro_empleado_novedad_det.FechaPago, dbo.ro_empleado_novedad_det.Estado AS Estado_det, dbo.ro_rubro_tipo.ru_tipo, 
-                         dbo.ro_empleado.em_codigo, dbo.tb_persona.pe_cedulaRuc, dbo.ro_Nomina_Tipo.Descripcion AS descripcion_tiponomina, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.ro_empleado_Novedad.MotivoModiica, 
-                         dbo.ro_empleado_Novedad.IdCalendario, dbo.ro_empleado_novedad_det.Num_Horas, dbo.ro_cargo.ca_descripcion, dbo.ro_empleado.em_status
+SELECT        dbo.ro_empleado_Novedad.IdEmpleado, dbo.ro_empleado_Novedad.Fecha, dbo.ro_empleado_Novedad.IdUsuario, dbo.ro_empleado_Novedad.Fecha_Transac, dbo.ro_empleado_Novedad.IdUsuarioUltMod, 
+                         dbo.ro_empleado_Novedad.Fecha_UltAnu, dbo.ro_empleado_Novedad.IdUsuarioUltAnu, dbo.ro_empleado_Novedad.MotiAnula, dbo.ro_empleado_Novedad.Estado, dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, 
+                         dbo.ro_empleado_Novedad.IdNomina_Tipo, dbo.ro_empleado_Novedad.IdNomina_TipoLiqui, dbo.tb_persona.pe_nombreCompleto, dbo.ro_empleado.em_codigo, dbo.tb_persona.pe_cedulaRuc, 
+                         dbo.ro_Nomina_Tipo.Descripcion AS descripcion_tiponomina, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.ro_cargo.ca_descripcion, dbo.ro_empleado.em_status, dbo.ro_empleado_Novedad.Observacion, 
+                         dbo.tb_sucursal.Su_Descripcion, dbo.ro_empleado_Novedad.IdSucursal
 FROM            dbo.ro_Nomina_Tipo INNER JOIN
                          dbo.ro_Nomina_Tipoliqui ON dbo.ro_Nomina_Tipo.IdEmpresa = dbo.ro_Nomina_Tipoliqui.IdEmpresa AND dbo.ro_Nomina_Tipo.IdNomina_Tipo = dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo INNER JOIN
-                         dbo.ro_rubro_tipo INNER JOIN
-                         dbo.ro_empleado_novedad_det ON dbo.ro_rubro_tipo.IdRubro = dbo.ro_empleado_novedad_det.IdRubro AND dbo.ro_rubro_tipo.IdEmpresa = dbo.ro_empleado_novedad_det.IdEmpresa INNER JOIN
                          dbo.tb_persona INNER JOIN
                          dbo.ro_empleado INNER JOIN
                          dbo.ro_empleado_Novedad ON dbo.ro_empleado.IdEmpresa = dbo.ro_empleado_Novedad.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_empleado_Novedad.IdEmpleado ON 
-                         dbo.tb_persona.IdPersona = dbo.ro_empleado.IdPersona ON dbo.ro_empleado_novedad_det.IdEmpresa = dbo.ro_empleado_Novedad.IdEmpresa AND 
-                         dbo.ro_empleado_novedad_det.IdNovedad = dbo.ro_empleado_Novedad.IdNovedad AND dbo.ro_empleado_novedad_det.IdEmpleado = dbo.ro_empleado_Novedad.IdEmpleado ON 
-                         dbo.ro_Nomina_Tipoliqui.IdEmpresa = dbo.ro_empleado_Novedad.IdEmpresa AND dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo = dbo.ro_empleado_Novedad.IdNomina_Tipo AND 
-                         dbo.ro_Nomina_Tipoliqui.IdNomina_TipoLiqui = dbo.ro_empleado_Novedad.IdNomina_TipoLiqui INNER JOIN
-                         dbo.ro_cargo ON dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa AND dbo.ro_empleado.IdCargo = dbo.ro_cargo.IdCargo
-GROUP BY dbo.ro_empleado_novedad_det.IdEmpresa, dbo.ro_empleado_novedad_det.IdNovedad, dbo.ro_empleado_novedad_det.IdEmpleado, dbo.ro_empleado_novedad_det.Secuencia, dbo.ro_empleado_Novedad.Fecha, 
-                         dbo.ro_empleado_Novedad.TotalValor, dbo.ro_empleado_Novedad.IdUsuario, dbo.ro_empleado_Novedad.Fecha_Transac, dbo.ro_empleado_Novedad.IdUsuarioUltMod, dbo.ro_empleado_Novedad.Fecha_UltAnu, 
-                         dbo.ro_empleado_Novedad.IdUsuarioUltAnu, dbo.ro_empleado_Novedad.nom_pc, dbo.ro_empleado_Novedad.ip, dbo.ro_empleado_Novedad.MotiAnula, dbo.ro_empleado_Novedad.Estado, 
-                         dbo.ro_empleado_Novedad.IdCentroCosto, dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, dbo.ro_empleado_Novedad.IdNomina_Tipo, dbo.ro_empleado_Novedad.IdNomina_TipoLiqui, dbo.ro_rubro_tipo.ru_descripcion, 
-                         dbo.tb_persona.pe_nombreCompleto, dbo.ro_empleado_novedad_det.IdRubro, dbo.ro_empleado_novedad_det.Observacion, dbo.ro_empleado_novedad_det.Valor, dbo.ro_empleado_novedad_det.EstadoCobro, 
-                         dbo.ro_empleado_novedad_det.FechaPago, dbo.ro_empleado_novedad_det.Estado, dbo.ro_rubro_tipo.ru_tipo, dbo.ro_empleado.em_codigo, dbo.tb_persona.pe_cedulaRuc, dbo.ro_Nomina_Tipo.Descripcion, 
-                         dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.ro_empleado_Novedad.MotivoModiica, dbo.ro_empleado_Novedad.IdCalendario, dbo.ro_empleado_novedad_det.Num_Horas, dbo.ro_cargo.ca_descripcion, 
-                         dbo.ro_empleado.em_status
+                         dbo.tb_persona.IdPersona = dbo.ro_empleado.IdPersona ON dbo.ro_Nomina_Tipoliqui.IdEmpresa = dbo.ro_empleado_Novedad.IdEmpresa AND 
+                         dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo = dbo.ro_empleado_Novedad.IdNomina_Tipo AND dbo.ro_Nomina_Tipoliqui.IdNomina_TipoLiqui = dbo.ro_empleado_Novedad.IdNomina_TipoLiqui INNER JOIN
+                         dbo.ro_cargo ON dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa AND dbo.ro_empleado.IdCargo = dbo.ro_cargo.IdCargo INNER JOIN
+                         dbo.tb_sucursal ON dbo.ro_empleado_Novedad.IdEmpresa = dbo.tb_sucursal.IdEmpresa AND dbo.ro_empleado_Novedad.IdSucursal = dbo.tb_sucursal.IdSucursal
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 

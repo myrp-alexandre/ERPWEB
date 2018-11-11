@@ -41,7 +41,6 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  CodigoEmpleado = q.CodigoEmpleado,
                                  pe_apellido = q.pe_apellido,
                                  pe_nombre = q.pe_nombre,
-                                 Num_Horas = q.Num_Horas,
                                  ca_descripcion = q.ca_descripcion, 
                                  NombreCompleto = q.NombreCompleto
                              }).ToList();
