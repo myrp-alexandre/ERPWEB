@@ -26,27 +26,27 @@ namespace Core.Erp.Data.RRHH
                                 join c in db.ro_rubro_tipo
                                 on new { a.IdEmpresa, a.IdRubro } equals new { c.IdEmpresa, c.IdRubro }
                                 where a.IdEmpresa == idEmpresa
-                                 && a.IdNominaTipo == idNominaTipo
+                               /*  && a.IdNominaTipo == idNominaTipo
                                  && a.IdNominaTipoLiqui == idNominaTipoLiqui
                                  && a.IdPeriodo == idPeriodo
-                                 && a.Valor > 0
+                                 && a.Valor > 0*/
                                  && c.rub_provision== es_provision
                                 select new ro_rol_detalle_Info
                                  {
                                      IdEmpresa = a.IdEmpresa,
-                                     IdNominaTipo = a.IdNominaTipo,
+                                    /* IdNominaTipo = a.IdNominaTipo,
                                      IdNominaTipoLiqui = a.IdNominaTipoLiqui,
-                                     IdPeriodo = a.IdPeriodo,
+                                     TipoMovimiento = a.TipoMovimiento,
+                                     IdCentroCosto = a.IdCentroCosto,
+                                     IdCentroCosto_sub_centro_costo = a.IdCentroCosto_sub_centro_costo,
+                                     IdPunto_cargo = a.IdPunto_cargo,
+                                     IdPeriodo = a.IdPeriodo,*/
+                                     Observacion = a.Observacion,
                                      IdEmpleado = a.IdEmpleado,
                                      IdRubro = a.IdRubro,
                                      Orden = a.Orden,
                                      Valor = a.Valor,
                                      rub_visible_reporte = a.rub_visible_reporte,
-                                     Observacion = a.Observacion,
-                                     TipoMovimiento = a.TipoMovimiento,
-                                     IdCentroCosto = a.IdCentroCosto,
-                                     IdCentroCosto_sub_centro_costo = a.IdCentroCosto_sub_centro_costo,
-                                     IdPunto_cargo = a.IdPunto_cargo,
                                      IdDivision = b.IdDivision,
                                      IdArea = b.IdArea,
                                      IdDepartamento = b.IdDepartamento,
