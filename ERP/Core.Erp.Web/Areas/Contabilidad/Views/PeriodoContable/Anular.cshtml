@@ -84,48 +84,32 @@
     }
 }
 
-<script>
-    $(function () {
+    <script>
+        $(function () {
+            actualizar_periodo();
+        });
+        $("#pe_mes").change(function () {
+            actualizar_periodo();
+        });
+        $("#IdanioFiscal").change(function () {
+            actualizar_periodo();
+        });
 
-        //Date picker
-        $('#pe_FechaIni').datepicker({
-            autoclose: true
-        })
+        function actualizar_periodo() {
+            var mes = $("#pe_mes").val();
+            var pad = "00";
+            var p = pad.substring(0, pad.length - mes.length) + mes;
 
-        $('#pe_FechaFin').datepicker({
-            autoclose: true
-        })
-    })
-    $("#smes").change(function () {
-        get_ultimo_dia();
-    });
+            var anio = $("#IdanioFiscal").val();
+            var periodo = anio + p;
+            $("#IdPeriodo").val(periodo)
 
-    $("#IdanioFiscal").change(function () {
-        get_ultimo_dia();
-    });
-    $("#pe_FechaIni").change(function () {
-        get_ultimo_dia();
-    });
-    $("#pe_FechaFin").change(function () {
-        get_ultimo_dia();
-    });
-
+            var date = new Date(anio + '-' + mes + '-' + 1);
+            pe_FechaIni.SetValue(date)
+            var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            pe_FechaFin.SetValue(ultimoDia)
 
 
-    function get_ultimo_dia() {
-        var mes = $("#smes").val();
-        var anio = $("#IdanioFiscal").val();
-        var periodo = anio + '0' + mes;
-        $("#IdPeriodo").val(periodo)
 
-        var inicio = $("#pe_FechaIni").val();
-        var fin = $("#pe_FechaFin").val();
-
-        var mes = 0;
-        var dia = new Date(2018, mes + 1, 0);
-        alert(dia)
-
-        $("#pe_FechaFin").val(dia)
-
-    }
-</script>
+        }
+    </script>

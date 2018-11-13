@@ -84,31 +84,32 @@
     }
 }
 
-<script>
-    $(function () {
+    <script>
+        $(function () {
+            actualizar_periodo();
+        });
+        $("#pe_mes").change(function () {
+            actualizar_periodo();
+        });
+        $("#IdanioFiscal").change(function () {
+            actualizar_periodo();
+        });
 
-        //Date picker
-        $('#pe_FechaIni').datepicker({
-            autoclose: true
-        })
+        function actualizar_periodo() {
+            var mes = $("#pe_mes").val();
+            var pad = "00";
+            var p = pad.substring(0, pad.length - mes.length) + mes;
 
-        $('#pe_FechaFin').datepicker({
-            autoclose: true
-        })
-    })
-    $("#smes").keyup(function () {
-        actualizar_periodo();
-    });
-    $("#IdanioFiscal").keyup(function () {
-        actualizar_periodo();
-    });
+            var anio = $("#IdanioFiscal").val();
+            var periodo = anio + p;
+            $("#IdPeriodo").val(periodo)
+
+            var date = new Date(anio + '-' + mes + '-' + 1);
+            pe_FechaIni.SetValue(date)
+            var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            pe_FechaFin.SetValue(ultimoDia)
 
 
-    function actualizar_periodo() {
-        var mes = $("#smes").val();
-        var anio = $("#IdanioFiscal").val();
 
-        var periodo = anio + '0' + mes;
-        $("#IdPeriodo").val(periodo)
-    }
-</script>
+        }
+    </script>
