@@ -64,32 +64,19 @@ delete ro_Comprobantes_Contables
 
 
 update ro_empleado_novedad_det set EstadoCobro='PEN'
-FROM            dbo.ro_rol_detalle AS rol INNER JOIN
-                         dbo.ro_empleado_novedad AS novedad ON rol.IdEmpresa = novedad.IdEmpresa AND rol.IdNominaTipo = novedad.IdNomina_tipo AND rol.IdNominaTipoLiqui = novedad.IdNomina_Tipo_Liq AND 
-                         rol.IdEmpleado = novedad.IdEmpleado AND rol.IdRubro = novedad.IdRubro
+FROM            dbo.ro_empleado_Novedad AS nov INNER JOIN
+                         dbo.ro_empleado_novedad_det AS nov_det ON nov.IdEmpresa = nov_det.IdEmpresa AND nov.IdNovedad = nov_det.IdNovedad INNER JOIN
+                         dbo.ro_rubro_tipo AS rub ON nov_det.IdEmpresa = rub.IdEmpresa AND nov_det.IdRubro = rub.IdRubro
 						 WHERE FechaPago between @fechai and @fechaf
 						 and IdNomina_tipo=@IdNomina_Tipo
 						 and IdNomina_TipoLiqui=@IdNomina_TipoLiqui
-						 and novedad.IdEmpresa=@IdEmpresa
+						 and nov.IdEmpresa=@IdEmpresa
 						 and exists (select * from ro_rol_detalle r
-						 where r.IdEmpresa=novedad.IdEmpresa
-						 and r.IdEmpleado=novedad.IdEmpleado
-						 and r.IdNominaTipo=novedad.IdNomina_tipo
-						 and r.IdNominaTipoLiqui=novedad.IdNomina_Tipo_Liq
-						 and r.IdRubro=novedad.IdRubro
-						 and r.IdPeriodo=@IdPeriodo)
-
-						 update ro_prestamo_detalle set EstadoPago='PEN'
-						 FROM            dbo.ro_prestamo_detalle INNER JOIN
-                         dbo.ro_prestamo ON dbo.ro_prestamo_detalle.IdEmpresa = dbo.ro_prestamo.IdEmpresa AND dbo.ro_prestamo_detalle.IdPrestamo = dbo.ro_prestamo.IdPrestamo
-						  WHERE FechaPago between @fechai and @fechaf						 
-						 and ro_prestamo_detalle.IdNominaTipoLiqui=@IdNomina_TipoLiqui
-						 and ro_prestamo_detalle.IdEmpresa=@IdEmpresa
-						 and exists (select * from ro_rol_detalle r
-						 where r.IdEmpresa=ro_prestamo_detalle.IdEmpresa
-						 and r.IdEmpleado=ro_prestamo.IdEmpleado
-						 and r.IdNominaTipoLiqui=ro_prestamo_detalle.IdNominaTipoLiqui
-						 and r.IdRubro=ro_prestamo.IdRubro
+						 where r.IdEmpresa=nov.IdEmpresa
+						 and r.IdEmpleado=nov.IdEmpleado
+						 and r.IdNominaTipo=nov.IdNomina_tipo
+						 and r.IdNominaTipoLiqui=nov.IdNomina_TipoLiqui
+						 and r.IdRubro=nov_det.IdRubro
 						 and r.IdPeriodo=@IdPeriodo)
 
 

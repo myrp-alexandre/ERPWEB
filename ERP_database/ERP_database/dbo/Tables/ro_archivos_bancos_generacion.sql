@@ -4,7 +4,6 @@
     [IdNomina]           INT             NOT NULL,
     [IdNominaTipo]       INT             NOT NULL,
     [IdPeriodo]          INT             NOT NULL,
-    [IdSucursal]         INT             NULL,
     [IdCuentaBancaria]   INT             NULL,
     [IdProceso_Bancario] VARCHAR (25)    NULL,
     [Cod_Empresa]        VARCHAR (30)    NULL,
@@ -20,9 +19,10 @@
     [IdRol]              NUMERIC (18)    NOT NULL,
     [MotiAnula]          VARCHAR (200)   NULL,
     CONSTRAINT [PK_ro_archivos_bancos_generacion] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdArchivo] ASC),
-    CONSTRAINT [FK_ro_archivos_bancos_generacion_ro_rol] FOREIGN KEY ([IdEmpresa], [IdRol]) REFERENCES [dbo].[ro_rol] ([IdEmpresa], [IdRol]),
-    CONSTRAINT [FK_ro_archivos_bancos_generacion_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
+    CONSTRAINT [FK_ro_archivos_bancos_generacion_ro_rol] FOREIGN KEY ([IdEmpresa], [IdRol]) REFERENCES [dbo].[ro_rol] ([IdEmpresa], [IdRol])
 );
+
+
 
 
 

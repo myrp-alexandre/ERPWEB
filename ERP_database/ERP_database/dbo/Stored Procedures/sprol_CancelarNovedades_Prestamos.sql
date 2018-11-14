@@ -12,20 +12,20 @@ declare
 @fechaFin date
 
 select @FechaInicio=pe_FechaIni,@fechaFin=pe_FechaFin from ro_periodo where IdPeriodo=@IdPeriodo and @IdEmpresa=@IdEmpresa
-update ro_empleado_novedad_det set EstadoCobro='CAN'
-FROM            dbo.ro_rol_detalle AS rol INNER JOIN
-                         dbo.ro_empleado_novedad AS novedad ON rol.IdEmpresa = novedad.IdEmpresa AND rol.IdNominaTipo = novedad.IdNomina_tipo AND rol.IdNominaTipoLiqui = novedad.IdNomina_Tipo_Liq AND 
-                         rol.IdEmpleado = novedad.IdEmpleado AND rol.IdRubro = novedad.IdRubro
+update ro_empleado_novedad_det set EstadoCobro='CAN'       
+FROM            dbo.ro_empleado_Novedad AS nov INNER JOIN
+                         dbo.ro_empleado_novedad_det AS nov_det ON nov.IdEmpresa = nov_det.IdEmpresa AND nov.IdNovedad = nov_det.IdNovedad INNER JOIN
+                         dbo.ro_rubro_tipo AS rub ON nov_det.IdEmpresa = rub.IdEmpresa AND nov_det.IdRubro = rub.IdRubro
 						 WHERE FechaPago between @FechaInicio and @fechaFin
 						 and IdNomina_tipo=@IdNomina
 						 and IdNomina_TipoLiqui=@IdNominaTipo
-						 and novedad.IdEmpresa=@IdEmpresa
+						 and nov.IdEmpresa=@IdEmpresa
 						 and exists (select * from ro_rol_detalle r
-						 where r.IdEmpresa=novedad.IdEmpresa
-						 and r.IdEmpleado=novedad.IdEmpleado
-						 and r.IdNominaTipo=novedad.IdNomina_tipo
-						 and r.IdNominaTipoLiqui=novedad.IdNomina_Tipo_Liq
-						 and r.IdRubro=novedad.IdRubro
+						 where r.IdEmpresa=nov.IdEmpresa
+						 and r.IdEmpleado=nov.IdEmpleado
+						 and r.IdNominaTipo=nov.IdNomina_tipo
+						 and r.IdNominaTipoLiqui=nov.IdNomina_TipoLiqui
+						 and r.IdRubro=nov_det.IdRubro
 						 and r.IdPeriodo=@IdPeriodo)
 
 

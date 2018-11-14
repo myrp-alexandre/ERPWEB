@@ -1,9 +1,9 @@
-﻿
-CREATE VIEW [web].[VWCXP_001_detalle]
+﻿CREATE VIEW web.VWCXP_001_detalle
 AS
 SELECT        dbo.cp_orden_giro.IdEmpresa, dbo.cp_orden_giro.IdCbteCble_Ogiro, dbo.cp_orden_giro.IdTipoCbte_Ogiro, dbo.in_Producto.pr_codigo, dbo.in_Producto.pr_codigo2, dbo.cp_orden_giro_det.IdProducto, 
                          dbo.cp_orden_giro_det.IdUnidadMedida, dbo.cp_orden_giro_det.Cantidad, dbo.cp_orden_giro_det.CostoUni, dbo.cp_orden_giro_det.PorDescuento, dbo.cp_orden_giro_det.DescuentoUni, dbo.cp_orden_giro_det.CostoUniFinal, 
-                         dbo.cp_orden_giro_det.Subtotal, dbo.cp_orden_giro_det.PorIva, dbo.cp_orden_giro_det.ValorIva, dbo.cp_orden_giro_det.Total, dbo.in_UnidadMedida.Descripcion
+                         dbo.cp_orden_giro_det.Subtotal, dbo.cp_orden_giro_det.PorIva, dbo.cp_orden_giro_det.ValorIva, dbo.cp_orden_giro_det.Total, dbo.in_UnidadMedida.Descripcion, dbo.in_Producto.pr_descripcion, 
+                         dbo.in_Producto.pr_descripcion_2
 FROM            dbo.cp_orden_giro INNER JOIN
                          dbo.cp_orden_giro_det ON dbo.cp_orden_giro.IdEmpresa = dbo.cp_orden_giro_det.IdEmpresa AND dbo.cp_orden_giro.IdCbteCble_Ogiro = dbo.cp_orden_giro_det.IdCbteCble_Ogiro AND 
                          dbo.cp_orden_giro.IdTipoCbte_Ogiro = dbo.cp_orden_giro_det.IdTipoCbte_Ogiro INNER JOIN

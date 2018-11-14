@@ -1,14 +1,14 @@
 ﻿CREATE VIEW web.vwro_rol_detalle_generar_op
 AS
-SELECT        dbo.ro_rol_detalle.IdEmpresa, dbo.ro_rol_detalle.IdNominaTipo, dbo.ro_rol_detalle.IdNominaTipoLiqui, dbo.ro_rol_detalle.IdPeriodo, dbo.ro_rol_detalle.IdEmpleado, dbo.ro_rol_detalle.IdRubro, dbo.ro_rol_detalle.Valor, 
-                         dbo.ro_periodo.pe_FechaIni, dbo.ro_periodo.pe_FechaFin, dbo.tb_persona.IdPersona, dbo.tb_persona.pe_nombreCompleto
+SELECT        dbo.ro_rol_detalle.IdEmpresa, dbo.ro_rol.IdNominaTipo, dbo.ro_rol.IdNominaTipoLiqui, dbo.ro_rol.IdPeriodo, dbo.ro_rol_detalle.IdEmpleado, dbo.ro_rol_detalle.IdRubro, dbo.ro_rol_detalle.Valor, dbo.ro_periodo.pe_FechaIni, 
+                         dbo.ro_periodo.pe_FechaFin, dbo.tb_persona.IdPersona, dbo.tb_persona.pe_nombreCompleto
 FROM            dbo.ro_periodo_x_ro_Nomina_TipoLiqui INNER JOIN
                          dbo.ro_periodo ON dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdEmpresa = dbo.ro_periodo.IdEmpresa AND dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdPeriodo = dbo.ro_periodo.IdPeriodo INNER JOIN
+                         dbo.ro_rol ON dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdEmpresa = dbo.ro_rol.IdEmpresa AND dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdNomina_Tipo = dbo.ro_rol.IdNominaTipo AND 
+                         dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdNomina_TipoLiqui = dbo.ro_rol.IdNominaTipoLiqui AND dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdPeriodo = dbo.ro_rol.IdPeriodo INNER JOIN
                          dbo.ro_rol_detalle INNER JOIN
                          dbo.ro_empleado ON dbo.ro_rol_detalle.IdEmpresa = dbo.ro_empleado.IdEmpresa AND dbo.ro_rol_detalle.IdEmpleado = dbo.ro_empleado.IdEmpleado INNER JOIN
-                         dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona ON dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdEmpresa = dbo.ro_rol_detalle.IdEmpresa AND 
-                         dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdNomina_Tipo = dbo.ro_rol_detalle.IdNominaTipo AND dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdNomina_TipoLiqui = dbo.ro_rol_detalle.IdNominaTipoLiqui AND 
-                         dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdPeriodo = dbo.ro_rol_detalle.IdPeriodo
+                         dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona ON dbo.ro_rol.IdEmpresa = dbo.ro_rol_detalle.IdEmpresa AND dbo.ro_rol.IdRol = dbo.ro_rol_detalle.IdRol
 WHERE        (dbo.ro_rol_detalle.IdRubro = '950') AND (dbo.ro_rol_detalle.Valor > 0)
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -16,7 +16,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[53] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[43] 4[5] 2[39] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -82,52 +82,62 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "ro_empleado"
-            Begin Extent = 
-               Top = 10
-               Left = 412
-               Bottom = 140
-               Right = 701
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "tb_persona"
+         Begin Table = "ro_periodo_x_ro_Nomina_TipoLiqui"
             Begin Extent = 
                Top = 0
-               Left = 760
-               Bottom = 233
-               Right = 992
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "ro_rol_detalle"
-            Begin Extent = 
-               Top = 6
-               Left = 38
-               Bottom = 347
-               Right = 301
+               Left = 330
+               Bottom = 237
+               Right = 619
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "ro_periodo"
             Begin Extent = 
-               Top = 173
-               Left = 722
-               Bottom = 416
-               Right = 943
+               Top = 48
+               Left = 453
+               Bottom = 291
+               Right = 674
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "ro_periodo_x_ro_Nomina_TipoLiqui"
+         Begin Table = "ro_rol_detalle"
             Begin Extent = 
-               Top = 138
-               Left = 421
-               Bottom = 375
-               Right = 621
+               Top = 242
+               Left = 77
+               Bottom = 583
+               Right = 340
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_empleado"
+            Begin Extent = 
+               Top = 362
+               Left = 442
+               Bottom = 492
+               Right = 731
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "tb_persona"
+            Begin Extent = 
+               Top = 309
+               Left = 769
+               Bottom = 542
+               Right = 1001
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_rol"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 230
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -141,7 +151,13 @@ Begin DesignProperties =
       End
       Begin ColumnWidths = 11
          Width = 284
-         Width = 1500
+         W', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'vwro_rol_detalle_generar_op';
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'idth = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -153,11 +169,7 @@ Begin DesignProperties =
          Width = 1500
       End
    End
-   Begin CriteriaPane = ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'vwro_rol_detalle_generar_op';
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
+   Begin CriteriaPane = 
       Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
@@ -176,6 +188,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'vwro_rol_detalle_generar_op';
+
+
 
 
 GO
