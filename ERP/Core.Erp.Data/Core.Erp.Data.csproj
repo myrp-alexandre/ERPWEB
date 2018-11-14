@@ -1413,6 +1413,9 @@
     <Compile Include="tb_banco.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
+    <Compile Include="tb_banco_procesos_bancarios_x_empresa.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_bodega.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>

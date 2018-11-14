@@ -332,6 +332,7 @@
     <Compile Include="Areas\General\Controllers\TransportistaController.cs" />
     <Compile Include="Areas\General\Controllers\VisorDeVideoController.cs" />
     <Compile Include="Areas\General\GeneralAreaRegistration.cs" />
+    <Compile Include="Areas\General\ProcesosBancariosPorEmpresaController.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoTipoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\GastosImportacionController.cs" />
@@ -9276,6 +9277,11 @@
     <Content Include="Areas\RRHH\Views\ArchivosTransferencias\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\ArchivosTransferencias\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\ArchivosTransferencias\Nuevo.cshtml" />
+    <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Nuevo.cshtml" />
+    <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Modificar.cshtml" />
+    <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Index.cshtml" />
+    <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Anular.cshtml" />
+    <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\_GridViewPartial_procesos_bancarios.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
