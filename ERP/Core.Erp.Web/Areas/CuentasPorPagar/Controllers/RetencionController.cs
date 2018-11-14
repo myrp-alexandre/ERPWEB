@@ -431,7 +431,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
          #region json
 
-        public JsonResult armar_diario(decimal IdProveedor=0, decimal IdTransaccionSession = 0)
+        public JsonResult armar_diario_retencion(decimal IdProveedor=0, decimal IdTransaccionSession = 0)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
@@ -444,7 +444,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
-
 
         #endregion
 

@@ -20,9 +20,9 @@
 @using (Html.BeginForm("Nuevo", "Retencion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id="IdEmpresa"})
     @Html.HiddenFor(q => q.IdProveedor, new { @id = "IdProveedor" })
-    @Html.HiddenFor(q => q.IdRetencion)
+    @Html.HiddenFor(q => q.IdRetencion, new { @id = "IdRetencion" })
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
     @Html.HiddenFor(q => q.co_serie)
@@ -207,7 +207,7 @@
     }
 }
 <script>
-            function armar_diario() {
+    function armar_diario_retencion() {
 
                 var datos = {
                     IdProveedor: $("#IdProveedor").val(),
@@ -216,7 +216,7 @@
                 $.ajax({
                     type: 'POST',
                     data: JSON.stringify(datos),
-                    url: '@Url.Action("armar_diario", "Retencion", new { Area = "CuentasPorPagar" })',
+                    url: '@Url.Action("armar_diario_retencion", "Retencion", new { Area = "CuentasPorPagar" })',
                     async: false,
                     bDeferRender: true,
                     bProcessing: true,
@@ -229,5 +229,6 @@
                     }
                 });
 
-            };
+    };
+
 </script>

@@ -21,6 +21,7 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
     @Html.HiddenFor(q => q.co_fechaOg)
@@ -211,6 +212,10 @@
             </li>
             <li>
                 <a href="#tab_detalle_cuotas" aria-controls="cuentas" role="tab" data-toggle="tab">Detalle de cuotas</a>
+            </li>
+
+            <li>
+                <a href="#tab_retencion" aria-controls="retencion" role="tab" data-toggle="tab">Retención</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
@@ -453,6 +458,88 @@
                     </div>
                 </div>
             </div>
+
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_retencion">
+
+
+
+
+
+                <div id="Tabs" role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active">
+                            <a href="#tab_retenciones" aria-controls="retenciones" role="tab" data-toggle="tab">Retenciones</a>
+                        </li>
+                        <li>
+                            <a href="#tab_diario" aria-controls="diario" role="tab" data-toggle="tab">Diario contable</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content" style="padding-top: 20px">
+                        <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_retenciones">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="info_retencion.serie1">Establecimiento</label>
+                                            @Html.TextBoxFor(q => q.info_retencion.serie1, new { @class = "form-control", @id = "info_retencion.serie1" })
+                                            @Html.ValidationMessageFor(q => q.info_retencion.serie1, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="info_retencion.serie2">Punto de emisión</label>
+                                            @Html.TextBoxFor(q => q.info_retencion.serie2, new { @class = "form-control", @id = "info_retencion.serie2" })
+                                            @Html.ValidationMessageFor(q => q.info_retencion.serie2, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="info_retencion.NumRetencion">Número de retención</label>
+                                            @Html.TextBoxFor(q => q.info_retencion.NumRetencion, new { @class = "form-control", @id = "info_retencion.NumRetencion" })
+                                            @Html.ValidationMessageFor(q => q.info_retencion.NumRetencion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Detalle retención*</label>
+                                            @Html.Action("GridViewPartial_retencion_det", new { Area = "CuentasPorPagar", Controller = "Retencion" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div role="tabpanel" class="tab-pane " style="margin-left: 1em;" id="tab_diario">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Diario contable*</label>
+                                            @Html.Action("GridViewPartial_retencio_dc", new { Area = "CuentasPorPagar", Controller = "Retencion" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
         </div>
     </div>
     <div class="box-footer">
@@ -761,5 +848,30 @@
             error: function (error) {
             }
         });
-    };
+                        };
+
+
+     function armar_diario_retencion() {
+
+                var datos = {
+                    IdProveedor: IdProveedor.GetValue(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val()
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("armar_diario_retencion", "Retencion", new { Area = "CuentasPorPagar" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        GridViewPartial_retencio_dc.PerformCallback();
+                    },
+                    error: function (error) {
+                    }
+                });
+
+            };
 </script>
