@@ -267,7 +267,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult ContabilizarPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        public ActionResult ContabilizarPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, int IdRol=0)
         {
             try
             {
@@ -275,7 +275,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combo_detalle();
                 IdEmpresa = GetIdEmpresa();
                 ro_rol_Info model = new ro_rol_Info();
-                model = bus_rol.get_info_contabilizar(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
+                model = bus_rol.get_info_contabilizar(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
                 Session["lst_sueldo_pagar"] = model.lst_sueldo_x_pagar;
                 Session["lst_provisiones"] = model.lst_provisiones;
 

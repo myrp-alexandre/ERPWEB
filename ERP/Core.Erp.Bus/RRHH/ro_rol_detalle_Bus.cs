@@ -7,11 +7,11 @@ namespace Core.Erp.Bus.RRHH
     public  class ro_rol_detalle_Bus
     {
         ro_rol_detalle_Data odata = new ro_rol_detalle_Data();
-        public List<ro_rol_detalle_Info> Get_lst_detalle_contabilizar(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo, bool es_provision)
+        public List<ro_rol_detalle_Info> Get_lst_detalle_contabilizar(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo, int IdRl,  bool es_provision)
         {
             try
             {
-                return odata.Get_lst_detalle_contabilizar(idEmpresa,idNominaTipo,idNominaTipoLiqui,idPeriodo, es_provision);
+                return odata.Get_lst_detalle_contabilizar(idEmpresa,idNominaTipo,idNominaTipoLiqui,idPeriodo,IdRl, es_provision);
             }
             catch (Exception)
             {

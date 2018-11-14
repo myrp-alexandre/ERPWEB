@@ -196,13 +196,13 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public ro_rol_Info get_info_contabilizar(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo)
+        public ro_rol_Info get_info_contabilizar(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo, int IdRol)
         {
             try
             {
                 info= odata.get_info(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo);
-                info.lst_sueldo_x_pagar = get_diario_ctble_sueldo_x_pagar(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo);
-                info.lst_provisiones = get_diario_ctble_provisiones(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo);
+                info.lst_sueldo_x_pagar = get_diario_ctble_sueldo_x_pagar(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo, IdRol);
+                info.lst_provisiones = get_diario_ctble_provisiones(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo, IdRol);
                 
                 return info;
             }
@@ -212,7 +212,7 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        private List<ct_cbtecble_det_Info> get_diario_ctble_sueldo_x_pagar(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo)
+        private List<ct_cbtecble_det_Info> get_diario_ctble_sueldo_x_pagar(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo,int IdRol)
         {
             try
             {
@@ -223,7 +223,7 @@ namespace Core.Erp.Bus.RRHH
                 double egreso = 0;
                 int secuecia = 0;
                 info_cta_sueldo_x_pagar = bus_cta_sueldo_x_pagar.get_info(idEmpresa, idNominaTipo, idNominaTipoLiqui);
-                oListro_rol_detalle_Info = bus_detalle.Get_lst_detalle_contabilizar(idEmpresa, idNominaTipo, idNominaTipoLiqui, idPeriodo, false);
+                oListro_rol_detalle_Info = bus_detalle.Get_lst_detalle_contabilizar(idEmpresa, idNominaTipo, idNominaTipoLiqui, idPeriodo, IdRol, false);
 
                 foreach (ro_Config_Param_contable_Info item in lst_confn_param_contables)
                 {
@@ -282,7 +282,7 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        private List<ct_cbtecble_det_Info> get_diario_ctble_provisiones(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo)
+        private List<ct_cbtecble_det_Info> get_diario_ctble_provisiones(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo, int IdRol)
         {
             try
             {
@@ -291,7 +291,7 @@ namespace Core.Erp.Bus.RRHH
                 List<ro_rol_detalle_Info> oListro_rol_detalle_Info = new List<ro_rol_detalle_Info>();
                 lst_confn_param_contables = bus_parametros_contables.get_list(idEmpresa, "1");
                 info_cta_sueldo_x_pagar = bus_cta_sueldo_x_pagar.get_info(idEmpresa, idNominaTipo, idNominaTipoLiqui);
-                oListro_rol_detalle_Info = bus_detalle.Get_lst_detalle_contabilizar(idEmpresa, idNominaTipo, idNominaTipoLiqui, idPeriodo, true);
+                oListro_rol_detalle_Info = bus_detalle.Get_lst_detalle_contabilizar(idEmpresa, idNominaTipo, idNominaTipoLiqui, idPeriodo,IdRol, true);
 
                 foreach (ro_Config_Param_contable_Info item in lst_confn_param_contables)
                 {
