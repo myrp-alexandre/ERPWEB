@@ -32,5 +32,17 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
+        public List<fa_factura_det_Info> get_list_proforma(int IdEmpresa, int IdSucursal, decimal IdCliente, decimal IdProforma)
+        {
+            try
+            {
+                return odata.get_list_proforma(IdEmpresa, IdSucursal, IdCliente, IdProforma);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

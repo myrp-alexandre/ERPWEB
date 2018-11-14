@@ -484,6 +484,24 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetProformas(int IdSucursal = 0, decimal IdCliente = 0, decimal IdProforma = 0, decimal IdTransaccionSession = 0)
+        {
+            bool resultado = true;
+
+            var list = bus_det.get_list_proforma(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, IdCliente, IdProforma);
+            if (list.Count() == 0)
+                resultado = false;
+            var detalle_factura = List_det.get_list(IdTransaccionSession);
+            if(detalle_factura.Where(v=>v.IdProforma==IdProforma).Count()==0)
+            detalle_factura.AddRange(list);
+
+
+            List_det.set_list(detalle_factura, IdTransaccionSession);
+
+
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         public void CargarCuotas(DateTime? FechaPrimerPago, string IdTerminoPago = "", double ValorPrimerPago = 0, decimal IdTransaccionSession = 0)
         {
             List<fa_cuotas_x_doc_Info> lst_cuotas = new List<fa_cuotas_x_doc_Info>();

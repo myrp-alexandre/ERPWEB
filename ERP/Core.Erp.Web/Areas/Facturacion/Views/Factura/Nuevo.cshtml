@@ -431,6 +431,41 @@
     }
 
     function MostrarModalProformas() {
+        var proforma = $("#IdProforma").val()
+
+        if (proforma != null && proforma != 0 && proforma!="") {
+
+            if (IdCliente.GetValue() > 0) {
+                var datos = {
+                    IdSucursal: $("#IdSucursal").val(),
+                    IdCliente: IdCliente.GetValue(),
+                    IdProforma: $("#IdProforma").val(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val()
+
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("GetProformas", "Factura", new { Area = "Facturacion" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (data == false) {
+                            alert('No existe datos para el número de proforma ' + proforma + ' ingresado');
+                        }
+                    },
+                    error: function (error) {
+                    }
+                });
+                GridView_factura_det.PerformCallback()
+            }
+        }
+        else
+        {
+        
         if (IdCliente.GetValue() > 0) {
             var datos = {
             IdSucursal: $("#IdSucursal").val(),
@@ -453,7 +488,9 @@
         });
             GridView_PFactura_det.PerformCallback();
         $("#ProformasModal").modal("show");
-        }
+            }
+    }
+    
     }
 
     function AddProformas() {
@@ -483,6 +520,7 @@
         GridView_factura_det.PerformCallback();
             $("#ProformasModal").modal("hide");
     }
+
     function ValidarGrid() {
         var datos = {
             IdTransaccionSession: $("#IdTransaccionSession").val()
@@ -802,50 +840,79 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <button type="button" class="btn btn-primary" id="btn_buscar" onclick="MostrarModalProformas();">
-                                    <i class="fa fa-search"></i> Proformas
-                                </button>
-                                <button type="button" class="btn btn-primary" id="btn_desbloquear" onclick="MostrarModalDesbloqueo();">
-                                    <i class="fa fa-lock"></i> Desbloquear
-                                </button>
-                                <label id="EstadoDesbloqueo" class="text-danger" style="margin-left:5px;" hidden></label>
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
+
+
+
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="fecha_primera_cuota">Fecha primer cuota</label>
-                                        <div class="input-group date">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label for="IdProforma">Proforma</label>
+                                            @Html.TextBoxFor(q => q.IdProforma, new { @class = "form-control", @id = "IdProforma" })
+                                            @Html.ValidationMessageFor(q => q.IdProforma, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for=""></label>
+                                            <button type="button" class="btn btn-primary" id="btn_buscar" onclick="MostrarModalProformas();">
+                                                <i class="fa fa-search"></i> Proformas
+                                            </button>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for=""></label>
+                                                <button type="button" class="btn btn-primary" id="btn_desbloquear" onclick="MostrarModalDesbloqueo();">
+                                                    <i class="fa fa-lock"></i> Desbloquear
+                                                </button>
+                                                <label id="EstadoDesbloqueo" class="text-danger" style="margin-left:5px;" hidden></label>
                                             </div>
-                                            @Html.DevExpress().DateEditFor(q => q.fecha_primera_cuota, settings =>
-                                      {
-                                          settings.Name = "fecha_primera_cuota";
-                                          settings.Properties.UseMaskBehavior = true;
-                                          settings.Properties.EditFormat = EditFormat.Date;
-                                          settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                          settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                          settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                          settings.Properties.ClientSideEvents.DateChanged = "function(s,e){CargarCuotas();}";
-                                      }).GetHtml()
-                                            @Html.ValidationMessageFor(q => q.fecha_primera_cuota, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                        </div>
+                            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="fecha_primera_cuota">Fecha primer cuota</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                @Html.DevExpress().DateEditFor(q => q.fecha_primera_cuota, settings =>
+                                          {
+                                              settings.Name = "fecha_primera_cuota";
+                                              settings.Properties.UseMaskBehavior = true;
+                                              settings.Properties.EditFormat = EditFormat.Date;
+                                              settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                              settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                              settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                              settings.Properties.ClientSideEvents.DateChanged = "function(s,e){CargarCuotas();}";
+                                          }).GetHtml()
+                                                @Html.ValidationMessageFor(q => q.fecha_primera_cuota, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Valor abono</label>
+                                            @Html.TextBoxFor(q => q.valor_abono, new { @class = "form-control", @id = "valor_abono" })
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Valor abono</label>
-                                        @Html.TextBoxFor(q => q.valor_abono, new { @class = "form-control", @id = "valor_abono" })
-                                    </div>
-                                </div>
+                                @Html.Action("GridViewPartial_factura_cuotas")
+                                <br />
                             </div>
-                            @Html.Action("GridViewPartial_factura_cuotas")
-                            <br />
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
