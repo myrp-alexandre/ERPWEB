@@ -388,9 +388,7 @@
     <Compile Include="Areas\RRHH\Controllers\DepartamentoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\DepartamentoPorAreaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\DivisionController.cs" />
-    <Compile Include="Areas\RRHH\Controllers\DocumentoEmpleadoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\EmpleadoController.cs" />
-    <Compile Include="Areas\RRHH\Controllers\EmpleadoDocumentoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\EmpleadoNovedadController.cs" />
     <Compile Include="Areas\RRHH\Controllers\EmpleadoPorRubroController.cs" />
     <Compile Include="Areas\RRHH\Controllers\EmpleadoRubroAcumuladoController.cs" />
@@ -9272,6 +9270,12 @@
     <Content Include="Areas\RRHH\Views\TipoGastosPersonalesAnual\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\TipoGastosPersonalesAnual\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\TipoGastosPersonalesAnual\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\ArchivosTransferencias\_GridViewPartial_archivo_transferencia.cshtml" />
+    <Content Include="Areas\RRHH\Views\ArchivosTransferencias\_GridViewPartial_archivo_transferencia_det.cshtml" />
+    <Content Include="Areas\RRHH\Views\ArchivosTransferencias\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\ArchivosTransferencias\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\ArchivosTransferencias\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\ArchivosTransferencias\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9351,12 +9355,6 @@
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
-    <Folder Include="Areas\RRHH\Views\ArchivosTransferencias\" />
-    <Folder Include="Areas\RRHH\Views\CapacitacionesEmpleado\" />
-    <Folder Include="Areas\RRHH\Views\DocumentoEmpleado\" />
-    <Folder Include="Areas\RRHH\Views\EmpleadoDocumento\" />
-    <Folder Include="Areas\RRHH\Views\EmpleadoHistorialSueldo\" />
-    <Folder Include="Areas\RRHH\Views\PeriodosPorNomina\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />

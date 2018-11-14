@@ -553,6 +553,7 @@
     <Compile Include="General\tbl_TransaccionesAutorizadas_Data.cs" />
     <Compile Include="General\tbl_usuario_ftp_Data.cs" />
     <Compile Include="General\tb_banco_Data.cs" />
+    <Compile Include="General\tb_banco_procesos_bancarios_x_empresa_Data.cs" />
     <Compile Include="General\tb_bodega_Data.cs" />
     <Compile Include="General\tb_CatalogoTipo_Data.cs" />
     <Compile Include="General\tb_Catalogo_Data.cs" />

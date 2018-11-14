@@ -160,6 +160,7 @@
     <Compile Include="General\tbl_TransaccionesAutorizadas_Bus.cs" />
     <Compile Include="General\tbl_usuario_ftp_Bus.cs" />
     <Compile Include="General\tb_banco_Bus.cs" />
+    <Compile Include="General\tb_banco_procesos_bancarios_x_empresa_Bus.cs" />
     <Compile Include="General\tb_bodega_Bus.cs" />
     <Compile Include="General\tb_CatalogoTipo_Bus.cs" />
     <Compile Include="General\tb_Catalogo_Bus.cs" />
