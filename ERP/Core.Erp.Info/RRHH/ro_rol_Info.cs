@@ -31,7 +31,7 @@ namespace Core.Erp.Info.RRHH
         public string UsuarioCierre { get; set; }
         public Nullable<System.DateTime> FechaCierre { get; set; }
         public string IdCentroCosto { get; set; }
-
+        public int IdRol { get; set; }
 
         public int Anio { get; set; }
         public bool decimoIII { get; set; }

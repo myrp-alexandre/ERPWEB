@@ -18,11 +18,9 @@ namespace Core.Erp.Data
         public decimal IdRol { get; set; }
         public decimal IdEmpleado { get; set; }
         public string IdRubro { get; set; }
-        public int IdNominaTipo { get; set; }
-        public int IdNominaTipoLiqui { get; set; }
-        public int IdPeriodo { get; set; }
         public double Valor { get; set; }
         public string Estado { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
     
         public virtual ro_rol ro_rol { get; set; }
     }

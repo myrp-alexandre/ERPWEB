@@ -11,7 +11,7 @@ namespace Core.Erp.Data.RRHH
     {
 
 
-        public List<ro_rol_detalle_Info> Get_lst_detalle_contabilizar(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo,bool es_provision)
+        public List<ro_rol_detalle_Info> Get_lst_detalle_contabilizar(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo,int IdRol, bool es_provision)
         {
 
             try
@@ -23,24 +23,23 @@ namespace Core.Erp.Data.RRHH
                     oListado = (from a in db.ro_rol_detalle
                                  join b in db.ro_empleado
                                  on new {a.IdEmpresa, a.IdEmpleado } equals new {b.IdEmpresa, b.IdEmpleado }
-                                join c in db.ro_rubro_tipo
-                                on new { a.IdEmpresa, a.IdRubro } equals new { c.IdEmpresa, c.IdRubro }
+                                 join c in db.ro_rubro_tipo
+                                 on new { a.IdEmpresa, a.IdRubro } equals new { c.IdEmpresa, c.IdRubro }
+                                 join r in db.ro_rol
+                                 on new { a.IdEmpresa, a.IdRol } equals new { r.IdEmpresa, r.IdRol }
                                 where a.IdEmpresa == idEmpresa
-                               /*  && a.IdNominaTipo == idNominaTipo
-                                 && a.IdNominaTipoLiqui == idNominaTipoLiqui
-                                 && a.IdPeriodo == idPeriodo
-                                 && a.Valor > 0*/
+                                 && r.IdNominaTipo == idNominaTipo
+                                 && r.IdNominaTipoLiqui == idNominaTipoLiqui
+                                 && r.IdPeriodo == idPeriodo
+                                 && a.Valor > 0
+                                 && r.IdRol==IdRol
                                  && c.rub_provision== es_provision
                                 select new ro_rol_detalle_Info
                                  {
                                      IdEmpresa = a.IdEmpresa,
-                                    /* IdNominaTipo = a.IdNominaTipo,
-                                     IdNominaTipoLiqui = a.IdNominaTipoLiqui,
-                                     TipoMovimiento = a.TipoMovimiento,
-                                     IdCentroCosto = a.IdCentroCosto,
-                                     IdCentroCosto_sub_centro_costo = a.IdCentroCosto_sub_centro_costo,
-                                     IdPunto_cargo = a.IdPunto_cargo,
-                                     IdPeriodo = a.IdPeriodo,*/
+                                     IdNominaTipo = r.IdNominaTipo,
+                                     IdNominaTipoLiqui = r.IdNominaTipoLiqui,
+                                     IdPeriodo = r.IdPeriodo,
                                      Observacion = a.Observacion,
                                      IdEmpleado = a.IdEmpleado,
                                      IdRubro = a.IdRubro,

@@ -1056,8 +1056,12 @@
     <Compile Include="ro_Acta_Finiquito_Detalle.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
-    <Compile Include="ro_archivos_bancos_generacion.cs" />
-    <Compile Include="ro_archivos_bancos_generacion_x_empleado.cs" />
+    <Compile Include="ro_archivos_bancos_generacion.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ro_archivos_bancos_generacion_x_empleado.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_area.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>

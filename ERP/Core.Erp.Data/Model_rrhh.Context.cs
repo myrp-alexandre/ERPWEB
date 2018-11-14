@@ -11,9 +11,9 @@ namespace Core.Erp.Data
 {
     using System;
     using System.Data.Entity;
-    using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
-
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
 
     public partial class Entities_rrhh : DbContext
     {
@@ -83,7 +83,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_participacion_utilidad_empleado> vwro_participacion_utilidad_empleado { get; set; }
         public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
         public DbSet<vwro_rubro_tipo> vwro_rubro_tipo { get; set; }
-        public DbSet<vwro_rol_detalle_generar_op> vwro_rol_detalle_generar_op { get; set; }
         public DbSet<vwro_rol> vwro_rol { get; set; }
         public DbSet<ro_tabla_Impu_Renta> ro_tabla_Impu_Renta { get; set; }
         public DbSet<vwro_empleado_x_Proyeccion_Gastos_Personales> vwro_empleado_x_Proyeccion_Gastos_Personales { get; set; }
@@ -108,28 +107,8 @@ namespace Core.Erp.Data
         public DbSet<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }
         public DbSet<ro_rol> ro_rol { get; set; }
         public DbSet<ro_rol_detalle> ro_rol_detalle { get; set; }
+        public DbSet<vwro_rol_detalle_generar_op> vwro_rol_detalle_generar_op { get; set; }
         public DbSet<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
-    
-        public virtual int spRo_Cierre_Rol(Nullable<int> idEmpresa, Nullable<int> idPeriodo, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var idPeriodoParameter = idPeriodo.HasValue ?
-                new ObjectParameter("IdPeriodo", idPeriodo) :
-                new ObjectParameter("IdPeriodo", typeof(int));
-    
-            var idNomina_TipoParameter = idNomina_Tipo.HasValue ?
-                new ObjectParameter("IdNomina_Tipo", idNomina_Tipo) :
-                new ObjectParameter("IdNomina_Tipo", typeof(int));
-    
-            var idNomina_TipoLiquiParameter = idNomina_TipoLiqui.HasValue ?
-                new ObjectParameter("IdNomina_TipoLiqui", idNomina_TipoLiqui) :
-                new ObjectParameter("IdNomina_TipoLiqui", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_Cierre_Rol", idEmpresaParameter, idPeriodoParameter, idNomina_TipoParameter, idNomina_TipoLiquiParameter);
-        }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
@@ -192,56 +171,6 @@ namespace Core.Erp.Data
                 new ObjectParameter("FechaFin", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spro_nomina_x_pago_utilidad_Result>("spro_nomina_x_pago_utilidad", idempresaParameter, idNominaParameter, fechaInicioParameter, fechaFinParameter);
-        }
-    
-        public virtual int spRo_procesa_Rol(Nullable<int> idEmpresa, Nullable<decimal> idNomina, Nullable<decimal> idNominaTipo, Nullable<decimal> idPEriodo, string idUsuario, string observacion)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var idNominaParameter = idNomina.HasValue ?
-                new ObjectParameter("IdNomina", idNomina) :
-                new ObjectParameter("IdNomina", typeof(decimal));
-    
-            var idNominaTipoParameter = idNominaTipo.HasValue ?
-                new ObjectParameter("IdNominaTipo", idNominaTipo) :
-                new ObjectParameter("IdNominaTipo", typeof(decimal));
-    
-            var idPEriodoParameter = idPEriodo.HasValue ?
-                new ObjectParameter("IdPEriodo", idPEriodo) :
-                new ObjectParameter("IdPEriodo", typeof(decimal));
-    
-            var idUsuarioParameter = idUsuario != null ?
-                new ObjectParameter("IdUsuario", idUsuario) :
-                new ObjectParameter("IdUsuario", typeof(string));
-    
-            var observacionParameter = observacion != null ?
-                new ObjectParameter("Observacion", observacion) :
-                new ObjectParameter("Observacion", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_procesa_Rol", idEmpresaParameter, idNominaParameter, idNominaTipoParameter, idPEriodoParameter, idUsuarioParameter, observacionParameter);
-        }
-    
-        public virtual int spRo_Reverso_Rol(Nullable<int> idEmpresa, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui, Nullable<int> idPeriodo)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var idNomina_TipoParameter = idNomina_Tipo.HasValue ?
-                new ObjectParameter("IdNomina_Tipo", idNomina_Tipo) :
-                new ObjectParameter("IdNomina_Tipo", typeof(int));
-    
-            var idNomina_TipoLiquiParameter = idNomina_TipoLiqui.HasValue ?
-                new ObjectParameter("IdNomina_TipoLiqui", idNomina_TipoLiqui) :
-                new ObjectParameter("IdNomina_TipoLiqui", typeof(int));
-    
-            var idPeriodoParameter = idPeriodo.HasValue ?
-                new ObjectParameter("IdPeriodo", idPeriodo) :
-                new ObjectParameter("IdPeriodo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_Reverso_Rol", idEmpresaParameter, idNomina_TipoParameter, idNomina_TipoLiquiParameter, idPeriodoParameter);
         }
     
         public virtual int sprol_CancelarNovedades_Prestamos(Nullable<int> idEmpresa, Nullable<int> idNomina, Nullable<int> idNominaTipo, Nullable<int> idPeriodo)
@@ -313,6 +242,81 @@ namespace Core.Erp.Data
                 new ObjectParameter("observacion", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spROL_DecimoTercero", idEmpresaParameter, idPeriodoParameter, regionParameter, idUsuarioParameter, observacionParameter);
+        }
+    
+        public virtual int spRo_Cierre_Rol(Nullable<int> idEmpresa, Nullable<int> idPeriodo, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idPeriodoParameter = idPeriodo.HasValue ?
+                new ObjectParameter("IdPeriodo", idPeriodo) :
+                new ObjectParameter("IdPeriodo", typeof(int));
+    
+            var idNomina_TipoParameter = idNomina_Tipo.HasValue ?
+                new ObjectParameter("IdNomina_Tipo", idNomina_Tipo) :
+                new ObjectParameter("IdNomina_Tipo", typeof(int));
+    
+            var idNomina_TipoLiquiParameter = idNomina_TipoLiqui.HasValue ?
+                new ObjectParameter("IdNomina_TipoLiqui", idNomina_TipoLiqui) :
+                new ObjectParameter("IdNomina_TipoLiqui", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_Cierre_Rol", idEmpresaParameter, idPeriodoParameter, idNomina_TipoParameter, idNomina_TipoLiquiParameter);
+        }
+    
+        public virtual int spRo_procesa_Rol(Nullable<int> idEmpresa, Nullable<decimal> idNomina, Nullable<decimal> idNominaTipo, Nullable<decimal> idPEriodo, string idUsuario, string observacion, Nullable<int> idRol)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idNominaParameter = idNomina.HasValue ?
+                new ObjectParameter("IdNomina", idNomina) :
+                new ObjectParameter("IdNomina", typeof(decimal));
+    
+            var idNominaTipoParameter = idNominaTipo.HasValue ?
+                new ObjectParameter("IdNominaTipo", idNominaTipo) :
+                new ObjectParameter("IdNominaTipo", typeof(decimal));
+    
+            var idPEriodoParameter = idPEriodo.HasValue ?
+                new ObjectParameter("IdPEriodo", idPEriodo) :
+                new ObjectParameter("IdPEriodo", typeof(decimal));
+    
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            var observacionParameter = observacion != null ?
+                new ObjectParameter("Observacion", observacion) :
+                new ObjectParameter("Observacion", typeof(string));
+    
+            var idRolParameter = idRol.HasValue ?
+                new ObjectParameter("IdRol", idRol) :
+                new ObjectParameter("IdRol", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_procesa_Rol", idEmpresaParameter, idNominaParameter, idNominaTipoParameter, idPEriodoParameter, idUsuarioParameter, observacionParameter, idRolParameter);
+        }
+    
+        public virtual int spRo_Reverso_Rol(Nullable<int> idEmpresa, Nullable<int> idNomina_Tipo, Nullable<int> idNomina_TipoLiqui, Nullable<int> idPeriodo)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idNomina_TipoParameter = idNomina_Tipo.HasValue ?
+                new ObjectParameter("IdNomina_Tipo", idNomina_Tipo) :
+                new ObjectParameter("IdNomina_Tipo", typeof(int));
+    
+            var idNomina_TipoLiquiParameter = idNomina_TipoLiqui.HasValue ?
+                new ObjectParameter("IdNomina_TipoLiqui", idNomina_TipoLiqui) :
+                new ObjectParameter("IdNomina_TipoLiqui", typeof(int));
+    
+            var idPeriodoParameter = idPeriodo.HasValue ?
+                new ObjectParameter("IdPeriodo", idPeriodo) :
+                new ObjectParameter("IdPeriodo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_Reverso_Rol", idEmpresaParameter, idNomina_TipoParameter, idNomina_TipoLiquiParameter, idPeriodoParameter);
         }
     }
 }

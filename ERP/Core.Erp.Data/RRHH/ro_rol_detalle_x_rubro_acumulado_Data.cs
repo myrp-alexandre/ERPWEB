@@ -44,16 +44,19 @@ namespace Core.Erp.Data.RRHH
                 double valor_cuotas = 0;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    var datos = (from q in Context.ro_rol_detalle_x_rubro_acumulado
+                    var datos = (from q in Context.ro_rol
+                                 join r in Context.ro_rol_detalle_x_rubro_acumulado
+                               on new { q.IdEmpresa, q.IdRol } equals new { r.IdEmpresa, r.IdRol }
                                  join p in Context.ro_periodo
                                  on new { q.IdEmpresa, q.IdPeriodo} equals new { p.IdEmpresa,p.IdPeriodo}
-                                     where q.IdEmpresa == IdEmpresa
-                                       & q.IdEmpleado == IdEmpleado
+                                
+                                 where q.IdEmpresa == IdEmpresa
+                                       & r.IdEmpleado == IdEmpleado
                                         &p.pe_anio==Anio
                                         && p.pe_mes==mes
-                                       && q.IdRubro == "295"
-                                       && q.Estado == "PEN"
-                                 select q.Valor);
+                                       && r.IdRubro == "295"
+                                       && r.Estado == "PEN"
+                                 select r.Valor);
                     if (datos.Count() > 0)
                         valor_cuotas = datos.Sum();
                 }
