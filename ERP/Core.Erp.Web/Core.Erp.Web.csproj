@@ -317,6 +317,7 @@
     <Compile Include="Areas\General\Controllers\ImagenesController.cs" />
     <Compile Include="Areas\General\Controllers\ImpuestoController.cs" />
     <Compile Include="Areas\General\Controllers\LogErrorController.cs" />
+    <Compile Include="Areas\General\Controllers\ProcesosBancariosPorEmpresaController.cs" />
     <Compile Include="Areas\General\Controllers\ReportesPorUsuarioController.cs" />
     <Compile Include="Areas\General\Controllers\ModuloController.cs" />
     <Compile Include="Areas\General\Controllers\PaisController.cs" />
@@ -332,7 +333,6 @@
     <Compile Include="Areas\General\Controllers\TransportistaController.cs" />
     <Compile Include="Areas\General\Controllers\VisorDeVideoController.cs" />
     <Compile Include="Areas\General\GeneralAreaRegistration.cs" />
-    <Compile Include="Areas\General\ProcesosBancariosPorEmpresaController.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoTipoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\GastosImportacionController.cs" />
