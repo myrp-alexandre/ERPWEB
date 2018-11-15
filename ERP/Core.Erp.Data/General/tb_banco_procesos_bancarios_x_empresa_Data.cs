@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Data.General
 {
-   public class tb_banco_procesos_bancarios_x_empresa_procesos_bancarios_x_empresa_Data
+   public class tb_banco_procesos_bancarios_x_empresa_Data
     {
         public List<tb_banco_procesos_bancarios_x_empresa_Info> get_list(bool mostrar_anulados)
         {
