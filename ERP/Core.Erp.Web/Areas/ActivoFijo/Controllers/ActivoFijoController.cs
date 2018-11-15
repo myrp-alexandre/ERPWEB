@@ -9,6 +9,7 @@ using Core.Erp.Bus.ActivoFijo;
 using Core.Erp.Info.ActivoFijo;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
@@ -78,8 +79,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 Af_fecha_compra = DateTime.Now,
                 Af_fecha_fin_depre = DateTime.Now,
                 Af_fecha_ini_depre = DateTime.Now,
-                Estado_Proceso = "TIP_ESTADO_AF_ACTIVO"
-            };
+                Estado_Proceso = "TIP_ESTADO_AF_ACTIVO",
+                Af_foto = new byte[0]
+        };
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -87,11 +89,16 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Nuevo(Af_Activo_fijo_Info model)
         {
+
+            model.Af_foto = Activo_imagen.Af_foto;
             if (!bus_activo.guardarDB(model))
             {
+                if (model.Af_foto == null)
+                    model.Af_foto = new byte[0];
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
+            Activo_imagen.Af_foto = null;
             return RedirectToAction("Index");
         }
 
@@ -100,6 +107,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             Af_Activo_fijo_Info model = bus_activo.get_info(IdEmpresa, IdActivoFijo);
             if (model == null)
                 return RedirectToAction("Index");
+            if (model.Af_foto == null)
+                model.Af_foto = new byte[0];
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -107,11 +116,15 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Modificar(Af_Activo_fijo_Info model)
         {
+            model.Af_foto = Activo_imagen.Af_foto;
             if (!bus_activo.modificarDB(model))
             {
+                if (model.Af_foto == null)
+                    model.Af_foto = new byte[0];
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
+            Activo_imagen.Af_foto = null;
             return RedirectToAction("Index");
         }
 
@@ -120,6 +133,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             Af_Activo_fijo_Info model = bus_activo.get_info(IdEmpresa, IdActivoFijo);
             if (model == null)
                 return RedirectToAction("Index");
+            if (model.Af_foto == null)
+                model.Af_foto = new byte[0];
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -127,11 +142,16 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Anular(Af_Activo_fijo_Info model)
         {
+            model.Af_foto = Activo_imagen.Af_foto;
+
             if (!bus_activo.anularDB(model))
             {
+                if (model.Af_foto == null)
+                    model.Af_foto = new byte[0];
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
+            Activo_imagen.Af_foto = null;
             return RedirectToAction("Index");
         }
         #endregion
@@ -155,6 +175,42 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        const string UploadDirectory = "~/Content/imagenes/";
 
+        public UploadedFile UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControl", Activo_imagen.UploadValidationSettings, Activo_imagen.FileUploadComplete);
+
+            byte[] model = Activo_imagen.Af_foto;
+            UploadedFile file = new UploadedFile();
+            return file;
+        }
+
+        public ActionResult get_imagen()
+        {
+
+            byte[] model = Activo_imagen.Af_foto;
+            if (model == null)
+                model = new byte[0];
+            return PartialView("_Activo_imagen", model);
+        }
+
+    }
+    public class Activo_imagen
+    {
+        public static byte[] Af_foto { get; set; }
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".jpg", ".jpeg" },
+            MaxFileSize = 4000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+
+            if (e.UploadedFile.IsValid)
+            {
+                Af_foto = e.UploadedFile.FileBytes;
+            }
+        }
     }
 }

@@ -147,6 +147,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         info.info_retencion.re_Tiene_RTiva = "S";
                         info.info_retencion.IdUsuario = info.IdUsuario;
                         info.info_retencion.observacion = "Retencion de factuta #" + info.co_serie +'-'+ info.co_factura;
+                        info.info_retencion.Fecha_Transac = Convert.ToDateTime(info.Fecha_Transac);
+                        info.info_retencion.aprobada_enviar_sri = false;
+
                         if (bus_retencion.guardarDB(info.info_retencion))
                         {
                             info.info_retencion.info_comprobante.IdEmpresa = info.IdEmpresa;
