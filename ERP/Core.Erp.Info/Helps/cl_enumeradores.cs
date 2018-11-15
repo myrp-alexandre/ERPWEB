@@ -233,5 +233,15 @@
             TIP_COBRO,
             CAJA
         }
+
+        public enum eTipoProcesoBancario
+        {
+            NCR,
+            NCR_OTROS_BCO,
+            PAGOS_MULTICASH,
+            ROL_ELECTRONICO_BG,
+            TRANSF_BANCARIA_BP
+        }
+
     }
 }
