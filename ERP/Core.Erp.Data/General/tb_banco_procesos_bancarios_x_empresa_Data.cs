@@ -102,6 +102,7 @@ namespace Core.Erp.Data.General
                 {
                     tb_banco_procesos_bancarios_x_empresa Entity = new tb_banco_procesos_bancarios_x_empresa
                     {
+                        IdEmpresa = info.IdEmpresa,
                         IdProceso = info.IdProceso = get_id(),
                         IdProceso_bancario_tipo = info.IdProceso_bancario_tipo,
                         Codigo_Empresa = info.Codigo_Empresa,
