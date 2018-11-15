@@ -184,6 +184,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                                 info_talonario.Usado = true;
                                 info_talonario.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
                                 data_talonario.modificar_estado_usadoDB(info_talonario);
+
                             }
 
                         }

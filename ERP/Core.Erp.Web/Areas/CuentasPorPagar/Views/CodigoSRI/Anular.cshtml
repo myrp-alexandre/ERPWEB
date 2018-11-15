@@ -90,24 +90,8 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCble">Cuenta contable</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.info_codigo_ctacble.IdCtaCble, settings =>
-               {
-                   settings.Name = "info_codigo_ctacble.IdCtaCble";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                   settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-                   //Campo ID
-                   settings.Properties.ValueField = "IdCtaCble";
-                   settings.Properties.ValueType = typeof(string);
-                   settings.Properties.TextField = "pc_Cuenta";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-               }).BindList(ViewBag.lst_cuentas).GetHtml()
+                    <label for="IdCtaCble">Cuenta contable*</label>
+                    @Html.Partial("_CmbCuenta_Codigo", Model.info_codigo_ctacble.IdCtaCble)
                     @Html.ValidationMessageFor(q => q.info_codigo_ctacble.IdCtaCble, "", new { @class = "text-danger" })
                 </div>
             </div>

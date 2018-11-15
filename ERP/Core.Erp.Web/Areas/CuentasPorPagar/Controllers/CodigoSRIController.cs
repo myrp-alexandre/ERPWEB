@@ -1,8 +1,11 @@
 ﻿using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.CuentasPorPagar;
+using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
@@ -143,5 +146,23 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
 
         #endregion
+
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbCuenta_Codigo()
+        {
+            string model = "";
+            return PartialView("_CmbCuenta_Codigo", model);
+        }
+
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
     }
 }
