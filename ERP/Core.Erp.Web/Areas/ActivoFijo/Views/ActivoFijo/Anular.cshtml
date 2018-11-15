@@ -141,6 +141,9 @@
             <li>
                 <a href="#tab_caracteristicas" aria-controls="caracteristicas" role="tab" data-toggle="tab">Características del activo</a>
             </li>
+            <li>
+                <a href="#tb_info_foto" aria-controls="foto" role="tab" data-toggle="tab">Foto del activo</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_configuracion">
@@ -318,6 +321,36 @@
                 </div>
 
             </div>
+
+            <div role="tabpanel" class="tab-pane" id="tb_info_foto">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+
+
+                            @Html.DevExpress().BinaryImage(
+                            settings =>
+                            {
+                                settings.Name = "Af_foto";
+                                settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "get_imagen" };
+                            }).Bind((Model.Af_foto).ToArray()).GetHtml()
+
+
+                            @Html.DevExpress().UploadControl(settings =>
+                       {
+
+                           settings.Name = "UploadControl";
+                           settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "UploadControlUpload" };
+                           settings.ShowUploadButton = true;
+                           settings.ShowProgressPanel = true;
+                       }).GetHtml()
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
     <div class="box-footer">
