@@ -7,6 +7,8 @@ using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.Helps;
+using Core.Erp.Data.General;
+using Core.Erp.Info.General;
 
 namespace Core.Erp.Bus.CuentasPorPagar
 {
@@ -22,6 +24,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_parametros_Bus bus_parametro = new cp_parametros_Bus();
         cp_orden_giro_pagos_sri_Bus bus_forma_pago = new cp_orden_giro_pagos_sri_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+        cp_retencion_Data bus_retencion = new cp_retencion_Data();
+
+        tb_sis_Documento_Tipo_Talonario_Data data_talonario = new tb_sis_Documento_Tipo_Talonario_Data();
         public List<cp_orden_giro_Info> get_lst(int IdEmpresa,int IdSucursal, DateTime fi, DateTime ff)
         {
             try
@@ -119,6 +124,75 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.info_forma_pago.formas_pago_sri = "";
                     bus_forma_pago.GuardarDB(info.info_forma_pago);
                 }
+
+
+                if(info.info_retencion!=null)
+                {
+                    if(info.info_retencion.detalle.Count()>0)
+                    {
+                        info.info_retencion.IdEmpresa = info.IdEmpresa;
+                        info.info_retencion.IdProveedor = info.IdProveedor;
+                        info.info_retencion.IdEmpresa_Ogiro = info.IdEmpresa;
+                        info.info_retencion.IdCbteCble_Ogiro = info.IdCbteCble_Ogiro;
+                        info.info_retencion.IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro;
+                        info.info_retencion.Fecha_Autorizacion = info.fecha_autorizacion;
+                        info.info_retencion.Descripcion = info.Descripcion;
+                        info.info_retencion.Estado = "A";
+                        info.info_retencion.fecha = info.co_fechaOg;
+                        info.info_retencion.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
+                        info.info_retencion.serie1 = info.co_serie;
+                        info.info_retencion.serie2 = info.co_serie;
+                        info.info_retencion.re_EstaImpresa = "N";
+                        info.info_retencion.re_Tiene_RFuente = "S";
+                        info.info_retencion.re_Tiene_RTiva = "S";
+                        info.info_retencion.IdUsuario = info.IdUsuario;
+                        info.info_retencion.observacion = "Retencion de factuta #" + info.co_serie +'-'+ info.co_factura;
+                        if (bus_retencion.guardarDB(info.info_retencion))
+                        {
+                            info.info_retencion.info_comprobante.IdEmpresa = info.IdEmpresa;
+                            info.info_retencion.info_comprobante.cb_Fecha = info.co_fechaOg;
+                            info.info_retencion.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
+                            info.info_retencion.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
+                            info.info_retencion.info_comprobante.IdTipoCbte = info.IdTipoCbte_Ogiro;
+                            info.info_retencion.info_comprobante.IdCbteCble = info.IdCbteCble_Ogiro;
+                            info.info_retencion.info_comprobante.cb_Estado = info.Estado;
+                            info.info_retencion.info_comprobante.cb_Valor = info.co_valorpagar;
+                            
+
+
+                            if ( bus_contabilidad.guardarDB(info.info_retencion.info_comprobante))
+                            {
+                                cp_retencion_x_ct_cbtecble_Info info_comp_x_retencion = new cp_retencion_x_ct_cbtecble_Info();
+                                cp_retencion_x_ct_cbtecble_Data data_comp_x_retencion = new cp_retencion_x_ct_cbtecble_Data();
+
+                                info_comp_x_retencion.ct_IdEmpresa = info.IdEmpresa;
+                                info_comp_x_retencion.rt_IdRetencion = info.info_retencion.IdRetencion;
+                                info_comp_x_retencion.ct_IdTipoCbte = info.info_retencion.info_comprobante.IdTipoCbte;
+                                info_comp_x_retencion.ct_IdCbteCble = info.info_retencion.info_comprobante.IdCbteCble;
+                                info_comp_x_retencion.Observacion = info.info_retencion.observacion;
+                                info_comp_x_retencion.rt_IdEmpresa = info.info_retencion.IdEmpresa;
+
+                                data_comp_x_retencion.guardarDB(info_comp_x_retencion);
+
+
+                                tb_sis_Documento_Tipo_Talonario_Info info_talonario = new tb_sis_Documento_Tipo_Talonario_Info();
+                                
+                                info_talonario.IdEmpresa = info.IdEmpresa;
+                                info_talonario.Establecimiento = info.info_retencion.serie1;
+                                info_talonario.PuntoEmision = info.info_retencion.serie2;
+                                info_talonario.NumDocumento = info.info_retencion.NumRetencion;
+                                info_talonario.Usado = true;
+                                info_talonario.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
+                                data_talonario.modificar_estado_usadoDB(info_talonario);
+                            }
+
+                        }
+
+                    }
+
+                }
+
+
                 return true;
             }
             catch (Exception e)

@@ -43,6 +43,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
         cp_orden_giro_det_Bus bus_det = new cp_orden_giro_det_Bus();
+
+        tb_sis_Documento_Tipo_Talonario_Bus bus_documento = new tb_sis_Documento_Tipo_Talonario_Bus();
+
+        ct_cbtecble_det_List_re List_ct_cbtecble_det_List = new ct_cbtecble_det_List_re();
+        cp_retencion_det_lst List_cp_retencion_det = new cp_retencion_det_lst();
+
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -259,6 +265,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
+            tb_sis_Documento_Tipo_Talonario_Info info_documento = new tb_sis_Documento_Tipo_Talonario_Info();
+            info_documento = bus_documento.get_info_ultimo_no_usado(IdEmpresa, cl_enumeradores.eTipoDocumento.RETEN.ToString());
+
             cp_orden_giro_Info model = new cp_orden_giro_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -272,8 +281,17 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 {
                     Fecha_inicio = DateTime.Now.Date
                 },
-
+                info_retencion = new cp_retencion_Info
+                {
+                    serie1 = info_documento.Establecimiento,
+                    serie2 = info_documento.PuntoEmision,
+                    NumRetencion = info_documento.NumDocumento
+                }
+    
             };
+            List_cp_retencion_det.set_list(new List<cp_retencion_det_Info>(), model.IdTransaccionSession);
+            List_ct_cbtecble_det_List.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
+
             Lis_ct_cbtecble_det_List.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
             Lis_cp_cuotas_x_doc_det_Info.set_list(new List<cp_cuotas_x_doc_det_Info>(), model.IdTransaccionSession);
             List_det.set_list(new List<cp_orden_giro_det_Info>(), model.IdTransaccionSession);
@@ -293,8 +311,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     model.info_cuota.Fecha_inicio = DateTime.Now;
                 return View(model);
             }
-             model.info_comrobante = new ct_cbtecble_Info();
-             model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
+            model.info_comrobante = new ct_cbtecble_Info();
+            List_cp_retencion_det.get_list(model.IdTransaccionSession);
+
+            model.info_retencion.detalle = List_cp_retencion_det.get_list(model.IdTransaccionSession);
+
+            model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
             if(Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession).Count()==0)
             {
@@ -340,6 +362,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     model.info_cuota.Fecha_inicio = DateTime.Now;
                 return View(model);
             }
+
+
             return RedirectToAction("Index");
         }
 
@@ -360,6 +384,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             Lis_ct_cbtecble_det_List.set_list( model.info_comrobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             if (model.info_cuota.lst_cuotas_det == null)
                 model.info_cuota.lst_cuotas_det = new List<cp_cuotas_x_doc_det_Info>();
+            List_cp_retencion_det.set_list(model.info_retencion.detalle, model.IdTransaccionSession);
             Lis_cp_cuotas_x_doc_det_Info.set_list( model.info_cuota.lst_cuotas_det, model.IdTransaccionSession);
             List_det.set_list(bus_det.get_list(model.IdEmpresa, model.IdTipoCbte_Ogiro, model.IdCbteCble_Ogiro), model.IdTransaccionSession);
             cargar_combos(model);
@@ -392,8 +417,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                model.info_comrobante = new ct_cbtecble_Info();
                model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
-            
-                model.info_comrobante.lst_ct_cbtecble_det =Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
+               model.info_retencion.detalle = List_cp_retencion_det.get_list(model.IdTransaccionSession);
+
+            model.info_comrobante.lst_ct_cbtecble_det =Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
             
             if(model.info_comrobante.lst_ct_cbtecble_det.Count()==0)
             {

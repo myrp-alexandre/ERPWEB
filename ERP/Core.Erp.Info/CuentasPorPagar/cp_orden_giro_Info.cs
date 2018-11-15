@@ -83,5 +83,13 @@ namespace Core.Erp.Info.CuentasPorPagar
         public bool ConvenioTributacion_bool { get; set; }
         public bool PagoSujetoRetencion_bool { get; set; }
         public List<cp_orden_giro_det_Info> lst_det { get; set; }
+
+        public cp_retencion_Info info_retencion { get; set; }
+
+        public cp_orden_giro_Info()
+
+        {
+            info_retencion = new cp_retencion_Info();
+        }
     }
 }

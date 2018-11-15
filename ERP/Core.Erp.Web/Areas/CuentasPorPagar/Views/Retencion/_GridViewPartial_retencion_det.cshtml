@@ -85,9 +85,10 @@
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
-        settings.ClientSideEvents.BatchEditChangesSaving= "function(s,e,){armar_diario()}";
-        settings.ClientSideEvents.BatchEditRowDeleting = "function(s,e,){armar_diario()}";
-        settings.ClientSideEvents.EndCallback = "function (s,e){armar_diario();}";
+        settings.ClientSideEvents.BatchEditChangesSaving= "function(s,e,){armar_diario_retencion()}";
+        settings.ClientSideEvents.BatchEditRowDeleting = "function(s,e,){armar_diario_retencion()}";
+        settings.ClientSideEvents.EndCallback = "function (s,e){armar_diario_retencion();}";
+
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 
