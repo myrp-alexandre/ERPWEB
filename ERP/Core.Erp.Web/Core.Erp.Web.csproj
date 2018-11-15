@@ -9282,6 +9282,7 @@
     <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Index.cshtml" />
     <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Anular.cshtml" />
     <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\_GridViewPartial_procesos_bancarios.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\CodigoSRI\_CmbCuenta_Codigo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
