@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Cuentas";
+    ViewBag.Title = "Procesos bancarios de archivos de transferencias";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -11,6 +11,6 @@
 @using (Html.BeginForm())
 {
 
-    @Html.Action("GridViewPartial_cuentas")
+    @Html.Action("GridViewPartial_procesos_bancarios")
 
 }

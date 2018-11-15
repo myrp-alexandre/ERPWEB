@@ -186,6 +186,7 @@
     <Compile Include="General\tb_sis_reporte_diseno_Bus.cs" />
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Bus.cs" />
     <Compile Include="General\tb_sucursal_Bus.cs" />
+    <Compile Include="General\tb_TarjetaCredito_Bus.cs" />
     <Compile Include="General\tb_transportista_Bus.cs" />
     <Compile Include="General\tb_visor_video_Bus.cs" />
     <Compile Include="Helps\FilesHelper_Bus.cs" />

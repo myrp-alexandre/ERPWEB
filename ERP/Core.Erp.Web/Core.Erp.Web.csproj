@@ -317,6 +317,7 @@
     <Compile Include="Areas\General\Controllers\ImagenesController.cs" />
     <Compile Include="Areas\General\Controllers\ImpuestoController.cs" />
     <Compile Include="Areas\General\Controllers\LogErrorController.cs" />
+    <Compile Include="Areas\General\Controllers\ProcesosBancariosPorEmpresaController.cs" />
     <Compile Include="Areas\General\Controllers\ReportesPorUsuarioController.cs" />
     <Compile Include="Areas\General\Controllers\ModuloController.cs" />
     <Compile Include="Areas\General\Controllers\PaisController.cs" />
@@ -327,12 +328,12 @@
     <Compile Include="Areas\General\Controllers\ReporteController.cs" />
     <Compile Include="Areas\General\Controllers\Reportes_pre_impreso.cs" />
     <Compile Include="Areas\General\Controllers\SucursalController.cs" />
+    <Compile Include="Areas\General\Controllers\TarjetaCreditoController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoTalonarioController.cs" />
     <Compile Include="Areas\General\Controllers\TransportistaController.cs" />
     <Compile Include="Areas\General\Controllers\VisorDeVideoController.cs" />
     <Compile Include="Areas\General\GeneralAreaRegistration.cs" />
-    <Compile Include="Areas\General\ProcesosBancariosPorEmpresaController.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\CatalogoTipoImportacionController.cs" />
     <Compile Include="Areas\Importacion\Controllers\GastosImportacionController.cs" />
@@ -9282,6 +9283,9 @@
     <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Index.cshtml" />
     <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Anular.cshtml" />
     <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\_GridViewPartial_procesos_bancarios.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\CodigoSRI\_CmbCuenta_Codigo.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\Index.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\_GridViewPartial_TarjetaCredito.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9391,7 +9395,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

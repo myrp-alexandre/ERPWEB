@@ -579,6 +579,7 @@
     <Compile Include="General\tb_sis_reporte_diseno_Data.cs" />
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Data.cs" />
     <Compile Include="General\tb_sucursal_Data.cs" />
+    <Compile Include="General\tb_TarjetaCredito_Data.cs" />
     <Compile Include="General\tb_transportista_Data.cs" />
     <Compile Include="General\tb_visor_video_Data.cs" />
     <Compile Include="generarATS_Result.cs">
@@ -1483,6 +1484,12 @@
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_sucursal.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_TarjetaCredito.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_TarjetaCredito_x_cp_proveedor.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_transportista.cs">
