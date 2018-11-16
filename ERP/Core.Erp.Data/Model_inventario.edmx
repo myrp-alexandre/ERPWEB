@@ -479,7 +479,6 @@
           <Property Name="tp_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="tp_EsCombo" Type="char" MaxLength="1" />
           <Property Name="tp_ManejaInven" Type="char" MaxLength="1" />
-          <Property Name="tp_ManejaLote" Type="bit" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_Transac" Type="datetime" />
@@ -487,14 +486,12 @@
           <Property Name="Fecha_UltMod" Type="datetime" />
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
-          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
-          <Property Name="ip" Type="varchar" MaxLength="25" />
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="200" />
-          <Property Name="tp_es_lote" Type="bit" Nullable="false" />
           <Property Name="Aparece_modu_Ventas" Type="bit" Nullable="false" />
           <Property Name="Aparece_modu_Compras" Type="bit" Nullable="false" />
           <Property Name="Aparece_modu_Inventario" Type="bit" Nullable="false" />
           <Property Name="Aparece_modu_Activo_F" Type="bit" Nullable="false" />
+          <Property Name="Aparece_fabricacion" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="in_subgrupo">
           <Key>
@@ -604,8 +601,8 @@
           <Property Name="valor_equiv" Type="float" Nullable="false" />
           <Property Name="interpretacion" Type="varchar" MaxLength="500" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_devolucion_inven_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.dbo.vwin_devolucion_inven_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_devolucion_inven_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -642,8 +639,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_devolucion_in
           <Property Name="IdUnidadMedida_sinConversion" Type="varchar" MaxLength="25" />
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven_distribucion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.dbo.vwin_Ing_Egr_Inven_distribucion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_distribucion">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -675,8 +672,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven
           <Property Name="vt_NumFactura" Type="varchar" MaxLength="20" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven_distribucion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.dbo.vwin_Ing_Egr_Inven_distribucion_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_distribucion_det">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -705,8 +702,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
           <Property Name="lote_fecha_fab" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven_distribucion_x_distribuir' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.dbo.vwin_Ing_Egr_Inven_distribucion_x_distribuir' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_distribucion_x_distribuir">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -735,8 +732,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Ing_Egr_Inven
           <Property Name="IdCategoria" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="IdPresentacion" Type="varchar" MaxLength="25" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Producto_Stock' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.dbo.vwin_Producto_Stock' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Producto_Stock">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -750,8 +747,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Producto_Stoc
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Stock" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_producto_x_tb_bodega_stock_x_lote' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.dbo.vwin_producto_x_tb_bodega_stock_x_lote' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_producto_x_tb_bodega_stock_x_lote">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -773,8 +770,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_producto_x_tb
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
           <Property Name="stock" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.dbo.vwin_Transferencias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Transferencias">
           <Key>
             <PropertyRef Name="SucuOrigen" />
@@ -822,8 +819,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwin_Transferencia
           <Property Name="IdEstadoAproba_ing" Type="varchar" MaxLength="15" />
           <Property Name="IdEstadoAproba_egr" Type="varchar" MaxLength="15" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.web.vwin_Ing_Egr_Inven_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -875,8 +872,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven
           <Property Name="lote_fecha_vcto" Type="datetime" />
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven_det_x_devolver' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.web.vwin_Ing_Egr_Inven_det_x_devolver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_det_x_devolver">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -909,8 +906,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven
           <Property Name="NomUnidad" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven_por_devolver' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.web.vwin_Ing_Egr_Inven_por_devolver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Ing_Egr_Inven_por_devolver">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -930,8 +927,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Ing_Egr_Inven
           <Property Name="cm_fecha" Type="datetime" Nullable="false" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Producto_Composicion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.web.vwin_Producto_Composicion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_Producto_Composicion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -955,8 +952,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_Producto_Comp
           <Property Name="lote_fecha_vcto" Type="datetime" />
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_hijo_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.web.vwin_producto_hijo_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_producto_hijo_combo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -977,8 +974,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_hijo
           <Property Name="lote_fecha_vcto" Type="datetime" />
           <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwin_producto_padre_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.web.vwin_producto_padre_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwin_producto_padre_combo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2699,7 +2696,7 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <NavigationProperty Name="in_movi_inven_tipo10" Relationship="Self.FK_in_parametro_in_movi_inven_tipo7" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
           <NavigationProperty Name="in_movi_inven_tipo11" Relationship="Self.FK_in_parametro_in_movi_inven_tipo8" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
           <NavigationProperty Name="in_movi_inven_tipo12" Relationship="Self.FK_in_parametro_in_movi_inven_tipo9" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_ProductoTipo" Relationship="Self.FK_in_parametro_in_ProductoTipo" FromRole="in_parametro" ToRole="in_ProductoTipo" />
+          <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_parametro_in_ProductoTipo" FromRole="in_parametro" ToRole="in_ProductoTipo" />
         </EntityType>
         <EntityType Name="in_presentacion">
           <Key>
@@ -2776,12 +2773,12 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <NavigationProperty Name="in_Producto_Composicion1" Relationship="Self.FK_in_Producto_Composicion_in_Producto1" FromRole="in_Producto" ToRole="in_Producto_Composicion" />
           <NavigationProperty Name="in_Producto1" Relationship="Self.FK_in_Producto_in_Producto1" FromRole="in_Producto" ToRole="in_Producto1" />
           <NavigationProperty Name="in_Producto2" Relationship="Self.FK_in_Producto_in_Producto1" FromRole="in_Producto1" ToRole="in_Producto" />
-          <NavigationProperty Name="in_ProductoTipo" Relationship="Self.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
           <NavigationProperty Name="in_subgrupo" Relationship="Self.FK_in_Producto_in_subgrupo" FromRole="in_Producto" ToRole="in_subgrupo" />
           <NavigationProperty Name="in_UnidadMedida" Relationship="Self.FK_in_Producto_in_UnidadMedida" FromRole="in_Producto" ToRole="in_UnidadMedida" />
           <NavigationProperty Name="in_UnidadMedida1" Relationship="Self.FK_in_Producto_in_UnidadMedida1" FromRole="in_Producto" ToRole="in_UnidadMedida" />
           <NavigationProperty Name="in_transferencia_det" Relationship="Self.FK_in_transferencia_det_in_Producto" FromRole="in_Producto" ToRole="in_transferencia_det" />
           <NavigationProperty Name="in_producto_x_tb_bodega" Relationship="Model_inventario.FK_in_producto_x_tb_bodega_in_Producto" FromRole="in_Producto" ToRole="in_producto_x_tb_bodega" />
+          <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
         </EntityType>
         <EntityType Name="in_Producto_Composicion">
           <Key>
@@ -2819,35 +2816,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <Property Name="Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fecha_trans" Type="DateTime" Precision="3" />
           <NavigationProperty Name="in_producto_x_tb_bodega" Relationship="Model_inventario.FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega" FromRole="in_producto_x_tb_bodega_Costo_Historico" ToRole="in_producto_x_tb_bodega" />
-        </EntityType>
-        <EntityType Name="in_ProductoTipo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdProductoTipo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdProductoTipo" Type="Int32" Nullable="false" />
-          <Property Name="tp_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tp_EsCombo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="tp_ManejaInven" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="tp_ManejaLote" Type="Boolean" Nullable="false" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="tp_es_lote" Type="Boolean" Nullable="false" />
-          <Property Name="Aparece_modu_Ventas" Type="Boolean" Nullable="false" />
-          <Property Name="Aparece_modu_Compras" Type="Boolean" Nullable="false" />
-          <Property Name="Aparece_modu_Inventario" Type="Boolean" Nullable="false" />
-          <Property Name="Aparece_modu_Activo_F" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="in_parametro" Relationship="Self.FK_in_parametro_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_Producto" Relationship="Self.FK_in_Producto_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_Producto" />
         </EntityType>
         <EntityType Name="in_subgrupo">
           <Key>
@@ -3849,20 +3817,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_in_parametro_in_ProductoTipo">
-          <End Role="in_ProductoTipo" Type="Self.in_ProductoTipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_ProductoTipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProductoTipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="P_IdProductoTipo_para_lote_0" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_in_Producto_in_presentacion">
           <End Role="in_presentacion" Type="Self.in_presentacion" Multiplicity="0..1" />
           <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="*" />
@@ -3916,20 +3870,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             <Dependent Role="in_Producto1">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdProducto_padre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_Producto_in_ProductoTipo">
-          <End Role="in_ProductoTipo" Type="Self.in_ProductoTipo" Multiplicity="1" />
-          <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_ProductoTipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProductoTipo" />
-            </Principal>
-            <Dependent Role="in_Producto">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProductoTipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4077,7 +4017,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <EntitySet Name="in_Producto" EntityType="Self.in_Producto" />
           <EntitySet Name="in_Producto_Composicion" EntityType="Self.in_Producto_Composicion" />
           <EntitySet Name="in_producto_x_tb_bodega_Costo_Historico" EntityType="Self.in_producto_x_tb_bodega_Costo_Historico" />
-          <EntitySet Name="in_ProductoTipo" EntityType="Self.in_ProductoTipo" />
           <EntitySet Name="in_subgrupo" EntityType="Self.in_subgrupo" />
           <EntitySet Name="in_transferencia" EntityType="Self.in_transferencia" />
           <EntitySet Name="in_transferencia_det" EntityType="Self.in_transferencia_det" />
@@ -4242,10 +4181,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
             <End Role="in_parametro" EntitySet="in_parametro" />
           </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_ProductoTipo" Association="Self.FK_in_parametro_in_ProductoTipo">
-            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
           <AssociationSet Name="FK_in_Producto_in_presentacion" Association="Self.FK_in_Producto_in_presentacion">
             <End Role="in_presentacion" EntitySet="in_presentacion" />
             <End Role="in_Producto" EntitySet="in_Producto" />
@@ -4261,10 +4196,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <AssociationSet Name="FK_in_Producto_in_Producto1" Association="Self.FK_in_Producto_in_Producto1">
             <End Role="in_Producto" EntitySet="in_Producto" />
             <End Role="in_Producto1" EntitySet="in_Producto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_Producto_in_ProductoTipo" Association="Self.FK_in_Producto_in_ProductoTipo">
-            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
-            <End Role="in_Producto" EntitySet="in_Producto" />
           </AssociationSet>
           <AssociationSet Name="FK_in_Producto_in_subgrupo" Association="Self.FK_in_Producto_in_subgrupo">
             <End Role="in_subgrupo" EntitySet="in_subgrupo" />
@@ -4331,7 +4262,16 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             <End Role="in_producto_x_tb_bodega" EntitySet="in_producto_x_tb_bodega" />
             <End Role="in_producto_x_tb_bodega_Costo_Historico" EntitySet="in_producto_x_tb_bodega_Costo_Historico" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="in_ProductoTipo" EntityType="Model_inventario.in_ProductoTipo" />
+          <AssociationSet Name="FK_in_parametro_in_ProductoTipo" Association="Model_inventario.FK_in_parametro_in_ProductoTipo">
+            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_Producto_in_ProductoTipo" Association="Model_inventario.FK_in_Producto_in_ProductoTipo">
+            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
+            <End Role="in_Producto" EntitySet="in_Producto" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="spSys_inv_Reversar_aprobacion_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Int32" Name="IdSucursal" Nullable="false" />
@@ -4450,7 +4390,61 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="in_ProductoTipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProductoTipo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProductoTipo" Type="Int32" Nullable="false" />
+          <Property Name="tp_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tp_EsCombo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="tp_ManejaInven" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Aparece_modu_Ventas" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Compras" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Inventario" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Activo_F" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_fabricacion" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="in_parametro" Relationship="Model_inventario.FK_in_parametro_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_Producto" />
+        </EntityType>
+        <Association Name="FK_in_parametro_in_ProductoTipo">
+          <End Type="Model_inventario.in_ProductoTipo" Role="in_ProductoTipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_ProductoTipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProductoTipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="P_IdProductoTipo_para_lote_0" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_Producto_in_ProductoTipo">
+          <End Type="Model_inventario.in_ProductoTipo" Role="in_ProductoTipo" Multiplicity="1" />
+          <End Type="Model_inventario.in_Producto" Role="in_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_ProductoTipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProductoTipo" />
+            </Principal>
+            <Dependent Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProductoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -4887,33 +4881,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="in_ProductoTipo">
-            <EntityTypeMapping TypeName="Model_inventario.in_ProductoTipo">
-              <MappingFragment StoreEntitySet="in_ProductoTipo">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdProductoTipo" ColumnName="IdProductoTipo" />
-                <ScalarProperty Name="tp_descripcion" ColumnName="tp_descripcion" />
-                <ScalarProperty Name="tp_EsCombo" ColumnName="tp_EsCombo" />
-                <ScalarProperty Name="tp_ManejaInven" ColumnName="tp_ManejaInven" />
-                <ScalarProperty Name="tp_ManejaLote" ColumnName="tp_ManejaLote" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="tp_es_lote" ColumnName="tp_es_lote" />
-                <ScalarProperty Name="Aparece_modu_Ventas" ColumnName="Aparece_modu_Ventas" />
-                <ScalarProperty Name="Aparece_modu_Compras" ColumnName="Aparece_modu_Compras" />
-                <ScalarProperty Name="Aparece_modu_Inventario" ColumnName="Aparece_modu_Inventario" />
-                <ScalarProperty Name="Aparece_modu_Activo_F" ColumnName="Aparece_modu_Activo_F" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="in_subgrupo">
             <EntityTypeMapping TypeName="Model_inventario.in_subgrupo">
               <MappingFragment StoreEntitySet="in_subgrupo">
@@ -5336,6 +5303,30 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_ProductoTipo">
+            <EntityTypeMapping TypeName="Model_inventario.in_ProductoTipo">
+              <MappingFragment StoreEntitySet="in_ProductoTipo">
+                <ScalarProperty Name="Aparece_fabricacion" ColumnName="Aparece_fabricacion" />
+                <ScalarProperty Name="Aparece_modu_Activo_F" ColumnName="Aparece_modu_Activo_F" />
+                <ScalarProperty Name="Aparece_modu_Inventario" ColumnName="Aparece_modu_Inventario" />
+                <ScalarProperty Name="Aparece_modu_Compras" ColumnName="Aparece_modu_Compras" />
+                <ScalarProperty Name="Aparece_modu_Ventas" ColumnName="Aparece_modu_Ventas" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="tp_ManejaInven" ColumnName="tp_ManejaInven" />
+                <ScalarProperty Name="tp_EsCombo" ColumnName="tp_EsCombo" />
+                <ScalarProperty Name="tp_descripcion" ColumnName="tp_descripcion" />
+                <ScalarProperty Name="IdProductoTipo" ColumnName="IdProductoTipo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

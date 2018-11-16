@@ -9,13 +9,11 @@
 
 namespace Core.Erp.Data
 {
-
     using System;
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
-    using System.Linq;
-
+    using System.Data.Entity.Infrastructure;
+    
     public partial class Entities_inventario : DbContext
     {
         public Entities_inventario()
@@ -47,7 +45,6 @@ namespace Core.Erp.Data
         public DbSet<in_Producto> in_Producto { get; set; }
         public DbSet<in_Producto_Composicion> in_Producto_Composicion { get; set; }
         public DbSet<in_producto_x_tb_bodega_Costo_Historico> in_producto_x_tb_bodega_Costo_Historico { get; set; }
-        public DbSet<in_ProductoTipo> in_ProductoTipo { get; set; }
         public DbSet<in_subgrupo> in_subgrupo { get; set; }
         public DbSet<in_transferencia> in_transferencia { get; set; }
         public DbSet<in_transferencia_det> in_transferencia_det { get; set; }
@@ -67,6 +64,7 @@ namespace Core.Erp.Data
         public DbSet<vwin_producto_x_tb_bodega_stock_x_lote> vwin_producto_x_tb_bodega_stock_x_lote { get; set; }
         public DbSet<vwin_Producto_Stock> vwin_Producto_Stock { get; set; }
         public DbSet<in_producto_x_tb_bodega> in_producto_x_tb_bodega { get; set; }
+        public DbSet<in_ProductoTipo> in_ProductoTipo { get; set; }
     
         public virtual ObjectResult<spSys_inv_Reversar_aprobacion_Result> spSys_inv_Reversar_aprobacion(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi, Nullable<bool> borar)
         {

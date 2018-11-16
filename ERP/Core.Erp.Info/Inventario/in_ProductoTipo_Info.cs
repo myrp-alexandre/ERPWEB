@@ -16,13 +16,12 @@ namespace Core.Erp.Info.Inventario
         public string tp_descripcion { get; set; }
         public string tp_EsCombo { get; set; }
         public string tp_ManejaInven { get; set; }
-        public bool tp_ManejaLote { get; set; }
-        public bool tp_es_lote { get; set; }
+        public string Estado { get; set; }
         public bool Aparece_modu_Ventas { get; set; }
         public bool Aparece_modu_Compras { get; set; }
         public bool Aparece_modu_Inventario { get; set; }
         public bool Aparece_modu_Activo_F { get; set; }
-        public string Estado { get; set; }
+        public int Aparece_fabricacion { get; set; }
         public bool EstadoBool { get; set; }
 
         #region Campos auditoria

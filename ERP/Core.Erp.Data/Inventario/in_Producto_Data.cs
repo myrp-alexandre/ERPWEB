@@ -452,7 +452,7 @@ namespace Core.Erp.Data.Inventario
                         }
                     }
 
-                    var parametros = Context.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+            /*        var parametros = Context.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     if (parametros.P_se_crea_lote_0_al_crear_producto_matriz == true)
                     {
                         var tipo = Context.in_ProductoTipo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdProductoTipo == info.IdProductoTipo).FirstOrDefault();
@@ -542,7 +542,7 @@ namespace Core.Erp.Data.Inventario
                             }
 
                         }
-                    }
+                    }*/
                     
                     Context.SaveChanges();
                 }

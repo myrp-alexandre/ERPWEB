@@ -84,11 +84,11 @@ namespace Core.Erp.Data
         public virtual ICollection<in_Producto_Composicion> in_Producto_Composicion1 { get; set; }
         public virtual ICollection<in_Producto> in_Producto1 { get; set; }
         public virtual in_Producto in_Producto2 { get; set; }
-        public virtual in_ProductoTipo in_ProductoTipo { get; set; }
         public virtual in_subgrupo in_subgrupo { get; set; }
         public virtual in_UnidadMedida in_UnidadMedida { get; set; }
         public virtual in_UnidadMedida in_UnidadMedida1 { get; set; }
         public virtual ICollection<in_transferencia_det> in_transferencia_det { get; set; }
         public virtual ICollection<in_producto_x_tb_bodega> in_producto_x_tb_bodega { get; set; }
+        public virtual in_ProductoTipo in_ProductoTipo { get; set; }
     }
 }
