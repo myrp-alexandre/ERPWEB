@@ -12,16 +12,12 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_sis_Impuesto_Tipo
+    public partial class tb_TarjetaCredito_x_cp_proveedor
     {
-        public tb_sis_Impuesto_Tipo()
-        {
-            this.tb_sis_Impuesto = new HashSet<tb_sis_Impuesto>();
-        }
+        public int IdTarjeta { get; set; }
+        public int IdEmpresa { get; set; }
+        public decimal IdProveedor { get; set; }
     
-        public string IdTipoImpuesto { get; set; }
-        public string nom_tipoImpuesto { get; set; }
-    
-        public virtual ICollection<tb_sis_Impuesto> tb_sis_Impuesto { get; set; }
+        public virtual tb_TarjetaCredito tb_TarjetaCredito { get; set; }
     }
 }
