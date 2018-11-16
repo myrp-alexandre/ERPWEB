@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Core.Erp.Bus.Banco;
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class ArchivosTransferenciasController : Controller
@@ -21,7 +21,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_archivos_bancos_generacion_x_empleado_list_Info ro_archivos_bancos_generacion_x_empleado_list_Info = new ro_archivos_bancos_generacion_x_empleado_list_Info();
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
-      
+        ba_Banco_Cuenta_Bus bus_cuentas_bancarias = new ba_Banco_Cuenta_Bus();
 
         int IdEmpresa = 0;
         #endregion
@@ -30,6 +30,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
+            
             return View(model);
         }
         [HttpPost]
@@ -40,25 +41,24 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_empleado_novedad(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        public ActionResult GridViewPartial_archivo_transferencia(DateTime? Fecha_ini, DateTime? Fecha_fin ,decimal? IdSucursal = 0)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-
+            ViewBag.IdSucursal = IdSucursal;
             var model = bus_archivo.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, true);
-            return PartialView("_GridViewPartial_empleado_novedad", model);
+            return PartialView("_GridViewPartial_archivo_transferencia", model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_empleado_novedad_det(int IdEmpleado = 0, decimal IdArchivo = 0)
+        public ActionResult GridViewPartial_archivo_transferencia_det()
         {
-            int IdEmpresa = Convert.ToInt32( SessionFixed.IdEmpresa);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             ro_archivos_bancos_generacion_Info model = new ro_archivos_bancos_generacion_Info();
-            model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdArchivo);
-            if (model.detalle.Count == 0)
-                model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+                model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_archivo_transferencia_det", model);
+
+
         }
         #endregion
 
@@ -188,6 +188,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina);
+
+            var lst_cuenta_bancarias = bus_cuentas_bancarias.get_list(IdEmpresa, false);
+            ViewBag.lst_cuenta = lst_cuenta_bancarias;
         }
         #endregion
 
@@ -200,7 +203,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ro_archivos_bancos_generacion_x_empleado_list_Info.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_archivos_bancos_generacion_Info model = new ro_archivos_bancos_generacion_Info();
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("__GridViewPartial_archivo_transferencia_det", model);
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_archivos_bancos_generacion_x_empleado_Info info_det)
@@ -208,7 +211,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_archivos_bancos_generacion_x_empleado_list_Info.DeleteRow(info_det.IdEmpleado, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_archivos_bancos_generacion_Info model = new ro_archivos_bancos_generacion_Info();
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("__GridViewPartial_archivo_transferencia_det", model);
         }
         #endregion
        
