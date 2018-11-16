@@ -37,6 +37,8 @@
 
 
 
+
+
 GO
 CREATE NONCLUSTERED INDEX [IX_ba_Archivo_Transferencia]
     ON [dbo].[ba_Archivo_Transferencia]([IdEmpresa] ASC, [IdArchivo] ASC, [IdBanco] ASC, [IdProceso_bancario] ASC);

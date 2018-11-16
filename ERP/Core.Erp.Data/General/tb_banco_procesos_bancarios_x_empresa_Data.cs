@@ -17,24 +17,33 @@ namespace Core.Erp.Data.General
                 using (Entities_general Context = new Entities_general())
                 {
                     if (mostrar_anulados)
-                        Lista = (from q in Context.tb_banco_procesos_bancarios_x_empresa
+                        Lista = (from q in Context.vwtb_banco_procesos_bancarios_x_empresa
                                  select new tb_banco_procesos_bancarios_x_empresa_Info
                                  {
                                      IdEmpresa=q.IdEmpresa,
+                                     IdProceso=q.IdProceso,
                                      IdBanco = q.IdBanco,
                                      IdProceso_bancario_tipo = q.IdProceso_bancario_tipo,
-                                     IdTipoNota = q.IdTipoNota,
-                                     Se_contabiliza = q.Se_contabiliza
+                                     NombreProceso=q.NombreProceso,
+                                     Codigo_Empresa=q.Codigo_Empresa,
+                                     ba_descripcion=q.ba_descripcion,
+                                      CodigoLegal=q.CodigoLegal,
+                                      estado=q.estado
+                                     
                                  }).ToList();
                     else
-                        Lista = (from q in Context.tb_banco_procesos_bancarios_x_empresa
+                        Lista = (from q in Context.vwtb_banco_procesos_bancarios_x_empresa
                                  select new tb_banco_procesos_bancarios_x_empresa_Info
                                  {
                                      IdEmpresa=q.IdEmpresa,
                                      IdBanco = q.IdBanco,
                                      IdProceso_bancario_tipo = q.IdProceso_bancario_tipo,
-                                     IdTipoNota = q.IdTipoNota,
-                                     Se_contabiliza = q.Se_contabiliza
+                                     NombreProceso = q.NombreProceso,
+                                     Codigo_Empresa = q.Codigo_Empresa,
+                                     CodigoLegal=q.CodigoLegal,
+                                     estado = q.estado
+
+
 
                                  }).ToList();
                 }
@@ -62,6 +71,8 @@ namespace Core.Erp.Data.General
                         IdProceso_bancario_tipo = Entity.IdProceso_bancario_tipo,
                         estado = Entity.estado,
                         Codigo_Empresa = Entity.Codigo_Empresa,
+                        NombreProceso=Entity.NombreProceso
+
 
                     };
                 }
@@ -73,7 +84,7 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-        private int get_id()
+        private int get_id(int IdEmpresa)
         {
             try
             {
@@ -81,6 +92,7 @@ namespace Core.Erp.Data.General
                 using (Entities_general Context = new Entities_general())
                 {
                     var lst = from q in Context.tb_banco_procesos_bancarios_x_empresa
+                              where q.IdEmpresa==IdEmpresa
                               select q;
 
                     if (lst.Count() > 0)
@@ -103,7 +115,9 @@ namespace Core.Erp.Data.General
                     tb_banco_procesos_bancarios_x_empresa Entity = new tb_banco_procesos_bancarios_x_empresa
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdProceso = info.IdProceso = get_id(),
+                        NombreProceso=info.NombreProceso,
+                        IdProceso = info.IdProceso = get_id(info.IdEmpresa),
+                        IdBanco=info.IdBanco,
                         IdProceso_bancario_tipo = info.IdProceso_bancario_tipo,
                         Codigo_Empresa = info.Codigo_Empresa,
                         estado = info.estado="A",
@@ -130,6 +144,7 @@ namespace Core.Erp.Data.General
                     if (Entity == null)
                         return false;
                     Entity.IdProceso_bancario_tipo = info.IdProceso_bancario_tipo;
+                    Entity.NombreProceso = info.NombreProceso;
                     Entity.Codigo_Empresa = info.Codigo_Empresa;
                     Entity.Se_contabiliza = info.Se_contabiliza;
                     Entity.IdTipoNota = info.IdTipoNota;

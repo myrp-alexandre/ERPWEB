@@ -13,10 +13,13 @@
     [IdUsuarioUltAnu]         VARCHAR (20)  NULL,
     [Fecha_UltAnu]            DATETIME      NULL,
     [MotivoAnulacion]         VARCHAR (100) NULL,
+    [NombreProceso]           VARCHAR (50)  NOT NULL,
     CONSTRAINT [PK_tb_banco_procesos_bancarios_x_empresa] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdProceso] ASC),
     CONSTRAINT [FK_tb_banco_procesos_bancarios_x_empresa_ba_tipo_nota] FOREIGN KEY ([IdEmpresa], [IdTipoNota]) REFERENCES [dbo].[ba_tipo_nota] ([IdEmpresa], [IdTipoNota]),
     CONSTRAINT [FK_tb_banco_procesos_bancarios_x_empresa_tb_banco] FOREIGN KEY ([IdBanco]) REFERENCES [dbo].[tb_banco] ([IdBanco])
 );
+
+
 
 
 

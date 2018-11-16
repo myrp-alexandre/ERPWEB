@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,15 @@ namespace Core.Erp.Info.General
     {
         public int IdEmpresa { get; set; }
         public int IdProceso { get; set; }
+        [Required(ErrorMessage = "El proceso es obligatorio")]
         public string IdProceso_bancario_tipo { get; set; }
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "El campo nombre proceso debe tener mínimo 4 caracteres y máximo 250")]
+        [Required(ErrorMessage = "El campo nombre del proceso es obligatorio")]
+        public string NombreProceso { get; set; }
+        [Required(ErrorMessage = "El campo banco es obligatorio")]
         public int IdBanco { get; set; }
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "El campo codigo de empresa debe tener mínimo 4 caracteres y máximo 250")]
+        [Required(ErrorMessage = "El campo codigo  es obligatorio")]
         public string Codigo_Empresa { get; set; }
         public Nullable<int> IdTipoNota { get; set; }
         public Nullable<bool> Se_contabiliza { get; set; }
@@ -23,6 +31,8 @@ namespace Core.Erp.Info.General
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
 
+        public string ba_descripcion { get; set; }
+        public string CodigoLegal { get; set; }
 
 
 

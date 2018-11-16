@@ -31,24 +31,36 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="TipoPermiso">Proceso*</label>
-                    @Html.DropDownListFor(q => q.IdProceso_bancario_tipo, new SelectList(ViewBag.list_tipo_permiso), new { @class = "form-control", @id = "TipoPermiso" })
+                    @Html.DropDownListFor(q => q.IdProceso_bancario_tipo, new SelectList(ViewBag.list_tipo_permiso), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdProceso_bancario_tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="ba_descripcion">Codigo otorgado por el banco*</label>
                     @Html.TextBoxFor(q => q.Codigo_Empresa, new { @class = "form-control", @id = "ba_descripcion" })
                     @Html.ValidationMessageFor(q => q.Codigo_Empresa, "", new { @class = "text-danger" })
                 </div>
             </div>
+
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ba_descripcion">Nombre del proceso*</label>
+                    @Html.TextBoxFor(q => q.NombreProceso, new { @class = "form-control", @id = "ba_descripcion" })
+                    @Html.ValidationMessageFor(q => q.NombreProceso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
 
     <div class="box-footer">

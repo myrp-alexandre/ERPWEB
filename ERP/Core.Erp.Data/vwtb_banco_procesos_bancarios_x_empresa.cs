@@ -12,24 +12,18 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_banco_procesos_bancarios_x_empresa
+    public partial class vwtb_banco_procesos_bancarios_x_empresa
     {
         public int IdEmpresa { get; set; }
         public int IdProceso { get; set; }
         public string IdProceso_bancario_tipo { get; set; }
         public int IdBanco { get; set; }
         public string Codigo_Empresa { get; set; }
+        public string ba_descripcion { get; set; }
+        public string CodigoLegal { get; set; }
+        public string NombreProceso { get; set; }
         public Nullable<int> IdTipoNota { get; set; }
         public Nullable<bool> Se_contabiliza { get; set; }
         public string estado { get; set; }
-        public Nullable<System.DateTime> Fecha_Transaccion { get; set; }
-        public string IdUsuarioUltModi { get; set; }
-        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
-        public string IdUsuarioUltAnu { get; set; }
-        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string MotivoAnulacion { get; set; }
-        public string NombreProceso { get; set; }
-    
-        public virtual tb_banco tb_banco { get; set; }
     }
 }

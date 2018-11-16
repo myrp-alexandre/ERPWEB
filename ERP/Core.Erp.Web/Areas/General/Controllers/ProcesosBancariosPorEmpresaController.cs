@@ -32,7 +32,7 @@ namespace Core.Erp.Web.Areas.General
 
         #region Acciones
 
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa)
         {
             tb_banco_procesos_bancarios_x_empresa_Info model = new tb_banco_procesos_bancarios_x_empresa_Info();
             cargar_combos();
@@ -47,9 +47,10 @@ namespace Core.Erp.Web.Areas.General
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdBanco = 0)
+        public ActionResult Modificar(int IdEmpresa=0, int IdProceso = 0)
         {
-            tb_banco_procesos_bancarios_x_empresa_Info model = bus_proceso_x_empresa.get_info(IdBanco);
+            cargar_combos();
+            tb_banco_procesos_bancarios_x_empresa_Info model = bus_proceso_x_empresa.get_info(IdProceso);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
@@ -62,9 +63,10 @@ namespace Core.Erp.Web.Areas.General
 
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdBanco = 0)
+        public ActionResult Anular(int  IdEmpresa=0, int IdProceso = 0)
         {
-            tb_banco_procesos_bancarios_x_empresa_Info model = bus_proceso_x_empresa.get_info(IdBanco);
+            cargar_combos();
+            tb_banco_procesos_bancarios_x_empresa_Info model = bus_proceso_x_empresa.get_info(IdProceso);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);

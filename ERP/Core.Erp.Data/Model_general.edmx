@@ -34,6 +34,7 @@
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
+          <Property Name="NombreProceso" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_bodega">
           <Key>
@@ -463,6 +464,30 @@
           <Property Name="FechaTransaccion" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_banco_procesos_bancarios_x_empresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwtb_banco_procesos_bancarios_x_empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProceso" />
+            <PropertyRef Name="IdProceso_bancario_tipo" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="CodigoLegal" />
+            <PropertyRef Name="NombreProceso" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdProceso" Type="int" Nullable="false" />
+          <Property Name="IdProceso_bancario_tipo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="Codigo_Empresa" Type="varchar" MaxLength="50" />
+          <Property Name="ba_descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CodigoLegal" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NombreProceso" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTipoNota" Type="int" />
+          <Property Name="Se_contabiliza" Type="bit" />
+          <Property Name="estado" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.dbo.vwtb_ciudad_id' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwtb_ciudad_id">
           <Key>
@@ -844,6 +869,21 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwtb_comprobantes_no_aut
           <EntitySet Name="tb_sis_reporte" EntityType="Self.tb_sis_reporte" Schema="web" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Self.tb_sis_reporte_x_seg_usuario" Schema="web" store:Type="Tables" />
           <EntitySet Name="tbl_TransaccionesAutorizadas" EntityType="Self.tbl_TransaccionesAutorizadas" Schema="web" store:Type="Tables" />
+          <EntitySet Name="vwtb_banco_procesos_bancarios_x_empresa" EntityType="Self.vwtb_banco_procesos_bancarios_x_empresa" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vwtb_banco_procesos_bancarios_x_empresa].[IdEmpresa] AS [IdEmpresa], 
+[vwtb_banco_procesos_bancarios_x_empresa].[IdProceso] AS [IdProceso], 
+[vwtb_banco_procesos_bancarios_x_empresa].[IdProceso_bancario_tipo] AS [IdProceso_bancario_tipo], 
+[vwtb_banco_procesos_bancarios_x_empresa].[IdBanco] AS [IdBanco], 
+[vwtb_banco_procesos_bancarios_x_empresa].[Codigo_Empresa] AS [Codigo_Empresa], 
+[vwtb_banco_procesos_bancarios_x_empresa].[ba_descripcion] AS [ba_descripcion], 
+[vwtb_banco_procesos_bancarios_x_empresa].[CodigoLegal] AS [CodigoLegal], 
+[vwtb_banco_procesos_bancarios_x_empresa].[NombreProceso] AS [NombreProceso], 
+[vwtb_banco_procesos_bancarios_x_empresa].[IdTipoNota] AS [IdTipoNota], 
+[vwtb_banco_procesos_bancarios_x_empresa].[Se_contabiliza] AS [Se_contabiliza], 
+[vwtb_banco_procesos_bancarios_x_empresa].[estado] AS [estado]
+FROM [dbo].[vwtb_banco_procesos_bancarios_x_empresa] AS [vwtb_banco_procesos_bancarios_x_empresa]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwtb_ciudad_id" EntityType="Self.vwtb_ciudad_id" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [vwtb_ciudad_id].[IdCiudad] AS [IdCiudad]
@@ -1877,6 +1917,7 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
             <End Role="tb_banco" EntitySet="tb_banco" />
             <End Role="tb_banco_procesos_bancarios_x_empresa" EntitySet="tb_banco_procesos_bancarios_x_empresa" />
           </AssociationSet>
+          <EntitySet Name="vwtb_banco_procesos_bancarios_x_empresa" EntityType="Model_general.vwtb_banco_procesos_bancarios_x_empresa" />
         </EntityContainer>
         <EntityType Name="vwtb_bodega_x_sucursal">
           <Key>
@@ -1947,6 +1988,7 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NombreProceso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_banco" Relationship="Model_general.FK_tb_banco_procesos_bancarios_x_empresa_tb_banco" FromRole="tb_banco_procesos_bancarios_x_empresa" ToRole="tb_banco" />
         </EntityType>
         <Association Name="FK_tb_banco_procesos_bancarios_x_empresa_tb_banco">
@@ -1961,6 +2003,28 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwtb_banco_procesos_bancarios_x_empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProceso" />
+            <PropertyRef Name="IdProceso_bancario_tipo" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="CodigoLegal" />
+            <PropertyRef Name="NombreProceso" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProceso" Type="Int32" Nullable="false" />
+          <Property Name="IdProceso_bancario_tipo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="Codigo_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ba_descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoLegal" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NombreProceso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoNota" Type="Int32" />
+          <Property Name="Se_contabiliza" Type="Boolean" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2482,6 +2546,7 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
           <EntitySetMapping Name="tb_banco_procesos_bancarios_x_empresa">
             <EntityTypeMapping TypeName="Model_general.tb_banco_procesos_bancarios_x_empresa">
               <MappingFragment StoreEntitySet="tb_banco_procesos_bancarios_x_empresa">
+                <ScalarProperty Name="NombreProceso" ColumnName="NombreProceso" />
                 <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
                 <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
                 <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
@@ -2491,6 +2556,23 @@ FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizad
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="Se_contabiliza" ColumnName="Se_contabiliza" />
                 <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="Codigo_Empresa" ColumnName="Codigo_Empresa" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdProceso_bancario_tipo" ColumnName="IdProceso_bancario_tipo" />
+                <ScalarProperty Name="IdProceso" ColumnName="IdProceso" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_banco_procesos_bancarios_x_empresa">
+            <EntityTypeMapping TypeName="Model_general.vwtb_banco_procesos_bancarios_x_empresa">
+              <MappingFragment StoreEntitySet="vwtb_banco_procesos_bancarios_x_empresa">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Se_contabiliza" ColumnName="Se_contabiliza" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="NombreProceso" ColumnName="NombreProceso" />
+                <ScalarProperty Name="CodigoLegal" ColumnName="CodigoLegal" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
                 <ScalarProperty Name="Codigo_Empresa" ColumnName="Codigo_Empresa" />
                 <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
                 <ScalarProperty Name="IdProceso_bancario_tipo" ColumnName="IdProceso_bancario_tipo" />

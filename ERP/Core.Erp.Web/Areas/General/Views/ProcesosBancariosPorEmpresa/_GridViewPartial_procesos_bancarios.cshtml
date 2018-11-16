@@ -52,7 +52,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("Estado")) == "I")
+            if (Convert.ToString(e.GetValue("estado")) == "I")
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -62,11 +62,11 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdBanco = DataBinder.Eval(tc.DataItem, "IdBanco") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdBanco = DataBinder.Eval(tc.DataItem, "IdBanco") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdProceso = DataBinder.Eval(tc.DataItem, "IdProceso") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdProceso = DataBinder.Eval(tc.DataItem, "IdProceso") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -83,19 +83,12 @@
         });
 
 
-        settings.Columns.Add("IdBanco", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("ba_descripcion", "Descripción").Width = Unit.Percentage(40);
-        settings.Columns.Add("ba_Num_Cuenta", "Número de cuenta").Width = Unit.Percentage(20);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EstadoBool";
-            column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
-            column.EditorProperties().CheckBox(sp =>
-            {
+        settings.Columns.Add("IdProceso", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdProceso_bancario_tipo", "Id Proceso").Width = Unit.Percentage(40);
+        settings.Columns.Add("NombreProceso", "Descripcion").Width = Unit.Percentage(20);
+        settings.Columns.Add("Codigo_Empresa", "Codigo empresa").Width = Unit.Percentage(20);
+        settings.Columns.Add("CodigoLegal", "Codigo banco").Width = Unit.Percentage(20);
 
-            });
-        });
     });
 }
 @grid.Bind(Model).GetHtml()

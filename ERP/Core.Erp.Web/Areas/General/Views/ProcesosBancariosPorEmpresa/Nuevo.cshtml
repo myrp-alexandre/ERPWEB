@@ -47,7 +47,20 @@
         </div>
     </div>
 
-  
+    <div class="row">
+        <div class="col-md-12">
+           
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ba_descripcion">Nombre del proceso*</label>
+                    @Html.TextBoxFor(q => q.NombreProceso, new { @class = "form-control", @id = "ba_descripcion" })
+                    @Html.ValidationMessageFor(q => q.NombreProceso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

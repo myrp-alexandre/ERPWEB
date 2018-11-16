@@ -61,8 +61,9 @@
         <EntityTypeShape EntityType="Model_general.tbl_usuario_ftp" Width="1.5" PointX="19.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_general.tbl_TransaccionesAutorizadas" Width="1.5" PointX="0.75" PointY="19.75" />
         <EntityTypeShape EntityType="Model_general.tb_sis_log_error" Width="1.5" PointX="19.375" PointY="3.75" />
-        <EntityTypeShape EntityType="Model_general.tb_banco_procesos_bancarios_x_empresa" Width="1.5" PointX="5.25" PointY="28.125" />
+        <EntityTypeShape EntityType="Model_general.tb_banco_procesos_bancarios_x_empresa" Width="1.5" PointX="5.25" PointY="28" />
         <AssociationConnector Association="Model_general.FK_tb_banco_procesos_bancarios_x_empresa_tb_banco" />
+        <EntityTypeShape EntityType="Model_general.vwtb_banco_procesos_bancarios_x_empresa" Width="1.5" PointX="19.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
