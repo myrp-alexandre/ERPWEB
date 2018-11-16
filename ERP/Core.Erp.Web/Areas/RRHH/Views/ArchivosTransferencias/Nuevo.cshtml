@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_archivos_bancos_generacion_Info
 @{
-    ViewBag.Title = "Nueva novedad";
+    ViewBag.Title = "Nueva archivo de transferencia";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -24,18 +24,14 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdNomina_Tipo">Nómina*</label>
                     @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
                     @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdNomina_TipoLiqui">Tipo liquidación de nómina*</label>
                     @Html.DropDownListFor(q => q.IdNominaTipo, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
@@ -44,13 +40,30 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco">Banco*</label>
+                    @Html.DropDownListFor(q => q.IdCuentaBancaria, new SelectList(ViewBag.lst_cuenta_bancarias, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
+                    @Html.ValidationMessageFor(q => q.IdCuentaBancaria, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco">Tipo de archivo*</label>
+                    @Html.DropDownListFor(q => q.IdProceso_Bancario, new SelectList(ViewBag.lst_procesos, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
+                    @Html.ValidationMessageFor(q => q.IdProceso_Bancario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="detalle">Detalle de la novedad</label>
-                    @Html.Action("GridViewPartial_empleado_novedad_det", new { IdArchivo = Model.IdArchivo })
+                    <label for="detalle">Detalle del archivo</label>
+                    @Html.Action("GridViewPartial_archivo_transferencia_det")
                     @Html.ValidationMessageFor(q => q.detalle, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -60,7 +73,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","EmpleadoNovedad",new { Area = "RRHH" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","ArvhivosTransfeencias",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
