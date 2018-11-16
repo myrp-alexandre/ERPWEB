@@ -61,11 +61,11 @@ if((select  COUNT(IdPeriodo) from ro_rol where IdEmpresa=@IdEmpresa and IdPeriod
 update ro_rol set UsuarioModifica=@IdUsuario, FechaModifica=GETDATE() where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPEriodo and IdNominaTipo=1 and IdNominaTipoLiqui=3
 else
 insert into ro_rol
-(IdEmpresa,		IdNominaTipo,		IdNominaTipoLiqui,		IdPeriodo,			Descripcion,				Observacion,				Cerrado,			FechaIngresa,
+(IdEmpresa,	 IdRol,	IdNominaTipo,		IdNominaTipoLiqui,		IdPeriodo,			Descripcion,				Observacion,				Cerrado,			FechaIngresa,
 UsuarioIngresa,	FechaModifica,		UsuarioModifica,		FechaAnula,			UsuarioAnula,				MotivoAnula,				UsuarioCierre,		FechaCierre,
 IdCentroCosto)
 values
-(@IdEmpresa		,1					,3						,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
+(@IdEmpresa	, @IdRol	,1					,3						,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
 ,@IdUsuario		,null				,null					,null				,null						,null						,null				,null
 ,null)
 
@@ -87,8 +87,8 @@ insert into ro_rol_detalle
 select
 
 
-@IdEmpresa,				1,						4,							@IdPeriodo,			emp.IdEmpleado,		@IdRubro_calculado, '1',			SUM(acum.Valor),
-1,						'Pago decimo cuarto sueldo', null,					null,				 null,										 null
+@IdEmpresa,				@IdRol,						emp.IdSucursal,									emp.IdEmpleado,		@IdRubro_calculado, '1',			SUM(acum.Valor),
+1,						'Pago decimo cuarto sueldo'
 
  from ro_rol_detalle_x_rubro_acumulado acum, ro_empleado emp
  where acum.IdEmpresa=emp.IdEmpresa
@@ -96,5 +96,5 @@ select
  and acum.Estado='PEN'
  AND emp.em_status='EST_ACT'
  AND acum.IdRubro='200'
- group by emp.IdEmpleado               
+ group by emp.IdEmpleado , emp.IdSucursal              
  end
