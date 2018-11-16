@@ -117,7 +117,7 @@ namespace Core.Erp.Data.General
                         IdEmpresa = info.IdEmpresa,
                         NombreProceso=info.NombreProceso,
                         IdProceso = info.IdProceso = get_id(info.IdEmpresa),
-                        IdProceso = info.IdProceso = get_id(),
+                       // IdProceso = info.IdProceso = get_id(),
                         IdBanco=info.IdBanco,
                         IdProceso_bancario_tipo = info.IdProceso_bancario_tipo,
                         Codigo_Empresa = info.Codigo_Empresa,

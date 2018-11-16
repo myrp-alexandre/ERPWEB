@@ -870,19 +870,19 @@
       <DependentUpon>Model_facturacion.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model_general.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Model_general.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Model_general.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Model_general.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Model_general.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Model_general.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Model_importacion.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1429,6 +1429,9 @@
     <Compile Include="tb_ciudad.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
+    <Compile Include="tb_dia.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_empresa.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
@@ -1462,7 +1465,16 @@
     <Compile Include="tb_sis_Documento_Tipo.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
+    <Compile Include="tb_sis_Documento_Tipo_Reporte_x_Empresa.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_sis_Documento_Tipo_Talonario.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_sis_Documento_Tipo_x_Empresa.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_sis_formulario.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_sis_Impuesto.cs">
@@ -1484,12 +1496,6 @@
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_sucursal.cs">
-      <DependentUpon>Model_general.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tb_TarjetaCredito.cs">
-      <DependentUpon>Model_general.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tb_TarjetaCredito_x_cp_proveedor.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_transportista.cs">
@@ -1981,6 +1987,9 @@
     <Compile Include="vwtb_bodega_x_sucursal.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwtb_Ciudad.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwtb_ciudad_id.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
@@ -1996,12 +2005,6 @@
     <Compile Include="vwtb_provincia.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Model_general.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model_general.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -2068,13 +2071,17 @@
     <None Include="Model_facturacion.edmx.diagram">
       <DependentUpon>Model_facturacion.edmx</DependentUpon>
     </None>
-    <None Include="Model_general.edmx.diagram">
-      <DependentUpon>Model_general.edmx</DependentUpon>
-    </None>
+    <EntityDeploy Include="Model_general.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_general.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <EntityDeploy Include="Model_importacion.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_importacion.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Model_general.edmx.diagram">
+      <DependentUpon>Model_general.edmx</DependentUpon>
+    </None>
     <None Include="Model_importacion.edmx.diagram">
       <DependentUpon>Model_importacion.edmx</DependentUpon>
     </None>
@@ -2200,13 +2207,13 @@
       <LastGenOutput>Model_facturacion.cs</LastGenOutput>
     </Content>
     <Content Include="Model_general.Context.tt">
+      <DependentUpon>Model_general.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model_general.Context.cs</LastGenOutput>
-      <DependentUpon>Model_general.edmx</DependentUpon>
     </Content>
     <Content Include="Model_general.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_general.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model_general.cs</LastGenOutput>
     </Content>
     <Content Include="Model_importacion.Context.tt">

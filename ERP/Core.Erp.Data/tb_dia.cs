@@ -12,9 +12,11 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_persona_tipo
+    public partial class tb_dia
     {
-        public string IdTipo_Persona { get; set; }
-        public string Descricpion { get; set; }
+        public byte idDia { get; set; }
+        public string sdia { get; set; }
+        public string nemonico { get; set; }
+        public string sdiaIngles { get; set; }
     }
 }

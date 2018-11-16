@@ -12,9 +12,13 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_persona_tipo
+    public partial class vwtb_Ciudad
     {
-        public string IdTipo_Persona { get; set; }
-        public string Descricpion { get; set; }
+        public string IdCiudad { get; set; }
+        public string Cod_Ciudad { get; set; }
+        public string Descripcion_Ciudad { get; set; }
+        public string Estado { get; set; }
+        public string IdPais { get; set; }
+        public string IdProvincia { get; set; }
     }
 }

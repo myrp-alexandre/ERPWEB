@@ -12,9 +12,17 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_persona_tipo
+    public partial class tb_sis_formulario
     {
-        public string IdTipo_Persona { get; set; }
-        public string Descricpion { get; set; }
+        public string IdFormulario { get; set; }
+        public string cod_Formulario { get; set; }
+        public string nom_Formulario { get; set; }
+        public string CodModulo { get; set; }
+        public string Text { get; set; }
+        public string observacion { get; set; }
+        public bool estado { get; set; }
+        public string nom_Asembly { get; set; }
+    
+        public virtual tb_modulo tb_modulo { get; set; }
     }
 }

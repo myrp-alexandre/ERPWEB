@@ -14,8 +14,8 @@ namespace Core.Erp.Data.General
         {
             try
             {
-                List<tb_TarjetaCredito_Info> Lista;
-
+                List<tb_TarjetaCredito_Info> Lista=new List<tb_TarjetaCredito_Info>();
+                /*
                 using (Entities_general db = new Entities_general())
                 {
                     if (MostrarAnulado == false)
@@ -36,7 +36,7 @@ namespace Core.Erp.Data.General
                             Estado = q.Estado
                         }).ToList();
                     }
-                }
+                }*/
                 return Lista;
             }
             catch (Exception)
@@ -53,10 +53,10 @@ namespace Core.Erp.Data.General
                 int ID = 1;
                 using (Entities_general db = new Entities_general())
                 {
-                    var Lista = db.tb_TarjetaCredito.Select(q=> q.IdTarjeta);
+                    //var Lista = db.tb_TarjetaCredito.Select(q=> q.IdTarjeta);
 
-                    if (Lista.Count() > 0)
-                        ID = Lista.Max() + 1;
+                    //if (Lista.Count() > 0)
+                    //    ID = Lista.Max() + 1;
                 }
                 return ID;
             }
@@ -72,12 +72,12 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general db = new Entities_general())
                 {
-                    db.tb_TarjetaCredito.Add(new tb_TarjetaCredito
-                    {
-                        IdTarjeta = get_id(),
-                        NombreTarjeta = info.NombreTarjeta,
-                        Estado = info.Estado
-                    });
+                    //db.tb_TarjetaCredito.Add(new tb_TarjetaCredito
+                    //{
+                    //    IdTarjeta = get_id(),
+                    //    NombreTarjeta = info.NombreTarjeta,
+                    //    Estado = info.Estado
+                    //});
 
                     db.SaveChanges();
                 }
@@ -96,15 +96,15 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general db = new Entities_general())
                 {
-                    tb_TarjetaCredito entity = db.tb_TarjetaCredito.Where(q => q.IdTarjeta == info.IdTarjeta).FirstOrDefault();
+                    //tb_TarjetaCredito entity = db.tb_TarjetaCredito.Where(q => q.IdTarjeta == info.IdTarjeta).FirstOrDefault();
 
-                    if (entity == null)
-                    {
-                        return false;
-                    }
+                    //if (entity == null)
+                    //{
+                    //    return false;
+                    //}
 
-                    entity.NombreTarjeta = info.NombreTarjeta;
-                    entity.Estado = info.Estado;
+                    //entity.NombreTarjeta = info.NombreTarjeta;
+                    //entity.Estado = info.Estado;
 
                     db.SaveChanges();
                 }
@@ -123,14 +123,14 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general db = new Entities_general())
                 {
-                    tb_TarjetaCredito entity = db.tb_TarjetaCredito.Where(q => q.IdTarjeta == info.IdTarjeta).FirstOrDefault();
+                    //tb_TarjetaCredito entity = db.tb_TarjetaCredito.Where(q => q.IdTarjeta == info.IdTarjeta).FirstOrDefault();
 
-                    if (entity == null)
-                    {
-                        return false;
-                    }
+                    //if (entity == null)
+                    //{
+                    //    return false;
+                    //}
 
-                    entity.Estado = info.Estado;
+                    //entity.Estado = info.Estado;
 
                     db.SaveChanges();
                 }
