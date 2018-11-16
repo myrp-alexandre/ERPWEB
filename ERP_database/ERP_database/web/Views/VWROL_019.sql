@@ -1,6 +1,6 @@
 ﻿CREATE VIEW web.VWROL_019
 AS
-SELECT        rol_det.IdEmpresa, rol_det.IdNominaTipo, rol_det.IdNominaTipoLiqui, rol_det.IdPeriodo, rol_det.IdEmpleado, rol_det.IdRubro, rol_det.Orden, rol_det.Valor, rol_det.Observacion, per.pe_anio, per.pe_mes, 
+SELECT        rol_det.IdEmpresa, rol.IdNominaTipo, rol.IdNominaTipoLiqui, rol.IdPeriodo, rol_det.IdEmpleado, rol_det.IdRubro, rol_det.Orden, rol_det.Valor, rol_det.Observacion, per.pe_anio, per.pe_mes, 
                          div.Descripcion AS Division, dep.de_descripcion AS Departamento, carg.ca_descripcion AS Cargo, dbo.ro_rubro_tipo.ru_descripcion AS Rubro, dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina AS NominaTipo, 
                          dbo.ro_Nomina_Tipo.Descripcion AS Nomina, pers.pe_cedulaRuc AS Cedula, pers.pe_nombreCompleto AS Empleado, dbo.ro_rubro_tipo.ru_tipo, CAST(per.pe_FechaIni AS date) AS FechaIni, CAST(per.pe_FechaFin AS date) 
                          AS FechaFin, dbo.ro_rubro_tipo.ru_codRolGen
@@ -18,9 +18,8 @@ FROM            dbo.ro_rubro_tipo INNER JOIN
                          rol.IdNominaTipoLiqui = ro_per_x_nom.IdNomina_TipoLiqui AND rol.IdPeriodo = ro_per_x_nom.IdPeriodo INNER JOIN
                          dbo.ro_periodo AS per ON ro_per_x_nom.IdEmpresa = per.IdEmpresa AND ro_per_x_nom.IdPeriodo = per.IdPeriodo ON dbo.ro_Nomina_Tipoliqui.IdEmpresa = rol.IdEmpresa AND 
                          dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo = rol.IdNominaTipo AND dbo.ro_Nomina_Tipoliqui.IdNomina_TipoLiqui = rol.IdNominaTipoLiqui INNER JOIN
-                         dbo.ro_Nomina_Tipo ON dbo.ro_Nomina_Tipoliqui.IdEmpresa = dbo.ro_Nomina_Tipo.IdEmpresa AND dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo = dbo.ro_Nomina_Tipo.IdNomina_Tipo ON rol_det.IdEmpresa = rol.IdEmpresa AND 
-                         rol_det.IdNominaTipo = rol.IdNominaTipo AND rol_det.IdNominaTipoLiqui = rol.IdNominaTipoLiqui AND rol_det.IdPeriodo = rol.IdPeriodo
-
+                         dbo.ro_Nomina_Tipo ON dbo.ro_Nomina_Tipoliqui.IdEmpresa = dbo.ro_Nomina_Tipo.IdEmpresa AND dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo = dbo.ro_Nomina_Tipo.IdNomina_Tipo ON rol_det.IdRol = rol.IdRol AND 
+                         rol_det.IdEmpresa = rol.IdEmpresa AND rol.IdNominaTipo = rol.IdNominaTipo AND rol.IdNominaTipoLiqui = rol.IdNominaTipoLiqui AND rol.IdPeriodo = rol.IdPeriodo
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_019';

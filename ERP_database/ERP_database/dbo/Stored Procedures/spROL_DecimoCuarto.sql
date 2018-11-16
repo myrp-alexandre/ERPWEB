@@ -6,7 +6,8 @@ CREATE PROCEDURE [dbo].[spROL_DecimoCuarto]
 	@IdPeriodo int,
 	@Region varchar(10),
 	@IdUsuario varchar(50),
-	@observacion varchar(200)
+	@observacion varchar(200),
+	@IdRol int
 	)
 	as
 BEGIN
@@ -16,7 +17,7 @@ declare
 @Fi date,
 @Ff date
 
--- variables pruebas
+ ----variables pruebas
 	--@IdEmpresa int,
 	--@IdPeriodo int,
 	--@Region varchar(10),
@@ -45,32 +46,33 @@ values
 
 
 
-if((select  COUNT(IdPeriodo) from ro_periodo_x_ro_Nomina_TipoLiqui where IdEmpresa=@IdEmpresa and IdNomina_Tipo=1 and IdNomina_TipoLiqui=4)=0)
+if((select  COUNT(IdPeriodo) from ro_periodo_x_ro_Nomina_TipoLiqui where IdEmpresa=@IdEmpresa and IdNomina_Tipo=1 and IdNomina_TipoLiqui=3)=0)
 insert into ro_periodo_x_ro_Nomina_TipoLiqui(
 IdEmpresa,				IdNomina_Tipo,			IdNomina_TipoLiqui,					IdPeriodo,					Cerrado			,Procesado,			Contabilizado
 )
 values
-(@IdEmpresa,			1,						4,									@IdPeriodo,					'N',			'S',				'N')
+(@IdEmpresa,			1,						3,									@IdPeriodo,					'N',			'S',				'N')
 
 
 
 
 
-if((select  COUNT(IdPeriodo) from ro_rol where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPEriodo and IdNominaTipo=1 and IdNominaTipoLiqui=4)>0)
-update ro_rol set UsuarioModifica=@IdUsuario, FechaModifica=GETDATE() where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPEriodo and IdNominaTipo=1 and IdNominaTipoLiqui=4
+if((select  COUNT(IdPeriodo) from ro_rol where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPEriodo and IdNominaTipo=1 and IdNominaTipoLiqui=3)>0)
+update ro_rol set UsuarioModifica=@IdUsuario, FechaModifica=GETDATE() where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPEriodo and IdNominaTipo=1 and IdNominaTipoLiqui=3
 else
 insert into ro_rol
 (IdEmpresa,		IdNominaTipo,		IdNominaTipoLiqui,		IdPeriodo,			Descripcion,				Observacion,				Cerrado,			FechaIngresa,
 UsuarioIngresa,	FechaModifica,		UsuarioModifica,		FechaAnula,			UsuarioAnula,				MotivoAnula,				UsuarioCierre,		FechaCierre,
 IdCentroCosto)
 values
-(@IdEmpresa		,1					,4						,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
+(@IdEmpresa		,1					,3						,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
 ,@IdUsuario		,null				,null					,null				,null						,null						,null				,null
 ,null)
 
 
 
-delete ro_rol_detalle where IdEmpresa=@IdEmpresa and IdNominaTipo=1 and IdNominaTipoLiqui=4 and IdPeriodo=@IdPeriodo
+
+delete ro_rol_detalle where IdEmpresa=@IdEmpresa and IdRol= @IdRol 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando decimo cuarto sueldo-------------------------------------------------------------------------------------------------<
@@ -78,11 +80,12 @@ delete ro_rol_detalle where IdEmpresa=@IdEmpresa and IdNominaTipo=1 and IdNomina
 
 select @IdRubro_calculado= IdRubro_DIII from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle
-(IdEmpresa,				IdNominaTipo,			IdNominaTipoLiqui,			IdPeriodo,			IdEmpleado,			IdRubro,			Orden,			Valor
-,rub_visible_reporte,	Observacion,			TipoMovimiento,				IdCentroCosto		,IdCentroCosto_sub_centro_costo			,IdPunto_cargo)
+(IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
+,rub_visible_reporte,	Observacion)
 
 
 select
+
 
 @IdEmpresa,				1,						4,							@IdPeriodo,			emp.IdEmpleado,		@IdRubro_calculado, '1',			SUM(acum.Valor),
 1,						'Pago decimo cuarto sueldo', null,					null,				 null,										 null

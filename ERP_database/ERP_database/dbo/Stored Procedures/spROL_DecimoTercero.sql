@@ -6,7 +6,8 @@ CREATE PROCEDURE [dbo].[spROL_DecimoTercero]
 	@IdPeriodo int,
 	@Region varchar(10),
 	@IdUsuario varchar(50),
-	@observacion varchar(200)
+	@observacion varchar(200),
+	@IdRol int
 	)
 	as
 BEGIN
@@ -71,7 +72,7 @@ values
 
 
 
-delete ro_rol_detalle where IdEmpresa=@IdEmpresa and IdNominaTipo=1 and IdNominaTipoLiqui=3 and IdPeriodo=@IdPeriodo
+delete ro_rol_detalle where IdEmpresa=@IdEmpresa and IdRol= @IdRol 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando decimo cuarto sueldo-------------------------------------------------------------------------------------------------<
@@ -79,14 +80,14 @@ delete ro_rol_detalle where IdEmpresa=@IdEmpresa and IdNominaTipo=1 and IdNomina
 
 select @IdRubro_calculado= IdRubro_DIII from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle
-(IdEmpresa,				IdNominaTipo,			IdNominaTipoLiqui,			IdPeriodo,			IdEmpleado,			IdRubro,			Orden,			Valor
-,rub_visible_reporte,	Observacion,			TipoMovimiento,				IdCentroCosto		,IdCentroCosto_sub_centro_costo			,IdPunto_cargo)
+(IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
+,rub_visible_reporte,	Observacion)
 
 
 select
 
-@IdEmpresa,				1,						3,							@IdPeriodo,			emp.IdEmpleado,		@IdRubro_calculado, '1',			SUM(acum.Valor),
-1,						'Pago decimo tercer sueldo', null,					null,				 null,										 null
+@IdEmpresa,				IdRol,						emp.IdSucursal,										emp.IdEmpleado,		@IdRubro_calculado, '1',			SUM(acum.Valor),
+1,						'Pago decimo tercer sueldo'
 
  from ro_rol_detalle_x_rubro_acumulado acum, ro_empleado emp
  where acum.IdEmpresa=emp.IdEmpresa

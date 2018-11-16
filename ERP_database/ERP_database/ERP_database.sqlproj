@@ -297,7 +297,6 @@
     <Build Include="dbo\Tables\seg_Menu.sql" />
     <Build Include="dbo\Tables\ro_Parametros.sql" />
     <Build Include="dbo\Tables\in_subgrupo.sql" />
-    <Build Include="dbo\Tables\tb_banco_procesos_bancarios_tipo.sql" />
     <Build Include="dbo\Tables\cp_proveedor_codigo_SRI.sql" />
     <Build Include="dbo\Tables\com_catalogo.sql" />
     <Build Include="dbo\Tables\Af_Activo_fijo_CtasCbles.sql" />
@@ -472,7 +471,6 @@
     <Build Include="dbo\Views\vwINV_FJ_Rpt003.sql" />
     <Build Include="dbo\Views\vwfa_factura_subtotal_iva_0_totales.sql" />
     <Build Include="dbo\Views\vwCONTA_Rpt003.sql" />
-    <Build Include="dbo\Views\vwRo_Generar_Decimo.sql" />
     <Build Include="dbo\Views\vwAf_Activo_fijo_cuentas_para_contabilizar_por_tipo.sql" />
     <Build Include="dbo\Views\vwINV_FJ_Rpt004.sql" />
     <Build Include="dbo\Views\vwfa_factura_SubTotal_Iva_total.sql" />
@@ -621,7 +619,6 @@
     <Build Include="dbo\Views\vwINV_Rpt024.sql" />
     <Build Include="dbo\Views\vwcp_orden_giro_total_saldo.sql" />
     <Build Include="dbo\Views\vwfa_Factura_Dev.sql" />
-    <Build Include="dbo\Views\vwtb_tb_banco_procesos_bancarios.sql" />
     <Build Include="web\Views\VWCXP_005.sql" />
     <Build Include="Fj_servindustrias\Views\vwACTF_FJ_Rpt002.sql" />
     <Build Include="dbo\Views\vwINV_Rpt025.sql" />
@@ -718,12 +715,10 @@
     <Build Include="dbo\Views\vwRo_Contrato.sql" />
     <Build Include="dbo\Views\vwFAC_Rpt004.sql" />
     <Build Include="dbo\Views\vwcp_Tipo_Impresion_Cheq.sql" />
-    <Build Include="dbo\Views\vwba_Archivo_Transferencia_Det.sql" />
     <Build Include="dbo\Views\vwAf_ActivoFijo.sql" />
     <Build Include="dbo\Views\vwFAC_Rpt008_cuotas.sql" />
     <Build Include="dbo\Views\vwFAC_Rpt004_Detalle.sql" />
     <Build Include="dbo\Views\vwcp_TipoServicioxProve.sql" />
-    <Build Include="dbo\Views\vwba_Archivo_Transferencia_Det_sum_valores.sql" />
     <Build Include="dbo\Views\vwAF_OrdenCompra_x_Proveedor_Factura_ActivoFijo.sql" />
     <Build Include="dbo\Views\vwRo_Departamento_X_Area.sql" />
     <Build Include="web\Views\VWACTF_001.sql" />
@@ -734,7 +729,6 @@
     <Build Include="dbo\Views\vwFAC_Rpt006.sql" />
     <Build Include="dbo\Views\vwct_anio_fiscal_x_cuenta_utilidad.sql" />
     <Build Include="dbo\Views\vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.sql" />
-    <Build Include="dbo\Views\vwba_Archivo_Transferencia_x_PreAviso_Cheq_det.sql" />
     <Build Include="dbo\Views\vwaf_Periodo_Sin_Depreciar.sql" />
     <Build Include="dbo\Views\vwRo_Division_Area_dep_rubro.sql" />
     <Build Include="web\Views\VWACTF_003.sql" />
@@ -742,7 +736,6 @@
     <Build Include="dbo\Views\vwct_cbtecble_det.sql" />
     <Build Include="dbo\Views\vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar.sql" />
     <Build Include="dbo\Views\vwba_ba_Banco_Cuenta.sql" />
-    <Build Include="dbo\Views\vwba_Archivo_Transferencia.sql" />
     <Build Include="web\Views\VWCONTA_001.sql" />
     <Build Include="dbo\Views\vwFAC_Rpt008.sql" />
     <Build Include="dbo\Views\vwct_cbtecble_det_TotalDiario.sql" />
@@ -968,29 +961,24 @@
     <Build Include="web\Views\vwfa_factura_det.sql" />
     <Build Include="dbo\Views\vwCXP_Rpt007.sql" />
     <Build Include="dbo\Views\vwCAJ_Rpt004.sql" />
-    <Build Include="dbo\Views\vwRo_Rol_Detalle.sql" />
     <Build Include="dbo\Views\vwin_movi_inve_x_Ing_Ordencompra_local.sql" />
     <Build Include="web\Views\vwfa_factura_sin_guia.sql" />
     <Build Include="dbo\Views\vwCXP_Rpt008.sql" />
     <Build Include="dbo\Views\vwCAJ_Rpt005.sql" />
-    <Build Include="dbo\Views\vwro_rol_detalle_agrupado_x_proceso.sql" />
     <Build Include="dbo\Views\vwin_producto_x_tb_bodega.sql" />
     <Build Include="web\Views\vwfa_factura_x_fa_guia_remision.sql" />
     <Build Include="dbo\Views\vwCXP_Rpt010.sql" />
     <Build Include="dbo\Views\vwCAJ_Rpt006.sql" />
-    <Build Include="dbo\Views\vwro_rol_detalle_consolidado.sql" />
     <Build Include="web\Views\vwfa_guia_remision.sql" />
     <Build Include="dbo\Views\vwCXP_Rpt012.sql" />
     <Build Include="dbo\Views\vwCaj_Talonario_Recibo.sql" />
     <Build Include="Fj_servindustrias\Views\vwfa_tarifario_horometro.sql" />
-    <Build Include="dbo\Views\vwro_rol_detalle_x_rubro_acumulado.sql" />
     <Build Include="dbo\Views\vwin_producto_x_sucursal.sql" />
     <Build Include="dbo\Views\vwin_Presentacion.sql" />
     <Build Include="web\Views\vwfa_guia_remision_det.sql" />
     <Build Include="dbo\Views\vwCXP_Rpt016.sql" />
     <Build Include="dbo\Views\vwcom_Catalogo_IdAuto_numeric.sql" />
     <Build Include="dbo\Views\vwCXP_FJ_Rpt001.sql" />
-    <Build Include="dbo\Views\vwRo_Rol_DetalleXEmpleado.sql" />
     <Build Include="dbo\Views\vwin_prt_transferencia.sql" />
     <Build Include="dbo\Views\vwin_presupuesto.sql" />
     <Build Include="web\Views\vwfa_notaCreDeb.sql" />
@@ -998,7 +986,6 @@
     <Build Include="dbo\Views\vwcom_cotizacion_compra.sql" />
     <Build Include="dbo\Views\vwCXP_NATU_Rpt001.sql" />
     <Build Include="dbo\Views\vwIMP_Rpt001.sql" />
-    <Build Include="dbo\Views\vwRo_Rol_Rubros_Acumulados.sql" />
     <Build Include="dbo\Views\vwfa_factura_con_guia.sql" />
     <Build Include="dbo\Views\vwin_presupuesto_detalle.sql" />
     <Build Include="web\Views\vwfa_notaCreDeb_det.sql" />
@@ -1129,20 +1116,13 @@
     <Build Include="dbo\Stored Procedures\sprol_CancelarNovedades_Prestamos.sql" />
     <Build Include="dbo\Stored Procedures\spROL_DecimoCuarto.sql" />
     <Build Include="dbo\Stored Procedures\spROL_DecimoTercero.sql" />
-    <Build Include="dbo\Stored Procedures\spROL_General_RolIndividual.sql" />
     <Build Include="dbo\Stored Procedures\spROL_Nomina_a_Eventuales.sql" />
     <Build Include="dbo\Stored Procedures\spROL_Nomina_a_Liquidar.sql" />
     <Build Include="dbo\Stored Procedures\spROL_NominaGeneral.sql" />
     <Build Include="dbo\Stored Procedures\spROL_Rpt001.sql" />
     <Build Include="dbo\Stored Procedures\spcp_Get_Data_orden_pago_con_cancelacion_data.sql" />
-    <Build Include="dbo\Stored Procedures\spROL_Rpt002.sql" />
     <Build Include="dbo\Stored Procedures\spin_Producto_validar_anulacion.sql" />
     <Build Include="dbo\Stored Procedures\spROL_Rpt005.sql" />
-    <Build Include="dbo\Stored Procedures\spROL_Rpt016.sql" />
-    <Build Include="dbo\Stored Procedures\spROL_Valor_Ganado_Vacaciones.sql" />
-    <Build Include="dbo\Stored Procedures\spROL_Valor_Pendiente_pago.sql" />
-    <Build Include="dbo\Stored Procedures\spROL_Valor_Pendiente_pago_x_Empleado_Acta_Finiquito.sql" />
-    <Build Include="dbo\Stored Procedures\spROLES_Rpt002.sql" />
     <Build Include="dbo\Stored Procedures\spRo_LiquidarEmpleado.sql" />
     <Build Include="dbo\Stored Procedures\spseg_corregir_menu.sql" />
     <Build Include="web\Stored Procedures\SPACTF_004_detalle.sql" />
@@ -1247,6 +1227,7 @@
     <Build Include="dbo\Stored Procedures\spsys_fa_reversar_anulacion_factura.sql" />
     <Build Include="dbo\Stored Procedures\spsys_actualizar_costo_ingresos.sql" />
     <Build Include="web\Views\VWCXP_001_detalle.sql" />
+    <Build Include="dbo\Views\vwtb_banco_procesos_bancarios_x_empresa.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

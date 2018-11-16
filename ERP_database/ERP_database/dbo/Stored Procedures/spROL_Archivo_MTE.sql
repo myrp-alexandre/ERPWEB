@@ -48,13 +48,16 @@ FROM            dbo.ro_empleado INNER JOIN
                          dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
                          dbo.ro_cargo ON dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa AND dbo.ro_empleado.IdCargo = dbo.ro_cargo.IdCargo INNER JOIN
                          dbo.ro_rol_detalle ON dbo.ro_empleado.IdEmpresa = dbo.ro_rol_detalle.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_rol_detalle.IdEmpleado INNER JOIN
-                         dbo.ro_periodo ON dbo.ro_rol_detalle.IdEmpresa = dbo.ro_periodo.IdEmpresa AND dbo.ro_rol_detalle.IdPeriodo = dbo.ro_periodo.IdPeriodo INNER JOIN
-                         dbo.ro_catalogo ON dbo.ro_empleado.em_status = dbo.ro_catalogo.CodCatalogo
+                         dbo.ro_catalogo ON dbo.ro_empleado.em_status = dbo.ro_catalogo.CodCatalogo INNER JOIN
+                         dbo.ro_rol ON dbo.ro_rol_detalle.IdEmpresa = dbo.ro_rol.IdEmpresa AND dbo.ro_rol_detalle.IdRol = dbo.ro_rol.IdRol INNER JOIN
+                         dbo.ro_periodo_x_ro_Nomina_TipoLiqui ON dbo.ro_rol.IdEmpresa = dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdEmpresa AND dbo.ro_rol.IdNominaTipo = dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdNomina_Tipo AND 
+                         dbo.ro_rol.IdNominaTipoLiqui = dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdNomina_TipoLiqui AND dbo.ro_rol.IdPeriodo = dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdPeriodo INNER JOIN
+                         dbo.ro_periodo ON dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdEmpresa = dbo.ro_periodo.IdEmpresa AND dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdPeriodo = dbo.ro_periodo.IdPeriodo
 					       where ro_empleado.IdEmpresa=@IdEmpresa
 						  -- and ro_empleado.em_status='EST_ACT'
 						   and ro_empleado.em_estado='A'
 						   and ro_rol_detalle.IdRubro= @IdRubro 
-						  and dbo.ro_rol_detalle.IdPeriodo=@IdPeriodo
+						  and dbo.ro_rol.IdPeriodo=@IdPeriodo
 						
 
 			) A
