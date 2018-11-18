@@ -52,7 +52,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdBanco">Tipo de archivo*</label>
-                    @Html.DropDownListFor(q => q.IdProceso_Bancario, new SelectList(ViewBag.lst_procesos, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
+                    @Html.DropDownListFor(q => q.IdProceso_Bancario, new SelectList(ViewBag.lst_proceso, "IdProceso", "NombreProceso"), new { @class = "form-control", @id = "IdProceso" })
                     @Html.ValidationMessageFor(q => q.IdProceso_Bancario, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -84,16 +84,10 @@
 <script>
 
 
-            $("#IdNomina_Tipo").change(function () {
-                $("#IdNomina_TipoLiqui").empty();
-                cargar_tipo_liquidacion_nomina();
-
-            });
 
 
 
-
-            function cargar_tipo_liquidacion_nomina() {
+            function cargar_procesos() {
                 var datos = {
                     IdNomina: $("#IdNomina_Tipo").val()
                 }
@@ -101,7 +95,7 @@
                 $.ajax({
                     type: 'POST',
                     data: JSON.stringify(datos),
-                    url: '@Url.Action("get_lst_nomina_tipo_liq", "NominaTipoLiquidacion", new { Area = "RRHH" })',
+                    url: '@Url.Action("get_list_procesos", "ProcesosBancariosPorEmpresa", new { Area = "General" })',
                     async: false,
                     bDeferRender: true,
                     bProcessing: true,
@@ -109,9 +103,7 @@
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
 
-                        $.each(data, function (i, row) {
-                            $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
-                        });
+                       
                     },
                     error: function (error) {
                     }

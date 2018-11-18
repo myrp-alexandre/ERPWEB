@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Banco;
+using Core.Erp.Bus.General;
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class ArchivosTransferenciasController : Controller
@@ -22,6 +23,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         ba_Banco_Cuenta_Bus bus_cuentas_bancarias = new ba_Banco_Cuenta_Bus();
+        tb_banco_procesos_bancarios_x_empresa_Bus bus_procesos_bancarios = new tb_banco_procesos_bancarios_x_empresa_Bus();
 
         int IdEmpresa = 0;
         #endregion
@@ -190,7 +192,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina);
 
             var lst_cuenta_bancarias = bus_cuentas_bancarias.get_list(IdEmpresa, false);
-            ViewBag.lst_cuenta = lst_cuenta_bancarias;
+            ViewBag.lst_cuenta_bancarias = lst_cuenta_bancarias;
+
+            var lst_proceso = bus_procesos_bancarios.get_list(IdEmpresa, false);
         }
         #endregion
 

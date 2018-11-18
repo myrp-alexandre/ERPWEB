@@ -9,7 +9,7 @@ namespace Core.Erp.Data.General
 {
    public class tb_banco_procesos_bancarios_x_empresa_Data
     {
-        public List<tb_banco_procesos_bancarios_x_empresa_Info> get_list(bool mostrar_anulados)
+        public List<tb_banco_procesos_bancarios_x_empresa_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
             {
@@ -18,6 +18,7 @@ namespace Core.Erp.Data.General
                 {
                     if (mostrar_anulados)
                         Lista = (from q in Context.vwtb_banco_procesos_bancarios_x_empresa
+                                 where q.IdEmpresa==IdEmpresa
                                  select new tb_banco_procesos_bancarios_x_empresa_Info
                                  {
                                      IdEmpresa=q.IdEmpresa,
@@ -33,6 +34,8 @@ namespace Core.Erp.Data.General
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwtb_banco_procesos_bancarios_x_empresa
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.estado=="A"
                                  select new tb_banco_procesos_bancarios_x_empresa_Info
                                  {
                                      IdEmpresa=q.IdEmpresa,
@@ -55,6 +58,40 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
+        public List<tb_banco_procesos_bancarios_x_empresa_Info> get_list(int IdEmpresa, int IdBanco)
+        {
+            try
+            {
+                List<tb_banco_procesos_bancarios_x_empresa_Info> Lista;
+                using (Entities_general Context = new Entities_general())
+                {
+                        Lista = (from q in Context.vwtb_banco_procesos_bancarios_x_empresa
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdBanco==IdBanco
+                                 select new tb_banco_procesos_bancarios_x_empresa_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdProceso = q.IdProceso,
+                                     IdBanco = q.IdBanco,
+                                     IdProceso_bancario_tipo = q.IdProceso_bancario_tipo,
+                                     NombreProceso = q.NombreProceso,
+                                     Codigo_Empresa = q.Codigo_Empresa,
+                                     ba_descripcion = q.ba_descripcion,
+                                     CodigoLegal = q.CodigoLegal,
+                                     estado = q.estado
+
+                                 }).ToList();
+                   
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public tb_banco_procesos_bancarios_x_empresa_Info get_info(int IdBanco)
         {
             try
