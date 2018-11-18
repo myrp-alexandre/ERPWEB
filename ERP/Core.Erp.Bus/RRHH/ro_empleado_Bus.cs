@@ -81,6 +81,18 @@ namespace Core.Erp.Bus.RRHH
                     info.info_persona.pe_Naturaleza = "NATU";
                     info.info_persona.pe_nombreCompleto = info.info_persona.pe_apellido + " " + info.info_persona.pe_nombre;
                     info.info_persona.pe_razonSocial = info.info_persona.pe_apellido + " " + info.info_persona.pe_nombre;
+                    info.info_persona.IdPersona = info.IdPersona;
+                    info.info_persona.pe_apellido = info.pe_apellido;
+                    info.info_persona.pe_nombre = info.pe_nombre;
+                    info.info_persona.IdTipoDocumento = info.IdTipoDocumento;
+                    info.info_persona.pe_cedulaRuc = info.pe_cedulaRuc;
+                    info.info_persona.pe_direccion = info.pe_direccion;
+                    info.info_persona.pe_telfono_Contacto = info.pe_telfono_Contacto;
+                    info.info_persona.pe_celular = info.pe_celular;
+                    info.info_persona.pe_correo = info.pe_correo;
+                    info.info_persona.pe_sexo = info.pe_sexo;
+                    info.info_persona.IdEstadoCivil = info.IdEstadoCivil;
+                    info.info_persona.pe_fechaNacimiento = info.pe_fechaNacimiento;
                     si_grabo = bus_persona.guardarDB(info.info_persona);
                 }
                 if(si_grabo)
@@ -111,6 +123,7 @@ namespace Core.Erp.Bus.RRHH
                 info.info_persona.pe_razonSocial = info.info_persona.pe_apellido + " " + info.info_persona.pe_nombre;
                 if (info.IdPersona != 0)
                 {
+                    info.info_persona.IdPersona = info.IdPersona;
                     info.info_persona.pe_apellido = info.pe_apellido;
                     info.info_persona.pe_nombre = info.pe_nombre;
                     info.info_persona.IdTipoDocumento = info.IdTipoDocumento;
