@@ -49,8 +49,6 @@
     [IdUsuarioUltAnu]                      VARCHAR (20)    NULL,
     [Fecha_UltAnu]                         DATETIME        NULL,
     [MotivoAnulacion]                      VARCHAR (100)   NULL,
-    [nom_pc]                               VARCHAR (25)    NULL,
-    [ip]                                   VARCHAR (25)    NULL,
     [por_discapacidad]                     FLOAT (53)      NOT NULL,
     [carnet_conadis]                       VARCHAR (50)    NULL,
     [recibi_uniforme]                      CHAR (1)        NULL,
@@ -76,6 +74,7 @@
     [em_motivo_salisa]                     VARCHAR (500)   NULL,
     [IdHorario]                            INT             NULL,
     [IdPuntoCargo]                         INT             NULL,
+    [Tiene_ingresos_compartidos]           BIT             NOT NULL,
     CONSTRAINT [PK_ro_empleado] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdEmpleado] ASC),
     CONSTRAINT [FK_ro_empleado_ct_plancta] FOREIGN KEY ([IdEmpresa], [IdCtaCble_Emplea]) REFERENCES [dbo].[ct_plancta] ([IdEmpresa], [IdCtaCble]),
     CONSTRAINT [FK_ro_empleado_ro_Cargo] FOREIGN KEY ([IdEmpresa], [IdCargo]) REFERENCES [dbo].[ro_cargo] ([IdEmpresa], [IdCargo]),
@@ -90,4 +89,6 @@
     CONSTRAINT [FK_ro_empleado_tb_persona] FOREIGN KEY ([IdPersona]) REFERENCES [dbo].[tb_persona] ([IdPersona]),
     CONSTRAINT [FK_ro_empleado_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 
