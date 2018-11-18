@@ -288,27 +288,27 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 string mensaje = "";
-                if(info.info_persona.pe_cedulaRuc=="")
+                if(info.pe_cedulaRuc=="")
                 {
                     mensaje = "El campo cédula es obligatoria";
                 }
-                if (info.info_persona.pe_nombre == ""|info.info_persona.pe_nombre==null )
+                if (info.pe_nombre == ""|info.pe_nombre==null )
                 {
                     mensaje = "El campo nombres es obligatoria";
                 }
-                if (info.info_persona.pe_apellido == "" | info.info_persona.pe_apellido==null)
+                if (info.pe_apellido == "" | info.pe_apellido==null)
                 {
                     mensaje = "El campo apellidos es obligatoria";
                 }
-                if (info.info_persona.pe_correo == ""| info.info_persona.pe_correo==null)
+                if (info.pe_correo == ""| info.pe_correo==null)
                 {
                     mensaje = "El campo correo es obligatoria";
                 }
-                if (info.info_persona.pe_fechaNacimiento == null)
+                if (info.pe_fechaNacimiento == null)
                 {
                     mensaje = "El campo fecha nacimiento es obligatoria";
                 }
-                if (info.info_persona.pe_celular == ""| info.info_persona.pe_celular==null)
+                if (info.pe_celular == ""| info.pe_celular==null)
                 {
                     mensaje = "El campo fecha nacimiento es obligatoria";
                 }

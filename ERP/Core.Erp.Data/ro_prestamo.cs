@@ -49,8 +49,8 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdCbteCble { get; set; }
         public Nullable<decimal> IdOrdenPago { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ICollection<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }
         public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

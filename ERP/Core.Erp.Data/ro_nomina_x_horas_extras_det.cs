@@ -37,9 +37,9 @@ namespace Core.Erp.Data
         public double hora_trabajada { get; set; }
         public bool es_HorasExtrasAutorizadas { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_horario ro_horario { get; set; }
         public virtual ro_nomina_x_horas_extras ro_nomina_x_horas_extras { get; set; }
         public virtual ro_turno ro_turno { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

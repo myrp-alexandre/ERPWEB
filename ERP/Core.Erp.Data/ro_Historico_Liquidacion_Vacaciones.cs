@@ -41,8 +41,8 @@ namespace Core.Erp.Data
         public string Gozadas_Pagadas { get; set; }
         public int IdSolicitud { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ICollection<ro_Historico_Liquidacion_Vacaciones_Det> ro_Historico_Liquidacion_Vacaciones_Det { get; set; }
         public virtual ro_Solicitud_Vacaciones_x_empleado ro_Solicitud_Vacaciones_x_empleado { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

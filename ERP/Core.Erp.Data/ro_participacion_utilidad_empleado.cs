@@ -25,7 +25,7 @@ namespace Core.Erp.Data
         public double ValorTotal { get; set; }
         public string Observacion { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_participacion_utilidad ro_participacion_utilidad { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }
