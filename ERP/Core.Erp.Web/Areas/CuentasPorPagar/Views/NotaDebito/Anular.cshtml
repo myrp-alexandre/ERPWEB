@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.CuentasPorPagar.cp_nota_DebCre_Info
 @{
-    ViewBag.Title = "Nueva nota de crédito";
+    ViewBag.Title = "Anular nota de débito";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -57,7 +57,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("seleccionar_op","NotaCredito", new { Area = "CuentasPorPagar" })',
+            url: '@Url.Action("seleccionar_op", "NotaDebito", new { Area = "CuentasPorPagar" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -76,11 +76,12 @@
     }
 
 </script>
-@using (Html.BeginForm("Nuevo", "NotaCredito", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "NotaDebito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdCbteCble_Nota)
+    @Html.HiddenFor(q => q.IdTipoCbte_Nota)
 
 <div class="row">
     <div class="col-md-6">
@@ -91,18 +92,11 @@
                 @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-11">
+        <div class="col-md-12">
             <div class="form-group">
                 <label for="IdProveedor">Proveedor*</label>
                 @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
                 @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="col-md-1">
-            <div class="form-group">
-                <label for=""></label>
-                <a type="button" class="btn btn-primary form-control " href="@Url.Action("Nuevo","Proveedor",new { Area = "CuentasPorPagar", IdEmpresa = Model.IdEmpresa },null)" target="_blank">+</a>
             </div>
         </div>
     </div>
@@ -155,16 +149,13 @@
                     settings.Properties.EditFormatString = "dd/MM/yyyy";
                     settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                }).GetHtml() 
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.cn_Fecha_vcto, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
     <div class="row" id="div_tipo">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -261,13 +252,12 @@
 
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="co_observacion">Diario contable*</label>
-                                @Html.Action("GridViewPartial_nota_credito_dc")
+                                @Html.Action("GridViewPartial_nota_debito_dc")
                             </div>
                         </div>
                     </div>
@@ -279,7 +269,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="IdOrden_giro_Tipo">Sustento tributario*</label>
-                                @Html.DropDownListFor(q => q.IdIden_credito, new SelectList(ViewBag.lst_codigos_sri, "IdCodigo_SRI", "co_descripcion"), new { @class = "form-control", @id = "cmb_idtCredito" })
+                                @Html.DropDownListFor(q => q.IdIden_credito, new SelectList(ViewBag.lst_codigos_sri, "IdCodigo_SRI", "co_descripcion"), new { @class = "form-control", @id = "IdIden_credito" })
                                 @Html.ValidationMessageFor(q => q.IdIden_credito, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -315,9 +305,10 @@
                             <div class="form-group">
 
                                 <button type="button" class="btn btn-primary" onclick="op_con_saldo()">
+                                    Buscar OP
                                     <i class="fa fa-search"></i>
                                 </button>
-                                @Html.Action("GridViewPartial_nota_credito_det")
+                                @Html.Action("GridViewPartial_nota_debito_det")
 
 
                             </div>
@@ -332,7 +323,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="PagoLocExt">Pago local o exterior*</label>
-                                @Html.DropDownListFor(q => q.PagoLocExt, new SelectList(ViewBag.lst_localizacion, "Key", "Value"), new { @class = "form-control", @id = "cmb_idtCredito" })
+                                @Html.DropDownListFor(q => q.PagoLocExt, new SelectList(ViewBag.lst_localizacion, "Key", "Value"), new { @class = "form-control", @id = "PagoLocExt" })
                                 @Html.ValidationMessageFor(q => q.PagoLocExt, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -367,38 +358,38 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","NotaCredito",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index","NotaDebito",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
-    }
+}
 
-    <div class="modal fade" id="op_con_saldo" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
+<div class="modal fade" id="op_con_saldo" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
 
-                <div class="modal-header">
-                    <h4 class="modal-title">Ordenes de pago con aldos</h4>
-                </div>
-                <div class="modal-body">
-                    @Html.Action("GridViewPartial_ordenes_pagos_con_saldo")
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="seleccionar_op();">Aceptar</button>
-                    <button type="button" class="btn btn-default" onclick="cerrar();">Close</button>
-                </div>
+            <div class="modal-header">
+                <h4 class="modal-title">Ordenes de pago con aldos</h4>
             </div>
+            <div class="modal-body">
+                @Html.Action("GridViewPartial_ordenes_pagos_con_saldo")
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="seleccionar_op();">Aceptar</button>
+                <button type="button" class="btn btn-default" onclick="cerrar();">Close</button>
+            </div>
         </div>
+
     </div>
+</div>
 
 
 
-    <script>
+<script>
 
 
                     $(function () {
@@ -409,6 +400,10 @@
                         $('#Fecha_contable').datepicker({
                             autoclose: true
                         })
+                        $('#Fecha_inicio').datepicker({
+                            autoclose: true
+                        })
+
 
                         $("#cn_num_doc_modificado").change(function () {
                             rellenar_ceros();
@@ -426,7 +421,6 @@
                     // funciones calcular total
                     $("#cn_fecha").change(function () {
                         var d = new Date($("#cn_fecha").val());
-                        d = moment(d).format("DD/MM/YYYY");
                         $('#Fecha_contable').datepicker("setDate", moment(d).format("DD/MM/YYYY"));
 
                     });
@@ -446,10 +440,7 @@
                         }
                         $("#cmbTipoDocu").empty();
                         $("#cmbTipoDocu_modif").empty();
-                        var tipo_nota = $("#IdTipoNota").val();
-                        if (tipo_nota == "T_TIP_NOTA_SRI") {
-                            get_list_tipo_doc();
-                        }
+                        get_list_tipo_doc();
                     });
 
                     function rellenar_ceros_izquierda() {
@@ -505,8 +496,8 @@
                         if (IdProveedor.GetValue() > 0 && $("#cmb_idtCredito").val() != "") {
                             var datos = {
                                 IdProveedor: IdProveedor.GetValue(),
-                                codigoSRI: $("#cmb_idtCredito").val(),
-                                    IdEmpresa : $("#IdEmpresa").val()
+                                codigoSRI: $("#IdIden_credito").val(),
+                                IdEmpresa: $("#IdEmpresa").val()
 
                             }
                             $.ajax({
@@ -550,14 +541,14 @@
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("armar_diario", "NotaCredito", new { Area = "CuentasPorPagar" })',
+                url: '@Url.Action("armar_diario", "NotaDebito", new { Area = "CuentasPorPagar" })',
                 async: false,
                 bDeferRender: true,
                 bProcessing: true,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    GridViewPartial_nota_credito_dc.PerformCallback();
+                    GridViewPartial_nota_debito_dc.PerformCallback();
                 },
                 error: function (error) {
                 }
@@ -579,7 +570,7 @@
                         $.ajax({
                             type: 'POST',
                             data: JSON.stringify(datos),
-                            url: '@Url.Action("Buscar_op", "NotaCredito", new { Area = "CuentasPorPagar" })',
+                            url: '@Url.Action("Buscar_op", "NotaDebito", new { Area = "CuentasPorPagar" })',
                             async: false,
                             bDeferRender: true,
                             bProcessing: true,
@@ -596,4 +587,4 @@
                     };
 
 
-    </script>
+</script>

@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.CuentasPorPagar.cp_nota_DebCre_Info
 @{
-    ViewBag.Title = "Nueva nota de crédito";
+    ViewBag.Title = "Nueva nota de débito";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -57,7 +57,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("seleccionar_op","NotaCredito", new { Area = "CuentasPorPagar" })',
+            url: '@Url.Action("seleccionar_op","NotaDebito", new { Area = "CuentasPorPagar" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -66,7 +66,7 @@
             success: function (data) {
 
                 $("#myform").submit();
-                GridViewPartial_nota_credito_det.PerformCallback();
+                GridViewPartial_nota_debito_det.PerformCallback();
                 $("#op_con_saldo").modal("hide");
 
             },
@@ -76,7 +76,7 @@
     }
 
 </script>
-@using (Html.BeginForm("Nuevo", "NotaCredito", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "NotaDebito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
@@ -267,7 +267,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="co_observacion">Diario contable*</label>
-                                @Html.Action("GridViewPartial_nota_credito_dc")
+                                @Html.Action("GridViewPartial_nota_debito_dc")
                             </div>
                         </div>
                     </div>
@@ -317,7 +317,7 @@
                                 <button type="button" class="btn btn-primary" onclick="op_con_saldo()">
                                     <i class="fa fa-search"></i>
                                 </button>
-                                @Html.Action("GridViewPartial_nota_credito_det")
+                                @Html.Action("GridViewPartial_nota_debito_det")
 
 
                             </div>
@@ -368,7 +368,7 @@
     </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","NotaCredito",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","NotaDebito",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -550,14 +550,14 @@
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("armar_diario", "NotaCredito", new { Area = "CuentasPorPagar" })',
+                url: '@Url.Action("armar_diario", "NotaDebito", new { Area = "CuentasPorPagar" })',
                 async: false,
                 bDeferRender: true,
                 bProcessing: true,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    GridViewPartial_nota_credito_dc.PerformCallback();
+                    GridViewPartial_nota_debito_dc.PerformCallback();
                 },
                 error: function (error) {
                 }
@@ -579,7 +579,7 @@
                         $.ajax({
                             type: 'POST',
                             data: JSON.stringify(datos),
-                            url: '@Url.Action("Buscar_op", "NotaCredito", new { Area = "CuentasPorPagar" })',
+                            url: '@Url.Action("Buscar_op", "NotaDebito", new { Area = "CuentasPorPagar" })',
                             async: false,
                             bDeferRender: true,
                             bProcessing: true,
