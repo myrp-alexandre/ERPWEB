@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Notas de débitos";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.Action("GridViewPartial_nota_debito")
+
+}
