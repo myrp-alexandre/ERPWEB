@@ -35,10 +35,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_Consignacion_Info model = new in_Consignacion_Info();
             return PartialView("_CmbProveedor_Consignacion", model);
         }
-        public ActionResult CmbProveedor_Consignacion()
+        public ActionResult CmbSucursal_Consignacion()
         {
             in_Consignacion_Info model = new in_Consignacion_Info();
-            return PartialView("_CmbProveedor_Consignacion", model);
+            return PartialView("_CmbSucursal_Consignacion", model);
         }
 
         public List<tb_persona_Info> get_list_bajo_demanda_proveedor(ListEditItemsRequestedByFilterConditionEventArgs args)
