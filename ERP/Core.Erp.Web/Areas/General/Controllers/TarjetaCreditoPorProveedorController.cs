@@ -70,7 +70,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             model.IdUsuario = SessionFixed.IdUsuario;
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            if (bus_TarjetaCredito_x_cp_proveedor.validar_existe_tarjeta_proveedor(model.IdEmpresa, model.IdTransaccion, model.IdTarjeta, model.IdProveedor))
+            if (bus_TarjetaCredito_x_cp_proveedor.validar_existe_tarjeta_proveedor(model.IdEmpresa, model.IdTransaccion, model.IdTarjeta, Convert.ToInt32(model.IdProveedor)))
             {
                 cargar_combo();
                 ViewBag.mensaje = "El proveedor ya tiene asignada la tarjeta de crédito";
@@ -101,7 +101,14 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             model.IdUsuarioUltMod = SessionFixed.IdUsuario;
 
-            if (bus_TarjetaCredito_x_cp_proveedor.validar_existe_tarjeta_proveedor(model.IdEmpresa, model.IdTransaccion, model.IdTarjeta, model.IdProveedor))
+            if (model.IdProveedor == 0)
+            {
+                cargar_combo();
+                ViewBag.mensaje = "El campo proveedor es obligatorio";
+                return View(model);
+            }
+
+            if (bus_TarjetaCredito_x_cp_proveedor.validar_existe_tarjeta_proveedor(model.IdEmpresa, model.IdTransaccion, model.IdTarjeta, Convert.ToInt32(model.IdProveedor)))
             {
                 cargar_combo();
                 ViewBag.mensaje = "El proveedor ya tiene asignada la tarjeta de crédito";
@@ -123,6 +130,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
+
+            cargar_combo();
             return View(model);
         }
 
@@ -133,6 +142,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
 
             if (!bus_TarjetaCredito_x_cp_proveedor.AnularBD(model))
             {
+                cargar_combo();
                 return View(model);
             }
             return RedirectToAction("Index");

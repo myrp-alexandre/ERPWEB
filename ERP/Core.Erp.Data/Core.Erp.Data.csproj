@@ -634,6 +634,8 @@
     <Compile Include="Inventario\in_CatalogoTipo_Data.cs" />
     <Compile Include="Inventario\in_Catalogo_Data.cs" />
     <Compile Include="Inventario\in_categorias_Data.cs" />
+    <Compile Include="Inventario\in_Consignacion_Data.cs" />
+    <Compile Include="Inventario\in_Consignacion_det_Data.cs" />
     <Compile Include="Inventario\in_devolucion_inven_Data.cs" />
     <Compile Include="Inventario\in_devolucion_inven_det_Data.cs" />
     <Compile Include="Inventario\in_grupo_Data.cs" />
@@ -664,6 +666,12 @@
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="in_categorias.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="In_consignacion.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="in_consignacion_det.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="in_devolucion_inven.cs">
@@ -1834,6 +1842,9 @@
     </Compile>
     <Compile Include="VWINV_011.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwin_consignacion.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="vwin_devolucion_inven_det.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>

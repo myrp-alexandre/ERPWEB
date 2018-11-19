@@ -232,6 +232,8 @@
     <Compile Include="Inventario\in_CatalogoTipo_Info.cs" />
     <Compile Include="Inventario\in_Catalogo_Info.cs" />
     <Compile Include="Inventario\in_categorias_Info.cs" />
+    <Compile Include="Inventario\in_Consignacion_Info.cs" />
+    <Compile Include="Inventario\in_Consignacion_det_Info.cs" />
     <Compile Include="Inventario\in_devolucion_inven_det_Info.cs" />
     <Compile Include="Inventario\in_devolucion_inven_Info.cs" />
     <Compile Include="Inventario\in_grupo_Info.cs" />
