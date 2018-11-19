@@ -1228,6 +1228,9 @@
     <Build Include="dbo\Stored Procedures\spsys_actualizar_costo_ingresos.sql" />
     <Build Include="web\Views\VWCXP_001_detalle.sql" />
     <Build Include="dbo\Views\vwtb_banco_procesos_bancarios_x_empresa.sql" />
+    <Build Include="dbo\Tables\tb_TarjetaCredito_x_cp_proveedor.sql" />
+    <Build Include="dbo\Tables\tb_TarjetaCredito.sql" />
+    <Build Include="dbo\Views\vwtb_TarjetaCredito_x_cp_proveedor.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

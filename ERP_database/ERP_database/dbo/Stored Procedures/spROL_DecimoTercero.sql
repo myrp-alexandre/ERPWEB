@@ -1,15 +1,15 @@
 ﻿
- --exec spROL_DecimoCuarto 1,'01/08/2016','31/07/2017','SIERRA'
-CREATE PROCEDURE [dbo].[spROL_DecimoTercero]
-	(
-	@IdEmpresa int,	
-	@IdPeriodo int,
-	@Region varchar(10),
-	@IdUsuario varchar(50),
-	@observacion varchar(200),
-	@IdRol int
-	)
-	as
+--exec spROL_DecimoCuarto 1,'01/08/2016','31/07/2017','SIERRA'
+create PROCEDURE [dbo].[spROL_DecimoTercero]
+       (
+       @IdEmpresa int,      
+       @IdPeriodo int,
+       @Region varchar(10),
+       @IdUsuario varchar(50),
+       @observacion varchar(200),
+       @IdRol int
+       )
+       as
 BEGIN
 
 declare
@@ -17,17 +17,17 @@ declare
 @Fi date,
 @Ff date
 
- ----variables pruebas
-	--@IdEmpresa int,
-	--@IdPeriodo int,
-	--@Region varchar(10),
-	--@IdUsuario varchar(50),
-	--@observacion varchar(200)
-	--set @IdEmpresa =1
-	--set @IdPeriodo =2018
-	--set @Region ='COSTA'
-	--set @IdUsuario ='admin'
-	--set @observacion= '...'
+----variables pruebas
+       --@IdEmpresa int,
+       --@IdPeriodo int,
+       --@Region varchar(10),
+       --@IdUsuario varchar(50),
+       --@observacion varchar(200)
+       --set @IdEmpresa =1
+       --set @IdPeriodo =2018
+       --set @Region ='COSTA'
+       --set @IdUsuario ='admin'
+       --set @observacion= '...'
 
 
 
@@ -39,19 +39,19 @@ select @fi=convert(varchar(4), (@IdPeriodo-1))+'-'+'12'+'-'+'01'
 select @ff=convert(varchar(4), (@IdPeriodo))+'-'+'11'+'-'+'30' 
 if((select  COUNT(IdPeriodo) from ro_periodo where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPeriodo)=0)
 insert into ro_periodo (
-IdEmpresa,				IdPeriodo,			pe_FechaIni,					pe_FechaFin,					pe_estado			,Fecha_Transac
+IdEmpresa,                        IdPeriodo,                 pe_FechaIni,                             pe_FechaFin,                             pe_estado                  ,Fecha_Transac
 )
 values
-(@IdEmpresa,			@IdPeriodo,			@Fi,							@Ff,							'A',				GETDATE())
+(@IdEmpresa,               @IdPeriodo,                @Fi,                                            @Ff,                                            'A',                       GETDATE())
 
 
 
 if((select  COUNT(IdPeriodo) from ro_periodo_x_ro_Nomina_TipoLiqui where IdEmpresa=@IdEmpresa and IdNomina_Tipo=1 and IdNomina_TipoLiqui=3)=0)
 insert into ro_periodo_x_ro_Nomina_TipoLiqui(
-IdEmpresa,				IdNomina_Tipo,			IdNomina_TipoLiqui,					IdPeriodo,					Cerrado			,Procesado,			Contabilizado
+IdEmpresa,                        IdNomina_Tipo,                    IdNomina_TipoLiqui,                             IdPeriodo,                               Cerrado                    ,Procesado,                     Contabilizado
 )
 values
-(@IdEmpresa,			1,						3,									@IdPeriodo,					'N',			'S',				'N')
+(@IdEmpresa,               1,                                       3,                                                           @IdPeriodo,                              'N',                 'S',                           'N')
 
 
 
@@ -61,12 +61,12 @@ if((select  COUNT(IdPeriodo) from ro_rol where IdEmpresa=@IdEmpresa and IdPeriod
 update ro_rol set UsuarioModifica=@IdUsuario, FechaModifica=GETDATE() where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPEriodo and IdNominaTipo=1 and IdNominaTipoLiqui=3
 else
 insert into ro_rol
-(IdEmpresa,	IdRol,	IdNominaTipo,		IdNominaTipoLiqui,		IdPeriodo,			Descripcion,				Observacion,				Cerrado,			FechaIngresa,
-UsuarioIngresa,	FechaModifica,		UsuarioModifica,		FechaAnula,			UsuarioAnula,				MotivoAnula,				UsuarioCierre,		FechaCierre,
+(IdEmpresa,   IdRol, IdNominaTipo,        IdNominaTipoLiqui,         IdPeriodo,                  Descripcion,                      Observacion,                      Cerrado,                    FechaIngresa,
+UsuarioIngresa,      FechaModifica,             UsuarioModifica,           FechaAnula,                 UsuarioAnula,                     MotivoAnula,                      UsuarioCierre,              FechaCierre,
 IdCentroCosto)
 values
-(@IdEmpresa	, @IdRol	,1					,3						,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
-,@IdUsuario		,null				,null					,null				,null						,null						,null				,null
+(@IdEmpresa   , @IdRol      ,1                                ,3                                       ,@IdPEriodo                ,@observacion                     ,@observacion                     ,'N'                       ,GETDATE()
+,@IdUsuario          ,null                      ,null                             ,null                       ,null                                    ,null                                    ,null                           ,null
 ,null)
 
 
@@ -80,20 +80,22 @@ delete ro_rol_detalle where IdEmpresa=@IdEmpresa and IdRol= @IdRol
 
 select @IdRubro_calculado= IdRubro_DIII from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle
-(IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
-,rub_visible_reporte,	Observacion)
+(IdEmpresa,                       IdRol,               IdSucursal,                                     IdEmpleado,                IdRubro,                   Orden,               Valor
+,rub_visible_reporte,      Observacion)
 
 
 select
 
-@IdEmpresa,				@IdRol,						emp.IdSucursal,										emp.IdEmpleado,		@IdRubro_calculado, '1',			SUM(acum.Valor),
-1,						'Pago decimo tercer sueldo'
+@IdEmpresa,                       @IdRol,                                         emp.IdSucursal,                                                                     emp.IdEmpleado,             @IdRubro_calculado, '1',                 SUM(acum.Valor),
+1,                                       'Pago decimo tercer sueldo'
 
- from ro_rol_detalle_x_rubro_acumulado acum, ro_empleado emp
- where acum.IdEmpresa=emp.IdEmpresa
- and acum.IdEmpleado=emp.IdEmpleado    
+from ro_rol_detalle_x_rubro_acumulado acum, ro_empleado emp
+where acum.IdEmpresa=emp.IdEmpresa
+and acum.IdEmpleado=emp.IdEmpleado    
  and acum.Estado='PEN'
- AND emp.em_status='EST_ACT'
- AND acum.IdRubro='199'
- group by emp.IdEmpleado, emp.IdSucursal              
+AND emp.em_status='EST_ACT'
+AND acum.IdRubro='199'
+group by emp.IdEmpleado, emp.IdSucursal              
  end
+
+

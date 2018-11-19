@@ -51,11 +51,11 @@ if((select  COUNT(@IdRol) from ro_rol where IdEmpresa=@IdEmpresa and @IdRol=IdRo
 update ro_rol set UsuarioModifica=@IdUsuario, FechaModifica=GETDATE() where IdEmpresa=@IdEmpresa and @IdRol=IdRol
 else
 insert into ro_rol
-(IdEmpresa,	IdRol,	IdNominaTipo,		IdNominaTipoLiqui,		IdPeriodo,			Descripcion,				Observacion,				Cerrado,			FechaIngresa,
+(IdEmpresa,		IdNominaTipo,		IdNominaTipoLiqui,		IdPeriodo,			Descripcion,				Observacion,				Cerrado,			FechaIngresa,
 UsuarioIngresa,	FechaModifica,		UsuarioModifica,		FechaAnula,			UsuarioAnula,				MotivoAnula,				UsuarioCierre,		FechaCierre,
 IdCentroCosto)
 values
-(@IdEmpresa	, @IdRol	,@IdNomina			,@IdNominaTipo			,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
+(@IdEmpresa		,@IdNomina			,@IdNominaTipo			,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
 ,@IdUsuario		,null				,null					,null				,null						,null						,null				,null
 ,null)
 
@@ -177,7 +177,6 @@ and rub_fij.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa
 and rub_fij.IdNomina_tipo=@IdNomina
 and rub_fij.IdNomina_TipoLiqui=@IdNominaTipo
-and (rub_fij.es_indifinido=1 or ( @Fi between rub_fij.FechaFin and rub_fij.FechaFin and @Ff between rub_fij.FechaFin and rub_fij.FechaFin))
 --and rub_fij.Estado='A'
 and (emp.em_status='EST_ACT')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
