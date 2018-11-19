@@ -35,6 +35,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_Consignacion_Info model = new in_Consignacion_Info();
             return PartialView("_CmbProveedor_Consignacion", model);
         }
+        public ActionResult CmbProveedor_Consignacion()
+        {
+            in_Consignacion_Info model = new in_Consignacion_Info();
+            return PartialView("_CmbProveedor_Consignacion", model);
+        }
+
         public List<tb_persona_Info> get_list_bajo_demanda_proveedor(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
             return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());

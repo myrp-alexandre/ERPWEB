@@ -60,6 +60,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="GetHtml">Sucursal*</label>
+                    @Html.Partial("_CmbSucursal_Consignacion", Model.IdSucursal)
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
