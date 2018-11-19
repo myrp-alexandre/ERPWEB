@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 namespace Core.Erp.Data.RRHH
 {
@@ -52,6 +53,55 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public List<ro_contrato_Info> get_list_contratos_por_vencer(int IdEmpresa, DateTime FechaCorte)
+        {
+            try
+            {
+                string Estado_contado = cl_enumeradores.eEstadoContratoRRHH.ECT_ACT.ToString();
+                List<ro_contrato_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from cont in Context.ro_contrato
+                             join emp in Context.vwro_empleado_combo
+                             on new { cont.IdEmpresa, cont.IdEmpleado } equals new { emp.IdEmpresa, emp.IdEmpleado }
+                             join cat in Context.ro_catalogo
+                             on cont.IdContrato_Tipo equals cat.CodCatalogo
+                             where cont.IdEmpresa == IdEmpresa
+                             && emp.IdEmpresa == IdEmpresa
+                             && cat.CodCatalogo != "CTR08"// me trae todos los contratos que no sean indefinidos
+                             && cont.EstadoContrato==Estado_contado
+                             && cont.FechaFin<=FechaCorte
+                             select new ro_contrato_Info
+                             {
+                                 IdEmpresa = cont.IdEmpresa,
+                                 IdEmpleado = cont.IdEmpleado,
+                                 IdContrato = cont.IdContrato,
+                                 IdContrato_Tipo = cont.IdContrato_Tipo,
+                                 Observacion = cont.Observacion,
+                                 FechaInicio = cont.FechaInicio,
+                                 FechaFin = cont.FechaFin,
+                                 NumDocumento = cont.NumDocumento,
+                                 Estado = cont.Estado,
+                                 Empleado = emp.Empleado,
+                                 Contrato = cat.ca_descripcion,
+                                 EstadoContrato = cont.EstadoContrato,
+
+                                 EstadoBool = cont.Estado == "A" ? true : false
+
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<ro_contrato_Info> get_list(int IdEmpresa, decimal IdEmpleado, DateTime FechaInicio, DateTime FechaFin)
         {
             try
@@ -200,6 +250,7 @@ namespace Core.Erp.Data.RRHH
                     ro_contrato Entity = Context.ro_contrato.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado && q.IdContrato == info.IdContrato);
                     if (Entity == null)
                         return false;
+                    Entity.IdContrato_Tipo = info.IdContrato_Tipo;
                     Entity.Observacion = info.Observacion;
                     Entity.FechaInicio = info.FechaInicio.Date;
                     Entity.FechaFin = info.FechaFin.Date;

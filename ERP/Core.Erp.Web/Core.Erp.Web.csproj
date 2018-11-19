@@ -9295,6 +9295,7 @@
     <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\Anular.cshtml" />
     <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\_GridViewPartial_tarjeta_credito_proveedor.cshtml" />
     <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\_CmbProveedor_TarjetaCredito.cshtml" />
+    <Content Include="Areas\RRHH\Views\Contrato\_GridViewPartial_contratos_por_vencer.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
