@@ -355,6 +355,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     List_cp_retencion_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                     model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
+                    
+
+
                 }
             }
             else

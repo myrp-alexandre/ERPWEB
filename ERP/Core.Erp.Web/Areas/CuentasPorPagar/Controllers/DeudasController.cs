@@ -312,10 +312,29 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
             }
             model.info_comrobante = new ct_cbtecble_Info();
-            List_cp_retencion_det.get_list(model.IdTransaccionSession);
 
             model.info_retencion.detalle = List_cp_retencion_det.get_list(model.IdTransaccionSession);
 
+            if(model.info_retencion.detalle.Count()>0)
+            {
+                var  lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
+                model.info_retencion.detalle.ForEach(item =>
+                {
+                    cp_codigo_SRI_Info info_ = lst_codigo_retencion.Where(v => v.codigoSRI == item.re_Codigo_impuesto).FirstOrDefault();
+                    item.IdCodigo_SRI = info_.IdCodigo_SRI;
+                    if (info_.IdTipoSRI == "COD_RET_IVA")
+                    {
+                        model.info_retencion.re_Tiene_RFuente = "S";
+                        item.re_tipoRet = "IVA";
+                    }
+                    if (info_.IdTipoSRI == "COD_RET_FUE")
+                    {
+                        model.info_retencion.re_Tiene_RTiva = "S";
+                        item.re_tipoRet = "RTF";
+                    }
+                });
+
+            }
             model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
             if(Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession).Count()==0)
@@ -417,7 +436,29 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                model.info_comrobante = new ct_cbtecble_Info();
                model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
-               model.info_retencion.detalle = List_cp_retencion_det.get_list(model.IdTransaccionSession);
+
+            model.info_retencion.detalle = List_cp_retencion_det.get_list(model.IdTransaccionSession);
+
+            if (model.info_retencion.detalle.Count() > 0)
+            {
+                var lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
+                model.info_retencion.detalle.ForEach(item =>
+                {
+                    cp_codigo_SRI_Info info_ = lst_codigo_retencion.Where(v => v.codigoSRI == item.re_Codigo_impuesto).FirstOrDefault();
+                    item.IdCodigo_SRI = info_.IdCodigo_SRI;
+                    if (info_.IdTipoSRI == "COD_RET_IVA")
+                    {
+                        model.info_retencion.re_Tiene_RFuente = "S";
+                        item.re_tipoRet = "IVA";
+                    }
+                    if (info_.IdTipoSRI == "COD_RET_FUE")
+                    {
+                        model.info_retencion.re_Tiene_RTiva = "S";
+                        item.re_tipoRet = "RTF";
+                    }
+                });
+
+            }
 
             model.info_comrobante.lst_ct_cbtecble_det =Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
             
@@ -528,6 +569,31 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cargar_combos_detalle();
                 return View(model);
             }
+
+
+            model.info_retencion.detalle = List_cp_retencion_det.get_list(model.IdTransaccionSession);
+
+            if (model.info_retencion.detalle.Count() > 0)
+            {
+                var lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
+                model.info_retencion.detalle.ForEach(item =>
+                {
+                    cp_codigo_SRI_Info info_ = lst_codigo_retencion.Where(v => v.codigoSRI == item.re_Codigo_impuesto).FirstOrDefault();
+                    item.IdCodigo_SRI = info_.IdCodigo_SRI;
+                    if (info_.IdTipoSRI == "COD_RET_IVA")
+                    {
+                        model.info_retencion.re_Tiene_RFuente = "S";
+                        item.re_tipoRet = "IVA";
+                    }
+                    if (info_.IdTipoSRI == "COD_RET_FUE")
+                    {
+                        model.info_retencion.re_Tiene_RTiva = "S";
+                        item.re_tipoRet = "RTF";
+                    }
+                });
+
+            }
+
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
