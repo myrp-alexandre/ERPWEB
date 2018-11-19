@@ -12,18 +12,18 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwtb_banco_procesos_bancarios_x_empresa
+    public partial class vwtb_TarjetaCredito_x_cp_proveedor
     {
+        public int IdTarjeta { get; set; }
         public int IdEmpresa { get; set; }
-        public int IdProceso { get; set; }
-        public string IdProceso_bancario_tipo { get; set; }
-        public int IdBanco { get; set; }
-        public string Codigo_Empresa { get; set; }
-        public string ba_descripcion { get; set; }
-        public string CodigoLegal { get; set; }
-        public string NombreProceso { get; set; }
-        public Nullable<int> IdTipoNota { get; set; }
-        public Nullable<bool> Se_contabiliza { get; set; }
-        public string estado { get; set; }
+        public decimal IdProveedor { get; set; }
+        public string NombreTarjeta { get; set; }
+        public string pr_codigo { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public bool Estado { get; set; }
+        public int IdTransaccion { get; set; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,5 +31,64 @@ namespace Core.Erp.Web.Areas.General.Controllers
             return PartialView("_GridViewPartial_TarjetaCredito", model);
 
         }
+
+
+        #region Acciones
+        public ActionResult Nuevo()
+        {
+            tb_TarjetaCredito_Info model = new tb_TarjetaCredito_Info();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Nuevo(tb_TarjetaCredito_Info model)
+        {
+            model.IdUsuario = SessionFixed.IdUsuario;
+            if (!bus_TarjetaCredito.GuardarBD(model))
+            {
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Modificar(int IdTarjeta = 0)
+        {
+            tb_TarjetaCredito_Info model = bus_TarjetaCredito.GetInfo(IdTarjeta);
+            if (model == null)
+                return RedirectToAction("Index");
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(tb_TarjetaCredito_Info model)
+        {
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
+            if (!bus_TarjetaCredito.ModificarBD(model))
+            {
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Anular(int IdTarjeta = 0)
+        {
+            tb_TarjetaCredito_Info model = bus_TarjetaCredito.GetInfo(IdTarjeta);
+            if (model == null)
+                return RedirectToAction("Index");
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Anular(tb_TarjetaCredito_Info model)
+        {
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
+            if (!bus_TarjetaCredito.AnularBD(model))
+            {
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+
+        #endregion
     }
 }

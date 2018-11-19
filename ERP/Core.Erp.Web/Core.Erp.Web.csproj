@@ -329,6 +329,7 @@
     <Compile Include="Areas\General\Controllers\Reportes_pre_impreso.cs" />
     <Compile Include="Areas\General\Controllers\SucursalController.cs" />
     <Compile Include="Areas\General\Controllers\TarjetaCreditoController.cs" />
+    <Compile Include="Areas\General\Controllers\TarjetaCreditoPorProveedorController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoTalonarioController.cs" />
     <Compile Include="Areas\General\Controllers\TransportistaController.cs" />
@@ -9286,6 +9287,15 @@
     <Content Include="Areas\CuentasPorPagar\Views\CodigoSRI\_CmbCuenta_Codigo.cshtml" />
     <Content Include="Areas\General\Views\TarjetaCredito\Index.cshtml" />
     <Content Include="Areas\General\Views\TarjetaCredito\_GridViewPartial_TarjetaCredito.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\Nuevo.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\Modificar.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\Anular.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\Nuevo.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\Modificar.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\Index.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\Anular.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\_GridViewPartial_tarjeta_credito_proveedor.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\_CmbProveedor_TarjetaCredito.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

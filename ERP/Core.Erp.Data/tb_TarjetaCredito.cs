@@ -12,24 +12,23 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_CatalogoTipo
+    public partial class tb_TarjetaCredito
     {
-        public tb_CatalogoTipo()
+        public tb_TarjetaCredito()
         {
-            this.tb_Catalogo = new HashSet<tb_Catalogo>();
+            this.tb_TarjetaCredito_x_cp_proveedor = new HashSet<tb_TarjetaCredito_x_cp_proveedor>();
         }
     
-        public int IdTipoCatalogo { get; set; }
-        public string Codigo { get; set; }
-        public string tc_Descripcion { get; set; }
+        public int IdTarjeta { get; set; }
+        public string NombreTarjeta { get; set; }
+        public bool Estado { get; set; }
         public string IdUsuario { get; set; }
-        public Nullable<System.DateTime> Fecha_Transaccion { get; set; }
-        public string IdUsuarioUltModi { get; set; }
+        public Nullable<System.DateTime> Fecha_Transac { get; set; }
+        public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string MotivoAnulacion { get; set; }
     
-        public virtual ICollection<tb_Catalogo> tb_Catalogo { get; set; }
+        public virtual ICollection<tb_TarjetaCredito_x_cp_proveedor> tb_TarjetaCredito_x_cp_proveedor { get; set; }
     }
 }

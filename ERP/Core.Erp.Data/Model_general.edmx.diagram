@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2c704904d89445798a8f6a1aacf9107a" Name="Diagram1" ZoomLevel="17">
+      <Diagram DiagramId="2c704904d89445798a8f6a1aacf9107a" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="Model_general.tb_banco" Width="1.5" PointX="0.75" PointY="7.125" />
         <EntityTypeShape EntityType="Model_general.tb_banco_procesos_bancarios_x_empresa" Width="1.5" PointX="3" PointY="14.5" />
         <EntityTypeShape EntityType="Model_general.tb_bodega" Width="1.5" PointX="15.25" PointY="12.375" />
@@ -72,6 +72,10 @@
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_sis_reporte" />
         <EntityTypeShape EntityType="Model_general.vwtb_bodega_x_tb_sucursal" Width="1.5" PointX="19.375" PointY="12.75" />
         <EntityTypeShape EntityType="Model_general.tb_persona_tipo" Width="1.5" PointX="17.375" PointY="12.75" />
+        <EntityTypeShape EntityType="Model_general.tb_TarjetaCredito" Width="1.5" PointX="19.625" PointY="27.5" />
+        <EntityTypeShape EntityType="Model_general.tb_TarjetaCredito_x_cp_proveedor" Width="1.5" PointX="21.875" PointY="27.25" />
+        <EntityTypeShape EntityType="Model_general.vwtb_TarjetaCredito_x_cp_proveedor" Width="1.5" PointX="6.375" PointY="20.75" />
+        <AssociationConnector Association="Model_general.FK_tb_TarjetaCredito_x_cp_proveedor_tb_TarjetaCredito" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
