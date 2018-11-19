@@ -349,6 +349,7 @@
     <Compile Include="Areas\Inventario\Controllers\CatalogoInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\CatalogoTipoInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\CategoriaController.cs" />
+    <Compile Include="Areas\Inventario\Controllers\ConsignacionController.cs" />
     <Compile Include="Areas\Inventario\Controllers\DevolucionInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\DistribucionPorLoteController.cs" />
     <Compile Include="Areas\Inventario\Controllers\EgresoInventarioController.cs" />
@@ -9296,6 +9297,13 @@
     <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\Anular.cshtml" />
     <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\_GridViewPartial_tarjeta_credito_proveedor.cshtml" />
     <Content Include="Areas\General\Views\TarjetaCreditoPorProveedor\_CmbProveedor_TarjetaCredito.cshtml" />
+    <Content Include="Areas\Inventario\Views\Consignacion\_GridViewPartial_consignacion.cshtml" />
+    <Content Include="Areas\Inventario\Views\Consignacion\Index.cshtml" />
+    <Content Include="Areas\Inventario\Views\Consignacion\_CmbProveedor_Consignacion.cshtml" />
+    <Content Include="Areas\Inventario\Views\Consignacion\Nuevo.cshtml" />
+    <Content Include="Areas\Inventario\Views\Consignacion\Modificar.cshtml" />
+    <Content Include="Areas\Inventario\Views\Consignacion\Anular.cshtml" />
+    <Content Include="Areas\Inventario\Views\Consignacion\_CmbSucursal_Consignacion.cshtml" />
     <Content Include="Areas\RRHH\Views\Contrato\_GridViewPartial_contratos_por_vencer.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Index.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_nota_debito.cshtml" />

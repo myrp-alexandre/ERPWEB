@@ -12,33 +12,32 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class in_subgrupo
+    public partial class In_consignacion
     {
-        public in_subgrupo()
+        public In_consignacion()
         {
-            this.in_Producto = new HashSet<in_Producto>();
+            this.in_consignacion_det = new HashSet<in_consignacion_det>();
         }
     
         public int IdEmpresa { get; set; }
-        public string IdCategoria { get; set; }
-        public int IdLinea { get; set; }
-        public int IdGrupo { get; set; }
-        public int IdSubgrupo { get; set; }
-        public string cod_subgrupo { get; set; }
-        public string nom_subgrupo { get; set; }
-        public string observacion { get; set; }
-        public string Estado { get; set; }
+        public decimal IdConsignacion { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
+        public Nullable<System.DateTime> FechaConsignacion { get; set; }
+        public Nullable<decimal> IdProveedor { get; set; }
+        public string Observacion { get; set; }
+        public Nullable<bool> Estado { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
-        public string MotiAnula { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        public int IdEmpresa_ing { get; set; }
+        public int IdSucursal_ing { get; set; }
+        public int IdMovi_inven_tipo_ing { get; set; }
+        public decimal IdNumMovi_ing { get; set; }
     
-        public virtual in_grupo in_grupo { get; set; }
-        public virtual ICollection<in_Producto> in_Producto { get; set; }
+        public virtual ICollection<in_consignacion_det> in_consignacion_det { get; set; }
+        public virtual in_Ing_Egr_Inven in_Ing_Egr_Inven { get; set; }
     }
 }

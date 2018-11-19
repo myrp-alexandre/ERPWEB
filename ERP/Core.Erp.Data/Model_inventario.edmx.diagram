@@ -98,6 +98,12 @@
         <EntityTypeShape EntityType="Model_inventario.in_ProductoTipo" Width="1.5" PointX="21.375" PointY="8.125" />
         <AssociationConnector Association="Model_inventario.FK_in_parametro_in_ProductoTipo" />
         <AssociationConnector Association="Model_inventario.FK_in_Producto_in_ProductoTipo" />
+        <EntityTypeShape EntityType="Model_inventario.In_consignacion" Width="1.5" PointX="19" PointY="21.375" />
+        <EntityTypeShape EntityType="Model_inventario.in_consignacion_det" Width="1.5" PointX="21.25" PointY="17.25" />
+        <EntityTypeShape EntityType="Model_inventario.vwin_consignacion" Width="1.5" PointX="16.375" PointY="21.75" />
+        <AssociationConnector Association="Model_inventario.FK_in_consignacion_det_In_consignacion" />
+        <AssociationConnector Association="Model_inventario.FK_In_consignacion_in_Ing_Egr_Inven" />
+        <AssociationConnector Association="Model_inventario.FK_in_consignacion_det_in_Producto" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

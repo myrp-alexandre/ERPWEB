@@ -1,48 +1,50 @@
-﻿using Core.Erp.Info.General;
+﻿using Core.Erp.Info.Inventario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Data.General
+namespace Core.Erp.Data.Inventario
 {
-    public class tb_TarjetaCredito_x_cp_proveedor_Data
+    public class in_Consignacion_Data
     {
-        public List<tb_TarjetaCredito_x_cp_proveedor_Info>GetList(bool MostrarAnulado, int IdEmpresa)
+        public List<in_Consignacion_Info> GetList(bool MostrarAnulado, int IdEmpresa)
         {
             try
             {
-                List<tb_TarjetaCredito_x_cp_proveedor_Info> Lista = new List<tb_TarjetaCredito_x_cp_proveedor_Info>();
+                List<in_Consignacion_Info> Lista = new List<in_Consignacion_Info>();
 
-                using (Entities_general db = new Entities_general())
+                using (Entities_inventario db = new Entities_inventario())
                 {
                     if (MostrarAnulado == false)
                     {
-                        Lista = db.vwtb_TarjetaCredito_x_cp_proveedor.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Select(q => new tb_TarjetaCredito_x_cp_proveedor_Info
+                        Lista = db.vwin_consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Select(q => new in_Consignacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
-                            IdTransaccion = q.IdTransaccion,
-                            IdTarjeta = q.IdTarjeta,                            
+                            IdConsignacion = q.IdConsignacion,
+                            IdSucursal = q.IdSucursal,
+                            FechaConsignacion = q.FechaConsignacion,
                             IdProveedor = q.IdProveedor,
-                            Estado = q.Estado,
-                            NombreTarjeta = q.NombreTarjeta,
                             pe_nombreCompleto = q.pe_nombreCompleto,
-                            pe_cedulaRuc = q.pe_cedulaRuc
+                            pe_cedulaRuc = q.pe_cedulaRuc,
+                            Observacion = q.Observacion,
+                            Estado = q.Estado                            
                         }).ToList();
                     }
                     else
                     {
-                        Lista = db.vwtb_TarjetaCredito_x_cp_proveedor.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new tb_TarjetaCredito_x_cp_proveedor_Info
+                        Lista = db.vwin_consignacion.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new in_Consignacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
-                            IdTransaccion = q.IdTransaccion,
-                            IdTarjeta = q.IdTarjeta,
+                            IdConsignacion = q.IdConsignacion,
+                            IdSucursal = q.IdSucursal,
+                            FechaConsignacion = q.FechaConsignacion,
                             IdProveedor = q.IdProveedor,
-                            Estado = q.Estado,
-                            NombreTarjeta = q.NombreTarjeta,
                             pe_nombreCompleto = q.pe_nombreCompleto,
-                            pe_cedulaRuc = q.pe_cedulaRuc
+                            pe_cedulaRuc = q.pe_cedulaRuc,
+                            Observacion = q.Observacion,
+                            Estado = q.Estado
                         }).ToList();
                     }
                 }
@@ -55,26 +57,28 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public tb_TarjetaCredito_x_cp_proveedor_Info GetInfo(int IdEmpresa, int IdTransaccion, int IdTarjeta, decimal IdProveedor)
+        public in_Consignacion_Info GetInfo(int IdEmpresa, int IdConsignacion)
         {
             try
             {
-                tb_TarjetaCredito_x_cp_proveedor_Info info = new tb_TarjetaCredito_x_cp_proveedor_Info();
+                in_Consignacion_Info info = new in_Consignacion_Info();
 
-                using (Entities_general Context = new Entities_general())
+                using (Entities_inventario Context = new Entities_inventario())
                 {
-                    tb_TarjetaCredito_x_cp_proveedor Entity = Context.tb_TarjetaCredito_x_cp_proveedor.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdTransaccion == IdTransaccion && q.IdTarjeta == IdTarjeta && q.IdProveedor == IdProveedor);
-                    //tb_TarjetaCredito_x_cp_proveedor Entity = Context.tb_TarjetaCredito_x_cp_proveedor.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdTransaccion == IdTransaccion && q.IdTarjeta == IdTarjeta && q.IdProveedor == IdProveedor);
+                    In_consignacion Entity = Context.In_consignacion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion);    
+                    
                     if (Entity == null)
                     {
                         return null;
                     }
-                    info = new tb_TarjetaCredito_x_cp_proveedor_Info
+                    info = new in_Consignacion_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
-                        IdTransaccion = Entity.IdTransaccion,
-                        IdTarjeta = Entity.IdTarjeta,                        
+                        IdConsignacion = Entity.IdConsignacion,
+                        IdSucursal = Entity.IdSucursal,
+                        FechaConsignacion = Entity.FechaConsignacion,
                         IdProveedor = Entity.IdProveedor,
+                        Observacion = Entity.Observacion,
                         Estado = Entity.Estado
                     };
                 }
@@ -88,15 +92,15 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public int GetId()
+        public decimal GetId()
         {
 
             try
             {
-                int ID = 1;
-                using (Entities_general db = new Entities_general())
+                decimal ID = 1;
+                using (Entities_inventario db = new Entities_inventario())
                 {
-                    var Lista = db.tb_TarjetaCredito_x_cp_proveedor.Select(q => q.IdTransaccion);
+                    var Lista = db.In_consignacion.Select(q => q.IdConsignacion);
 
                     if (Lista.Count() > 0)
                         ID = Lista.Max() + 1;
@@ -110,18 +114,19 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public bool GuardarDB(tb_TarjetaCredito_x_cp_proveedor_Info info)
+        public bool GuardarBD(in_Consignacion_Info info)
         {
             try
             {
-                using (Entities_general db = new Entities_general() )
+                using (Entities_inventario db = new Entities_inventario())
                 {
-                    db.tb_TarjetaCredito_x_cp_proveedor.Add(new tb_TarjetaCredito_x_cp_proveedor
+                    db.In_consignacion.Add(new In_consignacion
                     {
-                        IdEmpresa = info.IdEmpresa,
-                        IdTransaccion = GetId(),
-                        IdTarjeta = info.IdTarjeta,                        
-                        IdProveedor =Convert.ToInt32( info.IdProveedor),
+                        IdConsignacion = GetId(),
+                        IdSucursal = info.IdSucursal,
+                        FechaConsignacion = info.FechaConsignacion,
+                        IdProveedor = info.IdProveedor,
+                        Observacion = info.Observacion,
                         Estado = info.Estado = true,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
@@ -138,20 +143,24 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public bool ModificarDB(tb_TarjetaCredito_x_cp_proveedor_Info info)
+        public bool ModificarDB(in_Consignacion_Info info)
         {
             try
             {
-                using (Entities_general db = new Entities_general())
+                using (Entities_inventario db = new Entities_inventario())
                 {
-                    tb_TarjetaCredito_x_cp_proveedor Entity = db.tb_TarjetaCredito_x_cp_proveedor.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTransaccion == info.IdTransaccion).FirstOrDefault();
+                    In_consignacion Entity = db.In_consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).FirstOrDefault();
 
-                    if(Entity == null){
+                    if (Entity == null)
+                    {
                         return false;
                     }
 
-                    Entity.IdTarjeta = info.IdTarjeta;
+                    Entity.IdConsignacion = info.IdConsignacion;
                     Entity.IdProveedor = Convert.ToInt32(info.IdProveedor);
+                    Entity.IdSucursal = info.IdSucursal;
+                    Entity.FechaConsignacion = info.FechaConsignacion;
+                    Entity.Observacion = info.Observacion;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
 
@@ -166,11 +175,11 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public bool validar_existe_tarjeta_proveedor(int IdEmpresa, int IdTransaccion, int IdTarjeta, decimal IdProveedor)
+        /*public bool validar_existe_tarjeta_proveedor(int IdEmpresa, int IdTransaccion, int IdTarjeta, decimal IdProveedor)
         {
             try
             {
-                using (Entities_general db = new Entities_general())
+                using (Entities_inventario db = new Entities_inventario())
                 {
                     if (IdTransaccion == 0)
                     {
@@ -191,22 +200,22 @@ namespace Core.Erp.Data.General
                             return false;
                         }
                         return true;
-                    }                                        
+                    }
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-        }
+        }*/
 
-        public bool AnularBD(tb_TarjetaCredito_x_cp_proveedor_Info info)
+        public bool AnularBD(in_Consignacion_Info info)
         {
             try
             {
-                using (Entities_general db = new Entities_general())
+                using (Entities_inventario db = new Entities_inventario())
                 {
-                    tb_TarjetaCredito_x_cp_proveedor Entity = db.tb_TarjetaCredito_x_cp_proveedor.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTarjeta == info.IdTarjeta &&  q.IdProveedor == info.IdProveedor).FirstOrDefault();
+                    In_consignacion Entity = db.In_consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).FirstOrDefault();
 
                     if (Entity == null)
                     {
@@ -223,9 +232,9 @@ namespace Core.Erp.Data.General
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+
     }
 }

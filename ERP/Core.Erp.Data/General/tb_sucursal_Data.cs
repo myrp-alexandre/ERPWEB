@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,72 @@ namespace Core.Erp.Data.General
 {
     public class tb_sucursal_Data
     {
+        public List<tb_sucursal_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<tb_sucursal_Info> Lista = new List<tb_sucursal_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+            return Lista;
+        }
+
+        public tb_sucursal_Info get_info_bajo_demanda(int IdEmpresa, ListEditItemRequestedByValueEventArgs args)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info(IdEmpresa, (int)args.Value);
+        }
+
+        public List<tb_sucursal_Info> get_list(int IdEmpresa, int skip, int take, string filter)
+        {
+            try
+            {
+                List<tb_sucursal_Info> Lista = new List<tb_sucursal_Info>();
+
+                Entities_general context_g = new Entities_general();
+
+                var lstg = context_g.tb_sucursal.Where(q => q.Estado == "A" && (q.IdSucursal.ToString() + " " + q.Su_Descripcion).Contains(filter)).OrderBy(q => q.IdSucursal).Skip(skip).Take(take);
+                foreach (var q in lstg)
+                {
+                    Lista.Add(new tb_sucursal_Info
+                    {
+                        IdSucursal = q.IdSucursal,
+                        Su_Descripcion = q.Su_Descripcion
+                    });
+                }
+
+                context_g.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public tb_sucursal_Info get_info(int IdEmpresa, int IdSucursal)
+        {
+            tb_sucursal_Info info = new tb_sucursal_Info();
+
+            Entities_general context_g = new Entities_general();
+
+            info = (from q in context_g.tb_sucursal
+                    where q.Estado == "A"
+                    && q.IdEmpresa == IdEmpresa
+                    && q.IdSucursal == IdSucursal
+                    select new tb_sucursal_Info
+                    {
+                        IdSucursal = q.IdSucursal,
+                        Su_Descripcion = q.Su_Descripcion
+                    }).FirstOrDefault();
+
+            context_g.Dispose();
+
+            return info;
+        }
+
         public List<tb_sucursal_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
@@ -56,43 +123,7 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-        public tb_sucursal_Info get_info(int IdEmpresa, int IdSucursal)
-        {
-            try
-            {
-                tb_sucursal_Info info = new tb_sucursal_Info();
-
-                using (Entities_general Context = new Entities_general())
-                {
-                    tb_sucursal Entity = Context.tb_sucursal.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal);
-                    if (Entity == null) return null;
-
-                    info = new tb_sucursal_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdSucursal = Entity.IdSucursal,
-                        codigo = Entity.codigo,
-                        Su_Descripcion = Entity.Su_Descripcion,
-                        Su_CodigoEstablecimiento = Entity.Su_CodigoEstablecimiento,
-                        Su_Ubicacion = Entity.Su_Ubicacion,
-                        Su_Ruc = Entity.Su_Ruc,
-                        Su_JefeSucursal = Entity.Su_JefeSucursal,
-                        Su_Telefonos = Entity.Su_Telefonos,
-                        Su_Direccion = Entity.Su_Direccion,
-                        Es_establecimiento = Entity.Es_establecimiento == null ? false : Convert.ToBoolean(Entity.Es_establecimiento),
-                        Estado = Entity.Estado,
-                    };
-                }
-
-                return info;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+       
         public int get_id(int IdEmpresa)
         {
             try
