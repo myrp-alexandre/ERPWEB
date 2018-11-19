@@ -23,6 +23,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public List<ro_contrato_Info> get_list_contratos_por_vencer(int IdEmpresa, DateTime FechaCorte)
+        {
+            try
+            {
+                return odata.get_list_contratos_por_vencer(IdEmpresa, FechaCorte);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<ro_contrato_Info> get_list(int IdEmpresa, decimal IdEmpleado, DateTime FechaInicio, DateTime FechaFin)
         {
             try

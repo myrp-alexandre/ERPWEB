@@ -284,6 +284,7 @@
     <Compile Include="Areas\CuentasPorPagar\Controllers\CodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\NotaCreditoController.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\NotaDebitoController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\OrdenPagoController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ParametrosCXPController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ProveedorController.cs" />
@@ -9303,6 +9304,16 @@
     <Content Include="Areas\Inventario\Views\Consignacion\Modificar.cshtml" />
     <Content Include="Areas\Inventario\Views\Consignacion\Anular.cshtml" />
     <Content Include="Areas\Inventario\Views\Consignacion\_CmbSucursal_Consignacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\Contrato\_GridViewPartial_contratos_por_vencer.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_nota_debito.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_nota_debito_dc.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_nota_debito_det.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_ordenes_pagos_con_saldo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_CmbProveedor_CXP.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

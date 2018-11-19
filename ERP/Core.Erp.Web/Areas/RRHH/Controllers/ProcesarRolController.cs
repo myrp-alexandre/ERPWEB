@@ -86,6 +86,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                  {
                      IdNomina_Tipo = 1
                  };
+                ViewBag.FechaCorte = DateTime.Now.Date;
                 return View(info);
 
             }
