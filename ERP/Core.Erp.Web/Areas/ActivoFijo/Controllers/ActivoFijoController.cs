@@ -175,12 +175,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
-        public partial class UploadControlController : Activo_imagen
-        {
-            const string UploadDirectory = "~/Content/imagenes/";
 
-           
-        }
+            const string UploadDirectory = "~/Content/imagenes/";
         public UploadedFile UploadControlUpload()
         {
             UploadControlExtension.GetUploadedFiles("UploadControl", Activo_imagen.UploadValidationSettings, Activo_imagen.FileUploadComplete);
