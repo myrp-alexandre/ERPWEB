@@ -4,7 +4,7 @@ SELECT        tip.tp_descripcion, cat.ca_Categoria, pr.IdEmpresa, pr.IdProducto,
                          0 AS pr_pedidos, pr.IdMarca, pr.IdUsuario, pr.Fecha_Transac, pr.IdUsuarioUltMod, pr.Fecha_UltMod, pr.IdUsuarioUltAnu, pr.Fecha_UltAnu, pr.pr_motivoAnulacion, pr.nom_pc, pr.ip, pr.Estado, pr.pr_descripcion_2, pr.IdLinea, 
                          pr.IdGrupo, pr.IdSubGrupo, '' IdNaturaleza, 0 IdMotivo_Vta, pr.IdUnidadMedida_Consumo, dbo.in_linea.nom_linea, dbo.in_grupo.nom_grupo, dbo.in_subgrupo.nom_subgrupo, pr.IdCod_Impuesto_Iva, pr.Aparece_modu_Ventas, 
                          pr.Aparece_modu_Compras, pr.Aparece_modu_Inventario, pr.Aparece_modu_Activo_F, tip.tp_ManejaInven, pr.IdProducto_padre, pr.lote_fecha_fab, pr.lote_fecha_vcto, pr.lote_num_lote, 
-                         dbo.in_Producto.pr_descripcion AS pr_descripcion_padre, tip.tp_ManejaLote, tip.tp_EsCombo, pr.se_distribuye, pr.precio_1,  pr.precio_2, pr.signo_2, pr.porcentaje_2, pr.precio_3, pr.signo_3, 
+                         dbo.in_Producto.pr_descripcion AS pr_descripcion_padre,  tip.tp_EsCombo, pr.se_distribuye, pr.precio_1,  pr.precio_2, pr.signo_2, pr.porcentaje_2, pr.precio_3, pr.signo_3, 
                          pr.porcentaje_3, pr.precio_4, pr.signo_4, pr.porcentaje_4, pr.precio_5, pr.signo_5, pr.porcentaje_5, pr.pr_codigo2, dbo.in_presentacion.nom_presentacion
 FROM            dbo.in_Producto AS pr INNER JOIN
                          dbo.in_ProductoTipo AS tip ON pr.IdEmpresa = tip.IdEmpresa AND pr.IdProductoTipo = tip.IdProductoTipo INNER JOIN

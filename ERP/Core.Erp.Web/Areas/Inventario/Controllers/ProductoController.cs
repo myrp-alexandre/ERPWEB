@@ -391,7 +391,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 msg = "Seleccion el tipo de producto";
                 return false;
             }
-            if (tipo.tp_es_lote && string.IsNullOrEmpty(i_validar.lote_num_lote) )
+           /* if (tipo.tp_es_lote && string.IsNullOrEmpty(i_validar.lote_num_lote) )
             {
                 msg = "Ingrese el código del lote";
                 return false;
@@ -400,7 +400,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             {
                 msg = "Ingrese la fecha de vencimiento del lote";
                 return false;
-            }
+            }*/
 
             return true;
         }

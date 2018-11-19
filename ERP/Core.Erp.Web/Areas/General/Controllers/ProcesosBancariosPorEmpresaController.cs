@@ -24,8 +24,9 @@ namespace Core.Erp.Web.Areas.General
         [ValidateInput(false)]
         public ActionResult GridViewPartial_procesos_bancarios()
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<tb_banco_procesos_bancarios_x_empresa_Info> model = new List<tb_banco_procesos_bancarios_x_empresa_Info>();
-            model = bus_proceso_x_empresa.get_list(true);
+            model = bus_proceso_x_empresa.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_procesos_bancarios", model);
         }
         #endregion
@@ -91,6 +92,23 @@ namespace Core.Erp.Web.Areas.General
             var list_tipo_proceso = from cl_enumeradores.eTipoProcesoBancario s in Enum.GetValues(typeof(cl_enumeradores.eTipoProcesoBancario))
                                     select s;
             ViewBag.list_tipo_permiso = list_tipo_proceso;
+        }
+
+
+        public JsonResult get_list_procesos(int IdBanco = 0)
+        {
+            try
+            {
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                List<tb_banco_procesos_bancarios_x_empresa_Info> lst_periodos_x_nominas = new List<tb_banco_procesos_bancarios_x_empresa_Info>();
+                lst_periodos_x_nominas = bus_proceso_x_empresa.get_list(IdEmpresa,IdBanco);
+                return Json(lst_periodos_x_nominas, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 

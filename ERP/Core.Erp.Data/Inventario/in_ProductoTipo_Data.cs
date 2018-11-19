@@ -70,10 +70,9 @@ namespace Core.Erp.Data.Inventario
                         tp_descripcion = Entity.tp_descripcion,
                         tp_EsCombo_bool = Entity.tp_EsCombo == "S" ? true : false,                        
                         tp_ManejaInven_bool = Entity.tp_ManejaInven == "S" ? true : false,
-                        tp_ManejaLote = Entity.tp_ManejaLote,
                         tp_EsCombo = Entity.tp_EsCombo,
                         tp_ManejaInven = Entity.tp_ManejaInven,
-                        tp_es_lote = Entity.tp_es_lote,
+                        Aparece_fabricacion = Entity.Aparece_fabricacion,
                         Estado = Entity.Estado,
                         Aparece_modu_Activo_F = Entity.Aparece_modu_Activo_F,
                         Aparece_modu_Compras = Entity.Aparece_modu_Compras,
@@ -129,8 +128,7 @@ namespace Core.Erp.Data.Inventario
                         tp_descripcion = info.tp_descripcion,
                         tp_ManejaInven = info.tp_ManejaInven_bool == true ? "S" : "N",
                         tp_EsCombo = info.tp_EsCombo_bool == true ? "S" : "N",
-                        tp_ManejaLote = info.tp_ManejaLote,
-                        tp_es_lote = info.tp_es_lote,
+                        Aparece_fabricacion = info.Aparece_fabricacion,
                         Estado = "A",
                         Aparece_modu_Activo_F = info.Aparece_modu_Activo_F,
                         Aparece_modu_Compras = info.Aparece_modu_Compras,
@@ -163,8 +161,7 @@ namespace Core.Erp.Data.Inventario
                     Entity.tp_descripcion = info.tp_descripcion;
                     Entity.tp_ManejaInven = info.tp_ManejaInven_bool == true ? "S" : "N";
                     Entity.tp_EsCombo = info.tp_EsCombo_bool == true ? "S" : "N";
-                    Entity.tp_ManejaLote = info.tp_ManejaLote;
-                    Entity.tp_es_lote = info.tp_es_lote;
+                    Entity.Aparece_fabricacion = info.Aparece_fabricacion;
                     Entity.Aparece_modu_Activo_F = info.Aparece_modu_Activo_F;
                     Entity.Aparece_modu_Compras = info.Aparece_modu_Compras;
                     Entity.Aparece_modu_Inventario = info.Aparece_modu_Inventario;

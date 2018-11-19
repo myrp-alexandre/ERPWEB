@@ -84,15 +84,47 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                ro_tipo_gastos_personales_maxim_x_anio_Bus bus_detalle_techo_x_anio = new ro_tipo_gastos_personales_maxim_x_anio_Bus();
 
                 if (ModelState.IsValid)
                 {
                     info.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(info.IdTransaccionSession);
+
+                    var gastos = bus_detalle_techo_x_anio.get_list_gastos_tope_x_anio(info.AnioFiscal);
+
+                    if(gastos==null)
+                    {
+                        cargar_combo();
+                        ViewBag.mensaje = "No existen valores maximo registrado para el periodo fiscal";
+                        return View(info);
+                    }
+                    else
+                    {
+                        if(gastos.Count()==0)
+                        {
+                            cargar_combo();
+                            ViewBag.mensaje = "No existen valores maximo registrado para el periodo fiscal";
+                            return View(info);
+                        }
+                    }
+                    foreach (var item in info.list_proyeciones)
+                    {
+
+                        if (gastos.Where(v => v.AnioFiscal == info.AnioFiscal && v.IdTipoGasto == item.IdTipoGasto && v.Monto_max < item.Valor).Count() > 0)
+
+                        {
+                            cargar_combo();
+                            ViewBag.mensaje = "El tipo de gasto "+item.IdTipoGasto+" supera el valor maximo deducible";
+                            return View(info);
+                        }
+                        }
                     int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                     info.IdEmpresa = IdEmpresa;
                     if (!bus_proyeccion.guardarDB(info))
-
+                    {
+                        cargar_combo();
                         return View(info);
+                    }
                     else
                         return RedirectToAction("Index");
                 }
@@ -137,11 +169,48 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                ro_tipo_gastos_personales_maxim_x_anio_Bus bus_detalle_techo_x_anio = new ro_tipo_gastos_personales_maxim_x_anio_Bus();
+
                 if (ModelState.IsValid)
                 {
-                    info.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(info.IdTransaccionSession);
-                    if (!bus_proyeccion.modificarDB(info))
+                    var gastos = bus_detalle_techo_x_anio.get_list_gastos_tope_x_anio(info.AnioFiscal);
+
+                    if (gastos == null)
+                    {
+                        cargar_combo();
+                        ViewBag.mensaje = "No existen valores maximo registrado para el periodo fiscal";
                         return View(info);
+                    }
+                    else
+                    {
+                        if (gastos.Count() == 0)
+                        {
+                            cargar_combo();
+                            ViewBag.mensaje = "No existen valores maximo registrado para el periodo fiscal";
+                            return View(info);
+                        }
+                    }
+                    info.list_proyeciones = ro_empleado_proyeccion_gastos_det_Info_lis.get_list(info.IdTransaccionSession);
+
+                    foreach (var item in info.list_proyeciones)
+                    {
+                        gastos = bus_detalle_techo_x_anio.get_list_gastos_tope_x_anio(info.AnioFiscal);
+
+                        if (gastos.Where(v => v.AnioFiscal == info.AnioFiscal && v.IdTipoGasto == item.IdTipoGasto && v.Monto_max < item.Valor).Count() > 0)
+
+                        {
+                            cargar_combo();
+                            ViewBag.mensaje = "El tipo de gasto " + item.IdTipoGasto + " supera el valor maximo deducible";
+                            return View(info);
+                        }
+                    }
+                    int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                    info.IdEmpresa = IdEmpresa;
+                    if (!bus_proyeccion.modificarDB(info))
+                    {
+                        cargar_combo();
+                        return View(info);
+                    }
                     else
                         return RedirectToAction("Index");
                 }
@@ -189,7 +258,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
 
                 if (!bus_proyeccion.anularDB(info))
+                {
+                    cargar_combo();
                     return View(info);
+                }
                 else
                     return RedirectToAction("Index");
             }

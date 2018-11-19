@@ -8983,7 +8983,6 @@
     <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesPorAsignar.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesAsignados.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_CmbProducto_composicion.cshtml" />
-    <Content Include="Areas\Inventario\Views\Producto\_CmbProducto_padre.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\Consulta.cshtml" />
     <Content Include="Areas\General\Views\ReportesPorUsuario\_GridViewPartial_ReportesPorUsuario.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\_CmbProveedor_CXP.cshtml" />

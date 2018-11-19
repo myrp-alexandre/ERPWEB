@@ -98,5 +98,6 @@ namespace Core.Erp.Data
         public string Descripcion { get; set; }
         public decimal IdEmpleado { get; set; }
         public string pe_apellido { get; set; }
+        public bool Tiene_ingresos_compartidos { get; set; }
     }
 }

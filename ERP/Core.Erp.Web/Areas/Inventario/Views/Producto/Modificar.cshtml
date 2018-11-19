@@ -80,17 +80,6 @@
 
     <div class="row">
         <div class="col-md-7">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="IdProducto_padre">Producto padre</label>
-                            @Html.Partial("_CmbProducto_padre", Model)
-                            @Html.ValidationMessageFor(q => q.IdProducto_padre, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-md-12">
@@ -160,9 +149,6 @@
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
                 <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Datos generales</a>
-            </li>
-            <li hidden>
-                <a href="#tab_lote" aria-controls="lote" role="tab" data-toggle="tab" id="link_lote">Lote</a>
             </li>
             <li hidden>
                 <a href="#tab_precios" aria-controls="Precios" role="tab" data-toggle="tab" id="link_precios">Precios</a>
@@ -284,70 +270,6 @@
                 </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_lote">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="lote_num_lote">Código lote</label>
-                            @Html.TextBoxFor(q => q.lote_num_lote, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(q => q.lote_num_lote, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="lote_fecha_fab">Fecha fabricación</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                @Html.DevExpress().DateEditFor(q=> q.lote_fecha_fab, settings =>
-                            {
-                                settings.Name = "lote_fecha_fab";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            }).GetHtml()
-                                @Html.ValidationMessageFor(q => q.lote_fecha_fab, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="lote_fecha_fab">Fecha vencimiento</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                @Html.DevExpress().DateEditFor(q=> q.lote_fecha_vcto, settings =>
-                            {
-                                settings.Name = "lote_fecha_vcto";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            }).GetHtml()
-                                @Html.ValidationMessageFor(q => q.lote_fecha_vcto, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label for="se_distribuye">@Html.CheckBoxFor(q => q.se_distribuye) Se distribuye</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_precios">
                 <div class="row">
@@ -946,68 +868,6 @@
             get_info_producto_tipo();
         }
     }
-    function get_info_padre() {
-        var IPadre = IdProducto_padre.GetValue();
-        if (IPadre != "") {
-            var datos = {
-                IdProducto: IPadre
-            }
-            $.ajax({
-                type: 'POST',
-                data: JSON.stringify(datos),
-                url: '@Url.Action("get_info_padre", "Producto",new { Area = "Inventario"})',
-                async: false,
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    if (data == '') {
-                        //No hago nada
-                    } else {
-                        $("#pr_codigo").val(data.pr_codigo);
-                        $("#pr_codigo2").val(data.pr_codigo2);
-                        $("#pr_descripcion").val(data.pr_descripcion);
-                        $("#pr_descripcion_2").val(data.pr_descripcion_2);
-                        $("#IdProductoTipo").val(4);
-                        $("#IdMarca").val(data.IdMarca);
-                        $("#IdPresentacion").val(data.IdPresentacion);
-                        $("#IdCategoria").val(data.IdCategoria);
-                        cargar_lineas();
-                        $("#IdLinea").val(data.IdLinea);
-                        cargar_grupos();
-                        $("#IdGrupo").val(data.IdGrupo);
-                        cargar_subgrupos();
-                        $("#IdSubGrupo").val(data.IdSubGrupo);
-                        $("#IdUnidadMedida").val(data.IdUnidadMedida);
-                        $("#IdUnidadMedida_Consumo").val(data.IdUnidadMedida_Consumo);
-                        $("#pr_codigo_barra").val(data.pr_codigo_barra);
-                        $("#pr_observacion").val(data.pr_observacion);
-                        $("#IdCod_Impuesto_Iva").val(data.IdCod_Impuesto_Iva);
-                        $("#Aparece_modu_Ventas").attr("checked", data.Aparece_modu_Ventas);
-                        $("#Aparece_modu_Compras").attr("checked", data.Aparece_modu_Compras);
-                        $("#Aparece_modu_Inventario").attr("checked", data.Aparece_modu_Inventario);
-                        $("#Aparece_modu_Activo_F").attr("checked", data.Aparece_modu_Activo_F);
-                        $("#precio_1").val(data.precio_1);
-                        $("#precio_2").val(data.precio_2);
-                        $("#signo_2").val(data.signo_2);
-                        $("#porcentaje_2").val(data.porcentaje_2);
-                        $("#precio_3").val(data.precio_3);
-                        $("#signo_3").val(data.signo_3);
-                        $("#porcentaje_3").val(data.porcentaje_3);
-                        $("#precio_4").val(data.precio_4);
-                        $("#signo_4").val(data.signo_4);
-                        $("#porcentaje_4").val(data.porcentaje_4);
-                        $("#precio_5").val(data.precio_5);
-                        $("#signo_5").val(data.signo_5);
-                        $("#porcentaje_5").val(data.porcentaje_5);
-                    }
-                },
-                error: function (error) {
-
-                }
-            });
-        }
-    }
-
 
 
     function MostrarPrecios() {
