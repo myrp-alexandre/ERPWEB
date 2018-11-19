@@ -75,7 +75,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdProveedor">Beneficiario*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdEntidad, settings =>
@@ -94,12 +94,17 @@
                    //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
                }).BindList(ViewBag.lst_proveedores).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco_acreditacion">Tipo flujo</label>
+                    @Html.Partial("_CmbFlujo_OP", Model.IdTipoFlujo)
+                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

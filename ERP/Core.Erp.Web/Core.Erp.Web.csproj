@@ -9306,6 +9306,7 @@
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Nuevo.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_CmbFlujo_OP.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
