@@ -175,8 +175,12 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
-        const string UploadDirectory = "~/Content/imagenes/";
+        public partial class UploadControlController : Activo_imagen
+        {
+            const string UploadDirectory = "~/Content/imagenes/";
 
+           
+        }
         public UploadedFile UploadControlUpload()
         {
             UploadControlExtension.GetUploadedFiles("UploadControl", Activo_imagen.UploadValidationSettings, Activo_imagen.FileUploadComplete);
@@ -212,5 +216,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 Af_foto = e.UploadedFile.FileBytes;
             }
         }
+
+
     }
 }
