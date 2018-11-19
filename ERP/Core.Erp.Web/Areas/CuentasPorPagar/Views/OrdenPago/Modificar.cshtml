@@ -101,7 +101,6 @@
                    //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
                }).BindList(ViewBag.lst_proveedores).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                 </div>

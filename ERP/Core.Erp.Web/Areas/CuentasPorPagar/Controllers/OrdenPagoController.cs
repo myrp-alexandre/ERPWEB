@@ -14,6 +14,7 @@ using Core.Erp.Web.Helps;
 using Core.Erp.Bus.Banco;
 using Core.Erp.Info.Banco;
 using DevExpress.Web;
+using Core.Erp.Info.General;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -372,6 +373,23 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ba_TipoFlujo_Info get_info_bajo_demandaFlujo(ListEditItemRequestedByValueEventArgs args)
         {
             return bus_tipo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbPersona_OP()
+        {
+            SessionFixed.TipoPersona = Request.Params["IdTipo_Persona"] != null ? Request.Params["IdTipo_Persona"].ToString() : SessionFixed.TipoPersona;
+            decimal model = new decimal();
+            return PartialView("_CmbPersona_OP", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.TipoPersona);
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.TipoPersona);
         }
         #endregion
 
