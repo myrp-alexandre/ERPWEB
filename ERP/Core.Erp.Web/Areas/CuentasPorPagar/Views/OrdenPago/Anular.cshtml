@@ -79,31 +79,36 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdProveedor">Beneficiario*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdEntidad, settings =>
-                       {
-                           settings.Name = "IdEntidad";
-                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                           settings.Properties.Columns.Add("IdProveedor", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                           settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                           settings.Properties.Columns.Add("info_persona.pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                           settings.Properties.CallbackPageSize = 10;
-                           //Campo ID
-                           settings.Properties.ValueField = "IdProveedor";
-                           settings.Properties.ValueType = typeof(decimal);
-                           settings.Properties.TextField = "info_persona.pe_nombreCompleto";
-                           //Boton para seleccionar ningun registro
-                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                       }).BindList(ViewBag.lst_proveedores).GetHtml()
+               {
+                   settings.Name = "IdEntidad";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdProveedor", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("info_persona.pe_nombreCompleto", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                   settings.Properties.Columns.Add("info_persona.pe_cedulaRuc", "Cédula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.CallbackPageSize = 10;
+                   //Campo ID
+                   settings.Properties.ValueField = "IdProveedor";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "info_persona.pe_nombreCompleto";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+               }).BindList(ViewBag.lst_proveedores).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco_acreditacion">Tipo flujo</label>
+                    @Html.Partial("_CmbFlujo_OP", Model.IdTipoFlujo)
+                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -215,7 +220,7 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_asiento_contable">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_asiento_contable">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
@@ -230,6 +235,7 @@
             </div>
         </div>
     </div>
+
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","OrdenPago",new { Area = "CuentasPorPagar" },null)">Cancelar</a>

@@ -11,6 +11,10 @@ using Core.Erp.Bus.General;
 using Core.Erp.Info.Helps;
 using DevExpress.Web.Mvc;
 using Core.Erp.Web.Helps;
+using Core.Erp.Bus.Banco;
+using Core.Erp.Info.Banco;
+using DevExpress.Web;
+using Core.Erp.Info.General;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -32,6 +36,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         int IdEmpresa = 0;
         cp_orden_pago_det_Info_list lis_cp_orden_pago_det_Info = new cp_orden_pago_det_Info_list();
         #endregion
+        #region Index
+
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info
@@ -80,7 +86,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_pago_dc", model);
         }
-
+        #endregion
+        #region Metodos
         private void cargar_combos(int IdEmpresa )
         {
             var lst_proveedores = bus_proveedor.get_list(IdEmpresa, false);
@@ -105,6 +112,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
         }
+
+        #endregion
+        #region Acciones
+
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
             #region Validar Session
@@ -265,6 +276,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     return View(model);
                 }
         }
+        #endregion
         #region json
        
         public JsonResult armar_diario(string IdTipo_op = "", decimal IdEntidad = 0, double Valor_a_pagar = 0, string observacion="")
@@ -297,6 +309,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        #region DEtalles
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_deudas()
         {
@@ -344,9 +358,44 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_orden_pago_dc", model);
         }
+        #endregion
+        #region Metodos ComboBox bajo demanda flujo
+        ba_TipoFlujo_Bus bus_tipo = new ba_TipoFlujo_Bus();
+        public ActionResult CmbFlujo_OP()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbFlujo_OP", model);
+        }
+        public List<ba_TipoFlujo_Info> get_list_bajo_demandaFlujo(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_tipo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoIngEgr.EGR.ToString());
+        }
+        public ba_TipoFlujo_Info get_info_bajo_demandaFlujo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_tipo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbPersona_OP()
+        {
+            SessionFixed.TipoPersona = Request.Params["IdTipo_Persona"] != null ? Request.Params["IdTipo_Persona"].ToString() : SessionFixed.TipoPersona;
+            decimal model = new decimal();
+            return PartialView("_CmbPersona_OP", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.TipoPersona);
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.TipoPersona);
+        }
+        #endregion
 
-     
+
     }
+    #region Lista
 
     public class ct_cbtecble_det_List_op
     {
@@ -452,6 +501,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
       
 
     }
+    #endregion
 
     
 }
