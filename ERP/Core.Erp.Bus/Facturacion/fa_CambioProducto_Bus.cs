@@ -1,12 +1,61 @@
-﻿using System;
+﻿using Core.Erp.Data.Facturacion;
+using Core.Erp.Info.Facturacion;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Facturacion
 {
     public class fa_CambioProducto_Bus
     {
+        fa_CambioProducto_Data odata = new fa_CambioProducto_Data();
+
+        public List<fa_CambioProducto_Info> GetList(int IdEmpresa, int IdSucursal, DateTime FechaIni, DateTime FechaFin)
+        {
+            try
+            {
+                return odata.GetList(IdEmpresa, IdSucursal, FechaIni, FechaFin);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool GuardarDB(fa_CambioProducto_Info info)
+        {
+            try
+            {
+                return odata.GuardarDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool ModificarDB(fa_CambioProducto_Info info)
+        {
+            try
+            {
+                return odata.ModificarDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool AnularDB(fa_CambioProducto_Info info)
+        {
+            try
+            {
+                return odata.AnularDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -22,12 +22,19 @@ namespace Core.Erp.Data
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
-        public int IdCambio { get; set; }
+        public decimal IdCambio { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
         public bool Estado { get; set; }
         public Nullable<int> IdMovi_inven_tipo { get; set; }
         public Nullable<decimal> IdNumMovi { get; set; }
+        public string IdUsuario { get; set; }
+        public Nullable<System.DateTime> FechaTransac { get; set; }
+        public string IdUsuarioUltMod { get; set; }
+        public Nullable<System.DateTime> FechaUltMod { get; set; }
+        public string IdUsuarioUltAnu { get; set; }
+        public Nullable<System.DateTime> FechaUltAnu { get; set; }
+        public string MotivoAnulacion { get; set; }
     
         public virtual ICollection<fa_CambioProductoDet> fa_CambioProductoDet { get; set; }
     }

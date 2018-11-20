@@ -17,7 +17,7 @@ namespace Core.Erp.Data
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
-        public int IdCambio { get; set; }
+        public decimal IdCambio { get; set; }
         public int Secuencia { get; set; }
         public decimal IdCbteVta { get; set; }
         public int SecuenciaFact { get; set; }
