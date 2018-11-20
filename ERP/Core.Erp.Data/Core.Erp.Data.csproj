@@ -1115,6 +1115,12 @@
     <Compile Include="ro_empleado.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_EmpleadoNovedadCargaMasiva.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ro_EmpleadoNovedadCargaMasiva_det.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_empleado_Novedad.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1259,6 +1265,8 @@
     <Compile Include="RRHH\ro_departamento_Data.cs" />
     <Compile Include="RRHH\ro_division_Data.cs" />
     <Compile Include="RRHH\ro_DocumentoxEmp_Data.cs" />
+    <Compile Include="RRHH\ro_EmpleadoNovedadCargaMasiva_Data.cs" />
+    <Compile Include="RRHH\ro_EmpleadoNovedadCargaMasiva_det_Data.cs" />
     <Compile Include="RRHH\ro_empleado_Data.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_Data.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_det_Data.cs" />

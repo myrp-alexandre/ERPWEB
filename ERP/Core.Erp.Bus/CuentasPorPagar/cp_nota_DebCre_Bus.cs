@@ -21,11 +21,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_orden_pago_cancelaciones_Data data_cancelacion = new cp_orden_pago_cancelaciones_Data();
         cp_orden_pago_cancelaciones_Info info_cancelacion = new cp_orden_pago_cancelaciones_Info();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
-        public List<cp_nota_DebCre_Info> get_lst(int IdEmpresa, DateTime fi, DateTime ff)
+        public List<cp_nota_DebCre_Info> get_lst(int IdEmpresa, DateTime fi, DateTime ff, string DebCre)
         {
             try
             {
-                return data.get_lst(IdEmpresa, fi, ff);
+                return data.get_lst(IdEmpresa, fi, ff, DebCre);
             }
             catch (Exception)
             {

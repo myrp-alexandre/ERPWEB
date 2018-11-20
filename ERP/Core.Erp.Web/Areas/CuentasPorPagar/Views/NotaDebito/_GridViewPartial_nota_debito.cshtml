@@ -84,6 +84,7 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
+        settings.Columns.Add("IdCbteCble_Nota", "Id").Width = Unit.Percentage(10);
         settings.Columns.Add("info_proveedor.info_persona.pe_cedulaRuc", "Cédula").Width = Unit.Percentage(15);
         settings.Columns.Add("info_proveedor.info_persona.pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(25);
         settings.Columns.Add(column =>
@@ -99,6 +100,7 @@
             });
         });
         settings.Columns.Add("cn_observacion", "Observación").Width = Unit.Percentage(50);
+        settings.Columns.Add("cn_total", "Total").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
