@@ -56,15 +56,24 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region vistas partial
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            return View(model);
         }
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_nota_debito()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<cp_nota_DebCre_Info> model = new List<cp_nota_DebCre_Info>();
-            model = bus_orden_giro.get_lst(IdEmpresa, DateTime.Now, DateTime.Now);
+            model = bus_orden_giro.get_lst(IdEmpresa, DateTime.Now, DateTime.Now, "D");
             return PartialView("_GridViewPartial_nota_debito", model);
         }
 

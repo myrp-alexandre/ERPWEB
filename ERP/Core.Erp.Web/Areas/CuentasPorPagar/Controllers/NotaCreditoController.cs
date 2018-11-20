@@ -56,15 +56,26 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region vistas partial
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos_sucursal();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            cargar_combos_sucursal();
+            return View(model);
         }
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_nota_credito()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<cp_nota_DebCre_Info> model = new List<cp_nota_DebCre_Info>();
-            model = bus_orden_giro.get_lst(IdEmpresa, DateTime.Now, DateTime.Now);
+            model = bus_orden_giro.get_lst(IdEmpresa, DateTime.Now, DateTime.Now,"C");
             return PartialView("_GridViewPartial_nota_credito", model);
         }
 
@@ -354,6 +365,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         #endregion
         #region cargar combos
+
+        private void cargar_combos_sucursal()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_sucursales = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursales = lst_sucursales;
+        }
         private void cargar_combos(int IdEmpresa, decimal IdProveedor = 0, string IdTipoSRI = "")
         {
           
