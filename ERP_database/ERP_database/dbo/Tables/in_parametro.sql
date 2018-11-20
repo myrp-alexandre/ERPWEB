@@ -2,7 +2,6 @@
     [IdEmpresa]                                         INT          NOT NULL,
     [IdMovi_inven_tipo_egresoBodegaOrigen]              INT          NULL,
     [IdMovi_inven_tipo_ingresoBodegaDestino]            INT          NULL,
-    [Maneja_Stock_Negativo]                             VARCHAR (1)  NULL,
     [IdMovi_Inven_tipo_x_Dev_Inv_x_Ing]                 INT          NULL,
     [IdMovi_Inven_tipo_x_Dev_Inv_x_Erg]                 INT          NULL,
     [P_Al_Conta_CtaInven_Buscar_en]                     VARCHAR (15) NULL,
@@ -35,6 +34,8 @@
     CONSTRAINT [FK_in_parametro_in_movi_inven_tipo9] FOREIGN KEY ([IdEmpresa], [IdMovi_inven_tipo_x_distribucion_egr]) REFERENCES [dbo].[in_movi_inven_tipo] ([IdEmpresa], [IdMovi_inven_tipo]),
     CONSTRAINT [FK_in_parametro_in_ProductoTipo] FOREIGN KEY ([IdEmpresa], [P_IdProductoTipo_para_lote_0]) REFERENCES [dbo].[in_ProductoTipo] ([IdEmpresa], [IdProductoTipo])
 );
+
+
 
 
 
