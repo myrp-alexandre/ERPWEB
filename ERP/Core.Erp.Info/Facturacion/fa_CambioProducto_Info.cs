@@ -31,7 +31,11 @@ namespace Core.Erp.Info.Facturacion
         [Required(ErrorMessage = "El campo motivo anulación es obligatorio")]
         [StringLength(5000,ErrorMessage ="El campo motivo anulación debe contener máximo 5000 caracteres")]
         public string MotivoAnulacion { get; set; }
-        public List<fa_CambioProductoDet_Info> LstDet { get; set; }
 
+        #region Campos que no existen en la tabla
+        public List<fa_CambioProductoDet_Info> LstDet { get; set; }
+        public string bo_Descripcion { get; set; }
+        public string Su_Descripcion { get; set; }
+        #endregion
     }
 }

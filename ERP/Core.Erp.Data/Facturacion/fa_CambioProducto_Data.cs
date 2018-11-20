@@ -19,7 +19,7 @@ namespace Core.Erp.Data.Facturacion
 
                 using (Entities_facturacion db = new Entities_facturacion())
                 {
-                    Lista = db.fa_CambioProducto.Where(q => q.IdEmpresa == IdEmpresa
+                    Lista = db.vwfa_CambioProducto.Where(q => q.IdEmpresa == IdEmpresa
                     && IdSucursalIni <= q.IdSucursal
                     && q.IdSucursal <= IdSucursalFin
                     && FechaIni <= q.Fecha && q.Fecha <= FechaFin).Select(q => new fa_CambioProducto_Info
@@ -33,6 +33,9 @@ namespace Core.Erp.Data.Facturacion
                         Estado = q.Estado,
                         IdMovi_inven_tipo = q.IdMovi_inven_tipo,
                         IdNumMovi = q.IdNumMovi,
+
+                        bo_Descripcion = q.bo_Descripcion,
+                        Su_Descripcion = q.Su_Descripcion,
                     }).ToList();
                 }
 

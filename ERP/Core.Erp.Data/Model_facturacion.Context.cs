@@ -70,7 +70,8 @@ namespace Core.Erp.Data
         public DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
         public DbSet<vwfa_notaCreDeb_det> vwfa_notaCreDeb_det { get; set; }
         public DbSet<fa_guia_remision> fa_guia_remision { get; set; }
-        public DbSet<fa_CambioProducto> fa_CambioProducto { get; set; }
         public DbSet<fa_CambioProductoDet> fa_CambioProductoDet { get; set; }
+        public DbSet<fa_CambioProducto> fa_CambioProducto { get; set; }
+        public DbSet<vwfa_CambioProducto> vwfa_CambioProducto { get; set; }
     }
 }
