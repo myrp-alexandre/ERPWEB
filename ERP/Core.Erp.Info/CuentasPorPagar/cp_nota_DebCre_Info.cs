@@ -90,6 +90,7 @@ namespace Core.Erp.Info.CuentasPorPagar
 
         public bool ConvenioTributacion_bool { get; set; }
         public bool PagoSujetoRetencion_bool { get; set; }
+        public List<ct_cbtecble_det_Info> lst_detalle_ct { get; set; }
 
     }
 }

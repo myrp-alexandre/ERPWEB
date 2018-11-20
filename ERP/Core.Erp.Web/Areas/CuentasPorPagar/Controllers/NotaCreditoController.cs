@@ -69,13 +69,22 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             cargar_combos_sucursal();
             return View(model);
         }
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_nota_credito()
+        private void cargar_combos_sucursal()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_sucursales = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursales = lst_sucursales;
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_nota_credito(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0)
+        {
+            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
+            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
+            ViewBag.IdSucursal = IdSucursal;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<cp_nota_DebCre_Info> model = new List<cp_nota_DebCre_Info>();
-            model = bus_orden_giro.get_lst(IdEmpresa, DateTime.Now, DateTime.Now,"C");
+            model = bus_orden_giro.get_lst(IdEmpresa, IdSucursal, "C", Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
             return PartialView("_GridViewPartial_nota_credito", model);
         }
 
@@ -118,8 +127,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 Fecha_contable = DateTime.Now,
                 cn_fecha = DateTime.Now,
                 cn_Fecha_vcto = DateTime.Now,
-                PaisPago = "593"
+                PaisPago = "593",
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
+            model.lst_detalle_op = new List<cp_orden_pago_det_Info>();
+            Lis_ct_cbtecble_det_List_nc.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -366,12 +378,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
         #region cargar combos
 
-        private void cargar_combos_sucursal()
-        {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var lst_sucursales = bus_sucursal.get_list(IdEmpresa, false);
-            ViewBag.lst_sucursales = lst_sucursales;
-        }
         private void cargar_combos(int IdEmpresa, decimal IdProveedor = 0, string IdTipoSRI = "")
         {
           

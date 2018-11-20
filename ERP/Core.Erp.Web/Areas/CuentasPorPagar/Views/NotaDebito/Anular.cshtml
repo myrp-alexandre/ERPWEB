@@ -17,65 +17,6 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-<script>
-    function op_con_saldo() {
-        if (IdProveedor.GetValue() == 0) {
-            alert("Seleccione el proveedor");
-        }
-        else {
-            Buscar_op();
-            GridViewPartial_ordenes_pagos_con_saldo.PerformCallback();
-            $("#op_con_saldo").modal("show");
-        }
-    };
-    function cerrar() {
-        //GridViewPartial_distribuidos.PerformCallback();
-        //GridViewPartial_por_distribuir.PerformCallback();
-        $("#op_con_saldo").modal("hide");
-    };
-
-
-
-    var selectedIDs;
-    function OnBeginCallback(s, e) {
-        //Pass all selected keys to GridView callback action
-        e.customArgs["selectedIDs"] = selectedIDs;
-    }
-    function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdOrdenPago", GetSelectedFieldValuesCallback);
-    }
-    function GetSelectedFieldValuesCallback(values) {
-        //Capture all selected keys
-        selectedIDs = values.join(',');
-    }
-
-
-    function seleccionar_op() {
-        var datos = {
-            Ids: selectedIDs
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("seleccionar_op", "NotaDebito", new { Area = "CuentasPorPagar" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-
-                $("#myform").submit();
-                GridViewPartial_nota_credito_det.PerformCallback();
-                $("#op_con_saldo").modal("hide");
-
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-</script>
 @using (Html.BeginForm("Anular", "NotaDebito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
 
@@ -298,24 +239,6 @@
 
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-
-                                <button type="button" class="btn btn-primary" onclick="op_con_saldo()">
-                                    Buscar OP
-                                    <i class="fa fa-search"></i>
-                                </button>
-                                @Html.Action("GridViewPartial_nota_debito_det")
-
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_pago">
                 <div class="row">
@@ -366,32 +289,9 @@
     }
 }
 
-<div class="modal fade" id="op_con_saldo" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h4 class="modal-title">Ordenes de pago con aldos</h4>
-            </div>
-            <div class="modal-body">
-                @Html.Action("GridViewPartial_ordenes_pagos_con_saldo")
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="seleccionar_op();">Aceptar</button>
-                <button type="button" class="btn btn-default" onclick="cerrar();">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
 
 <script>
-
-
+    ocultar_mostrar_div();
                     $(function () {
                         //Date picker
                         $('#cn_fecha').datepicker({
@@ -556,35 +456,4 @@
         }
 
        };
-
-
-
-                    function Buscar_op() {
-
-                        var datos = {
-                            IdProveedor: IdProveedor.GetValue(),
-                            IdEmpresa: $("#IdEmpresa").val()
-
-
-                        }
-                        $.ajax({
-                            type: 'POST',
-                            data: JSON.stringify(datos),
-                            url: '@Url.Action("Buscar_op", "NotaDebito", new { Area = "CuentasPorPagar" })',
-                            async: false,
-                            bDeferRender: true,
-                            bProcessing: true,
-                            dataType: 'json',
-                            contentType: 'application/json; charset=utf-8',
-                            success: function (data) {
-                                GridViewPartial_ordenes_pagos_con_saldo.PerformCallback();
-
-                            },
-                            error: function (error) {
-                            }
-                        });
-
-                    };
-
-
 </script>

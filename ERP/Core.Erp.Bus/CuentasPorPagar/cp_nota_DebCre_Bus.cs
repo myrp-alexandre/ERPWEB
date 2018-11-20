@@ -21,11 +21,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_orden_pago_cancelaciones_Data data_cancelacion = new cp_orden_pago_cancelaciones_Data();
         cp_orden_pago_cancelaciones_Info info_cancelacion = new cp_orden_pago_cancelaciones_Info();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
-        public List<cp_nota_DebCre_Info> get_lst(int IdEmpresa, DateTime fi, DateTime ff, string DebCre)
+        public List<cp_nota_DebCre_Info> get_lst(int IdEmpresa, int IdSucursal, string DebCre, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
-                return data.get_lst(IdEmpresa, fi, ff, DebCre);
+                return data.get_lst(IdEmpresa, IdSucursal, DebCre, fecha_ini, fecha_fin);
             }
             catch (Exception)
             {
@@ -265,7 +265,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 {
                     if (info.cn_serie1 == "" | info.cn_Nota == null)
                     {
-                        mensaje = "Ingrese seri del documento";
+                        mensaje = "Ingrese serie del documento";
                         return mensaje;
                     }
                     if (info.cn_Nota == "" | info.cn_Nota == null)

@@ -8,7 +8,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 {
    public class cp_nota_DebCre_Data
     {
-        public List<cp_nota_DebCre_Info> get_lst(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin, string DebCre)
+        public List<cp_nota_DebCre_Info> get_lst(int IdEmpresa, int IdSucursal, string DebCre,  DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
@@ -17,8 +17,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                 {
                     Lista = (from q in Context.vwcp_nota_DebCre
                              where q.IdEmpresa == IdEmpresa
-                             && FechaInicio <= q.cn_fecha && q.cn_fecha <= FechaFin
+                             && q.IdSucursal == IdSucursal
                              && q.DebCre == DebCre
+                             && fecha_ini <= q.cn_fecha && q.cn_fecha <= fecha_fin
                              select new cp_nota_DebCre_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
