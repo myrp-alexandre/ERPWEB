@@ -9308,8 +9308,6 @@
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Index.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_nota_debito.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_nota_debito_dc.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_nota_debito_det.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_ordenes_pagos_con_saldo.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_CmbProveedor_CXP.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Nuevo.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Modificar.cshtml" />

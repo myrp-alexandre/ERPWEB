@@ -36,6 +36,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         List<cp_orden_pago_det_Info> lst_detalle_op = new List<cp_orden_pago_det_Info>();
         cp_orden_pago_cancelaciones_Bus bus_orden_pago_cancelaciones = new cp_orden_pago_cancelaciones_Bus();
         List<cp_orden_pago_det_Info> list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
+        string mensaje = string.Empty;
         #endregion
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
@@ -60,20 +61,31 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
+            cargar_combos_sucursal();
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            cargar_combos_sucursal();
             return View(model);
+        }
+        private void cargar_combos_sucursal()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_sucursales = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursales = lst_sucursales;
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_nota_debito()
+        public ActionResult GridViewPartial_nota_debito(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0)
         {
+            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
+            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
+            ViewBag.IdSucursal = IdSucursal;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<cp_nota_DebCre_Info> model = new List<cp_nota_DebCre_Info>();
-            model = bus_orden_giro.get_lst(IdEmpresa, DateTime.Now, DateTime.Now, "D");
+            model = bus_orden_giro.get_lst(IdEmpresa, IdSucursal, "D", Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
             return PartialView("_GridViewPartial_nota_debito", model);
         }
 
@@ -125,8 +137,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             }
             Dictionary<string, string> lst_tipo_nota = new Dictionary<string, string>();
-            lst_tipo_nota.Add("T_TIP_NOTA_SRI", "Autorizado por SRI");
             lst_tipo_nota.Add("T_TIP_NOTA_INT", "Uso interno");
+            lst_tipo_nota.Add("T_TIP_NOTA_SRI", "Autorizado por SRI");
             ViewBag.lst_tipo_nota = lst_tipo_nota;
             
             List<string> lst_tipo_servicio = new List<string>();
@@ -148,6 +160,34 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
         }
+        private bool validar(cp_nota_DebCre_Info i_validar, ref string msg)
+        {
+            if (i_validar.lst_detalle_ct.Where(q => q.pc_Cuenta == "").Count() > 0)
+            {
+                mensaje = "Existen valores sin cuentas asignadas";
+                return false;
+            }
+            if (i_validar.lst_detalle_ct.Count == 0)
+            {
+                mensaje = "Debe ingresar registros en el detalle";
+                return false;
+            }
+
+            if (i_validar.lst_detalle_ct.Sum(q => q.dc_Valor) != 0)
+            {
+                mensaje = "La suma de los detalles debe ser 0";
+                return false;
+            }
+
+            if (i_validar.lst_detalle_ct.Where(q => q.dc_Valor == 0).Count() > 0)
+            {
+                mensaje = "Existen detalles con valor 0 en el debe o haber";
+                return false;
+            }
+
+            return true;
+        }
+
         #endregion
         #region json
 
@@ -182,51 +222,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             Lis_ct_cbtecble_det_List_nd.delete_detail_New_details(info_proveedor, info_parametro, cn_subtotal_iva, cn_subtotal_siniva, valoriva, total, observacion);
             return Json("", JsonRequestBehavior.AllowGet);
         }
-
-        public JsonResult Buscar_op(int IdEmpresa, decimal IdProveedor)
-        {
-            try
-            {
-                string IdTipo_op = cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString();
-                string IdEstado_Aprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString();
-                string IdUsuario = Session["IdUsuario"].ToString();
-                lst_detalle_op = bus_orden_pago.Get_List_orden_pago_con_saldo(IdEmpresa, IdTipo_op, IdProveedor, IdEstado_Aprobacion, IdUsuario);
-                Session["list_op_por_proveedor"] = lst_detalle_op as List<cp_orden_pago_det_Info>;
-                return Json("", JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public JsonResult seleccionar_op(string Ids)
-        {
-            string[] array = Ids.Split(',');
-            var output = array.GroupBy(q => q).ToList();
-            List<cp_orden_pago_det_Info> model = new List<cp_orden_pago_det_Info>();
-            List<cp_orden_pago_det_Info> list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
-            model = Session["list_op_por_proveedor"] as List<cp_orden_pago_det_Info>;
-            list_op_seleccionadas = Session["list_op_seleccionadas"] as List<cp_orden_pago_det_Info>;
-            if (list_op_seleccionadas == null)
-                list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
-            foreach (var item in output)
-            {
-                if (item.Key != "")
-                {
-                    var lista_tmp = model.Where(v => v.IdOrdenPago == Convert.ToDecimal(item.Key));
-                    if (lista_tmp.Count() == 1 & list_op_seleccionadas.Where(v => v.IdOrdenPago == Convert.ToDecimal(item.Key)).Count() == 0)// agrego si existe y no esta repetida
-                    {
-                        var info_add = lista_tmp.FirstOrDefault();
-                        info_add.Valor_a_pagar = (double)info_add.Valor_a_pagar;
-                        list_op_seleccionadas.Add(info_add);
-                    }
-                }
-            }
-            Session["list_op_seleccionadas"] = list_op_seleccionadas;
-            return Json("", JsonRequestBehavior.AllowGet);
-        }
-
+       
         #endregion
         #region funciones
         public ActionResult Nuevo(int IdEmpresa = 0)
@@ -238,15 +234,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
             (Session["ct_cbtecble_det_Info"]) = null;
-            Session["list_op_por_proveedor"] = null;
-            Session["list_op_seleccionadas"] = null;
             cp_nota_DebCre_Info model = new cp_nota_DebCre_Info
             {
                 IdEmpresa = IdEmpresa,
                 Fecha_contable = DateTime.Now,
                 cn_fecha = DateTime.Now,
                 cn_Fecha_vcto = DateTime.Now,
-                PaisPago = "593"
+                PaisPago = "593",
+                
+
             };
             cargar_combos(IdEmpresa);
             return View(model);
@@ -258,39 +254,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_comrobante = new ct_cbtecble_Info();
             model.DebCre = "D";
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List_nd.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
-            if (model.info_comrobante.lst_ct_cbtecble_det == null)
-            {
-                ViewBag.mensaje = "Falta diario contable";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
-                cargar_combos_detalle();
-                return View(model);
-
-            }
-            if (Session["info_parametro"] != null)
-            {
-                info_parametro = Session["info_parametro"] as cp_parametros_Info;
-                model.info_comrobante.IdTipoCbte = (int)info_parametro.pa_TipoCbte_ND;
-            }
-            else
-            {
-                ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
-                cargar_combos_detalle();
-                return View(model);
-            }
-            string mensaje = bus_orden_giro.validar(model);
-            if (mensaje != "")
-            {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
-                cargar_combos_detalle();
-                ViewBag.mensaje = mensaje;
-                return View(model);
-            }
-
-
-            model.IdUsuario = Session["IdUsuario"].ToString();
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            model.IdUsuario = SessionFixed.IdUsuario.ToString();
 
             if (!bus_orden_giro.guardarDB(model))
             {
@@ -445,39 +409,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_nota_debito_dc", model);
         }
         #endregion
-        #region Editar y eliminar detalle
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdate_op([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_pago_det_Info info_det)
-        {
-
-            List<cp_orden_pago_det_Info> model = new List<cp_orden_pago_det_Info>();
-            model = Session["list_op_seleccionadas"] as List<cp_orden_pago_det_Info>;
-            if (model.Count() > 0)
-            {
-                cp_orden_pago_det_Info edited_info = model.Where(m => m.IdOrdenPago == info_det.IdOrdenPago).First();
-
-                edited_info.Valor_a_pagar = info_det.Valor_a_pagar;
-            }
-
-            return PartialView("_GridViewPartial_nota_debito_det", model);
-        }
-
-        public ActionResult EditingDelete_op(int IdOrdenPago)
-        {
-
-            List<cp_orden_pago_det_Info> model = new List<cp_orden_pago_det_Info>();
-            model = Session["list_op_seleccionadas"] as List<cp_orden_pago_det_Info>;
-            if (model.Count() > 0)
-            {
-                cp_orden_pago_det_Info edited_info = model.Where(m => m.IdOrdenPago == IdOrdenPago).First();
-                model.Remove(edited_info);
-                Session["list_op_seleccionadas"] = model;
-
-            }
-
-            return PartialView("_GridViewPartial_nota_debito_det", model);
-        }
-        #endregion
 
     }
 
@@ -538,7 +469,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cbtecble_det_total_Info.IdEmpresa = 0;
                 cbtecble_det_total_Info.IdTipoCbte = 1;
                 cbtecble_det_total_Info.IdCtaCble = info_proveedor.IdCtaCble_CXP;
-                cbtecble_det_total_Info.dc_Valor_debe = cn_total;
+                cbtecble_det_total_Info.dc_Valor_haber = cn_total;
                 cbtecble_det_total_Info.dc_Valor = cn_total * -1;
                 cbtecble_det_total_Info.dc_Observacion = observacion;
                 AddRow(cbtecble_det_total_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
@@ -550,7 +481,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cbtecble_det_iva_Info.IdEmpresa = 0;
                 cbtecble_det_iva_Info.IdTipoCbte = 1;
                 cbtecble_det_iva_Info.IdCtaCble = info_parametro.pa_ctacble_iva;
-                cbtecble_det_iva_Info.dc_Valor_haber = cn_valoriva;
+                cbtecble_det_iva_Info.dc_Valor_debe = cn_valoriva;
                 cbtecble_det_iva_Info.dc_Valor = cn_valoriva;
                 cbtecble_det_iva_Info.dc_Observacion = observacion;
                 AddRow(cbtecble_det_iva_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
@@ -561,7 +492,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cbtecble_det_sub_Info.IdEmpresa = 0;
                 cbtecble_det_sub_Info.IdTipoCbte = 1;
                 cbtecble_det_sub_Info.IdCtaCble = info_parametro.pa_ctacble_deudora;
-                cbtecble_det_sub_Info.dc_Valor_haber = cn_subtotal_iva + cn_subtotal_siniva;
+                cbtecble_det_sub_Info.dc_Valor_debe = cn_subtotal_iva + cn_subtotal_siniva;
                 cbtecble_det_sub_Info.dc_Valor = cn_subtotal_iva + cn_subtotal_siniva;
                 cbtecble_det_sub_Info.dc_Observacion = observacion;
                 AddRow(cbtecble_det_sub_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
