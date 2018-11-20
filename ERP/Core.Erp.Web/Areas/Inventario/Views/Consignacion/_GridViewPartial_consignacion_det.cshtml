@@ -48,13 +48,6 @@
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
         //Evento para pintar de rojo las filas anuladas
-        settings.HtmlRowPrepared = (s, e) =>
-        {
-            if (Convert.ToString(e.GetValue("Estado")) == "I")
-            {
-                e.Row.ForeColor = System.Drawing.Color.Red;
-            }
-        };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
@@ -79,35 +72,14 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
         });
-        settings.Columns.Add("tm_descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-        settings.Columns.Add("IdNumMovi", "# Movimiento").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "cm_fecha";
-            column.Caption = "Fecha";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        });
-        settings.Columns.Add("cm_observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EstadoBool";
-            column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
-            column.EditorProperties().CheckBox(sp =>
-            {
-
-            });
-        });
+        settings.Columns.Add("Secuencial", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("IdProducto", "Id Producto").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Columns.Add("IdProducto", "Producto").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("IdUnidadMedida", "Unidad de medida").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("Cantidad", "Cantidad").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("Precio", "Precio").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("Observacion", "Observacion").Width = System.Web.UI.WebControls.Unit.Percentage(20);
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
-        //settings.Columns.Add(column =>
-        //{
-        //    column.SetDataItemTemplateContent(c =>
-        //    {
-        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("INV_001", "InventarioReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdMovi_inven_tipo = DataBinder.Eval(c.DataItem, "IdMovi_inven_tipo"), IdNumMovi = DataBinder.Eval(c.DataItem, "IdNumMovi") }, Request.Url.Scheme) + "');\"></span>");
-        //    });
-        //    column.Width = Unit.Percentage(5);
-        //});
 
     });
 }

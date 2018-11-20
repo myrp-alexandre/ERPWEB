@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Consignacion por proveedor";
+    ViewBag.Title = "Consignación por proveedor";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,7 +9,7 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Consignacion", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     <div class="box ">
         <div class="box-header with-border">

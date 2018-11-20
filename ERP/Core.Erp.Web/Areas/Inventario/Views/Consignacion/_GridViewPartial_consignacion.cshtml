@@ -84,11 +84,11 @@
         });
 
         settings.Columns.Add("IdTransaccion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(25);
+        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(15);
         settings.Columns.Add("pe_cedulaRuc", "Cedula / RUC").Width = System.Web.UI.WebControls.Unit.Percentage(10);        
-        settings.Columns.Add("IdSucursal", "Sucursal").Width = System.Web.UI.WebControls.Unit.Percentage(15);
-        settings.Columns.Add("FechaConsignacion", "Fecha Consignacion").Width = System.Web.UI.WebControls.Unit.Percentage(15);
-        settings.Columns.Add("Observación", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Columns.Add("IdSucursal", "Sucursal").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("FechaConsignacion", "Fecha Consignacion").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("Observación", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(10);
 
         settings.Columns.Add(column =>
         {
@@ -102,4 +102,4 @@
         });
     });
 }
-@grid.Bind(Model).GetHtml()3
+@grid.Bind(Model).GetHtml()

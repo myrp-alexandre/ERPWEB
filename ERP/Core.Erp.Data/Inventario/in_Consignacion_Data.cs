@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Inventario
 {
     public class in_Consignacion_Data
     {
-        public List<in_Consignacion_Info> GetList(int IdEmpresa, string signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
+        public List<in_Consignacion_Info> GetList(int IdEmpresa, int IdSucursal, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
@@ -173,41 +173,7 @@ namespace Core.Erp.Data.Inventario
             {
                 throw;
             }
-        }
-
-        /*public bool validar_existe_tarjeta_proveedor(int IdEmpresa, int IdTransaccion, int IdTarjeta, decimal IdProveedor)
-        {
-            try
-            {
-                using (Entities_inventario db = new Entities_inventario())
-                {
-                    if (IdTransaccion == 0)
-                    {
-                        tb_TarjetaCredito_x_cp_proveedor Entity = db.tb_TarjetaCredito_x_cp_proveedor.Where(q => q.IdEmpresa == IdEmpresa && q.IdTarjeta == IdTarjeta && q.IdProveedor == IdProveedor).FirstOrDefault();
-
-                        if (Entity == null)
-                        {
-                            return false;
-                        }
-                        return true;
-                    }
-                    else
-                    {
-                        tb_TarjetaCredito_x_cp_proveedor Entity = db.tb_TarjetaCredito_x_cp_proveedor.Where(q => q.IdEmpresa == IdEmpresa && q.IdTarjeta == IdTarjeta && q.IdProveedor == IdProveedor && q.IdTransaccion != IdTransaccion).FirstOrDefault();
-
-                        if (Entity == null)
-                        {
-                            return false;
-                        }
-                        return true;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }*/
+        }        
 
         public bool AnularBD(in_Consignacion_Info info)
         {
@@ -235,6 +201,6 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
     }
+
 }

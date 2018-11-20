@@ -132,7 +132,7 @@ namespace Core.Erp.Data.General
                     }
 
                     entity.NombreTarjeta = info.NombreTarjeta;
-                    entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
+                    entity.IdUsuarioUltMod = info.IdUsuario;
                     entity.Fecha_UltMod = DateTime.Now;
                         
                     db.SaveChanges();
@@ -160,7 +160,7 @@ namespace Core.Erp.Data.General
                     }
 
                     entity.Estado = info.Estado;
-                    entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                    entity.IdUsuarioUltAnu = info.IdUsuario;
                     entity.Fecha_UltAnu = DateTime.Now;
 
                     db.SaveChanges();
