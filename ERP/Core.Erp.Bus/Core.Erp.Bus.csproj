@@ -187,6 +187,7 @@
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Bus.cs" />
     <Compile Include="General\tb_sucursal_Bus.cs" />
     <Compile Include="General\tb_TarjetaCredito_Bus.cs" />
+    <Compile Include="General\tb_TarjetaCredito_x_cp_proveedor_Bus.cs" />
     <Compile Include="General\tb_transportista_Bus.cs" />
     <Compile Include="General\tb_visor_video_Bus.cs" />
     <Compile Include="Helps\FilesHelper_Bus.cs" />
@@ -204,6 +205,8 @@
     <Compile Include="Inventario\in_CatalogoTipo_Bus.cs" />
     <Compile Include="Inventario\in_Catalogo_Bus.cs" />
     <Compile Include="Inventario\in_categorias_Bus.cs" />
+    <Compile Include="Inventario\in_Consignacion_Bus.cs" />
+    <Compile Include="Inventario\in_Consignacion_det_Bus.cs" />
     <Compile Include="Inventario\in_devolucion_inven_Bus.cs" />
     <Compile Include="Inventario\in_devolucion_inven_det_Bus.cs" />
     <Compile Include="Inventario\in_grupo_Bus.cs" />
@@ -337,6 +340,8 @@
     <Compile Include="RRHH\ro_departamento_Bus.cs" />
     <Compile Include="RRHH\ro_division_Bus.cs" />
     <Compile Include="RRHH\ro_DocumentoxEmp_Bus.cs" />
+    <Compile Include="RRHH\ro_EmpleadoNovedadCargaMasiva_Bus.cs" />
+    <Compile Include="RRHH\ro_EmpleadoNovedadCargaMasiva_det_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_estudios_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_Bus.cs" />

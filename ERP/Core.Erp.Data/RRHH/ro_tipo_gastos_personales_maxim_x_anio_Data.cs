@@ -42,6 +42,39 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
+        public List<ro_tipo_gastos_personales_maxim_x_anio_Info> get_list_gastos_tope_x_anio(int anio)
+        {
+            try
+            {
+                List<ro_tipo_gastos_personales_maxim_x_anio_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+
+                    Lista = (from q in Context.ro_tipo_gastos_personales_tabla_valores_x_anio
+                             where q.AnioFiscal == anio
+                             select new ro_tipo_gastos_personales_maxim_x_anio_Info
+                             {
+                                 IdGasto = q.IdGasto,
+                                 IdTipoGasto = q.IdTipoGasto,
+                                 AnioFiscal = q.AnioFiscal,
+                                 estado = q.estado,
+                                 Monto_max = q.Monto_max,
+                                 EstadoBool = q.estado == "A" ? true : false
+
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public ro_tipo_gastos_personales_maxim_x_anio_Info get_info(int IdGasto)
         {
             try

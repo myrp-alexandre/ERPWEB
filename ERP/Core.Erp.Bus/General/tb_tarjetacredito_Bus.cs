@@ -24,6 +24,18 @@ namespace Core.Erp.Bus.General
             }
         }
 
+        public tb_TarjetaCredito_Info GetInfo(int IdTarjeta)
+        {
+            try
+            {
+                return odata.GetInfo(IdTarjeta);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool GuardarBD(tb_TarjetaCredito_Info info)
         {
             try

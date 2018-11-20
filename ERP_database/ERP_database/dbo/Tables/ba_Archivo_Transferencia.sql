@@ -29,8 +29,9 @@
     CONSTRAINT [FK_ba_Archivo_Transferencia_ba_Banco_Cuenta] FOREIGN KEY ([IdEmpresa], [IdBanco]) REFERENCES [dbo].[ba_Banco_Cuenta] ([IdEmpresa], [IdBanco]),
     CONSTRAINT [FK_ba_Archivo_Transferencia_ba_Catalogo] FOREIGN KEY ([IdEstadoArchivo_cat]) REFERENCES [dbo].[ba_Catalogo] ([IdCatalogo]),
     CONSTRAINT [FK_ba_Archivo_Transferencia_ba_Catalogo1] FOREIGN KEY ([IdMotivoArchivo_cat]) REFERENCES [dbo].[ba_Catalogo] ([IdCatalogo]),
-    CONSTRAINT [FK_ba_Archivo_Transferencia_tb_banco_procesos_bancarios_tipo] FOREIGN KEY ([IdProceso_bancario]) REFERENCES [dbo].[tb_banco_procesos_bancarios_tipo] ([IdProceso_bancario_tipo])
 );
+
+
 
 
 

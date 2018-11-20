@@ -176,11 +176,18 @@
                     @Html.ValidationMessageFor(q => q.co_factura, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="co_factura">Número autorización*</label>
                     @Html.TextBoxFor(q => q.Num_Autorizacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Num_Autorizacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdBanco_acreditacion">Tipo flujo</label>
+                    @Html.Partial("_CmbFlujo_OP", Model.IdTipoFlujo)
+                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

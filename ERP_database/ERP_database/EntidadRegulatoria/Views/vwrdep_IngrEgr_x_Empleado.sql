@@ -9,13 +9,13 @@ FROM            (SELECT        IdEmpresa, IdEmpleado, pe_anio, Su_CodigoEstablec
                                                     GastoEucacion, ISNULL(GastoSalud, 0) GastoSalud, ISNULL(GastoVestimenta, 0) GastoVestimenta, ISNULL(GastoVivienda, 0) GastoVivienda, ISNULL(Utilidades, 0) Utilidades
                           FROM            (
 						  
-						  SELECT        rol_det.IdEmpresa, rol_det.IdPeriodo, rol_det.IdEmpleado, rol_det.IdRubro, rol_det.Valor, per.pe_cedulaRuc, per.pe_apellido, per.pe_nombre, per.pe_sexo, per.pe_direccion, per.pe_telfono_Contacto, 
+						  SELECT        rol_det.IdEmpresa, rol.IdPeriodo, rol_det.IdEmpleado, rol_det.IdRubro, rol_det.Valor, per.pe_cedulaRuc, per.pe_apellido, per.pe_nombre, per.pe_sexo, per.pe_direccion, per.pe_telfono_Contacto, 
                                                                               per.pe_celular, per.pe_correo, per.IdEstadoCivil, per.pe_fechaNacimiento, pe.pe_anio, sucr.Su_CodigoEstablecimiento, EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.GastoAlimentacion, 
                                                                               EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.GastoEucacion, EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.GastoSalud, 
                                                                               EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.GastoVestimenta, EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.GastoVivienda, SUM(utilidad_det.ValorTotal) Utilidades
                                                     FROM            dbo.ro_rol AS rol INNER JOIN
-                                                                              dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdNominaTipo = rol_det.IdNominaTipo AND rol.IdNominaTipoLiqui = rol_det.IdNominaTipoLiqui AND 
-                                                                              rol.IdPeriodo = rol_det.IdPeriodo INNER JOIN
+                                                                              dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdNominaTipo = rol.IdNominaTipo AND rol.IdNominaTipoLiqui = rol.IdNominaTipoLiqui AND 
+                                                                              rol.IdPeriodo = rol.IdPeriodo INNER JOIN
                                                                               dbo.ro_periodo_x_ro_Nomina_TipoLiqui AS pe_x_nom ON rol.IdEmpresa = pe_x_nom.IdEmpresa AND rol.IdNominaTipo = pe_x_nom.IdNomina_Tipo AND 
                                                                               rol.IdNominaTipoLiqui = pe_x_nom.IdNomina_TipoLiqui AND rol.IdPeriodo = pe_x_nom.IdPeriodo INNER JOIN
                                                                               dbo.ro_periodo AS pe ON pe_x_nom.IdEmpresa = pe.IdEmpresa AND pe_x_nom.IdPeriodo = pe.IdPeriodo INNER JOIN
@@ -28,18 +28,20 @@ FROM            (SELECT        IdEmpresa, IdEmpleado, pe_anio, Su_CodigoEstablec
                                                                               EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles ON emp.IdEmpresa = EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.IdEmpresa AND 
                                                                               emp.IdEmpleado = EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.IdEmpleado AND pe.IdEmpresa = EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.IdEmpresa AND 
                                                                               pe.pe_anio = EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.AnioFiscal
-                                                    GROUP BY rol_det.IdEmpresa, rol_det.IdPeriodo, rol_det.IdEmpleado, rol_det.IdRubro, rol_det.Valor, per.pe_cedulaRuc, per.pe_apellido, per.pe_nombre, per.pe_sexo, per.pe_direccion, per.pe_telfono_Contacto, 
+                                                    GROUP BY rol_det.IdEmpresa, rol.IdPeriodo, rol_det.IdEmpleado, rol_det.IdRubro, rol_det.Valor, per.pe_cedulaRuc, per.pe_apellido, per.pe_nombre, per.pe_sexo, per.pe_direccion, per.pe_telfono_Contacto, 
                                                                               per.pe_celular, per.pe_correo, per.IdEstadoCivil, per.pe_fechaNacimiento, pe.pe_anio, sucr.Su_CodigoEstablecimiento, EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.GastoAlimentacion, 
                                                                               EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.GastoEucacion, EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.GastoSalud, 
                                                                               EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.GastoVestimenta, EntidadRegulatoria.vwrdep_gastos_x_rubros_deducibles.GastoVivienda) AS s PIVOT (sum([Valor]) FOR [IdRubro] IN ([24], 
                                                     [199], [200], [198], [295], [6])) AS pvt) AS Ingresos_fijos left JOIN
                              (SELECT        rol_det.IdEmpresa, rol_det.IdEmpleado, ro_pe.pe_anio, SUM(rol_det.Valor) AS IngresoVarios
-                               FROM            dbo.ro_rubro_tipo AS rub INNER JOIN
-                                                         dbo.ro_rol_detalle AS rol_det ON rub.IdEmpresa = rol_det.IdEmpresa AND rub.IdRubro = rol_det.IdRubro INNER JOIN
-                                                         dbo.ro_periodo_x_ro_Nomina_TipoLiqui AS pe_nom ON rol_det.IdEmpresa = pe_nom.IdEmpresa AND rol_det.IdNominaTipo = pe_nom.IdNomina_Tipo AND 
-                                                         rol_det.IdNominaTipoLiqui = pe_nom.IdNomina_TipoLiqui AND rol_det.IdPeriodo = pe_nom.IdPeriodo INNER JOIN
-                                                         dbo.ro_periodo AS ro_pe ON pe_nom.IdEmpresa = ro_pe.IdEmpresa AND pe_nom.IdPeriodo = ro_pe.IdPeriodo AND rub.ru_tipo = 'I' AND rub.IdRubro <> 24
-                               GROUP BY rol_det.IdEmpresa, rol_det.IdEmpleado, ro_pe.pe_anio) Ingresos_varios ON Ingresos_fijos.IdEmpresa = Ingresos_varios.IdEmpresa AND Ingresos_fijos.IdEmpleado = Ingresos_varios.IdEmpleado AND 
+                                       
+FROM            dbo.ro_periodo AS ro_pe INNER JOIN
+                         dbo.ro_periodo_x_ro_Nomina_TipoLiqui AS pe_nom ON ro_pe.IdEmpresa = pe_nom.IdEmpresa AND ro_pe.IdPeriodo = pe_nom.IdPeriodo INNER JOIN
+                         dbo.ro_rubro_tipo AS rub INNER JOIN
+                         dbo.ro_rol_detalle AS rol_det ON rub.IdEmpresa = rol_det.IdEmpresa AND rub.IdRubro = rol_det.IdRubro ON rub.ru_tipo = 'I' AND rub.IdRubro <> 24 INNER JOIN
+                         dbo.ro_rol ON rol_det.IdEmpresa = dbo.ro_rol.IdEmpresa AND rol_det.IdRol = dbo.ro_rol.IdRol AND pe_nom.IdEmpresa = dbo.ro_rol.IdEmpresa AND pe_nom.IdNomina_Tipo = dbo.ro_rol.IdNominaTipo AND 
+                         pe_nom.IdNomina_TipoLiqui = dbo.ro_rol.IdNominaTipoLiqui AND pe_nom.IdPeriodo = dbo.ro_rol.IdPeriodo
+					   GROUP BY rol_det.IdEmpresa, rol_det.IdEmpleado, ro_pe.pe_anio) Ingresos_varios ON Ingresos_fijos.IdEmpresa = Ingresos_varios.IdEmpresa AND Ingresos_fijos.IdEmpleado = Ingresos_varios.IdEmpleado AND 
                          Ingresos_fijos.pe_anio = Ingresos_varios.pe_anio
 GROUP BY Ingresos_fijos.IdEmpresa, Ingresos_fijos.IdEmpleado, Ingresos_fijos.pe_anio, Ingresos_fijos.Su_CodigoEstablecimiento, Ingresos_fijos.pe_cedulaRuc, Ingresos_fijos.pe_nombre, Ingresos_fijos.pe_apellido, 
                          Ingresos_fijos.GastoAlimentacion, Ingresos_fijos.GastoSalud, Ingresos_fijos.GastoVivienda, Ingresos_fijos.GastoVestimenta, Ingresos_fijos.GastoEucacion, Ingresos_fijos.Utilidades, Ingresos_varios.IngresoVarios

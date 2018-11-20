@@ -23,6 +23,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public List<ro_tipo_gastos_personales_maxim_x_anio_Info> get_list_gastos_tope_x_anio(int anio)
+        {
+            try
+            {
+                return odata.get_list_gastos_tope_x_anio(anio);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public ro_tipo_gastos_personales_maxim_x_anio_Info get_info(int IdGasto)
         {

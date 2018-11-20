@@ -14,8 +14,8 @@ namespace Core.Erp.Data.General
         {
             try
             {
-                List<tb_TarjetaCredito_Info> Lista;
-
+                List<tb_TarjetaCredito_Info> Lista=new List<tb_TarjetaCredito_Info>();
+                
                 using (Entities_general db = new Entities_general())
                 {
                     if (MostrarAnulado == false)
@@ -45,6 +45,32 @@ namespace Core.Erp.Data.General
             }
         }
 
+        public tb_TarjetaCredito_Info GetInfo(int IdTarjeta)
+        {
+            try
+            {
+                tb_TarjetaCredito_Info info = new tb_TarjetaCredito_Info();
+
+                using (Entities_general Context = new Entities_general())
+                {
+                    tb_TarjetaCredito Entity = Context.tb_TarjetaCredito.FirstOrDefault(q => q.IdTarjeta == IdTarjeta);
+                    if (Entity == null) return null;
+                    info = new tb_TarjetaCredito_Info
+                    {
+                        IdTarjeta = Entity.IdTarjeta,
+                        NombreTarjeta = Entity.NombreTarjeta, 
+                        Estado = Entity.Estado                    
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public int get_id()
         {
 
@@ -53,7 +79,7 @@ namespace Core.Erp.Data.General
                 int ID = 1;
                 using (Entities_general db = new Entities_general())
                 {
-                    var Lista = db.tb_TarjetaCredito.Select(q=> q.IdTarjeta);
+                    var Lista = db.tb_TarjetaCredito.Select(q => q.IdTarjeta);
 
                     if (Lista.Count() > 0)
                         ID = Lista.Max() + 1;
@@ -76,7 +102,9 @@ namespace Core.Erp.Data.General
                     {
                         IdTarjeta = get_id(),
                         NombreTarjeta = info.NombreTarjeta,
-                        Estado = info.Estado
+                        Estado = info.Estado=true,
+                        IdUsuario = info.IdUsuario,
+                        Fecha_Transac = DateTime.Now                       
                     });
 
                     db.SaveChanges();
@@ -104,8 +132,9 @@ namespace Core.Erp.Data.General
                     }
 
                     entity.NombreTarjeta = info.NombreTarjeta;
-                    entity.Estado = info.Estado;
-
+                    entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
+                    entity.Fecha_UltMod = DateTime.Now;
+                        
                     db.SaveChanges();
                 }
                 return true;
@@ -131,6 +160,8 @@ namespace Core.Erp.Data.General
                     }
 
                     entity.Estado = info.Estado;
+                    entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                    entity.Fecha_UltAnu = DateTime.Now;
 
                     db.SaveChanges();
                 }

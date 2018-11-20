@@ -27,5 +27,6 @@ namespace Core.Erp.Data
         public Nullable<bool> es_Documento_Electronico { get; set; }
     
         public virtual tb_sis_Documento_Tipo tb_sis_Documento_Tipo { get; set; }
+        public virtual tb_sis_Documento_Tipo_x_Empresa tb_sis_Documento_Tipo_x_Empresa { get; set; }
     }
 }

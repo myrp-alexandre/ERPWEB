@@ -83,18 +83,13 @@ namespace Core.Erp.Data.RRHH
                                  {
                                      IdEmpresa = q.IdEmpresa,
                                      IdEmpleado = q.IdEmpleado,
-                                     info_persona =new Info.General.tb_persona_Info
-                                     {
-                                         IdPersona=q.IdPersona,
-                                         pe_cedulaRuc=q.pe_cedulaRuc
-                                     },
+                                     IdPersona=q.IdPersona,
+                                     pe_cedulaRuc=q.pe_cedulaRuc,
                                      em_estado = q.em_estado,
                                      em_status=q.em_status,
                                      Empleado=q.Empleado,
-                                     pe_cedulaRuc=q.pe_cedulaRuc,
                                      em_codigo=q.em_codigo,
                                      em_fechaIngaRol=q.em_fechaIngaRol,
-                                     IdPersona=q.IdPersona,
 
                                      EstadoBool = q.em_estado == "A" ? true : false
                                  }).ToList();
@@ -106,13 +101,13 @@ namespace Core.Erp.Data.RRHH
                                  {
                                      IdEmpresa = q.IdEmpresa,
                                      IdEmpleado = q.IdEmpleado,
+                                     IdPersona = q.IdPersona,
+                                     pe_cedulaRuc = q.pe_cedulaRuc,
                                      em_estado = q.em_estado,
                                      em_status = q.em_status,
                                      Empleado = q.Empleado,
-                                     pe_cedulaRuc = q.pe_cedulaRuc,
                                      em_codigo = q.em_codigo,
                                      em_fechaIngaRol = q.em_fechaIngaRol,
-                                     IdPersona = q.IdPersona,
 
                                      EstadoBool = q.em_estado == "A" ? true : false
                                  }).ToList();
@@ -208,9 +203,7 @@ namespace Core.Erp.Data.RRHH
                         em_motivo_salisa = info.em_motivo_salisa,
                         IdHorario = info.IdHorario,
                         IdPuntoCargo = info.IdPuntoCargo,
-                        info_persona=new Info.General.tb_persona_Info()
-                        {
-                           IdPersona=info.IdPersona,
+                        Tiene_ingresos_compartidos=info.Tiene_ingresos_compartidos,                       
                            pe_cedulaRuc=info.pe_cedulaRuc,
                            pe_nombre=info.pe_nombre,
                            pe_apellido=info.pe_apellido,
@@ -222,7 +215,7 @@ namespace Core.Erp.Data.RRHH
                            IdTipoDocumento=info.IdTipoDocumento,
                            pe_correo=info.pe_correo,
                            pe_fechaNacimiento=info.pe_fechaNacimiento
-                        }
+                        
                     };
                 }
 
@@ -335,6 +328,7 @@ namespace Core.Erp.Data.RRHH
                         em_motivo_salisa	=info.	em_motivo_salisa	,
                         IdHorario	=info.	IdHorario	,
                         IdPuntoCargo	=info.	IdPuntoCargo,
+                        Tiene_ingresos_compartidos=info.Tiene_ingresos_compartidos,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transaccion = info.Fecha_Transaccion=DateTime.Now
 
@@ -430,7 +424,8 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdHorario = info.IdHorario   ;
                         Entity.IdPuntoCargo = info.IdPuntoCargo;
                         Entity.IdUsuario = info.IdUsuarioUltModi;
-                        Entity.Fecha_UltMod = info.Fecha_Transaccion = DateTime.Now;            
+                        Entity.Fecha_UltMod = info.Fecha_Transaccion = DateTime.Now;
+                    Entity.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
                         Context.SaveChanges();
                 }
 

@@ -117,7 +117,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ActionResult Nuevo(cp_nota_DebCre_Info model)
         {
             model.info_comrobante = new ct_cbtecble_Info();
-
+            model.DebCre = "C";
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List_nc.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             if(model.info_comrobante.lst_ct_cbtecble_det==null)

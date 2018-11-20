@@ -16,6 +16,7 @@ namespace Core.Erp.Data
     {
         public tb_sis_Documento_Tipo()
         {
+            this.tb_sis_Documento_Tipo_Reporte_x_Empresa = new HashSet<tb_sis_Documento_Tipo_Reporte_x_Empresa>();
             this.tb_sis_Documento_Tipo_Talonario = new HashSet<tb_sis_Documento_Tipo_Talonario>();
         }
     
@@ -24,6 +25,7 @@ namespace Core.Erp.Data
         public string estado { get; set; }
         public Nullable<int> Posicion { get; set; }
     
+        public virtual ICollection<tb_sis_Documento_Tipo_Reporte_x_Empresa> tb_sis_Documento_Tipo_Reporte_x_Empresa { get; set; }
         public virtual ICollection<tb_sis_Documento_Tipo_Talonario> tb_sis_Documento_Tipo_Talonario { get; set; }
     }
 }

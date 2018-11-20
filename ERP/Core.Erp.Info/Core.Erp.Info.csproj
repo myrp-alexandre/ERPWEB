@@ -212,6 +212,7 @@
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Info.cs" />
     <Compile Include="General\tb_sucursal_Info.cs" />
     <Compile Include="General\tb_TarjetaCredito_Info.cs" />
+    <Compile Include="General\tb_TarjetaCredito_x_cp_proveedor_Info.cs" />
     <Compile Include="General\tb_transportista_Info.cs" />
     <Compile Include="General\tb_visor_video_Info.cs" />
     <Compile Include="Helps\cl_enumeradores.cs" />
@@ -231,6 +232,8 @@
     <Compile Include="Inventario\in_CatalogoTipo_Info.cs" />
     <Compile Include="Inventario\in_Catalogo_Info.cs" />
     <Compile Include="Inventario\in_categorias_Info.cs" />
+    <Compile Include="Inventario\in_Consignacion_Info.cs" />
+    <Compile Include="Inventario\in_Consignacion_det_Info.cs" />
     <Compile Include="Inventario\in_devolucion_inven_det_Info.cs" />
     <Compile Include="Inventario\in_devolucion_inven_Info.cs" />
     <Compile Include="Inventario\in_grupo_Info.cs" />
@@ -368,6 +371,8 @@
     <Compile Include="RRHH\ro_departamento_Info.cs" />
     <Compile Include="RRHH\ro_division_Info.cs" />
     <Compile Include="RRHH\ro_DocumentoxEmp_Info.cs" />
+    <Compile Include="RRHH\ro_EmpleadoNovedadCargaMasiva_det_Info.cs" />
+    <Compile Include="RRHH\ro_EmpleadoNovedadCargaMasiva_Info.cs" />
     <Compile Include="RRHH\ro_empleado_Info.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_det_Info.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_Info.cs" />

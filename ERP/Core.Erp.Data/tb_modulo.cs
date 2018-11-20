@@ -16,6 +16,7 @@ namespace Core.Erp.Data
     {
         public tb_modulo()
         {
+            this.tb_sis_formulario = new HashSet<tb_sis_formulario>();
             this.tb_sis_reporte = new HashSet<tb_sis_reporte>();
         }
     
@@ -24,6 +25,7 @@ namespace Core.Erp.Data
         public string Nom_Carpeta { get; set; }
         public Nullable<bool> Se_Cierra { get; set; }
     
+        public virtual ICollection<tb_sis_formulario> tb_sis_formulario { get; set; }
         public virtual ICollection<tb_sis_reporte> tb_sis_reporte { get; set; }
     }
 }

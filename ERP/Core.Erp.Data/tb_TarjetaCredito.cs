@@ -22,6 +22,12 @@ namespace Core.Erp.Data
         public int IdTarjeta { get; set; }
         public string NombreTarjeta { get; set; }
         public bool Estado { get; set; }
+        public string IdUsuario { get; set; }
+        public Nullable<System.DateTime> Fecha_Transac { get; set; }
+        public string IdUsuarioUltMod { get; set; }
+        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
+        public string IdUsuarioUltAnu { get; set; }
+        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
     
         public virtual ICollection<tb_TarjetaCredito_x_cp_proveedor> tb_TarjetaCredito_x_cp_proveedor { get; set; }
     }

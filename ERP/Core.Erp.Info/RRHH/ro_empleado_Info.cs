@@ -102,6 +102,42 @@ namespace Core.Erp.Info.RRHH
         public tb_persona_Info info_persona { get; set; }
         public Nullable<int> IdHorario { get; set; }
         public Nullable<int> IdPuntoCargo { get; set; }
+        public bool Tiene_ingresos_compartidos { get; set; }
+
+
+
+
+
+        #region datos personas
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo apellido debe tener máximo 100 caracteres")]
+        public string pe_apellido { get; set; }
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
+        public string pe_nombre { get; set; }
+        [Required(ErrorMessage = ("el campo sexo es obligatorio"))]
+        public string pe_sexo { get; set; }
+        [Required(ErrorMessage = ("el campo estado civil es obligatorio"))]
+
+        public string IdEstadoCivil { get; set; }
+        [StringLength(150, MinimumLength = 0, ErrorMessage = "el campo dirección debe tener máximo 150 caracteres")]
+        public string pe_direccion { get; set; }
+        [Required(ErrorMessage = ("el campo telefono es obligatorio"))]
+        public string pe_telfono_Contacto { get; set; }
+        [Required(ErrorMessage = ("el campo celular es obligatorio"))]
+        public string pe_celular { get; set; }
+        [Required(ErrorMessage = ("el campo tipo de documento es obligatorio"))]
+        public string IdTipoDocumento { get; set; }
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo correo debe tener máximo 100 caracteres")]
+        public string pe_correo { get; set; }
+        [Required(ErrorMessage = ("el campo fecha nacimiento es obligatorio"))]
+
+        public Nullable<System.DateTime> pe_fechaNacimiento { get; set; }
+
+
+        #endregion
+
+
+
+
         //
         public int IdTipoNomina { get; set; }
         public string Empleado { get; set; }

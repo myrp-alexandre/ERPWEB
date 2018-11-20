@@ -20,12 +20,14 @@ FROM            dbo.ro_empleado_Novedad AS nov INNER JOIN
 						 and IdNomina_tipo=@IdNomina
 						 and IdNomina_TipoLiqui=@IdNominaTipo
 						 and nov.IdEmpresa=@IdEmpresa
-						 and exists (select * from ro_rol_detalle r
+						 and exists (select * from ro_rol_detalle d, ro_rol r
 						 where r.IdEmpresa=nov.IdEmpresa
-						 and r.IdEmpleado=nov.IdEmpleado
+						 and r.IdEmpresa=d.IdEmpresa
+						 and r.IdRol=d.IdRol
+						 and d.IdEmpleado=nov.IdEmpleado
 						 and r.IdNominaTipo=nov.IdNomina_tipo
 						 and r.IdNominaTipoLiqui=nov.IdNomina_TipoLiqui
-						 and r.IdRubro=nov_det.IdRubro
+						 and d.IdRubro=nov_det.IdRubro
 						 and r.IdPeriodo=@IdPeriodo)
 
 

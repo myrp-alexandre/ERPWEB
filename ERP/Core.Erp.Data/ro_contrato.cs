@@ -34,7 +34,7 @@ namespace Core.Erp.Data
         public string IdUsuarioUltAnu { get; set; }
         public string EstadoContrato { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_Nomina_Tipo ro_Nomina_Tipo { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

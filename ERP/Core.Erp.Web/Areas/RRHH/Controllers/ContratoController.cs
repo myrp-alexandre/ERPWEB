@@ -78,6 +78,21 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+
+        public ActionResult GridViewPartial_contratos_por_vencer( DateTime FechaCorte)
+        {
+            try
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                List<ro_contrato_Info> model = bus_contrato.get_list_contratos_por_vencer(IdEmpresa, FechaCorte);
+                return PartialView("_GridViewPartial_contratos_por_vencer", model);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         [HttpPost]
         public ActionResult Nuevo(ro_contrato_Info info)
         {

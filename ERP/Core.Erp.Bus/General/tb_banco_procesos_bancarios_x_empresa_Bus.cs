@@ -12,11 +12,23 @@ namespace Core.Erp.Bus.General
     {
         tb_banco_procesos_bancarios_x_empresa_Data odata = new tb_banco_procesos_bancarios_x_empresa_Data();
 
-        public List<tb_banco_procesos_bancarios_x_empresa_Info> get_list(bool mostrar_anulados)
+        public List<tb_banco_procesos_bancarios_x_empresa_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(mostrar_anulados);
+                return odata.get_list(IdEmpresa, mostrar_anulados);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<tb_banco_procesos_bancarios_x_empresa_Info> get_list(int IdEmpresa,int IdBanco)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, IdBanco);
             }
             catch (Exception)
             {

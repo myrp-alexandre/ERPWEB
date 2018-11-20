@@ -35,11 +35,16 @@ declare
                          dbo.ro_empleado.IdTipoResidenciaSRI, dbo.ro_empleado.IdTipoSistemaSalarioNetoSRI, dbo.ro_empleado.es_AcreditaHorasExtras, 
                          dbo.ro_empleado.em_AnticipoSueldo, dbo.ro_empleado.CodigoSectorial AS CodigoSectorialIESS, dbo.ro_empleado.es_TruncarDecimalAnticipo, dbo.tb_pais.IdPais, 
                          dbo.tb_provincia.IdProvincia, dbo.tb_ciudad.IdCiudad, 
-                                                 (select sum( Valor) from ro_rol_detalle where IdEmpleado=ro_empleado.IdEmpleado and IdRubro='24' and SUBSTRING( cast( IdPeriodo as varchar(10)),1,4)=@Anio) as tot_Sueldo_Ganado,-- obtengo el total de sueldo ganados
-                                                 (select sum( Valor) from ro_rol_detalle where IdEmpleado=ro_empleado.IdEmpleado and IdRubro='289' and SUBSTRING( cast( IdPeriodo as varchar(10)),1,4)=@Anio) as tot_decimo_cuarto,-- total de decimo cuarto
-												 (select sum( Valor) from ro_rol_detalle where IdEmpleado=ro_empleado.IdEmpleado and IdRubro='290' and SUBSTRING( cast( IdPeriodo as varchar(10)),1,4)=@Anio) as tot_decimo_tercero,-- total de decimo tercero 
-                                                 (select sum( Valor) from ro_rol_detalle where IdEmpleado=ro_empleado.IdEmpleado and IdRubro='296' and SUBSTRING( cast( IdPeriodo as varchar(10)),1,4)=@Anio) as tot_fondo_reserva,-- total de fondos de reservas
-                                                 (select sum( Valor) from ro_rol_detalle where IdEmpleado=ro_empleado.IdEmpleado and IdRubro in(7,8,9) and SUBSTRING(cast( IdPeriodo as varchar(10)),1,4)=@Anio) as tot_horasExtras,-- total de horas extras
+                                                 (select sum( Valor) FROM            dbo.ro_rol AS rol INNER JOIN
+                         dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol where IdEmpleado=ro_empleado.IdEmpleado and IdRubro='24' and SUBSTRING( cast( IdPeriodo as varchar(10)),1,4)=@Anio) as tot_Sueldo_Ganado,-- obtengo el total de sueldo ganados
+                                                 (select sum( Valor) FROM            dbo.ro_rol AS rol INNER JOIN
+                         dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol where IdEmpleado=ro_empleado.IdEmpleado and IdRubro='289' and SUBSTRING( cast( IdPeriodo as varchar(10)),1,4)=@Anio) as tot_decimo_cuarto,-- total de decimo cuarto
+												 (select sum( Valor) FROM            dbo.ro_rol AS rol INNER JOIN
+                         dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol where IdEmpleado=ro_empleado.IdEmpleado and IdRubro='290' and SUBSTRING( cast( IdPeriodo as varchar(10)),1,4)=@Anio) as tot_decimo_tercero,-- total de decimo tercero 
+                                                 (select sum( Valor) FROM            dbo.ro_rol AS rol INNER JOIN
+                         dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol where IdEmpleado=ro_empleado.IdEmpleado and IdRubro='296' and SUBSTRING( cast( IdPeriodo as varchar(10)),1,4)=@Anio) as tot_fondo_reserva,-- total de fondos de reservas
+                                                 (select sum( Valor) FROM            dbo.ro_rol AS rol INNER JOIN
+                         dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol where IdEmpleado=ro_empleado.IdEmpleado and IdRubro in(7,8,9) and SUBSTRING(cast( IdPeriodo as varchar(10)),1,4)=@Anio) as tot_horasExtras,-- total de horas extras
 												 (select sum( Valor) from ro_Ing_Egre_x_Empleado where IdEmpleado=ro_empleado.IdEmpleado and IngEgr='I' and SUBSTRING(cast( IdPeriodo as varchar(10)),0,4)=@Anio) as tot_ingreso,-- total de ingreso
                                                 -- (select sum( ValorTotal) from ro_participacion_utilidad_empleado where IdEmpleado=ro_empleado.IdEmpleado and SUBSTRING(cast( IdPeriodo as varchar(10)),0,4)=@Anio) as tot_utilidad,-- total de utilidad
 

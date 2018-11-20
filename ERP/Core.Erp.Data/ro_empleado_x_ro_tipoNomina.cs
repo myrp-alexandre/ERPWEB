@@ -19,7 +19,7 @@ namespace Core.Erp.Data
         public int IdTipoNomina { get; set; }
         public string observacion { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_Nomina_Tipo ro_Nomina_Tipo { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

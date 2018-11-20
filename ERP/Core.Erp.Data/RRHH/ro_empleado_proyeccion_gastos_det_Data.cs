@@ -41,5 +41,6 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
+     
     }
 }

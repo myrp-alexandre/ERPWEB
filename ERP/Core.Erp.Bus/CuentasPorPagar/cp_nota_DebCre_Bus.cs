@@ -63,7 +63,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     data = new cp_nota_DebCre_Data();
                     info.IdTipoCbte_Nota = info.info_comrobante.IdTipoCbte;
                     info.IdCbteCble_Nota = info.info_comrobante.IdCbteCble;
-                    info.DebCre = "C";
                     info.Estado = "A";
                     info.cn_vaCoa = "N";
                     info.IdTipoNota = info.IdTipoNota;
