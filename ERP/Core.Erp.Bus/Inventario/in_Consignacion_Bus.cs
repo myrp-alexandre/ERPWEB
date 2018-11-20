@@ -12,11 +12,11 @@ namespace Core.Erp.Bus.Inventario
     {
         in_Consignacion_Data odata = new in_Consignacion_Data();
 
-        public List<in_Consignacion_Info> GetList(bool MostrarAnulado, int IdEmpresa)
+        public List<in_Consignacion_Info> GetList(int IdEmpresa, string signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
-                return odata.GetList(MostrarAnulado, IdEmpresa);
+                return odata.GetList(IdEmpresa, signo, mostrar_anulados, fecha_ini, fecha_fin);
             }
             catch (Exception)
             {

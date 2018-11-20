@@ -24,7 +24,7 @@ namespace Core.Erp.Data.General
             decimal id;
             if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
                 return null;
-            return get_info(IdEmpresa, (int)args.Value);
+            return get_info_demanda(IdEmpresa, (int)args.Value);
         }
 
         public List<tb_sucursal_Info> get_list(int IdEmpresa, int skip, int take, string filter)
@@ -35,12 +35,13 @@ namespace Core.Erp.Data.General
 
                 Entities_general context_g = new Entities_general();
 
-                var lstg = context_g.tb_sucursal.Where(q => q.Estado == "A" && (q.IdSucursal.ToString() + " " + q.Su_Descripcion).Contains(filter)).OrderBy(q => q.IdSucursal).Skip(skip).Take(take);
+                var lstg = context_g.tb_sucursal.Where(q => q.Estado == "A" && q.IdEmpresa == IdEmpresa && (q.IdSucursal.ToString() + " " + q.Su_Descripcion).Contains(filter)).OrderBy(q => q.IdSucursal).Skip(skip).Take(take);
                 foreach (var q in lstg)
                 {
                     Lista.Add(new tb_sucursal_Info
                     {
                         IdSucursal = q.IdSucursal,
+                        codigo = q.codigo,
                         Su_Descripcion = q.Su_Descripcion
                     });
                 }
@@ -53,6 +54,23 @@ namespace Core.Erp.Data.General
 
                 throw;
             }
+        }
+
+        public tb_sucursal_Info get_info_demanda(int IdEmpresa, int value)
+        {
+            tb_sucursal_Info info = new tb_sucursal_Info();
+            using (Entities_general Contex = new Entities_general())
+            {
+                info = (from q in Contex.tb_sucursal
+                        where q.IdEmpresa == IdEmpresa         
+                        select new tb_sucursal_Info
+                        {
+                            IdSucursal = q.IdSucursal,
+                            codigo = q.codigo,
+                            Su_Descripcion = q.Su_Descripcion
+                        }).FirstOrDefault();
+            }
+            return info;
         }
 
         public tb_sucursal_Info get_info(int IdEmpresa, int IdSucursal)
