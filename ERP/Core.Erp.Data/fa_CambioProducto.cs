@@ -12,18 +12,23 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class in_consignacion_det
+    public partial class fa_CambioProducto
     {
-        public int IdEmpresa { get; set; }
-        public decimal IdConsignacion { get; set; }
-        public int Secuencial { get; set; }
-        public Nullable<decimal> IdProducto { get; set; }
-        public string IdUnidadMedida { get; set; }
-        public Nullable<int> Cantidad { get; set; }
-        public Nullable<double> Precio { get; set; }
-        public string Observacion { get; set; }
+        public fa_CambioProducto()
+        {
+            this.fa_CambioProductoDet = new HashSet<fa_CambioProductoDet>();
+        }
     
-        public virtual In_consignacion In_consignacion { get; set; }
-        public virtual in_Producto in_Producto { get; set; }
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
+        public int IdCambio { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public string Observacion { get; set; }
+        public bool Estado { get; set; }
+        public Nullable<int> IdMovi_inven_tipo { get; set; }
+        public Nullable<decimal> IdNumMovi { get; set; }
+    
+        public virtual ICollection<fa_CambioProductoDet> fa_CambioProductoDet { get; set; }
     }
 }

@@ -12,20 +12,23 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class in_producto_x_tb_bodega_Costo_Historico
+    public partial class fa_CambioProductoDet
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
-        public decimal IdProducto { get; set; }
-        public int IdFecha { get; set; }
+        public int IdCambio { get; set; }
         public int Secuencia { get; set; }
-        public System.DateTime fecha { get; set; }
-        public double costo { get; set; }
-        public double Stock_a_la_fecha { get; set; }
-        public string Observacion { get; set; }
-        public Nullable<System.DateTime> fecha_trans { get; set; }
+        public decimal IdCbteVta { get; set; }
+        public int SecuenciaFact { get; set; }
+        public decimal IdProductoFact { get; set; }
+        public Nullable<decimal> IdProductoCambio { get; set; }
+        public double Costo { get; set; }
+        public double CantidadFact { get; set; }
+        public double CantidadCambio { get; set; }
+        public Nullable<decimal> IdDevolucion { get; set; }
     
-        public virtual in_producto_x_tb_bodega in_producto_x_tb_bodega { get; set; }
+        public virtual fa_CambioProducto fa_CambioProducto { get; set; }
+        public virtual fa_factura_det fa_factura_det { get; set; }
     }
 }

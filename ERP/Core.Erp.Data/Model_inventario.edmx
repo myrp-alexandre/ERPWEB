@@ -358,25 +358,8 @@
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdMovi_inven_tipo_egresoBodegaOrigen" Type="int" />
           <Property Name="IdMovi_inven_tipo_ingresoBodegaDestino" Type="int" />
-          <Property Name="Maneja_Stock_Negativo" Type="varchar" MaxLength="1" />
-          <Property Name="Usuario_Escoge_Motivo" Type="varchar" MaxLength="1" />
-          <Property Name="IdMovi_inven_tipo_egresoAjuste" Type="int" />
-          <Property Name="IdMovi_inven_tipo_ingresoAjuste" Type="int" />
-          <Property Name="IdCtaCble_Inven" Type="varchar" MaxLength="20" />
-          <Property Name="IdCtaCble_CostoInven" Type="varchar" MaxLength="20" />
-          <Property Name="IdTipoCbte_CostoInven" Type="int" />
-          <Property Name="IdTipoCbte_CostoInven_Reverso" Type="int" />
-          <Property Name="IdMovi_Inven_tipo_x_anu_Ing" Type="int" />
-          <Property Name="IdMovi_Inven_tipo_x_anu_Egr" Type="int" />
-          <Property Name="IdMovi_Inven_tipo_Ing_Ajust_fis_x_defa" Type="int" />
-          <Property Name="IdMovi_Inven_tipo_Egr_Ajust_fis_x_defa" Type="int" />
-          <Property Name="ApruebaAjusteFisicoAuto" Type="varchar" MaxLength="1" />
-          <Property Name="IdEstadoAproba_x_Ing" Type="varchar" MaxLength="15" />
-          <Property Name="IdEstadoAproba_x_Egr" Type="varchar" MaxLength="15" />
           <Property Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" Type="int" />
           <Property Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" Type="int" />
-          <Property Name="P_Fecha_para_contabilizacion_ingr_egr" Type="varchar" MaxLength="20" />
-          <Property Name="P_se_valida_parametrizacion_x_producto" Type="bit" />
           <Property Name="P_Al_Conta_CtaInven_Buscar_en" Type="varchar" MaxLength="15" />
           <Property Name="P_Al_Conta_CtaCosto_Buscar_en" Type="varchar" MaxLength="15" />
           <Property Name="P_IdCtaCble_transitoria_transf_inven" Type="varchar" MaxLength="20" />
@@ -389,6 +372,8 @@
           <Property Name="P_IdMovi_inven_tipo_ingreso_x_compra" Type="int" />
           <Property Name="P_Dias_menores_alerta_desde_fecha_actual_rojo" Type="int" />
           <Property Name="P_Dias_menores_alerta_desde_fecha_actual_amarillo" Type="int" />
+          <Property Name="DiasTransaccionesAFuturo" Type="int" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_Cambio" Type="int" />
         </EntityType>
         <EntityType Name="in_presentacion">
           <Key>
@@ -1375,21 +1360,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_producto_padre_combo' no 
             </Principal>
             <Dependent Role="in_parametro">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_Inven_tipo_x_anu_Ing" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo1">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_Inven_tipo_x_anu_Egr" />
+              <PropertyRef Name="IdMovi_inven_tipo_Cambio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1460,34 +1431,6 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_producto_padre_combo' no 
             <Dependent Role="in_parametro">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdMovi_inven_tipo_egresoBodegaOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo4">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo_ingresoAjuste" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo5">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo_egresoAjuste" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2277,10 +2220,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
             <End Role="in_parametro" EntitySet="in_parametro" />
           </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo1" Association="Self.FK_in_parametro_in_movi_inven_tipo1">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
           <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo10" Association="Self.FK_in_parametro_in_movi_inven_tipo10">
             <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
             <End Role="in_parametro" EntitySet="in_parametro" />
@@ -2298,14 +2237,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             <End Role="in_parametro" EntitySet="in_parametro" />
           </AssociationSet>
           <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo3" Association="Self.FK_in_parametro_in_movi_inven_tipo3">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo4" Association="Self.FK_in_parametro_in_movi_inven_tipo4">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo5" Association="Self.FK_in_parametro_in_movi_inven_tipo5">
             <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
             <End Role="in_parametro" EntitySet="in_parametro" />
           </AssociationSet>
@@ -2440,10 +2371,10 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="in_CatalogoTipo" Relationship="Self.FK_in_Catalogo_in_CatalogoTipo" FromRole="in_Catalogo" ToRole="in_CatalogoTipo" />
           <NavigationProperty Name="in_Motivo_Inven" Relationship="Self.FK_in_Motivo_Inven_in_Catalogo1" FromRole="in_Catalogo" ToRole="in_Motivo_Inven" />
-          <NavigationProperty Name="in_parametro" Relationship="Self.FK_in_parametro_in_Catalogo" FromRole="in_Catalogo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro1" Relationship="Self.FK_in_parametro_in_Catalogo1" FromRole="in_Catalogo" ToRole="in_parametro" />
           <NavigationProperty Name="in_transferencia" Relationship="Self.FK_in_transferencia_in_Catalogo" FromRole="in_Catalogo" ToRole="in_transferencia" />
-        </EntityType>
+          <NavigationProperty Name="in_parametro" Relationship="Model_inventario.FK_in_parametro_in_Catalogo" FromRole="in_Catalogo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_parametro1" Relationship="Model_inventario.FK_in_parametro_in_Catalogo1" FromRole="in_Catalogo" ToRole="in_parametro" />
+          </EntityType>
         <EntityType Name="in_CatalogoTipo">
           <Key>
             <PropertyRef Name="IdCatalogo_tipo" />
@@ -2753,20 +2684,17 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <Property Name="Genera_Movi_Inven" Type="Boolean" />
           <Property Name="Genera_Diario_Contable" Type="Boolean" />
           <NavigationProperty Name="in_movi_inven_tipo_x_tb_bodega" Relationship="Self.FK_in_movi_inven_tipo_x_tb_bodega_in_movi_inven_tipo" FromRole="in_movi_inven_tipo" ToRole="in_movi_inven_tipo_x_tb_bodega" />
-          <NavigationProperty Name="in_parametro" Relationship="Self.FK_in_parametro_in_movi_inven_tipo" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro1" Relationship="Self.FK_in_parametro_in_movi_inven_tipo1" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro2" Relationship="Self.FK_in_parametro_in_movi_inven_tipo10" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro3" Relationship="Self.FK_in_parametro_in_movi_inven_tipo11" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro4" Relationship="Self.FK_in_parametro_in_movi_inven_tipo12" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro5" Relationship="Self.FK_in_parametro_in_movi_inven_tipo2" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro6" Relationship="Self.FK_in_parametro_in_movi_inven_tipo3" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro7" Relationship="Self.FK_in_parametro_in_movi_inven_tipo4" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro8" Relationship="Self.FK_in_parametro_in_movi_inven_tipo5" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro9" Relationship="Self.FK_in_parametro_in_movi_inven_tipo6" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro10" Relationship="Self.FK_in_parametro_in_movi_inven_tipo7" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro11" Relationship="Self.FK_in_parametro_in_movi_inven_tipo8" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_parametro12" Relationship="Self.FK_in_parametro_in_movi_inven_tipo9" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
-        </EntityType>
+          <NavigationProperty Name="in_parametro" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_parametro1" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo10" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_parametro2" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo11" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_parametro3" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo12" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_parametro4" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo2" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_parametro5" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo3" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_parametro6" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo6" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_parametro7" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo7" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_parametro8" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo8" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_parametro9" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo9" FromRole="in_movi_inven_tipo" ToRole="in_parametro" />
+          </EntityType>
         <EntityType Name="in_movi_inven_tipo_x_tb_bodega">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2780,61 +2708,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <Property Name="IdBodega" Type="Int32" Nullable="false" />
           <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="in_movi_inven_tipo" Relationship="Self.FK_in_movi_inven_tipo_x_tb_bodega_in_movi_inven_tipo" FromRole="in_movi_inven_tipo_x_tb_bodega" ToRole="in_movi_inven_tipo" />
-        </EntityType>
-        <EntityType Name="in_parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMovi_inven_tipo_egresoBodegaOrigen" Type="Int32" />
-          <Property Name="IdMovi_inven_tipo_ingresoBodegaDestino" Type="Int32" />
-          <Property Name="Maneja_Stock_Negativo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Usuario_Escoge_Motivo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="IdMovi_inven_tipo_egresoAjuste" Type="Int32" />
-          <Property Name="IdMovi_inven_tipo_ingresoAjuste" Type="Int32" />
-          <Property Name="IdCtaCble_Inven" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble_CostoInven" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoCbte_CostoInven" Type="Int32" />
-          <Property Name="IdTipoCbte_CostoInven_Reverso" Type="Int32" />
-          <Property Name="IdMovi_Inven_tipo_x_anu_Ing" Type="Int32" />
-          <Property Name="IdMovi_Inven_tipo_x_anu_Egr" Type="Int32" />
-          <Property Name="IdMovi_Inven_tipo_Ing_Ajust_fis_x_defa" Type="Int32" />
-          <Property Name="IdMovi_Inven_tipo_Egr_Ajust_fis_x_defa" Type="Int32" />
-          <Property Name="ApruebaAjusteFisicoAuto" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="IdEstadoAproba_x_Ing" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="IdEstadoAproba_x_Egr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" Type="Int32" />
-          <Property Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" Type="Int32" />
-          <Property Name="P_Fecha_para_contabilizacion_ingr_egr" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="P_se_valida_parametrizacion_x_producto" Type="Boolean" />
-          <Property Name="P_Al_Conta_CtaInven_Buscar_en" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="P_Al_Conta_CtaCosto_Buscar_en" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="P_IdCtaCble_transitoria_transf_inven" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="P_IdProductoTipo_para_lote_0" Type="Int32" />
-          <Property Name="P_se_crea_lote_0_al_crear_producto_matriz" Type="Boolean" />
-          <Property Name="IdMovi_inven_tipo_x_distribucion_ing" Type="Int32" />
-          <Property Name="IdMovi_inven_tipo_x_distribucion_egr" Type="Int32" />
-          <Property Name="P_IdMovi_inven_tipo_default_ing" Type="Int32" />
-          <Property Name="P_IdMovi_inven_tipo_default_egr" Type="Int32" />
-          <Property Name="P_IdMovi_inven_tipo_ingreso_x_compra" Type="Int32" />
-          <Property Name="P_Dias_menores_alerta_desde_fecha_actual_rojo" Type="Int32" />
-          <Property Name="P_Dias_menores_alerta_desde_fecha_actual_amarillo" Type="Int32" />
-          <NavigationProperty Name="in_Catalogo" Relationship="Self.FK_in_parametro_in_Catalogo" FromRole="in_parametro" ToRole="in_Catalogo" />
-          <NavigationProperty Name="in_Catalogo1" Relationship="Self.FK_in_parametro_in_Catalogo1" FromRole="in_parametro" ToRole="in_Catalogo" />
-          <NavigationProperty Name="in_movi_inven_tipo" Relationship="Self.FK_in_parametro_in_movi_inven_tipo" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo1" Relationship="Self.FK_in_parametro_in_movi_inven_tipo1" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo2" Relationship="Self.FK_in_parametro_in_movi_inven_tipo10" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo3" Relationship="Self.FK_in_parametro_in_movi_inven_tipo11" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo4" Relationship="Self.FK_in_parametro_in_movi_inven_tipo12" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo5" Relationship="Self.FK_in_parametro_in_movi_inven_tipo2" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo6" Relationship="Self.FK_in_parametro_in_movi_inven_tipo3" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo7" Relationship="Self.FK_in_parametro_in_movi_inven_tipo4" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo8" Relationship="Self.FK_in_parametro_in_movi_inven_tipo5" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo9" Relationship="Self.FK_in_parametro_in_movi_inven_tipo6" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo10" Relationship="Self.FK_in_parametro_in_movi_inven_tipo7" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo11" Relationship="Self.FK_in_parametro_in_movi_inven_tipo8" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_movi_inven_tipo12" Relationship="Self.FK_in_parametro_in_movi_inven_tipo9" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
-          <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_parametro_in_ProductoTipo" FromRole="in_parametro" ToRole="in_ProductoTipo" />
         </EntityType>
         <EntityType Name="in_presentacion">
           <Key>
@@ -2916,8 +2789,8 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <NavigationProperty Name="in_UnidadMedida1" Relationship="Self.FK_in_Producto_in_UnidadMedida1" FromRole="in_Producto" ToRole="in_UnidadMedida" />
           <NavigationProperty Name="in_transferencia_det" Relationship="Self.FK_in_transferencia_det_in_Producto" FromRole="in_Producto" ToRole="in_transferencia_det" />
           <NavigationProperty Name="in_producto_x_tb_bodega" Relationship="Model_inventario.FK_in_producto_x_tb_bodega_in_Producto" FromRole="in_Producto" ToRole="in_producto_x_tb_bodega" />
-          <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
           <NavigationProperty Name="in_consignacion_det" Relationship="Model_inventario.FK_in_consignacion_det_in_Producto" FromRole="in_Producto" ToRole="in_consignacion_det" />
+          <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
         </EntityType>
         <EntityType Name="in_Producto_Composicion">
           <Key>
@@ -3436,30 +3309,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_in_parametro_in_Catalogo">
-          <End Role="in_Catalogo" Type="Self.in_Catalogo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_Catalogo">
-              <PropertyRef Name="IdCatalogo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="P_Al_Conta_CtaInven_Buscar_en" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_Catalogo1">
-          <End Role="in_Catalogo" Type="Self.in_Catalogo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_Catalogo">
-              <PropertyRef Name="IdCatalogo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="P_Al_Conta_CtaCosto_Buscar_en" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_in_transferencia_in_Catalogo">
           <End Role="in_Catalogo" Type="Self.in_Catalogo" Multiplicity="0..1" />
           <End Role="in_transferencia" Type="Self.in_transferencia" Multiplicity="*" />
@@ -3774,188 +3623,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_Inven_tipo_x_anu_Ing" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo1">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_Inven_tipo_x_anu_Egr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo10">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="P_IdMovi_inven_tipo_default_ing" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo11">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="P_IdMovi_inven_tipo_default_egr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo12">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="P_IdMovi_inven_tipo_ingreso_x_compra" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo2">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo_egresoBodegaOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo3">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo_egresoBodegaOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo4">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo_ingresoAjuste" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo5">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo_egresoAjuste" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo6">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo7">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo8">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo_x_distribucion_ing" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_parametro_in_movi_inven_tipo9">
-          <End Role="in_movi_inven_tipo" Type="Self.in_movi_inven_tipo" Multiplicity="0..1" />
-          <End Role="in_parametro" Type="Self.in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_movi_inven_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMovi_inven_tipo_x_distribucion_egr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_in_Producto_in_presentacion">
           <End Role="in_presentacion" Type="Self.in_presentacion" Multiplicity="0..1" />
           <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="*" />
@@ -4151,7 +3818,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <EntitySet Name="in_Motivo_Inven" EntityType="Self.in_Motivo_Inven" />
           <EntitySet Name="in_movi_inven_tipo" EntityType="Self.in_movi_inven_tipo" />
           <EntitySet Name="in_movi_inven_tipo_x_tb_bodega" EntityType="Self.in_movi_inven_tipo_x_tb_bodega" />
-          <EntitySet Name="in_parametro" EntityType="Self.in_parametro" />
           <EntitySet Name="in_presentacion" EntityType="Self.in_presentacion" />
           <EntitySet Name="in_Producto" EntityType="Self.in_Producto" />
           <EntitySet Name="in_Producto_Composicion" EntityType="Self.in_Producto_Composicion" />
@@ -4179,14 +3845,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <AssociationSet Name="FK_in_Motivo_Inven_in_Catalogo1" Association="Self.FK_in_Motivo_Inven_in_Catalogo1">
             <End Role="in_Catalogo" EntitySet="in_Catalogo" />
             <End Role="in_Motivo_Inven" EntitySet="in_Motivo_Inven" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_Catalogo" Association="Self.FK_in_parametro_in_Catalogo">
-            <End Role="in_Catalogo" EntitySet="in_Catalogo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_Catalogo1" Association="Self.FK_in_parametro_in_Catalogo1">
-            <End Role="in_Catalogo" EntitySet="in_Catalogo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
           </AssociationSet>
           <AssociationSet Name="FK_in_transferencia_in_Catalogo" Association="Self.FK_in_transferencia_in_Catalogo">
             <End Role="in_Catalogo" EntitySet="in_Catalogo" />
@@ -4267,58 +3925,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <AssociationSet Name="FK_in_movi_inven_tipo_x_tb_bodega_in_movi_inven_tipo" Association="Self.FK_in_movi_inven_tipo_x_tb_bodega_in_movi_inven_tipo">
             <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
             <End Role="in_movi_inven_tipo_x_tb_bodega" EntitySet="in_movi_inven_tipo_x_tb_bodega" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo" Association="Self.FK_in_parametro_in_movi_inven_tipo">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo1" Association="Self.FK_in_parametro_in_movi_inven_tipo1">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo10" Association="Self.FK_in_parametro_in_movi_inven_tipo10">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo11" Association="Self.FK_in_parametro_in_movi_inven_tipo11">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo12" Association="Self.FK_in_parametro_in_movi_inven_tipo12">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo2" Association="Self.FK_in_parametro_in_movi_inven_tipo2">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo3" Association="Self.FK_in_parametro_in_movi_inven_tipo3">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo4" Association="Self.FK_in_parametro_in_movi_inven_tipo4">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo5" Association="Self.FK_in_parametro_in_movi_inven_tipo5">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo6" Association="Self.FK_in_parametro_in_movi_inven_tipo6">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo7" Association="Self.FK_in_parametro_in_movi_inven_tipo7">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo8" Association="Self.FK_in_parametro_in_movi_inven_tipo8">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo9" Association="Self.FK_in_parametro_in_movi_inven_tipo9">
-            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
           </AssociationSet>
           <AssociationSet Name="FK_in_Producto_in_presentacion" Association="Self.FK_in_Producto_in_presentacion">
             <End Role="in_presentacion" EntitySet="in_presentacion" />
@@ -4401,15 +4007,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             <End Role="in_producto_x_tb_bodega" EntitySet="in_producto_x_tb_bodega" />
             <End Role="in_producto_x_tb_bodega_Costo_Historico" EntitySet="in_producto_x_tb_bodega_Costo_Historico" />
           </AssociationSet>
-          <EntitySet Name="in_ProductoTipo" EntityType="Model_inventario.in_ProductoTipo" />
-          <AssociationSet Name="FK_in_parametro_in_ProductoTipo" Association="Model_inventario.FK_in_parametro_in_ProductoTipo">
-            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
-            <End Role="in_parametro" EntitySet="in_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_Producto_in_ProductoTipo" Association="Model_inventario.FK_in_Producto_in_ProductoTipo">
-            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
-            <End Role="in_Producto" EntitySet="in_Producto" />
-          </AssociationSet>
           <EntitySet Name="In_consignacion" EntityType="Model_inventario.In_consignacion" />
           <EntitySet Name="in_consignacion_det" EntityType="Model_inventario.in_consignacion_det" />
           <EntitySet Name="vwin_consignacion" EntityType="Model_inventario.vwin_consignacion" />
@@ -4424,6 +4021,64 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <AssociationSet Name="FK_in_consignacion_det_in_Producto" Association="Model_inventario.FK_in_consignacion_det_in_Producto">
             <End Role="in_Producto" EntitySet="in_Producto" />
             <End Role="in_consignacion_det" EntitySet="in_consignacion_det" />
+          </AssociationSet>
+          <EntitySet Name="in_parametro" EntityType="Model_inventario.in_parametro" />
+          <AssociationSet Name="FK_in_parametro_in_Catalogo" Association="Model_inventario.FK_in_parametro_in_Catalogo">
+            <End Role="in_Catalogo" EntitySet="in_Catalogo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_Catalogo1" Association="Model_inventario.FK_in_parametro_in_Catalogo1">
+            <End Role="in_Catalogo" EntitySet="in_Catalogo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo" Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo">
+            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo10" Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo10">
+            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo11" Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo11">
+            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo12" Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo12">
+            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo2" Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo2">
+            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo3" Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo3">
+            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo6" Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo6">
+            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo7" Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo7">
+            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo8" Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo8">
+            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_parametro_in_movi_inven_tipo9" Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo9">
+            <End Role="in_movi_inven_tipo" EntitySet="in_movi_inven_tipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <EntitySet Name="in_ProductoTipo" EntityType="Model_inventario.in_ProductoTipo" />
+          <AssociationSet Name="FK_in_parametro_in_ProductoTipo" Association="Model_inventario.FK_in_parametro_in_ProductoTipo">
+            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
+            <End Role="in_parametro" EntitySet="in_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_Producto_in_ProductoTipo" Association="Model_inventario.FK_in_Producto_in_ProductoTipo">
+            <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
+            <End Role="in_Producto" EntitySet="in_Producto" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spSys_inv_Reversar_aprobacion_Result">
@@ -4544,60 +4199,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="in_ProductoTipo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdProductoTipo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdProductoTipo" Type="Int32" Nullable="false" />
-          <Property Name="tp_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="tp_EsCombo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="tp_ManejaInven" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Aparece_modu_Ventas" Type="Boolean" Nullable="false" />
-          <Property Name="Aparece_modu_Compras" Type="Boolean" Nullable="false" />
-          <Property Name="Aparece_modu_Inventario" Type="Boolean" Nullable="false" />
-          <Property Name="Aparece_modu_Activo_F" Type="Boolean" Nullable="false" />
-          <Property Name="Aparece_fabricacion" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="in_parametro" Relationship="Model_inventario.FK_in_parametro_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_parametro" />
-          <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_Producto" />
-        </EntityType>
-        <Association Name="FK_in_parametro_in_ProductoTipo">
-          <End Type="Model_inventario.in_ProductoTipo" Role="in_ProductoTipo" Multiplicity="0..1" />
-          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_ProductoTipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProductoTipo" />
-            </Principal>
-            <Dependent Role="in_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="P_IdProductoTipo_para_lote_0" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_Producto_in_ProductoTipo">
-          <End Type="Model_inventario.in_ProductoTipo" Role="in_ProductoTipo" Multiplicity="1" />
-          <End Type="Model_inventario.in_Producto" Role="in_Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_ProductoTipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProductoTipo" />
-            </Principal>
-            <Dependent Role="in_Producto">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProductoTipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="In_consignacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -4704,6 +4305,261 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             <Dependent Role="in_consignacion_det">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="in_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_egresoBodegaOrigen" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_ingresoBodegaDestino" Type="Int32" />
+          <Property Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" Type="Int32" />
+          <Property Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" Type="Int32" />
+          <Property Name="P_Al_Conta_CtaInven_Buscar_en" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="P_Al_Conta_CtaCosto_Buscar_en" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="P_IdCtaCble_transitoria_transf_inven" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="P_IdProductoTipo_para_lote_0" Type="Int32" />
+          <Property Name="P_se_crea_lote_0_al_crear_producto_matriz" Type="Boolean" />
+          <Property Name="IdMovi_inven_tipo_x_distribucion_ing" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_x_distribucion_egr" Type="Int32" />
+          <Property Name="P_IdMovi_inven_tipo_default_ing" Type="Int32" />
+          <Property Name="P_IdMovi_inven_tipo_default_egr" Type="Int32" />
+          <Property Name="P_IdMovi_inven_tipo_ingreso_x_compra" Type="Int32" />
+          <Property Name="P_Dias_menores_alerta_desde_fecha_actual_rojo" Type="Int32" />
+          <Property Name="P_Dias_menores_alerta_desde_fecha_actual_amarillo" Type="Int32" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_Cambio" Type="Int32" />
+          <NavigationProperty Name="in_Catalogo" Relationship="Model_inventario.FK_in_parametro_in_Catalogo" FromRole="in_parametro" ToRole="in_Catalogo" />
+          <NavigationProperty Name="in_Catalogo1" Relationship="Model_inventario.FK_in_parametro_in_Catalogo1" FromRole="in_parametro" ToRole="in_Catalogo" />
+          <NavigationProperty Name="in_movi_inven_tipo" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
+          <NavigationProperty Name="in_movi_inven_tipo1" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo10" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
+          <NavigationProperty Name="in_movi_inven_tipo2" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo11" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
+          <NavigationProperty Name="in_movi_inven_tipo3" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo12" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
+          <NavigationProperty Name="in_movi_inven_tipo4" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo2" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
+          <NavigationProperty Name="in_movi_inven_tipo5" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo3" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
+          <NavigationProperty Name="in_movi_inven_tipo6" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo6" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
+          <NavigationProperty Name="in_movi_inven_tipo7" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo7" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
+          <NavigationProperty Name="in_movi_inven_tipo8" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo8" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
+          <NavigationProperty Name="in_movi_inven_tipo9" Relationship="Model_inventario.FK_in_parametro_in_movi_inven_tipo9" FromRole="in_parametro" ToRole="in_movi_inven_tipo" />
+          <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_parametro_in_ProductoTipo" FromRole="in_parametro" ToRole="in_ProductoTipo" />
+        </EntityType>
+        <Association Name="FK_in_parametro_in_Catalogo">
+          <End Type="Model_inventario.in_Catalogo" Role="in_Catalogo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="P_Al_Conta_CtaInven_Buscar_en" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_Catalogo1">
+          <End Type="Model_inventario.in_Catalogo" Role="in_Catalogo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="P_Al_Conta_CtaCosto_Buscar_en" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_movi_inven_tipo">
+          <End Type="Model_inventario.in_movi_inven_tipo" Role="in_movi_inven_tipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_movi_inven_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo_Cambio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_movi_inven_tipo10">
+          <End Type="Model_inventario.in_movi_inven_tipo" Role="in_movi_inven_tipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_movi_inven_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="P_IdMovi_inven_tipo_default_ing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_movi_inven_tipo11">
+          <End Type="Model_inventario.in_movi_inven_tipo" Role="in_movi_inven_tipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_movi_inven_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="P_IdMovi_inven_tipo_default_egr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_movi_inven_tipo12">
+          <End Type="Model_inventario.in_movi_inven_tipo" Role="in_movi_inven_tipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_movi_inven_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="P_IdMovi_inven_tipo_ingreso_x_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_movi_inven_tipo2">
+          <End Type="Model_inventario.in_movi_inven_tipo" Role="in_movi_inven_tipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_movi_inven_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo_egresoBodegaOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_movi_inven_tipo3">
+          <End Type="Model_inventario.in_movi_inven_tipo" Role="in_movi_inven_tipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_movi_inven_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo_egresoBodegaOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_movi_inven_tipo6">
+          <End Type="Model_inventario.in_movi_inven_tipo" Role="in_movi_inven_tipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_movi_inven_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_movi_inven_tipo7">
+          <End Type="Model_inventario.in_movi_inven_tipo" Role="in_movi_inven_tipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_movi_inven_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_movi_inven_tipo8">
+          <End Type="Model_inventario.in_movi_inven_tipo" Role="in_movi_inven_tipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_movi_inven_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo_x_distribucion_ing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_parametro_in_movi_inven_tipo9">
+          <End Type="Model_inventario.in_movi_inven_tipo" Role="in_movi_inven_tipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_movi_inven_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMovi_inven_tipo_x_distribucion_egr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="in_ProductoTipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProductoTipo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProductoTipo" Type="Int32" Nullable="false" />
+          <Property Name="tp_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tp_EsCombo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="tp_ManejaInven" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Aparece_modu_Ventas" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Compras" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Inventario" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_modu_Activo_F" Type="Boolean" Nullable="false" />
+          <Property Name="Aparece_fabricacion" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="in_parametro" Relationship="Model_inventario.FK_in_parametro_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_parametro" />
+          <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_ProductoTipo" ToRole="in_Producto" />
+        </EntityType>
+        <Association Name="FK_in_parametro_in_ProductoTipo">
+          <End Type="Model_inventario.in_ProductoTipo" Role="in_ProductoTipo" Multiplicity="0..1" />
+          <End Type="Model_inventario.in_parametro" Role="in_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_ProductoTipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProductoTipo" />
+            </Principal>
+            <Dependent Role="in_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="P_IdProductoTipo_para_lote_0" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_Producto_in_ProductoTipo">
+          <End Type="Model_inventario.in_ProductoTipo" Role="in_ProductoTipo" Multiplicity="1" />
+          <End Type="Model_inventario.in_Producto" Role="in_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_ProductoTipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProductoTipo" />
+            </Principal>
+            <Dependent Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProductoTipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5006,46 +4862,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
                 <ScalarProperty Name="IdSucucursal" ColumnName="IdSucucursal" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="in_parametro">
-            <EntityTypeMapping TypeName="Model_inventario.in_parametro">
-              <MappingFragment StoreEntitySet="in_parametro">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdMovi_inven_tipo_egresoBodegaOrigen" ColumnName="IdMovi_inven_tipo_egresoBodegaOrigen" />
-                <ScalarProperty Name="IdMovi_inven_tipo_ingresoBodegaDestino" ColumnName="IdMovi_inven_tipo_ingresoBodegaDestino" />
-                <ScalarProperty Name="Maneja_Stock_Negativo" ColumnName="Maneja_Stock_Negativo" />
-                <ScalarProperty Name="Usuario_Escoge_Motivo" ColumnName="Usuario_Escoge_Motivo" />
-                <ScalarProperty Name="IdMovi_inven_tipo_egresoAjuste" ColumnName="IdMovi_inven_tipo_egresoAjuste" />
-                <ScalarProperty Name="IdMovi_inven_tipo_ingresoAjuste" ColumnName="IdMovi_inven_tipo_ingresoAjuste" />
-                <ScalarProperty Name="IdCtaCble_Inven" ColumnName="IdCtaCble_Inven" />
-                <ScalarProperty Name="IdCtaCble_CostoInven" ColumnName="IdCtaCble_CostoInven" />
-                <ScalarProperty Name="IdTipoCbte_CostoInven" ColumnName="IdTipoCbte_CostoInven" />
-                <ScalarProperty Name="IdTipoCbte_CostoInven_Reverso" ColumnName="IdTipoCbte_CostoInven_Reverso" />
-                <ScalarProperty Name="IdMovi_Inven_tipo_x_anu_Ing" ColumnName="IdMovi_Inven_tipo_x_anu_Ing" />
-                <ScalarProperty Name="IdMovi_Inven_tipo_x_anu_Egr" ColumnName="IdMovi_Inven_tipo_x_anu_Egr" />
-                <ScalarProperty Name="IdMovi_Inven_tipo_Ing_Ajust_fis_x_defa" ColumnName="IdMovi_Inven_tipo_Ing_Ajust_fis_x_defa" />
-                <ScalarProperty Name="IdMovi_Inven_tipo_Egr_Ajust_fis_x_defa" ColumnName="IdMovi_Inven_tipo_Egr_Ajust_fis_x_defa" />
-                <ScalarProperty Name="ApruebaAjusteFisicoAuto" ColumnName="ApruebaAjusteFisicoAuto" />
-                <ScalarProperty Name="IdEstadoAproba_x_Ing" ColumnName="IdEstadoAproba_x_Ing" />
-                <ScalarProperty Name="IdEstadoAproba_x_Egr" ColumnName="IdEstadoAproba_x_Egr" />
-                <ScalarProperty Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" ColumnName="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" />
-                <ScalarProperty Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" ColumnName="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" />
-                <ScalarProperty Name="P_Fecha_para_contabilizacion_ingr_egr" ColumnName="P_Fecha_para_contabilizacion_ingr_egr" />
-                <ScalarProperty Name="P_se_valida_parametrizacion_x_producto" ColumnName="P_se_valida_parametrizacion_x_producto" />
-                <ScalarProperty Name="P_Al_Conta_CtaInven_Buscar_en" ColumnName="P_Al_Conta_CtaInven_Buscar_en" />
-                <ScalarProperty Name="P_Al_Conta_CtaCosto_Buscar_en" ColumnName="P_Al_Conta_CtaCosto_Buscar_en" />
-                <ScalarProperty Name="P_IdCtaCble_transitoria_transf_inven" ColumnName="P_IdCtaCble_transitoria_transf_inven" />
-                <ScalarProperty Name="P_IdProductoTipo_para_lote_0" ColumnName="P_IdProductoTipo_para_lote_0" />
-                <ScalarProperty Name="P_se_crea_lote_0_al_crear_producto_matriz" ColumnName="P_se_crea_lote_0_al_crear_producto_matriz" />
-                <ScalarProperty Name="IdMovi_inven_tipo_x_distribucion_ing" ColumnName="IdMovi_inven_tipo_x_distribucion_ing" />
-                <ScalarProperty Name="IdMovi_inven_tipo_x_distribucion_egr" ColumnName="IdMovi_inven_tipo_x_distribucion_egr" />
-                <ScalarProperty Name="P_IdMovi_inven_tipo_default_ing" ColumnName="P_IdMovi_inven_tipo_default_ing" />
-                <ScalarProperty Name="P_IdMovi_inven_tipo_default_egr" ColumnName="P_IdMovi_inven_tipo_default_egr" />
-                <ScalarProperty Name="P_IdMovi_inven_tipo_ingreso_x_compra" ColumnName="P_IdMovi_inven_tipo_ingreso_x_compra" />
-                <ScalarProperty Name="P_Dias_menores_alerta_desde_fecha_actual_rojo" ColumnName="P_Dias_menores_alerta_desde_fecha_actual_rojo" />
-                <ScalarProperty Name="P_Dias_menores_alerta_desde_fecha_actual_amarillo" ColumnName="P_Dias_menores_alerta_desde_fecha_actual_amarillo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5570,30 +5386,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="in_ProductoTipo">
-            <EntityTypeMapping TypeName="Model_inventario.in_ProductoTipo">
-              <MappingFragment StoreEntitySet="in_ProductoTipo">
-                <ScalarProperty Name="Aparece_fabricacion" ColumnName="Aparece_fabricacion" />
-                <ScalarProperty Name="Aparece_modu_Activo_F" ColumnName="Aparece_modu_Activo_F" />
-                <ScalarProperty Name="Aparece_modu_Inventario" ColumnName="Aparece_modu_Inventario" />
-                <ScalarProperty Name="Aparece_modu_Compras" ColumnName="Aparece_modu_Compras" />
-                <ScalarProperty Name="Aparece_modu_Ventas" ColumnName="Aparece_modu_Ventas" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="tp_ManejaInven" ColumnName="tp_ManejaInven" />
-                <ScalarProperty Name="tp_EsCombo" ColumnName="tp_EsCombo" />
-                <ScalarProperty Name="tp_descripcion" ColumnName="tp_descripcion" />
-                <ScalarProperty Name="IdProductoTipo" ColumnName="IdProductoTipo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="In_consignacion">
             <EntityTypeMapping TypeName="Model_inventario.In_consignacion">
               <MappingFragment StoreEntitySet="In_consignacion">
@@ -5645,6 +5437,55 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
                 <ScalarProperty Name="FechaConsignacion" ColumnName="FechaConsignacion" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdConsignacion" ColumnName="IdConsignacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_parametro">
+            <EntityTypeMapping TypeName="Model_inventario.in_parametro">
+              <MappingFragment StoreEntitySet="in_parametro">
+                <ScalarProperty Name="IdMovi_inven_tipo_Cambio" ColumnName="IdMovi_inven_tipo_Cambio" />
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="P_Dias_menores_alerta_desde_fecha_actual_amarillo" ColumnName="P_Dias_menores_alerta_desde_fecha_actual_amarillo" />
+                <ScalarProperty Name="P_Dias_menores_alerta_desde_fecha_actual_rojo" ColumnName="P_Dias_menores_alerta_desde_fecha_actual_rojo" />
+                <ScalarProperty Name="P_IdMovi_inven_tipo_ingreso_x_compra" ColumnName="P_IdMovi_inven_tipo_ingreso_x_compra" />
+                <ScalarProperty Name="P_IdMovi_inven_tipo_default_egr" ColumnName="P_IdMovi_inven_tipo_default_egr" />
+                <ScalarProperty Name="P_IdMovi_inven_tipo_default_ing" ColumnName="P_IdMovi_inven_tipo_default_ing" />
+                <ScalarProperty Name="IdMovi_inven_tipo_x_distribucion_egr" ColumnName="IdMovi_inven_tipo_x_distribucion_egr" />
+                <ScalarProperty Name="IdMovi_inven_tipo_x_distribucion_ing" ColumnName="IdMovi_inven_tipo_x_distribucion_ing" />
+                <ScalarProperty Name="P_se_crea_lote_0_al_crear_producto_matriz" ColumnName="P_se_crea_lote_0_al_crear_producto_matriz" />
+                <ScalarProperty Name="P_IdProductoTipo_para_lote_0" ColumnName="P_IdProductoTipo_para_lote_0" />
+                <ScalarProperty Name="P_IdCtaCble_transitoria_transf_inven" ColumnName="P_IdCtaCble_transitoria_transf_inven" />
+                <ScalarProperty Name="P_Al_Conta_CtaCosto_Buscar_en" ColumnName="P_Al_Conta_CtaCosto_Buscar_en" />
+                <ScalarProperty Name="P_Al_Conta_CtaInven_Buscar_en" ColumnName="P_Al_Conta_CtaInven_Buscar_en" />
+                <ScalarProperty Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" ColumnName="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" />
+                <ScalarProperty Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" ColumnName="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" />
+                <ScalarProperty Name="IdMovi_inven_tipo_ingresoBodegaDestino" ColumnName="IdMovi_inven_tipo_ingresoBodegaDestino" />
+                <ScalarProperty Name="IdMovi_inven_tipo_egresoBodegaOrigen" ColumnName="IdMovi_inven_tipo_egresoBodegaOrigen" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_ProductoTipo">
+            <EntityTypeMapping TypeName="Model_inventario.in_ProductoTipo">
+              <MappingFragment StoreEntitySet="in_ProductoTipo">
+                <ScalarProperty Name="Aparece_fabricacion" ColumnName="Aparece_fabricacion" />
+                <ScalarProperty Name="Aparece_modu_Activo_F" ColumnName="Aparece_modu_Activo_F" />
+                <ScalarProperty Name="Aparece_modu_Inventario" ColumnName="Aparece_modu_Inventario" />
+                <ScalarProperty Name="Aparece_modu_Compras" ColumnName="Aparece_modu_Compras" />
+                <ScalarProperty Name="Aparece_modu_Ventas" ColumnName="Aparece_modu_Ventas" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="tp_ManejaInven" ColumnName="tp_ManejaInven" />
+                <ScalarProperty Name="tp_EsCombo" ColumnName="tp_EsCombo" />
+                <ScalarProperty Name="tp_descripcion" ColumnName="tp_descripcion" />
+                <ScalarProperty Name="IdProductoTipo" ColumnName="IdProductoTipo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
