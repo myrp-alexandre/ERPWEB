@@ -156,6 +156,8 @@
     <Compile Include="CuentasPorPagar\cp_retencion_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_retencion_x_ct_cbtecble_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_TipoDocumento_Info.cs" />
+    <Compile Include="Facturacion\fa_CambioProductoDet_Info.cs" />
+    <Compile Include="Facturacion\fa_CambioProducto_Info.cs" />
     <Compile Include="Facturacion\fa_catalogo_Info.cs" />
     <Compile Include="Facturacion\fa_catalogo_tipo_Info.cs" />
     <Compile Include="Facturacion\fa_cliente_contactos_Info.cs" />

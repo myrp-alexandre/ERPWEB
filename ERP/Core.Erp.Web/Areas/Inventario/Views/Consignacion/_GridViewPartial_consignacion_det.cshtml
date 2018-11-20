@@ -1,13 +1,10 @@
 @using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings =>
-    {
-        settings.Name = "GridViewPartial_consignacion";
-        settings.CallbackRouteValues = new { Controller = "Consignacion", Action = "GridViewPartial_consignacion" };
-        settings.KeyFieldName = "IdConsignacion";
-        
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridViewPartial_consignacion_det";
+        settings.CallbackRouteValues = new { Controller = "Consignacion", Action = "GridViewPartial_consignacion_det", fecha_ini = ViewBag.fecha_ini, fecha_fin = ViewBag.fecha_fin };
+        settings.KeyFieldName = "Secuencial";
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -53,7 +50,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
+            if (Convert.ToString(e.GetValue("Estado")) == "I")
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -63,11 +60,11 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdConsignacion = DataBinder.Eval(tc.DataItem, "IdConsignacion") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdConsignacion = DataBinder.Eval(tc.DataItem, "IdConsignacion") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), Secuencial = DataBinder.Eval(tc.DataItem, "Secuencial") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), Secuencial = DataBinder.Eval(tc.DataItem, "Secuencial") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -75,24 +72,26 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
         });
-
-        settings.Columns.Add("IdTransaccion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(25);
-        settings.Columns.Add("pe_cedulaRuc", "Cedula / RUC").Width = System.Web.UI.WebControls.Unit.Percentage(10);        
-        settings.Columns.Add("IdSucursal", "Sucursal").Width = System.Web.UI.WebControls.Unit.Percentage(15);
-        settings.Columns.Add("FechaConsignacion", "Fecha Consignacion").Width = System.Web.UI.WebControls.Unit.Percentage(15);
-        settings.Columns.Add("Observación", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-
+        settings.Columns.Add("tm_descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Columns.Add("IdNumMovi", "# Movimiento").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Estado";
+            column.FieldName = "cm_fecha";
+            column.Caption = "Fecha";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        });
+        settings.Columns.Add("cm_observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(40);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
             column.Caption = "Estado";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
             column.EditorProperties().CheckBox(sp =>
@@ -100,6 +99,16 @@
 
             });
         });
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        //settings.Columns.Add(column =>
+        //{
+        //    column.SetDataItemTemplateContent(c =>
+        //    {
+        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("INV_001", "InventarioReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdMovi_inven_tipo = DataBinder.Eval(c.DataItem, "IdMovi_inven_tipo"), IdNumMovi = DataBinder.Eval(c.DataItem, "IdNumMovi") }, Request.Url.Scheme) + "');\"></span>");
+        //    });
+        //    column.Width = Unit.Percentage(5);
+        //});
+
     });
 }
-@grid.Bind(Model).GetHtml()3
+@grid.Bind(Model).GetHtml()

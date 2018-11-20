@@ -89,6 +89,10 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_guia_remision_fa_cliente_contactos" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_guia_remision" />
         <AssociationConnector Association="Model_facturacion.FK_fa_guia_remision_det_fa_guia_remision" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_CambioProducto" Width="1.5" PointX="18.75" PointY="47.125" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_CambioProductoDet" Width="1.5" PointX="21" PointY="43.25" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_CambioProductoDet_fa_CambioProducto" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_CambioProductoDet_fa_factura_det" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

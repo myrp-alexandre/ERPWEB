@@ -22,7 +22,6 @@ namespace Core.Erp.Data.Inventario
                              && q.IdNumMovi == IdNumMovi
                              select new in_Ing_Egr_Inven_det_Info
                              {
-
                                  IdEmpresa = q.IdEmpresa,
                                  IdSucursal = q.IdSucursal,
                                  IdMovi_inven_tipo = q.IdMovi_inven_tipo,

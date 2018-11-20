@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Inventario
 {
     public class in_Consignacion_Data
     {
-        public List<in_Consignacion_Info> GetList(bool MostrarAnulado, int IdEmpresa)
+        public List<in_Consignacion_Info> GetList(int IdEmpresa, string signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
@@ -17,7 +17,7 @@ namespace Core.Erp.Data.Inventario
 
                 using (Entities_inventario db = new Entities_inventario())
                 {
-                    if (MostrarAnulado == false)
+                    if (mostrar_anulados == false)
                     {
                         Lista = db.vwin_consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Select(q => new in_Consignacion_Info
                         {

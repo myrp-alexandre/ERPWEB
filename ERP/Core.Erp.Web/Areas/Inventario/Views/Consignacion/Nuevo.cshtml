@@ -20,20 +20,18 @@
 @using (Html.BeginForm("Nuevo", "Consignacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdConsignacion)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="Codigo">Proveedor*</label>
                     @Html.Partial("_CmbProveedor_Consignacion", Model.IdProveedor)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="GetHtml">Fecha de consignación*</label>
                     <div class="input-group date">
@@ -42,7 +40,7 @@
                         </div>
                         @Html.DevExpress().DateEditFor(q=> q.FechaConsignacion, settings =>
                         {
-                            settings.Name = "cm_fecha";
+                            settings.Name = "FechaConsignacion";
                             settings.Properties.UseMaskBehavior = true;
                             settings.Properties.EditFormat = EditFormat.Date;
                             settings.Properties.EditFormatString = "dd/MM/yyyy";
@@ -53,11 +51,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="GetHtml">Sucursal*</label>
                     @Html.Partial("_CmbSucursal_Consignacion", Model.IdSucursal)
@@ -68,11 +62,20 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="GetHtml">Observación*</label>
                     @Html.TextAreaFor(q => q.Observacion, new { @class = "form-control", @rows = 3 })
                     @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_consignacion_det")
                 </div>
             </div>
         </div>
