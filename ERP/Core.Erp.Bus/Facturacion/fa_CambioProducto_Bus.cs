@@ -57,5 +57,17 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
+
+        public fa_CambioProducto_Info GetInfo(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCambio)
+        {
+            try
+            {
+                return odata.GetInfo(IdEmpresa, IdSucursal, IdBodega, IdCambio);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

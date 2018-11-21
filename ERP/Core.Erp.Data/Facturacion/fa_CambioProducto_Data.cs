@@ -142,5 +142,35 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
+
+        public fa_CambioProducto_Info GetInfo(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCambio)
+        {
+            try
+            {
+                fa_CambioProducto_Info info;
+                using (Entities_facturacion db = new Entities_facturacion())
+                {
+                    var Entity = db.fa_CambioProducto.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCambio == IdCambio).FirstOrDefault();
+                    if (Entity == null) return null;
+                    info = new fa_CambioProducto_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdSucursal = Entity.IdSucursal,
+                        IdBodega = Entity.IdBodega,
+                        IdCambio = Entity.IdCambio,
+                        Fecha = Entity.Fecha,
+                        Observacion = Entity.Observacion,
+                        Estado = Entity.Estado,
+                        IdMovi_inven_tipo = Entity.IdMovi_inven_tipo,
+                        IdNumMovi = Entity.IdNumMovi,
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
