@@ -1231,7 +1231,6 @@
     <Build Include="dbo\Tables\tb_TarjetaCredito_x_cp_proveedor.sql" />
     <Build Include="dbo\Tables\tb_TarjetaCredito.sql" />
     <Build Include="dbo\Views\vwtb_TarjetaCredito_x_cp_proveedor.sql" />
-    <Build Include="dbo\Tables\in_consignacion_det.sql" />
     <Build Include="dbo\Tables\In_consignacion.sql" />
     <Build Include="dbo\Views\vwin_consignacion.sql" />
     <Build Include="dbo\Views\vwin.sql" />
@@ -1240,6 +1239,8 @@
     <Build Include="dbo\Tables\fa_CambioProductoDet.sql" />
     <Build Include="dbo\Tables\fa_CambioProducto.sql" />
     <Build Include="dbo\Views\vwfa_CambioProducto.sql" />
+    <Build Include="dbo\Tables\in_ConsignacionDet.sql" />
+    <Build Include="dbo\Views\vwin_ConsignacionDet.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />
