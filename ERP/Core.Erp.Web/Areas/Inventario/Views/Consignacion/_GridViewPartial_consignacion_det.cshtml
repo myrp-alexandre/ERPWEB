@@ -40,16 +40,9 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pr_descripcion";
-            column.Caption = "Producto";
-            column.Width = Unit.Percentage(60);
-        });
-
-        settings.Columns.Add(column =>
-        {
             column.FieldName = "IdProducto";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(10);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
@@ -59,7 +52,14 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdUnidadMedida_sinConversion";
+            column.FieldName = "pr_descripcion";
+            column.Caption = "Producto";
+            column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdUnidadMedida";
             column.Caption = "Unidad de medida";
             column.Width = Unit.Percentage(20);
             column.EditorProperties().ComboBox(p =>
@@ -73,9 +73,23 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "dm_cantidad_sinConversion";
-            column.Caption = "cantidad";
-            column.Width = Unit.Percentage(15);
+            column.FieldName = "cantidad";
+            column.Caption = "Cantidad";
+            column.Width = Unit.Percentage(10);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "costo";
+            column.Caption = "Costo";
+            column.Width = Unit.Percentage(10);
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "observacion";
+            column.Caption = "Observacion";
+            column.Width = Unit.Percentage(30);
 
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
