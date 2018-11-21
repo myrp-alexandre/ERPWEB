@@ -3,9 +3,14 @@ using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
+using DevExpress.DataAccess.Excel;
 using DevExpress.Web.Mvc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -44,23 +49,40 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_empleado_novedad(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        public ActionResult GridViewPartial_importacion_novedades(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
 
             var model = bus_novedad.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, false);
-            return PartialView("_GridViewPartial_empleado_novedad", model);
+            return PartialView("_GridViewPartial_importacion_novedades", model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_empleado_novedad_det(int IdEmpleado = 0, decimal ro_IdCarga = 0)
+        public ActionResult GridViewPartial_importacion_novedades_det(string path)
         {
-            ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info();
-                model.detalle = detalle.get_list();
+            ro_EmpleadoNovedadCargaMasiva_Info modelReturn = new ro_EmpleadoNovedadCargaMasiva_Info();
+            if (path != null)
+            {
+                
+                var model = Session["DataTableModel"];
+                if (!string.IsNullOrEmpty(path))
+                {
+                    model = InMemoryModel.OpenExcelFile(path);
+                    Session["DataTableModel"] = model;
+                }
+                System.Data.DataTable table = new System.Data.DataTable();
+                table = model as System.Data.DataTable;
+                for (int i = 0; i < table.Columns.Count; i++)
+                {
+                    string valor = table.Rows[i]["Column1"].ToString();
+
+                }
+            }
+            modelReturn.detalle = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_importacion_novedades_det", modelReturn);
         }
         #endregion
 
@@ -153,7 +175,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info();
             model.detalle = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_importacion_novedades_det", model);
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_EmpleadoNovedadCargaMasiva_det_Info info_det)
@@ -162,7 +184,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info();
             model.detalle = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_importacion_novedades_det", model);
         }
         #endregion
         private void cargar_combos_detalle()
@@ -173,6 +195,53 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             Session["rubros"] = lst_rubros;
         }
 
+        public ActionResult GridViewPartial(string path)
+        {
+            var model = Session["DataTableModel"];
+            if (!string.IsNullOrEmpty(path))
+            {
+                model = InMemoryModel.OpenExcelFile(path);
+                Session["DataTableModel"] = model;
+            }
+            System.Data.DataTable table = new System.Data.DataTable();
+            table = model as System.Data.DataTable;
+            for (int i = 0; i < table.Columns.Count; i++)
+            {
+                string valor = table.Rows[i]["Column1"].ToString();
+
+            }
+            return PartialView(model);
+        }
+
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            return null;
+        }
+
+    }
+    public class UploadControlSettings
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            const string UploadDirectory = "~/Content/UploadedFiles/";
+            if (e.UploadedFile.IsValid)
+            {
+                MemoryStream ms = new MemoryStream();
+                string resultExtension = Path.GetExtension(e.UploadedFile.FileName);
+                string resultFileName = Path.ChangeExtension(Path.GetRandomFileName(), resultExtension);
+                string resultFileUrl = UploadDirectory + resultFileName;
+                string resultFilePath = System.Web.HttpContext.Current.Server.MapPath("~/") + e.UploadedFile.FileName;
+                e.UploadedFile.SaveAs(resultFilePath);
+                e.CallbackData = resultFilePath;
+
+            }
+        }
     }
 
 
@@ -208,4 +277,64 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             list.Remove(list.Where(m => m.Secualcial == Secuencia).First());
         }
     }
+
+
+    #region Clases leer excel
+    public class InMemoryModel
+    {
+
+        public static object OpenExcelFile(string path)
+        {
+            if (path == string.Empty)
+                path = "~/Countries.xlsx";
+
+            string fileName = path.StartsWith("~") ? System.Web.HttpContext.Current.Server.MapPath(path) : path;
+
+            ExcelDataSource excelDataSource = new ExcelDataSource();
+            excelDataSource.FileName = fileName;
+            ExcelWorksheetSettings excelWorksheetSettings = new ExcelWorksheetSettings();
+            excelWorksheetSettings.WorksheetName = "Sheet1";
+
+            ExcelSourceOptions excelSourceOptions = new ExcelSourceOptions();
+            excelSourceOptions.ImportSettings = excelWorksheetSettings;
+            excelSourceOptions.SkipHiddenRows = false;
+            excelSourceOptions.SkipHiddenColumns = false;
+            excelSourceOptions.UseFirstRowAsHeader = true;
+            excelDataSource.SourceOptions = excelSourceOptions;
+
+            excelDataSource.Fill();
+
+            DataTable table = excelDataSource.ToDataTable();
+            return table;
+        }
+    }
+
+
+    public static class ExcelDataSourceExtension
+    {
+        public static DataTable ToDataTable(this ExcelDataSource excelDataSource)
+        {
+            IList list = ((IListSource)excelDataSource).GetList();
+            DevExpress.DataAccess.Native.Excel.DataView dataView = (DevExpress.DataAccess.Native.Excel.DataView)list;
+            List<PropertyDescriptor> properties = dataView.Columns.ToList<PropertyDescriptor>();
+
+            DataTable table = new DataTable();
+            for (int i = 0; i < properties.Count; i++)
+            {
+                PropertyDescriptor prop = properties[i];
+                table.Columns.Add(prop.Name, prop.PropertyType);
+            }
+            object[] values = new object[properties.Count];
+            foreach (DevExpress.DataAccess.Native.Excel.ViewRow item in list)
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    values[i] = properties[i].GetValue(item);
+                }
+                table.Rows.Add(values);
+            }
+            return table;
+        }
+    }
+    #endregion
 }

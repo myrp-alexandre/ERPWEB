@@ -9322,6 +9322,14 @@
     <Content Include="Areas\Facturacion\Views\CambioProducto\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\CambioProducto\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\CambioProducto\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionNovedades\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionNovedades\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionNovedades\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionNovedades\_GridViewPartial_importacion_novedades.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionNovedades\_GridViewPartial_importacion_novedades_det.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CambioProducto\_GridViewPartial_CambioProductoDet.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CambioProducto\_GridViewPartial_CambioProductoDetFacturas.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CambioProducto\_CmbProducto_CambioProducto.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9401,7 +9409,6 @@
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
-    <Folder Include="Areas\RRHH\Views\ImportacionNovedades\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
