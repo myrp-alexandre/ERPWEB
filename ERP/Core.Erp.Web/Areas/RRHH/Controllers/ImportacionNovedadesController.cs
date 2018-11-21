@@ -3,9 +3,14 @@ using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
+using DevExpress.DataAccess.Excel;
 using DevExpress.Web.Mvc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -173,6 +178,53 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             Session["rubros"] = lst_rubros;
         }
 
+        public ActionResult GridViewPartial(string path)
+        {
+            var model = Session["DataTableModel"];
+            if (!string.IsNullOrEmpty(path))
+            {
+                model = InMemoryModel.OpenExcelFile(path);
+                Session["DataTableModel"] = model;
+            }
+            System.Data.DataTable table = new System.Data.DataTable();
+            table = model as System.Data.DataTable;
+            for (int i = 0; i < table.Columns.Count; i++)
+            {
+                string valor = table.Rows[i]["Column1"].ToString();
+
+            }
+            return PartialView(model);
+        }
+
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            return null;
+        }
+
+    }
+    public class UploadControlSettings
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            const string UploadDirectory = "~/Content/UploadedFiles/";
+            if (e.UploadedFile.IsValid)
+            {
+                MemoryStream ms = new MemoryStream();
+                string resultExtension = Path.GetExtension(e.UploadedFile.FileName);
+                string resultFileName = Path.ChangeExtension(Path.GetRandomFileName(), resultExtension);
+                string resultFileUrl = UploadDirectory + resultFileName;
+                string resultFilePath = System.Web.HttpContext.Current.Server.MapPath("~/") + e.UploadedFile.FileName;
+                e.UploadedFile.SaveAs(resultFilePath);
+                e.CallbackData = resultFilePath;
+
+            }
+        }
     }
 
 
@@ -208,4 +260,64 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             list.Remove(list.Where(m => m.Secualcial == Secuencia).First());
         }
     }
+
+
+    #region Clases leer excel
+    public class InMemoryModel
+    {
+
+        public static object OpenExcelFile(string path)
+        {
+            if (path == string.Empty)
+                path = "~/Countries.xlsx";
+
+            string fileName = path.StartsWith("~") ? System.Web.HttpContext.Current.Server.MapPath(path) : path;
+
+            ExcelDataSource excelDataSource = new ExcelDataSource();
+            excelDataSource.FileName = fileName;
+            ExcelWorksheetSettings excelWorksheetSettings = new ExcelWorksheetSettings();
+            excelWorksheetSettings.WorksheetName = "Sheet1";
+
+            ExcelSourceOptions excelSourceOptions = new ExcelSourceOptions();
+            excelSourceOptions.ImportSettings = excelWorksheetSettings;
+            excelSourceOptions.SkipHiddenRows = false;
+            excelSourceOptions.SkipHiddenColumns = false;
+            excelSourceOptions.UseFirstRowAsHeader = true;
+            excelDataSource.SourceOptions = excelSourceOptions;
+
+            excelDataSource.Fill();
+
+            DataTable table = excelDataSource.ToDataTable();
+            return table;
+        }
+    }
+
+
+    public static class ExcelDataSourceExtension
+    {
+        public static DataTable ToDataTable(this ExcelDataSource excelDataSource)
+        {
+            IList list = ((IListSource)excelDataSource).GetList();
+            DevExpress.DataAccess.Native.Excel.DataView dataView = (DevExpress.DataAccess.Native.Excel.DataView)list;
+            List<PropertyDescriptor> properties = dataView.Columns.ToList<PropertyDescriptor>();
+
+            DataTable table = new DataTable();
+            for (int i = 0; i < properties.Count; i++)
+            {
+                PropertyDescriptor prop = properties[i];
+                table.Columns.Add(prop.Name, prop.PropertyType);
+            }
+            object[] values = new object[properties.Count];
+            foreach (DevExpress.DataAccess.Native.Excel.ViewRow item in list)
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    values[i] = properties[i].GetValue(item);
+                }
+                table.Rows.Add(values);
+            }
+            return table;
+        }
+    }
+    #endregion
 }
