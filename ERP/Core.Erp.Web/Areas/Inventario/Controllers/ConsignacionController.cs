@@ -148,7 +148,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
                 IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
-                FechaConsignacion = DateTime.Now.Date
+                Fecha = DateTime.Now.Date
             };
             cargar_combos(model.IdEmpresa);
             return View(model);
@@ -266,7 +266,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             List<in_Consignacion_det_Info> list = get_list(IdTransaccionSession);
             info_det.IdConsignacion = info_det.IdConsignacion;
-            info_det.Secuencial = list.Count == 0 ? 1 : list.Max(q => q.Secuencial) + 1;
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             info_det.IdProducto = info_det.IdProducto;
             info_det.IdUnidadMedida = info_det.IdUnidadMedida;
             info_det.Cantidad = info_det.Cantidad;
@@ -278,7 +278,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public void UpdateRow(in_Consignacion_det_Info info_det, decimal IdTransaccionSession)
         {
-            in_Consignacion_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencial == info_det.Secuencial).First();
+            in_Consignacion_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             info_det.IdProducto = info_det.IdProducto;
             info_det.IdUnidadMedida = info_det.IdUnidadMedida;
             info_det.Cantidad = info_det.Cantidad;
@@ -289,7 +289,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public void DeleteRow(int Secuencial, decimal IdTransaccionSession)
         {
             List<in_Consignacion_det_Info> list = get_list(IdTransaccionSession);
-            list.Remove(list.Where(m => m.Secuencial == Secuencial).First());
+            list.Remove(list.Where(m => m.Secuencia == Secuencial).First());
         }
     }
 }
