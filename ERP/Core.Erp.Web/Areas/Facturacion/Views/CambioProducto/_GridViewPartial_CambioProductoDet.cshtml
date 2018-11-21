@@ -2,15 +2,15 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_factura_det";
-        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_factura_det", Area = "Facturacion"};
+        settings.Name = "GridView_CambioProductoDet";
+        settings.CallbackRouteValues = new { Controller = "CambioProducto", Action = "GridViewPartial_CambioProductoDet", Area = "Facturacion"};
         settings.KeyFieldName = "Secuencia";
 
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Factura", Action = "EditingAddNew", Area = "Facturacion" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Factura", Action = "EditingUpdate", Area = "Facturacion" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Factura", Action = "EditingDelete", Area = "Facturacion" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "CambioProducto", Action = "EditingAddNew", Area = "Facturacion" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "CambioProducto", Action = "EditingUpdate", Area = "Facturacion" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "CambioProducto", Action = "EditingDelete", Area = "Facturacion" };
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -44,18 +44,6 @@
             e.NewValues["vt_Precio"] = "";
             e.NewValues["vt_PorDescUnitario"] = "0";
         };
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "*";
-            column.FieldName = "Secuencia";
-            column.Width = Unit.Percentage(5);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            column.SetDataItemTemplateContent(c =>
-            {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-search\" onclick=\"BuscarProducto('" + c.KeyValue + "');\"></span>");
-            });
-        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pr_descripcion";
@@ -164,20 +152,7 @@
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "*";
-            column.FieldName = "Secuencia";
-            column.Width = Unit.Percentage(5);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            column.SetDataItemTemplateContent(c =>
-            {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-lock\" onclick=\"MostrarModalPrecios('" +c.KeyValue+ "');\"></span>");
-            });
-        });
-        settings.ClientSideEvents.BeginCallback = "function(s,e){e.customArgs['IdCliente'] = IdCliente.GetValue(); e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();}";
-        settings.ClientSideEvents.EndCallback = "function(s,e){CargarCuotas(); ValidarGrid();}";
+        settings.ClientSideEvents.BeginCallback = "e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();}";
 
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "vt_Subtotal").DisplayFormat = "{0:n2}";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "vt_iva").DisplayFormat = "{0:n2}";
