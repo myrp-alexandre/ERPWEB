@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_consignacion_det";
-        settings.CallbackRouteValues = new { Controller = "Consignacion", Action = "GridViewPartial_consignacion_det", Area = "Inventario" };
+        settings.Name = "GridViewPartial_ConsignacionDet";
+        settings.CallbackRouteValues = new { Controller = "Consignacion", Action = "GridViewPartial_ConsignacionDet", Area = "Inventario" };
         settings.KeyFieldName = "Secuencia";
 
         settings.Width = Unit.Percentage(100);
@@ -34,8 +34,10 @@
         settings.InitNewRow = (s, e) =>
         {
             e.NewValues["IdProducto"] = 0;
-            e.NewValues["IdUnidadMedida_sinConversion"] = "UNID";
-            e.NewValues["dm_cantidad_sinConversion"] = "1";
+            e.NewValues["IdUnidadMedida"] = "UNID";
+            e.NewValues["Cantidad"] = "1";
+            e.NewValues["Costo"] = "0";
+            e.NewValues["Observacion"] = "";
         };
 
         settings.Columns.Add(column =>
@@ -73,21 +75,21 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "cantidad";
+            column.FieldName = "Cantidad";
             column.Caption = "Cantidad";
             column.Width = Unit.Percentage(10);
 
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "costo";
+            column.FieldName = "Costo";
             column.Caption = "Costo";
             column.Width = Unit.Percentage(10);
 
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "observacion";
+            column.FieldName = "Observacion";
             column.Caption = "Observacion";
             column.Width = Unit.Percentage(30);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,13 @@ namespace Core.Erp.Info.Inventario
         public int IdEmpresa { get; set; }
         public decimal IdConsignacion { get; set; }
         public int Secuencia { get; set; }
+        [Required(ErrorMessage = "El campo producto es obligatorio")]
         public decimal IdProducto { get; set; }
+        [Required(ErrorMessage = "El campo unidad de medida es obligatorio")]
         public string IdUnidadMedida { get; set; }
+        [Required(ErrorMessage = "El campo cantidad es obligatorio")]
         public double Cantidad { get; set; }
+        [Required(ErrorMessage = "El campo costo es obligatorio")]
         public double Costo { get; set; }
         public string Observacion { get; set; }
 

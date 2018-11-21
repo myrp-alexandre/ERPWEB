@@ -128,17 +128,39 @@ namespace Core.Erp.Data.Inventario
                 {
                     db.in_Consignacion.Add(new in_Consignacion
                     {
-                        IdConsignacion = GetId(info.IdEmpresa),
+                        IdEmpresa = info.IdEmpresa,
+                        IdConsignacion = info.IdConsignacion = GetId(info.IdEmpresa),
                         IdSucursal = info.IdSucursal,
+                        IdBodega = info.IdBodega,
                         Fecha = info.Fecha,
                         IdProveedor = info.IdProveedor,
                         Observacion = info.Observacion,
-                        Estado = info.Estado = true,
-                        IdBodega = info.IdBodega,
-                        IdEmpresa = info.IdEmpresa,
+                        Estado = true,
                         IdUsuario = info.IdUsuario,
-                        Fecha_Transac = DateTime.Now
+                        Fecha_Transac = DateTime.Now,
+                        IdMovi_inven_tipo = 2,
+                        IdNumMovi = 10
                     });
+
+                    if (info.lst_producto_consignacion != null)
+                    {
+                        int Secuencia = 1;
+                        foreach (var item in info.lst_producto_consignacion)
+                        {
+                            db.in_ConsignacionDet.Add(new in_ConsignacionDet
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdConsignacion = info.IdConsignacion,
+                                Secuencia = Secuencia++,
+                                IdProducto = item.IdProducto,
+                                IdUnidadMedida = item.IdUnidadMedida,
+                                Cantidad = item.Cantidad,                                
+                                Costo = item.Costo,
+                                Observacion = info.Observacion
+                            });
+
+                        }
+                    }
 
                     db.SaveChanges();
                 }

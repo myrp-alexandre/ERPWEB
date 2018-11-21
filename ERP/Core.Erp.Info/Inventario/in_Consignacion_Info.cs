@@ -33,5 +33,9 @@ namespace Core.Erp.Info.Inventario
         public string NombreTipoMovimiento { get; set; }
         public string NombreProveedor { get; set; }
         #endregion
+
+        #region Campos que no existen en la tabla
+        public List<in_ConsignacionDet_Info> lst_producto_consignacion { get; set; }
+        #endregion
     }
 }
