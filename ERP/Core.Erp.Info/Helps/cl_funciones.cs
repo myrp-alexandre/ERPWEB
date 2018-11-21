@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.OleDb;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-
+using System.Web;
 namespace Core.Erp.Info.Helps
 {
     public class cl_funciones
@@ -203,5 +206,7 @@ namespace Core.Erp.Info.Helps
                 throw;
             }
         }
+
+
     }
 }
