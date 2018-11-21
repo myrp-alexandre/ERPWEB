@@ -23,6 +23,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         string mensaje = string.Empty;
         in_Producto_Bus bus_producto = new in_Producto_Bus();
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
         #endregion
 
         public ConsignacionController()
@@ -31,8 +34,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
         #region Metodos ComboBox bajo demanda
-        tb_persona_Bus bus_persona = new tb_persona_Bus();
-        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         in_Consignacion_det_Bus bus_consignacion_det = new in_Consignacion_det_Bus();
 
         #region Proveedor
@@ -53,24 +54,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
-        #region Sucursal
-        public ActionResult CmbSucursal_Consignacion()
-        {
-            in_Consignacion_Info model = new in_Consignacion_Info();
-            return PartialView("_CmbSucursal_Consignacion", model);
-        }
-
-        public List<tb_sucursal_Info> get_list_bajo_demanda_sucursal(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            return bus_sucursal.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
-        }
-
-        public tb_sucursal_Info get_info_bajo_demanda_sucursal(ListEditItemRequestedByValueEventArgs args)
-        {
-            return bus_sucursal.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
-        }
-        #endregion
-
         #region  Producto
         public ActionResult CmbProducto_Consignacion()
         {
@@ -86,6 +69,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
+
         #endregion
 
         #region Index
@@ -111,6 +95,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+
             lst_sucursal.Add(new tb_sucursal_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -118,12 +104,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 Su_Descripcion = "Todos"
             });
             ViewBag.lst_sucursal = lst_sucursal;
+
+            lst_bodega.Add(new tb_bodega_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = 0,
+                bo_Descripcion = "Todos"
+            });
+            ViewBag.lst_bodega = lst_bodega;
         }
 
         private void cargar_combos(int IdEmpresa)
         {
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
+
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+            ViewBag.lst_bodega = lst_bodega;
         }
         #endregion
 
@@ -153,6 +150,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
                 FechaConsignacion = DateTime.Now.Date
             };
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
 
@@ -164,6 +162,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
             if (!bus_in_Consignacion.GuardarBD(model))
             {
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");

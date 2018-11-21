@@ -9305,7 +9305,6 @@
     <Content Include="Areas\Inventario\Views\Consignacion\Nuevo.cshtml" />
     <Content Include="Areas\Inventario\Views\Consignacion\Modificar.cshtml" />
     <Content Include="Areas\Inventario\Views\Consignacion\Anular.cshtml" />
-    <Content Include="Areas\Inventario\Views\Consignacion\_CmbSucursal_Consignacion.cshtml" />
     <Content Include="Areas\RRHH\Views\Contrato\_GridViewPartial_contratos_por_vencer.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Index.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_nota_debito.cshtml" />
