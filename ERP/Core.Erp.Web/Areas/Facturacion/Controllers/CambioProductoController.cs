@@ -169,5 +169,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             ViewBag.lst_bodega = lst_bodega;
         }
         #endregion
+
+        #region Json
+        public JsonResult CargarBodega(int IdEmpresa= 0, int IdSucursal = 0)
+        {
+            var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }
