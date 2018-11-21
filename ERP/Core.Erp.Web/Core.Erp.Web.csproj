@@ -9322,6 +9322,8 @@
     <Content Include="Areas\Facturacion\Views\CambioProducto\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\CambioProducto\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\CambioProducto\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CambioProducto\_GridViewPartial_CambioProductoDet.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CambioProducto\_GridViewPartial_CambioProductoDetFacturas.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
