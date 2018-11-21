@@ -1,11 +1,9 @@
 ﻿using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
+using Core.Erp.Info.Facturacion;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
@@ -15,6 +13,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Variables
         tb_sucursal_Bus bus_sucursal;
         fa_CambioProducto_Bus bus_CambioProducto;
+        tb_bodega_Bus bus_bodega;
         #endregion
 
         #region Constructor
@@ -22,6 +21,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             bus_sucursal = new tb_sucursal_Bus();
             bus_CambioProducto = new fa_CambioProducto_Bus();
+            bus_bodega = new tb_bodega_Bus();
         }
         #endregion
 
@@ -68,6 +68,106 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         #endregion
 
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
 
+            fa_CambioProducto_Info model = new fa_CambioProducto_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
+                IdUsuario = SessionFixed.IdUsuario
+            };
+            CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Nuevo(fa_CambioProducto_Info model)
+        {   
+            if(!bus_CambioProducto.GuardarDB(model))
+            {
+                CargarCombosAccion(model.IdEmpresa,model.IdSucursal);
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCambio = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            fa_CambioProducto_Info model = bus_CambioProducto.GetInfo(IdEmpresa, IdSucursal, IdBodega, IdCambio);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.IdUsuario = SessionFixed.IdUsuario;
+            CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(fa_CambioProducto_Info model)
+        {
+            if (!bus_CambioProducto.ModificarDB(model))
+            {
+                CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Anular(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCambio = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            fa_CambioProducto_Info model = bus_CambioProducto.GetInfo(IdEmpresa, IdSucursal, IdBodega, IdCambio);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.IdUsuario = SessionFixed.IdUsuario;
+            CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Anular(fa_CambioProducto_Info model)
+        {
+            if (!bus_CambioProducto.AnularDB(model))
+            {
+                CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Metodos
+        private void CargarCombosAccion(int IdEmpresa, int IdSucursal)
+        {
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
+            ViewBag.lst_bodega = lst_bodega;
+        }
+        #endregion
     }
 }

@@ -2,7 +2,7 @@
     [IdEmpresa]                INT           NOT NULL,
     [IdSucursal]               INT           NOT NULL,
     [codigo]                   VARCHAR (10)  NULL,
-    [Su_Descripcion]           NCHAR (60)    NOT NULL,
+    [Su_Descripcion]           VARCHAR (100) NOT NULL,
     [Su_CodigoEstablecimiento] VARCHAR (30)  NULL,
     [Su_Ubicacion]             VARCHAR (20)  NULL,
     [Su_Ruc]                   VARCHAR (15)  NULL,
@@ -23,4 +23,6 @@
     CONSTRAINT [PK_tb_sucursal] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdSucursal] ASC),
     CONSTRAINT [FK_tb_sucursal_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa])
 );
+
+
 
