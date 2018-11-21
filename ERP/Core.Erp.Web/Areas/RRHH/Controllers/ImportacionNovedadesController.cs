@@ -49,23 +49,40 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_empleado_novedad(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        public ActionResult GridViewPartial_importacion_novedades(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
 
             var model = bus_novedad.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, false);
-            return PartialView("_GridViewPartial_empleado_novedad", model);
+            return PartialView("_GridViewPartial_importacion_novedades", model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_empleado_novedad_det(int IdEmpleado = 0, decimal ro_IdCarga = 0)
+        public ActionResult GridViewPartial_importacion_novedades_det(string path)
         {
-            ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info();
-                model.detalle = detalle.get_list();
+            ro_EmpleadoNovedadCargaMasiva_Info modelReturn = new ro_EmpleadoNovedadCargaMasiva_Info();
+            if (path != null)
+            {
+                
+                var model = Session["DataTableModel"];
+                if (!string.IsNullOrEmpty(path))
+                {
+                    model = InMemoryModel.OpenExcelFile(path);
+                    Session["DataTableModel"] = model;
+                }
+                System.Data.DataTable table = new System.Data.DataTable();
+                table = model as System.Data.DataTable;
+                for (int i = 0; i < table.Columns.Count; i++)
+                {
+                    string valor = table.Rows[i]["Column1"].ToString();
+
+                }
+            }
+            modelReturn.detalle = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_importacion_novedades_det", modelReturn);
         }
         #endregion
 
@@ -158,7 +175,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info();
             model.detalle = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_importacion_novedades_det", model);
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_EmpleadoNovedadCargaMasiva_det_Info info_det)
@@ -167,7 +184,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info();
             model.detalle = detalle.get_list();
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_empleado_novedad_det", model);
+            return PartialView("_GridViewPartial_importacion_novedades_det", model);
         }
         #endregion
         private void cargar_combos_detalle()

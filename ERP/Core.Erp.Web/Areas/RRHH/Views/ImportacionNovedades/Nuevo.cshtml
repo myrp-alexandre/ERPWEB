@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_EmpleadoNovedadCargaMasiva_Info
 @{
-    ViewBag.Title = "Nueva novedad";
+    ViewBag.Title = "Nueva carga de novedades";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -86,17 +86,16 @@
 
         <div class="col-md-4">
             <div class="col-md-12">
-                @using (Html.BeginForm("UploadControlUpload", "ImportacionNovedades", FormMethod.Post))
-                {
-                    @Html.DevExpress().UploadControl(settings => {
-                    settings.Name = "UploadControlFile";
-                    settings.CallbackRouteValues = new { Controller = "Home", Action = "UploadControlUpload" };
-                    settings.ShowUploadButton = true;
-                    settings.ShowProgressPanel = true;
-                    settings.NullText = "Click here to browse files...";
-                    settings.ClientSideEvents.FileUploadComplete = "function(s, e) { GridView1.PerformCallback({ path: e.callbackData}); }";
+                
+                @Html.DevExpress().UploadControl(settings => {
+                settings.Name = "UploadControlFile";
+                settings.CallbackRouteValues = new { Controller = "ImportacionNovedades", Action = "UploadControlUpload" };
+                settings.ShowUploadButton = true;
+                settings.ShowProgressPanel = true;
+                settings.NullText = "Click here to browse files...";
+                settings.ClientSideEvents.FileUploadComplete = "function(s, e) { GridViewPartial_importacion_novedades_det.PerformCallback({ path: e.callbackData}); }";
                 }).GetHtml()
-                }
+                
             </div>
         </div>
     </div>
@@ -106,7 +105,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="detalle">Detalle de la novedad</label>
-                    @Html.Action("GridViewPartial_importacion_novedades")
+                    @Html.Action("GridViewPartial_importacion_novedades_det")
                     @Html.ValidationMessageFor(q => q.detalle, "", new { @class = "text-danger" })
                 </div>
             </div>
