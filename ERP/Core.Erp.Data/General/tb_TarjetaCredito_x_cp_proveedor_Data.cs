@@ -152,7 +152,7 @@ namespace Core.Erp.Data.General
 
                     Entity.IdTarjeta = info.IdTarjeta;
                     Entity.IdProveedor = Convert.ToInt32(info.IdProveedor);
-                    Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
+                    Entity.IdUsuarioUltMod = info.IdUsuario;
                     Entity.Fecha_UltMod = DateTime.Now;
 
                     db.SaveChanges();
@@ -214,7 +214,7 @@ namespace Core.Erp.Data.General
                     }
 
                     Entity.Estado = info.Estado;
-                    Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                    Entity.IdUsuarioUltAnu = info.IdUsuario;
                     Entity.Fecha_UltAnu = DateTime.Now;
 
                     db.SaveChanges();

@@ -16,10 +16,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
     public class ConsignacionController : Controller
     {
         // GET: Inventario/Consignacion
-
         #region Variables
-        in_Consignacion_Bus bus_in_Consignacion;
-        in_Consignacion_det_Bus in_Consignacion_det_Bus;
+        in_Consignacion_Bus bus_in_Consignacion = new in_Consignacion_Bus();
         in_Consignacion_det_List in_Consignacion_det_List = new in_Consignacion_det_List();
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         string mensaje = string.Empty;
@@ -28,12 +26,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public ConsignacionController()
         {
-            bus_in_Consignacion = new in_Consignacion_Bus();
+
         }
 
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        in_Consignacion_det_Bus bus_consignacion_det = new in_Consignacion_det_Bus();
 
         public ActionResult CmbProveedor_Consignacion()
         {
@@ -67,10 +66,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
+        #region Index
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos_consulta();
+            return View(model);
         }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            cargar_combos_consulta();
+            return View(model);
+        }
+        #endregion        
 
         #region Metodos
         private void cargar_combos_consulta()
@@ -85,6 +97,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             });
             ViewBag.lst_sucursal = lst_sucursal;
         }
+
         private void cargar_combos(int IdEmpresa)
         {
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
@@ -98,14 +111,26 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            List<in_Ing_Egr_Inven_Info> model = in_Consignacion_det_Bus.get_list(IdEmpresa, "+", true, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            List<in_Consignacion_Info> model = bus_in_Consignacion.GetList(IdEmpresa, IdSucursal, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_consignacion", model);
-        }        
+        }
 
         #region Acciones
         public ActionResult Nuevo()
         {
-            in_Consignacion_Info model = new in_Consignacion_Info();
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            in_Consignacion_Info model = new in_Consignacion_Info {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
+                FechaConsignacion = DateTime.Now.Date
+            };
             return View(model);
         }
 
@@ -124,12 +149,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #endregion
 
         #region Funciones del detalle
-        public ActionResult GridViewPartial_consignacion_det(int IdEmpresa = 0, decimal IdConsignacion = 0)
+        public ActionResult GridViewPartial_consignacion_det()
         {
-            //int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            //siempre copiar
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            
             var model = in_Consignacion_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
+
             return PartialView("_GridViewPartial_consignacion_det", model);
         }
 
@@ -143,18 +170,20 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #endregion
     }
 
+    //siempre incluir clase para detalle
     public class in_Consignacion_det_List
     {
         string Variable = "in_Consignacion_det_Info";
-        public List<in_Consignacion_det_Info> get_list(decimal IdConsignacion)
+        public List<in_Consignacion_det_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session[Variable + IdConsignacion.ToString()] == null)
+
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
                 List<in_Consignacion_det_Info> list = new List<in_Consignacion_det_Info>();
 
-                HttpContext.Current.Session[Variable + IdConsignacion.ToString()] = list;
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<in_Consignacion_det_Info>)HttpContext.Current.Session[Variable + IdConsignacion.ToString()];
+            return (List<in_Consignacion_det_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
         public void set_list(List<in_Consignacion_det_Info> list, decimal IdTransaccionSession)
@@ -162,29 +191,33 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(in_Consignacion_det_Info info_det, decimal IdConsignacion)
+        public void AddRow(in_Consignacion_det_Info info_det, decimal IdTransaccionSession)
         {
-            List<in_Consignacion_det_Info> list = get_list(IdConsignacion);
+            List<in_Consignacion_det_Info> list = get_list(IdTransaccionSession);
+            info_det.IdConsignacion = info_det.IdConsignacion;
             info_det.Secuencial = list.Count == 0 ? 1 : list.Max(q => q.Secuencial) + 1;
             info_det.IdProducto = info_det.IdProducto;
             info_det.IdUnidadMedida = info_det.IdUnidadMedida;
+            info_det.Cantidad = info_det.Cantidad;
+            info_det.Precio = info_det.Precio;
+            info_det.Observacion = info_det.Observacion;
 
             list.Add(info_det);
         }
 
-        public void UpdateRow(in_Consignacion_det_Info info_det, decimal IdConsignacion)
+        public void UpdateRow(in_Consignacion_det_Info info_det, decimal IdTransaccionSession)
         {
-            in_Consignacion_det_Info edited_info = get_list(IdConsignacion).Where(m => m.Secuencial == info_det.Secuencial).First();
-            edited_info.IdProducto = info_det.IdProducto;
-            edited_info.IdUnidadMedida = info_det.IdUnidadMedida;
-            //edited_info.pr_descripcion = info_det.pr_descripcion;
-            edited_info.IdProducto = info_det.IdProducto;
-
+            in_Consignacion_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencial == info_det.Secuencial).First();
+            info_det.IdProducto = info_det.IdProducto;
+            info_det.IdUnidadMedida = info_det.IdUnidadMedida;
+            info_det.Cantidad = info_det.Cantidad;
+            info_det.Precio = info_det.Precio;
+            info_det.Observacion = info_det.Observacion;
         }
 
-        public void DeleteRow(int Secuencial, decimal IdConsignacion)
+        public void DeleteRow(int Secuencial, decimal IdTransaccionSession)
         {
-            List<in_Consignacion_det_Info> list = get_list(IdConsignacion);
+            List<in_Consignacion_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencial == Secuencial).First());
         }
     }

@@ -9,25 +9,62 @@ namespace Core.Erp.Data.Inventario
 {
     public class in_Consignacion_det_Data
     {
-        public bool GuardarBD(in_Consignacion_det_Info info)
+        public List<in_Consignacion_det_Info> GetList(int IdEmpresa, int IdConsignacion)
         {
             try
             {
+                List<in_Consignacion_det_Info> Lista = new List<in_Consignacion_det_Info>();
+
                 using (Entities_inventario db = new Entities_inventario())
                 {
-                    db.in_consignacion_det.Add(new in_consignacion_det
+                    Lista = db.in_consignacion_det.Where(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion).Select(q => new in_Consignacion_det_Info
                     {
-                        //IdTarjeta = get_id(),
-                        //NombreTarjeta = info.NombreTarjeta,
-                        //Estado = info.Estado = true,
-                        //IdUsuario = info.IdUsuario,
-                        //Fecha_Transac = DateTime.Now
-                    });
+                        IdEmpresa = q.IdEmpresa,
+                        IdConsignacion = q.IdConsignacion,
+                        Secuencial = q.Secuencial,
+                        IdProducto = q.IdProducto,
+                        IdUnidadMedida = q.IdUnidadMedida,
+                        Cantidad = q.Cantidad,
+                        Precio = q.Precio,
+                        Observacion = q.Observacion
+                    }).ToList();
 
-                    db.SaveChanges();
+                    return Lista;
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-                return true;
+        public in_Consignacion_det_Info GetInfo(int IdEmpresa, int IdConsignacion)
+        {
+            try
+            {
+                in_Consignacion_det_Info info = new in_Consignacion_det_Info();
+
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    in_consignacion_det Entity = Context.in_consignacion_det.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion);
+
+                    if (Entity == null)
+                    {
+                        return null;
+                    }
+
+                    info = new in_Consignacion_det_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdConsignacion = Entity.IdConsignacion,
+                        Secuencial = Entity.Secuencial,
+                        IdProducto = Entity.IdProducto,
+                        IdUnidadMedida = Entity.IdUnidadMedida,
+                        Cantidad = Entity.Cantidad,
+                        Observacion = Entity.Observacion
+                    };
+                }
+                return info;
             }
             catch (Exception)
             {

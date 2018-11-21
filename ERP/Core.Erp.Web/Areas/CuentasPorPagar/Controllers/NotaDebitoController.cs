@@ -111,7 +111,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         #endregion
         #region cargar combos
-        private void cargar_combos(int IdEmpresa, decimal IdProveedor = 0, string IdTipoSRI = "")
+        private void cargar_combos(int IdEmpresa , decimal IdProveedor = 0, string IdTipoSRI = "")
         {
             var lst_codigos_sri = bus_codigo_sri.get_list(IdEmpresa);
             ViewBag.lst_codigos_sri = lst_codigos_sri;
@@ -160,33 +160,45 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
         }
+
         private bool validar(cp_nota_DebCre_Info i_validar, ref string msg)
         {
-            if (i_validar.lst_detalle_ct.Where(q => q.pc_Cuenta == "").Count() > 0)
-            {
-                mensaje = "Existen valores sin cuentas asignadas";
-                return false;
-            }
+            i_validar.lst_detalle_ct = Lis_ct_cbtecble_det_List_nd.get_list(i_validar.IdTransaccionSession);
+
             if (i_validar.lst_detalle_ct.Count == 0)
             {
-                mensaje = "Debe ingresar registros en el detalle";
+                msg = "El detalle del diario se encuentra vacío";
                 return false;
             }
 
-            if (i_validar.lst_detalle_ct.Sum(q => q.dc_Valor) != 0)
+            if (i_validar.lst_detalle_ct.Where(q=>string.IsNullOrEmpty(q.IdCtaCble)).Count() > 0)
             {
-                mensaje = "La suma de los detalles debe ser 0";
+                msg = "En el detalle del diario faltan cuentas contables";
                 return false;
             }
 
+            foreach (var item in i_validar.lst_detalle_ct)
+            {
+                if (string.IsNullOrEmpty(item.IdCtaCble))
+                {
+                    mensaje = "Faltan cuentas contables, por favor verifique";
+                    return false;
+                }
+            }
+            if (Math.Round(i_validar.lst_detalle_ct.Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero) != 0)
+            {
+                mensaje = "La suma de los detalles debe ser 0, por favor verifique";
+                return false;
+            }
             if (i_validar.lst_detalle_ct.Where(q => q.dc_Valor == 0).Count() > 0)
             {
-                mensaje = "Existen detalles con valor 0 en el debe o haber";
+                mensaje = "Existen detalles con valor 0 en el debe o haber, por favor verifique";
                 return false;
             }
 
             return true;
         }
+
 
         #endregion
         #region json
@@ -242,7 +254,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cn_Fecha_vcto = DateTime.Now,
                 PaisPago = "593",
                 
-
             };
             cargar_combos(IdEmpresa);
             return View(model);
@@ -253,12 +264,19 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             model.info_comrobante = new ct_cbtecble_Info();
             model.DebCre = "D";
+            info_parametro.pa_TipoCbte_ND.ToString();
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List_nd.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
+                return View(model);
+            }
 
             if (!bus_orden_giro.guardarDB(model))
             {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -312,7 +330,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (model.info_comrobante.lst_ct_cbtecble_det == null)
             {
                 ViewBag.mensaje = "Falta detalle  de pago";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 cargar_combos_detalle();
                 return View(model);
 
@@ -321,7 +339,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
                 return View(model);
@@ -333,7 +351,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_orden_giro.modificarDB(model))
             {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -371,7 +389,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_orden_giro.anularDB(model))
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 return View(model);
             }
             return RedirectToAction("Index");

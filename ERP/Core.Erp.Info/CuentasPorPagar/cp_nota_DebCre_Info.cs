@@ -18,6 +18,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string DebCre { get; set; }
         public string IdTipoNota { get; set; }
         [Required(ErrorMessage = "El campo proveedor es obligatorio")]
+        [Range(1,int.MaxValue,ErrorMessage = "El campo proveedor es obligatorio")]
         public decimal IdProveedor { get; set; }
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }
