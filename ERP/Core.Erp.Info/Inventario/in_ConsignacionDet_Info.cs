@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Inventario
 {
-    public class in_Consignacion_det_Info
+    public class in_ConsignacionDet_Info
     {
         public int IdEmpresa { get; set; }
         public decimal IdConsignacion { get; set; }

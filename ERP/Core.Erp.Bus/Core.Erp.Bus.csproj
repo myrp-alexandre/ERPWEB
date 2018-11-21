@@ -208,7 +208,7 @@
     <Compile Include="Inventario\in_Catalogo_Bus.cs" />
     <Compile Include="Inventario\in_categorias_Bus.cs" />
     <Compile Include="Inventario\in_Consignacion_Bus.cs" />
-    <Compile Include="Inventario\in_Consignacion_det_Bus.cs" />
+    <Compile Include="Inventario\in_ConsignacionDet_Bus.cs" />
     <Compile Include="Inventario\in_devolucion_inven_Bus.cs" />
     <Compile Include="Inventario\in_devolucion_inven_det_Bus.cs" />
     <Compile Include="Inventario\in_grupo_Bus.cs" />

@@ -26,7 +26,7 @@ namespace Core.Erp.Data.Inventario
                             IdSucursal = q.IdSucursal,
                             Fecha = q.Fecha,
                             IdProveedor = q.IdProveedor,
-                            pe_nombreCompleto = q.NombreProveedor,
+                            NombreProveedor = q.NombreProveedor,
                             Su_Descripcion = q.Su_Descripcion,
                             bo_Descripcion = q.bo_Descripcion,
                             NombreTipoMovimiento = q.NombreTipoMovimiento,
@@ -44,7 +44,7 @@ namespace Core.Erp.Data.Inventario
                             IdSucursal = q.IdSucursal,
                             Fecha = q.Fecha,
                             IdProveedor = q.IdProveedor,
-                            pe_nombreCompleto = q.NombreProveedor,
+                            NombreProveedor = q.NombreProveedor,
                             Su_Descripcion = q.Su_Descripcion,
                             bo_Descripcion = q.bo_Descripcion,
                             NombreTipoMovimiento = q.NombreTipoMovimiento,
@@ -98,7 +98,7 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
-        public decimal GetId()
+        public decimal GetId(int IdEmpresa)
         {
 
             try
@@ -106,7 +106,7 @@ namespace Core.Erp.Data.Inventario
                 decimal ID = 1;
                 using (Entities_inventario db = new Entities_inventario())
                 {
-                    var Lista = db.in_Consignacion.Select(q => q.IdConsignacion);
+                    var Lista = db.in_Consignacion.Where(q=>q.IdEmpresa == IdEmpresa).Select(q =>q.IdConsignacion);
 
                     if (Lista.Count() > 0)
                         ID = Lista.Max() + 1;
@@ -128,7 +128,7 @@ namespace Core.Erp.Data.Inventario
                 {
                     db.in_Consignacion.Add(new in_Consignacion
                     {
-                        IdConsignacion = GetId(),
+                        IdConsignacion = GetId(info.IdEmpresa),
                         IdSucursal = info.IdSucursal,
                         Fecha = info.Fecha,
                         IdProveedor = info.IdProveedor,

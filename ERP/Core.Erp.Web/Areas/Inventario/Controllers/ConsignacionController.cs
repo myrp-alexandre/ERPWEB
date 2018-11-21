@@ -34,7 +34,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
         #region Metodos ComboBox bajo demanda
-        in_Consignacion_det_Bus bus_consignacion_det = new in_Consignacion_det_Bus();
+        in_ConsignacionDet_Bus bus_consignacion_det = new in_ConsignacionDet_Bus();
 
         #region Proveedor
         public ActionResult CmbProveedor_Consignacion()
@@ -189,7 +189,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_Consignacion_det_Info info_det)
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_ConsignacionDet_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (info_det != null)
@@ -210,7 +210,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_Consignacion_det_Info info_det)
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_ConsignacionDet_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (info_det != null)
@@ -245,26 +245,26 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
     public class in_Consignacion_det_List
     {
         string Variable = "in_Consignacion_det_Info";
-        public List<in_Consignacion_det_Info> get_list(decimal IdTransaccionSession)
+        public List<in_ConsignacionDet_Info> get_list(decimal IdTransaccionSession)
         {
 
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
-                List<in_Consignacion_det_Info> list = new List<in_Consignacion_det_Info>();
+                List<in_ConsignacionDet_Info> list = new List<in_ConsignacionDet_Info>();
 
                 HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<in_Consignacion_det_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+            return (List<in_ConsignacionDet_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<in_Consignacion_det_Info> list, decimal IdTransaccionSession)
+        public void set_list(List<in_ConsignacionDet_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(in_Consignacion_det_Info info_det, decimal IdTransaccionSession)
+        public void AddRow(in_ConsignacionDet_Info info_det, decimal IdTransaccionSession)
         {
-            List<in_Consignacion_det_Info> list = get_list(IdTransaccionSession);
+            List<in_ConsignacionDet_Info> list = get_list(IdTransaccionSession);
             info_det.IdConsignacion = info_det.IdConsignacion;
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             info_det.IdProducto = info_det.IdProducto;
@@ -276,9 +276,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             list.Add(info_det);
         }
 
-        public void UpdateRow(in_Consignacion_det_Info info_det, decimal IdTransaccionSession)
+        public void UpdateRow(in_ConsignacionDet_Info info_det, decimal IdTransaccionSession)
         {
-            in_Consignacion_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            in_ConsignacionDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             info_det.IdProducto = info_det.IdProducto;
             info_det.IdUnidadMedida = info_det.IdUnidadMedida;
             info_det.Cantidad = info_det.Cantidad;
@@ -288,7 +288,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public void DeleteRow(int Secuencial, decimal IdTransaccionSession)
         {
-            List<in_Consignacion_det_Info> list = get_list(IdTransaccionSession);
+            List<in_ConsignacionDet_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencia == Secuencial).First());
         }
     }

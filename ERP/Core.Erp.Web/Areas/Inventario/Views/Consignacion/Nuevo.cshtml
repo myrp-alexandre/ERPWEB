@@ -33,21 +33,21 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="GetHtml">Fecha de consignación*</label>
+                    <label for="GetHtml">Fecha*</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.DevExpress().DateEditFor(q=> q.FechaConsignacion, settings =>
+                        @Html.DevExpress().DateEditFor(q=> q.Fecha, settings =>
                         {
-                            settings.Name = "FechaConsignacion";
+                            settings.Name = "cm_fecha";
                             settings.Properties.UseMaskBehavior = true;
                             settings.Properties.EditFormat = EditFormat.Date;
                             settings.Properties.EditFormatString = "dd/MM/yyyy";
                             settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                             settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                         }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.FechaConsignacion, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -65,37 +65,38 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="GetHtml">Bodega*</label>
-                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
+                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "Idbodega" })
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-        <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-12">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="GetHtml">Observación*</label>
-                        @Html.TextAreaFor(q => q.Observacion, new { @class = "form-control", @rows = 3 })
-                        @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
-                    </div>
+                <div class="form-group">
+                    <label for="GetHtml">Observación*</label>
+                    @Html.TextAreaFor(q => q.Observacion, new { @class = "form-control", @rows = 3 })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-        <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-12">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        @Html.Action("GridViewPartial_consignacion_det")
-                    </div>
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_consignacion_det")
                 </div>
             </div>
         </div>
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index","Consignacion",new { Area = "Inventario" },null)">Cancelar</a>
-        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Consignacion",new { Area = "Inventario" },null)">Cancelar</a>
+    </div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
-        }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

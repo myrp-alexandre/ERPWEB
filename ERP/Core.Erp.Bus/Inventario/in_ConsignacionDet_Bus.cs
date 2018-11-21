@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Inventario
 {
-    public class in_Consignacion_det_Bus
+    public class in_ConsignacionDet_Bus
     {
-        in_Consignacion_det_Data odata_det = new in_Consignacion_det_Data();
+        in_ConsignacionDet_Data odata_det = new in_ConsignacionDet_Data();
 
-        public List<in_Consignacion_det_Info> GetList(int IdEmpresa, int IdConsignacion)
+        public List<in_ConsignacionDet_Info> GetList(int IdEmpresa, int IdConsignacion)
         {
             try
             {

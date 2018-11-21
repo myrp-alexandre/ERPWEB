@@ -8,8 +8,6 @@ namespace Core.Erp.Info.Inventario
 {
     public class in_Consignacion_Info
     {
-        public string bo_Descripcion;
-
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdConsignacion { get; set; }
@@ -30,13 +28,10 @@ namespace Core.Erp.Info.Inventario
         public decimal IdNumMovi { get; set; }
 
         #region Campos de la vista
-        public string pe_nombreCompleto { get; set; }
-        public string pe_apellido { get; set; }
-        public string pe_nombre { get; set; }
-        public string pe_cedulaRuc { get; set; }
-        public string pr_codigo { get; set; }
         public string Su_Descripcion { get; set; }
+        public string bo_Descripcion { get; set; }
         public string NombreTipoMovimiento { get; set; }
+        public string NombreProveedor { get; set; }
         #endregion
     }
 }
