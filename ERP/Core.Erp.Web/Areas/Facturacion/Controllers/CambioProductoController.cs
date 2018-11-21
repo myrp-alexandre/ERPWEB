@@ -212,7 +212,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             var producto = bus_producto.get_info(IdEmpresa, info_det.IdProductoCambio);
-
+            if (producto != null)
+                info_det.pr_descripcion = producto.pr_descripcion;
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -223,6 +224,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_CambioProductoDet_Info info_det)
         {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+            var producto = bus_producto.get_info(IdEmpresa, info_det.IdProductoCambio);
+            if (producto != null)
+                info_det.pr_descripcion = producto.pr_descripcion;
             if (ModelState.IsValid)
                 List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -272,6 +277,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             fa_CambioProductoDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdProductoCambio = info_det.IdProductoCambio;
             edited_info.CantidadCambio = info_det.CantidadCambio;
+            edited_info.pr_descripcion = info_det.pr_descripcion;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
