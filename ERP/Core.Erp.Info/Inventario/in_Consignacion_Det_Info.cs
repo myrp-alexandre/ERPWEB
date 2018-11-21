@@ -10,10 +10,10 @@ namespace Core.Erp.Info.Inventario
     {
         public int IdEmpresa { get; set; }
         public decimal IdConsignacion { get; set; }
-        public int Secuencial { get; set; }
+        public int Secuencia { get; set; }
         public decimal IdProducto { get; set; }
         public string IdUnidadMedida { get; set; }
-        public int Cantidad { get; set; }
+        public double Cantidad { get; set; }
         public double Costo { get; set; }
         public string Observacion { get; set; }
 

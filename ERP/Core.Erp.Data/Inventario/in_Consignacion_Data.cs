@@ -19,30 +19,36 @@ namespace Core.Erp.Data.Inventario
                 {
                     if (mostrar_anulados == false)
                     {
-                        Lista = db.vwin_consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Select(q => new in_Consignacion_Info
+                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Select(q => new in_Consignacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdConsignacion = q.IdConsignacion,
                             IdSucursal = q.IdSucursal,
-                            FechaConsignacion = q.FechaConsignacion,
+                            Fecha = q.Fecha,
                             IdProveedor = q.IdProveedor,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            pe_cedulaRuc = q.pe_cedulaRuc,
+                            pe_nombreCompleto = q.NombreProveedor,
+                            Su_Descripcion = q.Su_Descripcion,
+                            bo_Descripcion = q.bo_Descripcion,
+                            NombreTipoMovimiento = q.NombreTipoMovimiento,
+                            IdNumMovi = q.IdNumMovi,
                             Observacion = q.Observacion,
                             Estado = q.Estado                            
                         }).ToList();
                     }
                     else
                     {
-                        Lista = db.vwin_consignacion.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new in_Consignacion_Info
+                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new in_Consignacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdConsignacion = q.IdConsignacion,
                             IdSucursal = q.IdSucursal,
-                            FechaConsignacion = q.FechaConsignacion,
+                            Fecha = q.Fecha,
                             IdProveedor = q.IdProveedor,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            pe_cedulaRuc = q.pe_cedulaRuc,
+                            pe_nombreCompleto = q.NombreProveedor,
+                            Su_Descripcion = q.Su_Descripcion,
+                            bo_Descripcion = q.bo_Descripcion,
+                            NombreTipoMovimiento = q.NombreTipoMovimiento,
+                            IdNumMovi = q.IdNumMovi,
                             Observacion = q.Observacion,
                             Estado = q.Estado
                         }).ToList();
@@ -65,7 +71,7 @@ namespace Core.Erp.Data.Inventario
 
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    In_consignacion Entity = Context.In_consignacion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion);    
+                    in_Consignacion Entity = Context.in_Consignacion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion);    
                     
                     if (Entity == null)
                     {
@@ -76,7 +82,7 @@ namespace Core.Erp.Data.Inventario
                         IdEmpresa = Entity.IdEmpresa,
                         IdConsignacion = Entity.IdConsignacion,
                         IdSucursal = Entity.IdSucursal,
-                        FechaConsignacion = Entity.FechaConsignacion,
+                        Fecha = Entity.Fecha,
                         IdProveedor = Entity.IdProveedor,
                         Observacion = Entity.Observacion,
                         Estado = Entity.Estado
@@ -100,7 +106,7 @@ namespace Core.Erp.Data.Inventario
                 decimal ID = 1;
                 using (Entities_inventario db = new Entities_inventario())
                 {
-                    var Lista = db.In_consignacion.Select(q => q.IdConsignacion);
+                    var Lista = db.in_Consignacion.Select(q => q.IdConsignacion);
 
                     if (Lista.Count() > 0)
                         ID = Lista.Max() + 1;
@@ -120,14 +126,16 @@ namespace Core.Erp.Data.Inventario
             {
                 using (Entities_inventario db = new Entities_inventario())
                 {
-                    db.In_consignacion.Add(new In_consignacion
+                    db.in_Consignacion.Add(new in_Consignacion
                     {
                         IdConsignacion = GetId(),
                         IdSucursal = info.IdSucursal,
-                        FechaConsignacion = info.FechaConsignacion,
+                        Fecha = info.Fecha,
                         IdProveedor = info.IdProveedor,
                         Observacion = info.Observacion,
                         Estado = info.Estado = true,
+                        IdBodega = info.IdBodega,
+                        IdEmpresa = info.IdEmpresa,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     });
@@ -149,7 +157,7 @@ namespace Core.Erp.Data.Inventario
             {
                 using (Entities_inventario db = new Entities_inventario())
                 {
-                    In_consignacion Entity = db.In_consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).FirstOrDefault();
+                    in_Consignacion Entity = db.in_Consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).FirstOrDefault();
 
                     if (Entity == null)
                     {
@@ -157,9 +165,9 @@ namespace Core.Erp.Data.Inventario
                     }
 
                     Entity.IdConsignacion = info.IdConsignacion;
-                    Entity.IdProveedor = Convert.ToInt32(info.IdProveedor);
+                    Entity.IdProveedor = info.IdProveedor;
                     Entity.IdSucursal = info.IdSucursal;
-                    Entity.FechaConsignacion = info.FechaConsignacion;
+                    Entity.Fecha = info.Fecha;
                     Entity.Observacion = info.Observacion;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
@@ -181,7 +189,7 @@ namespace Core.Erp.Data.Inventario
             {
                 using (Entities_inventario db = new Entities_inventario())
                 {
-                    In_consignacion Entity = db.In_consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).FirstOrDefault();
+                    in_Consignacion Entity = db.in_Consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).FirstOrDefault();
 
                     if (Entity == null)
                     {

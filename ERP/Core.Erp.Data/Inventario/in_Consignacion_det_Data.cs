@@ -17,11 +17,11 @@ namespace Core.Erp.Data.Inventario
 
                 using (Entities_inventario db = new Entities_inventario())
                 {
-                    Lista = db.vwin_consignacion_detalle.Where(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion).Select(q => new in_Consignacion_det_Info
+                    Lista = db.vwin_ConsignacionDet.Where(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion).Select(q => new in_Consignacion_det_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdConsignacion = q.IdConsignacion,
-                        Secuencial = q.Secuencial,
+                        Secuencia = q.Secuencia,
                         pr_descripcion = q.pr_descripcion,
                         IdProducto = q.IdProducto,
                         IdUnidadMedida = q.IdUnidadMedida,
@@ -32,41 +32,6 @@ namespace Core.Erp.Data.Inventario
 
                     return Lista;
                 }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public in_Consignacion_det_Info GetInfo(int IdEmpresa, int IdConsignacion)
-        {
-            try
-            {
-                in_Consignacion_det_Info info = new in_Consignacion_det_Info();
-
-                using (Entities_inventario Context = new Entities_inventario())
-                {
-                    in_consignacion_det Entity = Context.in_consignacion_det.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion);
-
-                    if (Entity == null)
-                    {
-                        return null;
-                    }
-
-                    info = new in_Consignacion_det_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdConsignacion = Entity.IdConsignacion,
-                        Secuencial = Entity.Secuencial,
-                        IdProducto = Entity.IdProducto,
-                        //pr_descripcion = Entity.pr_descripcion,
-                        IdUnidadMedida = Entity.IdUnidadMedida,
-                        Cantidad = Entity.Cantidad,
-                        Observacion = Entity.Observacion
-                    };
-                }
-                return info;
             }
             catch (Exception)
             {

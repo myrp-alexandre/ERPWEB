@@ -24,17 +24,5 @@ namespace Core.Erp.Bus.Inventario
             }
         }
 
-        public in_Consignacion_det_Info GetInfo(int IdEmpresa, int IdConsignacion)
-        {
-            try
-
-            {
-                return odata_det.GetInfo(IdEmpresa, IdConsignacion);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
     }
 }
