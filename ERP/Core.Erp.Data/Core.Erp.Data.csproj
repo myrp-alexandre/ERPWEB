@@ -1865,6 +1865,9 @@
     <Compile Include="vwin_consignacion.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwin_consignacion_detalle.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwin_devolucion_inven_det.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>

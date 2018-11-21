@@ -87,11 +87,11 @@
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdConsignacion" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Secuencial" Type="int" Nullable="false" />
-          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="Cantidad" Type="int" />
-          <Property Name="Precio" Type="float" />
-          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Costo" Type="float" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="in_devolucion_inven">
           <Key>
@@ -648,6 +648,29 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_consignacion' no tiene de
           <Property Name="pr_codigo" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_consignacion_detalle' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwin_consignacion_detalle">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConsignacion" />
+            <PropertyRef Name="Secuencial" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Costo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConsignacion" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencial" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Costo" Type="float" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_devolucion_inven_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_devolucion_inven_det">
           <Key>
@@ -1063,7 +1086,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_producto_padre_combo' no 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_in_consignacion_det_in_Producto">
-          <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="0..1" />
+          <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="1" />
           <End Role="in_consignacion_det" Type="Self.in_consignacion_det" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="in_Producto">
@@ -1886,6 +1909,19 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_producto_padre_combo' no 
 [vwin_consignacion].[pe_cedulaRuc] AS [pe_cedulaRuc], 
 [vwin_consignacion].[pr_codigo] AS [pr_codigo]
 FROM [dbo].[vwin_consignacion] AS [vwin_consignacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwin_consignacion_detalle" EntityType="Self.vwin_consignacion_detalle" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vwin_consignacion_detalle].[IdEmpresa] AS [IdEmpresa], 
+[vwin_consignacion_detalle].[IdConsignacion] AS [IdConsignacion], 
+[vwin_consignacion_detalle].[Secuencial] AS [Secuencial], 
+[vwin_consignacion_detalle].[IdProducto] AS [IdProducto], 
+[vwin_consignacion_detalle].[pr_descripcion] AS [pr_descripcion], 
+[vwin_consignacion_detalle].[IdUnidadMedida] AS [IdUnidadMedida], 
+[vwin_consignacion_detalle].[Cantidad] AS [Cantidad], 
+[vwin_consignacion_detalle].[Costo] AS [Costo], 
+[vwin_consignacion_detalle].[Observacion] AS [Observacion]
+FROM [dbo].[vwin_consignacion_detalle] AS [vwin_consignacion_detalle]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_devolucion_inven_det" EntityType="Self.vwin_devolucion_inven_det" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2789,8 +2825,8 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <NavigationProperty Name="in_UnidadMedida1" Relationship="Self.FK_in_Producto_in_UnidadMedida1" FromRole="in_Producto" ToRole="in_UnidadMedida" />
           <NavigationProperty Name="in_transferencia_det" Relationship="Self.FK_in_transferencia_det_in_Producto" FromRole="in_Producto" ToRole="in_transferencia_det" />
           <NavigationProperty Name="in_producto_x_tb_bodega" Relationship="Model_inventario.FK_in_producto_x_tb_bodega_in_Producto" FromRole="in_Producto" ToRole="in_producto_x_tb_bodega" />
-          <NavigationProperty Name="in_consignacion_det" Relationship="Model_inventario.FK_in_consignacion_det_in_Producto" FromRole="in_Producto" ToRole="in_consignacion_det" />
           <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
+          <NavigationProperty Name="in_consignacion_det" Relationship="Model_inventario.FK_in_consignacion_det_in_Producto" FromRole="in_Producto" ToRole="in_consignacion_det" />
         </EntityType>
         <EntityType Name="in_Producto_Composicion">
           <Key>
@@ -4008,19 +4044,10 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             <End Role="in_producto_x_tb_bodega_Costo_Historico" EntitySet="in_producto_x_tb_bodega_Costo_Historico" />
           </AssociationSet>
           <EntitySet Name="In_consignacion" EntityType="Model_inventario.In_consignacion" />
-          <EntitySet Name="in_consignacion_det" EntityType="Model_inventario.in_consignacion_det" />
           <EntitySet Name="vwin_consignacion" EntityType="Model_inventario.vwin_consignacion" />
-          <AssociationSet Name="FK_in_consignacion_det_In_consignacion" Association="Model_inventario.FK_in_consignacion_det_In_consignacion">
-            <End Role="In_consignacion" EntitySet="In_consignacion" />
-            <End Role="in_consignacion_det" EntitySet="in_consignacion_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_In_consignacion_in_Ing_Egr_Inven" Association="Model_inventario.FK_In_consignacion_in_Ing_Egr_Inven">
             <End Role="in_Ing_Egr_Inven" EntitySet="in_Ing_Egr_Inven" />
             <End Role="In_consignacion" EntitySet="In_consignacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_in_consignacion_det_in_Producto" Association="Model_inventario.FK_in_consignacion_det_in_Producto">
-            <End Role="in_Producto" EntitySet="in_Producto" />
-            <End Role="in_consignacion_det" EntitySet="in_consignacion_det" />
           </AssociationSet>
           <EntitySet Name="in_parametro" EntityType="Model_inventario.in_parametro" />
           <AssociationSet Name="FK_in_parametro_in_Catalogo" Association="Model_inventario.FK_in_parametro_in_Catalogo">
@@ -4080,6 +4107,16 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
             <End Role="in_Producto" EntitySet="in_Producto" />
           </AssociationSet>
+          <EntitySet Name="in_consignacion_det" EntityType="Model_inventario.in_consignacion_det" />
+          <AssociationSet Name="FK_in_consignacion_det_In_consignacion" Association="Model_inventario.FK_in_consignacion_det_In_consignacion">
+            <End Role="In_consignacion" EntitySet="In_consignacion" />
+            <End Role="in_consignacion_det" EntitySet="in_consignacion_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_consignacion_det_in_Producto" Association="Model_inventario.FK_in_consignacion_det_in_Producto">
+            <End Role="in_Producto" EntitySet="in_Producto" />
+            <End Role="in_consignacion_det" EntitySet="in_consignacion_det" />
+          </AssociationSet>
+          <EntitySet Name="vwin_consignacion_detalle" EntityType="Model_inventario.vwin_consignacion_detalle" />
           </EntityContainer>
         <ComplexType Name="spSys_inv_Reversar_aprobacion_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -4221,25 +4258,8 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <Property Name="IdSucursal_ing" Type="Int32" Nullable="false" />
           <Property Name="IdMovi_inven_tipo_ing" Type="Int32" Nullable="false" />
           <Property Name="IdNumMovi_ing" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <NavigationProperty Name="in_consignacion_det" Relationship="Model_inventario.FK_in_consignacion_det_In_consignacion" FromRole="In_consignacion" ToRole="in_consignacion_det" />
           <NavigationProperty Name="in_Ing_Egr_Inven" Relationship="Model_inventario.FK_In_consignacion_in_Ing_Egr_Inven" FromRole="In_consignacion" ToRole="in_Ing_Egr_Inven" />
-        </EntityType>
-        <EntityType Name="in_consignacion_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdConsignacion" />
-            <PropertyRef Name="Secuencial" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdConsignacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencial" Type="Int32" Nullable="false" />
-          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Int32" />
-          <Property Name="Precio" Type="Double" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="In_consignacion" Relationship="Model_inventario.FK_in_consignacion_det_In_consignacion" FromRole="in_consignacion_det" ToRole="In_consignacion" />
-          <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_consignacion_det_in_Producto" FromRole="in_consignacion_det" ToRole="in_Producto" />
+          <NavigationProperty Name="in_consignacion_det" Relationship="Model_inventario.FK_in_consignacion_det_In_consignacion" FromRole="In_consignacion" ToRole="in_consignacion_det" />
         </EntityType>
         <EntityType Name="vwin_consignacion">
           <Key>
@@ -4262,20 +4282,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pr_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_in_consignacion_det_In_consignacion">
-          <End Type="Model_inventario.In_consignacion" Role="In_consignacion" Multiplicity="1" />
-          <End Type="Model_inventario.in_consignacion_det" Role="in_consignacion_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="In_consignacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdConsignacion" />
-            </Principal>
-            <Dependent Role="in_consignacion_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdConsignacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_In_consignacion_in_Ing_Egr_Inven">
           <End Type="Model_inventario.in_Ing_Egr_Inven" Role="in_Ing_Egr_Inven" Multiplicity="1" />
           <End Type="Model_inventario.In_consignacion" Role="In_consignacion" Multiplicity="*" />
@@ -4291,20 +4297,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
               <PropertyRef Name="IdSucursal_ing" />
               <PropertyRef Name="IdMovi_inven_tipo_ing" />
               <PropertyRef Name="IdNumMovi_ing" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_in_consignacion_det_in_Producto">
-          <End Type="Model_inventario.in_Producto" Role="in_Producto" Multiplicity="0..1" />
-          <End Type="Model_inventario.in_consignacion_det" Role="in_consignacion_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="in_Producto">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="in_consignacion_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4563,6 +4555,72 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="in_consignacion_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConsignacion" />
+            <PropertyRef Name="Secuencial" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConsignacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencial" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="In_consignacion" Relationship="Model_inventario.FK_in_consignacion_det_In_consignacion" FromRole="in_consignacion_det" ToRole="In_consignacion" />
+          <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_consignacion_det_in_Producto" FromRole="in_consignacion_det" ToRole="in_Producto" />
+        </EntityType>
+        <Association Name="FK_in_consignacion_det_In_consignacion">
+          <End Type="Model_inventario.In_consignacion" Role="In_consignacion" Multiplicity="1" />
+          <End Type="Model_inventario.in_consignacion_det" Role="in_consignacion_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="In_consignacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConsignacion" />
+            </Principal>
+            <Dependent Role="in_consignacion_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdConsignacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_consignacion_det_in_Producto">
+          <End Type="Model_inventario.in_Producto" Role="in_Producto" Multiplicity="1" />
+          <End Type="Model_inventario.in_consignacion_det" Role="in_consignacion_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="in_consignacion_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwin_consignacion_detalle">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConsignacion" />
+            <PropertyRef Name="Secuencial" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Costo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConsignacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencial" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5409,20 +5467,6 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="in_consignacion_det">
-            <EntityTypeMapping TypeName="Model_inventario.in_consignacion_det">
-              <MappingFragment StoreEntitySet="in_consignacion_det">
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="Secuencial" ColumnName="Secuencial" />
-                <ScalarProperty Name="IdConsignacion" ColumnName="IdConsignacion" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwin_consignacion">
             <EntityTypeMapping TypeName="Model_inventario.vwin_consignacion">
               <MappingFragment StoreEntitySet="vwin_consignacion">
@@ -5486,6 +5530,35 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
                 <ScalarProperty Name="tp_EsCombo" ColumnName="tp_EsCombo" />
                 <ScalarProperty Name="tp_descripcion" ColumnName="tp_descripcion" />
                 <ScalarProperty Name="IdProductoTipo" ColumnName="IdProductoTipo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_consignacion_det">
+            <EntityTypeMapping TypeName="Model_inventario.in_consignacion_det">
+              <MappingFragment StoreEntitySet="in_consignacion_det">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Secuencial" ColumnName="Secuencial" />
+                <ScalarProperty Name="IdConsignacion" ColumnName="IdConsignacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwin_consignacion_detalle">
+            <EntityTypeMapping TypeName="Model_inventario.vwin_consignacion_detalle">
+              <MappingFragment StoreEntitySet="vwin_consignacion_detalle">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Secuencial" ColumnName="Secuencial" />
+                <ScalarProperty Name="IdConsignacion" ColumnName="IdConsignacion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

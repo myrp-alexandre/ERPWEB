@@ -5,6 +5,7 @@ using Core.Erp.Info.Helps;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -167,6 +168,55 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_unidad = lst_unidad;
         }
 
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_Consignacion_det_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.IdProducto != 0)
+                {
+                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (info_producto != null)
+                    {
+                        info_det.pr_descripcion = info_producto.pr_descripcion_combo;
+                        info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
+                    }
+                }
+            if (info_det.Cantidad > 0)
+                in_Consignacion_det_List.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = in_Consignacion_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_consignacion_det", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_Consignacion_det_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.IdProducto != 0)
+                {
+                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (info_producto != null)
+                    {
+                        info_det.pr_descripcion = info_producto.pr_descripcion_combo;
+                        info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
+                    }
+                }
+
+            var model = in_Consignacion_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_consignacion_det", model);
+        }
+
+        //public ActionResult EditingDelete(int Secuencia)
+        //{
+        //    in_Consignacion_det_List.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //    in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
+        //    model.lst_in_Ing_Egr_Inven_det = in_Consignacion_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //    cargar_combos_detalle();
+        //    return PartialView("_GridViewPartial_consignacion_det", model.lst_in_Ing_Egr_Inven_det);
+        //}
         #endregion
     }
 
@@ -199,7 +249,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             info_det.IdProducto = info_det.IdProducto;
             info_det.IdUnidadMedida = info_det.IdUnidadMedida;
             info_det.Cantidad = info_det.Cantidad;
-            info_det.Precio = info_det.Precio;
+            info_det.Costo = info_det.Costo;
             info_det.Observacion = info_det.Observacion;
 
             list.Add(info_det);
@@ -211,7 +261,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             info_det.IdProducto = info_det.IdProducto;
             info_det.IdUnidadMedida = info_det.IdUnidadMedida;
             info_det.Cantidad = info_det.Cantidad;
-            info_det.Precio = info_det.Precio;
+            info_det.Costo = info_det.Costo;
             info_det.Observacion = info_det.Observacion;
         }
 

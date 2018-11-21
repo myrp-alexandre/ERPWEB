@@ -12,20 +12,16 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class in_producto_x_tb_bodega_Costo_Historico
+    public partial class vwin_consignacion_detalle
     {
         public int IdEmpresa { get; set; }
-        public int IdSucursal { get; set; }
-        public int IdBodega { get; set; }
+        public decimal IdConsignacion { get; set; }
+        public int Secuencial { get; set; }
         public decimal IdProducto { get; set; }
-        public int IdFecha { get; set; }
-        public int Secuencia { get; set; }
-        public System.DateTime fecha { get; set; }
-        public double costo { get; set; }
-        public double Stock_a_la_fecha { get; set; }
+        public string pr_descripcion { get; set; }
+        public string IdUnidadMedida { get; set; }
+        public int Cantidad { get; set; }
+        public double Costo { get; set; }
         public string Observacion { get; set; }
-        public Nullable<System.DateTime> fecha_trans { get; set; }
-    
-        public virtual in_producto_x_tb_bodega in_producto_x_tb_bodega { get; set; }
     }
 }
