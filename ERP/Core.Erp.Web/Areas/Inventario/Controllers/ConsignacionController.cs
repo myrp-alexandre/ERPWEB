@@ -35,15 +35,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         in_Consignacion_det_Bus bus_consignacion_det = new in_Consignacion_det_Bus();
 
+        #region Proveedor
         public ActionResult CmbProveedor_Consignacion()
         {
             in_Consignacion_Info model = new in_Consignacion_Info();
             return PartialView("_CmbProveedor_Consignacion", model);
-        }
-        public ActionResult CmbSucursal_Consignacion()
-        {
-            in_Consignacion_Info model = new in_Consignacion_Info();
-            return PartialView("_CmbSucursal_Consignacion", model);
         }
 
         public List<tb_persona_Info> get_list_bajo_demanda_proveedor(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -55,6 +51,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
         }
+        #endregion
+
+        #region Sucursal
+        public ActionResult CmbSucursal_Consignacion()
+        {
+            in_Consignacion_Info model = new in_Consignacion_Info();
+            return PartialView("_CmbSucursal_Consignacion", model);
+        }
 
         public List<tb_sucursal_Info> get_list_bajo_demanda_sucursal(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
@@ -65,6 +69,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             return bus_sucursal.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
         }
+        #endregion
+
+        #region  Producto
+        public ActionResult CmbProducto_Consignacion()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbProducto_Consignacion", model);
+        }
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.INV, 0);
+        }
+        public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
         #endregion
 
         #region Index
@@ -217,6 +238,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         //    cargar_combos_detalle();
         //    return PartialView("_GridViewPartial_consignacion_det", model.lst_in_Ing_Egr_Inven_det);
         //}
+
         #endregion
     }
 
