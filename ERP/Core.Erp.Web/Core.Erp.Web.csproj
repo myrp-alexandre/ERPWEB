@@ -402,6 +402,7 @@
     <Compile Include="Areas\RRHH\Controllers\HorarioController.cs" />
     <Compile Include="Areas\RRHH\Controllers\HorarioPlanificacionController.cs" />
     <Compile Include="Areas\RRHH\Controllers\HorasExtrasController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\ImportacionNovedadesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\LiquidacionVacacionesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\MarcacionEmpleadoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\NominaTipoController.cs" />
@@ -9397,6 +9398,7 @@
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
+    <Folder Include="Areas\RRHH\Views\ImportacionNovedades\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
