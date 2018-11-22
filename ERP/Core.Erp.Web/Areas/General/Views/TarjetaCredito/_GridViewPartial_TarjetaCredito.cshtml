@@ -75,6 +75,7 @@
             {
                 ViewContext.Writer.Write(
                     Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    //Html.ActionLink("Nuevo", "Nuevo", new { @style = "background:url('../../imagenes/new.png') no-repeat center right; display:block; height: 30px; width: 50px" }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

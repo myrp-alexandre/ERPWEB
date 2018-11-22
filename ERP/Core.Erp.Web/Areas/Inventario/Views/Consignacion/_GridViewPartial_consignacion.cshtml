@@ -2,10 +2,10 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_consignacion";
+        settings.Name = "GridViewPartial_Consignacion";
         settings.CallbackRouteValues = new { Controller = "Consignacion", Action = "GridViewPartial_Consignacion" };
         settings.KeyFieldName = "IdConsignacion";
-        
+
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
 
         //Configuración para que la grilla no muestre texto completo
@@ -83,12 +83,11 @@
             c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdTransaccion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(15);
-        settings.Columns.Add("pe_cedulaRuc", "Cedula / RUC").Width = System.Web.UI.WebControls.Unit.Percentage(10);        
-        settings.Columns.Add("IdSucursal", "Sucursal").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("FechaConsignacion", "Fecha Consignacion").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("Observación", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("IdConsignacion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("NombreProveedor", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(15);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("Fecha", "Fecha").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("Observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(10);
 
         settings.Columns.Add(column =>
         {

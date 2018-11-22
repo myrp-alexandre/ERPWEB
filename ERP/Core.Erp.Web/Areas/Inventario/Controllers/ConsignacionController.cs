@@ -124,7 +124,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
-        public ActionResult GridViewPartial_consignacion(DateTime fecha_ini, DateTime fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_Consignacion(DateTime fecha_ini, DateTime fecha_fin, int IdSucursal = 0)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
@@ -150,6 +150,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
                 Fecha = DateTime.Now.Date
             };
+
+            in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
             cargar_combos(model.IdEmpresa);
             return View(model);
         }
@@ -162,6 +164,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
             if (!bus_in_Consignacion.GuardarBD(model))
             {
+                in_ConsignacionDet_List.set_list(in_ConsignacionDet_List.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
+                ViewBag.mensaje = "No se ha podido guardar el registro";
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
