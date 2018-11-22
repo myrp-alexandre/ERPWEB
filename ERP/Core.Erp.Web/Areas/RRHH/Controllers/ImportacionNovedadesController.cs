@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using ExcelDataReader;
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class ImportacionNovedadesController : Controller
@@ -63,23 +63,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult GridViewPartial_importacion_novedades_det(string path)
         {
             ro_EmpleadoNovedadCargaMasiva_Info modelReturn = new ro_EmpleadoNovedadCargaMasiva_Info();
-            if (path != null)
-            {
-                
-                var model = Session["DataTableModel"];
-                if (!string.IsNullOrEmpty(path))
-                {
-                    model = InMemoryModel.OpenExcelFile(path);
-                    Session["DataTableModel"] = model;
-                }
-                System.Data.DataTable table = new System.Data.DataTable();
-                table = model as System.Data.DataTable;
-                for (int i = 0; i < table.Columns.Count; i++)
-                {
-                    string valor = table.Rows[i]["Column1"].ToString();
-
-                }
-            }
+          
             modelReturn.detalle = detalle.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_importacion_novedades_det", modelReturn);
@@ -195,24 +179,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             Session["rubros"] = lst_rubros;
         }
 
-        public ActionResult GridViewPartial(string path)
-        {
-            var model = Session["DataTableModel"];
-            if (!string.IsNullOrEmpty(path))
-            {
-                model = InMemoryModel.OpenExcelFile(path);
-                Session["DataTableModel"] = model;
-            }
-            System.Data.DataTable table = new System.Data.DataTable();
-            table = model as System.Data.DataTable;
-            for (int i = 0; i < table.Columns.Count; i++)
-            {
-                string valor = table.Rows[i]["Column1"].ToString();
-
-            }
-            return PartialView(model);
-        }
-
+      
         public ActionResult UploadControlUpload()
         {
             UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
@@ -229,22 +196,34 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         };
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
-            const string UploadDirectory = "~/Content/UploadedFiles/";
-            if (e.UploadedFile.IsValid)
+            int cont = 0;
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
             {
-                MemoryStream ms = new MemoryStream();
-                string resultExtension = Path.GetExtension(e.UploadedFile.FileName);
-                string resultFileName = Path.ChangeExtension(Path.GetRandomFileName(), resultExtension);
-                string resultFileUrl = UploadDirectory + resultFileName;
-                string resultFilePath = System.Web.HttpContext.Current.Server.MapPath("~/") + e.UploadedFile.FileName;
-                e.UploadedFile.SaveAs(resultFilePath);
-                e.CallbackData = resultFilePath;
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0))
+                    {
+                        if (cont != 0)
+                        {
+                            ro_EmpleadoNovedadCargaMasiva_det_Info info = new ro_EmpleadoNovedadCargaMasiva_det_Info
+                            {
+                                Valor =Convert.ToDouble( reader.GetString(3))
+                            };
+                        }
+                        cont++;
 
+                    }
+
+                }
             }
         }
+
+
+      
     }
-
-
     public class ro_EmpleadoNovedadCargaMasiva_detLis_Info
     {
         public List<ro_EmpleadoNovedadCargaMasiva_det_Info> get_list()
@@ -263,7 +242,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             HttpContext.Current.Session["ro_EmpleadoNovedadCargaMasiva_det_Info"] = list;
         }
 
-      
+
         public void UpdateRow(ro_EmpleadoNovedadCargaMasiva_det_Info info_det)
         {
             ro_EmpleadoNovedadCargaMasiva_det_Info edited_info = get_list().Where(m => m.Secualcial == info_det.Secualcial).First();
@@ -278,63 +257,4 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
     }
 
-
-    #region Clases leer excel
-    public class InMemoryModel
-    {
-
-        public static object OpenExcelFile(string path)
-        {
-            if (path == string.Empty)
-                path = "~/Countries.xlsx";
-
-            string fileName = path.StartsWith("~") ? System.Web.HttpContext.Current.Server.MapPath(path) : path;
-
-            ExcelDataSource excelDataSource = new ExcelDataSource();
-            excelDataSource.FileName = fileName;
-            ExcelWorksheetSettings excelWorksheetSettings = new ExcelWorksheetSettings();
-            excelWorksheetSettings.WorksheetName = "Sheet1";
-
-            ExcelSourceOptions excelSourceOptions = new ExcelSourceOptions();
-            excelSourceOptions.ImportSettings = excelWorksheetSettings;
-            excelSourceOptions.SkipHiddenRows = false;
-            excelSourceOptions.SkipHiddenColumns = false;
-            excelSourceOptions.UseFirstRowAsHeader = true;
-            excelDataSource.SourceOptions = excelSourceOptions;
-
-            excelDataSource.Fill();
-
-            DataTable table = excelDataSource.ToDataTable();
-            return table;
-        }
-    }
-
-
-    public static class ExcelDataSourceExtension
-    {
-        public static DataTable ToDataTable(this ExcelDataSource excelDataSource)
-        {
-            IList list = ((IListSource)excelDataSource).GetList();
-            DevExpress.DataAccess.Native.Excel.DataView dataView = (DevExpress.DataAccess.Native.Excel.DataView)list;
-            List<PropertyDescriptor> properties = dataView.Columns.ToList<PropertyDescriptor>();
-
-            DataTable table = new DataTable();
-            for (int i = 0; i < properties.Count; i++)
-            {
-                PropertyDescriptor prop = properties[i];
-                table.Columns.Add(prop.Name, prop.PropertyType);
-            }
-            object[] values = new object[properties.Count];
-            foreach (DevExpress.DataAccess.Native.Excel.ViewRow item in list)
-            {
-                for (int i = 0; i < values.Length; i++)
-                {
-                    values[i] = properties[i].GetValue(item);
-                }
-                table.Rows.Add(values);
-            }
-            return table;
-        }
-    }
-    #endregion
 }

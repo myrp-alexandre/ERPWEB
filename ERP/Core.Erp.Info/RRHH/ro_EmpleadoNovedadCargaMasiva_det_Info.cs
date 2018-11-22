@@ -16,6 +16,6 @@ namespace Core.Erp.Info.RRHH
         public string Observacion { get; set; }
 
 
-        public float Valor { get; set; }
+        public double Valor { get; set; }
     }
 }
