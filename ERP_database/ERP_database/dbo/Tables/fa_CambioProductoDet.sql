@@ -8,7 +8,6 @@
     [SecuenciaFact]    INT          NOT NULL,
     [IdProductoFact]   NUMERIC (18) NOT NULL,
     [IdProductoCambio] NUMERIC (18) NOT NULL,
-    [Costo]            FLOAT (53)   NOT NULL,
     [CantidadFact]     FLOAT (53)   NOT NULL,
     [CantidadCambio]   FLOAT (53)   NOT NULL,
     [IdDevolucion]     NUMERIC (18) NULL,
@@ -20,6 +19,8 @@
     CONSTRAINT [FK_fa_CambioProductoDet_in_Producto1] FOREIGN KEY ([IdEmpresa], [IdProductoCambio]) REFERENCES [dbo].[in_Producto] ([IdEmpresa], [IdProducto]),
     CONSTRAINT [FK_fa_CambioProductoDet_tb_bodega] FOREIGN KEY ([IdEmpresa], [IdSucursal], [IdBodega]) REFERENCES [dbo].[tb_bodega] ([IdEmpresa], [IdSucursal], [IdBodega])
 );
+
+
 
 
 

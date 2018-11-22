@@ -34,6 +34,7 @@ namespace Core.Erp.Info.Facturacion
         public List<fa_CambioProductoDet_Info> LstDet { get; set; }
         public string bo_Descripcion { get; set; }
         public string Su_Descripcion { get; set; }
+        public Nullable<decimal> NumeroFactura { get; set; }
         #endregion
     }
 }
