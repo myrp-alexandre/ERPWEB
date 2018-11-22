@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class fa_CambioProductoDet
+    public partial class vwfa_CambioProductoDet
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
@@ -26,8 +26,7 @@ namespace Core.Erp.Data
         public double CantidadFact { get; set; }
         public double CantidadCambio { get; set; }
         public Nullable<decimal> IdDevolucion { get; set; }
-    
-        public virtual fa_CambioProducto fa_CambioProducto { get; set; }
-        public virtual fa_factura_det fa_factura_det { get; set; }
+        public string pr_descripcionFact { get; set; }
+        public string pr_descripcionCambio { get; set; }
     }
 }

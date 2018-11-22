@@ -10,12 +10,15 @@ namespace Core.Erp.Info.RRHH
     {
         public int IdEmpresa { get; set; }
         public decimal IdCarga { get; set; }
-        public int Secualcial { get; set; }
+        public int Secuancia { get; set; }
         public int IdEmpresa_nov { get; set; }
         public decimal IdNovedad { get; set; }
         public string Observacion { get; set; }
-
-
-        public float Valor { get; set; }
+        public double Valor { get; set; }
+        public decimal IdEmpleado { get; set; }
+        public string em_codigo { get; set; }
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
+        public string pe_cedulaRuc { get; set; }
     }
 }

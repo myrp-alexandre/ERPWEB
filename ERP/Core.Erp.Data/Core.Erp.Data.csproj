@@ -1769,6 +1769,12 @@
     <Compile Include="vwfa_CambioProducto.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwfa_CambioProductoDet.cs">
+      <DependentUpon>Model_facturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwfa_CambioProductoDet_facturas.cs">
+      <DependentUpon>Model_facturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwfa_cliente_consulta.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
@@ -1956,6 +1962,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwRo_ActaFiniquito.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwro_EmpleadoNovedadCargaMasiva_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_empleados_consulta.cs">

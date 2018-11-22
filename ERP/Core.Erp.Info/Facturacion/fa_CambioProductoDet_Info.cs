@@ -13,7 +13,6 @@ namespace Core.Erp.Info.Facturacion
         public int SecuenciaFact { get; set; }
         public decimal IdProductoFact { get; set; }
         public decimal IdProductoCambio { get; set; }
-        public double Costo { get; set; }
         public double CantidadFact { get; set; }
         public double CantidadCambio { get; set; }
         public Nullable<decimal> IdDevolucion { get; set; }

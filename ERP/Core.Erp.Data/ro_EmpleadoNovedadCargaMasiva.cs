@@ -21,6 +21,9 @@ namespace Core.Erp.Data
     
         public int IdEmpresa { get; set; }
         public decimal IdCarga { get; set; }
+        public int IdNomina { get; set; }
+        public int IdNominaTipo { get; set; }
+        public int IdSucursal { get; set; }
         public System.DateTime FechaCarga { get; set; }
         public string Observacion { get; set; }
         public string IdRubro { get; set; }
@@ -32,5 +35,6 @@ namespace Core.Erp.Data
         public string MotiAnula { get; set; }
     
         public virtual ICollection<ro_EmpleadoNovedadCargaMasiva_det> ro_EmpleadoNovedadCargaMasiva_det { get; set; }
+        public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
     }
 }

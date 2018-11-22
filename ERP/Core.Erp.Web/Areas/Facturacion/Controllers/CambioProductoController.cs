@@ -111,7 +111,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 IdEmpresa = IdEmpresa,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
-                IdUsuario = SessionFixed.IdUsuario
+                IdUsuario = SessionFixed.IdUsuario,
+                Fecha = DateTime.Now
             };
             CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
             return View(model);
@@ -200,6 +201,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         #region Json
         public JsonResult CargarBodega(int IdEmpresa= 0, int IdSucursal = 0)
+        {
+            var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetFacturasCambio(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, string NumerFactura = "", decimal IdTransaccionSession = 0)
+        {
+            var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetListaFacturasCambio(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdTransaccionSession = 0)
         {
             var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
             return Json(resultado, JsonRequestBehavior.AllowGet);

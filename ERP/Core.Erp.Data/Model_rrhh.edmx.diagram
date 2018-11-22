@@ -173,10 +173,13 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="5.375" PointY="6.75" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_EmpleadoNovedadCargaMasiva" Width="1.5" PointX="17.75" PointY="33.25" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_EmpleadoNovedadCargaMasiva_det" Width="1.5" PointX="20" PointY="59.625" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_EmpleadoNovedadCargaMasiva" Width="1.5" PointX="12.75" PointY="26.125" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_EmpleadoNovedadCargaMasiva_det" Width="1.5" PointX="23" PointY="49.5" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_EmpleadoNovedadCargaMasiva_det" Width="1.5" PointX="7.375" PointY="5.75" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" />
         <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_EmpleadoNovedadCargaMasiva" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

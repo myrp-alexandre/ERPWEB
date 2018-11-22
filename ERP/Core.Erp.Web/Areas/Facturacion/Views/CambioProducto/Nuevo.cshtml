@@ -11,8 +11,8 @@
 
 @using (Html.BeginForm("Nuevo", "CambioProducto", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-    @Html.HiddenFor(q=> q.IdUsuario)
-    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa"})
+    @Html.HiddenFor(q => q.IdUsuario)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCambio)
 
@@ -67,10 +67,30 @@
         </div>
     </div>
 
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index","CambioProducto",new { Area = "Facturacion" },null)">Cancelar</a>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdProforma"></label>
+                    @Html.TextBoxFor(q => q.NumeroFactura, new { @class = "form-control", @id = "NumeroFactura", @placeholder = "# Factura" })
+                    @Html.ValidationMessageFor(q => q.NumeroFactura, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for=""></label>
+                    <button type="button" class="btn btn-primary" id="btn_buscar" onclick="MostrarModalFacturas();">
+                        <i class="fa fa-search"></i> Facturas
+                    </button>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","CambioProducto",new { Area = "Facturacion" },null)">Cancelar</a>
+    </div>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -84,7 +104,7 @@
             CargarBodega();
         });
     })
-    
+
     function CargarBodega() {
         $("#IdBodega").empty();
 
@@ -111,4 +131,65 @@
             }
         });
     };
+
+    function MostrarModalProformas() {        
+
+        var NumeroFactura = $("#NumeroFactura").val();
+
+        if (NumeroFactura != null && NumeroFactura != 0 && NumeroFactura != "") {            
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                IdSucursal: $("#IdSucursal").val(),
+                IdBodega: $("#IdBodega").val(),
+                NumeroFactura: $("#NumeroFactura").val(),
+                IdTransaccionSession: $("#IdTransaccionSession").val()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("GetFacturasCambio", "CambioProducto", new { Area = "Facturacion" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data == false) {
+                        alert('No existe datos para el número de factura ' + NumeroFactura + ' ingresado');
+                    }
+                },
+                error: function (error) {
+                }
+            });
+            GridView_CambioProductoDet.PerformCallback()
+            $("#NumeroFactura").val("");
+        }
+        else
+        {
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                IdSucursal: $("#IdSucursal").val(),
+                IdBodega: $("#IdBodega").val(),
+                IdTransaccionSession: $("#IdTransaccionSession").val()
+            }
+            $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetListaFacturasCambio", "CambioProducto", new { Area = "Facturacion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+            },
+            error: function (error) {
+            }
+            });
+            GridView_PFactura_det.PerformCallback();
+                $("#ModalFacturas").modal("show");
+            }
+    };
+
 </script>
