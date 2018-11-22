@@ -164,7 +164,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_EmpleadoNovedadCargaMasiva_det_Info info_det)
         {
-            detalle.DeleteRow(info_det.Secualcial);
+            detalle.DeleteRow(info_det.Secuancia);
             ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info();
             model.detalle = detalle.get_list();
             cargar_combos_detalle();
@@ -245,7 +245,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public void UpdateRow(ro_EmpleadoNovedadCargaMasiva_det_Info info_det)
         {
-            ro_EmpleadoNovedadCargaMasiva_det_Info edited_info = get_list().Where(m => m.Secualcial == info_det.Secualcial).First();
+            ro_EmpleadoNovedadCargaMasiva_det_Info edited_info = get_list().Where(m => m.Secuancia == info_det.Secuancia).First();
             edited_info.Valor = info_det.Valor;
             edited_info.Valor = info_det.Valor;
         }
@@ -253,7 +253,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public void DeleteRow(int Secuencia)
         {
             List<ro_EmpleadoNovedadCargaMasiva_det_Info> list = get_list();
-            list.Remove(list.Where(m => m.Secualcial == Secuencia).First());
+            list.Remove(list.Where(m => m.Secuancia == Secuencia).First());
         }
     }
 
