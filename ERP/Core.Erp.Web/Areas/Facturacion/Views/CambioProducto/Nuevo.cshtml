@@ -9,19 +9,121 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-<script>
+<script type="text/javascript">
+
+    $(function () {
+        CargarBodega();
+        $("#IdSucursal").change(function () {
+            CargarBodega();
+        });
+    });
+
     var selectedIDs;
     function OnBeginCallback(s, e) {
         e.customArgs["selectedIDs"] = selectedIDs;
-    }
+    };
 
     function OnSelectionChanged(s, e) {
         s.GetSelectedFieldValues("IdSecuencial", GetSelectedFieldValuesCallback);
-    }
+    };
+
     function GetSelectedFieldValuesCallback(values) {
         //Capture all selected keys
         selectedIDs = values.join(',');
-    }
+    };
+
+    function CargarBodega() {
+        $("#IdBodega").empty();
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarBodega", "CambioProducto", new { Area = "Facturacion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+    function MostrarModalFacturas() {
+        BuscarFacturas();
+        $("#ModalFacturas").modal("show");
+    };
+
+    function BuscarFacturas() {
+        var NumeroFactura = $("#NumeroFactura").val();
+
+        var datos = {
+            FechaIni: FechaIni.GetValue(),
+            FechaFin: FechaFin.GetValue(),
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
+            IdBodega: $("#IdBodega").val(),
+            NumeroFactura: $("#NumeroFactura").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetFacturasCambio", "CambioProducto", new { Area = "Facturacion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == false) {
+                    alert("No existen resultados para los filtros aplicados");
+                }
+            },
+            error: function (error) {
+            }
+        });
+        GridView_CambioProductoDetFacturas.UnselectRows();
+        GridView_CambioProductoDetFacturas.PerformCallback();
+        $("#NumeroFactura").val("");
+    };
+
+    function AddFacturas() {
+        var datos = {
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EditingAddNew", "CambioProducto",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        selectedIDs = "";
+        GridView_CambioProductoDetFacturas.PerformCallback();
+        GridView_CambioProductoDetFacturas.UnselectRows();
+
+        $("#ModalFacturas").modal("hide");
+
+        GridView_CambioProductoDet.PerformCallback();
+    };
 </script>
 @using (Html.BeginForm("Nuevo", "CambioProducto", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
@@ -170,6 +272,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 @Html.Action("GridViewPartial_CambioProductoDet")
+                
             </div>
         </div>
     </div>
@@ -183,104 +286,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-
-<script type="text/javascript">
-    $(function () {
-        CargarBodega();
-        $("#IdSucursal").change(function () {
-            CargarBodega();
-        });
-    })
-
-    function CargarBodega() {
-        $("#IdBodega").empty();
-
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#IdSucursal").val()
-        }
-
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("CargarBodega", "CambioProducto", new { Area = "Facturacion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $.each(data, function (i, row) {
-                    $("#IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
-                });
-            },
-            error: function (error) {
-            }
-        });
-    };
-
-    function MostrarModalFacturas() {
-        BuscarFacturas();
-        $("#ModalFacturas").modal("show");
-    };
-
-    function BuscarFacturas() {
-        var NumeroFactura = $("#NumeroFactura").val();
-
-        var datos = {
-            FechaIni: FechaIni.GetValue(),
-            FechaFin: FechaFin.GetValue(),
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#IdSucursal").val(),
-            IdBodega: $("#IdBodega").val(),
-            NumeroFactura: $("#NumeroFactura").val(),
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetFacturasCambio", "CambioProducto", new { Area = "Facturacion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data == false) {
-                    alert("No existen resultados para los filtros aplicados");
-                }
-            },
-            error: function (error) {
-            }
-        });
-        GridView_CambioProductoDetFacturas.UnselectRows();
-        GridView_CambioProductoDetFacturas.PerformCallback();
-        $("#NumeroFactura").val("");
-    }
-
-    function AddFacturas() {
-        var datos = {
-            IDs: selectedIDs,
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNew", "CambioProducto",new { Area = "Facturacion"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });
-        selectedIDs = "";
-        GridView_CambioProductoDetFacturas.PerformCallback();
-        GridView_CambioProductoDetFacturas.UnselectRows();
-        GridView_CambioProductoDet.PerformCallback();
-        $("#ModalFacturas").modal("hide");
-    }
-
-</script>

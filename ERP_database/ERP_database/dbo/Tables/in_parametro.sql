@@ -7,8 +7,8 @@
     [P_Al_Conta_CtaInven_Buscar_en]                     VARCHAR (15) NULL,
     [P_Al_Conta_CtaCosto_Buscar_en]                     VARCHAR (15) NULL,
     [P_IdCtaCble_transitoria_transf_inven]              VARCHAR (20) NOT NULL,
-    [P_IdProductoTipo_para_lote_0]                      INT          NULL,
-    [P_se_crea_lote_0_al_crear_producto_matriz]         BIT          NULL,
+    [P_IdProductoTipo_para_lote_0]                      INT          NOT NULL,
+    [P_se_crea_lote_0_al_crear_producto_matriz]         BIT          NOT NULL,
     [IdMovi_inven_tipo_x_distribucion_ing]              INT          NOT NULL,
     [IdMovi_inven_tipo_x_distribucion_egr]              INT          NOT NULL,
     [P_IdMovi_inven_tipo_default_ing]                   INT          NOT NULL,
@@ -35,6 +35,8 @@
     CONSTRAINT [FK_in_parametro_in_movi_inven_tipo9] FOREIGN KEY ([IdEmpresa], [IdMovi_inven_tipo_x_distribucion_egr]) REFERENCES [dbo].[in_movi_inven_tipo] ([IdEmpresa], [IdMovi_inven_tipo]),
     CONSTRAINT [FK_in_parametro_in_ProductoTipo] FOREIGN KEY ([IdEmpresa], [P_IdProductoTipo_para_lote_0]) REFERENCES [dbo].[in_ProductoTipo] ([IdEmpresa], [IdProductoTipo])
 );
+
+
 
 
 

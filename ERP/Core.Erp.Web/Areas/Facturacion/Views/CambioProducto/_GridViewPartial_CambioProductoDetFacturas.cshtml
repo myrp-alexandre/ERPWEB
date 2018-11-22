@@ -4,7 +4,7 @@
     {
         settings.Name = "GridView_CambioProductoDetFacturas";
         settings.CallbackRouteValues = new { Controller = "CambioProducto", Action = "GridViewPartial_CambioProductoDetFacturas", Area = "Facturacion"};
-        settings.KeyFieldName = "IdSecuencia";
+        settings.KeyFieldName = "IdSecuencial";
 
         settings.Width = Unit.Percentage(100);
 
@@ -71,6 +71,7 @@
         });
 
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
 }
 @grid.Bind(Model).GetHtml()

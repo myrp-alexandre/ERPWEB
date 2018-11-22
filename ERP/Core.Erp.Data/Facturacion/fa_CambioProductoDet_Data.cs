@@ -35,7 +35,7 @@ namespace Core.Erp.Data.Facturacion
                         pr_descripcionFact = q.pr_descripcionFact                        
                     }).ToList();
                 }
-                Lista.ForEach(q => q.IdSecuencial = q.IdEmpresa.ToString("00") + q.IdSucursal.ToString("00" + q.IdBodega.ToString("00") + q.IdCbteVta.ToString("000000000")));
+                Lista.ForEach(q => q.IdSecuencial = q.IdEmpresa.ToString("00") + q.IdSucursal.ToString("00") + q.IdBodega.ToString("00") + q.IdCbteVta.ToString("000000000"));
                 return Lista;
             }
             catch (Exception)
@@ -57,7 +57,8 @@ namespace Core.Erp.Data.Facturacion
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdSucursal = q.IdSucursal,
-                        IdBodega = q.IdBodega,                        
+                        IdBodega = q.IdBodega,    
+                        IdCbteVta = q.IdCbteVta,                    
                         SecuenciaFact = q.Secuencia,
                         IdProductoFact = q.IdProducto,
                         IdProductoCambio = q.IdProducto,
@@ -73,7 +74,7 @@ namespace Core.Erp.Data.Facturacion
                     if (NumeroFactura > 0)
                         Lista = Lista.Where(q => NumeroFactura == (string.IsNullOrEmpty(q.vt_NumFactura) ? 0 : Convert.ToDecimal(q.vt_NumFactura))).ToList();
                 }
-                Lista.ForEach(q => q.IdSecuencial = q.IdEmpresa.ToString("00") + q.IdSucursal.ToString("00" + q.IdBodega.ToString("00") + q.IdCbteVta.ToString("000000000")));
+                Lista.ForEach(q => q.IdSecuencial = q.IdEmpresa.ToString("00") + q.IdSucursal.ToString("00")+ q.IdBodega.ToString("00") + q.IdCbteVta.ToString("000000000") + q.SecuenciaFact.ToString("0000"));
                 return Lista;
             }
             catch (Exception)
