@@ -23,6 +23,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         tb_bodega_Bus bus_bodega;
         in_Producto_Bus bus_producto;
         fa_CambioProductoDet_List List_det;
+        fa_CambioProductoDet_Bus bus_CambioProductoDet;
+        fa_CambioProductoDetFacturas_List List_det_facturas;
         #endregion
 
         #region Constructor
@@ -33,6 +35,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             bus_bodega = new tb_bodega_Bus();
             bus_producto = new in_Producto_Bus();
             List_det = new fa_CambioProductoDet_List();
+            bus_CambioProductoDet = new fa_CambioProductoDet_Bus();
+            List_det_facturas = new fa_CambioProductoDetFacturas_List();
         }
         #endregion
 
@@ -112,17 +116,19 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
                 IdUsuario = SessionFixed.IdUsuario,
-                Fecha = DateTime.Now
+                Fecha = DateTime.Now,
+                FechaIni = DateTime.Now.Date.AddMonths(-1),
+                FechaFin = DateTime.Now.Date
             };
             CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(fa_CambioProducto_Info model)
-        {   
-            if(!bus_CambioProducto.GuardarDB(model))
+        {
+            if (!bus_CambioProducto.GuardarDB(model))
             {
-                CargarCombosAccion(model.IdEmpresa,model.IdSucursal);
+                CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 
@@ -142,6 +148,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.IdUsuario = SessionFixed.IdUsuario;
+            model.FechaIni = DateTime.Now.Date.AddMonths(-1);
+            model.FechaFin = DateTime.Now.Date;
             CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
             return View(model);
         }
@@ -171,6 +179,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.IdUsuario = SessionFixed.IdUsuario;
+            model.FechaIni = DateTime.Now.Date.AddMonths(-1);
+            model.FechaFin = DateTime.Now.Date;
             CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
             return View(model);
         }
@@ -200,37 +210,54 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region Json
-        public JsonResult CargarBodega(int IdEmpresa= 0, int IdSucursal = 0)
+        public JsonResult CargarBodega(int IdEmpresa = 0, int IdSucursal = 0)
         {
             var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetFacturasCambio(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, string NumerFactura = "", decimal IdTransaccionSession = 0)
+        public JsonResult GetFacturasCambio(DateTime FechaIni, DateTime FechaFin, int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, string NumeroFactura = "", decimal IdTransaccionSession = 0)
         {
-            var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
+            bool resultado = false;
 
-        public JsonResult GetListaFacturasCambio(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdTransaccionSession = 0)
-        {
-            var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
+            decimal n = 0;
+            var isNumeric = decimal.TryParse(NumeroFactura, out n);
+            if (isNumeric)
+                n = Convert.ToDecimal(NumeroFactura);
+            else
+                n = 0;
+            var ListaFacturas = bus_CambioProductoDet.GetListFacturas(IdEmpresa, IdSucursal, IdBodega, n, FechaIni, FechaFin);
+            List_det_facturas.set_list(ListaFacturas);
+            if (ListaFacturas.Count > 0)
+                resultado = true;
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
         #region Metodos del detalle
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_CambioProductoDet_Info info_det)
+        public ActionResult GridViewPartial_CambioProductoDet()
         {
-            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
-            var producto = bus_producto.get_info(IdEmpresa, info_det.IdProductoCambio);
-            if (producto != null)
-                info_det.pr_descripcion = producto.pr_descripcion;
-            if (ModelState.IsValid)
-                List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            
+            return PartialView("_GridViewPartial_CambioProductoDet", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew(string IDs = "", decimal IdTransaccionSession = 0)
+        {
+            if (!string.IsNullOrEmpty(IDs))
+            {
+                var lst = List_det_facturas.get_list();
+                string[] array = IDs.Split(',');
+                foreach (var item in array)
+                {
+                    var info_det = lst.Where(q => q.IdSecuencial == item).FirstOrDefault();
+                    if (info_det != null)
+                        List_det.AddRow(info_det, IdTransaccionSession);
+                }
+            }
+
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_CambioProductoDet", model);
         }
 
@@ -240,11 +267,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             var producto = bus_producto.get_info(IdEmpresa, info_det.IdProductoCambio);
             if (producto != null)
-                info_det.pr_descripcion = producto.pr_descripcion;
+                info_det.pr_descripcionCambio = producto.pr_descripcion;
             if (ModelState.IsValid)
                 List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            
+
             return PartialView("_GridViewPartial_CambioProductoDet", model);
         }
 
@@ -253,6 +280,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             List_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_CambioProductoDet", model);
+        }
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_CambioProductoDetFacturas()
+        {
+            var model = List_det_facturas.get_list();
+            return PartialView("_GridViewPartial_CambioProductoDetFacturas", model);
         }
         #endregion
     }
@@ -290,13 +323,34 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             fa_CambioProductoDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdProductoCambio = info_det.IdProductoCambio;
             edited_info.CantidadCambio = info_det.CantidadCambio;
-            edited_info.pr_descripcion = info_det.pr_descripcion;
+            edited_info.pr_descripcionCambio = info_det.pr_descripcionCambio;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
             List<fa_CambioProductoDet_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+    }
+
+    public class fa_CambioProductoDetFacturas_List
+    {
+        string Variable = "fa_CambioProductoDetFacturas";
+        public List<fa_CambioProductoDet_Info> get_list()
+        {
+
+            if (HttpContext.Current.Session[Variable] == null)
+            {
+                List<fa_CambioProductoDet_Info> list = new List<fa_CambioProductoDet_Info>();
+
+                HttpContext.Current.Session[Variable] = list;
+            }
+            return (List<fa_CambioProductoDet_Info>)HttpContext.Current.Session[Variable];
+        }
+
+        public void set_list(List<fa_CambioProductoDet_Info> list)
+        {
+            HttpContext.Current.Session[Variable] = list;
         }
     }
 }

@@ -35,6 +35,8 @@ namespace Core.Erp.Info.Facturacion
         public string bo_Descripcion { get; set; }
         public string Su_Descripcion { get; set; }
         public Nullable<decimal> NumeroFactura { get; set; }
+        public DateTime FechaIni { get; set; }
+        public DateTime FechaFin { get; set; }
         #endregion
     }
 }
