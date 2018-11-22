@@ -124,13 +124,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
-        public ActionResult GridViewPartial_Consignacion(DateTime fecha_ini, DateTime fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_Consignacion(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            List<in_Consignacion_Info> model = bus_in_Consignacion.GetList(IdEmpresa, IdSucursal, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            List<in_Consignacion_Info> model = bus_in_Consignacion.GetList(IdEmpresa, IdSucursal, false, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_Consignacion", model);
         }
 
@@ -161,19 +161,102 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             model.IdUsuario = SessionFixed.IdUsuario;
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.lst_producto_consignacion = in_ConsignacionDet_List.get_list( model.IdTransaccionSession);
 
             if (!bus_in_Consignacion.GuardarBD(model))
             {
-                in_ConsignacionDet_List.set_list(in_ConsignacionDet_List.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = "No se ha podido guardar el registro";
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult Modificar(int IdEmpresa = 0, int IdConsignacion=0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            in_Consignacion_Info model = bus_in_Consignacion.GetInfo(IdEmpresa, IdConsignacion);
+
+            if (model == null)
+                return RedirectToAction("Index");
+    
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.lst_producto_consignacion = bus_consignacion_det.GetList(model.IdEmpresa, Convert.ToInt32(model.IdConsignacion));
+            in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
+
+            cargar_combos(IdEmpresa);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Modificar(in_Consignacion_Info model)
+        {
+            model.lst_producto_consignacion = in_ConsignacionDet_List.get_list(model.IdTransaccionSession);
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model.IdEmpresa);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            if (!bus_in_Consignacion.ModificarBD(model))
+            {
+                cargar_combos(model.IdEmpresa);
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Anular(int IdEmpresa = 0, decimal IdConsignacion = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            in_Consignacion_Info model = bus_in_Consignacion.GetInfo(IdEmpresa, Convert.ToInt32(IdConsignacion));
+            if (model == null)
+                return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.lst_producto_consignacion = bus_consignacion_det.GetList(model.IdEmpresa, Convert.ToInt32(model.IdConsignacion));
+            in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
+
+            cargar_combos(model.IdEmpresa);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Anular(in_Consignacion_Info model)
+        {
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
+            if (!bus_in_Consignacion.AnularBD(model))
+            {
+                in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
+                ViewBag.mensaje = "No se ha podido anular el registro";
+                cargar_combos(model.IdEmpresa);
+                return View(model);
+            };
+            return RedirectToAction("Index");
+        }
         #endregion
 
         #region Funciones del detalle
+        private bool validar(in_Consignacion_Info i_validar, ref string msg)
+        {
+            if (i_validar.lst_producto_consignacion.Count == 0)
+            {
+                mensaje = "Debe ingresar al menos un producto";
+                return false;
+            }
+            return true;
+        }
+
         public ActionResult GridViewPartial_ConsignacionDet()
         {
             //siempre copiar

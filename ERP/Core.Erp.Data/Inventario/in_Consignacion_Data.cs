@@ -19,7 +19,7 @@ namespace Core.Erp.Data.Inventario
                 {
                     if (mostrar_anulados == false)
                     {
-                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Select(q => new in_Consignacion_Info
+                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.Estado == true && q.Fecha >= fecha_ini && q.Fecha <= fecha_fin).Select(q => new in_Consignacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdConsignacion = q.IdConsignacion,
@@ -37,7 +37,7 @@ namespace Core.Erp.Data.Inventario
                     }
                     else
                     {
-                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new in_Consignacion_Info
+                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.Estado == true && q.Fecha >= fecha_ini && q.Fecha <= fecha_fin).Select(q => new in_Consignacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdConsignacion = q.IdConsignacion,
@@ -82,6 +82,7 @@ namespace Core.Erp.Data.Inventario
                         IdEmpresa = Entity.IdEmpresa,
                         IdConsignacion = Entity.IdConsignacion,
                         IdSucursal = Entity.IdSucursal,
+                        IdBodega = Entity.IdBodega,
                         Fecha = Entity.Fecha,
                         IdProveedor = Entity.IdProveedor,
                         Observacion = Entity.Observacion,
@@ -89,6 +90,36 @@ namespace Core.Erp.Data.Inventario
                     };
                 }
 
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public in_Consignacion_Info GetInfo(int IdEmpresa, decimal IdConsignacion, int IdSucursal, int IdBodega)
+        {
+            try
+            {
+                in_Consignacion_Info info = new in_Consignacion_Info();
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    in_Consignacion Entity = Context.in_Consignacion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega);
+                    if (Entity == null) return null;
+                    info = new in_Consignacion_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdConsignacion = Entity.IdConsignacion,
+                        IdSucursal = Entity.IdSucursal,
+                        IdBodega = Entity.IdBodega,
+                        Fecha = Entity.Fecha,
+                        IdProveedor = Entity.IdProveedor,
+                        Observacion = Entity.Observacion,
+                        Estado = Entity.Estado
+                    };                    
+                }
                 return info;
             }
             catch (Exception)
@@ -126,7 +157,7 @@ namespace Core.Erp.Data.Inventario
             {
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    var motivo = Context.in_Motivo_Inven.Where(q => q.IdEmpresa == info.IdEmpresa && q.Tipo_Ing_Egr == "EGR" && q.Genera_Movi_Inven == "S").FirstOrDefault();
+                    var motivo = Context.in_Motivo_Inven.Where(q => q.IdEmpresa == info.IdEmpresa && q.Tipo_Ing_Egr == "ING" && q.Genera_Movi_Inven == "S").FirstOrDefault();
                     if (motivo == null)
                         return null;
 
@@ -140,16 +171,23 @@ namespace Core.Erp.Data.Inventario
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdSucursal = info.IdSucursal,
-                        IdBodega = info.IdBodega,
                         IdMovi_inven_tipo = IdMoviInven_tipo,
                         IdNumMovi = 0,
-                        cm_fecha = info.Fecha,
-                        cm_observacion = "CONS# " + info.IdConsignacion + " " + "PROVEEDOR: " + info.NombreProveedor + " " + info.Observacion,
-                        IdUsuario = info.IdUsuario,
-                        IdUsuarioUltModi = info.IdUsuarioUltMod,
-                        IdMotivo_Inv = motivo.IdMotivo_Inv,
-                        signo = "-",
+                        IdBodega = info.IdBodega,
+                        signo = "+",
                         CodMoviInven = "CONS# " + info.IdConsignacion,
+                        cm_observacion = "CONS# " + info.IdConsignacion + " " + "PROVEEDOR: " + info.NombreProveedor + " " + info.Observacion,
+                        cm_fecha = info.Fecha,
+                        IdUsuario = info.IdUsuario,
+                        Estado = "A",
+                        
+                        Fecha_Transac = info.Fecha_Transac,
+                        IdUsuarioUltModi = info.IdUsuarioUltMod,
+                        Fecha_UltMod = info.Fecha_UltMod,
+                        IdusuarioUltAnu = info.IdUsuarioUltAnu,
+                        Fecha_UltAnu = info.Fecha_UltAnu,
+                        IdMotivo_Inv = motivo.IdMotivo_Inv,
+
                         lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>()
                     };
                     foreach (var item in info.lst_producto_consignacion)
@@ -233,8 +271,32 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
+                in_Ing_Egr_Inven_Data data_inv = new in_Ing_Egr_Inven_Data();
+
                 using (Entities_inventario db = new Entities_inventario())
                 {
+                    #region Ingreso egreso inventario
+                    //var parametro = db.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    //if (parametro.IdMovi_inven_tipo_Consignacion != null)
+                    //{
+                    //    var nomContacto = "";
+                    //    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Consignacion), nomContacto);
+                    //    if (data_inv.guardarDB(movimiento, "-"))
+                    //    {
+                    //        db.in_Ing_Egr_Inven.Add(new in_Ing_Egr_Inven
+                    //        {
+                    //            IdEmpresa = info.IdEmpresa,
+                    //            IdSucursal = info.IdSucursal,
+                    //            IdBodega = info.IdBodega,
+
+                    //            IdMovi_inven_tipo = movimiento.IdMovi_inven_tipo,
+                    //            IdNumMovi = movimiento.IdNumMovi,
+                    //        });
+                    //    }
+                    //}
+                    #endregion
+
+                    #region Consignacion
                     db.in_Consignacion.Add(new in_Consignacion
                     {
                         IdEmpresa = info.IdEmpresa,
@@ -249,8 +311,12 @@ namespace Core.Erp.Data.Inventario
                         Fecha_Transac = DateTime.Now,
                         IdMovi_inven_tipo = 2,
                         IdNumMovi = 10
+                        //IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_Consignacion,
+                        //IdNumMovi = parametro.IdMovi_inven_tipo_Consignacion,
                     });
+                    #endregion
 
+                    #region Consignacion detalle
                     if (info.lst_producto_consignacion != null)
                     {
                         int Secuencia = 1;
@@ -265,11 +331,12 @@ namespace Core.Erp.Data.Inventario
                                 IdUnidadMedida = item.IdUnidadMedida,
                                 Cantidad = item.Cantidad,                                
                                 Costo = item.Costo,
-                                Observacion = info.Observacion
+                                Observacion = item.Observacion
                             });
 
                         }
                     }
+                    #endregion
 
                     db.SaveChanges();
                 }
@@ -295,7 +362,6 @@ namespace Core.Erp.Data.Inventario
                         return false;
                     }
 
-                    Entity.IdConsignacion = info.IdConsignacion;
                     Entity.IdProveedor = info.IdProveedor;
                     Entity.IdSucursal = info.IdSucursal;
                     Entity.Fecha = info.Fecha;
@@ -303,6 +369,28 @@ namespace Core.Erp.Data.Inventario
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
 
+                    var lst_det_consignacion = db.in_ConsignacionDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).ToList();
+                    db.in_ConsignacionDet.RemoveRange(lst_det_consignacion);
+
+                    if (info.lst_producto_consignacion != null)
+                    {
+                        int Secuencia = 1;
+
+                        foreach (var item in info.lst_producto_consignacion)
+                        {
+                            db.in_ConsignacionDet.Add(new in_ConsignacionDet
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdConsignacion = info.IdConsignacion,
+                                Secuencia = Secuencia++,
+                                IdProducto = item.IdProducto,
+                                IdUnidadMedida = item.IdUnidadMedida,
+                                Cantidad = item.Cantidad,
+                                Costo = item.Costo,
+                                Observacion = item.Observacion
+                            });
+                        }
+                    }
                     db.SaveChanges();
                 }
 
@@ -320,14 +408,15 @@ namespace Core.Erp.Data.Inventario
             {
                 using (Entities_inventario db = new Entities_inventario())
                 {
-                    in_Consignacion Entity = db.in_Consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).FirstOrDefault();
+                    in_Consignacion Entity = db.in_Consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion &&q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega).FirstOrDefault();
 
                     if (Entity == null)
                     {
                         return false;
                     }
 
-                    Entity.Estado = info.Estado;
+                    Entity.MotivoAnulacion = info.MotivoAnulacion;
+                    Entity.Estado = false;
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
 
