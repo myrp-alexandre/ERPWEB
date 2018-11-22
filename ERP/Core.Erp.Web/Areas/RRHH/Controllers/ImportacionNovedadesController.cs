@@ -217,16 +217,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                         {
                             string cedua = reader.GetString(0);
                             var empleado = empleado_info_list.get_list().Where(v => v.pe_cedulaRuc == cedua).FirstOrDefault();
-                            ro_EmpleadoNovedadCargaMasiva_det_Info info = new ro_EmpleadoNovedadCargaMasiva_det_Info
+                            if (empleado != null)
                             {
-                                Valor =Convert.ToDouble( reader.GetString(3)),
-                                pe_cedulaRuc=cedua,
-                                pe_apellido=empleado.pe_apellido,
-                                pe_nombre=empleado.pe_nombre,
-                                em_codigo=empleado.em_codigo,
-                                Secuancia=cont
-                            };
-                            lista_novedades.Add(info);
+                                ro_EmpleadoNovedadCargaMasiva_det_Info info = new ro_EmpleadoNovedadCargaMasiva_det_Info
+                                {
+                                    Valor = Convert.ToDouble(reader.GetString(3)),
+                                    pe_cedulaRuc = cedua,
+                                    pe_apellido = empleado.Empleado,
+                                    em_codigo = empleado.em_codigo,
+                                    Secuancia = cont
+                                };
+                                lista_novedades.Add(info);
+                            }
                         }
                         cont++;
 
