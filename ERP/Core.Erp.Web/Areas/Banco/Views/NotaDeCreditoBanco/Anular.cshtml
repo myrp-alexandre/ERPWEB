@@ -103,7 +103,14 @@
                     @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-4 col-md-2">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdBanco_acreditacion">Tipo flujo</label>
+                    @Html.Partial("_CmbFlujo_ND_C", Model.IdTipoFlujo)
+                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-2">
                 <div class="form-group">
                     <label for="cb_Fecha">Fecha:*</label>
                     <div class="input-group date">
@@ -154,7 +161,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="MotivoAnulacion">Motivo anuación</label>
+                    <label for="MotivoAnulacion">Motivo anulación</label>
                     @Html.TextAreaFor(q => q.MotivoAnulacion, new { @id = "MotivoAnulacion", @class = "form-control", @rows = 2 })
                     @Html.ValidationMessageFor(q => q.MotivoAnulacion, "", new { @class = "text-danger" })
                 </div>

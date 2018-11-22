@@ -1,6 +1,8 @@
-﻿using Core.Erp.Bus.Contabilidad;
+﻿using Core.Erp.Bus.Banco;
+using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Bus.General;
+using Core.Erp.Info.Banco;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Info.General;
@@ -38,6 +40,23 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         List<cp_orden_pago_det_Info> list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
         string mensaje = string.Empty;
         #endregion
+        #region Metodos ComboBox bajo demanda flujo
+        ba_TipoFlujo_Bus bus_tipo = new ba_TipoFlujo_Bus();
+        public ActionResult CmbFlujo_ND()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbFlujo_ND", model);
+        }
+        public List<ba_TipoFlujo_Info> get_list_bajo_demandaFlujo(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_tipo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoIngEgr.EGR.ToString());
+        }
+        public ba_TipoFlujo_Info get_info_bajo_demandaFlujo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_tipo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbProveedor_CXP()
