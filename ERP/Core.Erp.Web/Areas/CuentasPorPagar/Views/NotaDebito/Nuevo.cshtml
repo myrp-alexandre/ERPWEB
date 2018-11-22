@@ -23,15 +23,24 @@
 
     }
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCbteCble_Nota)
 
     <div class="row">
         <div class="col-md-6">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
                     @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdOrden_giro_Tipo">Tipo nota*</label>
+                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "Key", "Value"), new { @class = "form-control", @id = "IdTipoNota" })
+                    @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-11">
@@ -50,21 +59,15 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdOrden_giro_Tipo">Tipo nota*</label>
-                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "Key", "Value"), new { @class = "form-control", @id = "IdTipoNota" })
-                    @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdBanco_acreditacion">Tipo flujo</label>
                     @Html.Partial("_CmbFlujo_ND", Model.IdTipoFlujo)
                     @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
                 </div>
             </div>
+        </div>
+        <div class="col-md-6">
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="cn_fecha">Fecha documentos*</label>
@@ -77,9 +80,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="Fecha_contable">Fecha contabilización*</label>
                     <div class="input-group date">
@@ -91,7 +92,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="cn_Fecha_vcto">Fecha vencimiento*</label>
                     <div class="input-group date">
@@ -312,7 +313,6 @@
 
 <script>
         ocultar_mostrar_div();
-
                     $(function () {
                         //Date picker
                         $('#cn_fecha').datepicker({
