@@ -12,22 +12,19 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class fa_CambioProductoDet
+    public partial class vwfa_CambioProductoDet_facturas
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
-        public decimal IdCambio { get; set; }
-        public int Secuencia { get; set; }
         public decimal IdCbteVta { get; set; }
-        public int SecuenciaFact { get; set; }
-        public decimal IdProductoFact { get; set; }
-        public decimal IdProductoCambio { get; set; }
-        public double CantidadFact { get; set; }
-        public double CantidadCambio { get; set; }
-        public Nullable<decimal> IdDevolucion { get; set; }
-    
-        public virtual fa_CambioProducto fa_CambioProducto { get; set; }
-        public virtual fa_factura_det fa_factura_det { get; set; }
+        public int Secuencia { get; set; }
+        public System.DateTime vt_fecha { get; set; }
+        public decimal IdProducto { get; set; }
+        public string pr_descripcion { get; set; }
+        public double vt_cantidad { get; set; }
+        public string vt_NumFactura { get; set; }
+        public string NombreCliente { get; set; }
+        public string Estado { get; set; }
     }
 }
