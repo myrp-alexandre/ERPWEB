@@ -9327,6 +9327,9 @@
     <Content Include="Areas\RRHH\Views\ImportacionNovedades\Nuevo.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionNovedades\_GridViewPartial_importacion_novedades.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionNovedades\_GridViewPartial_importacion_novedades_det.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CambioProducto\_GridViewPartial_CambioProductoDet.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CambioProducto\_GridViewPartial_CambioProductoDetFacturas.cshtml" />
+    <Content Include="Areas\Facturacion\Views\CambioProducto\_CmbProducto_CambioProducto.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
