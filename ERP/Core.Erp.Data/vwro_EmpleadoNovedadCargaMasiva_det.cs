@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ro_EmpleadoNovedadCargaMasiva_det
+    public partial class vwro_EmpleadoNovedadCargaMasiva_det
     {
         public int IdEmpresa { get; set; }
         public decimal IdCarga { get; set; }
@@ -21,9 +21,9 @@ namespace Core.Erp.Data
         public decimal IdNovedad { get; set; }
         public string Observacion { get; set; }
         public decimal IdEmpleado { get; set; }
-    
-        public virtual ro_empleado ro_empleado { get; set; }
-        public virtual ro_empleado_Novedad ro_empleado_Novedad { get; set; }
-        public virtual ro_EmpleadoNovedadCargaMasiva ro_EmpleadoNovedadCargaMasiva { get; set; }
+        public string em_codigo { get; set; }
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
+        public string pe_cedulaRuc { get; set; }
     }
 }

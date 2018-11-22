@@ -578,6 +578,9 @@
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCarga" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdNomina" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="FechaCarga" Type="datetime" Nullable="false" />
           <Property Name="Observacion" Type="varchar(max)" />
           <Property Name="IdRubro" Type="varchar" MaxLength="50" Nullable="false" />
@@ -592,14 +595,15 @@
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdCarga" />
-            <PropertyRef Name="Secualcial" />
+            <PropertyRef Name="Secuencia" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCarga" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Secualcial" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
           <Property Name="IdEmpresa_nov" Type="int" Nullable="false" />
           <Property Name="IdNovedad" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="ro_Historico_Liquidacion_Vacaciones">
           <Key>
@@ -1637,6 +1641,30 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_x_titulos' does not ha
           <Property Name="IdInstitucion" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="IdTitulo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP_CCG.dbo.vwro_EmpleadoNovedadCargaMasiva_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwro_EmpleadoNovedadCargaMasiva_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCarga" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdEmpresa_nov" />
+            <PropertyRef Name="IdNovedad" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="pe_cedulaRuc" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCarga" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_nov" Type="int" Nullable="false" />
+          <Property Name="IdNovedad" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="em_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleados_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2768,6 +2796,20 @@ warning 6002: The table/view 'DBERP_CCG.web.vwro_rol_detalle_generar_op' does no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado">
+          <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
+          <End Role="ro_EmpleadoNovedadCargaMasiva_det" Type="Self.ro_EmpleadoNovedadCargaMasiva_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_EmpleadoNovedadCargaMasiva_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad">
           <End Role="ro_empleado_Novedad" Type="Self.ro_empleado_Novedad" Multiplicity="1" />
           <End Role="ro_EmpleadoNovedadCargaMasiva_det" Type="Self.ro_EmpleadoNovedadCargaMasiva_det" Multiplicity="*" />
@@ -2793,6 +2835,22 @@ warning 6002: The table/view 'DBERP_CCG.web.vwro_rol_detalle_generar_op' does no
             <Dependent Role="ro_EmpleadoNovedadCargaMasiva_det">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdCarga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui">
+          <End Role="ro_Nomina_Tipoliqui" Type="Self.ro_Nomina_Tipoliqui" Multiplicity="1" />
+          <End Role="ro_EmpleadoNovedadCargaMasiva" Type="Self.ro_EmpleadoNovedadCargaMasiva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_Nomina_Tipoliqui">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Principal>
+            <Dependent Role="ro_EmpleadoNovedadCargaMasiva">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina" />
+              <PropertyRef Name="IdNominaTipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3758,6 +3816,21 @@ FROM [dbo].[vwro_empleado_x_rubro_acumulado] AS [vwro_empleado_x_rubro_acumulado
 [vwro_empleado_x_titulos].[estado] AS [estado]
 FROM [dbo].[vwro_empleado_x_titulos] AS [vwro_empleado_x_titulos]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwro_EmpleadoNovedadCargaMasiva_det" EntityType="Self.vwro_EmpleadoNovedadCargaMasiva_det" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vwro_EmpleadoNovedadCargaMasiva_det].[IdEmpresa] AS [IdEmpresa], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[IdCarga] AS [IdCarga], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[Secuencia] AS [Secuencia], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[IdEmpresa_nov] AS [IdEmpresa_nov], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[IdNovedad] AS [IdNovedad], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[Observacion] AS [Observacion], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[IdEmpleado] AS [IdEmpleado], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[em_codigo] AS [em_codigo], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[pe_apellido] AS [pe_apellido], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[pe_nombre] AS [pe_nombre], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[pe_cedulaRuc] AS [pe_cedulaRuc]
+FROM [dbo].[vwro_EmpleadoNovedadCargaMasiva_det] AS [vwro_EmpleadoNovedadCargaMasiva_det]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwro_empleados_consulta" EntityType="Self.vwro_empleados_consulta" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [vwro_empleados_consulta].[IdEmpresa] AS [IdEmpresa], 
@@ -4249,6 +4322,10 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_empleado_x_titulos" EntitySet="ro_empleado_x_titulos" />
           </AssociationSet>
+          <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" Association="Self.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_EmpleadoNovedadCargaMasiva_det" EntitySet="ro_EmpleadoNovedadCargaMasiva_det" />
+          </AssociationSet>
           <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" Association="Self.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad">
             <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
             <End Role="ro_EmpleadoNovedadCargaMasiva_det" EntitySet="ro_EmpleadoNovedadCargaMasiva_det" />
@@ -4256,6 +4333,10 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_EmpleadoNovedadCargaMasiva" Association="Self.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_EmpleadoNovedadCargaMasiva">
             <End Role="ro_EmpleadoNovedadCargaMasiva" EntitySet="ro_EmpleadoNovedadCargaMasiva" />
             <End Role="ro_EmpleadoNovedadCargaMasiva_det" EntitySet="ro_EmpleadoNovedadCargaMasiva_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" Association="Self.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui">
+            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_EmpleadoNovedadCargaMasiva" EntitySet="ro_EmpleadoNovedadCargaMasiva" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_Historico_Liquidacion_Vacaciones_Det_ro_Historico_Liquidacion_Vacaciones" Association="Self.FK_ro_Historico_Liquidacion_Vacaciones_Det_ro_Historico_Liquidacion_Vacaciones">
             <End Role="ro_Historico_Liquidacion_Vacaciones" EntitySet="ro_Historico_Liquidacion_Vacaciones" />
@@ -5004,6 +5085,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <NavigationProperty Name="ro_empleado_x_ro_rubro" Relationship="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_empleado_x_ro_rubro" />
           <NavigationProperty Name="ro_empleado_Novedad" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_empleado_Novedad" />
           <NavigationProperty Name="ro_rol" Relationship="Model_rrhh.FK_ro_rol_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_rol" />
+          <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_EmpleadoNovedadCargaMasiva" />
         </EntityType>
         <EntityType Name="ro_nomina_x_horas_extras">
           <Key>
@@ -6861,6 +6943,11 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           </FunctionImport>
           <EntitySet Name="ro_EmpleadoNovedadCargaMasiva" EntityType="Model_rrhh.ro_EmpleadoNovedadCargaMasiva" />
           <EntitySet Name="ro_EmpleadoNovedadCargaMasiva_det" EntityType="Model_rrhh.ro_EmpleadoNovedadCargaMasiva_det" />
+          <EntitySet Name="vwro_EmpleadoNovedadCargaMasiva_det" EntityType="Model_rrhh.vwro_EmpleadoNovedadCargaMasiva_det" />
+          <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_EmpleadoNovedadCargaMasiva_det" EntitySet="ro_EmpleadoNovedadCargaMasiva_det" />
+          </AssociationSet>
           <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad">
             <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
             <End Role="ro_EmpleadoNovedadCargaMasiva_det" EntitySet="ro_EmpleadoNovedadCargaMasiva_det" />
@@ -6868,6 +6955,10 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_EmpleadoNovedadCargaMasiva" Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_EmpleadoNovedadCargaMasiva">
             <End Role="ro_EmpleadoNovedadCargaMasiva" EntitySet="ro_EmpleadoNovedadCargaMasiva" />
             <End Role="ro_EmpleadoNovedadCargaMasiva_det" EntitySet="ro_EmpleadoNovedadCargaMasiva_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui">
+            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_EmpleadoNovedadCargaMasiva" EntitySet="ro_EmpleadoNovedadCargaMasiva" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
@@ -7901,6 +7992,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <NavigationProperty Name="ro_prestamo" Relationship="Model_rrhh.FK_ro_prestamo_ro_empleado" FromRole="ro_empleado" ToRole="ro_prestamo" />
           <NavigationProperty Name="ro_rol_detalle" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_empleado" FromRole="ro_empleado" ToRole="ro_rol_detalle" />
           <NavigationProperty Name="ro_Solicitud_Vacaciones_x_empleado" Relationship="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_Solicitud_Vacaciones_x_empleado" />
+          <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva_det" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_EmpleadoNovedadCargaMasiva_det" />
         </EntityType>
         <Association Name="FK_ro_Acta_Finiquito_ro_empleado">
           <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
@@ -8430,6 +8522,9 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNomina" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
           <Property Name="FechaCarga" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -8440,22 +8535,61 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva_det" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_EmpleadoNovedadCargaMasiva" FromRole="ro_EmpleadoNovedadCargaMasiva" ToRole="ro_EmpleadoNovedadCargaMasiva_det" />
+          <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" FromRole="ro_EmpleadoNovedadCargaMasiva" ToRole="ro_Nomina_Tipoliqui" />
         </EntityType>
         <EntityType Name="ro_EmpleadoNovedadCargaMasiva_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdCarga" />
-            <PropertyRef Name="Secualcial" />
+            <PropertyRef Name="Secuencia" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secualcial" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
           <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
           <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" FromRole="ro_EmpleadoNovedadCargaMasiva_det" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_empleado_Novedad" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" FromRole="ro_EmpleadoNovedadCargaMasiva_det" ToRole="ro_empleado_Novedad" />
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_EmpleadoNovedadCargaMasiva" FromRole="ro_EmpleadoNovedadCargaMasiva_det" ToRole="ro_EmpleadoNovedadCargaMasiva" />
         </EntityType>
+        <EntityType Name="vwro_EmpleadoNovedadCargaMasiva_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCarga" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdEmpresa_nov" />
+            <PropertyRef Name="IdNovedad" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="pe_cedulaRuc" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
+          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado">
+          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_EmpleadoNovedadCargaMasiva_det" Role="ro_EmpleadoNovedadCargaMasiva_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_EmpleadoNovedadCargaMasiva_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad">
           <End Type="Model_rrhh.ro_empleado_Novedad" Role="ro_empleado_Novedad" Multiplicity="1" />
           <End Type="Model_rrhh.ro_EmpleadoNovedadCargaMasiva_det" Role="ro_EmpleadoNovedadCargaMasiva_det" Multiplicity="*" />
@@ -8481,6 +8615,22 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
             <Dependent Role="ro_EmpleadoNovedadCargaMasiva_det">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdCarga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui">
+          <End Type="Model_rrhh.ro_Nomina_Tipoliqui" Role="ro_Nomina_Tipoliqui" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_EmpleadoNovedadCargaMasiva" Role="ro_EmpleadoNovedadCargaMasiva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_Nomina_Tipoliqui">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Principal>
+            <Dependent Role="ro_EmpleadoNovedadCargaMasiva">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina" />
+              <PropertyRef Name="IdNominaTipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10349,6 +10499,9 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
                 <ScalarProperty Name="IdCarga" ColumnName="IdCarga" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
@@ -10357,10 +10510,28 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <EntitySetMapping Name="ro_EmpleadoNovedadCargaMasiva_det">
             <EntityTypeMapping TypeName="Model_rrhh.ro_EmpleadoNovedadCargaMasiva_det">
               <MappingFragment StoreEntitySet="ro_EmpleadoNovedadCargaMasiva_det">
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
                 <ScalarProperty Name="IdEmpresa_nov" ColumnName="IdEmpresa_nov" />
-                <ScalarProperty Name="Secualcial" ColumnName="Secualcial" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdCarga" ColumnName="IdCarga" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_EmpleadoNovedadCargaMasiva_det">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_EmpleadoNovedadCargaMasiva_det">
+              <MappingFragment StoreEntitySet="vwro_EmpleadoNovedadCargaMasiva_det">
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
+                <ScalarProperty Name="IdEmpresa_nov" ColumnName="IdEmpresa_nov" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdCarga" ColumnName="IdCarga" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
