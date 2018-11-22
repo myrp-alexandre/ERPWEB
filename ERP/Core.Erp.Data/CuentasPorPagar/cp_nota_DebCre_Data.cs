@@ -192,6 +192,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         PagoSujetoRetencion = info.PagoSujetoRetencion_bool == true ? "SI" : "NO",
                     };
                     Context.cp_nota_DebCre.Add(Entity);
+                    
+
                     Context.SaveChanges();
                 }
                 return true;
