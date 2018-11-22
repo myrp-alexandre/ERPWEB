@@ -38,7 +38,7 @@ namespace Core.Erp.Bus.Inventario
             }
         }
 
-        public in_Consignacion_Info GetInfo(int IdEmpresa, decimal IdConsignacion, int IdSucursal, int IdBodega)
+        public in_Consignacion_Info get_info(int IdEmpresa, decimal IdConsignacion, int IdSucursal, int IdBodega)
         {
             try
             {

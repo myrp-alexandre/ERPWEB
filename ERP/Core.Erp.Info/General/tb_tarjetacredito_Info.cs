@@ -11,7 +11,7 @@ namespace Core.Erp.Info.General
     {
         [Key]
         public int IdTarjeta { get; set; }
-        [Required(ErrorMessage = "El campo descripción es obligatorio")]
+        [Required(ErrorMessage = "El campo nombre de tarjeta es obligatorio")]
         [StringLength(500, MinimumLength = 1, ErrorMessage = "El campo nombre de tarjeta debe tener mínimo 1 caracter y máximo 500")]
 
         public string NombreTarjeta { get; set; }

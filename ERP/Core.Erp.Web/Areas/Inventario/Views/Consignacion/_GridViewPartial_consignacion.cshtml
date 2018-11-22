@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_Consignacion";
-        settings.CallbackRouteValues = new { Controller = "Consignacion", Action = "GridViewPartial_Consignacion" };
+        settings.CallbackRouteValues = new { Controller = "Consignacion", Action = "GridViewPartial_Consignacion", fecha_ini = ViewBag.fecha_ini, fecha_fin = ViewBag.fecha_fin, IdSucursal = ViewBag.IdSucursal };
         settings.KeyFieldName = "IdConsignacion";
 
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -84,7 +84,7 @@
         });
 
         settings.Columns.Add("IdConsignacion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(5);
-        settings.Columns.Add("NombreProveedor", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(35);
+        settings.Columns.Add("NombreProveedor", "Proveedor").Width = System.Web.UI.WebControls.Unit.Percentage(30);
         settings.Columns.Add("Su_Descripcion", "Sucursal").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
@@ -93,13 +93,13 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
         });
-        settings.Columns.Add("Observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(30);
+        settings.Columns.Add("Observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(25);
 
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
 
