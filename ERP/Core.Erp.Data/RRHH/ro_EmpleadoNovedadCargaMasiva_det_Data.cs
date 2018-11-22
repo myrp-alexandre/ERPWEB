@@ -28,7 +28,11 @@ namespace Core.Erp.Data.RRHH
                                  IdEmpresa_nov = q.IdEmpresa_nov,
                                  Observacion = q.Observacion,
                                  Secuancia = q.Secuencia,
-                                 IdNovedad=q.IdNovedad
+                                 IdNovedad=q.IdNovedad,
+                                 pe_cedulaRuc=q.pe_cedulaRuc,
+                                 pe_apellido=q.pe_apellido,
+                                 pe_nombre=q.pe_nombre,
+                                 em_codigo=q.em_codigo
                                   
                              }).ToList();
 

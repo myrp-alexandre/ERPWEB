@@ -30,6 +30,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_contrato_Bus bus_contrato = new ro_contrato_Bus();
         List<ro_rubro_tipo_Info> lst_rubros = new List<ro_rubro_tipo_Info>();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        ro_empleado_info_list empleado_info_list = new ro_empleado_info_list();
 
         int IdEmpresa = 0;
         #endregion
@@ -73,9 +74,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #region acciones
         public ActionResult Nuevo()
         {
+            empleado_info_list.set_list(bus_empleado.get_list_combo(Convert.ToInt32(SessionFixed.IdEmpresa)));
+
             ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info
             {
-                IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 FechaCarga = DateTime.Now,
             };
             model.detalle = new List<ro_EmpleadoNovedadCargaMasiva_det_Info>();
@@ -197,6 +200,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
             int cont = 0;
+            ro_empleado_info_list empleado_info_list = new ro_empleado_info_list();
+            ro_EmpleadoNovedadCargaMasiva_detLis_Info EmpleadoNovedadCargaMasiva_detLis_Info = new ro_EmpleadoNovedadCargaMasiva_detLis_Info();
+            List<ro_EmpleadoNovedadCargaMasiva_det_Info> lista_novedades = new List<ro_EmpleadoNovedadCargaMasiva_det_Info>();
+
             Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
             if (stream.Length > 0)
             {
@@ -208,16 +215,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     {
                         if (cont != 0)
                         {
+                            string cedua = reader.GetString(0);
+                            var empleado = empleado_info_list.get_list().Where(v => v.pe_cedulaRuc == cedua).FirstOrDefault();
                             ro_EmpleadoNovedadCargaMasiva_det_Info info = new ro_EmpleadoNovedadCargaMasiva_det_Info
                             {
-                                Valor =Convert.ToDouble( reader.GetString(3))
+                                Valor =Convert.ToDouble( reader.GetString(3)),
+                                pe_cedulaRuc=cedua,
+                                pe_apellido=empleado.pe_apellido,
+                                pe_nombre=empleado.pe_nombre,
+                                em_codigo=empleado.em_codigo,
+                                Secuancia=cont
                             };
+                            lista_novedades.Add(info);
                         }
                         cont++;
 
                     }
 
                 }
+                EmpleadoNovedadCargaMasiva_detLis_Info.set_list(lista_novedades);
             }
         }
 
@@ -255,6 +271,28 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             List<ro_EmpleadoNovedadCargaMasiva_det_Info> list = get_list();
             list.Remove(list.Where(m => m.Secuancia == Secuencia).First());
         }
+    }
+
+    public class ro_empleado_info_list
+    {
+        string variable = "ro_empleado_Info";
+        public List<ro_empleado_Info> get_list()
+        {
+            if (HttpContext.Current.Session[variable] == null)
+            {
+                List<ro_empleado_Info> list = new List<ro_empleado_Info>();
+
+                HttpContext.Current.Session[variable] = list;
+            }
+            return (List<ro_empleado_Info>)HttpContext.Current.Session[variable];
+        }
+
+        public void set_list(List<ro_empleado_Info> list)
+        {
+            HttpContext.Current.Session[variable] = list;
+        }
+
+
     }
 
 }
