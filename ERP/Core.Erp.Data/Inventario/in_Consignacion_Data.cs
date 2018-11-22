@@ -37,7 +37,7 @@ namespace Core.Erp.Data.Inventario
                     }
                     else
                     {
-                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.Estado == true && q.Fecha >= fecha_ini && q.Fecha <= fecha_fin).Select(q => new in_Consignacion_Info
+                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.Fecha >= fecha_ini && q.Fecha <= fecha_fin).Select(q => new in_Consignacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdConsignacion = q.IdConsignacion,
@@ -151,7 +151,7 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
-        public in_Ing_Egr_Inven_Info armar_movi_inven(in_Consignacion_Info info, int IdMoviInven_tipo, string nomContacto)
+        public in_Ing_Egr_Inven_Info armar_movi_inven(in_Consignacion_Info info, string nomContacto)
         {
             try
             {
@@ -161,7 +161,7 @@ namespace Core.Erp.Data.Inventario
                     if (motivo == null)
                         return null;
 
-                    var tipo = Context.in_movi_inven_tipo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMovi_inven_tipo == IdMoviInven_tipo).FirstOrDefault();
+                    var tipo = Context.in_movi_inven_tipo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMovi_inven_tipo == info.IdMovi_inven_tipo).FirstOrDefault();
                     if (tipo == null)
                         return null;
 
@@ -171,8 +171,8 @@ namespace Core.Erp.Data.Inventario
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdSucursal = info.IdSucursal,
-                        IdMovi_inven_tipo = IdMoviInven_tipo,
-                        IdNumMovi = 0,
+                        IdMovi_inven_tipo = info.IdMovi_inven_tipo,
+                        IdNumMovi = info.IdNumMovi,
                         IdBodega = info.IdBodega,
                         signo = "+",
                         CodMoviInven = "CONS# " + info.IdConsignacion,
@@ -180,81 +180,37 @@ namespace Core.Erp.Data.Inventario
                         cm_fecha = info.Fecha,
                         IdUsuario = info.IdUsuario,
                         Estado = "A",
-                        
+                        IdMotivo_Inv = motivo.IdMotivo_Inv,
+
                         Fecha_Transac = info.Fecha_Transac,
                         IdUsuarioUltModi = info.IdUsuarioUltMod,
                         Fecha_UltMod = info.Fecha_UltMod,
                         IdusuarioUltAnu = info.IdUsuarioUltAnu,
                         Fecha_UltAnu = info.Fecha_UltAnu,
-                        IdMotivo_Inv = motivo.IdMotivo_Inv,
+
 
                         lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>()
                     };
                     foreach (var item in info.lst_producto_consignacion)
                     {
-                        var lst = Context.in_Producto_Composicion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdProductoPadre == item.IdProducto).ToList();
-                        if (lst.Count == 0)
+                        movimiento.lst_in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det_Info
                         {
-                            var producto = (from p in Context.in_Producto
-                                            join t in Context.in_ProductoTipo
-                                            on new { p.IdEmpresa, p.IdProductoTipo } equals new { t.IdEmpresa, t.IdProductoTipo }
-                                            where p.IdEmpresa == info.IdEmpresa && p.IdProducto == item.IdProducto
-                                            && t.tp_ManejaInven == "S"
-                                            select p).FirstOrDefault();
-
-                            if (producto != null)
-                            {
-                                movimiento.lst_in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det_Info
-                                {
-                                    IdEmpresa = movimiento.IdEmpresa,
-                                    IdSucursal = movimiento.IdSucursal,
-                                    IdBodega = (int)movimiento.IdBodega,
-                                    IdMovi_inven_tipo = movimiento.IdMovi_inven_tipo,
-                                    IdNumMovi = 0,
-                                    Secuencia = secuencia++,
-                                    IdProducto = item.IdProducto,
-                                    dm_cantidad = item.Cantidad * -1,
-                                    dm_cantidad_sinConversion = item.Cantidad * -1,
-                                    mv_costo = 0,
-                                    mv_costo_sinConversion = 0,
-                                    IdUnidadMedida = producto.IdUnidadMedida_Consumo,
-                                    IdUnidadMedida_sinConversion = producto.IdUnidadMedida_Consumo
-                                });
-                            }
-                        }
-                        else
-                        {
-                            foreach (var comp in lst)
-                            {
-                                var producto = (from p in Context.in_Producto
-                                                join t in Context.in_ProductoTipo
-                                                on new { p.IdEmpresa, p.IdProductoTipo } equals new { t.IdEmpresa, t.IdProductoTipo }
-                                                where p.IdEmpresa == info.IdEmpresa && p.IdProducto == item.IdProducto
-                                                && t.tp_ManejaInven == "S"
-                                                select p).FirstOrDefault();
-
-                                if (producto != null)
-                                {
-                                    movimiento.lst_in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det_Info
-                                    {
-                                        IdEmpresa = movimiento.IdEmpresa,
-                                        IdSucursal = movimiento.IdSucursal,
-                                        IdBodega = (int)movimiento.IdBodega,
-                                        IdMovi_inven_tipo = movimiento.IdMovi_inven_tipo,
-                                        IdNumMovi = 0,
-                                        Secuencia = secuencia++,
-                                        IdProducto = comp.IdProductoHijo,
-                                        dm_cantidad = item.Cantidad * -1,
-                                        dm_cantidad_sinConversion = item.Cantidad * -1,
-                                        mv_costo = 0,
-                                        mv_costo_sinConversion = 0,
-                                        IdUnidadMedida = producto.IdUnidadMedida_Consumo,
-                                        IdUnidadMedida_sinConversion = producto.IdUnidadMedida_Consumo
-                                    });
-                                }
-                            }
-                        }
+                            IdEmpresa = movimiento.IdEmpresa,
+                            IdSucursal = movimiento.IdSucursal,
+                            IdBodega = (int)movimiento.IdBodega,
+                            IdMovi_inven_tipo = movimiento.IdMovi_inven_tipo,
+                            IdNumMovi = 0,
+                            Secuencia = secuencia++,
+                            IdProducto = item.IdProducto,
+                            dm_cantidad = item.Cantidad,
+                            dm_cantidad_sinConversion = item.Cantidad,
+                            mv_costo = 0,
+                            mv_costo_sinConversion = 0,
+                            IdUnidadMedida = item.IdUnidadMedida,
+                            IdUnidadMedida_sinConversion = item.IdUnidadMedida
+                        });
                     }
+
                     if (movimiento.lst_in_Ing_Egr_Inven_det.Count == 0)
                         return null;
                     return movimiento;
@@ -276,24 +232,21 @@ namespace Core.Erp.Data.Inventario
                 using (Entities_inventario db = new Entities_inventario())
                 {
                     #region Ingreso egreso inventario
-                    //var parametro = db.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                    //if (parametro.IdMovi_inven_tipo_Consignacion != null)
-                    //{
-                    //    var nomContacto = "";
-                    //    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Consignacion), nomContacto);
-                    //    if (data_inv.guardarDB(movimiento, "-"))
-                    //    {
-                    //        db.in_Ing_Egr_Inven.Add(new in_Ing_Egr_Inven
-                    //        {
-                    //            IdEmpresa = info.IdEmpresa,
-                    //            IdSucursal = info.IdSucursal,
-                    //            IdBodega = info.IdBodega,
+                    var parametro = db.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    var nomContacto = ""; //nombre de proveedor
+                    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Consignacion), nomContacto);
+                    if (data_inv.guardarDB(movimiento, "-"))
+                    {
+                        db.in_Ing_Egr_Inven.Add(new in_Ing_Egr_Inven
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdBodega = info.IdBodega,
 
-                    //            IdMovi_inven_tipo = movimiento.IdMovi_inven_tipo,
-                    //            IdNumMovi = movimiento.IdNumMovi,
-                    //        });
-                    //    }
-                    //}
+                            IdMovi_inven_tipo = movimiento.IdMovi_inven_tipo,
+                            IdNumMovi = movimiento.IdNumMovi,
+                        });         
+                    }
                     #endregion
 
                     #region Consignacion
