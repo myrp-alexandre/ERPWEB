@@ -19,7 +19,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         // GET: Inventario/Consignacion
         #region Variables
         in_Consignacion_Bus bus_in_Consignacion = new in_Consignacion_Bus();
-        in_Consignacion_det_List in_Consignacion_det_List = new in_Consignacion_det_List();
+        in_ConsignacionDet_List in_ConsignacionDet_List = new in_ConsignacionDet_List();
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         string mensaje = string.Empty;
         in_Producto_Bus bus_producto = new in_Producto_Bus();
@@ -131,7 +131,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
             List<in_Consignacion_Info> model = bus_in_Consignacion.GetList(IdEmpresa, IdSucursal, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
-            return PartialView("_GridViewPartial_consignacion", model);
+            return PartialView("_GridViewPartial_Consignacion", model);
         }
 
         #region Acciones
@@ -170,15 +170,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #endregion
 
         #region Funciones del detalle
-        public ActionResult GridViewPartial_consignacion_det()
+        public ActionResult GridViewPartial_ConsignacionDet()
         {
             //siempre copiar
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             
-            var model = in_Consignacion_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = in_ConsignacionDet_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
 
-            return PartialView("_GridViewPartial_consignacion_det", model);
+            return PartialView("_GridViewPartial_ConsignacionDet", model);
         }
 
         private void cargar_combos_detalle()
@@ -191,6 +191,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_ConsignacionDet_Info info_det)
         {
+            if (!ModelState.IsValid)
+            {
+                var valid = in_ConsignacionDet_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                cargar_combos_detalle();
+                return PartialView("_GridViewPartial_ConsignacionDet", valid);                 
+            }
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (info_det != null)
                 if (info_det.IdProducto != 0)
@@ -199,14 +205,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     if (info_producto != null)
                     {
                         info_det.pr_descripcion = info_producto.pr_descripcion_combo;
-                        info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
                     }
                 }
             if (info_det.Cantidad > 0)
-                in_Consignacion_det_List.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = in_Consignacion_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                in_ConsignacionDet_List.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = in_ConsignacionDet_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_consignacion_det", model);
+            return PartialView("_GridViewPartial_ConsignacionDet", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -220,31 +225,30 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     if (info_producto != null)
                     {
                         info_det.pr_descripcion = info_producto.pr_descripcion_combo;
-                        info_det.IdUnidadMedida = info_producto.IdUnidadMedida;
                     }
                 }
 
-            var model = in_Consignacion_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_consignacion_det", model);
+                in_ConsignacionDet_List.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                var model = in_ConsignacionDet_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                cargar_combos_detalle();
+                return PartialView("_GridViewPartial_ConsignacionDet", model);
         }
 
-        //public ActionResult EditingDelete(int Secuencia)
-        //{
-        //    in_Consignacion_det_List.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-        //    in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info();
-        //    model.lst_in_Ing_Egr_Inven_det = in_Consignacion_det_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-        //    cargar_combos_detalle();
-        //    return PartialView("_GridViewPartial_consignacion_det", model.lst_in_Ing_Egr_Inven_det);
-        //}
+        public ActionResult EditingDelete(int Secuencia)
+        {
+            in_ConsignacionDet_List.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = in_ConsignacionDet_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_ConsignacionDet", model);
+        }
 
         #endregion
     }
 
     //siempre incluir clase para detalle
-    public class in_Consignacion_det_List
+    public class in_ConsignacionDet_List
     {
-        string Variable = "in_Consignacion_det_Info";
+        string Variable = "in_ConsignacionDet_Info";
         public List<in_ConsignacionDet_Info> get_list(decimal IdTransaccionSession)
         {
 
