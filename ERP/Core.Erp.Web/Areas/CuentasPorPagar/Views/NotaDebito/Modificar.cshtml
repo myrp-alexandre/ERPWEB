@@ -42,14 +42,22 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="IdOrden_giro_Tipo">Tipo nota*</label>
                 @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "Key", "Value"), new { @class = "form-control", @id = "IdTipoNota" })
                 @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-6">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="IdBanco_acreditacion">Tipo flujo</label>
+                @Html.Partial("_CmbFlujo_ND", Model.IdTipoFlujo)
+                @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="cn_fecha">Fecha documentos*</label>
                 <div class="input-group date">

@@ -7,6 +7,7 @@ using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Areas.Contabilidad.Controllers;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,22 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ct_cbtecble_det_List List_ct = new ct_cbtecble_det_List();
         ct_cbtecble_det_Bus bus_det_ct = new ct_cbtecble_det_Bus();
         string mensaje = string.Empty;
+        #endregion
+        #region Metodos ComboBox bajo demanda flujo
+        ba_TipoFlujo_Bus bus_tipo = new ba_TipoFlujo_Bus();
+        public ActionResult CmbFlujo_ND_C()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbFlujo_ND_C", model);
+        }
+        public List<ba_TipoFlujo_Info> get_list_bajo_demandaFlujo(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_tipo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoIngEgr.ING.ToString());
+        }
+        public ba_TipoFlujo_Info get_info_bajo_demandaFlujo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_tipo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #region Index
