@@ -45,7 +45,7 @@
           <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="SecuenciaFact" Type="int" Nullable="false" />
           <Property Name="IdProductoFact" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdProductoCambio" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdProductoCambio" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Costo" Type="float" Nullable="false" />
           <Property Name="CantidadFact" Type="float" Nullable="false" />
           <Property Name="CantidadCambio" Type="float" Nullable="false" />
@@ -3705,15 +3705,15 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwfa_notaCreDeb_x_fa_factura_N
             <End Role="fa_guia_remision" EntitySet="fa_guia_remision" />
             <End Role="fa_guia_remision_det" EntitySet="fa_guia_remision_det" />
           </AssociationSet>
-          <EntitySet Name="fa_CambioProductoDet" EntityType="Model_facturacion.fa_CambioProductoDet" />
-          <AssociationSet Name="FK_fa_CambioProductoDet_fa_factura_det" Association="Model_facturacion.FK_fa_CambioProductoDet_fa_factura_det">
-            <End Role="fa_factura_det" EntitySet="fa_factura_det" />
-            <End Role="fa_CambioProductoDet" EntitySet="fa_CambioProductoDet" />
-          </AssociationSet>
           <EntitySet Name="fa_CambioProducto" EntityType="Model_facturacion.fa_CambioProducto" />
           <EntitySet Name="vwfa_CambioProducto" EntityType="Model_facturacion.vwfa_CambioProducto" />
+          <EntitySet Name="fa_CambioProductoDet" EntityType="Model_facturacion.fa_CambioProductoDet" />
           <AssociationSet Name="FK_fa_CambioProductoDet_fa_CambioProducto" Association="Model_facturacion.FK_fa_CambioProductoDet_fa_CambioProducto">
             <End Role="fa_CambioProducto" EntitySet="fa_CambioProducto" />
+            <End Role="fa_CambioProductoDet" EntitySet="fa_CambioProductoDet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_CambioProductoDet_fa_factura_det" Association="Model_facturacion.FK_fa_CambioProductoDet_fa_factura_det">
+            <End Role="fa_factura_det" EntitySet="fa_factura_det" />
             <End Role="fa_CambioProductoDet" EntitySet="fa_CambioProductoDet" />
           </AssociationSet>
           </EntityContainer>
@@ -4524,50 +4524,6 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwfa_notaCreDeb_x_fa_factura_N
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="fa_CambioProductoDet">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdCambio" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdCambio" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="SecuenciaFact" Type="Int32" Nullable="false" />
-          <Property Name="IdProductoFact" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdProductoCambio" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Costo" Type="Double" Nullable="false" />
-          <Property Name="CantidadFact" Type="Double" Nullable="false" />
-          <Property Name="CantidadCambio" Type="Double" Nullable="false" />
-          <Property Name="IdDevolucion" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="fa_factura_det" Relationship="Model_facturacion.FK_fa_CambioProductoDet_fa_factura_det" FromRole="fa_CambioProductoDet" ToRole="fa_factura_det" />
-          <NavigationProperty Name="fa_CambioProducto" Relationship="Model_facturacion.FK_fa_CambioProductoDet_fa_CambioProducto" FromRole="fa_CambioProductoDet" ToRole="fa_CambioProducto" />
-        </EntityType>
-        <Association Name="FK_fa_CambioProductoDet_fa_factura_det">
-          <End Type="Model_facturacion.fa_factura_det" Role="fa_factura_det" Multiplicity="1" />
-          <End Type="Model_facturacion.fa_CambioProductoDet" Role="fa_CambioProductoDet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="fa_factura_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSucursal" />
-              <PropertyRef Name="IdBodega" />
-              <PropertyRef Name="IdCbteVta" />
-              <PropertyRef Name="Secuencia" />
-            </Principal>
-            <Dependent Role="fa_CambioProductoDet">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSucursal" />
-              <PropertyRef Name="IdBodega" />
-              <PropertyRef Name="IdCbteVta" />
-              <PropertyRef Name="SecuenciaFact" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="fa_CambioProducto">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -4614,6 +4570,30 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwfa_notaCreDeb_x_fa_factura_N
           <Property Name="Su_Descripcion" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
           <Property Name="bo_Descripcion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
+        <EntityType Name="fa_CambioProductoDet">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCambio" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCambio" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SecuenciaFact" Type="Int32" Nullable="false" />
+          <Property Name="IdProductoFact" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdProductoCambio" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="CantidadFact" Type="Double" Nullable="false" />
+          <Property Name="CantidadCambio" Type="Double" Nullable="false" />
+          <Property Name="IdDevolucion" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="fa_CambioProducto" Relationship="Model_facturacion.FK_fa_CambioProductoDet_fa_CambioProducto" FromRole="fa_CambioProductoDet" ToRole="fa_CambioProducto" />
+          <NavigationProperty Name="fa_factura_det" Relationship="Model_facturacion.FK_fa_CambioProductoDet_fa_factura_det" FromRole="fa_CambioProductoDet" ToRole="fa_factura_det" />
+        </EntityType>
         <Association Name="FK_fa_CambioProductoDet_fa_CambioProducto">
           <End Type="Model_facturacion.fa_CambioProducto" Role="fa_CambioProducto" Multiplicity="1" />
           <End Type="Model_facturacion.fa_CambioProductoDet" Role="fa_CambioProductoDet" Multiplicity="*" />
@@ -4629,6 +4609,26 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwfa_notaCreDeb_x_fa_factura_N
               <PropertyRef Name="IdSucursal" />
               <PropertyRef Name="IdBodega" />
               <PropertyRef Name="IdCambio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_CambioProductoDet_fa_factura_det">
+          <End Type="Model_facturacion.fa_factura_det" Role="fa_factura_det" Multiplicity="1" />
+          <End Type="Model_facturacion.fa_CambioProductoDet" Role="fa_CambioProductoDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_factura_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdCbteVta" />
+              <PropertyRef Name="Secuencia" />
+            </Principal>
+            <Dependent Role="fa_CambioProductoDet">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdCbteVta" />
+              <PropertyRef Name="SecuenciaFact" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5607,25 +5607,6 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwfa_notaCreDeb_x_fa_factura_N
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="fa_CambioProductoDet">
-            <EntityTypeMapping TypeName="Model_facturacion.fa_CambioProductoDet">
-              <MappingFragment StoreEntitySet="fa_CambioProductoDet">
-                <ScalarProperty Name="IdDevolucion" ColumnName="IdDevolucion" />
-                <ScalarProperty Name="CantidadCambio" ColumnName="CantidadCambio" />
-                <ScalarProperty Name="CantidadFact" ColumnName="CantidadFact" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="IdProductoCambio" ColumnName="IdProductoCambio" />
-                <ScalarProperty Name="IdProductoFact" ColumnName="IdProductoFact" />
-                <ScalarProperty Name="SecuenciaFact" ColumnName="SecuenciaFact" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdCambio" ColumnName="IdCambio" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="fa_CambioProducto">
             <EntityTypeMapping TypeName="Model_facturacion.fa_CambioProducto">
               <MappingFragment StoreEntitySet="fa_CambioProducto">
@@ -5658,6 +5639,25 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwfa_notaCreDeb_x_fa_factura_N
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdCambio" ColumnName="IdCambio" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_CambioProductoDet">
+            <EntityTypeMapping TypeName="Model_facturacion.fa_CambioProductoDet">
+              <MappingFragment StoreEntitySet="fa_CambioProductoDet">
+                <ScalarProperty Name="IdDevolucion" ColumnName="IdDevolucion" />
+                <ScalarProperty Name="CantidadCambio" ColumnName="CantidadCambio" />
+                <ScalarProperty Name="CantidadFact" ColumnName="CantidadFact" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="IdProductoCambio" ColumnName="IdProductoCambio" />
+                <ScalarProperty Name="IdProductoFact" ColumnName="IdProductoFact" />
+                <ScalarProperty Name="SecuenciaFact" ColumnName="SecuenciaFact" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdCambio" ColumnName="IdCambio" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
