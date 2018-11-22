@@ -26,22 +26,82 @@
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
     @Html.HiddenFor(q => q.co_fechaOg)
 
+
+
     <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
                     @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdBodega">Bodega</label>
                     @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdTipoServicio">Tipo de servicio</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoServicio, setting =>
+               {
+                   setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   setting.Properties.Items.Add("BIENES", "BIEN");
+                   setting.Properties.Items.Add("SERVICIOS","SERVI");
+                   setting.Properties.Items.Add("MIXTO","AMBAS");
+               }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoServicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="co_FechaFactura">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.co_FechaFactura, settings =>
+                       {
+                           settings.Name = "co_FechaFactura";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           settings.Properties.ClientSideEvents.DateChanged = "function(s,e){co_FechaContabilizacion.SetValue(s.GetValue());}";
+                       }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.co_FechaFactura, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="co_FechaContabilizacion">Fecha contabilización*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.co_FechaContabilizacion, settings =>
+                       {
+                           settings.Name = "co_FechaContabilizacion";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.co_FechaContabilizacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <div class="col-md-11">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor*</label>
@@ -56,113 +116,49 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="IdTipoServicio">Tipo de servicio</label>
-                @Html.DevExpress().ComboBoxFor(q => q.IdTipoServicio, setting =>
-           {
-               setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-               setting.Properties.Items.Add("BIENES", "BIEN");
-               setting.Properties.Items.Add("SERVICIOS","SERVI");
-               setting.Properties.Items.Add("MIXTO","AMBAS");
-           }).GetHtml()
-                @Html.ValidationMessageFor(q => q.IdTipoServicio, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="co_FechaFactura">Fecha*</label>
-                <div class="input-group date">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    @Html.DevExpress().DateEditFor(q => q.co_FechaFactura, settings =>
-                   {
-                       settings.Name = "co_FechaFactura";
-                       settings.Properties.UseMaskBehavior = true;
-                       settings.Properties.EditFormat = EditFormat.Date;
-                       settings.Properties.EditFormatString = "dd/MM/yyyy";
-                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){co_FechaContabilizacion.SetValue(s.GetValue());}";
-                   }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.co_FechaFactura, "", new { @class = "text-danger" })
+        <div class="col-md-6">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="co_plazo">Plazo*</label>
+                    @Html.TextBoxFor(q => q.co_plazo, new { @class = "form-control", @id = "co_plazo" })
+                    @Html.ValidationMessageFor(q => q.co_plazo, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="co_FechaContabilizacion">Fecha contabilización*</label>
-                <div class="input-group date">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="co_FechaFactura_vct">Fecha vencimiento*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.co_FechaFactura_vct, settings =>
+                       {
+                           settings.Name = "co_FechaFactura_vct";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.co_FechaFactura_vct, "", new { @class = "text-danger" })
                     </div>
-                    @Html.DevExpress().DateEditFor(q => q.co_FechaContabilizacion, settings =>
-                   {
-                       settings.Name = "co_FechaContabilizacion";
-                       settings.Properties.UseMaskBehavior = true;
-                       settings.Properties.EditFormat = EditFormat.Date;
-                       settings.Properties.EditFormatString = "dd/MM/yyyy";
-                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.co_FechaContabilizacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="co_plazo">Plazo*</label>
-                @Html.TextBoxFor(q => q.co_plazo, new { @class = "form-control", @id = "co_plazo" })
-                @Html.ValidationMessageFor(q => q.co_plazo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="co_FechaFactura_vct">Fecha vencimiento*</label>
-                <div class="input-group date">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    @Html.DevExpress().DateEditFor(q => q.co_FechaFactura_vct, settings =>
-                   {
-                       settings.Name = "co_FechaFactura_vct";
-                       settings.Properties.UseMaskBehavior = true;
-                       settings.Properties.EditFormat = EditFormat.Date;
-                       settings.Properties.EditFormatString = "dd/MM/yyyy";
-                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.co_FechaFactura_vct, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
+        <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdOrden_giro_Tipo">Sustento tributario*</label>
                     @Html.DropDownListFor(q => q.IdIden_credito, new SelectList(ViewBag.lst_codigos_sri, "IdCodigo_SRI", "co_descripcion"), new { @class = "form-control", @id = "IdIden_credito" })
                     @Html.ValidationMessageFor(q => q.IdIden_credito, "", new { @class = "text-danger" })
-
-
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdOrden_giro_Tipo">Tipo documento*</label>
-                    @Html.DropDownListFor(q => q.IdOrden_giro_Tipo, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "IdOrden_giro_Tipo" })
-                    @Html.ValidationMessageFor(q => q.IdOrden_giro_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-3">
+        <div class="col-md-6">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="co_serie">Serie*</label>
                     @Html.TextBoxFor(q => q.co_serie, new { @class = "form-control" })
@@ -176,22 +172,16 @@
                     @Html.ValidationMessageFor(q => q.co_factura, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-7">
                 <div class="form-group">
                     <label for="co_factura">Número autorización*</label>
                     @Html.TextBoxFor(q => q.Num_Autorizacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Num_Autorizacion, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdBanco_acreditacion">Tipo flujo</label>
-                    @Html.Partial("_CmbFlujo_Deudas", Model.IdTipoFlujo)
-                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
-                </div>
-            </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

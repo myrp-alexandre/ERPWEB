@@ -27,7 +27,7 @@ namespace Core.Erp.Data.Inventario
                         P_Al_Conta_CtaCosto_Buscar_en = Entity.P_Al_Conta_CtaCosto_Buscar_en,
                         P_IdCtaCble_transitoria_transf_inven = Entity.P_IdCtaCble_transitoria_transf_inven,
                         P_IdProductoTipo_para_lote_0 = Entity.P_IdProductoTipo_para_lote_0,
-                        P_se_crea_lote_0_al_crear_producto_matriz = Entity.P_se_crea_lote_0_al_crear_producto_matriz == null ? false : Convert.ToBoolean(Entity.P_se_crea_lote_0_al_crear_producto_matriz),
+                        P_se_crea_lote_0_al_crear_producto_matriz = Entity.P_se_crea_lote_0_al_crear_producto_matriz,
                         IdMovi_inven_tipo_x_distribucion_ing = Entity.IdMovi_inven_tipo_x_distribucion_ing,
                         IdMovi_inven_tipo_x_distribucion_egr = Entity.IdMovi_inven_tipo_x_distribucion_egr,
                         P_IdMovi_inven_tipo_default_ing = Entity.P_IdMovi_inven_tipo_default_ing,
