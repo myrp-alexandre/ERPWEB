@@ -8,10 +8,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Nuevo", "Consignacion", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Modificar", "Consignacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdConsignacion)
+    @Html.HiddenFor(q => q.IdSucursal)
+    @Html.HiddenFor(q => q.IdBodega)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     if (ViewBag.mensaje != null)

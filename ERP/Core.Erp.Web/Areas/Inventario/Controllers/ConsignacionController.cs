@@ -124,13 +124,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
-        public ActionResult GridViewPartial_Consignacion(DateTime fecha_ini, DateTime fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_Consignacion(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            List<in_Consignacion_Info> model = bus_in_Consignacion.GetList(IdEmpresa, IdSucursal, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            List<in_Consignacion_Info> model = bus_in_Consignacion.GetList(IdEmpresa, IdSucursal, false, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_Consignacion", model);
         }
 
@@ -172,7 +172,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0, int IdConsignacion=0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdConsignacion=0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -182,11 +182,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             #endregion
 
             in_Consignacion_Info model = bus_in_Consignacion.GetInfo(IdEmpresa, IdConsignacion);
+
             if (model == null)
                 return RedirectToAction("Index");
     
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-            model.lst_producto_consignacion = in_ConsignacionDet_List.get_list(model.IdTransaccionSession);
+            model.lst_producto_consignacion = bus_consignacion_det.GetList(model.IdEmpresa, Convert.ToInt32(model.IdConsignacion));
+            in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
+
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -206,6 +209,39 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Anular(int IdEmpresa = 0, decimal IdConsignacion = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            in_Consignacion_Info model = bus_in_Consignacion.GetInfo(IdEmpresa, Convert.ToInt32(IdConsignacion));
+            if (model == null)
+                return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.lst_producto_consignacion = bus_consignacion_det.GetList(model.IdEmpresa, Convert.ToInt32(model.IdConsignacion));
+            in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
+
+            cargar_combos(model.IdEmpresa);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Anular(in_Consignacion_Info model)
+        {
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
+            if (!bus_in_Consignacion.AnularBD(model))
+            {
+                in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
+                ViewBag.mensaje = "No se ha podido anular el registro";
+                cargar_combos(model.IdEmpresa);
+                return View(model);
+            };
             return RedirectToAction("Index");
         }
         #endregion

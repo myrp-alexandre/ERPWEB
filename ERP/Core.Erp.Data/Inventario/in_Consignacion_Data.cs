@@ -19,7 +19,7 @@ namespace Core.Erp.Data.Inventario
                 {
                     if (mostrar_anulados == false)
                     {
-                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Select(q => new in_Consignacion_Info
+                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.Estado == true && q.Fecha >= fecha_ini && q.Fecha <= fecha_fin).Select(q => new in_Consignacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdConsignacion = q.IdConsignacion,
@@ -37,7 +37,7 @@ namespace Core.Erp.Data.Inventario
                     }
                     else
                     {
-                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new in_Consignacion_Info
+                        Lista = db.vwin_Consignacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.Estado == true && q.Fecha >= fecha_ini && q.Fecha <= fecha_fin).Select(q => new in_Consignacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdConsignacion = q.IdConsignacion,
@@ -82,6 +82,7 @@ namespace Core.Erp.Data.Inventario
                         IdEmpresa = Entity.IdEmpresa,
                         IdConsignacion = Entity.IdConsignacion,
                         IdSucursal = Entity.IdSucursal,
+                        IdBodega = Entity.IdBodega,
                         Fecha = Entity.Fecha,
                         IdProveedor = Entity.IdProveedor,
                         Observacion = Entity.Observacion,
@@ -89,6 +90,36 @@ namespace Core.Erp.Data.Inventario
                     };
                 }
 
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public in_Consignacion_Info GetInfo(int IdEmpresa, decimal IdConsignacion, int IdSucursal, int IdBodega)
+        {
+            try
+            {
+                in_Consignacion_Info info = new in_Consignacion_Info();
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    in_Consignacion Entity = Context.in_Consignacion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega);
+                    if (Entity == null) return null;
+                    info = new in_Consignacion_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdConsignacion = Entity.IdConsignacion,
+                        IdSucursal = Entity.IdSucursal,
+                        IdBodega = Entity.IdBodega,
+                        Fecha = Entity.Fecha,
+                        IdProveedor = Entity.IdProveedor,
+                        Observacion = Entity.Observacion,
+                        Estado = Entity.Estado
+                    };                    
+                }
                 return info;
             }
             catch (Exception)
@@ -278,14 +309,14 @@ namespace Core.Erp.Data.Inventario
                         Estado = true,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now,
-                        IdMovi_inven_tipo = 10,
-                        IdNumMovi = 2
+                        IdMovi_inven_tipo = 2,
+                        IdNumMovi = 10
                         //IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_Consignacion,
                         //IdNumMovi = parametro.IdMovi_inven_tipo_Consignacion,
                     });
                     #endregion
 
-                    #region Consignacion
+                    #region Consignacion detalle
                     if (info.lst_producto_consignacion != null)
                     {
                         int Secuencia = 1;
@@ -338,6 +369,28 @@ namespace Core.Erp.Data.Inventario
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
 
+                    var lst_det_consignacion = db.in_ConsignacionDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).ToList();
+                    db.in_ConsignacionDet.RemoveRange(lst_det_consignacion);
+
+                    if (info.lst_producto_consignacion != null)
+                    {
+                        int Secuencia = 1;
+
+                        foreach (var item in info.lst_producto_consignacion)
+                        {
+                            db.in_ConsignacionDet.Add(new in_ConsignacionDet
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdConsignacion = info.IdConsignacion,
+                                Secuencia = Secuencia++,
+                                IdProducto = item.IdProducto,
+                                IdUnidadMedida = item.IdUnidadMedida,
+                                Cantidad = item.Cantidad,
+                                Costo = item.Costo,
+                                Observacion = item.Observacion
+                            });
+                        }
+                    }
                     db.SaveChanges();
                 }
 
@@ -355,14 +408,15 @@ namespace Core.Erp.Data.Inventario
             {
                 using (Entities_inventario db = new Entities_inventario())
                 {
-                    in_Consignacion Entity = db.in_Consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).FirstOrDefault();
+                    in_Consignacion Entity = db.in_Consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion &&q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega).FirstOrDefault();
 
                     if (Entity == null)
                     {
                         return false;
                     }
 
-                    Entity.Estado = info.Estado;
+                    Entity.MotivoAnulacion = info.MotivoAnulacion;
+                    Entity.Estado = false;
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
 

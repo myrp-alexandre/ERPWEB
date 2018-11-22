@@ -1,6 +1,6 @@
-﻿@model Core.Erp.Info.General.tb_TarjetaCredito_x_cp_proveedor_Info
+﻿@model Core.Erp.Info.Inventario.in_Consignacion_Info
 @{
-    ViewBag.Title = "Anular tarjeta de crédito por proveedor";
+    ViewBag.Title = "Anular consignación por proveedor";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -8,58 +8,109 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-
-@using (Html.BeginForm("Anular", "TarjetaCreditoPorProveedor", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "Consignacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdTransaccion)
+    @Html.HiddenFor(q => q.IdConsignacion)
+    @Html.HiddenFor(q => q.IdSucursal)
+    @Html.HiddenFor(q => q.IdBodega)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-10">
                 <div class="form-group">
                     <label for="Codigo">Proveedor*</label>
-                    @Html.Partial("_CmbProveedor_TarjetaCredito", Model.IdProveedor)
-                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })                    
+                    @Html.Partial("_CmbProveedor_Consignacion", Model.IdProveedor)
+                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Fecha">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
+                   {
+                       settings.Name = "Fecha";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="GetHtml">Tarjeta de crédito</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdTarjeta, settings =>
-                       {
-                           settings.Name = "IdTarjeta";
-                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                           settings.Properties.Columns.Add("IdTarjeta", "IdTarjeta").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                           settings.Properties.Columns.Add("NombreTarjeta", "Nombre Tarjeta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                           //Campo ID
-                           settings.Properties.ValueField = "IdTarjeta";
-                           settings.Properties.ValueType = typeof(int);
-                           settings.Properties.TextField = "NombreTarjeta";
-                           //Boton para seleccionar ningun registro
-                           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                           settings.Properties.NullText = "== Seleccione ==";
-                           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                           //settings.ReadOnly = true;
-                       }).BindList(ViewBag.lst_tarjeta_credito).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdTarjeta, "", new { @class = "text-danger" })
+                    <label for="GetHtml">Sucursal*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="GetHtml">Bodega*</label>
+                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "Idbodega" })
+                    @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="GetHtml">Observación*</label>
+                    @Html.TextAreaFor(q => q.Observacion, new { @class = "form-control", @rows = 3 })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="MotiAnula">Motivo anulación*</label>
+                    @Html.TextAreaFor(q => q.MotivoAnulacion, new { @class = "form-control", @rows = 3 })
+                    @Html.ValidationMessageFor(q => q.MotivoAnulacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_ConsignacionDet")
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index","TarjetaCreditoPorProveedor", new { Area ="General"}, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Consignacion",new { Area = "Inventario" },null)">Cancelar</a>
     </div>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-

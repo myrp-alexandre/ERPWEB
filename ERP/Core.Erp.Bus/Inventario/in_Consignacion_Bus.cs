@@ -38,6 +38,18 @@ namespace Core.Erp.Bus.Inventario
             }
         }
 
+        public in_Consignacion_Info GetInfo(int IdEmpresa, decimal IdConsignacion, int IdSucursal, int IdBodega)
+        {
+            try
+            {
+                return odata.GetInfo(IdEmpresa, IdConsignacion, IdSucursal, IdBodega);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool GuardarBD(in_Consignacion_Info info)
         {
             try
