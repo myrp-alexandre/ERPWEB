@@ -19,6 +19,7 @@ namespace Core.Erp.Info.RRHH
         public int IdSucursal { get; set; }
         public System.DateTime FechaCarga { get; set; }
         public string Observacion { get; set; }
+        [Required(ErrorMessage = "El campo rubro es obligatorio")]
         public string IdRubro { get; set; }
         public string IdUsuario { get; set; }
         public bool Estado { get; set; }
@@ -26,6 +27,11 @@ namespace Core.Erp.Info.RRHH
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
+
+        public string Descripcion { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
+        public string ru_descripcion { get; set; }
+
 
         public List<ro_EmpleadoNovedadCargaMasiva_det_Info> detalle { get; set; }
     }
