@@ -11,14 +11,15 @@ namespace Core.Erp.Data.RRHH
     {
 
         ro_empleado_novedad_Data odata_novedad = new ro_empleado_novedad_Data();
-        public List<ro_EmpleadoNovedadCargaMasiva_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin, bool mostrar_anulados)
+        public List<ro_EmpleadoNovedadCargaMasiva_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
+                FechaFin = Convert.ToDateTime(FechaFin.Date.ToShortDateString());
+                FechaInicio = Convert.ToDateTime(FechaInicio.Date.ToShortDateString());
                 List<ro_EmpleadoNovedadCargaMasiva_Info> lista;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    if (mostrar_anulados)
                         lista = (from q in Context.ro_EmpleadoNovedadCargaMasiva
                                  where q.IdEmpresa == IdEmpresa
                                  && q.FechaCarga >= FechaInicio
@@ -33,24 +34,7 @@ namespace Core.Erp.Data.RRHH
                                      Estado = q.Estado
                                  }
                                ).ToList();
-                    else
-                    {
-                        lista = (from q in Context.ro_EmpleadoNovedadCargaMasiva
-                                 where q.IdEmpresa == IdEmpresa
-                                 && q.FechaCarga >= FechaInicio
-                                 && q.FechaCarga <= FechaFin
-                                 && q.Estado==true
-                                 select new ro_EmpleadoNovedadCargaMasiva_Info
-                                 {
-                                     IdEmpresa = q.IdEmpresa,
-                                     IdCarga = q.IdCarga,
-                                     FechaCarga = q.FechaCarga,
-                                     Observacion = q.Observacion,
-                                     IdRubro = q.IdRubro,
-                                     Estado = q.Estado
-                                 }
-                              ).ToList();
-                    }
+                   
 
                 }
 
@@ -63,12 +47,13 @@ namespace Core.Erp.Data.RRHH
             }
 
         }
-
         public bool GuardarDB(ro_EmpleadoNovedadCargaMasiva_Info info)
         {
             try
             {
-                
+                decimal IdNovedad = odata_novedad.get_id(info.IdEmpresa);
+
+
                 using (Entities_rrhh Contex=new Entities_rrhh())
                 {
 
@@ -76,7 +61,7 @@ namespace Core.Erp.Data.RRHH
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdCarga = info.IdCarga = Get_id(info.IdEmpresa),
-                        FechaCarga = info.FechaCarga,
+                        FechaCarga = info.FechaCarga.Date,
                         Observacion = info.Observacion,
                         IdNomina = info.IdNomina,
                         IdNominaTipo = info.IdNominaTipo,
@@ -89,19 +74,12 @@ namespace Core.Erp.Data.RRHH
 
                     foreach (var item in info.detalle)
                     {
-                        ro_EmpleadoNovedadCargaMasiva_det Entity_det_ = new ro_EmpleadoNovedadCargaMasiva_det
-                        {
-                            IdEmpresa = info.IdEmpresa,
-                            IdCarga = info.IdCarga,
-                            IdNovedad = item.IdNovedad,
-                            IdEmpleado = item.IdEmpleado,
-                            Observacion = item.Observacion,
-                            Secuencia = item.Secuancia
-                        };
+                        
+
                         ro_empleado_Novedad Entity = new ro_empleado_Novedad
                         {
                             IdEmpresa = info.IdEmpresa,
-                            IdNovedad = item.IdNovedad = odata_novedad. get_id(item.IdEmpresa),
+                            IdNovedad = item.IdNovedad = IdNovedad,
                             IdNomina_Tipo = info.IdNomina,
                             IdNomina_TipoLiqui = info.IdNominaTipo,
                             IdEmpleado = item.IdEmpleado,
@@ -116,7 +94,7 @@ namespace Core.Erp.Data.RRHH
 
                         ro_empleado_novedad_det Entity_det = new ro_empleado_novedad_det
                         {
-                            IdEmpresa = item.IdEmpresa,
+                            IdEmpresa = info.IdEmpresa,
                             IdNovedad = item.IdNovedad,
                             FechaPago = info.FechaCarga,
                             IdRubro = info.IdRubro,
@@ -127,6 +105,18 @@ namespace Core.Erp.Data.RRHH
                         };
                         Contex.ro_empleado_novedad_det.Add(Entity_det);
 
+                        ro_EmpleadoNovedadCargaMasiva_det Entity_det_ = new ro_EmpleadoNovedadCargaMasiva_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdCarga = info.IdCarga,
+                            IdNovedad = item.IdNovedad,
+                            IdEmpleado = item.IdEmpleado,
+                            Observacion = item.Observacion,
+                            Secuencia = item.Secuancia,
+                            IdEmpresa_nov = info.IdEmpresa
+                        };
+                        Contex.ro_EmpleadoNovedadCargaMasiva_det.Add(Entity_det_);
+                        IdNovedad++;
                     }
                     Contex.SaveChanges();
 
@@ -139,7 +129,6 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-
         public bool AnularDB (ro_EmpleadoNovedadCargaMasiva_Info info)
         {
             try
