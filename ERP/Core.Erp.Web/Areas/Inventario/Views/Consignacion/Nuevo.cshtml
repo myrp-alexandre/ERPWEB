@@ -60,15 +60,15 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="GetHtml">Sucursal*</label>
+                    <label for="Sucursal">Sucursal*</label>
                     @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="GetHtml">Bodega*</label>
-                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "Idbodega" })
+                    <label for="Bodega">Bodega*</label>
+                    @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -78,7 +78,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="GetHtml">Observación*</label>
+                    <label for="Observacion">Observación*</label>
                     @Html.TextAreaFor(q => q.Observacion, new { @class = "form-control", @rows = 3 })
                     @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
                 </div>
