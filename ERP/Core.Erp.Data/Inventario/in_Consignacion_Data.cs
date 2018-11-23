@@ -312,8 +312,8 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
-                in_Ing_Egr_Inven_Data data_inv = new in_Ing_Egr_Inven_Data()
-                cp_proveedor_Data data_proveedor = new cp_proveedor_Data(
+                in_Ing_Egr_Inven_Data data_inv = new in_Ing_Egr_Inven_Data();
+                cp_proveedor_Data data_proveedor = new cp_proveedor_Data();
 
                 using (Entities_inventario db = new Entities_inventario())
                 {
