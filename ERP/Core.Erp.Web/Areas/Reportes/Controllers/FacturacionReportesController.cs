@@ -519,5 +519,20 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+
+        public ActionResult FAC_012(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCambio = 0)
+        {
+            FAC_012_Rpt model = new FAC_012_Rpt();
+            model.p_IdEmpresa.Value = IdEmpresa;
+            model.p_IdSucursal.Value = IdSucursal;
+            model.p_IdBodega.Value = IdBodega;
+            model.p_IdCambio.Value =IdCambio;
+
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            return View(model);
+
+
+        }
     }
 }
