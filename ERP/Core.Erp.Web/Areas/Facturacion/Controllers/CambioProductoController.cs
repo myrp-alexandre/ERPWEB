@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.Facturacion;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Facturacion;
@@ -25,6 +26,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_CambioProductoDet_List List_det;
         fa_CambioProductoDet_Bus bus_CambioProductoDet;
         fa_CambioProductoDetFacturas_List List_det_facturas;
+        string mensaje = string.Empty;
+        ct_periodo_Bus bus_periodo;
         #endregion
 
         #region Constructor
@@ -37,6 +40,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             List_det = new fa_CambioProductoDet_List();
             bus_CambioProductoDet = new fa_CambioProductoDet_Bus();
             List_det_facturas = new fa_CambioProductoDetFacturas_List();
+            bus_periodo = new ct_periodo_Bus();
         }
         #endregion
 
@@ -121,11 +125,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 FechaFin = DateTime.Now.Date
             };
             CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+            
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(fa_CambioProducto_Info model)
         {
+            if (!Validar(model,ref mensaje))
+            {
+                CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             if (!bus_CambioProducto.GuardarDB(model))
             {
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
@@ -157,12 +168,19 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Modificar(fa_CambioProducto_Info model)
         {
+            if (!Validar(model, ref mensaje))
+            {
+                CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
+
             if (!bus_CambioProducto.ModificarDB(model))
             {
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
-
+                        
             return RedirectToAction("Index");
         }
 
@@ -206,6 +224,31 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             var lst_bodega = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
             ViewBag.lst_bodega = lst_bodega;
+        }
+
+        private bool Validar(fa_CambioProducto_Info i_validar, ref string msg)
+        {
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.Fecha, cl_enumeradores.eModulo.FAC, ref mensaje))
+                return false;
+
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.Fecha, cl_enumeradores.eModulo.INV, ref mensaje))
+                return false;
+
+            i_validar.LstDet = List_det.get_list(i_validar.IdTransaccionSession);
+
+            if(i_validar.LstDet.Count == 0)
+            {
+                mensaje = "Debe ingresar un detalle a devolver";
+                return false;
+            }
+
+            if (i_validar.LstDet.Where(q=>q.IdProductoCambio == q.IdProductoFact).Count() > 0)
+            {
+                mensaje = "Los productos de cambio deben ser distintos a los productos facturados en el detalle";
+                return false;
+            }            
+
+            return true;
         }
         #endregion
 

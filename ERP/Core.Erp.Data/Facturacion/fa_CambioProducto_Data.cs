@@ -87,7 +87,29 @@ namespace Core.Erp.Data.Facturacion
                         IdUsuario = info.IdUsuario,
                         FechaTransac = DateTime.Now
                     });
+                    int secuencia = 1;
+                    foreach (var item in info.LstDet)
+                    {
+                        db.fa_CambioProductoDet.Add(new fa_CambioProductoDet
+                        {
+                            IdEmpresa = info.IdEmpresa,                            
+                            IdSucursal = info.IdSucursal,
+                            IdBodega = info.IdBodega,
+                            IdCambio = info.IdCambio,
+                            Secuencia = secuencia++,
+
+                            IdCbteVta = item.IdCbteVta,
+                            SecuenciaFact = item.SecuenciaFact,
+                            IdProductoFact = item.IdProductoFact,
+                            IdProductoCambio = item.IdProductoCambio,
+                            CantidadCambio = item.CantidadCambio,
+                            CantidadFact = item.CantidadFact                            
+                        });
+                    }
+
                     db.SaveChanges();
+
+
                 }
                 return true;
             }
@@ -110,6 +132,28 @@ namespace Core.Erp.Data.Facturacion
 
                     Entity.IdUsuarioUltMod = info.IdUsuario;
                     Entity.FechaUltMod = DateTime.Now;
+
+                    var lst = db.fa_CambioProductoDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCambio == info.IdCambio).ToList();
+                    db.fa_CambioProductoDet.RemoveRange(lst);
+                    int secuencia = 1;
+                    foreach (var item in info.LstDet)
+                    {
+                        db.fa_CambioProductoDet.Add(new fa_CambioProductoDet
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdBodega = info.IdBodega,
+                            IdCambio = info.IdCambio,
+                            Secuencia = secuencia++,
+
+                            IdCbteVta = item.IdCbteVta,
+                            SecuenciaFact = item.SecuenciaFact,
+                            IdProductoFact = item.IdProductoFact,
+                            IdProductoCambio = item.IdProductoCambio,
+                            CantidadCambio = item.CantidadCambio,
+                            CantidadFact = item.CantidadFact
+                        });
+                    }
 
                     db.SaveChanges();
                 }
