@@ -82,7 +82,7 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-        public decimal get_id(int IdEmpresa, decimal IdEmpleado)
+        public decimal get_id(int IdEmpresa)
         {
             try
             {
@@ -92,7 +92,6 @@ namespace Core.Erp.Data.RRHH
                 {
                     var lst = from q in Context.ro_empleado_Novedad
                               where q.IdEmpresa == IdEmpresa
-                              && q.IdEmpleado==IdEmpleado
                               select q;
 
                     if (lst.Count() > 0)
@@ -116,7 +115,7 @@ namespace Core.Erp.Data.RRHH
                     ro_empleado_Novedad Entity = new ro_empleado_Novedad
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdNovedad = info.IdNovedad = get_id(info.IdEmpresa, info.IdEmpleado),
+                        IdNovedad = info.IdNovedad = get_id(info.IdEmpresa),
                         IdNomina_Tipo = info.IdNomina_Tipo,
                         IdNomina_TipoLiqui=info.IdNomina_TipoLiqui,
                         IdEmpleado=info.IdEmpleado,

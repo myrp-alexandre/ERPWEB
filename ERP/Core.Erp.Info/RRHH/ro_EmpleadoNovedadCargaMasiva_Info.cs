@@ -10,6 +10,9 @@ namespace Core.Erp.Info.RRHH
     {
         public int IdEmpresa { get; set; }
         public decimal IdCarga { get; set; }
+        public int IdNomina { get; set; }
+        public int IdNominaTipo { get; set; }
+        public int IdSucursal { get; set; }
         public System.DateTime FechaCarga { get; set; }
         public string Observacion { get; set; }
         public string IdRubro { get; set; }
