@@ -234,7 +234,8 @@ namespace Core.Erp.Data.Inventario
                     #region Ingreso egreso inventario
                     var parametro = db.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     var nomContacto = ""; //nombre de proveedor
-                    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Consignacion), nomContacto);
+                    info.IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_Consignacion;
+                    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, nomContacto);
                     if (data_inv.guardarDB(movimiento, "-"))
                     {
                         db.in_Ing_Egr_Inven.Add(new in_Ing_Egr_Inven
