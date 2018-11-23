@@ -281,12 +281,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] in_ConsignacionDet_Info info_det)
         {
-            if (!ModelState.IsValid)
-            {
-                var valid = in_ConsignacionDet_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                cargar_combos_detalle();
-                return PartialView("_GridViewPartial_ConsignacionDet", valid);                 
-            }
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (info_det != null)
                 if (info_det.IdProducto != 0)
@@ -297,7 +291,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                         info_det.pr_descripcion = info_producto.pr_descripcion_combo;
                     }
                 }
-            if (info_det.Cantidad > 0)
+            if (!ModelState.IsValid)
                 in_ConsignacionDet_List.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = in_ConsignacionDet_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
@@ -373,11 +367,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public void UpdateRow(in_ConsignacionDet_Info info_det, decimal IdTransaccionSession)
         {
             in_ConsignacionDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
-            info_det.IdProducto = info_det.IdProducto;
-            info_det.IdUnidadMedida = info_det.IdUnidadMedida;
-            info_det.Cantidad = info_det.Cantidad;
-            info_det.Costo = info_det.Costo;
-            info_det.Observacion = info_det.Observacion;
+            edited_info.IdProducto = info_det.IdProducto;
+            edited_info.IdUnidadMedida = info_det.IdUnidadMedida;
+            edited_info.Cantidad = info_det.Cantidad;
+            edited_info.Costo = info_det.Costo;
+            edited_info.Observacion = info_det.Observacion;
+            edited_info.pr_descripcion = info_det.pr_descripcion;
         }
 
         public void DeleteRow(int Secuencial, decimal IdTransaccionSession)

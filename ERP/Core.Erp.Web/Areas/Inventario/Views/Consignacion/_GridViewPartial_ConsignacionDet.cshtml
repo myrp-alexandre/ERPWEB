@@ -1,7 +1,7 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_ConsignacionDet";
+        settings.Name = "GridView_ConsignacionDet";
         settings.CallbackRouteValues = new { Controller = "Consignacion", Action = "GridViewPartial_ConsignacionDet", Area = "Inventario" };
         settings.KeyFieldName = "Secuencia";
 
@@ -10,6 +10,10 @@
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Consignacion", Action = "EditingAddNew", Area = "Inventario" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Consignacion", Action = "EditingUpdate", Area = "Inventario" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Consignacion", Action = "EditingDelete", Area = "Inventario" };
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;
@@ -56,7 +60,7 @@
         {
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(30);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
@@ -72,6 +76,7 @@
                 p.ValueType = typeof(string);
                 p.DataSource = ViewBag.lst_unidad;
             });
+            
         });
         settings.Columns.Add(column =>
         {
