@@ -326,7 +326,7 @@ namespace Core.Erp.Data.Inventario
                         return true;
 
                     Entity.Estado = info.Estado="I";
-
+                    Entity.MotivoAnulacion = info.MotivoAnulacion;
                     Entity.IdusuarioUltAnu = info.IdusuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
                     Context.SaveChanges();

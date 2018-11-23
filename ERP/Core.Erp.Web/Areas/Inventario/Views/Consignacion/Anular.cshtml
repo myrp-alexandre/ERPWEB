@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Inventario.in_Consignacion_Info
 @{
-    ViewBag.Title = "Anular consignación por proveedor";
+    ViewBag.Title = "Modificar consignación por proveedor";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -13,7 +13,7 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdConsignacion)
     @Html.HiddenFor(q => q.IdSucursal)
-    @Html.HiddenFor(q => q.IdBodega)
+    @Html.HiddenFor(q => q.IdNumMovi)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     if (ViewBag.mensaje != null)
@@ -61,7 +61,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="GetHtml">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -78,7 +78,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="GetHtml">Observación*</label>
+                    <label for="GetHtml">Observación</label>
                     @Html.TextAreaFor(q => q.Observacion, new { @class = "form-control", @rows = 3 })
                     @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
                 </div>

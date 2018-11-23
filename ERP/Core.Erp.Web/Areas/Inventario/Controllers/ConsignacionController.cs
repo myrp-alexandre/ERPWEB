@@ -235,9 +235,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
             if (!bus_in_Consignacion.AnularBD(model))
-            {
-                in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
+            {                
                 ViewBag.mensaje = "No se ha podido anular el registro";
+
+                model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                model.lst_producto_consignacion = bus_consignacion_det.GetList(model.IdEmpresa, Convert.ToInt32(model.IdConsignacion));
+                in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
+
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             };
