@@ -66,7 +66,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_EmpleadoNovedadCargaMasiva_Info modelReturn = new ro_EmpleadoNovedadCargaMasiva_Info();
           
             modelReturn.detalle = detalle.get_list();
-            cargar_combos_detalle();
             return PartialView("_GridViewPartial_importacion_novedades_det", modelReturn);
         }
         #endregion
@@ -80,11 +79,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 FechaCarga = DateTime.Now,
+                IdNomina=1,
+                IdNominaTipo=2,
+                IdSucursal=1
+                
             };
             model.detalle = new List<ro_EmpleadoNovedadCargaMasiva_det_Info>();
             detalle.set_list(model.detalle);
-            cargar_combos(0);
-            cargar_combos_detalle();
+            cargar_combos();
             return View(model);
         }
 
@@ -104,8 +106,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
           
 
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_novedad.GuardarDB(model))
             {
                 cargar_combos();
@@ -144,11 +146,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         #region cargar combos
 
-        private void cargar_combos(int IdNomina=0)
+        private void cargar_combos()
         {
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
-            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina);
+            ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, 1);
+            ViewBag.lst_sucursal = bus_sucursal.get_list(Convert.ToInt32(SessionFixed.IdEmpresa), false);
+
+            ViewBag.lst_rubro = bus_rubro.get_list(Convert.ToInt32(SessionFixed.IdEmpresa), false);
         }
         #endregion
 
@@ -161,7 +167,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 detalle.UpdateRow(info_det);
             ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info();
             model.detalle = detalle.get_list();
-            cargar_combos_detalle();
             return PartialView("_GridViewPartial_importacion_novedades_det", model);
         }
 
@@ -170,18 +175,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             detalle.DeleteRow(info_det.Secuancia);
             ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info();
             model.detalle = detalle.get_list();
-            cargar_combos_detalle();
             return PartialView("_GridViewPartial_importacion_novedades_det", model);
         }
         #endregion
-        private void cargar_combos_detalle()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            lst_rubros = bus_rubro.get_list_rub_concepto(IdEmpresa);
-            ViewBag.lst_rubro = lst_rubros;
-            Session["rubros"] = lst_rubros;
-        }
-
+       
       
         public ActionResult UploadControlUpload()
         {
@@ -225,7 +222,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     pe_cedulaRuc = cedua,
                                     pe_apellido = empleado.Empleado,
                                     em_codigo = empleado.em_codigo,
-                                    Secuancia = cont
+                                    Secuancia = cont,
+                                    IdEmpleado=empleado.IdEmpleado
                                 };
                                 lista_novedades.Add(info);
                             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,11 @@ namespace Core.Erp.Info.RRHH
     {
         public int IdEmpresa { get; set; }
         public decimal IdCarga { get; set; }
+        [Required(ErrorMessage = "El campo nómina es obligatorio")]
         public int IdNomina { get; set; }
+        [Required(ErrorMessage = "El campo proceso es obligatorio")]
         public int IdNominaTipo { get; set; }
+        [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }
         public System.DateTime FechaCarga { get; set; }
         public string Observacion { get; set; }
