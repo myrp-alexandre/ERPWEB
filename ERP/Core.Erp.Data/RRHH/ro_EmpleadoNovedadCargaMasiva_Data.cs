@@ -68,12 +68,36 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
-
+                
                 using (Entities_rrhh Contex=new Entities_rrhh())
                 {
 
+                    ro_EmpleadoNovedadCargaMasiva entity = new ro_EmpleadoNovedadCargaMasiva
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdCarga = info.IdCarga = Get_id(info.IdEmpresa),
+                        FechaCarga = info.FechaCarga,
+                        Observacion = info.Observacion,
+                        IdNomina = info.IdNomina,
+                        IdNominaTipo = info.IdNominaTipo,
+                        IdSucursal = info.IdSucursal,
+                        IdRubro = info.IdRubro,
+                        IdUsuario = info.IdUsuario,
+                        Fecha_Transac = DateTime.Now,
+                    };
+                    Contex.ro_EmpleadoNovedadCargaMasiva.Add(entity);
+
                     foreach (var item in info.detalle)
                     {
+                        ro_EmpleadoNovedadCargaMasiva_det Entity_det_ = new ro_EmpleadoNovedadCargaMasiva_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdCarga = info.IdCarga,
+                            IdNovedad = item.IdNovedad,
+                            IdEmpleado = item.IdEmpleado,
+                            Observacion = item.Observacion,
+                            Secuencia = item.Secuancia
+                        };
                         ro_empleado_Novedad Entity = new ro_empleado_Novedad
                         {
                             IdEmpresa = info.IdEmpresa,
@@ -83,7 +107,7 @@ namespace Core.Erp.Data.RRHH
                             IdEmpleado = item.IdEmpleado,
                             Fecha = info.FechaCarga,
 
-                            Observacion = info.Observacion,
+                            Observacion = info.Observacion==null?"":info.Observacion,
                             Estado  = "A",
                             IdUsuario = info.IdUsuario,
                             Fecha_Transac = info.Fecha_Transac = DateTime.Now
@@ -99,35 +123,17 @@ namespace Core.Erp.Data.RRHH
                             Valor = item.Valor,
                             Observacion = item.Observacion,
                             EstadoCobro  = "PEN",
+                            Secuencia=1
                         };
                         Contex.ro_empleado_novedad_det.Add(Entity_det);
 
-                        ro_EmpleadoNovedadCargaMasiva entity = new ro_EmpleadoNovedadCargaMasiva
-                        {
-                            IdEmpresa = info.IdEmpresa,
-                            IdCarga = info.IdCarga = Get_id(info.IdEmpresa),
-                            FechaCarga = info.FechaCarga,
-                            Observacion = info.Observacion,
-                            IdRubro = info.IdRubro,
-                            IdUsuario = info.IdUsuario,
-                            Fecha_Transac = DateTime.Now,
-                        };
-                        Contex.ro_EmpleadoNovedadCargaMasiva.Add(entity);
-
-                        ro_EmpleadoNovedadCargaMasiva_det Entity_det_ = new ro_EmpleadoNovedadCargaMasiva_det
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdNovedad = item.IdNovedad,
-                            IdEmpleado = item.IdEmpleado,
-                            Observacion = item.Observacion,
-                        };
                     }
                     Contex.SaveChanges();
 
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -202,7 +208,7 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
-                decimal Id = 0;
+                decimal Id = 1;
                 using (Entities_rrhh Contex=new Entities_rrhh())
                 {
                     var list = from q in Contex.ro_EmpleadoNovedadCargaMasiva

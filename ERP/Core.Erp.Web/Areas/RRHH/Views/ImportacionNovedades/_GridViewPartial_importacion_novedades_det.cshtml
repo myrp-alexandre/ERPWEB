@@ -25,6 +25,7 @@
         settings.SettingsPager.PageSize = 10;
         settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
         settings.SettingsPager.AlwaysShowPager = true;
+
         //Configuración filtro por columna
         settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
         settings.Settings.ShowFilterRow = true;
@@ -34,14 +35,22 @@
         settings.SettingsExport.EnableClientSideExportAPI = true;
         settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
         //Evento para pintar de rojo las filas anuladas
-       
-       
+
+        settings.Settings.ShowFooter = true;
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
         settings.Columns.Add("Secuancia","ID").Width=Unit.Percentage(5);
-       
+
 
         settings.Columns.Add("pe_cedulaRuc","Cédula").Width = Unit.Percentage(15);
         settings.Columns.Add("pe_apellido","Empleado").Width = Unit.Percentage(50);
         settings.Columns.Add("Valor", "Valor").Width = Unit.Percentage(15);
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor");
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Count, "Secuencia");
+
+
 
     });
 }
