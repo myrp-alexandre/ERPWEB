@@ -9,6 +9,8 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_EmpleadoNovedadCargaMasiva_Data
     {
+
+        ro_empleado_novedad_Data odata_novedad = new ro_empleado_novedad_Data();
         public List<ro_EmpleadoNovedadCargaMasiva_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin, bool mostrar_anulados)
         {
             try
@@ -70,17 +72,56 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Contex=new Entities_rrhh())
                 {
 
-                    ro_EmpleadoNovedadCargaMasiva entity = new ro_EmpleadoNovedadCargaMasiva
+                    foreach (var item in info.detalle)
                     {
-                        IdEmpresa=info.IdEmpresa,
-                        IdCarga=info.IdCarga=Get_id(info.IdEmpresa),
-                        FechaCarga=info.FechaCarga,
-                        Observacion=info.Observacion,
-                        IdRubro=info.IdRubro,
-                        IdUsuario=info.IdUsuario,
-                        Fecha_Transac=DateTime.Now,
-                    };
-                    Contex.ro_EmpleadoNovedadCargaMasiva.Add(entity);
+                        ro_empleado_Novedad Entity = new ro_empleado_Novedad
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdNovedad = item.IdNovedad = odata_novedad. get_id(item.IdEmpresa),
+                            IdNomina_Tipo = info.IdNomina,
+                            IdNomina_TipoLiqui = info.IdNominaTipo,
+                            IdEmpleado = item.IdEmpleado,
+                            Fecha = info.FechaCarga,
+
+                            Observacion = info.Observacion,
+                            Estado  = "A",
+                            IdUsuario = info.IdUsuario,
+                            Fecha_Transac = info.Fecha_Transac = DateTime.Now
+                        };
+                        Contex.ro_empleado_Novedad.Add(Entity);
+
+                        ro_empleado_novedad_det Entity_det = new ro_empleado_novedad_det
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdNovedad = item.IdNovedad,
+                            FechaPago = info.FechaCarga,
+                            IdRubro = info.IdRubro,
+                            Valor = item.Valor,
+                            Observacion = item.Observacion,
+                            EstadoCobro  = "PEN",
+                        };
+                        Contex.ro_empleado_novedad_det.Add(Entity_det);
+
+                        ro_EmpleadoNovedadCargaMasiva entity = new ro_EmpleadoNovedadCargaMasiva
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdCarga = info.IdCarga = Get_id(info.IdEmpresa),
+                            FechaCarga = info.FechaCarga,
+                            Observacion = info.Observacion,
+                            IdRubro = info.IdRubro,
+                            IdUsuario = info.IdUsuario,
+                            Fecha_Transac = DateTime.Now,
+                        };
+                        Contex.ro_EmpleadoNovedadCargaMasiva.Add(entity);
+
+                        ro_EmpleadoNovedadCargaMasiva_det Entity_det_ = new ro_EmpleadoNovedadCargaMasiva_det
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdNovedad = item.IdNovedad,
+                            IdEmpleado = item.IdEmpleado,
+                            Observacion = item.Observacion,
+                        };
+                    }
                     Contex.SaveChanges();
 
                 }
@@ -107,6 +148,16 @@ namespace Core.Erp.Data.RRHH
                     entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     entity.Estado = false;
+                    var lista = contex.ro_EmpleadoNovedadCargaMasiva_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCarga == info.IdCarga);
+                    foreach (var item in lista)
+                    {
+                        ro_empleado_Novedad entity_det = contex.ro_empleado_Novedad.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpresa&& q.IdNovedad==item.IdNovedad);
+                        entity_det.Estado = "I";
+                        entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                        entity_det.Fecha_UltAnu = DateTime.Now;
+                        contex.SaveChanges();
+
+                    }
                     contex.SaveChanges  ();
                 }
                 return true;
