@@ -28,5 +28,7 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdDevolucion { get; set; }
         public string pr_descripcionFact { get; set; }
         public string pr_descripcionCambio { get; set; }
+        public string vt_NumFactura { get; set; }
+        public string NombreCliente { get; set; }
     }
 }

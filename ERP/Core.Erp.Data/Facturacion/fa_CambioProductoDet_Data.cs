@@ -32,10 +32,12 @@ namespace Core.Erp.Data.Facturacion
                         CantidadCambio = q.CantidadCambio,
                         IdDevolucion = q.IdDevolucion,
                         pr_descripcionCambio = q.pr_descripcionCambio,
-                        pr_descripcionFact = q.pr_descripcionFact                        
+                        pr_descripcionFact = q.pr_descripcionFact,
+                        NombreCliente = q.NombreCliente,
+                        vt_NumFactura = q.vt_NumFactura                                              
                     }).ToList();
                 }
-                Lista.ForEach(q => q.IdSecuencial = q.IdEmpresa.ToString("00") + q.IdSucursal.ToString("00") + q.IdBodega.ToString("00") + q.IdCbteVta.ToString("000000000"));
+                Lista.ForEach(q => q.IdSecuencial = q.IdEmpresa.ToString("00") + q.IdSucursal.ToString("00") + q.IdBodega.ToString("00") + q.IdCbteVta.ToString("000000000") + q.SecuenciaFact.ToString("0000"));
                 return Lista;
             }
             catch (Exception)
