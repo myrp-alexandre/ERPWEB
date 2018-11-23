@@ -512,6 +512,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     Lista = (from q in Context.vwcp_orden_giro_x_pagar
                              where q.IdEmpresa == IdEmpresa
                              & q.Saldo_OG > 0
+                             orderby q.co_fechaOg descending
                              select new cp_orden_giro_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

@@ -978,7 +978,8 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  vt_Subtotal = q.vt_Subtotal,
                                  vt_Iva = q.vt_iva,
                                  vt_Total = q.vt_total,
-                                 Su_Descripcion = q.Su_Descripcion
+                                 Su_Descripcion = q.Su_Descripcion,
+                                 
                                  
                              }).ToList();
                 }

@@ -17,9 +17,8 @@ namespace Core.Erp.Info.Inventario
         [Required(ErrorMessage = "El campo bodega es obligatorio")]
         public int IdBodega { get; set; }
         public System.DateTime Fecha { get; set; }
-        [Required(ErrorMessage = "El proveedor observacion es obligatorio")]
+        [Required(ErrorMessage = "El campo proveedor  es obligatorio")]
         public decimal IdProveedor { get; set; }
-        [Required(ErrorMessage = "El campo observacion es obligatorio")]
         public string Observacion { get; set; }
         public bool Estado { get; set; }
         public string IdUsuario { get; set; }
@@ -28,7 +27,7 @@ namespace Core.Erp.Info.Inventario
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        [Required(ErrorMessage = "El campo descripción es obligatorio")]
+        [Required(ErrorMessage = "El campo motivo anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
         public int IdMovi_inven_tipo { get; set; }
         public decimal IdNumMovi { get; set; }

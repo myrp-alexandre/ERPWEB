@@ -50,6 +50,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public string cr_NumDocumento { get; set; }
         public System.DateTime cr_fecha { get; set; }
         public string IdCtaCble { get; set; }
+        public string NomCliente { get; set; }
         #endregion
 
     }
