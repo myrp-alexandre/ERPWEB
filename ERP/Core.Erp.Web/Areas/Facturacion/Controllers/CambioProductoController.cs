@@ -162,6 +162,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.FechaIni = DateTime.Now.Date.AddMonths(-1);
             model.FechaFin = DateTime.Now.Date;
             CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+            model.LstDet = bus_CambioProductoDet.GetList(model.IdEmpresa, model.IdSucursal, model.IdBodega, model.IdCambio);
+            List_det.set_list(model.LstDet, model.IdTransaccionSession);
             return View(model);
         }
 
@@ -200,6 +202,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.FechaIni = DateTime.Now.Date.AddMonths(-1);
             model.FechaFin = DateTime.Now.Date;
             CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+            model.LstDet = bus_CambioProductoDet.GetList(model.IdEmpresa, model.IdSucursal, model.IdBodega, model.IdCambio);
+            List_det.set_list(model.LstDet, model.IdTransaccionSession);
             return View(model);
         }
 
