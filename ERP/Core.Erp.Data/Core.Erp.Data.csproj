@@ -1034,6 +1034,7 @@
     <Compile Include="Reportes\Facturacion\FAC_009_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_010_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_011_Data.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_012_Data.cs" />
     <Compile Include="Reportes\Importacion\IMP_001_Data.cs" />
     <Compile Include="Reportes\Importacion\IMP_002_Data.cs" />
     <Compile Include="Reportes\Importacion\IMP_002_gastos_Data.cs" />
