@@ -8,6 +8,8 @@ using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Helps;
 using DevExpress.Web.Mvc;
 using Core.Erp.Web.Helps;
+using Core.Erp.Bus.Contabilidad;
+
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
     [SessionTimeout]
@@ -26,6 +28,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir = new List<in_Ing_Egr_Inven_distribucion_Info>();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         string NombreProducto = "";
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
 
         #endregion
 
@@ -60,7 +63,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_motivo = lst_motivo;
 
         }
+        private bool validar(in_Ing_Egr_Inven_distribucion_Info i_validar, ref string msg)
+        {
 
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cm_fecha, cl_enumeradores.eModulo.INV, ref msg))
+            {
+                return false;
+            }
+            return true;
+        }
         #endregion
 
         #region Grids
@@ -161,7 +172,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             bus_ing_inv = new in_Ing_Egr_Inven_distribucion_Bus();
             model.lst_distribuido = List_in_Ing_Egr_Inven_det.get_list(model.IdTransaccionSession);
             model.lst_x_distribuir = lst_x_distribuir_lis.get_list(model.IdTransaccionSession);
-          
+            model.cm_fecha = DateTime.Now.Date;
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model.IdEmpresa);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
             model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
             if (!bus_ing_inv.guardarDB(model))

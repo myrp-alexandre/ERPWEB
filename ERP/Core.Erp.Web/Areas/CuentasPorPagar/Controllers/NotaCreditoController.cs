@@ -35,6 +35,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         List<cp_orden_pago_det_Info> lst_detalle_op = new List<cp_orden_pago_det_Info>();
         cp_orden_pago_cancelaciones_Bus bus_orden_pago_cancelaciones = new cp_orden_pago_cancelaciones_Bus();
         List<cp_orden_pago_det_Info> list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+
         #endregion
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
@@ -143,7 +145,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.DebCre = "C";
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List_nc.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            if(model.info_comrobante.lst_ct_cbtecble_det==null)
+            if (model.info_comrobante.lst_ct_cbtecble_det==null)
             {
                 ViewBag.mensaje = "Falta diario contable";
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
@@ -164,6 +166,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
             }
             string mensaje = bus_orden_giro.validar(model);
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             if (mensaje != "")
             {
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
@@ -171,8 +179,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-
-
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
@@ -247,6 +253,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
             }
 
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
+                cargar_combos_detalle();
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
 
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -432,6 +445,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
         }
+
+        private bool validar(cp_nota_DebCre_Info i_validar, ref string msg)
+        {
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cn_fecha, cl_enumeradores.eModulo.CXP, ref msg))
+            {
+                return false;
+            }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cn_fecha, cl_enumeradores.eModulo.CONTA, ref msg))
+            {
+                return false;
+            }
+            return true;
+        }
+
         #endregion
         #region Funcion diario contable
         [HttpPost, ValidateInput(false)]

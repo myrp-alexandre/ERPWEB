@@ -38,6 +38,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         List<cp_orden_pago_det_Info> lst_detalle_op = new List<cp_orden_pago_det_Info>();
         cp_orden_pago_cancelaciones_Bus bus_orden_pago_cancelaciones = new cp_orden_pago_cancelaciones_Bus();
         List<cp_orden_pago_det_Info> list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         string mensaje = string.Empty;
         #endregion
         #region Metodos ComboBox bajo demanda flujo
@@ -197,7 +198,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 mensaje = "La suma de los detalles debe ser 0";
                 return false;
             }
-
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cn_fecha, cl_enumeradores.eModulo.CXP, ref msg))
+            {
+                return false;
+            }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cn_fecha, cl_enumeradores.eModulo.CONTA, ref msg))
+            {
+                return false;
+            }
             return true;
         }
 
@@ -317,7 +325,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List_nd.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
+                ViewBag.mensaje = mensaje;
+                cargar_combos_detalle();
+                return View(model);
+            }
             if (!bus_orden_giro.modificarDB(model))
             {
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DevExpress.Web.Mvc;
+using Core.Erp.Bus.Contabilidad;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
@@ -32,6 +33,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_factura_x_fa_guia_remision_Bus bus_detalle_x_factura = new fa_factura_x_fa_guia_remision_Bus();
         fa_catalogo_Bus bus_catalogo = new fa_catalogo_Bus();
         fa_factura_x_fa_guia_remision_Info_List List_rel = new fa_factura_x_fa_guia_remision_Info_List();
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda cliente
@@ -97,7 +99,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var model = List_rel.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_Facturas_x_guia", model);
         }
-
+        private bool validar(fa_guia_remision_Info i_validar, ref string msg)
+        {
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.gi_fecha, cl_enumeradores.eModulo.FAC, ref msg))
+            {
+                return false;
+            }
+            return true;
+        }
         #endregion
 
         #region acciones
@@ -139,6 +148,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 model.CodDocumentoTipo = "GUIA";
                 string mensaje = bus_guia.validar(model);
                 if (mensaje != "")
+                {
+                    cargar_combos(model);
+                    ViewBag.mensaje = mensaje;
+                    return View(model);
+                }
+                if (!validar(model, ref mensaje))
                 {
                     cargar_combos(model);
                     ViewBag.mensaje = mensaje;
@@ -191,6 +206,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 model.lst_detalle_x_factura = List_rel.get_list(model.IdTransaccionSession);
                 model.lst_detalle = detalle_info.get_list(model.IdTransaccionSession);
                 string mensaje = bus_guia.validar(model);
+                if (!validar(model, ref mensaje))
+                {
+                    cargar_combos(model);
+                    ViewBag.mensaje = mensaje;
+                    return View(model);
+                }
                 if (mensaje != "")
                 {
                     cargar_combos(model);

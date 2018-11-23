@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.General;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Caja;
 using Core.Erp.Info.Helps;
@@ -24,6 +25,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         string mensaje = string.Empty;
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -208,6 +210,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (i_validar.lst_in_Ing_Egr_Inven_det.Count == 0)
             {
                 mensaje = "Debe ingresar al menos un producto";
+                return false;
+            }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cm_fecha, cl_enumeradores.eModulo.INV, ref msg))
+            {
                 return false;
             }
             return true;
