@@ -240,7 +240,6 @@ namespace Core.Erp.Data.Inventario
                     var parametro = db.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     info.IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_Consignacion;
                     cp_proveedor_Info dato_proveedor = data_proveedor.get_info(info.IdEmpresa, info.IdProveedor);
-
                     var nomContacto = dato_proveedor.info_persona.pe_nombreCompleto; 
 
                     in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, nomContacto);
@@ -313,6 +312,9 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
+                in_Ing_Egr_Inven_Data data_inv = new in_Ing_Egr_Inven_Data()
+                cp_proveedor_Data data_proveedor = new cp_proveedor_Data(
+
                 using (Entities_inventario db = new Entities_inventario())
                 {
                     in_Consignacion Entity = db.in_Consignacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConsignacion == info.IdConsignacion).FirstOrDefault();
@@ -351,6 +353,22 @@ namespace Core.Erp.Data.Inventario
                             });
                         }
                     }
+
+                    #region Ingreso egreso inventario
+                    var parametro = db.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    info.IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_Consignacion;
+                    cp_proveedor_Info dato_proveedor = data_proveedor.get_info(info.IdEmpresa, info.IdProveedor);
+
+                    var nomContacto = dato_proveedor.info_persona.pe_nombreCompleto;
+
+                    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, nomContacto);
+
+                    if (movimiento != null)
+                    {
+                        movimiento.IdNumMovi = movimiento.IdNumMovi;
+                        data_inv.modificarDB(movimiento);
+                    }
+                    #endregion
                     db.SaveChanges();
                 }
 
