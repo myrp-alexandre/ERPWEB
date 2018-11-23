@@ -145,6 +145,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 return false;
             }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.vt_fecha, cl_enumeradores.eModulo.CONTA, ref msg))
+            {
+                return false;
+            }
 
             i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             if (i_validar.lst_det.Count == 0)
