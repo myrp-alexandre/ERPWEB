@@ -35,6 +35,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         List<cp_orden_pago_tipo_x_empresa_Info> lst_tipo_orden_pago = new List<cp_orden_pago_tipo_x_empresa_Info>();
         int IdEmpresa = 0;
         cp_orden_pago_det_Info_list lis_cp_orden_pago_det_Info = new cp_orden_pago_det_Info_list();
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
         #region Index
 
@@ -112,7 +113,18 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
         }
-
+        private bool validar(cp_orden_pago_Info i_validar, ref string msg)
+        {
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.Fecha, cl_enumeradores.eModulo.CXP, ref msg))
+            {
+                return false;
+            }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.Fecha, cl_enumeradores.eModulo.CONTA, ref msg))
+            {
+                return false;
+            }
+            return true;
+        }
         #endregion
         #region Acciones
 
@@ -148,7 +160,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
             model.info_comprobante.IdTipoCbte =(int) info_param_op.IdTipoCbte_OP;
             model.IdEstadoAprobacion = info_param_op.IdEstadoAprobacion;
+
             string mensaje = bus_orden_pago.validar(model);
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model.IdEmpresa);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             if (mensaje != "")
             {
                 cargar_combos(model.IdEmpresa);
@@ -208,7 +227,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
             }
 
-
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model.IdEmpresa);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             model.detalle = lis_cp_orden_pago_det_Info.get_list();
             model.info_comprobante.lst_ct_cbtecble_det = comprobante_contable_fp.get_list();
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);

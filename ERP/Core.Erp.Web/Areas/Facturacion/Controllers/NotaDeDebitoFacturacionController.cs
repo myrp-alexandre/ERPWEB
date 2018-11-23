@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.Facturacion;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Facturacion;
@@ -41,7 +42,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_notaCreDeb_x_fa_factura_NotaDeb_List List_cruce = new fa_notaCreDeb_x_fa_factura_NotaDeb_List();
         fa_TipoNota_x_Empresa_x_Sucursal_Bus bus_tipo_nota_x_sucursal = new fa_TipoNota_x_Empresa_x_Sucursal_Bus();
         fa_TipoNota_x_Empresa_x_Sucursal_Bus bus_nota_x_empresa_sucursal = new fa_TipoNota_x_Empresa_x_Sucursal_Bus();
-
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
 
         #region Index
@@ -332,6 +333,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             i_validar.lst_cruce = List_cruce.get_list(i_validar.IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.no_fecha, cl_enumeradores.eModulo.FAC, ref msg))
+            {
+                return false;
+            }
             if (i_validar.lst_det.Count == 0)
             {
                 msg = "No ha ingresado registros en el detalle";

@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.Facturacion;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Facturacion;
@@ -32,6 +33,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         in_Producto_List List_producto = new in_Producto_List();
         string mensaje = string.Empty;
         fa_parametro_Bus bus_param = new fa_parametro_Bus();
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
 
         #region Index
@@ -114,6 +116,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             if (i_validar.lst_det.Where(q => q.IdProducto == 0).Count() > 0)
             {
                 msg = "Existen registros sin producto en el detalle de la proforma";
+                return false;
+            }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.pf_fecha, cl_enumeradores.eModulo.FAC, ref msg))
+            {
                 return false;
             }
             return true;

@@ -43,7 +43,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
         cp_orden_giro_det_Bus bus_det = new cp_orden_giro_det_Bus();
-
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         tb_sis_Documento_Tipo_Talonario_Bus bus_documento = new tb_sis_Documento_Tipo_Talonario_Bus();
 
         ct_cbtecble_det_List_re List_ct_cbtecble_det_List = new ct_cbtecble_det_List_re();
@@ -252,9 +252,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
         }
-
+        private bool validar(cp_orden_giro_Info i_validar, ref string msg)
+        {
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.co_fechaOg, cl_enumeradores.eModulo.CXP, ref msg))
+            {
+                return false;
+            }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.co_fechaOg, cl_enumeradores.eModulo.CONTA, ref msg))
+            {
+                return false;
+            }
+            return true;
+        }
         #endregion
-        
+
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
@@ -373,6 +384,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
 
             model.IdUsuario = SessionFixed.IdUsuario;
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
             if (!bus_orden_giro.guardarDB(model))
             {
@@ -490,9 +507,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-
-
             model.IdUsuario = SessionFixed.IdUsuario;
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
 
             if (!bus_orden_giro.modificarDB(model))
@@ -602,8 +623,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-
-
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             model.IdUsuario = SessionFixed.IdUsuario;
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
 

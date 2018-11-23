@@ -11,6 +11,7 @@ using Core.Erp.Info.Helps;
 using DevExpress.Web.Mvc;
 using DevExpress.Web;
 using Core.Erp.Web.Helps;
+using Core.Erp.Bus.Contabilidad;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
@@ -24,6 +25,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_parametro_Bus bus_in_param = new in_parametro_Bus();
         string mensaje = string.Empty;
         in_Producto_Bus bus_producto = new in_Producto_Bus();
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -109,6 +111,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model.IdEmpresa);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             model.IdUsuario = Session["IdUsuario"].ToString();
             if (!bus_trnferencia.guardarDB(model))
             {
@@ -140,6 +148,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model.IdEmpresa);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             if (!bus_trnferencia.modificarDB(model))
             {
@@ -165,6 +179,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.list_detalle = List_in_transferencia_det.get_list();
             string mensaje = bus_trnferencia.validar(model);
             if (mensaje != "")
+            {
+                cargar_combos(model.IdEmpresa);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
+            if (!validar(model, ref mensaje))
             {
                 cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
@@ -237,6 +257,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
+        #region Combo y validaciones
+
         private void cargar_combos_detalle()
         {
            
@@ -263,7 +285,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
             ViewBag.lst_bodega = lst_bodega;
         }
-
+        private bool validar(in_transferencia_Info i_validar, ref string msg)
+        {
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.tr_fecha, cl_enumeradores.eModulo.INV, ref msg))
+            {
+                return false;
+            }
+            return true;
+        }
+        #endregion
     }
 
     public class in_transferencia_det_List

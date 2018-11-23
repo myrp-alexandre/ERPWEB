@@ -73,6 +73,17 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="pe_cerrado_bool">@Html.CheckBoxFor(q => q.pe_cerrado_bool) Cerrado</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
@@ -84,32 +95,32 @@
     }
 }
 
-    <script>
-        $(function () {
-            actualizar_periodo();
-        });
-        $("#pe_mes").change(function () {
-            actualizar_periodo();
-        });
-        $("#IdanioFiscal").change(function () {
-            actualizar_periodo();
-        });
+<script>
+    $(function () {
+        actualizar_periodo();
+    });
+    $("#pe_mes").change(function () {
+        actualizar_periodo();
+    });
+    $("#IdanioFiscal").change(function () {
+        actualizar_periodo();
+    });
 
-        function actualizar_periodo() {
-            var mes = $("#pe_mes").val();
-            var pad = "00";
-            var p = pad.substring(0, pad.length - mes.length) + mes;
+    function actualizar_periodo() {
+        var mes = $("#pe_mes").val();
+        var pad = "00";
+        var p = pad.substring(0, pad.length - mes.length) + mes;
 
-            var anio = $("#IdanioFiscal").val();
-            var periodo = anio + p;
-            $("#IdPeriodo").val(periodo)
+        var anio = $("#IdanioFiscal").val();
+        var periodo = anio + p;
+        $("#IdPeriodo").val(periodo)
 
-            var date = new Date(anio + '-' + mes + '-' + 1);
-            pe_FechaIni.SetValue(date)
-            var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-            pe_FechaFin.SetValue(ultimoDia)
+        var date = new Date(anio + '-' + mes + '-' + 1);
+        pe_FechaIni.SetValue(date)
+        var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        pe_FechaFin.SetValue(ultimoDia)
 
 
 
-        }
-    </script>
+    }
+</script>
