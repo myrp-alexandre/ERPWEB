@@ -77,53 +77,73 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal)
             };
-            cargar_combos_consulta();
+            CargarCombos(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
-            cargar_combos_consulta();
+            CargarCombos(model.IdEmpresa);
             return View(model);
-        }
-        #endregion        
-
-        #region Metodos
-        private void cargar_combos_consulta()
-        {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
-
-            lst_sucursal.Add(new tb_sucursal_Info
-            {
-                IdEmpresa = IdEmpresa,
-                IdSucursal = 0,
-                Su_Descripcion = "Todos"
-            });
-            ViewBag.lst_sucursal = lst_sucursal;
-
-            lst_bodega.Add(new tb_bodega_Info
-            {
-                IdEmpresa = IdEmpresa,
-                IdSucursal = 0,
-                bo_Descripcion = "Todos"
-            });
-            ViewBag.lst_bodega = lst_bodega;
-        }
-
-        private void cargar_combos(int IdEmpresa)
-        {
-            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-            ViewBag.lst_sucursal = lst_sucursal;
-
-            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
-            ViewBag.lst_bodega = lst_bodega;
         }
         #endregion
 
+        #region Metodos
+        private void CargarCombosAccion(int IdEmpresa, int IdSucursal)
+        {
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            var lst_bodega = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
+            ViewBag.lst_bodega = lst_bodega;
+        }
+        //private void cargar_combos_consulta()
+        //{
+        //    int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+        //    var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+        //    var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+
+        //    lst_sucursal.Add(new tb_sucursal_Info
+        //    {
+        //        IdEmpresa = IdEmpresa,
+        //        IdSucursal = 0,
+        //        Su_Descripcion = "Todos"
+        //    });
+        //    ViewBag.lst_sucursal = lst_sucursal;
+
+        //    lst_bodega.Add(new tb_bodega_Info
+        //    {
+        //        IdEmpresa = IdEmpresa,
+        //        IdSucursal = 0,
+        //        bo_Descripcion = "Todos"
+        //    });
+        //    ViewBag.lst_bodega = lst_bodega;
+        //}
+
+        private void CargarCombos(int IdEmpresa)
+        {
+            try
+            {
+                var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+                ViewBag.lst_sucursal = lst_sucursal;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region Json
+        public JsonResult CargarBodega(int IdEmpresa = 0, int IdSucursal = 0)
+        {
+            var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
         public ActionResult GridViewPartial_Consignacion(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0)
         {
             ViewBag.IdSucursal = IdSucursal;
@@ -153,7 +173,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             };
 
             in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
-            cargar_combos(model.IdEmpresa);
+            CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
             return View(model);
         }
 
@@ -167,7 +187,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             if (!bus_in_Consignacion.GuardarBD(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
-                cargar_combos(model.IdEmpresa);
+                CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -191,7 +211,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.lst_producto_consignacion = bus_consignacion_det.GetList(model.IdEmpresa, Convert.ToInt32(model.IdConsignacion));
             in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
 
-            cargar_combos(IdEmpresa);
+            CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
             return View(model);
         }
         [HttpPost]
@@ -200,14 +220,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.lst_producto_consignacion = in_ConsignacionDet_List.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
-                cargar_combos(model.IdEmpresa);
+                CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             if (!bus_in_Consignacion.ModificarBD(model))
             {
-                cargar_combos(model.IdEmpresa);
+                CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -229,7 +249,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.lst_producto_consignacion = bus_consignacion_det.GetList(model.IdEmpresa, Convert.ToInt32(model.IdConsignacion));
             in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
 
-            cargar_combos(model.IdEmpresa);
+            CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
             return View(model);
         }
         [HttpPost]
@@ -240,7 +260,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             {
                 in_ConsignacionDet_List.set_list(model.lst_producto_consignacion, model.IdTransaccionSession);
                 ViewBag.mensaje = "No se ha podido anular el registro";
-                cargar_combos(model.IdEmpresa);
+                CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             };
             return RedirectToAction("Index");

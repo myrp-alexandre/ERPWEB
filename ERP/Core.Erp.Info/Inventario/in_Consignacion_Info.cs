@@ -12,8 +12,9 @@ namespace Core.Erp.Info.Inventario
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdConsignacion { get; set; }
-
+        [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }
+        [Required(ErrorMessage = "El campo bodega es obligatorio")]
         public int IdBodega { get; set; }
         public System.DateTime Fecha { get; set; }
         [Required(ErrorMessage = "El proveedor observacion es obligatorio")]
