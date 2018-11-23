@@ -15,8 +15,11 @@
     [MotiAnula]       VARCHAR (200) NULL,
     CONSTRAINT [PK_ro_EmpleadoNovedadCargaMasiva] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdCarga] ASC),
     CONSTRAINT [FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui] FOREIGN KEY ([IdEmpresa], [IdNomina], [IdNominaTipo]) REFERENCES [dbo].[ro_Nomina_Tipoliqui] ([IdEmpresa], [IdNomina_Tipo], [IdNomina_TipoLiqui]),
+    CONSTRAINT [FK_ro_EmpleadoNovedadCargaMasiva_ro_rubro_tipo] FOREIGN KEY ([IdEmpresa], [IdRubro]) REFERENCES [dbo].[ro_rubro_tipo] ([IdEmpresa], [IdRubro]),
     CONSTRAINT [FK_ro_EmpleadoNovedadCargaMasiva_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa])
 );
+
+
 
 
 

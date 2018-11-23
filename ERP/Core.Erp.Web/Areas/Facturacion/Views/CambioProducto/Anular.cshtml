@@ -277,8 +277,20 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Observacion">Observación</label>
-                    @Html.TextAreaFor(q => q.Observacion, new { @class = "form-control", @rows = 3 })
+                    @Html.TextAreaFor(q => q.Observacion, new { @class = "form-control", @rows = 1 })
                     @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Observacion">Motivo anulación*</label>
+                    @Html.TextAreaFor(q => q.MotivoAnulacion, new { @class = "form-control", @rows = 1 })
+                    @Html.ValidationMessageFor(q => q.MotivoAnulacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
