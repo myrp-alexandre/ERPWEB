@@ -100,28 +100,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var lst_bodega = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
             ViewBag.lst_bodega = lst_bodega;
         }
-        //private void cargar_combos_consulta()
-        //{
-        //    int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-        //    var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-        //    var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
-
-        //    lst_sucursal.Add(new tb_sucursal_Info
-        //    {
-        //        IdEmpresa = IdEmpresa,
-        //        IdSucursal = 0,
-        //        Su_Descripcion = "Todos"
-        //    });
-        //    ViewBag.lst_sucursal = lst_sucursal;
-
-        //    lst_bodega.Add(new tb_bodega_Info
-        //    {
-        //        IdEmpresa = IdEmpresa,
-        //        IdSucursal = 0,
-        //        bo_Descripcion = "Todos"
-        //    });
-        //    ViewBag.lst_bodega = lst_bodega;
-        //}
 
         private void CargarCombos(int IdEmpresa)
         {
