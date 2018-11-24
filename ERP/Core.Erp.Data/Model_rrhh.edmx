@@ -1299,7 +1299,7 @@
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwRo_ActaFiniquito' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwRo_ActaFiniquito' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_ActaFiniquito">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -1352,7 +1352,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwRo_ActaFiniquito' does not have a 
           <Property Name="EstadoContrato" Type="varchar" MaxLength="10" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_combo">
           <Key>
             <PropertyRef Name="pe_cedulaRuc" />
@@ -1366,7 +1366,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_combo' does not have a
           <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_datos_generales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_datos_generales">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1477,7 +1477,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_datos_generales' does 
           <Property Name="Tiene_ingresos_compartidos" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_Novedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_Novedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_Novedad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1508,7 +1508,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_Novedad' does not have
           <Property Name="Observacion" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_Empleado_Novedades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_Empleado_Novedades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_Empleado_Novedades">
           <Key>
             <PropertyRef Name="IdEmpleado" />
@@ -1550,7 +1550,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_Empleado_Novedades' does not ha
           <Property Name="IdSucursal" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_x_ro_rubro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_ro_rubro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_ro_rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1586,7 +1586,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_x_ro_rubro' does not h
           <Property Name="es_indifinido" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_x_rubro_acumulado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_rubro_acumulado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_rubro_acumulado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1609,7 +1609,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_x_rubro_acumulado' doe
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_x_titulos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_titulos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_titulos">
           <Key>
             <PropertyRef Name="CodCatalogo" />
@@ -1643,7 +1643,35 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleado_x_titulos' does not ha
           <Property Name="estado" Type="varchar" MaxLength="1" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_EmpleadoNovedadCargaMasiva_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwro_EmpleadoNovedadCargaMasiva">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCarga" />
+            <PropertyRef Name="IdNomina" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="FechaCarga" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCarga" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdNomina" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="FechaCarga" Type="datetime" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="IdRubro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_EmpleadoNovedadCargaMasiva_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1653,6 +1681,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_EmpleadoNovedadCargaMasiva_det'
             <PropertyRef Name="IdNovedad" />
             <PropertyRef Name="IdEmpleado" />
             <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="Valor" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCarga" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -1665,9 +1694,10 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_EmpleadoNovedadCargaMasiva_det'
           <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleados_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_empleados_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleados_consulta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1689,7 +1719,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_empleados_consulta' does not ha
           <Property Name="em_fechaIngaRol" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_Historico_Liquidacion_Vacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_Historico_Liquidacion_Vacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_Historico_Liquidacion_Vacaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1726,7 +1756,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_Historico_Liquidacion_Vacacione
           <Property Name="Fecha_Retorno" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_horario_planificacion_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_horario_planificacion_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_horario_planificacion_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1768,7 +1798,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_horario_planificacion_det' does
           <Property Name="IdCalendario" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_marcaciones_x_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_marcaciones_x_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_marcaciones_x_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1812,7 +1842,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_marcaciones_x_empleado' does no
           <Property Name="ma_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_nomina_x_horas_extras_aprobadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_aprobadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_x_horas_extras_aprobadas">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1836,7 +1866,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_nomina_x_horas_extras_aprobadas
           <Property Name="Valor100" Type="float" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_nomina_x_horas_extras_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_x_horas_extras_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1886,7 +1916,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_nomina_x_horas_extras_det' does
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_participacion_utilidad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_participacion_utilidad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_participacion_utilidad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1923,7 +1953,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_participacion_utilidad' does no
           <Property Name="Estado" Type="varchar" MaxLength="1" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_participacion_utilidad_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_participacion_utilidad_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_participacion_utilidad_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1968,7 +1998,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_participacion_utilidad_empleado
           <Property Name="UtilidadCargaFamiliar" Type="float" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwRo_Prestamo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwRo_Prestamo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_Prestamo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2025,7 +2055,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwRo_Prestamo' does not have a prima
           <Property Name="descuento_men_quin" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_rol' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_rol' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rol">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2054,7 +2084,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_rol' does not have a primary ke
           <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwro_rubro_tipo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwro_rubro_tipo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rubro_tipo">
           <Key>
             <PropertyRef Name="ru_descripcion" />
@@ -2065,7 +2095,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwro_rubro_tipo' does not have a pri
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.dbo.vwRo_Solicitud_Vacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwRo_Solicitud_Vacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_Solicitud_Vacaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2118,7 +2148,7 @@ warning 6002: The table/view 'DBERP_CCG.dbo.vwRo_Solicitud_Vacaciones' does not 
           <Property Name="IdLiquidacion" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.EntidadRegulatoria.vwrdep_IngrEgr_x_Empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.EntidadRegulatoria.vwrdep_IngrEgr_x_Empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwrdep_IngrEgr_x_Empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2153,7 +2183,7 @@ warning 6002: The table/view 'DBERP_CCG.EntidadRegulatoria.vwrdep_IngrEgr_x_Empl
           <Property Name="IngresoVarios" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.web.vwro_empleado_x_Proyeccion_Gastos_Personales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.web.vwro_empleado_x_Proyeccion_Gastos_Personales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_Proyeccion_Gastos_Personales">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2173,7 +2203,7 @@ warning 6002: The table/view 'DBERP_CCG.web.vwro_empleado_x_Proyeccion_Gastos_Pe
           <Property Name="estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_CCG.web.vwro_rol_detalle_generar_op' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rol_detalle_generar_op">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2851,6 +2881,20 @@ warning 6002: The table/view 'DBERP_CCG.web.vwro_rol_detalle_generar_op' does no
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdNomina" />
               <PropertyRef Name="IdNominaTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_EmpleadoNovedadCargaMasiva_ro_rubro_tipo">
+          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
+          <End Role="ro_EmpleadoNovedadCargaMasiva" Type="Self.ro_EmpleadoNovedadCargaMasiva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_EmpleadoNovedadCargaMasiva">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3816,6 +3860,22 @@ FROM [dbo].[vwro_empleado_x_rubro_acumulado] AS [vwro_empleado_x_rubro_acumulado
 [vwro_empleado_x_titulos].[estado] AS [estado]
 FROM [dbo].[vwro_empleado_x_titulos] AS [vwro_empleado_x_titulos]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwro_EmpleadoNovedadCargaMasiva" EntityType="Self.vwro_EmpleadoNovedadCargaMasiva" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vwro_EmpleadoNovedadCargaMasiva].[IdEmpresa] AS [IdEmpresa], 
+[vwro_EmpleadoNovedadCargaMasiva].[IdCarga] AS [IdCarga], 
+[vwro_EmpleadoNovedadCargaMasiva].[IdNomina] AS [IdNomina], 
+[vwro_EmpleadoNovedadCargaMasiva].[IdNominaTipo] AS [IdNominaTipo], 
+[vwro_EmpleadoNovedadCargaMasiva].[IdSucursal] AS [IdSucursal], 
+[vwro_EmpleadoNovedadCargaMasiva].[FechaCarga] AS [FechaCarga], 
+[vwro_EmpleadoNovedadCargaMasiva].[Observacion] AS [Observacion], 
+[vwro_EmpleadoNovedadCargaMasiva].[IdRubro] AS [IdRubro], 
+[vwro_EmpleadoNovedadCargaMasiva].[IdUsuario] AS [IdUsuario], 
+[vwro_EmpleadoNovedadCargaMasiva].[Estado] AS [Estado], 
+[vwro_EmpleadoNovedadCargaMasiva].[ru_descripcion] AS [ru_descripcion], 
+[vwro_EmpleadoNovedadCargaMasiva].[Descripcion] AS [Descripcion]
+FROM [dbo].[vwro_EmpleadoNovedadCargaMasiva] AS [vwro_EmpleadoNovedadCargaMasiva]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwro_EmpleadoNovedadCargaMasiva_det" EntityType="Self.vwro_EmpleadoNovedadCargaMasiva_det" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [vwro_EmpleadoNovedadCargaMasiva_det].[IdEmpresa] AS [IdEmpresa], 
@@ -3828,7 +3888,8 @@ FROM [dbo].[vwro_empleado_x_titulos] AS [vwro_empleado_x_titulos]</DefiningQuery
 [vwro_EmpleadoNovedadCargaMasiva_det].[em_codigo] AS [em_codigo], 
 [vwro_EmpleadoNovedadCargaMasiva_det].[pe_apellido] AS [pe_apellido], 
 [vwro_EmpleadoNovedadCargaMasiva_det].[pe_nombre] AS [pe_nombre], 
-[vwro_EmpleadoNovedadCargaMasiva_det].[pe_cedulaRuc] AS [pe_cedulaRuc]
+[vwro_EmpleadoNovedadCargaMasiva_det].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+[vwro_EmpleadoNovedadCargaMasiva_det].[Valor] AS [Valor]
 FROM [dbo].[vwro_EmpleadoNovedadCargaMasiva_det] AS [vwro_EmpleadoNovedadCargaMasiva_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_empleados_consulta" EntityType="Self.vwro_empleados_consulta" store:Type="Views" store:Schema="dbo">
@@ -4336,6 +4397,10 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           </AssociationSet>
           <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" Association="Self.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui">
             <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_EmpleadoNovedadCargaMasiva" EntitySet="ro_EmpleadoNovedadCargaMasiva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_ro_rubro_tipo" Association="Self.FK_ro_EmpleadoNovedadCargaMasiva_ro_rubro_tipo">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_EmpleadoNovedadCargaMasiva" EntitySet="ro_EmpleadoNovedadCargaMasiva" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_Historico_Liquidacion_Vacaciones_Det_ro_Historico_Liquidacion_Vacaciones" Association="Self.FK_ro_Historico_Liquidacion_Vacaciones_Det_ro_Historico_Liquidacion_Vacaciones">
@@ -5378,6 +5443,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <NavigationProperty Name="ro_empleado_x_ro_rubro" Relationship="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_empleado_x_ro_rubro" />
           <NavigationProperty Name="ro_empleado_novedad_det" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_empleado_novedad_det" />
           <NavigationProperty Name="ro_rol_detalle" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_rol_detalle" />
+          <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_EmpleadoNovedadCargaMasiva" />
         </EntityType>
         <EntityType Name="ro_rubros_calculados">
           <Key>
@@ -6943,7 +7009,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           </FunctionImport>
           <EntitySet Name="ro_EmpleadoNovedadCargaMasiva" EntityType="Model_rrhh.ro_EmpleadoNovedadCargaMasiva" />
           <EntitySet Name="ro_EmpleadoNovedadCargaMasiva_det" EntityType="Model_rrhh.ro_EmpleadoNovedadCargaMasiva_det" />
-          <EntitySet Name="vwro_EmpleadoNovedadCargaMasiva_det" EntityType="Model_rrhh.vwro_EmpleadoNovedadCargaMasiva_det" />
           <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_EmpleadoNovedadCargaMasiva_det" EntitySet="ro_EmpleadoNovedadCargaMasiva_det" />
@@ -6958,6 +7023,12 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           </AssociationSet>
           <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui">
             <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_EmpleadoNovedadCargaMasiva" EntitySet="ro_EmpleadoNovedadCargaMasiva" />
+          </AssociationSet>
+          <EntitySet Name="vwro_EmpleadoNovedadCargaMasiva" EntityType="Model_rrhh.vwro_EmpleadoNovedadCargaMasiva" />
+          <EntitySet Name="vwro_EmpleadoNovedadCargaMasiva_det" EntityType="Model_rrhh.vwro_EmpleadoNovedadCargaMasiva_det" />
+          <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_ro_rubro_tipo" Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_rubro_tipo">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_EmpleadoNovedadCargaMasiva" EntitySet="ro_EmpleadoNovedadCargaMasiva" />
           </AssociationSet>
           </EntityContainer>
@@ -8536,6 +8607,7 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva_det" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_EmpleadoNovedadCargaMasiva" FromRole="ro_EmpleadoNovedadCargaMasiva" ToRole="ro_EmpleadoNovedadCargaMasiva_det" />
           <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" FromRole="ro_EmpleadoNovedadCargaMasiva" ToRole="ro_Nomina_Tipoliqui" />
+          <NavigationProperty Name="ro_rubro_tipo" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_rubro_tipo" FromRole="ro_EmpleadoNovedadCargaMasiva" ToRole="ro_rubro_tipo" />
         </EntityType>
         <EntityType Name="ro_EmpleadoNovedadCargaMasiva_det">
           <Key>
@@ -8553,28 +8625,6 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" FromRole="ro_EmpleadoNovedadCargaMasiva_det" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_empleado_Novedad" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" FromRole="ro_EmpleadoNovedadCargaMasiva_det" ToRole="ro_empleado_Novedad" />
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_EmpleadoNovedadCargaMasiva" FromRole="ro_EmpleadoNovedadCargaMasiva_det" ToRole="ro_EmpleadoNovedadCargaMasiva" />
-        </EntityType>
-        <EntityType Name="vwro_EmpleadoNovedadCargaMasiva_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCarga" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdEmpresa_nov" />
-            <PropertyRef Name="IdNovedad" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="pe_cedulaRuc" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
-          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado">
           <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
@@ -8631,6 +8681,70 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdNomina" />
               <PropertyRef Name="IdNominaTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwro_EmpleadoNovedadCargaMasiva">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCarga" />
+            <PropertyRef Name="IdNomina" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="FechaCarga" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNomina" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="FechaCarga" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwro_EmpleadoNovedadCargaMasiva_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCarga" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdEmpresa_nov" />
+            <PropertyRef Name="IdNovedad" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="Valor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
+          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ro_EmpleadoNovedadCargaMasiva_ro_rubro_tipo">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_EmpleadoNovedadCargaMasiva" Role="ro_EmpleadoNovedadCargaMasiva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_EmpleadoNovedadCargaMasiva">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10520,9 +10634,28 @@ FROM [web].[vwro_rol_detalle_generar_op] AS [vwro_rol_detalle_generar_op]</Defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vwro_EmpleadoNovedadCargaMasiva">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_EmpleadoNovedadCargaMasiva">
+              <MappingFragment StoreEntitySet="vwro_EmpleadoNovedadCargaMasiva">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="FechaCarga" ColumnName="FechaCarga" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
+                <ScalarProperty Name="IdCarga" ColumnName="IdCarga" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vwro_EmpleadoNovedadCargaMasiva_det">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_EmpleadoNovedadCargaMasiva_det">
               <MappingFragment StoreEntitySet="vwro_EmpleadoNovedadCargaMasiva_det">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
                 <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />

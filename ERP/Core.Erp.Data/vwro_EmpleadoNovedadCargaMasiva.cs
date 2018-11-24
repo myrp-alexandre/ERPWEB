@@ -12,13 +12,8 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ro_EmpleadoNovedadCargaMasiva
+    public partial class vwro_EmpleadoNovedadCargaMasiva
     {
-        public ro_EmpleadoNovedadCargaMasiva()
-        {
-            this.ro_EmpleadoNovedadCargaMasiva_det = new HashSet<ro_EmpleadoNovedadCargaMasiva_det>();
-        }
-    
         public int IdEmpresa { get; set; }
         public decimal IdCarga { get; set; }
         public int IdNomina { get; set; }
@@ -29,13 +24,7 @@ namespace Core.Erp.Data
         public string IdRubro { get; set; }
         public string IdUsuario { get; set; }
         public bool Estado { get; set; }
-        public System.DateTime Fecha_Transac { get; set; }
-        public string IdUsuarioUltAnu { get; set; }
-        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string MotiAnula { get; set; }
-    
-        public virtual ICollection<ro_EmpleadoNovedadCargaMasiva_det> ro_EmpleadoNovedadCargaMasiva_det { get; set; }
-        public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
-        public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
+        public string ru_descripcion { get; set; }
+        public string Descripcion { get; set; }
     }
 }

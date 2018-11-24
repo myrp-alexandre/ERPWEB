@@ -25,5 +25,6 @@ namespace Core.Erp.Data
         public string pe_apellido { get; set; }
         public string pe_nombre { get; set; }
         public string pe_cedulaRuc { get; set; }
+        public double Valor { get; set; }
     }
 }
