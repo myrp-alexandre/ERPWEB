@@ -419,6 +419,7 @@
     <Compile Include="Areas\RRHH\Controllers\HorarioController.cs" />
     <Compile Include="Areas\RRHH\Controllers\HorarioPlanificacionController.cs" />
     <Compile Include="Areas\RRHH\Controllers\HorasExtrasController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\ImportacionMarcacionesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ImportacionNovedadesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\LiquidacionVacacionesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\MarcacionEmpleadoController.cs" />
@@ -9360,6 +9361,8 @@
     <Content Include="Areas\Banco\Views\DepositoBanco\_CmbFlujo_Deposito.cshtml" />
     <Content Include="Areas\Banco\Views\ChequeBanco\_CmbFlujo_Cheque.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_012.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionMarcaciones\_GridViewPartial_importacion_marcaciones_det.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionMarcaciones\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
