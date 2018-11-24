@@ -25,6 +25,7 @@ namespace Core.Erp.Data.RRHH
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdCarga = q.IdCarga,
+                                 IdEmpleado=q.IdEmpleado,
                                  IdEmpresa_nov = q.IdEmpresa_nov,
                                  Observacion = q.Observacion,
                                  Secuancia = q.Secuencia,
