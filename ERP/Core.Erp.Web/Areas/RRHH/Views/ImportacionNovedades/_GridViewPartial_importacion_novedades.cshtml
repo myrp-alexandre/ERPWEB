@@ -62,10 +62,9 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "EstadoBool")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdCarga = DataBinder.Eval(tc.DataItem, "IdCarga") }) + "&nbsp;" +
                         Html.ActionLink("Anular", "Anular", new { IdCarga = DataBinder.Eval(tc.DataItem, "IdCarga") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );

@@ -31,7 +31,7 @@ namespace Core.Erp.Data.RRHH
                                      FechaCarga = q.FechaCarga,
                                      Observacion = q.Observacion,
                                      IdRubro = q.IdRubro,
-                                     Estado = q.Estado
+                                     EstadoBool = q.Estado
                                  }
                                ).ToList();
                    
@@ -69,6 +69,7 @@ namespace Core.Erp.Data.RRHH
                         IdRubro = info.IdRubro,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now,
+                        Estado=true
                     };
                     Contex.ro_EmpleadoNovedadCargaMasiva.Add(entity);
 

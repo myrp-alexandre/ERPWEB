@@ -31,7 +31,7 @@ namespace Core.Erp.Info.RRHH
         public string Descripcion { get; set; }
         public string DescripcionProcesoNomina { get; set; }
         public string ru_descripcion { get; set; }
-
+        public bool EstadoBool { get; set; }
 
         public List<ro_EmpleadoNovedadCargaMasiva_det_Info> detalle { get; set; }
     }
