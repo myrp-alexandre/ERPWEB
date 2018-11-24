@@ -1968,6 +1968,9 @@
     <Compile Include="vwRo_ActaFiniquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwro_EmpleadoNovedadCargaMasiva.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwro_EmpleadoNovedadCargaMasiva_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>

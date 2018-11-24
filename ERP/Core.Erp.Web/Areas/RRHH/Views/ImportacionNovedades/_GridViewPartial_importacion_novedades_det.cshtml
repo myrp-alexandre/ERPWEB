@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_importacion_novedades_det";
-        settings.CallbackRouteValues = new { Controller = "ImportacionNovedades", Action = "GridViewPartial_importacion_novedades_det", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
+        settings.CallbackRouteValues = new { Controller = "ImportacionNovedades", Action = "GridViewPartial_importacion_novedades_det" };
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "Secualcial";

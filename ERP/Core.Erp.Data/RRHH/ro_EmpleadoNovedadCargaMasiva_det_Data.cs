@@ -30,9 +30,10 @@ namespace Core.Erp.Data.RRHH
                                  Secuancia = q.Secuencia,
                                  IdNovedad=q.IdNovedad,
                                  pe_cedulaRuc=q.pe_cedulaRuc,
-                                 pe_apellido=q.pe_apellido,
                                  pe_nombre=q.pe_nombre,
-                                 em_codigo=q.em_codigo
+                                 em_codigo=q.em_codigo,
+                                 Valor=q.Valor,
+                                 pe_apellido=q.pe_apellido+" "+q.pe_nombre
                                   
                              }).ToList();
 

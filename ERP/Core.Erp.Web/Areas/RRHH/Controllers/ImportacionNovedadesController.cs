@@ -61,7 +61,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_importacion_novedades_det(string path)
+        public ActionResult GridViewPartial_importacion_novedades_det()
         {
             ro_EmpleadoNovedadCargaMasiva_Info modelReturn = new ro_EmpleadoNovedadCargaMasiva_Info();
           
@@ -116,9 +116,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdEmpleado, decimal IdCarga)
+        public ActionResult Anular(decimal IdCarga)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ro_EmpleadoNovedadCargaMasiva_Info model = bus_novedad.get_info(IdEmpresa,  IdCarga);
             if (model == null)
                 return RedirectToAction("Index");
@@ -132,8 +132,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             model.detalle = detalle.get_list();
 
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             model.Fecha_UltAnu = DateTime.Now;
             if (!bus_novedad.AnularDB(model))
             {
