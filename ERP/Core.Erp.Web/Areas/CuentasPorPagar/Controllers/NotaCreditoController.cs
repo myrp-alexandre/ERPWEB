@@ -166,16 +166,17 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
             }
             string mensaje = bus_orden_giro.validar(model);
-            if (!validar(model, ref mensaje))
-            {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
-                ViewBag.mensaje = mensaje;
-                return View(model);
-            }
+
             if (mensaje != "")
             {
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
                 cargar_combos_detalle();
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
+            if (!validar(model, ref mensaje))
+            {
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
