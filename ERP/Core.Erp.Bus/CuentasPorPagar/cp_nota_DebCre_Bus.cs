@@ -224,6 +224,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
             try
             {
                 string mensaje = "";
+                if (mensaje != "")
+                {
+                    return mensaje;
+
+                }
                 if (!bus_periodo.ValidarFechaTransaccion(info.IdEmpresa, info.cn_fecha, cl_enumeradores.eModulo.CONTA, ref mensaje))
                 {
                     return mensaje;
@@ -234,7 +239,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     return mensaje;
                 }
 
+
                 
+
                 if (info.IdSucursal == 0 )
                 {
                     mensaje = "Selecciona la sucursal";

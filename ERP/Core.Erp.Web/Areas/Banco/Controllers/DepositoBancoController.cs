@@ -29,6 +29,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ct_cbtecble_det_Bus bus_det_ct = new ct_cbtecble_det_Bus();
         ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Bus bus_det = new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Bus();
         ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List List_ing = new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List();
+
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         string mensaje = string.Empty;        
         #endregion
 
@@ -106,6 +108,16 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             i_validar.lst_det_ct = List_ct.get_list(i_validar.IdTransaccionSession);
             i_validar.lst_det_ing = List_ing.get_list();
+
+
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.BANCO, ref msg))
+            {
+                return false;
+            }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.CONTA, ref msg))
+            {
+                return false;
+            }
             if (i_validar.lst_det_ing.Count == 0)
             {
                 msg = "No ha seleccionado ingresos a ser depositados";
