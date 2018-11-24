@@ -144,7 +144,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_comrobante = new ct_cbtecble_Info();
             model.DebCre = "C";
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List_nc.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
             if (model.info_comrobante.lst_ct_cbtecble_det==null)
             {
                 ViewBag.mensaje = "Falta diario contable";
@@ -165,6 +164,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cargar_combos_detalle();
                 return View(model);
             }
+
+
+            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             string mensaje = bus_orden_giro.validar(model);
 
             if (mensaje != "")
@@ -174,14 +177,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            if (!validar(model, ref mensaje))
-            {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
-                ViewBag.mensaje = mensaje;
-                return View(model);
-            }
-            model.IdUsuario = Session["IdUsuario"].ToString();
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
             if (!bus_orden_giro.guardarDB(model))
             {
@@ -253,15 +248,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-
-            if (!validar(model, ref mensaje))
-            {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
-                cargar_combos_detalle();
-                ViewBag.mensaje = mensaje;
-                return View(model);
-            }
-
             model.IdUsuario = Session["IdUsuario"].ToString();
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
@@ -446,19 +432,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
         }
-
-        private bool validar(cp_nota_DebCre_Info i_validar, ref string msg)
-        {
-            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cn_fecha, cl_enumeradores.eModulo.CXP, ref msg))
-            {
-                return false;
-            }
-            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cn_fecha, cl_enumeradores.eModulo.CONTA, ref msg))
-            {
-                return false;
-            }
-            return true;
-        }
+        
 
         #endregion
         #region Funcion diario contable

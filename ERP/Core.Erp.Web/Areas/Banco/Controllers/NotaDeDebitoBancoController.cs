@@ -31,6 +31,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ct_cbtecble_det_List List_ct = new ct_cbtecble_det_List();
         ct_cbtecble_det_Bus bus_det_ct = new ct_cbtecble_det_Bus();
         string mensaje = string.Empty;
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -90,7 +91,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             i_validar.lst_det_canc_op = List_op.get_list();
             i_validar.lst_det_ct = List_ct.get_list(i_validar.IdTransaccionSession);
-
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.BANCO, ref msg))
+            {
+                return false;
+            }
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.CONTA, ref msg))
+            {
+                return false;
+            }
             if (i_validar.lst_det_ct.Count == 0)
             {
                 msg = "El detalle del diario se encuentra vacío";
