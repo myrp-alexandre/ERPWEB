@@ -20,7 +20,7 @@ namespace Core.Erp.Data.RRHH
                 List<ro_EmpleadoNovedadCargaMasiva_Info> lista;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                        lista = (from q in Context.ro_EmpleadoNovedadCargaMasiva
+                        lista = (from q in Context.vwro_EmpleadoNovedadCargaMasiva
                                  where q.IdEmpresa == IdEmpresa
                                  && q.FechaCarga >= FechaInicio
                                  && q.FechaCarga <= FechaFin
@@ -31,7 +31,11 @@ namespace Core.Erp.Data.RRHH
                                      FechaCarga = q.FechaCarga,
                                      Observacion = q.Observacion,
                                      IdRubro = q.IdRubro,
-                                     EstadoBool = q.Estado
+                                     EstadoBool = q.Estado,
+                                     Descripcion=q.Descripcion,
+                                     DescripcionProcesoNomina=q.DescripcionProcesoNomina,
+                                     ru_descripcion=q.ru_descripcion
+
                                  }
                                ).ToList();
                    
@@ -134,31 +138,42 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
-                using (Entities_rrhh contex=new Entities_rrhh())
+                ro_EmpleadoNovedadCargaMasiva_det_Data oda_det = new ro_EmpleadoNovedadCargaMasiva_det_Data();
+                var lista = oda_det.get_list(info.IdEmpresa, info.IdCarga);
+                using (Entities_rrhh contex = new Entities_rrhh())
                 {
+                    foreach (var item in lista)
+                    {
+                        ro_empleado_Novedad entity_det = contex.ro_empleado_Novedad.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == item.IdEmpleado && q.IdNovedad == item.IdNovedad);
+                        if (entity_det != null)
+                        {
+                            //string sql = "update ro_empleado_Novedad set Estado='I' where IdEmpresa='" + info.IdEmpresa + "' and IdEmpleado='" + item.IdEmpleado + "' and IdNovedad='" + item.IdNovedad + "'";
+                            //contex.Database.ExecuteSqlCommand(sql);
+                            entity_det.Estado = "I";
+                            entity_det.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                            entity_det.Fecha_UltAnu = DateTime.Now;
+                            contex.SaveChanges();
 
+                        }
+
+                    }
+
+                }
+
+                using (Entities_rrhh contex = new Entities_rrhh())
+                {
                     ro_EmpleadoNovedadCargaMasiva entity = contex.ro_EmpleadoNovedadCargaMasiva.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdCarga == info.IdCarga);
 
                     if (entity == null)
                         return false;
-                    entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                    entity.Fecha_UltAnu = info.Fecha_UltAnu=DateTime.Now;
                     entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     entity.Estado = false;
-                    var lista = contex.ro_EmpleadoNovedadCargaMasiva_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCarga == info.IdCarga);
-                    foreach (var item in lista)
-                    {
-                        ro_empleado_Novedad entity_det = contex.ro_empleado_Novedad.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpresa&& q.IdNovedad==item.IdNovedad);
-                        entity_det.Estado = "I";
-                        entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
-                        entity_det.Fecha_UltAnu = DateTime.Now;
-                        contex.SaveChanges();
-
-                    }
-                    contex.SaveChanges  ();
+                    contex.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
@@ -182,7 +197,11 @@ namespace Core.Erp.Data.RRHH
                         IdRubro = Entity.IdRubro,
                         FechaCarga = Entity.FechaCarga,
                         Estado = Entity.Estado,
-                        Observacion = Entity.Observacion
+                        Observacion = Entity.Observacion,
+                        IdNomina=Entity.IdNomina,
+                        IdNominaTipo=Entity.IdNominaTipo,
+                        IdSucursal=Entity.IdSucursal,
+
                     };
                 }
 

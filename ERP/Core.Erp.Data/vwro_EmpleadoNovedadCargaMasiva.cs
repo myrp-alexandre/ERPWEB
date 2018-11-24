@@ -26,5 +26,6 @@ namespace Core.Erp.Data
         public bool Estado { get; set; }
         public string ru_descripcion { get; set; }
         public string Descripcion { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
     }
 }
