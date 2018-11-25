@@ -38,7 +38,7 @@ namespace Core.Erp.Data.Reportes.ActivoFijo
                 }
                 return Lista;
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
                 throw;

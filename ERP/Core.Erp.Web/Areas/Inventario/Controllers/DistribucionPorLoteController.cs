@@ -27,7 +27,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         List<in_Producto_Info> list_productos = new List<in_Producto_Info>();
         List<in_Ing_Egr_Inven_distribucion_Info> lst_x_distribuir = new List<in_Ing_Egr_Inven_distribucion_Info>();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
-        string NombreProducto = "";
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
 
         #endregion

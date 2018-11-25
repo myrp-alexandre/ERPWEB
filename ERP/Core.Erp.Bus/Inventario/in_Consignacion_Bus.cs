@@ -56,7 +56,7 @@ namespace Core.Erp.Bus.Inventario
             {
                 return odata.GuardarBD(info);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 throw;

@@ -685,18 +685,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         string Variable = "in_producto_x_tb_bodega_Info";
         public List<in_Producto_Info> get_list()
         {
-            if (HttpContext.Current.Session["in_Producto_Info"] == null)
+            if (HttpContext.Current.Session[Variable] == null)
             {
                 List<in_Producto_Info> list = new List<in_Producto_Info>();
 
-                HttpContext.Current.Session["in_Producto_Info"] = list;
+                HttpContext.Current.Session[Variable] = list;
             }
-            return (List<in_Producto_Info>)HttpContext.Current.Session["in_Producto_Info"];
+            return (List<in_Producto_Info>)HttpContext.Current.Session[Variable];
         }
 
         public void set_list(List<in_Producto_Info> list)
         {
-            HttpContext.Current.Session["in_Producto_Info"] = list;
+            HttpContext.Current.Session[Variable] = list;
         }
 
         public void AddRow(in_Producto_Info info_det)

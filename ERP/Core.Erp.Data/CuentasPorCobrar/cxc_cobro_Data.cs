@@ -223,7 +223,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         return false;
                     if (tipo_cobro.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.DIARIO.ToString())
                     {
-                        IdTipoCbte = param_cxc.pa_IdTipoCbteCble_CxC == null ? 0 : Convert.ToInt32(param_cxc.pa_IdTipoCbteCble_CxC);
+                        IdTipoCbte = param_cxc.pa_IdTipoCbteCble_CxC;
                     }
                     else
                         if (tipo_cobro.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.MOVI_CAJA.ToString())
@@ -232,7 +232,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         if (param_caja == null)
                             return false;
                         IdTipoCbte = param_caja.IdTipoCbteCble_MoviCaja_Ing;
-                        IdTipoMoviCaja = param_cxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente == null ? 0 : Convert.ToInt32(param_cxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente);
+                        IdTipoMoviCaja = param_cxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente;
                     }
 
                     if (IdTipoCbte == 0)
@@ -556,7 +556,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         return false;
                     if (tipo_cobro.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.DIARIO.ToString())
                     {
-                        IdTipoCbte = param_cxc.pa_IdTipoCbteCble_CxC == null ? 0 : Convert.ToInt32(param_cxc.pa_IdTipoCbteCble_CxC);
+                        IdTipoCbte = param_cxc.pa_IdTipoCbteCble_CxC;
                     }
                     else
                         if (tipo_cobro.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.MOVI_CAJA.ToString())
@@ -565,7 +565,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         if (param_caja == null)
                             return false;
                         IdTipoCbte = param_caja.IdTipoCbteCble_MoviCaja_Ing;
-                        IdTipoMoviCaja = param_cxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente == null ? 0 : Convert.ToInt32(param_cxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente);
+                        IdTipoMoviCaja = param_cxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente;
                     }
 
                     if (IdTipoCbte == 0)

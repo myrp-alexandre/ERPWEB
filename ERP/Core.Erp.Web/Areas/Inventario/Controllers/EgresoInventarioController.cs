@@ -95,7 +95,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 IdEmpresa = IdEmpresa,
                 cm_fecha = DateTime.Now,
                 signo = "-",
-                IdMovi_inven_tipo = i_param.P_IdMovi_inven_tipo_default_egr == null ? 0 : Convert.ToInt32(i_param.P_IdMovi_inven_tipo_default_egr)
+                IdMovi_inven_tipo = i_param.P_IdMovi_inven_tipo_default_egr
             };
             List_in_Ing_Egr_Inven_det.set_list(new List<in_Ing_Egr_Inven_det_Info>(), model.IdTransaccionSession);
             cargar_combos(IdEmpresa);

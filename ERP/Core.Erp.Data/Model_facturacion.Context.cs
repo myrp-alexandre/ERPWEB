@@ -75,5 +75,6 @@ namespace Core.Erp.Data
         public DbSet<fa_CambioProductoDet> fa_CambioProductoDet { get; set; }
         public DbSet<vwfa_CambioProductoDet_facturas> vwfa_CambioProductoDet_facturas { get; set; }
         public DbSet<vwfa_CambioProductoDet> vwfa_CambioProductoDet { get; set; }
+        public DbSet<fa_factura_det_x_in_Ing_Egr_Inven_det> fa_factura_det_x_in_Ing_Egr_Inven_det { get; set; }
     }
 }

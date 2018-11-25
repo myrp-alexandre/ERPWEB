@@ -138,7 +138,7 @@ namespace Core.Erp.Bus.Importacion
                     {
                         foreach (var item in model.lst_detalle)
                         {
-                            if (item.od_costo_total == 0 | item.od_costo_total == null)
+                            if (item.od_costo_total == 0)
                                 mensaje = "Faltan costo en uno de los registros";
                         }
                     }

@@ -122,7 +122,7 @@ namespace Core.Erp.Data.General
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 throw;

@@ -492,6 +492,9 @@
     <Compile Include="fa_factura_det.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="fa_factura_det_x_in_Ing_Egr_Inven_det.cs">
+      <DependentUpon>Model_facturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="fa_factura_x_ct_cbtecble.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>

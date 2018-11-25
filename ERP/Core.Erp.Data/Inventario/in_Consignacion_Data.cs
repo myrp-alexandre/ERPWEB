@@ -212,8 +212,8 @@ namespace Core.Erp.Data.Inventario
                             IdProducto = item.IdProducto,
                             dm_cantidad = item.Cantidad,
                             dm_cantidad_sinConversion = item.Cantidad,
-                            mv_costo = 0,
-                            mv_costo_sinConversion = 0,
+                            mv_costo = item.Costo,
+                            mv_costo_sinConversion = item.Costo,
                             IdUnidadMedida = item.IdUnidadMedida,
                             IdUnidadMedida_sinConversion = item.IdUnidadMedida
                         });
@@ -294,7 +294,7 @@ namespace Core.Erp.Data.Inventario
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }

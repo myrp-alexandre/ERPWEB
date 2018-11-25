@@ -226,7 +226,7 @@ namespace Core.Erp.Data.Facturacion
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
                 throw;

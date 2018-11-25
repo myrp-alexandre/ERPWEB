@@ -40,7 +40,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 throw;
             }

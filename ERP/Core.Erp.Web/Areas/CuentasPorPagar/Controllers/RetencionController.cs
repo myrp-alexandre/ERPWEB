@@ -28,7 +28,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         List<cp_codigo_SRI_Info> lst_codigo_retencion = new List<cp_codigo_SRI_Info>();
         cp_codigo_SRI_Bus bus_codigo_ret = new cp_codigo_SRI_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
-        int IdEmpresa = 0;
         #endregion
         #region vistas
         public ActionResult Index()

@@ -331,8 +331,7 @@ namespace Core.Erp.Data.Facturacion
 
                 #region Inventario
                 var parametro = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                if (parametro.IdMovi_inven_tipo_Factura != null)
-                {
+                
                     
                     in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura),contacto == null ? "" : contacto.Nombres);
                     if(data_inv.guardarDB(movimiento, "-"))
@@ -351,12 +350,11 @@ namespace Core.Erp.Data.Facturacion
                         });
                         db_f.SaveChanges();
                     }
-                }
                 #endregion
 
                 #region Contabilidad
                 var cliente = db_f.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
-                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito) && parametro.IdTipoCbteCble_Factura != null)
+                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito))
                 {
                     ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, parametro.pa_IdCtaCble_descuento, contacto == null ? "" : contacto.Nombres);
                     if(diario != null)
@@ -380,7 +378,7 @@ namespace Core.Erp.Data.Facturacion
                 db_f.Dispose();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -768,8 +766,7 @@ namespace Core.Erp.Data.Facturacion
                                 
                 #region Inventario
                 var parametro = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                if (parametro.IdMovi_inven_tipo_Factura != null)
-                {
+                
                     var egr = db_f.fa_factura_x_in_Ing_Egr_Inven.Where(q => q.IdEmpresa_fa == info.IdEmpresa && q.IdSucursal_fa == info.IdSucursal && q.IdBodega_fa == info.IdBodega && q.IdCbteVta_fa == info.IdCbteVta).FirstOrDefault();
                     if (egr == null)
                     {
@@ -804,12 +801,11 @@ namespace Core.Erp.Data.Facturacion
                             data_inv.modificarDB(movimiento);
                         }
                     }
-                }
                 #endregion
 
                 #region Contabilidad
                 var cliente = db_f.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
-                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito) && parametro.IdTipoCbteCble_Factura != null)
+                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito))
                 {
                     var conta = db_f.fa_factura_x_ct_cbtecble.Where(q => q.vt_IdEmpresa == info.IdEmpresa && q.vt_IdSucursal == info.IdSucursal && q.vt_IdBodega == info.IdBodega && q.vt_IdCbteVta == info.IdCbteVta).FirstOrDefault();
                     if (conta == null)
@@ -995,7 +991,7 @@ namespace Core.Erp.Data.Facturacion
                 }
                 var parametro = db.fa_parametro.Where(q => q.IdEmpresa == factura.IdEmpresa).FirstOrDefault();
                 var cliente = db.fa_cliente.Where(q => q.IdEmpresa == factura.IdEmpresa && q.IdCliente == factura.IdCliente).FirstOrDefault();
-                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito) && parametro.IdTipoCbteCble_Factura != null)
+                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito))
                 {
                     var conta = db.fa_factura_x_ct_cbtecble.Where(q => q.vt_IdEmpresa == factura.IdEmpresa && q.vt_IdSucursal == factura.IdSucursal && q.vt_IdBodega == factura.IdBodega && q.vt_IdCbteVta == factura.IdCbteVta).FirstOrDefault();
                     if (conta == null)

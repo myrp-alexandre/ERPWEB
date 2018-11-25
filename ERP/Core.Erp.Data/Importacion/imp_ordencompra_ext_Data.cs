@@ -235,7 +235,7 @@ namespace Core.Erp.Data.Importacion
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
                 throw;

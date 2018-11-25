@@ -549,7 +549,7 @@ namespace Core.Erp.Data.Inventario
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 throw;
             }
@@ -657,7 +657,7 @@ namespace Core.Erp.Data.Inventario
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }

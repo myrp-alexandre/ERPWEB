@@ -83,7 +83,7 @@ namespace Core.Erp.Data.RRHH
 
                 return Lista;
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
                 throw;
