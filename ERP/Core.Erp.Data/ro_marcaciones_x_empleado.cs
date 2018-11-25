@@ -20,17 +20,9 @@ namespace Core.Erp.Data
         public decimal IdEmpleado { get; set; }
         public string IdTipoMarcaciones { get; set; }
         public Nullable<int> IdNomina { get; set; }
-        public Nullable<int> IdPeriodo { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
         public Nullable<System.TimeSpan> es_Hora { get; set; }
         public System.DateTime es_fechaRegistro { get; set; }
-        public Nullable<int> es_anio { get; set; }
-        public Nullable<int> es_mes { get; set; }
-        public Nullable<int> es_semana { get; set; }
-        public Nullable<int> es_dia { get; set; }
-        public string es_sdia { get; set; }
-        public Nullable<int> es_idDia { get; set; }
-        public string es_EsActualizacion { get; set; }
-        public string IdTipoMarcaciones_Biometrico { get; set; }
         public string Observacion { get; set; }
         public string IdUsuario { get; set; }
         public string Estado { get; set; }
@@ -43,8 +35,8 @@ namespace Core.Erp.Data
         public string nom_pc { get; set; }
         public string Motivo_Anu { get; set; }
     
-        public virtual ro_catalogo ro_catalogo { get; set; }
-        public virtual ro_marcaciones_tipo ro_marcaciones_tipo { get; set; }
         public virtual ro_empleado ro_empleado { get; set; }
+        public virtual ro_marcaciones_tipo ro_marcaciones_tipo { get; set; }
+        public virtual ro_Nomina_Tipo ro_Nomina_Tipo { get; set; }
     }
 }

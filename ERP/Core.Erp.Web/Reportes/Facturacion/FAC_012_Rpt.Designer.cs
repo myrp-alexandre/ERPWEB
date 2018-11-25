@@ -86,8 +86,8 @@
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrTable6 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow10 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell25 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell27 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell25 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell29 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell30 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell31 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -465,6 +465,7 @@
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.Text = "CAMBIO DE PRODUCTOS";
+            this.xrTableCell1.TextTrimming = System.Drawing.StringTrimming.Word;
             this.xrTableCell1.Weight = 2D;
             // 
             // xrTableRow7
@@ -483,6 +484,7 @@
             this.xrTableCell18.Name = "xrTableCell18";
             this.xrTableCell18.StylePriority.UseFont = false;
             this.xrTableCell18.StylePriority.UseForeColor = false;
+            this.xrTableCell18.TextTrimming = System.Drawing.StringTrimming.Word;
             this.xrTableCell18.Weight = 2D;
             // 
             // PageFooter
@@ -609,18 +611,18 @@
             this.xrTableRow10.Name = "xrTableRow10";
             this.xrTableRow10.Weight = 1D;
             // 
+            // xrTableCell27
+            // 
+            this.xrTableCell27.Name = "xrTableCell27";
+            this.xrTableCell27.Text = "Cliente:";
+            this.xrTableCell27.Weight = 1D;
+            // 
             // xrTableCell25
             // 
             this.xrTableCell25.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NombreCliente]")});
             this.xrTableCell25.Name = "xrTableCell25";
             this.xrTableCell25.Weight = 2.5D;
-            // 
-            // xrTableCell27
-            // 
-            this.xrTableCell27.Name = "xrTableCell27";
-            this.xrTableCell27.Text = "Cliente:";
-            this.xrTableCell27.Weight = 1D;
             // 
             // xrTableCell29
             // 

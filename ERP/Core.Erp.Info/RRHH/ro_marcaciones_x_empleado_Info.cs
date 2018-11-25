@@ -9,6 +9,7 @@ namespace Core.Erp.Info.RRHH
 {
   public  class ro_marcaciones_x_empleado_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdRegistro { get; set; }
         public int IdCalendadrio { get; set; }
@@ -22,13 +23,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<System.TimeSpan> es_Hora { get; set; }
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public System.DateTime es_fechaRegistro { get; set; }
-        public Nullable<int> es_anio { get; set; }
-        public Nullable<int> es_mes { get; set; }
-        public Nullable<int> es_semana { get; set; }
-        public Nullable<int> es_dia { get; set; }
-        public string es_sdia { get; set; }
-        public Nullable<int> es_idDia { get; set; }
-        public string es_EsActualizacion { get; set; }
+
         public string IdTipoMarcaciones_Biometrico { get; set; }
         public string Observacion { get; set; }
         public string IdUsuario { get; set; }
@@ -42,7 +37,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string nom_pc { get; set; }
         public string Motivo_Anu { get; set; }
-
+        public int IdSucursal { get; set; }
         public string ca_descripcion { get; set; }
         public string pe_NombreCompleato { get; set; }
         public string pe_cedula { get; set; }

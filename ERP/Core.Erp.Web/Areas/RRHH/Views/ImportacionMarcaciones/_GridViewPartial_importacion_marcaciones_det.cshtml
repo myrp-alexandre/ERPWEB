@@ -5,7 +5,7 @@
         settings.CallbackRouteValues = new { Controller = "ImportacionMarcaciones", Action = "GridViewPartial_importacion_marcaciones_det" };
 
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdMarcacion";
+        settings.KeyFieldName = "IdRegistro";
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -44,8 +44,32 @@
         settings.Columns.Add("IdRegistro","ID").Width=Unit.Percentage(5);
 
 
-        settings.Columns.Add("pe_cedulaRuc","Cédula").Width = Unit.Percentage(15);
-        settings.Columns.Add("pe_apellido","Empleado").Width = Unit.Percentage(50);
+        settings.Columns.Add("pe_cedula", "Cédula").Width = Unit.Percentage(10);
+        settings.Columns.Add("pe_NombreCompleato", "Nombres").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdTipoMarcaciones", "Tipo marcación").Width = Unit.Percentage(15);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "es_fechaRegistro";
+            column.Caption = "Fecha";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add("es_Hora", "Hora").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor");
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Count, "Secuencia");
 

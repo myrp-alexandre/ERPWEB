@@ -20,14 +20,6 @@ namespace Core.Erp.Data
         public string IdTipoMarcaciones { get; set; }
         public Nullable<System.TimeSpan> es_Hora { get; set; }
         public System.DateTime es_fechaRegistro { get; set; }
-        public Nullable<int> es_anio { get; set; }
-        public Nullable<int> es_mes { get; set; }
-        public Nullable<int> es_semana { get; set; }
-        public Nullable<int> es_dia { get; set; }
-        public string es_sdia { get; set; }
-        public Nullable<int> es_idDia { get; set; }
-        public string es_EsActualizacion { get; set; }
-        public string IdTipoMarcaciones_Biometrico { get; set; }
         public string nom_compl_empleado { get; set; }
         public string Motivo_Anu { get; set; }
         public string Estado { get; set; }
