@@ -86,7 +86,18 @@ namespace Core.Erp.Data.General
                     select new tb_sucursal_Info
                     {
                         IdSucursal = q.IdSucursal,
-                        Su_Descripcion = q.Su_Descripcion
+                        Su_Descripcion = q.Su_Descripcion,
+                        codigo = q.codigo,
+                        Estado = q.Estado,
+                        Es_establecimiento = q.Es_establecimiento,
+                        IdEmpresa = q.IdEmpresa,
+                        Su_CodigoEstablecimiento = q.Su_CodigoEstablecimiento,
+                        Su_Direccion = q.Su_Direccion,
+                        Su_JefeSucursal = q.Su_JefeSucursal,
+                        Su_Ubicacion = q.Su_Ubicacion,
+                        Su_Ruc = q.Su_Ruc,
+                        Su_Telefonos = q.Su_Telefonos,
+                        
                     }).FirstOrDefault();
 
             context_g.Dispose();
