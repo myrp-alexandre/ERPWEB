@@ -49,6 +49,19 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public bool guardarDB(List<ro_marcaciones_x_empleado_Info> lista, int IdEmpresa)
+        {
+            try
+            {
+                    return odata.guardarDB(lista, IdEmpresa);
+               
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public bool modificarDB(ro_marcaciones_x_empleado_Info info)
         {

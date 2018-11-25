@@ -50,7 +50,7 @@ namespace Core.Erp.Info.RRHH
         public string em_codigo { get; set; }
 
 
-
+        public List<ro_marcaciones_x_empleado_Info> detalle { get; set; }
 
     }
 }

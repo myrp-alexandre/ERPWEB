@@ -159,6 +159,51 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+        public bool guardarDB(List<ro_marcaciones_x_empleado_Info> lista, int IdEmpresa)
+        {
+            try
+            {
+                decimal IdRegistro = get_id(IdEmpresa);
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    foreach (var item in lista)
+                    {
+                        ro_marcaciones_x_empleado Entity = new ro_marcaciones_x_empleado
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdRegistro = item.IdRegistro = IdRegistro,
+                            IdEmpleado = item.IdEmpleado,
+                            IdCalendadrio = item.IdCalendadrio,
+                            IdTipoMarcaciones = item.IdTipoMarcaciones,
+                            IdNomina = item.IdNomina,
+                            IdPeriodo = item.IdPeriodo,
+                            es_Hora = item.es_Hora,
+                            es_fechaRegistro = item.es_fechaRegistro.Date,
+                            es_anio = item.es_anio,
+                            es_mes = item.es_mes,
+                            es_sdia = item.es_sdia,
+                            es_dia = item.es_dia,
+                            es_EsActualizacion = item.es_EsActualizacion,
+                            Observacion = item.Observacion,
+                            IdUsuario = item.IdUsuario,
+                            Estado = item.Estado = "A",
+                            Fecha_Transac = item.Fecha_Transac = DateTime.Now
+                        };
+                        IdRegistro++;
+                       if( !si_existe(item))
+                        Context.ro_marcaciones_x_empleado.Add(Entity);
+                    }
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool modificarDB(ro_marcaciones_x_empleado_Info info)
         {
             try

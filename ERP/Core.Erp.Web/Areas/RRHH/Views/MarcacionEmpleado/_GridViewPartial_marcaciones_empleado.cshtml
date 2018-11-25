@@ -70,8 +70,11 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString() + "/" + "&nbsp;"
                 );
+                ViewContext.Writer.Write(
+                   Html.ActionLink("Imp. Marcaciones", "Nuevo", "ImportacionMarcaciones").ToHtmlString()
+               );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;

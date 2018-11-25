@@ -134,6 +134,7 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
         public bool AnularDB (ro_EmpleadoNovedadCargaMasiva_Info info)
         {
             try
