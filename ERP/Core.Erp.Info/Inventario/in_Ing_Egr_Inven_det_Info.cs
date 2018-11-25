@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Erp.Info.Facturacion;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -50,6 +51,10 @@ namespace Core.Erp.Info.Inventario
         public DateTime? lote_fecha_vcto { get; set; }
         public string lote_num_lote { get; set; }
         public string nom_presentacion { get; set; }
+        #endregion
+
+        #region Campos de factura        
+        public fa_factura_det_x_in_Ing_Egr_Inven_det_Info RelacionDetalleFactura { get; set; }
         #endregion
     }
 }
