@@ -178,7 +178,7 @@ namespace Core.Erp.Data.Inventario
                             IdSucursal = info.IdSucursal,
                             IdMovi_inven_tipo = info.IdMovi_inven_tipo,
                             IdNumMovi = info.IdNumMovi,
-                            Secuencia = sec,
+                            Secuencia = item.Secuencia = sec,
                             IdBodega =(int) info.IdBodega,
                             IdProducto = item.IdProducto,
 
