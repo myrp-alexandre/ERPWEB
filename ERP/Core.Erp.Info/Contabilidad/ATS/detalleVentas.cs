@@ -21,7 +21,7 @@ namespace Core.Erp.Info.Contabilidad.ATS
 
         private parteRelType parteRelVtasField;
 
-        private bool parteRelVtasFieldSpecified;
+        //private bool parteRelVtasFieldSpecified;
 
         private string tipoClienteField;
 

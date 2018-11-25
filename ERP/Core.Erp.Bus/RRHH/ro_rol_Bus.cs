@@ -331,7 +331,7 @@ namespace Core.Erp.Bus.RRHH
               
                 return lst_detalle_diario;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }

@@ -52,7 +52,7 @@ namespace Core.Erp.Info.Contabilidad.ATS
 
         private parteRelType parteRelField;
 
-        private bool parteRelFieldSpecified;
+        //private bool parteRelFieldSpecified;
 
         private string fechaRegistroField;
 

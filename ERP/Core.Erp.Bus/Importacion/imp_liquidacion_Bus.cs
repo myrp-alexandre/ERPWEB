@@ -311,7 +311,7 @@ namespace Core.Erp.Bus.Importacion
                 }
                 return ingreso;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
