@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.RRHH.ro_EmpleadoNovedadCargaMasiva_Info
+﻿@model Core.Erp.Info.RRHH.ro_marcaciones_x_empleado_Info
 @{
     ViewBag.Title = "Nueva carga de novedades";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -17,13 +17,12 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Nuevo", "ImportacionNovedades", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "ImportacionMarcaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdCarga)
 
 
-    <div class="row">
+    @*<div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="IdCargo">Sucursal*</label>
@@ -95,67 +94,9 @@
                 @Html.ValidationMessageFor(q => q.IdNominaTipo, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
+    </div>*@
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="Fecha">Fecha Novedad*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q=> q.FechaCarga, settings =>
-                    {
-                        settings.Name = "FechaCarga";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.FechaCarga, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-10">
-                <div class="form-group">
-                    <label for="IdCargo">Rubro*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdRubro, settings =>
-                   {
-                       settings.Name = "IdRubro";
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                       settings.Properties.Columns.Add("ru_codRolGen", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdRubro";
-                       settings.Properties.ValueType = typeof(string);
-                       settings.Properties.TextField = "ru_descripcion";
-                       //Boton para seleccionar ningun registro
-                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                       settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                   }).BindList(ViewBag.lst_rubro).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="Fecha">Observación</label>
-                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", disabled = "disabled" })
-                    @Html.ValidationMessageFor(m => m.Observacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
+   
 
 
     <div class="row">
@@ -165,11 +106,11 @@
 
                 @Html.DevExpress().UploadControl(settings => {
                 settings.Name = "UploadControlFile";
-                settings.CallbackRouteValues = new { Controller = "ImportacionNovedades", Action = "UploadControlUpload" };
+                settings.CallbackRouteValues = new { Controller = "ImportacionMarcaciones", Action = "UploadControlUpload" };
                 settings.ShowUploadButton = true;
                 settings.ShowProgressPanel = true;
                 settings.NullText = "Click here to browse files...";
-                settings.ClientSideEvents.FileUploadComplete = "function(s, e) { GridViewPartial_importacion_novedades_det.PerformCallback({ path: e.callbackData}); }";
+                settings.ClientSideEvents.FileUploadComplete = "function(s, e) { GridViewPartial_importacion_marcaciones_det.PerformCallback({ path: e.callbackData}); }";
                 }).GetHtml()
 
             </div>
