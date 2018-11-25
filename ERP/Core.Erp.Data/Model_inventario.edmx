@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model_inventario.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model_inventario.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="in_Catalogo">
           <Key>
             <PropertyRef Name="IdCatalogo" />
@@ -626,7 +626,7 @@
           <Property Name="interpretacion" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Consignacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_Consignacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_Consignacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -653,7 +653,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Consignacion' no tiene de
           <Property Name="NombreProveedor" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_ConsignacionDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_ConsignacionDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_ConsignacionDet">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -675,7 +675,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_ConsignacionDet' no tiene
           <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_devolucion_inven_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_devolucion_inven_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_devolucion_inven_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -713,7 +713,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_devolucion_inven_det' no 
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Ing_Egr_Inven_distribucion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_Ing_Egr_Inven_distribucion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_Ing_Egr_Inven_distribucion">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -746,7 +746,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Ing_Egr_Inven_distribucio
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Ing_Egr_Inven_distribucion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_Ing_Egr_Inven_distribucion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_Ing_Egr_Inven_distribucion_det">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -776,7 +776,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Ing_Egr_Inven_distribucio
           <Property Name="lote_fecha_fab" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Ing_Egr_Inven_distribucion_x_distribuir' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_Ing_Egr_Inven_distribucion_x_distribuir' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_Ing_Egr_Inven_distribucion_x_distribuir">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -806,7 +806,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Ing_Egr_Inven_distribucio
           <Property Name="IdPresentacion" Type="varchar" MaxLength="25" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Producto_Stock' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_Producto_Stock' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_Producto_Stock">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -821,7 +821,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Producto_Stock' no tiene 
           <Property Name="Stock" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_producto_x_tb_bodega_stock_x_lote' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_producto_x_tb_bodega_stock_x_lote' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_producto_x_tb_bodega_stock_x_lote">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -844,7 +844,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_producto_x_tb_bodega_stoc
           <Property Name="stock" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Transferencias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_Transferencias' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_Transferencias">
           <Key>
             <PropertyRef Name="SucuOrigen" />
@@ -893,7 +893,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.dbo.vwin_Transferencias' no tiene 
           <Property Name="IdEstadoAproba_egr" Type="varchar" MaxLength="15" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_Ing_Egr_Inven_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwin_Ing_Egr_Inven_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_Ing_Egr_Inven_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -946,7 +946,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_Ing_Egr_Inven_det' no tie
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_Ing_Egr_Inven_det_x_devolver' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwin_Ing_Egr_Inven_det_x_devolver' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_Ing_Egr_Inven_det_x_devolver">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -980,7 +980,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_Ing_Egr_Inven_det_x_devol
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_Ing_Egr_Inven_por_devolver' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwin_Ing_Egr_Inven_por_devolver' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_Ing_Egr_Inven_por_devolver">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1001,7 +1001,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_Ing_Egr_Inven_por_devolve
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_Producto_Composicion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwin_Producto_Composicion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_Producto_Composicion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1026,7 +1026,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_Producto_Composicion' no 
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_producto_hijo_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_hijo_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_producto_hijo_combo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1048,7 +1048,7 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_producto_hijo_combo' no t
           <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_producto_padre_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_producto_padre_combo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1063,6 +1063,8 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_producto_padre_combo' no 
           <Property Name="nom_presentacion" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="ca_Categoria" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWINV_014' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <Association Name="FK_in_Catalogo_in_CatalogoTipo">
           <End Role="in_CatalogoTipo" Type="Self.in_CatalogoTipo" Multiplicity="1" />
           <End Role="in_Catalogo" Type="Self.in_Catalogo" Multiplicity="*" />
@@ -1912,278 +1914,278 @@ advertencia 6002: La tabla o vista 'DBERP_CCG.web.vwin_producto_padre_combo' no 
           <EntitySet Name="in_UnidadMedida_Equiv_conversion" EntityType="Self.in_UnidadMedida_Equiv_conversion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwin_Consignacion" EntityType="Self.vwin_Consignacion" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwin_Consignacion].[IdEmpresa] AS [IdEmpresa], 
-[vwin_Consignacion].[IdConsignacion] AS [IdConsignacion], 
-[vwin_Consignacion].[IdSucursal] AS [IdSucursal], 
-[vwin_Consignacion].[IdBodega] AS [IdBodega], 
-[vwin_Consignacion].[Fecha] AS [Fecha], 
-[vwin_Consignacion].[IdProveedor] AS [IdProveedor], 
-[vwin_Consignacion].[Observacion] AS [Observacion], 
-[vwin_Consignacion].[Estado] AS [Estado], 
-[vwin_Consignacion].[IdNumMovi] AS [IdNumMovi], 
-[vwin_Consignacion].[Su_Descripcion] AS [Su_Descripcion], 
-[vwin_Consignacion].[bo_Descripcion] AS [bo_Descripcion], 
-[vwin_Consignacion].[NombreTipoMovimiento] AS [NombreTipoMovimiento], 
-[vwin_Consignacion].[NombreProveedor] AS [NombreProveedor]
-FROM [dbo].[vwin_Consignacion] AS [vwin_Consignacion]</DefiningQuery>
+    [vwin_Consignacion].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Consignacion].[IdConsignacion] AS [IdConsignacion], 
+    [vwin_Consignacion].[IdSucursal] AS [IdSucursal], 
+    [vwin_Consignacion].[IdBodega] AS [IdBodega], 
+    [vwin_Consignacion].[Fecha] AS [Fecha], 
+    [vwin_Consignacion].[IdProveedor] AS [IdProveedor], 
+    [vwin_Consignacion].[Observacion] AS [Observacion], 
+    [vwin_Consignacion].[Estado] AS [Estado], 
+    [vwin_Consignacion].[IdNumMovi] AS [IdNumMovi], 
+    [vwin_Consignacion].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwin_Consignacion].[bo_Descripcion] AS [bo_Descripcion], 
+    [vwin_Consignacion].[NombreTipoMovimiento] AS [NombreTipoMovimiento], 
+    [vwin_Consignacion].[NombreProveedor] AS [NombreProveedor]
+    FROM [dbo].[vwin_Consignacion] AS [vwin_Consignacion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_ConsignacionDet" EntityType="Self.vwin_ConsignacionDet" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwin_ConsignacionDet].[IdEmpresa] AS [IdEmpresa], 
-[vwin_ConsignacionDet].[IdConsignacion] AS [IdConsignacion], 
-[vwin_ConsignacionDet].[Secuencia] AS [Secuencia], 
-[vwin_ConsignacionDet].[IdProducto] AS [IdProducto], 
-[vwin_ConsignacionDet].[IdUnidadMedida] AS [IdUnidadMedida], 
-[vwin_ConsignacionDet].[Cantidad] AS [Cantidad], 
-[vwin_ConsignacionDet].[Costo] AS [Costo], 
-[vwin_ConsignacionDet].[Observacion] AS [Observacion], 
-[vwin_ConsignacionDet].[pr_descripcion] AS [pr_descripcion]
-FROM [dbo].[vwin_ConsignacionDet] AS [vwin_ConsignacionDet]</DefiningQuery>
+    [vwin_ConsignacionDet].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_ConsignacionDet].[IdConsignacion] AS [IdConsignacion], 
+    [vwin_ConsignacionDet].[Secuencia] AS [Secuencia], 
+    [vwin_ConsignacionDet].[IdProducto] AS [IdProducto], 
+    [vwin_ConsignacionDet].[IdUnidadMedida] AS [IdUnidadMedida], 
+    [vwin_ConsignacionDet].[Cantidad] AS [Cantidad], 
+    [vwin_ConsignacionDet].[Costo] AS [Costo], 
+    [vwin_ConsignacionDet].[Observacion] AS [Observacion], 
+    [vwin_ConsignacionDet].[pr_descripcion] AS [pr_descripcion]
+    FROM [dbo].[vwin_ConsignacionDet] AS [vwin_ConsignacionDet]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_devolucion_inven_det" EntityType="Self.vwin_devolucion_inven_det" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwin_devolucion_inven_det].[IdEmpresa] AS [IdEmpresa], 
-[vwin_devolucion_inven_det].[IdDev_Inven] AS [IdDev_Inven], 
-[vwin_devolucion_inven_det].[secuencia] AS [secuencia], 
-[vwin_devolucion_inven_det].[inv_IdEmpresa] AS [inv_IdEmpresa], 
-[vwin_devolucion_inven_det].[inv_IdSucursal] AS [inv_IdSucursal], 
-[vwin_devolucion_inven_det].[inv_IdMovi_inven_tipo] AS [inv_IdMovi_inven_tipo], 
-[vwin_devolucion_inven_det].[inv_IdNumMovi] AS [inv_IdNumMovi], 
-[vwin_devolucion_inven_det].[inv_Secuencia] AS [inv_Secuencia], 
-[vwin_devolucion_inven_det].[cant_devuelta] AS [cant_devuelta], 
-[vwin_devolucion_inven_det].[pr_descripcion] AS [pr_descripcion], 
-[vwin_devolucion_inven_det].[nom_presentacion] AS [nom_presentacion], 
-[vwin_devolucion_inven_det].[dm_cantidad_sinConversion] AS [dm_cantidad_sinConversion], 
-[vwin_devolucion_inven_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwin_devolucion_inven_det].[lote_num_lote] AS [lote_num_lote], 
-[vwin_devolucion_inven_det].[IdBodega] AS [IdBodega], 
-[vwin_devolucion_inven_det].[NomUnidad] AS [NomUnidad], 
-[vwin_devolucion_inven_det].[mv_costo_sinConversion] AS [mv_costo_sinConversion], 
-[vwin_devolucion_inven_det].[IdUnidadMedida_sinConversion] AS [IdUnidadMedida_sinConversion], 
-[vwin_devolucion_inven_det].[IdProducto] AS [IdProducto]
-FROM [dbo].[vwin_devolucion_inven_det] AS [vwin_devolucion_inven_det]</DefiningQuery>
+    [vwin_devolucion_inven_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_devolucion_inven_det].[IdDev_Inven] AS [IdDev_Inven], 
+    [vwin_devolucion_inven_det].[secuencia] AS [secuencia], 
+    [vwin_devolucion_inven_det].[inv_IdEmpresa] AS [inv_IdEmpresa], 
+    [vwin_devolucion_inven_det].[inv_IdSucursal] AS [inv_IdSucursal], 
+    [vwin_devolucion_inven_det].[inv_IdMovi_inven_tipo] AS [inv_IdMovi_inven_tipo], 
+    [vwin_devolucion_inven_det].[inv_IdNumMovi] AS [inv_IdNumMovi], 
+    [vwin_devolucion_inven_det].[inv_Secuencia] AS [inv_Secuencia], 
+    [vwin_devolucion_inven_det].[cant_devuelta] AS [cant_devuelta], 
+    [vwin_devolucion_inven_det].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_devolucion_inven_det].[nom_presentacion] AS [nom_presentacion], 
+    [vwin_devolucion_inven_det].[dm_cantidad_sinConversion] AS [dm_cantidad_sinConversion], 
+    [vwin_devolucion_inven_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwin_devolucion_inven_det].[lote_num_lote] AS [lote_num_lote], 
+    [vwin_devolucion_inven_det].[IdBodega] AS [IdBodega], 
+    [vwin_devolucion_inven_det].[NomUnidad] AS [NomUnidad], 
+    [vwin_devolucion_inven_det].[mv_costo_sinConversion] AS [mv_costo_sinConversion], 
+    [vwin_devolucion_inven_det].[IdUnidadMedida_sinConversion] AS [IdUnidadMedida_sinConversion], 
+    [vwin_devolucion_inven_det].[IdProducto] AS [IdProducto]
+    FROM [dbo].[vwin_devolucion_inven_det] AS [vwin_devolucion_inven_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Ing_Egr_Inven_distribucion" EntityType="Self.vwin_Ing_Egr_Inven_distribucion" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwin_Ing_Egr_Inven_distribucion].[IdRow] AS [IdRow], 
-[vwin_Ing_Egr_Inven_distribucion].[IdEmpresa] AS [IdEmpresa], 
-[vwin_Ing_Egr_Inven_distribucion].[IdSucursal] AS [IdSucursal], 
-[vwin_Ing_Egr_Inven_distribucion].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
-[vwin_Ing_Egr_Inven_distribucion].[IdNumMovi] AS [IdNumMovi], 
-[vwin_Ing_Egr_Inven_distribucion].[IdBodega] AS [IdBodega], 
-[vwin_Ing_Egr_Inven_distribucion].[can_total] AS [can_total], 
-[vwin_Ing_Egr_Inven_distribucion].[can_distribuida] AS [can_distribuida], 
-[vwin_Ing_Egr_Inven_distribucion].[can_x_distribuir] AS [can_x_distribuir], 
-[vwin_Ing_Egr_Inven_distribucion].[signo] AS [signo], 
-[vwin_Ing_Egr_Inven_distribucion].[cm_observacion] AS [cm_observacion], 
-[vwin_Ing_Egr_Inven_distribucion].[cm_fecha] AS [cm_fecha], 
-[vwin_Ing_Egr_Inven_distribucion].[tm_descripcion] AS [tm_descripcion], 
-[vwin_Ing_Egr_Inven_distribucion].[Su_Descripcion] AS [Su_Descripcion], 
-[vwin_Ing_Egr_Inven_distribucion].[vt_NumFactura] AS [vt_NumFactura], 
-[vwin_Ing_Egr_Inven_distribucion].[pe_nombreCompleto] AS [pe_nombreCompleto]
-FROM [dbo].[vwin_Ing_Egr_Inven_distribucion] AS [vwin_Ing_Egr_Inven_distribucion]</DefiningQuery>
+    [vwin_Ing_Egr_Inven_distribucion].[IdRow] AS [IdRow], 
+    [vwin_Ing_Egr_Inven_distribucion].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Ing_Egr_Inven_distribucion].[IdSucursal] AS [IdSucursal], 
+    [vwin_Ing_Egr_Inven_distribucion].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
+    [vwin_Ing_Egr_Inven_distribucion].[IdNumMovi] AS [IdNumMovi], 
+    [vwin_Ing_Egr_Inven_distribucion].[IdBodega] AS [IdBodega], 
+    [vwin_Ing_Egr_Inven_distribucion].[can_total] AS [can_total], 
+    [vwin_Ing_Egr_Inven_distribucion].[can_distribuida] AS [can_distribuida], 
+    [vwin_Ing_Egr_Inven_distribucion].[can_x_distribuir] AS [can_x_distribuir], 
+    [vwin_Ing_Egr_Inven_distribucion].[signo] AS [signo], 
+    [vwin_Ing_Egr_Inven_distribucion].[cm_observacion] AS [cm_observacion], 
+    [vwin_Ing_Egr_Inven_distribucion].[cm_fecha] AS [cm_fecha], 
+    [vwin_Ing_Egr_Inven_distribucion].[tm_descripcion] AS [tm_descripcion], 
+    [vwin_Ing_Egr_Inven_distribucion].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwin_Ing_Egr_Inven_distribucion].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwin_Ing_Egr_Inven_distribucion].[pe_nombreCompleto] AS [pe_nombreCompleto]
+    FROM [dbo].[vwin_Ing_Egr_Inven_distribucion] AS [vwin_Ing_Egr_Inven_distribucion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Ing_Egr_Inven_distribucion_det" EntityType="Self.vwin_Ing_Egr_Inven_distribucion_det" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwin_Ing_Egr_Inven_distribucion_det].[IdRow] AS [IdRow], 
-[vwin_Ing_Egr_Inven_distribucion_det].[IdEmpresa] AS [IdEmpresa], 
-[vwin_Ing_Egr_Inven_distribucion_det].[IdSucursal] AS [IdSucursal], 
-[vwin_Ing_Egr_Inven_distribucion_det].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
-[vwin_Ing_Egr_Inven_distribucion_det].[IdNumMovi] AS [IdNumMovi], 
-[vwin_Ing_Egr_Inven_distribucion_det].[IdProducto_padre] AS [IdProducto_padre], 
-[vwin_Ing_Egr_Inven_distribucion_det].[IdProducto] AS [IdProducto], 
-[vwin_Ing_Egr_Inven_distribucion_det].[pr_descripcion] AS [pr_descripcion], 
-[vwin_Ing_Egr_Inven_distribucion_det].[IdUnidadMedida] AS [IdUnidadMedida], 
-[vwin_Ing_Egr_Inven_distribucion_det].[dm_cantidad] AS [dm_cantidad], 
-[vwin_Ing_Egr_Inven_distribucion_det].[mv_costo] AS [mv_costo], 
-[vwin_Ing_Egr_Inven_distribucion_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwin_Ing_Egr_Inven_distribucion_det].[lote_num_lote] AS [lote_num_lote], 
-[vwin_Ing_Egr_Inven_distribucion_det].[lote_fecha_fab] AS [lote_fecha_fab]
-FROM [dbo].[vwin_Ing_Egr_Inven_distribucion_det] AS [vwin_Ing_Egr_Inven_distribucion_det]</DefiningQuery>
+    [vwin_Ing_Egr_Inven_distribucion_det].[IdRow] AS [IdRow], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[IdSucursal] AS [IdSucursal], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[IdNumMovi] AS [IdNumMovi], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[IdProducto_padre] AS [IdProducto_padre], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[IdProducto] AS [IdProducto], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[IdUnidadMedida] AS [IdUnidadMedida], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[dm_cantidad] AS [dm_cantidad], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[mv_costo] AS [mv_costo], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[lote_num_lote] AS [lote_num_lote], 
+    [vwin_Ing_Egr_Inven_distribucion_det].[lote_fecha_fab] AS [lote_fecha_fab]
+    FROM [dbo].[vwin_Ing_Egr_Inven_distribucion_det] AS [vwin_Ing_Egr_Inven_distribucion_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Ing_Egr_Inven_distribucion_x_distribuir" EntityType="Self.vwin_Ing_Egr_Inven_distribucion_x_distribuir" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdEmpresa] AS [IdEmpresa], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdSucursal] AS [IdSucursal], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdNumMovi] AS [IdNumMovi], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[signo] AS [signo], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdProducto_padre] AS [IdProducto_padre], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdProducto] AS [IdProducto], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[pr_descripcion] AS [pr_descripcion], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdUnidadMedida] AS [IdUnidadMedida], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[can_total] AS [can_total], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[can_distribuida] AS [can_distribuida], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[can_x_distribuir] AS [can_x_distribuir], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdCategoria] AS [IdCategoria], 
-[vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdPresentacion] AS [IdPresentacion]
-FROM [dbo].[vwin_Ing_Egr_Inven_distribucion_x_distribuir] AS [vwin_Ing_Egr_Inven_distribucion_x_distribuir]</DefiningQuery>
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdSucursal] AS [IdSucursal], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdNumMovi] AS [IdNumMovi], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[signo] AS [signo], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdProducto_padre] AS [IdProducto_padre], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdProducto] AS [IdProducto], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdUnidadMedida] AS [IdUnidadMedida], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[can_total] AS [can_total], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[can_distribuida] AS [can_distribuida], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[can_x_distribuir] AS [can_x_distribuir], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdCategoria] AS [IdCategoria], 
+    [vwin_Ing_Egr_Inven_distribucion_x_distribuir].[IdPresentacion] AS [IdPresentacion]
+    FROM [dbo].[vwin_Ing_Egr_Inven_distribucion_x_distribuir] AS [vwin_Ing_Egr_Inven_distribucion_x_distribuir]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Producto_Stock" EntityType="Self.vwin_Producto_Stock" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwin_Producto_Stock].[IdEmpresa] AS [IdEmpresa], 
-[vwin_Producto_Stock].[IdSucursal] AS [IdSucursal], 
-[vwin_Producto_Stock].[IdBodega] AS [IdBodega], 
-[vwin_Producto_Stock].[IdProducto] AS [IdProducto], 
-[vwin_Producto_Stock].[Stock] AS [Stock]
-FROM [dbo].[vwin_Producto_Stock] AS [vwin_Producto_Stock]</DefiningQuery>
+    [vwin_Producto_Stock].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Producto_Stock].[IdSucursal] AS [IdSucursal], 
+    [vwin_Producto_Stock].[IdBodega] AS [IdBodega], 
+    [vwin_Producto_Stock].[IdProducto] AS [IdProducto], 
+    [vwin_Producto_Stock].[Stock] AS [Stock]
+    FROM [dbo].[vwin_Producto_Stock] AS [vwin_Producto_Stock]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_producto_x_tb_bodega_stock_x_lote" EntityType="Self.vwin_producto_x_tb_bodega_stock_x_lote" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwin_producto_x_tb_bodega_stock_x_lote].[IdEmpresa] AS [IdEmpresa], 
-[vwin_producto_x_tb_bodega_stock_x_lote].[IdSucursal] AS [IdSucursal], 
-[vwin_producto_x_tb_bodega_stock_x_lote].[IdBodega] AS [IdBodega], 
-[vwin_producto_x_tb_bodega_stock_x_lote].[IdProducto] AS [IdProducto], 
-[vwin_producto_x_tb_bodega_stock_x_lote].[pr_codigo] AS [pr_codigo], 
-[vwin_producto_x_tb_bodega_stock_x_lote].[pr_descripcion] AS [pr_descripcion], 
-[vwin_producto_x_tb_bodega_stock_x_lote].[IdProducto_padre] AS [IdProducto_padre], 
-[vwin_producto_x_tb_bodega_stock_x_lote].[lote_fecha_fab] AS [lote_fecha_fab], 
-[vwin_producto_x_tb_bodega_stock_x_lote].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwin_producto_x_tb_bodega_stock_x_lote].[lote_num_lote] AS [lote_num_lote], 
-[vwin_producto_x_tb_bodega_stock_x_lote].[stock] AS [stock]
-FROM [dbo].[vwin_producto_x_tb_bodega_stock_x_lote] AS [vwin_producto_x_tb_bodega_stock_x_lote]</DefiningQuery>
+    [vwin_producto_x_tb_bodega_stock_x_lote].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_producto_x_tb_bodega_stock_x_lote].[IdSucursal] AS [IdSucursal], 
+    [vwin_producto_x_tb_bodega_stock_x_lote].[IdBodega] AS [IdBodega], 
+    [vwin_producto_x_tb_bodega_stock_x_lote].[IdProducto] AS [IdProducto], 
+    [vwin_producto_x_tb_bodega_stock_x_lote].[pr_codigo] AS [pr_codigo], 
+    [vwin_producto_x_tb_bodega_stock_x_lote].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_producto_x_tb_bodega_stock_x_lote].[IdProducto_padre] AS [IdProducto_padre], 
+    [vwin_producto_x_tb_bodega_stock_x_lote].[lote_fecha_fab] AS [lote_fecha_fab], 
+    [vwin_producto_x_tb_bodega_stock_x_lote].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwin_producto_x_tb_bodega_stock_x_lote].[lote_num_lote] AS [lote_num_lote], 
+    [vwin_producto_x_tb_bodega_stock_x_lote].[stock] AS [stock]
+    FROM [dbo].[vwin_producto_x_tb_bodega_stock_x_lote] AS [vwin_producto_x_tb_bodega_stock_x_lote]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Transferencias" EntityType="Self.vwin_Transferencias" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwin_Transferencias].[SucuOrigen] AS [SucuOrigen], 
-[vwin_Transferencias].[BodegaORIG] AS [BodegaORIG], 
-[vwin_Transferencias].[SucuDEST] AS [SucuDEST], 
-[vwin_Transferencias].[BodegDest] AS [BodegDest], 
-[vwin_Transferencias].[IdEmpresa] AS [IdEmpresa], 
-[vwin_Transferencias].[IdSucursalOrigen] AS [IdSucursalOrigen], 
-[vwin_Transferencias].[IdBodegaOrigen] AS [IdBodegaOrigen], 
-[vwin_Transferencias].[IdTransferencia] AS [IdTransferencia], 
-[vwin_Transferencias].[IdSucursalDest] AS [IdSucursalDest], 
-[vwin_Transferencias].[IdBodegaDest] AS [IdBodegaDest], 
-[vwin_Transferencias].[tr_Observacion] AS [tr_Observacion], 
-[vwin_Transferencias].[tr_fecha] AS [tr_fecha], 
-[vwin_Transferencias].[Estado] AS [Estado], 
-[vwin_Transferencias].[IdUsuario] AS [IdUsuario], 
-[vwin_Transferencias].[IdEmpresa_Ing_Egr_Inven_Origen] AS [IdEmpresa_Ing_Egr_Inven_Origen], 
-[vwin_Transferencias].[IdSucursal_Ing_Egr_Inven_Origen] AS [IdSucursal_Ing_Egr_Inven_Origen], 
-[vwin_Transferencias].[IdNumMovi_Ing_Egr_Inven_Origen] AS [IdNumMovi_Ing_Egr_Inven_Origen], 
-[vwin_Transferencias].[IdEmpresa_Ing_Egr_Inven_Destino] AS [IdEmpresa_Ing_Egr_Inven_Destino], 
-[vwin_Transferencias].[IdSucursal_Ing_Egr_Inven_Destino] AS [IdSucursal_Ing_Egr_Inven_Destino], 
-[vwin_Transferencias].[IdNumMovi_Ing_Egr_Inven_Destino] AS [IdNumMovi_Ing_Egr_Inven_Destino], 
-[vwin_Transferencias].[tr_fechaAnulacion] AS [tr_fechaAnulacion], 
-[vwin_Transferencias].[tr_userAnulo] AS [tr_userAnulo], 
-[vwin_Transferencias].[Codigo] AS [Codigo], 
-[vwin_Transferencias].[IdMovi_inven_tipo_SucuOrig] AS [IdMovi_inven_tipo_SucuOrig], 
-[vwin_Transferencias].[IdMovi_inven_tipo_SucuDest] AS [IdMovi_inven_tipo_SucuDest], 
-[vwin_Transferencias].[IdEstadoAprobacion_cat] AS [IdEstadoAprobacion_cat], 
-[vwin_Transferencias].[EstadoAprobacion_cat] AS [EstadoAprobacion_cat], 
-[vwin_Transferencias].[IdEstadoAproba_ing] AS [IdEstadoAproba_ing], 
-[vwin_Transferencias].[IdEstadoAproba_egr] AS [IdEstadoAproba_egr]
-FROM [dbo].[vwin_Transferencias] AS [vwin_Transferencias]</DefiningQuery>
+    [vwin_Transferencias].[SucuOrigen] AS [SucuOrigen], 
+    [vwin_Transferencias].[BodegaORIG] AS [BodegaORIG], 
+    [vwin_Transferencias].[SucuDEST] AS [SucuDEST], 
+    [vwin_Transferencias].[BodegDest] AS [BodegDest], 
+    [vwin_Transferencias].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Transferencias].[IdSucursalOrigen] AS [IdSucursalOrigen], 
+    [vwin_Transferencias].[IdBodegaOrigen] AS [IdBodegaOrigen], 
+    [vwin_Transferencias].[IdTransferencia] AS [IdTransferencia], 
+    [vwin_Transferencias].[IdSucursalDest] AS [IdSucursalDest], 
+    [vwin_Transferencias].[IdBodegaDest] AS [IdBodegaDest], 
+    [vwin_Transferencias].[tr_Observacion] AS [tr_Observacion], 
+    [vwin_Transferencias].[tr_fecha] AS [tr_fecha], 
+    [vwin_Transferencias].[Estado] AS [Estado], 
+    [vwin_Transferencias].[IdUsuario] AS [IdUsuario], 
+    [vwin_Transferencias].[IdEmpresa_Ing_Egr_Inven_Origen] AS [IdEmpresa_Ing_Egr_Inven_Origen], 
+    [vwin_Transferencias].[IdSucursal_Ing_Egr_Inven_Origen] AS [IdSucursal_Ing_Egr_Inven_Origen], 
+    [vwin_Transferencias].[IdNumMovi_Ing_Egr_Inven_Origen] AS [IdNumMovi_Ing_Egr_Inven_Origen], 
+    [vwin_Transferencias].[IdEmpresa_Ing_Egr_Inven_Destino] AS [IdEmpresa_Ing_Egr_Inven_Destino], 
+    [vwin_Transferencias].[IdSucursal_Ing_Egr_Inven_Destino] AS [IdSucursal_Ing_Egr_Inven_Destino], 
+    [vwin_Transferencias].[IdNumMovi_Ing_Egr_Inven_Destino] AS [IdNumMovi_Ing_Egr_Inven_Destino], 
+    [vwin_Transferencias].[tr_fechaAnulacion] AS [tr_fechaAnulacion], 
+    [vwin_Transferencias].[tr_userAnulo] AS [tr_userAnulo], 
+    [vwin_Transferencias].[Codigo] AS [Codigo], 
+    [vwin_Transferencias].[IdMovi_inven_tipo_SucuOrig] AS [IdMovi_inven_tipo_SucuOrig], 
+    [vwin_Transferencias].[IdMovi_inven_tipo_SucuDest] AS [IdMovi_inven_tipo_SucuDest], 
+    [vwin_Transferencias].[IdEstadoAprobacion_cat] AS [IdEstadoAprobacion_cat], 
+    [vwin_Transferencias].[EstadoAprobacion_cat] AS [EstadoAprobacion_cat], 
+    [vwin_Transferencias].[IdEstadoAproba_ing] AS [IdEstadoAproba_ing], 
+    [vwin_Transferencias].[IdEstadoAproba_egr] AS [IdEstadoAproba_egr]
+    FROM [dbo].[vwin_Transferencias] AS [vwin_Transferencias]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Ing_Egr_Inven_det" EntityType="Self.vwin_Ing_Egr_Inven_det" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwin_Ing_Egr_Inven_det].[IdEmpresa] AS [IdEmpresa], 
-[vwin_Ing_Egr_Inven_det].[IdSucursal] AS [IdSucursal], 
-[vwin_Ing_Egr_Inven_det].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
-[vwin_Ing_Egr_Inven_det].[IdNumMovi] AS [IdNumMovi], 
-[vwin_Ing_Egr_Inven_det].[Secuencia] AS [Secuencia], 
-[vwin_Ing_Egr_Inven_det].[IdBodega] AS [IdBodega], 
-[vwin_Ing_Egr_Inven_det].[IdProducto] AS [IdProducto], 
-[vwin_Ing_Egr_Inven_det].[dm_cantidad] AS [dm_cantidad], 
-[vwin_Ing_Egr_Inven_det].[dm_observacion] AS [dm_observacion], 
-[vwin_Ing_Egr_Inven_det].[mv_costo] AS [mv_costo], 
-[vwin_Ing_Egr_Inven_det].[IdCentroCosto] AS [IdCentroCosto], 
-[vwin_Ing_Egr_Inven_det].[IdCentroCosto_sub_centro_costo] AS [IdCentroCosto_sub_centro_costo], 
-[vwin_Ing_Egr_Inven_det].[IdEstadoAproba] AS [IdEstadoAproba], 
-[vwin_Ing_Egr_Inven_det].[IdUnidadMedida] AS [IdUnidadMedida], 
-[vwin_Ing_Egr_Inven_det].[IdEmpresa_oc] AS [IdEmpresa_oc], 
-[vwin_Ing_Egr_Inven_det].[IdSucursal_oc] AS [IdSucursal_oc], 
-[vwin_Ing_Egr_Inven_det].[IdOrdenCompra] AS [IdOrdenCompra], 
-[vwin_Ing_Egr_Inven_det].[Secuencia_oc] AS [Secuencia_oc], 
-[vwin_Ing_Egr_Inven_det].[IdPunto_cargo_grupo] AS [IdPunto_cargo_grupo], 
-[vwin_Ing_Egr_Inven_det].[IdPunto_cargo] AS [IdPunto_cargo], 
-[vwin_Ing_Egr_Inven_det].[IdEmpresa_inv] AS [IdEmpresa_inv], 
-[vwin_Ing_Egr_Inven_det].[IdSucursal_inv] AS [IdSucursal_inv], 
-[vwin_Ing_Egr_Inven_det].[IdBodega_inv] AS [IdBodega_inv], 
-[vwin_Ing_Egr_Inven_det].[IdMovi_inven_tipo_inv] AS [IdMovi_inven_tipo_inv], 
-[vwin_Ing_Egr_Inven_det].[IdNumMovi_inv] AS [IdNumMovi_inv], 
-[vwin_Ing_Egr_Inven_det].[secuencia_inv] AS [secuencia_inv], 
-[vwin_Ing_Egr_Inven_det].[Motivo_Aprobacion] AS [Motivo_Aprobacion], 
-[vwin_Ing_Egr_Inven_det].[dm_cantidad_sinConversion] AS [dm_cantidad_sinConversion], 
-[vwin_Ing_Egr_Inven_det].[IdUnidadMedida_sinConversion] AS [IdUnidadMedida_sinConversion], 
-[vwin_Ing_Egr_Inven_det].[mv_costo_sinConversion] AS [mv_costo_sinConversion], 
-[vwin_Ing_Egr_Inven_det].[IdMotivo_Inv] AS [IdMotivo_Inv], 
-[vwin_Ing_Egr_Inven_det].[pr_descripcion] AS [pr_descripcion], 
-[vwin_Ing_Egr_Inven_det].[nom_presentacion] AS [nom_presentacion], 
-[vwin_Ing_Egr_Inven_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwin_Ing_Egr_Inven_det].[lote_num_lote] AS [lote_num_lote]
-FROM [web].[vwin_Ing_Egr_Inven_det] AS [vwin_Ing_Egr_Inven_det]</DefiningQuery>
+    [vwin_Ing_Egr_Inven_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Ing_Egr_Inven_det].[IdSucursal] AS [IdSucursal], 
+    [vwin_Ing_Egr_Inven_det].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
+    [vwin_Ing_Egr_Inven_det].[IdNumMovi] AS [IdNumMovi], 
+    [vwin_Ing_Egr_Inven_det].[Secuencia] AS [Secuencia], 
+    [vwin_Ing_Egr_Inven_det].[IdBodega] AS [IdBodega], 
+    [vwin_Ing_Egr_Inven_det].[IdProducto] AS [IdProducto], 
+    [vwin_Ing_Egr_Inven_det].[dm_cantidad] AS [dm_cantidad], 
+    [vwin_Ing_Egr_Inven_det].[dm_observacion] AS [dm_observacion], 
+    [vwin_Ing_Egr_Inven_det].[mv_costo] AS [mv_costo], 
+    [vwin_Ing_Egr_Inven_det].[IdCentroCosto] AS [IdCentroCosto], 
+    [vwin_Ing_Egr_Inven_det].[IdCentroCosto_sub_centro_costo] AS [IdCentroCosto_sub_centro_costo], 
+    [vwin_Ing_Egr_Inven_det].[IdEstadoAproba] AS [IdEstadoAproba], 
+    [vwin_Ing_Egr_Inven_det].[IdUnidadMedida] AS [IdUnidadMedida], 
+    [vwin_Ing_Egr_Inven_det].[IdEmpresa_oc] AS [IdEmpresa_oc], 
+    [vwin_Ing_Egr_Inven_det].[IdSucursal_oc] AS [IdSucursal_oc], 
+    [vwin_Ing_Egr_Inven_det].[IdOrdenCompra] AS [IdOrdenCompra], 
+    [vwin_Ing_Egr_Inven_det].[Secuencia_oc] AS [Secuencia_oc], 
+    [vwin_Ing_Egr_Inven_det].[IdPunto_cargo_grupo] AS [IdPunto_cargo_grupo], 
+    [vwin_Ing_Egr_Inven_det].[IdPunto_cargo] AS [IdPunto_cargo], 
+    [vwin_Ing_Egr_Inven_det].[IdEmpresa_inv] AS [IdEmpresa_inv], 
+    [vwin_Ing_Egr_Inven_det].[IdSucursal_inv] AS [IdSucursal_inv], 
+    [vwin_Ing_Egr_Inven_det].[IdBodega_inv] AS [IdBodega_inv], 
+    [vwin_Ing_Egr_Inven_det].[IdMovi_inven_tipo_inv] AS [IdMovi_inven_tipo_inv], 
+    [vwin_Ing_Egr_Inven_det].[IdNumMovi_inv] AS [IdNumMovi_inv], 
+    [vwin_Ing_Egr_Inven_det].[secuencia_inv] AS [secuencia_inv], 
+    [vwin_Ing_Egr_Inven_det].[Motivo_Aprobacion] AS [Motivo_Aprobacion], 
+    [vwin_Ing_Egr_Inven_det].[dm_cantidad_sinConversion] AS [dm_cantidad_sinConversion], 
+    [vwin_Ing_Egr_Inven_det].[IdUnidadMedida_sinConversion] AS [IdUnidadMedida_sinConversion], 
+    [vwin_Ing_Egr_Inven_det].[mv_costo_sinConversion] AS [mv_costo_sinConversion], 
+    [vwin_Ing_Egr_Inven_det].[IdMotivo_Inv] AS [IdMotivo_Inv], 
+    [vwin_Ing_Egr_Inven_det].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_Ing_Egr_Inven_det].[nom_presentacion] AS [nom_presentacion], 
+    [vwin_Ing_Egr_Inven_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwin_Ing_Egr_Inven_det].[lote_num_lote] AS [lote_num_lote]
+    FROM [web].[vwin_Ing_Egr_Inven_det] AS [vwin_Ing_Egr_Inven_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Ing_Egr_Inven_det_x_devolver" EntityType="Self.vwin_Ing_Egr_Inven_det_x_devolver" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwin_Ing_Egr_Inven_det_x_devolver].[IdEmpresa] AS [IdEmpresa], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[IdSucursal] AS [IdSucursal], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[IdNumMovi] AS [IdNumMovi], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[Secuencia] AS [Secuencia], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[IdBodega] AS [IdBodega], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[dm_cantidad_sinConversion] AS [dm_cantidad_sinConversion], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[IdUnidadMedida_sinConversion] AS [IdUnidadMedida_sinConversion], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[mv_costo_sinConversion] AS [mv_costo_sinConversion], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[pr_descripcion] AS [pr_descripcion], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[nom_presentacion] AS [nom_presentacion], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[lote_num_lote] AS [lote_num_lote], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[cant_devuelta] AS [cant_devuelta], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[NomUnidad] AS [NomUnidad], 
-[vwin_Ing_Egr_Inven_det_x_devolver].[IdProducto] AS [IdProducto]
-FROM [web].[vwin_Ing_Egr_Inven_det_x_devolver] AS [vwin_Ing_Egr_Inven_det_x_devolver]</DefiningQuery>
+    [vwin_Ing_Egr_Inven_det_x_devolver].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[IdSucursal] AS [IdSucursal], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[IdNumMovi] AS [IdNumMovi], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[Secuencia] AS [Secuencia], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[IdBodega] AS [IdBodega], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[dm_cantidad_sinConversion] AS [dm_cantidad_sinConversion], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[IdUnidadMedida_sinConversion] AS [IdUnidadMedida_sinConversion], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[mv_costo_sinConversion] AS [mv_costo_sinConversion], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[nom_presentacion] AS [nom_presentacion], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[lote_num_lote] AS [lote_num_lote], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[cant_devuelta] AS [cant_devuelta], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[NomUnidad] AS [NomUnidad], 
+    [vwin_Ing_Egr_Inven_det_x_devolver].[IdProducto] AS [IdProducto]
+    FROM [web].[vwin_Ing_Egr_Inven_det_x_devolver] AS [vwin_Ing_Egr_Inven_det_x_devolver]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Ing_Egr_Inven_por_devolver" EntityType="Self.vwin_Ing_Egr_Inven_por_devolver" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwin_Ing_Egr_Inven_por_devolver].[IdEmpresa] AS [IdEmpresa], 
-[vwin_Ing_Egr_Inven_por_devolver].[IdSucursal] AS [IdSucursal], 
-[vwin_Ing_Egr_Inven_por_devolver].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
-[vwin_Ing_Egr_Inven_por_devolver].[IdNumMovi] AS [IdNumMovi], 
-[vwin_Ing_Egr_Inven_por_devolver].[signo] AS [signo], 
-[vwin_Ing_Egr_Inven_por_devolver].[tm_descripcion] AS [tm_descripcion], 
-[vwin_Ing_Egr_Inven_por_devolver].[cm_observacion] AS [cm_observacion], 
-[vwin_Ing_Egr_Inven_por_devolver].[cm_fecha] AS [cm_fecha], 
-[vwin_Ing_Egr_Inven_por_devolver].[Su_Descripcion] AS [Su_Descripcion]
-FROM [web].[vwin_Ing_Egr_Inven_por_devolver] AS [vwin_Ing_Egr_Inven_por_devolver]</DefiningQuery>
+    [vwin_Ing_Egr_Inven_por_devolver].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Ing_Egr_Inven_por_devolver].[IdSucursal] AS [IdSucursal], 
+    [vwin_Ing_Egr_Inven_por_devolver].[IdMovi_inven_tipo] AS [IdMovi_inven_tipo], 
+    [vwin_Ing_Egr_Inven_por_devolver].[IdNumMovi] AS [IdNumMovi], 
+    [vwin_Ing_Egr_Inven_por_devolver].[signo] AS [signo], 
+    [vwin_Ing_Egr_Inven_por_devolver].[tm_descripcion] AS [tm_descripcion], 
+    [vwin_Ing_Egr_Inven_por_devolver].[cm_observacion] AS [cm_observacion], 
+    [vwin_Ing_Egr_Inven_por_devolver].[cm_fecha] AS [cm_fecha], 
+    [vwin_Ing_Egr_Inven_por_devolver].[Su_Descripcion] AS [Su_Descripcion]
+    FROM [web].[vwin_Ing_Egr_Inven_por_devolver] AS [vwin_Ing_Egr_Inven_por_devolver]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Producto_Composicion" EntityType="Self.vwin_Producto_Composicion" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwin_Producto_Composicion].[IdEmpresa] AS [IdEmpresa], 
-[vwin_Producto_Composicion].[IdProductoPadre] AS [IdProductoPadre], 
-[vwin_Producto_Composicion].[IdProductoHijo] AS [IdProductoHijo], 
-[vwin_Producto_Composicion].[IdUnidadMedida] AS [IdUnidadMedida], 
-[vwin_Producto_Composicion].[Cantidad] AS [Cantidad], 
-[vwin_Producto_Composicion].[pr_descripcion] AS [pr_descripcion], 
-[vwin_Producto_Composicion].[nom_presentacion] AS [nom_presentacion], 
-[vwin_Producto_Composicion].[ca_Categoria] AS [ca_Categoria], 
-[vwin_Producto_Composicion].[lote_fecha_fab] AS [lote_fecha_fab], 
-[vwin_Producto_Composicion].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwin_Producto_Composicion].[lote_num_lote] AS [lote_num_lote]
-FROM [web].[vwin_Producto_Composicion] AS [vwin_Producto_Composicion]</DefiningQuery>
+    [vwin_Producto_Composicion].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_Producto_Composicion].[IdProductoPadre] AS [IdProductoPadre], 
+    [vwin_Producto_Composicion].[IdProductoHijo] AS [IdProductoHijo], 
+    [vwin_Producto_Composicion].[IdUnidadMedida] AS [IdUnidadMedida], 
+    [vwin_Producto_Composicion].[Cantidad] AS [Cantidad], 
+    [vwin_Producto_Composicion].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_Producto_Composicion].[nom_presentacion] AS [nom_presentacion], 
+    [vwin_Producto_Composicion].[ca_Categoria] AS [ca_Categoria], 
+    [vwin_Producto_Composicion].[lote_fecha_fab] AS [lote_fecha_fab], 
+    [vwin_Producto_Composicion].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwin_Producto_Composicion].[lote_num_lote] AS [lote_num_lote]
+    FROM [web].[vwin_Producto_Composicion] AS [vwin_Producto_Composicion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_producto_hijo_combo" EntityType="Self.vwin_producto_hijo_combo" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwin_producto_hijo_combo].[IdEmpresa] AS [IdEmpresa], 
-[vwin_producto_hijo_combo].[IdProducto] AS [IdProducto], 
-[vwin_producto_hijo_combo].[IdProducto_padre] AS [IdProducto_padre], 
-[vwin_producto_hijo_combo].[pr_descripcion] AS [pr_descripcion], 
-[vwin_producto_hijo_combo].[nom_presentacion] AS [nom_presentacion], 
-[vwin_producto_hijo_combo].[ca_Categoria] AS [ca_Categoria], 
-[vwin_producto_hijo_combo].[lote_num_lote] AS [lote_num_lote], 
-[vwin_producto_hijo_combo].[lote_fecha_vcto] AS [lote_fecha_vcto], 
-[vwin_producto_hijo_combo].[IdUnidadMedida] AS [IdUnidadMedida]
-FROM [web].[vwin_producto_hijo_combo] AS [vwin_producto_hijo_combo]</DefiningQuery>
+    [vwin_producto_hijo_combo].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_producto_hijo_combo].[IdProducto] AS [IdProducto], 
+    [vwin_producto_hijo_combo].[IdProducto_padre] AS [IdProducto_padre], 
+    [vwin_producto_hijo_combo].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_producto_hijo_combo].[nom_presentacion] AS [nom_presentacion], 
+    [vwin_producto_hijo_combo].[ca_Categoria] AS [ca_Categoria], 
+    [vwin_producto_hijo_combo].[lote_num_lote] AS [lote_num_lote], 
+    [vwin_producto_hijo_combo].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwin_producto_hijo_combo].[IdUnidadMedida] AS [IdUnidadMedida]
+    FROM [web].[vwin_producto_hijo_combo] AS [vwin_producto_hijo_combo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_producto_padre_combo" EntityType="Self.vwin_producto_padre_combo" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwin_producto_padre_combo].[IdEmpresa] AS [IdEmpresa], 
-[vwin_producto_padre_combo].[IdProducto] AS [IdProducto], 
-[vwin_producto_padre_combo].[pr_descripcion] AS [pr_descripcion], 
-[vwin_producto_padre_combo].[nom_presentacion] AS [nom_presentacion], 
-[vwin_producto_padre_combo].[ca_Categoria] AS [ca_Categoria]
-FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQuery>
+    [vwin_producto_padre_combo].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_producto_padre_combo].[IdProducto] AS [IdProducto], 
+    [vwin_producto_padre_combo].[pr_descripcion] AS [pr_descripcion], 
+    [vwin_producto_padre_combo].[nom_presentacion] AS [nom_presentacion], 
+    [vwin_producto_padre_combo].[ca_Categoria] AS [ca_Categoria]
+    FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_in_Catalogo_in_CatalogoTipo" Association="Self.FK_in_Catalogo_in_CatalogoTipo">
             <End Role="in_CatalogoTipo" EntitySet="in_CatalogoTipo" />
@@ -5624,7 +5626,7 @@ FROM [web].[vwin_producto_padre_combo] AS [vwin_producto_padre_combo]</DefiningQ
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>

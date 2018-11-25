@@ -51,8 +51,10 @@
     <Reference Include="DevExpress.CodeParser.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.DataAccess.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.ExpressApp.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Pdf.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Persistent.Base.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.PivotGrid.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.RichEdit.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -949,112 +951,118 @@
     <Compile Include="Reportes\Inventario\INV_013_Rpt.Designer.cs">
       <DependentUpon>INV_013_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
+    <Compile Include="Reportes\Inventario\INV_014_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_001_Rpt.Designer.cs">
+    <Compile Include="Reportes\Inventario\INV_014_Rpt.Designer.cs">
+      <DependentUpon>INV_014_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RRHH\ROL_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RRHH\ROL_001_Rpt.Designer.cs">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_002_Rpt.cs">
+    <Compile Include="RRHH\ROL_002_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_002_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_002_Rpt.Designer.cs">
       <DependentUpon>ROL_002_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_003_Rpt.cs">
+    <Compile Include="RRHH\ROL_003_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_003_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_003_Rpt.Designer.cs">
       <DependentUpon>ROL_003_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_004_Rpt.cs">
+    <Compile Include="RRHH\ROL_004_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_004_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_004_Rpt.Designer.cs">
       <DependentUpon>ROL_004_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_005_Rpt.cs">
+    <Compile Include="RRHH\ROL_005_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_005_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_005_Rpt.Designer.cs">
       <DependentUpon>ROL_005_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_006_rpt.cs">
+    <Compile Include="RRHH\ROL_006_rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_006_rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_006_rpt.Designer.cs">
       <DependentUpon>ROL_006_rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_007_Rpt.cs">
+    <Compile Include="RRHH\ROL_007_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_007_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_007_Rpt.Designer.cs">
       <DependentUpon>ROL_007_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_008_Rpt.cs">
+    <Compile Include="RRHH\ROL_008_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_008_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_008_Rpt.Designer.cs">
       <DependentUpon>ROL_008_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_009_Rpt.cs">
+    <Compile Include="RRHH\ROL_009_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_009_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_009_Rpt.Designer.cs">
       <DependentUpon>ROL_009_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_010_Rpt.cs">
+    <Compile Include="RRHH\ROL_010_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_010_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_010_Rpt.Designer.cs">
       <DependentUpon>ROL_010_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_011_Rpt.cs">
+    <Compile Include="RRHH\ROL_011_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_011_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_011_Rpt.Designer.cs">
       <DependentUpon>ROL_011_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_012_Rpt.cs">
+    <Compile Include="RRHH\ROL_012_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_012_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_012_Rpt.Designer.cs">
       <DependentUpon>ROL_012_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_013_Rpt.cs">
+    <Compile Include="RRHH\ROL_013_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_013_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_013_Rpt.Designer.cs">
       <DependentUpon>ROL_013_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_014_Rpt.cs">
+    <Compile Include="RRHH\ROL_014_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_014_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_014_Rpt.Designer.cs">
       <DependentUpon>ROL_014_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_015_Rpt.cs">
+    <Compile Include="RRHH\ROL_015_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_015_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_015_Rpt.Designer.cs">
       <DependentUpon>ROL_015_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_016_Rpt.cs">
+    <Compile Include="RRHH\ROL_016_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_016_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_016_Rpt.Designer.cs">
       <DependentUpon>ROL_016_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_017_Rpt.cs">
+    <Compile Include="RRHH\ROL_017_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_017_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_017_Rpt.Designer.cs">
       <DependentUpon>ROL_017_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_018_Rpt.cs">
+    <Compile Include="RRHH\ROL_018_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\RRHH\ROL_018_Rpt.Designer.cs">
+    <Compile Include="RRHH\ROL_018_Rpt.Designer.cs">
       <DependentUpon>ROL_018_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
@@ -9472,6 +9480,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -9718,58 +9727,61 @@
     <EmbeddedResource Include="Reportes\Inventario\INV_013_Rpt.resx">
       <DependentUpon>INV_013_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
+    <EmbeddedResource Include="Reportes\Inventario\INV_014_Rpt.resx">
+      <DependentUpon>INV_014_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_002_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_002_Rpt.resx">
       <DependentUpon>ROL_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_003_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_003_Rpt.resx">
       <DependentUpon>ROL_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_004_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_004_Rpt.resx">
       <DependentUpon>ROL_004_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_005_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_005_Rpt.resx">
       <DependentUpon>ROL_005_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_006_rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_006_rpt.resx">
       <DependentUpon>ROL_006_rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_007_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_007_Rpt.resx">
       <DependentUpon>ROL_007_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_008_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_008_Rpt.resx">
       <DependentUpon>ROL_008_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_009_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_009_Rpt.resx">
       <DependentUpon>ROL_009_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_010_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_010_Rpt.resx">
       <DependentUpon>ROL_010_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_011_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_011_Rpt.resx">
       <DependentUpon>ROL_011_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_012_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_012_Rpt.resx">
       <DependentUpon>ROL_012_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_013_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_013_Rpt.resx">
       <DependentUpon>ROL_013_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_014_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_014_Rpt.resx">
       <DependentUpon>ROL_014_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_015_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_015_Rpt.resx">
       <DependentUpon>ROL_015_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_016_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_016_Rpt.resx">
       <DependentUpon>ROL_016_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_017_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_017_Rpt.resx">
       <DependentUpon>ROL_017_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_018_Rpt.resx">
+    <EmbeddedResource Include="RRHH\ROL_018_Rpt.resx">
       <DependentUpon>ROL_018_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
