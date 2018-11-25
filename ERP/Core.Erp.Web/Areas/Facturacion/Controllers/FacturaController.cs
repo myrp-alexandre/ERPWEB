@@ -588,6 +588,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 List_det.set_list(List_det.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = mensaje;
                 cargar_combos(model);
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
@@ -596,6 +597,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 List_det.set_list(List_det.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = "No se ha podido guardar el registro";
                 cargar_combos(model);
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             };
             return RedirectToAction("Index");
@@ -631,6 +633,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 List_det.set_list(List_det.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = mensaje;
                 cargar_combos(model);
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
@@ -638,6 +641,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 List_det.set_list(List_det.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = "No se ha podido modificar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model);
                 return View(model);
             };
@@ -671,6 +675,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 List_det.set_list(List_det.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = mensaje;
                 cargar_combos(model);
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
             model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
@@ -679,6 +684,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 List_det.set_list(List_det.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = "No se ha podido anular el registro";
                 cargar_combos(model);
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             };
             return RedirectToAction("Index");

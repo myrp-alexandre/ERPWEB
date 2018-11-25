@@ -867,7 +867,30 @@ namespace Core.Erp.Data.Facturacion
                     if (movimiento != null)
                     {
                         movimiento.IdNumMovi = egr.IdNumMovi_in_eg_x_inv;
-                        data_inv.modificarDB(movimiento);
+                        if(data_inv.modificarDB(movimiento))
+                        {
+                            var lstegr = db_f.fa_factura_det_x_in_Ing_Egr_Inven_det.Where(q => q.IdEmpresa_fa == info.IdEmpresa && q.IdSucursal_fa == info.IdSucursal && q.IdBodega_fa == info.IdBodega && q.IdCbteVta_fa == info.IdCbteVta).ToList();
+                            db_f.fa_factura_det_x_in_Ing_Egr_Inven_det.RemoveRange(lstegr);
+
+                            foreach (var item in movimiento.lst_in_Ing_Egr_Inven_det)
+                            {
+                                db_f.fa_factura_det_x_in_Ing_Egr_Inven_det.Add(new fa_factura_det_x_in_Ing_Egr_Inven_det
+                                {
+                                    IdEmpresa_fa = info.IdEmpresa,
+                                    IdSucursal_fa = info.IdSucursal,
+                                    IdBodega_fa = info.IdBodega,
+                                    IdCbteVta_fa = info.IdCbteVta,
+                                    Secuencia_fa = item.RelacionDetalleFactura.Secuencia_fa,
+
+                                    IdEmpresa_eg = movimiento.IdEmpresa,
+                                    IdSucursal_eg = movimiento.IdSucursal,
+                                    IdMovi_inven_tipo_eg = movimiento.IdMovi_inven_tipo,
+                                    IdNumMovi_eg = movimiento.IdNumMovi,
+                                    Secuencia_eg = item.Secuencia
+                                });
+                            }
+                            db_f.SaveChanges();
+                        }
                     }
                 }
                 #endregion
