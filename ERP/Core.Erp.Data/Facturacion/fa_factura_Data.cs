@@ -253,7 +253,7 @@ namespace Core.Erp.Data.Facturacion
                         IdSucursal = info.IdSucursal,
                         IdBodega = info.IdBodega,
                         IdCbteVta = info.IdCbteVta,
-                        Secuencia = secuencia++,
+                        Secuencia = item.Secuencia = secuencia++,
 
                         IdProducto = item.IdProducto,
                         vt_cantidad = item.vt_cantidad,
@@ -267,7 +267,7 @@ namespace Core.Erp.Data.Facturacion
                         vt_iva = item.vt_iva,
                         vt_total = item.vt_total,
                         vt_estado = item.vt_estado = "A",
-                        
+
                         IdEmpresa_pf = item.IdEmpresa_pf,
                         IdSucursal_pf = item.IdSucursal_pf,
                         IdProforma = item.IdProforma,
@@ -302,13 +302,13 @@ namespace Core.Erp.Data.Facturacion
                         IdEmpresa = info.IdEmpresa,
                         IdSucursal = info.IdSucursal,
                         IdBodega = info.IdBodega,
-                        IdCbteVta = info.IdCbteVta,                        
+                        IdCbteVta = info.IdCbteVta,
                         secuencia = secuencia++,
 
                         Estado = item.Estado,
                         fecha_vcto_cuota = item.fecha_vcto_cuota.Date,
                         num_cuota = item.num_cuota,
-                        valor_a_cobrar = item.valor_a_cobrar                        
+                        valor_a_cobrar = item.valor_a_cobrar
                     });
                 }
                 #endregion
@@ -331,10 +331,10 @@ namespace Core.Erp.Data.Facturacion
 
                 #region Inventario
                 var parametro = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                
-                    
-                    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura),contacto == null ? "" : contacto.Nombres);
-                    if(data_inv.guardarDB(movimiento, "-"))
+
+                in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura), contacto == null ? "" : contacto.Nombres);
+                if (movimiento != null)
+                    if (data_inv.guardarDB(movimiento, "-"))
                     {
                         db_f.fa_factura_x_in_Ing_Egr_Inven.Add(new fa_factura_x_in_Ing_Egr_Inven
                         {
@@ -346,8 +346,27 @@ namespace Core.Erp.Data.Facturacion
                             IdEmpresa_in_eg_x_inv = movimiento.IdEmpresa,
                             IdSucursal_in_eg_x_inv = movimiento.IdSucursal,
                             IdMovi_inven_tipo_in_eg_x_inv = movimiento.IdMovi_inven_tipo,
-                            IdNumMovi_in_eg_x_inv = movimiento.IdNumMovi,                            
+                            IdNumMovi_in_eg_x_inv = movimiento.IdNumMovi,
                         });
+
+                        foreach (var item in movimiento.lst_in_Ing_Egr_Inven_det)
+                        {
+                            db_f.fa_factura_det_x_in_Ing_Egr_Inven_det.Add(new fa_factura_det_x_in_Ing_Egr_Inven_det
+                            {
+                                IdEmpresa_fa = info.IdEmpresa,
+                                IdSucursal_fa = info.IdSucursal,
+                                IdBodega_fa = info.IdBodega,
+                                IdCbteVta_fa = info.IdCbteVta,
+                                Secuencia_fa = item.RelacionDetalleFactura.Secuencia_fa,
+
+                                IdEmpresa_eg = movimiento.IdEmpresa,
+                                IdSucursal_eg = movimiento.IdSucursal,
+                                IdMovi_inven_tipo_eg = movimiento.IdMovi_inven_tipo,
+                                IdNumMovi_eg = movimiento.IdNumMovi,
+                                Secuencia_eg = item.Secuencia
+                            });
+                        }
+
                         db_f.SaveChanges();
                     }
                 #endregion
@@ -357,24 +376,25 @@ namespace Core.Erp.Data.Facturacion
                 if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito))
                 {
                     ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, parametro.pa_IdCtaCble_descuento, contacto == null ? "" : contacto.Nombres);
-                    if(diario != null)
-                    if (data_ct.guardarDB(diario))
-                    {
-                        db_f.fa_factura_x_ct_cbtecble.Add(new fa_factura_x_ct_cbtecble
+                    if (diario != null)
+                        if (data_ct.guardarDB(diario))
                         {
-                            vt_IdEmpresa = info.IdEmpresa,
-                            vt_IdSucursal = info.IdSucursal,
-                            vt_IdBodega = info.IdBodega,
-                            vt_IdCbteVta = info.IdCbteVta,
+                            db_f.fa_factura_x_ct_cbtecble.Add(new fa_factura_x_ct_cbtecble
+                            {
+                                vt_IdEmpresa = info.IdEmpresa,
+                                vt_IdSucursal = info.IdSucursal,
+                                vt_IdBodega = info.IdBodega,
+                                vt_IdCbteVta = info.IdCbteVta,
 
-                            ct_IdEmpresa = diario.IdEmpresa,
-                            ct_IdTipoCbte = diario.IdTipoCbte,
-                            ct_IdCbteCble = diario.IdCbteCble,
-                        });
-                        db_f.SaveChanges();
-                    }
+                                ct_IdEmpresa = diario.IdEmpresa,
+                                ct_IdTipoCbte = diario.IdTipoCbte,
+                                ct_IdCbteCble = diario.IdCbteCble,
+                            });
+                            db_f.SaveChanges();
+                        }
                 }
                 #endregion
+
                 db_f.Dispose();
                 return true;
             }
@@ -599,7 +619,21 @@ namespace Core.Erp.Data.Facturacion
                                     mv_costo = 0,
                                     mv_costo_sinConversion = 0,
                                     IdUnidadMedida = producto.IdUnidadMedida_Consumo,
-                                    IdUnidadMedida_sinConversion = producto.IdUnidadMedida_Consumo
+                                    IdUnidadMedida_sinConversion = producto.IdUnidadMedida_Consumo,
+
+                                    //FK Factura detalle x egreso detalle
+                                    RelacionDetalleFactura = new fa_factura_det_x_in_Ing_Egr_Inven_det_Info
+                                    {
+                                        IdEmpresa_eg = movimiento.IdEmpresa,
+                                        IdSucursal_eg = movimiento.IdSucursal,
+                                        IdMovi_inven_tipo_eg = movimiento.IdMovi_inven_tipo,
+                                        IdNumMovi_eg = 0,
+                                        IdEmpresa_fa = item.IdEmpresa,
+                                        IdSucursal_fa = item.IdSucursal,
+                                        IdBodega_fa = item.IdBodega,
+                                        IdCbteVta_fa = item.IdCbteVta,
+                                        Secuencia_fa = item.Secuencia
+                                    }
                                 });
                             }
                         }else
@@ -629,7 +663,21 @@ namespace Core.Erp.Data.Facturacion
                                         mv_costo = 0,
                                         mv_costo_sinConversion = 0,
                                         IdUnidadMedida = producto.IdUnidadMedida_Consumo,
-                                        IdUnidadMedida_sinConversion = producto.IdUnidadMedida_Consumo
+                                        IdUnidadMedida_sinConversion = producto.IdUnidadMedida_Consumo,
+
+                                        //FK Factura detalle x egreso detalle
+                                        RelacionDetalleFactura = new fa_factura_det_x_in_Ing_Egr_Inven_det_Info
+                                        {
+                                            IdEmpresa_eg = movimiento.IdEmpresa,
+                                            IdSucursal_eg = movimiento.IdSucursal,
+                                            IdMovi_inven_tipo_eg = movimiento.IdMovi_inven_tipo,
+                                            IdNumMovi_eg = 0,
+                                            IdEmpresa_fa = item.IdEmpresa,
+                                            IdSucursal_fa = item.IdSucursal,
+                                            IdBodega_fa = item.IdBodega,
+                                            IdCbteVta_fa = item.IdCbteVta,
+                                            Secuencia_fa = item.Secuencia
+                                        }
                                     });
                                 }
                             }
@@ -696,7 +744,7 @@ namespace Core.Erp.Data.Facturacion
                         IdSucursal = info.IdSucursal,
                         IdBodega = info.IdBodega,
                         IdCbteVta = info.IdCbteVta,
-                        Secuencia = secuencia++,
+                        Secuencia = item.Secuencia = secuencia++,
 
                         IdProducto = item.IdProducto,
                         vt_cantidad = item.vt_cantidad,
@@ -734,7 +782,7 @@ namespace Core.Erp.Data.Facturacion
                     IdBodega = info.IdBodega,
                     IdCbteVta = info.IdCbteVta,
                     IdFormaPago = info.IdFormaPago,
-                    observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura 
+                    observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura
                 });
                 #endregion
 
@@ -763,44 +811,65 @@ namespace Core.Erp.Data.Facturacion
 
                 #endregion
                 db_f.SaveChanges();
-                                
+
                 #region Inventario
                 var parametro = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                
-                    var egr = db_f.fa_factura_x_in_Ing_Egr_Inven.Where(q => q.IdEmpresa_fa == info.IdEmpresa && q.IdSucursal_fa == info.IdSucursal && q.IdBodega_fa == info.IdBodega && q.IdCbteVta_fa == info.IdCbteVta).FirstOrDefault();
-                    if (egr == null)
+
+                var egr = db_f.fa_factura_x_in_Ing_Egr_Inven.Where(q => q.IdEmpresa_fa == info.IdEmpresa && q.IdSucursal_fa == info.IdSucursal && q.IdBodega_fa == info.IdBodega && q.IdCbteVta_fa == info.IdCbteVta).FirstOrDefault();
+                if (egr == null)
+                {
+                    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura), contacto == null ? "" : contacto.Nombres);
+                    if (movimiento != null)
                     {
-                        in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura),contacto == null ? "" : contacto.Nombres);
-                        if (movimiento != null)
+                        if (data_inv.guardarDB(movimiento, "-"))
                         {
-                            if (data_inv.guardarDB(movimiento, "-"))
+                            db_f.fa_factura_x_in_Ing_Egr_Inven.Add(new fa_factura_x_in_Ing_Egr_Inven
                             {
-                                db_f.fa_factura_x_in_Ing_Egr_Inven.Add(new fa_factura_x_in_Ing_Egr_Inven
+                                IdEmpresa_fa = info.IdEmpresa,
+                                IdSucursal_fa = info.IdSucursal,
+                                IdBodega_fa = info.IdBodega,
+                                IdCbteVta_fa = info.IdCbteVta,
+
+                                IdEmpresa_in_eg_x_inv = movimiento.IdEmpresa,
+                                IdSucursal_in_eg_x_inv = movimiento.IdSucursal,
+                                IdMovi_inven_tipo_in_eg_x_inv = movimiento.IdMovi_inven_tipo,
+                                IdNumMovi_in_eg_x_inv = movimiento.IdNumMovi,
+                            });
+
+                            var lstegr = db_f.fa_factura_det_x_in_Ing_Egr_Inven_det.Where(q => q.IdEmpresa_fa == info.IdEmpresa && q.IdSucursal_fa == info.IdSucursal && q.IdBodega_fa == info.IdBodega && q.IdCbteVta_fa == info.IdCbteVta).ToList();
+                            db_f.fa_factura_det_x_in_Ing_Egr_Inven_det.RemoveRange(lstegr);
+
+                            foreach (var item in movimiento.lst_in_Ing_Egr_Inven_det)
+                            {
+                                db_f.fa_factura_det_x_in_Ing_Egr_Inven_det.Add(new fa_factura_det_x_in_Ing_Egr_Inven_det
                                 {
                                     IdEmpresa_fa = info.IdEmpresa,
                                     IdSucursal_fa = info.IdSucursal,
                                     IdBodega_fa = info.IdBodega,
                                     IdCbteVta_fa = info.IdCbteVta,
+                                    Secuencia_fa = item.RelacionDetalleFactura.Secuencia_fa,
 
-                                    IdEmpresa_in_eg_x_inv = movimiento.IdEmpresa,
-                                    IdSucursal_in_eg_x_inv = movimiento.IdSucursal,
-                                    IdMovi_inven_tipo_in_eg_x_inv = movimiento.IdMovi_inven_tipo,
-                                    IdNumMovi_in_eg_x_inv = movimiento.IdNumMovi,
+                                    IdEmpresa_eg = movimiento.IdEmpresa,
+                                    IdSucursal_eg = movimiento.IdSucursal,
+                                    IdMovi_inven_tipo_eg = movimiento.IdMovi_inven_tipo,
+                                    IdNumMovi_eg = movimiento.IdNumMovi,
+                                    Secuencia_eg = item.Secuencia
                                 });
-                                db_f.SaveChanges();
                             }
+                            db_f.SaveChanges();
                         }
                     }
-                    else
+                }
+                else
+                {
+
+                    in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura), contacto == null ? "" : contacto.Nombres);
+                    if (movimiento != null)
                     {
-                        
-                        in_Ing_Egr_Inven_Info movimiento = armar_movi_inven(info, Convert.ToInt32(parametro.IdMovi_inven_tipo_Factura), contacto == null ? "" : contacto.Nombres);
-                        if (movimiento != null)
-                        {
-                            movimiento.IdNumMovi = egr.IdNumMovi_in_eg_x_inv;
-                            data_inv.modificarDB(movimiento);
-                        }
+                        movimiento.IdNumMovi = egr.IdNumMovi_in_eg_x_inv;
+                        data_inv.modificarDB(movimiento);
                     }
+                }
                 #endregion
 
                 #region Contabilidad
@@ -828,21 +897,22 @@ namespace Core.Erp.Data.Facturacion
                                 });
                                 db_f.SaveChanges();
                             }
-                        }                       
-                    } else
+                        }
+                    }
+                    else
                     {
                         ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura), cliente.IdCtaCble_cxc_Credito, parametro.pa_IdCtaCble_descuento, contacto == null ? "" : contacto.Nombres);
                         if (diario != null)
                         {
                             diario.IdCbteCble = conta.ct_IdCbteCble;
                             data_ct.modificarDB(diario);
-                        }                        
-                    }                    
+                        }
+                    }
                 }
                 #endregion
 
-                db_f.Dispose();                
-                
+                db_f.Dispose();
+
                 return true;
             }
             catch (Exception)
