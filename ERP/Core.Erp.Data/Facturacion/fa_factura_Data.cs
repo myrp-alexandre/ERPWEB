@@ -568,11 +568,7 @@ namespace Core.Erp.Data.Facturacion
                     var motivo = Context.in_Motivo_Inven.Where(q => q.IdEmpresa == info.IdEmpresa && q.Tipo_Ing_Egr == "EGR" && q.Genera_Movi_Inven == "S").FirstOrDefault();
                     if (motivo == null)
                         return null;
-
-                    var tipo = Context.in_movi_inven_tipo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMovi_inven_tipo == IdMoviInven_tipo).FirstOrDefault();
-                    if (tipo == null)
-                        return null;
-
+                    
                     int secuencia = 1;
 
                     in_Ing_Egr_Inven_Info movimiento = new in_Ing_Egr_Inven_Info

@@ -1,4 +1,6 @@
-﻿using Core.Erp.Info.Facturacion;
+﻿using Core.Erp.Data.Inventario;
+using Core.Erp.Info.Facturacion;
+using Core.Erp.Info.Inventario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,45 +74,63 @@ namespace Core.Erp.Data.Facturacion
         {
             try
             {
-                using (Entities_facturacion db = new Entities_facturacion())
+                Entities_facturacion db = new Entities_facturacion();
+                #region Cambio producto
+                db.fa_CambioProducto.Add(new fa_CambioProducto
                 {
-                    db.fa_CambioProducto.Add(new fa_CambioProducto
+                    IdEmpresa = info.IdEmpresa,
+                    IdSucursal = info.IdSucursal,
+                    IdBodega = info.IdBodega,
+                    IdCambio = info.IdCambio = GetId(info.IdEmpresa, info.IdSucursal, info.IdBodega),
+                    Fecha = info.Fecha.Date,
+                    Observacion = info.Observacion,
+                    Estado = true,
+
+                    IdUsuario = info.IdUsuario,
+                    FechaTransac = DateTime.Now
+                });
+                int secuencia = 1;
+                foreach (var item in info.LstDet)
+                {
+                    db.fa_CambioProductoDet.Add(new fa_CambioProductoDet
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdSucursal = info.IdSucursal,
                         IdBodega = info.IdBodega,
-                        IdCambio = info.IdCambio = GetId(info.IdEmpresa, info.IdSucursal, info.IdBodega),
-                        Fecha = info.Fecha.Date,
-                        Observacion = info.Observacion,
-                        Estado = true,
+                        IdCambio = info.IdCambio,
+                        Secuencia = secuencia++,
 
-                        IdUsuario = info.IdUsuario,
-                        FechaTransac = DateTime.Now
+                        IdCbteVta = item.IdCbteVta,
+                        SecuenciaFact = item.SecuenciaFact,
+                        IdProductoFact = item.IdProductoFact,
+                        IdProductoCambio = item.IdProductoCambio,
+                        CantidadCambio = item.CantidadCambio,
+                        CantidadFact = item.CantidadFact
                     });
-                    int secuencia = 1;
-                    foreach (var item in info.LstDet)
-                    {
-                        db.fa_CambioProductoDet.Add(new fa_CambioProductoDet
-                        {
-                            IdEmpresa = info.IdEmpresa,                            
-                            IdSucursal = info.IdSucursal,
-                            IdBodega = info.IdBodega,
-                            IdCambio = info.IdCambio,
-                            Secuencia = secuencia++,
+                }
+                db.SaveChanges();
+                #endregion
 
-                            IdCbteVta = item.IdCbteVta,
-                            SecuenciaFact = item.SecuenciaFact,
-                            IdProductoFact = item.IdProductoFact,
-                            IdProductoCambio = item.IdProductoCambio,
-                            CantidadCambio = item.CantidadCambio,
-                            CantidadFact = item.CantidadFact                            
-                        });
-                    }
+                Entities_inventario dbi = new Entities_inventario();
+                in_Ing_Egr_Inven_Data odata_i = new in_Ing_Egr_Inven_Data();
 
+                var parametro = dbi.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                if (parametro == null)
+                    return true;
+
+                info.IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_Cambio;
+                var movi = GenerarMoviInven(info);
+                if (movi == null)
+                    return true;
+
+                if (odata_i.guardarDB(movi,"-"))
+                {
+                    info.IdNumMovi = movi.IdNumMovi;
                     db.SaveChanges();
 
 
                 }
+
                 return true;
             }
             catch (Exception)
@@ -213,6 +233,81 @@ namespace Core.Erp.Data.Facturacion
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        private in_Ing_Egr_Inven_Info GenerarMoviInven(fa_CambioProducto_Info info)
+        {
+            try
+            {
+                using (Entities_inventario db = new Entities_inventario())
+                {
+                    var motivo = db.in_Motivo_Inven.Where(q => q.IdEmpresa == info.IdEmpresa && q.Genera_Movi_Inven == "S" && q.Tipo_Ing_Egr == "EGR").FirstOrDefault();
+                    if (motivo == null)
+                        return null;
+
+                    in_Ing_Egr_Inven_Info movi = new in_Ing_Egr_Inven_Info
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdSucursal = info.IdSucursal,
+                        IdBodega = info.IdBodega,
+                        IdMovi_inven_tipo = (int)info.IdMovi_inven_tipo,
+                        IdNumMovi = info.IdNumMovi == null ? 0 : Convert.ToDecimal(info.IdNumMovi),
+                        cm_fecha = info.Fecha.Date,
+                        cm_observacion = "CAMB#" + info.IdCambio + " " + info.Observacion,
+                        Estado = "A",
+                        CodMoviInven = "CAMB#" + info.IdCambio,
+                        signo = "-",
+                        IdUsuario = info.IdUsuario,
+                        IdUsuarioUltModi = info.IdUsuario,
+                        IdMotivo_Inv = motivo.IdMotivo_Inv
+                    };
+                    int secuencia = 1;
+                    foreach (var item in info.LstDet)
+                    {
+                        var producto = db.in_Producto.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdProducto == item.IdProductoCambio).FirstOrDefault();
+                        if (producto == null)
+                            return null;
+
+                        movi.lst_in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det_Info
+                        {
+                            IdEmpresa = movi.IdEmpresa,
+                            IdSucursal = movi.IdSucursal,
+                            IdBodega = (int)movi.IdBodega,
+                            IdMovi_inven_tipo = movi.IdMovi_inven_tipo,
+                            IdNumMovi = 0,
+                            Secuencia = secuencia++,
+                            IdProducto = item.IdProductoCambio,
+                            dm_cantidad = item.CantidadCambio * -1,
+                            dm_cantidad_sinConversion = item.CantidadCambio * -1,
+                            mv_costo = 0,
+                            mv_costo_sinConversion = 0,
+                            IdUnidadMedida = producto.IdUnidadMedida_Consumo,
+                            IdUnidadMedida_sinConversion = producto.IdUnidadMedida_Consumo,
+                        });
+                    }
+                    return movi;
+                }
+
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void GenerarDevoluciones(List<fa_CambioProductoDet_Info> ListaCambios)
+        {
+            try
+            {
+                
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
