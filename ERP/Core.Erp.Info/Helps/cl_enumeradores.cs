@@ -105,6 +105,16 @@
            ENFERMEDAD,
            PERSONAL
         }
+        public enum eTipoMarcacionRRHH
+        {
+
+            IN1,
+            IN2,
+            OUT1,
+            OUT2,
+            RLUNCH,
+            SLUNCH
+        }
         public enum eTipoIngEgr
         {
             ING,

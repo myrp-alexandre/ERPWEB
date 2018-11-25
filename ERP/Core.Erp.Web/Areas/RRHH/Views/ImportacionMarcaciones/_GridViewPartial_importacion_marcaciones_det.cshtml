@@ -41,12 +41,11 @@
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
-        settings.Columns.Add("Secuancia","ID").Width=Unit.Percentage(5);
+        settings.Columns.Add("IdRegistro","ID").Width=Unit.Percentage(5);
 
 
         settings.Columns.Add("pe_cedulaRuc","Cédula").Width = Unit.Percentage(15);
         settings.Columns.Add("pe_apellido","Empleado").Width = Unit.Percentage(50);
-        settings.Columns.Add("Valor", "Valor").Width = Unit.Percentage(15);
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor");
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Count, "Secuencia");
 
@@ -54,4 +53,4 @@
 
     });
 }
-@grid.Bind(Model.detalle).GetHtml()
+@grid.Bind(Model).GetHtml()

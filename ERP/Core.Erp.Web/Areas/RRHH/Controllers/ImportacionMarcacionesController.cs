@@ -111,7 +111,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult UploadControlUpload()
         {
-            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_marcaciones.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_marcaciones.UploadValidationSettings, UploadControlSettings_marcaciones.FileUploadComplete_marcaciones);
             return null;
         }
 
@@ -123,11 +123,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             AllowedFileExtensions = new string[] { ".xlsx" },
             MaxFileSize = 40000000
         };
-        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        public static void FileUploadComplete_marcaciones(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
             int cont = 0;
             ro_empleado_info_list empleado_info_list = new ro_empleado_info_list();
-            ro_EmpleadoNovedadCargaMasiva_detLis_Info EmpleadoNovedadCargaMasiva_detLis_Info = new ro_EmpleadoNovedadCargaMasiva_detLis_Info();
+            ro_marcaciones_x_empleado_detLis_Info EmpleadoNovedadCargaMasiva_detLis_Info = new ro_marcaciones_x_empleado_detLis_Info();
             List<ro_marcaciones_x_empleado_Info> lista_novedades = new List<ro_marcaciones_x_empleado_Info>();
 
             Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
@@ -135,6 +135,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IExcelDataReader reader = null;
                 reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                DateTime Fecha_registro;
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0))
@@ -145,16 +146,80 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             var empleado = empleado_info_list.get_list().Where(v => v.pe_cedulaRuc == cedua).FirstOrDefault();
                             if (empleado != null)
                             {
-                                ro_marcaciones_x_empleado_Info info = new ro_marcaciones_x_empleado_Info
+                                if (!reader.IsDBNull(2))// si tiene fehca de marcacion
                                 {
-                                    //Valor = Convert.ToDouble(reader.GetString(3)),
-                                    //pe_cedulaRuc = cedua,
-                                    //pe_apellido = empleado.Empleado,
-                                    //em_codigo = empleado.em_codigo,
-                                    //Secuancia = cont,
-                                    IdEmpleado = empleado.IdEmpleado
-                                };
-                                lista_novedades.Add(info);
+                                    Fecha_registro =Convert.ToDateTime( reader.GetString(2));
+                                    if (!reader.IsDBNull(3))// si tiene entrada del primer turno
+                                    {
+                                        ro_marcaciones_x_empleado_Info info = new ro_marcaciones_x_empleado_Info
+                                        {   IdEmpleado=empleado.IdEmpleado,
+                                            IdEmpresa=empleado.IdEmpresa,
+                                            es_fechaRegistro=Fecha_registro,
+                                            es_anio=Fecha_registro.Year,
+                                            es_mes=Fecha_registro.Month,
+                                            es_idDia=Fecha_registro.Day,
+                                            es_Hora=new TimeSpan(Fecha_registro.Hour,Fecha_registro.Minute,0),
+                                            IdTipoMarcaciones=cl_enumeradores.eTipoMarcacionRRHH.IN1.ToString()
+                                            
+                                        };
+                                        lista_novedades.Add(info);
+                                    }
+
+
+                                    if (!reader.IsDBNull(4))// si tiene salida del primer turno
+                                    {
+                                        ro_marcaciones_x_empleado_Info info = new ro_marcaciones_x_empleado_Info
+                                        {
+                                            IdEmpleado = empleado.IdEmpleado,
+                                            IdEmpresa = empleado.IdEmpresa,
+                                            es_fechaRegistro = Fecha_registro,
+                                            es_anio = Fecha_registro.Year,
+                                            es_mes = Fecha_registro.Month,
+                                            es_idDia = Fecha_registro.Day,
+                                            es_Hora = new TimeSpan(Fecha_registro.Hour, Fecha_registro.Minute, 0),
+                                            IdTipoMarcaciones = cl_enumeradores.eTipoMarcacionRRHH.IN1.ToString()
+
+                                        };
+                                        lista_novedades.Add(info);
+                                    }
+
+                                    if (!reader.IsDBNull(5))// si tiene entrada del segundo turno
+                                    {
+                                        ro_marcaciones_x_empleado_Info info = new ro_marcaciones_x_empleado_Info
+                                        {
+                                            IdEmpleado = empleado.IdEmpleado,
+                                            IdEmpresa = empleado.IdEmpresa,
+                                            es_fechaRegistro = Fecha_registro,
+                                            es_anio = Fecha_registro.Year,
+                                            es_mes = Fecha_registro.Month,
+                                            es_idDia = Fecha_registro.Day,
+                                            es_Hora = new TimeSpan(Fecha_registro.Hour, Fecha_registro.Minute, 0),
+                                            IdTipoMarcaciones = cl_enumeradores.eTipoMarcacionRRHH.IN1.ToString()
+
+                                        };
+                                        lista_novedades.Add(info);
+                                    }
+
+
+                                    if (reader.IsDBNull(6))// si tiene salida del segundo turno
+                                    {
+                                        ro_marcaciones_x_empleado_Info info = new ro_marcaciones_x_empleado_Info
+                                        {
+                                            IdEmpleado = empleado.IdEmpleado,
+                                            IdEmpresa = empleado.IdEmpresa,
+                                            es_fechaRegistro = Fecha_registro,
+                                            es_anio = Fecha_registro.Year,
+                                            es_mes = Fecha_registro.Month,
+                                            es_idDia = Fecha_registro.Day,
+                                            es_Hora = new TimeSpan(Fecha_registro.Hour, Fecha_registro.Minute, 0),
+                                            IdTipoMarcaciones = cl_enumeradores.eTipoMarcacionRRHH.IN1.ToString()
+
+                                        };
+                                        lista_novedades.Add(info);
+                                    }
+                                }
+
+                                
                             }
                         }
                         cont++;
@@ -162,7 +227,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     }
 
                 }
-               // EmpleadoNovedadCargaMasiva_detLis_Info.set_list(lista_novedades);
+                EmpleadoNovedadCargaMasiva_detLis_Info.set_list(lista_novedades);
             }
         }
 
