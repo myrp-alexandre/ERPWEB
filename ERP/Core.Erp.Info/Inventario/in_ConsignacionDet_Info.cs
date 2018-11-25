@@ -13,6 +13,7 @@ namespace Core.Erp.Info.Inventario
         public decimal IdConsignacion { get; set; }
         public int Secuencia { get; set; }
         [Required(ErrorMessage = "El campo producto es obligatorio")]
+        [Range(1, int.MaxValue, ErrorMessage = "El campo producto es obligatorio")]
         public decimal IdProducto { get; set; }
         [Required(ErrorMessage = "El campo unidad de medida es obligatorio")]
         public string IdUnidadMedida { get; set; }
@@ -20,6 +21,7 @@ namespace Core.Erp.Info.Inventario
         [Range(1, double.MaxValue, ErrorMessage = "El campo cantidad es obligatorio")]
         public double Cantidad { get; set; }
         [Required(ErrorMessage = "El campo costo es obligatorio")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El campo cantidad es obligatorio")]
         public double Costo { get; set; }
         public string Observacion { get; set; }
 

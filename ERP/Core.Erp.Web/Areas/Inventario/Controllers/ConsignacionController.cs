@@ -160,7 +160,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             model.IdUsuario = SessionFixed.IdUsuario;
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.lst_producto_consignacion = in_ConsignacionDet_List.get_list( model.IdTransaccionSession);
+            model.lst_producto_consignacion = in_ConsignacionDet_List.get_list(model.IdTransaccionSession);
+            
+            if (!Validar(model, ref mensaje))
+            {
+                CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
 
             if (!bus_in_Consignacion.GuardarBD(model))
             {
@@ -168,7 +175,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index");            
         }
 
         public ActionResult Modificar(int IdEmpresa = 0, int IdConsignacion=0)
@@ -196,13 +204,15 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult Modificar(in_Consignacion_Info model)
         {
             model.lst_producto_consignacion = in_ConsignacionDet_List.get_list(model.IdTransaccionSession);
-            if (!validar(model, ref mensaje))
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+
+            if (!Validar(model, ref mensaje))
             {
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+           
             if (!bus_in_Consignacion.ModificarBD(model))
             {
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
@@ -249,14 +259,62 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
-        #region Funciones del detalle
-        private bool validar(in_Consignacion_Info i_validar, ref string msg)
+        private bool Validar(in_Consignacion_Info i_validar, ref string msg)
         {
+            i_validar.lst_producto_consignacion = in_ConsignacionDet_List.get_list(i_validar.IdTransaccionSession);
+
             if (i_validar.lst_producto_consignacion.Count == 0)
             {
-                mensaje = "Debe ingresar al menos un producto";
+                mensaje = "Debe ingresar un detalle en la consignación";
                 return false;
             }
+
+            if (i_validar.IdSucursal == 0)
+            {
+                mensaje = "Debe ingresar una sucursal";
+                return false;
+            }
+
+            if (i_validar.IdBodega == 0)
+            {
+                mensaje = "Debe ingresar una bodega";
+                return false;
+            }
+
+            if (i_validar.IdProveedor == 0)
+            {
+                mensaje = "Debe ingresar un proveedor";
+                return false;
+            }
+            return true;
+        }
+        #region Funciones del detalle
+        private bool validar_detalle(in_ConsignacionDet_Info item_validar, ref string msg)
+        {
+            if (item_validar.IdProducto == 0)
+            {
+                mensaje = "Debe ingresar producto";
+                return false;
+            }
+
+            if (item_validar.Cantidad == 0)
+            {
+                mensaje = "Debe ingresar cantidad mayor a 0";
+                return false;
+            }
+
+            if (item_validar.Costo == 0)
+            {
+                mensaje = "Debe ingresar costo mayor a 0";
+                return false;
+            }
+
+            if (item_validar.IdUnidadMedida == "")
+            {
+                mensaje = "Debe ingresar unidad de medida";
+                return false;
+            }
+
             return true;
         }
 
@@ -283,16 +341,30 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (info_det != null)
-                if (info_det.IdProducto != 0)
+            {
+                if (!validar_detalle(info_det, ref mensaje))
                 {
-                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-                    if (info_producto != null)
+                    cargar_combos_detalle();
+                    ViewBag.mensaje = mensaje;
+                }
+                else
+                {
+                    if (info_det.IdProducto != 0)
                     {
-                        info_det.pr_descripcion = info_producto.pr_descripcion_combo;
+                        in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                        if (info_producto != null)
+                        {
+                            info_det.pr_descripcion = info_producto.pr_descripcion_combo;
+                        }
                     }
                 }
-            if (!ModelState.IsValid)
+            }
+
+            if (ModelState.IsValid)
+            {
                 in_ConsignacionDet_List.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+
             var model = in_ConsignacionDet_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_ConsignacionDet", model);
@@ -302,20 +374,35 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] in_ConsignacionDet_Info info_det)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+
             if (info_det != null)
-                if (info_det.IdProducto != 0)
+            {
+                if (!validar_detalle(info_det, ref mensaje))
                 {
-                    in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-                    if (info_producto != null)
+                    cargar_combos_detalle();
+                    ViewBag.mensaje = mensaje;
+                }
+                else
+                {
+                    if (info_det.IdProducto != 0)
                     {
-                        info_det.pr_descripcion = info_producto.pr_descripcion_combo;
+                        in_Producto_Info info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                        if (info_producto != null)
+                        {
+                            info_det.pr_descripcion = info_producto.pr_descripcion_combo;
+                        }
                     }
                 }
+            }                    
 
+            if (ModelState.IsValid)
+            {
                 in_ConsignacionDet_List.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                var model = in_ConsignacionDet_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                cargar_combos_detalle();
-                return PartialView("_GridViewPartial_ConsignacionDet", model);
+            }
+            
+            var model = in_ConsignacionDet_List.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_ConsignacionDet", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
