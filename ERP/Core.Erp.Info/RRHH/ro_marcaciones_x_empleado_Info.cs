@@ -23,13 +23,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<System.TimeSpan> es_Hora { get; set; }
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public System.DateTime es_fechaRegistro { get; set; }
-        public Nullable<int> es_anio { get; set; }
-        public Nullable<int> es_mes { get; set; }
-        public Nullable<int> es_semana { get; set; }
-        public Nullable<int> es_dia { get; set; }
-        public string es_sdia { get; set; }
-        public Nullable<int> es_idDia { get; set; }
-        public string es_EsActualizacion { get; set; }
+
         public string IdTipoMarcaciones_Biometrico { get; set; }
         public string Observacion { get; set; }
         public string IdUsuario { get; set; }

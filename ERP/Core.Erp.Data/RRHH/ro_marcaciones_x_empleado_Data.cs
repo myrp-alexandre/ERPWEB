@@ -28,11 +28,7 @@ namespace Core.Erp.Data.RRHH
                                  IdTipoMarcaciones = q.IdTipoMarcaciones,
                                  es_Hora = q.es_Hora,
                                  es_fechaRegistro = q.es_fechaRegistro,
-                                 es_anio = q.es_anio,
-                                 es_mes = q.es_mes,
-                                 es_sdia = q.es_sdia,
-                                 es_dia = q.es_dia,
-                                 es_EsActualizacion = q.es_EsActualizacion,
+                                
                                  Observacion = q.Observacion,
                                  IdUsuario = q.IdUsuario,
                                 
@@ -75,14 +71,8 @@ namespace Core.Erp.Data.RRHH
                         IdCalendadrio=Entity.IdCalendadrio,
                         IdTipoMarcaciones = Entity.IdTipoMarcaciones,
                         IdNomina = Entity.IdNomina,
-                        IdPeriodo = Entity.IdPeriodo,
                         es_Hora = Entity.es_Hora,
                         es_fechaRegistro = Entity.es_fechaRegistro,
-                        es_anio = Entity.es_anio,
-                        es_mes = Entity.es_mes,
-                        es_sdia = Entity.es_sdia,
-                        es_dia = Entity.es_dia,
-                        es_EsActualizacion = Entity.es_EsActualizacion,
                         Observacion = Entity.Observacion,
                         IdUsuario = Entity.IdUsuario,
                         Estado = Entity.Estado
@@ -135,14 +125,9 @@ namespace Core.Erp.Data.RRHH
                         IdCalendadrio = info.IdCalendadrio,
                         IdTipoMarcaciones = info.IdTipoMarcaciones,
                         IdNomina = info.IdNomina,
-                        IdPeriodo = info.IdPeriodo,
                         es_Hora = info.es_Hora,
                         es_fechaRegistro = info.es_fechaRegistro.Date,
-                        es_anio = info.es_anio,
-                        es_mes = info.es_mes,
-                        es_sdia = info.es_sdia,
-                        es_dia = info.es_dia,
-                        es_EsActualizacion = info.es_EsActualizacion,
+                        
                         Observacion = info.Observacion,
                         IdUsuario = info.IdUsuario,
                         Estado = info.Estado = "A",
@@ -173,18 +158,14 @@ namespace Core.Erp.Data.RRHH
                         {
                             IdEmpresa = item.IdEmpresa,
                             IdRegistro = item.IdRegistro = IdRegistro,
+                            
                             IdEmpleado = item.IdEmpleado,
                             IdCalendadrio = item.IdCalendadrio,
                             IdTipoMarcaciones = item.IdTipoMarcaciones,
                             IdNomina = item.IdNomina,
-                            IdPeriodo = item.IdPeriodo,
                             es_Hora = item.es_Hora,
                             es_fechaRegistro = item.es_fechaRegistro.Date,
-                            es_anio = item.es_anio,
-                            es_mes = item.es_mes,
-                            es_sdia = item.es_sdia,
-                            es_dia = item.es_dia,
-                            es_EsActualizacion = item.es_EsActualizacion,
+                            
                             Observacion = item.Observacion,
                             IdUsuario = item.IdUsuario,
                             Estado = item.Estado = "A",
@@ -217,14 +198,8 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdCalendadrio = info.IdCalendadrio;
                         Entity.IdTipoMarcaciones = info.IdTipoMarcaciones;
                         Entity.IdNomina = info.IdNomina;
-                        Entity.IdPeriodo = info.IdPeriodo;
                         Entity.es_Hora = info.es_Hora;
                         Entity.es_fechaRegistro = info.es_fechaRegistro.Date;
-                        Entity.es_anio = info.es_anio;
-                        Entity.es_mes = info.es_mes;
-                        Entity.es_sdia = info.es_sdia;
-                        Entity.es_dia = info.es_dia;
-                        Entity.es_EsActualizacion = info.es_EsActualizacion;
                         Entity.Observacion = info.Observacion;
                         Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
                         Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
