@@ -129,7 +129,7 @@ namespace Core.Erp.Data.Facturacion
                     if (movi == null)
                         return true;
 
-                    if (odata_i.guardarDB(movi, "-"))
+                    if (info.IdNumMovi == null && odata_i.guardarDB(movi, "-"))
                     {
                         info.IdNumMovi = movi.IdNumMovi;
 
@@ -141,8 +141,8 @@ namespace Core.Erp.Data.Facturacion
                         db.SaveChanges();
 
                         GenerarDevoluciones(info);
-                    }
-                    
+                    }else
+                        GenerarDevoluciones(info);
                 }
                 db.Dispose();
                 #endregion
