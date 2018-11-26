@@ -19,7 +19,6 @@ namespace Core.Erp.Data
         public decimal IdContrato { get; set; }
         public Nullable<int> IdNomina { get; set; }
         public string IdContrato_Tipo { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
         public string NumDocumento { get; set; }
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime FechaFin { get; set; }

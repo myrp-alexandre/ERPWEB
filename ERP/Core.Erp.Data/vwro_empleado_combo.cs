@@ -19,5 +19,7 @@ namespace Core.Erp.Data
         public string em_status { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdEmpleado { get; set; }
+        public Nullable<int> IdNomina { get; set; }
+        public int IdSucursal { get; set; }
     }
 }

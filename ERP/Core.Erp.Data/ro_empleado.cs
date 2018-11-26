@@ -38,8 +38,8 @@ namespace Core.Erp.Data
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_Solicitud_Vacaciones_x_empleado = new HashSet<ro_Solicitud_Vacaciones_x_empleado>();
             this.ro_EmpleadoNovedadCargaMasiva_det = new HashSet<ro_EmpleadoNovedadCargaMasiva_det>();
-            this.ro_contrato = new HashSet<ro_contrato>();
             this.ro_marcaciones_x_empleado = new HashSet<ro_marcaciones_x_empleado>();
+            this.ro_contrato = new HashSet<ro_contrato>();
         }
     
         public int IdEmpresa { get; set; }
@@ -149,7 +149,7 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
         public virtual ICollection<ro_EmpleadoNovedadCargaMasiva_det> ro_EmpleadoNovedadCargaMasiva_det { get; set; }
-        public virtual ICollection<ro_contrato> ro_contrato { get; set; }
         public virtual ICollection<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
+        public virtual ICollection<ro_contrato> ro_contrato { get; set; }
     }
 }

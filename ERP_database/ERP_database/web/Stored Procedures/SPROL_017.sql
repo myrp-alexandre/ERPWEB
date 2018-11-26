@@ -20,7 +20,7 @@ from
 
 select marcaciones.Entrada1, marcaciones.Entrada2,marcaciones.Salida1,marcaciones.Salida2,marcaciones.SalidaLounch,marcaciones.RegresoLounch, empleado.*
 from (
-SELECT        emp.IdEmpresa, emp.IdEmpleado, per.pe_nombreCompleto, per.pe_cedulaRuc, marc.es_fechaRegistro, marc.es_Hora, marc.es_anio, marc.es_mes, marc.es_semana, marc.es_dia, marc.es_sdia, m_tipo.ma_descripcion
+SELECT        emp.IdEmpresa, emp.IdEmpleado, per.pe_nombreCompleto, per.pe_cedulaRuc, marc.es_fechaRegistro, marc.es_Hora,  m_tipo.ma_descripcion
 FROM            dbo.ro_marcaciones_tipo AS m_tipo INNER JOIN
                          dbo.ro_marcaciones_x_empleado AS marc ON m_tipo.IdTipoMarcaciones = marc.IdTipoMarcaciones INNER JOIN
                          dbo.ro_empleado AS emp ON marc.IdEmpresa = emp.IdEmpresa AND marc.IdEmpleado = emp.IdEmpleado INNER JOIN
