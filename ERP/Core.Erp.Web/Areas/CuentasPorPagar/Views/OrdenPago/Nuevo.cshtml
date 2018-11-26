@@ -29,7 +29,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
-                    
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
@@ -38,22 +39,22 @@
                         <div class="form-group">
                             <label for="IdTipo_op">Tipo orden pago*</label>
                             @Html.DevExpress().ComboBoxFor(q => q.IdTipo_op, settings =>
-               {
-                   settings.Name = "IdTipo_op";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdTipo_op", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                   settings.Properties.Columns.Add("Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                   //Campo ID
-                   settings.Properties.ValueField = "IdTipo_op";
-                   settings.Properties.ValueType = typeof(string);
-                   settings.Properties.TextField = "Descricpion";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            {
+                                settings.Name = "IdTipo_op";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdTipo_op", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                settings.Properties.Columns.Add("Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdTipo_op";
+                                settings.Properties.ValueType = typeof(string);
+                                settings.Properties.TextField = "Descricpion";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
-               }).BindList(ViewBag.lst_tipo_orden_pago).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdTipo_op, "", new { @class = "text-danger" })
+                            }).BindList(ViewBag.lst_tipo_orden_pago).GetHtml()
+                                        @Html.ValidationMessageFor(q => q.IdTipo_op, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
