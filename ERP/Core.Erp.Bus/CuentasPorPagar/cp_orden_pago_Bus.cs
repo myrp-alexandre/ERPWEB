@@ -18,11 +18,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
         ct_cbtecble_det_Bus bus_contabilidad_det = new ct_cbtecble_det_Bus();
 
-        public List<cp_orden_pago_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<cp_orden_pago_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal)
         {
             try
             {
-                return oData.get_list(IdEmpresa, Fecha_ini, Fecha_fin);
+                return oData.get_list(IdEmpresa, Fecha_ini, Fecha_fin, IdSucursal);
             }
             catch (Exception)
             {

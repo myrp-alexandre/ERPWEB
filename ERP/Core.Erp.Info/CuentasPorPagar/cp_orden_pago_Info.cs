@@ -12,6 +12,7 @@ namespace Core.Erp.Info.CuentasPorPagar
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
+        public string Su_Descripcion { get; set; }
         public decimal IdOrdenPago { get; set; }
         [Required(ErrorMessage = "El campo observación es obligatorio")]
         [StringLength(50, MinimumLength = 4, ErrorMessage = "La descripción debe tener mínimo 4 caracteres y máximo 500")]

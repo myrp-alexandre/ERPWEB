@@ -36,5 +36,8 @@ namespace Core.Erp.Info.CuentasPorPagar
         public bool EstadoBool { get; set; }
         public string GeneraDiario { get; set; }
 
+
+        public string DescripcionAprobacion { get; set; }
+
     }
 }

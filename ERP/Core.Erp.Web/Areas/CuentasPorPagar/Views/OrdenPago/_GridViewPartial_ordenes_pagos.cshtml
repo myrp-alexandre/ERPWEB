@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_ordenes_pagos";
-        settings.CallbackRouteValues = new { Controller = "OrdenPago", Action = "GridViewPartial_ordenes_pagos" };
+        settings.CallbackRouteValues = new { Controller = "OrdenPago", Action = "GridViewPartial_ordenes_pagos", Fecha_ini= ViewBag.Fecha_ini, Fecha_fin=ViewBag.Fecha_fin, IdSucursal=ViewBag.IdSucursal };
         settings.KeyFieldName = "IdOrdenPago";
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -87,8 +87,20 @@
         });
 
         settings.Columns.Add("IdOrdenPago","ID").Width=Unit.Percentage(10);
-        settings.Columns.Add("Nom_Beneficiario", "Beneficiario").Width=Unit.Percentage(30);
-        settings.Columns.Add("Observacion","Observación").Width = Unit.Percentage(30);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha_Pago";
+            column.Caption = "Fecha pago";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add("Nom_Beneficiario", "Beneficiario").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Total_OP";
@@ -103,23 +115,13 @@
 
             });
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Fecha_Pago";
-            column.Caption = "Fecha pago";
-            column.Width = Unit.Percentage(15);
-            column.PropertiesEdit.DisplayFormatString = "d";
-            column.EditorProperties().DateEdit(sp =>
-            {
-                column.PropertiesEdit.DisplayFormatString = "d";
-                sp.Width = Unit.Percentage(100);
-            });
-        });
+        settings.Columns.Add("Observacion","Observación").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdEstadoAprobacion", "Estado Aprobación").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
 

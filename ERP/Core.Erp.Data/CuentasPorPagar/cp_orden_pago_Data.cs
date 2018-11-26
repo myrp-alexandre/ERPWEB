@@ -8,7 +8,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 {
    public class cp_orden_pago_Data
     {
-        public List<cp_orden_pago_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<cp_orden_pago_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal)
         {
             try
             {
@@ -20,10 +20,12 @@ namespace Core.Erp.Data.CuentasPorPagar
                              where IdEmpresa == q.IdEmpresa
                              && q.Fecha_Pago>=Fecha_ini
                              && q.Fecha_Pago <= Fecha_fin
-
+                             && q.IdSucursal == IdSucursal
                              select new cp_orden_pago_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 Su_Descripcion = q.Su_Descripcion,
                                  IdOrdenPago = q.IdOrdenPago,
                                  Observacion = q.Observacion,
                                  IdTipo_op = q.IdTipo_op,

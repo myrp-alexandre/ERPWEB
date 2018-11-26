@@ -61,8 +61,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     Lista = (from q in Context.cp_orden_pago_tipo_x_empresa
-                             join p in Context.cp_orden_pago_tipo
+                             join p in Context.cp_orden_pago_tipo                             
                              on new { q.IdTipo_op } equals new { p.IdTipo_op }
+                             join r in Context.cp_orden_pago_estado_aprob
+                             on new { q.IdEstadoAprobacion } equals new { r.IdEstadoAprobacion }
                              where q.IdEmpresa == IdEmpresa
                              && q.IdTipo_op == p.IdTipo_op
                              &&q.IdTipo_op==IdTipo_op
@@ -80,7 +82,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdCtaCble_Credito = q.IdCtaCble_Credito,
                                  Dispara_Alerta = q.Dispara_Alerta,
                                  Descripcion = p.Descripcion,
-                                 Estado = p.Estado
+                                 Estado = p.Estado,
+                                 DescripcionAprobacion=r.Descripcion
 
 
 

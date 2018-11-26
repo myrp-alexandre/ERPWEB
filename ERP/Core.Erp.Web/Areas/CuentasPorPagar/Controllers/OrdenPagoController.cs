@@ -23,7 +23,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         #region variables
         cp_orden_pago_Bus bus_orden_pago = new cp_orden_pago_Bus();
+        cp_orden_pago_tipo_x_empresa_Bus bus_orden_pago_tipo_x_empresa = new cp_orden_pago_tipo_x_empresa_Bus();
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         cp_orden_pago_tipo_x_empresa_Info info_param_op = new cp_orden_pago_tipo_x_empresa_Info();
         cp_orden_pago_tipo_x_empresa_Bus bus_orden_pago_tipo = new cp_orden_pago_tipo_x_empresa_Bus();
         ct_cbtecble_det_List_op comprobante_contable_fp = new ct_cbtecble_det_List_op();
@@ -43,24 +45,29 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal)
             };
-            cargar_combos_consulta();
+
+            cargar_combos_consulta(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
-            cargar_combos_consulta();
+            model.IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+            cargar_combos_consulta(model.IdEmpresa);
             return View(model);
         }
 
-        public ActionResult GridViewPartial_ordenes_pagos(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        public ActionResult GridViewPartial_ordenes_pagos(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-            lst_ordenes_pagos = bus_orden_pago.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            ViewBag.IdSucursal = IdSucursal == 0 ? 0: Convert.ToInt32(IdSucursal);
+
+            lst_ordenes_pagos = bus_orden_pago.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, IdSucursal);
             return PartialView("_GridViewPartial_ordenes_pagos", lst_ordenes_pagos);
         }
 
@@ -103,16 +110,23 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_tipo_orden_pago = bus_orden_pago_tipo.get_list(IdEmpresa);
             ViewBag.lst_tipo_orden_pago = lst_tipo_orden_pago;
 
-
-        }
-
-        private void cargar_combos_consulta()
-        {
-            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
         }
+
+        private void cargar_combos_consulta(int IdEmpresa)
+        {
+            try
+            {
+                var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+                ViewBag.lst_sucursal = lst_sucursal;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         private bool validar(cp_orden_pago_Info i_validar, ref string msg)
         {
             if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.Fecha, cl_enumeradores.eModulo.CXP, ref msg))
@@ -124,6 +138,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return false;
             }
             return true;
+        }
+        #endregion
+
+        #region Json
+        public JsonResult CargarEstadoAprobacion(int IdEmpresa = 0, string IdTipo_op = "")
+        {
+            var resultado = bus_orden_pago_tipo_x_empresa.get_info(IdEmpresa, IdTipo_op);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
         #region Acciones

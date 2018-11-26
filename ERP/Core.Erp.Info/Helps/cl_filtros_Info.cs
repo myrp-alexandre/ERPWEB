@@ -64,6 +64,8 @@ namespace Core.Erp.Info.Helps
 
     }
 
+
+
     public class cl_filtros_importacion_Info
     {
         public DateTime fecha_fin { get; set; }
