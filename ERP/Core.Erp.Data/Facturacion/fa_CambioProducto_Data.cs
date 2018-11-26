@@ -129,15 +129,20 @@ namespace Core.Erp.Data.Facturacion
                     if (movi == null)
                         return true;
 
-
-                    if (odata_i.guardarDB(movi, "-"))
+                    if (info.IdNumMovi == null && odata_i.guardarDB(movi, "-"))
                     {
                         info.IdNumMovi = movi.IdNumMovi;
+
+                        var Entity = db.fa_CambioProducto.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCambio == info.IdCambio).FirstOrDefault();
+                        if (Entity == null)
+                            return true;
+                        Entity.IdMovi_inven_tipo = info.IdMovi_inven_tipo;
+                        Entity.IdNumMovi = info.IdNumMovi;
                         db.SaveChanges();
 
                         GenerarDevoluciones(info);
-                    }
-                    
+                    }else
+                        GenerarDevoluciones(info);
                 }
                 db.Dispose();
                 #endregion
@@ -186,7 +191,7 @@ namespace Core.Erp.Data.Facturacion
                 }
 
                 db.SaveChanges();
-                db.Dispose();
+
 
                 #region Egreso y devoluciones
                 if (info.GenerarDevolucion)
@@ -203,17 +208,22 @@ namespace Core.Erp.Data.Facturacion
                     if (movi == null)
                         return true;
 
-
-                    if (odata_i.guardarDB(movi, "-"))
+                    if (info.IdNumMovi == null && odata_i.guardarDB(movi, "-"))
                     {
                         info.IdNumMovi = movi.IdNumMovi;
+
+                        Entity.IdMovi_inven_tipo = info.IdMovi_inven_tipo;
+                        Entity.IdNumMovi = info.IdNumMovi;
                         db.SaveChanges();
 
                         GenerarDevoluciones(info);
                     }
+                    else
+                        GenerarDevoluciones(info);
                 }
                 #endregion
 
+                db.Dispose();
                 return true;
             }
             catch (Exception)

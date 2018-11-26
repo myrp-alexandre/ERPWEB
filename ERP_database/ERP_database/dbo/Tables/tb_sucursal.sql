@@ -19,10 +19,12 @@
     [ip]                       VARCHAR (25)  NULL,
     [Estado]                   CHAR (1)      NOT NULL,
     [MotiAnula]                VARCHAR (200) NULL,
-    [Es_establecimiento]       BIT           NULL,
+    [Es_establecimiento]       BIT           NOT NULL,
     CONSTRAINT [PK_tb_sucursal] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdSucursal] ASC),
     CONSTRAINT [FK_tb_sucursal_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa])
 );
+
+
 
 
 
