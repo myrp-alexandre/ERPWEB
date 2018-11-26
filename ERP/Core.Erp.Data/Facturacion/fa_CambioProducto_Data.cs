@@ -109,27 +109,38 @@ namespace Core.Erp.Data.Facturacion
                     });
                 }
                 db.SaveChanges();
+
                 #endregion
 
-                Entities_inventario dbi = new Entities_inventario();
-                in_Ing_Egr_Inven_Data odata_i = new in_Ing_Egr_Inven_Data();
 
-                var parametro = dbi.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                if (parametro == null)
-                    return true;
 
-                info.IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_Cambio;
-                var movi = GenerarMoviInven(info);
-                if (movi == null)
-                    return true;
-
-                if (odata_i.guardarDB(movi,"-"))
+                #region Egreso y devoluciones
+                if (info.GenerarDevolucion)
                 {
-                    info.IdNumMovi = movi.IdNumMovi;
-                    db.SaveChanges();
+                    Entities_inventario dbi = new Entities_inventario();
+                    in_Ing_Egr_Inven_Data odata_i = new in_Ing_Egr_Inven_Data();
+
+                    var parametro = dbi.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    if (parametro == null)
+                        return true;
+
+                    info.IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_Cambio;
+                    var movi = GenerarMoviInven(info);
+                    if (movi == null)
+                        return true;
 
 
+                    if (odata_i.guardarDB(movi, "-"))
+                    {
+                        info.IdNumMovi = movi.IdNumMovi;
+                        db.SaveChanges();
+
+                        GenerarDevoluciones(info);
+                    }
+                    
                 }
+                db.Dispose();
+                #endregion
 
                 return true;
             }
@@ -141,42 +152,68 @@ namespace Core.Erp.Data.Facturacion
 
         public bool ModificarDB(fa_CambioProducto_Info info)
         {
+            Entities_facturacion db = new Entities_facturacion();
             try
             {
-                using (Entities_facturacion db = new Entities_facturacion())
+                var Entity = db.fa_CambioProducto.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCambio == info.IdCambio).FirstOrDefault();
+                if (Entity == null) return false;
+                Entity.Fecha = info.Fecha;
+                Entity.Observacion = info.Observacion;
+
+                Entity.IdUsuarioUltMod = info.IdUsuario;
+                Entity.FechaUltMod = DateTime.Now;
+
+                var lst = db.fa_CambioProductoDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCambio == info.IdCambio).ToList();
+                db.fa_CambioProductoDet.RemoveRange(lst);
+                int secuencia = 1;
+                foreach (var item in info.LstDet)
                 {
-                    var Entity = db.fa_CambioProducto.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCambio == info.IdCambio).FirstOrDefault();
-                    if (Entity == null) return false;
-                    Entity.Fecha = info.Fecha;
-                    Entity.Observacion = info.Observacion;
-
-                    Entity.IdUsuarioUltMod = info.IdUsuario;
-                    Entity.FechaUltMod = DateTime.Now;
-
-                    var lst = db.fa_CambioProductoDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCambio == info.IdCambio).ToList();
-                    db.fa_CambioProductoDet.RemoveRange(lst);
-                    int secuencia = 1;
-                    foreach (var item in info.LstDet)
+                    db.fa_CambioProductoDet.Add(new fa_CambioProductoDet
                     {
-                        db.fa_CambioProductoDet.Add(new fa_CambioProductoDet
-                        {
-                            IdEmpresa = info.IdEmpresa,
-                            IdSucursal = info.IdSucursal,
-                            IdBodega = info.IdBodega,
-                            IdCambio = info.IdCambio,
-                            Secuencia = secuencia++,
+                        IdEmpresa = info.IdEmpresa,
+                        IdSucursal = info.IdSucursal,
+                        IdBodega = info.IdBodega,
+                        IdCambio = info.IdCambio,
+                        Secuencia = secuencia++,
 
-                            IdCbteVta = item.IdCbteVta,
-                            SecuenciaFact = item.SecuenciaFact,
-                            IdProductoFact = item.IdProductoFact,
-                            IdProductoCambio = item.IdProductoCambio,
-                            CantidadCambio = item.CantidadCambio,
-                            CantidadFact = item.CantidadFact
-                        });
-                    }
-
-                    db.SaveChanges();
+                        IdCbteVta = item.IdCbteVta,
+                        SecuenciaFact = item.SecuenciaFact,
+                        IdProductoFact = item.IdProductoFact,
+                        IdProductoCambio = item.IdProductoCambio,
+                        CantidadCambio = item.CantidadCambio,
+                        CantidadFact = item.CantidadFact
+                    });
                 }
+
+                db.SaveChanges();
+                db.Dispose();
+
+                #region Egreso y devoluciones
+                if (info.GenerarDevolucion)
+                {
+                    Entities_inventario dbi = new Entities_inventario();
+                    in_Ing_Egr_Inven_Data odata_i = new in_Ing_Egr_Inven_Data();
+
+                    var parametro = dbi.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    if (parametro == null)
+                        return true;
+
+                    info.IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_Cambio;
+                    var movi = GenerarMoviInven(info);
+                    if (movi == null)
+                        return true;
+
+
+                    if (odata_i.guardarDB(movi, "-"))
+                    {
+                        info.IdNumMovi = movi.IdNumMovi;
+                        db.SaveChanges();
+
+                        GenerarDevoluciones(info);
+                    }
+                }
+                #endregion
+
                 return true;
             }
             catch (Exception)
@@ -261,7 +298,8 @@ namespace Core.Erp.Data.Facturacion
                         signo = "-",
                         IdUsuario = info.IdUsuario,
                         IdUsuarioUltModi = info.IdUsuario,
-                        IdMotivo_Inv = motivo.IdMotivo_Inv
+                        IdMotivo_Inv = motivo.IdMotivo_Inv,
+                        lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>()
                     };
                     int secuencia = 1;
                     foreach (var item in info.LstDet)
@@ -288,26 +326,86 @@ namespace Core.Erp.Data.Facturacion
                         });
                     }
                     return movi;
-                }
-
-                
+                }                
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
-        private void GenerarDevoluciones(List<fa_CambioProductoDet_Info> ListaCambios)
+        private void GenerarDevoluciones(fa_CambioProducto_Info info)
         {
+            Entities_facturacion dbf = new Entities_facturacion();
             try
             {
-                
+                var ListaDetalleCambio = dbf.vwfa_CambioProductoDet_FacturasConMovimiento.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCambio == info.IdCambio).ToList();
+                if (ListaDetalleCambio.Where(q => q.IdNumMovi_eg == null).Count() > 0)
+                    return;
+
+                in_devolucion_inven_Data odata_d = new in_devolucion_inven_Data();
+
+                var DevolucionesAgrupadas = ListaDetalleCambio.GroupBy(q => new { q.IdEmpresa_eg, q.IdSucursal_eg, q.IdMovi_inven_tipo_eg, q.IdNumMovi_eg}).ToList();
+                foreach (var item in DevolucionesAgrupadas)
+                {
+                    var ListaPorMovimiento = ListaDetalleCambio.Where(q => q.IdEmpresa_eg == item.Key.IdEmpresa_eg && q.IdSucursal_eg == item.Key.IdSucursal_eg && q.IdMovi_inven_tipo_eg == item.Key.IdMovi_inven_tipo_eg && q.IdNumMovi_eg == item.Key.IdNumMovi_eg).ToList();
+                    in_devolucion_inven_Info devolucion = new in_devolucion_inven_Info
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdEmpresa_inv = (int)item.Key.IdEmpresa_eg,
+                        IdSucursal_inv = (int)item.Key.IdSucursal_eg,
+                        IdMovi_inven_tipo_inv = (int)item.Key.IdMovi_inven_tipo_eg,
+                        IdNumMovi_inv = (decimal)item.Key.IdNumMovi_eg,
+                        cod_Dev_Inven = "CAMB#"+info.IdCambio,
+                        Estado = true,
+                        dev_signo = "+",
+                        Fecha = info.Fecha.Date,
+                        IdUsuario = info.IdUsuario,
+                        observacion = "CAMB#" + info.IdCambio + " " + info.Observacion,
+                        
+                        lst_det = new List<in_devolucion_inven_det_Info>()
+                    };
+                    foreach (var Det in ListaPorMovimiento)
+                    {
+                        devolucion.lst_det.Add(new in_devolucion_inven_det_Info
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            inv_IdEmpresa = (int)Det.IdEmpresa_eg,
+                            inv_IdSucursal = (int)Det.IdSucursal_eg,
+                            inv_IdMovi_inven_tipo = (int)Det.IdMovi_inven_tipo_eg,
+                            inv_IdNumMovi = (int)Det.IdNumMovi_eg,
+                            inv_Secuencia = (int)Det.Secuencia_eg,
+
+                            IdProducto = (decimal)Det.IdProducto,
+                            IdBodega = (int)Det.IdBodega_eg,
+                            cant_devuelta = Det.CantidadCambio,
+                            IdUnidadMedida = Det.IdUnidadMedida_sinConversion,
+                            mv_costo = Det.Costo
+                        });
+                    }
+
+                    if(odata_d.guardarDB(devolucion))
+                    {
+                        ListaDetalleCambio.ForEach(q => dbf.fa_CambioProductoDet_x_in_devolucion_inven.Add(new fa_CambioProductoDet_x_in_devolucion_inven
+                        {
+                            IdEmpresa_ca = info.IdEmpresa,
+                            IdSucursal_ca = info.IdSucursal,
+                            IdBodega_ca = info.IdBodega,
+                            IdCambio = info.IdCambio,
+                            Secuencia_ca = q.Secuencia_ca,
+
+                            IdEmpresa_de = devolucion.IdEmpresa,
+                            IdDev_Inven = devolucion.IdDev_Inven
+                        }));                        
+                        dbf.SaveChanges();
+                    }
+                }
+
+                dbf.Dispose();
             }
             catch (Exception)
             {
-
+                dbf.Dispose();
                 throw;
             }
         }

@@ -871,6 +871,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwfa_CambioProductoDet_FacturasCon
           <Property Name="CantidadCambio" Type="float" Nullable="false" />
           <Property Name="Costo" Type="float" Nullable="false" />
           <Property Name="IdUnidadMedida_sinConversion" Type="varchar" MaxLength="25" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdBodega_eg" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwfa_cliente_contactos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -2159,7 +2161,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
     [vwfa_CambioProductoDet_FacturasConMovimiento].[Secuencia_eg] AS [Secuencia_eg], 
     [vwfa_CambioProductoDet_FacturasConMovimiento].[CantidadCambio] AS [CantidadCambio], 
     [vwfa_CambioProductoDet_FacturasConMovimiento].[Costo] AS [Costo], 
-    [vwfa_CambioProductoDet_FacturasConMovimiento].[IdUnidadMedida_sinConversion] AS [IdUnidadMedida_sinConversion]
+    [vwfa_CambioProductoDet_FacturasConMovimiento].[IdUnidadMedida_sinConversion] AS [IdUnidadMedida_sinConversion], 
+    [vwfa_CambioProductoDet_FacturasConMovimiento].[IdProducto] AS [IdProducto], 
+    [vwfa_CambioProductoDet_FacturasConMovimiento].[IdBodega_eg] AS [IdBodega_eg]
     FROM [dbo].[vwfa_CambioProductoDet_FacturasConMovimiento] AS [vwfa_CambioProductoDet_FacturasConMovimiento]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_cliente_contactos" EntityType="Self.vwfa_cliente_contactos" store:Type="Views" store:Schema="dbo">
@@ -3919,7 +3923,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
           <EntitySet Name="fa_CambioProductoDet" EntityType="Model_facturacion.fa_CambioProductoDet" />
           <EntitySet Name="fa_CambioProductoDet_x_in_devolucion_inven" EntityType="Model_facturacion.fa_CambioProductoDet_x_in_devolucion_inven" />
           <EntitySet Name="vwfa_CambioProductoDet" EntityType="Model_facturacion.vwfa_CambioProductoDet" />
-          <EntitySet Name="vwfa_CambioProductoDet_FacturasConMovimiento" EntityType="Model_facturacion.vwfa_CambioProductoDet_FacturasConMovimiento" />
           <AssociationSet Name="FK_fa_CambioProductoDet_fa_CambioProducto" Association="Model_facturacion.FK_fa_CambioProductoDet_fa_CambioProducto">
             <End Role="fa_CambioProducto" EntitySet="fa_CambioProducto" />
             <End Role="fa_CambioProductoDet" EntitySet="fa_CambioProductoDet" />
@@ -3932,6 +3935,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
             <End Role="fa_CambioProductoDet" EntitySet="fa_CambioProductoDet" />
             <End Role="fa_CambioProductoDet_x_in_devolucion_inven" EntitySet="fa_CambioProductoDet_x_in_devolucion_inven" />
           </AssociationSet>
+          <EntitySet Name="vwfa_CambioProductoDet_FacturasConMovimiento" EntityType="Model_facturacion.vwfa_CambioProductoDet_FacturasConMovimiento" />
           </EntityContainer>
         <EntityType Name="vwfa_factura_det">
           <Key>
@@ -4911,30 +4915,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
           <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="NombreCliente" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="vwfa_CambioProductoDet_FacturasConMovimiento">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdCambio" />
-            <PropertyRef Name="Secuencia_ca" />
-            <PropertyRef Name="CantidadCambio" />
-            <PropertyRef Name="Costo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdCambio" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia_ca" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpresa_eg" Type="Int32" />
-          <Property Name="IdSucursal_eg" Type="Int32" />
-          <Property Name="IdMovi_inven_tipo_eg" Type="Int32" />
-          <Property Name="IdNumMovi_eg" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Secuencia_eg" Type="Int32" />
-          <Property Name="CantidadCambio" Type="Double" Nullable="false" />
-          <Property Name="Costo" Type="Double" Nullable="false" />
-          <Property Name="IdUnidadMedida_sinConversion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-        </EntityType>
         <Association Name="FK_fa_CambioProductoDet_fa_CambioProducto">
           <End Type="Model_facturacion.fa_CambioProducto" Role="fa_CambioProducto" Multiplicity="1" />
           <End Type="Model_facturacion.fa_CambioProductoDet" Role="fa_CambioProductoDet" Multiplicity="*" />
@@ -4993,6 +4973,32 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwfa_CambioProductoDet_FacturasConMovimiento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCambio" />
+            <PropertyRef Name="Secuencia_ca" />
+            <PropertyRef Name="CantidadCambio" />
+            <PropertyRef Name="Costo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCambio" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia_ca" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_eg" Type="Int32" />
+          <Property Name="IdSucursal_eg" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_eg" Type="Int32" />
+          <Property Name="IdNumMovi_eg" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Secuencia_eg" Type="Int32" />
+          <Property Name="CantidadCambio" Type="Double" Nullable="false" />
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="IdUnidadMedida_sinConversion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdBodega_eg" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6097,6 +6103,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
           <EntitySetMapping Name="vwfa_CambioProductoDet_FacturasConMovimiento">
             <EntityTypeMapping TypeName="Model_facturacion.vwfa_CambioProductoDet_FacturasConMovimiento">
               <MappingFragment StoreEntitySet="vwfa_CambioProductoDet_FacturasConMovimiento">
+                <ScalarProperty Name="IdBodega_eg" ColumnName="IdBodega_eg" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
                 <ScalarProperty Name="IdUnidadMedida_sinConversion" ColumnName="IdUnidadMedida_sinConversion" />
                 <ScalarProperty Name="Costo" ColumnName="Costo" />
                 <ScalarProperty Name="CantidadCambio" ColumnName="CantidadCambio" />

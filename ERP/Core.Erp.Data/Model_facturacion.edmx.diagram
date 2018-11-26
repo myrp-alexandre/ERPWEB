@@ -96,10 +96,10 @@
         <EntityTypeShape EntityType="Model_facturacion.fa_CambioProductoDet" Width="1.5" PointX="19.625" PointY="23" />
         <EntityTypeShape EntityType="Model_facturacion.fa_CambioProductoDet_x_in_devolucion_inven" Width="1.5" PointX="21.875" PointY="23.5" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_CambioProductoDet" Width="1.5" PointX="17.375" PointY="10.75" />
-        <EntityTypeShape EntityType="Model_facturacion.vwfa_CambioProductoDet_FacturasConMovimiento" Width="1.5" PointX="19.375" PointY="4.75" />
         <AssociationConnector Association="Model_facturacion.FK_fa_CambioProductoDet_fa_CambioProducto" />
         <AssociationConnector Association="Model_facturacion.FK_fa_CambioProductoDet_fa_factura_det" />
         <AssociationConnector Association="Model_facturacion.FK_fa_CambioProductoDet_x_in_devolucion_inven_fa_CambioProductoDet" />
+        <EntityTypeShape EntityType="Model_facturacion.vwfa_CambioProductoDet_FacturasConMovimiento" Width="1.5" PointX="19.375" PointY="4.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

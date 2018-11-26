@@ -8,7 +8,7 @@
 
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "CambioProducto", Action = "EditingAddNew", Area = "Facturacion" };
+        //settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "CambioProducto", Action = "EditingAddNew", Area = "Facturacion" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "CambioProducto", Action = "EditingUpdate", Area = "Facturacion" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "CambioProducto", Action = "EditingDelete", Area = "Facturacion" };
 
@@ -17,11 +17,12 @@
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
 
         settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
 
         settings.SettingsPager.Visible = true;

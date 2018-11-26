@@ -27,5 +27,7 @@ namespace Core.Erp.Data
         public double CantidadCambio { get; set; }
         public double Costo { get; set; }
         public string IdUnidadMedida_sinConversion { get; set; }
+        public Nullable<decimal> IdProducto { get; set; }
+        public Nullable<int> IdBodega_eg { get; set; }
     }
 }
