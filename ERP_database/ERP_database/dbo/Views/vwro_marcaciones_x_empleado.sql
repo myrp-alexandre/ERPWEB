@@ -1,12 +1,9 @@
 ﻿CREATE VIEW dbo.vwro_marcaciones_x_empleado
 AS
 SELECT        dbo.ro_marcaciones_x_empleado.IdEmpresa, dbo.ro_marcaciones_x_empleado.IdRegistro, dbo.ro_marcaciones_x_empleado.IdEmpleado, dbo.ro_marcaciones_x_empleado.IdTipoMarcaciones, 
-                         dbo.ro_marcaciones_x_empleado.es_Hora, dbo.ro_marcaciones_x_empleado.es_fechaRegistro, dbo.ro_marcaciones_x_empleado.es_anio, dbo.ro_marcaciones_x_empleado.es_mes, 
-                         dbo.ro_marcaciones_x_empleado.es_semana, dbo.ro_marcaciones_x_empleado.es_dia, dbo.ro_marcaciones_x_empleado.es_sdia, dbo.ro_marcaciones_x_empleado.es_idDia, 
-                         dbo.ro_marcaciones_x_empleado.es_EsActualizacion, dbo.ro_marcaciones_x_empleado.IdTipoMarcaciones_Biometrico, dbo.tb_persona.pe_nombreCompleto AS nom_compl_empleado, 
-                         dbo.ro_marcaciones_x_empleado.Motivo_Anu, dbo.ro_marcaciones_x_empleado.Estado, dbo.ro_marcaciones_x_empleado.Observacion, dbo.ro_marcaciones_x_empleado.IdUsuario, 
-                         dbo.ro_marcaciones_x_empleado.Fecha_Transac, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.ro_empleado.em_codigo, dbo.tb_persona.pe_cedulaRuc, dbo.ro_cargo.ca_descripcion AS cargo, 
-                         dbo.ro_marcaciones_tipo.ma_descripcion
+                         dbo.ro_marcaciones_x_empleado.es_Hora, dbo.ro_marcaciones_x_empleado.es_fechaRegistro, dbo.tb_persona.pe_nombreCompleto AS nom_compl_empleado, dbo.ro_marcaciones_x_empleado.Motivo_Anu, 
+                         dbo.ro_marcaciones_x_empleado.Estado, dbo.ro_marcaciones_x_empleado.Observacion, dbo.ro_marcaciones_x_empleado.IdUsuario, dbo.ro_marcaciones_x_empleado.Fecha_Transac, dbo.tb_persona.pe_apellido, 
+                         dbo.tb_persona.pe_nombre, dbo.ro_empleado.em_codigo, dbo.tb_persona.pe_cedulaRuc, dbo.ro_cargo.ca_descripcion AS cargo, dbo.ro_marcaciones_tipo.ma_descripcion
 FROM            dbo.ro_marcaciones_x_empleado INNER JOIN
                          dbo.ro_empleado ON dbo.ro_marcaciones_x_empleado.IdEmpresa = dbo.ro_empleado.IdEmpresa AND dbo.ro_marcaciones_x_empleado.IdEmpleado = dbo.ro_empleado.IdEmpleado INNER JOIN
                          dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
@@ -18,7 +15,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[79] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[27] 4[5] 2[59] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -154,7 +151,9 @@ Begin DesignProperties =
          Width = 1500
          Width = 1500
          Width = 1500
-         Width = 1500', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_marcaciones_x_empleado';
+         Width = 1500', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_marcaciones_x_empleado';
+
+
 
 
 

@@ -1,8 +1,9 @@
-﻿CREATE view  vwfa_CambioProductoDet
+﻿
+CREATE view [dbo].[vwfa_CambioProductoDet]
 as
 SELECT dbo.fa_CambioProductoDet.IdEmpresa, dbo.fa_CambioProductoDet.IdSucursal, dbo.fa_CambioProductoDet.IdBodega, dbo.fa_CambioProductoDet.IdCambio, dbo.fa_CambioProductoDet.Secuencia, dbo.fa_CambioProductoDet.IdCbteVta, 
                   dbo.fa_CambioProductoDet.SecuenciaFact, dbo.fa_CambioProductoDet.IdProductoFact, dbo.fa_CambioProductoDet.IdProductoCambio, dbo.fa_CambioProductoDet.CantidadFact, dbo.fa_CambioProductoDet.CantidadCambio, 
-                  dbo.fa_CambioProductoDet.IdDevolucion, in_Producto_1.pr_descripcion AS pr_descripcionFact, dbo.in_Producto.pr_descripcion AS pr_descripcionCambio, dbo.fa_factura.vt_NumFactura, 
+                  in_Producto_1.pr_descripcion AS pr_descripcionFact, dbo.in_Producto.pr_descripcion AS pr_descripcionCambio, dbo.fa_factura.vt_NumFactura, 
                   dbo.fa_cliente_contactos.Nombres AS NombreCliente
 FROM     dbo.fa_cliente_contactos INNER JOIN
                   dbo.fa_factura ON dbo.fa_cliente_contactos.IdEmpresa = dbo.fa_factura.IdEmpresa AND dbo.fa_cliente_contactos.IdCliente = dbo.fa_factura.IdCliente AND 
