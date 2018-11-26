@@ -10,7 +10,7 @@ namespace Core.Erp.Info.CuentasPorPagar
     public class cp_orden_giro_Info
     {
         public decimal IdTransaccionSession { get; set; }
-        public int IdEmpresai { get; set; }
+        public int IdEmpresa { get; set; }
         public decimal IdSucursal { get; set; }
         public decimal IdCbteCble_Ogiro { get; set; }
         public int IdTipoCbte_Ogiro { get; set; }
@@ -50,7 +50,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string IdUsuarioUltAnu { get; set; }
         public string MotivoAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
         public string PagoLocExt { get; set; }
         public string PaisPago { get; set; }
         public string ConvenioTributacion { get; set; }
