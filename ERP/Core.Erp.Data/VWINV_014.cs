@@ -17,22 +17,25 @@ namespace Core.Erp.Data
         public int IdEmpresa { get; set; }
         public decimal IdConsignacion { get; set; }
         public int IdSucursal { get; set; }
+        public string Su_Descripcion { get; set; }
         public int IdBodega { get; set; }
+        public string bo_Descripcion { get; set; }
         public System.DateTime Fecha { get; set; }
         public decimal IdProveedor { get; set; }
+        public decimal IdPersona { get; set; }
+        public string pr_codigo { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
         public string Observacion { get; set; }
         public bool Estado { get; set; }
+        public string MotivoAnulacion { get; set; }
         public int Secuencia { get; set; }
         public decimal IdProducto { get; set; }
+        public string pr_descripcion { get; set; }
         public string IdUnidadMedida { get; set; }
         public double Cantidad { get; set; }
         public double Costo { get; set; }
         public string ObservacionDet { get; set; }
-        public string pr_descripcion { get; set; }
-        public string pr_codigo { get; set; }
-        public decimal IdPersona { get; set; }
-        public string pe_nombreCompleto { get; set; }
-        public string pe_apellido { get; set; }
-        public string pe_nombre { get; set; }
     }
 }

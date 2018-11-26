@@ -736,6 +736,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult INV_014(int IdEmpresa = 0, decimal IdConsignacion = 0)
+        {
+            INV_014_Rpt model = new INV_014_Rpt();
+            model.p_IdEmpresa.Value = IdEmpresa;
+            model.p_IdConsignacion.Value = IdConsignacion;
+
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            return View(model);
+        }
     }
 
 }

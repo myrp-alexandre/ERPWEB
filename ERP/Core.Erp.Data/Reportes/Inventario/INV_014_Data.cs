@@ -13,17 +13,19 @@ namespace Core.Erp.Data.Reportes.Inventario
         {
             try
             {
-                List<INV_014_Info> Lista;
+                List<INV_014_Info> Lista = new List<INV_014_Info>();
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = Context.VWINV_014.Where(q => q.IdEmpresa == IdEmpresa && q.IdConsignacion == IdConsignacion).Select(q => new INV_014_Info
                     {
-                        IdEmpresa = q.IdEmpresa,
+                        IdEmpresa = q.IdEmpresa,                       
                         IdConsignacion = q.IdConsignacion,
                         IdSucursal = q.IdSucursal,
+                        Su_Descripcion = q.Su_Descripcion,
                         IdBodega = q.IdBodega,
+                        Bo_Descripcion = q.bo_Descripcion,
                         Fecha = q.Fecha,
-                        IdProveedor = Convert.ToInt32(q.IdProveedor),
+                        IdProveedor = q.IdProveedor,
                         Observacion = q.Observacion,
                         Estado = q.Estado,
                         Secuencia = q.Secuencia,
@@ -36,15 +38,14 @@ namespace Core.Erp.Data.Reportes.Inventario
                         pr_codigo = q.pr_codigo,
                         pe_nombre_Completo = q.pe_nombreCompleto,
                         pe_apellido = q.pe_apellido,
-                        IdPersona = Convert.ToInt32(q.IdPersona),
+                        IdPersona = q.IdPersona,
                         pe_nombre = q.pe_nombre
                     }).ToList();
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
         }
