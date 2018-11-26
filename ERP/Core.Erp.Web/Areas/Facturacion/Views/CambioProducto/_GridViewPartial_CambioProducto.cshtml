@@ -59,6 +59,10 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
+            if (e.GetValue("IdNumMovi") != null)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
             if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
@@ -69,7 +73,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && DataBinder.Eval(tc.DataItem,"IdNumMovi") == null)
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdCambio = DataBinder.Eval(tc.DataItem, "IdCambio") }) + "&nbsp;" +
@@ -95,9 +99,9 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
-        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(15);
-        settings.Columns.Add("bo_Descripcion", "Bodega").Width = Unit.Percentage(15);
-        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(20);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(20);
+        settings.Columns.Add("bo_Descripcion", "Bodega").Width = Unit.Percentage(20);
+        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";
