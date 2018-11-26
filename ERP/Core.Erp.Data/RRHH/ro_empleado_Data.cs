@@ -23,7 +23,9 @@ namespace Core.Erp.Data.RRHH
                                      IdEmpresa = q.IdEmpresa,
                                      IdEmpleado = q.IdEmpleado,
                                      Empleado=q.Empleado,
-                                     pe_cedulaRuc=q.pe_cedulaRuc
+                                     pe_cedulaRuc=q.pe_cedulaRuc,
+                                     IdTipoNomina=Convert.ToInt32( q.IdNomina),
+                                     IdSucursal=q.IdSucursal
                                  }).ToList();
                   
                 }
