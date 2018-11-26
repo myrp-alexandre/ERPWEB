@@ -18,6 +18,7 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }
         public System.DateTime FechaCarga { get; set; }
+        [Required(ErrorMessage = "El campo observación es obligatorio")]
         public string Observacion { get; set; }
         [Required(ErrorMessage = "El campo rubro es obligatorio")]
         public string IdRubro { get; set; }

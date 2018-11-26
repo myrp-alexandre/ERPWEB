@@ -85,7 +85,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","MarcacionEmpleado");
         }
 
         #endregion

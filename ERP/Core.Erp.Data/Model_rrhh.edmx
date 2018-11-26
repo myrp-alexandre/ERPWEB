@@ -6793,15 +6793,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Parameter Name="IdNomina_Tipo" Mode="In" Type="Int32" />
             <Parameter Name="IdNomina_TipoLiqui" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spRo_procesa_Rol">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="IdNomina" Mode="In" Type="Decimal" />
-            <Parameter Name="IdNominaTipo" Mode="In" Type="Decimal" />
-            <Parameter Name="IdPEriodo" Mode="In" Type="Decimal" />
-            <Parameter Name="IdUsuario" Mode="In" Type="String" />
-            <Parameter Name="Observacion" Mode="In" Type="String" />
-            <Parameter Name="IdRol" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="spRo_Reverso_Rol">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdNomina_Tipo" Mode="In" Type="Int32" />
@@ -6991,6 +6982,15 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_Nomina_Tipo" EntitySet="ro_Nomina_Tipo" />
             <End Role="ro_contrato" EntitySet="ro_contrato" />
           </AssociationSet>
+          <FunctionImport Name="spRo_procesa_Rol">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdNomina" Mode="In" Type="Decimal" />
+            <Parameter Name="IdNominaTipo" Mode="In" Type="Decimal" />
+            <Parameter Name="IdPEriodo" Mode="In" Type="Decimal" />
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="Observacion" Mode="In" Type="String" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -10302,7 +10302,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spRo_Cierre_Rol" FunctionName="Model_rrhh.Store.spRo_Cierre_Rol" />
-          <FunctionImportMapping FunctionImportName="spRo_procesa_Rol" FunctionName="Model_rrhh.Store.spRo_procesa_Rol" />
           <FunctionImportMapping FunctionImportName="spRo_Reverso_Rol" FunctionName="Model_rrhh.Store.spRo_Reverso_Rol" />
           <EntitySetMapping Name="ro_rol_detalle_x_rubro_acumulado">
             <EntityTypeMapping TypeName="Model_rrhh.ro_rol_detalle_x_rubro_acumulado">
@@ -10650,6 +10649,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spRo_procesa_Rol" FunctionName="Model_rrhh.Store.spRo_procesa_Rol" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -150,7 +150,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Fecha">Observación</label>
-                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
