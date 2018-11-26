@@ -465,6 +465,9 @@
     <Compile Include="fa_CambioProductoDet.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="fa_CambioProductoDet_x_in_devolucion_inven.cs">
+      <DependentUpon>Model_facturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="fa_catalogo.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
@@ -1781,6 +1784,9 @@
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="vwfa_CambioProductoDet_facturas.cs">
+      <DependentUpon>Model_facturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwfa_CambioProductoDet_FacturasConMovimiento.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="vwfa_cliente_consulta.cs">

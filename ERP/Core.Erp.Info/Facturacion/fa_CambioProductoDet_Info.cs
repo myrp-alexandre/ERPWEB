@@ -15,7 +15,6 @@ namespace Core.Erp.Info.Facturacion
         public decimal IdProductoCambio { get; set; }
         public double CantidadFact { get; set; }
         public double CantidadCambio { get; set; }
-        public Nullable<decimal> IdDevolucion { get; set; }
 
         #region Campos que no existen en la tabla
         public string pr_descripcionFact { get; set; }

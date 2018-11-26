@@ -30,7 +30,6 @@ namespace Core.Erp.Data.Facturacion
                         IdProductoCambio = q.IdProductoCambio,
                         CantidadFact = q.CantidadFact,
                         CantidadCambio = q.CantidadCambio,
-                        IdDevolucion = q.IdDevolucion,
                         pr_descripcionCambio = q.pr_descripcionCambio,
                         pr_descripcionFact = q.pr_descripcionFact,
                         NombreCliente = q.NombreCliente,
