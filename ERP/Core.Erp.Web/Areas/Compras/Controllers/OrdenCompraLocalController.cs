@@ -34,7 +34,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         com_ordencompra_local_det_List List_det = new com_ordencompra_local_det_List();
         com_ordencompra_local_det_Bus bus_det = new com_ordencompra_local_det_Bus();
-
+        com_parametro_Bus bus_param = new com_parametro_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda proveedor
@@ -91,9 +91,6 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             var lst_termino = bus_termino.get_list(false);
             ViewBag.lst_termino = lst_termino;
 
-            var lst_apro = bus_catalogo.get_list(Convert.ToString(cl_enumeradores.eTipoCatalogoCOM.EST_APRO), false);
-            ViewBag.lst_apro = lst_apro;
-
             var lst_estado = bus_estado.get_list(false);
             ViewBag.lst_estado = lst_estado;
 
@@ -121,7 +118,9 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-
+            com_parametro_Info i_param = bus_param.get_info(IdEmpresa);
+            if (i_param == null)
+                return RedirectToAction("Index");
             com_ordencompra_local_Info model = new com_ordencompra_local_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -129,7 +128,8 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
                 oc_fechaVencimiento = DateTime.Now,
                 co_fechaReproba = DateTime.Now,
                 co_fecha_aprobacion = DateTime.Now,
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                IdEstadoAprobacion_cat = i_param.IdEstadoAprobacion_OC
 
             };
             List_det.set_list(model.lst_det, model.IdTransaccionSession);

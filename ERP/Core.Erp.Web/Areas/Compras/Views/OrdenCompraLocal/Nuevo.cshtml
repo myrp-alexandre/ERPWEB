@@ -12,10 +12,11 @@
 @using (Html.BeginForm("Nuevo", "OrdenCompraLocal", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
 
-    @Html.HiddenFor(q => q.IdEmpresa, new { @id="IdEmpresa"})
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdOrdenCompra)
+    @Html.HiddenFor(q => q.IdEstadoAprobacion_cat)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-     <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
@@ -79,7 +80,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdEstadoAprobacion_cat">Estado de aprobación*</label>
-                    @Html.DropDownListFor(q => q.IdEstadoAprobacion_cat, new SelectList(ViewBag.lst_apro, "IdCatalogocompra", "Nombre"), new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.IdEstadoAprobacion_cat, new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdEstadoAprobacion_cat, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -100,7 +101,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -172,7 +173,7 @@
     }
 }
 <script type="text/javascript">
-    
+
     function GetInfoProducto(s, e) {
         $("#Secuencia").text(0);
         var datos = {
