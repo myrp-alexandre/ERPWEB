@@ -9,6 +9,7 @@
 
 namespace Core.Erp.Data
 {
+
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -87,7 +88,6 @@ namespace Core.Erp.Data
         public DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
         public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public DbSet<ro_marcaciones_tipo> ro_marcaciones_tipo { get; set; }
-        public DbSet<vwro_marcaciones_x_empleado> vwro_marcaciones_x_empleado { get; set; }
         public DbSet<ro_permiso_x_empleado> ro_permiso_x_empleado { get; set; }
         public DbSet<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
         public DbSet<vwro_empleado_x_ro_rubro> vwro_empleado_x_ro_rubro { get; set; }
@@ -113,6 +113,7 @@ namespace Core.Erp.Data
         public DbSet<vwro_EmpleadoNovedadCargaMasiva> vwro_EmpleadoNovedadCargaMasiva { get; set; }
         public DbSet<ro_contrato> ro_contrato { get; set; }
         public DbSet<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
+        public DbSet<vwro_marcaciones_x_empleado> vwro_marcaciones_x_empleado { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

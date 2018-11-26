@@ -102,7 +102,6 @@
         <EntityTypeShape EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" Width="1.5" PointX="19.375" PointY="6.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_combo" Width="1.5" PointX="11.375" PointY="19.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_marcaciones_tipo" Width="1.5" PointX="19.375" PointY="13.875" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_marcaciones_x_empleado" Width="1.5" PointX="13.375" PointY="18.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_permiso_x_empleado" Width="1.5" PointX="11.25" PointY="74.875" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_ro_rubro" Width="1.5" PointX="15.75" PointY="48.125" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_ro_rubro" Width="1.5" PointX="19.375" PointY="16.75" />
@@ -182,6 +181,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_Nomina_Tipo" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_marcaciones_x_empleado" Width="1.5" PointX="21.375" PointY="10.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
