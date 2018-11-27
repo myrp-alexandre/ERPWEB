@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class PagoBenediciosSocialesController : Controller
@@ -82,6 +84,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 if (ModelState.IsValid)
                 {
                     info.IdEmpresa = GetIdEmpresa();
+                    info.UsuarioIngresa = SessionFixed.IdUsuario;
                     if (!bus_rol.Decimos(info))
                     {
                         cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
