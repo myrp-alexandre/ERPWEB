@@ -66,7 +66,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_.info_comprobante.lst_ct_cbtecble_det = bus_contabilidad_det.get_list(info_.IdEmpresa, info_.info_comprobante.IdTipoCbte,info_.info_comprobante.IdCbteCble);
                 return info_;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

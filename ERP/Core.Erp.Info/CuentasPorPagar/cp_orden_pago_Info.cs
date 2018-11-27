@@ -11,20 +11,19 @@ namespace Core.Erp.Info.CuentasPorPagar
    public class cp_orden_pago_Info
     {
         public int IdEmpresa { get; set; }
+        [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }
         public string Su_Descripcion { get; set; }
         public decimal IdOrdenPago { get; set; }
         [Required(ErrorMessage = "El campo observación es obligatorio")]
-        [StringLength(500, MinimumLength = 4, ErrorMessage = "La descripción debe tener mínimo 4 caracteres y máximo 500")]
+        [StringLength(500, MinimumLength = 4, ErrorMessage = "La observación debe tener mínimo 4 caracteres y máximo 500")]
         public string Observacion { get; set; }
         [Required(ErrorMessage = "El campo tipo de orden de pago es obligatorio")]
         public string IdTipo_op { get; set; }
         [Required(ErrorMessage = "El campo tipo de persona es obligatorio")]
-
         public string IdTipo_Persona { get; set; }
         public decimal IdPersona { get; set; }
         [Required(ErrorMessage = "El campo beneficiario es obligatorio")]
-
         public Nullable<decimal> IdEntidad { get; set; }
         public System.DateTime Fecha { get; set; }
         public string IdEstadoAprobacion { get; set; }
@@ -44,7 +43,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<decimal> IdTipoFlujo { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public Nullable<int> IdTipoMovi { get; set; }
-        [Required(ErrorMessage = "El campo monto a cancelar es obligatorio")]
+        [Required(ErrorMessage = "El campo valor a pagar a cancelar es obligatorio")]
         public double Valor_a_pagar { get; set; }
         public double Valor_estimado_a_pagar_OP { get; set; }
         public double Total_cancelado_OP { get; set; }
