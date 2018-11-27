@@ -10,6 +10,7 @@ namespace Core.Erp.Info.CuentasPorPagar
 {
    public class cp_orden_pago_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }

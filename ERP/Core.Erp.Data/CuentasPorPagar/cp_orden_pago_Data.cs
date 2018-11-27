@@ -166,6 +166,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     cp_orden_pago Entity = new cp_orden_pago
                     {
                         IdEmpresa = info.IdEmpresa,
+                        IdSucursal = info.IdSucursal,
                         IdOrdenPago =info.IdOrdenPago= get_id(info.IdEmpresa),
                         Observacion = info.Observacion,
                         IdTipo_op = info.IdTipo_op,
@@ -218,7 +219,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 }
                 return true;
             }
-            catch (Exception )
+            catch (Exception ex)
             {
                 throw;
             }
