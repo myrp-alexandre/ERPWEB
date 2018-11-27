@@ -88,7 +88,7 @@ namespace Core.Erp.Data.RRHH
                             IdNomina_Tipo = info.IdNomina,
                             IdNomina_TipoLiqui = info.IdNominaTipo,
                             IdEmpleado = item.IdEmpleado,
-                            Fecha = info.FechaCarga,
+                            Fecha = info.FechaCarga.Date,
 
                             Observacion = info.Observacion==null?"":info.Observacion,
                             Estado  = "A",
@@ -101,7 +101,7 @@ namespace Core.Erp.Data.RRHH
                         {
                             IdEmpresa = info.IdEmpresa,
                             IdNovedad = item.IdNovedad,
-                            FechaPago = info.FechaCarga,
+                            FechaPago = info.FechaCarga.Date,
                             IdRubro = info.IdRubro,
                             Valor = item.Valor,
                             Observacion = item.Observacion,
