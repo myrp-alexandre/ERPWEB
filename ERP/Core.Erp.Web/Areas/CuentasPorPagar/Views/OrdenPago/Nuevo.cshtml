@@ -144,30 +144,13 @@
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdTipo_Persona">Tipo de persona*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdTipo_Persona, settings =>
-                    {
-                        settings.Name = "IdTipo_Persona";
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                        settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                        settings.Properties.Columns.Add("IdTipo_Persona", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                        settings.Properties.Columns.Add("Descricpion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                        //Campo ID
-                        settings.Properties.ValueField = "IdTipo_Persona";
-                        settings.Properties.ValueType = typeof(string);
-                        settings.Properties.TextField = "Descricpion";
-                        //Boton para seleccionar ningun registro
-                        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                        //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){CargarPersona();}";
-                    }).BindList(ViewBag.lst_persona_tipo).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdTipo_Persona, "", new { @class = "text-danger" })
-                    
+                    <label for="IdTipo_Persona">Tipo persona:*</label>
+                    @Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "Key", "Value"), new { @class = "form-control", @id = "IdTipo_Persona" })
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="form-group">
-                    <label for="IdEntidad">Beneficiario*</label>
+                    <label for="IdEntidad">Beneficiario:*</label>
                     @Html.Partial("_CmbPersona_OP", Model.IdEntidad)
                     @Html.ValidationMessageFor(q => q.IdEntidad, "", new { @class = "text-danger" })
                 </div>

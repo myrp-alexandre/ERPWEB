@@ -19,7 +19,7 @@
         settings.Properties.Columns.Add("pe_cedulaRUC", "RUC", 20);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Persona", 70);
         settings.Properties.FilterMinLength = 3;
-        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipo_Persona'] = IdTipo_Persona.GetValue(); }";
+        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdTipo_Persona'] =  $('#IdTipo_Persona').val(); }";
 
     })
     .BindList(new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.OrdenPagoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.OrdenPagoController().get_info_bajo_demanda)

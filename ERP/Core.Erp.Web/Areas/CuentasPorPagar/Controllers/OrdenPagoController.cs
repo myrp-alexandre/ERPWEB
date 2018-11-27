@@ -112,6 +112,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
+
+            Dictionary<string, string> lst_tipo_personas = new Dictionary<string, string>();
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PERSONA.ToString(), "Persona");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PROVEE.ToString(), "Proveedor");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.EMPLEA.ToString(), "Empleado");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.CLIENTE.ToString(), "Cliente");
+            ViewBag.lst_tipo_personas = lst_tipo_personas;
         }
 
         private void cargar_combos_consulta(int IdEmpresa)
