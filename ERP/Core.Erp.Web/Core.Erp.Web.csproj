@@ -9373,6 +9373,8 @@
     <Content Include="Areas\RRHH\Views\ImportacionMarcaciones\_GridViewPartial_importacion_marcaciones_det.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionMarcaciones\Nuevo.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_014.cshtml" />
+    <Content Include="Areas\Compras\Views\AprobacionOC\Index.cshtml" />
+    <Content Include="Areas\Compras\Views\AprobacionOC\_GridViewPartial_aprobacion_oc.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9443,7 +9445,6 @@
     <Folder Include="Areas\Banco\Models\" />
     <Folder Include="Areas\Caja\Models\" />
     <Folder Include="Areas\Compras\Models\" />
-    <Folder Include="Areas\Compras\Views\AprobacionOC\" />
     <Folder Include="Areas\Contabilidad\Models\" />
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />

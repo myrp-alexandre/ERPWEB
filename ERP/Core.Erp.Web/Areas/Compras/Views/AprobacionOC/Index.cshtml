@@ -1,17 +1,15 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 
 @{
-    ViewBag.Title = "Orden compra";
+    ViewBag.Title = "Aprobación orden de compra";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
-
-
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Index", "OrdenCompraLocal", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "AprobacionOC", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     <div class="box ">
@@ -99,8 +97,8 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_ordencompralocal", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
-
+            @Html.Action("GridViewPartial_aprobacion_oc", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
+            
   </div>
         <!-- /.box-body -->
         <div class="box-footer">

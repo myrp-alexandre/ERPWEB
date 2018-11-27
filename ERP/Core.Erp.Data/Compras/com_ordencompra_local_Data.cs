@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Compras
 {
     public class com_ordencompra_local_Data
     {
-        public List<com_ordencompra_local_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<com_ordencompra_local_Info> get_list(int IdEmpresa, int IdSucursal, DateTime fecha_ini, DateTime  fecha_fin, bool mostrar_anulados)
         {
             try
             {
@@ -19,6 +19,9 @@ namespace Core.Erp.Data.Compras
                     if (mostrar_anulados)
                         Lista = (from q in Context.vwcom_ordencompra_local
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal == IdSucursal
+                                 && q.oc_fecha >= fecha_ini
+                                 && q.oc_fecha <= fecha_fin
                                  select new com_ordencompra_local_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -38,6 +41,9 @@ namespace Core.Erp.Data.Compras
                     else
                         Lista = (from q in Context.vwcom_ordencompra_local
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal == IdSucursal
+                                 && q.oc_fecha >= fecha_ini
+                                 && q.oc_fecha <= fecha_fin
                                  && q.Estado == "A"
                                  select new com_ordencompra_local_Info
                                  {
