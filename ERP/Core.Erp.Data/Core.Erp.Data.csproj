@@ -1432,6 +1432,9 @@
     <Compile Include="SPROL_017_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="spROL_DecimosCSV_Result.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="spro_nomina_x_pago_utilidad_Result.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
