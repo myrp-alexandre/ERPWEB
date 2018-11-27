@@ -22,31 +22,17 @@ namespace Core.Erp.Data.Compras
                                  select new com_ordencompra_local_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
-                                     IdComprador = q.IdComprador,
                                      IdOrdenCompra = q.IdOrdenCompra,
-                                     IdDepartamento = q.IdDepartamento,
                                      IdEstadoAprobacion_cat = q.IdEstadoAprobacion_cat,
                                      IdEstado_cierre = q.IdEstado_cierre,
-                                     IdMotivo = q.IdMotivo,
-                                     IdProveedor = q.IdProveedor,
                                      IdSucursal = q.IdSucursal,
-                                     IdTerminoPago = q.IdTerminoPago,
-                                     IdUsuario_Aprueba = q.IdUsuario_Aprueba,
-                                     IdUsuario_Reprue = q.IdUsuario_Reprue,
                                      Estado = q.Estado,
                                      oc_plazo = q.oc_plazo,
                                      oc_observacion = q.oc_observacion,
                                      oc_fecha = q.oc_fecha,
-                                     oc_fechaVencimiento = q.oc_fechaVencimiento,
-                                     oc_NumDocumento = q.oc_NumDocumento,
-                                     co_fechaReproba = q.co_fechaReproba,
-                                     co_fecha_aprobacion = q.co_fecha_aprobacion,
 
                                      EstadoBool = q.Estado == "A" ? true : false,
-                                     pr_codigo = q.pr_codigo,
-                                     Nombre = q.Nombre,
-                                     pe_nombreCompleto = q.pe_nombreCompleto,
-                                     pe_cedulaRuc = q.pe_cedulaRuc
+                                     pe_nombreCompleto = q.pe_nombreCompleto
                                      
                                  }).ToList();
                     else
@@ -56,31 +42,17 @@ namespace Core.Erp.Data.Compras
                                  select new com_ordencompra_local_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
-                                     IdComprador = q.IdComprador,
                                      IdOrdenCompra = q.IdOrdenCompra,
-                                     IdDepartamento = q.IdDepartamento,
                                      IdEstadoAprobacion_cat = q.IdEstadoAprobacion_cat,
                                      IdEstado_cierre = q.IdEstado_cierre,
-                                     IdMotivo = q.IdMotivo,
-                                     IdProveedor = q.IdProveedor,
                                      IdSucursal = q.IdSucursal,
-                                     IdTerminoPago = q.IdTerminoPago,
-                                     IdUsuario_Aprueba = q.IdUsuario_Aprueba,
-                                     IdUsuario_Reprue = q.IdUsuario_Reprue,
                                      Estado = q.Estado,
                                      oc_plazo = q.oc_plazo,
                                      oc_observacion = q.oc_observacion,
                                      oc_fecha = q.oc_fecha,
-                                     oc_fechaVencimiento = q.oc_fechaVencimiento,
-                                     oc_NumDocumento = q.oc_NumDocumento,
-                                     co_fechaReproba = q.co_fechaReproba,
-                                     co_fecha_aprobacion = q.co_fecha_aprobacion,
 
                                      EstadoBool = q.Estado == "A" ? true : false,
-                                     pr_codigo = q.pr_codigo,
-                                     Nombre = q.Nombre,
                                      pe_nombreCompleto = q.pe_nombreCompleto,
-                                     pe_cedulaRuc = q.pe_cedulaRuc
                                  }).ToList();
                 }
                 return Lista;

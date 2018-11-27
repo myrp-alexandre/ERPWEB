@@ -193,51 +193,40 @@
           <Property Name="MotiAnula" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcom_ordencompra_local' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.dbo.vwcom_ordencompra_local' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcom_ordencompra_local">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdSucursal" />
             <PropertyRef Name="IdOrdenCompra" />
-            <PropertyRef Name="IdProveedor" />
-            <PropertyRef Name="IdTerminoPago" />
-            <PropertyRef Name="oc_plazo" />
             <PropertyRef Name="oc_fecha" />
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="IdEstadoAprobacion_cat" />
-            <PropertyRef Name="oc_fechaVencimiento" />
-            <PropertyRef Name="IdComprador" />
-            <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdEstadoAprobacion_cat" />
+            <PropertyRef Name="EstadoAprobacion" />
+            <PropertyRef Name="EstadoCierre" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="oc_plazo" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="IdOrdenCompra" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="oc_NumDocumento" Type="varchar" MaxLength="50" />
-          <Property Name="IdTerminoPago" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="oc_plazo" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="29" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
           <Property Name="oc_fecha" Type="datetime" Nullable="false" />
-          <Property Name="oc_observacion" Type="varchar" MaxLength="1000" />
-          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="IdEstadoAprobacion_cat" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="co_fecha_aprobacion" Type="datetime" />
-          <Property Name="IdUsuario_Aprueba" Type="varchar" MaxLength="20" />
-          <Property Name="IdUsuario_Reprue" Type="varchar" MaxLength="20" />
-          <Property Name="co_fechaReproba" Type="datetime" />
-          <Property Name="MotivoReprobacion" Type="varchar" MaxLength="500" />
-          <Property Name="IdDepartamento" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="IdMotivo" Type="int" />
-          <Property Name="oc_fechaVencimiento" Type="datetime" Nullable="false" />
-          <Property Name="IdEstado_cierre" Type="varchar" MaxLength="25" />
-          <Property Name="IdComprador" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="pr_codigo" Type="varchar" MaxLength="50" />
-          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Total" Type="float" />
+          <Property Name="IdEstadoAprobacion_cat" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="EstadoAprobacion" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="oc_observacion" Type="varchar" MaxLength="1000" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="IdEstado_cierre" Type="varchar" MaxLength="25" />
+          <Property Name="EstadoCierre" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="TerminoPago" Type="varchar" MaxLength="500" />
+          <Property Name="oc_plazo" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcom_ordencompra_local_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcom_ordencompra_local_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -433,34 +422,26 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcom_ordencompra_local_
           <EntitySet Name="com_ordencompra_local_det" EntityType="Self.com_ordencompra_local_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_parametro" EntityType="Self.com_parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="com_TerminoPago" EntityType="Self.com_TerminoPago" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="vwcom_ordencompra_local" EntityType="Self.vwcom_ordencompra_local" store:Type="Views" store:Schema="web">
+          <EntitySet Name="vwcom_ordencompra_local" EntityType="Self.vwcom_ordencompra_local" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwcom_ordencompra_local].[IdEmpresa] AS [IdEmpresa], 
     [vwcom_ordencompra_local].[IdSucursal] AS [IdSucursal], 
     [vwcom_ordencompra_local].[IdOrdenCompra] AS [IdOrdenCompra], 
-    [vwcom_ordencompra_local].[IdProveedor] AS [IdProveedor], 
-    [vwcom_ordencompra_local].[oc_NumDocumento] AS [oc_NumDocumento], 
-    [vwcom_ordencompra_local].[IdTerminoPago] AS [IdTerminoPago], 
-    [vwcom_ordencompra_local].[oc_plazo] AS [oc_plazo], 
+    [vwcom_ordencompra_local].[Codigo] AS [Codigo], 
+    [vwcom_ordencompra_local].[Su_Descripcion] AS [Su_Descripcion], 
     [vwcom_ordencompra_local].[oc_fecha] AS [oc_fecha], 
-    [vwcom_ordencompra_local].[oc_observacion] AS [oc_observacion], 
-    [vwcom_ordencompra_local].[Estado] AS [Estado], 
-    [vwcom_ordencompra_local].[IdEstadoAprobacion_cat] AS [IdEstadoAprobacion_cat], 
-    [vwcom_ordencompra_local].[co_fecha_aprobacion] AS [co_fecha_aprobacion], 
-    [vwcom_ordencompra_local].[IdUsuario_Aprueba] AS [IdUsuario_Aprueba], 
-    [vwcom_ordencompra_local].[IdUsuario_Reprue] AS [IdUsuario_Reprue], 
-    [vwcom_ordencompra_local].[co_fechaReproba] AS [co_fechaReproba], 
-    [vwcom_ordencompra_local].[MotivoReprobacion] AS [MotivoReprobacion], 
-    [vwcom_ordencompra_local].[IdDepartamento] AS [IdDepartamento], 
-    [vwcom_ordencompra_local].[IdMotivo] AS [IdMotivo], 
-    [vwcom_ordencompra_local].[oc_fechaVencimiento] AS [oc_fechaVencimiento], 
-    [vwcom_ordencompra_local].[IdEstado_cierre] AS [IdEstado_cierre], 
-    [vwcom_ordencompra_local].[IdComprador] AS [IdComprador], 
-    [vwcom_ordencompra_local].[pr_codigo] AS [pr_codigo], 
-    [vwcom_ordencompra_local].[pe_cedulaRuc] AS [pe_cedulaRuc], 
     [vwcom_ordencompra_local].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-    [vwcom_ordencompra_local].[Nombre] AS [Nombre]
-    FROM [web].[vwcom_ordencompra_local] AS [vwcom_ordencompra_local]</DefiningQuery>
+    [vwcom_ordencompra_local].[Total] AS [Total], 
+    [vwcom_ordencompra_local].[IdEstadoAprobacion_cat] AS [IdEstadoAprobacion_cat], 
+    [vwcom_ordencompra_local].[EstadoAprobacion] AS [EstadoAprobacion], 
+    [vwcom_ordencompra_local].[oc_observacion] AS [oc_observacion], 
+    [vwcom_ordencompra_local].[Descripcion] AS [Descripcion], 
+    [vwcom_ordencompra_local].[IdEstado_cierre] AS [IdEstado_cierre], 
+    [vwcom_ordencompra_local].[EstadoCierre] AS [EstadoCierre], 
+    [vwcom_ordencompra_local].[Estado] AS [Estado], 
+    [vwcom_ordencompra_local].[TerminoPago] AS [TerminoPago], 
+    [vwcom_ordencompra_local].[oc_plazo] AS [oc_plazo]
+    FROM [dbo].[vwcom_ordencompra_local] AS [vwcom_ordencompra_local]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcom_ordencompra_local_det" EntityType="Self.vwcom_ordencompra_local_det" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -588,12 +569,12 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcom_ordencompra_local_
             <End Role="com_parametro" EntitySet="com_parametro" />
           </AssociationSet>
           <EntitySet Name="vwcom_ordencompra_local_det" EntityType="Model_compras.vwcom_ordencompra_local_det" />
-          <EntitySet Name="vwcom_ordencompra_local" EntityType="Model_compras.vwcom_ordencompra_local" />
           <EntitySet Name="com_comprador" EntityType="Model_compras.com_comprador" />
           <AssociationSet Name="FK_com_ordencompra_local_com_comprador" Association="Model_compras.FK_com_ordencompra_local_com_comprador">
             <End Role="com_comprador" EntitySet="com_comprador" />
             <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
           </AssociationSet>
+          <EntitySet Name="vwcom_ordencompra_local" EntityType="Model_compras.vwcom_ordencompra_local" />
         </EntityContainer>
         <EntityType Name="com_catalogo">
           <Key>
@@ -953,48 +934,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcom_ordencompra_local_
           <Property Name="IdCod_Impuesto" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="pr_descripcion" Type="String" MaxLength="651" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="vwcom_ordencompra_local">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdOrdenCompra" />
-            <PropertyRef Name="IdProveedor" />
-            <PropertyRef Name="IdTerminoPago" />
-            <PropertyRef Name="oc_plazo" />
-            <PropertyRef Name="oc_fecha" />
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="IdEstadoAprobacion_cat" />
-            <PropertyRef Name="oc_fechaVencimiento" />
-            <PropertyRef Name="IdComprador" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="pe_nombreCompleto" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenCompra" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="oc_NumDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTerminoPago" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="oc_plazo" Type="Int32" Nullable="false" />
-          <Property Name="oc_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="oc_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="IdEstadoAprobacion_cat" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="co_fecha_aprobacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuario_Aprueba" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuario_Reprue" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="co_fechaReproba" Type="DateTime" Precision="3" />
-          <Property Name="MotivoReprobacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdDepartamento" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdMotivo" Type="Int32" />
-          <Property Name="oc_fechaVencimiento" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdEstado_cierre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdComprador" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pr_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="com_comprador">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1030,6 +969,37 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcom_ordencompra_local_
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwcom_ordencompra_local">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdOrdenCompra" />
+            <PropertyRef Name="oc_fecha" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdEstadoAprobacion_cat" />
+            <PropertyRef Name="EstadoAprobacion" />
+            <PropertyRef Name="EstadoCierre" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="oc_plazo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="29" FixedLength="false" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="oc_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="IdEstadoAprobacion_cat" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoAprobacion" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="oc_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstado_cierre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoCierre" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="TerminoPago" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="oc_plazo" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1233,37 +1203,6 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcom_ordencompra_local_
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwcom_ordencompra_local">
-            <EntityTypeMapping TypeName="Model_compras.vwcom_ordencompra_local">
-              <MappingFragment StoreEntitySet="vwcom_ordencompra_local">
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
-                <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
-                <ScalarProperty Name="IdEstado_cierre" ColumnName="IdEstado_cierre" />
-                <ScalarProperty Name="oc_fechaVencimiento" ColumnName="oc_fechaVencimiento" />
-                <ScalarProperty Name="IdMotivo" ColumnName="IdMotivo" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="MotivoReprobacion" ColumnName="MotivoReprobacion" />
-                <ScalarProperty Name="co_fechaReproba" ColumnName="co_fechaReproba" />
-                <ScalarProperty Name="IdUsuario_Reprue" ColumnName="IdUsuario_Reprue" />
-                <ScalarProperty Name="IdUsuario_Aprueba" ColumnName="IdUsuario_Aprueba" />
-                <ScalarProperty Name="co_fecha_aprobacion" ColumnName="co_fecha_aprobacion" />
-                <ScalarProperty Name="IdEstadoAprobacion_cat" ColumnName="IdEstadoAprobacion_cat" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="oc_observacion" ColumnName="oc_observacion" />
-                <ScalarProperty Name="oc_fecha" ColumnName="oc_fecha" />
-                <ScalarProperty Name="oc_plazo" ColumnName="oc_plazo" />
-                <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
-                <ScalarProperty Name="oc_NumDocumento" ColumnName="oc_NumDocumento" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="com_comprador">
             <EntityTypeMapping TypeName="Model_compras.com_comprador">
               <MappingFragment StoreEntitySet="com_comprador">
@@ -1280,6 +1219,29 @@ warning 6002: The table/view 'DBERP_RAPI_PRODUCCION.web.vwcom_ordencompra_local_
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdUsuario_com" ColumnName="IdUsuario_com" />
                 <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcom_ordencompra_local">
+            <EntityTypeMapping TypeName="Model_compras.vwcom_ordencompra_local">
+              <MappingFragment StoreEntitySet="vwcom_ordencompra_local">
+                <ScalarProperty Name="oc_plazo" ColumnName="oc_plazo" />
+                <ScalarProperty Name="TerminoPago" ColumnName="TerminoPago" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="EstadoCierre" ColumnName="EstadoCierre" />
+                <ScalarProperty Name="IdEstado_cierre" ColumnName="IdEstado_cierre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="oc_observacion" ColumnName="oc_observacion" />
+                <ScalarProperty Name="EstadoAprobacion" ColumnName="EstadoAprobacion" />
+                <ScalarProperty Name="IdEstadoAprobacion_cat" ColumnName="IdEstadoAprobacion_cat" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="oc_fecha" ColumnName="oc_fecha" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
