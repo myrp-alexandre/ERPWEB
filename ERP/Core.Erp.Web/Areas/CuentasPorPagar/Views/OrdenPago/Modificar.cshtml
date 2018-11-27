@@ -61,13 +61,11 @@
 
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdOrdenPago)
-    @Html.HiddenFor(q => q.IdEntidad)
-    @Html.HiddenFor(q => q.IdEstadoAprobacion)
-    @Html.HiddenFor(q => q.Descripcion)
     @Html.HiddenFor(q => q.IdPersona)
+    @Html.HiddenFor(q => q.IdEstadoAprobacion)
     @Html.HiddenFor(q => q.info_comprobante.IdTipoCbte)
     @Html.HiddenFor(q => q.info_comprobante.IdCbteCble)
-
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     <div class="row">
         <div class="col-md-12">

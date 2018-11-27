@@ -5,23 +5,27 @@
         settings.Name = "GridViewPartial_detalle_op";
         settings.CallbackRouteValues = new { Controller = "OrdenPago", Action = "GridViewPartial_detalle_op" };
 
-
         settings.KeyFieldName = "Secuencia";
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        //settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.Width = Unit.Percentage(100);
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         settings.CommandColumn.Visible = false;
         settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = false;
         settings.CommandColumn.ShowDeleteButton = false;
 
-        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsContextMenu.Enabled = false;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
-
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
