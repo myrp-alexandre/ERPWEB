@@ -157,6 +157,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
+        /*
         public FileResult Nuevo(ats_Info model)
         {
 
@@ -180,7 +181,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
         }
-
+        */
 
     }
 }

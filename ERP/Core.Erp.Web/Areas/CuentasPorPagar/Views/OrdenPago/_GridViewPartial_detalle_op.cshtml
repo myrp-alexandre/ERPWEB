@@ -8,15 +8,12 @@
 
         settings.KeyFieldName = "Secuencia";
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "OrdenPago", Action = "EditingAddNew", Area = "CuentasPorPagar" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "OrdenPago", Action = "EditingUpdate", Area = "CuentasPorPagar" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "OrdenPago", Action = "EditingDelete", Area = "CuentasPorPagar" };
         settings.Width = Unit.Percentage(100);
 
-        settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
-        settings.CommandColumn.ShowEditButton = true;
-        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;

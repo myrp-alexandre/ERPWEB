@@ -62,6 +62,8 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdOrdenPago)
     @Html.HiddenFor(q => q.IdEntidad)
+    @Html.HiddenFor(q => q.IdEstadoAprobacion)
+    @Html.HiddenFor(q => q.Descripcion)
     @Html.HiddenFor(q => q.IdPersona)
     @Html.HiddenFor(q => q.info_comprobante.IdTipoCbte)
     @Html.HiddenFor(q => q.info_comprobante.IdCbteCble)
@@ -131,8 +133,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdTipo_Persona">Tipo persona:*</label>
-                    @Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "Key", "Value"), new { @class = "form-control", @id = "IdTipo_Persona" })
-                    @*@Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "IdTipo_Persona", "Descricpion"), new { @class = "form-control", @id = "IdTipo_Persona" })*@
+                    @Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "Key", "Value"), new { @class = "form-control", @id = "IdTipo_Persona" })                    
                     @Html.ValidationMessageFor(q => q.IdTipo_Persona, "", new { @class = "text-danger" })
                 </div>
             </div>
