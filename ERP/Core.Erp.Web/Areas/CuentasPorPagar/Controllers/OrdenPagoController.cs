@@ -113,6 +113,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
+            //var lst_tipo_personas = bus_persona_tipo.get_list();
+            //ViewBag.lst_tipo_personas = lst_tipo_personas;
+
             Dictionary<string, string> lst_tipo_personas = new Dictionary<string, string>();
             lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PERSONA.ToString(), "Persona");
             lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PROVEE.ToString(), "Proveedor");
@@ -523,7 +526,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
