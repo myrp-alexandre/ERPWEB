@@ -23,17 +23,12 @@ namespace Core.Erp.Data
         public int IdSucursal { get; set; }
         public decimal IdOrdenCompra { get; set; }
         public decimal IdProveedor { get; set; }
-        public string oc_NumDocumento { get; set; }
         public string IdTerminoPago { get; set; }
         public int oc_plazo { get; set; }
         public System.DateTime oc_fecha { get; set; }
         public string oc_observacion { get; set; }
         public string Estado { get; set; }
         public string IdEstadoAprobacion_cat { get; set; }
-        public Nullable<System.DateTime> co_fecha_aprobacion { get; set; }
-        public string IdUsuario_Aprueba { get; set; }
-        public string IdUsuario_Reprue { get; set; }
-        public Nullable<System.DateTime> co_fechaReproba { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltMod { get; set; }
@@ -49,11 +44,11 @@ namespace Core.Erp.Data
         public decimal IdComprador { get; set; }
     
         public virtual com_catalogo com_catalogo { get; set; }
+        public virtual com_comprador com_comprador { get; set; }
         public virtual com_departamento com_departamento { get; set; }
         public virtual com_estado_cierre com_estado_cierre { get; set; }
         public virtual com_Motivo_Orden_Compra com_Motivo_Orden_Compra { get; set; }
         public virtual com_TerminoPago com_TerminoPago { get; set; }
         public virtual ICollection<com_ordencompra_local_det> com_ordencompra_local_det { get; set; }
-        public virtual com_comprador com_comprador { get; set; }
     }
 }

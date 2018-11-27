@@ -32,10 +32,10 @@ namespace Core.Erp.Data
         public DbSet<com_TerminoPago> com_TerminoPago { get; set; }
         public DbSet<com_Motivo_Orden_Compra> com_Motivo_Orden_Compra { get; set; }
         public DbSet<com_ordencompra_local_det> com_ordencompra_local_det { get; set; }
-        public DbSet<com_ordencompra_local> com_ordencompra_local { get; set; }
         public DbSet<com_parametro> com_parametro { get; set; }
         public DbSet<vwcom_ordencompra_local_det> vwcom_ordencompra_local_det { get; set; }
         public DbSet<com_comprador> com_comprador { get; set; }
         public DbSet<vwcom_ordencompra_local> vwcom_ordencompra_local { get; set; }
+        public DbSet<com_ordencompra_local> com_ordencompra_local { get; set; }
     }
 }

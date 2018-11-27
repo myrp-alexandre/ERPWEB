@@ -45,7 +45,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             var lst_est_aprob= bus_catalogo.get_list(Convert.ToString(cl_enumeradores.eTipoCatalogoCOM.EST_APRO), false);
             ViewBag.lst_est_aprob = lst_est_aprob;
 
-            var lst_est_anu = bus_catalogo.get_list(Convert.ToString(cl_enumeradores.eTipoCatalogoCOM.EST_ANU), false);
+            var lst_est_anu = bus_catalogo.get_list(Convert.ToString(cl_enumeradores.eTipoCatalogoCOM.EST_APRO), false);
             ViewBag.lst_est_anu = lst_est_anu;
 
             var lst_estado = bus_estado.get_list(false);

@@ -16,8 +16,6 @@ namespace Core.Erp.Info.Compras
         public decimal IdOrdenCompra { get; set; }
         [Required(ErrorMessage = ("el campo Proveedor es obligatorio"))]
         public decimal IdProveedor { get; set; }
-        [Required(ErrorMessage = ("el campo número de documento es obligatorio"))]
-        [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo número de documento debe tener mínimo 1 caracter y máximo 50")]
         public string oc_NumDocumento { get; set; }
         [Required(ErrorMessage = ("el campo termino pago es obligatorio"))]
         public string IdTerminoPago { get; set; }

@@ -86,16 +86,11 @@ namespace Core.Erp.Data.Compras
                         IdProveedor = Entity.IdProveedor,
                         IdSucursal = Entity.IdSucursal,
                         IdTerminoPago = Entity.IdTerminoPago,
-                        IdUsuario_Aprueba = Entity.IdUsuario_Aprueba,
-                        IdUsuario_Reprue = Entity.IdUsuario_Reprue,
                         Estado = Entity.Estado,
                         oc_plazo = Entity.oc_plazo,
                         oc_observacion = Entity.oc_observacion,
                         oc_fecha = Entity.oc_fecha,
                         oc_fechaVencimiento = Entity.oc_fechaVencimiento,
-                        oc_NumDocumento = Entity.oc_NumDocumento,
-                        co_fechaReproba = Entity.co_fechaReproba,
-                        co_fecha_aprobacion = Entity.co_fecha_aprobacion
                     };
                 }
                 return info;
@@ -148,16 +143,11 @@ namespace Core.Erp.Data.Compras
                         IdProveedor = info.IdProveedor,
                         IdSucursal = info.IdSucursal,
                         IdTerminoPago = info.IdTerminoPago,
-                        IdUsuario_Aprueba = info.IdUsuario_Aprueba,
-                        IdUsuario_Reprue = info.IdUsuario_Reprue,
                         Estado = "A",
                         oc_plazo = info.oc_plazo,
                         oc_observacion = info.oc_observacion,
                         oc_fecha = info.oc_fecha,
                         oc_fechaVencimiento = info.oc_fechaVencimiento,
-                        oc_NumDocumento = info.oc_NumDocumento,
-                        co_fechaReproba = info.co_fechaReproba,
-                        co_fecha_aprobacion = info.co_fecha_aprobacion,
 
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
@@ -218,15 +208,10 @@ namespace Core.Erp.Data.Compras
                      Entity.IdProveedor = info.IdProveedor;
                      Entity.IdSucursal = info.IdSucursal;
                      Entity.IdTerminoPago = info.IdTerminoPago;
-                     Entity.IdUsuario_Aprueba = info.IdUsuario_Aprueba;
-                     Entity.IdUsuario_Reprue = info.IdUsuario_Reprue;
                      Entity.oc_plazo = info.oc_plazo;
                      Entity.oc_observacion = info.oc_observacion;
                      Entity.oc_fecha = info.oc_fecha;
                      Entity.oc_fechaVencimiento = info.oc_fechaVencimiento;
-                     Entity.oc_NumDocumento = info.oc_NumDocumento;
-                     Entity.co_fechaReproba = info.co_fechaReproba;
-                     Entity.co_fecha_aprobacion = info.co_fecha_aprobacion;
 
                      Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                      Entity.Fecha_UltMod = DateTime.Now;

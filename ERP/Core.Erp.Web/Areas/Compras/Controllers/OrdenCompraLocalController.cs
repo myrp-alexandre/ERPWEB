@@ -91,6 +91,9 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             var lst_termino = bus_termino.get_list(false);
             ViewBag.lst_termino = lst_termino;
 
+            var lst_apro = bus_catalogo.get_list(cl_enumeradores.eTipoCatalogoCOM.EST_APRO.ToString(), false);
+            ViewBag.lst_apro = lst_apro;
+
             var lst_estado = bus_estado.get_list(false);
             ViewBag.lst_estado = lst_estado;
 
