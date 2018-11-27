@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Web.Helps;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -153,5 +156,31 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+
+        public FileResult Nuevo(ats_Info model)
+        {
+
+          
+            var ms = new MemoryStream();
+            var xw = XmlWriter.Create(ms);
+
+
+            var serializer = new XmlSerializer(ats.GetType());
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("", "");
+            serializer.Serialize(xw, ats, ns);
+            xw.Flush();
+            ms.Seek(0, SeekOrigin.Begin);
+            using (var sr = new StreamReader(ms, Encoding.UTF8))
+            {
+                xml = sr.ReadToEnd();
+            }
+            byte[] fileBytes = ms.ToArray();
+            return File(fileBytes, "application/xml", nombre_file + ".xml");
+
+
+        }
+
+
     }
 }

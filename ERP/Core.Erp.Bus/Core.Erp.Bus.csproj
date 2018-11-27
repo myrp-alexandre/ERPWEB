@@ -329,6 +329,7 @@
     <Compile Include="RRHH\Rdep_Bus.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Bus.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Bus.cs" />
+    <Compile Include="RRHH\ro_archivosCSV_Bus.cs" />
     <Compile Include="RRHH\ro_archivos_bancos_generacion_Bus.cs" />
     <Compile Include="RRHH\ro_archivos_bancos_generacion_x_empleado_Bus.cs" />
     <Compile Include="RRHH\ro_area_Bus.cs" />
