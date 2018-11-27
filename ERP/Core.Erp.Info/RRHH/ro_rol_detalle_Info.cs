@@ -19,16 +19,17 @@ namespace Core.Erp.Info.RRHH
         public Nullable<bool> rub_visible_reporte { get; set; }
         public string Observacion { get; set; }
 
+        #region campos de la vista
         public Nullable<int> IdArea { get; set; }
         public Nullable<int> IdDivision { get; set; }
         public int IdDepartamento { get; set; }
         public Nullable<int> IdCargo { get; set; }
-
         public decimal IdPersona { get; set; }
         public decimal IdEntidad { get; set; }
         public System.DateTime pe_FechaFin { get; set; }
         public string pe_nombreCompleato { get; set; }
         public string ru_tipo { get; set; }
+        #endregion
 
 
 
