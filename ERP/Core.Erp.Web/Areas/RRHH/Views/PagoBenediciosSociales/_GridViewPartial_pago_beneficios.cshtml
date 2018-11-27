@@ -167,6 +167,19 @@
             });
         });
 
+        
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "";
+            column.SetDataItemTemplateContent(c =>
+            {
+                if (DataBinder.Eval(c.DataItem, "NombreArchivo") != null)
+                {
+                    ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("GetCSV", "PagoBenediciosSociales", new { Area = "RRHH", IdRol = DataBinder.Eval(c.DataItem, "IdRol") }, Request.Url.Scheme) + "');\"></span>");
+                }
+            });
+            column.Width = Unit.Percentage(10);
+        });
 
     });
 }
