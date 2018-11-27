@@ -157,31 +157,33 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
-        /*
-        public FileResult Nuevo(ats_Info model)
+        
+        public FileResult GetCSV(int IdRol,int IdNomina)
         {
-
-          
-            var ms = new MemoryStream();
-            var xw = XmlWriter.Create(ms);
-
-
-            var serializer = new XmlSerializer(ats.GetType());
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            ns.Add("", "");
-            serializer.Serialize(xw, ats, ns);
-            xw.Flush();
-            ms.Seek(0, SeekOrigin.Begin);
-            using (var sr = new StreamReader(ms, Encoding.UTF8))
+            ro_archivosCSV_Bus bus_archivos = new ro_archivosCSV_Bus();
+            string archivo = "";
+            var listado = bus_archivos.get_lis(Convert.ToInt32(SessionFixed.IdEmpresa), IdRol, 950);
+            foreach (var item in listado)
             {
-                xml = sr.ReadToEnd();
+                archivo = "";
+                archivo += item.pe_cedulaRuc + ";";
+                archivo += item.pe_nombre + ";";
+                archivo += item.pe_apellido + ";";
+                archivo += item.pe_sexo + ";";
+                archivo += item.CodigoSectorial + ";";
+                archivo += item.DiasA_considerar_Decimo + ";";
+                archivo += "A" + ";";//Tipo de Deposito
+                archivo += "P" + ";";// aqui definir que se pone en este campo
             }
-            byte[] fileBytes = ms.ToArray();
-            return File(fileBytes, "application/xml", nombre_file + ".xml");
+
+            string NombreFile = "Decimo";
+            string csv = "";
+            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(csv);
+            return File(byteArray, "application/xml", NombreFile + ".csv");
 
 
         }
-        */
+        
 
     }
 }
