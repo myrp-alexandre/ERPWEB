@@ -34,6 +34,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdEntidad = q.IdEntidad,
                                  Fecha = q.Fecha,
                                  IdEstadoAprobacion = q.IdEstadoAprobacion,
+                                 Descripcion = q.Descripcion,
                                  IdFormaPago = q.IdFormaPago,
                                  Fecha_Pago = q.Fecha_Pago,
                                  IdBanco = q.IdBanco,

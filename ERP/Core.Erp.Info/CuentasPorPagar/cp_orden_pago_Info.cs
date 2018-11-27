@@ -15,7 +15,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string Su_Descripcion { get; set; }
         public decimal IdOrdenPago { get; set; }
         [Required(ErrorMessage = "El campo observación es obligatorio")]
-        [StringLength(50, MinimumLength = 4, ErrorMessage = "La descripción debe tener mínimo 4 caracteres y máximo 500")]
+        [StringLength(500, MinimumLength = 4, ErrorMessage = "La descripción debe tener mínimo 4 caracteres y máximo 500")]
         public string Observacion { get; set; }
         [Required(ErrorMessage = "El campo tipo de orden de pago es obligatorio")]
         public string IdTipo_op { get; set; }
@@ -28,6 +28,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<decimal> IdEntidad { get; set; }
         public System.DateTime Fecha { get; set; }
         public string IdEstadoAprobacion { get; set; }
+        public string Descripcion { get; set; }
         [Required(ErrorMessage = "El campo forma de pago es obligatorio")]
         public string IdFormaPago { get; set; }
         public System.DateTime Fecha_Pago { get; set; }
