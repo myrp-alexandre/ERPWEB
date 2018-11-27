@@ -33,7 +33,7 @@ namespace Core.Erp.Data.Compras
 
                                      EstadoBool = q.Estado == "A" ? true : false,
                                      pe_nombreCompleto = q.pe_nombreCompleto
-                                     
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwcom_ordencompra_local
@@ -279,5 +279,37 @@ namespace Core.Erp.Data.Compras
             }
         }
 
+        public List<com_ordencompra_local_Info> GetListPorAprobar(int IdEmpresa, int IdSucursal, DateTime fecha_ini, DateTime fecha_fin)
+        {
+            try
+            {
+                List<com_ordencompra_local_Info> List;
+                using (Entities_compras Context = new Entities_compras())
+                {
+                    List = Context.com_ordencompra_local.Where(
+                        q => q.IdEmpresa == IdEmpresa
+                        && q.IdSucursal == IdSucursal
+                        && q.oc_fecha >= fecha_ini
+                        && q.oc_fecha <= fecha_fin
+                        && q.IdEstadoAprobacion_cat == "xAPRO"
+                        && q.Estado == "A").Select(q => new com_ordencompra_local_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdSucursal = q.IdSucursal,
+                            IdOrdenCompra = q.IdOrdenCompra,
+                            IdEstadoAprobacion_cat = q.IdEstadoAprobacion_cat,
+                            oc_observacion = q.oc_observacion,
+                            Estado = q.Estado,
+                            IdProveedor = q.IdProveedor
+                    }).ToList();
+                }
+                return List;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

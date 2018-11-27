@@ -274,7 +274,6 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         #endregion
 
     }
-
     public class com_ordencompra_local_det_List
     {
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
@@ -340,5 +339,4 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
-
 }
