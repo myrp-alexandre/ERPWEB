@@ -126,7 +126,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.cb_Estado = "A";
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
-                if (info_proveedor != null)
+
+                if (info_cliente != null || info_empleado != null || info_persona != null || info_proveedor != null)
                 {
                     if (info.Observacion == null)
                         info.Observacion = "";
@@ -135,10 +136,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 }
                 else
                     info.info_comprobante.cb_Observacion = info.Observacion;
-                if (bus_contabilidad.guardarDB(info.info_comprobante))
-                {
 
-                   
+                if (bus_contabilidad.guardarDB(info.info_comprobante))
+                {                   
                     oData.guardarDB(info);
                 }
 
@@ -152,8 +152,59 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
         public Boolean modificarDB(cp_orden_pago_Info info)
         {
+            var ObservacionComprobante = "";
+
             try
             {
+                if (cl_enumeradores.eTipoPersona.CLIENTE.ToString() == info.IdTipo_Persona)
+                {
+                    info_cliente = bus_cliente.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
+                    info.IdPersona = info_cliente.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a cliente: " + (info_cliente.info_persona.pe_nombreCompleto) == null ? "" : info_cliente.info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+                if (cl_enumeradores.eTipoPersona.EMPLEA.ToString() == info.IdTipo_Persona)
+                {
+                    info_empleado = bus_empleado.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
+                    info.IdPersona = info_empleado.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a empleado: " + (info_empleado.info_persona.pe_nombreCompleto) == null ? "" : info_empleado.info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+                if (cl_enumeradores.eTipoPersona.PERSONA.ToString() == info.IdTipo_Persona)
+                {
+                    info_persona = bus_persona.get_info(Convert.ToInt32(info.IdPersona));
+                    info.IdPersona = info_persona.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a persona: " + (info_persona.pe_nombreCompleto) == null ? "" : info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+                if (cl_enumeradores.eTipoPersona.PROVEE.ToString() == info.IdTipo_Persona)
+                {
+                    info_proveedor = bus_proveedor.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
+                    info.IdPersona = info_proveedor.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a proveedor: " + (info_proveedor.info_persona.pe_nombreCompleto) == null ? "" : info_proveedor.info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+
+                info.info_comprobante.IdEmpresa = info.IdEmpresa;
+                info.info_comprobante.cb_Fecha = (DateTime)info.Fecha;
+                info.info_comprobante.cb_Anio = info.info_comprobante.cb_Fecha.Year;
+                info.info_comprobante.cb_mes = info.info_comprobante.cb_Fecha.Month;
+                info.info_comprobante.cb_Estado = "A";
+                info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
+                info.info_comprobante.IdEmpresa = info.IdEmpresa;
+
+                if (info_cliente != null || info_empleado != null || info_persona != null || info_proveedor != null)
+                {
+                    if (info.Observacion == null)
+                        info.Observacion = "";
+                    info.info_comprobante.cb_Observacion = ObservacionComprobante;
+
+                }
+                else
+                    info.info_comprobante.cb_Observacion = info.Observacion;
+
+                info.Fecha_Pago = info.Fecha;
+
                 if (oData.modificarDB(info))
                 {
                     bus_contabilidad.modificarDB(info.info_comprobante);

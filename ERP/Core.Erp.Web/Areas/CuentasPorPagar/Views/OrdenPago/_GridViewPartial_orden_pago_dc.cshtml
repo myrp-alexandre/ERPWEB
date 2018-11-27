@@ -4,10 +4,10 @@
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_orden_pago_dc";
         settings.CallbackRouteValues = new { Controller = "OrdenPago", Action = "GridViewPartial_orden_pago_dc", Area = "CuentasPorPagar" };
+
         settings.KeyFieldName = "secuencia";
+        //settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.Width = Unit.Percentage(100);
-
-
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "OrdenPago", Action = "EditingAddNew", Area = "CuentasPorPagar" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "OrdenPago", Action = "EditingUpdate", Area = "CuentasPorPagar" };
@@ -17,11 +17,10 @@
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
-        settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
-        settings.CommandColumn.ShowEditButton = true;
-        settings.CommandColumn.ShowDeleteButton = true;
-        settings.Settings.ShowFooter = true;
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
