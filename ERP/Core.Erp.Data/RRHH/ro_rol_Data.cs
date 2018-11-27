@@ -71,7 +71,8 @@ namespace Core.Erp.Data.RRHH
                                  Procesado = ROL.Procesado,
                                  Contabilizado = ROL.Contabilizado,
                                  pe_FechaIni = ROL.pe_FechaIni,
-                                 pe_FechaFin = ROL.pe_FechaFin
+                                 pe_FechaFin = ROL.pe_FechaFin,
+                                 IdRol=ROL.IdRol
 
                              }).ToList();
                 }
