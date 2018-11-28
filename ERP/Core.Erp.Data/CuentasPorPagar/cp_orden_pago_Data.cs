@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Info.Helps;
 namespace Core.Erp.Data.CuentasPorPagar
 {
    public class cp_orden_pago_Data
@@ -56,7 +57,57 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-        
+
+        public List<cp_orden_pago_Info> get_list_aprobacion(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal)
+        {
+            try
+            {
+                List<cp_orden_pago_Info> Lista;
+
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                        Lista = (from q in Context.vwcp_orden_pago
+                                 where IdEmpresa == q.IdEmpresa
+                                 && q.Fecha_Pago >= Fecha_ini
+                                 && q.Fecha_Pago <= Fecha_fin
+                                 && q.IdSucursal == IdSucursal
+                                 && q.IdEstadoAprobacion == cl_enumeradores.eEstadoAprobacionOrdenPago.PENDI.ToString()
+                                 && q.Estado == "A"
+                                 select new cp_orden_pago_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdSucursal = q.IdSucursal,
+                                     Su_Descripcion = q.Su_Descripcion,
+                                     IdOrdenPago = q.IdOrdenPago,
+                                     Observacion = q.Observacion,
+                                     IdTipo_op = q.IdTipo_op,
+                                     IdTipo_Persona = q.IdTipo_Persona,
+                                     IdPersona = q.IdPersona,
+                                     IdEntidad = q.IdEntidad,
+                                     Fecha = q.Fecha,
+                                     IdEstadoAprobacion = q.IdEstadoAprobacion,
+                                     Descripcion = q.Descripcion,
+                                     IdFormaPago = q.IdFormaPago,
+                                     Fecha_Pago = q.Fecha_Pago,
+                                     IdBanco = q.IdBanco,
+                                     IdTipoFlujo = q.IdTipoFlujo,
+                                     IdTipoMovi = q.IdTipoMovi,
+                                     Estado = q.Estado,
+                                     Nom_Beneficiario = q.pe_nombreCompleto,
+                                     Total_OP = q.Total_OP,
+                                     EstadoBool = q.Estado == "A" ? true : false
+
+                                 }).ToList();
+                    }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public cp_orden_pago_Info get_info(int IdEmpresa, decimal IdOrdenPago)
         {
             try

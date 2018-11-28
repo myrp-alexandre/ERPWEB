@@ -42,6 +42,17 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
+        public List<cp_orden_pago_Info> get_list_aprobacion(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal)
+        {
+            try
+            {
+                return oData.get_list_aprobacion(IdEmpresa, Fecha_ini, Fecha_fin, IdSucursal);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<cp_orden_pago_det_Info> Get_List_orden_pago_con_saldo(int IdEmpresa, string IdTipo_op, decimal IdProveedor, string IdEstado_Aprobacion, string IdUsuario)
         {
             try
