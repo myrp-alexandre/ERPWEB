@@ -173,6 +173,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             cp_orden_pago_Info model = new cp_orden_pago_Info
             {
                 IdEmpresa = IdEmpresa,
+                Fecha=DateTime.Now.Date
                 Fecha=DateTime.Now.Date,
             };
             cargar_combos(IdEmpresa);
