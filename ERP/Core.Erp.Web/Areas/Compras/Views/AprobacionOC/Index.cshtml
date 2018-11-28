@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.Helps.cl_filtros_Info
+﻿@model Core.Erp.Info.Compras.com_orden_aprobacion_Info
 
 @{
     ViewBag.Title = "Aprobación orden de compra";
@@ -23,12 +23,10 @@
         //Capture all selected keys
         selectedIDs = values.join(',');
     };
-
     function aprobar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IDs: selectedIDs,
-            IdEstadoAprobacion: $("#btn_aprobar").val(),
+            IDs: selectedIDs
         }
         $("#btn_aprobar").attr("disabled", true);
         $.ajax({
@@ -41,42 +39,39 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#myform").submit();
-                GridViewPartial_aprobacion_oc.PerformCallback();
+               
             },
             error: function (error) {
             }
         });
+        $("#myform").submit();
     }
 
-    function reprobar() {
+    function rechazar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IDs: selectedIDs,
-            IdEstadoAprobacion: $("#btn_reprobar").val(),
+            IDs: selectedIDs
         }
         $("#btn_aprobar").attr("disabled", true);
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("reprobar", "AprobacionOC", new { Area = "Compras" })',
+            url: '@Url.Action("rechazar", "AprobacionOC", new { Area = "Compras" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#myform").submit();
-                GridViewPartial_aprobacion_oc.PerformCallback();
+
             },
             error: function (error) {
             }
         });
+        $("#myform").submit();
     }
-
     </script>
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Index", "AprobacionOC", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "AprobacionOC", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id="IdTransaccionSession"})
@@ -168,8 +163,8 @@
             @Html.Action("GridViewPartial_aprobacion_oc", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
 
                     <div class="box-footer">
-                        <button type="button" class="btn btn-primary" id="btn_aprobar"  onclick="aprobar();">Aprobar</button>
-                        <button type="button" class="btn btn-danger" id="btn_reprobar"  onclick="reprobar();">Reprobar</button>
+                        <button type="button" class="btn btn-success" id="btn_aprobar" estado="APRO" onclick="aprobar();">Aprobar</button>
+                        <button type="button" class="btn btn-danger" id="btn_rechazar" estado="REPRO" onclick="rechazar();">Rechazar</button>
                     </div>
 
                 </div>

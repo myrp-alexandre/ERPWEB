@@ -66,13 +66,11 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                //ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_004", "CuentasPorPagarReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(),IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble").ToString() }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("COMP_001", "CompraReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(),IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal").ToString(), IdOrdenCompra = DataBinder.Eval(c.DataItem, "IdOrdenCompra").ToString() }, Request.Url.Scheme) + "');\"></span>");
 
             });
             column.Width = Unit.Percentage(5);
         });
-
-
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
 

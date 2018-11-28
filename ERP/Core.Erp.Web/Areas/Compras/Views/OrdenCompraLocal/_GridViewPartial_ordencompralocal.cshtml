@@ -59,6 +59,10 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Blue;
             }
+            if (Convert.ToString(e.GetValue("IdEstadoAprobacion_cat")) == "ANU")
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
         };
         settings.Columns.Add(c =>
         {
