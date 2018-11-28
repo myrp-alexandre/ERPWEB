@@ -91,9 +91,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 lst_ordenes_pago_aprobacion.Add(info);
             }
 
-            DateTime fecha_ini = DateTime.Now;
-            DateTime fecha_fin = DateTime.Now;
-
             var resultado_orden = bus_orden_pago.aprobarOP(lst_ordenes_pago_aprobacion);
 
             return Json(resultado_orden, JsonRequestBehavior.AllowGet);
@@ -116,9 +113,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 lst_ordenes_pago_aprobacion.Add(info);
             }
-
-            DateTime fecha_ini = DateTime.Now;
-            DateTime fecha_fin = DateTime.Now;
 
             var resultado_orden = bus_orden_pago.rechazarOP(lst_ordenes_pago_aprobacion);
 

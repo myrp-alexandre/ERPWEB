@@ -482,7 +482,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_op.IdEntidad = info.IdProveedor;
                 info_op.IdEstadoAprobacion = info_tipo_op.IdEstadoAprobacion;
                 info_op.IdFormaPago = "CHEQUE";
-                info_op.Fecha_Pago = DateTime.Now ;
                 info_op.Estado = "A";
                 info_op.Fecha = DateTime.Now;
                 
