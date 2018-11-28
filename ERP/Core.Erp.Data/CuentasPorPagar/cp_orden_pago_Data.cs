@@ -347,7 +347,7 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        public bool aprobacionDB(List<cp_orden_pago_Info> Lista)
+        public bool aprobarOP(List<cp_orden_pago_Info> Lista)
         {
             try
             {
@@ -360,25 +360,53 @@ namespace Core.Erp.Data.CuentasPorPagar
                 {
                     foreach (var item in Lista)
                     {
-                        cp_orden_pago Entity = new cp_orden_pago
+                        cp_orden_pago Entity = Context.cp_orden_pago.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdOrdenPago == item.IdOrdenPago);
+                        if (Entity != null)
                         {
-                            IdEmpresa = item.IdEmpresa,
-                            IdOrdenPago = item.IdOrdenPago,
-                            IdEstadoAprobacion = item.IdEstadoAprobacion,
-                        };
-                        Context.cp_orden_pago.Add(Entity);
-                    }
-                    Context.SaveChanges();
+                            Entity.IdEstadoAprobacion = item.IdEstadoAprobacion;
+                        }
+                        Context.SaveChanges();
+                    }                    
                 }
 
                 return true;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+
+        public bool rechazarOP(List<cp_orden_pago_Info> Lista)
+        {
+            try
+            {
+                int IdEmpresa = 0;
+                if (Lista.Count() > 0)
+                    IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+                IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    foreach (var item in Lista)
+                    {
+                        cp_orden_pago Entity = Context.cp_orden_pago.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdOrdenPago == item.IdOrdenPago);
+                        if (Entity != null)
+                        {
+                            Entity.IdEstadoAprobacion = item.IdEstadoAprobacion;
+                        }
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public Boolean modificar_estado_aprobacion(cp_orden_pago_Info info)
         {
             try

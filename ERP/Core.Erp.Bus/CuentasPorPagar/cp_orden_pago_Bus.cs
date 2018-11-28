@@ -302,11 +302,24 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
         }
 
-        public bool aprobacionDB(List<cp_orden_pago_Info> Lista)
+        public bool aprobarOP(List<cp_orden_pago_Info> Lista)
         {
             try
             {
-                return oData.aprobacionDB(Lista);
+                return oData.aprobarOP(Lista);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool rechazarOP(List<cp_orden_pago_Info> Lista)
+        {
+            try
+            {
+                return oData.rechazarOP(Lista);
             }
             catch (Exception)
             {
