@@ -140,8 +140,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         info.info_retencion.Estado = "A";
                         info.info_retencion.fecha = info.co_fechaOg;
                         info.info_retencion.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
-                        info.info_retencion.serie1 = info.co_serie;
-                        info.info_retencion.serie2 = info.co_serie;
+                        info.info_retencion.serie1 = info.info_retencion.serie1;
+                        info.info_retencion.serie2 = info.info_retencion.serie2;
                         info.info_retencion.re_EstaImpresa = "N";
                         info.info_retencion.re_Tiene_RFuente = "S";
                         info.info_retencion.re_Tiene_RTiva = "S";
@@ -155,12 +155,13 @@ namespace Core.Erp.Bus.CuentasPorPagar
                             info.info_retencion.info_comprobante.IdEmpresa = info.IdEmpresa;
                             info.info_retencion.info_comprobante.cb_Fecha = info.co_fechaOg;
                             info.info_retencion.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
-                            info.info_retencion.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
                             info.info_retencion.info_comprobante.IdTipoCbte = info.IdTipoCbte_Ogiro;
                             info.info_retencion.info_comprobante.IdCbteCble = info.IdCbteCble_Ogiro;
                             info.info_retencion.info_comprobante.cb_Estado = info.Estado;
                             info.info_retencion.info_comprobante.cb_Valor = info.co_valorpagar;
-                            
+                            info.info_retencion.info_comprobante.cb_Anio = info.info_comrobante.cb_Anio;
+                            info.info_retencion.info_comprobante.cb_mes = info.info_comrobante.cb_mes;
+                            info.info_retencion.info_comprobante.cb_Observacion = "Comprobante contable de retencion #"+info.info_retencion.serie1+" "+info.info_retencion.serie2+" "+info.info_retencion.NumRetencion;
 
 
                             if ( bus_contabilidad.guardarDB(info.info_retencion.info_comprobante))

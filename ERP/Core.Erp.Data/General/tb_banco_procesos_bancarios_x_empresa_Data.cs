@@ -92,14 +92,14 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public tb_banco_procesos_bancarios_x_empresa_Info get_info(int IdBanco)
+        public tb_banco_procesos_bancarios_x_empresa_Info get_info( int IdEmpresa, int IdProceso)
         {
             try
             {
                 tb_banco_procesos_bancarios_x_empresa_Info info = new tb_banco_procesos_bancarios_x_empresa_Info();
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_banco_procesos_bancarios_x_empresa Entity = Context.tb_banco_procesos_bancarios_x_empresa.FirstOrDefault(q => q.IdBanco == IdBanco);
+                    tb_banco_procesos_bancarios_x_empresa Entity = Context.tb_banco_procesos_bancarios_x_empresa.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdProceso== IdProceso);
                     if (Entity == null) return null;
 
                     info = new tb_banco_procesos_bancarios_x_empresa_Info

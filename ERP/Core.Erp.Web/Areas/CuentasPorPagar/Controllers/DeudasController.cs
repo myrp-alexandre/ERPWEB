@@ -46,9 +46,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         tb_sis_Documento_Tipo_Talonario_Bus bus_documento = new tb_sis_Documento_Tipo_Talonario_Bus();
 
-        ct_cbtecble_det_List_re List_ct_cbtecble_det_List = new ct_cbtecble_det_List_re();
+        ct_cbtecble_det_List_re List_ct_cbtecble_det_List_retencion = new ct_cbtecble_det_List_re();
         cp_retencion_det_lst List_cp_retencion_det = new cp_retencion_det_lst();
-
+        cp_retencion_Bus bus_retencion = new cp_retencion_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -254,11 +254,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         private bool validar(cp_orden_giro_Info i_validar, ref string msg)
         {
-            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.co_fechaOg, cl_enumeradores.eModulo.CXP, ref msg))
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.co_FechaFactura, cl_enumeradores.eModulo.CXP, ref msg))
             {
                 return false;
             }
-            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.co_fechaOg, cl_enumeradores.eModulo.CONTA, ref msg))
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.co_FechaFactura, cl_enumeradores.eModulo.CONTA, ref msg))
             {
                 return false;
             }
@@ -301,7 +301,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     
             };
             List_cp_retencion_det.set_list(new List<cp_retencion_det_Info>(), model.IdTransaccionSession);
-            List_ct_cbtecble_det_List.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
+            List_ct_cbtecble_det_List_retencion.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
 
             Lis_ct_cbtecble_det_List.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
             Lis_cp_cuotas_x_doc_det_Info.set_list(new List<cp_cuotas_x_doc_det_Info>(), model.IdTransaccionSession);
@@ -325,8 +325,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_comrobante = new ct_cbtecble_Info();
 
             model.info_retencion.detalle = List_cp_retencion_det.get_list(model.IdTransaccionSession);
+            model.info_retencion.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List_retencion.get_list(model.IdTransaccionSession);
+            model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
 
-            if(model.info_retencion.detalle.Count()>0)
+
+            if (model.info_retencion.detalle.Count()>0)
             {
                 var  lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
                 model.info_retencion.detalle.ForEach(item =>
@@ -347,7 +350,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             }
             model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
-            model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
             if(Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession).Count()==0)
             {
                 ViewBag.mensaje = "Falta diario contable";
@@ -423,6 +425,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             List_cp_retencion_det.set_list(model.info_retencion.detalle, model.IdTransaccionSession);
             Lis_cp_cuotas_x_doc_det_Info.set_list( model.info_cuota.lst_cuotas_det, model.IdTransaccionSession);
             List_det.set_list(bus_det.get_list(model.IdEmpresa, model.IdTipoCbte_Ogiro, model.IdCbteCble_Ogiro), model.IdTransaccionSession);
+
+            model.info_retencion = bus_retencion.get_info(model.IdEmpresa, model.IdCbteCble_Ogiro, model.IdTipoCbte_Ogiro);
+            model.info_retencion = bus_retencion.get_info(model.info_retencion.IdEmpresa, model.info_retencion.IdRetencion);
+
+            List_ct_cbtecble_det_List_retencion.set_list(model.info_retencion.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
+            List_cp_retencion_det.set_list(model.info_retencion.detalle, model.IdTransaccionSession);
             cargar_combos(model);
             cargar_combos_detalle();
             return View(model);
