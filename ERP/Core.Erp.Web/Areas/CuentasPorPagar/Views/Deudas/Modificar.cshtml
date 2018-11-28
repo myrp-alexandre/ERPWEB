@@ -26,6 +26,8 @@
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
     @Html.HiddenFor(q => q.co_fechaOg)
 
+    @Html.HiddenFor(q => q.info_retencion.IdRetencion);
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -185,378 +187,378 @@
                 </div>
             </div>
         </div>
-            <div class="col-md-6">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="IdBanco_acreditacion">Tipo flujo</label>
-                        @Html.Partial("_CmbFlujo_Deudas", Model.IdTipoFlujo)
-                        @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
+        <div class="col-md-6">
             <div class="col-md-12">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="co_observacion">Observación*</label>
-                        @Html.TextBoxFor(q => q.co_observacion, new { @class = "form-control", @id = "observacion" })
-                        @Html.ValidationMessageFor(q => q.co_observacion, "", new { @class = "text-danger" })
-                    </div>
+                <div class="form-group">
+                    <label for="IdBanco_acreditacion">Tipo flujo</label>
+                    @Html.Partial("_CmbFlujo_Deudas", Model.IdTipoFlujo)
+                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-        <div id="Tabs" role="tabpanel">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active">
-                    <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos generales</a>
-                </li>
-                <li>
-                    <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Detalle de ingreso</a>
-                </li>
-                <li>
-                    <a href="#tab_documento_modificado" aria-controls="contactos_telefonos" role="tab" data-toggle="tab">Documento modificado</a>
-                </li>
-                <li>
-                    <a href="#tab_informacion_pago" aria-controls="contabilidad" role="tab" data-toggle="tab">Información de pago</a>
-                </li>
-                <li>
-                    <a href="#tab_detalle_cuotas" aria-controls="cuentas" role="tab" data-toggle="tab">Detalle de cuotas</a>
-                </li>
-                <li>
-                    <a href="#tab_retencion" aria-controls="retencion" role="tab" data-toggle="tab">Retención</a>
-                </li>
-            </ul>
-            <div class="tab-content" style="padding-top: 20px">
-                <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="co_subtotal_iva">Subtotal IVA</label>
-                                    @Html.TextBoxFor(q => q.co_subtotal_iva, new { @class = "form-control", @id = "co_subtotal_iva" })
-                                    @Html.ValidationMessageFor(q => q.co_subtotal_iva, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="co_subtotal_siniva">Subtotal cero</label>
-                                    @Html.TextBoxFor(q => q.co_subtotal_siniva, new { @class = "form-control", @id = "co_subtotal_siniva" })
-                                    @Html.ValidationMessageFor(q => q.co_subtotal_siniva, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="co_Por_iva">% Iva</label>
-                                    @Html.TextBoxFor(q => q.co_Por_iva, new { @class = "form-control", @id = "co_Por_iva", @readonly = "readonly" })
-                                    @Html.ValidationMessageFor(q => q.co_Por_iva, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="co_valoriva">Iva</label>
-                                    @Html.TextBoxFor(q => q.co_valoriva, new { @class = "form-control", @id = "co_valoriva" })
-                                    @Html.ValidationMessageFor(q => q.co_valoriva, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="co_total">Total</label>
-                                    @Html.TextBoxFor(q => q.co_total, new { @class = "form-control", @id = "co_total" })
-                                    @Html.ValidationMessageFor(q => q.co_total, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="co_observacion">Diario contable*</label>
-                                    @Html.Action("GridViewPartial_deudas_dc")
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="co_observacion">Observación*</label>
+                    @Html.TextBoxFor(q => q.co_observacion, new { @class = "form-control", @id = "observacion" })
+                    @Html.ValidationMessageFor(q => q.co_observacion, "", new { @class = "text-danger" })
                 </div>
-                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_documento_modificado">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="Tipodoc_a_Modificar">Tipo documento*</label>
-                                    @Html.DropDownListFor(q => q.Tipodoc_a_Modificar, new SelectList(ViewBag.lst_doc_tipo, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "Tipodoc_a_Modificar" })
-                                    @Html.ValidationMessageFor(q => q.Tipodoc_a_Modificar, "", new { @class = "text-danger" })
-                                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos generales</a>
+            </li>
+            <li>
+                <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Detalle de ingreso</a>
+            </li>
+            <li>
+                <a href="#tab_documento_modificado" aria-controls="contactos_telefonos" role="tab" data-toggle="tab">Documento modificado</a>
+            </li>
+            <li>
+                <a href="#tab_informacion_pago" aria-controls="contabilidad" role="tab" data-toggle="tab">Información de pago</a>
+            </li>
+            <li>
+                <a href="#tab_detalle_cuotas" aria-controls="cuentas" role="tab" data-toggle="tab">Detalle de cuotas</a>
+            </li>
+            <li>
+                <a href="#tab_retencion" aria-controls="retencion" role="tab" data-toggle="tab">Retención</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="co_subtotal_iva">Subtotal IVA</label>
+                                @Html.TextBoxFor(q => q.co_subtotal_iva, new { @class = "form-control", @id = "co_subtotal_iva" })
+                                @Html.ValidationMessageFor(q => q.co_subtotal_iva, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="estable_a_Modificar">Establecimiento*</label>
-                                    @Html.TextBoxFor(q => q.estable_a_Modificar, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.estable_a_Modificar, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="ptoEmi_a_Modificar">Punto emisión*</label>
-                                    @Html.TextBoxFor(q => q.ptoEmi_a_Modificar, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.ptoEmi_a_Modificar, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
 
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="num_docu_Modificar">Numero documento*</label>
-                                    @Html.TextBoxFor(q => q.num_docu_Modificar, new { @class = "form-control", @id = "num_docu_Modificar" })
-                                    @Html.ValidationMessageFor(q => q.num_docu_Modificar, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Num_Autorizacion">Autorización*</label>
-                                    @Html.TextBoxFor(q => q.aut_doc_Modificar, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.aut_doc_Modificar, "", new { @class = "text-danger" })
-                                </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="co_subtotal_siniva">Subtotal cero</label>
+                                @Html.TextBoxFor(q => q.co_subtotal_siniva, new { @class = "form-control", @id = "co_subtotal_siniva" })
+                                @Html.ValidationMessageFor(q => q.co_subtotal_siniva, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_pago">
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="info_forma_pago.codigo_pago_sri">Forma Pago*</label>
-                                    @Html.DevExpress().ComboBoxFor(q => q.info_forma_pago.codigo_pago_sri, settings =>
-                                   {
-                                       settings.Name = "info_forma_pago.codigo_pago_sri";
-                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                       settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                       settings.Properties.Columns.Add("formas_pago_sri", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-
-
-                                       //Campo ID
-                                       settings.Properties.ValueField = "codigo_pago_sri";
-                                       settings.Properties.ValueType = typeof(string);
-                                       settings.Properties.TextField = "formas_pago_sri";
-                                       //Boton para seleccionar ningun registro
-                                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                                   }).BindList(ViewBag.lst_forma_pago).GetHtml()
-                                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="PagoLocExt">Pago local o exterior</label>
-                                    @Html.DropDownListFor(q => q.PagoLocExt, new SelectList(ViewBag.lst_pagos, "Key", "Value"), new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.PagoLocExt, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="PaisPago">País efectua el pago*</label>
-                                    @Html.DropDownListFor(q => q.PaisPago, new SelectList(ViewBag.lst_paises, "Codigo", "Pais"), new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.PaisPago, "", new { @class = "text-danger" })
-                                </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="co_Por_iva">% Iva</label>
+                                @Html.TextBoxFor(q => q.co_Por_iva, new { @class = "form-control", @id = "co_Por_iva", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(q => q.co_Por_iva, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label for="ConvenioTributacion_bool">@Html.CheckBoxFor(q => q.ConvenioTributacion_bool) Aplica convenio de doble tributación en el pago</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label for="PagoSujetoRetencion_bool">@Html.CheckBoxFor(q => q.PagoSujetoRetencion_bool) Pago sujeto a retención en aplicación en la norma legal</label>
-                                    </div>
-                                </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="co_valoriva">Iva</label>
+                                @Html.TextBoxFor(q => q.co_valoriva, new { @class = "form-control", @id = "co_valoriva" })
+                                @Html.ValidationMessageFor(q => q.co_valoriva, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-
-                </div>
-                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="co_observacion">Detalle</label>
-                                    @Html.Action("GridViewPartial_deudas_det")
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_cuotas">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="Num_cuotas">#cuotas</label>
-                                    @Html.TextBoxFor(q => q.info_cuota.Num_cuotas, new { @class = "form-control", @id = "Num_cuotas" })
-                                    @Html.ValidationMessageFor(q => q.info_cuota.Num_cuotas, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="Dias_plazo">Días plazo</label>
-                                    @Html.TextBoxFor(q => q.info_cuota.Dias_plazo, new { @class = "form-control", @id = "Dias_plazo" })
-                                    @Html.ValidationMessageFor(q => q.info_cuota.Dias_plazo, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="Total_a_pagar">Total pagar</label>
-                                    @Html.TextBoxFor(q => q.info_cuota.Total_a_pagar, new { @class = "form-control", @id = "Total_a_pagar" })
-                                    @Html.ValidationMessageFor(q => q.info_cuota.Total_a_pagar, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="co_FechaContabilizacion">Fecha Primera cuota*</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        @Html.DevExpress().DateEditFor(q => q.info_cuota.Fecha_inicio, settings =>
-                                           {
-                                               settings.Name = "Fecha_inicio";
-                                               settings.Properties.UseMaskBehavior = true;
-                                               settings.Properties.EditFormat = EditFormat.Date;
-                                               settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                               settings.Properties.ClientSideEvents.DateChanged = "function(s,e){get_cuotas();}";
-                                           }).GetHtml()
-                                        @Html.ValidationMessageFor(q => q.info_cuota.Fecha_inicio, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="co_observacion">Detalle de cuotas</label>
-
-                                    @Html.Action("GridViewPartial_documento_cuotas_det")
-
-                                </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="co_total">Total</label>
+                                @Html.TextBoxFor(q => q.co_total, new { @class = "form-control", @id = "co_total" })
+                                @Html.ValidationMessageFor(q => q.co_total, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_retencion">
-
-
-
-
-
-                    <div id="Tabs" role="tabpanel">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="active">
-                                <a href="#tab_retenciones" aria-controls="retenciones" role="tab" data-toggle="tab">Retenciones</a>
-                            </li>
-                            <li>
-                                <a href="#tab_diario" aria-controls="diario" role="tab" data-toggle="tab">Diario contable</a>
-                            </li>
-
-                        </ul>
-                        <div class="tab-content" style="padding-top: 20px">
-                            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_retenciones">
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="info_retencion.serie1">Establecimiento</label>
-                                                @Html.TextBoxFor(q => q.info_retencion.serie1, new { @class = "form-control", @id = "info_retencion.serie1" })
-                                                @Html.ValidationMessageFor(q => q.info_retencion.serie1, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="info_retencion.serie2">Punto de emisión</label>
-                                                @Html.TextBoxFor(q => q.info_retencion.serie2, new { @class = "form-control", @id = "info_retencion.serie2" })
-                                                @Html.ValidationMessageFor(q => q.info_retencion.serie2, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="info_retencion.NumRetencion">Número de retención</label>
-                                                @Html.TextBoxFor(q => q.info_retencion.NumRetencion, new { @class = "form-control", @id = "info_retencion.NumRetencion" })
-                                                @Html.ValidationMessageFor(q => q.info_retencion.NumRetencion, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Detalle retención*</label>
-                                                @Html.Action("GridViewPartial_retencion_det", new { Area = "CuentasPorPagar", Controller = "Retencion" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="co_observacion">Diario contable*</label>
+                                @Html.Action("GridViewPartial_deudas_dc")
                             </div>
-
-
-                            <div role="tabpanel" class="tab-pane " style="margin-left: 1em;" id="tab_diario">
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Diario contable*</label>
-                                                @Html.Action("GridViewPartial_retencio_dc", new { Area = "CuentasPorPagar", Controller = "Retencion" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
                         </div>
                     </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_documento_modificado">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Tipodoc_a_Modificar">Tipo documento*</label>
+                                @Html.DropDownListFor(q => q.Tipodoc_a_Modificar, new SelectList(ViewBag.lst_doc_tipo, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "Tipodoc_a_Modificar" })
+                                @Html.ValidationMessageFor(q => q.Tipodoc_a_Modificar, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="estable_a_Modificar">Establecimiento*</label>
+                                @Html.TextBoxFor(q => q.estable_a_Modificar, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.estable_a_Modificar, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="ptoEmi_a_Modificar">Punto emisión*</label>
+                                @Html.TextBoxFor(q => q.ptoEmi_a_Modificar, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.ptoEmi_a_Modificar, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="num_docu_Modificar">Numero documento*</label>
+                                @Html.TextBoxFor(q => q.num_docu_Modificar, new { @class = "form-control", @id = "num_docu_Modificar" })
+                                @Html.ValidationMessageFor(q => q.num_docu_Modificar, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Num_Autorizacion">Autorización*</label>
+                                @Html.TextBoxFor(q => q.aut_doc_Modificar, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.aut_doc_Modificar, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_pago">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="info_forma_pago.codigo_pago_sri">Forma Pago*</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.info_forma_pago.codigo_pago_sri, settings =>
+                               {
+                                   settings.Name = "info_forma_pago.codigo_pago_sri";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("formas_pago_sri", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+
+
+                                   //Campo ID
+                                   settings.Properties.ValueField = "codigo_pago_sri";
+                                   settings.Properties.ValueType = typeof(string);
+                                   settings.Properties.TextField = "formas_pago_sri";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+                               }).BindList(ViewBag.lst_forma_pago).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="PagoLocExt">Pago local o exterior</label>
+                                @Html.DropDownListFor(q => q.PagoLocExt, new SelectList(ViewBag.lst_pagos, "Key", "Value"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.PagoLocExt, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="PaisPago">País efectua el pago*</label>
+                                @Html.DropDownListFor(q => q.PaisPago, new SelectList(ViewBag.lst_paises, "Codigo", "Pais"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.PaisPago, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="ConvenioTributacion_bool">@Html.CheckBoxFor(q => q.ConvenioTributacion_bool) Aplica convenio de doble tributación en el pago</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="PagoSujetoRetencion_bool">@Html.CheckBoxFor(q => q.PagoSujetoRetencion_bool) Pago sujeto a retención en aplicación en la norma legal</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="co_observacion">Detalle</label>
+                                @Html.Action("GridViewPartial_deudas_det")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_cuotas">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Num_cuotas">#cuotas</label>
+                                @Html.TextBoxFor(q => q.info_cuota.Num_cuotas, new { @class = "form-control", @id = "Num_cuotas" })
+                                @Html.ValidationMessageFor(q => q.info_cuota.Num_cuotas, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Dias_plazo">Días plazo</label>
+                                @Html.TextBoxFor(q => q.info_cuota.Dias_plazo, new { @class = "form-control", @id = "Dias_plazo" })
+                                @Html.ValidationMessageFor(q => q.info_cuota.Dias_plazo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Total_a_pagar">Total pagar</label>
+                                @Html.TextBoxFor(q => q.info_cuota.Total_a_pagar, new { @class = "form-control", @id = "Total_a_pagar" })
+                                @Html.ValidationMessageFor(q => q.info_cuota.Total_a_pagar, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="co_FechaContabilizacion">Fecha Primera cuota*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.info_cuota.Fecha_inicio, settings =>
+                                       {
+                                           settings.Name = "Fecha_inicio";
+                                           settings.Properties.UseMaskBehavior = true;
+                                           settings.Properties.EditFormat = EditFormat.Date;
+                                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                           settings.Properties.ClientSideEvents.DateChanged = "function(s,e){get_cuotas();}";
+                                       }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.info_cuota.Fecha_inicio, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="co_observacion">Detalle de cuotas</label>
+
+                                @Html.Action("GridViewPartial_documento_cuotas_det")
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_retencion">
+
+
+
+
+
+                <div id="Tabs" role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active">
+                            <a href="#tab_retenciones" aria-controls="retenciones" role="tab" data-toggle="tab">Retenciones</a>
+                        </li>
+                        <li>
+                            <a href="#tab_diario" aria-controls="diario" role="tab" data-toggle="tab">Diario contable</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content" style="padding-top: 20px">
+                        <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_retenciones">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="info_retencion.serie1">Establecimiento</label>
+                                            @Html.TextBoxFor(q => q.info_retencion.serie1, new { @class = "form-control", @id = "info_retencion.serie1" })
+                                            @Html.ValidationMessageFor(q => q.info_retencion.serie1, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="info_retencion.serie2">Punto de emisión</label>
+                                            @Html.TextBoxFor(q => q.info_retencion.serie2, new { @class = "form-control", @id = "info_retencion.serie2" })
+                                            @Html.ValidationMessageFor(q => q.info_retencion.serie2, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="info_retencion.NumRetencion">Número de retención</label>
+                                            @Html.TextBoxFor(q => q.info_retencion.NumRetencion, new { @class = "form-control", @id = "info_retencion.NumRetencion" })
+                                            @Html.ValidationMessageFor(q => q.info_retencion.NumRetencion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Detalle retención*</label>
+                                            @Html.Action("GridViewPartial_retencion_det", new { Area = "CuentasPorPagar", Controller = "Retencion" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div role="tabpanel" class="tab-pane " style="margin-left: 1em;" id="tab_diario">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Diario contable*</label>
+                                            @Html.Action("GridViewPartial_retencio_dc", new { Area = "CuentasPorPagar", Controller = "Retencion" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index","Deudas",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
-        </div>
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
-        }
-        <script>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Deudas",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
 
 
     $(function () {
@@ -878,4 +880,4 @@
                 });
 
     };
-        </script>
+</script>

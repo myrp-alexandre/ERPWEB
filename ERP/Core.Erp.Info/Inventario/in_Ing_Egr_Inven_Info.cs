@@ -16,6 +16,8 @@ namespace Core.Erp.Info.Inventario
         [Required(ErrorMessage = ("El campo tipo es obligatorio"))]
         public int IdMovi_inven_tipo { get; set; }
         public decimal IdNumMovi { get; set; }
+        [Required(ErrorMessage = ("El campo bodega es obligatorio"))]
+
         public Nullable<int> IdBodega { get; set; }
         public string signo { get; set; }
         public string CodMoviInven { get; set; }

@@ -25,6 +25,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         string mensaje = string.Empty;
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+        tb_bodega_Bus bus_bodega;
+
 
         #endregion
 
@@ -287,6 +289,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
+
+
+        #region Json
+        public JsonResult CargarBodega(int IdEmpresa = 0, int IdSucursal = 0)
+        {
+            bus_bodega = new tb_bodega_Bus();
+            var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+          #endregion
     }
 
     public class in_Ing_Egr_Inven_det_List
