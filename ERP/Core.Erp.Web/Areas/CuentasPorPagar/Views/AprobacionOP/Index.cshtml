@@ -15,66 +15,22 @@
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
         e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
     }
     function OnSelectionChanged(s, e) {
-        s.GetSelectedNodeValues("IdOrdenPago", GetSelectedNodeValuesCallback);
+        s.GetSelectedFieldValues("IdOrdenPago", GetSelectedFieldValuesCallback);
+
     }
-    function GetSelectedNodeValuesCallback(values) {
+    function GetSelectedFieldValuesCallback(values) {
         //Capture all selected keys
         selectedIDs = values.join(',');
-    }
-
-    function aprobar() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IDs: selectedIDs,
-            IdEstadoAprobacion: $("#btn_aprobar").attr('estado'),
-            }
-        $("#btn_aprobar").attr("disabled", true);
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "AprobacionOP", new { Area = "CuentasPorPagar" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#myform").submit();
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-    function rechazar() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IDs: selectedIDs,
-            IdEstadoAprobacion: $("#btn_rechazar").attr('estado'),
-        }
-        $("#btn_aprobar").attr("disabled", true);
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "AprobacionOP", new { Area = "CuentasPorPagar" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#myform").submit();
-            },
-            error: function (error) {
-            }
-        });
     }
 </script>
 
 @using (Html.BeginForm("Index", "AprobacionOP", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="box ">
         <div class="box-header with-border">
             <div class="row">
@@ -111,14 +67,14 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 @Html.DevExpress().DateEditFor(q => q.fecha_ini, settings =>
-                           {
-                               settings.Name = "fecha_ini";
-                               settings.Properties.UseMaskBehavior = true;
-                               settings.Properties.EditFormat = EditFormat.Date;
-                               settings.Properties.EditFormatString = "dd/MM/yyyy";
-                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           }).GetHtml()
+                                   {
+                                       settings.Name = "fecha_ini";
+                                       settings.Properties.UseMaskBehavior = true;
+                                       settings.Properties.EditFormat = EditFormat.Date;
+                                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -131,14 +87,14 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 @Html.DevExpress().DateEditFor(q => q.fecha_fin, settings =>
-                           {
-                               settings.Name = "fecha_fin";
-                               settings.Properties.UseMaskBehavior = true;
-                               settings.Properties.EditFormat = EditFormat.Date;
-                               settings.Properties.EditFormatString = "dd/MM/yyyy";
-                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           }).GetHtml()
+                               {
+                                   settings.Name = "fecha_fin";
+                                   settings.Properties.UseMaskBehavior = true;
+                                   settings.Properties.EditFormat = EditFormat.Date;
+                                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -162,9 +118,9 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_AprobacionOP", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal })
-          </div>
-        <div class="box-body"> 
+            @Html.Action("GridViewPartial_AprobacionOP", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal })
+        </div>
+        @*<div class="box-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
@@ -176,21 +132,71 @@
                     </div>
                 </div>
             </div>
+        </div>*@
+        <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <button type="button" class="btn btn-default" id="btn_aprobar" estado="APRO" onclick="aprobar();">Aprobar</button>
-                            <button type="button" class="btn btn-primary" id="btn_rechazar" estado="REPRO" onclick="rechazar();">Rechazar</button>
+                            <button type="button" class="btn btn-success" id="btn_aprobar" estado="APRO" onclick="aprobar();">Aprobar</button>
+                            <button type="button" class="btn btn-danger" id="btn_rechazar" estado="REPRO" onclick="rechazar();">Rechazar</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
         <!-- /.box-body -->
         <div class="box-footer">
             [@Session["IdEmpresa"]] @Session["nom_empresa"]
         </div>
         <!-- /.box-footer-->
     </div>
+}
+<script type="text/javascript">
+     function aprobar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IDs: selectedIDs
+            }
+        $("#btn_aprobar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("aprobar", "AprobacionOP", new { Area = "CuentasPorPagar" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
     }
+
+    function rechazar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IDs: selectedIDs,
+            IdEstadoAprobacion: $("#btn_rechazar").attr('estado'),
+        }
+        $("#btn_aprobar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("rechazar", "AprobacionOP", new { Area = "CuentasPorPagar" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
