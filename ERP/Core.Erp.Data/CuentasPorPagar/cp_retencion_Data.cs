@@ -97,6 +97,39 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
+
+
+        public cp_retencion_Info get_info(int IdEmpresa_Ogiro, decimal IdCbteCble_Ogiro,int IdTipoCbte_Ogiro)
+        {
+            try
+            {
+                cp_retencion_Info info = new cp_retencion_Info();
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    cp_retencion Entity = Context.cp_retencion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa_Ogiro & q.IdCbteCble_Ogiro == IdCbteCble_Ogiro && q.IdTipoCbte_Ogiro== IdTipoCbte_Ogiro);
+                    if (Entity == null) return null;
+                    info = new cp_retencion_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdRetencion = Entity.IdRetencion,
+                        CodDocumentoTipo = Entity.CodDocumentoTipo,
+                        serie1 = Entity.serie1,
+                        serie2 = Entity.serie2,
+                        NumRetencion = Entity.NumRetencion,
+                        NAutorizacion = Entity.NAutorizacion,
+                        observacion = Entity.observacion,
+                        fecha = Convert.ToDateTime(Entity.fecha.ToShortDateString()),
+                        re_Tiene_RTiva = Entity.re_Tiene_RTiva,
+                        re_Tiene_RFuente = Entity.re_Tiene_RFuente,
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public Boolean guardarDB(cp_retencion_Info info)
         {
             Boolean res = true;

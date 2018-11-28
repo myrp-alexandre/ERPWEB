@@ -853,5 +853,29 @@
             error: function (error) {
             }
         });
+            };
+
+             function armar_diario_retencion() {
+
+                var datos = {
+                    IdProveedor: IdProveedor.GetValue(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val()
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("armar_diario_retencion", "Retencion", new { Area = "CuentasPorPagar" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        GridViewPartial_retencio_dc.PerformCallback();
+                    },
+                    error: function (error) {
+                    }
+                });
+
     };
         </script>
