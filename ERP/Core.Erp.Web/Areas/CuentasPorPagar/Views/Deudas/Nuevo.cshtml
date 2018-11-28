@@ -1,5 +1,7 @@
 ﻿@model Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info
 @{
+    /**/
+
     ViewBag.Title = "Nueva deuda";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -25,6 +27,7 @@
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
     @Html.HiddenFor(q => q.co_fechaOg)
+
 
 
 
@@ -102,17 +105,11 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="col-md-11">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdProveedor">Proveedor*</label>
                     @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label for=""></label>
-                    <a type="button" class="btn btn-primary form-control " href="@Url.Action("Nuevo","Proveedor",new { Area = "CuentasPorPagar", IdEmpresa = Model.IdEmpresa },null)" target="_blank">+</a>
                 </div>
             </div>
         </div>
@@ -167,7 +164,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="co_factura">Número documento*</label>
+                    <label for="co_factura">Dcumento*</label>
                     @Html.TextBoxFor(q => q.co_factura, new { @class = "form-control", @id = "co_factura" })
                     @Html.ValidationMessageFor(q => q.co_factura, "", new { @class = "text-danger" })
                 </div>
@@ -182,6 +179,27 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdOrden_giro_Tipo">Tipo documento*</label>
+                    @Html.DropDownListFor(q => q.IdOrden_giro_Tipo, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "IdOrden_giro_Tipo" })
+                    @Html.ValidationMessageFor(q => q.IdOrden_giro_Tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdBanco_acreditacion">Tipo flujo</label>
+                    @Html.Partial("_CmbFlujo_Deudas", Model.IdTipoFlujo)
+                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -196,7 +214,7 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos contables</a>
+                <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos generales</a>
             </li>
             <li>
                 <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Detalle de ingreso</a>
@@ -210,7 +228,6 @@
             <li>
                 <a href="#tab_detalle_cuotas" aria-controls="cuentas" role="tab" data-toggle="tab">Detalle de cuotas</a>
             </li>
-
             <li>
                 <a href="#tab_retencion" aria-controls="retencion" role="tab" data-toggle="tab">Retención</a>
             </li>
@@ -316,44 +333,31 @@
                     </div>
                 </div>
             </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="co_observacion">Detalle</label>
-                                @Html.Action("GridViewPartial_deudas_det")
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_pago">
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="info_forma_pago.codigo_pago_sri">Forma Pago*</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.info_forma_pago.codigo_pago_sri, settings =>
-                           {
-                               settings.Name = "info_forma_pago.codigo_pago_sri";
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                               settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                               settings.Properties.Columns.Add("formas_pago_sri", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                               {
+                                   settings.Name = "info_forma_pago.codigo_pago_sri";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("formas_pago_sri", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
 
 
-                               //Campo ID
-                               settings.Properties.ValueField = "codigo_pago_sri";
-                               settings.Properties.ValueType = typeof(string);
-                               settings.Properties.TextField = "formas_pago_sri";
-                               //Boton para seleccionar ningun registro
-                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                   //Campo ID
+                                   settings.Properties.ValueField = "codigo_pago_sri";
+                                   settings.Properties.ValueType = typeof(string);
+                                   settings.Properties.TextField = "formas_pago_sri";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
-                           }).BindList(ViewBag.lst_forma_pago).GetHtml()
+                               }).BindList(ViewBag.lst_forma_pago).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -393,6 +397,18 @@
                 </div>
 
             </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="co_observacion">Detalle</label>
+                                @Html.Action("GridViewPartial_deudas_det")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle_cuotas">
                 <div class="row">
                     <div class="col-md-12">
@@ -426,15 +442,15 @@
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     @Html.DevExpress().DateEditFor(q => q.info_cuota.Fecha_inicio, settings =>
-                                   {
-                                       settings.Name = "Fecha_inicio";
-                                       settings.Properties.UseMaskBehavior = true;
-                                       settings.Properties.EditFormat = EditFormat.Date;
-                                       settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){get_cuotas();}";
-                                   }).GetHtml()
+                                       {
+                                           settings.Name = "Fecha_inicio";
+                                           settings.Properties.UseMaskBehavior = true;
+                                           settings.Properties.EditFormat = EditFormat.Date;
+                                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                           settings.Properties.ClientSideEvents.DateChanged = "function(s,e){get_cuotas();}";
+                                       }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.info_cuota.Fecha_inicio, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -455,7 +471,6 @@
                     </div>
                 </div>
             </div>
-
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_retencion">
 
@@ -536,7 +551,6 @@
 
             </div>
 
-
         </div>
     </div>
     <div class="box-footer">
@@ -551,12 +565,11 @@
 
 
     $(function () {
+
         $("#IdSucursal").change(function () {
             cargar_bodega();
         });
-        cargar_bodega();
     });
-
 
 
     $("#co_subtotal_iva").change(function () {
@@ -636,7 +649,6 @@
 
 
     }
-    // funciones calcular cuotas
     $("#Num_cuotas").keyup(function () {
         get_cuotas();
     });
@@ -738,7 +750,7 @@
             co_subtotal_siniva : $("#co_subtotal_siniva").val(),
             co_valoriva : $("#co_valoriva").val(),
             co_total : $("#co_total").val(),
-            observacion : $("#observacion").val(),
+            observacion: $("#observacion").val(),
             IdTransaccionSession: $("#IdTransaccionSession").val()
             }
             $.ajax({
@@ -762,6 +774,9 @@
 
 
     function get_info_proveedor() {
+
+
+
         if (IdProveedor.GetValue() > 0)  {
             var datos = {
                 IdProveedor: IdProveedor.GetValue()
@@ -794,8 +809,7 @@
         }
     };
 
-
-        function cargar_bodega() {
+    function cargar_bodega() {
         $("#IdBodega").empty();
 
         var sucursal = $("#IdSucursal").val();
@@ -823,8 +837,7 @@
             }
         });
     };
-
-        function GetInfo_Producto(s, e) {
+            function GetInfo_Producto(s, e) {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdProducto: s.GetValue()
@@ -845,30 +858,6 @@
             error: function (error) {
             }
         });
-                        };
-
-
-     function armar_diario_retencion() {
-
-                var datos = {
-                    IdProveedor: IdProveedor.GetValue(),
-                    IdTransaccionSession: $("#IdTransaccionSession").val()
-                }
-                $.ajax({
-                    type: 'POST',
-                    data: JSON.stringify(datos),
-                    url: '@Url.Action("armar_diario_retencion", "Retencion", new { Area = "CuentasPorPagar" })',
-                    async: false,
-                    bDeferRender: true,
-                    bProcessing: true,
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (data) {
-                        GridViewPartial_retencio_dc.PerformCallback();
-                    },
-                    error: function (error) {
-                    }
-                });
-
-            };
+    };
 </script>
+

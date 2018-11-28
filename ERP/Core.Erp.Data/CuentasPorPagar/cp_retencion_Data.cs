@@ -157,7 +157,7 @@ namespace Core.Erp.Data.CuentasPorPagar
             
                 return res;
             }
-            catch (Exception )
+            catch (Exception e)
             {
                 throw;
 
