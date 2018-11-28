@@ -9385,6 +9385,7 @@
     <Content Include="Areas\CuentasPorPagar\Views\AprobacionOP\_GridViewPartial_AprobacionOP.cshtml" />
     <Content Include="Areas\Compras\Views\AprobacionOC\Index.cshtml" />
     <Content Include="Areas\Compras\Views\AprobacionOC\_GridViewPartial_aprobacion_oc.cshtml" />
+    <Content Include="Areas\Reportes\Views\CompraReportes\COMP_001.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9463,7 +9464,6 @@
     <Folder Include="Areas\Importacion\Models\" />
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
-    <Folder Include="Areas\Reportes\Views\CompraReportes\" />
     <Folder Include="Areas\RRHH\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
