@@ -1653,9 +1653,6 @@
     <Compile Include="vwcp_orden_pago.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
-    <Compile Include="vwcp_orden_pago_con_cancelacion.cs">
-      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
-    </Compile>
     <Compile Include="vwcp_proveedor_consulta.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>

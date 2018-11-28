@@ -34,9 +34,9 @@ namespace Core.Erp.Info.Compras
         public string IdUsuarioUltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
         public string MotivoReprobacion { get; set; }
-        public Nullable<decimal> IdDepartamento { get; set; }
+        public decimal IdDepartamento { get; set; }
         public string IdUsuario { get; set; }
-        public Nullable<int> IdMotivo { get; set; }
+        public int IdMotivo { get; set; }
         public System.DateTime oc_fechaVencimiento { get; set; }
         public string IdEstado_cierre { get; set; }
         [Required(ErrorMessage = ("el campo comprador es obligatorio"))]
@@ -48,7 +48,9 @@ namespace Core.Erp.Info.Compras
         public string pe_nombreCompleto { get; set; }
         public string Nombre { get; set; }
         public string Su_Descripcion { get; set; }
-
+        public string IdUsuarioAprobacion { get; set; }
+        public string MotivoAprobacion { get; set; }
+        public Nullable<System.DateTime> FechaAprobacion { get; set; }
         public List<com_ordencompra_local_det_Info> lst_det { get; set; }
 
     }

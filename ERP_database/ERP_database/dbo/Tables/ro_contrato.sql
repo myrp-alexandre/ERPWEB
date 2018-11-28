@@ -4,7 +4,6 @@
     [IdContrato]      NUMERIC (18)  NOT NULL,
     [IdNomina]        INT           NULL,
     [IdContrato_Tipo] VARCHAR (10)  NOT NULL,
-    [IdSucursal]      INT           NULL,
     [NumDocumento]    VARCHAR (25)  NOT NULL,
     [FechaInicio]     DATE          NOT NULL,
     [FechaFin]        DATE          NOT NULL,
@@ -21,9 +20,10 @@
     [EstadoContrato]  VARCHAR (10)  NULL,
     CONSTRAINT [PK_ro_contrato] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdEmpleado] ASC, [IdContrato] ASC),
     CONSTRAINT [FK_ro_contrato_ro_empleado] FOREIGN KEY ([IdEmpresa], [IdEmpleado]) REFERENCES [dbo].[ro_empleado] ([IdEmpresa], [IdEmpleado]),
-    CONSTRAINT [FK_ro_contrato_ro_Nomina_Tipo] FOREIGN KEY ([IdEmpresa], [IdNomina]) REFERENCES [dbo].[ro_Nomina_Tipo] ([IdEmpresa], [IdNomina_Tipo]),
-    CONSTRAINT [FK_ro_contrato_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
+    CONSTRAINT [FK_ro_contrato_ro_Nomina_Tipo] FOREIGN KEY ([IdEmpresa], [IdNomina]) REFERENCES [dbo].[ro_Nomina_Tipo] ([IdEmpresa], [IdNomina_Tipo])
 );
+
+
 
 
 

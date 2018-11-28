@@ -1,22 +1,23 @@
 ﻿CREATE VIEW dbo.vwcp_orden_pago
 AS
-SELECT OP.IdEmpresa, OP.IdOrdenPago, OP.IdTipo_op, OP.IdTipo_Persona, OP.IdPersona, OP.IdEntidad, OP.Fecha, OP.IdEstadoAprobacion, OP.IdFormaPago, OP.Fecha_Pago, OP.IdBanco, OP.Estado, dbo.tb_persona.pe_nombreCompleto, 
-                  CAN.Total_OP, ISNULL(PAGO.Total_cancelado, 0) AS Total_cancelado, ROUND(CAN.Total_OP - ISNULL(PAGO.Total_cancelado, 0), 2) AS Saldo, OP.Observacion, OP.IdTipoFlujo, dbo.ba_TipoFlujo.Descricion AS nom_tipoFlujo, 
-                  CASE WHEN round(CAN.Total_OP - ISNULL(PAGO.Total_cancelado, 0), 2) > 0 THEN 'PENDIENTE' WHEN round(CAN.Total_OP - ISNULL(PAGO.Total_cancelado, 0), 2) <= 0 THEN 'CANCELADA' END AS EstadoCancelacion, 
-                  dbo.cp_orden_pago_estado_aprob.Descripcion, OP.IdTipoMovi
-FROM     dbo.cp_orden_pago AS OP INNER JOIN
-                  dbo.tb_persona ON OP.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
-                  dbo.vwcp_orden_pago_total AS CAN ON OP.IdEmpresa = CAN.IdEmpresa AND OP.IdOrdenPago = CAN.IdOrdenPago INNER JOIN
-                  dbo.cp_orden_pago_estado_aprob ON OP.IdEstadoAprobacion = dbo.cp_orden_pago_estado_aprob.IdEstadoAprobacion LEFT OUTER JOIN
-                  dbo.ba_TipoFlujo ON OP.IdEmpresa = dbo.ba_TipoFlujo.IdEmpresa AND OP.IdTipoFlujo = dbo.ba_TipoFlujo.IdTipoFlujo LEFT OUTER JOIN
-                  dbo.vwcp_orden_pago_Total_Pagado AS PAGO ON CAN.IdEmpresa = PAGO.IdEmpresa_op AND CAN.IdOrdenPago = PAGO.IdOrdenPago_op
+SELECT        OP.IdEmpresa, OP.IdOrdenPago, OP.IdTipo_op, OP.IdTipo_Persona, OP.IdPersona, OP.IdEntidad, OP.Fecha, OP.IdEstadoAprobacion, OP.IdFormaPago, OP.Estado, 
+                         dbo.tb_persona.pe_nombreCompleto, CAN.Total_OP, ISNULL(PAGO.Total_cancelado, 0) AS Total_cancelado, ROUND(CAN.Total_OP - ISNULL(PAGO.Total_cancelado, 0), 2) AS Saldo, OP.Observacion, OP.IdTipoFlujo, 
+                         dbo.ba_TipoFlujo.Descricion AS nom_tipoFlujo, CASE WHEN round(CAN.Total_OP - ISNULL(PAGO.Total_cancelado, 0), 2) > 0 THEN 'PENDIENTE' WHEN round(CAN.Total_OP - ISNULL(PAGO.Total_cancelado, 0), 2) 
+                         <= 0 THEN 'CANCELADA' END AS EstadoCancelacion, dbo.cp_orden_pago_estado_aprob.Descripcion, OP.IdSucursal, dbo.tb_sucursal.Su_Descripcion
+FROM            dbo.cp_orden_pago AS OP INNER JOIN
+                         dbo.tb_persona ON OP.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
+                         dbo.vwcp_orden_pago_total AS CAN ON OP.IdEmpresa = CAN.IdEmpresa AND OP.IdOrdenPago = CAN.IdOrdenPago INNER JOIN
+                         dbo.cp_orden_pago_estado_aprob ON OP.IdEstadoAprobacion = dbo.cp_orden_pago_estado_aprob.IdEstadoAprobacion LEFT OUTER JOIN
+                         dbo.tb_sucursal ON OP.IdEmpresa = dbo.tb_sucursal.IdEmpresa AND OP.IdSucursal = dbo.tb_sucursal.IdSucursal LEFT OUTER JOIN
+                         dbo.ba_TipoFlujo ON OP.IdEmpresa = dbo.ba_TipoFlujo.IdEmpresa AND OP.IdTipoFlujo = dbo.ba_TipoFlujo.IdTipoFlujo LEFT OUTER JOIN
+                         dbo.vwcp_orden_pago_Total_Pagado AS PAGO ON CAN.IdEmpresa = PAGO.IdEmpresa_op AND CAN.IdOrdenPago = PAGO.IdOrdenPago_op
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[52] 4[3] 2[31] 3) )"
+         Configuration = "(H (1[53] 4[3] 2[15] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -90,7 +91,7 @@ Begin DesignProperties =
                Right = 226
             End
             DisplayFlags = 280
-            TopColumn = 16
+            TopColumn = 0
          End
          Begin Table = "tb_persona"
             Begin Extent = 
@@ -142,6 +143,22 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
+         Begin Table = "tb_sucursal"
+            Begin Extent = 
+               Top = 184
+               Left = 838
+               Bottom = 314
+               Right = 1068
+            End
+            D', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwcp_orden_pago';
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'isplayFlags = 280
+            TopColumn = 0
+         End
       End
    End
    Begin SQLPane = 
@@ -151,12 +168,8 @@ Begin DesignProperties =
       End
       Begin ColumnWidths = 20
          Width = 284
-         Width = 2808
-         Width', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwcp_orden_pago';
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' = 1500
+         Width = 2805
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -178,16 +191,16 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' = 1500
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 3096
-         Alias = 2508
-         Table = 1176
+         Column = 3090
+         Alias = 2505
+         Table = 1170
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1356
-         SortOrder = 1416
+         SortType = 1350
+         SortOrder = 1410
          GroupBy = 1350
-         Filter = 1356
+         Filter = 1350
          Or = 1350
          Or = 1350
          Or = 1350
@@ -195,6 +208,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' = 1500
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwcp_orden_pago';
+
+
 
 
 GO

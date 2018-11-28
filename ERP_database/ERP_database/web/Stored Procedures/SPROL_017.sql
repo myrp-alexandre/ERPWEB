@@ -13,14 +13,14 @@ CREATE procedure [web].[SPROL_017]
 as
 begin
 
-select listaMarc.IdEmpresa,listaMarc.IdEmpleado,listaMarc.Entrada1, listaMarc.Entrada2, listaMarc.Salida1, listaMarc.Salida2, listaMarc.SalidaLounch, listaMarc.RegresoLounch, listaMarc.pe_nombreCompleto, listaMarc.pe_cedulaRuc, listaMarc.es_fechaRegistro, listaMarc.es_mes, listaMarc.es_anio, listaMarc.es_semana, listaMarc.es_dia, listaMarc.es_sdia
+select listaMarc.IdEmpresa,listaMarc.IdEmpleado,listaMarc.Entrada1, listaMarc.Entrada2, listaMarc.Salida1, listaMarc.Salida2, listaMarc.SalidaLounch, listaMarc.RegresoLounch, listaMarc.pe_nombreCompleto, listaMarc.pe_cedulaRuc, listaMarc.es_fechaRegistro
 from 
 (
 
 
 select marcaciones.Entrada1, marcaciones.Entrada2,marcaciones.Salida1,marcaciones.Salida2,marcaciones.SalidaLounch,marcaciones.RegresoLounch, empleado.*
 from (
-SELECT        emp.IdEmpresa, emp.IdEmpleado, per.pe_nombreCompleto, per.pe_cedulaRuc, marc.es_fechaRegistro, marc.es_Hora,  m_tipo.ma_descripcion
+SELECT        emp.IdEmpresa, emp.IdEmpleado, per.pe_nombreCompleto, per.pe_cedulaRuc, marc.es_fechaRegistro, marc.es_Hora, m_tipo.ma_descripcion
 FROM            dbo.ro_marcaciones_tipo AS m_tipo INNER JOIN
                          dbo.ro_marcaciones_x_empleado AS marc ON m_tipo.IdTipoMarcaciones = marc.IdTipoMarcaciones INNER JOIN
                          dbo.ro_empleado AS emp ON marc.IdEmpresa = emp.IdEmpresa AND marc.IdEmpleado = emp.IdEmpleado INNER JOIN
@@ -48,7 +48,7 @@ on
  and empleado.IdEmpleado=marcaciones.IdEmpleado
  ) listaMarc
 
- group by listaMarc.IdEmpresa,listaMarc.IdEmpleado,listaMarc.Entrada1, listaMarc.Entrada2, listaMarc.Salida1, listaMarc.Salida2, listaMarc.SalidaLounch, listaMarc.RegresoLounch, listaMarc.pe_nombreCompleto, listaMarc.pe_cedulaRuc, listaMarc.es_fechaRegistro, listaMarc.es_mes, listaMarc.es_anio, listaMarc.es_semana, listaMarc.es_dia, listaMarc.es_sdia
+ group by listaMarc.IdEmpresa,listaMarc.IdEmpleado,listaMarc.Entrada1, listaMarc.Entrada2, listaMarc.Salida1, listaMarc.Salida2, listaMarc.SalidaLounch, listaMarc.RegresoLounch, listaMarc.pe_nombreCompleto, listaMarc.pe_cedulaRuc, listaMarc.es_fechaRegistro
  end
 
  

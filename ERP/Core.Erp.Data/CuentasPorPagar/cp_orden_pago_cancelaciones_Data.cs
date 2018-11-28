@@ -92,6 +92,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                 using (Entities_cuentas_por_pagar cxp = new Entities_cuentas_por_pagar())
                 {
+                    /*
                     Lista = (from q in cxp.vwcp_orden_pago_con_cancelacion
                                    where q.IdEmpresa_cxp == IdEmpresa_cxp
                                    && q.IdTipoCbte_cxp == IdTipoCbte_cxp
@@ -114,7 +115,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  Referencia=q.Observacion
                                  
                              }).ToList();
-
+                             */
 
                 }
 

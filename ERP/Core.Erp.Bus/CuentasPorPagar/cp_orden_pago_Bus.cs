@@ -131,7 +131,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 }
 
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
-                info.info_comprobante.cb_Fecha = (DateTime)info.Fecha_Pago;
+                info.info_comprobante.cb_Fecha = (DateTime)info.Fecha;
                 info.info_comprobante.cb_Anio = info.info_comprobante.cb_Fecha.Year;
                 info.info_comprobante.cb_mes = info.info_comprobante.cb_Fecha.Month;
                 info.info_comprobante.cb_Estado = "A";
@@ -214,7 +214,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 else
                     info.info_comprobante.cb_Observacion = info.Observacion;
 
-                info.Fecha_Pago = info.Fecha;
+                
 
                 if (oData.modificarDB(info))
                 {
