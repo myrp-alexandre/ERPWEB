@@ -14,7 +14,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         [StringLength(20, MinimumLength = 3, ErrorMessage = "el campo código debe tener mínimo 3 caracter y máximo 20")]
 
         public string IdTipo_op { get; set; }
-        [Required(ErrorMessage = ("el campo cuenta contable debito es obligatorio"))]
 
         public string IdCtaCble { get; set; }
         public string IdCentroCosto { get; set; }
@@ -26,7 +25,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<int> IdTipoCbte_OP_anulacion { get; set; }
         public string IdEstadoAprobacion { get; set; }
         public string Buscar_FactxPagar { get; set; }
-        [Required(ErrorMessage = ("el campo cuenta contable credito es obligatorio"))]
         public string IdCtaCble_Credito { get; set; }
         public Nullable<bool> Dispara_Alerta { get; set; }
         [Required(ErrorMessage = ("el campo descripción es obligatorio"))]
