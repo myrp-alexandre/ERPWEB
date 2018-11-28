@@ -62,8 +62,7 @@ namespace Core.Erp.Info.Compras
         public System.DateTime fecha_ini { get; set; }
         public System.DateTime fecha_fin { get; set; }
         public string IdUsuario { get; set; }
-        public string MotivoAprobacion { get; set; }
-        public string MotivoReprobacion { get; set; }
+        public string Observacion { get; set; }
         public string IdEstadoAprobacion_cat { get; set; }
 
         public com_orden_aprobacion_Info()
