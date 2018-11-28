@@ -174,8 +174,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 IdEmpresa = IdEmpresa,
                 Fecha=DateTime.Now.Date,
-                Fecha_Pago = DateTime.Now.Date
-
             };
             cargar_combos(IdEmpresa);
             return View(model);

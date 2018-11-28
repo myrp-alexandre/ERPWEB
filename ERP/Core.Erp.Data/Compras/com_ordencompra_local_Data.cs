@@ -301,7 +301,7 @@ namespace Core.Erp.Data.Compras
                     Entity.Estado = "I";
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.IdEstadoAprobacion_cat = "ANU";
-                    Entity.FechaHoraAnul = DateTime.Now;
+                    Entity.Fecha_UltAnu = DateTime.Now;
 
                     Context.SaveChanges();
 

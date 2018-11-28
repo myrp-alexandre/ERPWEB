@@ -280,24 +280,24 @@
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="Observacion" Type="varchar(max)" />
           <Property Name="IdTipo_op" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" />
+          <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdEntidad" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdEntidad" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="IdEstadoAprobacion" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="IdFormaPago" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Fecha_Pago" Type="date" Nullable="false" />
-          <Property Name="IdBanco" Type="int" />
-          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdUsuarioAprobacion" Type="varchar" MaxLength="20" />
+          <Property Name="MotivoAprobacion" Type="varchar" MaxLength="1000" />
+          <Property Name="FechaAprobacion" Type="datetime" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="FechaUltMod" Type="varchar" MaxLength="20" />
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="MotivoAnu" Type="varchar" MaxLength="150" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
-          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
-          <Property Name="ip" Type="varchar" MaxLength="50" />
-          <Property Name="IdTipoFlujo" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="Fecha_Transac" Type="datetime" />
-          <Property Name="IdTipoMovi" Type="int" />
         </EntityType>
         <EntityType Name="cp_orden_pago_cancelaciones">
           <Key>
@@ -708,11 +708,12 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_pago' no tiene definida
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdOrdenPago" />
             <PropertyRef Name="IdTipo_op" />
+            <PropertyRef Name="IdTipo_Persona" />
             <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdEntidad" />
             <PropertyRef Name="Fecha" />
             <PropertyRef Name="IdEstadoAprobacion" />
             <PropertyRef Name="IdFormaPago" />
-            <PropertyRef Name="Fecha_Pago" />
             <PropertyRef Name="Estado" />
             <PropertyRef Name="pe_nombreCompleto" />
             <PropertyRef Name="Total_cancelado" />
@@ -722,15 +723,13 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_pago' no tiene definida
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdOrdenPago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdTipo_op" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" />
+          <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdEntidad" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdEntidad" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="IdEstadoAprobacion" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="IdFormaPago" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Fecha_Pago" Type="date" Nullable="false" />
-          <Property Name="IdBanco" Type="int" />
-          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Total_OP" Type="float" />
           <Property Name="Total_cancelado" Type="float" Nullable="false" />
@@ -740,7 +739,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_pago' no tiene definida
           <Property Name="nom_tipoFlujo" Type="varchar" MaxLength="50" />
           <Property Name="EstadoCancelacion" Type="varchar" MaxLength="9" />
           <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="IdTipoMovi" Type="int" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
@@ -945,48 +943,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_orden_giro_det' no tiene defi
           <Property Name="Total" Type="float" Nullable="false" />
           <Property Name="IdCtaCbleGasto" Type="varchar" MaxLength="20" />
           <Property Name="pr_descripcion" Type="nvarchar" MaxLength="713" />
-        </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwcp_orden_pago_con_cancelacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="vwcp_orden_pago_con_cancelacion">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdOrdenPago" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="Valor_a_pagar" />
-            <PropertyRef Name="IdFormaPago" />
-            <PropertyRef Name="Fecha_Pago" />
-            <PropertyRef Name="MontoAplicado" />
-            <PropertyRef Name="SaldoAnterior" />
-            <PropertyRef Name="SaldoActual" />
-            <PropertyRef Name="Observacion" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdTipo_op" />
-            <PropertyRef Name="IdPersona" />
-            <PropertyRef Name="IdEstadoAprobacion" />
-          </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdOrdenPago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Secuencia" Type="int" Nullable="false" />
-          <Property Name="IdEmpresa_cxp" Type="int" />
-          <Property Name="Valor_a_pagar" Type="float" Nullable="false" />
-          <Property Name="Referencia" Type="varchar" MaxLength="50" />
-          <Property Name="IdFormaPago" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Fecha_Pago" Type="date" Nullable="false" />
-          <Property Name="MontoAplicado" Type="float" Nullable="false" />
-          <Property Name="SaldoAnterior" Type="float" Nullable="false" />
-          <Property Name="SaldoActual" Type="float" Nullable="false" />
-          <Property Name="Observacion" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdTipo_op" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" />
-          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdEntidad" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="IdEstadoAprobacion" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="IdTipoCbte_cxp" Type="int" />
-          <Property Name="IdCbteCble_cxp" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.vwcp_proveedor_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1622,8 +1578,6 @@ FROM [dbo].[vwcp_orden_giro_x_pagar] AS [vwcp_orden_giro_x_pagar]</DefiningQuery
 [vwcp_orden_pago].[Fecha] AS [Fecha], 
 [vwcp_orden_pago].[IdEstadoAprobacion] AS [IdEstadoAprobacion], 
 [vwcp_orden_pago].[IdFormaPago] AS [IdFormaPago], 
-[vwcp_orden_pago].[Fecha_Pago] AS [Fecha_Pago], 
-[vwcp_orden_pago].[IdBanco] AS [IdBanco], 
 [vwcp_orden_pago].[Estado] AS [Estado], 
 [vwcp_orden_pago].[pe_nombreCompleto] AS [pe_nombreCompleto], 
 [vwcp_orden_pago].[Total_OP] AS [Total_OP], 
@@ -1634,7 +1588,6 @@ FROM [dbo].[vwcp_orden_giro_x_pagar] AS [vwcp_orden_giro_x_pagar]</DefiningQuery
 [vwcp_orden_pago].[nom_tipoFlujo] AS [nom_tipoFlujo], 
 [vwcp_orden_pago].[EstadoCancelacion] AS [EstadoCancelacion], 
 [vwcp_orden_pago].[Descripcion] AS [Descripcion], 
-[vwcp_orden_pago].[IdTipoMovi] AS [IdTipoMovi], 
 [vwcp_orden_pago].[IdSucursal] AS [IdSucursal], 
 [vwcp_orden_pago].[Su_Descripcion] AS [Su_Descripcion]
 FROM [dbo].[vwcp_orden_pago] AS [vwcp_orden_pago]</DefiningQuery>
@@ -1769,31 +1722,6 @@ FROM [web].[vwcp_orden_giro] AS [vwcp_orden_giro]</DefiningQuery>
 [vwcp_orden_giro_det].[IdCtaCbleGasto] AS [IdCtaCbleGasto], 
 [vwcp_orden_giro_det].[pr_descripcion] AS [pr_descripcion]
 FROM [web].[vwcp_orden_giro_det] AS [vwcp_orden_giro_det]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="vwcp_orden_pago_con_cancelacion" EntityType="Self.vwcp_orden_pago_con_cancelacion" store:Type="Views" store:Schema="web">
-            <DefiningQuery>SELECT 
-[vwcp_orden_pago_con_cancelacion].[IdEmpresa] AS [IdEmpresa], 
-[vwcp_orden_pago_con_cancelacion].[IdOrdenPago] AS [IdOrdenPago], 
-[vwcp_orden_pago_con_cancelacion].[Secuencia] AS [Secuencia], 
-[vwcp_orden_pago_con_cancelacion].[IdEmpresa_cxp] AS [IdEmpresa_cxp], 
-[vwcp_orden_pago_con_cancelacion].[Valor_a_pagar] AS [Valor_a_pagar], 
-[vwcp_orden_pago_con_cancelacion].[Referencia] AS [Referencia], 
-[vwcp_orden_pago_con_cancelacion].[IdFormaPago] AS [IdFormaPago], 
-[vwcp_orden_pago_con_cancelacion].[Fecha_Pago] AS [Fecha_Pago], 
-[vwcp_orden_pago_con_cancelacion].[MontoAplicado] AS [MontoAplicado], 
-[vwcp_orden_pago_con_cancelacion].[SaldoAnterior] AS [SaldoAnterior], 
-[vwcp_orden_pago_con_cancelacion].[SaldoActual] AS [SaldoActual], 
-[vwcp_orden_pago_con_cancelacion].[Observacion] AS [Observacion], 
-[vwcp_orden_pago_con_cancelacion].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-[vwcp_orden_pago_con_cancelacion].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-[vwcp_orden_pago_con_cancelacion].[IdTipo_op] AS [IdTipo_op], 
-[vwcp_orden_pago_con_cancelacion].[IdTipo_Persona] AS [IdTipo_Persona], 
-[vwcp_orden_pago_con_cancelacion].[IdPersona] AS [IdPersona], 
-[vwcp_orden_pago_con_cancelacion].[IdEntidad] AS [IdEntidad], 
-[vwcp_orden_pago_con_cancelacion].[IdEstadoAprobacion] AS [IdEstadoAprobacion], 
-[vwcp_orden_pago_con_cancelacion].[IdTipoCbte_cxp] AS [IdTipoCbte_cxp], 
-[vwcp_orden_pago_con_cancelacion].[IdCbteCble_cxp] AS [IdCbteCble_cxp]
-FROM [web].[vwcp_orden_pago_con_cancelacion] AS [vwcp_orden_pago_con_cancelacion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_proveedor_consulta" EntityType="Self.vwcp_proveedor_consulta" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -2857,7 +2785,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
             <End Role="cp_proveedor" EntitySet="cp_proveedor" />
           </AssociationSet>
           <EntitySet Name="vwcp_orden_giro" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro" />
-          <EntitySet Name="vwcp_orden_pago_con_cancelacion" EntityType="Model_cuentas_por_pagar.vwcp_orden_pago_con_cancelacion" />
           <EntitySet Name="vwcp_orden_giro_x_pagar" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_x_pagar" />
           <EntitySet Name="cp_orden_giro_det" EntityType="Model_cuentas_por_pagar.cp_orden_giro_det" />
           <EntitySet Name="cp_orden_giro_x_in_Ing_Egr_Inven" EntityType="Model_cuentas_por_pagar.cp_orden_giro_x_in_Ing_Egr_Inven" />
@@ -2920,7 +2847,7 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
             <End Role="cp_orden_pago" EntitySet="cp_orden_pago" />
             <End Role="cp_orden_pago_x_nomina" EntitySet="cp_orden_pago_x_nomina" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="spcp_Get_Data_orden_pago_con_cancelacion_data_Result">
           <Property Type="Int64" Name="IdRow" Nullable="false" />
           <Property Type="String" Name="IdUsuario" Nullable="false" MaxLength="20" />
@@ -3188,46 +3115,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="vwcp_orden_pago_con_cancelacion">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdOrdenPago" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="Valor_a_pagar" />
-            <PropertyRef Name="IdFormaPago" />
-            <PropertyRef Name="Fecha_Pago" />
-            <PropertyRef Name="MontoAplicado" />
-            <PropertyRef Name="SaldoAnterior" />
-            <PropertyRef Name="SaldoActual" />
-            <PropertyRef Name="Observacion" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdTipo_op" />
-            <PropertyRef Name="IdPersona" />
-            <PropertyRef Name="IdEstadoAprobacion" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpresa_cxp" Type="Int32" />
-          <Property Name="Valor_a_pagar" Type="Double" Nullable="false" />
-          <Property Name="Referencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdFormaPago" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Pago" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="MontoAplicado" Type="Double" Nullable="false" />
-          <Property Name="SaldoAnterior" Type="Double" Nullable="false" />
-          <Property Name="SaldoActual" Type="Double" Nullable="false" />
-          <Property Name="Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipo_op" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipo_Persona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEntidad" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdEstadoAprobacion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoCbte_cxp" Type="Int32" />
-          <Property Name="IdCbteCble_cxp" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="vwcp_orden_giro_x_pagar">
           <Key>
@@ -3674,24 +3561,24 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
           <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IdTipo_op" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipo_Persona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_Persona" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEntidad" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdEntidad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdEstadoAprobacion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IdFormaPago" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Pago" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdBanco" Type="Int32" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoFlujo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdUsuarioAprobacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAprobacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAprobacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MotivoAnu" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoFlujo" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdTipoMovi" Type="Int32" />
           <NavigationProperty Name="cp_orden_pago_formapago" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_formapago" FromRole="cp_orden_pago" ToRole="cp_orden_pago_formapago" />
           <NavigationProperty Name="cp_orden_pago_tipo" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_tipo" FromRole="cp_orden_pago" ToRole="cp_orden_pago_tipo" />
           <NavigationProperty Name="cp_orden_pago_det" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago" FromRole="cp_orden_pago" ToRole="cp_orden_pago_det" />
@@ -3702,11 +3589,12 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdOrdenPago" />
             <PropertyRef Name="IdTipo_op" />
+            <PropertyRef Name="IdTipo_Persona" />
             <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdEntidad" />
             <PropertyRef Name="Fecha" />
             <PropertyRef Name="IdEstadoAprobacion" />
             <PropertyRef Name="IdFormaPago" />
-            <PropertyRef Name="Fecha_Pago" />
             <PropertyRef Name="Estado" />
             <PropertyRef Name="pe_nombreCompleto" />
             <PropertyRef Name="Total_cancelado" />
@@ -3716,15 +3604,13 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="IdTipo_op" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipo_Persona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_Persona" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEntidad" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdEntidad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdEstadoAprobacion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IdFormaPago" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Pago" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdBanco" Type="Int32" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Total_OP" Type="Double" />
           <Property Name="Total_cancelado" Type="Double" Nullable="false" />
@@ -3734,7 +3620,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <Property Name="nom_tipoFlujo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstadoCancelacion" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoMovi" Type="Int32" />
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
           <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -3790,7 +3675,7 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -4463,33 +4348,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwcp_orden_pago_con_cancelacion">
-            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_orden_pago_con_cancelacion">
-              <MappingFragment StoreEntitySet="vwcp_orden_pago_con_cancelacion">
-                <ScalarProperty Name="IdCbteCble_cxp" ColumnName="IdCbteCble_cxp" />
-                <ScalarProperty Name="IdTipoCbte_cxp" ColumnName="IdTipoCbte_cxp" />
-                <ScalarProperty Name="IdEstadoAprobacion" ColumnName="IdEstadoAprobacion" />
-                <ScalarProperty Name="IdEntidad" ColumnName="IdEntidad" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="IdTipo_Persona" ColumnName="IdTipo_Persona" />
-                <ScalarProperty Name="IdTipo_op" ColumnName="IdTipo_op" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="SaldoActual" ColumnName="SaldoActual" />
-                <ScalarProperty Name="SaldoAnterior" ColumnName="SaldoAnterior" />
-                <ScalarProperty Name="MontoAplicado" ColumnName="MontoAplicado" />
-                <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha_Pago" />
-                <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="Valor_a_pagar" ColumnName="Valor_a_pagar" />
-                <ScalarProperty Name="IdEmpresa_cxp" ColumnName="IdEmpresa_cxp" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwcp_orden_giro_x_pagar">
             <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_orden_giro_x_pagar">
               <MappingFragment StoreEntitySet="vwcp_orden_giro_x_pagar">
@@ -4726,18 +4584,18 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <EntitySetMapping Name="cp_orden_pago">
             <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_orden_pago">
               <MappingFragment StoreEntitySet="cp_orden_pago">
-                <ScalarProperty Name="IdTipoMovi" ColumnName="IdTipoMovi" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
                 <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
                 <ScalarProperty Name="MotivoAnu" ColumnName="MotivoAnu" />
                 <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="FechaAprobacion" ColumnName="FechaAprobacion" />
+                <ScalarProperty Name="MotivoAprobacion" ColumnName="MotivoAprobacion" />
+                <ScalarProperty Name="IdUsuarioAprobacion" ColumnName="IdUsuarioAprobacion" />
+                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha_Pago" />
                 <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
                 <ScalarProperty Name="IdEstadoAprobacion" ColumnName="IdEstadoAprobacion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
@@ -4757,7 +4615,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
               <MappingFragment StoreEntitySet="vwcp_orden_pago">
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdTipoMovi" ColumnName="IdTipoMovi" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="EstadoCancelacion" ColumnName="EstadoCancelacion" />
                 <ScalarProperty Name="nom_tipoFlujo" ColumnName="nom_tipoFlujo" />
@@ -4768,8 +4625,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
                 <ScalarProperty Name="Total_OP" ColumnName="Total_OP" />
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha_Pago" />
                 <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
                 <ScalarProperty Name="IdEstadoAprobacion" ColumnName="IdEstadoAprobacion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />

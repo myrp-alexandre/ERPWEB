@@ -19,8 +19,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                 {
                     Lista = (from q in Context.vwcp_orden_pago
                              where IdEmpresa == q.IdEmpresa
-                             && q.Fecha_Pago>=Fecha_ini
-                             && q.Fecha_Pago <= Fecha_fin
+                             && q.Fecha>=Fecha_ini
+                             && q.Fecha <= Fecha_fin
                              && q.IdSucursal == IdSucursal
                              select new cp_orden_pago_Info
                              {
@@ -38,7 +38,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  Descripcion = q.Descripcion,
                                  IdFormaPago = q.IdFormaPago,
                                  IdTipoFlujo = q.IdTipoFlujo,
-                                 IdTipoMovi = q.IdTipoMovi,
                                  Estado =q.Estado,
                                  Nom_Beneficiario=q.pe_nombreCompleto,
                                  Total_OP=q.Total_OP,
@@ -87,7 +86,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                                      Descripcion = q.Descripcion,
                                      IdFormaPago = q.IdFormaPago,
                                      IdTipoFlujo = q.IdTipoFlujo,
-                                     IdTipoMovi = q.IdTipoMovi,
                                      Estado = q.Estado,
                                      Nom_Beneficiario = q.pe_nombreCompleto,
                                      Total_OP = q.Total_OP,
@@ -126,7 +124,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdEstadoAprobacion = Entity.IdEstadoAprobacion,
                         IdFormaPago = Entity.IdFormaPago,
                         IdTipoFlujo = Entity.IdTipoFlujo,
-                        IdTipoMovi = Entity.IdTipoMovi,
                         Estado = Entity.Estado,
                     };
                     info.detalle
@@ -222,7 +219,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdEstadoAprobacion = info.IdEstadoAprobacion,
                         IdFormaPago = info.IdFormaPago,
                         IdTipoFlujo = info.IdTipoFlujo,
-                        IdTipoMovi = info.IdTipoMovi,
                         Estado = "A",
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
@@ -286,7 +282,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdEstadoAprobacion = info.IdEstadoAprobacion;
                         Entity.IdFormaPago = info.IdFormaPago;
                         Entity.IdTipoFlujo = info.IdTipoFlujo;
-                        Entity.IdTipoMovi = info.IdTipoMovi;
                         Context.SaveChanges();
 
                         

@@ -118,19 +118,21 @@
           <Property Name="oc_observacion" Type="varchar(max)" />
           <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="IdEstadoAprobacion_cat" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="Fecha_Transac" Type="datetime" />
-          <Property Name="Fecha_UltMod" Type="datetime" />
-          <Property Name="IdUsuarioUltMod" Type="char" MaxLength="20" />
-          <Property Name="FechaHoraAnul" Type="datetime" />
-          <Property Name="IdUsuarioUltAnu" Type="char" MaxLength="20" />
-          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="500" />
-          <Property Name="MotivoReprobacion" Type="varchar" MaxLength="500" />
-          <Property Name="IdDepartamento" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="IdUsuario" Type="varchar" MaxLength="25" />
-          <Property Name="IdMotivo" Type="int" />
+          <Property Name="IdDepartamento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdMotivo" Type="int" Nullable="false" />
           <Property Name="oc_fechaVencimiento" Type="datetime" Nullable="false" />
           <Property Name="IdEstado_cierre" Type="varchar" MaxLength="25" />
           <Property Name="IdComprador" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdUsuarioAprobacion" Type="varchar" MaxLength="20" />
+          <Property Name="MotivoAprobacion" Type="varchar" MaxLength="1000" />
+          <Property Name="FechaAprobacion" Type="datetime" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="25" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="com_ordencompra_local_det">
           <Key>
@@ -303,7 +305,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_com_ordencompra_local_com_departamento">
-          <End Role="com_departamento" Type="Self.com_departamento" Multiplicity="0..1" />
+          <End Role="com_departamento" Type="Self.com_departamento" Multiplicity="1" />
           <End Role="com_ordencompra_local" Type="Self.com_ordencompra_local" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="com_departamento">
@@ -329,7 +331,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_com_ordencompra_local_com_Motivo_Orden_Compra">
-          <End Role="com_Motivo_Orden_Compra" Type="Self.com_Motivo_Orden_Compra" Multiplicity="0..1" />
+          <End Role="com_Motivo_Orden_Compra" Type="Self.com_Motivo_Orden_Compra" Multiplicity="1" />
           <End Role="com_ordencompra_local" Type="Self.com_ordencompra_local" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="com_Motivo_Orden_Compra">
@@ -540,7 +542,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
           </AssociationSet>
           <EntitySet Name="vwcom_ordencompra_local_det" EntityType="Model_compras.vwcom_ordencompra_local_det" />
           <EntitySet Name="com_comprador" EntityType="Model_compras.com_comprador" />
-          <EntitySet Name="vwcom_ordencompra_local" EntityType="Model_compras.vwcom_ordencompra_local" />
           <EntitySet Name="com_ordencompra_local" EntityType="Model_compras.com_ordencompra_local" />
           <AssociationSet Name="FK_com_ordencompra_local_com_catalogo" Association="Model_compras.FK_com_ordencompra_local_com_catalogo">
             <End Role="com_catalogo" EntitySet="com_catalogo" />
@@ -570,7 +571,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
             <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
             <End Role="com_ordencompra_local_det" EntitySet="com_ordencompra_local_det" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="vwcom_ordencompra_local" EntityType="Model_compras.vwcom_ordencompra_local" />
+          </EntityContainer>
         <EntityType Name="com_catalogo">
           <Key>
             <PropertyRef Name="IdCatalogocompra" />
@@ -828,37 +830,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
           <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="com_ordencompra_local" Relationship="Model_compras.FK_com_ordencompra_local_com_comprador" FromRole="com_comprador" ToRole="com_ordencompra_local" />
         </EntityType>
-        <EntityType Name="vwcom_ordencompra_local">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdOrdenCompra" />
-            <PropertyRef Name="oc_fecha" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="IdEstadoAprobacion_cat" />
-            <PropertyRef Name="EstadoAprobacion" />
-            <PropertyRef Name="EstadoCierre" />
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="oc_plazo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenCompra" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Codigo" Type="String" MaxLength="29" FixedLength="false" Unicode="false" />
-          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="oc_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Total" Type="Double" />
-          <Property Name="IdEstadoAprobacion_cat" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="EstadoAprobacion" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="oc_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdEstado_cierre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="EstadoCierre" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="TerminoPago" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="oc_plazo" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="com_ordencompra_local">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -875,19 +846,21 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
           <Property Name="oc_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="IdEstadoAprobacion_cat" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="FechaHoraAnul" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="MotivoReprobacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdDepartamento" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdUsuario" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdMotivo" Type="Int32" />
+          <Property Name="IdDepartamento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdMotivo" Type="Int32" Nullable="false" />
           <Property Name="oc_fechaVencimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdEstado_cierre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="IdComprador" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUsuarioAprobacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAprobacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAprobacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="com_catalogo" Relationship="Model_compras.FK_com_ordencompra_local_com_catalogo" FromRole="com_ordencompra_local" ToRole="com_catalogo" />
           <NavigationProperty Name="com_comprador" Relationship="Model_compras.FK_com_ordencompra_local_com_comprador" FromRole="com_ordencompra_local" ToRole="com_comprador" />
           <NavigationProperty Name="com_departamento" Relationship="Model_compras.FK_com_ordencompra_local_com_departamento" FromRole="com_ordencompra_local" ToRole="com_departamento" />
@@ -923,7 +896,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_com_ordencompra_local_com_departamento">
-          <End Type="Model_compras.com_departamento" Role="com_departamento" Multiplicity="0..1" />
+          <End Type="Model_compras.com_departamento" Role="com_departamento" Multiplicity="1" />
           <End Type="Model_compras.com_ordencompra_local" Role="com_ordencompra_local" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="com_departamento">
@@ -949,7 +922,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_com_ordencompra_local_com_Motivo_Orden_Compra">
-          <End Type="Model_compras.com_Motivo_Orden_Compra" Role="com_Motivo_Orden_Compra" Multiplicity="0..1" />
+          <End Type="Model_compras.com_Motivo_Orden_Compra" Role="com_Motivo_Orden_Compra" Multiplicity="1" />
           <End Type="Model_compras.com_ordencompra_local" Role="com_ordencompra_local" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="com_Motivo_Orden_Compra">
@@ -990,7 +963,38 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="vwcom_ordencompra_local">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdOrdenCompra" />
+            <PropertyRef Name="oc_fecha" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdEstadoAprobacion_cat" />
+            <PropertyRef Name="EstadoAprobacion" />
+            <PropertyRef Name="EstadoCierre" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="oc_plazo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="29" FixedLength="false" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="oc_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="IdEstadoAprobacion_cat" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoAprobacion" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="oc_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstado_cierre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoCierre" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="TerminoPago" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="oc_plazo" Type="Int32" Nullable="false" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1179,6 +1183,37 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="com_ordencompra_local">
+            <EntityTypeMapping TypeName="Model_compras.com_ordencompra_local">
+              <MappingFragment StoreEntitySet="com_ordencompra_local">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="FechaAprobacion" ColumnName="FechaAprobacion" />
+                <ScalarProperty Name="MotivoAprobacion" ColumnName="MotivoAprobacion" />
+                <ScalarProperty Name="IdUsuarioAprobacion" ColumnName="IdUsuarioAprobacion" />
+                <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
+                <ScalarProperty Name="IdEstado_cierre" ColumnName="IdEstado_cierre" />
+                <ScalarProperty Name="oc_fechaVencimiento" ColumnName="oc_fechaVencimiento" />
+                <ScalarProperty Name="IdMotivo" ColumnName="IdMotivo" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdEstadoAprobacion_cat" ColumnName="IdEstadoAprobacion_cat" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="oc_observacion" ColumnName="oc_observacion" />
+                <ScalarProperty Name="oc_fecha" ColumnName="oc_fecha" />
+                <ScalarProperty Name="oc_plazo" ColumnName="oc_plazo" />
+                <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vwcom_ordencompra_local">
             <EntityTypeMapping TypeName="Model_compras.vwcom_ordencompra_local">
               <MappingFragment StoreEntitySet="vwcom_ordencompra_local">
@@ -1196,35 +1231,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcom_ordencompra_local_det' no ti
                 <ScalarProperty Name="oc_fecha" ColumnName="oc_fecha" />
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="com_ordencompra_local">
-            <EntityTypeMapping TypeName="Model_compras.com_ordencompra_local">
-              <MappingFragment StoreEntitySet="com_ordencompra_local">
-                <ScalarProperty Name="IdComprador" ColumnName="IdComprador" />
-                <ScalarProperty Name="IdEstado_cierre" ColumnName="IdEstado_cierre" />
-                <ScalarProperty Name="oc_fechaVencimiento" ColumnName="oc_fechaVencimiento" />
-                <ScalarProperty Name="IdMotivo" ColumnName="IdMotivo" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="MotivoReprobacion" ColumnName="MotivoReprobacion" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="FechaHoraAnul" ColumnName="FechaHoraAnul" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdEstadoAprobacion_cat" ColumnName="IdEstadoAprobacion_cat" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="oc_observacion" ColumnName="oc_observacion" />
-                <ScalarProperty Name="oc_fecha" ColumnName="oc_fecha" />
-                <ScalarProperty Name="oc_plazo" ColumnName="oc_plazo" />
-                <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
                 <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
