@@ -292,7 +292,7 @@ namespace Core.Erp.Data.Compras
                 List<com_ordencompra_local_Info> List;
                 using (Entities_compras Context = new Entities_compras())
                 {
-                    List = Context.com_ordencompra_local.Where(
+                    List = Context.vwcom_ordencompra_local.Where(
                         q => q.IdEmpresa == IdEmpresa
                         && q.IdSucursal == IdSucursal
                         && q.oc_fecha >= fecha_ini
@@ -306,7 +306,6 @@ namespace Core.Erp.Data.Compras
                             IdEstadoAprobacion_cat = q.IdEstadoAprobacion_cat,
                             oc_observacion = q.oc_observacion,
                             Estado = q.Estado,
-                            IdProveedor = q.IdProveedor
                     }).ToList();
                 }
                 return List;

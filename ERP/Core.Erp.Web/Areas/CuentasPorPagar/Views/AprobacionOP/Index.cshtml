@@ -1,45 +1,18 @@
-﻿@model Core.Erp.Info.Compras.com_orden_aprobacion_Info
+﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 
 @{
-    ViewBag.Title = "Aprobación orden de compra";
+    ViewBag.Title = "Aprobar Ordenes de pagos";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
-<script type="text/javascript">
-
-    var selectedIDs;
-    function OnBeginCallback(s, e) {
-        e.customArgs["selectedIDs"] = selectedIDs;
-    };
-
-    function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdOdenCompra", GetSelectedFieldValuesCallback);
-    };
-
-    function GetSelectedFieldValuesCallback(values) {
-        //Capture all selected keys
-        selectedIDs = values.join(',');
-    };
-
-    function ocultar_mostrar_div() {
-        var d = $("#MotivoAprobacion").val();
-        if (d == "MotivoAprobacion") {
-            $("#mostrar_aprobacion").hide();
-        } else {
-            $("#mostrar_reprobacion").show();
-        }
-    }
-
-
-    </script>
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Index", "AprobacionOC", FormMethod.Post, new { @role = "form", @class = "form" }))
+
+@using (Html.BeginForm())
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id="IdTransaccionSession"})
+
     <div class="box ">
         <div class="box-header with-border">
             <div class="row">
@@ -59,11 +32,13 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdSucursal">Sucursal*</label>
-                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
-                            @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                                @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -125,45 +100,14 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_aprobacion_oc", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12" id="mostrar_aprobacion">
-                        <div class="form-group">
-                            <label for="MotivoAprobacion">Motivo aprobación</label>
-                            @Html.TextBoxFor(q => q.MotivoAprobacion, new { @class = "form-control", @id = "MotivoAprobacion" })
-                            @Html.ValidationMessageFor(q => q.MotivoAprobacion, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12" id="mostrar_reprobacion">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="MotivoReprobacion">Motivo reprobación</label>
-                            @Html.TextBoxFor(q => q.MotivoReprobacion, new { @class = "form-control", @id = "MotivoReprobacion" })
-                            @Html.ValidationMessageFor(q => q.MotivoReprobacion, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-                    <div class="box-footer">
-                        <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aprobar</button>
-                        <button type="button" class="btn btn-primary" onclick="AddFacturas();">Reprobar</button>
-                    </div>
-
-                </div>
+            @Html.Action("GridViewPartial_AprobacionOP", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal })
+        </div>
         <!-- /.box-body -->
         <div class="box-footer">
             [@Session["IdEmpresa"]] @Session["nom_empresa"]
         </div>
         <!-- /.box-footer-->
+    </div>
 
 
-
-
-        </div>
 }

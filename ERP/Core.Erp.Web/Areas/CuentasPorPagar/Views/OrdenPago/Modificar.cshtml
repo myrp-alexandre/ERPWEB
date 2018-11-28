@@ -23,6 +23,8 @@
         $("#IdTipo_Persona").change(function () {
             IdEntidad.SetValue(null);
         });
+
+        CargarEstadoAprobacion();
     });
     var selectedIDs;
     function OnBeginCallback(s, e) {
@@ -33,7 +35,7 @@
 
     function CargarEstadoAprobacion() {
         $("#IdEstado_op").empty();
-
+        
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdTipo_op: IdTipo_op.GetValue()

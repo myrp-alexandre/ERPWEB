@@ -300,6 +300,7 @@
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\TipoCobroController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\AprobacionOPController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ClaseProveedorController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\CodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
@@ -9373,6 +9374,8 @@
     <Content Include="Areas\RRHH\Views\ImportacionMarcaciones\_GridViewPartial_importacion_marcaciones_det.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionMarcaciones\Nuevo.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_014.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\AprobacionOP\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\AprobacionOP\_GridViewPartial_AprobacionOP.cshtml" />
     <Content Include="Areas\Compras\Views\AprobacionOC\Index.cshtml" />
     <Content Include="Areas\Compras\Views\AprobacionOC\_GridViewPartial_aprobacion_oc.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
