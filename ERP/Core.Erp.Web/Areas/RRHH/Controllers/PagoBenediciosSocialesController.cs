@@ -9,6 +9,7 @@ using Core.Erp.Web.Helps;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
+using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -158,27 +159,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         
-        public FileResult GetCSV(int IdRol,int IdNomina)
+        public FileResult GetCSV(int IdRol=0,int IdNomina_TipoLiqui = 0)
         {
             ro_archivosCSV_Bus bus_archivos = new ro_archivosCSV_Bus();
             string archivo = "";
-            var listado = bus_archivos.get_lis(Convert.ToInt32(SessionFixed.IdEmpresa), IdRol, 950);
-            foreach (var item in listado)
-            {
-                archivo = "";
-                archivo += item.pe_cedulaRuc + ";";
-                archivo += item.pe_nombre + ";";
-                archivo += item.pe_apellido + ";";
-                archivo += item.pe_sexo + ";";
-                archivo += item.CodigoSectorial + ";";
-                archivo += item.DiasA_considerar_Decimo + ";";
-                archivo += "A" + ";";//Tipo de Deposito
-                archivo += "P" + ";";// aqui definir que se pone en este campo
-            }
+            string NombreFile = "";
 
-            string NombreFile = "Decimo";
-            string csv = "";
-            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(csv);
+            var listado = bus_archivos.get_lis(Convert.ToInt32(SessionFixed.IdEmpresa), IdRol, 950);
+            if (IdNomina_TipoLiqui == 3)
+            {
+                NombreFile = "Decimo III";
+                archivo = bus_archivos.Get_decimoIII(listado);
+            }
+            else
+            { 
+                NombreFile = "Decimo IV";
+
+                archivo = bus_archivos.Get_decimoIII(listado);
+            }
+            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(archivo);
             return File(byteArray, "application/xml", NombreFile + ".csv");
 
 

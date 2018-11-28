@@ -150,31 +150,27 @@
         settings.Columns.Add("Cerrado","Cerrado").Width = Unit.Percentage(5);
         settings.Columns.Add("Contabilizado","Contabilizado").Width = Unit.Percentage(8);
 
+
+
         settings.Columns.Add(column =>
         {
-            column.Caption = "#";
-            column.Width = Unit.Pixel(100);
-            column.SetDataItemTemplateContent(container =>
+            column.Caption = "Comprobante";
+
+            column.SetDataItemTemplateContent(c =>
             {
-                Html.DevExpress().HyperLink(hyperlink =>
-                {
-                    var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
-                    var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
-                    var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
-                    hyperlink.Properties.Text = "Rol gen.";
-                    hyperlink.NavigateUrl = Url.Action("ROL_001", "RRHHReportes", new { Area = "Reportes", IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
-                }).Render();
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_001", "RRHHReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdNomina_Tipo = DataBinder.Eval(c.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(c.DataItem, "IdPeriodo") }, Request.Url.Scheme) + "');\"></span>");
             });
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(4);
         });
 
 
         settings.Columns.Add(column =>
         {
-            column.Caption = "";
+            column.Caption = "Archivo CSV";
             column.SetDataItemTemplateContent(c =>
             {
 
-                ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("GetCSV", "PagoBenediciosSociales", new { Area = "RRHH", IdRol = DataBinder.Eval(c.DataItem, "IdRol"), IdNomina_TipoLiqui=DataBinder.Eval(c.DataItem,"IdNomina_TipoLiqui") }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("GetCSV", "PagoBenediciosSociales", new { Area = "RRHH", IdRol = DataBinder.Eval(c.DataItem, "IdRol"), IdNomina_TipoLiqui=DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui") }, Request.Url.Scheme) + "');\"></span>");
 
             });
             column.Width = Unit.Percentage(10);
