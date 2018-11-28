@@ -1,8 +1,10 @@
-﻿CREATE view  vwro_empleado_combo as
-
-SELECT        dbo.tb_persona.pe_apellido + ' ' + dbo.tb_persona.pe_nombre AS Empleado, dbo.tb_persona.pe_cedulaRuc, dbo.ro_empleado.em_status, dbo.ro_empleado.IdEmpresa, dbo.ro_empleado.IdEmpleado
+﻿CREATE VIEW dbo.vwro_empleado_combo
+AS
+SELECT        dbo.tb_persona.pe_apellido + ' ' + dbo.tb_persona.pe_nombre AS Empleado, dbo.tb_persona.pe_cedulaRuc, dbo.ro_empleado.em_status, dbo.ro_empleado.IdEmpresa, dbo.ro_empleado.IdEmpleado, dbo.ro_contrato.IdNomina, 
+                         dbo.ro_empleado.IdSucursal
 FROM            dbo.ro_empleado INNER JOIN
-                         dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona
+                         dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
+                         dbo.ro_contrato ON dbo.ro_empleado.IdEmpresa = dbo.ro_contrato.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_contrato.IdEmpleado
 WHERE        (dbo.ro_empleado.em_status <> 'EST_LIQ') AND (dbo.ro_empleado.em_estado = 'A')
 
 GO
@@ -11,7 +13,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[55] 4[5] 2[22] 3) )"
+         Configuration = "(H (1[56] 4[5] 2[8] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -79,13 +81,13 @@ Begin DesignProperties =
       Begin Tables = 
          Begin Table = "ro_empleado"
             Begin Extent = 
-               Top = 32
-               Left = 418
-               Bottom = 285
-               Right = 707
+               Top = 10
+               Left = 264
+               Bottom = 263
+               Right = 553
             End
             DisplayFlags = 280
-            TopColumn = 56
+            TopColumn = 0
          End
          Begin Table = "tb_persona"
             Begin Extent = 
@@ -95,14 +97,14 @@ Begin DesignProperties =
                Right = 1077
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 4
          End
-         Begin Table = "ro_empleado_x_ro_tipoNomina"
+         Begin Table = "ro_contrato"
             Begin Extent = 
-               Top = 22
-               Left = 116
-               Bottom = 222
-               Right = 286
+               Top = 6
+               Left = 38
+               Bottom = 226
+               Right = 217
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -145,6 +147,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_combo';
+
+
 
 
 GO

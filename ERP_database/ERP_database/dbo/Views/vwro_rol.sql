@@ -2,7 +2,7 @@
 AS
 SELECT        dbo.ro_rol.IdEmpresa, dbo.ro_rol.IdNominaTipo, dbo.ro_rol.IdNominaTipoLiqui, dbo.ro_rol.IdPeriodo, dbo.ro_rol.Observacion, dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, 
                          dbo.ro_periodo_x_ro_Nomina_TipoLiqui.Cerrado, dbo.ro_periodo_x_ro_Nomina_TipoLiqui.Procesado, dbo.ro_periodo_x_ro_Nomina_TipoLiqui.Contabilizado, dbo.ro_Nomina_Tipo.Descripcion, dbo.ro_periodo.pe_FechaIni, 
-                         dbo.ro_periodo.pe_FechaFin
+                         dbo.ro_periodo.pe_FechaFin, dbo.ro_rol.IdRol, dbo.ro_rol.Descripcion AS Expr1
 FROM            dbo.ro_periodo INNER JOIN
                          dbo.ro_periodo_x_ro_Nomina_TipoLiqui ON dbo.ro_periodo.IdEmpresa = dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdEmpresa AND dbo.ro_periodo.IdPeriodo = dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdPeriodo INNER JOIN
                          dbo.ro_rol ON dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdEmpresa = dbo.ro_rol.IdEmpresa AND dbo.ro_periodo_x_ro_Nomina_TipoLiqui.IdNomina_Tipo = dbo.ro_rol.IdNominaTipo AND 

@@ -1,41 +1,34 @@
-﻿CREATE  PROCEDURE  [dbo].[spROL_Archivo_MTE] 
+﻿
+CREATE  PROCEDURE  [EntidadRegulatoria].[spROL_DecimosCSV] 
  @IdEmpresa int,
- @IdNominaTipo int,
- @IdNominatipoLiq int,
- @IdPeriodo int,
- @FechaI date,
- @FechaF date,
+ @IdRol int,
  @IdRubro Int
  AS
  
- /*
+ 
 
- declare
+ --declare
 
-  @IdEmpresa int,
- @IdNominaTipo int,
- @IdNominatipoLiq int,
- @IdPeriodo int,
- @FechaI date,
- @FechaF date,
- @IdRubro Int
-
-
-  set @IdEmpresa =1
- set @IdNominaTipo =1
- set @IdNominatipoLiq =4
- set @IdPeriodo =201705
- set @FechaI ='01/01/2017'
- set @FechaF ='31/12/2017'
- set @IdRubro=950
+ --@IdEmpresa int,
+ --@IdRol int,
+ --@IdRubro Int
+ --set @IdEmpresa =1
+ --set @IdEol =1
+ --set @IdRubro=950
 	
-	*/
+	
 BEGIN
 	
-	SET NOCOUNT ON;
+	declare 
+	@IdPeriodo int,
+	@FechaI date,
+	@FechaF date
 
+	select @IdPeriodo= IdPEriodo from ro_rol where IdEmpresa=@IdEmpresa and IdRol=@IdRubro
+	
+	select @FechaI= pe_FechaIni, @FechaF=pe_FechaFin from ro_periodo where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPeriodo
    
-select Tab_Valores_Decimos_x_Empleado.*,tab_DiasTrabajados_x_Empleado.DiasTrabajados as Dias_Decimo,isnull(Tab_Dias_Faltados_x_Empl.TotalDiasF,0) as TotalDiasF,tab_DiasTrabajados_x_Empleado.DiasTrabajados-ISNULL( Tab_Dias_Faltados_x_Empl.TotalDiasF,0) as DiasA_considerar_Decimo 
+select Tab_Valores_Decimos_x_Empleado.*,tab_DiasTrabajados_x_Empleado.DiasTrabajados as Dias_Decimo,tab_DiasTrabajados_x_Empleado.DiasTrabajados as DiasA_considerar_Decimo 
 from 
 (
 			select A.IdEmpresa, A.IdEmpleado, A.pe_apellido,A.pe_nombre,A.pe_cedulaRuc,A.CodigoSectorial,A.ca_descripcion, sum(A.valor) as Valor, A.pe_sexo,A.Estado,A.em_fechaIngaRol
@@ -57,7 +50,7 @@ FROM            dbo.ro_empleado INNER JOIN
 						  -- and ro_empleado.em_status='EST_ACT'
 						   and ro_empleado.em_estado='A'
 						   and ro_rol_detalle.IdRubro= @IdRubro 
-						  and dbo.ro_rol.IdPeriodo=@IdPeriodo
+						  and dbo.ro_rol.IdRol=@IdRol
 						
 
 			) A
@@ -65,15 +58,6 @@ FROM            dbo.ro_empleado INNER JOIN
 
 ) 
 Tab_Valores_Decimos_x_Empleado  
-left join (
-		select C.IdEmpresa,C.IdEmpleado,  sum(diasDescuento) as TotalDiasF
-		from ro_DiasFaltados_x_Empleado C
-		where IdEmpresa=1
-		and FechaDescuentaRol between @FechaI and @FechaF
-		group by C.IdEmpresa,C.IdEmpleado
-) Tab_Dias_Faltados_x_Empl 
-on Tab_Valores_Decimos_x_Empleado.IdEmpresa=Tab_Dias_Faltados_x_Empl.IdEmpresa
-and Tab_Valores_Decimos_x_Empleado.IdEmpleado=Tab_Dias_Faltados_x_Empl.IdEmpleado
 
 left join
 (

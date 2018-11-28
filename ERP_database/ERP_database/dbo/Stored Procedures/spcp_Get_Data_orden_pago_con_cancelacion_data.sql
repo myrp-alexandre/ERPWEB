@@ -26,8 +26,8 @@ INSERT INTO [dbo].[cp_orden_pago_con_cancelacion_data]
 select		@IdUsuario, cp_orden_pago.IdEmpresa, cp_orden_pago.IdTipo_op, cp_orden_pago_det.Referencia AS Expr1, cp_orden_pago_det.Referencia AS Expr2, cp_orden_pago.IdOrdenPago, cp_orden_pago_det.Secuencia, cp_orden_pago.IdTipo_Persona, cp_orden_pago.IdPersona, cp_orden_pago.IdEntidad, 
                   cp_orden_pago.Fecha, cp_orden_pago.Fecha AS Expr3, cp_orden_pago.Fecha AS Expr4, cp_orden_pago.Observacion, NULL AS Expr5, NULL AS Expr6, cp_orden_pago_det.Valor_a_pagar, cp_orden_pago_det.Valor_a_pagar AS valor_estimado_a_pagar, 
                   ISNULL(SUM(cp_orden_pago_cancelaciones.MontoAplicado),0) AS MontoAplicado, cp_orden_pago_det.Valor_a_pagar - ISNULL(SUM(cp_orden_pago_cancelaciones.MontoAplicado), 0) AS saldo, cp_orden_pago.IdEstadoAprobacion, 
-                  cp_orden_pago.IdFormaPago, cp_orden_pago.Fecha_Pago, NULL AS IdCtaCble, NULL AS Expr7, NULL AS Expr8, NULL AS Expr10, cp_orden_pago.Estado, NULL AS Expr9, cp_orden_pago_det.IdEmpresa_cxp, 
-                  cp_orden_pago_det.IdTipoCbte_cxp, cp_orden_pago_det.IdCbteCble_cxp, cp_orden_pago.IdBanco
+                  cp_orden_pago.IdFormaPago, cp_orden_pago.Fecha Fecha_Pago, NULL AS IdCtaCble, NULL AS Expr7, NULL AS Expr8, NULL AS Expr10, cp_orden_pago.Estado, NULL AS Expr9, cp_orden_pago_det.IdEmpresa_cxp, 
+                  cp_orden_pago_det.IdTipoCbte_cxp, cp_orden_pago_det.IdCbteCble_cxp, 0 IdBanco
 FROM     cp_orden_pago INNER JOIN
                   cp_orden_pago_det ON cp_orden_pago.IdEmpresa = cp_orden_pago_det.IdEmpresa AND cp_orden_pago.IdOrdenPago = cp_orden_pago_det.IdOrdenPago LEFT JOIN
                   cp_orden_pago_cancelaciones ON cp_orden_pago_det.IdEmpresa = cp_orden_pago_cancelaciones.IdEmpresa_op AND cp_orden_pago_det.IdOrdenPago = cp_orden_pago_cancelaciones.IdOrdenPago_op AND 
@@ -35,8 +35,8 @@ FROM     cp_orden_pago INNER JOIN
 WHERE cp_orden_pago.IdEmpresa = @IdEmpresa and cp_orden_pago.IdTipo_Persona like '%'+@IdTipoPersona+'%' and cp_orden_pago.IdEntidad between @IdEntidad_ini and @IdEntidad_fin
 and cp_orden_pago.IdEstadoAprobacion = @IdEstado_Aprobacion and cp_orden_pago.IdPersona between @IdPersona_ini and @IdPersona_fin AND cp_orden_pago.Estado = 'A'
 GROUP BY cp_orden_pago.IdEmpresa, cp_orden_pago.IdTipo_op,cp_orden_pago_det.Referencia, cp_orden_pago.IdOrdenPago, cp_orden_pago_det.Secuencia, cp_orden_pago.IdTipo_Persona, cp_orden_pago.IdPersona, cp_orden_pago.IdEntidad, cp_orden_pago.Fecha, 
-                  cp_orden_pago.Observacion, cp_orden_pago_det.Valor_a_pagar, cp_orden_pago.IdEstadoAprobacion, cp_orden_pago.IdFormaPago, cp_orden_pago.Fecha_Pago, cp_orden_pago_det.IdCbteCble_cxp, cp_orden_pago.Estado, 
-                  cp_orden_pago_det.IdEmpresa_cxp, cp_orden_pago_det.IdTipoCbte_cxp, cp_orden_pago.IdBanco
+                  cp_orden_pago.Observacion, cp_orden_pago_det.Valor_a_pagar, cp_orden_pago.IdEstadoAprobacion, cp_orden_pago.IdFormaPago, cp_orden_pago.Fecha, cp_orden_pago_det.IdCbteCble_cxp, cp_orden_pago.Estado, 
+                  cp_orden_pago_det.IdEmpresa_cxp, cp_orden_pago_det.IdTipoCbte_cxp
 --HAVING ROUND(cp_orden_pago_det.Valor_a_pagar - ISNULL(SUM(cp_orden_pago_cancelaciones.MontoAplicado), 0),2) > 0
 
 if(@mostrar_saldo_0 = 0)
