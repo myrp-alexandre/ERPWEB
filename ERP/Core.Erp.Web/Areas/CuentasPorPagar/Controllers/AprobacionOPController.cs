@@ -61,5 +61,26 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             lst_ordenes_pagos_aprobacion = bus_orden_pago.get_list_aprobacion(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, IdSucursal);
             return PartialView("_GridViewPartial_AprobacionOP", lst_ordenes_pagos_aprobacion);
         }
+
+        public JsonResult guardar(int IdEmpresa = 0, string Ids = "")
+        {
+            string[] array = Ids.Split(',');
+            List<cp_orden_pago_Info> lst_ordenes_pagos_aprobacion = new List<cp_orden_pago_Info>();
+            var output = array.GroupBy(q => q).ToList();
+            foreach (var item in output)
+            {
+                cp_orden_pago_Info info = new cp_orden_pago_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    IdOrdenPago = Convert.ToInt32(item.IdOrdenPago),
+                };
+
+                lst_ordenes_pagos_aprobacion.Add(info);
+            }
+
+            var resultado = bus_orden_pago.(lst_ordenes_pagos_aprobacion);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -292,13 +292,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
         public Boolean guardar_op_x_fpDB(cp_orden_pago_Info info)
         {
             try
-            {
-               
-               
-
-                    oData.guardarDB(info);
-                
-
+            {                              
+                oData.guardarDB(info);                
                 return true;
             }
             catch (Exception)
@@ -307,5 +302,17 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
         }
 
+        public bool aprobacionDB(List<cp_orden_pago_Info> Lista)
+        {
+            try
+            {
+                return oData.aprobacionDB(Lista);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
