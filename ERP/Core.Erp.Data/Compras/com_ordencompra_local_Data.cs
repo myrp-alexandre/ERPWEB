@@ -266,6 +266,29 @@ namespace Core.Erp.Data.Compras
             }
         }
 
+        public bool AprobarOC(com_ordencompra_local_Info info)
+        {
+            try
+            {
+                using (Entities_compras Context = new Entities_compras())
+                {
+                    com_ordencompra_local Entity = Context.com_ordencompra_local.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdOrdenCompra == info.IdOrdenCompra).FirstOrDefault();
+                    if (Entity == null) return false;
+
+                    Entity.IdEstadoAprobacion_cat = info.IdEstadoAprobacion_cat;
+                    
+                    Context.SaveChanges();
+
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool anularDB(com_ordencompra_local_Info info)
         {
             try
@@ -277,6 +300,7 @@ namespace Core.Erp.Data.Compras
 
                     Entity.Estado = "I";
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                    Entity.IdEstadoAprobacion_cat = "ANU";
                     Entity.FechaHoraAnul = DateTime.Now;
 
                     Context.SaveChanges();

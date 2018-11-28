@@ -57,6 +57,8 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             ViewBag.IdSucursal = IdSucursal == 0 ? 0 : Convert.ToInt32(IdSucursal);
 
             var model = bus_ordencompra.GetListPorAprobar(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            List_apro.set_list(model, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
             return PartialView("_GridViewPartial_aprobacion_oc", model);
         }
 
@@ -67,27 +69,39 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             
         }
 
-        public JsonResult guardar(int IdEmpresa = 0,   string Ids = "")
+        public JsonResult aprobar(int IdEmpresa = 0,   string Ids = "")
         {
+            
             string[] array = Ids.Split(',');
             List<com_ordencompra_local_Info> lst_ordenes_compra_aprobacion = new List<com_ordencompra_local_Info>();
+            int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             var output = array.GroupBy(q => q).ToList();
             foreach (var item in output)
             {
-                com_ordencompra_local_Info info = new com_ordencompra_local_Info
-                {
-                    IdEmpresa = IdEmpresa,
-                    IdOrdenCompra = Convert.ToInt32(item.Key)
-                };
-
-                lst_ordenes_compra_aprobacion.Add(info);
+                var lsis = List_apro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                com_ordencompra_local_Info info = new com_ordencompra_local_Info();
+                info = List_apro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession)).Where(v=>v.IdOrdenCompra == Convert.ToDecimal(item.Key)).FirstOrDefault();
+                info.IdEstadoAprobacion_cat = "APRO";
+                bus_ordencompra.AprobarOC(info);
             }
-            int IdSucursal = 0;
-            DateTime fecha_ini = DateTime.Now;
-            DateTime fecha_fin = DateTime.Now;
-            var resultado = bus_ordencompra.GetListPorAprobar(IdEmpresa, IdSucursal, fecha_ini, fecha_fin);
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+        public JsonResult reprobar(int IdEmpresa = 0, string Ids = "")
+        {
+            string[] array = Ids.Split(',');
+            List<com_ordencompra_local_Info> lst_ordenes_compra_aprobacion = new List<com_ordencompra_local_Info>();
+            int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
+            var output = array.GroupBy(q => q).ToList();
+            foreach (var item in output)
+            {
+                var lsis = List_apro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                com_ordencompra_local_Info info = new com_ordencompra_local_Info();
+                info = List_apro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession)).Where(v => v.IdOrdenCompra == Convert.ToDecimal(item.Key)).FirstOrDefault();
+                info.IdEstadoAprobacion_cat = "ANU";
+                bus_ordencompra.AprobarOC(info);
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
         }
     }
     public class com_orden_aprobacion_List
