@@ -129,8 +129,6 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
                 IdEmpresa = IdEmpresa,
                 oc_fecha = DateTime.Now,
                 oc_fechaVencimiento = DateTime.Now,
-                co_fechaReproba = DateTime.Now,
-                co_fecha_aprobacion = DateTime.Now,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
                 IdEstadoAprobacion_cat = i_param.IdEstadoAprobacion_OC
 
