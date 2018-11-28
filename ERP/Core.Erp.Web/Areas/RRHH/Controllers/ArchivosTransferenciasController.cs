@@ -195,6 +195,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.lst_cuenta_bancarias = lst_cuenta_bancarias;
 
             var lst_proceso = bus_procesos_bancarios.get_list(IdEmpresa, false);
+            ViewBag.lst_proceso = lst_proceso;
         }
         #endregion
 
