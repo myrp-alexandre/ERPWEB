@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.Helps.cl_filtros_Info
+﻿@model Core.Erp.Info.CuentasPorPagar.cp_orden_pago_aprobacion_Info
 
 @{
     ViewBag.Title = "Aprobar Ordenes de pagos";
@@ -8,7 +8,6 @@
     }
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
     var selectedIDs;
 
@@ -120,26 +119,26 @@
         <div class="box-body">
             @Html.Action("GridViewPartial_AprobacionOP", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal })
         </div>
-        @*<div class="box-body">
+        <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="co_observacion">Observación*</label>
-                            @Html.TextBoxFor(q => q.IdEmpresa, new { @class = "form-control", @id = "observacion" })
-                            @Html.ValidationMessageFor(q => q.IdEmpresa, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.MotivoAprobacion, new { @class = "form-control", @id = "observacion" })
+                            @Html.ValidationMessageFor(q => q.MotivoAprobacion, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
             </div>
-        </div>*@
+        </div>
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <button type="button" class="btn btn-success" id="btn_aprobar" estado="APRO" onclick="aprobar();">Aprobar</button>
-                            <button type="button" class="btn btn-danger" id="btn_rechazar" estado="REPRO" onclick="rechazar();">Rechazar</button>
+                            <button type="button" class="btn btn-success" id="btn_aprobar" onclick="aprobar();">Aprobar</button>
+                            <button type="button" class="btn btn-danger" id="btn_rechazar" onclick="rechazar();">Rechazar</button>
                         </div>
                     </div>
                 </div>
@@ -179,8 +178,7 @@
     function rechazar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IDs: selectedIDs,
-            IdEstadoAprobacion: $("#btn_rechazar").attr('estado'),
+            IDs: selectedIDs
         }
         $("#btn_aprobar").attr("disabled", true);
         $.ajax({
