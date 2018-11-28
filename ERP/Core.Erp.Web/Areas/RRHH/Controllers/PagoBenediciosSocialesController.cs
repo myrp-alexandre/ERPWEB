@@ -159,37 +159,24 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         
-        public FileResult GetCSV(int IdRol=0,int IdNomina=0)
+        public FileResult GetCSV(int IdRol=0,int IdNomina_TipoLiqui = 0)
         {
             ro_archivosCSV_Bus bus_archivos = new ro_archivosCSV_Bus();
             string archivo = "";
+            string NombreFile = "";
+
             var listado = bus_archivos.get_lis(Convert.ToInt32(SessionFixed.IdEmpresa), IdRol, 950);
-            
-            foreach (var item in listado)
+            if (IdNomina_TipoLiqui == 3)
             {
-                item.pe_apellido = item.pe_apellido.Replace(".", " ").Replace("ñ", "n").Replace("Ñ", "N");
-                item.pe_nombre = item.pe_nombre.Replace(".", " ").Replace("ñ", "n").Replace("Ñ", "N");
-                archivo += item.pe_cedulaRuc + ";";
-                archivo += item.pe_apellido + ";";
-                archivo += item.pe_nombre + ";";
-                if (item.pe_sexo == cl_enumeradores.eTipoSexoGeneral.SEXO_FEM.ToString())
-                    archivo += "F" + ";";
-                else
-                    archivo += "M" + ";";
-                archivo += item.CodigoSectorial + ";";
-                archivo += item.Valor + ";";
-                archivo += item.DiasA_considerar_Decimo + ";";
-                archivo += "A" + ";";//Tipo de Deposito
-                archivo += ";";
-                archivo += ";";
-                archivo += ";";
-                archivo += ";";
-                archivo += ";";
-
-                archivo += "\n";
+                NombreFile = "Decimo III";
+                archivo = bus_archivos.Get_decimoIII(listado);
             }
+            else
+            { 
+                NombreFile = "Decimo IV";
 
-            string NombreFile = "Decimo";
+                archivo = bus_archivos.Get_decimoIII(listado);
+            }
             byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(archivo);
             return File(byteArray, "application/xml", NombreFile + ".csv");
 

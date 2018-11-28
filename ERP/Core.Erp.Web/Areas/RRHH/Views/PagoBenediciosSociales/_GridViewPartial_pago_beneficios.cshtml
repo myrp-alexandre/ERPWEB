@@ -170,7 +170,7 @@
             column.SetDataItemTemplateContent(c =>
             {
 
-                ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("GetCSV", "PagoBenediciosSociales", new { Area = "RRHH", IdRol = DataBinder.Eval(c.DataItem, "IdRol"), IdNomina_TipoLiqui=DataBinder.Eval(c.DataItem,"IdNomina_TipoLiqui") }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("GetCSV", "PagoBenediciosSociales", new { Area = "RRHH", IdRol = DataBinder.Eval(c.DataItem, "IdRol"), IdNomina_TipoLiqui=DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui") }, Request.Url.Scheme) + "');\"></span>");
 
             });
             column.Width = Unit.Percentage(10);
