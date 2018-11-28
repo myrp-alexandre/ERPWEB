@@ -223,10 +223,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0 , int IdOrdenPago = 0)
         {
+
             bus_orden_pago = new cp_orden_pago_Bus();
-               cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa);
             cargar_combos_detalle();
             IdEmpresa =Convert.ToInt32( Session["IdEmpresa"]);
+
             cp_orden_pago_Info model = new cp_orden_pago_Info();
             model = bus_orden_pago.get_info(IdEmpresa, IdOrdenPago);
             comprobante_contable_fp.set_list(model.info_comprobante.lst_ct_cbtecble_det);
@@ -528,7 +530,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

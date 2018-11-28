@@ -23,6 +23,8 @@
         $("#IdTipo_Persona").change(function () {
             IdEntidad.SetValue(null);
         });
+
+        CargarEstadoAprobacion();
     });
     var selectedIDs;
     function OnBeginCallback(s, e) {
@@ -33,7 +35,7 @@
 
     function CargarEstadoAprobacion() {
         $("#IdEstado_op").empty();
-
+        
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdTipo_op: IdTipo_op.GetValue()
@@ -61,11 +63,11 @@
 
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdOrdenPago)
-    @Html.HiddenFor(q => q.IdEntidad)
     @Html.HiddenFor(q => q.IdPersona)
+    @Html.HiddenFor(q => q.IdEstadoAprobacion)
     @Html.HiddenFor(q => q.info_comprobante.IdTipoCbte)
     @Html.HiddenFor(q => q.info_comprobante.IdCbteCble)
-
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     <div class="row">
         <div class="col-md-12">
@@ -131,8 +133,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdTipo_Persona">Tipo persona:*</label>
-                    @Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "Key", "Value"), new { @class = "form-control", @id = "IdTipo_Persona" })
-                    @*@Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "IdTipo_Persona", "Descricpion"), new { @class = "form-control", @id = "IdTipo_Persona" })*@
+                    @Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "Key", "Value"), new { @class = "form-control", @id = "IdTipo_Persona" })                    
                     @Html.ValidationMessageFor(q => q.IdTipo_Persona, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Compras
    public class com_ordencompra_local_Bus
     {
         com_ordencompra_local_Data odata = new com_ordencompra_local_Data();
-        public List<com_ordencompra_local_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<com_ordencompra_local_Info> get_list(int IdEmpresa, int IdSucursal, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(IdEmpresa, mostrar_anulados);
+                return odata.get_list(IdEmpresa,  IdSucursal,  fecha_ini,   fecha_fin, mostrar_anulados);
             }
             catch (Exception)
             {
@@ -64,6 +64,30 @@ namespace Core.Erp.Bus.Compras
             try
             {
                 return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<com_ordencompra_local_Info> GetListPorAprobar(int IdEmpresa, int IdSucursal, DateTime fecha_ini, DateTime fecha_fin)
+        {
+            try
+            {
+                return odata.GetListPorAprobar(IdEmpresa, IdSucursal, fecha_ini, fecha_fin);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool AprobarOC(com_ordencompra_local_Info info)
+        {
+            try
+            {
+                return odata.AprobarOC(info);
             }
             catch (Exception)
             {

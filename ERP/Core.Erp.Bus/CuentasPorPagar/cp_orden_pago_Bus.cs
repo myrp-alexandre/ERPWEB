@@ -6,6 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Erp.Info.Helps;
+using Core.Erp.Info.RRHH;
+using Core.Erp.Info.Facturacion;
+using Core.Erp.Info.General;
+using Core.Erp.Bus.RRHH;
+using Core.Erp.Bus.Facturacion;
+using Core.Erp.Bus.General;
+
 namespace Core.Erp.Bus.CuentasPorPagar
 {
     public class cp_orden_pago_Bus
@@ -14,8 +21,14 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_orden_pago_det_Data odata_detalle = new cp_orden_pago_det_Data();
 
         ct_cbtecble_Bus bus_contabilidad = new ct_cbtecble_Bus();
-        cp_proveedor_Info info_proveedore = new cp_proveedor_Info();
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
+        ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+        cp_proveedor_Info info_proveedor = new cp_proveedor_Info();
+        ro_empleado_Info info_empleado = new ro_empleado_Info();
+        fa_cliente_Info info_cliente = new fa_cliente_Info();
+        tb_persona_Info info_persona = new tb_persona_Info();
         ct_cbtecble_det_Bus bus_contabilidad_det = new ct_cbtecble_det_Bus();
 
         public List<cp_orden_pago_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal)
@@ -23,6 +36,17 @@ namespace Core.Erp.Bus.CuentasPorPagar
             try
             {
                 return oData.get_list(IdEmpresa, Fecha_ini, Fecha_fin, IdSucursal);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<cp_orden_pago_Info> get_list_aprobacion(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal)
+        {
+            try
+            {
+                return oData.get_list_aprobacion(IdEmpresa, Fecha_ini, Fecha_fin, IdSucursal);
             }
             catch (Exception)
             {
@@ -66,7 +90,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_.info_comprobante.lst_ct_cbtecble_det = bus_contabilidad_det.get_list(info_.IdEmpresa, info_.info_comprobante.IdTipoCbte,info_.info_comprobante.IdCbteCble);
                 return info_;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -74,12 +98,36 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
         public Boolean guardarDB(cp_orden_pago_Info info)
         {
+            var ObservacionComprobante = "";
             try
-            {
-                if (info.IdTipo_op.ToString() != cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString())
+            {                
+                if(cl_enumeradores.eTipoPersona.CLIENTE.ToString() == info.IdTipo_Persona)
                 {
-                    info_proveedore = bus_proveedor.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
-                    info.IdPersona = info_proveedore.IdPersona;
+                    info_cliente = bus_cliente.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
+                    info.IdPersona = info_cliente.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a cliente: " + (info_cliente.info_persona.pe_nombreCompleto) == null ? "" : info_cliente.info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+                if (cl_enumeradores.eTipoPersona.EMPLEA.ToString() == info.IdTipo_Persona)
+                {
+                    info_empleado = bus_empleado.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
+                    info.IdPersona = info_empleado.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a empleado: " + (info_empleado.info_persona.pe_nombreCompleto) == null ? "" : info_empleado.info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+                if (cl_enumeradores.eTipoPersona.PERSONA.ToString() == info.IdTipo_Persona)
+                {
+                    info_persona = bus_persona.get_info(Convert.ToInt32(info.IdPersona));
+                    info.IdPersona = info_persona.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a persona: " + (info_persona.pe_nombreCompleto) == null ? "" : info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+                if (cl_enumeradores.eTipoPersona.PROVEE.ToString() == info.IdTipo_Persona)
+                {
+                    info_proveedor = bus_proveedor.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
+                    info.IdPersona = info_proveedor.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a proveedor: " + (info_proveedor.info_persona.pe_nombreCompleto) == null ? "" : info_proveedor.info_persona.pe_nombreCompleto + " " + info.Observacion;
                 }
 
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
@@ -89,25 +137,25 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.cb_Estado = "A";
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
-                if (info_proveedore != null)
+
+                if (info_cliente != null || info_empleado != null || info_persona != null || info_proveedor != null)
                 {
                     if (info.Observacion == null)
                         info.Observacion = "";
-                    info.info_comprobante.cb_Observacion = "Orden pago al Prov: " + (info_proveedore.info_persona.pe_nombreCompleto)==null?"": info_proveedore.info_persona.pe_nombreCompleto + " "+ info.Observacion;
+                    info.info_comprobante.cb_Observacion = ObservacionComprobante;
 
                 }
                 else
                     info.info_comprobante.cb_Observacion = info.Observacion;
-                if (bus_contabilidad.guardarDB(info.info_comprobante))
-                {
 
-                   
+                if (bus_contabilidad.guardarDB(info.info_comprobante))
+                {                   
                     oData.guardarDB(info);
                 }
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -115,8 +163,59 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
         public Boolean modificarDB(cp_orden_pago_Info info)
         {
+            var ObservacionComprobante = "";
+
             try
             {
+                if (cl_enumeradores.eTipoPersona.CLIENTE.ToString() == info.IdTipo_Persona)
+                {
+                    info_cliente = bus_cliente.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
+                    info.IdPersona = info_cliente.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a cliente: " + (info_cliente.info_persona.pe_nombreCompleto) == null ? "" : info_cliente.info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+                if (cl_enumeradores.eTipoPersona.EMPLEA.ToString() == info.IdTipo_Persona)
+                {
+                    info_empleado = bus_empleado.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
+                    info.IdPersona = info_empleado.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a empleado: " + (info_empleado.info_persona.pe_nombreCompleto) == null ? "" : info_empleado.info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+                if (cl_enumeradores.eTipoPersona.PERSONA.ToString() == info.IdTipo_Persona)
+                {
+                    info_persona = bus_persona.get_info(Convert.ToInt32(info.IdPersona));
+                    info.IdPersona = info_persona.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a persona: " + (info_persona.pe_nombreCompleto) == null ? "" : info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+                if (cl_enumeradores.eTipoPersona.PROVEE.ToString() == info.IdTipo_Persona)
+                {
+                    info_proveedor = bus_proveedor.get_info(info.IdEmpresa, Convert.ToInt32(info.IdEntidad));
+                    info.IdPersona = info_proveedor.IdPersona;
+
+                    ObservacionComprobante = "Orden pago a proveedor: " + (info_proveedor.info_persona.pe_nombreCompleto) == null ? "" : info_proveedor.info_persona.pe_nombreCompleto + " " + info.Observacion;
+                }
+
+                info.info_comprobante.IdEmpresa = info.IdEmpresa;
+                info.info_comprobante.cb_Fecha = (DateTime)info.Fecha;
+                info.info_comprobante.cb_Anio = info.info_comprobante.cb_Fecha.Year;
+                info.info_comprobante.cb_mes = info.info_comprobante.cb_Fecha.Month;
+                info.info_comprobante.cb_Estado = "A";
+                info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
+                info.info_comprobante.IdEmpresa = info.IdEmpresa;
+
+                if (info_cliente != null || info_empleado != null || info_persona != null || info_proveedor != null)
+                {
+                    if (info.Observacion == null)
+                        info.Observacion = "";
+                    info.info_comprobante.cb_Observacion = ObservacionComprobante;
+
+                }
+                else
+                    info.info_comprobante.cb_Observacion = info.Observacion;
+
+                info.Fecha_Pago = info.Fecha;
+
                 if (oData.modificarDB(info))
                 {
                     bus_contabilidad.modificarDB(info.info_comprobante);
@@ -193,13 +292,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
         public Boolean guardar_op_x_fpDB(cp_orden_pago_Info info)
         {
             try
-            {
-               
-               
-
-                    oData.guardarDB(info);
-                
-
+            {                              
+                oData.guardarDB(info);                
                 return true;
             }
             catch (Exception)
@@ -208,5 +302,17 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
         }
 
+        public bool aprobacionDB(List<cp_orden_pago_Info> Lista)
+        {
+            try
+            {
+                return oData.aprobacionDB(Lista);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

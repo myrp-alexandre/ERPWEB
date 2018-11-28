@@ -271,6 +271,7 @@
     <Compile Include="Areas\Caja\Controllers\ParametroCajaController.cs" />
     <Compile Include="Areas\Caja\Controllers\TipoMovimientoCajaController.cs" />
     <Compile Include="Areas\Compras\ComprasAreaRegistration.cs" />
+    <Compile Include="Areas\Compras\Controllers\AprobacionOCController.cs" />
     <Compile Include="Areas\Compras\Controllers\CatalogoComprasController.cs" />
     <Compile Include="Areas\Compras\Controllers\CatalogoTipoComprasController.cs" />
     <Compile Include="Areas\Compras\Controllers\CompradorController.cs" />
@@ -299,6 +300,7 @@
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\TipoCobroController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\AprobacionOPController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ClaseProveedorController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\CodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
@@ -566,6 +568,12 @@
     </Compile>
     <Compile Include="Reportes\Caja\CAJ_002_Rpt.Designer.cs">
       <DependentUpon>CAJ_002_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Compra\COMP_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Compra\COMP_001_Rpt.Designer.cs">
+      <DependentUpon>COMP_001_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -9372,6 +9380,10 @@
     <Content Include="Areas\RRHH\Views\ImportacionMarcaciones\_GridViewPartial_importacion_marcaciones_det.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionMarcaciones\Nuevo.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_014.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\AprobacionOP\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\AprobacionOP\_GridViewPartial_AprobacionOP.cshtml" />
+    <Content Include="Areas\Compras\Views\AprobacionOC\Index.cshtml" />
+    <Content Include="Areas\Compras\Views\AprobacionOC\_GridViewPartial_aprobacion_oc.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9534,6 +9546,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_002_Rpt.resx">
       <DependentUpon>CAJ_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Compra\COMP_001_Rpt.resx">
+      <DependentUpon>COMP_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_001_Rpt.resx">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>

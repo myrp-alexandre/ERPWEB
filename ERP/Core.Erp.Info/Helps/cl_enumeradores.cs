@@ -31,6 +31,14 @@
             TIPONATPER = 5,
             TIP_CTA_AC = 27
         }
+        public enum eTipoSexoGeneral
+        {
+            SEXO_FEM ,
+            SEXO_MAS
+        }
+
+        
+
         public enum eTipoCatalogoBanco
         {
             CALTAMOR = 1,

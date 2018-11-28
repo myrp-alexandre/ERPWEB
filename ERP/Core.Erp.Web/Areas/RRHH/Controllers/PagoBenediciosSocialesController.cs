@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Web.Helps;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
+using Core.Erp.Info.Helps;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -153,5 +157,32 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+
+        
+        public FileResult GetCSV(int IdRol=0,int IdNomina_TipoLiqui = 0)
+        {
+            ro_archivosCSV_Bus bus_archivos = new ro_archivosCSV_Bus();
+            string archivo = "";
+            string NombreFile = "";
+
+            var listado = bus_archivos.get_lis(Convert.ToInt32(SessionFixed.IdEmpresa), IdRol, 950);
+            if (IdNomina_TipoLiqui == 3)
+            {
+                NombreFile = "Decimo III";
+                archivo = bus_archivos.Get_decimoIII(listado);
+            }
+            else
+            { 
+                NombreFile = "Decimo IV";
+
+                archivo = bus_archivos.Get_decimoIII(listado);
+            }
+            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(archivo);
+            return File(byteArray, "application/xml", NombreFile + ".csv");
+
+
+        }
+        
+
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Info.Helps;
 namespace Core.Erp.Data.CuentasPorPagar
 {
    public class cp_orden_pago_Data
@@ -56,7 +57,57 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-        
+
+        public List<cp_orden_pago_Info> get_list_aprobacion(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal)
+        {
+            try
+            {
+                List<cp_orden_pago_Info> Lista;
+
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                        Lista = (from q in Context.vwcp_orden_pago
+                                 where IdEmpresa == q.IdEmpresa
+                                 && q.Fecha_Pago >= Fecha_ini
+                                 && q.Fecha_Pago <= Fecha_fin
+                                 && q.IdSucursal == IdSucursal
+                                 && q.IdEstadoAprobacion == cl_enumeradores.eEstadoAprobacionOrdenPago.PENDI.ToString()
+                                 && q.Estado == "A"
+                                 select new cp_orden_pago_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdSucursal = q.IdSucursal,
+                                     Su_Descripcion = q.Su_Descripcion,
+                                     IdOrdenPago = q.IdOrdenPago,
+                                     Observacion = q.Observacion,
+                                     IdTipo_op = q.IdTipo_op,
+                                     IdTipo_Persona = q.IdTipo_Persona,
+                                     IdPersona = q.IdPersona,
+                                     IdEntidad = q.IdEntidad,
+                                     Fecha = q.Fecha,
+                                     IdEstadoAprobacion = q.IdEstadoAprobacion,
+                                     Descripcion = q.Descripcion,
+                                     IdFormaPago = q.IdFormaPago,
+                                     Fecha_Pago = q.Fecha_Pago,
+                                     IdBanco = q.IdBanco,
+                                     IdTipoFlujo = q.IdTipoFlujo,
+                                     IdTipoMovi = q.IdTipoMovi,
+                                     Estado = q.Estado,
+                                     Nom_Beneficiario = q.pe_nombreCompleto,
+                                     Total_OP = q.Total_OP,
+                                     EstadoBool = q.Estado == "A" ? true : false
+
+                                 }).ToList();
+                    }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public cp_orden_pago_Info get_info(int IdEmpresa, decimal IdOrdenPago)
         {
             try
@@ -166,6 +217,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     cp_orden_pago Entity = new cp_orden_pago
                     {
                         IdEmpresa = info.IdEmpresa,
+                        IdSucursal = info.IdSucursal,
                         IdOrdenPago =info.IdOrdenPago= get_id(info.IdEmpresa),
                         Observacion = info.Observacion,
                         IdTipo_op = info.IdTipo_op,
@@ -218,7 +270,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 }
                 return true;
             }
-            catch (Exception )
+            catch (Exception ex)
             {
                 throw;
             }
@@ -295,6 +347,38 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
+        public bool aprobacionDB(List<cp_orden_pago_Info> Lista)
+        {
+            try
+            {
+                int IdEmpresa = 0;
+                if (Lista.Count() > 0)
+                    IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+                IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    foreach (var item in Lista)
+                    {
+                        cp_orden_pago Entity = new cp_orden_pago
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdOrdenPago = item.IdOrdenPago,
+                            IdEstadoAprobacion = item.IdEstadoAprobacion,
+                        };
+                        Context.cp_orden_pago.Add(Entity);
+                    }
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public Boolean modificar_estado_aprobacion(cp_orden_pago_Info info)
         {
             try
@@ -319,7 +403,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
+        
         public List<cp_orden_pago_det_Info> Get_List_orden_pago_con_saldo(int IdEmpresa, string IdTipo_op, decimal IdProveedor, string IdEstado_Aprobacion, string IdUsuario)
         {
             try

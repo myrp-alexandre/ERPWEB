@@ -1001,6 +1001,7 @@
     <Compile Include="Reportes\Caja\CAJ_001_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Data.cs" />
+    <Compile Include="Reportes\Compra\COMP_001_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_001_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_002_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_003_balances_Data.cs" />
@@ -1266,6 +1267,7 @@
     <Compile Include="RRHH\Rdep_Data.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Data.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Data.cs" />
+    <Compile Include="RRHH\ro_archivosCSV_Data.cs" />
     <Compile Include="RRHH\ro_archivos_bancos_generacion_Data.cs" />
     <Compile Include="RRHH\ro_archivos_bancos_generacion_x_empleado_Data.cs" />
     <Compile Include="RRHH\ro_area_Data.cs" />
@@ -1431,6 +1433,9 @@
     </Compile>
     <Compile Include="SPROL_017_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spROL_DecimosCSV_Result.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="spro_nomina_x_pago_utilidad_Result.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
@@ -1611,6 +1616,9 @@
     </Compile>
     <Compile Include="vwcaj_Caja_Movimiento_x_Conciliar.cs">
       <DependentUpon>Model_caja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCOMP_001.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcom_ordencompra_local.cs">
       <DependentUpon>Model_compras.tt</DependentUpon>

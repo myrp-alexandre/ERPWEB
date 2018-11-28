@@ -26,5 +26,7 @@ namespace Core.Erp.Data
         public string Descripcion { get; set; }
         public System.DateTime pe_FechaIni { get; set; }
         public System.DateTime pe_FechaFin { get; set; }
+        public decimal IdRol { get; set; }
+        public string Expr1 { get; set; }
     }
 }

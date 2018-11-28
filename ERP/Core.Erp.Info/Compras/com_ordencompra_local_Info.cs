@@ -47,7 +47,29 @@ namespace Core.Erp.Info.Compras
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string Nombre { get; set; }
+        public string Su_Descripcion { get; set; }
 
         public List<com_ordencompra_local_det_Info> lst_det { get; set; }
+
     }
+    public class com_orden_aprobacion_Info
+    {
+        public decimal IdTransaccionSession { get; set; }
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public System.DateTime fecha_ini { get; set; }
+        public System.DateTime fecha_fin { get; set; }
+        public string IdUsuario { get; set; }
+        public string MotivoAprobacion { get; set; }
+        public string MotivoReprobacion { get; set; }
+        public string IdEstadoAprobacion_cat { get; set; }
+
+        public com_orden_aprobacion_Info()
+        {
+            fecha_ini = DateTime.Now.Date.AddMonths(-1);
+            fecha_fin = DateTime.Now.Date;
+        }
+    }
+
+
 }

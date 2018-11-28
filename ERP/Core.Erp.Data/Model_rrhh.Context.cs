@@ -80,7 +80,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_participacion_utilidad_empleado> vwro_participacion_utilidad_empleado { get; set; }
         public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
         public DbSet<vwro_rubro_tipo> vwro_rubro_tipo { get; set; }
-        public DbSet<vwro_rol> vwro_rol { get; set; }
         public DbSet<ro_tabla_Impu_Renta> ro_tabla_Impu_Renta { get; set; }
         public DbSet<vwro_empleado_x_Proyeccion_Gastos_Personales> vwro_empleado_x_Proyeccion_Gastos_Personales { get; set; }
         public DbSet<vwrdep_IngrEgr_x_Empleado> vwrdep_IngrEgr_x_Empleado { get; set; }
@@ -113,6 +112,7 @@ namespace Core.Erp.Data
         public DbSet<vwro_marcaciones_x_empleado> vwro_marcaciones_x_empleado { get; set; }
         public DbSet<ro_contrato> ro_contrato { get; set; }
         public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
+        public DbSet<vwro_rol> vwro_rol { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
@@ -329,6 +329,23 @@ namespace Core.Erp.Data
                 new ObjectParameter("IdRol", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_procesa_Rol", idEmpresaParameter, idNominaParameter, idNominaTipoParameter, idPEriodoParameter, idUsuarioParameter, observacionParameter, idRolParameter);
+        }
+    
+        public virtual ObjectResult<spROL_DecimosCSV_Result> spROL_DecimosCSV(Nullable<int> idEmpresa, Nullable<int> idRol, Nullable<int> idRubro)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idRolParameter = idRol.HasValue ?
+                new ObjectParameter("IdRol", idRol) :
+                new ObjectParameter("IdRol", typeof(int));
+    
+            var idRubroParameter = idRubro.HasValue ?
+                new ObjectParameter("IdRubro", idRubro) :
+                new ObjectParameter("IdRubro", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spROL_DecimosCSV_Result>("spROL_DecimosCSV", idEmpresaParameter, idRolParameter, idRubroParameter);
         }
     }
 }
