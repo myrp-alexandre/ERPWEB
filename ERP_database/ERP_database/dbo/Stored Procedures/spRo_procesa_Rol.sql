@@ -1,5 +1,6 @@
 ﻿
 
+
 CREATE PROCEDURE [dbo].[spRo_procesa_Rol] (
 @IdEmpresa int,
 @IdNomina numeric,
@@ -22,13 +23,13 @@ AS
 --@IdSucursal int
 
 
-set @IdEmpresa =1
-set @IdNomina =1
-set @IdNominaTipo =2
-set @IdPEriodo= 201810
-set @IdUsuario ='admin'
-set @observacion= 'PERIODO'+CAST( @IdPEriodo AS varchar(15))
-set @IdRol =1
+--set @IdEmpresa =1
+--set @IdNomina =1
+--set @IdNominaTipo =2
+--set @IdPEriodo= 201812
+--set @IdUsuario ='admin'
+--set @observacion= 'PERIODO'+CAST( @IdPEriodo AS varchar(15))
+--set @IdRol =0
 
 BEGIN
 
@@ -47,7 +48,7 @@ select @Fi= pe_FechaIni, @Ff=pe_FechaFin, @Anio=pe_anio from ro_periodo where Id
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------preparando la cabecera del rol general-------- ----------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-if((select  COUNT(@IdRol) from ro_rol where IdEmpresa=@IdEmpresa and @IdRol=IdRol)>0)
+if((select  COUNT(idrol) from ro_rol where IdEmpresa=@IdEmpresa and @IdRol=IdRol)>0)
 update ro_rol set UsuarioModifica=@IdUsuario, FechaModifica=GETDATE() where IdEmpresa=@IdEmpresa and @IdRol=IdRol
 else
 insert into ro_rol

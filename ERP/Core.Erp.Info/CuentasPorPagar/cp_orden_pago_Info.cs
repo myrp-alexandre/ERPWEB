@@ -25,14 +25,12 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string IdTipo_Persona { get; set; }
         public decimal IdPersona { get; set; }
         [Required(ErrorMessage = "El campo beneficiario es obligatorio")]
-        public Nullable<decimal> IdEntidad { get; set; }
+        public decimal IdEntidad { get; set; }
         public System.DateTime Fecha { get; set; }
         public string IdEstadoAprobacion { get; set; }
         public string Descripcion { get; set; }
         [Required(ErrorMessage = "El campo forma de pago es obligatorio")]
         public string IdFormaPago { get; set; }
-        public System.DateTime Fecha_Pago { get; set; }
-        public Nullable<int> IdBanco { get; set; }
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
@@ -42,8 +40,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public Nullable<decimal> IdTipoFlujo { get; set; }
-        public Nullable<System.DateTime> Fecha_Transac { get; set; }
-        public Nullable<int> IdTipoMovi { get; set; }
+        public Nullable<System.DateTime> Fecha_Transac { get; set; }        
         [Required(ErrorMessage = "El campo valor a pagar a cancelar es obligatorio")]
         public double Valor_a_pagar { get; set; }
         public double Valor_estimado_a_pagar_OP { get; set; }
@@ -56,11 +53,35 @@ namespace Core.Erp.Info.CuentasPorPagar
         public ct_cbtecble_Info info_comprobante { get; set; }
         public bool seleccionado { get; set; }
         public decimal IdEmpleado { get; set; }
+        public string IdUsuarioAprobacion { get; set; }
+        public string MotivoAprobacion { get; set; }
+        public Nullable<System.DateTime> FechaAprobacion { get; set; }
 
         public cp_orden_pago_Info()
         {
             detalle = new List<cp_orden_pago_det_Info>();
             info_comprobante = new ct_cbtecble_Info();
+        }
+    }
+
+    public class cp_orden_pago_aprobacion_Info
+    {
+        public decimal IdTransaccionSession { get; set; }
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdOrdenPago { get; set; }
+        public System.DateTime fecha_ini { get; set; }
+        public System.DateTime fecha_fin { get; set; }
+        public string IdUsuario { get; set; }
+        public string IdUsuarioAprobacion { get; set; }
+        public string MotivoAprobacion { get; set; }
+        public string IdEstadoAprobacion { get; set; }
+        public DateTime FechaAprobacion { get; set; }
+
+        public cp_orden_pago_aprobacion_Info()
+        {
+            fecha_ini = DateTime.Now.Date.AddMonths(-1);
+            fecha_fin = DateTime.Now.Date;
         }
     }
 }

@@ -19,8 +19,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                 {
                     Lista = (from q in Context.vwcp_orden_pago
                              where IdEmpresa == q.IdEmpresa
-                             && q.Fecha_Pago>=Fecha_ini
-                             && q.Fecha_Pago <= Fecha_fin
+                             && q.Fecha>=Fecha_ini
+                             && q.Fecha <= Fecha_fin
                              && q.IdSucursal == IdSucursal
                              select new cp_orden_pago_Info
                              {
@@ -37,10 +37,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  IdEstadoAprobacion = q.IdEstadoAprobacion,
                                  Descripcion = q.Descripcion,
                                  IdFormaPago = q.IdFormaPago,
-                                 Fecha_Pago = q.Fecha_Pago,
-                                 IdBanco = q.IdBanco,
                                  IdTipoFlujo = q.IdTipoFlujo,
-                                 IdTipoMovi = q.IdTipoMovi,
                                  Estado =q.Estado,
                                  Nom_Beneficiario=q.pe_nombreCompleto,
                                  Total_OP=q.Total_OP,
@@ -68,8 +65,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                 {
                         Lista = (from q in Context.vwcp_orden_pago
                                  where IdEmpresa == q.IdEmpresa
-                                 && q.Fecha_Pago >= Fecha_ini
-                                 && q.Fecha_Pago <= Fecha_fin
+                                 && q.Fecha >= Fecha_ini
+                                 && q.Fecha <= Fecha_fin
                                  && q.IdSucursal == IdSucursal
                                  && q.IdEstadoAprobacion == cl_enumeradores.eEstadoAprobacionOrdenPago.PENDI.ToString()
                                  && q.Estado == "A"
@@ -88,10 +85,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                      IdEstadoAprobacion = q.IdEstadoAprobacion,
                                      Descripcion = q.Descripcion,
                                      IdFormaPago = q.IdFormaPago,
-                                     Fecha_Pago = q.Fecha_Pago,
-                                     IdBanco = q.IdBanco,
                                      IdTipoFlujo = q.IdTipoFlujo,
-                                     IdTipoMovi = q.IdTipoMovi,
                                      Estado = q.Estado,
                                      Nom_Beneficiario = q.pe_nombreCompleto,
                                      Total_OP = q.Total_OP,
@@ -129,10 +123,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Fecha = Entity.Fecha,
                         IdEstadoAprobacion = Entity.IdEstadoAprobacion,
                         IdFormaPago = Entity.IdFormaPago,
-                        Fecha_Pago = Entity.Fecha_Pago,
-                        IdBanco = Entity.IdBanco,
                         IdTipoFlujo = Entity.IdTipoFlujo,
-                        IdTipoMovi = Entity.IdTipoMovi,
                         Estado = Entity.Estado,
                     };
                     info.detalle
@@ -227,10 +218,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Fecha = info.Fecha.Date,
                         IdEstadoAprobacion = info.IdEstadoAprobacion,
                         IdFormaPago = info.IdFormaPago,
-                        Fecha_Pago = info.Fecha_Pago.Date,
-                        IdBanco = info.IdBanco,
                         IdTipoFlujo = info.IdTipoFlujo,
-                        IdTipoMovi = info.IdTipoMovi,
                         Estado = "A",
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
@@ -250,7 +238,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         
                         IdTipoCbte_cxp = (item.IdTipoCbte_cxp==0| item.IdTipoCbte_cxp == null)? info.info_comprobante.IdTipoCbte:item.IdTipoCbte_cxp,
                         IdCbteCble_cxp = (item.IdCbteCble_cxp == 0 | item.IdCbteCble_cxp == null) ? info.info_comprobante.IdCbteCble : item.IdCbteCble_cxp,
-                        Fecha_Pago =info.Fecha_Pago,
+                        Fecha_Pago =info.Fecha,
                         IdEstadoAprobacion=info.IdEstadoAprobacion,
                         Valor_a_pagar=(item.Valor_a_pagar)==0?info.Valor_a_pagar:item.Valor_a_pagar,
                         Referencia=item.Referencia
@@ -270,7 +258,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -293,10 +281,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.Fecha = info.Fecha.Date;
                         Entity.IdEstadoAprobacion = info.IdEstadoAprobacion;
                         Entity.IdFormaPago = info.IdFormaPago;
-                        Entity.Fecha_Pago = info.Fecha_Pago.Date;
-                        Entity.IdBanco = info.IdBanco;
                         Entity.IdTipoFlujo = info.IdTipoFlujo;
-                        Entity.IdTipoMovi = info.IdTipoMovi;
                         Context.SaveChanges();
 
                         

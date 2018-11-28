@@ -266,25 +266,62 @@ namespace Core.Erp.Data.Compras
             }
         }
 
-        public bool AprobarOC(com_ordencompra_local_Info info)
+        public bool AprobarOC(List<com_ordencompra_local_Info> Lista)
         {
             try
             {
+                int IdEmpresa = 0;
+                if (Lista.Count() > 0)
+                    IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+                IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+
                 using (Entities_compras Context = new Entities_compras())
                 {
-                    com_ordencompra_local Entity = Context.com_ordencompra_local.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdOrdenCompra == info.IdOrdenCompra).FirstOrDefault();
-                    if (Entity == null) return false;
-
-                    Entity.IdEstadoAprobacion_cat = info.IdEstadoAprobacion_cat;
-                    
-                    Context.SaveChanges();
-
+                    foreach (var item in Lista)
+                    {
+                        com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdOrdenCompra == item.IdOrdenCompra);
+                        if (Entity != null)
+                        {
+                            Entity.IdEstadoAprobacion_cat = item.IdEstadoAprobacion_cat;
+                        }
+                        Context.SaveChanges();
+                    }
                 }
+
                 return true;
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
 
+        public bool RechazarOP(List<com_ordencompra_local_Info> Lista)
+        {
+            try
+            {
+                int IdEmpresa = 0;
+                if (Lista.Count() > 0)
+                    IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+                IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
+
+                using (Entities_compras Context = new Entities_compras())
+                {
+                    foreach (var item in Lista)
+                    {
+                        com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdOrdenCompra == item.IdOrdenCompra);
+                        if (Entity != null)
+                        {
+                            Entity.IdEstadoAprobacion_cat = item.IdEstadoAprobacion_cat;
+                        }
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -301,7 +338,7 @@ namespace Core.Erp.Data.Compras
                     Entity.Estado = "I";
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.IdEstadoAprobacion_cat = "ANU";
-                    Entity.FechaHoraAnul = DateTime.Now;
+                    Entity.Fecha_UltAnu = DateTime.Now;
 
                     Context.SaveChanges();
 

@@ -187,7 +187,6 @@ namespace Core.Erp.Data.Caja
                         IdPersona = info.IdPersona,
                         IdEntidad = info.IdEntidad,
                         Fecha = info.FechaOP.Date,
-                        Fecha_Pago = info.FechaOP.Date,
                         IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
                         IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
                         Estado = "A"
@@ -238,7 +237,7 @@ namespace Core.Erp.Data.Caja
                         Valor_a_pagar = Convert.ToDouble(info.lst_det_ct.Sum(q=>q.dc_Valor_debe)),
                         IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
                         IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
-                        Fecha_Pago = op.Fecha_Pago
+                        Fecha_Pago = op.Fecha
                     };
                     Context_cxp.cp_orden_pago_det.Add(op_det);
                     #endregion
@@ -344,7 +343,6 @@ namespace Core.Erp.Data.Caja
                                 IdPersona = item.IdPersona,
                                 IdEntidad = item.idEntidad,
                                 Fecha = Convert.ToDateTime(Entity_c.Fecha_fin).Date,
-                                Fecha_Pago = Convert.ToDateTime(Entity_c.Fecha_fin).Date,
                                 IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
                                 IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
                                 Estado = "A"
@@ -366,7 +364,7 @@ namespace Core.Erp.Data.Caja
                                 Valor_a_pagar = Convert.ToDouble(item.Valor_a_aplicar),
                                 IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
                                 IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
-                                Fecha_Pago = op.Fecha_Pago
+                                Fecha_Pago = op.Fecha
                             };
                             Context_cxp.cp_orden_pago_det.Add(op_det);
                             #endregion
@@ -377,11 +375,11 @@ namespace Core.Erp.Data.Caja
                                 IdEmpresa = info.IdEmpresa,
                                 IdTipoCbte = IdTipoCbte_NC,
                                 IdCbteCble = IdCbteCble_NC,
-                                cb_Fecha = op.Fecha_Pago,
+                                cb_Fecha = op.Fecha,
                                 cb_Observacion = op.Observacion,
-                                IdPeriodo = Convert.ToInt32(op.Fecha_Pago.ToString("yyyyMM")),
-                                cb_Anio = op.Fecha_Pago.Year,
-                                cb_mes = op.Fecha_Pago.Month,
+                                IdPeriodo = Convert.ToInt32(op.Fecha.ToString("yyyyMM")),
+                                cb_Anio = op.Fecha.Year,
+                                cb_mes = op.Fecha.Month,
                                 cb_FechaTransac = DateTime.Now,
                                 cb_Estado = "A"
                             };
@@ -418,9 +416,9 @@ namespace Core.Erp.Data.Caja
                                 IdTipoNota = cl_enumeradores.eTipoNotaCXP.T_TIP_NOTA_INT.ToString(),
                                 IdProveedor = item.idEntidad,
                                 IdSucursal = Convert.ToInt32(item.idSucursal),
-                                cn_fecha = op.Fecha_Pago,
-                                Fecha_contable = op.Fecha_Pago,
-                                cn_Fecha_vcto = op.Fecha_Pago,
+                                cn_fecha = op.Fecha,
+                                Fecha_contable = op.Fecha,
+                                cn_Fecha_vcto = op.Fecha,
                                 cn_observacion = op.Observacion,
                                 cn_subtotal_iva = 0,
                                 cn_subtotal_siniva = Convert.ToDouble(item.Valor_a_aplicar),
@@ -689,7 +687,6 @@ namespace Core.Erp.Data.Caja
                                 IdPersona = item.IdPersona,
                                 IdEntidad = item.idEntidad,
                                 Fecha = Convert.ToDateTime(info.Fecha_fin).Date,
-                                Fecha_Pago = Convert.ToDateTime(info.Fecha_fin).Date,
                                 IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
                                 IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
                                 Estado = "A"
@@ -711,7 +708,7 @@ namespace Core.Erp.Data.Caja
                                 Valor_a_pagar = Convert.ToDouble(item.Valor_a_aplicar),
                                 IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
                                 IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
-                                Fecha_Pago = op.Fecha_Pago
+                                Fecha_Pago = op.Fecha
                             };
                             Context_cxp.cp_orden_pago_det.Add(op_det);
                             #endregion
@@ -722,11 +719,11 @@ namespace Core.Erp.Data.Caja
                                 IdEmpresa = info.IdEmpresa,
                                 IdTipoCbte = IdTipoCbte_NC,
                                 IdCbteCble = IdCbteCble_NC,
-                                cb_Fecha = op.Fecha_Pago,
+                                cb_Fecha = op.Fecha,
                                 cb_Observacion = op.Observacion,
-                                IdPeriodo = Convert.ToInt32(op.Fecha_Pago.ToString("yyyyMM")),
-                                cb_Anio = op.Fecha_Pago.Year,
-                                cb_mes = op.Fecha_Pago.Month,
+                                IdPeriodo = Convert.ToInt32(op.Fecha.ToString("yyyyMM")),
+                                cb_Anio = op.Fecha.Year,
+                                cb_mes = op.Fecha.Month,
                                 cb_FechaTransac = DateTime.Now,
                                 cb_Estado = "A"
                             };
@@ -763,9 +760,9 @@ namespace Core.Erp.Data.Caja
                                 IdTipoNota = cl_enumeradores.eTipoNotaCXP.T_TIP_NOTA_INT.ToString(),
                                 IdProveedor = item.idEntidad,
                                 IdSucursal = Convert.ToInt32(item.idSucursal),
-                                cn_fecha = op.Fecha_Pago,
-                                Fecha_contable = op.Fecha_Pago,
-                                cn_Fecha_vcto = op.Fecha_Pago,
+                                cn_fecha = op.Fecha,
+                                Fecha_contable = op.Fecha,
+                                cn_Fecha_vcto = op.Fecha,
                                 cn_observacion = op.Observacion,
                                 cn_subtotal_iva = 0,
                                 cn_subtotal_siniva = Convert.ToDouble(item.Valor_a_aplicar),
@@ -1040,7 +1037,6 @@ namespace Core.Erp.Data.Caja
                         IdPersona = info.IdPersona,
                         IdEntidad = info.IdEntidad,
                         Fecha = info.FechaOP.Date,
-                        Fecha_Pago = info.FechaOP.Date,
                         IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
                         IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
                         Estado = "A"
@@ -1091,7 +1087,7 @@ namespace Core.Erp.Data.Caja
                         Valor_a_pagar = Convert.ToDouble(info.lst_det_ct.Sum(q => q.dc_Valor_debe)),
                         IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
                         IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
-                        Fecha_Pago = op.Fecha_Pago
+                        Fecha_Pago = op.Fecha
                     };
                     Context_cxp.cp_orden_pago_det.Add(op_det);
                     Entity.IdEmpresa_op = op.IdEmpresa;

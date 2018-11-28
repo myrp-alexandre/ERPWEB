@@ -20,19 +20,19 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info
+            cp_orden_pago_aprobacion_Info model = new cp_orden_pago_aprobacion_Info
             {
                 IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
-            List_aprobacion_op.set_list(new List<cp_orden_pago_Info>(), model.IdTransaccionSession);
+            List_aprobacion_op.set_list(new List<cp_orden_pago_aprobacion_Info>(), model.IdTransaccionSession);
             cargar_combos_consulta(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
-        public ActionResult Index(cl_filtros_Info model)
+        public ActionResult Index(cp_orden_pago_aprobacion_Info model)
         {
             model.IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
 
@@ -91,9 +91,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 lst_ordenes_pago_aprobacion.Add(info);
             }
 
-            DateTime fecha_ini = DateTime.Now;
-            DateTime fecha_fin = DateTime.Now;
-
             var resultado_orden = bus_orden_pago.aprobarOP(lst_ordenes_pago_aprobacion);
 
             return Json(resultado_orden, JsonRequestBehavior.AllowGet);
@@ -117,9 +114,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 lst_ordenes_pago_aprobacion.Add(info);
             }
 
-            DateTime fecha_ini = DateTime.Now;
-            DateTime fecha_fin = DateTime.Now;
-
             var resultado_orden = bus_orden_pago.rechazarOP(lst_ordenes_pago_aprobacion);
 
             return Json(resultado_orden, JsonRequestBehavior.AllowGet);
@@ -129,17 +123,17 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     public class orden_pago_aprobacion_List
     {
         string variable = "cp_orden_pago_Info";
-        public List<cp_orden_pago_Info> get_list(decimal IdTransaccionSession)
+        public List<cp_orden_pago_aprobacion_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
             {
-                List<cp_orden_pago_Info> list = new List<cp_orden_pago_Info>();
+                List<cp_orden_pago_aprobacion_Info> list = new List<cp_orden_pago_aprobacion_Info>();
 
                 HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<cp_orden_pago_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+            return (List<cp_orden_pago_aprobacion_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
         }
-        public void set_list(List<cp_orden_pago_Info> list, decimal IdTransaccionSession)
+        public void set_list(List<cp_orden_pago_aprobacion_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }

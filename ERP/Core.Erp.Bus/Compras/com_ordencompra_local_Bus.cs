@@ -83,11 +83,11 @@ namespace Core.Erp.Bus.Compras
                 throw;
             }
         }
-        public bool AprobarOC(com_ordencompra_local_Info info)
+        public bool AprobarOC(List<com_ordencompra_local_Info> Lista)
         {
             try
             {
-                return odata.AprobarOC(info);
+                return odata.AprobarOC(Lista);
             }
             catch (Exception)
             {
@@ -95,5 +95,19 @@ namespace Core.Erp.Bus.Compras
                 throw;
             }
         }
+
+        public bool RechazarOP(List<com_ordencompra_local_Info> Lista)
+        {
+            try
+            {
+                return odata.RechazarOP(Lista);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

@@ -29,19 +29,21 @@ namespace Core.Erp.Data
         public string oc_observacion { get; set; }
         public string Estado { get; set; }
         public string IdEstadoAprobacion_cat { get; set; }
-        public Nullable<System.DateTime> Fecha_Transac { get; set; }
-        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
-        public string IdUsuarioUltMod { get; set; }
-        public Nullable<System.DateTime> FechaHoraAnul { get; set; }
-        public string IdUsuarioUltAnu { get; set; }
-        public string MotivoAnulacion { get; set; }
-        public string MotivoReprobacion { get; set; }
-        public Nullable<decimal> IdDepartamento { get; set; }
-        public string IdUsuario { get; set; }
-        public Nullable<int> IdMotivo { get; set; }
+        public decimal IdDepartamento { get; set; }
+        public int IdMotivo { get; set; }
         public System.DateTime oc_fechaVencimiento { get; set; }
         public string IdEstado_cierre { get; set; }
         public decimal IdComprador { get; set; }
+        public string IdUsuarioAprobacion { get; set; }
+        public string MotivoAprobacion { get; set; }
+        public Nullable<System.DateTime> FechaAprobacion { get; set; }
+        public string IdUsuario { get; set; }
+        public Nullable<System.DateTime> Fecha_Transac { get; set; }
+        public string IdUsuarioUltMod { get; set; }
+        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
+        public string IdUsuarioUltAnu { get; set; }
+        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        public string MotivoAnulacion { get; set; }
     
         public virtual com_catalogo com_catalogo { get; set; }
         public virtual com_comprador com_comprador { get; set; }
