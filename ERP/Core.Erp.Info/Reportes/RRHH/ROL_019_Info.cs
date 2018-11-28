@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Reportes.RRHH
 {
     public class ROL_019_Info
     {
         public int IdEmpresa { get; set; }
-        public int IdNominaTipo { get; set; }
-        public int IdNominaTipoLiqui { get; set; }
-        public int IdPeriodo { get; set; }
+        public int? IdNominaTipo { get; set; }
+        public int? IdNominaTipoLiqui { get; set; }
+        public int? IdPeriodo { get; set; }
         public decimal IdEmpleado { get; set; }
         public string IdRubro { get; set; }
         public int Orden { get; set; }
