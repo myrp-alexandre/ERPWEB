@@ -49,19 +49,10 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(20);
-        settings.Columns.Add("oc_observacion", "Observación").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdEstadoAprobacion_cat", "Estado Aprobación").Width = Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EstadoBool";
-            column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
-            column.EditorProperties().CheckBox(sp =>
-            {
+        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(30);
+        settings.Columns.Add("oc_observacion", "Observación").Width = Unit.Percentage(30);
+        settings.Columns.Add("IdEstadoAprobacion_cat", "Estado Aprobación").Width = Unit.Percentage(20);
 
-            });
-        });
         settings.Columns.Add(column =>
         {
             column.SetDataItemTemplateContent(c =>

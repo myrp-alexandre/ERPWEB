@@ -58,7 +58,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdProvincia = model.IdProvincia } );
+            return RedirectToAction("Index", new { IdProvincia = model.IdProvincia, IdPais = ViewBag.IdPais, } );
         }
 
         public ActionResult Modificar( string IdCiudad="")
@@ -67,7 +67,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (model == null)
             {
                 ViewBag.IdProvincia = model.IdProvincia;
-                return RedirectToAction("Index", ViewBag.IdProvincia = model.IdProvincia);
+                return RedirectToAction("Index", new { IdProvincia = model.IdProvincia, IdPais = ViewBag.IdPais, });
             }
             cargar_combos();
             return View(model);
@@ -81,7 +81,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdProvincia = model.IdProvincia });
+            return RedirectToAction("Index", new { IdProvincia = model.IdProvincia, IdPais = ViewBag.IdPais, });
         }
 
         public ActionResult Anular( string IdCiudad="")
@@ -90,7 +90,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (model == null)
             {
                 ViewBag.IdProvincia = model.IdProvincia;
-                return RedirectToAction("Index", ViewBag.IdProvincia = model.IdProvincia);
+                return RedirectToAction("Index", new { IdProvincia = model.IdProvincia, IdPais = ViewBag.IdPais, });
             }
             cargar_combos();
             return View(model);
@@ -104,7 +104,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdProvincia = model.IdProvincia });
+            return RedirectToAction("Index", new { IdProvincia = model.IdProvincia, IdPais = ViewBag.IdPais, });
         }
 
         public JsonResult get_lst_ciudad_x_provincia(string IdProvincia)

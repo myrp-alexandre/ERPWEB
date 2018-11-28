@@ -24,11 +24,10 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdTipoCbte = p_IdTipoCbte.Value == null ? 0 : Convert.ToInt32(p_IdTipoCbte.Value);
-            decimal IdCbteCble = p_IdCbteCble.Value == null ? 0 : Convert.ToDecimal(p_IdCbteCble.Value);
+            decimal IdOrdenPago = p_IdOrdenPago.Value == null ? 0 : Convert.ToDecimal(p_IdOrdenPago.Value);
 
             CXP_004_Bus bus_rpt = new CXP_004_Bus();
-            List<CXP_004_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
+            List<CXP_004_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdOrdenPago);
             this.DataSource = lst_rpt;
         }
     }
