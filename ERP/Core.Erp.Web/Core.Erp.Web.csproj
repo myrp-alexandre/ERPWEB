@@ -569,6 +569,12 @@
     <Compile Include="Reportes\Caja\CAJ_002_Rpt.Designer.cs">
       <DependentUpon>CAJ_002_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Compra\COMP_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Compra\COMP_001_Rpt.Designer.cs">
+      <DependentUpon>COMP_001_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9540,6 +9546,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_002_Rpt.resx">
       <DependentUpon>CAJ_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Compra\COMP_001_Rpt.resx">
+      <DependentUpon>COMP_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_001_Rpt.resx">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>

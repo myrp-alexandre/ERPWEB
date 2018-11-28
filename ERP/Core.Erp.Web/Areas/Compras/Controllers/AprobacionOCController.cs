@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            com_orden_aprobacion_Info model = new com_orden_aprobacion_Info
+            cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
@@ -38,7 +38,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Index(com_orden_aprobacion_Info model)
+        public ActionResult Index(cl_filtros_Info model)
         {
             List_apro.get_list(model.IdTransaccionSession);
             cargar_combos(model.IdEmpresa);
@@ -56,8 +56,8 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(fecha_fin);
             ViewBag.IdSucursal = IdSucursal == 0 ? 0 : Convert.ToInt32(IdSucursal);
 
-            var model = bus_ordencompra.GetListPorAprobar(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin);
-            return PartialView("_GridViewPartial_aprobacion_oc", model);
+            List_apro = bus_ordencompra.GetListPorAprobar(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            return PartialView("_GridViewPartial_aprobacion_oc", List_apro);
         }
 
         private void cargar_combos(int IdEmpresa)
