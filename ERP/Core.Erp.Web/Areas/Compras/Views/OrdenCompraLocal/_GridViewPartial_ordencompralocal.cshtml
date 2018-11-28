@@ -81,10 +81,9 @@
             c.Width = Unit.Pixel(150);
         });
         settings.Columns.Add("pr_codigo", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(10);
-        settings.Columns.Add("Nombre", "Comprador").Width = Unit.Percentage(10);
-        settings.Columns.Add("oc_observacion", "Observación").Width = Unit.Percentage(20);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(20);
+        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(40);
+        settings.Columns.Add("oc_observacion", "Observación").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";

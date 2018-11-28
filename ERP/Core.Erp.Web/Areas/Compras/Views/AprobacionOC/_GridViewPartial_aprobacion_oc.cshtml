@@ -4,7 +4,7 @@
     {
         settings.Name = "GridView_aprobacion_oc";
         settings.CallbackRouteValues = new { Controller = "AprobacionOC", Action = "GridViewPartial_aprobacion_oc", IdSucursal = ViewBag.IdSucursal, fecha_ini = ViewBag.fecha_ini, fecha_fin = ViewBag.fecha_fin };
-        settings.KeyFieldName = "IdSucursal";
+        settings.KeyFieldName = "IdOrdenCompra";
 
         settings.Width = Unit.Percentage(100);
 
@@ -35,20 +35,41 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdOrdenCompra";
-            column.Caption = "# OC";
-            column.Width = Unit.Percentage(10);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
+        settings.Columns.Add("IdOrdenCompra", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "oc_fecha";
-            column.Caption = "Fecha";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-            column.Width = Unit.Percentage(50
-                );
+            column.Caption = "Fecha pago";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(20);
+        settings.Columns.Add("oc_observacion", "Observación").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdEstadoAprobacion_cat", "Estado Aprobación").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoBool";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                //ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_004", "CuentasPorPagarReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(),IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble").ToString() }, Request.Url.Scheme) + "');\"></span>");
+
+            });
+            column.Width = Unit.Percentage(5);
         });
 
 

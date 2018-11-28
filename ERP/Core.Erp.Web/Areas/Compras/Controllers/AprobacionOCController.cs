@@ -33,7 +33,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
 
             };
-            List_apro.set_list(new List<com_orden_aprobacion_Info>(), model.IdTransaccionSession);
+            List_apro.set_list(new List<com_ordencompra_local_Info>(), model.IdTransaccionSession);
             cargar_combos(model.IdEmpresa);
             return View(model);
         }
@@ -56,8 +56,8 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(fecha_fin);
             ViewBag.IdSucursal = IdSucursal == 0 ? 0 : Convert.ToInt32(IdSucursal);
 
-            List_apro = bus_ordencompra.GetListPorAprobar(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin);
-            return PartialView("_GridViewPartial_aprobacion_oc", List_apro);
+            var model = bus_ordencompra.GetListPorAprobar(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            return PartialView("_GridViewPartial_aprobacion_oc", model);
         }
 
         private void cargar_combos(int IdEmpresa)
@@ -67,21 +67,43 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             
         }
 
+        public JsonResult guardar(int IdEmpresa = 0,   string Ids = "")
+        {
+            string[] array = Ids.Split(',');
+            List<com_ordencompra_local_Info> lst_ordenes_compra_aprobacion = new List<com_ordencompra_local_Info>();
+            var output = array.GroupBy(q => q).ToList();
+            foreach (var item in output)
+            {
+                com_ordencompra_local_Info info = new com_ordencompra_local_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    IdOrdenCompra = Convert.ToInt32(item.Key)
+                };
+
+                lst_ordenes_compra_aprobacion.Add(info);
+            }
+            int IdSucursal = 0;
+            DateTime fecha_ini = DateTime.Now;
+            DateTime fecha_fin = DateTime.Now;
+            var resultado = bus_ordencompra.GetListPorAprobar(IdEmpresa, IdSucursal, fecha_ini, fecha_fin);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
     }
     public class com_orden_aprobacion_List
        {
-           string variable = "com_orden_aprobacion_Info";
-           public List<com_orden_aprobacion_Info> get_list(decimal IdTransaccionSession)
+           string variable = "com_ordencompra_local_Info";
+           public List<com_ordencompra_local_Info> get_list(decimal IdTransaccionSession)
            {
                if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
                {
-                   List<com_orden_aprobacion_Info> list = new List<com_orden_aprobacion_Info>();
+                   List<com_ordencompra_local_Info> list = new List<com_ordencompra_local_Info>();
 
                    HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
                }
-               return (List<com_orden_aprobacion_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+               return (List<com_ordencompra_local_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
            }
-           public void set_list(List<com_orden_aprobacion_Info> list, decimal IdTransaccionSession)
+           public void set_list(List<com_ordencompra_local_Info> list, decimal IdTransaccionSession)
            {
                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
           }

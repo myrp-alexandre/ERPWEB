@@ -52,6 +52,7 @@ namespace Core.Erp.Info.Compras
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string Nombre { get; set; }
+        public string Su_Descripcion { get; set; }
 
         public List<com_ordencompra_local_det_Info> lst_det { get; set; }
 

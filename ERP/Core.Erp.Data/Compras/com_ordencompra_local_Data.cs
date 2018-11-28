@@ -35,7 +35,10 @@ namespace Core.Erp.Data.Compras
                                      oc_fecha = q.oc_fecha,
 
                                      EstadoBool = q.Estado == "A" ? true : false,
-                                     pe_nombreCompleto = q.pe_nombreCompleto
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     pr_codigo = q.Codigo,
+                                     Nombre = q.pe_nombreCompleto,
+                                     Su_Descripcion = q.Su_Descripcion
 
                                  }).ToList();
                     else
@@ -59,6 +62,9 @@ namespace Core.Erp.Data.Compras
 
                                      EstadoBool = q.Estado == "A" ? true : false,
                                      pe_nombreCompleto = q.pe_nombreCompleto,
+                                     pr_codigo = q.Codigo,
+                                     Nombre = q.pe_nombreCompleto
+
                                  }).ToList();
                 }
                 return Lista;
@@ -305,7 +311,13 @@ namespace Core.Erp.Data.Compras
                             IdOrdenCompra = q.IdOrdenCompra,
                             IdEstadoAprobacion_cat = q.IdEstadoAprobacion_cat,
                             oc_observacion = q.oc_observacion,
-                            Estado = q.Estado,
+                            EstadoBool = q.Estado == "A" ? true : false,
+                            oc_fecha = q.oc_fecha,
+                            Su_Descripcion = q.Su_Descripcion,
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            IdTerminoPago = q.TerminoPago
+                            
+
                     }).ToList();
                 }
                 return List;

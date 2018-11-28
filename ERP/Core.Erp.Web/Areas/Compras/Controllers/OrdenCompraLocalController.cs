@@ -142,10 +142,8 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             com_ordencompra_local_Info model = new com_ordencompra_local_Info
             {
                 IdEmpresa = IdEmpresa,
-                oc_fecha = DateTime.Now,
-                oc_fechaVencimiento = DateTime.Now,
-                co_fechaReproba = DateTime.Now,
-                co_fecha_aprobacion = DateTime.Now,
+                oc_fecha = DateTime.Now.Date,
+                oc_fechaVencimiento = DateTime.Now.Date,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
                 IdEstadoAprobacion_cat = i_param.IdEstadoAprobacion_OC
 
