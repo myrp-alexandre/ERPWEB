@@ -63,4 +63,25 @@ namespace Core.Erp.Info.CuentasPorPagar
             info_comprobante = new ct_cbtecble_Info();
         }
     }
+
+    public class cp_orden_pago_aprobacion_Info
+    {
+        public decimal IdTransaccionSession { get; set; }
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdOrdenPago { get; set; }
+        public System.DateTime fecha_ini { get; set; }
+        public System.DateTime fecha_fin { get; set; }
+        public string IdUsuario { get; set; }
+        public string IdUsuarioAprobacion { get; set; }
+        public string MotivoAprobacion { get; set; }
+        public string IdEstadoAprobacion { get; set; }
+        public DateTime FechaAprobacion { get; set; }
+
+        public cp_orden_pago_aprobacion_Info()
+        {
+            fecha_ini = DateTime.Now.Date.AddMonths(-1);
+            fecha_fin = DateTime.Now.Date;
+        }
+    }
 }
