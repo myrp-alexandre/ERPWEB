@@ -73,18 +73,33 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             string[] array = Ids.Split(',');
 
-            var resultado_orden = bus_orden_pago.aprobarOP(IdEmpresa, array, MotivoAprobacion, IdUsuarioAprobacion);
+            if (string.IsNullOrEmpty(array.ToString()))
+            {
+                var resultado_orden = bus_orden_pago.aprobarOP(IdEmpresa, array, MotivoAprobacion, IdUsuarioAprobacion);
+                return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            
 
-            return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+            
         }
 
         public JsonResult rechazar(int IdEmpresa = 0, string Ids = "", string MotivoAprobacion = "", string IdUsuarioAprobacion = "")
         {
             string[] array = Ids.Split(',');
 
-            var resultado_orden = bus_orden_pago.rechazarOP(IdEmpresa, array, MotivoAprobacion, IdUsuarioAprobacion);
-
-            return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+            if (string.IsNullOrEmpty(array.ToString()))
+            {
+                var resultado_orden = bus_orden_pago.rechazarOP(IdEmpresa, array, MotivoAprobacion, IdUsuarioAprobacion);
+                return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 
