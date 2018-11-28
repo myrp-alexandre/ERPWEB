@@ -34,7 +34,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "AprobacionOC", new { Area = "Compras" })',
+            url: '@Url.Action("aprobar", "AprobacionOC", new { Area = "Compras" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -42,23 +42,24 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $("#myform").submit();
+                GridViewPartial_aprobacion_oc.PerformCallback();
             },
             error: function (error) {
             }
         });
     }
 
-    function rechazar() {
+    function reprobar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IDs: selectedIDs,
-            IdEstadoAprobacion: $("#btn_rechazar").attr('estado'),
+            IdEstadoAprobacion: $("#btn_reprobar").attr('estado'),
         }
         $("#btn_aprobar").attr("disabled", true);
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "AprobacionOC", new { Area = "Compras" })',
+            url: '@Url.Action("reprobar", "AprobacionOC", new { Area = "Compras" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -66,6 +67,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $("#myform").submit();
+                GridViewPartial_aprobacion_oc.PerformCallback();
             },
             error: function (error) {
             }
@@ -167,7 +169,7 @@
 
                     <div class="box-footer">
                         <button type="button" class="btn btn-primary" id="btn_aprobar" estado="APRO" onclick="aprobar();">Aprobar</button>
-                        <button type="button" class="btn btn-primary" id="btn_rechazar" estado="REPRO" onclick="rechazar();">Rechazar</button>
+                        <button type="button" class="btn btn-danger" id="btn_reprobar" estado="REPRO" onclick="reprobar();">Reprobar</button>
                     </div>
 
                 </div>
