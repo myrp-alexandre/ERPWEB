@@ -526,7 +526,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

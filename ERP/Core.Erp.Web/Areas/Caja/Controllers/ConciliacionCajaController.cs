@@ -208,7 +208,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
             if (i_validar.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
             {
-                if (i_validar.IdEntidad == null)
+                if (i_validar.IdEntidad == 0)
                 {
                     msg = "Seleccione el beneficiario";
                     return false;
