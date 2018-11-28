@@ -39,7 +39,7 @@
         settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Fecha_Pago";
+            column.FieldName = "Fecha";
             column.Caption = "Fecha pago";
             column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "d";
@@ -80,7 +80,7 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_004", "CuentasPorPagarReportes", new { Area = "Reportes", IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble").ToString() }, Request.Url.Scheme) + "');\"></span>");
+                //ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_004", "CuentasPorPagarReportes", new { Area = "Reportes", IdTipoCbte = DataBinder.Eval(c.DataItem, "IdTipoCbte").ToString(), IdCbteCble = DataBinder.Eval(c.DataItem, "IdCbteCble").ToString() }, Request.Url.Scheme) + "');\"></span>");
             });
             column.Width = Unit.Percentage(5);
         });

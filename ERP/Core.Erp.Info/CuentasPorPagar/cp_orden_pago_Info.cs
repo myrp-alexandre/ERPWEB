@@ -74,6 +74,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public System.DateTime fecha_fin { get; set; }
         public string IdUsuario { get; set; }
         public string IdUsuarioAprobacion { get; set; }
+        [StringLength(1000, MinimumLength = 0, ErrorMessage = "La observación debe tener máximo 500 caracteres")]
         public string MotivoAprobacion { get; set; }
         public string IdEstadoAprobacion { get; set; }
         public DateTime FechaAprobacion { get; set; }

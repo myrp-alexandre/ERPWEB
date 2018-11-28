@@ -235,7 +235,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdEmpresa_cxp=info.IdEmpresa,
                         IdOrdenPago = info.IdOrdenPago,
                         IdFormaPago = info.IdFormaPago,
-                        
+                        Secuencia = 1,
                         IdTipoCbte_cxp = (item.IdTipoCbte_cxp==0| item.IdTipoCbte_cxp == null)? info.info_comprobante.IdTipoCbte:item.IdTipoCbte_cxp,
                         IdCbteCble_cxp = (item.IdCbteCble_cxp == 0 | item.IdCbteCble_cxp == null) ? info.info_comprobante.IdCbteCble : item.IdCbteCble_cxp,
                         Fecha_Pago =info.Fecha,
@@ -332,23 +332,22 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        public bool aprobarOP(List<cp_orden_pago_Info> Lista)
+        public bool aprobarOP(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
-                int IdEmpresa = 0;
-                if (Lista.Count() > 0)
-                    IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
-                IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
-
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     foreach (var item in Lista)
                     {
-                        cp_orden_pago Entity = Context.cp_orden_pago.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdOrdenPago == item.IdOrdenPago);
+                        var IdOrdenPagoAprobacion = Convert.ToDecimal(item);
+                        cp_orden_pago Entity = Context.cp_orden_pago.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdOrdenPago == IdOrdenPagoAprobacion);
                         if (Entity != null)
                         {
-                            Entity.IdEstadoAprobacion = item.IdEstadoAprobacion;
+                            Entity.IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString();
+                            Entity.MotivoAprobacion = MotivoAprobacion;
+                            Entity.IdUsuarioAprobacion = IdUsuarioAprobacion;
+                            Entity.FechaAprobacion = DateTime.Now;
                         }
                         Context.SaveChanges();
                     }                    
@@ -362,23 +361,27 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        public bool rechazarOP(List<cp_orden_pago_Info> Lista)
+        public bool rechazarOP(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
-                int IdEmpresa = 0;
-                if (Lista.Count() > 0)
-                    IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
-                IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
-
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     foreach (var item in Lista)
                     {
-                        cp_orden_pago Entity = Context.cp_orden_pago.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdOrdenPago == item.IdOrdenPago);
+                        var IdOrdenPagoAprobacion = Convert.ToDecimal(item);
+                        cp_orden_pago Entity = Context.cp_orden_pago.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdOrdenPago == IdOrdenPagoAprobacion);
                         if (Entity != null)
                         {
-                            Entity.IdEstadoAprobacion = item.IdEstadoAprobacion;
+                            Entity.IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.REPRO.ToString();
+                            Entity.MotivoAprobacion = MotivoAprobacion;
+                            Entity.IdUsuarioAprobacion = IdUsuarioAprobacion;
+                            Entity.FechaAprobacion = DateTime.Now;
+
+                            Entity.IdUsuarioUltAnu = IdUsuarioAprobacion;
+                            Entity.Fecha_UltAnu = DateTime.Now;
+                            Entity.MotivoAnu = MotivoAprobacion;
+
                         }
                         Context.SaveChanges();
                     }
