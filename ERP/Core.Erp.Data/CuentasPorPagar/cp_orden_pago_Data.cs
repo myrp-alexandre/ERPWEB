@@ -378,6 +378,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                             Entity.IdUsuarioAprobacion = IdUsuarioAprobacion;
                             Entity.FechaAprobacion = DateTime.Now;
 
+                            Entity.Estado = "I";
+
                             Entity.IdUsuarioUltAnu = IdUsuarioAprobacion;
                             Entity.Fecha_UltAnu = DateTime.Now;
                             Entity.MotivoAnu = MotivoAprobacion;

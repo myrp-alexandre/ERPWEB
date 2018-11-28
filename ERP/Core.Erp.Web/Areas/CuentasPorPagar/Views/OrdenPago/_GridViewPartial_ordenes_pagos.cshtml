@@ -54,6 +54,11 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
+
+            if (Convert.ToString(e.GetValue("IdEstadoAprobacion")) == "APRO")
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
         };
         settings.Columns.Add(c =>
         {

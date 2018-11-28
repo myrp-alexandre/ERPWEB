@@ -75,12 +75,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (string.IsNullOrEmpty(array.ToString()))
             {
-                var resultado_orden = bus_orden_pago.aprobarOP(IdEmpresa, array, MotivoAprobacion, IdUsuarioAprobacion);
-                return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+                return Json(true, JsonRequestBehavior.AllowGet);                
             }
             else
             {
-                return Json(true, JsonRequestBehavior.AllowGet);
+                var resultado_orden = bus_orden_pago.aprobarOP(IdEmpresa, array, MotivoAprobacion, IdUsuarioAprobacion);
+                return Json(resultado_orden, JsonRequestBehavior.AllowGet);
             }
             
 
@@ -93,12 +93,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (string.IsNullOrEmpty(array.ToString()))
             {
-                var resultado_orden = bus_orden_pago.rechazarOP(IdEmpresa, array, MotivoAprobacion, IdUsuarioAprobacion);
-                return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(true, JsonRequestBehavior.AllowGet);
+                var resultado_orden = bus_orden_pago.rechazarOP(IdEmpresa, array, MotivoAprobacion, IdUsuarioAprobacion);
+                return Json(resultado_orden, JsonRequestBehavior.AllowGet);                
             }
         }
     }
