@@ -65,20 +65,20 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstadoAprobacion_cat")) == "xAPRO")
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
-
-                    settings.HtmlRowPrepared = (s, e) =>
+                    if (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstadoAprobacion_cat")) == "xAPRO")
                     {
-                        ViewContext.Writer.Write(
-                                    Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") }) + "&nbsp;" +
-                                            Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") },
-                                                new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                        );
-                    };
+                        settings.HtmlRowPrepared = (s, e) =>
+                        {
+                            ViewContext.Writer.Write(
+                                   Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") }) + "&nbsp;" +
+                                     Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") },
+                                       new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                            );
+                        };
+                    }
                 }
-
             });
             c.SetHeaderTemplateContent(tc =>
             {
