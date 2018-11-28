@@ -302,11 +302,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
         }
 
-        public bool aprobarOP(List<cp_orden_pago_Info> Lista)
+        public bool aprobarOP(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
-                return oData.aprobarOP(Lista);
+                return oData.aprobarOP(IdEmpresa, Lista, MotivoAprobacion, IdUsuarioAprobacion);
             }
             catch (Exception)
             {
@@ -315,11 +315,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
         }
 
-        public bool rechazarOP(List<cp_orden_pago_Info> Lista)
+        public bool rechazarOP(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
-                return oData.rechazarOP(Lista);
+                return oData.rechazarOP(IdEmpresa, Lista, MotivoAprobacion, IdUsuarioAprobacion);
             }
             catch (Exception)
             {
