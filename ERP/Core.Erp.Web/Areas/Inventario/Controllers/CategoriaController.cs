@@ -32,7 +32,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         private void cargar_combos(int IdEmpresa)
         {
-            var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, false);
+            var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_ctacble;
         }
         #endregion

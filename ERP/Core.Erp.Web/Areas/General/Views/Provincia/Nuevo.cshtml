@@ -50,7 +50,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Cod_Region">Región*</label>
-                    @Html.DropDownListFor(q => q.Cod_Region, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.Cod_Region, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.Cod_Region, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -160,7 +160,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            Session["in_transferencia_det_Info"] = null;
+            List_in_transferencia_det.set_list(null);
             return RedirectToAction("Index");
         }
         public ActionResult Anular(int IdEmpresa = 0, int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)

@@ -61,12 +61,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult CXP_004( int IdTipoCbte = 0, decimal IdCbteCble = 0)
+        public ActionResult CXP_004( decimal IdOrdenPago = 0)
         {
             CXP_004_Rpt model = new CXP_004_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
-            model.p_IdTipoCbte.Value = IdTipoCbte;
-            model.p_IdCbteCble.Value = IdCbteCble;
+            model.p_IdOrdenPago.Value = IdOrdenPago;
             model.usuario = SessionFixed.IdUsuario;
             model.empresa = SessionFixed.NomEmpresa;
             model.RequestParameters = false;

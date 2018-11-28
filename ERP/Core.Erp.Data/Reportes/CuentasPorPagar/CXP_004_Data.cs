@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
 {
     public class CXP_004_Data
     {
-        public List<CXP_004_Info> get_list(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
+        public List<CXP_004_Info> get_list(int IdEmpresa, decimal IdOrdenPago)
         {
             try
             {
@@ -18,11 +18,13 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                 {
                     Lista = (from q in Context.VWCXP_004
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdTipoCbte == IdTipoCbte
-                             && q.IdCbteCble == IdCbteCble
+                             && q.IdOrdenPago == IdOrdenPago
+
+
                              select new CXP_004_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
+                                 IdOrdenPago = q.IdOrdenPago,
                                  IdTipoCbte = q.IdTipoCbte,
                                  IdCbteCble = q.IdCbteCble,
                                  secuencia = q.secuencia,
@@ -43,8 +45,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  Descripcion = q.Descripcion,
                                  GeneraDiario = q.GeneraDiario,
                                  IdEstadoAprobacion = q.IdEstadoAprobacion,
-                                 estado_apro = q.estado_apro,
-                                 IdOrdenPago = q.IdOrdenPago
+                                 estado_apro = q.estado_apro
                              }).ToList();
                 }
                 return Lista;
