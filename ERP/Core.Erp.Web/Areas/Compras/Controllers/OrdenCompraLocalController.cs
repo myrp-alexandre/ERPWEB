@@ -75,14 +75,29 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         #region Index
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos(model.IdEmpresa);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            cargar_combos(model.IdEmpresa);
+            return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_ordencompralocal()
+        public ActionResult GridViewPartial_ordencompralocal(int IdSucursal, DateTime? fecha_ini, DateTime? fecha_fin)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_ordencompra.get_list(IdEmpresa, true);
+            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(fecha_ini);
+            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(fecha_fin);
+            ViewBag.IdSucursal = IdSucursal == 0 ? 0 : Convert.ToInt32(IdSucursal);
+            var model = bus_ordencompra.get_list(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin, true);
             return PartialView("_GridViewPartial_ordencompralocal", model);
         }
 

@@ -1,19 +1,45 @@
-﻿@model Core.Erp.Info.Helps.cl_filtros_Info
+﻿@model Core.Erp.Info.Compras.com_orden_aprobacion_Info
 
 @{
-    ViewBag.Title = "Orden compra";
+    ViewBag.Title = "Aprobación orden de compra";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
+<script type="text/javascript">
+
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        e.customArgs["selectedIDs"] = selectedIDs;
+    };
+
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdOdenCompra", GetSelectedFieldValuesCallback);
+    };
+
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    };
+
+    function ocultar_mostrar_div() {
+        var d = $("#MotivoAprobacion").val();
+        if (d == "MotivoAprobacion") {
+            $("#mostrar_aprobacion").hide();
+        } else {
+            $("#mostrar_reprobacion").show();
+        }
+    }
 
 
+    </script>
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Index", "OrdenCompraLocal", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "AprobacionOC", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id="IdTransaccionSession"})
     <div class="box ">
         <div class="box-header with-border">
             <div class="row">
@@ -99,14 +125,45 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_ordencompralocal", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
+            @Html.Action("GridViewPartial_aprobacion_oc", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
 
-  </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12" id="mostrar_aprobacion">
+                        <div class="form-group">
+                            <label for="MotivoAprobacion">Motivo aprobación</label>
+                            @Html.TextBoxFor(q => q.MotivoAprobacion, new { @class = "form-control", @id = "MotivoAprobacion" })
+                            @Html.ValidationMessageFor(q => q.MotivoAprobacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="mostrar_reprobacion">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="MotivoReprobacion">Motivo reprobación</label>
+                            @Html.TextBoxFor(q => q.MotivoReprobacion, new { @class = "form-control", @id = "MotivoReprobacion" })
+                            @Html.ValidationMessageFor(q => q.MotivoReprobacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aprobar</button>
+                        <button type="button" class="btn btn-primary" onclick="AddFacturas();">Reprobar</button>
+                    </div>
+
+                </div>
         <!-- /.box-body -->
         <div class="box-footer">
             [@Session["IdEmpresa"]] @Session["nom_empresa"]
         </div>
         <!-- /.box-footer-->
-    </div>
 
+
+
+
+        </div>
 }
