@@ -51,9 +51,13 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("Estado")) == "I")
+            if (Convert.ToString(e.GetValue("Estado")) == "I" )
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
+            }
+            if (Convert.ToString(e.GetValue("IdEstadoAprobacion_cat")) == "APRO" )
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
             }
         };
         settings.Columns.Add(c =>
@@ -63,11 +67,17 @@
             {
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
+                    if (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstadoAprobacion_cat")) == "xAPRO")
+                    {
+                        settings.HtmlRowPrepared = (s, e) =>
+                        {
+                            ViewContext.Writer.Write(
+                                   Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") }) + "&nbsp;" +
+                                     Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") },
+                                       new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                            );
+                        };
+                    }
                 }
             });
             c.SetHeaderTemplateContent(tc =>
@@ -81,10 +91,10 @@
             c.Width = Unit.Pixel(150);
         });
         settings.Columns.Add("pr_codigo", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(10);
-        settings.Columns.Add("Nombre", "Comprador").Width = Unit.Percentage(10);
-        settings.Columns.Add("oc_observacion", "Observación").Width = Unit.Percentage(20);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10);
+        settings.Columns.Add("pe_nombreCompleto", "Proveedor").Width = Unit.Percentage(40);
+        settings.Columns.Add("oc_observacion", "Observación").Width = Unit.Percentage(30);
+        settings.Columns.Add("IdEstadoAprobacion_cat", "Estado Aprobación").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";

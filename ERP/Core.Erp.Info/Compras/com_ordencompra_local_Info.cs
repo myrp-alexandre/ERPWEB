@@ -27,10 +27,6 @@ namespace Core.Erp.Info.Compras
         public bool EstadoBool { get; set; }
         [Required(ErrorMessage = ("el campo estado de aprobación es obligatorio"))]
         public string IdEstadoAprobacion_cat { get; set; }
-        public Nullable<System.DateTime> co_fecha_aprobacion { get; set; }
-        public string IdUsuario_Aprueba { get; set; }
-        public string IdUsuario_Reprue { get; set; }
-        public Nullable<System.DateTime> co_fechaReproba { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltMod { get; set; }
@@ -38,7 +34,6 @@ namespace Core.Erp.Info.Compras
         public string IdUsuarioUltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
         public string MotivoReprobacion { get; set; }
-
         public Nullable<decimal> IdDepartamento { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<int> IdMotivo { get; set; }
@@ -52,6 +47,7 @@ namespace Core.Erp.Info.Compras
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string Nombre { get; set; }
+        public string Su_Descripcion { get; set; }
 
         public List<com_ordencompra_local_det_Info> lst_det { get; set; }
 

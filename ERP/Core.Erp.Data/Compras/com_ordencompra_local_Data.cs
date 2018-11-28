@@ -35,7 +35,10 @@ namespace Core.Erp.Data.Compras
                                      oc_fecha = q.oc_fecha,
 
                                      EstadoBool = q.Estado == "A" ? true : false,
-                                     pe_nombreCompleto = q.pe_nombreCompleto
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     pr_codigo = q.Codigo,
+                                     Nombre = q.pe_nombreCompleto,
+                                     Su_Descripcion = q.Su_Descripcion
 
                                  }).ToList();
                     else
@@ -59,6 +62,9 @@ namespace Core.Erp.Data.Compras
 
                                      EstadoBool = q.Estado == "A" ? true : false,
                                      pe_nombreCompleto = q.pe_nombreCompleto,
+                                     pr_codigo = q.Codigo,
+                                     Nombre = q.pe_nombreCompleto
+
                                  }).ToList();
                 }
                 return Lista;
@@ -260,6 +266,29 @@ namespace Core.Erp.Data.Compras
             }
         }
 
+        public bool AprobarOC(com_ordencompra_local_Info info)
+        {
+            try
+            {
+                using (Entities_compras Context = new Entities_compras())
+                {
+                    com_ordencompra_local Entity = Context.com_ordencompra_local.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdOrdenCompra == info.IdOrdenCompra).FirstOrDefault();
+                    if (Entity == null) return false;
+
+                    Entity.IdEstadoAprobacion_cat = info.IdEstadoAprobacion_cat;
+                    
+                    Context.SaveChanges();
+
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool anularDB(com_ordencompra_local_Info info)
         {
             try
@@ -271,6 +300,7 @@ namespace Core.Erp.Data.Compras
 
                     Entity.Estado = "I";
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                    Entity.IdEstadoAprobacion_cat = "ANU";
                     Entity.FechaHoraAnul = DateTime.Now;
 
                     Context.SaveChanges();
@@ -305,7 +335,13 @@ namespace Core.Erp.Data.Compras
                             IdOrdenCompra = q.IdOrdenCompra,
                             IdEstadoAprobacion_cat = q.IdEstadoAprobacion_cat,
                             oc_observacion = q.oc_observacion,
-                            Estado = q.Estado,
+                            EstadoBool = q.Estado == "A" ? true : false,
+                            oc_fecha = q.oc_fecha,
+                            Su_Descripcion = q.Su_Descripcion,
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            IdTerminoPago = q.TerminoPago
+                            
+
                     }).ToList();
                 }
                 return List;

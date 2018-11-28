@@ -83,5 +83,17 @@ namespace Core.Erp.Bus.Compras
                 throw;
             }
         }
+        public bool AprobarOC(com_ordencompra_local_Info info)
+        {
+            try
+            {
+                return odata.AprobarOC(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

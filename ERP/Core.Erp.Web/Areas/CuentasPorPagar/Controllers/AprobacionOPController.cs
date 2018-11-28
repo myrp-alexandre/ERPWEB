@@ -55,40 +55,75 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
         }
         #endregion
-        public ActionResult GridViewPartial_AprobacionOP(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal)
+        public ActionResult GridViewPartial_AprobacionOP(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var det = List_aprobacion_op.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            ViewBag.fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
-            ViewBag.fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(fecha_ini);
+            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(fecha_fin);
             ViewBag.IdSucursal = IdSucursal == 0 ? 0 : Convert.ToInt32(IdSucursal);
 
-            List_aprobacion_op = bus_orden_pago.get_list_aprobacion(IdEmpresa, ViewBag.fecha_ini, ViewBag.fecha_fin, IdSucursal);
-            return PartialView("_GridViewPartial_AprobacionOP", List_aprobacion_op);
+            //var Lista = bus_orden_pago.get_list_aprobacion(IdEmpresa, ViewBag.fecha_ini, ViewBag.fecha_fin, IdSucursal);
+            //List_aprobacion_op.set_list(Lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            //return PartialView("_GridViewPartial_AprobacionOP", List_aprobacion_op.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)));
+
+            var model = bus_orden_pago.get_list_aprobacion(IdEmpresa, ViewBag.fecha_ini, ViewBag.fecha_fin, IdSucursal);
+            return PartialView("_GridViewPartial_AprobacionOP", model);
         }
 
-        //public JsonResult guardar(int IdEmpresa = 0, string Ids = "")
-        //{
-        //    string[] array = Ids.Split(',');
-        //    List<cp_orden_pago_Info> lst_ordenes_pagos_aprobacion = new List<cp_orden_pago_Info>();
-        //    var output = array.GroupBy(q => q).ToList();
-        //    foreach (var item in output)
-        //    {
-        //        cp_orden_pago_Info info = new cp_orden_pago_Info
-        //        {
-        //            IdEmpresa = IdEmpresa,
-        //            IdOrdenPago = Convert.ToInt32(item.IdOrdenPago),
-        //        };
+        public JsonResult aprobar(int IdEmpresa = 0, string Ids = "")
+        {
+            string[] array = Ids.Split(',');
+            List<cp_orden_pago_Info> lst_ordenes_pago_aprobacion = new List<cp_orden_pago_Info>();
+            var output = array.GroupBy(q => q).ToList();
 
-        //        lst_ordenes_pagos_aprobacion.Add(info);
-        //    }
+            foreach (var item in output)
+            {
+                cp_orden_pago_Info info = new cp_orden_pago_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    IdOrdenPago = Convert.ToInt32(item.Key),
+                    IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString()
+                };
 
-        //    var resultado = bus_orden_pago.(lst_ordenes_pagos_aprobacion);
+                lst_ordenes_pago_aprobacion.Add(info);
+            }
 
-        //    return Json(resultado, JsonRequestBehavior.AllowGet);
-        //}
+            DateTime fecha_ini = DateTime.Now;
+            DateTime fecha_fin = DateTime.Now;
+
+            var resultado_orden = bus_orden_pago.aprobarOP(lst_ordenes_pago_aprobacion);
+
+            return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult rechazar(int IdEmpresa = 0, string Ids = "")
+        {
+            string[] array = Ids.Split(',');
+            List<cp_orden_pago_Info> lst_ordenes_pago_aprobacion = new List<cp_orden_pago_Info>();
+            var output = array.GroupBy(q => q).ToList();
+
+            foreach (var item in output)
+            {
+                cp_orden_pago_Info info = new cp_orden_pago_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    IdOrdenPago = Convert.ToInt32(item.Key),
+                    IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString()
+                };
+
+                lst_ordenes_pago_aprobacion.Add(info);
+            }
+
+            DateTime fecha_ini = DateTime.Now;
+            DateTime fecha_fin = DateTime.Now;
+
+            var resultado_orden = bus_orden_pago.rechazarOP(lst_ordenes_pago_aprobacion);
+
+            return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+        }
     }
 
     public class orden_pago_aprobacion_List
