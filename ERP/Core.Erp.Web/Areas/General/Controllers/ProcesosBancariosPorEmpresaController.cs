@@ -67,7 +67,7 @@ namespace Core.Erp.Web.Areas.General
         public ActionResult Anular(int  IdEmpresa=0, int IdProceso = 0)
         {
             cargar_combos();
-            tb_banco_procesos_bancarios_x_empresa_Info model = bus_proceso_x_empresa.get_info(IdProceso);
+            tb_banco_procesos_bancarios_x_empresa_Info model = bus_proceso_x_empresa.get_info(IdEmpresa, IdProceso);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
