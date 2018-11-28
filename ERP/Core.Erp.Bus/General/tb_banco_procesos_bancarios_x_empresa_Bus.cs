@@ -36,11 +36,11 @@ namespace Core.Erp.Bus.General
                 throw;
             }
         }
-        public tb_banco_procesos_bancarios_x_empresa_Info get_info(int IdBanco)
+        public tb_banco_procesos_bancarios_x_empresa_Info get_info(int IdEmpresa, int IdProceso)
         {
             try
             {
-                return odata.get_info(IdBanco);
+                return odata.get_info(IdEmpresa, IdProceso);
             }
             catch (Exception)
             {

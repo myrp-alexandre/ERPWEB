@@ -63,6 +63,25 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
+
+
+        public cp_retencion_Info get_info(int IdEmpresa_Ogiro, decimal IdCbteCble_Ogiro, int IdTipoCbte_Ogiro)
+        {
+            try
+            {
+                cp_retencion_Info info = new cp_retencion_Info();
+
+                info = odata.get_info(IdEmpresa_Ogiro,IdCbteCble_Ogiro, IdTipoCbte_Ogiro);
+                if (info == null)
+                    info = new cp_retencion_Info();
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public cp_retencion_Info get_info_factura(int IdEmpresa, int IdTipoCbte_Ogiro, decimal IdCbteCble_Ogiro)
         {
             try
