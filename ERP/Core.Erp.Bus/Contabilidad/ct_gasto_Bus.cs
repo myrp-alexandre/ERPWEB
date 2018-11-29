@@ -36,5 +36,52 @@ namespace Core.Erp.Bus.Contabilidad
                 throw;
             }
         }
+        public ct_gasto_Info GetId(int IdEmpresa)
+        {
+            try
+            {
+                return odata.GetInfo(IdEmpresa);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool GuardarDB(ct_gasto_Info info)
+        {
+            try
+            {
+                return odata.GuardarDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //public bool ModificarDB(ct_gasto_Info info)
+        //{
+        //    try
+        //    {
+        //        return odata.ModificarDB(info);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        //public bool AnularDB(ct_gasto_Info info)
+        //{
+        //    try
+        //    {
+        //        return odata.AnularDB(info);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
     }
 }

@@ -1,6 +1,6 @@
-﻿@model Core.Erp.Info.General.tb_TarjetaCredito_Info
+﻿@model Core.Erp.Info.Contabilidad.ct_gasto_Info
 @{
-    ViewBag.Title = "Nueva tarjeta de crédito";
+    ViewBag.Title = "Rubro de gastos";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -8,15 +8,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Nuevo", "TarjetaCredito", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "Gasto", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdUsuario)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="Codigo">Nombre*</label>
-                    @Html.TextBoxFor(q => q.NombreTarjeta, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.NombreTarjeta, "", new { @class = "text-danger" })
+                    <label for="Codigo">Descripción*</label>
+                    @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Codigo">Cuenta Contable*</label>
+                    @Html.TextBoxFor(q => q.IdCtaCble, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.IdCtaCble, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -24,7 +37,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","TarjetaCredito",new { Area = "General" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Gasto",new { Area = "Contabilidad" },null)">Cancelar</a>
     </div>
 
     @section Scripts {

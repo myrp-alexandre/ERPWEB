@@ -75,5 +75,78 @@ namespace Core.Erp.Data.Contabilidad
                 throw;
             }
         }
+
+        public int GetId(int IdEmpresa)
+        {
+            try
+            {
+                int ID = 1;
+
+                using (Entities_contabilidad db = new Entities_contabilidad())
+                {
+                    var lst = db.ct_gasto.Where(q => q.IdEmpresa == IdEmpresa).ToList();
+                    if (lst.Count > 0)
+                        ID = lst.Max(q => q.IdGasto) + 1;
+                }
+
+                return ID;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool GuardarDB(ct_gasto_Info info)
+        {
+            try
+            {
+                Entities_contabilidad db = new Entities_contabilidad();
+                #region Cambio producto
+                db.ct_gasto.Add(new ct_gasto
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdGasto = GetId(info.IdEmpresa),
+                    Descripcion = info.Descripcion,
+                    IdCtaCble = info.IdCtaCble,
+                    Estado = true,
+                    IdUsuario = info.IdUsuario,
+                    Fecha_Transac = DateTime.Now
+                });
+
+                db.SaveChanges();
+                #endregion
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool AnularDB(ct_gasto_Info info)
+        {
+            try
+            {
+                using (Entities_contabilidad db = new Entities_contabilidad())
+                {
+                    var Entity = db.ct_gasto.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdGasto == info.IdGasto).FirstOrDefault();
+                    if (Entity == null) return false;
+
+                    Entity.Estado = false;
+                    Entity.IdUsuarioUltAnu = info.IdUsuario;
+                    Entity.Fecha_UltAnu = DateTime.Now;
+                    Entity.MotivoAnu = info.MotiAnu;
+
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
