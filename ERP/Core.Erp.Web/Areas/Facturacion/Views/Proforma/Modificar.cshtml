@@ -231,40 +231,8 @@
         $("#pf_fecha").change(function () {
             cargar_fecha_vencimiento();
         });
-        $("#IdSucursal").change(function () {
-            cargar_bodega();
-        });
 
     });
-
-    function cargar_bodega() {
-        $("#IdBodega").empty();
-
-        var sucursal = $("#IdSucursal").val();
-
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: sucursal
-        }
-
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("cargar_bodega", "Proforma", new { Area = "Facturacion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $.each(data, function (i, row) {
-                    $("#IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
-                });
-            },
-            error: function (error) {
-            }
-        });
-    };
 
     function MostrarModal() {
         GridView_LoteProforma.PerformCallback();

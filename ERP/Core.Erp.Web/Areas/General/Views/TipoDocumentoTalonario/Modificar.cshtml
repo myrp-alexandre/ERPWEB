@@ -136,7 +136,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.FechaCaducidad, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaCaducidad" })
+                        @Html.DevExpress().DateEditFor(q => q.FechaCaducidad, settings =>
+                           {
+                               settings.Name = "FechaCaducidad";
+                               settings.Properties.UseMaskBehavior = true;
+                               settings.Properties.EditFormat = EditFormat.Date;
+                               settings.Properties.EditFormatString = "dd/MM/yyyy";
+                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           }).GetHtml()
                         @Html.ValidationMessageFor(q => q.FechaCaducidad, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -156,9 +164,6 @@
 <script>
     $(function () {
 
-        $('#FechaCaducidad').datepicker({
-            autoclose: true
-        })
         $("#es_Documento_Electronico").change(function () {
             ocultar_mostrar_div_autorizacion();
         });
