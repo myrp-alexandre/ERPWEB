@@ -141,6 +141,7 @@ namespace Core.Erp.Info.RRHH
         //
         public int? IdTipoNomina { get; set; }
         public string Empleado { get; set; }
+        [Required(ErrorMessage = ("el campo número de documento es obligatorio"))]
         public string pe_cedulaRuc { get; set; }
         public ro_empleado_Info()
         {
