@@ -19,6 +19,7 @@ namespace Core.Erp.Data
             this.ct_anio_fiscal_x_cuenta_utilidad = new HashSet<ct_anio_fiscal_x_cuenta_utilidad>();
             this.ct_cbtecble_det = new HashSet<ct_cbtecble_det>();
             this.ct_plancta1 = new HashSet<ct_plancta>();
+            this.ct_gasto = new HashSet<ct_gasto>();
         }
     
         public int IdEmpresa { get; set; }
@@ -48,5 +49,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ct_plancta> ct_plancta1 { get; set; }
         public virtual ct_plancta ct_plancta2 { get; set; }
         public virtual ct_plancta_nivel ct_plancta_nivel { get; set; }
+        public virtual ICollection<ct_gasto> ct_gasto { get; set; }
     }
 }

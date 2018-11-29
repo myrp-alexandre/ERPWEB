@@ -46,6 +46,7 @@ namespace Core.Erp.Data
         public DbSet<vwct_cbtecble_con_ctacble_acreedora> vwct_cbtecble_con_ctacble_acreedora { get; set; }
         public DbSet<ct_parametro> ct_parametro { get; set; }
         public DbSet<vwct_RevisionContableFacturas> vwct_RevisionContableFacturas { get; set; }
+        public DbSet<ct_gasto> ct_gasto { get; set; }
     
         public virtual ObjectResult<generarATS_Result> generarATS(Nullable<int> idempresa, Nullable<int> idPeriodo)
         {

@@ -226,6 +226,7 @@
     <Compile Include="Contabilidad\ct_cbtecble_Data.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_det_Data.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_tipo_Data.cs" />
+    <Compile Include="Contabilidad\ct_gasto_Data.cs" />
     <Compile Include="Contabilidad\ct_grupocble_Data.cs" />
     <Compile Include="Contabilidad\ct_parametro_Data.cs" />
     <Compile Include="Contabilidad\ct_periodo_Data.cs" />
@@ -342,6 +343,9 @@
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="ct_cbtecble_tipo.cs">
+      <DependentUpon>Model_contabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ct_gasto.cs">
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="ct_grupocble.cs">

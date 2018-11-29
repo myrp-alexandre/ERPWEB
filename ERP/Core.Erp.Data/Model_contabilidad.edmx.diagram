@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="88d84dbdfe4b4df5b2a7f9d3b97864ff" Name="Diagram1">
+      <Diagram DiagramId="88d84dbdfe4b4df5b2a7f9d3b97864ff" Name="Diagram1" ZoomLevel="90">
         <EntityTypeShape EntityType="Model_contabilidad.ct_anio_fiscal" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_contabilidad.ct_cbtecble" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
@@ -41,6 +41,8 @@
         <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" />
         <EntityTypeShape EntityType="Model_contabilidad.vwct_RevisionContableFacturas" Width="1.5" PointX="12.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Model_contabilidad.ct_gasto" Width="1.5" PointX="3" PointY="30.125" />
+        <AssociationConnector Association="Model_contabilidad.FK_ct_gasto_ct_plancta" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

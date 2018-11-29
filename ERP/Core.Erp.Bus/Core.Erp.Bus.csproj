@@ -88,6 +88,7 @@
     <Compile Include="Contabilidad\ct_cbtecble_Bus.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_det_Bus.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_tipo_Bus.cs" />
+    <Compile Include="Contabilidad\ct_gasto_Bus.cs" />
     <Compile Include="Contabilidad\ct_grupocble_Bus.cs" />
     <Compile Include="Contabilidad\ct_parametro_Bus.cs" />
     <Compile Include="Contabilidad\ct_periodo_Bus.cs" />

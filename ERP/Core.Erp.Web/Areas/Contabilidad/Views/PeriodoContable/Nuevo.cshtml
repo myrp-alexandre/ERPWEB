@@ -135,25 +135,18 @@
         var mes = $("#pe_mes").val();
         var anio = $("#IdanioFiscal").val();
         var dia_inicio = 1;
+        var pad = "00"
+        var mes_format = pad.substring(0, pad.length-mes.length) + mes;
         
-        var fecha_texto_inicio = anio + "-" + mes + "-" + dia_inicio
-        //var dia_inicio = new Date(Date.UTC(fecha_texto_inicio));
-        var fecha_inicio = Date.parse(fecha_texto_inicio);
-        var fecha_inicio_setear = new Date(fecha_inicio);
+        var periodo = anio + "-" + mes_format;
+        var fecha_texto_inicio = anio + "-" + mes_format + "-" + dia_inicio;
+
+        var dia_inicio = Date.parse(fecha_texto_inicio);
         var dia_fin = new Date(Date.UTC(anio, mes));
 
-        //var fecha_texto_fin = anio + "-" + mes + "-" + dia_fin + "00:00:00 UTC";
-        //var fecha_fin = Date.parse(fecha_texto_fin);        
+        pe_FechaIni.SetValue(new Date(dia_inicio));
+        pe_FechaFin.SetValue(dia_fin);
 
-        //fecha_inicio_setear = new Date(fecha_inicio);
-        //fecha_fin_setear = new Date(fecha_fin);
-
-        pe_FechaIni.SetValue(fecha_inicio_setear)
-        pe_FechaFin.SetValue(dia_fin)
-
-        //var periodo = $("#IdPeriodo").val();
-        var periodo = (anio.GetFullYear + mes.GetFullMonth);
-        console.log(periodo);
-        IdPeriodo.SetValue(periodo)
+        $("#IdPeriodo").val(periodo);
     }
 </script>
