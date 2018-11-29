@@ -10,7 +10,7 @@ namespace Core.Erp.Data.Inventario
     {
 
 
-        public List<in_transferencia_Info> get_list(int IdEmpresa)
+        public List<in_transferencia_Info> get_list(int IdEmpresa, int IdSucursal, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
@@ -20,6 +20,9 @@ namespace Core.Erp.Data.Inventario
                 {
                     Lista = (from q in Context.vwin_Transferencias
                              where q.IdEmpresa == IdEmpresa
+                             && q.tr_fecha>=FechaInicio
+                             && q.tr_fecha<=FechaFin
+                             && q.IdSucursalDest==IdSucursal
                              select new in_transferencia_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

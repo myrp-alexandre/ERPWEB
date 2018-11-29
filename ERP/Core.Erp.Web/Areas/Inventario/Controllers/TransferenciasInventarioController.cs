@@ -47,23 +47,31 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #region vistas
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos(Convert.ToInt32( SessionFixed.IdEmpresa));
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
+
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_transferencias(DateTime? fecha_ini, DateTime? fecha_fin)
+        public ActionResult GridViewPartial_transferencias(int IdSucursal, DateTime? fecha_ini, DateTime? fecha_fin)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<in_transferencia_Info> model = bus_trnferencia.get_list(IdEmpresa);
+            ViewBag.IdSucursal = IdSucursal == 0 ? 0 : Convert.ToInt32(IdSucursal);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            List<in_transferencia_Info> model = bus_trnferencia.get_list(IdEmpresa, IdSucursal, ViewBag. fecha_ini, ViewBag. fecha_fin);
             return PartialView("_GridViewPartial_transferencias", model);
         }
 
@@ -80,6 +88,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
         #endregion
+
 
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)

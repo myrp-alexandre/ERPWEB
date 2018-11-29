@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Inventario
         in_transferencia_det_Data odata_det = new in_transferencia_det_Data();
         in_Ing_Egr_Inven_Bus bus_ingreso = new in_Ing_Egr_Inven_Bus();
         in_producto_x_tb_bodega_Costo_Historico_Bus bus_costo = new in_producto_x_tb_bodega_Costo_Historico_Bus();
-        public List<in_transferencia_Info> get_list(int IdEmpresa)
+        public List<in_transferencia_Info> get_list(int IdEmpresa, int IdSucursal, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
-                return odata.get_list(IdEmpresa);
+                return odata.get_list(IdEmpresa, IdSucursal, FechaInicio, FechaFin);
             }
             catch (Exception)
             {
