@@ -442,30 +442,25 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Modificar(cp_orden_giro_Info model)
         {
-           
-            if (Session["info_proveedor"] == null)
+            info_proveedor = bus_prov.get_info(model.IdEmpresa, model.IdProveedor);
+            info_parametro = bus_param.get_info(model.IdEmpresa);
+
+            
+            if(info_parametro==null)
             {
-                info_proveedor = bus_prov.get_info(model.IdEmpresa, model.IdProveedor);
-                Session["info_proveedor"] = info_proveedor;
+                ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
+                cargar_combos(model);
+                cargar_combos_detalle();
+                return View(model);
             }
-            else
-                info_proveedor = Session["info_proveedor"] as cp_proveedor_Info;
+
+            model.info_comrobante.IdTipoCbte = (int)info_parametro.pa_TipoCbte_OG;
 
 
-            if (Session["info_parametro"] == null)
-            {
-                info_parametro = bus_param.get_info(model.IdEmpresa);
-                Session["info_parametro"] = info_parametro;
-            }
-            else
-                info_parametro = Session["info_parametro"] as cp_parametros_Info;
-
-
-
-               model.info_comrobante = new ct_cbtecble_Info();
-               model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
-
+            model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
             model.info_retencion.detalle = List_cp_retencion_det.get_list(model.IdTransaccionSession);
+            model.info_retencion.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List_retencion.get_list(model.IdTransaccionSession);
+            model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
 
             if (model.info_retencion.detalle.Count() > 0)
             {
@@ -488,7 +483,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             }
 
-            model.info_comrobante.lst_ct_cbtecble_det =Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
             
             if(model.info_comrobante.lst_ct_cbtecble_det.Count()==0)
             {
@@ -498,18 +492,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
 
             }
-            if (Session["info_parametro"] != null)
-            {
-                info_parametro = Session["info_parametro"] as cp_parametros_Info;
-                model.info_comrobante.IdTipoCbte = (int)info_parametro.pa_TipoCbte_OG;
-            }
-            else
-            {
-                ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
-                cargar_combos(model);
-                cargar_combos_detalle();
-                return View(model);
-            }
+           
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {

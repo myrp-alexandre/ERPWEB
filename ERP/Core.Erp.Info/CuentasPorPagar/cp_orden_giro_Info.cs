@@ -90,6 +90,7 @@ namespace Core.Erp.Info.CuentasPorPagar
 
         {
             info_retencion = new cp_retencion_Info();
+            info_comrobante = new ct_cbtecble_Info();
         }
     }
 }
