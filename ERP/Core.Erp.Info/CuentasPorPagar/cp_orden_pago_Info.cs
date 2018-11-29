@@ -35,6 +35,8 @@ namespace Core.Erp.Info.CuentasPorPagar
         public bool EstadoBool { get; set; }
         public string IdUsuario { get; set; }
         public string IdUsuarioUltAnu { get; set; }
+        [Required(ErrorMessage = "El campo observación es obligatorio")]
+        [StringLength(150, MinimumLength = 3, ErrorMessage = "La observación debe tener mínimo 3 caracteres y máximo 150")]
         public string MotivoAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string nom_pc { get; set; }

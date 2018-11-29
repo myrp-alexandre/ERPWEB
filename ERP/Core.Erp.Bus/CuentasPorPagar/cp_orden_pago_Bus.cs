@@ -117,7 +117,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 }
                 if (cl_enumeradores.eTipoPersona.PERSONA.ToString() == info.IdTipo_Persona)
                 {
-                    info_persona = bus_persona.get_info(Convert.ToInt32(info.IdPersona));
+                    info_persona = bus_persona.get_info(Convert.ToInt32(info.IdEntidad));
                     info.IdPersona = info_persona.IdPersona;
 
                     ObservacionComprobante = "Orden pago a persona: " + (info_persona.pe_nombreCompleto) == null ? "" : info_persona.pe_nombreCompleto + " " + info.Observacion;

@@ -149,7 +149,18 @@
                     @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
                 </div>
             </div> 
-            <div class="col-md-6">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="co_observacion">Observación*</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", @id = "observacion" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>                          
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdFormaPago">Forma de pago*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdFormaPago, settings =>
@@ -177,17 +188,6 @@
                     @Html.TextBoxFor(q => q.Valor_a_pagar, new { @class = "form-control", @id = "Valor_a_pagar" })
                     @Html.ValidationMessageFor(q => q.Valor_a_pagar, "", new { @class = "text-danger" })
                 </div>
-            </div>                        
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="co_observacion">Observación*</label>
-                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", @id = "observacion" })
-                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
-                </div>
             </div>
         </div>
     </div>
@@ -209,7 +209,7 @@
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="co_observacion">Detalle de deudad a cancelar</label>
+                                <label for="co_observacion">Detalle de deuda a cancelar</label>
                                 @Html.Action("GridViewPartial_detalle_op")
                             </div>
                         </div>

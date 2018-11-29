@@ -541,7 +541,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             if (HttpContext.Current.Session["cp_orden_pago_det_Info"] == null)
             {
-                List<ct_cbtecble_det_Info> list = new List<ct_cbtecble_det_Info>();
+                List<cp_orden_pago_det_Info> list = new List<cp_orden_pago_det_Info>();
 
                 HttpContext.Current.Session["cp_orden_pago_det_Info"] = list;
             }

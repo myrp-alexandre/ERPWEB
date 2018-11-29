@@ -155,7 +155,18 @@
                     @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="co_observacion">Observación*</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", @id = "observacion" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>            
+        </div>   
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdFormaPago">Forma de pago*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdFormaPago, settings =>
@@ -184,63 +195,52 @@
                     @Html.ValidationMessageFor(q => q.Valor_a_pagar, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>   
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="co_observacion">Observación*</label>
-                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", @id = "observacion" })
-                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
         </div>
     </div>
-        <div id="Tabs" role="tabpanel">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active">
-                    <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos deuda a cancelar</a>
-                </li>
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos deuda a cancelar</a>
+            </li>
 
-                <li>
-                    <a href="#tab_asiento_contable" aria-controls="contabilidad" role="tab" data-toggle="tab">Asiento contable</a>
-                </li>
+            <li>
+                <a href="#tab_asiento_contable" aria-controls="contabilidad" role="tab" data-toggle="tab">Asiento contable</a>
+            </li>
 
-            </ul>
-            <div class="tab-content" style="padding-top: 20px">
-                <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
 
-                    <div class="row">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-12">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="co_observacion">Detalle de deudad a cancelar</label>
-                                    @Html.Action("GridViewPartial_detalle_op")
-                                </div>
+                            <div class="form-group">
+                                <label for="co_observacion">Detalle de deuda a cancelar</label>
+                                @Html.Action("GridViewPartial_detalle_op")
                             </div>
                         </div>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_asiento_contable">
-                    <div class="row">
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_asiento_contable">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-12">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="co_observacion">Diario contable</label>
-                                    @Html.Action("GridViewPartial_orden_pago_dc")
+                            <div class="form-group">
+                                <label for="co_observacion">Diario contable</label>
+                                @Html.Action("GridViewPartial_orden_pago_dc")
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index","OrdenPago",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
-        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","OrdenPago",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
+    </div>
 
 
 

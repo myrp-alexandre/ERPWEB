@@ -73,7 +73,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             string[] array = Ids.Split(',');
 
-            if (string.IsNullOrEmpty(array.ToString()))
+            if (string.IsNullOrEmpty(Ids))
             {
                 return Json(true, JsonRequestBehavior.AllowGet);                
             }
@@ -90,8 +90,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public JsonResult rechazar(int IdEmpresa = 0, string Ids = "", string MotivoAprobacion = "", string IdUsuarioAprobacion = "")
         {
             string[] array = Ids.Split(',');
-
-            if (string.IsNullOrEmpty(array.ToString()))
+            
+            if (string.IsNullOrEmpty(Ids))
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
             }

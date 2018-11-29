@@ -282,9 +282,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdEstadoAprobacion = info.IdEstadoAprobacion;
                         Entity.IdFormaPago = info.IdFormaPago;
                         Entity.IdTipoFlujo = info.IdTipoFlujo;
-                        Context.SaveChanges();
 
-                        
+                        Context.SaveChanges();                        
                     }
 
                 }
@@ -309,6 +308,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.Estado = "I";
                         Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                         Entity.Fecha_UltAnu = info.Fecha_UltAnu=DateTime.Now;
+                        Entity.MotivoAnu = info.MotivoAnu;
+                        Entity.MotivoAprobacion = info.MotivoAnu;
+                        Entity.IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.REPRO.ToString();
 
                         cp_orden_pago_det Entity_de = Context.cp_orden_pago_det.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdOrdenPago == info.IdOrdenPago);
                         if (Entity != null)
