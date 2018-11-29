@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Data.RRHH;
+using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,20 @@ namespace Core.Erp.Bus.RRHH
             try
             {
                 return odata.eliminarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public string GetArchivo(List<ro_Acta_Finiquito_Detalle_Info> listas, cl_enumeradores.eTipoProcesoBancario TipoFile)
+        {
+            try
+            {
+                string Archivo = "";
             }
             catch (Exception)
             {

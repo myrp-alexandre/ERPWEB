@@ -64,8 +64,8 @@
           <Property Name="IdNomina" Type="int" Nullable="false" />
           <Property Name="IdNominaTipo" Type="int" Nullable="false" />
           <Property Name="IdPeriodo" Type="int" Nullable="false" />
-          <Property Name="IdCuentaBancaria" Type="int" />
-          <Property Name="IdProceso_Bancario" Type="varchar" MaxLength="25" />
+          <Property Name="IdCuentaBancaria" Type="int" Nullable="false" />
+          <Property Name="IdProceso_Bancario" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Cod_Empresa" Type="varchar" MaxLength="30" />
           <Property Name="Nom_Archivo" Type="varchar" MaxLength="200" />
           <Property Name="archivo" Type="varbinary(max)" Nullable="false" />
@@ -82,13 +82,14 @@
         <EntityType Name="ro_archivos_bancos_generacion_x_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
             <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="Secuencia" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdArchivo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
           <Property Name="pagacheque" Type="bit" Nullable="false" />
         </EntityType>
@@ -1344,6 +1345,38 @@ warning 6002: The table/view 'DBERP.dbo.vwRo_ActaFiniquito' does not have a prim
           <Property Name="EstadoContrato" Type="varchar" MaxLength="10" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_archivos_bancos_generacion_x_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwro_archivos_bancos_generacion_x_empleado">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="IdNomina" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="pagacheque" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdTipoDocumento" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdArchivo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdNomina" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pagacheque" Type="bit" Nullable="false" />
+          <Property Name="em_tipoCta" Type="varchar" MaxLength="25" />
+          <Property Name="em_NumCta" Type="varchar" MaxLength="20" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTipoDocumento" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_empleado_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_combo">
           <Key>
@@ -2304,6 +2337,20 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Dependent Role="ro_archivos_bancos_generacion_x_empleado">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado">
+          <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
+          <End Role="ro_archivos_bancos_generacion_x_empleado" Type="Self.ro_archivos_bancos_generacion_x_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_archivos_bancos_generacion_x_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="Secuencia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3673,6 +3720,25 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwRo_ActaFiniquito].[EstadoContrato] AS [EstadoContrato]
     FROM [dbo].[vwRo_ActaFiniquito] AS [vwRo_ActaFiniquito]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwro_archivos_bancos_generacion_x_empleado" EntityType="Self.vwro_archivos_bancos_generacion_x_empleado" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwro_archivos_bancos_generacion_x_empleado].[IdEmpresa] AS [IdEmpresa], 
+    [vwro_archivos_bancos_generacion_x_empleado].[IdArchivo] AS [IdArchivo], 
+    [vwro_archivos_bancos_generacion_x_empleado].[IdNomina] AS [IdNomina], 
+    [vwro_archivos_bancos_generacion_x_empleado].[IdNominaTipo] AS [IdNominaTipo], 
+    [vwro_archivos_bancos_generacion_x_empleado].[IdPeriodo] AS [IdPeriodo], 
+    [vwro_archivos_bancos_generacion_x_empleado].[Valor] AS [Valor], 
+    [vwro_archivos_bancos_generacion_x_empleado].[IdEmpleado] AS [IdEmpleado], 
+    [vwro_archivos_bancos_generacion_x_empleado].[pagacheque] AS [pagacheque], 
+    [vwro_archivos_bancos_generacion_x_empleado].[em_tipoCta] AS [em_tipoCta], 
+    [vwro_archivos_bancos_generacion_x_empleado].[em_NumCta] AS [em_NumCta], 
+    [vwro_archivos_bancos_generacion_x_empleado].[pe_apellido] AS [pe_apellido], 
+    [vwro_archivos_bancos_generacion_x_empleado].[pe_nombre] AS [pe_nombre], 
+    [vwro_archivos_bancos_generacion_x_empleado].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwro_archivos_bancos_generacion_x_empleado].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwro_archivos_bancos_generacion_x_empleado].[IdTipoDocumento] AS [IdTipoDocumento]
+    FROM [dbo].[vwro_archivos_bancos_generacion_x_empleado] AS [vwro_archivos_bancos_generacion_x_empleado]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwro_empleado_combo" EntityType="Self.vwro_empleado_combo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwro_empleado_combo].[Empleado] AS [Empleado], 
@@ -4242,6 +4308,10 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           </AssociationSet>
           <AssociationSet Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" Association="Self.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion">
             <End Role="ro_archivos_bancos_generacion" EntitySet="ro_archivos_bancos_generacion" />
+            <End Role="ro_archivos_bancos_generacion_x_empleado" EntitySet="ro_archivos_bancos_generacion_x_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" Association="Self.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_archivos_bancos_generacion_x_empleado" EntitySet="ro_archivos_bancos_generacion_x_empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_area_ro_Division" Association="Self.FK_ro_area_ro_Division">
@@ -6764,18 +6834,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_tipo_gastos_personales" EntitySet="ro_tipo_gastos_personales" />
             <End Role="ro_tipo_gastos_personales_tabla_valores_x_anio" EntitySet="ro_tipo_gastos_personales_tabla_valores_x_anio" />
           </AssociationSet>
-          <EntitySet Name="ro_archivos_bancos_generacion" EntityType="Model_rrhh.ro_archivos_bancos_generacion" />
-          <EntitySet Name="ro_archivos_bancos_generacion_x_empleado" EntityType="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" />
-          <AssociationSet Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion">
-            <End Role="ro_archivos_bancos_generacion" EntitySet="ro_archivos_bancos_generacion" />
-            <End Role="ro_archivos_bancos_generacion_x_empleado" EntitySet="ro_archivos_bancos_generacion_x_empleado" />
-          </AssociationSet>
           <EntitySet Name="ro_rol" EntityType="Model_rrhh.ro_rol" />
           <EntitySet Name="ro_rol_detalle" EntityType="Model_rrhh.ro_rol_detalle" />
-          <AssociationSet Name="FK_ro_archivos_bancos_generacion_ro_rol" Association="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_rol">
-            <End Role="ro_rol" EntitySet="ro_rol" />
-            <End Role="ro_archivos_bancos_generacion" EntitySet="ro_archivos_bancos_generacion" />
-          </AssociationSet>
           <AssociationSet Name="FK_ro_rol_ro_Nomina_Tipo" Association="Model_rrhh.FK_ro_rol_ro_Nomina_Tipo">
             <End Role="ro_Nomina_Tipo" EntitySet="ro_Nomina_Tipo" />
             <End Role="ro_rol" EntitySet="ro_rol" />
@@ -7007,6 +7067,21 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Parameter Name="IdRubro" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="vwro_rol" EntityType="Model_rrhh.vwro_rol" />
+          <EntitySet Name="ro_archivos_bancos_generacion" EntityType="Model_rrhh.ro_archivos_bancos_generacion" />
+          <EntitySet Name="ro_archivos_bancos_generacion_x_empleado" EntityType="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" />
+          <EntitySet Name="vwro_archivos_bancos_generacion_x_empleado" EntityType="Model_rrhh.vwro_archivos_bancos_generacion_x_empleado" />
+          <AssociationSet Name="FK_ro_archivos_bancos_generacion_ro_rol" Association="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_rol">
+            <End Role="ro_rol" EntitySet="ro_rol" />
+            <End Role="ro_archivos_bancos_generacion" EntitySet="ro_archivos_bancos_generacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion">
+            <End Role="ro_archivos_bancos_generacion" EntitySet="ro_archivos_bancos_generacion" />
+            <End Role="ro_archivos_bancos_generacion_x_empleado" EntitySet="ro_archivos_bancos_generacion_x_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_archivos_bancos_generacion_x_empleado" EntitySet="ro_archivos_bancos_generacion_x_empleado" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -7534,61 +7609,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ro_archivos_bancos_generacion">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdArchivo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdNomina" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="IdCuentaBancaria" Type="Int32" />
-          <Property Name="IdProceso_Bancario" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_Empresa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Nom_Archivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="archivo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="IdRol" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_archivos_bancos_generacion_x_empleado" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" FromRole="ro_archivos_bancos_generacion" ToRole="ro_archivos_bancos_generacion_x_empleado" />
-          <NavigationProperty Name="ro_rol" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_rol" FromRole="ro_archivos_bancos_generacion" ToRole="ro_rol" />
-        </EntityType>
-        <EntityType Name="ro_archivos_bancos_generacion_x_empleado">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdArchivo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="pagacheque" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ro_archivos_bancos_generacion" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" FromRole="ro_archivos_bancos_generacion_x_empleado" ToRole="ro_archivos_bancos_generacion" />
-        </EntityType>
-        <Association Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion">
-          <End Type="Model_rrhh.ro_archivos_bancos_generacion" Role="ro_archivos_bancos_generacion" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" Role="ro_archivos_bancos_generacion_x_empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_archivos_bancos_generacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdArchivo" />
-            </Principal>
-            <Dependent Role="ro_archivos_bancos_generacion_x_empleado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdArchivo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ro_rol">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7612,12 +7632,12 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="UsuarioCierre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="FechaCierre" Type="DateTime" Precision="3" />
           <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_archivos_bancos_generacion" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_rol" FromRole="ro_rol" ToRole="ro_archivos_bancos_generacion" />
           <NavigationProperty Name="ro_Nomina_Tipo" Relationship="Model_rrhh.FK_ro_rol_ro_Nomina_Tipo" FromRole="ro_rol" ToRole="ro_Nomina_Tipo" />
           <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_rol_ro_Nomina_Tipoliqui" FromRole="ro_rol" ToRole="ro_Nomina_Tipoliqui" />
           <NavigationProperty Name="ro_periodo_x_ro_Nomina_TipoLiqui" Relationship="Model_rrhh.FK_ro_rol_ro_periodo_x_ro_Nomina_TipoLiqui" FromRole="ro_rol" ToRole="ro_periodo_x_ro_Nomina_TipoLiqui" />
           <NavigationProperty Name="ro_rol_detalle" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_rol" FromRole="ro_rol" ToRole="ro_rol_detalle" />
           <NavigationProperty Name="ro_rol_detalle_x_rubro_acumulado" Relationship="Model_rrhh.FK_ro_rol_detalle_x_rubro_acumulado_ro_rol" FromRole="ro_rol" ToRole="ro_rol_detalle_x_rubro_acumulado" />
+          <NavigationProperty Name="ro_archivos_bancos_generacion" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_rol" FromRole="ro_rol" ToRole="ro_archivos_bancos_generacion" />
         </EntityType>
         <EntityType Name="ro_rol_detalle">
           <Key>
@@ -7639,20 +7659,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_rubro_tipo" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_rubro_tipo" FromRole="ro_rol_detalle" ToRole="ro_rubro_tipo" />
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_empleado" FromRole="ro_rol_detalle" ToRole="ro_empleado" />
         </EntityType>
-        <Association Name="FK_ro_archivos_bancos_generacion_ro_rol">
-          <End Type="Model_rrhh.ro_rol" Role="ro_rol" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_archivos_bancos_generacion" Role="ro_archivos_bancos_generacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_rol">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRol" />
-            </Principal>
-            <Dependent Role="ro_archivos_bancos_generacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ro_rol_ro_Nomina_Tipo">
           <End Type="Model_rrhh.ro_Nomina_Tipo" Role="ro_Nomina_Tipo" Multiplicity="1" />
           <End Type="Model_rrhh.ro_rol" Role="ro_rol" Multiplicity="*" />
@@ -7898,6 +7904,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva_det" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_EmpleadoNovedadCargaMasiva_det" />
           <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_marcaciones_x_empleado" />
           <NavigationProperty Name="ro_contrato" Relationship="Model_rrhh.FK_ro_contrato_ro_empleado" FromRole="ro_empleado" ToRole="ro_contrato" />
+          <NavigationProperty Name="ro_archivos_bancos_generacion_x_empleado" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_archivos_bancos_generacion_x_empleado" />
         </EntityType>
         <Association Name="FK_ro_Acta_Finiquito_ro_empleado">
           <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
@@ -8776,6 +8783,121 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="IdRol" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Expr1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ro_archivos_bancos_generacion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNomina" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdCuentaBancaria" Type="Int32" Nullable="false" />
+          <Property Name="IdProceso_Bancario" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Empresa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Nom_Archivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="archivo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="IdRol" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_rol" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_rol" FromRole="ro_archivos_bancos_generacion" ToRole="ro_rol" />
+          <NavigationProperty Name="ro_archivos_bancos_generacion_x_empleado" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" FromRole="ro_archivos_bancos_generacion" ToRole="ro_archivos_bancos_generacion_x_empleado" />
+        </EntityType>
+        <EntityType Name="ro_archivos_bancos_generacion_x_empleado">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="pagacheque" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ro_archivos_bancos_generacion" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" FromRole="ro_archivos_bancos_generacion_x_empleado" ToRole="ro_archivos_bancos_generacion" />
+          <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" FromRole="ro_archivos_bancos_generacion_x_empleado" ToRole="ro_empleado" />
+        </EntityType>
+        <EntityType Name="vwro_archivos_bancos_generacion_x_empleado">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="IdNomina" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="pagacheque" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdTipoDocumento" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNomina" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pagacheque" Type="Boolean" Nullable="false" />
+          <Property Name="em_tipoCta" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="em_NumCta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_ro_archivos_bancos_generacion_ro_rol">
+          <End Type="Model_rrhh.ro_rol" Role="ro_rol" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_archivos_bancos_generacion" Role="ro_archivos_bancos_generacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rol">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="ro_archivos_bancos_generacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion">
+          <End Type="Model_rrhh.ro_archivos_bancos_generacion" Role="ro_archivos_bancos_generacion" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" Role="ro_archivos_bancos_generacion_x_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_archivos_bancos_generacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdArchivo" />
+            </Principal>
+            <Dependent Role="ro_archivos_bancos_generacion_x_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado">
+          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" Role="ro_archivos_bancos_generacion_x_empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_archivos_bancos_generacion_x_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="Secuencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10225,43 +10347,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ro_archivos_bancos_generacion">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_archivos_bancos_generacion">
-              <MappingFragment StoreEntitySet="ro_archivos_bancos_generacion">
-                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="archivo" ColumnName="archivo" />
-                <ScalarProperty Name="Nom_Archivo" ColumnName="Nom_Archivo" />
-                <ScalarProperty Name="Cod_Empresa" ColumnName="Cod_Empresa" />
-                <ScalarProperty Name="IdProceso_Bancario" ColumnName="IdProceso_Bancario" />
-                <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
-                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
-                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ro_archivos_bancos_generacion_x_empleado">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_archivos_bancos_generacion_x_empleado">
-              <MappingFragment StoreEntitySet="ro_archivos_bancos_generacion_x_empleado">
-                <ScalarProperty Name="pagacheque" ColumnName="pagacheque" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ro_rol">
             <EntityTypeMapping TypeName="Model_rrhh.ro_rol">
               <MappingFragment StoreEntitySet="ro_rol">
@@ -10702,6 +10787,65 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
                 <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_archivos_bancos_generacion">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_archivos_bancos_generacion">
+              <MappingFragment StoreEntitySet="ro_archivos_bancos_generacion">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="archivo" ColumnName="archivo" />
+                <ScalarProperty Name="Nom_Archivo" ColumnName="Nom_Archivo" />
+                <ScalarProperty Name="Cod_Empresa" ColumnName="Cod_Empresa" />
+                <ScalarProperty Name="IdProceso_Bancario" ColumnName="IdProceso_Bancario" />
+                <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_archivos_bancos_generacion_x_empleado">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_archivos_bancos_generacion_x_empleado">
+              <MappingFragment StoreEntitySet="ro_archivos_bancos_generacion_x_empleado">
+                <ScalarProperty Name="pagacheque" ColumnName="pagacheque" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_archivos_bancos_generacion_x_empleado">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_archivos_bancos_generacion_x_empleado">
+              <MappingFragment StoreEntitySet="vwro_archivos_bancos_generacion_x_empleado">
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
+                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
+                <ScalarProperty Name="pagacheque" ColumnName="pagacheque" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

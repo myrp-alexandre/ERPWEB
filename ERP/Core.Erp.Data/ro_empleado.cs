@@ -40,6 +40,7 @@ namespace Core.Erp.Data
             this.ro_EmpleadoNovedadCargaMasiva_det = new HashSet<ro_EmpleadoNovedadCargaMasiva_det>();
             this.ro_marcaciones_x_empleado = new HashSet<ro_marcaciones_x_empleado>();
             this.ro_contrato = new HashSet<ro_contrato>();
+            this.ro_archivos_bancos_generacion_x_empleado = new HashSet<ro_archivos_bancos_generacion_x_empleado>();
         }
     
         public int IdEmpresa { get; set; }
@@ -151,5 +152,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_EmpleadoNovedadCargaMasiva_det> ro_EmpleadoNovedadCargaMasiva_det { get; set; }
         public virtual ICollection<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
         public virtual ICollection<ro_contrato> ro_contrato { get; set; }
+        public virtual ICollection<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }
     }
 }

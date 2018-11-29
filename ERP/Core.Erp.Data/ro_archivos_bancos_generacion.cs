@@ -24,7 +24,7 @@ namespace Core.Erp.Data
         public int IdNomina { get; set; }
         public int IdNominaTipo { get; set; }
         public int IdPeriodo { get; set; }
-        public Nullable<int> IdCuentaBancaria { get; set; }
+        public int IdCuentaBancaria { get; set; }
         public string IdProceso_Bancario { get; set; }
         public string Cod_Empresa { get; set; }
         public string Nom_Archivo { get; set; }
@@ -39,7 +39,7 @@ namespace Core.Erp.Data
         public decimal IdRol { get; set; }
         public string MotiAnula { get; set; }
     
-        public virtual ICollection<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }
         public virtual ro_rol ro_rol { get; set; }
+        public virtual ICollection<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }
     }
 }

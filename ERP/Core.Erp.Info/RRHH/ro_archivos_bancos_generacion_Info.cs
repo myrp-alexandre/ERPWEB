@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Erp.Info.Helps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,7 @@ namespace Core.Erp.Info.RRHH
         public decimal IdRol { get; set; }
         public string MotiAnula { get; set; }
         public bool EstadoBool { get; set; }
-
+        public cl_enumeradores.eTipoProcesoBancario TipoFile { get; set; }
         public List < ro_archivos_bancos_generacion_x_empleado_Info> detalle { get; set; }
 
       public  ro_archivos_bancos_generacion_Info()

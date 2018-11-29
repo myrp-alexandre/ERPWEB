@@ -70,7 +70,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (model == null)
             {
                 ViewBag.IdPais = model.IdPais;
-                return RedirectToAction("Index", ViewBag.IdPais = model.IdPais );
+                return RedirectToAction("Index",new { IdPais = model.IdPais });
             }
             cargar_combos(model.IdPais);
             return View(model);
@@ -93,7 +93,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (model == null)
             {
                 ViewBag.IdPais = model.IdPais;
-                return RedirectToAction("Index", ViewBag.IdPais = model.IdPais);
+                return RedirectToAction("Index", new { IdPais = model.IdPais });
             }
             cargar_combos(model.IdPais);
             return View(model);

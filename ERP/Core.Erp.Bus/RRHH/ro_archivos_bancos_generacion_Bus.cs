@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Data.RRHH;
+using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 using System;
 using System.Collections.Generic;
@@ -76,5 +77,55 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public string GetArchivo(ro_archivos_bancos_generacion_Info info)
+        {
+            try
+            {
+                string Archivo = "";
+                switch (info.TipoFile)
+                {
+                    case cl_enumeradores.eTipoProcesoBancario.NCR:
+                        
+                        break;
+                  
+                    case cl_enumeradores.eTipoProcesoBancario.ROL_ELECTRONICO:
+
+                        break;
+                    
+                    default:
+                        break;
+                }
+
+                return Archivo;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #region Archivos para el banco de guayaquil
+
+        private string get_NCR(ro_archivos_bancos_generacion_Info info)
+        {
+            try
+            {
+                string File = "";
+                foreach (var item in info.detalle)
+                {
+
+                }
+
+                return File;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
     }
 }

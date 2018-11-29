@@ -1993,6 +1993,9 @@
     <Compile Include="vwRo_ActaFiniquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwro_archivos_bancos_generacion_x_empleado.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwro_EmpleadoNovedadCargaMasiva.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>

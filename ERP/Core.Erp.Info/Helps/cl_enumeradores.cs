@@ -83,6 +83,15 @@
             ECT_LIQ,
             ECT_PLQ
         }
+
+        public enum eTipoCuentaRRHH
+        {
+            AHO,
+            CHE,
+            COR,
+            EFE,
+            VRT
+        }
         public enum eTipoPeriodoRRHH
         {
             BEN_SOCIAL,
@@ -254,10 +263,7 @@
         public enum eTipoProcesoBancario
         {
             NCR,
-            NCR_OTROS_BCO,
-            PAGOS_MULTICASH,
-            ROL_ELECTRONICO_BG,
-            TRANSF_BANCARIA_BP
+            ROL_ELECTRONICO
         }
 
     }
