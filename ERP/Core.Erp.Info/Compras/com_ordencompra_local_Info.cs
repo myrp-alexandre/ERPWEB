@@ -62,8 +62,11 @@ namespace Core.Erp.Info.Compras
         public System.DateTime fecha_ini { get; set; }
         public System.DateTime fecha_fin { get; set; }
         public string IdUsuario { get; set; }
-        public string Observacion { get; set; }
+        public string IdUsuarioAprobacion { get; set; }
+        [StringLength(1000, MinimumLength = 0, ErrorMessage = "La observación debe tener máximo 500 caracteres")]
+        public string MotivoAprobacion { get; set; }
         public string IdEstadoAprobacion_cat { get; set; }
+        public DateTime FechaAprobacion { get; set; }
 
         public com_orden_aprobacion_Info()
         {
