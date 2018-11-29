@@ -119,27 +119,7 @@
                         @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="Fecha_Pago">Fecha pago*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q => q.Fecha_Pago, settings =>
-                        {
-                            settings.Name = "Fecha_Pago";
-                            settings.Properties.UseMaskBehavior = true;
-                            settings.Properties.EditFormat = EditFormat.Date;
-                            settings.Properties.EditFormatString = "dd/MM/yyyy";
-                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                        }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.Fecha_Pago, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>                                       
+            </div>                                      
         </div>
     </div>
     <div class="row">
@@ -147,8 +127,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdTipo_Persona">Tipo persona:*</label>
-                    @Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "Key", "Value"), new { @class = "form-control", @id = "IdTipo_Persona" })
-                    @*@Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "IdTipo_Persona", "Descricpion"), new { @class = "form-control", @id = "IdTipo_Persona" })*@
+                    @Html.DropDownListFor(q => q.IdTipo_Persona, new SelectList(ViewBag.lst_tipo_personas, "Key", "Value"), new { @class = "form-control", @id = "IdTipo_Persona" })                    
                     @Html.ValidationMessageFor(q => q.IdTipo_Persona, "", new { @class = "text-danger" })                    
                 </div>
             </div>
