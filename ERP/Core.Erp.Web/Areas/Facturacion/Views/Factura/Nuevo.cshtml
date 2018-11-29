@@ -364,7 +364,7 @@
             success: function (data) {
                 $.each(data, function (i, row) {
                     $("#IdPuntoVta").append("<option value=" + row.IdPuntoVta + ">" + row.nom_PuntoVta + "</option>");
-                    $("#IdPuntoVta").val(1);
+                    $("#IdPuntoVta").val($("#IdPuntoVta option:first").val());
                 });
             },
             error: function (error) {
@@ -848,16 +848,16 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="IdProforma"></label>
+                                            <label for="IdProforma">    </label>
                                             @Html.TextBoxFor(q => q.IdProforma, new { @class = "form-control", @id = "IdProforma", @placeholder ="# Proforma" })
                                             @Html.ValidationMessageFor(q => q.IdProforma, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for=""></label>
+                                            <label for="btn_buscar">    </label>
                                             <button type="button" class="btn btn-primary" id="btn_buscar" onclick="MostrarModalProformas();">
                                                 <i class="fa fa-search"></i> Proformas
                                             </button>
@@ -865,7 +865,7 @@
                                     </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for=""></label>
+                                                <label for="btn_desbloquear">   </label>
                                                 <button type="button" class="btn btn-primary" id="btn_desbloquear" onclick="MostrarModalDesbloqueo();">
                                                     <i class="fa fa-lock"></i> Desbloquear
                                                 </button>
