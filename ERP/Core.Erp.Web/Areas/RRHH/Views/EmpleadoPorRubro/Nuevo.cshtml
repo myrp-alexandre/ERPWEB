@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdProveedor">Empleado</label>
+                    <label for="IdProveedor">Empleado*</label>
                     @Html.Partial("_CmbEmpleado_rubros_fijos", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
@@ -28,7 +28,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdContrato_Tipo">Nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
+                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"),  new { @class = "form-control", @id = "IdNomina_Tipo" })
                     @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -39,7 +39,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdContrato_Tipo">Tipo liquidación de nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"),  new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                     @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -187,12 +187,9 @@
             });
         };
 
+ 
     function mostrar_fechas() {
-        GridViewPartial_tarea_det_adjunto.PerformCallback();
-    };
-
-    function mostrar_fechas() {
-        if (es_indifinido.GetValue()) {
+        if (!es_indifinido.GetValue()) {
             $("#col_FechaFin").show();
             $("#col_FechaInicio").show();
 

@@ -49,20 +49,29 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    Lista = (from q in Context.ro_empleado_novedad_det
+                    Lista = (from q in Context.ro_empleado_Novedad
+
+                             join s in Context.ro_empleado_novedad_det
+                             on new { q.IdEmpresa,q.IdNovedad } equals new { s.IdEmpresa, s.IdNovedad }
+
+
                              join p in Context.ro_rubro_tipo
-                             on new { q.IdEmpresa, q.IdRubro} equals new {p.IdEmpresa, p.IdRubro}
+                             on new { s.IdEmpresa, s.IdRubro} equals new {p.IdEmpresa, p.IdRubro}
                                  where q.IdEmpresa == IdEmpresa
-                                   && q.EstadoCobro=="PEN"
+                                   && s.EstadoCobro=="PEN"
+                                   && q.IdEmpleado==IdEmpleado
+                                   && q.IdEmpresa==IdEmpresa
+                                   && s.IdEmpresa==IdEmpresa
+                                   && p.IdEmpresa==IdEmpresa
                              select new ro_empleado_novedad_det_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdNovedad = q.IdNovedad,
-                                 FechaPago = q.FechaPago,
+                                 FechaPago = s.FechaPago,
                                  Observacion = q.Observacion,
-                                 Valor = q.Valor,
-                                 IdRubro = q.IdRubro,
-                                 Secuencia = q.Secuencia,
+                                 Valor = s.Valor,
+                                 IdRubro = p.IdRubro,
+                                 Secuencia = s.Secuencia,
                                  rub_tipo=p.ru_tipo
                              }).ToList();
 

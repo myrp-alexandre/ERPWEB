@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_devolucion";
-        settings.CallbackRouteValues = new { Controller = "DevolucionInventario", Action = "GridViewPartial_devolucion", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin };
+        settings.CallbackRouteValues = new { Controller = "DevolucionInventario", Action = "GridViewPartial_devolucion", IdSucursal = ViewBag.IdSucursal, Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdDev_Inven";
 

@@ -83,11 +83,11 @@ namespace Core.Erp.Bus.Compras
                 throw;
             }
         }
-        public bool AprobarOC(List<com_ordencompra_local_Info> Lista)
+        public bool AprobarOC(int IdEmpresa, int IdSucursal, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
-                return odata.AprobarOC(Lista);
+                return odata.AprobarOC(IdEmpresa,  IdSucursal, Lista, MotivoAprobacion, IdUsuarioAprobacion);
             }
             catch (Exception)
             {
@@ -96,11 +96,11 @@ namespace Core.Erp.Bus.Compras
             }
         }
 
-        public bool RechazarOP(List<com_ordencompra_local_Info> Lista)
+        public bool RechazarOC(int IdEmpresa, int IdSucursal, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
-                return odata.RechazarOP(Lista);
+                return odata.RechazarOC(IdEmpresa,  IdSucursal, Lista, MotivoAprobacion, IdUsuarioAprobacion);
             }
             catch (Exception)
             {

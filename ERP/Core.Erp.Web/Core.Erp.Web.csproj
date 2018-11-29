@@ -8604,9 +8604,6 @@
     <Content Include="Areas\RRHH\Views\ProcesarRol\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\Nuevo.cshtml" />
     <Content Include="Areas\RRHH\Views\RubrosCalculados\Index.cshtml" />
-    <Content Include="Areas\RRHH\Views\RubrosCalculados\Modificar.cshtml" />
-    <Content Include="Areas\RRHH\Views\RubrosCalculados\Nuevo.cshtml" />
-    <Content Include="Areas\RRHH\Views\RubrosCalculados\_GridViewPartial_rubros_calculados.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_ro_rol.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\Index.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\Modificar.cshtml" />

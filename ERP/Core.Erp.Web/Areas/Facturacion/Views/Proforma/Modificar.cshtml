@@ -10,7 +10,7 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "Proforma", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdSucursal)
     @Html.HiddenFor(q => q.IdProforma)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -99,7 +99,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id= "IdSucursal", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -231,6 +231,7 @@
         $("#pf_fecha").change(function () {
             cargar_fecha_vencimiento();
         });
+
     });
 
     function MostrarModal() {

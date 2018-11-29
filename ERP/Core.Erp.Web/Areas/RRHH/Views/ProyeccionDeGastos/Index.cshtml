@@ -1,11 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "Proyeccioón de gastos personales";
+    ViewBag.Title = "Proyección de gastos personales";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
-    Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 

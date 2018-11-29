@@ -349,16 +349,21 @@
         GetUltimoDocumento();
         get_direccion();
         get_placa();
+        GetDireccionOrigen();
 
         $("#IdSucursal").change(function () {
             CargarPuntosDeVenta();
             GetUltimoDocumento();
+            GetDireccionOrigen();
         });
         $("#IdPuntoVta").change(function () {
             GetUltimoDocumento();
         });
         $("#IdContacto").change(function () {
             get_direccion();
+        });
+        $("#IdTransportista").change(function () {
+            get_placa();
         });
     });
 
@@ -432,6 +437,27 @@
         });
     }
 
+        function GetDireccionOrigen() {
+        var datos = {
+            IdSucursal: $("#IdSucursal").val(),
+            IdPuntoVta: $("#IdPuntoVta").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_direccion_origen", "GuiaRemision",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#Direccion_Origen").val(data.Su_Direccion);
+              
+            },
+            error: function (error) {
+            }
+        });
+    }
+
     function get_placa() {
         var datos = {
             IdTransportista: $("#IdTransportista").val()
@@ -467,7 +493,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data != null) {
-                    $("#Direccion_Origen").val(data.Direccion_emp);
+                    //$("#Direccion_Origen").val(data.Direccion_emp);
                     $("#Direccion_Destino").val(data.Direccion);
                 }
             },

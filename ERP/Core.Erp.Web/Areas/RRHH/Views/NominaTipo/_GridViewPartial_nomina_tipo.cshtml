@@ -80,13 +80,13 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdNomina_Tipo","ID");
-        settings.Columns.Add("Descripcion","Nómina");
+        settings.Columns.Add("IdNomina_Tipo","ID").Width=Unit.Percentage(10);
+        settings.Columns.Add("Descripcion","Nómina").Width = Unit.Percentage(65);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
 

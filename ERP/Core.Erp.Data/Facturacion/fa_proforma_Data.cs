@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Facturacion
 {
   public  class fa_proforma_Data
     {
-         public List<fa_proforma_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
+         public List<fa_proforma_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
@@ -20,6 +20,7 @@ namespace Core.Erp.Data.Facturacion
                 {
                     Lista = (from q in Context.vwfa_proforma
                              where q.IdEmpresa == IdEmpresa
+                             && q.IdSucursal == IdSucursal
                              && Fecha_ini <= q.pf_fecha && q.pf_fecha <= Fecha_fin
                              orderby q.IdProforma descending
                              select new fa_proforma_Info
@@ -36,7 +37,8 @@ namespace Core.Erp.Data.Facturacion
                                  pd_subtotal = q.pd_subtotal,
                                  pd_iva = q.pd_iva,
                                  pd_total = q.pd_total,
-                                 EstadoCierre = q.EstadoCierre
+                                 EstadoCierre = q.EstadoCierre,
+                                 Su_Descripcion = q.Su_Descripcion
                              }).ToList();
                 }
                 return Lista;

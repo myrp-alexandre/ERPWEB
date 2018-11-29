@@ -51,17 +51,17 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("Estado")) == "I" )
-            {
-                e.Row.ForeColor = System.Drawing.Color.Red;
-            }
-            if (Convert.ToString(e.GetValue("IdEstadoAprobacion_cat")) == "APRO" )
+            if (Convert.ToString(e.GetValue("IdEstadoAprobacion_cat")) == "APRO")
             {
                 e.Row.ForeColor = System.Drawing.Color.Blue;
             }
             if (Convert.ToString(e.GetValue("IdEstadoAprobacion_cat")) == "ANU")
             {
-                e.Row.ForeColor = System.Drawing.Color.Blue;
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
+            if (Convert.ToString(e.GetValue("Estado")) == "I")
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
             }
         };
         settings.Columns.Add(c =>
@@ -69,19 +69,20 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstadoAprobacion_cat")) == "xAPRO")
                 {
-                    if (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstadoAprobacion_cat")) == "xAPRO")
-                    {
-                        settings.HtmlRowPrepared = (s, e) =>
-                        {
-                            ViewContext.Writer.Write(
-                                   Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") }) + "&nbsp;" +
-                                     Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") },
-                                       new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                            );
-                        };
-                    }
+                    ViewContext.Writer.Write(
+                           Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") }) + "&nbsp;" +
+                             Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") },
+                               new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                    );
+                }
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstadoAprobacion_cat")) == "APRO")
+                {
+                    ViewContext.Writer.Write(
+                             Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdOrdenCompra = DataBinder.Eval(tc.DataItem, "IdOrdenCompra") },
+                               new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                    );
                 }
             });
             c.SetHeaderTemplateContent(tc =>

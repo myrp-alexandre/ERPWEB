@@ -39,23 +39,30 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Index
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
-        {            
+        {
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_proforma(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        public ActionResult GridViewPartial_proforma(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal =0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<fa_proforma_Info> model = new List<fa_proforma_Info>();
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-            model = bus_proforma.get_list(IdEmpresa,ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            model = bus_proforma.get_list(IdEmpresa, IdSucursal, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_proforma", model);
         }
 
@@ -260,6 +267,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region json
+        public JsonResult cargar_bodega(int IdEmpresa = 0, int IdSucursal = 0)
+        {
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+            var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult get_info_termino_pago(string IdTerminoPago = "")
         {
             fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();

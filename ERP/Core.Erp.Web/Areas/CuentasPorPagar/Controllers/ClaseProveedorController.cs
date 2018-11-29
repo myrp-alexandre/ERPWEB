@@ -44,7 +44,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 IdEmpresa = IdEmpresa
             };
-            model.cod_clase_proveedor = bus_clase_proveedor.get_id(IdEmpresa).ToString();
             cargar_combos();
             return View(model);
         }

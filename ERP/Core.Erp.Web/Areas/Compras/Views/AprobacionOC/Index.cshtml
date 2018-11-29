@@ -11,69 +11,26 @@
 <script type="text/javascript">
 
     var selectedIDs;
-    function OnBeginCallback(s, e) {
-        e.customArgs["selectedIDs"] = selectedIDs;
-    };
 
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
     function OnSelectionChanged(s, e) {
         s.GetSelectedFieldValues("IdOrdenCompra", GetSelectedFieldValuesCallback);
-    };
 
+    }
     function GetSelectedFieldValuesCallback(values) {
         //Capture all selected keys
         selectedIDs = values.join(',');
-    };
-    function aprobar() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IDs: selectedIDs
-        }
-        $("#btn_aprobar").attr("disabled", true);
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("aprobar", "AprobacionOC", new { Area = "Compras" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-               
-            },
-            error: function (error) {
-            }
-        });
-        $("#myform").submit();
     }
 
-    function rechazar() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IDs: selectedIDs
-        }
-        $("#btn_aprobar").attr("disabled", true);
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("rechazar", "AprobacionOC", new { Area = "Compras" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-
-            },
-            error: function (error) {
-            }
-        });
-        $("#myform").submit();
-    }
     </script>
 @using (Html.BeginForm("Index", "AprobacionOC", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdUsuarioAprobacion, new { @id = "IdUsuarioAprobacion" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id="IdTransaccionSession"})
     <div class="box ">
         <div class="box-header with-border">
@@ -97,7 +54,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdSucursal">Sucursal*</label>
-                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
+                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id="IdSucursal" })
                             @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -162,20 +119,22 @@
         <div class="box-body">
             @Html.Action("GridViewPartial_aprobacion_oc", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="Observacion">Observación*</label>
-                            @Html.TextAreaFor(q => q.Observacion, new { @class = "form-control", @rows="1" })
-                            @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="MotivoAprobacion">Observación</label>
+                                @Html.TextBoxFor(q => q.MotivoAprobacion, new { @class = "form-control", @id = "MotivoAprobacion" })
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="box-footer">
-                <button type="button" class="btn btn-success" id="btn_aprobar" estado="APRO" onclick="aprobar();">Aprobar</button>
-                <button type="button" class="btn btn-danger" id="btn_rechazar" estado="REPRO" onclick="rechazar();">Rechazar</button>
+                <button type="button" class="btn btn-success" id="btn_aprobar" onclick="aprobar();">Aprobar</button>
+                <button type="button" class="btn btn-danger" id="btn_rechazar" onclick="rechazar();">Anular</button>
             </div>
 
         </div>
@@ -190,3 +149,62 @@
 
             </div>
             }
+<script type="text/javascript">
+
+
+    function aprobar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
+            IDs: selectedIDs,
+            MotivoAprobacion: $("#MotivoAprobacion").val(),
+            IdUsuarioAprobacion: $("#IdUsuarioAprobacion").val()
+        }
+        $("#btn_aprobar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("aprobar", "AprobacionOC", new { Area = "Compras" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#MotivoAprobacion").val("");
+                $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function rechazar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
+            IDs: selectedIDs,
+            MotivoAprobacion: $("#MotivoAprobacion").val(),
+            IdUsuarioAprobacion: $("#IdUsuarioAprobacion").val()
+        }
+        $("#btn_aprobar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("rechazar", "AprobacionOC", new { Area = "Compras" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $("#MotivoAprobacion").val("");
+                $("#myform").submit();
+
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>

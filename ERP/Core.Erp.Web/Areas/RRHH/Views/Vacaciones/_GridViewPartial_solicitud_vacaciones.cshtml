@@ -108,34 +108,7 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        //settings.Columns.Add("Observacion","Observación").Width=Unit.Percentage(15);
-        settings.Columns.Add("Dias_q_Corresponde","Ganados").Width=Unit.Percentage(10);
-        settings.Columns.Add("Dias_a_disfrutar", "Tomados").Width = Unit.Percentage(10);
-        settings.Columns.Add("Dias_pendiente", "Pendientes").Width = Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Anio_Desde";
-            column.Caption = "Año desde";
-            column.Width = Unit.Percentage(11);
-            column.PropertiesEdit.DisplayFormatString = "d";
-            column.EditorProperties().DateEdit(sp =>
-            {
-                column.PropertiesEdit.DisplayFormatString = "d";
-                sp.Width = Unit.Percentage(100);
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Anio_Hasta";
-            column.Caption = "Año hasta";
-            column.Width = Unit.Percentage(11);
-            column.PropertiesEdit.DisplayFormatString = "d";
-            column.EditorProperties().DateEdit(sp =>
-            {
-                column.PropertiesEdit.DisplayFormatString = "d";
-                sp.Width = Unit.Percentage(100);
-            });
-        });
+      
         settings.Columns.Add(column =>
         {
             column.FieldName = "Fecha_Desde";

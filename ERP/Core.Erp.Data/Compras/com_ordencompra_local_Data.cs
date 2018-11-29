@@ -266,23 +266,23 @@ namespace Core.Erp.Data.Compras
             }
         }
 
-        public bool AprobarOC(List<com_ordencompra_local_Info> Lista)
+        public bool AprobarOC(int IdEmpresa, int IdSucursal, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
-                int IdEmpresa = 0;
-                if (Lista.Count() > 0)
-                    IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
-                IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
 
                 using (Entities_compras Context = new Entities_compras())
                 {
                     foreach (var item in Lista)
                     {
-                        com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdOrdenCompra == item.IdOrdenCompra);
+                        var IdOrdenCompraAprobacion = Convert.ToDecimal(item);
+                        com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdOrdenCompra == IdOrdenCompraAprobacion);
                         if (Entity != null)
                         {
-                            Entity.IdEstadoAprobacion_cat = item.IdEstadoAprobacion_cat;
+                            Entity.IdEstadoAprobacion_cat = "APRO";
+                            Entity.MotivoAprobacion = MotivoAprobacion;
+                            Entity.IdUsuarioAprobacion = IdUsuarioAprobacion;
+                            Entity.FechaAprobacion = DateTime.Now;
                         }
                         Context.SaveChanges();
                     }
@@ -296,23 +296,29 @@ namespace Core.Erp.Data.Compras
             }
         }
 
-        public bool RechazarOP(List<com_ordencompra_local_Info> Lista)
+        public bool RechazarOC(int IdEmpresa, int IdSucursal, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
-                int IdEmpresa = 0;
-                if (Lista.Count() > 0)
-                    IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
-                IdEmpresa = Lista.FirstOrDefault().IdEmpresa;
 
                 using (Entities_compras Context = new Entities_compras())
                 {
                     foreach (var item in Lista)
                     {
-                        com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdOrdenCompra == item.IdOrdenCompra);
+                        var IdOrdenCompraAprobacion = Convert.ToDecimal(item);
+                        com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdOrdenCompra == IdOrdenCompraAprobacion);
                         if (Entity != null)
                         {
-                            Entity.IdEstadoAprobacion_cat = item.IdEstadoAprobacion_cat;
+                            Entity.IdEstadoAprobacion_cat = "ANU";
+                            Entity.MotivoAprobacion = MotivoAprobacion;
+                            Entity.IdUsuarioAprobacion = IdUsuarioAprobacion;
+                            Entity.FechaAprobacion = DateTime.Now;
+
+                            Entity.Estado = "I";
+
+                            Entity.IdUsuarioUltAnu = IdUsuarioAprobacion;
+                            Entity.Fecha_UltAnu = DateTime.Now;
+                            Entity.MotivoAnulacion = MotivoAprobacion;
                         }
                         Context.SaveChanges();
                     }
@@ -376,7 +382,8 @@ namespace Core.Erp.Data.Compras
                             oc_fecha = q.oc_fecha,
                             Su_Descripcion = q.Su_Descripcion,
                             pe_nombreCompleto = q.pe_nombreCompleto,
-                            IdTerminoPago = q.TerminoPago
+                            IdTerminoPago = q.TerminoPago,
+                            Total = q.Total
                             
 
                     }).ToList();
