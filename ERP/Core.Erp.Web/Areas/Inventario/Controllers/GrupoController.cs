@@ -51,6 +51,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 IdCategoria = IdCategoria,
                 IdLinea = IdLinea
             };
+            ViewBag.IdCategoria = IdCategoria;
+            ViewBag.IdLinea =IdLinea;
             cargar_combos(IdEmpresa, IdCategoria);
             return View(model);
         }

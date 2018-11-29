@@ -23,7 +23,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         public ActionResult GridViewPartial_linea(int IdEmpresa = 0 , string IdCategoria = "")
         {
             ViewBag.IdCategoria = IdCategoria;
-            List<in_linea_Info> model = bus_linea.get_list(IdEmpresa, IdCategoria, true);
+            var model = bus_linea.get_list(IdEmpresa, IdCategoria, true);
             return PartialView("_GridViewPartial_linea", model);
         }
 
@@ -42,6 +42,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 IdCategoria = IdCategoria,
                 IdEmpresa = IdEmpresa
             };
+            ViewBag.IdCategoria = IdCategoria;
             cargar_combos(IdEmpresa);
             return View(model);
         }

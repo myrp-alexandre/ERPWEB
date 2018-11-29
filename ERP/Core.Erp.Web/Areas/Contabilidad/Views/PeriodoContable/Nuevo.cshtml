@@ -117,11 +117,16 @@
 
 <script>
     $(function () {
+        actualizar_periodo();
+
         $("#pe_mes").change(function () {
             actualizar_periodo();
         });
 
         $("#IdanioFiscal").change(function () {
+            actualizar_periodo();
+        });
+        $("#IdPeriodo").change(function () {
             actualizar_periodo();
         });
     });
@@ -145,5 +150,10 @@
 
         pe_FechaIni.SetValue(fecha_inicio_setear)
         pe_FechaFin.SetValue(dia_fin)
+
+        //var periodo = $("#IdPeriodo").val();
+        var periodo = (anio.GetFullYear + mes.GetFullMonth);
+        console.log(periodo);
+        IdPeriodo.SetValue(periodo)
     }
 </script>
