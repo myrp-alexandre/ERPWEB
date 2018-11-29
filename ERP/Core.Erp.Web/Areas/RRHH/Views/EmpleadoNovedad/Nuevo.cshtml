@@ -28,7 +28,7 @@
             <div class="col-md-12">
 
                 <div class="form-group">
-                    <label for="IdProveedor">Empleado</label>
+                    <label for="IdProveedor">Empleado*</label>
                     @Html.Partial("_CmbEmpleado_novedades", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
@@ -40,7 +40,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdNomina_Tipo">Nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
+                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
                     @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdNomina_TipoLiqui">Tipo liquidación de nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                     @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -125,7 +125,7 @@
                 cargar_tipo_liquidacion_nomina();
 
             });
-
+    cargar_tipo_liquidacion_nomina();
             function cargar_tipo_liquidacion_nomina() {
                 var datos = {
                     IdNomina: $("#IdNomina_Tipo").val()
@@ -145,6 +145,7 @@
                         $.each(data, function (i, row) {
                             $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
                         });
+                        $("#IdNomina_TipoLiqui").val(2);
                     },
                     error: function (error) {
                     }
