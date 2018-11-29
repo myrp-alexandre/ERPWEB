@@ -42,8 +42,6 @@
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
             column.Width = Unit.Percentage(80);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
 
@@ -52,7 +50,7 @@
             column.FieldName = "gi_cantidad";
             column.Caption = "cantidad";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(20);
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;

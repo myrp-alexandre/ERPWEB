@@ -393,6 +393,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var resultado = bus_contacto.get_list(IdEmpresa, IdCliente);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult get_direccion_origen(int  IdSucursal = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var resultado = bus_sucursal.get_info(IdEmpresa, IdSucursal);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
 
