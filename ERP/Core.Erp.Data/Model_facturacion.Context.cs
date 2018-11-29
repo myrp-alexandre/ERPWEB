@@ -28,7 +28,6 @@ namespace Core.Erp.Data
         public DbSet<fa_catalogo> fa_catalogo { get; set; }
         public DbSet<fa_catalogo_tipo> fa_catalogo_tipo { get; set; }
         public DbSet<fa_cliente_contactos> fa_cliente_contactos { get; set; }
-        public DbSet<fa_cliente_tipo> fa_cliente_tipo { get; set; }
         public DbSet<fa_cliente_x_fa_Vendedor_x_sucursal> fa_cliente_x_fa_Vendedor_x_sucursal { get; set; }
         public DbSet<fa_cuotas_x_doc> fa_cuotas_x_doc { get; set; }
         public DbSet<fa_factura_det> fa_factura_det { get; set; }
@@ -66,7 +65,6 @@ namespace Core.Erp.Data
         public DbSet<fa_parametro> fa_parametro { get; set; }
         public DbSet<vwfa_factura> vwfa_factura { get; set; }
         public DbSet<fa_factura> fa_factura { get; set; }
-        public DbSet<fa_cliente> fa_cliente { get; set; }
         public DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
         public DbSet<vwfa_notaCreDeb_det> vwfa_notaCreDeb_det { get; set; }
         public DbSet<fa_guia_remision> fa_guia_remision { get; set; }
@@ -78,5 +76,7 @@ namespace Core.Erp.Data
         public DbSet<fa_CambioProductoDet_x_in_devolucion_inven> fa_CambioProductoDet_x_in_devolucion_inven { get; set; }
         public DbSet<vwfa_CambioProductoDet> vwfa_CambioProductoDet { get; set; }
         public DbSet<vwfa_CambioProductoDet_FacturasConMovimiento> vwfa_CambioProductoDet_FacturasConMovimiento { get; set; }
+        public DbSet<fa_cliente> fa_cliente { get; set; }
+        public DbSet<fa_cliente_tipo> fa_cliente_tipo { get; set; }
     }
 }

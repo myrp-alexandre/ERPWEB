@@ -23,8 +23,6 @@ namespace Core.Erp.Data
         public int Idtipo_cliente { get; set; }
         public string Cod_cliente_tipo { get; set; }
         public string Descripcion_tip_cliente { get; set; }
-        public string IdCtaCble_CXC_Anticipo { get; set; }
-        public string IdCtaCble_CXC_Con { get; set; }
         public string IdCtaCble_CXC_Cred { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
@@ -33,9 +31,7 @@ namespace Core.Erp.Data
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotivoAnula { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
-        public string estado { get; set; }
+        public string Estado { get; set; }
     
         public virtual ICollection<fa_cliente> fa_cliente { get; set; }
     }

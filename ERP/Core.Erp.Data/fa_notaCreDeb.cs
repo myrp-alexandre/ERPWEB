@@ -58,7 +58,7 @@ namespace Core.Erp.Data
         public virtual fa_TipoNota fa_TipoNota { get; set; }
         public virtual ICollection<fa_notaCreDeb_x_ct_cbtecble> fa_notaCreDeb_x_ct_cbtecble { get; set; }
         public virtual ICollection<fa_notaCreDeb_x_cxc_cobro> fa_notaCreDeb_x_cxc_cobro { get; set; }
-        public virtual fa_cliente fa_cliente { get; set; }
         public virtual ICollection<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
+        public virtual fa_cliente fa_cliente { get; set; }
     }
 }

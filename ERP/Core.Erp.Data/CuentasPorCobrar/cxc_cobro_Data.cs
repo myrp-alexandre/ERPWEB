@@ -147,7 +147,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 var cliente = Context_fac.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
                 if (cliente == null)
                     return false;
-                IdCtaCble_haber = cliente.IdCtaCble_cxc;
+                IdCtaCble_haber = cliente.IdCtaCble_cxc_Credito;
                 #endregion
                 
                 #region CtaCble Haber
@@ -475,7 +475,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 var cliente = Context_fac.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
                 if (cliente == null)
                     return false;
-                IdCtaCble_haber = cliente.IdCtaCble_cxc;
+                IdCtaCble_haber = cliente.IdCtaCble_cxc_Credito;
                 #endregion
 
                 #region CtaCble Haber

@@ -90,10 +90,9 @@ namespace Core.Erp.Data.Facturacion
                     cl_plazo = Entity.cl_plazo,
                     Codigo = Entity.Codigo,
                     Estado = Entity.Estado,
-                    es_empresa_relacionada = Entity.es_empresa_relacionada == null ? false : Convert.ToBoolean(Entity.es_empresa_relacionada),
+                    es_empresa_relacionada = Entity.es_empresa_relacionada,
                     IdCliente = Entity.IdCliente,
                     FormaPago = Entity.FormaPago,
-                    IdCtaCble_cxc = Entity.IdCtaCble_cxc,
                     IdCtaCble_cxc_Credito = Entity.IdCtaCble_cxc_Credito,
                     IdPersona = Entity.IdPersona,
                     IdTipoCredito = Entity.IdTipoCredito,
@@ -231,7 +230,6 @@ namespace Core.Erp.Data.Facturacion
                         Estado = info.Estado = "A",
                         es_empresa_relacionada = info.es_empresa_relacionada,
                         FormaPago = info.FormaPago,
-                        IdCtaCble_cxc = info.IdCtaCble_cxc,
                         IdCtaCble_cxc_Credito = info.IdCtaCble_cxc_Credito,
                         IdPersona = info.IdPersona,
                         IdTipoCredito = info.IdTipoCredito,
@@ -296,7 +294,6 @@ namespace Core.Erp.Data.Facturacion
                     Entity.Codigo = info.Codigo;
                     Entity.es_empresa_relacionada = info.es_empresa_relacionada;
                     Entity.FormaPago = info.FormaPago;
-                    Entity.IdCtaCble_cxc = info.IdCtaCble_cxc;
                     Entity.IdCtaCble_cxc_Credito = info.IdCtaCble_cxc_Credito;
                     Entity.IdTipoCredito = info.IdTipoCredito;
                     Entity.Idtipo_cliente = info.Idtipo_cliente;

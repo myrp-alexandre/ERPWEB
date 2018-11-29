@@ -897,12 +897,10 @@
     <Build Include="dbo\Views\vwin_Producto_Stock_x_Sucursal.sql" />
     <Build Include="web\Views\vwimp_gastos_no_asignados.sql" />
     <Build Include="dbo\Views\vwcom_MotivoRequerimiento.sql" />
-    <Build Include="dbo\Views\vwfa_cliente.sql" />
     <Build Include="dbo\Views\vwro_TipoContrato.sql" />
     <Build Include="dbo\Views\vwin_producto_Ult_Costo_Hist_x_Bod.sql" />
     <Build Include="web\Views\vwin_Ing_Egr_Inven_det.sql" />
     <Build Include="dbo\Views\vwcom_ordencompra_local.sql" />
-    <Build Include="dbo\Views\vwfa_cliente_vista_previa.sql" />
     <Build Include="dbo\Views\vwin_producto_Ult_Costo_Hist_x_Sucu.sql" />
     <Build Include="web\Views\vwin_Ing_Egr_Inven_det_x_devolver.sql" />
     <Build Include="dbo\Views\vwro_titulos.sql" />
