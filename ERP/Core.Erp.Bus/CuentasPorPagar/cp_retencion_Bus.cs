@@ -45,6 +45,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 cp_retencion_Info info = new cp_retencion_Info();
 
                 info= odata.get_info(IdEmpresa,IdRetencion);
+                if (info == null)
+                    info = new cp_retencion_Info();
                 info.detalle = data_retencion_der.get_list(info.IdEmpresa, info.IdRetencion);
                 if (info.ct_IdCbteCble != null)
                     info.info_comprobante = bus_comprobante.get_info(info.IdEmpresa, (int)info.ct_IdTipoCbte, (decimal)info.ct_IdCbteCble);

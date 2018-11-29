@@ -263,6 +263,56 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
                     bus_forma_pago.GuardarDB(info.info_forma_pago);
                 }
+
+                #region Modificar retencion y diario rtencion
+
+                if (info.info_retencion != null)
+                {
+                    if (info.info_retencion.detalle.Count() > 0)
+                    {
+                        info.info_retencion.IdEmpresa = info.IdEmpresa;
+                        info.info_retencion.IdProveedor = info.IdProveedor;
+                        info.info_retencion.IdEmpresa_Ogiro = info.IdEmpresa;
+                        info.info_retencion.IdCbteCble_Ogiro = info.IdCbteCble_Ogiro;
+                        info.info_retencion.IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro;
+                        info.info_retencion.Fecha_Autorizacion = info.fecha_autorizacion;
+                        info.info_retencion.Descripcion = info.Descripcion;
+                        info.info_retencion.Estado = "A";
+                        info.info_retencion.fecha = info.co_fechaOg;
+                        info.info_retencion.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
+                        info.info_retencion.serie1 = info.info_retencion.serie1;
+                        info.info_retencion.serie2 = info.info_retencion.serie2;
+                        info.info_retencion.re_EstaImpresa = "N";
+                        info.info_retencion.re_Tiene_RFuente = "S";
+                        info.info_retencion.re_Tiene_RTiva = "S";
+                        info.info_retencion.IdUsuario = info.IdUsuario;
+                        info.info_retencion.observacion = "Retencion de factuta #" + info.co_serie + '-' + info.co_factura;
+                        info.info_retencion.Fecha_Transac = Convert.ToDateTime(info.Fecha_Transac);
+                        info.info_retencion.aprobada_enviar_sri = false;
+
+                        if (bus_retencion.modificarDB(info.info_retencion))
+                        {
+                            info.info_retencion.info_comprobante.IdEmpresa = info.IdEmpresa;
+                            info.info_retencion.info_comprobante.cb_Fecha = info.co_fechaOg;
+                            info.info_retencion.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
+                            info.info_retencion.info_comprobante.IdTipoCbte = info.IdTipoCbte_Ogiro;
+                            info.info_retencion.info_comprobante.IdCbteCble = info.IdCbteCble_Ogiro;
+                            info.info_retencion.info_comprobante.cb_Estado = info.Estado;
+                            info.info_retencion.info_comprobante.cb_Valor = info.co_valorpagar;
+                            info.info_retencion.info_comprobante.cb_Anio = info.info_comrobante.cb_Anio;
+                            info.info_retencion.info_comprobante.cb_mes = info.info_comrobante.cb_mes;
+                            info.info_retencion.info_comprobante.cb_Observacion = "Comprobante contable de retencion #" + info.info_retencion.serie1 + " " + info.info_retencion.serie2 + " " + info.info_retencion.NumRetencion;
+                            bus_contabilidad.guardarDB(info.info_retencion.info_comprobante);
+
+
+
+
+                        }
+
+                    }
+
+                }
+                #endregion
                 return true;
             }
             catch (Exception)
@@ -311,6 +361,55 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     bus_cuotas.AnularDB(info.info_cuota);
                 }
 
+                #region Modificar retencion y diario rtencion
+
+                if (info.info_retencion != null)
+                {
+                    if (info.info_retencion.detalle.Count() > 0)
+                    {
+                        info.info_retencion.IdEmpresa = info.IdEmpresa;
+                        info.info_retencion.IdProveedor = info.IdProveedor;
+                        info.info_retencion.IdEmpresa_Ogiro = info.IdEmpresa;
+                        info.info_retencion.IdCbteCble_Ogiro = info.IdCbteCble_Ogiro;
+                        info.info_retencion.IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro;
+                        info.info_retencion.Fecha_Autorizacion = info.fecha_autorizacion;
+                        info.info_retencion.Descripcion = info.Descripcion;
+                        info.info_retencion.Estado = "A";
+                        info.info_retencion.fecha = info.co_fechaOg;
+                        info.info_retencion.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
+                        info.info_retencion.serie1 = info.info_retencion.serie1;
+                        info.info_retencion.serie2 = info.info_retencion.serie2;
+                        info.info_retencion.re_EstaImpresa = "N";
+                        info.info_retencion.re_Tiene_RFuente = "S";
+                        info.info_retencion.re_Tiene_RTiva = "S";
+                        info.info_retencion.IdUsuario = info.IdUsuario;
+                        info.info_retencion.observacion = "Retencion de factuta #" + info.co_serie + '-' + info.co_factura;
+                        info.info_retencion.Fecha_Transac = Convert.ToDateTime(info.Fecha_Transac);
+                        info.info_retencion.aprobada_enviar_sri = false;
+
+                        if (bus_retencion.anularDB(info.info_retencion))
+                        {
+                            info.info_retencion.info_comprobante.IdEmpresa = info.IdEmpresa;
+                            info.info_retencion.info_comprobante.cb_Fecha = info.co_fechaOg;
+                            info.info_retencion.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
+                            info.info_retencion.info_comprobante.IdTipoCbte = info.IdTipoCbte_Ogiro;
+                            info.info_retencion.info_comprobante.IdCbteCble = info.IdCbteCble_Ogiro;
+                            info.info_retencion.info_comprobante.cb_Estado = info.Estado;
+                            info.info_retencion.info_comprobante.cb_Valor = info.co_valorpagar;
+                            info.info_retencion.info_comprobante.cb_Anio = info.info_comrobante.cb_Anio;
+                            info.info_retencion.info_comprobante.cb_mes = info.info_comrobante.cb_mes;
+                            info.info_retencion.info_comprobante.cb_Observacion = "Comprobante contable de retencion #" + info.info_retencion.serie1 + " " + info.info_retencion.serie2 + " " + info.info_retencion.NumRetencion;
+                            bus_contabilidad.anularDB(info.info_retencion.info_comprobante);
+
+
+
+
+                        }
+
+                    }
+
+                }
+                #endregion
                 return true;
             }
             catch (Exception)
