@@ -469,10 +469,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var punto_venta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
             if (punto_venta != null)
             {
-                tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
-                var bodega = bus_bodega.get_info(IdEmpresa, IdSucursal, Convert.ToInt32(punto_venta.IdBodega));
                 var sucursal = bus_sucursal.get_info(IdEmpresa, IdSucursal);
-                resultado = bus_talonario.get_info_ultimo_no_usado(IdEmpresa, sucursal.Su_CodigoEstablecimiento, bodega.cod_punto_emision, "FACT");
+                resultado = bus_talonario.get_info_ultimo_no_usado(IdEmpresa, sucursal.Su_CodigoEstablecimiento, punto_venta.cod_PuntoVta, "FACT");
             }
             else
                 resultado = new tb_sis_Documento_Tipo_Talonario_Info();
