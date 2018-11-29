@@ -266,7 +266,7 @@ namespace Core.Erp.Data.Compras
             }
         }
 
-        public bool AprobarOC(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
+        public bool AprobarOC(int IdEmpresa, int IdSucursal, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
@@ -276,7 +276,7 @@ namespace Core.Erp.Data.Compras
                     foreach (var item in Lista)
                     {
                         var IdOrdenCompraAprobacion = Convert.ToDecimal(item);
-                        com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdOrdenCompra == IdOrdenCompraAprobacion);
+                        com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdOrdenCompra == IdOrdenCompraAprobacion);
                         if (Entity != null)
                         {
                             Entity.IdEstadoAprobacion_cat = "xAPRO";
@@ -296,7 +296,7 @@ namespace Core.Erp.Data.Compras
             }
         }
 
-        public bool RechazarOC(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
+        public bool RechazarOC(int IdEmpresa, int IdSucursal, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
@@ -306,7 +306,7 @@ namespace Core.Erp.Data.Compras
                     foreach (var item in Lista)
                     {
                         var IdOrdenCompraAprobacion = Convert.ToDecimal(item);
-                        com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdOrdenCompra == IdOrdenCompraAprobacion);
+                        com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdOrdenCompra == IdOrdenCompraAprobacion);
                         if (Entity != null)
                         {
                             Entity.IdEstadoAprobacion_cat = "ANU";

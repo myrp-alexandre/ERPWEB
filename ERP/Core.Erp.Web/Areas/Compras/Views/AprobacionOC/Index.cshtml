@@ -54,7 +54,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdSucursal">Sucursal*</label>
-                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
+                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id="IdSucursal" })
                             @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -155,6 +155,7 @@
     function aprobar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
             IDs: selectedIDs,
             MotivoAprobacion: $("#MotivoAprobacion").val(),
             IdUsuarioAprobacion: $("#IdUsuarioAprobacion").val()
@@ -181,6 +182,7 @@
     function rechazar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
             IDs: selectedIDs,
             MotivoAprobacion: $("#MotivoAprobacion").val(),
             IdUsuarioAprobacion: $("#IdUsuarioAprobacion").val()

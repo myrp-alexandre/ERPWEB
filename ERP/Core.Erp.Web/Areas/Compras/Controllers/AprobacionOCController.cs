@@ -20,16 +20,11 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
 
         public ActionResult Index()
         {
-            #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            #endregion
             com_orden_aprobacion_Info model = new com_orden_aprobacion_Info
             {
                 IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
+                IdUsuarioAprobacion = string.IsNullOrEmpty(SessionFixed.IdUsuario) ? "" : SessionFixed.IdUsuario,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
 
             };
@@ -46,11 +41,10 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             return View(model);
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_aprobacion_oc(int IdSucursal, DateTime? fecha_ini, DateTime? fecha_fin)
+        public ActionResult GridViewPartial_aprobacion_oc( DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal)
         {
 
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var det = List_apro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(fecha_ini);
@@ -58,8 +52,6 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             ViewBag.IdSucursal = IdSucursal == 0 ? 0 : Convert.ToInt32(IdSucursal);
 
             var model = bus_ordencompra.GetListPorAprobar(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin);
-            List_apro.set_list(model, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
             return PartialView("_GridViewPartial_aprobacion_oc", model);
         }
 
@@ -70,69 +62,33 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             
         }
 
-        //public JsonResult aprobar(int IdEmpresa = 0,   string Ids = "")
-        //{
-
-        //    string[] array = Ids.Split(',');
-        //    List<com_ordencompra_local_Info> lst_ordenes_compra_aprobacion = new List<com_ordencompra_local_Info>();
-        //    var output = array.GroupBy(q => q).ToList();
-
-        //    foreach (var item in output)
-        //    {
-        //        var lsis = List_apro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-        //        com_ordencompra_local_Info info = new com_ordencompra_local_Info();
-        //        info = List_apro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession)).Where(v=>v.IdOrdenCompra == Convert.ToDecimal(item.Key)).FirstOrDefault();
-        //        info.IdEstadoAprobacion_cat = "APRO";
-        //        bus_ordencompra.AprobarOC(info);
-        //    }
-
-        //    return Json("", JsonRequestBehavior.AllowGet);
-        //}
-        public JsonResult aprobar(int IdEmpresa = 0, string Ids = "")
+        public JsonResult aprobar(int IdEmpresa = 0, int IdSucursal = 0 , string Ids = "", string MotivoAprobacion = "", string IdUsuarioAprobacion = "")
         {
             string[] array = Ids.Split(',');
-            List<com_ordencompra_local_Info> lst_ordenes_compra_aprobacion = new List<com_ordencompra_local_Info>();
-            var output = array.GroupBy(q => q).ToList();
 
-            foreach (var item in output)
+            if (string.IsNullOrEmpty(array.ToString()))
             {
-                com_ordencompra_local_Info info = new com_ordencompra_local_Info
-                {
-                    IdEmpresa = IdEmpresa,
-                    IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
-                    IdOrdenCompra = Convert.ToInt32(item.Key),
-                    IdEstadoAprobacion_cat = "APRO"
-                };
-
-                lst_ordenes_compra_aprobacion.Add(info);
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-            
-            var resultado_orden = bus_ordencompra.AprobarOC(lst_ordenes_compra_aprobacion);
-
-            return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+            else
+            {
+                var resultado_orden = bus_ordencompra.AprobarOC(IdEmpresa, IdSucursal, array, MotivoAprobacion, IdUsuarioAprobacion);
+                return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+            }
         }
-        public JsonResult rechazar(int IdEmpresa = 0, string Ids = "")
+        public JsonResult rechazar(int IdEmpresa = 0, string Ids = "", int IdSucursal = 0 , string MotivoAprobacion = "", string IdUsuarioAprobacion = "")
         {
             string[] array = Ids.Split(',');
-            List<com_ordencompra_local_Info> lst_ordenes_compra_aprobacion = new List<com_ordencompra_local_Info>();
-            var output = array.GroupBy(q => q).ToList();
 
-            foreach (var item in output)
+            if (string.IsNullOrEmpty(array.ToString()))
             {
-                com_ordencompra_local_Info info = new com_ordencompra_local_Info
-                {
-                    IdEmpresa = IdEmpresa,
-                    IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
-                    IdOrdenCompra = Convert.ToInt32(item.Key),
-                    IdEstadoAprobacion_cat = "ANU"
-                };
-
-                lst_ordenes_compra_aprobacion.Add(info);
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
-
-            var resultado_orden = bus_ordencompra.AprobarOC(lst_ordenes_compra_aprobacion);
-
-            return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+            else
+            {
+                var resultado_orden = bus_ordencompra.RechazarOC(IdEmpresa, IdSucursal, array, MotivoAprobacion, IdUsuarioAprobacion);
+                return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+            }
         }
 
     }

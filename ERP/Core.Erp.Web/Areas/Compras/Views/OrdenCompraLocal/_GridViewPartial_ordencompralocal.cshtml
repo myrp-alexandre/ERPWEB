@@ -55,7 +55,7 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
-            if (Convert.ToString(e.GetValue("IdEstadoAprobacion_cat")) == "APRO" )
+            if (Convert.ToString(e.GetValue("IdEstadoAprobacion_cat")) == "APRO")
             {
                 e.Row.ForeColor = System.Drawing.Color.Blue;
             }
@@ -71,8 +71,6 @@
             {
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
-                    if (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstadoAprobacion_cat")) == "xAPRO")
-                    {
                         settings.HtmlRowPrepared = (s, e) =>
                         {
                             ViewContext.Writer.Write(
@@ -81,7 +79,6 @@
                                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                             );
                         };
-                    }
                 }
             });
             c.SetHeaderTemplateContent(tc =>

@@ -83,11 +83,11 @@ namespace Core.Erp.Bus.Compras
                 throw;
             }
         }
-        public bool AprobarOC(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
+        public bool AprobarOC(int IdEmpresa, int IdSucursal, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
-                return odata.AprobarOC(IdEmpresa, Lista, MotivoAprobacion, IdUsuarioAprobacion);
+                return odata.AprobarOC(IdEmpresa,  IdSucursal, Lista, MotivoAprobacion, IdUsuarioAprobacion);
             }
             catch (Exception)
             {
@@ -96,11 +96,11 @@ namespace Core.Erp.Bus.Compras
             }
         }
 
-        public bool RechazarOC(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
+        public bool RechazarOC(int IdEmpresa, int IdSucursal, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
         {
             try
             {
-                return odata.RechazarOC(IdEmpresa, Lista, MotivoAprobacion, IdUsuarioAprobacion);
+                return odata.RechazarOC(IdEmpresa,  IdSucursal, Lista, MotivoAprobacion, IdUsuarioAprobacion);
             }
             catch (Exception)
             {
