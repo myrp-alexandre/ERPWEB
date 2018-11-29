@@ -303,6 +303,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return true;
         }
         #endregion
+
+
+        #region Json
+        public JsonResult CargarBodega(int IdEmpresa = 0, int IdSucursal = 0)
+        {
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+            bus_bodega = new tb_bodega_Bus();
+            var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
     }
 
     public class in_transferencia_det_List
