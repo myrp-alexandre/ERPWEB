@@ -101,8 +101,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 ro_empleado_x_rubro_acumulado_Info model = new ro_empleado_x_rubro_acumulado_Info
                 {
-                    IdEmpleado = IdEmpleado
-                };
+                    IdEmpleado = IdEmpleado,
+                    Fec_Inicio_Acumulacion = new DateTime(DateTime.Now.Year, 1, 1),
+                    Fec_Fin_Acumulacion = new DateTime(DateTime.Now.Year, 12, 1)
+
+            };
                 ViewBag.IdEmpleado = IdEmpleado;
                 cargar_combos();
                 return View(model);
