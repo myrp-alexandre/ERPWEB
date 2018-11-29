@@ -52,6 +52,7 @@ namespace Core.Erp.Info.Compras
         public string MotivoAprobacion { get; set; }
         public Nullable<System.DateTime> FechaAprobacion { get; set; }
         public List<com_ordencompra_local_det_Info> lst_det { get; set; }
+        public Nullable<double> Total { get; set; }
 
     }
     public class com_orden_aprobacion_Info

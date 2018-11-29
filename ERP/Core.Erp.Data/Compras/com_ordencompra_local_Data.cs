@@ -382,7 +382,8 @@ namespace Core.Erp.Data.Compras
                             oc_fecha = q.oc_fecha,
                             Su_Descripcion = q.Su_Descripcion,
                             pe_nombreCompleto = q.pe_nombreCompleto,
-                            IdTerminoPago = q.TerminoPago
+                            IdTerminoPago = q.TerminoPago,
+                            Total = q.Total
                             
 
                     }).ToList();
