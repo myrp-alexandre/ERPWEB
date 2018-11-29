@@ -115,7 +115,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 var lst_producto_x_bodega = bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa));
                 model.pr_imagen = new byte[0];
                 list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
-                Lis_in_producto_x_tb_bodega_Info_List.set_list(bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa)), model.IdTransaccionSession);
+                Lis_in_producto_x_tb_bodega_Info_List.set_list(lst_producto_x_bodega, model.IdTransaccionSession);
                 cargar_combos(model);
                 return View(model);
             }

@@ -31,24 +31,8 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdPais">Ciudad*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_Canton, settings =>
-               {
-                   settings.Name = "IdCiudad";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Descripcion_Ciudad", "Provincia").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                   //Campo ID
-                   settings.Properties.ValueField = "IdCiudad";
-                   settings.Properties.ValueType = typeof(string);
-                   settings.Properties.TextField = "Descripcion_Ciudad";
-                   settings.Properties.AllowNull = false;
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-               }).BindList(ViewBag.lst_ciudades).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdCiudad_Canton, "", new { @class = "text-danger" })
+@Html.DropDownListFor(q => q.IdCiudad_Canton, new SelectList(ViewBag.lst_ciudades, "IdCiudad", "Descripcion_ciudad"), new { @class = "form-control", @disabled = "disabled" })
+@Html.ValidationMessageFor(q => q.IdCiudad_Canton, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -69,7 +53,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Parroquia",new {IdCiudad = Model.IdCiudad_Canton,  Area = "General" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","Parroquia",new {IdCiudad = Model.IdCiudad_Canton,IdPais = ViewBag.IdPais,  Area = "General" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

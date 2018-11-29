@@ -22,9 +22,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_region(string IdPais = "")
         {
-            List<tb_region_Info> model = new List<tb_region_Info>();
-            model = bus_region.get_list(IdPais, true);
             ViewBag.IdPais = IdPais;
+            var model = bus_region.get_list(IdPais, true);
             return PartialView("_GridViewPartial_region", model);
         }
         private void cargar_combos()
