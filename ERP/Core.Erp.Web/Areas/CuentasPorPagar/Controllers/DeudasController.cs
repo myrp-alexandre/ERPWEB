@@ -324,6 +324,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             model.info_comrobante = new ct_cbtecble_Info();
 
+            var ct_ret = List_ct_cbtecble_det_List_retencion.get_list(model.IdTransaccionSession);
+            var ct_factura = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
+
             model.info_retencion.detalle = List_cp_retencion_det.get_list(model.IdTransaccionSession);
             model.info_retencion.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List_retencion.get_list(model.IdTransaccionSession);
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
@@ -892,7 +895,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
     public class ct_cbtecble_det_List_fp
     {
-        string Variable = "ct_cbtecble_det_Info";
+        string Variable = "ct_cbtecble_det_List_fp";
         public List<ct_cbtecble_det_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
