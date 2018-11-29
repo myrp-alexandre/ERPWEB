@@ -279,7 +279,7 @@ namespace Core.Erp.Data.Compras
                         com_ordencompra_local Entity = Context.com_ordencompra_local.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdOrdenCompra == IdOrdenCompraAprobacion);
                         if (Entity != null)
                         {
-                            Entity.IdEstadoAprobacion_cat = "xAPRO";
+                            Entity.IdEstadoAprobacion_cat = "APRO";
                             Entity.MotivoAprobacion = MotivoAprobacion;
                             Entity.IdUsuarioAprobacion = IdUsuarioAprobacion;
                             Entity.FechaAprobacion = DateTime.Now;
