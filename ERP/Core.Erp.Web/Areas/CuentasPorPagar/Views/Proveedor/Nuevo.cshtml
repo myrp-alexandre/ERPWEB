@@ -372,9 +372,10 @@
 
 
 <script>
-        $(function () {
-            get_info_clase_proveedor();
-        })
+    $(function () {
+        get_info_clase_proveedor();
+    });    
+
     $("#pe_apellido").keyup(function () {
         actualizar_nombre_completo();
     });
@@ -386,6 +387,10 @@
     });
     $("#pe_cedulaRuc").change(function () {
         get_info_x_num_cedula();
+    });
+
+    $("#IdClaseProveedor").change(function () {
+        get_info_clase_proveedor();
     });
 
     $("#pe_cedulaRuc").keyup(function () {
@@ -532,7 +537,6 @@
                     } else {
                         IdCtaCble_CXP.SetValue(data.IdCtaCble_CXP);
                         IdCtaCble_Gasto.SetValue(data.IdCtaCble_Gasto);
-                        IdCtaCble_Anticipo.SetValue(data.IdCtaCble_CXC_Anticipo);
                     }
                 },
                 error: function (error) {
@@ -542,7 +546,6 @@
         } else {
             IdCtaCble_CXP.SetValue(null);
             IdCtaCble_Gasto.SetValue(null);
-            IdCtaCble_Anticipo.SetValue(null);
         }
         }
 
