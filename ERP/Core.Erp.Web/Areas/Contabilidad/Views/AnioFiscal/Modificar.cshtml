@@ -13,6 +13,14 @@
     @Html.HiddenFor(q => q.IdanioFiscal)
     @Html.HiddenFor(q => q.info_anio_ctautil.IdEmpresa)
     @Html.HiddenFor(q => q.info_anio_ctautil.IdanioFiscal)
+    if (@ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -90,18 +98,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-
-
-<script>
-    $(function () {
-
-        //Date picker
-        $('#af_fechaIni').datepicker({
-            autoclose: true
-        })
-
-        $('#af_fechaFin').datepicker({
-            autoclose: true
-        })
-    })
-</script>
