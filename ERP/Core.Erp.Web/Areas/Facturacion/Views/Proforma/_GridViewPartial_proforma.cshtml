@@ -4,7 +4,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_proforma";
-        settings.CallbackRouteValues = new { Controller = "Proforma", Action = "GridViewPartial_proforma" , Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin };
+        settings.CallbackRouteValues = new { Controller = "Proforma", Action = "GridViewPartial_proforma", IdSucursal = ViewBag.IdSucursal, Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin };
         settings.KeyFieldName = "IdProforma";
         settings.Width = Unit.Percentage(100);
 

@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Inventario
 {
     public class in_devolucion_inven_Data
     {
-        public List<in_devolucion_inven_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<in_devolucion_inven_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
@@ -20,6 +20,7 @@ namespace Core.Erp.Data.Inventario
                 {
                     Lista = (from q in Context.in_devolucion_inven
                              where q.IdEmpresa == IdEmpresa
+                             && q.dev_IdSucursal == IdSucursal
                              && Fecha_ini <= q.Fecha && q.Fecha <= Fecha_fin
                              select new in_devolucion_inven_Info
                              {

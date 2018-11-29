@@ -10,7 +10,8 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Index", "Proforma", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-    <div class="box ">
+    @Html.HiddenFor(q => q.IdEmpresa)
+  <div class="box ">
         <div class="box-header with-border">
             <div class="row">
                 <div class="col-md-12">
@@ -29,6 +30,13 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdSucursal">Sucursal*</label>
+                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                            @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>
@@ -88,7 +96,7 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_proforma", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
+            @Html.Action("GridViewPartial_proforma", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

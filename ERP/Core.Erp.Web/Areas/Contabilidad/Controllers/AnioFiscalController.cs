@@ -15,6 +15,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         ct_anio_fiscal_Bus bus_anio_fiscal = new ct_anio_fiscal_Bus();
         ct_anio_fiscal_x_cuenta_utilidad_Bus bus_aniocta = new ct_anio_fiscal_x_cuenta_utilidad_Bus();
+        string mensaje = string.Empty;
 
         public ActionResult Index()
         {
@@ -52,6 +53,18 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         }
         #endregion
 
+
+
+
+        private bool validar(ct_anio_fiscal_Info i_validar, ref string msg)
+        {
+            if (string.IsNullOrEmpty(i_validar.info_anio_ctautil.IdCtaCble))
+             {
+                        msg = "El campo cuenta contable es obligatorio";
+                        return false;
+            }
+            return true;
+        }
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa =0 , int IdanioFiscal = 0)
         {
@@ -68,7 +81,13 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [HttpPost]
         public ActionResult Nuevo(ct_anio_fiscal_Info model)
         {
-            if(bus_anio_fiscal.validar_existe_Idanio(model.IdanioFiscal))
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
+                return View(model);
+            }
+            if (bus_anio_fiscal.validar_existe_Idanio(model.IdanioFiscal))
             {
                 ViewBag.mensaje = "El año ya se encuentra registrado";
                 cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
@@ -105,7 +124,13 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [HttpPost]
         public ActionResult Modificar(ct_anio_fiscal_Info model)
         {
-            if(!bus_anio_fiscal.modificarDB(model))
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
+                return View(model);
+            }
+            if (!bus_anio_fiscal.modificarDB(model))
             {
                 model.info_anio_ctautil.IdEmpresa = model.info_anio_ctautil.IdEmpresa;
                 model.info_anio_ctautil.IdanioFiscal = model.IdanioFiscal;

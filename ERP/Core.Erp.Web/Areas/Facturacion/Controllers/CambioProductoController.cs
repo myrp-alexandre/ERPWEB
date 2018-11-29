@@ -135,10 +135,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 ViewBag.mensaje = mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
             if (!bus_CambioProducto.GuardarDB(model))
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
@@ -174,12 +176,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 ViewBag.mensaje = mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
 
             if (!bus_CambioProducto.ModificarDB(model))
             {
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
                         
@@ -212,6 +216,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             if (!bus_CambioProducto.AnularDB(model))
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }

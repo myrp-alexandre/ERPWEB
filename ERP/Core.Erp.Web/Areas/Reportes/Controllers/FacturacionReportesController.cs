@@ -198,7 +198,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_vendedor = lst_vendedor;
 
             fa_proforma_Bus bus_proforma = new fa_proforma_Bus();
-            var lst_proforma = bus_proforma.get_list(IdEmpresa, model.fecha_ini, model.fecha_fin);
+            var lst_proforma = bus_proforma.get_list(IdEmpresa, model.IdSucursal, model.fecha_ini, model.fecha_fin);
             lst_proforma.Add(new Info.Facturacion.fa_proforma_Info
             {
                 IdProforma = 0,

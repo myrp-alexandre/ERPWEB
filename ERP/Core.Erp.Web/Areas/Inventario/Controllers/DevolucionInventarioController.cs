@@ -29,20 +29,28 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #region Index
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
-        public ActionResult GridViewPartial_devolucion(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        public ActionResult GridViewPartial_devolucion( DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            ViewBag.IdSucursal = IdSucursal;
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-            var model = bus_devolucion.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            var model = bus_devolucion.get_list(IdEmpresa, IdSucursal, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_devolucion",model);
         }
         #endregion
