@@ -11,7 +11,7 @@
 
 @using (Html.BeginForm("Modificar", "TransferenciasInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransferencia)
     @Html.HiddenFor(q => q.IdSucursalOrigen)
     @Html.HiddenFor(q => q.IdBodegaOrigen)
@@ -152,3 +152,79 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+
+
+
+<script type="text/javascript">
+
+        $(function () {
+            CargarBodegaOrigen();
+            $("#IdSucursalOrigen").change(function () {
+                CargarBodegaOrigen();
+            });
+    });
+
+function CargarBodegaOrigen() {
+    $("#IdBodegaOrigen").empty();
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursalOrigen").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarBodega", "TransferenciasInventario", new { Area = "Inventario" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            $.each(data, function (i, row) {
+                $("#IdBodegaOrigen").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+            });
+            },
+            error: function (error) {
+            }
+            });
+    };
+
+
+     $(function () {
+            CargarBodegaOrigen();
+         $("#IdSucursalDest").change(function () {
+             CargarBodegaDestino();
+            });
+    });
+
+function CargarBodegaDestino() {
+    $("#IdBodegaDest").empty();
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursalDest").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarBodega", "TransferenciasInventario", new { Area = "Inventario" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            $.each(data, function (i, row) {
+                $("#IdBodegaDest").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+            });
+            },
+            error: function (error) {
+            }
+            });
+    };
+
+
+</script>
