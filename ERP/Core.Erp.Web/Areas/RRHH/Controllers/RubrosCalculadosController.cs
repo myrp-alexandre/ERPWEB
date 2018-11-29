@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class RubrosCalculadosController : Controller
@@ -15,27 +17,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         public ActionResult Index()
         {
-            return View();
+            ro_rubros_calculados_Info model = new ro_rubros_calculados_Info();
+            model= bus_cargo.get_info(Convert.ToInt32( SessionFixed.IdEmpresa));
+            cargar_combos();
+            return View(model);
         }
 
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_rubros_calculados()
-        {
-            try
-            {
-                cargar_combos();
-                IdEmpresa = GetIdEmpresa();
-                List<ro_rubros_calculados_Info> model = bus_cargo.get_list(IdEmpresa, true);
-                return PartialView("_GridViewPartial_rubros_calculados", model);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+       
         [HttpPost]
-        public ActionResult Nuevo(ro_rubros_calculados_Info info)
+        public ActionResult Index(ro_rubros_calculados_Info info)
         {
             try
             {
@@ -43,49 +33,24 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     info.IdEmpresa = GetIdEmpresa();
                     if (!bus_cargo.guardarDB(info))
+                    {
+                        cargar_combos();
                         return View(info);
+                    }
                     else
-                        return RedirectToAction("Index");
+                    {
+                        cargar_combos();
+
+                        return View(info);
+
+                    }
                 }
                 else
-                    return View(info);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        public ActionResult Nuevo()
-        {
-            try
-            {
-                cargar_combos();
-                ro_rubros_calculados_Info info = new ro_rubros_calculados_Info();
-                return View(info);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        [HttpPost]
-        public ActionResult Modificar(ro_rubros_calculados_Info info)
-        {
-            try
-            {
-                if (ModelState.IsValid)
                 {
-                    if (!bus_cargo.modificarDB(info))
-                        return View(info);
-                    else
-                        return RedirectToAction("Index");
-                }
-                else
+                    cargar_combos();
+
                     return View(info);
+                }
 
             }
             catch (Exception)
@@ -94,22 +59,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-
-        public ActionResult Modificar(int IdArea = 0)
-        {
-            try
-            {
-                cargar_combos();
-                IdEmpresa = GetIdEmpresa();
-                return View(bus_cargo.get_info(IdEmpresa));
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+       
        
         private int GetIdEmpresa()
         {

@@ -70,6 +70,7 @@ namespace Core.Erp.Data.RRHH
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdHorasExtras == IdHorasExtras
                                  && q.es_HorasExtrasAutorizadas == estado_aprobacion
+                                 && q.hora_trabajada>0
                                  select new ro_nomina_x_horas_extras_det_Info
                                  {
 
