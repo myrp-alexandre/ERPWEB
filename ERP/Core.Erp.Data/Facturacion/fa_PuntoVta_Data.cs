@@ -17,7 +17,7 @@ namespace Core.Erp.Data.Facturacion
                 List<fa_PuntoVta_Info> Lista;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    Lista = (from q in Context.fa_PuntoVta
+                    Lista = (from q in Context.vwfa_PuntoVta
                              where q.IdEmpresa == IdEmpresa
                              select new fa_PuntoVta_Info
                              {
@@ -27,8 +27,8 @@ namespace Core.Erp.Data.Facturacion
                                  IdPuntoVta = q.IdPuntoVta,
                                  cod_PuntoVta = q.cod_PuntoVta,
                                  nom_PuntoVta = q.nom_PuntoVta,
-                                 estado = q.estado == true
-
+                                 estado = q.estado,
+                                 Su_Descripcion = q.Su_Descripcion
                              }).ToList();
                 }
                 return Lista;

@@ -78,5 +78,6 @@ namespace Core.Erp.Data
         public DbSet<vwfa_CambioProductoDet_FacturasConMovimiento> vwfa_CambioProductoDet_FacturasConMovimiento { get; set; }
         public DbSet<fa_cliente> fa_cliente { get; set; }
         public DbSet<fa_cliente_tipo> fa_cliente_tipo { get; set; }
+        public DbSet<vwfa_PuntoVta> vwfa_PuntoVta { get; set; }
     }
 }

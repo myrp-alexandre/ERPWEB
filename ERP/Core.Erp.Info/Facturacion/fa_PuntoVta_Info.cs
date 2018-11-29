@@ -23,5 +23,6 @@ namespace Core.Erp.Info.Facturacion
         public bool estado { get; set; }
         [Required(ErrorMessage = "El campo bodega es obligatorio")]
         public Nullable<int> IdBodega { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }
