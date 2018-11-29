@@ -219,31 +219,6 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="IdCtaCble_cxc">Cuenta contable cxc*</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_cxc, settings =>
-                                   {
-                                       settings.Name = "IdCtaCble_cxc";
-                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                       settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                       settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                       settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-                                       //Campo ID
-                                       settings.Properties.ValueField = "IdCtaCble";
-                                       settings.Properties.ValueType = typeof(string);
-                                       settings.Properties.TextField = "pc_Cuenta";
-                                       //Boton para seleccionar ningun registro
-                                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                       settings.Properties.NullText = "== Seleccione ==";
-                                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                   }).BindList(ViewBag.lst_cuentas).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdCtaCble_cxc, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
                             <label for="IdCtaCble_cxc_Credito">Cuenta contable credito</label>
                             @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_cxc_Credito, settings =>
                                    {
@@ -404,9 +379,7 @@
                     if (data.length == 0) {
                         console.log("NO DATA!")
                     } else {
-                        IdCtaCble_cxc.SetValue(data.IdCtaCble_CXC_Con);
                         IdCtaCble_cxc_Credito.SetValue(data.IdCtaCble_CXC_Cred);
-                        IdCtaCble_Anti.SetValue(data.IdCtaCble_CXC_Anticipo);
                     }
                 },
                 error: function (error) {
@@ -414,9 +387,7 @@
                 }
             });
         } else {
-            IdCtaCble_cxc.SetValue(null);
             IdCtaCble_cxc_Credito.SetValue(null);
-            IdCtaCble_Anti.SetValue(null);
         }
     }
 

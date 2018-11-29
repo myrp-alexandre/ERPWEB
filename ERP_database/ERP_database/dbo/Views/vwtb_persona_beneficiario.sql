@@ -8,8 +8,8 @@ FROM            tb_persona AS pers INNER JOIN
                          cp_proveedor AS prov ON pers.IdPersona = prov.IdPersona
 UNION
 SELECT        cli.IdEmpresa, 'CLIENTE' + '-' + CAST(pers.IdPersona AS varchar(20)) + '-' + CAST(cli.IdCliente AS varchar(20)) AS IdBeneficiario, 'CLIENTE' AS IdTipo_Persona, pers.IdPersona, cli.IdCliente, cli.Codigo, 
-                         pers.pe_nombreCompleto, pers.pe_nombreCompleto AS Girado_a, pers.pe_razonSocial, pers.pe_cedulaRuc, pers.pe_Naturaleza, cli.IdCtaCble_cxc, NULL AS Expr2, NULL AS Expr3, cli.IdCtaCble_cxc AS Expr4, 
-                         cli.IdCtaCble_cxc AS Expr5, cli.Estado, pers.IdTipoCta_acreditacion_cat, pers.num_cta_acreditacion, pers.IdBanco_acreditacion, pers.pe_apellido, pers.pe_nombre, pers.pe_nombreCompleto AS Expr6, 
+                         pers.pe_nombreCompleto, pers.pe_nombreCompleto AS Girado_a, pers.pe_razonSocial, pers.pe_cedulaRuc, pers.pe_Naturaleza, cli.IdCtaCble_cxc_Credito IdCtaCble_cxc, NULL AS Expr2, NULL AS Expr3, cli.IdCtaCble_cxc_Credito AS Expr4, 
+                         cli.IdCtaCble_cxc_Credito AS Expr5, cli.Estado, pers.IdTipoCta_acreditacion_cat, pers.num_cta_acreditacion, pers.IdBanco_acreditacion, pers.pe_apellido, pers.pe_nombre, pers.pe_nombreCompleto AS Expr6, 
                          pers.IdTipoDocumento, pers.pe_direccion, null pe_telefonoCasa, pers.pe_celular, pers.pe_correo
 FROM            tb_persona AS pers INNER JOIN
                          fa_cliente AS cli ON pers.IdPersona = cli.IdPersona

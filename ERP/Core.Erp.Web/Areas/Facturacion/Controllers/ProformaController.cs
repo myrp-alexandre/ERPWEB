@@ -430,7 +430,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
-                        int nivel_precio = (cliente.NivelPrecio == null || cliente.NivelPrecio == 0) ? 1 : Convert.ToInt32(cliente.NivelPrecio);
+                        int nivel_precio = cliente.NivelPrecio == 0 ? 1 : cliente.NivelPrecio;
                         switch (nivel_precio)
                         {
                             case 1:
@@ -509,7 +509,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
-                        int nivel_precio = (cliente.NivelPrecio == null || cliente.NivelPrecio == 0) ? 1 : Convert.ToInt32(cliente.NivelPrecio);
+                        int nivel_precio = cliente.NivelPrecio == 0 ? 1 : cliente.NivelPrecio;
                         switch (nivel_precio)
                         {
                             case 1:

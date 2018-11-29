@@ -31,7 +31,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         private void cargar_combos(int IdEmpresa)
         {
             ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
-            var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, false);
+            var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_ctacble;
         }
 
