@@ -129,11 +129,12 @@
     function actualizar_periodo() {
         var mes = $("#pe_mes").val();
         var anio = $("#IdanioFiscal").val();
-        var dia_inicio = -1;
+        var dia_inicio = 1;
         
         var fecha_texto_inicio = anio + "-" + mes + "-" + dia_inicio
-        var dia_inicio = new Date(Date.UTC(fecha_texto_inicio));
-                
+        //var dia_inicio = new Date(Date.UTC(fecha_texto_inicio));
+        var fecha_inicio = Date.parse(fecha_texto_inicio);
+        var fecha_inicio_setear = new Date(fecha_inicio);
         var dia_fin = new Date(Date.UTC(anio, mes));
 
         //var fecha_texto_fin = anio + "-" + mes + "-" + dia_fin + "00:00:00 UTC";
@@ -142,7 +143,7 @@
         //fecha_inicio_setear = new Date(fecha_inicio);
         //fecha_fin_setear = new Date(fecha_fin);
 
-        pe_FechaIni.SetValue(dia_inicio)
+        pe_FechaIni.SetValue(fecha_inicio_setear)
         pe_FechaFin.SetValue(dia_fin)
     }
 </script>
