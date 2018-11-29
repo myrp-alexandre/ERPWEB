@@ -119,12 +119,8 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" />
         <EntityTypeShape EntityType="Model_rrhh.ro_tipo_gastos_personales_tabla_valores_x_anio" Width="1.5" PointX="23.625" PointY="1" />
         <AssociationConnector Association="Model_rrhh.FK_ro_tipo_gastos_personales_tabla_valores_x_anio_ro_tipo_gastos_personales" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_archivos_bancos_generacion" Width="1.5" PointX="20.25" PointY="30.75" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" Width="1.5" PointX="22.5" PointY="32.125" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" />
         <EntityTypeShape EntityType="Model_rrhh.ro_rol" Width="1.5" PointX="18" PointY="38.25" />
         <EntityTypeShape EntityType="Model_rrhh.ro_rol_detalle" Width="1.5" PointX="20.25" PointY="55.25" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_rol" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_ro_Nomina_Tipo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_ro_Nomina_Tipoliqui" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_ro_periodo_x_ro_Nomina_TipoLiqui" />
@@ -182,6 +178,12 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_contrato_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_contrato_ro_Nomina_Tipo" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_rol" Width="1.5" PointX="7.375" PointY="17.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_archivos_bancos_generacion" Width="1.5" PointX="20.25" PointY="30.5" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" Width="1.5" PointX="25.5" PointY="47.875" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_archivos_bancos_generacion_x_empleado" Width="1.5" PointX="21.375" PointY="16.75" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_rol" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

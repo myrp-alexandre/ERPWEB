@@ -12,9 +12,10 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Linq;
-
+    
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
@@ -96,8 +97,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_empleado_Novedad> vwro_empleado_Novedad { get; set; }
         public DbSet<vwro_Empleado_Novedades> vwro_Empleado_Novedades { get; set; }
         public DbSet<ro_tipo_gastos_personales_tabla_valores_x_anio> ro_tipo_gastos_personales_tabla_valores_x_anio { get; set; }
-        public DbSet<ro_archivos_bancos_generacion> ro_archivos_bancos_generacion { get; set; }
-        public DbSet<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }
         public DbSet<ro_rol> ro_rol { get; set; }
         public DbSet<ro_rol_detalle> ro_rol_detalle { get; set; }
         public DbSet<vwro_rol_detalle_generar_op> vwro_rol_detalle_generar_op { get; set; }
@@ -113,6 +112,9 @@ namespace Core.Erp.Data
         public DbSet<ro_contrato> ro_contrato { get; set; }
         public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public DbSet<vwro_rol> vwro_rol { get; set; }
+        public DbSet<ro_archivos_bancos_generacion> ro_archivos_bancos_generacion { get; set; }
+        public DbSet<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }
+        public DbSet<vwro_archivos_bancos_generacion_x_empleado> vwro_archivos_bancos_generacion_x_empleado { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

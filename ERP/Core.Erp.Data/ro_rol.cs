@@ -16,9 +16,9 @@ namespace Core.Erp.Data
     {
         public ro_rol()
         {
-            this.ro_archivos_bancos_generacion = new HashSet<ro_archivos_bancos_generacion>();
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_rol_detalle_x_rubro_acumulado = new HashSet<ro_rol_detalle_x_rubro_acumulado>();
+            this.ro_archivos_bancos_generacion = new HashSet<ro_archivos_bancos_generacion>();
         }
     
         public int IdEmpresa { get; set; }
@@ -40,11 +40,11 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> FechaCierre { get; set; }
         public string IdCentroCosto { get; set; }
     
-        public virtual ICollection<ro_archivos_bancos_generacion> ro_archivos_bancos_generacion { get; set; }
         public virtual ro_Nomina_Tipo ro_Nomina_Tipo { get; set; }
         public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
         public virtual ro_periodo_x_ro_Nomina_TipoLiqui ro_periodo_x_ro_Nomina_TipoLiqui { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
+        public virtual ICollection<ro_archivos_bancos_generacion> ro_archivos_bancos_generacion { get; set; }
     }
 }

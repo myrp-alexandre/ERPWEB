@@ -1,19 +1,21 @@
 ﻿@model Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info
 @{
-    ViewBag.Title = "Anular deuda";
-    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    {
-        Response.Redirect("~/Account/Login");
-    }
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    if (ViewBag.mensaje != null)
-    {
-        <div class="alert alert-warning alert-dismissible">
-            <h4>
-                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
-            </h4>
-        </div>
-    }
+                /**/
+
+                ViewBag.Title = "Anular deuda";
+                if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+                {
+                    Response.Redirect("~/Account/Login");
+                }
+                Layout = "~/Views/Shared/_Layout.cshtml";
+                if (ViewBag.mensaje != null)
+                {
+                    <div class="alert alert-warning alert-dismissible">
+                        <h4>
+                            <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                        </h4>
+                    </div>
+                }
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
@@ -24,7 +26,6 @@
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
-    @Html.HiddenFor(q => q.info_cuota.IdCuota)
     @Html.HiddenFor(q => q.co_fechaOg)
 
     @Html.HiddenFor(q => q.info_retencion.IdRetencion);
@@ -33,6 +34,7 @@
     @Html.HiddenFor(q => q.info_retencion.info_comprobante.IdTipoCbte);
     @Html.HiddenFor(q => q.info_retencion.info_comprobante.IdCbteCble);
     @Html.HiddenFor(q => q.info_retencion.info_comprobante.IdEmpresa);
+
 
     <div class="row">
         <div class="col-md-12">
@@ -117,7 +119,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="col-md-3">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="co_plazo">Plazo*</label>
                     @Html.TextBoxFor(q => q.co_plazo, new { @class = "form-control", @id = "co_plazo" })
@@ -167,7 +169,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="co_factura"># Documento*</label>
+                    <label for="co_factura">Dcumento*</label>
                     @Html.TextBoxFor(q => q.co_factura, new { @class = "form-control", @id = "co_factura" })
                     @Html.ValidationMessageFor(q => q.co_factura, "", new { @class = "text-danger" })
                 </div>
@@ -183,6 +185,26 @@
     </div>
 
 
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdOrden_giro_Tipo">Tipo documento*</label>
+                    @Html.DropDownListFor(q => q.IdOrden_giro_Tipo, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "IdOrden_giro_Tipo" })
+                    @Html.ValidationMessageFor(q => q.IdOrden_giro_Tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdBanco_acreditacion">Tipo flujo</label>
+                    @Html.Partial("_CmbFlujo_Deudas", Model.IdTipoFlujo)
+                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -211,6 +233,9 @@
             <li>
                 <a href="#tab_detalle_cuotas" aria-controls="cuentas" role="tab" data-toggle="tab">Detalle de cuotas</a>
             </li>
+            <li>
+                <a href="#tab_retencion" aria-controls="retencion" role="tab" data-toggle="tab">Retención</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
@@ -235,7 +260,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="co_Por_iva">% Iva</label>
-                                @Html.TextBoxFor(q => q.co_Por_iva, new { @class = "form-control", @id = "co_valoriva", @readonly = "readonly" })
+                                @Html.TextBoxFor(q => q.co_Por_iva, new { @class = "form-control", @id = "co_Por_iva", @readonly = "readonly" })
                                 @Html.ValidationMessageFor(q => q.co_Por_iva, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -313,18 +338,6 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="co_observacion">Detalle</label>
-                                @Html.Action("GridViewPartial_deudas_det")
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_pago">
 
                 <div class="row">
@@ -333,23 +346,23 @@
                             <div class="form-group">
                                 <label for="info_forma_pago.codigo_pago_sri">Forma Pago*</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.info_forma_pago.codigo_pago_sri, settings =>
-                                   {
-                                       settings.Name = "info_forma_pago.codigo_pago_sri";
-                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                       settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                       settings.Properties.Columns.Add("formas_pago_sri", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                               {
+                                   settings.Name = "info_forma_pago.codigo_pago_sri";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("codigo_pago_sri", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                   settings.Properties.Columns.Add("formas_pago_sri", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
 
 
-                                       //Campo ID
-                                       settings.Properties.ValueField = "codigo_pago_sri";
-                                       settings.Properties.ValueType = typeof(string);
-                                       settings.Properties.TextField = "formas_pago_sri";
-                                       //Boton para seleccionar ningun registro
-                                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                   //Campo ID
+                                   settings.Properties.ValueField = "codigo_pago_sri";
+                                   settings.Properties.ValueType = typeof(string);
+                                   settings.Properties.TextField = "formas_pago_sri";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
-                                   }).BindList(ViewBag.lst_forma_pago).GetHtml()
+                               }).BindList(ViewBag.lst_forma_pago).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -369,7 +382,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-6">
@@ -384,6 +396,19 @@
                                 <div class="form-group">
                                     <label for="PagoSujetoRetencion_bool">@Html.CheckBoxFor(q => q.PagoSujetoRetencion_bool) Pago sujeto a retención en aplicación en la norma legal</label>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="co_observacion">Detalle</label>
+                                @Html.Action("GridViewPartial_deudas_det")
                             </div>
                         </div>
                     </div>
@@ -451,11 +476,90 @@
                     </div>
                 </div>
             </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_retencion">
+
+
+
+
+
+                <div id="Tabs" role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active">
+                            <a href="#tab_retenciones" aria-controls="retenciones" role="tab" data-toggle="tab">Retenciones</a>
+                        </li>
+                        <li>
+                            <a href="#tab_diario" aria-controls="diario" role="tab" data-toggle="tab">Diario contable</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content" style="padding-top: 20px">
+                        <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_retenciones">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="info_retencion.serie1">Establecimiento</label>
+                                            @Html.TextBoxFor(q => q.info_retencion.serie1, new { @class = "form-control", @id = "info_retencion.serie1" })
+                                            @Html.ValidationMessageFor(q => q.info_retencion.serie1, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="info_retencion.serie2">Punto de emisión</label>
+                                            @Html.TextBoxFor(q => q.info_retencion.serie2, new { @class = "form-control", @id = "info_retencion.serie2" })
+                                            @Html.ValidationMessageFor(q => q.info_retencion.serie2, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="info_retencion.NumRetencion">Número de retención</label>
+                                            @Html.TextBoxFor(q => q.info_retencion.NumRetencion, new { @class = "form-control", @id = "info_retencion.NumRetencion" })
+                                            @Html.ValidationMessageFor(q => q.info_retencion.NumRetencion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Detalle retención*</label>
+                                            @Html.Action("GridViewPartial_retencion_det", new { Area = "CuentasPorPagar", Controller = "Retencion" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div role="tabpanel" class="tab-pane " style="margin-left: 1em;" id="tab_diario">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Diario contable*</label>
+                                            @Html.Action("GridViewPartial_retencio_dc", new { Area = "CuentasPorPagar", Controller = "Retencion" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
-
     <div class="box-footer">
-        <button type="submit" class="btn btn-danger">Anular</button>
+        <button type="submit" class="btn btn-danger">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Deudas",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
     </div>
     @section Scripts {
@@ -463,26 +567,63 @@
     }
 }
 <script>
+
+
+    $(function () {
+
+        $("#IdSucursal").change(function () {
+            cargar_bodega();
+        });
+    });
+
+
+    $("#co_subtotal_iva").change(function () {
+
+        actualizar_valores();
+        armar_diario();
+    });
+    $("#co_subtotal_siniva").change(function () {
+
+        actualizar_valores();
+        armar_diario();
+    });
+
     $("#num_docu_Modificar").change(function () {
         rellenar_ceros_izq();
     });
     $("#co_factura").change(function () {
         rellenar_ceros_izquierda();
     });
-    $("#co_subtotal_iva").keyup(function () {
-
-        actualizar_valores();
-        armar_diario();
-    });
-    $("#co_subtotal_siniva").keyup(function () {
-
-        actualizar_valores();
-        armar_diario();
-    });
-    $("#cmb_idtCredito").change(function () {
-        $("#cmbTipoDocu").empty();
+    $("#IdIden_credito").change(function () {
+        $("#IdOrden_giro_Tipo").empty();
         $("#cmbTipoDocu_modif").empty();
-        get_list_tipo_doc();
+        if (IdProveedor.GetValue() == 0) {
+            alert("Seleccione el proveedor");
+        } else {
+            get_list_tipo_doc();
+        }
+    });
+    $("#co_plazo").change(function () {
+        var plazo = Number($("#co_plazo").val());
+        if (plazo > 0) {
+            var new_date = moment(co_FechaFactura.GetDate(), "DD-MM-YYYY").add(plazo, 'days');
+            co_FechaFactura_vct.SetDate(new Date(new_date));
+        };
+    });
+
+    $("#IdIden_credito").change(function () {
+
+        var tipo_doc = $("#IdIden_credito").val();
+
+        if (tipo_doc == "04")
+        {
+            $("#tab_documento_modificado").show();
+        }
+        else
+        {
+            $("#tab_documento_modificado").hide();
+
+        }
     });
 
 
@@ -498,11 +639,30 @@
             iva = 0;
         var tot = parseFloat(parseFloat(base_iva) + parseFloat(base_cero) + parseFloat(iva));
         $('#co_valoriva').val(iva.toFixed(2));
-        if(tot>0)
+        if (tot > 0) {
             $('#co_total').val(tot.toFixed(2));
+            $('#Total_a_pagar').val(tot.toFixed(2));
+
+        }
         else
             $('#co_total').val(0.00);
+        if(iva>0)
+            $('#co_Por_iva').val(12);
+        else
+            $('#co_Por_iva').val(0.00);
+
+
+
     }
+    $("#Num_cuotas").keyup(function () {
+        get_cuotas();
+    });
+    $("#Dias_plazo").keyup(function () {
+        get_cuotas();
+    });
+    $("#Total_a_pagar").keyup(function () {
+        get_cuotas();
+    });
 
     function rellenar_ceros_izquierda() {
         var str = "" + Number($("#co_factura").val());
@@ -519,16 +679,6 @@
 
         $("#num_docu_Modificar").val(doc);
     }
-
-    $("#Num_cuotas").keyup(function () {
-        get_cuotas();
-    });
-    $("#Dias_plazo").keyup(function () {
-        get_cuotas();
-    });
-    $("#Total_a_pagar").keyup(function () {
-        get_cuotas();
-    });
     // calcular cuotas
     function get_cuotas()
     {
@@ -543,8 +693,8 @@
                 Fecha_inicio: Fecha_i,
                 Num_cuotas: Num_cuot,
                 Dias_plazo: Dias_plaz,
-                Total_a_pagar: Total_a_pag
-
+                Total_a_pagar: Total_a_pag,
+                IdTransaccionSession: $("#IdTransaccionSession").val()
             }
             $.ajax({
                 type: 'POST',
@@ -568,11 +718,12 @@
     function get_list_tipo_doc() {
 
 
-
-        if (IdProveedor.GetValue() > 0 && $("#cmb_idtCredito").val() != "") {
+        get_info_proveedor();
+        if (IdProveedor.GetValue() > 0 && $("#IdIden_credito").val() != "") {
             var datos = {
                 IdProveedor:  IdProveedor.GetValue(),
-                codigoSRI: $("#cmb_idtCredito").val()
+                codigoSRI: $("#IdIden_credito").val(),
+                IdEmpresa: $("#IdEmpresa").val()
 
             }
             $.ajax({
@@ -586,7 +737,7 @@
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
                     $.each(data, function (i, row) {
-                        $("#cmbTipoDocu").append("<option value=" + row.CodTipoDocumento + ">" + row.Descripcion + "</option>");
+                        $("#IdOrden_giro_Tipo").append("<option value=" + row.CodTipoDocumento + ">" + row.Descripcion + "</option>");
                         $("#cmbTipoDocu_modif").append("<option value=" + row.CodTipoDocumento + ">" + row.Descripcion + "</option>");
                     });
                 },
@@ -598,18 +749,14 @@
     // armar diario contable
 
     function armar_diario() {
-
-
-
-
-
             var datos = {
             IdProveedor :  IdProveedor.GetValue(),
             co_subtotal_iva : $("#co_subtotal_iva").val(),
             co_subtotal_siniva : $("#co_subtotal_siniva").val(),
             co_valoriva : $("#co_valoriva").val(),
             co_total : $("#co_total").val(),
-            observacion : $("#observacion").val()
+            observacion: $("#observacion").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
             }
             $.ajax({
                 type: 'POST',
@@ -627,6 +774,73 @@
                 }
             });
 
+    };
+
+
+
+    function get_info_proveedor() {
+
+
+
+        if (IdProveedor.GetValue() > 0)  {
+            var datos = {
+                IdProveedor: IdProveedor.GetValue()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_info", "Proveedor", new { Area = "CuentasPorPagar" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.pr_plazo == 0)
+                    {
+                        $("#co_plazo").val(1);
+                    }
+                    else
+                    {
+                        var date = moment(co_FechaFactura.GetValue(), "DD-MM-YYYY").add(data.pr_plazo, 'days');
+                        co_FechaFactura_vct.SetValue(new Date(moment(date).format("DD/MM/YYYY")));
+                    }
+
+
+                },
+                error: function (error) {
+                }
+            });
+        }
+    };
+
+    function cargar_bodega() {
+        $("#IdBodega").empty();
+
+        var sucursal = $("#IdSucursal").val();
+
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: sucursal
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_bodega", "InventarioReportes", new { Area = "Reportes" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
     };
             function GetInfo_Producto(s, e) {
         var datos = {
@@ -649,6 +863,29 @@
             error: function (error) {
             }
         });
-    };
+            };
 
+             function armar_diario_retencion() {
+
+                var datos = {
+                    IdProveedor: IdProveedor.GetValue(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val()
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("armar_diario_retencion", "Retencion", new { Area = "CuentasPorPagar" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        GridViewPartial_retencio_dc.PerformCallback();
+                    },
+                    error: function (error) {
+                    }
+                });
+
+    };
 </script>
