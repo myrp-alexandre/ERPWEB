@@ -248,6 +248,7 @@ namespace Core.Erp.Data.Inventario
                 {
                     Lista = (from q in Context.vwin_producto_x_tb_bodega_stock_x_lote
                              where q.IdEmpresa == IdEmpresa && q.IdProducto_padre == IdProducto_padre
+                             && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega
                              && q.stock > 0
                              orderby q.lote_fecha_vcto ascending
                              select new in_Producto_Info
