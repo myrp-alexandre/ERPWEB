@@ -73,7 +73,14 @@
 </html>
 
 <script type="text/javascript">
-    cargar_sucursal_x_empresa();
+
+    $(function () {
+        cargar_sucursal_x_empresa();
+        $("#IdEmpresa").change(function () {
+            cargar_sucursal_x_empresa();
+        });
+    });
+
 
     function cargar_sucursal_x_empresa() {
         $("#IdSucursal").empty();        

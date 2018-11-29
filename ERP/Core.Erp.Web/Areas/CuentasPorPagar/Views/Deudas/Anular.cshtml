@@ -27,6 +27,13 @@
     @Html.HiddenFor(q => q.info_cuota.IdCuota)
     @Html.HiddenFor(q => q.co_fechaOg)
 
+    @Html.HiddenFor(q => q.info_retencion.IdRetencion);
+    @Html.HiddenFor(q => q.info_retencion.IdEmpresa);
+
+    @Html.HiddenFor(q => q.info_retencion.info_comprobante.IdTipoCbte);
+    @Html.HiddenFor(q => q.info_retencion.info_comprobante.IdCbteCble);
+    @Html.HiddenFor(q => q.info_retencion.info_comprobante.IdEmpresa);
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
