@@ -28,5 +28,11 @@ namespace Core.Erp.Info.General
         public string MotivoAnula { get; set; }
         public string nom_pc { get; set; }
         public string ip { get; set; }
+
+
+        //campos que no existen en la tabla
+        public string IdPais { get; set; }
+        public string IdProvincia { get; set; }
+
     }
 }

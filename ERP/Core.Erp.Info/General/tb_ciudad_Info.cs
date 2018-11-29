@@ -31,5 +31,8 @@ namespace Core.Erp.Info.General
         public string nom_pc { get; set; }
         public string ip { get; set; }
 
+        //campos que no existen en la tabla
+        public string IdPais { get; set; }
+
     }
 }

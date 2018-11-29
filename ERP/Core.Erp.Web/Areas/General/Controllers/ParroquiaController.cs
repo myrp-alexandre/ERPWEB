@@ -45,6 +45,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 IdCiudad_Canton = IdCiudad
             };
             ViewBag.IdCiudad = model.IdCiudad_Canton;
+            ViewBag.IdProvincia = model.IdProvincia;
+            ViewBag.IdPais = model.IdPais;
             cargar_combos();
             return View(model);
         }
@@ -54,10 +56,17 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (!bus_parroquia.guardarDB(model))
             {
                 ViewBag.IdCiudad = model.IdCiudad_Canton;
+                ViewBag.IdProvincia = model.IdProvincia;
+                ViewBag.IdPais = model.IdPais;
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdCiudad = model.IdCiudad_Canton });
+            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais, ViewBag.IdProvincia = model.IdProvincia, ViewBag.IdCiudad = model.IdCiudad_Canton );
+        }
+
+        private ActionResult RedirectToAction(string v, dynamic dynamic, object p1, object p2)
+        {
+            throw new NotImplementedException();
         }
 
         public ActionResult Modificar( string IdParroquia = "")
@@ -66,7 +75,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (model == null)
             {
                 ViewBag.IdCiudad = model.IdCiudad_Canton;
-                return RedirectToAction("Index", ViewBag.IdCiudad = model.IdCiudad_Canton);
+                ViewBag.IdProvincia = model.IdProvincia;
+                ViewBag.IdPais = model.IdPais;
+                return RedirectToAction("Index", new { IdPais = model.IdPais, IdProvincia = model.IdProvincia, IdCiudad = model.IdCiudad_Canton });
             }
             cargar_combos();
             return View(model);
@@ -77,10 +88,12 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (!bus_parroquia.modificarDB(model))
             {
                 ViewBag.IdCiudad = model.IdCiudad_Canton;
+                ViewBag.IdProvincia = model.IdProvincia;
+                ViewBag.IdPais = model.IdPais;
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdCiudad = model.IdCiudad_Canton });
+            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais, ViewBag.IdProvincia = model.IdProvincia, ViewBag.IdCiudad = model.IdCiudad_Canton);
         }
 
 
@@ -90,7 +103,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (model == null)
             {
                 ViewBag.IdCiudad = model.IdCiudad_Canton;
-                return RedirectToAction("Index", ViewBag.IdCiudad = model.IdCiudad_Canton);
+                ViewBag.IdProvincia = model.IdProvincia;
+                ViewBag.IdPais = model.IdPais;
+                return RedirectToAction("Index", new { IdPais = model.IdPais, IdProvincia = model.IdProvincia, IdCiudad = model.IdCiudad_Canton });
             }
             cargar_combos();
             return View(model);
@@ -101,15 +116,17 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (!bus_parroquia.anularDB(model))
             {
                 ViewBag.IdCiudad = model.IdCiudad_Canton;
+                ViewBag.IdProvincia = model.IdProvincia;
+                ViewBag.IdPais = model.IdPais;
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index", new { IdCiudad_Canton = model.IdCiudad_Canton });
+            return RedirectToAction("Index", ViewBag.IdPais = model.IdPais, ViewBag.IdProvincia = model.IdProvincia, ViewBag.IdCiudad = model.IdCiudad_Canton);
         }
 
         #endregion
 
-   public JsonResult get_lst_ciudad_x_provincia(string IdCiudad)
+        public JsonResult get_lst_ciudad_x_provincia(string IdCiudad)
         {
             try
             {
