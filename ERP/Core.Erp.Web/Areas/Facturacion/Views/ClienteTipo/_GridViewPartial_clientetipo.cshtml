@@ -81,8 +81,9 @@
             c.Width = Unit.Pixel(150);
         });
 
+        settings.Columns.Add("Idtipo_cliente", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("Cod_cliente_tipo", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("Descripcion_tip_cliente", "Descripción").Width = Unit.Percentage(85);
+        settings.Columns.Add("Descripcion_tip_cliente", "Descripción").Width = Unit.Percentage(70);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
