@@ -65,9 +65,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
 
         #region acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa=0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0)
         {
-
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -77,9 +76,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_archivos_bancos_generacion_Info model = new ro_archivos_bancos_generacion_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                 
+                IdNomina= IdNomina_Tipo,
+                IdNominaTipo= IdNomina_TipoLiqui
+
             };
-            ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(new List<ro_archivos_bancos_generacion_x_empleado_Info>(),Convert.ToDecimal( SessionFixed.IdTransaccionSession));
+            model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
+            ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(model.detalle, Convert.ToDecimal( SessionFixed.IdTransaccionSession));
             cargar_combos(0);
             return View(model);
         }

@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Info.Helps;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,13 @@ namespace Core.Erp.Info.RRHH
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdArchivo { get; set; }
+        [Required(ErrorMessage = "El campo nómina  es obligatorio")]
         public int IdNomina { get; set; }
+        [Required(ErrorMessage = "El campo tipo liquidación nómina  es obligatorio")]
         public int IdNominaTipo { get; set; }
         public int IdPeriodo { get; set; }
         public Nullable<int> IdCuentaBancaria { get; set; }
+        [Required(ErrorMessage = "El campo proceso bancario  es obligatorio")]
         public string IdProceso_Bancario { get; set; }
         public string Cod_Empresa { get; set; }
         public string Nom_Archivo { get; set; }

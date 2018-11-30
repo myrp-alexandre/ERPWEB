@@ -24,11 +24,24 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-     
-      
+        public List<ro_archivos_bancos_generacion_x_empleado_Info> get_list(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, IdNominaTipo,IdNominaTipoLiqui,IdPeriodo);
+            }
+            catch (Exception)
+            {
 
-       
+                throw;
+            }
+        }
 
-       
+
+
+
+
+
+
     }
 }

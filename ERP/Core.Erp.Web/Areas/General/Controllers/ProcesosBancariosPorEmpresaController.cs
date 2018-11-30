@@ -1,4 +1,8 @@
-﻿using Core.Erp.Bus.General;
+﻿using Core.Erp.Bus.Banco;
+using Core.Erp.Info.Banco;
+
+using Core.Erp.Bus.General;
+using Core.Erp.Info.Banco;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
@@ -100,8 +104,15 @@ namespace Core.Erp.Web.Areas.General
             try
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                ba_Banco_Cuenta_Bus bus_cta_bancaria = new ba_Banco_Cuenta_Bus();
+                ba_Banco_Cuenta_Info info = new ba_Banco_Cuenta_Info();
+                info = bus_cta_bancaria.get_info(IdEmpresa, IdBanco);
+                if (info == null)
+                    info = new ba_Banco_Cuenta_Info();
+                if (info.IdBanco_Financiero == null)
+                    info.IdBanco_Financiero = 0;
                 List<tb_banco_procesos_bancarios_x_empresa_Info> lst_periodos_x_nominas = new List<tb_banco_procesos_bancarios_x_empresa_Info>();
-                lst_periodos_x_nominas = bus_proceso_x_empresa.get_list(IdEmpresa,IdBanco);
+                lst_periodos_x_nominas = bus_proceso_x_empresa.get_list(IdEmpresa,Convert.ToInt32( info.IdBanco_Financiero));
                 return Json(lst_periodos_x_nominas, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
