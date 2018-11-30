@@ -28,8 +28,6 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public ActionResult GridViewPartial_Ciudad(string IdProvincia="")
         {
             var model = bus_ciudad.get_list(IdProvincia, true);
-            ViewBag.
-                = ViewBag.IdPais;
             ViewBag.IdProvincia = IdProvincia;
             return PartialView("_GridViewPartial_Ciudad", model);
         }
