@@ -54,8 +54,8 @@ namespace Core.Erp.Data.Facturacion
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
                     fa_formaPago Entity = Context.fa_formaPago.Where(q => q.IdFormaPago == IdFormaPago).FirstOrDefault();
-                    if (Entity == null)
-                        info = new fa_formaPago_Info
+                    if (Entity == null) return null;
+                    info = new fa_formaPago_Info
                         {
                             IdFormaPago = Entity.IdFormaPago,
                             nom_FormaPago = Entity.nom_FormaPago,
@@ -100,7 +100,8 @@ namespace Core.Erp.Data.Facturacion
             {
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    fa_formaPago Entity = new fa_formaPago
+
+                    Context.fa_formaPago.Add(new fa_formaPago
                     {
                         IdFormaPago = info.IdFormaPago,
                         nom_FormaPago = info.nom_FormaPago,
@@ -108,8 +109,7 @@ namespace Core.Erp.Data.Facturacion
 
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
-                    };
-                    Context.fa_formaPago.Add(Entity);
+                    });
                     Context.SaveChanges();
                         
 
@@ -131,10 +131,11 @@ namespace Core.Erp.Data.Facturacion
                 {
                     fa_formaPago Entity = Context.fa_formaPago.Where(q => q.IdFormaPago == info.IdFormaPago).FirstOrDefault();
                     if (Entity == null) return false;
+
                     Entity.nom_FormaPago = info.nom_FormaPago;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
-                         Entity.Fecha_UltMod = DateTime.Now;
+                    Entity.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();
             }
                 return true;
