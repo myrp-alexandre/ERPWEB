@@ -60,18 +60,6 @@ namespace Core.Erp.Bus.RRHH
         }
 
 
-        public string GetArchivo(List<ro_Acta_Finiquito_Detalle_Info> listas, cl_enumeradores.eTipoProcesoBancario TipoFile)
-        {
-            try
-            {
-                string Archivo = "";
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
       
     }
 }

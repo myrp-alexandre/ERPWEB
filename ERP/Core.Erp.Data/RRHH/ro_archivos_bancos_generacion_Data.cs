@@ -148,6 +148,19 @@ namespace Core.Erp.Data.RRHH
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
                     };
                     Context.ro_archivos_bancos_generacion.Add(Entity);
+                    foreach (var item in info.detalle)
+                    {
+                        ro_archivos_bancos_generacion_x_empleado Entity_ = new ro_archivos_bancos_generacion_x_empleado
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdArchivo = item.IdArchivo,
+                            IdSucursal = item.IdSucursal,
+                            IdEmpleado = item.IdEmpleado,
+                            Valor = item.Valor,
+                            pagacheque = item.pagacheque,
+                        };
+                        Context.ro_archivos_bancos_generacion_x_empleado.Add(Entity_);
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -177,6 +190,21 @@ namespace Core.Erp.Data.RRHH
                     Entity.estado = info.estado = "A";
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
+
+                    foreach (var item in info.detalle)
+                    {
+                        ro_archivos_bancos_generacion_x_empleado Entity_ = new ro_archivos_bancos_generacion_x_empleado
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdArchivo = item.IdArchivo,
+                            IdSucursal = item.IdSucursal,
+                            IdEmpleado = item.IdEmpleado,
+                            Valor = item.Valor,
+                            pagacheque = item.pagacheque,
+                        };
+                        Context.ro_archivos_bancos_generacion_x_empleado.Add(Entity_);
+                    }
+
                     Context.SaveChanges();
                 }
 

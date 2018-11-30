@@ -25,32 +25,10 @@ namespace Core.Erp.Bus.RRHH
         }
 
      
-        public bool guardarDB(List<ro_archivos_bancos_generacion_x_empleado_Info> lista)
-        {
-            try
-            {
-                return odata.guardarDB(lista);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+      
 
        
 
-        public bool anularDB(ro_archivos_bancos_generacion_Info info)
-        {
-            try
-            {
-                return odata.eliminarDB(info);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+       
     }
 }

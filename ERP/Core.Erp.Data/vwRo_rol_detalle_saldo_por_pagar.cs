@@ -12,24 +12,23 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwro_archivos_bancos_generacion_x_empleado
+    public partial class vwRo_rol_detalle_saldo_por_pagar
     {
         public int IdEmpresa { get; set; }
-        public decimal IdArchivo { get; set; }
-        public int IdNomina { get; set; }
+        public decimal IdRol { get; set; }
         public int IdNominaTipo { get; set; }
+        public int IdNominaTipoLiqui { get; set; }
         public int IdPeriodo { get; set; }
-        public double Valor { get; set; }
         public decimal IdEmpleado { get; set; }
-        public bool pagacheque { get; set; }
-        public string em_tipoCta { get; set; }
-        public string em_NumCta { get; set; }
+        public string IdRubro { get; set; }
+        public double ValorGanado { get; set; }
+        public int IdSucursal { get; set; }
+        public string em_codigo { get; set; }
         public string pe_apellido { get; set; }
         public string pe_nombre { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string pe_cedulaRuc { get; set; }
-        public string IdTipoDocumento { get; set; }
-        public int IdSucursal { get; set; }
-        public decimal Secuencia { get; set; }
+        public double ValorCancelado { get; set; }
+        public double Saldo { get; set; }
     }
 }

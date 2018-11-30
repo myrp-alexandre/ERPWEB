@@ -2059,6 +2059,9 @@
     <Compile Include="vwro_rol_detalle_generar_op.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwRo_rol_detalle_saldo_por_pagar.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwro_rubro_tipo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>

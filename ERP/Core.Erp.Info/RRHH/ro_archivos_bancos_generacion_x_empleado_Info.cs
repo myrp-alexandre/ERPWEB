@@ -14,5 +14,19 @@ namespace Core.Erp.Info.RRHH
         public int IdSucursal { get; set; }
         public double Valor { get; set; }
         public bool pagacheque { get; set; }
+
+
+
+
+        #region campos vista
+
+        public string em_tipoCta { get; set; }
+        public string em_NumCta { get; set; }
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string IdTipoDocumento { get; set; }
+        #endregion
     }
 }

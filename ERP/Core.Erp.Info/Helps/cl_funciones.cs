@@ -207,6 +207,27 @@ namespace Core.Erp.Info.Helps
             }
         }
 
+        public static string QuitarTildes(string strin)
+        {
+            try
+            {
+                strin = strin.ToUpper();
+
+                strin = strin.Replace("Ñ", "N");
+                strin = strin.Replace("Á", "A");
+                strin = strin.Replace("É", "E");
+                strin = strin.Replace("Í", "I");
+                strin = strin.Replace("Ó", "O");
+                strin = strin.Replace("Ú", "U");
+                return strin;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
     }
 }

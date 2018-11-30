@@ -86,8 +86,8 @@ namespace Core.Erp.Bus.RRHH
                 switch (info.TipoFile)
                 {
                     case cl_enumeradores.eTipoProcesoBancario.NCR:
-                        
-                        break;
+
+                        return get_NCR(info);
                   
                     case cl_enumeradores.eTipoProcesoBancario.ROL_ELECTRONICO:
 
@@ -114,6 +114,24 @@ namespace Core.Erp.Bus.RRHH
                 string File = "";
                 foreach (var item in info.detalle)
                 {
+                    double valor = Convert.ToDouble(item.Valor);
+                    double valorEntero = Math.Floor(valor);
+                    double valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+
+                    if (item.em_tipoCta == "COR" || item.em_tipoCta == "AHO")
+                    {
+                        File += "A";
+                        if (item.em_tipoCta == "AHO")
+                            File += "A";
+                        else
+                            File += "C";
+                        File += File + item.em_NumCta.PadLeft(10, '0');
+                        File += File + (valorEntero.ToString()+valorDecimal.ToString()).PadLeft(15,'0');
+                        File+=File+"EI";
+                        File += File+"Y";
+                        File += File + "01";
+                        File += File + cl_funciones.QuitarTildes(item.pe_apellido + item.pe_nombre);
+                    }
 
                 }
 
