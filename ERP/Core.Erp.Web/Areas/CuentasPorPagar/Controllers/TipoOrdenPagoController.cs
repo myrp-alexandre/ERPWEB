@@ -45,11 +45,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0 )
         {
-            cargar_combos(IdEmpresa);
             cp_orden_pago_tipo_x_empresa_Info model = new cp_orden_pago_tipo_x_empresa_Info
             {
                 IdEmpresa = IdEmpresa
             };
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -60,7 +60,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (bus_tipo_op.si_existe(model))
             {
                 cargar_combos(model.IdEmpresa);
-
                 ViewBag.mensaje = "El código ya se encuentra registrado";
                 return View(model);
             }

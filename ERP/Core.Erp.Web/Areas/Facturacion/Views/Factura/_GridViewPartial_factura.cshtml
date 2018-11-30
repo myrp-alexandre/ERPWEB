@@ -4,7 +4,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_factura";
-        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_factura" , Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin };
+        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_factura",  Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin, IdSucursal = ViewBag.IdSucursal };
         settings.KeyFieldName = "IdCbteVta";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
@@ -131,7 +131,7 @@
             column.Caption = "Total";
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
             column.Width = Unit.Percentage(7);
-        });        
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
@@ -142,7 +142,7 @@
 
             });
         });
-        
+
         settings.Columns.Add(column =>
         {
             column.Caption = "Despacho";
@@ -155,7 +155,7 @@
             });
             column.Width = Unit.Percentage(5);
         });
-        
+
         settings.Columns.Add(column =>
         {
             column.Caption = "Módulo";

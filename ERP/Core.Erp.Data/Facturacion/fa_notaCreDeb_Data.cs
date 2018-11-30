@@ -12,7 +12,7 @@ namespace Core.Erp.Data.Facturacion
 {
     public class fa_notaCreDeb_Data
     {
-        public List<fa_notaCreDeb_consulta_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, string CreDeb)
+        public List<fa_notaCreDeb_consulta_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin, string CreDeb)
         {
             try
             {
@@ -23,6 +23,7 @@ namespace Core.Erp.Data.Facturacion
                 {
                     Lista = (from q in Context.vwfa_notaCreDeb
                              where q.IdEmpresa == IdEmpresa
+                             && q.IdSucursal == IdSucursal
                              && Fecha_ini <= q.no_fecha
                              && q.no_fecha <= Fecha_fin
                              && q.CreDeb == CreDeb

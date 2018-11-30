@@ -13,7 +13,7 @@ namespace Core.Erp.Data.Facturacion
 {
    public class fa_factura_Data
     {
-        public List<fa_factura_consulta_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<fa_factura_consulta_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
@@ -24,6 +24,7 @@ namespace Core.Erp.Data.Facturacion
                 {
                     Lista = (from q in Context.vwfa_factura
                              where q.IdEmpresa == IdEmpresa
+                             && q.IdSucursal == IdSucursal
                              && Fecha_ini <= q.vt_fecha && q.vt_fecha <= Fecha_fin
                              orderby q.IdCbteVta descending
                              select new fa_factura_consulta_Info

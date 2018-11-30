@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Facturacion
     public class fa_notaCreDeb_Bus
     {
         fa_notaCreDeb_Data odata = new fa_notaCreDeb_Data();
-        public List<fa_notaCreDeb_consulta_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin, string CreDeb)
+        public List<fa_notaCreDeb_consulta_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin, string CreDeb)
         {
             try
             {
-                return odata.get_list(IdEmpresa, Fecha_ini, Fecha_fin, CreDeb);
+                return odata.get_list(IdEmpresa, IdSucursal, Fecha_ini, Fecha_fin, CreDeb);
             }
             catch (Exception)
             {
