@@ -51,7 +51,7 @@
                 p.ValueType = typeof(string);
                 p.DropDownStyle = DropDownStyle.DropDownList;
                 p.DataSource = ViewBag.lst_retenciones;
-                p.ClientSideEvents.SelectedIndexChanged = "SetValorRetencion";
+                p.ClientSideEvents.SelectedIndexChanged = "SetValorRetencion";                
                 p.Columns.Add("tc_descripcion", "Retención").Width = Unit.Percentage(100);
             });
         });

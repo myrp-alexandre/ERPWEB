@@ -207,8 +207,37 @@
     }
 }
 <script>
-    function armar_diario_retencion() {
+    function SetValorRetencion(s, e) {
+        var datos = {
+            IdCodigoSRI: s.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetValorRetencion", "Retencion",new { Area = "CuentasPorPagar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var valor = 0;
+                if (data.IdTipoSRI == "COD_RET_IVA")
+                {
+                    valor = $("#co_valoriva").val();
+                }
+                else
+                {
+                    valor = parseFloat($("#co_subtotal_iva").val()) + parseFloat($("#co_subtotal_siniva").val());
+                }
+                GridViewPartial_retencion_det.GetEditor('re_baseRetencion').SetValue(valor);
+            },
+            error: function (error) {
+            }
+        });
+    };
 
+    function armar_diario_retencion() {
                 var datos = {
                     IdProveedor: $("#IdProveedor").val(),
                     IdTransaccionSession: $("#IdTransaccionSession").val()

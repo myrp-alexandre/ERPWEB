@@ -18,6 +18,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     {
         #region variables
         cp_retencion_Bus bus_retencion = new cp_retencion_Bus();
+        cp_codigo_SRI_Bus bus_codigo_SRI = new cp_codigo_SRI_Bus();
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
         ct_cbtecble_det_List_re List_ct_cbtecble_det_List = new ct_cbtecble_det_List_re();
         cp_retencion_det_lst List_cp_retencion_det = new cp_retencion_det_lst();
@@ -25,7 +26,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         List<cp_retencion_Info> lst_retenciones = new List<cp_retencion_Info>();
         cp_parametros_Info info_param_op = new cp_parametros_Info();
         cp_parametros_Bus bus_parametros = new cp_parametros_Bus();
-        List<cp_codigo_SRI_Info> lst_codigo_retencion = new List<cp_codigo_SRI_Info>();
+        cp_codigo_SRI_List lst_codigo_retencion = new cp_codigo_SRI_List();
         cp_codigo_SRI_Bus bus_codigo_ret = new cp_codigo_SRI_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
@@ -135,22 +136,27 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             else
             {
-                lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
-                model.detalle.ForEach(item =>
+                var lista_cp_codigo_SRI = lst_codigo_retencion.get_list();
+
+                if (lista_cp_codigo_SRI.Count > 0)
                 {
-                    cp_codigo_SRI_Info info_ = lst_codigo_retencion.Where(v => v.codigoSRI == item.re_Codigo_impuesto).FirstOrDefault();
-                    item.IdCodigo_SRI = info_.IdCodigo_SRI;
-                    if (info_.IdTipoSRI == "COD_RET_IVA")
+                    model.detalle.ForEach(item =>
                     {
-                        model.re_Tiene_RFuente = "S";
-                        item.re_tipoRet = "IVA";
-                    }
-                    if (info_.IdTipoSRI == "COD_RET_FUE")
-                    {
-                        model.re_Tiene_RTiva = "S";
-                        item.re_tipoRet = "RTF";
-                    }
-                });
+                        cp_codigo_SRI_Info info_ = lista_cp_codigo_SRI.Where(v => v.IdCodigo_SRI == item.IdCodigo_SRI).FirstOrDefault();
+                        item.re_Codigo_impuesto = info_.co_codigoBase;
+
+                        if (info_.IdTipoSRI == "COD_RET_IVA")
+                        {
+                            model.re_Tiene_RFuente = "S";
+                            item.re_tipoRet = "IVA";
+                        }
+                        if (info_.IdTipoSRI == "COD_RET_FUE")
+                        {
+                            model.re_Tiene_RTiva = "S";
+                            item.re_tipoRet = "RTF";
+                        }
+                    });
+                }                
 
                 if (bus_retencion.guardarDB(model))
                     return RedirectToAction("Index");
@@ -210,22 +216,26 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             else
             {
-                lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
-                model.detalle.ForEach(item =>
+                var lista_cp_codigo_SRI = lst_codigo_retencion.get_list();
+
+                if (lista_cp_codigo_SRI.Count > 0)
                 {
-                    cp_codigo_SRI_Info info_ = lst_codigo_retencion.Where(v => v.codigoSRI == item.re_Codigo_impuesto).FirstOrDefault();
-                    item.IdCodigo_SRI = info_.IdCodigo_SRI;
-                    if (info_.IdTipoSRI == "COD_RET_IVA")
+                    model.detalle.ForEach(item =>
                     {
-                        model.re_Tiene_RFuente = "S";
-                        item.re_tipoRet = "IVA";
-                    }
-                    if (info_.IdTipoSRI == "COD_RET_FUE")
-                    {
-                        model.re_Tiene_RTiva = "S";
-                        item.re_tipoRet = "RTF";
-                    }
-                });
+                        cp_codigo_SRI_Info info_ = lista_cp_codigo_SRI.Where(v => v.IdCodigo_SRI == item.IdCodigo_SRI).FirstOrDefault();
+                        item.re_Codigo_impuesto = info_.co_codigoBase;
+                        if (info_.IdTipoSRI == "COD_RET_IVA")
+                        {
+                            model.re_Tiene_RFuente = "S";
+                            item.re_tipoRet = "IVA";
+                        }
+                        if (info_.IdTipoSRI == "COD_RET_FUE")
+                        {
+                            model.re_Tiene_RTiva = "S";
+                            item.re_tipoRet = "RTF";
+                        }
+                    });
+                }
 
                 if (bus_retencion.modificarDB(model))
                     return RedirectToAction("Index");
@@ -280,22 +290,26 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             else
             {
-                lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
-                model.detalle.ForEach(item =>
+                var lista_cp_codigo_SRI = lst_codigo_retencion.get_list();
+
+                if (lista_cp_codigo_SRI.Count > 0)
                 {
-                    cp_codigo_SRI_Info info_ = lst_codigo_retencion.Where(v => v.codigoSRI == item.re_Codigo_impuesto).FirstOrDefault();
-                    item.IdCodigo_SRI = info_.IdCodigo_SRI;
-                    if (info_.IdTipoSRI == "COD_RET_IVA")
+                    model.detalle.ForEach(item =>
                     {
-                        model.re_Tiene_RFuente = "S";
-                        item.re_tipoRet = "IVA";
-                    }
-                    if (info_.IdTipoSRI == "COD_RET_FUE")
-                    {
-                        model.re_Tiene_RTiva = "S";
-                        item.re_tipoRet = "RTF";
-                    }
-                });
+                        cp_codigo_SRI_Info info_ = lista_cp_codigo_SRI.Where(v => v.IdCodigo_SRI == item.IdCodigo_SRI).FirstOrDefault();
+                        item.re_Codigo_impuesto = info_.co_codigoBase;
+                        if (info_.IdTipoSRI == "COD_RET_IVA")
+                        {
+                            model.re_Tiene_RFuente = "S";
+                            item.re_tipoRet = "IVA";
+                        }
+                        if (info_.IdTipoSRI == "COD_RET_FUE")
+                        {
+                            model.re_Tiene_RTiva = "S";
+                            item.re_tipoRet = "RTF";
+                        }
+                    });
+                }
 
                 if (bus_retencion.anularDB(model))
                     return RedirectToAction("Index");
@@ -348,8 +362,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             cp_codigo_SRI_Info info_codifo_sri = new cp_codigo_SRI_Info();
             List<cp_retencion_det_Info> model = new List<cp_retencion_det_Info>();
-            lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
-            info_codifo_sri = lst_codigo_retencion.Where(v => v.codigoSRI == info_det.re_Codigo_impuesto).FirstOrDefault();
+            var lista_cp_codigo_SRI = lst_codigo_retencion.get_list();
+            info_codifo_sri = lista_cp_codigo_SRI.Where(v => v.IdCodigo_SRI == info_det.IdCodigo_SRI).FirstOrDefault();
             info_det.re_Porcen_retencion = info_codifo_sri.co_porRetencion;
             if (info_codifo_sri.IdTipoSRI == "COD_RET_IVA")
             {
@@ -397,8 +411,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             cp_codigo_SRI_Info info_codifo_sri = new cp_codigo_SRI_Info();
             List<cp_retencion_det_Info> model = new List<cp_retencion_det_Info>();
-            lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
-            info_codifo_sri = lst_codigo_retencion.Where(v => v.codigoSRI == info_det.re_Codigo_impuesto).FirstOrDefault();
+            var lista_cp_codigo_SRI = lst_codigo_retencion.get_list();
+            info_codifo_sri = lista_cp_codigo_SRI.Where(v => v.IdCodigo_SRI == info_det.IdCodigo_SRI).FirstOrDefault();
             info_det.re_Porcen_retencion = info_codifo_sri.co_porRetencion;
             if (info_codifo_sri.IdTipoSRI == "COD_RET_IVA")
             {
@@ -454,6 +468,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult SetValorRetencion(int IdCodigoSRI = 0)
+        {
+            var resultado = bus_codigo_SRI.get_info(IdCodigoSRI);
+            if (resultado == null)
+                resultado = new cp_codigo_SRI_Info();
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
         #region Cargar combos
         private void cargar_combos(int IdEmpresa)
@@ -468,7 +489,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
-            lst_codigo_retencion = bus_codigo_ret.get_list_cod_ret(false, IdEmpresa);
+            var lista_cp_codigo_SRI = lst_codigo_retencion.get_list();
+            lista_cp_codigo_SRI = bus_codigo_ret.get_list_cod_ret(false, IdEmpresa);
             ViewBag.lst_codigo_retencion = lst_codigo_retencion;
             Session["lst_codigo_retencion"] = lst_codigo_retencion;
         }
@@ -488,6 +510,25 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
     }
 
+    public class cp_codigo_SRI_List
+    {
+        string variable = "cp_codigo_SRI_Info";
+        public List<cp_codigo_SRI_Info> get_list()
+        {
+            if (HttpContext.Current.Session[variable] == null)
+            {
+                List<cp_codigo_SRI_Info> list = new List<cp_codigo_SRI_Info>();
+
+                HttpContext.Current.Session[variable] = list;
+            }
+            return (List<cp_codigo_SRI_Info>)HttpContext.Current.Session[variable];
+        }
+
+        public void set_list(List<cp_codigo_SRI_Info> list)
+        {
+            HttpContext.Current.Session[variable] = list;
+        }
+    }
     public class ct_cbtecble_det_List_re
     {
         string variable = "ct_cbtecble_det_Info";
