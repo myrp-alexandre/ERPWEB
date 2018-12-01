@@ -43,7 +43,7 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "re_Codigo_impuesto";
+            column.FieldName = "IdCodigo_SRI";
             column.Caption = "Código";
             column.Width = Unit.Percentage(60);
             column.EditorProperties().ComboBox(p =>
@@ -52,11 +52,13 @@
                 p.Columns.Add("IdTipoSRI", "Tipo").Width = Unit.Percentage(30);
                 p.Columns.Add("co_codigoBase", "Código").Width = Unit.Percentage(30);
                 p.Columns.Add("co_descripcion", "Descripcion").Width = Unit.Percentage(60);
-                p.ValueField = "codigoSRI";
+                //p.ValueField = "codigoSRI";
+                p.ValueField = "IdCodigo_SRI";
                 p.ValueType = typeof(string);
                 p.DataSource = ViewBag.lst_codigo_retencion;
                 p.Width = Unit.Percentage(100);
-                //  p.ClientSideEvents.ValueChanged = "function(s,e,){armar_diario()}";
+                p.ClientSideEvents.ValueChanged = "function(s,e,){armar_diario_retencion()}";
+                p.ClientSideEvents.SelectedIndexChanged = "SetValorRetencion";
             });
         });
 

@@ -141,7 +141,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_pago = bus_termino_pago.get_list(false);
             ViewBag.lst_pago = lst_pago;
 
-            var lst_forma_pago = bus_forma_pago.get_list();
+            var lst_forma_pago = bus_forma_pago.get_list(false);
             ViewBag.lst_forma_pago = lst_forma_pago;
         }
         private bool validar(fa_factura_Info i_validar, ref string msg)

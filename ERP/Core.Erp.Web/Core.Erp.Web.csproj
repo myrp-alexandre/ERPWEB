@@ -320,6 +320,7 @@
     <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\FacturaController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\FormaPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\GuiaRemisionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeCreditoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeDebitoFacturacionController.cs" />
@@ -9389,6 +9390,11 @@
     <Content Include="Areas\Contabilidad\Views\Gasto\Index.cshtml" />
     <Content Include="Areas\Contabilidad\Views\Gasto\Modificar.cshtml" />
     <Content Include="Areas\Contabilidad\Views\Gasto\Nuevo.cshtml" />
+    <Content Include="Areas\Facturacion\Views\FormaPago\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\FormaPago\Nuevo.cshtml" />
+    <Content Include="Areas\Facturacion\Views\FormaPago\Modificar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\FormaPago\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\FormaPago\_GridViewPartial_forma_pago.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
