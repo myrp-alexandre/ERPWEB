@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Info.Helps;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,14 +15,15 @@ namespace Core.Erp.Info.RRHH
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdArchivo { get; set; }
+        [Required(ErrorMessage = "El campo nómina  es obligatorio")]
         public int IdNomina { get; set; }
+        [Required(ErrorMessage = "El campo tipo liquidación nómina  es obligatorio")]
         public int IdNominaTipo { get; set; }
         public int IdPeriodo { get; set; }
         public Nullable<int> IdCuentaBancaria { get; set; }
-        public string IdProceso_Bancario { get; set; }
-        public string Cod_Empresa { get; set; }
-        public string Nom_Archivo { get; set; }
-        public byte[] archivo { get; set; }
+        [Required(ErrorMessage = "El campo proceso bancario  es obligatorio")]
+        public int IdProceso { get; set; }
+       
         public string estado { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
@@ -32,6 +34,14 @@ namespace Core.Erp.Info.RRHH
         public decimal IdRol { get; set; }
         public string MotiAnula { get; set; }
         public bool EstadoBool { get; set; }
+
+        #region MyRegion
+        public string Descripcion { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
+        public System.DateTime pe_FechaIni { get; set; }
+        public System.DateTime pe_FechaFin { get; set; }
+        public string NombreProceso { get; set; }
+        #endregion
         public cl_enumeradores.eTipoProcesoBancario TipoFile { get; set; }
         public List < ro_archivos_bancos_generacion_x_empleado_Info> detalle { get; set; }
 

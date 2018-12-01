@@ -22,7 +22,7 @@ namespace Core.Erp.Data
         public double Valor { get; set; }
         public bool pagacheque { get; set; }
     
-        public virtual ro_archivos_bancos_generacion ro_archivos_bancos_generacion { get; set; }
         public virtual ro_empleado ro_empleado { get; set; }
+        public virtual ro_archivos_bancos_generacion ro_archivos_bancos_generacion { get; set; }
     }
 }

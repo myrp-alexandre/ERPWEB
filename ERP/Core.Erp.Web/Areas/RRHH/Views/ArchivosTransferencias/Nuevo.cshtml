@@ -17,24 +17,26 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Nuevo", "ArvhivosTransfeencias", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "ArchivosTransferencias", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdArchivo)
+    @Html.HiddenFor(q => q.IdPeriodo)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
 
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdNomina_Tipo">Nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
+                    @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
                     @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdNomina_TipoLiqui">Tipo liquidación de nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNominaTipo, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                    @Html.DropDownListFor(q => q.IdNominaTipo, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                     @Html.ValidationMessageFor(q => q.IdNominaTipo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -52,8 +54,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdBanco">Tipo de archivo*</label>
-                    @Html.DropDownListFor(q => q.IdProceso_Bancario, new SelectList(ViewBag.lst_proceso, "IdProceso", "NombreProceso"), new { @class = "form-control", @id = "IdProceso" })
-                    @Html.ValidationMessageFor(q => q.IdProceso_Bancario, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(q => q.IdProceso, new SelectList(ViewBag.lst_proceso, "IdProceso", "NombreProceso"), new { @class = "form-control", @id = "IdProceso" })
+                    @Html.ValidationMessageFor(q => q.IdProceso, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -82,14 +84,14 @@
 
 
 <script>
+    $("#IdBanco").change(function () {
+        $("#IdProceso").empty();
+        cargar_procesos();
 
-
-
-
-
+    });
             function cargar_procesos() {
                 var datos = {
-                    IdNomina: $("#IdNomina_Tipo").val()
+                    IdBanco: $("#IdBanco").val()
                 }
 
                 $.ajax({
@@ -103,11 +105,45 @@
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
 
-                       
+                        $.each(data, function (i, row) {
+                            $("#IdProceso").append("<option value=" + row.IdProceso + ">" + row.NombreProceso + "</option>");
+
+                        });
+                    },
+                    error: function (error) {
+                    }
+                });
+    };
+
+
+
+
+    cargar_tipo_liquidacion_nomina();
+            function cargar_tipo_liquidacion_nomina() {
+                var datos = {
+                    IdNomina: $("#IdNomina_Tipo").val()
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("get_lst_nomina_tipo_liq", "NominaTipoLiquidacion", new { Area = "RRHH" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        $.each(data, function (i, row) {
+                            $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
+                        });
+                        $("#IdNomina_TipoLiqui").val(2);
                     },
                     error: function (error) {
                     }
                 });
             };
+
 
 </script>

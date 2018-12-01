@@ -25,10 +25,7 @@ namespace Core.Erp.Data
         public int IdNominaTipo { get; set; }
         public int IdPeriodo { get; set; }
         public int IdCuentaBancaria { get; set; }
-        public string IdProceso_Bancario { get; set; }
-        public string Cod_Empresa { get; set; }
-        public string Nom_Archivo { get; set; }
-        public byte[] archivo { get; set; }
+        public int IdProceso { get; set; }
         public string estado { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
@@ -39,6 +36,7 @@ namespace Core.Erp.Data
         public decimal IdRol { get; set; }
         public string MotiAnula { get; set; }
     
+        public virtual ro_periodo_x_ro_Nomina_TipoLiqui ro_periodo_x_ro_Nomina_TipoLiqui { get; set; }
         public virtual ro_rol ro_rol { get; set; }
         public virtual ICollection<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }
     }

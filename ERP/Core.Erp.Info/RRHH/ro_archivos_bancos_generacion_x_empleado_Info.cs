@@ -27,6 +27,8 @@ namespace Core.Erp.Info.RRHH
         public string pe_nombreCompleto { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string IdTipoDocumento { get; set; }
+        public double ValorCancelado { get; set; }
+        public double Saldo { get; set; }
         #endregion
     }
 }

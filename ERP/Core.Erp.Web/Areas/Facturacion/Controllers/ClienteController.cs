@@ -54,7 +54,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         private void cargar_combos(fa_cliente_Info info)
         {
             fa_formaPago_Bus bus_formapago = new fa_formaPago_Bus();
-            var lst_formapago = bus_formapago.get_list();
+            var lst_formapago = bus_formapago.get_list(false);
             ViewBag.lst_formapago = lst_formapago;
 
             fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();

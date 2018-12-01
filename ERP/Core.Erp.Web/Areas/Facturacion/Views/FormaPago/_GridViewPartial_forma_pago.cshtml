@@ -1,11 +1,13 @@
 @using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_archivo_transferencia";
-        settings.CallbackRouteValues = new { Controller = "ArchivosTransferencias", Action = "GridViewPartial_archivo_transferencia",  Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin, IdSucursal = ViewBag.IdSucursal };
-
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView_forma_pago";
+        settings.CallbackRouteValues = new { Controller = "FormaPago", Action = "GridViewPartial_forma_pago" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdArchivo";
+
+        settings.KeyFieldName = "IdFormaPago";
+
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -51,7 +53,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("estado")) == "I")
+            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -61,14 +63,15 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "estado")) == "A")
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdEmpresa = DataBinder.Eval(tc.DataItem, "IdArchivo") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdEmpresa = DataBinder.Eval(tc.DataItem, "IdArchivo") },
+                Html.ActionLink("Modificar", "Modificar", new { IdFormaPago = DataBinder.Eval(tc.DataItem, "IdFormaPago") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdFormaPago = DataBinder.Eval(tc.DataItem, "IdFormaPago") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
+
             });
             c.SetHeaderTemplateContent(tc =>
             {
@@ -78,51 +81,20 @@
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(120);
+            c.Width = Unit.Pixel(150);
         });
 
-
-
-        settings.Columns.Add("IdArchivo","ID").Width = Unit.Percentage(8);
-        settings.Columns.Add("Descripcion", "Nómina").Width = Unit.Percentage(22);
-        settings.Columns.Add("DescripcionProcesoNomina", "Nómina tipo").Width = Unit.Percentage(8);
-        settings.Columns.Add("NombreProceso", "Archivo").Width = Unit.Percentage(8);
-
-
+        settings.Columns.Add("IdFormaPago", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("nom_FormaPago", "Descripción").Width = Unit.Percentage(70);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pe_FechaIni";
-            column.Caption = "Fecha inicio";
-            column.Width = Unit.Percentage(8);
-            column.PropertiesEdit.DisplayFormatString = "d";
-
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "pe_FechaFin";
-            column.Caption = "Fecha fin";
-            column.Width = Unit.Percentage(8);
-            column.PropertiesEdit.DisplayFormatString = "d";
-
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EstadoBool";
+            column.FieldName = "Estado";
             column.Caption = "Estado";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
             column.EditorProperties().CheckBox(sp =>
             {
 
             });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.SetDataItemTemplateContent(c =>
-            {
-                ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("get_archivo", "ArchivosTransferencias", new { Area = "RRHH", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(c.DataItem, "IdArchivo") }, Request.Url.Scheme) + "');\"></span>");
-
-            });
-            column.Width = Unit.Percentage(5);
         });
     });
 }

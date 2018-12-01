@@ -47,5 +47,45 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+        public List<ro_archivos_bancos_generacion_x_empleado_Info> get_list(int IdEmpresa,int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo)
+        {
+            try
+            {
+                List<ro_archivos_bancos_generacion_x_empleado_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from q in Context.vwRo_rol_detalle_saldo_por_pagar
+                             where q.IdEmpresa == IdEmpresa
+                                   && q.IdEmpresa == IdEmpresa
+                                   && q.IdNominaTipo== IdNominaTipo
+                                   && q.IdNominaTipoLiqui== IdNominaTipoLiqui
+                                   && q.IdPeriodo==IdPeriodo
+                             select new ro_archivos_bancos_generacion_x_empleado_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdEmpleado=q.IdEmpleado,
+                                 pe_nombreCompleto=q.pe_nombreCompleto,
+                                 pe_cedulaRuc=q.pe_cedulaRuc,
+                                 Valor=q.ValorGanado,
+                                 ValorCancelado=q.ValorCancelado,
+                                 Saldo=q.Saldo,
+                                 IdSucursal=q.IdSucursal
+                                 
+
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

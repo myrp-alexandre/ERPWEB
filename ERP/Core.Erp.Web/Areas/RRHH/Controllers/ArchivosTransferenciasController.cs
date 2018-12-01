@@ -25,7 +25,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ba_Banco_Cuenta_Bus bus_cuentas_bancarias = new ba_Banco_Cuenta_Bus();
         tb_banco_procesos_bancarios_x_empresa_Bus bus_procesos_bancarios = new tb_banco_procesos_bancarios_x_empresa_Bus();
 
-        int IdEmpresa = 0;
         #endregion
 
         #region Vistas
@@ -48,6 +47,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_archivo.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, true);
             return PartialView("_GridViewPartial_archivo_transferencia", model);
         }
@@ -65,9 +65,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
 
         #region acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa=0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0)
         {
-
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -77,9 +76,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_archivos_bancos_generacion_Info model = new ro_archivos_bancos_generacion_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                 
+                IdNomina= IdNomina_Tipo,
+                IdNominaTipo= IdNomina_TipoLiqui,
+                IdTransaccionSession=Convert.ToDecimal( SessionFixed.IdTransaccionSession),
+                
+                
+
             };
-            ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(new List<ro_archivos_bancos_generacion_x_empleado_Info>(),Convert.ToDecimal( SessionFixed.IdTransaccionSession));
+            model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
+            ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(model.detalle, Convert.ToDecimal( SessionFixed.IdTransaccionSession));
             cargar_combos(0);
             return View(model);
         }
@@ -91,6 +96,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(model.IdTransaccionSession);
+            model.IdRol = 1;
             if (model.detalle == null || model.detalle.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para la el archivo";
@@ -181,12 +187,29 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+        public FileResult get_archivo(int IdEmpresa = 0, int IdArchivo = 0)
+        {
+            string archivo = "";
+            string NombreFile = "";
+
+            var info_archivo = bus_archivo.get_info(IdEmpresa, IdArchivo);
+            info_archivo.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdArchivo);
+            archivo = bus_archivo.GetArchivo(info_archivo);
+            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(archivo);
+            return File(byteArray, "application/xml", NombreFile + ".txt");
+
+
+        }
         #endregion
 
         #region cargar combos
 
         private void cargar_combos(int IdNomina)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
             IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina);
@@ -232,7 +255,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             if (HttpContext.Current.Session[variable+IdTransaccionSession.ToString()] == null)
             {
-                List<ro_empleado_novedad_det_Info> list = new List<ro_empleado_novedad_det_Info>();
+                List<ro_archivos_bancos_generacion_x_empleado_Info> list = new List<ro_archivos_bancos_generacion_x_empleado_Info>();
 
                 HttpContext.Current.Session[variable+IdTransaccionSession.ToString()] = list;
             }

@@ -18,7 +18,7 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     if (mostrar_anulados)
-                        Lista = (from q in Context.ro_archivos_bancos_generacion
+                        Lista = (from q in Context.vwro_archivos_bancos_generacion
                                  where q.IdEmpresa == IdEmpresa
                                  select new ro_archivos_bancos_generacion_Info
                                  {
@@ -27,16 +27,20 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina = q.IdNomina,
                                      IdNominaTipo =q.IdNominaTipo,
                                      IdCuentaBancaria=q.IdCuentaBancaria,
-                                     IdProceso_Bancario=q.IdProceso_Bancario,
-                                     Cod_Empresa=q.Cod_Empresa,
-                                     Nom_Archivo=q.Nom_Archivo,
-                                     archivo=q.archivo,
+                                     IdProceso=q.IdProceso,
                                      estado = q.estado,
                                     IdRol=q.IdRol,
-                                     EstadoBool = q.estado == "A" ? true : false
+                                     EstadoBool = q.estado == "A" ? true : false,
+                                     Descripcion=q.Descripcion,
+                                     DescripcionProcesoNomina=q.DescripcionProcesoNomina,
+                                     pe_FechaIni=q.pe_FechaIni,
+                                     pe_FechaFin=q.pe_FechaFin,
+                                     NombreProceso = q.NombreProceso
+
+
                                  }).ToList();
                     else
-                        Lista = (from q in Context.ro_archivos_bancos_generacion
+                        Lista = (from q in Context.vwro_archivos_bancos_generacion
                                  where q.IdEmpresa == IdEmpresa
                                  && q.estado == "A"
                                  select new ro_archivos_bancos_generacion_Info
@@ -46,13 +50,15 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina = q.IdNomina,
                                      IdNominaTipo = q.IdNominaTipo,
                                      IdCuentaBancaria = q.IdCuentaBancaria,
-                                     IdProceso_Bancario = q.IdProceso_Bancario,
-                                     Cod_Empresa = q.Cod_Empresa,
-                                     Nom_Archivo = q.Nom_Archivo,
-                                     archivo = q.archivo,
+                                     IdProceso = q.IdProceso,
                                      estado = q.estado,
                                      IdRol = q.IdRol,
-                                     EstadoBool = q.estado == "A" ? true : false
+                                     EstadoBool = q.estado == "A" ? true : false,
+                                     Descripcion = q.Descripcion,
+                                     DescripcionProcesoNomina = q.DescripcionProcesoNomina,
+                                     pe_FechaIni = q.pe_FechaIni,
+                                     pe_FechaFin = q.pe_FechaFin,
+                                     NombreProceso=q.NombreProceso
                                  }).ToList();
                 }
 
@@ -83,10 +89,7 @@ namespace Core.Erp.Data.RRHH
                         IdNomina = Entity.IdNomina,
                         IdNominaTipo = Entity.IdNominaTipo,
                         IdCuentaBancaria = Entity.IdCuentaBancaria,
-                        IdProceso_Bancario = Entity.IdProceso_Bancario,
-                        Cod_Empresa = Entity.Cod_Empresa,
-                        Nom_Archivo = Entity.Nom_Archivo,
-                        archivo = Entity.archivo,
+                        IdProceso = Entity.IdProceso,
                         estado = Entity.estado,
                         IdRol = Entity.IdRol,
                         EstadoBool = Entity.estado == "A" ? true : false
@@ -129,6 +132,7 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                int secuencia = 1;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_archivos_bancos_generacion Entity = new ro_archivos_bancos_generacion
@@ -136,12 +140,9 @@ namespace Core.Erp.Data.RRHH
                         IdEmpresa = info.IdEmpresa,
                         IdArchivo = info.IdArchivo = get_id(info.IdEmpresa),
                         IdNomina = info.IdNomina,
-                        IdNominaTipo = info.IdNomina ,
+                        IdNominaTipo = info.IdNominaTipo ,
                         IdPeriodo = info.IdPeriodo,
-                        IdProceso_Bancario=info.IdProceso_Bancario,
-                        Cod_Empresa=info.Cod_Empresa,
-                        Nom_Archivo=info.Nom_Archivo,
-                        archivo=info.archivo,
+                        IdProceso=info.IdProceso,
                         estado=info.estado="A",
                         IdUsuario=info.IdUsuario,
                         IdRol=info.IdRol,
@@ -153,19 +154,21 @@ namespace Core.Erp.Data.RRHH
                         ro_archivos_bancos_generacion_x_empleado Entity_ = new ro_archivos_bancos_generacion_x_empleado
                         {
                             IdEmpresa = item.IdEmpresa,
-                            IdArchivo = item.IdArchivo,
+                            IdArchivo = item.IdArchivo=info.IdArchivo,
                             IdSucursal = item.IdSucursal,
                             IdEmpleado = item.IdEmpleado,
                             Valor = item.Valor,
                             pagacheque = item.pagacheque,
+                            Secuencia=secuencia
                         };
                         Context.ro_archivos_bancos_generacion_x_empleado.Add(Entity_);
+                        secuencia++;
                     }
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
@@ -183,10 +186,8 @@ namespace Core.Erp.Data.RRHH
                     Entity.IdNomina = info.IdNomina;
                     Entity.IdNominaTipo = info.IdNomina;
                     Entity.IdPeriodo = info.IdPeriodo;
-                    Entity.IdProceso_Bancario = info.IdProceso_Bancario;
-                    Entity.Cod_Empresa = info.Cod_Empresa;
-                    Entity.Nom_Archivo = info.Nom_Archivo;
-                    Entity.archivo = info.archivo;
+                    Entity.IdProceso = info.IdProceso;
+                   
                     Entity.estado = info.estado = "A";
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
