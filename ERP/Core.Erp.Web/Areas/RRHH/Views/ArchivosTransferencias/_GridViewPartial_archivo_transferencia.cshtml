@@ -88,7 +88,7 @@
         settings.Columns.Add("DescripcionProcesoNomina", "Nómina tipo").Width = Unit.Percentage(8);
         settings.Columns.Add("NombreProceso", "Archivo").Width = Unit.Percentage(8);
 
-        
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "pe_FechaIni";
@@ -119,7 +119,8 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                //ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_003", "RRHHReportes", new { Area = "Reportes", IdEmpleado = DataBinder.Eval(c.DataItem, "IdEmpleado"), IdNovedad = DataBinder.Eval(c.DataItem, "IdNovedad") }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("get_archivo", "ArchivosTransferencias", new { Area = "RRHH", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(c.DataItem, "IdArchivo") }, Request.Url.Scheme) + "');\"></span>");
+
             });
             column.Width = Unit.Percentage(5);
         });
