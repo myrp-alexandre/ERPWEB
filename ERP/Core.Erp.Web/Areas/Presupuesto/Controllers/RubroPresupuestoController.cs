@@ -2,14 +2,16 @@
 using Core.Erp.Bus.Presupuesto;
 using Core.Erp.Info.Presupuesto;
 using Core.Erp.Web.Helps;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
-namespace Core.Erp.Web.Areas.Presupuesto
+namespace Core.Erp.Web.Areas.Presupuesto.Controllers
 {
-    public class RubroController : Controller
+    public class RubroPresupuestoController : Controller
     {
-        // GET: Presupuesto/Rubro
         #region Variables
         pre_rubro_Bus bus_Rubro = new pre_rubro_Bus();
         #endregion
@@ -89,5 +91,68 @@ namespace Core.Erp.Web.Areas.Presupuesto
         }
 
         #endregion
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialAddNew(Core.Erp.Info.RRHH.ro_area_Info item)
+        {
+            var model = new object[0];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Insert here a code to insert the new item in your model
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_GridViewPartial", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialUpdate(Core.Erp.Info.RRHH.ro_area_Info item)
+        {
+            var model = new object[0];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Insert here a code to update the item in your model
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_GridViewPartial", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewPartialDelete(System.Int32 IdArea)
+        {
+            var model = new object[0];
+            if (IdArea >= 0)
+            {
+                try
+                {
+                    // Insert here a code to delete the item from your model
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            return PartialView("_GridViewPartial", model);
+        }
     }
 }

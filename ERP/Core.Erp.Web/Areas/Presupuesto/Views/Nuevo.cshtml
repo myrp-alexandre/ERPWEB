@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.Presupuesto.pre_rubro
+﻿@model Core.Erp.Info.Presupuesto.pre_rubro_Info
 @{
     ViewBag.Title = "Nuevo rubro";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -35,16 +35,16 @@
         </div>
     </div>
     @*<div class="row">
-        <div class="col-md-12">
             <div class="col-md-12">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="">@Html.CheckBoxFor(q => q.TieneFormatoTransferencia) Tiene formato transferencia</label>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label for="">@Html.CheckBoxFor(q => q.TieneFormatoTransferencia) Tiene formato transferencia</label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
