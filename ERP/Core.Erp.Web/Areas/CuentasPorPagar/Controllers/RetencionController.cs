@@ -60,9 +60,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             try
             {
                 cargar_combos_detalle();
+                cp_retencion_Info model = new cp_retencion_Info();
                 SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-                var model = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                return PartialView("_GridViewPartial_retencion_det", model);
+                 model.detalle = List_cp_retencion_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                return PartialView("_GridViewPartial_retencion_det", model.detalle);
             }
             catch (Exception)
             {
@@ -108,6 +109,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_cp_retencion_det.set_list(new List<cp_retencion_det_Info>(), model.IdTransaccionSession);
             List_ct_cbtecble_det_List.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
+            var lista = bus_codigo_ret.get_list_cod_ret(true, IdEmpresa);
+            lst_codigo_retencion.set_list(lista);
             return View(model);
         }
         [HttpPost]
@@ -187,6 +190,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_ct_cbtecble_det_List.set_list(model.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             List_cp_retencion_det.set_list(model.detalle, model.IdTransaccionSession);
+
+            var lista = bus_codigo_ret.get_list_cod_ret(true, IdEmpresa);
+            lst_codigo_retencion.set_list(lista);
             return View(model);
         }
         [HttpPost]
@@ -266,6 +272,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_ct_cbtecble_det_List.set_list(model.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             List_cp_retencion_det.set_list(model.detalle, model.IdTransaccionSession);
+
+            var lista = bus_codigo_ret.get_list_cod_ret(true, IdEmpresa);
+            lst_codigo_retencion.set_list(lista);
             return View(model);
         }
         [HttpPost]
@@ -491,8 +500,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             ViewBag.lst_cuentas = lst_cuentas;
             var lista_cp_codigo_SRI = lst_codigo_retencion.get_list();
             lista_cp_codigo_SRI = bus_codigo_ret.get_list_cod_ret(false, IdEmpresa);
-            ViewBag.lst_codigo_retencion = lst_codigo_retencion;
-            Session["lst_codigo_retencion"] = lst_codigo_retencion;
+            ViewBag.lst_codigo_retencion = lista_cp_codigo_SRI;           
         }
 
         private bool validar(cp_retencion_Info i_validar, ref string msg)
