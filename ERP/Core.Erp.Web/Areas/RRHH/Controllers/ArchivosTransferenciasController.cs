@@ -196,6 +196,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             var info_archivo = bus_archivo.get_info(IdEmpresa, IdArchivo);
             info_archivo.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdArchivo);
+            archivo = bus_archivo.GetArchivo(info_archivo);
             byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(archivo);
             return File(byteArray, "application/xml", NombreFile + ".txt");
 

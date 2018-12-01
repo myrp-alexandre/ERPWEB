@@ -125,12 +125,13 @@ namespace Core.Erp.Bus.RRHH
                             File += "A";
                         else
                             File += "C";
-                        File += File + item.em_NumCta.PadLeft(10, '0');
-                        File += File + (valorEntero.ToString()+valorDecimal.ToString()).PadLeft(15,'0');
-                        File+=File+"EI";
-                        File += File+"Y";
-                        File += File + "01";
-                        File += File + cl_funciones.QuitarTildes(item.pe_apellido + item.pe_nombre);
+                        File += item.em_NumCta.PadLeft(10, '0');
+                        File +=  (valorEntero.ToString()+valorDecimal.ToString()).PadLeft(15,'0');
+                        File+="EI";
+                        File += "Y";
+                        File +=  "01";
+                        File +=  cl_funciones.QuitarTildes(item.pe_apellido + item.pe_nombre);
+                        File += "\n";
                     }
 
                 }
