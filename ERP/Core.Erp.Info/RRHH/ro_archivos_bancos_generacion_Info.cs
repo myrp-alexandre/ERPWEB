@@ -22,10 +22,8 @@ namespace Core.Erp.Info.RRHH
         public int IdPeriodo { get; set; }
         public Nullable<int> IdCuentaBancaria { get; set; }
         [Required(ErrorMessage = "El campo proceso bancario  es obligatorio")]
-        public string IdProceso_Bancario { get; set; }
-        public string Cod_Empresa { get; set; }
-        public string Nom_Archivo { get; set; }
-        public byte[] archivo { get; set; }
+        public int IdProceso { get; set; }
+       
         public string estado { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

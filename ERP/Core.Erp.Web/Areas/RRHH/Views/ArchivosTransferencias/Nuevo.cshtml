@@ -17,24 +17,26 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Nuevo", "ArvhivosTransfencias", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "ArchivosTransferencias", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdArchivo)
+    @Html.HiddenFor(q => q.IdPeriodo)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
 
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdNomina_Tipo">Nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
+                    @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
                     @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdNomina_TipoLiqui">Tipo liquidación de nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNominaTipo, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                    @Html.DropDownListFor(q => q.IdNominaTipo, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                     @Html.ValidationMessageFor(q => q.IdNominaTipo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -52,8 +54,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdBanco">Tipo de archivo*</label>
-                    @Html.DropDownListFor(q => q.IdProceso_Bancario, new SelectList(ViewBag.lst_proceso, "IdProceso", "NombreProceso"), new { @class = "form-control", @id = "IdProceso_Bancario" })
-                    @Html.ValidationMessageFor(q => q.IdProceso_Bancario, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(q => q.IdProceso, new SelectList(ViewBag.lst_proceso, "IdProceso", "NombreProceso"), new { @class = "form-control", @id = "IdProceso" })
+                    @Html.ValidationMessageFor(q => q.IdProceso, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -83,7 +85,7 @@
 
 <script>
     $("#IdBanco").change(function () {
-        $("#IdProceso_Bancario").empty();
+        $("#IdProceso").empty();
         cargar_procesos();
 
     });
@@ -104,7 +106,7 @@
                     success: function (data) {
 
                         $.each(data, function (i, row) {
-                            $("#IdProceso_Bancario").append("<option value=" + row.IdProceso_bancario_tipo + ">" + row.NombreProceso + "</option>");
+                            $("#IdProceso").append("<option value=" + row.IdProceso + ">" + row.NombreProceso + "</option>");
 
                         });
                     },
@@ -114,8 +116,8 @@
     };
 
 
-    
-        
+
+
     cargar_tipo_liquidacion_nomina();
             function cargar_tipo_liquidacion_nomina() {
                 var datos = {

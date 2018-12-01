@@ -27,10 +27,8 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina = q.IdNomina,
                                      IdNominaTipo =q.IdNominaTipo,
                                      IdCuentaBancaria=q.IdCuentaBancaria,
-                                     IdProceso_Bancario=q.IdProceso_Bancario,
-                                     Cod_Empresa=q.Cod_Empresa,
-                                     Nom_Archivo=q.Nom_Archivo,
-                                     archivo=q.archivo,
+                                     IdProceso=q.IdProceso,
+                                     
                                      estado = q.estado,
                                     IdRol=q.IdRol,
                                      EstadoBool = q.estado == "A" ? true : false
@@ -46,10 +44,8 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina = q.IdNomina,
                                      IdNominaTipo = q.IdNominaTipo,
                                      IdCuentaBancaria = q.IdCuentaBancaria,
-                                     IdProceso_Bancario = q.IdProceso_Bancario,
-                                     Cod_Empresa = q.Cod_Empresa,
-                                     Nom_Archivo = q.Nom_Archivo,
-                                     archivo = q.archivo,
+                                     IdProceso = q.IdProceso,
+                                     
                                      estado = q.estado,
                                      IdRol = q.IdRol,
                                      EstadoBool = q.estado == "A" ? true : false
@@ -83,10 +79,7 @@ namespace Core.Erp.Data.RRHH
                         IdNomina = Entity.IdNomina,
                         IdNominaTipo = Entity.IdNominaTipo,
                         IdCuentaBancaria = Entity.IdCuentaBancaria,
-                        IdProceso_Bancario = Entity.IdProceso_Bancario,
-                        Cod_Empresa = Entity.Cod_Empresa,
-                        Nom_Archivo = Entity.Nom_Archivo,
-                        archivo = Entity.archivo,
+                        IdProceso = Entity.IdProceso,
                         estado = Entity.estado,
                         IdRol = Entity.IdRol,
                         EstadoBool = Entity.estado == "A" ? true : false
@@ -136,12 +129,9 @@ namespace Core.Erp.Data.RRHH
                         IdEmpresa = info.IdEmpresa,
                         IdArchivo = info.IdArchivo = get_id(info.IdEmpresa),
                         IdNomina = info.IdNomina,
-                        IdNominaTipo = info.IdNomina ,
+                        IdNominaTipo = info.IdNominaTipo ,
                         IdPeriodo = info.IdPeriodo,
-                        IdProceso_Bancario=info.IdProceso_Bancario,
-                        Cod_Empresa=info.Cod_Empresa,
-                        Nom_Archivo=info.Nom_Archivo,
-                        archivo=info.archivo,
+                        IdProceso=info.IdProceso,
                         estado=info.estado="A",
                         IdUsuario=info.IdUsuario,
                         IdRol=info.IdRol,
@@ -183,10 +173,8 @@ namespace Core.Erp.Data.RRHH
                     Entity.IdNomina = info.IdNomina;
                     Entity.IdNominaTipo = info.IdNomina;
                     Entity.IdPeriodo = info.IdPeriodo;
-                    Entity.IdProceso_Bancario = info.IdProceso_Bancario;
-                    Entity.Cod_Empresa = info.Cod_Empresa;
-                    Entity.Nom_Archivo = info.Nom_Archivo;
-                    Entity.archivo = info.archivo;
+                    Entity.IdProceso = info.IdProceso;
+                   
                     Entity.estado = info.estado = "A";
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;

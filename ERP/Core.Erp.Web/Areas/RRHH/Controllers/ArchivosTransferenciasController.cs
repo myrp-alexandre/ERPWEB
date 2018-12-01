@@ -77,7 +77,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdNomina= IdNomina_Tipo,
-                IdNominaTipo= IdNomina_TipoLiqui
+                IdNominaTipo= IdNomina_TipoLiqui,
+                IdTransaccionSession=Convert.ToDecimal( SessionFixed.IdTransaccionSession),
+                
+                
 
             };
             model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
@@ -93,6 +96,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(model.IdTransaccionSession);
+            model.IdRol = 1;
             if (model.detalle == null || model.detalle.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para la el archivo";
@@ -234,7 +238,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             if (HttpContext.Current.Session[variable+IdTransaccionSession.ToString()] == null)
             {
-                List<ro_empleado_novedad_det_Info> list = new List<ro_empleado_novedad_det_Info>();
+                List<ro_archivos_bancos_generacion_x_empleado_Info> list = new List<ro_archivos_bancos_generacion_x_empleado_Info>();
 
                 HttpContext.Current.Session[variable+IdTransaccionSession.ToString()] = list;
             }
