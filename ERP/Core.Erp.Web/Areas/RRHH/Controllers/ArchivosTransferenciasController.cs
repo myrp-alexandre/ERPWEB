@@ -25,7 +25,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ba_Banco_Cuenta_Bus bus_cuentas_bancarias = new ba_Banco_Cuenta_Bus();
         tb_banco_procesos_bancarios_x_empresa_Bus bus_procesos_bancarios = new tb_banco_procesos_bancarios_x_empresa_Bus();
 
-        int IdEmpresa = 0;
         #endregion
 
         #region Vistas
@@ -48,6 +47,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_archivo.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, true);
             return PartialView("_GridViewPartial_archivo_transferencia", model);
         }
@@ -193,6 +193,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         private void cargar_combos(int IdNomina)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
             IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina);

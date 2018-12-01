@@ -71,6 +71,7 @@ namespace Core.Erp.Data.RRHH
                                  Valor=q.ValorGanado,
                                  ValorCancelado=q.ValorCancelado,
                                  Saldo=q.Saldo,
+                                 IdSucursal=q.IdSucursal
                                  
 
                              }).ToList();

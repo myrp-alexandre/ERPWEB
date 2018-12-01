@@ -34,6 +34,14 @@ namespace Core.Erp.Info.RRHH
         public decimal IdRol { get; set; }
         public string MotiAnula { get; set; }
         public bool EstadoBool { get; set; }
+
+        #region MyRegion
+        public string Descripcion { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
+        public System.DateTime pe_FechaIni { get; set; }
+        public System.DateTime pe_FechaFin { get; set; }
+        public string NombreProceso { get; set; }
+        #endregion
         public cl_enumeradores.eTipoProcesoBancario TipoFile { get; set; }
         public List < ro_archivos_bancos_generacion_x_empleado_Info> detalle { get; set; }
 

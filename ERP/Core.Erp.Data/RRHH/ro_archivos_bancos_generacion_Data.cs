@@ -18,7 +18,7 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     if (mostrar_anulados)
-                        Lista = (from q in Context.ro_archivos_bancos_generacion
+                        Lista = (from q in Context.vwro_archivos_bancos_generacion
                                  where q.IdEmpresa == IdEmpresa
                                  select new ro_archivos_bancos_generacion_Info
                                  {
@@ -28,13 +28,19 @@ namespace Core.Erp.Data.RRHH
                                      IdNominaTipo =q.IdNominaTipo,
                                      IdCuentaBancaria=q.IdCuentaBancaria,
                                      IdProceso=q.IdProceso,
-                                     
                                      estado = q.estado,
                                     IdRol=q.IdRol,
-                                     EstadoBool = q.estado == "A" ? true : false
+                                     EstadoBool = q.estado == "A" ? true : false,
+                                     Descripcion=q.Descripcion,
+                                     DescripcionProcesoNomina=q.DescripcionProcesoNomina,
+                                     pe_FechaIni=q.pe_FechaIni,
+                                     pe_FechaFin=q.pe_FechaFin,
+                                     NombreProceso = q.NombreProceso
+
+
                                  }).ToList();
                     else
-                        Lista = (from q in Context.ro_archivos_bancos_generacion
+                        Lista = (from q in Context.vwro_archivos_bancos_generacion
                                  where q.IdEmpresa == IdEmpresa
                                  && q.estado == "A"
                                  select new ro_archivos_bancos_generacion_Info
@@ -45,10 +51,14 @@ namespace Core.Erp.Data.RRHH
                                      IdNominaTipo = q.IdNominaTipo,
                                      IdCuentaBancaria = q.IdCuentaBancaria,
                                      IdProceso = q.IdProceso,
-                                     
                                      estado = q.estado,
                                      IdRol = q.IdRol,
-                                     EstadoBool = q.estado == "A" ? true : false
+                                     EstadoBool = q.estado == "A" ? true : false,
+                                     Descripcion = q.Descripcion,
+                                     DescripcionProcesoNomina = q.DescripcionProcesoNomina,
+                                     pe_FechaIni = q.pe_FechaIni,
+                                     pe_FechaFin = q.pe_FechaFin,
+                                     NombreProceso=q.NombreProceso
                                  }).ToList();
                 }
 
@@ -122,6 +132,7 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                int secuencia = 1;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_archivos_bancos_generacion Entity = new ro_archivos_bancos_generacion
@@ -143,19 +154,21 @@ namespace Core.Erp.Data.RRHH
                         ro_archivos_bancos_generacion_x_empleado Entity_ = new ro_archivos_bancos_generacion_x_empleado
                         {
                             IdEmpresa = item.IdEmpresa,
-                            IdArchivo = item.IdArchivo,
+                            IdArchivo = item.IdArchivo=info.IdArchivo,
                             IdSucursal = item.IdSucursal,
                             IdEmpleado = item.IdEmpleado,
                             Valor = item.Valor,
                             pagacheque = item.pagacheque,
+                            Secuencia=secuencia
                         };
                         Context.ro_archivos_bancos_generacion_x_empleado.Add(Entity_);
+                        secuencia++;
                     }
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
