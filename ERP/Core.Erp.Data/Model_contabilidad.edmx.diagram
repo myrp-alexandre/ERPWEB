@@ -41,8 +41,6 @@
         <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" />
         <AssociationConnector Association="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" />
         <EntityTypeShape EntityType="Model_contabilidad.vwct_RevisionContableFacturas" Width="1.5" PointX="12.375" PointY="3.75" />
-        <EntityTypeShape EntityType="Model_contabilidad.ct_gasto" Width="1.5" PointX="3" PointY="30.125" />
-        <AssociationConnector Association="Model_contabilidad.FK_ct_gasto_ct_plancta" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

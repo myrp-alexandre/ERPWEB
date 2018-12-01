@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model_presupuesto.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="pre_Grupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="pre_Grupo_x_seg_usuario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AsignaCuentas" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pre_rubro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRubro" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdRubro" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo">
+          <End Role="pre_Grupo" Type="Self.pre_Grupo" Multiplicity="1" />
+          <End Role="pre_Grupo_x_seg_usuario" Type="Self.pre_Grupo_x_seg_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_Grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="pre_Grupo_x_seg_usuario">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model_presupuestoStoreContainer">
+          <EntitySet Name="pre_Grupo" EntityType="Self.pre_Grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pre_Grupo_x_seg_usuario" EntityType="Self.pre_Grupo_x_seg_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pre_rubro" EntityType="Self.pre_rubro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo" Association="Self.FK_pre_Grupo_x_seg_usuario_pre_Grupo">
+            <End Role="pre_Grupo" EntitySet="pre_Grupo" />
+            <End Role="pre_Grupo_x_seg_usuario" EntitySet="pre_Grupo_x_seg_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model_presupuesto" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="pre_Grupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="pre_Grupo_x_seg_usuario" Relationship="Self.FK_pre_Grupo_x_seg_usuario_pre_Grupo" FromRole="pre_Grupo" ToRole="pre_Grupo_x_seg_usuario" />
+        </EntityType>
+        <EntityType Name="pre_Grupo_x_seg_usuario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AsignaCuentas" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="pre_Grupo" Relationship="Self.FK_pre_Grupo_x_seg_usuario_pre_Grupo" FromRole="pre_Grupo_x_seg_usuario" ToRole="pre_Grupo" />
+        </EntityType>
+        <EntityType Name="pre_rubro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRubro" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdRubro" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo">
+          <End Role="pre_Grupo" Type="Self.pre_Grupo" Multiplicity="1" />
+          <End Role="pre_Grupo_x_seg_usuario" Type="Self.pre_Grupo_x_seg_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_Grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="pre_Grupo_x_seg_usuario">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities_presupuesto" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="pre_Grupo" EntityType="Self.pre_Grupo" />
+          <EntitySet Name="pre_Grupo_x_seg_usuario" EntityType="Self.pre_Grupo_x_seg_usuario" />
+          <EntitySet Name="pre_rubro" EntityType="Self.pre_rubro" />
+          <AssociationSet Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo" Association="Self.FK_pre_Grupo_x_seg_usuario_pre_Grupo">
+            <End Role="pre_Grupo" EntitySet="pre_Grupo" />
+            <End Role="pre_Grupo_x_seg_usuario" EntitySet="pre_Grupo_x_seg_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model_presupuestoStoreContainer" CdmEntityContainer="Entities_presupuesto">
+          <EntitySetMapping Name="pre_Grupo">
+            <EntityTypeMapping TypeName="Model_presupuesto.pre_Grupo">
+              <MappingFragment StoreEntitySet="pre_Grupo">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pre_Grupo_x_seg_usuario">
+            <EntityTypeMapping TypeName="Model_presupuesto.pre_Grupo_x_seg_usuario">
+              <MappingFragment StoreEntitySet="pre_Grupo_x_seg_usuario">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="AsignaCuentas" ColumnName="AsignaCuentas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pre_rubro">
+            <EntityTypeMapping TypeName="Model_presupuesto.pre_rubro">
+              <MappingFragment StoreEntitySet="pre_rubro">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

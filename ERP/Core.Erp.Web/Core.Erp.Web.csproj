@@ -285,7 +285,6 @@
     <Compile Include="Areas\Contabilidad\Controllers\AnioFiscalController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ATSController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ComprobanteContableController.cs" />
-    <Compile Include="Areas\Contabilidad\Controllers\GastoController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\GrupoContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ParametroContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\PeriodoContableController.cs" />
@@ -9385,11 +9384,6 @@
     <Content Include="Areas\Compras\Views\AprobacionOC\Index.cshtml" />
     <Content Include="Areas\Compras\Views\AprobacionOC\_GridViewPartial_aprobacion_oc.cshtml" />
     <Content Include="Areas\Reportes\Views\CompraReportes\COMP_001.cshtml" />
-    <Content Include="Areas\Contabilidad\Views\Gasto\_GridViewPartial_Gasto.cshtml" />
-    <Content Include="Areas\Contabilidad\Views\Gasto\Anular.cshtml" />
-    <Content Include="Areas\Contabilidad\Views\Gasto\Index.cshtml" />
-    <Content Include="Areas\Contabilidad\Views\Gasto\Modificar.cshtml" />
-    <Content Include="Areas\Contabilidad\Views\Gasto\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\FormaPago\Index.cshtml" />
     <Content Include="Areas\Facturacion\Views\FormaPago\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\FormaPago\Modificar.cshtml" />
@@ -9504,7 +9498,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

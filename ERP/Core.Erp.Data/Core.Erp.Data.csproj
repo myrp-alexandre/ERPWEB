@@ -226,7 +226,6 @@
     <Compile Include="Contabilidad\ct_cbtecble_Data.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_det_Data.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_tipo_Data.cs" />
-    <Compile Include="Contabilidad\ct_gasto_Data.cs" />
     <Compile Include="Contabilidad\ct_grupocble_Data.cs" />
     <Compile Include="Contabilidad\ct_parametro_Data.cs" />
     <Compile Include="Contabilidad\ct_periodo_Data.cs" />
@@ -343,9 +342,6 @@
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="ct_cbtecble_tipo.cs">
-      <DependentUpon>Model_contabilidad.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ct_gasto.cs">
       <DependentUpon>Model_contabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="ct_grupocble.cs">
@@ -941,6 +937,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_inventario.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model_presupuesto.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_presupuesto.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_presupuesto.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_presupuesto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_presupuesto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_presupuesto.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Model_reportes.Context.cs">
       <DependentUpon>Model_reportes.Context.tt</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -985,6 +996,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_seguridad_acceso.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="pre_Grupo.cs">
+      <DependentUpon>Model_presupuesto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pre_Grupo_x_seg_usuario.cs">
+      <DependentUpon>Model_presupuesto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pre_rubro.cs">
+      <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Data.cs" />
@@ -2197,6 +2217,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_seguridad_acceso.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Model_presupuesto.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_presupuesto.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model_presupuesto.edmx.diagram">
+      <DependentUpon>Model_presupuesto.edmx</DependentUpon>
+    </None>
     <None Include="Model_reportes.edmx.diagram">
       <DependentUpon>Model_reportes.edmx</DependentUpon>
     </None>
@@ -2328,6 +2355,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_inventario.edmx</DependentUpon>
       <LastGenOutput>Model_inventario.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model_presupuesto.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_presupuesto.edmx</DependentUpon>
+      <LastGenOutput>Model_presupuesto.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model_presupuesto.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_presupuesto.edmx</DependentUpon>
+      <LastGenOutput>Model_presupuesto.cs</LastGenOutput>
     </Content>
     <Content Include="Model_reportes.Context.tt">
       <DependentUpon>Model_reportes.edmx</DependentUpon>
