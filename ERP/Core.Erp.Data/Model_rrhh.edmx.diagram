@@ -181,12 +181,12 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" Width="1.5" PointX="25.5" PointY="47.875" />
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_archivos_bancos_generacion_x_empleado" Width="1.5" PointX="21.375" PointY="16.75" />
-        <EntityTypeShape EntityType="Model_rrhh.vwRo_rol_detalle_saldo_por_pagar" Width="1.5" PointX="7.375" PointY="22.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_archivos_bancos_generacion" Width="1.5" PointX="24.25" PointY="39" />
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_periodo_x_ro_Nomina_TipoLiqui" />
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_rol" />
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_archivos_bancos_generacion" Width="1.5" PointX="9.375" PointY="22.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwRo_rol_detalle_saldo_por_pagar" Width="1.5" PointX="17.375" PointY="22.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

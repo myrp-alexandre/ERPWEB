@@ -30,5 +30,7 @@ namespace Core.Erp.Data
         public string pe_cedulaRuc { get; set; }
         public double ValorCancelado { get; set; }
         public double Saldo { get; set; }
+        public string em_NumCta { get; set; }
+        public string em_tipoCta { get; set; }
     }
 }

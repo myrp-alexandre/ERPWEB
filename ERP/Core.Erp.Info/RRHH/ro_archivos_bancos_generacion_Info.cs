@@ -20,7 +20,7 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo tipo liquidación nómina  es obligatorio")]
         public int IdNominaTipo { get; set; }
         public int IdPeriodo { get; set; }
-        public Nullable<int> IdCuentaBancaria { get; set; }
+        public int IdCuentaBancaria { get; set; }
         [Required(ErrorMessage = "El campo proceso bancario  es obligatorio")]
         public int IdProceso { get; set; }
        

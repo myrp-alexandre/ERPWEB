@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_archivos_bancos_generacion_Info
 @{
-    ViewBag.Title = "Modificar archivo de transferencia";
+    ViewBag.Title = "Nueva archivo de transferencia";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -17,12 +17,12 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Modificar", "ArchivosTransferencias", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "ArchivosTransferencias", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdArchivo)
-    @Html.HiddenFor(q => q.IdPeriodo)
-    @Html.HiddenFor(q => q.IdTransaccionSession)
+    @Html.HiddenFor(q => q.IdPeriodo, new { @id = "IdPeriodo" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     <div class="row">
         <div class="col-md-12">
@@ -87,8 +87,14 @@
     $("#IdBanco").change(function () {
         $("#IdProceso").empty();
         cargar_procesos();
+        cargar_empleados();
 
     });
+    $("#IdProceso").change(function () {
+        cargar_empleados();
+
+    });
+
             function cargar_procesos() {
                 var datos = {
                     IdBanco: $("#IdBanco").val()
@@ -144,6 +150,31 @@
                     }
                 });
             };
+            function cargar_empleados() {
+                var datos = {
+                    IdProceso: $("#IdProceso").val(),
+                    IdNomina_Tipo: $("#IdNomina_Tipo").val(),
+                    IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
+                    IdPeriodo: $("#IdPeriodo").val(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val()
 
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("CargarEmpleados", "ArchivosTransferencias", new { Area = "RRHH" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        GridViewPartial_archivo_transferencia_det.PerformCallback();
+                    },
+                    error: function (error) {
+                    }
+                });
+            };
 
 </script>

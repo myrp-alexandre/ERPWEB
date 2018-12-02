@@ -180,21 +180,40 @@ namespace Core.Erp.Bus.RRHH
                     {
                         if (secuencia == 0)
                         {
-                        valor = Convert.ToDouble(info.detalle.Sum(v => v.Saldo));
-                        valorEntero = Math.Floor(valor);
-                        valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+                            valor = Convert.ToDouble(info.detalle.Sum(v => v.Valor));
+                            valorEntero = Math.Floor(valor);
+                            valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
 
                             File += "C";
                             File += Info_proceso.Codigo_Empresa;
-                            File += info_empresa.em_nombre;
+                            File += info_cuenta.ba_Num_Cuenta.PadLeft(10,'0');
+                            if(info_empresa.NombreComercial.Length>38)
+                            File += info_empresa.em_nombre.Substring(0,37);
+                            else
+                            File += info_empresa.em_nombre.PadLeft(38, ' ');
                             File += "C";
-
+                            File += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+                            File += DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
+                            File += info.detalle.Count().ToString().PadLeft(5, '0');
                         }
                         else
                         {
-
+                            valor = Convert.ToDouble(info.detalle.Sum(v => v.Saldo));
+                            valorEntero = Math.Floor(valor);
+                            valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+                            File += "D";
+                            File += Info_proceso.Codigo_Empresa;
+                            File += item.pe_cedulaRuc.PadLeft(10,'0');
+                            File += item.pe_nombreCompleto.Substring(0,16);
+                            File += "E";
+                            File += "                    ";
+                            File += "N";
+                            File += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+                            File += "                                           ";
+                            File += "0900000000";
                         }
                     }
+                    File += "\n";
                     
 
                 }

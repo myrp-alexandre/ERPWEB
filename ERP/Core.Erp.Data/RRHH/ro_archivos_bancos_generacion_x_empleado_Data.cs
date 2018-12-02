@@ -33,7 +33,8 @@ namespace Core.Erp.Data.RRHH
                                   pe_apellido=q.pe_apellido,
                                   pe_nombre=q.pe_nombre,
                                   pe_cedulaRuc=q.pe_cedulaRuc,
-                                  IdTipoDocumento=q.IdTipoDocumento
+                                  IdTipoDocumento=q.IdTipoDocumento,
+                                  pe_nombreCompleto=q.pe_nombreCompleto
                                   
                              }).ToList();
 
@@ -48,7 +49,7 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-        public List<ro_archivos_bancos_generacion_x_empleado_Info> get_list(int IdEmpresa,int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo)
+        public List<ro_archivos_bancos_generacion_x_empleado_Info> get_list(int IdEmpresa,int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo, string Tipocta)
         {
             try
             {
@@ -62,6 +63,7 @@ namespace Core.Erp.Data.RRHH
                                    && q.IdNominaTipo== IdNominaTipo
                                    && q.IdNominaTipoLiqui== IdNominaTipoLiqui
                                    && q.IdPeriodo==IdPeriodo
+                                   && Tipocta.Contains(q.em_tipoCta)
                              select new ro_archivos_bancos_generacion_x_empleado_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -71,7 +73,9 @@ namespace Core.Erp.Data.RRHH
                                  Valor=q.ValorGanado,
                                  ValorCancelado=q.ValorCancelado,
                                  Saldo=q.Saldo,
-                                 IdSucursal=q.IdSucursal
+                                 IdSucursal=q.IdSucursal,
+                                 em_NumCta=q.em_NumCta,
+                                 em_tipoCta=q.em_tipoCta
                                  
 
                              }).ToList();

@@ -182,6 +182,7 @@ namespace Core.Erp.Data.RRHH
                         IdNominaTipo = info.IdNominaTipo ,
                         IdPeriodo = info.IdPeriodo,
                         IdProceso=info.IdProceso,
+                        IdCuentaBancaria=info.IdCuentaBancaria,
                         estado=info.estado="A",
                         IdUsuario=info.IdUsuario,
                         IdRol=info.IdRol,
@@ -226,11 +227,12 @@ namespace Core.Erp.Data.RRHH
                     Entity.IdNominaTipo = info.IdNomina;
                     Entity.IdPeriodo = info.IdPeriodo;
                     Entity.IdProceso = info.IdProceso;
-                   
+                    Entity.IdCuentaBancaria = info.IdCuentaBancaria;
                     Entity.estado = info.estado = "A";
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
-
+                    var detalle = Context.ro_archivos_bancos_generacion_x_empleado.Where(v =>v.IdEmpresa==info.IdEmpresa&& v.IdArchivo==info.IdArchivo);
+                    Context.ro_archivos_bancos_generacion_x_empleado.RemoveRange(detalle);
                     foreach (var item in info.detalle)
                     {
                         ro_archivos_bancos_generacion_x_empleado Entity_ = new ro_archivos_bancos_generacion_x_empleado
