@@ -391,6 +391,8 @@
     <Compile Include="Areas\Inventario\Controllers\TransferenciasInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\UnidadDeMedidaController.cs" />
     <Compile Include="Areas\Inventario\InventarioAreaRegistration.cs" />
+    <Compile Include="Areas\Presupuesto\Controllers\RubroPresupuestoController.cs" />
+    <Compile Include="Areas\Presupuesto\PresupuestoAreaRegistration.cs" />
     <Compile Include="Areas\Reportes\Controllers\ActivoFijoReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\BancoReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\CajaReportesController.cs" />
@@ -9389,6 +9391,12 @@
     <Content Include="Areas\Facturacion\Views\FormaPago\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\FormaPago\Anular.cshtml" />
     <Content Include="Areas\Facturacion\Views\FormaPago\_GridViewPartial_forma_pago.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\web.config" />
+    <Content Include="Areas\Presupuesto\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Index.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\_GridViewPartial_Rubro.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9466,6 +9474,7 @@
     <Folder Include="Areas\General\Models\" />
     <Folder Include="Areas\Importacion\Models\" />
     <Folder Include="Areas\Inventario\Models\" />
+    <Folder Include="Areas\Presupuesto\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />

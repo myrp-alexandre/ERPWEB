@@ -997,6 +997,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_seguridad_acceso.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Presupuesto\pre_rubro_Data.cs" />
     <Compile Include="pre_Grupo.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
