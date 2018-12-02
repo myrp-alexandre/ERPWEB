@@ -221,12 +221,12 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == d.IdCobro_tipo_det).FirstOrDefault();
                     if (tipo_cobro == null)
                         return false;
-                    if (tipo_cobro.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.DIARIO.ToString())
+                    if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.TIP_COBRO.ToString())
                     {
                         IdTipoCbte = param_cxc.pa_IdTipoCbteCble_CxC;
                     }
                     else
-                        if (tipo_cobro.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.MOVI_CAJA.ToString())
+                        if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
                     {
                         var param_caja = Context_caj.caj_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                         if (param_caja == null)
@@ -554,12 +554,12 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     var tipo_cobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == d.IdCobro_tipo_det).FirstOrDefault();
                     if (tipo_cobro == null)
                         return false;
-                    if (tipo_cobro.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.DIARIO.ToString())
+                    if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.TIP_COBRO.ToString())
                     {
                         IdTipoCbte = param_cxc.pa_IdTipoCbteCble_CxC;
                     }
                     else
-                        if (tipo_cobro.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.MOVI_CAJA.ToString())
+                        if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
                     {
                         var param_caja = Context_caj.caj_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                         if (param_caja == null)
@@ -922,7 +922,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                             {
                                 var cobro_tipo = Context.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == Entity.IdCobro_tipo).FirstOrDefault();
 
-                                if (cobro_tipo.tc_Que_Tipo_Registro_Genera == cl_enumeradores.eTipoCobroGenera.MOVI_CAJA.ToString())
+                                if (cobro_tipo.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
                                 {
                                     caj_Caja_Movimiento_Data odata_caj = new caj_Caja_Movimiento_Data();
                                     odata_caj.anularDB(new Info.Caja.caj_Caja_Movimiento_Info

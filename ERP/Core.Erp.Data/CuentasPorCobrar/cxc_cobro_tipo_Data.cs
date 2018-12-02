@@ -104,12 +104,12 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdMotivo_tipo_cobro = Entity.IdMotivo_tipo_cobro,
                         tc_abreviatura = Entity.tc_abreviatura,
                         tc_descripcion = Entity.tc_descripcion,
-                        tc_Que_Tipo_Registro_Genera = Entity.tc_Que_Tipo_Registro_Genera,
                         tc_Tomar_Cta_Cble_De = Entity.tc_Tomar_Cta_Cble_De,
                         Estado = Entity.Estado,
                         PorcentajeRet = Entity.PorcentajeRet,
                         EsTarjetaCredito = Entity.EsTarjetaCredito,
-                        SeDeposita = Entity.SeDeposita                        
+                        SeDeposita = Entity.SeDeposita,
+                        ValorDescuento = Entity.ValorDescuento
                     };
                 }
                 return info;
@@ -156,12 +156,12 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdMotivo_tipo_cobro = info.IdMotivo_tipo_cobro,
                         tc_abreviatura = info.tc_abreviatura,
                         tc_descripcion = info.tc_descripcion,
-                        tc_Que_Tipo_Registro_Genera = info.tc_Que_Tipo_Registro_Genera,
                         tc_Tomar_Cta_Cble_De = info.tc_Tomar_Cta_Cble_De,
-                        Estado = info.Estado="A",
+                        Estado = info.Estado = "A",
                         PorcentajeRet = info.PorcentajeRet,
                         EsTarjetaCredito = info.EsTarjetaCredito,
                         SeDeposita = info.SeDeposita,
+                        ValorDescuento = info.ValorDescuento,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     };
@@ -199,11 +199,11 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     Entity.ESRetenIVA = info.ESRetenIVA_bool == true ? "S" : "N";
                     Entity.tc_abreviatura = info.tc_abreviatura;
                     Entity.tc_descripcion = info.tc_descripcion;
-                    Entity.tc_Que_Tipo_Registro_Genera = info.tc_Que_Tipo_Registro_Genera;
                     Entity.tc_Tomar_Cta_Cble_De = info.tc_Tomar_Cta_Cble_De;
                     Entity.PorcentajeRet = info.PorcentajeRet;
                     Entity.EsTarjetaCredito = info.EsTarjetaCredito;
                     Entity.SeDeposita = info.SeDeposita;
+                    Entity.ValorDescuento = info.ValorDescuento;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod;
