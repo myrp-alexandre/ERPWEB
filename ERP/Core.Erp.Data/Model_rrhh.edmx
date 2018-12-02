@@ -343,26 +343,14 @@
           <Property Name="IdTipoEmpleado" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
           <Property Name="Codigo_Biometrico" Type="varchar" MaxLength="50" />
-          <Property Name="em_lugarNacimiento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="em_lugarNacimiento" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="em_CarnetIees" Type="varchar" MaxLength="20" />
           <Property Name="em_cedulaMil" Type="varchar" MaxLength="20" />
-          <Property Name="em_fecha_ingreso" Type="datetime" />
           <Property Name="em_fechaSalida" Type="datetime" />
-          <Property Name="em_fechaTerminoContra" Type="datetime" />
           <Property Name="em_fechaIngaRol" Type="datetime" />
-          <Property Name="em_SeAcreditaBanco" Type="varchar" MaxLength="1" />
           <Property Name="em_tipoCta" Type="varchar" MaxLength="25" />
           <Property Name="em_NumCta" Type="varchar" MaxLength="20" />
-          <Property Name="em_SepagaBeneficios" Type="varchar" MaxLength="1" />
-          <Property Name="em_SePagaConTablaSec" Type="varchar" MaxLength="1" />
           <Property Name="em_estado" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="em_sueldoBasicoMen" Type="float" Nullable="false" />
-          <Property Name="em_SueldoExtraMen" Type="float" />
-          <Property Name="em_MovilizacionQuincenal" Type="float" />
-          <Property Name="em_foto" Type="image" />
-          <Property Name="em_empEspecial" Type="varchar" MaxLength="1" />
-          <Property Name="em_pagoFdoRsv" Type="varchar" MaxLength="1" />
-          <Property Name="em_huella" Type="varchar" MaxLength="4000" />
           <Property Name="IdCodSectorial" Type="int" />
           <Property Name="IdDepartamento" Type="int" Nullable="false" />
           <Property Name="IdTipoSangre" Type="varchar" MaxLength="10" />
@@ -371,13 +359,9 @@
           <Property Name="IdCiudad" Type="varchar" MaxLength="25" />
           <Property Name="em_mail" Type="varchar" MaxLength="50" />
           <Property Name="IdTipoLicencia" Type="varchar" MaxLength="10" />
-          <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
           <Property Name="IdBanco" Type="varchar" MaxLength="10" />
-          <Property Name="Archivo" Type="varbinary(max)" />
-          <Property Name="NombreArchivo" Type="varchar" MaxLength="200" />
           <Property Name="IdArea" Type="int" />
           <Property Name="IdDivision" Type="int" />
-          <Property Name="IdCentroCosto_sub_centro_costo" Type="varchar" MaxLength="20" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_Transaccion" Type="datetime" />
           <Property Name="IdUsuarioUltModi" Type="varchar" MaxLength="20" />
@@ -387,7 +371,6 @@
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
           <Property Name="por_discapacidad" Type="float" Nullable="false" />
           <Property Name="carnet_conadis" Type="varchar" MaxLength="50" />
-          <Property Name="recibi_uniforme" Type="char" MaxLength="1" />
           <Property Name="talla_pant" Type="float" />
           <Property Name="talla_camisa" Type="varchar" MaxLength="50" />
           <Property Name="talla_zapato" Type="float" />
@@ -402,15 +385,11 @@
           <Property Name="IdTipoAnticipo" Type="varchar" MaxLength="10" />
           <Property Name="ValorAnticipo" Type="float" />
           <Property Name="CodigoSectorial" Type="varchar" MaxLength="25" />
-          <Property Name="es_TruncarDecimalAnticipo" Type="bit" />
           <Property Name="em_AnticipoSueldo" Type="float" />
-          <Property Name="IdBanco_Acreditacion" Type="int" />
-          <Property Name="IdGrupo" Type="int" />
           <Property Name="Marca_Biometrico" Type="bit" Nullable="false" />
-          <Property Name="em_motivo_salisa" Type="varchar" MaxLength="500" />
           <Property Name="IdHorario" Type="int" />
-          <Property Name="IdPuntoCargo" Type="int" />
           <Property Name="Tiene_ingresos_compartidos" Type="bit" Nullable="false" />
+          <Property Name="Pago_por_horas" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ro_empleado_Novedad">
           <Key>
@@ -1438,7 +1417,6 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not 
             <PropertyRef Name="IdTipoEmpleado" />
             <PropertyRef Name="em_lugarNacimiento" />
             <PropertyRef Name="em_estado" />
-            <PropertyRef Name="em_sueldoBasicoMen" />
             <PropertyRef Name="IdDepartamento" />
             <PropertyRef Name="por_discapacidad" />
             <PropertyRef Name="es_AcreditaHorasExtras" />
@@ -1452,6 +1430,7 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not 
             <PropertyRef Name="Descripcion" />
             <PropertyRef Name="IdEmpleado" />
             <PropertyRef Name="Tiene_ingresos_compartidos" />
+            <PropertyRef Name="Pago_por_horas" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdEmpleado_Supervisor" Type="numeric" Precision="18" Scale="0" />
@@ -1460,26 +1439,14 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not 
           <Property Name="IdTipoEmpleado" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
           <Property Name="Codigo_Biometrico" Type="varchar" MaxLength="50" />
-          <Property Name="em_lugarNacimiento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="em_lugarNacimiento" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="em_CarnetIees" Type="varchar" MaxLength="20" />
           <Property Name="em_cedulaMil" Type="varchar" MaxLength="20" />
-          <Property Name="em_fecha_ingreso" Type="datetime" />
           <Property Name="em_fechaSalida" Type="datetime" />
-          <Property Name="em_fechaTerminoContra" Type="datetime" />
           <Property Name="em_fechaIngaRol" Type="datetime" />
-          <Property Name="em_SeAcreditaBanco" Type="varchar" MaxLength="1" />
           <Property Name="em_tipoCta" Type="varchar" MaxLength="25" />
           <Property Name="em_NumCta" Type="varchar" MaxLength="20" />
-          <Property Name="em_SepagaBeneficios" Type="varchar" MaxLength="1" />
-          <Property Name="em_SePagaConTablaSec" Type="varchar" MaxLength="1" />
           <Property Name="em_estado" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="em_sueldoBasicoMen" Type="float" Nullable="false" />
-          <Property Name="em_SueldoExtraMen" Type="float" />
-          <Property Name="em_MovilizacionQuincenal" Type="float" />
-          <Property Name="em_foto" Type="image" />
-          <Property Name="em_empEspecial" Type="varchar" MaxLength="1" />
-          <Property Name="em_pagoFdoRsv" Type="varchar" MaxLength="1" />
-          <Property Name="em_huella" Type="varchar" MaxLength="4000" />
           <Property Name="IdCodSectorial" Type="int" />
           <Property Name="IdDepartamento" Type="int" Nullable="false" />
           <Property Name="IdTipoSangre" Type="varchar" MaxLength="10" />
@@ -1488,16 +1455,11 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not 
           <Property Name="IdCiudad" Type="varchar" MaxLength="25" />
           <Property Name="em_mail" Type="varchar" MaxLength="50" />
           <Property Name="IdTipoLicencia" Type="varchar" MaxLength="10" />
-          <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
           <Property Name="IdBanco" Type="varchar" MaxLength="10" />
-          <Property Name="Archivo" Type="varbinary(max)" />
-          <Property Name="NombreArchivo" Type="varchar" MaxLength="200" />
           <Property Name="IdArea" Type="int" />
           <Property Name="IdDivision" Type="int" />
-          <Property Name="IdCentroCosto_sub_centro_costo" Type="varchar" MaxLength="20" />
           <Property Name="por_discapacidad" Type="float" Nullable="false" />
           <Property Name="carnet_conadis" Type="varchar" MaxLength="50" />
-          <Property Name="recibi_uniforme" Type="char" MaxLength="1" />
           <Property Name="talla_pant" Type="float" />
           <Property Name="talla_camisa" Type="varchar" MaxLength="50" />
           <Property Name="talla_zapato" Type="float" />
@@ -1512,14 +1474,9 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not 
           <Property Name="IdTipoAnticipo" Type="varchar" MaxLength="10" />
           <Property Name="ValorAnticipo" Type="float" />
           <Property Name="CodigoSectorial" Type="varchar" MaxLength="25" />
-          <Property Name="es_TruncarDecimalAnticipo" Type="bit" />
           <Property Name="em_AnticipoSueldo" Type="float" />
-          <Property Name="IdBanco_Acreditacion" Type="int" />
-          <Property Name="IdGrupo" Type="int" />
           <Property Name="Marca_Biometrico" Type="bit" Nullable="false" />
-          <Property Name="em_motivo_salisa" Type="varchar" MaxLength="500" />
           <Property Name="IdHorario" Type="int" />
-          <Property Name="IdPuntoCargo" Type="int" />
           <Property Name="pe_Naturaleza" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="IdTipoDocumento" Type="varchar" MaxLength="25" Nullable="false" />
@@ -1531,13 +1488,14 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not 
           <Property Name="pe_sexo" Type="varchar" MaxLength="25" />
           <Property Name="IdEstadoCivil" Type="varchar" MaxLength="25" />
           <Property Name="pe_fechaNacimiento" Type="datetime" />
-          <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="de_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
           <Property Name="Tiene_ingresos_compartidos" Type="bit" Nullable="false" />
+          <Property Name="Pago_por_horas" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_empleado_Novedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3872,23 +3830,11 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_empleado_datos_generales].[em_lugarNacimiento] AS [em_lugarNacimiento], 
     [vwro_empleado_datos_generales].[em_CarnetIees] AS [em_CarnetIees], 
     [vwro_empleado_datos_generales].[em_cedulaMil] AS [em_cedulaMil], 
-    [vwro_empleado_datos_generales].[em_fecha_ingreso] AS [em_fecha_ingreso], 
     [vwro_empleado_datos_generales].[em_fechaSalida] AS [em_fechaSalida], 
-    [vwro_empleado_datos_generales].[em_fechaTerminoContra] AS [em_fechaTerminoContra], 
     [vwro_empleado_datos_generales].[em_fechaIngaRol] AS [em_fechaIngaRol], 
-    [vwro_empleado_datos_generales].[em_SeAcreditaBanco] AS [em_SeAcreditaBanco], 
     [vwro_empleado_datos_generales].[em_tipoCta] AS [em_tipoCta], 
     [vwro_empleado_datos_generales].[em_NumCta] AS [em_NumCta], 
-    [vwro_empleado_datos_generales].[em_SepagaBeneficios] AS [em_SepagaBeneficios], 
-    [vwro_empleado_datos_generales].[em_SePagaConTablaSec] AS [em_SePagaConTablaSec], 
     [vwro_empleado_datos_generales].[em_estado] AS [em_estado], 
-    [vwro_empleado_datos_generales].[em_sueldoBasicoMen] AS [em_sueldoBasicoMen], 
-    [vwro_empleado_datos_generales].[em_SueldoExtraMen] AS [em_SueldoExtraMen], 
-    [vwro_empleado_datos_generales].[em_MovilizacionQuincenal] AS [em_MovilizacionQuincenal], 
-    [vwro_empleado_datos_generales].[em_foto] AS [em_foto], 
-    [vwro_empleado_datos_generales].[em_empEspecial] AS [em_empEspecial], 
-    [vwro_empleado_datos_generales].[em_pagoFdoRsv] AS [em_pagoFdoRsv], 
-    [vwro_empleado_datos_generales].[em_huella] AS [em_huella], 
     [vwro_empleado_datos_generales].[IdCodSectorial] AS [IdCodSectorial], 
     [vwro_empleado_datos_generales].[IdDepartamento] AS [IdDepartamento], 
     [vwro_empleado_datos_generales].[IdTipoSangre] AS [IdTipoSangre], 
@@ -3897,16 +3843,11 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_empleado_datos_generales].[IdCiudad] AS [IdCiudad], 
     [vwro_empleado_datos_generales].[em_mail] AS [em_mail], 
     [vwro_empleado_datos_generales].[IdTipoLicencia] AS [IdTipoLicencia], 
-    [vwro_empleado_datos_generales].[IdCentroCosto] AS [IdCentroCosto], 
     [vwro_empleado_datos_generales].[IdBanco] AS [IdBanco], 
-    [vwro_empleado_datos_generales].[Archivo] AS [Archivo], 
-    [vwro_empleado_datos_generales].[NombreArchivo] AS [NombreArchivo], 
     [vwro_empleado_datos_generales].[IdArea] AS [IdArea], 
     [vwro_empleado_datos_generales].[IdDivision] AS [IdDivision], 
-    [vwro_empleado_datos_generales].[IdCentroCosto_sub_centro_costo] AS [IdCentroCosto_sub_centro_costo], 
     [vwro_empleado_datos_generales].[por_discapacidad] AS [por_discapacidad], 
     [vwro_empleado_datos_generales].[carnet_conadis] AS [carnet_conadis], 
-    [vwro_empleado_datos_generales].[recibi_uniforme] AS [recibi_uniforme], 
     [vwro_empleado_datos_generales].[talla_pant] AS [talla_pant], 
     [vwro_empleado_datos_generales].[talla_camisa] AS [talla_camisa], 
     [vwro_empleado_datos_generales].[talla_zapato] AS [talla_zapato], 
@@ -3921,14 +3862,9 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_empleado_datos_generales].[IdTipoAnticipo] AS [IdTipoAnticipo], 
     [vwro_empleado_datos_generales].[ValorAnticipo] AS [ValorAnticipo], 
     [vwro_empleado_datos_generales].[CodigoSectorial] AS [CodigoSectorial], 
-    [vwro_empleado_datos_generales].[es_TruncarDecimalAnticipo] AS [es_TruncarDecimalAnticipo], 
     [vwro_empleado_datos_generales].[em_AnticipoSueldo] AS [em_AnticipoSueldo], 
-    [vwro_empleado_datos_generales].[IdBanco_Acreditacion] AS [IdBanco_Acreditacion], 
-    [vwro_empleado_datos_generales].[IdGrupo] AS [IdGrupo], 
     [vwro_empleado_datos_generales].[Marca_Biometrico] AS [Marca_Biometrico], 
-    [vwro_empleado_datos_generales].[em_motivo_salisa] AS [em_motivo_salisa], 
     [vwro_empleado_datos_generales].[IdHorario] AS [IdHorario], 
-    [vwro_empleado_datos_generales].[IdPuntoCargo] AS [IdPuntoCargo], 
     [vwro_empleado_datos_generales].[pe_Naturaleza] AS [pe_Naturaleza], 
     [vwro_empleado_datos_generales].[pe_nombre] AS [pe_nombre], 
     [vwro_empleado_datos_generales].[IdTipoDocumento] AS [IdTipoDocumento], 
@@ -3946,7 +3882,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_empleado_datos_generales].[Descripcion] AS [Descripcion], 
     [vwro_empleado_datos_generales].[IdEmpleado] AS [IdEmpleado], 
     [vwro_empleado_datos_generales].[pe_apellido] AS [pe_apellido], 
-    [vwro_empleado_datos_generales].[Tiene_ingresos_compartidos] AS [Tiene_ingresos_compartidos]
+    [vwro_empleado_datos_generales].[Tiene_ingresos_compartidos] AS [Tiene_ingresos_compartidos], 
+    [vwro_empleado_datos_generales].[Pago_por_horas] AS [Pago_por_horas]
     FROM [dbo].[vwro_empleado_datos_generales] AS [vwro_empleado_datos_generales]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_empleado_Novedad" EntityType="Self.vwro_empleado_Novedad" store:Type="Views" store:Schema="dbo">
@@ -7011,7 +6948,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_rol" EntitySet="ro_rol" />
             <End Role="ro_rol_detalle_x_rubro_acumulado" EntitySet="ro_rol_detalle_x_rubro_acumulado" />
           </AssociationSet>
-          <EntitySet Name="vwro_empleado_datos_generales" EntityType="Model_rrhh.vwro_empleado_datos_generales" />
           <FunctionImport Name="spROL_DecimoCuarto">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdPeriodo" Mode="In" Type="Int32" />
@@ -7091,15 +7027,16 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySet Name="vwro_archivos_bancos_generacion" EntityType="Model_rrhh.vwro_archivos_bancos_generacion" />
           <EntitySet Name="vwRo_rol_detalle_saldo_por_pagar" EntityType="Model_rrhh.vwRo_rol_detalle_saldo_por_pagar" />
           <EntitySet Name="ro_archivos_bancos_generacion_x_empleado" EntityType="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" />
-          <EntitySet Name="ro_empleado" EntityType="Model_rrhh.ro_empleado" />
           <EntitySet Name="vwro_archivos_bancos_generacion_x_empleado" EntityType="Model_rrhh.vwro_archivos_bancos_generacion_x_empleado" />
-          <AssociationSet Name="FK_ro_Acta_Finiquito_ro_empleado" Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado">
-            <End Role="ro_empleado" EntitySet="ro_empleado" />
-            <End Role="ro_Acta_Finiquito" EntitySet="ro_Acta_Finiquito" />
-          </AssociationSet>
           <AssociationSet Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion">
             <End Role="ro_archivos_bancos_generacion" EntitySet="ro_archivos_bancos_generacion" />
             <End Role="ro_archivos_bancos_generacion_x_empleado" EntitySet="ro_archivos_bancos_generacion_x_empleado" />
+          </AssociationSet>
+          <EntitySet Name="ro_empleado" EntityType="Model_rrhh.ro_empleado" />
+          <EntitySet Name="vwro_empleado_datos_generales" EntityType="Model_rrhh.vwro_empleado_datos_generales" />
+          <AssociationSet Name="FK_ro_Acta_Finiquito_ro_empleado" Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_Acta_Finiquito" EntitySet="ro_Acta_Finiquito" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
@@ -7576,7 +7513,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva_det" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_EmpleadoNovedadCargaMasiva_det" />
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" FromRole="ro_empleado_Novedad" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_empleado1" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" FromRole="ro_empleado_Novedad" ToRole="ro_empleado" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="ro_empleado_novedad_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7934,115 +7871,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwro_empleado_datos_generales">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdPersona" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdTipoEmpleado" />
-            <PropertyRef Name="em_lugarNacimiento" />
-            <PropertyRef Name="em_estado" />
-            <PropertyRef Name="em_sueldoBasicoMen" />
-            <PropertyRef Name="IdDepartamento" />
-            <PropertyRef Name="por_discapacidad" />
-            <PropertyRef Name="es_AcreditaHorasExtras" />
-            <PropertyRef Name="Marca_Biometrico" />
-            <PropertyRef Name="pe_Naturaleza" />
-            <PropertyRef Name="IdTipoDocumento" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="Su_Descripcion" />
-            <PropertyRef Name="de_descripcion" />
-            <PropertyRef Name="ca_descripcion" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="Tiene_ingresos_compartidos" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado_Supervisor" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoEmpleado" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Codigo_Biometrico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_lugarNacimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_CarnetIees" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="em_cedulaMil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="em_fecha_ingreso" Type="DateTime" Precision="3" />
-          <Property Name="em_fechaSalida" Type="DateTime" Precision="3" />
-          <Property Name="em_fechaTerminoContra" Type="DateTime" Precision="3" />
-          <Property Name="em_fechaIngaRol" Type="DateTime" Precision="3" />
-          <Property Name="em_SeAcreditaBanco" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_tipoCta" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="em_NumCta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="em_SepagaBeneficios" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_SePagaConTablaSec" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_sueldoBasicoMen" Type="Double" Nullable="false" />
-          <Property Name="em_SueldoExtraMen" Type="Double" />
-          <Property Name="em_MovilizacionQuincenal" Type="Double" />
-          <Property Name="em_foto" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="em_empEspecial" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_pagoFdoRsv" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_huella" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="IdCodSectorial" Type="Int32" />
-          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoSangre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdCargo" Type="Int32" />
-          <Property Name="IdCtaCble_Emplea" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCiudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="em_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoLicencia" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdBanco" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Archivo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="NombreArchivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdArea" Type="Int32" />
-          <Property Name="IdDivision" Type="Int32" />
-          <Property Name="IdCentroCosto_sub_centro_costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="por_discapacidad" Type="Double" Nullable="false" />
-          <Property Name="carnet_conadis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="recibi_uniforme" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="talla_pant" Type="Double" />
-          <Property Name="talla_camisa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="talla_zapato" Type="Double" />
-          <Property Name="em_status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdCondicionDiscapacidadSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoIdentDiscapacitadoSustitutoSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdentDiscapacitadoSustitutoSRI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdAplicaConvenioDobleImposicionSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoResidenciaSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoSistemaSalarioNetoSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="es_AcreditaHorasExtras" Type="Boolean" Nullable="false" />
-          <Property Name="IdTipoAnticipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ValorAnticipo" Type="Double" />
-          <Property Name="CodigoSectorial" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="es_TruncarDecimalAnticipo" Type="Boolean" />
-          <Property Name="em_AnticipoSueldo" Type="Double" />
-          <Property Name="IdBanco_Acreditacion" Type="Int32" />
-          <Property Name="IdGrupo" Type="Int32" />
-          <Property Name="Marca_Biometrico" Type="Boolean" Nullable="false" />
-          <Property Name="em_motivo_salisa" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdHorario" Type="Int32" />
-          <Property Name="IdPuntoCargo" Type="Int32" />
-          <Property Name="pe_Naturaleza" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="pe_telfono_Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_sexo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdEstadoCivil" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
-          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
-          <Property Name="de_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Tiene_ingresos_compartidos" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="ro_EmpleadoNovedadCargaMasiva">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -8525,121 +8353,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_archivos_bancos_generacion" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" FromRole="ro_archivos_bancos_generacion_x_empleado" ToRole="ro_archivos_bancos_generacion" />
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" FromRole="ro_archivos_bancos_generacion_x_empleado" ToRole="ro_empleado" />
         </EntityType>
-        <EntityType Name="ro_empleado">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEmpleado_Supervisor" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoEmpleado" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Codigo_Biometrico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_lugarNacimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_CarnetIees" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="em_cedulaMil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="em_fecha_ingreso" Type="DateTime" Precision="3" />
-          <Property Name="em_fechaSalida" Type="DateTime" Precision="3" />
-          <Property Name="em_fechaTerminoContra" Type="DateTime" Precision="3" />
-          <Property Name="em_fechaIngaRol" Type="DateTime" Precision="3" />
-          <Property Name="em_SeAcreditaBanco" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_tipoCta" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="em_NumCta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="em_SepagaBeneficios" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_SePagaConTablaSec" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_sueldoBasicoMen" Type="Double" Nullable="false" />
-          <Property Name="em_SueldoExtraMen" Type="Double" />
-          <Property Name="em_MovilizacionQuincenal" Type="Double" />
-          <Property Name="em_foto" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="em_empEspecial" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_pagoFdoRsv" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="em_huella" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="IdCodSectorial" Type="Int32" />
-          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoSangre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdCargo" Type="Int32" />
-          <Property Name="IdCtaCble_Emplea" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCiudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="em_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoLicencia" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdBanco" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Archivo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="NombreArchivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdArea" Type="Int32" />
-          <Property Name="IdDivision" Type="Int32" />
-          <Property Name="IdCentroCosto_sub_centro_costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transaccion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="por_discapacidad" Type="Double" Nullable="false" />
-          <Property Name="carnet_conadis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="recibi_uniforme" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="talla_pant" Type="Double" />
-          <Property Name="talla_camisa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="talla_zapato" Type="Double" />
-          <Property Name="em_status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdCondicionDiscapacidadSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoIdentDiscapacitadoSustitutoSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdentDiscapacitadoSustitutoSRI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdAplicaConvenioDobleImposicionSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoResidenciaSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoSistemaSalarioNetoSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="es_AcreditaHorasExtras" Type="Boolean" Nullable="false" />
-          <Property Name="IdTipoAnticipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ValorAnticipo" Type="Double" />
-          <Property Name="CodigoSectorial" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="es_TruncarDecimalAnticipo" Type="Boolean" />
-          <Property Name="em_AnticipoSueldo" Type="Double" />
-          <Property Name="IdBanco_Acreditacion" Type="Int32" />
-          <Property Name="IdGrupo" Type="Int32" />
-          <Property Name="Marca_Biometrico" Type="Boolean" Nullable="false" />
-          <Property Name="em_motivo_salisa" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdHorario" Type="Int32" />
-          <Property Name="IdPuntoCargo" Type="Int32" />
-          <Property Name="Tiene_ingresos_compartidos" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ro_Acta_Finiquito" Relationship="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado" FromRole="ro_empleado" ToRole="ro_Acta_Finiquito" />
-          <NavigationProperty Name="ro_archivos_bancos_generacion_x_empleado" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_archivos_bancos_generacion_x_empleado" />
-          <NavigationProperty Name="ro_cargaFamiliar" Relationship="Model_rrhh.FK_ro_CargaFamiliar_ro_empleado" FromRole="ro_empleado" ToRole="ro_cargaFamiliar" />
-          <NavigationProperty Name="ro_cargo" Relationship="Model_rrhh.FK_ro_empleado_ro_Cargo" FromRole="ro_empleado" ToRole="ro_cargo" />
-          <NavigationProperty Name="ro_catalogo" Relationship="Model_rrhh.FK_ro_empleado_ro_Catalogo" FromRole="ro_empleado" ToRole="ro_catalogo" />
-          <NavigationProperty Name="ro_catalogo1" Relationship="Model_rrhh.FK_ro_empleado_ro_Catalogo1" FromRole="ro_empleado" ToRole="ro_catalogo" />
-          <NavigationProperty Name="ro_catalogo2" Relationship="Model_rrhh.FK_ro_empleado_ro_Catalogo2" FromRole="ro_empleado" ToRole="ro_catalogo" />
-          <NavigationProperty Name="ro_catalogo3" Relationship="Model_rrhh.FK_ro_empleado_ro_Catalogo3" FromRole="ro_empleado" ToRole="ro_catalogo" />
-          <NavigationProperty Name="ro_contrato" Relationship="Model_rrhh.FK_ro_contrato_ro_empleado" FromRole="ro_empleado" ToRole="ro_contrato" />
-          <NavigationProperty Name="ro_Departamento" Relationship="Model_rrhh.FK_ro_empleado_ro_Departamento" FromRole="ro_empleado" ToRole="ro_Departamento" />
-          <NavigationProperty Name="ro_Division" Relationship="Model_rrhh.FK_ro_empleado_ro_Division" FromRole="ro_empleado" ToRole="ro_Division" />
-          <NavigationProperty Name="ro_DocumentoxEmp" Relationship="Model_rrhh.FK_ro_DocumentoxEmp_ro_empleado" FromRole="ro_empleado" ToRole="ro_DocumentoxEmp" />
-          <NavigationProperty Name="ro_empleado_Novedad" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_Novedad" />
-          <NavigationProperty Name="ro_empleado_Novedad1" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" FromRole="ro_empleado" ToRole="ro_empleado_Novedad" />
-          <NavigationProperty Name="ro_empleado_proyeccion_gastos" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_proyeccion_gastos" />
-          <NavigationProperty Name="ro_empleado1" Relationship="Model_rrhh.FK_ro_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado1" />
-          <NavigationProperty Name="ro_empleado2" Relationship="Model_rrhh.FK_ro_empleado_ro_empleado" FromRole="ro_empleado1" ToRole="ro_empleado" />
-          <NavigationProperty Name="ro_empleado_x_ro_rubro" Relationship="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_ro_rubro" />
-          <NavigationProperty Name="ro_empleado_x_ro_tipoNomina" Relationship="Model_rrhh.FK_ro_empleado_x_ro_tipoNomina_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_ro_tipoNomina" />
-          <NavigationProperty Name="ro_empleado_x_rubro_acumulado" Relationship="Model_rrhh.FK_ro_empleado_x_rubro_acumulado" FromRole="ro_empleado" ToRole="ro_empleado_x_rubro_acumulado" />
-          <NavigationProperty Name="ro_empleado_x_titulos" Relationship="Model_rrhh.FK_ro_empleado_x_titulos_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_titulos" />
-          <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva_det" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_EmpleadoNovedadCargaMasiva_det" />
-          <NavigationProperty Name="ro_Historico_Liquidacion_Vacaciones" Relationship="Model_rrhh.FK_ro_Historico_Liquidacion_Vacaciones_ro_empleado" FromRole="ro_empleado" ToRole="ro_Historico_Liquidacion_Vacaciones" />
-          <NavigationProperty Name="ro_historico_vacaciones_x_empleado" Relationship="Model_rrhh.FK_ro_historico_vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_historico_vacaciones_x_empleado" />
-          <NavigationProperty Name="ro_horario_planificacion_det" Relationship="Model_rrhh.FK_ro_horario_planificacion_ro_empleado" FromRole="ro_empleado" ToRole="ro_horario_planificacion_det" />
-          <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_marcaciones_x_empleado" />
-          <NavigationProperty Name="ro_nomina_x_horas_extras_det" Relationship="Model_rrhh.FK_ro_nomina_x_horas_extras_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_nomina_x_horas_extras_det" />
-          <NavigationProperty Name="ro_participacion_utilidad_empleado" Relationship="Model_rrhh.FK_ro_participacion_utilidad_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_participacion_utilidad_empleado" />
-          <NavigationProperty Name="ro_permiso_x_empleado" Relationship="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_permiso_x_empleado" />
-          <NavigationProperty Name="ro_permiso_x_empleado1" Relationship="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado1" FromRole="ro_empleado" ToRole="ro_permiso_x_empleado" />
-          <NavigationProperty Name="ro_prestamo" Relationship="Model_rrhh.FK_ro_prestamo_ro_empleado" FromRole="ro_empleado" ToRole="ro_prestamo" />
-          <NavigationProperty Name="ro_rol_detalle" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_empleado" FromRole="ro_empleado" ToRole="ro_rol_detalle" />
-          <NavigationProperty Name="ro_Solicitud_Vacaciones_x_empleado" Relationship="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_Solicitud_Vacaciones_x_empleado" />
-        </EntityType>
         <EntityType Name="vwro_archivos_bancos_generacion_x_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -8674,20 +8387,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
           <Property Name="Secuencia" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK_ro_Acta_Finiquito_ro_empleado">
-          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_Acta_Finiquito" Role="ro_Acta_Finiquito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ro_Acta_Finiquito">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion">
           <End Type="Model_rrhh.ro_archivos_bancos_generacion" Role="ro_archivos_bancos_generacion" Multiplicity="1" />
           <End Type="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" Role="ro_archivos_bancos_generacion_x_empleado" Multiplicity="*" />
@@ -8699,6 +8398,202 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Dependent Role="ro_archivos_bancos_generacion_x_empleado">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ro_empleado">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpleado_Supervisor" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoEmpleado" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo_Biometrico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_lugarNacimiento" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="em_CarnetIees" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="em_cedulaMil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="em_fechaSalida" Type="DateTime" Precision="3" />
+          <Property Name="em_fechaIngaRol" Type="DateTime" Precision="3" />
+          <Property Name="em_tipoCta" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="em_NumCta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="em_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCodSectorial" Type="Int32" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoSangre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdCargo" Type="Int32" />
+          <Property Name="IdCtaCble_Emplea" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="em_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoLicencia" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdArea" Type="Int32" />
+          <Property Name="IdDivision" Type="Int32" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transaccion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="por_discapacidad" Type="Double" Nullable="false" />
+          <Property Name="carnet_conadis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="talla_pant" Type="Double" />
+          <Property Name="talla_camisa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="talla_zapato" Type="Double" />
+          <Property Name="em_status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdCondicionDiscapacidadSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoIdentDiscapacitadoSustitutoSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdentDiscapacitadoSustitutoSRI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdAplicaConvenioDobleImposicionSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoResidenciaSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoSistemaSalarioNetoSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="es_AcreditaHorasExtras" Type="Boolean" Nullable="false" />
+          <Property Name="IdTipoAnticipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ValorAnticipo" Type="Double" />
+          <Property Name="CodigoSectorial" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="em_AnticipoSueldo" Type="Double" />
+          <Property Name="Marca_Biometrico" Type="Boolean" Nullable="false" />
+          <Property Name="IdHorario" Type="Int32" />
+          <Property Name="Tiene_ingresos_compartidos" Type="Boolean" Nullable="false" />
+          <Property Name="Pago_por_horas" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ro_Acta_Finiquito" Relationship="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado" FromRole="ro_empleado" ToRole="ro_Acta_Finiquito" />
+          <NavigationProperty Name="ro_archivos_bancos_generacion_x_empleado" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_archivos_bancos_generacion_x_empleado" />
+          <NavigationProperty Name="ro_cargaFamiliar" Relationship="Model_rrhh.FK_ro_CargaFamiliar_ro_empleado" FromRole="ro_empleado" ToRole="ro_cargaFamiliar" />
+          <NavigationProperty Name="ro_cargo" Relationship="Model_rrhh.FK_ro_empleado_ro_Cargo" FromRole="ro_empleado" ToRole="ro_cargo" />
+          <NavigationProperty Name="ro_catalogo" Relationship="Model_rrhh.FK_ro_empleado_ro_Catalogo" FromRole="ro_empleado" ToRole="ro_catalogo" />
+          <NavigationProperty Name="ro_catalogo1" Relationship="Model_rrhh.FK_ro_empleado_ro_Catalogo1" FromRole="ro_empleado" ToRole="ro_catalogo" />
+          <NavigationProperty Name="ro_catalogo2" Relationship="Model_rrhh.FK_ro_empleado_ro_Catalogo2" FromRole="ro_empleado" ToRole="ro_catalogo" />
+          <NavigationProperty Name="ro_catalogo3" Relationship="Model_rrhh.FK_ro_empleado_ro_Catalogo3" FromRole="ro_empleado" ToRole="ro_catalogo" />
+          <NavigationProperty Name="ro_contrato" Relationship="Model_rrhh.FK_ro_contrato_ro_empleado" FromRole="ro_empleado" ToRole="ro_contrato" />
+          <NavigationProperty Name="ro_Departamento" Relationship="Model_rrhh.FK_ro_empleado_ro_Departamento" FromRole="ro_empleado" ToRole="ro_Departamento" />
+          <NavigationProperty Name="ro_Division" Relationship="Model_rrhh.FK_ro_empleado_ro_Division" FromRole="ro_empleado" ToRole="ro_Division" />
+          <NavigationProperty Name="ro_DocumentoxEmp" Relationship="Model_rrhh.FK_ro_DocumentoxEmp_ro_empleado" FromRole="ro_empleado" ToRole="ro_DocumentoxEmp" />
+          <NavigationProperty Name="ro_empleado_Novedad" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_Novedad" />
+          <NavigationProperty Name="ro_empleado_Novedad1" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" FromRole="ro_empleado" ToRole="ro_empleado_Novedad" />
+          <NavigationProperty Name="ro_empleado_proyeccion_gastos" Relationship="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_proyeccion_gastos" />
+          <NavigationProperty Name="ro_empleado1" Relationship="Model_rrhh.FK_ro_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado1" />
+          <NavigationProperty Name="ro_empleado2" Relationship="Model_rrhh.FK_ro_empleado_ro_empleado" FromRole="ro_empleado1" ToRole="ro_empleado" />
+          <NavigationProperty Name="ro_empleado_x_ro_rubro" Relationship="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_ro_rubro" />
+          <NavigationProperty Name="ro_empleado_x_ro_tipoNomina" Relationship="Model_rrhh.FK_ro_empleado_x_ro_tipoNomina_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_ro_tipoNomina" />
+          <NavigationProperty Name="ro_empleado_x_rubro_acumulado" Relationship="Model_rrhh.FK_ro_empleado_x_rubro_acumulado" FromRole="ro_empleado" ToRole="ro_empleado_x_rubro_acumulado" />
+          <NavigationProperty Name="ro_empleado_x_titulos" Relationship="Model_rrhh.FK_ro_empleado_x_titulos_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_titulos" />
+          <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva_det" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_EmpleadoNovedadCargaMasiva_det" />
+          <NavigationProperty Name="ro_Historico_Liquidacion_Vacaciones" Relationship="Model_rrhh.FK_ro_Historico_Liquidacion_Vacaciones_ro_empleado" FromRole="ro_empleado" ToRole="ro_Historico_Liquidacion_Vacaciones" />
+          <NavigationProperty Name="ro_historico_vacaciones_x_empleado" Relationship="Model_rrhh.FK_ro_historico_vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_historico_vacaciones_x_empleado" />
+          <NavigationProperty Name="ro_horario_planificacion_det" Relationship="Model_rrhh.FK_ro_horario_planificacion_ro_empleado" FromRole="ro_empleado" ToRole="ro_horario_planificacion_det" />
+          <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_marcaciones_x_empleado" />
+          <NavigationProperty Name="ro_nomina_x_horas_extras_det" Relationship="Model_rrhh.FK_ro_nomina_x_horas_extras_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_nomina_x_horas_extras_det" />
+          <NavigationProperty Name="ro_participacion_utilidad_empleado" Relationship="Model_rrhh.FK_ro_participacion_utilidad_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_participacion_utilidad_empleado" />
+          <NavigationProperty Name="ro_permiso_x_empleado" Relationship="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_permiso_x_empleado" />
+          <NavigationProperty Name="ro_permiso_x_empleado1" Relationship="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado1" FromRole="ro_empleado" ToRole="ro_permiso_x_empleado" />
+          <NavigationProperty Name="ro_prestamo" Relationship="Model_rrhh.FK_ro_prestamo_ro_empleado" FromRole="ro_empleado" ToRole="ro_prestamo" />
+          <NavigationProperty Name="ro_rol_detalle" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_empleado" FromRole="ro_empleado" ToRole="ro_rol_detalle" />
+          <NavigationProperty Name="ro_Solicitud_Vacaciones_x_empleado" Relationship="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_Solicitud_Vacaciones_x_empleado" />
+        </EntityType>
+        <EntityType Name="vwro_empleado_datos_generales">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdTipoEmpleado" />
+            <PropertyRef Name="em_lugarNacimiento" />
+            <PropertyRef Name="em_estado" />
+            <PropertyRef Name="IdDepartamento" />
+            <PropertyRef Name="por_discapacidad" />
+            <PropertyRef Name="es_AcreditaHorasExtras" />
+            <PropertyRef Name="Marca_Biometrico" />
+            <PropertyRef Name="pe_Naturaleza" />
+            <PropertyRef Name="IdTipoDocumento" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="de_descripcion" />
+            <PropertyRef Name="ca_descripcion" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="Tiene_ingresos_compartidos" />
+            <PropertyRef Name="Pago_por_horas" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado_Supervisor" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoEmpleado" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo_Biometrico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_lugarNacimiento" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="em_CarnetIees" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="em_cedulaMil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="em_fechaSalida" Type="DateTime" Precision="3" />
+          <Property Name="em_fechaIngaRol" Type="DateTime" Precision="3" />
+          <Property Name="em_tipoCta" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="em_NumCta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="em_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCodSectorial" Type="Int32" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoSangre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdCargo" Type="Int32" />
+          <Property Name="IdCtaCble_Emplea" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="em_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoLicencia" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdArea" Type="Int32" />
+          <Property Name="IdDivision" Type="Int32" />
+          <Property Name="por_discapacidad" Type="Double" Nullable="false" />
+          <Property Name="carnet_conadis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="talla_pant" Type="Double" />
+          <Property Name="talla_camisa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="talla_zapato" Type="Double" />
+          <Property Name="em_status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdCondicionDiscapacidadSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoIdentDiscapacitadoSustitutoSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdentDiscapacitadoSustitutoSRI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdAplicaConvenioDobleImposicionSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoResidenciaSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoSistemaSalarioNetoSRI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="es_AcreditaHorasExtras" Type="Boolean" Nullable="false" />
+          <Property Name="IdTipoAnticipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ValorAnticipo" Type="Double" />
+          <Property Name="CodigoSectorial" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="em_AnticipoSueldo" Type="Double" />
+          <Property Name="Marca_Biometrico" Type="Boolean" Nullable="false" />
+          <Property Name="IdHorario" Type="Int32" />
+          <Property Name="pe_Naturaleza" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="pe_telfono_Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_sexo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstadoCivil" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="de_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tiene_ingresos_compartidos" Type="Boolean" Nullable="false" />
+          <Property Name="Pago_por_horas" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ro_Acta_Finiquito_ro_empleado">
+          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_Acta_Finiquito" Role="ro_Acta_Finiquito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_Acta_Finiquito">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10648,97 +10543,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwro_empleado_datos_generales">
-            <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_datos_generales">
-              <MappingFragment StoreEntitySet="vwro_empleado_datos_generales">
-                <ScalarProperty Name="Tiene_ingresos_compartidos" ColumnName="Tiene_ingresos_compartidos" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
-                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
-                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
-                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
-                <ScalarProperty Name="pe_correo" ColumnName="pe_correo" />
-                <ScalarProperty Name="pe_celular" ColumnName="pe_celular" />
-                <ScalarProperty Name="pe_telfono_Contacto" ColumnName="pe_telfono_Contacto" />
-                <ScalarProperty Name="pe_direccion" ColumnName="pe_direccion" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
-                <ScalarProperty Name="IdPuntoCargo" ColumnName="IdPuntoCargo" />
-                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
-                <ScalarProperty Name="em_motivo_salisa" ColumnName="em_motivo_salisa" />
-                <ScalarProperty Name="Marca_Biometrico" ColumnName="Marca_Biometrico" />
-                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
-                <ScalarProperty Name="IdBanco_Acreditacion" ColumnName="IdBanco_Acreditacion" />
-                <ScalarProperty Name="em_AnticipoSueldo" ColumnName="em_AnticipoSueldo" />
-                <ScalarProperty Name="es_TruncarDecimalAnticipo" ColumnName="es_TruncarDecimalAnticipo" />
-                <ScalarProperty Name="CodigoSectorial" ColumnName="CodigoSectorial" />
-                <ScalarProperty Name="ValorAnticipo" ColumnName="ValorAnticipo" />
-                <ScalarProperty Name="IdTipoAnticipo" ColumnName="IdTipoAnticipo" />
-                <ScalarProperty Name="es_AcreditaHorasExtras" ColumnName="es_AcreditaHorasExtras" />
-                <ScalarProperty Name="IdTipoSistemaSalarioNetoSRI" ColumnName="IdTipoSistemaSalarioNetoSRI" />
-                <ScalarProperty Name="IdTipoResidenciaSRI" ColumnName="IdTipoResidenciaSRI" />
-                <ScalarProperty Name="IdAplicaConvenioDobleImposicionSRI" ColumnName="IdAplicaConvenioDobleImposicionSRI" />
-                <ScalarProperty Name="IdentDiscapacitadoSustitutoSRI" ColumnName="IdentDiscapacitadoSustitutoSRI" />
-                <ScalarProperty Name="IdTipoIdentDiscapacitadoSustitutoSRI" ColumnName="IdTipoIdentDiscapacitadoSustitutoSRI" />
-                <ScalarProperty Name="IdCondicionDiscapacidadSRI" ColumnName="IdCondicionDiscapacidadSRI" />
-                <ScalarProperty Name="em_status" ColumnName="em_status" />
-                <ScalarProperty Name="talla_zapato" ColumnName="talla_zapato" />
-                <ScalarProperty Name="talla_camisa" ColumnName="talla_camisa" />
-                <ScalarProperty Name="talla_pant" ColumnName="talla_pant" />
-                <ScalarProperty Name="recibi_uniforme" ColumnName="recibi_uniforme" />
-                <ScalarProperty Name="carnet_conadis" ColumnName="carnet_conadis" />
-                <ScalarProperty Name="por_discapacidad" ColumnName="por_discapacidad" />
-                <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
-                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
-                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
-                <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
-                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-                <ScalarProperty Name="IdTipoLicencia" ColumnName="IdTipoLicencia" />
-                <ScalarProperty Name="em_mail" ColumnName="em_mail" />
-                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
-                <ScalarProperty Name="IdCtaCble_Emplea" ColumnName="IdCtaCble_Emplea" />
-                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
-                <ScalarProperty Name="IdTipoSangre" ColumnName="IdTipoSangre" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="IdCodSectorial" ColumnName="IdCodSectorial" />
-                <ScalarProperty Name="em_huella" ColumnName="em_huella" />
-                <ScalarProperty Name="em_pagoFdoRsv" ColumnName="em_pagoFdoRsv" />
-                <ScalarProperty Name="em_empEspecial" ColumnName="em_empEspecial" />
-                <ScalarProperty Name="em_foto" ColumnName="em_foto" />
-                <ScalarProperty Name="em_MovilizacionQuincenal" ColumnName="em_MovilizacionQuincenal" />
-                <ScalarProperty Name="em_SueldoExtraMen" ColumnName="em_SueldoExtraMen" />
-                <ScalarProperty Name="em_sueldoBasicoMen" ColumnName="em_sueldoBasicoMen" />
-                <ScalarProperty Name="em_estado" ColumnName="em_estado" />
-                <ScalarProperty Name="em_SePagaConTablaSec" ColumnName="em_SePagaConTablaSec" />
-                <ScalarProperty Name="em_SepagaBeneficios" ColumnName="em_SepagaBeneficios" />
-                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
-                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
-                <ScalarProperty Name="em_SeAcreditaBanco" ColumnName="em_SeAcreditaBanco" />
-                <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
-                <ScalarProperty Name="em_fechaTerminoContra" ColumnName="em_fechaTerminoContra" />
-                <ScalarProperty Name="em_fechaSalida" ColumnName="em_fechaSalida" />
-                <ScalarProperty Name="em_fecha_ingreso" ColumnName="em_fecha_ingreso" />
-                <ScalarProperty Name="em_cedulaMil" ColumnName="em_cedulaMil" />
-                <ScalarProperty Name="em_CarnetIees" ColumnName="em_CarnetIees" />
-                <ScalarProperty Name="em_lugarNacimiento" ColumnName="em_lugarNacimiento" />
-                <ScalarProperty Name="Codigo_Biometrico" ColumnName="Codigo_Biometrico" />
-                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
-                <ScalarProperty Name="IdTipoEmpleado" ColumnName="IdTipoEmpleado" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spROL_DecimoCuarto" FunctionName="Model_rrhh.Store.spROL_DecimoCuarto" />
           <FunctionImportMapping FunctionImportName="spROL_DecimoTercero" FunctionName="Model_rrhh.Store.spROL_DecimoTercero" />
           <EntitySetMapping Name="ro_EmpleadoNovedadCargaMasiva">
@@ -11018,88 +10822,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ro_empleado">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado">
-              <MappingFragment StoreEntitySet="ro_empleado">
-                <ScalarProperty Name="Tiene_ingresos_compartidos" ColumnName="Tiene_ingresos_compartidos" />
-                <ScalarProperty Name="IdPuntoCargo" ColumnName="IdPuntoCargo" />
-                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
-                <ScalarProperty Name="em_motivo_salisa" ColumnName="em_motivo_salisa" />
-                <ScalarProperty Name="Marca_Biometrico" ColumnName="Marca_Biometrico" />
-                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
-                <ScalarProperty Name="IdBanco_Acreditacion" ColumnName="IdBanco_Acreditacion" />
-                <ScalarProperty Name="em_AnticipoSueldo" ColumnName="em_AnticipoSueldo" />
-                <ScalarProperty Name="es_TruncarDecimalAnticipo" ColumnName="es_TruncarDecimalAnticipo" />
-                <ScalarProperty Name="CodigoSectorial" ColumnName="CodigoSectorial" />
-                <ScalarProperty Name="ValorAnticipo" ColumnName="ValorAnticipo" />
-                <ScalarProperty Name="IdTipoAnticipo" ColumnName="IdTipoAnticipo" />
-                <ScalarProperty Name="es_AcreditaHorasExtras" ColumnName="es_AcreditaHorasExtras" />
-                <ScalarProperty Name="IdTipoSistemaSalarioNetoSRI" ColumnName="IdTipoSistemaSalarioNetoSRI" />
-                <ScalarProperty Name="IdTipoResidenciaSRI" ColumnName="IdTipoResidenciaSRI" />
-                <ScalarProperty Name="IdAplicaConvenioDobleImposicionSRI" ColumnName="IdAplicaConvenioDobleImposicionSRI" />
-                <ScalarProperty Name="IdentDiscapacitadoSustitutoSRI" ColumnName="IdentDiscapacitadoSustitutoSRI" />
-                <ScalarProperty Name="IdTipoIdentDiscapacitadoSustitutoSRI" ColumnName="IdTipoIdentDiscapacitadoSustitutoSRI" />
-                <ScalarProperty Name="IdCondicionDiscapacidadSRI" ColumnName="IdCondicionDiscapacidadSRI" />
-                <ScalarProperty Name="em_status" ColumnName="em_status" />
-                <ScalarProperty Name="talla_zapato" ColumnName="talla_zapato" />
-                <ScalarProperty Name="talla_camisa" ColumnName="talla_camisa" />
-                <ScalarProperty Name="talla_pant" ColumnName="talla_pant" />
-                <ScalarProperty Name="recibi_uniforme" ColumnName="recibi_uniforme" />
-                <ScalarProperty Name="carnet_conadis" ColumnName="carnet_conadis" />
-                <ScalarProperty Name="por_discapacidad" ColumnName="por_discapacidad" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
-                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
-                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
-                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
-                <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
-                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-                <ScalarProperty Name="IdTipoLicencia" ColumnName="IdTipoLicencia" />
-                <ScalarProperty Name="em_mail" ColumnName="em_mail" />
-                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
-                <ScalarProperty Name="IdCtaCble_Emplea" ColumnName="IdCtaCble_Emplea" />
-                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
-                <ScalarProperty Name="IdTipoSangre" ColumnName="IdTipoSangre" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="IdCodSectorial" ColumnName="IdCodSectorial" />
-                <ScalarProperty Name="em_huella" ColumnName="em_huella" />
-                <ScalarProperty Name="em_pagoFdoRsv" ColumnName="em_pagoFdoRsv" />
-                <ScalarProperty Name="em_empEspecial" ColumnName="em_empEspecial" />
-                <ScalarProperty Name="em_foto" ColumnName="em_foto" />
-                <ScalarProperty Name="em_MovilizacionQuincenal" ColumnName="em_MovilizacionQuincenal" />
-                <ScalarProperty Name="em_SueldoExtraMen" ColumnName="em_SueldoExtraMen" />
-                <ScalarProperty Name="em_sueldoBasicoMen" ColumnName="em_sueldoBasicoMen" />
-                <ScalarProperty Name="em_estado" ColumnName="em_estado" />
-                <ScalarProperty Name="em_SePagaConTablaSec" ColumnName="em_SePagaConTablaSec" />
-                <ScalarProperty Name="em_SepagaBeneficios" ColumnName="em_SepagaBeneficios" />
-                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
-                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
-                <ScalarProperty Name="em_SeAcreditaBanco" ColumnName="em_SeAcreditaBanco" />
-                <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
-                <ScalarProperty Name="em_fechaTerminoContra" ColumnName="em_fechaTerminoContra" />
-                <ScalarProperty Name="em_fechaSalida" ColumnName="em_fechaSalida" />
-                <ScalarProperty Name="em_fecha_ingreso" ColumnName="em_fecha_ingreso" />
-                <ScalarProperty Name="em_cedulaMil" ColumnName="em_cedulaMil" />
-                <ScalarProperty Name="em_CarnetIees" ColumnName="em_CarnetIees" />
-                <ScalarProperty Name="em_lugarNacimiento" ColumnName="em_lugarNacimiento" />
-                <ScalarProperty Name="Codigo_Biometrico" ColumnName="Codigo_Biometrico" />
-                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
-                <ScalarProperty Name="IdTipoEmpleado" ColumnName="IdTipoEmpleado" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwro_archivos_bancos_generacion_x_empleado">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_archivos_bancos_generacion_x_empleado">
               <MappingFragment StoreEntitySet="vwro_archivos_bancos_generacion_x_empleado">
@@ -11119,6 +10841,137 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
                 <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
                 <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_empleado">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado">
+              <MappingFragment StoreEntitySet="ro_empleado">
+                <ScalarProperty Name="Pago_por_horas" ColumnName="Pago_por_horas" />
+                <ScalarProperty Name="Tiene_ingresos_compartidos" ColumnName="Tiene_ingresos_compartidos" />
+                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
+                <ScalarProperty Name="Marca_Biometrico" ColumnName="Marca_Biometrico" />
+                <ScalarProperty Name="em_AnticipoSueldo" ColumnName="em_AnticipoSueldo" />
+                <ScalarProperty Name="CodigoSectorial" ColumnName="CodigoSectorial" />
+                <ScalarProperty Name="ValorAnticipo" ColumnName="ValorAnticipo" />
+                <ScalarProperty Name="IdTipoAnticipo" ColumnName="IdTipoAnticipo" />
+                <ScalarProperty Name="es_AcreditaHorasExtras" ColumnName="es_AcreditaHorasExtras" />
+                <ScalarProperty Name="IdTipoSistemaSalarioNetoSRI" ColumnName="IdTipoSistemaSalarioNetoSRI" />
+                <ScalarProperty Name="IdTipoResidenciaSRI" ColumnName="IdTipoResidenciaSRI" />
+                <ScalarProperty Name="IdAplicaConvenioDobleImposicionSRI" ColumnName="IdAplicaConvenioDobleImposicionSRI" />
+                <ScalarProperty Name="IdentDiscapacitadoSustitutoSRI" ColumnName="IdentDiscapacitadoSustitutoSRI" />
+                <ScalarProperty Name="IdTipoIdentDiscapacitadoSustitutoSRI" ColumnName="IdTipoIdentDiscapacitadoSustitutoSRI" />
+                <ScalarProperty Name="IdCondicionDiscapacidadSRI" ColumnName="IdCondicionDiscapacidadSRI" />
+                <ScalarProperty Name="em_status" ColumnName="em_status" />
+                <ScalarProperty Name="talla_zapato" ColumnName="talla_zapato" />
+                <ScalarProperty Name="talla_camisa" ColumnName="talla_camisa" />
+                <ScalarProperty Name="talla_pant" ColumnName="talla_pant" />
+                <ScalarProperty Name="carnet_conadis" ColumnName="carnet_conadis" />
+                <ScalarProperty Name="por_discapacidad" ColumnName="por_discapacidad" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdTipoLicencia" ColumnName="IdTipoLicencia" />
+                <ScalarProperty Name="em_mail" ColumnName="em_mail" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="IdCtaCble_Emplea" ColumnName="IdCtaCble_Emplea" />
+                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+                <ScalarProperty Name="IdTipoSangre" ColumnName="IdTipoSangre" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdCodSectorial" ColumnName="IdCodSectorial" />
+                <ScalarProperty Name="em_estado" ColumnName="em_estado" />
+                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
+                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
+                <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
+                <ScalarProperty Name="em_fechaSalida" ColumnName="em_fechaSalida" />
+                <ScalarProperty Name="em_cedulaMil" ColumnName="em_cedulaMil" />
+                <ScalarProperty Name="em_CarnetIees" ColumnName="em_CarnetIees" />
+                <ScalarProperty Name="em_lugarNacimiento" ColumnName="em_lugarNacimiento" />
+                <ScalarProperty Name="Codigo_Biometrico" ColumnName="Codigo_Biometrico" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="IdTipoEmpleado" ColumnName="IdTipoEmpleado" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_empleado_datos_generales">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_datos_generales">
+              <MappingFragment StoreEntitySet="vwro_empleado_datos_generales">
+                <ScalarProperty Name="Pago_por_horas" ColumnName="Pago_por_horas" />
+                <ScalarProperty Name="Tiene_ingresos_compartidos" ColumnName="Tiene_ingresos_compartidos" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
+                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
+                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
+                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
+                <ScalarProperty Name="pe_correo" ColumnName="pe_correo" />
+                <ScalarProperty Name="pe_celular" ColumnName="pe_celular" />
+                <ScalarProperty Name="pe_telfono_Contacto" ColumnName="pe_telfono_Contacto" />
+                <ScalarProperty Name="pe_direccion" ColumnName="pe_direccion" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
+                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
+                <ScalarProperty Name="Marca_Biometrico" ColumnName="Marca_Biometrico" />
+                <ScalarProperty Name="em_AnticipoSueldo" ColumnName="em_AnticipoSueldo" />
+                <ScalarProperty Name="CodigoSectorial" ColumnName="CodigoSectorial" />
+                <ScalarProperty Name="ValorAnticipo" ColumnName="ValorAnticipo" />
+                <ScalarProperty Name="IdTipoAnticipo" ColumnName="IdTipoAnticipo" />
+                <ScalarProperty Name="es_AcreditaHorasExtras" ColumnName="es_AcreditaHorasExtras" />
+                <ScalarProperty Name="IdTipoSistemaSalarioNetoSRI" ColumnName="IdTipoSistemaSalarioNetoSRI" />
+                <ScalarProperty Name="IdTipoResidenciaSRI" ColumnName="IdTipoResidenciaSRI" />
+                <ScalarProperty Name="IdAplicaConvenioDobleImposicionSRI" ColumnName="IdAplicaConvenioDobleImposicionSRI" />
+                <ScalarProperty Name="IdentDiscapacitadoSustitutoSRI" ColumnName="IdentDiscapacitadoSustitutoSRI" />
+                <ScalarProperty Name="IdTipoIdentDiscapacitadoSustitutoSRI" ColumnName="IdTipoIdentDiscapacitadoSustitutoSRI" />
+                <ScalarProperty Name="IdCondicionDiscapacidadSRI" ColumnName="IdCondicionDiscapacidadSRI" />
+                <ScalarProperty Name="em_status" ColumnName="em_status" />
+                <ScalarProperty Name="talla_zapato" ColumnName="talla_zapato" />
+                <ScalarProperty Name="talla_camisa" ColumnName="talla_camisa" />
+                <ScalarProperty Name="talla_pant" ColumnName="talla_pant" />
+                <ScalarProperty Name="carnet_conadis" ColumnName="carnet_conadis" />
+                <ScalarProperty Name="por_discapacidad" ColumnName="por_discapacidad" />
+                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdTipoLicencia" ColumnName="IdTipoLicencia" />
+                <ScalarProperty Name="em_mail" ColumnName="em_mail" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="IdCtaCble_Emplea" ColumnName="IdCtaCble_Emplea" />
+                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+                <ScalarProperty Name="IdTipoSangre" ColumnName="IdTipoSangre" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdCodSectorial" ColumnName="IdCodSectorial" />
+                <ScalarProperty Name="em_estado" ColumnName="em_estado" />
+                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
+                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
+                <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
+                <ScalarProperty Name="em_fechaSalida" ColumnName="em_fechaSalida" />
+                <ScalarProperty Name="em_cedulaMil" ColumnName="em_cedulaMil" />
+                <ScalarProperty Name="em_CarnetIees" ColumnName="em_CarnetIees" />
+                <ScalarProperty Name="em_lugarNacimiento" ColumnName="em_lugarNacimiento" />
+                <ScalarProperty Name="Codigo_Biometrico" ColumnName="Codigo_Biometrico" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="IdTipoEmpleado" ColumnName="IdTipoEmpleado" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

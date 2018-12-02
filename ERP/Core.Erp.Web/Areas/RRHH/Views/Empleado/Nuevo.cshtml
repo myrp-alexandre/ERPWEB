@@ -353,30 +353,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="IdPuntoCargo">Punto cargo</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdPuntoCargo, settings =>
-                               {
-                                   settings.Name = "IdPunto_cargo";
-                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                   settings.Properties.Columns.Add("codPunto_cargo", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("nom_punto_cargo", "nom_punto_cargo").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                   //Campo ID
-                                   settings.Properties.ValueField = "IdPunto_cargo";
-                                   settings.Properties.ValueType = typeof(decimal);
-                                   settings.Properties.TextField = "nom_punto_cargo";
-                                   //Boton para seleccionar ningun registro
-                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
-                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                               }).BindList(ViewBag.lst_punto_cargo).GetHtml()
-                                @Html.ValidationMessageFor(q => q.IdPuntoCargo, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
+                  
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="IdEmpleado_Supervisor">Jefe inmediato</label>

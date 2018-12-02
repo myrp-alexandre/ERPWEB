@@ -54,23 +54,11 @@ namespace Core.Erp.Data
         public string em_lugarNacimiento { get; set; }
         public string em_CarnetIees { get; set; }
         public string em_cedulaMil { get; set; }
-        public Nullable<System.DateTime> em_fecha_ingreso { get; set; }
         public Nullable<System.DateTime> em_fechaSalida { get; set; }
-        public Nullable<System.DateTime> em_fechaTerminoContra { get; set; }
         public Nullable<System.DateTime> em_fechaIngaRol { get; set; }
-        public string em_SeAcreditaBanco { get; set; }
         public string em_tipoCta { get; set; }
         public string em_NumCta { get; set; }
-        public string em_SepagaBeneficios { get; set; }
-        public string em_SePagaConTablaSec { get; set; }
         public string em_estado { get; set; }
-        public double em_sueldoBasicoMen { get; set; }
-        public Nullable<double> em_SueldoExtraMen { get; set; }
-        public Nullable<double> em_MovilizacionQuincenal { get; set; }
-        public byte[] em_foto { get; set; }
-        public string em_empEspecial { get; set; }
-        public string em_pagoFdoRsv { get; set; }
-        public string em_huella { get; set; }
         public Nullable<int> IdCodSectorial { get; set; }
         public int IdDepartamento { get; set; }
         public string IdTipoSangre { get; set; }
@@ -79,13 +67,9 @@ namespace Core.Erp.Data
         public string IdCiudad { get; set; }
         public string em_mail { get; set; }
         public string IdTipoLicencia { get; set; }
-        public string IdCentroCosto { get; set; }
         public string IdBanco { get; set; }
-        public byte[] Archivo { get; set; }
-        public string NombreArchivo { get; set; }
         public Nullable<int> IdArea { get; set; }
         public Nullable<int> IdDivision { get; set; }
-        public string IdCentroCosto_sub_centro_costo { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transaccion { get; set; }
         public string IdUsuarioUltModi { get; set; }
@@ -95,7 +79,6 @@ namespace Core.Erp.Data
         public string MotivoAnulacion { get; set; }
         public double por_discapacidad { get; set; }
         public string carnet_conadis { get; set; }
-        public string recibi_uniforme { get; set; }
         public Nullable<double> talla_pant { get; set; }
         public string talla_camisa { get; set; }
         public Nullable<double> talla_zapato { get; set; }
@@ -110,15 +93,11 @@ namespace Core.Erp.Data
         public string IdTipoAnticipo { get; set; }
         public Nullable<double> ValorAnticipo { get; set; }
         public string CodigoSectorial { get; set; }
-        public Nullable<bool> es_TruncarDecimalAnticipo { get; set; }
         public Nullable<double> em_AnticipoSueldo { get; set; }
-        public Nullable<int> IdBanco_Acreditacion { get; set; }
-        public Nullable<int> IdGrupo { get; set; }
         public bool Marca_Biometrico { get; set; }
-        public string em_motivo_salisa { get; set; }
         public Nullable<int> IdHorario { get; set; }
-        public Nullable<int> IdPuntoCargo { get; set; }
         public bool Tiene_ingresos_compartidos { get; set; }
+        public bool Pago_por_horas { get; set; }
     
         public virtual ICollection<ro_Acta_Finiquito> ro_Acta_Finiquito { get; set; }
         public virtual ICollection<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }

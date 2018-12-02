@@ -122,8 +122,8 @@ namespace Core.Erp.Bus.RRHH
                         ro_historico_vacaciones_x_empleado_Info info = new ro_historico_vacaciones_x_empleado_Info();
                         info.IdEmpresa = info_empleado.IdEmpresa;
                         info.IdEmpleado = info_empleado.IdEmpleado;
-                        info.FechaIni = Convert.ToDateTime(info_empleado.em_fecha_ingreso);
-                        info.FechaFin = Convert.ToDateTime(Convert.ToDateTime( info_empleado.em_fecha_ingreso).AddYears(1).AddDays(-1));
+                        info.FechaIni = Convert.ToDateTime(info_empleado.em_fechaIngaRol);
+                        info.FechaFin = Convert.ToDateTime(Convert.ToDateTime( info_empleado.em_fechaIngaRol).AddYears(1).AddDays(-1));
                         info.DiasGanado = Convert.ToInt32(dias*15)/360;
                         info.DiasPendientes = Convert.ToInt32(dias * 15) / 360;
                         info.Descripcion = info.FechaIni.Date.ToString() + " " + info.FechaFin.Date.ToString() + " " + info.DiasGanado.ToString();
