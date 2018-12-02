@@ -128,7 +128,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             { 
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
                 IdEmpresa = GetIdEmpresa();
-                return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo));
+                ro_rol_Info model = bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
+                ViewBag.FechaCorte = DateTime.Now;
+                return View();
 
             }
             catch (Exception)

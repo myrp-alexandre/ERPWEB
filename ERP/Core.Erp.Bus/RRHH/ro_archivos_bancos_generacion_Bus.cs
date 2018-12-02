@@ -224,9 +224,7 @@ namespace Core.Erp.Bus.RRHH
                     
 
                    
-                    tw.WriteLine(File);
-                    tw.Flush();
-                    tw.Close();
+                  
 
                     File += "\n";
                     
