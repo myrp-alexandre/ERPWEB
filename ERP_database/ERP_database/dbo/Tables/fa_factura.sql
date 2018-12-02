@@ -34,7 +34,10 @@
     [esta_impresa]        BIT           NULL,
     [fecha_primera_cuota] DATETIME      NULL,
     [valor_abono]         FLOAT (53)    NULL,
-	[aprobada_enviar_sri]         bit not    NULL,
+    [aprobada_enviar_sri] BIT           NOT NULL,
+    [vt_Total]            FLOAT (53)    NOT NULL,
+    [vt_ValorEfectivo]    FLOAT (53)    NOT NULL,
+    [vt_Cambio]           FLOAT (53)    NOT NULL,
     CONSTRAINT [PK_fa_factura] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdSucursal] ASC, [IdBodega] ASC, [IdCbteVta] ASC),
     CONSTRAINT [FK_fa_factura_caj_Caja] FOREIGN KEY ([IdEmpresa], [IdCaja]) REFERENCES [dbo].[caj_Caja] ([IdEmpresa], [IdCaja]),
     CONSTRAINT [FK_fa_factura_ct_periodo] FOREIGN KEY ([IdEmpresa], [IdPeriodo]) REFERENCES [dbo].[ct_periodo] ([IdEmpresa], [IdPeriodo]),
@@ -46,6 +49,8 @@
     CONSTRAINT [FK_fa_factura_tb_mes] FOREIGN KEY ([vt_mes]) REFERENCES [dbo].[tb_mes] ([idMes]),
     CONSTRAINT [FK_fa_factura_tb_sis_Documento_Tipo_Talonario] FOREIGN KEY ([IdEmpresa], [vt_tipoDoc], [vt_serie2], [vt_serie1], [vt_NumFactura]) REFERENCES [dbo].[tb_sis_Documento_Tipo_Talonario] ([IdEmpresa], [CodDocumentoTipo], [PuntoEmision], [Establecimiento], [NumDocumento])
 );
+
+
 
 
 GO

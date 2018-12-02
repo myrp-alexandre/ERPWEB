@@ -12,17 +12,17 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class fa_cuotas_x_doc
+    public partial class fa_factura_x_cxc_cobro_tipo
     {
-        public int IdEmpresa { get; set; }
-        public int IdSucursal { get; set; }
-        public int IdBodega { get; set; }
-        public decimal IdCbteVta { get; set; }
-        public int secuencia { get; set; }
-        public int num_cuota { get; set; }
-        public System.DateTime fecha_vcto_cuota { get; set; }
-        public double valor_a_cobrar { get; set; }
-        public bool Estado { get; set; }
+        public int IdEmpresa_fa { get; set; }
+        public int IdSucursal_fa { get; set; }
+        public int IdBodega_fa { get; set; }
+        public decimal IdCbteVta_fa { get; set; }
+        public int Secuencia { get; set; }
+        public string IdCobro_tipo { get; set; }
+        public int IdEmpresa_cxc { get; set; }
+        public int IdSucursal_cxc { get; set; }
+        public decimal IdCobro_cxc { get; set; }
     
         public virtual fa_factura fa_factura { get; set; }
     }
