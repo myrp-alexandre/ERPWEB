@@ -19,9 +19,9 @@ namespace Core.Erp.Data
             this.fa_cuotas_x_doc = new HashSet<fa_cuotas_x_doc>();
             this.fa_factura_det = new HashSet<fa_factura_det>();
             this.fa_factura_x_ct_cbtecble = new HashSet<fa_factura_x_ct_cbtecble>();
-            this.fa_factura_x_cxc_cobro_tipo = new HashSet<fa_factura_x_cxc_cobro_tipo>();
             this.fa_factura_x_fa_guia_remision = new HashSet<fa_factura_x_fa_guia_remision>();
             this.fa_factura_x_in_Ing_Egr_Inven = new HashSet<fa_factura_x_in_Ing_Egr_Inven>();
+            this.fa_factura_x_cxc_cobro_tipo = new HashSet<fa_factura_x_cxc_cobro_tipo>();
         }
     
         public int IdEmpresa { get; set; }
@@ -71,8 +71,8 @@ namespace Core.Erp.Data
         public virtual fa_PuntoVta fa_PuntoVta { get; set; }
         public virtual fa_Vendedor fa_Vendedor { get; set; }
         public virtual ICollection<fa_factura_x_ct_cbtecble> fa_factura_x_ct_cbtecble { get; set; }
-        public virtual ICollection<fa_factura_x_cxc_cobro_tipo> fa_factura_x_cxc_cobro_tipo { get; set; }
         public virtual ICollection<fa_factura_x_fa_guia_remision> fa_factura_x_fa_guia_remision { get; set; }
         public virtual ICollection<fa_factura_x_in_Ing_Egr_Inven> fa_factura_x_in_Ing_Egr_Inven { get; set; }
+        public virtual ICollection<fa_factura_x_cxc_cobro_tipo> fa_factura_x_cxc_cobro_tipo { get; set; }
     }
 }

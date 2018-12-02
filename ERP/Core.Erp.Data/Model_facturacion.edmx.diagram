@@ -89,7 +89,6 @@
         <EntityTypeShape EntityType="Model_facturacion.fa_formaPago" Width="1.5" PointX="19.375" PointY="14" />
         <AssociationConnector Association="Model_facturacion.FK_fa_cliente_fa_forma_pago" />
         <EntityTypeShape EntityType="Model_facturacion.fa_factura" Width="1.5" PointX="7.5" PointY="24.5" />
-        <EntityTypeShape EntityType="Model_facturacion.fa_factura_x_cxc_cobro_tipo" Width="1.5" PointX="9.75" PointY="55.25" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_cliente" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_cliente_contactos" />
         <AssociationConnector Association="Model_facturacion.FK_fa_cuotas_x_doc_fa_factura" />
@@ -97,9 +96,10 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_PuntoVta" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_Vendedor" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_ct_cbtecble_fa_factura" />
-        <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_cxc_cobro_tipo_fa_factura" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_factura" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_in_Ing_Egr_Inven_fa_factura" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_factura_x_cxc_cobro_tipo" Width="1.5" PointX="9.75" PointY="55.125" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_cxc_cobro_tipo_fa_factura" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

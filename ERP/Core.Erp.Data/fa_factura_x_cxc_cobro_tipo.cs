@@ -23,6 +23,7 @@ namespace Core.Erp.Data
         public int IdEmpresa_cxc { get; set; }
         public int IdSucursal_cxc { get; set; }
         public decimal IdCobro_cxc { get; set; }
+        public double Valor { get; set; }
     
         public virtual fa_factura fa_factura { get; set; }
     }
