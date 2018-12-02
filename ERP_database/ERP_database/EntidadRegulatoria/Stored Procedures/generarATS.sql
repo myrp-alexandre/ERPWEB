@@ -25,10 +25,10 @@ declare
 delete EntidadRegulatoria.ATS_ventas
 select @fecha_inicio=pe_FechaIni, @fecha_fin=pe_FechaFin from ct_periodo where IdEmpresa=@idempresa and IdPeriodo=@idPeriodo
 delete EntidadRegulatoria.ATS_ventas where IdEmpresa=@idempresa --and IdPeriodo=@idPeriodo
-delete EntidadRegulatoria.ATS_compras where idempresa=@idempresa-- and idperiodo=@idPeriodo
-delete EntidadRegulatoria.ATS_retenciones where idempresa=@idempresa-- and idperiodo=@idPeriodo
-delete EntidadRegulatoria.ATS_comprobantes_anulados where idempresa=@idempresa-- and idperiodo=@idPeriodo
-delete EntidadRegulatoria.ATS_exportaciones where idempresa=@idempresa --and idperiodo=@idPeriodo
+delete EntidadRegulatoria.ATS_compras where IdEmpresa=@idempresa-- and idperiodo=@idPeriodo
+delete EntidadRegulatoria.ATS_retenciones where IdEmpresa=@idempresa-- and idperiodo=@idPeriodo
+delete EntidadRegulatoria.ATS_comprobantes_anulados where IdEmpresa=@idempresa-- and idperiodo=@idPeriodo
+delete EntidadRegulatoria.ATS_exportaciones where IdEmpresa=@idempresa --and idperiodo=@idPeriodo
 
 insert into EntidadRegulatoria.ATS_compras
 (
@@ -156,7 +156,7 @@ select cobro_x_retencion.IdEmpresa,cobro_x_retencion.IdSucursal,cobro_x_retencio
 cobro_x_retencion.IdCliente,SUM( cobro_x_retencion.valorRetIva)valorRetIva,SUM( cobro_x_retencion.valorRetRenta)valorRetRenta,cobro_x_retencion.IdCbte_vta_nota
 from
 (
-select  cxc_cobro.idempresa,cxc_cobro.IdSucursal, IdBodega_Cbte,IdCbte_vta_nota, cxc_cobro.idCliente,
+select  cxc_cobro.IdEmpresa,cxc_cobro.IdSucursal, IdBodega_Cbte,IdCbte_vta_nota, cxc_cobro.IdCliente,
 isnull( case when SUBSTRING( cxc_cobro_det.IdCobro_tipo,0,5)= 'RTFT'then sum(dc_ValorPago) end,0.00) valorRetRenta,
 isnull(case when SUBSTRING( cxc_cobro_det.IdCobro_tipo,0,5)= 'RTIV'then sum(dc_ValorPago) end,0.00) valorRetIva
  from cxc_cobro_det, cxc_cobro_tipo, cxc_cobro
@@ -165,7 +165,7 @@ isnull(case when SUBSTRING( cxc_cobro_det.IdCobro_tipo,0,5)= 'RTIV'then sum(dc_V
  and cxc_cobro_det.IdCobro=cxc_cobro.IdCobro
  and cxc_cobro_tipo.IdMotivo_tipo_cobro='RET'
  and cxc_cobro_det.IdEmpresa=@idempresa
- GROUP by cxc_cobro.idempresa,cxc_cobro.IdSucursal, IdBodega_Cbte,IdCbte_vta_nota,cxc_cobro.IdCliente, cxc_cobro_det.IdCobro_tipo
+ GROUP by cxc_cobro.IdEmpresa,cxc_cobro.IdSucursal, IdBodega_Cbte,IdCbte_vta_nota,cxc_cobro.IdCliente, cxc_cobro_det.IdCobro_tipo
  ) as 
  cobro_x_retencion
  group by 
@@ -304,7 +304,7 @@ from fa_factura, tb_sis_Documento_Tipo_Talonario
  and fa_factura.vt_serie1=tb_sis_Documento_Tipo_Talonario.Establecimiento
  and fa_factura.vt_serie2=tb_sis_Documento_Tipo_Talonario.PuntoEmision
  and fa_factura.vt_NumFactura=tb_sis_Documento_Tipo_Talonario.NumDocumento
- AND FA_fACTURA.IdEMPRESA = @IdEMPRESA
+ AND FA_fACTURA.IdEmpresa = @IdEMPRESA
  and fa_factura.vt_fecha  between @fecha_inicio and @fecha_fin
  union
  select  
@@ -330,7 +330,7 @@ from fa_notaCreDeb, tb_sis_Documento_Tipo_Talonario
  and fa_notaCreDeb.Serie1=tb_sis_Documento_Tipo_Talonario.Establecimiento
  and fa_notaCreDeb.Serie1=tb_sis_Documento_Tipo_Talonario.PuntoEmision
  and fa_notaCreDeb.Serie2=tb_sis_Documento_Tipo_Talonario.NumDocumento
- AND fa_notaCreDeb.IdEMPRESA = @IdEMPRESA
+ AND fa_notaCreDeb.IdEmpresa = @IdEMPRESA
  and fa_notaCreDeb.no_fecha  between @fecha_inicio and @fecha_fin
 
 

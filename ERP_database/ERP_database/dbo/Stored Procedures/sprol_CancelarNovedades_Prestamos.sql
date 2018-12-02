@@ -17,7 +17,7 @@ FROM            dbo.ro_empleado_Novedad AS nov INNER JOIN
                          dbo.ro_empleado_novedad_det AS nov_det ON nov.IdEmpresa = nov_det.IdEmpresa AND nov.IdNovedad = nov_det.IdNovedad INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON nov_det.IdEmpresa = rub.IdEmpresa AND nov_det.IdRubro = rub.IdRubro
 						 WHERE FechaPago between @FechaInicio and @fechaFin
-						 and IdNomina_tipo=@IdNomina
+						 and IdNomina_Tipo=@IdNomina
 						 and IdNomina_TipoLiqui=@IdNominaTipo
 						 and nov.IdEmpresa=@IdEmpresa
 						 and exists (select * from ro_rol_detalle d, ro_rol r
@@ -25,7 +25,7 @@ FROM            dbo.ro_empleado_Novedad AS nov INNER JOIN
 						 and r.IdEmpresa=d.IdEmpresa
 						 and r.IdRol=d.IdRol
 						 and d.IdEmpleado=nov.IdEmpleado
-						 and r.IdNominaTipo=nov.IdNomina_tipo
+						 and r.IdNominaTipo=nov.IdNomina_Tipo
 						 and r.IdNominaTipoLiqui=nov.IdNomina_TipoLiqui
 						 and d.IdRubro=nov_det.IdRubro
 						 and r.IdPeriodo=@IdPeriodo)

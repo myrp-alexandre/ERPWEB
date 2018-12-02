@@ -24,7 +24,7 @@ set @FechaFin ='2017/12/31'
 SELECT     emp.IdEmpresa,emp.IdEmpleado,   car.ca_descripcion, per.pe_apellido, per.pe_nombre, per.pe_cedulaRuc, emp.em_status, emp.em_fechaIngaRol, emp.em_fecha_ingreso, emp.em_fechaSalida,count( cont.FechaInicio) as num_contratos,
 ISNULL((select COUNT( c.IdEmpleado) from ro_cargaFamiliar c 
 where
-( c.idempresa=emp.idempresa 
+( c.IdEmpresa=emp.IdEmpresa 
 and c.IdEmpleado=emp.IdEmpleado 
 and c.Estado='A'
 and DATEDIFF(year, @FechaFin  , c.FechaNacimiento)<18

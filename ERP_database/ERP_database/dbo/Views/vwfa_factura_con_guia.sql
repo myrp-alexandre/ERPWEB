@@ -5,7 +5,7 @@ FROM            (
 
 
 SELECT        dbo.fa_cliente.IdEmpresa, dbo.fa_cliente.IdCliente, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.fa_factura.IdSucursal, dbo.fa_factura.IdBodega, dbo.fa_factura.IdCbteVta, 
-                         dbo.fa_factura.vt_serie1, dbo.fa_factura.vt_serie2, dbo.fa_factura.vt_NumFactura, dbo.fa_factura_det.Secuencia, dbo.fa_factura.vt_Observacion, dbo.fa_factura.vt_fecha,fa_guia_remision_det_x_factura.idguiaremision_guia
+                         dbo.fa_factura.vt_serie1, dbo.fa_factura.vt_serie2, dbo.fa_factura.vt_NumFactura, dbo.fa_factura_det.Secuencia, dbo.fa_factura.vt_Observacion, dbo.fa_factura.vt_fecha,fa_guia_remision_det_x_factura.IdGuiaRemision_guia
 FROM            dbo.fa_factura INNER JOIN
                          dbo.fa_factura_det ON dbo.fa_factura.IdEmpresa = dbo.fa_factura_det.IdEmpresa AND dbo.fa_factura.IdSucursal = dbo.fa_factura_det.IdSucursal AND dbo.fa_factura.IdBodega = dbo.fa_factura_det.IdBodega AND 
                          dbo.fa_factura.IdCbteVta = dbo.fa_factura_det.IdCbteVta INNER JOIN

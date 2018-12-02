@@ -24,7 +24,7 @@ BEGIN
 	@FechaI date,
 	@FechaF date
 
-	select @IdPeriodo= IdPEriodo from ro_rol where IdEmpresa=@IdEmpresa and IdRol=@IdRubro
+	select @IdPeriodo= IdPeriodo from ro_rol where IdEmpresa=@IdEmpresa and IdRol=@IdRubro
 	
 	select @FechaI= pe_FechaIni, @FechaF=pe_FechaFin from ro_periodo where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPeriodo
    

@@ -1,7 +1,7 @@
 ﻿
 CREATE VIEW [dbo].[XXXPADRESDIFERENTESAHIJOS]
 AS
-select * from in_producto
+select * from in_Producto
 where exists(
 select * from in_Producto as f
 where f.IdEmpresa = in_Producto.IdEmpresa

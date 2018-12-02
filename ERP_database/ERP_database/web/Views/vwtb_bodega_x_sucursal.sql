@@ -1,4 +1,4 @@
-﻿CREATE VIEW WEB.vwtb_bodega_x_sucursal
+﻿CREATE VIEW web.vwtb_bodega_x_sucursal
 AS
 SELECT dbo.tb_bodega.IdEmpresa, dbo.tb_bodega.IdSucursal, dbo.tb_bodega.IdBodega, dbo.tb_bodega.cod_bodega, dbo.tb_bodega.bo_Descripcion, dbo.tb_bodega.cod_punto_emision, dbo.tb_bodega.bo_manejaFacturacion, 
                   dbo.tb_sucursal.codigo, dbo.tb_sucursal.Su_Descripcion, dbo.tb_sucursal.Estado

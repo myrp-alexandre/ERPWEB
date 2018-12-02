@@ -186,7 +186,7 @@ SELECT * FROM (
 						tb_sucursal.codigo AS cod_sucursal, tb_sucursal.Su_Descripcion AS nom_sucursal, in_Ing_Egr_Inven_det.IdEmpresa_oc, in_Ing_Egr_Inven_det.IdSucursal_oc, 
 						in_Ing_Egr_Inven_det.IdOrdenCompra, 
 						
-						IIF(cp_orden_giro.co_factura is null, cast(cast(fa_factura.vt_numFactura as numeric) as varchar(20)), cast(cast(cp_orden_giro.co_factura as numeric) as varchar(20))) AS num_factura, 
+						IIF(cp_orden_giro.co_factura is null, cast(cast(fa_factura.vt_NumFactura as numeric) as varchar(20)), cast(cast(cp_orden_giro.co_factura as numeric) as varchar(20))) AS num_factura, 
 
 						iif(tb_persona.pe_nombreCompleto is null,fa_cliente_contactos.Nombres,tb_persona.pe_nombreCompleto) AS nom_proveedor, in_Producto.pr_codigo, 
 						in_Producto.pr_descripcion + ' '+pre.nom_presentacion + ' ' + ISNULL(in_Producto.lote_num_lote,'') + ' ' + (iif(in_Producto.lote_fecha_vcto is null,'',CONVERT(varchar(10), in_Producto.lote_fecha_vcto, 103))) pr_descripcion, 

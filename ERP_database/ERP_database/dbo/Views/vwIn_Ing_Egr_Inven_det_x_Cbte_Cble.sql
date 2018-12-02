@@ -4,7 +4,7 @@ SELECT        vw_Ing_Egr.IdEmpresa, vw_Ing_Egr.IdSucursal, vw_Ing_Egr.IdBodega, 
                          vw_Ing_Egr.IdEmpresa_inv, vw_Ing_Egr.IdSucursal_inv, vw_Ing_Egr.IdBodega_inv, vw_Ing_Egr.IdNumMovi_inv, vw_Ing_Egr.IdMovi_inven_tipo_inv, 
                          cbte.IdEmpresa AS IdEmpresa_CbteCble, cbte.IdCbteCble, cbte.IdTipoCbte, cbte.CodCbteCble, cbte.IdPeriodo, cbte.cb_Fecha, cbte.cb_Valor, cbte.cb_Observacion, 
                          vw_Ing_Egr.IdMovi_inven_tipo
-FROM            dbo.vwIn_Ing_Egr_Inven_det_x_Producto AS vw_Ing_Egr INNER JOIN
+FROM            dbo.vwin_Ing_Egr_Inven_det_x_Producto AS vw_Ing_Egr INNER JOIN
                          dbo.in_movi_inve_x_ct_cbteCble AS in_Movi ON in_Movi.IdEmpresa = vw_Ing_Egr.IdEmpresa_inv AND in_Movi.IdSucursal = vw_Ing_Egr.IdSucursal_inv AND 
                          in_Movi.IdBodega = vw_Ing_Egr.IdBodega_inv AND in_Movi.IdNumMovi = vw_Ing_Egr.IdNumMovi_inv AND 
                          in_Movi.IdMovi_inven_tipo = vw_Ing_Egr.IdMovi_inven_tipo_inv INNER JOIN

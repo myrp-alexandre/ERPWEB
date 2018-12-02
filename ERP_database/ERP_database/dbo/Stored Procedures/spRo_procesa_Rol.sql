@@ -48,7 +48,7 @@ select @Fi= pe_FechaIni, @Ff=pe_FechaFin, @Anio=pe_anio from ro_periodo where Id
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------preparando la cabecera del rol general-------- ----------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-if((select  COUNT(idrol) from ro_rol where IdEmpresa=@IdEmpresa and @IdRol=IdRol)>0)
+if((select  COUNT(IdRol) from ro_rol where IdEmpresa=@IdEmpresa and @IdRol=IdRol)>0)
 update ro_rol set UsuarioModifica=@IdUsuario, FechaModifica=GETDATE() where IdEmpresa=@IdEmpresa and @IdRol=IdRol
 else
 insert into ro_rol
@@ -56,7 +56,7 @@ insert into ro_rol
 UsuarioIngresa,	FechaModifica,		UsuarioModifica,		FechaAnula,			UsuarioAnula,				MotivoAnula,				UsuarioCierre,		FechaCierre,
 IdCentroCosto)
 values
-(@IdEmpresa	, @IdRol	,@IdNomina			,@IdNominaTipo			,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
+(@IdEmpresa	, @IdRol	,@IdNomina			,@IdNominaTipo			,@IdPEriodo			,@Observacion				,@Observacion				,'N'				,GETDATE()
 ,@IdUsuario		,null				,null					,null				,null						,null						,null				,null
 ,null)
 
@@ -100,7 +100,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select 
-@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,cont.sueldo/30*(dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol))
+@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,cont.Sueldo/30*(dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol))
 ,1						,'Sueldo base'		
 FROM            dbo.ro_contrato AS cont INNER JOIN
                 dbo.ro_empleado AS emp ON cont.IdEmpresa = emp.IdEmpresa AND cont.IdEmpleado = emp.IdEmpleado
@@ -129,7 +129,7 @@ dbo.ro_empleado_novedad_det AS nov ON novc.IdEmpresa = nov.IdEmpresa AND novc.Id
 dbo.ro_rubro_tipo AS rub ON nov.IdEmpresa = rub.IdEmpresa AND nov.IdRubro = rub.IdRubro
 and nov.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa
-and novc.IdNomina_tipo=@IdNomina
+and novc.IdNomina_Tipo=@IdNomina
 and novc.IdNomina_TipoLiqui=@IdNominaTipo
 and nov.FechaPago between @Fi and @Ff
 and novc.Estado='A'
@@ -176,7 +176,7 @@ FROM            dbo.ro_rubro_tipo AS rub INNER JOIN
                          dbo.ro_empleado AS emp ON rub_fij.IdEmpresa = emp.IdEmpresa AND rub_fij.IdEmpleado = emp.IdEmpleado
 and rub_fij.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa
-and rub_fij.IdNomina_tipo=@IdNomina
+and rub_fij.IdNomina_Tipo=@IdNomina
 and rub_fij.IdNomina_TipoLiqui=@IdNominaTipo
 and (rub_fij.es_indifinido=1 or ( @Fi between rub_fij.FechaFin and rub_fij.FechaFin and @Ff between rub_fij.FechaFin and rub_fij.FechaFin))
 --and rub_fij.Estado='A'
@@ -449,7 +449,7 @@ where acum.IdEmpresa= emp.IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
 and acum.IdRubro='296'
-and emp.idempresa=@idempresa
+and emp.IdEmpresa=@idempresa
 and acum.IdEmpresa=@IdEmpresa)
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal

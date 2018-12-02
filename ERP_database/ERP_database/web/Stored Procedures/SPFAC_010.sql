@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE WEB.SPFAC_010
+﻿CREATE PROCEDURE web.SPFAC_010
 (
 @IdEmpresa int,
 @IdProducto_ini numeric,

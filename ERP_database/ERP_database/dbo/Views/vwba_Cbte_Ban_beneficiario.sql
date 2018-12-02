@@ -3,7 +3,7 @@ AS
 SELECT ba_Cbte_Ban.IdEmpresa, ba_Cbte_Ban.IdTipocbte, ba_Cbte_Ban.IdCbteCble, tb_persona.IdPersona, tb_persona.pe_nombreCompleto
 FROM     ba_Cbte_Ban INNER JOIN
                   tb_persona ON ba_Cbte_Ban.IdPersona_Girado_a = tb_persona.IdPersona
-WHERE  cb_cheque IS NOT NULL
+WHERE  cb_Cheque IS NOT NULL
 UNION
 SELECT dbo.ba_Cbte_Ban.IdEmpresa, dbo.ba_Cbte_Ban.IdTipocbte, dbo.ba_Cbte_Ban.IdCbteCble, dbo.tb_persona.IdPersona, dbo.tb_persona.pe_nombreCompleto
 FROM     dbo.cp_orden_pago INNER JOIN

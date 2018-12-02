@@ -74,7 +74,7 @@ BEGIN --INSERT DATA
 			select A.IdEmpresa, A.IdUsuario,@AnioInicio, A.IdProducto,a.pr_descripcion, a.IdPresentacion ,A.IdCategoria, A.IdLinea, A.IdGrupo, A.IdSubGrupo, A.IdMarca,
 			0,0,0,0,0,0,0,0,0,0,0,0,0,0
 			from(
-			SELECT        fa_factura_det.IdEmpresa, @IdUsuario IdUsuario, CASE WHEN in_Producto.IdProducto_padre IS NULL THEN  in_Producto.IdProducto ELSE IN_producto.IdProducto_Padre end as IdProducto, in_Producto.pr_descripcion, in_Producto.IdPresentacion, in_Producto.IdCategoria, in_Producto.IdLinea, in_Producto.IdGrupo, in_Producto.IdSubGrupo, in_Producto.IdMarca
+			SELECT        fa_factura_det.IdEmpresa, @IdUsuario IdUsuario, CASE WHEN in_Producto.IdProducto_padre IS NULL THEN  in_Producto.IdProducto ELSE IN_producto.IdProducto_padre end as IdProducto, in_Producto.pr_descripcion, in_Producto.IdPresentacion, in_Producto.IdCategoria, in_Producto.IdLinea, in_Producto.IdGrupo, in_Producto.IdSubGrupo, in_Producto.IdMarca
 			FROM            fa_factura_det INNER JOIN
 									 in_Producto ON fa_factura_det.IdEmpresa = in_Producto.IdEmpresa AND fa_factura_det.IdProducto = in_Producto.IdProducto INNER JOIN
 									 fa_factura ON fa_factura_det.IdEmpresa = fa_factura.IdEmpresa AND fa_factura_det.IdSucursal = fa_factura.IdSucursal AND fa_factura_det.IdBodega = fa_factura.IdBodega AND fa_factura_det.IdCbteVta = fa_factura.IdCbteVta
@@ -196,7 +196,7 @@ BEGIN --RELLENO VENTAS POR PERIODOS
 					from(
 						select G.IdEmpresa, G.IdProducto, SUM(G.Cantidad) Cantidad
 						from(
-						SELECT   FC.IdEmpresa, ISNULL(P.IdProducto_Padre,P.IdProducto) IdProducto, FD.vt_cantidad Cantidad
+						SELECT   FC.IdEmpresa, ISNULL(P.IdProducto_padre,P.IdProducto) IdProducto, FD.vt_cantidad Cantidad
 						FROM            fa_factura AS FC INNER JOIN
 						fa_factura_det AS FD ON FC.IdEmpresa = FD.IdEmpresa AND FC.IdSucursal = FD.IdSucursal AND FC.IdBodega = FD.IdBodega AND FC.IdCbteVta = FD.IdCbteVta INNER JOIN
 						in_Producto AS P ON FD.IdEmpresa = P.IdEmpresa AND FD.IdProducto = P.IdProducto
@@ -212,12 +212,12 @@ BEGIN --RELLENO VENTAS POR PERIODOS
 END
 
 BEGIN --CALCULO TOTALES
-	UPDATE WEB.in_SPINV_010 SET Total = Enero + Febrero + Marzo + Abril + Mayo + Junio + Julio + Agosto + Septiembre + Octubre + Noviembre + Diciembre
+	UPDATE [web].in_SPINV_010 SET Total = Enero + Febrero + Marzo + Abril + Mayo + Junio + Julio + Agosto + Septiembre + Octubre + Noviembre + Diciembre
 	WHERE IdEmpresa = @IdEmpresa and IdUsuario = @IdUsuario
 END
 
 BEGIN --ACTUALIZO STOCK A LA FECHA
-	UPDATE WEB.in_SPINV_010 SET StockActual = A.Cantidad
+	UPDATE [web].in_SPINV_010 SET StockActual = A.Cantidad
 	from(
 		SELECT G.IdEmpresa, G.IdProducto, SUM(G.dm_cantidad) Cantidad
 		FROM(
@@ -230,10 +230,10 @@ BEGIN --ACTUALIZO STOCK A LA FECHA
 		AND C.IdNumMovi = D.IdNumMovi
 		WHERE C.IdEmpresa = @IdEmpresa AND C.cm_fecha <= GETDATE()
 		) G GROUP BY G.IdEmpresa, G.IdProducto
-	) A WHERE A.IdEmpresa = WEB.in_SPINV_010.IdEmpresa 
-	AND A.IdProducto = WEB.in_SPINV_010.IdProducto
-	AND WEB.in_SPINV_010.IdUsuario = @IdUsuario
-	AND WEB.in_SPINV_010.IdEmpresa = @IdEmpresa
+	) A WHERE A.IdEmpresa = [web].in_SPINV_010.IdEmpresa 
+	AND A.IdProducto = [web].in_SPINV_010.IdProducto
+	AND [web].in_SPINV_010.IdUsuario = @IdUsuario
+	AND [web].in_SPINV_010.IdEmpresa = @IdEmpresa
 END
 
 SELECT        web.in_SPINV_010.IdEmpresa, web.in_SPINV_010.IdUsuario, web.in_SPINV_010.IdAnio, web.in_SPINV_010.IdProducto,web.in_SPINV_010.pr_descripcion, web.in_SPINV_010.IdCategoria, web.in_SPINV_010.IdLinea, web.in_SPINV_010.IdGrupo, 

@@ -1,4 +1,4 @@
-﻿CREATE VIEW WEB.VWIMP_003
+﻿CREATE VIEW web.VWIMP_003
 AS
 SELECT        imp_orden_compra_ext_det.IdEmpresa, imp_orden_compra_ext_det.IdOrdenCompra_ext, imp_orden_compra_ext_det.Secuencia, CASE WHEN ProdHijo.IdProducto_padre IS NULL 
                          THEN prodHijo.IdProducto ELSE prodPadre.IdProducto END AS IdProducto, ProdHijo.pr_descripcion, ProdHijo.IdPresentacion, in_presentacion.nom_presentacion, ProdHijo.IdMarca, in_Marca.Descripcion AS NomMarca, 
