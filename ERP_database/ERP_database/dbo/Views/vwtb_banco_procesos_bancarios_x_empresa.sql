@@ -1,9 +1,9 @@
 ﻿CREATE VIEW dbo.vwtb_banco_procesos_bancarios_x_empresa
 AS
 SELECT        dbo.tb_banco_procesos_bancarios_x_empresa.IdEmpresa, dbo.tb_banco_procesos_bancarios_x_empresa.IdProceso, dbo.tb_banco_procesos_bancarios_x_empresa.IdProceso_bancario_tipo, 
-                         dbo.tb_banco_procesos_bancarios_x_empresa.IdBanco, dbo.tb_banco_procesos_bancarios_x_empresa.Codigo_Empresa, dbo.tb_banco.ba_descripcion, dbo.tb_banco.CodigoLegal, 
-                         dbo.tb_banco_procesos_bancarios_x_empresa.NombreProceso, dbo.tb_banco_procesos_bancarios_x_empresa.IdTipoNota, dbo.tb_banco_procesos_bancarios_x_empresa.Se_contabiliza, 
-                         dbo.tb_banco_procesos_bancarios_x_empresa.estado
+                         dbo.tb_banco_procesos_bancarios_x_empresa.Codigo_Empresa, dbo.tb_banco.ba_descripcion, dbo.tb_banco.CodigoLegal, dbo.tb_banco_procesos_bancarios_x_empresa.NombreProceso, 
+                         dbo.tb_banco_procesos_bancarios_x_empresa.IdTipoNota, dbo.tb_banco_procesos_bancarios_x_empresa.Se_contabiliza, dbo.tb_banco_procesos_bancarios_x_empresa.estado, dbo.tb_banco.IdBanco, 
+                         dbo.tb_banco_procesos_bancarios_x_empresa.IdBanco AS Expr1
 FROM            dbo.tb_banco INNER JOIN
                          dbo.tb_banco_procesos_bancarios_x_empresa ON dbo.tb_banco.IdBanco = dbo.tb_banco_procesos_bancarios_x_empresa.IdBanco
 GO
@@ -16,7 +16,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[58] 4[3] 2[21] 3) )"
+         Configuration = "(H (1[67] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -85,9 +85,9 @@ Begin DesignProperties =
          Begin Table = "tb_banco"
             Begin Extent = 
                Top = 5
-               Left = 16
+               Left = 507
                Bottom = 245
-               Right = 250
+               Right = 744
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -95,9 +95,9 @@ Begin DesignProperties =
          Begin Table = "tb_banco_procesos_bancarios_x_empresa"
             Begin Extent = 
                Top = 0
-               Left = 330
+               Left = 81
                Bottom = 306
-               Right = 548
+               Right = 416
             End
             DisplayFlags = 280
             TopColumn = 1
@@ -109,15 +109,19 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
+      Begin ColumnWidths = 13
          Width = 284
          Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
-         Width = 1500
+         Width = 2580
          Width = 1500
          Width = 2640
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
          Width = 1500
       End
    End
@@ -140,4 +144,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwtb_banco_procesos_bancarios_x_empresa';
+
+
 
