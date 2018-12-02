@@ -30,6 +30,6 @@ namespace Core.Erp.Data
         public string pe_cedulaRuc { get; set; }
         public string IdTipoDocumento { get; set; }
         public int IdSucursal { get; set; }
-        public decimal Secuencia { get; set; }
+        public int Secuencia { get; set; }
     }
 }

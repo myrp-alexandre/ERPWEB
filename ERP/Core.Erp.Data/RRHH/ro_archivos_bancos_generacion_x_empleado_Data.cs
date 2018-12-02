@@ -27,6 +27,7 @@ namespace Core.Erp.Data.RRHH
                                  IdEmpleado = q.IdEmpleado,
                                  IdSucursal = q.IdSucursal,
                                  Valor = q.Valor,
+                                 ValorCancelado=q.Valor,
                                   pagacheque=q.pagacheque,
                                   em_tipoCta=q.em_tipoCta,
                                   em_NumCta=q.em_NumCta,

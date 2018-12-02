@@ -213,6 +213,7 @@ namespace Core.Erp.Bus.RRHH
                             File += "0900000000";
                         }
                     }
+                    secuencia++;
                     File += "\n";
                     
 

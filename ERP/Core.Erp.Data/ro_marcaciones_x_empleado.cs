@@ -35,8 +35,8 @@ namespace Core.Erp.Data
         public string nom_pc { get; set; }
         public string Motivo_Anu { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_marcaciones_tipo ro_marcaciones_tipo { get; set; }
         public virtual ro_Nomina_Tipo ro_Nomina_Tipo { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }
