@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_Rubro";
-        settings.CallbackRouteValues = new { Controller = "Rubro", Action = "GridViewPartial_Rubro" };
+        settings.CallbackRouteValues = new { Controller = "RubroPresupuesto", Action = "GridViewPartial_Rubro" };
         settings.KeyFieldName = "IdRubro";
         settings.Width = Unit.Percentage(100);
 
@@ -86,7 +86,7 @@ settings.HtmlRowPrepared = (s, e) =>
 
         settings.Columns.Add("IdRubro", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("IdCtaCble", "Cuenta Contable").Width = Unit.Percentage(40);
-        settings.Columns.Add("Descripcion", "Descripcin").Width = Unit.Percentage(20);
+        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
