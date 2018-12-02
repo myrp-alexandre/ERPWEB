@@ -169,18 +169,33 @@ namespace Core.Erp.Bus.RRHH
                 var info_empresa = odata_empresa.get_info(info.IdEmpresa);
                 var info_cuenta = odata_cuenta.get_info(info.IdEmpresa,Convert.ToInt32( info.IdCuentaBancaria));
                 string File = "";
+                double valor= 0;
+                double valorEntero = 0;
+                double valorDecimal = 0;
+                int secuencia = 0;
+                
                 foreach (var item in info.detalle)
                 {
-                    double valor = Convert.ToDouble(item.Valor);
-                    double valorEntero = Math.Floor(valor);
-                    double valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
-
                     if (item.em_tipoCta == "VRT")
                     {
-                        File += "C";
-                        File += Info_proceso.Codigo_Empresa;
-                        File += info_empresa.em_nombre;
+                        if (secuencia == 0)
+                        {
+                        valor = Convert.ToDouble(info.detalle.Sum(v => v.Saldo));
+                        valorEntero = Math.Floor(valor);
+                        valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+
+                            File += "C";
+                            File += Info_proceso.Codigo_Empresa;
+                            File += info_empresa.em_nombre;
+                            File += "C";
+
+                        }
+                        else
+                        {
+
+                        }
                     }
+                    
 
                 }
 
