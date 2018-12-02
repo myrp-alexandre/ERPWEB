@@ -238,7 +238,10 @@ namespace Core.Erp.Data.Facturacion
                     Estado = info.Estado = "A",
                     esta_impresa = info.esta_impresa,
                     valor_abono = info.valor_abono,
-                    IdUsuario = info.IdUsuario
+                    IdUsuario = info.IdUsuario,
+                    vt_Total = info.vt_Total,
+                    vt_Cambio = info.vt_Cambio,
+                    vt_ValorEfectivo = info.vt_ValorEfectivo
                 });
                 #endregion
 
@@ -707,6 +710,9 @@ namespace Core.Erp.Data.Facturacion
                 Entity.vt_tipo_venta = info.vt_tipo_venta;
                 Entity.fecha_primera_cuota = info.fecha_primera_cuota;
                 Entity.valor_abono = info.valor_abono;
+                Entity.vt_Total = info.vt_Total;
+                Entity.vt_Cambio = info.vt_Cambio;
+                Entity.vt_ValorEfectivo = info.vt_ValorEfectivo;
 
                 Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                 Entity.Fecha_UltMod = DateTime.Now;

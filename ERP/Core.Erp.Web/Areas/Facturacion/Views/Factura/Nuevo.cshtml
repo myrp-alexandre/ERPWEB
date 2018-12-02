@@ -464,7 +464,7 @@
         }
         else
         {
-        
+
         if (IdCliente.GetValue() > 0) {
             var datos = {
             IdSucursal: $("#IdSucursal").val(),
@@ -489,7 +489,7 @@
         $("#ProformasModal").modal("show");
             }
     }
-    
+
     }
 
     function AddProformas() {
@@ -549,38 +549,55 @@
 
 @using (Html.BeginForm("Nuevo", "Factura", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa"})
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.vt_tipoDoc)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-    
-        <div class="row" id="DivSuperAdmin" hidden>
-            <div class="col-md-6">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="">Usuario administrador</label>
-                        @Html.TextBoxFor(q => q.IdUsuarioAut, new { @class = "form-control", @id = "IdUsuarioAut" })
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="">Contraseña</label>
-                        @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @id = "contrasena_admin" })
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <div class="alert alert-warning alert-dismissible" id="DivMensajeCliente" hidden>
-                        <h4>
-                            <i class="icon fa fa-warning"></i> <label id="txtMensajeCliente">MENSAJE</label>
-                        </h4>
-                    </div>
+    <div class="row" id="DivCobros" hidden>
+        <div class="col-md-6">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Usuario administrador</label>
+                    @Html.TextBoxFor(q => q.IdUsuarioAut, new { @class = "form-control", @id = "IdUsuarioAut" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Contraseña</label>
+                    @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @id = "contrasena_admin" })
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="row" id="DivSuperAdmin" hidden>
+        <div class="col-md-6">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Usuario administrador</label>
+                    @Html.TextBoxFor(q => q.IdUsuarioAut, new { @class = "form-control", @id = "IdUsuarioAut" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Contraseña</label>
+                    @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @id = "contrasena_admin" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible" id="DivMensajeCliente" hidden>
+                    <h4>
+                        <i class="icon fa fa-warning"></i> <label id="txtMensajeCliente">MENSAJE</label>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     if (ViewBag.mensaje != null)
@@ -752,155 +769,152 @@
                     @Html.ValidationMessageFor(q => q.vt_NumFactura, "", new { @class = "text-danger" })
                 </div>
             </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="IdProforma">    </label>
-                        @Html.TextBoxFor(q => q.IdProforma, new { @class = "form-control", @id = "IdProforma", @placeholder = "# Proforma"})
-                        @Html.ValidationMessageFor(q => q.IdProforma, "", new { @class = "text-danger" })
-                    </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdProforma">    </label>
+                    @Html.TextBoxFor(q => q.IdProforma, new { @class = "form-control", @id = "IdProforma", @placeholder = "# Proforma" })
+                    @Html.ValidationMessageFor(q => q.IdProforma, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-1">
-                    <div class="form-group">
-                        <label for="btn_buscar">                    </label>
-                        <button type="button" class="btn btn-primary form-control" id="btn_buscar" onclick="MostrarModalProformas();" title="Buscar proformas">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="btn_buscar">                    </label>
+                    <button type="button" class="btn btn-primary form-control" id="btn_buscar" onclick="MostrarModalProformas();" title="Buscar proformas">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </div>
-                <div class="col-md-1">
-                    <div class="form-group">
-                        <label for="btn_desbloquear">         </label>
-                        <button type="button" class="btn btn-primary form-control" id="btn_desbloquear" onclick="MostrarModalDesbloqueo();" title="Desbloquear precios">
-                            <i class="fa fa-lock"></i>
-                        </button>
-                        <label id="EstadoDesbloqueo" class="text-danger" style="margin-left:5px;" hidden></label>
-                    </div>
-                </div>
-        </div>
-
-            <div class="col-md-6">
-                <div id="Tabs" role="tabpanel">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="active">
-                            <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Datos generales</a>
-                        </li>
-                        <li>
-                            <a href="#tab_cuotas" aria-controls="lote" role="tab" data-toggle="tab" id="link_cuotas">Detalle de cuotas</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" style="padding-top: 5px">
-                        <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="IdTerminoPago">Termino pago*</label>
-                                    @Html.DropDownListFor(q => q.vt_tipo_venta, new SelectList(ViewBag.lst_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "vt_tipo_venta" })
-                                    @Html.ValidationMessageFor(q => q.vt_tipo_venta, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="IdVendedor">Vendedor*</label>
-                                    @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor"), new { @class = "form-control", @id = "IdVendedor" })
-                                    @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="pf_fecha">Fecha*</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        @Html.DevExpress().DateEditFor(q => q.vt_fecha, settings =>
-                                       {
-                                           settings.Name = "vt_fecha";
-                                           settings.Properties.UseMaskBehavior = true;
-                                           settings.Properties.EditFormat = EditFormat.Date;
-                                           settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                           settings.Properties.ClientSideEvents.DateChanged = "function(s,e){cargar_fecha_vencimiento();}";
-                                       }).GetHtml()
-                                        @Html.ValidationMessageFor(q => q.vt_fecha, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="pf_plazo">Plazo*</label>
-                                    @Html.TextBoxFor(q => q.vt_plazo, new { @class = "form-control", @id = "vt_plazo" })
-                                    @Html.ValidationMessageFor(q => q.vt_plazo, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="pf_fecha_vcto">Vencimiento*</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        @Html.DevExpress().DateEditFor(q => q.vt_fech_venc, settings =>
-                                       {
-                                           settings.Name = "vt_fech_venc";
-                                           settings.Properties.UseMaskBehavior = true;
-                                           settings.Properties.EditFormat = EditFormat.Date;
-                                           settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                       }).GetHtml()
-                                        @Html.ValidationMessageFor(q => q.vt_fech_venc, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="pf_observacion">Observación</label>
-                                    @Html.TextBoxFor(q => q.vt_Observacion, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.vt_Observacion, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="fecha_primera_cuota">Fecha primer cuota</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                @Html.DevExpress().DateEditFor(q => q.fecha_primera_cuota, settings =>
-                                          {
-                                              settings.Name = "fecha_primera_cuota";
-                                              settings.Properties.UseMaskBehavior = true;
-                                              settings.Properties.EditFormat = EditFormat.Date;
-                                              settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                              settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                              settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                              settings.Properties.ClientSideEvents.DateChanged = "function(s,e){CargarCuotas();}";
-                                          }).GetHtml()
-                                                @Html.ValidationMessageFor(q => q.fecha_primera_cuota, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Valor abono</label>
-                                            @Html.TextBoxFor(q => q.valor_abono, new { @class = "form-control", @id = "valor_abono" })
-                                        </div>
-                                    </div>
-                                </div>
-                                @Html.Action("GridViewPartial_factura_cuotas")
-                                <br />
-                            </div>
-                        </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="btn_desbloquear">         </label>
+                    <button type="button" class="btn btn-primary form-control" id="btn_desbloquear" onclick="MostrarModalDesbloqueo();" title="Desbloquear precios">
+                        <i class="fa fa-lock"></i>
+                    </button>
+                    <label id="EstadoDesbloqueo" class="text-danger" style="margin-left:5px;" hidden></label>
                 </div>
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div id="Tabs" role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active">
+                        <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Datos generales</a>
+                    </li>
+                    <li>
+                        <a href="#tab_cuotas" aria-controls="lote" role="tab" data-toggle="tab" id="link_cuotas">Detalle de cuotas</a>
+                    </li>
+                </ul>
+                <div class="tab-content" style="padding-top: 5px">
+                    <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="IdTerminoPago">Termino pago*</label>
+                                @Html.DropDownListFor(q => q.vt_tipo_venta, new SelectList(ViewBag.lst_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "vt_tipo_venta" })
+                                @Html.ValidationMessageFor(q => q.vt_tipo_venta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdVendedor">Vendedor*</label>
+                                @Html.DropDownListFor(q => q.IdVendedor, new SelectList(ViewBag.lst_vendedor, "IdVendedor", "Ve_Vendedor"), new { @class = "form-control", @id = "IdVendedor" })
+                                @Html.ValidationMessageFor(q => q.IdVendedor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="pf_fecha">Fecha*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.vt_fecha, settings =>
+                                   {
+                                       settings.Name = "vt_fecha";
+                                       settings.Properties.UseMaskBehavior = true;
+                                       settings.Properties.EditFormat = EditFormat.Date;
+                                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.Properties.ClientSideEvents.DateChanged = "function(s,e){cargar_fecha_vencimiento();}";
+                                   }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.vt_fecha, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="pf_plazo">Plazo*</label>
+                                @Html.TextBoxFor(q => q.vt_plazo, new { @class = "form-control", @id = "vt_plazo" })
+                                @Html.ValidationMessageFor(q => q.vt_plazo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="pf_fecha_vcto">Vencimiento*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.vt_fech_venc, settings =>
+                                   {
+                                       settings.Name = "vt_fech_venc";
+                                       settings.Properties.UseMaskBehavior = true;
+                                       settings.Properties.EditFormat = EditFormat.Date;
+                                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.vt_fech_venc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="pf_observacion">Observación</label>
+                                @Html.TextBoxFor(q => q.vt_Observacion, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.vt_Observacion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fecha_primera_cuota">Fecha primer cuota</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        @Html.DevExpress().DateEditFor(q => q.fecha_primera_cuota, settings =>
+                                  {
+                                      settings.Name = "fecha_primera_cuota";
+                                      settings.Properties.UseMaskBehavior = true;
+                                      settings.Properties.EditFormat = EditFormat.Date;
+                                      settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                      settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                      settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                      settings.Properties.ClientSideEvents.DateChanged = "function(s,e){CargarCuotas();}";
+                                  }).GetHtml()
+                                        @Html.ValidationMessageFor(q => q.fecha_primera_cuota, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Valor abono</label>
+                                    @Html.TextBoxFor(q => q.valor_abono, new { @class = "form-control", @id = "valor_abono" })
+                                </div>
+                            </div>
+                        </div>
+                        @Html.Action("GridViewPartial_factura_cuotas")
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
