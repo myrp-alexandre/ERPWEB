@@ -22,7 +22,6 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  {
                                      IdCobro_tipo = q.IdCobro_tipo,
                                      tc_abreviatura = q.tc_abreviatura,
-                                     tc_Orden = q.tc_Orden,
                                      tc_descripcion = q.tc_descripcion,
                                      Estado = q.Estado,
 
@@ -35,7 +34,6 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  {
                                      IdCobro_tipo = q.IdCobro_tipo,
                                      tc_abreviatura = q.tc_abreviatura,
-                                     tc_Orden = q.tc_Orden,
                                      tc_descripcion = q.tc_descripcion,
                                      Estado = q.Estado,
 
@@ -64,7 +62,6 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  {
                                      IdCobro_tipo = q.IdCobro_tipo,
                                      tc_abreviatura = q.tc_abreviatura,
-                                     tc_Orden = q.tc_Orden,
                                      tc_descripcion = q.tc_descripcion,
                                      Estado = q.Estado
                                  }).ToList();
@@ -76,7 +73,6 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  {
                                      IdCobro_tipo = q.IdCobro_tipo,
                                      tc_abreviatura = q.tc_abreviatura,
-                                     tc_Orden = q.tc_Orden,
                                      tc_descripcion = q.tc_descripcion,
                                      Estado = q.Estado
                                  }).ToList();
@@ -107,22 +103,13 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         ESRetenIVA = Entity.ESRetenIVA,
                         IdMotivo_tipo_cobro = Entity.IdMotivo_tipo_cobro,
                         tc_abreviatura = Entity.tc_abreviatura,
-                        tc_Afecha_bool = Entity.tc_Afecha == "S" ? true : false,
-                        tc_cobroDirecto_bool = Entity.tc_cobroDirecto == "S" ? true:false,
-                        tc_cobroInDirecto_bool = Entity.tc_cobroInDirecto == "S" ? true : false,
                         tc_descripcion = Entity.tc_descripcion,
-                        tc_docXCobrar_bool = Entity.tc_docXCobrar == "S" ? true : false,
-                        tc_EsCheque_bool = Entity.tc_EsCheque == "S" ? true : false,
-                        tc_generaNCAuto_bool = Entity.tc_generaNCAuto == "S" ? true : false,
                         tc_Que_Tipo_Registro_Genera = Entity.tc_Que_Tipo_Registro_Genera,
-                        tc_interno_bool = Entity.tc_interno == "S" ? true : false,
-                        tc_seCobra_bool = Entity.tc_seCobra == "S" ? true : false,
-                        tc_seMuestraManCheque_bool = Entity.tc_seMuestraManCheque == "S" ? true : false,
-                        tc_SePuede_Depositar_bool = Entity.tc_SePuede_Depositar == "S" ? true : false,
                         tc_Tomar_Cta_Cble_De = Entity.tc_Tomar_Cta_Cble_De,
-                        tc_Orden = Entity.tc_Orden,
                         Estado = Entity.Estado,
-                        PorcentajeRet = Entity.PorcentajeRet
+                        PorcentajeRet = Entity.PorcentajeRet,
+                        EsTarjetaCredito = Entity.EsTarjetaCredito,
+                        SeDeposita = Entity.SeDeposita                        
                     };
                 }
                 return info;
@@ -168,23 +155,13 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         ESRetenIVA = info.ESRetenIVA_bool == true ? "S" : "N",
                         IdMotivo_tipo_cobro = info.IdMotivo_tipo_cobro,
                         tc_abreviatura = info.tc_abreviatura,
-                        tc_Afecha = info.tc_Afecha_bool == true ? "S" : "N",
-                        tc_cobroDirecto = info.tc_cobroDirecto_bool == true ? "S" : "N",
-                        tc_cobroInDirecto = info.tc_cobroInDirecto_bool == true ? "S" : "N",
                         tc_descripcion = info.tc_descripcion,
-                        tc_docXCobrar = info.tc_docXCobrar_bool == true ? "S" : "N",
-                        tc_EsCheque = info.tc_EsCheque_bool == true ? "S" : "N",
-                        tc_generaNCAuto = info.tc_generaNCAuto_bool == true ? "S" : "N",
                         tc_Que_Tipo_Registro_Genera = info.tc_Que_Tipo_Registro_Genera,
-                        tc_interno = info.tc_interno_bool == true ? "S" : "N",
-                        tc_seCobra = info.tc_seCobra_bool == true ? "S" : "N",
-                        tc_seMuestraManCheque = info.tc_seMuestraManCheque_bool == true ? "S" : "N",
-                        tc_SePuede_Depositar = info.tc_SePuede_Depositar_bool == true ? "S" : "N",
                         tc_Tomar_Cta_Cble_De = info.tc_Tomar_Cta_Cble_De,
-                        tc_Orden = info.tc_Orden,
                         Estado = info.Estado="A",
                         PorcentajeRet = info.PorcentajeRet,
-                         
+                        EsTarjetaCredito = info.EsTarjetaCredito,
+                        SeDeposita = info.SeDeposita,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     };
@@ -221,22 +198,12 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     Entity.ESRetenFTE = info.ESRetenFTE_bool == true ? "S" : "N";
                     Entity.ESRetenIVA = info.ESRetenIVA_bool == true ? "S" : "N";
                     Entity.tc_abreviatura = info.tc_abreviatura;
-                    Entity.tc_Afecha = info.tc_Afecha_bool == true ? "S" : "N";
-                    Entity.tc_cobroDirecto = info.tc_cobroDirecto_bool == true ? "S" : "N";
-                    Entity.tc_cobroInDirecto = info.tc_cobroInDirecto_bool == true ? "S" : "N";
                     Entity.tc_descripcion = info.tc_descripcion;
-                    Entity.tc_docXCobrar = info.tc_docXCobrar_bool == true ? "S" : "N";
-                    Entity.tc_EsCheque = info.tc_EsCheque_bool == true ? "S" : "N";
-                    Entity.tc_generaNCAuto = info.tc_generaNCAuto_bool == true ? "S" : "N";
                     Entity.tc_Que_Tipo_Registro_Genera = info.tc_Que_Tipo_Registro_Genera;
-                    Entity.tc_interno = info.tc_interno_bool == true ? "S" : "N";
-                    Entity.tc_seCobra = info.tc_seCobra_bool == true ? "S" : "N";
-                    Entity.tc_seMuestraManCheque = info.tc_seMuestraManCheque_bool == true ? "S" : "N";
-                    Entity.tc_SePuede_Depositar = info.tc_SePuede_Depositar_bool == true ? "S" : "N";
                     Entity.tc_Tomar_Cta_Cble_De = info.tc_Tomar_Cta_Cble_De;
-                    Entity.tc_Orden = info.tc_Orden;
                     Entity.PorcentajeRet = info.PorcentajeRet;
-
+                    Entity.EsTarjetaCredito = info.EsTarjetaCredito;
+                    Entity.SeDeposita = info.SeDeposita;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod;

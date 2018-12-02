@@ -53,8 +53,8 @@ namespace Core.Erp.Data
         public string MotiAnula { get; set; }
         public Nullable<int> IdTipoNotaCredito { get; set; }
     
-        public virtual cxc_cobro_tipo cxc_cobro_tipo { get; set; }
         public virtual ICollection<cxc_cobro_det> cxc_cobro_det { get; set; }
         public virtual ICollection<cxc_cobro_x_ct_cbtecble> cxc_cobro_x_ct_cbtecble { get; set; }
+        public virtual cxc_cobro_tipo cxc_cobro_tipo { get; set; }
     }
 }

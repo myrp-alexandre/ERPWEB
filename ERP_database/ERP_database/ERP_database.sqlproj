@@ -647,7 +647,6 @@
     <Build Include="dbo\Views\vwcp_retencion_x_RET_FT.sql" />
     <Build Include="dbo\Views\vwAf_Valores_Depre_Contabilizar.sql" />
     <Build Include="dbo\Views\vwcp_retencion_x_RET_IVA.sql" />
-    <Build Include="dbo\Views\vwRo_ConfLiqui_X_Empleado.sql" />
     <Build Include="dbo\Views\vwcp_Retenciones_x_tipo_impresion.sql" />
     <Build Include="dbo\Views\vwAf_Venta_Activo.sql" />
     <Build Include="dbo\Views\vwRo_Contrato.sql" />
@@ -729,7 +728,6 @@
     <Build Include="dbo\Views\vwRo_empleado_x_Proyeccion_Gastos_Personales.sql" />
     <Build Include="dbo\Views\vwCxc_Catalogo_IdAuto_numeric.sql" />
     <Build Include="dbo\Views\vwba_MoviCaja_Depositados.sql" />
-    <Build Include="dbo\Views\vwro_empleadoXdepXcargo.sql" />
     <Build Include="dbo\Views\vwcxc_cobro.sql" />
     <Build Include="dbo\Views\vwba_notasDebCre_masivo.sql" />
     <Build Include="dbo\Views\vwRo_FormaPago_Prestamo.sql" />
@@ -800,7 +798,6 @@
     <Build Include="dbo\Views\vwcxc_anticipos_x_cruzar.sql" />
     <Build Include="dbo\Views\vwRo_Parametros_Contables.sql" />
     <Build Include="dbo\Views\vwcxc_cartera_x_cobrar.sql" />
-    <Build Include="dbo\Views\vwRo_PeriocidadPago.sql" />
     <Build Include="dbo\Views\vwin_Ing_Egr_Inven_x_in_movi_inve.sql" />
     <Build Include="dbo\Views\vwcxc_cobro_det.sql" />
     <Build Include="dbo\Views\vwRo_periodo_x_ro_Nomina_TipoLiqui.sql" />
@@ -957,10 +954,8 @@
     <Build Include="dbo\Stored Procedures\spROL_Nomina_a_Eventuales.sql" />
     <Build Include="dbo\Stored Procedures\spROL_Nomina_a_Liquidar.sql" />
     <Build Include="dbo\Stored Procedures\spROL_NominaGeneral.sql" />
-    <Build Include="dbo\Stored Procedures\spROL_Rpt001.sql" />
     <Build Include="dbo\Stored Procedures\spcp_Get_Data_orden_pago_con_cancelacion_data.sql" />
     <Build Include="dbo\Stored Procedures\spin_Producto_validar_anulacion.sql" />
-    <Build Include="dbo\Stored Procedures\spROL_Rpt005.sql" />
     <Build Include="dbo\Stored Procedures\spRo_LiquidarEmpleado.sql" />
     <Build Include="dbo\Stored Procedures\spseg_corregir_menu.sql" />
     <Build Include="web\Stored Procedures\SPACTF_004_detalle.sql" />
@@ -1090,6 +1085,12 @@
     <Build Include="dbo\Views\vwfa_CambioProductoDet_FacturasConMovimiento.sql" />
     <Build Include="web\Views\VWCOMP_001.sql" />
     <Build Include="EntidadRegulatoria\Stored Procedures\spROL_DecimosCSV.sql" />
+    <Build Include="dbo\Tables\pre_rubro.sql" />
+    <Build Include="dbo\Tables\pre_Grupo_x_seg_usuario.sql" />
+    <Build Include="dbo\Tables\pre_Grupo.sql" />
+    <Build Include="dbo\Views\vwRo_rol_detalle_saldo_por_pagar.sql" />
+    <Build Include="dbo\Views\vwro_archivos_bancos_generacion.sql" />
+    <Build Include="dbo\Views\vwpre_rubro.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

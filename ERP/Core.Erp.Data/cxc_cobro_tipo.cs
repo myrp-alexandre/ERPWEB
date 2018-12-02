@@ -23,34 +23,22 @@ namespace Core.Erp.Data
     
         public string IdCobro_tipo { get; set; }
         public string tc_descripcion { get; set; }
-        public string tc_EsCheque { get; set; }
-        public string tc_Afecha { get; set; }
-        public string tc_interno { get; set; }
         public string Estado { get; set; }
-        public string tc_generaNCAuto { get; set; }
         public string tc_abreviatura { get; set; }
-        public string tc_cobroDirecto { get; set; }
-        public string tc_cobroInDirecto { get; set; }
-        public string tc_docXCobrar { get; set; }
-        public int tc_Orden { get; set; }
-        public string tc_seMuestraManCheque { get; set; }
         public string tc_Que_Tipo_Registro_Genera { get; set; }
         public string tc_Tomar_Cta_Cble_De { get; set; }
-        public string tc_seCobra { get; set; }
-        public string IdEstadoCobro_Inicial { get; set; }
         public string ESRetenIVA { get; set; }
         public string ESRetenFTE { get; set; }
-        public Nullable<double> PorcentajeRet { get; set; }
+        public double PorcentajeRet { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
-        public string tc_SePuede_Depositar { get; set; }
         public string IdMotivo_tipo_cobro { get; set; }
+        public bool EsTarjetaCredito { get; set; }
+        public bool SeDeposita { get; set; }
     
         public virtual ICollection<cxc_cobro> cxc_cobro { get; set; }
         public virtual ICollection<cxc_cobro_det> cxc_cobro_det { get; set; }

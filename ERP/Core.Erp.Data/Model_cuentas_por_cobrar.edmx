@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model_cuentas_por_cobrar.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model_cuentas_por_cobrar.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cxc_Catalogo">
           <Key>
             <PropertyRef Name="IdCatalogo" />
@@ -98,34 +98,22 @@
           </Key>
           <Property Name="IdCobro_tipo" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="tc_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="tc_EsCheque" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="tc_Afecha" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="tc_interno" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="tc_generaNCAuto" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="tc_abreviatura" Type="char" MaxLength="5" Nullable="false" />
-          <Property Name="tc_cobroDirecto" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="tc_cobroInDirecto" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="tc_docXCobrar" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="tc_Orden" Type="int" Nullable="false" />
-          <Property Name="tc_seMuestraManCheque" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="tc_abreviatura" Type="varchar" MaxLength="20" />
           <Property Name="tc_Que_Tipo_Registro_Genera" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="tc_Tomar_Cta_Cble_De" Type="varchar" MaxLength="20" />
-          <Property Name="tc_seCobra" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="IdEstadoCobro_Inicial" Type="varchar" MaxLength="5" />
-          <Property Name="ESRetenIVA" Type="char" MaxLength="1" />
-          <Property Name="ESRetenFTE" Type="char" MaxLength="1" />
-          <Property Name="PorcentajeRet" Type="float" />
+          <Property Name="tc_Tomar_Cta_Cble_De" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ESRetenIVA" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ESRetenFTE" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="PorcentajeRet" Type="float" Nullable="false" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_Transac" Type="datetime" />
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltMod" Type="datetime" />
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
-          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
-          <Property Name="ip" Type="varchar" MaxLength="50" />
-          <Property Name="tc_SePuede_Depositar" Type="char" MaxLength="1" />
           <Property Name="IdMotivo_tipo_cobro" Type="varchar" MaxLength="15" />
+          <Property Name="EsTarjetaCredito" Type="bit" Nullable="false" />
+          <Property Name="SeDeposita" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="cxc_cobro_tipo_motivo">
           <Key>
@@ -221,8 +209,8 @@
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
           <Property Name="FechaUltMod" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_cartera_x_cobrar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwcxc_cartera_x_cobrar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcxc_cartera_x_cobrar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -267,8 +255,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_cartera_x_co
           <Property Name="em_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_comisiones_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwcxc_liquidacion_comisiones_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcxc_liquidacion_comisiones_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -333,8 +321,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_
           <Property Name="TotalLiquidacion" Type="float" Nullable="false" />
           <Property Name="NoComisiona" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_comisiones_det_x_comisionar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwcxc_liquidacion_comisiones_det_x_comisionar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcxc_liquidacion_comisiones_det_x_comisionar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -382,8 +370,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.dbo.vwcxc_liquidacion_
           <Property Name="IdVendedor" Type="int" Nullable="false" />
           <Property Name="PorComision" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwcxc_cobro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcxc_cobro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -410,8 +398,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro' no ti
           <Property Name="cr_NumDocumento" Type="varchar" MaxLength="100" />
           <Property Name="nom_Motivo_tipo_cobro" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwcxc_cobro_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcxc_cobro_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -451,8 +439,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det' n
           <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="1000" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det_retencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwcxc_cobro_det_retencion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcxc_cobro_det_retencion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -482,8 +470,8 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_det_re
           <Property Name="cr_NumDocumento" Type="varchar" MaxLength="100" />
           <Property Name="cr_fecha" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_retencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwcxc_cobro_para_retencion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcxc_cobro_para_retencion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -635,176 +623,176 @@ advertencia 6002: La tabla o vista 'DBERP_RAPI_PRODUCCION.web.vwcxc_cobro_para_r
           <EntitySet Name="cxc_Parametro" EntityType="Self.cxc_Parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwcxc_cartera_x_cobrar" EntityType="Self.vwcxc_cartera_x_cobrar" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwcxc_cartera_x_cobrar].[IdEmpresa] AS [IdEmpresa], 
-[vwcxc_cartera_x_cobrar].[IdSucursal] AS [IdSucursal], 
-[vwcxc_cartera_x_cobrar].[IdBodega] AS [IdBodega], 
-[vwcxc_cartera_x_cobrar].[vt_tipoDoc] AS [vt_tipoDoc], 
-[vwcxc_cartera_x_cobrar].[vt_NunDocumento] AS [vt_NunDocumento], 
-[vwcxc_cartera_x_cobrar].[Referencia] AS [Referencia], 
-[vwcxc_cartera_x_cobrar].[IdComprobante] AS [IdComprobante], 
-[vwcxc_cartera_x_cobrar].[CodComprobante] AS [CodComprobante], 
-[vwcxc_cartera_x_cobrar].[Su_Descripcion] AS [Su_Descripcion], 
-[vwcxc_cartera_x_cobrar].[IdCliente] AS [IdCliente], 
-[vwcxc_cartera_x_cobrar].[vt_fecha] AS [vt_fecha], 
-[vwcxc_cartera_x_cobrar].[vt_total] AS [vt_total], 
-[vwcxc_cartera_x_cobrar].[Saldo] AS [Saldo], 
-[vwcxc_cartera_x_cobrar].[TotalxCobrado] AS [TotalxCobrado], 
-[vwcxc_cartera_x_cobrar].[Bodega] AS [Bodega], 
-[vwcxc_cartera_x_cobrar].[vt_Subtotal] AS [vt_Subtotal], 
-[vwcxc_cartera_x_cobrar].[vt_iva] AS [vt_iva], 
-[vwcxc_cartera_x_cobrar].[vt_fech_venc] AS [vt_fech_venc], 
-[vwcxc_cartera_x_cobrar].[dc_ValorRetFu] AS [dc_ValorRetFu], 
-[vwcxc_cartera_x_cobrar].[dc_ValorRetIva] AS [dc_ValorRetIva], 
-[vwcxc_cartera_x_cobrar].[CodCliente] AS [CodCliente], 
-[vwcxc_cartera_x_cobrar].[NomCliente] AS [NomCliente], 
-[vwcxc_cartera_x_cobrar].[em_nombre] AS [em_nombre], 
-[vwcxc_cartera_x_cobrar].[Estado] AS [Estado]
-FROM [dbo].[vwcxc_cartera_x_cobrar] AS [vwcxc_cartera_x_cobrar]</DefiningQuery>
+    [vwcxc_cartera_x_cobrar].[IdEmpresa] AS [IdEmpresa], 
+    [vwcxc_cartera_x_cobrar].[IdSucursal] AS [IdSucursal], 
+    [vwcxc_cartera_x_cobrar].[IdBodega] AS [IdBodega], 
+    [vwcxc_cartera_x_cobrar].[vt_tipoDoc] AS [vt_tipoDoc], 
+    [vwcxc_cartera_x_cobrar].[vt_NunDocumento] AS [vt_NunDocumento], 
+    [vwcxc_cartera_x_cobrar].[Referencia] AS [Referencia], 
+    [vwcxc_cartera_x_cobrar].[IdComprobante] AS [IdComprobante], 
+    [vwcxc_cartera_x_cobrar].[CodComprobante] AS [CodComprobante], 
+    [vwcxc_cartera_x_cobrar].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwcxc_cartera_x_cobrar].[IdCliente] AS [IdCliente], 
+    [vwcxc_cartera_x_cobrar].[vt_fecha] AS [vt_fecha], 
+    [vwcxc_cartera_x_cobrar].[vt_total] AS [vt_total], 
+    [vwcxc_cartera_x_cobrar].[Saldo] AS [Saldo], 
+    [vwcxc_cartera_x_cobrar].[TotalxCobrado] AS [TotalxCobrado], 
+    [vwcxc_cartera_x_cobrar].[Bodega] AS [Bodega], 
+    [vwcxc_cartera_x_cobrar].[vt_Subtotal] AS [vt_Subtotal], 
+    [vwcxc_cartera_x_cobrar].[vt_iva] AS [vt_iva], 
+    [vwcxc_cartera_x_cobrar].[vt_fech_venc] AS [vt_fech_venc], 
+    [vwcxc_cartera_x_cobrar].[dc_ValorRetFu] AS [dc_ValorRetFu], 
+    [vwcxc_cartera_x_cobrar].[dc_ValorRetIva] AS [dc_ValorRetIva], 
+    [vwcxc_cartera_x_cobrar].[CodCliente] AS [CodCliente], 
+    [vwcxc_cartera_x_cobrar].[NomCliente] AS [NomCliente], 
+    [vwcxc_cartera_x_cobrar].[em_nombre] AS [em_nombre], 
+    [vwcxc_cartera_x_cobrar].[Estado] AS [Estado]
+    FROM [dbo].[vwcxc_cartera_x_cobrar] AS [vwcxc_cartera_x_cobrar]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcxc_liquidacion_comisiones_det" EntityType="Self.vwcxc_liquidacion_comisiones_det" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwcxc_liquidacion_comisiones_det].[IdEmpresa] AS [IdEmpresa], 
-[vwcxc_liquidacion_comisiones_det].[IdLiquidacion] AS [IdLiquidacion], 
-[vwcxc_liquidacion_comisiones_det].[Secuencia] AS [Secuencia], 
-[vwcxc_liquidacion_comisiones_det].[IdSucursal] AS [IdSucursal], 
-[vwcxc_liquidacion_comisiones_det].[IdBodega] AS [IdBodega], 
-[vwcxc_liquidacion_comisiones_det].[IdCbteVta] AS [IdCbteVta], 
-[vwcxc_liquidacion_comisiones_det].[vt_tipoDoc] AS [vt_tipoDoc], 
-[vwcxc_liquidacion_comisiones_det].[vt_serie1] AS [vt_serie1], 
-[vwcxc_liquidacion_comisiones_det].[vt_serie2] AS [vt_serie2], 
-[vwcxc_liquidacion_comisiones_det].[vt_NumFactura] AS [vt_NumFactura], 
-[vwcxc_liquidacion_comisiones_det].[Nombres] AS [Nombres], 
-[vwcxc_liquidacion_comisiones_det].[Ve_Vendedor] AS [Ve_Vendedor], 
-[vwcxc_liquidacion_comisiones_det].[NomInterno] AS [NomInterno], 
-[vwcxc_liquidacion_comisiones_det].[nom_TerminoPago] AS [nom_TerminoPago], 
-[vwcxc_liquidacion_comisiones_det].[vt_fecha] AS [vt_fecha], 
-[vwcxc_liquidacion_comisiones_det].[vt_fech_venc] AS [vt_fech_venc], 
-[vwcxc_liquidacion_comisiones_det].[vt_Subtotal] AS [vt_Subtotal], 
-[vwcxc_liquidacion_comisiones_det].[vt_iva] AS [vt_iva], 
-[vwcxc_liquidacion_comisiones_det].[vt_total] AS [vt_total], 
-[vwcxc_liquidacion_comisiones_det].[IdVendedor] AS [IdVendedor], 
-[vwcxc_liquidacion_comisiones_det].[PorComision] AS [PorComision], 
-[vwcxc_liquidacion_comisiones_det].[SubtotalFactura] AS [SubtotalFactura], 
-[vwcxc_liquidacion_comisiones_det].[IvaFactura] AS [IvaFactura], 
-[vwcxc_liquidacion_comisiones_det].[Expr1] AS [Expr1], 
-[vwcxc_liquidacion_comisiones_det].[TotalFactura] AS [TotalFactura], 
-[vwcxc_liquidacion_comisiones_det].[TotalCobrado] AS [TotalCobrado], 
-[vwcxc_liquidacion_comisiones_det].[BaseComision] AS [BaseComision], 
-[vwcxc_liquidacion_comisiones_det].[PorcentajeComision] AS [PorcentajeComision], 
-[vwcxc_liquidacion_comisiones_det].[TotalAComisionar] AS [TotalAComisionar], 
-[vwcxc_liquidacion_comisiones_det].[TotalComisionado] AS [TotalComisionado], 
-[vwcxc_liquidacion_comisiones_det].[TotalLiquidacion] AS [TotalLiquidacion], 
-[vwcxc_liquidacion_comisiones_det].[NoComisiona] AS [NoComisiona]
-FROM [dbo].[vwcxc_liquidacion_comisiones_det] AS [vwcxc_liquidacion_comisiones_det]</DefiningQuery>
+    [vwcxc_liquidacion_comisiones_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwcxc_liquidacion_comisiones_det].[IdLiquidacion] AS [IdLiquidacion], 
+    [vwcxc_liquidacion_comisiones_det].[Secuencia] AS [Secuencia], 
+    [vwcxc_liquidacion_comisiones_det].[IdSucursal] AS [IdSucursal], 
+    [vwcxc_liquidacion_comisiones_det].[IdBodega] AS [IdBodega], 
+    [vwcxc_liquidacion_comisiones_det].[IdCbteVta] AS [IdCbteVta], 
+    [vwcxc_liquidacion_comisiones_det].[vt_tipoDoc] AS [vt_tipoDoc], 
+    [vwcxc_liquidacion_comisiones_det].[vt_serie1] AS [vt_serie1], 
+    [vwcxc_liquidacion_comisiones_det].[vt_serie2] AS [vt_serie2], 
+    [vwcxc_liquidacion_comisiones_det].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwcxc_liquidacion_comisiones_det].[Nombres] AS [Nombres], 
+    [vwcxc_liquidacion_comisiones_det].[Ve_Vendedor] AS [Ve_Vendedor], 
+    [vwcxc_liquidacion_comisiones_det].[NomInterno] AS [NomInterno], 
+    [vwcxc_liquidacion_comisiones_det].[nom_TerminoPago] AS [nom_TerminoPago], 
+    [vwcxc_liquidacion_comisiones_det].[vt_fecha] AS [vt_fecha], 
+    [vwcxc_liquidacion_comisiones_det].[vt_fech_venc] AS [vt_fech_venc], 
+    [vwcxc_liquidacion_comisiones_det].[vt_Subtotal] AS [vt_Subtotal], 
+    [vwcxc_liquidacion_comisiones_det].[vt_iva] AS [vt_iva], 
+    [vwcxc_liquidacion_comisiones_det].[vt_total] AS [vt_total], 
+    [vwcxc_liquidacion_comisiones_det].[IdVendedor] AS [IdVendedor], 
+    [vwcxc_liquidacion_comisiones_det].[PorComision] AS [PorComision], 
+    [vwcxc_liquidacion_comisiones_det].[SubtotalFactura] AS [SubtotalFactura], 
+    [vwcxc_liquidacion_comisiones_det].[IvaFactura] AS [IvaFactura], 
+    [vwcxc_liquidacion_comisiones_det].[Expr1] AS [Expr1], 
+    [vwcxc_liquidacion_comisiones_det].[TotalFactura] AS [TotalFactura], 
+    [vwcxc_liquidacion_comisiones_det].[TotalCobrado] AS [TotalCobrado], 
+    [vwcxc_liquidacion_comisiones_det].[BaseComision] AS [BaseComision], 
+    [vwcxc_liquidacion_comisiones_det].[PorcentajeComision] AS [PorcentajeComision], 
+    [vwcxc_liquidacion_comisiones_det].[TotalAComisionar] AS [TotalAComisionar], 
+    [vwcxc_liquidacion_comisiones_det].[TotalComisionado] AS [TotalComisionado], 
+    [vwcxc_liquidacion_comisiones_det].[TotalLiquidacion] AS [TotalLiquidacion], 
+    [vwcxc_liquidacion_comisiones_det].[NoComisiona] AS [NoComisiona]
+    FROM [dbo].[vwcxc_liquidacion_comisiones_det] AS [vwcxc_liquidacion_comisiones_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcxc_liquidacion_comisiones_det_x_comisionar" EntityType="Self.vwcxc_liquidacion_comisiones_det_x_comisionar" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[IdEmpresa] AS [IdEmpresa], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[IdSucursal] AS [IdSucursal], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[IdBodega] AS [IdBodega], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[IdCbteVta] AS [IdCbteVta], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_tipoDoc] AS [vt_tipoDoc], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_serie1] AS [vt_serie1], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_serie2] AS [vt_serie2], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_NumFactura] AS [vt_NumFactura], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[Nombres] AS [Nombres], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[Ve_Vendedor] AS [Ve_Vendedor], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[NomInterno] AS [NomInterno], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[nom_TerminoPago] AS [nom_TerminoPago], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_fecha] AS [vt_fecha], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_fech_venc] AS [vt_fech_venc], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_Subtotal] AS [vt_Subtotal], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_iva] AS [vt_iva], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_total] AS [vt_total], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[valor_cobro] AS [valor_cobro], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[ESTADO_COBRO] AS [ESTADO_COBRO], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[TotalAComisionar] AS [TotalAComisionar], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[TotalComisionado] AS [TotalComisionado], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[SaldoPorComisionar] AS [SaldoPorComisionar], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[IdVendedor] AS [IdVendedor], 
-[vwcxc_liquidacion_comisiones_det_x_comisionar].[PorComision] AS [PorComision]
-FROM [dbo].[vwcxc_liquidacion_comisiones_det_x_comisionar] AS [vwcxc_liquidacion_comisiones_det_x_comisionar]</DefiningQuery>
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[IdEmpresa] AS [IdEmpresa], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[IdSucursal] AS [IdSucursal], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[IdBodega] AS [IdBodega], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[IdCbteVta] AS [IdCbteVta], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_tipoDoc] AS [vt_tipoDoc], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_serie1] AS [vt_serie1], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_serie2] AS [vt_serie2], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[Nombres] AS [Nombres], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[Ve_Vendedor] AS [Ve_Vendedor], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[NomInterno] AS [NomInterno], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[nom_TerminoPago] AS [nom_TerminoPago], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_fecha] AS [vt_fecha], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_fech_venc] AS [vt_fech_venc], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_Subtotal] AS [vt_Subtotal], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_iva] AS [vt_iva], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[vt_total] AS [vt_total], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[valor_cobro] AS [valor_cobro], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[ESTADO_COBRO] AS [ESTADO_COBRO], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[TotalAComisionar] AS [TotalAComisionar], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[TotalComisionado] AS [TotalComisionado], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[SaldoPorComisionar] AS [SaldoPorComisionar], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[IdVendedor] AS [IdVendedor], 
+    [vwcxc_liquidacion_comisiones_det_x_comisionar].[PorComision] AS [PorComision]
+    FROM [dbo].[vwcxc_liquidacion_comisiones_det_x_comisionar] AS [vwcxc_liquidacion_comisiones_det_x_comisionar]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcxc_cobro" EntityType="Self.vwcxc_cobro" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwcxc_cobro].[IdEmpresa] AS [IdEmpresa], 
-[vwcxc_cobro].[IdSucursal] AS [IdSucursal], 
-[vwcxc_cobro].[IdCobro] AS [IdCobro], 
-[vwcxc_cobro].[IdCliente] AS [IdCliente], 
-[vwcxc_cobro].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-[vwcxc_cobro].[IdCobro_tipo] AS [IdCobro_tipo], 
-[vwcxc_cobro].[cr_fecha] AS [cr_fecha], 
-[vwcxc_cobro].[cr_TotalCobro] AS [cr_TotalCobro], 
-[vwcxc_cobro].[cr_estado] AS [cr_estado], 
-[vwcxc_cobro].[Su_Descripcion] AS [Su_Descripcion], 
-[vwcxc_cobro].[cr_observacion] AS [cr_observacion], 
-[vwcxc_cobro].[cr_NumDocumento] AS [cr_NumDocumento], 
-[vwcxc_cobro].[nom_Motivo_tipo_cobro] AS [nom_Motivo_tipo_cobro]
-FROM [web].[vwcxc_cobro] AS [vwcxc_cobro]</DefiningQuery>
+    [vwcxc_cobro].[IdEmpresa] AS [IdEmpresa], 
+    [vwcxc_cobro].[IdSucursal] AS [IdSucursal], 
+    [vwcxc_cobro].[IdCobro] AS [IdCobro], 
+    [vwcxc_cobro].[IdCliente] AS [IdCliente], 
+    [vwcxc_cobro].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwcxc_cobro].[IdCobro_tipo] AS [IdCobro_tipo], 
+    [vwcxc_cobro].[cr_fecha] AS [cr_fecha], 
+    [vwcxc_cobro].[cr_TotalCobro] AS [cr_TotalCobro], 
+    [vwcxc_cobro].[cr_estado] AS [cr_estado], 
+    [vwcxc_cobro].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwcxc_cobro].[cr_observacion] AS [cr_observacion], 
+    [vwcxc_cobro].[cr_NumDocumento] AS [cr_NumDocumento], 
+    [vwcxc_cobro].[nom_Motivo_tipo_cobro] AS [nom_Motivo_tipo_cobro]
+    FROM [web].[vwcxc_cobro] AS [vwcxc_cobro]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcxc_cobro_det" EntityType="Self.vwcxc_cobro_det" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwcxc_cobro_det].[IdEmpresa] AS [IdEmpresa], 
-[vwcxc_cobro_det].[IdSucursal] AS [IdSucursal], 
-[vwcxc_cobro_det].[IdCobro] AS [IdCobro], 
-[vwcxc_cobro_det].[secuencial] AS [secuencial], 
-[vwcxc_cobro_det].[dc_TipoDocumento] AS [dc_TipoDocumento], 
-[vwcxc_cobro_det].[IdBodega_Cbte] AS [IdBodega_Cbte], 
-[vwcxc_cobro_det].[IdCbte_vta_nota] AS [IdCbte_vta_nota], 
-[vwcxc_cobro_det].[dc_ValorPago] AS [dc_ValorPago], 
-[vwcxc_cobro_det].[IdCobro_tipo] AS [IdCobro_tipo], 
-[vwcxc_cobro_det].[vt_NumFactura] AS [vt_NumFactura], 
-[vwcxc_cobro_det].[vt_Observacion] AS [vt_Observacion], 
-[vwcxc_cobro_det].[CodDoc] AS [CodDoc], 
-[vwcxc_cobro_det].[vt_Subtotal] AS [vt_Subtotal], 
-[vwcxc_cobro_det].[vt_iva] AS [vt_iva], 
-[vwcxc_cobro_det].[vt_total] AS [vt_total], 
-[vwcxc_cobro_det].[ValorCobrado] AS [ValorCobrado], 
-[vwcxc_cobro_det].[saldo] AS [saldo], 
-[vwcxc_cobro_det].[saldo_sin_cobro] AS [saldo_sin_cobro], 
-[vwcxc_cobro_det].[vt_fecha] AS [vt_fecha], 
-[vwcxc_cobro_det].[vt_fech_venc] AS [vt_fech_venc], 
-[vwcxc_cobro_det].[IdCliente] AS [IdCliente], 
-[vwcxc_cobro_det].[pe_nombreCompleto] AS [pe_nombreCompleto]
-FROM [web].[vwcxc_cobro_det] AS [vwcxc_cobro_det]</DefiningQuery>
+    [vwcxc_cobro_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwcxc_cobro_det].[IdSucursal] AS [IdSucursal], 
+    [vwcxc_cobro_det].[IdCobro] AS [IdCobro], 
+    [vwcxc_cobro_det].[secuencial] AS [secuencial], 
+    [vwcxc_cobro_det].[dc_TipoDocumento] AS [dc_TipoDocumento], 
+    [vwcxc_cobro_det].[IdBodega_Cbte] AS [IdBodega_Cbte], 
+    [vwcxc_cobro_det].[IdCbte_vta_nota] AS [IdCbte_vta_nota], 
+    [vwcxc_cobro_det].[dc_ValorPago] AS [dc_ValorPago], 
+    [vwcxc_cobro_det].[IdCobro_tipo] AS [IdCobro_tipo], 
+    [vwcxc_cobro_det].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwcxc_cobro_det].[vt_Observacion] AS [vt_Observacion], 
+    [vwcxc_cobro_det].[CodDoc] AS [CodDoc], 
+    [vwcxc_cobro_det].[vt_Subtotal] AS [vt_Subtotal], 
+    [vwcxc_cobro_det].[vt_iva] AS [vt_iva], 
+    [vwcxc_cobro_det].[vt_total] AS [vt_total], 
+    [vwcxc_cobro_det].[ValorCobrado] AS [ValorCobrado], 
+    [vwcxc_cobro_det].[saldo] AS [saldo], 
+    [vwcxc_cobro_det].[saldo_sin_cobro] AS [saldo_sin_cobro], 
+    [vwcxc_cobro_det].[vt_fecha] AS [vt_fecha], 
+    [vwcxc_cobro_det].[vt_fech_venc] AS [vt_fech_venc], 
+    [vwcxc_cobro_det].[IdCliente] AS [IdCliente], 
+    [vwcxc_cobro_det].[pe_nombreCompleto] AS [pe_nombreCompleto]
+    FROM [web].[vwcxc_cobro_det] AS [vwcxc_cobro_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcxc_cobro_det_retencion" EntityType="Self.vwcxc_cobro_det_retencion" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwcxc_cobro_det_retencion].[IdEmpresa] AS [IdEmpresa], 
-[vwcxc_cobro_det_retencion].[IdSucursal] AS [IdSucursal], 
-[vwcxc_cobro_det_retencion].[IdBodega_Cbte] AS [IdBodega_Cbte], 
-[vwcxc_cobro_det_retencion].[IdCbte_vta_nota] AS [IdCbte_vta_nota], 
-[vwcxc_cobro_det_retencion].[dc_TipoDocumento] AS [dc_TipoDocumento], 
-[vwcxc_cobro_det_retencion].[IdCobro] AS [IdCobro], 
-[vwcxc_cobro_det_retencion].[secuencial] AS [secuencial], 
-[vwcxc_cobro_det_retencion].[IdCobro_tipo] AS [IdCobro_tipo], 
-[vwcxc_cobro_det_retencion].[dc_ValorPago] AS [dc_ValorPago], 
-[vwcxc_cobro_det_retencion].[tc_descripcion] AS [tc_descripcion], 
-[vwcxc_cobro_det_retencion].[ESRetenIVA] AS [ESRetenIVA], 
-[vwcxc_cobro_det_retencion].[ESRetenFTE] AS [ESRetenFTE], 
-[vwcxc_cobro_det_retencion].[PorcentajeRet] AS [PorcentajeRet], 
-[vwcxc_cobro_det_retencion].[cr_NumDocumento] AS [cr_NumDocumento], 
-[vwcxc_cobro_det_retencion].[cr_fecha] AS [cr_fecha]
-FROM [web].[vwcxc_cobro_det_retencion] AS [vwcxc_cobro_det_retencion]</DefiningQuery>
+    [vwcxc_cobro_det_retencion].[IdEmpresa] AS [IdEmpresa], 
+    [vwcxc_cobro_det_retencion].[IdSucursal] AS [IdSucursal], 
+    [vwcxc_cobro_det_retencion].[IdBodega_Cbte] AS [IdBodega_Cbte], 
+    [vwcxc_cobro_det_retencion].[IdCbte_vta_nota] AS [IdCbte_vta_nota], 
+    [vwcxc_cobro_det_retencion].[dc_TipoDocumento] AS [dc_TipoDocumento], 
+    [vwcxc_cobro_det_retencion].[IdCobro] AS [IdCobro], 
+    [vwcxc_cobro_det_retencion].[secuencial] AS [secuencial], 
+    [vwcxc_cobro_det_retencion].[IdCobro_tipo] AS [IdCobro_tipo], 
+    [vwcxc_cobro_det_retencion].[dc_ValorPago] AS [dc_ValorPago], 
+    [vwcxc_cobro_det_retencion].[tc_descripcion] AS [tc_descripcion], 
+    [vwcxc_cobro_det_retencion].[ESRetenIVA] AS [ESRetenIVA], 
+    [vwcxc_cobro_det_retencion].[ESRetenFTE] AS [ESRetenFTE], 
+    [vwcxc_cobro_det_retencion].[PorcentajeRet] AS [PorcentajeRet], 
+    [vwcxc_cobro_det_retencion].[cr_NumDocumento] AS [cr_NumDocumento], 
+    [vwcxc_cobro_det_retencion].[cr_fecha] AS [cr_fecha]
+    FROM [web].[vwcxc_cobro_det_retencion] AS [vwcxc_cobro_det_retencion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcxc_cobro_para_retencion" EntityType="Self.vwcxc_cobro_para_retencion" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwcxc_cobro_para_retencion].[IdEmpresa] AS [IdEmpresa], 
-[vwcxc_cobro_para_retencion].[IdSucursal] AS [IdSucursal], 
-[vwcxc_cobro_para_retencion].[IdBodega] AS [IdBodega], 
-[vwcxc_cobro_para_retencion].[IdCbteVta] AS [IdCbteVta], 
-[vwcxc_cobro_para_retencion].[vt_tipoDoc] AS [vt_tipoDoc], 
-[vwcxc_cobro_para_retencion].[vt_Subtotal] AS [vt_Subtotal], 
-[vwcxc_cobro_para_retencion].[vt_iva] AS [vt_iva], 
-[vwcxc_cobro_para_retencion].[vt_total] AS [vt_total], 
-[vwcxc_cobro_para_retencion].[Nombres] AS [Nombres], 
-[vwcxc_cobro_para_retencion].[vt_fecha] AS [vt_fecha], 
-[vwcxc_cobro_para_retencion].[vt_fech_venc] AS [vt_fech_venc], 
-[vwcxc_cobro_para_retencion].[vt_Observacion] AS [vt_Observacion], 
-[vwcxc_cobro_para_retencion].[vt_NumFactura] AS [vt_NumFactura], 
-[vwcxc_cobro_para_retencion].[Su_Descripcion] AS [Su_Descripcion], 
-[vwcxc_cobro_para_retencion].[IdCliente] AS [IdCliente]
-FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</DefiningQuery>
+    [vwcxc_cobro_para_retencion].[IdEmpresa] AS [IdEmpresa], 
+    [vwcxc_cobro_para_retencion].[IdSucursal] AS [IdSucursal], 
+    [vwcxc_cobro_para_retencion].[IdBodega] AS [IdBodega], 
+    [vwcxc_cobro_para_retencion].[IdCbteVta] AS [IdCbteVta], 
+    [vwcxc_cobro_para_retencion].[vt_tipoDoc] AS [vt_tipoDoc], 
+    [vwcxc_cobro_para_retencion].[vt_Subtotal] AS [vt_Subtotal], 
+    [vwcxc_cobro_para_retencion].[vt_iva] AS [vt_iva], 
+    [vwcxc_cobro_para_retencion].[vt_total] AS [vt_total], 
+    [vwcxc_cobro_para_retencion].[Nombres] AS [Nombres], 
+    [vwcxc_cobro_para_retencion].[vt_fecha] AS [vt_fecha], 
+    [vwcxc_cobro_para_retencion].[vt_fech_venc] AS [vt_fech_venc], 
+    [vwcxc_cobro_para_retencion].[vt_Observacion] AS [vt_Observacion], 
+    [vwcxc_cobro_para_retencion].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwcxc_cobro_para_retencion].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwcxc_cobro_para_retencion].[IdCliente] AS [IdCliente]
+    FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_cxc_Catalogo_cxc_CatalogoTipo" Association="Self.FK_cxc_Catalogo_cxc_CatalogoTipo">
             <End Role="cxc_CatalogoTipo" EntitySet="cxc_CatalogoTipo" />
@@ -905,9 +893,9 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <Property Name="IdCaja" Type="Int32" Nullable="false" />
           <Property Name="MotiAnula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoNotaCredito" Type="Int32" />
-          <NavigationProperty Name="cxc_cobro_tipo" Relationship="Self.FK_cxc_cobro_cxc_cobro_tipo" FromRole="cxc_cobro" ToRole="cxc_cobro_tipo" />
           <NavigationProperty Name="cxc_cobro_det" Relationship="Self.FK_cxc_cobro_det_cxc_cobro" FromRole="cxc_cobro" ToRole="cxc_cobro_det" />
           <NavigationProperty Name="cxc_cobro_x_ct_cbtecble" Relationship="Self.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" FromRole="cxc_cobro" ToRole="cxc_cobro_x_ct_cbtecble" />
+          <NavigationProperty Name="cxc_cobro_tipo" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo" FromRole="cxc_cobro" ToRole="cxc_cobro_tipo" />
         </EntityType>
         <EntityType Name="cxc_cobro_det">
           <Key>
@@ -935,54 +923,15 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="IdCobro_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="cxc_cobro" Relationship="Self.FK_cxc_cobro_det_cxc_cobro" FromRole="cxc_cobro_det" ToRole="cxc_cobro" />
-          <NavigationProperty Name="cxc_cobro_tipo" Relationship="Self.FK_cxc_cobro_det_cxc_cobro_tipo" FromRole="cxc_cobro_det" ToRole="cxc_cobro_tipo" />
+          <NavigationProperty Name="cxc_cobro_tipo" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro_tipo" FromRole="cxc_cobro_det" ToRole="cxc_cobro_tipo" />
         </EntityType>
-        <EntityType Name="cxc_cobro_tipo">
-          <Key>
-            <PropertyRef Name="IdCobro_tipo" />
-          </Key>
-          <Property Name="IdCobro_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_EsCheque" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_Afecha" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_interno" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_generaNCAuto" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_abreviatura" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="tc_cobroDirecto" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_cobroInDirecto" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_docXCobrar" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_Orden" Type="Int32" Nullable="false" />
-          <Property Name="tc_seMuestraManCheque" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_Que_Tipo_Registro_Genera" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tc_Tomar_Cta_Cble_De" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="tc_seCobra" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdEstadoCobro_Inicial" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="ESRetenIVA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="ESRetenFTE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="PorcentajeRet" Type="Double" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="tc_SePuede_Depositar" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdMotivo_tipo_cobro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="cxc_cobro" Relationship="Self.FK_cxc_cobro_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro" />
-          <NavigationProperty Name="cxc_cobro_det" Relationship="Self.FK_cxc_cobro_det_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_det" />
-          <NavigationProperty Name="cxc_cobro_tipo_motivo" Relationship="Self.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_tipo_motivo" />
-          <NavigationProperty Name="cxc_cobro_tipo_Param_conta_x_sucursal" Relationship="Self.FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_tipo_Param_conta_x_sucursal" />
-          </EntityType>
         <EntityType Name="cxc_cobro_tipo_motivo">
           <Key>
             <PropertyRef Name="IdMotivo_tipo_cobro" />
           </Key>
           <Property Name="IdMotivo_tipo_cobro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom_Motivo_tipo_cobro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="cxc_cobro_tipo" Relationship="Self.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" FromRole="cxc_cobro_tipo_motivo" ToRole="cxc_cobro_tipo" />
+          <NavigationProperty Name="cxc_cobro_tipo" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" FromRole="cxc_cobro_tipo_motivo" ToRole="cxc_cobro_tipo" />
         </EntityType>
         <EntityType Name="cxc_cobro_tipo_Param_conta_x_sucursal">
           <Key>
@@ -995,7 +944,7 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <Property Name="IdCobro_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdCtaCble_Anticipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="cxc_cobro_tipo" Relationship="Self.FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo" FromRole="cxc_cobro_tipo_Param_conta_x_sucursal" ToRole="cxc_cobro_tipo" />
+          <NavigationProperty Name="cxc_cobro_tipo" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo" FromRole="cxc_cobro_tipo_Param_conta_x_sucursal" ToRole="cxc_cobro_tipo" />
         </EntityType>
         <EntityType Name="cxc_cobro_x_ct_cbtecble">
           <Key>
@@ -1152,18 +1101,6 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_cxc_cobro_cxc_cobro_tipo">
-          <End Role="cxc_cobro_tipo" Type="Self.cxc_cobro_tipo" Multiplicity="0..1" />
-          <End Role="cxc_cobro" Type="Self.cxc_cobro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cxc_cobro_tipo">
-              <PropertyRef Name="IdCobro_tipo" />
-            </Principal>
-            <Dependent Role="cxc_cobro">
-              <PropertyRef Name="IdCobro_tipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_cxc_cobro_det_cxc_cobro">
           <End Role="cxc_cobro" Type="Self.cxc_cobro" Multiplicity="1" />
           <End Role="cxc_cobro_det" Type="Self.cxc_cobro_det" Multiplicity="*" />
@@ -1196,48 +1133,11 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_cxc_cobro_det_cxc_cobro_tipo">
-          <End Role="cxc_cobro_tipo" Type="Self.cxc_cobro_tipo" Multiplicity="1" />
-          <End Role="cxc_cobro_det" Type="Self.cxc_cobro_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cxc_cobro_tipo">
-              <PropertyRef Name="IdCobro_tipo" />
-            </Principal>
-            <Dependent Role="cxc_cobro_det">
-              <PropertyRef Name="IdCobro_tipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo">
-          <End Role="cxc_cobro_tipo_motivo" Type="Self.cxc_cobro_tipo_motivo" Multiplicity="0..1" />
-          <End Role="cxc_cobro_tipo" Type="Self.cxc_cobro_tipo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cxc_cobro_tipo_motivo">
-              <PropertyRef Name="IdMotivo_tipo_cobro" />
-            </Principal>
-            <Dependent Role="cxc_cobro_tipo">
-              <PropertyRef Name="IdMotivo_tipo_cobro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo">
-          <End Role="cxc_cobro_tipo" Type="Self.cxc_cobro_tipo" Multiplicity="1" />
-          <End Role="cxc_cobro_tipo_Param_conta_x_sucursal" Type="Self.cxc_cobro_tipo_Param_conta_x_sucursal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cxc_cobro_tipo">
-              <PropertyRef Name="IdCobro_tipo" />
-            </Principal>
-            <Dependent Role="cxc_cobro_tipo_Param_conta_x_sucursal">
-              <PropertyRef Name="IdCobro_tipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities_cuentas_por_cobrar" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="cxc_Catalogo" EntityType="Self.cxc_Catalogo" />
           <EntitySet Name="cxc_CatalogoTipo" EntityType="Self.cxc_CatalogoTipo" />
           <EntitySet Name="cxc_cobro" EntityType="Self.cxc_cobro" />
           <EntitySet Name="cxc_cobro_det" EntityType="Self.cxc_cobro_det" />
-          <EntitySet Name="cxc_cobro_tipo" EntityType="Self.cxc_cobro_tipo" />
           <EntitySet Name="cxc_cobro_tipo_motivo" EntityType="Self.cxc_cobro_tipo_motivo" />
           <EntitySet Name="cxc_cobro_tipo_Param_conta_x_sucursal" EntityType="Self.cxc_cobro_tipo_Param_conta_x_sucursal" />
           <EntitySet Name="cxc_cobro_x_ct_cbtecble" EntityType="Self.cxc_cobro_x_ct_cbtecble" />
@@ -1249,10 +1149,6 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
             <End Role="cxc_CatalogoTipo" EntitySet="cxc_CatalogoTipo" />
             <End Role="cxc_Catalogo" EntitySet="cxc_Catalogo" />
           </AssociationSet>
-          <AssociationSet Name="FK_cxc_cobro_cxc_cobro_tipo" Association="Self.FK_cxc_cobro_cxc_cobro_tipo">
-            <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
-            <End Role="cxc_cobro" EntitySet="cxc_cobro" />
-          </AssociationSet>
           <AssociationSet Name="FK_cxc_cobro_det_cxc_cobro" Association="Self.FK_cxc_cobro_det_cxc_cobro">
             <End Role="cxc_cobro" EntitySet="cxc_cobro" />
             <End Role="cxc_cobro_det" EntitySet="cxc_cobro_det" />
@@ -1260,18 +1156,6 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <AssociationSet Name="FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" Association="Self.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro">
             <End Role="cxc_cobro" EntitySet="cxc_cobro" />
             <End Role="cxc_cobro_x_ct_cbtecble" EntitySet="cxc_cobro_x_ct_cbtecble" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cxc_cobro_det_cxc_cobro_tipo" Association="Self.FK_cxc_cobro_det_cxc_cobro_tipo">
-            <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
-            <End Role="cxc_cobro_det" EntitySet="cxc_cobro_det" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" Association="Self.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo">
-            <End Role="cxc_cobro_tipo_motivo" EntitySet="cxc_cobro_tipo_motivo" />
-            <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo" Association="Self.FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo">
-            <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
-            <End Role="cxc_cobro_tipo_Param_conta_x_sucursal" EntitySet="cxc_cobro_tipo_Param_conta_x_sucursal" />
           </AssociationSet>
           <EntitySet Name="vwcxc_cartera_x_cobrar" EntityType="Model_cuentas_por_cobrar.vwcxc_cartera_x_cobrar" />
           <EntitySet Name="cxc_liquidacion_comisiones" EntityType="Model_cuentas_por_cobrar.cxc_liquidacion_comisiones" />
@@ -1283,6 +1167,23 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           </AssociationSet>
           <EntitySet Name="vwcxc_liquidacion_comisiones_det" EntityType="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det" />
           <EntitySet Name="vwcxc_liquidacion_comisiones_det_x_comisionar" EntityType="Model_cuentas_por_cobrar.vwcxc_liquidacion_comisiones_det_x_comisionar" />
+          <EntitySet Name="cxc_cobro_tipo" EntityType="Model_cuentas_por_cobrar.cxc_cobro_tipo" />
+          <AssociationSet Name="FK_cxc_cobro_cxc_cobro_tipo" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo">
+            <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
+            <End Role="cxc_cobro" EntitySet="cxc_cobro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cxc_cobro_det_cxc_cobro_tipo" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro_tipo">
+            <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
+            <End Role="cxc_cobro_det" EntitySet="cxc_cobro_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo">
+            <End Role="cxc_cobro_tipo_motivo" EntitySet="cxc_cobro_tipo_motivo" />
+            <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo" Association="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo">
+            <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
+            <End Role="cxc_cobro_tipo_Param_conta_x_sucursal" EntitySet="cxc_cobro_tipo_Param_conta_x_sucursal" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="vwcxc_cartera_x_cobrar">
           <Key>
@@ -1513,6 +1414,81 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
           <Property Name="IdVendedor" Type="Int32" Nullable="false" />
           <Property Name="PorComision" Type="Double" Nullable="false" />
         </EntityType>
+        <EntityType Name="cxc_cobro_tipo">
+          <Key>
+            <PropertyRef Name="IdCobro_tipo" />
+          </Key>
+          <Property Name="IdCobro_tipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tc_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="tc_abreviatura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tc_Que_Tipo_Registro_Genera" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tc_Tomar_Cta_Cble_De" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ESRetenIVA" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ESRetenFTE" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PorcentajeRet" Type="Double" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="IdMotivo_tipo_cobro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EsTarjetaCredito" Type="Boolean" Nullable="false" />
+          <Property Name="SeDeposita" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="cxc_cobro" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro" />
+          <NavigationProperty Name="cxc_cobro_det" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_det" />
+          <NavigationProperty Name="cxc_cobro_tipo_motivo" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_tipo_motivo" />
+          <NavigationProperty Name="cxc_cobro_tipo_Param_conta_x_sucursal" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_tipo_Param_conta_x_sucursal" />
+        </EntityType>
+        <Association Name="FK_cxc_cobro_cxc_cobro_tipo">
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro_tipo" Role="cxc_cobro_tipo" Multiplicity="0..1" />
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro" Role="cxc_cobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cxc_cobro_tipo">
+              <PropertyRef Name="IdCobro_tipo" />
+            </Principal>
+            <Dependent Role="cxc_cobro">
+              <PropertyRef Name="IdCobro_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cxc_cobro_det_cxc_cobro_tipo">
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro_tipo" Role="cxc_cobro_tipo" Multiplicity="1" />
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro_det" Role="cxc_cobro_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cxc_cobro_tipo">
+              <PropertyRef Name="IdCobro_tipo" />
+            </Principal>
+            <Dependent Role="cxc_cobro_det">
+              <PropertyRef Name="IdCobro_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo">
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro_tipo_motivo" Role="cxc_cobro_tipo_motivo" Multiplicity="0..1" />
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro_tipo" Role="cxc_cobro_tipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cxc_cobro_tipo_motivo">
+              <PropertyRef Name="IdMotivo_tipo_cobro" />
+            </Principal>
+            <Dependent Role="cxc_cobro_tipo">
+              <PropertyRef Name="IdMotivo_tipo_cobro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo">
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro_tipo" Role="cxc_cobro_tipo" Multiplicity="1" />
+          <End Type="Model_cuentas_por_cobrar.cxc_cobro_tipo_Param_conta_x_sucursal" Role="cxc_cobro_tipo_Param_conta_x_sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cxc_cobro_tipo">
+              <PropertyRef Name="IdCobro_tipo" />
+            </Principal>
+            <Dependent Role="cxc_cobro_tipo_Param_conta_x_sucursal">
+              <PropertyRef Name="IdCobro_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1602,42 +1578,6 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
                 <ScalarProperty Name="ip" ColumnName="ip" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="cxc_cobro_tipo">
-            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.cxc_cobro_tipo">
-              <MappingFragment StoreEntitySet="cxc_cobro_tipo">
-                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
-                <ScalarProperty Name="tc_descripcion" ColumnName="tc_descripcion" />
-                <ScalarProperty Name="tc_EsCheque" ColumnName="tc_EsCheque" />
-                <ScalarProperty Name="tc_Afecha" ColumnName="tc_Afecha" />
-                <ScalarProperty Name="tc_interno" ColumnName="tc_interno" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="tc_generaNCAuto" ColumnName="tc_generaNCAuto" />
-                <ScalarProperty Name="tc_abreviatura" ColumnName="tc_abreviatura" />
-                <ScalarProperty Name="tc_cobroDirecto" ColumnName="tc_cobroDirecto" />
-                <ScalarProperty Name="tc_cobroInDirecto" ColumnName="tc_cobroInDirecto" />
-                <ScalarProperty Name="tc_docXCobrar" ColumnName="tc_docXCobrar" />
-                <ScalarProperty Name="tc_Orden" ColumnName="tc_Orden" />
-                <ScalarProperty Name="tc_seMuestraManCheque" ColumnName="tc_seMuestraManCheque" />
-                <ScalarProperty Name="tc_Que_Tipo_Registro_Genera" ColumnName="tc_Que_Tipo_Registro_Genera" />
-                <ScalarProperty Name="tc_Tomar_Cta_Cble_De" ColumnName="tc_Tomar_Cta_Cble_De" />
-                <ScalarProperty Name="tc_seCobra" ColumnName="tc_seCobra" />
-                <ScalarProperty Name="IdEstadoCobro_Inicial" ColumnName="IdEstadoCobro_Inicial" />
-                <ScalarProperty Name="ESRetenIVA" ColumnName="ESRetenIVA" />
-                <ScalarProperty Name="ESRetenFTE" ColumnName="ESRetenFTE" />
-                <ScalarProperty Name="PorcentajeRet" ColumnName="PorcentajeRet" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="tc_SePuede_Depositar" ColumnName="tc_SePuede_Depositar" />
-                <ScalarProperty Name="IdMotivo_tipo_cobro" ColumnName="IdMotivo_tipo_cobro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1918,6 +1858,30 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="cxc_cobro_tipo">
+            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.cxc_cobro_tipo">
+              <MappingFragment StoreEntitySet="cxc_cobro_tipo">
+                <ScalarProperty Name="SeDeposita" ColumnName="SeDeposita" />
+                <ScalarProperty Name="EsTarjetaCredito" ColumnName="EsTarjetaCredito" />
+                <ScalarProperty Name="IdMotivo_tipo_cobro" ColumnName="IdMotivo_tipo_cobro" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="PorcentajeRet" ColumnName="PorcentajeRet" />
+                <ScalarProperty Name="ESRetenFTE" ColumnName="ESRetenFTE" />
+                <ScalarProperty Name="ESRetenIVA" ColumnName="ESRetenIVA" />
+                <ScalarProperty Name="tc_Tomar_Cta_Cble_De" ColumnName="tc_Tomar_Cta_Cble_De" />
+                <ScalarProperty Name="tc_Que_Tipo_Registro_Genera" ColumnName="tc_Que_Tipo_Registro_Genera" />
+                <ScalarProperty Name="tc_abreviatura" ColumnName="tc_abreviatura" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="tc_descripcion" ColumnName="tc_descripcion" />
+                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1934,7 +1898,7 @@ FROM [web].[vwcxc_cobro_para_retencion] AS [vwcxc_cobro_para_retencion]</Definin
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>

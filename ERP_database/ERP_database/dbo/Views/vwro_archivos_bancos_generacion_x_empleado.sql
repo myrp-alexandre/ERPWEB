@@ -1,19 +1,21 @@
 ﻿CREATE VIEW dbo.vwro_archivos_bancos_generacion_x_empleado
 AS
-SELECT        dbo.ro_archivos_bancos_generacion.IdEmpresa, dbo.ro_archivos_bancos_generacion.IdArchivo, dbo.ro_archivos_bancos_generacion.IdNomina, 
-                         dbo.ro_archivos_bancos_generacion.IdNominaTipo, dbo.ro_archivos_bancos_generacion.IdPeriodo, dbo.ro_archivos_bancos_generacion_x_empleado.IdEmpleado, 
-                         dbo.ro_archivos_bancos_generacion_x_empleado.Valor
+SELECT        dbo.ro_archivos_bancos_generacion.IdEmpresa, dbo.ro_archivos_bancos_generacion.IdArchivo, dbo.ro_archivos_bancos_generacion.IdNomina, dbo.ro_archivos_bancos_generacion.IdNominaTipo, 
+                         dbo.ro_archivos_bancos_generacion.IdPeriodo, dbo.ro_archivos_bancos_generacion_x_empleado.Valor, dbo.ro_archivos_bancos_generacion_x_empleado.IdEmpleado, 
+                         dbo.ro_archivos_bancos_generacion_x_empleado.pagacheque, dbo.ro_empleado.em_tipoCta, dbo.ro_empleado.em_NumCta, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.tb_persona.pe_nombreCompleto, 
+                         dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.IdTipoDocumento, dbo.ro_archivos_bancos_generacion_x_empleado.IdSucursal, dbo.ro_archivos_bancos_generacion_x_empleado.Secuencia
 FROM            dbo.ro_archivos_bancos_generacion INNER JOIN
-                         dbo.ro_archivos_bancos_generacion_x_empleado ON 
-                         dbo.ro_archivos_bancos_generacion.IdEmpresa = dbo.ro_archivos_bancos_generacion_x_empleado.IdEmpresa AND 
-                         dbo.ro_archivos_bancos_generacion.IdArchivo = dbo.ro_archivos_bancos_generacion_x_empleado.IdArchivo
+                         dbo.ro_archivos_bancos_generacion_x_empleado ON dbo.ro_archivos_bancos_generacion.IdEmpresa = dbo.ro_archivos_bancos_generacion_x_empleado.IdEmpresa AND 
+                         dbo.ro_archivos_bancos_generacion.IdArchivo = dbo.ro_archivos_bancos_generacion_x_empleado.IdArchivo INNER JOIN
+                         dbo.ro_empleado ON dbo.ro_archivos_bancos_generacion_x_empleado.IdEmpresa = dbo.ro_empleado.IdEmpresa AND dbo.ro_archivos_bancos_generacion_x_empleado.Secuencia = dbo.ro_empleado.IdEmpleado INNER JOIN
+                         dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[49] 4[5] 2[2] 3) )"
+         Configuration = "(H (1[54] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -84,20 +86,40 @@ Begin DesignProperties =
                Top = 6
                Left = 38
                Bottom = 276
-               Right = 247
+               Right = 272
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "ro_archivos_bancos_generacion_x_empleado"
             Begin Extent = 
-               Top = 14
-               Left = 499
-               Bottom = 224
-               Right = 708
+               Top = 0
+               Left = 606
+               Bottom = 210
+               Right = 815
             End
             DisplayFlags = 280
             TopColumn = 0
+         End
+         Begin Table = "ro_empleado"
+            Begin Extent = 
+               Top = 30
+               Left = 306
+               Bottom = 389
+               Right = 595
+            End
+            DisplayFlags = 280
+            TopColumn = 59
+         End
+         Begin Table = "tb_persona"
+            Begin Extent = 
+               Top = 111
+               Left = 38
+               Bottom = 456
+               Right = 270
+            End
+            DisplayFlags = 280
+            TopColumn = 1
          End
       End
    End
@@ -130,15 +152,23 @@ Begin DesignProperties =
          SortOrder = 1410
          GroupBy = 1350
          Filter = 1350
-         Or = 1350
+         Or =', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_archivos_bancos_generacion_x_empleado';
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_archivos_bancos_generacion_x_empleado';
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' 1350
          Or = 1350
          Or = 1350
       End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_archivos_bancos_generacion_x_empleado';
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_archivos_bancos_generacion_x_empleado';
 
