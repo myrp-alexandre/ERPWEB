@@ -192,7 +192,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public FileResult get_archivo(int IdEmpresa = 0, int IdArchivo = 0)
         {
             string archivo = "";
-            string NombreFile = "";
+            string NombreFile = "NCR";
 
             var info_archivo = bus_archivo.get_info(IdEmpresa, IdArchivo);
             info_archivo.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdArchivo);

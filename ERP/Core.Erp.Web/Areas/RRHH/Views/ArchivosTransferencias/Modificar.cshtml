@@ -1,84 +1,61 @@
-﻿@model Core.Erp.Info.RRHH.ro_empleado_novedad_Info
+﻿@model Core.Erp.Info.RRHH.ro_archivos_bancos_generacion_Info
 @{
-    ViewBag.Title = "Modificar novedad";
+    ViewBag.Title = "Modificar archivo de transferencia";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Modificar", "EmpleadoNovedad", FormMethod.Post, new { @class = "form", @role = "form" }))
+
+@using (Html.BeginForm("Modificar", "ArchivosTransferencias", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdNovedad)
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-
-                <div class="form-group">
-                    <label for="IdProveedor">Empleado</label>
-                    @Html.Partial("_CmbEmpleado_novedades", Model.IdEmpleado)
-                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdContrato_Tipo">Nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
-                    @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdContrato_Tipo">Tipo liquidación de nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
-                    @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
+    @Html.HiddenFor(q => q.IdArchivo)
+    @Html.HiddenFor(q => q.IdPeriodo)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="cb_Observacion">Observación</label>
-                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                    <label for="IdNomina_Tipo">Nómina*</label>
+                    @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
+                    @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdNomina_TipoLiqui">Tipo liquidación de nómina*</label>
+                    @Html.DropDownListFor(q => q.IdNominaTipo, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                    @Html.ValidationMessageFor(q => q.IdNominaTipo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="pe_fechaNacimiento">Fecha Novedad*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q=> q.Fecha, settings =>
-                    {
-                        settings.Name = "Fecha";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
-                    </div>
+                    <label for="IdBanco">Banco*</label>
+                    @Html.DropDownListFor(q => q.IdCuentaBancaria, new SelectList(ViewBag.lst_cuenta_bancarias, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
+                    @Html.ValidationMessageFor(q => q.IdCuentaBancaria, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco">Tipo de archivo*</label>
+                    @Html.DropDownListFor(q => q.IdProceso, new SelectList(ViewBag.lst_proceso, "IdProceso", "NombreProceso"), new { @class = "form-control", @id = "IdProceso" })
+                    @Html.ValidationMessageFor(q => q.IdProceso, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -87,9 +64,9 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="cb_Observacion">Detalle de la novedad</label>
-                    @Html.Action("GridViewPartial_empleado_novedad_det", new { IdEmpleado = Model.IdEmpleado, IdNovedad = Model.IdNovedad })
-                    @Html.ValidationMessageFor(q => q.lst_novedad_det, "", new { @class = "text-danger" })
+                    <label for="detalle">Detalle del archivo</label>
+                    @Html.Action("GridViewPartial_archivo_transferencia_det")
+                    @Html.ValidationMessageFor(q => q.detalle, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -98,7 +75,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","EmpleadoNovedad",new { Area = "RRHH" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","ArvhivosTransfeencias",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -107,17 +84,41 @@
 
 
 <script>
+    $("#IdBanco").change(function () {
+        $("#IdProceso").empty();
+        cargar_procesos();
+
+    });
+            function cargar_procesos() {
+                var datos = {
+                    IdBanco: $("#IdBanco").val()
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("get_list_procesos", "ProcesosBancariosPorEmpresa", new { Area = "General" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        $.each(data, function (i, row) {
+                            $("#IdProceso").append("<option value=" + row.IdProceso + ">" + row.NombreProceso + "</option>");
+
+                        });
+                    },
+                    error: function (error) {
+                    }
+                });
+    };
 
 
-            $("#IdNomina_Tipo").change(function () {
-                $("#IdNomina_TipoLiqui").empty();
-                cargar_tipo_liquidacion_nomina();
-
-            });
 
 
-
-
+    cargar_tipo_liquidacion_nomina();
             function cargar_tipo_liquidacion_nomina() {
                 var datos = {
                     IdNomina: $("#IdNomina_Tipo").val()
@@ -137,10 +138,12 @@
                         $.each(data, function (i, row) {
                             $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
                         });
+                        $("#IdNomina_TipoLiqui").val(2);
                     },
                     error: function (error) {
                     }
                 });
             };
-    
+
+
 </script>
