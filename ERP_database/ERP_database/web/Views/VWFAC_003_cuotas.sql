@@ -7,9 +7,9 @@ FROM     (SELECT dbo.fa_factura_det.IdEmpresa, dbo.fa_factura_det.IdSucursal, db
                                     dbo.tb_persona.pe_cedulaRuc, con.Direccion AS pe_direccion, con.Telefono AS pe_telefonoOfic, dbo.fa_factura.vt_Observacion AS Observacion_central, DAY(dbo.fa_factura.vt_fecha) AS dia, MONTH(dbo.fa_factura.vt_fecha) 
                                     AS mes, YEAR(dbo.fa_factura.vt_fecha) AS anio, dbo.fa_factura_det.vt_iva, CASE WHEN dbo.fa_factura_det.vt_iva = 0 THEN dbo.fa_factura_det.vt_Subtotal ELSE 0 END AS subtotal_0, 
                                     CASE WHEN dbo.fa_factura_det.vt_iva <> 0 THEN dbo.fa_factura_det.vt_Subtotal ELSE 0 END AS subtotal_iva, dbo.fa_factura_det.vt_total, 
-                                    CASE WHEN dbo.fa_factura_x_formaPago.IdFormaPago = '01' THEN dbo.fa_factura_det.vt_total ELSE 0 END AS forma_pago_EFECTIVO, 
-                                    CASE WHEN dbo.fa_factura_x_formaPago.IdFormaPago = '17' THEN dbo.fa_factura_det.vt_total ELSE 0 END AS forma_pago_DINERO_ELECTRONICO, CASE WHEN dbo.fa_factura_x_formaPago.IdFormaPago = '16' OR
-                                    dbo.fa_factura_x_formaPago.IdFormaPago = '19' THEN dbo.fa_factura_det.vt_total ELSE 0 END AS forma_pago_TARJETA_CRE_DEB, CASE WHEN dbo.fa_factura_x_formaPago.IdFormaPago NOT IN ('01', '17', '16', '19') 
+                                    CASE WHEN dbo.fa_cliente.FormaPago = '01' THEN dbo.fa_factura_det.vt_total ELSE 0 END AS forma_pago_EFECTIVO, 
+                                    CASE WHEN dbo.fa_cliente.FormaPago = '17' THEN dbo.fa_factura_det.vt_total ELSE 0 END AS forma_pago_DINERO_ELECTRONICO, CASE WHEN dbo.fa_cliente.FormaPago = '16' OR
+                                    dbo.fa_cliente.FormaPago = '19' THEN dbo.fa_factura_det.vt_total ELSE 0 END AS forma_pago_TARJETA_CRE_DEB, CASE WHEN dbo.fa_cliente.FormaPago NOT IN ('01', '17', '16', '19') 
                                     THEN dbo.fa_factura_det.vt_total ELSE 0 END AS forma_pago_CHEQUE_TRANSFERENCIA, dbo.fa_factura_det.vt_DescUnitario * dbo.fa_factura_det.vt_cantidad AS descto, dbo.in_Producto.pr_descripcion_2, 
                                     dbo.fa_factura_det.IdCod_Impuesto_Iva + ' %' AS vt_por_iva, dbo.tb_ciudad.Descripcion_Ciudad, dbo.fa_Vendedor.Codigo, dbo.fa_factura_det.vt_PorDescUnitario, dbo.fa_factura_det.vt_DescUnitario, 
                                     dbo.fa_factura_det.vt_PrecioFinal, dbo.fa_Vendedor.Ve_Vendedor, dbo.fa_factura.vt_fech_venc, dbo.in_Producto.lote_fecha_fab, dbo.in_Producto.lote_fecha_vcto, dbo.in_Producto.lote_num_lote, 
@@ -26,9 +26,7 @@ FROM     (SELECT dbo.fa_factura_det.IdEmpresa, dbo.fa_factura_det.IdSucursal, db
                                     dbo.fa_cliente_contactos AS con ON con.IdEmpresa = dbo.fa_cliente.IdEmpresa AND con.IdCliente = dbo.fa_cliente.IdCliente AND dbo.fa_factura.IdEmpresa = con.IdEmpresa AND dbo.fa_factura.IdCliente = con.IdCliente AND 
                                     dbo.fa_factura.IdContacto = con.IdContacto INNER JOIN
                                     dbo.tb_ciudad ON con.IdCiudad = dbo.tb_ciudad.IdCiudad INNER JOIN
-                                    dbo.fa_Vendedor ON dbo.fa_factura.IdEmpresa = dbo.fa_Vendedor.IdEmpresa AND dbo.fa_factura.IdVendedor = dbo.fa_Vendedor.IdVendedor LEFT OUTER JOIN
-                                    dbo.fa_factura_x_formaPago ON dbo.fa_factura.IdEmpresa = dbo.fa_factura_x_formaPago.IdEmpresa AND dbo.fa_factura.IdSucursal = dbo.fa_factura_x_formaPago.IdSucursal AND 
-                                    dbo.fa_factura.IdBodega = dbo.fa_factura_x_formaPago.IdBodega AND dbo.fa_factura.IdCbteVta = dbo.fa_factura_x_formaPago.IdCbteVta INNER JOIN
+                                    dbo.fa_Vendedor ON dbo.fa_factura.IdEmpresa = dbo.fa_Vendedor.IdEmpresa AND dbo.fa_factura.IdVendedor = dbo.fa_Vendedor.IdVendedor INNER JOIN
                                     dbo.in_presentacion AS pre ON pre.IdEmpresa = dbo.in_Producto.IdEmpresa AND pre.IdPresentacion = dbo.in_Producto.IdPresentacion
                   UNION ALL
                   SELECT dbo.fa_factura_det.IdEmpresa, dbo.fa_factura_det.IdSucursal, dbo.fa_factura_det.IdBodega, dbo.fa_factura_det.IdCbteVta, dbo.fa_factura_det.Secuencia, dbo.fa_factura.vt_tipoDoc, dbo.fa_factura.vt_serie1, 

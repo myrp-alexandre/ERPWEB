@@ -12,9 +12,7 @@ FROM            (SELECT        fac.IdEmpresa, fac.IdSucursal, fac.IdBodega, fac.
                                                     dbo.tb_persona AS per INNER JOIN
                                                     dbo.fa_cliente AS cli ON per.IdPersona = cli.IdPersona ON cl_cont.IdEmpresa = cli.IdEmpresa AND cl_cont.IdCliente = cli.IdCliente INNER JOIN
                                                     dbo.tb_empresa AS emp ON cli.IdEmpresa = emp.IdEmpresa INNER JOIN
-                                                    dbo.fa_factura_x_formaPago ON fac.IdEmpresa = dbo.fa_factura_x_formaPago.IdEmpresa AND fac.IdSucursal = dbo.fa_factura_x_formaPago.IdSucursal AND 
-                                                    fac.IdBodega = dbo.fa_factura_x_formaPago.IdBodega AND fac.IdCbteVta = dbo.fa_factura_x_formaPago.IdCbteVta INNER JOIN
-                                                    dbo.fa_formaPago ON dbo.fa_factura_x_formaPago.IdFormaPago = dbo.fa_formaPago.IdFormaPago INNER JOIN
+                                                    dbo.fa_formaPago ON cli.FormaPago = dbo.fa_formaPago.IdFormaPago INNER JOIN
                                                     dbo.fa_TerminoPago ON cli.IdTipoCredito = dbo.fa_TerminoPago.IdTerminoPago AND fac.Estado = 'A' AND fac.aprobada_enviar_sri = 1 AND NOT EXISTS
                                                         (SELECT        ID_REGISTRO
                                                           FROM            EntidadRegulatoria.fa_elec_registros_generados
