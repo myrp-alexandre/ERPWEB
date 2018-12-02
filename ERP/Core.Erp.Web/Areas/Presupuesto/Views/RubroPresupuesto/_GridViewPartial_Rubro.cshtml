@@ -7,33 +7,33 @@
         settings.KeyFieldName = "IdRubro";
         settings.Width = Unit.Percentage(100);
 
-//Configuración para que la grilla no muestre texto completo
-settings.SettingsBehavior.AllowEllipsisInText = true;
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
-//CConfiguracion responsive
+        //CConfiguracion responsive
 
-//Configuracion responsive
-settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+        //Configuracion responsive
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-//Configuración scrolling y pager
-settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
+        //Configuración scrolling y pager
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
         settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
         settings.Settings.VerticalScrollableHeight = 400;
         settings.SettingsPager.Visible = true;
         settings.SettingsPager.PageSize = 10;
         settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
         settings.SettingsPager.AlwaysShowPager = true;
-//Configuración filtro por columna
-settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        //Configuración filtro por columna
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
         settings.Settings.ShowFilterRow = true;
         settings.Settings.ShowHeaderFilterButton = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
-//Configuracion exportacion
-settings.SettingsExport.EnableClientSideExportAPI = true;
+        //Configuracion exportacion
+        settings.SettingsExport.EnableClientSideExportAPI = true;
         settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
         settings.Toolbars.Add(t =>
         {
@@ -50,24 +50,24 @@ settings.SettingsExport.EnableClientSideExportAPI = true;
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-//Evento para pintar de rojo las filas anuladas
-settings.HtmlRowPrepared = (s, e) =>
+        //Evento para pintar de rojo las filas anuladas
+        settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("Estado")) == "I")
-            {
-                e.Row.ForeColor = System.Drawing.Color.Red;
-            }
+            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
+                {
+                    e.Row.ForeColor = System.Drawing.Color.Red;
+                }
         };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdBanco = DataBinder.Eval(tc.DataItem, "IdRubro") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdBanco = DataBinder.Eval(tc.DataItem, "IdRubro") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdRubro = DataBinder.Eval(tc.DataItem, "IdRubro") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdRubro = DataBinder.Eval(tc.DataItem, "IdRubro") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -85,13 +85,13 @@ settings.HtmlRowPrepared = (s, e) =>
 
 
         settings.Columns.Add("IdRubro", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdCtaCble", "Cuenta Contable").Width = Unit.Percentage(40);
-        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(20);
+        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(30);
+        settings.Columns.Add("pc_Cuenta", "Cuenta Contable").Width = Unit.Percentage(40);        
         settings.Columns.Add(column =>
         {
-            column.FieldName = "EstadoBool";
+            column.FieldName = "Estado";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
 

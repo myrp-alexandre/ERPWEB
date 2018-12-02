@@ -9397,6 +9397,10 @@
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Index.cshtml" />
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\_GridViewPartial_Rubro.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Nuevo.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\_CmbCuentaContable.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Nuevo.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Modificar.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

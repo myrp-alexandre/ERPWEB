@@ -1963,6 +1963,9 @@
     <Compile Include="vwin_Transferencias.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwpre_rubro.cs">
+      <DependentUpon>Model_presupuesto.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwrdep_IngrEgr_x_Empleado.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>

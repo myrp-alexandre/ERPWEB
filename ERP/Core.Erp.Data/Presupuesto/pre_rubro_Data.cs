@@ -17,21 +17,25 @@ namespace Core.Erp.Data.Presupuesto
                 {
                     if (MostrarAnulado == false)
                     {
-                        Lista = db.pre_rubro.Where(q => q.Estado == true).Select(q => new pre_rubro_Info
+                        Lista = db.vwpre_rubro.Where(q => q.Estado == true).Select(q => new pre_rubro_Info
                         {
                             IdRubro = q.IdRubro,
+                            IdEmpresa = q.IdEmpresa,
                             Descripcion = q.Descripcion,
                             IdCtaCble = q.IdCtaCble,
+                            pc_Cuenta = q.pc_Cuenta,
                             Estado = q.Estado
                         }).ToList();
                     }
                     else
                     {
-                        Lista = db.pre_rubro.Select(q => new pre_rubro_Info
+                        Lista = db.vwpre_rubro.Select(q => new pre_rubro_Info
                         {
                             IdRubro = q.IdRubro,
+                            IdEmpresa = q.IdEmpresa,
                             Descripcion = q.Descripcion,
                             IdCtaCble = q.IdCtaCble,
+                            pc_Cuenta = q.pc_Cuenta,
                             Estado = q.Estado
                         }).ToList();
                     }
@@ -44,7 +48,7 @@ namespace Core.Erp.Data.Presupuesto
             }
         }
 
-        public pre_rubro_Info GetInfo(int IdRubro)
+        public pre_rubro_Info GetInfo(int IdEmpresa, int IdRubro)
         {
             try
             {
@@ -52,10 +56,12 @@ namespace Core.Erp.Data.Presupuesto
 
                 using (Entities_presupuesto Context = new Entities_presupuesto())
                 {
-                    pre_rubro Entity = Context.pre_rubro.FirstOrDefault(q => q.IdRubro == IdRubro);
+                    pre_rubro Entity = Context.pre_rubro.Where(q => q.IdRubro == IdRubro && q.IdEmpresa == IdEmpresa).FirstOrDefault();
+
                     if (Entity == null) return null;
                     info = new pre_rubro_Info
                     {
+                        IdEmpresa = Entity.IdEmpresa,
                         IdRubro = Entity.IdRubro,
                         Descripcion = Entity.Descripcion,
                         IdCtaCble = Entity.IdCtaCble,
@@ -98,12 +104,14 @@ namespace Core.Erp.Data.Presupuesto
             {
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
+                    int id = get_id(info.IdEmpresa);
                     db.pre_rubro.Add(new pre_rubro
-                    {
-                        IdRubro = get_id(info.IdEmpresa),
+                    {            
+                        IdEmpresa = info.IdEmpresa,            
+                        IdRubro = id,
                         Descripcion = info.Descripcion,
                         IdCtaCble = info.IdCtaCble,
-                        Estado = info.Estado,
+                        Estado = true,
                         IdUsuarioCreacion = info.IdUsuario,
                         FechaCreacion = DateTime.Now
                     });
@@ -125,7 +133,7 @@ namespace Core.Erp.Data.Presupuesto
             {
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    pre_rubro entity = db.pre_rubro.Where(q => q.IdRubro == info.IdRubro).FirstOrDefault();
+                    pre_rubro entity = db.pre_rubro.Where(q => q.IdRubro == info.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
 
                     if (entity == null)
                     {
@@ -134,7 +142,7 @@ namespace Core.Erp.Data.Presupuesto
 
                     entity.Descripcion = info.Descripcion;
                     entity.IdCtaCble = info.IdCtaCble;
-                    entity.IdUsuarioModificacion = info.IdUsuario;
+                    entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     entity.FechaModificacion = DateTime.Now;
 
                     db.SaveChanges();
@@ -154,15 +162,15 @@ namespace Core.Erp.Data.Presupuesto
             {
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    pre_rubro entity = db.pre_rubro.Where(q => q.IdRubro == info.IdRubro).FirstOrDefault();
+                    pre_rubro entity = db.pre_rubro.Where(q => q.IdRubro == info.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
 
                     if (entity == null)
                     {
                         return false;
                     }
 
-                    entity.Estado = info.Estado;
-                    entity.IdUsuarioAnulacion = info.IdUsuario;
+                    entity.Estado = false;
+                    entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     entity.FechaAnulacion = DateTime.Now;
                     entity.MotivoAnulacion = info.MotivoAnulacion;
 

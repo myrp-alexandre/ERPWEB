@@ -25,5 +25,8 @@ namespace Core.Erp.Info.Presupuesto
         [Required(ErrorMessage = "El campo descripción es obligatorio")]
         [StringLength(500, MinimumLength = 4, ErrorMessage = "El campo descripción debe tener mínimo 4 caracteres y máximo 500")]
         public string MotivoAnulacion { get; set; }
+
+
+        public string pc_Cuenta { get; set; }
     }
 }

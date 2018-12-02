@@ -12,17 +12,13 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class pre_Grupo
+    public partial class vwpre_rubro
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public pre_Grupo()
-        {
-            this.pre_Grupo_x_seg_usuario = new HashSet<pre_Grupo_x_seg_usuario>();
-        }
-    
         public int IdEmpresa { get; set; }
-        public int IdGrupo { get; set; }
+        public int IdRubro { get; set; }
         public string Descripcion { get; set; }
+        public string IdCtaCble { get; set; }
+        public string pc_Cuenta { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -31,8 +27,5 @@ namespace Core.Erp.Data
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pre_Grupo_x_seg_usuario> pre_Grupo_x_seg_usuario { get; set; }
     }
 }

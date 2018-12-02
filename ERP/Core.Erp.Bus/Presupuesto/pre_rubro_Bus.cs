@@ -21,11 +21,11 @@ namespace Core.Erp.Bus.Presupuesto
             }
         }
 
-        public pre_rubro_Info GetInfo(int IdRubro)
+        public pre_rubro_Info GetInfo(int IdEmpresa, int IdRubro)
         {
             try
             {
-                return odata.GetInfo(IdRubro);
+                return odata.GetInfo(IdEmpresa, IdRubro);
             }
             catch (Exception)
             {

@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.Contabilidad;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.Presupuesto.Controllers
 {
@@ -29,18 +32,46 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             List<pre_rubro_Info> model = bus_Rubro.GetList(IdEmpresa, true);
             return PartialView("_GridViewPartial_Rubro", model);
         }
+
+        private void cargar_combos(int IdEmpresa)
+        {
+            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+            var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, false);
+            ViewBag.lst_cuentas = lst_ctacble;
+        }
+        #endregion
+
+        #region Metodos ComboBox bajo demanda
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        public ActionResult CmbCuentaContable()
+        {
+            string model = "";
+            return PartialView("_CmbCuentaContable", model);
+        }
+
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #region Acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            cargar_combos(IdEmpresa);
             pre_rubro_Info model = new pre_rubro_Info();
             return View(model);
+            
         }
 
         [HttpPost]
         public ActionResult Nuevo(pre_rubro_Info model)
-        {
+        {            
             model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_Rubro.GuardarBD(model))
             {
@@ -49,9 +80,9 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdRubro = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdRubro = 0)
         {
-            pre_rubro_Info model = bus_Rubro.GetInfo(IdRubro);
+            pre_rubro_Info model = bus_Rubro.GetInfo(IdEmpresa, IdRubro);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
@@ -68,9 +99,9 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdRubro = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdRubro = 0)
         {
-            pre_rubro_Info model = bus_Rubro.GetInfo(IdRubro);
+            pre_rubro_Info model = bus_Rubro.GetInfo(IdEmpresa, IdRubro);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
@@ -79,7 +110,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         [HttpPost]
         public ActionResult Anular(pre_rubro_Info model)
         {
-            model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_Rubro.AnularBD(model))
             {
                 return View(model);
@@ -88,68 +119,5 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         }
 
         #endregion
-
-        //[ValidateInput(false)]
-        //public ActionResult GridViewPartial()
-        //{
-        //    var model = new object[0];
-        //    return PartialView("_GridViewPartial", model);
-        //}
-
-        //[HttpPost, ValidateInput(false)]
-        //public ActionResult GridViewPartialAddNew(Core.Erp.Info.RRHH.ro_area_Info item)
-        //{
-        //    var model = new object[0];
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            // Insert here a code to insert the new item in your model
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            ViewData["EditError"] = e.Message;
-        //        }
-        //    }
-        //    else
-        //        ViewData["EditError"] = "Please, correct all errors.";
-        //    return PartialView("_GridViewPartial", model);
-        //}
-        //[HttpPost, ValidateInput(false)]
-        //public ActionResult GridViewPartialUpdate(Core.Erp.Info.RRHH.ro_area_Info item)
-        //{
-        //    var model = new object[0];
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            // Insert here a code to update the item in your model
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            ViewData["EditError"] = e.Message;
-        //        }
-        //    }
-        //    else
-        //        ViewData["EditError"] = "Please, correct all errors.";
-        //    return PartialView("_GridViewPartial", model);
-        //}
-        //[HttpPost, ValidateInput(false)]
-        //public ActionResult GridViewPartialDelete(System.Int32 IdArea)
-        //{
-        //    var model = new object[0];
-        //    if (IdArea >= 0)
-        //    {
-        //        try
-        //        {
-        //            // Insert here a code to delete the item from your model
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            ViewData["EditError"] = e.Message;
-        //        }
-        //    }
-        //    return PartialView("_GridViewPartial", model);
-        //}
     }
 }
