@@ -87,8 +87,14 @@
     $("#IdBanco").change(function () {
         $("#IdProceso").empty();
         cargar_procesos();
+        cargar_empleados();
 
     });
+    $("#IdProceso").change(function () {
+        cargar_empleados();
+
+    });
+
             function cargar_procesos() {
                 var datos = {
                     IdBanco: $("#IdBanco").val()
@@ -147,8 +153,8 @@
             function cargar_empleados() {
                 var datos = {
                     IdProceso: $("#IdProceso").val(),
-                    IdProceso: $("#IdNomina_Tipo").val(),
-                    IdProceso: $("#IdNomina_TipoLiqui").val(),
+                    IdNomina_Tipo: $("#IdNomina_Tipo").val(),
+                    IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
                     IdPeriodo: $("#IdPeriodo").val(),
                     IdTransaccionSession: $("#IdTransaccionSession").val()
                     

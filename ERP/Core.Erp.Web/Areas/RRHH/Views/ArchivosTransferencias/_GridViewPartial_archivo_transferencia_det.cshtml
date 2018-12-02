@@ -41,18 +41,40 @@
         settings.Settings.ShowHeaderFilterButton = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Nombres";
-            column.Width = Unit.Percentage(65);
+            column.Width = Unit.Percentage(40);
             column.EditorProperties().TextBox(sp =>
             {
                 sp.Width = Unit.Percentage(100);
 
             });
         });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "em_tipoCta";
+            column.Caption = "Tipo cta.";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().TextBox(sp =>
+            {
+                sp.Width = Unit.Percentage(100);
 
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "em_NumCta";
+            column.Caption = "# cuenta";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().TextBox(sp =>
+            {
+                sp.Width = Unit.Percentage(100);
+
+            });
+        });
 
 
         settings.Columns.Add(column =>

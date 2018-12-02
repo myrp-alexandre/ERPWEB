@@ -33,7 +33,8 @@ namespace Core.Erp.Data.RRHH
                                   pe_apellido=q.pe_apellido,
                                   pe_nombre=q.pe_nombre,
                                   pe_cedulaRuc=q.pe_cedulaRuc,
-                                  IdTipoDocumento=q.IdTipoDocumento
+                                  IdTipoDocumento=q.IdTipoDocumento,
+                                  pe_nombreCompleto=q.pe_nombreCompleto
                                   
                              }).ToList();
 
