@@ -6,12 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Core.Erp.Data.General;
+using Core.Erp.Data.Banco;
 namespace Core.Erp.Bus.RRHH
 {
    public class ro_archivos_bancos_generacion_Bus
     {
         ro_archivos_bancos_generacion_Data odata = new ro_archivos_bancos_generacion_Data();
+        tb_banco_procesos_bancarios_x_empresa_Data odata_proceso = new tb_banco_procesos_bancarios_x_empresa_Data();
+        tb_empresa_Data odata_empresa = new tb_empresa_Data();
+        ba_Banco_Cuenta_Data odata_cuenta = new ba_Banco_Cuenta_Data();
         public List<ro_archivos_bancos_generacion_Info> get_list(int IdEmpresa, DateTime Fechainicio, DateTime fechafin, bool estado)
         {
             try
@@ -102,8 +106,9 @@ namespace Core.Erp.Bus.RRHH
                   
                     case cl_enumeradores.eTipoProcesoBancario.ROL_ELECTRONICO:
 
-                        break;
-                    
+                        return get_ROL_ELECTRONICO(info);
+                        
+
                     default:
                         break;
                 }
@@ -143,6 +148,54 @@ namespace Core.Erp.Bus.RRHH
                         File +=  cl_funciones.QuitarTildes(item.pe_apellido + item.pe_nombre);
                         File += "\n";
                     }
+
+                }
+
+                return File;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        private string get_ROL_ELECTRONICO(ro_archivos_bancos_generacion_Info info)
+        {
+            try
+            {
+                var Info_proceso = odata_proceso.get_info(info.IdEmpresa, info.IdProceso);
+                var info_empresa = odata_empresa.get_info(info.IdEmpresa);
+                var info_cuenta = odata_cuenta.get_info(info.IdEmpresa,Convert.ToInt32( info.IdCuentaBancaria));
+                string File = "";
+                double valor= 0;
+                double valorEntero = 0;
+                double valorDecimal = 0;
+                int secuencia = 0;
+                
+                foreach (var item in info.detalle)
+                {
+                    if (item.em_tipoCta == "VRT")
+                    {
+                        if (secuencia == 0)
+                        {
+                        valor = Convert.ToDouble(info.detalle.Sum(v => v.Saldo));
+                        valorEntero = Math.Floor(valor);
+                        valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+
+                            File += "C";
+                            File += Info_proceso.Codigo_Empresa;
+                            File += info_empresa.em_nombre;
+                            File += "C";
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    
 
                 }
 

@@ -204,6 +204,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     NombreFile = "NCR" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0')+tipo_file.Codigo_Empresa+"_"+secuancia.ToString().PadLeft(2,'0');
                     break;
                 case cl_enumeradores.eTipoProcesoBancario.ROL_ELECTRONICO:
+                    NombreFile = "NCR" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0') + tipo_file.Codigo_Empresa + "_" + secuancia.ToString().PadLeft(2, '0');
                     break;
                 default:
                     break;
