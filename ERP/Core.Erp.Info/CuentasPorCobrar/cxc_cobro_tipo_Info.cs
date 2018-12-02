@@ -27,6 +27,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public string IdMotivo_tipo_cobro { get; set; }
         public bool EsTarjetaCredito { get; set; }
         public bool SeDeposita { get; set; }
+        public double PorcentajeDescuento { get; set; }
 
         #region Campos auditoria
         public string IdUsuario { get; set; }
@@ -43,7 +44,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public bool ESRetenIVA_bool { get; set; }
         public bool ESRetenFTE_bool { get; set; }
         public int IdEmpresa { get; set; }
-        public double ValorDescuento { get; set; }
+        
         #endregion
     }
 }

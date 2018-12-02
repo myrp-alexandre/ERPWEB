@@ -113,7 +113,7 @@
           <Property Name="IdMotivo_tipo_cobro" Type="varchar" MaxLength="15" />
           <Property Name="EsTarjetaCredito" Type="bit" Nullable="false" />
           <Property Name="SeDeposita" Type="bit" Nullable="false" />
-          <Property Name="ValorDescuento" Type="float" Nullable="false" />
+          <Property Name="PorcentajeDescuento" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="cxc_cobro_tipo_motivo">
           <Key>
@@ -1435,7 +1435,7 @@ warning 6002: The table/view 'DBERP.web.vwcxc_cobro_para_retencion' does not hav
           <Property Name="IdMotivo_tipo_cobro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="EsTarjetaCredito" Type="Boolean" Nullable="false" />
           <Property Name="SeDeposita" Type="Boolean" Nullable="false" />
-          <Property Name="ValorDescuento" Type="Double" Nullable="false" />
+          <Property Name="PorcentajeDescuento" Type="Double" Nullable="false" />
           <NavigationProperty Name="cxc_cobro" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro" />
           <NavigationProperty Name="cxc_cobro_det" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_det" />
           <NavigationProperty Name="cxc_cobro_tipo_motivo" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_tipo_motivo" />
@@ -1861,7 +1861,7 @@ warning 6002: The table/view 'DBERP.web.vwcxc_cobro_para_retencion' does not hav
           <EntitySetMapping Name="cxc_cobro_tipo">
             <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.cxc_cobro_tipo">
               <MappingFragment StoreEntitySet="cxc_cobro_tipo">
-                <ScalarProperty Name="ValorDescuento" ColumnName="ValorDescuento" />
+                <ScalarProperty Name="PorcentajeDescuento" ColumnName="PorcentajeDescuento" />
                 <ScalarProperty Name="SeDeposita" ColumnName="SeDeposita" />
                 <ScalarProperty Name="EsTarjetaCredito" ColumnName="EsTarjetaCredito" />
                 <ScalarProperty Name="IdMotivo_tipo_cobro" ColumnName="IdMotivo_tipo_cobro" />

@@ -130,16 +130,16 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="PorcentajeRet">Porcentaje</label>
+                    <label for="PorcentajeRet">Porcentaje retención</label>
                     @Html.TextBoxFor(q => q.PorcentajeRet, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.PorcentajeRet, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="ValorDescuento">Valor descuento</label>
-                    @Html.TextBoxFor(q => q.ValorDescuento, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.ValorDescuento, "", new { @class = "text-danger" })
+                    <label for="ValorDescuento">Porcentaje descuento al facturar</label>
+                    @Html.TextBoxFor(q => q.PorcentajeDescuento, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.PorcentajeDescuento, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

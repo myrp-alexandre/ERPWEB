@@ -109,7 +109,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         PorcentajeRet = Entity.PorcentajeRet,
                         EsTarjetaCredito = Entity.EsTarjetaCredito,
                         SeDeposita = Entity.SeDeposita,
-                        ValorDescuento = Entity.ValorDescuento
+                        PorcentajeDescuento = Entity.PorcentajeDescuento
                     };
                 }
                 return info;
@@ -161,7 +161,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         PorcentajeRet = info.PorcentajeRet,
                         EsTarjetaCredito = info.EsTarjetaCredito,
                         SeDeposita = info.SeDeposita,
-                        ValorDescuento = info.ValorDescuento,
+                        PorcentajeDescuento = info.PorcentajeDescuento,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     };
@@ -203,7 +203,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     Entity.PorcentajeRet = info.PorcentajeRet;
                     Entity.EsTarjetaCredito = info.EsTarjetaCredito;
                     Entity.SeDeposita = info.SeDeposita;
-                    Entity.ValorDescuento = info.ValorDescuento;
+                    Entity.PorcentajeDescuento = info.PorcentajeDescuento;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod;
