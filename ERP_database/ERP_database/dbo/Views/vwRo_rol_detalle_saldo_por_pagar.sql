@@ -3,9 +3,9 @@ where rol.IdPeriodo=201804*/
 CREATE VIEW dbo.vwRo_rol_detalle_saldo_por_pagar
 AS
 SELECT        rol_1.IdEmpresa, rol_1.IdRol, rol_1.IdNominaTipo, rol_1.IdNominaTipoLiqui, rol_1.IdPeriodo, rol_1.IdEmpleado, rol_1.IdRubro, rol_1.ValorGanado, rol_1.IdSucursal, rol_1.em_codigo, rol_1.pe_apellido, rol_1.pe_nombre, 
-                         rol_1.pe_nombreCompleto, rol_1.pe_cedulaRuc, ISNULL(pago.Valor, 0) AS ValorCancelado, rol_1.ValorGanado - ISNULL(pago.Valor, 0) AS Saldo
+                         rol_1.pe_nombreCompleto, rol_1.pe_cedulaRuc, ISNULL(pago.Valor, 0) AS ValorCancelado, rol_1.ValorGanado - ISNULL(pago.Valor, 0) AS Saldo, rol_1.em_NumCta, rol_1.em_tipoCta
 FROM            (SELECT        rol.IdEmpresa, rol.IdRol, rol.IdNominaTipo, rol.IdNominaTipoLiqui, rol.IdPeriodo, rol_det.IdEmpleado, rol_det.IdRubro, rol_det.Valor AS ValorGanado, rol_det.IdSucursal, emp.em_codigo, persona.pe_apellido, 
-                                                    persona.pe_nombre, persona.pe_nombreCompleto, persona.pe_cedulaRuc
+                                                    persona.pe_nombre, persona.pe_nombreCompleto, persona.pe_cedulaRuc, emp.em_NumCta, emp.em_tipoCta
                           FROM            dbo.ro_rol AS rol INNER JOIN
                                                     dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol INNER JOIN
                                                     dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
@@ -25,7 +25,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[37] 4[6] 2[14] 3) )"
+         Configuration = "(H (1[38] 4[6] 2[32] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -91,22 +91,22 @@ Begin DesignProperties =
          Left = -1114
       End
       Begin Tables = 
-         Begin Table = "rol_1"
-            Begin Extent = 
-               Top = 6
-               Left = 1152
-               Bottom = 136
-               Right = 1354
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "pago"
             Begin Extent = 
                Top = 6
                Left = 1392
                Bottom = 136
                Right = 1562
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "rol_1"
+            Begin Extent = 
+               Top = 6
+               Left = 1152
+               Bottom = 136
+               Right = 1354
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -149,4 +149,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_rol_detalle_saldo_por_pagar';
+
+
 

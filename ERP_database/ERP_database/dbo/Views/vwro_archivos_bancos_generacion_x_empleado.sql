@@ -7,7 +7,8 @@ SELECT        dbo.ro_archivos_bancos_generacion.IdEmpresa, dbo.ro_archivos_banco
 FROM            dbo.ro_archivos_bancos_generacion INNER JOIN
                          dbo.ro_archivos_bancos_generacion_x_empleado ON dbo.ro_archivos_bancos_generacion.IdEmpresa = dbo.ro_archivos_bancos_generacion_x_empleado.IdEmpresa AND 
                          dbo.ro_archivos_bancos_generacion.IdArchivo = dbo.ro_archivos_bancos_generacion_x_empleado.IdArchivo INNER JOIN
-                         dbo.ro_empleado ON dbo.ro_archivos_bancos_generacion_x_empleado.IdEmpresa = dbo.ro_empleado.IdEmpresa AND dbo.ro_archivos_bancos_generacion_x_empleado.Secuencia = dbo.ro_empleado.IdEmpleado INNER JOIN
+                         dbo.ro_empleado ON dbo.ro_archivos_bancos_generacion_x_empleado.IdEmpresa = dbo.ro_empleado.IdEmpresa AND 
+                         dbo.ro_archivos_bancos_generacion_x_empleado.IdEmpleado = dbo.ro_empleado.IdEmpleado INNER JOIN
                          dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -15,7 +16,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[54] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[29] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -81,36 +82,6 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "ro_archivos_bancos_generacion"
-            Begin Extent = 
-               Top = 6
-               Left = 38
-               Bottom = 276
-               Right = 272
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "ro_archivos_bancos_generacion_x_empleado"
-            Begin Extent = 
-               Top = 0
-               Left = 606
-               Bottom = 210
-               Right = 815
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "ro_empleado"
-            Begin Extent = 
-               Top = 30
-               Left = 306
-               Bottom = 389
-               Right = 595
-            End
-            DisplayFlags = 280
-            TopColumn = 59
-         End
          Begin Table = "tb_persona"
             Begin Extent = 
                Top = 111
@@ -119,7 +90,37 @@ Begin DesignProperties =
                Right = 270
             End
             DisplayFlags = 280
-            TopColumn = 1
+            TopColumn = 0
+         End
+         Begin Table = "ro_empleado"
+            Begin Extent = 
+               Top = 30
+               Left = 828
+               Bottom = 389
+               Right = 1117
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_archivos_bancos_generacion"
+            Begin Extent = 
+               Top = 0
+               Left = 204
+               Bottom = 270
+               Right = 438
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_archivos_bancos_generacion_x_empleado"
+            Begin Extent = 
+               Top = 6
+               Left = 481
+               Bottom = 216
+               Right = 690
+            End
+            DisplayFlags = 280
+            TopColumn = 0
          End
       End
    End
@@ -128,8 +129,17 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
+      Begin ColumnWidths = 18
          Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -144,15 +154,9 @@ Begin DesignProperties =
       Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
-         Table = 1170
-         Output = 720
-         Append = 1400
-         NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
-         GroupBy = 1350
-         Filter = 1350
-         Or =', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_archivos_bancos_generacion_x_empleado';
+  ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_archivos_bancos_generacion_x_empleado';
+
+
 
 
 
@@ -164,11 +168,21 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' 1350
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
          Or = 1350
          Or = 1350
       End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_archivos_bancos_generacion_x_empleado';
+
+
 

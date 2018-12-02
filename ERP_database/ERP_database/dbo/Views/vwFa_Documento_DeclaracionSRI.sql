@@ -1,11 +1,19 @@
 ﻿CREATE VIEW [dbo].[vwFa_Documento_DeclaracionSRI]
 AS
-SELECT A.IdEmpresa, A.IdTipoDocumento, A.pe_cedulaRuc, A.vt_tipoDoc, A.SubTotal_0 AS baseNoGraIva, A.Subtotal_Iva AS baseImpGrav, A.vt_Subtotal AS baseImponible, A.vt_iva AS montoIva, A.IdCbteVta, A.IdCliente, A.vt_serie1, A.vt_fecha, 
+SELECT A.IdEmpresa, per.IdTipoDocumento, per.pe_cedulaRuc, A.vt_tipoDoc, d.Subtotal0 AS baseNoGraIva, d.SubtotalIVA AS baseImpGrav, d.vt_Subtotal AS baseImponible, d.vt_iva AS montoIva, A.IdCbteVta, A.IdCliente, A.vt_serie1, A.vt_fecha, 
                   'FA-' + A.vt_serie1 + '-' + A.vt_serie2 + '-' + CAST(A.vt_NumFactura AS varchar(20)) + '/' + CAST(A.IdCbteVta AS varchar(20)) AS vt_NumDocumento, per.pe_nombreCompleto AS Razon_Social
-FROM     vwfa_factura AS A
+FROM     fa_factura AS A
 inner join fa_cliente as cli on a.IdEmpresa = cli.IdEmpresa
 and a.IdCliente = cli.IdCliente
 inner join tb_persona as per on cli.IdPersona = per.IdPersona
+inner join (
+select Fdet.IdEmpresa, Fdet.IdSucursal, Fdet.IdBodega, Fdet.IdCbteVta,
+sum(Fdet.Subtotal0) Subtotal0, sum(Fdet.SubtotalIVA) SubtotalIVA, sum(Fdet.vt_Subtotal) vt_Subtotal, sum(Fdet.vt_iva)vt_iva, sum(Fdet.vt_total) vt_total
+from (
+select d.IdEmpresa, d.IdSucursal, d.IdBodega, d.IdCbteVta, iif(d.vt_por_iva = 0, d.vt_Subtotal,0) as Subtotal0, iif(d.vt_por_iva > 0, d.vt_Subtotal,0) as SubtotalIVA,d.vt_Subtotal, d.vt_iva, d.vt_total
+from fa_factura_det as d
+) Fdet group by Fdet.IdEmpresa, Fdet.IdSucursal, Fdet.IdBodega, Fdet.IdCbteVta
+) as d on a.IdEmpresa = d.IdEmpresa and a.IdSucursal = d.IdSucursal and a.IdBodega = d.IdBodega and a.IdCbteVta = d.IdCbteVta
 UNION ALL
 SELECT A.IdEmpresa, A.IdTipoDocumento, A.pe_cedulaRuc, A.CreDeb, vt_Subtotal0 AS baseNoGraIva, vt_subtotalIva AS baseImpGrav, A.sc_Subtotal AS baseImponible, A.sc_iva AS montoIva, A.IdNota, A.IdCliente, A.Serie1, A.no_fecha, 
                   A.CreDeb + '-' + cast(A.IdNota AS varchar(50)), isnull(A.pe_apellido, '') + ' ' + isnull(A.pe_nombre, '') AS Razon_Social

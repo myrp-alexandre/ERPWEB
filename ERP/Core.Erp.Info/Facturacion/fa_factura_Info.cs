@@ -57,6 +57,10 @@ namespace Core.Erp.Info.Facturacion
         public Nullable<System.DateTime> fecha_primera_cuota { get; set; }
         public Nullable<double> valor_abono { get; set; }
 
+        public double vt_Total { get; set; }
+        public double vt_ValorEfectivo { get; set; }
+        public double vt_Cambio { get; set; }
+
         #region Campos de auditoria
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transaccion { get; set; }

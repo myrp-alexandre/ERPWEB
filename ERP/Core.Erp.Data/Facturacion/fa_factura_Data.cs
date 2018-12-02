@@ -159,9 +159,6 @@ namespace Core.Erp.Data.Facturacion
                         esta_impresa = Entity.esta_impresa,
                         valor_abono = Entity.valor_abono
                     };
-                    var Entity_fp = Context.fa_factura_x_formaPago.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta).FirstOrDefault();
-                    if (Entity_fp != null)
-                        info.IdFormaPago = Entity_fp.IdFormaPago;
                 }
                 return info;
             }
@@ -280,18 +277,6 @@ namespace Core.Erp.Data.Facturacion
                         IdPunto_cargo_grupo = item.IdPunto_cargo_grupo
                     });
                 }
-                #endregion
-
-                #region Forma de pago
-                db_f.fa_factura_x_formaPago.Add(new fa_factura_x_formaPago
-                {
-                    IdEmpresa = info.IdEmpresa,
-                    IdSucursal = info.IdSucursal,
-                    IdBodega = info.IdBodega,
-                    IdCbteVta = info.IdCbteVta,
-                    IdFormaPago = info.IdFormaPago,
-                    observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura
-                });
                 #endregion
 
                 #region Cuotas
@@ -767,20 +752,6 @@ namespace Core.Erp.Data.Facturacion
                         IdPunto_cargo_grupo = item.IdPunto_cargo_grupo
                     });
                 }
-                #endregion
-
-                #region Forma de pago
-                var fp = db_f.fa_factura_x_formaPago.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCbteVta == info.IdCbteVta).FirstOrDefault();
-                db_f.fa_factura_x_formaPago.Remove(fp);
-                db_f.fa_factura_x_formaPago.Add(new fa_factura_x_formaPago
-                {
-                    IdEmpresa = info.IdEmpresa,
-                    IdSucursal = info.IdSucursal,
-                    IdBodega = info.IdBodega,
-                    IdCbteVta = info.IdCbteVta,
-                    IdFormaPago = info.IdFormaPago,
-                    observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura
-                });
                 #endregion
 
                 #region Cuotas
