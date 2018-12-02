@@ -75,6 +75,7 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                
                 ro_archivos_bancos_generacion_Info info = new ro_archivos_bancos_generacion_Info();
 
                 using (Entities_rrhh Context = new Entities_rrhh())
@@ -92,7 +93,45 @@ namespace Core.Erp.Data.RRHH
                         IdProceso = Entity.IdProceso,
                         estado = Entity.estado,
                         IdRol = Entity.IdRol,
-                        EstadoBool = Entity.estado == "A" ? true : false
+                        EstadoBool = Entity.estado == "A" ? true : false,
+                        
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public ro_archivos_bancos_generacion_Info get_info_generar_file(int IdEmpresa, decimal IdArchivo)
+        {
+            try
+            {
+
+                ro_archivos_bancos_generacion_Info info = new ro_archivos_bancos_generacion_Info();
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_archivos_bancos_generacion Entity = Context.ro_archivos_bancos_generacion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdArchivo == IdArchivo);
+                    if (Entity == null) return null;
+
+                    info = new ro_archivos_bancos_generacion_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdArchivo = Entity.IdArchivo,
+                        IdNomina = Entity.IdNomina,
+                        IdNominaTipo = Entity.IdNominaTipo,
+                        IdCuentaBancaria = Entity.IdCuentaBancaria,
+                        IdProceso = Entity.IdProceso,
+                        estado = Entity.estado,
+                        IdRol = Entity.IdRol,
+                        EstadoBool = Entity.estado == "A" ? true : false,
+
                     };
                 }
 
@@ -242,5 +281,31 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
+        public int get_secuencia_file(int IdEmpresa, int IdProceso, DateTime FechaActual)
+        {
+            try
+            {
+                int ID = 1;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    var lst = from q in Context.ro_archivos_bancos_generacion
+                              where q.IdEmpresa == IdEmpresa
+                              && q.IdProceso == IdProceso
+                               && q.Fecha_Transac == FechaActual
+                              select q;
+
+                    if (lst.Count() > 0)
+                        ID = lst.Count()+1;
+                }
+
+                return ID;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
