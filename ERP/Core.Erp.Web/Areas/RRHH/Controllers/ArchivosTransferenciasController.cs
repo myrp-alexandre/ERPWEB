@@ -24,6 +24,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         ba_Banco_Cuenta_Bus bus_cuentas_bancarias = new ba_Banco_Cuenta_Bus();
         tb_banco_procesos_bancarios_x_empresa_Bus bus_procesos_bancarios = new tb_banco_procesos_bancarios_x_empresa_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
 
         #endregion
 
@@ -31,12 +32,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
-            
+            cargar_combos_consulta();
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            cargar_combos_consulta();
             return View(model);
 
         }
@@ -261,10 +263,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var lst_proceso = bus_procesos_bancarios.get_list(IdEmpresa, false);
             ViewBag.lst_proceso = lst_proceso;
         }
+
+        private void cargar_combos_consulta()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
         #endregion
 
         #region funciones del detalle
-       
+
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_archivos_bancos_generacion_x_empleado_Info info_det)
         {

@@ -167,6 +167,7 @@ namespace Core.Erp.Bus.RRHH
             {
                 var Info_proceso = odata_proceso.get_info(info.IdEmpresa, info.IdProceso);
                 var info_empresa = odata_empresa.get_info(info.IdEmpresa);
+                info_empresa.RazonSocial = info_empresa.RazonSocial.Replace("S.A", "");
                 var info_cuenta = odata_cuenta.get_info(info.IdEmpresa,Convert.ToInt32( info.IdCuentaBancaria));
                 string File = "";
                 double valor= 0;
@@ -187,10 +188,10 @@ namespace Core.Erp.Bus.RRHH
                             File += "C";
                             File += Info_proceso.Codigo_Empresa;
                             File += info_cuenta.ba_Num_Cuenta.PadLeft(10,'0');
-                            if(info_empresa.NombreComercial.Length>38)
-                            File += info_empresa.em_nombre.Substring(0,37);
+                            if(info_empresa.RazonSocial.Length>38)
+                            File += info_empresa.RazonSocial.Substring(0,37);
                             else
-                            File += info_empresa.em_nombre.PadLeft(38, ' ');
+                            File += info_empresa.RazonSocial.PadRight(38, ' ');
                             File += "C";
                             File += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
                             File += DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
@@ -198,14 +199,14 @@ namespace Core.Erp.Bus.RRHH
                         }
                         else
                         {
-                            valor = Convert.ToDouble(info.detalle.Sum(v => v.Saldo));
+                            valor = Convert.ToDouble(info.detalle.Sum(v => v.Valor));
                             valorEntero = Math.Floor(valor);
                             valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
                             File += "D";
                             File += Info_proceso.Codigo_Empresa;
                             File += item.pe_cedulaRuc.PadLeft(10,'0');
-                            File += item.pe_nombreCompleto.Substring(0,16);
-                            File += "E";
+                            File += item.pe_nombreCompleto.Substring(0,17);
+                            File += "C";
                             File += "                    ";
                             File += "N";
                             File += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
