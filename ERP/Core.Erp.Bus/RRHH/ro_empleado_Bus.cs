@@ -119,8 +119,8 @@ namespace Core.Erp.Bus.RRHH
                 info.IdSucursal = 1;
                 bool si_grabo = false;
                 info.info_persona.pe_Naturaleza = "NATU";
-                info.info_persona.pe_nombreCompleto = info.info_persona.pe_apellido + " " + info.info_persona.pe_nombre;
-                info.info_persona.pe_razonSocial = info.info_persona.pe_apellido + " " + info.info_persona.pe_nombre;
+                info.info_persona.pe_nombreCompleto = info.pe_apellido + " " + info.pe_nombre;
+                info.info_persona.pe_razonSocial = info.pe_apellido + " " + info.pe_nombre;
                 if (info.IdPersona != 0)
                 {
                     info.info_persona.IdPersona = info.IdPersona;

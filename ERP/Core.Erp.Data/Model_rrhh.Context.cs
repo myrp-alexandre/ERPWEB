@@ -113,9 +113,9 @@ namespace Core.Erp.Data
         public DbSet<vwro_rol> vwro_rol { get; set; }
         public DbSet<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }
         public DbSet<vwro_archivos_bancos_generacion_x_empleado> vwro_archivos_bancos_generacion_x_empleado { get; set; }
-        public DbSet<vwRo_rol_detalle_saldo_por_pagar> vwRo_rol_detalle_saldo_por_pagar { get; set; }
         public DbSet<ro_archivos_bancos_generacion> ro_archivos_bancos_generacion { get; set; }
         public DbSet<vwro_archivos_bancos_generacion> vwro_archivos_bancos_generacion { get; set; }
+        public DbSet<vwRo_rol_detalle_saldo_por_pagar> vwRo_rol_detalle_saldo_por_pagar { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

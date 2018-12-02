@@ -83,7 +83,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 
 
             };
-            model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
+            model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo,"");
             ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(model.detalle, Convert.ToDecimal( SessionFixed.IdTransaccionSession));
             cargar_combos(0);
             return View(model);
@@ -196,6 +196,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             info_archivo.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdArchivo);
             var tipo_file = bus_tipo_file.get_info(IdEmpresa, info_archivo.IdProceso);
             int secuancia = bus_archivo.get_secuencia_file(IdEmpresa, info_archivo.IdProceso, DateTime.Now.Date);
+            info_archivo.TipoFile  = (cl_enumeradores.eTipoProcesoBancario)Enum.Parse(typeof(cl_enumeradores.eTipoProcesoBancario), tipo_file.IdProceso_bancario_tipo, true);
             archivo = bus_archivo.GetArchivo(info_archivo);
 
             switch (info_archivo.TipoFile)
@@ -204,7 +205,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     NombreFile = "NCR" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0')+tipo_file.Codigo_Empresa+"_"+secuancia.ToString().PadLeft(2,'0');
                     break;
                 case cl_enumeradores.eTipoProcesoBancario.ROL_ELECTRONICO:
-                    NombreFile = "NCR" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0') + tipo_file.Codigo_Empresa + "_" + secuancia.ToString().PadLeft(2, '0');
+                    NombreFile = "ROL" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0') + tipo_file.Codigo_Empresa + "_" + secuancia.ToString().PadLeft(2, '0');
                     break;
                 default:
                     break;
@@ -213,6 +214,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return File(byteArray, "application/xml", NombreFile + ".txt");
 
 
+        }
+
+
+        public JsonResult CargarEmpleados( int IdProceso  = 0, int IdNomina_Tipo=0, int IdNomina_TipoLiqui=0, int IdPeriodo=0, decimal  IdTransaccionSession=0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            string TipoCuenta = "";
+            
+            var infoProceso = bus_procesos_bancarios.get_info(IdEmpresa, IdPeriodo);
+            if (infoProceso.IdProceso_bancario_tipo == cl_enumeradores.eTipoProcesoBancario.NCR.ToString())
+                TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.AHO.ToString() + "," + cl_enumeradores.eTipoCuentaRRHH.COR.ToString()  ;
+            else
+                TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.VRT.ToString() ;
+
+            var detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, TipoCuenta);
+            ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(detalle, Convert.ToDecimal(IdTransaccionSession));
+            return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
 

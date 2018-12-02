@@ -21,8 +21,8 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdArchivo)
-    @Html.HiddenFor(q => q.IdPeriodo)
-    @Html.HiddenFor(q => q.IdTransaccionSession)
+    @Html.HiddenFor(q => q.IdPeriodo, new { @id="IdPeriodo"})
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id= "IdTransaccionSession" })
 
     <div class="row">
         <div class="col-md-12">
@@ -144,6 +144,31 @@
                     }
                 });
             };
+            function cargar_empleados() {
+                var datos = {
+                    IdProceso: $("#IdProceso").val(),
+                    IdProceso: $("#IdNomina_Tipo").val(),
+                    IdProceso: $("#IdNomina_TipoLiqui").val(),
+                    IdPeriodo: $("#IdPeriodo").val(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val()
+                    
+                }
 
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("CargarEmpleados", "ArchivosTransferencias", new { Area = "RRHH" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        GridViewPartial_archivo_transferencia_det.PerformCallback();
+                    },
+                    error: function (error) {
+                    }
+                });
+            };
 
 </script>

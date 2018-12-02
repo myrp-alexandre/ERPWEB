@@ -48,7 +48,7 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-        public List<ro_archivos_bancos_generacion_x_empleado_Info> get_list(int IdEmpresa,int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo)
+        public List<ro_archivos_bancos_generacion_x_empleado_Info> get_list(int IdEmpresa,int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo, string Tipocta)
         {
             try
             {
@@ -62,6 +62,7 @@ namespace Core.Erp.Data.RRHH
                                    && q.IdNominaTipo== IdNominaTipo
                                    && q.IdNominaTipoLiqui== IdNominaTipoLiqui
                                    && q.IdPeriodo==IdPeriodo
+                                   && Tipocta.Contains(q.em_tipoCta)
                              select new ro_archivos_bancos_generacion_x_empleado_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -71,7 +72,9 @@ namespace Core.Erp.Data.RRHH
                                  Valor=q.ValorGanado,
                                  ValorCancelado=q.ValorCancelado,
                                  Saldo=q.Saldo,
-                                 IdSucursal=q.IdSucursal
+                                 IdSucursal=q.IdSucursal,
+                                 em_NumCta=q.em_NumCta,
+                                 em_tipoCta=q.em_tipoCta
                                  
 
                              }).ToList();
