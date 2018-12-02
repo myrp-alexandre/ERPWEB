@@ -77,7 +77,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public int get_secuencia_file(int IdEmpresa, int IdProceso, DateTime FechaActual)
+        {
+            try
+            {
+                return odata.get_secuencia_file(IdEmpresa, IdProceso, FechaActual);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public string GetArchivo(ro_archivos_bancos_generacion_Info info)
         {
             try
@@ -120,7 +131,6 @@ namespace Core.Erp.Bus.RRHH
 
                     if (item.em_tipoCta == "COR" || item.em_tipoCta == "AHO")
                     {
-                        File += "A";
                         if (item.em_tipoCta == "AHO")
                             File += "A";
                         else

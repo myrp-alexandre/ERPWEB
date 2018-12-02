@@ -116,7 +116,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdEmpleado, decimal IdArchivo)
+        public ActionResult Modificar(int IdEmpresa=0, decimal IdArchivo=0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -124,7 +124,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_archivos_bancos_generacion_Info model = bus_archivo.get_info(IdEmpresa, IdArchivo);
             if (model == null)
                 return RedirectToAction("Index");
@@ -155,7 +154,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         }
 
-        public ActionResult Anular(int IdEmpleado, decimal IdArchivo)
+        public ActionResult Anular(int IdEmpresa=0, decimal IdArchivo=0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -163,7 +162,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_archivos_bancos_generacion_Info model = bus_archivo.get_info(IdEmpresa, IdArchivo);
             if (model == null)
                 return RedirectToAction("Index");
@@ -193,10 +191,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             string archivo = "";
             string NombreFile = "NCR";
-
+            tb_banco_procesos_bancarios_x_empresa_Bus bus_tipo_file = new tb_banco_procesos_bancarios_x_empresa_Bus();
             var info_archivo = bus_archivo.get_info(IdEmpresa, IdArchivo);
             info_archivo.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdArchivo);
+            var tipo_file = bus_tipo_file.get_info(IdEmpresa, info_archivo.IdProceso);
+            int secuancia = bus_archivo.get_secuencia_file(IdEmpresa, info_archivo.IdProceso, DateTime.Now.Date);
             archivo = bus_archivo.GetArchivo(info_archivo);
+
+            switch (info_archivo.TipoFile)
+            {
+                case cl_enumeradores.eTipoProcesoBancario.NCR:
+                    NombreFile = "NCR" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0')+tipo_file.Codigo_Empresa+"_"+secuancia.ToString().PadLeft(2,'0');
+                    break;
+                case cl_enumeradores.eTipoProcesoBancario.ROL_ELECTRONICO:
+                    break;
+                default:
+                    break;
+            }
             byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(archivo);
             return File(byteArray, "application/xml", NombreFile + ".txt");
 
@@ -231,7 +242,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ro_archivos_bancos_generacion_x_empleado_list_Info.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_archivos_bancos_generacion_Info model = new ro_archivos_bancos_generacion_Info();
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("__GridViewPartial_archivo_transferencia_det", model);
+            return PartialView("_GridViewPartial_archivo_transferencia_det", model);
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_archivos_bancos_generacion_x_empleado_Info info_det)
@@ -239,7 +250,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_archivos_bancos_generacion_x_empleado_list_Info.DeleteRow(info_det.IdEmpleado, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_archivos_bancos_generacion_Info model = new ro_archivos_bancos_generacion_Info();
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("__GridViewPartial_archivo_transferencia_det", model);
+            return PartialView("_GridViewPartial_archivo_transferencia_det", model);
         }
         #endregion
        
