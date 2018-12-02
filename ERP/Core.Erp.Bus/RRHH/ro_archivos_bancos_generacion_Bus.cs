@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Data.General;
 using Core.Erp.Data.Banco;
+using System.IO;
 namespace Core.Erp.Bus.RRHH
 {
    public class ro_archivos_bancos_generacion_Bus
@@ -165,6 +166,9 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                MemoryStream memoryStream = new MemoryStream();
+                TextWriter tw = new StreamWriter(memoryStream);
+
                 var Info_proceso = odata_proceso.get_info(info.IdEmpresa, info.IdProceso);
                 var info_empresa = odata_empresa.get_info(info.IdEmpresa);
                 info_empresa.RazonSocial = info_empresa.RazonSocial.Replace("S.A", "");
@@ -174,7 +178,9 @@ namespace Core.Erp.Bus.RRHH
                 double valorEntero = 0;
                 double valorDecimal = 0;
                 int secuencia = 0;
-                
+
+
+               
                 foreach (var item in info.detalle)
                 {
                     if (item.em_tipoCta == "VRT")
@@ -215,6 +221,13 @@ namespace Core.Erp.Bus.RRHH
                         }
                     }
                     secuencia++;
+                    
+
+                   
+                    tw.WriteLine(File);
+                    tw.Flush();
+                    tw.Close();
+
                     File += "\n";
                     
 

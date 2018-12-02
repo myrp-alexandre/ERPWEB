@@ -192,6 +192,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public FileResult get_archivo(int IdEmpresa = 0, int IdArchivo = 0)
         {
+
+
+           
+
             string archivo = "";
             string NombreFile = "NCR";
             tb_banco_procesos_bancarios_x_empresa_Bus bus_tipo_file = new tb_banco_procesos_bancarios_x_empresa_Bus();
