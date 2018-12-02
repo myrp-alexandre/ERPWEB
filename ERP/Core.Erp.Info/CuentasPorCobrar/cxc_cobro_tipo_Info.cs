@@ -20,9 +20,6 @@ namespace Core.Erp.Info.CuentasPorCobrar
         [Required(ErrorMessage = ("el campo abreviatura es obligatorio"))]
         [StringLength(20, MinimumLength = 1, ErrorMessage = "el campo abreviatura debe tener mínimo 1 caracter y máximo 20")]
         public string tc_abreviatura { get; set; }
-        [Required(ErrorMessage = ("el campo registro es obligatorio"))]
-        [StringLength(20, MinimumLength = 1, ErrorMessage = "el campo registro debe tener mínimo 1 caracter y máximo 20")]
-        public string tc_Que_Tipo_Registro_Genera { get; set; }
         public string tc_Tomar_Cta_Cble_De { get; set; }
         public string ESRetenIVA { get; set; }
         public string ESRetenFTE { get; set; }
@@ -30,6 +27,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public string IdMotivo_tipo_cobro { get; set; }
         public bool EsTarjetaCredito { get; set; }
         public bool SeDeposita { get; set; }
+        public double PorcentajeDescuento { get; set; }
 
         #region Campos auditoria
         public string IdUsuario { get; set; }
@@ -46,6 +44,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public bool ESRetenIVA_bool { get; set; }
         public bool ESRetenFTE_bool { get; set; }
         public int IdEmpresa { get; set; }
+        
         #endregion
     }
 }

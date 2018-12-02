@@ -11,13 +11,13 @@
 
 @using (Html.BeginForm("Modificar", "TipoCobro", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa);
+    @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdCobro_tipo)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdCobro_tipo">Código*</label>
+                    <label for="IdCobro_tipo">ID*</label>
                     @Html.TextBoxFor(q => q.IdCobro_tipo, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
                 </div>
@@ -29,13 +29,6 @@
                     @Html.ValidationMessageFor(q => q.tc_abreviatura, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="tc_Orden">Orden</label>
-                    @Html.TextBoxFor(q => q.tc_Orden, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.tc_Orden, "", new { @class = "text-danger" })
-                </div>
-            </div>
         </div>
     </div>
     <div class="row">
@@ -43,7 +36,6 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdMotivo_tipo_cobro">tipo motivo</label>
-                    @Html.HiddenFor(q => q.IdMotivo_tipo_cobro)
                     @Html.DevExpress().ComboBoxFor(q => q.IdMotivo_tipo_cobro, settings =>
                {
                    settings.Name = "IdMotivo_tipo_cobro";
@@ -59,8 +51,6 @@
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                    settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                   settings.ReadOnly = true;
-                   settings.Properties.DropDownButton.Enabled = false;
                }).BindList(ViewBag.lst_motivo_cobro).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdMotivo_tipo_cobro, "", new { @class = "text-danger" })
                 </div>
@@ -71,36 +61,8 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="tc_Que_Tipo_Registro_Genera">tipo que se registra</label>
-                    @Html.HiddenFor(q => q.tc_Que_Tipo_Registro_Genera)
-                    @Html.DevExpress().ComboBoxFor(q => q.tc_Que_Tipo_Registro_Genera, settings =>
-               {
-                   settings.Name = "tc_Que_Tipo_Registro_Genera";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdCatalogo_tipo", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                   //Campo ID
-                   settings.Properties.ValueField = "IdCatalogo_tipo";
-                   settings.Properties.ValueType = typeof(string);
-                   settings.Properties.TextField = "Descripcion";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown; settings.ReadOnly = true;
-                   settings.Properties.DropDownButton.Enabled = false;
-               }).BindList(ViewBag.lst_catalogotipo).GetHtml()
-                    @Html.ValidationMessageFor(q => q.tc_Que_Tipo_Registro_Genera, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
                     <label for="tc_Tomar_Cta_Cble_De">Se toma cuenta contable de </label>
-                    @Html.DropDownListFor(q => q.tc_Tomar_Cta_Cble_De, new SelectList(ViewBag.lst_cta, "Key", "Value"), new { @class = "form-control", @id = "tc_Tomar_Cta_Cble_De", @readonly = "readonly" })
+                    @Html.DropDownListFor(q => q.tc_Tomar_Cta_Cble_De, new SelectList(ViewBag.lst_cta, "Key", "Value"), new { @class = "form-control", @id = "tc_Tomar_Cta_Cble_De" })
                     @Html.ValidationMessageFor(q => q.tc_Tomar_Cta_Cble_De, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -119,11 +81,59 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
-                    <label for="PorcentajeRet">Porcentaje</label>
+                    @Html.DevExpress().CheckBoxFor( q=>q.ESRetenFTE_bool,
+                         settings => {
+                         settings.Name = "ESRetenFTE_bool";
+                         settings.Checked = false;
+                         settings.Text = "Es retención a la fuente";
+                         }
+                     ).GetHtml()
+                    @Html.DevExpress().CheckBoxFor( q=>q.ESRetenIVA_bool,
+                         settings => {
+                         settings.Name = "ESRetenIVA_bool";
+                         settings.Checked = false;
+                         settings.Text = "Es retención al I.V.A.";
+                         }
+                     ).GetHtml()
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.DevExpress().CheckBoxFor( q=>q.EsTarjetaCredito,
+                         settings => {
+                         settings.Name = "EsTarjetaCredito";
+                         settings.Checked = false;
+                         settings.Text = "Es tarjeta de crédito";
+                         }
+                     ).GetHtml()
+                    @Html.DevExpress().CheckBoxFor( q=>q.SeDeposita,
+                         settings => {
+                         settings.Name = "SeDeposita";
+                         settings.Checked = false;
+                         settings.Text = "Se deposita";
+                         }
+                     ).GetHtml()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="PorcentajeRet">Porcentaje retención</label>
                     @Html.TextBoxFor(q => q.PorcentajeRet, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.PorcentajeRet, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="ValorDescuento">Porcentaje descuento al facturar</label>
+                    @Html.TextBoxFor(q => q.PorcentajeDescuento, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.PorcentajeDescuento, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -138,95 +148,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="ESRetenFTE_bool">@Html.CheckBoxFor(q => q.ESRetenFTE_bool, new { @id = "ESRetenFTE_bool" }) Es retención a la fuente</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="ESRetenIVA_bool">@Html.CheckBoxFor(q => q.ESRetenIVA_bool, new { @id = "ESRetenIVA_bool" }) Es retención al IVA</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="tc_EsCheque_bool">@Html.CheckBoxFor(q => q.tc_EsCheque_bool, new { @id = "tc_EsCheque_bool" }) Es un cheque</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="tc_Afecha_bool">@Html.CheckBoxFor(q => q.tc_Afecha_bool, new { @id = "tc_Afecha_bool" }) Es documento a fecha</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="tc_cobroDirecto_bool">@Html.CheckBoxFor(q => q.tc_cobroDirecto_bool, new { @id = "tc_cobroDirecto_bool" }) Es cobro directo</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="tc_cobroInDirecto_bool">@Html.CheckBoxFor(q => q.tc_cobroInDirecto_bool, new { @id = "tc_cobroInDirecto_bool" }) Es cobro indirecto</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="tc_docXCobrar_bool">@Html.CheckBoxFor(q => q.tc_docXCobrar_bool, new { @id = "tc_docXCobrar_bool" }) Es documento por cobrar</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="tc_generaNCAuto_bool">@Html.CheckBoxFor(q => q.tc_generaNCAuto_bool, new { @id = "tc_generaNCAuto_bool" }) Se genera cobro automatico</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="tc_SePuede_Depositar_bool">@Html.CheckBoxFor(q => q.tc_SePuede_Depositar_bool, new { @id = "tc_SePuede_Depositar_bool" }) Se puede depositar</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="tc_seCobra_bool">@Html.CheckBoxFor(q => q.tc_seCobra_bool, new { @id = "tc_generaNCAuto_btc_seCobra_boolool" }) Se cobra</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="tc_interno_bool">@Html.CheckBoxFor(q => q.tc_interno_bool, new { @id = "tc_interno_bool" }) Interno</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

@@ -25,7 +25,6 @@ namespace Core.Erp.Data
         public string tc_descripcion { get; set; }
         public string Estado { get; set; }
         public string tc_abreviatura { get; set; }
-        public string tc_Que_Tipo_Registro_Genera { get; set; }
         public string tc_Tomar_Cta_Cble_De { get; set; }
         public string ESRetenIVA { get; set; }
         public string ESRetenFTE { get; set; }
@@ -39,6 +38,7 @@ namespace Core.Erp.Data
         public string IdMotivo_tipo_cobro { get; set; }
         public bool EsTarjetaCredito { get; set; }
         public bool SeDeposita { get; set; }
+        public double PorcentajeDescuento { get; set; }
     
         public virtual ICollection<cxc_cobro> cxc_cobro { get; set; }
         public virtual ICollection<cxc_cobro_det> cxc_cobro_det { get; set; }

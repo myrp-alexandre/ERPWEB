@@ -100,7 +100,6 @@
           <Property Name="tc_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="tc_abreviatura" Type="varchar" MaxLength="20" />
-          <Property Name="tc_Que_Tipo_Registro_Genera" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="tc_Tomar_Cta_Cble_De" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="ESRetenIVA" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="ESRetenFTE" Type="char" MaxLength="1" Nullable="false" />
@@ -114,6 +113,7 @@
           <Property Name="IdMotivo_tipo_cobro" Type="varchar" MaxLength="15" />
           <Property Name="EsTarjetaCredito" Type="bit" Nullable="false" />
           <Property Name="SeDeposita" Type="bit" Nullable="false" />
+          <Property Name="PorcentajeDescuento" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="cxc_cobro_tipo_motivo">
           <Key>
@@ -1184,7 +1184,7 @@ warning 6002: The table/view 'DBERP.web.vwcxc_cobro_para_retencion' does not hav
             <End Role="cxc_cobro_tipo" EntitySet="cxc_cobro_tipo" />
             <End Role="cxc_cobro_tipo_Param_conta_x_sucursal" EntitySet="cxc_cobro_tipo_Param_conta_x_sucursal" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="vwcxc_cartera_x_cobrar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1422,7 +1422,6 @@ warning 6002: The table/view 'DBERP.web.vwcxc_cobro_para_retencion' does not hav
           <Property Name="tc_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="tc_abreviatura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="tc_Que_Tipo_Registro_Genera" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="tc_Tomar_Cta_Cble_De" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ESRetenIVA" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="ESRetenFTE" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -1436,6 +1435,7 @@ warning 6002: The table/view 'DBERP.web.vwcxc_cobro_para_retencion' does not hav
           <Property Name="IdMotivo_tipo_cobro" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="EsTarjetaCredito" Type="Boolean" Nullable="false" />
           <Property Name="SeDeposita" Type="Boolean" Nullable="false" />
+          <Property Name="PorcentajeDescuento" Type="Double" Nullable="false" />
           <NavigationProperty Name="cxc_cobro" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro" />
           <NavigationProperty Name="cxc_cobro_det" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro_tipo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_det" />
           <NavigationProperty Name="cxc_cobro_tipo_motivo" Relationship="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" FromRole="cxc_cobro_tipo" ToRole="cxc_cobro_tipo_motivo" />
@@ -1489,7 +1489,7 @@ warning 6002: The table/view 'DBERP.web.vwcxc_cobro_para_retencion' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1861,6 +1861,7 @@ warning 6002: The table/view 'DBERP.web.vwcxc_cobro_para_retencion' does not hav
           <EntitySetMapping Name="cxc_cobro_tipo">
             <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.cxc_cobro_tipo">
               <MappingFragment StoreEntitySet="cxc_cobro_tipo">
+                <ScalarProperty Name="PorcentajeDescuento" ColumnName="PorcentajeDescuento" />
                 <ScalarProperty Name="SeDeposita" ColumnName="SeDeposita" />
                 <ScalarProperty Name="EsTarjetaCredito" ColumnName="EsTarjetaCredito" />
                 <ScalarProperty Name="IdMotivo_tipo_cobro" ColumnName="IdMotivo_tipo_cobro" />
@@ -1874,7 +1875,6 @@ warning 6002: The table/view 'DBERP.web.vwcxc_cobro_para_retencion' does not hav
                 <ScalarProperty Name="ESRetenFTE" ColumnName="ESRetenFTE" />
                 <ScalarProperty Name="ESRetenIVA" ColumnName="ESRetenIVA" />
                 <ScalarProperty Name="tc_Tomar_Cta_Cble_De" ColumnName="tc_Tomar_Cta_Cble_De" />
-                <ScalarProperty Name="tc_Que_Tipo_Registro_Genera" ColumnName="tc_Que_Tipo_Registro_Genera" />
                 <ScalarProperty Name="tc_abreviatura" ColumnName="tc_abreviatura" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="tc_descripcion" ColumnName="tc_descripcion" />

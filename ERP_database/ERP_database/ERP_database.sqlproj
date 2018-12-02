@@ -438,7 +438,6 @@
     <Build Include="dbo\Views\vwfa_creditos_debitos_con_saldo.sql" />
     <Build Include="dbo\Views\vwin_Transferencias.sql" />
     <Build Include="dbo\Views\vwfa_devolucion.sql" />
-    <Build Include="dbo\Views\vwRo_Acta_Finiquito_X_Empleado.sql" />
     <Build Include="Naturisa\Views\vwINV_NAT_Rpt006.sql" />
     <Build Include="dbo\Views\vwin_UnidadMedida.sql" />
     <Build Include="dbo\Views\vwfa_Documento_Tipo_x_Secuencia_Talonario.sql" />
@@ -452,7 +451,6 @@
     <Build Include="dbo\Views\vwfa_factura_det.sql" />
     <Build Include="dbo\Views\vwfa_factura_sri.sql" />
     <Build Include="dbo\Views\vwACTF_Rpt013.sql" />
-    <Build Include="dbo\Views\vwRo_Empleado_X_Nomina.sql" />
     <Build Include="Naturisa\Views\vwINV_NAT_Rpt004.sql" />
     <Build Include="dbo\Views\vwfa_factura_Subtotal_Iva.sql" />
     <Build Include="dbo\Views\vwfa_factura_subtotal_iva_0_totales.sql" />

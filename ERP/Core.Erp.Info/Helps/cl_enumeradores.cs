@@ -247,13 +247,7 @@
         {
             LOC,
             EXT
-        }
-
-        public enum eTipoCobroGenera
-        {
-            MOVI_CAJA,
-            DIARIO
-        }        
+        }  
         public enum eTipoCobroTomaCuentaDe
         {
             TIP_COBRO,

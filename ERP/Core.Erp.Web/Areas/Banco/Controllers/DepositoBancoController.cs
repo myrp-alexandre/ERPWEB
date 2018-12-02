@@ -72,6 +72,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return PartialView("_GridViewPartial_DepositoBanco", model);
         }
         #endregion
+
         #region Metodos ComboBox bajo demanda flujo
         ba_TipoFlujo_Bus bus_tipo = new ba_TipoFlujo_Bus();
         public ActionResult CmbFlujo_Deposito()
