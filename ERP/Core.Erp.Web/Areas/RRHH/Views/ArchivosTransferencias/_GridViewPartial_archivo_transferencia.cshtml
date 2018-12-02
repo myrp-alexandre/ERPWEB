@@ -65,7 +65,7 @@
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(tc.DataItem, "IdArchivo") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(tc.DataItem, "IdArchivo") },
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(tc.DataItem, "IdArchivo") },
                             new { onclick = "return confirm('¿Está IdEmpresa de que desea anular el registro?')" })
                     );
                 }
@@ -119,8 +119,10 @@
         {
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("get_archivo", "ArchivosTransferencias", new { Area = "RRHH", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(c.DataItem, "IdArchivo") }, Request.Url.Scheme) + "');\"></span>");
-
+                if (Convert.ToString(DataBinder.Eval(c.DataItem, "estado")) == "A")
+                {
+                    ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("get_archivo", "ArchivosTransferencias", new { Area = "RRHH", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(c.DataItem, "IdArchivo") }, Request.Url.Scheme) + "');\"></span>");
+                }
             });
             column.Width = Unit.Percentage(5);
         });

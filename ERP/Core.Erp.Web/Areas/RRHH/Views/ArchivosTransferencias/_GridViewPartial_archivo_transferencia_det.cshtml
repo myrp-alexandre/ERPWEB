@@ -41,7 +41,17 @@
         settings.Settings.ShowHeaderFilterButton = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdEmpleado";
+            column.Caption = "ID";
+            column.Width = Unit.Percentage(5);
+            column.EditorProperties().TextBox(sp =>
+            {
+                sp.Width = Unit.Percentage(100);
 
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pe_nombreCompleto";

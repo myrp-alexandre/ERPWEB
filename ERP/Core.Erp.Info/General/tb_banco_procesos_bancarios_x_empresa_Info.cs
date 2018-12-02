@@ -13,12 +13,12 @@ namespace Core.Erp.Info.General
         public int IdProceso { get; set; }
         [Required(ErrorMessage = "El proceso es obligatorio")]
         public string IdProceso_bancario_tipo { get; set; }
-        [StringLength(50, MinimumLength = 4, ErrorMessage = "El campo nombre proceso debe tener mínimo 4 caracteres y máximo 250")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "El campo nombre proceso debe tener mínimo 3 caracteres y máximo 250")]
         [Required(ErrorMessage = "El campo nombre del proceso es obligatorio")]
         public string NombreProceso { get; set; }
         [Required(ErrorMessage = "El campo banco es obligatorio")]
         public int IdBanco { get; set; }
-        [StringLength(50, MinimumLength = 4, ErrorMessage = "El campo codigo de empresa debe tener mínimo 4 caracteres y máximo 250")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "El campo codigo de empresa debe tener mínimo 1 caracteres y máximo 250")]
         [Required(ErrorMessage = "El campo codigo  es obligatorio")]
         public string Codigo_Empresa { get; set; }
         public Nullable<int> IdTipoNota { get; set; }

@@ -89,6 +89,7 @@ namespace Core.Erp.Data.RRHH
                         IdArchivo = Entity.IdArchivo,
                         IdNomina = Entity.IdNomina,
                         IdNominaTipo = Entity.IdNominaTipo,
+                        IdPeriodo=Entity.IdPeriodo,
                         IdCuentaBancaria = Entity.IdCuentaBancaria,
                         IdProceso = Entity.IdProceso,
                         estado = Entity.estado,
@@ -208,7 +209,7 @@ namespace Core.Erp.Data.RRHH
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
                 throw;
@@ -218,17 +219,14 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                int secuencia = 1;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_archivos_bancos_generacion Entity = Context.ro_archivos_bancos_generacion.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdArchivo == info.IdArchivo);
                     if (Entity == null)
                         return false;
-                    Entity.IdNomina = info.IdNomina;
-                    Entity.IdNominaTipo = info.IdNomina;
-                    Entity.IdPeriodo = info.IdPeriodo;
-                    Entity.IdProceso = info.IdProceso;
+                    
                     Entity.IdCuentaBancaria = info.IdCuentaBancaria;
-                    Entity.estado = info.estado = "A";
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
                     var detalle = Context.ro_archivos_bancos_generacion_x_empleado.Where(v =>v.IdEmpresa==info.IdEmpresa&& v.IdArchivo==info.IdArchivo);
@@ -240,11 +238,13 @@ namespace Core.Erp.Data.RRHH
                             IdEmpresa = item.IdEmpresa,
                             IdArchivo = item.IdArchivo,
                             IdSucursal = item.IdSucursal,
+                            Secuencia = secuencia,
                             IdEmpleado = item.IdEmpleado,
                             Valor = item.Valor,
                             pagacheque = item.pagacheque,
                         };
                         Context.ro_archivos_bancos_generacion_x_empleado.Add(Entity_);
+                        secuencia++;
                     }
 
                     Context.SaveChanges();
@@ -252,7 +252,7 @@ namespace Core.Erp.Data.RRHH
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception )
             {
 
                 throw;
@@ -268,9 +268,10 @@ namespace Core.Erp.Data.RRHH
                     if (Entity == null)
                         return false;
                     Entity.estado = info.estado = "I";
-
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = info.Fecha_UltAnu = DateTime.Now;
+                    var detalle = Context.ro_archivos_bancos_generacion_x_empleado.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdArchivo == info.IdArchivo);
+                    Context.ro_archivos_bancos_generacion_x_empleado.RemoveRange(detalle);
                     Context.SaveChanges();
                 }
 

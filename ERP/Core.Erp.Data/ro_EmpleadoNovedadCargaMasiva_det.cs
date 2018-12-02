@@ -22,8 +22,8 @@ namespace Core.Erp.Data
         public string Observacion { get; set; }
         public decimal IdEmpleado { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_empleado_Novedad ro_empleado_Novedad { get; set; }
         public virtual ro_EmpleadoNovedadCargaMasiva ro_EmpleadoNovedadCargaMasiva { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }
