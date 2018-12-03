@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivoFijo\Af_Activo_fijo_Categoria_Data.cs" />
+    <Compile Include="ActivoFijo\Af_Activo_fijo_CtaCble_Data.cs" />
     <Compile Include="ActivoFijo\Af_Activo_fijo_Data.cs" />
     <Compile Include="ActivoFijo\Af_Activo_fijo_tipo_Data.cs" />
     <Compile Include="ActivoFijo\Af_CatalogoTipo_Data.cs" />
@@ -65,6 +66,9 @@
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
     <Compile Include="Af_Activo_fijo_Categoria.cs">
+      <DependentUpon>Model_activo_fijo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Af_Activo_fijo_CtaCble.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
     <Compile Include="Af_Activo_fijo_tipo.cs">

@@ -14,10 +14,7 @@ namespace Core.Erp.Info.ActivoFijo
         public int IdTipoCbteBaja { get; set; }
         public int IdTipoCbteVenta { get; set; }
         public int IdTipoCbteRetiro { get; set; }
-        public string IdCtaCble_Activo { get; set; }
-        public string IdCtaCble_Dep_Acum { get; set; }
-        public string IdCtaCble_Gastos_Depre { get; set; }
-        public string FormaContabiliza { get; set; }
         public int DiasTransaccionesAFuturo { get; set; }
+        public bool ContabilizaDepreciacionPorActivo { get; set; }
     }
 }

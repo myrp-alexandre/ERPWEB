@@ -12,15 +12,16 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Af_Parametros
+    public partial class Af_Activo_fijo_CtaCble
     {
         public int IdEmpresa { get; set; }
-        public int IdTipoCbte { get; set; }
-        public int IdTipoCbteMejora { get; set; }
-        public int IdTipoCbteBaja { get; set; }
-        public int IdTipoCbteVenta { get; set; }
-        public int IdTipoCbteRetiro { get; set; }
-        public int DiasTransaccionesAFuturo { get; set; }
-        public bool ContabilizaDepreciacionPorActivo { get; set; }
+        public int IdActivoFijo { get; set; }
+        public int Secuencia { get; set; }
+        public string IdCatalogo { get; set; }
+        public string IdCtaCble { get; set; }
+        public double Porcentaje { get; set; }
+    
+        public virtual Af_Activo_fijo Af_Activo_fijo { get; set; }
+        public virtual Af_Catalogo Af_Catalogo { get; set; }
     }
 }

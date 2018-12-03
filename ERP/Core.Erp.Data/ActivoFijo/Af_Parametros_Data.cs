@@ -21,10 +21,6 @@ namespace Core.Erp.Data.ActivoFijo
                     info = new Af_Parametros_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
-                        IdCtaCble_Activo = Entity.IdCtaCble_Activo,
-                        FormaContabiliza = Entity.FormaContabiliza,
-                        IdCtaCble_Dep_Acum = Entity.IdCtaCble_Dep_Acum,
-                        IdCtaCble_Gastos_Depre = Entity.IdCtaCble_Gastos_Depre,
                         IdTipoCbte = Entity.IdTipoCbte,
                         IdTipoCbteBaja =Entity.IdTipoCbteBaja,
                         IdTipoCbteMejora = Entity.IdTipoCbteMejora,
@@ -55,10 +51,6 @@ namespace Core.Erp.Data.ActivoFijo
                         {
 
                             IdEmpresa = info.IdEmpresa,
-                            IdCtaCble_Activo = info.IdCtaCble_Activo,
-                            FormaContabiliza = info.FormaContabiliza,
-                            IdCtaCble_Dep_Acum = info.IdCtaCble_Dep_Acum,
-                            IdCtaCble_Gastos_Depre = info.IdCtaCble_Gastos_Depre,
                             IdTipoCbte = info.IdTipoCbte,
                             IdTipoCbteBaja = info.IdTipoCbteBaja,
                             IdTipoCbteMejora = info.IdTipoCbteMejora,
@@ -70,10 +62,6 @@ namespace Core.Erp.Data.ActivoFijo
                     }
                     else
                     {
-                        Entity.IdCtaCble_Activo = info.IdCtaCble_Activo;
-                        Entity.FormaContabiliza = info.FormaContabiliza;
-                        Entity.IdCtaCble_Dep_Acum = info.IdCtaCble_Dep_Acum;
-                        Entity.IdCtaCble_Gastos_Depre = info.IdCtaCble_Gastos_Depre;
                         Entity.IdTipoCbte = info.IdTipoCbte;
                         Entity.IdTipoCbteBaja = info.IdTipoCbteBaja;
                         Entity.IdTipoCbteMejora = info.IdTipoCbteMejora;

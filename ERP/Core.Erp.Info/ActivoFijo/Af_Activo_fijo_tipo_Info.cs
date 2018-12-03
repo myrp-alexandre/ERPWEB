@@ -15,20 +15,14 @@ namespace Core.Erp.Info.ActivoFijo
         public string CodActivoFijo { get; set; }
         [Required(ErrorMessage = ("el campo descripción es obligatorio"))]
         [StringLength(150, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 150")]
+
         public string Af_Descripcion { get; set; }
-        [Required(ErrorMessage = ("el campo porcentaje es obligatorio"))]
         public double Af_Porcentaje_depre { get; set; }
         [Required(ErrorMessage = ("el campo año es obligatorio"))]
         public int Af_anio_depreciacion { get; set; }
-        [Required(ErrorMessage = "El campo cuenta contable  es obligatoria")]
         public string IdCtaCble_Activo { get; set; }
-        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
         public string IdCtaCble_Dep_Acum { get; set; }
-        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
         public string IdCtaCble_Gastos_Depre { get; set; }
-        public string IdCentroCosto_Activo { get; set; }
-        public string IdCentroCosto_Dep_Acum { get; set; }
-        public string IdCentroCosto_Gasto_Depre { get; set; }
         public bool Se_Deprecia { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
@@ -36,10 +30,20 @@ namespace Core.Erp.Info.ActivoFijo
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string Estado { get; set; }
-        public bool EstadoBool { get; set; }
         public string MotiAnula { get; set; }
+
+        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
+        public string IdCtaCble_CostoVenta { get; set; }
+
+        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
+        public string IdCtaCble_Mejora { get; set; }
+
+        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
+        public string IdCtaCble_Baja { get; set; }
+
+        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
+        public string IdCtaCble_Retiro { get; set; }
+
     }
 }
