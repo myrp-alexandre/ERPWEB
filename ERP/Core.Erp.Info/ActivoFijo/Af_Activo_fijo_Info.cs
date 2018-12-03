@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 namespace Core.Erp.Info.ActivoFijo
 {
     public class Af_Activo_fijo_Info
-    {       
+
+    {
         public int IdEmpresa { get; set; }
         public int IdActivoFijo { get; set; }
         public string CodActivoFijo { get; set; }
-
         [Required(ErrorMessage = ("el campo nombre es obligatorio"))]
         [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo nombre debe tener mínimo 1 caracter y máximo 500")]
-        public string Af_Nombre { get; set; }
-        [Required(ErrorMessage = ("el campo activo es obligatorio"))]
 
+        public string Af_Nombre { get; set; }
         public Nullable<int> IdActivoFijoTipo { get; set; }
         [Required(ErrorMessage = ("el campo catégoria es obligatorio"))]
 
@@ -40,16 +39,15 @@ namespace Core.Erp.Info.ActivoFijo
         public string Af_observacion { get; set; }
         public string Af_NumPlaca { get; set; }
         public Nullable<int> Af_Anio_fabrica { get; set; }
-        public string Estado { get; set; }
         public bool EstadoBool { get; set; }
+        public string Estado { get; set; }
         public string MotiAnula { get; set; }
-        public byte[] Af_foto { get; set; }
         public string Af_DescripcionCorta { get; set; }
         public string Af_Codigo_Barra { get; set; }
         public string Af_DescripcionTecnica { get; set; }
         public string Estado_Proceso { get; set; }
-        public double Af_ValorSalvamento { get; set; }
-        public double Af_ValorResidual { get; set; }
+        public Nullable<double> Af_ValorSalvamento { get; set; }
+        public Nullable<double> Af_ValorResidual { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
@@ -58,6 +56,8 @@ namespace Core.Erp.Info.ActivoFijo
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string Af_NumSerie_Motor { get; set; }
         public string Af_NumSerie_Chasis { get; set; }
+        public decimal IdEmpleadoEncargado { get; set; }
+        public decimal IdEmpleadoCustodio { get; set; }
 
         //Campos que no existen en la tabla
         public string Estado_Proceso_nombre { get; set; }

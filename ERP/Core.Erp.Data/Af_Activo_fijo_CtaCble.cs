@@ -21,7 +21,7 @@ namespace Core.Erp.Data
         public string IdCtaCble { get; set; }
         public double Porcentaje { get; set; }
     
-        public virtual Af_Activo_fijo Af_Activo_fijo { get; set; }
         public virtual Af_Catalogo Af_Catalogo { get; set; }
+        public virtual Af_Activo_fijo Af_Activo_fijo { get; set; }
     }
 }
