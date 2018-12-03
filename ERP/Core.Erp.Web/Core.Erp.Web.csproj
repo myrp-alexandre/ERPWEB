@@ -409,6 +409,7 @@
     <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridExportDemoOptions.cs" />
     <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridDataOutputDemosHelper.cs" />
     <Compile Include="Areas\RRHH\Controllers\ActaFiniquitoController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\ArchivosActualizacionSueldoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ArchivosTransferenciasController.cs" />
     <Compile Include="Areas\RRHH\Controllers\AreaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\BaseImpuestoRentaController.cs" />
@@ -9495,6 +9496,7 @@
     <Folder Include="Areas\Presupuesto\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
+    <Folder Include="Areas\RRHH\Views\ArchivosActualizacionSueldo\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />

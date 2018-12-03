@@ -368,6 +368,7 @@
     <Compile Include="RRHH\RDEP\Rdep_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Info.cs" />
+    <Compile Include="RRHH\ro_ArchivosIess_Info.cs" />
     <Compile Include="RRHH\ro_archivos_bancos_generacion_Info.cs" />
     <Compile Include="RRHH\ro_archivos_bancos_generacion_x_empleado_Info.cs" />
     <Compile Include="RRHH\ro_area_Info.cs" />
