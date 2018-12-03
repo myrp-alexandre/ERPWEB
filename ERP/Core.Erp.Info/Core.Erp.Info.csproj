@@ -383,6 +383,7 @@
     <Compile Include="RRHH\ro_departamento_Info.cs" />
     <Compile Include="RRHH\ro_division_Info.cs" />
     <Compile Include="RRHH\ro_DocumentoxEmp_Info.cs" />
+    <Compile Include="RRHH\ro_EmpleadoFoto_Info.cs" />
     <Compile Include="RRHH\ro_EmpleadoNovedadCargaMasiva_det_Info.cs" />
     <Compile Include="RRHH\ro_EmpleadoNovedadCargaMasiva_Info.cs" />
     <Compile Include="RRHH\ro_empleado_Info.cs" />

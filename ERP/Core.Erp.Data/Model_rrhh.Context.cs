@@ -116,6 +116,7 @@ namespace Core.Erp.Data
         public DbSet<vwro_archivos_bancos_generacion_x_empleado> vwro_archivos_bancos_generacion_x_empleado { get; set; }
         public DbSet<ro_empleado> ro_empleado { get; set; }
         public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
+        public DbSet<ro_EmpleadoFoto> ro_EmpleadoFoto { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

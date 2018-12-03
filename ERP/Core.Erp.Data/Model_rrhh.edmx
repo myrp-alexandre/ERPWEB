@@ -548,6 +548,15 @@
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
           <Property Name="estado" Type="varchar" MaxLength="1" />
         </EntityType>
+        <EntityType Name="ro_EmpleadoFoto">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Foto" Type="image" />
+        </EntityType>
         <EntityType Name="ro_EmpleadoNovedadCargaMasiva">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3702,6 +3711,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySet Name="ro_empleado_x_ro_tipoNomina" EntityType="Self.ro_empleado_x_ro_tipoNomina" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_x_rubro_acumulado" EntityType="Self.ro_empleado_x_rubro_acumulado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_x_titulos" EntityType="Self.ro_empleado_x_titulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_EmpleadoFoto" EntityType="Self.ro_EmpleadoFoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_EmpleadoNovedadCargaMasiva" EntityType="Self.ro_EmpleadoNovedadCargaMasiva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_EmpleadoNovedadCargaMasiva_det" EntityType="Self.ro_EmpleadoNovedadCargaMasiva_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_Historico_Liquidacion_Vacaciones" EntityType="Self.ro_Historico_Liquidacion_Vacaciones" Schema="dbo" store:Type="Tables" />
@@ -7162,6 +7172,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_Solicitud_Vacaciones_x_empleado" EntitySet="ro_Solicitud_Vacaciones_x_empleado" />
           </AssociationSet>
+          <EntitySet Name="ro_EmpleadoFoto" EntityType="Model_rrhh.ro_EmpleadoFoto" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -9023,6 +9034,15 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ro_EmpleadoFoto">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10972,6 +10992,15 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_EmpleadoFoto">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_EmpleadoFoto">
+              <MappingFragment StoreEntitySet="ro_EmpleadoFoto">
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
