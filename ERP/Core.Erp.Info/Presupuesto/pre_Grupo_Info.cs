@@ -22,6 +22,5 @@ namespace Core.Erp.Info.Presupuesto
         public string IdUsuarioAnulacion { get; set; }
         public DateTime FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
-
     }
 }
