@@ -160,5 +160,12 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
 
 
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_activo_fijo_ctacble()
+        {
+            var model = new object[0];
+            return PartialView("_GridViewPartial_activo_fijo_ctacble", model);
+        }
     }
 }

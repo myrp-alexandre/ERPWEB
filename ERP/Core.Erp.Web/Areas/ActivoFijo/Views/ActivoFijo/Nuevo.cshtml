@@ -142,6 +142,9 @@
             <li>
                 <a href="#tab_caracteristicas" aria-controls="caracteristicas" role="tab" data-toggle="tab">Características del activo</a>
             </li>
+            <li>
+                <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Detalle</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_configuracion">
@@ -320,7 +323,22 @@
 
             </div>
 
-        </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
+
+
+
+                @Html.Action("GridViewPartial_activo_fijo_ctacble")
+
+
+
+
+
+
+
+
+</div>
+
+            </div>
     </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

@@ -1,0 +1,28 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView_activo_fijo_ctacble";
+        settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "GridViewPartial_activo_fijo_ctacble" };
+
+
+		settings.KeyFieldName = "Secuencia";
+
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowGroupPanel = true;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+		settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+		settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+		settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+		settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+		settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+				settings.Columns.Add("IdEmpresa");
+				settings.Columns.Add("IdActivoFijo");
+				settings.Columns.Add("Secuencia");
+				settings.Columns.Add("IdCatalogo");
+				settings.Columns.Add("IdCtaCble");
+				settings.Columns.Add("Porcentaje");
+			});
+}
+@grid.Bind(Model).GetHtml()

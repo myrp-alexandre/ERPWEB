@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.ActivoFijo
 {
-    class Af_Activo_fijo_CtaCble_Info
+   public class Af_Activo_fijo_CtaCble_Info
     {
         public int IdEmpresa { get; set; }
         public int IdActivoFijo { get; set; }
