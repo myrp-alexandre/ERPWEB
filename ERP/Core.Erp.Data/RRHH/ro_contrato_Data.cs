@@ -57,6 +57,7 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                FechaCorte = FechaCorte.AddMonths(1).Date;
                 string Estado_contado = cl_enumeradores.eEstadoContratoRRHH.ECT_ACT.ToString();
                 List<ro_contrato_Info> Lista;
 
