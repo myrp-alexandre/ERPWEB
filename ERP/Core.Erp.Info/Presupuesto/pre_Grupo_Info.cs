@@ -9,6 +9,8 @@ namespace Core.Erp.Info.Presupuesto
 {
     public class pre_Grupo_Info
     {
+        public decimal IdTransaccionSession { get; set; }
+        
         public int IdEmpresa { get; set; }
         public int IdGrupo { get; set; }
         [Required(ErrorMessage = ("El campo descripción es obligatorio"))]
@@ -22,5 +24,9 @@ namespace Core.Erp.Info.Presupuesto
         public string IdUsuarioAnulacion { get; set; }
         public DateTime FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+
+        #region Campos que no existen en la tabla
+        public List<pre_Grupo_x_seg_usuario_Info> ListaGrupoDetalle { get; set; }        
+        #endregion
     }
 }
