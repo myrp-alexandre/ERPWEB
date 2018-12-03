@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Data.SeguridadAcceso;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.SeguridadAcceso;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 
@@ -124,6 +125,31 @@ namespace Core.Erp.Bus.SeguridadAcceso
             {
                 Contrasena = cl_funciones.convertir_string_MD5Hash(Contrasena == null ? "" : Contrasena);
                 return odata.ResetearContrasenia(IdUsuario, Contrasena);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<seg_usuario_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            try
+            {
+                return odata.get_list_bajo_demanda(args);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public seg_usuario_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            try
+            {
+                return odata.get_info_bajo_demanda(args);
             }
             catch (Exception)
             {

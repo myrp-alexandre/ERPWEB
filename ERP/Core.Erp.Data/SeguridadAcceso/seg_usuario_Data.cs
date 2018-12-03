@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.SeguridadAcceso;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -255,6 +256,50 @@ namespace Core.Erp.Data.SeguridadAcceso
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public List<seg_usuario_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<seg_usuario_Info> Lista = new List<seg_usuario_Info>();
+            Lista = get_list(skip, take, args.Filter);
+            return Lista;
+        }
+
+        public seg_usuario_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            //La variable args del devexpress ya trae el ID seleccionado en la propiedad Value, se pasa el IdEmpresa porque es un filtro que no tiene
+            return get_info(args.Value == null ? "" : args.Value.ToString());
+        }
+
+        public List<seg_usuario_Info> get_list(int skip, int take, string filter)
+        {
+            try
+            {
+                List<seg_usuario_Info> Lista = new List<seg_usuario_Info>();
+
+                Entities_seguridad_acceso Context = new Entities_seguridad_acceso();
+
+                {
+                    List<seg_usuario> ListaUsuarios;
+                    ListaUsuarios = Context.seg_usuario.Where(q => q.estado == "A" && (q.IdUsuario + " " + q.Nombre).Contains(filter)).OrderBy(q => q.IdUsuario).Skip(skip).Take(take).ToList();
+                    foreach (var q in ListaUsuarios)
+                    {
+                        Lista.Add(new seg_usuario_Info
+                        {
+                            IdUsuario = q.IdUsuario,
+                            Nombre = q.Nombre
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
