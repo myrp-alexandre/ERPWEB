@@ -64,7 +64,8 @@ namespace Core.Erp.Data.ActivoFijo
                         IdTipoCatalogo = Entity.IdTipoCatalogo,
                         IdCatalogo = Entity.IdCatalogo,
                         Descripcion = Entity.Descripcion,
-                        Estado = Entity.Estado
+                        Estado = Entity.Estado,
+                        
                     };
                 }
                 return info;
@@ -86,7 +87,9 @@ namespace Core.Erp.Data.ActivoFijo
                         IdTipoCatalogo = info.IdTipoCatalogo,
                         IdCatalogo = info.IdCatalogo,
                         Descripcion = info.Descripcion,
-                        Estado = info.Estado = "A"
+                        Estado = info.Estado = "A",
+
+                        IdUsuario = info.IdUsuario
 
                     };
                     Context.Af_Catalogo.Add(Entity);

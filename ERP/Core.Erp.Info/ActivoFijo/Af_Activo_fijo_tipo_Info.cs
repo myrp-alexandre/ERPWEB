@@ -31,6 +31,7 @@ namespace Core.Erp.Info.ActivoFijo
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
         public string MotiAnula { get; set; }
 
         [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]

@@ -23,14 +23,8 @@ namespace Core.Erp.Data.ActivoFijo
                                  {
                                      IdActivoFijoTipo = q.IdActivoFijoTipo,
                                      IdEmpresa = q.IdEmpresa,
-                                     Af_anio_depreciacion = q.Af_anio_depreciacion,
                                      Af_Descripcion = q.Af_Descripcion,
-                                     Af_Porcentaje_depre = q.Af_Porcentaje_depre,
                                      CodActivoFijo = q.CodActivoFijo,
-                                     Estado = q.Estado,
-                                     IdCtaCble_Activo = q.IdCtaCble_Activo,
-                                     IdCtaCble_Dep_Acum = q.IdCtaCble_Dep_Acum,
-                                     IdCtaCble_Gastos_Depre = q.IdCtaCble_Gastos_Depre,
 
                                      EstadoBool = q.Estado == "A" ? true : false
 
@@ -43,14 +37,8 @@ namespace Core.Erp.Data.ActivoFijo
                                  {
                                      IdActivoFijoTipo = q.IdActivoFijoTipo,
                                      IdEmpresa = q.IdEmpresa,
-                                     Af_anio_depreciacion = q.Af_anio_depreciacion,
                                      Af_Descripcion = q.Af_Descripcion,
-                                     Af_Porcentaje_depre = q.Af_Porcentaje_depre,
                                      CodActivoFijo = q.CodActivoFijo,
-                                     Estado = q.Estado,
-                                     IdCtaCble_Activo = q.IdCtaCble_Activo,
-                                     IdCtaCble_Dep_Acum = q.IdCtaCble_Dep_Acum,
-                                     IdCtaCble_Gastos_Depre = q.IdCtaCble_Gastos_Depre,
 
                                      EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
@@ -85,7 +73,12 @@ namespace Core.Erp.Data.ActivoFijo
                         IdCtaCble_Activo = Entity.IdCtaCble_Activo,
                         IdCtaCble_Dep_Acum = Entity.IdCtaCble_Dep_Acum,
                         IdCtaCble_Gastos_Depre = Entity.IdCtaCble_Gastos_Depre,
-                        Se_Deprecia = Entity.Se_Deprecia==Convert.ToBoolean(Entity.Se_Deprecia)
+                        Se_Deprecia = Entity.Se_Deprecia==Convert.ToBoolean(Entity.Se_Deprecia),
+                        IdCtaCble_Baja = Entity.IdCtaCble_Baja,
+                        IdCtaCble_CostoVenta = Entity.IdCtaCble_CostoVenta,
+                        IdCtaCble_Mejora = Entity.IdCtaCble_Mejora,
+                        IdCtaCble_Retiro = Entity.IdCtaCble_Retiro
+                        
                         
                     };
                 }
@@ -141,7 +134,11 @@ namespace Core.Erp.Data.ActivoFijo
                         IdCtaCble_Gastos_Depre = info.IdCtaCble_Gastos_Depre,
                         Se_Deprecia = info.Se_Deprecia == Convert.ToBoolean(info.Se_Deprecia),
                         IdUsuario = info.IdUsuario,
-                        Fecha_Transac = DateTime.Now
+                        Fecha_Transac = DateTime.Now,
+                        IdCtaCble_Baja = info.IdCtaCble_Baja,
+                        IdCtaCble_CostoVenta = info.IdCtaCble_CostoVenta,
+                        IdCtaCble_Mejora = info.IdCtaCble_Mejora,
+                        IdCtaCble_Retiro = info.IdCtaCble_Retiro
                     };
                     Context.Af_Activo_fijo_tipo.Add(Entity);
                     Context.SaveChanges();
@@ -171,6 +168,10 @@ namespace Core.Erp.Data.ActivoFijo
                     Entity.IdCtaCble_Dep_Acum = info.IdCtaCble_Dep_Acum;
                     Entity.IdCtaCble_Gastos_Depre = info.IdCtaCble_Gastos_Depre;
                     Entity.Se_Deprecia = info.Se_Deprecia == Convert.ToBoolean(info.Se_Deprecia);
+                    Entity.IdCtaCble_Baja = info.IdCtaCble_Baja;
+                    Entity.IdCtaCble_CostoVenta = info.IdCtaCble_CostoVenta;
+                    Entity.IdCtaCble_Mejora = info.IdCtaCble_Mejora;
+                    Entity.IdCtaCble_Retiro = info.IdCtaCble_Retiro;
 
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;

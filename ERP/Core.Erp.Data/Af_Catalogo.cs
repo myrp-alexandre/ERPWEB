@@ -16,12 +16,12 @@ namespace Core.Erp.Data
     {
         public Af_Catalogo()
         {
+            this.Af_Activo_fijo_CtaCble = new HashSet<Af_Activo_fijo_CtaCble>();
             this.Af_Activo_fijo = new HashSet<Af_Activo_fijo>();
             this.Af_Activo_fijo1 = new HashSet<Af_Activo_fijo>();
             this.Af_Activo_fijo2 = new HashSet<Af_Activo_fijo>();
             this.Af_Activo_fijo3 = new HashSet<Af_Activo_fijo>();
             this.Af_Activo_fijo4 = new HashSet<Af_Activo_fijo>();
-            this.Af_Activo_fijo_CtaCble = new HashSet<Af_Activo_fijo_CtaCble>();
         }
     
         public string IdCatalogo { get; set; }
@@ -35,12 +35,12 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
     
+        public virtual ICollection<Af_Activo_fijo_CtaCble> Af_Activo_fijo_CtaCble { get; set; }
+        public virtual Af_CatalogoTipo Af_CatalogoTipo { get; set; }
         public virtual ICollection<Af_Activo_fijo> Af_Activo_fijo { get; set; }
         public virtual ICollection<Af_Activo_fijo> Af_Activo_fijo1 { get; set; }
         public virtual ICollection<Af_Activo_fijo> Af_Activo_fijo2 { get; set; }
         public virtual ICollection<Af_Activo_fijo> Af_Activo_fijo3 { get; set; }
         public virtual ICollection<Af_Activo_fijo> Af_Activo_fijo4 { get; set; }
-        public virtual ICollection<Af_Activo_fijo_CtaCble> Af_Activo_fijo_CtaCble { get; set; }
-        public virtual Af_CatalogoTipo Af_CatalogoTipo { get; set; }
     }
 }

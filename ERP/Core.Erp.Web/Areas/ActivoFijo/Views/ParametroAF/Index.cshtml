@@ -23,52 +23,11 @@
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IdCtaCble_Activo">Cuenta contable para activo</label>
-                                @Html.Partial("_CmbCuenta_Param1", Model)
-                                @Html.ValidationMessageFor(q => q.IdCtaCble_Activo, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+              
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IdCtaCble_Dep_Acum">Cuenta contable depreciación acumulada</label>
-                                @Html.Partial("_CmbCuenta_Param2", Model)
-                                @Html.ValidationMessageFor(q => q.IdCtaCble_Dep_Acum, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IdCtaCble_Gastos_Depre">Cuenta contable gastos de depreciación</label>
-                                @Html.Partial("_CmbCuenta_Param3", Model)
-                                @Html.ValidationMessageFor(q => q.IdCtaCble_Gastos_Depre, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="FormaContabiliza">Forma de contabilizar</label>
-                                @Html.DropDownListFor(q => q.FormaContabiliza, new SelectList(ViewBag.lst_forma, "Key", "Value"), new { @class = "form-control", @id = "FormaContabiliza" })
-                                @Html.ValidationMessageFor(q => q.FormaContabiliza, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="DiasTransaccionesAFuturo">Dias máximos para transacciones a futuro</label>

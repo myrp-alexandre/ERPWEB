@@ -16,11 +16,11 @@ namespace Core.Erp.Data
     {
         public Af_Activo_fijo()
         {
+            this.Af_Activo_fijo_CtaCble = new HashSet<Af_Activo_fijo_CtaCble>();
             this.Af_Depreciacion_Det = new HashSet<Af_Depreciacion_Det>();
             this.Af_Mej_Baj_Activo = new HashSet<Af_Mej_Baj_Activo>();
             this.Af_Retiro_Activo = new HashSet<Af_Retiro_Activo>();
             this.Af_Venta_Activo = new HashSet<Af_Venta_Activo>();
-            this.Af_Activo_fijo_CtaCble = new HashSet<Af_Activo_fijo_CtaCble>();
         }
     
         public int IdEmpresa { get; set; }
@@ -49,7 +49,6 @@ namespace Core.Erp.Data
         public Nullable<int> Af_Anio_fabrica { get; set; }
         public string Estado { get; set; }
         public string MotiAnula { get; set; }
-        public byte[] Af_foto { get; set; }
         public string Af_DescripcionCorta { get; set; }
         public string Af_Codigo_Barra { get; set; }
         public string Af_DescripcionTecnica { get; set; }
@@ -68,10 +67,6 @@ namespace Core.Erp.Data
         public decimal IdEmpleadoCustodio { get; set; }
     
         public virtual Af_Activo_fijo_Categoria Af_Activo_fijo_Categoria { get; set; }
-        public virtual ICollection<Af_Depreciacion_Det> Af_Depreciacion_Det { get; set; }
-        public virtual ICollection<Af_Mej_Baj_Activo> Af_Mej_Baj_Activo { get; set; }
-        public virtual ICollection<Af_Retiro_Activo> Af_Retiro_Activo { get; set; }
-        public virtual ICollection<Af_Venta_Activo> Af_Venta_Activo { get; set; }
         public virtual Af_Activo_fijo_tipo Af_Activo_fijo_tipo { get; set; }
         public virtual Af_Catalogo Af_Catalogo { get; set; }
         public virtual Af_Catalogo Af_Catalogo1 { get; set; }
@@ -79,5 +74,9 @@ namespace Core.Erp.Data
         public virtual Af_Catalogo Af_Catalogo3 { get; set; }
         public virtual Af_Catalogo Af_Catalogo4 { get; set; }
         public virtual ICollection<Af_Activo_fijo_CtaCble> Af_Activo_fijo_CtaCble { get; set; }
+        public virtual ICollection<Af_Depreciacion_Det> Af_Depreciacion_Det { get; set; }
+        public virtual ICollection<Af_Mej_Baj_Activo> Af_Mej_Baj_Activo { get; set; }
+        public virtual ICollection<Af_Retiro_Activo> Af_Retiro_Activo { get; set; }
+        public virtual ICollection<Af_Venta_Activo> Af_Venta_Activo { get; set; }
     }
 }

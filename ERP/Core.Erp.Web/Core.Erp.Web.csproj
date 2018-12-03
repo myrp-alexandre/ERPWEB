@@ -9266,7 +9266,6 @@
     <Content Include="Areas\Contabilidad\Views\RevisionContable\_GridViewPartial_Facturacion.cshtml" />
     <Content Include="Areas\Caja\Views\Caja\_CmbCuenta_Caja.cshtml" />
     <Content Include="Areas\Caja\Views\TipoMovimientoCaja\_CmbCuenta_Tipo_movimiento.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\ParametroAF\_CmbCuenta_Param1.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ParametroAF\_CmbCuenta_Param2.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ParametroAF\_CmbCuenta_Param3.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\ParametrosCXP\_CmbCuenta_Param1.cshtml" />
@@ -9401,6 +9400,8 @@
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Nuevo.cshtml" />
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Modificar.cshtml" />
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Anular.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ParametroAF\_CmbCuenta_Param1.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

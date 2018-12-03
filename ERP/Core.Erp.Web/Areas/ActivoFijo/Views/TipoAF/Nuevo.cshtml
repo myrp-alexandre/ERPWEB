@@ -63,23 +63,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_Activo">Cuenta contable activo*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Activo, settings =>
-       {
-           settings.Name = "IdCtaCble_Activo";
-           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-           settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-           settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-           settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-           //Campo ID
-           settings.Properties.ValueField = "IdCtaCble";
-           settings.Properties.ValueType = typeof(string);
-           settings.Properties.TextField = "pc_Cuenta";
-           //Boton para seleccionar ningun registro
-           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-           settings.Properties.NullText = "== Seleccione ==";
-           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-       }).BindList(ViewBag.lst_cuentas).GetHtml()
+                    @Html.Partial("_CmbCuenta_TipoAF", Model.IdCtaCble_Activo)
                     @Html.ValidationMessageFor(q => q.IdCtaCble_Activo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -91,23 +75,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_Dep_Acum">Cuenta contable depreciación acumulada*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Dep_Acum, settings =>
-       {
-           settings.Name = "IdCtaCble_Dep_Acum";
-           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-           settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-           settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-           settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-           //Campo ID
-           settings.Properties.ValueField = "IdCtaCble";
-           settings.Properties.ValueType = typeof(string);
-           settings.Properties.TextField = "pc_Cuenta";
-           //Boton para seleccionar ningun registro
-           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-           settings.Properties.NullText = "== Seleccione ==";
-           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-       }).BindList(ViewBag.lst_cuentas).GetHtml()
+                    @Html.Partial("_CmbCuenta_TipoAF", Model.IdCtaCble_Dep_Acum)
                     @Html.ValidationMessageFor(q => q.IdCtaCble_Dep_Acum, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -119,23 +87,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_Gastos_Depre">Cuenta contable gastos de depreciación*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Gastos_Depre, settings =>
-       {
-           settings.Name = "IdCtaCble_Gastos_Depre";
-           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-           settings.Properties.DisplayFormatString = "[{0}] - {1}";
-           settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-           settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-           settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-           //Campo ID
-           settings.Properties.ValueField = "IdCtaCble";
-           settings.Properties.ValueType = typeof(string);
-           settings.Properties.TextField = "pc_Cuenta";
-           //Boton para seleccionar ningun registro
-           settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-           settings.Properties.NullText = "== Seleccione ==";
-           settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-       }).BindList(ViewBag.lst_cuentas).GetHtml()
+                    @Html.Partial("_CmbCuenta_TipoAF", Model.IdCtaCble_Gastos_Depre)
                     @Html.ValidationMessageFor(q => q.IdCtaCble_Gastos_Depre, "", new { @class = "text-danger" })
                 </div>
             </div>
