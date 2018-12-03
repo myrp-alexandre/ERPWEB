@@ -38,7 +38,6 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-
         public List<ro_empleado_Info> get_list_combo_liquidar(int IdEmpresa)
         {
             try
@@ -68,8 +67,6 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-
-
         public List<ro_empleado_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
@@ -252,10 +249,8 @@ namespace Core.Erp.Data.RRHH
                         em_fechaSalida	=info.em_fechaSalida	,
                         em_fechaIngaRol	=info.	em_fechaIngaRol	,
                         em_tipoCta	=info.em_tipoCta	,
-                        em_NumCta	=info.em_NumCta	,
-                        
-                        em_estado	=info.	em_estado,
-                      
+                        em_NumCta	=info.em_NumCta	,                     
+                        em_estado	=info.	em_estado,                    
                         IdCodSectorial	=info.IdCodSectorial	,
                         IdDepartamento	=info.IdDepartamento	,
                         IdTipoSangre	=info.IdTipoSangre	,
@@ -293,14 +288,26 @@ namespace Core.Erp.Data.RRHH
 
                     };
                     Context.ro_empleado.Add(Entity);
-
-                   
+                    if (info.info_foto != null)
+                    {
+                        if (info.info_foto.Foto != null)
+                            if (info.info_foto.Foto.Length != 0)
+                            {
+                                ro_EmpleadoFoto entity_foto = new ro_EmpleadoFoto
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdEmpleado = info.IdEmpleado,
+                                    Foto = info.info_foto.Foto
+                                };
+                                Context.ro_EmpleadoFoto.Add(entity_foto);
+                            }
+                    }
                     
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception E)
+            catch (Exception )
             {
 
                 throw;
@@ -362,8 +369,24 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdHorario = info.IdHorario   ;
                         Entity.IdUsuario = info.IdUsuarioUltModi;
                         Entity.Fecha_UltMod = info.Fecha_Transaccion = DateTime.Now;
-                    Entity.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
-                        Context.SaveChanges();
+                        Entity.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
+                    var foto = Context.ro_EmpleadoFoto.FirstOrDefault(v => v.IdEmpresa ==info. IdEmpresa && v.IdEmpleado ==info.IdEmpleado);
+                    Context.ro_EmpleadoFoto.Remove(foto);
+                    if (info.info_foto != null)
+                    {
+                        if (info.info_foto.Foto != null)
+                            if (info.info_foto.Foto.Length != 0)
+                            {
+                                ro_EmpleadoFoto entity_foto = new ro_EmpleadoFoto
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdEmpleado = info.IdEmpleado,
+                                    Foto = info.info_foto.Foto
+                                };
+                                Context.ro_EmpleadoFoto.Add(entity_foto);
+                            }
+                    }
+                    Context.SaveChanges();
                 }
 
                 return true;
