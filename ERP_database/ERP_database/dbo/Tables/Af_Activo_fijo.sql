@@ -25,7 +25,6 @@
     [Af_Anio_fabrica]          INT            NULL,
     [Estado]                   CHAR (1)       NOT NULL,
     [MotiAnula]                VARCHAR (100)  NULL,
-    [Af_foto]                  IMAGE          NULL,
     [Af_DescripcionCorta]      VARCHAR (500)  NULL,
     [Af_Codigo_Barra]          VARCHAR (50)   NULL,
     [Af_DescripcionTecnica]    VARCHAR (1000) NULL,
@@ -40,15 +39,21 @@
     [Fecha_UltAnu]             DATETIME       NULL,
     [Af_NumSerie_Motor]        VARCHAR (50)   NULL,
     [Af_NumSerie_Chasis]       VARCHAR (50)   NULL,
+    [IdEmpleadoEncargado]      NUMERIC (18)   NOT NULL,
+    [IdEmpleadoCustodio]       NUMERIC (18)   NOT NULL,
     CONSTRAINT [PK_Af_Activo_fijo_1] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdActivoFijo] ASC),
     CONSTRAINT [FK_Af_Activo_fijo_Af_Activo_fijo_Categoria] FOREIGN KEY ([IdEmpresa], [IdCategoriaAF]) REFERENCES [dbo].[Af_Activo_fijo_Categoria] ([IdEmpresa], [IdCategoriaAF]),
     CONSTRAINT [FK_Af_Activo_fijo_Af_Activo_fijo_tipo] FOREIGN KEY ([IdEmpresa], [IdActivoFijoTipo]) REFERENCES [dbo].[Af_Activo_fijo_tipo] ([IdEmpresa], [IdActivoFijoTipo]),
-    CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo] FOREIGN KEY ([IdTipoCatalogo_Ubicacion]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
-    CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo1] FOREIGN KEY ([IdCatalogo_Marca]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
-    CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo2] FOREIGN KEY ([IdCatalogo_Modelo]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
-    CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo3] FOREIGN KEY ([IdCatalogo_Color]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
-    CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo4] FOREIGN KEY ([Estado_Proceso]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
+    CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo5] FOREIGN KEY ([IdCatalogo_Marca]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
+    CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo6] FOREIGN KEY ([IdCatalogo_Modelo]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
+    CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo7] FOREIGN KEY ([IdCatalogo_Color]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
+    CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo8] FOREIGN KEY ([IdTipoCatalogo_Ubicacion]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
+    CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo9] FOREIGN KEY ([Estado_Proceso]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
+    CONSTRAINT [FK_Af_Activo_fijo_ro_empleado] FOREIGN KEY ([IdEmpresa], [IdEmpleadoEncargado]) REFERENCES [dbo].[ro_empleado] ([IdEmpresa], [IdEmpleado]),
+    CONSTRAINT [FK_Af_Activo_fijo_ro_empleado1] FOREIGN KEY ([IdEmpresa], [IdEmpleadoCustodio]) REFERENCES [dbo].[ro_empleado] ([IdEmpresa], [IdEmpleado]),
     CONSTRAINT [FK_Af_Activo_fijo_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa]),
     CONSTRAINT [FK_Af_Activo_fijo_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 

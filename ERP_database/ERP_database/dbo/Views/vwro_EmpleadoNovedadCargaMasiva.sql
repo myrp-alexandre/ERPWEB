@@ -2,7 +2,7 @@
 AS
 SELECT        vwro_EmpleadoNovedadCargaMasiva.IdEmpresa, vwro_EmpleadoNovedadCargaMasiva.IdCarga, vwro_EmpleadoNovedadCargaMasiva.IdNomina, vwro_EmpleadoNovedadCargaMasiva.IdNominaTipo, 
                          vwro_EmpleadoNovedadCargaMasiva.IdSucursal, vwro_EmpleadoNovedadCargaMasiva.FechaCarga, vwro_EmpleadoNovedadCargaMasiva.Observacion, vwro_EmpleadoNovedadCargaMasiva.IdRubro, 
-                         vwro_EmpleadoNovedadCargaMasiva.IdUsuario, vwro_EmpleadoNovedadCargaMasiva.Estado, dbo.ro_rubro_tipo.ru_descripcion, dbo.ro_Nomina_Tipo.Descripcion
+                         vwro_EmpleadoNovedadCargaMasiva.IdUsuario, vwro_EmpleadoNovedadCargaMasiva.Estado, dbo.ro_rubro_tipo.ru_descripcion, dbo.ro_Nomina_Tipo.Descripcion, dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina
 FROM            dbo.ro_EmpleadoNovedadCargaMasiva AS vwro_EmpleadoNovedadCargaMasiva INNER JOIN
                          dbo.ro_Nomina_Tipoliqui ON vwro_EmpleadoNovedadCargaMasiva.IdEmpresa = dbo.ro_Nomina_Tipoliqui.IdEmpresa AND vwro_EmpleadoNovedadCargaMasiva.IdNomina = dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo AND 
                          vwro_EmpleadoNovedadCargaMasiva.IdNominaTipo = dbo.ro_Nomina_Tipoliqui.IdNomina_TipoLiqui INNER JOIN
@@ -13,12 +13,14 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' Or = 1350
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'   Or = 1350
          Or = 1350
       End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_EmpleadoNovedadCargaMasiva';
+
+
 
 
 GO
@@ -93,12 +95,22 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "ro_Nomina_Tipoliqui"
+         Begin Table = "vwro_EmpleadoNovedadCargaMasiva"
             Begin Extent = 
                Top = 6
-               Left = 252
-               Bottom = 209
-               Right = 488
+               Left = 38
+               Bottom = 263
+               Right = 232
+            End
+            DisplayFlags = 280
+            TopColumn = 3
+         End
+         Begin Table = "ro_Nomina_Tipoliqui"
+            Begin Extent = 
+               Top = 119
+               Left = 208
+               Bottom = 322
+               Right = 444
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -122,16 +134,6 @@ Begin DesignProperties =
             End
             DisplayFlags = 280
             TopColumn = 0
-         End
-         Begin Table = "vwro_EmpleadoNovedadCargaMasiva"
-            Begin Extent = 
-               Top = 6
-               Left = 38
-               Bottom = 263
-               Right = 232
-            End
-            DisplayFlags = 280
-            TopColumn = 3
          End
       End
    End
@@ -165,5 +167,7 @@ Begin DesignProperties =
          GroupBy = 1350
          Filter = 1350
          Or = 1350
-        ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_EmpleadoNovedadCargaMasiva';
+      ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_EmpleadoNovedadCargaMasiva';
+
+
 

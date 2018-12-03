@@ -63,16 +63,13 @@ update Af_spACTF_activos_a_depreciar set Af_valor_depreciacion = IIF((Af_dias_a_
 --ELIMINO LOS QUE YA NO DEBEN DEPRECIARSE XQ EL VALOR ES 0
 DELETE Af_spACTF_activos_a_depreciar WHERE ROUND(Af_valor_depreciacion,2) <= 0
 
-DECLARE @Tipo_contabilizacion varchar(30)
-select @Tipo_contabilizacion = FormaContabiliza from Af_Parametros where IdEmpresa = @IdEmpresa
-
-
 update Af_spACTF_activos_a_depreciar set IdCtaCble_Activo = A.IdCtaCble_Activo,
 IdCtaCble_Dep_Acum = A.IdCtaCble_Dep_Acum,
 IdCtaCble_Gastos_Depre = A.IdCtaCble_Gastos_Depre
 FROM(
-SELECT * FROM vwAf_Activo_fijo_cuentas_para_contabilizar_por_tipo
-where tipo = @Tipo_contabilizacion
+SELECT af.IdEmpresa, af.IdActivoFijo, t.IdCtaCble_Activo, t.IdCtaCble_Gastos_Depre, t.IdCtaCble_Dep_Acum 
+FROM Af_Activo_fijo_tipo as t inner join Af_Activo_fijo as af
+on af.IdEmpresa = t.IdEmpresa and af.IdActivoFijoTipo = t.IdActivoFijoTipo
 ) A
 WHERE Af_spACTF_activos_a_depreciar.IdEmpresa = A.IdEmpresa
 and Af_spACTF_activos_a_depreciar.IdActivoFijo = A.IdActivoFijo
