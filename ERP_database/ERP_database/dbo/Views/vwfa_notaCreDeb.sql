@@ -2,7 +2,7 @@
 as 
 SELECT d.IdEmpresa, d.IdSucursal, d.IdBodega, CASE CreDeb WHEN 'C' THEN 'NTCR' WHEN 'D' THEN 'NTDB' END AS Tipo, d.IdNota, CodNota, CreDeb, Serie1, Serie2, NumNota_Impresa, NumAutorizacion, d.IdCliente, no_fecha, 
                   no_fecha_venc,  d.IdTipoNota, sc_observacion, d.Estado, IdPuntoVta, isnull(det.sc_subtotal,0) AS sc_subtotal,isnull(det.sc_iva,0) AS sc_iva, isnull(det.sc_total,0) as sc_total, isnull(cobro.valor_pago,0) valor_aplicado,
-				  round(isnull(det.sc_total,0) - isnull(cobro.valor_pago,0),2) as saldo, ltrim(rtrim(per.pe_nombreCompleto)) as nom_cliente, su.Su_Descripcion, bo.bo_descripcion, d.NaturalezaNota, tn.IdCtaCble
+				  round(isnull(det.sc_total,0) - isnull(cobro.valor_pago,0),2) as saldo, ltrim(rtrim(per.pe_nombreCompleto)) as nom_cliente, su.Su_Descripcion, bo.bo_Descripcion bo_descripcion, d.NaturalezaNota, tn.IdCtaCble
 FROM     dbo.fa_notaCreDeb d 
 
 left join (

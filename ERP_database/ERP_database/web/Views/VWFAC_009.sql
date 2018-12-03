@@ -1,4 +1,4 @@
-﻿CREATE VIEW WEB.VWFAC_009
+﻿CREATE VIEW web.VWFAC_009
 AS
 SELECT fa_guia_remision.IdEmpresa, fa_guia_remision.IdSucursal, fa_guia_remision.IdBodega, fa_guia_remision.IdGuiaRemision, vt_tipoDoc, vt_NumFactura, vt_autorizacion,
 fa_guia_remision.gi_FechaInicioTraslado, fa_guia_remision.gi_FechaFinTraslado, fa_guia_remision.Num_declaracion_aduanera, c.Nombre as MotivoTraslado, fa_guia_remision.Direccion_Origen,

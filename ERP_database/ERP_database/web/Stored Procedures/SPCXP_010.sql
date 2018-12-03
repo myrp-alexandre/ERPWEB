@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE WEB.SPCXP_010
+﻿CREATE PROCEDURE web.SPCXP_010
 (  @IdEmpresa int, @IdProveedorIni numeric, @IdProveedorFin numeric, @FechaIni date, @FechaFin date, @MostrarAnulados bit
 )
 AS

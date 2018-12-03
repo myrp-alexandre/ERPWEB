@@ -2,5 +2,5 @@
 as
 
 SELECT     CodCatalogo, IdCatalogo, ca_descripcion, IdTipoCatalogo, ca_orden, ca_estado
-FROM         dbo.ro_Catalogo
+FROM         dbo.ro_catalogo
 WHERE     (IdTipoCatalogo = 15)

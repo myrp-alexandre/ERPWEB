@@ -21,7 +21,7 @@ SELECT        A.IdEmpresa, A.IdSucursal, A.IdCobro, A.IdCliente, B.IdBodega_Cbte
 FROM            dbo.vwcxc_cobro AS A INNER JOIN
                          dbo.cxc_cobro_det AS B ON A.IdEmpresa = B.IdEmpresa AND A.IdSucursal = B.IdSucursal AND A.IdCobro = B.IdCobro INNER JOIN
                          dbo.vwfa_notaCreDeb AS C ON B.IdEmpresa = C.IdEmpresa AND B.IdSucursal = C.IdSucursal AND B.IdBodega_Cbte = C.IdBodega AND 
-                         B.dc_TipoDocumento = C.tipo AND B.IdCbte_vta_nota = C.IdNota
+                         B.dc_TipoDocumento = C.Tipo AND B.IdCbte_vta_nota = C.IdNota
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 

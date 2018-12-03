@@ -3,7 +3,7 @@ AS
 SELECT     og.IdEmpresa, og.IdCbteCble_Ogiro, og.co_fechaOg, og.co_observacion, og.co_valorpagar, og_p.MontoAplicado pg_MontoAplicado, og_p.SaldoAnterior pg_saldoAnterior
 , og.IdProveedor, 
                       og_p.IdCbteCble_pago IdCbteCble_cbte, og_p.IdTipoCbte_pago IdTipocbte_cbte, og.IdTipoCbte_Ogiro, og.co_factura AS NFactura, per.pe_nombreCompleto AS Proveedor, '' AS GiraCheque, 
-                      p.IdCtaCble_CXP AS CtaProveedor, og_p.IdCancelacion, og_p.IdEmpresa_op IdEmpresa_cbte
+                      p.IdCtaCble_CXP AS CtaProveedor, og_p.Idcancelacion, og_p.IdEmpresa_op IdEmpresa_cbte
 FROM         dbo.cp_orden_pago_cancelaciones AS og_p INNER JOIN
                       dbo.cp_orden_giro AS og ON og_p.IdEmpresa_cxp = og.IdEmpresa AND og_p.IdCbteCble_cxp = og.IdCbteCble_Ogiro AND 
                       og_p.IdTipoCbte_cxp = og.IdTipoCbte_Ogiro INNER JOIN

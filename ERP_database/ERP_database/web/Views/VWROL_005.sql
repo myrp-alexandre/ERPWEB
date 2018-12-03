@@ -1,7 +1,7 @@
 ﻿
 create view  web.VWROL_005 as
 SELECT        dbo.ro_Acta_Finiquito.IdEmpresa, dbo.ro_Acta_Finiquito.IdActaFiniquito, dbo.ro_Acta_Finiquito.IdEmpleado, dbo.ro_Acta_Finiquito.IdCausaTerminacion, dbo.ro_Acta_Finiquito.IdContrato, dbo.ro_Acta_Finiquito.FechaIngreso, 
-                         dbo.ro_Acta_Finiquito.FechaSalida, dbo.ro_Acta_Finiquito.UltimaRemuneracion, dbo.ro_Acta_Finiquito.Observacion,IIF(valor>0, valor,0.00) Ingresos,iif(valor<1, valor,0.00)Egresos, dbo.ro_Acta_Finiquito.EsMujerEmbarazada, 
+                         dbo.ro_Acta_Finiquito.FechaSalida, dbo.ro_Acta_Finiquito.UltimaRemuneracion, dbo.ro_Acta_Finiquito.Observacion,IIF(Valor>0, Valor,0.00) Ingresos,iif(Valor<1, Valor,0.00)Egresos, dbo.ro_Acta_Finiquito.EsMujerEmbarazada, 
                          dbo.ro_Acta_Finiquito.EsDirigenteSindical, dbo.ro_Acta_Finiquito.EsPorDiscapacidad, dbo.ro_Acta_Finiquito.EsPorEnfermedadNoProfesional, dbo.ro_Acta_Finiquito_Detalle.IdSecuencia, 
                          dbo.ro_Acta_Finiquito_Detalle.Observacion AS DescripcionDetalle, dbo.ro_Acta_Finiquito_Detalle.Valor, dbo.ro_Acta_Finiquito.IdCargo, dbo.ro_contrato.NumDocumento, dbo.tb_persona.pe_cedulaRuc, 
                          dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.ro_cargo.ca_descripcion, dbo.ro_rubro_tipo.ru_descripcion
