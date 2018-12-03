@@ -41,13 +41,43 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             ViewBag.lst_cuentas = lst_cuentas;
         }
         #endregion
-        
         #region Metodos ComboBox bajo demanda
-        public ActionResult CmbCuenta_TipoAF()
+        public ActionResult CmbCuenta_TipoAF1()
         {
             Af_Activo_fijo_tipo_Info model = new Af_Activo_fijo_tipo_Info();
-            return PartialView("_CmbCuenta_TipoAF", model);
+            return PartialView("_CmbCuenta_TipoAF1", model);
         }
+        public ActionResult CmbCuenta_TipoAF2()
+        {
+            Af_Activo_fijo_tipo_Info model = new Af_Activo_fijo_tipo_Info();
+            return PartialView("_CmbCuenta_TipoAF2", model);
+        }
+        public ActionResult CmbCuenta_TipoAF3()
+        {
+            Af_Activo_fijo_tipo_Info model = new Af_Activo_fijo_tipo_Info();
+            return PartialView("_CmbCuenta_TipoAF3", model);
+        }
+        public ActionResult CmbCuenta_TipoAF4()
+        {
+            Af_Activo_fijo_tipo_Info model = new Af_Activo_fijo_tipo_Info();
+            return PartialView("_CmbCuenta_TipoAF4", model);
+        }
+        public ActionResult CmbCuenta_TipoAF5()
+        {
+            Af_Activo_fijo_tipo_Info model = new Af_Activo_fijo_tipo_Info();
+            return PartialView("_CmbCuenta_TipoAF5", model);
+        }
+        public ActionResult CmbCuenta_TipoAF6()
+        {
+            Af_Activo_fijo_tipo_Info model = new Af_Activo_fijo_tipo_Info();
+            return PartialView("_CmbCuenta_TipoAF6", model);
+        }
+        public ActionResult CmbCuenta_TipoAF7()
+        {
+            Af_Activo_fijo_tipo_Info model = new Af_Activo_fijo_tipo_Info();
+            return PartialView("_CmbCuenta_TipoAF7", model);
+        }
+
 
         public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {

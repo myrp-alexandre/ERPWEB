@@ -33,17 +33,13 @@ namespace Core.Erp.Info.ActivoFijo
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
         public string MotiAnula { get; set; }
-
-        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
+        
         public string IdCtaCble_CostoVenta { get; set; }
-
-        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
+        
         public string IdCtaCble_Mejora { get; set; }
-
-        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
+        
         public string IdCtaCble_Baja { get; set; }
-
-        [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
+        
         public string IdCtaCble_Retiro { get; set; }
 
     }
