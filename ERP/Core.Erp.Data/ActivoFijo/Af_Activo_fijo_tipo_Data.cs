@@ -25,7 +25,7 @@ namespace Core.Erp.Data.ActivoFijo
                                      IdEmpresa = q.IdEmpresa,
                                      Af_Descripcion = q.Af_Descripcion,
                                      CodActivoFijo = q.CodActivoFijo,
-
+                                     Estado = q.Estado,
                                      EstadoBool = q.Estado == "A" ? true : false
 
                                  }).ToList();
@@ -39,7 +39,7 @@ namespace Core.Erp.Data.ActivoFijo
                                      IdEmpresa = q.IdEmpresa,
                                      Af_Descripcion = q.Af_Descripcion,
                                      CodActivoFijo = q.CodActivoFijo,
-
+                                     Estado = q.Estado,
                                      EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }

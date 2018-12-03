@@ -99,12 +99,15 @@
             column.Width = Unit.Pixel(100);
             column.SetDataItemTemplateContent(container =>
             {
+            if (Convert.ToString(DataBinder.Eval(container.DataItem, "Estado")) == "A")
+            {
                 Html.DevExpress().HyperLink(hyperlink =>
                 {
                     var keyValue = DataBinder.Eval(container.DataItem, "IdActivoFijoTipo");
                     hyperlink.Properties.Text = "Categorías";
                     hyperlink.NavigateUrl = Url.Action("Index", "CategoriaAF", new { IdEmpresa = DataBinder.Eval(container.DataItem, "IdEmpresa"), IdActivoFijoTipo = keyValue });
                 }).Render();
+                }
             });
         });
 
