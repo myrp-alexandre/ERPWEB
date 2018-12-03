@@ -50,8 +50,10 @@
             column.EditorProperties().ComboBox(p =>
             {
 
-                p.Columns.Add("IdTipoSRI", "Tipo").Width = Unit.Percentage(30);
-                p.Columns.Add("co_codigoBase", "Código").Width = Unit.Percentage(30);
+                p.Columns.Add("IdTipoSRI", "Tipo").Width = Unit.Percentage(20);
+                p.Columns.Add("co_codigoBase", "Código").Width = Unit.Percentage(10);
+                p.Columns.Add("co_porRetencion", "%").Width = Unit.Percentage(10);
+                
                 p.Columns.Add("co_descripcion", "Descripcion").Width = Unit.Percentage(60);
                 //p.ValueField = "codigoSRI";
                 p.ValueField = "IdCodigo_SRI";

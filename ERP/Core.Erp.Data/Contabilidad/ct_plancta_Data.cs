@@ -224,7 +224,6 @@ namespace Core.Erp.Data.Contabilidad
                         pc_Estado = Entity.pc_Estado,
                         pc_EsMovimiento = Entity.pc_EsMovimiento,
                         pc_clave_corta = Entity.pc_clave_corta,
-                        IdTipo_Gasto = Entity.IdTipo_Gasto,
                         pc_EsMovimiento_bool = Entity.pc_EsMovimiento == "S" ? true : false,
                     };
                 }

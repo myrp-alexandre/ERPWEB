@@ -24,7 +24,6 @@ namespace Core.Erp.Info.Contabilidad
         public bool EstadoBool { get; set; }
         public string pc_EsMovimiento { get; set; }
         public string pc_clave_corta { get; set; }
-        public Nullable<int> IdTipo_Gasto { get; set; }
 
         #region Campos de auditoria
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
@@ -34,8 +33,6 @@ namespace Core.Erp.Info.Contabilidad
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         #endregion
 
         //Campos que no existen en la base

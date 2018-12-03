@@ -171,7 +171,8 @@
             TIP_MODELO,
             TIP_ESTADO_AF,
             TIP_MARCA,
-            TIP_UBICACION
+            TIP_UBICACION,
+            TIP_CTACBLE
         }
         public enum eTipoCatalogoCOM
         {

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model_contabilidad.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model_contabilidad.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ct_anio_fiscal">
           <Key>
             <PropertyRef Name="IdanioFiscal" />
@@ -168,9 +168,6 @@
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="50" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="150" />
-          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
-          <Property Name="ip" Type="varchar" MaxLength="50" />
-          <Property Name="IdTipo_Gasto" Type="int" />
         </EntityType>
         <EntityType Name="ct_plancta_nivel">
           <Key>
@@ -347,8 +344,8 @@
           <Property Name="ventasEstab" Type="numeric" Precision="20" Scale="2" Nullable="false" />
           <Property Name="ivaComp" Type="numeric" Precision="20" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_cbtecble_con_ctacble_acreedora' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwct_cbtecble_con_ctacble_acreedora' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwct_cbtecble_con_ctacble_acreedora">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -360,8 +357,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_cbtecble_con_ctacble_acreedor
           <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdCtaCble_Acreedora" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwct_RevisionContableFacturas">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -651,28 +648,28 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
           <EntitySet Name="ATS_ventas" EntityType="Self.ATS_ventas" Schema="EntidadRegulatoria" store:Type="Tables" />
           <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="Self.vwct_cbtecble_con_ctacble_acreedora" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwct_cbtecble_con_ctacble_acreedora].[IdEmpresa] AS [IdEmpresa], 
-[vwct_cbtecble_con_ctacble_acreedora].[IdTipoCbte] AS [IdTipoCbte], 
-[vwct_cbtecble_con_ctacble_acreedora].[IdCbteCble] AS [IdCbteCble], 
-[vwct_cbtecble_con_ctacble_acreedora].[IdCtaCble_Acreedora] AS [IdCtaCble_Acreedora]
-FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_acreedora]</DefiningQuery>
+    [vwct_cbtecble_con_ctacble_acreedora].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdTipoCbte] AS [IdTipoCbte], 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdCbteCble] AS [IdCbteCble], 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdCtaCble_Acreedora] AS [IdCtaCble_Acreedora]
+    FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_acreedora]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwct_RevisionContableFacturas" EntityType="Self.vwct_RevisionContableFacturas" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwct_RevisionContableFacturas].[IdEmpresa] AS [IdEmpresa], 
-[vwct_RevisionContableFacturas].[IdSucursal] AS [IdSucursal], 
-[vwct_RevisionContableFacturas].[IdBodega] AS [IdBodega], 
-[vwct_RevisionContableFacturas].[IdCbteVta] AS [IdCbteVta], 
-[vwct_RevisionContableFacturas].[ct_IdEmpresa] AS [ct_IdEmpresa], 
-[vwct_RevisionContableFacturas].[ct_IdTipoCbte] AS [ct_IdTipoCbte], 
-[vwct_RevisionContableFacturas].[ct_IdCbteCble] AS [ct_IdCbteCble], 
-[vwct_RevisionContableFacturas].[Nombres] AS [Nombres], 
-[vwct_RevisionContableFacturas].[Referencia] AS [Referencia], 
-[vwct_RevisionContableFacturas].[vt_fecha] AS [vt_fecha], 
-[vwct_RevisionContableFacturas].[TotalModulo] AS [TotalModulo], 
-[vwct_RevisionContableFacturas].[TotalContabilidad] AS [TotalContabilidad], 
-[vwct_RevisionContableFacturas].[Diferencia] AS [Diferencia]
-FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</DefiningQuery>
+    [vwct_RevisionContableFacturas].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_RevisionContableFacturas].[IdSucursal] AS [IdSucursal], 
+    [vwct_RevisionContableFacturas].[IdBodega] AS [IdBodega], 
+    [vwct_RevisionContableFacturas].[IdCbteVta] AS [IdCbteVta], 
+    [vwct_RevisionContableFacturas].[ct_IdEmpresa] AS [ct_IdEmpresa], 
+    [vwct_RevisionContableFacturas].[ct_IdTipoCbte] AS [ct_IdTipoCbte], 
+    [vwct_RevisionContableFacturas].[ct_IdCbteCble] AS [ct_IdCbteCble], 
+    [vwct_RevisionContableFacturas].[Nombres] AS [Nombres], 
+    [vwct_RevisionContableFacturas].[Referencia] AS [Referencia], 
+    [vwct_RevisionContableFacturas].[vt_fecha] AS [vt_fecha], 
+    [vwct_RevisionContableFacturas].[TotalModulo] AS [TotalModulo], 
+    [vwct_RevisionContableFacturas].[TotalContabilidad] AS [TotalContabilidad], 
+    [vwct_RevisionContableFacturas].[Diferencia] AS [Diferencia]
+    FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
             <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
@@ -773,7 +770,7 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
           <Property Name="IdCbteCble_cbte_cierre" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="ct_anio_fiscal" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_anio_fiscal" />
           <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_cbtecble" />
-          <NavigationProperty Name="ct_plancta" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_plancta" />
+          <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_plancta" />
         </EntityType>
         <EntityType Name="ct_cbtecble">
           <Key>
@@ -827,8 +824,8 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
           <Property Name="IdPunto_cargo_grupo" Type="Int32" />
           <Property Name="dc_para_conciliar" Type="Boolean" />
           <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble_det" ToRole="ct_cbtecble" />
-          <NavigationProperty Name="ct_plancta" Relationship="Self.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_cbtecble_det" ToRole="ct_plancta" />
           <NavigationProperty Name="ct_punto_cargo" Relationship="Self.FK_ct_cbtecble_det_ct_punto_cargo" FromRole="ct_cbtecble_det" ToRole="ct_punto_cargo" />
+          <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_cbtecble_det" ToRole="ct_plancta" />
         </EntityType>
         <EntityType Name="ct_cbtecble_Reversado">
           <Key>
@@ -884,7 +881,7 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
           <Property Name="gc_signo_operacion" Type="Int32" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="IdGrupo_Mayor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ct_plancta" Relationship="Self.FK_ct_plancta_ct_grupocble" FromRole="ct_grupocble" ToRole="ct_plancta" />
+          <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_plancta_ct_grupocble" FromRole="ct_grupocble" ToRole="ct_plancta" />
         </EntityType>
         <EntityType Name="ct_periodo">
           <Key>
@@ -901,38 +898,6 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
           <Property Name="pe_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ct_anio_fiscal" Relationship="Self.FK_ct_periodo_ct_anio_fiscal" FromRole="ct_periodo" ToRole="ct_anio_fiscal" />
           <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_ct_periodo" FromRole="ct_periodo" ToRole="ct_cbtecble" />
-        </EntityType>
-        <EntityType Name="ct_plancta">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCtaCble" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="pc_Cuenta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdCtaCblePadre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pc_Naturaleza" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="IdNivelCta" Type="Int32" Nullable="false" />
-          <Property Name="IdGrupoCble" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="pc_Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="pc_EsMovimiento" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="pc_clave_corta" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipo_Gasto" Type="Int32" />
-          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_plancta" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
-          <NavigationProperty Name="ct_cbtecble_det" Relationship="Self.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_plancta" ToRole="ct_cbtecble_det" />
-          <NavigationProperty Name="ct_grupocble" Relationship="Self.FK_ct_plancta_ct_grupocble" FromRole="ct_plancta" ToRole="ct_grupocble" />
-          <NavigationProperty Name="ct_plancta1" Relationship="Self.FK_ct_plancta_ct_plancta" FromRole="ct_plancta" ToRole="ct_plancta1" />
-          <NavigationProperty Name="ct_plancta2" Relationship="Self.FK_ct_plancta_ct_plancta" FromRole="ct_plancta1" ToRole="ct_plancta" />
-          <NavigationProperty Name="ct_plancta_nivel" Relationship="Self.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta" ToRole="ct_plancta_nivel" />
         </EntityType>
         <EntityType Name="ct_plancta_nivel">
           <Key>
@@ -951,7 +916,7 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ct_plancta" Relationship="Self.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta_nivel" ToRole="ct_plancta" />
+          <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta_nivel" ToRole="ct_plancta" />
         </EntityType>
         <EntityType Name="ct_punto_cargo">
           <Key>
@@ -1174,20 +1139,6 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
-          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="0..1" />
-          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Principal>
-            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ct_cbtecble_ct_cbtecble_tipo">
           <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="1" />
           <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
@@ -1264,20 +1215,6 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ct_cbtecble_det_ct_plancta">
-          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="1" />
-          <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ct_cbtecble_det_ct_punto_cargo">
           <End Role="ct_punto_cargo" Type="Self.ct_punto_cargo" Multiplicity="0..1" />
           <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
@@ -1292,46 +1229,6 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ct_plancta_ct_grupocble">
-          <End Role="ct_grupocble" Type="Self.ct_grupocble" Multiplicity="1" />
-          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_grupocble">
-              <PropertyRef Name="IdGrupoCble" />
-            </Principal>
-            <Dependent Role="ct_plancta">
-              <PropertyRef Name="IdGrupoCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_plancta_ct_plancta">
-          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="0..1" />
-          <End Role="ct_plancta1" Type="Self.ct_plancta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Principal>
-            <Dependent Role="ct_plancta1">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCblePadre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_plancta_ct_plancta_nivel">
-          <End Role="ct_plancta_nivel" Type="Self.ct_plancta_nivel" Multiplicity="1" />
-          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta_nivel">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNivelCta" />
-            </Principal>
-            <Dependent Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNivelCta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities_contabilidad" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ct_anio_fiscal" EntityType="Self.ct_anio_fiscal" />
           <EntitySet Name="ct_anio_fiscal_x_cuenta_utilidad" EntityType="Self.ct_anio_fiscal_x_cuenta_utilidad" />
@@ -1341,7 +1238,6 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
           <EntitySet Name="ct_cbtecble_tipo" EntityType="Self.ct_cbtecble_tipo" />
           <EntitySet Name="ct_grupocble" EntityType="Self.ct_grupocble" />
           <EntitySet Name="ct_periodo" EntityType="Self.ct_periodo" />
-          <EntitySet Name="ct_plancta" EntityType="Self.ct_plancta" />
           <EntitySet Name="ct_plancta_nivel" EntityType="Self.ct_plancta_nivel" />
           <EntitySet Name="ct_punto_cargo" EntityType="Self.ct_punto_cargo" />
           <EntitySet Name="ATS_compras" EntityType="Self.ATS_compras" />
@@ -1366,10 +1262,6 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
             <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
             <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
           </AssociationSet>
-          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
-          </AssociationSet>
           <AssociationSet Name="FK_ct_cbtecble_ct_cbtecble_tipo" Association="Self.FK_ct_cbtecble_ct_cbtecble_tipo">
             <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
             <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
@@ -1390,25 +1282,9 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
             <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
             <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
           </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_det_ct_plancta" Association="Self.FK_ct_cbtecble_det_ct_plancta">
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_ct_cbtecble_det_ct_punto_cargo" Association="Self.FK_ct_cbtecble_det_ct_punto_cargo">
             <End Role="ct_punto_cargo" EntitySet="ct_punto_cargo" />
             <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_plancta_ct_grupocble" Association="Self.FK_ct_plancta_ct_grupocble">
-            <End Role="ct_grupocble" EntitySet="ct_grupocble" />
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_plancta_ct_plancta" Association="Self.FK_ct_plancta_ct_plancta">
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-            <End Role="ct_plancta1" EntitySet="ct_plancta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_plancta_ct_plancta_nivel" Association="Self.FK_ct_plancta_ct_plancta_nivel">
-            <End Role="ct_plancta_nivel" EntitySet="ct_plancta_nivel" />
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
           </AssociationSet>
           <FunctionImport Name="generarATS" ReturnType="Collection(Model_contabilidad.generarATS_Result)">
             <Parameter Name="idempresa" Mode="In" Type="Int32" />
@@ -1424,6 +1300,27 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
             <End Role="ct_parametro" EntitySet="ct_parametro" />
           </AssociationSet>
           <EntitySet Name="vwct_RevisionContableFacturas" EntityType="Model_contabilidad.vwct_RevisionContableFacturas" />
+          <EntitySet Name="ct_plancta" EntityType="Model_contabilidad.ct_plancta" />
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_plancta" Association="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_grupocble" Association="Model_contabilidad.FK_ct_plancta_ct_grupocble">
+            <End Role="ct_grupocble" EntitySet="ct_grupocble" />
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_plancta" Association="Model_contabilidad.FK_ct_plancta_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_plancta1" EntitySet="ct_plancta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_plancta_nivel" Association="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel">
+            <End Role="ct_plancta_nivel" EntitySet="ct_plancta_nivel" />
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="generarATS_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -1514,6 +1411,103 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
           <Property Name="TotalContabilidad" Type="Double" Nullable="false" />
           <Property Name="Diferencia" Type="Double" />
         </EntityType>
+        <EntityType Name="ct_plancta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCtaCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCblePadre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Naturaleza" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdNivelCta" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupoCble" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="pc_EsMovimiento" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="pc_clave_corta" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_plancta" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
+          <NavigationProperty Name="ct_cbtecble_det" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_plancta" ToRole="ct_cbtecble_det" />
+          <NavigationProperty Name="ct_grupocble" Relationship="Model_contabilidad.FK_ct_plancta_ct_grupocble" FromRole="ct_plancta" ToRole="ct_grupocble" />
+          <NavigationProperty Name="ct_plancta1" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta" FromRole="ct_plancta" ToRole="ct_plancta1" />
+          <NavigationProperty Name="ct_plancta2" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta" FromRole="ct_plancta1" ToRole="ct_plancta" />
+          <NavigationProperty Name="ct_plancta_nivel" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta" ToRole="ct_plancta_nivel" />
+        </EntityType>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
+          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="0..1" />
+          <End Type="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad" Role="ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_det_ct_plancta">
+          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_grupocble">
+          <End Type="Model_contabilidad.ct_grupocble" Role="ct_grupocble" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_grupocble">
+              <PropertyRef Name="IdGrupoCble" />
+            </Principal>
+            <Dependent Role="ct_plancta">
+              <PropertyRef Name="IdGrupoCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_plancta">
+          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="0..1" />
+          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_plancta1">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCblePadre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_plancta_nivel">
+          <End Type="Model_contabilidad.ct_plancta_nivel" Role="ct_plancta_nivel" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta_nivel">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivelCta" />
+            </Principal>
+            <Dependent Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivelCta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1643,32 +1637,6 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
                 <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
                 <ScalarProperty Name="pe_cerrado" ColumnName="pe_cerrado" />
                 <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ct_plancta">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_plancta">
-              <MappingFragment StoreEntitySet="ct_plancta">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
-                <ScalarProperty Name="IdCtaCblePadre" ColumnName="IdCtaCblePadre" />
-                <ScalarProperty Name="pc_Naturaleza" ColumnName="pc_Naturaleza" />
-                <ScalarProperty Name="IdNivelCta" ColumnName="IdNivelCta" />
-                <ScalarProperty Name="IdGrupoCble" ColumnName="IdGrupoCble" />
-                <ScalarProperty Name="pc_Estado" ColumnName="pc_Estado" />
-                <ScalarProperty Name="pc_EsMovimiento" ColumnName="pc_EsMovimiento" />
-                <ScalarProperty Name="pc_clave_corta" ColumnName="pc_clave_corta" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="IdTipo_Gasto" ColumnName="IdTipo_Gasto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1908,6 +1876,29 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ct_plancta">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_plancta">
+              <MappingFragment StoreEntitySet="ct_plancta">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="pc_clave_corta" ColumnName="pc_clave_corta" />
+                <ScalarProperty Name="pc_EsMovimiento" ColumnName="pc_EsMovimiento" />
+                <ScalarProperty Name="pc_Estado" ColumnName="pc_Estado" />
+                <ScalarProperty Name="IdGrupoCble" ColumnName="IdGrupoCble" />
+                <ScalarProperty Name="IdNivelCta" ColumnName="IdNivelCta" />
+                <ScalarProperty Name="pc_Naturaleza" ColumnName="pc_Naturaleza" />
+                <ScalarProperty Name="IdCtaCblePadre" ColumnName="IdCtaCblePadre" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1924,7 +1915,7 @@ FROM [web].[vwct_RevisionContableFacturas] AS [vwct_RevisionContableFacturas]</D
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>

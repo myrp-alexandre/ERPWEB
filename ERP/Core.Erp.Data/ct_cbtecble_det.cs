@@ -28,7 +28,7 @@ namespace Core.Erp.Data
         public Nullable<bool> dc_para_conciliar { get; set; }
     
         public virtual ct_cbtecble ct_cbtecble { get; set; }
-        public virtual ct_plancta ct_plancta { get; set; }
         public virtual ct_punto_cargo ct_punto_cargo { get; set; }
+        public virtual ct_plancta ct_plancta { get; set; }
     }
 }

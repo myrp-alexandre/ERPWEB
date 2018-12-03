@@ -64,7 +64,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     if (mostrar_anulados == true)
                         Lista = (from q in Context.vwcp_codigo_SRI
                                  where (q.IdTipoSRI == "COD_RET_FUE" || q.IdTipoSRI == "COD_RET_IVA")
-                                 && (q.IdEmpresa == null || q.IdEmpresa == IdEmpresa)
+                                 && q.IdEmpresa == IdEmpresa
                                  select new cp_codigo_SRI_Info
                                  {
                                      IdTipoSRI = q.IdTipoSRI,
@@ -84,7 +84,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Lista = (from q in Context.vwcp_codigo_SRI
                                  where q.co_estado == "A"
                                  && (q.IdTipoSRI == "COD_RET_FUE" || q.IdTipoSRI == "COD_RET_IVA")
-                                 && (q.IdEmpresa == null || q.IdEmpresa == IdEmpresa)
+                                 && q.IdEmpresa == IdEmpresa
                                  select new cp_codigo_SRI_Info
                                  {
                                      IdCodigo_SRI = q.IdCodigo_SRI,

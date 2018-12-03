@@ -109,7 +109,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_cp_retencion_det.set_list(new List<cp_retencion_det_Info>(), model.IdTransaccionSession);
             List_ct_cbtecble_det_List.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
-            var lista = bus_codigo_ret.get_list_cod_ret(true, IdEmpresa);
+            var lista = bus_codigo_ret.get_list_cod_ret(false, IdEmpresa);
             lst_codigo_retencion.set_list(lista);
             return View(model);
         }
@@ -191,7 +191,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             List_ct_cbtecble_det_List.set_list(model.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             List_cp_retencion_det.set_list(model.detalle, model.IdTransaccionSession);
 
-            var lista = bus_codigo_ret.get_list_cod_ret(true, IdEmpresa);
+            var lista = bus_codigo_ret.get_list_cod_ret(false, IdEmpresa);
             lst_codigo_retencion.set_list(lista);
             return View(model);
         }
@@ -273,7 +273,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             List_ct_cbtecble_det_List.set_list(model.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             List_cp_retencion_det.set_list(model.detalle, model.IdTransaccionSession);
 
-            var lista = bus_codigo_ret.get_list_cod_ret(true, IdEmpresa);
+            var lista = bus_codigo_ret.get_list_cod_ret(false, IdEmpresa);
             lst_codigo_retencion.set_list(lista);
             return View(model);
         }
@@ -498,8 +498,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
-            var lista_cp_codigo_SRI = lst_codigo_retencion.get_list();
-            lista_cp_codigo_SRI = bus_codigo_ret.get_list_cod_ret(false, IdEmpresa);
+            var lista_cp_codigo_SRI = bus_codigo_ret.get_list_cod_ret(false, IdEmpresa);
             ViewBag.lst_codigo_retencion = lista_cp_codigo_SRI;           
         }
 
