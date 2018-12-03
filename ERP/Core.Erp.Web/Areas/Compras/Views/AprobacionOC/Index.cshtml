@@ -1,7 +1,7 @@
 ﻿@model Core.Erp.Info.Compras.com_orden_aprobacion_Info
 
 @{
-    ViewBag.Title = "Aprobación orden de compra";
+    ViewBag.Title = "Aprobación órdenes de compra";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -117,17 +117,22 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_aprobacion_oc", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
-
-
-            <div class="box-body">
-                <div class="row">
+            <div class="row">
+                <div class="col-md-12">
                     <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="MotivoAprobacion">Observación</label>
-                                @Html.TextBoxFor(q => q.MotivoAprobacion, new { @class = "form-control", @id = "MotivoAprobacion" })
-                            </div>
+                        @Html.Action("GridViewPartial_aprobacion_oc", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
+                    </div>
+                </div>
+            </div>
+
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="MotivoAprobacion">Observación</label>
+                            @Html.TextAreaFor(q => q.MotivoAprobacion, new { @class = "form-control", @id = "MotivoAprobacion", @rows = 1 })
                         </div>
                     </div>
                 </div>
