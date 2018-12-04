@@ -1231,6 +1231,12 @@
     <Compile Include="ro_horario_planificacion_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_HorasProfesores.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ro_HorasProfesores_det.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_marcaciones_tipo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1351,6 +1357,8 @@
     <Compile Include="RRHH\ro_horario_Data.cs" />
     <Compile Include="RRHH\ro_horario_planificacion_Data.cs" />
     <Compile Include="RRHH\ro_horario_planificacion_det_Data.cs" />
+    <Compile Include="RRHH\ro_HorasProfesores_Data.cs" />
+    <Compile Include="RRHH\ro_HorasProfesores_det_Data.cs" />
     <Compile Include="RRHH\ro_marcaciones_tipo_Data.cs" />
     <Compile Include="RRHH\ro_marcaciones_x_empleado_Data.cs" />
     <Compile Include="RRHH\ro_Nomina_Tipoliqui_Data.cs" />

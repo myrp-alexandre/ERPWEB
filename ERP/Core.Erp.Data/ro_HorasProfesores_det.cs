@@ -12,12 +12,15 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ro_EmpleadoFoto
+    public partial class ro_HorasProfesores_det
     {
         public int IdEmpresa { get; set; }
+        public decimal IdCarga { get; set; }
+        public int Secuencia { get; set; }
+        public string IdRubro { get; set; }
+        public int IdEmpresa_nov { get; set; }
+        public decimal IdNovedad { get; set; }
+        public string Observacion { get; set; }
         public decimal IdEmpleado { get; set; }
-        public byte[] Foto { get; set; }
-    
-        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

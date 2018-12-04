@@ -9,12 +9,12 @@
 
 namespace Core.Erp.Data
 {
+
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-
 
     public partial class Entities_rrhh : DbContext
     {
@@ -119,6 +119,8 @@ namespace Core.Erp.Data
         public DbSet<vwro_ArchivosIess> vwro_ArchivosIess { get; set; }
         public DbSet<ro_empleado> ro_empleado { get; set; }
         public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
+        public DbSet<ro_HorasProfesores> ro_HorasProfesores { get; set; }
+        public DbSet<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

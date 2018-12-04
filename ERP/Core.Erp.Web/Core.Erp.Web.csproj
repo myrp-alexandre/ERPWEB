@@ -430,6 +430,7 @@
     <Compile Include="Areas\RRHH\Controllers\HorarioController.cs" />
     <Compile Include="Areas\RRHH\Controllers\HorarioPlanificacionController.cs" />
     <Compile Include="Areas\RRHH\Controllers\HorasExtrasController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\ImportacionHorasController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ImportacionMarcacionesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ImportacionNovedadesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\LiquidacionVacacionesController.cs" />
@@ -9436,7 +9437,6 @@
     <Content Include="Areas\Presupuesto\Views\Presupuesto\Modificar.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Presupuesto\Anular.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_020.cshtml" />
-
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9517,6 +9517,7 @@
     <Folder Include="Areas\Presupuesto\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
+    <Folder Include="Areas\RRHH\Views\ImportacionHoras\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />

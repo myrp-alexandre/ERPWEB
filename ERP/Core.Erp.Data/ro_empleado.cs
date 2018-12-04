@@ -134,5 +134,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
+        public virtual ro_EmpleadoFoto ro_EmpleadoFoto { get; set; }
     }
 }
