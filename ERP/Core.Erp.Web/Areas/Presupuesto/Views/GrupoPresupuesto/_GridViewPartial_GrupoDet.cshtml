@@ -48,7 +48,7 @@
         {
             column.FieldName = "Nombre";
             column.Caption = "Nombre";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(60);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
@@ -56,7 +56,7 @@
         {
             column.FieldName = "IdUsuario";
             column.Caption = "Usuario";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(50);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
@@ -70,7 +70,7 @@
         {
             column.FieldName = "AsignaCuentas";
             column.Caption = "Asigna Cuentas";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(20);
             column.EditorProperties().CheckBox(sp =>
             {
 

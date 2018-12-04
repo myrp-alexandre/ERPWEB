@@ -17,7 +17,7 @@ namespace Core.Erp.Data.Presupuesto
                 {
                     if (MostrarAnulado == false)
                     {
-                        Lista = db.vwpre_rubro.Where(q => q.Estado == true).Select(q => new pre_rubro_Info
+                        Lista = db.vwpre_rubro.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa).Select(q => new pre_rubro_Info
                         {
                             IdRubro = q.IdRubro,
                             IdEmpresa = q.IdEmpresa,
@@ -29,7 +29,7 @@ namespace Core.Erp.Data.Presupuesto
                     }
                     else
                     {
-                        Lista = db.vwpre_rubro.Select(q => new pre_rubro_Info
+                        Lista = db.vwpre_rubro.Where(q=> q.IdEmpresa == IdEmpresa).Select(q => new pre_rubro_Info
                         {
                             IdRubro = q.IdRubro,
                             IdEmpresa = q.IdEmpresa,
@@ -85,7 +85,7 @@ namespace Core.Erp.Data.Presupuesto
                 int ID = 1;
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    var Lista = db.pre_rubro.Select(q => q.IdRubro);
+                    var Lista = db.pre_rubro.Where(q => q.IdEmpresa == IdEmpresa).Select(q => q.IdRubro);
 
                     if (Lista.Count() > 0)
                         ID = Lista.Max() + 1;

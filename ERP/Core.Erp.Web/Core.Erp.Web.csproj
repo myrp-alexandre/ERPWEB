@@ -392,6 +392,7 @@
     <Compile Include="Areas\Inventario\Controllers\UnidadDeMedidaController.cs" />
     <Compile Include="Areas\Inventario\InventarioAreaRegistration.cs" />
     <Compile Include="Areas\Presupuesto\Controllers\GrupoPresupuestoController.cs" />
+    <Compile Include="Areas\Presupuesto\Controllers\PresupuestoController.cs" />
     <Compile Include="Areas\Presupuesto\Controllers\RubroPresupuestoController.cs" />
     <Compile Include="Areas\Presupuesto\PresupuestoAreaRegistration.cs" />
     <Compile Include="Areas\Reportes\Controllers\ActivoFijoReportesController.cs" />
@@ -1078,6 +1079,12 @@
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_018_Rpt.Designer.cs">
       <DependentUpon>ROL_018_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_020_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_020_Rpt.Designer.cs">
+      <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -9420,6 +9427,11 @@
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_CmbCuenta_AF.cshtml" />
     <Content Include="Areas\RRHH\Views\ArchivosActualizacionSueldo\Nuevo.cshtml" />
     <Content Include="Areas\RRHH\Views\ArchivosActualizacionSueldo\_GridViewPartial_archivos_iess.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_CmbEmpleado_Enc_AF.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_CmbEmpleado_Cus_AF.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\Presupuesto\_GridViewPartial_Presupuesto.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\Presupuesto\Index.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_020.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9835,6 +9847,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_018_Rpt.resx">
       <DependentUpon>ROL_018_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_020_Rpt.resx">
+      <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

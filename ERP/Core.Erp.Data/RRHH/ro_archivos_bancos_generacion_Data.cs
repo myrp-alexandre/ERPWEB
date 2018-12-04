@@ -9,7 +9,7 @@ namespace Core.Erp.Data.RRHH
 {
   public  class ro_archivos_bancos_generacion_Data
     {
-        public List<ro_archivos_bancos_generacion_Info> get_list(int IdEmpresa, DateTime Fechainicio, DateTime FechaFin, bool mostrar_anulados)
+        public List<ro_archivos_bancos_generacion_Info> get_list(int IdEmpresa,  DateTime Fechainicio, DateTime FechaFin, bool mostrar_anulados)
         {
             try
             {
@@ -35,7 +35,8 @@ namespace Core.Erp.Data.RRHH
                                      DescripcionProcesoNomina=q.DescripcionProcesoNomina,
                                      pe_FechaIni=q.pe_FechaIni,
                                      pe_FechaFin=q.pe_FechaFin,
-                                     NombreProceso = q.NombreProceso
+                                     NombreProceso = q.NombreProceso,
+                                     IdPeriodo = q.IdPeriodo
 
 
                                  }).ToList();

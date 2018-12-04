@@ -1004,11 +1004,23 @@
     </Compile>
     <Compile Include="Presupuesto\pre_Grupo_Data.cs" />
     <Compile Include="Presupuesto\pre_Grupo_x_seg_usuario_Data.cs" />
+    <Compile Include="Presupuesto\pre_Presupuesto_Data.cs" />
+    <Compile Include="Presupuesto\pre_Presupuesto_x_grupo_Data.cs" />
+    <Compile Include="Presupuesto\pre_Presupuesto_x_grupo_det_Data.cs" />
     <Compile Include="Presupuesto\pre_rubro_Data.cs" />
     <Compile Include="pre_Grupo.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
     <Compile Include="pre_Grupo_x_seg_usuario.cs">
+      <DependentUpon>Model_presupuesto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pre_Presupuesto.cs">
+      <DependentUpon>Model_presupuesto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pre_Presupuesto_x_grupo.cs">
+      <DependentUpon>Model_presupuesto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pre_Presupuesto_x_grupo_det.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
     <Compile Include="pre_rubro.cs">
@@ -1110,6 +1122,7 @@
     <Compile Include="Reportes\RRHH\ROL_017_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_019_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_018_Data.cs" />
+    <Compile Include="Reportes\RRHH\ROL_020_Data.cs" />
     <Compile Include="ro_Acta_Finiquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1594,6 +1607,9 @@
     <Compile Include="VWACTF_003.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwAf_Activo_fijo_CtaCble.cs">
+      <DependentUpon>Model_activo_fijo.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWBAN_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
@@ -2027,6 +2043,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWROL_019.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWROL_020.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwRo_ActaFiniquito.cs">

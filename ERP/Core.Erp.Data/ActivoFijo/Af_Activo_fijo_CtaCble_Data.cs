@@ -16,7 +16,7 @@ namespace Core.Erp.Data.ActivoFijo
                 List<Af_Activo_fijo_CtaCble_Info> Lista;
                 using (Entities_activo_fijo Context = new Entities_activo_fijo())
                 {
-                    Lista = Context.Af_Activo_fijo_CtaCble.Where(
+                    Lista = Context.vwAf_Activo_fijo_CtaCble.Where(
                         q => q.IdEmpresa == IdEmpresa
                         && q.IdActivoFijo == IdActivoFijo).Select(
                         q => new Af_Activo_fijo_CtaCble_Info
@@ -26,7 +26,8 @@ namespace Core.Erp.Data.ActivoFijo
                             IdCatalogo = q.IdCatalogo,
                             IdCtaCble = q.IdCtaCble,
                            Porcentaje = q.Porcentaje,
-                           Secuencia = q.Secuencia
+                           Secuencia = q.Secuencia,
+                           pc_Cuenta = q.pc_Cuenta
                              
                     }).ToList();
                 }

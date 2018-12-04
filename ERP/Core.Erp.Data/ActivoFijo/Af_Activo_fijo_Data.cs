@@ -103,8 +103,12 @@ namespace Core.Erp.Data.ActivoFijo
                         IdCatalogo_Modelo = Entity.IdCatalogo_Modelo,
                         IdCategoriaAF = Entity.IdCategoriaAF,
                         IdSucursal = Entity.IdSucursal,
-                        IdTipoCatalogo_Ubicacion = Entity.IdTipoCatalogo_Ubicacion
+                        IdTipoCatalogo_Ubicacion = Entity.IdTipoCatalogo_Ubicacion,
+                        IdEmpleadoCustodio = Entity.IdEmpleadoCustodio,
+                        IdEmpleadoEncargado = Entity.IdEmpleadoEncargado,
+                        Estado_Proceso_nombre = Entity.Estado_Proceso,
                         
+
                     };
                 }
                 return info;
@@ -179,17 +183,35 @@ namespace Core.Erp.Data.ActivoFijo
                         IdCategoriaAF = info.IdCategoriaAF,
                         IdSucursal = info.IdSucursal,
                         IdTipoCatalogo_Ubicacion = info.IdTipoCatalogo_Ubicacion,
+                        IdEmpleadoCustodio = info.IdEmpleadoCustodio,
+                        IdEmpleadoEncargado = info.IdEmpleadoEncargado,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                         
                         
                     };
+                    if (info.LstDet.Count > 0)
+                    {
+                        foreach (var item in info.LstDet)
+                        {
+                            Context.Af_Activo_fijo_CtaCble.Add(new Af_Activo_fijo_CtaCble
+                            {
+                                IdActivoFijo = info.IdActivoFijo,
+                                IdCatalogo = item.IdCatalogo,
+                                IdCtaCble = item.IdCtaCble,
+                                Porcentaje = item.Porcentaje,
+                                Secuencia = item.Secuencia,
+                                IdEmpresa = info.IdEmpresa
+
+                            });
+                        }
+                    }
                     Context.Af_Activo_fijo.Add(Entity);
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
@@ -235,14 +257,34 @@ namespace Core.Erp.Data.ActivoFijo
                     Entity.IdCategoriaAF = info.IdCategoriaAF;
                     Entity.IdSucursal = info.IdSucursal;
                     Entity.IdTipoCatalogo_Ubicacion = info.IdTipoCatalogo_Ubicacion;
+                    Entity.IdEmpleadoCustodio = info.IdEmpleadoCustodio;
+                    Entity.IdEmpleadoEncargado = info.IdEmpleadoEncargado;
 
+                    var detalle = Context.Af_Activo_fijo_CtaCble.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdActivoFijo == info.IdActivoFijo);
+                    Context.Af_Activo_fijo_CtaCble.RemoveRange(detalle);
+                    if (info.LstDet.Count > 0)
+                    {
+                        foreach (var item in info.LstDet)
+                        {
+                            Context.Af_Activo_fijo_CtaCble.Add(new Af_Activo_fijo_CtaCble
+                            {
+                                IdActivoFijo = info.IdActivoFijo,
+                                IdCatalogo = item.IdCatalogo,
+                                IdCtaCble = item.IdCtaCble,
+                                Porcentaje = item.Porcentaje,
+                                Secuencia = item.Secuencia,
+                                IdEmpresa = info.IdEmpresa
+
+                            });
+                        }
+                    }
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

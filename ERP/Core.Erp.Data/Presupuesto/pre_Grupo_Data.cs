@@ -21,7 +21,7 @@ namespace Core.Erp.Data.Presupuesto
                 {
                     if (MostrarAnulados == false)
                     {
-                        Lista = db.pre_Grupo.Where(q => q.Estado == true).Select(q => new pre_Grupo_Info
+                        Lista = db.pre_Grupo.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa).Select(q => new pre_Grupo_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdGrupo = q.IdGrupo,
@@ -36,7 +36,7 @@ namespace Core.Erp.Data.Presupuesto
                     }
                     else
                     {
-                        Lista = db.pre_Grupo.Select(q => new pre_Grupo_Info                        
+                        Lista = db.pre_Grupo.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new pre_Grupo_Info                        
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdGrupo = q.IdGrupo,
@@ -95,7 +95,7 @@ namespace Core.Erp.Data.Presupuesto
                 int ID = 1;
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    var Lista = db.pre_Grupo.Select(q => q.IdGrupo);
+                    var Lista = db.pre_Grupo.Where(q => q.IdEmpresa == IdEmpresa).Select(q => q.IdGrupo);
 
                     if (Lista.Count() > 0)
                         ID = Lista.Max() + 1;

@@ -59,7 +59,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_Activo">Cuenta contable activo</label>
@@ -67,11 +67,6 @@
                     @Html.ValidationMessageFor(q => q.IdCtaCble_Activo, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_Dep_Acum">Cuenta contable depreciación acumulada</label>
@@ -79,11 +74,7 @@
                     @Html.ValidationMessageFor(q => q.IdCtaCble_Dep_Acum, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_Gastos_Depre">Cuenta contable gastos de depreciación</label>
@@ -92,9 +83,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_CostoVenta">Cuenta contable costo de venta</label>
@@ -102,9 +91,7 @@
                     @Html.ValidationMessageFor(q => q.IdCtaCble_CostoVenta, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>    <div class="row">
-        <div class="col-md-12">
+
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_Mejora">Cuenta contable mejora</label>
@@ -112,9 +99,6 @@
                     @Html.ValidationMessageFor(q => q.IdCtaCble_Mejora, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>    <div class="row">
-        <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_Baja">Cuenta contable baja</label>
@@ -122,9 +106,7 @@
                     @Html.ValidationMessageFor(q => q.IdCtaCble_Baja, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>    <div class="row">
-        <div class="col-md-12">
+
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCtaCble_Retiro">Cuenta contable retiro</label>
@@ -133,7 +115,10 @@
                 </div>
             </div>
         </div>
+
     </div>
+
+   
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

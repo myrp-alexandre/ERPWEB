@@ -18,6 +18,7 @@ namespace Core.Erp.Data
         public pre_Grupo()
         {
             this.pre_Grupo_x_seg_usuario = new HashSet<pre_Grupo_x_seg_usuario>();
+            this.pre_Presupuesto_x_grupo = new HashSet<pre_Presupuesto_x_grupo>();
         }
     
         public int IdEmpresa { get; set; }
@@ -34,5 +35,7 @@ namespace Core.Erp.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pre_Grupo_x_seg_usuario> pre_Grupo_x_seg_usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<pre_Presupuesto_x_grupo> pre_Presupuesto_x_grupo { get; set; }
     }
 }

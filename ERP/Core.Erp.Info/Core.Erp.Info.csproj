@@ -264,6 +264,9 @@
     <Compile Include="Inventario\in_UnidadMedida_Info.cs" />
     <Compile Include="Presupuesto\pre_Grupo_Info.cs" />
     <Compile Include="Presupuesto\pre_Grupo_x_seg_usuario_Info.cs" />
+    <Compile Include="Presupuesto\pre_Presupuesto_Info.cs" />
+    <Compile Include="Presupuesto\pre_Presupuesto_x_grupo_Info.cs" />
+    <Compile Include="Presupuesto\pre_Presupuesto_x_grupo_det_Info.cs" />
     <Compile Include="Presupuesto\pre_rubro_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Info.cs" />
@@ -363,6 +366,7 @@
     <Compile Include="Reportes\RRHH\ROL_017_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_019_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_018_Info.cs" />
+    <Compile Include="Reportes\RRHH\ROL_020_Info.cs" />
     <Compile Include="RRHH\MTE\ro_archivosCSV_Info.cs" />
     <Compile Include="RRHH\RDEP\Rdep.cs" />
     <Compile Include="RRHH\RDEP\Rdep_Info.cs" />
