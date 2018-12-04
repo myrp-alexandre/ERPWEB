@@ -301,6 +301,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             info_det.IdCatalogo = info_det.IdCatalogo;
             info_det.IdCtaCble = info_det.IdCtaCble;
             info_det.Porcentaje = info_det.Porcentaje;
+            info_det.pc_Cuenta = info_det.pc_Cuenta;
 
 
             list.Add(info_det);
@@ -313,6 +314,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             edited_info.IdCtaCble = info_det.IdCtaCble;
             edited_info.IdCatalogo = info_det.IdCatalogo;
             edited_info.Porcentaje = info_det.Porcentaje;
+            edited_info.pc_Cuenta = info_det.pc_Cuenta;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
