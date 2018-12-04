@@ -41,6 +41,7 @@ namespace Core.Erp.Data
             this.ro_prestamo = new HashSet<ro_prestamo>();
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_Solicitud_Vacaciones_x_empleado = new HashSet<ro_Solicitud_Vacaciones_x_empleado>();
+            this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
         }
     
         public int IdEmpresa { get; set; }
@@ -135,5 +136,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
         public virtual ro_EmpleadoFoto ro_EmpleadoFoto { get; set; }
+        public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
     }
 }

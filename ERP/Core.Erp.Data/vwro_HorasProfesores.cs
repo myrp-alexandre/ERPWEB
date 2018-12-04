@@ -12,13 +12,8 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ro_HorasProfesores
+    public partial class vwro_HorasProfesores
     {
-        public ro_HorasProfesores()
-        {
-            this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
-        }
-    
         public int IdEmpresa { get; set; }
         public decimal IdCarga { get; set; }
         public int IdNomina { get; set; }
@@ -27,14 +22,8 @@ namespace Core.Erp.Data
         public int IdSucursal { get; set; }
         public System.DateTime FechaCarga { get; set; }
         public string Observacion { get; set; }
-        public string IdUsuario { get; set; }
         public bool Estado { get; set; }
-        public System.DateTime Fecha_Transac { get; set; }
-        public string IdUsuarioUltAnu { get; set; }
-        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string MotiAnula { get; set; }
-    
-        public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
-        public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
+        public string Descripcion { get; set; }
     }
 }
