@@ -260,6 +260,8 @@ namespace Core.Erp.Data.ActivoFijo
                     Entity.IdEmpleadoCustodio = info.IdEmpleadoCustodio;
                     Entity.IdEmpleadoEncargado = info.IdEmpleadoEncargado;
 
+                    var detalle = Context.Af_Activo_fijo_CtaCble.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdActivoFijo == info.IdActivoFijo);
+                    Context.Af_Activo_fijo_CtaCble.RemoveRange(detalle);
                     if (info.LstDet.Count > 0)
                     {
                         foreach (var item in info.LstDet)
