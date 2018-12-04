@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_Presupuesto";
-        settings.CallbackRouteValues = new { Controller = "Presupuesto", Action = "GridViewPartial_Presupuesto" };
+        settings.CallbackRouteValues = new { Controller = "Presupuesto", Action = "GridViewPartial_Presupuesto", FechaInicio = ViewBag.FechaInicio, FechaFin = ViewBag.FechaFin, IdSucursal = ViewBag.IdSucursal };
         settings.KeyFieldName = "IdPresupuesto";
         settings.Width = Unit.Percentage(100);
 
@@ -54,9 +54,9 @@
         settings.HtmlRowPrepared = (s, e) =>
         {
             if (Convert.ToBoolean(e.GetValue("Estado")) == false)
-                {
-                    e.Row.ForeColor = System.Drawing.Color.Red;
-                }
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
         };
         settings.Columns.Add(c =>
         {
@@ -85,7 +85,9 @@
 
 
         settings.Columns.Add("IdPresupuesto", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(70);    
+        settings.Columns.Add("FechaInicio", "Fecha Inicio").Width = Unit.Percentage(10);
+        settings.Columns.Add("FechaFin", "FechaFin").Width = Unit.Percentage(10);
+        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(50);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";

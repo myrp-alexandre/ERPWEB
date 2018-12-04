@@ -1,4 +1,6 @@
-﻿using Core.Erp.Bus.Presupuesto;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Bus.Presupuesto;
+using Core.Erp.Info.Helps;
 using Core.Erp.Info.Presupuesto;
 using Core.Erp.Web.Helps;
 using System;
@@ -13,6 +15,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
     {
         // GET: Presupuesto/Presupuesto
         #region Variables
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         pre_Presupuesto_Bus bus_Presupuesto  = new pre_Presupuesto_Bus();
         pre_Presupuesto_x_grupo_Bus bus_Presupuesto_x_grupo = new pre_Presupuesto_x_grupo_Bus();
         pre_Presupuesto_x_grupo_det_Bus bus_Presupuesto_x_grupo_det = new pre_Presupuesto_x_grupo_det_Bus();
@@ -24,13 +27,44 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         #region Index
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+
+            CargarCombos(model.IdEmpresa);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            CargarCombos(model.IdEmpresa);
+            return View(model);
+        }
+
+        private void CargarCombos(int IdEmpresa)
+        {
+            try
+            {
+                var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+                ViewBag.lst_sucursal = lst_sucursal;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_Presupuesto(int IdEmpresa, int IdSucursal, DateTime FechaInicio, DateTime FechaFin, bool MostrarAnulados)
+        public ActionResult GridViewPartial_Presupuesto(DateTime? FechaInicio, DateTime? FechaFin, int IdSucursal)
         {
-            List<pre_Presupuesto_Info> model = bus_Presupuesto.GetList(IdEmpresa, IdSucursal, FechaInicio, FechaFin, true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.FechaInicio = FechaInicio == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(FechaInicio);
+            ViewBag.FechaFin = FechaFin == null ? DateTime.Now.Date : Convert.ToDateTime(FechaFin);
+            ViewBag.IdSucursal = IdSucursal == 0 ? 0 : Convert.ToInt32(IdSucursal);
+
+            List<pre_Presupuesto_Info> model = bus_Presupuesto.GetList(IdEmpresa, IdSucursal, ViewBag.FechaInicio, ViewBag.FechaFin, true);
 
             return PartialView("_GridViewPartial_Presupuesto", model);
         }
