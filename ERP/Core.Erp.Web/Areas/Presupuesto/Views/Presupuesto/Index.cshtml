@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Grupos";
+    ViewBag.Title = "Presupuestos";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,6 +9,6 @@
 
 @using (Html.BeginForm())
 {
-    @Html.Action("GridViewPartial_Grupo");
+    @Html.Action("GridViewPartial_Presupuesto");
 
 }
