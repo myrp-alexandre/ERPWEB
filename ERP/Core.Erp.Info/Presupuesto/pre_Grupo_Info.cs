@@ -23,6 +23,8 @@ namespace Core.Erp.Info.Presupuesto
         public DateTime FechaModificacion { get; set; }
         public string IdUsuarioAnulacion { get; set; }
         public DateTime FechaAnulacion { get; set; }
+        [Required(ErrorMessage = ("El campo motivo de anulación es obligatorio"))]
+        [StringLength(150, MinimumLength = 1, ErrorMessage = ("El campo motivo de anulación debe tener mínimo 1 caracter máximo 150"))]
         public string MotivoAnulacion { get; set; }
 
         #region Campos que no existen en la tabla

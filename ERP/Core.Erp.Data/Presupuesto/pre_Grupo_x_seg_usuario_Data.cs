@@ -17,12 +17,13 @@ namespace Core.Erp.Data.Presupuesto
 
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    Lista = db.pre_Grupo_x_seg_usuario.Where(q => q.IdEmpresa == IdEmpresa && q.IdGrupo == IdGrupo).Select(q => new pre_Grupo_x_seg_usuario_Info
+                    Lista = db.vwpre_Grupo.Where(q => q.IdEmpresa == IdEmpresa && q.IdGrupo == IdGrupo).Select(q => new pre_Grupo_x_seg_usuario_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdGrupo = q.IdGrupo,
                         Secuencia = q.Secuencia,
                         IdUsuario = q.IdUsuario,
+                        Nombre = q.Nombre,
                         AsignaCuentas = q.AsignaCuentas
                     }).ToList();
 
