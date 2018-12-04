@@ -390,8 +390,10 @@
           <Property Name="IdHorario" Type="int" />
           <Property Name="Tiene_ingresos_compartidos" Type="bit" Nullable="false" />
           <Property Name="Pago_por_horas" Type="bit" Nullable="false" />
-          <Property Name="Valor_horas" Type="float" />
           <Property Name="Valor_maximo_horas" Type="float" />
+          <Property Name="Valor_horas_vespertina" Type="float" />
+          <Property Name="Valor_horas_matutino" Type="float" />
+          <Property Name="Valor_horas_nocturna" Type="float" />
         </EntityType>
         <EntityType Name="ro_empleado_Novedad">
           <Key>
@@ -1176,16 +1178,18 @@
           <Property Name="IdRubro_iess_perso" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdRubro_sueldo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdRubro_tot_pagar" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdRubro_aporte_patronal" Type="varchar" MaxLength="50" />
-          <Property Name="IdRubro_fondo_reserva" Type="varchar" MaxLength="50" />
-          <Property Name="IdRubro_prov_vac" Type="varchar" MaxLength="50" />
-          <Property Name="IdRubro_prov_DIII" Type="varchar" MaxLength="50" />
-          <Property Name="IdRubro_prov_DIV" Type="varchar" MaxLength="50" />
-          <Property Name="IdRubro_prov_FR" Type="varchar" MaxLength="50" />
-          <Property Name="IdRubro_DIII" Type="varchar" MaxLength="50" />
-          <Property Name="IdRubro_DIV" Type="varchar" MaxLength="50" />
+          <Property Name="IdRubro_aporte_patronal" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRubro_fondo_reserva" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRubro_prov_vac" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRubro_prov_DIII" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRubro_prov_DIV" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRubro_prov_FR" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRubro_DIII" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRubro_DIV" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdRubro_IR" Type="varchar" MaxLength="50" />
-          <Property Name="IdRubro_FR" Type="varchar" MaxLength="50" />
+          <Property Name="IdRubro_horas_matutina" Type="varchar" MaxLength="50" />
+          <Property Name="IdRubro_horas_vespertina" Type="varchar" MaxLength="50" />
+          <Property Name="IdRubro_horas_nocturna" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ro_Solicitud_Vacaciones_x_empleado">
           <Key>
@@ -1544,8 +1548,9 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not 
           <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
           <Property Name="Tiene_ingresos_compartidos" Type="bit" Nullable="false" />
           <Property Name="Pago_por_horas" Type="bit" Nullable="false" />
-          <Property Name="Valor_horas" Type="float" />
           <Property Name="Valor_maximo_horas" Type="float" />
+          <Property Name="Valor_horas_vespertina" Type="float" />
+          <Property Name="Valor_horas_matutino" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_empleado_Novedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3715,7 +3720,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo">
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo10">
           <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
           <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3725,11 +3730,11 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Principal>
             <Dependent Role="ro_rubros_calculados">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_dias_trabajados" />
+              <PropertyRef Name="IdRubro_prov_FR" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo1">
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo11">
           <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
           <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3739,11 +3744,11 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Principal>
             <Dependent Role="ro_rubros_calculados">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_tot_ing" />
+              <PropertyRef Name="IdRubro_prov_DIV" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo2">
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo12">
           <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
           <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3753,11 +3758,11 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Principal>
             <Dependent Role="ro_rubros_calculados">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_tot_egr" />
+              <PropertyRef Name="IdRubro_prov_DIII" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo3">
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo13">
           <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
           <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3767,11 +3772,53 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Principal>
             <Dependent Role="ro_rubros_calculados">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_iess_perso" />
+              <PropertyRef Name="IdRubro_prov_vac" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo4">
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo14">
+          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
+          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_fondo_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo15">
+          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
+          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_aporte_patronal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo16">
+          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
+          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_tot_pagar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo17">
           <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
           <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3785,7 +3832,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo5">
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo18">
           <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
           <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3795,7 +3842,91 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Principal>
             <Dependent Role="ro_rubros_calculados">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_tot_pagar" />
+              <PropertyRef Name="IdRubro_iess_perso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo19">
+          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
+          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_tot_egr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo20">
+          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
+          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_tot_ing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo21">
+          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
+          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_dias_trabajados" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo6">
+          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="0..1" />
+          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_horas_matutina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo8">
+          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
+          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_DIV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo9">
+          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
+          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_DIII" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4120,8 +4251,9 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_empleado_datos_generales].[pe_apellido] AS [pe_apellido], 
     [vwro_empleado_datos_generales].[Tiene_ingresos_compartidos] AS [Tiene_ingresos_compartidos], 
     [vwro_empleado_datos_generales].[Pago_por_horas] AS [Pago_por_horas], 
-    [vwro_empleado_datos_generales].[Valor_horas] AS [Valor_horas], 
-    [vwro_empleado_datos_generales].[Valor_maximo_horas] AS [Valor_maximo_horas]
+    [vwro_empleado_datos_generales].[Valor_maximo_horas] AS [Valor_maximo_horas], 
+    [vwro_empleado_datos_generales].[Valor_horas_vespertina] AS [Valor_horas_vespertina], 
+    [vwro_empleado_datos_generales].[Valor_horas_matutino] AS [Valor_horas_matutino]
     FROM [dbo].[vwro_empleado_datos_generales] AS [vwro_empleado_datos_generales]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_empleado_Novedad" EntityType="Self.vwro_empleado_Novedad" store:Type="Views" store:Schema="dbo">
@@ -5011,27 +5143,63 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_periodo_x_ro_Nomina_TipoLiqui" EntitySet="ro_periodo_x_ro_Nomina_TipoLiqui" />
             <End Role="ro_rol" EntitySet="ro_rol" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo">
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo10" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo10">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo1" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo1">
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo11" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo11">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo2" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo2">
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo12" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo12">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo3" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo3">
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo13" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo13">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo4" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo4">
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo14" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo14">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo5" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo5">
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo15" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo15">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo16" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo16">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo17" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo17">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo18" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo18">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo19" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo19">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo20" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo20">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo21" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo21">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo6" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo6">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo8" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo8">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo9" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo9">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
@@ -5884,46 +6052,27 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_Config_Param_contable" Relationship="Self.FK_ro_Config_Param_contable_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_Config_Param_contable" />
           <NavigationProperty Name="ro_empleado_x_rubro_acumulado" Relationship="Self.FK_ro_empleado_x_rubro_acumulado_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_empleado_x_rubro_acumulado" />
           <NavigationProperty Name="ro_prestamo" Relationship="Self.FK_ro_prestamo_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_prestamo" />
-          <NavigationProperty Name="ro_rubros_calculados" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
-          <NavigationProperty Name="ro_rubros_calculados1" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo1" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
-          <NavigationProperty Name="ro_rubros_calculados2" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo2" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
-          <NavigationProperty Name="ro_rubros_calculados3" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo3" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
-          <NavigationProperty Name="ro_rubros_calculados4" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo4" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
-          <NavigationProperty Name="ro_rubros_calculados5" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo5" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
           <NavigationProperty Name="ro_empleado_x_ro_rubro" Relationship="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_empleado_x_ro_rubro" />
           <NavigationProperty Name="ro_empleado_novedad_det" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_empleado_novedad_det" />
           <NavigationProperty Name="ro_rol_detalle" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_rol_detalle" />
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_EmpleadoNovedadCargaMasiva" />
           <NavigationProperty Name="ro_HorasProfesores_det" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_rubro_tipo" FromRole="ro_rubro_tipo" ToRole="ro_HorasProfesores_det" />
-        </EntityType>
-        <EntityType Name="ro_rubros_calculados">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdRubro_dias_trabajados" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdRubro_tot_ing" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdRubro_tot_egr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdRubro_iess_perso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdRubro_sueldo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdRubro_tot_pagar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdRubro_aporte_patronal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro_fondo_reserva" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro_prov_vac" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro_prov_DIII" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro_prov_DIV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro_prov_FR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro_DIII" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro_DIV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro_IR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdRubro_FR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_rubro_tipo" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
-          <NavigationProperty Name="ro_rubro_tipo1" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo1" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
-          <NavigationProperty Name="ro_rubro_tipo2" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo2" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
-          <NavigationProperty Name="ro_rubro_tipo3" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo3" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
-          <NavigationProperty Name="ro_rubro_tipo4" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo4" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
-          <NavigationProperty Name="ro_rubro_tipo5" Relationship="Self.FK_ro_rubros_calculados_ro_rubro_tipo5" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
-        </EntityType>
+          <NavigationProperty Name="ro_rubros_calculados" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo10" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados1" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo11" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados2" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo12" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados3" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo13" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados4" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo14" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados5" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo15" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados6" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo16" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados7" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo17" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados8" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo18" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados9" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo19" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados10" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo20" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados11" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo21" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados12" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo6" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados13" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo8" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          <NavigationProperty Name="ro_rubros_calculados14" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo9" FromRole="ro_rubro_tipo" ToRole="ro_rubros_calculados" />
+          </EntityType>
         <EntityType Name="ro_Solicitud_Vacaciones_x_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -6872,90 +7021,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo">
-          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
-          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_rubro_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro" />
-            </Principal>
-            <Dependent Role="ro_rubros_calculados">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_dias_trabajados" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo1">
-          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
-          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_rubro_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro" />
-            </Principal>
-            <Dependent Role="ro_rubros_calculados">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_tot_ing" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo2">
-          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
-          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_rubro_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro" />
-            </Principal>
-            <Dependent Role="ro_rubros_calculados">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_tot_egr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo3">
-          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
-          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_rubro_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro" />
-            </Principal>
-            <Dependent Role="ro_rubros_calculados">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_iess_perso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo4">
-          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
-          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_rubro_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro" />
-            </Principal>
-            <Dependent Role="ro_rubros_calculados">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_sueldo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo5">
-          <End Role="ro_rubro_tipo" Type="Self.ro_rubro_tipo" Multiplicity="1" />
-          <End Role="ro_rubros_calculados" Type="Self.ro_rubros_calculados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_rubro_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro" />
-            </Principal>
-            <Dependent Role="ro_rubros_calculados">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro_tot_pagar" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities_rrhh" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ro_Acta_Finiquito" EntityType="Self.ro_Acta_Finiquito" />
           <EntitySet Name="ro_Acta_Finiquito_Detalle" EntityType="Self.ro_Acta_Finiquito_Detalle" />
@@ -6994,7 +7059,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySet Name="ro_prestamo" EntityType="Self.ro_prestamo" />
           <EntitySet Name="ro_prestamo_detalle" EntityType="Self.ro_prestamo_detalle" />
           <EntitySet Name="ro_rubro_tipo" EntityType="Self.ro_rubro_tipo" />
-          <EntitySet Name="ro_rubros_calculados" EntityType="Self.ro_rubros_calculados" />
           <EntitySet Name="ro_Solicitud_Vacaciones_x_empleado" EntityType="Self.ro_Solicitud_Vacaciones_x_empleado" />
           <EntitySet Name="ro_Tipo_Prestamo" EntityType="Self.ro_Tipo_Prestamo" />
           <EntitySet Name="ro_turno" EntityType="Self.ro_turno" />
@@ -7133,30 +7197,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <AssociationSet Name="FK_ro_prestamo_ro_rubro_tipo" Association="Self.FK_ro_prestamo_ro_rubro_tipo">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_prestamo" EntitySet="ro_prestamo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo">
-            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
-            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo1" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo1">
-            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
-            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo2" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo2">
-            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
-            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo3" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo3">
-            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
-            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo4" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo4">
-            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
-            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo5" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo5">
-            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
-            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
           <FunctionImport Name="spRo_LiquidarEmpleado">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
@@ -7356,6 +7396,26 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           </AssociationSet>
           <EntitySet Name="ro_EmpleadoFoto" EntityType="Model_rrhh.ro_EmpleadoFoto" />
           <EntitySet Name="vwro_ArchivosIess" EntityType="Model_rrhh.vwro_ArchivosIess" />
+          <EntitySet Name="ro_HorasProfesores" EntityType="Model_rrhh.ro_HorasProfesores" />
+          <EntitySet Name="ro_HorasProfesores_det" EntityType="Model_rrhh.ro_HorasProfesores_det" />
+          <EntitySet Name="vwro_HorasProfesores" EntityType="Model_rrhh.vwro_HorasProfesores" />
+          <EntitySet Name="vwro_HorasProfesores_det" EntityType="Model_rrhh.vwro_HorasProfesores_det" />
+          <AssociationSet Name="FK_ro_HorasProfesores_det_ro_empleado_Novedad" Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad">
+            <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
+            <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_HorasProfesores_det_ro_HorasProfesores" Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_HorasProfesores">
+            <End Role="ro_HorasProfesores" EntitySet="ro_HorasProfesores" />
+            <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_HorasProfesores_ro_Nomina_Tipoliqui" Association="Model_rrhh.FK_ro_HorasProfesores_ro_Nomina_Tipoliqui">
+            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_HorasProfesores" EntitySet="ro_HorasProfesores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_HorasProfesores_det_ro_rubro_tipo" Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_rubro_tipo">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
+          </AssociationSet>
           <EntitySet Name="ro_empleado" EntityType="Model_rrhh.ro_empleado" />
           <EntitySet Name="vwro_empleado_datos_generales" EntityType="Model_rrhh.vwro_empleado_datos_generales" />
           <AssociationSet Name="FK_ro_Acta_Finiquito_ro_empleado" Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado">
@@ -7438,6 +7498,10 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_empleado_x_titulos" EntitySet="ro_empleado_x_titulos" />
           </AssociationSet>
+          <AssociationSet Name="FK_ro_EmpleadoFoto_ro_empleado" Association="Model_rrhh.FK_ro_EmpleadoFoto_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_EmpleadoFoto" EntitySet="ro_EmpleadoFoto" />
+          </AssociationSet>
           <AssociationSet Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_EmpleadoNovedadCargaMasiva_det" EntitySet="ro_EmpleadoNovedadCargaMasiva_det" />
@@ -7453,6 +7517,10 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <AssociationSet Name="FK_ro_horario_planificacion_ro_empleado" Association="Model_rrhh.FK_ro_horario_planificacion_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_horario_planificacion_det" EntitySet="ro_horario_planificacion_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_HorasProfesores_det_ro_empleado" Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_marcaciones_x_empleado_ro_empleado" Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
@@ -7486,33 +7554,66 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_Solicitud_Vacaciones_x_empleado" EntitySet="ro_Solicitud_Vacaciones_x_empleado" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_EmpleadoFoto_ro_empleado" Association="Model_rrhh.FK_ro_EmpleadoFoto_ro_empleado">
-            <End Role="ro_empleado" EntitySet="ro_empleado" />
-            <End Role="ro_EmpleadoFoto" EntitySet="ro_EmpleadoFoto" />
-          </AssociationSet>
-          <EntitySet Name="ro_HorasProfesores" EntityType="Model_rrhh.ro_HorasProfesores" />
-          <EntitySet Name="ro_HorasProfesores_det" EntityType="Model_rrhh.ro_HorasProfesores_det" />
-          <EntitySet Name="vwro_HorasProfesores" EntityType="Model_rrhh.vwro_HorasProfesores" />
-          <EntitySet Name="vwro_HorasProfesores_det" EntityType="Model_rrhh.vwro_HorasProfesores_det" />
-          <AssociationSet Name="FK_ro_HorasProfesores_det_ro_empleado" Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado">
-            <End Role="ro_empleado" EntitySet="ro_empleado" />
-            <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_HorasProfesores_det_ro_empleado_Novedad" Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad">
-            <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
-            <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_HorasProfesores_det_ro_HorasProfesores" Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_HorasProfesores">
-            <End Role="ro_HorasProfesores" EntitySet="ro_HorasProfesores" />
-            <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_HorasProfesores_ro_Nomina_Tipoliqui" Association="Model_rrhh.FK_ro_HorasProfesores_ro_Nomina_Tipoliqui">
-            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
-            <End Role="ro_HorasProfesores" EntitySet="ro_HorasProfesores" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ro_HorasProfesores_det_ro_rubro_tipo" Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_rubro_tipo">
+          <EntitySet Name="ro_rubros_calculados" EntityType="Model_rrhh.ro_rubros_calculados" />
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo10" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo10">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
-            <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo11" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo11">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo12" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo12">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo13" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo13">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo14" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo14">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo15" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo15">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo16" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo16">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo17" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo17">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo18" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo18">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo19" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo19">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo20" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo20">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo21" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo21">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo6" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo6">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo8" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo8">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo9" Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo9">
+            <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
+            <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
@@ -7863,9 +7964,9 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_empleado_novedad_det" Relationship="Model_rrhh.FK_ro_empleado_novedad_det_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_empleado_novedad_det" />
           <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_Nomina_Tipoliqui" FromRole="ro_empleado_Novedad" ToRole="ro_Nomina_Tipoliqui" />
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva_det" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_EmpleadoNovedadCargaMasiva_det" />
+          <NavigationProperty Name="ro_HorasProfesores_det" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_HorasProfesores_det" />
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" FromRole="ro_empleado_Novedad" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_empleado1" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" FromRole="ro_empleado_Novedad" ToRole="ro_empleado" />
-          <NavigationProperty Name="ro_HorasProfesores_det" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_HorasProfesores_det" />
           </EntityType>
         <EntityType Name="ro_empleado_novedad_det">
           <Key>
@@ -8797,6 +8898,165 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
           <Property Name="Sueldo" Type="Double" />
         </EntityType>
+        <EntityType Name="ro_HorasProfesores">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCarga" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNomina" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="FechaCarga" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_HorasProfesores_det" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_HorasProfesores" FromRole="ro_HorasProfesores" ToRole="ro_HorasProfesores_det" />
+          <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_HorasProfesores_ro_Nomina_Tipoliqui" FromRole="ro_HorasProfesores" ToRole="ro_Nomina_Tipoliqui" />
+        </EntityType>
+        <EntityType Name="ro_HorasProfesores_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCarga" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
+          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NumHoras" Type="Double" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <NavigationProperty Name="ro_empleado_Novedad" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad" FromRole="ro_HorasProfesores_det" ToRole="ro_empleado_Novedad" />
+          <NavigationProperty Name="ro_HorasProfesores" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_HorasProfesores" FromRole="ro_HorasProfesores_det" ToRole="ro_HorasProfesores" />
+          <NavigationProperty Name="ro_rubro_tipo" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_rubro_tipo" FromRole="ro_HorasProfesores_det" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado" FromRole="ro_HorasProfesores_det" ToRole="ro_empleado" />
+        </EntityType>
+        <EntityType Name="vwro_HorasProfesores">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCarga" />
+            <PropertyRef Name="IdNomina" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="FechaCarga" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNomina" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="FechaCarga" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwro_HorasProfesores_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCarga" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="IdEmpresa_nov" />
+            <PropertyRef Name="IdNovedad" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="rub_codigo" />
+            <PropertyRef Name="ru_codRolGen" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
+          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NumHoras" Type="Double" />
+          <Property Name="rub_codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ru_codRolGen" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_ro_HorasProfesores_det_ro_empleado_Novedad">
+          <End Type="Model_rrhh.ro_empleado_Novedad" Role="ro_empleado_Novedad" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_HorasProfesores_det" Role="ro_HorasProfesores_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado_Novedad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNovedad" />
+            </Principal>
+            <Dependent Role="ro_HorasProfesores_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNovedad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_HorasProfesores_det_ro_HorasProfesores">
+          <End Type="Model_rrhh.ro_HorasProfesores" Role="ro_HorasProfesores" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_HorasProfesores_det" Role="ro_HorasProfesores_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_HorasProfesores">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCarga" />
+            </Principal>
+            <Dependent Role="ro_HorasProfesores_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCarga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_HorasProfesores_ro_Nomina_Tipoliqui">
+          <End Type="Model_rrhh.ro_Nomina_Tipoliqui" Role="ro_Nomina_Tipoliqui" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_HorasProfesores" Role="ro_HorasProfesores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_Nomina_Tipoliqui">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Principal>
+            <Dependent Role="ro_HorasProfesores">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina" />
+              <PropertyRef Name="IdNominaTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_HorasProfesores_det_ro_rubro_tipo">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_HorasProfesores_det" Role="ro_HorasProfesores_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_HorasProfesores_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="ro_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -8857,8 +9117,10 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="IdHorario" Type="Int32" />
           <Property Name="Tiene_ingresos_compartidos" Type="Boolean" Nullable="false" />
           <Property Name="Pago_por_horas" Type="Boolean" Nullable="false" />
-          <Property Name="Valor_horas" Type="Double" />
           <Property Name="Valor_maximo_horas" Type="Double" />
+          <Property Name="Valor_horas_vespertina" Type="Double" />
+          <Property Name="Valor_horas_matutino" Type="Double" />
+          <Property Name="Valor_horas_nocturna" Type="Double" />
           <NavigationProperty Name="ro_Acta_Finiquito" Relationship="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado" FromRole="ro_empleado" ToRole="ro_Acta_Finiquito" />
           <NavigationProperty Name="ro_archivos_bancos_generacion_x_empleado" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_archivos_bancos_generacion_x_empleado" />
           <NavigationProperty Name="ro_cargaFamiliar" Relationship="Model_rrhh.FK_ro_CargaFamiliar_ro_empleado" FromRole="ro_empleado" ToRole="ro_cargaFamiliar" />
@@ -8880,10 +9142,12 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_empleado_x_ro_tipoNomina" Relationship="Model_rrhh.FK_ro_empleado_x_ro_tipoNomina_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_ro_tipoNomina" />
           <NavigationProperty Name="ro_empleado_x_rubro_acumulado" Relationship="Model_rrhh.FK_ro_empleado_x_rubro_acumulado" FromRole="ro_empleado" ToRole="ro_empleado_x_rubro_acumulado" />
           <NavigationProperty Name="ro_empleado_x_titulos" Relationship="Model_rrhh.FK_ro_empleado_x_titulos_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_titulos" />
+          <NavigationProperty Name="ro_EmpleadoFoto" Relationship="Model_rrhh.FK_ro_EmpleadoFoto_ro_empleado" FromRole="ro_empleado" ToRole="ro_EmpleadoFoto" />
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva_det" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_EmpleadoNovedadCargaMasiva_det" />
           <NavigationProperty Name="ro_Historico_Liquidacion_Vacaciones" Relationship="Model_rrhh.FK_ro_Historico_Liquidacion_Vacaciones_ro_empleado" FromRole="ro_empleado" ToRole="ro_Historico_Liquidacion_Vacaciones" />
           <NavigationProperty Name="ro_historico_vacaciones_x_empleado" Relationship="Model_rrhh.FK_ro_historico_vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_historico_vacaciones_x_empleado" />
           <NavigationProperty Name="ro_horario_planificacion_det" Relationship="Model_rrhh.FK_ro_horario_planificacion_ro_empleado" FromRole="ro_empleado" ToRole="ro_horario_planificacion_det" />
+          <NavigationProperty Name="ro_HorasProfesores_det" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_HorasProfesores_det" />
           <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_marcaciones_x_empleado" />
           <NavigationProperty Name="ro_nomina_x_horas_extras_det" Relationship="Model_rrhh.FK_ro_nomina_x_horas_extras_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_nomina_x_horas_extras_det" />
           <NavigationProperty Name="ro_participacion_utilidad_empleado" Relationship="Model_rrhh.FK_ro_participacion_utilidad_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_participacion_utilidad_empleado" />
@@ -8892,8 +9156,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_prestamo" Relationship="Model_rrhh.FK_ro_prestamo_ro_empleado" FromRole="ro_empleado" ToRole="ro_prestamo" />
           <NavigationProperty Name="ro_rol_detalle" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_empleado" FromRole="ro_empleado" ToRole="ro_rol_detalle" />
           <NavigationProperty Name="ro_Solicitud_Vacaciones_x_empleado" Relationship="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_Solicitud_Vacaciones_x_empleado" />
-          <NavigationProperty Name="ro_EmpleadoFoto" Relationship="Model_rrhh.FK_ro_EmpleadoFoto_ro_empleado" FromRole="ro_empleado" ToRole="ro_EmpleadoFoto" />
-          <NavigationProperty Name="ro_HorasProfesores_det" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_HorasProfesores_det" />
         </EntityType>
         <EntityType Name="vwro_empleado_datos_generales">
           <Key>
@@ -8982,8 +9244,9 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Tiene_ingresos_compartidos" Type="Boolean" Nullable="false" />
           <Property Name="Pago_por_horas" Type="Boolean" Nullable="false" />
-          <Property Name="Valor_horas" Type="Double" />
           <Property Name="Valor_maximo_horas" Type="Double" />
+          <Property Name="Valor_horas_vespertina" Type="Double" />
+          <Property Name="Valor_horas_matutino" Type="Double" />
         </EntityType>
         <Association Name="FK_ro_Acta_Finiquito_ro_empleado">
           <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
@@ -9257,6 +9520,20 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ro_EmpleadoFoto_ro_empleado">
+          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_EmpleadoFoto" Role="ro_EmpleadoFoto" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_EmpleadoFoto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado">
           <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
           <End Type="Model_rrhh.ro_EmpleadoNovedadCargaMasiva_det" Role="ro_EmpleadoNovedadCargaMasiva_det" Multiplicity="*" />
@@ -9308,6 +9585,20 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               <PropertyRef Name="IdEmpleado" />
             </Principal>
             <Dependent Role="ro_horario_planificacion_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_HorasProfesores_det_ro_empleado">
+          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_HorasProfesores_det" Role="ro_HorasProfesores_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_HorasProfesores_det">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdEmpleado" />
             </Dependent>
@@ -9425,190 +9716,252 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ro_EmpleadoFoto_ro_empleado">
-          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_EmpleadoFoto" Role="ro_EmpleadoFoto" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ro_EmpleadoFoto">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ro_HorasProfesores">
+        <EntityType Name="ro_rubros_calculados">
           <Key>
             <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCarga" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdNomina" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="FechaCarga" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_HorasProfesores_det" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_HorasProfesores" FromRole="ro_HorasProfesores" ToRole="ro_HorasProfesores_det" />
-          <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_HorasProfesores_ro_Nomina_Tipoliqui" FromRole="ro_HorasProfesores" ToRole="ro_Nomina_Tipoliqui" />
+          <Property Name="IdRubro_dias_trabajados" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_tot_ing" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_tot_egr" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_iess_perso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_sueldo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_tot_pagar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_aporte_patronal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_fondo_reserva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_prov_vac" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_prov_DIII" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_prov_DIV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_prov_FR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_DIII" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_DIV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_IR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_horas_matutina" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_horas_vespertina" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro_horas_nocturna" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_rubro_tipo" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo10" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo1" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo11" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo2" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo12" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo3" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo13" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo4" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo14" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo5" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo15" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo6" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo16" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo7" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo17" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo8" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo18" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo9" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo19" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo10" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo20" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo11" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo21" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo12" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo6" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo13" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo8" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
+          <NavigationProperty Name="ro_rubro_tipo14" Relationship="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo9" FromRole="ro_rubros_calculados" ToRole="ro_rubro_tipo" />
         </EntityType>
-        <EntityType Name="ro_HorasProfesores_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCarga" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
-          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="NumHoras" Type="Double" />
-          <Property Name="IdSucursal" Type="Int32" />
-          <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado" FromRole="ro_HorasProfesores_det" ToRole="ro_empleado" />
-          <NavigationProperty Name="ro_empleado_Novedad" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad" FromRole="ro_HorasProfesores_det" ToRole="ro_empleado_Novedad" />
-          <NavigationProperty Name="ro_HorasProfesores" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_HorasProfesores" FromRole="ro_HorasProfesores_det" ToRole="ro_HorasProfesores" />
-          <NavigationProperty Name="ro_rubro_tipo" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_rubro_tipo" FromRole="ro_HorasProfesores_det" ToRole="ro_rubro_tipo" />
-        </EntityType>
-        <EntityType Name="vwro_HorasProfesores">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCarga" />
-            <PropertyRef Name="IdNomina" />
-            <PropertyRef Name="IdNominaTipo" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="FechaCarga" />
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="DescripcionProcesoNomina" />
-            <PropertyRef Name="Descripcion" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdNomina" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="FechaCarga" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="vwro_HorasProfesores_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCarga" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="IdEmpresa_nov" />
-            <PropertyRef Name="IdNovedad" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="rub_codigo" />
-            <PropertyRef Name="ru_codRolGen" />
-            <PropertyRef Name="ru_descripcion" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="pe_cedulaRuc" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
-          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="NumHoras" Type="Double" />
-          <Property Name="rub_codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ru_codRolGen" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_ro_HorasProfesores_det_ro_empleado">
-          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_HorasProfesores_det" Role="ro_HorasProfesores_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="ro_HorasProfesores_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEmpleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_HorasProfesores_det_ro_empleado_Novedad">
-          <End Type="Model_rrhh.ro_empleado_Novedad" Role="ro_empleado_Novedad" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_HorasProfesores_det" Role="ro_HorasProfesores_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_empleado_Novedad">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNovedad" />
-            </Principal>
-            <Dependent Role="ro_HorasProfesores_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNovedad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_HorasProfesores_det_ro_HorasProfesores">
-          <End Type="Model_rrhh.ro_HorasProfesores" Role="ro_HorasProfesores" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_HorasProfesores_det" Role="ro_HorasProfesores_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_HorasProfesores">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCarga" />
-            </Principal>
-            <Dependent Role="ro_HorasProfesores_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCarga" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_HorasProfesores_ro_Nomina_Tipoliqui">
-          <End Type="Model_rrhh.ro_Nomina_Tipoliqui" Role="ro_Nomina_Tipoliqui" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_HorasProfesores" Role="ro_HorasProfesores" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_Nomina_Tipoliqui">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNomina_Tipo" />
-              <PropertyRef Name="IdNomina_TipoLiqui" />
-            </Principal>
-            <Dependent Role="ro_HorasProfesores">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNomina" />
-              <PropertyRef Name="IdNominaTipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_HorasProfesores_det_ro_rubro_tipo">
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo10">
           <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_HorasProfesores_det" Role="ro_HorasProfesores_det" Multiplicity="*" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ro_rubro_tipo">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdRubro" />
             </Principal>
-            <Dependent Role="ro_HorasProfesores_det">
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_prov_FR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo11">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_prov_DIV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo12">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_prov_DIII" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo13">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_prov_vac" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo14">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_fondo_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo15">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_aporte_patronal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo16">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_tot_pagar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo17">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_sueldo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo18">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_iess_perso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo19">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_tot_egr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo20">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_tot_ing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo21">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_dias_trabajados" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo6">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="0..1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_horas_matutina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo8">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_DIV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_rubros_calculados_ro_rubro_tipo9">
+          <End Type="Model_rrhh.ro_rubro_tipo" Role="ro_rubro_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_rubros_calculados" Role="ro_rubros_calculados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rubro_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="ro_rubros_calculados">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro_DIII" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10333,29 +10686,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="ip" ColumnName="ip" />
                 <ScalarProperty Name="rub_acumula" ColumnName="rub_acumula" />
                 <ScalarProperty Name="rub_acumula_descuento" ColumnName="rub_acumula_descuento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ro_rubros_calculados">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_rubros_calculados">
-              <MappingFragment StoreEntitySet="ro_rubros_calculados">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdRubro_dias_trabajados" ColumnName="IdRubro_dias_trabajados" />
-                <ScalarProperty Name="IdRubro_tot_ing" ColumnName="IdRubro_tot_ing" />
-                <ScalarProperty Name="IdRubro_tot_egr" ColumnName="IdRubro_tot_egr" />
-                <ScalarProperty Name="IdRubro_iess_perso" ColumnName="IdRubro_iess_perso" />
-                <ScalarProperty Name="IdRubro_sueldo" ColumnName="IdRubro_sueldo" />
-                <ScalarProperty Name="IdRubro_tot_pagar" ColumnName="IdRubro_tot_pagar" />
-                <ScalarProperty Name="IdRubro_aporte_patronal" ColumnName="IdRubro_aporte_patronal" />
-                <ScalarProperty Name="IdRubro_fondo_reserva" ColumnName="IdRubro_fondo_reserva" />
-                <ScalarProperty Name="IdRubro_prov_vac" ColumnName="IdRubro_prov_vac" />
-                <ScalarProperty Name="IdRubro_prov_DIII" ColumnName="IdRubro_prov_DIII" />
-                <ScalarProperty Name="IdRubro_prov_DIV" ColumnName="IdRubro_prov_DIV" />
-                <ScalarProperty Name="IdRubro_prov_FR" ColumnName="IdRubro_prov_FR" />
-                <ScalarProperty Name="IdRubro_DIII" ColumnName="IdRubro_DIII" />
-                <ScalarProperty Name="IdRubro_DIV" ColumnName="IdRubro_DIV" />
-                <ScalarProperty Name="IdRubro_IR" ColumnName="IdRubro_IR" />
-                <ScalarProperty Name="IdRubro_FR" ColumnName="IdRubro_FR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -11467,141 +11797,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ro_empleado">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado">
-              <MappingFragment StoreEntitySet="ro_empleado">
-                <ScalarProperty Name="Valor_maximo_horas" ColumnName="Valor_maximo_horas" />
-                <ScalarProperty Name="Valor_horas" ColumnName="Valor_horas" />
-                <ScalarProperty Name="Pago_por_horas" ColumnName="Pago_por_horas" />
-                <ScalarProperty Name="Tiene_ingresos_compartidos" ColumnName="Tiene_ingresos_compartidos" />
-                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
-                <ScalarProperty Name="Marca_Biometrico" ColumnName="Marca_Biometrico" />
-                <ScalarProperty Name="em_AnticipoSueldo" ColumnName="em_AnticipoSueldo" />
-                <ScalarProperty Name="CodigoSectorial" ColumnName="CodigoSectorial" />
-                <ScalarProperty Name="ValorAnticipo" ColumnName="ValorAnticipo" />
-                <ScalarProperty Name="IdTipoAnticipo" ColumnName="IdTipoAnticipo" />
-                <ScalarProperty Name="es_AcreditaHorasExtras" ColumnName="es_AcreditaHorasExtras" />
-                <ScalarProperty Name="IdTipoSistemaSalarioNetoSRI" ColumnName="IdTipoSistemaSalarioNetoSRI" />
-                <ScalarProperty Name="IdTipoResidenciaSRI" ColumnName="IdTipoResidenciaSRI" />
-                <ScalarProperty Name="IdAplicaConvenioDobleImposicionSRI" ColumnName="IdAplicaConvenioDobleImposicionSRI" />
-                <ScalarProperty Name="IdentDiscapacitadoSustitutoSRI" ColumnName="IdentDiscapacitadoSustitutoSRI" />
-                <ScalarProperty Name="IdTipoIdentDiscapacitadoSustitutoSRI" ColumnName="IdTipoIdentDiscapacitadoSustitutoSRI" />
-                <ScalarProperty Name="IdCondicionDiscapacidadSRI" ColumnName="IdCondicionDiscapacidadSRI" />
-                <ScalarProperty Name="em_status" ColumnName="em_status" />
-                <ScalarProperty Name="talla_zapato" ColumnName="talla_zapato" />
-                <ScalarProperty Name="talla_camisa" ColumnName="talla_camisa" />
-                <ScalarProperty Name="talla_pant" ColumnName="talla_pant" />
-                <ScalarProperty Name="carnet_conadis" ColumnName="carnet_conadis" />
-                <ScalarProperty Name="por_discapacidad" ColumnName="por_discapacidad" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
-                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
-                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="IdTipoLicencia" ColumnName="IdTipoLicencia" />
-                <ScalarProperty Name="em_mail" ColumnName="em_mail" />
-                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
-                <ScalarProperty Name="IdCtaCble_Emplea" ColumnName="IdCtaCble_Emplea" />
-                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
-                <ScalarProperty Name="IdTipoSangre" ColumnName="IdTipoSangre" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="IdCodSectorial" ColumnName="IdCodSectorial" />
-                <ScalarProperty Name="em_estado" ColumnName="em_estado" />
-                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
-                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
-                <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
-                <ScalarProperty Name="em_fechaSalida" ColumnName="em_fechaSalida" />
-                <ScalarProperty Name="em_cedulaMil" ColumnName="em_cedulaMil" />
-                <ScalarProperty Name="em_CarnetIees" ColumnName="em_CarnetIees" />
-                <ScalarProperty Name="em_lugarNacimiento" ColumnName="em_lugarNacimiento" />
-                <ScalarProperty Name="Codigo_Biometrico" ColumnName="Codigo_Biometrico" />
-                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
-                <ScalarProperty Name="IdTipoEmpleado" ColumnName="IdTipoEmpleado" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwro_empleado_datos_generales">
-            <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_datos_generales">
-              <MappingFragment StoreEntitySet="vwro_empleado_datos_generales">
-                <ScalarProperty Name="Valor_maximo_horas" ColumnName="Valor_maximo_horas" />
-                <ScalarProperty Name="Valor_horas" ColumnName="Valor_horas" />
-                <ScalarProperty Name="Pago_por_horas" ColumnName="Pago_por_horas" />
-                <ScalarProperty Name="Tiene_ingresos_compartidos" ColumnName="Tiene_ingresos_compartidos" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
-                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
-                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
-                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
-                <ScalarProperty Name="pe_correo" ColumnName="pe_correo" />
-                <ScalarProperty Name="pe_celular" ColumnName="pe_celular" />
-                <ScalarProperty Name="pe_telfono_Contacto" ColumnName="pe_telfono_Contacto" />
-                <ScalarProperty Name="pe_direccion" ColumnName="pe_direccion" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
-                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
-                <ScalarProperty Name="Marca_Biometrico" ColumnName="Marca_Biometrico" />
-                <ScalarProperty Name="em_AnticipoSueldo" ColumnName="em_AnticipoSueldo" />
-                <ScalarProperty Name="CodigoSectorial" ColumnName="CodigoSectorial" />
-                <ScalarProperty Name="ValorAnticipo" ColumnName="ValorAnticipo" />
-                <ScalarProperty Name="IdTipoAnticipo" ColumnName="IdTipoAnticipo" />
-                <ScalarProperty Name="es_AcreditaHorasExtras" ColumnName="es_AcreditaHorasExtras" />
-                <ScalarProperty Name="IdTipoSistemaSalarioNetoSRI" ColumnName="IdTipoSistemaSalarioNetoSRI" />
-                <ScalarProperty Name="IdTipoResidenciaSRI" ColumnName="IdTipoResidenciaSRI" />
-                <ScalarProperty Name="IdAplicaConvenioDobleImposicionSRI" ColumnName="IdAplicaConvenioDobleImposicionSRI" />
-                <ScalarProperty Name="IdentDiscapacitadoSustitutoSRI" ColumnName="IdentDiscapacitadoSustitutoSRI" />
-                <ScalarProperty Name="IdTipoIdentDiscapacitadoSustitutoSRI" ColumnName="IdTipoIdentDiscapacitadoSustitutoSRI" />
-                <ScalarProperty Name="IdCondicionDiscapacidadSRI" ColumnName="IdCondicionDiscapacidadSRI" />
-                <ScalarProperty Name="em_status" ColumnName="em_status" />
-                <ScalarProperty Name="talla_zapato" ColumnName="talla_zapato" />
-                <ScalarProperty Name="talla_camisa" ColumnName="talla_camisa" />
-                <ScalarProperty Name="talla_pant" ColumnName="talla_pant" />
-                <ScalarProperty Name="carnet_conadis" ColumnName="carnet_conadis" />
-                <ScalarProperty Name="por_discapacidad" ColumnName="por_discapacidad" />
-                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
-                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="IdTipoLicencia" ColumnName="IdTipoLicencia" />
-                <ScalarProperty Name="em_mail" ColumnName="em_mail" />
-                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
-                <ScalarProperty Name="IdCtaCble_Emplea" ColumnName="IdCtaCble_Emplea" />
-                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
-                <ScalarProperty Name="IdTipoSangre" ColumnName="IdTipoSangre" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="IdCodSectorial" ColumnName="IdCodSectorial" />
-                <ScalarProperty Name="em_estado" ColumnName="em_estado" />
-                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
-                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
-                <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
-                <ScalarProperty Name="em_fechaSalida" ColumnName="em_fechaSalida" />
-                <ScalarProperty Name="em_cedulaMil" ColumnName="em_cedulaMil" />
-                <ScalarProperty Name="em_CarnetIees" ColumnName="em_CarnetIees" />
-                <ScalarProperty Name="em_lugarNacimiento" ColumnName="em_lugarNacimiento" />
-                <ScalarProperty Name="Codigo_Biometrico" ColumnName="Codigo_Biometrico" />
-                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
-                <ScalarProperty Name="IdTipoEmpleado" ColumnName="IdTipoEmpleado" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ro_HorasProfesores">
             <EntityTypeMapping TypeName="Model_rrhh.ro_HorasProfesores">
               <MappingFragment StoreEntitySet="ro_HorasProfesores">
@@ -11674,6 +11869,169 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdCarga" ColumnName="IdCarga" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_empleado">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado">
+              <MappingFragment StoreEntitySet="ro_empleado">
+                <ScalarProperty Name="Valor_horas_nocturna" ColumnName="Valor_horas_nocturna" />
+                <ScalarProperty Name="Valor_horas_matutino" ColumnName="Valor_horas_matutino" />
+                <ScalarProperty Name="Valor_horas_vespertina" ColumnName="Valor_horas_vespertina" />
+                <ScalarProperty Name="Valor_maximo_horas" ColumnName="Valor_maximo_horas" />
+                <ScalarProperty Name="Pago_por_horas" ColumnName="Pago_por_horas" />
+                <ScalarProperty Name="Tiene_ingresos_compartidos" ColumnName="Tiene_ingresos_compartidos" />
+                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
+                <ScalarProperty Name="Marca_Biometrico" ColumnName="Marca_Biometrico" />
+                <ScalarProperty Name="em_AnticipoSueldo" ColumnName="em_AnticipoSueldo" />
+                <ScalarProperty Name="CodigoSectorial" ColumnName="CodigoSectorial" />
+                <ScalarProperty Name="ValorAnticipo" ColumnName="ValorAnticipo" />
+                <ScalarProperty Name="IdTipoAnticipo" ColumnName="IdTipoAnticipo" />
+                <ScalarProperty Name="es_AcreditaHorasExtras" ColumnName="es_AcreditaHorasExtras" />
+                <ScalarProperty Name="IdTipoSistemaSalarioNetoSRI" ColumnName="IdTipoSistemaSalarioNetoSRI" />
+                <ScalarProperty Name="IdTipoResidenciaSRI" ColumnName="IdTipoResidenciaSRI" />
+                <ScalarProperty Name="IdAplicaConvenioDobleImposicionSRI" ColumnName="IdAplicaConvenioDobleImposicionSRI" />
+                <ScalarProperty Name="IdentDiscapacitadoSustitutoSRI" ColumnName="IdentDiscapacitadoSustitutoSRI" />
+                <ScalarProperty Name="IdTipoIdentDiscapacitadoSustitutoSRI" ColumnName="IdTipoIdentDiscapacitadoSustitutoSRI" />
+                <ScalarProperty Name="IdCondicionDiscapacidadSRI" ColumnName="IdCondicionDiscapacidadSRI" />
+                <ScalarProperty Name="em_status" ColumnName="em_status" />
+                <ScalarProperty Name="talla_zapato" ColumnName="talla_zapato" />
+                <ScalarProperty Name="talla_camisa" ColumnName="talla_camisa" />
+                <ScalarProperty Name="talla_pant" ColumnName="talla_pant" />
+                <ScalarProperty Name="carnet_conadis" ColumnName="carnet_conadis" />
+                <ScalarProperty Name="por_discapacidad" ColumnName="por_discapacidad" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdTipoLicencia" ColumnName="IdTipoLicencia" />
+                <ScalarProperty Name="em_mail" ColumnName="em_mail" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="IdCtaCble_Emplea" ColumnName="IdCtaCble_Emplea" />
+                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+                <ScalarProperty Name="IdTipoSangre" ColumnName="IdTipoSangre" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdCodSectorial" ColumnName="IdCodSectorial" />
+                <ScalarProperty Name="em_estado" ColumnName="em_estado" />
+                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
+                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
+                <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
+                <ScalarProperty Name="em_fechaSalida" ColumnName="em_fechaSalida" />
+                <ScalarProperty Name="em_cedulaMil" ColumnName="em_cedulaMil" />
+                <ScalarProperty Name="em_CarnetIees" ColumnName="em_CarnetIees" />
+                <ScalarProperty Name="em_lugarNacimiento" ColumnName="em_lugarNacimiento" />
+                <ScalarProperty Name="Codigo_Biometrico" ColumnName="Codigo_Biometrico" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="IdTipoEmpleado" ColumnName="IdTipoEmpleado" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_empleado_datos_generales">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_datos_generales">
+              <MappingFragment StoreEntitySet="vwro_empleado_datos_generales">
+                <ScalarProperty Name="Valor_horas_matutino" ColumnName="Valor_horas_matutino" />
+                <ScalarProperty Name="Valor_horas_vespertina" ColumnName="Valor_horas_vespertina" />
+                <ScalarProperty Name="Valor_maximo_horas" ColumnName="Valor_maximo_horas" />
+                <ScalarProperty Name="Pago_por_horas" ColumnName="Pago_por_horas" />
+                <ScalarProperty Name="Tiene_ingresos_compartidos" ColumnName="Tiene_ingresos_compartidos" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
+                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
+                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
+                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
+                <ScalarProperty Name="pe_correo" ColumnName="pe_correo" />
+                <ScalarProperty Name="pe_celular" ColumnName="pe_celular" />
+                <ScalarProperty Name="pe_telfono_Contacto" ColumnName="pe_telfono_Contacto" />
+                <ScalarProperty Name="pe_direccion" ColumnName="pe_direccion" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
+                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
+                <ScalarProperty Name="Marca_Biometrico" ColumnName="Marca_Biometrico" />
+                <ScalarProperty Name="em_AnticipoSueldo" ColumnName="em_AnticipoSueldo" />
+                <ScalarProperty Name="CodigoSectorial" ColumnName="CodigoSectorial" />
+                <ScalarProperty Name="ValorAnticipo" ColumnName="ValorAnticipo" />
+                <ScalarProperty Name="IdTipoAnticipo" ColumnName="IdTipoAnticipo" />
+                <ScalarProperty Name="es_AcreditaHorasExtras" ColumnName="es_AcreditaHorasExtras" />
+                <ScalarProperty Name="IdTipoSistemaSalarioNetoSRI" ColumnName="IdTipoSistemaSalarioNetoSRI" />
+                <ScalarProperty Name="IdTipoResidenciaSRI" ColumnName="IdTipoResidenciaSRI" />
+                <ScalarProperty Name="IdAplicaConvenioDobleImposicionSRI" ColumnName="IdAplicaConvenioDobleImposicionSRI" />
+                <ScalarProperty Name="IdentDiscapacitadoSustitutoSRI" ColumnName="IdentDiscapacitadoSustitutoSRI" />
+                <ScalarProperty Name="IdTipoIdentDiscapacitadoSustitutoSRI" ColumnName="IdTipoIdentDiscapacitadoSustitutoSRI" />
+                <ScalarProperty Name="IdCondicionDiscapacidadSRI" ColumnName="IdCondicionDiscapacidadSRI" />
+                <ScalarProperty Name="em_status" ColumnName="em_status" />
+                <ScalarProperty Name="talla_zapato" ColumnName="talla_zapato" />
+                <ScalarProperty Name="talla_camisa" ColumnName="talla_camisa" />
+                <ScalarProperty Name="talla_pant" ColumnName="talla_pant" />
+                <ScalarProperty Name="carnet_conadis" ColumnName="carnet_conadis" />
+                <ScalarProperty Name="por_discapacidad" ColumnName="por_discapacidad" />
+                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdTipoLicencia" ColumnName="IdTipoLicencia" />
+                <ScalarProperty Name="em_mail" ColumnName="em_mail" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="IdCtaCble_Emplea" ColumnName="IdCtaCble_Emplea" />
+                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+                <ScalarProperty Name="IdTipoSangre" ColumnName="IdTipoSangre" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdCodSectorial" ColumnName="IdCodSectorial" />
+                <ScalarProperty Name="em_estado" ColumnName="em_estado" />
+                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
+                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
+                <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
+                <ScalarProperty Name="em_fechaSalida" ColumnName="em_fechaSalida" />
+                <ScalarProperty Name="em_cedulaMil" ColumnName="em_cedulaMil" />
+                <ScalarProperty Name="em_CarnetIees" ColumnName="em_CarnetIees" />
+                <ScalarProperty Name="em_lugarNacimiento" ColumnName="em_lugarNacimiento" />
+                <ScalarProperty Name="Codigo_Biometrico" ColumnName="Codigo_Biometrico" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="IdTipoEmpleado" ColumnName="IdTipoEmpleado" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_rubros_calculados">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_rubros_calculados">
+              <MappingFragment StoreEntitySet="ro_rubros_calculados">
+                <ScalarProperty Name="IdRubro_horas_nocturna" ColumnName="IdRubro_horas_nocturna" />
+                <ScalarProperty Name="IdRubro_horas_vespertina" ColumnName="IdRubro_horas_vespertina" />
+                <ScalarProperty Name="IdRubro_horas_matutina" ColumnName="IdRubro_horas_matutina" />
+                <ScalarProperty Name="IdRubro_IR" ColumnName="IdRubro_IR" />
+                <ScalarProperty Name="IdRubro_DIV" ColumnName="IdRubro_DIV" />
+                <ScalarProperty Name="IdRubro_DIII" ColumnName="IdRubro_DIII" />
+                <ScalarProperty Name="IdRubro_prov_FR" ColumnName="IdRubro_prov_FR" />
+                <ScalarProperty Name="IdRubro_prov_DIV" ColumnName="IdRubro_prov_DIV" />
+                <ScalarProperty Name="IdRubro_prov_DIII" ColumnName="IdRubro_prov_DIII" />
+                <ScalarProperty Name="IdRubro_prov_vac" ColumnName="IdRubro_prov_vac" />
+                <ScalarProperty Name="IdRubro_fondo_reserva" ColumnName="IdRubro_fondo_reserva" />
+                <ScalarProperty Name="IdRubro_aporte_patronal" ColumnName="IdRubro_aporte_patronal" />
+                <ScalarProperty Name="IdRubro_tot_pagar" ColumnName="IdRubro_tot_pagar" />
+                <ScalarProperty Name="IdRubro_sueldo" ColumnName="IdRubro_sueldo" />
+                <ScalarProperty Name="IdRubro_iess_perso" ColumnName="IdRubro_iess_perso" />
+                <ScalarProperty Name="IdRubro_tot_egr" ColumnName="IdRubro_tot_egr" />
+                <ScalarProperty Name="IdRubro_tot_ing" ColumnName="IdRubro_tot_ing" />
+                <ScalarProperty Name="IdRubro_dias_trabajados" ColumnName="IdRubro_dias_trabajados" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

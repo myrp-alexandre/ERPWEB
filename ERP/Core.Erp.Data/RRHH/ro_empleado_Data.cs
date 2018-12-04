@@ -192,9 +192,11 @@ namespace Core.Erp.Data.RRHH
                            pe_correo=info.pe_correo,
                            pe_fechaNacimiento=info.pe_fechaNacimiento,
                            Pago_por_horas = info.Pago_por_horas,
-                           Valor_horas = info.Valor_horas,
-                           Valor_maximo_horas = info.Valor_maximo_horas
-                        
+                        Valor_horas_vespertina = info.Valor_horas_vespertina,
+                        Valor_horas_nocturna = info.Valor_horas_nocturna,
+                        Valor_horas_matutino = info.Valor_horas_matutino,
+                        Valor_maximo_horas = info.Valor_maximo_horas
+
                     };
                 }
 
@@ -289,7 +291,9 @@ namespace Core.Erp.Data.RRHH
                         IdUsuario = info.IdUsuario,
                         Fecha_Transaccion = info.Fecha_Transaccion=DateTime.Now,
                         Pago_por_horas = info.Pago_por_horas,
-                        Valor_horas = info.Valor_horas,
+                        Valor_horas_vespertina = info.Valor_horas_vespertina,
+                        Valor_horas_nocturna = info.Valor_horas_nocturna,
+                        Valor_horas_matutino = info.Valor_horas_matutino,
                         Valor_maximo_horas = info.Valor_maximo_horas
 
                     };
@@ -350,9 +354,11 @@ namespace Core.Erp.Data.RRHH
                         Entity.em_mail = info.em_mail   ;
                         Entity.IdTipoLicencia = info.IdTipoLicencia    ;
                         Entity.IdBanco = info.IdBanco   ;
-                    Entity.Pago_por_horas = info.Pago_por_horas;
-                    Entity.Valor_horas = info.Valor_horas;
+                        Entity.Pago_por_horas = info.Pago_por_horas;
+                    Entity.Valor_horas_nocturna = info.Valor_horas_nocturna;
+                    Entity.Valor_horas_matutino = info.Valor_horas_matutino;
                     Entity.Valor_maximo_horas = info.Valor_maximo_horas;
+                        Entity.Valor_maximo_horas = info.Valor_maximo_horas;
                         Entity.IdArea = info.IdArea    ;
                         Entity.IdDivision = info.IdDivision    ;
                         Entity.Fecha_UltMod = info.Fecha_UltMod  ;
