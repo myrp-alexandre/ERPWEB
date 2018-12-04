@@ -34,6 +34,55 @@
           <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="AsignaCuentas" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="pre_Presupuesto">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPresupuesto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+          <Property Name="EstadoCierre" Type="bit" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="pre_Presupuesto_x_grupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPresupuesto" />
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="MontoSolicitado" Type="float" Nullable="false" />
+          <Property Name="MontoAprobado" Type="float" />
+        </EntityType>
+        <EntityType Name="pre_Presupuesto_x_grupo_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPresupuesto" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="IdRubro" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Monto" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="pre_rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -111,9 +160,70 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_pre_Presupuesto_x_grupo_det_pre_Presupuesto_x_grupo">
+          <End Role="pre_Presupuesto_x_grupo" Type="Self.pre_Presupuesto_x_grupo" Multiplicity="1" />
+          <End Role="pre_Presupuesto_x_grupo_det" Type="Self.pre_Presupuesto_x_grupo_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_Presupuesto_x_grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPresupuesto" />
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="pre_Presupuesto_x_grupo_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPresupuesto" />
+              <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pre_Presupuesto_x_grupo_det_pre_rubro">
+          <End Role="pre_rubro" Type="Self.pre_rubro" Multiplicity="1" />
+          <End Role="pre_Presupuesto_x_grupo_det" Type="Self.pre_Presupuesto_x_grupo_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="pre_Presupuesto_x_grupo_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pre_Presupuesto_x_grupo_pre_Grupo">
+          <End Role="pre_Grupo" Type="Self.pre_Grupo" Multiplicity="1" />
+          <End Role="pre_Presupuesto_x_grupo" Type="Self.pre_Presupuesto_x_grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_Grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="pre_Presupuesto_x_grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pre_Presupuesto_x_grupo_pre_Presupuesto">
+          <End Role="pre_Presupuesto" Type="Self.pre_Presupuesto" Multiplicity="1" />
+          <End Role="pre_Presupuesto_x_grupo" Type="Self.pre_Presupuesto_x_grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_Presupuesto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPresupuesto" />
+            </Principal>
+            <Dependent Role="pre_Presupuesto_x_grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPresupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Model_presupuestoStoreContainer">
           <EntitySet Name="pre_Grupo" EntityType="Self.pre_Grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pre_Grupo_x_seg_usuario" EntityType="Self.pre_Grupo_x_seg_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pre_Presupuesto" EntityType="Self.pre_Presupuesto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pre_Presupuesto_x_grupo" EntityType="Self.pre_Presupuesto_x_grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pre_Presupuesto_x_grupo_det" EntityType="Self.pre_Presupuesto_x_grupo_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pre_rubro" EntityType="Self.pre_rubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwpre_Grupo" EntityType="Self.vwpre_Grupo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -148,6 +258,22 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
             <End Role="pre_Grupo" EntitySet="pre_Grupo" />
             <End Role="pre_Grupo_x_seg_usuario" EntitySet="pre_Grupo_x_seg_usuario" />
           </AssociationSet>
+          <AssociationSet Name="FK_pre_Presupuesto_x_grupo_det_pre_Presupuesto_x_grupo" Association="Self.FK_pre_Presupuesto_x_grupo_det_pre_Presupuesto_x_grupo">
+            <End Role="pre_Presupuesto_x_grupo" EntitySet="pre_Presupuesto_x_grupo" />
+            <End Role="pre_Presupuesto_x_grupo_det" EntitySet="pre_Presupuesto_x_grupo_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pre_Presupuesto_x_grupo_det_pre_rubro" Association="Self.FK_pre_Presupuesto_x_grupo_det_pre_rubro">
+            <End Role="pre_rubro" EntitySet="pre_rubro" />
+            <End Role="pre_Presupuesto_x_grupo_det" EntitySet="pre_Presupuesto_x_grupo_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pre_Presupuesto_x_grupo_pre_Grupo" Association="Self.FK_pre_Presupuesto_x_grupo_pre_Grupo">
+            <End Role="pre_Grupo" EntitySet="pre_Grupo" />
+            <End Role="pre_Presupuesto_x_grupo" EntitySet="pre_Presupuesto_x_grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pre_Presupuesto_x_grupo_pre_Presupuesto" Association="Self.FK_pre_Presupuesto_x_grupo_pre_Presupuesto">
+            <End Role="pre_Presupuesto" EntitySet="pre_Presupuesto" />
+            <End Role="pre_Presupuesto_x_grupo" EntitySet="pre_Presupuesto_x_grupo" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -170,6 +296,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
           <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="pre_Presupuesto_x_grupo_det" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_rubro" FromRole="pre_rubro" ToRole="pre_Presupuesto_x_grupo_det" />
         </EntityType>
         <EntityContainer Name="Entities_presupuesto" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="pre_rubro" EntityType="Self.pre_rubro" />
@@ -181,6 +308,25 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
             <End Role="pre_Grupo_x_seg_usuario" EntitySet="pre_Grupo_x_seg_usuario" />
           </AssociationSet>
           <EntitySet Name="vwpre_Grupo" EntityType="Model_presupuesto.vwpre_Grupo" />
+          <EntitySet Name="pre_Presupuesto" EntityType="Model_presupuesto.pre_Presupuesto" />
+          <EntitySet Name="pre_Presupuesto_x_grupo" EntityType="Model_presupuesto.pre_Presupuesto_x_grupo" />
+          <EntitySet Name="pre_Presupuesto_x_grupo_det" EntityType="Model_presupuesto.pre_Presupuesto_x_grupo_det" />
+          <AssociationSet Name="FK_pre_Presupuesto_x_grupo_pre_Grupo" Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_pre_Grupo">
+            <End Role="pre_Grupo" EntitySet="pre_Grupo" />
+            <End Role="pre_Presupuesto_x_grupo" EntitySet="pre_Presupuesto_x_grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pre_Presupuesto_x_grupo_pre_Presupuesto" Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_pre_Presupuesto">
+            <End Role="pre_Presupuesto" EntitySet="pre_Presupuesto" />
+            <End Role="pre_Presupuesto_x_grupo" EntitySet="pre_Presupuesto_x_grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pre_Presupuesto_x_grupo_det_pre_Presupuesto_x_grupo" Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_Presupuesto_x_grupo">
+            <End Role="pre_Presupuesto_x_grupo" EntitySet="pre_Presupuesto_x_grupo" />
+            <End Role="pre_Presupuesto_x_grupo_det" EntitySet="pre_Presupuesto_x_grupo_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pre_Presupuesto_x_grupo_det_pre_rubro" Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_rubro">
+            <End Role="pre_rubro" EntitySet="pre_rubro" />
+            <End Role="pre_Presupuesto_x_grupo_det" EntitySet="pre_Presupuesto_x_grupo_det" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="vwpre_rubro">
           <Key>
@@ -221,6 +367,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="pre_Grupo_x_seg_usuario" Relationship="Model_presupuesto.FK_pre_Grupo_x_seg_usuario_pre_Grupo1" FromRole="pre_Grupo" ToRole="pre_Grupo_x_seg_usuario" />
+          <NavigationProperty Name="pre_Presupuesto_x_grupo" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_pre_Grupo" FromRole="pre_Grupo" ToRole="pre_Presupuesto_x_grupo" />
         </EntityType>
         <EntityType Name="pre_Grupo_x_seg_usuario">
           <Key>
@@ -268,6 +415,119 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
           <Property Name="AsignaCuentas" Type="Boolean" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="pre_Presupuesto">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPresupuesto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EstadoCierre" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="pre_Presupuesto_x_grupo" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_pre_Presupuesto" FromRole="pre_Presupuesto" ToRole="pre_Presupuesto_x_grupo" />
+        </EntityType>
+        <EntityType Name="pre_Presupuesto_x_grupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPresupuesto" />
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="MontoSolicitado" Type="Double" Nullable="false" />
+          <Property Name="MontoAprobado" Type="Double" />
+          <NavigationProperty Name="pre_Grupo" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_pre_Grupo" FromRole="pre_Presupuesto_x_grupo" ToRole="pre_Grupo" />
+          <NavigationProperty Name="pre_Presupuesto" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_pre_Presupuesto" FromRole="pre_Presupuesto_x_grupo" ToRole="pre_Presupuesto" />
+          <NavigationProperty Name="pre_Presupuesto_x_grupo_det" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_Presupuesto_x_grupo" FromRole="pre_Presupuesto_x_grupo" ToRole="pre_Presupuesto_x_grupo_det" />
+        </EntityType>
+        <EntityType Name="pre_Presupuesto_x_grupo_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPresupuesto" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="IdRubro" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Monto" Type="Double" Nullable="false" />
+          <NavigationProperty Name="pre_Presupuesto_x_grupo" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_Presupuesto_x_grupo" FromRole="pre_Presupuesto_x_grupo_det" ToRole="pre_Presupuesto_x_grupo" />
+          <NavigationProperty Name="pre_rubro" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_rubro" FromRole="pre_Presupuesto_x_grupo_det" ToRole="pre_rubro" />
+        </EntityType>
+        <Association Name="FK_pre_Presupuesto_x_grupo_pre_Grupo">
+          <End Type="Model_presupuesto.pre_Grupo" Role="pre_Grupo" Multiplicity="1" />
+          <End Type="Model_presupuesto.pre_Presupuesto_x_grupo" Role="pre_Presupuesto_x_grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_Grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="pre_Presupuesto_x_grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pre_Presupuesto_x_grupo_pre_Presupuesto">
+          <End Type="Model_presupuesto.pre_Presupuesto" Role="pre_Presupuesto" Multiplicity="1" />
+          <End Type="Model_presupuesto.pre_Presupuesto_x_grupo" Role="pre_Presupuesto_x_grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_Presupuesto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPresupuesto" />
+            </Principal>
+            <Dependent Role="pre_Presupuesto_x_grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPresupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pre_Presupuesto_x_grupo_det_pre_Presupuesto_x_grupo">
+          <End Type="Model_presupuesto.pre_Presupuesto_x_grupo" Role="pre_Presupuesto_x_grupo" Multiplicity="1" />
+          <End Type="Model_presupuesto.pre_Presupuesto_x_grupo_det" Role="pre_Presupuesto_x_grupo_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_Presupuesto_x_grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPresupuesto" />
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="pre_Presupuesto_x_grupo_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPresupuesto" />
+              <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pre_Presupuesto_x_grupo_det_pre_rubro">
+          <End Type="Model_presupuesto.pre_rubro" Role="pre_rubro" Multiplicity="1" />
+          <End Type="Model_presupuesto.pre_Presupuesto_x_grupo_det" Role="pre_Presupuesto_x_grupo_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="pre_Presupuesto_x_grupo_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -349,6 +609,51 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pre_Presupuesto">
+            <EntityTypeMapping TypeName="Model_presupuesto.pre_Presupuesto">
+              <MappingFragment StoreEntitySet="pre_Presupuesto">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="EstadoCierre" ColumnName="EstadoCierre" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pre_Presupuesto_x_grupo">
+            <EntityTypeMapping TypeName="Model_presupuesto.pre_Presupuesto_x_grupo">
+              <MappingFragment StoreEntitySet="pre_Presupuesto_x_grupo">
+                <ScalarProperty Name="MontoAprobado" ColumnName="MontoAprobado" />
+                <ScalarProperty Name="MontoSolicitado" ColumnName="MontoSolicitado" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pre_Presupuesto_x_grupo_det">
+            <EntityTypeMapping TypeName="Model_presupuesto.pre_Presupuesto_x_grupo_det">
+              <MappingFragment StoreEntitySet="pre_Presupuesto_x_grupo_det">
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

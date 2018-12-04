@@ -30,5 +30,8 @@ namespace Core.Erp.Data
         public virtual DbSet<pre_Grupo> pre_Grupo { get; set; }
         public virtual DbSet<pre_Grupo_x_seg_usuario> pre_Grupo_x_seg_usuario { get; set; }
         public virtual DbSet<vwpre_Grupo> vwpre_Grupo { get; set; }
+        public virtual DbSet<pre_Presupuesto> pre_Presupuesto { get; set; }
+        public virtual DbSet<pre_Presupuesto_x_grupo> pre_Presupuesto_x_grupo { get; set; }
+        public virtual DbSet<pre_Presupuesto_x_grupo_det> pre_Presupuesto_x_grupo_det { get; set; }
     }
 }
