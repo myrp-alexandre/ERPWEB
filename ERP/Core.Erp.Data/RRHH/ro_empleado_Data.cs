@@ -38,7 +38,6 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-
         public List<ro_empleado_Info> get_list_combo_liquidar(int IdEmpresa)
         {
             try
@@ -68,8 +67,6 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-
-
         public List<ro_empleado_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
@@ -148,23 +145,10 @@ namespace Core.Erp.Data.RRHH
                         em_lugarNacimiento = info.em_lugarNacimiento,
                         em_CarnetIees = info.em_CarnetIees,
                         em_cedulaMil = info.em_cedulaMil,
-                        em_fecha_ingreso = info.em_fecha_ingreso,
-                        em_fechaSalida = info.em_fechaSalida,
-                        em_fechaTerminoContra = info.em_fechaTerminoContra,
                         em_fechaIngaRol = info.em_fechaIngaRol,
-                        em_SeAcreditaBanco = info.em_SeAcreditaBanco,
                         em_tipoCta = info.em_tipoCta,
                         em_NumCta = info.em_NumCta,
-                        em_SepagaBeneficios = info.em_SepagaBeneficios,
-                        em_SePagaConTablaSec = info.em_SePagaConTablaSec,
                         em_estado = info.em_estado,
-                        em_sueldoBasicoMen = info.em_sueldoBasicoMen,
-                        em_SueldoExtraMen = info.em_SueldoExtraMen,
-                        em_MovilizacionQuincenal = info.em_MovilizacionQuincenal,
-                        em_foto = info.em_foto,
-                        em_empEspecial = info.em_empEspecial,
-                        em_pagoFdoRsv = info.em_pagoFdoRsv,
-                        em_huella = info.em_huella,
                         IdCodSectorial = info.IdCodSectorial,
                         IdDepartamento = info.IdDepartamento,
                         IdTipoSangre = info.IdTipoSangre,
@@ -173,16 +157,11 @@ namespace Core.Erp.Data.RRHH
                         IdCiudad = info.IdCiudad,
                         em_mail = info.em_mail,
                         IdTipoLicencia = info.IdTipoLicencia,
-                        IdCentroCosto = info.IdCentroCosto,
                         IdBanco = info.IdBanco,
-                        Archivo = info.Archivo,
-                        NombreArchivo = info.NombreArchivo,
                         IdArea = info.IdArea,
                         IdDivision = info.IdDivision,
-                        IdCentroCosto_sub_centro_costo = info.IdCentroCosto_sub_centro_costo,
                         por_discapacidad = info.por_discapacidad,
                         carnet_conadis = info.carnet_conadis,
-                        recibi_uniforme = info.recibi_uniforme,
                         talla_pant = info.talla_pant,
                         talla_camisa = info.talla_camisa,
                         talla_zapato = info.talla_zapato,
@@ -197,14 +176,9 @@ namespace Core.Erp.Data.RRHH
                         IdTipoAnticipo = info.IdTipoAnticipo,
                         ValorAnticipo = info.ValorAnticipo,
                         CodigoSectorial = info.CodigoSectorial,
-                        es_TruncarDecimalAnticipo = info.es_TruncarDecimalAnticipo,
                         em_AnticipoSueldo = info.em_AnticipoSueldo,
-                        IdBanco_Acreditacion = info.IdBanco_Acreditacion,
-                        IdGrupo = info.IdGrupo,
                         Marca_Biometrico = info.Marca_Biometrico,
-                        em_motivo_salisa = info.em_motivo_salisa,
                         IdHorario = info.IdHorario,
-                        IdPuntoCargo = info.IdPuntoCargo,
                         Tiene_ingresos_compartidos=info.Tiene_ingresos_compartidos,                       
                            pe_cedulaRuc=info.pe_cedulaRuc,
                            pe_nombre=info.pe_nombre,
@@ -272,23 +246,11 @@ namespace Core.Erp.Data.RRHH
                         em_lugarNacimiento	=info.em_lugarNacimiento,
                         em_CarnetIees	=info.em_CarnetIees,
                         em_cedulaMil	=info.em_cedulaMil	,
-                        em_fecha_ingreso	=info.em_fecha_ingreso	,
                         em_fechaSalida	=info.em_fechaSalida	,
-                        em_fechaTerminoContra=info.	em_fechaTerminoContra	,
                         em_fechaIngaRol	=info.	em_fechaIngaRol	,
-                        em_SeAcreditaBanco	=info.em_SeAcreditaBanco	,
                         em_tipoCta	=info.em_tipoCta	,
-                        em_NumCta	=info.em_NumCta	,
-                        em_SepagaBeneficios	=info.em_SepagaBeneficios	,
-                        em_SePagaConTablaSec	=info.em_SePagaConTablaSec	,
-                        em_estado	=info.	em_estado,
-                        em_sueldoBasicoMen	=info.em_sueldoBasicoMen	,
-                        em_SueldoExtraMen	=info.em_SueldoExtraMen	,
-                        em_MovilizacionQuincenal=info.em_MovilizacionQuincenal	,
-                        em_foto	=info.	em_foto,
-                        em_empEspecial	=info.em_empEspecial	,
-                        em_pagoFdoRsv	=info.em_pagoFdoRsv	,
-                        em_huella	=info.em_huella	,
+                        em_NumCta	=info.em_NumCta	,                     
+                        em_estado	=info.	em_estado,                    
                         IdCodSectorial	=info.IdCodSectorial	,
                         IdDepartamento	=info.IdDepartamento	,
                         IdTipoSangre	=info.IdTipoSangre	,
@@ -297,17 +259,12 @@ namespace Core.Erp.Data.RRHH
                         IdCiudad	=info.IdCiudad	,
                         em_mail	=info.em_mail	,
                         IdTipoLicencia	=info.IdTipoLicencia	,
-                        IdCentroCosto	=info.IdCentroCosto	,
                         IdBanco	=info.IdBanco	,
-                        Archivo	=info.Archivo	,
-                        NombreArchivo=info.	NombreArchivo	,
                         IdArea	=info.IdArea	,
                         IdDivision	=info.IdDivision	,
-                        IdCentroCosto_sub_centro_costo	=info.IdCentroCosto_sub_centro_costo	,
                         Fecha_UltMod	=info.Fecha_UltMod	,
                         por_discapacidad	=info.	por_discapacidad	,
                         carnet_conadis	=info.	carnet_conadis	,
-                        recibi_uniforme	=info.	recibi_uniforme	,
                         talla_pant	=info.	talla_pant	,
                         talla_camisa	=info.	talla_camisa	,
                         talla_zapato	=info.	talla_zapato	,
@@ -322,28 +279,35 @@ namespace Core.Erp.Data.RRHH
                         IdTipoAnticipo	=info.	IdTipoAnticipo	,
                         ValorAnticipo	=info.	ValorAnticipo	,
                         CodigoSectorial	=info.	CodigoSectorial	,
-                        es_TruncarDecimalAnticipo	=info.	es_TruncarDecimalAnticipo	,
                         em_AnticipoSueldo	=info.	em_AnticipoSueldo	,
-                        IdBanco_Acreditacion	=info.	IdBanco_Acreditacion	,
-                        IdGrupo	=info.	IdGrupo	,
                         Marca_Biometrico	=info.	Marca_Biometrico	,
-                        em_motivo_salisa	=info.	em_motivo_salisa	,
                         IdHorario	=info.	IdHorario	,
-                        IdPuntoCargo	=info.	IdPuntoCargo,
                         Tiene_ingresos_compartidos=info.Tiene_ingresos_compartidos,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transaccion = info.Fecha_Transaccion=DateTime.Now
 
                     };
                     Context.ro_empleado.Add(Entity);
-
-                   
+                    if (info.info_foto != null)
+                    {
+                        if (info.info_foto.Foto != null)
+                            if (info.info_foto.Foto.Length != 0)
+                            {
+                                ro_EmpleadoFoto entity_foto = new ro_EmpleadoFoto
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdEmpleado = info.IdEmpleado,
+                                    Foto = info.info_foto.Foto
+                                };
+                                Context.ro_EmpleadoFoto.Add(entity_foto);
+                            }
+                    }
                     
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception E)
+            catch (Exception )
             {
 
                 throw;
@@ -367,23 +331,10 @@ namespace Core.Erp.Data.RRHH
                         Entity.em_lugarNacimiento = info.em_lugarNacimiento;
                         Entity.em_CarnetIees = info.em_CarnetIees;
                         Entity.em_cedulaMil = info.em_cedulaMil  ;
-                        Entity.em_fecha_ingreso = info.em_fecha_ingreso  ;
-                        Entity.em_fechaSalida = info.em_fechaSalida    ;
-                        Entity.em_fechaTerminoContra = info.em_fechaTerminoContra   ;
                         Entity.em_fechaIngaRol = info.em_fechaIngaRol ;
-                        Entity.em_SeAcreditaBanco = info.em_SeAcreditaBanco    ;
                         Entity.em_tipoCta = info.em_tipoCta    ;
                         Entity.em_NumCta = info.em_NumCta ;
-                        Entity.em_SepagaBeneficios = info.em_SepagaBeneficios   ;
-                        Entity.em_SePagaConTablaSec = info.em_SePagaConTablaSec  ;
                         Entity.em_estado = info.em_estado;
-                        Entity.em_sueldoBasicoMen = info.em_sueldoBasicoMen    ;
-                        Entity.em_SueldoExtraMen = info.em_SueldoExtraMen ;
-                        Entity.em_MovilizacionQuincenal = info.em_MovilizacionQuincenal  ;
-                        Entity.em_foto = info.em_foto;
-                        Entity.em_empEspecial = info.em_empEspecial    ;
-                        Entity.em_pagoFdoRsv = info.em_pagoFdoRsv ;
-                        Entity.em_huella = info.em_huella ;
                         Entity.IdCodSectorial = info.IdCodSectorial    ;
                         Entity.IdDepartamento = info.IdDepartamento    ;
                         Entity.IdTipoSangre = info.IdTipoSangre  ;
@@ -392,17 +343,13 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdCiudad = info.IdCiudad  ;
                         Entity.em_mail = info.em_mail   ;
                         Entity.IdTipoLicencia = info.IdTipoLicencia    ;
-                        Entity.IdCentroCosto = info.IdCentroCosto ;
                         Entity.IdBanco = info.IdBanco   ;
-                        Entity.Archivo = info.Archivo   ;
-                        Entity.NombreArchivo = info.NombreArchivo   ;
+                    
                         Entity.IdArea = info.IdArea    ;
                         Entity.IdDivision = info.IdDivision    ;
-                        Entity.IdCentroCosto_sub_centro_costo = info.IdCentroCosto_sub_centro_costo    ;
                         Entity.Fecha_UltMod = info.Fecha_UltMod  ;
                         Entity.por_discapacidad = info.por_discapacidad    ;
                         Entity.carnet_conadis = info.carnet_conadis  ;
-                        Entity.recibi_uniforme = info.recibi_uniforme ;
                         Entity.talla_pant = info.talla_pant  ;
                         Entity.talla_camisa = info.talla_camisa    ;
                         Entity.talla_zapato = info.talla_zapato    ;
@@ -417,18 +364,29 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdTipoAnticipo = info.IdTipoAnticipo  ;
                         Entity.ValorAnticipo = info.ValorAnticipo   ;
                         Entity.CodigoSectorial = info.CodigoSectorial ;
-                        Entity.es_TruncarDecimalAnticipo = info.es_TruncarDecimalAnticipo   ;
                         Entity.em_AnticipoSueldo = info.em_AnticipoSueldo   ;
-                        Entity.IdBanco_Acreditacion = info.IdBanco_Acreditacion    ;
-                        Entity.IdGrupo = info.IdGrupo ;
                         Entity.Marca_Biometrico = info.Marca_Biometrico    ;
-                        Entity.em_motivo_salisa = info.em_motivo_salisa    ;
                         Entity.IdHorario = info.IdHorario   ;
-                        Entity.IdPuntoCargo = info.IdPuntoCargo;
                         Entity.IdUsuario = info.IdUsuarioUltModi;
                         Entity.Fecha_UltMod = info.Fecha_Transaccion = DateTime.Now;
-                    Entity.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
-                        Context.SaveChanges();
+                        Entity.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
+                    var foto = Context.ro_EmpleadoFoto.FirstOrDefault(v => v.IdEmpresa ==info. IdEmpresa && v.IdEmpleado ==info.IdEmpleado);
+                    Context.ro_EmpleadoFoto.Remove(foto);
+                    if (info.info_foto != null)
+                    {
+                        if (info.info_foto.Foto != null)
+                            if (info.info_foto.Foto.Length != 0)
+                            {
+                                ro_EmpleadoFoto entity_foto = new ro_EmpleadoFoto
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdEmpleado = info.IdEmpleado,
+                                    Foto = info.info_foto.Foto
+                                };
+                                Context.ro_EmpleadoFoto.Add(entity_foto);
+                            }
+                    }
+                    Context.SaveChanges();
                 }
 
                 return true;

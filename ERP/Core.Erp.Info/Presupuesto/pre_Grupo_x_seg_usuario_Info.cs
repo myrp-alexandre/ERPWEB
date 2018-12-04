@@ -15,5 +15,7 @@ namespace Core.Erp.Info.Presupuesto
         [Required(ErrorMessage = ("El campo descripción es obligatorio"))]
         public string IdUsuario { get; set; }
         public bool AsignaCuentas { get; set; }
+
+        public string Nombre { get; set; }
     }
 }

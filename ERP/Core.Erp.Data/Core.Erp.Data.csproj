@@ -1163,6 +1163,9 @@
     <Compile Include="ro_empleado.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_EmpleadoFoto.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_EmpleadoNovedadCargaMasiva.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1299,6 +1302,7 @@
     <Compile Include="RRHH\ro_Acta_Finiquito_Data.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Data.cs" />
     <Compile Include="RRHH\ro_archivosCSV_Data.cs" />
+    <Compile Include="RRHH\ro_ArchivosIess_Data.cs" />
     <Compile Include="RRHH\ro_archivos_bancos_generacion_Data.cs" />
     <Compile Include="RRHH\ro_archivos_bancos_generacion_x_empleado_Data.cs" />
     <Compile Include="RRHH\ro_area_Data.cs" />
@@ -1314,6 +1318,7 @@
     <Compile Include="RRHH\ro_departamento_Data.cs" />
     <Compile Include="RRHH\ro_division_Data.cs" />
     <Compile Include="RRHH\ro_DocumentoxEmp_Data.cs" />
+    <Compile Include="RRHH\ro_EmpleadoFoto_Data.cs" />
     <Compile Include="RRHH\ro_EmpleadoNovedadCargaMasiva_Data.cs" />
     <Compile Include="RRHH\ro_EmpleadoNovedadCargaMasiva_det_Data.cs" />
     <Compile Include="RRHH\ro_empleado_Data.cs" />

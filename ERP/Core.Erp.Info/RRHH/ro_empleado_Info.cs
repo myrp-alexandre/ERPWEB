@@ -25,16 +25,12 @@ namespace Core.Erp.Info.RRHH
         public string em_lugarNacimiento { get; set; }
         public string em_CarnetIees { get; set; }
         public string em_cedulaMil { get; set; }
-        public Nullable<System.DateTime> em_fecha_ingreso { get; set; }
         public Nullable<System.DateTime> em_fechaSalida { get; set; }
-        public Nullable<System.DateTime> em_fechaTerminoContra { get; set; }
         [Required(ErrorMessage = ("el campo fecha ingreso es obligatorio"))]
         public Nullable<System.DateTime> em_fechaIngaRol { get; set; }
-        public string em_SeAcreditaBanco { get; set; }
         public string em_tipoCta { get; set; }
         public string em_NumCta { get; set; }
-        public string em_SepagaBeneficios { get; set; }
-        public string em_SePagaConTablaSec { get; set; }
+       
         public string em_estado { get; set; }
         public bool EstadoBool { get; set; }
         public double em_sueldoBasicoMen { get; set; }
@@ -56,16 +52,13 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = ("el campo correo es obligatorio"))]
         public string em_mail { get; set; }
         public string IdTipoLicencia { get; set; }
-        public string IdCentroCosto { get; set; }
         public string IdBanco { get; set; }
-        public byte[] Archivo { get; set; }
-        public string NombreArchivo { get; set; }
+
         [Required(ErrorMessage = ("el campo área es obligatorio"))]
 
         public Nullable<int> IdArea { get; set; }
         [Required(ErrorMessage = ("el campo división es obligatorio"))]
         public Nullable<int> IdDivision { get; set; }
-        public string IdCentroCosto_sub_centro_costo { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transaccion { get; set; }
         public string IdUsuarioUltModi { get; set; }
@@ -96,12 +89,10 @@ namespace Core.Erp.Info.RRHH
         public Nullable<bool> es_TruncarDecimalAnticipo { get; set; }
         public Nullable<double> em_AnticipoSueldo { get; set; }
         public Nullable<int> IdBanco_Acreditacion { get; set; }
-        public Nullable<int> IdGrupo { get; set; }
         public bool Marca_Biometrico { get; set; }
         public string em_motivo_salisa { get; set; }
         public tb_persona_Info info_persona { get; set; }
         public Nullable<int> IdHorario { get; set; }
-        public Nullable<int> IdPuntoCargo { get; set; }
         public bool Tiene_ingresos_compartidos { get; set; }
 
 
@@ -143,9 +134,10 @@ namespace Core.Erp.Info.RRHH
         public string Empleado { get; set; }
         [Required(ErrorMessage = ("el campo número de documento es obligatorio"))]
         public string pe_cedulaRuc { get; set; }
+        public ro_EmpleadoFoto_Info info_foto { get; set; }
         public ro_empleado_Info()
         {
-            info_persona = new tb_persona_Info();
+            info_persona = new tb_persona_Info();info_foto = new ro_EmpleadoFoto_Info();
         }
     }
 }

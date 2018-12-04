@@ -409,6 +409,7 @@
     <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridExportDemoOptions.cs" />
     <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridDataOutputDemosHelper.cs" />
     <Compile Include="Areas\RRHH\Controllers\ActaFiniquitoController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\ArchivosActualizacionSueldoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ArchivosTransferenciasController.cs" />
     <Compile Include="Areas\RRHH\Controllers\AreaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\BaseImpuestoRentaController.cs" />
@@ -9396,16 +9397,17 @@
     <Content Include="Areas\Presupuesto\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Index.cshtml" />
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\_GridViewPartial_Rubro.cshtml" />
-    <Content Include="Areas\Presupuesto\Views\Nuevo.cshtml" />
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\_CmbCuentaContable.cshtml" />
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Nuevo.cshtml" />
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Modificar.cshtml" />
     <Content Include="Areas\Presupuesto\Views\RubroPresupuesto\Anular.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF1.cshtml" />
     <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\_GridViewPartial_Grupo.cshtml" />
-    <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\_CmbUsuario.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\_CmbUsuario_Grupo.cshtml" />
     <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\Index.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ParametroAF\_CmbCuenta_Param1.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\Nuevo.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\_GridViewPartial_GrupoDet.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF2.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF3.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF6.cshtml" />
@@ -9494,6 +9496,7 @@
     <Folder Include="Areas\Presupuesto\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
+    <Folder Include="Areas\RRHH\Views\ArchivosActualizacionSueldo\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
