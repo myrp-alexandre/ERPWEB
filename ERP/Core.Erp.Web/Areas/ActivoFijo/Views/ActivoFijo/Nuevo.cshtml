@@ -144,7 +144,10 @@
                 <a href="#tab_caracteristicas" aria-controls="caracteristicas" role="tab" data-toggle="tab">Características del activo</a>
             </li>
             <li>
-                <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Detalle</a>
+                <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Distribución de depreciación</a>
+            </li>
+            <li>
+                <a href="#tab_encargado" aria-controls="encargado" role="tab" data-toggle="tab">Encargado</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
@@ -345,6 +348,39 @@
 
 
 </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_encargado">
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdEmpleadoCustodio">Empleado custodio*</label>
+                                @Html.Partial("_CmbEmpleado_Cus_AF", Model.IdEmpleadoCustodio)
+                                @Html.ValidationMessageFor(q => q.IdEmpleadoCustodio, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdEmpleadoEncargado">Empleado encargado*</label>
+                                @Html.Partial("_CmbEmpleado_Enc_AF", Model.IdEmpleadoEncargado)
+                                @Html.ValidationMessageFor(q => q.IdEmpleadoEncargado, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
 
             </div>
     </div>

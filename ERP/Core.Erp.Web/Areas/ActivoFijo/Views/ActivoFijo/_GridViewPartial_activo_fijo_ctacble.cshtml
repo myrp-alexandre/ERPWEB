@@ -10,12 +10,12 @@
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ActivoFijo", Action = "EditingAddNew", Area = "ActivoFijo" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ActivoFijo", Action = "EditingUpdate", Area = "ActivoFijo" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ActivoFijo", Action = "EditingUpdate", Area = "ActivoFijo" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ActivoFijo", Action = "EditingDelete", Area = "ActivoFijo" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;
         settings.CommandColumn.ShowEditButton = true;
-        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsContextMenu.RowMenuItemVisibility.DeleteRow = false;
@@ -34,7 +34,7 @@
         settings.InitNewRow = (s, e) =>
         {
             e.NewValues["IdCatalogo"] = "";
-            e.NewValues["IdCtaCble"] = null;
+            e.NewValues["IdCtaCble"] = "";
             e.NewValues["Porcentaje"] = 0;
         };
         settings.Columns.Add(column =>
@@ -42,7 +42,7 @@
             column.Name = "IdCatalogo";
             column.FieldName = "IdCatalogo";
             column.Caption = "Tipo de cuenta*";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(40);
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
             {
@@ -57,15 +57,15 @@
         {
             column.FieldName = "pc_Cuenta";
             column.Caption = "Cuenta contable";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(40);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdCtaCble";
-            column.Caption = "ID";
-            column.Width = Unit.Percentage(30);
+            column.Caption = "Cuenta contable";
+            column.Width = Unit.Percentage(40);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
@@ -87,7 +87,8 @@
             });
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
 
     });
 }
-@grid.Bind(Model).GetHtml()
+@grid.Bind(Model.LstDet).GetHtml()

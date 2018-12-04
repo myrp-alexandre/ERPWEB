@@ -12,6 +12,7 @@ using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.General;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
@@ -58,6 +59,27 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
             return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_Enc_AF()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbEmpleado_Enc_AF", model);
+        }
+        public ActionResult CmbEmpleado_Cus_AF()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbEmpleado_Cus_AF", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda_emp(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda_emp(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
         }
         #endregion
 
@@ -110,7 +132,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
             model.LstDet = new List<Af_Activo_fijo_CtaCble_Info>();
-            List_det.set_list(new List<Af_Activo_fijo_CtaCble_Info>(), model.IdTransaccionSession);
+            List_det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -210,16 +232,19 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             cargar_combos_Detalle();
             Af_Activo_fijo_Info model = new Af_Activo_fijo_Info();
             model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_activo_fijo_ctacble", model.LstDet);
+            return PartialView("_GridViewPartial_activo_fijo_ctacble", model);
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] Af_Activo_fijo_CtaCble_Info info_det)
         {
-
+            var cuenta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
+            if (cuenta != null)
+                info_det.pc_Cuenta = cuenta.pc_Cuenta;
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            Af_Activo_fijo_Info model = new Af_Activo_fijo_Info();
+           model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_Detalle();
             return PartialView("_GridViewPartial_activo_fijo_ctacble", model);
         }
@@ -227,17 +252,23 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] Af_Activo_fijo_CtaCble_Info info_det)
         {
+            var cuenta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
+            if (cuenta != null)
+                info_det.pc_Cuenta = cuenta.pc_Cuenta;
+
             if (ModelState.IsValid)
                 List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            Af_Activo_fijo_Info model = new Af_Activo_fijo_Info();
+            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_Detalle();
             return PartialView("_GridViewPartial_activo_fijo_ctacble", model);
         }
-
+        [HttpPost, ValidateInput(false)]
         public ActionResult EditingDelete(int Secuencia)
         {
             List_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            Af_Activo_fijo_Info model = new Af_Activo_fijo_Info();
+            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_Detalle();
             return PartialView("_GridViewPartial_activo_fijo_ctacble", model);
         }
@@ -267,6 +298,10 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         {
             List<Af_Activo_fijo_CtaCble_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            info_det.IdCatalogo = info_det.IdCatalogo;
+            info_det.IdCtaCble = info_det.IdCtaCble;
+            info_det.Porcentaje = info_det.Porcentaje;
+
 
             list.Add(info_det);
         }
