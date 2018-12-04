@@ -390,6 +390,8 @@
           <Property Name="IdHorario" Type="int" />
           <Property Name="Tiene_ingresos_compartidos" Type="bit" Nullable="false" />
           <Property Name="Pago_por_horas" Type="bit" Nullable="false" />
+          <Property Name="Valor_horas" Type="float" />
+          <Property Name="Valor_maximo_horas" Type="float" />
         </EntityType>
         <EntityType Name="ro_empleado_Novedad">
           <Key>
@@ -1505,6 +1507,8 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not 
           <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
           <Property Name="Tiene_ingresos_compartidos" Type="bit" Nullable="false" />
           <Property Name="Pago_por_horas" Type="bit" Nullable="false" />
+          <Property Name="Valor_horas" Type="float" />
+          <Property Name="Valor_maximo_horas" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_empleado_Novedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3928,7 +3932,9 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_empleado_datos_generales].[IdEmpleado] AS [IdEmpleado], 
     [vwro_empleado_datos_generales].[pe_apellido] AS [pe_apellido], 
     [vwro_empleado_datos_generales].[Tiene_ingresos_compartidos] AS [Tiene_ingresos_compartidos], 
-    [vwro_empleado_datos_generales].[Pago_por_horas] AS [Pago_por_horas]
+    [vwro_empleado_datos_generales].[Pago_por_horas] AS [Pago_por_horas], 
+    [vwro_empleado_datos_generales].[Valor_horas] AS [Valor_horas], 
+    [vwro_empleado_datos_generales].[Valor_maximo_horas] AS [Valor_maximo_horas]
     FROM [dbo].[vwro_empleado_datos_generales] AS [vwro_empleado_datos_generales]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_empleado_Novedad" EntityType="Self.vwro_empleado_Novedad" store:Type="Views" store:Schema="dbo">
@@ -7099,6 +7105,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_archivos_bancos_generacion" EntitySet="ro_archivos_bancos_generacion" />
             <End Role="ro_archivos_bancos_generacion_x_empleado" EntitySet="ro_archivos_bancos_generacion_x_empleado" />
           </AssociationSet>
+          <EntitySet Name="ro_EmpleadoFoto" EntityType="Model_rrhh.ro_EmpleadoFoto" />
+          <EntitySet Name="vwro_ArchivosIess" EntityType="Model_rrhh.vwro_ArchivosIess" />
           <EntitySet Name="ro_empleado" EntityType="Model_rrhh.ro_empleado" />
           <EntitySet Name="vwro_empleado_datos_generales" EntityType="Model_rrhh.vwro_empleado_datos_generales" />
           <AssociationSet Name="FK_ro_Acta_Finiquito_ro_empleado" Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado">
@@ -7229,8 +7237,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_Solicitud_Vacaciones_x_empleado" EntitySet="ro_Solicitud_Vacaciones_x_empleado" />
           </AssociationSet>
-          <EntitySet Name="ro_EmpleadoFoto" EntityType="Model_rrhh.ro_EmpleadoFoto" />
-          <EntitySet Name="vwro_ArchivosIess" EntityType="Model_rrhh.vwro_ArchivosIess" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -8470,6 +8476,48 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ro_EmpleadoFoto">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="vwro_ArchivosIess">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Orden" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Double" />
+          <Property Name="rub_visible_reporte" Type="Boolean" />
+          <Property Name="Observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Sueldo" Type="Double" />
+        </EntityType>
         <EntityType Name="ro_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -8530,6 +8578,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="IdHorario" Type="Int32" />
           <Property Name="Tiene_ingresos_compartidos" Type="Boolean" Nullable="false" />
           <Property Name="Pago_por_horas" Type="Boolean" Nullable="false" />
+          <Property Name="Valor_horas" Type="Double" />
+          <Property Name="Valor_maximo_horas" Type="Double" />
           <NavigationProperty Name="ro_Acta_Finiquito" Relationship="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado" FromRole="ro_empleado" ToRole="ro_Acta_Finiquito" />
           <NavigationProperty Name="ro_archivos_bancos_generacion_x_empleado" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_archivos_bancos_generacion_x_empleado" />
           <NavigationProperty Name="ro_cargaFamiliar" Relationship="Model_rrhh.FK_ro_CargaFamiliar_ro_empleado" FromRole="ro_empleado" ToRole="ro_cargaFamiliar" />
@@ -8651,6 +8701,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Tiene_ingresos_compartidos" Type="Boolean" Nullable="false" />
           <Property Name="Pago_por_horas" Type="Boolean" Nullable="false" />
+          <Property Name="Valor_horas" Type="Double" />
+          <Property Name="Valor_maximo_horas" Type="Double" />
         </EntityType>
         <Association Name="FK_ro_Acta_Finiquito_ro_empleado">
           <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
@@ -9092,48 +9144,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ro_EmpleadoFoto">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="vwro_ArchivosIess">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="Orden" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="ru_descripcion" />
-            <PropertyRef Name="IdNominaTipo" />
-            <PropertyRef Name="IdNominaTipoLiqui" />
-            <PropertyRef Name="IdPeriodo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Orden" Type="Int32" Nullable="false" />
-          <Property Name="Valor" Type="Double" />
-          <Property Name="rub_visible_reporte" Type="Boolean" />
-          <Property Name="Observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="Sueldo" Type="Double" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10956,9 +10966,44 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ro_EmpleadoFoto">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_EmpleadoFoto">
+              <MappingFragment StoreEntitySet="ro_EmpleadoFoto">
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_ArchivosIess">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_ArchivosIess">
+              <MappingFragment StoreEntitySet="vwro_ArchivosIess">
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="rub_visible_reporte" ColumnName="rub_visible_reporte" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ro_empleado">
             <EntityTypeMapping TypeName="Model_rrhh.ro_empleado">
               <MappingFragment StoreEntitySet="ro_empleado">
+                <ScalarProperty Name="Valor_maximo_horas" ColumnName="Valor_maximo_horas" />
+                <ScalarProperty Name="Valor_horas" ColumnName="Valor_horas" />
                 <ScalarProperty Name="Pago_por_horas" ColumnName="Pago_por_horas" />
                 <ScalarProperty Name="Tiene_ingresos_compartidos" ColumnName="Tiene_ingresos_compartidos" />
                 <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
@@ -11020,6 +11065,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySetMapping Name="vwro_empleado_datos_generales">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_datos_generales">
               <MappingFragment StoreEntitySet="vwro_empleado_datos_generales">
+                <ScalarProperty Name="Valor_maximo_horas" ColumnName="Valor_maximo_horas" />
+                <ScalarProperty Name="Valor_horas" ColumnName="Valor_horas" />
                 <ScalarProperty Name="Pago_por_horas" ColumnName="Pago_por_horas" />
                 <ScalarProperty Name="Tiene_ingresos_compartidos" ColumnName="Tiene_ingresos_compartidos" />
                 <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
@@ -11083,39 +11130,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="IdEmpleado_Supervisor" ColumnName="IdEmpleado_Supervisor" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ro_EmpleadoFoto">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_EmpleadoFoto">
-              <MappingFragment StoreEntitySet="ro_EmpleadoFoto">
-                <ScalarProperty Name="Foto" ColumnName="Foto" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwro_ArchivosIess">
-            <EntityTypeMapping TypeName="Model_rrhh.vwro_ArchivosIess">
-              <MappingFragment StoreEntitySet="vwro_ArchivosIess">
-                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
-                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
-                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="rub_visible_reporte" ColumnName="rub_visible_reporte" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="Orden" ColumnName="Orden" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

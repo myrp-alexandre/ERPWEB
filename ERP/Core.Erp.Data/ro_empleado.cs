@@ -98,6 +98,8 @@ namespace Core.Erp.Data
         public Nullable<int> IdHorario { get; set; }
         public bool Tiene_ingresos_compartidos { get; set; }
         public bool Pago_por_horas { get; set; }
+        public Nullable<double> Valor_horas { get; set; }
+        public Nullable<double> Valor_maximo_horas { get; set; }
     
         public virtual ICollection<ro_Acta_Finiquito> ro_Acta_Finiquito { get; set; }
         public virtual ICollection<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }

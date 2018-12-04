@@ -153,8 +153,10 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_archivos_bancos_generacion_x_empleado" Width="1.5" PointX="26.5" PointY="55" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_archivos_bancos_generacion_x_empleado" Width="1.5" PointX="21.375" PointY="16.75" />
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_empleado" Width="1.5" PointX="9" PointY="53.625" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="3.375" PointY="21.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_EmpleadoFoto" Width="1.5" PointX="5.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_ArchivosIess" Width="1.5" PointX="5.375" PointY="22.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_empleado" Width="1.5" PointX="9" PointY="53.5" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="22.375" PointY="22.75" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_CargaFamiliar_ro_empleado" />
@@ -187,8 +189,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_prestamo_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_EmpleadoFoto" Width="1.5" PointX="5.375" PointY="10.75" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_ArchivosIess" Width="1.5" PointX="5.375" PointY="22.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
