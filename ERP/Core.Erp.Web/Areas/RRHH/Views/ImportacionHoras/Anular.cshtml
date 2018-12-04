@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_EmpleadoNovedadCargaMasiva_Info
 @{
-    ViewBag.Title = "Anular carga de novedades";
+    ViewBag.Title = "Anular carga de horas";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -17,7 +17,7 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Anular", "ImportacionNovedades", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "ImportacionHoras", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdCarga)
@@ -165,7 +165,7 @@
 
                 @Html.DevExpress().UploadControl(settings => {
                 settings.Name = "UploadControlFile";
-                settings.CallbackRouteValues = new { Controller = "ImportacionNovedades", Action = "UploadControlUpload" };
+                settings.CallbackRouteValues = new { Controller = "ImportacionHoras", Action = "UploadControlUpload" };
                 settings.ShowUploadButton = true;
                 settings.ShowProgressPanel = true;
                 settings.NullText = "Click here to browse files...";
@@ -191,7 +191,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index","ImportacionNovedades",new { Area = "RRHH" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","ImportacionHoras",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

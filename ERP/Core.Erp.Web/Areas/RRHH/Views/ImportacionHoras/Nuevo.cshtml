@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_EmpleadoNovedadCargaMasiva_Info
 @{
-    ViewBag.Title = "Anular carga de novedades";
+    ViewBag.Title = "Nueva carga de horas";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -17,13 +17,15 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Anular", "ImportacionNovedades", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "ImportacionHoras", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdCarga)
 
+   
+<div class="row">
+    <div class="col-md-12">
 
-    <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="IdCargo">Sucursal*</label>
@@ -96,6 +98,7 @@
             </div>
         </div>
     </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -150,7 +153,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Fecha">Observación</label>
-                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -165,7 +168,7 @@
 
                 @Html.DevExpress().UploadControl(settings => {
                 settings.Name = "UploadControlFile";
-                settings.CallbackRouteValues = new { Controller = "ImportacionNovedades", Action = "UploadControlUpload" };
+                settings.CallbackRouteValues = new { Controller = "ImportacionHoras", Action = "UploadControlUpload" };
                 settings.ShowUploadButton = true;
                 settings.ShowProgressPanel = true;
                 settings.NullText = "Click here to browse files...";
@@ -190,12 +193,12 @@
     </div>
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index","ImportacionNovedades",new { Area = "RRHH" },null)">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","ImportacionHoras",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
-}
+    }
 
 

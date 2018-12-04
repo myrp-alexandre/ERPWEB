@@ -47,23 +47,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_importacion_novedades(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        public ActionResult GridViewPartial_importacion_horas(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
 
             var model = bus_novedad.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, false);
-            return PartialView("_GridViewPartial_importacion_novedades", model);
+            return PartialView("_GridViewPartial_importacion_horas", model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_importacion_novedades_det()
+        public ActionResult GridViewPartial_importacion_horas_det()
         {
             ro_HorasProfesores_Info modelReturn = new ro_HorasProfesores_Info();
 
             modelReturn.detalle = detalle.get_list();
-            return PartialView("_GridViewPartial_importacion_novedades_det", modelReturn);
+            return PartialView("_GridViewPartial_importacion_horas_det", modelReturn);
         }
         #endregion
 
@@ -164,7 +164,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 detalle.UpdateRow(info_det);
             ro_HorasProfesores_Info model = new ro_HorasProfesores_Info();
             model.detalle = detalle.get_list();
-            return PartialView("_GridViewPartial_importacion_novedades_det", model);
+            return PartialView("_GridViewPartial_importacion_horas_det", model);
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_HorasProfesores_det_Info info_det)
@@ -172,7 +172,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             detalle.DeleteRow(info_det.Secuencia);
             ro_HorasProfesores_Info model = new ro_HorasProfesores_Info();
             model.detalle = detalle.get_list();
-            return PartialView("_GridViewPartial_importacion_novedades_det", model);
+            return PartialView("_GridViewPartial_importacion_horas_det", model);
         }
         #endregion
 
