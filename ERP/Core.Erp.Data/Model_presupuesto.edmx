@@ -52,8 +52,29 @@
           <Property Name="FechaAnulacion" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwpre_rubro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Grupo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwpre_Grupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="AsignaCuentas" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AsignaCuentas" Type="bit" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwpre_rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -94,6 +115,18 @@ warning 6002: The table/view 'DBERP.dbo.vwpre_rubro' does not have a primary key
           <EntitySet Name="pre_Grupo" EntityType="Self.pre_Grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pre_Grupo_x_seg_usuario" EntityType="Self.pre_Grupo_x_seg_usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pre_rubro" EntityType="Self.pre_rubro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwpre_Grupo" EntityType="Self.vwpre_Grupo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwpre_Grupo].[IdEmpresa] AS [IdEmpresa], 
+    [vwpre_Grupo].[IdGrupo] AS [IdGrupo], 
+    [vwpre_Grupo].[Descripcion] AS [Descripcion], 
+    [vwpre_Grupo].[Estado] AS [Estado], 
+    [vwpre_Grupo].[Secuencia] AS [Secuencia], 
+    [vwpre_Grupo].[IdUsuario] AS [IdUsuario], 
+    [vwpre_Grupo].[AsignaCuentas] AS [AsignaCuentas], 
+    [vwpre_Grupo].[Nombre] AS [Nombre]
+    FROM [dbo].[vwpre_Grupo] AS [vwpre_Grupo]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwpre_rubro" EntityType="Self.vwpre_rubro" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwpre_rubro].[IdEmpresa] AS [IdEmpresa], 
@@ -147,6 +180,7 @@ warning 6002: The table/view 'DBERP.dbo.vwpre_rubro' does not have a primary key
             <End Role="pre_Grupo" EntitySet="pre_Grupo" />
             <End Role="pre_Grupo_x_seg_usuario" EntitySet="pre_Grupo_x_seg_usuario" />
           </AssociationSet>
+          <EntitySet Name="vwpre_Grupo" EntityType="Model_presupuesto.vwpre_Grupo" />
         </EntityContainer>
         <EntityType Name="vwpre_rubro">
           <Key>
@@ -215,6 +249,25 @@ warning 6002: The table/view 'DBERP.dbo.vwpre_rubro' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwpre_Grupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="AsignaCuentas" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AsignaCuentas" Type="Boolean" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -281,6 +334,20 @@ warning 6002: The table/view 'DBERP.dbo.vwpre_rubro' does not have a primary key
                 <ScalarProperty Name="AsignaCuentas" ColumnName="AsignaCuentas" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwpre_Grupo">
+            <EntityTypeMapping TypeName="Model_presupuesto.vwpre_Grupo">
+              <MappingFragment StoreEntitySet="vwpre_Grupo">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="AsignaCuentas" ColumnName="AsignaCuentas" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>

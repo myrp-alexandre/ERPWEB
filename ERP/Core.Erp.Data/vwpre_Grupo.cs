@@ -12,20 +12,15 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwpre_rubro
+    public partial class vwpre_Grupo
     {
         public int IdEmpresa { get; set; }
-        public int IdRubro { get; set; }
+        public int IdGrupo { get; set; }
         public string Descripcion { get; set; }
-        public string IdCtaCble { get; set; }
-        public string pc_Cuenta { get; set; }
         public bool Estado { get; set; }
-        public string IdUsuarioCreacion { get; set; }
-        public Nullable<System.DateTime> FechaCreacion { get; set; }
-        public string IdUsuarioModificacion { get; set; }
-        public Nullable<System.DateTime> FechaModificacion { get; set; }
-        public string IdUsuarioAnulacion { get; set; }
-        public Nullable<System.DateTime> FechaAnulacion { get; set; }
-        public string MotivoAnulacion { get; set; }
+        public int Secuencia { get; set; }
+        public string IdUsuario { get; set; }
+        public bool AsignaCuentas { get; set; }
+        public string Nombre { get; set; }
     }
 }

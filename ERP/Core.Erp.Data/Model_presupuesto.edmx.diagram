@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="Model_presupuesto.pre_Grupo" Width="1.5" PointX="5.375" PointY="6" />
         <EntityTypeShape EntityType="Model_presupuesto.pre_Grupo_x_seg_usuario" Width="1.5" PointX="7.625" PointY="6.625" />
         <AssociationConnector Association="Model_presupuesto.FK_pre_Grupo_x_seg_usuario_pre_Grupo1" />
+        <EntityTypeShape EntityType="Model_presupuesto.vwpre_Grupo" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
