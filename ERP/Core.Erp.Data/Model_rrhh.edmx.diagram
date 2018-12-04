@@ -188,6 +188,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" />
         <EntityTypeShape EntityType="Model_rrhh.ro_EmpleadoFoto" Width="1.5" PointX="5.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_ArchivosIess" Width="1.5" PointX="5.375" PointY="22.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

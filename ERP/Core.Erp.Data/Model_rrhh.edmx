@@ -2248,6 +2248,41 @@ warning 6002: The table/view 'DBERP.EntidadRegulatoria.vwrdep_IngrEgr_x_Empleado
           <Property Name="IngresoVarios" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.EntidadRegulatoria.vwro_ArchivosIess' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwro_ArchivosIess">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Orden" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdRubro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="float" />
+          <Property Name="rub_visible_reporte" Type="bit" />
+          <Property Name="Observacion" Type="varchar" MaxLength="255" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="em_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="Sueldo" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.web.vwro_empleado_x_Proyeccion_Gastos_Personales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_Proyeccion_Gastos_Personales">
           <Key>
@@ -4338,6 +4373,28 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwrdep_IngrEgr_x_Empleado].[Utilidades] AS [Utilidades], 
     [vwrdep_IngrEgr_x_Empleado].[IngresoVarios] AS [IngresoVarios]
     FROM [EntidadRegulatoria].[vwrdep_IngrEgr_x_Empleado] AS [vwrdep_IngrEgr_x_Empleado]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwro_ArchivosIess" EntityType="Self.vwro_ArchivosIess" store:Type="Views" store:Schema="EntidadRegulatoria">
+            <DefiningQuery>SELECT 
+    [vwro_ArchivosIess].[IdEmpresa] AS [IdEmpresa], 
+    [vwro_ArchivosIess].[IdEmpleado] AS [IdEmpleado], 
+    [vwro_ArchivosIess].[IdRubro] AS [IdRubro], 
+    [vwro_ArchivosIess].[Orden] AS [Orden], 
+    [vwro_ArchivosIess].[Valor] AS [Valor], 
+    [vwro_ArchivosIess].[rub_visible_reporte] AS [rub_visible_reporte], 
+    [vwro_ArchivosIess].[Observacion] AS [Observacion], 
+    [vwro_ArchivosIess].[IdSucursal] AS [IdSucursal], 
+    [vwro_ArchivosIess].[em_codigo] AS [em_codigo], 
+    [vwro_ArchivosIess].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwro_ArchivosIess].[pe_apellido] AS [pe_apellido], 
+    [vwro_ArchivosIess].[pe_nombre] AS [pe_nombre], 
+    [vwro_ArchivosIess].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwro_ArchivosIess].[ru_descripcion] AS [ru_descripcion], 
+    [vwro_ArchivosIess].[IdNominaTipo] AS [IdNominaTipo], 
+    [vwro_ArchivosIess].[IdNominaTipoLiqui] AS [IdNominaTipoLiqui], 
+    [vwro_ArchivosIess].[IdPeriodo] AS [IdPeriodo], 
+    [vwro_ArchivosIess].[Sueldo] AS [Sueldo]
+    FROM [EntidadRegulatoria].[vwro_ArchivosIess] AS [vwro_ArchivosIess]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_empleado_x_Proyeccion_Gastos_Personales" EntityType="Self.vwro_empleado_x_Proyeccion_Gastos_Personales" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -7173,6 +7230,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_Solicitud_Vacaciones_x_empleado" EntitySet="ro_Solicitud_Vacaciones_x_empleado" />
           </AssociationSet>
           <EntitySet Name="ro_EmpleadoFoto" EntityType="Model_rrhh.ro_EmpleadoFoto" />
+          <EntitySet Name="vwro_ArchivosIess" EntityType="Model_rrhh.vwro_ArchivosIess" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -9042,6 +9100,39 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="vwro_ArchivosIess">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Orden" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Double" />
+          <Property Name="rub_visible_reporte" Type="Boolean" />
+          <Property Name="Observacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Sueldo" Type="Double" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -11000,6 +11091,30 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <EntityTypeMapping TypeName="Model_rrhh.ro_EmpleadoFoto">
               <MappingFragment StoreEntitySet="ro_EmpleadoFoto">
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_ArchivosIess">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_ArchivosIess">
+              <MappingFragment StoreEntitySet="vwro_ArchivosIess">
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="rub_visible_reporte" ColumnName="rub_visible_reporte" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
