@@ -52,8 +52,8 @@
           <Property Name="FechaAnulacion" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar(max)" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwpre_rubro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwpre_rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -76,7 +76,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
           <Property Name="FechaAnulacion" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar(max)" />
         </EntityType>
-        <Association Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo">
+        <Association Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo1">
           <End Role="pre_Grupo" Type="Self.pre_Grupo" Multiplicity="1" />
           <End Role="pre_Grupo_x_seg_usuario" Type="Self.pre_Grupo_x_seg_usuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -111,7 +111,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
     [vwpre_rubro].[MotivoAnulacion] AS [MotivoAnulacion]
     FROM [dbo].[vwpre_rubro] AS [vwpre_rubro]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo" Association="Self.FK_pre_Grupo_x_seg_usuario_pre_Grupo">
+          <AssociationSet Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo1" Association="Self.FK_pre_Grupo_x_seg_usuario_pre_Grupo1">
             <End Role="pre_Grupo" EntitySet="pre_Grupo" />
             <End Role="pre_Grupo_x_seg_usuario" EntitySet="pre_Grupo_x_seg_usuario" />
           </AssociationSet>
@@ -120,37 +120,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model_presupuesto" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="pre_Grupo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdGrupo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="pre_Grupo_x_seg_usuario" Relationship="Self.FK_pre_Grupo_x_seg_usuario_pre_Grupo" FromRole="pre_Grupo" ToRole="pre_Grupo_x_seg_usuario" />
-        </EntityType>
-        <EntityType Name="pre_Grupo_x_seg_usuario">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdGrupo" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AsignaCuentas" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="pre_Grupo" Relationship="Self.FK_pre_Grupo_x_seg_usuario_pre_Grupo" FromRole="pre_Grupo_x_seg_usuario" ToRole="pre_Grupo" />
-        </EntityType>
         <EntityType Name="pre_rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -169,29 +138,15 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo">
-          <End Role="pre_Grupo" Type="Self.pre_Grupo" Multiplicity="1" />
-          <End Role="pre_Grupo_x_seg_usuario" Type="Self.pre_Grupo_x_seg_usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="pre_Grupo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdGrupo" />
-            </Principal>
-            <Dependent Role="pre_Grupo_x_seg_usuario">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdGrupo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities_presupuesto" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="pre_Grupo" EntityType="Self.pre_Grupo" />
-          <EntitySet Name="pre_Grupo_x_seg_usuario" EntityType="Self.pre_Grupo_x_seg_usuario" />
           <EntitySet Name="pre_rubro" EntityType="Self.pre_rubro" />
-          <AssociationSet Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo" Association="Self.FK_pre_Grupo_x_seg_usuario_pre_Grupo">
+          <EntitySet Name="vwpre_rubro" EntityType="Model_presupuesto.vwpre_rubro" />
+          <EntitySet Name="pre_Grupo" EntityType="Model_presupuesto.pre_Grupo" />
+          <EntitySet Name="pre_Grupo_x_seg_usuario" EntityType="Model_presupuesto.pre_Grupo_x_seg_usuario" />
+          <AssociationSet Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo1" Association="Model_presupuesto.FK_pre_Grupo_x_seg_usuario_pre_Grupo1">
             <End Role="pre_Grupo" EntitySet="pre_Grupo" />
             <End Role="pre_Grupo_x_seg_usuario" EntitySet="pre_Grupo_x_seg_usuario" />
           </AssociationSet>
-          <EntitySet Name="vwpre_rubro" EntityType="Model_presupuesto.vwpre_rubro" />
         </EntityContainer>
         <EntityType Name="vwpre_rubro">
           <Key>
@@ -215,40 +170,57 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="pre_Grupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="pre_Grupo_x_seg_usuario" Relationship="Model_presupuesto.FK_pre_Grupo_x_seg_usuario_pre_Grupo1" FromRole="pre_Grupo" ToRole="pre_Grupo_x_seg_usuario" />
+        </EntityType>
+        <EntityType Name="pre_Grupo_x_seg_usuario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AsignaCuentas" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="pre_Grupo" Relationship="Model_presupuesto.FK_pre_Grupo_x_seg_usuario_pre_Grupo1" FromRole="pre_Grupo_x_seg_usuario" ToRole="pre_Grupo" />
+        </EntityType>
+        <Association Name="FK_pre_Grupo_x_seg_usuario_pre_Grupo1">
+          <End Type="Model_presupuesto.pre_Grupo" Role="pre_Grupo" Multiplicity="1" />
+          <End Type="Model_presupuesto.pre_Grupo_x_seg_usuario" Role="pre_Grupo_x_seg_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_Grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="pre_Grupo_x_seg_usuario">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Model_presupuestoStoreContainer" CdmEntityContainer="Entities_presupuesto">
-          <EntitySetMapping Name="pre_Grupo">
-            <EntityTypeMapping TypeName="Model_presupuesto.pre_Grupo">
-              <MappingFragment StoreEntitySet="pre_Grupo">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="pre_Grupo_x_seg_usuario">
-            <EntityTypeMapping TypeName="Model_presupuesto.pre_Grupo_x_seg_usuario">
-              <MappingFragment StoreEntitySet="pre_Grupo_x_seg_usuario">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="AsignaCuentas" ColumnName="AsignaCuentas" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="pre_rubro">
             <EntityTypeMapping TypeName="Model_presupuesto.pre_rubro">
               <MappingFragment StoreEntitySet="pre_rubro">
@@ -282,6 +254,34 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_rubro' no tiene definida nin
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pre_Grupo">
+            <EntityTypeMapping TypeName="Model_presupuesto.pre_Grupo">
+              <MappingFragment StoreEntitySet="pre_Grupo">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pre_Grupo_x_seg_usuario">
+            <EntityTypeMapping TypeName="Model_presupuesto.pre_Grupo_x_seg_usuario">
+              <MappingFragment StoreEntitySet="pre_Grupo_x_seg_usuario">
+                <ScalarProperty Name="AsignaCuentas" ColumnName="AsignaCuentas" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
