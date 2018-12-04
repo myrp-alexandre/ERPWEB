@@ -50,9 +50,9 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdRubroTipo = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdPeriodo = 0)
         {
-            pre_Periodo_Info model = bus_Periodo.GetInfo(IdEmpresa, IdRubroTipo);
+            pre_Periodo_Info model = bus_Periodo.GetInfo(IdEmpresa, IdPeriodo);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
@@ -69,9 +69,9 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdEmpresa = 0, int IdRubroTipo = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdPeriodo = 0)
         {
-            pre_Periodo_Info model = bus_Periodo.GetInfo(IdEmpresa, IdRubroTipo);
+            pre_Periodo_Info model = bus_Periodo.GetInfo(IdEmpresa, IdPeriodo);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);

@@ -31,10 +31,21 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         }
         #endregion
 
+        #region Metodos
+        private void cargar_combos(int IdEmpresa)
+        {
+            Dictionary<string, string> lst_signo = new Dictionary<string, string>();
+            lst_signo.Add("+", "+");
+            lst_signo.Add("-", "-");
+            ViewBag.lst_signo = lst_signo;
+        }
+        #endregion
+
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             pre_RubroTipo_Info model = new pre_RubroTipo_Info();
+            cargar_combos(IdEmpresa);
             return View(model);
 
         }
@@ -55,6 +66,8 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             pre_RubroTipo_Info model = bus_RubroTipo.GetInfo(IdEmpresa, IdRubroTipo);
             if (model == null)
                 return RedirectToAction("Index");
+
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -74,6 +87,8 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             pre_RubroTipo_Info model = bus_RubroTipo.GetInfo(IdEmpresa, IdRubroTipo);
             if (model == null)
                 return RedirectToAction("Index");
+
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
