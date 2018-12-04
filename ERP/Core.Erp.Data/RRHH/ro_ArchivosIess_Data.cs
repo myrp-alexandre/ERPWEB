@@ -14,14 +14,13 @@ namespace Core.Erp.Data.RRHH
             try
             {
                 List<ro_ArchivosIess_Info> lista;
-
                 using (Entities_rrhh Contex=new Entities_rrhh())
                 {
 
                     lista = (from q in Contex.vwro_ArchivosIess
                              where q.IdEmpresa==IdEmpresa
                              && q.IdNominaTipo==IdNominaTipo
-                             && q.IdNominaTipoLiqui==IdNominaTipo
+                             && q.IdNominaTipoLiqui==IdNominaTipoLiqui
                             && q.IdPeriodo==IdPeriodo
                              select new ro_ArchivosIess_Info
                              {
@@ -35,13 +34,14 @@ namespace Core.Erp.Data.RRHH
                                  pe_nombre=q.pe_nombre,
                                  pe_apellido=q.pe_apellido,
                                  pe_nombreCompleto=q.pe_nombreCompleto,
-                                 Valor=q.Valor
+                                 Valor=q.Valor,
+                                 ru_descripcion=q.ru_descripcion
                              }
                            ).ToList();
 
                 }
 
-                return new List<ro_ArchivosIess_Info>();
+                return lista;
             }
             catch (Exception)
             {

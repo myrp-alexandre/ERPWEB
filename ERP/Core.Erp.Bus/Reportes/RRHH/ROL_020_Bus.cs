@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core.Erp.Data.Reportes.RRHH;
+using Core.Erp.Info.Reportes.RRHH;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,20 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.RRHH
 {
-    class ROL_020_Bus
+    public class ROL_020_Bus
     {
+        ROL_020_Data odata = new ROL_020_Data();
+        public List<ROL_020_Info> GetList(int IdEmpresa, int IdNominaTipo, int IdNomina, int IdPeriodo)
+        {
+            try
+            {
+                return odata.GetList(IdEmpresa, IdNominaTipo, IdNomina, IdPeriodo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

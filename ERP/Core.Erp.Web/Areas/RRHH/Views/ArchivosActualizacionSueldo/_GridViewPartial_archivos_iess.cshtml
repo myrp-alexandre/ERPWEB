@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_archivos_iess";
-        settings.CallbackRouteValues = new { Controller = "Contrato", Action = "GridViewPartial_archivos_iess" };
+        settings.CallbackRouteValues = new { Controller = "ArchivosActualizacionSueldo", Action = "GridViewPartial_archivos_iess" };
         settings.KeyFieldName = "IdContrato";
         settings.Width = Unit.Percentage(100);
 
@@ -48,16 +48,11 @@
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
       
-
-
-        settings.Columns.Add("IdContrato", "ID").Width = Unit.Percentage(5);
-        settings.Columns.Add("NumDocumento", "Nº contrato").Width = Unit.Percentage(10);
-        settings.Columns.Add("Empleado", "Nombres").Width = Unit.Percentage(30);
-        settings.Columns.Add("FechaInicio", "Fecha inicio").Width = Unit.Percentage(10);
-        settings.Columns.Add("FechaFin", "Fecha fin").Width = Unit.Percentage(10);
-        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(20);
-        settings.Columns.Add("Contrato", "Contrato").Width = Unit.Percentage(15);
-        settings.Columns.Add("EstadoContrato", "Estado").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdEmpleado", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("pe_nombreCompleto", "Nombres").Width = Unit.Percentage(30);
+        settings.Columns.Add("pe_cedulaRuc", "Cédula ").Width = Unit.Percentage(10);
+        settings.Columns.Add("ru_descripcion", "Rubro").Width = Unit.Percentage(10);
+        settings.Columns.Add("Valor", "Valor").Width = Unit.Percentage(20);
 
     });
 }
