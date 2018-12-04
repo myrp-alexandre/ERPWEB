@@ -18,8 +18,10 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         // GET: Presupuesto/GrupoPresupuesto
         #region Variables
         pre_Grupo_Bus bus_Grupo = new pre_Grupo_Bus();
+        pre_Grupo_x_seg_usuario_Bus bus_Grupo_Usuario = new pre_Grupo_x_seg_usuario_Bus();
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         pre_GrupoDet_List Lista_GrupoDet = new pre_GrupoDet_List();
+        string mensaje = string.Empty;
         #endregion
 
         #region Index
@@ -32,7 +34,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         public ActionResult GridViewPartial_Grupo()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<pre_Grupo_Info> model = bus_Grupo.GetList(IdEmpresa, false);
+            List<pre_Grupo_Info> model = bus_Grupo.GetList(IdEmpresa, true);
 
             return PartialView("_GridViewPartial_Grupo", model);
         }
@@ -79,7 +81,15 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         [HttpPost]
         public ActionResult Nuevo(pre_Grupo_Info model)
         {
+            model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             model.ListaGrupoDetalle = Lista_GrupoDet.get_list(model.IdTransaccionSession);
+
+            if (!Validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
 
             if (!bus_Grupo.GuardarBD(model))
             {
@@ -87,6 +97,82 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 return View(model);
             }
 
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Modificar(int IdEmpresa = 0, int IdGrupo = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            pre_Grupo_Info model = bus_Grupo.GetInfo(IdEmpresa, IdGrupo);
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.ListaGrupoDetalle = bus_Grupo_Usuario.GetList(model.IdEmpresa, Convert.ToInt32(model.IdGrupo));
+            Lista_GrupoDet.set_list(model.ListaGrupoDetalle, model.IdTransaccionSession);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(pre_Grupo_Info model)
+        {
+            model.ListaGrupoDetalle = Lista_GrupoDet.get_list(model.IdTransaccionSession);
+            model.IdUsuarioModificacion = Session["IdUsuario"].ToString();
+
+            if (!Validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
+
+            if (!bus_Grupo.ModificarBD(model))
+            {
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Anular(int IdEmpresa = 0, decimal IdGrupo = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            pre_Grupo_Info model = bus_Grupo.GetInfo(IdEmpresa, Convert.ToInt32(IdGrupo));
+            if (model == null)
+                return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.ListaGrupoDetalle = bus_Grupo_Usuario.GetList(model.IdEmpresa, Convert.ToInt32(model.IdGrupo));
+            Lista_GrupoDet.set_list(model.ListaGrupoDetalle, model.IdTransaccionSession);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Anular(pre_Grupo_Info model)
+        {
+            model.IdUsuarioAnulacion = SessionFixed.IdUsuario.ToString();
+            if (!bus_Grupo.AnularBD(model))
+            {
+                ViewBag.mensaje = "No se ha podido anular el registro";
+
+                model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                model.ListaGrupoDetalle = bus_Grupo_Usuario.GetList(model.IdEmpresa, Convert.ToInt32(model.IdGrupo));
+                Lista_GrupoDet.set_list(model.ListaGrupoDetalle, model.IdTransaccionSession);
+
+                return View(model);
+            };
             return RedirectToAction("Index");
         }
         #endregion
@@ -147,6 +233,38 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             model.ListaGrupoDetalle = Lista_GrupoDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return PartialView("_GridViewPartial_GrupoDet", model.ListaGrupoDetalle);
+        }
+
+        private bool Validar(pre_Grupo_Info i_validar, ref string msg)
+        {            
+            i_validar.ListaGrupoDetalle = Lista_GrupoDet.get_list(i_validar.IdTransaccionSession);
+
+            if (i_validar.ListaGrupoDetalle.Count == 0)
+            {
+                mensaje = "Debe ingresar al menos un usuario";
+                return false;
+            }
+            else
+            {
+                foreach (var item1 in i_validar.ListaGrupoDetalle)
+                {
+                    var contador = 0;
+                    foreach (var item2 in i_validar.ListaGrupoDetalle)
+                    {
+                        if (item1.IdUsuario == item2.IdUsuario)
+                        {
+                            contador++;
+                        }
+
+                        if (contador > 1)
+                        {
+                            mensaje = "Existe usuarios repetidos en el detalle";
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
         #endregion        
     }

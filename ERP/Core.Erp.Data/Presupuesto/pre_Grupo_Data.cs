@@ -78,6 +78,7 @@ namespace Core.Erp.Data.Presupuesto
                         Estado = Entity.Estado
                     };
                 }
+
                 return info;
             }
             catch (Exception)
@@ -112,12 +113,11 @@ namespace Core.Erp.Data.Presupuesto
             try
             {
                 using (Entities_presupuesto db = new Entities_presupuesto())
-                {
-                    int id = get_id(info.IdEmpresa);
+                {                   
                     db.pre_Grupo.Add(new pre_Grupo
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdGrupo = id,
+                        IdGrupo = info.IdGrupo = get_id(info.IdEmpresa),
                         Descripcion = info.Descripcion,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
@@ -134,7 +134,7 @@ namespace Core.Erp.Data.Presupuesto
                             {
                                 IdEmpresa = info.IdEmpresa,
                                 IdGrupo = info.IdGrupo,
-                                Secuencia = Secuencia,
+                                Secuencia = Secuencia++,
                                 IdUsuario = item.IdUsuario,
                                 AsignaCuentas = item.AsignaCuentas
                             });
@@ -146,7 +146,7 @@ namespace Core.Erp.Data.Presupuesto
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

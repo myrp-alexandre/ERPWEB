@@ -9415,6 +9415,8 @@
     <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF5.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF7.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_activo_fijo_ctacble.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\Modificar.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
