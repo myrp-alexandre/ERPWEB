@@ -9,7 +9,7 @@ namespace Core.Erp.Data.RRHH
 {
   public  class ro_archivos_bancos_generacion_Data
     {
-        public List<ro_archivos_bancos_generacion_Info> get_list(int IdEmpresa, DateTime Fechainicio, DateTime FechaFin, bool mostrar_anulados)
+        public List<ro_archivos_bancos_generacion_Info> get_list(int IdEmpresa, int IdPeriodo, DateTime Fechainicio, DateTime FechaFin, bool mostrar_anulados)
         {
             try
             {
@@ -20,6 +20,7 @@ namespace Core.Erp.Data.RRHH
                     if (mostrar_anulados)
                         Lista = (from q in Context.vwro_archivos_bancos_generacion
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.IdPeriodo == IdPeriodo
                                  select new ro_archivos_bancos_generacion_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

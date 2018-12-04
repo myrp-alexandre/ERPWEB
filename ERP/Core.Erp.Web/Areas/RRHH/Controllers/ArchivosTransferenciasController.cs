@@ -44,13 +44,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_archivo_transferencia(DateTime? Fecha_ini, DateTime? Fecha_fin ,decimal? IdSucursal = 0)
+        public ActionResult GridViewPartial_archivo_transferencia(DateTime? Fecha_ini, DateTime? Fecha_fin ,decimal? IdSucursal = 0, int IdPeriodo = 0)
         {
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_archivo.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, true);
+            var model = bus_archivo.get_list(IdEmpresa, IdPeriodo, ViewBag.Fecha_ini, ViewBag.Fecha_fin, true);
             return PartialView("_GridViewPartial_archivo_transferencia", model);
         }
 

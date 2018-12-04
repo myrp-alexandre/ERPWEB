@@ -35,7 +35,11 @@ namespace Core.Erp.Data.Reportes.RRHH
                         Nombres = q.Nombres,
                         pe_cedulaRuc = q.pe_cedulaRuc,
                         Secuancia = q.Secuancia,
-                        Valor = q.Valor
+                        Valor = q.Valor,
+                        Descripcion = q.Descripcion,
+                        DescripcionProcesoNomina = q.DescripcionProcesoNomina,
+                        pe_FechaFin = q.pe_FechaFin,
+                        pe_FechaIni = q.pe_FechaIni
 
                     }).ToList();
                 }

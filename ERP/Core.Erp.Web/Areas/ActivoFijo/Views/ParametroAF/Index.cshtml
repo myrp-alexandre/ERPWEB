@@ -35,6 +35,12 @@
                                 @Html.ValidationMessageFor(q => q.DiasTransaccionesAFuturo, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
+                        <div class="col-md-2">
+                            <div class="checkbox">
+                                <label for="ContabilizaDepreciacionPorActivo">@Html.CheckBoxFor(q => q.ContabilizaDepreciacionPorActivo) Contabiliza depreciación por activo</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

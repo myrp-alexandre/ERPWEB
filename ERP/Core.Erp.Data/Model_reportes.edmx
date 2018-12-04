@@ -3163,6 +3163,10 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
             <PropertyRef Name="Valor" />
             <PropertyRef Name="em_tipoCta" />
             <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="pe_FechaIni" />
+            <PropertyRef Name="pe_FechaFin" />
           </Key>
           <Property Name="Secuancia" Type="bigint" />
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
@@ -3178,6 +3182,10 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <Property Name="Nombres" Type="varchar" MaxLength="201" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="DescripcionProcesoNomina" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pe_FechaIni" Type="smalldatetime" Nullable="false" />
+          <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <Function Name="SPACTF_004_detalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -5272,7 +5280,11 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
     [VWROL_020].[em_NumCta] AS [em_NumCta], 
     [VWROL_020].[Nombres] AS [Nombres], 
     [VWROL_020].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-    [VWROL_020].[em_codigo] AS [em_codigo]
+    [VWROL_020].[em_codigo] AS [em_codigo], 
+    [VWROL_020].[DescripcionProcesoNomina] AS [DescripcionProcesoNomina], 
+    [VWROL_020].[Descripcion] AS [Descripcion], 
+    [VWROL_020].[pe_FechaIni] AS [pe_FechaIni], 
+    [VWROL_020].[pe_FechaFin] AS [pe_FechaFin]
     FROM [web].[VWROL_020] AS [VWROL_020]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -9186,6 +9198,10 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
             <PropertyRef Name="Valor" />
             <PropertyRef Name="em_tipoCta" />
             <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="pe_FechaIni" />
+            <PropertyRef Name="pe_FechaFin" />
           </Key>
           <Property Name="Secuancia" Type="Int64" />
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
@@ -9201,6 +9217,10 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <Property Name="Nombres" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -11885,6 +11905,10 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <EntitySetMapping Name="VWROL_020">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_020">
               <MappingFragment StoreEntitySet="VWROL_020">
+                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
+                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
                 <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="Nombres" ColumnName="Nombres" />

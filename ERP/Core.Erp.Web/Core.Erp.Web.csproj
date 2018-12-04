@@ -9431,6 +9431,7 @@
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_CmbEmpleado_Cus_AF.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Presupuesto\_GridViewPartial_Presupuesto.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Presupuesto\Index.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_020.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9847,6 +9848,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_018_Rpt.resx">
       <DependentUpon>ROL_018_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_020_Rpt.resx">
+      <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -28,5 +28,9 @@ namespace Core.Erp.Data
         public string Nombres { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string em_codigo { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
+        public string Descripcion { get; set; }
+        public System.DateTime pe_FechaIni { get; set; }
+        public System.DateTime pe_FechaFin { get; set; }
     }
 }
