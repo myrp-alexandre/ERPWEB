@@ -27,7 +27,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<pre_RubroTipo_Info> model = bus_RubroTipo.GetList(IdEmpresa, true);
-            return PartialView("_GridViewPartial_Rubro", model);
+            return PartialView("_GridViewPartial_RubroTipo", model);
         }
         #endregion
 
@@ -50,9 +50,9 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdRubro = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdRubroTipo = 0)
         {
-            pre_RubroTipo_Info model = bus_RubroTipo.GetInfo(IdEmpresa, IdRubro);
+            pre_RubroTipo_Info model = bus_RubroTipo.GetInfo(IdEmpresa, IdRubroTipo);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
@@ -69,9 +69,9 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(int IdEmpresa = 0, int IdRubro = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdRubroTipo = 0)
         {
-            pre_RubroTipo_Info model = bus_RubroTipo.GetInfo(IdEmpresa, IdRubro);
+            pre_RubroTipo_Info model = bus_RubroTipo.GetInfo(IdEmpresa, IdRubroTipo);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
@@ -87,7 +87,6 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             }
             return RedirectToAction("Index");
         }
-
         #endregion
     }
 }

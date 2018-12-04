@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2c74264947894553a2351c4200dbe223" Name="Diagram1">
-        <EntityTypeShape EntityType="Model_produccion.pro_Fabricacion" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_produccion.pro_FabricacionDet" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <AssociationConnector Association="Model_produccion.FK_pro_FabricacionDet_pro_Fabricacion" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model_produccion.pro_Fabricacion" Width="1.5" PointX="0.75" PointY="8.5" />
+        <AssociationConnector Association="Model_produccion.FK_pro_FabricacionDet_pro_Fabricacion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

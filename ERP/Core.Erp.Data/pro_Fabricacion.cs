@@ -32,6 +32,14 @@ namespace Core.Erp.Data
         public Nullable<decimal> ing_IdNumMovi { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
+        public bool Estado { get; set; }
+        public string IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string IdUsuarioModificacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public string IdUsuarioAnulacion { get; set; }
+        public Nullable<System.DateTime> FechaAnulacion { get; set; }
+        public string MotivoAnulacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pro_FabricacionDet> pro_FabricacionDet { get; set; }
