@@ -26,5 +26,8 @@ namespace Core.Erp.Info.RRHH
         public int IdNominaTipoLiqui { get; set; }
         public int IdPeriodo { get; set; }
         public Nullable<double> Sueldo { get; set; }
+
+
+        public List<ro_ArchivosIess_Info> lst_detalle { get; set; }
     }
 }

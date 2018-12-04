@@ -1,6 +1,6 @@
-﻿@model Core.Erp.Info.RRHH.ro_rol_Info
+﻿@model Core.Erp.Info.RRHH.ro_ArchivosIess_Info
 @{
-    ViewBag.Title = "Procesar rol";
+    ViewBag.Title = "Archivos batch IESS";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,16 +9,15 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "ArchivosActualizacionSueldo", FormMethod.Post, new { @class = "form", @role = "form" }))
-{@Html.HiddenFor(q => q.IdEmpresa);
-@Html.HiddenFor(q => q.IdRol);
+{@Html.HiddenFor(q => q.IdEmpresa, new { @id= "IdEmpresa"});
 
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-12">
             <div class="form-group">
                 <label for="FechaInicio">Nómina*</label>
-                @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
-                @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(q => q.IdNominaTipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"),  new { @class = "form-control", @id = "IdNomina_Tipo" })
+                @Html.ValidationMessageFor(q => q.IdNominaTipo, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
@@ -28,8 +27,8 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="FechaInicio">Proceso de la nómina*</label>
-                @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
-                @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(q => q.IdNominaTipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                @Html.ValidationMessageFor(q => q.IdNominaTipoLiqui, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
@@ -39,7 +38,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="FechaInicio">Periodo*</label>
-                @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdPeriodo" })
+                @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"),  new { @class = "form-control", @id = "IdPeriodo" })
                 @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -49,20 +48,7 @@
     <div class="col-md-12">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="ca_descripcion">Descripción*</label>
-                @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Observacion, "", new { @class = "text-danger" })
-
-
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-12">
-            <div class="form-group">
-                @Html.Action("GridViewPartial_contratos_por_vencer", new { Area = "RRHH", Controller = "Contrato", ViewBag.FechaCorte })
+                @Html.Action("GridViewPartial_archivos_iess")
             </div>
         </div>
     </div>
@@ -86,18 +72,21 @@
              cargar_tipo_liquidacion_nomina();
 
         });
-
+    cargar_tipo_liquidacion_nomina();
     $("#IdNomina_TipoLiqui").change(function () {
            $("#IdPeriodo").empty();
             cargar_periodos_x_nomina();
         });
 
-
+    cargar_periodos_x_nomina();
 
         function cargar_tipo_liquidacion_nomina() {
             var datos = {
                 IdNomina: $("#IdNomina_Tipo").val()
             }
+            $("#IdPeriodo").change(function () {
+                get_list();
+            });   
 
             $.ajax({
                 type: 'POST',
@@ -113,6 +102,8 @@
                     $.each(data, function (i, row) {
                         $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
                     });
+                    $("#IdNomina_TipoLiqui").val(2);
+
                 },
                 error: function (error) {
                 }
@@ -139,6 +130,32 @@
                 $.each(data, function (i, row) {
                     $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
                 });
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+     function get_list() {
+         var datos = {
+             IdEmpresa: $("#IdEmpresa").val(),
+             IdNomina_Tipo: $("#IdNomina_Tipo").val(),
+             IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
+            IdPeriodo: $("#IdPeriodo").val()
+
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_list", "ArchivosActualizacionSueldo", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_archivos_iess.PerformCallback();
             },
             error: function (error) {
             }
