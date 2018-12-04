@@ -26,10 +26,9 @@ namespace Core.Erp.Bus.Presupuesto
         {
             try
             {
-                return odata.get_info(IdEmpresa, IdGrupo);
-
                 pre_Grupo_Info info_ = new pre_Grupo_Info();
                 info_ = odata.get_info(IdEmpresa, IdGrupo);
+
                 if (info_ == null)
                     info_ = new pre_Grupo_Info();
                 info_.ListaGrupoDetalle = odata_detalle.GetList(IdEmpresa, IdGrupo);

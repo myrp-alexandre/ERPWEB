@@ -66,8 +66,7 @@ namespace Core.Erp.Data.Presupuesto
                 pre_Grupo_Info info = new pre_Grupo_Info();
                 using (Entities_presupuesto Context = new Entities_presupuesto())
                 {
-                    pre_Grupo Entity = Context.pre_Grupo.Where(q => q.IdGrupo == IdGrupo && q.IdEmpresa == IdEmpresa).FirstOrDefault();
-                    Entity = Context.pre_Grupo.Where(q => q.IdGrupo == IdGrupo && q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                    pre_Grupo Entity = Context.pre_Grupo.Where(q => q.IdGrupo == IdGrupo && q.IdEmpresa == IdEmpresa).FirstOrDefault();                   
 
                     if (Entity == null) return null;
                     info = new pre_Grupo_Info
