@@ -9420,6 +9420,8 @@
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_CmbCuenta_AF.cshtml" />
     <Content Include="Areas\RRHH\Views\ArchivosActualizacionSueldo\Nuevo.cshtml" />
     <Content Include="Areas\RRHH\Views\ArchivosActualizacionSueldo\_GridViewPartial_archivos_iess.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_CmbEmpleado_Enc_AF.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_CmbEmpleado_Cus_AF.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

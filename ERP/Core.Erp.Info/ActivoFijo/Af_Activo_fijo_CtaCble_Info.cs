@@ -14,6 +14,8 @@ namespace Core.Erp.Info.ActivoFijo
         public string IdCatalogo { get; set; }
         public string IdCtaCble { get; set; }
         public double Porcentaje { get; set; }
+        //campos que no existen en la tabla
+        public string pc_Cuenta { get; set; }
 
     }
 }
