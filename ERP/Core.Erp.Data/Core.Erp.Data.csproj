@@ -1303,6 +1303,7 @@
     <Compile Include="RRHH\ro_Acta_Finiquito_Data.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Data.cs" />
     <Compile Include="RRHH\ro_archivosCSV_Data.cs" />
+    <Compile Include="RRHH\ro_ArchivosIess_Data.cs" />
     <Compile Include="RRHH\ro_archivos_bancos_generacion_Data.cs" />
     <Compile Include="RRHH\ro_archivos_bancos_generacion_x_empleado_Data.cs" />
     <Compile Include="RRHH\ro_area_Data.cs" />

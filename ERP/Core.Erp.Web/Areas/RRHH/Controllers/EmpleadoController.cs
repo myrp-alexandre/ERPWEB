@@ -361,4 +361,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
     }
+
+
+
+
+
 }
