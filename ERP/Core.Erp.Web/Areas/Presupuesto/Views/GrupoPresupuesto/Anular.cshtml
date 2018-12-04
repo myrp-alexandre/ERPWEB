@@ -40,7 +40,8 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="MotivoAnulacion">Motivo Anulacion</label>
-                    @Html.TextAreaFor(q => q.MotivoAnulacion, new { @class = "form-control", @id = "MotivoAprobacion", @rows = 1 })
+                    @Html.TextAreaFor(q => q.MotivoAnulacion, new { @class = "form-control", @id = "MotivoAnulacion", @rows = 1 })
+                    @Html.ValidationMessageFor(q => q.MotivoAnulacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
