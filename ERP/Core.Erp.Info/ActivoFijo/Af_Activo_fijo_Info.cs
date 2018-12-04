@@ -10,6 +10,7 @@ namespace Core.Erp.Info.ActivoFijo
     public class Af_Activo_fijo_Info
 
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdActivoFijo { get; set; }
         public string CodActivoFijo { get; set; }
@@ -61,6 +62,9 @@ namespace Core.Erp.Info.ActivoFijo
 
         //Campos que no existen en la tabla
         public string Estado_Proceso_nombre { get; set; }
+        public List<Af_Activo_fijo_CtaCble_Info> LstDet { get; set; }
+        public string IdCtaCble { get; set; }
+        public string pc_Cuenta { get; set; }
     }
 
     public class Af_Activo_fijo_valores_Info

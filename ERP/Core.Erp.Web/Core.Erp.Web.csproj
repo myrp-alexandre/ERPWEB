@@ -9405,7 +9405,6 @@
     <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\_GridViewPartial_Grupo.cshtml" />
     <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\_CmbUsuario.cshtml" />
     <Content Include="Areas\Presupuesto\Views\GrupoPresupuesto\Index.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ParametroAF\_CmbCuenta_Param1.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF2.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF3.cshtml" />
@@ -9414,6 +9413,7 @@
     <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF5.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\TipoAF\_CmbCuenta_TipoAF7.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_activo_fijo_ctacble.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_CmbCuenta_AF.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

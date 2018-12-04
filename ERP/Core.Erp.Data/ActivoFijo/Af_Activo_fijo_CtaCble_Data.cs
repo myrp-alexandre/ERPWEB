@@ -7,7 +7,7 @@ using Core.Erp.Info.ActivoFijo;
 
 namespace Core.Erp.Data.ActivoFijo
 {
-    class Af_Activo_fijo_CtaCble_Data
+  public  class Af_Activo_fijo_CtaCble_Data
     {
         public List<Af_Activo_fijo_CtaCble_Info> GetList(int IdEmpresa, int IdActivoFijo)
         {
