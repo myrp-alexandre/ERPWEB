@@ -217,7 +217,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 {
                                     ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                     {
-                                        NumHoras = Convert.ToDouble(reader.GetString(3)),
+                                        NumHoras = Convert.ToDouble(reader.GetDouble(3)),
                                         pe_cedulaRuc = cedua,
                                         pe_apellido = empleado.Empleado,
                                         em_codigo = empleado.em_codigo,
@@ -231,7 +231,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 {
                                     ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                     {
-                                        NumHoras = Convert.ToDouble(reader.GetString(3)),
+                                        NumHoras = Convert.ToDouble(reader.GetDouble(4)),
                                         pe_cedulaRuc = cedua,
                                         pe_apellido = empleado.Empleado,
                                         em_codigo = empleado.em_codigo,
@@ -245,7 +245,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 {
                                     ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                     {
-                                        NumHoras = Convert.ToDouble(reader.GetString(3)),
+                                        NumHoras = Convert.ToDouble(reader.GetDouble(5)),
                                         pe_cedulaRuc = cedua,
                                         pe_apellido = empleado.Empleado,
                                         em_codigo = empleado.em_codigo,
