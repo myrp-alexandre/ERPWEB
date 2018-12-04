@@ -16,6 +16,7 @@ namespace Core.Erp.Data
     using System.Data.Entity.Core.Objects;
     using System.Linq;
 
+
     public partial class Entities_activo_fijo : DbContext
     {
         public Entities_activo_fijo()
@@ -40,6 +41,7 @@ namespace Core.Erp.Data
         public DbSet<Af_Catalogo> Af_Catalogo { get; set; }
         public DbSet<Af_Parametros> Af_Parametros { get; set; }
         public DbSet<Af_Activo_fijo> Af_Activo_fijo { get; set; }
+        public DbSet<vwAf_Activo_fijo_CtaCble> vwAf_Activo_fijo_CtaCble { get; set; }
     
         public virtual ObjectResult<spACTF_activos_a_depreciar_Result> spACTF_activos_a_depreciar(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_ini, Nullable<System.DateTime> fecha_fin, string idUsuario)
         {

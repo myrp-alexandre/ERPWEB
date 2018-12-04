@@ -259,18 +259,24 @@ namespace Core.Erp.Data.ActivoFijo
                     Entity.IdTipoCatalogo_Ubicacion = info.IdTipoCatalogo_Ubicacion;
                     Entity.IdEmpleadoCustodio = info.IdEmpleadoCustodio;
                     Entity.IdEmpleadoEncargado = info.IdEmpleadoEncargado;
-                    foreach (var item in info.LstDet)
-                    {
-                        Context.Af_Activo_fijo_CtaCble.Add(new Af_Activo_fijo_CtaCble
-                        {
-                            IdActivoFijo = info.IdActivoFijo,
-                            IdCatalogo = item.IdCatalogo,
-                            IdCtaCble = item.IdCtaCble,
-                            Porcentaje = item.Porcentaje,
-                            Secuencia = item.Secuencia,
-                            IdEmpresa = info.IdEmpresa
 
-                        });
+                    var detalle = Context.Af_Activo_fijo_CtaCble.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdActivoFijo == info.IdActivoFijo);
+                    Context.Af_Activo_fijo_CtaCble.RemoveRange(detalle);
+                    if (info.LstDet.Count > 0)
+                    {
+                        foreach (var item in info.LstDet)
+                        {
+                            Context.Af_Activo_fijo_CtaCble.Add(new Af_Activo_fijo_CtaCble
+                            {
+                                IdActivoFijo = info.IdActivoFijo,
+                                IdCatalogo = item.IdCatalogo,
+                                IdCtaCble = item.IdCtaCble,
+                                Porcentaje = item.Porcentaje,
+                                Secuencia = item.Secuencia,
+                                IdEmpresa = info.IdEmpresa
+
+                            });
+                        }
                     }
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
@@ -278,7 +284,7 @@ namespace Core.Erp.Data.ActivoFijo
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
