@@ -280,7 +280,7 @@ namespace Core.Erp.Data.RRHH
             }
             catch (Exception)
             {
-
+                
                 throw;
             }
         }
