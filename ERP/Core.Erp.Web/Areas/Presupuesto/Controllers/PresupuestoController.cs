@@ -66,12 +66,106 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
 
             List<pre_Presupuesto_Info> model = bus_Presupuesto.GetList(IdEmpresa, IdSucursal, ViewBag.FechaInicio, ViewBag.FechaFin, true);
 
+            CargarCombos(IdEmpresa);
             return PartialView("_GridViewPartial_Presupuesto", model);
         }
         #endregion
 
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            pre_Presupuesto_Info model = new pre_Presupuesto_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
+                IdUsuarioCreacion = SessionFixed.IdUsuario,
+                FechaInicio = DateTime.Now.Date.AddMonths(-1),
+                FechaFin = DateTime.Now.Date
+            };
+
+            CargarCombos(model.IdEmpresa);
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Nuevo(pre_Presupuesto_Info model)
+        {
+            //if (!Validar(model, ref mensaje))
+            //{
+            //    CargarCombosAccion(model.IdEmpresa, model.IdSucursal);
+            //    ViewBag.mensaje = mensaje;
+            //    SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+            //    return View(model);
+            //}
+            if (!bus_Presupuesto.GuardarBD(model))
+            {
+                CargarCombos(model.IdEmpresa);
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Modificar(int IdEmpresa = 0, int IdPresupuesto = 0)
+        {
+            CargarCombos(IdEmpresa);
+
+            pre_Presupuesto_Info model = new pre_Presupuesto_Info();
+            model = bus_Presupuesto.GetInfo(IdEmpresa, IdPresupuesto);
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            CargarCombos(model.IdEmpresa);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(pre_Presupuesto_Info model)
+        {
+            model.IdUsuarioModificacion = Session["IdUsuario"].ToString();
+
+            if (!bus_Presupuesto.ModificarBD(model))
+            {
+                CargarCombos(model.IdEmpresa);
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Anular(int IdEmpresa = 0, decimal IdPresupuesto = 0)
+        {
+            pre_Presupuesto_Info model = bus_Presupuesto.GetInfo(IdEmpresa, Convert.ToInt32(IdPresupuesto));
+            if (model == null)
+                return RedirectToAction("Index");
+
+            CargarCombos(model.IdEmpresa);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Anular(pre_Presupuesto_Info model)
+        {
+            model.IdUsuarioAnulacion = SessionFixed.IdUsuario.ToString();
+            if (!bus_Presupuesto.AnularBD(model))
+            {
+                ViewBag.mensaje = "No se ha podido anular el registro";
+                CargarCombos(model.IdEmpresa);
+                return View(model);
+            };
+            return RedirectToAction("Index");
+        }
+        #endregion
     }
 
+
+    /*
     public class pre_Presupuesto_x_grupo_det_Lista
     {
         string Variable = "pre_Presupuesto_x_grupo_det_Info";
@@ -116,5 +210,5 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             List<pre_Presupuesto_x_grupo_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
-    }
+    }*/
 }

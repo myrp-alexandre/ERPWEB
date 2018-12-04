@@ -52,7 +52,7 @@ namespace Core.Erp.Data.Presupuesto
                 }
                 return Lista;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -146,7 +146,7 @@ namespace Core.Erp.Data.Presupuesto
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

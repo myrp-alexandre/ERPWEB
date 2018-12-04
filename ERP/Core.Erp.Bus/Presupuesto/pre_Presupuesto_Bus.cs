@@ -36,5 +36,44 @@ namespace Core.Erp.Bus.Presupuesto
                 throw;
             }
         }
+
+        public bool GuardarBD(pre_Presupuesto_Info info)
+        {
+            try
+            {
+                return oData.GuardarBD(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool ModificarBD(pre_Presupuesto_Info info)
+        {
+            try
+            {
+                return oData.ModificarBD(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool AnularBD(pre_Presupuesto_Info info)
+        {
+            try
+            {
+                return oData.AnularBD(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

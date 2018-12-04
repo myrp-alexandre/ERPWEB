@@ -9425,6 +9425,10 @@
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_CmbEmpleado_Cus_AF.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Presupuesto\_GridViewPartial_Presupuesto.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Presupuesto\Index.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\Presupuesto\_GridViewPartial_PresupuestoDet.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\Presupuesto\Nuevo.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\Presupuesto\Modificar.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\Presupuesto\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

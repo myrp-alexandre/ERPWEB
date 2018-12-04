@@ -19,7 +19,7 @@ namespace Core.Erp.Data.Presupuesto
                 {
                     if (MostrarAnulados == false)
                     {
-                        Lista = db.pre_Presupuesto.Where(q => q.IdEmpresa ==IdEmpresa && q.Estado == true ).Select(q => new pre_Presupuesto_Info
+                        Lista = db.pre_Presupuesto.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.FechaInicio >= FechaInicio && q.FechaFin <= FechaFin && q.Estado == true ).Select(q => new pre_Presupuesto_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdPresupuesto = q.IdPresupuesto,
@@ -37,7 +37,7 @@ namespace Core.Erp.Data.Presupuesto
                     }
                     else
                     {
-                        Lista = db.pre_Presupuesto.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new pre_Presupuesto_Info
+                        Lista = db.pre_Presupuesto.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.FechaInicio >= FechaInicio && q.FechaFin <= FechaFin).Select(q => new pre_Presupuesto_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdPresupuesto = q.IdPresupuesto,
@@ -56,7 +56,7 @@ namespace Core.Erp.Data.Presupuesto
                 }
                 return Lista;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -109,6 +109,97 @@ namespace Core.Erp.Data.Presupuesto
                         ID = Convert.ToInt32(Lista.Max() + 1);
                 }
                 return ID;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool GuardarBD(pre_Presupuesto_Info info)
+        {
+            try
+            {
+                using (Entities_presupuesto db = new Entities_presupuesto())
+                {
+                    db.pre_Presupuesto.Add(new pre_Presupuesto
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdPresupuesto = info.IdPresupuesto = get_id(info.IdEmpresa),
+                        IdSucursal = info.IdSucursal,
+                        Observacion = info.Observacion,
+                        FechaInicio = info.FechaInicio,
+                        FechaFin = info.FechaInicio,
+                        EstadoCierre = info.EstadoCierre,
+                        Estado = true,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = DateTime.Now
+                    });
+
+                    db.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool ModificarBD(pre_Presupuesto_Info info)
+        {
+            try
+            {
+                using (Entities_presupuesto db = new Entities_presupuesto())
+                {
+                    pre_Presupuesto entity = db.pre_Presupuesto.Where(q => q.IdPresupuesto == info.IdPresupuesto && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+
+                    if (entity == null)
+                    {
+                        return false;
+                    }
+
+                    entity.IdSucursal = info.IdSucursal;
+                    entity.FechaInicio = info.FechaInicio;
+                    entity.FechaFin = info.FechaFin;
+                    entity.EstadoCierre = info.EstadoCierre;
+                    entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    entity.FechaModificacion = DateTime.Now;
+
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool AnularBD(pre_Presupuesto_Info info)
+        {
+            try
+            {
+                using (Entities_presupuesto db = new Entities_presupuesto())
+                {
+                    pre_Presupuesto entity = db.pre_Presupuesto.Where(q => q.IdPresupuesto == info.IdPresupuesto && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+
+                    if (entity == null)
+                    {
+                        return false;
+                    }
+
+                    entity.Estado = false;
+                    entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
+                    entity.FechaAnulacion = DateTime.Now;
+                    entity.MotivoAnulacion = info.MotivoAnulacion;
+
+                    db.SaveChanges();
+                }
+                return true;
             }
             catch (Exception)
             {
