@@ -1,4 +1,5 @@
-﻿using Core.Erp.Info.Presupuesto;
+﻿using Core.Erp.Data.Inventario;
+using Core.Erp.Info.Presupuesto;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ namespace Core.Erp.Data.Presupuesto
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -123,6 +124,23 @@ namespace Core.Erp.Data.Presupuesto
                         FechaCreacion = DateTime.Now
                     });
 
+                    //detalle
+                    if (info.ListaGrupoDetalle != null)
+                    {
+                        int Secuencia = 1;
+                        foreach (var item in info.ListaGrupoDetalle)
+                        {
+                            db.pre_Grupo_x_seg_usuario.Add(new pre_Grupo_x_seg_usuario
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdGrupo = info.IdGrupo,
+                                Secuencia = Secuencia,
+                                IdUsuario = item.IdUsuario,
+                                AsignaCuentas = item.AsignaCuentas
+                            });
+
+                        }
+                    }
                     db.SaveChanges();
                 }
 
@@ -151,6 +169,25 @@ namespace Core.Erp.Data.Presupuesto
                     entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     entity.FechaModificacion = DateTime.Now;
 
+                    var lst_det_grupo = db.pre_Grupo_x_seg_usuario.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdGrupo == info.IdGrupo).ToList();
+                    db.pre_Grupo_x_seg_usuario.RemoveRange(lst_det_grupo);
+
+                    if (info.ListaGrupoDetalle != null)
+                    {
+                        int Secuencia = 1;
+
+                        foreach (var item in info.ListaGrupoDetalle)
+                        {
+                            db.pre_Grupo_x_seg_usuario.Add(new pre_Grupo_x_seg_usuario
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdGrupo = info.IdGrupo,
+                                Secuencia = Secuencia++,
+                                IdUsuario = item.IdUsuario,
+                                AsignaCuentas = item.AsignaCuentas
+                            });
+                        }
+                    }
                     db.SaveChanges();
                 }
                 return true;

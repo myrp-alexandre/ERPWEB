@@ -20,6 +20,5 @@ namespace Core.Erp.Data
         public string IdUsuario { get; set; }
         public bool AsignaCuentas { get; set; }
     
-        public virtual pre_Grupo pre_Grupo { get; set; }
     }
 }

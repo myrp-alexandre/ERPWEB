@@ -32,7 +32,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         public ActionResult GridViewPartial_Grupo()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<pre_Grupo_Info> model = bus_Grupo.GetList(IdEmpresa, true);
+            List<pre_Grupo_Info> model = bus_Grupo.GetList(IdEmpresa, false);
 
             return PartialView("_GridViewPartial_Grupo", model);
         }
