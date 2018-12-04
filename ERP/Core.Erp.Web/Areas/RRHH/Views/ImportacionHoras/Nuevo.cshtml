@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.RRHH.ro_EmpleadoNovedadCargaMasiva_Info
+﻿@model Core.Erp.Info.RRHH.ro_HorasProfesores_Info
 @{
     ViewBag.Title = "Nueva carga de horas";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -122,29 +122,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-10">
-                <div class="form-group">
-                    <label for="IdCargo">Rubro*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdRubro, settings =>
-                   {
-                       settings.Name = "IdRubro";
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                       settings.Properties.Columns.Add("ru_codRolGen", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                       settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdRubro";
-                       settings.Properties.ValueType = typeof(string);
-                       settings.Properties.TextField = "ru_descripcion";
-                       //Boton para seleccionar ningun registro
-                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                       settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                   }).BindList(ViewBag.lst_rubro).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
-                </div>
-            </div>
         </div>
     </div>
 
@@ -185,7 +162,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="detalle">Detalle de la novedad</label>
-                    @Html.Action("GridViewPartial_importacion_novedades_det")
+                    @Html.Action("GridViewPartial_importacion_horas_det")
                     @Html.ValidationMessageFor(q => q.detalle, "", new { @class = "text-danger" })
                 </div>
             </div>
