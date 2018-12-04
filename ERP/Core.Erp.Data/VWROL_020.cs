@@ -12,25 +12,21 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VWROL_002
+    public partial class VWROL_020
     {
-        public string NombreCompleto { get; set; }
-        public string Ruc { get; set; }
-        public string RubroDescripcion { get; set; }
+        public Nullable<long> Secuancia { get; set; }
         public int IdEmpresa { get; set; }
+        public decimal IdArchivo { get; set; }
+        public int IdNomina { get; set; }
         public int IdNominaTipo { get; set; }
-        public int IdNominaTipoLiqui { get; set; }
         public int IdPeriodo { get; set; }
-        public decimal IdEmpleado { get; set; }
+        public int IdCuentaBancaria { get; set; }
+        public int IdProceso { get; set; }
         public double Valor { get; set; }
-        public string Cargo { get; set; }
-        public string pe_apellido { get; set; }
-        public string pe_nombre { get; set; }
-        public System.DateTime pe_FechaIni { get; set; }
-        public System.DateTime pe_FechaFin { get; set; }
-        public string ru_tipo { get; set; }
-        public string em_status { get; set; }
-        public int ru_orden { get; set; }
-        public string em_ruc { get; set; }
+        public string em_tipoCta { get; set; }
+        public string em_NumCta { get; set; }
+        public string Nombres { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string em_codigo { get; set; }
     }
 }

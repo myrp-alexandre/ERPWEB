@@ -3149,6 +3149,36 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_019' no tiene definida ningu
           <Property Name="FechaFin" Type="date" />
           <Property Name="ru_codRolGen" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWROL_020">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="IdNomina" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdCuentaBancaria" />
+            <PropertyRef Name="IdProceso" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="em_tipoCta" />
+            <PropertyRef Name="pe_cedulaRuc" />
+          </Key>
+          <Property Name="Secuancia" Type="bigint" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdArchivo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdNomina" Type="int" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="IdCuentaBancaria" Type="int" Nullable="false" />
+          <Property Name="IdProceso" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="em_tipoCta" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="em_NumCta" Type="varchar" MaxLength="50" />
+          <Property Name="Nombres" Type="varchar" MaxLength="201" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="em_codigo" Type="varchar" MaxLength="50" />
+        </EntityType>
         <Function Name="SPACTF_004_detalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="Fecha_corte" Type="datetime" Mode="In" />
@@ -5226,6 +5256,24 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_019' no tiene definida ningu
     [VWROL_019].[FechaFin] AS [FechaFin], 
     [VWROL_019].[ru_codRolGen] AS [ru_codRolGen]
     FROM [web].[VWROL_019] AS [VWROL_019]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWROL_020" EntityType="Self.VWROL_020" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWROL_020].[Secuancia] AS [Secuancia], 
+    [VWROL_020].[IdEmpresa] AS [IdEmpresa], 
+    [VWROL_020].[IdArchivo] AS [IdArchivo], 
+    [VWROL_020].[IdNomina] AS [IdNomina], 
+    [VWROL_020].[IdNominaTipo] AS [IdNominaTipo], 
+    [VWROL_020].[IdPeriodo] AS [IdPeriodo], 
+    [VWROL_020].[IdCuentaBancaria] AS [IdCuentaBancaria], 
+    [VWROL_020].[IdProceso] AS [IdProceso], 
+    [VWROL_020].[Valor] AS [Valor], 
+    [VWROL_020].[em_tipoCta] AS [em_tipoCta], 
+    [VWROL_020].[em_NumCta] AS [em_NumCta], 
+    [VWROL_020].[Nombres] AS [Nombres], 
+    [VWROL_020].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [VWROL_020].[em_codigo] AS [em_codigo]
+    FROM [web].[VWROL_020] AS [VWROL_020]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -7927,6 +7975,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_019' no tiene definida ningu
           <EntitySet Name="VWINV_014" EntityType="Model_reportes.VWINV_014" />
           <EntitySet Name="VWCOMP_001" EntityType="Model_reportes.VWCOMP_001" />
           <EntitySet Name="VWROL_019" EntityType="Model_reportes.VWROL_019" />
+          <EntitySet Name="VWROL_020" EntityType="Model_reportes.VWROL_020" />
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -9124,6 +9173,34 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_019' no tiene definida ningu
           <Property Name="FechaIni" Type="DateTime" Precision="0" />
           <Property Name="FechaFin" Type="DateTime" Precision="0" />
           <Property Name="ru_codRolGen" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VWROL_020">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="IdNomina" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdCuentaBancaria" />
+            <PropertyRef Name="IdProceso" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="em_tipoCta" />
+            <PropertyRef Name="pe_cedulaRuc" />
+          </Key>
+          <Property Name="Secuancia" Type="Int64" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNomina" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdCuentaBancaria" Type="Int32" Nullable="false" />
+          <Property Name="IdProceso" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="em_tipoCta" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="em_NumCta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -11802,6 +11879,26 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_019' no tiene definida ningu
                 <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
                 <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWROL_020">
+            <EntityTypeMapping TypeName="Model_reportes.VWROL_020">
+              <MappingFragment StoreEntitySet="VWROL_020">
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
+                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IdProceso" ColumnName="IdProceso" />
+                <ScalarProperty Name="IdCuentaBancaria" ColumnName="IdCuentaBancaria" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Secuancia" ColumnName="Secuancia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

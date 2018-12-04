@@ -366,6 +366,7 @@
     <Compile Include="Reportes\RRHH\ROL_017_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_019_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_018_Info.cs" />
+    <Compile Include="Reportes\RRHH\ROL_020_Info.cs" />
     <Compile Include="RRHH\MTE\ro_archivosCSV_Info.cs" />
     <Compile Include="RRHH\RDEP\Rdep.cs" />
     <Compile Include="RRHH\RDEP\Rdep_Info.cs" />
