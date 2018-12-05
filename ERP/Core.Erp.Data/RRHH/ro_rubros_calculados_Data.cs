@@ -58,7 +58,6 @@ namespace Core.Erp.Data.RRHH
                         IdRubro_tot_egr = Entity.IdRubro_tot_egr,
                         IdRubro_tot_ing = Entity.IdRubro_tot_ing,
                         IdRubro_tot_pagar = Entity.IdRubro_tot_pagar,
-
                         IdRubro_aporte_patronal = Entity.IdRubro_aporte_patronal,
                         IdRubro_fondo_reserva = Entity.IdRubro_fondo_reserva,
                         IdRubro_prov_vac = Entity.IdRubro_prov_vac,
@@ -68,7 +67,9 @@ namespace Core.Erp.Data.RRHH
                         IdRubro_DIII = Entity.IdRubro_DIII,
                         IdRubro_DIV = Entity.IdRubro_DIV,
                         IdRubro_IR = Entity.IdRubro_IR,
-                        IdRubro_FR = Entity.IdRubro_FR
+                        IdRubro_horas_matutina=Entity.IdRubro_horas_matutina,
+                        IdRubro_horas_nocturna=Entity.IdRubro_horas_nocturna,
+                        IdRubro_horas_vespertina=Entity.IdRubro_horas_vespertina
                     };
                 }
 
@@ -127,9 +128,11 @@ namespace Core.Erp.Data.RRHH
                         IdRubro_DIII = info.IdRubro_DIII,
                         IdRubro_DIV = info.IdRubro_DIV,
                         IdRubro_IR = info.IdRubro_IR,
-                        IdRubro_FR = info.IdRubro_FR
+                        IdRubro_horas_nocturna = info.IdRubro_horas_nocturna,
+                        IdRubro_horas_vespertina = info.IdRubro_horas_vespertina,
+                        IdRubro_horas_matutina = info.IdRubro_horas_matutina
 
-    };
+                    };
                     Context.ro_rubros_calculados.Add(Entity);
                     Context.SaveChanges();
                 }
@@ -166,7 +169,10 @@ namespace Core.Erp.Data.RRHH
                          Entity.IdRubro_DIII = info.IdRubro_DIII;
                          Entity.IdRubro_DIV = info.IdRubro_DIV;
                          Entity.IdRubro_IR = info.IdRubro_IR;
-                         Entity.IdRubro_FR = info.IdRubro_FR;
+                         Entity.IdRubro_horas_nocturna = info.IdRubro_horas_nocturna;
+                    Entity.IdRubro_horas_vespertina = info.IdRubro_horas_vespertina;
+                    Entity.IdRubro_horas_matutina = info.IdRubro_horas_matutina;
+
                     Context.SaveChanges();
                 }
 

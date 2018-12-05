@@ -7,28 +7,33 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Presupuesto
 {
-    public class pre_Grupo_Info
+    public class pre_Presupuesto_Info
     {
         public decimal IdTransaccionSession { get; set; }
-        
+
         public int IdEmpresa { get; set; }
+        public decimal IdPresupuesto { get; set; }
+        [Required(ErrorMessage = ("El campo sucursal es obligatorio"))]
+        public int IdSucursal { get; set; }
+        [Required(ErrorMessage = ("El campo periodo es obligatorio"))]
+        public decimal IdPeriodo { get; set; }
+        [Required(ErrorMessage = ("El campo grupo es obligatorio"))]
         public int IdGrupo { get; set; }
-        [Required(ErrorMessage = ("El campo descripción es obligatorio"))]
-        [StringLength(150, MinimumLength = 1, ErrorMessage = ("El campo descripción debe tener mínimo 1 caracter máximo 150"))]
-        public string Descripcion { get; set; }
+        public string Observacion { get; set; }
         public bool Estado { get; set; }
+        public double MontoSolicitado { get; set; }
+        public double MontoAprobado { get; set; }
         public string IdUsuarioCreacion { get; set; }
-        public DateTime FechaCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
-        public DateTime FechaModificacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
         public string IdUsuarioAnulacion { get; set; }
-        public DateTime FechaAnulacion { get; set; }
+        public Nullable<System.DateTime> FechaAnulacion { get; set; }
         [Required(ErrorMessage = ("El campo motivo de anulación es obligatorio"))]
         [StringLength(150, MinimumLength = 1, ErrorMessage = ("El campo motivo de anulación debe tener mínimo 1 caracter máximo 500"))]
         public string MotivoAnulacion { get; set; }
 
-        #region Campos que no existen en la tabla
-        public List<pre_Grupo_x_seg_usuario_Info> ListaGrupoDetalle { get; set; }        
-        #endregion
+
+        public List<pre_PresupuestoDet_Info> ListaPresupuestoDet { get; set; }
     }
 }

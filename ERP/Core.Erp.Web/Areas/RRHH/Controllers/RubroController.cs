@@ -191,6 +191,29 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+        
+    }
+
+
+    public class ro_rubro_tipo_Info_list
+    {
+        string variable = "ro_rubro_tipo_Info";
+        public List<ro_rubro_tipo_Info> get_list()
+        {
+            if (HttpContext.Current.Session[variable] == null)
+            {
+                List<ro_rubro_tipo_Info> list = new List<ro_rubro_tipo_Info>();
+
+                HttpContext.Current.Session[variable] = list;
+            }
+            return (List<ro_rubro_tipo_Info>)HttpContext.Current.Session[variable];
+        }
+
+        public void set_list(List<ro_rubro_tipo_Info> list)
+        {
+            HttpContext.Current.Session[variable] = list;
+        }
+
 
     }
 }

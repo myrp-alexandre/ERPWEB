@@ -22,7 +22,6 @@ namespace Core.Erp.Info.Inventario
         public bool Aparece_modu_Ventas { get; set; }
         public bool Aparece_modu_Compras { get; set; }
         public bool Aparece_modu_Inventario { get; set; }
-        public bool Aparece_modu_Activo_F { get; set; }
         public bool Aparece_fabricacion { get; set; }
 
         #region Campos auditoria

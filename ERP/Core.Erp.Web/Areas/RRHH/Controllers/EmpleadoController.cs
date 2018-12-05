@@ -369,6 +369,27 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
 
+    public class ro_empleado_info_list
+    {
+        string variable = "ro_empleado_Info";
+        public List<ro_empleado_Info> get_list()
+        {
+            if (HttpContext.Current.Session[variable] == null)
+            {
+                List<ro_empleado_Info> list = new List<ro_empleado_Info>();
+
+                HttpContext.Current.Session[variable] = list;
+            }
+            return (List<ro_empleado_Info>)HttpContext.Current.Session[variable];
+        }
+
+        public void set_list(List<ro_empleado_Info> list)
+        {
+            HttpContext.Current.Session[variable] = list;
+        }
+
+
+    }
 
 
 }

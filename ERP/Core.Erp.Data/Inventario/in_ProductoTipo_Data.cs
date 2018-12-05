@@ -74,7 +74,6 @@ namespace Core.Erp.Data.Inventario
                         tp_ManejaInven = Entity.tp_ManejaInven,
                         Aparece_fabricacion = Entity.Aparece_fabricacion,
                         Estado = Entity.Estado,
-                        Aparece_modu_Activo_F = Entity.Aparece_modu_Activo_F,
                         Aparece_modu_Compras = Entity.Aparece_modu_Compras,
                         Aparece_modu_Inventario = Entity.Aparece_modu_Inventario,
                         Aparece_modu_Ventas = Entity.Aparece_modu_Ventas
@@ -130,7 +129,6 @@ namespace Core.Erp.Data.Inventario
                         tp_EsCombo = info.tp_EsCombo_bool == true ? "S" : "N",
                         Aparece_fabricacion = info.Aparece_fabricacion,
                         Estado = "A",
-                        Aparece_modu_Activo_F = info.Aparece_modu_Activo_F,
                         Aparece_modu_Compras = info.Aparece_modu_Compras,
                         Aparece_modu_Inventario = info.Aparece_modu_Inventario,
                         Aparece_modu_Ventas = info.Aparece_modu_Ventas,
@@ -162,7 +160,6 @@ namespace Core.Erp.Data.Inventario
                     Entity.tp_ManejaInven = info.tp_ManejaInven_bool == true ? "S" : "N";
                     Entity.tp_EsCombo = info.tp_EsCombo_bool == true ? "S" : "N";
                     Entity.Aparece_fabricacion = info.Aparece_fabricacion;
-                    Entity.Aparece_modu_Activo_F = info.Aparece_modu_Activo_F;
                     Entity.Aparece_modu_Compras = info.Aparece_modu_Compras;
                     Entity.Aparece_modu_Inventario = info.Aparece_modu_Inventario;
                     Entity.Aparece_modu_Ventas = info.Aparece_modu_Ventas;

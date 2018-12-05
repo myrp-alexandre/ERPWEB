@@ -2,13 +2,15 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_fabricacion";
-        settings.CallbackRouteValues = new { Controller = "Fabricacion", Action = "GridViewPartial_fabricacion" };
-        settings.KeyFieldName = "IdFabricacion";
+        settings.Name = "GridViewPartial_Presupuesto";
+        settings.CallbackRouteValues = new { Controller = "Presupuesto", Action = "GridViewPartial_Presupuesto" };
+        settings.KeyFieldName = "IdPresupuesto";
         settings.Width = Unit.Percentage(100);
+
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+        //CConfiguracion responsive
 
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
@@ -64,8 +66,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdFabricacion = DataBinder.Eval(tc.DataItem, "IdFabricacion")  }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdFabricacion = DataBinder.Eval(tc.DataItem, "IdFabricacion")},
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPresupuesto = DataBinder.Eval(tc.DataItem, "IdPresupuesto") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPresupuesto = DataBinder.Eval(tc.DataItem, "IdPresupuesto") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -78,17 +80,15 @@
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
+            c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdFabricacion", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Fecha";
-            column.Caption = "Fecha";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-            column.Width = Unit.Percentage(7);
-        });
-        settings.Columns.Add("Observacion", "Descripción").Width = Unit.Percentage(60);
+
+
+        settings.Columns.Add("IdPresupuesto", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdSucursal", "Sucursal").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdPeriodo", "Periodo").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdGrupo", "Grupo").Width = Unit.Percentage(20);
+        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";

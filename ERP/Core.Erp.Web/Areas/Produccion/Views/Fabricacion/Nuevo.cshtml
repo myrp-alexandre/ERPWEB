@@ -12,7 +12,7 @@
 @using (Html.BeginForm("Nuevo", "Fabricacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id="IdEmpresa"})
-    @Html.HiddenFor(q => q.IdFabricacion)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     <div class="row">
         <div class="col-md-3">
@@ -77,7 +77,7 @@
             </div>
         </div>
 
-            <div class="col-md-6">
+        <div class="col-md-6">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="">Desde*</label>
@@ -118,10 +118,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label for=""> </label>
-                        <button type="button" class="btn btn-primary form-control" onclick="BuscarFacturas();">Productos facturados</button>
+                        <label for=""></label>
+                        <button type="button" class="btn btn-primary form-control" >Productos facturados</button>
                     </div>
                 </div>
             </div>
@@ -143,9 +143,16 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
-                    @Html.Action("GridViewPartial_fabricacion_det")
+                    <label for="">Materia prima</label>
+                    @Html.Action("GridViewPartial_fabricacion_det_egr")
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Producto terminado</label>
+                        @Html.Action("GridViewPartial_fabricacion_det_ing")
                 </div>
             </div>
         </div>
