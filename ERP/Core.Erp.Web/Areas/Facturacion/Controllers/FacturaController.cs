@@ -1,8 +1,10 @@
 ﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.CuentasPorCobrar;
 using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Inventario;
 using Core.Erp.Bus.SeguridadAcceso;
+using Core.Erp.Info.CuentasPorCobrar;
 using Core.Erp.Info.Facturacion;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
@@ -49,6 +51,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         tbl_TransaccionesAutorizadas_Bus bus_transaccionesAut = new tbl_TransaccionesAutorizadas_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+        cxc_cobro_tipo_Bus bus_tipo_cobro = new cxc_cobro_tipo_Bus();
         #endregion
 
         #region Index
@@ -143,6 +146,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             var lst_forma_pago = bus_forma_pago.get_list(false);
             ViewBag.lst_forma_pago = lst_forma_pago;
+
+            var lst_tipo_efectivo = bus_tipo_cobro.get_list(false,cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar.EFEC);
+            ViewBag.lst_tipo_efectivo = lst_tipo_efectivo;
+
+            var lst_tipo_cobro = bus_tipo_cobro.get_list(false, cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar.SINRET);
+            ViewBag.lst_tipo_cobro = lst_tipo_cobro;
         }
         private bool validar(fa_factura_Info i_validar, ref string msg)
         {

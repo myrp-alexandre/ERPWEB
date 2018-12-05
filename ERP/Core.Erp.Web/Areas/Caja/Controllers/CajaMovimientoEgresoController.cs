@@ -131,7 +131,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst_caja = bus_caja.get_list(IdEmpresa, false);
             ViewBag.lst_caja = lst_caja;
 
-            var lst_cobro = bus_cobro.get_list(false);
+            var lst_cobro = bus_cobro.get_list(false, cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar.SINRET);
             ViewBag.lst_cobro = lst_cobro;
 
             Dictionary<string, string> lst_tipo_personas = new Dictionary<string, string>();
