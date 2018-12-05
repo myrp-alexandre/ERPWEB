@@ -90,7 +90,7 @@ namespace Core.Erp.Data
         public virtual in_UnidadMedida in_UnidadMedida1 { get; set; }
         public virtual ICollection<in_transferencia_det> in_transferencia_det { get; set; }
         public virtual ICollection<in_producto_x_tb_bodega> in_producto_x_tb_bodega { get; set; }
-        public virtual in_ProductoTipo in_ProductoTipo { get; set; }
         public virtual ICollection<in_ConsignacionDet> in_ConsignacionDet { get; set; }
+        public virtual in_ProductoTipo in_ProductoTipo { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.CuentasPorCobrar;
+using Core.Erp.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,36 +10,97 @@ namespace Core.Erp.Data.CuentasPorCobrar
 {
     public class cxc_cobro_tipo_Data
     {
-        public List<cxc_cobro_tipo_Info> get_list(bool mostrar_anulados)
+        public List<cxc_cobro_tipo_Info> get_list(bool mostrar_anulados, cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar Motivo)
         {
             try
             {
                 List<cxc_cobro_tipo_Info> Lista;
                 using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
                 {
-                    if (mostrar_anulados)
-                        Lista = (from q in Context.cxc_cobro_tipo
-                                 select new cxc_cobro_tipo_Info
-                                 {
-                                     IdCobro_tipo = q.IdCobro_tipo,
-                                     tc_abreviatura = q.tc_abreviatura,
-                                     tc_descripcion = q.tc_descripcion,
-                                     Estado = q.Estado,
+                    string IdMotivoCobro = Motivo.ToString();
+                    if (Motivo == cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar.TODOS)
+                    {
+                        if (mostrar_anulados)
+                            Lista = (from q in Context.cxc_cobro_tipo
+                                     select new cxc_cobro_tipo_Info
+                                     {
+                                         IdCobro_tipo = q.IdCobro_tipo,
+                                         tc_abreviatura = q.tc_abreviatura,
+                                         tc_descripcion = q.tc_descripcion,
+                                         Estado = q.Estado,
 
-                                     EstadoBool = q.Estado == "A" ? true : false
-                                 }).ToList();
+                                         EstadoBool = q.Estado == "A" ? true : false
+                                     }).ToList();
+                        else
+                            Lista = (from q in Context.cxc_cobro_tipo
+                                     where q.Estado == "A"
+                                     select new cxc_cobro_tipo_Info
+                                     {
+                                         IdCobro_tipo = q.IdCobro_tipo,
+                                         tc_abreviatura = q.tc_abreviatura,
+                                         tc_descripcion = q.tc_descripcion,
+                                         Estado = q.Estado,
+
+                                         EstadoBool = q.Estado == "A" ? true : false
+                                     }).ToList();
+                    }else
+                    if(Motivo == cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar.SINRET)
+                    {
+                        if (mostrar_anulados)
+                            Lista = (from q in Context.cxc_cobro_tipo
+                                     where q.IdMotivo_tipo_cobro != "RET"
+                                     select new cxc_cobro_tipo_Info
+                                     {
+                                         IdCobro_tipo = q.IdCobro_tipo,
+                                         tc_abreviatura = q.tc_abreviatura,
+                                         tc_descripcion = q.tc_descripcion,
+                                         Estado = q.Estado,
+
+                                         EstadoBool = q.Estado == "A" ? true : false
+                                     }).ToList();
+                        else
+                            Lista = (from q in Context.cxc_cobro_tipo
+                                     where q.Estado == "A" &&
+                                     q.IdMotivo_tipo_cobro != "RET"
+                                     select new cxc_cobro_tipo_Info
+                                     {
+                                         IdCobro_tipo = q.IdCobro_tipo,
+                                         tc_abreviatura = q.tc_abreviatura,
+                                         tc_descripcion = q.tc_descripcion,
+                                         Estado = q.Estado,
+
+                                         EstadoBool = q.Estado == "A" ? true : false
+                                     }).ToList();
+                    }
                     else
-                        Lista = (from q in Context.cxc_cobro_tipo
-                                 where q.Estado == "A"
-                                 select new cxc_cobro_tipo_Info
-                                 {
-                                     IdCobro_tipo = q.IdCobro_tipo,
-                                     tc_abreviatura = q.tc_abreviatura,
-                                     tc_descripcion = q.tc_descripcion,
-                                     Estado = q.Estado,
+                    {
+                        if (mostrar_anulados)
+                            Lista = (from q in Context.cxc_cobro_tipo
+                                     where q.IdMotivo_tipo_cobro == IdMotivoCobro
+                                     select new cxc_cobro_tipo_Info
+                                     {
+                                         IdCobro_tipo = q.IdCobro_tipo,
+                                         tc_abreviatura = q.tc_abreviatura,
+                                         tc_descripcion = q.tc_descripcion,
+                                         Estado = q.Estado,
 
-                                     EstadoBool = q.Estado == "A" ? true : false
-                                 }).ToList();
+                                         EstadoBool = q.Estado == "A" ? true : false
+                                     }).ToList();
+                        else
+                            Lista = (from q in Context.cxc_cobro_tipo
+                                     where q.Estado == "A" &&
+                                     q.IdMotivo_tipo_cobro == IdMotivoCobro
+                                     select new cxc_cobro_tipo_Info
+                                     {
+                                         IdCobro_tipo = q.IdCobro_tipo,
+                                         tc_abreviatura = q.tc_abreviatura,
+                                         tc_descripcion = q.tc_descripcion,
+                                         Estado = q.Estado,
+
+                                         EstadoBool = q.Estado == "A" ? true : false
+                                     }).ToList();
+                    }
+                    
                 }
                 return Lista;
             }

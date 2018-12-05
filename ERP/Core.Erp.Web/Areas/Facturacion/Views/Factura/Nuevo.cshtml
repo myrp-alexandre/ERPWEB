@@ -35,6 +35,10 @@
         });
     });
 
+    function MostrarModalCobros() {
+        $("#DivCobros").modal("show");
+    }
+
     function ValidarCliente() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -486,7 +490,7 @@
             }
         });
             GridView_PFactura_det.PerformCallback();
-        $("#ProformasModal").modal("show");
+            $("#ProformasModal").modal("show");
             }
     }
 
@@ -552,19 +556,63 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.vt_tipoDoc)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-
-    <div class="row" id="DivCobros" hidden>
-        <div class="col-md-6">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="">Usuario administrador</label>
-                    @Html.TextBoxFor(q => q.IdUsuarioAut, new { @class = "form-control", @id = "IdUsuarioAut" })
+    
+    <div class="modal fade" id="DivCobros" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Aplicar cobro</h4>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="">Contraseña</label>
-                    @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @id = "contrasena_admin" })
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="IdCobro_tipo">Tipo cobro*</label>
+                                    @Html.DropDownListFor(q => q.IdCobro_tipo, new SelectList(ViewBag.lst_tipo_efectivo, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
+                                    @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="txtDescuento">% Desc.</label>
+                                    <label id="txtDescuento" class="form-control">0</label>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="btn_buscar">          </label>
+                                    <button type="button" class="btn btn-primary form-control" id="btn_descuento" title="Aplicar descuento">
+                                        <i class="fa fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-12">                                
+                                <div class="col-md-2">                                    
+                                        <label for="txtTotal">Total</label>
+                                        <label id="txtTotal" class="form-control">0</label>                                    
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="vt_ValorEfectivo">Valor efectivo</label>
+                                    @Html.TextBoxFor(q => q.vt_ValorEfectivo, new { @class = "form-control", @id = "vt_ValorEfectivo" })
+                                    @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="txtCambio">Cambio</label>
+                                        <label id="txtCambio" class="form-control">0</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                     
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -769,14 +817,14 @@
                     @Html.ValidationMessageFor(q => q.vt_NumFactura, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdProforma">    </label>
+                    <label for="IdProforma">       </label>
                     @Html.TextBoxFor(q => q.IdProforma, new { @class = "form-control", @id = "IdProforma", @placeholder = "# Proforma" })
                     @Html.ValidationMessageFor(q => q.IdProforma, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="btn_buscar">                    </label>
                     <button type="button" class="btn btn-primary form-control" id="btn_buscar" onclick="MostrarModalProformas();" title="Buscar proformas">
@@ -784,7 +832,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="btn_desbloquear">         </label>
                     <button type="button" class="btn btn-primary form-control" id="btn_desbloquear" onclick="MostrarModalDesbloqueo();" title="Desbloquear precios">
@@ -937,7 +985,7 @@
     </div>
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-primary" onclick="MostrarModalCobros();">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Factura",new { Area = "Facturacion" },null)">Cancelar</a>
     </div>
     @section Scripts {

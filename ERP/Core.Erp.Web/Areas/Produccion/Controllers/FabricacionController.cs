@@ -48,6 +48,13 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             ViewBag.lst_bodega = lst_bodega;
 
         }
+        private void cargar_combos_detalle()
+        {
+            in_UnidadMedida_Bus bus_unidad = new in_UnidadMedida_Bus();
+            var lst_unidad = bus_unidad.get_list(false);
+            ViewBag.lst_unidad = lst_unidad;
+        }
+
         #endregion
         #region Acciones
         public ActionResult Nuevo()
@@ -174,18 +181,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
-        #region Detalle
-        private void cargar_combos_detalle()
-        {
-            in_UnidadMedida_Bus bus_unidad = new in_UnidadMedida_Bus();
-            var lst_unidad = bus_unidad.get_list(false);
-            ViewBag.lst_unidad = lst_unidad;
-
-            Dictionary<string, string> lst_signo = new Dictionary<string, string>();
-            lst_signo.Add("+", "+");
-            lst_signo.Add("-", "-");
-            ViewBag.lst_signo = lst_signo;
-        }
+        #region Detalle_ing
 
 
         public ActionResult GridViewPartial_fabricacion_det_ing(decimal IdFabricacion = 0)
@@ -235,21 +231,56 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             return PartialView("_GridViewPartial_fabricacion_det_ing", model);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        #endregion
+        #region Detalle_egr
+        public ActionResult GridViewPartial_fabricacion_det_egr(decimal IdFabricacion = 0)
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            cargar_combos_detalle();
+            pro_Fabricacion_Info model = new pro_Fabricacion_Info();
+            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "-").ToList();
+            return PartialView("_GridViewPartial_fabricacion_det_egr", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNewEgreso([ModelBinder(typeof(DevExpressEditorsBinder))] pro_FabricacionDet_Info info_det)
+        {
+            var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
+            if (producto != null)
+                info_det.pr_descripcion = producto.pr_descripcion;
+            info_det.Signo = "-";
+            if (ModelState.IsValid)
+                List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            pro_Fabricacion_Info model = new pro_Fabricacion_Info();
+            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "-").ToList();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_fabricacion_det_egr", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateEgreso([ModelBinder(typeof(DevExpressEditorsBinder))] pro_FabricacionDet_Info info_det)
+        {
+            var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
+            if (producto != null)
+                info_det.pr_descripcion = producto.pr_descripcion;
+            if (ModelState.IsValid)
+                info_det.Signo = "-";
+            List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            pro_Fabricacion_Info model = new pro_Fabricacion_Info();
+            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "-").ToList();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_fabricacion_det_egr", model);
+        }
+        public ActionResult EditingDeleteEgreso(int Secuencia)
+        {
+            List_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            pro_Fabricacion_Info model = new pro_Fabricacion_Info();
+            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "-").ToList();
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_fabricacion_det_egr", model);
+        }
 
         #endregion
+
     }
 
     public class pro_FabricacionDet_List
