@@ -1062,6 +1062,19 @@
     <Build Include="dbo\Views\vwro_EmpleadoNovedadCargaMasiva_det.sql" />
     <Build Include="dbo\Tables\fa_factura_x_cxc_cobro_tipo.sql" />
     <Build Include="dbo\Views\vwCXP_Rpt001.sql" />
+    <Build Include="dbo\Tables\ro_HorasProfesores_det.sql" />
+    <Build Include="dbo\Tables\ro_HorasProfesores.sql" />
+    <Build Include="dbo\Tables\ro_EmpleadoFoto.sql" />
+    <Build Include="dbo\Tables\pro_FabricacionDet.sql" />
+    <Build Include="dbo\Tables\pro_Fabricacion.sql" />
+    <Build Include="dbo\Tables\pre_RubroTipo.sql" />
+    <Build Include="dbo\Tables\pre_PresupuestoPeriodo.sql" />
+    <Build Include="dbo\Tables\pre_PresupuestoDet.sql" />
+    <Build Include="dbo\Tables\pre_Presupuesto.sql" />
+    <Build Include="web\Views\VWROL_020.sql" />
+    <Build Include="EntidadRegulatoria\Views\vwro_ArchivosIess.sql" />
+    <Build Include="dbo\Views\vwpre_Grupo.sql" />
+    <Build Include="dbo\Views\vwAf_Activo_fijo_CtaCble.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

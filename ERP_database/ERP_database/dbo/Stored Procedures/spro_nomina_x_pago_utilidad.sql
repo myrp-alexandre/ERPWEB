@@ -21,7 +21,7 @@ set @FechaInicio ='2017/01/01'
 set @FechaFin ='2017/12/31'
 	
 */
-SELECT     emp.IdEmpresa,emp.IdEmpleado,   car.ca_descripcion, per.pe_apellido, per.pe_nombre, per.pe_cedulaRuc, emp.em_status, emp.em_fechaIngaRol, emp.em_fecha_ingreso, emp.em_fechaSalida,count( cont.FechaInicio) as num_contratos,
+SELECT     emp.IdEmpresa,emp.IdEmpleado,   car.ca_descripcion, per.pe_apellido, per.pe_nombre, per.pe_cedulaRuc, emp.em_status, emp.em_fechaIngaRol, emp.em_fechaIngaRol em_fecha_ingreso, emp.em_fechaSalida,count( cont.FechaInicio) as num_contratos,
 ISNULL((select COUNT( c.IdEmpleado) from ro_cargaFamiliar c 
 where
 ( c.IdEmpresa=emp.IdEmpresa 
@@ -44,6 +44,6 @@ where
 (cont.FechaInicio<@FechaFin and emp.em_status='EST_ACT')
 or (emp.em_fechaSalida between @FechaInicio and @FechaFin)
 					 
-group by emp.IdEmpresa,emp.IdEmpleado ,car.ca_descripcion, per.pe_apellido, per.pe_nombre, per.pe_cedulaRuc, emp.em_status, emp.em_fechaIngaRol, emp.em_fecha_ingreso, emp.em_fechaSalida
+group by emp.IdEmpresa,emp.IdEmpleado ,car.ca_descripcion, per.pe_apellido, per.pe_nombre, per.pe_cedulaRuc, emp.em_status, emp.em_fechaIngaRol, emp.em_fechaSalida
 
 END

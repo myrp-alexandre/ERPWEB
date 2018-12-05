@@ -1,6 +1,6 @@
 ﻿create view web.VWROL_010 as
 						 SELECT        dbo.ro_empleado_x_ro_tipoNomina.IdEmpresa, dbo.ro_empleado_x_ro_tipoNomina.IdEmpleado, dbo.ro_empleado_x_ro_tipoNomina.IdTipoNomina, dbo.tb_persona.pe_cedulaRuc, 
-                         dbo.tb_persona.pe_apellido + ' ' + dbo.tb_persona.pe_nombre AS Empleado, dbo.ro_empleado.em_fecha_ingreso, CAST(dbo.ro_empleado.em_fechaSalida AS date) em_fechaSalida, dbo.ro_cargo.ca_descripcion, 
+                         dbo.tb_persona.pe_apellido + ' ' + dbo.tb_persona.pe_nombre AS Empleado, ro_empleado.em_fechaIngaRol em_fecha_ingreso, CAST(dbo.ro_empleado.em_fechaSalida AS date) em_fechaSalida, dbo.ro_cargo.ca_descripcion, 
                          dbo.ro_catalogo.ca_descripcion AS EstadoEmpleado, dbo.ro_empleado.IdDivision, dbo.ro_empleado.em_fechaIngaRol, cast(CASE WHEN IIF(em_fechaSalida = NULL, datediff(dayofyear, em_fechaSalida, em_fechaIngaRol), 
                          datediff(dayofyear, em_fechaIngaRol, getdate())) >= 360 THEN IIF(em_fechaSalida = NULL, datediff(dayofyear, em_fechaSalida, em_fechaIngaRol), datediff(dayofyear, em_fechaIngaRol, getdate())) 
                          / 360 ELSE 0 END AS varchar(20)) + ' año(s), ' + cast(CASE WHEN IIF(em_fechaSalida = NULL, datediff(dayofyear, em_fechaSalida, em_fechaIngaRol), datediff(dayofyear, em_fechaIngaRol, getdate())) 

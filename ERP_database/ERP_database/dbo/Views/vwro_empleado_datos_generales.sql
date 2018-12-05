@@ -1,20 +1,16 @@
 ﻿CREATE VIEW dbo.vwro_empleado_datos_generales
 AS
 SELECT        dbo.ro_empleado.IdEmpresa, dbo.ro_empleado.IdEmpleado_Supervisor, dbo.ro_empleado.IdPersona, dbo.ro_empleado.IdSucursal, dbo.ro_empleado.IdTipoEmpleado, dbo.ro_empleado.em_codigo, 
-                         dbo.ro_empleado.Codigo_Biometrico, dbo.ro_empleado.em_lugarNacimiento, dbo.ro_empleado.em_CarnetIees, dbo.ro_empleado.em_cedulaMil, dbo.ro_empleado.em_fecha_ingreso, dbo.ro_empleado.em_fechaSalida, 
-                         dbo.ro_empleado.em_fechaTerminoContra, dbo.ro_empleado.em_fechaIngaRol, dbo.ro_empleado.em_SeAcreditaBanco, dbo.ro_empleado.em_tipoCta, dbo.ro_empleado.em_NumCta, dbo.ro_empleado.em_SepagaBeneficios, 
-                         dbo.ro_empleado.em_SePagaConTablaSec, dbo.ro_empleado.em_estado, dbo.ro_empleado.em_sueldoBasicoMen, dbo.ro_empleado.em_SueldoExtraMen, dbo.ro_empleado.em_MovilizacionQuincenal, 
-                         dbo.ro_empleado.em_foto, dbo.ro_empleado.em_empEspecial, dbo.ro_empleado.em_pagoFdoRsv, dbo.ro_empleado.em_huella, dbo.ro_empleado.IdCodSectorial, dbo.ro_empleado.IdDepartamento, 
-                         dbo.ro_empleado.IdTipoSangre, dbo.ro_empleado.IdCargo, dbo.ro_empleado.IdCtaCble_Emplea, dbo.ro_empleado.IdCiudad, dbo.ro_empleado.em_mail, dbo.ro_empleado.IdTipoLicencia, dbo.ro_empleado.IdCentroCosto, 
-                         dbo.ro_empleado.IdBanco, dbo.ro_empleado.Archivo, dbo.ro_empleado.NombreArchivo, dbo.ro_empleado.IdArea, dbo.ro_empleado.IdDivision, dbo.ro_empleado.IdCentroCosto_sub_centro_costo, 
-                         dbo.ro_empleado.por_discapacidad, dbo.ro_empleado.carnet_conadis, dbo.ro_empleado.recibi_uniforme, dbo.ro_empleado.talla_pant, dbo.ro_empleado.talla_camisa, dbo.ro_empleado.talla_zapato, 
-                         dbo.ro_empleado.em_status, dbo.ro_empleado.IdCondicionDiscapacidadSRI, dbo.ro_empleado.IdTipoIdentDiscapacitadoSustitutoSRI, dbo.ro_empleado.IdentDiscapacitadoSustitutoSRI, 
-                         dbo.ro_empleado.IdAplicaConvenioDobleImposicionSRI, dbo.ro_empleado.IdTipoResidenciaSRI, dbo.ro_empleado.IdTipoSistemaSalarioNetoSRI, dbo.ro_empleado.es_AcreditaHorasExtras, dbo.ro_empleado.IdTipoAnticipo, 
-                         dbo.ro_empleado.ValorAnticipo, dbo.ro_empleado.CodigoSectorial, dbo.ro_empleado.es_TruncarDecimalAnticipo, dbo.ro_empleado.em_AnticipoSueldo, dbo.ro_empleado.IdBanco_Acreditacion, dbo.ro_empleado.IdGrupo, 
-                         dbo.ro_empleado.Marca_Biometrico, dbo.ro_empleado.em_motivo_salisa, dbo.ro_empleado.IdHorario, dbo.ro_empleado.IdPuntoCargo, dbo.tb_persona.pe_Naturaleza, dbo.tb_persona.pe_nombre, 
+                         dbo.ro_empleado.Codigo_Biometrico, dbo.ro_empleado.em_lugarNacimiento, dbo.ro_empleado.em_CarnetIees, dbo.ro_empleado.em_cedulaMil, dbo.ro_empleado.em_fechaSalida, dbo.ro_empleado.em_fechaIngaRol, 
+                         dbo.ro_empleado.em_tipoCta, dbo.ro_empleado.em_NumCta, dbo.ro_empleado.em_estado, dbo.ro_empleado.IdCodSectorial, dbo.ro_empleado.IdDepartamento, dbo.ro_empleado.IdTipoSangre, dbo.ro_empleado.IdCargo, 
+                         dbo.ro_empleado.IdCtaCble_Emplea, dbo.ro_empleado.IdCiudad, dbo.ro_empleado.em_mail, dbo.ro_empleado.IdTipoLicencia, dbo.ro_empleado.IdBanco, dbo.ro_empleado.IdArea, dbo.ro_empleado.IdDivision, 
+                         dbo.ro_empleado.por_discapacidad, dbo.ro_empleado.carnet_conadis, dbo.ro_empleado.talla_pant, dbo.ro_empleado.talla_camisa, dbo.ro_empleado.talla_zapato, dbo.ro_empleado.em_status, 
+                         dbo.ro_empleado.IdCondicionDiscapacidadSRI, dbo.ro_empleado.IdTipoIdentDiscapacitadoSustitutoSRI, dbo.ro_empleado.IdentDiscapacitadoSustitutoSRI, dbo.ro_empleado.IdAplicaConvenioDobleImposicionSRI, 
+                         dbo.ro_empleado.IdTipoResidenciaSRI, dbo.ro_empleado.IdTipoSistemaSalarioNetoSRI, dbo.ro_empleado.es_AcreditaHorasExtras, dbo.ro_empleado.IdTipoAnticipo, dbo.ro_empleado.ValorAnticipo, 
+                         dbo.ro_empleado.CodigoSectorial, dbo.ro_empleado.em_AnticipoSueldo, dbo.ro_empleado.Marca_Biometrico, dbo.ro_empleado.IdHorario, dbo.tb_persona.pe_Naturaleza, dbo.tb_persona.pe_nombre, 
                          dbo.tb_persona.IdTipoDocumento, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_direccion, dbo.tb_persona.pe_telfono_Contacto, dbo.tb_persona.pe_celular, dbo.tb_persona.pe_correo, dbo.tb_persona.pe_sexo, 
                          dbo.tb_persona.IdEstadoCivil, dbo.tb_persona.pe_fechaNacimiento, dbo.tb_sucursal.Su_Descripcion, dbo.ro_Departamento.de_descripcion, dbo.ro_cargo.ca_descripcion, dbo.ro_Division.Descripcion, 
-                         dbo.ro_empleado.IdEmpleado, dbo.tb_persona.pe_apellido, dbo.ro_empleado.Tiene_ingresos_compartidos
+                         dbo.ro_empleado.IdEmpleado, dbo.tb_persona.pe_apellido, dbo.ro_empleado.Tiene_ingresos_compartidos, dbo.ro_empleado.Pago_por_horas, dbo.ro_empleado.Valor_horas, dbo.ro_empleado.Valor_maximo_horas
 FROM            dbo.tb_persona INNER JOIN
                          dbo.ro_empleado ON dbo.tb_persona.IdPersona = dbo.ro_empleado.IdPersona INNER JOIN
                          dbo.ro_cargo ON dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa AND dbo.ro_empleado.IdCargo = dbo.ro_cargo.IdCargo AND dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa AND 
@@ -31,7 +27,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[85] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[86] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -115,7 +111,7 @@ Begin DesignProperties =
                Right = 564
             End
             DisplayFlags = 280
-            TopColumn = 57
+            TopColumn = 38
          End
          Begin Table = "ro_cargo"
             Begin Extent = 
@@ -168,6 +164,8 @@ Begin DesignProperties =
          Width = 284
          Width = 1500
  ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_datos_generales';
+
+
 
 
 

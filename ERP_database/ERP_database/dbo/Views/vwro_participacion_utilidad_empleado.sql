@@ -4,7 +4,7 @@ SELECT        dbo.ro_participacion_utilidad_empleado.IdEmpresa, dbo.ro_participa
                          dbo.ro_participacion_utilidad_empleado.CargasFamiliares, dbo.ro_participacion_utilidad_empleado.ValorIndividual, dbo.ro_participacion_utilidad_empleado.ValorCargaFamiliar, 
                          dbo.ro_participacion_utilidad_empleado.ValorExedenteIESS, dbo.ro_participacion_utilidad_empleado.ValorTotal, dbo.ro_participacion_utilidad.IdNomina, dbo.ro_participacion_utilidad.IdNominaTipo_liq, 
                          dbo.ro_participacion_utilidad.IdPeriodo, dbo.ro_participacion_utilidad.Estado, dbo.ro_cargo.ca_descripcion, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.tb_persona.pe_cedulaRuc, dbo.ro_empleado.em_status, 
-                         dbo.ro_empleado.em_fechaIngaRol, dbo.ro_empleado.em_fecha_ingreso, dbo.ro_empleado.em_fechaSalida, dbo.ro_participacion_utilidad.UtilidadDerechoIndividual, dbo.ro_participacion_utilidad.UtilidadCargaFamiliar
+                         dbo.ro_empleado.em_fechaIngaRol, ro_empleado.em_fechaIngaRol em_fecha_ingreso, dbo.ro_empleado.em_fechaSalida, dbo.ro_participacion_utilidad.UtilidadDerechoIndividual, dbo.ro_participacion_utilidad.UtilidadCargaFamiliar
 FROM            dbo.ro_participacion_utilidad INNER JOIN
                          dbo.ro_participacion_utilidad_empleado ON dbo.ro_participacion_utilidad.IdEmpresa = dbo.ro_participacion_utilidad_empleado.IdEmpresa AND 
                          dbo.ro_participacion_utilidad.IdUtilidad = dbo.ro_participacion_utilidad_empleado.IdUtilidad INNER JOIN
