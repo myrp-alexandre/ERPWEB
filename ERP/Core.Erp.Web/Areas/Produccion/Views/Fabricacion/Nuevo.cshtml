@@ -139,6 +139,17 @@
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_fabricacion_det")
+                </div>
+            </div>
+        </div>
+    </div>
             <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <a class="btn btn-default" href="@Url.Action("Index", "Fabricacion", new { Area = "Produccion" }, null)">Cancelar</a>
