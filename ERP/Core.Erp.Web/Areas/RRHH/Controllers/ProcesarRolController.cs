@@ -101,8 +101,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
+                
                     info.IdEmpresa = GetIdEmpresa();
                     if (!bus_rol.procesar(info))
                     {
@@ -111,9 +110,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     }
                     else
                         return RedirectToAction("Index");
-                }
-                else
-                    return View(info);
+                
 
             }
             catch (Exception)
@@ -122,13 +119,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult Modificar( int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0)
+        public ActionResult Modificar( int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0, decimal IdRol=0)
         {
             try
             { 
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
                 IdEmpresa = GetIdEmpresa();
-                ro_rol_Info model = bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
+                ro_rol_Info model = bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
                 ViewBag.FechaCorte = DateTime.Now;
                 return View();
 
@@ -170,13 +167,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult CerrarPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        public ActionResult CerrarPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, decimal IdRol=0)
         {
             try
             {
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
                 IdEmpresa = GetIdEmpresa();
-                return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo));
+                return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol));
 
             }
             catch (Exception)
@@ -208,13 +205,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult AbrirPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        public ActionResult AbrirPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, decimal IdRol=0)
         {
             try
             {
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
                 IdEmpresa = GetIdEmpresa();
-                return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo));
+                return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol));
 
             }
             catch (Exception)
@@ -315,13 +312,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult ReversarcontabilidadPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        public ActionResult ReversarcontabilidadPeriodo(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, decimal IdRol=0)
         {
             try
             {
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
                 IdEmpresa = GetIdEmpresa();
-                return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo));
+                return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo,IdRol));
 
             }
             catch (Exception)
@@ -403,7 +400,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                List<ro_rol_Info> model = bus_rol.get_list_nominas(IdEmpresa);
+                List<ro_rol_Info> model = bus_rol.get_list_nominas_cerradas(IdEmpresa);
                 return PartialView("_GridViewPartial_nominas_cerradas", model);
             }
             catch (Exception)

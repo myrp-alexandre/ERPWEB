@@ -107,14 +107,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        public ActionResult Modificar(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0)
+        public ActionResult Modificar(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, decimal IdRol=0)
         {
             try
             {
                 ro_rol_Info model = new ro_rol_Info();
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
                 IdEmpresa = GetIdEmpresa();
-                model=bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
+                model=bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
                 if (model.IdNomina_TipoLiqui == 3)
                     model.decimoIII = true;
                 else

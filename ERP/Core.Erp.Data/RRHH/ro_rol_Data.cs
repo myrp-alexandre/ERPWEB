@@ -23,6 +23,48 @@ namespace Core.Erp.Data.RRHH
                              select new ro_rol_Info
                              {
                                  IdEmpresa = ROL.IdEmpresa,
+                                 IdRol=ROL.IdRol,
+                                 IdNomina_Tipo = ROL.IdNominaTipo,
+                                 IdNomina_TipoLiqui = ROL.IdNominaTipoLiqui,
+                                 IdPeriodo = ROL.IdPeriodo,
+                                 Observacion = ROL.Observacion,
+                                 Descripcion = ROL.Descripcion,
+                                 Cerrado = ROL.Cerrado,
+                                 DescripcionProcesoNomina = ROL.DescripcionProcesoNomina,
+                                 Procesado = ROL.Procesado,
+                                 Contabilizado = ROL.Contabilizado,
+                                 pe_FechaIni = ROL.pe_FechaIni,
+                                 pe_FechaFin = ROL.pe_FechaFin
+
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ro_rol_Info> get_list_nominas_cerradas(int IdEmpresa)
+        {
+            try
+            {
+                List<ro_rol_Info> Lista = new List<ro_rol_Info>();
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from ROL in Context.vwro_rol
+                             where ROL.IdEmpresa == IdEmpresa
+                             && ROL.IdNominaTipoLiqui <= 2
+                             && ROL.IdNominaTipoLiqui >= 1
+                             && ROL.Cerrado=="S"
+                             select new ro_rol_Info
+                             {
+                                 IdEmpresa = ROL.IdEmpresa,
+                                 IdRol = ROL.IdRol,
                                  IdNomina_Tipo = ROL.IdNominaTipo,
                                  IdNomina_TipoLiqui = ROL.IdNominaTipoLiqui,
                                  IdPeriodo = ROL.IdPeriodo,
@@ -86,7 +128,7 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-        public ro_rol_Info get_info(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo)
+        public ro_rol_Info get_info(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo, decimal IdRol)
         {
             try
             {
@@ -94,7 +136,8 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                     ro_rol Entity = Context. ro_rol.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdNominaTipo == IdNominaTipo && q.IdNominaTipoLiqui==IdNominaTipoLiqui && q.IdPeriodo==IdPeriodo);
+                     ro_rol Entity = Context. ro_rol.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdNominaTipo == IdNominaTipo 
+                     &&q.IdRol==IdRol && q.IdNominaTipoLiqui==IdNominaTipoLiqui && q.IdPeriodo==IdPeriodo);
                     if (Entity == null) return null;
 
                     info = new  ro_rol_Info

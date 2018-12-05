@@ -69,8 +69,10 @@
                         var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
                         var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
                         var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
+                        var IdRol = DataBinder.Eval(container.DataItem, "IdRol");
+
                         hyperlink.Properties.Text = "Abrir rol";
-                        hyperlink.NavigateUrl = Url.Action("AbrirPeriodo", "ProcesarRol", new { IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
+                        hyperlink.NavigateUrl = Url.Action("AbrirPeriodo", "ProcesarRol", new { IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo, IdRol= IdRol });
                     }).Render();
 
                 }
@@ -90,8 +92,10 @@
                         var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
                         var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
                         var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
+                        var IdRol = DataBinder.Eval(container.DataItem, "IdRol");
+
                         hyperlink.Properties.Text = "Reversar cotabilizacion";
-                        hyperlink.NavigateUrl = Url.Action("ReversarcontabilidadPeriodo", "ProcesarRol", new { IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
+                        hyperlink.NavigateUrl = Url.Action("ReversarcontabilidadPeriodo", "ProcesarRol", new { IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo, IdRol= IdRol });
                     }).Render();
 
                 }

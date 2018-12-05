@@ -66,7 +66,7 @@
                 {
 
                     ViewContext.Writer.Write(
-                    Html.ActionLink("Reprocesar", "Modificar", new { IdNomina_Tipo = DataBinder.Eval(tc.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(tc.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") },
+                    Html.ActionLink("Reprocesar", "Modificar", new { IdNomina_Tipo = DataBinder.Eval(tc.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(tc.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") , IdRol = DataBinder.Eval(tc.DataItem, "IdRol") },
                         new { onclick = "return confirm('¿Está seguro de que desea reprocesar la nómina?')" })
                         );
 
@@ -96,14 +96,16 @@
                         var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
                         var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
                         var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
+                        var IdRol = DataBinder.Eval(container.DataItem, "IdRol");
+
                         hyperlink.Properties.Text = "Cerrar rol";
-                        hyperlink.NavigateUrl = Url.Action("CerrarPeriodo", "ProcesarRol", new { IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo });
+                        hyperlink.NavigateUrl = Url.Action("CerrarPeriodo", "ProcesarRol", new { IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo, IdRol=IdRol });
                     }).Render();
 
                 }
             });
         });
-       
+
         settings.Columns.Add("Descripcion","Nómina").Width=Unit.Percentage(9);
         settings.Columns.Add("DescripcionProcesoNomina","Proceso").Width = Unit.Percentage(15);
         settings.Columns.Add(column =>

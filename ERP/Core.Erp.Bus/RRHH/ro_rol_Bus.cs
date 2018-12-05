@@ -44,6 +44,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public List<ro_rol_Info> get_list_nominas_cerradas(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_nominas_cerradas(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<ro_rol_Info> get_list_decimos(int IdEmpresa)
         {
             try
@@ -56,11 +68,11 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public ro_rol_Info get_info(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo)
+        public ro_rol_Info get_info(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo, decimal IdRol)
         {
             try
             {
-                return odata.get_info(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo);
+                return odata.get_info(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo, IdRol);
             }
             catch (Exception)
             {
@@ -200,7 +212,7 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
-                info= odata.get_info(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo);
+                info= odata.get_info(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo, IdRol);
                 info.lst_sueldo_x_pagar = get_diario_ctble_sueldo_x_pagar(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo, IdRol);
                 info.lst_provisiones = get_diario_ctble_provisiones(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo, IdRol);
                 
