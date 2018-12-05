@@ -66,7 +66,6 @@ namespace Core.Erp.Data.RRHH
                         Observacion = info.Observacion,
                         IdNomina = info.IdNomina,
                         IdNominaTipo = info.IdNominaTipo,
-                        IdSucursal = info.IdSucursal,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now,
                         Estado = true
@@ -86,7 +85,7 @@ namespace Core.Erp.Data.RRHH
                             IdEmpleado = item.IdEmpleado,
                             Fecha = info.FechaCarga.Date,
 
-                            Observacion = info.Observacion == null ? "" : info.Observacion,
+                            Observacion =item.ru_descripcion,
                             Estado = "A",
                             IdUsuario = info.IdUsuario,
                             Fecha_Transac = info.Fecha_Transac = DateTime.Now
@@ -99,11 +98,12 @@ namespace Core.Erp.Data.RRHH
                             IdNovedad = item.IdNovedad,
                             FechaPago = info.FechaCarga.Date,
                             IdRubro = item.IdRubro,
-                            //Valor = item.Valor,
-                            Observacion = item.Observacion,
-                            EstadoCobro = "PEN",
+                            Valor = item.Valor,
+                            Observacion = item.Observacion + " del " + info.FechaCarga.Date.ToString().Substring(0, 10),
+                             EstadoCobro = "PEN",
                             Secuencia = 1
                         };
+                           
                         Contex.ro_empleado_novedad_det.Add(Entity_det);
 
                         ro_HorasProfesores_det Entity_det_ = new ro_HorasProfesores_det
@@ -114,7 +114,8 @@ namespace Core.Erp.Data.RRHH
                             IdEmpleado = item.IdEmpleado,
                             Observacion = item.Observacion,
                             Secuencia = item.Secuencia,
-                            IdEmpresa_nov = info.IdEmpresa
+                            IdEmpresa_nov = info.IdEmpresa,
+                            ValorHora=item.ValorHora
                         };
                         Contex.ro_HorasProfesores_det.Add(Entity_det_);
                         IdNovedad++;
@@ -144,8 +145,8 @@ namespace Core.Erp.Data.RRHH
                         ro_empleado_Novedad entity_det = contex.ro_empleado_Novedad.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == item.IdEmpleado && q.IdNovedad == item.IdNovedad);
                         if (entity_det != null)
                         {
-                            //string sql = "update ro_empleado_Novedad set Estado='I' where IdEmpresa='" + info.IdEmpresa + "' and IdEmpleado='" + item.IdEmpleado + "' and IdNovedad='" + item.IdNovedad + "'";
-                            //contex.Database.ExecuteSqlCommand(sql);
+                            string sql = "update ro_empleado_Novedad set Estado='I' where IdEmpresa='" + info.IdEmpresa + "' and IdEmpleado='" + item.IdEmpleado + "' and IdNovedad='" + item.IdNovedad + "'";
+                            contex.Database.ExecuteSqlCommand(sql);
                             entity_det.Estado = "I";
                             entity_det.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                             entity_det.Fecha_UltAnu = DateTime.Now;
@@ -196,8 +197,6 @@ namespace Core.Erp.Data.RRHH
                         Observacion = Entity.Observacion,
                         IdNomina = Entity.IdNomina,
                         IdNominaTipo = Entity.IdNominaTipo,
-                        IdSucursal = Entity.IdSucursal,
-
                     };
                 }
 

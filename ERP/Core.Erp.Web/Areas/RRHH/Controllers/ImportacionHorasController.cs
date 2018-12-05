@@ -28,7 +28,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         List<ro_rubro_tipo_Info> lst_rubros = new List<ro_rubro_tipo_Info>();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         ro_empleado_info_list empleado_info_list = new ro_empleado_info_list();
-
+         
         ro_rubro_tipo_Info_list ro_rubro_tipo_Info_list = new ro_rubro_tipo_Info_list();
 
         int IdEmpresa = 0;
@@ -72,7 +72,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #region acciones
         public ActionResult Nuevo()
         {
-            empleado_info_list.set_list(bus_empleado.get_list_combo(Convert.ToInt32(SessionFixed.IdEmpresa)));
+
+            var lst_rubros = bus_rubro.get_list(Convert.ToInt32(SessionFixed.IdEmpresa), false);
+            ro_rubro_tipo_Info_list.set_list(lst_rubros);
+
+            var lst_empleados = bus_empleado.get_list_profesores(Convert.ToInt32(SessionFixed.IdEmpresa));
+            empleado_info_list.set_list(lst_empleados);
 
             ro_HorasProfesores_Info model = new ro_HorasProfesores_Info
             {
@@ -80,8 +85,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 FechaCarga = DateTime.Now,
                 IdNomina = 1,
                 IdNominaTipo = 2,
-                IdSucursal = 1
-
             };
             model.detalle = new List<ro_HorasProfesores_det_Info>();
             detalle.set_list(model.detalle);
@@ -217,8 +220,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                         {
                             string cedua = reader.GetString(0);
                             var empleado = empleado_info_list.get_list().Where(v => v.pe_cedulaRuc == cedua).FirstOrDefault();
+                            
                             if (empleado != null)
                             {
+                                if (empleado.Valor_horas_matutino == null)
+                                    empleado.Valor_horas_matutino = 0;
+                                if (empleado.Valor_horas_vespertina == null)
+                                    empleado.Valor_horas_vespertina = 0;
+                                if (empleado.Valor_horas_nocturna == null)
+                                    empleado.Valor_horas_nocturna = 0;
 
                                 if (!reader.IsDBNull(3))
                                 {
@@ -235,8 +245,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 em_codigo = empleado.em_codigo,
                                                 Secuencia = cont,
                                                 IdEmpleado = empleado.IdEmpleado,
-                                                IdRubro = rubros_calculados.IdRubro_horas_matutina
+                                                IdRubro = rubros_calculados.IdRubro_horas_matutina,
+                                                ru_descripcion=rubros.ru_descripcion,
+                                                ValorHora=Convert.ToDouble( empleado.Valor_horas_matutino)
                                             };
+                                            info.Valor = Convert.ToDouble(empleado.Valor_horas_matutino * info.NumHoras);
+
                                             lista_novedades.Add(info);
                                         }
                                     }
@@ -257,8 +271,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 em_codigo = empleado.em_codigo,
                                                 Secuencia = cont,
                                                 IdEmpleado = empleado.IdEmpleado,
-                                                IdRubro = rubros_calculados.IdRubro_horas_vespertina
+                                                IdRubro = rubros_calculados.IdRubro_horas_vespertina,
+                                                ru_descripcion = rubros.ru_descripcion,
+                                                ValorHora = Convert.ToDouble(empleado.Valor_horas_vespertina)
+
+
                                             };
+                                            info.Valor = Convert.ToDouble(empleado.Valor_horas_vespertina * info.NumHoras);
                                             lista_novedades.Add(info);
                                         }
                                     }
@@ -279,8 +298,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 em_codigo = empleado.em_codigo,
                                                 Secuencia = cont,
                                                 IdEmpleado = empleado.IdEmpleado,
-                                                IdRubro = rubros_calculados.IdRubro_horas_nocturna
+                                                IdRubro = rubros_calculados.IdRubro_horas_nocturna,
+                                                ru_descripcion = rubros.ru_descripcion,
+                                                ValorHora = Convert.ToDouble(empleado.Valor_horas_nocturna)
+
+
                                             };
+                                            info.Valor = Convert.ToDouble(empleado.Valor_horas_nocturna * info.NumHoras);
+
                                             lista_novedades.Add(info);
                                         }
                                     }

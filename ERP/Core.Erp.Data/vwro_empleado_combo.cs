@@ -21,5 +21,11 @@ namespace Core.Erp.Data
         public decimal IdEmpleado { get; set; }
         public Nullable<int> IdNomina { get; set; }
         public int IdSucursal { get; set; }
+        public bool Pago_por_horas { get; set; }
+        public Nullable<double> Valor_maximo_horas { get; set; }
+        public Nullable<double> Valor_horas_vespertina { get; set; }
+        public Nullable<double> Valor_horas_matutino { get; set; }
+        public Nullable<double> Valor_horas_nocturna { get; set; }
+        public bool Tiene_ingresos_compartidos { get; set; }
     }
 }

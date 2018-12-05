@@ -120,6 +120,43 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+
+        public List<ro_empleado_Info> get_list_profesores(int IdEmpresa)
+        {
+            try
+            {
+                List<ro_empleado_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from q in Context.vwro_empleado_combo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.Pago_por_horas==true
+                             select new ro_empleado_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdEmpleado = q.IdEmpleado,
+                                 Empleado = q.Empleado,
+                                 pe_cedulaRuc = q.pe_cedulaRuc,
+                                 IdTipoNomina = q.IdNomina,
+                                 IdSucursal = q.IdSucursal,
+                                 Valor_horas_matutino=q.Valor_horas_matutino,
+                                 Valor_horas_vespertina=q.Valor_horas_vespertina,
+                                 Valor_horas_nocturna=q.Valor_horas_nocturna,
+                                 Valor_maximo_horas=q.Valor_maximo_horas
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public ro_empleado_Info get_info(int IdEmpresa, decimal IdEmpleado)
         {
             try
@@ -357,7 +394,7 @@ namespace Core.Erp.Data.RRHH
                         Entity.Pago_por_horas = info.Pago_por_horas;
                     Entity.Valor_horas_nocturna = info.Valor_horas_nocturna;
                     Entity.Valor_horas_matutino = info.Valor_horas_matutino;
-                    Entity.Valor_maximo_horas = info.Valor_maximo_horas;
+                    Entity.Valor_horas_vespertina = info.Valor_horas_vespertina;
                         Entity.Valor_maximo_horas = info.Valor_maximo_horas;
                         Entity.IdArea = info.IdArea    ;
                         Entity.IdDivision = info.IdDivision    ;
@@ -385,6 +422,7 @@ namespace Core.Erp.Data.RRHH
                         Entity.Fecha_UltMod = info.Fecha_Transaccion = DateTime.Now;
                         Entity.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
                     var foto = Context.ro_EmpleadoFoto.FirstOrDefault(v => v.IdEmpresa ==info. IdEmpresa && v.IdEmpleado ==info.IdEmpleado);
+                    if(foto!=null)
                     Context.ro_EmpleadoFoto.Remove(foto);
                     if (info.info_foto != null)
                     {

@@ -34,7 +34,8 @@ namespace Core.Erp.Data.RRHH
                                  pe_nombre = q.pe_nombre,
                                  em_codigo = q.em_codigo,
                                  NumHoras = q.NumHoras,
-                                 pe_apellido = q.pe_apellido + " " + q.pe_nombre
+                                 pe_apellido = q.pe_apellido + " " + q.pe_nombre,
+                                 ValorHora=q.ValorHora
 
                              }).ToList();
 

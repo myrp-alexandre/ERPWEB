@@ -22,6 +22,20 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public List<ro_empleado_Info> get_list_profesores(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_profesores(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<ro_empleado_Info> get_list_combo_liquidar(int IdEmpresa)
         {
             try

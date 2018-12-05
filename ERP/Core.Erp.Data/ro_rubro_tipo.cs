@@ -22,7 +22,6 @@ namespace Core.Erp.Data
             this.ro_empleado_x_ro_rubro = new HashSet<ro_empleado_x_ro_rubro>();
             this.ro_empleado_x_rubro_acumulado = new HashSet<ro_empleado_x_rubro_acumulado>();
             this.ro_EmpleadoNovedadCargaMasiva = new HashSet<ro_EmpleadoNovedadCargaMasiva>();
-            this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
             this.ro_prestamo = new HashSet<ro_prestamo>();
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_rubros_calculados = new HashSet<ro_rubros_calculados>();
@@ -40,6 +39,7 @@ namespace Core.Erp.Data
             this.ro_rubros_calculados12 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados13 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados14 = new HashSet<ro_rubros_calculados>();
+            this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
         }
     
         public int IdEmpresa { get; set; }
@@ -72,7 +72,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
         public virtual ICollection<ro_empleado_x_rubro_acumulado> ro_empleado_x_rubro_acumulado { get; set; }
         public virtual ICollection<ro_EmpleadoNovedadCargaMasiva> ro_EmpleadoNovedadCargaMasiva { get; set; }
-        public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
         public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados { get; set; }
@@ -90,5 +89,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados12 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados13 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados14 { get; set; }
+        public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
     }
 }
