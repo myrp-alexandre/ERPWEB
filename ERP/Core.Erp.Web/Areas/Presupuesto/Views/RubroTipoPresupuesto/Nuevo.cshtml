@@ -35,7 +35,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdCtaCble">Signo*</label>
-                    @Html.TextBoxFor(q => q.Signo, new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.Signo, new SelectList(ViewBag.lst_signo, "Key", "Value"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Signo, "", new { @class = "text-danger" })
                 </div>
             </div>
