@@ -5,20 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bafee54089a34bf29f4b6d680d18f104" Name="Diagram1">
-        <EntityTypeShape EntityType="Model_presupuesto.pre_rubro" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_presupuesto.vwpre_rubro" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_presupuesto.pre_Grupo" Width="1.5" PointX="5.375" PointY="6" />
         <EntityTypeShape EntityType="Model_presupuesto.pre_Grupo_x_seg_usuario" Width="1.5" PointX="7.625" PointY="6.625" />
         <AssociationConnector Association="Model_presupuesto.FK_pre_Grupo_x_seg_usuario_pre_Grupo1" />
         <EntityTypeShape EntityType="Model_presupuesto.vwpre_Grupo" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_presupuesto.pre_Presupuesto" Width="1.5" PointX="8.375" PointY="1.75" />
-        <EntityTypeShape EntityType="Model_presupuesto.pre_Presupuesto_x_grupo" Width="1.5" PointX="10.625" PointY="6.5" />
-        <EntityTypeShape EntityType="Model_presupuesto.pre_Presupuesto_x_grupo_det" Width="1.5" PointX="12.875" PointY="5.5" />
+        <EntityTypeShape EntityType="Model_presupuesto.pre_Presupuesto" Width="1.5" PointX="10.625" PointY="5.375" />
+        <EntityTypeShape EntityType="Model_presupuesto.pre_PresupuestoDet" Width="1.5" PointX="12.875" PointY="6.375" />
+        <EntityTypeShape EntityType="Model_presupuesto.pre_PresupuestoPeriodo" Width="1.5" PointX="8.375" PointY="1.75" />
+        <EntityTypeShape EntityType="Model_presupuesto.pre_RubroTipo" Width="1.5" PointX="8.375" PointY="11.875" />
         <AssociationConnector Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_pre_Grupo" />
-        <AssociationConnector Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_pre_Presupuesto" />
-        <AssociationConnector Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_Presupuesto_x_grupo" />
+        <AssociationConnector Association="Model_presupuesto.FK_pre_Presupuesto_pre_PresupuestoPeriodo" />
+        <AssociationConnector Association="Model_presupuesto.FK_pre_PresupuestoDet_pre_Presupuesto" />
+        <EntityTypeShape EntityType="Model_presupuesto.pre_Rubro" Width="1.5" PointX="10.625" PointY="11.75" />
         <AssociationConnector Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_rubro" />
-      </Diagram>
+        <AssociationConnector Association="Model_presupuesto.FK_pre_Rubro_pre_RubroTipo" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

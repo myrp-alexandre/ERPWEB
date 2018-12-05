@@ -12,17 +12,17 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class pre_Presupuesto_x_grupo_det
+    public partial class pre_PresupuestoDet
     {
         public int IdEmpresa { get; set; }
         public decimal IdPresupuesto { get; set; }
-        public int IdGrupo { get; set; }
-        public int IdRubro { get; set; }
         public int Secuencia { get; set; }
+        public int IdRubro { get; set; }
+        public string IdCtaCble { get; set; }
         public int Cantidad { get; set; }
         public double Monto { get; set; }
     
-        public virtual pre_Presupuesto_x_grupo pre_Presupuesto_x_grupo { get; set; }
-        public virtual pre_rubro pre_rubro { get; set; }
+        public virtual pre_Presupuesto pre_Presupuesto { get; set; }
+        public virtual pre_Rubro pre_Rubro { get; set; }
     }
 }

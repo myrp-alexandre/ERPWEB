@@ -12,16 +12,17 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class pre_rubro
+    public partial class pre_Rubro
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public pre_rubro()
+        public pre_Rubro()
         {
-            this.pre_Presupuesto_x_grupo_det = new HashSet<pre_Presupuesto_x_grupo_det>();
+            this.pre_PresupuestoDet = new HashSet<pre_PresupuestoDet>();
         }
     
         public int IdEmpresa { get; set; }
         public int IdRubro { get; set; }
+        public int IdRubroTipo { get; set; }
         public string Descripcion { get; set; }
         public string IdCtaCble { get; set; }
         public bool Estado { get; set; }
@@ -34,6 +35,7 @@ namespace Core.Erp.Data
         public string MotivoAnulacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pre_Presupuesto_x_grupo_det> pre_Presupuesto_x_grupo_det { get; set; }
+        public virtual ICollection<pre_PresupuestoDet> pre_PresupuestoDet { get; set; }
+        public virtual pre_RubroTipo pre_RubroTipo { get; set; }
     }
 }

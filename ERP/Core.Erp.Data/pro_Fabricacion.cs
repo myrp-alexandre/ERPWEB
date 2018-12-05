@@ -12,23 +12,28 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class pre_Presupuesto_x_grupo
+    public partial class pro_Fabricacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public pre_Presupuesto_x_grupo()
+        public pro_Fabricacion()
         {
-            this.pre_Presupuesto_x_grupo_det = new HashSet<pre_Presupuesto_x_grupo_det>();
+            this.pro_FabricacionDet = new HashSet<pro_FabricacionDet>();
         }
     
         public int IdEmpresa { get; set; }
-        public decimal IdPresupuesto { get; set; }
-        public int IdGrupo { get; set; }
-        public double MontoSolicitado { get; set; }
-        public Nullable<double> MontoAprobado { get; set; }
+        public decimal IdFabricacion { get; set; }
+        public int egr_IdSucursal { get; set; }
+        public int egr_IdBodega { get; set; }
+        public Nullable<int> egr_IdMovi_inven_tipo { get; set; }
+        public Nullable<decimal> egr_IdNumMovi { get; set; }
+        public int ing_IdSucursal { get; set; }
+        public int ing_IdBodega { get; set; }
+        public Nullable<int> ing_IdMovi_inven_tipo { get; set; }
+        public Nullable<decimal> ing_IdNumMovi { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public string Observacion { get; set; }
     
-        public virtual pre_Grupo pre_Grupo { get; set; }
-        public virtual pre_Presupuesto pre_Presupuesto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pre_Presupuesto_x_grupo_det> pre_Presupuesto_x_grupo_det { get; set; }
+        public virtual ICollection<pro_FabricacionDet> pro_FabricacionDet { get; set; }
     }
 }

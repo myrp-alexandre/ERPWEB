@@ -12,23 +12,21 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class pre_Presupuesto
+    public partial class pre_PresupuestoPeriodo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public pre_Presupuesto()
+        public pre_PresupuestoPeriodo()
         {
-            this.pre_PresupuestoDet = new HashSet<pre_PresupuestoDet>();
+            this.pre_Presupuesto = new HashSet<pre_Presupuesto>();
         }
     
         public int IdEmpresa { get; set; }
-        public decimal IdPresupuesto { get; set; }
-        public int IdSucursal { get; set; }
         public decimal IdPeriodo { get; set; }
-        public int IdGrupo { get; set; }
         public string Observacion { get; set; }
+        public System.DateTime FechaInicio { get; set; }
+        public System.DateTime FechaFin { get; set; }
+        public bool EstadoCierre { get; set; }
         public bool Estado { get; set; }
-        public double MontoSolicitado { get; set; }
-        public double MontoAprobado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
@@ -37,9 +35,7 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
-        public virtual pre_Grupo pre_Grupo { get; set; }
-        public virtual pre_PresupuestoPeriodo pre_PresupuestoPeriodo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pre_PresupuestoDet> pre_PresupuestoDet { get; set; }
+        public virtual ICollection<pre_Presupuesto> pre_Presupuesto { get; set; }
     }
 }

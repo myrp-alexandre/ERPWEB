@@ -957,6 +957,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_presupuesto.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model_produccion.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_produccion.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_produccion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_produccion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_produccion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_produccion.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Model_reportes.Context.cs">
       <DependentUpon>Model_reportes.Context.tt</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -1017,16 +1032,25 @@
     <Compile Include="pre_Presupuesto.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
-    <Compile Include="pre_Presupuesto_x_grupo.cs">
+    <Compile Include="pre_PresupuestoDet.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
-    <Compile Include="pre_Presupuesto_x_grupo_det.cs">
+    <Compile Include="pre_PresupuestoPeriodo.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
-    <Compile Include="pre_rubro.cs">
+    <Compile Include="pre_Rubro.cs">
+      <DependentUpon>Model_presupuesto.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pre_RubroTipo.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="pro_Fabricacion.cs">
+      <DependentUpon>Model_produccion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pro_FabricacionDet.cs">
+      <DependentUpon>Model_produccion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_002_Data.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_003_Data.cs" />
@@ -2279,6 +2303,13 @@
     <None Include="Model_presupuesto.edmx.diagram">
       <DependentUpon>Model_presupuesto.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="Model_produccion.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_produccion.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model_produccion.edmx.diagram">
+      <DependentUpon>Model_produccion.edmx</DependentUpon>
+    </None>
     <None Include="Model_reportes.edmx.diagram">
       <DependentUpon>Model_reportes.edmx</DependentUpon>
     </None>
@@ -2420,6 +2451,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_presupuesto.edmx</DependentUpon>
       <LastGenOutput>Model_presupuesto.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model_produccion.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_produccion.edmx</DependentUpon>
+      <LastGenOutput>Model_produccion.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model_produccion.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_produccion.edmx</DependentUpon>
+      <LastGenOutput>Model_produccion.cs</LastGenOutput>
     </Content>
     <Content Include="Model_reportes.Context.tt">
       <DependentUpon>Model_reportes.edmx</DependentUpon>
