@@ -1921,6 +1921,7 @@ warning 6002: The table/view 'DBERP.dbo.vwro_HorasProfesores_det' does not have 
             <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="IdSucursal" />
             <PropertyRef Name="ValorHora" />
+            <PropertyRef Name="Valor" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCarga" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -1941,6 +1942,7 @@ warning 6002: The table/view 'DBERP.dbo.vwro_HorasProfesores_det' does not have 
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="ValorHora" Type="float" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_marcaciones_x_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4498,7 +4500,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_HorasProfesores_det].[pe_nombre] AS [pe_nombre], 
     [vwro_HorasProfesores_det].[pe_cedulaRuc] AS [pe_cedulaRuc], 
     [vwro_HorasProfesores_det].[IdSucursal] AS [IdSucursal], 
-    [vwro_HorasProfesores_det].[ValorHora] AS [ValorHora]
+    [vwro_HorasProfesores_det].[ValorHora] AS [ValorHora], 
+    [vwro_HorasProfesores_det].[Valor] AS [Valor]
     FROM [dbo].[vwro_HorasProfesores_det] AS [vwro_HorasProfesores_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_marcaciones_x_empleado" EntityType="Self.vwro_marcaciones_x_empleado" store:Type="Views" store:Schema="dbo">
@@ -7491,7 +7494,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySet Name="ro_HorasProfesores" EntityType="Model_rrhh.ro_HorasProfesores" />
           <EntitySet Name="ro_HorasProfesores_det" EntityType="Model_rrhh.ro_HorasProfesores_det" />
           <EntitySet Name="vwro_HorasProfesores" EntityType="Model_rrhh.vwro_HorasProfesores" />
-          <EntitySet Name="vwro_HorasProfesores_det" EntityType="Model_rrhh.vwro_HorasProfesores_det" />
           <AssociationSet Name="FK_ro_HorasProfesores_det_ro_empleado" Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
@@ -7512,6 +7514,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
           </AssociationSet>
+          <EntitySet Name="vwro_HorasProfesores_det" EntityType="Model_rrhh.vwro_HorasProfesores_det" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -9873,44 +9876,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="vwro_HorasProfesores_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCarga" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="IdEmpresa_nov" />
-            <PropertyRef Name="IdNovedad" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="NumHoras" />
-            <PropertyRef Name="rub_codigo" />
-            <PropertyRef Name="ru_codRolGen" />
-            <PropertyRef Name="ru_descripcion" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="ValorHora" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
-          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="NumHoras" Type="Double" Nullable="false" />
-          <Property Name="rub_codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ru_codRolGen" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="ValorHora" Type="Double" Nullable="false" />
-        </EntityType>
         <Association Name="FK_ro_HorasProfesores_det_ro_empleado">
           <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
           <End Type="Model_rrhh.ro_HorasProfesores_det" Role="ro_HorasProfesores_det" Multiplicity="*" />
@@ -9983,6 +9948,46 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwro_HorasProfesores_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCarga" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="IdEmpresa_nov" />
+            <PropertyRef Name="IdNovedad" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="NumHoras" />
+            <PropertyRef Name="rub_codigo" />
+            <PropertyRef Name="ru_codRolGen" />
+            <PropertyRef Name="ru_descripcion" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="ValorHora" />
+            <PropertyRef Name="Valor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCarga" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdRubro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
+          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NumHoras" Type="Double" Nullable="false" />
+          <Property Name="rub_codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ru_codRolGen" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ru_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="ValorHora" Type="Double" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12033,6 +12038,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySetMapping Name="vwro_HorasProfesores_det">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_HorasProfesores_det">
               <MappingFragment StoreEntitySet="vwro_HorasProfesores_det">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="ValorHora" ColumnName="ValorHora" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />

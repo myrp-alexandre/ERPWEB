@@ -9,6 +9,8 @@ namespace Core.Erp.Info.RRHH
    public class ro_HorasProfesores_det_Info
     {
         public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+
         public decimal IdCarga { get; set; }
         public int Secuencia { get; set; }
         public string IdRubro { get; set; }
@@ -16,7 +18,7 @@ namespace Core.Erp.Info.RRHH
         public decimal IdNovedad { get; set; }
         public string Observacion { get; set; }
         public decimal IdEmpleado { get; set; }
-        public Nullable<double> NumHoras { get; set; }
+        public double NumHoras { get; set; }
         public string rub_codigo { get; set; }
         public string ru_codRolGen { get; set; }
         public string ru_descripcion { get; set; }

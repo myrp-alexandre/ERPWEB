@@ -111,11 +111,14 @@ namespace Core.Erp.Data.RRHH
                             IdEmpresa = info.IdEmpresa,
                             IdCarga = info.IdCarga,
                             IdNovedad = item.IdNovedad,
+                            IdRubro=item.IdRubro,
                             IdEmpleado = item.IdEmpleado,
                             Observacion = item.Observacion,
                             Secuencia = item.Secuencia,
                             IdEmpresa_nov = info.IdEmpresa,
-                            ValorHora=item.ValorHora
+                            ValorHora=item.ValorHora,
+                            NumHoras=item.NumHoras,
+                            IdSucursal=item.IdSucursal
                         };
                         Contex.ro_HorasProfesores_det.Add(Entity_det_);
                         IdNovedad++;
@@ -125,7 +128,7 @@ namespace Core.Erp.Data.RRHH
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

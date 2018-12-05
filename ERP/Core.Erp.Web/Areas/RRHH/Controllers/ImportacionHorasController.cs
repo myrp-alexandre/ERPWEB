@@ -243,6 +243,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 pe_cedulaRuc = cedua,
                                                 pe_apellido = empleado.Empleado,
                                                 em_codigo = empleado.em_codigo,
+                                                IdSucursal=empleado.IdSucursal,
                                                 Secuencia = cont,
                                                 IdEmpleado = empleado.IdEmpleado,
                                                 IdRubro = rubros_calculados.IdRubro_horas_matutina,
@@ -250,7 +251,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 ValorHora=Convert.ToDouble( empleado.Valor_horas_matutino)
                                             };
                                             info.Valor = Convert.ToDouble(empleado.Valor_horas_matutino * info.NumHoras);
-
+                                            info.Secuencia = lista_novedades.Count() + 1;
                                             lista_novedades.Add(info);
                                         }
                                     }
@@ -269,6 +270,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 pe_cedulaRuc = cedua,
                                                 pe_apellido = empleado.Empleado,
                                                 em_codigo = empleado.em_codigo,
+                                                IdSucursal = empleado.IdSucursal,
                                                 Secuencia = cont,
                                                 IdEmpleado = empleado.IdEmpleado,
                                                 IdRubro = rubros_calculados.IdRubro_horas_vespertina,
@@ -278,6 +280,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                                             };
                                             info.Valor = Convert.ToDouble(empleado.Valor_horas_vespertina * info.NumHoras);
+                                            info.Secuencia = lista_novedades.Count() + 1;
                                             lista_novedades.Add(info);
                                         }
                                     }
@@ -295,6 +298,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 NumHoras = Convert.ToDouble(reader.GetDouble(5)),
                                                 pe_cedulaRuc = cedua,
                                                 pe_apellido = empleado.Empleado,
+                                                IdSucursal = empleado.IdSucursal,
                                                 em_codigo = empleado.em_codigo,
                                                 Secuencia = cont,
                                                 IdEmpleado = empleado.IdEmpleado,
@@ -305,7 +309,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                                             };
                                             info.Valor = Convert.ToDouble(empleado.Valor_horas_nocturna * info.NumHoras);
-
+                                            info.Secuencia = lista_novedades.Count() + 1;
                                             lista_novedades.Add(info);
                                         }
                                     }
@@ -318,6 +322,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     }
 
                 }
+
                 EmpleadoNovedadCargaMasiva_detLis_Info.set_list(lista_novedades);
             }
         }

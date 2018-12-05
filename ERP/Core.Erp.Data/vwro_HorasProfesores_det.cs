@@ -33,5 +33,6 @@ namespace Core.Erp.Data
         public string pe_cedulaRuc { get; set; }
         public int IdSucursal { get; set; }
         public double ValorHora { get; set; }
+        public double Valor { get; set; }
     }
 }
