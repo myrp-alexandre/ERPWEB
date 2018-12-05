@@ -9462,6 +9462,7 @@
     <Content Include="Areas\Presupuesto\Views\Presupuesto\_GridViewPartial_PresupuestoDet.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Presupuesto\_GridViewPartial_Presupuesto.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Presupuesto\_CmbCuentaContable.cshtml" />
+    <Content Include="Areas\Produccion\Views\Fabricacion\_GridViewPartial_fabricacion_det_egr.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
