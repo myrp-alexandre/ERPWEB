@@ -213,16 +213,48 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             var empleado = empleado_info_list.get_list().Where(v => v.pe_cedulaRuc == cedua).FirstOrDefault();
                             if (empleado != null)
                             {
-                                ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
+                                if (!reader.IsDBNull(3))
                                 {
-                                    NumHoras = Convert.ToDouble(reader.GetString(3)),
-                                    pe_cedulaRuc = cedua,
-                                    pe_apellido = empleado.Empleado,
-                                    em_codigo = empleado.em_codigo,
-                                    Secuencia = cont,
-                                    IdEmpleado = empleado.IdEmpleado
-                                };
-                                lista_novedades.Add(info);
+                                    ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
+                                    {
+                                        NumHoras = Convert.ToDouble(reader.GetString(3)),
+                                        pe_cedulaRuc = cedua,
+                                        pe_apellido = empleado.Empleado,
+                                        em_codigo = empleado.em_codigo,
+                                        Secuencia = cont,
+                                        IdEmpleado = empleado.IdEmpleado
+                                    };
+                                    lista_novedades.Add(info);
+                                }
+
+                                if (!reader.IsDBNull(4))
+                                {
+                                    ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
+                                    {
+                                        NumHoras = Convert.ToDouble(reader.GetString(3)),
+                                        pe_cedulaRuc = cedua,
+                                        pe_apellido = empleado.Empleado,
+                                        em_codigo = empleado.em_codigo,
+                                        Secuencia = cont,
+                                        IdEmpleado = empleado.IdEmpleado
+                                    };
+                                    lista_novedades.Add(info);
+                                }
+
+                                if (!reader.IsDBNull(5))
+                                {
+                                    ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
+                                    {
+                                        NumHoras = Convert.ToDouble(reader.GetString(3)),
+                                        pe_cedulaRuc = cedua,
+                                        pe_apellido = empleado.Empleado,
+                                        em_codigo = empleado.em_codigo,
+                                        Secuencia = cont,
+                                        IdEmpleado = empleado.IdEmpleado
+                                    };
+                                    lista_novedades.Add(info);
+                                }
+
                             }
                         }
                         cont++;
