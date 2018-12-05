@@ -9454,6 +9454,9 @@
     <Content Include="Areas\Produccion\Views\Fabricacion\Modificar.cshtml" />
     <Content Include="Areas\Presupuesto\Views\PeriodoPresupuesto\Modificar.cshtml" />
     <Content Include="Areas\Presupuesto\Views\PeriodoPresupuesto\Anular.cshtml" />
+    <Content Include="Areas\Produccion\Views\Fabricacion\_GridViewPartial_fabricacion_det.cshtml" />
+    <Content Include="Areas\Produccion\Views\Fabricacion\_CmbProducto_Fabricacion.cshtml" />
+
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

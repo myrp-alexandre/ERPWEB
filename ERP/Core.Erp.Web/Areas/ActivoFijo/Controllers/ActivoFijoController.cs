@@ -151,6 +151,12 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0, int IdActivoFijo = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             Af_Activo_fijo_Info model = bus_activo.get_info(IdEmpresa, IdActivoFijo);
             if (model == null)
                 return RedirectToAction("Index");
@@ -263,7 +269,6 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             cargar_combos_Detalle();
             return PartialView("_GridViewPartial_activo_fijo_ctacble", model);
         }
-        [HttpPost, ValidateInput(false)]
         public ActionResult EditingDelete(int Secuencia)
         {
             List_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));

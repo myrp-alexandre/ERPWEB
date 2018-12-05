@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Produccion
 {
     public class pro_Fabricacion_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdFabricacion { get; set; }
         [Required(ErrorMessage = ("el campo sucursal de egreso es obligatorio"))]
@@ -35,9 +36,10 @@ namespace Core.Erp.Info.Produccion
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
-        //campos que noe xisten en la tabla
+        //campos que no existen en la tabla
 
         public DateTime FechaIni { get; set; }
         public DateTime FechaFin { get; set; }
+        public List<pro_FabricacionDet_Info> LstDet { get; set; }
     }
 }
