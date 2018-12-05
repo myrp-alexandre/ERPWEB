@@ -25,9 +25,9 @@ namespace Core.Erp.Data
         public Nullable<double> NumHoras { get; set; }
         public Nullable<int> IdSucursal { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_empleado_Novedad ro_empleado_Novedad { get; set; }
         public virtual ro_HorasProfesores ro_HorasProfesores { get; set; }
         public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

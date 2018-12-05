@@ -20,17 +20,26 @@ namespace Core.Erp.Data
             this.ro_Config_Param_contable = new HashSet<ro_Config_Param_contable>();
             this.ro_empleado_x_rubro_acumulado = new HashSet<ro_empleado_x_rubro_acumulado>();
             this.ro_prestamo = new HashSet<ro_prestamo>();
+            this.ro_empleado_x_ro_rubro = new HashSet<ro_empleado_x_ro_rubro>();
+            this.ro_empleado_novedad_det = new HashSet<ro_empleado_novedad_det>();
+            this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
+            this.ro_EmpleadoNovedadCargaMasiva = new HashSet<ro_EmpleadoNovedadCargaMasiva>();
+            this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
             this.ro_rubros_calculados = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados1 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados2 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados3 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados4 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados5 = new HashSet<ro_rubros_calculados>();
-            this.ro_empleado_x_ro_rubro = new HashSet<ro_empleado_x_ro_rubro>();
-            this.ro_empleado_novedad_det = new HashSet<ro_empleado_novedad_det>();
-            this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
-            this.ro_EmpleadoNovedadCargaMasiva = new HashSet<ro_EmpleadoNovedadCargaMasiva>();
-            this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
+            this.ro_rubros_calculados6 = new HashSet<ro_rubros_calculados>();
+            this.ro_rubros_calculados7 = new HashSet<ro_rubros_calculados>();
+            this.ro_rubros_calculados8 = new HashSet<ro_rubros_calculados>();
+            this.ro_rubros_calculados9 = new HashSet<ro_rubros_calculados>();
+            this.ro_rubros_calculados10 = new HashSet<ro_rubros_calculados>();
+            this.ro_rubros_calculados11 = new HashSet<ro_rubros_calculados>();
+            this.ro_rubros_calculados12 = new HashSet<ro_rubros_calculados>();
+            this.ro_rubros_calculados13 = new HashSet<ro_rubros_calculados>();
+            this.ro_rubros_calculados14 = new HashSet<ro_rubros_calculados>();
         }
     
         public int IdEmpresa { get; set; }
@@ -68,16 +77,25 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_Config_Param_contable> ro_Config_Param_contable { get; set; }
         public virtual ICollection<ro_empleado_x_rubro_acumulado> ro_empleado_x_rubro_acumulado { get; set; }
         public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
+        public virtual ICollection<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
+        public virtual ICollection<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
+        public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
+        public virtual ICollection<ro_EmpleadoNovedadCargaMasiva> ro_EmpleadoNovedadCargaMasiva { get; set; }
+        public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados1 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados2 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados3 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados4 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados5 { get; set; }
-        public virtual ICollection<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
-        public virtual ICollection<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
-        public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
-        public virtual ICollection<ro_EmpleadoNovedadCargaMasiva> ro_EmpleadoNovedadCargaMasiva { get; set; }
-        public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
+        public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados6 { get; set; }
+        public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados7 { get; set; }
+        public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados8 { get; set; }
+        public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados9 { get; set; }
+        public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados10 { get; set; }
+        public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados11 { get; set; }
+        public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados12 { get; set; }
+        public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados13 { get; set; }
+        public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados14 { get; set; }
     }
 }

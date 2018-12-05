@@ -31,6 +31,8 @@ namespace Core.Erp.Info.RRHH
         public string IdRubro_DIII { get; set; }
         public string IdRubro_DIV { get; set; }
         public string IdRubro_IR { get; set; }
-        public string IdRubro_FR { get; set; }
+        public string IdRubro_horas_matutina { get; set; }
+        public string IdRubro_horas_vespertina { get; set; }
+        public string IdRubro_horas_nocturna { get; set; }
     }
 }

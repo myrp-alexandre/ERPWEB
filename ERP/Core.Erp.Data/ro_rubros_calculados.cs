@@ -30,7 +30,9 @@ namespace Core.Erp.Data
         public string IdRubro_DIII { get; set; }
         public string IdRubro_DIV { get; set; }
         public string IdRubro_IR { get; set; }
-        public string IdRubro_FR { get; set; }
+        public string IdRubro_horas_matutina { get; set; }
+        public string IdRubro_horas_vespertina { get; set; }
+        public string IdRubro_horas_nocturna { get; set; }
     
         public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
         public virtual ro_rubro_tipo ro_rubro_tipo1 { get; set; }
@@ -38,5 +40,14 @@ namespace Core.Erp.Data
         public virtual ro_rubro_tipo ro_rubro_tipo3 { get; set; }
         public virtual ro_rubro_tipo ro_rubro_tipo4 { get; set; }
         public virtual ro_rubro_tipo ro_rubro_tipo5 { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo6 { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo7 { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo8 { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo9 { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo10 { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo11 { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo12 { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo13 { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo14 { get; set; }
     }
 }

@@ -147,6 +147,26 @@ namespace Core.Erp.Data.Produccion
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
                     });
+
+                    if(info.LstDet.Count()>0)
+                    {
+                        foreach (var item in info.LstDet)
+                        {
+                            Context.pro_FabricacionDet.Add(new pro_FabricacionDet
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdFabricacion = info.IdFabricacion,
+                                IdProducto = item.IdProducto,
+                                Cantidad = item.Cantidad,
+                                Costo = item.Costo,
+                                RealizaMovimiento = item.RealizaMovimiento,
+                                Secuencia = item.Secuencia,
+                                Signo = item.Signo,
+                                IdUnidadMedida = item.IdUnidadMedida
+                            });
+                        }
+
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -179,6 +199,30 @@ namespace Core.Erp.Data.Produccion
 
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
+
+
+                    var detalle = Context.pro_FabricacionDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdFabricacion == info.IdFabricacion);
+                    Context.pro_FabricacionDet.RemoveRange(detalle);
+                    if (info.LstDet.Count() > 0)
+                    {
+                        foreach (var item in info.LstDet)
+                        {
+                            Context.pro_FabricacionDet.Add(new pro_FabricacionDet
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdFabricacion = info.IdFabricacion,
+                                IdProducto = item.IdProducto,
+                                Cantidad = item.Cantidad,
+                                Costo = item.Costo,
+                                RealizaMovimiento = item.RealizaMovimiento,
+                                Secuencia = item.Secuencia,
+                                Signo = item.Signo,
+                                IdUnidadMedida = item.IdUnidadMedida
+                            });
+                        }
+
+                    }
+
                     Context.SaveChanges();
 
                 }

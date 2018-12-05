@@ -17,5 +17,7 @@ namespace Core.Erp.Info.Produccion
         public double Cantidad { get; set; }
         public double Costo { get; set; }
         public bool RealizaMovimiento { get; set; }
+        //campos que no existen en la tabla
+        public string pr_descripcion { get; set; }
     }
 }
