@@ -53,17 +53,7 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="rub_tipcal">Tipo campo*</label>
-                    @Html.DropDownListFor(q => q.rub_tipcal, new SelectList(ViewBag.lst_tipo_campo, "IdCatalogo", "ca_descripcion"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.rub_tipcal, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
+        
 
     <div class="row">
         <div class="col-md-12">
@@ -162,21 +152,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <div class="form-group">
-                    <label for="rub_guarda_rol"></label>
-                    @Html.DevExpress().CheckBoxFor(q => q.rub_guarda_rol, settings =>
-                       {
-                           settings.Name = "rub_guarda_rol";
-                           settings.Text = "Se guarda en rol";
-
-                       }).GetHtml()
-                </div>
-            </div>
-        </div>
-    </div>
+   
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">

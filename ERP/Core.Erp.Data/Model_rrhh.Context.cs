@@ -63,7 +63,6 @@ namespace Core.Erp.Data
         public DbSet<ro_periodo_x_ro_Nomina_TipoLiqui> ro_periodo_x_ro_Nomina_TipoLiqui { get; set; }
         public DbSet<ro_prestamo> ro_prestamo { get; set; }
         public DbSet<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }
-        public DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
         public DbSet<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
         public DbSet<ro_Tipo_Prestamo> ro_Tipo_Prestamo { get; set; }
         public DbSet<ro_turno> ro_turno { get; set; }
@@ -120,8 +119,9 @@ namespace Core.Erp.Data
         public DbSet<vwro_HorasProfesores> vwro_HorasProfesores { get; set; }
         public DbSet<vwro_HorasProfesores_det> vwro_HorasProfesores_det { get; set; }
         public DbSet<ro_empleado> ro_empleado { get; set; }
-        public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
         public DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
+        public DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
+        public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
