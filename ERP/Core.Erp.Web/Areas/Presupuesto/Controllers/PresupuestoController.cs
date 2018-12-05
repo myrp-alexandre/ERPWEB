@@ -1,6 +1,8 @@
 ﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.General;
 using Core.Erp.Bus.Presupuesto;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.Helps;
 using Core.Erp.Info.Presupuesto;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
@@ -20,26 +22,82 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         pre_Presupuesto_Bus bus_Presupuesto = new pre_Presupuesto_Bus();
         pre_PresupuestoDet_Bus bus_PresupuestoDet = new pre_PresupuestoDet_Bus();
         pre_Grupo_Bus bus_Grupo = new pre_Grupo_Bus();
+        tb_sucursal_Bus bus_Sucursal = new tb_sucursal_Bus();
         pre_rubro_Bus bus_Rubro = new pre_rubro_Bus();
+        pre_Periodo_Bus bus_Periodo = new pre_Periodo_Bus();
         ct_plancta_Bus bus_PlanCta = new ct_plancta_Bus();
         pre_PresupuestoDet_List Lista_PresupuestoDet = new pre_PresupuestoDet_List();
+        List<pre_Presupuesto_Info> lst_Presupuesto = new List<pre_Presupuesto_Info>();
         string mensaje = string.Empty;
         #endregion
 
         #region Index
         public ActionResult Index()
         {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+
+            cargar_combos(model.IdEmpresa);
             return View();
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            model.IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            cargar_filtros(model.IdEmpresa);
+            return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_Grupo()
+        public ActionResult GridViewPartial_Presupuesto(int IdSucursal = 0, decimal IdPeriodo = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<pre_Presupuesto_Info> model = bus_Presupuesto.GetList(IdEmpresa, true);
+            ViewBag.IdSucursal = IdSucursal == 0 ? 0 : Convert.ToInt32(IdSucursal);
+            ViewBag.IdPeriodo = IdPeriodo == 0 ? 0 : Convert.ToInt32(IdPeriodo);
 
-            return PartialView("_GridViewPartial_Presupuesto", model);
+            lst_Presupuesto = bus_Presupuesto.GetList(IdEmpresa, IdSucursal, IdPeriodo, true);
+            return PartialView("_GridViewPartial_Presupuesto", lst_Presupuesto);
         }
+
+        #region Metodos
+        private void cargar_filtros(int IdEmpresa)
+        {
+            try
+            {
+                var lst_Sucursal = bus_Sucursal.get_list(IdEmpresa, false);
+                ViewBag.lst_Sucursal = lst_Sucursal;
+
+                var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false);
+                ViewBag.lst_Periodo = lst_Periodo;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private void cargar_combos(int IdEmpresa)
+        {
+            try
+            {
+                var lst_Sucursal = bus_Sucursal.get_list(IdEmpresa, false);
+                ViewBag.lst_Sucursal = lst_Sucursal;
+
+                var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false);
+                ViewBag.lst_Periodo = lst_Periodo;
+
+                var lst_Rubro = bus_Rubro.GetList(IdEmpresa, false);
+                ViewBag.lst_Rubro = lst_Rubro;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
         #endregion
 
 
@@ -60,6 +118,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 IdUsuarioCreacion = SessionFixed.IdUsuario
             };
 
+            cargar_combos(IdEmpresa);
             Lista_PresupuestoDet.set_list(new List<pre_PresupuestoDet_Info>(), model.IdTransaccionSession);
             return View(model);
         }
@@ -103,6 +162,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             model.ListaPresupuestoDet = bus_PresupuestoDet.GetList(model.IdEmpresa, Convert.ToInt32(model.IdPresupuesto));
             Lista_PresupuestoDet.set_list(model.ListaPresupuestoDet, model.IdTransaccionSession);
 
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -141,6 +201,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             model.ListaPresupuestoDet = bus_PresupuestoDet.GetList(model.IdEmpresa, Convert.ToInt32(model.IdPresupuesto));
             Lista_PresupuestoDet.set_list(model.ListaPresupuestoDet, model.IdTransaccionSession);
 
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -195,7 +256,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             Lista_PresupuestoDet.AddRow(info_PresupuestoDet, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = Lista_PresupuestoDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            return PartialView("_GridViewPartial_GrupoDet", model);
+            return PartialView("_GridViewPartial_PresupuestoDet", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -224,7 +285,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             Lista_PresupuestoDet.AddRow(info_PresupuestoDet, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = Lista_PresupuestoDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            return PartialView("_GridViewPartial_GrupoDet", model);
+            return PartialView("_GridViewPartial_PresupuestoDet", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
@@ -232,7 +293,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             Lista_PresupuestoDet.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = Lista_PresupuestoDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            return PartialView("_GridViewPartial_GrupoDet", model);
+            return PartialView("_GridViewPartial_PresupuestoDet", model);
         }
 
         public ActionResult CmbCuentaContable()

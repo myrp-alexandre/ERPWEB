@@ -56,6 +56,11 @@ namespace Core.Erp.Info.Helps
 
         #endregion
 
+        #region filtros de Presupuesto
+        public decimal IdPeriodo { get; set; }
+
+        #endregion
+
         public cl_filtros_Info()
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
