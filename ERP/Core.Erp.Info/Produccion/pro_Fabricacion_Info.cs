@@ -37,9 +37,11 @@ namespace Core.Erp.Info.Produccion
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
         //campos que no existen en la tabla
-
+        public string pr_descripcion { get; set; }
         public DateTime FechaIni { get; set; }
         public DateTime FechaFin { get; set; }
         public List<pro_FabricacionDet_Info> LstDet { get; set; }
+        public pro_FabricacionDet_Info info_det { get; set; }
+
     }
 }
