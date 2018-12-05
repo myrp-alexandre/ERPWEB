@@ -31,13 +31,12 @@
             TIPONATPER = 5,
             TIP_CTA_AC = 27
         }
+
         public enum eTipoSexoGeneral
         {
             SEXO_FEM ,
             SEXO_MAS
-        }
-
-        
+        }        
 
         public enum eTipoCatalogoBanco
         {
@@ -162,7 +161,9 @@
             NTDB,
             RET,
             TARJ,
-            TRANS_BAN
+            TRANS_BAN,
+            TODOS,
+            SINRET
         }
 
         public enum eTipoCatalogoAF

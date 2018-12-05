@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.Presupuesto.pre_Grupo_Info
+﻿@model Core.Erp.Info.Presupuesto.pre_Presupuesto_Info
 @{
     ViewBag.Title = "Nuevo presupuesto";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -22,11 +22,36 @@
     @Html.HiddenFor(q => q.IdTransaccionSession);
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label for="Descripcion">Descripción*</label>
-                    @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Descripcion, "", new { @class = "text-danger" })
+                    <label for="Descripcion">Sucursal*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_Sucursal, "IdSucursal", "su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Descripcion">Periodo*</label>
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_Periodo, "IdPeriodo", "FechaInicio"), new { @class = "form-control", @id = "IdPeriodo" })
+                    @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Descripcion">Grupo*</label>
+                    @Html.DropDownListFor(q => q.IdGrupo, new SelectList(ViewBag.lst_Grupo, "IdGrupo", "Descripcion"), new { @class = "form-control", @id = "IdGrupo" })
+                    @Html.ValidationMessageFor(q => q.IdGrupo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Descripcion">Observación</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

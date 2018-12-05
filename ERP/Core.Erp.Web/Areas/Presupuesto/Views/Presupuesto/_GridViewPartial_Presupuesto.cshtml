@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_Presupuesto";
-        settings.CallbackRouteValues = new { Controller = "Presupuesto", Action = "GridViewPartial_Presupuesto" };
+        settings.CallbackRouteValues = new { Controller = "Presupuesto", Action = "GridViewPartial_Presupuesto", IdSucursal = ViewBag.IdSucursal, IdPeriodo = ViewBag.IdPeriodo };
         settings.KeyFieldName = "IdPresupuesto";
         settings.Width = Unit.Percentage(100);
 

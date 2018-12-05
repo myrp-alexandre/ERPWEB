@@ -51,7 +51,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             var lst_tipo_comprobante = bus_tipo_comprobante.get_list(IdEmpresa, false);
             ViewBag.lst_tipo_comprobante = lst_tipo_comprobante;
 
-            var lst_cobrotipo = bus_cobrotipo.get_list(false);
+            var lst_cobrotipo = bus_cobrotipo.get_list(false, Info.Helps.cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar.TODOS);
             ViewBag.lst_cobrotipo = lst_cobrotipo;
             
             var lst_movimiento = bus_movimiento.get_list(IdEmpresa, false);

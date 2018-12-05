@@ -82,6 +82,7 @@ namespace Core.Erp.Info.Facturacion
         public List<fa_cuotas_x_doc_Info> lst_cuota { get; set; }
         public string IdFormaPago { get; set; }
         public decimal? IdProforma { get; set; }
+        public string IdCobro_tipo { get; set; }
         #endregion
 
         #region Campos super admin

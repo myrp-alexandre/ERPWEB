@@ -64,12 +64,13 @@ namespace Core.Erp.Data
         public DbSet<vwin_producto_x_tb_bodega_stock_x_lote> vwin_producto_x_tb_bodega_stock_x_lote { get; set; }
         public DbSet<vwin_Producto_Stock> vwin_Producto_Stock { get; set; }
         public DbSet<in_producto_x_tb_bodega> in_producto_x_tb_bodega { get; set; }
-        public DbSet<in_ProductoTipo> in_ProductoTipo { get; set; }
         public DbSet<in_Consignacion> in_Consignacion { get; set; }
         public DbSet<in_ConsignacionDet> in_ConsignacionDet { get; set; }
         public DbSet<vwin_Consignacion> vwin_Consignacion { get; set; }
         public DbSet<vwin_ConsignacionDet> vwin_ConsignacionDet { get; set; }
         public DbSet<in_parametro> in_parametro { get; set; }
+        public DbSet<in_ProductoTipo> in_ProductoTipo { get; set; }
+        public DbSet<vwin_Producto_para_composicion> vwin_Producto_para_composicion { get; set; }
     
         public virtual ObjectResult<spSys_inv_Reversar_aprobacion_Result> spSys_inv_Reversar_aprobacion(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi, Nullable<bool> borar)
         {

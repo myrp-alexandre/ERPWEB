@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Presupuesto
 {
     public class pre_Presupuesto_Data
     {
-        public List<pre_Presupuesto_Info> get_list(int IdEmpresa, bool MostrarAnulados)
+        public List<pre_Presupuesto_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdPeriodo, bool MostrarAnulados)
         {
             try
             {

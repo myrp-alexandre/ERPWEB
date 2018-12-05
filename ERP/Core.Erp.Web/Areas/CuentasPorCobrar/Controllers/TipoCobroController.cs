@@ -36,7 +36,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         public ActionResult GridViewPartial_tipocobro()
         {
             List<cxc_cobro_tipo_Info> model = new List<cxc_cobro_tipo_Info>();
-            model = bus_tipocobro.get_list(true);
+            model = bus_tipocobro.get_list(true, Info.Helps.cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar.TODOS);
             return PartialView("_GridViewPartial_tipocobro", model);
         }
 

@@ -13,11 +13,11 @@ namespace Core.Erp.Bus.Presupuesto
         pre_Presupuesto_Data oData = new pre_Presupuesto_Data();
         pre_PresupuestoDet_Data oData_det = new pre_PresupuestoDet_Data();
 
-        public List<pre_Presupuesto_Info> GetList(int IdEmpresa, bool MostrarAnulado)
+        public List<pre_Presupuesto_Info> GetList(int IdEmpresa, int IdSucursal, decimal IdPeriodo, bool MostrarAnulados)
         {
             try
             {
-                return oData.get_list(IdEmpresa, MostrarAnulado);
+                return oData.get_list(IdEmpresa, IdSucursal, IdPeriodo, MostrarAnulados);
             }
             catch (Exception)
             {

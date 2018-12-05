@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.CuentasPorCobrar;
 using Core.Erp.Info.CuentasPorCobrar;
+using Core.Erp.Info.Helps;
 using System;
 using System.Collections.Generic;
 
@@ -8,12 +9,12 @@ namespace Core.Erp.Bus.CuentasPorCobrar
     public class cxc_cobro_tipo_Bus
     {
         cxc_cobro_tipo_Data odata = new cxc_cobro_tipo_Data();
-        
-        public List<cxc_cobro_tipo_Info> get_list(bool mostrar_anulados)
+
+        public List<cxc_cobro_tipo_Info> get_list(bool mostrar_anulados, cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar Motivo)
         {
             try
             {
-                return odata.get_list(mostrar_anulados);
+                return odata.get_list(mostrar_anulados, Motivo);
             }
             catch (Exception)
             {
