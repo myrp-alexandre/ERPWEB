@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_empleado_horas";
-        settings.CallbackRouteValues = new { Controller = "ImportacionHoras", Action = "GridViewPartial_importacion_novedades", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
+        settings.CallbackRouteValues = new { Controller = "ImportacionHoras", Action = "GridViewPartial_importacion_horas", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCarga";
@@ -52,7 +52,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("Estado")) == "I")
+            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
