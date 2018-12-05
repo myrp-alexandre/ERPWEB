@@ -56,7 +56,7 @@ namespace Core.Erp.Data.Presupuesto
 
                 using (Entities_presupuesto Context = new Entities_presupuesto())
                 {
-                    pre_rubro Entity = Context.pre_rubro.Where(q => q.IdRubro == IdRubro && q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                    pre_Rubro Entity = Context.pre_Rubro.Where(q => q.IdRubro == IdRubro && q.IdEmpresa == IdEmpresa).FirstOrDefault();
 
                     if (Entity == null) return null;
                     info = new pre_rubro_Info
@@ -85,7 +85,7 @@ namespace Core.Erp.Data.Presupuesto
                 int ID = 1;
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    var Lista = db.pre_rubro.Where(q => q.IdEmpresa == IdEmpresa).Select(q => q.IdRubro);
+                    var Lista = db.pre_Rubro.Where(q => q.IdEmpresa == IdEmpresa).Select(q => q.IdRubro);
 
                     if (Lista.Count() > 0)
                         ID = Lista.Max() + 1;
@@ -105,7 +105,7 @@ namespace Core.Erp.Data.Presupuesto
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
                     int id = get_id(info.IdEmpresa);
-                    db.pre_rubro.Add(new pre_rubro
+                    db.pre_Rubro.Add(new pre_Rubro
                     {            
                         IdEmpresa = info.IdEmpresa,            
                         IdRubro = id,
@@ -133,7 +133,7 @@ namespace Core.Erp.Data.Presupuesto
             {
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    pre_rubro entity = db.pre_rubro.Where(q => q.IdRubro == info.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    pre_Rubro entity = db.pre_Rubro.Where(q => q.IdRubro == info.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
 
                     if (entity == null)
                     {
@@ -162,7 +162,7 @@ namespace Core.Erp.Data.Presupuesto
             {
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    pre_rubro entity = db.pre_rubro.Where(q => q.IdRubro == info.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    pre_Rubro entity = db.pre_Rubro.Where(q => q.IdRubro == info.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
 
                     if (entity == null)
                     {

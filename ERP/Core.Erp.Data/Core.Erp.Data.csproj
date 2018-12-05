@@ -1019,9 +1019,6 @@
     </Compile>
     <Compile Include="Presupuesto\pre_Grupo_Data.cs" />
     <Compile Include="Presupuesto\pre_Grupo_x_seg_usuario_Data.cs" />
-    <Compile Include="Presupuesto\pre_Presupuesto_Data.cs" />
-    <Compile Include="Presupuesto\pre_Presupuesto_x_grupo_Data.cs" />
-    <Compile Include="Presupuesto\pre_Presupuesto_x_grupo_det_Data.cs" />
     <Compile Include="Presupuesto\pre_rubro_Data.cs" />
     <Compile Include="pre_Grupo.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
@@ -2502,6 +2499,8 @@
       <Name>Core.Erp.Info</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Produccion\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

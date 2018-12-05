@@ -236,9 +236,6 @@
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Bus.cs" />
     <Compile Include="Presupuesto\pre_Grupo_Bus.cs" />
     <Compile Include="Presupuesto\pre_Grupo_x_seg_usuario_Bus.cs" />
-    <Compile Include="Presupuesto\pre_Presupuesto_Bus.cs" />
-    <Compile Include="Presupuesto\pre_Presupuesto_x_grupo_Bus.cs" />
-    <Compile Include="Presupuesto\pre_Presupuesto_x_grupo_det_Bus.cs" />
     <Compile Include="Presupuesto\pre_rubro_Bus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Bus.cs" />
@@ -410,7 +407,9 @@
     <Compile Include="SeguridadAcceso\seg_usuario_Bus.cs" />
     <Compile Include="SeguridadAcceso\seg_Usuario_x_Empresa_Bus.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Produccion\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Erp.Data\Core.Erp.Data.csproj">
       <Project>{a52f3b91-b460-4ffb-aa55-a667dc60db43}</Project>
