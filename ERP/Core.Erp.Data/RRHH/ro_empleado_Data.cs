@@ -190,7 +190,10 @@ namespace Core.Erp.Data.RRHH
                            pe_celular=info.pe_celular,
                            IdTipoDocumento=info.IdTipoDocumento,
                            pe_correo=info.pe_correo,
-                           pe_fechaNacimiento=info.pe_fechaNacimiento
+                           pe_fechaNacimiento=info.pe_fechaNacimiento,
+                           Pago_por_horas = info.Pago_por_horas,
+                           Valor_horas = info.Valor_horas,
+                           Valor_maximo_horas = info.Valor_maximo_horas
                         
                     };
                 }
@@ -284,7 +287,10 @@ namespace Core.Erp.Data.RRHH
                         IdHorario	=info.	IdHorario	,
                         Tiene_ingresos_compartidos=info.Tiene_ingresos_compartidos,
                         IdUsuario = info.IdUsuario,
-                        Fecha_Transaccion = info.Fecha_Transaccion=DateTime.Now
+                        Fecha_Transaccion = info.Fecha_Transaccion=DateTime.Now,
+                        Pago_por_horas = info.Pago_por_horas,
+                        Valor_horas = info.Valor_horas,
+                        Valor_maximo_horas = info.Valor_maximo_horas
 
                     };
                     Context.ro_empleado.Add(Entity);
@@ -344,7 +350,9 @@ namespace Core.Erp.Data.RRHH
                         Entity.em_mail = info.em_mail   ;
                         Entity.IdTipoLicencia = info.IdTipoLicencia    ;
                         Entity.IdBanco = info.IdBanco   ;
-                    
+                    Entity.Pago_por_horas = info.Pago_por_horas;
+                    Entity.Valor_horas = info.Valor_horas;
+                    Entity.Valor_maximo_horas = info.Valor_maximo_horas;
                         Entity.IdArea = info.IdArea    ;
                         Entity.IdDivision = info.IdDivision    ;
                         Entity.Fecha_UltMod = info.Fecha_UltMod  ;

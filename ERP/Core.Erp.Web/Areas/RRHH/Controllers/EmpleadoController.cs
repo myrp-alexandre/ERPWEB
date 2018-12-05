@@ -93,7 +93,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
 
                 cargar_combos();
-                ro_empleado_Info info = new ro_empleado_Info();
+                ro_empleado_Info info = new ro_empleado_Info
+                {
+                    em_fechaIngaRol = DateTime.Now,
+                    em_fechaSalida = DateTime.Now,
+                    IdSucursal = 1
+                };
                 info.em_foto = new byte[0];
 
                 return View(info);
