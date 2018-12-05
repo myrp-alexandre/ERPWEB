@@ -18,7 +18,7 @@ namespace Core.Erp.Data
         public decimal IdRol { get; set; }
         public decimal IdEmpleado { get; set; }
         public string IdRubro { get; set; }
-        public double Valor { get; set; }
+        public Nullable<decimal> Valor { get; set; }
         public int IdSucursal { get; set; }
         public string em_codigo { get; set; }
         public string pe_cedulaRuc { get; set; }

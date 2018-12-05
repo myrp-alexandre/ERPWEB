@@ -52,7 +52,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("Estado")) == "I")
+            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
