@@ -1019,6 +1019,7 @@
     </Compile>
     <Compile Include="Presupuesto\pre_Grupo_Data.cs" />
     <Compile Include="Presupuesto\pre_Grupo_x_seg_usuario_Data.cs" />
+    <Compile Include="Presupuesto\pre_RubroTipo_Data.cs" />
     <Compile Include="Presupuesto\pre_rubro_Data.cs" />
     <Compile Include="pre_Grupo.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>

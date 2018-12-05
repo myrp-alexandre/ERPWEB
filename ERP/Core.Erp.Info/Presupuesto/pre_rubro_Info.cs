@@ -8,6 +8,8 @@ namespace Core.Erp.Info.Presupuesto
         [Key]
         public int IdRubro { get; set; }
         public int IdEmpresa { get; set; }
+        [Required(ErrorMessage = "El campo tipo de rubro es obligatorio")]
+        public int IdRubroTipo { get; set; }
         [Required(ErrorMessage = "El campo descripción es obligatorio")]
         [StringLength(500, MinimumLength = 4, ErrorMessage = "El campo descripción debe tener mínimo 4 caracteres y máximo 500")]
 

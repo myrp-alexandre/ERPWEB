@@ -264,6 +264,7 @@
     <Compile Include="Inventario\in_UnidadMedida_Info.cs" />
     <Compile Include="Presupuesto\pre_Grupo_Info.cs" />
     <Compile Include="Presupuesto\pre_Grupo_x_seg_usuario_Info.cs" />
+    <Compile Include="Presupuesto\pre_RubroTipo_Info.cs" />
     <Compile Include="Presupuesto\pre_rubro_Info.cs" />
     <Compile Include="Produccion\pro_Fabricacion_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
