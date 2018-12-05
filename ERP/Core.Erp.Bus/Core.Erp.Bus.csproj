@@ -237,6 +237,8 @@
     <Compile Include="Presupuesto\pre_Grupo_Bus.cs" />
     <Compile Include="Presupuesto\pre_Grupo_x_seg_usuario_Bus.cs" />
     <Compile Include="Presupuesto\pre_Periodo_Bus.cs" />
+    <Compile Include="Presupuesto\pre_PresupuestoDet_Bus.cs" />
+    <Compile Include="Presupuesto\pre_Presupuesto_Bus.cs" />
     <Compile Include="Presupuesto\pre_RubroTipo_Bus.cs" />
     <Compile Include="Presupuesto\pre_rubro_Bus.cs" />
     <Compile Include="Produccion\pro_FabricacionDet_Bus.cs" />
