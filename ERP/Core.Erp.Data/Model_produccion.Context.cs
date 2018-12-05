@@ -25,7 +25,7 @@ namespace Core.Erp.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<pro_Fabricacion> pro_Fabricacion { get; set; }
         public virtual DbSet<pro_FabricacionDet> pro_FabricacionDet { get; set; }
+        public virtual DbSet<pro_Fabricacion> pro_Fabricacion { get; set; }
     }
 }
