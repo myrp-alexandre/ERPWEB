@@ -2,9 +2,9 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_Rubro";
-        settings.CallbackRouteValues = new { Controller = "RubroPresupuesto", Action = "GridViewPartial_Rubro" };
-        settings.KeyFieldName = "IdRubro";
+        settings.Name = "GridViewPartial_Periodo";
+        settings.CallbackRouteValues = new { Controller = "PeriodoPresupuesto", Action = "GridViewPartial_Periodo" };
+        settings.KeyFieldName = "IdPeriodo";
         settings.Width = Unit.Percentage(100);
 
         //Configuración para que la grilla no muestre texto completo
@@ -66,8 +66,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdRubro = DataBinder.Eval(tc.DataItem, "IdRubro") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdRubro = DataBinder.Eval(tc.DataItem, "IdRubro") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -84,10 +84,20 @@
         });
 
 
-        settings.Columns.Add("IdRubro", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(30);
-        settings.Columns.Add("Descripcion_RubroTipo", "Tipo de Rubro").Width = Unit.Percentage(20);
-        settings.Columns.Add("pc_Cuenta", "Cuenta Contable").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdPeriodo", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("FechaInicio", "Fecha Inicio").Width = Unit.Percentage(15);
+        settings.Columns.Add("FechaFin", "FechaFin").Width = Unit.Percentage(15);        
+        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(30);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EstadoCierre";
+            column.Caption = "Estado Cierre";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";

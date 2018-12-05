@@ -14,7 +14,6 @@ namespace Core.Erp.Info.Presupuesto
         [StringLength(500, MinimumLength = 4, ErrorMessage = "El campo descripción debe tener mínimo 4 caracteres y máximo 500")]
 
         public string Descripcion { get; set; }
-        [Required(ErrorMessage = "El campo cuenta contable es obligatorio")]
         public string IdCtaCble { get; set; }
 
         public bool Estado { get; set; }
@@ -30,5 +29,6 @@ namespace Core.Erp.Info.Presupuesto
 
 
         public string pc_Cuenta { get; set; }
+        public string Descripcion_RubroTipo { get; set; }
     }
 }

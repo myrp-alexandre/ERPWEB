@@ -25,7 +25,6 @@ namespace Core.Erp.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<vwpre_rubro> vwpre_rubro { get; set; }
         public virtual DbSet<pre_Grupo> pre_Grupo { get; set; }
         public virtual DbSet<pre_Grupo_x_seg_usuario> pre_Grupo_x_seg_usuario { get; set; }
         public virtual DbSet<vwpre_Grupo> vwpre_Grupo { get; set; }
@@ -34,5 +33,6 @@ namespace Core.Erp.Data
         public virtual DbSet<pre_PresupuestoPeriodo> pre_PresupuestoPeriodo { get; set; }
         public virtual DbSet<pre_RubroTipo> pre_RubroTipo { get; set; }
         public virtual DbSet<pre_Rubro> pre_Rubro { get; set; }
+        public virtual DbSet<vwpre_Rubro> vwpre_Rubro { get; set; }
     }
 }

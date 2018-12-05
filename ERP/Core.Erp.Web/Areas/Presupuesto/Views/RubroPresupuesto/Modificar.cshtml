@@ -22,7 +22,7 @@
     @Html.HiddenFor(q => q.IdRubro)
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="Descripcion">Descripción*</label>
                     @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
@@ -33,7 +33,14 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdRubroTipo">Tipo de rubro*</label>
+                    @Html.DropDownListFor(q => q.IdRubroTipo, new SelectList(ViewBag.lst_RubroTipo, "IdRubroTipo", "Descripcion"), new { @class = "form-control", @id = "IdRubroTipo" })
+                    @Html.ValidationMessageFor(q => q.IdRubroTipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCtaCble">Cuenta contable de utilidad*</label>
                     @Html.Partial("_CmbCuentaContable", Model.IdCtaCble)

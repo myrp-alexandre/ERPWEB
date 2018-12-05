@@ -1019,6 +1019,7 @@
     </Compile>
     <Compile Include="Presupuesto\pre_Grupo_Data.cs" />
     <Compile Include="Presupuesto\pre_Grupo_x_seg_usuario_Data.cs" />
+    <Compile Include="Presupuesto\pre_Periodo_Data.cs" />
     <Compile Include="Presupuesto\pre_RubroTipo_Data.cs" />
     <Compile Include="Presupuesto\pre_rubro_Data.cs" />
     <Compile Include="pre_Grupo.cs">
@@ -2025,7 +2026,7 @@
     <Compile Include="vwpre_Grupo.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
-    <Compile Include="vwpre_rubro.cs">
+    <Compile Include="vwpre_Rubro.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
     <Compile Include="vwrdep_IngrEgr_x_Empleado.cs">

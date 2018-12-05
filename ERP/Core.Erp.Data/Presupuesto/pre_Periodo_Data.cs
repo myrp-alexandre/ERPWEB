@@ -2,44 +2,44 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Presupuesto
 {
-    public class pre_rubro_Data
+    public class pre_Periodo_Data
     {
-        public List<pre_rubro_Info> GetList(int IdEmpresa, bool MostrarAnulado)
+        public List<pre_Periodo_Info> GetList(int IdEmpresa, bool MostrarAnulado)
         {
             try
             {
-                List<pre_rubro_Info> Lista = new List<pre_rubro_Info>();
+                List<pre_Periodo_Info> Lista = new List<pre_Periodo_Info>();
 
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
                     if (MostrarAnulado == false)
                     {
-                        Lista = db.vwpre_Rubro.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa).Select(q => new pre_rubro_Info
+                        Lista = db.pre_PresupuestoPeriodo.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa).Select(q => new pre_Periodo_Info
                         {
-                            IdRubro = q.IdRubro,
+                            IdPeriodo = q.IdPeriodo,
                             IdEmpresa = q.IdEmpresa,
-                            IdRubroTipo = q.IdRubroTipo,
-                            Descripcion = q.Descripcion,
-                            IdCtaCble = q.IdCtaCble,
-                            pc_Cuenta = q.pc_Cuenta,
-                            Descripcion_RubroTipo = q.Descripcion_RubroTipo,
+                            Observacion = q.Observacion,
+                            FechaInicio = q.FechaInicio,
+                            FechaFin = q.FechaFin,
+                            EstadoCierre = q.EstadoCierre,
                             Estado = q.Estado
                         }).ToList();
                     }
                     else
                     {
-                        Lista = db.vwpre_Rubro.Where(q=> q.IdEmpresa == IdEmpresa).Select(q => new pre_rubro_Info
+                        Lista = db.pre_PresupuestoPeriodo.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new pre_Periodo_Info
                         {
-                            IdRubro = q.IdRubro,
+                            IdPeriodo = q.IdPeriodo,
                             IdEmpresa = q.IdEmpresa,
-                            IdRubroTipo = q.IdRubroTipo,
-                            Descripcion = q.Descripcion,
-                            IdCtaCble = q.IdCtaCble,
-                            pc_Cuenta = q.pc_Cuenta,
-                            Descripcion_RubroTipo = q.Descripcion_RubroTipo,
+                            Observacion = q.Observacion,
+                            FechaInicio = q.FechaInicio,
+                            FechaFin = q.FechaFin,
+                            EstadoCierre = q.EstadoCierre,
                             Estado = q.Estado
                         }).ToList();
                     }
@@ -52,24 +52,25 @@ namespace Core.Erp.Data.Presupuesto
             }
         }
 
-        public pre_rubro_Info GetInfo(int IdEmpresa, int IdRubro)
+        public pre_Periodo_Info GetInfo(int IdEmpresa, int IdPeriodo)
         {
             try
             {
-                pre_rubro_Info info = new pre_rubro_Info();
+                pre_Periodo_Info info = new pre_Periodo_Info();
 
                 using (Entities_presupuesto Context = new Entities_presupuesto())
                 {
-                    pre_Rubro Entity = Context.pre_Rubro.Where(q => q.IdRubro == IdRubro && q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                    pre_PresupuestoPeriodo Entity = Context.pre_PresupuestoPeriodo.Where(q => q.IdPeriodo == IdPeriodo && q.IdEmpresa == IdEmpresa).FirstOrDefault();
 
                     if (Entity == null) return null;
-                    info = new pre_rubro_Info
+                    info = new pre_Periodo_Info
                     {
+                        IdPeriodo = Entity.IdPeriodo,
                         IdEmpresa = Entity.IdEmpresa,
-                        IdRubro = Entity.IdRubro,
-                        IdRubroTipo = Entity.IdRubroTipo,
-                        Descripcion = Entity.Descripcion,
-                        IdCtaCble = Entity.IdCtaCble,
+                        Observacion = Entity.Observacion,
+                        FechaInicio = Entity.FechaInicio,
+                        FechaFin = Entity.FechaFin,
+                        EstadoCierre = Entity.EstadoCierre,
                         Estado = Entity.Estado
                     };
                 }
@@ -90,10 +91,10 @@ namespace Core.Erp.Data.Presupuesto
                 int ID = 1;
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    var Lista = db.pre_Rubro.Where(q => q.IdEmpresa == IdEmpresa).Select(q => q.IdRubro);
+                    var Lista = db.pre_PresupuestoPeriodo.Where(q => q.IdEmpresa == IdEmpresa).Select(q => q.IdPeriodo);
 
                     if (Lista.Count() > 0)
-                        ID = Lista.Max() + 1;
+                        ID = Convert.ToInt32(Lista.Max() + 1);
                 }
                 return ID;
             }
@@ -103,21 +104,22 @@ namespace Core.Erp.Data.Presupuesto
                 throw;
             }
         }
-        public bool GuardarBD(pre_rubro_Info info)
+        public bool GuardarBD(pre_Periodo_Info info)
         {
             try
             {
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    db.pre_Rubro.Add(new pre_Rubro
-                    {            
-                        IdEmpresa = info.IdEmpresa,            
-                        IdRubro = info.IdRubro = get_id(info.IdEmpresa),
-                        IdRubroTipo = info.IdRubroTipo,
-                        Descripcion = info.Descripcion,
-                        IdCtaCble = info.IdCtaCble,
+                    db.pre_PresupuestoPeriodo.Add(new pre_PresupuestoPeriodo
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdPeriodo = info.IdPeriodo = get_id(info.IdEmpresa),
+                        Observacion = info.Observacion,
+                        FechaInicio = info.FechaInicio,
+                        FechaFin = info.FechaFin,
+                        EstadoCierre = info.EstadoCierre,
                         Estado = true,
-                        IdUsuarioCreacion = info.IdUsuario,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
                     });
 
@@ -132,22 +134,23 @@ namespace Core.Erp.Data.Presupuesto
             }
         }
 
-        public bool ModificarBD(pre_rubro_Info info)
+        public bool ModificarBD(pre_Periodo_Info info)
         {
             try
             {
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    pre_Rubro entity = db.pre_Rubro.Where(q => q.IdRubro == info.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    pre_PresupuestoPeriodo entity = db.pre_PresupuestoPeriodo.Where(q => q.IdPeriodo == info.IdPeriodo && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
 
                     if (entity == null)
                     {
                         return false;
                     }
 
-                    entity.Descripcion = info.Descripcion;
-                    entity.IdRubroTipo = info.IdRubroTipo;
-                    entity.IdCtaCble = info.IdCtaCble;
+                    entity.Observacion = info.Observacion;
+                    entity.FechaInicio = info.FechaInicio;
+                    entity.FechaFin = info.FechaFin;
+                    entity.EstadoCierre = info.EstadoCierre;
                     entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     entity.FechaModificacion = DateTime.Now;
 
@@ -162,13 +165,13 @@ namespace Core.Erp.Data.Presupuesto
             }
         }
 
-        public bool AnularBD(pre_rubro_Info info)
+        public bool AnularBD(pre_Periodo_Info info)
         {
             try
             {
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    pre_Rubro entity = db.pre_Rubro.Where(q => q.IdRubro == info.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    pre_PresupuestoPeriodo entity = db.pre_PresupuestoPeriodo.Where(q => q.IdPeriodo == info.IdPeriodo && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
 
                     if (entity == null)
                     {

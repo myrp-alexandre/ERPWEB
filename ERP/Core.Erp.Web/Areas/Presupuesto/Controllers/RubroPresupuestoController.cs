@@ -33,13 +33,6 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             List<pre_rubro_Info> model = bus_Rubro.GetList(IdEmpresa, true);
             return PartialView("_GridViewPartial_Rubro", model);
         }
-
-        private void cargar_combos(int IdEmpresa)
-        {
-            ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
-            var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, false);
-            ViewBag.lst_cuentas = lst_ctacble;
-        }
         #endregion
 
         #region Metodos
@@ -79,8 +72,9 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            cargar_combos(IdEmpresa);
             pre_rubro_Info model = new pre_rubro_Info();
+
+            cargar_RubroTipo(IdEmpresa);            
             return View(model);
             
         }
@@ -101,6 +95,8 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             pre_rubro_Info model = bus_Rubro.GetInfo(IdEmpresa, IdRubro);
             if (model == null)
                 return RedirectToAction("Index");
+
+            cargar_RubroTipo(IdEmpresa);
             return View(model);
         }
 
@@ -120,6 +116,8 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             pre_rubro_Info model = bus_Rubro.GetInfo(IdEmpresa, IdRubro);
             if (model == null)
                 return RedirectToAction("Index");
+
+            cargar_RubroTipo(IdEmpresa);
             return View(model);
         }
 
