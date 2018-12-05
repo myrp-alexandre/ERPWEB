@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Presupuesto.pre_RubroTipo_Info
 @{
-    ViewBag.Title = "Nuevo tipo de rubro";
+    ViewBag.Title = "Modificar tipo de rubro";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Nuevo", "RubroTipoPresupuesto", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Modificar", "RubroTipoPresupuesto", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
     {
@@ -19,9 +19,10 @@
         </div>
     }
     @Html.HiddenFor(q => q.IdEmpresa);
+    @Html.HiddenFor(q => q.IdRubroTipo);
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="Descripcion">Descripción*</label>
                     @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
@@ -41,9 +42,9 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdCtaCble">Costo*</label>
-                    @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Descripcion, "", new { @class = "text-danger" })
+                    <label for="IdCtaCble">Orden*</label>
+                    @Html.TextBoxFor(q => q.Orden, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Orden, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

@@ -17,6 +17,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
     {
         #region Variables
         pre_rubro_Bus bus_Rubro = new pre_rubro_Bus();
+        pre_RubroTipo_Bus bus_RubroTipo = new pre_RubroTipo_Bus();
         #endregion
 
         #region Index
@@ -38,6 +39,21 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
             var lst_ctacble = bus_plancta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cuentas = lst_ctacble;
+        }
+        #endregion
+
+        #region Metodos
+        private void cargar_RubroTipo(int IdEmpresa)
+        {
+            try
+            {
+                var lst_RubroTipo = bus_RubroTipo.GetList(IdEmpresa, false);
+                ViewBag.lst_RubroTipo = lst_RubroTipo;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         #endregion
 

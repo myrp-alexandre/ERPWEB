@@ -9438,9 +9438,11 @@
     <Content Include="Areas\RRHH\Views\ImportacionHoras\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionHoras\Nuevo.cshtml" />
     <Content Include="Areas\Produccion\Views\web.config" />
-    <Content Include="Areas\Presupuesto\Views\TipoRubroPresupuesto\Index.cshtml" />
-    <Content Include="Areas\Presupuesto\Views\TipoRubroPresupuesto\Nuevo.cshtml" />
-    <Content Include="Areas\Presupuesto\Views\TipoRubroPresupuesto\_GridViewPartial_RubroTipo.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroTipoPresupuesto\Index.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroTipoPresupuesto\Nuevo.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroTipoPresupuesto\_GridViewPartial_RubroTipo.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroTipoPresupuesto\Modificar.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\RubroTipoPresupuesto\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
