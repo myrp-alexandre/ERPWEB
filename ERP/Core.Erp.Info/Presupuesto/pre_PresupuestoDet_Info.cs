@@ -21,6 +21,5 @@ namespace Core.Erp.Info.Presupuesto
         public double Monto { get; set; }
 
         public string Descripcion { get; set; }
-        public string pc_Cuenta { get; set; }
     }
 }
