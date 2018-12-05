@@ -119,7 +119,7 @@ namespace Core.Erp.Data.RRHH
                                     IdEmpleado=a.IdEmpleado,
                                     IdRol=a.IdRol,
                                     pe_nombreCompleato = a.pe_nombreCompleto,
-                                    Valor=a.Valor
+                                    Valor_=a.Valor
                                 }).ToList();
                 }
                 return oListado;
