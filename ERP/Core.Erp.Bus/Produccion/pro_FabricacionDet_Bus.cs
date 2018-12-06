@@ -24,11 +24,11 @@ namespace Core.Erp.Bus.Produccion
             }
         }
 
-        public List<pro_FabricacionDet_Info> GetProductoFacturadosPorFecha(int IdEmpresa, int IdSucursal, int IdBodega, DateTime fecha_ini, DateTime fecha_fin)
+        public List<pro_FabricacionDet_Info> GetProductoFacturadosPorFecha(int IdEmpresa, int IdSucursal, int IdBodega, DateTime FechaIni, DateTime FechaFin)
         {
             try
             {
-                return odata.GetProductoFacturadosPorFecha(IdEmpresa, IdSucursal, IdBodega, fecha_ini, fecha_fin);
+                return odata.GetProductoFacturadosPorFecha(IdEmpresa, IdSucursal, IdBodega,  FechaIni,  FechaFin);
             }
             catch (Exception)
             {

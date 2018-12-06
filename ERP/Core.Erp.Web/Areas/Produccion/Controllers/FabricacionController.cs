@@ -200,6 +200,16 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
 
         }
+
+        public JsonResult GetProductoFacturadosPorFecha(DateTime FechaIni, DateTime FechaFin, int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0 ,  decimal IdTransaccionSession = 0)
+        {
+            pro_FabricacionDet_Bus bus_comp = new pro_FabricacionDet_Bus();
+            var resultado = bus_comp.GetProductoFacturadosPorFecha(IdEmpresa, IdSucursal, IdBodega, FechaIni, FechaFin);
+            
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+
+        }
+
         #endregion
         #region Metodos ComboBox bajo demanda
         in_Producto_Bus bus_producto = new in_Producto_Bus();
