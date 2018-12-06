@@ -21,6 +21,7 @@
         <AssociationConnector Association="Model_presupuesto.FK_pre_Rubro_pre_RubroTipo" />
         <EntityTypeShape EntityType="Model_presupuesto.vwpre_Rubro" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_presupuesto.vwpre_Presupuesto" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Model_presupuesto.vwpre_PresupuestoDet" Width="1.5" PointX="5.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

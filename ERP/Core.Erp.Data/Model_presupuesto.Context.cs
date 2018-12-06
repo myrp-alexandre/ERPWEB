@@ -35,5 +35,6 @@ namespace Core.Erp.Data
         public virtual DbSet<pre_Rubro> pre_Rubro { get; set; }
         public virtual DbSet<vwpre_Rubro> vwpre_Rubro { get; set; }
         public virtual DbSet<vwpre_Presupuesto> vwpre_Presupuesto { get; set; }
+        public virtual DbSet<vwpre_PresupuestoDet> vwpre_PresupuestoDet { get; set; }
     }
 }

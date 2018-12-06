@@ -121,6 +121,9 @@ namespace Core.Erp.Data.Presupuesto
                         FechaCreacion = DateTime.Now
                     });
 
+                     var DataPresupuestos = db.vwpre_PresupuestoDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdGrupo == info.IdRubro).ToList();
+
+
                     db.SaveChanges();
                 }
 
