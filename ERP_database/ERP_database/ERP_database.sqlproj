@@ -364,7 +364,6 @@
     <Build Include="dbo\Tables\com_ordencompra_local.sql" />
     <Build Include="dbo\Tables\Af_Parametros.sql" />
     <Build Include="dbo\Tables\ct_cbtecble_Reversado.sql" />
-    <Build Include="dbo\Tables\ro_nomina_tipo_liqui_orden.sql" />
     <Build Include="dbo\Tables\tb_parroquia.sql" />
     <Build Include="web\Tables\Af_SPACTF_004_resumen.sql" />
     <Build Include="dbo\Tables\com_ordencompra_local_det.sql" />
@@ -1081,7 +1080,7 @@
     <Build Include="dbo\Views\vwpre_PresupuestoDet_1.sql" />
     <Build Include="dbo\Views\vwpre_Presupuesto_1.sql" />
     <Build Include="dbo\Views\vwin_Producto_para_composicion_1.sql" />
-    <Build Include="dbo\Stored Procedures\spRo_procesa_Rol_anticipo_1.sql" />
+    <Build Include="dbo\Stored Procedures\spRo_procesa_Rol_anticipo.sql" />
     <Build Include="dbo\Stored Procedures\sppro_GetProductoFacturadosPorFecha_1.sql" />
   </ItemGroup>
   <ItemGroup>

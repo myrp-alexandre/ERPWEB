@@ -1,9 +1,9 @@
 ﻿CREATE view vwRo_Division_Area_dep_rubro as 
 SELECT       ROW_NUMBER() OVER (ORDER BY dbo.ro_rubro_tipo.IdEmpresa) AS IdFila, dbo.ro_Division.IdEmpresa, dbo.ro_Division.IdDivision, dbo.ro_Division.Descripcion AS DescripcionDiv, dbo.ro_area.IdArea, dbo.ro_area.Descripcion AS DescripcionArea, dbo.ro_Departamento.IdDepartamento, 
                          dbo.ro_Departamento.de_descripcion, dbo.ro_rubro_tipo.IdRubro, dbo.ro_rubro_tipo.rub_codigo, dbo.ro_rubro_tipo.ru_descripcion, dbo.ro_rubro_tipo.ru_estado, dbo.ro_rubro_tipo.ru_tipo, dbo.ro_rubro_tipo.rub_concep, 
-                         dbo.ro_rubro_tipo.rub_tipcal, dbo.ro_rubro_tipo.rub_ctacon, dbo.ro_rubro_tipo.rub_nocontab, dbo.ro_rubro_tipo.rub_guarda_rol, dbo.ro_rubro_tipo.rub_provision, dbo.ro_Config_Param_contable.IdCtaCble, 
-                         dbo.ro_Config_Param_contable.IdCtaCble_Haber, dbo.ro_Config_Param_contable.DebCre as DebCre_rrhh, dbo.ro_Config_Param_contable.IdCentroCosto, dbo.ro_rubro_tipo.rub_noafecta, dbo.ro_rubro_tipo.rub_Acuerdo_Descuento, 
-                         dbo.ro_rubro_tipo.rub_Contabiliza_x_empleado, dbo.ro_rubro_tipo.rub_aplica_IESS, dbo.ro_rubro_tipo.rub_grupo, dbo.ct_plancta.pc_Naturaleza as DebCre
+                          dbo.ro_rubro_tipo.rub_ctacon, dbo.ro_rubro_tipo.rub_nocontab,  dbo.ro_rubro_tipo.rub_provision, dbo.ro_Config_Param_contable.IdCtaCble, 
+                         dbo.ro_Config_Param_contable.IdCtaCble_Haber, dbo.ro_Config_Param_contable.DebCre as DebCre_rrhh, dbo.ro_Config_Param_contable.IdCentroCosto,  
+                          dbo.ro_rubro_tipo.rub_aplica_IESS, dbo.ro_rubro_tipo.rub_grupo, dbo.ct_plancta.pc_Naturaleza as DebCre
 FROM            dbo.ro_Config_Param_contable INNER JOIN
                          dbo.ct_plancta ON dbo.ro_Config_Param_contable.IdEmpresa = dbo.ct_plancta.IdEmpresa AND dbo.ro_Config_Param_contable.IdCtaCble = dbo.ct_plancta.IdCtaCble FULL OUTER JOIN
                          dbo.ro_area RIGHT OUTER JOIN
