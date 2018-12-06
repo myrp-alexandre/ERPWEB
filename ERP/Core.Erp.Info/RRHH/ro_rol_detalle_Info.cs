@@ -9,6 +9,7 @@ namespace Core.Erp.Info.RRHH
    public class ro_rol_detalle_Info
     {
         public int IdEmpresa { get; set; }
+        public decimal IdRol { get; set; }
         public int IdNominaTipo { get; set; }
         public int IdNominaTipoLiqui { get; set; }
         public int IdPeriodo { get; set; }
@@ -29,6 +30,9 @@ namespace Core.Erp.Info.RRHH
         public System.DateTime pe_FechaFin { get; set; }
         public string pe_nombreCompleato { get; set; }
         public string ru_tipo { get; set; }
+
+        public decimal? Valor_ { get; set; }
+
         #endregion
 
 

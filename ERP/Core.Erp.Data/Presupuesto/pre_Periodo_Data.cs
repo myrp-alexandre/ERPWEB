@@ -95,7 +95,7 @@ namespace Core.Erp.Data.Presupuesto
 
                 using (Entities_presupuesto Context = new Entities_presupuesto())
                 {
-                    pre_PresupuestoPeriodo Entity = Context.pre_PresupuestoPeriodo.Where(q => q.IdEmpresa == IdEmpresa && q.EstadoCierre == true && q.Estado == true).FirstOrDefault();
+                    pre_PresupuestoPeriodo Entity = Context.pre_PresupuestoPeriodo.Where(q => q.IdEmpresa == IdEmpresa && q.EstadoCierre == false && q.Estado == true).FirstOrDefault();
 
                     if (Entity == null) return null;
                     info = new pre_Periodo_Info

@@ -121,16 +121,6 @@ namespace Core.Erp.Data.Presupuesto
                         FechaCreacion = DateTime.Now
                     });
 
-                    List<pre_PresupuestoDet_Info> ListaPresupuestos = new List<pre_PresupuestoDet_Info>();
-                    ListaPresupuestos = db.vwpre_PresupuestoDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdGrupo == info.IdRubro).Select(q => new pre_PresupuestoDet_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdPresupuesto = q.IdPresupuesto,                            
-                            IdRubro = q.IdRubro,
-                            IdPeriodo = q.IdPeriodo,
-                            EstadoCierre = q.EstadoCierre
-                    }).ToList();
-
                     db.SaveChanges();
                 }
 
@@ -162,6 +152,16 @@ namespace Core.Erp.Data.Presupuesto
                     entity.FechaModificacion = DateTime.Now;
 
                     db.SaveChanges();
+
+                    var ListaPresupuestos = db.vwpre_PresupuestoDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdRubro == info.IdRubro && q.EstadoCierre == false).ToList();
+
+                    foreach (var item in ListaPresupuestos)
+                    {
+                        pre_PresupuestoDet EntityRubro = db.pre_PresupuestoDet.Where(q => q.IdRubro == item.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+
+                        EntityRubro.IdCtaCble = info.IdCtaCble;
+                        db.SaveChanges();
+                    }                    
                 }
                 return true;
             }
