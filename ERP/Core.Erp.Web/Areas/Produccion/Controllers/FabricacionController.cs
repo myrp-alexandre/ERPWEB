@@ -165,11 +165,24 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ArmarMateriaPrima(int IdEmpresa = 0 , decimal IdProducto = 0)
+        public JsonResult ArmarMateriaPrima(int IdEmpresa = 0 , decimal IdProducto = 0, double Cantidad = 0, decimal IdTransaccionSession = 0 )
         {
             in_Producto_Composicion_Bus bus_comp = new in_Producto_Composicion_Bus();
             var resultado = bus_comp.get_list(IdEmpresa, IdProducto);
-
+            foreach (var item in resultado)
+            {
+              //  item.Cantidad = item.Cantidad * 1;
+                pro_FabricacionDet_Info info = new pro_FabricacionDet_Info
+                {
+                    IdEmpresa = item.IdEmpresa,
+                    IdProducto = item.IdProductoHijo,
+                    Cantidad = item.Cantidad,
+                    IdUnidadMedida = item.IdUnidadMedida,
+                    Signo = "-"
+                };
+                info.Cantidad = info.Cantidad * Cantidad;
+                List_det.AddRow(info, IdTransaccionSession);
+            }
             return Json(resultado, JsonRequestBehavior.AllowGet);
 
         }

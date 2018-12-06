@@ -208,6 +208,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_ro_Nomina_Tipoliqui" />
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_rubro_tipo" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_HorasProfesores_det" Width="1.5" PointX="19.375" PointY="22.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_nomina_sin_percebir_sueldo" Width="1.5" PointX="23.375" PointY="5.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
