@@ -166,12 +166,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Presupuesto' no tiene defini
             <PropertyRef Name="Estado" />
             <PropertyRef Name="MontoSolicitado" />
             <PropertyRef Name="MontoAprobado" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="DescripcionRubro" />
-            <PropertyRef Name="pc_Cuenta" />
-            <PropertyRef Name="Cantidad" />
-            <PropertyRef Name="Monto" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdPresupuesto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -187,13 +181,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Presupuesto' no tiene defini
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="MontoSolicitado" Type="float" Nullable="false" />
           <Property Name="MontoAprobado" Type="float" Nullable="false" />
-          <Property Name="Secuencia" Type="int" Nullable="false" />
-          <Property Name="IdRubro" Type="int" Nullable="false" />
-          <Property Name="DescripcionRubro" Type="varchar(max)" Nullable="false" />
-          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
-          <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="Cantidad" Type="int" Nullable="false" />
-          <Property Name="Monto" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -334,14 +321,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
     [vwpre_Presupuesto].[Observacion] AS [Observacion], 
     [vwpre_Presupuesto].[Estado] AS [Estado], 
     [vwpre_Presupuesto].[MontoSolicitado] AS [MontoSolicitado], 
-    [vwpre_Presupuesto].[MontoAprobado] AS [MontoAprobado], 
-    [vwpre_Presupuesto].[Secuencia] AS [Secuencia], 
-    [vwpre_Presupuesto].[IdRubro] AS [IdRubro], 
-    [vwpre_Presupuesto].[DescripcionRubro] AS [DescripcionRubro], 
-    [vwpre_Presupuesto].[IdCtaCble] AS [IdCtaCble], 
-    [vwpre_Presupuesto].[pc_Cuenta] AS [pc_Cuenta], 
-    [vwpre_Presupuesto].[Cantidad] AS [Cantidad], 
-    [vwpre_Presupuesto].[Monto] AS [Monto]
+    [vwpre_Presupuesto].[MontoAprobado] AS [MontoAprobado]
     FROM [dbo].[vwpre_Presupuesto] AS [vwpre_Presupuesto]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwpre_Rubro" EntityType="Self.vwpre_Rubro" store:Type="Views" store:Schema="dbo">
@@ -692,12 +672,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
             <PropertyRef Name="Estado" />
             <PropertyRef Name="MontoSolicitado" />
             <PropertyRef Name="MontoAprobado" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="DescripcionRubro" />
-            <PropertyRef Name="pc_Cuenta" />
-            <PropertyRef Name="Cantidad" />
-            <PropertyRef Name="Monto" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdPresupuesto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
@@ -713,13 +687,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
           <Property Name="Estado" Type="Boolean" Nullable="false" />
           <Property Name="MontoSolicitado" Type="Double" Nullable="false" />
           <Property Name="MontoAprobado" Type="Double" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdRubro" Type="Int32" Nullable="false" />
-          <Property Name="DescripcionRubro" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
-          <Property Name="Monto" Type="Double" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -879,13 +846,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
           <EntitySetMapping Name="vwpre_Presupuesto">
             <EntityTypeMapping TypeName="Model_presupuesto.vwpre_Presupuesto">
               <MappingFragment StoreEntitySet="vwpre_Presupuesto">
-                <ScalarProperty Name="Monto" ColumnName="Monto" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="DescripcionRubro" ColumnName="DescripcionRubro" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="MontoAprobado" ColumnName="MontoAprobado" />
                 <ScalarProperty Name="MontoSolicitado" ColumnName="MontoSolicitado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
