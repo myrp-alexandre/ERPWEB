@@ -39,14 +39,14 @@ namespace Core.Erp.Data.Produccion
             }
         }
 
-        public List<pro_FabricacionDet_Info> GetProductoFacturadosPorFecha(int IdEmpresa, int IdSucursal, int IdBodega , DateTime fecha_ini, DateTime fecha_fin)
+        public List<pro_FabricacionDet_Info> GetProductoFacturadosPorFecha(int IdEmpresa, int IdSucursal, int IdBodega , DateTime FechaIni, DateTime FechaFin)
         {
             try
             {
                 List<pro_FabricacionDet_Info> Lista;
                 using (Entities_produccion Context = new Entities_produccion())
                 {
-                    Lista = (from q in Context.sppro_GetProductoFacturadosPorFecha(IdEmpresa, IdSucursal, IdBodega, fecha_ini, fecha_fin)
+                    Lista = (from q in Context.sppro_GetProductoFacturadosPorFecha(IdEmpresa, IdSucursal, IdBodega,  FechaIni,  FechaFin)
                              select new pro_FabricacionDet_Info
                              {
                                   IdEmpresa = q.IdEmpresa,
