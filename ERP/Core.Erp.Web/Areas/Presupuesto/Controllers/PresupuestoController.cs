@@ -367,7 +367,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         {
             pre_PresupuestoDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdRubro = info_det.IdRubro;
-            edited_info.IdCtaCble = info_det.IdCtaCble;
+            edited_info.Descripcion = info_det.Descripcion;
             edited_info.Cantidad = info_det.Cantidad;
             edited_info.Monto = info_det.Monto;
         }

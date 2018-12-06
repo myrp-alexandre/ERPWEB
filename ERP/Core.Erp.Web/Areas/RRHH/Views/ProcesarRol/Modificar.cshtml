@@ -64,7 +64,7 @@
 <div id="Tabs" role="tabpanel">
     <ul class="nav nav-tabs" role="tablist">
         <li class="active">
-            <a href="#tab_estadisticas" aria-controls="datos" role="tab" data-toggle="tab">Estadistica</a>
+            <a href="#tab_estadisticas" aria-controls="datos" role="tab" data-toggle="tab">Empleados sin sueldo a percibir</a>
         </li>
         <li>
             <a href="#tab_contratos_por_vencer" aria-controls="diario" role="tab" data-toggle="tab">Contratos por vencer</a>
@@ -72,7 +72,15 @@
     </ul>
     <div class="tab-content" style="padding-top: 20px">
         <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_estadisticas">
-
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.Action("GridViewPartial_empleados_sin_percibir_sueldo", new { Area = "RRHH", Controller = "ProcesarRol" })
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_contratos_por_vencer">
             <div class="row">

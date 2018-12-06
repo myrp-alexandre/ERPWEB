@@ -9464,6 +9464,7 @@
     <Content Include="Areas\Produccion\Views\Fabricacion\_GridViewPartial_fabricacion_det_egr.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Presupuesto\Modificar.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Presupuesto\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_empleados_sin_percibir_sueldo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

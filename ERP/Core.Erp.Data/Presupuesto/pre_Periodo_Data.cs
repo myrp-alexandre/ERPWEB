@@ -44,6 +44,9 @@ namespace Core.Erp.Data.Presupuesto
                         }).ToList();
                     }
                 }
+                Lista.ForEach
+                    (
+                    item => item.Periodo = item.FechaInicio.ToString().Substring(0,10) + " - " + item.FechaFin.ToString().Substring(0,10));
                 return Lista;
             }
             catch (Exception)

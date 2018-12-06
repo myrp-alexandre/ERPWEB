@@ -124,6 +124,7 @@ namespace Core.Erp.Data.Presupuesto
         {
             try
             {
+                double monto_solicitado = info.ListaPresupuestoDet.Sum(v => v.Monto);
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
                     db.pre_Presupuesto.Add(new pre_Presupuesto
@@ -134,7 +135,7 @@ namespace Core.Erp.Data.Presupuesto
                         IdGrupo = info.IdGrupo,
                         IdPeriodo = info.IdPeriodo,
                         Observacion =  info.Observacion,
-                        MontoSolicitado = info.MontoSolicitado,
+                        MontoSolicitado = monto_solicitado,
                         MontoAprobado = info.MontoAprobado,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
@@ -144,12 +145,10 @@ namespace Core.Erp.Data.Presupuesto
                     if (info.ListaPresupuestoDet != null)
                     {
                         int Secuencia = 1;
-                        double monto_solicitado = 0;
 
                         foreach (var item in info.ListaPresupuestoDet)
                         {
                             pre_Rubro EntityRubro = db.pre_Rubro.Where(q => q.IdRubro == item.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                            monto_solicitado = (monto_solicitado + item.Monto);
 
                             db.pre_PresupuestoDet.Add(new pre_PresupuestoDet
                             {
@@ -180,7 +179,7 @@ namespace Core.Erp.Data.Presupuesto
             try
             {
                 using (Entities_presupuesto db = new Entities_presupuesto())
-                {
+                {                    
                     pre_Presupuesto entity = db.pre_Presupuesto.Where(q => q.IdPresupuesto == info.IdPresupuesto && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
 
                     if (entity == null)
@@ -188,21 +187,22 @@ namespace Core.Erp.Data.Presupuesto
                         return false;
                     }
 
+                    double monto_solicitado = info.ListaPresupuestoDet.Sum(v => v.Monto);
+
                     entity.IdSucursal = info.IdSucursal;
                     entity.IdPeriodo = info.IdPeriodo;
                     entity.IdGrupo = info.IdGrupo;
                     entity.Observacion = info.Observacion;
-                    entity.MontoSolicitado = info.MontoSolicitado;
+                    entity.MontoSolicitado = monto_solicitado;
                     entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     entity.FechaModificacion = DateTime.Now;
 
                     var lst_PresupuestoDet = db.pre_PresupuestoDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdPresupuesto == info.IdPresupuesto).ToList();
                     db.pre_PresupuestoDet.RemoveRange(lst_PresupuestoDet);
-
+                    
                     if (info.ListaPresupuestoDet != null)
                     {
                         int Secuencia = 1;
-                        double monto_solicitado = 0;
 
                         foreach (var item in info.ListaPresupuestoDet)
                         {
@@ -211,6 +211,8 @@ namespace Core.Erp.Data.Presupuesto
 
                             db.pre_PresupuestoDet.Add(new pre_PresupuestoDet
                             {
+                                IdEmpresa = info.IdEmpresa,
+                                IdPresupuesto = info.IdPresupuesto,
                                 Secuencia = Secuencia++,
                                 IdRubro = item.IdRubro,
                                 IdCtaCble = item.IdCtaCble,
@@ -223,7 +225,7 @@ namespace Core.Erp.Data.Presupuesto
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
