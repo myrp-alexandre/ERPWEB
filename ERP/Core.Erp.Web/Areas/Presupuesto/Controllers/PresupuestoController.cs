@@ -34,14 +34,17 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         #region Index
         public ActionResult Index()
         {
+            var info_periodo = bus_Periodo.GetInfo_UltimoPeriodoAbierto(Convert.ToInt32(SessionFixed.IdEmpresa));
+
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal)
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal),
+                IdPeriodo = info_periodo.IdPeriodo
             };
 
             cargar_combos(model.IdEmpresa);
-            return View();
+            return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
@@ -89,8 +92,8 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false);
                 ViewBag.lst_Periodo = lst_Periodo;
 
-                var lst_Rubro = bus_Rubro.GetList(IdEmpresa, false);
-                ViewBag.lst_Rubro = lst_Rubro;
+                var lst_Grupo = bus_Grupo.GetList(IdEmpresa, false);
+                ViewBag.lst_Grupo = lst_Grupo;
             }
             catch (Exception)
             {
@@ -224,8 +227,9 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         #endregion
 
         #region Metodos del detalle
-        public ActionResult GridViewPartial_GrupoDet()
+        public ActionResult GridViewPartial_PresupuestoDet()
         {
+            cargar_combos_detalle();
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = Lista_PresupuestoDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_PresupuestoDet", model);
@@ -235,21 +239,14 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] pre_PresupuestoDet_Info info_PresupuestoDet)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+
             if (info_PresupuestoDet != null)
                 if (info_PresupuestoDet.IdRubro != 0)
                 {
-                    pre_rubro_Info info_Rubro = bus_Rubro.GetInfo(info_PresupuestoDet.IdEmpresa, info_PresupuestoDet.IdRubro);
+                    pre_rubro_Info info_Rubro = bus_Rubro.GetInfo(IdEmpresa, info_PresupuestoDet.IdRubro);
                     if (info_Rubro != null)
                     {
                         info_PresupuestoDet.Descripcion = info_Rubro.Descripcion;
-                    }
-                }
-                if (info_PresupuestoDet.IdCtaCble != "")
-                {
-                    ct_plancta_Info info_PlanCta = bus_PlanCta.get_info(info_PresupuestoDet.IdEmpresa, info_PresupuestoDet.IdCtaCble);
-                    if (info_PlanCta != null)
-                    {
-                        info_PresupuestoDet.pc_Cuenta = info_PlanCta.pc_Cuenta;
                     }
                 }
 
@@ -263,53 +260,38 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] pre_PresupuestoDet_Info info_PresupuestoDet)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            
             if (info_PresupuestoDet != null)
                 if (info_PresupuestoDet.IdRubro != 0)
                 {
-                    pre_rubro_Info info_Rubro = bus_Rubro.GetInfo(info_PresupuestoDet.IdEmpresa, info_PresupuestoDet.IdRubro);
+                    pre_rubro_Info info_Rubro = bus_Rubro.GetInfo(IdEmpresa, info_PresupuestoDet.IdRubro);
                     if (info_Rubro != null)
                     {
+                        info_PresupuestoDet.IdRubro = info_Rubro.IdRubro;
                         info_PresupuestoDet.Descripcion = info_Rubro.Descripcion;
                     }                    
                 }
 
-                if (info_PresupuestoDet.IdCtaCble != "")
-                {
-                    ct_plancta_Info info_PlanCta = bus_PlanCta.get_info(info_PresupuestoDet.IdEmpresa, info_PresupuestoDet.IdCtaCble);
-                    if (info_PlanCta != null)
-                    {
-                        info_PresupuestoDet.pc_Cuenta = info_PlanCta.pc_Cuenta;
-                    }
-                }
-
-            Lista_PresupuestoDet.AddRow(info_PresupuestoDet, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            Lista_PresupuestoDet.UpdateRow(info_PresupuestoDet, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = Lista_PresupuestoDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return PartialView("_GridViewPartial_PresupuestoDet", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
-        {
+        {            
             Lista_PresupuestoDet.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = Lista_PresupuestoDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return PartialView("_GridViewPartial_PresupuestoDet", model);
         }
 
-        public ActionResult CmbCuentaContable()
+        private void cargar_combos_detalle()
         {
-            string model = "";
-            return PartialView("_CmbCuentaContable", model);
-        }
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            return bus_PlanCta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
-        }
-
-        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
-        {
-            return bus_PlanCta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+            var lst_Rubro = bus_Rubro.GetList(IdEmpresa, false);
+            ViewBag.lst_Rubro = lst_Rubro;
         }
 
         private bool Validar(pre_Presupuesto_Info i_validar, ref string msg)

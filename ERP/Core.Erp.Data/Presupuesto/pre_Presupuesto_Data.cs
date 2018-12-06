@@ -19,13 +19,17 @@ namespace Core.Erp.Data.Presupuesto
                 {
                     if (MostrarAnulados == false)
                     {
-                        Lista = db.pre_Presupuesto.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa).Select(q => new pre_Presupuesto_Info
+                        Lista = db.vwpre_Presupuesto.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdPeriodo == IdPeriodo).Select(q => new pre_Presupuesto_Info
                         {
                             IdEmpresa = q.IdEmpresa,
-                            IdPresupuesto = q.IdPresupuesto,
+                            IdPresupuesto = q.IdPresupuesto,                            
                             IdSucursal = q.IdSucursal,
+                            Su_Descripcion = q.Su_Descripcion,
                             IdPeriodo = q.IdPeriodo,
+                            FechaInicio = q.FechaInicio,
+                            FechaFin = q.FechaFin,
                             IdGrupo = q.IdGrupo,
+                            Descripcion = q.Descripcion,
                             Observacion = q.Observacion,
                             Estado = q.Estado,
                             MontoSolicitado = q.MontoSolicitado,
@@ -35,13 +39,17 @@ namespace Core.Erp.Data.Presupuesto
                     }
                     else
                     {
-                        Lista = db.pre_Presupuesto.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new pre_Presupuesto_Info
+                        Lista = db.vwpre_Presupuesto.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdPeriodo == IdPeriodo).Select(q => new pre_Presupuesto_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdPresupuesto = q.IdPresupuesto,
                             IdSucursal = q.IdSucursal,
+                            Su_Descripcion = q.Su_Descripcion,
                             IdPeriodo = q.IdPeriodo,
+                            FechaInicio = q.FechaInicio,
+                            FechaFin = q.FechaFin,
                             IdGrupo = q.IdGrupo,
+                            Descripcion = q.Descripcion,
                             Observacion = q.Observacion,
                             Estado = q.Estado,
                             MontoSolicitado = q.MontoSolicitado,
@@ -138,13 +146,15 @@ namespace Core.Erp.Data.Presupuesto
                         int Secuencia = 1;
                         foreach (var item in info.ListaPresupuestoDet)
                         {
+                            pre_Rubro EntityRubro = db.pre_Rubro.Where(q => q.IdRubro == item.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();                            
+
                             db.pre_PresupuestoDet.Add(new pre_PresupuestoDet
                             {
                                 IdEmpresa = info.IdEmpresa,
                                 IdPresupuesto = info.IdPresupuesto,
                                 Secuencia = Secuencia++,
                                 IdRubro = item.IdRubro,
-                                IdCtaCble = item.IdCtaCble,
+                                IdCtaCble = EntityRubro.IdCtaCble,
                                 Cantidad = item.Cantidad,
                                 Monto = item.Monto
                             });

@@ -33,7 +33,11 @@ namespace Core.Erp.Info.Presupuesto
         [StringLength(150, MinimumLength = 1, ErrorMessage = ("El campo motivo de anulación debe tener mínimo 1 caracter máximo 500"))]
         public string MotivoAnulacion { get; set; }
 
-
         public List<pre_PresupuestoDet_Info> ListaPresupuestoDet { get; set; }
+        public string Su_Descripcion { get; set; }
+        public System.DateTime FechaInicio { get; set; }
+        public System.DateTime FechaFin { get; set; }
+        public bool EstadoCierre { get; set; }
+        public string Descripcion { get; set; }
     }
 }

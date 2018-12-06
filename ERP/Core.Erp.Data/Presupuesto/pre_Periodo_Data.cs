@@ -83,6 +83,38 @@ namespace Core.Erp.Data.Presupuesto
                 throw;
             }
         }
+
+        public pre_Periodo_Info GetInfo_UltimoPeriodoAbierto(int IdEmpresa)
+        {
+            try
+            {
+                pre_Periodo_Info info = new pre_Periodo_Info();
+
+                using (Entities_presupuesto Context = new Entities_presupuesto())
+                {
+                    pre_PresupuestoPeriodo Entity = Context.pre_PresupuestoPeriodo.Where(q => q.IdEmpresa == IdEmpresa && q.EstadoCierre == true && q.Estado == true).FirstOrDefault();
+
+                    if (Entity == null) return null;
+                    info = new pre_Periodo_Info
+                    {
+                        IdPeriodo = Entity.IdPeriodo,
+                        IdEmpresa = Entity.IdEmpresa,
+                        Observacion = Entity.Observacion,
+                        FechaInicio = Entity.FechaInicio,
+                        FechaFin = Entity.FechaFin,
+                        EstadoCierre = Entity.EstadoCierre,
+                        Estado = Entity.Estado
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public int get_id(int IdEmpresa)
         {
 

@@ -41,33 +41,49 @@
         {
             e.NewValues["IdRubro"] = "";
             e.NewValues["Descripcion"] = "";
-            e.NewValues["IdCtaCble"] = "";
-            e.NewValues["pc_Cuenta"] = "";
+            e.NewValues["Cantidad"] = 0;
+            e.NewValues["Monto"] = 0;
         };
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "pc_Cuenta";
-            column.Caption = "Cuenta Contable";
-            column.Width = Unit.Percentage(60);
+            column.FieldName = "Descripcion";
+            column.Caption = "Descripción";
+            column.Width = Unit.Percentage(20);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdCtaCble";
-            column.Caption = "Cuenta Contable";
-            column.Width = Unit.Percentage(50);
+            column.FieldName = "Cantidad";
+            column.Caption = "Cantidad";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Monto";
+            column.Caption = "Monto";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdRubro";
+            column.Caption = "Rubro";
+            column.Width = Unit.Percentage(20);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
-            column.SetEditItemTemplateContent(c =>
+            column.EditorProperties().ComboBox(p =>
             {
-                ViewContext.Writer.Write("<div id='ajaxDiv'>");
-                Html.RenderPartial("_CmbCuentaContable", DataBinder.Eval(c.DataItem, "IdCtaCble"));
-                ViewContext.Writer.Write("</div>");
+                p.Columns.Add("IdRubro", "ID").Width = Unit.Percentage(20);
+                p.Columns.Add("Descripcion", "Rubro").Width = Unit.Percentage(70);
+                p.ValueField = "IdRubro";
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_Rubro;
+                p.Width = Unit.Percentage(100);
             });
         });
-        
+
 
         settings.ClientSideEvents.BeginCallback = "function(s,e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();}";
     });

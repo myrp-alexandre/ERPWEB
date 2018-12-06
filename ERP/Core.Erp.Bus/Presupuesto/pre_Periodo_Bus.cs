@@ -36,6 +36,17 @@ namespace Core.Erp.Bus.Presupuesto
             }
         }
 
+        public pre_Periodo_Info GetInfo_UltimoPeriodoAbierto(int IdEmpresa)
+        {
+            try
+            {
+                return oData.GetInfo_UltimoPeriodoAbierto(IdEmpresa);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public bool GuardarBD(pre_Periodo_Info info)
         {
             try
