@@ -23,6 +23,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         List<ro_Nomina_Tipoliqui_Info> lst_nomina_tipo = new List<ro_Nomina_Tipoliqui_Info>();
         ro_periodo_x_ro_Nomina_TipoLiqui_Bus bus_periodos_x_nomina = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
         List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lst_periodos = new List<ro_periodo_x_ro_Nomina_TipoLiqui_Info>();
+        ro_rol_detalle_Bus bus_detalle = new ro_rol_detalle_Bus();
         ro_rol_Bus bus_rol = new ro_rol_Bus();
         ct_plancta_Bus bus_cuentas = new ct_plancta_Bus();
         int IdEmpresa = 0;
@@ -122,7 +123,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Modificar( int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0, decimal IdRol=0)
         {
             try
-            { 
+            {
+                ViewBag.IdRol = IdRol;
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
                 IdEmpresa = GetIdEmpresa();
                 ro_rol_Info model = bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
@@ -394,6 +396,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_provisiones", model);
         }
 
+        public ActionResult GridViewPartial_empleados_sin_percibir_sueldo(decimal IdRol=0)
+        {
+            var model = bus_detalle.get_list_nomina_sin_sueldo_percibir(Convert.ToInt32(SessionFixed.IdEmpresa), IdRol);
+            return PartialView("_GridViewPartial_empleados_sin_percibir_sueldo", model);
+        }
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_nomonas_cerradas()
         {
@@ -410,4 +418,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
     }
+
+
 }

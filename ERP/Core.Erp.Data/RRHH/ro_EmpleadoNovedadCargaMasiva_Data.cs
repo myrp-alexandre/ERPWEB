@@ -34,8 +34,8 @@ namespace Core.Erp.Data.RRHH
                                      EstadoBool = q.Estado,
                                      Descripcion=q.Descripcion,
                                      DescripcionProcesoNomina=q.DescripcionProcesoNomina,
-                                     ru_descripcion=q.ru_descripcion
-
+                                     ru_descripcion=q.ru_descripcion,
+                                     Estado=q.Estado
                                  }
                                ).ToList();
                    

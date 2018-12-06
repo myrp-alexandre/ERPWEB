@@ -100,6 +100,37 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-   
+        public List<ro_rol_detalle_Info> get_list_nomina_sin_sueldo_percibir(int idEmpresa, decimal IdRol)
+        {
+
+            try
+            {
+                List<ro_rol_detalle_Info> oListado = new List<ro_rol_detalle_Info>();
+
+                using (Entities_rrhh db = new Entities_rrhh())
+                {
+                    oListado = (from a in db.vwro_nomina_sin_percebir_sueldo
+                                where a.IdEmpresa == idEmpresa
+                                && a.IdRol == IdRol
+                              
+                                select new ro_rol_detalle_Info
+                                {
+                                    IdEmpresa=a.IdEmpresa,
+                                    IdEmpleado=a.IdEmpleado,
+                                    IdRol=a.IdRol,
+                                    pe_nombreCompleato = a.pe_nombreCompleto,
+                                    Valor=a.Valor
+                                }).ToList();
+                }
+                return oListado;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

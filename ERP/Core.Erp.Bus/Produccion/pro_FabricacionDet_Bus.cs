@@ -23,5 +23,18 @@ namespace Core.Erp.Bus.Produccion
                 throw;
             }
         }
+
+        public List<pro_FabricacionDet_Info> GetProductoFacturadosPorFecha(int IdEmpresa, int IdSucursal, int IdBodega, DateTime fecha_ini, DateTime fecha_fin)
+        {
+            try
+            {
+                return odata.GetProductoFacturadosPorFecha(IdEmpresa, IdSucursal, IdBodega, fecha_ini, fecha_fin);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

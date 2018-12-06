@@ -1507,6 +1507,9 @@
     <Compile Include="SPINV_012_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="sppro_GetProductoFacturadosPorFecha_Result.cs">
+      <DependentUpon>Model_produccion.tt</DependentUpon>
+    </Compile>
     <Compile Include="SPROL_012_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>

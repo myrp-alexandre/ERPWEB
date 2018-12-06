@@ -59,7 +59,10 @@
     </div>
 </div>
 
-
+<div class="box-footer">
+    <button type="submit" class="btn btn-primary">Procesar</button>
+    <a class="btn btn-default" href="@Url.Action("Index","ProcesarRol",new { Area = "RRHH" },null)">Cancelar</a>
+</div>
 <div id="Tabs" role="tabpanel">
     <ul class="nav nav-tabs" role="tablist">
         <li class="active">
@@ -89,10 +92,7 @@
     </div>
 </div>
 
-<div class="box-footer">
-    <button type="submit" class="btn btn-primary">Procesar</button>
-    <a class="btn btn-default" href="@Url.Action("Index","ProcesarRol",new { Area = "RRHH" },null)">Cancelar</a>
-</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

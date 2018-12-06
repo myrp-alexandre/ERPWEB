@@ -32,18 +32,25 @@
         settings.SettingsExport.EnableClientSideExportAPI = true;
         settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
 
-       
 
 
-        settings.Columns.Add("IdContrato","ID").Width=Unit.Percentage(5);
-        settings.Columns.Add("NumDocumento","Nº contrato").Width = Unit.Percentage(10);
-        settings.Columns.Add("Empleado", "Nombres").Width = Unit.Percentage(30);
-        settings.Columns.Add("FechaInicio", "Fecha inicio").Width = Unit.Percentage(10);
-        settings.Columns.Add("FechaFin", "Fecha fin").Width = Unit.Percentage(10);
-        settings.Columns.Add("Observacion","Observación").Width = Unit.Percentage(20);
-        settings.Columns.Add("Contrato", "Contrato").Width = Unit.Percentage(15);
-        settings.Columns.Add("EstadoContrato", "Estado").Width = Unit.Percentage(10);
-        //settings.Columns.Add("Estado").Width = Unit.Percentage(5);
+
+        settings.Columns.Add("IdEmpleado","ID").Width=Unit.Percentage(5);
+        settings.Columns.Add("pe_nombreCompleato", "Empleado").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Valor_";
+            column.Caption = "$Valor";
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.Width = Unit.Percentage(15);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+                sp.Width = Unit.Percentage(100);
+
+            });
+        });
 
     });
 }

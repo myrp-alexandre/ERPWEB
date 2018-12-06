@@ -19,6 +19,19 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public List<ro_rol_detalle_Info> get_list_nomina_sin_sueldo_percibir(int idEmpresa, decimal IdRol)
+        {
+            try
+            {
+                return odata.get_list_nomina_sin_sueldo_percibir(idEmpresa, IdRol);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<ro_rol_detalle_Info> Get_lst_detalle_genear_op(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo)
         {
             try

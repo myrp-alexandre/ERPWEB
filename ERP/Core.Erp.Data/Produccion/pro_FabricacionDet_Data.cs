@@ -38,5 +38,37 @@ namespace Core.Erp.Data.Produccion
                 throw;
             }
         }
+
+        public List<pro_FabricacionDet_Info> GetProductoFacturadosPorFecha(int IdEmpresa, int IdSucursal, int IdBodega , DateTime fecha_ini, DateTime fecha_fin)
+        {
+            try
+            {
+                List<pro_FabricacionDet_Info> Lista;
+                using (Entities_produccion Context = new Entities_produccion())
+                {
+                    Lista = (from q in Context.sppro_GetProductoFacturadosPorFecha(IdEmpresa, IdSucursal, IdBodega, fecha_ini, fecha_fin)
+                             select new pro_FabricacionDet_Info
+                             {
+                                  IdEmpresa = q.IdEmpresa,
+                                  IdProducto = q.IdProducto,
+                                  pr_descripcion = q.pr_descripcion,
+                                  Cantidad = q.vt_cantidad == null ? 0 : Convert.ToDouble(q.vt_cantidad),
+                                  vt_fecha = q.vt_fecha,
+                                  NombreUnidad = q.NombreUnidad,
+                                  CantidadFabricada = q.CantidadFabricada,
+                                  stock = q.stock
+                                  
+                             }).ToList();
+                    
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

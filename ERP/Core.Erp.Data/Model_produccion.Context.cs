@@ -12,6 +12,8 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities_produccion : DbContext
     {
@@ -27,5 +29,30 @@ namespace Core.Erp.Data
     
         public virtual DbSet<pro_FabricacionDet> pro_FabricacionDet { get; set; }
         public virtual DbSet<pro_Fabricacion> pro_Fabricacion { get; set; }
+    
+        public virtual ObjectResult<sppro_GetProductoFacturadosPorFecha_Result> sppro_GetProductoFacturadosPorFecha(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idSucursalParameter = idSucursal.HasValue ?
+                new ObjectParameter("IdSucursal", idSucursal) :
+                new ObjectParameter("IdSucursal", typeof(int));
+    
+            var idBodegaParameter = idBodega.HasValue ?
+                new ObjectParameter("IdBodega", idBodega) :
+                new ObjectParameter("IdBodega", typeof(int));
+    
+            var fechaIniParameter = fechaIni.HasValue ?
+                new ObjectParameter("FechaIni", fechaIni) :
+                new ObjectParameter("FechaIni", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sppro_GetProductoFacturadosPorFecha_Result>("sppro_GetProductoFacturadosPorFecha", idEmpresaParameter, idSucursalParameter, idBodegaParameter, fechaIniParameter, fechaFinParameter);
+        }
     }
 }
