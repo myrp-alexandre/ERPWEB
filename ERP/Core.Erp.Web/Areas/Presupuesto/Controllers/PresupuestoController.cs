@@ -135,6 +135,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             {
                 ViewBag.mensaje = mensaje;
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
@@ -178,6 +179,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             if (!Validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
 
@@ -220,6 +222,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 model.ListaPresupuestoDet = bus_PresupuestoDet.GetList(model.IdEmpresa, Convert.ToInt32(model.IdGrupo));
                 Lista_PresupuestoDet.set_list(model.ListaPresupuestoDet, model.IdTransaccionSession);
 
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             };
             return RedirectToAction("Index");
