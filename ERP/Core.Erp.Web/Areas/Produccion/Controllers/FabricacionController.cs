@@ -190,7 +190,6 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
                 {
                     List_det.AddRow(info, IdTransaccionSession);
                     item.Cantidad = info.Cantidad * Cantidad;
-
                 }
                 else
                 {
@@ -240,8 +239,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             info_det.Signo = "+";
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            pro_Fabricacion_Info model = new pro_Fabricacion_Info();
-            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "+").ToList();
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "+").ToList();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_fabricacion_det_ing", model);
         }
@@ -253,9 +251,6 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             if (producto != null)
                 info_det.pr_descripcion = producto.pr_descripcion;
             info_det.Signo = "+";
-
-
-
             if (ModelState.IsValid)
                 List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             pro_Fabricacion_Info model = new pro_Fabricacion_Info();
@@ -272,7 +267,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
         {
             List_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             pro_Fabricacion_Info model = new pro_Fabricacion_Info();
-            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "+").ToList();
+
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_fabricacion_det_ing", model);
         }
