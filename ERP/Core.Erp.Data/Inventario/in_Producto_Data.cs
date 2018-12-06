@@ -1033,19 +1033,9 @@ namespace Core.Erp.Data.Inventario
                 Entities_inventario Context = new Entities_inventario();
 
                 var lst = (from
-                          p in Context.in_Producto
-                           join c in Context.in_categorias
-                           on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
-                           join pr in Context.in_presentacion
-                          
-                           on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
-
-                           where
-                            p.IdEmpresa == IdEmpresa
-                            && c.IdEmpresa == IdEmpresa
-                            && pr.IdEmpresa == IdEmpresa
+                          p in Context.vwin_Producto_para_composicion
+                           where p.IdEmpresa == IdEmpresa
                             && p.Estado == "A"
-                            && p.IdProducto_padre!=null
                             && (p.IdProducto.ToString() + " " + p.pr_descripcion + " " + p.lote_num_lote).Contains(filter)
                            select new
                            {
@@ -1056,8 +1046,8 @@ namespace Core.Erp.Data.Inventario
                                p.pr_codigo,
                                p.lote_num_lote,
                                p.lote_fecha_vcto,
-                               c.ca_Categoria,
-                               pr.nom_presentacion
+                               p.ca_Categoria,
+                               p.nom_presentacion
                            })
                              .OrderBy(p => p.IdProducto)
                              .Skip(skip)

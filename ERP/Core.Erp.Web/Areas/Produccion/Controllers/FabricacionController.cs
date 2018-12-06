@@ -164,6 +164,15 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             var resultado = bus_bodega.get_list(IdEmpresa, IdSucursal, false);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ArmarMateriaPrima(int IdEmpresa = 0 , decimal IdProducto = 0)
+        {
+            in_Producto_Composicion_Bus bus_comp = new in_Producto_Composicion_Bus();
+            var resultado = bus_comp.get_list(IdEmpresa, IdProducto);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+
+        }
         #endregion
         #region Metodos ComboBox bajo demanda
         in_Producto_Bus bus_producto = new in_Producto_Bus();
