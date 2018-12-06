@@ -165,7 +165,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ArmarMateriaPrima(int IdEmpresa = 0 , decimal IdProducto = 0, double Cantidad = 0, decimal IdTransaccionSession = 0 )
+        public JsonResult ArmarMateriaPrima(int IdEmpresa = 0 , decimal IdProducto = 0, decimal IdTransaccionSession = 0 )
         {
             in_Producto_Composicion_Bus bus_comp = new in_Producto_Composicion_Bus();
             var resultado = bus_comp.get_list(IdEmpresa, IdProducto);
@@ -178,10 +178,25 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
                     IdProducto = item.IdProductoHijo,
                     Cantidad = item.Cantidad,
                     IdUnidadMedida = item.IdUnidadMedida,
-                    Signo = "-"
+                    Signo = "-",
+                    pr_descripcion = item.pr_descripcion,
+                    Secuencia = item.secuencia,
+                    IdProductoPadre = item.IdProductoPadre
+                    
                 };
-                info.Cantidad = info.Cantidad * Cantidad;
-                List_det.AddRow(info, IdTransaccionSession);
+                var producto = List_det.get_list(IdTransaccionSession).Where(q => q.IdProducto == info.IdProducto).FirstOrDefault();
+                double Cantidad = 0;
+                if (producto == null)
+                {
+                    List_det.AddRow(info, IdTransaccionSession);
+                    item.Cantidad = info.Cantidad * Cantidad;
+
+                }
+                else
+                {
+                    producto.Cantidad = producto.Cantidad + info.Cantidad;
+                    List_det.UpdateRow(info, IdTransaccionSession);
+                }
             }
             return Json(resultado, JsonRequestBehavior.AllowGet);
 
@@ -237,10 +252,19 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
             if (producto != null)
                 info_det.pr_descripcion = producto.pr_descripcion;
+            info_det.Signo = "+";
+
+
+
             if (ModelState.IsValid)
                 List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             pro_Fabricacion_Info model = new pro_Fabricacion_Info();
             model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "+").ToList();
+            foreach (var item in model.LstDet.Where(v=>v.IdProductoPadre==info_det.IdProducto))
+            {
+                item.Cantidad = item.Cantidad * info_det.Cantidad;
+                List_det.UpdateRow(item, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));   
+            }
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_fabricacion_det_ing", model);
         }
@@ -340,6 +364,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             edited_info.IdUnidadMedida = info_det.IdUnidadMedida;
             edited_info.RealizaMovimiento = info_det.RealizaMovimiento;
             edited_info.pr_descripcion = info_det.pr_descripcion;
+            edited_info.IdProductoPadre = info_det.IdProductoPadre;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)

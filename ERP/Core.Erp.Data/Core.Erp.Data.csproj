@@ -2149,6 +2149,9 @@
     <Compile Include="vwro_marcaciones_x_empleado.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwro_nomina_sin_percebir_sueldo.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwro_nomina_x_horas_extras_aprobadas.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
