@@ -39,5 +39,6 @@ namespace Core.Erp.Info.Presupuesto
         public System.DateTime FechaFin { get; set; }
         public bool EstadoCierre { get; set; }
         public string Descripcion { get; set; }
+        public string Periodo { get; set; }
     }
 }

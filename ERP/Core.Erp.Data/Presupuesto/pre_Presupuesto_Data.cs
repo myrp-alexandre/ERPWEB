@@ -58,6 +58,11 @@ namespace Core.Erp.Data.Presupuesto
                         }).ToList();
                     }
                 }
+
+                Lista.ForEach
+                    (
+                    item => item.Periodo = item.FechaInicio.ToString().Substring(0, 10) + " - " + item.FechaFin.ToString().Substring(0, 10));
+
                 return Lista;
             }
             catch (Exception)
@@ -207,7 +212,6 @@ namespace Core.Erp.Data.Presupuesto
                         foreach (var item in info.ListaPresupuestoDet)
                         {
                             pre_Rubro EntityRubro = db.pre_Rubro.Where(q => q.IdRubro == item.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                            monto_solicitado = (monto_solicitado + item.Monto);
 
                             db.pre_PresupuestoDet.Add(new pre_PresupuestoDet
                             {
