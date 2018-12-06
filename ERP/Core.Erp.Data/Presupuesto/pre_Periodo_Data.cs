@@ -211,14 +211,24 @@ namespace Core.Erp.Data.Presupuesto
                     if (entity == null)
                     {
                         return false;
+                    }                    
+
+                    var ListaPresupuestos = db.vwpre_PresupuestoDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdPeriodo == entity.IdPeriodo && q.Estado == true).ToList();
+
+                    if (ListaPresupuestos == null || ListaPresupuestos.Count == 0)
+                    {
+                        entity.Estado = false;
+                        entity.EstadoCierre = false;
+                        entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
+                        entity.FechaAnulacion = DateTime.Now;
+                        entity.MotivoAnulacion = info.MotivoAnulacion;
+
+                        db.SaveChanges();
                     }
-
-                    entity.Estado = false;
-                    entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
-                    entity.FechaAnulacion = DateTime.Now;
-                    entity.MotivoAnulacion = info.MotivoAnulacion;
-
-                    db.SaveChanges();
+                    else
+                    {
+                        return false;
+                    }
                 }
                 return true;
             }

@@ -22,6 +22,7 @@ namespace Core.Erp.Info.Presupuesto
         public string Observacion { get; set; }
         public bool Estado { get; set; }
         public double MontoSolicitado { get; set; }
+        [Required(ErrorMessage = ("El campo monto aprobado es obligatorio"))]
         public double MontoAprobado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -32,6 +33,13 @@ namespace Core.Erp.Info.Presupuesto
         [Required(ErrorMessage = ("El campo motivo de anulación es obligatorio"))]
         [StringLength(150, MinimumLength = 1, ErrorMessage = ("El campo motivo de anulación debe tener mínimo 1 caracter máximo 500"))]
         public string MotivoAnulacion { get; set; }
+        public string IdUsuarioAprobacion { get; set; }
+        public Nullable<System.DateTime> FechaAprobacion { get; set; }
+        [Required(ErrorMessage = ("El campo motivo de aprobación es obligatorio"))]
+        [StringLength(150, MinimumLength = 1, ErrorMessage = ("El campo motivo de aprobación debe tener mínimo 1 caracter máximo 500"))]
+        public string MotivoAprobacion { get; set; }
+
+
 
         public List<pre_PresupuestoDet_Info> ListaPresupuestoDet { get; set; }
         public string Su_Descripcion { get; set; }

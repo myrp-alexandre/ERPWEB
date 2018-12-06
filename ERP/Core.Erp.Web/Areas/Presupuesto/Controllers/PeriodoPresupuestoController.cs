@@ -83,6 +83,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_Periodo.AnularBD(model))
             {
+                ViewBag.mensaje = "Existen presupuestos activos con el periodo seleccionado";
                 return View(model);
             }
             return RedirectToAction("Index");

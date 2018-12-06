@@ -36,6 +36,9 @@ namespace Core.Erp.Data
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public string IdUsuarioAprobacion { get; set; }
+        public Nullable<System.DateTime> FechaAprobacion { get; set; }
+        public string MotivoAprobacion { get; set; }
     
         public virtual pre_Grupo pre_Grupo { get; set; }
         public virtual pre_PresupuestoPeriodo pre_PresupuestoPeriodo { get; set; }

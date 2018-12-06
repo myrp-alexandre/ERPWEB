@@ -86,5 +86,18 @@ namespace Core.Erp.Bus.Presupuesto
                 throw;
             }
         }
+
+        public bool AprobarBD(pre_Presupuesto_Info info)
+        {
+            try
+            {
+                return oData.AprobarBD(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

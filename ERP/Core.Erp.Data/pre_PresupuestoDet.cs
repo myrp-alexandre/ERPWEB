@@ -22,7 +22,7 @@ namespace Core.Erp.Data
         public int Cantidad { get; set; }
         public double Monto { get; set; }
     
-        public virtual pre_Presupuesto pre_Presupuesto { get; set; }
         public virtual pre_Rubro pre_Rubro { get; set; }
+        public virtual pre_Presupuesto pre_Presupuesto { get; set; }
     }
 }

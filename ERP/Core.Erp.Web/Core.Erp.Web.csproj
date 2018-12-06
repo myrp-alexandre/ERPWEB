@@ -391,6 +391,7 @@
     <Compile Include="Areas\Inventario\Controllers\TransferenciasInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\UnidadDeMedidaController.cs" />
     <Compile Include="Areas\Inventario\InventarioAreaRegistration.cs" />
+    <Compile Include="Areas\Presupuesto\Controllers\AprobacionPresupuestoController.cs" />
     <Compile Include="Areas\Presupuesto\Controllers\GrupoPresupuestoController.cs" />
     <Compile Include="Areas\Presupuesto\Controllers\PeriodoPresupuestoController.cs" />
     <Compile Include="Areas\Presupuesto\Controllers\PresupuestoController.cs" />
@@ -9465,6 +9466,10 @@
     <Content Include="Areas\Presupuesto\Views\Presupuesto\Modificar.cshtml" />
     <Content Include="Areas\Presupuesto\Views\Presupuesto\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\ProcesarRol\_GridViewPartial_empleados_sin_percibir_sueldo.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\AprobacionPresupuesto\_GridViewPartial_AprobacionPresupuestoDet.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\AprobacionPresupuesto\_GridViewPartial_AprobacionPresupuesto.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\AprobacionPresupuesto\Index.cshtml" />
+    <Content Include="Areas\Presupuesto\Views\AprobacionPresupuesto\Aprobar.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

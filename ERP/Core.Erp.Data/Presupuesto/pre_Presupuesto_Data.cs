@@ -92,7 +92,9 @@ namespace Core.Erp.Data.Presupuesto
                         Observacion = Entity.Observacion,
                         MontoAprobado = Entity.MontoAprobado,
                         MontoSolicitado = Entity.MontoSolicitado,
-                        Estado = Entity.Estado
+                        Estado = Entity.Estado,
+                        MotivoAnulacion = Entity.MotivoAnulacion,
+                        MotivoAprobacion = Entity.MotivoAprobacion
                     };
                 }
 
@@ -219,7 +221,7 @@ namespace Core.Erp.Data.Presupuesto
                                 IdPresupuesto = info.IdPresupuesto,
                                 Secuencia = Secuencia++,
                                 IdRubro = item.IdRubro,
-                                IdCtaCble = item.IdCtaCble,
+                                IdCtaCble = EntityRubro.IdCtaCble,
                                 Cantidad = item.Cantidad,
                                 Monto = item.Monto
                             });
@@ -253,6 +255,35 @@ namespace Core.Erp.Data.Presupuesto
                     entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     entity.FechaAnulacion = DateTime.Now;
                     entity.MotivoAnulacion = info.MotivoAnulacion;
+
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool AprobarBD(pre_Presupuesto_Info info)
+        {
+            try
+            {
+                using (Entities_presupuesto db = new Entities_presupuesto())
+                {
+                    pre_Presupuesto entity = db.pre_Presupuesto.Where(q => q.IdPresupuesto == info.IdPresupuesto && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+
+                    if (entity == null)
+                    {
+                        return false;
+                    }
+
+                    entity.IdUsuarioAprobacion = info.IdUsuarioAprobacion;
+                    entity.FechaAprobacion = DateTime.Now;
+                    entity.MontoAprobado = info.MontoAprobado;
+                    entity.MotivoAprobacion = info.MotivoAprobacion;
 
                     db.SaveChanges();
                 }
