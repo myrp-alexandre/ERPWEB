@@ -80,7 +80,7 @@ namespace Core.Erp.Data
         public bool Pago_por_horas { get; set; }
         public Nullable<double> Valor_maximo_horas { get; set; }
         public Nullable<double> Valor_horas_vespertina { get; set; }
-        public Nullable<double> Valor_horas_nocturna { get; set; }
         public Nullable<double> Valor_horas_matutino { get; set; }
+        public Nullable<double> Valor_horas_nocturna { get; set; }
     }
 }

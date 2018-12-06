@@ -29,15 +29,11 @@ namespace Core.Erp.Info.RRHH
         public int ru_orden { get; set; }
         public bool rub_concep { get; set; }
         [Required(ErrorMessage = "El tipo de campo es obligatorio")]
-        public int rub_tipcal { get; set; }
         public string rub_ctacon { get; set; }
         public Nullable<int> rub_grupo { get; set; }
         public bool rub_provision { get; set; }
-        public bool rub_noafecta { get; set; }
         public bool rub_nocontab { get; set; }
-        public bool rub_guarda_rol { get; set; }
         public bool rub_aplica_IESS { get; set; }
-        public bool rub_Contabiliza_x_empleado { get; set; }
         public string rub_Acuerdo_Descuento { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
