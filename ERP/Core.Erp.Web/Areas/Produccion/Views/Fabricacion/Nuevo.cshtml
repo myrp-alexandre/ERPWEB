@@ -185,7 +185,7 @@
             }
 }
 <script type="text/javascript">
-    var selectedIDs;
+    @*var selectedIDs;
     function OnBeginCallback(s, e) {
         e.customArgs["selectedIDs"] = selectedIDs;
     };
@@ -260,7 +260,7 @@
         $("#ModalFacturas").modal("hide");
 
         GridViewPartial_fabricacion_det_ing.PerformCallback();
-    };
+    };*@
 
 
 
@@ -353,10 +353,7 @@
         $("#Secuencia").text(0);
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IdProducto: s.GetValue(),
             IdTransaccionSession: $("#IdTransaccionSession").val(),
-
-
 
         }
         $.ajax({
@@ -369,11 +366,12 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridViewPartial_fabricacion_det_egr.PerformCallback();
             },
             error: function (error) {
             }
         });
+        GridViewPartial_fabricacion_det_egr.PerformCallback();
+
     }
 
 </script>
