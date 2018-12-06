@@ -12,10 +12,18 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwro_rubro_tipo
+    public partial class vwro_nomina_sin_percebir_sueldo
     {
-        public Nullable<int> IdRubro { get; set; }
-        public string ru_descripcion { get; set; }
         public int IdEmpresa { get; set; }
+        public decimal IdRol { get; set; }
+        public decimal IdEmpleado { get; set; }
+        public string IdRubro { get; set; }
+        public double Valor { get; set; }
+        public int IdSucursal { get; set; }
+        public string em_codigo { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
+        public string pe_nombreCompleto { get; set; }
     }
 }
