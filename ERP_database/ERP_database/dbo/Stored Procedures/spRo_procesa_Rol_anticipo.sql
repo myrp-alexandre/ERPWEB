@@ -1,6 +1,6 @@
 ﻿
 
-create PROCEDURE [dbo].[spRo_procesa_Rol_anticipo] (
+CREATE PROCEDURE [dbo].[spRo_procesa_Rol_anticipo] (
 @IdEmpresa int,
 @IdNomina numeric,
 @IdNominaTipo numeric,
@@ -99,7 +99,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select 
-@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,cont.sueldo/30*(dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol))
+@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,294	,'1' ,(cont.sueldo/30*(dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol)))*2*0.25
 ,1						,'Sueldo base'		
 FROM            dbo.ro_contrato AS cont INNER JOIN
                 dbo.ro_empleado AS emp ON cont.IdEmpresa = emp.IdEmpresa AND cont.IdEmpleado = emp.IdEmpleado

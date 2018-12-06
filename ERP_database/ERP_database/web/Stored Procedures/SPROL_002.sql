@@ -21,7 +21,7 @@ BEGIN
 --	set @idnomina_Tipo_liq =2
 --	set @idperiodo =201803
 	
-	delete web.ro_SPROL_002 --where IdEmpresa=@idempresa
+	delete web.ro_SPROL_002 where IdEmpresa=@idempresa
 	insert  into web.ro_SPROL_002(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor)	
 	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor from ro_rol_detalle as D, ro_rubro_tipo as R, ro_rol ro
 
