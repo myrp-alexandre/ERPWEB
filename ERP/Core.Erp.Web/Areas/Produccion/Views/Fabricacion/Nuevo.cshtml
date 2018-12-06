@@ -121,13 +121,31 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for=""></label>
-                        <button type="button" class="btn btn-primary form-control" >Productos facturados</button>
+                        <button type="button" class="btn btn-primary form-control" onclick="BuscarFacturas();">Productos facturados</button>
                     </div>
                 </div>
             </div>
 
-    </div>  
-      
+    </div>
+    <div class="modal fade" id="ModalFacturas" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Productos</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("GridViewPartial_fabricacion_det_fac")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aceptar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -167,13 +185,102 @@
             }
 }
 <script type="text/javascript">
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        e.customArgs["selectedIDs"] = selectedIDs;
+    };
+
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("Secuencia", GetSelectedFieldValuesCallback);
+    };
+
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    };
+
+    function MostrarModalFacturas() {
+        BuscarFacturas();
+        $("#ModalFacturas").modal("show");
+    };
+
+
+    function BuscarFacturas() {
+        var datos = {
+            FechaIni: FechaIni.GetValue(),
+            FechaFin: FechaFin.GetValue(),
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
+            IdBodega: $("#IdBodega").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetProductoFacturadosPorFecha", "Fabricacion", new { Area = "Produccion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == false) {
+                    alert("No existen resultados para los filtros aplicados");
+                }
+            },
+            error: function (error) {
+            }
+        });
+        GridViewPartial_fabricacion_det_fac.UnselectRows();
+        GridViewPartial_fabricacion_det_fac.PerformCallback();
+    };
+    function AddFacturas() {
+        var datos = {
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EditingAddNewIngreso", "Fabricacion", new { Area = "Produccion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        selectedIDs = "";
+        GridViewPartial_fabricacion_det_fac.PerformCallback();
+        GridViewPartial_fabricacion_det_fac.UnselectRows();
+
+        $("#ModalFacturas").modal("hide");
+
+        GridViewPartial_fabricacion_det_ing.PerformCallback();
+    };
+
+
+
+
+
+
+
+
+
+
+
 
         $(function () {
             CargarBodegaIngreso();
             $("#ing_IdSucursal").change(function () {
                 CargarBodegaIngreso();
             });
-    });
+        });
+
+
 
         function CargarBodegaIngreso() {
     $("#ing_IdBodega").empty();
@@ -250,7 +357,7 @@
             IdTransaccionSession: $("#IdTransaccionSession").val(),
 
 
-           
+
         }
         $.ajax({
             type: 'POST',
