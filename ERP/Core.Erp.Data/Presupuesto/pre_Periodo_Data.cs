@@ -27,7 +27,8 @@ namespace Core.Erp.Data.Presupuesto
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin,
                             EstadoCierre = q.EstadoCierre,
-                            Estado = q.Estado
+                            Estado = q.Estado,
+                            Periodo = ""
                         }).ToList();
                     }
                     else
@@ -40,7 +41,8 @@ namespace Core.Erp.Data.Presupuesto
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin,
                             EstadoCierre = q.EstadoCierre,
-                            Estado = q.Estado
+                            Estado = q.Estado,
+                            Periodo = ""
                         }).ToList();
                     }
                 }

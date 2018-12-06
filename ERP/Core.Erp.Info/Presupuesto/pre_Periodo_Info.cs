@@ -27,5 +27,9 @@ namespace Core.Erp.Info.Presupuesto
         [Required(ErrorMessage = ("El campo motivo de anulación es obligatorio"))]
         [StringLength(150, MinimumLength = 1, ErrorMessage = ("El campo motivo de anulación debe tener mínimo 1 caracter máximo 500"))]
         public string MotivoAnulacion { get; set; }
+
+
+
+        public string Periodo { get; set; }
     }
 }
