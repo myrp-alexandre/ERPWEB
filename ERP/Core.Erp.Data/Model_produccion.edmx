@@ -61,6 +61,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sppro_GetProductoFacturadosPorFecha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="IdBodega" Type="int" Mode="In" />
+          <Parameter Name="FechaIni" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="Model_produccionStoreContainer">
           <EntitySet Name="pro_Fabricacion" EntityType="Self.pro_Fabricacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pro_FabricacionDet" EntityType="Self.pro_FabricacionDet" Schema="dbo" store:Type="Tables" />
@@ -97,6 +104,13 @@
             <End Role="pro_Fabricacion" EntitySet="pro_Fabricacion" />
             <End Role="pro_FabricacionDet" EntitySet="pro_FabricacionDet" />
           </AssociationSet>
+          <FunctionImport Name="sppro_GetProductoFacturadosPorFecha" ReturnType="Collection(Model_produccion.sppro_GetProductoFacturadosPorFecha_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodega" Mode="In" Type="Int32" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="pro_Fabricacion">
           <Key>
@@ -139,6 +153,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sppro_GetProductoFacturadosPorFecha_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdProducto" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="pr_descripcion" Nullable="true" MaxLength="500" />
+          <Property Type="Double" Name="vt_cantidad" Nullable="true" />
+          <Property Type="DateTime" Name="vt_fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="NombreUnidad" Nullable="false" MaxLength="500" />
+          <Property Type="Double" Name="stock" Nullable="false" />
+          <Property Type="Double" Name="CantidadFabricada" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -186,6 +210,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sppro_GetProductoFacturadosPorFecha" FunctionName="Model_produccion.Store.sppro_GetProductoFacturadosPorFecha">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_produccion.sppro_GetProductoFacturadosPorFecha_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="vt_cantidad" ColumnName="vt_cantidad" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="NombreUnidad" ColumnName="NombreUnidad" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="CantidadFabricada" ColumnName="CantidadFabricada" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
