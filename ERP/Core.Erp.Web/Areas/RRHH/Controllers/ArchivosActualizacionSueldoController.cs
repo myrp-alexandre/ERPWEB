@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Core.Erp.Bus.General;
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
@@ -48,10 +49,26 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost]
         public FileResult Nuevo(ro_ArchivosIess_Info model)
         {
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+            var empresa = bus_empresa.get_info(Convert.ToInt32(SessionFixed.IdEmpresa));
+            string archivo = "";
+            model.lst_detalle = ro_ArchivosIess_Info_lst.get_list();
+            foreach (var item in model.lst_detalle)
+            {
+                archivo += empresa.em_ruc + ";";
+                archivo += "0001" + ";";
+                archivo += DateTime.Now.Year.ToString() + ";";
+                archivo += DateTime.Now.Month.ToString().PadLeft(2, '0') + ";";
+                archivo += "INS" + ";";
+                archivo += item.pe_cedulaRuc + ";";
+                archivo += item.Valor + ";";
+                archivo += "X";
 
+                archivo += "\n";
+            }
 
-            return File(new byte[00], "application/xml", "" + ".xml");
-
+            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(archivo);
+            return File(byteArray, "application/xml", "HORAS_EXTRAS_"+ DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + + ".txt");
 
         }
 

@@ -23,5 +23,7 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+
     }
 }
