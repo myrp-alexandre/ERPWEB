@@ -21,5 +21,7 @@ namespace Core.Erp.Info.Presupuesto
         public double Monto { get; set; }
 
         public string Descripcion { get; set; }
+        public decimal IdPeriodo { get; set; }
+        public bool EstadoCierre { get; set; }
     }
 }
