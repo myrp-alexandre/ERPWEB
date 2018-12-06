@@ -68,7 +68,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
 
             byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(archivo);
-            return File(byteArray, "application/xml", "HORAS_EXTRAS_"+ DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + + ".txt");
+            return File(byteArray, "application/xml", "HORAS_EXTRAS_"+ DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() +  ".txt");
 
         }
 
