@@ -107,10 +107,10 @@ namespace Core.Erp.Data.Presupuesto
                 int ID = 1;
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
-                    var Lista = db.pre_Presupuesto.Where(q => q.IdEmpresa == IdEmpresa).Select(q => q.IdGrupo);
+                    var Lista = db.pre_Presupuesto.Where(q => q.IdEmpresa == IdEmpresa).Select(q => q.IdPresupuesto);
 
                     if (Lista.Count() > 0)
-                        ID = Lista.Max() + 1;
+                        ID = Convert.ToInt32(Lista.Max() + 1);
                 }
                 return ID;
             }
@@ -144,9 +144,12 @@ namespace Core.Erp.Data.Presupuesto
                     if (info.ListaPresupuestoDet != null)
                     {
                         int Secuencia = 1;
+                        double monto_solicitado = 0;
+
                         foreach (var item in info.ListaPresupuestoDet)
                         {
-                            pre_Rubro EntityRubro = db.pre_Rubro.Where(q => q.IdRubro == item.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();                            
+                            pre_Rubro EntityRubro = db.pre_Rubro.Where(q => q.IdRubro == item.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                            monto_solicitado = (monto_solicitado + item.Monto);
 
                             db.pre_PresupuestoDet.Add(new pre_PresupuestoDet
                             {
@@ -189,7 +192,7 @@ namespace Core.Erp.Data.Presupuesto
                     entity.IdPeriodo = info.IdPeriodo;
                     entity.IdGrupo = info.IdGrupo;
                     entity.Observacion = info.Observacion;
-                    entity.MontoSolicitado = 0;
+                    entity.MontoSolicitado = info.MontoSolicitado;
                     entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     entity.FechaModificacion = DateTime.Now;
 
@@ -199,11 +202,13 @@ namespace Core.Erp.Data.Presupuesto
                     if (info.ListaPresupuestoDet != null)
                     {
                         int Secuencia = 1;
-                        //decimal monto_solicitado = 0;
+                        double monto_solicitado = 0;
 
                         foreach (var item in info.ListaPresupuestoDet)
                         {
-                            //monto_solicitado = monto_solicitado + item.Monto;
+                            pre_Rubro EntityRubro = db.pre_Rubro.Where(q => q.IdRubro == item.IdRubro && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                            monto_solicitado = (monto_solicitado + item.Monto);
+
                             db.pre_PresupuestoDet.Add(new pre_PresupuestoDet
                             {
                                 Secuencia = Secuencia++,
@@ -213,14 +218,12 @@ namespace Core.Erp.Data.Presupuesto
                                 Monto = item.Monto
                             });
                         }
-
-                        //entity.MontoSolicitado = monto_solicitado;
                     }
                     db.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

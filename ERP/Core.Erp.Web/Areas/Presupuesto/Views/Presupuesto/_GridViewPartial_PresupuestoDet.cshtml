@@ -40,7 +40,6 @@
         settings.InitNewRow = (s, e) =>
         {
             e.NewValues["IdRubro"] = "";
-            e.NewValues["Descripcion"] = "";
             e.NewValues["Cantidad"] = 0;
             e.NewValues["Monto"] = 0;
         };
@@ -48,7 +47,7 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "Descripcion";
-            column.Caption = "Descripción";
+            column.Caption = "Rubro";
             column.Width = Unit.Percentage(20);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });

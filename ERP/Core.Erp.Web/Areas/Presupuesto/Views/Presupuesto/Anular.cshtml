@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Presupuesto.pre_Presupuesto_Info
 @{
-    ViewBag.Title = "Nuevo presupuesto";
+    ViewBag.Title = "Anular presupuesto";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Nuevo", "Presupuesto", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "Presupuesto", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
     {
@@ -19,6 +19,7 @@
         </div>
     }
     @Html.HiddenFor(q => q.IdEmpresa);
+    @Html.HiddenFor(q => q.IdPresupuesto);
     @Html.HiddenFor(q => q.IdTransaccionSession);
     <div class="row">
         <div class="col-md-12">
@@ -56,11 +57,22 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Descripcion">Motivo de anulación</label>
+                    @Html.TextBoxFor(q => q.MotivoAnulacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.MotivoAnulacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal-body">
         @Html.Action("GridViewPartial_PresupuestoDet")
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Presupuesto", new { Area ="Presupuesto" }, null)">Cancelar</a>
     </div>
 
