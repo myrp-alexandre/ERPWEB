@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_AprobacionPresupuesto";
-        settings.CallbackRouteValues = new { Controller = "Presupuesto", Action = "GridViewPartial_AprobacionPresupuesto", IdSucursal = ViewBag.IdSucursal, IdPeriodo = ViewBag.IdPeriodo };
+        settings.CallbackRouteValues = new { Controller = "AprobacionPresupuesto", Action = "GridViewPartial_AprobacionPresupuesto", IdSucursal = ViewBag.IdSucursal, IdPeriodo = ViewBag.IdPeriodo };
         settings.KeyFieldName = "IdPresupuesto";
         settings.Width = Unit.Percentage(100);
 
@@ -57,13 +57,18 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
+
+            if (Convert.ToString(e.GetValue("IdUsuarioAprobacion")) != "")
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
         };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioAprobacion")) == "") )
                 {
                     ViewContext.Writer.Write(
                         Html.ActionLink("Aprobar", "Aprobar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPresupuesto = DataBinder.Eval(tc.DataItem, "IdPresupuesto") })
@@ -76,10 +81,11 @@
         });
 
 
-        settings.Columns.Add("IdPresupuesto", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdPresupuesto", "Código").Width = Unit.Percentage(5);
         settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(15);
-        settings.Columns.Add("Periodo", "Periodo").Width = Unit.Percentage(15);
+        settings.Columns.Add("DescripcionPeriodo", "Periodo").Width = Unit.Percentage(15);
         settings.Columns.Add("Descripcion", "Grupo").Width = Unit.Percentage(15);
+        settings.Columns.Add("MontoSolicitado", "Monto Solicitado").Width = Unit.Percentage(10);
         settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
@@ -91,14 +97,14 @@
 
             });
         });
-        //settings.Columns.Add(column =>
-        //{
-        //    column.SetDataItemTemplateContent(c =>
-        //    {
-        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_004", "PresupuestoReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdPresupuesto = DataBinder.Eval(c.DataItem, "IdPresupuesto").ToString() }, Request.Url.Scheme) + "');\"></span>");
-        //    });
-        //    column.Width = Unit.Percentage(5);
-        //});
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("PRE_001", "PresupuestoReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdPresupuesto = DataBinder.Eval(c.DataItem, "IdPresupuesto").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -38,6 +38,8 @@ namespace Core.Erp.Info.Presupuesto
         [Required(ErrorMessage = ("El campo motivo de aprobación es obligatorio"))]
         [StringLength(150, MinimumLength = 1, ErrorMessage = ("El campo motivo de aprobación debe tener mínimo 1 caracter máximo 500"))]
         public string MotivoAprobacion { get; set; }
+        [Required(ErrorMessage = ("El campo descripción de periodo es obligatorio"))]
+        public string DescripcionPeriodo { get; set; }
 
 
 
@@ -46,7 +48,6 @@ namespace Core.Erp.Info.Presupuesto
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime FechaFin { get; set; }
         public bool EstadoCierre { get; set; }
-        public string Descripcion { get; set; }
-        public string Periodo { get; set; }
+        public string Descripcion { get; set; }        
     }
 }

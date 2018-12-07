@@ -35,6 +35,8 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             pre_Periodo_Info model = new pre_Periodo_Info();
+            model.FechaInicio = DateTime.Now;
+            model.FechaFin = DateTime.Now;
             return View(model);
 
         }

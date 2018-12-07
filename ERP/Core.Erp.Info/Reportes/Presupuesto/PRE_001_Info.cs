@@ -10,23 +10,23 @@ namespace Core.Erp.Info.Reportes.Presupuesto
     {
         public int IdEmpresa { get; set; }
         public decimal IdPresupuesto { get; set; }
+        public int Secuencia { get; set; }
         public int IdSucursal { get; set; }
         public string Su_Descripcion { get; set; }
         public decimal IdPeriodo { get; set; }
-        public System.DateTime FechaInicio { get; set; }
-        public System.DateTime FechaFin { get; set; }
-        public bool EstadoCierre { get; set; }
+        public string DescripciónPeriodo { get; set; }
         public int IdGrupo { get; set; }
-        public string Descripcion { get; set; }
-        public string Observacion { get; set; }
-        public bool Estado { get; set; }
-        public double MontoSolicitado { get; set; }
-        public double MontoAprobado { get; set; }
-        public int Secuencia { get; set; }
+        public string DescripcionGrupo { get; set; }
         public int IdRubro { get; set; }
         public string DescripcionRubro { get; set; }
         public string IdCtaCble { get; set; }
+        public string pc_Cuenta { get; set; }
         public int Cantidad { get; set; }
         public double Monto { get; set; }
+        public bool Estado { get; set; }
+        public double MontoSolicitado { get; set; }
+        public double MontoAprobado { get; set; }
+        public string Observacion { get; set; }
+        public string MotivoAnulacion { get; set; }
     }
 }

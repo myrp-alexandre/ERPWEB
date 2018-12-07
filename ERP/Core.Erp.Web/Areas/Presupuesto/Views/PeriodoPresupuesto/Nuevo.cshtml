@@ -8,6 +8,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
+    $(function () {
+        MostrarDescripcion();
+    });
+
+    function MostrarDescripcion() {
+        var descripcion = "Periodo desde :" + Date.parse(FechaInicio.GetValue()) + " hasta: " + new Date(FechaFin.GetValue());
+        console.log(Date.parse(FechaInicio.GetValue()));
+        $("#DescripcionPeriodo").val( descripcion);
+    };
+
+</script>
 @using (Html.BeginForm("Nuevo", "PeriodoPresupuesto", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
@@ -21,6 +33,13 @@
     @Html.HiddenFor(q => q.IdEmpresa);
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="DescripcionPeriodo">Descripción*</label>
+                    @Html.TextBoxFor(q => q.DescripcionPeriodo, new { @class = "form-control", id= "DescripcionPeriodo" })
+                    @Html.ValidationMessageFor(q => q.DescripcionPeriodo, "", new { @class = "text-danger" })
+                </div>
+            </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="FechaInicio">Fecha de inicio*</label>
@@ -32,6 +51,7 @@
                         settings.Properties.EditFormatString = "dd/MM/yyyy";
                         settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        settings.Properties.ClientSideEvents.DateChanged = "function(s,e){MostrarDescripcion();}";
                     }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaInicio, "", new { @class = "text-danger" })
                 </div>
@@ -47,11 +67,12 @@
                         settings.Properties.EditFormatString = "dd/MM/yyyy";
                         settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        settings.Properties.ClientSideEvents.DateChanged = "function(s,e){MostrarDescripcion();}";
                     }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaFin, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="FechaFin"></label>
                     @Html.DevExpress().CheckBoxFor(q => q.EstadoCierre, settings =>

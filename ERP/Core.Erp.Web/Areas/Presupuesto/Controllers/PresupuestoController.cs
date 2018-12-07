@@ -43,7 +43,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 IdPeriodo = info_periodo.IdPeriodo
             };
 
-            cargar_combos(model.IdEmpresa);
+            cargar_filtros(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -72,9 +72,21 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             try
             {
                 var lst_Sucursal = bus_Sucursal.get_list(IdEmpresa, false);
+
+                lst_Sucursal.Add(new Info.General.tb_sucursal_Info
+                {
+                    IdSucursal = 0,
+                    Su_Descripcion = "Todos"
+                });
                 ViewBag.lst_Sucursal = lst_Sucursal;
 
                 var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false);
+
+                lst_Periodo.Add(new Info.Presupuesto.pre_Periodo_Info
+                {
+                    IdPeriodo = 0,
+                    DescripcionPeriodo = "Todos"
+                });
                 ViewBag.lst_Periodo = lst_Periodo;
             }
             catch (Exception)
