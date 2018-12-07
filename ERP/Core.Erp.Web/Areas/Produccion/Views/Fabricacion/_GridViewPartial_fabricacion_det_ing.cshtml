@@ -101,8 +101,8 @@
             });
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
-        settings.ClientSideEvents.EndCallback = "function(s,e){ArmarMateriaPrima();}";
 
     });
 }
+
 @grid.Bind(Model.LstDet).GetHtml()

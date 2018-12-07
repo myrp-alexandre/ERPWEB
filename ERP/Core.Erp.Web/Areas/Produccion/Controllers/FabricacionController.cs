@@ -203,19 +203,22 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             foreach (var item in Lista)
             {
                 var composicion = bus_comp.get_list(IdEmpresa, item.IdProducto);
+
                 foreach (var comp in composicion)
                 {
-                    List_det.AddRow(new pro_FabricacionDet_Info
+                    pro_FabricacionDet_Info info = new pro_FabricacionDet_Info
                     {
-                        IdProducto = comp.IdProductoHijo,
+                        IdProducto = item.IdProducto,
                         Signo = "-",
-                        Cantidad = item.Cantidad*comp.Cantidad,
-                        IdUnidadMedida = comp.IdUnidadMedida,
-                        Costo = 0
-                    }, 
-                    IdTransaccionSession
-                    );
+                        Cantidad = item.Cantidad * item.Cantidad,
+                        IdUnidadMedida = item.IdUnidadMedida,
+                        Costo = 0,
+                        pr_descripcion = item.pr_descripcion
+                    };
+                    List_det.AddRow(info, IdTransaccionSession);
                 }
+                List_det.set_list(Lista, IdTransaccionSession);
+                
             }
             return Json(Lista, JsonRequestBehavior.AllowGet);
 
@@ -264,20 +267,12 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNewIngreso( [ModelBinder(typeof(DevExpressEditorsBinder))] pro_FabricacionDet_Info info_det, string IDs = "", decimal IdtransaccionSession = 0 )
+        public ActionResult EditingAddNewIngreso( [ModelBinder(typeof(DevExpressEditorsBinder))] pro_FabricacionDet_Info info_det )
         {
             var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
             if (producto != null)
                 info_det.pr_descripcion = producto.pr_descripcion;
             info_det.Signo = "+";
-            var lst = List.get_list();
-            string[] array = IDs.Split(',');
-            foreach (var item in array)
-            {
-                 info_det = lst.Where(q => q.Secuencia == info_det.Secuencia).FirstOrDefault();
-                if (info_det != null)
-                    List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            }
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "+").ToList();
