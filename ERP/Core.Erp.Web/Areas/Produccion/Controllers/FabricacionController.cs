@@ -169,26 +169,27 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
         public JsonResult ArmarMateriaPrima(int IdEmpresa = 0 ,  decimal IdTransaccionSession = 0 )
         {
             in_Producto_Composicion_Bus bus_comp = new in_Producto_Composicion_Bus();
-            var Lista = List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList();
-            foreach (var item in Lista)
+         //  List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList();
+            foreach (var item in List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList())
+
             {
                 var composicion = bus_comp.get_list(IdEmpresa, item.IdProducto);
+
                 foreach (var comp in composicion)
                 {
                     pro_FabricacionDet_Info info = new pro_FabricacionDet_Info
                     {
-
                         IdProducto = comp.IdProductoHijo,
                         Signo = "-",
                         Cantidad = item.Cantidad * comp.Cantidad,
                         IdUnidadMedida = comp.IdUnidadMedida,
-                        Costo = 0, 
+                        Costo = 0,
                         pr_descripcion = comp.pr_descripcion
                     };
-                    List_det.AddRow(info, IdTransaccionSession);
-                }
+                List_det.AddRow(info, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                };
             }
-            return Json(List_det, JsonRequestBehavior.AllowGet);
+            return Json("", JsonRequestBehavior.AllowGet);
 
         }
 
@@ -349,7 +350,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             }
             return (List<pro_FabricacionDet_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
-
+        
         public void set_list(List<pro_FabricacionDet_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
