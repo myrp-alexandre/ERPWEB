@@ -169,36 +169,6 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
         public JsonResult ArmarMateriaPrima(int IdEmpresa = 0 ,  decimal IdTransaccionSession = 0 )
         {
             in_Producto_Composicion_Bus bus_comp = new in_Producto_Composicion_Bus();
-            //var resultado = bus_comp.get_list(IdEmpresa, IdProducto);
-            //foreach (var item in resultado)
-            //{
-            //  //  item.Cantidad = item.Cantidad * 1;
-            //    pro_FabricacionDet_Info info = new pro_FabricacionDet_Info
-            //    {
-            //        IdEmpresa = item.IdEmpresa,
-            //        IdProducto = item.IdProductoHijo,
-            //        Cantidad = item.Cantidad,
-            //        IdUnidadMedida = item.IdUnidadMedida,
-            //        Signo = "-",
-            //        pr_descripcion = item.pr_descripcion,
-            //        Secuencia = item.secuencia,
-            //        IdProductoPadre = item.IdProductoPadre
-
-            //    };
-            //    var producto = List_det.get_list(IdTransaccionSession).Where(q => q.IdProducto == info.IdProducto).FirstOrDefault();
-            //    double Cantidad = 0;
-            //    if (producto == null)
-            //    {
-            //        List_det.AddRow(info, IdTransaccionSession);
-            //        item.Cantidad = info.Cantidad * Cantidad;
-            //    }
-            //    else
-            //    {
-            //        producto.Cantidad = producto.Cantidad + info.Cantidad;
-            //        List_det.UpdateRow(info, IdTransaccionSession);
-            //    }
-            //}
-
             var Lista = List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList();
             foreach (var item in Lista)
             {
