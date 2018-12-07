@@ -10,7 +10,8 @@ SELECT        dbo.ro_empleado.IdEmpresa, dbo.ro_empleado.IdEmpleado_Supervisor, 
                          dbo.ro_empleado.CodigoSectorial, dbo.ro_empleado.em_AnticipoSueldo, dbo.ro_empleado.Marca_Biometrico, dbo.ro_empleado.IdHorario, dbo.tb_persona.pe_Naturaleza, dbo.tb_persona.pe_nombre, 
                          dbo.tb_persona.IdTipoDocumento, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_direccion, dbo.tb_persona.pe_telfono_Contacto, dbo.tb_persona.pe_celular, dbo.tb_persona.pe_correo, dbo.tb_persona.pe_sexo, 
                          dbo.tb_persona.IdEstadoCivil, dbo.tb_persona.pe_fechaNacimiento, dbo.tb_sucursal.Su_Descripcion, dbo.ro_Departamento.de_descripcion, dbo.ro_cargo.ca_descripcion, dbo.ro_Division.Descripcion, 
-                         dbo.ro_empleado.IdEmpleado, dbo.tb_persona.pe_apellido, dbo.ro_empleado.Tiene_ingresos_compartidos, dbo.ro_empleado.Pago_por_horas, dbo.ro_empleado.Valor_horas, dbo.ro_empleado.Valor_maximo_horas
+                         dbo.ro_empleado.IdEmpleado, dbo.tb_persona.pe_apellido, dbo.ro_empleado.Tiene_ingresos_compartidos, dbo.ro_empleado.Pago_por_horas, dbo.ro_empleado.Valor_maximo_horas, 
+                         dbo.ro_empleado.Valor_horas_vespertina, dbo.ro_empleado.Valor_horas_matutino, dbo.ro_empleado.Valor_horas_nocturna
 FROM            dbo.tb_persona INNER JOIN
                          dbo.ro_empleado ON dbo.tb_persona.IdPersona = dbo.ro_empleado.IdPersona INNER JOIN
                          dbo.ro_cargo ON dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa AND dbo.ro_empleado.IdCargo = dbo.ro_cargo.IdCargo AND dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa AND 
@@ -27,7 +28,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[86] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[75] 4[4] 2[21] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -111,7 +112,7 @@ Begin DesignProperties =
                Right = 564
             End
             DisplayFlags = 280
-            TopColumn = 38
+            TopColumn = 40
          End
          Begin Table = "ro_cargo"
             Begin Extent = 
@@ -163,7 +164,9 @@ Begin DesignProperties =
       Begin ColumnWidths = 104
          Width = 284
          Width = 1500
- ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_datos_generales';
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_datos_generales';
+
+
 
 
 
@@ -175,7 +178,7 @@ Begin DesignProperties =
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'        Width = 1500
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -298,6 +301,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'        Wi
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_datos_generales';
+
+
 
 
 

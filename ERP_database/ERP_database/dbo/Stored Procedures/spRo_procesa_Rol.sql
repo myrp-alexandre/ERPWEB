@@ -321,14 +321,14 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculandoliquido impuesto a la renta--------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-/*
+
 select @IdRubro_calculado= IdRubro_IR from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle
-(IdEmpresa,				IdNominaTipo,			IdNominaTipoLiqui,			IdPeriodo,			IdEmpleado,			IdRubro,			Orden,			Valor
-,rub_visible_reporte,	Observacion,			TipoMovimiento,				IdCentroCosto		,IdCentroCosto_sub_centro_costo			,IdPunto_cargo)
+(IdEmpresa,				IdRol,	IdSucursal,					IdEmpleado,			IdRubro,			Orden,			Valor
+,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdNomina				,@IdNominaTipo				,@IdPEriodo			,rol_det.IdEmpleado		,@IdRubro_calculado	,rub.ru_orden			,
+@IdEmpresa				,@IdRol, emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,rub.ru_orden			,
 
 isnull( (
 select ISNULL(valor,0) from (
@@ -342,15 +342,17 @@ and FraccionBasica>0
 
 ,0)
 
-,1						,'Provisión impuesto a la renta'	,	null						, null				,null									,null
+,1						,'Provisión impuesto a la renta'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
-                         dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro
-where rol_det.IdEmpresa=@IdEmpresa
-and rol_det.IdNominaTipo=@IdNomina
-and rol_det.IdNominaTipoLiqui=@IdNominaTipo
-and rol_det.IdPeriodo=@IdPEriodo
+                         dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
+                         dbo.ro_rol ON rol_det.IdEmpresa = dbo.ro_rol.IdEmpresa AND rol_det.IdRol = dbo.ro_rol.IdRol INNER JOIN
+                         dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado
+where ro_rol.IdEmpresa=@IdEmpresa
+and ro_rol.IdNominaTipo=@IdNomina
+and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
+and ro_rol.IdPeriodo=@IdPEriodo
 and rol_det.IdRubro=500
-*/
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando total egreso por empleado--------------------------------------------------------------------------------------------<

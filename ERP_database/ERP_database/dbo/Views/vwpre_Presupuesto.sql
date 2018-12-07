@@ -1,12 +1,23 @@
-﻿CREATE VIEW dbo.vwro_empleado_combo
+﻿CREATE VIEW dbo.vwpre_Presupuesto
 AS
-SELECT        dbo.tb_persona.pe_apellido + ' ' + dbo.tb_persona.pe_nombre AS Empleado, dbo.tb_persona.pe_cedulaRuc, dbo.ro_empleado.em_status, dbo.ro_empleado.IdEmpresa, dbo.ro_empleado.IdEmpleado, dbo.ro_contrato.IdNomina, 
-                         dbo.ro_empleado.IdSucursal, dbo.ro_empleado.Pago_por_horas, dbo.ro_empleado.Valor_maximo_horas, dbo.ro_empleado.Valor_horas_vespertina, dbo.ro_empleado.Valor_horas_matutino, 
-                         dbo.ro_empleado.Valor_horas_nocturna, dbo.ro_empleado.Tiene_ingresos_compartidos
-FROM            dbo.ro_empleado INNER JOIN
-                         dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
-                         dbo.ro_contrato ON dbo.ro_empleado.IdEmpresa = dbo.ro_contrato.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_contrato.IdEmpleado
-WHERE        (dbo.ro_empleado.em_status <> 'EST_LIQ') AND (dbo.ro_empleado.em_estado = 'A')
+SELECT        dbo.pre_Presupuesto.IdEmpresa, dbo.pre_Presupuesto.IdPresupuesto, dbo.pre_Presupuesto.IdSucursal, dbo.tb_sucursal.Su_Descripcion, dbo.pre_Presupuesto.IdPeriodo, dbo.pre_PresupuestoPeriodo.FechaInicio, 
+                         dbo.pre_PresupuestoPeriodo.FechaFin, dbo.pre_PresupuestoPeriodo.EstadoCierre, dbo.pre_Presupuesto.IdGrupo, dbo.pre_Grupo.Descripcion, dbo.pre_Presupuesto.Observacion, dbo.pre_Presupuesto.Estado, 
+                         dbo.pre_Presupuesto.MontoSolicitado, dbo.pre_Presupuesto.MontoAprobado
+FROM            dbo.pre_Grupo INNER JOIN
+                         dbo.pre_Presupuesto ON dbo.pre_Grupo.IdEmpresa = dbo.pre_Presupuesto.IdEmpresa AND dbo.pre_Grupo.IdGrupo = dbo.pre_Presupuesto.IdGrupo INNER JOIN
+                         dbo.pre_PresupuestoPeriodo ON dbo.pre_Presupuesto.IdEmpresa = dbo.pre_PresupuestoPeriodo.IdEmpresa AND dbo.pre_Presupuesto.IdPeriodo = dbo.pre_PresupuestoPeriodo.IdPeriodo INNER JOIN
+                         dbo.tb_sucursal ON dbo.pre_Presupuesto.IdEmpresa = dbo.tb_sucursal.IdEmpresa AND dbo.pre_Presupuesto.IdSucursal = dbo.tb_sucursal.IdSucursal
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwpre_Presupuesto';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'    Or = 1350
+      End
+   End
+End
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwpre_Presupuesto';
+
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -14,7 +25,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[56] 4[5] 2[8] 3) )"
+         Configuration = "(H (1[69] 4[5] 2[14] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -80,32 +91,42 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "ro_empleado"
-            Begin Extent = 
-               Top = 10
-               Left = 264
-               Bottom = 263
-               Right = 553
-            End
-            DisplayFlags = 280
-            TopColumn = 48
-         End
-         Begin Table = "tb_persona"
-            Begin Extent = 
-               Top = 14
-               Left = 845
-               Bottom = 285
-               Right = 1077
-            End
-            DisplayFlags = 280
-            TopColumn = 4
-         End
-         Begin Table = "ro_contrato"
+         Begin Table = "pre_Grupo"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 226
-               Right = 217
+               Bottom = 136
+               Right = 247
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "pre_Presupuesto"
+            Begin Extent = 
+               Top = 138
+               Left = 38
+               Bottom = 268
+               Right = 247
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "pre_PresupuestoPeriodo"
+            Begin Extent = 
+               Top = 270
+               Left = 38
+               Bottom = 400
+               Right = 247
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "tb_sucursal"
+            Begin Extent = 
+               Top = 534
+               Left = 38
+               Bottom = 664
+               Right = 268
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -122,7 +143,7 @@ Begin DesignProperties =
          Width = 1500
          Width = 1500
          Width = 1500
-         Width = 4035
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -143,17 +164,5 @@ Begin DesignProperties =
          Filter = 1350
          Or = 1350
          Or = 1350
-         Or = 1350
-      End
-   End
-End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_combo';
-
-
-
-
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_combo';
+     ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwpre_Presupuesto';
 

@@ -15,10 +15,11 @@
     [Aparece_modu_Ventas]     BIT           NOT NULL,
     [Aparece_modu_Compras]    BIT           NOT NULL,
     [Aparece_modu_Inventario] BIT           NOT NULL,
-    [Aparece_modu_Activo_F]   BIT           NOT NULL,
     [Aparece_fabricacion]     BIT           NOT NULL,
     CONSTRAINT [PK_in_productoTipo] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdProductoTipo] ASC)
 );
+
+
 
 
 

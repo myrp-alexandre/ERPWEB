@@ -1,12 +1,14 @@
-﻿CREATE VIEW dbo.vwro_empleado_combo
+﻿CREATE VIEW dbo.vwro_HorasProfesores
 AS
-SELECT        dbo.tb_persona.pe_apellido + ' ' + dbo.tb_persona.pe_nombre AS Empleado, dbo.tb_persona.pe_cedulaRuc, dbo.ro_empleado.em_status, dbo.ro_empleado.IdEmpresa, dbo.ro_empleado.IdEmpleado, dbo.ro_contrato.IdNomina, 
-                         dbo.ro_empleado.IdSucursal, dbo.ro_empleado.Pago_por_horas, dbo.ro_empleado.Valor_maximo_horas, dbo.ro_empleado.Valor_horas_vespertina, dbo.ro_empleado.Valor_horas_matutino, 
-                         dbo.ro_empleado.Valor_horas_nocturna, dbo.ro_empleado.Tiene_ingresos_compartidos
-FROM            dbo.ro_empleado INNER JOIN
-                         dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
-                         dbo.ro_contrato ON dbo.ro_empleado.IdEmpresa = dbo.ro_contrato.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_contrato.IdEmpleado
-WHERE        (dbo.ro_empleado.em_status <> 'EST_LIQ') AND (dbo.ro_empleado.em_estado = 'A')
+SELECT        dbo.ro_HorasProfesores.IdEmpresa, dbo.ro_HorasProfesores.IdCarga, dbo.ro_HorasProfesores.IdNomina, dbo.ro_HorasProfesores.IdNominaTipo, dbo.ro_HorasProfesores.IdPeriodo, dbo.ro_HorasProfesores.FechaCarga, 
+                         dbo.ro_HorasProfesores.Observacion, dbo.ro_HorasProfesores.Estado, dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, dbo.ro_Nomina_Tipo.Descripcion
+FROM            dbo.ro_HorasProfesores INNER JOIN
+                         dbo.ro_Nomina_Tipoliqui ON dbo.ro_HorasProfesores.IdEmpresa = dbo.ro_Nomina_Tipoliqui.IdEmpresa AND dbo.ro_HorasProfesores.IdNomina = dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo AND 
+                         dbo.ro_HorasProfesores.IdNominaTipo = dbo.ro_Nomina_Tipoliqui.IdNomina_TipoLiqui INNER JOIN
+                         dbo.ro_Nomina_Tipo ON dbo.ro_Nomina_Tipoliqui.IdEmpresa = dbo.ro_Nomina_Tipo.IdEmpresa AND dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo = dbo.ro_Nomina_Tipo.IdNomina_Tipo
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_HorasProfesores';
+
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -14,7 +16,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[56] 4[5] 2[8] 3) )"
+         Configuration = "(H (1[41] 4[5] 2[39] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -80,32 +82,32 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "ro_empleado"
-            Begin Extent = 
-               Top = 10
-               Left = 264
-               Bottom = 263
-               Right = 553
-            End
-            DisplayFlags = 280
-            TopColumn = 48
-         End
-         Begin Table = "tb_persona"
-            Begin Extent = 
-               Top = 14
-               Left = 845
-               Bottom = 285
-               Right = 1077
-            End
-            DisplayFlags = 280
-            TopColumn = 4
-         End
-         Begin Table = "ro_contrato"
+         Begin Table = "ro_HorasProfesores"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 226
-               Right = 217
+               Bottom = 301
+               Right = 214
+            End
+            DisplayFlags = 280
+            TopColumn = 1
+         End
+         Begin Table = "ro_Nomina_Tipoliqui"
+            Begin Extent = 
+               Top = 6
+               Left = 472
+               Bottom = 243
+               Right = 708
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_Nomina_Tipo"
+            Begin Extent = 
+               Top = 14
+               Left = 799
+               Bottom = 264
+               Right = 981
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -122,7 +124,7 @@ Begin DesignProperties =
          Width = 1500
          Width = 1500
          Width = 1500
-         Width = 4035
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -147,13 +149,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_combo';
-
-
-
-
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_combo';
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_HorasProfesores';
 
