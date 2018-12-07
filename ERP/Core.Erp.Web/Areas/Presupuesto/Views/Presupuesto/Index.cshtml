@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label for="IdPeriodo">Periodo*</label>
                             <div class="form-group">
-                                @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_Periodo, "IdPeriodo", "Periodo"), new { @class = "form-control", @id = "IdPeriodo" })
+                                @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_Periodo, "IdPeriodo", "DescripcionPeriodo"), new { @class = "form-control", @id = "IdPeriodo" })
                                 @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                             </div>
                         </div>
