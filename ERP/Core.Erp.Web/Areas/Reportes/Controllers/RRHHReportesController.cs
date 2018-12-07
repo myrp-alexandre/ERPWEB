@@ -112,7 +112,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-        public ActionResult ROL_009( DateTime? fecha_ini, DateTime? fecha_fin, bool mostrar_nov_can = false, bool mostrar_nov_pen = false, bool mostrar_todas_nov = false)
+        public ActionResult ROL_009( DateTime? fecha_ini, DateTime? fecha_fin, string[] estado_novedad )
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
@@ -124,9 +124,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fecha_inicio.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
-            report.p_can.Value = mostrar_nov_can;
-            report.p_pen.Value = mostrar_nov_pen;
-            report.p_todas.Value = mostrar_todas_nov;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;

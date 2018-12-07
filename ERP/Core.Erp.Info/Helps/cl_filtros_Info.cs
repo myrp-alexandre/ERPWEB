@@ -24,7 +24,7 @@ namespace Core.Erp.Info.Helps
 
 
         public string IdPais_embarque { get; set; }
-        
+
 
 
         #endregion
@@ -42,7 +42,7 @@ namespace Core.Erp.Info.Helps
         public bool mostrar_agrupado { get; set; }
         public bool no_mostrar_en_conciliacion { get; set; }
         public bool no_mostrar_saldo_en_0 { get; set; }
-        
+
         #endregion
 
         #region filtros de RRHH
@@ -53,6 +53,7 @@ namespace Core.Erp.Info.Helps
         public bool mostrar_todas_nov { get; set; }
         public int IdSucursal { get; set; }
         public decimal IdEmpleado { get; set; }
+        public string[]  estado_novedad { get; set; }
 
         #endregion
 
@@ -187,4 +188,5 @@ namespace Core.Erp.Info.Helps
             fecha_corte = DateTime.Now.Date;
         }
     }
+
 }

@@ -73,6 +73,8 @@ namespace Core.Erp.Data.General
             return info;
         }
 
+
+
         public tb_sucursal_Info get_info(int IdEmpresa, int IdSucursal)
         {
             tb_sucursal_Info info = new tb_sucursal_Info();

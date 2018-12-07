@@ -4,10 +4,83 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.RRHH;
+using DevExpress.Web;
+
 namespace Core.Erp.Data.RRHH
 {
    public class ro_rubro_tipo_Data
     {
+
+
+        public List<ro_rubro_tipo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<ro_rubro_tipo_Info> Lista = new List<ro_rubro_tipo_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+            return Lista;
+        }
+
+        public ro_rubro_tipo_Info get_info_bajo_demanda(int IdEmpresa, ListEditItemRequestedByValueEventArgs args)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info_demanda(IdEmpresa, (int)args.Value);
+        }
+
+        public List<ro_rubro_tipo_Info> get_list(int IdEmpresa, int skip, int take, string filter)
+        {
+            try
+            {
+                List<ro_rubro_tipo_Info> Lista = new List<ro_rubro_tipo_Info>();
+
+                Entities_rrhh context_g = new Entities_rrhh();
+
+                var lstg = context_g.ro_rubro_tipo.Where(q => q.ru_estado == "A" && q.IdEmpresa == IdEmpresa && (q.IdRubro.ToString() + " " + q.ru_descripcion).Contains(filter)).OrderBy(q => q.IdRubro).Skip(skip).Take(take);
+                foreach (var q in lstg)
+                {
+                    Lista.Add(new ro_rubro_tipo_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        rub_codigo = q.rub_codigo,
+                        ru_codRolGen = q.ru_codRolGen,
+                        ru_descripcion=q.ru_descripcion,
+                        NombreCorto=q.NombreCorto
+                    });
+                }
+
+                context_g.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ro_rubro_tipo_Info get_info_demanda(int IdEmpresa, int value)
+        {
+            ro_rubro_tipo_Info info = new ro_rubro_tipo_Info();
+            using (Entities_rrhh Contex = new Entities_rrhh())
+            {
+                info = (from q in Contex.ro_rubro_tipo
+                        where q.IdEmpresa == IdEmpresa
+                        select new ro_rubro_tipo_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            rub_codigo = q.rub_codigo,
+                            ru_codRolGen = q.ru_codRolGen,
+                            ru_descripcion = q.ru_descripcion,
+                            NombreCorto = q.NombreCorto
+                        }).FirstOrDefault();
+            }
+            return info;
+        }
+
+
+
         public List<ro_rubro_tipo_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try

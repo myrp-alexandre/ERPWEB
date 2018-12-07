@@ -71,8 +71,84 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Estado novedades*</label>
+
+                            <script type="text/javascript">
+                                var textSeparator = ";";
+                                function updateText() {
+                                    var selectedItems = estado_novedad.GetSelectedItems();
+                                    checkComboBox.SetText(getSelectedItemsText(selectedItems));
+                                }
+                                function synchronizeListBoxValues(dropDown, args) {
+                                    estado_novedad.UnselectAll();
+                                    var texts = dropDown.GetText().split(textSeparator);
+                                    var values = getValuesByTexts(texts);
+                                    estado_novedad.SelectValues(values);
+                                    updateText(); // for remove non-existing texts
+                                }
+                                function getSelectedItemsText(items) {
+                                    var texts = [];
+                                    for (var i = 0; i < items.length; i++)
+                                        texts.push(items[i].text);
+                                    return texts.join(textSeparator);
+                                }
+                                function getValuesByTexts(texts) {
+                                    var actualValues = [];
+                                    var item;
+                                    for (var i = 0; i < texts.length; i++) {
+                                        item = checkListBox.FindItemByText(texts[i]);
+                                        if (item != null)
+                                            actualValues.push(item.value);
+                                    }
+                                    return actualValues;
+                                }
+                            </script>
+
+
+                            @Html.DevExpress().DropDownEdit(settings => {
+                            settings.Name = "checkComboBox";
+                            settings.Width = 285;
+                            //settings.Properties.DropDownWindowStyle.BackColor = Color.FromArgb(0xEDEDED);
+
+                            settings.SetDropDownWindowTemplateContent(c => {
+                                @Html.DevExpress().ListBox(listBoxSettings => {
+                                    listBoxSettings.Name = "estado_novedad";
+                                    listBoxSettings.ControlStyle.Border.BorderWidth = 0;
+                                    listBoxSettings.ControlStyle.BorderBottom.BorderWidth = 1;
+                                    //listBoxSettings.ControlStyle.BorderBottom.BorderColor = Color.FromArgb(0xDCDCDC);
+                                    listBoxSettings.Height = Unit.Pixel(200);
+                                    listBoxSettings.Width = Unit.Percentage(100);
+
+                                    listBoxSettings.Properties.EnableSelectAll = true;
+                                    listBoxSettings.Properties.FilteringSettings.ShowSearchUI = true;
+                                    listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.CheckColumn;
+                                    listBoxSettings.Properties.Items.Add("PEN");
+                                    listBoxSettings.Properties.Items.Add("CAN");
+                                    listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "updateText";
+                                    listBoxSettings.Properties.ClientSideEvents.Init = "updateText";
+                                }).Render();
+                                ViewContext.Writer.Write("<div style=\"margin: 6px; overflow: hidden;\">");
+                                @Html.DevExpress().Button(buttonSettings => {
+                                    buttonSettings.Name = "buttonClose";
+                                    buttonSettings.Text = "Close";
+                                    buttonSettings.Style.Add("float", "right");
+                                    buttonSettings.ClientSideEvents.Click = "function(s, e){ checkComboBox.HideDropDown(); }";
+                                    buttonSettings.Height = 26;
+                                }).Render();
+                                ViewContext.Writer.Write("</div>");
+                            });
+                            settings.Properties.AnimationType = AnimationType.None;
+                            settings.Properties.ClientSideEvents.TextChanged = "synchronizeListBoxValues";
+                            settings.Properties.ClientSideEvents.DropDown = "synchronizeListBoxValues";
+                        }).GetHtml()
+
+
+                        </div>
+                    </div>
                 </div>
-            </div>            <!-- /.box-body -->
+            </div>
         </div>
     </div>
 
