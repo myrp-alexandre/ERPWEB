@@ -169,38 +169,9 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
         public JsonResult ArmarMateriaPrima(int IdEmpresa = 0 ,  decimal IdTransaccionSession = 0 )
         {
             in_Producto_Composicion_Bus bus_comp = new in_Producto_Composicion_Bus();
-            //var resultado = bus_comp.get_list(IdEmpresa, IdProducto);
-            //foreach (var item in resultado)
-            //{
-            //  //  item.Cantidad = item.Cantidad * 1;
-            //    pro_FabricacionDet_Info info = new pro_FabricacionDet_Info
-            //    {
-            //        IdEmpresa = item.IdEmpresa,
-            //        IdProducto = item.IdProductoHijo,
-            //        Cantidad = item.Cantidad,
-            //        IdUnidadMedida = item.IdUnidadMedida,
-            //        Signo = "-",
-            //        pr_descripcion = item.pr_descripcion,
-            //        Secuencia = item.secuencia,
-            //        IdProductoPadre = item.IdProductoPadre
+         //  List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList();
+            foreach (var item in List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList())
 
-            //    };
-            //    var producto = List_det.get_list(IdTransaccionSession).Where(q => q.IdProducto == info.IdProducto).FirstOrDefault();
-            //    double Cantidad = 0;
-            //    if (producto == null)
-            //    {
-            //        List_det.AddRow(info, IdTransaccionSession);
-            //        item.Cantidad = info.Cantidad * Cantidad;
-            //    }
-            //    else
-            //    {
-            //        producto.Cantidad = producto.Cantidad + info.Cantidad;
-            //        List_det.UpdateRow(info, IdTransaccionSession);
-            //    }
-            //}
-
-            var Lista = List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList();
-            foreach (var item in Lista)
             {
                 var composicion = bus_comp.get_list(IdEmpresa, item.IdProducto);
 
@@ -208,19 +179,17 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
                 {
                     pro_FabricacionDet_Info info = new pro_FabricacionDet_Info
                     {
-                        IdProducto = item.IdProducto,
+                        IdProducto = comp.IdProductoHijo,
                         Signo = "-",
-                        Cantidad = item.Cantidad * item.Cantidad,
-                        IdUnidadMedida = item.IdUnidadMedida,
+                        Cantidad = item.Cantidad * comp.Cantidad,
+                        IdUnidadMedida = comp.IdUnidadMedida,
                         Costo = 0,
-                        pr_descripcion = item.pr_descripcion
+                        pr_descripcion = comp.pr_descripcion
                     };
-                    List_det.AddRow(info, IdTransaccionSession);
-                }
-                List_det.set_list(Lista, IdTransaccionSession);
-                
+                List_det.AddRow(info, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                };
             }
-            return Json(Lista, JsonRequestBehavior.AllowGet);
+            return Json("", JsonRequestBehavior.AllowGet);
 
         }
 
@@ -275,7 +244,8 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             info_det.Signo = "+";
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "+").ToList();
+            pro_Fabricacion_Info model = new pro_Fabricacion_Info();
+            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "+").ToList();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_fabricacion_det_ing", model);
         }
@@ -380,7 +350,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             }
             return (List<pro_FabricacionDet_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
-
+        
         public void set_list(List<pro_FabricacionDet_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;

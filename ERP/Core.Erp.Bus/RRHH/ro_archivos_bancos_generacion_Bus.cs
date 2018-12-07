@@ -197,7 +197,7 @@ namespace Core.Erp.Bus.RRHH
                             if(info_empresa.RazonSocial.Length>38)
                             File += info_empresa.RazonSocial.Substring(0,37);
                             else
-                            File += info_empresa.RazonSocial.PadRight(38, ' ');
+                            File += info_empresa.RazonSocial.PadRight(37, ' ');
                             File += "C";
                             File += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
                             File += DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
@@ -221,28 +221,7 @@ namespace Core.Erp.Bus.RRHH
                         }
                     }
                     secuencia++;
-                    
-
-                   
-                  
-
-                    //File += "\n";
-
-                    //using (FileStream fsStream = new FileStream("prueba.txt", FileMode.Create))
-                    //using (BinaryWriter writer = new BinaryWriter(fsStream, Encoding.UTF8))
-                    //{
-                    //    // Writing the strings.
-                    //    writer.Write(File);
-                       
-
-                    //    // Writing your bytes afterwards.
-                    //    writer.Write(new byte[]
-                    //                 {
-                    // 0xff,
-                    // 0xfe
-                    //                 });
-                    //}
-
+                    File += "\n";
 
                 }
 

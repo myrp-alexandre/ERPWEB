@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="FechaInicio">Nómina*</label>
-                @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
+                @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
                 @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="FechaInicio">Proceso de la nómina*</label>
-                @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"),  new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                 @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -39,7 +39,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="FechaInicio">Periodo*</label>
-                @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdPeriodo" })
+                @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), new { @class = "form-control", @id = "IdPeriodo" })
                 @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,18 +65,14 @@
 </div>
 <div id="Tabs" role="tabpanel">
     <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#tab_estadisticas" aria-controls="datos" role="tab" data-toggle="tab">Estadistica</a>
-        </li>
-        <li>
+       
+        <li class=" panel active">
             <a href="#tab_contratos_por_vencer" aria-controls="diario" role="tab" data-toggle="tab">Contratos por vencer</a>
         </li>
     </ul>
     <div class="tab-content" style="padding-top: 20px">
-        <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_estadisticas">
-
-        </div>
-        <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_contratos_por_vencer">
+       
+        <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_contratos_por_vencer">
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-12">
@@ -112,7 +108,8 @@
            $("#IdPeriodo").empty();
             cargar_periodos_x_nomina();
         });
-
+    cargar_tipo_liquidacion_nomina();
+    cargar_periodos_x_nomina();
 
 
         function cargar_tipo_liquidacion_nomina() {
