@@ -203,24 +203,22 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             foreach (var item in Lista)
             {
                 var composicion = bus_comp.get_list(IdEmpresa, item.IdProducto);
-
                 foreach (var comp in composicion)
                 {
                     pro_FabricacionDet_Info info = new pro_FabricacionDet_Info
                     {
-                        IdProducto = item.IdProducto,
+
+                        IdProducto = comp.IdProductoHijo,
                         Signo = "-",
-                        Cantidad = item.Cantidad * item.Cantidad,
-                        IdUnidadMedida = item.IdUnidadMedida,
-                        Costo = 0,
-                        pr_descripcion = item.pr_descripcion
+                        Cantidad = item.Cantidad * comp.Cantidad,
+                        IdUnidadMedida = comp.IdUnidadMedida,
+                        Costo = 0, 
+                        pr_descripcion = comp.pr_descripcion
                     };
                     List_det.AddRow(info, IdTransaccionSession);
                 }
-                List_det.set_list(Lista, IdTransaccionSession);
-                
             }
-            return Json(Lista, JsonRequestBehavior.AllowGet);
+            return Json(List_det, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -275,7 +273,8 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             info_det.Signo = "+";
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "+").ToList();
+            pro_Fabricacion_Info model = new pro_Fabricacion_Info();
+            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.Signo == "+").ToList();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_fabricacion_det_ing", model);
         }
