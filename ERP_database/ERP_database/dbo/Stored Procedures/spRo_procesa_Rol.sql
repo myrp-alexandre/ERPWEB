@@ -328,8 +328,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol, emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,'195'			,
-
+@IdEmpresa				,@IdRol, emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,rub.ru_orden			,
 
 isnull( (
 select ISNULL(valor,0) from (

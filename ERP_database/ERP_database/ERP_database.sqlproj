@@ -1075,6 +1075,14 @@
     <Build Include="EntidadRegulatoria\Views\vwro_ArchivosIess.sql" />
     <Build Include="dbo\Views\vwpre_Grupo.sql" />
     <Build Include="dbo\Views\vwAf_Activo_fijo_CtaCble.sql" />
+    <Build Include="dbo\Views\vwro_nomina_sin_percebir_sueldo_1.sql" />
+    <Build Include="dbo\Views\vwro_HorasProfesores_det_1.sql" />
+    <Build Include="dbo\Views\vwro_HorasProfesores_1.sql" />
+    <Build Include="dbo\Views\vwpre_PresupuestoDet_1.sql" />
+    <Build Include="dbo\Views\vwpre_Presupuesto_1.sql" />
+    <Build Include="dbo\Views\vwin_Producto_para_composicion_1.sql" />
+    <Build Include="dbo\Stored Procedures\spRo_procesa_Rol_anticipo_1.sql" />
+    <Build Include="dbo\Stored Procedures\sppro_GetProductoFacturadosPorFecha_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />
