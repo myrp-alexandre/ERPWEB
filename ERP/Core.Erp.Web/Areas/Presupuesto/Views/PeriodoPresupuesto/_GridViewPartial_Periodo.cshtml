@@ -85,6 +85,7 @@
 
 
         settings.Columns.Add("IdPeriodo", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("DescripcionPeriodo", "Descripción").Width = Unit.Percentage(50);
         settings.Columns.Add(column =>
         {
             column.FieldName = "FechaInicio";
@@ -99,7 +100,6 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
-        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(50);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoCierre";

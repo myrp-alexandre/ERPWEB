@@ -8,18 +8,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-<script type="text/javascript">
-    $(function () {
-        MostrarDescripcion();
-    });
-
-    function MostrarDescripcion() {
-        var descripcion = "Periodo desde :" + Date.parse(FechaInicio.GetValue()) + " hasta: " + new Date(FechaFin.GetValue());
-        console.log(Date.parse(FechaInicio.GetValue()));
-        $("#DescripcionPeriodo").val( descripcion);
-    };
-
-</script>
 @using (Html.BeginForm("Nuevo", "PeriodoPresupuesto", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
@@ -104,5 +92,34 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+<script type="text/javascript">
+    $(function () {
+        MostrarDescripcion();
+    });
+
+    function MostrarDescripcion() {
+        var fecha_inicio = FechaInicio.GetValue();
+        var fecha_fin = FechaFin.GetValue();
+        var pad = "00";
+
+        var dia_inicio = fecha_inicio.getUTCDate();
+        var mes_inicio = fecha_inicio.getUTCMonth() + 1;
+        var anio_inicio = fecha_inicio.getUTCFullYear();
+        var mes_format = pad.substr(0, (pad.length - String(mes_inicio).length)) + mes_inicio;
+        var dia_format = pad.substr(0, (pad.length - String(dia_inicio).length)) + dia_inicio;
+
+        var dia_fin = fecha_fin.getUTCDate();
+        var mes_fin = fecha_fin.getUTCMonth() + 1;
+        var anio_fin = fecha_fin.getUTCFullYear();
+        var mes_fin_format = pad.substr(0, (pad.length - String(mes_fin).length)) + mes_fin;
+        var dia_fin_format = pad.substr(0, (pad.length - String(dia_fin).length)) + dia_fin;
+
+        var desde = anio_inicio + "-" + mes_format + "-" + dia_format;
+        var hasta = anio_fin + "-" + mes_fin_format + "-" + dia_fin_format;
+
+        $("#DescripcionPeriodo").val("Periodo desde: " + desde + " hasta: " + hasta);
+    };
+
+</script>
 
 

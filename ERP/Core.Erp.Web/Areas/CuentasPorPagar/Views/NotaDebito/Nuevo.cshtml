@@ -9,8 +9,6 @@
 
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-
-
 @using (Html.BeginForm("Nuevo", "NotaDebito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
@@ -20,7 +18,6 @@
                 <i class="icon fa fa-warning"></i> @ViewBag.mensaje
             </h4>
         </div>
-
     }
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -114,9 +111,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="row" id="div_tipo">
         <div class="col-md-12">
             <div class="col-md-2">

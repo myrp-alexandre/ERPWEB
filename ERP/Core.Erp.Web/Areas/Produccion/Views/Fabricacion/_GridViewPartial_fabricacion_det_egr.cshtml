@@ -13,6 +13,9 @@
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -26,7 +29,15 @@
             e.NewValues["Costo"] = 0;
             e.NewValues["Cantidad"] = 0;
         };
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.FieldName = "Secuencia";
+            column.Width = Unit.Percentage(5);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
 
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pr_descripcion";
@@ -86,8 +97,7 @@
             });
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
-        settings.ClientSideEvents.EndCallback = "function(s,e){ArmarMateriaPrima();}";
 
     });
 }
-@grid.Bind(Model.LstDet).GetHtml()
+@grid.Bind(Model).GetHtml()

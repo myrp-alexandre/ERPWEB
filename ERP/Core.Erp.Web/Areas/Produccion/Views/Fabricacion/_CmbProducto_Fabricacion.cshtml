@@ -22,9 +22,8 @@
 
     })
 
-     .BindList(new Core.Erp.Web.Areas.Produccion.Controllers.FabricacionController().get_list_bajo_demanda,
-      new Core.Erp.Web.Areas.Produccion.Controllers.FabricacionController().get_info_bajo_demanda)
-      .Bind((Model.GetType() == typeof(Core.Erp.Info.Produccion.pro_Fabricacion_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Produccion.pro_Fabricacion_Info>)) ? "" : (Model == 0 ? "" : Model));
+    .BindList(new Core.Erp.Web.Areas.Produccion.Controllers.FabricacionController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Produccion.Controllers.FabricacionController().get_info_bajo_demanda)
+      .Bind((Model.GetType() == typeof(Core.Erp.Info.Produccion.pro_FabricacionDet_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Produccion.pro_FabricacionDet_Info>)) ? "" : (Model == 0 ? "" : Model));
 
 
 }

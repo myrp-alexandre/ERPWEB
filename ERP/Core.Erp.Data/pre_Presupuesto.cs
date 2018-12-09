@@ -41,8 +41,8 @@ namespace Core.Erp.Data
         public string MotivoAprobacion { get; set; }
     
         public virtual pre_Grupo pre_Grupo { get; set; }
-        public virtual pre_PresupuestoPeriodo pre_PresupuestoPeriodo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pre_PresupuestoDet> pre_PresupuestoDet { get; set; }
+        public virtual pre_PresupuestoPeriodo pre_PresupuestoPeriodo { get; set; }
     }
 }

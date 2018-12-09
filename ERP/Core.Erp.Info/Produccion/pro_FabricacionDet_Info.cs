@@ -19,7 +19,6 @@ namespace Core.Erp.Info.Produccion
         public bool RealizaMovimiento { get; set; }
         //campos que no existen en la tabla
         public string pr_descripcion { get; set; }
-        public decimal IdProductoPadre { get; set; }
         public Nullable<System.DateTime> vt_fecha { get; set; }
         public string NombreUnidad { get; set; }
         public double stock { get; set; }

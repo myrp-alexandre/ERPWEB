@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Produccion
                 List<pro_FabricacionDet_Info> Lista;
                 using (Entities_produccion Context = new Entities_produccion())
                 {
-                    Lista = Context.pro_FabricacionDet.Where(q => q.IdEmpresa == IdEmpresa && q.IdFabricacion == IdFabricacion).Select(q => new pro_FabricacionDet_Info
+                    Lista = Context.vwpro_FabricacionDet.Where(q => q.IdEmpresa == IdEmpresa && q.IdFabricacion == IdFabricacion).Select(q => new pro_FabricacionDet_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdFabricacion = q.IdProducto,
@@ -26,8 +26,9 @@ namespace Core.Erp.Data.Produccion
                         IdUnidadMedida = q.IdUnidadMedida,
                         RealizaMovimiento = q.RealizaMovimiento,
                         Secuencia = q.Secuencia,
-                        Signo = q.Signo
-
+                        Signo = q.Signo,
+                        pr_descripcion = q.pr_descripcion
+                        
                     }).ToList();
                 }
                 return Lista;
@@ -52,11 +53,12 @@ namespace Core.Erp.Data.Produccion
                                   IdEmpresa = q.IdEmpresa,
                                   IdProducto = q.IdProducto,
                                   pr_descripcion = q.pr_descripcion,
-                                  Cantidad = q.vt_cantidad == null ? 0 : Convert.ToDouble(q.vt_cantidad),
+                                  Cantidad = q.vt_cantidad,
                                   vt_fecha = q.vt_fecha,
                                   NombreUnidad = q.NombreUnidad,
                                   CantidadFabricada = q.CantidadFabricada,
-                                  stock = q.stock
+                                  stock = q.stock,
+                                  IdUnidadMedida = q.IdUnidadMedida
                                   
                              }).ToList();
                     
