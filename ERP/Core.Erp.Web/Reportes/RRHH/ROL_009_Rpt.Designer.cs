@@ -89,6 +89,7 @@
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.estado_noveda = new DevExpress.XtraReports.Parameters.Parameter();
             this.IdRubro = new DevExpress.XtraReports.Parameters.Parameter();
+            this.IdEmpleado = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -678,6 +679,13 @@
             this.IdRubro.Name = "IdRubro";
             this.IdRubro.Visible = false;
             // 
+            // IdEmpleado
+            // 
+            this.IdEmpleado.Name = "IdEmpleado";
+            this.IdEmpleado.Type = typeof(decimal);
+            this.IdEmpleado.ValueInfo = "0";
+            this.IdEmpleado.Visible = false;
+            // 
             // ROL_009_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -702,7 +710,8 @@
             this.p_fecha_inicio,
             this.p_fecha_fin,
             this.estado_noveda,
-            this.IdRubro});
+            this.IdRubro,
+            this.IdEmpleado});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_009_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
@@ -777,5 +786,6 @@
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
         public DevExpress.XtraReports.Parameters.Parameter estado_noveda;
         public DevExpress.XtraReports.Parameters.Parameter IdRubro;
+        public DevExpress.XtraReports.Parameters.Parameter IdEmpleado;
     }
 }
