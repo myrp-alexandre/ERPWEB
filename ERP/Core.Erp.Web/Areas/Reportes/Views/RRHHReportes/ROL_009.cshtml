@@ -148,7 +148,15 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdRubro">Empleado</label>
+                            @Html.Partial("_CmbEmpleado_RRHH", Model)
+                            @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdRubro">Rubro</label>
                             @Html.Partial("_CmbRubro_roles", Model)
