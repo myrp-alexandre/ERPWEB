@@ -26,7 +26,7 @@ namespace Core.Erp.Data.RRHH
             decimal id;
             if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
                 return null;
-            return get_info_demanda(IdEmpresa, (int)args.Value);
+            return get_info_demanda(IdEmpresa,Convert.ToString( args.Value));
         }
 
         public List<ro_rubro_tipo_Info> get_list(int IdEmpresa, int skip, int take, string filter)
@@ -43,6 +43,7 @@ namespace Core.Erp.Data.RRHH
                     Lista.Add(new ro_rubro_tipo_Info
                     {
                         IdEmpresa = q.IdEmpresa,
+                        IdRubro=q.IdRubro,
                         rub_codigo = q.rub_codigo,
                         ru_codRolGen = q.ru_codRolGen,
                         ru_descripcion=q.ru_descripcion,
@@ -60,13 +61,14 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-        public ro_rubro_tipo_Info get_info_demanda(int IdEmpresa, int value)
+        public ro_rubro_tipo_Info get_info_demanda(int IdEmpresa, string value)
         {
             ro_rubro_tipo_Info info = new ro_rubro_tipo_Info();
             using (Entities_rrhh Contex = new Entities_rrhh())
             {
                 info = (from q in Contex.ro_rubro_tipo
                         where q.IdEmpresa == IdEmpresa
+                        && q.IdRubro==value
                         select new ro_rubro_tipo_Info
                         {
                             IdEmpresa = q.IdEmpresa,

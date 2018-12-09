@@ -109,7 +109,7 @@
 
                             @Html.DevExpress().DropDownEdit(settings => {
                             settings.Name = "checkComboBox";
-                            settings.Width = 285;
+                            settings.Width = Unit.Percentage(100);
                             //settings.Properties.DropDownWindowStyle.BackColor = Color.FromArgb(0xEDEDED);
 
                             settings.SetDropDownWindowTemplateContent(c => {
@@ -147,6 +147,16 @@
 
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IdRubro">Rubro</label>
+                            @Html.Partial("_CmbRubro_roles", Model)
+                            @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

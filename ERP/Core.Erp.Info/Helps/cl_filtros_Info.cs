@@ -54,6 +54,7 @@ namespace Core.Erp.Info.Helps
         public int IdSucursal { get; set; }
         public decimal IdEmpleado { get; set; }
         public string[]  estado_novedad { get; set; }
+        public string IdRubro { get; set; }
 
         #endregion
 

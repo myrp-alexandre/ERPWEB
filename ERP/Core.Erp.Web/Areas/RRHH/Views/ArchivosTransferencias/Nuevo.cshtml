@@ -21,23 +21,29 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdArchivo)
-    @Html.HiddenFor(q => q.IdPeriodo, new { @id="IdPeriodo"})
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id= "IdTransaccionSession" })
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdNomina_Tipo">Nómina*</label>
                     @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
                     @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdNomina_TipoLiqui">Tipo liquidación de nómina*</label>
                     @Html.DropDownListFor(q => q.IdNominaTipo, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                     @Html.ValidationMessageFor(q => q.IdNominaTipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="FechaInicio">Periodo*</label>
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), new { @class = "form-control", @id = "IdPeriodo" })
+                    @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -51,7 +57,7 @@
                     @Html.ValidationMessageFor(q => q.IdCuentaBancaria, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdBanco">Tipo de archivo*</label>
                     @Html.DropDownListFor(q => q.IdProceso, new SelectList(ViewBag.lst_proceso, "IdProceso", "NombreProceso"), new { @class = "form-control", @id = "IdProceso" })
@@ -94,8 +100,17 @@
         cargar_empleados();
 
     });
+    $("#IdNomina_TipoLiqui").change(function () {
+        $("#IdPeriodo").empty();
+        cargar_periodos_x_nomina();
+    });
+    $("#IdPeriodo").change(function () {
+        cargar_empleados();
+    });
 
-            function cargar_procesos() {
+    function cargar_procesos() {
+        $("#IdProceso").empty();
+
                 var datos = {
                     IdBanco: $("#IdBanco").val()
                 }
@@ -149,7 +164,35 @@
                     error: function (error) {
                     }
                 });
-            };
+    };
+
+
+    function cargar_periodos_x_nomina() {
+        var datos = {
+            IdNomina: $("#IdNomina_Tipo").val(),
+            IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_lst_periodo_x_nomina","PeriodosPorNomina", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $.each(data, function (i, row) {
+                    $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
+
             function cargar_empleados() {
                 var datos = {
                     IdProceso: $("#IdProceso").val(),
@@ -175,6 +218,13 @@
                     error: function (error) {
                     }
                 });
-            };
+    };
+
+
+    $(function () {
+        cargar_procesos();
+        cargar_tipo_liquidacion_nomina();
+        cargar_periodos_x_nomina();
+    });
 
 </script>

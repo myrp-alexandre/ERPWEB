@@ -35,6 +35,25 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
         }
         #endregion
+
+
+
+        #region Metodos ComboBox bajo rubros
+        ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
+        public ActionResult CmbRubro_roles()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            return PartialView("_CmbRubro_roles", model);
+        }
+        public List<ro_rubro_tipo_Info> get_list_bajo_demanda_rubro(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_rubro.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public ro_rubro_tipo_Info get_info_bajo_demanda_rubro(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_rubro.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa),args);
+        }
+        #endregion
         public ActionResult ROL_001(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0)
         {
             ROL_001_Rpt model = new ROL_001_Rpt();
@@ -112,12 +131,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-        public ActionResult ROL_009( DateTime? fecha_ini, DateTime? fecha_fin, string[] estado_novedad )
+        public ActionResult ROL_009()
         {
+            string[] novedad = new string[2] { "PEN", "CAN" };
             cl_filtros_Info model = new cl_filtros_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
-
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                fecha_ini=DateTime.Now.AddMonths(-1),
+                fecha_fin=DateTime.Now.Date,
+                estado_novedad=  novedad
+                
             };
             cargar_combos(model.IdEmpresa);
             ROL_009_Rpt report = new ROL_009_Rpt();
@@ -129,6 +152,28 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+        [HttpPost]
+        public ActionResult ROL_009(cl_filtros_Info model)
+        {
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            string noveda = "";
+            foreach (var item in model.estado_novedad)
+            {
+                noveda += item+",";
+            }
+            cargar_combos(model.IdEmpresa);
+            ROL_009_Rpt report = new ROL_009_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_fecha_inicio.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            report.estado_noveda.Value = noveda;
+            report.IdRubro.Value = model.IdRubro;
+            ViewBag.Report = report;
+            return View(model);
+        }
+
         public ActionResult ROL_010()
         {
             ROL_010_Rpt model = new ROL_010_Rpt();
