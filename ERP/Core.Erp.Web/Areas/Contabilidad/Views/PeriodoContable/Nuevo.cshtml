@@ -93,13 +93,19 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">
                 <div class="form-group">
-                    <div class="checkbox">
-                        <label for="pe_cerrado_bool">@Html.CheckBoxFor(q => q.pe_cerrado_bool) Cerrado</label>
-                    </div>
+                    @Html.DevExpress().CheckBoxFor(q => q.pe_cerrado_bool,
+                         settings =>
+                         {
+                             settings.Name = "pe_cerrado_bool";
+                             settings.Checked = false;
+                             settings.Text = "Cerrado";
+                         }
+                     ).GetHtml()
                 </div>
             </div>
         </div>

@@ -49,7 +49,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         {
             cargar_combos();
             ct_periodo_Info model = new ct_periodo_Info();
-            return View();
+            return View(model);
         }
 
         [HttpPost]

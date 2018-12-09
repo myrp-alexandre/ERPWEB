@@ -325,6 +325,24 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             var model = List_Fac.get_list_fact(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_fabricacion_det_fac", model);
         }
+
+        public ActionResult EditingAddNew(string IDs = "", decimal IdTransaccionSession = 0)
+        {
+            if (!string.IsNullOrEmpty(IDs))
+            {
+                var lst = List_Fac.get_list_fact(IdTransaccionSession);
+                string[] array = IDs.Split(',');
+                foreach (var item in array)
+                {
+                    var info_det = lst.Where(q => q.Secuencia == Convert.ToInt32(item)).FirstOrDefault();
+                    if (info_det != null)
+                        List_det.AddRow(info_det, IdTransaccionSession);
+                }
+            }
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_CambioProductoDet", model);
+        }
+
         #endregion
     }
     public class pro_FabricacionDet_List

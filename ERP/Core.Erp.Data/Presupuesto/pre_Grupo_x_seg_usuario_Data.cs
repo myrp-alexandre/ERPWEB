@@ -35,5 +35,33 @@ namespace Core.Erp.Data.Presupuesto
                 throw;
             }
         }
+
+        public pre_Grupo_x_seg_usuario_Info GetInfoPermiso(int IdEmpresa, string IdUsuario)
+        {
+            try
+            {
+                pre_Grupo_x_seg_usuario_Info info = new pre_Grupo_x_seg_usuario_Info();
+                using (Entities_presupuesto Context = new Entities_presupuesto())
+                {
+                    pre_Grupo_x_seg_usuario Entity = Context.pre_Grupo_x_seg_usuario.Where(q => q.IdEmpresa == IdEmpresa && q.IdUsuario == IdUsuario && q.AsignaCuentas == true && q.pre_Grupo.Estado == true).FirstOrDefault();
+
+                    if (Entity == null) return null;
+                    info = new pre_Grupo_x_seg_usuario_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdGrupo = Entity.IdGrupo,
+                        Secuencia = Entity.Secuencia,
+                        IdUsuario = Entity.IdUsuario,
+                        AsignaCuentas = Entity.AsignaCuentas
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

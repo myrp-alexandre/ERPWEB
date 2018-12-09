@@ -304,6 +304,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             pre_Grupo_x_seg_usuario_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdUsuario = info_det.IdUsuario;
             edited_info.Nombre = info_det.Nombre;
+            edited_info.AsignaCuentas = info_det.AsignaCuentas;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
