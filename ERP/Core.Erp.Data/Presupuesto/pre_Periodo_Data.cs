@@ -102,6 +102,7 @@ namespace Core.Erp.Data.Presupuesto
                     {
                         IdPeriodo = Entity.IdPeriodo,
                         IdEmpresa = Entity.IdEmpresa,
+                        DescripcionPeriodo = Entity.DescripciónPeriodo,
                         Observacion = Entity.Observacion,
                         FechaInicio = Entity.FechaInicio,
                         FechaFin = Entity.FechaFin,
@@ -149,6 +150,7 @@ namespace Core.Erp.Data.Presupuesto
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdPeriodo = info.IdPeriodo = get_id(info.IdEmpresa),
+                        DescripciónPeriodo = info.DescripcionPeriodo,
                         Observacion = info.Observacion,
                         FechaInicio = info.FechaInicio,
                         FechaFin = info.FechaFin,
@@ -182,6 +184,7 @@ namespace Core.Erp.Data.Presupuesto
                         return false;
                     }
 
+                    entity.DescripciónPeriodo = info.DescripcionPeriodo;
                     entity.Observacion = info.Observacion;
                     entity.FechaInicio = info.FechaInicio;
                     entity.FechaFin = info.FechaFin;
