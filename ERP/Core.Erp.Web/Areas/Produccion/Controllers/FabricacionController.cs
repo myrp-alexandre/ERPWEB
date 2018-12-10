@@ -24,6 +24,8 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
         tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
         pro_FabricacionDet_List List_det = new pro_FabricacionDet_List();
         pro_FabricacionDet_Info_List List = new pro_FabricacionDet_Info_List();
+        in_Producto_Composicion_Info comp = new in_Producto_Composicion_Info();
+        in_Producto_Composicion_Bus bus_comp = new in_Producto_Composicion_Bus();
 
         #endregion
         #region Index
@@ -168,26 +170,44 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
 
         public JsonResult ArmarMateriaPrima(int IdEmpresa = 0 ,  decimal IdTransaccionSession = 0 )
         {
-            in_Producto_Composicion_Bus bus_comp = new in_Producto_Composicion_Bus();
-         //  List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList();
-            foreach (var item in List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList())
-
+            //  List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList();
+            //foreach (var item in List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList())
+            //{
+            //    var composicion = bus_comp.get_list(IdEmpresa, item.IdProducto);
+            //    foreach (var comp in composicion)
+            //    {
+            //        pro_FabricacionDet_Info info = new pro_FabricacionDet_Info
+            //        {
+            //            IdProducto = comp.IdProductoHijo,
+            //            Signo = "-",
+            //            Cantidad = item.Cantidad * comp.Cantidad,
+            //            IdUnidadMedida = comp.IdUnidadMedida,
+            //            Costo = 0,
+            //            pr_descripcion = comp.pr_descripcion
+            //        };
+            //    List_det.AddRow(info, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            //    };
+            //}
+            var lst = List_det.get_list(IdTransaccionSession).Where(q => q.Signo == "+").ToList();
+            foreach (var item in lst)
             {
-                var composicion = bus_comp.get_list(IdEmpresa, item.IdProducto);
+                var resultado = bus_comp.get_list(IdEmpresa, comp.IdProductoHijo);
 
-                foreach (var comp in composicion)
+                foreach (var cmp in resultado)
                 {
                     pro_FabricacionDet_Info info = new pro_FabricacionDet_Info
                     {
-                        IdProducto = comp.IdProductoHijo,
-                        Signo = "-",
+                        IdEmpresa = item.IdEmpresa,
+                        IdProducto = item.IdProducto,
                         Cantidad = item.Cantidad * comp.Cantidad,
-                        IdUnidadMedida = comp.IdUnidadMedida,
-                        Costo = 0,
-                        pr_descripcion = comp.pr_descripcion
+                        IdUnidadMedida = item.IdUnidadMedida,
+                        Signo = "-",
+                        pr_descripcion = item.pr_descripcion,
+                        IdProductoPadre = item.IdProductoPadre
+
                     };
-                List_det.AddRow(info, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                };
+                    List_det.AddRow(info, IdTransaccionSession);
+                }
             }
             return Json("", JsonRequestBehavior.AllowGet);
 

@@ -15,11 +15,22 @@ namespace Core.Erp.Data.Presupuesto
             {
                 List<pre_Presupuesto_Info> Lista;
 
+                int IdSucursalInicio = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
+
+                decimal IdPeriodoIncio = IdPeriodo;
+                decimal IdPeriodoFin = IdPeriodo == 0 ? 9999 : IdPeriodo;
+
                 using (Entities_presupuesto db = new Entities_presupuesto())
                 {
                     if (MostrarAnulados == false)
                     {
-                        Lista = db.vwpre_Presupuesto.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdPeriodo == IdPeriodo).Select(q => new pre_Presupuesto_Info
+                        Lista = (from q in db.vwpre_Presupuesto
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal >= IdSucursalInicio && q.IdSucursal <=IdSucursalFin
+                                 && q.IdPeriodo >= IdPeriodoIncio && q.IdPeriodo <= IdPeriodoFin
+                                 && q.Estado == true
+                                 select new pre_Presupuesto_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdPresupuesto = q.IdPresupuesto,                            
@@ -33,14 +44,20 @@ namespace Core.Erp.Data.Presupuesto
                             Observacion = q.Observacion,
                             Estado = q.Estado,
                             MontoSolicitado = q.MontoSolicitado,
-                            MontoAprobado = q.MontoAprobado
+                            MontoAprobado = q.MontoAprobado,
+                            DescripcionPeriodo = q.DescripciónPeriodo,
+                            IdUsuarioAprobacion = q.IdUsuarioAprobacion
 
                         }).ToList();
                     }
                     else
                     {
-                        Lista = db.vwpre_Presupuesto.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdPeriodo == IdPeriodo).Select(q => new pre_Presupuesto_Info
-                        {
+                        Lista = (from q in db.vwpre_Presupuesto
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal >= IdSucursalInicio && q.IdSucursal <= IdSucursalFin
+                                 && q.IdPeriodo >= IdPeriodoIncio && q.IdPeriodo <= IdPeriodoFin                                 
+                                 select new pre_Presupuesto_Info
+                                 {
                             IdEmpresa = q.IdEmpresa,
                             IdPresupuesto = q.IdPresupuesto,
                             IdSucursal = q.IdSucursal,
@@ -53,16 +70,13 @@ namespace Core.Erp.Data.Presupuesto
                             Observacion = q.Observacion,
                             Estado = q.Estado,
                             MontoSolicitado = q.MontoSolicitado,
-                            MontoAprobado = q.MontoAprobado
+                            MontoAprobado = q.MontoAprobado,
+                            DescripcionPeriodo = q.DescripciónPeriodo,
+                            IdUsuarioAprobacion = q.IdUsuarioAprobacion
 
-                        }).ToList();
+                                 }).ToList();
                     }
                 }
-
-                Lista.ForEach
-                    (
-                    item => item.Periodo = item.FechaInicio.ToString().Substring(0, 10) + " - " + item.FechaFin.ToString().Substring(0, 10));
-
                 return Lista;
             }
             catch (Exception)

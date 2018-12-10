@@ -2496,6 +2496,48 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWINV_014' no tiene definida ningu
           <Property Name="ObservacionDet" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWPRE_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWPRE_001">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPresupuesto" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="DescripciónPeriodo" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="DescripcionGrupo" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="DescripcionRubro" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Monto" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="MontoSolicitado" />
+            <PropertyRef Name="MontoAprobado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdPeriodo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DescripciónPeriodo" Type="varchar(max)" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="DescripcionGrupo" Type="varchar(max)" Nullable="false" />
+          <Property Name="IdRubro" Type="int" Nullable="false" />
+          <Property Name="DescripcionRubro" Type="varchar(max)" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Monto" Type="float" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="MontoSolicitado" Type="float" Nullable="false" />
+          <Property Name="MontoAprobado" Type="float" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.VWROL_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_001">
           <Key>
@@ -4888,6 +4930,30 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
     [VWINV_014].[Costo] AS [Costo], 
     [VWINV_014].[ObservacionDet] AS [ObservacionDet]
     FROM [web].[VWINV_014] AS [VWINV_014]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWPRE_001" EntityType="Self.VWPRE_001" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWPRE_001].[IdEmpresa] AS [IdEmpresa], 
+    [VWPRE_001].[IdPresupuesto] AS [IdPresupuesto], 
+    [VWPRE_001].[Secuencia] AS [Secuencia], 
+    [VWPRE_001].[IdSucursal] AS [IdSucursal], 
+    [VWPRE_001].[Su_Descripcion] AS [Su_Descripcion], 
+    [VWPRE_001].[IdPeriodo] AS [IdPeriodo], 
+    [VWPRE_001].[DescripciónPeriodo] AS [DescripciónPeriodo], 
+    [VWPRE_001].[IdGrupo] AS [IdGrupo], 
+    [VWPRE_001].[DescripcionGrupo] AS [DescripcionGrupo], 
+    [VWPRE_001].[IdRubro] AS [IdRubro], 
+    [VWPRE_001].[DescripcionRubro] AS [DescripcionRubro], 
+    [VWPRE_001].[IdCtaCble] AS [IdCtaCble], 
+    [VWPRE_001].[pc_Cuenta] AS [pc_Cuenta], 
+    [VWPRE_001].[Cantidad] AS [Cantidad], 
+    [VWPRE_001].[Monto] AS [Monto], 
+    [VWPRE_001].[Estado] AS [Estado], 
+    [VWPRE_001].[MontoSolicitado] AS [MontoSolicitado], 
+    [VWPRE_001].[MontoAprobado] AS [MontoAprobado], 
+    [VWPRE_001].[Observacion] AS [Observacion], 
+    [VWPRE_001].[MotivoAnulacion] AS [MotivoAnulacion]
+    FROM [web].[VWPRE_001] AS [VWPRE_001]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWROL_001" EntityType="Self.VWROL_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -7988,6 +8054,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <EntitySet Name="VWCOMP_001" EntityType="Model_reportes.VWCOMP_001" />
           <EntitySet Name="VWROL_019" EntityType="Model_reportes.VWROL_019" />
           <EntitySet Name="VWROL_020" EntityType="Model_reportes.VWROL_020" />
+          <EntitySet Name="VWPRE_001" EntityType="Model_reportes.VWPRE_001" />
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -9221,6 +9288,46 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="VWPRE_001">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPresupuesto" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="DescripciónPeriodo" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="DescripcionGrupo" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="DescripcionRubro" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Monto" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="MontoSolicitado" />
+            <PropertyRef Name="MontoAprobado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdPeriodo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DescripciónPeriodo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="DescripcionGrupo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdRubro" Type="Int32" Nullable="false" />
+          <Property Name="DescripcionRubro" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Cuenta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Monto" Type="Double" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="MontoSolicitado" Type="Double" Nullable="false" />
+          <Property Name="MontoAprobado" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -11923,6 +12030,32 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
                 <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
                 <ScalarProperty Name="Secuancia" ColumnName="Secuancia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWPRE_001">
+            <EntityTypeMapping TypeName="Model_reportes.VWPRE_001">
+              <MappingFragment StoreEntitySet="VWPRE_001">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="MontoAprobado" ColumnName="MontoAprobado" />
+                <ScalarProperty Name="MontoSolicitado" ColumnName="MontoSolicitado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="DescripcionRubro" ColumnName="DescripcionRubro" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="DescripcionGrupo" ColumnName="DescripcionGrupo" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="DescripciónPeriodo" ColumnName="DescripciónPeriodo" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -85,6 +85,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 
 
             };
+           
             model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo,"");
             ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(model.detalle, Convert.ToDecimal( SessionFixed.IdTransaccionSession));
             cargar_combos(0);
@@ -101,7 +102,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.IdRol = 1;
             if (model.detalle == null || model.detalle.Count() == 0)
             {
-                ViewBag.mensaje = "No existe detalle para la el archivo";
+                ViewBag.mensaje = "No existe detalle para el archivo";
                 cargar_combos(model.IdNomina);
                 return View(model);
             }
@@ -142,7 +143,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(model.IdTransaccionSession);
             if (model.detalle == null || model.detalle.Count() == 0)
             {
-                ViewBag.mensaje = "No existe detalle para la planificación";
+                ViewBag.mensaje = "No existe detalle para el arhivo";
                 cargar_combos(model.IdNomina);
                 return View(model);
             }
@@ -266,6 +267,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             var lst_proceso = bus_procesos_bancarios.get_list(IdEmpresa, false);
             ViewBag.lst_proceso = lst_proceso;
+
+            List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lst_periodos = new List<ro_periodo_x_ro_Nomina_TipoLiqui_Info>();
+            ViewBag.lst_periodos = lst_periodos;
         }
 
         private void cargar_combos_consulta()

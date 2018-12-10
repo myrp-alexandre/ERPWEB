@@ -53,6 +53,11 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
+            if (Convert.ToString(e.GetValue("IdUsuarioAprobacion")) != "")
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
+
             if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
@@ -63,7 +68,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "EstadoCierre")) == false ) && (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioAprobacion")) == "" || Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioAprobacion")) == null) )
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPresupuesto = DataBinder.Eval(tc.DataItem, "IdPresupuesto") }) + "&nbsp;" +
@@ -86,7 +91,7 @@
 
         settings.Columns.Add("IdPresupuesto", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(15);
-        settings.Columns.Add("Periodo", "Periodo").Width = Unit.Percentage(20);
+        settings.Columns.Add("DescripcionPeriodo", "Periodo").Width = Unit.Percentage(15);
         settings.Columns.Add("Descripcion", "Grupo").Width = Unit.Percentage(15);
         settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
@@ -98,6 +103,14 @@
             {
 
             });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("PRE_001", "PresupuestoReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdPresupuesto = DataBinder.Eval(c.DataItem, "IdPresupuesto").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
         });
     });
 }

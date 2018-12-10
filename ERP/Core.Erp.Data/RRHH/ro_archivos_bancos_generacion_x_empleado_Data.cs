@@ -65,6 +65,7 @@ namespace Core.Erp.Data.RRHH
                                    && q.IdNominaTipoLiqui== IdNominaTipoLiqui
                                    && q.IdPeriodo==IdPeriodo
                                    && Tipocta.Contains(q.em_tipoCta)
+                                   && q.Saldo>0
                              select new ro_archivos_bancos_generacion_x_empleado_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

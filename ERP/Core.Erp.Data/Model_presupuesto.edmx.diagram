@@ -16,12 +16,12 @@
         <AssociationConnector Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_rubro" />
         <AssociationConnector Association="Model_presupuesto.FK_pre_Rubro_pre_RubroTipo" />
         <EntityTypeShape EntityType="Model_presupuesto.vwpre_Rubro" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_presupuesto.vwpre_Presupuesto" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="Model_presupuesto.vwpre_PresupuestoDet" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_presupuesto.pre_Presupuesto" Width="1.5" PointX="10.625" PointY="3" />
         <AssociationConnector Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_pre_Grupo" />
         <AssociationConnector Association="Model_presupuesto.FK_pre_Presupuesto_pre_PresupuestoPeriodo" />
         <AssociationConnector Association="Model_presupuesto.FK_pre_PresupuestoDet_pre_Presupuesto" />
+        <EntityTypeShape EntityType="Model_presupuesto.vwpre_Presupuesto" Width="1.5" PointX="0.75" PointY="4.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -23,6 +23,7 @@ namespace Core.Erp.Data.Presupuesto
                         {
                             IdPeriodo = q.IdPeriodo,
                             IdEmpresa = q.IdEmpresa,
+                            DescripcionPeriodo = q.DescripciónPeriodo,
                             Observacion = q.Observacion,
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin,
@@ -36,6 +37,7 @@ namespace Core.Erp.Data.Presupuesto
                         {
                             IdPeriodo = q.IdPeriodo,
                             IdEmpresa = q.IdEmpresa,
+                            DescripcionPeriodo = q.DescripciónPeriodo,
                             Observacion = q.Observacion,
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin,
@@ -44,9 +46,6 @@ namespace Core.Erp.Data.Presupuesto
                         }).ToList();
                     }
                 }
-                Lista.ForEach
-                    (
-                    item => item.Periodo = item.FechaInicio.ToString().Substring(0,10) + " - " + item.FechaFin.ToString().Substring(0,10));
                 return Lista;
             }
             catch (Exception)
@@ -70,6 +69,7 @@ namespace Core.Erp.Data.Presupuesto
                     {
                         IdPeriodo = Entity.IdPeriodo,
                         IdEmpresa = Entity.IdEmpresa,
+                        DescripcionPeriodo = Entity.DescripciónPeriodo,
                         Observacion = Entity.Observacion,
                         FechaInicio = Entity.FechaInicio,
                         FechaFin = Entity.FechaFin,

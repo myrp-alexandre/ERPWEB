@@ -11,6 +11,8 @@ namespace Core.Erp.Info.Presupuesto
     {
         public int IdEmpresa { get; set; }
         public decimal IdPeriodo { get; set; }
+        [Required(ErrorMessage = ("El campo descripción periodo es obligatorio"))]
+        public string DescripcionPeriodo { get; set; }
         public string Observacion { get; set; }
         [Required(ErrorMessage = ("El campo fecha de inicio es obligatorio"))]
         public System.DateTime FechaInicio { get; set; }

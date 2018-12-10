@@ -28,5 +28,9 @@ namespace Core.Erp.Data
         public bool Estado { get; set; }
         public double MontoSolicitado { get; set; }
         public double MontoAprobado { get; set; }
+        public string DescripciónPeriodo { get; set; }
+        public string IdUsuarioAprobacion { get; set; }
+        public Nullable<System.DateTime> FechaAprobacion { get; set; }
+        public string MotivoAprobacion { get; set; }
     }
 }

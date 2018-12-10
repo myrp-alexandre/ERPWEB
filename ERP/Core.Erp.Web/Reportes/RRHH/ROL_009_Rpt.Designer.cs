@@ -78,9 +78,6 @@
             this.xrTableRow9 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell18 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.p_can = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_pen = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_todas = new DevExpress.XtraReports.Parameters.Parameter();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrTable11 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow6 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -90,6 +87,8 @@
             this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell50 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
+            this.estado_noveda = new DevExpress.XtraReports.Parameters.Parameter();
+            this.IdRubro = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -454,6 +453,7 @@
             // p_fecha_fin
             // 
             this.p_fecha_fin.Name = "p_fecha_fin";
+            this.p_fecha_fin.Type = typeof(System.DateTime);
             this.p_fecha_fin.Visible = false;
             // 
             // GroupHeader1
@@ -551,27 +551,6 @@
             this.xrTableCell19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell19.TextFormatString = "{0:n2}";
             this.xrTableCell19.Weight = 0.6D;
-            // 
-            // p_can
-            // 
-            this.p_can.Name = "p_can";
-            this.p_can.Type = typeof(bool);
-            this.p_can.ValueInfo = "False";
-            this.p_can.Visible = false;
-            // 
-            // p_pen
-            // 
-            this.p_pen.Name = "p_pen";
-            this.p_pen.Type = typeof(bool);
-            this.p_pen.ValueInfo = "False";
-            this.p_pen.Visible = false;
-            // 
-            // p_todas
-            // 
-            this.p_todas.Name = "p_todas";
-            this.p_todas.Type = typeof(bool);
-            this.p_todas.ValueInfo = "False";
-            this.p_todas.Visible = false;
             // 
             // PageFooter
             // 
@@ -689,6 +668,16 @@
             this.xrPageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo2.TextFormatString = "Página {0} de {1}";
             // 
+            // estado_noveda
+            // 
+            this.estado_noveda.Name = "estado_noveda";
+            this.estado_noveda.Visible = false;
+            // 
+            // IdRubro
+            // 
+            this.IdRubro.Name = "IdRubro";
+            this.IdRubro.Visible = false;
+            // 
             // ROL_009_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -712,9 +701,8 @@
             this.p_IdEmpresa,
             this.p_fecha_inicio,
             this.p_fecha_fin,
-            this.p_can,
-            this.p_pen,
-            this.p_todas});
+            this.estado_noveda,
+            this.IdRubro});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_009_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
@@ -778,9 +766,6 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow9;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell18;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell19;
-        public DevExpress.XtraReports.Parameters.Parameter p_can;
-        public DevExpress.XtraReports.Parameters.Parameter p_pen;
-        public DevExpress.XtraReports.Parameters.Parameter p_todas;
         private DevExpress.XtraReports.UI.PageFooterBand PageFooter;
         private DevExpress.XtraReports.UI.XRTable xrTable11;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow6;
@@ -790,5 +775,7 @@
         private DevExpress.XtraReports.UI.XRTableCell lbl_fecha;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell50;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
+        public DevExpress.XtraReports.Parameters.Parameter estado_noveda;
+        public DevExpress.XtraReports.Parameters.Parameter IdRubro;
     }
 }

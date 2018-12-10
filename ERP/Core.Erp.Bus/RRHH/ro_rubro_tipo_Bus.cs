@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
@@ -7,11 +8,12 @@ namespace Core.Erp.Bus.RRHH
     public class ro_rubro_tipo_Bus
     {
         ro_rubro_tipo_Data odata = new ro_rubro_tipo_Data();
-        public List<ro_rubro_tipo_Info> get_list(int IdEmpresa, bool estado)
+
+        public List<ro_rubro_tipo_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(IdEmpresa, estado);
+                return odata.get_list(IdEmpresa, mostrar_anulados);
             }
             catch (Exception)
             {
@@ -19,7 +21,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public List<ro_rubro_tipo_Info> get_list_rub_acumula(int IdEmpresa)
+
+        public List<ro_rubro_tipo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            return odata.get_list_bajo_demanda(args, IdEmpresa);
+        }
+
+        public ro_rubro_tipo_Info get_info_bajo_demanda(int IdEmpresa, ListEditItemRequestedByValueEventArgs args)
+        {
+            return odata.get_info_bajo_demanda(IdEmpresa, args);
+        }
+
+         public List<ro_rubro_tipo_Info> get_list_rub_acumula(int IdEmpresa)
         {
             try
             {
