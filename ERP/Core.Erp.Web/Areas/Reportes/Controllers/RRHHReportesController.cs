@@ -169,6 +169,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
             report.estado_noveda.Value = noveda;
+            report.IdEmpleado.Value = Convert.ToDecimal(model.IdEmpleado);
             report.IdRubro.Value = model.IdRubro;
             ViewBag.Report = report;
             return View(model);
