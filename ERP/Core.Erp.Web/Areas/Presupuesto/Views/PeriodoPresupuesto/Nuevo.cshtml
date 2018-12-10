@@ -15,8 +15,15 @@
 
     function MostrarDescripcion() {
         var descripcion = "Periodo desde :" + Date.parse(FechaInicio.GetValue()) + " hasta: " + new Date(FechaFin.GetValue());
-        console.log(Date.parse(FechaInicio.GetValue()));
-        $("#DescripcionPeriodo").val( descripcion);
+        var fecha_inicio = FechaInicio.GetValue()
+        var fecha_fin = FechaFin.GetValue()
+        var anio_inicio = fecha_inicio.getFullYear();
+        var anio_fin = fecha_fin.getFullYear();
+        var mes_inicio = fecha_inicio.getMonth();
+        var mes_fin = fecha_fin.getMonth();
+        var dia_inicio = fecha_inicio.getDay();
+        var dia_fin = fecha_fin.getDay();
+        $("#DescripcionPeriodo").val("Periodo desde: " + anio_inicio + "-" + mes_inicio + "-" + dia_inicio + "hasta: " + anio_fin + "-" + mes_fin + "-" + dia_fin);
     };
 
 </script>
