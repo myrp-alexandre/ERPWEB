@@ -8,12 +8,95 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
+        $(function () {
+            CargarBodegaIngreso();
+            CargarBodegaEgreso();
+            $("#ing_IdSucursal").change(function () {
+                CargarBodegaIngreso();
+            });
+            $("#egr_IdSucursal").change(function () {
+                CargarBodegaEgreso();
+            });
+        });
+        function CargarBodegaIngreso() {
+    $("#ing_IdBodega").empty();
 
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#ing_IdSucursal").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarBodega", "Fabricacion", new { Area = "Produccion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            $.each(data, function (i, row) {
+                $("#ing_IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+            });
+            },
+            error: function (error) {
+            }
+            });
+        };
+
+     function CargarBodegaEgreso() {
+    $("#egr_IdBodega").empty();
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#egr_IdSucursal").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarBodega", "Fabricacion", new { Area = "Produccion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            $.each(data, function (i, row) {
+                $("#egr_IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+            });
+            },
+            error: function (error) {
+            }
+            });
+     };
+
+    function ArmarMateriaPrima() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ArmarMateriaPrima", "Fabricacion", new { Area = "Produccion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        GridViewPartial_fabricacion_det_egr.PerformCallback();
+    }
+</script>
 @using (Html.BeginForm("Nuevo", "Fabricacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id="IdEmpresa"})
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-
     <div class="row">
         <div class="col-md-3">
             <div class="col-md-12">
@@ -158,7 +241,6 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
@@ -184,109 +266,3 @@
                 @Scripts.Render("~/bundles/jqueryval")
             }
 }
-<script type="text/javascript">
-
-
-
-        $(function () {
-            CargarBodegaIngreso();
-            $("#ing_IdSucursal").change(function () {
-                CargarBodegaIngreso();
-            });
-        });
-
-
-
-        function CargarBodegaIngreso() {
-    $("#ing_IdBodega").empty();
-
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#ing_IdSucursal").val()
-        }
-
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("CargarBodega", "Fabricacion", new { Area = "Produccion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            $.each(data, function (i, row) {
-                $("#ing_IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
-            });
-            },
-            error: function (error) {
-            }
-            });
-    };
-
-
-     $(function () {
-         CargarBodegaIngreso();
-         $("#egr_IdSucursal").change(function () {
-             CargarBodegaEgreso();
-            });
-    });
-
-     function CargarBodegaEgreso() {
-    $("#egr_IdBodega").empty();
-
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#egr_IdSucursal").val()
-        }
-
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("CargarBodega", "Fabricacion", new { Area = "Produccion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            $.each(data, function (i, row) {
-                $("#egr_IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
-            });
-            },
-            error: function (error) {
-            }
-            });
-    };
-
-
-
-
-
-
-    function ArmarMateriaPrima(s, e) {
-        $("#Secuencia").text(0);
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val(),
-
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("ArmarMateriaPrima", "Fabricacion", new { Area = "Produccion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });
-        GridViewPartial_fabricacion_det_egr.PerformCallback();
-
-    }
-
-</script>

@@ -218,6 +218,7 @@ namespace Core.Erp.Data.Produccion
                                 Secuencia = item.Secuencia,
                                 Signo = item.Signo,
                                 IdUnidadMedida = item.IdUnidadMedida
+                                
                             });
                         }
 

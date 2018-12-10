@@ -14,6 +14,8 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
 {
     public class AprobacionOCController : Controller
     {
+        #region Index
+
         com_ordencompra_local_Bus bus_ordencompra = new com_ordencompra_local_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         com_orden_aprobacion_List List_apro = new com_orden_aprobacion_List();
@@ -54,6 +56,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             var model = bus_ordencompra.GetListPorAprobar(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_aprobacion_oc", model);
         }
+        #endregion
 
         private void cargar_combos(int IdEmpresa)
         {
@@ -61,7 +64,6 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             ViewBag.lst_sucursal = lst_sucursal;
             
         }
-
         public JsonResult aprobar(int IdEmpresa = 0, int IdSucursal = 0 , string Ids = "", string MotivoAprobacion = "", string IdUsuarioAprobacion = "")
         {
             string[] array = Ids.Split(',');
