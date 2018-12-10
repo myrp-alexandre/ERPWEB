@@ -100,6 +100,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_Rubro.GuardarBD(model))
             {
+                model.AsignaCuentaRubro = cargar_permiso_asignacion_cuenta(model.IdEmpresa, model.IdUsuario);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -112,6 +113,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 return RedirectToAction("Index");
 
             cargar_RubroTipo(IdEmpresa);
+            model.AsignaCuentaRubro = cargar_permiso_asignacion_cuenta(IdEmpresa, SessionFixed.IdUsuario);
             return View(model);
         }
 
@@ -121,6 +123,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             if (!bus_Rubro.ModificarBD(model))
             {
+                model.AsignaCuentaRubro = cargar_permiso_asignacion_cuenta(model.IdEmpresa, SessionFixed.IdUsuario);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -133,6 +136,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 return RedirectToAction("Index");
 
             cargar_RubroTipo(IdEmpresa);
+            model.AsignaCuentaRubro = cargar_permiso_asignacion_cuenta(IdEmpresa, SessionFixed.IdUsuario);
             return View(model);
         }
 
@@ -142,6 +146,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_Rubro.AnularBD(model))
             {
+                model.AsignaCuentaRubro = cargar_permiso_asignacion_cuenta(model.IdEmpresa, SessionFixed.IdUsuario);
                 return View(model);
             }
             return RedirectToAction("Index");

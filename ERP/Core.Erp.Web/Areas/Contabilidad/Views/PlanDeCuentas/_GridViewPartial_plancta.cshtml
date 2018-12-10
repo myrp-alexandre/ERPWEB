@@ -1,4 +1,5 @@
 @using System.Web.UI.WebControls;
+@using Core.Erp.Web.Helps;
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
@@ -64,8 +65,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "pc_Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdCtaCble = DataBinder.Eval(tc.DataItem, "IdCtaCble") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdCtaCble = DataBinder.Eval(tc.DataItem, "IdCtaCble") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdCtaCble = DataBinder.Eval(tc.DataItem, "IdCtaCble") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdCtaCble = DataBinder.Eval(tc.DataItem, "IdCtaCble") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -73,7 +74,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

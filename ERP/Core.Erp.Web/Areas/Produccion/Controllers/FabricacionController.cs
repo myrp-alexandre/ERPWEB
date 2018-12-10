@@ -80,6 +80,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
 
             };
             List_det.set_list(model.LstDet, model.IdTransaccionSession);
+            List_Fac.set_list_fac(model.LstDet, model.IdTransaccionSession);
             cargar_combos(model.IdEmpresa);
             return View(model);
         }
@@ -202,10 +203,27 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             if (Lista.Count()== 0)
                 resultado = false;
             var det = List_Fac.get_list_fact(IdTransaccionSession);
-            det.AddRange(Lista);
-            List_det.set_list(det, IdTransaccionSession);
+            List_Fac.set_list_fac(Lista, IdTransaccionSession);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult EditingAddNew(string IDs = "", decimal IdTransaccionSession = 0)
+        {
+           bool resultado = true;
+            if (!string.IsNullOrEmpty(IDs))
+            {
+                var lst = List_Fac.get_list_fact(IdTransaccionSession);
+                string[] array = IDs.Split(',');
+                foreach (var item in array)
+                {
+                    var info_det = lst.Where(q => q.Secuencia == Convert.ToInt32(item)).FirstOrDefault();
+                    if (info_det != null)
+                        List_det.AddRow(info_det, IdTransaccionSession);
+                }
+            }
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+           return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
         #region Metodos ComboBox bajo demanda
         in_Producto_Bus bus_producto = new in_Producto_Bus();
@@ -326,22 +344,6 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             return PartialView("_GridViewPartial_fabricacion_det_fac", model);
         }
 
-        public ActionResult EditingAddNew(string IDs = "", decimal IdTransaccionSession = 0)
-        {
-            if (!string.IsNullOrEmpty(IDs))
-            {
-                var lst = List_Fac.get_list_fact(IdTransaccionSession);
-                string[] array = IDs.Split(',');
-                foreach (var item in array)
-                {
-                    var info_det = lst.Where(q => q.Secuencia == Convert.ToInt32(item)).FirstOrDefault();
-                    if (info_det != null)
-                        List_det.AddRow(info_det, IdTransaccionSession);
-                }
-            }
-            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_CambioProductoDet", model);
-        }
 
         #endregion
     }

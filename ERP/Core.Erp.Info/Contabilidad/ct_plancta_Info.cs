@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Info.Contabilidad
 {
     public class ct_plancta_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         [StringLength(20, MinimumLength = 1, ErrorMessage = "el campo código cuenta contable debe tener mínimo 1 caracter y máximo 20")]
         [Required(ErrorMessage = "El campo código cuenta contable es obligatorio")]

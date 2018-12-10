@@ -9,7 +9,6 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
-
         $(function () {
             CargarBodegaIngreso();
             CargarBodegaEgreso();
@@ -20,24 +19,20 @@
                 CargarBodegaEgreso();
             });
         });
-
-
         var selectedIDs;
         function OnBeginCallback(s, e) {
             e.customArgs["selectedIDs"] = selectedIDs;
         };
-
         function OnSelectionChanged(s, e) {
             s.GetSelectedFieldValues("Secuencia", GetSelectedFieldValuesCallback);
         };
-
         function GetSelectedFieldValuesCallback(values) {
             //Capture all selected keys
             selectedIDs = values.join(',');
         };
+
         function CargarBodegaIngreso() {
     $("#ing_IdBodega").empty();
-
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSucursal: $("#ing_IdSucursal").val()
@@ -63,7 +58,6 @@
 
      function CargarBodegaEgreso() {
     $("#egr_IdBodega").empty();
-
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSucursal: $("#egr_IdSucursal").val()
@@ -114,9 +108,7 @@
         BuscarFacturas();
         $("#ModalFacturas").modal("show");
     };
-
     function BuscarFacturas() {
-
         var datos = {
             FechaIni: FechaIni.GetValue(),
             FechaFin: FechaFin.GetValue(),
@@ -142,9 +134,9 @@
             error: function (error) {
             }
         });
-        GridViewPartial_fabricacion_det_fac.UnselectRows();
         GridViewPartial_fabricacion_det_fac.PerformCallback();
     };
+
     function AddFacturas() {
         var datos = {
             IDs: selectedIDs,
@@ -167,8 +159,8 @@
         selectedIDs = "";
         GridViewPartial_fabricacion_det_fac.PerformCallback();
         GridViewPartial_fabricacion_det_fac.UnselectRows();
-        $("#ModalFacturas").modal("hide");
         GridViewPartial_fabricacion_det_ing.PerformCallback();
+        $("#ModalFacturas").modal("hide");
     };
 </script>
 @using (Html.BeginForm("Nuevo", "Fabricacion", FormMethod.Post, new { @class = "form", @role = "form" }))
@@ -260,7 +252,7 @@
                     <h4 class="modal-title">Facturas</h4>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Desde*</label>
                                     <div class="input-group date">
@@ -280,7 +272,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-offset-1 col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Hasta*</label>
                                     <div class="input-group date">

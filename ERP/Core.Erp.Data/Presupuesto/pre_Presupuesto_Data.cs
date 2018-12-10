@@ -179,7 +179,8 @@ namespace Core.Erp.Data.Presupuesto
                                 IdRubro = item.IdRubro,
                                 IdCtaCble = EntityRubro.IdCtaCble,
                                 Cantidad = item.Cantidad,
-                                Monto = item.Monto
+                                ValorUnitario = item.ValorUnitario,
+                                Monto = (item.Cantidad * item.ValorUnitario)
                             });
 
                         }
@@ -237,7 +238,8 @@ namespace Core.Erp.Data.Presupuesto
                                 IdRubro = item.IdRubro,
                                 IdCtaCble = EntityRubro.IdCtaCble,
                                 Cantidad = item.Cantidad,
-                                Monto = item.Monto
+                                ValorUnitario = item.ValorUnitario,
+                                Monto = (item.Cantidad * item.ValorUnitario)
                             });
                         }
                     }
