@@ -22,7 +22,6 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string DescripcionProcesoNomina { get; set; }
         public string Observacion { get; set; }
         public string Descripcion { get; set; }
-        public string rub_Acuerdo_Descuento { get; set; }
         public string ru_descripcion { get; set; }
         public string EstadoCobro { get; set; }
         public double TotalValor { get; set; }

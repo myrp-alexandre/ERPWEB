@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Bus.CuentasPorPagar;
+using Core.Erp.Bus.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Info.Helps;
@@ -16,6 +17,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         // GET: Inventario/AprobarOrdenPago
         cp_orden_pago_Bus bus_orden_pago = new cp_orden_pago_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        cp_orden_pago_formapago_Bus bus_cp_orden_pago_forma_pago = new cp_orden_pago_formapago_Bus();
         orden_pago_aprobacion_List List_aprobacion_op = new orden_pago_aprobacion_List();
 
         public ActionResult Index()
@@ -49,6 +51,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
                 ViewBag.lst_sucursal = lst_sucursal;
+
+                var lst_forma_pago = bus_cp_orden_pago_forma_pago.get_list();
+                
+                lst_forma_pago.Add(new Info.CuentasPorPagar.cp_orden_pago_formapago_Info
+                {
+                    IdFormaPago = "",
+                    descripcion = "Predefinido"
+                });
+                ViewBag.lst_forma_pago = lst_forma_pago;
             }
             catch (Exception)
             {
@@ -69,7 +80,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_AprobacionOP", model);
         }
 
-        public JsonResult aprobar(int IdEmpresa = 0, string Ids = "", string MotivoAprobacion="", string IdUsuarioAprobacion="")
+        public JsonResult aprobar(int IdEmpresa = 0, string Ids = "", string MotivoAprobacion="", string IdFormaPago="", string IdUsuarioAprobacion="")
         {
             string[] array = Ids.Split(',');
 
@@ -79,7 +90,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             else
             {
-                var resultado_orden = bus_orden_pago.aprobarOP(IdEmpresa, array, MotivoAprobacion, IdUsuarioAprobacion);
+                var resultado_orden = bus_orden_pago.aprobarOP(IdEmpresa, array, MotivoAprobacion, IdFormaPago, IdUsuarioAprobacion);
                 return Json(resultado_orden, JsonRequestBehavior.AllowGet);
             }
             

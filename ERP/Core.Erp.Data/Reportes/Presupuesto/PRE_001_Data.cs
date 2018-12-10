@@ -39,6 +39,7 @@ namespace Core.Erp.Data.Reportes.Presupuesto
                                  IdCtaCble = q.IdCtaCble,
                                  Cantidad = q.Cantidad,
                                  Monto = q.Monto,
+                                 ValorUnitario = q.ValorUnitario,
                                  pc_Cuenta = q.pc_Cuenta
 
                              }).ToList();
