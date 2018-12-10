@@ -17,6 +17,8 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
     {
         #region Variables
         pre_rubro_Bus bus_Rubro = new pre_rubro_Bus();
+        pre_Grupo_Bus bus_Grupo = new pre_Grupo_Bus();
+        pre_Grupo_x_seg_usuario_Bus bus_GrupoDet = new pre_Grupo_x_seg_usuario_Bus();
         pre_RubroTipo_Bus bus_RubroTipo = new pre_RubroTipo_Bus();
         #endregion
 
@@ -48,6 +50,18 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 throw;
             }
         }
+
+        private bool cargar_permiso_asignacion_cuenta(int IdEmpresa, string IdUsuario)
+        {
+            var info = bus_GrupoDet.GetInfoPermiso(IdEmpresa, IdUsuario);
+
+            if (info == null)
+            {                
+                return false;
+            }
+
+            return true;
+        }
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -73,8 +87,9 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             pre_rubro_Info model = new pre_rubro_Info();
-
-            cargar_RubroTipo(IdEmpresa);            
+            cargar_RubroTipo(IdEmpresa);
+            
+            model.AsignaCuentaRubro = cargar_permiso_asignacion_cuenta(IdEmpresa, SessionFixed.IdUsuario);
             return View(model);
             
         }

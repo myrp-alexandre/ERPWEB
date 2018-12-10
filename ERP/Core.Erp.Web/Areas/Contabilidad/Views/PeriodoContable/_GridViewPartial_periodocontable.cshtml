@@ -85,8 +85,20 @@
 
         settings.Columns.Add("IdPeriodo", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("pe_mes", "Mes").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_FechaIni", "Fecha incio").Width = Unit.Percentage(20);
-        settings.Columns.Add("pe_FechaFin", "Fecha fin").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_FechaIni";
+            column.Caption = "Fecha incio";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Width = Unit.Percentage(20);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_FechaFin";
+            column.Caption = "Fecha fin";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Width = Unit.Percentage(20);
+        });
         settings.Columns.Add("pe_cerrado", "Cerrado").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {

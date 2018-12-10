@@ -40,13 +40,20 @@
                     @Html.ValidationMessageFor(q => q.IdRubroTipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdCtaCble">Cuenta contable*</label>
-                    @Html.Partial("_CmbCuentaContable", Model.IdCtaCble)
-                    @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
+            @if (Model.AsignaCuentaRubro == true)
+            {
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IdCtaCble">Cuenta contable</label>
+                        @Html.Partial("_CmbCuentaContable", Model.IdCtaCble)
+                        @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                @Html.HiddenFor(q => q.IdCtaCble);
+            }
         </div>
     </div>
     <div class="row">

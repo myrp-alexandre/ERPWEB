@@ -30,5 +30,7 @@ namespace Core.Erp.Info.Presupuesto
 
         public string pc_Cuenta { get; set; }
         public string Descripcion_RubroTipo { get; set; }
+
+        public bool AsignaCuentaRubro { get; set; }
     }
 }

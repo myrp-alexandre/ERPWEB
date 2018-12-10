@@ -23,5 +23,17 @@ namespace Core.Erp.Bus.Presupuesto
                 throw;
             }
         }
+
+        public pre_Grupo_x_seg_usuario_Info GetInfoPermiso(int IdEmpresa, string IdUsuario)
+        {
+            try
+            {
+                return odata_det.GetInfoPermiso(IdEmpresa, IdUsuario);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

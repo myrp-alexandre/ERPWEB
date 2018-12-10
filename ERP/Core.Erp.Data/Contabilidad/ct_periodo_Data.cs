@@ -166,8 +166,7 @@ namespace Core.Erp.Data.Contabilidad
                     ct_periodo Entity = Context.ct_periodo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdPeriodo == info.IdPeriodo);
                     if (Entity == null)
                         return false;
-                    Entity.IdPeriodo = info.IdPeriodo;
-                    Entity.pe_mes = info.pe_mes;
+
                     Entity.pe_FechaFin = info.pe_FechaFin.Date;
                     Entity.pe_FechaIni = info.pe_FechaIni.Date;
                     Entity.pe_cerrado = info.pe_cerrado_bool == true ? "S" : "N";

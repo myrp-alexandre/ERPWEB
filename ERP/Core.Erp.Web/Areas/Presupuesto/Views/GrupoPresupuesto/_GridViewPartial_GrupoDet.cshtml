@@ -22,7 +22,7 @@
         settings.CommandColumn.ShowDeleteButton = true;
 
         settings.SettingsContextMenu.Enabled = true;
-        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
 
         settings.SettingsPager.Visible = true;
@@ -48,7 +48,7 @@
         {
             column.FieldName = "Nombre";
             column.Caption = "Nombre";
-            column.Width = Unit.Percentage(60);
+            column.Width = Unit.Percentage(80);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
