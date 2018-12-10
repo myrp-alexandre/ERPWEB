@@ -442,7 +442,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
           </AssociationSet>
           <EntitySet Name="vwpre_Grupo" EntityType="Model_presupuesto.vwpre_Grupo" />
           <EntitySet Name="pre_PresupuestoDet" EntityType="Model_presupuesto.pre_PresupuestoDet" />
-          <EntitySet Name="pre_PresupuestoPeriodo" EntityType="Model_presupuesto.pre_PresupuestoPeriodo" />
           <EntitySet Name="pre_RubroTipo" EntityType="Model_presupuesto.pre_RubroTipo" />
           <EntitySet Name="pre_Rubro" EntityType="Model_presupuesto.pre_Rubro" />
           <AssociationSet Name="FK_pre_Presupuesto_x_grupo_det_pre_rubro" Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_rubro">
@@ -460,15 +459,16 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
             <End Role="pre_Grupo" EntitySet="pre_Grupo" />
             <End Role="pre_Presupuesto" EntitySet="pre_Presupuesto" />
           </AssociationSet>
-          <AssociationSet Name="FK_pre_Presupuesto_pre_PresupuestoPeriodo" Association="Model_presupuesto.FK_pre_Presupuesto_pre_PresupuestoPeriodo">
-            <End Role="pre_PresupuestoPeriodo" EntitySet="pre_PresupuestoPeriodo" />
-            <End Role="pre_Presupuesto" EntitySet="pre_Presupuesto" />
-          </AssociationSet>
           <AssociationSet Name="FK_pre_PresupuestoDet_pre_Presupuesto" Association="Model_presupuesto.FK_pre_PresupuestoDet_pre_Presupuesto">
             <End Role="pre_Presupuesto" EntitySet="pre_Presupuesto" />
             <End Role="pre_PresupuestoDet" EntitySet="pre_PresupuestoDet" />
           </AssociationSet>
           <EntitySet Name="vwpre_Presupuesto" EntityType="Model_presupuesto.vwpre_Presupuesto" />
+          <EntitySet Name="pre_PresupuestoPeriodo" EntityType="Model_presupuesto.pre_PresupuestoPeriodo" />
+          <AssociationSet Name="FK_pre_Presupuesto_pre_PresupuestoPeriodo" Association="Model_presupuesto.FK_pre_Presupuesto_pre_PresupuestoPeriodo">
+            <End Role="pre_PresupuestoPeriodo" EntitySet="pre_PresupuestoPeriodo" />
+            <End Role="pre_Presupuesto" EntitySet="pre_Presupuesto" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="pre_Grupo">
           <Key>
@@ -550,28 +550,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
           <Property Name="Monto" Type="Double" Nullable="false" />
           <NavigationProperty Name="pre_Rubro" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_rubro" FromRole="pre_PresupuestoDet" ToRole="pre_Rubro" />
           <NavigationProperty Name="pre_Presupuesto" Relationship="Model_presupuesto.FK_pre_PresupuestoDet_pre_Presupuesto" FromRole="pre_PresupuestoDet" ToRole="pre_Presupuesto" />
-        </EntityType>
-        <EntityType Name="pre_PresupuestoPeriodo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdPeriodo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EstadoCierre" Type="Boolean" Nullable="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="pre_Presupuesto" Relationship="Model_presupuesto.FK_pre_Presupuesto_pre_PresupuestoPeriodo" FromRole="pre_PresupuestoPeriodo" ToRole="pre_Presupuesto" />
-          <Property Name="DescripciónPeriodo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="pre_RubroTipo">
           <Key>
@@ -718,8 +696,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
           <Property Name="FechaAprobacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAprobacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="pre_Grupo" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_pre_Grupo" FromRole="pre_Presupuesto" ToRole="pre_Grupo" />
-          <NavigationProperty Name="pre_PresupuestoPeriodo" Relationship="Model_presupuesto.FK_pre_Presupuesto_pre_PresupuestoPeriodo" FromRole="pre_Presupuesto" ToRole="pre_PresupuestoPeriodo" />
           <NavigationProperty Name="pre_PresupuestoDet" Relationship="Model_presupuesto.FK_pre_PresupuestoDet_pre_Presupuesto" FromRole="pre_Presupuesto" ToRole="pre_PresupuestoDet" />
+          <NavigationProperty Name="pre_PresupuestoPeriodo" Relationship="Model_presupuesto.FK_pre_Presupuesto_pre_PresupuestoPeriodo" FromRole="pre_Presupuesto" ToRole="pre_PresupuestoPeriodo" />
         </EntityType>
         <Association Name="FK_pre_Presupuesto_x_grupo_pre_Grupo">
           <End Type="Model_presupuesto.pre_Grupo" Role="pre_Grupo" Multiplicity="1" />
@@ -732,20 +710,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
             <Dependent Role="pre_Presupuesto">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdGrupo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_pre_Presupuesto_pre_PresupuestoPeriodo">
-          <End Type="Model_presupuesto.pre_PresupuestoPeriodo" Role="pre_PresupuestoPeriodo" Multiplicity="1" />
-          <End Type="Model_presupuesto.pre_Presupuesto" Role="pre_Presupuesto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="pre_PresupuestoPeriodo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPeriodo" />
-            </Principal>
-            <Dependent Role="pre_Presupuesto">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPeriodo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -799,6 +763,42 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
           <Property Name="FechaAprobacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAprobacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="pre_PresupuestoPeriodo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DescripciónPeriodo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoCierre" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="pre_Presupuesto" Relationship="Model_presupuesto.FK_pre_Presupuesto_pre_PresupuestoPeriodo" FromRole="pre_PresupuestoPeriodo" ToRole="pre_Presupuesto" />
+        </EntityType>
+        <Association Name="FK_pre_Presupuesto_pre_PresupuestoPeriodo">
+          <End Type="Model_presupuesto.pre_PresupuestoPeriodo" Role="pre_PresupuestoPeriodo" Multiplicity="1" />
+          <End Type="Model_presupuesto.pre_Presupuesto" Role="pre_Presupuesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pre_PresupuestoPeriodo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPeriodo" />
+            </Principal>
+            <Dependent Role="pre_Presupuesto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -856,27 +856,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="pre_PresupuestoPeriodo">
-            <EntityTypeMapping TypeName="Model_presupuesto.pre_PresupuestoPeriodo">
-              <MappingFragment StoreEntitySet="pre_PresupuestoPeriodo">
-                <ScalarProperty Name="DescripciónPeriodo" ColumnName="DescripciónPeriodo" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="EstadoCierre" ColumnName="EstadoCierre" />
-                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1000,6 +979,27 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pre_PresupuestoPeriodo">
+            <EntityTypeMapping TypeName="Model_presupuesto.pre_PresupuestoPeriodo">
+              <MappingFragment StoreEntitySet="pre_PresupuestoPeriodo">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="EstadoCierre" ColumnName="EstadoCierre" />
+                <ScalarProperty Name="DescripciónPeriodo" ColumnName="DescripciónPeriodo" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

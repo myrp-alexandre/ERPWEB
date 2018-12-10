@@ -25,6 +25,7 @@ namespace Core.Erp.Data
         public string Observacion { get; set; }
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime FechaFin { get; set; }
+        public string DescripciónPeriodo { get; set; }
         public bool EstadoCierre { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
@@ -34,7 +35,6 @@ namespace Core.Erp.Data
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
-        public string DescripciónPeriodo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pre_Presupuesto> pre_Presupuesto { get; set; }
