@@ -47,6 +47,31 @@
           <Property Name="Costo" Type="float" Nullable="false" />
           <Property Name="RealizaMovimiento" Type="bit" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwpro_FabricacionDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwpro_FabricacionDet">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdFabricacion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="Signo" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="RealizaMovimiento" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdFabricacion" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="Signo" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Cantidad" Type="float" Nullable="false" />
+          <Property Name="Costo" Type="float" Nullable="false" />
+          <Property Name="RealizaMovimiento" Type="bit" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <Association Name="FK_pro_FabricacionDet_pro_Fabricacion">
           <End Role="pro_Fabricacion" Type="Self.pro_Fabricacion" Multiplicity="1" />
           <End Role="pro_FabricacionDet" Type="Self.pro_FabricacionDet" Multiplicity="*" />
@@ -71,6 +96,20 @@
         <EntityContainer Name="Model_produccionStoreContainer">
           <EntitySet Name="pro_Fabricacion" EntityType="Self.pro_Fabricacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pro_FabricacionDet" EntityType="Self.pro_FabricacionDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwpro_FabricacionDet" EntityType="Self.vwpro_FabricacionDet" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwpro_FabricacionDet].[IdEmpresa] AS [IdEmpresa], 
+    [vwpro_FabricacionDet].[IdFabricacion] AS [IdFabricacion], 
+    [vwpro_FabricacionDet].[Secuencia] AS [Secuencia], 
+    [vwpro_FabricacionDet].[Signo] AS [Signo], 
+    [vwpro_FabricacionDet].[IdProducto] AS [IdProducto], 
+    [vwpro_FabricacionDet].[IdUnidadMedida] AS [IdUnidadMedida], 
+    [vwpro_FabricacionDet].[Cantidad] AS [Cantidad], 
+    [vwpro_FabricacionDet].[Costo] AS [Costo], 
+    [vwpro_FabricacionDet].[RealizaMovimiento] AS [RealizaMovimiento], 
+    [vwpro_FabricacionDet].[pr_descripcion] AS [pr_descripcion]
+    FROM [dbo].[vwpro_FabricacionDet] AS [vwpro_FabricacionDet]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_pro_FabricacionDet_pro_Fabricacion" Association="Self.FK_pro_FabricacionDet_pro_Fabricacion">
             <End Role="pro_Fabricacion" EntitySet="pro_Fabricacion" />
             <End Role="pro_FabricacionDet" EntitySet="pro_FabricacionDet" />
@@ -104,6 +143,7 @@
             <End Role="pro_Fabricacion" EntitySet="pro_Fabricacion" />
             <End Role="pro_FabricacionDet" EntitySet="pro_FabricacionDet" />
           </AssociationSet>
+          <EntitySet Name="vwpro_FabricacionDet" EntityType="Model_produccion.vwpro_FabricacionDet" />
           <FunctionImport Name="sppro_GetProductoFacturadosPorFecha" ReturnType="Collection(Model_produccion.sppro_GetProductoFacturadosPorFecha_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
@@ -153,15 +193,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwpro_FabricacionDet">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdFabricacion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="Signo" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="RealizaMovimiento" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdFabricacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Signo" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Double" Nullable="false" />
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="RealizaMovimiento" Type="Boolean" Nullable="false" />
+          <Property Name="pr_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         <ComplexType Name="sppro_GetProductoFacturadosPorFecha_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Decimal" Name="IdProducto" Nullable="false" Precision="18" Scale="0" />
           <Property Type="String" Name="pr_descripcion" Nullable="true" MaxLength="500" />
-          <Property Type="Double" Name="vt_cantidad" Nullable="true" />
+          <Property Type="Double" Name="vt_cantidad" Nullable="false" />
           <Property Type="DateTime" Name="vt_fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IdUnidadMedida" Nullable="false" MaxLength="25" />
           <Property Type="String" Name="NombreUnidad" Nullable="false" MaxLength="500" />
           <Property Type="Double" Name="stock" Nullable="false" />
-          <Property Type="Double" Name="CantidadFabricada" Nullable="true" />
+          <Property Type="Double" Name="CantidadFabricada" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -210,6 +274,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vwpro_FabricacionDet">
+            <EntityTypeMapping TypeName="Model_produccion.vwpro_FabricacionDet">
+              <MappingFragment StoreEntitySet="vwpro_FabricacionDet">
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="RealizaMovimiento" ColumnName="RealizaMovimiento" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Signo" ColumnName="Signo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdFabricacion" ColumnName="IdFabricacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sppro_GetProductoFacturadosPorFecha" FunctionName="Model_produccion.Store.sppro_GetProductoFacturadosPorFecha">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model_produccion.sppro_GetProductoFacturadosPorFecha_Result">
@@ -218,6 +298,7 @@
                 <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
                 <ScalarProperty Name="vt_cantidad" ColumnName="vt_cantidad" />
                 <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
                 <ScalarProperty Name="NombreUnidad" ColumnName="NombreUnidad" />
                 <ScalarProperty Name="stock" ColumnName="stock" />
                 <ScalarProperty Name="CantidadFabricada" ColumnName="CantidadFabricada" />

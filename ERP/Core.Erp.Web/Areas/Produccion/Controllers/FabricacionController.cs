@@ -25,6 +25,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
         pro_FabricacionDet_List List_det = new pro_FabricacionDet_List();
         in_Producto_Composicion_Info comp = new in_Producto_Composicion_Info();
         in_Producto_Composicion_Bus bus_comp = new in_Producto_Composicion_Bus();
+        pro_FabricacionDet_Fac List_Fac = new pro_FabricacionDet_Fac();
 
         #endregion
         #region Index
@@ -200,7 +201,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
             var Lista = bus_fabricacion_det.GetProductoFacturadosPorFecha(IdEmpresa, IdSucursal, IdBodega, FechaIni, FechaFin);
             if (Lista.Count()== 0)
                 resultado = false;
-            var det = List_det.get_list(IdTransaccionSession);
+            var det = List_Fac.get_list_fact(IdTransaccionSession);
             det.AddRange(Lista);
             List_det.set_list(det, IdTransaccionSession);
             return Json(resultado, JsonRequestBehavior.AllowGet);
@@ -321,23 +322,8 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
         public ActionResult GridViewPartial_fabricacion_det_fac()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var model = get_list_fact(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_Fac.get_list_fact(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_fabricacion_det_fac", model);
-        }
-        public List<pro_FabricacionDet_Info> get_list_fact(decimal IdTransaccionSession)
-        {
-            if (Session["pro_FabricacionDet_fac"] == null)
-            {
-                List<pro_FabricacionDet_Info> list = new List<pro_FabricacionDet_Info>();
-
-                Session["pro_FabricacionDet_fac"] = list;
-            }
-            return (List<pro_FabricacionDet_Info>)Session["pro_FabricacionDet_fac"];
-        }
-
-        public void set_list_fac(List<pro_FabricacionDet_Info> list, decimal IdTransaccionSession)
-        {
-            Session["pro_FabricacionDet_fac"] = list;
         }
         #endregion
     }
@@ -395,6 +381,25 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
         {
             List<pro_FabricacionDet_Info> list = get_list(IdTransaccionSession);
             list.RemoveAll(m => m.Signo == Signo);
+        }
+    }
+
+    public class pro_FabricacionDet_Fac
+    {
+        string variable = "pro_FabricacionDet_Info";
+        public List<pro_FabricacionDet_Info> get_list_fact(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<pro_FabricacionDet_Info> list = new List<pro_FabricacionDet_Info>();
+
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<pro_FabricacionDet_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+        }
+        public void set_list_fac(List<pro_FabricacionDet_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
     }
 }

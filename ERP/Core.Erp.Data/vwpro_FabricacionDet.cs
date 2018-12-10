@@ -10,17 +10,19 @@
 namespace Core.Erp.Data
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sppro_GetProductoFacturadosPorFecha_Result
+    public partial class vwpro_FabricacionDet
     {
         public int IdEmpresa { get; set; }
+        public decimal IdFabricacion { get; set; }
+        public int Secuencia { get; set; }
+        public string Signo { get; set; }
         public decimal IdProducto { get; set; }
-        public string pr_descripcion { get; set; }
-        public double vt_cantidad { get; set; }
-        public Nullable<System.DateTime> vt_fecha { get; set; }
         public string IdUnidadMedida { get; set; }
-        public string NombreUnidad { get; set; }
-        public double stock { get; set; }
-        public double CantidadFabricada { get; set; }
+        public double Cantidad { get; set; }
+        public double Costo { get; set; }
+        public bool RealizaMovimiento { get; set; }
+        public string pr_descripcion { get; set; }
     }
 }

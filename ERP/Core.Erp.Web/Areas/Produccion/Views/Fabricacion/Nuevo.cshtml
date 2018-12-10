@@ -92,6 +92,43 @@
         });
         GridViewPartial_fabricacion_det_egr.PerformCallback();
     }
+
+
+    function MostrarModalFacturas() {
+        BuscarFacturas();
+        $("#ModalFacturas").modal("show");
+    };
+
+    function BuscarFacturas() {
+
+        var datos = {
+            FechaIni: FechaIni.GetValue(),
+            FechaFin: FechaFin.GetValue(),
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#egr_IdSucursal").val(),
+            IdBodega: $("#egr_IdBodega").val(),
+            NumeroFactura: $("#NumeroFactura").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetProductoFacturadosPorFecha", "Fabricacion", new { Area = "Produccion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == false) {
+                    alert("No existen resultados para los filtros aplicados");
+                }
+            },
+            error: function (error) {
+            }
+        });
+        GridViewPartial_fabricacion_det_fac.UnselectRows();
+        GridViewPartial_fabricacion_det_fac.PerformCallback();
+    };
 </script>
 @using (Html.BeginForm("Nuevo", "Fabricacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
