@@ -227,5 +227,29 @@ namespace Core.Erp.Data.Presupuesto
             }
         }
 
+        public List<pre_Grupo_Info> GetList_x_Usuario(int IdEmpresa, string IdUsuario)
+        {
+            try
+            {
+                List<pre_Grupo_Info> Lista = new List<pre_Grupo_Info>();
+
+                using (Entities_presupuesto db = new Entities_presupuesto())
+                {
+                    Lista = db.vwpre_Grupo.Where(q => q.IdEmpresa == IdEmpresa && q.IdUsuario == IdUsuario && q.Estado == true).Select(q => new pre_Grupo_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdGrupo = q.IdGrupo,
+                        Descripcion = q.Descripcion,
+                        Estado = q.Estado
+                    }).ToList();
+
+                    return Lista;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

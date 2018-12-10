@@ -104,7 +104,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false);
                 ViewBag.lst_Periodo = lst_Periodo;
 
-                var lst_Grupo = bus_Grupo.GetList(IdEmpresa, false);
+                var lst_Grupo = bus_Grupo.GetList_x_Usuario(IdEmpresa, SessionFixed.IdUsuario);
                 ViewBag.lst_Grupo = lst_Grupo;
             }
             catch (Exception)
@@ -370,7 +370,8 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             info_det.IdRubro = info_det.IdRubro;
             info_det.IdCtaCble = info_det.IdCtaCble;
             info_det.Cantidad = info_det.Cantidad;
-            info_det.Monto = info_det.Monto;
+            info_det.ValorUnitario = info_det.ValorUnitario;
+            info_det.Monto = (info_det.Cantidad * info_det.ValorUnitario);
 
             list.Add(info_det);
         }
@@ -381,7 +382,8 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             edited_info.IdRubro = info_det.IdRubro;
             edited_info.Descripcion = info_det.Descripcion;
             edited_info.Cantidad = info_det.Cantidad;
-            edited_info.Monto = info_det.Monto;
+            info_det.ValorUnitario = info_det.ValorUnitario;
+            info_det.Monto = (info_det.Cantidad * info_det.ValorUnitario);
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)

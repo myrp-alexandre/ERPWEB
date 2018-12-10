@@ -20,9 +20,10 @@ namespace Core.Erp.Data
         public int IdRubro { get; set; }
         public string IdCtaCble { get; set; }
         public int Cantidad { get; set; }
+        public double ValorUnitario { get; set; }
         public double Monto { get; set; }
     
-        public virtual pre_Rubro pre_Rubro { get; set; }
         public virtual pre_Presupuesto pre_Presupuesto { get; set; }
+        public virtual pre_Rubro pre_Rubro { get; set; }
     }
 }

@@ -34,8 +34,8 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
+        public virtual pre_RubroTipo pre_RubroTipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pre_PresupuestoDet> pre_PresupuestoDet { get; set; }
-        public virtual pre_RubroTipo pre_RubroTipo { get; set; }
     }
 }

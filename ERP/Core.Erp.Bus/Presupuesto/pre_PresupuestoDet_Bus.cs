@@ -22,6 +22,6 @@ namespace Core.Erp.Bus.Presupuesto
             {
                 throw;
             }
-        }
+        }       
     }
 }
