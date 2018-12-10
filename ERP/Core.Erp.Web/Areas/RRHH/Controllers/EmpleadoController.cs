@@ -10,7 +10,8 @@ using Core.Erp.Info.General;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Contabilidad;
 using DevExpress.Web;
-
+using System.IO;
+using Microsoft.SqlServer.Server;
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class EmpleadoController : Controller
@@ -69,7 +70,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     return View(info);
                 }
                 info.IdEmpresa = GetIdEmpresa();
-                info.em_foto = Empleado_imagen.em_foto;
                 if (!bus_empleado.guardarDB(info))
                 {
                     if (info.em_foto == null)
@@ -77,7 +77,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     cargar_combos();
                     return View(info);
                 }
-                Empleado_imagen.em_foto = null;
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -126,7 +125,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     return View(info);
                 }
                 info.IdEmpresa = GetIdEmpresa();
-                info.em_foto = Empleado_imagen.em_foto;
                 if (!bus_empleado.modificarDB(info))
                 {
                     if (info.em_foto == null)
@@ -134,7 +132,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     cargar_combos();
                     return View(info);
                 }
-                Empleado_imagen.em_foto = null;
                 return RedirectToAction("Index");
 
             }
@@ -182,7 +179,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     return View(info);
                 }
                 info.IdEmpresa = GetIdEmpresa();
-                info.em_foto = Empleado_imagen.em_foto;
                 if (!bus_empleado.anularDB(info))
                 {
                     if (info.em_foto == null)
@@ -190,7 +186,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     cargar_combos();
                     return View(info);
                 }
-                Empleado_imagen.em_foto = null;
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -332,24 +327,33 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public UploadedFile UploadControlUpload()
         {
-            UploadControlExtension.GetUploadedFiles("UploadControl", Empleado_imagen.UploadValidationSettings, Empleado_imagen.FileUploadComplete);
+            UploadControlExtension.GetUploadedFiles("UploadControl", UploadControlDemosHelper.UploadValidationSettings, UploadControlDemosHelper.FileUploadComplete);
 
-            byte[] model = Empleado_imagen.em_foto;
-            UploadedFile file = new UploadedFile();
-            return file;
+            
+            return null;
         }
-
-        public ActionResult get_imagen()
+        public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
         {
 
-            byte[] model = Empleado_imagen.em_foto;
-            if (model == null)
-                model = new byte[0];
-            return PartialView("_Empleado_imagen", model);
+            //var path = Path.Combine(Server.MapPath, "/App_Data/userfiles/"), "n");
+            //var dir = Directory.CreateDirectory(path);
+            //ucDragAndDrop.FirstOrDefault().SaveAs(Path.Combine(path, bareFilename);
+            return null;
+        }
+        public ActionResult DragAndDrop()
+        {
+            return PartialView("DragAndDrop");
         }
 
     }
-    public class Empleado_imagen
+
+    public class DragAndDropSupportDemoBinder : DevExpressEditorsBinder {
+        public DragAndDropSupportDemoBinder() {
+            UploadControlBinderSettings.ValidationSettings.Assign(UploadControlDemosHelper.UploadValidationSettings);
+            UploadControlBinderSettings.FileUploadCompleteHandler = UploadControlDemosHelper.FileUploadComplete;
+        }
+    }
+    public class UploadControlDemosHelper
     {
         public static byte[] em_foto { get; set; }
         public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
@@ -362,7 +366,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             if (e.UploadedFile.IsValid)
             {
+
+
+
+
+
                 em_foto = e.UploadedFile.FileBytes;
+                var filename = Path.GetFileName(e.UploadedFile.FileName);
+                e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);
             }
         }
     }
@@ -390,6 +401,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
     }
+
+
 
 
 }
