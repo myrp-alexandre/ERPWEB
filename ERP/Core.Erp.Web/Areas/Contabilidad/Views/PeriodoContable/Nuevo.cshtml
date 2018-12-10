@@ -54,16 +54,16 @@
                         </div>
 
                         @Html.DevExpress().DateEditFor(q=> q.pe_FechaIni, settings =>
-                   {
-                       settings.Name = "pe_FechaIni";
-                       settings.Properties.UseMaskBehavior = true;
-                       settings.Properties.EditFormat = EditFormat.Date;
-                       settings.Properties.EditFormatString = "dd/MM/yyyy";
-                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       //settings.Properties.ClientSideEvents.DateChanged = "function(s,e){actualizar_periodo();}";                      
+                       {
+                           settings.Name = "pe_FechaIni";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           //settings.Properties.ClientSideEvents.DateChanged = "function(s,e){actualizar_periodo();}";                      
 
-                   }).GetHtml()
+                       }).GetHtml()
                         @Html.ValidationMessageFor(q => q.pe_FechaIni, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -77,16 +77,16 @@
                         </div>
 
                         @Html.DevExpress().DateEditFor(q=> q.pe_FechaFin, settings =>
-                   {
-                       settings.Name = "pe_FechaFin";
-                       settings.Properties.UseMaskBehavior = true;
-                       settings.Properties.EditFormat = EditFormat.Date;
-                       settings.Properties.EditFormatString = "dd/MM/yyyy";
-                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       //settings.Properties.ClientSideEvents.DateChanged = "function(s,e){actualizar_periodo();}";
+                       {
+                           settings.Name = "pe_FechaFin";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           //settings.Properties.ClientSideEvents.DateChanged = "function(s,e){actualizar_periodo();}";
 
-                   }).GetHtml()
+                       }).GetHtml()
                         @Html.ValidationMessageFor(q => q.pe_FechaFin, "", new { @class = "text-danger" })
                     </div>
                 </div>
