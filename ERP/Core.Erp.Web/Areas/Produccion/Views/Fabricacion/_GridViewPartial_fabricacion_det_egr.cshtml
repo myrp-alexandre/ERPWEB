@@ -93,11 +93,9 @@
             column.Width = Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
-
             });
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
-
     });
 }
 @grid.Bind(Model).GetHtml()

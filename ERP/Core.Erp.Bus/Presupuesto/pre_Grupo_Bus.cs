@@ -22,6 +22,18 @@ namespace Core.Erp.Bus.Presupuesto
             }
         }
 
+        public List<pre_Grupo_Info> GetList_x_Usuario(int IdEmpresa, string IdUsuario)
+        {
+            try
+            {
+                return odata.GetList_x_Usuario(IdEmpresa, IdUsuario);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public pre_Grupo_Info GetInfo(int IdEmpresa, int IdGrupo)
         {
             try

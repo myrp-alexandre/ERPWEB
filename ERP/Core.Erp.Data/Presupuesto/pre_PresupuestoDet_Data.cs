@@ -26,6 +26,7 @@ namespace Core.Erp.Data.Presupuesto
                         Descripcion = q.Descripcion,
                         IdCtaCble = q.IdCtaCble,
                         Cantidad = q.Cantidad,
+                        ValorUnitario = q.ValorUnitario,
                         Monto = q.Monto
                     }).ToList();
 

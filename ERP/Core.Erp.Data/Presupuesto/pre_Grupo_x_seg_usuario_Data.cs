@@ -62,6 +62,6 @@ namespace Core.Erp.Data.Presupuesto
             {
                 throw;
             }
-        }
+        }       
     }
 }

@@ -48,22 +48,29 @@
         {
             column.FieldName = "Descripcion";
             column.Caption = "Rubro";
-            column.Width = Unit.Percentage(60);
+            column.Width = Unit.Percentage(55);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Cantidad";
             column.Caption = "Cantidad";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ValorUnitario";
+            column.Caption = "Valor Unitario";
+            column.Width = Unit.Percentage(15);
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Monto";
             column.Caption = "Monto";
-            column.Width = Unit.Percentage(20);
-            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {

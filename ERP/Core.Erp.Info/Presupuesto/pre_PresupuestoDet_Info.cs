@@ -18,6 +18,7 @@ namespace Core.Erp.Info.Presupuesto
         [Required(ErrorMessage = ("El campo cantidad es obligatorio"))]
         public int Cantidad { get; set; }
         [Required(ErrorMessage = ("El campo monto es obligatorio"))]
+        public double ValorUnitario { get; set; }
         public double Monto { get; set; }
 
         public string Descripcion { get; set; }
