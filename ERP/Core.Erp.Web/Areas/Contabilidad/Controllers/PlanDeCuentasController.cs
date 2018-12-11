@@ -133,11 +133,29 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             };
             return View(model);
         }
+        [HttpPost]
+        public ActionResult Importar(ct_plancta_Info model)
+        {
+            var Lista = ListaPlancta.get_list(model.IdTransaccionSession);
+            foreach (var item in Lista)
+            {
+                bus_plancta.guardarDB(item);
+            }
+            return RedirectToAction("Index");
+        }
         public ActionResult GridViewPartial_plancta_importacion()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = ListaPlancta.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_plancta_importacion", model);
+        }
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -158,19 +176,25 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         };
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
-            int cont = 0;
-            decimal IdTransaccionSession = string.IsNullOrEmpty(HttpContext.Current.Request.Params["TransaccionFixed"].ToString()) ? 0 : Convert.ToDecimal(HttpContext.Current.Request.Params["TransaccionFixed"]);
-            int IdEmpresa = string.IsNullOrEmpty(HttpContext.Current.Request.Params["Empresa"].ToString()) ? 0 : Convert.ToInt32(HttpContext.Current.Request.Params["Empresa"]);
-
+            #region Variables
+            ct_anio_fiscal_List ListaAnioFiscal = new ct_anio_fiscal_List();
             ct_plancta_List ListaPlancta = new ct_plancta_List();
-            List<ct_plancta_Info> Lista = new List<ct_plancta_Info>();
+            List<ct_plancta_Info> ListaPlan = new List<ct_plancta_Info>();
+            List<ct_anio_fiscal_Info> ListaAnio = new List<ct_anio_fiscal_Info>();
+
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
+
 
             Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
-
             if (stream.Length > 0)
             {
                 IExcelDataReader reader = null;
                 reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                
+                #region Plan de cuentas                
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
@@ -188,12 +212,44 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                             pc_EsMovimiento = reader.GetString(6) == "SI" ? "S" : "N",
                             IdGrupoCble = reader.GetString(7)
                         };
-                        Lista.Add(info);
+                        listaplancta.Add(info);
                     }
                     else
                         cont++;
                 }
-                ListaPlancta.set_list(Lista,IdTransaccionSession);
+                #endregion
+
+                cont = 0;
+                //Para avanzar a la siguiente hoja de excel
+                reader.NextResult();
+
+                #region Cuentas contables por anio
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        ct_anio_fiscal_Info info = new ct_anio_fiscal_Info
+                        {
+                            
+                            IdanioFiscal = Convert.ToInt32(reader.GetValue(0)),
+                            af_fechaIni = new DateTime(Convert.ToInt32(reader.GetValue(0)), 1, 1),
+                            af_fechaFin = new DateTime(Convert.ToInt32(reader.GetValue(0)), 12, 31),
+                            info_anio_ctautil = new ct_anio_fiscal_x_cuenta_utilidad_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdCtaCble = reader.GetString(1),
+                                IdanioFiscal = Convert.ToInt32(reader.GetValue(0)),                                
+                            },                            
+                        };
+                        ListaAnio.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                #endregion
+
+                ListaPlancta.set_list(ListaPlan,IdTransaccionSession);
+                ListaAnioFiscal.set_list(ListaAnio, IdTransaccionSession);
             }
         }
     }
@@ -216,17 +272,5 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession] = list;
         }
-
-
-        public void UpdateRow(ct_plancta_Info info_det, decimal IdTransaccionSession)
-        {
-            ct_plancta_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdCtaCble == info_det.IdCtaCble).First();
-        }
-
-        public void DeleteRow(string IdCtaCble, decimal IdTransaccionSession)
-        {
-            List<ct_plancta_Info> list = get_list(IdTransaccionSession);
-            list.Remove(list.Where(m => m.IdCtaCble == IdCtaCble).First());
-        }
-    }
+    }    
 }

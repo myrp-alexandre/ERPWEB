@@ -4,6 +4,7 @@ using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
@@ -164,5 +165,25 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         }
 
         #endregion
+    }
+
+    public class ct_anio_fiscal_List
+    {
+        string Variable = "ct_anio_fiscal_Info";
+        public List<ct_anio_fiscal_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession] == null)
+            {
+                List<ct_anio_fiscal_Info> list = new List<ct_anio_fiscal_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession] = list;
+            }
+            return (List<ct_anio_fiscal_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession];
+        }
+
+        public void set_list(List<ct_anio_fiscal_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession] = list;
+        }
     }
 }

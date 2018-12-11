@@ -246,6 +246,10 @@ namespace Core.Erp.Data.Contabilidad
             {
                 using (Entities_contabilidad Context = new Entities_contabilidad())
                 {
+                    var plancta = Context.ct_plancta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCtaCble == info.IdCtaCble).FirstOrDefault();
+                    if (plancta != null)
+                        return false;
+
                     ct_plancta Entity = new ct_plancta
                     {
                         IdEmpresa = info.IdEmpresa,

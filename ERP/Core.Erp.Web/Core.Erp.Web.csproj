@@ -9483,6 +9483,7 @@
     <Content Include="Areas\Contabilidad\Views\PlanDeCuentas\Importar.cshtml" />
     <Content Include="Areas\Contabilidad\Views\PlanDeCuentas\_GridViewPartial_plancta_importacion.cshtml" />
     <Content Include="Areas\Produccion\Views\Fabricacion\Anular.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\PlanDeCuentas\_GridViewPartial_anio_fiscal_importacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
