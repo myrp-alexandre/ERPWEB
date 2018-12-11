@@ -1,12 +1,11 @@
 @using System.Web.UI.WebControls;
-@using Core.Erp.Web.Helps;
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_plancta";
-        settings.CallbackRouteValues = new { Controller = "PlanDeCuentas", Action = "GridViewPartial_plancta" };
+        settings.Name = "GridView_plancta_importacion";
+        settings.CallbackRouteValues = new { Controller = "PlanDeCuentas", Action = "GridViewPartial_plancta_importacion" };
         settings.KeyFieldName = "IdCtaCble";
-        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -49,56 +48,14 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        //Evento para pintar de rojo las filas anuladas
-        settings.HtmlRowPrepared = (s, e) =>
-        {
-            if (Convert.ToString(e.GetValue("pc_Estado")) == "I")
-            {
-                e.Row.ForeColor = System.Drawing.Color.Red;
-            }
-        };
-        settings.Columns.Add(c =>
-        {
-            c.Caption = "#";
-            c.SetDataItemTemplateContent(tc =>
-            {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "pc_Estado")) == "A")
-                {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdCtaCble = DataBinder.Eval(tc.DataItem, "IdCtaCble") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdCtaCble = DataBinder.Eval(tc.DataItem, "IdCtaCble") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                }
-            });
-            c.SetHeaderTemplateContent(tc =>
-            {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = SessionFixed.IdEmpresa }).ToHtmlString()
-                );
-            });
-            c.Settings.AllowDragDrop = DefaultBoolean.False;
-            c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = System.Web.UI.WebControls.Unit.Pixel(150);
-        });
+        
+        settings.Columns.Add("IdCtaCble","ID").Width = Unit.Percentage(20);
+        settings.Columns.Add("pc_Cuenta","Cuenta").Width = Unit.Percentage(40);
+        settings.Columns.Add("IdCtaCblePadre","ID padre").Width = Unit.Percentage(20);        
+        settings.Columns.Add("IdNivelCta","Nivel").Width = Unit.Percentage(10);
+        settings.Columns.Add("pc_EsMovimiento", "Tiene movimiento").Width = Unit.Percentage(10);
 
-        settings.Columns.Add("IdCtaCble","ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pc_Cuenta","Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(30);
-        settings.Columns.Add("IdCtaCblePadre","ID padre").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(30);
-        settings.Columns.Add("IdNivelCta","Nivel").Width = System.Web.UI.WebControls.Unit.Percentage(5);
-        settings.Columns.Add("pc_EsMovimiento", "Tiene movimiento").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EstadoBool";
-            column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
-            column.EditorProperties().CheckBox(sp =>
-            {
-
-            });
-        });
-
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }
 @grid.Bind(Model).GetHtml()

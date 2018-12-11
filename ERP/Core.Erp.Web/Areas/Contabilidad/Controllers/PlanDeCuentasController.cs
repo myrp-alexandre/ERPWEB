@@ -15,6 +15,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
     [SessionTimeout]
     public class PlanDeCuentasController : Controller
     {
+        ct_plancta_List ListaPlancta = new ct_plancta_List();
+
         #region Index
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         public ActionResult Index()
@@ -42,7 +44,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             var lst_grupo_contabe = bus_grupo_contable.get_list(false);
             ViewBag.lst_grupo_contabe = lst_grupo_contabe;
         }
-
         #endregion
 
         #region Acciones
@@ -124,6 +125,12 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             };
             return View(model);
         }
+        public ActionResult GridViewPartial_plancta_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaPlancta.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_plancta_importacion", model);
+        }
         #endregion
 
         public JsonResult get_info_nuevo(int IdEmpresa = 0, string IdCtaCble_padre = "")
@@ -144,8 +151,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
             int cont = 0;
-            var transaccion = HttpContext.Current.Request.Params["IdTransaccionSession"];
-            var empresa = HttpContext.Current.Request.Params["IdEmpresa"];
+            var transaccion = HttpContext.Current.Request.Params["TransaccionFixed"];
+            var empresa = HttpContext.Current.Request.Params["Empresa"];
             decimal IdTransaccionSession = string.IsNullOrEmpty(transaccion) ? 0 : Convert.ToDecimal(transaccion);
             int IdEmpresa = string.IsNullOrEmpty(empresa) ? 0 : Convert.ToInt32(empresa);
 
