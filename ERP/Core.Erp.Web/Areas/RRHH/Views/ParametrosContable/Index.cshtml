@@ -135,20 +135,20 @@
                     <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="genera_op_x_pago">Genera op al cerrar la nomina</label>
                                 @Html.DevExpress().CheckBoxFor(q => q.genera_op_x_pago, settings =>
-                                     {
-                                         settings.Name = "genera_op_x_pago";
-                                     }).GetHtml()
+                           {
+                               settings.Name = "genera_op_x_pago";
+                               settings.Text = "Genera op al cerrar la nomina";
+                           }).GetHtml()
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="Genera_op_x_pago_x_empleao">Genera orden de pago por empleado</label>
                                 @Html.DevExpress().CheckBoxFor(q => q.Genera_op_x_pago_x_empleao, settings =>
-                                   {
-                                       settings.Name = "Genera_op_x_pago_x_empleao";
-                                   }).GetHtml()
+                           {
+                               settings.Name = "Genera_op_x_pago_x_empleao";
+                               settings.Text = "Genera orden de pago por empleado";
+                           }).GetHtml()
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -180,11 +180,11 @@
                     <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="genera_op_x_pago">Genera OP al generar prestamos</label>
                                 @Html.DevExpress().CheckBoxFor(q => q.Genera_op_por_prestamos, settings =>
-                                     {
-                                         settings.Name = "Genera_op_por_prestamos";
-                                     }).GetHtml()
+                           {
+                               settings.Name = "Genera_op_por_prestamos";
+                               settings.Text = "Genera OP al generar prestamos";
+                           }).GetHtml()
                             </div>
                         </div>
 
@@ -218,11 +218,11 @@
                     <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="genera_op_x_pago">Genera OP al generar acta finiquito</label>
                                 @Html.DevExpress().CheckBoxFor(q => q.Genera_op_por_acta_finiquito, settings =>
-                                     {
-                                         settings.Name = "Genera_op_por_acta_finiquito";
-                                     }).GetHtml()
+                           {
+                               settings.Name = "Genera_op_por_acta_finiquito";
+                               settings.Text = "Genera OP al generar acta finiquito";
+                           }).GetHtml()
                             </div>
                         </div>
 
@@ -257,11 +257,11 @@
                     <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="genera_op_x_pago">Genera OP por liquidacion vacaciones</label>
                                 @Html.DevExpress().CheckBoxFor(q => q.Genera_op_por_liq_vacaciones, settings =>
-                                     {
-                                         settings.Name = "Genera_op_por_liq_vacaciones";
-                                     }).GetHtml()
+                           {
+                               settings.Name = "Genera_op_por_liq_vacaciones";
+                               settings.Text = "Genera OP por liquidacion vacaciones";
+                           }).GetHtml()
                             </div>
                         </div>
 
