@@ -22,6 +22,7 @@
         var selectedIDs;
         function OnBeginCallback(s, e) {
             e.customArgs["selectedIDs"] = selectedIDs;
+            e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
         };
         function OnSelectionChanged(s, e) {
             s.GetSelectedFieldValues("Secuencia", GetSelectedFieldValuesCallback);

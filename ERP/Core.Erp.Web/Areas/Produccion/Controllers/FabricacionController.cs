@@ -189,7 +189,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
                         pr_descripcion = cmp.pr_descripcion,
                         IdUnidadMedida = cmp.IdUnidadMedida,
                         Signo = "-",
-                        RealizaMovimiento = item.RealizaMovimiento
+                        RealizaMovimiento = true
                     }, IdTransaccionSession);
                 }
             }
@@ -406,7 +406,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
 
     public class pro_FabricacionDet_Fac
     {
-        string variable = "pro_FabricacionDet_Info";
+        string variable = "pro_FabricacionDet_Fac";
         public List<pro_FabricacionDet_Info> get_list_fact(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)

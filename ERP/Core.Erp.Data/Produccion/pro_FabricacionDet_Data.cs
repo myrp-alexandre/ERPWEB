@@ -58,10 +58,11 @@ namespace Core.Erp.Data.Produccion
                                   NombreUnidad = q.NombreUnidad,
                                   CantidadFabricada = q.CantidadFabricada,
                                   stock = q.stock,
-                                  IdUnidadMedida = q.IdUnidadMedida
-                                  
+                                  IdUnidadMedida = q.IdUnidadMedida,
+                                  Signo = "+"
                              }).ToList();
-                    
+                    int Secuencia = 1;
+                    Lista.ForEach(q => q.Secuencia = Secuencia++);
                 }
                 return Lista;
             }
