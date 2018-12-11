@@ -368,7 +368,6 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             List<pre_PresupuestoDet_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             info_det.IdRubro = info_det.IdRubro;
-            info_det.IdCtaCble = info_det.IdCtaCble;
             info_det.Cantidad = info_det.Cantidad;
             info_det.ValorUnitario = info_det.ValorUnitario;
             info_det.Monto = (info_det.Cantidad * info_det.ValorUnitario);
@@ -382,8 +381,8 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
             edited_info.IdRubro = info_det.IdRubro;
             edited_info.Descripcion = info_det.Descripcion;
             edited_info.Cantidad = info_det.Cantidad;
-            info_det.ValorUnitario = info_det.ValorUnitario;
-            info_det.Monto = (info_det.Cantidad * info_det.ValorUnitario);
+            edited_info.ValorUnitario = info_det.ValorUnitario;
+            edited_info.Monto = (info_det.Cantidad * info_det.ValorUnitario);
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)

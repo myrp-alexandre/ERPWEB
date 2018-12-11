@@ -334,7 +334,7 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        public bool aprobarOP(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
+        public bool aprobarOP(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdFormaPago, string IdUsuarioAprobacion)
         {
             try
             {
@@ -346,6 +346,11 @@ namespace Core.Erp.Data.CuentasPorPagar
                         cp_orden_pago Entity = Context.cp_orden_pago.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdOrdenPago == IdOrdenPagoAprobacion);
                         if (Entity != null)
                         {
+                            if (IdFormaPago!="")
+                            {
+                                Entity.IdFormaPago = IdFormaPago;
+                            }
+
                             Entity.IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString();
                             Entity.MotivoAprobacion = MotivoAprobacion;
                             Entity.IdUsuarioAprobacion = IdUsuarioAprobacion;

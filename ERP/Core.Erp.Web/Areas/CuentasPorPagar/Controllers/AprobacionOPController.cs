@@ -80,7 +80,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_AprobacionOP", model);
         }
 
-        public JsonResult aprobar(int IdEmpresa = 0, string Ids = "", string MotivoAprobacion="", string IdUsuarioAprobacion="")
+        public JsonResult aprobar(int IdEmpresa = 0, string Ids = "", string MotivoAprobacion="", string IdFormaPago="", string IdUsuarioAprobacion="")
         {
             string[] array = Ids.Split(',');
 
@@ -90,7 +90,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             else
             {
-                var resultado_orden = bus_orden_pago.aprobarOP(IdEmpresa, array, MotivoAprobacion, IdUsuarioAprobacion);
+                var resultado_orden = bus_orden_pago.aprobarOP(IdEmpresa, array, MotivoAprobacion, IdFormaPago, IdUsuarioAprobacion);
                 return Json(resultado_orden, JsonRequestBehavior.AllowGet);
             }
             

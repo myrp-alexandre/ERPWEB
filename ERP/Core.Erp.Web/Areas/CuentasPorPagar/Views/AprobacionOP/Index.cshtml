@@ -58,7 +58,7 @@
                                 @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio</label>
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class= "col-md-offset-1 col-md-4">
                         <div class="form-group">
                             <label for="IdSucursal">Forma de pago</label>
                             @Html.DevExpress().ComboBoxFor(q => q.IdFormaPago, settings =>
@@ -185,6 +185,7 @@
             IdEmpresa: $("#IdEmpresa").val(),
             IDs: selectedIDs,
             MotivoAprobacion: $("#MotivoAprobacion").val(),
+            IdFormaPago: IdFormaPago.GetValue(),
             IdUsuarioAprobacion: $("#IdUsuarioAprobacion").val()
             }
         $("#btn_aprobar").attr("disabled", true);

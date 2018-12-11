@@ -302,11 +302,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
         }
 
-        public bool aprobarOP(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdUsuarioAprobacion)
+        public bool aprobarOP(int IdEmpresa, string[] Lista, string MotivoAprobacion, string IdFormaPago, string IdUsuarioAprobacion)
         {
             try
             {
-                return oData.aprobarOP(IdEmpresa, Lista, MotivoAprobacion, IdUsuarioAprobacion);
+                return oData.aprobarOP(IdEmpresa, Lista, MotivoAprobacion, IdFormaPago, IdUsuarioAprobacion);
             }
             catch (Exception)
             {
