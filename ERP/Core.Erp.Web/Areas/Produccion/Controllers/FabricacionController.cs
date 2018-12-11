@@ -152,6 +152,7 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
         public ActionResult Anular(pro_Fabricacion_Info model)
         {
             model.IdUsuarioAnulacion = Session["IdUsuario"].ToString();
+              model.LstDet = List_det.get_list(model.IdTransaccionSession);
             if (!bus_fabricacion.AnularDB(model))
             {
                 cargar_combos(model.IdEmpresa);

@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Produccion.pro_Fabricacion_Info
 @{
-    ViewBag.Title = "Modificar fabricación";
+    ViewBag.Title = "Anular fabricación";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -8,162 +8,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-<script type="text/javascript">
-        $(function () {
-            CargarBodegaIngreso();
-            CargarBodegaEgreso();
-            $("#ing_IdSucursal").change(function () {
-                CargarBodegaIngreso();
-            });
-            $("#egr_IdSucursal").change(function () {
-                CargarBodegaEgreso();
-            });
-        });
-        var selectedIDs;
-        function OnBeginCallback(s, e) {
-            e.customArgs["selectedIDs"] = selectedIDs;
-            e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
-        };
-        function OnSelectionChanged(s, e) {
-            s.GetSelectedFieldValues("Secuencia", GetSelectedFieldValuesCallback);
-        };
-        function GetSelectedFieldValuesCallback(values) {
-            //Capture all selected keys
-            selectedIDs = values.join(',');
-        };
-
-        function CargarBodegaIngreso() {
-    $("#ing_IdBodega").empty();
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#ing_IdSucursal").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("CargarBodega", "Fabricacion", new { Area = "Produccion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            $.each(data, function (i, row) {
-                $("#ing_IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
-            });
-            },
-            error: function (error) {
-            }
-            });
-        };
-
-     function CargarBodegaEgreso() {
-    $("#egr_IdBodega").empty();
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#egr_IdSucursal").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("CargarBodega", "Fabricacion", new { Area = "Produccion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            $.each(data, function (i, row) {
-                $("#egr_IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
-            });
-            },
-            error: function (error) {
-            }
-            });
-     };
-
-    function ArmarMateriaPrima() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("ArmarMateriaPrima", "Fabricacion", new { Area = "Produccion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });
-        GridViewPartial_fabricacion_det_egr.PerformCallback();
-    }
-
-
-    function MostrarModalFacturas() {
-        BuscarFacturas();
-        $("#ModalFacturas").modal("show");
-    };
-    function BuscarFacturas() {
-        var datos = {
-            FechaIni: FechaIni.GetValue(),
-            FechaFin: FechaFin.GetValue(),
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#egr_IdSucursal").val(),
-            IdBodega: $("#egr_IdBodega").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetProductoFacturadosPorFecha", "Fabricacion", new { Area = "Produccion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data == false) {
-                    alert("No existen resultados para los filtros aplicados");
-                }
-            },
-            error: function (error) {
-            }
-        });
-        GridViewPartial_fabricacion_det_fac.PerformCallback();
-    };
-
-    function AddFacturas() {
-        var datos = {
-            IDs: selectedIDs,
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNew", "Fabricacion", new { Area = "Produccion" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });
-        selectedIDs = "";
-        GridViewPartial_fabricacion_det_fac.PerformCallback();
-        GridViewPartial_fabricacion_det_fac.UnselectRows();
-        GridViewPartial_fabricacion_det_ing.PerformCallback();
-        $("#ModalFacturas").modal("hide");
-    };
-</script>
 
 @using (Html.BeginForm("Anular", "Fabricacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -348,7 +192,7 @@
         <a class="btn btn-default" href="@Url.Action("Index", "Fabricacion", new { Area = "Produccion" }, null)">Cancelar</a>
     </div>
 
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
