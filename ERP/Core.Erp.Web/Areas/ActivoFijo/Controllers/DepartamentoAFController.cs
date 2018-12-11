@@ -29,12 +29,16 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         #region Acciones
         public ActionResult Nuevo()
         {
-            Af_Departamento_Info model = new Af_Departamento_Info();
+            Af_Departamento_Info model = new Af_Departamento_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(Af_Departamento_Info model)
         {
+            model.IdUsuarioCreacion = Session["IdUsuario"].ToString();
             if (!bus_dep.GuardarDB(model))
             {
                 return View(model);
@@ -53,6 +57,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Modificar(Af_Departamento_Info model)
         {
+            model.IdUsuarioModificacion = Session["IdUsuario"].ToString();
             if (!bus_dep.ModificarDB(model))
             {
                 return View(model);
@@ -70,6 +75,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Anular(Af_Departamento_Info model)
         {
+            model.IdUsuarioAnulacion = Session["IdUsuario"].ToString();
             if (!bus_dep.AnularDB(model))
             {
                 return View(model);

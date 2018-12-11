@@ -60,6 +60,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Nuevo(Af_Activo_fijo_Categoria_Info model)
         {
+            model.IdUsuario = Session["IdUsuario"].ToString();
             if (!bus_categoria.guardarDB(model))
             {
                 ViewBag.IdActivoFijoTipo = model.IdActivoFijoTipo;
