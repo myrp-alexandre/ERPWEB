@@ -1249,6 +1249,9 @@
     <Compile Include="ro_empleado_x_titulos.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_FormulaHorasRecargo.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_Historico_Liquidacion_Vacaciones.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1387,6 +1390,7 @@
     <Compile Include="RRHH\ro_empleado_x_ro_tipoNomina_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_rubro_acumulado_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_titulos_Data.cs" />
+    <Compile Include="RRHH\ro_FormulaHorasRecargo_Data.cs" />
     <Compile Include="RRHH\ro_Historico_Liquidacion_Vacaciones_Data.cs" />
     <Compile Include="RRHH\ro_Historico_Liquidacion_Vacaciones_Det_Data.cs" />
     <Compile Include="RRHH\ro_historico_vacaciones_x_empleado_Data.cs" />

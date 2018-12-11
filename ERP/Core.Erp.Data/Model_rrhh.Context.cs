@@ -122,6 +122,7 @@ namespace Core.Erp.Data
         public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
         public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
+        public DbSet<ro_FormulaHorasRecargo> ro_FormulaHorasRecargo { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
