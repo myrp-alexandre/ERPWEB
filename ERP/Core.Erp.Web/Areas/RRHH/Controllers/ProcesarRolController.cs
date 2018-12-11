@@ -129,7 +129,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 IdEmpresa = GetIdEmpresa();
                 ro_rol_Info model = bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
                 ViewBag.FechaCorte = DateTime.Now;
-                return View();
+                return View(model);
 
             }
             catch (Exception)
