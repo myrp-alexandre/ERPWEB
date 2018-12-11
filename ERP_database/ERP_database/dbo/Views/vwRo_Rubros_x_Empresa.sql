@@ -3,11 +3,11 @@ AS
 SELECT        dbo.ro_rubro_tipo.IdRubro, dbo.ro_rubro_tipo.rub_codigo, dbo.ro_rubro_tipo.ru_codRolGen, dbo.ro_rubro_tipo.ru_descripcion, dbo.ro_rubro_tipo.NombreCorto, 
                          dbo.ro_rubro_tipo.ru_tipo, dbo.ro_rubro_tipo.ru_estado, dbo.ro_rubro_tipo.ru_orden,  dbo.ro_rubro_tipo.IdUsuario, 
                          dbo.ro_rubro_tipo.Fecha_Transac, dbo.ro_rubro_tipo.IdUsuarioUltMod, dbo.ro_rubro_tipo.Fecha_UltMod, dbo.ro_rubro_tipo.IdUsuarioUltAnu, 
-                         dbo.ro_rubro_tipo.Fecha_UltAnu, dbo.ro_rubro_tipo.nom_pc, dbo.ro_rubro_tipo.ip, dbo.ro_rubro_tipo.rub_concep, dbo.ro_rubro_tipo.rub_tipcal, 
+                         dbo.ro_rubro_tipo.Fecha_UltAnu,   dbo.ro_rubro_tipo.rub_concep,  
                          
                          dbo.ro_rubro_tipo.rub_ctacon, dbo.ro_rubro_tipo.rub_grupo, 
-                         dbo.ro_rubro_tipo.rub_provision, dbo.ro_rubro_tipo.rub_noafecta,  dbo.ro_rubro_tipo.rub_nocontab, 
-                          dbo.ro_rubro_tipo.rub_guarda_rol, dbo.ro_rubro_tipo.rub_aplica_IESS
+                         dbo.ro_rubro_tipo.rub_provision,   dbo.ro_rubro_tipo.rub_nocontab, 
+                           dbo.ro_rubro_tipo.rub_aplica_IESS
 FROM            dbo.ro_rubro_tipo
 
 GO
