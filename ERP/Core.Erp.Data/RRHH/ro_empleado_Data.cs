@@ -232,8 +232,6 @@ namespace Core.Erp.Data.RRHH
                         Valor_horas_vespertina = info.Valor_horas_vespertina,
                         //Valor_horas_nocturna = info.Valor_horas_nocturna,
                         Valor_horas_matutino = info.Valor_horas_matutino,
-                       // Valor_maximo_horas = info.Valor_maximo_horas
-
                     };
                 }
 
@@ -329,9 +327,9 @@ namespace Core.Erp.Data.RRHH
                         Fecha_Transaccion = info.Fecha_Transaccion=DateTime.Now,
                         Pago_por_horas = info.Pago_por_horas,
                         Valor_horas_vespertina = info.Valor_horas_vespertina,
-                      //  Valor_horas_nocturna = info.Valor_horas_nocturna,
                         Valor_horas_matutino = info.Valor_horas_matutino,
-                       // Valor_maximo_horas = info.Valor_maximo_horas
+                        Valor_horas_matutino = info.Valor_horas_matutino,
+
 
                     };
                     Context.ro_empleado.Add(Entity);
@@ -396,6 +394,10 @@ namespace Core.Erp.Data.RRHH
                     Entity.Valor_horas_matutino = info.Valor_horas_matutino;
                     Entity.Valor_horas_vespertina = info.Valor_horas_vespertina;
                       //  Entity.Valor_maximo_horas = info.Valor_maximo_horas;
+                    //Entity.Valor_horas_nocturna = info.Valor_horas_nocturna;
+                    Entity.Valor_horas_matutino = info.Valor_horas_matutino;
+                    Entity.Valor_horas_vespertina = info.Valor_horas_vespertina;
+                        //Entity.Valor_maximo_horas = info.Valor_maximo_horas;
                         Entity.IdArea = info.IdArea    ;
                         Entity.IdDivision = info.IdDivision    ;
                         Entity.Fecha_UltMod = info.Fecha_UltMod  ;

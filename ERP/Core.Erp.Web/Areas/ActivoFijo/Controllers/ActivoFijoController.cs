@@ -27,6 +27,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         Af_Catalogo_Bus bus_catalogo = new Af_Catalogo_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         Af_Activo_fijo_CtaCble_List List_det = new Af_Activo_fijo_CtaCble_List();
+        Af_Departamento_Bus bus_dep = new Af_Departamento_Bus();
         #endregion
 
         #region Index
@@ -227,8 +228,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         #region Detalle
         private void cargar_combos_Detalle()
         {
-            var lst_catalogo = bus_catalogo.get_list(cl_enumeradores.eTipoCatalogoAF.TIP_CTACBLE.ToString(), false);
-            ViewBag.lst_catalogo = lst_catalogo;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_departamento = bus_dep.GetList(IdEmpresa, false);
+            ViewBag.lst_departamento = lst_departamento;
         }
         [ValidateInput(false)]
         public ActionResult GridViewPartial_activo_fijo_ctacble(int IdActivoFijo = 0)
@@ -303,7 +305,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         {
             List<Af_Activo_fijo_CtaCble_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-            info_det.IdCatalogo = info_det.IdCatalogo;
+            info_det.IdDepartamento = info_det.IdDepartamento;
             info_det.IdCtaCble = info_det.IdCtaCble;
             info_det.Porcentaje = info_det.Porcentaje;
             info_det.pc_Cuenta = info_det.pc_Cuenta;
@@ -317,7 +319,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             Af_Activo_fijo_CtaCble_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdActivoFijo = info_det.IdActivoFijo;
             edited_info.IdCtaCble = info_det.IdCtaCble;
-            edited_info.IdCatalogo = info_det.IdCatalogo;
+            edited_info.IdDepartamento = info_det.IdDepartamento;
             edited_info.Porcentaje = info_det.Porcentaje;
             edited_info.pc_Cuenta = info_det.pc_Cuenta;
         }
