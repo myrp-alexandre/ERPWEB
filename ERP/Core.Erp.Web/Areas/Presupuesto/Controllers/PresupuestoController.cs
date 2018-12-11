@@ -101,7 +101,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 var lst_Sucursal = bus_Sucursal.get_list(IdEmpresa, false);
                 ViewBag.lst_Sucursal = lst_Sucursal;
 
-                var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false);
+                var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false, false);
                 ViewBag.lst_Periodo = lst_Periodo;
 
                 var lst_Grupo = bus_Grupo.GetList_x_Usuario(IdEmpresa, SessionFixed.IdUsuario);
