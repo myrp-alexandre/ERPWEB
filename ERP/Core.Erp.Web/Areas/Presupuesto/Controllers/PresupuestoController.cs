@@ -275,7 +275,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] pre_PresupuestoDet_Info info_PresupuestoDet)
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            
+            info_PresupuestoDet.IdEmpresa = IdEmpresa;
             if (info_PresupuestoDet != null)
                 if (info_PresupuestoDet.IdRubro != 0)
                 {

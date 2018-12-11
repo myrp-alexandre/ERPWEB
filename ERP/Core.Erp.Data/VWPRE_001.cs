@@ -28,6 +28,7 @@ namespace Core.Erp.Data
         public string IdCtaCble { get; set; }
         public string pc_Cuenta { get; set; }
         public int Cantidad { get; set; }
+        public double ValorUnitario { get; set; }
         public double Monto { get; set; }
         public bool Estado { get; set; }
         public double MontoSolicitado { get; set; }

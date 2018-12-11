@@ -2511,6 +2511,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWPRE_001' no tiene definida ningu
             <PropertyRef Name="IdRubro" />
             <PropertyRef Name="DescripcionRubro" />
             <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="ValorUnitario" />
             <PropertyRef Name="Monto" />
             <PropertyRef Name="Estado" />
             <PropertyRef Name="MontoSolicitado" />
@@ -2530,6 +2531,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWPRE_001' no tiene definida ningu
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="ValorUnitario" Type="float" Nullable="false" />
           <Property Name="Monto" Type="float" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="MontoSolicitado" Type="float" Nullable="false" />
@@ -4947,6 +4949,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
     [VWPRE_001].[IdCtaCble] AS [IdCtaCble], 
     [VWPRE_001].[pc_Cuenta] AS [pc_Cuenta], 
     [VWPRE_001].[Cantidad] AS [Cantidad], 
+    [VWPRE_001].[ValorUnitario] AS [ValorUnitario], 
     [VWPRE_001].[Monto] AS [Monto], 
     [VWPRE_001].[Estado] AS [Estado], 
     [VWPRE_001].[MontoSolicitado] AS [MontoSolicitado], 
@@ -9303,6 +9306,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
             <PropertyRef Name="IdRubro" />
             <PropertyRef Name="DescripcionRubro" />
             <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="ValorUnitario" />
             <PropertyRef Name="Monto" />
             <PropertyRef Name="Estado" />
             <PropertyRef Name="MontoSolicitado" />
@@ -9322,6 +9326,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="pc_Cuenta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="ValorUnitario" Type="Double" Nullable="false" />
           <Property Name="Monto" Type="Double" Nullable="false" />
           <Property Name="Estado" Type="Boolean" Nullable="false" />
           <Property Name="MontoSolicitado" Type="Double" Nullable="false" />
@@ -12042,6 +12047,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
                 <ScalarProperty Name="MontoSolicitado" ColumnName="MontoSolicitado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
