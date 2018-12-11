@@ -119,9 +119,17 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         }
         public ActionResult Importar(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             ct_plancta_Info model = new ct_plancta_Info
             {
-                IdEmpresa = IdEmpresa
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             return View(model);
         }
@@ -151,10 +159,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
             int cont = 0;
-            var transaccion = HttpContext.Current.Request.Params["TransaccionFixed"];
-            var empresa = HttpContext.Current.Request.Params["Empresa"];
-            decimal IdTransaccionSession = string.IsNullOrEmpty(transaccion) ? 0 : Convert.ToDecimal(transaccion);
-            int IdEmpresa = string.IsNullOrEmpty(empresa) ? 0 : Convert.ToInt32(empresa);
+            decimal IdTransaccionSession = string.IsNullOrEmpty(HttpContext.Current.Request.Params["TransaccionFixed"].ToString()) ? 0 : Convert.ToDecimal(HttpContext.Current.Request.Params["TransaccionFixed"]);
+            int IdEmpresa = string.IsNullOrEmpty(HttpContext.Current.Request.Params["Empresa"].ToString()) ? 0 : Convert.ToInt32(HttpContext.Current.Request.Params["Empresa"]);
 
             ct_plancta_List ListaPlancta = new ct_plancta_List();
             List<ct_plancta_Info> Lista = new List<ct_plancta_Info>();
@@ -169,17 +175,17 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
-                        string cedua = reader.GetString(0);
                         ct_plancta_Info info = new ct_plancta_Info
                         {
                             IdEmpresa = IdEmpresa,
                             IdCtaCble = reader.GetString(0),
                             pc_clave_corta = reader.GetString(1),
                             pc_Cuenta = reader.GetString(2),
-                            IdCtaCblePadre = string.IsNullOrEmpty(reader.GetString(3)) ? null : reader.GetString(3),
+                            IdCtaCblePadre = reader.GetValue(3) == null ? null : (string.IsNullOrEmpty(reader.GetString(3)) ? null : reader.GetString(3)),
                             pc_Naturaleza = reader.GetString(4),
-                            IdNivelCta = Convert.ToInt32(reader.GetString(5)),
+                            IdNivelCta = Convert.ToInt32(reader.GetValue(5)),
                             pc_EsMovimiento_bool = reader.GetString(6) == "SI" ? true : false,
+                            pc_EsMovimiento = reader.GetString(6) == "SI" ? "S" : "N",
                             IdGrupoCble = reader.GetString(7)
                         };
                         Lista.Add(info);

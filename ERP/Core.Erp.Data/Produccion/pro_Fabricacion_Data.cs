@@ -105,7 +105,7 @@ namespace Core.Erp.Data.Produccion
         {
             try
             {
-                decimal ID = 0;
+                decimal ID = 1;
                 using (Entities_produccion Context = new Entities_produccion())
                 {
                     var lst = Context.pro_Fabricacion.Where(q => q.IdEmpresa == IdEmpresa).Select(q => q.IdFabricacion);

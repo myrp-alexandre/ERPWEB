@@ -4,6 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
+    function OnFileUploadComplete(s, e)
+    {
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+        e.customArgs['Empresa'] = $('#IdEmpresa').val();
+        GridView_plancta_importacion.PerformCallback();
+    }    
+</script>
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(q=> q.IdEmpresa, new { @id = "IdEmpresa"})
@@ -19,7 +27,7 @@
                settings.ShowUploadButton = true;
                settings.ShowProgressPanel = true;
                settings.NullText = "Selecciona el archivo...";
-               settings.ClientSideEvents.FileUploadComplete = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); e.customArgs['Empresa'] = $('#IdEmpresa').val(); GridView_plancta_importacion.PerformCallback(); }";
+               settings.ClientSideEvents.FileUploadComplete = "OnFileUploadComplete";
            }).GetHtml()
             </div>
         </div>
