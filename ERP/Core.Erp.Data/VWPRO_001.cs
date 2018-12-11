@@ -12,30 +12,29 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VWINV_014
+    public partial class VWPRO_001
     {
         public int IdEmpresa { get; set; }
-        public decimal IdConsignacion { get; set; }
-        public int IdSucursal { get; set; }
-        public string Su_Descripcion { get; set; }
-        public int IdBodega { get; set; }
-        public string bo_Descripcion { get; set; }
+        public decimal IdFabricacion { get; set; }
+        public int Secuencia { get; set; }
         public System.DateTime Fecha { get; set; }
-        public decimal IdProveedor { get; set; }
-        public decimal IdPersona { get; set; }
-        public string pr_codigo { get; set; }
-        public string pe_nombreCompleto { get; set; }
-        public string pe_apellido { get; set; }
-        public string pe_nombre { get; set; }
         public string Observacion { get; set; }
         public bool Estado { get; set; }
-        public string MotivoAnulacion { get; set; }
-        public int Secuencia { get; set; }
+        public string in_Su_Descripcion { get; set; }
+        public string in_bo_Descripcion { get; set; }
+        public string eg_Su_Descripcion { get; set; }
+        public string eg_bo_Descripcion { get; set; }
+        public string in_NombreTipo { get; set; }
+        public string eg_NombreTipo { get; set; }
+        public Nullable<decimal> egr_IdNumMovi { get; set; }
+        public Nullable<decimal> ing_IdNumMovi { get; set; }
+        public string Signo { get; set; }
         public decimal IdProducto { get; set; }
-        public string pr_descripcion { get; set; }
         public string IdUnidadMedida { get; set; }
         public double Cantidad { get; set; }
         public double Costo { get; set; }
-        public string ObservacionDet { get; set; }
+        public bool RealizaMovimiento { get; set; }
+        public string pr_descripcion { get; set; }
+        public string NombreUnidad { get; set; }
     }
 }
