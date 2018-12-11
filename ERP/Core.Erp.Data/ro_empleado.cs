@@ -33,6 +33,7 @@ namespace Core.Erp.Data
             this.ro_Historico_Liquidacion_Vacaciones = new HashSet<ro_Historico_Liquidacion_Vacaciones>();
             this.ro_historico_vacaciones_x_empleado = new HashSet<ro_historico_vacaciones_x_empleado>();
             this.ro_horario_planificacion_det = new HashSet<ro_horario_planificacion_det>();
+            this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
             this.ro_marcaciones_x_empleado = new HashSet<ro_marcaciones_x_empleado>();
             this.ro_nomina_x_horas_extras_det = new HashSet<ro_nomina_x_horas_extras_det>();
             this.ro_participacion_utilidad_empleado = new HashSet<ro_participacion_utilidad_empleado>();
@@ -41,7 +42,6 @@ namespace Core.Erp.Data
             this.ro_prestamo = new HashSet<ro_prestamo>();
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_Solicitud_Vacaciones_x_empleado = new HashSet<ro_Solicitud_Vacaciones_x_empleado>();
-            this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
         }
     
         public int IdEmpresa { get; set; }
@@ -130,6 +130,7 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_Historico_Liquidacion_Vacaciones> ro_Historico_Liquidacion_Vacaciones { get; set; }
         public virtual ICollection<ro_historico_vacaciones_x_empleado> ro_historico_vacaciones_x_empleado { get; set; }
         public virtual ICollection<ro_horario_planificacion_det> ro_horario_planificacion_det { get; set; }
+        public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
         public virtual ICollection<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
         public virtual ICollection<ro_nomina_x_horas_extras_det> ro_nomina_x_horas_extras_det { get; set; }
         public virtual ICollection<ro_participacion_utilidad_empleado> ro_participacion_utilidad_empleado { get; set; }
@@ -138,6 +139,5 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
-        public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
     }
 }
