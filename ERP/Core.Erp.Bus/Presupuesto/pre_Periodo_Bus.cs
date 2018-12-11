@@ -12,11 +12,11 @@ namespace Core.Erp.Bus.Presupuesto
     {
         pre_Periodo_Data oData = new pre_Periodo_Data();
 
-        public List<pre_Periodo_Info> GetList(int IdEmpresa, bool MostrarAnulado)
+        public List<pre_Periodo_Info> GetList(int IdEmpresa, bool MostrarAnulado, bool MostrarCerrado)
         {
             try
             {
-                return oData.GetList(IdEmpresa, MostrarAnulado);
+                return oData.GetList(IdEmpresa, MostrarAnulado, MostrarCerrado);
             }
             catch (Exception)
             {

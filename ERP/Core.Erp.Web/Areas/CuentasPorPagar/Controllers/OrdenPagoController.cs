@@ -229,6 +229,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             cp_orden_pago_Info model = new cp_orden_pago_Info();
             model = bus_orden_pago.get_info(IdEmpresa, IdOrdenPago);
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
             comprobante_contable_fp.set_list(model.info_comprobante.lst_ct_cbtecble_det);
             lis_cp_orden_pago_det_Info.set_list(model.detalle);
 
@@ -300,6 +301,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cp_orden_pago_Info model = new cp_orden_pago_Info();
             model = bus_orden_pago.get_info(IdEmpresa, IdOrdenPago);
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
             Session["ct_cbtecble_Info"] = model.info_comprobante;
             Session["lst_detalle"] = model.detalle;
             comprobante_contable_fp.set_list( model.info_comprobante.lst_ct_cbtecble_det);

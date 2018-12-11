@@ -11,7 +11,7 @@ namespace Core.Erp.Info.Presupuesto
     {
         public int IdEmpresa { get; set; }
         public int IdRubroTipo { get; set; }
-        [Required(ErrorMessage = "El campo motivo descripción es obligatorio")]
+        [Required(ErrorMessage = "El campo descripción es obligatorio")]
         [StringLength(500, MinimumLength = 4, ErrorMessage = "El campo motivo anulación  debe tener mínimo 4 caracteres y máximo 500")]
         public string Descripcion { get; set; }
         [Required(ErrorMessage = "El campo signo es obligatorio")]

@@ -9569,7 +9569,6 @@
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\" />
     <Folder Include="Content\videos\" />
-    <Folder Include="Views\PresupuestoReportes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

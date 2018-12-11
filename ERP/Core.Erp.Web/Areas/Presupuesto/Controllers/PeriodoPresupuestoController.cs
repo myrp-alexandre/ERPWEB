@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         public ActionResult GridViewPartial_Periodo()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<pre_Periodo_Info> model = bus_Periodo.GetList(IdEmpresa, true);
+            List<pre_Periodo_Info> model = bus_Periodo.GetList(IdEmpresa, true, true);
             return PartialView("_GridViewPartial_Periodo", model);
         }
         #endregion

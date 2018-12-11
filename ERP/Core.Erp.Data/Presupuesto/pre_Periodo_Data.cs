@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Presupuesto
 {
     public class pre_Periodo_Data
     {
-        public List<pre_Periodo_Info> GetList(int IdEmpresa, bool MostrarAnulado)
+        public List<pre_Periodo_Info> GetList(int IdEmpresa, bool MostrarAnulado, bool MostarCerrado)
         {
             try
             {
@@ -19,31 +19,66 @@ namespace Core.Erp.Data.Presupuesto
                 {
                     if (MostrarAnulado == false)
                     {
-                        Lista = db.pre_PresupuestoPeriodo.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa).Select(q => new pre_Periodo_Info
+                        if (MostarCerrado == false)
                         {
-                            IdPeriodo = q.IdPeriodo,
-                            IdEmpresa = q.IdEmpresa,
-                            DescripcionPeriodo = q.DescripciónPeriodo,
-                            Observacion = q.Observacion,
-                            FechaInicio = q.FechaInicio,
-                            FechaFin = q.FechaFin,
-                            EstadoCierre = q.EstadoCierre,
-                            Estado = q.Estado
-                        }).ToList();
+                            Lista = db.pre_PresupuestoPeriodo.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa && q.EstadoCierre == true).Select(q => new pre_Periodo_Info
+                            {
+                                IdPeriodo = q.IdPeriodo,
+                                IdEmpresa = q.IdEmpresa,
+                                DescripcionPeriodo = q.DescripciónPeriodo,
+                                Observacion = q.Observacion,
+                                FechaInicio = q.FechaInicio,
+                                FechaFin = q.FechaFin,
+                                EstadoCierre = q.EstadoCierre,
+                                Estado = q.Estado
+                            }).ToList();
+                        }
+                        else
+                        {
+                            Lista = db.pre_PresupuestoPeriodo.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa && q.EstadoCierre == false).Select(q => new pre_Periodo_Info
+                            {
+                                IdPeriodo = q.IdPeriodo,
+                                IdEmpresa = q.IdEmpresa,
+                                DescripcionPeriodo = q.DescripciónPeriodo,
+                                Observacion = q.Observacion,
+                                FechaInicio = q.FechaInicio,
+                                FechaFin = q.FechaFin,
+                                EstadoCierre = q.EstadoCierre,
+                                Estado = q.Estado
+                            }).ToList();
+                        }                        
                     }
                     else
                     {
-                        Lista = db.pre_PresupuestoPeriodo.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new pre_Periodo_Info
+                        if (MostarCerrado == false)
                         {
-                            IdPeriodo = q.IdPeriodo,
-                            IdEmpresa = q.IdEmpresa,
-                            DescripcionPeriodo = q.DescripciónPeriodo,
-                            Observacion = q.Observacion,
-                            FechaInicio = q.FechaInicio,
-                            FechaFin = q.FechaFin,
-                            EstadoCierre = q.EstadoCierre,
-                            Estado = q.Estado
-                        }).ToList();
+                            Lista = db.pre_PresupuestoPeriodo.Where(q => q.IdEmpresa == IdEmpresa && q.EstadoCierre == true).Select(q => new pre_Periodo_Info
+                            {
+                                IdPeriodo = q.IdPeriodo,
+                                IdEmpresa = q.IdEmpresa,
+                                DescripcionPeriodo = q.DescripciónPeriodo,
+                                Observacion = q.Observacion,
+                                FechaInicio = q.FechaInicio,
+                                FechaFin = q.FechaFin,
+                                EstadoCierre = q.EstadoCierre,
+                                Estado = q.Estado
+                            }).ToList();
+                        }
+                        else
+                        {
+                            Lista = db.pre_PresupuestoPeriodo.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new pre_Periodo_Info
+                            {
+                                IdPeriodo = q.IdPeriodo,
+                                IdEmpresa = q.IdEmpresa,
+                                DescripcionPeriodo = q.DescripciónPeriodo,
+                                Observacion = q.Observacion,
+                                FechaInicio = q.FechaInicio,
+                                FechaFin = q.FechaFin,
+                                EstadoCierre = q.EstadoCierre,
+                                Estado = q.Estado
+                            }).ToList();
+                        }
+                        
                     }
                 }
                 return Lista;

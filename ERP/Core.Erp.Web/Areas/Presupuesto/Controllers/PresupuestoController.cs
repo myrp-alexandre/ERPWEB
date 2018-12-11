@@ -80,7 +80,7 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 });
                 ViewBag.lst_Sucursal = lst_Sucursal;
 
-                var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false);
+                var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false, false);
 
                 lst_Periodo.Add(new Info.Presupuesto.pre_Periodo_Info
                 {
