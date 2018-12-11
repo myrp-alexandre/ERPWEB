@@ -368,7 +368,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 em_foto = e.UploadedFile.FileBytes;
                 var filename = Path.GetFileName(e.UploadedFile.FileName);
-               // e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);
+                e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);
             }
         }
     }

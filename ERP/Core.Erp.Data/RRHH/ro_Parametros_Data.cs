@@ -8,49 +8,6 @@ namespace Core.Erp.Data.RRHH
 {
     public class ro_Parametros_Data
     {
-        public List<ro_Parametros_Info> get_list(int IdEmpresa)
-        {
-            try
-            {
-                List<ro_Parametros_Info> Lista;
-
-                using (Entities_rrhh Context = new Entities_rrhh())
-                {
-                    Lista = (from q in Context.ro_Parametros
-                             where q.IdEmpresa == IdEmpresa
-                             select new ro_Parametros_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdTipoCbte_AsientoSueldoXPagar = q.IdTipoCbte_AsientoSueldoXPagar,                                 
-                                 GeneraOP_PagoPrestamos = q.GeneraOP_PagoPrestamos,
-                                 IdTipoOP_PagoPrestamos = q.IdTipoOP_PagoPrestamos,
-                                 IdFormaOP_PagoPrestamos = q.IdFormaOP_PagoPrestamos,
-                                 GeneraOP_LiquidacionVacaciones = q.GeneraOP_LiquidacionVacaciones,
-                                 IdTipoOP_LiquidacionVacaciones = q.IdTipoOP_LiquidacionVacaciones,
-                                 IdTipoFlujoOP_LiquidacionVacaciones = q.IdTipoFlujoOP_LiquidacionVacaciones,
-                                 IdFormaOP_LiquidacionVacaciones = q.IdFormaOP_LiquidacionVacaciones,
-                                 DescuentaIESS_LiquidacionVacaciones = q.DescuentaIESS_LiquidacionVacaciones,
-                                 cta_contable_IESS_Vacaciones = q.cta_contable_IESS_Vacaciones,
-                                 GeneraOP_ActaFiniquito = q.GeneraOP_ActaFiniquito,
-                                 IdTipoOP_ActaFiniquito = q.IdTipoOP_ActaFiniquito,
-                                 IdFormaPagoOP_ActaFiniquito = q.IdFormaPagoOP_ActaFiniquito,
-                                 Sueldo_basico=q.Sueldo_basico,
-                                 Porcentaje_aporte_patr=q.Porcentaje_aporte_patr,
-                                 Porcentaje_aporte_pers=q.Porcentaje_aporte_pers,
-                                 IdRubro_acta_finiquito=q.IdRubro_acta_finiquito,
-                                 Descripcion="Parametrización contable"
-
-                             }).ToList();
-                }
-
-                return Lista;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
         public ro_Parametros_Info get_info(int IdEmpresa)
         {
             try
@@ -66,23 +23,19 @@ namespace Core.Erp.Data.RRHH
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdTipoCbte_AsientoSueldoXPagar = q.IdTipoCbte_AsientoSueldoXPagar,
-                        GeneraOP_PagoPrestamos = q.GeneraOP_PagoPrestamos,
-                        IdTipoOP_PagoPrestamos = q.IdTipoOP_PagoPrestamos,
-                        IdFormaOP_PagoPrestamos = q.IdFormaOP_PagoPrestamos,
-                        GeneraOP_LiquidacionVacaciones = q.GeneraOP_LiquidacionVacaciones,
-                        IdTipoOP_LiquidacionVacaciones = q.IdTipoOP_LiquidacionVacaciones,
-                        IdTipoFlujoOP_LiquidacionVacaciones = q.IdTipoFlujoOP_LiquidacionVacaciones,
-                        IdFormaOP_LiquidacionVacaciones = q.IdFormaOP_LiquidacionVacaciones,
-                        DescuentaIESS_LiquidacionVacaciones = q.DescuentaIESS_LiquidacionVacaciones,
-                        cta_contable_IESS_Vacaciones = q.cta_contable_IESS_Vacaciones,
-                        GeneraOP_ActaFiniquito = q.GeneraOP_ActaFiniquito,
-                        IdTipoOP_ActaFiniquito = q.IdTipoOP_ActaFiniquito,
-                        IdFormaPagoOP_ActaFiniquito = q.IdFormaPagoOP_ActaFiniquito,
+                        Genera_op_por_acta_finiquito = q.Genera_op_por_acta_finiquito,
+                        Genera_op_por_liq_vacaciones = q.Genera_op_por_liq_vacaciones,
+                        Genera_op_por_prestamos = q.Genera_op_por_prestamos,
+                        genera_op_x_pago = q.genera_op_x_pago,
+                        Genera_op_x_pago_x_empleao = q.Genera_op_x_pago_x_empleao,
+                        IdTipo_op_acta_finiquito = q.IdTipo_op_acta_finiquito,
+                        IdTipo_op_sueldo_por_pagar = q.IdTipo_op_sueldo_por_pagar,
+                        IdTipo_op_prestamos = q.IdTipo_op_prestamos,
+                        IdTipo_op_vacaciones = q.IdTipo_op_vacaciones,
                         Sueldo_basico = q.Sueldo_basico,
                         Porcentaje_aporte_patr = q.Porcentaje_aporte_patr,
                         Porcentaje_aporte_pers = q.Porcentaje_aporte_pers,
                         IdRubro_acta_finiquito = q.IdRubro_acta_finiquito,
-                        Descripcion = "Parametrización contable"
                     };
                 }
 
@@ -126,27 +79,21 @@ namespace Core.Erp.Data.RRHH
                     ro_Parametros Entity = new ro_Parametros
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdTipoCbte_AsientoSueldoXPagar = info.IdTipoCbte_AsientoSueldoXPagar,
-                       
-                        GeneraOP_PagoPrestamos = info.GeneraOP_PagoPrestamos,
-                        IdTipoOP_PagoPrestamos = info.IdTipoOP_PagoPrestamos,
-                        IdFormaOP_PagoPrestamos = info.IdFormaOP_PagoPrestamos,
-                        GeneraOP_LiquidacionVacaciones = info.GeneraOP_LiquidacionVacaciones,
-                        IdTipoOP_LiquidacionVacaciones = info.IdTipoOP_LiquidacionVacaciones,
-                        IdTipoFlujoOP_LiquidacionVacaciones = info.IdTipoFlujoOP_LiquidacionVacaciones,
-                        IdFormaOP_LiquidacionVacaciones = info.IdFormaOP_LiquidacionVacaciones,
-                        DescuentaIESS_LiquidacionVacaciones = info.DescuentaIESS_LiquidacionVacaciones,
-                        cta_contable_IESS_Vacaciones = info.cta_contable_IESS_Vacaciones,
-                        GeneraOP_ActaFiniquito = info.GeneraOP_ActaFiniquito,
-                        IdTipoOP_ActaFiniquito = info.IdTipoOP_ActaFiniquito,
-                        IdFormaPagoOP_ActaFiniquito = info.IdFormaPagoOP_ActaFiniquito,
+                        IdTipoCbte_AsientoSueldoXPagar =Convert.ToInt32( info.IdTipoCbte_AsientoSueldoXPagar),
+                        Genera_op_por_acta_finiquito = info.Genera_op_por_acta_finiquito,
+                        Genera_op_por_liq_vacaciones = info.Genera_op_por_liq_vacaciones,
+                        Genera_op_por_prestamos = info.Genera_op_por_prestamos,
+                        genera_op_x_pago = info.genera_op_x_pago,
+                        Genera_op_x_pago_x_empleao = info.Genera_op_x_pago_x_empleao,
+                        IdTipo_op_acta_finiquito=info.IdTipo_op_acta_finiquito,
+                        IdTipo_op_sueldo_por_pagar=info.IdTipo_op_sueldo_por_pagar,
+                        IdTipo_op_prestamos=info.IdTipo_op_prestamos,
+                        IdTipo_op_vacaciones=info.IdTipo_op_vacaciones,
                         Sueldo_basico = info.Sueldo_basico,
                         Porcentaje_aporte_patr = info.Porcentaje_aporte_patr,
                         Porcentaje_aporte_pers = info.Porcentaje_aporte_pers,
                         IdRubro_acta_finiquito = info.IdRubro_acta_finiquito,
-                        genera_op_x_pago = info.genera_op_x_pago,
-                        Genera_op_x_pago_x_empleao = info.Genera_op_x_pago_x_empleao
-                };
+                    };
                     Context.ro_Parametros.Add(Entity);
                     Context.SaveChanges();
                 }
@@ -167,19 +114,16 @@ namespace Core.Erp.Data.RRHH
                     ro_Parametros Entity = Context.ro_Parametros.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa);
                     if (Entity == null)
                         return false;
-                    Entity.IdTipoCbte_AsientoSueldoXPagar = info.IdTipoCbte_AsientoSueldoXPagar;
-                    Entity.GeneraOP_PagoPrestamos = info.GeneraOP_PagoPrestamos;
-                    Entity.IdTipoOP_PagoPrestamos = info.IdTipoOP_PagoPrestamos;
-                    Entity.IdFormaOP_PagoPrestamos = info.IdFormaOP_PagoPrestamos;
-                    Entity.GeneraOP_LiquidacionVacaciones = info.GeneraOP_LiquidacionVacaciones;
-                    Entity.IdTipoOP_LiquidacionVacaciones = info.IdTipoOP_LiquidacionVacaciones;
-                    Entity.IdTipoFlujoOP_LiquidacionVacaciones = info.IdTipoFlujoOP_LiquidacionVacaciones;
-                    Entity.IdFormaOP_LiquidacionVacaciones = info.IdFormaOP_LiquidacionVacaciones;
-                    Entity.DescuentaIESS_LiquidacionVacaciones = info.DescuentaIESS_LiquidacionVacaciones;
-                    Entity.cta_contable_IESS_Vacaciones = info.cta_contable_IESS_Vacaciones;
-                    Entity.GeneraOP_ActaFiniquito = info.GeneraOP_ActaFiniquito;
-                    Entity.IdTipoOP_ActaFiniquito = info.IdTipoOP_ActaFiniquito;
-                    Entity.IdFormaPagoOP_ActaFiniquito = info.IdFormaPagoOP_ActaFiniquito;
+                    Entity.IdTipoCbte_AsientoSueldoXPagar =Convert.ToInt32( info.IdTipoCbte_AsientoSueldoXPagar);
+                    Entity.Genera_op_por_acta_finiquito = info.Genera_op_por_acta_finiquito;
+                    Entity.Genera_op_por_liq_vacaciones = info.Genera_op_por_liq_vacaciones;
+                    Entity.Genera_op_por_prestamos = info.Genera_op_por_prestamos;
+                    Entity.genera_op_x_pago = info.genera_op_x_pago;
+                    Entity.Genera_op_x_pago_x_empleao = info.Genera_op_x_pago_x_empleao;
+                    Entity.IdTipo_op_acta_finiquito = info.IdTipo_op_acta_finiquito;
+                    Entity.IdTipo_op_prestamos = info.IdTipo_op_prestamos;
+                    Entity.IdTipo_op_sueldo_por_pagar = info.IdTipo_op_sueldo_por_pagar;
+                    Entity.IdTipo_op_vacaciones = info.IdTipo_op_vacaciones;
                     Entity.Sueldo_basico = info.Sueldo_basico;
                     Entity.Porcentaje_aporte_pers = info.Porcentaje_aporte_pers;
                     Entity.Porcentaje_aporte_patr = info.Porcentaje_aporte_patr;

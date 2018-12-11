@@ -13,19 +13,14 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = "El campo tipo de asiento es obligatorio es obligatorio")]
 
         public Nullable<int> IdTipoCbte_AsientoSueldoXPagar { get; set; }
-        
-        public Nullable<bool> GeneraOP_PagoPrestamos { get; set; }
-        public string IdTipoOP_PagoPrestamos { get; set; }
-        public string IdFormaOP_PagoPrestamos { get; set; }
-        public Nullable<bool> GeneraOP_LiquidacionVacaciones { get; set; }
-        public string IdTipoOP_LiquidacionVacaciones { get; set; }
-        public Nullable<int> IdTipoFlujoOP_LiquidacionVacaciones { get; set; }
-        public string IdFormaOP_LiquidacionVacaciones { get; set; }
-        public Nullable<bool> DescuentaIESS_LiquidacionVacaciones { get; set; }
-        public string cta_contable_IESS_Vacaciones { get; set; }
-        public Nullable<bool> GeneraOP_ActaFiniquito { get; set; }
-        public string IdTipoOP_ActaFiniquito { get; set; }
-        public string IdFormaPagoOP_ActaFiniquito { get; set; }
+        public bool Genera_op_por_liq_vacaciones { get; set; }
+        public bool Genera_op_por_acta_finiquito { get; set; }
+        public bool Genera_op_por_prestamos { get; set; }
+        public string IdTipo_op_vacaciones { get; set; }
+        public string IdTipo_op_prestamos { get; set; }
+        public string IdTipo_op_acta_finiquito { get; set; }
+        public string IdTipo_op_sueldo_por_pagar { get; set; }
+
         public string Descripcion { get; set; }
         [RegularExpression(@"\d+(\.\d{1,4})?", ErrorMessage = "Ingrese solo numeros con máximo 4 decimal")]
         [Required(ErrorMessage = "El campo salario básico unificado es obligatorio")]
