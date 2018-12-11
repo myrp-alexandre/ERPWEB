@@ -342,6 +342,21 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Cerrar"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.Cerrar, settings =>
+               {
+                   settings.Name = "Cerrar";
+                   settings.Text = "Cerrar cambios";
+               }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.Cerrar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
             <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <a class="btn btn-default" href="@Url.Action("Index", "Fabricacion", new { Area = "Produccion" }, null)">Cancelar</a>

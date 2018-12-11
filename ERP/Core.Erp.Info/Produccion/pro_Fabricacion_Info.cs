@@ -42,6 +42,8 @@ namespace Core.Erp.Info.Produccion
         public DateTime FechaFin { get; set; }
         public List<pro_FabricacionDet_Info> LstDet { get; set; }
         public pro_FabricacionDet_Info info_det { get; set; }
+        public bool Cerrar { get; set; }
+
 
     }
 }

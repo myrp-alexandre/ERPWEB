@@ -129,7 +129,8 @@ namespace Core.Erp.Data.Produccion
             {
                 using (Entities_produccion Context = new Entities_produccion())
                 {
-                    #region Fab
+                    #region FAB
+                    #region CAB
                     Context.pro_Fabricacion.Add(new pro_Fabricacion
                     {
                         IdEmpresa = info.IdEmpresa,
@@ -149,7 +150,8 @@ namespace Core.Erp.Data.Produccion
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
                     });
-
+                    #endregion
+                    #region DET
                     if (info.LstDet.Count() > 0)
                     {
                         foreach (var item in info.LstDet)
@@ -167,42 +169,61 @@ namespace Core.Erp.Data.Produccion
                                 IdUnidadMedida = item.IdUnidadMedida
                             });
                         }
-
                     }
                     Context.SaveChanges();
                     #endregion
-                    //Entities_inventario dbi = new Entities_inventario();
-                    //in_Ing_Egr_Inven_Data odata_i = new in_Ing_Egr_Inven_Data();
-                    //var parametro = dbi.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                    //if (parametro != null)
-                    //    return true;
-                    
-                    //info.egr_IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_egresoBodegaOrigen;
-                    //var movi_egr = GenerarMoviInven(info);
-                    //if (movi_egr == null)
-                    //    return true;
+                    #endregion
+                    #region MOV
+                  
+                    if(info.Cerrar)
+                    {
+                        Entities_inventario dbi = new Entities_inventario();
+                        in_Ing_Egr_Inven_Data odata_i = new in_Ing_Egr_Inven_Data();
+                        var parametro = dbi.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                        if (parametro == null)
+                            return true;
+                        #region EGR
+                        info.egr_IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_elaboracion_egr;
+                        var movi_egr = GenerarMoviInven(info, "-");
+                        if (movi_egr == null)
+                            return true;
 
-                    //if (info.egr_IdNumMovi == null && odata_i.guardarDB(movi_egr, "-"))
-                    //{
-                    //    info.egr_IdNumMovi = movi_egr.IdNumMovi;
+                        if (info.egr_IdNumMovi == null && odata_i.guardarDB(movi_egr, "-"))
+                        {
+                            info.egr_IdNumMovi = movi_egr.IdNumMovi;
 
-                    //    var Entity = Context.pro_Fabricacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdFabricacion == info.IdFabricacion).FirstOrDefault();
-                    //    if (Entity == null)
-                    //        return true;
-                    //    Entity.egr_IdMovi_inven_tipo = info.egr_IdMovi_inven_tipo;
-                    //    Entity.egr_IdNumMovi = info.egr_IdNumMovi;
-                    //   Context.SaveChanges();
-                        
-                    //}
-                    
-                    //Context.Dispose();
-
+                            var Entity = Context.pro_Fabricacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdFabricacion == info.IdFabricacion).FirstOrDefault();
+                            if (Entity == null)
+                                return true;
+                            Entity.egr_IdMovi_inven_tipo = info.egr_IdMovi_inven_tipo;
+                            Entity.egr_IdNumMovi = info.egr_IdNumMovi;
+                            Context.SaveChanges();
+                        }
+                        #endregion
+                        #region ING
+                        info.ing_IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_elaboracion_ing;
+                        var movi_ing = GenerarMoviInven(info, "+");
+                        if (movi_ing == null)
+                            return true;
+                        if (info.ing_IdMovi_inven_tipo == null && odata_i.guardarDB(movi_ing, "+"))
+                        {
+                            info.ing_IdNumMovi = movi_ing.IdNumMovi;
+                            var Entity = Context.pro_Fabricacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdFabricacion == info.IdFabricacion).FirstOrDefault();
+                            if (Entity == null)
+                                return true;
+                            Entity.ing_IdMovi_inven_tipo = info.ing_IdMovi_inven_tipo;
+                            Entity.ing_IdNumMovi = info.ing_IdNumMovi;
+                            Context.SaveChanges();
+                        }
+                        #endregion
+                    }
+                    Context.Dispose();
+                    #endregion
                 }
                 return true;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -228,7 +249,6 @@ namespace Core.Erp.Data.Produccion
 
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
-
 
                     var detalle = Context.pro_FabricacionDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdFabricacion == info.IdFabricacion);
                     Context.pro_FabricacionDet.RemoveRange(detalle);
@@ -310,7 +330,9 @@ namespace Core.Erp.Data.Produccion
                         IdUsuario = info.IdUsuarioCreacion,
                         IdUsuarioUltModi = info.IdUsuarioModificacion,
                         IdMotivo_Inv = motivo.IdMotivo_Inv,
-                        lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>()
+                        lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>(),
+                        IdSucursal = Signo == "+" ? info.ing_IdSucursal : info.egr_IdSucursal,
+                        IdBodega = Signo == "+" ? info.ing_IdBodega : info.ing_IdBodega
                     };
                     int secuencia = 1;
                     foreach (var item in info.LstDet)
@@ -323,13 +345,13 @@ namespace Core.Erp.Data.Produccion
                         {
                             IdEmpresa = movi.IdEmpresa,
                             IdSucursal = movi.IdSucursal,
-                            IdBodega = (int)movi.IdBodega,
+                            IdBodega = Convert.ToInt32(movi.IdBodega),
                             IdMovi_inven_tipo = movi.IdMovi_inven_tipo,
                             IdNumMovi = 0,
                             Secuencia = secuencia++,
                             IdProducto = item.IdProducto,
                             dm_cantidad = item.Cantidad *(Signo =="-" ? -1 : 1),
-                            dm_cantidad_sinConversion = item.Cantidad * -1,
+                            dm_cantidad_sinConversion = item.Cantidad * (Signo == "-" ? -1 : 1),
                             mv_costo = 0,
                             mv_costo_sinConversion = 0,
                             IdUnidadMedida = producto.IdUnidadMedida_Consumo,

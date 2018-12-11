@@ -19,7 +19,6 @@ namespace Core.Erp.Bus.Produccion
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -43,7 +42,6 @@ namespace Core.Erp.Bus.Produccion
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -67,7 +65,6 @@ namespace Core.Erp.Bus.Produccion
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
