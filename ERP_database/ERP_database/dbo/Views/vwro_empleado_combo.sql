@@ -1,8 +1,8 @@
 ﻿CREATE VIEW dbo.vwro_empleado_combo
 AS
 SELECT        dbo.tb_persona.pe_apellido + ' ' + dbo.tb_persona.pe_nombre AS Empleado, dbo.tb_persona.pe_cedulaRuc, dbo.ro_empleado.em_status, dbo.ro_empleado.IdEmpresa, dbo.ro_empleado.IdEmpleado, dbo.ro_contrato.IdNomina, 
-                         dbo.ro_empleado.IdSucursal, dbo.ro_empleado.Pago_por_horas,  dbo.ro_empleado.Valor_horas_vespertina, dbo.ro_empleado.Valor_horas_matutino, 
-                          dbo.ro_empleado.Tiene_ingresos_compartidos
+                         dbo.ro_empleado.IdSucursal, dbo.ro_empleado.Pago_por_horas, dbo.ro_empleado.Valor_horas_vespertina, dbo.ro_empleado.Valor_horas_matutino, dbo.ro_empleado.Tiene_ingresos_compartidos, 
+                         dbo.ro_empleado.Valor_maximo_horas_vesp, dbo.ro_empleado.Valor_maximo_horas_mat, dbo.ro_empleado.Valor_horas_brigada, dbo.ro_empleado.Valor_horas_extras
 FROM            dbo.ro_empleado INNER JOIN
                          dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
                          dbo.ro_contrato ON dbo.ro_empleado.IdEmpresa = dbo.ro_contrato.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_contrato.IdEmpleado
@@ -14,7 +14,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[56] 4[5] 2[8] 3) )"
+         Configuration = "(H (1[23] 4[5] 2[43] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -88,7 +88,7 @@ Begin DesignProperties =
                Right = 553
             End
             DisplayFlags = 280
-            TopColumn = 48
+            TopColumn = 50
          End
          Begin Table = "tb_persona"
             Begin Extent = 
@@ -148,6 +148,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_combo';
+
+
 
 
 
