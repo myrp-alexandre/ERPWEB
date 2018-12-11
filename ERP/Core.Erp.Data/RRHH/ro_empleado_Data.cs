@@ -328,7 +328,7 @@ namespace Core.Erp.Data.RRHH
                         Pago_por_horas = info.Pago_por_horas,
                         Valor_horas_vespertina = info.Valor_horas_vespertina,
                         Valor_horas_matutino = info.Valor_horas_matutino,
-                        Valor_horas_matutino = info.Valor_horas_matutino,
+                       // Valor_horas_matutino = info.Valor_horas_matutino,
 
 
                     };
