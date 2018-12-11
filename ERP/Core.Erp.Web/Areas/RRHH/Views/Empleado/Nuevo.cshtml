@@ -1,4 +1,5 @@
-﻿@model Core.Erp.Info.RRHH.ro_empleado_Info
+﻿@using System.Web.UI.WebControls;
+@model Core.Erp.Info.RRHH.ro_empleado_Info
 @{
     ViewBag.Title = "Nuevo empleado";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -587,7 +588,7 @@
 
 
 
-            
+
 
             </div>
 
@@ -722,31 +723,83 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" id="tb_info_foto">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
 
-
-                            @Html.DevExpress().BinaryImage(
-                            settings =>
-                            {
-                                settings.Name = "em_foto";
-                                settings.CallbackRouteValues = new { Controller = "Empleado", Action = "get_imagen" };
-                            }).Bind((Model.em_foto).ToArray()).GetHtml()
-
-
-                            @Html.DevExpress().UploadControl(settings =>
-                       {
-
-                           settings.Name = "UploadControl";
-                           settings.CallbackRouteValues = new { Controller = "Empleado", Action = "UploadControlUpload" };
-                           settings.ShowUploadButton = true;
-                           settings.ShowProgressPanel = true;
-                       }).GetHtml()
-
-                        </div>
+                <script type="text/javascript">
+                    function onUploadControlFileUploadComplete(s, e) {
+                        if (e.isValid)
+                            $("#uploadedImage").attr("src", e.callbackData);
+                        setElementVisible("uploadedImage", e.isValid);
+                    }
+                    function onImageLoad() {
+                        var externalDropZone = $("#externalDropZone");
+                        var uploadedImage = $("#uploadedImage");
+                        uploadedImage.css({
+                            left: (externalDropZone.width() - uploadedImage.width()) / 4,
+                            top: (externalDropZone.height() - uploadedImage.height()) / 4
+                        });
+                        setElementVisible("dragZone", false);
+                    }
+                    function setElementVisible(elementId, visible) {
+                        var el = $("#" + elementId);
+                        if (visible)
+                            el.show();
+                        else
+                            el.hide();
+                    }
+                </script>
+                <div id="externalDropZone" class="dropZoneExternal">
+                    <div id="dragZone">
+                        <span class="dragZoneText">Seleccione una foto</span>
+                    </div>
+                    <img id="uploadedImage" src="#" alt="" style="display: none" onload="onImageLoad()" />
+                    <div id="dropZone" style="display: none">
+                        <span class="dropZoneText">Drop an image here</span>
                     </div>
                 </div>
+
+                <div class="uploadContainer">
+                    @Html.DevExpress().UploadControl(settings => {
+                   settings.ShowProgressPanel = true;
+                   settings.CallbackRouteValues = new { Controller = "Empleado", Action = "DragAndDropImageUpload" };
+                   settings.Name = "ucDragAndDrop";
+                   settings.UploadMode = UploadControlUploadMode.Auto;
+                   settings.AutoStartUpload = true;
+                   settings.Width = Unit.Percentage(100);
+                   settings.DialogTriggerID = "externalDropZone";
+                   settings.AdvancedModeSettings.EnableDragAndDrop = true;
+                   settings.AdvancedModeSettings.EnableFileList = false;
+                   settings.AdvancedModeSettings.EnableMultiSelect = false;
+                   settings.AdvancedModeSettings.ExternalDropZoneID = "externalDropZone";
+                   settings.AdvancedModeSettings.DropZoneText = "";
+                   settings.ValidationSettings.MaxFileSize = 4194304;
+                   settings.ValidationSettings.AllowedFileExtensions = new string[] {".jpg", ".jpeg", ".gif", ".png"};
+                   settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
+                   settings.BrowseButton.Text = "Select an image for upload...";
+                   settings.Styles.DropZone.CssClass = "uploadControlDropZone";
+                   settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
+                   settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
+                   settings.ClientSideEvents.FileUploadComplete = "onUploadControlFileUploadComplete";
+               }).GetHtml()
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
 
@@ -761,6 +814,8 @@
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/bootstrap_imagenes.css")" />
+
     }
 
 }
