@@ -19,13 +19,12 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_plancta()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             List<ct_plancta_Info> model = bus_plancta.get_list(IdEmpresa, true, false);
             return PartialView("_GridViewPartial_plancta", model);
         }
-        private void cargar_combos()
+        private void cargar_combos(int IdEmpresa)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             var lst_cuentas = bus_plancta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cuentas = lst_cuentas;
 
@@ -40,37 +39,39 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         }
 
         #endregion
+
         #region Acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            ct_plancta_Info model = new ct_plancta_Info();
-            cargar_combos();
+            ct_plancta_Info model = new ct_plancta_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(ct_plancta_Info model)
         {
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (bus_plancta.validar_existe_id(model.IdEmpresa,model.IdCtaCble))
             {
                 ViewBag.mensaje = "El código de la cuenta ya se encuentra registrado";
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             if (!bus_plancta.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(string IdCtaCble = "")
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+        public ActionResult Modificar(int IdEmpresa = 0, string IdCtaCble = "")
+        {   
             ct_plancta_Info model = bus_plancta.get_info(IdEmpresa, IdCtaCble);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -78,18 +79,17 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         {
             if (!bus_plancta.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(string IdCtaCble = "")
+        public ActionResult Anular(int IdEmpresa = 0, string IdCtaCble = "")
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ct_plancta_Info model = bus_plancta.get_info(IdEmpresa, IdCtaCble);
             if (model == null)
                 return RedirectToAction("Index");
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -97,7 +97,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         {
             if (!bus_plancta.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -105,10 +105,12 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         #endregion
 
-        public JsonResult get_info_nuevo(string IdCtaCble_padre = "")
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+        #region Importacion
 
+        #endregion
+
+        public JsonResult get_info_nuevo(int IdEmpresa = 0, string IdCtaCble_padre = "")
+        {
             var resultado = bus_plancta.get_info_nuevo(IdEmpresa, IdCtaCble_padre);
             
             return Json(resultado, JsonRequestBehavior.AllowGet);

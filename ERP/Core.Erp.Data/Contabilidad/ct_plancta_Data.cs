@@ -115,6 +115,7 @@ namespace Core.Erp.Data.Contabilidad
                                  orderby q.IdCtaCble
                                  select new ct_plancta_Info
                                  {
+                                     IdEmpresa = q.IdEmpresa,
                                      IdCtaCble = q.IdCtaCble,
                                      pc_Cuenta = q.pc_Cuenta,
                                      IdCtaCblePadre = q.IdCtaCblePadre,
@@ -138,6 +139,7 @@ namespace Core.Erp.Data.Contabilidad
                                  orderby q.IdCtaCble
                                  select new ct_plancta_Info
                                  {
+                                     IdEmpresa = q.IdEmpresa,
                                      IdCtaCble = q.IdCtaCble,
                                      pc_Cuenta = q.pc_Cuenta,
                                      IdCtaCblePadre = q.IdCtaCblePadre,
@@ -159,6 +161,7 @@ namespace Core.Erp.Data.Contabilidad
                                  orderby q.IdCtaCble
                                  select new ct_plancta_Info
                                  {
+                                     IdEmpresa = q.IdEmpresa,
                                      IdCtaCble = q.IdCtaCble,
                                      pc_Cuenta = q.pc_Cuenta,
                                      IdCtaCblePadre = q.IdCtaCblePadre,
@@ -180,6 +183,7 @@ namespace Core.Erp.Data.Contabilidad
                                  orderby q.IdCtaCble
                                  select new ct_plancta_Info
                                  {
+                                     IdEmpresa = q.IdEmpresa,
                                      IdCtaCble = q.IdCtaCble,
                                      pc_Cuenta = q.pc_Cuenta,
                                      IdCtaCblePadre = q.IdCtaCblePadre,
