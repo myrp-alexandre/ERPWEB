@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Presupuesto.pre_Presupuesto_Info
 @{
-    ViewBag.Title = "Anular presupuesto";
+    ViewBag.Title = "Aprobación de presupuesto";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -33,7 +33,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdPeriodo">Periodo*</label>
-                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_Periodo, "IdPeriodo", "Periodo"), new { @class = "form-control", @id = "IdPeriodo" })
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_Periodo, "IdPeriodo", "DescripcionPeriodo"), new { @class = "form-control", @id = "IdPeriodo" })
                     @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>

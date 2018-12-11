@@ -21,7 +21,7 @@ namespace Core.Erp.Data.Presupuesto
                     {
                         if (MostarCerrado == false)
                         {
-                            Lista = db.pre_PresupuestoPeriodo.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa && q.EstadoCierre == true).Select(q => new pre_Periodo_Info
+                            Lista = db.pre_PresupuestoPeriodo.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa && q.EstadoCierre == false).Select(q => new pre_Periodo_Info
                             {
                                 IdPeriodo = q.IdPeriodo,
                                 IdEmpresa = q.IdEmpresa,
@@ -35,7 +35,7 @@ namespace Core.Erp.Data.Presupuesto
                         }
                         else
                         {
-                            Lista = db.pre_PresupuestoPeriodo.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa && q.EstadoCierre == false).Select(q => new pre_Periodo_Info
+                            Lista = db.pre_PresupuestoPeriodo.Where(q => q.Estado == true && q.IdEmpresa == IdEmpresa && q.EstadoCierre == true).Select(q => new pre_Periodo_Info
                             {
                                 IdPeriodo = q.IdPeriodo,
                                 IdEmpresa = q.IdEmpresa,
@@ -52,7 +52,7 @@ namespace Core.Erp.Data.Presupuesto
                     {
                         if (MostarCerrado == false)
                         {
-                            Lista = db.pre_PresupuestoPeriodo.Where(q => q.IdEmpresa == IdEmpresa && q.EstadoCierre == true).Select(q => new pre_Periodo_Info
+                            Lista = db.pre_PresupuestoPeriodo.Where(q => q.IdEmpresa == IdEmpresa && q.EstadoCierre == false).Select(q => new pre_Periodo_Info
                             {
                                 IdPeriodo = q.IdPeriodo,
                                 IdEmpresa = q.IdEmpresa,
