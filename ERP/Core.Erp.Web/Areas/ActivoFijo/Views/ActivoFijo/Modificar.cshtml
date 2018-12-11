@@ -23,7 +23,7 @@
                     @Html.ValidationMessageFor(q => q.CodActivoFijo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="Af_Codigo_Barra">Código de barra</label>
                     @Html.TextBoxFor(q => q.Af_Codigo_Barra, new { @class = "form-control" })
@@ -61,26 +61,19 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdSucursal, settings =>
-               {
-                   settings.Name = "IdSucursal";
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                   settings.Properties.Columns.Add("IdSucursal", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Su_Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                   //Campo ID
-                   settings.Properties.ValueField = "IdSucursal";
-                   settings.Properties.ValueType = typeof(int);
-                   settings.Properties.TextField = "Su_Descripcion";
-                   //Boton para seleccionar ningun registro
-                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                   settings.Properties.NullText = "== Seleccione ==";
-                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-               }).BindList(ViewBag.lst_sucursal).GetHtml()
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdDepartamento">Departamento</label>
+                    @Html.DropDownListFor(q => q.IdDepartamento, new SelectList(ViewBag.lst_departamento, "IdDepartamento", "Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdDepartamento, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -111,24 +104,6 @@
                     <label for="Af_Nombre">Nombre*</label>
                     @Html.TextBoxFor(q => q.Af_Nombre, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Af_Nombre, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Af_DescripcionCorta">Descripción corta</label>
-                    @Html.TextBoxFor(q => q.Af_DescripcionCorta, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Af_DescripcionCorta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Af_DescripcionTecnica">Descripción técnica</label>
-                    @Html.TextBoxFor(q => q.Af_DescripcionTecnica, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Af_DescripcionTecnica, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -240,20 +215,6 @@
                                 @Html.ValidationMessageFor(q => q.Af_Depreciacion_acum, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_Costo_historico">Costo histórico</label>
-                                @Html.TextBoxFor(q => q.Af_Costo_historico, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_Costo_historico, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_ValorResidual">Valor residual</label>
-                                @Html.TextBoxFor(q => q.Af_ValorResidual, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_ValorResidual, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -289,36 +250,12 @@
                                 @Html.ValidationMessageFor(q => q.IdTipoCatalogo_Ubicacion, "", new { @class = "text-danger", @id = "pe_cedulaRuc" })
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
+
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="Af_NumPlaca">Número de placa</label>
                                 @Html.TextBoxFor(q => q.Af_NumPlaca, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.Af_NumPlaca, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_Anio_fabrica">Año de fabrica</label>
-                                @Html.TextBoxFor(q => q.Af_Anio_fabrica, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_Anio_fabrica, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_NumSerie_Motor">Serie de motor</label>
-                                @Html.TextBoxFor(q => q.Af_NumSerie_Motor, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_NumSerie_Motor, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_NumSerie_Chasis">Número de chasis</label>
-                                @Html.TextBoxFor(q => q.Af_NumSerie_Chasis, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_NumSerie_Chasis, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

@@ -87,6 +87,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         #region Metodos
         private void cargar_combos(int IdEmpresa, int IdActivoFijoTipo = 0)
         {
+            var lst_departamento = bus_dep.GetList(IdEmpresa, false);
+            ViewBag.lst_departamento = lst_departamento;
+
             var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
 
