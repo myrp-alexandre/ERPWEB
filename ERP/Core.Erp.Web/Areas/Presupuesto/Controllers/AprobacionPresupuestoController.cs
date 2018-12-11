@@ -75,7 +75,7 @@ namespace Core.Erp.Web.Areas.Presupuesto
                 });
                 ViewBag.lst_Sucursal = lst_Sucursal;
 
-                var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false);
+                var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false, false);
 
                 lst_Periodo.Add(new Info.Presupuesto.pre_Periodo_Info
                 {
@@ -97,7 +97,7 @@ namespace Core.Erp.Web.Areas.Presupuesto
                 var lst_Sucursal = bus_Sucursal.get_list(IdEmpresa, false);
                 ViewBag.lst_Sucursal = lst_Sucursal;
 
-                var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false);
+                var lst_Periodo = bus_Periodo.GetList(IdEmpresa, false, false);
                 ViewBag.lst_Periodo = lst_Periodo;
 
                 var lst_Grupo = bus_Grupo.GetList(IdEmpresa, false);
