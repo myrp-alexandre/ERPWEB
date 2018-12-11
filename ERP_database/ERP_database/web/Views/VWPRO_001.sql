@@ -1,4 +1,4 @@
-﻿CREATE VIEW VWPRO_001
+﻿create VIEW web.VWPRO_001
 AS
 SELECT        d.IdEmpresa, d.IdFabricacion, d.Secuencia, c.Fecha, c.Observacion, c.Estado, in_su.Su_Descripcion AS in_Su_Descripcion, in_bo.bo_Descripcion AS in_bo_Descripcion, eg_su.Su_Descripcion AS eg_Su_Descripcion, 
                          eg_bo.bo_Descripcion AS eg_bo_Descripcion, in_ti.tm_descripcion AS in_NombreTipo, eg_ti.tm_descripcion AS eg_NombreTipo, c.egr_IdNumMovi, c.ing_IdNumMovi, d.Signo, d.IdProducto, d.IdUnidadMedida, d.Cantidad, 
