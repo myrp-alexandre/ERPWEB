@@ -27,40 +27,117 @@
     @Html.HiddenFor(q => q.IdEmpleado);
     <div class="row">
         <div class="col-md-12">
-            @*<div class="col-md-2" height = "100"  width = "100"  style = "border:solid">
-                    <label for="foto">Foto*</label>
-                    <div class="form-group">
-                        @Html.EditorFor(q => q.em_foto,  new { @class = "form-control" })
+
+
+            <div class="col-md-2">
+
+
+
+                <script type="text/javascript">
+                    function onUploadControlFileUploadComplete(s, e) {
+                        if (e.isValid)
+                            $("#uploadedImage").attr("src", e.callbackData);
+                        setElementVisible("uploadedImage", e.isValid);
+                    }
+                    function onImageLoad() {
+                        var externalDropZone = $("#externalDropZone");
+                        var uploadedImage = $("#uploadedImage");
+                        uploadedImage.css({
+                            left: (externalDropZone.width() - uploadedImage.width()) / 4,
+                            top: (externalDropZone.height() - uploadedImage.height()) / 4
+                        });
+                        setElementVisible("dragZone", false);
+                    }
+                    function setElementVisible(elementId, visible) {
+                        var el = $("#" + elementId);
+                        if (visible)
+                            el.show();
+                        else
+                            el.hide();
+                    }
+                </script>
+                <div id="externalDropZone" class="dropZoneExternal">
+                    <div id="dragZone">
+                        <span class="dragZoneText">Seleccione una foto</span>
                     </div>
-                </div>*@
+                    <img id="uploadedImage" src="#" alt="" style="display: none" onload="onImageLoad()" />
+                    <div id="dropZone" style="display: none">
+                        <span class="dropZoneText">Drop an image here</span>
+                    </div>
+                </div>
+
+                <div class="uploadContainer">
+                    @Html.DevExpress().UploadControl(settings => {
+                   settings.ShowProgressPanel = true;
+                   settings.CallbackRouteValues = new { Controller = "Empleado", Action = "DragAndDropImageUpload" };
+                   settings.Name = "ucDragAndDrop";
+                   settings.UploadMode = UploadControlUploadMode.Auto;
+                   settings.AutoStartUpload = true;
+                   settings.Width = Unit.Percentage(70);
+                   settings.DialogTriggerID = "externalDropZone";
+                   settings.AdvancedModeSettings.EnableDragAndDrop = true;
+                   settings.AdvancedModeSettings.EnableFileList = false;
+                   settings.AdvancedModeSettings.EnableMultiSelect = false;
+                   settings.AdvancedModeSettings.ExternalDropZoneID = "externalDropZone";
+                   settings.AdvancedModeSettings.DropZoneText = "";
+                   settings.ValidationSettings.MaxFileSize = 4194304;
+                   settings.ValidationSettings.AllowedFileExtensions = new string[] {".jpg", ".jpeg", ".gif", ".png"};
+                   settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
+                  // settings.BrowseButton.Text = "Select an image for upload...";
+                   settings.Styles.DropZone.CssClass = "uploadControlDropZone";
+                   settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
+                   settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
+                   settings.ClientSideEvents.FileUploadComplete = "onUploadControlFileUploadComplete";
+               }).GetHtml()
+                </div>
+
+            </div>
 
 
-            <div class="col-md-3">
+
+
+
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="em_status">Estado*</label>
                     @Html.DropDownListFor(q => q.em_status, new SelectList(ViewBag.lst_estado_empleado, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.em_status, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdTipoDocumento">Tipo documento*</label>
                     @Html.DropDownListFor(q => q.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_docu, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento" })
                     @Html.ValidationMessageFor(q => q.IdTipoDocumento, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="em_codigo">Código</label>
                     @Html.TextBoxFor(q => q.em_codigo, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.em_codigo, "", new { @class = "text-danger", @id = "em_codigo" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label for="pe_apellido">Apellidos*</label>
+                    @Html.TextBoxFor(q => q.pe_apellido, new { @class = "form-control", @id = "pe_apellido" })
+                    @Html.ValidationMessageFor(q => q.pe_apellido, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label for="pe_nombre">Nombres*</label>
+                    @Html.TextBoxFor(q => q.pe_nombre, new { @class = "form-control", @id = "pe_nombre" })
+                    @Html.ValidationMessageFor(q => q.pe_nombre, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -69,21 +146,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="pe_apellido">Apellidos*</label>
-                    @Html.TextBoxFor(q => q.pe_apellido, new { @class = "form-control", @id = "pe_apellido" })
-                    @Html.ValidationMessageFor(q => q.pe_apellido, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="pe_nombre">Nombres*</label>
-                    @Html.TextBoxFor(q => q.pe_nombre, new { @class = "form-control", @id = "pe_nombre" })
-                    @Html.ValidationMessageFor(q => q.pe_nombre, "", new { @class = "text-danger" })
-                </div>
-            </div>
+          
         </div>
     </div>
     <div id="Tabs" role="tabpanel">
@@ -101,9 +164,7 @@
             <li>
                 <a href="#tb_info_adicional" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Información adicional</a>
             </li>
-            <li>
-                <a href="#tb_info_foto" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Foto del empleado</a>
-            </li>
+           
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="padding-top: 20px">
@@ -722,86 +783,6 @@
                 </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane" id="tb_info_foto">
-
-                <script type="text/javascript">
-                    function onUploadControlFileUploadComplete(s, e) {
-                        if (e.isValid)
-                            $("#uploadedImage").attr("src", e.callbackData);
-                        setElementVisible("uploadedImage", e.isValid);
-                    }
-                    function onImageLoad() {
-                        var externalDropZone = $("#externalDropZone");
-                        var uploadedImage = $("#uploadedImage");
-                        uploadedImage.css({
-                            left: (externalDropZone.width() - uploadedImage.width()) / 4,
-                            top: (externalDropZone.height() - uploadedImage.height()) / 4
-                        });
-                        setElementVisible("dragZone", false);
-                    }
-                    function setElementVisible(elementId, visible) {
-                        var el = $("#" + elementId);
-                        if (visible)
-                            el.show();
-                        else
-                            el.hide();
-                    }
-                </script>
-                <div id="externalDropZone" class="dropZoneExternal">
-                    <div id="dragZone">
-                        <span class="dragZoneText">Seleccione una foto</span>
-                    </div>
-                    <img id="uploadedImage" src="#" alt="" style="display: none" onload="onImageLoad()" />
-                    <div id="dropZone" style="display: none">
-                        <span class="dropZoneText">Drop an image here</span>
-                    </div>
-                </div>
-
-                <div class="uploadContainer">
-                    @Html.DevExpress().UploadControl(settings => {
-                   settings.ShowProgressPanel = true;
-                   settings.CallbackRouteValues = new { Controller = "Empleado", Action = "DragAndDropImageUpload" };
-                   settings.Name = "ucDragAndDrop";
-                   settings.UploadMode = UploadControlUploadMode.Auto;
-                   settings.AutoStartUpload = true;
-                   settings.Width = Unit.Percentage(100);
-                   settings.DialogTriggerID = "externalDropZone";
-                   settings.AdvancedModeSettings.EnableDragAndDrop = true;
-                   settings.AdvancedModeSettings.EnableFileList = false;
-                   settings.AdvancedModeSettings.EnableMultiSelect = false;
-                   settings.AdvancedModeSettings.ExternalDropZoneID = "externalDropZone";
-                   settings.AdvancedModeSettings.DropZoneText = "";
-                   settings.ValidationSettings.MaxFileSize = 4194304;
-                   settings.ValidationSettings.AllowedFileExtensions = new string[] {".jpg", ".jpeg", ".gif", ".png"};
-                   settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
-                   settings.BrowseButton.Text = "Select an image for upload...";
-                   settings.Styles.DropZone.CssClass = "uploadControlDropZone";
-                   settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
-                   settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
-                   settings.ClientSideEvents.FileUploadComplete = "onUploadControlFileUploadComplete";
-               }).GetHtml()
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </div>
 
 
         </div>
