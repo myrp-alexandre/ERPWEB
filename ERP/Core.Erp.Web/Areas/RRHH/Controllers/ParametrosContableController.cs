@@ -62,12 +62,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_parametros()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-           // List<ro_Parametros_Info> model = bus_parametros.get_list(IdEmpresa);
-            return PartialView("_GridViewPartial_parametros", model);
-        }
+       
         private void cargar_combos()
         {
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
