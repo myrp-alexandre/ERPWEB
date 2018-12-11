@@ -175,14 +175,14 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="egr_IdSucursal">Sucursal de egreso*</label>
-                    @Html.DropDownListFor(q => q.egr_IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "egr_IdSucursal" })
+                    @Html.DropDownListFor(q => q.egr_IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "egr_IdSucursal"})
                     @Html.ValidationMessageFor(q => q.egr_IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="egr_IdBodega">Bodega de egreso*</label>
-                    @Html.DropDownListFor(q => q.egr_IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_descripcion"), new { @class = "form-control", @id = "egr_IdBodega" })
+                    @Html.DropDownListFor(q => q.egr_IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_descripcion"), new { @class = "form-control", @id = "egr_IdBodega"})
                     @Html.ValidationMessageFor(q => q.egr_IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -219,14 +219,14 @@
                             <i class="fa fa-calendar"></i>
                         </div>
                         @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
-                           {
-                               settings.Name = "Fecha";
-                               settings.Properties.UseMaskBehavior = true;
-                               settings.Properties.EditFormat = EditFormat.Date;
-                               settings.Properties.EditFormatString = "dd/MM/yyyy";
-                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           }).GetHtml()
+                   {
+                       settings.Name = "Fecha";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -339,6 +339,21 @@
                 <div class="form-group">
                     <label for="">Producto terminado</label>
                     @Html.Action("GridViewPartial_fabricacion_det_ing")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Cerrar"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.Cerrar, settings =>
+                           {   settings.Name = "Cerrar";
+                               settings.Text = "Cerrar cambios";
+                           }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.Cerrar, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
