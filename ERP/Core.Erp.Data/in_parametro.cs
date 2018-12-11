@@ -34,6 +34,8 @@ namespace Core.Erp.Data
         public int DiasTransaccionesAFuturo { get; set; }
         public int IdMovi_inven_tipo_Cambio { get; set; }
         public int IdMovi_inven_tipo_Consignacion { get; set; }
+        public int IdMovi_inven_tipo_elaboracion_egr { get; set; }
+        public int IdMovi_inven_tipo_elaboracion_ing { get; set; }
     
         public virtual in_Catalogo in_Catalogo { get; set; }
         public virtual in_Catalogo in_Catalogo1 { get; set; }
@@ -47,6 +49,8 @@ namespace Core.Erp.Data
         public virtual in_movi_inven_tipo in_movi_inven_tipo7 { get; set; }
         public virtual in_movi_inven_tipo in_movi_inven_tipo8 { get; set; }
         public virtual in_movi_inven_tipo in_movi_inven_tipo9 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo10 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo11 { get; set; }
         public virtual in_ProductoTipo in_ProductoTipo { get; set; }
     }
 }

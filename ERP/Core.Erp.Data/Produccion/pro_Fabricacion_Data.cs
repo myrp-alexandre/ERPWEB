@@ -1,4 +1,6 @@
-﻿using Core.Erp.Info.Produccion;
+﻿using Core.Erp.Data.Inventario;
+using Core.Erp.Info.Inventario;
+using Core.Erp.Info.Produccion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,7 @@ namespace Core.Erp.Data.Produccion
                 List<pro_Fabricacion_Info> Lista;
                 using (Entities_produccion Context = new Entities_produccion())
                 {
-                    if(mostrar_anulados==false)
+                    if(mostrar_anulados==true)
                     Lista = Context.pro_Fabricacion.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new pro_Fabricacion_Info
                     {
                         IdEmpresa = q.IdEmpresa,
@@ -127,11 +129,11 @@ namespace Core.Erp.Data.Produccion
             {
                 using (Entities_produccion Context = new Entities_produccion())
                 {
-                    Context.pro_Fabricacion.Add( new pro_Fabricacion
+                    #region Fab
+                    Context.pro_Fabricacion.Add(new pro_Fabricacion
                     {
-
                         IdEmpresa = info.IdEmpresa,
-                        IdFabricacion = info.IdFabricacion=GetId(info.IdEmpresa),
+                        IdFabricacion = info.IdFabricacion = GetId(info.IdEmpresa),
                         egr_IdSucursal = info.egr_IdSucursal,
                         ing_IdSucursal = info.ing_IdSucursal,
                         Estado = true,
@@ -148,7 +150,7 @@ namespace Core.Erp.Data.Produccion
                         FechaCreacion = DateTime.Now
                     });
 
-                    if(info.LstDet.Count()>0)
+                    if (info.LstDet.Count() > 0)
                     {
                         foreach (var item in info.LstDet)
                         {
@@ -168,6 +170,33 @@ namespace Core.Erp.Data.Produccion
 
                     }
                     Context.SaveChanges();
+                    #endregion
+                    //Entities_inventario dbi = new Entities_inventario();
+                    //in_Ing_Egr_Inven_Data odata_i = new in_Ing_Egr_Inven_Data();
+                    //var parametro = dbi.in_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    //if (parametro != null)
+                    //    return true;
+                    
+                    //info.egr_IdMovi_inven_tipo = parametro.IdMovi_inven_tipo_egresoBodegaOrigen;
+                    //var movi_egr = GenerarMoviInven(info);
+                    //if (movi_egr == null)
+                    //    return true;
+
+                    //if (info.egr_IdNumMovi == null && odata_i.guardarDB(movi_egr, "-"))
+                    //{
+                    //    info.egr_IdNumMovi = movi_egr.IdNumMovi;
+
+                    //    var Entity = Context.pro_Fabricacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdFabricacion == info.IdFabricacion).FirstOrDefault();
+                    //    if (Entity == null)
+                    //        return true;
+                    //    Entity.egr_IdMovi_inven_tipo = info.egr_IdMovi_inven_tipo;
+                    //    Entity.egr_IdNumMovi = info.egr_IdNumMovi;
+                    //   Context.SaveChanges();
+                        
+                    //}
+                    
+                    //Context.Dispose();
+
                 }
                 return true;
             }
@@ -224,6 +253,8 @@ namespace Core.Erp.Data.Produccion
 
                     }
 
+
+
                     Context.SaveChanges();
 
                 }
@@ -259,6 +290,61 @@ namespace Core.Erp.Data.Produccion
                 throw;
             }
         }
+
+        private in_Ing_Egr_Inven_Info GenerarMoviInven(pro_Fabricacion_Info info, string Signo)
+        {
+            try
+            {
+                using (Entities_inventario db = new Entities_inventario())
+                {
+                    var motivo = db.in_Motivo_Inven.Where(q => q.IdEmpresa == info.IdEmpresa && q.Genera_Movi_Inven == "S" && q.Tipo_Ing_Egr == (Signo=="+" ? "ING":"EGR")).FirstOrDefault();
+                    if (motivo == null)
+                        return null;
+
+                    in_Ing_Egr_Inven_Info movi = new in_Ing_Egr_Inven_Info
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        cm_fecha = info.Fecha.Date,
+                        Estado = "A",
+                        signo = Signo,
+                        IdUsuario = info.IdUsuarioCreacion,
+                        IdUsuarioUltModi = info.IdUsuarioModificacion,
+                        IdMotivo_Inv = motivo.IdMotivo_Inv,
+                        lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>()
+                    };
+                    int secuencia = 1;
+                    foreach (var item in info.LstDet)
+                    {
+                        var producto = db.in_Producto.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdProducto == item.IdProducto).FirstOrDefault();
+                        if (producto == null)
+                            return null;
+
+                        movi.lst_in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det_Info
+                        {
+                            IdEmpresa = movi.IdEmpresa,
+                            IdSucursal = movi.IdSucursal,
+                            IdBodega = (int)movi.IdBodega,
+                            IdMovi_inven_tipo = movi.IdMovi_inven_tipo,
+                            IdNumMovi = 0,
+                            Secuencia = secuencia++,
+                            IdProducto = item.IdProducto,
+                            dm_cantidad = item.Cantidad *(Signo =="-" ? -1 : 1),
+                            dm_cantidad_sinConversion = item.Cantidad * -1,
+                            mv_costo = 0,
+                            mv_costo_sinConversion = 0,
+                            IdUnidadMedida = producto.IdUnidadMedida_Consumo,
+                            IdUnidadMedida_sinConversion = producto.IdUnidadMedida_Consumo,
+                        });
+                    }
+                    return movi;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
     }
 }
