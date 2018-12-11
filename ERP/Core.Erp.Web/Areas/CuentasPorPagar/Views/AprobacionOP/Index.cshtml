@@ -52,7 +52,7 @@
                 <div class="col-md-12">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="IdSucursal">Sucursal*</label>
+                            <label for="IdSucursal">Sucursal</label>
                             <div class="form-group">
                                 @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                                 @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Fecha inicio*</label>
+                            <label for="">Fecha inicio</label>
                             <div class="input-group date">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Fecha fin*</label>
+                            <label for="">Fecha fin</label>
                             <div class="input-group date">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
@@ -97,6 +97,28 @@
                                }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdSucursal">Forma de pago</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdFormaPago, settings =>
+                            {
+                                settings.Name = "IdFormaPago";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdFormaPago", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                settings.Properties.Columns.Add("descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdFormaPago";
+                                settings.Properties.ValueType = typeof(string);
+                                settings.Properties.TextField = "Descripción";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+                            }).BindList(ViewBag.lst_forma_pago).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdFormaPago, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

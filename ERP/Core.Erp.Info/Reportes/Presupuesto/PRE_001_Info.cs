@@ -23,6 +23,7 @@ namespace Core.Erp.Info.Reportes.Presupuesto
         public string pc_Cuenta { get; set; }
         public int Cantidad { get; set; }
         public double Monto { get; set; }
+        public double ValorUnitario { get; set; }
         public bool Estado { get; set; }
         public double MontoSolicitado { get; set; }
         public double MontoAprobado { get; set; }

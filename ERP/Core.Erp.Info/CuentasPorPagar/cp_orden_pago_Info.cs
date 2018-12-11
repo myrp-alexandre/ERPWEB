@@ -72,6 +72,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdOrdenPago { get; set; }
+        public string IdFormaPago { get; set; }
         public System.DateTime fecha_ini { get; set; }
         public System.DateTime fecha_fin { get; set; }
         public string IdUsuario { get; set; }
