@@ -35,7 +35,6 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  pe_cedulaRuc = q.pe_cedulaRuc,
                                  DescripcionProcesoNomina = q.DescripcionProcesoNomina,
                                  Observacion = q.Observacion,
-                                 rub_Acuerdo_Descuento = q.rub_Acuerdo_Descuento,
                                  ru_descripcion = q.ru_descripcion,
                                  EstadoCobro = q.EstadoCobro,
                              }).ToList();
