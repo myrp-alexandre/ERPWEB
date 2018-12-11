@@ -100,7 +100,7 @@ namespace Core.Erp.Data.Contabilidad
                 using (Entities_contabilidad Context = new Entities_contabilidad())
                 {
                     if (Context.ct_anio_fiscal_x_cuenta_utilidad.Where(q => q.IdEmpresa == info.info_anio_ctautil.IdEmpresa && q.IdanioFiscal == info.IdanioFiscal).FirstOrDefault() != null)                    
-                        modificarDB(info);
+                        return modificarDB(info);
                     
 
                     ct_anio_fiscal Entity = new ct_anio_fiscal()
@@ -155,7 +155,7 @@ namespace Core.Erp.Data.Contabilidad
                         IdEmpresa = info.info_anio_ctautil.IdEmpresa,
                         IdanioFiscal = info.IdanioFiscal,
                         IdCtaCble = info.info_anio_ctautil.IdCtaCble,
-                        observacion = info.info_anio_ctautil.observacion,
+                        observacion = string.IsNullOrEmpty(info.info_anio_ctautil.observacion) ? "" : info.info_anio_ctautil.observacion,
                         IdEmpresa_cbte_cierre = info.info_anio_ctautil.IdEmpresa_cbte_cierre,
                         IdCbteCble_cbte_cierre = info.info_anio_ctautil.IdCbteCble_cbte_cierre,
                         IdTipoCbte_cbte_cierre = info.info_anio_ctautil.IdTipoCbte_cbte_cierre
