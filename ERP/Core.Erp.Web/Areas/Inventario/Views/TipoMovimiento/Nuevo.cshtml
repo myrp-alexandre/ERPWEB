@@ -95,49 +95,6 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-12">
-        <table class="table table-bordered table-striped dataTable" role="grid">
-            <thead>
-                <tr role="row">
-                    <td width="10%"><strong>*</strong></td>
-                    <td width="45%"><strong>Sucursal</strong></td>
-                    <td width="45%"><strong>Bodega</strong></td>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    string clase = "";
-                    for (int i = 0; i < Model.lst_tipo_mov_x_bodega.Count; i++)
-                    {
-                        if (i % 2 == 0)
-                        {
-                            clase = "even";
-                        }
-                        else
-                        {
-                            clase = "odd";
-                        }
-                        <tr role="row" class=@clase>
-                            @Html.HiddenFor(q => q.lst_tipo_mov_x_bodega[i].IdEmpresa)
-                            @Html.HiddenFor(q => q.lst_tipo_mov_x_bodega[i].IdSucucursal)
-                            @Html.HiddenFor(q => q.lst_tipo_mov_x_bodega[i].IdBodega)
-                            <td>
-                                @Html.CheckBoxFor(q => q.lst_tipo_mov_x_bodega[i].seleccionado, new { @checked = "checked" })
-                            </td>
-                            <td>
-                                @Model.lst_tipo_mov_x_bodega[i].Su_Descripcion
-                            </td>
-                            <td>
-                                @Model.lst_tipo_mov_x_bodega[i].bo_Descripcion
-                            </td>
-                        </tr>
-                    }
-                }
-            </tbody>
-        </table>
-    </div>
-
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","TipoMovimiento",new { Area = "Inventario" },null)">Cancelar</a>
