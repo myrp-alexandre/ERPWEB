@@ -15,7 +15,11 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
     [SessionTimeout]
     public class PlanDeCuentasController : Controller
     {
+        #region Variables
         ct_plancta_List ListaPlancta = new ct_plancta_List();
+        ct_anio_fiscal_List ListaAnioFiscal = new ct_anio_fiscal_List();
+        ct_anio_fiscal_Bus bus_anio_fiscal = new ct_anio_fiscal_Bus();
+        #endregion
 
         #region Index
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
@@ -141,6 +145,11 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             {
                 bus_plancta.guardarDB(item);
             }
+            var ListaAnio = ListaAnioFiscal.get_list(model.IdTransaccionSession);
+            foreach (var item in ListaAnio)
+            {
+                bus_anio_fiscal.guardarDB(item);
+            }
             return RedirectToAction("Index");
         }
         public ActionResult GridViewPartial_plancta_importacion()
@@ -148,6 +157,13 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = ListaPlancta.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_plancta_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_anio_fiscal_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaAnioFiscal.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_anio_fiscal_importacion", model);
         }
         public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
         {
@@ -212,7 +228,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                             pc_EsMovimiento = reader.GetString(6) == "SI" ? "S" : "N",
                             IdGrupoCble = reader.GetString(7)
                         };
-                        listaplancta.Add(info);
+                        ListaPlan.Add(info);
                     }
                     else
                         cont++;
@@ -229,8 +245,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
                         ct_anio_fiscal_Info info = new ct_anio_fiscal_Info
-                        {
-                            
+                        {                            
                             IdanioFiscal = Convert.ToInt32(reader.GetValue(0)),
                             af_fechaIni = new DateTime(Convert.ToInt32(reader.GetValue(0)), 1, 1),
                             af_fechaFin = new DateTime(Convert.ToInt32(reader.GetValue(0)), 12, 31),

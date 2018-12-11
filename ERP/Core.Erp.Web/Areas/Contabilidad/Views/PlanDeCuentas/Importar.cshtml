@@ -30,6 +30,7 @@
     function OnFileUploadComplete(s, e)
     {
         GridView_plancta_importacion.PerformCallback();
+        GridView_anio_fiscal_importacion.PerformCallBack();
     }
 </script>
 
@@ -84,7 +85,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_plancta_importacion")
+                            @Html.Action("GridViewPartial_anio_fiscal_importacion")
                         </div>
                     </div>
                 </div>

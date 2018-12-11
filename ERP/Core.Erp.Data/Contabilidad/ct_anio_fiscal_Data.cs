@@ -99,6 +99,10 @@ namespace Core.Erp.Data.Contabilidad
             {
                 using (Entities_contabilidad Context = new Entities_contabilidad())
                 {
+                    if (Context.ct_anio_fiscal_x_cuenta_utilidad.Where(q => q.IdEmpresa == info.info_anio_ctautil.IdEmpresa && q.IdanioFiscal == info.IdanioFiscal).FirstOrDefault() != null)                    
+                        modificarDB(info);
+                    
+
                     ct_anio_fiscal Entity = new ct_anio_fiscal()
                     {
                         IdanioFiscal = info.IdanioFiscal,
@@ -118,11 +122,8 @@ namespace Core.Erp.Data.Contabilidad
                             IdEmpresa_cbte_cierre = info.info_anio_ctautil.IdEmpresa_cbte_cierre,
                             IdCbteCble_cbte_cierre = info.info_anio_ctautil.IdCbteCble_cbte_cierre,
                             IdTipoCbte_cbte_cierre = info.info_anio_ctautil.IdTipoCbte_cbte_cierre
-
                         };
-                        Context.ct_anio_fiscal_x_cuenta_utilidad.Add(Entity_det);
-
-                    
+                        Context.ct_anio_fiscal_x_cuenta_utilidad.Add(Entity_det);                    
                     Context.SaveChanges();
                 }
                 return true;
@@ -146,7 +147,10 @@ namespace Core.Erp.Data.Contabilidad
                     Entity.af_fechaIni = info.af_fechaIni;
                     Entity.af_fechaFin = info.af_fechaFin;
 
-                    ct_anio_fiscal_x_cuenta_utilidad Entity_det = new ct_anio_fiscal_x_cuenta_utilidad
+                    var det = Context.ct_anio_fiscal_x_cuenta_utilidad.Where(q => q.IdEmpresa == info.info_anio_ctautil.IdEmpresa && q.IdanioFiscal == info.IdanioFiscal).ToList();
+                    Context.ct_anio_fiscal_x_cuenta_utilidad.RemoveRange(det);
+
+                    Context.ct_anio_fiscal_x_cuenta_utilidad.Add(new ct_anio_fiscal_x_cuenta_utilidad
                     {
                         IdEmpresa = info.info_anio_ctautil.IdEmpresa,
                         IdanioFiscal = info.IdanioFiscal,
@@ -155,8 +159,7 @@ namespace Core.Erp.Data.Contabilidad
                         IdEmpresa_cbte_cierre = info.info_anio_ctautil.IdEmpresa_cbte_cierre,
                         IdCbteCble_cbte_cierre = info.info_anio_ctautil.IdCbteCble_cbte_cierre,
                         IdTipoCbte_cbte_cierre = info.info_anio_ctautil.IdTipoCbte_cbte_cierre
-
-                    };
+                    });
                     Context.SaveChanges();
                 }
                 return true;
