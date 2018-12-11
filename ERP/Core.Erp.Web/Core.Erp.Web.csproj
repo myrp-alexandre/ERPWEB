@@ -9480,6 +9480,7 @@
     <Content Include="Areas\Produccion\Views\Fabricacion\_GridViewPartial_fabricacion_det_fac.cshtml" />
     <Content Include="Areas\Reportes\Views\PresupuestoReportes\PRE_001.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbRubro_roles.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\PlanDeCuentas\Importar.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
