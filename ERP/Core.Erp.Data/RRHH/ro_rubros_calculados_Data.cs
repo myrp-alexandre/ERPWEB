@@ -149,6 +149,7 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdRubro_horas_matutina = info.IdRubro_horas_matutina;
                         Entity.IdRubro_horas_extras = info.IdRubro_horas_extras;
                         Entity.IdRubro_horas_brigadas = info.IdRubro_horas_extras;
+                    Entity.IdRubro_horas_recargo = info.IdRubro_horas_recargo;
 
                     Context.SaveChanges();
                 }
