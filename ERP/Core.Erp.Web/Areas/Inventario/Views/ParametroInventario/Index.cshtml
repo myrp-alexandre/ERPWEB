@@ -147,6 +147,9 @@
                                         @Html.ValidationMessageFor(q => q.P_Dias_menores_alerta_desde_fecha_actual_amarillo, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group has-error">
                                         <label for="P_Dias_menores_alerta_desde_fecha_actual_rojo">Alerta roja en dias</label>
@@ -173,68 +176,63 @@
 
                         <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tab_movimientos">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="IdMovi_inven_tipo_egresoBodegaOrigen">Tipo movimiento para transferencia - Bodega origen</label>
-                                        @Html.DropDownListFor(q => q.IdMovi_inven_tipo_egresoBodegaOrigen, new SelectList(ViewBag.lst_tipo_movimiento_egr, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_egresoBodegaOrigen, "", new { @class = "text-danger" })
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="IdMovi_inven_tipo_egresoBodegaOrigen">Tipo movimiento para transferencia - Bodega origen</label>
+                                            @Html.DropDownListFor(q => q.IdMovi_inven_tipo_egresoBodegaOrigen, new SelectList(ViewBag.lst_tipo_movimiento_egr, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_egresoBodegaOrigen, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg">Tipo movimiento para devolución inventario - Egresos</label>
-                                        @Html.DropDownListFor(q => q.IdMovi_Inven_tipo_x_Dev_Inv_x_Erg, new SelectList(ViewBag.lst_tipo_movimiento_ing, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(q => q.IdMovi_Inven_tipo_x_Dev_Inv_x_Erg, "", new { @class = "text-danger" })
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg">Tipo movimiento para devolución inventario - Egresos</label>
+                                            @Html.DropDownListFor(q => q.IdMovi_Inven_tipo_x_Dev_Inv_x_Erg, new SelectList(ViewBag.lst_tipo_movimiento_ing, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(q => q.IdMovi_Inven_tipo_x_Dev_Inv_x_Erg, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="IdMovi_inven_tipo_x_distribucion_egr">Tipo movimiento para distribución - Egreso</label>
+                                            @Html.DropDownListFor(q => q.IdMovi_inven_tipo_x_distribucion_egr, new SelectList(ViewBag.lst_tipo_movimiento_egr, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_x_distribucion_egr, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="P_IdMovi_inven_tipo_ingreso_x_compra">Tipo movimiento para ingreso por compra</label>
+                                            @Html.DropDownListFor(q => q.P_IdMovi_inven_tipo_ingreso_x_compra, new SelectList(ViewBag.lst_tipo_movimiento_ing, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(q => q.P_IdMovi_inven_tipo_ingreso_x_compra, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="IdMovi_inven_tipo_x_distribucion_egr">Tipo movimiento para distribución - Egreso</label>
-                                        @Html.DropDownListFor(q => q.IdMovi_inven_tipo_x_distribucion_egr, new SelectList(ViewBag.lst_tipo_movimiento_egr, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_x_distribucion_egr, "", new { @class = "text-danger" })
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="IdMovi_inven_tipo_ingresoBodegaDestino">Tipo movimiento para transferencia - Bodega destino</label>
+                                            @Html.DropDownListFor(q => q.IdMovi_inven_tipo_ingresoBodegaDestino, new SelectList(ViewBag.lst_tipo_movimiento_ing, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_ingresoBodegaDestino, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing">Tipo movimiento para devolución inventario - Ingresos</label>
+                                            @Html.DropDownListFor(q => q.IdMovi_Inven_tipo_x_Dev_Inv_x_Ing, new SelectList(ViewBag.lst_tipo_movimiento_egr, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(q => q.IdMovi_Inven_tipo_x_Dev_Inv_x_Ing, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="IdMovi_inven_tipo_x_distribucion_ing">Tipo movimiento para distribución - Ingreso</label>
+                                            @Html.DropDownListFor(q => q.IdMovi_inven_tipo_x_distribucion_ing, new SelectList(ViewBag.lst_tipo_movimiento_ing, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_x_distribucion_ing, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
                                 </div>
 
-                                
-                            </div>
+                                </div>
 
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="IdMovi_inven_tipo_ingresoBodegaDestino">Tipo movimiento para transferencia - Bodega destino</label>
-                                        @Html.DropDownListFor(q => q.IdMovi_inven_tipo_ingresoBodegaDestino, new SelectList(ViewBag.lst_tipo_movimiento_ing, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_ingresoBodegaDestino, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing">Tipo movimiento para devolución inventario - Ingresos</label>
-                                        @Html.DropDownListFor(q => q.IdMovi_Inven_tipo_x_Dev_Inv_x_Ing, new SelectList(ViewBag.lst_tipo_movimiento_egr, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(q => q.IdMovi_Inven_tipo_x_Dev_Inv_x_Ing, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="IdMovi_inven_tipo_x_distribucion_ing">Tipo movimiento para distribución - Ingreso</label>
-                                        @Html.DropDownListFor(q => q.IdMovi_inven_tipo_x_distribucion_ing, new SelectList(ViewBag.lst_tipo_movimiento_ing, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_x_distribucion_ing, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="P_IdMovi_inven_tipo_ingreso_x_compra">Tipo movimiento para ingreso por compra</label>
-                                        @Html.DropDownListFor(q => q.P_IdMovi_inven_tipo_ingreso_x_compra, new SelectList(ViewBag.lst_tipo_movimiento_ing, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(q => q.P_IdMovi_inven_tipo_ingreso_x_compra, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
         </div>
