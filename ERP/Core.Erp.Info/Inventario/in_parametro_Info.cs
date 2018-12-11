@@ -24,5 +24,7 @@ namespace Core.Erp.Info.Inventario
         public int DiasTransaccionesAFuturo { get; set; }
         public int IdMovi_inven_tipo_Cambio { get; set; }
         public int IdMovi_inven_tipo_Consignacion { get; set; }
+        public int IdMovi_inven_tipo_elaboracion_egr { get; set; }
+        public int IdMovi_inven_tipo_elaboracion_ing { get; set; }
     }
 }
