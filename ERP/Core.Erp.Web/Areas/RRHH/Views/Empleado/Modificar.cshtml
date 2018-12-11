@@ -581,6 +581,13 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
+                                <label for="Valor_maximo_horas">Horas máxima vespertina</label>
+                                @Html.TextBoxFor(q => q.Valor_maximo_horas_vesp, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Valor_maximo_horas_vesp, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
                                 <label for="Valor_horas">Valor hora matutina</label>
                                 @Html.TextBoxFor(q => q.Valor_horas_matutino, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.Valor_horas_matutino, "", new { @class = "text-danger" })
@@ -588,24 +595,34 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="Valor_horas">Valor hora nocturnas</label>
-                                @Html.TextBoxFor(q => q.Valor_horas_nocturna, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Valor_horas_nocturna, "", new { @class = "text-danger" })
+                                <label for="Valor_maximo_horas">Horas máxima matutina</label>
+                                @Html.TextBoxFor(q => q.Valor_maximo_horas_mat, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Valor_maximo_horas_mat, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Valor_horas">Valor hora brigada</label>
+                                @Html.TextBoxFor(q => q.Valor_horas_brigada, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Valor_horas_brigada, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Valor_maximo_horas">Valor máximo de horas</label>
-                                @Html.TextBoxFor(q => q.Valor_maximo_horas, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Valor_maximo_horas, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+
                     </div>
                 </div>
 
+
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Valor_horas">Valor hora adicionales</label>
+                                @Html.TextBoxFor(q => q.Valor_horas_extras, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Valor_horas_extras, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="es_AcreditaHorasExtras"></label>

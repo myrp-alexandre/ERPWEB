@@ -97,8 +97,10 @@ namespace Core.Erp.Info.RRHH
         public bool Pago_por_horas { get; set; }
         public Nullable<double> Valor_horas_vespertina { get; set; }
         public Nullable<double> Valor_horas_matutino { get; set; }
-        public Nullable<double> Valor_horas_nocturna { get; set; }
-        public Nullable<double> Valor_maximo_horas { get; set; }
+        public Nullable<double> Valor_maximo_horas_vesp { get; set; }
+        public Nullable<double> Valor_maximo_horas_mat { get; set; }
+        public Nullable<double> Valor_horas_brigada { get; set; }
+        public Nullable<double> Valor_horas_extras { get; set; }
 
 
 

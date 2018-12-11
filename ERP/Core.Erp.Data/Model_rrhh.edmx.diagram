@@ -162,7 +162,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo6" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo8" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo9" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_combo" Width="1.5" PointX="11.375" PointY="18.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_HorasProfesores" Width="1.5" PointX="22.75" PointY="66.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_HorasProfesores_det" Width="1.5" PointX="25" PointY="59.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_HorasProfesores" Width="1.5" PointX="5.375" PointY="13.75" />
@@ -209,6 +208,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_prestamo_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_combo" Width="1.5" PointX="11.375" PointY="18.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

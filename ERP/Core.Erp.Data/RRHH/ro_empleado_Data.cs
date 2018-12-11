@@ -143,8 +143,11 @@ namespace Core.Erp.Data.RRHH
                                  IdSucursal = q.IdSucursal,
                                  Valor_horas_matutino=q.Valor_horas_matutino,
                                  Valor_horas_vespertina=q.Valor_horas_vespertina,
-                                 Valor_horas_nocturna=q.Valor_horas_nocturna,
-                                 Valor_maximo_horas=q.Valor_maximo_horas
+                                 Valor_horas_brigada=q.Valor_horas_brigada,
+                                 Valor_maximo_horas_vesp=q.Valor_maximo_horas_vesp,
+                                 Valor_maximo_horas_mat=q.Valor_maximo_horas_mat,
+                                 Valor_horas_extras=q.Valor_horas_extras
+                                
                              }).ToList();
 
                 }
@@ -172,7 +175,7 @@ namespace Core.Erp.Data.RRHH
                     info_ = new ro_empleado_Info
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdEmpleado =info.IdEmpleado,
+                        IdEmpleado = info.IdEmpleado,
                         IdEmpleado_Supervisor = info.IdEmpleado_Supervisor,
                         IdPersona = info.IdPersona,
                         IdSucursal = info.IdSucursal,
@@ -216,22 +219,25 @@ namespace Core.Erp.Data.RRHH
                         em_AnticipoSueldo = info.em_AnticipoSueldo,
                         Marca_Biometrico = info.Marca_Biometrico,
                         IdHorario = info.IdHorario,
-                        Tiene_ingresos_compartidos=info.Tiene_ingresos_compartidos,                       
-                           pe_cedulaRuc=info.pe_cedulaRuc,
-                           pe_nombre=info.pe_nombre,
-                           pe_apellido=info.pe_apellido,
-                           pe_sexo=info.pe_sexo,
-                           IdEstadoCivil=info.IdEstadoCivil,
-                           pe_direccion=info.pe_direccion,
-                           pe_telfono_Contacto=info.pe_telfono_Contacto,
-                           pe_celular=info.pe_celular,
-                           IdTipoDocumento=info.IdTipoDocumento,
-                           pe_correo=info.pe_correo,
-                           pe_fechaNacimiento=info.pe_fechaNacimiento,
-                           Pago_por_horas = info.Pago_por_horas,
+                        Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos,
+                        pe_cedulaRuc = info.pe_cedulaRuc,
+                        pe_nombre = info.pe_nombre,
+                        pe_apellido = info.pe_apellido,
+                        pe_sexo = info.pe_sexo,
+                        IdEstadoCivil = info.IdEstadoCivil,
+                        pe_direccion = info.pe_direccion,
+                        pe_telfono_Contacto = info.pe_telfono_Contacto,
+                        pe_celular = info.pe_celular,
+                        IdTipoDocumento = info.IdTipoDocumento,
+                        pe_correo = info.pe_correo,
+                        pe_fechaNacimiento = info.pe_fechaNacimiento,
+                        Pago_por_horas = info.Pago_por_horas,
                         Valor_horas_vespertina = info.Valor_horas_vespertina,
-                        //Valor_horas_nocturna = info.Valor_horas_nocturna,
+                        Valor_horas_brigada = info.Valor_horas_brigada,
                         Valor_horas_matutino = info.Valor_horas_matutino,
+                        Valor_maximo_horas_mat = info.Valor_maximo_horas_mat,
+                        Valor_maximo_horas_vesp=info.Valor_maximo_horas_vesp,
+                        Valor_horas_extras=info.Valor_horas_extras
                     };
                 }
 
@@ -327,8 +333,11 @@ namespace Core.Erp.Data.RRHH
                         Fecha_Transaccion = info.Fecha_Transaccion=DateTime.Now,
                         Pago_por_horas = info.Pago_por_horas,
                         Valor_horas_vespertina = info.Valor_horas_vespertina,
+                        Valor_horas_brigada = info.Valor_horas_brigada,
                         Valor_horas_matutino = info.Valor_horas_matutino,
-                       // Valor_horas_matutino = info.Valor_horas_matutino,
+                        Valor_maximo_horas_mat = info.Valor_maximo_horas_mat,
+                        Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp,
+                        Valor_horas_extras = info.Valor_horas_extras
 
 
                     };
@@ -390,16 +399,14 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdTipoLicencia = info.IdTipoLicencia    ;
                         Entity.IdBanco = info.IdBanco   ;
                         Entity.Pago_por_horas = info.Pago_por_horas;
-                   // Entity.Valor_horas_nocturna = info.Valor_horas_nocturna;
-                    Entity.Valor_horas_matutino = info.Valor_horas_matutino;
-                    Entity.Valor_horas_vespertina = info.Valor_horas_vespertina;
-                      //  Entity.Valor_maximo_horas = info.Valor_maximo_horas;
-                    //Entity.Valor_horas_nocturna = info.Valor_horas_nocturna;
-                    Entity.Valor_horas_matutino = info.Valor_horas_matutino;
-                    Entity.Valor_horas_vespertina = info.Valor_horas_vespertina;
-                        //Entity.Valor_maximo_horas = info.Valor_maximo_horas;
-                        Entity.IdArea = info.IdArea    ;
-                        Entity.IdDivision = info.IdDivision    ;
+                        Entity.Valor_horas_vespertina = info.Valor_horas_vespertina;
+                        Entity.Valor_horas_brigada = info.Valor_horas_brigada;
+                        Entity.Valor_horas_matutino = info.Valor_horas_matutino;
+                        Entity.Valor_maximo_horas_mat = info.Valor_maximo_horas_mat;
+                        Entity.Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp;
+                        Entity.Valor_horas_extras = info.Valor_horas_extras;
+                        Entity.IdArea = info.IdArea;
+                        Entity.IdDivision = info.IdDivision;
                         Entity.Fecha_UltMod = info.Fecha_UltMod  ;
                         Entity.por_discapacidad = info.por_discapacidad    ;
                         Entity.carnet_conadis = info.carnet_conadis  ;
