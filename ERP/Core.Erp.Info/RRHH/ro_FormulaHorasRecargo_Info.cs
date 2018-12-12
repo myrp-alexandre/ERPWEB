@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Info.RRHH
 {
-    class ro_FormulaHorasRecargo_Info
+   public class ro_FormulaHorasRecargo_Info
     {
+        public int IdEmpresa { get; set; }
+        public double Dividendo { get; set; }
+        public double Divisor { get; set; }
+        public double PorcentajeRecargo { get; set; }
     }
 }

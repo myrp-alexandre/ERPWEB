@@ -102,8 +102,8 @@ namespace Core.Erp.Data.RRHH
                         IdRubro_IR = info.IdRubro_IR,
 
                         IdRubro_horas_matutina = info.IdRubro_horas_matutina,
-                        IdRubro_horas_brigadas = info.IdRubro_horas_brigadas,
                         IdRubro_horas_vespertina = info.IdRubro_horas_vespertina,
+                        IdRubro_horas_brigadas = info.IdRubro_horas_brigadas,
                         IdRubro_horas_extras = info.IdRubro_horas_extras,
                         IdRubro_horas_recargo = info.IdRubro_horas_recargo
 
@@ -144,12 +144,11 @@ namespace Core.Erp.Data.RRHH
                          Entity.IdRubro_DIII = info.IdRubro_DIII;
                          Entity.IdRubro_DIV = info.IdRubro_DIV;
                          Entity.IdRubro_IR = info.IdRubro_IR;
-                         Entity.IdRubro_horas_brigadas = info.IdRubro_horas_brigadas;
                         Entity.IdRubro_horas_vespertina = info.IdRubro_horas_vespertina;
                         Entity.IdRubro_horas_matutina = info.IdRubro_horas_matutina;
+                        Entity.IdRubro_horas_brigadas = info.IdRubro_horas_brigadas;
                         Entity.IdRubro_horas_extras = info.IdRubro_horas_extras;
-                        Entity.IdRubro_horas_brigadas = info.IdRubro_horas_extras;
-                    Entity.IdRubro_horas_recargo = info.IdRubro_horas_recargo;
+                        Entity.IdRubro_horas_recargo = info.IdRubro_horas_recargo;
 
                     Context.SaveChanges();
                 }

@@ -602,8 +602,8 @@
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="Campo1" Type="float" Nullable="false" />
-          <Property Name="Campo2" Type="float" Nullable="false" />
+          <Property Name="Dividendo" Type="float" Nullable="false" />
+          <Property Name="Divisor" Type="float" Nullable="false" />
           <Property Name="PorcentajeRecargo" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="ro_Historico_Liquidacion_Vacaciones">
@@ -10170,8 +10170,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="Campo1" Type="Double" Nullable="false" />
-          <Property Name="Campo2" Type="Double" Nullable="false" />
+          <Property Name="Dividendo" Type="Double" Nullable="false" />
+          <Property Name="Divisor" Type="Double" Nullable="false" />
           <Property Name="PorcentajeRecargo" Type="Double" Nullable="false" />
         </EntityType>
         </Schema>
@@ -12272,8 +12272,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <EntityTypeMapping TypeName="Model_rrhh.ro_FormulaHorasRecargo">
               <MappingFragment StoreEntitySet="ro_FormulaHorasRecargo">
                 <ScalarProperty Name="PorcentajeRecargo" ColumnName="PorcentajeRecargo" />
-                <ScalarProperty Name="Campo2" ColumnName="Campo2" />
-                <ScalarProperty Name="Campo1" ColumnName="Campo1" />
+                <ScalarProperty Name="Divisor" ColumnName="Divisor" />
+                <ScalarProperty Name="Dividendo" ColumnName="Dividendo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

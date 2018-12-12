@@ -15,8 +15,8 @@ namespace Core.Erp.Data
     public partial class ro_FormulaHorasRecargo
     {
         public int IdEmpresa { get; set; }
-        public double Campo1 { get; set; }
-        public double Campo2 { get; set; }
+        public double Dividendo { get; set; }
+        public double Divisor { get; set; }
         public double PorcentajeRecargo { get; set; }
     }
 }

@@ -198,6 +198,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         };
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
+            ro_FormulaHorasRecargo_Bus busformulas = new ro_FormulaHorasRecargo_Bus();
+            var formula_horas = busformulas.get_info(Convert.ToInt32(SessionFixed.IdEmpresa));
+            if (formula_horas == null)
+                return;
             int cont = 0;
             ro_empleado_info_list empleado_info_list = new ro_empleado_info_list();
             ro_HorasProfesores_detLis_Info EmpleadoNovedadCargaMasiva_detLis_Info = new ro_HorasProfesores_detLis_Info();
@@ -342,7 +346,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                             em_codigo = empleado.em_codigo,
                                             Secuencia = cont,
                                             IdEmpleado = empleado.IdEmpleado,
-                                            IdRubro = rubros_calculados.IdRubro_horas_brigadas,
+                                            IdRubro = rubros_calculados.IdRubro_horas_extras,
                                             ru_descripcion = rubros.ru_descripcion,
                                             ValorHora = Convert.ToDouble(empleado.Valor_horas_extras)
 
@@ -358,11 +362,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
                             #region horas adicionales
-                            if ((horas_vesp+horas_mat)*(40/60)>0)
+                            if ((horas_vesp+horas_mat)*(formula_horas.Dividendo/formula_horas.Divisor)>0)
                             {
                                 if (rubros_calculados.IdRubro_horas_recargo != null)
                                 {
-                                    var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_extras);
+                                    var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_recargo);
                                     if (rubros != null)
                                     {
                                         ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
@@ -374,9 +378,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                             em_codigo = empleado.em_codigo,
                                             Secuencia = cont,
                                             IdEmpleado = empleado.IdEmpleado,
-                                            IdRubro = rubros_calculados.IdRubro_horas_brigadas,
+                                            IdRubro = rubros_calculados.IdRubro_horas_recargo,
                                             ru_descripcion = rubros.ru_descripcion,
-                                            ValorHora = Convert.ToDouble(empleado.Valor_horas_extras)
+                                            ValorHora = Math.Round(Convert.ToDouble((horas_vesp + horas_mat) * (formula_horas.Dividendo / formula_horas.Divisor)), 2)
                                         };
                                         info.Valor = Convert.ToDouble(empleado.Valor_horas_extras * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
@@ -388,10 +392,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                         }
 
-                        cont++;
 
                     }
 
+                    cont++;
                 }
 
                 EmpleadoNovedadCargaMasiva_detLis_Info.set_list(lista_novedades);
