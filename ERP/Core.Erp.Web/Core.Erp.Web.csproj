@@ -9509,6 +9509,7 @@
     <Content Include="Areas\Reportes\Views\ProduccionReportes\PRO_001.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_departamentoAF_importacion.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_catalogoAF_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionHoras\Duplicar.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

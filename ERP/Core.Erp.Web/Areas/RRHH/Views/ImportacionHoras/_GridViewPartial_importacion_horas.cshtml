@@ -68,6 +68,10 @@
                         Html.ActionLink("Anular", "Anular", new { IdCarga = DataBinder.Eval(tc.DataItem, "IdCarga") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
+                    ViewContext.Writer.Write(
+                       Html.ActionLink("Anular", "Diplicar", new { IdCarga = DataBinder.Eval(tc.DataItem, "IdCarga") },
+                           new { onclick = "return confirm('¿Está seguro de que desea duplicar el registro?')" })
+                   );
                 }
             });
             c.SetHeaderTemplateContent(tc =>

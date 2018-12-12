@@ -144,6 +144,34 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+        public ActionResult Duplicar(decimal IdCarga)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ro_HorasProfesores_Info model = bus_novedad.get_info(IdEmpresa, IdCarga);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.detalle = bus_novedad_detalle_bus.get_list(IdEmpresa, IdCarga);
+            detalle.set_list(model.detalle);
+            cargar_combos();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Duplicar(ro_HorasProfesores_Info model)
+        {
+            model.detalle = detalle.get_list();
+
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
+            model.Fecha_UltAnu = DateTime.Now;
+            if (!bus_novedad.GuardarDB(model))
+            {
+                cargar_combos();
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
         #endregion
 
         #region cargar combos
