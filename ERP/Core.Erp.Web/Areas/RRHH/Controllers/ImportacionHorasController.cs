@@ -163,8 +163,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.detalle = detalle.get_list();
 
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
-            model.Fecha_UltAnu = DateTime.Now;
+            model.IdUsuario = SessionFixed.IdUsuario;
+            model.Fecha_Transac = DateTime.Now;
             if (!bus_novedad.GuardarDB(model))
             {
                 cargar_combos();
