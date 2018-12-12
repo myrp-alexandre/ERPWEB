@@ -277,6 +277,7 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_004_detalle_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_004_resumen_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Info.cs" />
+    <Compile Include="Reportes\ActivoFijo\ACTF_006_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Info.cs" />
