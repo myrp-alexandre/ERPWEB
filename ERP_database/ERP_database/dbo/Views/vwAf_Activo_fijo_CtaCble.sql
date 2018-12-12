@@ -1,6 +1,6 @@
 ﻿CREATE VIEW dbo.vwAf_Activo_fijo_CtaCble
 AS
-SELECT        dbo.Af_Activo_fijo_CtaCble.IdEmpresa, dbo.Af_Activo_fijo_CtaCble.IdActivoFijo, dbo.Af_Activo_fijo_CtaCble.Secuencia, dbo.Af_Activo_fijo_CtaCble.IdCatalogo, dbo.Af_Activo_fijo_CtaCble.IdCtaCble, 
+SELECT        dbo.Af_Activo_fijo_CtaCble.IdEmpresa, dbo.Af_Activo_fijo_CtaCble.IdActivoFijo, dbo.Af_Activo_fijo_CtaCble.Secuencia, dbo.Af_Activo_fijo_CtaCble.IdDepartamento, dbo.Af_Activo_fijo_CtaCble.IdCtaCble, 
                          dbo.Af_Activo_fijo_CtaCble.Porcentaje, dbo.ct_plancta.pc_Cuenta
 FROM            dbo.Af_Activo_fijo_CtaCble INNER JOIN
                          dbo.ct_plancta ON dbo.Af_Activo_fijo_CtaCble.IdEmpresa = dbo.ct_plancta.IdEmpresa AND dbo.Af_Activo_fijo_CtaCble.IdCtaCble = dbo.ct_plancta.IdCtaCble
