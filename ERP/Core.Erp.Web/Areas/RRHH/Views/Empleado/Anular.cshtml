@@ -617,7 +617,7 @@
                     <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="Valor_horas">Valor hora adicionales</label>
+                                <label for="Valor_horas">Valor hora extra</label>
                                 @Html.TextBoxFor(q => q.Valor_horas_extras, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.Valor_horas_extras, "", new { @class = "text-danger" })
                             </div>
@@ -720,7 +720,7 @@
                                {
                                    settings.Name = "IdTipoIdentDiscapacitadoSustitutoSRI";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                    settings.Properties.Columns.Add("CodCatalogo", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                                    settings.Properties.Columns.Add("ca_descripcion", "Desripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
                                    //Campo ID

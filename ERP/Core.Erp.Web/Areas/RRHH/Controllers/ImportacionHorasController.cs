@@ -260,7 +260,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                         horas_mat = info.NumHoras;
                                         info.Valor = Convert.ToDouble(empleado.Valor_horas_matutino * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
-                                        lista_novedades.Add(info);
+                                        if (info.Valor > 0)
+                                            lista_novedades.Add(info);
                                     }
                                 }
                             }
@@ -292,7 +293,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                         horas_vesp = info.NumHoras;
                                         info.Valor = Convert.ToDouble(empleado.Valor_horas_vespertina * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
-                                        lista_novedades.Add(info);
+                                        if (info.Valor > 0)
+                                            lista_novedades.Add(info);
                                     }
                                 }
                             }
@@ -323,13 +325,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                         };
                                         info.Valor = Convert.ToDouble(empleado.Valor_horas_brigada * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
+                                        if(info.Valor>0)
                                         lista_novedades.Add(info);
                                     }
                                 }
                             }
                             #endregion
 
-                            #region horas brigadas
+                            #region horas extras
                             if (!reader.IsDBNull(5))
                             {
                                 if (rubros_calculados.IdRubro_horas_extras != null)
@@ -354,7 +357,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                         };
                                         info.Valor = Convert.ToDouble(empleado.Valor_horas_extras * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
-                                        lista_novedades.Add(info);
+                                        if (info.Valor > 0)
+                                            lista_novedades.Add(info);
                                     }
                                 }
                             }
@@ -383,7 +387,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                         info.NumHoras = Math.Round(Convert.ToDouble((horas_vesp + horas_mat) * (formula_horas.Dividendo / formula_horas.Divisor)));
                                         info.Valor = Convert.ToDouble(empleado.Valor_horas_extras * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
-                                        lista_novedades.Add(info);
+                                        if (info.Valor > 0)
+                                            lista_novedades.Add(info);
                                     }
                                 }
                             }
