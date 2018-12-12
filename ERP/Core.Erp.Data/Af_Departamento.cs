@@ -16,8 +16,8 @@ namespace Core.Erp.Data
     {
         public Af_Departamento()
         {
-            this.Af_Activo_fijo = new HashSet<Af_Activo_fijo>();
             this.Af_Activo_fijo_CtaCble = new HashSet<Af_Activo_fijo_CtaCble>();
+            this.Af_Activo_fijo = new HashSet<Af_Activo_fijo>();
         }
     
         public int IdEmpresa { get; set; }
@@ -32,7 +32,7 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
-        public virtual ICollection<Af_Activo_fijo> Af_Activo_fijo { get; set; }
         public virtual ICollection<Af_Activo_fijo_CtaCble> Af_Activo_fijo_CtaCble { get; set; }
+        public virtual ICollection<Af_Activo_fijo> Af_Activo_fijo { get; set; }
     }
 }

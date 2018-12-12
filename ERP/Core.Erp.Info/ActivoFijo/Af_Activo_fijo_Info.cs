@@ -10,8 +10,6 @@ namespace Core.Erp.Info.ActivoFijo
     public class Af_Activo_fijo_Info
 
     {
- 
-
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdActivoFijo { get; set; }
@@ -42,8 +40,6 @@ namespace Core.Erp.Info.ActivoFijo
         public string Af_NumPlaca { get; set; }
         public Nullable<int> Af_Anio_fabrica { get; set; }
         public string Estado { get; set; }
-        public bool EstadoBool { get; set; }
-
         public string MotiAnula { get; set; }
         public string Af_DescripcionCorta { get; set; }
         public string Af_Codigo_Barra { get; set; }
@@ -61,6 +57,7 @@ namespace Core.Erp.Info.ActivoFijo
         public string Af_NumSerie_Chasis { get; set; }
         public decimal IdEmpleadoEncargado { get; set; }
         public decimal IdEmpleadoCustodio { get; set; }
+        public bool EstadoBool { get; set; }
 
         //Campos que no existen en la tabla
         public string Estado_Proceso_nombre { get; set; }
