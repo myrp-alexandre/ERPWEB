@@ -380,7 +380,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                             IdRubro = rubros_calculados.IdRubro_horas_recargo,
                                             ru_descripcion = rubros.ru_descripcion,
                                         };
-                                        NumHoras = Math.Round(Convert.ToDouble((horas_vesp + horas_mat) * (formula_horas.Dividendo / formula_horas.Divisor)), 2);
+                                        info.NumHoras = Math.Round(Convert.ToDouble((horas_vesp + horas_mat) * (formula_horas.Dividendo / formula_horas.Divisor)));
                                         info.Valor = Convert.ToDouble(empleado.Valor_horas_extras * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
                                         lista_novedades.Add(info);
