@@ -371,7 +371,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     {
                                         ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                         {
-                                            NumHoras = Convert.ToDouble(reader.GetDouble(5)),
                                             pe_cedulaRuc = cedua,
                                             pe_apellido = empleado.Empleado,
                                             IdSucursal = empleado.IdSucursal,
@@ -380,8 +379,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                             IdEmpleado = empleado.IdEmpleado,
                                             IdRubro = rubros_calculados.IdRubro_horas_recargo,
                                             ru_descripcion = rubros.ru_descripcion,
-                                            ValorHora = Math.Round(Convert.ToDouble((horas_vesp + horas_mat) * (formula_horas.Dividendo / formula_horas.Divisor)), 2)
                                         };
+                                        NumHoras = Math.Round(Convert.ToDouble((horas_vesp + horas_mat) * (formula_horas.Dividendo / formula_horas.Divisor)), 2);
                                         info.Valor = Convert.ToDouble(empleado.Valor_horas_extras * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
                                         lista_novedades.Add(info);
