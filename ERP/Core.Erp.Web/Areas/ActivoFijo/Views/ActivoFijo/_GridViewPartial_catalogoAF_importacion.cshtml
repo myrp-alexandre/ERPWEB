@@ -1,10 +1,10 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_categoriaAF_importacion";
-        settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "GridViewPartial_categoriaAF_importacion" };
+        settings.Name = "GridViewPartial_catalogoAF_importacion";
+        settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "GridViewPartial_catalogoAF_importacion" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdCategoriaAF";
+        settings.KeyFieldName = "IdCatalogo";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -48,8 +48,7 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdActivoFijoTipo", "Codigo").Width = Unit.Percentage(10);
-        settings.Columns.Add("cod_tipo", "Categoria").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdTipoCatalogo", "Tipo").Width = Unit.Percentage(80);
         settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(80);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";

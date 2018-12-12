@@ -2,6 +2,7 @@
 using Core.Erp.Info.ActivoFijo;
 using Core.Erp.Web.Helps;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
@@ -114,5 +115,25 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         #endregion
 
+    }
+
+    public class Af_Catalogo_List
+    {
+        string Variable = "Af_Catalogo_Info";
+        public List<Af_Catalogo_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<Af_Catalogo_Info> list = new List<Af_Catalogo_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<Af_Catalogo_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<Af_Catalogo_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
     }
 }
