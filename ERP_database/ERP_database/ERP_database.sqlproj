@@ -1084,6 +1084,7 @@
     <Build Include="dbo\Stored Procedures\sppro_GetProductoFacturadosPorFecha_1.sql" />
     <Build Include="web\Views\VWPRE_001.sql" />
     <Build Include="dbo\Views\vwpro_FabricacionDet.sql" />
+    <Build Include="dbo\Views\VWPRO_001.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />
