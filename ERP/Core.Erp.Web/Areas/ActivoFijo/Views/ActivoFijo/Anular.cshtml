@@ -10,8 +10,11 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Anular", "ActivoFijo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdActivoFijo)
+    @Html.HiddenFor(q => q.IdTransaccionSession);
+    @Html.HiddenFor(q => q.Estado_Proceso);
 
     <div class="row">
         <div class="col-md-12">
@@ -22,7 +25,7 @@
                     @Html.ValidationMessageFor(q => q.CodActivoFijo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="Af_Codigo_Barra">Código de barra</label>
                     @Html.TextBoxFor(q => q.Af_Codigo_Barra, new { @class = "form-control" })
@@ -43,15 +46,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.DevExpress().DateEditFor(q=> q.Af_fecha_compra, settings =>
-                    {
-                        settings.Name = "Af_fecha_compra";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
+                        @Html.DevExpress().DateEditFor(q => q.Af_fecha_compra, settings =>
+                   {
+                       settings.Name = "Af_fecha_compra";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Af_fecha_compra, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -60,26 +63,19 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdSucursal, settings =>
-                    {
-                        settings.Name = "IdSucursal";
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                        settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                        settings.Properties.Columns.Add("IdSucursal", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                        settings.Properties.Columns.Add("Su_Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdSucursal";
-                        settings.Properties.ValueType = typeof(int);
-                        settings.Properties.TextField = "Su_Descripcion";
-                       //Boton para seleccionar ningun registro
-                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                        settings.Properties.NullText = "== Seleccione ==";
-                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                    }).BindList(ViewBag.lst_sucursal).GetHtml()
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdDepartamento">Departamento</label>
+                    @Html.DropDownListFor(q => q.IdDepartamento, new SelectList(ViewBag.lst_departamento, "IdDepartamento", "Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdDepartamento, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -93,7 +89,6 @@
                     @Html.ValidationMessageFor(q => q.IdActivoFijoTipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCategoriaAF">Categoría*</label>
@@ -103,6 +98,7 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -110,24 +106,6 @@
                     <label for="Af_Nombre">Nombre*</label>
                     @Html.TextBoxFor(q => q.Af_Nombre, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Af_Nombre, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Af_DescripcionCorta">Descripción corta</label>
-                    @Html.TextBoxFor(q => q.Af_DescripcionCorta, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Af_DescripcionCorta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Af_DescripcionTecnica">Descripción técnica</label>
-                    @Html.TextBoxFor(q => q.Af_DescripcionTecnica, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Af_DescripcionTecnica, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -181,15 +159,15 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.DevExpress().DateEditFor(q=> q.Af_fecha_ini_depre, settings =>
-                                {
-                                    settings.Name = "Af_fecha_ini_depre";
-                                    settings.Properties.UseMaskBehavior = true;
-                                    settings.Properties.EditFormat = EditFormat.Date;
-                                    settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                }).GetHtml()
+                                    @Html.DevExpress().DateEditFor(q => q.Af_fecha_ini_depre, settings =>
+                               {
+                                   settings.Name = "Af_fecha_ini_depre";
+                                   settings.Properties.UseMaskBehavior = true;
+                                   settings.Properties.EditFormat = EditFormat.Date;
+                                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.Af_fecha_ini_depre, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -201,15 +179,15 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.DevExpress().DateEditFor(q=> q.Af_fecha_fin_depre, settings =>
-                                {
-                                    settings.Name = "Af_fecha_fin_depre";
-                                    settings.Properties.UseMaskBehavior = true;
-                                    settings.Properties.EditFormat = EditFormat.Date;
-                                    settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                }).GetHtml()
+                                    @Html.DevExpress().DateEditFor(q => q.Af_fecha_fin_depre, settings =>
+                               {
+                                   settings.Name = "Af_fecha_fin_depre";
+                                   settings.Properties.UseMaskBehavior = true;
+                                   settings.Properties.EditFormat = EditFormat.Date;
+                                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.Af_fecha_fin_depre, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -237,20 +215,6 @@
                                 <label for="Af_Depreciacion_acum">Depreciación acumulada</label>
                                 @Html.TextBoxFor(q => q.Af_Depreciacion_acum, new { @class = "form-control", @id = "Af_Meses_depreciar" })
                                 @Html.ValidationMessageFor(q => q.Af_Depreciacion_acum, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_Costo_historico">Costo histórico</label>
-                                @Html.TextBoxFor(q => q.Af_Costo_historico, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_Costo_historico, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_ValorResidual">Valor residual</label>
-                                @Html.TextBoxFor(q => q.Af_ValorResidual, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_ValorResidual, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -288,10 +252,7 @@
                                 @Html.ValidationMessageFor(q => q.IdTipoCatalogo_Ubicacion, "", new { @class = "text-danger", @id = "pe_cedulaRuc" })
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
+
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="Af_NumPlaca">Número de placa</label>
@@ -299,32 +260,10 @@
                                 @Html.ValidationMessageFor(q => q.Af_NumPlaca, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_Anio_fabrica">Año de fabrica</label>
-                                @Html.TextBoxFor(q => q.Af_Anio_fabrica, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_Anio_fabrica, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_NumSerie_Motor">Serie de motor</label>
-                                @Html.TextBoxFor(q => q.Af_NumSerie_Motor, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_NumSerie_Motor, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_NumSerie_Chasis">Número de chasis</label>
-                                @Html.TextBoxFor(q => q.Af_NumSerie_Chasis, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_NumSerie_Chasis, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
                     </div>
                 </div>
 
             </div>
-
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
 
@@ -381,6 +320,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "ActivoFijo", new { Area ="ActivoFijo" }, null)">Cancelar</a>
