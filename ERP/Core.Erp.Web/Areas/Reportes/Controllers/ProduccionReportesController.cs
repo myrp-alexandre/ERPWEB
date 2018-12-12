@@ -13,7 +13,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult PRO_001(int IdEmpresa = 0, decimal IdFabricacion = 0)
         {
             PRO_001_Rpt model = new PRO_001_Rpt();
-            model.p_IdEmpresa.Value = IdEmpresa;
+            model.p_IdEmpresa.Value = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdFabricacion.Value = IdFabricacion;
 
             model.usuario = SessionFixed.IdUsuario;
