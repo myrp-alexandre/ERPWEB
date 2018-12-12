@@ -9516,6 +9516,7 @@
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_departamentoAF_importacion.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_catalogoAF_importacion.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionHoras\Duplicar.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_ActivoFijo_importacion.cshtml" />
     <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_006.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoPorRubro\_CmbRubro_EmpxRub.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbRubro_EmpNov.cshtml" />
