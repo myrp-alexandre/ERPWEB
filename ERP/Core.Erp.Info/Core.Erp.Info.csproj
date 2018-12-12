@@ -47,6 +47,7 @@
     <Compile Include="ActivoFijo\Af_Activo_fijo_tipo_Info.cs" />
     <Compile Include="ActivoFijo\Af_CatalogoTipo_Info.cs" />
     <Compile Include="ActivoFijo\Af_Catalogo_Info.cs" />
+    <Compile Include="ActivoFijo\Af_Departamento_Info.cs" />
     <Compile Include="ActivoFijo\Af_Depreciacion_Det_Info.cs" />
     <Compile Include="ActivoFijo\Af_Depreciacion_Info.cs" />
     <Compile Include="ActivoFijo\Af_Mej_Baj_Activo_Info.cs" />

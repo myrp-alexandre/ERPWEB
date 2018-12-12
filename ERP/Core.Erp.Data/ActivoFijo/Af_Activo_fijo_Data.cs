@@ -107,6 +107,7 @@ namespace Core.Erp.Data.ActivoFijo
                         IdEmpleadoCustodio = Entity.IdEmpleadoCustodio,
                         IdEmpleadoEncargado = Entity.IdEmpleadoEncargado,
                         Estado_Proceso_nombre = Entity.Estado_Proceso,
+                        IdDepartamento = Entity.IdDepartamento
                         
 
                     };
@@ -185,6 +186,7 @@ namespace Core.Erp.Data.ActivoFijo
                         IdTipoCatalogo_Ubicacion = info.IdTipoCatalogo_Ubicacion,
                         IdEmpleadoCustodio = info.IdEmpleadoCustodio,
                         IdEmpleadoEncargado = info.IdEmpleadoEncargado,
+                        IdDepartamento = info.IdDepartamento,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                         
@@ -259,6 +261,7 @@ namespace Core.Erp.Data.ActivoFijo
                     Entity.IdTipoCatalogo_Ubicacion = info.IdTipoCatalogo_Ubicacion;
                     Entity.IdEmpleadoCustodio = info.IdEmpleadoCustodio;
                     Entity.IdEmpleadoEncargado = info.IdEmpleadoEncargado;
+                    Entity.IdDepartamento = info.IdDepartamento;
 
                     var detalle = Context.Af_Activo_fijo_CtaCble.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdActivoFijo == info.IdActivoFijo);
                     Context.Af_Activo_fijo_CtaCble.RemoveRange(detalle);
