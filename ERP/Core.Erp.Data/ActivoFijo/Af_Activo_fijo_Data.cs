@@ -72,13 +72,9 @@ namespace Core.Erp.Data.ActivoFijo
                     info = new Af_Activo_fijo_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
-                        Af_Anio_fabrica = Entity.Af_Anio_fabrica,
                         Af_Codigo_Barra = Entity.Af_Codigo_Barra,
                         Af_costo_compra = Entity.Af_costo_compra,
-                        Af_Costo_historico = Entity.Af_Costo_historico,
                         Af_Depreciacion_acum = Entity.Af_Depreciacion_acum,
-                        Af_DescripcionCorta = Entity.Af_DescripcionCorta,
-                        Af_DescripcionTecnica = Entity.Af_DescripcionTecnica,
                         Af_fecha_compra = Entity.Af_fecha_compra,
                         Af_fecha_fin_depre = Entity.Af_fecha_fin_depre,
                         Af_fecha_ini_depre = Entity.Af_fecha_ini_depre,
@@ -86,14 +82,11 @@ namespace Core.Erp.Data.ActivoFijo
                         Af_Nombre = Entity.Af_Nombre,
                         Af_NumPlaca = Entity.Af_NumPlaca,
                         Af_NumSerie = Entity.Af_NumSerie,
-                        Af_NumSerie_Chasis = Entity.Af_NumSerie_Chasis,
-                        Af_NumSerie_Motor = Entity.Af_NumSerie_Motor,
                         Af_observacion = Entity.Af_observacion,
                         Af_porcentaje_deprec = Entity.Af_porcentaje_deprec,
-                        Af_ValorResidual = Entity.Af_ValorResidual == null ? 0 : Convert.ToDouble(Entity.Af_ValorResidual),
-                        Af_ValorSalvamento = Entity.Af_ValorSalvamento == null ? 0 : Convert.ToDouble(Entity.Af_ValorSalvamento),
                         Af_Vida_Util = Entity.Af_Vida_Util,
                         CodActivoFijo = Entity.CodActivoFijo,
+                        Af_ValorSalvamento = Entity.Af_ValorSalvamento,
                         Estado = Entity.Estado,
                         Estado_Proceso = Entity.Estado_Proceso,
                         IdActivoFijoTipo = Entity.IdActivoFijoTipo,
@@ -152,13 +145,9 @@ namespace Core.Erp.Data.ActivoFijo
                     Af_Activo_fijo Entity = new Af_Activo_fijo
                     {
                         IdEmpresa = info.IdEmpresa,
-                        Af_Anio_fabrica = info.Af_Anio_fabrica,
                         Af_Codigo_Barra = info.Af_Codigo_Barra,
                         Af_costo_compra = info.Af_costo_compra,
-                        Af_Costo_historico = info.Af_Costo_historico,
                         Af_Depreciacion_acum = info.Af_Depreciacion_acum,
-                        Af_DescripcionCorta = info.Af_DescripcionCorta,
-                        Af_DescripcionTecnica = info.Af_DescripcionTecnica,
                         Af_fecha_compra = info.Af_fecha_compra.Date,
                         Af_fecha_fin_depre = info.Af_fecha_fin_depre.Date,
                         Af_fecha_ini_depre = info.Af_fecha_ini_depre.Date,
@@ -166,11 +155,8 @@ namespace Core.Erp.Data.ActivoFijo
                         Af_Nombre = info.Af_Nombre,
                         Af_NumPlaca = info.Af_NumPlaca,
                         Af_NumSerie = info.Af_NumSerie,
-                        Af_NumSerie_Chasis = info.Af_NumSerie_Chasis,
-                        Af_NumSerie_Motor = info.Af_NumSerie_Motor,
                         Af_observacion = info.Af_observacion,
                         Af_porcentaje_deprec = info.Af_porcentaje_deprec,
-                        Af_ValorResidual = info.Af_ValorResidual,
                         Af_ValorSalvamento = info.Af_ValorSalvamento,
                         Af_Vida_Util = info.Af_Vida_Util,
                         CodActivoFijo = info.CodActivoFijo,
@@ -228,14 +214,10 @@ namespace Core.Erp.Data.ActivoFijo
                 {
                     Af_Activo_fijo Entity = Context.Af_Activo_fijo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdActivoFijo == info.IdActivoFijo);
                     if (Entity == null) return false;
-
-                    Entity.Af_Anio_fabrica = info.Af_Anio_fabrica;
+                    
                     Entity.Af_Codigo_Barra = info.Af_Codigo_Barra;
                     Entity.Af_costo_compra = info.Af_costo_compra;
-                    Entity .Af_Costo_historico = info.Af_Costo_historico;
                     Entity.Af_Depreciacion_acum = info.Af_Depreciacion_acum;
-                    Entity.Af_DescripcionCorta = info.Af_DescripcionCorta;
-                    Entity.Af_DescripcionTecnica = info.Af_DescripcionTecnica;
                     Entity.Af_fecha_compra = info.Af_fecha_compra.Date;
                     Entity.Af_fecha_fin_depre = info.Af_fecha_fin_depre.Date;
                     Entity.Af_fecha_ini_depre = info.Af_fecha_ini_depre.Date;
@@ -243,11 +225,8 @@ namespace Core.Erp.Data.ActivoFijo
                     Entity.Af_Nombre = info.Af_Nombre;
                     Entity.Af_NumPlaca = info.Af_NumPlaca;
                     Entity.Af_NumSerie = info.Af_NumSerie;
-                    Entity.Af_NumSerie_Chasis = info.Af_NumSerie_Chasis;
-                    Entity.Af_NumSerie_Motor = info.Af_NumSerie_Motor;
                     Entity.Af_observacion = info.Af_observacion;
                     Entity.Af_porcentaje_deprec = info.Af_porcentaje_deprec;
-                    Entity.Af_ValorResidual = info.Af_ValorResidual;
                     Entity.Af_ValorSalvamento = info.Af_ValorSalvamento;
                     Entity.Af_Vida_Util = info.Af_Vida_Util;
                     Entity.CodActivoFijo = info.CodActivoFijo;

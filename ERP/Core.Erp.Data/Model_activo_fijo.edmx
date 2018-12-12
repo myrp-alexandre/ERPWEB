@@ -26,7 +26,6 @@
           <Property Name="Af_fecha_compra" Type="datetime" Nullable="false" />
           <Property Name="Af_fecha_ini_depre" Type="datetime" Nullable="false" />
           <Property Name="Af_fecha_fin_depre" Type="datetime" Nullable="false" />
-          <Property Name="Af_Costo_historico" Type="float" Nullable="false" />
           <Property Name="Af_costo_compra" Type="float" Nullable="false" />
           <Property Name="Af_Depreciacion_acum" Type="float" Nullable="false" />
           <Property Name="Af_Vida_Util" Type="int" Nullable="false" />
@@ -34,25 +33,19 @@
           <Property Name="Af_porcentaje_deprec" Type="float" Nullable="false" />
           <Property Name="Af_observacion" Type="varchar" MaxLength="5000" />
           <Property Name="Af_NumPlaca" Type="varchar" MaxLength="50" />
-          <Property Name="Af_Anio_fabrica" Type="int" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="MotiAnula" Type="varchar" MaxLength="100" />
-          <Property Name="Af_DescripcionCorta" Type="varchar" MaxLength="5000" />
+          <Property Name="IdEmpleadoEncargado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpleadoCustodio" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Af_Codigo_Barra" Type="varchar" MaxLength="50" />
-          <Property Name="Af_DescripcionTecnica" Type="varchar" MaxLength="5000" />
           <Property Name="Estado_Proceso" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="Af_ValorSalvamento" Type="float" Nullable="false" />
-          <Property Name="Af_ValorResidual" Type="float" Nullable="false" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_Transac" Type="datetime" />
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltMod" Type="datetime" />
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
-          <Property Name="Af_NumSerie_Motor" Type="varchar" MaxLength="50" />
-          <Property Name="Af_NumSerie_Chasis" Type="varchar" MaxLength="50" />
-          <Property Name="IdEmpleadoEncargado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdEmpleadoCustodio" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Af_Activo_fijo_Categoria">
           <Key>
@@ -886,7 +879,7 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
             <End Role="Af_Activo_fijo" EntitySet="Af_Activo_fijo" />
             <End Role="Af_Venta_Activo" EntitySet="Af_Venta_Activo" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="spACTF_activos_a_depreciar_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Int32" Name="IdActivoFijo" Nullable="false" />
@@ -1105,7 +1098,6 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
           <Property Name="Af_fecha_compra" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Af_fecha_ini_depre" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Af_fecha_fin_depre" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Af_Costo_historico" Type="Double" Nullable="false" />
           <Property Name="Af_costo_compra" Type="Double" Nullable="false" />
           <Property Name="Af_Depreciacion_acum" Type="Double" Nullable="false" />
           <Property Name="Af_Vida_Util" Type="Int32" Nullable="false" />
@@ -1113,25 +1105,19 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
           <Property Name="Af_porcentaje_deprec" Type="Double" Nullable="false" />
           <Property Name="Af_observacion" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
           <Property Name="Af_NumPlaca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Af_Anio_fabrica" Type="Int32" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Af_DescripcionCorta" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpleadoEncargado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpleadoCustodio" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Af_Codigo_Barra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Af_DescripcionTecnica" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
           <Property Name="Estado_Proceso" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
           <Property Name="Af_ValorSalvamento" Type="Double" Nullable="false" />
-          <Property Name="Af_ValorResidual" Type="Double" Nullable="false" />
           <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="Af_NumSerie_Motor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Af_NumSerie_Chasis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpleadoEncargado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEmpleadoCustodio" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Af_Activo_fijo_Categoria" Relationship="Model_activo_fijo.FK_Af_Activo_fijo_Af_Activo_fijo_Categoria" FromRole="Af_Activo_fijo" ToRole="Af_Activo_fijo_Categoria" />
           <NavigationProperty Name="Af_Activo_fijo_tipo" Relationship="Model_activo_fijo.FK_Af_Activo_fijo_Af_Activo_fijo_tipo" FromRole="Af_Activo_fijo" ToRole="Af_Activo_fijo_tipo" />
           <NavigationProperty Name="Af_Catalogo" Relationship="Model_activo_fijo.FK_Af_Activo_fijo_Af_Catalogo5" FromRole="Af_Activo_fijo" ToRole="Af_Catalogo" />
@@ -1318,7 +1304,7 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1621,25 +1607,19 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
           <EntitySetMapping Name="Af_Activo_fijo">
             <EntityTypeMapping TypeName="Model_activo_fijo.Af_Activo_fijo">
               <MappingFragment StoreEntitySet="Af_Activo_fijo">
-                <ScalarProperty Name="IdEmpleadoCustodio" ColumnName="IdEmpleadoCustodio" />
-                <ScalarProperty Name="IdEmpleadoEncargado" ColumnName="IdEmpleadoEncargado" />
-                <ScalarProperty Name="Af_NumSerie_Chasis" ColumnName="Af_NumSerie_Chasis" />
-                <ScalarProperty Name="Af_NumSerie_Motor" ColumnName="Af_NumSerie_Motor" />
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
                 <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
                 <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
                 <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
                 <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
                 <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Af_ValorResidual" ColumnName="Af_ValorResidual" />
                 <ScalarProperty Name="Af_ValorSalvamento" ColumnName="Af_ValorSalvamento" />
                 <ScalarProperty Name="Estado_Proceso" ColumnName="Estado_Proceso" />
-                <ScalarProperty Name="Af_DescripcionTecnica" ColumnName="Af_DescripcionTecnica" />
                 <ScalarProperty Name="Af_Codigo_Barra" ColumnName="Af_Codigo_Barra" />
-                <ScalarProperty Name="Af_DescripcionCorta" ColumnName="Af_DescripcionCorta" />
-                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="IdEmpleadoCustodio" ColumnName="IdEmpleadoCustodio" />
+                <ScalarProperty Name="IdEmpleadoEncargado" ColumnName="IdEmpleadoEncargado" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Af_Anio_fabrica" ColumnName="Af_Anio_fabrica" />
                 <ScalarProperty Name="Af_NumPlaca" ColumnName="Af_NumPlaca" />
                 <ScalarProperty Name="Af_observacion" ColumnName="Af_observacion" />
                 <ScalarProperty Name="Af_porcentaje_deprec" ColumnName="Af_porcentaje_deprec" />
@@ -1647,7 +1627,6 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
                 <ScalarProperty Name="Af_Vida_Util" ColumnName="Af_Vida_Util" />
                 <ScalarProperty Name="Af_Depreciacion_acum" ColumnName="Af_Depreciacion_acum" />
                 <ScalarProperty Name="Af_costo_compra" ColumnName="Af_costo_compra" />
-                <ScalarProperty Name="Af_Costo_historico" ColumnName="Af_Costo_historico" />
                 <ScalarProperty Name="Af_fecha_fin_depre" ColumnName="Af_fecha_fin_depre" />
                 <ScalarProperty Name="Af_fecha_ini_depre" ColumnName="Af_fecha_ini_depre" />
                 <ScalarProperty Name="Af_fecha_compra" ColumnName="Af_fecha_compra" />

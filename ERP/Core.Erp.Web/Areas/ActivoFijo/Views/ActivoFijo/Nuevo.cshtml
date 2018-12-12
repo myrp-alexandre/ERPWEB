@@ -116,24 +116,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Af_DescripcionCorta">Descripción corta</label>
-                    @Html.TextBoxFor(q => q.Af_DescripcionCorta, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Af_DescripcionCorta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="Af_DescripcionTecnica">Descripción técnica</label>
-                    @Html.TextBoxFor(q => q.Af_DescripcionTecnica, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Af_DescripcionTecnica, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
@@ -241,20 +223,6 @@
                                 @Html.ValidationMessageFor(q => q.Af_Depreciacion_acum, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_Costo_historico">Costo histórico</label>
-                                @Html.TextBoxFor(q => q.Af_Costo_historico, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_Costo_historico, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_ValorResidual">Valor residual</label>
-                                @Html.TextBoxFor(q => q.Af_ValorResidual, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_ValorResidual, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -299,27 +267,6 @@
                                 <label for="Af_NumPlaca">Número de placa</label>
                                 @Html.TextBoxFor(q => q.Af_NumPlaca, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.Af_NumPlaca, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_Anio_fabrica">Año de fabrica</label>
-                                @Html.TextBoxFor(q => q.Af_Anio_fabrica, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_Anio_fabrica, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_NumSerie_Motor">Serie de motor</label>
-                                @Html.TextBoxFor(q => q.Af_NumSerie_Motor, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_NumSerie_Motor, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Af_NumSerie_Chasis">Número de chasis</label>
-                                @Html.TextBoxFor(q => q.Af_NumSerie_Chasis, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Af_NumSerie_Chasis, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
