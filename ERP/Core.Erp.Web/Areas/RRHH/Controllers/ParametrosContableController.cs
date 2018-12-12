@@ -7,6 +7,8 @@ using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
 using DevExpress.Web.Mvc;
 using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Bus.CuentasPorPagar;
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class ParametrosContableController : Controller
@@ -23,6 +25,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_catalogo_Bus bus_catalogo = new ro_catalogo_Bus();
         ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Bus bus_configuracion_cta_x_sueldo = new ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Bus();
         ct_cbtecble_tipo_Bus bus_comprobante_tipo = new ct_cbtecble_tipo_Bus();
+        cp_orden_pago_tipo_x_empresa_Bus bus_tipo_op = new cp_orden_pago_tipo_x_empresa_Bus();
 
         int IdEmpresa = 0;
         #endregion
@@ -59,12 +62,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_parametros()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            List<ro_Parametros_Info> model = bus_parametros.get_list(IdEmpresa);
-            return PartialView("_GridViewPartial_parametros", model);
-        }
+       
         private void cargar_combos()
         {
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -73,6 +71,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.lst_rubro = bus_rubro.get_list(IdEmpresa, false);
             ViewBag.lst_comprobante_tipo = bus_comprobante_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
+            ViewBag.lst_tipo_op = bus_tipo_op.get_list(IdEmpresa);
+
         }
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cta_ctble_rubros()

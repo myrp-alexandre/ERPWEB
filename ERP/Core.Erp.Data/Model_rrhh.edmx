@@ -896,25 +896,20 @@
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdTipoCbte_AsientoSueldoXPagar" Type="int" />
-          <Property Name="GeneraOP_PagoPrestamos" Type="bit" />
-          <Property Name="IdTipoOP_PagoPrestamos" Type="varchar" MaxLength="20" />
-          <Property Name="IdFormaOP_PagoPrestamos" Type="varchar" MaxLength="20" />
-          <Property Name="GeneraOP_LiquidacionVacaciones" Type="bit" />
-          <Property Name="IdTipoOP_LiquidacionVacaciones" Type="varchar" MaxLength="20" />
-          <Property Name="IdTipoFlujoOP_LiquidacionVacaciones" Type="int" />
-          <Property Name="IdFormaOP_LiquidacionVacaciones" Type="varchar" MaxLength="20" />
-          <Property Name="DescuentaIESS_LiquidacionVacaciones" Type="bit" />
-          <Property Name="cta_contable_IESS_Vacaciones" Type="varchar" MaxLength="20" />
-          <Property Name="GeneraOP_ActaFiniquito" Type="bit" />
-          <Property Name="IdTipoOP_ActaFiniquito" Type="varchar" MaxLength="20" />
-          <Property Name="IdFormaPagoOP_ActaFiniquito" Type="varchar" MaxLength="20" />
+          <Property Name="IdTipoCbte_AsientoSueldoXPagar" Type="int" Nullable="false" />
           <Property Name="Sueldo_basico" Type="float" Nullable="false" />
           <Property Name="Porcentaje_aporte_pers" Type="float" Nullable="false" />
           <Property Name="Porcentaje_aporte_patr" Type="float" Nullable="false" />
           <Property Name="IdRubro_acta_finiquito" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="genera_op_x_pago" Type="bit" Nullable="false" />
           <Property Name="Genera_op_x_pago_x_empleao" Type="bit" Nullable="false" />
+          <Property Name="Genera_op_por_liq_vacaciones" Type="bit" Nullable="false" />
+          <Property Name="Genera_op_por_acta_finiquito" Type="bit" Nullable="false" />
+          <Property Name="Genera_op_por_prestamos" Type="bit" Nullable="false" />
+          <Property Name="IdTipo_op_vacaciones" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdTipo_op_prestamos" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdTipo_op_acta_finiquito" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdTipo_op_sueldo_por_pagar" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="ro_participacion_utilidad">
           <Key>
@@ -5906,31 +5901,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="IdTipoFlujo" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Self.FK_ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_ro_Nomina_Tipoliqui" FromRole="ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" ToRole="ro_Nomina_Tipoliqui" />
         </EntityType>
-        <EntityType Name="ro_Parametros">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_AsientoSueldoXPagar" Type="Int32" />
-          <Property Name="GeneraOP_PagoPrestamos" Type="Boolean" />
-          <Property Name="IdTipoOP_PagoPrestamos" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdFormaOP_PagoPrestamos" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="GeneraOP_LiquidacionVacaciones" Type="Boolean" />
-          <Property Name="IdTipoOP_LiquidacionVacaciones" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoFlujoOP_LiquidacionVacaciones" Type="Int32" />
-          <Property Name="IdFormaOP_LiquidacionVacaciones" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DescuentaIESS_LiquidacionVacaciones" Type="Boolean" />
-          <Property Name="cta_contable_IESS_Vacaciones" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="GeneraOP_ActaFiniquito" Type="Boolean" />
-          <Property Name="IdTipoOP_ActaFiniquito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdFormaPagoOP_ActaFiniquito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Sueldo_basico" Type="Double" Nullable="false" />
-          <Property Name="Porcentaje_aporte_pers" Type="Double" Nullable="false" />
-          <Property Name="Porcentaje_aporte_patr" Type="Double" Nullable="false" />
-          <Property Name="IdRubro_acta_finiquito" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="genera_op_x_pago" Type="Boolean" Nullable="false" />
-          <Property Name="Genera_op_x_pago_x_empleao" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="ro_participacion_utilidad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -6999,7 +6969,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySet Name="ro_nomina_x_horas_extras" EntityType="Self.ro_nomina_x_horas_extras" />
           <EntitySet Name="ro_nomina_x_horas_extras_det" EntityType="Self.ro_nomina_x_horas_extras_det" />
           <EntitySet Name="ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" EntityType="Self.ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" />
-          <EntitySet Name="ro_Parametros" EntityType="Self.ro_Parametros" />
           <EntitySet Name="ro_participacion_utilidad" EntityType="Self.ro_participacion_utilidad" />
           <EntitySet Name="ro_participacion_utilidad_empleado" EntityType="Self.ro_participacion_utilidad_empleado" />
           <EntitySet Name="ro_periodo" EntityType="Self.ro_periodo" />
@@ -7573,6 +7542,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Parameter Name="IdRol" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="vwro_nomina_sin_percebir_sueldo" EntityType="Model_rrhh.vwro_nomina_sin_percebir_sueldo" />
+          <EntitySet Name="ro_Parametros" EntityType="Model_rrhh.ro_Parametros" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -10068,6 +10038,26 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ro_Parametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_AsientoSueldoXPagar" Type="Int32" Nullable="false" />
+          <Property Name="Sueldo_basico" Type="Double" Nullable="false" />
+          <Property Name="Porcentaje_aporte_pers" Type="Double" Nullable="false" />
+          <Property Name="Porcentaje_aporte_patr" Type="Double" Nullable="false" />
+          <Property Name="IdRubro_acta_finiquito" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="genera_op_x_pago" Type="Boolean" Nullable="false" />
+          <Property Name="Genera_op_x_pago_x_empleao" Type="Boolean" Nullable="false" />
+          <Property Name="Genera_op_por_liq_vacaciones" Type="Boolean" Nullable="false" />
+          <Property Name="Genera_op_por_acta_finiquito" Type="Boolean" Nullable="false" />
+          <Property Name="Genera_op_por_prestamos" Type="Boolean" Nullable="false" />
+          <Property Name="IdTipo_op_vacaciones" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_op_prestamos" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_op_acta_finiquito" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_op_sueldo_por_pagar" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10600,32 +10590,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ro_Parametros">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_Parametros">
-              <MappingFragment StoreEntitySet="ro_Parametros">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipoCbte_AsientoSueldoXPagar" ColumnName="IdTipoCbte_AsientoSueldoXPagar" />
-                <ScalarProperty Name="GeneraOP_PagoPrestamos" ColumnName="GeneraOP_PagoPrestamos" />
-                <ScalarProperty Name="IdTipoOP_PagoPrestamos" ColumnName="IdTipoOP_PagoPrestamos" />
-                <ScalarProperty Name="IdFormaOP_PagoPrestamos" ColumnName="IdFormaOP_PagoPrestamos" />
-                <ScalarProperty Name="GeneraOP_LiquidacionVacaciones" ColumnName="GeneraOP_LiquidacionVacaciones" />
-                <ScalarProperty Name="IdTipoOP_LiquidacionVacaciones" ColumnName="IdTipoOP_LiquidacionVacaciones" />
-                <ScalarProperty Name="IdTipoFlujoOP_LiquidacionVacaciones" ColumnName="IdTipoFlujoOP_LiquidacionVacaciones" />
-                <ScalarProperty Name="IdFormaOP_LiquidacionVacaciones" ColumnName="IdFormaOP_LiquidacionVacaciones" />
-                <ScalarProperty Name="DescuentaIESS_LiquidacionVacaciones" ColumnName="DescuentaIESS_LiquidacionVacaciones" />
-                <ScalarProperty Name="cta_contable_IESS_Vacaciones" ColumnName="cta_contable_IESS_Vacaciones" />
-                <ScalarProperty Name="GeneraOP_ActaFiniquito" ColumnName="GeneraOP_ActaFiniquito" />
-                <ScalarProperty Name="IdTipoOP_ActaFiniquito" ColumnName="IdTipoOP_ActaFiniquito" />
-                <ScalarProperty Name="IdFormaPagoOP_ActaFiniquito" ColumnName="IdFormaPagoOP_ActaFiniquito" />
-                <ScalarProperty Name="Sueldo_basico" ColumnName="Sueldo_basico" />
-                <ScalarProperty Name="Porcentaje_aporte_pers" ColumnName="Porcentaje_aporte_pers" />
-                <ScalarProperty Name="Porcentaje_aporte_patr" ColumnName="Porcentaje_aporte_patr" />
-                <ScalarProperty Name="IdRubro_acta_finiquito" ColumnName="IdRubro_acta_finiquito" />
-                <ScalarProperty Name="genera_op_x_pago" ColumnName="genera_op_x_pago" />
-                <ScalarProperty Name="Genera_op_x_pago_x_empleao" ColumnName="Genera_op_x_pago_x_empleao" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -12155,6 +12119,27 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_Parametros">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_Parametros">
+              <MappingFragment StoreEntitySet="ro_Parametros">
+                <ScalarProperty Name="IdTipo_op_sueldo_por_pagar" ColumnName="IdTipo_op_sueldo_por_pagar" />
+                <ScalarProperty Name="IdTipo_op_acta_finiquito" ColumnName="IdTipo_op_acta_finiquito" />
+                <ScalarProperty Name="IdTipo_op_prestamos" ColumnName="IdTipo_op_prestamos" />
+                <ScalarProperty Name="IdTipo_op_vacaciones" ColumnName="IdTipo_op_vacaciones" />
+                <ScalarProperty Name="Genera_op_por_prestamos" ColumnName="Genera_op_por_prestamos" />
+                <ScalarProperty Name="Genera_op_por_acta_finiquito" ColumnName="Genera_op_por_acta_finiquito" />
+                <ScalarProperty Name="Genera_op_por_liq_vacaciones" ColumnName="Genera_op_por_liq_vacaciones" />
+                <ScalarProperty Name="Genera_op_x_pago_x_empleao" ColumnName="Genera_op_x_pago_x_empleao" />
+                <ScalarProperty Name="genera_op_x_pago" ColumnName="genera_op_x_pago" />
+                <ScalarProperty Name="IdRubro_acta_finiquito" ColumnName="IdRubro_acta_finiquito" />
+                <ScalarProperty Name="Porcentaje_aporte_patr" ColumnName="Porcentaje_aporte_patr" />
+                <ScalarProperty Name="Porcentaje_aporte_pers" ColumnName="Porcentaje_aporte_pers" />
+                <ScalarProperty Name="Sueldo_basico" ColumnName="Sueldo_basico" />
+                <ScalarProperty Name="IdTipoCbte_AsientoSueldoXPagar" ColumnName="IdTipoCbte_AsientoSueldoXPagar" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

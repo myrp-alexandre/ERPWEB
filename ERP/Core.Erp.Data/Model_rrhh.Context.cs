@@ -57,7 +57,6 @@ namespace Core.Erp.Data
         public DbSet<ro_nomina_x_horas_extras> ro_nomina_x_horas_extras { get; set; }
         public DbSet<ro_nomina_x_horas_extras_det> ro_nomina_x_horas_extras_det { get; set; }
         public DbSet<ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar> ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar { get; set; }
-        public DbSet<ro_Parametros> ro_Parametros { get; set; }
         public DbSet<ro_participacion_utilidad> ro_participacion_utilidad { get; set; }
         public DbSet<ro_participacion_utilidad_empleado> ro_participacion_utilidad_empleado { get; set; }
         public DbSet<ro_periodo> ro_periodo { get; set; }
@@ -124,6 +123,7 @@ namespace Core.Erp.Data
         public DbSet<vwro_HorasProfesores> vwro_HorasProfesores { get; set; }
         public DbSet<vwro_HorasProfesores_det> vwro_HorasProfesores_det { get; set; }
         public DbSet<vwro_nomina_sin_percebir_sueldo> vwro_nomina_sin_percebir_sueldo { get; set; }
+        public DbSet<ro_Parametros> ro_Parametros { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

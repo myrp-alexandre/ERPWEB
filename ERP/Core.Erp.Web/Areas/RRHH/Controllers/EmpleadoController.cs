@@ -323,7 +323,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
 
-        const string UploadDirectory = "~/Content/imagenes/";
+        const string UploadDirectory = "~/Content/UploadControl/UploadFolder/";
 
         public UploadedFile UploadControlUpload()
         {
@@ -366,11 +366,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             if (e.UploadedFile.IsValid)
             {
-
-
-
-
-
                 em_foto = e.UploadedFile.FileBytes;
                 var filename = Path.GetFileName(e.UploadedFile.FileName);
                 e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);

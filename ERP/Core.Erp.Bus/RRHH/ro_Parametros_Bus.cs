@@ -9,18 +9,7 @@ namespace Core.Erp.Bus.RRHH
         ro_Parametros_Data odata = new ro_Parametros_Data();
         ro_Config_Param_contable_Bus bus_parametros = new ro_Config_Param_contable_Bus();
         ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Bus bus_nomina_sueldo = new ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Bus();
-        public List<ro_Parametros_Info> get_list(int IdEmpresa)
-        {
-            try
-            {
-                return odata.get_list(IdEmpresa);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+      
         public ro_Parametros_Info get_info(int IdEmpresa)
         {
             try
