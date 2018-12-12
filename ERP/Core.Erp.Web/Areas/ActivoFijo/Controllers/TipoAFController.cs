@@ -101,7 +101,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         [HttpPost]
         public ActionResult Nuevo(Af_Activo_fijo_tipo_Info model)
-        {            
+        {
+            model.IdUsuario = Session["IdUsuario"].ToString();
             if (!bus_tipoactivo.guardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -121,6 +122,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Modificar(Af_Activo_fijo_tipo_Info model)
         {
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             if (!bus_tipoactivo.modificarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -140,6 +142,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Anular(Af_Activo_fijo_tipo_Info model)
         {
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
             if (!bus_tipoactivo.anularDB(model))
             {
                 cargar_combos(model.IdEmpresa);
