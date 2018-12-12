@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Core.Erp.Data.Reportes.Inventario
+namespace Core.Erp.Data.Reportes.ActivoFijo
 {
     public class ACTF_006_Data
     {

@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.ActivoFijo;
 using Core.Erp.Info.ActivoFijo;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,18 @@ namespace Core.Erp.Bus.ActivoFijo
 {
     public class Af_Activo_fijo_Bus
     {
+
+     
+        public List<Af_Activo_fijo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            return odata.get_list_bajo_demanda(args, IdEmpresa);
+        }
+
+        public Af_Activo_fijo_Info get_info_bajo_demanda(int IdEmpresa, ListEditItemRequestedByValueEventArgs args)
+        {
+            return odata.get_info_bajo_demanda(IdEmpresa, args);
+        }
+
         Af_Activo_fijo_Data odata = new Af_Activo_fijo_Data();
     
         public List<Af_Activo_fijo_Info> get_list(int IdEmpresa, bool mostrar_anulados)

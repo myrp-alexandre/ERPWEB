@@ -8,7 +8,7 @@
         Response.Redirect("~/Account/Login");
     }
 }
-@using (Html.BeginForm("INV_013", "ActivoFijoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("ACTF_006", "ActivoFijoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q=>q.IdEmpresa, new { @id="IdEmpresa"})
     <div class="box">
@@ -33,9 +33,9 @@
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="IdProductoPadre">Producto padre</label>
+                            <label for="IdProductoPadre">Activo fijo</label>
                             @Html.Partial("_CmbActivo_fijo", Model)
-                            @Html.ValidationMessageFor(q => q.IdProductoPadre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdActivoFijo, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

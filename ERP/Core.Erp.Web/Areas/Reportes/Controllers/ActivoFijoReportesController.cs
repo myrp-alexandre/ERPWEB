@@ -3,7 +3,9 @@ using Core.Erp.Info.ActivoFijo;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using Core.Erp.Web.Reportes.ActivoFijo;
+using DevExpress.Web;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Reportes.Controllers
@@ -11,6 +13,23 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     [SessionTimeout]
     public class ActivoFijoReportesController : Controller
     {
+        Af_Activo_fijo_Bus bus_activo = new Af_Activo_fijo_Bus();
+        public ActionResult CmbActivo_fijo()
+        {
+            string model = "";
+            return PartialView("_CmbActivo_fijo", model);
+        }
+
+        public List<Af_Activo_fijo_Info> get_list_bajo_demanda_af(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_activo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+
+        public Af_Activo_fijo_Info get_info_bajo_demanda_af(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_activo.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
+        }
+
         #region Json
         public JsonResult cargar_categoria(int IdEmpresa = 0 , int IdActivoFijoTipo = 0)
         {

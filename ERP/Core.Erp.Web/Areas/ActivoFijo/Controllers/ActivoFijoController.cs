@@ -89,6 +89,24 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
         }
+
+
+
+        public ActionResult CmbActivo_fijo()
+        {
+            string model = "";
+            return PartialView("_CmbActivo_fijo", model);
+        }
+
+        public List<Af_Activo_fijo_Info> get_list_bajo_demanda_af(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_activo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+
+        public Af_Activo_fijo_Info get_info_bajo_demanda_af(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_activo.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
+        }
         #endregion
 
         #region Metodos
