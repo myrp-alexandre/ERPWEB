@@ -53,6 +53,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Metodos
         private void cargar_combos(fa_cliente_Info info)
         {
+            //fa_NivelDescuento_Bus bus_nivel = new fa_NivelDescuento_Bus();
+            //var lst_nivel = bus_nivel.GetList();
+            //ViewBag.lst_nivel = lst_nivel;
+
             fa_formaPago_Bus bus_formapago = new fa_formaPago_Bus();
             var lst_formapago = bus_formapago.get_list(false);
             ViewBag.lst_formapago = lst_formapago;

@@ -757,167 +757,167 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return PartialView("_GridViewPartial_factura_det", model);
         }
 
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
-            if (info_det != null && info_det.IdProducto != 0)
-            {
-                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-                if (producto != null)
-                {
-                    info_det.pr_descripcion = producto.pr_descripcion_combo;
-                    info_det.se_distribuye = producto.se_distribuye;
-                    info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
-                    var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
-                    if (cliente != null)
-                    {
-                        int nivel_precio = cliente.NivelPrecio == 0 ? 1 : cliente.NivelPrecio;
-                        switch (nivel_precio)
-                        {
-                            case 1:
-                                info_det.vt_Precio = producto.precio_1;
-                                break;
-                            case 2:
-                                if (producto.signo_2 == "+")
-                                {
-                                    info_det.vt_Precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
-                                    info_det.vt_PorDescUnitario = 0;
-                                }
-                                else
-                                {
-                                    info_det.vt_Precio = producto.precio_1;
-                                    info_det.vt_PorDescUnitario = producto.porcentaje_2;
-                                }
-                                break;
-                            case 3:
-                                if (producto.signo_3 == "+")
-                                {
-                                    info_det.vt_Precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
-                                    info_det.vt_PorDescUnitario = 0;
-                                }
-                                else
-                                {
-                                    info_det.vt_Precio = producto.precio_1;
-                                    info_det.vt_PorDescUnitario = producto.porcentaje_3;
-                                }
-                                break;
-                            case 4:
-                                if (producto.signo_4 == "+")
-                                {
-                                    info_det.vt_Precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
-                                    info_det.vt_PorDescUnitario = 0;
-                                }
-                                else
-                                {
-                                    info_det.vt_Precio = producto.precio_1;
-                                    info_det.vt_PorDescUnitario = producto.porcentaje_4;
-                                }
+      //  [HttpPost, ValidateInput(false)]
+        //public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
+        //{
+        //    int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+        //    decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
+        //    if (info_det != null && info_det.IdProducto != 0)
+        //    {
+        //        var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+        //        if (producto != null)
+        //        {
+        //            info_det.pr_descripcion = producto.pr_descripcion_combo;
+        //            info_det.se_distribuye = producto.se_distribuye;
+        //            info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
+        //            var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
+        //            if (cliente != null)
+        //            {
+        //                int nivel_precio = cliente.NivelPrecio == 0 ? 1 : cliente.NivelPrecio;
+        //                switch (nivel_precio)
+        //                {
+        //                    case 1:
+        //                        info_det.vt_Precio = producto.precio_1;
+        //                        break;
+        //                    case 2:
+        //                        if (producto.signo_2 == "+")
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
+        //                            info_det.vt_PorDescUnitario = 0;
+        //                        }
+        //                        else
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_1;
+        //                            info_det.vt_PorDescUnitario = producto.porcentaje_2;
+        //                        }
+        //                        break;
+        //                    case 3:
+        //                        if (producto.signo_3 == "+")
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
+        //                            info_det.vt_PorDescUnitario = 0;
+        //                        }
+        //                        else
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_1;
+        //                            info_det.vt_PorDescUnitario = producto.porcentaje_3;
+        //                        }
+        //                        break;
+        //                    case 4:
+        //                        if (producto.signo_4 == "+")
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
+        //                            info_det.vt_PorDescUnitario = 0;
+        //                        }
+        //                        else
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_1;
+        //                            info_det.vt_PorDescUnitario = producto.porcentaje_4;
+        //                        }
 
-                                break;
-                            case 5:
-                                if (producto.signo_5 == "+")
-                                {
-                                    info_det.vt_Precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
-                                    info_det.vt_PorDescUnitario = 0;
-                                }
-                                else
-                                {
-                                    info_det.vt_Precio = producto.precio_1;
-                                    info_det.vt_PorDescUnitario = producto.porcentaje_5;
-                                }
-                                break;
-                        }
-                    }
-                }
-            }
-            List_det.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_factura_det", model);
-        }
+        //                        break;
+        //                    case 5:
+        //                        if (producto.signo_5 == "+")
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
+        //                            info_det.vt_PorDescUnitario = 0;
+        //                        }
+        //                        else
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_1;
+        //                            info_det.vt_PorDescUnitario = producto.porcentaje_5;
+        //                        }
+        //                        break;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    List_det.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //    var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //    cargar_combos_detalle();
+        //    return PartialView("_GridViewPartial_factura_det", model);
+        //}
 
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
-            if (info_det != null && info_det.IdProducto != 0)
-            {
-                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-                if (producto != null)
-                {
-                    info_det.pr_descripcion = producto.pr_descripcion_combo;
-                    info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
-                    info_det.se_distribuye = producto.se_distribuye;
-                    var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
-                    if (cliente != null)
-                    {
-                        int nivel_precio = cliente.NivelPrecio == 0 ? 1 : cliente.NivelPrecio;
-                        switch (nivel_precio)
-                        {
-                            case 1:
-                                info_det.vt_Precio = producto.precio_1;
-                                break;
-                            case 2:
-                                if (producto.signo_2 == "+")
-                                {
-                                    info_det.vt_Precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
-                                    info_det.vt_PorDescUnitario = 0;
-                                }
-                                else
-                                {
-                                    info_det.vt_Precio = producto.precio_1;
-                                    info_det.vt_PorDescUnitario = producto.porcentaje_2;
-                                }
-                                break;
-                            case 3:
-                                if (producto.signo_3 == "+")
-                                {
-                                    info_det.vt_Precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
-                                    info_det.vt_PorDescUnitario = 0;
-                                }
-                                else
-                                {
-                                    info_det.vt_Precio = producto.precio_1;
-                                    info_det.vt_PorDescUnitario = producto.porcentaje_3;
-                                }
-                                break;
-                            case 4:
-                                if (producto.signo_4 == "+")
-                                {
-                                    info_det.vt_Precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
-                                    info_det.vt_PorDescUnitario = 0;
-                                }
-                                else
-                                {
-                                    info_det.vt_Precio = producto.precio_1;
-                                    info_det.vt_PorDescUnitario = producto.porcentaje_4;
-                                }
+    //    [HttpPost, ValidateInput(false)]
+        //public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
+        //{
+        //    int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+        //    decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
+        //    if (info_det != null && info_det.IdProducto != 0)
+        //    {
+        //        var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+        //        if (producto != null)
+        //        {
+        //            info_det.pr_descripcion = producto.pr_descripcion_combo;
+        //            info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
+        //            info_det.se_distribuye = producto.se_distribuye;
+        //            var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
+        //            if (cliente != null)
+        //            {
+        //                int nivel_precio = cliente.NivelPrecio == 0 ? 1 : cliente.NivelPrecio;
+        //                switch (nivel_precio)
+        //                {
+        //                    case 1:
+        //                        info_det.vt_Precio = producto.precio_1;
+        //                        break;
+        //                    case 2:
+        //                        if (producto.signo_2 == "+")
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
+        //                            info_det.vt_PorDescUnitario = 0;
+        //                        }
+        //                        else
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_1;
+        //                            info_det.vt_PorDescUnitario = producto.porcentaje_2;
+        //                        }
+        //                        break;
+        //                    case 3:
+        //                        if (producto.signo_3 == "+")
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
+        //                            info_det.vt_PorDescUnitario = 0;
+        //                        }
+        //                        else
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_1;
+        //                            info_det.vt_PorDescUnitario = producto.porcentaje_3;
+        //                        }
+        //                        break;
+        //                    case 4:
+        //                        if (producto.signo_4 == "+")
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
+        //                            info_det.vt_PorDescUnitario = 0;
+        //                        }
+        //                        else
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_1;
+        //                            info_det.vt_PorDescUnitario = producto.porcentaje_4;
+        //                        }
 
-                                break;
-                            case 5:
-                                if (producto.signo_5 == "+")
-                                {
-                                    info_det.vt_Precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
-                                    info_det.vt_PorDescUnitario = 0;
-                                }
-                                else
-                                {
-                                    info_det.vt_Precio = producto.precio_1;
-                                    info_det.vt_PorDescUnitario = producto.porcentaje_5;
-                                }
-                                break;
-                        }
-                    }
-                }
-            }
-            List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_factura_det", model);
-        }
+        //                        break;
+        //                    case 5:
+        //                        if (producto.signo_5 == "+")
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
+        //                            info_det.vt_PorDescUnitario = 0;
+        //                        }
+        //                        else
+        //                        {
+        //                            info_det.vt_Precio = producto.precio_1;
+        //                            info_det.vt_PorDescUnitario = producto.porcentaje_5;
+        //                        }
+        //                        break;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //    var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //    cargar_combos_detalle();
+        //    return PartialView("_GridViewPartial_factura_det", model);
+        //}
 
         public ActionResult EditingDelete(int Secuencia)
         {
