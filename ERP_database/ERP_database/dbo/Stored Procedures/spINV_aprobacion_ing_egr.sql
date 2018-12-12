@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[spINV_aprobacion_ing_egr]
+﻿--exec [dbo].[spINV_aprobacion_ing_egr] 1,1,1,1,358
+CREATE PROCEDURE [dbo].[spINV_aprobacion_ing_egr]
 (
 @IdEmpresa int,
 @IdSucursal int,
@@ -269,7 +270,16 @@ IF(@VALIDADOR != 0)
 		DELETE ct_cbtecble WHERE IdEmpresa = @IdEmpresa AND IdTipoCbte = @IdTipoCbte AND IdCbteCble = @IdCbteCble
 		RETURN @IdNumMovi_apro
 	END
-END
+END	
+
+SELECT @VALIDADOR = COUNT(*) FROM #in_movi_inven_x_cbte_cble 
+WHERE IdCtaCble IS NULL
+
+IF(@VALIDADOR > 0)
+	BEGIN
+		DELETE ct_cbtecble WHERE IdEmpresa = @IdEmpresa AND IdTipoCbte = @IdTipoCbte AND IdCbteCble = @IdCbteCble
+		RETURN @IdNumMovi_apro
+	END
 
 BEGIN --INSERTO REGISTROS EN CT_CBTECBLE_DET
 PRINT 'INSERTO REGISTROS EN CT_CBTECBLE_DET'

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE sppro_GetProductoFacturadosPorFecha
+﻿CREATE PROCEDURE [dbo].[sppro_GetProductoFacturadosPorFecha]
 (
 @IdEmpresa int, @IdSucursal int, @IdBodega int, @FechaIni DATE, @FechaFin DATE
 )
@@ -10,7 +10,7 @@ set @IdBodega = 1
 set @FechaIni = DATEFROMPARTS(2018,1,1)
 set @FechaFin = DATEFROMPARTS(2018,12,31)*/
 
-select d.IdEmpresa, d.IdProducto, p.pr_descripcion, sum(d.vt_cantidad) vt_cantidad, min(c.vt_fecha) vt_fecha, u.Descripcion as NombreUnidad, isnull(inv.stock,0)stock, fab.CantidadFabricada
+select d.IdEmpresa, d.IdProducto, p.pr_descripcion, ISNULL(sum(d.vt_cantidad),0) vt_cantidad, min(c.vt_fecha) vt_fecha, U.IdUnidadMedida, u.Descripcion as NombreUnidad, isnull(inv.stock,0)stock, ISNULL(fab.CantidadFabricada,0)CantidadFabricada
 from fa_factura_det as d inner join fa_factura as c
 on c.IdEmpresa = d.IdEmpresa and c.IdSucursal = d.IdSucursal
 and c.IdBodega = d.IdBodega and c.IdCbteVta = d.IdCbteVta
@@ -43,4 +43,4 @@ where c.IdEmpresa = @IdEmpresa and c.IdSucursal = @IdSucursal
 and c.IdBodega = @IdBodega and
 c.vt_fecha between @FechaIni and @FechaFin and t.Aparece_fabricacion = 1
 and c.Estado = 'A'
-group by d.IdEmpresa, d.IdProducto, p.pr_descripcion, u.Descripcion, inv.stock, fab.CantidadFabricada
+group by d.IdEmpresa, d.IdProducto, p.pr_descripcion, U.IdUnidadMedida,u.Descripcion, inv.stock, fab.CantidadFabricada

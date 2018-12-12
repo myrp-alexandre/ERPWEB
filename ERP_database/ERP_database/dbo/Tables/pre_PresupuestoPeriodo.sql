@@ -4,6 +4,7 @@
     [Observacion]           VARCHAR (MAX) NULL,
     [FechaInicio]           DATE          NOT NULL,
     [FechaFin]              DATE          NOT NULL,
+    [DescripciónPeriodo]    VARCHAR (MAX) NOT NULL,
     [EstadoCierre]          BIT           NOT NULL,
     [Estado]                BIT           NOT NULL,
     [IdUsuarioCreacion]     VARCHAR (50)  NULL,
@@ -15,4 +16,6 @@
     [MotivoAnulacion]       VARCHAR (MAX) NULL,
     CONSTRAINT [PK_pre_Presupuesto] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdPeriodo] ASC)
 );
+
+
 

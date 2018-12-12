@@ -12,7 +12,7 @@ FROM            (SELECT        rol.IdEmpresa, rol.IdRol, rol.IdNominaTipo, rol.I
                                                     dbo.tb_persona AS persona ON emp.IdPersona = persona.IdPersona AND rol_det.IdRubro = 950) AS rol_1 LEFT OUTER JOIN
                              (SELECT        archivo.IdEmpresa, archivo.IdNomina, archivo.IdNominaTipo, archivo.IdPeriodo, archivo_det.IdSucursal, archivo_det.IdEmpleado, SUM(archivo_det.Valor) AS Valor
                                FROM            dbo.ro_archivos_bancos_generacion AS archivo INNER JOIN
-                                                         dbo.ro_archivos_bancos_generacion_x_empleado AS archivo_det ON archivo.IdEmpresa = archivo_det.IdEmpresa AND archivo.IdArchivo = archivo_det.IdArchivo
+                                                         dbo.ro_archivos_bancos_generacion_x_empleado AS archivo_det ON archivo.IdEmpresa = archivo_det.IdEmpresa AND archivo.IdArchivo = archivo_det.IdArchivo AND archivo.estado = 'A'
                                GROUP BY archivo.IdEmpresa, archivo.IdNomina, archivo.IdNominaTipo, archivo.IdPeriodo, archivo_det.IdEmpleado, archivo_det.IdSucursal) AS pago ON pago.IdEmpresa = rol_1.IdEmpresa AND 
                          pago.IdNomina = rol_1.IdNominaTipo AND pago.IdNominaTipo = rol_1.IdNominaTipoLiqui AND pago.IdPeriodo = rol_1.IdPeriodo AND pago.IdEmpleado = rol_1.IdEmpleado AND pago.IdSucursal = rol_1.IdSucursal
 GO
@@ -25,7 +25,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[38] 4[6] 2[32] 3) )"
+         Configuration = "(H (1[67] 4[5] 2[6] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -91,22 +91,22 @@ Begin DesignProperties =
          Left = -1114
       End
       Begin Tables = 
-         Begin Table = "pago"
-            Begin Extent = 
-               Top = 6
-               Left = 1392
-               Bottom = 136
-               Right = 1562
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "rol_1"
             Begin Extent = 
                Top = 6
                Left = 1152
-               Bottom = 136
+               Bottom = 282
                Right = 1354
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "pago"
+            Begin Extent = 
+               Top = 8
+               Left = 1546
+               Bottom = 238
+               Right = 1713
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -149,6 +149,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_rol_detalle_saldo_por_pagar';
+
+
 
 
 

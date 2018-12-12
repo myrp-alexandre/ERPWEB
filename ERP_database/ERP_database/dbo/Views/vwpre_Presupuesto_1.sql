@@ -2,7 +2,8 @@
 AS
 SELECT        dbo.pre_Presupuesto.IdEmpresa, dbo.pre_Presupuesto.IdPresupuesto, dbo.pre_Presupuesto.IdSucursal, dbo.tb_sucursal.Su_Descripcion, dbo.pre_Presupuesto.IdPeriodo, dbo.pre_PresupuestoPeriodo.FechaInicio, 
                          dbo.pre_PresupuestoPeriodo.FechaFin, dbo.pre_PresupuestoPeriodo.EstadoCierre, dbo.pre_Presupuesto.IdGrupo, dbo.pre_Grupo.Descripcion, dbo.pre_Presupuesto.Observacion, dbo.pre_Presupuesto.Estado, 
-                         dbo.pre_Presupuesto.MontoSolicitado, dbo.pre_Presupuesto.MontoAprobado
+                         dbo.pre_Presupuesto.MontoSolicitado, dbo.pre_Presupuesto.MontoAprobado, dbo.pre_PresupuestoPeriodo.DescripciónPeriodo, dbo.pre_Presupuesto.IdUsuarioAprobacion, dbo.pre_Presupuesto.FechaAprobacion, 
+                         dbo.pre_Presupuesto.MotivoAprobacion
 FROM            dbo.pre_Grupo INNER JOIN
                          dbo.pre_Presupuesto ON dbo.pre_Grupo.IdEmpresa = dbo.pre_Presupuesto.IdEmpresa AND dbo.pre_Grupo.IdGrupo = dbo.pre_Presupuesto.IdGrupo INNER JOIN
                          dbo.pre_PresupuestoPeriodo ON dbo.pre_Presupuesto.IdEmpresa = dbo.pre_PresupuestoPeriodo.IdEmpresa AND dbo.pre_Presupuesto.IdPeriodo = dbo.pre_PresupuestoPeriodo.IdPeriodo INNER JOIN
@@ -12,11 +13,20 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'    Or = 1350
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'alue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
       End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwpre_Presupuesto';
+
+
 
 
 GO
@@ -25,7 +35,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[69] 4[5] 2[14] 3) )"
+         Configuration = "(H (1[34] 4[5] 2[8] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -103,23 +113,23 @@ Begin DesignProperties =
          End
          Begin Table = "pre_Presupuesto"
             Begin Extent = 
-               Top = 138
-               Left = 38
-               Bottom = 268
-               Right = 247
+               Top = 0
+               Left = 307
+               Bottom = 130
+               Right = 516
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 15
          End
          Begin Table = "pre_PresupuestoPeriodo"
             Begin Extent = 
-               Top = 270
-               Left = 38
-               Bottom = 400
-               Right = 247
+               Top = 9
+               Left = 555
+               Bottom = 159
+               Right = 764
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 4
          End
          Begin Table = "tb_sucursal"
             Begin Extent = 
@@ -138,8 +148,15 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
+      Begin ColumnWidths = 16
          Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -157,12 +174,7 @@ Begin DesignProperties =
          Table = 1170
          Output = 720
          Append = 1400
-         NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
-         GroupBy = 1350
-         Filter = 1350
-         Or = 1350
-         Or = 1350
-     ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwpre_Presupuesto';
+         NewV', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwpre_Presupuesto';
+
+
 

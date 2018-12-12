@@ -1,4 +1,5 @@
 ﻿
+
 CREATE PROCEDURE [dbo].[spRo_procesa_Rol] (
 @IdEmpresa int,
 @IdNomina numeric,
@@ -78,7 +79,7 @@ insert into ro_rol_detalle
 
 select 
 
-@IdEmpresa				,@IdRol				,emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'0' , case when emp.Pago_por_horas=0 then dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol) else 0 end
+@IdEmpresa				,@IdRol				,emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'0' ,dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol)
 ,1						,'Días trabajados'		
 FROM            dbo.ro_contrato AS cont INNER JOIN
                 dbo.ro_empleado AS emp ON cont.IdEmpresa = emp.IdEmpresa AND cont.IdEmpleado = emp.IdEmpleado
@@ -98,7 +99,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select 
-@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,CASe when emp.Pago_por_horas=0 then cont.sueldo/30*(dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol)) else 0 end
+@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,cont.sueldo/30*(dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol))
 ,1						,'Sueldo base'		
 FROM            dbo.ro_contrato AS cont INNER JOIN
                 dbo.ro_empleado AS emp ON cont.IdEmpresa = emp.IdEmpresa AND cont.IdEmpleado = emp.IdEmpleado
@@ -327,7 +328,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol, emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,'195'			,
+@IdEmpresa				,@IdRol, emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,'199'			,
 
 isnull( (
 select ISNULL(valor,0) from (
@@ -352,30 +353,6 @@ and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
 and rol_det.IdRubro=500
 
-
-
-----------------------------------------------------------------------------------------------------------------------------------------------
--------------buscando anticipo de quincena-------------------------------------------------------------------------------<
-----------------------------------------------------------------------------------------------------------------------------------------------
-
-insert into ro_rol_detalle
-(IdEmpresa,				IdRol,			IdSucursal,			IdEmpleado,			IdRubro,			Orden,			Valor
-,rub_visible_reporte,	Observacion)
-
-select
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,1035	,'110'			,rol_det.Valor
-,1						,'Anticipo'	
-FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
-                         dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
-                         dbo.ro_rol ON rol_det.IdEmpresa = dbo.ro_rol.IdEmpresa AND rol_det.IdRol = dbo.ro_rol.IdRol INNER JOIN
-                         dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado
-
-where rol_det.IdEmpresa=@IdEmpresa
-and ro_rol.IdNominaTipo=@IdNomina
-and ro_rol.IdNominaTipoLiqui=1
-and CAST( ro_rol.IdPeriodo as varchar)=CONCAT( @IdPEriodo,'01')
-and rub.ru_tipo='I'
-and rol_det.IdRubro=294
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando total egreso por empleado--------------------------------------------------------------------------------------------<
@@ -416,7 +393,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1000'			,( isnull( [500],0) -ISNULL( [900],0))
+@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1000'			,( [500] - [900])
 ,1						,'Liquido a recibir'	
 FROM (
     SELECT 
