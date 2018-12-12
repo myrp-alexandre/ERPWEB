@@ -198,5 +198,31 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+
+
+        public ActionResult ACTF_006()
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdActivoFijoTipo = 0,
+            };
+
+            ACTF_006_Rpt report = new ACTF_006_Rpt();
+            //report.p_IdEmpresa.Value = model.IdEmpresa;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACTF_006(cl_filtros_Info model)
+        {
+            ACTF_006_Rpt report = new ACTF_006_Rpt();
+            //report.p_IdEmpresa.Value = model.IdEmpresa;
+           // report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
     }
 }

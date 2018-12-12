@@ -514,6 +514,12 @@
     <Compile Include="Reportes\ActivoFijo\ACTF_005_Rpt.Designer.cs">
       <DependentUpon>ACTF_005_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\ActivoFijo\ACTF_006_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ActivoFijo\ACTF_006_Rpt.Designer.cs">
+      <DependentUpon>ACTF_006_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
