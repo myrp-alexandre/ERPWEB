@@ -413,6 +413,7 @@
     <Compile Include="Areas\Reportes\Controllers\ImportacionReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\InventarioReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\PresupuestoReportesController.cs" />
+    <Compile Include="Areas\Reportes\Controllers\ProduccionReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\RRHHReportesController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
     <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridExportDemoOptions.cs" />
@@ -986,6 +987,12 @@
     </Compile>
     <Compile Include="Reportes\Presupuesto\PRE_001_Rpt.Designer.cs">
       <DependentUpon>PRE_001_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Produccion\PRO_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Produccion\PRO_001_Rpt.Designer.cs">
+      <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -9496,6 +9503,7 @@
     <Content Include="Areas\Facturacion\Views\NivelDescuento\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\NivelDescuento\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\NivelDescuento\Anular.cshtml" />
+    <Content Include="Areas\Reportes\Views\ProduccionReportes\PR0_001.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9608,6 +9616,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
