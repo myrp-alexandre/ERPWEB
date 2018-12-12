@@ -12,23 +12,24 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class fa_TerminoPago
+    public partial class fa_NivelDescuento
     {
-        public fa_TerminoPago()
+        public fa_NivelDescuento()
         {
-            this.fa_proforma = new HashSet<fa_proforma>();
-            this.fa_TerminoPago_Distribucion = new HashSet<fa_TerminoPago_Distribucion>();
+            this.fa_factura = new HashSet<fa_factura>();
+            this.fa_PuntoVta = new HashSet<fa_PuntoVta>();
             this.fa_cliente = new HashSet<fa_cliente>();
         }
     
-        public string IdTerminoPago { get; set; }
-        public string nom_TerminoPago { get; set; }
-        public int Num_Coutas { get; set; }
-        public int Dias_Vct { get; set; }
-        public bool estado { get; set; }
+        public int IdEmpresa { get; set; }
+        public int IdNivel { get; set; }
+        public string Descripcion { get; set; }
+        public string Observacion { get; set; }
+        public double Porcentaje { get; set; }
+        public bool Estado { get; set; }
     
-        public virtual ICollection<fa_proforma> fa_proforma { get; set; }
-        public virtual ICollection<fa_TerminoPago_Distribucion> fa_TerminoPago_Distribucion { get; set; }
+        public virtual ICollection<fa_factura> fa_factura { get; set; }
+        public virtual ICollection<fa_PuntoVta> fa_PuntoVta { get; set; }
         public virtual ICollection<fa_cliente> fa_cliente { get; set; }
     }
 }
