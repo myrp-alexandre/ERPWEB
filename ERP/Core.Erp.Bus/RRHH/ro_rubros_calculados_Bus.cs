@@ -7,19 +7,7 @@ namespace Core.Erp.Bus.RRHH
     public class ro_rubros_calculados_Bus
     {
         ro_rubros_calculados_Data odata = new ro_rubros_calculados_Data();
-        public List<ro_rubros_calculados_Info> get_list(int IdEmpresa, bool estado)
-        {
-            try
-            {
-                return odata.get_list(IdEmpresa, estado);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+       
         public ro_rubros_calculados_Info get_info(int IdEmpresa )
         {
             try

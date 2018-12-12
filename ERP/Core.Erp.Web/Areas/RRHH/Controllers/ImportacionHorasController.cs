@@ -288,9 +288,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                                 if (!reader.IsDBNull(5))
                                 {
-                                    if (rubros_calculados.IdRubro_horas_nocturna != null)
+                                    if (rubros_calculados.IdRubro_horas_brigadas != null)
                                     {
-                                        var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_nocturna);
+                                        var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_brigadas);
                                         if (rubros != null)
                                         {
                                             ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
@@ -302,7 +302,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 em_codigo = empleado.em_codigo,
                                                 Secuencia = cont,
                                                 IdEmpleado = empleado.IdEmpleado,
-                                                IdRubro = rubros_calculados.IdRubro_horas_nocturna,
+                                                IdRubro = rubros_calculados.IdRubro_horas_brigadas,
                                                 ru_descripcion = rubros.ru_descripcion,
                                                 ValorHora = Convert.ToDouble(empleado.Valor_horas_brigada)
 
