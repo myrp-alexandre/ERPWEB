@@ -9,6 +9,8 @@ namespace Core.Erp.Info.ActivoFijo
 {
     public class Af_Activo_fijo_tipo_Info
     {
+        public decimal IdTransaccionSession { get; set; }
+        
       public int IdEmpresa { get; set; }
         public int IdActivoFijoTipo { get; set; }
         [StringLength(150, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 150")]

@@ -6,6 +6,7 @@ using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
@@ -148,5 +149,25 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+    }
+
+    public class Af_Activo_fijo_tipo_List
+    {
+        string Variable = "Af_Activo_fijo_tipo_Info";
+        public List<Af_Activo_fijo_tipo_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<Af_Activo_fijo_tipo_Info> list = new List<Af_Activo_fijo_tipo_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<Af_Activo_fijo_tipo_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<Af_Activo_fijo_tipo_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
     }
 }

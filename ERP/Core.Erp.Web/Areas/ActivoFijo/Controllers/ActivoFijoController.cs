@@ -13,6 +13,8 @@ using DevExpress.Web;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.General;
+using System.IO;
+using ExcelDataReader;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
@@ -28,6 +30,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         Af_Activo_fijo_CtaCble_List List_det = new Af_Activo_fijo_CtaCble_List();
         Af_Departamento_Bus bus_dep = new Af_Departamento_Bus();
+
+        Af_Activo_fijo_tipo_List ListaTipo = new Af_Activo_fijo_tipo_List();
+        Af_Activo_fijo_Categoria_List ListaCategoria = new Af_Activo_fijo_Categoria_List();
         #endregion
 
         #region Index
@@ -205,20 +210,82 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         }
         #endregion
 
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            Af_Activo_fijo_Info model = new Af_Activo_fijo_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(Af_Activo_fijo_Info model)
+        {
+            var Lista_Tipo = ListaTipo.get_list(model.IdTransaccionSession);
+            foreach (var item in Lista_Tipo)
+            {
+                bus_tipo.guardarDB(item);
+            }
+
+            var Lista_Categoria = ListaCategoria.get_list(model.IdTransaccionSession);
+            foreach (var item in Lista_Categoria)
+            {
+                bus_categoria.guardarDB(item);
+            }
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult GridViewPartial_tipoAF_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaTipo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_tipoAF_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_categoriaAF_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaTipo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_categoriaAF_importacion", model);
+        }
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region Json
-        public JsonResult cargar_categoria( int IdActivoFijoTipo = 0)
+        public JsonResult cargar_categoria(int IdActivoFijoTipo = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             Af_Activo_fijo_Categoria_Bus bus_categoria = new Af_Activo_fijo_Categoria_Bus();
             var resultado = bus_categoria.get_list(IdEmpresa, IdActivoFijoTipo, false);
-            
+
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult get_info_tipo( int IdActivoFijoTipo = 0)
+        public JsonResult get_info_tipo(int IdActivoFijoTipo = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            Af_Activo_fijo_tipo_Bus bus_tipo  = new Af_Activo_fijo_tipo_Bus();
+            Af_Activo_fijo_tipo_Bus bus_tipo = new Af_Activo_fijo_tipo_Bus();
             var resultado = bus_tipo.get_info(IdEmpresa, IdActivoFijoTipo);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
@@ -252,7 +319,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             Af_Activo_fijo_Info model = new Af_Activo_fijo_Info();
-           model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.LstDet = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_Detalle();
             return PartialView("_GridViewPartial_activo_fijo_ctacble", model);
         }
@@ -281,6 +348,72 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         }
         #endregion
     }
+
+    public class UploadControlSettings
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            Af_Activo_fijo_tipo_List ListaTipo = new Af_Activo_fijo_tipo_List();
+            List<Af_Activo_fijo_tipo_Info> Lista_Tipo = new List<Af_Activo_fijo_tipo_Info>();
+            Af_Activo_fijo_Categoria_List ListaCategoria = new Af_Activo_fijo_Categoria_List();
+            List<Af_Activo_fijo_Categoria_Info> List_Categoria = new List<Af_Activo_fijo_Categoria_Info>();
+
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
+
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                #region Plan de cuentas                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        Af_Activo_fijo_tipo_Info info = new Af_Activo_fijo_tipo_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            CodActivoFijo = reader.GetString(1),
+                            Af_Descripcion = reader.GetString(2),
+                            Af_Porcentaje_depre = Convert.ToDouble(reader.GetValue(3)),
+                            Af_anio_depreciacion = Convert.ToInt32(reader.GetValue(4)),
+                            IdCtaCble_Activo = Convert.ToString(reader.GetValue(6)),
+                            IdCtaCble_Dep_Acum = Convert.ToString(reader.GetValue(7)),
+                            IdCtaCble_Gastos_Depre = Convert.ToString(reader.GetValue(8)),
+                            Se_Deprecia = reader.GetString(5) == "SI" ? true : false,
+                            IdCtaCble_CostoVenta = Convert.ToString(reader.GetValue(9)),
+                            IdCtaCble_Mejora = Convert.ToString(reader.GetValue(10)),
+                            IdCtaCble_Baja = Convert.ToString(reader.GetValue(11)),
+                            IdCtaCble_Retiro = Convert.ToString(reader.GetValue(12)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        Lista_Tipo.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                #endregion
+
+                //cont = 0;
+                //Para avanzar a la siguiente hoja de excel
+                //reader.NextResult();
+
+                ListaTipo.set_list(Lista_Tipo, IdTransaccionSession);
+            }
+        }
+    }
+
     public class Af_Activo_fijo_CtaCble_List
     {
         string Variable = "Af_Activo_fijo_CtaCble_Info";

@@ -9,6 +9,8 @@ namespace Core.Erp.Info.ActivoFijo
 {
     public class Af_Activo_fijo_Categoria_Info
     {
+        public decimal IdTransaccionSession { get; set; }
+
         public int IdEmpresa { get; set; }
         public int IdCategoriaAF { get; set; }
         public int IdActivoFijoTipo { get; set; }
