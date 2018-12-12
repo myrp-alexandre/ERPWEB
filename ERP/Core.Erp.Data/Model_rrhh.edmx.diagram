@@ -137,40 +137,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" />
         <EntityTypeShape EntityType="Model_rrhh.ro_EmpleadoFoto" Width="1.5" PointX="5.375" PointY="10.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_ArchivosIess" Width="1.5" PointX="5.375" PointY="22.75" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_empleado" Width="1.5" PointX="9" PointY="53.125" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_CargaFamiliar_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Cargo" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo1" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo2" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo3" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_contrato_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Departamento" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Division" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_DocumentoxEmp_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_tipoNomina_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_rubro_acumulado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_titulos_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoFoto_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_Historico_Liquidacion_Vacaciones_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_historico_vacaciones_x_empleado_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_horario_planificacion_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_nomina_x_horas_extras_det_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_participacion_utilidad_empleado_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado1" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_prestamo_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" />
         <EntityTypeShape EntityType="Model_rrhh.ro_rubros_calculados" Width="1.5" PointX="6" PointY="48.875" />
         <EntityTypeShape EntityType="Model_rrhh.ro_rubro_tipo" Width="1.5" PointX="3.75" PointY="43.25" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_Detalle_ro_rubro_tipo" />
@@ -196,12 +162,10 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo6" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo8" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo9" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="22.375" PointY="22.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_combo" Width="1.5" PointX="11.375" PointY="18.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_HorasProfesores" Width="1.5" PointX="22.75" PointY="66.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_HorasProfesores_det" Width="1.5" PointX="25" PointY="59.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_HorasProfesores" Width="1.5" PointX="5.375" PointY="13.75" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad" />
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_HorasProfesores" />
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_ro_Nomina_Tipoliqui" />
@@ -209,6 +173,42 @@
         <EntityTypeShape EntityType="Model_rrhh.vwro_HorasProfesores_det" Width="1.5" PointX="19.375" PointY="22.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_nomina_sin_percebir_sueldo" Width="1.5" PointX="23.375" PointY="5.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_Parametros" Width="1.5" PointX="23.375" PointY="9.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_empleado" Width="1.5" PointX="9" PointY="52.875" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="22.375" PointY="22.75" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_CargaFamiliar_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Cargo" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo1" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo2" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo3" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_contrato_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Departamento" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Division" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_DocumentoxEmp_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_tipoNomina_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_rubro_acumulado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_titulos_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoFoto_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_Historico_Liquidacion_Vacaciones_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_historico_vacaciones_x_empleado_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_horario_planificacion_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_nomina_x_horas_extras_det_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_participacion_utilidad_empleado_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado1" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_prestamo_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
