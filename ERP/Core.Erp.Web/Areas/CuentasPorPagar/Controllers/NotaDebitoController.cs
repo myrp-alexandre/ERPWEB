@@ -172,6 +172,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             i_validar.lst_detalle_ct = Lis_ct_cbtecble_det_List_nd.get_list(i_validar.IdTransaccionSession);
 
+
+
             foreach (var item in i_validar.lst_detalle_ct)
             {
                 if (string.IsNullOrEmpty(item.IdCtaCble))
@@ -180,13 +182,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     return false;
                 }
             }
-
+            if (i_validar.IdTipoFlujo == null)
+            {
+                mensaje = "El campo tipo flujo es obligatorio";
+                return false;
+            }
             if (i_validar.lst_detalle_ct.Where(q => q.dc_Valor == 0).Count() > 0)
             {
                 mensaje = "Existen detalles con valor 0 en el debe o haber";
                 return false;
             }
-
             if (i_validar.lst_detalle_ct.Count == 0)
             {
                 mensaje = "Debe ingresar registros en el detalle";
