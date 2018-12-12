@@ -23,11 +23,11 @@ namespace Core.Erp.Data.ActivoFijo
                     {
                             IdActivoFijo = q.IdActivoFijo,
                             IdEmpresa = q.IdEmpresa,
-                            IdCatalogo = q.IdCatalogo,
                             IdCtaCble = q.IdCtaCble,
                            Porcentaje = q.Porcentaje,
                            Secuencia = q.Secuencia,
-                           pc_Cuenta = q.pc_Cuenta
+                           pc_Cuenta = q.pc_Cuenta,
+                           IdDepartamento = q.IdDepartamento
                              
                     }).ToList();
                 }

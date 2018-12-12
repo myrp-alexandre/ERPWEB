@@ -10,19 +10,20 @@ namespace Core.Erp.Info.ActivoFijo
     public class Af_Activo_fijo_Info
 
     {
+ 
+
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdActivoFijo { get; set; }
         public string CodActivoFijo { get; set; }
         [Required(ErrorMessage = ("el campo nombre es obligatorio"))]
         [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo nombre debe tener mínimo 1 caracter y máximo 500")]
-
         public string Af_Nombre { get; set; }
-        public Nullable<int> IdActivoFijoTipo { get; set; }
+        public int IdActivoFijoTipo { get; set; }
         [Required(ErrorMessage = ("el campo catégoria es obligatorio"))]
-
-        public Nullable<int> IdCategoriaAF { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
+        public int IdCategoriaAF { get; set; }
+        public int IdSucursal { get; set; }
+        public decimal IdDepartamento { get; set; }
         public string IdCatalogo_Marca { get; set; }
         public string IdCatalogo_Modelo { get; set; }
         public string Af_NumSerie { get; set; }
@@ -40,15 +41,16 @@ namespace Core.Erp.Info.ActivoFijo
         public string Af_observacion { get; set; }
         public string Af_NumPlaca { get; set; }
         public Nullable<int> Af_Anio_fabrica { get; set; }
-        public bool EstadoBool { get; set; }
         public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
+
         public string MotiAnula { get; set; }
         public string Af_DescripcionCorta { get; set; }
         public string Af_Codigo_Barra { get; set; }
         public string Af_DescripcionTecnica { get; set; }
         public string Estado_Proceso { get; set; }
-        public Nullable<double> Af_ValorSalvamento { get; set; }
-        public Nullable<double> Af_ValorResidual { get; set; }
+        public double Af_ValorSalvamento { get; set; }
+        public double Af_ValorResidual { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }

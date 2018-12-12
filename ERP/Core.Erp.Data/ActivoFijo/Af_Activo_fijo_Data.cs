@@ -197,7 +197,7 @@ namespace Core.Erp.Data.ActivoFijo
                             Context.Af_Activo_fijo_CtaCble.Add(new Af_Activo_fijo_CtaCble
                             {
                                 IdActivoFijo = info.IdActivoFijo,
-                                IdCatalogo = item.IdCatalogo,
+                                IdDepartamento = item.IdDepartamento,
                                 IdCtaCble = item.IdCtaCble,
                                 Porcentaje = item.Porcentaje,
                                 Secuencia = item.Secuencia,
@@ -269,7 +269,7 @@ namespace Core.Erp.Data.ActivoFijo
                             Context.Af_Activo_fijo_CtaCble.Add(new Af_Activo_fijo_CtaCble
                             {
                                 IdActivoFijo = info.IdActivoFijo,
-                                IdCatalogo = item.IdCatalogo,
+                                IdDepartamento = item.IdDepartamento,
                                 IdCtaCble = item.IdCtaCble,
                                 Porcentaje = item.Porcentaje,
                                 Secuencia = item.Secuencia,
