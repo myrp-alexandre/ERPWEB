@@ -1086,6 +1086,7 @@
     <Build Include="dbo\Views\vwpro_FabricacionDet.sql" />
     <Build Include="dbo\Tables\Af_Departamento.sql" />
     <Build Include="web\Views\VWPRO_001.sql" />
+    <Build Include="dbo\Tables\fa_NivelDescuento.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

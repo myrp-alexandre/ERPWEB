@@ -34,7 +34,7 @@ namespace Core.Erp.Data
         public string MotiAnula { get; set; }
         public string Estado { get; set; }
     
-        public virtual ICollection<Af_Activo_fijo> Af_Activo_fijo { get; set; }
         public virtual Af_Activo_fijo_tipo Af_Activo_fijo_tipo { get; set; }
+        public virtual ICollection<Af_Activo_fijo> Af_Activo_fijo { get; set; }
     }
 }

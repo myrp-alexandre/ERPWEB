@@ -92,6 +92,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         #region Metodos
         private void cargar_combos(int IdEmpresa, int IdActivoFijoTipo = 0)
         {
+            var lst_departamento = bus_dep.GetList(IdEmpresa, false);
+            ViewBag.lst_departamento = lst_departamento;
+
             var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
 
@@ -146,6 +149,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Nuevo(Af_Activo_fijo_Info model)
         {
+            model.IdUsuario = Session["IdUsuario"].ToString();
             model.LstDet = List_det.get_list(model.IdTransaccionSession);
             if (!bus_activo.guardarDB(model))
             {
@@ -176,6 +180,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Modificar(Af_Activo_fijo_Info model)
         {
+            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             model.LstDet = List_det.get_list(model.IdTransaccionSession);
             if (!bus_activo.modificarDB(model))
             {
@@ -200,6 +205,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Anular(Af_Activo_fijo_Info model)
         {
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
             model.LstDet = List_det.get_list(model.IdTransaccionSession);
             if (!bus_activo.anularDB(model))
             {

@@ -438,7 +438,7 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="IdRubro_prov_vac">Rubro horas vesértina*</label>
+                    <label for="IdRubro_prov_vac">Rubro horas vespértina*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdRubro_horas_vespertina, settings =>
                {
                    settings.Name = "IdRubro_horas_vespertina";
@@ -464,8 +464,8 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="IdRubro_prov_vac">Rubro horas nocturna*</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdRubro_horas_nocturna, settings =>
+                    <label for="IdRubro_prov_vac">Rubro horas brigada*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdRubro_horas_brigadas, settings =>
                {
                    settings.Name = "IdRubro_horas_nocturna";
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -483,11 +483,74 @@
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                }).BindList(ViewBag.lst_rubro).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdRubro_horas_nocturna, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(q => q.IdRubro_horas_brigadas, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
+
+
+
+    
+
+    
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdRubro_prov_vac">Rubro horas recargo*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdRubro_horas_recargo, settings =>
+               {
+                   settings.Name = "IdRubro_horas_recargo";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdRubro";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "ru_descripcion";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_rubro).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdRubro_horas_recargo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdRubro_prov_vac">Rubro horas extras*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdRubro_horas_extras, settings =>
+               {
+                   settings.Name = "IdRubro_horas_extras";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdRubro";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "ru_descripcion";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_rubro).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdRubro_horas_extras, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","RubrosCalculados",new { Area = "RRHH" },null)">Cancelar</a>

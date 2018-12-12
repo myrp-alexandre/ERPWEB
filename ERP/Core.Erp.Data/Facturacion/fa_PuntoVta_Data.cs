@@ -23,7 +23,6 @@ namespace Core.Erp.Data.Facturacion
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdSucursal = q.IdSucursal,
-                                 IdBodega = q.IdBodega,
                                  IdPuntoVta = q.IdPuntoVta,
                                  cod_PuntoVta = q.cod_PuntoVta,
                                  nom_PuntoVta = q.nom_PuntoVta,
@@ -102,7 +101,8 @@ namespace Core.Erp.Data.Facturacion
                         IdPuntoVta = Entity.IdPuntoVta,
                         cod_PuntoVta = Entity.cod_PuntoVta,
                         nom_PuntoVta = Entity.nom_PuntoVta,
-                        estado = Entity.estado
+                        estado = Entity.estado,
+                        IdNivel = Entity.IdNivel
 
                     };
                 }
@@ -154,7 +154,8 @@ namespace Core.Erp.Data.Facturacion
                         IdPuntoVta = info.IdPuntoVta = get_id(info.IdEmpresa, info.IdSucursal),
                         cod_PuntoVta = info.cod_PuntoVta,
                          nom_PuntoVta = info.nom_PuntoVta,
-                        estado = info.estado = true
+                        estado = info.estado = true,
+                        IdNivel = info.IdNivel
                     };
                     Context.fa_PuntoVta.Add(Entity);
                     Context.SaveChanges();
@@ -179,6 +180,7 @@ namespace Core.Erp.Data.Facturacion
                     
                     Entity.cod_PuntoVta = info.cod_PuntoVta;
                     Entity.nom_PuntoVta = info.nom_PuntoVta;
+                    Entity.IdNivel = info.IdNivel;
 
                     Context.SaveChanges();
                 

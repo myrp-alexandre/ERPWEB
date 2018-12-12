@@ -21,8 +21,11 @@ namespace Core.Erp.Info.ActivoFijo
         public double Af_Porcentaje_depre { get; set; }
         [Required(ErrorMessage = ("el campo año es obligatorio"))]
         public int Af_anio_depreciacion { get; set; }
+        [Required(ErrorMessage = ("el campo cuenta contable es obligatorio"))]
         public string IdCtaCble_Activo { get; set; }
+        [Required(ErrorMessage = ("el campo cuenta contable es obligatorio"))]
         public string IdCtaCble_Dep_Acum { get; set; }
+        [Required(ErrorMessage = ("el campo cuenta contable es obligatorio"))]
         public string IdCtaCble_Gastos_Depre { get; set; }
         public bool Se_Deprecia { get; set; }
         public string IdUsuario { get; set; }
@@ -33,9 +36,13 @@ namespace Core.Erp.Info.ActivoFijo
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string Estado { get; set; }
         public string MotiAnula { get; set; }
+        [Required(ErrorMessage = ("el campo cuenta contable es obligatorio"))]
         public string IdCtaCble_CostoVenta { get; set; }
+        [Required(ErrorMessage = ("el campo cuenta contable es obligatorio"))]
         public string IdCtaCble_Mejora { get; set; }
+        [Required(ErrorMessage = ("el campo cuenta contable es obligatorio"))]
         public string IdCtaCble_Baja { get; set; }
+        [Required(ErrorMessage = ("el campo cuenta contable es obligatorio"))]
         public string IdCtaCble_Retiro { get; set; }
         public bool EstadoBool { get; set; }
 

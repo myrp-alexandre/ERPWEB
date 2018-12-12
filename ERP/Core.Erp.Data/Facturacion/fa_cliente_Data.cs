@@ -97,7 +97,7 @@ namespace Core.Erp.Data.Facturacion
                     IdPersona = Entity.IdPersona,
                     IdTipoCredito = Entity.IdTipoCredito,
                     Idtipo_cliente = Entity.Idtipo_cliente,
-                    NivelPrecio = Entity.NivelPrecio,
+                    IdNivel = Entity.IdNivel,
                     EsClienteExportador = Entity.EsClienteExportador
                 };
                 tb_persona Entity_p = Context_g.tb_persona.Where(q => q.IdPersona == info.IdPersona).FirstOrDefault();
@@ -234,7 +234,7 @@ namespace Core.Erp.Data.Facturacion
                         IdPersona = info.IdPersona,
                         IdTipoCredito = info.IdTipoCredito,
                         Idtipo_cliente = info.Idtipo_cliente,
-                        NivelPrecio = info.NivelPrecio,
+                        IdNivel = info.IdNivel,
                         EsClienteExportador = info.EsClienteExportador,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
@@ -297,7 +297,7 @@ namespace Core.Erp.Data.Facturacion
                     Entity.IdCtaCble_cxc_Credito = info.IdCtaCble_cxc_Credito;
                     Entity.IdTipoCredito = info.IdTipoCredito;
                     Entity.Idtipo_cliente = info.Idtipo_cliente;
-                    Entity.NivelPrecio = info.NivelPrecio;
+                    Entity.IdNivel = info.IdNivel;
                     Entity.EsClienteExportador = info.EsClienteExportador;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;

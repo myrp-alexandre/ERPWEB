@@ -322,6 +322,7 @@
     <Compile Include="Areas\Facturacion\Controllers\FacturaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\FormaPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\GuiaRemisionController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\NivelDescuentoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeCreditoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeDebitoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ParametrosFacturacionController.cs" />
@@ -9489,6 +9490,16 @@
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\Importar.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_categoriaAF_importacion.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_tipoAF_importacion - Copia.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\_GridViewPartial_departamento_af.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Nuevo.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Modificar.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NivelDescuento\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NivelDescuento\_GridViewPartial_nivel_dscto_fa.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NivelDescuento\Nuevo.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NivelDescuento\Modificar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NivelDescuento\Anular.cshtml" />
+
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

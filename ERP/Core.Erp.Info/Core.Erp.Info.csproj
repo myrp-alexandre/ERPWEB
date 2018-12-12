@@ -176,6 +176,7 @@
     <Compile Include="Facturacion\fa_guia_remision_det_Info.cs" />
     <Compile Include="Facturacion\fa_guia_remision_det_x_factura_Info.cs" />
     <Compile Include="Facturacion\fa_guia_remision_Info.cs" />
+    <Compile Include="Facturacion\fa_NivelDescuento_Info.cs" />
     <Compile Include="Facturacion\fa_notaCreDeb_det_Info.cs" />
     <Compile Include="Facturacion\fa_notaCreDeb_Info.cs" />
     <Compile Include="Facturacion\fa_notaCreDeb_x_fa_factura_NotaDeb_Info.cs" />
@@ -344,6 +345,7 @@
     <Compile Include="Reportes\Inventario\INV_013_Info.cs" />
     <Compile Include="Reportes\Inventario\INV_014_Info.cs" />
     <Compile Include="Reportes\Presupuesto\PRE_001_Info.cs" />
+    <Compile Include="Reportes\Produccion\PRO_001_Info.cs" />
     <Compile Include="Reportes\RRHH\ROL_001_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_001_Info.cs" />
     <Compile Include="Reportes\ActivoFijo\ACTF_002_Info.cs" />
@@ -406,6 +408,7 @@
     <Compile Include="RRHH\ro_empleado_x_ro_tipoNomina_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_rubro_acumulado_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_titulos_Info.cs" />
+    <Compile Include="RRHH\ro_FormulaHorasRecargo_Info.cs" />
     <Compile Include="RRHH\ro_Historico_Liquidacion_Vacaciones_Det_Info.cs" />
     <Compile Include="RRHH\ro_Historico_Liquidacion_Vacaciones_Info.cs" />
     <Compile Include="RRHH\ro_historico_vacaciones_x_empleado_Info.cs" />

@@ -18,6 +18,7 @@ namespace Core.Erp.Info.Facturacion
         public decimal IdPersona { get; set; }
         public int Idtipo_cliente { get; set; }
         public string IdTipoCredito { get; set; }
+
         [Required(ErrorMessage = "El campo plazo es obligatorio")]
         public int cl_plazo { get; set; }
         [Required(ErrorMessage = "El campo cupo es obligatorio")]
@@ -30,12 +31,13 @@ namespace Core.Erp.Info.Facturacion
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
+
         [Required(ErrorMessage = "El campo cuenta contable es obligatorio")]
         public string IdCtaCble_cxc_Credito { get; set; }
         public bool es_empresa_relacionada { get; set; }
-        public int NivelPrecio { get; set; }
         public string FormaPago { get; set; }
         public bool EsClienteExportador { get; set; }
+        public int IdNivel { get; set; }
 
         //Campos que no existen en la tabla
         public tb_persona_Info info_persona { get; set; }

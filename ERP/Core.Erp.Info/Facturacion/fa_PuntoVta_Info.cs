@@ -10,7 +10,6 @@ namespace Core.Erp.Info.Facturacion
     public class fa_PuntoVta_Info
     {
         public int IdEmpresa { get; set; }
-
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }
         public int IdPuntoVta { get; set; }
@@ -22,7 +21,10 @@ namespace Core.Erp.Info.Facturacion
         public string nom_PuntoVta { get; set; }
         public bool estado { get; set; }
         [Required(ErrorMessage = "El campo bodega es obligatorio")]
-        public Nullable<int> IdBodega { get; set; }
+        public int IdBodega { get; set; }
+        public int IdNivel { get; set; }
+        //campos que no existen en la tabla
         public string Su_Descripcion { get; set; }
+
     }
 }
