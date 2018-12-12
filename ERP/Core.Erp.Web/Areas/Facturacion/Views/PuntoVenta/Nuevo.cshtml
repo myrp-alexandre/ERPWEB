@@ -37,6 +37,13 @@
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdNivel">Nivel de descuento*</label>
+                    @Html.DropDownListFor(q => q.IdNivel, new SelectList(ViewBag.lst_nivel, "IdNivel", "Descripcion"), new { @class = "form-control", @id = "NivelPrecio" })
+                    @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
