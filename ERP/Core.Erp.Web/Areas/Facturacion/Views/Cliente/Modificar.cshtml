@@ -214,9 +214,9 @@
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="NivelPrecio">Nivel de precio*</label>
-                                @Html.DropDownListFor(q => q.NivelPrecio, new SelectList(ViewBag.lst_nivel_precio, "Key", "Value"), new { @class = "form-control", @id = "NivelPrecio" })
-                                @Html.ValidationMessageFor(q => q.NivelPrecio, "", new { @class = "text-danger" })
+                                <label for="IdNivel">Nivel de descuento*</label>
+                                @Html.DropDownListFor(q => q.IdNivel, new SelectList(ViewBag.lst_nivel, "IdNivel", "Descripcion"), new { @class = "form-control", @id = "NivelPrecio" })
+                                @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-3">

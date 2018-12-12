@@ -44,9 +44,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             lst_signos.Add("+", "+");
             ViewBag.lst_signos = lst_signos;
 
-            //fa_NivelDescuento_Bus bus_nivel = new fa_NivelDescuento_Bus();
-            //var lst_nivel = bus_nivel.GetList();
-            //ViewBag.lst_nivel = lst_nivel;
+            fa_NivelDescuento_Bus bus_nivel = new fa_NivelDescuento_Bus();
+            var lst_nivel = bus_nivel.GetList(model.IdEmpresa, false);
+            ViewBag.lst_nivel = lst_nivel;
 
         }
         #endregion

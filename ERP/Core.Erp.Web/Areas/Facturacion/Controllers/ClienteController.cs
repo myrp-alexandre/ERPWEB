@@ -53,9 +53,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #region Metodos
         private void cargar_combos(fa_cliente_Info info)
         {
-            //fa_NivelDescuento_Bus bus_nivel = new fa_NivelDescuento_Bus();
-            //var lst_nivel = bus_nivel.GetList();
-            //ViewBag.lst_nivel = lst_nivel;
+            fa_NivelDescuento_Bus bus_nivel = new fa_NivelDescuento_Bus();
+            var lst_nivel = bus_nivel.GetList(info.IdEmpresa, false);
+            ViewBag.lst_nivel = lst_nivel;
 
             fa_formaPago_Bus bus_formapago = new fa_formaPago_Bus();
             var lst_formapago = bus_formapago.get_list(false);
@@ -65,14 +65,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_clientetipo = bus_clientetipo.get_list(info.IdEmpresa, false);
             ViewBag.lst_clientetipo = lst_clientetipo;
 
-            Dictionary<int, string> lst_nivel_precio = new Dictionary<int, string>();
-            lst_nivel_precio.Add(1, "Nivel 1");
-            lst_nivel_precio.Add(2, "Nivel 2");
-            lst_nivel_precio.Add(3, "Nivel 3");
-            lst_nivel_precio.Add(4, "Nivel 4");
-            lst_nivel_precio.Add(5, "Nivel 5");
-            ViewBag.lst_nivel_precio = lst_nivel_precio;
-
+  
             fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
             var lst_termino_pago = bus_termino_pago.get_list(false);
             ViewBag.lst_termino_pago = lst_termino_pago;

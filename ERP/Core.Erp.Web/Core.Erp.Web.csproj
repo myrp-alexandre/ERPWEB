@@ -322,6 +322,7 @@
     <Compile Include="Areas\Facturacion\Controllers\FacturaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\FormaPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\GuiaRemisionController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\NivelDescuentoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeCreditoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeDebitoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ParametrosFacturacionController.cs" />
@@ -412,6 +413,7 @@
     <Compile Include="Areas\Reportes\Controllers\ImportacionReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\InventarioReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\PresupuestoReportesController.cs" />
+    <Compile Include="Areas\Reportes\Controllers\ProduccionReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\RRHHReportesController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
     <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridExportDemoOptions.cs" />
@@ -985,6 +987,12 @@
     </Compile>
     <Compile Include="Reportes\Presupuesto\PRE_001_Rpt.Designer.cs">
       <DependentUpon>PRE_001_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Produccion\PRO_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Produccion\PRO_001_Rpt.Designer.cs">
+      <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -9486,10 +9494,19 @@
     <Content Include="Areas\Produccion\Views\Fabricacion\Anular.cshtml" />
     <Content Include="Areas\Contabilidad\Views\PlanDeCuentas\_GridViewPartial_anio_fiscal_importacion.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Index.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\Importar.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_categoriaAF_importacion.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_tipoAF_importacion - Copia.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\_GridViewPartial_departamento_af.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Nuevo.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Modificar.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NivelDescuento\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NivelDescuento\_GridViewPartial_nivel_dscto_fa.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NivelDescuento\Nuevo.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NivelDescuento\Modificar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NivelDescuento\Anular.cshtml" />
+    <Content Include="Areas\Reportes\Views\ProduccionReportes\PR0_001.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9602,6 +9619,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
