@@ -9,13 +9,12 @@ namespace Core.Erp.Info.ActivoFijo
 {
     public class Af_Activo_fijo_tipo_Info
     {
-        public int IdEmpresa { get; set; }
+      public int IdEmpresa { get; set; }
         public int IdActivoFijoTipo { get; set; }
         [StringLength(150, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 150")]
         public string CodActivoFijo { get; set; }
         [Required(ErrorMessage = ("el campo descripción es obligatorio"))]
         [StringLength(150, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 150")]
-
         public string Af_Descripcion { get; set; }
         public double Af_Porcentaje_depre { get; set; }
         [Required(ErrorMessage = ("el campo año es obligatorio"))]
@@ -31,16 +30,12 @@ namespace Core.Erp.Info.ActivoFijo
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string Estado { get; set; }
-        public bool EstadoBool { get; set; }
         public string MotiAnula { get; set; }
-        
         public string IdCtaCble_CostoVenta { get; set; }
-        
         public string IdCtaCble_Mejora { get; set; }
-        
         public string IdCtaCble_Baja { get; set; }
-        
         public string IdCtaCble_Retiro { get; set; }
+        public bool EstadoBool { get; set; }
 
     }
 }
