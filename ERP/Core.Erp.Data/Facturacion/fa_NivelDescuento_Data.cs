@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Facturacion
                 List<fa_NivelDescuento_Info> Lista;
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    if(mostrar_anulados==true)
+                    if(mostrar_anulados)
                     Lista = Context.fa_NivelDescuento.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new fa_NivelDescuento_Info
                     {
                         IdEmpresa = q.IdEmpresa,

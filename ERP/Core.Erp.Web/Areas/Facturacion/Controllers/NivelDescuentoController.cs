@@ -26,7 +26,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public ActionResult Nuevo()
         {
-            fa_NivelDescuento_Info model = new fa_NivelDescuento_Info();
+            fa_NivelDescuento_Info model = new fa_NivelDescuento_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
             return View(model);
         }
 
