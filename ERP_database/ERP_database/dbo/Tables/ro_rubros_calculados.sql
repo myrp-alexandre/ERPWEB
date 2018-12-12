@@ -17,8 +17,12 @@
     [IdRubro_IR]               VARCHAR (50) NULL,
     [IdRubro_horas_matutina]   VARCHAR (50) NULL,
     [IdRubro_horas_vespertina] VARCHAR (50) NULL,
-    [IdRubro_horas_nocturna]   VARCHAR (50) NULL,
+    [IdRubro_horas_brigadas]   VARCHAR (50) NULL,
+    [IdRubro_horas_recargo]    VARCHAR (50) NULL,
+    [IdRubro_horas_extras]     VARCHAR (50) NULL,
     CONSTRAINT [PK_ro_rubros_calculados] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC),
+    CONSTRAINT [FK_ro_rubros_calculados_ro_rubro_tipo] FOREIGN KEY ([IdEmpresa], [IdRubro_horas_recargo]) REFERENCES [dbo].[ro_rubro_tipo] ([IdEmpresa], [IdRubro]),
+    CONSTRAINT [FK_ro_rubros_calculados_ro_rubro_tipo1] FOREIGN KEY ([IdEmpresa], [IdRubro_horas_extras]) REFERENCES [dbo].[ro_rubro_tipo] ([IdEmpresa], [IdRubro]),
     CONSTRAINT [FK_ro_rubros_calculados_ro_rubro_tipo10] FOREIGN KEY ([IdEmpresa], [IdRubro_prov_FR]) REFERENCES [dbo].[ro_rubro_tipo] ([IdEmpresa], [IdRubro]),
     CONSTRAINT [FK_ro_rubros_calculados_ro_rubro_tipo11] FOREIGN KEY ([IdEmpresa], [IdRubro_prov_DIV]) REFERENCES [dbo].[ro_rubro_tipo] ([IdEmpresa], [IdRubro]),
     CONSTRAINT [FK_ro_rubros_calculados_ro_rubro_tipo12] FOREIGN KEY ([IdEmpresa], [IdRubro_prov_DIII]) REFERENCES [dbo].[ro_rubro_tipo] ([IdEmpresa], [IdRubro]),
@@ -35,6 +39,8 @@
     CONSTRAINT [FK_ro_rubros_calculados_ro_rubro_tipo8] FOREIGN KEY ([IdEmpresa], [IdRubro_DIV]) REFERENCES [dbo].[ro_rubro_tipo] ([IdEmpresa], [IdRubro]),
     CONSTRAINT [FK_ro_rubros_calculados_ro_rubro_tipo9] FOREIGN KEY ([IdEmpresa], [IdRubro_DIII]) REFERENCES [dbo].[ro_rubro_tipo] ([IdEmpresa], [IdRubro])
 );
+
+
 
 
 

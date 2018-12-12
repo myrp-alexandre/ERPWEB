@@ -90,7 +90,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             var lst_caja = bus_caja.get_list(IdEmpresa, false);
             ViewBag.lst_caja = lst_caja;
 
-            var lst_cobro_tipo = bus_cobro_tipo.get_list(false,cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar.SINRET);
+            var lst_cobro_tipo = bus_cobro_tipo.get_list(false);
             ViewBag.lst_cobro_tipo = lst_cobro_tipo;
 
             var lst_banco = bus_banco.get_list(false);

@@ -10,11 +10,11 @@ namespace Core.Erp.Bus.CuentasPorCobrar
     {
         cxc_cobro_tipo_Data odata = new cxc_cobro_tipo_Data();
 
-        public List<cxc_cobro_tipo_Info> get_list(bool mostrar_anulados, cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar Motivo)
+        public List<cxc_cobro_tipo_Info> get_list(bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(mostrar_anulados, Motivo);
+                return odata.get_list(mostrar_anulados);
             }
             catch (Exception)
             {
