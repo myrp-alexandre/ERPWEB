@@ -8,14 +8,13 @@
 //------------------------------------------------------------------------------
 
 namespace Core.Erp.Data
-{
 
+{
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-
 
     public partial class Entities_activo_fijo : DbContext
     {
@@ -29,19 +28,20 @@ namespace Core.Erp.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Af_Activo_fijo_Categoria> Af_Activo_fijo_Categoria { get; set; }
         public DbSet<Af_CatalogoTipo> Af_CatalogoTipo { get; set; }
         public DbSet<Af_Depreciacion> Af_Depreciacion { get; set; }
         public DbSet<Af_Depreciacion_Det> Af_Depreciacion_Det { get; set; }
         public DbSet<Af_Mej_Baj_Activo> Af_Mej_Baj_Activo { get; set; }
         public DbSet<Af_Retiro_Activo> Af_Retiro_Activo { get; set; }
         public DbSet<Af_Venta_Activo> Af_Venta_Activo { get; set; }
-        public DbSet<Af_Activo_fijo_CtaCble> Af_Activo_fijo_CtaCble { get; set; }
-        public DbSet<Af_Activo_fijo_tipo> Af_Activo_fijo_tipo { get; set; }
         public DbSet<Af_Catalogo> Af_Catalogo { get; set; }
         public DbSet<Af_Parametros> Af_Parametros { get; set; }
-        public DbSet<Af_Activo_fijo> Af_Activo_fijo { get; set; }
         public DbSet<vwAf_Activo_fijo_CtaCble> vwAf_Activo_fijo_CtaCble { get; set; }
+        public DbSet<Af_Activo_fijo> Af_Activo_fijo { get; set; }
+        public DbSet<Af_Activo_fijo_Categoria> Af_Activo_fijo_Categoria { get; set; }
+        public DbSet<Af_Activo_fijo_CtaCble> Af_Activo_fijo_CtaCble { get; set; }
+        public DbSet<Af_Activo_fijo_tipo> Af_Activo_fijo_tipo { get; set; }
+        public DbSet<Af_Departamento> Af_Departamento { get; set; }
     
         public virtual ObjectResult<spACTF_activos_a_depreciar_Result> spACTF_activos_a_depreciar(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_ini, Nullable<System.DateTime> fecha_fin, string idUsuario)
         {

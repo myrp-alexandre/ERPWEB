@@ -16,8 +16,8 @@ namespace Core.Erp.Data
     {
         public Af_Activo_fijo_tipo()
         {
-            this.Af_Activo_fijo_Categoria = new HashSet<Af_Activo_fijo_Categoria>();
             this.Af_Activo_fijo = new HashSet<Af_Activo_fijo>();
+            this.Af_Activo_fijo_Categoria = new HashSet<Af_Activo_fijo_Categoria>();
         }
     
         public int IdEmpresa { get; set; }
@@ -43,7 +43,7 @@ namespace Core.Erp.Data
         public string IdCtaCble_Baja { get; set; }
         public string IdCtaCble_Retiro { get; set; }
     
-        public virtual ICollection<Af_Activo_fijo_Categoria> Af_Activo_fijo_Categoria { get; set; }
         public virtual ICollection<Af_Activo_fijo> Af_Activo_fijo { get; set; }
+        public virtual ICollection<Af_Activo_fijo_Categoria> Af_Activo_fijo_Categoria { get; set; }
     }
 }

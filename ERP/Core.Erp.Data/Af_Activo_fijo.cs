@@ -27,9 +27,10 @@ namespace Core.Erp.Data
         public int IdActivoFijo { get; set; }
         public string CodActivoFijo { get; set; }
         public string Af_Nombre { get; set; }
-        public Nullable<int> IdActivoFijoTipo { get; set; }
-        public Nullable<int> IdCategoriaAF { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
+        public int IdActivoFijoTipo { get; set; }
+        public int IdCategoriaAF { get; set; }
+        public int IdSucursal { get; set; }
+        public decimal IdDepartamento { get; set; }
         public string IdCatalogo_Marca { get; set; }
         public string IdCatalogo_Modelo { get; set; }
         public string Af_NumSerie { get; set; }
@@ -53,8 +54,8 @@ namespace Core.Erp.Data
         public string Af_Codigo_Barra { get; set; }
         public string Af_DescripcionTecnica { get; set; }
         public string Estado_Proceso { get; set; }
-        public Nullable<double> Af_ValorSalvamento { get; set; }
-        public Nullable<double> Af_ValorResidual { get; set; }
+        public double Af_ValorSalvamento { get; set; }
+        public double Af_ValorResidual { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
@@ -73,6 +74,7 @@ namespace Core.Erp.Data
         public virtual Af_Catalogo Af_Catalogo2 { get; set; }
         public virtual Af_Catalogo Af_Catalogo3 { get; set; }
         public virtual Af_Catalogo Af_Catalogo4 { get; set; }
+        public virtual Af_Departamento Af_Departamento { get; set; }
         public virtual ICollection<Af_Activo_fijo_CtaCble> Af_Activo_fijo_CtaCble { get; set; }
         public virtual ICollection<Af_Depreciacion_Det> Af_Depreciacion_Det { get; set; }
         public virtual ICollection<Af_Mej_Baj_Activo> Af_Mej_Baj_Activo { get; set; }

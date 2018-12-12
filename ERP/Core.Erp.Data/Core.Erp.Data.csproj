@@ -80,6 +80,9 @@
     <Compile Include="Af_CatalogoTipo.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Af_Departamento.cs">
+      <DependentUpon>Model_activo_fijo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Af_Depreciacion.cs">
       <DependentUpon>Model_activo_fijo.tt</DependentUpon>
     </Compile>

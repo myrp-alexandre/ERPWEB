@@ -17,11 +17,11 @@ namespace Core.Erp.Data
         public int IdEmpresa { get; set; }
         public int IdActivoFijo { get; set; }
         public int Secuencia { get; set; }
-        public string IdCatalogo { get; set; }
+        public decimal IdDepartamento { get; set; }
         public string IdCtaCble { get; set; }
         public double Porcentaje { get; set; }
     
-        public virtual Af_Catalogo Af_Catalogo { get; set; }
         public virtual Af_Activo_fijo Af_Activo_fijo { get; set; }
+        public virtual Af_Departamento Af_Departamento { get; set; }
     }
 }

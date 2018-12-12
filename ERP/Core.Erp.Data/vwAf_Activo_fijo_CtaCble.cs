@@ -21,5 +21,6 @@ namespace Core.Erp.Data
         public string IdCtaCble { get; set; }
         public double Porcentaje { get; set; }
         public string pc_Cuenta { get; set; }
+        public decimal IdDepartamento { get; set; }
     }
 }
