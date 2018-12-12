@@ -9494,6 +9494,9 @@
     <Content Include="Areas\Produccion\Views\Fabricacion\Anular.cshtml" />
     <Content Include="Areas\Contabilidad\Views\PlanDeCuentas\_GridViewPartial_anio_fiscal_importacion.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Index.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\Importar.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_categoriaAF_importacion.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_tipoAF_importacion - Copia.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\_GridViewPartial_departamento_af.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Nuevo.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Modificar.cshtml" />
