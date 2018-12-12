@@ -17,7 +17,11 @@ namespace Core.Erp.Data.Reportes.Inventario
                 {
                     Lista = Context.Af_Activo_fijo.Where(q => q.IdEmpresa == IdEmpresa && q.IdActivoFijo == IdActivoFijo).Select(q => new ACTF_006_Info
                     {
-                        
+                        IdEmpresa=q.IdEmpresa,
+                        IdActivoFijo=q.IdActivoFijo,
+                        CodActivoFijo=q.CodActivoFijo,
+                        Af_Nombre=q.Af_Nombre,
+                        Af_Codigo_Barra=q.Af_Codigo_Barra
                     }).ToList();
                 }
 
