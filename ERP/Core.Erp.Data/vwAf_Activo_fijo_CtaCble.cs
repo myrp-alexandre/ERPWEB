@@ -17,10 +17,9 @@ namespace Core.Erp.Data
         public int IdEmpresa { get; set; }
         public int IdActivoFijo { get; set; }
         public int Secuencia { get; set; }
-        public string IdCatalogo { get; set; }
+        public decimal IdDepartamento { get; set; }
         public string IdCtaCble { get; set; }
         public double Porcentaje { get; set; }
         public string pc_Cuenta { get; set; }
-        public decimal IdDepartamento { get; set; }
     }
 }

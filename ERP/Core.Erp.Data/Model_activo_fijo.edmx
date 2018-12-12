@@ -820,7 +820,6 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
             <End Role="Af_CatalogoTipo" EntitySet="Af_CatalogoTipo" />
             <End Role="Af_Catalogo" EntitySet="Af_Catalogo" />
           </AssociationSet>
-          <EntitySet Name="vwAf_Activo_fijo_CtaCble" EntityType="Model_activo_fijo.vwAf_Activo_fijo_CtaCble" />
           <EntitySet Name="Af_Activo_fijo" EntityType="Model_activo_fijo.Af_Activo_fijo" />
           <EntitySet Name="Af_Activo_fijo_Categoria" EntityType="Model_activo_fijo.Af_Activo_fijo_Categoria" />
           <EntitySet Name="Af_Activo_fijo_CtaCble" EntityType="Model_activo_fijo.Af_Activo_fijo_CtaCble" />
@@ -886,6 +885,7 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
             <End Role="Af_Departamento" EntitySet="Af_Departamento" />
             <End Role="Af_Activo_fijo_CtaCble" EntitySet="Af_Activo_fijo_CtaCble" />
           </AssociationSet>
+          <EntitySet Name="vwAf_Activo_fijo_CtaCble" EntityType="Model_activo_fijo.vwAf_Activo_fijo_CtaCble" />
         </EntityContainer>
         <ComplexType Name="spACTF_activos_a_depreciar_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -952,26 +952,6 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwAf_Activo_fijo_CtaCble">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdActivoFijo" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdCatalogo" />
-            <PropertyRef Name="IdCtaCble" />
-            <PropertyRef Name="Porcentaje" />
-            <PropertyRef Name="pc_Cuenta" />
-            <PropertyRef Name="IdDepartamento" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdActivoFijo" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdCatalogo" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Porcentaje" Type="Double" Nullable="false" />
-          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdDepartamento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-        </EntityType>
         <EntityType Name="Af_Activo_fijo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1320,6 +1300,24 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwAf_Activo_fijo_CtaCble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdActivoFijo" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdDepartamento" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="pc_Cuenta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdActivoFijo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdDepartamento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Porcentaje" Type="Double" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1530,19 +1528,6 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwAf_Activo_fijo_CtaCble">
-            <EntityTypeMapping TypeName="Model_activo_fijo.vwAf_Activo_fijo_CtaCble">
-              <MappingFragment StoreEntitySet="vwAf_Activo_fijo_CtaCble">
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
-                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdActivoFijo" ColumnName="IdActivoFijo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Af_Activo_fijo">
             <EntityTypeMapping TypeName="Model_activo_fijo.Af_Activo_fijo">
               <MappingFragment StoreEntitySet="Af_Activo_fijo">
@@ -1665,6 +1650,19 @@ FROM [dbo].[vwAf_Activo_fijo_CtaCble] AS [vwAf_Activo_fijo_CtaCble]</DefiningQue
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwAf_Activo_fijo_CtaCble">
+            <EntityTypeMapping TypeName="Model_activo_fijo.vwAf_Activo_fijo_CtaCble">
+              <MappingFragment StoreEntitySet="vwAf_Activo_fijo_CtaCble">
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdActivoFijo" ColumnName="IdActivoFijo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
