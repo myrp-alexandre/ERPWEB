@@ -52,6 +52,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         tbl_TransaccionesAutorizadas_Bus bus_transaccionesAut = new tbl_TransaccionesAutorizadas_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         cxc_cobro_tipo_Bus bus_tipo_cobro = new cxc_cobro_tipo_Bus();
+        fa_NivelDescuento_Bus bus_nivelDescuento = new fa_NivelDescuento_Bus();
         #endregion
 
         #region Index
@@ -144,14 +145,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_pago = bus_termino_pago.get_list(false);
             ViewBag.lst_pago = lst_pago;
 
-            var lst_forma_pago = bus_forma_pago.get_list(false);
-            ViewBag.lst_forma_pago = lst_forma_pago;
-
-            var lst_tipo_efectivo = bus_tipo_cobro.get_list(false,cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar.EFEC);
-            ViewBag.lst_tipo_efectivo = lst_tipo_efectivo;
-
-            var lst_tipo_cobro = bus_tipo_cobro.get_list(false, cl_enumeradores.eCobroTipoMotivoCuentasPorCobrar.SINRET);
-            ViewBag.lst_tipo_cobro = lst_tipo_cobro;
+            var lst_NivelDescuento = bus_nivelDescuento.GetList(model.IdEmpresa, false);
+            ViewBag.lst_NivelDescuento = lst_NivelDescuento;
         }
         private bool validar(fa_factura_Info i_validar, ref string msg)
         {
@@ -757,167 +752,64 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return PartialView("_GridViewPartial_factura_det", model);
         }
 
-      //  [HttpPost, ValidateInput(false)]
-        //public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
-        //{
-        //    int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-        //    decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
-        //    if (info_det != null && info_det.IdProducto != 0)
-        //    {
-        //        var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-        //        if (producto != null)
-        //        {
-        //            info_det.pr_descripcion = producto.pr_descripcion_combo;
-        //            info_det.se_distribuye = producto.se_distribuye;
-        //            info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
-        //            var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
-        //            if (cliente != null)
-        //            {
-        //                int nivel_precio = cliente.NivelPrecio == 0 ? 1 : cliente.NivelPrecio;
-        //                switch (nivel_precio)
-        //                {
-        //                    case 1:
-        //                        info_det.vt_Precio = producto.precio_1;
-        //                        break;
-        //                    case 2:
-        //                        if (producto.signo_2 == "+")
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
-        //                            info_det.vt_PorDescUnitario = 0;
-        //                        }
-        //                        else
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_1;
-        //                            info_det.vt_PorDescUnitario = producto.porcentaje_2;
-        //                        }
-        //                        break;
-        //                    case 3:
-        //                        if (producto.signo_3 == "+")
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
-        //                            info_det.vt_PorDescUnitario = 0;
-        //                        }
-        //                        else
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_1;
-        //                            info_det.vt_PorDescUnitario = producto.porcentaje_3;
-        //                        }
-        //                        break;
-        //                    case 4:
-        //                        if (producto.signo_4 == "+")
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
-        //                            info_det.vt_PorDescUnitario = 0;
-        //                        }
-        //                        else
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_1;
-        //                            info_det.vt_PorDescUnitario = producto.porcentaje_4;
-        //                        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
 
-        //                        break;
-        //                    case 5:
-        //                        if (producto.signo_5 == "+")
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
-        //                            info_det.vt_PorDescUnitario = 0;
-        //                        }
-        //                        else
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_1;
-        //                            info_det.vt_PorDescUnitario = producto.porcentaje_5;
-        //                        }
-        //                        break;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    List_det.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-        //    var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-        //    cargar_combos_detalle();
-        //    return PartialView("_GridViewPartial_factura_det", model);
-        //}
+            if (info_det != null && info_det.IdProducto != 0)
+            {
+                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                if (producto != null)
+                {
+                    info_det.pr_descripcion = producto.pr_descripcion_combo;
+                    info_det.se_distribuye = producto.se_distribuye;
+                    info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
+                    var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
+                    if (cliente != null)
+                    {
+                        int nivel_precio = cliente.IdNivel == 0 ? 1 : cliente.IdNivel;
+                        var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
+                        info_det.vt_Precio = producto.precio_1;
+                        info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                    }
+                }
+            }
+            List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_factura_det", model);
+        }
 
-    //    [HttpPost, ValidateInput(false)]
-        //public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
-        //{
-        //    int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-        //    decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
-        //    if (info_det != null && info_det.IdProducto != 0)
-        //    {
-        //        var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-        //        if (producto != null)
-        //        {
-        //            info_det.pr_descripcion = producto.pr_descripcion_combo;
-        //            info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
-        //            info_det.se_distribuye = producto.se_distribuye;
-        //            var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
-        //            if (cliente != null)
-        //            {
-        //                int nivel_precio = cliente.NivelPrecio == 0 ? 1 : cliente.NivelPrecio;
-        //                switch (nivel_precio)
-        //                {
-        //                    case 1:
-        //                        info_det.vt_Precio = producto.precio_1;
-        //                        break;
-        //                    case 2:
-        //                        if (producto.signo_2 == "+")
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_2 == 0 ? producto.precio_1 : producto.precio_2;
-        //                            info_det.vt_PorDescUnitario = 0;
-        //                        }
-        //                        else
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_1;
-        //                            info_det.vt_PorDescUnitario = producto.porcentaje_2;
-        //                        }
-        //                        break;
-        //                    case 3:
-        //                        if (producto.signo_3 == "+")
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_3 == 0 ? producto.precio_1 : producto.precio_3;
-        //                            info_det.vt_PorDescUnitario = 0;
-        //                        }
-        //                        else
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_1;
-        //                            info_det.vt_PorDescUnitario = producto.porcentaje_3;
-        //                        }
-        //                        break;
-        //                    case 4:
-        //                        if (producto.signo_4 == "+")
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_4 == 0 ? producto.precio_1 : producto.precio_4;
-        //                            info_det.vt_PorDescUnitario = 0;
-        //                        }
-        //                        else
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_1;
-        //                            info_det.vt_PorDescUnitario = producto.porcentaje_4;
-        //                        }
-
-        //                        break;
-        //                    case 5:
-        //                        if (producto.signo_5 == "+")
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_5 == 0 ? producto.precio_1 : producto.precio_5;
-        //                            info_det.vt_PorDescUnitario = 0;
-        //                        }
-        //                        else
-        //                        {
-        //                            info_det.vt_Precio = producto.precio_1;
-        //                            info_det.vt_PorDescUnitario = producto.porcentaje_5;
-        //                        }
-        //                        break;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-        //    var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-        //    cargar_combos_detalle();
-        //    return PartialView("_GridViewPartial_factura_det", model);
-        //}
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
+            if (info_det != null && info_det.IdProducto != 0)
+            {
+                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                if (producto != null)
+                {
+                    info_det.pr_descripcion = producto.pr_descripcion_combo;
+                    info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
+                    info_det.se_distribuye = producto.se_distribuye;
+                    var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
+                    if (cliente != null)
+                    {
+                        int nivel_precio = cliente.IdNivel == 0 ? 1 : cliente.IdNivel;
+                        var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
+                        info_det.vt_Precio = producto.precio_1;
+                        info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                    }
+                }
+            }
+            List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_factura_det", model);
+        }
 
         public ActionResult EditingDelete(int Secuencia)
         {
