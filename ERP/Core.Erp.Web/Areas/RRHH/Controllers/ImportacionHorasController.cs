@@ -432,6 +432,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             ro_HorasProfesores_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.NumHoras = info_det.NumHoras;
+            edited_info.Valor = info_det.Valor;
+            edited_info.ValorHora = info_det.ValorHora;
         }
 
         public void DeleteRow(int Secuencia)

@@ -9,8 +9,7 @@
         settings.Width = Unit.Percentage(100);
 
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "EmpleadoNovedad", Action = "EditingAddNew", Area = "RRHH" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "EmpleadoNovedad", Action = "EditingUpdate", Area = "RRHH" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "EmpleadoNovedad", Action = "EditingDelete", Area = "RRHH" };
 
