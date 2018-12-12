@@ -36,7 +36,7 @@ SELECT Af_Activo_fijo.IdEmpresa,
 		Af_costo_compra, 
 		isnull(Af_Depreciacion_acum,0) + ISNULL(Depreciacion_acumulada.depr_acum,0), 
 		iif(Af_fecha_ini_depre between @Fecha_ini and @Fecha_fin,DATEDIFF(DAY,Af_fecha_ini_depre,@Fecha_fin),@Dias_depr),		
-		(((Af_costo_compra + isnull(mb.Valor_Mej_Baj_Activo,0) - isnull(Af_ValorResidual,0)) /Af_Vida_Util)/365),
+		(((Af_costo_compra + isnull(mb.Valor_Mej_Baj_Activo,0) - isnull(Af_ValorSalvamento,0)) /Af_Vida_Util)/365),
 		0
 FROM   Af_Activo_fijo_tipo INNER JOIN
        Af_Activo_fijo ON Af_Activo_fijo_tipo.IdEmpresa = Af_Activo_fijo.IdEmpresa AND Af_Activo_fijo_tipo.IdActivoFijoTipo = Af_Activo_fijo.IdActivoFijoTipo LEFT JOIN
