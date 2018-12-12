@@ -23,7 +23,7 @@ namespace Core.Erp.Data.Facturacion
                              {
                                  IdEmpresa = q.IdEmpresa,
                                  IdSucursal = q.IdSucursal,
-                                 IdBodega = q.IdBodega,
+                                 IdBodega = Convert.ToInt32(q.IdBodega),
                                  IdPuntoVta = q.IdPuntoVta,
                                  cod_PuntoVta = q.cod_PuntoVta,
                                  nom_PuntoVta = q.nom_PuntoVta,
