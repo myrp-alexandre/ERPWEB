@@ -9496,7 +9496,7 @@
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Index.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\Importar.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_categoriaAF_importacion.cshtml" />
-    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_tipoAF_importacion - Copia.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_tipoAF_importacion.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\_GridViewPartial_departamento_af.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Nuevo.cshtml" />
     <Content Include="Areas\ActivoFijo\Views\DepartamentoAF\Modificar.cshtml" />
@@ -9507,6 +9507,9 @@
     <Content Include="Areas\Facturacion\Views\NivelDescuento\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\NivelDescuento\Anular.cshtml" />
     <Content Include="Areas\Reportes\Views\ProduccionReportes\PRO_001.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_departamentoAF_importacion.cshtml" />
+    <Content Include="Areas\ActivoFijo\Views\ActivoFijo\_GridViewPartial_catalogoAF_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionHoras\Duplicar.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

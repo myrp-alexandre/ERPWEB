@@ -9,6 +9,7 @@ namespace Core.Erp.Info.ActivoFijo
 {
     public class Af_Catalogo_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         [Required(ErrorMessage = ("el campo código es obligatorio"))]
         [StringLength(35, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 35")]
 

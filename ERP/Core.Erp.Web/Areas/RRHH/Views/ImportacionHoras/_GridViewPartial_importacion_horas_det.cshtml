@@ -6,6 +6,16 @@
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "Secuencia";
+
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ImportacionHoras", Action = "EditingUpdate", Area = "RRHH" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ImportacionHoras", Action = "EditingDelete", Area = "RRHH" };
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -41,13 +51,35 @@
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
-        settings.Columns.Add("Secuencia", "ID").Width=Unit.Percentage(5);
 
-
-        settings.Columns.Add("pe_cedulaRuc","Cédula").Width = Unit.Percentage(15);
-        settings.Columns.Add("pe_apellido","Empleado").Width = Unit.Percentage(40);
-        settings.Columns.Add("ru_descripcion", "Rubro").Width = Unit.Percentage(30);
-
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Secuencia";
+            column.Caption = "ID";
+            column.Width = Unit.Percentage(5);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_cedulaRuc";
+            column.Caption = "Cédula";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_apellido";
+            column.Caption = "Empleado";
+            column.Width = Unit.Percentage(25);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ru_descripcion";
+            column.Caption = "Rubro";
+            column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
         settings.Columns.Add("NumHoras", "#Horas").Width = Unit.Percentage(10);
         settings.Columns.Add("ValorHora", "Valor hora").Width = Unit.Percentage(10);
 

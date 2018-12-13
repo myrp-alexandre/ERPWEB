@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_HorasProfesores_Info
 @{
-    ViewBag.Title = "Nueva carga de horas";
+    ViewBag.Title = "Duplicar carga de horas";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -17,7 +17,7 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Nuevo", "ImportacionHoras", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Duplicar", "ImportacionHoras", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdCarga)

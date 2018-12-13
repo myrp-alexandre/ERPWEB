@@ -33,6 +33,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         Af_Activo_fijo_tipo_List ListaTipo = new Af_Activo_fijo_tipo_List();
         Af_Activo_fijo_Categoria_List ListaCategoria = new Af_Activo_fijo_Categoria_List();
+        Af_Departamento_List ListaDepartamento = new Af_Departamento_List();
+        Af_Catalogo_List ListaCatalogo = new Af_Catalogo_List();
         #endregion
 
         #region Index
@@ -253,6 +255,18 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 bus_categoria.guardarDB(item);
             }
 
+            var Lista_Departamento = ListaDepartamento.get_list(model.IdTransaccionSession);
+            foreach (var item in Lista_Departamento)
+            {
+                bus_dep.GuardarDB(item);
+            }
+
+            var Lista_Catalogo = ListaCatalogo.get_list(model.IdTransaccionSession);
+            foreach (var item in Lista_Catalogo)
+            {
+                bus_catalogo.guardarDB(item);
+            }
+
             return RedirectToAction("Index");
         }
         public ActionResult GridViewPartial_tipoAF_importacion()
@@ -265,9 +279,24 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         public ActionResult GridViewPartial_categoriaAF_importacion()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var model = ListaTipo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = ListaCategoria.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_categoriaAF_importacion", model);
         }
+
+        public ActionResult GridViewPartial_departamentoAF_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaDepartamento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_departamentoAF_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_catalogoAF_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaCatalogo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_catalogoAF_importacion", model);
+        }
+
         public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
         {
             string retorno = string.Empty;
@@ -368,7 +397,11 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             Af_Activo_fijo_tipo_List ListaTipo = new Af_Activo_fijo_tipo_List();
             List<Af_Activo_fijo_tipo_Info> Lista_Tipo = new List<Af_Activo_fijo_tipo_Info>();
             Af_Activo_fijo_Categoria_List ListaCategoria = new Af_Activo_fijo_Categoria_List();
-            List<Af_Activo_fijo_Categoria_Info> List_Categoria = new List<Af_Activo_fijo_Categoria_Info>();
+            List<Af_Activo_fijo_Categoria_Info> Lista_Categoria = new List<Af_Activo_fijo_Categoria_Info>();
+            Af_Departamento_List ListaDepartamento = new Af_Departamento_List();
+            List<Af_Departamento_Info> Lista_Departamento = new List<Af_Departamento_Info>();
+            Af_Catalogo_List ListaCatalogo = new Af_Catalogo_List();
+            List<Af_Catalogo_Info> Lista_Catalogo = new List<Af_Catalogo_Info>();
 
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
@@ -382,7 +415,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 IExcelDataReader reader = null;
                 reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
-                #region Plan de cuentas                
+                #region Tipo                
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
@@ -411,11 +444,77 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 }
                 #endregion
 
-                //cont = 0;
+                cont = 0;
                 //Para avanzar a la siguiente hoja de excel
-                //reader.NextResult();
+                reader.NextResult();
+
+                #region Categoria                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        Af_Activo_fijo_Categoria_Info info = new Af_Activo_fijo_Categoria_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdActivoFijoTipo = Convert.ToInt32(reader.GetValue(1)),
+                            CodCategoriaAF = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2)))?null: Convert.ToString(reader.GetValue(2)),
+                            Descripcion = Convert.ToString(reader.GetValue(3)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        Lista_Categoria.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                #endregion
+
+                cont = 0;
+                reader.NextResult();
+
+                #region Departamento                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        Af_Departamento_Info info = new Af_Departamento_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            Descripcion = Convert.ToString(reader.GetValue(1)),
+                            IdUsuarioCreacion = SessionFixed.IdUsuario
+                        };
+                        Lista_Departamento.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                #endregion
+
+                cont = 0;
+                reader.NextResult();
+
+                #region Catalogo                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        Af_Catalogo_Info info = new Af_Catalogo_Info
+                        {
+                            IdCatalogo = Convert.ToString(reader.GetValue(0)),
+                            IdTipoCatalogo = Convert.ToString(reader.GetValue(1)),
+                            Descripcion = Convert.ToString(reader.GetValue(2)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        Lista_Catalogo.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                #endregion
 
                 ListaTipo.set_list(Lista_Tipo, IdTransaccionSession);
+                ListaCategoria.set_list(Lista_Categoria, IdTransaccionSession);
+                ListaDepartamento.set_list(Lista_Departamento, IdTransaccionSession);
+                ListaCatalogo.set_list(Lista_Catalogo, IdTransaccionSession);
             }
         }
     }
