@@ -36,6 +36,8 @@
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.p_IdActivoFijo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -53,7 +55,7 @@
             // 
             this.xrBarCode1.AutoModule = true;
             this.xrBarCode1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pr_codigo_barra]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Af_Codigo_Barra]")});
             this.xrBarCode1.LocationFloat = new DevExpress.Utils.PointFloat(23F, 10.455F);
             this.xrBarCode1.Name = "xrBarCode1";
             this.xrBarCode1.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
@@ -63,7 +65,7 @@
             // xrLabel1
             // 
             this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[nom_etiqueta]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Af_Nombre]")});
             this.xrLabel1.Font = new System.Drawing.Font("Times New Roman", 6F);
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(23F, 75.625F);
             this.xrLabel1.Name = "xrLabel1";
@@ -94,6 +96,16 @@
             this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.ActivoFijo.ACTF_006_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
+            // p_IdActivoFijo
+            // 
+            this.p_IdActivoFijo.Name = "p_IdActivoFijo";
+            this.p_IdActivoFijo.Visible = false;
+            // 
+            // p_IdEmpresa
+            // 
+            this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
+            // 
             // ACTF_006_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -107,7 +119,11 @@
             this.PageHeight = 110;
             this.PageWidth = 300;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
+            this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
+            this.p_IdActivoFijo,
+            this.p_IdEmpresa});
             this.Version = "17.2";
+            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACTF_006_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
@@ -121,5 +137,7 @@
         private DevExpress.XtraReports.UI.XRBarCode xrBarCode1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel1;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdActivoFijo;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
     }
 }

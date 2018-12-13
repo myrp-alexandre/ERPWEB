@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.ActivoFijo;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,72 @@ namespace Core.Erp.Data.ActivoFijo
 {
    public class Af_Activo_fijo_Data
     {
+
+        public List<Af_Activo_fijo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<Af_Activo_fijo_Info> Lista = new List<Af_Activo_fijo_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+            return Lista;
+        }
+
+        public Af_Activo_fijo_Info get_info_bajo_demanda(int IdEmpresa, ListEditItemRequestedByValueEventArgs args)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info_demanda(IdEmpresa, (int)args.Value);
+        }
+
+        public List<Af_Activo_fijo_Info> get_list(int IdEmpresa, int skip, int take, string filter)
+        {
+            try
+            {
+                List<Af_Activo_fijo_Info> Lista = new List<Af_Activo_fijo_Info>();
+
+                Entities_activo_fijo context_g = new Entities_activo_fijo();
+
+                var lstg = context_g.Af_Activo_fijo.Where(q => q.Estado == "A" && q.IdEmpresa == IdEmpresa && (q.IdActivoFijo.ToString() + " " + q.Af_Nombre).Contains(filter)).OrderBy(q => q.IdSucursal).Skip(skip).Take(take);
+                foreach (var q in lstg)
+                {
+                    Lista.Add(new Af_Activo_fijo_Info
+                    {
+                        IdSucursal = q.IdSucursal,
+                        CodActivoFijo = q.CodActivoFijo,
+                        Af_Nombre = q.Af_Nombre
+                    });
+                }
+
+                context_g.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public Af_Activo_fijo_Info get_info_demanda(int IdEmpresa, int value)
+        {
+            Af_Activo_fijo_Info info = new Af_Activo_fijo_Info();
+            using (Entities_activo_fijo Contex = new Entities_activo_fijo())
+            {
+                info = (from q in Contex.Af_Activo_fijo
+                        where q.IdEmpresa == IdEmpresa
+                        && q.IdActivoFijo==value
+                        select new Af_Activo_fijo_Info
+                        {
+                            IdSucursal = q.IdSucursal,
+                            CodActivoFijo = q.CodActivoFijo,
+                            Af_Nombre = q.Af_Nombre
+                        }).FirstOrDefault();
+            }
+            return info;
+        }
+
+
         public List<Af_Activo_fijo_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try

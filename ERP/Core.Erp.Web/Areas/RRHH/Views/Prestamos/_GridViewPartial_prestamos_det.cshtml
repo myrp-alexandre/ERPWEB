@@ -7,23 +7,31 @@
         settings.KeyFieldName = "NumCuota";
         settings.Width = Unit.Percentage(100);
 
-
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Prestamos", Action = "EditingUpdate", Area = "RRHH" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Prestamos", Action = "EditingDelete", Area = "RRHH" };
 
-        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
 
         settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
+        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.DeleteRow = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
 
-        settings.Settings.ShowFooter = true;
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
