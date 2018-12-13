@@ -1,5 +1,5 @@
 ﻿
-@model Core.Erp.Info.Helps.cl_filtros_inventario_Info
+@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
     ViewBag.Title = "ACTF_006";
@@ -31,10 +31,10 @@
             
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="IdProductoPadre">Activo fijo</label>
-                            @Html.Partial("_CmbActivo_fijo", Model)
+                            @Html.Partial("_CmbActivo_fijo", Model.IdActivoFijo)
                             @Html.ValidationMessageFor(q => q.IdActivoFijo, "", new { @class = "text-danger" })
                         </div>
                     </div>

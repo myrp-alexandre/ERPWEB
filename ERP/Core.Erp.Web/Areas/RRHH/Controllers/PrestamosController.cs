@@ -40,7 +40,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult CmbRubro_Prestamos()
         {
-            decimal model = new decimal();
+            ro_prestamo_Info model = new ro_prestamo_Info();
             return PartialView("_CmbRubro_Prestamos", model);
         }
         public List<ro_rubro_tipo_Info> get_list_bajo_demanda_rubro(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -250,8 +250,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             if (ModelState.IsValid)
                 Lis_ro_prestamo_detalle_lst.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            ro_prestamo_Info model = new ro_prestamo_Info();
-            model.lst_detalle = Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_prestamos_det", model);
         }
@@ -261,8 +260,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             if (ModelState.IsValid)
                 Lis_ro_prestamo_detalle_lst.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            ro_prestamo_Info model = new ro_prestamo_Info();
-            model.lst_detalle = Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_prestamos_det", model);
         }
@@ -270,8 +268,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_prestamo_detalle_Info info_det )
         {
             Lis_ro_prestamo_detalle_lst.DeleteRow(info_det.NumCuota, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            ro_prestamo_Info model = new ro_prestamo_Info();
-            model.lst_detalle = Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_prestamos_det", model);
         }

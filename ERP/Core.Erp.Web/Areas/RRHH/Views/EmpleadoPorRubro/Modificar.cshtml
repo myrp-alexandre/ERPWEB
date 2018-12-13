@@ -55,7 +55,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdRubro">Rubro*</label>
-                    @Html.Partial("_CmbRubro_EmpxRub", Model.IdRubro)
+                    @Html.Partial("_CmbRubro_EmpxRub", Model)
                     @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
                 </div>
             </div>

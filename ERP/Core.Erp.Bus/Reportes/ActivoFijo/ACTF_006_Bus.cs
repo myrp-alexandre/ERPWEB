@@ -12,7 +12,7 @@ namespace Core.Erp.Bus.Reportes.ActivoFijo
    public class ACTF_006_Bus
     {
         ACTF_006_Data odata = new ACTF_006_Data();
-        public List<ACTF_006_Info> get_list(int IdEmpresa, decimal IdActivoFijo)
+        public List<ACTF_006_Info> get_list(int IdEmpresa, int IdActivoFijo)
         {
             try
             {

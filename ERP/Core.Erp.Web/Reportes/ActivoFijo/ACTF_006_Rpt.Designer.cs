@@ -36,7 +36,7 @@
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.IdActivoFijo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdActivoFijo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -96,12 +96,10 @@
             this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.ActivoFijo.ACTF_006_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
-            // IdActivoFijo
+            // p_IdActivoFijo
             // 
-            this.IdActivoFijo.Name = "IdActivoFijo";
-            this.IdActivoFijo.Type = typeof(decimal);
-            this.IdActivoFijo.ValueInfo = "0";
-            this.IdActivoFijo.Visible = false;
+            this.p_IdActivoFijo.Name = "p_IdActivoFijo";
+            this.p_IdActivoFijo.Visible = false;
             // 
             // p_IdEmpresa
             // 
@@ -122,7 +120,7 @@
             this.PageWidth = 300;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
-            this.IdActivoFijo,
+            this.p_IdActivoFijo,
             this.p_IdEmpresa});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACTF_006_Rpt_BeforePrint);
@@ -139,7 +137,7 @@
         private DevExpress.XtraReports.UI.XRBarCode xrBarCode1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel1;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
-        public DevExpress.XtraReports.Parameters.Parameter IdActivoFijo;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdActivoFijo;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
     }
 }

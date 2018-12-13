@@ -245,8 +245,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             if (ModelState.IsValid)
                 lst_novedad_det.AddRow(info_det);
-            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
-            model.lst_novedad_det = lst_novedad_det.get_list();
+            var model = lst_novedad_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
@@ -256,8 +255,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             if (ModelState.IsValid)
                 lst_novedad_det.UpdateRow(info_det);
-            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
-            model.lst_novedad_det = lst_novedad_det.get_list();
+            var model = lst_novedad_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
@@ -265,8 +263,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_novedad_det_Info info_det)
         {
             lst_novedad_det.DeleteRow(info_det.Secuencia);
-            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
-            model.lst_novedad_det = lst_novedad_det.get_list();
+            var model = lst_novedad_det.get_list();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }

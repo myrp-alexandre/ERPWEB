@@ -16,7 +16,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         Af_Activo_fijo_Bus bus_activo = new Af_Activo_fijo_Bus();
         public ActionResult CmbActivo_fijo()
         {
-            string model = "";
+            int model = new int();
             return PartialView("_CmbActivo_fijo", model);
         }
 
@@ -218,18 +218,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-
         public ActionResult ACTF_006()
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdActivoFijoTipo = 0,
+                IdActivoFijo = 0,
             };
-
             ACTF_006_Rpt report = new ACTF_006_Rpt();
-            //report.p_IdEmpresa.Value = model.IdEmpresa;
-
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdActivoFijo.Value = model.IdActivoFijo;
             ViewBag.Report = report;
             return View(model);
         }
@@ -237,9 +235,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult ACTF_006(cl_filtros_Info model)
         {
             ACTF_006_Rpt report = new ACTF_006_Rpt();
-            //report.p_IdEmpresa.Value = model.IdEmpresa;
-           // report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
-
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdActivoFijo.Value = model.IdActivoFijo;
             ViewBag.Report = report;
             return View(model);
         }
