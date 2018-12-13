@@ -9651,6 +9651,9 @@
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_005_Rpt.resx">
       <DependentUpon>ACTF_005_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_006_Rpt.resx">
+      <DependentUpon>ACTF_006_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.resx">
       <DependentUpon>BAN_001_cancelaciones_Rpt.cs</DependentUpon>
     </EmbeddedResource>
