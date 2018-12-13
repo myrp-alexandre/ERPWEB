@@ -272,6 +272,16 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 bus_catalogo.guardarDB(item);
             }
 
+            var Lista_ActivoFijo = ListaActivoFijo.get_list(model.IdTransaccionSession);
+            var Lista_ActivoFijo_CtaCble = List_det.get_list(model.IdTransaccionSession);
+            
+            foreach (var item in Lista_ActivoFijo)
+            {
+                item.LstDet = Lista_ActivoFijo_CtaCble.Where(q=>q.IdActivoFijo == item.IdActivoFijo).ToList();
+
+                bus_activo.guardarDB(item);
+            }
+
             return RedirectToAction("Index");
         }
         public ActionResult GridViewPartial_tipoAF_importacion()
@@ -307,6 +317,13 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = ListaActivoFijo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_ActivoFijo_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_ActivoFijo_CtaCble_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ActivoFijo_CtaCble_importacion", model);
         }
 
         public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
@@ -407,6 +424,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         {
             #region Variables
             ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
+            Af_Activo_fijo_tipo_Bus bus_tipo = new Af_Activo_fijo_tipo_Bus();
 
             Af_Activo_fijo_tipo_List ListaTipo = new Af_Activo_fijo_tipo_List();
             List<Af_Activo_fijo_tipo_Info> Lista_Tipo = new List<Af_Activo_fijo_tipo_Info>();
@@ -442,6 +460,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                         Af_Activo_fijo_tipo_Info info = new Af_Activo_fijo_tipo_Info
                         {
                             IdEmpresa = IdEmpresa,
+                            IdActivoFijoTipo = Convert.ToInt32(reader.GetValue(0)),
                             CodActivoFijo = reader.GetString(1),
                             Af_Descripcion = reader.GetString(2),
                             Af_Porcentaje_depre = Convert.ToDouble(reader.GetValue(3)),
@@ -461,6 +480,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                     else
                         cont++;
                 }
+                ListaTipo.set_list(Lista_Tipo, IdTransaccionSession);
                 #endregion
 
                 cont = 0;
@@ -485,6 +505,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                     else
                         cont++;
                 }
+                ListaCategoria.set_list(Lista_Categoria, IdTransaccionSession);
                 #endregion
 
                 cont = 0;
@@ -506,6 +527,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                     else
                         cont++;
                 }
+                ListaDepartamento.set_list(Lista_Departamento, IdTransaccionSession);
                 #endregion
 
                 cont = 0;
@@ -528,10 +550,13 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                     else
                         cont++;
                 }
+                ListaCatalogo.set_list(Lista_Catalogo, IdTransaccionSession);
                 #endregion
 
-                #region ActivoFijo   
+                cont = 0;
+                reader.NextResult();
 
+                #region ActivoFijo   
                 var ListaEmpleado = bus_empleado.get_list_combo(IdEmpresa);
                 ro_empleado_info_list Lista_Empleado = new ro_empleado_info_list();
                 Lista_Empleado.set_list(ListaEmpleado);
@@ -540,54 +565,75 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
-                        var info_empleado_custodio = Lista_Empleado.get_list().Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(1))).FirstOrDefault();
-                        var info_empleado_encargado = Lista_Empleado.get_list().Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(1))).FirstOrDefault();
-                        
+                        var IdTipo = Convert.ToInt32(reader.GetValue(5));
+                        var info_empleado_custodio = Lista_Empleado.get_list().Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(13))).FirstOrDefault();
+                        var info_empleado_encargado = Lista_Empleado.get_list().Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(14))).FirstOrDefault();
+                        var info_tipo_activofijo = ListaTipo.get_list(IdTransaccionSession).Where(q => q.IdActivoFijoTipo == IdTipo).FirstOrDefault(); ;
+
                         Af_Activo_fijo_Info info = new Af_Activo_fijo_Info
                         {
                             IdEmpresa = IdEmpresa,
                             IdUsuario = SessionFixed.IdUsuario,
-                            Af_Codigo_Barra = Convert.ToString(reader.GetValue(1)),
-                            Af_costo_compra = Convert.ToDouble(reader.GetValue(1)),
-                            Af_Depreciacion_acum = Convert.ToDouble(reader.GetValue(1)),
-                            Af_fecha_compra = Convert.ToDateTime(reader.GetValue(1)),
-                            Af_fecha_fin_depre = Convert.ToDateTime(reader.GetValue(1)),
-                            Af_fecha_ini_depre = Convert.ToDateTime(reader.GetValue(1)),
-                            Af_Meses_depreciar = Convert.ToInt32(reader.GetValue(1)),
-                            Af_Nombre = Convert.ToString(reader.GetValue(1)),
-                            Af_NumPlaca = Convert.ToString(reader.GetValue(1)),
-                            Af_NumSerie = Convert.ToString(reader.GetValue(1)),
-                            Af_observacion = Convert.ToString(reader.GetValue(1)),
-                            Af_porcentaje_deprec = Convert.ToDouble(reader.GetValue(1)),
-                            Af_ValorSalvamento = Convert.ToDouble(reader.GetValue(1)),
-                            Af_Vida_Util = Convert.ToInt32(reader.GetValue(1)),
                             CodActivoFijo = Convert.ToString(reader.GetValue(1)),
-                            Estado_Proceso = Convert.ToString(reader.GetValue(1)),
-                            IdActivoFijoTipo = Convert.ToInt32(reader.GetValue(1)),
-                            IdCatalogo_Color = Convert.ToString(reader.GetValue(1)),
-                            IdCatalogo_Marca = Convert.ToString(reader.GetValue(1)),
-                            IdCatalogo_Modelo = Convert.ToString(reader.GetValue(1)),
-                            IdCategoriaAF = Convert.ToInt32(reader.GetValue(1)),
-                            IdSucursal = Convert.ToInt32(reader.GetValue(1)),
-                            IdTipoCatalogo_Ubicacion = Convert.ToString(reader.GetValue(1)),
+                            Af_Codigo_Barra = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2)))?null: Convert.ToString(reader.GetValue(2)),
+                            Af_Nombre = Convert.ToString(reader.GetValue(3)),
+                            IdCategoriaAF = Convert.ToInt32(reader.GetValue(4)),
+                            IdActivoFijoTipo = Convert.ToInt32(reader.GetValue(5)),
+                            IdSucursal = Convert.ToInt32(reader.GetValue(6)),
+                            IdDepartamento = Convert.ToInt32(reader.GetValue(7)),
+                            IdCatalogo_Marca = Convert.ToString(reader.GetValue(8)),
+                            IdCatalogo_Modelo = Convert.ToString(reader.GetValue(9)),
+                            IdCatalogo_Color = Convert.ToString(reader.GetValue(10)),
+                            IdTipoCatalogo_Ubicacion = Convert.ToString(reader.GetValue(11)),
                             IdEmpleadoCustodio = info_empleado_custodio.IdEmpleado,
                             IdEmpleadoEncargado = info_empleado_encargado.IdEmpleado,
-                            IdDepartamento = Convert.ToInt32(reader.GetValue(1)),
-
+                            Af_fecha_compra = Convert.ToDateTime(reader.GetValue(15)),
+                            Af_fecha_ini_depre = Convert.ToDateTime(reader.GetValue(16)),                            
+                            Af_costo_compra = Convert.ToDouble(reader.GetValue(17)),
+                            Af_Depreciacion_acum = Convert.ToDouble(reader.GetValue(18)),
+                            Af_ValorSalvamento = Convert.ToDouble(reader.GetValue(19)),
+                            Af_NumSerie = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(20)))?null: Convert.ToString(reader.GetValue(20)),
+                            Af_NumPlaca = Convert.ToString(reader.GetValue(21)),
+                            Estado_Proceso = "TIP_ESTADO_AF_ACTIVO",
+                            Af_fecha_fin_depre = (Convert.ToDateTime(reader.GetValue(16))).AddYears(info_tipo_activofijo.Af_anio_depreciacion),
+                            Af_Meses_depreciar = (info_tipo_activofijo.Af_anio_depreciacion * 12),
+                            Af_porcentaje_deprec = info_tipo_activofijo.Af_Porcentaje_depre,
+                            Af_Vida_Util = info_tipo_activofijo.Af_anio_depreciacion,
                         };
+
                         Lista_ActivoFijo.Add(info);
                     }
                     else
                         cont++;
                 }
+                ListaActivoFijo.set_list(Lista_ActivoFijo, IdTransaccionSession);
                 #endregion
 
-                ListaTipo.set_list(Lista_Tipo, IdTransaccionSession);
-                ListaCategoria.set_list(Lista_Categoria, IdTransaccionSession);
-                ListaDepartamento.set_list(Lista_Departamento, IdTransaccionSession);
-                ListaCatalogo.set_list(Lista_Catalogo, IdTransaccionSession);
-                ListaActivoFijo.set_list(Lista_ActivoFijo, IdTransaccionSession);
-                
+                cont = 0;                
+                reader.NextResult();
+
+                #region ActivoFijo_CtaCble                
+                while (reader.Read())
+                {
+                    var sec = 0;
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        Af_Activo_fijo_CtaCble_Info info = new Af_Activo_fijo_CtaCble_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdActivoFijo = Convert.ToInt32(reader.GetValue(0)),
+                            Secuencia = sec++,
+                            IdDepartamento = Convert.ToInt32(reader.GetValue(1)),
+                            IdCtaCble = Convert.ToString(reader.GetValue(2)),
+                            Porcentaje = Convert.ToDouble(reader.GetValue(3))
+                        };
+                        Lista_ActivoFijoCtaCble.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                ListaActivoFijoCtaCble.set_list(Lista_ActivoFijoCtaCble, IdTransaccionSession);
+                #endregion
             }
         }
     }
