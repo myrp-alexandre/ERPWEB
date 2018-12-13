@@ -41,6 +41,9 @@ namespace Core.Erp.Data.ActivoFijo
                 {
                     Lista.Add(new Af_Activo_fijo_Info
                     {
+
+                        IdEmpresa = q.IdEmpresa,
+                        IdActivoFijo = q.IdActivoFijo,
                         IdSucursal = q.IdSucursal,
                         CodActivoFijo = q.CodActivoFijo,
                         Af_Nombre = q.Af_Nombre
@@ -67,6 +70,9 @@ namespace Core.Erp.Data.ActivoFijo
                         && q.IdActivoFijo==value
                         select new Af_Activo_fijo_Info
                         {
+
+                            IdEmpresa = q.IdEmpresa,
+                            IdActivoFijo = q.IdActivoFijo,
                             IdSucursal = q.IdSucursal,
                             CodActivoFijo = q.CodActivoFijo,
                             Af_Nombre = q.Af_Nombre
