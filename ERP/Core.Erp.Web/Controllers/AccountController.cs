@@ -86,10 +86,11 @@ namespace Core.Erp.Web.Controllers
             SessionFixed.em_direccion = info_empresa.em_direccion;
             SessionFixed.IdTransaccionSession = string.IsNullOrEmpty(SessionFixed.IdTransaccionSession) ? "1" : SessionFixed.IdTransaccionSession;
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-
+            
             var usuario = bus_usuario.get_info(model.IdUsuario);
+            SessionFixed.EsSuperAdmin = usuario.es_super_admin.ToString();
             if (usuario != null && usuario.IdMenu != null)
-            {
+            {                
                 var menu = bus_menu.get_info((int)usuario.IdMenu);
                 if (menu != null && !string.IsNullOrEmpty(menu.web_nom_Action))
                     return RedirectToAction(menu.web_nom_Action, menu.web_nom_Controller, new { Area = menu.web_nom_Area });                

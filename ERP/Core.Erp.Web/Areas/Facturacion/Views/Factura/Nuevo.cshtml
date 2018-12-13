@@ -12,16 +12,20 @@
 <script>
     $(function () {
         CargarPuntosDeVenta();
+        MostrarOcultarEfectivo();
         get_info_termino_pago();
         GetUltimoDocumento();
         ValidarGrid();
-        ValidarCliente();
+        ValidarCliente();        
         $("#vt_tipo_venta").change(function () {
             get_info_termino_pago();
             CargarCuotas();
         });
         $("#vt_plazo").change(function () {
             cargar_fecha_vencimiento();
+        });
+        $("#EnumeradorCobro").change(function () {
+            MostrarOcultarEfectivo();
         });
         $("#IdSucursal").change(function () {
             CargarPuntosDeVenta();
@@ -33,7 +37,17 @@
         $("#valor_abono").change(function () {
             CargarCuotas();
         });
+        $("#vt_ValorEfectivo").keyup(function () {
+            CalcularCambio();
+        });
     });
+
+    function MostrarOcultarEfectivo() {
+        if ($("#EnumeradorCobro").val() == "EFEC") {
+            $("#DivEfectivo").show();
+        } else
+            $("#DivEfectivo").hide();
+    }
     function ValidarCliente() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -257,7 +271,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridView_factura_det.GetEditor('IdCod_Impuesto_Iva').SetValue(data.IdCod_Impuesto_Iva);
+                //GridView_factura_det.GetEditor('IdCod_Impuesto_Iva').SetValue(data.IdCod_Impuesto_Iva);
                 if (data.IdProducto_padre > 0) {
                     MostrarModal();
                 }
@@ -519,6 +533,8 @@
             $("#ProformasModal").modal("hide");
     }
 
+
+
     function ValidarGrid() {
         var datos = {
             IdTransaccionSession: $("#IdTransaccionSession").val()
@@ -533,16 +549,24 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#txtMensaje").text(data);
-                if (data.length > 0) {
+                $("#txtMensaje").text(data.mensaje);
+                $("#vt_Total").val(data.Total);
+                if (data.mensaje.length > 0) {
                     $("#divMensaje").show();
                 } else {
                     $("#divMensaje").hide();
                 }
+                CalcularCambio();
             },
             error: function (error) {
             }
         });
+    }
+
+    function CalcularCambio() {
+        var Total = Number($("#vt_Total").val());
+        var Efectivo = Number($("#vt_ValorEfectivo").val());
+        $("#vt_Cambio").val((Efectivo - Total).toFixed(2));
     }
 </script>
 
@@ -791,7 +815,7 @@
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="IdNivel">Tipo de cobro*</label>
+                                <label for="EnumeradorCobro">Tipo de cobro*</label>
                                 @Html.DropDownListFor(q => q.EnumeradorCobro, new SelectList(ViewBag.lst_enumerador_cobro, "Key", "Value"), new { @class = "form-control", @id = "EnumeradorCobro" })
                                 @Html.ValidationMessageFor(q => q.EnumeradorCobro, "", new { @class = "text-danger" })
                             </div>
@@ -923,15 +947,38 @@
         </div>
     </div>
 
-
+    
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
-                @Html.Action("GridViewPartial_factura_det")
+                @Html.Action("GridViewPartial_factura_det", new { DescuentoReadonly = Model.DescuentoReadOnly })
             </div>
         </div>
     </div>
-
+    <br />
+    <div class="row" id="DivEfectivo" hidden>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_Total">Total</label>
+                    @Html.TextBoxFor(q => q.vt_Total, new { @id = "vt_Total", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_ValorEfectivo">Efectivo</label>
+                    @Html.TextBoxFor(q => q.vt_ValorEfectivo, new { @id = "vt_ValorEfectivo", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.vt_ValorEfectivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_Cambio">Cambio</label>
+                    @Html.TextBoxFor(q => q.vt_Cambio, new { @id = "vt_Cambio", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Factura",new { Area = "Facturacion" },null)">Cancelar</a>

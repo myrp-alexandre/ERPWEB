@@ -354,7 +354,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 mensaje = "Existen items con precio 0 en el detalle";
             }
-            return Json(mensaje, JsonRequestBehavior.AllowGet);
+            double Total = Math.Round(lista.Sum(q => q.vt_Subtotal + q.vt_iva),2,MidpointRounding.AwayFromZero);
+            return Json(new { mensaje  = mensaje, Total = Total}, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ModificarLinea(int Secuencia = 0, decimal IdTransaccionSession = 0, double Precio = 0, double PorDescuento = 0, bool AplicarTodaFactura = false)
         {            
@@ -592,8 +593,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 lst_det = new List<fa_factura_det_Info>(),
                 lst_cuota = new List<fa_cuotas_x_doc_Info>(),
                 vt_tipoDoc = "FACT",
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                DescuentoReadOnly = false
             };
+            
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             List_cuotas.set_list(model.lst_cuota, model.IdTransaccionSession);
             cargar_combos(model);
@@ -750,12 +753,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_factura_det()
-        {
+        {            
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             SessionFixed.IdNivelDescuento = Request.Params["NivelDescuento"] != null ? Request.Params["NivelDescuento"].ToString() : SessionFixed.IdNivelDescuento;
             SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();            
+            cargar_combos_detalle();
             return PartialView("_GridViewPartial_factura_det", model);
         }
 
@@ -773,13 +776,20 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     info_det.pr_descripcion = producto.pr_descripcion_combo;
                     info_det.se_distribuye = producto.se_distribuye;
                     info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
+                    info_det.IdCod_Impuesto_Iva = producto.IdCod_Impuesto_Iva;
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
+                        info_det.vt_Precio = producto.precio_1;
                         int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
                         var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
-                        info_det.vt_Precio = producto.precio_1;
-                        info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                        if (SessionFixed.EsSuperAdmin == "False")
+                        {                            
+                            info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                        }else
+                        {
+                            info_det.vt_PorDescUnitario = IdNivelDescuento > 1 ? nivel.Porcentaje : info_det.vt_PorDescUnitario;
+                        }                        
                     }
                 }
             }
@@ -803,13 +813,21 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     info_det.pr_descripcion = producto.pr_descripcion_combo;
                     info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
                     info_det.se_distribuye = producto.se_distribuye;
+                    info_det.IdCod_Impuesto_Iva = producto.IdCod_Impuesto_Iva;
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
+                        info_det.vt_Precio = producto.precio_1;
                         int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
                         var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
-                        info_det.vt_Precio = producto.precio_1;
-                        info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                        if (SessionFixed.EsSuperAdmin == "False")
+                        {
+                            info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                        }
+                        else
+                        {
+                            info_det.vt_PorDescUnitario = IdNivelDescuento > 1 ? nivel.Porcentaje : info_det.vt_PorDescUnitario;
+                        }
                     }
                 }
             }
