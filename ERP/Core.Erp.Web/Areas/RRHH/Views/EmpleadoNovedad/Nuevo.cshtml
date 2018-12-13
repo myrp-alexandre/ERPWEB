@@ -22,6 +22,7 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdNovedad)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
 
     <div class="row">
         <div class="col-md-12">
@@ -99,8 +100,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="detalle">Detalle de la novedad</label>
-                    @Html.Action("GridViewPartial_empleado_novedad_det", new { IdEmpleado = Model.IdEmpleado, IdNovedad = Model.IdNovedad })
-                    @Html.ValidationMessageFor(q => q.lst_novedad_det, "", new { @class = "text-danger" })
+                    @Html.Action("GridViewPartial_empleado_novedad_det")
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
         ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
         ro_empleado_novedad_det_Bus bus_novedad_detalle_bus = new ro_empleado_novedad_det_Bus();
-        ro_empleado_novedad_det_lst lst_novedad_det = new ro_empleado_novedad_det_lst();
+        ro_empleado_novedad_det_lst lst_det = new ro_empleado_novedad_det_lst();
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         ro_contrato_Bus bus_contrato = new ro_contrato_Bus();
@@ -89,14 +89,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_empleado_novedad_det(int IdEmpleado = 0, decimal IdNovedad = 0)
+        public ActionResult GridViewPartial_empleado_novedad_det()
         {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
-            model.lst_novedad_det = bus_novedad_detalle_bus.get_list(IdEmpresa, IdEmpleado, IdNovedad);
-            if (model.lst_novedad_det.Count == 0)
-                model.lst_novedad_det = lst_novedad_det.get_list();
-            cargar_combos_detalle();
+            model.lst_novedad_det = lst_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
         #endregion
@@ -108,10 +106,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
                 Fecha = DateTime.Now,
-                    IdNomina_Tipo = 1
-        };
+                    IdNomina_Tipo = 1,
+                    IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
+                    lst_novedad_det = new List<ro_empleado_novedad_det_Info>()
+            };
             model.lst_novedad_det = new List<ro_empleado_novedad_det_Info>();
-            lst_novedad_det.set_list(model.lst_novedad_det);
+            lst_det.set_list(model.lst_novedad_det, model.IdTransaccionSession);
             cargar_combos(0);
             cargar_combos_detalle();
             return View(model);
@@ -123,7 +123,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
 
-            model.lst_novedad_det = lst_novedad_det.get_list();
+            model.lst_novedad_det = lst_det.get_list(model.IdTransaccionSession);
             if (model.lst_novedad_det == null || model.lst_novedad_det.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para la novedad";
@@ -174,7 +174,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_novedad_det = bus_novedad_detalle_bus.get_list(IdEmpresa, IdEmpleado, IdNovedad);
-            lst_novedad_det.set_list(model.lst_novedad_det);
+            lst_det.set_list(model.lst_novedad_det, model.IdTransaccionSession);
             cargar_combos_detalle();
             cargar_combos(model.IdNomina_Tipo);
             return View(model);
@@ -183,7 +183,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost]
         public ActionResult Modificar(ro_empleado_novedad_Info model)
         {
-            model.lst_novedad_det = lst_novedad_det.get_list();
+            model.lst_novedad_det = lst_det.get_list(model.IdTransaccionSession);
             if (model.lst_novedad_det == null || model.lst_novedad_det.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para la planificación";
@@ -208,14 +208,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_novedad_det = bus_novedad_detalle_bus.get_list(IdEmpresa, IdEmpleado, IdNovedad);
-            lst_novedad_det.set_list(model.lst_novedad_det);
+            lst_det.set_list(model.lst_novedad_det, model.IdTransaccionSession);
             cargar_combos(model.IdNomina_Tipo);
             return View(model);
         }
         [HttpPost]
         public ActionResult Anular(ro_empleado_novedad_Info model)
         {
-            model.lst_novedad_det = lst_novedad_det.get_list();
+            model.lst_novedad_det = lst_det.get_list(model.IdTransaccionSession);
 
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
@@ -244,9 +244,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_novedad_det_Info info_det)
         {
             if (ModelState.IsValid)
-                lst_novedad_det.AddRow(info_det);
-            var model = lst_novedad_det.get_list();
-            cargar_combos_detalle();
+                lst_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            model.lst_novedad_det = lst_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
 
@@ -254,17 +254,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_novedad_det_Info info_det)
         {
             if (ModelState.IsValid)
-                lst_novedad_det.UpdateRow(info_det);
-            var model = lst_novedad_det.get_list();
-            cargar_combos_detalle();
+                lst_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            model.lst_novedad_det = lst_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_novedad_det_Info info_det)
         {
-            lst_novedad_det.DeleteRow(info_det.Secuencia);
-            var model = lst_novedad_det.get_list();
-            cargar_combos_detalle();
+            lst_det.DeleteRow(info_det.Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
+            model.lst_novedad_det = lst_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
         #endregion
@@ -281,40 +281,42 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
     public class ro_empleado_novedad_det_lst
     {
-        public List<ro_empleado_novedad_det_Info> get_list()
+        string Variable = "ro_empleado_novedad_det_Info";
+        public List<ro_empleado_novedad_det_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["ro_novedad_detalle_info"] == null)
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
                 List<ro_empleado_novedad_det_Info> list = new List<ro_empleado_novedad_det_Info>();
 
-                HttpContext.Current.Session["ro_novedad_detalle_info"] = list;
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<ro_empleado_novedad_det_Info>)HttpContext.Current.Session["ro_novedad_detalle_info"];
+            return (List<ro_empleado_novedad_det_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<ro_empleado_novedad_det_Info> list)
+        public void set_list(List<ro_empleado_novedad_det_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["ro_novedad_detalle_info"] = list;
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(ro_empleado_novedad_det_Info info_det)
+        public void AddRow(ro_empleado_novedad_det_Info info_det, decimal IdTransaccionSession)
         {
-            List<ro_empleado_novedad_det_Info> list = get_list();
+            List<ro_empleado_novedad_det_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             list.Add(info_det);
         }
 
-        public void UpdateRow(ro_empleado_novedad_det_Info info_det)
+        public void UpdateRow(ro_empleado_novedad_det_Info info_det, decimal IdTransaccionSession)
         {
-            ro_empleado_novedad_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            ro_empleado_novedad_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdNovedad = info_det.IdNovedad;
             edited_info.IdRubro = info_det.IdRubro;
             edited_info.Valor = info_det.Valor;
+            edited_info.Observacion = info_det.Observacion;
         }
 
-        public void DeleteRow(int Secuencia)
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
-            List<ro_empleado_novedad_det_Info> list = get_list();
+            List<ro_empleado_novedad_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }

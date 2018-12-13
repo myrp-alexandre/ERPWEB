@@ -17,8 +17,8 @@ namespace Core.Erp.Data.Reportes.ActivoFijo
                 List<ACTF_006_Info> Lista=new List<ACTF_006_Info>();
                 using (Entities_activo_fijo Context = new Entities_activo_fijo())
                 {
-                    Lista = Context.Af_Activo_fijo.Where(q => q.IdEmpresa == IdEmpresa && q.IdActivoFijo >= IdActivoFijoIni && q.IdActivoFijo <= IdActivoFijoFin
-                    ).Select(q => new ACTF_006_Info
+                    Lista = Context.Af_Activo_fijo.Where(q => q.IdEmpresa == IdEmpresa
+                     && q.IdActivoFijo >= IdActivoFijoIni && q.IdActivoFijo <= IdActivoFijoFin).Select(q => new ACTF_006_Info
                     {
                         IdEmpresa=q.IdEmpresa,
                         IdActivoFijo=q.IdActivoFijo,

@@ -21,10 +21,8 @@ namespace Core.Erp.Web.Reportes.ActivoFijo
         {
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdActivoFijo = string.IsNullOrEmpty(p_IdActivoFijo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdActivoFijo.Value);
+            this.DataSource = bus_rpt.get_list(IdEmpresa, IdActivoFijo);
 
-            ACTF_006_Bus bus_rpt = new ACTF_006_Bus();
-            List<ACTF_006_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdActivoFijo);
-            this.DataSource = lst_rpt;
         }
     }
 }

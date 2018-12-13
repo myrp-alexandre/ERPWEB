@@ -46,7 +46,7 @@
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrBarCode1,
             this.xrLabel1});
-            this.Detail.HeightF = 100F;
+            this.Detail.HeightF = 94.04762F;
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -56,7 +56,7 @@
             this.xrBarCode1.AutoModule = true;
             this.xrBarCode1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Af_Codigo_Barra]")});
-            this.xrBarCode1.LocationFloat = new DevExpress.Utils.PointFloat(23F, 10.455F);
+            this.xrBarCode1.LocationFloat = new DevExpress.Utils.PointFloat(22F, 0F);
             this.xrBarCode1.Name = "xrBarCode1";
             this.xrBarCode1.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
             this.xrBarCode1.SizeF = new System.Drawing.SizeF(212F, 57.17F);
@@ -67,7 +67,7 @@
             this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Af_Nombre]")});
             this.xrLabel1.Font = new System.Drawing.Font("Times New Roman", 6F);
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(23F, 75.625F);
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(26F, 65.17F);
             this.xrLabel1.Name = "xrLabel1";
             this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel1.SizeF = new System.Drawing.SizeF(212F, 13.92F);

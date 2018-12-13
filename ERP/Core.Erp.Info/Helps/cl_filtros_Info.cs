@@ -35,7 +35,7 @@ namespace Core.Erp.Info.Helps
         public string Estado_Proceso { get; set; }
         public string IdUsuario { get; set; }
         public DateTime fecha { get; set; }
-        public decimal IdActivoFijo { get; set; }
+        public int IdActivoFijo { get; set; }
         #endregion
 
         #region Filtros cuentas por pagar

@@ -180,6 +180,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             });
             ViewBag.lst_activo = lst_activo;
 
+            Af_Activo_fijo_Bus bus_act = new Af_Activo_fijo_Bus();
+            var lst_act = bus_act.get_list(model.IdEmpresa, false);
+            lst_act.Add(new Af_Activo_fijo_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdActivoFijo = 0,
+                Af_Nombre = "Todos"
+            });
+            ViewBag.lst_act = lst_act;
 
         }
         public ActionResult ACTF_005()
@@ -223,7 +232,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdActivoFijo = 0,
+                IdActivoFijo = 0
             };
             ACTF_006_Rpt report = new ACTF_006_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
