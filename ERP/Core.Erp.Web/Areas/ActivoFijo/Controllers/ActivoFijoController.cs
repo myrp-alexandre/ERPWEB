@@ -457,8 +457,18 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         #region Funciones imagen activo
         public JsonResult nombre_imagen(int IdActivoFijo = 0)
         {
-            SessionFixed.NombreImagen=IdActivoFijo.ToString();
-            return Json("", JsonRequestBehavior.AllowGet);
+            try
+            {
+                if (IdActivoFijo == 0)
+                    IdActivoFijo = bus_activo.get_id(Convert.ToInt32(SessionFixed.IdEmpresa));
+                SessionFixed.NombreImagen = IdActivoFijo.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
         }
 
         public JsonResult actualizar_div()
@@ -469,19 +479,26 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
         {
 
-            //Extract Image File Name.
-            string fileName = System.IO.Path.GetFileName(ucDragAndDrop.FirstOrDefault().FileName);
+            try
+            {
+                //Extract Image File Name.
+                string fileName = System.IO.Path.GetFileName(ucDragAndDrop.FirstOrDefault().FileName);
 
-            //Set the Image File Path.
-            UploadDirectory = UploadDirectory +  SessionFixed.IdEmpresa+SessionFixed.NombreImagen +".jpg";
-            imagen = ucDragAndDrop.FirstOrDefault().FileBytes;
-            //Save the Image File in Folder.
-            ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
-            SessionFixed.NombreImagen = UploadDirectory;
+                //Set the Image File Path.
+                UploadDirectory = UploadDirectory + SessionFixed.IdEmpresa + SessionFixed.NombreImagen + ".jpg";
+                imagen = ucDragAndDrop.FirstOrDefault().FileBytes;
+                //Save the Image File in Folder.
+                ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
+                SessionFixed.NombreImagen = UploadDirectory;
 
-            file = ucDragAndDrop.FirstOrDefault();
-            return Json(ucDragAndDrop.FirstOrDefault().FileBytes, JsonRequestBehavior.AllowGet);
+                file = ucDragAndDrop.FirstOrDefault();
+                return Json(ucDragAndDrop.FirstOrDefault().FileBytes, JsonRequestBehavior.AllowGet);
 
+            }
+            catch (Exception)
+            {
+                return View();
+            }
 
         }
 
