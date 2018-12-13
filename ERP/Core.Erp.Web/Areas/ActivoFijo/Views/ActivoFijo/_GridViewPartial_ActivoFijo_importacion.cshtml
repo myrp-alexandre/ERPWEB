@@ -1,14 +1,15 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_catalogo_af";
-        settings.CallbackRouteValues = new { Controller = "CatalogoAF", Action = "GridViewPartial_catalogo_af", IdTipoCatalogo = ViewBag.IdTipoCatalogo };
-        settings.KeyFieldName = "IdCatalogo";
+        settings.Name = "GridViewPartial_ActivoFijo_importacion";
+        settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "GridViewPartial_ActivoFijo_importacion" };
         settings.Width = Unit.Percentage(100);
-
+        settings.KeyFieldName = "IdActivoFijo";
+        settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -47,52 +48,33 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        //Evento para pintar de rojo las filas anuladas
-        settings.HtmlRowPrepared = (s, e) =>
-        {
-            if (Convert.ToString(e.GetValue("Estado")) == "I")
-            {
-                e.Row.ForeColor = System.Drawing.Color.Red;
-            }
-        };
-        settings.Columns.Add(c =>
-        {
-            c.Caption = "#";
-            c.SetDataItemTemplateContent(tc =>
-            {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
-                {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdCatalogo = DataBinder.Eval(tc.DataItem, "IdCatalogo"), IdTipoCatalogo = ViewBag.IdTipoCatalogo }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdCatalogo = DataBinder.Eval(tc.DataItem, "IdCatalogo"), IdTipoCatalogo = ViewBag.IdTipoCatalogo },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                }
-            });
-            c.SetHeaderTemplateContent(tc =>
-            {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdTipoCatalogo = ViewBag.IdTipoCatalogo }).ToHtmlString()
-                );
-            });
-            c.Settings.AllowDragDrop = DefaultBoolean.False;
-            c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(150);
-        });
+        settings.Columns.Add("CodActivoFijo", "Codigo").Width = Unit.Percentage(3);
+        settings.Columns.Add("Af_Codigo_Barra", "Cod Barra").Width = Unit.Percentage(4);
+        settings.Columns.Add("Af_Nombre", "Descripción").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdCategoriaAF", "Categoría").Width = Unit.Percentage(4);
+        settings.Columns.Add("IdActivoFijoTipo", "Tipo").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdSucursal", "Sucursal").Width = Unit.Percentage(3);
+        settings.Columns.Add("IdDepartamento", "Departamento").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdCatalogo_Marca", "Marca").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdCatalogo_Modelo", "Modelo").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdCatalogo_Color", "Color").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdTipoCatalogo_Ubicacion", "Ubicación").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdEmpleadoCustodio", "Custodio").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdEmpleadoEncargado", "Encargado").Width = Unit.Percentage(5);
+        settings.Columns.Add("Af_fecha_compra", "Fec Compra").Width = Unit.Percentage(5);
+        settings.Columns.Add("Af_fecha_ini_depre", "Ini Dep").Width = Unit.Percentage(5);
+        settings.Columns.Add("Af_fecha_fin_depre", "Fin Dep").Width = Unit.Percentage(5);
+        settings.Columns.Add("Af_costo_compra", "Cto Compra").Width = Unit.Percentage(5);
+        settings.Columns.Add("Af_Depreciacion_acum", "Dep Acum").Width = Unit.Percentage(5);
+        settings.Columns.Add("Af_ValorSalvamento", "Salvamento").Width = Unit.Percentage(3);
+        settings.Columns.Add("Af_NumSerie", "Serie").Width = Unit.Percentage(3);
+        settings.Columns.Add("Af_NumPlaca", "Placa").Width = Unit.Percentage(5);
+        //settings.Columns.Add("Af_Vida_Util", "Vida Util").Width = Unit.Percentage(5);
+        //settings.Columns.Add("Af_Meses_depreciar", "Meses Dep").Width = Unit.Percentage(5);
+        //settings.Columns.Add("Af_porcentaje_deprec", "% Dep").Width = Unit.Percentage(5);
+        //settings.Columns.Add("Af_observacion", "Observación").Width = Unit.Percentage(5);
 
-
-        settings.Columns.Add("IdCatalogo", "Código").Width = Unit.Percentage(20);
-        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(70);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EstadoBool";
-            column.Caption = "Estado";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().CheckBox(sp =>
-            {
-
-            });
-        });
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }
 @grid.Bind(Model).GetHtml()
