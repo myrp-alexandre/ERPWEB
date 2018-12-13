@@ -331,7 +331,7 @@ namespace Core.Erp.Data.ActivoFijo
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 throw;
