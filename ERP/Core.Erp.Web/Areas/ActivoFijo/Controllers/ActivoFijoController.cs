@@ -297,9 +297,14 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             {
                 item.LstDet = Lista_ActivoFijo_CtaCble.Where(q=>q.IdActivoFijo == item.IdActivoFijo).ToList();
 
+                var secuencia = 1;
+                foreach (var item2 in item.LstDet)
+                {
+                    item2.Secuencia = secuencia++;
+                }
+
                 bus_activo.guardarDB(item);
             }
-
             return RedirectToAction("Index");
         }
         public ActionResult GridViewPartial_tipoAF_importacion()
@@ -584,15 +589,17 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
                         var IdTipo = Convert.ToInt32(reader.GetValue(5));
-                        var info_empleado_custodio = Lista_Empleado.get_list().Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(13))).FirstOrDefault();
-                        var info_empleado_encargado = Lista_Empleado.get_list().Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(14))).FirstOrDefault();
+                        var ini_depre = Convert.ToDateTime(reader.GetValue(15));
+                        var info_empleado_custodio = Lista_Empleado.get_list().Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(12))).FirstOrDefault();
+                        var info_empleado_encargado = Lista_Empleado.get_list().Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(13))).FirstOrDefault();
                         var info_tipo_activofijo = ListaTipo.get_list(IdTransaccionSession).Where(q => q.IdActivoFijoTipo == IdTipo).FirstOrDefault(); ;
 
                         Af_Activo_fijo_Info info = new Af_Activo_fijo_Info
                         {
                             IdEmpresa = IdEmpresa,
                             IdUsuario = SessionFixed.IdUsuario,
-                            CodActivoFijo = Convert.ToString(reader.GetValue(1)),
+                            IdActivoFijo = Convert.ToInt32(reader.GetValue(0)),
+                            CodActivoFijo = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(1)))?null: Convert.ToString(reader.GetValue(1)),
                             Af_Codigo_Barra = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2)))?null: Convert.ToString(reader.GetValue(2)),
                             Af_Nombre = Convert.ToString(reader.GetValue(3)),
                             IdCategoriaAF = Convert.ToInt32(reader.GetValue(4)),
@@ -605,15 +612,15 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                             IdTipoCatalogo_Ubicacion = Convert.ToString(reader.GetValue(11)),
                             IdEmpleadoCustodio = info_empleado_custodio.IdEmpleado,
                             IdEmpleadoEncargado = info_empleado_encargado.IdEmpleado,
-                            Af_fecha_compra = Convert.ToDateTime(reader.GetValue(15)),
-                            Af_fecha_ini_depre = Convert.ToDateTime(reader.GetValue(16)),                            
-                            Af_costo_compra = Convert.ToDouble(reader.GetValue(17)),
-                            Af_Depreciacion_acum = Convert.ToDouble(reader.GetValue(18)),
-                            Af_ValorSalvamento = Convert.ToDouble(reader.GetValue(19)),
-                            Af_NumSerie = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(20)))?null: Convert.ToString(reader.GetValue(20)),
-                            Af_NumPlaca = Convert.ToString(reader.GetValue(21)),
+                            Af_fecha_compra = Convert.ToDateTime(reader.GetValue(14)),
+                            Af_fecha_ini_depre = ini_depre,                            
+                            Af_costo_compra = Convert.ToDouble(reader.GetValue(16)),
+                            Af_Depreciacion_acum = Convert.ToDouble(reader.GetValue(17)),
+                            Af_ValorSalvamento = Convert.ToDouble(reader.GetValue(18)),
+                            Af_NumSerie = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(19)))?null: Convert.ToString(reader.GetValue(19)),
+                            Af_NumPlaca = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(20)))?null: Convert.ToString(reader.GetValue(20)),
                             Estado_Proceso = "TIP_ESTADO_AF_ACTIVO",
-                            Af_fecha_fin_depre = (Convert.ToDateTime(reader.GetValue(16))).AddYears(info_tipo_activofijo.Af_anio_depreciacion),
+                            Af_fecha_fin_depre = ini_depre.AddYears(info_tipo_activofijo.Af_anio_depreciacion),
                             Af_Meses_depreciar = (info_tipo_activofijo.Af_anio_depreciacion * 12),
                             Af_porcentaje_deprec = info_tipo_activofijo.Af_Porcentaje_depre,
                             Af_Vida_Util = info_tipo_activofijo.Af_anio_depreciacion,
@@ -633,14 +640,12 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 #region ActivoFijo_CtaCble                
                 while (reader.Read())
                 {
-                    var sec = 0;
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
                         Af_Activo_fijo_CtaCble_Info info = new Af_Activo_fijo_CtaCble_Info
                         {
                             IdEmpresa = IdEmpresa,
                             IdActivoFijo = Convert.ToInt32(reader.GetValue(0)),
-                            Secuencia = sec++,
                             IdDepartamento = Convert.ToInt32(reader.GetValue(1)),
                             IdCtaCble = Convert.ToString(reader.GetValue(2)),
                             Porcentaje = Convert.ToDouble(reader.GetValue(3))
