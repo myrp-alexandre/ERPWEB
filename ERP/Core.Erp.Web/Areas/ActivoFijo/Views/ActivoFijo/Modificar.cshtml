@@ -368,7 +368,7 @@
                                {
                                    settings.Name = "pr_imagen";
                                    settings.CallbackRouteValues = new { Controller = "Empresa", Action = "get_imagen" };
-                               }).Bind((Model.em_logo).ToArray()).GetHtml()
+                               }).Bind((Model.imagen_af).ToArray()).GetHtml()
                                 <div id="dropZone" style="display: none">
                                     <span class="dropZoneText">Drop an image here</span>
                                 </div>
@@ -420,7 +420,7 @@
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
-        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/bootstrap_imagenes.css")" />
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/bootstrap_imagenes_af.css")" />
 
     }
 }

@@ -33,7 +33,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         Af_Activo_fijo_CtaCble_List List_det = new Af_Activo_fijo_CtaCble_List();
         Af_Departamento_Bus bus_dep = new Af_Departamento_Bus();
-
+        public static UploadedFile file { get; set; }
         Af_Activo_fijo_tipo_List ListaTipo = new Af_Activo_fijo_tipo_List();
         Af_Activo_fijo_Categoria_List ListaCategoria = new Af_Activo_fijo_Categoria_List();
         Af_Departamento_List ListaDepartamento = new Af_Departamento_List();
@@ -202,7 +202,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             List_det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
                        
-            model.imagen_af = System.IO.File.ReadAllBytes(UploadDirectory);
+            model.imagen_af = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory)+"descarga.jpg");
 
             return View(model);
         }
@@ -212,11 +212,15 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         {
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             model.LstDet = List_det.get_list(model.IdTransaccionSession);
+
             if (!bus_activo.modificarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
+
+            file.SaveAs(Server.MapPath(UploadDirectory+model.IdEmpresa.ToString()+ model.IdActivoFijo.ToString()));
+
             return RedirectToAction("Index");
         }
 
@@ -464,6 +468,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             //Save the Image File in Folder.
             ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
             SessionFixed.NombreImagen = UploadDirectory;
+
+            file = ucDragAndDrop.FirstOrDefault();
             return Json(ucDragAndDrop.FirstOrDefault().FileBytes, JsonRequestBehavior.AllowGet);
 
 

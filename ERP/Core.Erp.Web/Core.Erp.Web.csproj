@@ -7711,6 +7711,7 @@
     <Content Include="bower_DevExpress\knockout\dist\knockout.debug.js" />
     <Content Include="bower_DevExpress\knockout\dist\knockout.js" />
     <Content Include="bower_DevExpress\knockout\Gruntfile.js" />
+    <Content Include="Content\bootstrap_imagenes_af.css" />
     <Content Include="Content\bootstrap_imagenes.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
