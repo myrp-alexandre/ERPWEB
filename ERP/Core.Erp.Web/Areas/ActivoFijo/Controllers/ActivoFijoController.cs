@@ -39,7 +39,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         Af_Departamento_List ListaDepartamento = new Af_Departamento_List();
         Af_Catalogo_List ListaCatalogo = new Af_Catalogo_List();
         Af_Activo_fijo_List ListaActivoFijo = new Af_Activo_fijo_List();
-
+        public int IdActivoFijo { get; set; }
         #endregion
 
         #region Index
@@ -434,8 +434,69 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             return PartialView("_GridViewPartial_activo_fijo_ctacble", model);
         }
         #endregion
+
+        #region Funciones imagen activo
+        public JsonResult OnFileUploadStart(int IdActivoFijo = 0)
+        {
+
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+        public string UploadDirectory = "~/Content/imagenes/activofijo";
+        public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
+        {
+
+            //Extract Image File Name.
+            string fileName = System.IO.Path.GetFileName(ucDragAndDrop.FirstOrDefault().FileName);
+
+            //Set the Image File Path.
+            UploadDirectory = UploadDirectory + IdActivoFijo.ToString()+ fileName ;
+
+            //Save the Image File in Folder.
+            ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
+            return Json(UploadDirectory, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+        #endregion
     }
 
+
+    #region clases para imagen af
+    public class DragAndDropSupportDemoBinder : DevExpressEditorsBinder
+    {
+        public DragAndDropSupportDemoBinder()
+        {
+            UploadControlBinderSettings.ValidationSettings.Assign(UploadControlDemosHelper.UploadValidationSettings);
+            UploadControlBinderSettings.FileUploadCompleteHandler = UploadControlDemosHelper.FileUploadComplete;
+        }
+    }
+    public class UploadControlDemosHelper
+    {
+        public static byte[] em_foto { get; set; }
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".jpg", ".jpeg" },
+            MaxFileSize = 4000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+
+            if (e.UploadedFile.IsValid)
+            {
+                em_foto = e.UploadedFile.FileBytes;
+                //var filename = Path.GetFileName(e.UploadedFile.FileName);
+                //e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);
+            }
+        }
+
+
+
+
+
+
+
+    }
     public class UploadControlSettings
     {
         public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
@@ -519,7 +580,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                         {
                             IdEmpresa = IdEmpresa,
                             IdActivoFijoTipo = Convert.ToInt32(reader.GetValue(1)),
-                            CodCategoriaAF = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2)))?null: Convert.ToString(reader.GetValue(2)),
+                            CodCategoriaAF = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)),
                             Descripcion = Convert.ToString(reader.GetValue(3)),
                             IdUsuario = SessionFixed.IdUsuario
                         };
@@ -599,8 +660,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                             IdEmpresa = IdEmpresa,
                             IdUsuario = SessionFixed.IdUsuario,
                             IdActivoFijo = Convert.ToInt32(reader.GetValue(0)),
-                            CodActivoFijo = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(1)))?null: Convert.ToString(reader.GetValue(1)),
-                            Af_Codigo_Barra = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2)))?null: Convert.ToString(reader.GetValue(2)),
+                            CodActivoFijo = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(1))) ? null : Convert.ToString(reader.GetValue(1)),
+                            Af_Codigo_Barra = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)),
                             Af_Nombre = Convert.ToString(reader.GetValue(3)),
                             IdCategoriaAF = Convert.ToInt32(reader.GetValue(4)),
                             IdActivoFijoTipo = Convert.ToInt32(reader.GetValue(5)),
@@ -613,12 +674,12 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                             IdEmpleadoCustodio = info_empleado_custodio.IdEmpleado,
                             IdEmpleadoEncargado = info_empleado_encargado.IdEmpleado,
                             Af_fecha_compra = Convert.ToDateTime(reader.GetValue(14)),
-                            Af_fecha_ini_depre = ini_depre,                            
+                            Af_fecha_ini_depre = ini_depre,
                             Af_costo_compra = Convert.ToDouble(reader.GetValue(16)),
                             Af_Depreciacion_acum = Convert.ToDouble(reader.GetValue(17)),
                             Af_ValorSalvamento = Convert.ToDouble(reader.GetValue(18)),
-                            Af_NumSerie = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(19)))?null: Convert.ToString(reader.GetValue(19)),
-                            Af_NumPlaca = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(20)))?null: Convert.ToString(reader.GetValue(20)),
+                            Af_NumSerie = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(19))) ? null : Convert.ToString(reader.GetValue(19)),
+                            Af_NumPlaca = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(20))) ? null : Convert.ToString(reader.GetValue(20)),
                             Estado_Proceso = "TIP_ESTADO_AF_ACTIVO",
                             Af_fecha_fin_depre = ini_depre.AddYears(info_tipo_activofijo.Af_anio_depreciacion),
                             Af_Meses_depreciar = (info_tipo_activofijo.Af_anio_depreciacion * 12),
@@ -634,7 +695,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 ListaActivoFijo.set_list(Lista_ActivoFijo, IdTransaccionSession);
                 #endregion
 
-                cont = 0;                
+                cont = 0;
                 reader.NextResult();
 
                 #region ActivoFijo_CtaCble                
@@ -660,6 +721,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             }
         }
     }
+    #endregion
 
     public class Af_Activo_fijo_CtaCble_List
     {
@@ -730,4 +792,6 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
     }
+
+
 }

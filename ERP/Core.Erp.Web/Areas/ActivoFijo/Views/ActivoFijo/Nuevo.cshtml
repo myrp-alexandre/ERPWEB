@@ -1,4 +1,6 @@
-﻿@model Core.Erp.Info.ActivoFijo.Af_Activo_fijo_Info
+﻿@using System.Web.UI.WebControls;
+
+@model Core.Erp.Info.ActivoFijo.Af_Activo_fijo_Info
 @{
     ViewBag.Title = "Nuevo activo";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -73,7 +75,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdDepartamento">Departamento</label>
-                    @Html.DropDownListFor(q => q.IdDepartamento, new SelectList(ViewBag.lst_departamento, "IdDepartamento", "Descripcion"), new { @class = "form-control"})
+                    @Html.DropDownListFor(q => q.IdDepartamento, new SelectList(ViewBag.lst_departamento, "IdDepartamento", "Descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdDepartamento, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -123,6 +125,9 @@
             </li>
             <li>
                 <a href="#tab_encargado" aria-controls="encargado" role="tab" data-toggle="tab">Encargado</a>
+            </li>
+            <li>
+                <a href="#tab_imagen" aria-controls="imagen" role="tab" data-toggle="tab">Imagen</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
@@ -283,7 +288,7 @@
 
 
 
-</div>
+            </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_encargado">
 
@@ -317,8 +322,82 @@
 
             </div>
 
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_imagen">
+
+
+
+                <div class="col-md-2">
+
+
+
+                    <script type="text/javascript">
+                        function onUploadControlFileUploadComplete(s, e) {
+                            if (e.isValid)
+                                // $("#uploadedImage").attr("src", e.callbackData);
+                                setElementVisible("uploadedImage", e.isValid);
+                        }
+                        function onImageLoad() {
+                            var externalDropZone = $("#externalDropZone");
+                            var uploadedImage = $("#uploadedImage");
+                            uploadedImage.css({
+                                left: (externalDropZone.width() - uploadedImage.width()) / 4,
+                                top: (externalDropZone.height() - uploadedImage.height()) / 4
+                            });
+                            setElementVisible("dragZone", false);
+                        }
+                        function setElementVisible(elementId, visible) {
+                            var el = $("#" + elementId);
+                            if (visible)
+                                el.show();
+                            else
+                                el.hide();
+                        }
+                    </script>
+                    <div id="externalDropZone" class="dropZoneExternal">
+                        <div id="dragZone">
+                            <span class="dragZoneText">Seleccione una foto</span>
+                        </div>
+                        <img id="uploadedImage" src="~/Content/imagenes/empleados/@Model.IdActivoFijo" alt="" style="display: none" onload="onImageLoad()" />
+                        <div id="dropZone" style="display: none">
+                            <span class="dropZoneText">Drop an image here</span>
+                        </div>
+                    </div>
+
+                    <div class="uploadContainer">
+                        @Html.DevExpress().UploadControl(settings => {
+                       settings.ShowProgressPanel = true;
+                       settings.CallbackRouteValues = new { Controller = "Empleado", Action = "DragAndDropImageUpload" };
+                       settings.Name = "ucDragAndDrop";
+                       settings.UploadMode = UploadControlUploadMode.Auto;
+                       settings.AutoStartUpload = true;
+                       settings.Width = Unit.Percentage(70);
+                       settings.DialogTriggerID = "externalDropZone";
+                       settings.AdvancedModeSettings.EnableDragAndDrop = true;
+                       settings.AdvancedModeSettings.EnableFileList = false;
+                       settings.AdvancedModeSettings.EnableMultiSelect = false;
+                       settings.AdvancedModeSettings.ExternalDropZoneID = "externalDropZone";
+                       settings.AdvancedModeSettings.DropZoneText = "";
+                       settings.ValidationSettings.MaxFileSize = 4194304;
+                       settings.ValidationSettings.AllowedFileExtensions = new string[] {".jpg", ".jpeg", ".gif", ".png"};
+                       settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
+                       settings.ClientSideEvents.FilesUploadStart = "OnFileUploadStart";
+                       settings.Styles.DropZone.CssClass = "uploadControlDropZone";
+                       settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
+                       settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
+                       settings.ClientSideEvents.FileUploadComplete = "onUploadControlFileUploadComplete";
+                   }).GetHtml()
+                    </div>
+
+                </div>
+
+
+
 
             </div>
+
+
+
+        </div>
     </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -402,8 +481,28 @@
         Af_fecha_ini_depre.SetValue(fecha_inicio);
         var Af_Meses_depreciar = $("#Af_Meses_depreciar").val();
         var date = new Date(moment(Af_fecha_ini_depre.GetValue(), "DD/MM/YYYY").add(Af_Meses_depreciar, 'month'));
-       
+
         Af_fecha_fin_depre.SetValue(date);
 
-        };
+    };
+
+    function OnFileUploadStart(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpleado").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizarFoto", "ActivoFijo",new { Area = "ActivoFijo" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });        
+    }
 </script>
