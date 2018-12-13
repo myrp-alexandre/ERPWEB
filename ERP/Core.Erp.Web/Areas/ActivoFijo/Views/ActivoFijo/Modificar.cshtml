@@ -358,21 +358,10 @@
                                         el.hide();
                                 }
                             </script>
-                            <div id="externalDropZone" class="dropZoneExternal">
-                                <div id="dragZone">
-                                    <span class="dragZoneText">Seleccione una foto</span>
-                                </div>
-                                @*<img id="uploadedImage" src="~/Content/imagenes/activofijo/@ViewBag.nombre_imagen" alt="" style="display: none" onload="onImageLoad()" width="200" height="200" />*@
-                                @Html.DevExpress().BinaryImage(
-                               settings =>
-                               {
-                                   settings.Name = "pr_imagen";
-                                   settings.CallbackRouteValues = new { Controller = "Empresa", Action = "get_imagen" };
-                               }).Bind((Model.imagen_af).ToArray()).GetHtml()
-                                <div id="dropZone" style="display: none">
-                                    <span class="dropZoneText">Drop an image here</span>
-                                </div>
-                            </div>
+
+                                
+                                
+                                
                             <div class="uploadContainer">
                                 @Html.DevExpress().UploadControl(settings => {
                                settings.ShowProgressPanel = true;
@@ -400,7 +389,14 @@
 
                            }).GetHtml()
                             </div>
-
+                            @Html.DevExpress().BinaryImage(
+                               settings =>
+                               {
+                                   settings.Name = "pr_imagen";
+                                   settings.CallbackRouteValues = new { Controller = "Empresa", Action = "get_imagen" };
+                                   settings.Properties.ImageSizeMode = ImageSizeMode.FitProportional;
+                                   settings.Properties.EnableServerResize = true;
+                               }).Bind((Model.imagen_af).ToArray()).GetHtml()
                         </div>
 
 
