@@ -183,6 +183,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
+
+            
+
             return RedirectToAction("Index");
         }
 
