@@ -24,7 +24,7 @@
 {
     @Html.HiddenFor(q => q.IdPersona);
     @Html.HiddenFor(q => q.IdEmpresa);
-    @Html.HiddenFor(q => q.IdEmpleado);
+    @Html.HiddenFor(q => q.IdEmpleado, new {@id= "IdEmpleado" });
     <div class="row">
         <div class="col-md-12">
 
@@ -35,8 +35,8 @@
 
                 <script type="text/javascript">
                     function onUploadControlFileUploadComplete(s, e) {
-                        if (e.isValid)
-                            $("#uploadedImage").attr("src", e.callbackData);
+                        if (e.isValid) 
+                           // $("#uploadedImage").attr("src", e.callbackData);
                         setElementVisible("uploadedImage", e.isValid);
                     }
                     function onImageLoad() {
@@ -60,7 +60,7 @@
                     <div id="dragZone">
                         <span class="dragZoneText">Seleccione una foto</span>
                     </div>
-                    <img id="uploadedImage" src="#" alt="" style="display: none" onload="onImageLoad()" />
+                    <img id="uploadedImage" src="~/Content/imagenes/@Model.IdEmpleado" alt="" style="display: none" onload="onImageLoad()" />
                     <div id="dropZone" style="display: none">
                         <span class="dropZoneText">Drop an image here</span>
                     </div>
@@ -83,7 +83,7 @@
                    settings.ValidationSettings.MaxFileSize = 4194304;
                    settings.ValidationSettings.AllowedFileExtensions = new string[] {".jpg", ".jpeg", ".gif", ".png"};
                    settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
-                  // settings.BrowseButton.Text = "Select an image for upload...";
+                   // settings.BrowseButton.Text = "Select an image for upload...";
                    settings.Styles.DropZone.CssClass = "uploadControlDropZone";
                    settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
                    settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
@@ -94,6 +94,7 @@
             </div>
 
 
+            
 
 
 
@@ -141,6 +142,9 @@
                 </div>
             </div>
         </div>
+
+
+
     </div>
 
     <div class="row">
@@ -855,5 +859,31 @@
         }
     };
 
+
+    function set_id_nom_imagen()
+            {
+                 var datos = {
+                     IdEmpleado: $("#IdEmpleado").val()
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("GenerarPrestamo", "Prestamos", new { Area = "RRHH" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data)
+                    {
+
+                        GridViewPartial_prestamos_det.PerformCallback();
+
+                    },
+                    error: function (error)
+                    {
+                    }
+                    });
+};
 
 </script>

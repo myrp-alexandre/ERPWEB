@@ -61,7 +61,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 string mensaje = "";
                 mensaje = Validar(info);
-                if(mensaje!="")
+                if (mensaje != "")
                 {
                     if (info.em_foto == null)
                         info.em_foto = new byte[0];
@@ -252,18 +252,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                ViewBag.lst_area = bus_area.get_list(IdEmpresa,false);
+                ViewBag.lst_area = bus_area.get_list(IdEmpresa, false);
                 ViewBag.lst_banco = bus_banco.get_list(false);
                 ViewBag.lst_cargo = bus_cargo.get_list(IdEmpresa, false);
                 ViewBag.lst_division = bus_division.get_list(IdEmpresa, false);
                 ViewBag.lst_departamento = bus_departamento.get_list(IdEmpresa, false);
-                ViewBag.lst_documento = bus_catalogo_general.get_list(3,false);
+                ViewBag.lst_documento = bus_catalogo_general.get_list(3, false);
                 ViewBag.lst_sexo = bus_catalogo_general.get_list(1, false);
                 ViewBag.lst_estado_civil = bus_catalogo_general.get_list(2, false);
                 ViewBag.lst_tipo_docu = bus_catalogo_general.get_list(3, false);
                 ViewBag.lst_estado_empleado = bus_catalogorrhh.get_list_x_tipo(25);
                 ViewBag.lst_pais = bus_pais.get_list(false);
-                ViewBag.lst_ciudad = bus_ciudad.get_list("",false);
+                ViewBag.lst_ciudad = bus_ciudad.get_list("", false);
                 ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
                 ViewBag.lst_punto_cargo = bus_puntocargo.get_list(IdEmpresa, false);
                 ViewBag.lst_horario = bus_horario.get_list(IdEmpresa, false);
@@ -288,19 +288,19 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 string mensaje = "";
-                if(info.pe_cedulaRuc=="")
+                if (info.pe_cedulaRuc == "")
                 {
                     mensaje = "El campo cédula es obligatoria";
                 }
-                if (info.pe_nombre == ""|info.pe_nombre==null )
+                if (info.pe_nombre == "" | info.pe_nombre == null)
                 {
                     mensaje = "El campo nombres es obligatoria";
                 }
-                if (info.pe_apellido == "" | info.pe_apellido==null)
+                if (info.pe_apellido == "" | info.pe_apellido == null)
                 {
                     mensaje = "El campo apellidos es obligatoria";
                 }
-                if (info.pe_correo == ""| info.pe_correo==null)
+                if (info.pe_correo == "" | info.pe_correo == null)
                 {
                     mensaje = "El campo correo es obligatoria";
                 }
@@ -308,11 +308,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     mensaje = "El campo fecha nacimiento es obligatoria";
                 }
-                if (info.pe_celular == ""| info.pe_celular==null)
+                if (info.pe_celular == "" | info.pe_celular == null)
                 {
                     mensaje = "El campo fecha nacimiento es obligatoria";
                 }
-                
+
                 return mensaje;
             }
             catch (Exception)
@@ -322,33 +322,38 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
+        public string UploadDirectory = "~/Content/imagenes/";
 
-        const string UploadDirectory = "~/Content/UploadControl/UploadFolder/";
-
-        public UploadedFile UploadControlUpload()
-        {
-            UploadControlExtension.GetUploadedFiles("UploadControl", UploadControlDemosHelper.UploadValidationSettings, UploadControlDemosHelper.FileUploadComplete);
-
-            
-            return null;
-        }
+      
         public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
         {
 
-            //var path = Path.Combine(Server.MapPath, "/App_Data/userfiles/"), "n");
-            //var dir = Directory.CreateDirectory(path);
-            //ucDragAndDrop.FirstOrDefault().SaveAs(Path.Combine(path, bareFilename);
-            return null;
+            //Extract Image File Name.
+            string fileName = System.IO.Path.GetFileName(ucDragAndDrop.FirstOrDefault().FileName);
+
+            //Set the Image File Path.
+            UploadDirectory = UploadDirectory + fileName;
+
+            //Save the Image File in Folder.
+            ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
+            return Json(UploadDirectory, JsonRequestBehavior.AllowGet);
+
+
         }
-        public ActionResult DragAndDrop()
+        public ActionResult bootstrap_imagenes()
         {
-            return PartialView("DragAndDrop");
+            return PartialView("bootstrap_imagenes");
         }
+
+
 
     }
 
-    public class DragAndDropSupportDemoBinder : DevExpressEditorsBinder {
-        public DragAndDropSupportDemoBinder() {
+
+    public class DragAndDropSupportDemoBinder : DevExpressEditorsBinder
+    {
+        public DragAndDropSupportDemoBinder()
+        {
             UploadControlBinderSettings.ValidationSettings.Assign(UploadControlDemosHelper.UploadValidationSettings);
             UploadControlBinderSettings.FileUploadCompleteHandler = UploadControlDemosHelper.FileUploadComplete;
         }
@@ -367,13 +372,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (e.UploadedFile.IsValid)
             {
                 em_foto = e.UploadedFile.FileBytes;
-                var filename = Path.GetFileName(e.UploadedFile.FileName);
-                e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);
+                //var filename = Path.GetFileName(e.UploadedFile.FileName);
+                //e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);
             }
         }
+
+
+
+
+
+
+
     }
-
-
 
     public class ro_empleado_info_list
     {
@@ -396,8 +406,4 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
     }
-
-
-
-
 }
