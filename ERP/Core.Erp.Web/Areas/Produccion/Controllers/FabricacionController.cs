@@ -29,16 +29,31 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
 
         #endregion
         #region Index
+
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos(model.IdEmpresa);
+            return View(model);
         }
-
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            cargar_combos(model.IdEmpresa);
+            return View(model);
+        }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_fabricacion()
+        public ActionResult GridViewPartial_fabricacion(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_fabricacion.GetList(IdEmpresa, true);
+            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(fecha_ini);
+            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(fecha_fin);
+            ViewBag.IdSucursal = IdSucursal;
+            var model = bus_fabricacion.GetList(IdEmpresa, IdSucursal, ViewBag.fecha_ini, ViewBag.fecha_fin, true);
             return PartialView("_GridViewPartial_fabricacion", model);
         }
         #endregion

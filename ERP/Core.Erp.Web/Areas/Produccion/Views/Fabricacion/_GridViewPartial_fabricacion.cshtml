@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_fabricacion";
-        settings.CallbackRouteValues = new { Controller = "Fabricacion", Action = "GridViewPartial_fabricacion" };
+        settings.CallbackRouteValues = new { Controller = "Fabricacion", Action = "GridViewPartial_fabricacion", fecha_ini = ViewBag.fecha_ini, fecha_fin = ViewBag.fecha_fin, IdSucursal = ViewBag.IdSucursal };
         settings.KeyFieldName = "IdFabricacion";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
@@ -55,7 +55,7 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
-            if (Convert.ToInt32(e.GetValue("egr_IdNumMovi")) != null)
+            if ("egr_IdNumMovi" != null)
             {
                 e.Row.ForeColor = System.Drawing.Color.Blue;
             }
@@ -65,7 +65,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "egr_IdNumMovi")) == null )
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && "ing_IdNumMovi" == null)
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdFabricacion = DataBinder.Eval(tc.DataItem, "IdFabricacion") }) + "&nbsp;" +
@@ -92,6 +92,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(7);
         });
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10);
         settings.Columns.Add("Observacion", "Descripción").Width = Unit.Percentage(60);
         settings.Columns.Add(column =>
         {

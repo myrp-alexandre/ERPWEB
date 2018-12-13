@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Produccion
    public class pro_Fabricacion_Bus
     {
         pro_Fabricacion_Data odata = new pro_Fabricacion_Data();
-        public List<pro_Fabricacion_Info> GetList(int IdEmpresa, bool mostrar_anulados)
+        public List<pro_Fabricacion_Info> GetList(int IdEmpresa,int IdSucursal, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_anulados)
         {
             try
             {
-                return odata.GetList(IdEmpresa, mostrar_anulados);
+                return odata.GetList(IdEmpresa, IdSucursal,  fecha_ini,  fecha_fin, mostrar_anulados);
             }
             catch (Exception)
             {
