@@ -23,11 +23,13 @@
     CONSTRAINT [FK_fa_cliente_ct_plancta2] FOREIGN KEY ([IdEmpresa], [IdCtaCble_cxc_Credito]) REFERENCES [dbo].[ct_plancta] ([IdEmpresa], [IdCtaCble]),
     CONSTRAINT [FK_fa_cliente_fa_cliente_tipo] FOREIGN KEY ([IdEmpresa], [Idtipo_cliente]) REFERENCES [dbo].[fa_cliente_tipo] ([IdEmpresa], [Idtipo_cliente]),
     CONSTRAINT [FK_fa_cliente_fa_forma_pago] FOREIGN KEY ([FormaPago]) REFERENCES [dbo].[fa_formaPago] ([IdFormaPago]),
-    CONSTRAINT [FK_fa_cliente_fa_NivelDescuento1] FOREIGN KEY ([IdEmpresa], [IdNivel]) REFERENCES [dbo].[fa_NivelDescuento] ([IdEmpresa], [IdNivel]),
+    CONSTRAINT [FK_fa_cliente_fa_NivelDescuento] FOREIGN KEY ([IdEmpresa], [IdNivel]) REFERENCES [dbo].[fa_NivelDescuento] ([IdEmpresa], [IdNivel]),
     CONSTRAINT [FK_fa_cliente_fa_TerminoPago] FOREIGN KEY ([IdTipoCredito]) REFERENCES [dbo].[fa_TerminoPago] ([IdTerminoPago]),
     CONSTRAINT [FK_fa_cliente_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa]),
     CONSTRAINT [FK_fa_cliente_tb_persona] FOREIGN KEY ([IdPersona]) REFERENCES [dbo].[tb_persona] ([IdPersona])
 );
+
+
 
 
 

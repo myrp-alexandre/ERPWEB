@@ -55,17 +55,21 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
+            if (Convert.ToInt32(e.GetValue("egr_IdNumMovi")) != null)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
         };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "egr_IdNumMovi")) == null )
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdFabricacion = DataBinder.Eval(tc.DataItem, "IdFabricacion")  }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdFabricacion = DataBinder.Eval(tc.DataItem, "IdFabricacion")},
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdFabricacion = DataBinder.Eval(tc.DataItem, "IdFabricacion") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdFabricacion = DataBinder.Eval(tc.DataItem, "IdFabricacion") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
