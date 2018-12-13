@@ -9519,6 +9519,7 @@
     <Content Include="Areas\Reportes\Views\ActivoFijoReportes\ACTF_006.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoPorRubro\_CmbRubro_EmpxRub.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbRubro_EmpNov.cshtml" />
+    <Content Include="Areas\RRHH\Views\Prestamos\_CmbRubro_Prestamos.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
