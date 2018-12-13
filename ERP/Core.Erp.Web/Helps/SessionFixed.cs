@@ -14,8 +14,7 @@ namespace Core.Erp.Web.Helps
         string em_direccion { get; set; }
         string IdTransaccionSession { get; set; }
         string IdTransaccionSessionActual { get; set; }
-        string IdEmpresaActual { get; set; }
-
+        string IdNivelDescuento { get; set; }
     }
 
     public static class SessionFixed
@@ -37,11 +36,6 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.IdEmpresa; }
             set { _sessionValueProvider.IdEmpresa = value; }
         }
-        public static string IdEmpresaActual
-        {
-            get { return _sessionValueProvider.IdEmpresaActual; }
-            set { _sessionValueProvider.IdEmpresaActual = value; }
-        }
         public static string NomEmpresa
         {
             get { return _sessionValueProvider.NomEmpresa; }
@@ -57,6 +51,12 @@ namespace Core.Erp.Web.Helps
         {
             get { return _sessionValueProvider.IdProducto_padre_dist; }
             set { _sessionValueProvider.IdProducto_padre_dist = value; }
+
+        }
+        public static string IdNivelDescuento
+        {
+            get { return _sessionValueProvider.IdNivelDescuento; }
+            set { _sessionValueProvider.IdNivelDescuento = value; }
 
         }
         public static string IdSucursal
@@ -98,7 +98,7 @@ namespace Core.Erp.Web.Helps
         private const string _em_direccion = "em_direccion";
         private const string _IdTransaccionSession = "IdTransaccionSesssion";
         private const string _IdTransaccionSessionActual = "IdTransaccionSessionActual";
-        private const string _IdEmpresaActual = "IdEmpresaActual";
+        private const string _IdNivelDescuento = "IdNivelDescuento";
         public string TipoPersona
         {
             get { return (string)HttpContext.Current.Session[_IdTipoPersona]; }
@@ -109,11 +109,6 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdEmpresa]; }
             set { HttpContext.Current.Session[_IdEmpresa] = value; }
-        }
-        public string IdEmpresaActual
-        {
-            get { return (string)HttpContext.Current.Session[_IdEmpresaActual]; }
-            set { HttpContext.Current.Session[_IdEmpresaActual] = value; }
         }
         public string IdUsuario
         {
@@ -154,6 +149,11 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdTransaccionSessionActual]; }
             set { HttpContext.Current.Session[_IdTransaccionSessionActual] = value; }
+        }
+        public string IdNivelDescuento
+        {
+            get { return (string)HttpContext.Current.Session[_IdNivelDescuento]; }
+            set { HttpContext.Current.Session[_IdNivelDescuento] = value; }
         }
     }
 }
