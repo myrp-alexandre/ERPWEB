@@ -39,7 +39,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         Af_Departamento_List ListaDepartamento = new Af_Departamento_List();
         Af_Catalogo_List ListaCatalogo = new Af_Catalogo_List();
         Af_Activo_fijo_List ListaActivoFijo = new Af_Activo_fijo_List();
-        public int IdActivoFijo { get; set; }
+        public int IdActivoFijo_ { get; set; }
         #endregion
 
         #region Index
@@ -168,6 +168,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             model.LstDet = new List<Af_Activo_fijo_CtaCble_Info>();
             List_det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
+            ViewBag.IdActivoFijo = "0.jpg";
             return View(model);
         }
 
@@ -436,10 +437,15 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         #endregion
 
         #region Funciones imagen activo
-        public JsonResult OnFileUploadStart(int IdActivoFijo = 0)
+        public JsonResult nombre_imagen(int IdActivoFijo = 0)
         {
-
+            IdActivoFijo_ = IdActivoFijo;
             return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult actualizar_div()
+        {
+            return Json(UploadDirectory, JsonRequestBehavior.AllowGet);
         }
         public string UploadDirectory = "~/Content/imagenes/activofijo";
         public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
@@ -449,7 +455,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             string fileName = System.IO.Path.GetFileName(ucDragAndDrop.FirstOrDefault().FileName);
 
             //Set the Image File Path.
-            UploadDirectory = UploadDirectory + IdActivoFijo.ToString()+ fileName ;
+            UploadDirectory = UploadDirectory + IdActivoFijo_.ToString()+ fileName ;
 
             //Save the Image File in Folder.
             ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
