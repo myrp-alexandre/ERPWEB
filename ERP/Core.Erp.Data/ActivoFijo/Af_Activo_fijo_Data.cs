@@ -241,9 +241,7 @@ namespace Core.Erp.Data.ActivoFijo
                         IdEmpleadoEncargado = info.IdEmpleadoEncargado,
                         IdDepartamento = info.IdDepartamento,
                         IdUsuario = info.IdUsuario,
-                        Fecha_Transac = DateTime.Now
-                        
-                        
+                        Fecha_Transac = DateTime.Now                                                
                     };
                     if (info.LstDet.Count > 0)
                     {
@@ -266,7 +264,7 @@ namespace Core.Erp.Data.ActivoFijo
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 throw;
@@ -333,7 +331,7 @@ namespace Core.Erp.Data.ActivoFijo
                 }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 throw;
