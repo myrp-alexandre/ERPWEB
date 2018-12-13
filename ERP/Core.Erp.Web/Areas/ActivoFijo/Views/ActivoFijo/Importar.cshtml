@@ -30,7 +30,9 @@
     function OnFileUploadComplete(s, e)
     {
         GridViewPartial_tipoAF_importacion.PerformCallback();
-        //GridView_anio_fiscal_importacion.PerformCallback();
+        GridViewPartial_categoriaAF_importacion.PerformCallback();
+        GridViewPartial_departamentoAF_importacion.PerformCallback();
+        GridViewPartial_catalogoAF_importacion.PerformCallback();
     }
 </script>
 
@@ -107,7 +109,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-
+                            @Html.Action("GridViewPartial_departamentoAF_importacion")
                         </div>
                     </div>
                 </div>
