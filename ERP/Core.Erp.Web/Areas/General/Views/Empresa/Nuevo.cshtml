@@ -237,21 +237,21 @@
                             <div class="form-group">
                                 <label for="codigo">Logo</label>
                                 @Html.DevExpress().BinaryImage(
-                    settings =>
-                    {
-                        settings.Name = "pr_imagen";
-                        settings.CallbackRouteValues = new { Controller = "Empresa", Action = "get_imagen" };
-                    }).Bind((Model.em_logo).ToArray()).GetHtml()
+                                settings =>
+                                {
+                                    settings.Name = "pr_imagen";
+                                    settings.CallbackRouteValues = new { Controller = "Empresa", Action = "get_imagen" };
+                                }).Bind((Model.em_logo).ToArray()).GetHtml()
 
 
                                 @Html.DevExpress().UploadControl(settings =>
-               {
+                               {
 
-                   settings.Name = "UploadControl";
-                   settings.CallbackRouteValues = new { Controller = "Empresa", Action = "UploadControlUpload" };
-                   settings.ShowUploadButton = true;
-                   settings.ShowProgressPanel = true;
-               }).GetHtml()
+                                   settings.Name = "UploadControl";
+                                   settings.CallbackRouteValues = new { Controller = "Empresa", Action = "UploadControlUpload" };
+                                   settings.ShowUploadButton = true;
+                                   settings.ShowProgressPanel = true;
+                               }).GetHtml()
 
 
                             </div>

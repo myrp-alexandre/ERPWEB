@@ -169,7 +169,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             model.LstDet = new List<Af_Activo_fijo_CtaCble_Info>();
             List_det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
-            ViewBag.IdActivoFijo = "0.jpg";
+            ViewBag.nombre_imagen = "descarga.jpg";
             return View(model);
         }
 
@@ -446,7 +446,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         public JsonResult actualizar_div()
         {
-            return Json(imagen, JsonRequestBehavior.AllowGet);
+            return Json(SessionFixed.NombreImagen, JsonRequestBehavior.AllowGet);
         }
         public string UploadDirectory = "~/Content/imagenes/activofijo/";
         public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)

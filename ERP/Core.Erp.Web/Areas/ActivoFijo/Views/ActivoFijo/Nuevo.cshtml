@@ -15,7 +15,7 @@
     @Html.HiddenFor(q => q.IdEmpresa);
     @Html.HiddenFor(q => q.IdTransaccionSession);
     @Html.HiddenFor(q => q.Estado_Proceso);
-    @Html.HiddenFor(q => q.IdActivoFijo, new { @id= "IdActivoFijo" });
+    @Html.HiddenFor(q => q.IdActivoFijo, new { @id = "IdActivoFijo" });
 
 
     <div class="row">
@@ -48,7 +48,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.DevExpress().DateEditFor(q=> q.Af_fecha_compra, settings =>
+                        @Html.DevExpress().DateEditFor(q => q.Af_fecha_compra, settings =>
                    {
                        settings.Name = "Af_fecha_compra";
                        settings.Properties.UseMaskBehavior = true;
@@ -166,15 +166,15 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.DevExpress().DateEditFor(q=> q.Af_fecha_ini_depre, settings =>
-                                {
-                                    settings.Name = "Af_fecha_ini_depre";
-                                    settings.Properties.UseMaskBehavior = true;
-                                    settings.Properties.EditFormat = EditFormat.Date;
-                                    settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                }).GetHtml()
+                                    @Html.DevExpress().DateEditFor(q => q.Af_fecha_ini_depre, settings =>
+                               {
+                                   settings.Name = "Af_fecha_ini_depre";
+                                   settings.Properties.UseMaskBehavior = true;
+                                   settings.Properties.EditFormat = EditFormat.Date;
+                                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.Af_fecha_ini_depre, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -186,15 +186,15 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.DevExpress().DateEditFor(q=> q.Af_fecha_fin_depre, settings =>
-                                {
-                                    settings.Name = "Af_fecha_fin_depre";
-                                    settings.Properties.UseMaskBehavior = true;
-                                    settings.Properties.EditFormat = EditFormat.Date;
-                                    settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                }).GetHtml()
+                                    @Html.DevExpress().DateEditFor(q => q.Af_fecha_fin_depre, settings =>
+                               {
+                                   settings.Name = "Af_fecha_fin_depre";
+                                   settings.Properties.UseMaskBehavior = true;
+                                   settings.Properties.EditFormat = EditFormat.Date;
+                                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.Af_fecha_fin_depre, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -362,10 +362,11 @@
                                 <div id="dragZone">
                                     <span class="dragZoneText">Seleccione una foto</span>
                                 </div>
-                                <img id="uploadedImage" src="#" alt="" style="display: none" onload="onImageLoad()" />
+                                <img id="uploadedImage" src="~/Content/imagenes/activofijo/@ViewBag.nombre_image" alt="" style="display: none" onload="onImageLoad()" width="200" height="200" />
                                 <div id="dropZone" style="display: none">
                                     <span class="dropZoneText">Drop an image here</span>
                                 </div>
+                                <img src="~/Content/imagenes/activofijo/arbol.jpg" />
                             </div>
                             <div class="uploadContainer">
                                 @Html.DevExpress().UploadControl(settings => {
@@ -382,7 +383,7 @@
                                settings.AdvancedModeSettings.ExternalDropZoneID = "externalDropZone";
                                settings.AdvancedModeSettings.DropZoneText = "";
                                settings.ValidationSettings.MaxFileSize = 4194304;
-                               settings.ValidationSettings.AllowedFileExtensions = new string[] {".jpg", ".jpeg", ".gif", ".png"};
+                               settings.ValidationSettings.AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".gif", ".png" };
                                settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
                                settings.ClientSideEvents.FilesUploadStart = "function(s,e){nombre_imagen();}";
 
@@ -392,7 +393,7 @@
                                settings.ClientSideEvents.FileUploadComplete = "onUploadControlFileUploadComplete";
                                settings.ClientSideEvents.FileUploadComplete = "onUploadControlFileUploadComplete";
 
-                              
+
                            }).GetHtml()
                             </div>
 
@@ -410,7 +411,7 @@
     </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "ActivoFijo", new { Area ="ActivoFijo" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index", "ActivoFijo", new { Area = "ActivoFijo" }, null)">Cancelar</a>
     </div>
 
     @section Scripts {
@@ -443,7 +444,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("get_info_tipo", "ActivoFijo",new { Area = "ActivoFijo" })',
+            url: '@Url.Action("get_info_tipo", "ActivoFijo", new { Area = "ActivoFijo" })',
             async: false,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
@@ -504,7 +505,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("nombre_imagen", "ActivoFijo",new { Area = "ActivoFijo" })',
+            url: '@Url.Action("nombre_imagen", "ActivoFijo", new { Area = "ActivoFijo" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -522,7 +523,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("actualizar_div", "ActivoFijo",new { Area = "ActivoFijo" })',
+            url: '@Url.Action("actualizar_div", "ActivoFijo", new { Area = "ActivoFijo" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -530,18 +531,14 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
 
-                @{
-                    var base64 = Convert.ToBase64String("<%data%>"); 
-                    var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
-            } 
-
-
-                $("#uploadedImage").attr("src", data);
+               
+                //$("#uploadedImage").load();
+              //  $("#uploadedImage").attr("src",//Url.Content(Core.Erp.Web.Helps.SessionFixed.NombreImagen));
 
             },
             error: function (error) {
-            }
-        });
+                    }
+                });
     }
 
     
