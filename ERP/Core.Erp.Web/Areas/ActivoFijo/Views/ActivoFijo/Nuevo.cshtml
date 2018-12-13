@@ -338,7 +338,7 @@
                                 function onUploadControlFileUploadComplete(s, e) {
                                     if (e.isValid)
                                         // $("#uploadedImage").attr("src", e.callbackData);
-                                        actualizar_div();
+                                       // actualizar_div();
                                         setElementVisible("uploadedImage", e.isValid);
                                 }
                                 function onImageLoad() {
@@ -362,11 +362,16 @@
                                 <div id="dragZone">
                                     <span class="dragZoneText">Seleccione una foto</span>
                                 </div>
-                                <img id="uploadedImage" src="~/Content/imagenes/activofijo/@ViewBag.nombre_image" alt="" style="display: none" onload="onImageLoad()" width="200" height="200" />
+                                @*<img id="uploadedImage" src="~/Content/imagenes/activofijo/@ViewBag.nombre_imagen" alt="" style="display: none" onload="onImageLoad()" width="200" height="200" />*@
+                                @Html.DevExpress().BinaryImage(
+                               settings =>
+                               {
+                                   settings.Name = "pr_imagen";
+                                   settings.CallbackRouteValues = new { Controller = "Empresa", Action = "get_imagen" };
+                               }).Bind((Model.em_logo).ToArray()).GetHtml()
                                 <div id="dropZone" style="display: none">
                                     <span class="dropZoneText">Drop an image here</span>
                                 </div>
-                                <img src="~/Content/imagenes/activofijo/arbol.jpg" />
                             </div>
                             <div class="uploadContainer">
                                 @Html.DevExpress().UploadControl(settings => {
@@ -390,7 +395,6 @@
                                settings.Styles.DropZone.CssClass = "uploadControlDropZone";
                                settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
                                settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
-                               settings.ClientSideEvents.FileUploadComplete = "onUploadControlFileUploadComplete";
                                settings.ClientSideEvents.FileUploadComplete = "onUploadControlFileUploadComplete";
 
 

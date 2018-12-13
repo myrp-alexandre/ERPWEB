@@ -57,6 +57,8 @@ namespace Core.Erp.Info.ActivoFijo
         public List<Af_Activo_fijo_CtaCble_Info> LstDet { get; set; }
         public string IdCtaCble { get; set; }
         public string pc_Cuenta { get; set; }
+        public byte[] imagen_af { get; set; }
+
     }
 
     public class Af_Activo_fijo_valores_Info
@@ -68,6 +70,8 @@ namespace Core.Erp.Info.ActivoFijo
         public double v_mejora { get; set; }
         public double v_baja { get; set; }
         public double v_neto { get; set; }
-        
+
+
+
     }
 }

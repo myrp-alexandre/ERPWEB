@@ -201,6 +201,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             model.LstDet = bus_cta_cble.GetList(IdEmpresa, IdActivoFijo);
             List_det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
+                       
+            model.imagen_af = System.IO.File.ReadAllBytes(UploadDirectory);
+
             return View(model);
         }
 
