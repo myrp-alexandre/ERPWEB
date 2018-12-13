@@ -196,7 +196,7 @@
                     @Html.ValidationMessageFor(q => q.vt_NumFactura, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="btn_desbloquear">         </label>
                     <button type="button" class="btn btn-primary form-control" id="btn_desbloquear" onclick="MostrarModalDesbloqueo();" title="Desbloquear precios">
@@ -219,6 +219,20 @@
                 </ul>
                 <div class="tab-content" style="padding-top: 5px">
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="IdNivel">Tipo de cobro*</label>
+                                @Html.DropDownListFor(q => q.EnumeradorCobro, new SelectList(ViewBag.lst_enumerador_cobro, "Key", "Value"), new { @class = "form-control", @id = "EnumeradorCobro" })
+                                @Html.ValidationMessageFor(q => q.EnumeradorCobro, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="IdNivel">Nivel Descuento*</label>
+                                @Html.DropDownListFor(q => q.IdNivel, new SelectList(ViewBag.lst_NivelDescuento, "IdNivel", "Descripcion"), new { @class = "form-control", @id = "IdNivel" })
+                                @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="IdTerminoPago">Termino pago*</label>
@@ -288,7 +302,7 @@
                                 @Html.ValidationMessageFor(q => q.vt_Observacion, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        
+
                     </div>
                     <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
                         <div class="row">

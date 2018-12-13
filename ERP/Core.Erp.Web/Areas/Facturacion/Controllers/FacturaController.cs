@@ -147,6 +147,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             var lst_NivelDescuento = bus_nivelDescuento.GetList(model.IdEmpresa, false);
             ViewBag.lst_NivelDescuento = lst_NivelDescuento;
+
+            Dictionary<string, string> lst_enumerador_cobro = new Dictionary<string, string>();
+            lst_enumerador_cobro.Add(cl_enumeradores.eCobroFactura.EFEC.ToString(), "EFECTIVO");
+            lst_enumerador_cobro.Add(cl_enumeradores.eCobroFactura.CRED.ToString(), "CREDITO");            
+            lst_enumerador_cobro.Add(cl_enumeradores.eCobroFactura.TARJ.ToString(), "TARJETA DE CREDITO");            
+            ViewBag.lst_enumerador_cobro = lst_enumerador_cobro;
         }
         private bool validar(fa_factura_Info i_validar, ref string msg)
         {

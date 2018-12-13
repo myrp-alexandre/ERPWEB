@@ -151,19 +151,11 @@
             CXP
         }
 
-        public enum eCobroTipoMotivoCuentasPorCobrar
+        public enum eCobroFactura
         {
-            CHEQ,
-            COMI_TAR,
-            DEPO,
             EFEC,
-            NTCR,
-            NTDB,
-            RET,
             TARJ,
-            TRANS_BAN,
-            TODOS,
-            SINRET
+            CRED
         }
 
         public enum eTipoCatalogoAF

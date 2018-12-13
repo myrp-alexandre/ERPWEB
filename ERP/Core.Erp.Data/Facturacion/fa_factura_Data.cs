@@ -143,7 +143,7 @@ namespace Core.Erp.Data.Facturacion
                         vt_autorizacion = Entity.vt_autorizacion,
                         vt_fecha = Entity.vt_fecha,
                         vt_fech_venc = Entity.vt_fech_venc,
-                        vt_mes = Entity.vt_mes,                       
+                        vt_mes = Entity.vt_mes,
                         IdCliente = Entity.IdCliente,
                         IdContacto = Entity.IdContacto,
                         IdVendedor = Entity.IdVendedor,
@@ -157,7 +157,8 @@ namespace Core.Erp.Data.Facturacion
                         Fecha_Transaccion = Entity.fecha_primera_cuota,
                         Estado = Entity.Estado,
                         esta_impresa = Entity.esta_impresa,
-                        valor_abono = Entity.valor_abono
+                        valor_abono = Entity.valor_abono,
+                        IdNivel = Entity.IdNivel
                     };
                 }
                 return info;
@@ -713,7 +714,7 @@ namespace Core.Erp.Data.Facturacion
                 Entity.vt_Total = info.vt_Total;
                 Entity.vt_Cambio = info.vt_Cambio;
                 Entity.vt_ValorEfectivo = info.vt_ValorEfectivo;
-
+                Entity.IdNivel = info.IdNivel;
                 Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                 Entity.Fecha_UltMod = DateTime.Now;
 
