@@ -47,7 +47,7 @@ namespace Core.Erp.Data.Reportes.Produccion
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;
