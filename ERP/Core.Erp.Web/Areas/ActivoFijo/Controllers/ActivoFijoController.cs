@@ -169,7 +169,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             model.LstDet = new List<Af_Activo_fijo_CtaCble_Info>();
             List_det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
-            ViewBag.nombre_imagen = "descarga.jpg";
+            model.imagen_af = new byte[0];
             return View(model);
         }
 
@@ -201,8 +201,17 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             model.LstDet = bus_cta_cble.GetList(IdEmpresa, IdActivoFijo);
             List_det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
-                       
-            model.imagen_af = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory)+"descarga.jpg");
+
+            try
+            {
+
+                model.imagen_af = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + model.IdEmpresa.ToString() + model.IdActivoFijo.ToString() + ".jpg");
+            }
+            catch (Exception)
+            {
+
+                model.imagen_af = new byte[0];
+            }
 
             return View(model);
         }
@@ -218,8 +227,6 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-
-            file.SaveAs(Server.MapPath(UploadDirectory+model.IdEmpresa.ToString()+ model.IdActivoFijo.ToString()));
 
             return RedirectToAction("Index");
         }
@@ -447,7 +454,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         #region Funciones imagen activo
         public JsonResult nombre_imagen(int IdActivoFijo = 0)
         {
-            IdActivoFijo_ = IdActivoFijo;
+            SessionFixed.NombreImagen=IdActivoFijo.ToString();
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
@@ -463,7 +470,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             string fileName = System.IO.Path.GetFileName(ucDragAndDrop.FirstOrDefault().FileName);
 
             //Set the Image File Path.
-            UploadDirectory = UploadDirectory +  fileName ;
+            UploadDirectory = UploadDirectory +  SessionFixed.IdEmpresa+SessionFixed.NombreImagen +".jpg";
             imagen = ucDragAndDrop.FirstOrDefault().FileBytes;
             //Save the Image File in Folder.
             ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
