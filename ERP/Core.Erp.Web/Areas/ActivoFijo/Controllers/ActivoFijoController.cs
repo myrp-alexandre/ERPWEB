@@ -445,9 +445,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
         public JsonResult actualizar_div()
         {
-            return Json(UploadDirectory, JsonRequestBehavior.AllowGet);
+            return Json(SessionFixed.NombreImagen, JsonRequestBehavior.AllowGet);
         }
-        public string UploadDirectory = "~/Content/imagenes/activofijo";
+        public string UploadDirectory = "Content/imagenes/activofijo/";
         public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
         {
 
@@ -459,6 +459,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 
             //Save the Image File in Folder.
             ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
+            SessionFixed.NombreImagen = UploadDirectory;
             return Json(UploadDirectory, JsonRequestBehavior.AllowGet);
 
 

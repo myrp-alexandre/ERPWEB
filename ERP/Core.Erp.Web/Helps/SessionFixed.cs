@@ -5,6 +5,7 @@ namespace Core.Erp.Web.Helps
     public interface ISessionValueProvider
     {
         string TipoPersona { get; set; }
+
         string IdEmpresa { get; set; }
         string IdUsuario { get; set; }
         string NomEmpresa { get; set; }
@@ -15,6 +16,8 @@ namespace Core.Erp.Web.Helps
         string IdTransaccionSession { get; set; }
         string IdTransaccionSessionActual { get; set; }
         string IdNivelDescuento { get; set; }
+        string NombreImagen { get; set; }
+
     }
 
     public static class SessionFixed
@@ -30,7 +33,11 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.TipoPersona; }
             set { _sessionValueProvider.TipoPersona = value; }
         }
-
+        public static string NombreImagen
+        {
+            get { return _sessionValueProvider.NombreImagen; }
+            set { _sessionValueProvider.NombreImagen = value; }
+        }
         public static string IdEmpresa
         {
             get { return _sessionValueProvider.IdEmpresa; }
@@ -99,6 +106,8 @@ namespace Core.Erp.Web.Helps
         private const string _IdTransaccionSession = "IdTransaccionSesssion";
         private const string _IdTransaccionSessionActual = "IdTransaccionSessionActual";
         private const string _IdNivelDescuento = "IdNivelDescuento";
+        private const string _NombreImagen = "NombreImagen";
+
         public string TipoPersona
         {
             get { return (string)HttpContext.Current.Session[_IdTipoPersona]; }
@@ -154,6 +163,11 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdNivelDescuento]; }
             set { HttpContext.Current.Session[_IdNivelDescuento] = value; }
+        }
+        public string NombreImagen
+        {
+            get { return (string)HttpContext.Current.Session[_NombreImagen]; }
+            set { HttpContext.Current.Session[_NombreImagen] = value; }
         }
     }
 }

@@ -338,7 +338,7 @@
                                 function onUploadControlFileUploadComplete(s, e) {
                                     if (e.isValid)
                                         // $("#uploadedImage").attr("src", e.callbackData);
-                                        actualizar_div();
+                                     //   actualizar_div();
                                         setElementVisible("uploadedImage", e.isValid);
                                 }
                                 function onImageLoad() {
@@ -362,12 +362,11 @@
                                 <div id="dragZone">
                                     <span class="dragZoneText">Seleccione una foto</span>
                                 </div>
-                                <img id="uploadedImage" src="~/Content/imagenes/empleados/@ViewBag.IdActivoFijo" alt="" style="display: none" onload="onImageLoad()" />
+                                <img id="uploadedImage" src="~/Content/imagenes/activofijo/0perro.jpg" alt="" style="display: none" onload="onImageLoad()" />
                                 <div id="dropZone" style="display: none">
                                     <span class="dropZoneText">Drop an image here</span>
                                 </div>
                             </div>
-
                             <div class="uploadContainer">
                                 @Html.DevExpress().UploadControl(settings => {
                                settings.ShowProgressPanel = true;
