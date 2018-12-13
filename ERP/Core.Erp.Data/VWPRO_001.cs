@@ -36,5 +36,8 @@ namespace Core.Erp.Data
         public bool RealizaMovimiento { get; set; }
         public string pr_descripcion { get; set; }
         public string NombreUnidad { get; set; }
+        public int Orden { get; set; }
+        public string Tipo { get; set; }
+        public string Movimiento { get; set; }
     }
 }

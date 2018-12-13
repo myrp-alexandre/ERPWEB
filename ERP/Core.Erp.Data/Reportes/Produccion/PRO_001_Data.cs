@@ -39,7 +39,10 @@ namespace Core.Erp.Data.Reportes.Produccion
                         pr_descripcion = q.pr_descripcion,
                         RealizaMovimiento = q.RealizaMovimiento,
                         Secuencia = q.Secuencia,
-                        Signo = q.Signo
+                        Signo = q.Signo,
+                        Movimiento = q.Movimiento,
+                        Orden = q.Orden,
+                        Tipo = q.Tipo
                     }).ToList();
                 }
                 return Lista;
