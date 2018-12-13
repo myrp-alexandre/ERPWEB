@@ -752,9 +752,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         public ActionResult GridViewPartial_factura_det()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
+            SessionFixed.IdNivelDescuento = Request.Params["NivelDescuento"] != null ? Request.Params["NivelDescuento"].ToString() : SessionFixed.IdNivelDescuento;
             SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();            
             return PartialView("_GridViewPartial_factura_det", model);
         }
 
@@ -763,7 +764,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
-
+            int IdNivelDescuento = Convert.ToInt32(SessionFixed.IdNivelDescuento);
             if (info_det != null && info_det.IdProducto != 0)
             {
                 var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
@@ -775,7 +776,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
-                        int nivel_precio = cliente.IdNivel == 0 ? 1 : cliente.IdNivel;
+                        int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
                         var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
                         info_det.vt_Precio = producto.precio_1;
                         info_det.vt_PorDescUnitario = nivel.Porcentaje;
@@ -793,6 +794,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
+            int IdNivelDescuento = Convert.ToInt32(SessionFixed.IdNivelDescuento);
             if (info_det != null && info_det.IdProducto != 0)
             {
                 var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
@@ -804,7 +806,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
-                        int nivel_precio = cliente.IdNivel == 0 ? 1 : cliente.IdNivel;
+                        int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
                         var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
                         info_det.vt_Precio = producto.precio_1;
                         info_det.vt_PorDescUnitario = nivel.Porcentaje;
