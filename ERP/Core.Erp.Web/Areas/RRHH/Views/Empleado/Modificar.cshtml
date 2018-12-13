@@ -715,12 +715,12 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
-                            <label for="IdCiudad">Tipo documento persona sustituida</label>
+                            <label for="IdTipoIdentDiscapacitadoSustitutoSRI">Tipo documento persona sustituida</label>
                             @Html.DevExpress().ComboBoxFor(q => q.IdTipoIdentDiscapacitadoSustitutoSRI, settings =>
                                {
                                    settings.Name = "IdTipoIdentDiscapacitadoSustitutoSRI";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                    settings.Properties.Columns.Add("CodCatalogo", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                                    settings.Properties.Columns.Add("ca_descripcion", "Desripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
                                    //Campo ID
@@ -738,7 +738,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="IdTipoIdentDiscapacitadoSustitutoSRI">Número identificación</label>
+                            <label for="IdentDiscapacitadoSustitutoSRI">Número identificación</label>
                             @Html.TextBoxFor(q => q.IdentDiscapacitadoSustitutoSRI, new { @class = "form-control", @id = "pe_apellido" })
                             @Html.ValidationMessageFor(q => q.IdentDiscapacitadoSustitutoSRI, "", new { @class = "text-danger" })
                         </div>
