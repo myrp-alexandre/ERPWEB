@@ -37,25 +37,34 @@
         settings.InitNewRow = (s, e) =>
         {
             e.NewValues["FechaPago"] = DateTime.Now;
-           
+
         };
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ru_descripcion";
+            column.Caption = "Rubro";
+            column.Width = Unit.Percentage(30);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
 
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdRubro";
             column.Caption = "Rubro";
-            column.Width = Unit.Percentage(35);
-            column.EditorProperties().ComboBox(p =>
+            column.Width = Unit.Percentage(30);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.Columns.Add("IdRubro", "Código").Width = Unit.Percentage(20);
-                p.Columns.Add("ru_descripcion", "Descripción").Width = Unit.Percentage(70);
-                p.Columns.Add("ru_tipo", "Tipo").Width = Unit.Percentage(10);
-                p.ValueField = "IdRubro";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_rubro;
-                p.Width = Unit.Percentage(100);
+                ViewContext.Writer.Write("<div id='ajaxDiv'>");
+                Html.RenderPartial("_CmbRubro_EmpNov", DataBinder.Eval(c.DataItem, "IdRubro"));
+                ViewContext.Writer.Write("</div>");
             });
         });
+
+
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "FechaPago";
