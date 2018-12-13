@@ -99,6 +99,14 @@
 
             });
         });
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("PRO_001", "ProduccionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdFabricacion = DataBinder.Eval(c.DataItem, "IdFabricacion").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

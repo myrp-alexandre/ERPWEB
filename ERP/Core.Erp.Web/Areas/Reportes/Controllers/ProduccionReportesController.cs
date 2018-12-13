@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core.Erp.Web.Helps;
+using Core.Erp.Web.Reportes.Produccion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +10,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 {
     public class ProduccionReportesController : Controller
     {
-        // GET: Reportes/ProduccionReportes
-        public ActionResult Index()
+        public ActionResult PRO_001(int IdEmpresa = 0, decimal IdFabricacion = 0)
         {
-            return View();
+            PRO_001_Rpt model = new PRO_001_Rpt();
+            model.p_IdEmpresa.Value = IdEmpresa;
+            model.p_IdFabricacion.Value = IdFabricacion;
+
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            return View(model);
         }
+
     }
 }

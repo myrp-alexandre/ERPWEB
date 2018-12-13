@@ -9506,7 +9506,7 @@
     <Content Include="Areas\Facturacion\Views\NivelDescuento\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\NivelDescuento\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\NivelDescuento\Anular.cshtml" />
-    <Content Include="Areas\Reportes\Views\ProduccionReportes\PR0_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\ProduccionReportes\PRO_001.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9619,6 +9619,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -9873,6 +9874,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Presupuesto\PRE_001_Rpt.resx">
       <DependentUpon>PRE_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Produccion\PRO_001_Rpt.resx">
+      <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
