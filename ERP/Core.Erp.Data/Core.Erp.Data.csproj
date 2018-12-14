@@ -2065,6 +2065,9 @@
     <Compile Include="VWPRO_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwpro_Fabricacion.cs">
+      <DependentUpon>Model_produccion.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwpro_FabricacionDet.cs">
       <DependentUpon>Model_produccion.tt</DependentUpon>
     </Compile>

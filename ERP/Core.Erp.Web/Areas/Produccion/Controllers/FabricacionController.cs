@@ -127,6 +127,8 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.LstDet = bus_fabricacion_det.GetList(IdEmpresa, IdFabricacion);
+            model.FechaIni = DateTime.Now;
+            model.FechaFin = DateTime.Now;
             List_det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
