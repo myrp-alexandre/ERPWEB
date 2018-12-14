@@ -243,6 +243,8 @@ namespace Core.Erp.Data.Produccion
             {
                 using (Entities_produccion Context = new Entities_produccion())
                 {
+                    #region Cab&Det
+
                     pro_Fabricacion Entity = Context.pro_Fabricacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdFabricacion == info.IdFabricacion).FirstOrDefault();
                     if (Entity == null) return false;
                     Entity.egr_IdSucursal = info.egr_IdSucursal;
@@ -281,8 +283,7 @@ namespace Core.Erp.Data.Produccion
                         }
 
                     }
-                    Context.SaveChanges();
-
+                    #endregion
                     #region MOV
 
                     if (info.Cerrar)
@@ -325,6 +326,8 @@ namespace Core.Erp.Data.Produccion
                     }
                     Context.Dispose();
                     #endregion
+                    Context.SaveChanges();
+
 
                 }
                 return true;
