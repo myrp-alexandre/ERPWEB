@@ -29,5 +29,6 @@ namespace Core.Erp.Info.Reportes.Presupuesto
         public double MontoAprobado { get; set; }
         public string Observacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public string IdUsuarioAprobacion { get; set; }
     }
 }

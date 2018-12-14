@@ -40,7 +40,8 @@ namespace Core.Erp.Data.Reportes.Presupuesto
                                  Cantidad = q.Cantidad,
                                  Monto = q.Monto,
                                  ValorUnitario = q.ValorUnitario,
-                                 pc_Cuenta = q.pc_Cuenta
+                                 pc_Cuenta = q.pc_Cuenta,
+                                 IdUsuarioAprobacion = q.IdUsuarioAprobacion
 
                              }).ToList();
                 }
