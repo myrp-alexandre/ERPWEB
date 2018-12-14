@@ -11,7 +11,7 @@ namespace Core.Erp.Data.Produccion
 {
     public class pro_Fabricacion_Data
     {
-       public List<pro_Fabricacion_Info> GetList(int IdEmpresa, bool mostrar_anulados)
+       public List<pro_Fabricacion_Info> GetList(int IdEmpresa,int IdSucursal, DateTime fecha_ini, DateTime fecha_fin, bool mostrar_anulados)
         {
             try
             {
@@ -19,7 +19,10 @@ namespace Core.Erp.Data.Produccion
                 using (Entities_produccion Context = new Entities_produccion())
                 {
                     if(mostrar_anulados==true)
-                    Lista = Context.pro_Fabricacion.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new pro_Fabricacion_Info
+                    Lista = Context.pro_Fabricacion.Where(q => q.IdEmpresa == IdEmpresa
+                    && q.ing_IdSucursal == IdSucursal
+                             && q.Fecha >= fecha_ini
+                             && q.Fecha <= fecha_fin).Select(q => new pro_Fabricacion_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         egr_IdSucursal = q.egr_IdSucursal,
@@ -40,7 +43,11 @@ namespace Core.Erp.Data.Produccion
                     }).ToList();
 
                     else
-                        Lista = Context.pro_Fabricacion.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Select(q => new pro_Fabricacion_Info
+                        Lista = Context.pro_Fabricacion.Where(q => q.IdEmpresa == IdEmpresa 
+                        && q.ing_IdSucursal == IdSucursal
+                             && q.Fecha >= fecha_ini
+                             && q.Fecha <= fecha_fin
+                             && q.Estado == true).Select(q => new pro_Fabricacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             egr_IdSucursal = q.egr_IdSucursal,
