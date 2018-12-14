@@ -219,6 +219,8 @@ namespace Core.Erp.Data.Presupuesto
                     entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     entity.FechaModificacion = DateTime.Now;
 
+                    entity.IdUsuarioAprobacion = null;                    
+
                     var lst_PresupuestoDet = db.pre_PresupuestoDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdPresupuesto == info.IdPresupuesto).ToList();
                     db.pre_PresupuestoDet.RemoveRange(lst_PresupuestoDet);
                     

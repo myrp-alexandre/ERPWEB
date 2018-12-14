@@ -56,6 +56,10 @@
             if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
+            }else
+                if (Convert.ToBoolean(e.GetValue("EstadoCierre")) == true)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
             }
         };
         settings.Columns.Add(c =>

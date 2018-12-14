@@ -292,18 +292,19 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
         public void AddRow(pre_Grupo_x_seg_usuario_Info info_det, decimal IdTransaccionSession)
         {
             List<pre_Grupo_x_seg_usuario_Info> list = get_list(IdTransaccionSession);
-            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-            info_det.IdUsuario = info_det.IdUsuario;
-            info_det.Nombre = info_det.Nombre;
+            if (list.Where(q => q.IdUsuario == info_det.IdUsuario).Count() == 0)
+            {
+                info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+                info_det.IdUsuario = info_det.IdUsuario;
+                info_det.Nombre = info_det.Nombre;
 
-            list.Add(info_det);
+                list.Add(info_det);
+            }            
         }
 
         public void UpdateRow(pre_Grupo_x_seg_usuario_Info info_det, decimal IdTransaccionSession)
         {
             pre_Grupo_x_seg_usuario_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
-            edited_info.IdUsuario = info_det.IdUsuario;
-            edited_info.Nombre = info_det.Nombre;
             edited_info.AsignaCuentas = info_det.AsignaCuentas;
         }
 

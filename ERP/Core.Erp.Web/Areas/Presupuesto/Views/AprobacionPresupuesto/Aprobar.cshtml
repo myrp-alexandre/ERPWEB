@@ -65,7 +65,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="MontoSolicitado">Monto Solicitado</label>
-                    @Html.TextBoxFor(q => q.MontoSolicitado, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.MontoSolicitado, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.MontoSolicitado, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -90,7 +90,7 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Aprobar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "AprobacionPresupuesto", new { Area ="Presupuesto" }, null)">Cancelar</a>
     </div>
 
