@@ -181,6 +181,17 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-       
-    }
+        public decimal get_id(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_id(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        }
 }

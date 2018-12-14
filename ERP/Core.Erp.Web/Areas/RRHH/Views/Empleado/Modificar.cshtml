@@ -24,7 +24,7 @@
 {
     @Html.HiddenFor(q => q.IdPersona);
     @Html.HiddenFor(q => q.IdEmpresa);
-    @Html.HiddenFor(q => q.IdEmpleado);
+    @Html.HiddenFor(q => q.IdEmpleado, new { @id= "IdEmpleado" });
     <div class="row">
         <div class="col-md-12">
 
@@ -81,9 +81,10 @@
                    settings.AdvancedModeSettings.ExternalDropZoneID = "externalDropZone";
                    settings.AdvancedModeSettings.DropZoneText = "";
                    settings.ValidationSettings.MaxFileSize = 4194304;
-                   settings.ValidationSettings.AllowedFileExtensions = new string[] {".jpg", ".jpeg", ".gif", ".png"};
+                   settings.ValidationSettings.AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".gif", ".png" };
                    settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
-                  // settings.BrowseButton.Text = "Select an image for upload...";
+                   settings.ClientSideEvents.FilesUploadStart = "function(s,e){nombre_imagen();}";
+
                    settings.Styles.DropZone.CssClass = "uploadControlDropZone";
                    settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
                    settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
@@ -617,7 +618,7 @@
                     <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="Valor_horas">Valor hora adicionales</label>
+                                <label for="Valor_horas">Valor hora extra</label>
                                 @Html.TextBoxFor(q => q.Valor_horas_extras, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.Valor_horas_extras, "", new { @class = "text-danger" })
                             </div>
@@ -715,7 +716,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
-                            <label for="IdTipoIdentDiscapacitadoSustitutoSRI">Tipo documento persona sustituida</label>
+                            <label for="IdCiudad">Tipo documento persona sustituida</label>
                             @Html.DevExpress().ComboBoxFor(q => q.IdTipoIdentDiscapacitadoSustitutoSRI, settings =>
                                {
                                    settings.Name = "IdTipoIdentDiscapacitadoSustitutoSRI";
@@ -738,7 +739,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="IdentDiscapacitadoSustitutoSRI">Número identificación</label>
+                            <label for="IdTipoIdentDiscapacitadoSustitutoSRI">Número identificación</label>
                             @Html.TextBoxFor(q => q.IdentDiscapacitadoSustitutoSRI, new { @class = "form-control", @id = "pe_apellido" })
                             @Html.ValidationMessageFor(q => q.IdentDiscapacitadoSustitutoSRI, "", new { @class = "text-danger" })
                         </div>
@@ -855,5 +856,47 @@
         }
     };
 
+    function nombre_imagen() {
+        var datos = {
+            IdEmpleado: $("#IdEmpleado").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("nombre_imagen", "ActivoFijo", new { Area = "ActivoFijo" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
+    function actualizar_div() {
+        var datos = {
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizar_div", "ActivoFijo", new { Area = "ActivoFijo" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+               
+                //$("#uploadedImage").load();
+              //  $("#uploadedImage").attr("src",//Url.Content(Core.Erp.Web.Helps.SessionFixed.NombreImagen));
+
+            },
+            error: function (error) {
+                    }
+                });
+    }
 
 </script>

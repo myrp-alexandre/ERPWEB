@@ -12,6 +12,8 @@ using Core.Erp.Bus.Contabilidad;
 using DevExpress.Web;
 using System.IO;
 using Microsoft.SqlServer.Server;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class EmpleadoController : Controller
@@ -33,6 +35,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ct_punto_cargo_Bus bus_puntocargo = new ct_punto_cargo_Bus();
         ro_horario_Bus bus_horario = new ro_horario_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        public static byte[] imagen { get; set; }
+        public decimal IdEmpleado { get; set; }
+        public static UploadedFile file { get; set; }
+        public string UploadDirectory = "~/Content/imagenes/empleados";
+
         #endregion
         public ActionResult Index()
         {
@@ -153,6 +160,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 info = bus_empleado.get_info(GetIdEmpresa(), Idempleado);
                 if (info.em_foto == null)
                     info.em_foto = new byte[0];
+
+                try
+                {
+
+                    info.em_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + info.IdEmpresa.ToString() + info.IdEmpleado.ToString() + ".jpg");
+                }
+                catch (Exception)
+                {
+
+                    info.em_foto = new byte[0];
+                }
+
                 return View(info);
 
             }
@@ -206,6 +225,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 info = bus_empleado.get_info(GetIdEmpresa(), Idempleado);
                 if (info.em_foto == null)
                     info.em_foto = new byte[0];
+
+                try
+                {
+
+                    info.em_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + info.IdEmpresa.ToString() + info.IdEmpleado.ToString() + ".jpg");
+                }
+                catch (Exception)
+                {
+
+                    info.em_foto = new byte[0];
+                }
+
                 return View(info);
 
             }
@@ -321,9 +352,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-
-        public string UploadDirectory = "~/Content/imagenes/";
-
       
         public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
         {
@@ -332,20 +360,38 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             string fileName = System.IO.Path.GetFileName(ucDragAndDrop.FirstOrDefault().FileName);
 
             //Set the Image File Path.
-            UploadDirectory = UploadDirectory + fileName;
-
+            UploadDirectory = UploadDirectory + SessionFixed.IdEmpresa + SessionFixed.NombreImagen + ".jpg";
+            imagen = ucDragAndDrop.FirstOrDefault().FileBytes;
             //Save the Image File in Folder.
             ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
-            return Json(UploadDirectory, JsonRequestBehavior.AllowGet);
+            SessionFixed.NombreImagen = UploadDirectory;
+
+            file = ucDragAndDrop.FirstOrDefault();
+            return Json(ucDragAndDrop.FirstOrDefault().FileBytes, JsonRequestBehavior.AllowGet);
 
 
         }
-        public ActionResult bootstrap_imagenes()
+
+        public JsonResult nombre_imagen(decimal IdActivoFijo = 0)
         {
-            return PartialView("bootstrap_imagenes");
+            try
+            {
+                if (IdActivoFijo == 0)
+                    IdActivoFijo = bus_empleado.get_id(Convert.ToInt32(SessionFixed.IdEmpresa));
+                SessionFixed.NombreImagen = IdActivoFijo.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
         }
 
-
+        public JsonResult actualizar_div()
+        {
+            return Json(SessionFixed.NombreImagen, JsonRequestBehavior.AllowGet);
+        }
 
     }
 
@@ -363,7 +409,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public static byte[] em_foto { get; set; }
         public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
         {
-            AllowedFileExtensions = new string[] { ".jpg", ".jpeg" },
+            AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".png" },
             MaxFileSize = 4000000
         };
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)

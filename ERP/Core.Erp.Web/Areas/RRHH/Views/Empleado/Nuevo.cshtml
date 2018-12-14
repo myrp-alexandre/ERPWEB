@@ -24,7 +24,7 @@
 {
     @Html.HiddenFor(q => q.IdPersona);
     @Html.HiddenFor(q => q.IdEmpresa);
-    @Html.HiddenFor(q => q.IdEmpleado, new {@id= "IdEmpleado" });
+    @Html.HiddenFor(q => q.IdEmpleado);
     <div class="row">
         <div class="col-md-12">
 
@@ -35,8 +35,8 @@
 
                 <script type="text/javascript">
                     function onUploadControlFileUploadComplete(s, e) {
-                        if (e.isValid) 
-                           // $("#uploadedImage").attr("src", e.callbackData);
+                        if (e.isValid)
+                            $("#uploadedImage").attr("src", e.callbackData);
                         setElementVisible("uploadedImage", e.isValid);
                     }
                     function onImageLoad() {
@@ -60,7 +60,7 @@
                     <div id="dragZone">
                         <span class="dragZoneText">Seleccione una foto</span>
                     </div>
-                    <img id="uploadedImage" src="~/Content/imagenes/empleados/@Model.IdEmpleado" alt="" style="display: none" onload="onImageLoad()" />
+                    <img id="uploadedImage" src="#" alt="" style="display: none" onload="onImageLoad()" />
                     <div id="dropZone" style="display: none">
                         <span class="dropZoneText">Drop an image here</span>
                     </div>
@@ -81,9 +81,10 @@
                    settings.AdvancedModeSettings.ExternalDropZoneID = "externalDropZone";
                    settings.AdvancedModeSettings.DropZoneText = "";
                    settings.ValidationSettings.MaxFileSize = 4194304;
-                   settings.ValidationSettings.AllowedFileExtensions = new string[] {".jpg", ".jpeg", ".gif", ".png"};
+                   settings.ValidationSettings.AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".gif", ".png" };
                    settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
-                   settings.ClientSideEvents.FilesUploadStart = "OnFileUploadStart";
+                   settings.ClientSideEvents.FilesUploadStart = "function(s,e){nombre_imagen();}";
+
                    settings.Styles.DropZone.CssClass = "uploadControlDropZone";
                    settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
                    settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
@@ -94,7 +95,6 @@
             </div>
 
 
-            
 
 
 
@@ -142,15 +142,12 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 
     <div class="row">
         <div class="col-md-12">
 
-          
+
         </div>
     </div>
     <div id="Tabs" role="tabpanel">
@@ -168,7 +165,7 @@
             <li>
                 <a href="#tb_info_adicional" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Información adicional</a>
             </li>
-           
+
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="padding-top: 20px">
@@ -611,7 +608,7 @@
                                 @Html.ValidationMessageFor(q => q.Valor_horas_brigada, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                      
+
 
                     </div>
                 </div>
@@ -621,7 +618,7 @@
                     <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="Valor_horas">Valor hora adicionales</label>
+                                <label for="Valor_horas">Valor hora extra</label>
                                 @Html.TextBoxFor(q => q.Valor_horas_extras, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.Valor_horas_extras, "", new { @class = "text-danger" })
                             </div>
@@ -724,7 +721,7 @@
                                {
                                    settings.Name = "IdTipoIdentDiscapacitadoSustitutoSRI";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                    settings.Properties.Columns.Add("CodCatalogo", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
                                    settings.Properties.Columns.Add("ca_descripcion", "Desripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
                                    //Campo ID
@@ -859,15 +856,14 @@
         }
     };
 
-
-   function OnFileUploadStart(s, e) {
+    function nombre_imagen() {
         var datos = {
-            IdEmpresa: $("#IdEmpleado").val()
+            IdEmpresa: $("#IdActivoFijo").val()
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("actualizarFoto", "Empleado",new { Area = "RRHH"})',
+            url: '@Url.Action("nombre_imagen", "Empleado", new { Area = "RRHH" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -877,7 +873,31 @@
             },
             error: function (error) {
             }
-        });        
+        });
     }
+    function actualizar_div() {
+        var datos = {
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("nombre_imagen", "Empleado", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+               
+                //$("#uploadedImage").load();
+              //  $("#uploadedImage").attr("src",//Url.Content(Core.Erp.Web.Helps.SessionFixed.NombreImagen));
+
+            },
+            error: function (error) {
+                    }
+                });
+    }
+
 
 </script>

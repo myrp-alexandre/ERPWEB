@@ -80,10 +80,10 @@
                    settings.AdvancedModeSettings.EnableMultiSelect = false;
                    settings.AdvancedModeSettings.ExternalDropZoneID = "externalDropZone";
                    settings.AdvancedModeSettings.DropZoneText = "";
-                   settings.ValidationSettings.MaxFileSize = 4194304;
-                   settings.ValidationSettings.AllowedFileExtensions = new string[] {".jpg", ".jpeg", ".gif", ".png"};
+                   settings.ValidationSettings.AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".gif", ".png" };
                    settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
-                  // settings.BrowseButton.Text = "Select an image for upload...";
+                   settings.ClientSideEvents.FilesUploadStart = "function(s,e){nombre_imagen();}";
+
                    settings.Styles.DropZone.CssClass = "uploadControlDropZone";
                    settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
                    settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
