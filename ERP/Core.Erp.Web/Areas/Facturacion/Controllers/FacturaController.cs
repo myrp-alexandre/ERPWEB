@@ -751,14 +751,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_factura_det(bool DescuentoReadOnly = true)
+        public ActionResult GridViewPartial_factura_det()
         {            
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             SessionFixed.IdNivelDescuento = Request.Params["NivelDescuento"] != null ? Request.Params["NivelDescuento"].ToString() : SessionFixed.IdNivelDescuento;
             SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
-            ViewBag.DescuentoReadOnly = DescuentoReadOnly;
             return PartialView("_GridViewPartial_factura_det", model);
         }
 
@@ -783,11 +782,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
                         var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
                         info_det.vt_Precio = producto.precio_1;
-                        if(info_det.vt_PorDescUnitario > 0)
-                            ViewBag.DescuentoReadOnly = false;
-                        else
-                            ViewBag.DescuentoReadOnly = true;
-                        info_det.vt_PorDescUnitario = info_det.vt_PorDescUnitario > 0 ? info_det.vt_PorDescUnitario : nivel.Porcentaje;
+                        info_det.vt_PorDescUnitario = nivel.Porcentaje;
                     }
                 }
             }
@@ -818,11 +813,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
                         var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
                         info_det.vt_Precio = producto.precio_1;
-                        if (info_det.vt_PorDescUnitario > 0)
-                            ViewBag.DescuentoReadOnly = false;
-                        else
-                            ViewBag.DescuentoReadOnly = true;
-                        info_det.vt_PorDescUnitario = info_det.vt_PorDescUnitario > 0 ? info_det.vt_PorDescUnitario : nivel.Porcentaje;
+                        info_det.vt_PorDescUnitario = nivel.Porcentaje;
                     }
                 }
             }
