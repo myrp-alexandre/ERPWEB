@@ -673,6 +673,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                             IdUsuario = SessionFixed.IdUsuario
                         };
                         info.IdCatalogo = info.IdCatalogo.Trim();
+                        info.IdTipoCatalogo = info.IdTipoCatalogo.Trim();
+
                         Lista_Catalogo.Add(info);
                     }
                     else

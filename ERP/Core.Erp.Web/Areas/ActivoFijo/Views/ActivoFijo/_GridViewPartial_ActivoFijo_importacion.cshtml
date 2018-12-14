@@ -48,12 +48,11 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("CodActivoFijo", "Codigo").Width = Unit.Percentage(3);
-        settings.Columns.Add("Af_Codigo_Barra", "Cod Barra").Width = Unit.Percentage(4);
-        settings.Columns.Add("Af_Nombre", "Descripción").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdCategoriaAF", "Categoría").Width = Unit.Percentage(4);
+        settings.Columns.Add("IdActivoFijo", "ID").Width = Unit.Percentage(5);
+        settings.Columns.Add("Af_Nombre", "Descripción").Width = Unit.Percentage(5);
+        settings.Columns.Add("IdCategoriaAF", "Categoría").Width = Unit.Percentage(5);
         settings.Columns.Add("IdActivoFijoTipo", "Tipo").Width = Unit.Percentage(5);
-        settings.Columns.Add("IdSucursal", "Sucursal").Width = Unit.Percentage(3);
+        settings.Columns.Add("IdSucursal", "Sucursal").Width = Unit.Percentage(5);
         settings.Columns.Add("IdDepartamento", "Departamento").Width = Unit.Percentage(5);
         settings.Columns.Add("IdCatalogo_Marca", "Marca").Width = Unit.Percentage(5);
         settings.Columns.Add("IdCatalogo_Modelo", "Modelo").Width = Unit.Percentage(5);
@@ -66,13 +65,7 @@
         settings.Columns.Add("Af_fecha_fin_depre", "Fin Dep").Width = Unit.Percentage(5);
         settings.Columns.Add("Af_costo_compra", "Cto Compra").Width = Unit.Percentage(5);
         settings.Columns.Add("Af_Depreciacion_acum", "Dep Acum").Width = Unit.Percentage(5);
-        settings.Columns.Add("Af_ValorSalvamento", "Salvamento").Width = Unit.Percentage(3);
-        settings.Columns.Add("Af_NumSerie", "Serie").Width = Unit.Percentage(3);
-        settings.Columns.Add("Af_NumPlaca", "Placa").Width = Unit.Percentage(5);
-        //settings.Columns.Add("Af_Vida_Util", "Vida Util").Width = Unit.Percentage(5);
-        //settings.Columns.Add("Af_Meses_depreciar", "Meses Dep").Width = Unit.Percentage(5);
-        //settings.Columns.Add("Af_porcentaje_deprec", "% Dep").Width = Unit.Percentage(5);
-        //settings.Columns.Add("Af_observacion", "Observación").Width = Unit.Percentage(5);
+        settings.Columns.Add("Af_ValorSalvamento", "Salvamento").Width = Unit.Percentage(5);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
