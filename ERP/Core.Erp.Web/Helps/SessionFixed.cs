@@ -17,6 +17,7 @@ namespace Core.Erp.Web.Helps
         string IdTransaccionSessionActual { get; set; }
         string IdNivelDescuento { get; set; }
         string NombreImagen { get; set; }
+        string EsSuperAdmin { get; set; }
 
     }
 
@@ -91,6 +92,11 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.IdTransaccionSessionActual; }
             set { _sessionValueProvider.IdTransaccionSessionActual = value; }
         }
+        public static string EsSuperAdmin
+        {
+            get { return _sessionValueProvider.EsSuperAdmin; }
+            set { _sessionValueProvider.EsSuperAdmin = value; }
+        }
     }
 
     public class WebSessionValueProvider : ISessionValueProvider
@@ -107,6 +113,7 @@ namespace Core.Erp.Web.Helps
         private const string _IdTransaccionSessionActual = "IdTransaccionSessionActual";
         private const string _IdNivelDescuento = "IdNivelDescuento";
         private const string _NombreImagen = "NombreImagen";
+        private const string _EsSuperAdmin = "EsSuperAdmin";
 
         public string TipoPersona
         {
@@ -168,6 +175,11 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_NombreImagen]; }
             set { HttpContext.Current.Session[_NombreImagen] = value; }
+        }
+        public string EsSuperAdmin
+        {
+            get { return (string)HttpContext.Current.Session[_EsSuperAdmin]; }
+            set { HttpContext.Current.Session[_EsSuperAdmin] = value; }
         }
     }
 }

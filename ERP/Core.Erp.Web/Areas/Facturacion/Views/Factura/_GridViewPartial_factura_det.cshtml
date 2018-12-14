@@ -1,9 +1,10 @@
 @using System.Web.UI.WebControls;
+@using Core.Erp.Web.Helps;
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_factura_det";
-        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_factura_det", Area = "Facturacion", DescuentoReadOnly = ViewBag.DescuentoReadOnly };
+        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_factura_det", Area = "Facturacion"};
         settings.KeyFieldName = "Secuencia";
 
         settings.Width = Unit.Percentage(100);
@@ -178,10 +179,10 @@
         });
         settings.CellEditorInitialize = (sender, e) =>
         {
-            if (e.Column.FieldName == "vt_PorDescUnitario")
+            if (e.Column.FieldName == "vt_PorDescUnitario" && SessionFixed.EsSuperAdmin != "True")
             {
-                MVCxGridView g = sender as MVCxGridView;                
-                e.Editor.ReadOnly = ViewBag.DescuentoReadOnly;                
+                MVCxGridView g = sender as MVCxGridView;
+                e.Editor.ReadOnly = true;
             }
         };
 

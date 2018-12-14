@@ -354,7 +354,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 mensaje = "Existen items con precio 0 en el detalle";
             }
-            return Json(mensaje, JsonRequestBehavior.AllowGet);
+            double Total = Math.Round(lista.Sum(q => q.vt_Subtotal + q.vt_iva),2,MidpointRounding.AwayFromZero);
+            return Json(new { mensaje  = mensaje, Total = Total}, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ModificarLinea(int Secuencia = 0, decimal IdTransaccionSession = 0, double Precio = 0, double PorDescuento = 0, bool AplicarTodaFactura = false)
         {            
@@ -779,10 +780,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
+                        info_det.vt_Precio = producto.precio_1;
                         int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
                         var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
-                        info_det.vt_Precio = producto.precio_1;
-                        info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                        if (SessionFixed.EsSuperAdmin == "False")
+                        {                            
+                            info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                        }else
+                        {
+                            info_det.vt_PorDescUnitario = IdNivelDescuento > 1 ? nivel.Porcentaje : info_det.vt_PorDescUnitario;
+                        }                        
                     }
                 }
             }
@@ -810,10 +817,17 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
+                        info_det.vt_Precio = producto.precio_1;
                         int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
                         var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
-                        info_det.vt_Precio = producto.precio_1;
-                        info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                        if (SessionFixed.EsSuperAdmin == "False")
+                        {
+                            info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                        }
+                        else
+                        {
+                            info_det.vt_PorDescUnitario = IdNivelDescuento > 1 ? nivel.Porcentaje : info_det.vt_PorDescUnitario;
+                        }
                     }
                 }
             }
