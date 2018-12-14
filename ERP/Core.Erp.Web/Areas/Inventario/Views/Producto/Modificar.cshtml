@@ -827,8 +827,11 @@
                 } else
                 {
                     $("#link_general").click();
-                    if (data.tp_EsCombo == "S") {
+                    if (data.tp_EsCombo == "S" || data.Aparece_fabricacion == true) {
                         $("#link_composicion").show();
+                    }
+                    else {
+                        $("#link_composicion").hide();
                     }
                     else {
                         $("#link_composicion").hide();
