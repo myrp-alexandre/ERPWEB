@@ -40,6 +40,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         Af_Catalogo_List ListaCatalogo = new Af_Catalogo_List();
         Af_Activo_fijo_List ListaActivoFijo = new Af_Activo_fijo_List();
         public int IdActivoFijo_ { get; set; }
+        public static byte[] imagen { get; set; }
         #endregion
 
         #region Index
@@ -168,7 +169,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             model.LstDet = new List<Af_Activo_fijo_CtaCble_Info>();
             List_det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
-            ViewBag.IdActivoFijo = "0.jpg";
+            ViewBag.nombre_imagen = "descarga.jpg";
             return View(model);
         }
 
@@ -447,7 +448,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         {
             return Json(SessionFixed.NombreImagen, JsonRequestBehavior.AllowGet);
         }
-        public string UploadDirectory = "Content/imagenes/activofijo/";
+        public string UploadDirectory = "~/Content/imagenes/activofijo/";
         public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
         {
 
@@ -455,12 +456,12 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             string fileName = System.IO.Path.GetFileName(ucDragAndDrop.FirstOrDefault().FileName);
 
             //Set the Image File Path.
-            UploadDirectory = UploadDirectory + IdActivoFijo_.ToString()+ fileName ;
-
+            UploadDirectory = UploadDirectory +  fileName ;
+            imagen = ucDragAndDrop.FirstOrDefault().FileBytes;
             //Save the Image File in Folder.
             ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
             SessionFixed.NombreImagen = UploadDirectory;
-            return Json(UploadDirectory, JsonRequestBehavior.AllowGet);
+            return Json(ucDragAndDrop.FirstOrDefault().FileBytes, JsonRequestBehavior.AllowGet);
 
 
         }
@@ -483,7 +484,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         public static byte[] em_foto { get; set; }
         public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
         {
-            AllowedFileExtensions = new string[] { ".jpg", ".jpeg" },
+            AllowedFileExtensions = new string[] { ".jpg", ".jpeg",".png" },
             MaxFileSize = 4000000
         };
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)

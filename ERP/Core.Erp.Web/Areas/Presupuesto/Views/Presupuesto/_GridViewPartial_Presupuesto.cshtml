@@ -53,7 +53,8 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("IdUsuarioAprobacion")) != "")
+            if (Math.Round(Convert.ToDouble(e.GetValue("MontoSolicitado")),2) == Math.Round(Convert.ToDouble(e.GetValue("MontoAprobado")), 2)
+            && !string.IsNullOrEmpty(Convert.ToString(e.GetValue("IdUsuarioAprobacion"))))
             {
                 e.Row.ForeColor = System.Drawing.Color.Blue;
             }
@@ -68,7 +69,8 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "EstadoCierre")) == false ) && (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioAprobacion")) == "" || Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioAprobacion")) == null) )
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "EstadoCierre")) == false ) 
+                && (Math.Round(Convert.ToDouble(DataBinder.Eval(tc.DataItem, "MontoSolicitado")), 2) - Math.Round(Convert.ToDouble(DataBinder.Eval(tc.DataItem, "MontoAprobado")), 2)) != 0)
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPresupuesto = DataBinder.Eval(tc.DataItem, "IdPresupuesto") }) + "&nbsp;" +
