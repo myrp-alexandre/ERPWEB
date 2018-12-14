@@ -18,6 +18,7 @@ using ExcelDataReader;
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Areas.RRHH.Controllers;
+using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 
 namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
 {
@@ -39,6 +40,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         Af_Departamento_List ListaDepartamento = new Af_Departamento_List();
         Af_Catalogo_List ListaCatalogo = new Af_Catalogo_List();
         Af_Activo_fijo_List ListaActivoFijo = new Af_Activo_fijo_List();
+        tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
         public int IdActivoFijo_ { get; set; }
         public static byte[] imagen { get; set; }
         #endregion
@@ -313,10 +315,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             }
             catch (Exception ex)
             {
-                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
-                if (tb_sis_log_error_InfoList.DescripcionError == null)
-                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
-                ViewBag.mensaje = ex.Message.ToString();
+                SisLogError.set_list( (ex.InnerException) == null ? ex.Message.ToString(): ex.InnerException.ToString());
+              
+                ViewBag.error = ex.Message.ToString();
                 return View(model);
             }            
 
@@ -671,6 +672,9 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                             Descripcion = Convert.ToString(reader.GetValue(2)),
                             IdUsuario = SessionFixed.IdUsuario
                         };
+                        info.IdCatalogo = info.IdCatalogo.Trim();
+                        info.IdTipoCatalogo = info.IdTipoCatalogo.Trim();
+
                         Lista_Catalogo.Add(info);
                     }
                     else
@@ -695,7 +699,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                         var ini_depre = Convert.ToDateTime(reader.GetValue(15));
                         var info_empleado_custodio = Lista_Empleado.get_list().Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(12))).FirstOrDefault();
                         var info_empleado_encargado = Lista_Empleado.get_list().Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(13))).FirstOrDefault();
-                        var info_tipo_activofijo = ListaTipo.get_list(IdTransaccionSession).Where(q => q.IdActivoFijoTipo == IdTipo).FirstOrDefault(); ;
+                        var info_tipo_activofijo = ListaTipo.get_list(IdTransaccionSession).Where(q => q.IdActivoFijoTipo == IdTipo).FirstOrDefault();
 
                         Af_Activo_fijo_Info info = new Af_Activo_fijo_Info
                         {

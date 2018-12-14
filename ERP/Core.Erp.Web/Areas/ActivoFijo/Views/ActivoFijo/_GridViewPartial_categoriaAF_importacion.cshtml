@@ -48,9 +48,10 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdActivoFijoTipo", "Codigo").Width = Unit.Percentage(10);
-        settings.Columns.Add("cod_tipo", "Categoria").Width = Unit.Percentage(10);
-        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(80);
+        settings.Columns.Add("IdCategoriaAF", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdActivoFijoTipo", "Tipo").Width = Unit.Percentage(10);
+        settings.Columns.Add("cod_tipo", "Cod Tipo").Width = Unit.Percentage(10);
+        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(70);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

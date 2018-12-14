@@ -66,7 +66,6 @@ namespace Core.Erp.Data
         public virtual Af_Catalogo Af_Catalogo1 { get; set; }
         public virtual Af_Catalogo Af_Catalogo2 { get; set; }
         public virtual Af_Catalogo Af_Catalogo3 { get; set; }
-        public virtual Af_Catalogo Af_Catalogo4 { get; set; }
         public virtual Af_Departamento Af_Departamento { get; set; }
         public virtual ICollection<Af_Activo_fijo_CtaCble> Af_Activo_fijo_CtaCble { get; set; }
         public virtual ICollection<Af_Depreciacion_Det> Af_Depreciacion_Det { get; set; }

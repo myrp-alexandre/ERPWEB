@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class NominaTipoLiquidacionController : Controller
@@ -152,8 +154,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 List<ro_Nomina_Tipoliqui_Info> lst_tipo_nomina = new List<ro_Nomina_Tipoliqui_Info>();
-                lst_tipo_nomina = bus_nomina_tipo.get_list(GetIdEmpresa(), IdNomina);
+                lst_tipo_nomina = bus_nomina_tipo.get_list(IdEmpresa, IdNomina);
                 return Json(lst_tipo_nomina, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)

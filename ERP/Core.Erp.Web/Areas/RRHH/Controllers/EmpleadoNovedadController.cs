@@ -50,7 +50,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         
         public ActionResult CmbRubro_EmpNov()
         {
-            decimal model = new decimal();
+            ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
             return PartialView("_CmbRubro_EmpNov", model);
         }
         public List<ro_rubro_tipo_Info> get_list_bajo_demanda_rubro(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -312,6 +312,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             edited_info.IdRubro = info_det.IdRubro;
             edited_info.Valor = info_det.Valor;
             edited_info.Observacion = info_det.Observacion;
+            edited_info.ru_descripcion = info_det.ru_descripcion;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)

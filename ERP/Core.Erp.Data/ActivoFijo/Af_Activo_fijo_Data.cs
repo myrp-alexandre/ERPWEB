@@ -546,7 +546,7 @@ namespace Core.Erp.Data.ActivoFijo
                                         IdActivoFijo = item_det.IdActivoFijo,
                                         Secuencia = item_det.Secuencia,
                                         IdDepartamento = item.IdDepartamento,
-                                        IdCtaCble = item.IdCtaCble,
+                                        IdCtaCble = item_det.IdCtaCble,
                                         Porcentaje = item_det.Porcentaje                                                                              
                                     });
                                 }

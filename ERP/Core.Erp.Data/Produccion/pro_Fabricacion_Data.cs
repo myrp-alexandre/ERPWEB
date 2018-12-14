@@ -19,7 +19,7 @@ namespace Core.Erp.Data.Produccion
                 using (Entities_produccion Context = new Entities_produccion())
                 {
                     if(mostrar_anulados==true)
-                    Lista = Context.pro_Fabricacion.Where(q => q.IdEmpresa == IdEmpresa
+                    Lista = Context.vwpro_Fabricacion.Where(q => q.IdEmpresa == IdEmpresa
                     && q.ing_IdSucursal == IdSucursal
                              && q.Fecha >= fecha_ini
                              && q.Fecha <= fecha_fin).Select(q => new pro_Fabricacion_Info
@@ -36,14 +36,15 @@ namespace Core.Erp.Data.Produccion
                         ing_IdBodega = q.ing_IdBodega,
                         ing_IdMovi_inven_tipo = q.ing_IdMovi_inven_tipo,
                         Observacion = q.Observacion,
-                        ing_IdNumMovi = q.ing_IdNumMovi
+                        ing_IdNumMovi = q.ing_IdNumMovi,
+                        Su_Descripcion = q.Su_Descripcion
 
 
 
                     }).ToList();
 
                     else
-                        Lista = Context.pro_Fabricacion.Where(q => q.IdEmpresa == IdEmpresa 
+                        Lista = Context.vwpro_Fabricacion.Where(q => q.IdEmpresa == IdEmpresa 
                         && q.ing_IdSucursal == IdSucursal
                              && q.Fecha >= fecha_ini
                              && q.Fecha <= fecha_fin
@@ -61,8 +62,9 @@ namespace Core.Erp.Data.Produccion
                             ing_IdBodega = q.ing_IdBodega,
                             ing_IdMovi_inven_tipo = q.ing_IdMovi_inven_tipo,
                             Observacion = q.Observacion,
-                            ing_IdNumMovi = q.ing_IdNumMovi
-                        }).ToList();
+                            ing_IdNumMovi = q.ing_IdNumMovi,
+                                 Su_Descripcion = q.Su_Descripcion
+                             }).ToList();
                 }
                 return Lista;
             }
@@ -243,6 +245,8 @@ namespace Core.Erp.Data.Produccion
             {
                 using (Entities_produccion Context = new Entities_produccion())
                 {
+                    #region Cab&Det
+
                     pro_Fabricacion Entity = Context.pro_Fabricacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdFabricacion == info.IdFabricacion).FirstOrDefault();
                     if (Entity == null) return false;
                     Entity.egr_IdSucursal = info.egr_IdSucursal;
@@ -281,8 +285,7 @@ namespace Core.Erp.Data.Produccion
                         }
 
                     }
-                    Context.SaveChanges();
-
+                    #endregion
                     #region MOV
 
                     if (info.Cerrar)
@@ -323,8 +326,9 @@ namespace Core.Erp.Data.Produccion
                         }
                         #endregion
                     }
-                    Context.Dispose();
                     #endregion
+                    Context.SaveChanges();
+
 
                 }
                 return true;

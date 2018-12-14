@@ -13,6 +13,8 @@ using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.General;
+using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
+
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
     [SessionTimeout]
@@ -29,6 +31,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_producto_x_tb_bodega_Bus bus_producto_x_bodega = new in_producto_x_tb_bodega_Bus();
         seg_usuario_Bus bus_usuarios = new seg_usuario_Bus();
         tbl_TransaccionesAutorizadas_Bus bus_transacciones_aut = new tbl_TransaccionesAutorizadas_Bus();
+        tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
+
         private string mensaje;
         #endregion
 
@@ -159,10 +163,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             {
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
-                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
-                if (tb_sis_log_error_InfoList.DescripcionError == null)
-                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
-                ViewBag.error = ex.Message.ToString();
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.mensaje = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);
             }
@@ -238,9 +241,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
-                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
-                if (tb_sis_log_error_InfoList.DescripcionError == null)
-                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
                 ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);
@@ -294,10 +295,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
-                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
-                if (tb_sis_log_error_InfoList.DescripcionError == null)
-                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
-                ViewBag.error = ex.Message.ToString();
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.mensaje = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);
             }

@@ -2065,6 +2065,9 @@
     <Compile Include="VWPRO_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwpro_Fabricacion.cs">
+      <DependentUpon>Model_produccion.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwpro_FabricacionDet.cs">
       <DependentUpon>Model_produccion.tt</DependentUpon>
     </Compile>
@@ -2150,6 +2153,9 @@
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_Empleado_Novedades.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwro_empleado_novedad_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_empleado_x_Proyeccion_Gastos_Personales.cs">

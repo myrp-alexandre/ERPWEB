@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using DevExpress.Web.Mvc;
 using Core.Erp.Bus.Contabilidad;
+using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
@@ -34,6 +35,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_catalogo_Bus bus_catalogo = new fa_catalogo_Bus();
         fa_factura_x_fa_guia_remision_Info_List List_rel = new fa_factura_x_fa_guia_remision_Info_List();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+        tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
         #endregion
 
         #region Metodos ComboBox bajo demanda cliente
@@ -168,9 +170,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             catch (Exception ex)
             {
-                tb_sis_log_error_InfoList.DescripcionError=ex.InnerException.ToString();
-                if (tb_sis_log_error_InfoList.DescripcionError == null)
-                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
                 ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);
@@ -228,10 +229,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             catch (Exception ex)
             {
-
-                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
-                if (tb_sis_log_error_InfoList.DescripcionError == null)
-                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
                 ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);
@@ -274,10 +272,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             catch (Exception ex)
             {
-
-                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
-                if (tb_sis_log_error_InfoList.DescripcionError == null)
-                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
                 ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
                 return View(model);

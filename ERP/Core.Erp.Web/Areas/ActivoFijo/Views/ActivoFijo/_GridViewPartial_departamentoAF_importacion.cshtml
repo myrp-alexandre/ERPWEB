@@ -48,6 +48,7 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
+        settings.Columns.Add("IdDepartamento", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(90);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
