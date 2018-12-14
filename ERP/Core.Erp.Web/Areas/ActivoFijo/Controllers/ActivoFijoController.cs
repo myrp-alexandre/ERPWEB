@@ -285,45 +285,41 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Importar(Af_Activo_fijo_Info model)
         {
-            var Lista_Tipo = ListaTipo.get_list(model.IdTransaccionSession);
-            foreach (var item in Lista_Tipo)
+            try
             {
-                bus_tipo.guardarDB(item);
-            }
+                var Lista_Tipo = ListaTipo.get_list(model.IdTransaccionSession);
+                var Lista_Categoria = ListaCategoria.get_list(model.IdTransaccionSession);
+                var Lista_Departamento = ListaDepartamento.get_list(model.IdTransaccionSession);
+                var Lista_Catalogo = ListaCatalogo.get_list(model.IdTransaccionSession);
+                var Lista_ActivoFijo = ListaActivoFijo.get_list(model.IdTransaccionSession);
+                var Lista_ActivoFijo_CtaCble = List_det.get_list(model.IdTransaccionSession);
 
-            var Lista_Categoria = ListaCategoria.get_list(model.IdTransaccionSession);
-            foreach (var item in Lista_Categoria)
-            {
-                bus_categoria.guardarDB(item);
-            }
-
-            var Lista_Departamento = ListaDepartamento.get_list(model.IdTransaccionSession);
-            foreach (var item in Lista_Departamento)
-            {
-                bus_dep.GuardarDB(item);
-            }
-
-            var Lista_Catalogo = ListaCatalogo.get_list(model.IdTransaccionSession);
-            foreach (var item in Lista_Catalogo)
-            {
-                bus_catalogo.guardarDB(item);
-            }
-
-            var Lista_ActivoFijo = ListaActivoFijo.get_list(model.IdTransaccionSession);
-            var Lista_ActivoFijo_CtaCble = List_det.get_list(model.IdTransaccionSession);
-            
-            foreach (var item in Lista_ActivoFijo)
-            {
-                item.LstDet = Lista_ActivoFijo_CtaCble.Where(q=>q.IdActivoFijo == item.IdActivoFijo).ToList();
-
-                var secuencia = 1;
-                foreach (var item2 in item.LstDet)
+                foreach (var item in Lista_ActivoFijo)
                 {
-                    item2.Secuencia = secuencia++;
+                    item.LstDet = Lista_ActivoFijo_CtaCble.Where(q => q.IdActivoFijo == item.IdActivoFijo).ToList();
+
+                    var secuencia = 1;
+                    foreach (var item2 in item.LstDet)
+                    {
+                        item2.Secuencia = secuencia++;
+                    }
                 }
 
-                bus_activo.guardarDB(item);
+                if (!bus_activo.guardarDB_importacion(Lista_Tipo, Lista_Categoria, Lista_Departamento, Lista_Catalogo, Lista_ActivoFijo))
+                {
+                    ViewBag.mensaje = "Error al importar el archivo";
+                    return View(model);
+                }
             }
+            catch (Exception ex)
+            {
+                tb_sis_log_error_InfoList.DescripcionError = ex.InnerException.ToString();
+                if (tb_sis_log_error_InfoList.DescripcionError == null)
+                    tb_sis_log_error_InfoList.DescripcionError = ex.Message.ToString();
+                ViewBag.mensaje = ex.Message.ToString();
+                return View(model);
+            }            
+
             return RedirectToAction("Index");
         }
         public ActionResult GridViewPartial_tipoAF_importacion()
@@ -623,6 +619,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                         Af_Activo_fijo_Categoria_Info info = new Af_Activo_fijo_Categoria_Info
                         {
                             IdEmpresa = IdEmpresa,
+                            IdCategoriaAF = Convert.ToInt32(reader.GetValue(0)),
                             IdActivoFijoTipo = Convert.ToInt32(reader.GetValue(1)),
                             CodCategoriaAF = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)),
                             Descripcion = Convert.ToString(reader.GetValue(3)),
@@ -647,6 +644,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                         Af_Departamento_Info info = new Af_Departamento_Info
                         {
                             IdEmpresa = IdEmpresa,
+                            IdDepartamento = Convert.ToInt32(reader.GetValue(0)),
                             Descripcion = Convert.ToString(reader.GetValue(1)),
                             IdUsuarioCreacion = SessionFixed.IdUsuario
                         };

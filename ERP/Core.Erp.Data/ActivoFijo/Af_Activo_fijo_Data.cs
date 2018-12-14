@@ -408,5 +408,160 @@ namespace Core.Erp.Data.ActivoFijo
                 throw;
             }
         }
+
+        public bool guardarDB_importacion(List<Af_Activo_fijo_tipo_Info> Lista_Tipo, List<Af_Activo_fijo_Categoria_Info> Lista_Categoria, List<Af_Departamento_Info> Lista_Departamento, List<Af_Catalogo_Info> Lista_Catalogo, List<Af_Activo_fijo_Info> Lista_ActivoFijo)
+        {
+            try
+            {
+                using (Entities_activo_fijo Context = new Entities_activo_fijo())
+                {
+                    if (Lista_Tipo.Count > 0)
+                    {
+                        foreach (var item in Lista_Tipo)
+                        {
+                            Af_Activo_fijo_tipo Entity_tipo = new Af_Activo_fijo_tipo
+                            {
+                                IdActivoFijoTipo = item.IdActivoFijoTipo,
+                                IdEmpresa = item.IdEmpresa,
+                                Af_anio_depreciacion = item.Af_anio_depreciacion,
+                                Af_Descripcion = item.Af_Descripcion,
+                                Af_Porcentaje_depre = item.Af_Porcentaje_depre,
+                                CodActivoFijo = item.CodActivoFijo,
+                                Estado = item.Estado = "A",
+                                IdCtaCble_Activo = item.IdCtaCble_Activo,
+                                IdCtaCble_Dep_Acum = item.IdCtaCble_Dep_Acum,
+                                IdCtaCble_Gastos_Depre = item.IdCtaCble_Gastos_Depre,
+                                Se_Deprecia = item.Se_Deprecia,
+                                IdUsuario = item.IdUsuario,
+                                Fecha_Transac = DateTime.Now,
+                                IdCtaCble_Baja = item.IdCtaCble_Baja,
+                                IdCtaCble_CostoVenta = item.IdCtaCble_CostoVenta,
+                                IdCtaCble_Mejora = item.IdCtaCble_Mejora,
+                                IdCtaCble_Retiro = item.IdCtaCble_Retiro
+                            };
+
+                            Context.Af_Activo_fijo_tipo.Add(Entity_tipo);
+                        }                        
+                    }
+
+                    if (Lista_Categoria.Count > 0)
+                    {
+                        foreach (var item in Lista_Categoria)
+                        {
+                            Af_Activo_fijo_Categoria Entity_categoria = new Af_Activo_fijo_Categoria
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                CodCategoriaAF = item.CodCategoriaAF,
+                                cod_tipo = item.cod_tipo,
+                                Descripcion = item.Descripcion,
+                                IdActivoFijoTipo = item.IdActivoFijoTipo,
+                                IdCategoriaAF = item.IdCategoriaAF,
+                                Estado = item.Estado = "A",
+                                IdUsuario = item.IdUsuario,
+                                Fecha_Transac = DateTime.Now
+                            };
+                            Context.Af_Activo_fijo_Categoria.Add(Entity_categoria);
+                        }
+                    }
+
+                    if (Lista_Departamento.Count > 0)
+                    {
+                        foreach (var item in Lista_Departamento)
+                        {
+                            Af_Departamento Entity_departamento = new Af_Departamento
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdDepartamento = item.IdDepartamento,
+                                Descripcion = item.Descripcion,
+                                Estado = true,
+                                IdUsuarioCreacion = item.IdUsuarioCreacion,
+                                FechaCreacion = DateTime.Now
+                            };
+                            Context.Af_Departamento.Add(Entity_departamento);
+                        }
+                    }
+
+                    if (Lista_Catalogo.Count > 0)
+                    {
+                        foreach (var item in Lista_Catalogo)
+                        {
+                            Af_Catalogo Entity_catalogo = new Af_Catalogo
+                            {
+                                IdTipoCatalogo = item.IdTipoCatalogo,
+                                IdCatalogo = item.IdCatalogo,
+                                Descripcion = item.Descripcion,
+                                Estado = item.Estado = "A",
+                                IdUsuario = item.IdUsuario
+                            };
+                            Context.Af_Catalogo.Add(Entity_catalogo);
+                        }
+                    }
+
+                    if (Lista_ActivoFijo.Count > 0)
+                    {
+                        foreach (var item in Lista_ActivoFijo)
+                        {
+                            Af_Activo_fijo Entity_activofijo = new Af_Activo_fijo
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                Af_Codigo_Barra = item.Af_Codigo_Barra,
+                                Af_costo_compra = item.Af_costo_compra,
+                                Af_Depreciacion_acum = item.Af_Depreciacion_acum,
+                                Af_fecha_compra = item.Af_fecha_compra.Date,
+                                Af_fecha_fin_depre = item.Af_fecha_fin_depre.Date,
+                                Af_fecha_ini_depre = item.Af_fecha_ini_depre.Date,
+                                Af_Meses_depreciar = item.Af_Meses_depreciar,
+                                Af_Nombre = item.Af_Nombre,
+                                Af_NumPlaca = item.Af_NumPlaca,
+                                Af_NumSerie = item.Af_NumSerie,
+                                Af_observacion = item.Af_observacion,
+                                Af_porcentaje_deprec = item.Af_porcentaje_deprec,
+                                Af_ValorSalvamento = item.Af_ValorSalvamento,
+                                Af_Vida_Util = item.Af_Vida_Util,
+                                CodActivoFijo = item.CodActivoFijo,
+                                Estado = item.Estado = "A",
+                                Estado_Proceso = item.Estado_Proceso,
+                                IdActivoFijoTipo = item.IdActivoFijoTipo,
+                                IdActivoFijo = item.IdActivoFijo,
+                                IdCatalogo_Color = item.IdCatalogo_Color,
+                                IdCatalogo_Marca = item.IdCatalogo_Marca,
+                                IdCatalogo_Modelo = item.IdCatalogo_Modelo,
+                                IdCategoriaAF = item.IdCategoriaAF,
+                                IdSucursal = item.IdSucursal,
+                                IdTipoCatalogo_Ubicacion = item.IdTipoCatalogo_Ubicacion,
+                                IdEmpleadoCustodio = item.IdEmpleadoCustodio,
+                                IdEmpleadoEncargado = item.IdEmpleadoEncargado,
+                                IdDepartamento = item.IdDepartamento,
+                                IdUsuario = item.IdUsuario,
+                                Fecha_Transac = DateTime.Now
+                            };
+
+                            if (item.LstDet.Count > 0)
+                            {
+                                foreach (var item_det in item.LstDet)
+                                {
+                                    Context.Af_Activo_fijo_CtaCble.Add(new Af_Activo_fijo_CtaCble
+                                    {
+                                        IdEmpresa = item.IdEmpresa,
+                                        IdActivoFijo = item_det.IdActivoFijo,
+                                        Secuencia = item_det.Secuencia,
+                                        IdDepartamento = item.IdDepartamento,
+                                        IdCtaCble = item.IdCtaCble,
+                                        Porcentaje = item_det.Porcentaje                                                                              
+                                    });
+                                }
+                            }
+                            Context.Af_Activo_fijo.Add(Entity_activofijo);
+                        }
+                    }
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
