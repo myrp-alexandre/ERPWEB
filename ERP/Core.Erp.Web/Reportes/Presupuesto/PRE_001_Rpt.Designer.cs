@@ -101,6 +101,11 @@
             this.xrTableCell34 = new DevExpress.XtraReports.UI.XRTableCell();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.ESTADOAPROBACION = new DevExpress.XtraReports.UI.CalculatedField();
+            this.NOMBREREPORTE = new DevExpress.XtraReports.UI.CalculatedField();
+            this.xrTable10 = new DevExpress.XtraReports.UI.XRTable();
+            this.xrTableRow15 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell36 = new DevExpress.XtraReports.UI.XRTableCell();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -111,6 +116,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrTable10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -280,6 +286,8 @@
             // 
             // xrTableCell4
             // 
+            this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NOMBREREPORTE]")});
             this.xrTableCell4.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.StylePriority.UseFont = false;
@@ -789,12 +797,55 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable10,
             this.xrTable9,
             this.xrTable8,
             this.xrTable7,
             this.xrTable4});
             this.ReportFooter.HeightF = 153.125F;
             this.ReportFooter.Name = "ReportFooter";
+            // 
+            // ESTADOAPROBACION
+            // 
+            this.ESTADOAPROBACION.Expression = "Iif(Round([MontoAprobado],2) = Round([MontoSolicitado],2) And IsNullOrEmpty([IdUs" +
+    "uarioAprobacion]) == False , \'APROBADO\' ,\'\' )";
+            this.ESTADOAPROBACION.Name = "ESTADOAPROBACION";
+            // 
+            // NOMBREREPORTE
+            // 
+            this.NOMBREREPORTE.Expression = "Concat(\'PRESUPUESTO # \',[IdPresupuesto] )";
+            this.NOMBREREPORTE.Name = "NOMBREREPORTE";
+            // 
+            // xrTable10
+            // 
+            this.xrTable10.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTable10.LocationFloat = new DevExpress.Utils.PointFloat(0F, 39.99999F);
+            this.xrTable10.Name = "xrTable10";
+            this.xrTable10.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+            this.xrTableRow15});
+            this.xrTable10.SizeF = new System.Drawing.SizeF(750.9999F, 42.70834F);
+            this.xrTable10.StylePriority.UseFont = false;
+            // 
+            // xrTableRow15
+            // 
+            this.xrTableRow15.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell36});
+            this.xrTableRow15.Name = "xrTableRow15";
+            this.xrTableRow15.Weight = 1D;
+            // 
+            // xrTableCell36
+            // 
+            this.xrTableCell36.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell36.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ESTADOAPROBACION]")});
+            this.xrTableCell36.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrTableCell36.Name = "xrTableCell36";
+            this.xrTableCell36.StylePriority.UseBorders = false;
+            this.xrTableCell36.StylePriority.UseFont = false;
+            this.xrTableCell36.StylePriority.UseTextAlignment = false;
+            this.xrTableCell36.Text = "APROBADO";
+            this.xrTableCell36.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell36.Weight = 1D;
             // 
             // PRE_001_Rpt
             // 
@@ -805,6 +856,9 @@
             this.GroupHeader1,
             this.PageFooter,
             this.ReportFooter});
+            this.CalculatedFields.AddRange(new DevExpress.XtraReports.UI.CalculatedField[] {
+            this.ESTADOAPROBACION,
+            this.NOMBREREPORTE});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
@@ -827,6 +881,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrTable10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -904,5 +959,10 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow14;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell33;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell34;
+        private DevExpress.XtraReports.UI.CalculatedField ESTADOAPROBACION;
+        private DevExpress.XtraReports.UI.CalculatedField NOMBREREPORTE;
+        private DevExpress.XtraReports.UI.XRTable xrTable10;
+        private DevExpress.XtraReports.UI.XRTableRow xrTableRow15;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell36;
     }
 }
