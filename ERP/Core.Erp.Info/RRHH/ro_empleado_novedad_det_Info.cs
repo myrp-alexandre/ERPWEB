@@ -26,6 +26,7 @@ namespace Core.Erp.Info.RRHH
         public Nullable<int> IdPeriodo { get; set; }
 
         public string rub_tipo { get; set; }
+        public string ru_descripcion { get; set; }
 
     }
 }

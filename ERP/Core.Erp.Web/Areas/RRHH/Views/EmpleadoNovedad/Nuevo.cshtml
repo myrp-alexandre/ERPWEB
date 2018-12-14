@@ -119,13 +119,12 @@
 
 <script>
 
-
             $("#IdNomina_Tipo").change(function () {
                 $("#IdNomina_TipoLiqui").empty();
                 cargar_tipo_liquidacion_nomina();
 
             });
-    cargar_tipo_liquidacion_nomina();
+                  cargar_tipo_liquidacion_nomina();
             function cargar_tipo_liquidacion_nomina() {
                 var datos = {
                     IdNomina: $("#IdNomina_Tipo").val()

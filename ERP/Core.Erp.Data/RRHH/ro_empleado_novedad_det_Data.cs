@@ -17,7 +17,7 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    Lista = (from q in Context.ro_empleado_novedad_det
+                    Lista = (from q in Context.vwro_empleado_novedad_det
                              where q.IdEmpresa == IdEmpresa
                                    && q.IdNovedad==IdNovedad
                              select new ro_empleado_novedad_det_Info
@@ -28,7 +28,9 @@ namespace Core.Erp.Data.RRHH
                                  Observacion = q.Observacion,
                                  Valor = q.Valor,
                                  IdRubro = q.IdRubro ,
-                                 Secuencia=q.Secuencia                               
+                                 Secuencia=q.Secuencia ,
+                                 ru_descripcion = q.ru_descripcion
+                                                              
                              }).ToList();
 
                 }
