@@ -211,6 +211,6 @@ namespace Core.Erp.Data.ActivoFijo
                 throw;
             }
         }
-
+       
     }
 }

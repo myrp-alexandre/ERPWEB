@@ -38,8 +38,17 @@
 
 </script>
 
-@using (Html.BeginForm("Importar", "ActivoFijo", FormMethod.Post,new { @role = "form", @id = "form"}))
+@using (Html.BeginForm("Importar", "ActivoFijo", FormMethod.Post, new { @role = "form", @id = "form" }))
 {
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+
     @Html.HiddenFor(q=> q.IdEmpresa, new { @id = "IdEmpresa"})
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
