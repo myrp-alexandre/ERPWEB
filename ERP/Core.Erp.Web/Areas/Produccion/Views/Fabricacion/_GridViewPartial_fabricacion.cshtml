@@ -54,7 +54,7 @@
             if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
-            }
+            }else
             if ("egr_IdNumMovi" != null)
             {
                 e.Row.ForeColor = System.Drawing.Color.Blue;
@@ -65,7 +65,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && "ing_IdNumMovi" == null)
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && "egr_IdNumMovi" == null)
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdFabricacion = DataBinder.Eval(tc.DataItem, "IdFabricacion") }) + "&nbsp;" +
