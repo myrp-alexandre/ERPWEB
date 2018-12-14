@@ -529,6 +529,13 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+
+                @{
+                    var base64 = Convert.ToBase64String("<%data%>"); 
+                    var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+            } 
+
+
                 $("#uploadedImage").attr("src", data);
 
             },
