@@ -242,7 +242,8 @@ namespace Core.Erp.Data.Facturacion
                     IdUsuario = info.IdUsuario,
                     vt_Total = info.vt_Total,
                     vt_Cambio = info.vt_Cambio,
-                    vt_ValorEfectivo = info.vt_ValorEfectivo
+                    vt_ValorEfectivo = info.vt_ValorEfectivo,
+                    IdNivel = info.IdNivel
                 });
                 #endregion
 

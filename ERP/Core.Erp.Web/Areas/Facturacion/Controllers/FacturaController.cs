@@ -592,8 +592,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 lst_det = new List<fa_factura_det_Info>(),
                 lst_cuota = new List<fa_cuotas_x_doc_Info>(),
                 vt_tipoDoc = "FACT",
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                DescuentoReadOnly = false
             };
+            
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             List_cuotas.set_list(model.lst_cuota, model.IdTransaccionSession);
             cargar_combos(model);
@@ -749,13 +751,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_factura_det()
-        {
+        public ActionResult GridViewPartial_factura_det(bool DescuentoReadOnly = true)
+        {            
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             SessionFixed.IdNivelDescuento = Request.Params["NivelDescuento"] != null ? Request.Params["NivelDescuento"].ToString() : SessionFixed.IdNivelDescuento;
             SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();            
+            cargar_combos_detalle();
+            ViewBag.DescuentoReadOnly = DescuentoReadOnly;
             return PartialView("_GridViewPartial_factura_det", model);
         }
 
@@ -773,13 +776,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     info_det.pr_descripcion = producto.pr_descripcion_combo;
                     info_det.se_distribuye = producto.se_distribuye;
                     info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
+                    info_det.IdCod_Impuesto_Iva = producto.IdCod_Impuesto_Iva;
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
                         int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
                         var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
                         info_det.vt_Precio = producto.precio_1;
-                        info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                        if(info_det.vt_PorDescUnitario > 0)
+                            ViewBag.DescuentoReadOnly = false;
+                        else
+                            ViewBag.DescuentoReadOnly = true;
+                        info_det.vt_PorDescUnitario = info_det.vt_PorDescUnitario > 0 ? info_det.vt_PorDescUnitario : nivel.Porcentaje;
                     }
                 }
             }
@@ -803,13 +811,18 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     info_det.pr_descripcion = producto.pr_descripcion_combo;
                     info_det.tp_manejaInven = bus_producto_tipo.get_info(IdEmpresa, producto.IdProductoTipo).tp_ManejaInven;
                     info_det.se_distribuye = producto.se_distribuye;
+                    info_det.IdCod_Impuesto_Iva = producto.IdCod_Impuesto_Iva;
                     var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
                     if (cliente != null)
                     {
                         int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
                         var nivel = bus_nivelDescuento.GetInfo(IdEmpresa, nivel_precio);
                         info_det.vt_Precio = producto.precio_1;
-                        info_det.vt_PorDescUnitario = nivel.Porcentaje;
+                        if (info_det.vt_PorDescUnitario > 0)
+                            ViewBag.DescuentoReadOnly = false;
+                        else
+                            ViewBag.DescuentoReadOnly = true;
+                        info_det.vt_PorDescUnitario = info_det.vt_PorDescUnitario > 0 ? info_det.vt_PorDescUnitario : nivel.Porcentaje;
                     }
                 }
             }
