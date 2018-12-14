@@ -171,7 +171,7 @@ IF(@signo = '+')
 		where cab.IdEmpresa = @IdEmpresa and cab.IdSucursal = @IdSucursal and cab.IdMovi_inven_tipo = @IdMovi_inven_tipo and cab.IdNumMovi = @IdNumMovi and det.IdBodega = @IdBodega
 	END
 END
-
+/*
 BEGIN --VALIDO PARAMETROS PARA CONTABILIZACION
 PRINT 'VALIDO PARAMETROS PARA CONTABILIZACION'
 SELECT @Genera_Diario_Contable = Genera_Diario_Contable, @IdTipoCbte = IdTipoCbte FROM in_movi_inven_tipo
@@ -308,6 +308,6 @@ FROM #in_movi_inven_x_cbte_cble
 END
 
 DROP TABLE #in_movi_inven_x_cbte_cble
-
+*/
 RETURN @IdNumMovi_apro
 END

@@ -44,13 +44,15 @@
     CONSTRAINT [FK_fa_factura_ct_periodo] FOREIGN KEY ([IdEmpresa], [IdPeriodo]) REFERENCES [dbo].[ct_periodo] ([IdEmpresa], [IdPeriodo]),
     CONSTRAINT [FK_fa_factura_fa_cliente] FOREIGN KEY ([IdEmpresa], [IdCliente]) REFERENCES [dbo].[fa_cliente] ([IdEmpresa], [IdCliente]),
     CONSTRAINT [FK_fa_factura_fa_cliente_contactos] FOREIGN KEY ([IdEmpresa], [IdCliente], [IdContacto]) REFERENCES [dbo].[fa_cliente_contactos] ([IdEmpresa], [IdCliente], [IdContacto]),
-    CONSTRAINT [FK_fa_factura_fa_NivelDescuento1] FOREIGN KEY ([IdEmpresa], [IdNivel]) REFERENCES [dbo].[fa_NivelDescuento] ([IdEmpresa], [IdNivel]),
+    CONSTRAINT [FK_fa_factura_fa_NivelDescuento] FOREIGN KEY ([IdEmpresa], [IdNivel]) REFERENCES [dbo].[fa_NivelDescuento] ([IdEmpresa], [IdNivel]),
     CONSTRAINT [FK_fa_factura_fa_PuntoVta] FOREIGN KEY ([IdEmpresa], [IdSucursal], [IdPuntoVta]) REFERENCES [dbo].[fa_PuntoVta] ([IdEmpresa], [IdSucursal], [IdPuntoVta]),
     CONSTRAINT [FK_fa_factura_fa_Vendedor] FOREIGN KEY ([IdEmpresa], [IdVendedor]) REFERENCES [dbo].[fa_Vendedor] ([IdEmpresa], [IdVendedor]),
     CONSTRAINT [FK_fa_factura_tb_bodega] FOREIGN KEY ([IdEmpresa], [IdSucursal], [IdBodega]) REFERENCES [dbo].[tb_bodega] ([IdEmpresa], [IdSucursal], [IdBodega]),
     CONSTRAINT [FK_fa_factura_tb_mes] FOREIGN KEY ([vt_mes]) REFERENCES [dbo].[tb_mes] ([idMes]),
     CONSTRAINT [FK_fa_factura_tb_sis_Documento_Tipo_Talonario] FOREIGN KEY ([IdEmpresa], [vt_tipoDoc], [vt_serie2], [vt_serie1], [vt_NumFactura]) REFERENCES [dbo].[tb_sis_Documento_Tipo_Talonario] ([IdEmpresa], [CodDocumentoTipo], [PuntoEmision], [Establecimiento], [NumDocumento])
 );
+
+
 
 
 
