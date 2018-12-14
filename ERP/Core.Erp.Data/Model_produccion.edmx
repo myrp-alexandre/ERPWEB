@@ -48,6 +48,34 @@
           <Property Name="RealizaMovimiento" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwpro_Fabricacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwpro_Fabricacion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdFabricacion" />
+            <PropertyRef Name="egr_IdSucursal" />
+            <PropertyRef Name="egr_IdBodega" />
+            <PropertyRef Name="ing_IdSucursal" />
+            <PropertyRef Name="ing_IdBodega" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdFabricacion" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="egr_IdSucursal" Type="int" Nullable="false" />
+          <Property Name="egr_IdBodega" Type="int" Nullable="false" />
+          <Property Name="egr_IdMovi_inven_tipo" Type="int" />
+          <Property Name="egr_IdNumMovi" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ing_IdSucursal" Type="int" Nullable="false" />
+          <Property Name="ing_IdBodega" Type="int" Nullable="false" />
+          <Property Name="ing_IdMovi_inven_tipo" Type="int" />
+          <Property Name="ing_IdNumMovi" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwpro_FabricacionDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwpro_FabricacionDet">
           <Key>
@@ -96,6 +124,24 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpro_FabricacionDet' no tiene def
         <EntityContainer Name="Model_produccionStoreContainer">
           <EntitySet Name="pro_Fabricacion" EntityType="Self.pro_Fabricacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pro_FabricacionDet" EntityType="Self.pro_FabricacionDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwpro_Fabricacion" EntityType="Self.vwpro_Fabricacion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwpro_Fabricacion].[IdEmpresa] AS [IdEmpresa], 
+    [vwpro_Fabricacion].[IdFabricacion] AS [IdFabricacion], 
+    [vwpro_Fabricacion].[egr_IdSucursal] AS [egr_IdSucursal], 
+    [vwpro_Fabricacion].[egr_IdBodega] AS [egr_IdBodega], 
+    [vwpro_Fabricacion].[egr_IdMovi_inven_tipo] AS [egr_IdMovi_inven_tipo], 
+    [vwpro_Fabricacion].[egr_IdNumMovi] AS [egr_IdNumMovi], 
+    [vwpro_Fabricacion].[ing_IdSucursal] AS [ing_IdSucursal], 
+    [vwpro_Fabricacion].[ing_IdBodega] AS [ing_IdBodega], 
+    [vwpro_Fabricacion].[ing_IdMovi_inven_tipo] AS [ing_IdMovi_inven_tipo], 
+    [vwpro_Fabricacion].[ing_IdNumMovi] AS [ing_IdNumMovi], 
+    [vwpro_Fabricacion].[Fecha] AS [Fecha], 
+    [vwpro_Fabricacion].[Observacion] AS [Observacion], 
+    [vwpro_Fabricacion].[Estado] AS [Estado], 
+    [vwpro_Fabricacion].[Su_Descripcion] AS [Su_Descripcion]
+    FROM [dbo].[vwpro_Fabricacion] AS [vwpro_Fabricacion]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwpro_FabricacionDet" EntityType="Self.vwpro_FabricacionDet" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwpro_FabricacionDet].[IdEmpresa] AS [IdEmpresa], 
@@ -151,6 +197,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpro_FabricacionDet' no tiene def
             <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="vwpro_Fabricacion" EntityType="Model_produccion.vwpro_Fabricacion" />
         </EntityContainer>
         <EntityType Name="pro_Fabricacion">
           <Key>
@@ -227,6 +274,32 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpro_FabricacionDet' no tiene def
           <Property Type="Double" Name="stock" Nullable="false" />
           <Property Type="Double" Name="CantidadFabricada" Nullable="false" />
         </ComplexType>
+        <EntityType Name="vwpro_Fabricacion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdFabricacion" />
+            <PropertyRef Name="egr_IdSucursal" />
+            <PropertyRef Name="egr_IdBodega" />
+            <PropertyRef Name="ing_IdSucursal" />
+            <PropertyRef Name="ing_IdBodega" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdFabricacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="egr_IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="egr_IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="egr_IdMovi_inven_tipo" Type="Int32" />
+          <Property Name="egr_IdNumMovi" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ing_IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="ing_IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="ing_IdMovi_inven_tipo" Type="Int32" />
+          <Property Name="ing_IdNumMovi" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -305,6 +378,26 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpro_FabricacionDet' no tiene def
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="vwpro_Fabricacion">
+            <EntityTypeMapping TypeName="Model_produccion.vwpro_Fabricacion">
+              <MappingFragment StoreEntitySet="vwpro_Fabricacion">
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ing_IdNumMovi" ColumnName="ing_IdNumMovi" />
+                <ScalarProperty Name="ing_IdMovi_inven_tipo" ColumnName="ing_IdMovi_inven_tipo" />
+                <ScalarProperty Name="ing_IdBodega" ColumnName="ing_IdBodega" />
+                <ScalarProperty Name="ing_IdSucursal" ColumnName="ing_IdSucursal" />
+                <ScalarProperty Name="egr_IdNumMovi" ColumnName="egr_IdNumMovi" />
+                <ScalarProperty Name="egr_IdMovi_inven_tipo" ColumnName="egr_IdMovi_inven_tipo" />
+                <ScalarProperty Name="egr_IdBodega" ColumnName="egr_IdBodega" />
+                <ScalarProperty Name="egr_IdSucursal" ColumnName="egr_IdSucursal" />
+                <ScalarProperty Name="IdFabricacion" ColumnName="IdFabricacion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

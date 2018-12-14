@@ -7,6 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
         $(function () {
             CargarBodegaIngreso();
@@ -163,7 +164,6 @@
         $("#ModalFacturas").modal("hide");
     };
 </script>
-
 @using (Html.BeginForm("Modificar", "Fabricacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
