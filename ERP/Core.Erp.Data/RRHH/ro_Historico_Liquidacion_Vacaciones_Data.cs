@@ -163,7 +163,7 @@ namespace Core.Erp.Data.RRHH
                         contact.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                         contact.FechaHoraAnul = DateTime.Now;
                         contact.MotiAnula = info.MotiAnula;
-                        context.SaveChanges();
+                    context.SaveChanges();
                     }
 
                     return true;

@@ -12,11 +12,10 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
-                List<ro_Solicitud_Vacaciones_x_empleado_Info> Lista;
+                List<ro_Solicitud_Vacaciones_x_empleado_Info> Lista = new List<ro_Solicitud_Vacaciones_x_empleado_Info>();
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    if (mostrar_anulados)
                         Lista = (from q in Context.vwRo_Solicitud_Vacaciones
                                  where q.IdEmpresa == IdEmpresa
                                  select new ro_Solicitud_Vacaciones_x_empleado_Info
@@ -45,40 +44,10 @@ namespace Core.Erp.Data.RRHH
                                      pe_nombre_completo=q.pe_apellido+" "+q.pe_nombre,
                                      Estado = q.Estado,
                                      IdLiquidacion=q.IdLiquidacion,
-
+                                     Estado_liquidacion=q.Estado_liquidacion==null?"A":q.Estado_liquidacion,
                                      EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
-                    else
-                        Lista = (from q in Context.vwRo_Solicitud_Vacaciones
-                                 where q.IdEmpresa == IdEmpresa
-                                 && q.Estado == "A"
-                                 select new ro_Solicitud_Vacaciones_x_empleado_Info
-                                 {
-                                     IdEmpresa = q.IdEmpresa,
-                                     IdEmpleado = q.IdEmpleado,
-                                     IdSolicitud = q.IdSolicitud,
-                                     IdVacacion = q.IdVacacion,
-                                     IdEmpleado_aprue = q.IdEmpleado_aprue,
-                                     IdEmpleado_remp = q.IdEmpleado_remp,
-                                     IdEstadoAprobacion = q.IdEstadoAprobacion,
-                                     Fecha = q.Fecha,
-                                     AnioServicio = q.AnioServicio,
-                                     Dias_q_Corresponde = q.Dias_q_Corresponde,
-                                     Dias_a_disfrutar = q.Dias_a_disfrutar,
-                                     Dias_pendiente = q.Dias_pendiente,
-                                     Anio_Desde = q.Anio_Desde,
-                                     Anio_Hasta = q.Anio_Hasta,
-                                     Fecha_Desde = q.Fecha_Desde,
-                                     Fecha_Hasta = q.Fecha_Hasta,
-                                     Fecha_Retorno = q.Fecha_Retorno,
-                                     Observacion = q.Observacion,
-                                     Gozadas_Pgadas = q.Gozadas_Pgadas,
-                                     Estado = q.Estado,
-                                     IdLiquidacion = q.IdLiquidacion,
-
-                                     EstadoBool = q.Estado == "A" ? true : false
-
-                                 }).ToList();
+                    
                 }
 
                 return Lista;

@@ -20,7 +20,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         List<ro_Historico_Liquidacion_Vacaciones_Info> lst_vacaciones = new List<ro_Historico_Liquidacion_Vacaciones_Info>();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         List<ro_Historico_Liquidacion_Vacaciones_Det_Info> lst_detalle = new List<ro_Historico_Liquidacion_Vacaciones_Det_Info>();
-        ro_Historico_Liquidacion_Vacaciones_Det_Info_lst lst_detalle_lst = new ro_Historico_Liquidacion_Vacaciones_Det_Info_lst();
+        ro_Historico_Liquidacion_Vacaciones_Det_Info_lst ro_Historico_Liquidacion_Vacaciones_Det_Info = new ro_Historico_Liquidacion_Vacaciones_Det_Info_lst();
         ro_Historico_Liquidacion_Vacaciones_Info info_liquidacion = new ro_Historico_Liquidacion_Vacaciones_Info();
         ro_Solicitud_Vacaciones_x_empleado_Bus bus_solicitud = new ro_Solicitud_Vacaciones_x_empleado_Bus();
         public static int IdSolicitud { get; set; }
@@ -83,7 +83,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                lst_detalle = Session["detalle"] as List<ro_Historico_Liquidacion_Vacaciones_Det_Info>;
+                lst_detalle = ro_Historico_Liquidacion_Vacaciones_Det_Info.get_list();
                 return PartialView("_GridViewPartial_vacaciones_liquidadas_det", lst_detalle);
             }
             catch (Exception)
@@ -101,7 +101,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 if (ModelState.IsValid)
                 {
                     string mensaje = "";
-                    info.detalle = Session["detalle"] as List<ro_Historico_Liquidacion_Vacaciones_Det_Info>;
+                    info.detalle = ro_Historico_Liquidacion_Vacaciones_Det_Info.get_list();
                     if (info.detalle != null)
                     {
                         foreach (var item in info.detalle)
@@ -169,7 +169,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 if (ModelState.IsValid)
                 {
                     string mensaje = "";
-                    info.detalle = Session["detalle"] as List<ro_Historico_Liquidacion_Vacaciones_Det_Info>;
+                    info.detalle = ro_Historico_Liquidacion_Vacaciones_Det_Info.get_list();
                     if(info.detalle!=null)
                     {
                         foreach (var item in info.detalle)
@@ -212,7 +212,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = GetIdEmpresa();
                 info_liquidacion = bus_liquidacion.get_info(IdEmpresa, IdEmpleado, IdLiquidacion);
-                Session["detalle"] = info_liquidacion.detalle;
+                ro_Historico_Liquidacion_Vacaciones_Det_Info.set_list( info_liquidacion.detalle);
                 cargar_combo();
                 return View(info_liquidacion);
             }
@@ -250,7 +250,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = GetIdEmpresa();
                 info_liquidacion = bus_liquidacion.get_info(IdEmpresa, IdEmpleado, IdLiquidacion);
-                Session["detalle"] = info_liquidacion.detalle;
+                ro_Historico_Liquidacion_Vacaciones_Det_Info.set_list( info_liquidacion.detalle);
                 cargar_combo();
                 return View(info_liquidacion);
 
@@ -283,14 +283,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.lst_empleado = bus_empleado.get_list_combo(IdEmpresa);
             ViewBag.lst_vacaciones = lst_vacaciones;
         }
-        public JsonResult get_list_vacaciones(decimal IdEmpleado)
-        {
-            IdEmpresa = GetIdEmpresa();
-          //  lst_vacaciones = bus_vacaciones.GrabarBD(IdEmpresa, IdEmpleado);
-            Session["lst_vacaciones"] = lst_vacaciones;
-
-            return Json(lst_vacaciones, JsonRequestBehavior.AllowGet);
-        }
+   
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_Historico_Liquidacion_Vacaciones_Det_Info info_det)
@@ -306,8 +299,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             info_det.Total_Vacaciones = info_det.Total_Remuneracion / 24;
             info_det.Valor_Cancelar = (info_det.Total_Vacaciones / ro_solicitud.Dias_q_Corresponde)*ro_solicitud.Dias_a_disfrutar;
 
-            lst_detalle_lst.UpdateRow(info_det);
-            model.detalle = lst_detalle_lst.get_list() as List<ro_Historico_Liquidacion_Vacaciones_Det_Info>;
+            ro_Historico_Liquidacion_Vacaciones_Det_Info.UpdateRow(info_det);
+            model.detalle = ro_Historico_Liquidacion_Vacaciones_Det_Info.get_list() as List<ro_Historico_Liquidacion_Vacaciones_Det_Info>;
             return PartialView("_GridViewPartial_vacaciones_liquidadas_det", model.detalle);
         }
 
@@ -317,20 +310,21 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
     public class ro_Historico_Liquidacion_Vacaciones_Det_Info_lst
     {
+        string variable = "ro_Historico_Liquidacion_Vacaciones_Det_Info";
         public List<ro_Historico_Liquidacion_Vacaciones_Det_Info> get_list()
         {
-            if (HttpContext.Current.Session["detalle"] == null)
+            if (HttpContext.Current.Session[variable] == null)
             {
                 List<ro_Historico_Liquidacion_Vacaciones_Det_Info> list = new List<ro_Historico_Liquidacion_Vacaciones_Det_Info>();
 
-                HttpContext.Current.Session["detalle"] = list;
+                HttpContext.Current.Session[variable] = list;
             }
-            return (List<ro_Historico_Liquidacion_Vacaciones_Det_Info>)HttpContext.Current.Session["detalle"];
+            return (List<ro_Historico_Liquidacion_Vacaciones_Det_Info>)HttpContext.Current.Session[variable];
         }
 
         public void set_list(List<ro_Historico_Liquidacion_Vacaciones_Det_Info> list)
         {
-            HttpContext.Current.Session["detalle"] = list;
+            HttpContext.Current.Session[variable] = list;
         }
 
 
