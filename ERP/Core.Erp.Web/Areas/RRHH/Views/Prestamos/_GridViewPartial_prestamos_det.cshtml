@@ -53,6 +53,7 @@
             {
 
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
 
@@ -92,6 +93,8 @@
                 sp.Width = Unit.Percentage(100);
 
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
         settings.Columns.Add(column =>
         {
@@ -122,6 +125,8 @@
                 p.DataSource = ViewBag.lst_catalogo;
                 p.Width = Unit.Percentage(100);
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "TotalCuota");
 
