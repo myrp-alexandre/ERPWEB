@@ -22,6 +22,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         List<ro_Historico_Liquidacion_Vacaciones_Det_Info> lst_detalle = new List<ro_Historico_Liquidacion_Vacaciones_Det_Info>();
         ro_Historico_Liquidacion_Vacaciones_Det_Info_lst lst_detalle_lst = new ro_Historico_Liquidacion_Vacaciones_Det_Info_lst();
         ro_Historico_Liquidacion_Vacaciones_Info info_liquidacion = new ro_Historico_Liquidacion_Vacaciones_Info();
+        ro_Solicitud_Vacaciones_x_empleado_Bus bus_solicitud = new ro_Solicitud_Vacaciones_x_empleado_Bus();
         public static int IdSolicitud { get; set; }
         int IdEmpresa = 0;
 
@@ -294,11 +295,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_Historico_Liquidacion_Vacaciones_Det_Info info_det)
         {
-            if (ModelState.IsValid)
-                lst_detalle_lst.UpdateRow(info_det);
-            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdSolicitud"]) ? Request.Params["IdSolicitud"].ToString() : "-1";
-
+            bus_solicitud = new ro_Solicitud_Vacaciones_x_empleado_Bus();
             ro_Historico_Liquidacion_Vacaciones_Info model = new ro_Historico_Liquidacion_Vacaciones_Info();
+            string IdSolicitud = !string.IsNullOrEmpty(Request.Params["IdSolicitud"]) ? Request.Params["IdSolicitud"].ToString() : "0";
+            string IdEmpleado = !string.IsNullOrEmpty(Request.Params["IdEmpleado"]) ? Request.Params["IdEmpleado"].ToString() : "0";
+
+            var ro_solicitud = bus_solicitud.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(IdEmpleado), Convert.ToInt32(IdSolicitud));
+            if (ro_solicitud == null)
+                ro_solicitud = new ro_Solicitud_Vacaciones_x_empleado_Info();
+            info_det.Total_Vacaciones = info_det.Total_Remuneracion / 24;
+            info_det.Valor_Cancelar = (info_det.Total_Vacaciones / ro_solicitud.Dias_q_Corresponde)*ro_solicitud.Dias_a_disfrutar;
+
+            lst_detalle_lst.UpdateRow(info_det);
             model.detalle = lst_detalle_lst.get_list() as List<ro_Historico_Liquidacion_Vacaciones_Det_Info>;
             return PartialView("_GridViewPartial_vacaciones_liquidadas_det", model.detalle);
         }
