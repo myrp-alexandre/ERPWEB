@@ -77,6 +77,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                if( bus_rubro_acumulados.si_existe(info))
                 {
                     ViewBag.mensaje = "El empleado tiene una solicitud vigente para el rubro seleccionado";
+                    cargar_combos();
+                    return View(info);
                 }
                 if (ModelState.IsValid)
                 {
