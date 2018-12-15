@@ -8,11 +8,11 @@ namespace Core.Erp.Bus.RRHH
     {
 
         ro_Solicitud_Vacaciones_x_empleado_Data odata = new ro_Solicitud_Vacaciones_x_empleado_Data();
-        public List<ro_Solicitud_Vacaciones_x_empleado_Info> get_list(int IdEmpresa, bool estado)
+        public List<ro_Solicitud_Vacaciones_x_empleado_Info> get_list(int IdEmpresa,  DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, estado);
+                return odata.get_list(IdEmpresa, FechaInicio, FechaFin);
             }
             catch (Exception)
             {

@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_vacaciones_liquidadas";
-        settings.CallbackRouteValues = new { Controller = "LiquidacionVacaciones", Action = "GridViewPartial_vacaciones_liquidadas" };
+        settings.CallbackRouteValues = new { Controller = "LiquidacionVacaciones", Action = "GridViewPartial_vacaciones_liquidadas", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdLiquidacion";
@@ -51,7 +51,15 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
+        settings.HtmlRowPrepared = (s, e) =>
+        {
+            if (Convert.ToString(e.GetValue("Estado")) == "I")
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
 
+
+        };
         settings.Columns.Add(c =>
         {
             c.Caption = "#";

@@ -71,12 +71,12 @@ namespace Core.Erp.Bus.RRHH
 
         }
 
-        public List<ro_Historico_Liquidacion_Vacaciones_Info> get_list(int IdEmpresa)
+        public List<ro_Historico_Liquidacion_Vacaciones_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
 
-                return data.get_list(IdEmpresa,false);
+                return data.get_list(IdEmpresa,FechaInicio, FechaFin);
             }
             catch (Exception)
             {

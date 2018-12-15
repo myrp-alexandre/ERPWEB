@@ -8,16 +8,19 @@ namespace Core.Erp.Data.RRHH
 {
     public class ro_Solicitud_Vacaciones_x_empleado_Data
     {
-        public List<ro_Solicitud_Vacaciones_x_empleado_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<ro_Solicitud_Vacaciones_x_empleado_Info> get_list(int IdEmpresa, DateTime fechaInicio, DateTime FechaFin)
         {
             try
             {
                 List<ro_Solicitud_Vacaciones_x_empleado_Info> Lista = new List<ro_Solicitud_Vacaciones_x_empleado_Info>();
-
+                DateTime fi = fechaInicio.Date;
+                DateTime ff = FechaFin.Date;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                         Lista = (from q in Context.vwRo_Solicitud_Vacaciones
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.Fecha_Hasta>=fi
+                                 && q.Fecha_Hasta <= ff
                                  select new ro_Solicitud_Vacaciones_x_empleado_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

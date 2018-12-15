@@ -7,6 +7,14 @@
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
@@ -98,11 +106,11 @@
         </div>
     </div>
 
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index","EmpleadoRubroAcumulado",new { Area = "RRHH" },null)">Cancelar</a>
-        </div>
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
-        }
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","EmpleadoRubroAcumulado",new { Area = "RRHH" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

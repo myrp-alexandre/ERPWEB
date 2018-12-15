@@ -58,5 +58,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public bool si_existe(ro_empleado_x_rubro_acumulado_Info info)
+        {
+            try
+            {
+                return odata.si_existe(info.IdEmpresa, info.IdEmpleado, info.IdRubro);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
