@@ -5,7 +5,7 @@
         settings.Name = "GridView_vacaciones_liquidadas_det";
         settings.CallbackRouteValues = new { Controller = "LiquidacionVacaciones", Action = "GridViewPartial_vacaciones_liquidadas_det" };
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "LiquidacionVacaciones", Action = "EditingUpdate", Area = "RRHH" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "Sec";
@@ -64,6 +64,7 @@
             column.Caption = "$Vacaciones";
             column.Width = Unit.Percentage(15);
             column.PropertiesEdit.DisplayFormatString = "n2";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
         settings.Columns.Add(column =>
@@ -72,6 +73,7 @@
             column.Caption = "$Valor cancela";
             column.PropertiesEdit.DisplayFormatString = "n2";
             column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total_Remuneracion");
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Total_Vacaciones");
@@ -79,6 +81,7 @@
         settings.ClientSideEvents.FocusedCellChanging = "function(s,e,){get_fila()}";
 
         settings.Settings.ShowFooter = true;
+        settings.ClientSideEvents.BeginCallback = "function(s,e){e.customArgs['IdSolicitud'] =  $('#IdSolicitud').val(); e.customArgs['IdEmpleado'] =  $('#IdEmpleado').val();}";
 
     });
     if (ViewData["EditError"] != null){

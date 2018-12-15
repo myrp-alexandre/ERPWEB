@@ -20,8 +20,8 @@
 
 @using (Html.BeginForm("Nuevo", "LiquidacionVacaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdSolicitud);
-    @Html.HiddenFor(q => q.IdEmpleado);
+    @Html.HiddenFor(q => q.IdSolicitud, new { @id= "IdSolicitud" });
+    @Html.HiddenFor(q => q.IdEmpleado, new { @id = "IdEmpleado" });
 
     <div class="row">
         <div class="col-md-12">
@@ -42,7 +42,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Fecha_Desde">Fecha desde*</label>
-                    @Html.TextBoxFor(q => q.Fecha_Desde, new { @class = "form-control", @id = "FechaInicio", @disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.Fecha_Desde, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaInicio", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -43,7 +43,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Fecha_Desde">Fecha desde*</label>
-                    @Html.TextBoxFor(q => q.Fecha_Desde, new { @class = "form-control", @id = "FechaInicio", @disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.Fecha_Desde, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "FechaInicio", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
                 </div>
             </div>

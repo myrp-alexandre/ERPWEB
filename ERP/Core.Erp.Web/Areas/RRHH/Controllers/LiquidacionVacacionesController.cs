@@ -22,6 +22,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         List<ro_Historico_Liquidacion_Vacaciones_Det_Info> lst_detalle = new List<ro_Historico_Liquidacion_Vacaciones_Det_Info>();
         ro_Historico_Liquidacion_Vacaciones_Det_Info_lst lst_detalle_lst = new ro_Historico_Liquidacion_Vacaciones_Det_Info_lst();
         ro_Historico_Liquidacion_Vacaciones_Info info_liquidacion = new ro_Historico_Liquidacion_Vacaciones_Info();
+        public static int IdSolicitud { get; set; }
         int IdEmpresa = 0;
 
         #region Metodos ComboBox bajo demanda
@@ -145,6 +146,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 };
                 IdEmpresa = GetIdEmpresa();
                 info = bus_liquidacion.obtener_valores(IdEmpresa, IdEmpleado, IdSolicitud);
+                IdSolicitud = info.IdSolicitud;
                 Session["detalle"] = info.detalle;
                 cargar_combo();
                 return View(info);
@@ -294,6 +296,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             if (ModelState.IsValid)
                 lst_detalle_lst.UpdateRow(info_det);
+            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdSolicitud"]) ? Request.Params["IdSolicitud"].ToString() : "-1";
+
             ro_Historico_Liquidacion_Vacaciones_Info model = new ro_Historico_Liquidacion_Vacaciones_Info();
             model.detalle = lst_detalle_lst.get_list() as List<ro_Historico_Liquidacion_Vacaciones_Det_Info>;
             return PartialView("_GridViewPartial_vacaciones_liquidadas_det", model.detalle);

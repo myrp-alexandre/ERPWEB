@@ -75,8 +75,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 IdEmpresa = GetIdEmpresa();
                 List<ro_historico_vacaciones_x_empleado_Info> model = new List<ro_historico_vacaciones_x_empleado_Info>();
                 model=ro_historico_vacaciones_x_empleado_Info_list.get_list();
-                if (model.Count() == 0)
-                    model = new List<ro_historico_vacaciones_x_empleado_Info>();
+                
                 return PartialView("_cmb_vacaciones", model);
             }
             catch (Exception)
@@ -144,7 +143,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     Fecha_Desde = DateTime.Now,
                     Fecha_Hasta = DateTime.Now,
                     Fecha_Retorno = DateTime.Now,
-                    IdVacacion = 1
+                    IdVacacion = 1,
+                    IdEmpleado=1
                 };
                 cargar_combo();
                 return View(info);
