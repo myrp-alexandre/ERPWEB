@@ -210,9 +210,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 IdEmpresa = GetIdEmpresa();
                 lst_vacaciones = bus_vacaciones.get_lst_vaciones_x_empleado(IdEmpresa, IdEmpleado);
                 ro_historico_vacaciones_x_empleado_Info_list.set_list(lst_vacaciones);
-
                 cargar_combo();
-                return View(bus_solicitud.get_info(GetIdEmpresa(), IdEmpleado, IdSolicitud));
+                ro_Solicitud_Vacaciones_x_empleado_Info model = bus_solicitud.get_info(GetIdEmpresa(), IdEmpleado, IdSolicitud);
+                return View(model);
 
             }
             catch (Exception)
@@ -227,7 +227,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-
                 if (!bus_solicitud.anularDB(info))
                     return View(info);
                 else

@@ -21,6 +21,8 @@
 {
     @Html.HiddenFor(q => q.IdSolicitud);
     @Html.HiddenFor(q => q.IdEmpleado);
+    @Html.HiddenFor(q => q.IdVacacion);
+    @Html.HiddenFor(q => q.IdEmpresa);
 
 
     <div class="row">
@@ -50,14 +52,53 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdVacacion">Periodo de vacaciones*</label>
-                    @Html.Action("cmb_vacaciones", Model.IdVacacion)
-                    @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
-
+            <div class="form-group">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Fecha_Desde">Periodo inicio*</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            @Html.DevExpress().DateEditFor(q => q.Anio_Desde, settings =>
+                       {
+                           settings.Name = "Anio_Desde";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           settings.ReadOnly = true;
+                       }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
                 </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Fecha_Hasta">Periodo fin*</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            @Html.DevExpress().DateEditFor(q => q.Anio_Hasta, settings =>
+                       {
+                           settings.Name = "Anio_Hasta";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           settings.ReadOnly = true;
+
+                       }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.Fecha_Hasta, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

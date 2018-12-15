@@ -1,18 +1,28 @@
 ﻿@model Core.Erp.Info.RRHH.ro_Solicitud_Vacaciones_x_empleado_Info
 @{
-    ViewBag.Title = "Anular solicitud vacaciones";
+    ViewBag.Title = "Anular Solicitud";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
 @using (Html.BeginForm("Anular", "Vacaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdSolicitud)
-    @Html.HiddenFor(q => q.IdEmpleado)
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdSolicitud);
+    @Html.HiddenFor(q => q.IdEmpleado);
+    @Html.HiddenFor(q => q.IdVacacion);
+    @Html.HiddenFor(q => q.IdEmpresa);
 
 
     <div class="row">
@@ -42,14 +52,53 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdVacacion">Periodo de vacaciones*</label>
-                    @Html.Action("cmb_vacaciones", Model.IdVacacion)
-                    @Html.ValidationMessageFor(q => q.IdVacacion, "", new { @class = "text-danger" })
-
+            <div class="form-group">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Fecha_Desde">Periodo inicio*</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            @Html.DevExpress().DateEditFor(q => q.Anio_Desde, settings =>
+                       {
+                           settings.Name = "Anio_Desde";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           settings.ReadOnly = true;
+                       }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.Fecha_Desde, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
                 </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Fecha_Hasta">Periodo fin*</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            @Html.DevExpress().DateEditFor(q => q.Anio_Hasta, settings =>
+                       {
+                           settings.Name = "Anio_Hasta";
+                           settings.Properties.UseMaskBehavior = true;
+                           settings.Properties.EditFormat = EditFormat.Date;
+                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           settings.ReadOnly = true;
+
+                       }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.Fecha_Hasta, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -145,6 +194,9 @@
         </div>
     </div>
 
+
+
+
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","Vacaciones",new { Area = "RRHH" },null)">Cancelar</a>
@@ -152,5 +204,33 @@
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
-
 }
+
+
+
+<script>
+    function calcular_vacaciones()
+            {
+                 var datos = {
+                     IdEmpleado: IdEmpleado.GetValue()
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("get_list_vacaciones", "Vacaciones", new { Area = "RRHH" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data)
+                    {
+                        IdVacacion.PerformCallback();
+
+                    },
+                    error: function (error)
+                    {
+                    }
+                    });
+};
+</script>
