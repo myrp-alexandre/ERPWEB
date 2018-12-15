@@ -21,6 +21,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         List<ro_historico_vacaciones_x_empleado_Info> lst_vacaciones = new List<ro_historico_vacaciones_x_empleado_Info>();
         ro_Solicitud_Vacaciones_x_empleado_Bus bus_solicitud = new ro_Solicitud_Vacaciones_x_empleado_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
+        ro_historico_vacaciones_x_empleado_Info_list ro_historico_vacaciones_x_empleado_Info_list = new ro_historico_vacaciones_x_empleado_Info_list();
         #endregion
 
 
@@ -94,7 +95,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     string mensaje = "";
                     ro_historico_vacaciones_x_empleado_Info info_historico = null;
-                    lst_vacaciones = Session["lst_vacaciones"] as List<ro_historico_vacaciones_x_empleado_Info>;
+                    lst_vacaciones =ro_historico_vacaciones_x_empleado_Info_list.get_list();
                     info_historico = lst_vacaciones.Where(v => v.IdVacacion == info.IdVacacion).FirstOrDefault();
                     info.Dias_a_disfrutar = Convert.ToInt32((info.Fecha_Hasta.AddDays(1) - info.Fecha_Desde).TotalDays);
                     info.Dias_q_Corresponde = info_historico.DiasGanado;
@@ -164,7 +165,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     string mensaje = "";
                     ro_historico_vacaciones_x_empleado_Info info_historico = null;
-                    lst_vacaciones = Session["lst_vacaciones"] as List<ro_historico_vacaciones_x_empleado_Info>;
+                    lst_vacaciones = ro_historico_vacaciones_x_empleado_Info_list.get_list();
                     info_historico = lst_vacaciones.Where(v => v.IdVacacion == info.IdVacacion).FirstOrDefault();
                     info.Dias_a_disfrutar = Convert.ToInt32((info.Fecha_Hasta - info.Fecha_Desde).TotalDays)+1;
                     info.Dias_q_Corresponde = info_historico.DiasGanado;
@@ -207,7 +208,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = GetIdEmpresa();
                 lst_vacaciones = bus_vacaciones.get_lst_vaciones_x_empleado(IdEmpresa, IdEmpleado);
-                Session["lst_vacaciones"] = lst_vacaciones;
+                ro_historico_vacaciones_x_empleado_Info_list.set_list(lst_vacaciones);
 
                 cargar_combo();
                 return View(bus_solicitud.get_info(GetIdEmpresa(), IdEmpleado, IdSolicitud));
@@ -243,9 +244,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                IdEmpresa = GetIdEmpresa();
-                return View(bus_solicitud.get_info(IdEmpresa, IdEmpleado, IdSolicitud));
 
+                IdEmpresa = GetIdEmpresa();
+                lst_vacaciones = bus_vacaciones.get_lst_vaciones_x_empleado(IdEmpresa, IdEmpleado);
+                ro_historico_vacaciones_x_empleado_Info_list.set_list(lst_vacaciones);
+
+                cargar_combo();
+                return View(bus_solicitud.get_info(GetIdEmpresa(), IdEmpleado, IdSolicitud));
             }
             catch (Exception)
             {
@@ -287,10 +292,32 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [ValidateInput(false)]
         public ActionResult GridLookupPartial_vacaciones()
         {
-            lst_vacaciones = Session["lst_vacaciones"] as List<ro_historico_vacaciones_x_empleado_Info>;
+            lst_vacaciones = ro_historico_vacaciones_x_empleado_Info_list.get_list();
             return PartialView("_GridViewPartial_vaciones_periodos", lst_vacaciones);
         }
 
          
+    }
+
+
+    public class ro_historico_vacaciones_x_empleado_Info_list
+    {
+        string variable = "";
+        public List<ro_historico_vacaciones_x_empleado_Info> get_list()
+        {
+            if (HttpContext.Current.Session[variable] == null)
+            {
+                List<ro_historico_vacaciones_x_empleado_Info> list = new List<ro_historico_vacaciones_x_empleado_Info>();
+
+                HttpContext.Current.Session[variable] = list;
+            }
+            return (List<ro_historico_vacaciones_x_empleado_Info>)HttpContext.Current.Session[variable];
+        }
+
+        public void set_list(List<ro_historico_vacaciones_x_empleado_Info> list)
+        {
+            HttpContext.Current.Session[variable] = list;
+        }
+
     }
 }
