@@ -197,7 +197,6 @@ namespace Core.Erp.Data.RRHH
                       && q.IdEmpleado == info.IdEmpleado
                       && q.IdVacacion == info.IdVacacion);
                     Entity_his.DiasTomados = info.Dias_a_disfrutar;
-
                     if (Entity_his == null)
                         return false;
                     Context.SaveChanges();

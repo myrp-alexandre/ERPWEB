@@ -10,9 +10,12 @@ namespace Core.Erp.Info.RRHH
    public class ro_Solicitud_Vacaciones_x_empleado_Info
     {
         public int IdEmpresa { get; set; }
+        [Required(ErrorMessage = "El campo empleado es obligatorio")]
         public decimal IdEmpleado { get; set; }
         public int IdSolicitud { get; set; }
         public int IdVacacion { get; set; }
+        [Required(ErrorMessage = "El campo empleado autoriza es obligatorio")]
+
         public decimal IdEmpleado_aprue { get; set; }
         public Nullable<decimal> IdEmpleado_remp { get; set; }
         public string IdEstadoAprobacion { get; set; }

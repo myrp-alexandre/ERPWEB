@@ -74,8 +74,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdEmpresa = GetIdEmpresa();
                 List<ro_historico_vacaciones_x_empleado_Info> model = new List<ro_historico_vacaciones_x_empleado_Info>();
-                model=Session["lst_vacaciones"] as List<ro_historico_vacaciones_x_empleado_Info>;
-               
+                model=ro_historico_vacaciones_x_empleado_Info_list.get_list();
+                if (model.Count() == 0)
+                    model = new List<ro_historico_vacaciones_x_empleado_Info>();
                 return PartialView("_cmb_vacaciones", model);
             }
             catch (Exception)
@@ -285,7 +286,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             IdEmpresa = GetIdEmpresa();
             lst_vacaciones = bus_vacaciones.get_lst_vaciones_x_empleado(IdEmpresa, IdEmpleado);
-            Session["lst_vacaciones"]=lst_vacaciones;
+           ro_historico_vacaciones_x_empleado_Info_list.set_list(lst_vacaciones);
 
            return Json(lst_vacaciones, JsonRequestBehavior.AllowGet);
         }

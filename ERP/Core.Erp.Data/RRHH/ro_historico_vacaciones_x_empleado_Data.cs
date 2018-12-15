@@ -54,7 +54,7 @@ namespace Core.Erp.Data.RRHH
                     ro_historico_vacaciones_x_empleado data = new ro_historico_vacaciones_x_empleado();
                     data.IdEmpresa = info.IdEmpresa;
                     data.IdEmpleado = info.IdEmpleado;
-                    data.IdVacacion = info.IdVacacion;
+                    data.IdVacacion = get_id(info.IdEmpresa,info.IdEmpleado);
                     data.IdPeriodo_Inicio = info.IdPeriodo_Inicio;
                     data.IdPeriodo_Fin = info.IdPeriodo_Fin;
                     data.FechaIni = info.FechaIni;
@@ -83,9 +83,7 @@ namespace Core.Erp.Data.RRHH
                     && a.IdEmpleado == info.IdEmpleado
                     && a.IdPeriodo_Inicio == info.IdPeriodo_Inicio
                     && a.IdPeriodo_Fin==info.IdPeriodo_Fin);
-
                     data.DiasGanado = info.DiasGanado;
-                    data.DiasTomados = info.DiasTomados;
                     contex.SaveChanges();
                 }
                 return true;
@@ -109,7 +107,10 @@ namespace Core.Erp.Data.RRHH
                                 && a.IdPeriodo_Fin == info.IdPeriodo_Fin
                                 select a).Count();
 
-                    if (cont > 0) { valorRetornar = true; }
+                    if (cont > 0)
+                    {
+                        valorRetornar = true;
+                    }
                     else { valorRetornar = false; }
                 }
                 return valorRetornar;
@@ -118,6 +119,32 @@ namespace Core.Erp.Data.RRHH
             {
                
                 throw ;
+            }
+        }
+
+
+        public int get_id(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                using (Entities_rrhh contex = new Entities_rrhh())
+                {
+                    var  resultado = (from a in contex.ro_historico_vacaciones_x_empleado
+                                where a.IdEmpresa == IdEmpresa && a.IdEmpleado == IdEmpleado                             
+                                select a);
+
+                    if (resultado.Count() > 0)
+                    {
+                       return Convert.ToInt32( resultado.Max(v => v.IdVacacion)+1);
+                    }
+                    else
+                        return 1;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }
