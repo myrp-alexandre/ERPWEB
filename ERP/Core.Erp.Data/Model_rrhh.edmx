@@ -7440,7 +7440,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Parameter Name="IdRol" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="vwro_nomina_sin_percebir_sueldo" EntityType="Model_rrhh.vwro_nomina_sin_percebir_sueldo" />
-          <EntitySet Name="ro_Parametros" EntityType="Model_rrhh.ro_Parametros" />
           <EntitySet Name="ro_empleado" EntityType="Model_rrhh.ro_empleado" />
           <EntitySet Name="vwro_empleado_datos_generales" EntityType="Model_rrhh.vwro_empleado_datos_generales" />
           <AssociationSet Name="FK_ro_Acta_Finiquito_ro_empleado" Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado">
@@ -7652,6 +7651,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
+          <EntitySet Name="ro_Parametros" EntityType="Model_rrhh.ro_Parametros" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -9166,26 +9166,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="ro_Parametros">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_AsientoSueldoXPagar" Type="Int32" Nullable="false" />
-          <Property Name="Sueldo_basico" Type="Double" Nullable="false" />
-          <Property Name="Porcentaje_aporte_pers" Type="Double" Nullable="false" />
-          <Property Name="Porcentaje_aporte_patr" Type="Double" Nullable="false" />
-          <Property Name="IdRubro_acta_finiquito" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="genera_op_x_pago" Type="Boolean" Nullable="false" />
-          <Property Name="Genera_op_x_pago_x_empleao" Type="Boolean" Nullable="false" />
-          <Property Name="Genera_op_por_liq_vacaciones" Type="Boolean" Nullable="false" />
-          <Property Name="Genera_op_por_acta_finiquito" Type="Boolean" Nullable="false" />
-          <Property Name="Genera_op_por_prestamos" Type="Boolean" Nullable="false" />
-          <Property Name="IdTipo_op_vacaciones" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipo_op_prestamos" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipo_op_acta_finiquito" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipo_op_sueldo_por_pagar" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="ro_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -10240,6 +10220,26 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ro_Parametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_AsientoSueldoXPagar" Type="Int32" Nullable="false" />
+          <Property Name="Sueldo_basico" Type="Double" Nullable="false" />
+          <Property Name="Porcentaje_aporte_pers" Type="Double" Nullable="false" />
+          <Property Name="Porcentaje_aporte_patr" Type="Double" Nullable="false" />
+          <Property Name="IdRubro_acta_finiquito" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="genera_op_x_pago" Type="Boolean" Nullable="false" />
+          <Property Name="Genera_op_x_pago_x_empleao" Type="Boolean" Nullable="false" />
+          <Property Name="Genera_op_por_liq_vacaciones" Type="Boolean" Nullable="false" />
+          <Property Name="Genera_op_por_acta_finiquito" Type="Boolean" Nullable="false" />
+          <Property Name="Genera_op_por_prestamos" Type="Boolean" Nullable="false" />
+          <Property Name="IdTipo_op_vacaciones" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_op_prestamos" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_op_acta_finiquito" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_op_sueldo_por_pagar" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12089,27 +12089,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ro_Parametros">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_Parametros">
-              <MappingFragment StoreEntitySet="ro_Parametros">
-                <ScalarProperty Name="IdTipo_op_sueldo_por_pagar" ColumnName="IdTipo_op_sueldo_por_pagar" />
-                <ScalarProperty Name="IdTipo_op_acta_finiquito" ColumnName="IdTipo_op_acta_finiquito" />
-                <ScalarProperty Name="IdTipo_op_prestamos" ColumnName="IdTipo_op_prestamos" />
-                <ScalarProperty Name="IdTipo_op_vacaciones" ColumnName="IdTipo_op_vacaciones" />
-                <ScalarProperty Name="Genera_op_por_prestamos" ColumnName="Genera_op_por_prestamos" />
-                <ScalarProperty Name="Genera_op_por_acta_finiquito" ColumnName="Genera_op_por_acta_finiquito" />
-                <ScalarProperty Name="Genera_op_por_liq_vacaciones" ColumnName="Genera_op_por_liq_vacaciones" />
-                <ScalarProperty Name="Genera_op_x_pago_x_empleao" ColumnName="Genera_op_x_pago_x_empleao" />
-                <ScalarProperty Name="genera_op_x_pago" ColumnName="genera_op_x_pago" />
-                <ScalarProperty Name="IdRubro_acta_finiquito" ColumnName="IdRubro_acta_finiquito" />
-                <ScalarProperty Name="Porcentaje_aporte_patr" ColumnName="Porcentaje_aporte_patr" />
-                <ScalarProperty Name="Porcentaje_aporte_pers" ColumnName="Porcentaje_aporte_pers" />
-                <ScalarProperty Name="Sueldo_basico" ColumnName="Sueldo_basico" />
-                <ScalarProperty Name="IdTipoCbte_AsientoSueldoXPagar" ColumnName="IdTipoCbte_AsientoSueldoXPagar" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ro_empleado">
             <EntityTypeMapping TypeName="Model_rrhh.ro_empleado">
               <MappingFragment StoreEntitySet="ro_empleado">
@@ -12358,6 +12337,27 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdRubro_tot_egr" ColumnName="IdRubro_tot_egr" />
                 <ScalarProperty Name="IdRubro_tot_ing" ColumnName="IdRubro_tot_ing" />
                 <ScalarProperty Name="IdRubro_dias_trabajados" ColumnName="IdRubro_dias_trabajados" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_Parametros">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_Parametros">
+              <MappingFragment StoreEntitySet="ro_Parametros">
+                <ScalarProperty Name="IdTipo_op_sueldo_por_pagar" ColumnName="IdTipo_op_sueldo_por_pagar" />
+                <ScalarProperty Name="IdTipo_op_acta_finiquito" ColumnName="IdTipo_op_acta_finiquito" />
+                <ScalarProperty Name="IdTipo_op_prestamos" ColumnName="IdTipo_op_prestamos" />
+                <ScalarProperty Name="IdTipo_op_vacaciones" ColumnName="IdTipo_op_vacaciones" />
+                <ScalarProperty Name="Genera_op_por_prestamos" ColumnName="Genera_op_por_prestamos" />
+                <ScalarProperty Name="Genera_op_por_acta_finiquito" ColumnName="Genera_op_por_acta_finiquito" />
+                <ScalarProperty Name="Genera_op_por_liq_vacaciones" ColumnName="Genera_op_por_liq_vacaciones" />
+                <ScalarProperty Name="Genera_op_x_pago_x_empleao" ColumnName="Genera_op_x_pago_x_empleao" />
+                <ScalarProperty Name="genera_op_x_pago" ColumnName="genera_op_x_pago" />
+                <ScalarProperty Name="IdRubro_acta_finiquito" ColumnName="IdRubro_acta_finiquito" />
+                <ScalarProperty Name="Porcentaje_aporte_patr" ColumnName="Porcentaje_aporte_patr" />
+                <ScalarProperty Name="Porcentaje_aporte_pers" ColumnName="Porcentaje_aporte_pers" />
+                <ScalarProperty Name="Sueldo_basico" ColumnName="Sueldo_basico" />
+                <ScalarProperty Name="IdTipoCbte_AsientoSueldoXPagar" ColumnName="IdTipoCbte_AsientoSueldoXPagar" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
