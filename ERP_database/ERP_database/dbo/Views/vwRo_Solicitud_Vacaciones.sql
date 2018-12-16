@@ -7,7 +7,8 @@ SELECT        dbo.ro_Solicitud_Vacaciones_x_empleado.IdEmpresa, dbo.ro_Solicitud
                          dbo.ro_Solicitud_Vacaciones_x_empleado.Observacion, dbo.ro_Solicitud_Vacaciones_x_empleado.IdUsuario_Anu, dbo.ro_Solicitud_Vacaciones_x_empleado.Estado, 
                          dbo.ro_Solicitud_Vacaciones_x_empleado.IdEstadoAprobacion, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.ro_Solicitud_Vacaciones_x_empleado.IdEmpleado_aprue, 
                          dbo.ro_Solicitud_Vacaciones_x_empleado.IdEmpleado_remp, dbo.ro_Solicitud_Vacaciones_x_empleado.Gozadas_Pgadas, dbo.ro_Solicitud_Vacaciones_x_empleado.Canceladas, 
-                         dbo.ro_Solicitud_Vacaciones_x_empleado.IdVacacion, dbo.tb_persona.pe_cedulaRuc, dbo.ro_empleado.em_codigo, dbo.ro_Historico_Liquidacion_Vacaciones.IdLiquidacion
+                         dbo.ro_Solicitud_Vacaciones_x_empleado.IdVacacion, dbo.tb_persona.pe_cedulaRuc, dbo.ro_empleado.em_codigo, dbo.ro_Historico_Liquidacion_Vacaciones.IdLiquidacion, 
+                         dbo.ro_Historico_Liquidacion_Vacaciones.Estado AS Estado_liquidacion
 FROM            dbo.ro_Solicitud_Vacaciones_x_empleado INNER JOIN
                          dbo.ro_empleado ON dbo.ro_Solicitud_Vacaciones_x_empleado.IdEmpresa = dbo.ro_empleado.IdEmpresa AND dbo.ro_Solicitud_Vacaciones_x_empleado.IdEmpleado = dbo.ro_empleado.IdEmpleado INNER JOIN
                          dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona LEFT OUTER JOIN
@@ -19,7 +20,19 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'0
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 2730
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
          Width = 1500
          Width = 1500
       End
@@ -45,13 +58,15 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_Solicitud_Vacaciones';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[65] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[23] 4[5] 2[49] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -117,12 +132,12 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "tb_persona"
+         Begin Table = "ro_Solicitud_Vacaciones_x_empleado"
             Begin Extent = 
-               Top = 5
-               Left = 1040
-               Bottom = 219
-               Right = 1257
+               Top = 17
+               Left = 407
+               Bottom = 375
+               Right = 603
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -137,15 +152,25 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 13
          End
-         Begin Table = "ro_Solicitud_Vacaciones_x_empleado"
+         Begin Table = "tb_persona"
             Begin Extent = 
-               Top = 17
-               Left = 407
-               Bottom = 375
-               Right = 603
+               Top = 5
+               Left = 1040
+               Bottom = 219
+               Right = 1257
             End
             DisplayFlags = 280
             TopColumn = 0
+         End
+         Begin Table = "ro_Historico_Liquidacion_Vacaciones"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 296
+               Right = 220
+            End
+            DisplayFlags = 280
+            TopColumn = 4
          End
       End
    End
@@ -178,17 +203,7 @@ Begin DesignProperties =
          Width = 1500
          Width = 1500
          Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 2730
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 150', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_Solicitud_Vacaciones';
+       ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_Solicitud_Vacaciones';
+
+
 

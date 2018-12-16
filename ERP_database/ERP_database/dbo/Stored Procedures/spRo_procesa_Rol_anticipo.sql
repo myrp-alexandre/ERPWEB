@@ -1,6 +1,6 @@
 ﻿
 
-create PROCEDURE [dbo].[spRo_procesa_Rol_anticipo] (
+CREATE PROCEDURE [dbo].[spRo_procesa_Rol_anticipo] (
 @IdEmpresa int,
 @IdNomina numeric,
 @IdNominaTipo numeric,
@@ -79,14 +79,14 @@ insert into ro_rol_detalle
 
 select 
 
-@IdEmpresa				,@IdRol				,emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'0' ,dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol)
+@IdEmpresa				,@IdRol				,emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'0' ,dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol, emp.em_status, emp.em_fechaSalida)
 ,1						,'Días trabajados'		
 FROM            dbo.ro_contrato AS cont INNER JOIN
                 dbo.ro_empleado AS emp ON cont.IdEmpresa = emp.IdEmpresa AND cont.IdEmpleado = emp.IdEmpleado
 where cont.IdEmpresa=@IdEmpresa 
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato='ECT_ACT'
-and (emp.em_status='EST_ACT')
+and cont.EstadoContrato!='ECT_LIQ'
+and (emp.em_status!='EST_LIQ')
 and CAST( cont.FechaInicio as date)<=@Ff
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,14 +99,14 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select 
-@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,cont.sueldo/30*(dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol))
+@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,cont.sueldo/30* ((dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol, emp.em_status, emp.em_fechaSalida)))*2*0.25
 ,1						,'Sueldo base'		
 FROM            dbo.ro_contrato AS cont INNER JOIN
                 dbo.ro_empleado AS emp ON cont.IdEmpresa = emp.IdEmpresa AND cont.IdEmpleado = emp.IdEmpleado
 where cont.IdEmpresa=@IdEmpresa 
 and cont.IdNomina=@IdNomina
-and cont.EstadoContrato='ECT_ACT'
-and (emp.em_status='EST_ACT')
+and cont.EstadoContrato!='ECT_LIQ'
+and (emp.em_status!='EST_LIQ')
 and CAST( cont.FechaInicio as date)<=@Ff
 
 
@@ -133,7 +133,7 @@ and novc.IdNomina_TipoLiqui=@IdNominaTipo
 and nov.FechaPago between @Fi and @Ff
 and novc.Estado='A'
 and nov.EstadoCobro='PEN'
-and (emp.em_status='EST_ACT')
+and (emp.em_status!='EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 group by novc.IdEmpresa,novc.IdEmpleado,nov.IdRubro,rub.ru_orden,rub.ru_descripcion, emp.IdSucursal
 
@@ -157,8 +157,9 @@ and pred.IdNominaTipoLiqui=@IdNominaTipo
 and pred.FechaPago between @Fi and @Ff
 and pred.Estado='A'
 and pred.EstadoPago='PEN'
-and (emp.em_status='EST_ACT')
+and (emp.em_status!='EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
+AND (emp.em_fechaSalida IS NULL OR emp.em_fechaSalida BETWEEN @Fi and @Ff)
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------buscando rubros fijos e insertando al rol detalle-------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -179,8 +180,9 @@ and rub_fij.IdNomina_tipo=@IdNomina
 and rub_fij.IdNomina_TipoLiqui=@IdNominaTipo
 and (rub_fij.es_indifinido=1 or ( @Fi between rub_fij.FechaFin and rub_fij.FechaFin and @Ff between rub_fij.FechaFin and rub_fij.FechaFin))
 --and rub_fij.Estado='A'
-and (emp.em_status='EST_ACT')
+and (emp.em_status!='EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
+AND (emp.em_fechaSalida IS NULL OR emp.em_fechaSalida BETWEEN @Fi and @Ff)
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando total ingreso por empleado-------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -245,7 +247,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1000'			,( [500] - [900])
+@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1000'			,(ISNULL( [500],0) -ISNULL( [900],0))
 ,1						,'Liquido a recibir'	
 FROM (
     SELECT 
