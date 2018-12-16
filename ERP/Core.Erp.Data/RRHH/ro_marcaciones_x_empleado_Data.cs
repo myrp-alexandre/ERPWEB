@@ -14,8 +14,8 @@ namespace Core.Erp.Data.RRHH
             try
             {
                 List<ro_marcaciones_x_empleado_Info> Lista;
-              DateTime fi=  FechaFin = FechaFin.Date;
-                DateTime ff = FechaInicio = FechaInicio.Date;
+              DateTime fi = FechaInicio.Date;
+                DateTime ff = FechaFin.Date;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
 
