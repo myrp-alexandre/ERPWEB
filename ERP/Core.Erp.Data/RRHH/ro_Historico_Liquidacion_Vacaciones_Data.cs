@@ -10,16 +10,19 @@ namespace Core.Erp.Data.RRHH
     {
 
 
-        public List<ro_Historico_Liquidacion_Vacaciones_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<ro_Historico_Liquidacion_Vacaciones_Info> get_list(int IdEmpresa,DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
                 List<ro_Historico_Liquidacion_Vacaciones_Info> Lista;
-
+                FechaInicio = FechaInicio.Date;
+                FechaFin = FechaFin.Date;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     Lista = (from q in Context.vwro_Historico_Liquidacion_Vacaciones
                              where q.IdEmpresa == IdEmpresa
+                              && q.FechaPago >= FechaInicio
+                                 && q.FechaPago <= FechaFin
                              select new ro_Historico_Liquidacion_Vacaciones_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -163,7 +166,7 @@ namespace Core.Erp.Data.RRHH
                         contact.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                         contact.FechaHoraAnul = DateTime.Now;
                         contact.MotiAnula = info.MotiAnula;
-                        context.SaveChanges();
+                    context.SaveChanges();
                     }
 
                     return true;

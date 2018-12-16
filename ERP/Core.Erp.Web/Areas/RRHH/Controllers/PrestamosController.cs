@@ -130,15 +130,28 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost]
         public ActionResult Nuevo(ro_prestamo_Info model)
         {
+            model.lst_detalle = Lis_ro_prestamo_detalle_lst.get_list(model.IdTransaccionSession);
             if (!validar(model))
             {
                 cargar_combos();
                 return View(model);
             }
+            if (model.lst_detalle == null || model.lst_detalle.Count() == 0)
+            {
+                ViewBag.mensaje = "No existe detalle del prestamo";
+                cargar_combos();
+                return View(model);
+            }
+            decimal diferencia = Convert.ToDecimal((model.MontoSol - model.lst_detalle.Sum(v => v.TotalCuota)));
 
+            if (Convert.ToInt32(diferencia) != 0)
+            {
+                ViewBag.mensaje = "Monto del prestamo no coincide con la suma del detalle";
+                cargar_combos();
+                return View(model);
+            }
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.IdUsuario = Session["IdUsuario"].ToString();
-            model.lst_detalle = Lis_ro_prestamo_detalle_lst.get_list(model.IdTransaccionSession);
             foreach (var item in model.lst_detalle)
             {
                 item.TotalCuota = Math.Round(item.TotalCuota, 2);
@@ -174,15 +187,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             model.lst_detalle = Lis_ro_prestamo_detalle_lst.get_list(model.IdTransaccionSession);
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
-            decimal diferencia = Convert.ToDecimal((model.MontoSol - model.lst_detalle.Sum(v => v.TotalCuota)));
             if (model.lst_detalle == null || model.lst_detalle.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle del prestamo";
                 cargar_combos();
                 return View(model);
             }
-
-            if (Math.Round(Convert.ToDecimal(diferencia), 2) != 0)
+            decimal diferencia = Convert.ToDecimal((model.MontoSol - model.lst_detalle.Sum(v => v.TotalCuota)));
+           
+            if (Convert.ToInt32(diferencia) != 0)
             {
                 ViewBag.mensaje = "Monto del prestamo no coincide con la suma del detalle";
                 cargar_combos();
@@ -286,7 +299,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            ViewBag.lst_tipo_nomina = bus_nomina_tipo.get_list(IdEmpresa, false);
+            ViewBag.lst_tipo_nomina = bus_nomina_tipo.get_list(IdEmpresa, false).Where(v=>v.IdNomina_Tipo==1).ToList();
             ViewBag.lst_catalogo = bus_catalogo.get_list_x_tipo(16);
         }
 
@@ -374,7 +387,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             edited_info.IdNominaTipoLiqui = info_det.IdNominaTipoLiqui;
             edited_info.FechaPago = info_det.FechaPago;
             edited_info.TotalCuota = info_det.TotalCuota;
-            edited_info.EstadoPago = info_det.EstadoPago;
+            edited_info.EstadoPago = "PEN";
         }
 
         public void DeleteRow(int NumCuota,decimal IdTransaccionSession)

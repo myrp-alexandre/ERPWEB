@@ -50,7 +50,7 @@ namespace Core.Erp.Info.RRHH
         public string em_codigo { get; set; }
         public string pe_nombre_completo { get; set; }
         public Nullable<int> IdLiquidacion { get; set; }
-
+        public string Estado_liquidacion { get; set; }
         public List<ro_historico_vacaciones_x_empleado_Info> lst_vacaciones { get; set; }
         public  ro_Solicitud_Vacaciones_x_empleado_Info()
         {

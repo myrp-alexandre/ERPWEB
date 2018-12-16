@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_solicitud_vacaciones";
-        settings.CallbackRouteValues = new { Controller = "Vacaciones", Action = "GridViewPartial_solicitud_vacaciones" };
+        settings.CallbackRouteValues = new { Controller = "Vacaciones", Action = "GridViewPartial_solicitud_vacaciones", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdSolicitud";
@@ -58,10 +58,8 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
-            if (Convert.ToInt32(e.GetValue( "IdLiquidacion")) != 0)
-            {
-                e.Row.ForeColor = System.Drawing.Color.Blue;
-            }
+
+
         };
         settings.Columns.Add(c =>
         {
@@ -69,7 +67,7 @@
             c.Width = Unit.Percentage(5);
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "IdLiquidacion"))==0)
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" &&( Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado_liquidacion"))!="A") )
                 {
                     ViewContext.Writer.Write(
                          Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdSolicitud = DataBinder.Eval(tc.DataItem, "IdSolicitud") }) + "&nbsp;" +
@@ -108,7 +106,7 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-      
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "Fecha_Desde";

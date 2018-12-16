@@ -245,7 +245,7 @@ namespace Core.Erp.Bus.RRHH
                     item.FechaPago = fecha_pago;
                     item.EstadoPago = "PEN";
                     item.Observacion_det = "Cuota número " + i + " fecha pago " + fecha_pago.ToString("dd/MM/yyyy");
-                    if (info.Fecha_PriPago.Day > 15)
+                    if (item.FechaPago.Day > 15)
                         item.IdNominaTipoLiqui = 2;
                     else
                         item.IdNominaTipoLiqui = 1;
