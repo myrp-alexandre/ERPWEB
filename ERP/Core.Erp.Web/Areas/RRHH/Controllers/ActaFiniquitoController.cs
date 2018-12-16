@@ -81,8 +81,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_Acta_Finiquito_Info model = new ro_Acta_Finiquito_Info
             {
                 IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]),
-                FechaIngreso = DateTime.Now,
-                FechaSalida =DateTime.Now,
                IdCausaTerminacion= "CTL_02"
 
             };

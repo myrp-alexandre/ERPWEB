@@ -18,7 +18,7 @@
                     <label for="IdRubro">Empleado*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
                {
-                   settings.Name = "IdRubro";
+                   settings.Name = "IdEmpleado";
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
                    settings.Properties.Columns.Add("pe_cedulaRuc", "Cedula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
@@ -32,6 +32,7 @@
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
                    settings.Properties.NullText = "== Seleccione ==";
                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_info();}";
 
                }).BindList(ViewBag.lst_empleado).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
