@@ -90,7 +90,7 @@ and (emp.em_status!='EST_LIQ')
 and CAST( cont.FechaInicio as date)<=@Ff
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
--------------calculando sueldo por días trabajados-------------------------------------------------------------------------------------------<
+-------------calculando sueldo al personal que no se les paga por horas-------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
 select @IdRubro_calculado= IdRubro_sueldo from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 
@@ -108,7 +108,45 @@ and cont.IdNomina=@IdNomina
 and cont.EstadoContrato!='ECT_LIQ'
 and (emp.em_status!='EST_LIQ')
 and CAST( cont.FechaInicio as date)<=@Ff
+and emp.Pago_por_horas=0
 
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+-------------calculando sueldo por días trabajados al personal que  se les paga por horas-------------------------------------------------------------------------------------------<
+----------------------------------------------------------------------------------------------------------------------------------------------
+select @IdRubro_calculado= IdRubro_sueldo from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+
+insert into ro_rol_detalle
+(IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
+,rub_visible_reporte,	Observacion)
+
+select 
+@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,rol_det.valor*0.25
+,1						,'Sueldo base'		
+FROM            dbo.ro_rol AS rol INNER JOIN
+                         dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol INNER JOIN
+                         dbo.ro_periodo_x_ro_Nomina_TipoLiqui AS pe_x_nom ON rol.IdEmpresa = pe_x_nom.IdEmpresa AND rol.IdNominaTipo = pe_x_nom.IdNomina_Tipo AND rol.IdNominaTipoLiqui = pe_x_nom.IdNomina_TipoLiqui AND 
+                         rol.IdPeriodo = pe_x_nom.IdPeriodo INNER JOIN
+                         dbo.ro_periodo AS peri ON pe_x_nom.IdEmpresa = peri.IdEmpresa AND pe_x_nom.IdPeriodo = peri.IdPeriodo INNER JOIN
+                         dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
+                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado
+						 and rol_det.idrubro=500
+						 and emp.Pago_por_horas=1
+						 and peri.pe_anio=case when peri.pe_mes=1 then DATEPART(year, @Fi)-1 else  DATEPART(year, peri.pe_FechaIni) end
+						 and peri.pe_mes=case when peri.pe_mes=1 then 12 else  DATEPART(MONTH, @Fi)-1 end
+						 and pe_x_nom.IdNomina_TipoLiqui=2
+where cont.IdEmpresa=@IdEmpresa 
+and cont.IdNomina=@IdNomina
+and cont.EstadoContrato!='ECT_LIQ'
+and (emp.em_status!='EST_LIQ')
+and CAST( cont.FechaInicio as date)<=@Ff
+and emp.Pago_por_horas=1
+
+
+select * from ro_periodo
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------buscando novedades del periodo e insertando al rol detalle-----------------------------------------------------------------------<

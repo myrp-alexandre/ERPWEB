@@ -203,7 +203,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1000'			,( [500] - [900])
+@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1000'			,(ISNULL( [500],0) -ISNULL( [900],0))
 ,1						,'Liquido a recibir'	
 FROM (
     SELECT 

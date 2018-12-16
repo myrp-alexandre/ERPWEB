@@ -57,7 +57,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
                 ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
 
-                List<ro_marcaciones_x_empleado_Info> model = bus_marcaciones.get_list(IdEmpresa, Fecha_ini, Fecha_fin);
+                List<ro_marcaciones_x_empleado_Info> model = bus_marcaciones.get_list(IdEmpresa, ViewBag. Fecha_ini,ViewBag. Fecha_fin);
                 return PartialView("_GridViewPartial_marcaciones_empleado", model);
             }
             catch (Exception)
