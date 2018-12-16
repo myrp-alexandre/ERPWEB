@@ -18,8 +18,9 @@ namespace Core.Erp.Data.RRHH
                 {
                     Lista = (from ROL in Context.vwro_rol
                              where ROL.IdEmpresa == IdEmpresa
-                             && ROL.IdNominaTipoLiqui<=2
-                             && ROL.IdNominaTipoLiqui>=1
+                             &&( ROL.IdNominaTipoLiqui==2
+                             || ROL.IdNominaTipoLiqui==1
+                             || ROL.IdNominaTipoLiqui==6)
                              select new ro_rol_Info
                              {
                                  IdEmpresa = ROL.IdEmpresa,
@@ -176,7 +177,12 @@ namespace Core.Erp.Data.RRHH
                     if (info.IdNomina_Tipo == 1 && info.IdNomina_TipoLiqui == 6)
                         Context.spRo_procesa_Rol_bono(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo, info.UsuarioIngresa, info.Observacion, Convert.ToInt32(info.IdRol));
 
-                    
+                    var conte = Context.ro_periodo_x_ro_Nomina_TipoLiqui.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdNomina_Tipo == info.IdNomina_Tipo && v.IdNomina_TipoLiqui == info.IdNomina_TipoLiqui
+                      && v.IdPeriodo == info.IdPeriodo).FirstOrDefault();
+
+                    if (conte != null)
+                        conte.Procesado = "S";
+                    Context.SaveChanges();
                 }
                 return true;
             }
