@@ -195,13 +195,9 @@
                         $("#IdContrato").val(data.IdContrato);
 
 
-                        var datei = new Date(moment(data.FechaInicio, "DD/MM/YYYY"));
-                        FechaIngreso.SetValue(datei);
+                        FechaIngreso.SetValue(new Date(data.anio_ing, data.mes_ing, data.dia_in));
 
-                        var date = new Date(moment(data.FechaFin, "DD/MM/YYYY"));
-                        FechaSalida.SetValue(date);
-
-
+                        FechaSalida.SetValue(new Date(data.anio_sal, data.mes_sal, data.dia_sal));
                         $("#Sueldo").val(data.Sueldo);
 
                     }

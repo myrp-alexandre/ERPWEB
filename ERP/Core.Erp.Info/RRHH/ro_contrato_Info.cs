@@ -46,6 +46,12 @@ namespace Core.Erp.Info.RRHH
 
         public Nullable<System.DateTime> em_fechaSalida { get; set; }
 
+        public int anio_ing { get; set; }
+        public int mes_ing { get; set; }
+        public int dia_in { get; set; }
+        public int anio_sal { get; set; }
+        public int mes_sal { get; set; }
+        public int dia_sal { get; set; }
 
 
     }

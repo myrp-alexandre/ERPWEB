@@ -260,6 +260,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             var resultado = bus_contrato.get_info_contato_a_liquidar(IdEmpresa, IdEmpleado);
 
+            resultado.anio_ing = resultado.FechaInicio.Year;
+            resultado.mes_ing = resultado.FechaInicio.Month;
+            resultado.dia_in = resultado.FechaInicio.Day;
+
+            resultado.anio_sal = resultado.FechaFin.Year;
+            resultado.mes_sal = resultado.FechaFin.Month;
+            resultado.dia_sal = resultado.FechaFin.Day;
+
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
     }

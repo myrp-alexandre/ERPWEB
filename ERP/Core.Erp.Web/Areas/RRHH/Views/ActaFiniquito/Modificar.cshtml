@@ -1,5 +1,4 @@
 ﻿@model Core.Erp.Info.RRHH.ro_Acta_Finiquito_Info
-
 @{
     ViewBag.Title = "Modificar acta finiquito";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -11,21 +10,40 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "ActaFiniquito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpleado);
-    @Html.HiddenFor(q => q.IdActaFiniquito);
+
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpleado)
+    @Html.HiddenFor(q => q.IdActaFiniquito)
 
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCblePadre">Empleado*</label>
-                    @Html.Partial("_CmbEmpleado_acta", Model.IdEmpleado)
+                    <label for="IdRubro">Empleado*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
+               {
+                   settings.Name = "IdEmpleado";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cedula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(70);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdEmpleado";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "Empleado";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_info();}";
+
+               }).BindList(ViewBag.lst_empleado).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -39,14 +57,14 @@
                 <div class="form-group">
                     <label for="FechaIngreso">Fecha ingreso*</label>
                     @Html.DevExpress().DateEditFor(q=> q.FechaIngreso, settings =>
-                   {
-                       settings.Name = "FechaIngreso";
-                       settings.Properties.UseMaskBehavior = true;
-                       settings.Properties.EditFormat = EditFormat.Date;
-                       settings.Properties.EditFormatString = "dd/MM/yyyy";
-                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   }).GetHtml()
+                {
+                    settings.Name = "FechaIngreso";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.FechaIngreso, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -79,41 +97,41 @@
             <div class="col-md-3">
                 <div class="form-group">
                     @Html.DevExpress().CheckBoxFor(q => q.EsMujerEmbarazada, settings =>
-               {
-                   settings.Name = "EsMujerEmbarazada";
-                   settings.Text = "¿Es mujer embarazada?";
+                           {
+                               settings.Name = "EsMujerEmbarazada";
+                               settings.Text = "¿Es mujer embarazada?";
 
-               }).GetHtml()
+                           }).GetHtml()
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     @Html.DevExpress().CheckBoxFor(q => q.EsPorDiscapacidad, settings =>
-               {
-                   settings.Name = "EsPorDiscapacidad";
-                   settings.Text = "¿Por discapacidad?";
+                           {
+                               settings.Name = "EsPorDiscapacidad";
+                               settings.Text = "¿Por discapacidad?";
 
-               }).GetHtml()
+                           }).GetHtml()
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     @Html.DevExpress().CheckBoxFor(q => q.EsDirigenteSindical, settings =>
-               {
-                   settings.Name = "EsDirigenteSindical";
-                   settings.Text = "¿Es dirigente sindical?";
+                           {
+                               settings.Name = "EsDirigenteSindical";
+                               settings.Text = "¿Es dirigente sindical?";
 
-               }).GetHtml()
+                           }).GetHtml()
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     @Html.DevExpress().CheckBoxFor(q => q.EsPorEnfermedadNoProfesional, settings =>
-               {
-                   settings.Name = "EsPorEnfermedadNoProfesional";
-                   settings.Text = "¿Por enfermedad no profesional?";
+                           {
+                               settings.Name = "EsPorEnfermedadNoProfesional";
+                               settings.Text = "¿Por enfermedad no profesional?";
 
-               }).GetHtml()
+                           }).GetHtml()
                 </div>
             </div>
         </div>
@@ -129,7 +147,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -141,7 +158,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -152,22 +168,21 @@
             </div>
         </div>
     </div>
-
     <div class="box-footer">
         <button type="button" onclick="Procesar_Liqui()" class="btn btn-primary" id="btnprocesar">Procesar</button>
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "ActaFiniquito", new { Area = "RRHH" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","ActaFiniquito",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+
 <script>
     function get_info()
     {
-
         var datos = {
-            IdEmpleado:  IdEmpleado.GetValue(),
+            IdEmpleado: IdEmpleado.GetValue(),
         }
             $.ajax({
                 type: 'POST',
@@ -182,8 +197,11 @@
                     } else {
                         $("#IdContrato_Tipo").val(data.IdContrato_Tipo);
                         $("#IdContrato").val(data.IdContrato);
-                        FechaIngreso.GetValue(data.FechaInicio);
-                        FechaSalida.GetValue('dd/MM/yyyy', data.em_fechaSalida);
+
+
+                        FechaIngreso.SetValue(new Date(data.anio_ing, data.mes_ing, data.dia_in));
+
+                        FechaSalida.SetValue(new Date(data.anio_sal, data.mes_sal, data.dia_sal));
                         $("#Sueldo").val(data.Sueldo);
 
                     }
@@ -195,7 +213,6 @@
         }
 
 </script>
-
 <script>
     function Procesar_Liqui()
             {
