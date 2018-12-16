@@ -163,6 +163,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                 try
                 {
+                    ViewBag.foto = info.IdEmpresa.ToString() + info.IdEmpleado.ToString() + ".jpg";
 
                     info.em_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + info.IdEmpresa.ToString() + info.IdEmpleado.ToString() + ".jpg");
                 }
@@ -372,13 +373,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         }
 
-        public JsonResult nombre_imagen(decimal IdActivoFijo = 0)
+        public JsonResult nombre_imagen(decimal IdEmpleado = 0)
         {
             try
             {
-                if (IdActivoFijo == 0)
-                    IdActivoFijo = bus_empleado.get_id(Convert.ToInt32(SessionFixed.IdEmpresa));
-                SessionFixed.NombreImagen = IdActivoFijo.ToString();
+                if (IdEmpleado == 0)
+                    IdEmpleado = bus_empleado.get_id(Convert.ToInt32(SessionFixed.IdEmpresa));
+                SessionFixed.NombreImagen = IdEmpleado.ToString();
                 return Json("", JsonRequestBehavior.AllowGet);
             }
             catch (Exception)

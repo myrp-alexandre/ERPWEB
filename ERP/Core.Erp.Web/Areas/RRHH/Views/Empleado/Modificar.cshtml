@@ -36,7 +36,7 @@
                 <script type="text/javascript">
                     function onUploadControlFileUploadComplete(s, e) {
                         if (e.isValid)
-                            $("#uploadedImage").attr("src", e.callbackData);
+                           // $("#uploadedImage").attr("src", e.callbackData);
                         setElementVisible("uploadedImage", e.isValid);
                     }
                     function onImageLoad() {
@@ -60,7 +60,18 @@
                     <div id="dragZone">
                         <span class="dragZoneText">Seleccione una foto</span>
                     </div>
-                    <img id="uploadedImage" src="#" alt="" style="display: none" onload="onImageLoad()" />
+                    @*<img id="uploadedImage" src="~/Content/imagenes/empleados/@ViewBag.foto" alt="" style="display: none" onload="onImageLoad()" />*@
+                    @Html.DevExpress().BinaryImage(
+                               settings =>
+                               {
+                                   settings.Name = "em_foto";
+                                   settings.CallbackRouteValues = new { Controller = "Empresa", Action = "get_imagen" };
+                                   settings.Properties.ImageSizeMode = ImageSizeMode.FitProportional;
+                                   settings.Properties.EnableServerResize = true;
+                                   settings.Width = Unit.Percentage(100);
+                                   settings.Height = Unit.Percentage(100);
+
+                               }).Bind((Model.em_foto).ToArray()).GetHtml()
                     <div id="dropZone" style="display: none">
                         <span class="dropZoneText">Drop an image here</span>
                     </div>
