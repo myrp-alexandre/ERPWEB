@@ -491,9 +491,9 @@
 
 
 
-    
 
-    
+
+
 
 
     <div class="row">
@@ -546,6 +546,38 @@
 
                }).BindList(ViewBag.lst_rubro).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdRubro_horas_extras, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdRubro_prov_vac">Rubro para bono por antiguedad*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdRubro_bono_x_antiguedad, settings =>
+               {
+                   settings.Name = "IdRubro_bono_x_antiguedad";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("ru_codRolGen", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("ru_descripcion", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdRubro";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "ru_descripcion";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_rubro).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdRubro_bono_x_antiguedad, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

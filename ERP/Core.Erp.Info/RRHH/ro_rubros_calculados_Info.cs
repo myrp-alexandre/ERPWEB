@@ -36,5 +36,7 @@ namespace Core.Erp.Info.RRHH
         public string IdRubro_horas_brigadas { get; set; }
         public string IdRubro_horas_recargo { get; set; }
         public string IdRubro_horas_extras { get; set; }
+        public string IdRubro_bono_x_antiguedad { get; set; }
+
     }
 }
