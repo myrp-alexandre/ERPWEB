@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_liquidacion_empleado";
-        settings.CallbackRouteValues = new { Controller = "ActaFiniquito", Action = "GridViewPartial_liquidacion_empleado" };
+        settings.CallbackRouteValues = new { Controller = "ActaFiniquito", Action = "GridViewPartial_liquidacion_empleado", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
 
 
         settings.KeyFieldName = "IdActaFiniquito";
@@ -118,7 +118,7 @@
             column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "c2";
         });
-       
+
         settings.Columns.Add(column =>
         {
             column.Caption = "#";

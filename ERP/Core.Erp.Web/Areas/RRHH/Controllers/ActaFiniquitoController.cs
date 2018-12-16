@@ -59,12 +59,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info();
+            return View(model);
         }
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_liquidacion_empleado()
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            return View(model);
+
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_liquidacion_empleado(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+
             List<ro_Acta_Finiquito_Info> model = bus_acta_finiquito.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_liquidacion_empleado", model);
         }
