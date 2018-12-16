@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.RRHH;
+using Core.Erp.Info.Helps;
 namespace Core.Erp.Data.RRHH
 {
    public class ro_empleado_Data
@@ -43,12 +44,12 @@ namespace Core.Erp.Data.RRHH
             try
             {
                 List<ro_empleado_Info> Lista;
-
+                string estado = cl_enumeradores.eEstadoEmpleadoRRHH.EST_LIQ.ToString()+","+cl_enumeradores.eEstadoEmpleadoRRHH.EST_PLQ.ToString();
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     Lista = (from q in Context.vwro_empleado_combo
                              where q.IdEmpresa == IdEmpresa
-                             && q.em_status== "EST_PLQ"
+                             && estado.Contains(q.em_status)
                              select new ro_empleado_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

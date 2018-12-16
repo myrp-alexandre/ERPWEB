@@ -10,12 +10,30 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "ActaFiniquito", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCblePadre">Empleado*</label>
-                    @Html.Partial("_CmbEmpleado_acta", Model.IdEmpleado)
+                    <label for="IdRubro">Empleado*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpleado, settings =>
+               {
+                   settings.Name = "IdRubro";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("pe_cedulaRuc", "Cedula").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Empleado", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(70);
+
+                   //Campo ID
+                   settings.Properties.ValueField = "IdEmpleado";
+                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.TextField = "Empleado";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+               }).BindList(ViewBag.lst_empleado).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
