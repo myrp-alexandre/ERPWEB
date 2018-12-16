@@ -182,6 +182,7 @@ namespace Core.Erp.Bus.RRHH
                             {
                                 item.hora_trabajada = ((TimeSpan)(item.time_salida1 - item.time_entrada1)).TotalHours - ((TimeSpan)(horarioActual.RegLunch - horarioActual.SalLunch)).TotalHours;
                                 item.hora_extra100 = item.hora_trabajada;
+                                horaExtra100 = item.hora_extra100;
                             }
                             else
                             {

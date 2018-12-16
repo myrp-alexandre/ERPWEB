@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_marcaciones_empleado";
-        settings.CallbackRouteValues = new { Controller = "MarcacionEmpleado", Action = "GridViewPartial_marcaciones_empleado" };
+        settings.CallbackRouteValues = new { Controller = "MarcacionEmpleado", Action = "GridViewPartial_marcaciones_empleado", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdRegistro";
 

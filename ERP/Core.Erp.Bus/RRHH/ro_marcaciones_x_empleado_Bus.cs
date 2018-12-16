@@ -7,11 +7,11 @@ namespace Core.Erp.Bus.RRHH
     public class ro_marcaciones_x_empleado_Bus
     {
         ro_marcaciones_x_empleado_Data odata = new ro_marcaciones_x_empleado_Data();
-        public List<ro_marcaciones_x_empleado_Info> get_list(int IdEmpresa)
+        public List<ro_marcaciones_x_empleado_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
-                return odata.get_list(IdEmpresa);
+                return odata.get_list(IdEmpresa, FechaInicio, FechaFin);
             }
             catch (Exception)
             {

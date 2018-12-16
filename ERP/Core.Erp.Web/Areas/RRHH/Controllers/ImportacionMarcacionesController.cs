@@ -147,7 +147,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             {
                                 if (!reader.IsDBNull(2))// si tiene fehca de marcacion
                                 {
-                                    Fecha_registro =Convert.ToDateTime( reader.GetString(2));
+                                    Fecha_registro =Convert.ToDateTime( reader.GetDateTime(2));
                                     if (!reader.IsDBNull(3))// si tiene entrada del primer turno
                                     {
                                         
@@ -159,15 +159,16 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 IdEmpleado = empleado.IdEmpleado,
                                                 IdEmpresa = empleado.IdEmpresa,
                                                 es_fechaRegistro = Fecha_registro,
-                                               
-                                                IdCalendadrio   = Convert.ToInt32(Fecha_registro.ToString("ddMMyyyy")),
-                                                IdNomina=empleado.IdTipoNomina,
-                                                IdUsuario=SessionFixed.IdUsuario,
+
+                                                IdCalendadrio = Convert.ToInt32(Fecha_registro.ToString("ddMMyyyy")),
+                                                IdNomina = empleado.IdTipoNomina,
+                                                IdUsuario = SessionFixed.IdUsuario,
                                                 es_Hora = new TimeSpan(marcacion.Hour, marcacion.Minute, 0),
                                                 IdTipoMarcaciones = cl_enumeradores.eTipoMarcacionRRHH.IN1.ToString(),
                                                 pe_NombreCompleato = empleado.Empleado,
                                                 pe_cedula = cedua,
-                                                EstadoBool=true
+                                                EstadoBool = true,
+                                                IdRegistro = cont++
 
                                             };
                                             lista_novedades.Add(info);
@@ -192,9 +193,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 IdTipoMarcaciones = cl_enumeradores.eTipoMarcacionRRHH.OUT1.ToString(),
                                                 pe_NombreCompleato = empleado.Empleado,
                                                 pe_cedula = cedua,
-                                                EstadoBool = true
+                                                EstadoBool = true,
+                                                IdRegistro = cont++
 
-                                            };
+                                    };
                                             lista_novedades.Add(info);
                                         }
                                     }
@@ -216,9 +218,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 IdTipoMarcaciones = cl_enumeradores.eTipoMarcacionRRHH.IN2.ToString(),
                                                 pe_NombreCompleato = empleado.Empleado,
                                                 pe_cedula = cedua,
-                                                EstadoBool = true
+                                                EstadoBool = true,
+                                                IdRegistro = cont++
 
-                                            };
+
+                                        };
                                             lista_novedades.Add(info);
                                         }
                                     }
@@ -242,9 +246,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                                 IdTipoMarcaciones = cl_enumeradores.eTipoMarcacionRRHH.OUT2.ToString(),
                                                 pe_NombreCompleato = empleado.Empleado,
                                                 pe_cedula = cedua,
-                                                EstadoBool = true
+                                                EstadoBool = true,
+                                                IdRegistro = cont++
 
-                                            };
+
+                                    };
                                             lista_novedades.Add(info);
                                         }
                                     }

@@ -9,17 +9,20 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_marcaciones_x_empleado_Data
     {
-        public List<ro_marcaciones_x_empleado_Info> get_list(int IdEmpresa)
+        public List<ro_marcaciones_x_empleado_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
                 List<ro_marcaciones_x_empleado_Info> Lista;
-
+              DateTime fi=  FechaFin = FechaFin.Date;
+                DateTime ff = FechaInicio = FechaInicio.Date;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
 
                     Lista = (from q in Context.vwro_marcaciones_x_empleado
-                            
+                            where q.IdEmpresa==IdEmpresa
+                            && q.es_fechaRegistro>=fi
+                            && q.es_fechaRegistro<=ff
                              select new ro_marcaciones_x_empleado_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
