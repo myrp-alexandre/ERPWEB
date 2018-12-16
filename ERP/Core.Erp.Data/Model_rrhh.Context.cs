@@ -392,5 +392,38 @@ namespace Core.Erp.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_procesa_Rol_anticipo", idEmpresaParameter, idNominaParameter, idNominaTipoParameter, idPEriodoParameter, idUsuarioParameter, observacionParameter, idRolParameter);
         }
+    
+        public virtual int spRo_procesa_Rol_bono(Nullable<int> idEmpresa, Nullable<decimal> idNomina, Nullable<decimal> idNominaTipo, Nullable<decimal> idPEriodo, string idUsuario, string observacion, Nullable<int> idRol)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idNominaParameter = idNomina.HasValue ?
+                new ObjectParameter("IdNomina", idNomina) :
+                new ObjectParameter("IdNomina", typeof(decimal));
+    
+            var idNominaTipoParameter = idNominaTipo.HasValue ?
+                new ObjectParameter("IdNominaTipo", idNominaTipo) :
+                new ObjectParameter("IdNominaTipo", typeof(decimal));
+    
+            var idPEriodoParameter = idPEriodo.HasValue ?
+                new ObjectParameter("IdPEriodo", idPEriodo) :
+                new ObjectParameter("IdPEriodo", typeof(decimal));
+    
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            var observacionParameter = observacion != null ?
+                new ObjectParameter("Observacion", observacion) :
+                new ObjectParameter("Observacion", typeof(string));
+    
+            var idRolParameter = idRol.HasValue ?
+                new ObjectParameter("IdRol", idRol) :
+                new ObjectParameter("IdRol", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_procesa_Rol_bono", idEmpresaParameter, idNominaParameter, idNominaTipoParameter, idPEriodoParameter, idUsuarioParameter, observacionParameter, idRolParameter);
+        }
     }
 }

@@ -4111,6 +4111,15 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Parameter Name="Observacion" Type="varchar" Mode="In" />
           <Parameter Name="IdRol" Type="int" Mode="In" />
         </Function>
+        <Function Name="spRo_procesa_Rol_bono" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdNomina" Type="numeric" Mode="In" />
+          <Parameter Name="IdNominaTipo" Type="numeric" Mode="In" />
+          <Parameter Name="IdPEriodo" Type="numeric" Mode="In" />
+          <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="Observacion" Type="varchar" Mode="In" />
+          <Parameter Name="IdRol" Type="int" Mode="In" />
+        </Function>
         <Function Name="spRo_Reverso_Rol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="IdNomina_Tipo" Type="int" Mode="In" />
@@ -7652,6 +7661,15 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
           </AssociationSet>
           <EntitySet Name="ro_Parametros" EntityType="Model_rrhh.ro_Parametros" />
+          <FunctionImport Name="spRo_procesa_Rol_bono">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdNomina" Mode="In" Type="Decimal" />
+            <Parameter Name="IdNominaTipo" Mode="In" Type="Decimal" />
+            <Parameter Name="IdPEriodo" Mode="In" Type="Decimal" />
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="Observacion" Mode="In" Type="String" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -12362,6 +12380,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spRo_procesa_Rol_bono" FunctionName="Model_rrhh.Store.spRo_procesa_Rol_bono" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
