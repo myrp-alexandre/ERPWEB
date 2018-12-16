@@ -70,8 +70,6 @@
           <Property Name="Secuencia" Type="int" Nullable="false" />
           <Property Name="IdRubro" Type="int" Nullable="false" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
-          <Property Name="Cantidad" Type="int" Nullable="false" />
-          <Property Name="ValorUnitario" Type="float" Nullable="false" />
           <Property Name="Monto" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="pre_PresupuestoPeriodo">
@@ -207,8 +205,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_PresupuestoDet' no tiene def
             <PropertyRef Name="MontoAprobado" />
             <PropertyRef Name="Secuencia" />
             <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="Cantidad" />
-            <PropertyRef Name="ValorUnitario" />
             <PropertyRef Name="Monto" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
@@ -225,8 +221,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_PresupuestoDet' no tiene def
           <Property Name="IdRubro" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar(max)" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
-          <Property Name="Cantidad" Type="int" Nullable="false" />
-          <Property Name="ValorUnitario" Type="float" Nullable="false" />
           <Property Name="Monto" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
@@ -391,8 +385,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
     [vwpre_PresupuestoDet].[IdRubro] AS [IdRubro], 
     [vwpre_PresupuestoDet].[Descripcion] AS [Descripcion], 
     [vwpre_PresupuestoDet].[IdCtaCble] AS [IdCtaCble], 
-    [vwpre_PresupuestoDet].[Cantidad] AS [Cantidad], 
-    [vwpre_PresupuestoDet].[ValorUnitario] AS [ValorUnitario], 
     [vwpre_PresupuestoDet].[Monto] AS [Monto]
     FROM [dbo].[vwpre_PresupuestoDet] AS [vwpre_PresupuestoDet]</DefiningQuery>
           </EntitySet>
@@ -464,6 +456,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
             <End Role="pre_Presupuesto" EntitySet="pre_Presupuesto" />
           </AssociationSet>
           <EntitySet Name="pre_PresupuestoDet" EntityType="Model_presupuesto.pre_PresupuestoDet" />
+          <EntitySet Name="vwpre_PresupuestoDet" EntityType="Model_presupuesto.vwpre_PresupuestoDet" />
           <AssociationSet Name="FK_pre_PresupuestoDet_pre_Presupuesto" Association="Model_presupuesto.FK_pre_PresupuestoDet_pre_Presupuesto">
             <End Role="pre_Presupuesto" EntitySet="pre_Presupuesto" />
             <End Role="pre_PresupuestoDet" EntitySet="pre_PresupuestoDet" />
@@ -472,7 +465,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
             <End Role="pre_Rubro" EntitySet="pre_Rubro" />
             <End Role="pre_PresupuestoDet" EntitySet="pre_PresupuestoDet" />
           </AssociationSet>
-          <EntitySet Name="vwpre_PresupuestoDet" EntityType="Model_presupuesto.vwpre_PresupuestoDet" />
           </EntityContainer>
         <EntityType Name="pre_Grupo">
           <Key>
@@ -737,11 +729,40 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
           <Property Name="Secuencia" Type="Int32" Nullable="false" />
           <Property Name="IdRubro" Type="Int32" Nullable="false" />
           <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
-          <Property Name="ValorUnitario" Type="Double" Nullable="false" />
           <Property Name="Monto" Type="Double" Nullable="false" />
           <NavigationProperty Name="pre_Presupuesto" Relationship="Model_presupuesto.FK_pre_PresupuestoDet_pre_Presupuesto" FromRole="pre_PresupuestoDet" ToRole="pre_Presupuesto" />
           <NavigationProperty Name="pre_Rubro" Relationship="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_rubro" FromRole="pre_PresupuestoDet" ToRole="pre_Rubro" />
+        </EntityType>
+        <EntityType Name="vwpre_PresupuestoDet">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPresupuesto" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="EstadoCierre" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="MontoSolicitado" />
+            <PropertyRef Name="MontoAprobado" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="Monto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPresupuesto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="EstadoCierre" Type="Boolean" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="MontoSolicitado" Type="Double" Nullable="false" />
+          <Property Name="MontoAprobado" Type="Double" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdRubro" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Monto" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="FK_pre_PresupuestoDet_pre_Presupuesto">
           <End Type="Model_presupuesto.pre_Presupuesto" Role="pre_Presupuesto" Multiplicity="1" />
@@ -771,41 +792,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwpre_PresupuestoDet">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdPresupuesto" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="EstadoCierre" />
-            <PropertyRef Name="IdGrupo" />
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="MontoSolicitado" />
-            <PropertyRef Name="MontoAprobado" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="Cantidad" />
-            <PropertyRef Name="ValorUnitario" />
-            <PropertyRef Name="Monto" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdPresupuesto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="EstadoCierre" Type="Boolean" Nullable="false" />
-          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="MontoSolicitado" Type="Double" Nullable="false" />
-          <Property Name="MontoAprobado" Type="Double" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdRubro" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
-          <Property Name="ValorUnitario" Type="Double" Nullable="false" />
-          <Property Name="Monto" Type="Double" Nullable="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -980,8 +966,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
             <EntityTypeMapping TypeName="Model_presupuesto.pre_PresupuestoDet">
               <MappingFragment StoreEntitySet="pre_PresupuestoDet">
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
-                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
@@ -994,8 +978,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
             <EntityTypeMapping TypeName="Model_presupuesto.vwpre_PresupuestoDet">
               <MappingFragment StoreEntitySet="vwpre_PresupuestoDet">
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
-                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />

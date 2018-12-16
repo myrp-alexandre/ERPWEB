@@ -19,8 +19,6 @@ namespace Core.Erp.Data
         public int Secuencia { get; set; }
         public int IdRubro { get; set; }
         public string IdCtaCble { get; set; }
-        public int Cantidad { get; set; }
-        public double ValorUnitario { get; set; }
         public double Monto { get; set; }
     
         public virtual pre_Presupuesto pre_Presupuesto { get; set; }

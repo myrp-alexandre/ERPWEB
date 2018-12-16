@@ -178,9 +178,7 @@ namespace Core.Erp.Data.Presupuesto
                                 Secuencia = Secuencia++,
                                 IdRubro = item.IdRubro,
                                 IdCtaCble = EntityRubro.IdCtaCble,
-                                Cantidad = item.Cantidad,
-                                ValorUnitario = item.ValorUnitario,
-                                Monto = (item.Cantidad * item.ValorUnitario)
+                                Monto = item.Monto
                             });
 
                         }
@@ -239,9 +237,7 @@ namespace Core.Erp.Data.Presupuesto
                                 Secuencia = Secuencia++,
                                 IdRubro = item.IdRubro,
                                 IdCtaCble = EntityRubro.IdCtaCble,
-                                Cantidad = item.Cantidad,
-                                ValorUnitario = item.ValorUnitario,
-                                Monto = (item.Cantidad * item.ValorUnitario)
+                                Monto = item.Monto
                             });
                         }
                     }

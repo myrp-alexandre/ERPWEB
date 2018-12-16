@@ -28,8 +28,6 @@ namespace Core.Erp.Data
         public int IdRubro { get; set; }
         public string Descripcion { get; set; }
         public string IdCtaCble { get; set; }
-        public int Cantidad { get; set; }
-        public double ValorUnitario { get; set; }
         public double Monto { get; set; }
     }
 }

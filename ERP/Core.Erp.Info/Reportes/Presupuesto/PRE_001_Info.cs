@@ -21,14 +21,13 @@ namespace Core.Erp.Info.Reportes.Presupuesto
         public string DescripcionRubro { get; set; }
         public string IdCtaCble { get; set; }
         public string pc_Cuenta { get; set; }
-        public int Cantidad { get; set; }
         public double Monto { get; set; }
-        public double ValorUnitario { get; set; }
         public bool Estado { get; set; }
         public double MontoSolicitado { get; set; }
         public double MontoAprobado { get; set; }
         public string Observacion { get; set; }
         public string MotivoAnulacion { get; set; }
         public string IdUsuarioAprobacion { get; set; }
+        public Nullable<System.DateTime> FechaAprobacion { get; set; }
     }
 }
