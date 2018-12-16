@@ -414,7 +414,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                         };
                                         info.ValorHora =Convert.ToDouble( empleado.Valor_horas_extras- empleado.Valor_horas_vespertina);
                                         info.NumHoras = Math.Round(Convert.ToDouble((horas_vesp + horas_mat) * (formula_horas.Dividendo / formula_horas.Divisor)));
-                                        info.Valor = Convert.ToDouble(empleado.Valor_horas_extras * info.NumHoras);
+                                        info.Valor = Convert.ToDouble(Convert.ToDouble(empleado.Valor_horas_extras - empleado.Valor_horas_vespertina) * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
                                         if (info.Valor > 0)
                                             lista_novedades.Add(info);
