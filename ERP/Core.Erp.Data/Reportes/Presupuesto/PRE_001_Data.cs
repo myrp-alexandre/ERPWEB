@@ -37,11 +37,10 @@ namespace Core.Erp.Data.Reportes.Presupuesto
                                  IdRubro = q.IdRubro,
                                  DescripcionRubro = q.DescripcionRubro,
                                  IdCtaCble = q.IdCtaCble,
-                                 Cantidad = q.Cantidad,
                                  Monto = q.Monto,
-                                 ValorUnitario = q.ValorUnitario,
                                  pc_Cuenta = q.pc_Cuenta,
-                                 IdUsuarioAprobacion = q.IdUsuarioAprobacion
+                                 IdUsuarioAprobacion = q.IdUsuarioAprobacion,
+                                 FechaAprobacion = q.FechaAprobacion
 
                              }).ToList();
                 }
