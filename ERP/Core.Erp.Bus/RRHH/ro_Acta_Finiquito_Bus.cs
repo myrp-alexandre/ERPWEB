@@ -176,9 +176,8 @@ namespace Core.Erp.Bus.RRHH
                     default:
                         break;
                 }
-                ObtenerIndemnizacionXDesahucio();
-                Obtenersueldo_no_pagados();
-                ObtenerAportePersonal();
+          //      Obtenersueldo_no_pagados();
+           //     ObtenerAportePersonal();
                 ObtenerProvisionDecimoIII();
                 ObtenerProvisionDecimoIV();
                 ObtenerProvisionFondoReserva();
@@ -486,7 +485,7 @@ namespace Core.Erp.Bus.RRHH
                     if(item_nov.rub_tipo=="E")
                         item.Valor =Math.Round( item_nov.Valor*-1,2);
                     else
-                        item.Valor = Math.Round(item_nov.Valor * -1, 2);
+                        item.Valor = Math.Round(item_nov.Valor, 2);
                     item.IdRubro = item_nov.IdRubro;
                     lst_valores_x_indegnizacion.Add(item);
                 }
@@ -531,9 +530,10 @@ namespace Core.Erp.Bus.RRHH
                 item.IdEmpleado = _Info.IdEmpleado;
                 item.IdActaFiniquito = _Info.IdActaFiniquito;
                 item.Observacion = "Decima tercera remuneracón";
-                item.Valor =Math.Round( vacaciones+(sueldo_base/12),2);
+                item.Valor =Math.Round( vacaciones,2);
                 item.IdRubro = info_rubros_calculados.IdRubro_prov_DIII;
-                lst_valores_x_indegnizacion.Add(item);
+                if (item.Valor != 0)
+                    lst_valores_x_indegnizacion.Add(item);
 
                 return true;
             }
@@ -553,8 +553,9 @@ namespace Core.Erp.Bus.RRHH
                 item.IdEmpleado = _Info.IdEmpleado;
                 item.IdActaFiniquito = _Info.IdActaFiniquito;
                 item.Observacion = "Decima cuarta remuneracón";
-                item.Valor =Math.Round( vacaciones+((info_parametro.Sueldo_basico/360)*dias_trabajados),2);
+                item.Valor =Math.Round( vacaciones,2);
                 item.IdRubro = info_rubros_calculados.IdRubro_prov_DIV;
+                if(item.Valor!=0)
                 lst_valores_x_indegnizacion.Add(item);
                 return true;
             }
@@ -577,7 +578,8 @@ namespace Core.Erp.Bus.RRHH
                 item.Observacion = "Provision de fondo de reserva";
                 item.Valor = Math.Round( (sueldo_base  *0.0833),2);
                 item.IdRubro = info_rubros_calculados.IdRubro_fondo_reserva;
-                lst_valores_x_indegnizacion.Add(item);
+                if (item.Valor != 0)
+                    lst_valores_x_indegnizacion.Add(item);
 
                 return true;
             }
