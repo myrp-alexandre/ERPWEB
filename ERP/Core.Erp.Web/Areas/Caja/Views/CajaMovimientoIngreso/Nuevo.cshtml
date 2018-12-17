@@ -36,7 +36,6 @@
             <div class="col-md-offset-7 col-md-2">
                 <div class="form-group">
                     <label for="">Fecha</label>
-                    <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
@@ -50,7 +49,6 @@
                         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                     }).GetHtml()
                         @Html.ValidationMessageFor(q => q.cm_fecha, "", new { @class = "text-danger" })
-                    </div>
                 </div>
             </div>
         </div>
