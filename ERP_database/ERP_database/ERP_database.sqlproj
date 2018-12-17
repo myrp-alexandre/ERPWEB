@@ -1059,7 +1059,6 @@
     <Build Include="dbo\Views\vwpre_rubro.sql" />
     <Build Include="dbo\Tables\Af_Activo_fijo_CtaCble.sql" />
     <Build Include="dbo\Views\vwro_EmpleadoNovedadCargaMasiva_det.sql" />
-    <Build Include="dbo\Tables\fa_factura_x_cxc_cobro_tipo.sql" />
     <Build Include="dbo\Views\vwCXP_Rpt001.sql" />
     <Build Include="dbo\Tables\ro_HorasProfesores_det.sql" />
     <Build Include="dbo\Tables\ro_HorasProfesores.sql" />
