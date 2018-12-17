@@ -26,14 +26,11 @@ namespace Core.Erp.Data.Contabilidad
                                  dc_Observacion = q.dc_Observacion,
                                  dc_Valor = q.dc_Valor,
                                  IdCbteCble = q.IdCbteCble,
-                                 IdCentroCosto = q.IdCentroCosto,
-                                 IdCentroCosto_sub_centro_costo = q.IdCentroCosto_sub_centro_costo,
                                  IdCtaCble = q.IdCtaCble,
-                                 IdPunto_cargo = q.IdPunto_cargo,
-                                 IdPunto_cargo_grupo = q.IdPunto_cargo_grupo,
                                  IdTipoCbte = q.IdTipoCbte,
                                  secuencia = q.secuencia,
-                                 dc_para_conciliar_null = q.dc_para_conciliar
+                                 dc_para_conciliar_null = q.dc_para_conciliar,
+                                 IdGrupoPresupuesto = q.IdGrupoPresupuesto
                              }).ToList();
                 }
                 Lista.ForEach(q => { q.dc_Valor_debe = q.dc_Valor > 0 ? q.dc_Valor : 0; q.dc_Valor_haber = q.dc_Valor < 0 ? Math.Abs( q.dc_Valor) : 0; q.dc_para_conciliar = q.dc_para_conciliar_null == null ? false : Convert.ToBoolean(q.dc_para_conciliar_null); });

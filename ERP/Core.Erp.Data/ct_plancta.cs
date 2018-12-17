@@ -17,8 +17,8 @@ namespace Core.Erp.Data
         public ct_plancta()
         {
             this.ct_anio_fiscal_x_cuenta_utilidad = new HashSet<ct_anio_fiscal_x_cuenta_utilidad>();
-            this.ct_cbtecble_det = new HashSet<ct_cbtecble_det>();
             this.ct_plancta1 = new HashSet<ct_plancta>();
+            this.ct_cbtecble_det = new HashSet<ct_cbtecble_det>();
         }
     
         public int IdEmpresa { get; set; }
@@ -40,10 +40,10 @@ namespace Core.Erp.Data
         public string MotivoAnulacion { get; set; }
     
         public virtual ICollection<ct_anio_fiscal_x_cuenta_utilidad> ct_anio_fiscal_x_cuenta_utilidad { get; set; }
-        public virtual ICollection<ct_cbtecble_det> ct_cbtecble_det { get; set; }
         public virtual ct_grupocble ct_grupocble { get; set; }
         public virtual ICollection<ct_plancta> ct_plancta1 { get; set; }
         public virtual ct_plancta ct_plancta2 { get; set; }
         public virtual ct_plancta_nivel ct_plancta_nivel { get; set; }
+        public virtual ICollection<ct_cbtecble_det> ct_cbtecble_det { get; set; }
     }
 }

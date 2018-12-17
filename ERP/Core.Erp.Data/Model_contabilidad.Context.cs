@@ -30,7 +30,6 @@ namespace Core.Erp.Data
         public DbSet<ct_anio_fiscal> ct_anio_fiscal { get; set; }
         public DbSet<ct_anio_fiscal_x_cuenta_utilidad> ct_anio_fiscal_x_cuenta_utilidad { get; set; }
         public DbSet<ct_cbtecble> ct_cbtecble { get; set; }
-        public DbSet<ct_cbtecble_det> ct_cbtecble_det { get; set; }
         public DbSet<ct_cbtecble_Reversado> ct_cbtecble_Reversado { get; set; }
         public DbSet<ct_cbtecble_tipo> ct_cbtecble_tipo { get; set; }
         public DbSet<ct_grupocble> ct_grupocble { get; set; }
@@ -46,6 +45,7 @@ namespace Core.Erp.Data
         public DbSet<ct_parametro> ct_parametro { get; set; }
         public DbSet<vwct_RevisionContableFacturas> vwct_RevisionContableFacturas { get; set; }
         public DbSet<ct_plancta> ct_plancta { get; set; }
+        public DbSet<ct_cbtecble_det> ct_cbtecble_det { get; set; }
     
         public virtual ObjectResult<generarATS_Result> generarATS(Nullable<int> idempresa, Nullable<int> idPeriodo)
         {

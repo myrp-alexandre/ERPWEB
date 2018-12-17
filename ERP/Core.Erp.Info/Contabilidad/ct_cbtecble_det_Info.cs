@@ -15,14 +15,11 @@ namespace Core.Erp.Info.Contabilidad
         public int secuencia { get; set; }
         [Required(ErrorMessage = "El campo cuenta contable es obligatorio")]
         public string IdCtaCble { get; set; }
-        public string IdCentroCosto { get; set; }
-        public string IdCentroCosto_sub_centro_costo { get; set; }
         public double dc_Valor { get; set; }
         public string dc_Observacion { get; set; }
-        public Nullable<int> IdPunto_cargo { get; set; }
-        public Nullable<int> IdPunto_cargo_grupo { get; set; }
         public bool dc_para_conciliar { get; set; }
         public bool? dc_para_conciliar_null { get; set; }
+        public Nullable<int> IdGrupoPresupuesto { get; set; }
 
         //campos que no existen en la tabla
         [Required(ErrorMessage = "El campo cuenta valor debe es obligatorio")]

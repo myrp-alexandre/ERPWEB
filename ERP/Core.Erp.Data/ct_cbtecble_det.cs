@@ -19,16 +19,12 @@ namespace Core.Erp.Data
         public decimal IdCbteCble { get; set; }
         public int secuencia { get; set; }
         public string IdCtaCble { get; set; }
-        public string IdCentroCosto { get; set; }
-        public string IdCentroCosto_sub_centro_costo { get; set; }
         public double dc_Valor { get; set; }
         public string dc_Observacion { get; set; }
-        public Nullable<int> IdPunto_cargo { get; set; }
-        public Nullable<int> IdPunto_cargo_grupo { get; set; }
         public Nullable<bool> dc_para_conciliar { get; set; }
+        public Nullable<int> IdGrupoPresupuesto { get; set; }
     
         public virtual ct_cbtecble ct_cbtecble { get; set; }
-        public virtual ct_punto_cargo ct_punto_cargo { get; set; }
         public virtual ct_plancta ct_plancta { get; set; }
     }
 }
