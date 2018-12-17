@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
 using DevExpress.Web.Mvc;
+using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -29,12 +31,21 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #region aprobacion horas extras
         public ActionResult Index2()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index2(cl_filtros_Info model)
+        {
+            return View(model);
+
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_aprobacion_horas_extras()
+        public ActionResult GridViewPartial_aprobacion_horas_extras(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"].ToString());
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             lst_horas_extras = bus_horas_extras.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_aprobacion_horas_extras", lst_horas_extras);
         }
@@ -82,13 +93,21 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info();
+            return View(model);
         }
-      
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_horas_extras()
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
         {
-            int IdEmpresa=Convert.ToInt32( Session["IdEmpresa"].ToString());
+            return View(model);
+
+        }
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_horas_extras(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             lst_horas_extras = bus_horas_extras.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_horas_extras", lst_horas_extras);
         }

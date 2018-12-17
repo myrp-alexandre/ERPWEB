@@ -9,7 +9,7 @@
 
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
-        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "HorasExtras", Action = "EditingUpdate", Area = "RRHH" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "HorasExtras", Action = "EditingDelete", Area = "RRHH" };
 
@@ -19,12 +19,15 @@
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
-        settings.Settings.ShowFilterRow = true;
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
+
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -33,18 +36,7 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
 
-        settings.SettingsExport.EnableClientSideExportAPI = true;
-        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.DataAware;
-        settings.Toolbars.Add(t =>
-        {
-            t.EnableAdaptivity = true;
-            t.Items.Add(GridViewToolbarCommand.ExportToPdf);
-            t.Items.Add(GridViewToolbarCommand.ExportToXls);
-            t.Items.Add(GridViewToolbarCommand.ExportToXlsx);
-            t.Items.Add(GridViewToolbarCommand.ExportToDocx);
-            t.Items.Add(GridViewToolbarCommand.ExportToRtf);
-            t.Items.Add(GridViewToolbarCommand.ExportToCsv);
-        });
+
         settings.Columns.Add("IdCalendario").Visible = false;
         settings.Columns.Add("IdEmpleado","ID emp.").Width = Unit.Percentage(5);
         settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(5);
