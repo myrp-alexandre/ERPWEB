@@ -341,8 +341,8 @@
           <Property Name="ventasEstab" Type="numeric" Precision="20" Scale="2" Nullable="false" />
           <Property Name="ivaComp" Type="numeric" Precision="20" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwct_cbtecble_con_ctacble_acreedora' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_cbtecble_con_ctacble_acreedora' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwct_cbtecble_con_ctacble_acreedora">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -354,8 +354,10 @@ warning 6002: The table/view 'DBERP.dbo.vwct_cbtecble_con_ctacble_acreedora' doe
           <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdCtaCble_Acreedora" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Grupo_x_CtaCble' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwct_RevisionContableFacturas">
           <Key>
             <PropertyRef Name="IdEmpresa" />

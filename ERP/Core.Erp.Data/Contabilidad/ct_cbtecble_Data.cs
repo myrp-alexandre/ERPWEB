@@ -159,7 +159,7 @@ namespace Core.Erp.Data.Contabilidad
                         IdCbteCble = info.IdCbteCble=get_id(info.IdEmpresa, info.IdTipoCbte),
                         IdPeriodo = info.IdPeriodo = Convert.ToInt32(info.cb_Fecha.Year.ToString()+ info.cb_Fecha.Month.ToString("00")),
                         IdTipoCbte = info.IdTipoCbte,
-
+                        
                         IdUsuario = info.IdUsuario,
                         cb_FechaTransac = DateTime.Now
                     };

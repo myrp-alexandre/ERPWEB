@@ -153,6 +153,25 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Grupo' no tiene definida nin
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Grupo_x_CtaCble' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwpre_Grupo_x_CtaCble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="FechaFin" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Presupuesto' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwpre_Presupuesto">
           <Key>
@@ -347,6 +366,17 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
     [vwpre_Grupo].[Nombre] AS [Nombre]
     FROM [dbo].[vwpre_Grupo] AS [vwpre_Grupo]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwpre_Grupo_x_CtaCble" EntityType="Self.vwpre_Grupo_x_CtaCble" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwpre_Grupo_x_CtaCble].[IdEmpresa] AS [IdEmpresa], 
+    [vwpre_Grupo_x_CtaCble].[IdSucursal] AS [IdSucursal], 
+    [vwpre_Grupo_x_CtaCble].[IdCtaCble] AS [IdCtaCble], 
+    [vwpre_Grupo_x_CtaCble].[FechaInicio] AS [FechaInicio], 
+    [vwpre_Grupo_x_CtaCble].[FechaFin] AS [FechaFin], 
+    [vwpre_Grupo_x_CtaCble].[IdGrupo] AS [IdGrupo], 
+    [vwpre_Grupo_x_CtaCble].[Descripcion] AS [Descripcion]
+    FROM [dbo].[vwpre_Grupo_x_CtaCble] AS [vwpre_Grupo_x_CtaCble]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwpre_Presupuesto" EntityType="Self.vwpre_Presupuesto" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwpre_Presupuesto].[IdEmpresa] AS [IdEmpresa], 
@@ -465,6 +495,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
             <End Role="pre_Rubro" EntitySet="pre_Rubro" />
             <End Role="pre_PresupuestoDet" EntitySet="pre_PresupuestoDet" />
           </AssociationSet>
+          <EntitySet Name="vwpre_Grupo_x_CtaCble" EntityType="Model_presupuesto.vwpre_Grupo_x_CtaCble" />
           </EntityContainer>
         <EntityType Name="pre_Grupo">
           <Key>
@@ -792,6 +823,23 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwpre_Grupo_x_CtaCble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="FechaFin" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -991,6 +1039,19 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Rubro' no tiene definida nin
                 <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwpre_Grupo_x_CtaCble">
+            <EntityTypeMapping TypeName="Model_presupuesto.vwpre_Grupo_x_CtaCble">
+              <MappingFragment StoreEntitySet="vwpre_Grupo_x_CtaCble">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

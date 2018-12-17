@@ -17,6 +17,7 @@ using Core.Erp.Bus.Inventario;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Info.Banco;
 using Core.Erp.Bus.Banco;
+using Core.Erp.Bus.Presupuesto;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -42,6 +43,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_orden_giro_det_Info_List List_det = new cp_orden_giro_det_Info_List();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+        pre_Grupo_Bus bus_grupo = new pre_Grupo_Bus();
         cp_orden_giro_det_Bus bus_det = new cp_orden_giro_det_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         tb_sis_Documento_Tipo_Talonario_Bus bus_documento = new tb_sis_Documento_Tipo_Talonario_Bus();
@@ -245,10 +247,25 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
         }
+
+        public ActionResult CargarGrupo(DateTime co_FechaFactura, int IdSucursal = 0, string IdCtaCble = "")
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            return GridViewExtension.GetComboBoxCallbackResult(p =>
+            {
+                p.TextField = "Descripcion";
+                p.ValueField = "IdGrupo";
+                p.ValueType = typeof(int);
+                p.BindList(bus_grupo.get_list_x_CtaCble(IdEmpresa, IdSucursal, IdCtaCble, co_FechaFactura));
+            });
+        }
+
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+            pre_Grupo_Bus bus_grupo = new pre_Grupo_Bus();
+
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
         }
@@ -892,6 +909,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
             info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
+            info_det.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
+            //info_det.Descripcion = info_det.Descripcion;
             list.Add(info_det);
         }
 
@@ -903,6 +922,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             edited_info.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
             edited_info.dc_Valor_debe = info_det.dc_Valor_debe;
             edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
+            edited_info.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
+            //edited_info.Descripcion = info_det.Descripcion;
         }
 
         public void DeleteRow(int secuencia, decimal IdTransaccionSession)

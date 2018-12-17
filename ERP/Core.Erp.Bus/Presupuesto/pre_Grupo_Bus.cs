@@ -22,6 +22,18 @@ namespace Core.Erp.Bus.Presupuesto
             }
         }
 
+        public List<pre_Grupo_Info> get_list_x_CtaCble(int IdEmpresa, int IdSucursal, string IdCtaCble, DateTime Fecha)
+        {
+            try
+            {
+                return odata.get_list_x_CtaCble(IdEmpresa, IdSucursal, IdCtaCble, Fecha);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<pre_Grupo_Info> GetList_x_Usuario(int IdEmpresa, string IdUsuario)
         {
             try

@@ -22,6 +22,7 @@
         <EntityTypeShape EntityType="Model_presupuesto.vwpre_PresupuestoDet" Width="1.5" PointX="0.75" PointY="10.75" />
         <AssociationConnector Association="Model_presupuesto.FK_pre_PresupuestoDet_pre_Presupuesto" />
         <AssociationConnector Association="Model_presupuesto.FK_pre_Presupuesto_x_grupo_det_pre_rubro" />
+        <EntityTypeShape EntityType="Model_presupuesto.vwpre_Grupo_x_CtaCble" Width="1.5" PointX="3.375" PointY="10.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

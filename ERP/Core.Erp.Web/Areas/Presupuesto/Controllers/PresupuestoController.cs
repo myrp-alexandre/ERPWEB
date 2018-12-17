@@ -437,17 +437,19 @@ namespace Core.Erp.Web.Areas.Presupuesto.Controllers
                 IExcelDataReader reader = null;
                 reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
+                var SecDet = 1;
                 #region Presupuesto                
                 while (reader.Read())
-                {
+                {                    
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
                         var IdRubroDet = Convert.ToInt32(reader.GetValue(0));
                         pre_rubro_Info infoRubro = bus_rubro.GetInfo(IdEmpresa, IdRubroDet);
-
+                        
                         pre_PresupuestoDet_Info info = new pre_PresupuestoDet_Info
                         {
-                            IdEmpresa = IdEmpresa,                            
+                            IdEmpresa = IdEmpresa,
+                            Secuencia = SecDet++,
                             IdRubro = IdRubroDet,
                             Descripcion = infoRubro.Descripcion,
                             Monto = Convert.ToDouble(reader.GetValue(1)),

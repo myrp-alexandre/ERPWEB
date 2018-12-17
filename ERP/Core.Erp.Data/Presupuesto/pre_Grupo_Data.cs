@@ -59,6 +59,30 @@ namespace Core.Erp.Data.Presupuesto
             }            
         }
 
+        public List<pre_Grupo_Info> get_list_x_CtaCble(int IdEmpresa, int IdSucursal, string IdCtaCble, DateTime Fecha)
+        {
+            try
+            {
+                List<pre_Grupo_Info> Lista;
+
+                using (Entities_presupuesto db = new Entities_presupuesto())
+                {
+                    Lista = db.vwpre_Grupo_x_CtaCble.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdCtaCble == IdCtaCble
+                    && (Fecha >= q.FechaInicio  && Fecha<= q.FechaFin ) ).Select(q => new pre_Grupo_Info
+                    {
+                        IdGrupo = q.IdGrupo,
+                        Descripcion = q.Descripcion
+                    }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public pre_Grupo_Info get_info(int IdEmpresa, int IdGrupo)
         {
             try

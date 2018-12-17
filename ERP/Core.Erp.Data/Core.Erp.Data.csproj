@@ -2049,6 +2049,9 @@
     <Compile Include="vwpre_Grupo.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwpre_Grupo_x_CtaCble.cs">
+      <DependentUpon>Model_presupuesto.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwpre_Presupuesto.cs">
       <DependentUpon>Model_presupuesto.tt</DependentUpon>
     </Compile>

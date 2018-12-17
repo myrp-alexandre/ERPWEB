@@ -16,13 +16,13 @@
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
-        settings.CommandColumn.Visible = false;
-        settings.CommandColumn.ShowNewButton = false;
-        settings.CommandColumn.ShowEditButton = false;
-        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
 
-        settings.SettingsContextMenu.Enabled = false;
-        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
 
         settings.SettingsPager.Visible = true;
@@ -55,7 +55,7 @@
             column.FieldName = "Monto";
             column.Caption = "Monto";
             column.Width = Unit.Percentage(30);
-            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.EditFormSettings.Visible = DefaultBoolean.True;            
         });
         settings.Columns.Add(column =>
         {

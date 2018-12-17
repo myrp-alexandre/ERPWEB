@@ -18,7 +18,6 @@
     }
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-
 @using (Html.BeginForm("Nuevo", "Deudas", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
@@ -27,9 +26,6 @@
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
     @Html.HiddenFor(q => q.co_fechaOg)
-
-
-
 
     <div class="row">
         <div class="col-md-12">
@@ -562,6 +558,15 @@
     }
 }
 <script>
+
+    function OnSelectedCtaCbleChanged() {
+        GridViewPartial_deudas_dc.GetEditor("IdGrupoPresupuesto").PerformCallback();
+    }
+    function GrupoComboBox_BeginCallback(s, e) {
+        e.customArgs["IdCtaCble"] = GridViewPartial_deudas_dc.GetEditor("IdCtaCble").GetValue();
+        e.customArgs["IdSucursal"] = $('#IdSucursal').val();
+        e.customArgs["co_FechaFactura"] = co_FechaFactura.GetValue();
+    }
 
 
     $(function () {

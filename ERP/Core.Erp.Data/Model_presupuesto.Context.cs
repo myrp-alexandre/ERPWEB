@@ -36,5 +36,6 @@ namespace Core.Erp.Data
         public virtual DbSet<pre_PresupuestoPeriodo> pre_PresupuestoPeriodo { get; set; }
         public virtual DbSet<pre_PresupuestoDet> pre_PresupuestoDet { get; set; }
         public virtual DbSet<vwpre_PresupuestoDet> vwpre_PresupuestoDet { get; set; }
+        public virtual DbSet<vwpre_Grupo_x_CtaCble> vwpre_Grupo_x_CtaCble { get; set; }
     }
 }
