@@ -645,12 +645,14 @@ namespace Core.Erp.Data.Caja
                 cp_parametros Entity_p = Context_cxp.cp_parametros.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                 caj_parametro Entity_pc = Context.caj_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                 cp_orden_pago_tipo_x_empresa Entity_op_tipo = Context_cxp.cp_orden_pago_tipo_x_empresa.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipo_op == cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString()).FirstOrDefault();
-                if (Entity_p == null || Entity_pc == null || Entity_op_tipo == null)
+                caj_Caja Caja = Context.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == info.IdCaja).FirstOrDefault();
+                if (Entity_p == null || Entity_pc == null || Entity_op_tipo == null || Caja == null)
                     return false;
                 int IdTipoCbte_NC = Convert.ToInt32(Entity_p.pa_TipoCbte_NC);
                 int IdTipoCbte_EG = Entity_pc.IdTipoCbteCble_MoviCaja_Egr;
                 int IdTipoCbte_op = Convert.ToInt32(Entity_op_tipo.IdTipoCbte_OP);
                 int IdTipoCbte_IN = Entity_pc.IdTipoCbteCble_MoviCaja_Ing;
+                int IdSucursal = Convert.ToInt32(Caja.IdSucursal);
                 #endregion
 
                 cp_conciliacion_Caja Entity = Context.cp_conciliacion_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion_Caja == info.IdConciliacion_Caja).FirstOrDefault();
@@ -1031,6 +1033,7 @@ namespace Core.Erp.Data.Caja
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdOrdenPago = IdOrdenPago++,
+                        IdSucursal = IdSucursal,
                         Observacion = "Caja #" + info.IdConciliacion_Caja,
                         IdTipo_op = cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString(),
                         IdTipo_Persona = info.IdTipoPersona,
@@ -1038,7 +1041,7 @@ namespace Core.Erp.Data.Caja
                         IdEntidad = info.IdEntidad,
                         Fecha = info.FechaOP.Date,
                         IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
-                        IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
+                        IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
                         Estado = "A"
                     };
                     info.IdEmpresa_op = op.IdEmpresa;
