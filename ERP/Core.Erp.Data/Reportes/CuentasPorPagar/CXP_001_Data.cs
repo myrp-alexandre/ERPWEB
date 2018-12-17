@@ -32,11 +32,9 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  em_nombre = q.em_nombre,
                                  Su_Descripcion = q.Su_Descripcion,
                                  pr_nombre = q.pr_nombre,
-                                 nom_CentroCosto = q.nom_CentroCosto,
                                  IdIden_credito = q.IdIden_credito,
                                  IdOrden_giro_Tipo = q.IdOrden_giro_Tipo,
                                  IdProveedor = q.IdProveedor,
-                                 nom_CentroCosto_sub_centro_costo = q.nom_CentroCosto,
                                  co_fechaOg = q.co_fechaOg,
                                  co_serie = q.co_serie,
                                  co_factura = q.co_factura,
@@ -51,16 +49,10 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  secuencia = q.secuencia,
                                  IdCtaCble = q.IdCtaCble,
                                  pc_Cuenta = q.pc_Cuenta,
-                                 idCentroCosto = q.idCentroCosto,
-                                 idCentroCosto_sub_centro_costo = q.idCentroCosto_sub_centro_costo,
                                  dc_Valor = q.dc_Valor,
                                  dc_Valor_Debe = q.dc_Valor_Debe,
                                  dc_Valor_Haber = q.dc_Valor_Haber,
                                  dc_Observacion = q.dc_Observacion,
-                                 IdPunto_cargo = q.IdPunto_cargo,
-                                 nom_punto_cargo = q.nom_punto_cargo,
-                                 IdPunto_cargo_grupo = q.IdPunto_cargo_grupo,
-                                 nom_punto_cargo_grupo = q.nom_punto_cargo_grupo
                              }).ToList();
                 }
                 return Lista;
