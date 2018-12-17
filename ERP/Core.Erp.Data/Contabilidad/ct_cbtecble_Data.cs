@@ -173,12 +173,11 @@ namespace Core.Erp.Data.Contabilidad
                                 IdCbteCble = Entity.IdCbteCble,
                                 IdTipoCbte = Entity.IdTipoCbte,                                
                                 dc_Observacion = item.dc_Observacion,
-                                dc_Valor = item.dc_Valor,                                
-                                IdCentroCosto = item.IdCentroCosto,
-                                IdCentroCosto_sub_centro_costo = item.IdCentroCosto_sub_centro_costo,
+                                dc_Valor = item.dc_Valor,
                                 IdCtaCble = item.IdCtaCble,                                
                                 secuencia = secuencia++,
-                                dc_para_conciliar = item.dc_para_conciliar
+                                dc_para_conciliar = item.dc_para_conciliar,
+                                IdGrupoPresupuesto = item.IdGrupoPresupuesto
                             };
                             Context.ct_cbtecble_det.Add(Entity_det);                        
                     }
@@ -225,11 +224,10 @@ namespace Core.Erp.Data.Contabilidad
                             IdTipoCbte = Entity.IdTipoCbte,
                             dc_Observacion = item.dc_Observacion,
                             dc_Valor = item.dc_Valor,
-                            IdCentroCosto = item.IdCentroCosto,
-                            IdCentroCosto_sub_centro_costo = item.IdCentroCosto_sub_centro_costo,
                             IdCtaCble = item.IdCtaCble,
                             secuencia = secuencia++,
-                            dc_para_conciliar = item.dc_para_conciliar
+                            dc_para_conciliar = item.dc_para_conciliar,
+                            IdGrupoPresupuesto = item.IdGrupoPresupuesto
                         };
                         Context.ct_cbtecble_det.Add(Entity_det);
                     }
@@ -297,8 +295,7 @@ namespace Core.Erp.Data.Contabilidad
                             IdCtaCble = item.IdCtaCble,
                             dc_Observacion = "**REVERSO DE DIARIO tipo: " + Entity.IdTipoCbte.ToString() + " #cbte: " + Entity.IdCbteCble.ToString() + "** " + item.dc_Observacion,
                             dc_Valor = item.dc_Valor * -1,
-                            IdCentroCosto = item.IdCentroCosto,
-                            IdCentroCosto_sub_centro_costo = item.IdCentroCosto_sub_centro_costo,
+                            IdGrupoPresupuesto = item.IdGrupoPresupuesto,
                             dc_para_conciliar = false
                         };
                         Context.ct_cbtecble_det.Add(Entity_reverso_det);

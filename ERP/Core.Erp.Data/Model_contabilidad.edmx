@@ -64,13 +64,10 @@
           <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="secuencia" Type="int" Nullable="false" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="IdCentroCosto" Type="varchar" MaxLength="20" />
-          <Property Name="IdCentroCosto_sub_centro_costo" Type="varchar" MaxLength="20" />
           <Property Name="dc_Valor" Type="float" Nullable="false" />
           <Property Name="dc_Observacion" Type="varchar(max)" />
-          <Property Name="IdPunto_cargo" Type="int" />
-          <Property Name="IdPunto_cargo_grupo" Type="int" />
           <Property Name="dc_para_conciliar" Type="bit" />
+          <Property Name="IdGrupoPresupuesto" Type="int" />
         </EntityType>
         <EntityType Name="ct_cbtecble_Reversado">
           <Key>
@@ -498,20 +495,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ct_cbtecble_det_ct_punto_cargo">
-          <End Role="ct_punto_cargo" Type="Self.ct_punto_cargo" Multiplicity="0..1" />
-          <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_punto_cargo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPunto_cargo" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPunto_cargo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble">
           <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
           <End Role="ct_cbtecble_Reversado" Type="Self.ct_cbtecble_Reversado" Multiplicity="*" />
@@ -703,10 +686,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
             <End Role="ct_plancta" EntitySet="ct_plancta" />
             <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
           </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_det_ct_punto_cargo" Association="Self.FK_ct_cbtecble_det_ct_punto_cargo">
-            <End Role="ct_punto_cargo" EntitySet="ct_punto_cargo" />
-            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble" Association="Self.FK_ct_cbtecble_Reversado_ct_cbtecble">
             <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
             <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
@@ -800,32 +779,9 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
           <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
           <NavigationProperty Name="ct_cbtecble_tipo" Relationship="Self.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble" ToRole="ct_cbtecble_tipo" />
           <NavigationProperty Name="ct_periodo" Relationship="Self.FK_ct_cbtecble_ct_periodo" FromRole="ct_cbtecble" ToRole="ct_periodo" />
-          <NavigationProperty Name="ct_cbtecble_det" Relationship="Self.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_det" />
           <NavigationProperty Name="ct_cbtecble_Reversado" Relationship="Self.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
           <NavigationProperty Name="ct_cbtecble_Reversado1" Relationship="Self.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
-        </EntityType>
-        <EntityType Name="ct_cbtecble_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdTipoCbte" />
-            <PropertyRef Name="IdCbteCble" />
-            <PropertyRef Name="secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdCentroCosto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCentroCosto_sub_centro_costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="dc_Valor" Type="Double" Nullable="false" />
-          <Property Name="dc_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdPunto_cargo" Type="Int32" />
-          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
-          <Property Name="dc_para_conciliar" Type="Boolean" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble_det" ToRole="ct_cbtecble" />
-          <NavigationProperty Name="ct_punto_cargo" Relationship="Self.FK_ct_cbtecble_det_ct_punto_cargo" FromRole="ct_cbtecble_det" ToRole="ct_punto_cargo" />
-          <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_cbtecble_det" ToRole="ct_plancta" />
+          <NavigationProperty Name="ct_cbtecble_det" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_det" />
         </EntityType>
         <EntityType Name="ct_cbtecble_Reversado">
           <Key>
@@ -929,7 +885,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
           <Property Name="nom_punto_cargo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="IdPunto_cargo_grupo" Type="Int32" />
-          <NavigationProperty Name="ct_cbtecble_det" Relationship="Self.FK_ct_cbtecble_det_ct_punto_cargo" FromRole="ct_punto_cargo" ToRole="ct_cbtecble_det" />
         </EntityType>
         <EntityType Name="ATS_compras">
           <Key>
@@ -1167,22 +1122,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ct_cbtecble_det_ct_cbtecble">
-          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
-          <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble">
           <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
           <End Role="ct_cbtecble_Reversado" Type="Self.ct_cbtecble_Reversado" Multiplicity="*" />
@@ -1215,25 +1154,10 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ct_cbtecble_det_ct_punto_cargo">
-          <End Role="ct_punto_cargo" Type="Self.ct_punto_cargo" Multiplicity="0..1" />
-          <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_punto_cargo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPunto_cargo" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPunto_cargo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities_contabilidad" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ct_anio_fiscal" EntityType="Self.ct_anio_fiscal" />
           <EntitySet Name="ct_anio_fiscal_x_cuenta_utilidad" EntityType="Self.ct_anio_fiscal_x_cuenta_utilidad" />
           <EntitySet Name="ct_cbtecble" EntityType="Self.ct_cbtecble" />
-          <EntitySet Name="ct_cbtecble_det" EntityType="Self.ct_cbtecble_det" />
           <EntitySet Name="ct_cbtecble_Reversado" EntityType="Self.ct_cbtecble_Reversado" />
           <EntitySet Name="ct_cbtecble_tipo" EntityType="Self.ct_cbtecble_tipo" />
           <EntitySet Name="ct_grupocble" EntityType="Self.ct_grupocble" />
@@ -1270,10 +1194,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
             <End Role="ct_periodo" EntitySet="ct_periodo" />
             <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
           </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_det_ct_cbtecble" Association="Self.FK_ct_cbtecble_det_ct_cbtecble">
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble" Association="Self.FK_ct_cbtecble_Reversado_ct_cbtecble">
             <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
             <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
@@ -1281,10 +1201,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
           <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble1" Association="Self.FK_ct_cbtecble_Reversado_ct_cbtecble1">
             <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
             <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_det_ct_punto_cargo" Association="Self.FK_ct_cbtecble_det_ct_punto_cargo">
-            <End Role="ct_punto_cargo" EntitySet="ct_punto_cargo" />
-            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
           </AssociationSet>
           <FunctionImport Name="generarATS" ReturnType="Collection(Model_contabilidad.generarATS_Result)">
             <Parameter Name="idempresa" Mode="In" Type="Int32" />
@@ -1305,10 +1221,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
             <End Role="ct_plancta" EntitySet="ct_plancta" />
             <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
           </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_det_ct_plancta" Association="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta">
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_ct_plancta_ct_grupocble" Association="Model_contabilidad.FK_ct_plancta_ct_grupocble">
             <End Role="ct_grupocble" EntitySet="ct_grupocble" />
             <End Role="ct_plancta" EntitySet="ct_plancta" />
@@ -1320,6 +1232,15 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
           <AssociationSet Name="FK_ct_plancta_ct_plancta_nivel" Association="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel">
             <End Role="ct_plancta_nivel" EntitySet="ct_plancta_nivel" />
             <End Role="ct_plancta" EntitySet="ct_plancta" />
+          </AssociationSet>
+          <EntitySet Name="ct_cbtecble_det" EntityType="Model_contabilidad.ct_cbtecble_det" />
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_cbtecble" Association="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_plancta" Association="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="generarATS_Result">
@@ -1434,11 +1355,11 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_plancta" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
-          <NavigationProperty Name="ct_cbtecble_det" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_plancta" ToRole="ct_cbtecble_det" />
           <NavigationProperty Name="ct_grupocble" Relationship="Model_contabilidad.FK_ct_plancta_ct_grupocble" FromRole="ct_plancta" ToRole="ct_grupocble" />
           <NavigationProperty Name="ct_plancta1" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta" FromRole="ct_plancta" ToRole="ct_plancta1" />
           <NavigationProperty Name="ct_plancta2" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta" FromRole="ct_plancta1" ToRole="ct_plancta" />
           <NavigationProperty Name="ct_plancta_nivel" Relationship="Model_contabilidad.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta" ToRole="ct_plancta_nivel" />
+          <NavigationProperty Name="ct_cbtecble_det" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_plancta" ToRole="ct_cbtecble_det" />
         </EntityType>
         <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
           <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="0..1" />
@@ -1449,20 +1370,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
               <PropertyRef Name="IdCtaCble" />
             </Principal>
             <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_cbtecble_det_ct_plancta">
-          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_det">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdCtaCble" />
             </Dependent>
@@ -1505,6 +1412,55 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
             <Dependent Role="ct_plancta">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdNivelCta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ct_cbtecble_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="dc_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="dc_para_conciliar" Type="Boolean" />
+          <Property Name="IdGrupoPresupuesto" Type="Int32" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble_det" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_cbtecble_det" ToRole="ct_plancta" />
+        </EntityType>
+        <Association Name="FK_ct_cbtecble_det_ct_cbtecble">
+          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_det_ct_plancta">
+          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1558,24 +1514,6 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
                 <ScalarProperty Name="cb_FechaAnu" ColumnName="cb_FechaAnu" />
                 <ScalarProperty Name="cb_FechaTransac" ColumnName="cb_FechaTransac" />
                 <ScalarProperty Name="cb_FechaUltModi" ColumnName="cb_FechaUltModi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ct_cbtecble_det">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_cbtecble_det">
-              <MappingFragment StoreEntitySet="ct_cbtecble_det">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
-                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
-                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
-                <ScalarProperty Name="IdCentroCosto_sub_centro_costo" ColumnName="IdCentroCosto_sub_centro_costo" />
-                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
-                <ScalarProperty Name="dc_Observacion" ColumnName="dc_Observacion" />
-                <ScalarProperty Name="IdPunto_cargo" ColumnName="IdPunto_cargo" />
-                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
-                <ScalarProperty Name="dc_para_conciliar" ColumnName="dc_para_conciliar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1895,6 +1833,21 @@ warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not 
                 <ScalarProperty Name="IdCtaCblePadre" ColumnName="IdCtaCblePadre" />
                 <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_cbtecble_det">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_cbtecble_det">
+              <MappingFragment StoreEntitySet="ct_cbtecble_det">
+                <ScalarProperty Name="IdGrupoPresupuesto" ColumnName="IdGrupoPresupuesto" />
+                <ScalarProperty Name="dc_para_conciliar" ColumnName="dc_para_conciliar" />
+                <ScalarProperty Name="dc_Observacion" ColumnName="dc_Observacion" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

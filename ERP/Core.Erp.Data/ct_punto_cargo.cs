@@ -14,18 +14,11 @@ namespace Core.Erp.Data
     
     public partial class ct_punto_cargo
     {
-        public ct_punto_cargo()
-        {
-            this.ct_cbtecble_det = new HashSet<ct_cbtecble_det>();
-        }
-    
         public int IdEmpresa { get; set; }
         public int IdPunto_cargo { get; set; }
         public string codPunto_cargo { get; set; }
         public string nom_punto_cargo { get; set; }
         public string Estado { get; set; }
         public Nullable<int> IdPunto_cargo_grupo { get; set; }
-    
-        public virtual ICollection<ct_cbtecble_det> ct_cbtecble_det { get; set; }
     }
 }

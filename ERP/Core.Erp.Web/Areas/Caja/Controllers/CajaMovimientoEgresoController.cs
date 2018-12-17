@@ -195,7 +195,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 ViewBag.mensaje = "Debe ingresar los parámetros para usar el módulo";
                 return View(model);
             }
-            model.IdTipocbte = i_parametro.IdTipoCbteCble_MoviCaja_Ing;
+            model.IdTipocbte = i_parametro.IdTipoCbteCble_MoviCaja_Egr;
             model.cm_Signo = "-";
             #endregion
 

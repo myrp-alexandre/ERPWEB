@@ -43,8 +43,8 @@ namespace Core.Erp.Data.Reportes.Caja
                                  Dif_x_pagar_o_cobrar = q.Dif_x_pagar_o_cobrar,
                                  TIPO = q.TIPO,
                                  Fecha_fin = q.Fecha_fin,
-                                 Fecha_ini = q.Fecha_ini
-                                 
+                                 Fecha_ini = q.Fecha_ini,
+                                 NombreCaja = q.NombreCaja
                              }).ToList();
                 }
                 return Lista;

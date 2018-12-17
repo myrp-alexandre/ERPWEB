@@ -255,7 +255,6 @@ namespace Core.Erp.Bus.RRHH
                         oct_cbtecble_det_Info.secuencia = secuecia;
                         oct_cbtecble_det_Info.IdEmpresa = idEmpresa;
                         oct_cbtecble_det_Info.IdCtaCble = item.IdCtaCble;
-                        oct_cbtecble_det_Info.IdCentroCosto = item.IdCentroCosto;
                         if (item.ru_tipo == "E")
                         {
                             egreso = egreso + valorTotal;
