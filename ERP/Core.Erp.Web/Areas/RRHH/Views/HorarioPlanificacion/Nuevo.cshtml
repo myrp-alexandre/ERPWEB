@@ -225,7 +225,7 @@
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
                    settings.Properties.Columns.Add("IdHorario", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Descripcion", "Horario").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Descripcion", "Horario").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                    //Campo ID
                    settings.Properties.ValueField = "IdHorario";
                    settings.Properties.ValueType = typeof(decimal);
@@ -255,7 +255,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="cb_Observacion">Detalle de la planificación</label>
-                    @Html.Action("GridViewPartial_horario_planificacion_det");
+                    @Html.Action("GridViewPartial_horario_planificacion_det")
                 </div>
             </div>
         </div>

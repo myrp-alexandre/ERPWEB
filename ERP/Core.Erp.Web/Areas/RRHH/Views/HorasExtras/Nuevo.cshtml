@@ -25,21 +25,21 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaInicio">Nómina*</label>
                     @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
                     @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaFin">Tipo liquidación nómina*</label>
                     @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                     @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaFin">Período*</label>
                     @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdPeriodo" })

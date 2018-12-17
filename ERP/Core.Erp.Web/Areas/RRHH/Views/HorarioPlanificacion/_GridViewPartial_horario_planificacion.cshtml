@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_horario_planificacion";
-        settings.CallbackRouteValues = new { Controller = "HorarioPlanificacion", Action = "GridViewPartial_horario_planificacion" };
+        settings.CallbackRouteValues = new { Controller = "HorarioPlanificacion", Action = "GridViewPartial_horario_planificacion", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdPlanificacion";

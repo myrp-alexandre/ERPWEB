@@ -14,11 +14,11 @@ namespace Core.Erp.Bus.RRHH
         List<ro_horario_planificacion_det_Info> lst_empleados = new List<ro_horario_planificacion_det_Info>();
         ro_horario_planificacion_Info info = new ro_horario_planificacion_Info();
 
-        public List<ro_horario_planificacion_Info> get_list(int IdEmpresa)
+        public List<ro_horario_planificacion_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
-                return odata.get_list(IdEmpresa);
+                return odata.get_list(IdEmpresa, FechaInicio, FechaFin);
             }
             catch (Exception)
             {

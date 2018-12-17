@@ -216,6 +216,7 @@
                     @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdCargo">Horario</label>
@@ -225,7 +226,7 @@
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
                    settings.Properties.Columns.Add("IdHorario", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                   settings.Properties.Columns.Add("Descripcion", "Horario").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Descripcion", "Horario").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                    //Campo ID
                    settings.Properties.ValueField = "IdHorario";
                    settings.Properties.ValueType = typeof(decimal);

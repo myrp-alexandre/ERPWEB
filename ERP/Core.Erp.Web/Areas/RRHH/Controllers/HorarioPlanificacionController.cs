@@ -7,6 +7,9 @@ using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
 using DevExpress.Web.Mvc;
 using Core.Erp.Bus.General;
+using Core.Erp.Info.Helps;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class HorarioPlanificacionController : Controller
@@ -29,8 +32,16 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info();
+            return View(model);
         }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            return View(model);
+
+        }
+
         [ValidateInput(false)]      
         public ActionResult Nuevo()
         {
@@ -48,6 +59,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 return View(model);
             model.IdEmpresa=Convert.ToInt32( Session["IdEmpresa"].ToString());
             model.lst_planificacion_det = lst_planificacion_det.get_list();
+            if (model.lst_planificacion_det == null || model.lst_planificacion_det.Count() == 0)
+            {
+                ViewBag.mensaje = "No existe detalle para la planificacion";
+                cargar_combos();
+                return View(model);
+            }
             if (bus_planificacion.guardarDB(model))
                 return RedirectToAction("Index");
             else return View(model);
@@ -66,7 +83,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.lst_planificacion_det = lst_planificacion_det.get_list();
             if (model.lst_planificacion_det == null || model.lst_planificacion_det.Count() == 0)
             {
-                ViewBag.mensaje = "No existe detalle para la novedad";
+                ViewBag.mensaje = "No existe detalle para la planificacion";
                 cargar_combos();
                 return View(model);
             }
@@ -117,10 +134,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
     [ValidateInput(false)]
-        public ActionResult GridViewPartial_horario_planificacion()
+        public ActionResult GridViewPartial_horario_planificacion(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
-            IdEmpresa =Convert.ToInt32( Session["IdEmpresa"]);
-            lst_detalle = bus_planificacion.get_list(IdEmpresa);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
+            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+
+            lst_detalle = bus_planificacion.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             return PartialView("_GridViewPartial_horario_planificacion", lst_detalle);
         }
 
@@ -160,7 +180,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             cargar_combos_detalle();
             info = new ro_horario_planificacion_Info();
             info.IdEmpresa=Convert.ToInt32( Session["IdEmpresa"].ToString());
-            info.lst_planificacion_det = Session["ro_horario_planificacion_det_Info"] as List<ro_horario_planificacion_det_Info>;
+            info.lst_planificacion_det = lst_planificacion_det.get_list();
             return PartialView("_GridViewPartial_horario_planificacion_det", info);
         }
 

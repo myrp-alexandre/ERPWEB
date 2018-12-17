@@ -294,8 +294,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public JsonResult get_list_vacaciones(decimal IdEmpleado)
         {
             IdEmpresa = GetIdEmpresa();
-            lst_vacaciones = bus_vacaciones.get_lst_vaciones_x_empleado(IdEmpresa, IdEmpleado);
-           ro_historico_vacaciones_x_empleado_Info_list.set_list(lst_vacaciones);
+             bus_vacaciones.get_lst_vaciones_x_empleado(IdEmpresa, IdEmpleado);// recalculando vacaciones
+            lst_vacaciones = bus_vacaciones.get_list(IdEmpresa, IdEmpleado);
+            ro_historico_vacaciones_x_empleado_Info_list.set_list(lst_vacaciones);
 
            return Json(lst_vacaciones, JsonRequestBehavior.AllowGet);
         }

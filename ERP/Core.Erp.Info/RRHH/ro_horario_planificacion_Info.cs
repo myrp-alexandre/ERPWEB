@@ -25,13 +25,13 @@ namespace Core.Erp.Info.RRHH
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public string MotivoAnulacion { get; set; }
-        public int IdCargo { get; set; }
+        public int? IdCargo { get; set; }
 
-        public int IdSucursal { get; set; }
+        public int? IdSucursal { get; set; }
 
-        public int IdDivision { get; set; }
-        public int IdArea { get; set; }
-        public int IdDepartamento { get; set; }
+        public int? IdDivision { get; set; }
+        public int? IdArea { get; set; }
+        public int? IdDepartamento { get; set; }
         public int IdHorario { get; set; }
 
         public List<ro_horario_planificacion_det_Info> lst_planificacion_det { get; set; }
