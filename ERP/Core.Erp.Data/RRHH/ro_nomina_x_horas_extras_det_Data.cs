@@ -9,7 +9,7 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_nomina_x_horas_extras_det_Data
     {
-        public List<ro_nomina_x_horas_extras_det_Info> get_list(int IdEmpresa, decimal IdHorasExtras)
+        public List<ro_nomina_x_horas_extras_det_Info> get_list(int IdEmpresa, int IdHorasExtras)
         {
             try
             {

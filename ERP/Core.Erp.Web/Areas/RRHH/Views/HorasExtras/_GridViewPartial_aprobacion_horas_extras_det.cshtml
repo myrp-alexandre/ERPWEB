@@ -14,12 +14,14 @@
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
-        settings.Settings.ShowFilterRow = true;
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -28,7 +30,7 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
 
-   
+
         settings.Columns.Add("IdCalendario").Visible = false;
         settings.Columns.Add("IdEmpleado", "ID emp.").Width = Unit.Percentage(5);
         settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(5);

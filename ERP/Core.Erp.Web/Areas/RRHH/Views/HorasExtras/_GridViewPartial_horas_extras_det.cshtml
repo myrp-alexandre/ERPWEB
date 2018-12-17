@@ -28,6 +28,10 @@
         settings.Settings.ShowFilterRow = true;
         settings.Settings.ShowHeaderFilterButton = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -37,24 +41,60 @@
 
 
 
-        settings.Columns.Add("IdCalendario").Visible = false;
-        settings.Columns.Add("IdEmpleado","ID emp.").Width = Unit.Percentage(5);
-        settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(5);
-        settings.Columns.Add("pe_nombreCompleto", "Empleado").Width = Unit.Percentage(50);
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdEmpleado";
+            column.Caption = "ID";
+            column.Width = Unit.Percentage(5);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_cedulaRuc";
+            column.Caption = "Cédula";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_nombreCompleto";
+            column.Caption = "Empleado";
+            column.Width = Unit.Percentage(25);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "FechaRegistro";
             column.Caption = "Fecha";
-            column.Width = Unit.Percentage(5);
+            column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "d";
             column.EditorProperties().DateEdit(sp =>
             {
                 column.PropertiesEdit.DisplayFormatString = "d";
                 sp.Width = Unit.Percentage(100);
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-        settings.Columns.Add("time_entrada1","Ingreso").Width = Unit.Percentage(5);
-        settings.Columns.Add("time_salida1","Salida").Width = Unit.Percentage(5);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "time_entrada1";
+            column.Caption = "Ingreso";
+            column.Width = Unit.Percentage(10);
+            
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "time_salida1";
+            column.Caption = "Salida";
+            column.Width = Unit.Percentage(10);
+
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "hora_trabajada";
@@ -66,6 +106,8 @@
                 column.PropertiesEdit.DisplayFormatString = "n2";
                 sp.Width = Unit.Percentage(100);
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
         settings.Columns.Add(column =>
         {
@@ -78,6 +120,8 @@
                 column.PropertiesEdit.DisplayFormatString = "n2";
                 sp.Width = Unit.Percentage(100);
             });
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+
         });
         settings.Columns.Add(column =>
         {
@@ -90,6 +134,7 @@
                 column.PropertiesEdit.DisplayFormatString = "n2";
                 sp.Width = Unit.Percentage(100);
             });
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
@@ -102,6 +147,8 @@
                 column.PropertiesEdit.DisplayFormatString = "n2";
                 sp.Width = Unit.Percentage(100);
             });
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+
         });
 
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "hora_extra25");

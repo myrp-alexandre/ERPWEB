@@ -32,11 +32,11 @@ namespace Core.Erp.Bus.RRHH
         ro_empleado_novedad_Bus bus_novedad = new ro_empleado_novedad_Bus();
         List<ro_nomina_x_horas_extras_det> lst_nomina_horas_extras = new List<ro_nomina_x_horas_extras_det>();
         #endregion
-        public List<ro_nomina_x_horas_extras_det_Info> get_list(int IdEmpresa, decimal IdPlanificacion)
+        public List<ro_nomina_x_horas_extras_det_Info> get_list(int IdEmpresa, int IdHorasExtra)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdPlanificacion);
+                return odata.get_list(IdEmpresa, IdHorasExtra);
             }
             catch (Exception)
             {

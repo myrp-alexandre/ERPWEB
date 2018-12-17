@@ -23,6 +23,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
         ro_periodo_x_ro_Nomina_TipoLiqui_Bus bus_periodos = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
         ro_nomina_x_horas_extras_Info info = new ro_nomina_x_horas_extras_Info();
+        ro_nomina_x_horas_extras_det_Info_list ro_nomina_x_horas_extras_det_Info_list = new ro_nomina_x_horas_extras_det_Info_list();
         int IdEmpresa = 0;
         #endregion
 
@@ -50,30 +51,26 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_aprobacion_horas_extras", lst_horas_extras);
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_aprobacion_horas_extras_det(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, int IdHorasExtras = 0)
+        public ActionResult GridViewPartial_aprobacion_horas_extras_det()
         {
             cargar_combos_detalle();
-            info = new ro_nomina_x_horas_extras_Info();
-            info.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"].ToString());
-            info.IdHorasExtras = IdHorasExtras;
-            info.lst_nomina_horas_extras = bus_hora_extra_detalle.get_list_x_extado_aprobacion(info.IdEmpresa, info.IdHorasExtras, false);
-            if (info.lst_nomina_horas_extras.Count() > 0)
-                Session["ro_nomina_x_horas_extras_det_Info"] = info.lst_nomina_horas_extras;
-            else
-            {
-                info.lst_nomina_horas_extras = Session["ro_nomina_x_horas_extras_det_Info"] as List<ro_nomina_x_horas_extras_det_Info>;
-                if (info.lst_nomina_horas_extras == null)
-                    info.lst_nomina_horas_extras = new List<ro_nomina_x_horas_extras_det_Info>();
-            }
+            ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
+            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list();
 
-            return PartialView("_GridViewPartial_aprobacion_horas_extras_det", info);
+            return PartialView("_GridViewPartial_aprobacion_horas_extras_det", model);
         }
 
         public ActionResult Aprobar(int IdNomina_Tipo, int IdNomina_TipoLiqui, int IdPeriodo, int IdHorasExtras)
         {
             cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            return View(bus_horas_extras.get_info(IdEmpresa, IdHorasExtras));
+            ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
+            model = bus_horas_extras.get_info(IdEmpresa, IdHorasExtras);
+            if (model != null)
+                model.lst_nomina_horas_extras = bus_hora_extra_detalle.get_list(model.IdEmpresa, model.IdHorasExtras);
+            ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras);
+
+            return View(model);
         }
         [HttpPost]
         public ActionResult Aprobar(ro_nomina_x_horas_extras_Info model)
@@ -83,7 +80,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.IdUsuario = Session["IdUsuario"].ToString();
             if (!bus_horas_extras.aprobacionHE(model))
             {
-                cargar_combos(info.IdNomina_Tipo,info.IdNomina_TipoLiqui);
+                cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
                 cargar_combos(model.IdNomina_Tipo, model.IdNomina_TipoLiqui);
                 return View(model);
             }
@@ -111,11 +108,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             lst_horas_extras = bus_horas_extras.get_list(IdEmpresa);
             return PartialView("_GridViewPartial_horas_extras", lst_horas_extras);
         }
-     
+
         [ValidateInput(false)]
         public ActionResult Nuevo()
         {
-            cargar_combos(0,0);
+            cargar_combos(0, 0);
             ro_nomina_x_horas_extras_Info info = new ro_nomina_x_horas_extras_Info();
             info.lst_nomina_horas_extras = new List<ro_nomina_x_horas_extras_det_Info>();
             return View(info);
@@ -134,16 +131,22 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 return View(model);
             }
         }
-        public ActionResult Modificar(int IdNomina_Tipo,int IdNomina_TipoLiqui, int IdPeriodo, int IdHorasExtras)
+        public ActionResult Modificar(int IdNomina_Tipo, int IdNomina_TipoLiqui, int IdPeriodo, int IdHorasExtras)
         {
             cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            return View(bus_horas_extras.get_info(IdEmpresa, IdHorasExtras));
+            ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
+            model = bus_horas_extras.get_info(IdEmpresa, IdHorasExtras);
+            if (model != null)
+                model.lst_nomina_horas_extras = bus_hora_extra_detalle.get_list(model.IdEmpresa, model.IdHorasExtras);
+            ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras);
+
+            return View(model);
         }
         [HttpPost]
         public ActionResult Modificar(ro_nomina_x_horas_extras_Info model)
         {
-           
+
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.IdUsuario = Session["IdUsuario"].ToString();
             if (!bus_horas_extras.modificarDB(model))
@@ -158,7 +161,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            return View(bus_horas_extras.get_info(IdEmpresa, IdHorasExtras));
+            ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
+            model = bus_horas_extras.get_info(IdEmpresa, IdHorasExtras);
+            if (model != null)
+                model.lst_nomina_horas_extras = bus_hora_extra_detalle.get_list(model.IdEmpresa, model.IdHorasExtras);
+            ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras);
+
+            return View(model);
         }
         [HttpPost]
         public ActionResult Anular(ro_nomina_x_horas_extras_Info model)
@@ -167,49 +176,40 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.IdUsuario = Session["IdUsuario"].ToString();
             if (!bus_horas_extras.anularDB(model))
             {
-                cargar_combos(model.IdNomina_Tipo,model.IdNomina_TipoLiqui);
+                cargar_combos(model.IdNomina_Tipo, model.IdNomina_TipoLiqui);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        [ValidateInput(false)]
-        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_nomina_x_horas_extras_det_Info info_det)
-        {
-            return PartialView("_GridViewPartial_horas_extras_det", info);
-
-        }
+        
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_nomina_x_horas_extras_det_Info info_det)
         {
-            return PartialView("_GridViewPartial_horas_extras_det", info);
+            if (ModelState.IsValid)
+                ro_nomina_x_horas_extras_det_Info_list.UpdateRow(info_det);
+            ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
+            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list();
+            return PartialView("_GridViewPartial_horas_extras_det", model);
 
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_nomina_x_horas_extras_det_Info info_det)
         {
-            return PartialView("_GridViewPartial_horas_extras_det", info);
+            ro_nomina_x_horas_extras_det_Info_list.DeleteRow(Convert.ToInt32(info_det.Secuencia));
+            ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
+            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list();
+            return PartialView("_GridViewPartial_horas_extras_det", model);
 
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_horas_extras_det(int IdNomina_Tipo=0,int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, int IdHorasExtras = 0)
+        public ActionResult GridViewPartial_horas_extras_det()
         {
             cargar_combos_detalle();
-            info = new ro_nomina_x_horas_extras_Info();
-            info.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"].ToString());
-            info.IdHorasExtras = IdHorasExtras;
-            info.lst_nomina_horas_extras = bus_hora_extra_detalle.get_list(info.IdEmpresa, info.IdHorasExtras);
-            if ( info.lst_nomina_horas_extras.Count() > 0)
-                Session["ro_nomina_x_horas_extras_det_Info"] = info.lst_nomina_horas_extras;
-            else
-            {
-                info.lst_nomina_horas_extras = Session["ro_nomina_x_horas_extras_det_Info"] as List<ro_nomina_x_horas_extras_det_Info>;
-                if (info.lst_nomina_horas_extras == null)
-                    info.lst_nomina_horas_extras = new List<ro_nomina_x_horas_extras_det_Info>();
-            }
-           
-            return PartialView("_GridViewPartial_horas_extras_det", info);
+            ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
+            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list();
+            return PartialView("_GridViewPartial_horas_extras_det", model);
         }
         private void cargar_combos_detalle()
         {
@@ -228,4 +228,46 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
     }
 
+    public class ro_nomina_x_horas_extras_det_Info_list
+    {
+        string variable = "ro_nomina_x_horas_extras_det_Info";
+        public List<ro_nomina_x_horas_extras_det_Info> get_list()
+        {
+            if (HttpContext.Current.Session[variable] == null)
+            {
+                List<ro_nomina_x_horas_extras_det_Info> list = new List<ro_nomina_x_horas_extras_det_Info>();
+
+                HttpContext.Current.Session[variable] = list;
+            }
+            return (List<ro_nomina_x_horas_extras_det_Info>)HttpContext.Current.Session[variable];
+        }
+
+        public void set_list(List<ro_nomina_x_horas_extras_det_Info> list)
+        {
+            HttpContext.Current.Session[variable] = list;
+        }
+
+        public void AddRow(ro_nomina_x_horas_extras_det_Info info_det)
+        {
+            List<ro_nomina_x_horas_extras_det_Info> list = get_list();
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(ro_nomina_x_horas_extras_det_Info info_det)
+        {
+
+            ro_nomina_x_horas_extras_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.hora_extra100 = info_det.hora_extra100;
+            edited_info.hora_extra50 = info_det.hora_extra50;
+            edited_info.hora_extra25 = info_det.hora_extra25;
+
+        }
+
+        public void DeleteRow(int Secuencia)
+        {
+            List<ro_nomina_x_horas_extras_det_Info> list = get_list();
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+
+    }
 }
