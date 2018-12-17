@@ -46,7 +46,8 @@
     CONSTRAINT [FK_Af_Activo_fijo_ro_empleado] FOREIGN KEY ([IdEmpresa], [IdEmpleadoEncargado]) REFERENCES [dbo].[ro_empleado] ([IdEmpresa], [IdEmpleado]),
     CONSTRAINT [FK_Af_Activo_fijo_ro_empleado1] FOREIGN KEY ([IdEmpresa], [IdEmpleadoCustodio]) REFERENCES [dbo].[ro_empleado] ([IdEmpresa], [IdEmpleado]),
     CONSTRAINT [FK_Af_Activo_fijo_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa]),
-    CONSTRAINT [FK_Af_Activo_fijo_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
+    CONSTRAINT [FK_Af_Activo_fijo_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal]),
+	CONSTRAINT [FK_Af_Activo_fijo_Af_Catalogo9] FOREIGN KEY ([Estado_Proceso]) REFERENCES [dbo].[Af_Catalogo] ([IdCatalogo]),
 );
 
 
