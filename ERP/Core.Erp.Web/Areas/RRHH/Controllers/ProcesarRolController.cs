@@ -143,14 +143,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                cp_orden_pago_tipo_x_empresa_Bus bus_op_tipo = new cp_orden_pago_tipo_x_empresa_Bus();
-                var info_tipo_op = bus_op_tipo.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString());
-                if( (info_tipo_op.IdCtaCble==null | info_tipo_op.IdCtaCble=="") | (info_tipo_op.IdCtaCble_Credito == null | info_tipo_op.IdCtaCble_Credito == ""))
-                {
-                    ViewBag.mensaje = "Falta cuenta contable tipo de orden de pago";
-                    cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
-                    return View(info);
-                }
+                //cp_orden_pago_tipo_x_empresa_Bus bus_op_tipo = new cp_orden_pago_tipo_x_empresa_Bus();
+                //var info_tipo_op = bus_op_tipo.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString());
+                //if( (info_tipo_op.IdCtaCble==null | info_tipo_op.IdCtaCble=="") | (info_tipo_op.IdCtaCble_Credito == null | info_tipo_op.IdCtaCble_Credito == ""))
+                //{
+                //    ViewBag.mensaje = "Falta cuenta contable tipo de orden de pago";
+                //    cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
+                //    return View(info);
+                //}
 
                 info.IdEmpresa = GetIdEmpresa();
                     if (!bus_rol.CerrarPeriodo(info))

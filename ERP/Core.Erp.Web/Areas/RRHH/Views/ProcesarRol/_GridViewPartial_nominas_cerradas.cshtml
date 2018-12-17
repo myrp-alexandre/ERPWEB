@@ -61,7 +61,7 @@
             column.Width = Unit.Pixel(100);
             column.SetDataItemTemplateContent(container =>
             {
-                if (Convert.ToString(DataBinder.Eval(container.DataItem, "Cerrado")) == "S")
+                if (Convert.ToString(DataBinder.Eval(container.DataItem, "Cerrado")) == "S" && Convert.ToString(DataBinder.Eval(container.DataItem, "Contabilizado"))=="N")
                 {
 
                     Html.DevExpress().HyperLink(hyperlink =>
@@ -98,6 +98,19 @@
                         hyperlink.NavigateUrl = Url.Action("ReversarcontabilidadPeriodo", "ProcesarRol", new { IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo, IdRol= IdRol });
                     }).Render();
 
+                }
+                else
+                {
+                    Html.DevExpress().HyperLink(hyperlink =>
+                    {
+                        var IdNomina_Tipo = DataBinder.Eval(container.DataItem, "IdNomina_Tipo");
+                        var IdNomina_TipoLiqui = DataBinder.Eval(container.DataItem, "IdNomina_TipoLiqui");
+                        var IdPeriodo = DataBinder.Eval(container.DataItem, "IdPeriodo");
+                        var IdRol = DataBinder.Eval(container.DataItem, "IdRol");
+
+                        hyperlink.Properties.Text = "Contabilizar";
+                        hyperlink.NavigateUrl = Url.Action("ContabilizarPeriodo", "ProcesarRol", new { IdNomina_Tipo = IdNomina_Tipo, IdNomina_TipoLiqui = IdNomina_TipoLiqui, IdPeriodo = IdPeriodo, IdRol = IdRol });
+                    }).Render();
                 }
 
             });
