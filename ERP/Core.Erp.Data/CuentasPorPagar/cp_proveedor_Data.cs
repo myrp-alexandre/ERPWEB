@@ -189,8 +189,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         pr_celular = info.pr_celular,
                         pr_telefonos = info.pr_telefonos,
                         pr_direccion = info.pr_direccion,
-                        pr_correo = info.pr_correo,
-                        
+                        pr_correo = info.pr_correo,                        
 
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
@@ -203,48 +202,6 @@ namespace Core.Erp.Data.CuentasPorPagar
             catch (Exception)
             {
 
-                throw;
-            }
-        }
-
-        public bool guardarDB_importacion(List<cp_proveedor_Info> Lista_Proveedor, List<cp_proveedor_clase_Info> Lista_ClaseProveedor)
-        {
-            try
-            {
-                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
-                {
-                    if (Lista_ClaseProveedor.Count > 0)
-                    {
-                        foreach (var item in Lista_ClaseProveedor)
-                        {
-                            cp_proveedor_clase Entity_ClaseProveedor = new cp_proveedor_clase
-                            {
-                                IdUsuario = item.IdUsuario,
-                                FechaTransac = DateTime.Now
-                            };
-
-                            Context.cp_proveedor_clase.Add(Entity_ClaseProveedor);
-                        }
-                    }
-
-                    if (Lista_Proveedor.Count > 0)
-                    {
-                        foreach (var item in Lista_Proveedor)
-                        {
-                            cp_proveedor Entity_Proveedor = new cp_proveedor
-                            {                                
-                                IdUsuario = item.IdUsuario,
-                                Fecha_Transac = DateTime.Now
-                            };
-                            Context.cp_proveedor.Add(Entity_Proveedor);                        
-                        }
-                    }
-                    Context.SaveChanges();
-                }
-                return true;
-            }
-            catch (Exception)
-            {
                 throw;
             }
         }

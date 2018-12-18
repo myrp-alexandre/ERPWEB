@@ -67,28 +67,30 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-
-        public bool guardarDB_importacion(List<cp_proveedor_Info> Lista_Proveedor, List<cp_proveedor_clase_Info> Lista_ClaseProveedor)
+        public bool guardarDB_importacion(cp_proveedor_Info info)
         {
             try
             {
-                if (Lista_Proveedor.Count > 0)
+                if (info.IdPersona == 0)
                 {
-                    foreach (var item in Lista_Proveedor)
+                    info.info_persona = odata_per.armar_info(info.info_persona);
+                    if (odata_per.guardarDB(info.info_persona))
                     {
-                        if (item.IdPersona == 0)
-                        {
-                            item.info_persona.pe_telfono_Contacto = item.pr_telefonos;
-                            item.info_persona.pe_direccion = item.pr_direccion;
-                            item.info_persona.pe_correo = item.pr_correo;
-                            item.info_persona.pe_celular = item.pr_celular;
-
-                            item.info_persona = odata_per.armar_info(item.info_persona);
-                        }
+                        info.IdPersona = info.info_persona.IdPersona;
+                        return odata.guardarDB(info);
                     }
-
                 }
-                return odata.guardarDB_importacion(Lista_Proveedor, Lista_ClaseProveedor);
+                else
+                {
+                    if (odata_per.modificarDB(info.info_persona))
+                    {
+                        return odata.guardarDB(info);
+                    }
+                    return odata.guardarDB(info);
+                }
+                    
+                return false;
+
             }
             catch (Exception)
             {

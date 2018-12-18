@@ -24,6 +24,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     {
         #region Variables
         cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
+        cp_proveedor_clase_Bus bus_claseproveedor = new cp_proveedor_clase_Bus();
         tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
         ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
@@ -199,15 +200,26 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             try
             {
-                var Lista_Persona = ListaPersona.get_list(model.IdTransaccionSession);
                 var Lista_Proveedor = ListaProveedor.get_list(model.IdTransaccionSession);
                 var Lista_ClaseProveedor = ListaClaseProveedor.get_list(model.IdTransaccionSession);
 
-                if (!bus_proveedor.guardarDB_importacion(Lista_Proveedor, Lista_ClaseProveedor))
+                foreach (var item in Lista_ClaseProveedor)
                 {
-                    ViewBag.mensaje = "Error al importar el archivo";
-                    return View(model);
+                    if (!bus_claseproveedor.guardarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
                 }
+
+                foreach (var item in Lista_Proveedor)
+                {
+                    if (!bus_proveedor.guardarDB_importacion(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }                
             }
             catch (Exception ex)
             {
@@ -294,10 +306,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                         {
                             IdEmpresa = IdEmpresa,
                             IdClaseProveedor = Convert.ToInt32(reader.GetValue(0)),
-                            cod_clase_proveedor = reader.GetString(1),
-                            descripcion_clas_prove = reader.GetString(2),
-                            IdCtaCble_Anticipo = Convert.ToString(reader.GetValue(3)),
-                            IdCtaCble_gasto = Convert.ToString(reader.GetValue(4)),
+                            cod_clase_proveedor = Convert.ToString(reader.GetValue(1)),
+                            descripcion_clas_prove = Convert.ToString(reader.GetValue(2)),
+                            IdCtaCble_gasto = Convert.ToString(reader.GetValue(3)),
+                            IdCtaCble_CXP = Convert.ToString(reader.GetValue(4)),
                             IdUsuario = SessionFixed.IdUsuario
                         };
                         Lista_ClaseProveedor.Add(info);
@@ -323,12 +335,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     {
                         var info_persona = ListaPersona.get_list(IdTransaccionSession).Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
                         var info_persona_prov = info_persona;
+
                         if (info_persona ==  null)
                         {
                             tb_persona_Info info_ = new tb_persona_Info
                             {
                                 pe_Naturaleza =Convert.ToString(reader.GetValue(4)),
-                                pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(5)),
+                                pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7)),
                                 pe_razonSocial = Convert.ToString(reader.GetValue(5)),
                                 pe_apellido = Convert.ToString(reader.GetValue(6)),
                                 pe_nombre = Convert.ToString(reader.GetValue(7)),
@@ -342,23 +355,37 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                             Lista_Persona.Add(info_);
                             info_persona_prov = info_;
                         }
-                        
-                        ListaPersona.set_list(Lista_Persona, IdTransaccionSession);
+                        else
+                        {
+                            info_persona_prov = bus_persona.get_info(info_persona.IdPersona);
+
+                            info_persona_prov.pe_Naturaleza = Convert.ToString(reader.GetValue(4));
+                            info_persona_prov.pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7));
+                            info_persona_prov.pe_razonSocial = Convert.ToString(reader.GetValue(5));
+                            info_persona_prov.pe_apellido = Convert.ToString(reader.GetValue(6));
+                            info_persona_prov.pe_nombre = Convert.ToString(reader.GetValue(7));
+                            info_persona_prov.IdTipoDocumento = Convert.ToString(reader.GetValue(2));
+                            info_persona_prov.pe_cedulaRuc = Convert.ToString(reader.GetValue(3));
+                            info_persona_prov.pe_direccion = Convert.ToString(reader.GetValue(9));
+                            info_persona_prov.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
+                            info_persona_prov.pe_celular = Convert.ToString(reader.GetValue(11));
+                            info_persona_prov.pe_correo = Convert.ToString(reader.GetValue(8));
+                        }
 
                         cp_proveedor_Info info = new cp_proveedor_Info
                         {
                             IdEmpresa = IdEmpresa,
                             IdProveedor = Convert.ToInt32(reader.GetValue(0)),
-                            pr_codigo = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)),
-                            pr_plazo = Convert.ToInt32(reader.GetValue(19)),
+                            IdPersona = info_persona_prov.IdPersona,
                             IdCiudad = "01",
+                            pr_codigo = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(1))) ? null : Convert.ToString(reader.GetValue(1)),
+                            pr_plazo = Convert.ToInt32(reader.GetValue(19)),
                             IdCtaCble_CXP = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(15))) ? null : Convert.ToString(reader.GetValue(15)),
-                            //IdCtaCble_Anticipo = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(15))) ? null : Convert.ToString(reader.GetValue(15)),
                             IdCtaCble_Gasto = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(14))) ? null : Convert.ToString(reader.GetValue(14)),
                             IdClaseProveedor = Convert.ToInt32(reader.GetValue(13)),
                             num_cta_acreditacion = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(18))) ? null : Convert.ToString(reader.GetValue(18)),
                             IdBanco_acreditacion = Convert.ToInt32(reader.GetValue(16)),
-                            es_empresa_relacionada = (Convert.ToString(reader.GetValue(12))=="SI")?true:false,
+                            es_empresa_relacionada = (Convert.ToString(reader.GetValue(12)) == "SI") ? true : false,
                             pr_telefonos = Convert.ToString(reader.GetValue(10)),
                             pr_celular = Convert.ToString(reader.GetValue(11)),
                             pr_direccion = Convert.ToString(reader.GetValue(9)),
