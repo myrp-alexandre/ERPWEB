@@ -36,21 +36,24 @@
             <div class="col-md-offset-7 col-md-2">
                 <div class="form-group">
                     <label for="">Fecha</label>
+                    <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.DevExpress().DateEditFor(q=> q.cm_fecha, settings =>
-                    {
-                        settings.Name = "cm_fecha";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
+                        @Html.DevExpress().DateEditFor(q => q.cm_fecha, settings =>
+                        {
+                            settings.Name = "cm_fecha";
+                            settings.Properties.UseMaskBehavior = true;
+                            settings.Properties.EditFormat = EditFormat.Date;
+                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        }).GetHtml()
                         @Html.ValidationMessageFor(q => q.cm_fecha, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
     <div class="row">
