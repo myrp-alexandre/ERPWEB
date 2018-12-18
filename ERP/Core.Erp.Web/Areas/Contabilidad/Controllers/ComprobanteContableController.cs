@@ -306,6 +306,8 @@ public class ct_cbtecble_det_List
             List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
             info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
+            info_det.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
+            info_det.Descripcion = info_det.Descripcion;
             list.Add(info_det);
         }
 
@@ -317,6 +319,9 @@ public class ct_cbtecble_det_List
             edited_info.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * - 1;
             edited_info.dc_Valor_debe = info_det.dc_Valor_debe;
             edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
+
+            edited_info.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
+            edited_info.Descripcion = info_det.Descripcion;
         }
 
         public void DeleteRow(int secuencia, decimal IdTransaccionSession)
