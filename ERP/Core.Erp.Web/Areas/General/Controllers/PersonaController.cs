@@ -4,6 +4,7 @@ using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
@@ -106,5 +107,25 @@ namespace Core.Erp.Web.Areas.General.Controllers
         }
 
         #endregion
+    }
+
+    public class tb_persona_List
+    {
+        string Variable = "tb_persona_Info";
+        public List<tb_persona_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<tb_persona_Info> list = new List<tb_persona_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<tb_persona_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<tb_persona_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
     }
 }

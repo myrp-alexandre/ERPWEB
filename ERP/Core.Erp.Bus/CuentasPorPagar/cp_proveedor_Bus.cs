@@ -68,6 +68,34 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
         }
 
+        public bool guardarDB_importacion(List<cp_proveedor_Info> Lista_Proveedor, List<cp_proveedor_clase_Info> Lista_ClaseProveedor)
+        {
+            try
+            {
+                if (Lista_Proveedor.Count > 0)
+                {
+                    foreach (var item in Lista_Proveedor)
+                    {
+                        if (item.IdPersona == 0)
+                        {
+                            item.info_persona.pe_telfono_Contacto = item.pr_telefonos;
+                            item.info_persona.pe_direccion = item.pr_direccion;
+                            item.info_persona.pe_correo = item.pr_correo;
+                            item.info_persona.pe_celular = item.pr_celular;
+
+                            item.info_persona = odata_per.armar_info(item.info_persona);
+                        }
+                    }
+
+                }
+                return odata.guardarDB_importacion(Lista_Proveedor, Lista_ClaseProveedor);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool modificarDB(cp_proveedor_Info info)
         {
             try

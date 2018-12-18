@@ -11,6 +11,7 @@ namespace Core.Erp.Info.CuentasPorPagar
    public class cp_proveedor_Info
     {
         public int IdEmpresa { get; set; }
+        public decimal IdTransaccionSession { get; set; }
         public decimal IdProveedor { get; set; }
         public decimal IdPersona { get; set; }
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 50")]
@@ -28,7 +29,8 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<int> codigoSRI_101_Predeter { get; set; }
         public string IdCentroCosot { get; set; }
         [Required(ErrorMessage = "El campo cuenta contable es obligatorio")]
-        public string IdCtaCble_CXP { get; set; }
+        public string IdCtaCble_CXP { get; set; }        
+        public string IdCtaCble_Anticipo { get; set; }
         public string IdCtaCble_Gasto { get; set; }
         [Required(ErrorMessage = "El campo clase proveedor es obligatorio")]
         public int IdClaseProveedor { get; set; }

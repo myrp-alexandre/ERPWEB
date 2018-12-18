@@ -3,6 +3,8 @@ using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Web.Helps;
 using System;
+using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
@@ -106,5 +108,25 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
 
         #endregion
+    }
+
+    public class cp_proveedor_clase_List
+    {
+        string Variable = "cp_proveedor_clase_Info";
+        public List<cp_proveedor_clase_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<cp_proveedor_clase_Info> list = new List<cp_proveedor_clase_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<cp_proveedor_clase_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<cp_proveedor_clase_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
     }
 }

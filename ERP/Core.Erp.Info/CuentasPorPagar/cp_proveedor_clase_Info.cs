@@ -18,6 +18,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         [Required(ErrorMessage = "El campo descripción es obligatorio")]
         [StringLength(100, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 100")]
         public string descripcion_clas_prove { get; set; }
+        public string IdCtaCble_Anticipo { get; set; }
         public string IdCtaCble_gasto { get; set; }
         [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
         public string IdCtaCble_CXP { get; set; }
