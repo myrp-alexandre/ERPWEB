@@ -74,7 +74,8 @@ namespace Core.Erp.Data.RRHH
                                  Valor = s.Valor,
                                  IdRubro = p.IdRubro,
                                  Secuencia = s.Secuencia,
-                                 rub_tipo=p.ru_tipo
+                                 rub_tipo=p.ru_tipo,
+                                 ru_descripcion = p.ru_descripcion
                              }).ToList();
 
                 }
@@ -132,6 +133,7 @@ namespace Core.Erp.Data.RRHH
                             Valor=item.Valor,
                             Observacion=item.Observacion,
                             EstadoCobro = item.EstadoCobro="PEN",
+                            
                     };
                         Context.ro_empleado_novedad_det.Add(Entity);
                     }

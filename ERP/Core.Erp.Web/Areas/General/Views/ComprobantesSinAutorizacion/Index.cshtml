@@ -26,7 +26,7 @@
    
 
 </script>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "ComprobantesSinAutorizacion",FormMethod.Post,new { @role = "form", @id = "myform" }))
 {
     <div class="box collapsed-box">
         <div class="box-header with-border">
@@ -142,6 +142,7 @@
             success: function (data) {
 
                 $("#myform").submit();
+                GridViewPartial_documentos_pendientes_enviar_sri.UnselectRows();
                 GridViewPartial_documentos_pendientes_enviar_sri.PerformCallback();
 
             },

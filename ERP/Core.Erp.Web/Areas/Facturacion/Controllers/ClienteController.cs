@@ -210,10 +210,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
         #region Json
         public ActionResult get_parroquias(string IdCiudad = "")
-        {
-            
+        {            
             return GridViewExtension.GetComboBoxCallbackResult(p =>
             {
+                p.CallbackRouteValues = new { Controller = "Cliente", Action = "get_parroquias" };
                 p.TextField = "nom_parroquia";
                 p.ValueField = "IdParroquia";
                 p.ValueType = typeof(string);

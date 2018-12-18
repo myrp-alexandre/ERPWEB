@@ -3,7 +3,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_documentos_pendientes_enviar_sri";
-        settings.CallbackRouteValues = new { Controller = "ComprobantesSinAutorizacion", Action = "GridViewPartial_documentos_pendientes_enviar_sri"};
+        settings.CallbackRouteValues = new { Controller = "ComprobantesSinAutorizacion", Action = "GridViewPartial_documentos_pendientes_enviar_sri", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin};
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "secuencia";
 
@@ -60,8 +60,8 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("pe_nombreCompleto", "Beneficiario").Width = Unit.Percentage(35);
-        settings.Columns.Add("vt_Observacion", "Observación").Width = Unit.Percentage(35);
+        settings.Columns.Add("pe_nombreCompleto", "Beneficiario").Width = Unit.Percentage(30);
+        settings.Columns.Add("vt_Observacion", "Observación").Width = Unit.Percentage(30);
 
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "OnBeginCallback";

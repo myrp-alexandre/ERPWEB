@@ -52,8 +52,6 @@ namespace Core.Erp.Info.RRHH
         public string pe_nombreCompleto { get; set; }
         public string Descripcion { get; set; }
         public string IdRubro { get; set; }
-        public string ru_descripcion { get; set; }
-        
         public string DescripcionProcesoNomina { get; set; }
     }
 }
