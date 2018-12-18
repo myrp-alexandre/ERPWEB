@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.Presupuesto;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
@@ -20,6 +21,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         ct_cbtecble_det_List list_ct_cbtecble_det = new ct_cbtecble_det_List();
         string mensaje = string.Empty;
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+        pre_Grupo_Bus bus_grupo = new pre_Grupo_Bus();
         #endregion
 
         #region Index
@@ -83,6 +85,18 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         }
 
+        public ActionResult CargarGrupo(DateTime cb_Fecha, string IdCtaCble = "")
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
+            return GridViewExtension.GetComboBoxCallbackResult(p =>
+            {
+                p.TextField = "Descripcion";
+                p.ValueField = "IdGrupo";
+                p.ValueType = typeof(int);
+                p.BindList(bus_grupo.get_list_x_CtaCble(IdEmpresa, IdSucursal, IdCtaCble, cb_Fecha));
+            });
+        }
         #endregion
 
         #region Acciones
@@ -230,6 +244,9 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false , true);
             ViewBag.lst_cuentas = lst_cuentas;
+
+            var lst_grupos = bus_grupo.GetList(IdEmpresa, false);
+            ViewBag.lst_grupos = lst_grupos;
         }
 
         [HttpPost, ValidateInput(false)]

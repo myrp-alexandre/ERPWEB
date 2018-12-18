@@ -68,13 +68,14 @@
             column.Width = Unit.Percentage(40);
             column.EditorProperties().ComboBox(p =>
             {
-                p.CallbackRouteValues = new { Controller = "Deudas", Action = "CargarGrupo" };
+                p.CallbackRouteValues = new { Controller = "Deudas", Action = "CargarGrupo", TextField = "Descripcion" };
                 p.TextField = "Descripcion";
                 p.ValueField = "IdGrupo";
                 p.ValueType = typeof(int);
                 //p.ClientSideEvents.Init = "function(s,e){s.PerformCallback();}";
                 p.BindList(ViewBag.lst_grupos);
                 p.ClientSideEvents.BeginCallback = "GrupoComboBox_BeginCallback";
+                p.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
             });
         });
         settings.Columns.Add(column =>
@@ -109,6 +110,11 @@
 
             });
         });
+        settings.CellEditorInitialize = (sender, e) =>
+        {
+            ASPxEdit editor = (ASPxEdit)e.Editor;
+            editor.ValidationSettings.Display = Display.Dynamic;
+        };
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_debe");
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_haber");
 

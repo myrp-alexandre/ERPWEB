@@ -269,7 +269,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
 
-            var lst_grupos = bus_grupo.GetList(IdEmpresa, false);
+            var lst_grupos = bus_grupo.GetList(IdEmpresa,false);
             ViewBag.lst_grupos = lst_grupos;
         }
         private bool validar(cp_orden_giro_Info i_validar, ref string msg)
