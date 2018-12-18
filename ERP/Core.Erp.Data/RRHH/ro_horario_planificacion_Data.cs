@@ -8,16 +8,19 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_horario_planificacion_Data
     {
-        public List<ro_horario_planificacion_Info> get_list(int IdEmpresa)
+        public List<ro_horario_planificacion_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
                 List<ro_horario_planificacion_Info> Lista;
-
+                DateTime fi = FechaInicio.Date;
+                DateTime ff = FechaFin.Date;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     Lista = (from q in Context.ro_horario_planificacion
                              where q.IdEmpresa == IdEmpresa
+                             && q.FechaInicio>=fi&&
+                             q.FechaInicio<=ff
                              select new ro_horario_planificacion_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

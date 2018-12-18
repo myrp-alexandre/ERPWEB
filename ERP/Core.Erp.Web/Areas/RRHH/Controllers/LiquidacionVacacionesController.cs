@@ -157,7 +157,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 IdEmpresa = GetIdEmpresa();
                 info = bus_liquidacion.obtener_valores(IdEmpresa, IdEmpleado, IdSolicitud);
                 IdSolicitud = info.IdSolicitud;
-                Session["detalle"] = info.detalle;
+                ro_Historico_Liquidacion_Vacaciones_Det_Info.set_list(info.detalle);
+
                 cargar_combo();
                 return View(info);
 

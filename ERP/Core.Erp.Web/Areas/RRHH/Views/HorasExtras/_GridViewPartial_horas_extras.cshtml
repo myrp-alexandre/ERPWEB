@@ -2,9 +2,13 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_horas_extras";
-        settings.CallbackRouteValues = new { Controller = "HorasExtras", Action = "GridViewPartial_horas_extras" };
+        settings.CallbackRouteValues = new { Controller = "HorasExtras", Action = "GridViewPartial_horas_extras", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
         settings.KeyFieldName = "IdHorasExtras";
         settings.Width = Unit.Percentage(100);
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
