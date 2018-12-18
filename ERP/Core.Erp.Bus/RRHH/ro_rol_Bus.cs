@@ -96,31 +96,31 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
-                var oarametro = ro_parametro.get_info(info.IdEmpresa);
-                if(oarametro!=null)
-                if (oarametro.genera_op_x_pago == true && oarametro.Genera_op_x_pago_x_empleao == true)
-                {
-                    info_tipo_op = data_tipo_op.get_info(info.IdEmpresa, cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString());
-                    var lst_rol_x_empleado = bus_detalle.Get_lst_detalle_genear_op(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
-                    var lst_op = get_op_x_empleados(lst_rol_x_empleado, info_tipo_op);
-                    foreach (var item in lst_op)
-                    {
-                        bus_op.guardarDB(item);
-                        lst_op_x_nomina.Add(
-                            new cp_orden_pago_x_nomina_Info
-                            {
-                                IdEmpresa = item.IdEmpresa,
-                                IdEmpleado = item.IdEmpleado,
-                                IdNominaTipo = info.IdNomina_Tipo,
-                                IdNominaTipoLiqui = info.IdNomina_TipoLiqui,
-                                IdPeriodo = info.IdPeriodo,
-                                IdEmpresa_op = item.IdEmpresa,
-                                IdOrdenPago = item.IdOrdenPago
-                            }
-                            );
-                    }
-                    data_op_x_empleado.guardarDB(lst_op_x_nomina, info);
-                }
+                //var oarametro = ro_parametro.get_info(info.IdEmpresa);
+                //if(oarametro!=null)
+                //if (oarametro.genera_op_x_pago == true && oarametro.Genera_op_x_pago_x_empleao == true)
+                //{
+                //    info_tipo_op = data_tipo_op.get_info(info.IdEmpresa, cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString());
+                //    var lst_rol_x_empleado = bus_detalle.Get_lst_detalle_genear_op(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
+                //    var lst_op = get_op_x_empleados(lst_rol_x_empleado, info_tipo_op);
+                //    foreach (var item in lst_op)
+                //    {
+                //        bus_op.guardarDB(item);
+                //        lst_op_x_nomina.Add(
+                //            new cp_orden_pago_x_nomina_Info
+                //            {
+                //                IdEmpresa = item.IdEmpresa,
+                //                IdEmpleado = item.IdEmpleado,
+                //                IdNominaTipo = info.IdNomina_Tipo,
+                //                IdNominaTipoLiqui = info.IdNomina_TipoLiqui,
+                //                IdPeriodo = info.IdPeriodo,
+                //                IdEmpresa_op = item.IdEmpresa,
+                //                IdOrdenPago = item.IdOrdenPago
+                //            }
+                //            );
+                //    }
+                //    data_op_x_empleado.guardarDB(lst_op_x_nomina, info);
+                //}
                 return odata.CerrarPeriodo(info);
             }
             catch (Exception)
