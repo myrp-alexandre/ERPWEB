@@ -565,7 +565,14 @@
     }
 }
 <script>
-
+    function OnSelectedCtaCbleChanged() {
+        GridViewPartial_deudas_dc.GetEditor("IdGrupoPresupuesto").PerformCallback();
+    }
+    function GrupoComboBox_BeginCallback(s, e) {
+        e.customArgs["IdCtaCble"] = GridViewPartial_deudas_dc.GetEditor("IdCtaCble").GetValue();
+        e.customArgs["IdSucursal"] = $('#IdSucursal').val();
+        e.customArgs["co_FechaFactura"] = co_FechaFactura.GetValue();
+    }
 
     $(function () {
 

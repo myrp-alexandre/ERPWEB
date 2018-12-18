@@ -268,6 +268,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
+
+            var lst_grupos = bus_grupo.GetList(IdEmpresa, false);
+            ViewBag.lst_grupos = lst_grupos;
         }
         private bool validar(cp_orden_giro_Info i_validar, ref string msg)
         {
@@ -910,7 +913,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
             info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
             info_det.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
-            //info_det.Descripcion = info_det.Descripcion;
+            info_det.Descripcion = info_det.Descripcion;
             list.Add(info_det);
         }
 
@@ -923,7 +926,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             edited_info.dc_Valor_debe = info_det.dc_Valor_debe;
             edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
             edited_info.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
-            //edited_info.Descripcion = info_det.Descripcion;
+            edited_info.Descripcion = info_det.Descripcion;
         }
 
         public void DeleteRow(int secuencia, decimal IdTransaccionSession)

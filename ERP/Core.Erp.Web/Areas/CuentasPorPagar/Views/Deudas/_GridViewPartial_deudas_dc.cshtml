@@ -73,7 +73,7 @@
                 p.ValueField = "IdGrupo";
                 p.ValueType = typeof(int);
                 //p.ClientSideEvents.Init = "function(s,e){s.PerformCallback();}";
-                p.BindList(ViewBag.lst_parroquia);
+                p.BindList(ViewBag.lst_grupos);
                 p.ClientSideEvents.BeginCallback = "GrupoComboBox_BeginCallback";
             });
         });
