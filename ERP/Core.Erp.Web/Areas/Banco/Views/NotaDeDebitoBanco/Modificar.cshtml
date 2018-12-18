@@ -171,7 +171,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdBanco_acreditacion">Tipo flujo</label>
+                    <label for="IdBanco_acreditacion">Tipo flujo*</label>
                     @Html.Partial("_CmbFlujo_ND_B", Model.IdTipoFlujo)
                     @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
                 </div>

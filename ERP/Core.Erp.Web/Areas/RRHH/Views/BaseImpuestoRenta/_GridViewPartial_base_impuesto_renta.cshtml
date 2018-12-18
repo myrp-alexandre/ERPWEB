@@ -11,6 +11,9 @@
         settings.Width = Unit.Percentage(100);
 
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -76,7 +79,7 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("AnioFiscal","Año").Width = Unit.Percentage(5);
+        settings.Columns.Add("AnioFiscal","Año").Width = Unit.Percentage(10);
         settings.Columns.Add("FraccionBasica", "Fraccion basica").Width = Unit.Percentage(20);
         settings.Columns.Add("ExcesoHasta", "Exceso hasta").Width = Unit.Percentage(20);
         settings.Columns.Add("ImpFraccionBasica", "impuesto fraccion basica").Width = Unit.Percentage(20);

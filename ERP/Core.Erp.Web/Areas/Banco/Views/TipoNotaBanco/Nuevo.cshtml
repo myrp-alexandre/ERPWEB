@@ -22,7 +22,7 @@
                     @Html.ValidationMessageFor(q => q.Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-9">
                 <div class="form-group">
                     <label for="IdCtaCble">Cuenta contable*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble, settings =>
@@ -48,7 +48,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="Descripcion">Descripción*</label>
                     @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
