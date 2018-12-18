@@ -39,7 +39,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
           
-            var model = bus_comprobantes.get_list(1,"", ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            var model = bus_comprobantes.get_list(IdEmpresa,"", ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             Lis_tb_comprobantes_sin_autorizacion_List.set_list(model);
             return PartialView("_GridViewPartial_documentos_pendientes_enviar_sri", model);
         }

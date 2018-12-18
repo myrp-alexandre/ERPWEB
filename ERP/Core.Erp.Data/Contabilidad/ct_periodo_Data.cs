@@ -137,7 +137,7 @@ namespace Core.Erp.Data.Contabilidad
                 {
                     ct_periodo Entity = new ct_periodo
                     {
-                        IdPeriodo = info.IdPeriodo = get_id(info.IdEmpresa),
+                        IdPeriodo = info.IdPeriodo,
                         IdEmpresa = info.IdEmpresa,
                         IdanioFiscal = info.IdanioFiscal,
                         pe_FechaIni = info.pe_FechaIni.Date,
