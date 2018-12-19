@@ -546,7 +546,7 @@
             this.xrTableCell31.Name = "xrTableCell31";
             this.xrTableCell31.StylePriority.UseBorders = false;
             this.xrTableCell31.StylePriority.UseTextAlignment = false;
-            this.xrTableCell31.Text = "Aprobado por:";
+            this.xrTableCell31.Text = "Aprobado por";
             this.xrTableCell31.Weight = 0.9272727052142361D;
             // 
             // xrTable6
@@ -572,7 +572,7 @@
             this.xrTableCell30.Name = "xrTableCell30";
             this.xrTableCell30.StylePriority.UseBorders = false;
             this.xrTableCell30.StylePriority.UseTextAlignment = false;
-            this.xrTableCell30.Text = "Revisado por:";
+            this.xrTableCell30.Text = "Revisado por";
             this.xrTableCell30.Weight = 0.9272727052142361D;
             // 
             // xrTable5
@@ -598,7 +598,7 @@
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.StylePriority.UseBorders = false;
             this.xrTableCell36.StylePriority.UseTextAlignment = false;
-            this.xrTableCell36.Text = "Firma empleado:";
+            this.xrTableCell36.Text = "Firma empleado";
             this.xrTableCell36.Weight = 0.98471508638962135D;
             // 
             // p_IdNovedad
