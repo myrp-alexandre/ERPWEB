@@ -247,14 +247,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 var Lista_TipoCliente = ListaTipoCliente.get_list(model.IdTransaccionSession);
                 var Lista_Cliente = ListaCliente.get_list(model.IdTransaccionSession);
+                var Lista_ClienteContactos = List_fa_cliente_contactos.get_list(model.IdTransaccionSession);
+                var Lista_clienteVendedorSucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(model.IdTransaccionSession);
 
                 foreach (var item in Lista_TipoCliente)
                 {
-                    if (!bus_cliente_tipo.guardarDB(item))
-                    {
-                        ViewBag.mensaje = "Error al importar el archivo";
-                        return View(model);
-                    }
+                    //if (!bus_cliente_tipo.guardarDB(item))
+                    //{
+                    //    ViewBag.mensaje = "Error al importar el archivo";
+                    //    return View(model);
+                    //}
                 }
 
                 foreach (var item in Lista_Cliente)
@@ -435,6 +437,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             List<fa_cliente_tipo_Info> Lista_ClienteTipo = new List<fa_cliente_tipo_Info>();
             fa_cliente_List ListaCliente = new fa_cliente_List();
             List<fa_cliente_Info> Lista_Cliente = new List<fa_cliente_Info>();
+            fa_cliente_contactos_List List_fa_cliente_contactos = new fa_cliente_contactos_List();
+            List<fa_cliente_contactos_Info> Lista_ClienteContactos = new List<fa_cliente_contactos_Info>();
+            fa_cliente_x_fa_Vendedor_x_sucursal_list List_fa_cliente_x_fa_Vendedor_x_sucursal = new fa_cliente_x_fa_Vendedor_x_sucursal_list();
+            List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> Lista_ClienteVendedor= new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
+
             tb_persona_Bus bus_persona = new tb_persona_Bus();
 
             int cont = 0;
@@ -528,18 +535,43 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             IdPersona = info_persona_prov.IdPersona,
                             Codigo = Convert.ToString(reader.GetValue(1)),
                             Idtipo_cliente = Convert.ToInt32(reader.GetValue(13)),
-                            IdTipoCredito = Convert.ToString(reader.GetValue(20)),
                             cl_plazo = Convert.ToInt32(reader.GetValue(15)),
                             cl_Cupo = Convert.ToDouble(reader.GetValue(16)),
                             IdCtaCble_cxc_Credito = Convert.ToString(reader.GetValue(14)),
                             es_empresa_relacionada = (Convert.ToString(reader.GetValue(12)) == "SI") ? true : false,                            
                             EsClienteExportador = false,
                             IdNivel = 1,
+                            IdTipoCredito = "CON",
+                            FormaPago = "01",
                             IdUsuario = SessionFixed.IdUsuario
                         };
-                        info.info_persona = info_persona_prov;
-                        Lista_Cliente.Add(info);
 
+                        fa_cliente_contactos_Info info_cliente_contacto = new fa_cliente_contactos_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdContacto = 1,
+                            IdCiudad = Convert.ToString(reader.GetValue(18)),
+                            IdParroquia = Convert.ToString(reader.GetValue(19)),
+                            Celular = Convert.ToString(reader.GetValue(11)),
+                            Correo = Convert.ToString(reader.GetValue(8)),
+                            Direccion = Convert.ToString(reader.GetValue(9)),
+                            Nombres = (Convert.ToString(reader.GetValue(4)) == "NATU") ? Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7)) : Convert.ToString(reader.GetValue(5)),
+                            Telefono = Convert.ToString(reader.GetValue(10)),
+
+                        };
+
+                        fa_cliente_x_fa_Vendedor_x_sucursal_Info info_cliente_vendedor = new fa_cliente_x_fa_Vendedor_x_sucursal_Info
+                        {
+                        };
+
+                        Lista_ClienteContactos.Add(info_cliente_contacto);
+                        Lista_ClienteVendedor.Add(info_cliente_vendedor);
+
+                        info.info_persona = info_persona_prov;
+                        //info.lst_fa_cliente_contactos = Lista_ClienteContactos;
+                        //info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = Lista_ClienteVendedor;
+
+                        Lista_Cliente.Add(info);
                     }
                     else
                         cont++;
