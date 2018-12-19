@@ -559,17 +559,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             Telefono = Convert.ToString(reader.GetValue(10)),
 
                         };
-
-                        fa_cliente_x_fa_Vendedor_x_sucursal_Info info_cliente_vendedor = new fa_cliente_x_fa_Vendedor_x_sucursal_Info
-                        {
-                        };
-
-                        Lista_ClienteContactos.Add(info_cliente_contacto);
-                        Lista_ClienteVendedor.Add(info_cliente_vendedor);
-
+                        info.lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>();
+                        info.lst_fa_cliente_contactos.Add(info_cliente_contacto);
+                        info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
                         info.info_persona = info_persona_prov;
-                        //info.lst_fa_cliente_contactos = Lista_ClienteContactos;
-                        //info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = Lista_ClienteVendedor;
 
                         Lista_Cliente.Add(info);
                     }
