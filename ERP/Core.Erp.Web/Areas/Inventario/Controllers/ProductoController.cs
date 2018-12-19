@@ -14,6 +14,8 @@ using Core.Erp.Info.Helps;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.General;
 using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
+using Core.Erp.Bus.Facturacion;
+using Core.Erp.Info.Facturacion;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
@@ -23,9 +25,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #region variables
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_Producto_Composicion_List list_producto_composicion = new in_Producto_Composicion_List();
+        in_Producto_x_fa_NivelDescuesto_List list_producto_x_fa_NivelDescuento = new in_Producto_x_fa_NivelDescuesto_List();
         in_Producto_Composicion_Bus bus_producto_composicion = new in_Producto_Composicion_Bus();
+        fa_NivelDescuento_Bus bus_nivel_descuento = new fa_NivelDescuento_Bus();
         in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
+        in_Producto_x_fa_NivelDescuento_Bus bus_producto_x_NivelDescuento = new in_Producto_x_fa_NivelDescuento_Bus();
         in_producto_x_tb_bodega_Info_List Lis_in_producto_x_tb_bodega_Info_List = new in_producto_x_tb_bodega_Info_List();
+        in_Producto_x_fa_NivelDescuesto_List list_producto_x_nivel_descuento = new in_Producto_x_fa_NivelDescuesto_List();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
         in_producto_x_tb_bodega_Bus bus_producto_x_bodega = new in_producto_x_tb_bodega_Bus();
@@ -86,7 +92,16 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             return PartialView("_GridViewPartial_producto_por_bodega", model);
         }
-        
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_producto_x_niveldescuento()
+        {
+            cargar_combos_producto_x_NivelDescuento();
+            in_Producto_Info model = new in_Producto_Info();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            model.list_producto_x_fa_NivelDescuento = list_producto_x_fa_NivelDescuento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            return PartialView("_GridViewPartial_producto_x_niveldescuento", model);
+        }
         public List<in_Producto_Info> get_lst_productos()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
@@ -120,6 +135,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 model.pr_imagen = new byte[0];
                 list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
                 Lis_in_producto_x_tb_bodega_Info_List.set_list(lst_producto_x_bodega, model.IdTransaccionSession);
+                list_producto_x_fa_NivelDescuento.set_list(model.list_producto_x_fa_NivelDescuento, model.IdTransaccionSession);
+
                 cargar_combos(model);
                 return View(model);
             }
@@ -156,6 +173,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     cargar_combos(model);
                     return View(model);
                 }
+
+                model.list_producto_x_fa_NivelDescuento = list_producto_x_fa_NivelDescuento.get_list(model.IdTransaccionSession);
+                model.list_producto_x_fa_NivelDescuento.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdProducto = model.IdProducto; });
+                bus_producto_x_NivelDescuento.eliminarDB(model.IdEmpresa, model.IdProducto);
+
+                if (!bus_producto_x_NivelDescuento.guardarDB(model.list_producto_x_fa_NivelDescuento))
+                {
+                    cargar_combos(model);
+                    return View(model);
+                }
+
                 Producto_imagen.pr_imagen = null;
                 return RedirectToAction("Index");
             }
@@ -185,10 +213,13 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     return RedirectToAction("Index");
                 cargar_combos(model);
                 model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                model.list_producto_x_fa_NivelDescuento = bus_producto_x_NivelDescuento.get_list(model.IdEmpresa, model.IdProducto);
                 model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
                 model.lst_producto_x_bodega = bus_producto_x_bodega.get_list(IdEmpresa, model.IdProducto);
                 Lis_in_producto_x_tb_bodega_Info_List.set_list(model.lst_producto_x_bodega, model.IdTransaccionSession);
                 list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
+                list_producto_x_fa_NivelDescuento.set_list(model.list_producto_x_fa_NivelDescuento, model.IdTransaccionSession);
+
                 return View(model);
             }
             catch (Exception)
@@ -199,15 +230,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         [HttpPost]
         public ActionResult Modificar(in_Producto_Info model)
-
         {
             try
             {
                 bus_producto = new in_Producto_Bus();
+
                 model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToInt32(model.IdTransaccionSession));
                 if (model.lst_producto_x_bodega == null)
                     model.lst_producto_x_bodega = new List<in_producto_x_tb_bodega_Info>();
+
                 model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
+
                 model.pr_imagen = Producto_imagen.pr_imagen;
                 if (!validar(model, ref mensaje))
                 {
@@ -217,6 +250,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     ViewBag.mensaje = mensaje;
                     return View(model);
                 }
+
                 if (!bus_producto.modificarDB(model))
                 {
                     if (model.pr_imagen == null)
@@ -233,6 +267,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     cargar_combos(model);
                     return View(model);
                 }
+
+                model.list_producto_x_fa_NivelDescuento = list_producto_x_fa_NivelDescuento.get_list(model.IdTransaccionSession);
+                model.list_producto_x_fa_NivelDescuento.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdProducto = model.IdProducto; });
+                bus_producto_x_NivelDescuento.eliminarDB(model.IdEmpresa, model.IdProducto);
+
+                if (!bus_producto_x_NivelDescuento.guardarDB(model.list_producto_x_fa_NivelDescuento))
+                {
+                    cargar_combos(model);
+                    return View(model);
+                }
+
                 Producto_imagen.pr_imagen = null;
                 return RedirectToAction("Index");
             }
@@ -471,6 +516,59 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_susucrsal = lst_susucrsal;
             ViewBag.lst_bodega = lst_bodega;
 
+        }
+        private void cargar_combos_producto_x_NivelDescuento()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            var lst_NivelDescuento = bus_nivel_descuento.GetList(IdEmpresa, false);
+            ViewBag.lst_NivelDescuento = lst_NivelDescuento;
+
+        }
+        #endregion
+
+        #region funciones del detalle producto por nivel de descuento
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew_pro_x_desc([ModelBinder(typeof(DevExpressEditorsBinder))] in_Producto_x_fa_NivelDescuento_Info info_det)
+        {
+            in_Producto_Info model = new in_Producto_Info();
+            if (ModelState.IsValid)
+            {
+                in_Producto_x_fa_NivelDescuento_Info info_pro_x_nivel_desc = new in_Producto_x_fa_NivelDescuento_Info();
+                info_pro_x_nivel_desc.IdNivel = info_det.IdNivel;
+                info_pro_x_nivel_desc.Porcentaje = info_det.Porcentaje;
+
+                var lista = list_producto_x_fa_NivelDescuento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+                if (lista.Where(v => v.IdNivel == info_det.IdNivel && v.IdEmpresa == info_det.IdEmpresa).Count() == 0)
+                    list_producto_x_fa_NivelDescuento.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            }
+            cargar_combos_producto_x_NivelDescuento();            
+            model.list_producto_x_fa_NivelDescuento = list_producto_x_fa_NivelDescuento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_producto_x_niveldescuento", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate_pro_x_desc([ModelBinder(typeof(DevExpressEditorsBinder))] in_Producto_x_fa_NivelDescuento_Info info_det)
+        {
+            in_Producto_Info model = new in_Producto_Info();
+            if (ModelState.IsValid)
+            {
+                list_producto_x_fa_NivelDescuento.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+            model.list_producto_x_fa_NivelDescuento = list_producto_x_fa_NivelDescuento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_producto_x_NivelDescuento();
+            return PartialView("_GridViewPartial_producto_x_niveldescuento", model);
+        }
+
+        public ActionResult EditingDelete_pro_x_desc(int Secuencia = 0)
+        {
+            in_Producto_Info model = new in_Producto_Info();
+            list_producto_x_fa_NivelDescuento.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.list_producto_x_fa_NivelDescuento = list_producto_x_fa_NivelDescuento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_producto_x_NivelDescuento();
+            return PartialView("_GridViewPartial_producto_x_niveldescuento", model);
         }
         #endregion
 
@@ -757,4 +855,55 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
     }
 
+    public class in_Producto_x_fa_NivelDescuesto_List
+    {
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
+        fa_NivelDescuento_Bus bus_nivel_desc = new fa_NivelDescuento_Bus();
+        string Variable = "in_Producto_x_fa_NivelDescuento_Info";
+
+        public List<in_Producto_x_fa_NivelDescuento_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<in_Producto_x_fa_NivelDescuento_Info> list = new List<in_Producto_x_fa_NivelDescuento_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<in_Producto_x_fa_NivelDescuento_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<in_Producto_x_fa_NivelDescuento_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(in_Producto_x_fa_NivelDescuento_Info info_det, decimal IdTransaccionSession)
+        {
+            List<in_Producto_x_fa_NivelDescuento_Info> list = get_list(IdTransaccionSession);
+            fa_NivelDescuento_Info info_nivel = bus_nivel_desc.GetInfo(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdNivel);
+
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            info_det.Descripcion = info_nivel.Descripcion;
+
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(in_Producto_x_fa_NivelDescuento_Info info_det, decimal IdTransaccionSession)
+        {
+            in_Producto_x_fa_NivelDescuento_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            if (edited_info.IdNivel != info_det.IdNivel)
+            {
+                fa_NivelDescuento_Info info_nivel = bus_nivel_desc.GetInfo(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdNivel);
+                edited_info.Descripcion = info_nivel.Descripcion;
+            }
+            edited_info.IdNivel = info_det.IdNivel;
+            edited_info.Porcentaje = info_det.Porcentaje;
+        }
+
+        public void DeleteRow(int secuencia, decimal IdTransaccionSession)
+        {
+            List<in_Producto_x_fa_NivelDescuento_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == secuencia).First());
+        }
+    }
 }

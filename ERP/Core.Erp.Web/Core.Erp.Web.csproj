@@ -9526,6 +9526,10 @@
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\_GridViewPartial_proveedor_importacion.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\Importar.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\_GridViewPartial_clase_proveedor_importacion.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\Importar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente_importacion.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente_tipo_importacion.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_producto_x_niveldescuento.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

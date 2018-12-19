@@ -11,6 +11,10 @@ using System.Web.Mvc;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
+using ExcelDataReader;
+using System.IO;
+using Core.Erp.Web.Areas.General.Controllers;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
@@ -19,11 +23,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
     {
         #region Variables
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+        fa_cliente_tipo_Bus bus_cliente_tipo = new fa_cliente_tipo_Bus();
         fa_cliente_contactos_Bus bus_cliente_contacto = new fa_cliente_contactos_Bus();
         fa_cliente_contactos_List List_fa_cliente_contactos = new fa_cliente_contactos_List();
         fa_cliente_x_fa_Vendedor_x_sucursal_list List_fa_cliente_x_fa_Vendedor_x_sucursal = new fa_cliente_x_fa_Vendedor_x_sucursal_list();
         fa_cliente_x_fa_Vendedor_x_sucursal_Bus bus_fa_vendedor = new fa_cliente_x_fa_Vendedor_x_sucursal_Bus();
         tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
+        tb_persona_List ListaPersona = new tb_persona_List();
+        fa_cliente_tipo_List ListaTipoCliente = new fa_cliente_tipo_List();
+        fa_cliente_List ListaCliente = new fa_cliente_List();
+        tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
         string mensaje = string.Empty;
         #endregion
         #region Index
@@ -208,6 +217,80 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            fa_cliente_Info model = new fa_cliente_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(fa_cliente_Info model)
+        {
+            try
+            {
+                var Lista_TipoCliente = ListaTipoCliente.get_list(model.IdTransaccionSession);
+                var Lista_Cliente = ListaCliente.get_list(model.IdTransaccionSession);
+
+                foreach (var item in Lista_TipoCliente)
+                {
+                    if (!bus_cliente_tipo.guardarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }
+
+                foreach (var item in Lista_Cliente)
+                {
+                    if (!bus_cliente.guardarDB_importacion(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.error = ex.Message.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult GridViewPartial_cliente_tipo_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaTipoCliente.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_cliente_tipo_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_cliente_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaCliente.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_cliente_importacion", model);
+        }
+        #endregion
+
         #region Json
         public ActionResult get_parroquias(string IdCiudad = "")
         {            
@@ -338,6 +421,135 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
     }
 
+    public class UploadControlSettings
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            fa_cliente_tipo_List ListaClienteTipo = new fa_cliente_tipo_List();
+            List<fa_cliente_tipo_Info> Lista_ClienteTipo = new List<fa_cliente_tipo_Info>();
+            fa_cliente_List ListaCliente = new fa_cliente_List();
+            List<fa_cliente_Info> Lista_Cliente = new List<fa_cliente_Info>();
+            tb_persona_Bus bus_persona = new tb_persona_Bus();
+
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                #region ClienteTipo                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        fa_cliente_tipo_Info info = new fa_cliente_tipo_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            Idtipo_cliente = Convert.ToInt32(reader.GetValue(0)),
+                            Cod_cliente_tipo = Convert.ToString(reader.GetValue(1)),
+                            Descripcion_tip_cliente = Convert.ToString(reader.GetValue(2)),
+                            IdCtaCble_CXC_Cred = Convert.ToString(reader.GetValue(3)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        Lista_ClienteTipo.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                ListaClienteTipo.set_list(Lista_ClienteTipo, IdTransaccionSession);
+                #endregion
+
+                cont = 0;
+                //Para avanzar a la siguiente hoja de excel
+                reader.NextResult();
+
+                #region Cliente   
+                var Lista_Persona = bus_persona.get_list(false);
+                tb_persona_List ListaPersona = new tb_persona_List();
+                ListaPersona.set_list(Lista_Persona, IdTransaccionSession);
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        var info_persona = ListaPersona.get_list(IdTransaccionSession).Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
+                        var info_persona_prov = info_persona;
+
+                        if (info_persona == null)
+                        {
+                            tb_persona_Info info_ = new tb_persona_Info
+                            {
+                                pe_Naturaleza = Convert.ToString(reader.GetValue(4)),
+                                pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7)),
+                                pe_razonSocial = Convert.ToString(reader.GetValue(5)),
+                                pe_apellido = Convert.ToString(reader.GetValue(6)),
+                                pe_nombre = Convert.ToString(reader.GetValue(7)),
+                                IdTipoDocumento = Convert.ToString(reader.GetValue(2)),
+                                pe_cedulaRuc = Convert.ToString(reader.GetValue(3)),
+                                pe_direccion = Convert.ToString(reader.GetValue(9)),
+                                pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)),
+                                pe_celular = Convert.ToString(reader.GetValue(11)),
+                                pe_correo = Convert.ToString(reader.GetValue(8)),
+                            };
+                            Lista_Persona.Add(info_);
+                            info_persona_prov = info_;
+                        }
+                        else
+                        {
+                            info_persona_prov = bus_persona.get_info(info_persona.IdPersona);
+
+                            info_persona_prov.pe_Naturaleza = Convert.ToString(reader.GetValue(4));
+                            info_persona_prov.pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7));
+                            info_persona_prov.pe_razonSocial = Convert.ToString(reader.GetValue(5));
+                            info_persona_prov.pe_apellido = Convert.ToString(reader.GetValue(6));
+                            info_persona_prov.pe_nombre = Convert.ToString(reader.GetValue(7));
+                            info_persona_prov.IdTipoDocumento = Convert.ToString(reader.GetValue(2));
+                            info_persona_prov.pe_cedulaRuc = Convert.ToString(reader.GetValue(3));
+                            info_persona_prov.pe_direccion = Convert.ToString(reader.GetValue(9));
+                            info_persona_prov.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
+                            info_persona_prov.pe_celular = Convert.ToString(reader.GetValue(11));
+                            info_persona_prov.pe_correo = Convert.ToString(reader.GetValue(8));
+                        }
+
+                        fa_cliente_Info info = new fa_cliente_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdPersona = info_persona_prov.IdPersona,
+                            Codigo = Convert.ToString(reader.GetValue(1)),
+                            Idtipo_cliente = Convert.ToInt32(reader.GetValue(13)),
+                            IdTipoCredito = Convert.ToString(reader.GetValue(20)),
+                            cl_plazo = Convert.ToInt32(reader.GetValue(15)),
+                            cl_Cupo = Convert.ToDouble(reader.GetValue(16)),
+                            IdCtaCble_cxc_Credito = Convert.ToString(reader.GetValue(14)),
+                            es_empresa_relacionada = (Convert.ToString(reader.GetValue(12)) == "SI") ? true : false,                            
+                            EsClienteExportador = false,
+                            IdNivel = 1,
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        info.info_persona = info_persona_prov;
+                        Lista_Cliente.Add(info);
+
+                    }
+                    else
+                        cont++;
+                }
+                ListaCliente.set_list(Lista_Cliente, IdTransaccionSession);
+                #endregion
+            }
+        }
+    }
+
     #region List
 
     public class fa_cliente_contactos_List
@@ -422,6 +634,26 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.IdCliente == IdCliente).First());
+        }
+    }
+
+    public class fa_cliente_List
+    {
+        string Variable = "fa_cliente_Info";
+        public List<fa_cliente_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<fa_cliente_Info> list = new List<fa_cliente_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<fa_cliente_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<fa_cliente_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
     }
     #endregion

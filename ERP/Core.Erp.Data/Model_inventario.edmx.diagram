@@ -106,6 +106,8 @@
         <AssociationConnector Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo8" />
         <AssociationConnector Association="Model_inventario.FK_in_parametro_in_movi_inven_tipo9" />
         <AssociationConnector Association="Model_inventario.FK_in_parametro_in_ProductoTipo" />
+        <EntityTypeShape EntityType="Model_inventario.in_Producto_x_fa_NivelDescuento" Width="1.5" PointX="16.25" PointY="21.75" />
+        <AssociationConnector Association="Model_inventario.FK_in_Producto_x_fa_NivelDescuento_in_Producto" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

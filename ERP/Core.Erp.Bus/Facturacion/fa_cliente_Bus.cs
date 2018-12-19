@@ -79,6 +79,39 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
+
+        public bool guardarDB_importacion(fa_cliente_Info info)
+        {
+            try
+            {
+                if (info.IdPersona == 0)
+                {
+                    info.info_persona = odata_per.armar_info(info.info_persona);
+                    if (odata_per.guardarDB(info.info_persona))
+                    {
+                        info.IdPersona = info.info_persona.IdPersona;
+                        return odata.guardarDB(info);
+                    }
+                }
+                else
+                {
+                    if (odata_per.modificarDB(info.info_persona))
+                    {
+                        return odata.guardarDB(info);
+                    }
+                    return odata.guardarDB(info);
+                }
+
+                return false;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool modificarDB(fa_cliente_Info info)
         {
             try

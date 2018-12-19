@@ -92,6 +92,8 @@ namespace Core.Erp.Info.Inventario
         #region Campos que no existen en la tabla
         public List<in_Producto_Composicion_Info> lst_producto_composicion { get; set; }
         public List<in_producto_x_tb_bodega_Info> lst_producto_x_bodega { get; set; }
+        public List<in_Producto_x_fa_NivelDescuento_Info> list_producto_x_fa_NivelDescuento { get; set; }
+
         public string nom_presentacion { get; set; }
         public string nom_categoria { get; set; }
 
