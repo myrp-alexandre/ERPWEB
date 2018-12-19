@@ -233,7 +233,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                 foreach (var item in info.lst_sueldo_x_pagar)
                 {
-                    if (item.IdCtaCble == null)
+                    item.IdCtaCble = item.IdCtaCble.Trim();
+                    if (item.IdCtaCble == null || item.IdCtaCble == "")
                     {
                         ViewBag.mensaje = " Falta cueta contable de:" +item.dc_Observacion;
                         cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);
@@ -243,7 +244,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 }
                 foreach (var item in info.lst_provisiones)
                 {
-                    if (item.IdCtaCble == null)
+                    item.IdCtaCble = item.IdCtaCble.Trim();
+
+                    if (item.IdCtaCble == null || item.IdCtaCble == "")
                     {
                         ViewBag.mensaje = " Falta cueta contable de:" + item.dc_Observacion;
                         cargar_combos(info.IdNomina_Tipo, info.IdNomina_TipoLiqui);

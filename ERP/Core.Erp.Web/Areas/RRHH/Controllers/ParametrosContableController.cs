@@ -82,10 +82,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
             if (model.lst_cta_x_rubros.Count() == 0)
             {
-                model.lst_cta_x_rubros = bus_configuracion_ctas.get_list(IdEmpresa);
+                model.lst_cta_x_rubros = bus_configuracion_ctas.get_list(IdEmpresa).Where(v => v.rub_provision == false).ToList();
                 lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
+
             }
-            model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros().Where(v => v.rub_provision == false).ToList();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_cta_ctble_rubros", model);
         }
@@ -97,10 +97,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.lst_cta_x_rubros = lst_cta_rubro.get_list_cta_rubros();
             if (model.lst_cta_x_rubros.Count() == 0)
             {
-                model.lst_cta_x_rubros = bus_configuracion_ctas.get_list(IdEmpresa);
+                model.lst_cta_x_rubros = bus_configuracion_ctas.get_list(IdEmpresa).Where(v => v.rub_provision == false).ToList();
                 lst_cta_rubro.set_list_cta_rubros(model.lst_cta_x_rubros);
+
             }
-            model.lst_cta_x_provisiones = lst_cta_rubro.get_list_cta_rubros().Where(v => v.rub_provision == true).ToList();
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_cta_ctble_provisiones", model);
         }
@@ -113,6 +113,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (model.lst_cta_x_sueldo_pagar.Count() == 0)
             {
                 model.lst_cta_x_sueldo_pagar = bus_configuracion_cta_x_sueldo.get_list(IdEmpresa);
+                model.lst_cta_x_provisiones = lst_cta_rubro.get_list_cta_rubros().Where(v => v.rub_provision == true && v.rub_nocontab == true).ToList();
                 lst_cta_rubro.set_list_sueldo_x_pagar(model.lst_cta_x_sueldo_pagar);
             }
             model.lst_cta_x_sueldo_pagar = lst_cta_rubro.get_list_sueldo_x_pagar();
