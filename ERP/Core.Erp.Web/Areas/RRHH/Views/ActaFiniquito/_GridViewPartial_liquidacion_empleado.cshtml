@@ -127,12 +127,13 @@
             {
                 if (Convert.ToString(DataBinder.Eval(container.DataItem, "EstadoContrato")) != "ECT_LIQ")
                 {
+                   
                     Html.DevExpress().HyperLink(hyperlink =>
                     {
                         var IdActaFiniquito = DataBinder.Eval(container.DataItem, "IdActaFiniquito");
 
                         hyperlink.Properties.Text = "Liquidar A.F";
-                        hyperlink.NavigateUrl = Url.Action("Liquidar", "ActaFiniquito", new {  IdActaFiniquito = IdActaFiniquito });
+                        hyperlink.NavigateUrl = Url.Action("Liquidar", "ActaFiniquito", new { IdActaFiniquito = IdActaFiniquito });
                     }).Render();
 
                 }

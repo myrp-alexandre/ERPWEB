@@ -6,6 +6,9 @@
         settings.KeyFieldName = "IdContrato";
         settings.Width = Unit.Percentage(100);
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -79,7 +82,7 @@
         });
 
 
-        settings.Columns.Add("IdContrato","ID").Width=Unit.Percentage(5);
+        settings.Columns.Add("IdContrato","ID").Width=Unit.Percentage(10);
         settings.Columns.Add("NumDocumento","Nº contrato").Width = Unit.Percentage(10);
         settings.Columns.Add("Empleado", "Nombres").Width = Unit.Percentage(30);
         settings.Columns.Add("FechaInicio", "Fecha inicio").Width = Unit.Percentage(10);

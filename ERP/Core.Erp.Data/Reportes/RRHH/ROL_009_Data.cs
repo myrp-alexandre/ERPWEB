@@ -26,10 +26,10 @@ namespace Core.Erp.Data.Reportes.RRHH
                     Lista = (from q in Context.VWROL_009
                              where q.IdEmpresa == IdEmpresa
                              && q.FechaPago>=fecha_inicio
-                             && q.FechaPago<=fecha_fin
+                             && q.FechaPago<= fecha_fin
+                             && q.EstadoCobro.Contains(estado_novedad)
                              && q.IdEmpleado>=IdEmpleadoInicio
                              && q.IdEmpleado<=IdEmpleadoFin
-                             && estado_novedad.Contains(estado_novedad)
 
                              select new ROL_009_Info
                              {
@@ -56,10 +56,10 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  where q.IdEmpresa == IdEmpresa
                                  && q.FechaPago >= fecha_inicio
                                  && q.FechaPago <= fecha_fin
-                                 && estado_novedad.Contains(estado_novedad)
+                                 && estado_novedad.Contains(q.EstadoCobro)
                                  && q.IdRubro==IdRubro
                                  && q.IdEmpleado >= IdEmpleadoInicio
-                                && q.IdEmpleado <= IdEmpleadoFin
+                                 && q.IdEmpleado <= IdEmpleadoFin
                                  select new ROL_009_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
