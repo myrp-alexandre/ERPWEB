@@ -158,6 +158,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 model.lst_producto_x_bodega = Lis_in_producto_x_tb_bodega_Info_List.get_list(Convert.ToInt32(model.IdTransaccionSession));
                 if (model.lst_producto_x_bodega == null)
                     model.lst_producto_x_bodega = new List<in_producto_x_tb_bodega_Info>();
+
                 if (!validar(model, ref mensaje))
                 {
                     if (model.pr_imagen == null)
@@ -166,6 +167,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     ViewBag.mensaje = mensaje;
                     return View(model);
                 }
+
                 if (!bus_producto.guardarDB(model))
                 {
                     if (model.pr_imagen == null)
@@ -306,8 +308,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 if (model == null)
                     return RedirectToAction("Index");
                 cargar_combos(model);
+                model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                model.list_producto_x_fa_NivelDescuento = bus_producto_x_NivelDescuento.get_list(model.IdEmpresa, model.IdProducto);
                 model.lst_producto_composicion = bus_producto_composicion.get_list(model.IdEmpresa, model.IdProducto);
+                model.lst_producto_x_bodega = bus_producto_x_bodega.get_list(IdEmpresa, model.IdProducto);
+                Lis_in_producto_x_tb_bodega_Info_List.set_list(model.lst_producto_x_bodega, model.IdTransaccionSession);
                 list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
+                list_producto_x_fa_NivelDescuento.set_list(model.list_producto_x_fa_NivelDescuento, model.IdTransaccionSession);
+
                 return View(model);
             }
             catch (Exception)
@@ -347,6 +355,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 return View(model);
             }
         }
+
         #endregion
 
         #region Json
