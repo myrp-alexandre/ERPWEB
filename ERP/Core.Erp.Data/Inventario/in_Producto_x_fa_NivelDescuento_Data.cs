@@ -74,6 +74,7 @@ namespace Core.Erp.Data.Inventario
             {
                 using (Entities_inventario Context = new Entities_inventario())
                 {
+                    var secuencia = 1;
                     foreach (var item in Lista)
                     {
                         in_Producto_x_fa_NivelDescuento Entity = new in_Producto_x_fa_NivelDescuento
@@ -81,7 +82,7 @@ namespace Core.Erp.Data.Inventario
                             IdEmpresa = item.IdEmpresa,
                             IdProducto = item.IdProducto,
                             IdNivel = item.IdNivel,
-                            Secuencia = item.Secuencia,
+                            Secuencia = secuencia++,
                             Porcentaje = item.Porcentaje,
                         };
                         Context.in_Producto_x_fa_NivelDescuento.Add(Entity);
