@@ -1284,6 +1284,12 @@
     <Compile Include="ro_marcaciones_x_empleado.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_NominasPagosCheques.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ro_NominasPagosCheques_det.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_Nomina_Tipo.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1403,6 +1409,8 @@
     <Compile Include="RRHH\ro_HorasProfesores_det_Data.cs" />
     <Compile Include="RRHH\ro_marcaciones_tipo_Data.cs" />
     <Compile Include="RRHH\ro_marcaciones_x_empleado_Data.cs" />
+    <Compile Include="RRHH\ro_NominasPagosCheques_Data.cs" />
+    <Compile Include="RRHH\ro_NominasPagosCheques_det_Data.cs" />
     <Compile Include="RRHH\ro_Nomina_Tipoliqui_Data.cs" />
     <Compile Include="RRHH\ro_nomina_tipo_Data.cs" />
     <Compile Include="RRHH\ro_nomina_x_horas_extras_Data.cs" />

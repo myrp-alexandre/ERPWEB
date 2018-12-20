@@ -888,6 +888,42 @@
           <Property Name="hora_trabajada" Type="float" Nullable="false" />
           <Property Name="es_HorasExtrasAutorizadas" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ro_NominasPagosCheques">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTransaccion" Type="int" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="int" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuarioAnu" Type="varchar" MaxLength="20" />
+          <Property Name="MotivoAnu" Type="varchar" MaxLength="100" />
+          <Property Name="IdUsuarioUltModi" Type="varchar" MaxLength="20" />
+          <Property Name="FechaAnu" Type="datetime" />
+          <Property Name="FechaTransac" Type="datetime" Nullable="false" />
+          <Property Name="FechaUltModi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ro_NominasPagosCheques_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTransaccion" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="IdEmpresa_op" Type="int" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3523,6 +3559,50 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ro_NominasPagosCheques_det_ro_empleado">
+          <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="0..1" />
+          <End Role="ro_NominasPagosCheques_det" Type="Self.ro_NominasPagosCheques_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_NominasPagosCheques_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques">
+          <End Role="ro_NominasPagosCheques" Type="Self.ro_NominasPagosCheques" Multiplicity="1" />
+          <End Role="ro_NominasPagosCheques_det" Type="Self.ro_NominasPagosCheques_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_NominasPagosCheques">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTransaccion" />
+            </Principal>
+            <Dependent Role="ro_NominasPagosCheques_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui">
+          <End Role="ro_Nomina_Tipoliqui" Type="Self.ro_Nomina_Tipoliqui" Multiplicity="1" />
+          <End Role="ro_NominasPagosCheques" Type="Self.ro_NominasPagosCheques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_Nomina_Tipoliqui">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Principal>
+            <Dependent Role="ro_NominasPagosCheques">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_ro_Nomina_Tipoliqui">
           <End Role="ro_Nomina_Tipoliqui" Type="Self.ro_Nomina_Tipoliqui" Multiplicity="1" />
           <End Role="ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" Type="Self.ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" Multiplicity="*" />
@@ -4199,6 +4279,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySet Name="ro_Nomina_Tipoliqui" EntityType="Self.ro_Nomina_Tipoliqui" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_nomina_x_horas_extras" EntityType="Self.ro_nomina_x_horas_extras" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_nomina_x_horas_extras_det" EntityType="Self.ro_nomina_x_horas_extras_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_NominasPagosCheques" EntityType="Self.ro_NominasPagosCheques" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_NominasPagosCheques_det" EntityType="Self.ro_NominasPagosCheques_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" EntityType="Self.ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_Parametros" EntityType="Self.ro_Parametros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_participacion_utilidad" EntityType="Self.ro_participacion_utilidad" Schema="dbo" store:Type="Tables" />
@@ -5230,6 +5312,18 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_periodo_x_ro_Nomina_TipoLiqui" EntitySet="ro_periodo_x_ro_Nomina_TipoLiqui" />
             <End Role="ro_nomina_x_horas_extras" EntitySet="ro_nomina_x_horas_extras" />
           </AssociationSet>
+          <AssociationSet Name="FK_ro_NominasPagosCheques_det_ro_empleado" Association="Self.FK_ro_NominasPagosCheques_det_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_NominasPagosCheques_det" EntitySet="ro_NominasPagosCheques_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques" Association="Self.FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques">
+            <End Role="ro_NominasPagosCheques" EntitySet="ro_NominasPagosCheques" />
+            <End Role="ro_NominasPagosCheques_det" EntitySet="ro_NominasPagosCheques_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui" Association="Self.FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui">
+            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_NominasPagosCheques" EntitySet="ro_NominasPagosCheques" />
+          </AssociationSet>
           <AssociationSet Name="FK_ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_ro_Nomina_Tipoliqui" Association="Self.FK_ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_ro_Nomina_Tipoliqui">
             <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
             <End Role="ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" EntitySet="ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar" />
@@ -5935,6 +6029,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_rol" Relationship="Model_rrhh.FK_ro_rol_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_rol" />
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_EmpleadoNovedadCargaMasiva" />
           <NavigationProperty Name="ro_HorasProfesores" Relationship="Model_rrhh.FK_ro_HorasProfesores_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_HorasProfesores" />
+          <NavigationProperty Name="ro_NominasPagosCheques" Relationship="Model_rrhh.FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_NominasPagosCheques" />
         </EntityType>
         <EntityType Name="ro_nomina_x_horas_extras">
           <Key>
@@ -7670,6 +7765,20 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Parameter Name="Observacion" Mode="In" Type="String" />
             <Parameter Name="IdRol" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="ro_NominasPagosCheques" EntityType="Model_rrhh.ro_NominasPagosCheques" />
+          <EntitySet Name="ro_NominasPagosCheques_det" EntityType="Model_rrhh.ro_NominasPagosCheques_det" />
+          <AssociationSet Name="FK_ro_NominasPagosCheques_det_ro_empleado" Association="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_NominasPagosCheques_det" EntitySet="ro_NominasPagosCheques_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui" Association="Model_rrhh.FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui">
+            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_NominasPagosCheques" EntitySet="ro_NominasPagosCheques" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques" Association="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques">
+            <End Role="ro_NominasPagosCheques" EntitySet="ro_NominasPagosCheques" />
+            <End Role="ro_NominasPagosCheques_det" EntitySet="ro_NominasPagosCheques_det" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -9285,6 +9394,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_prestamo" Relationship="Model_rrhh.FK_ro_prestamo_ro_empleado" FromRole="ro_empleado" ToRole="ro_prestamo" />
           <NavigationProperty Name="ro_rol_detalle" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_empleado" FromRole="ro_empleado" ToRole="ro_rol_detalle" />
           <NavigationProperty Name="ro_Solicitud_Vacaciones_x_empleado" Relationship="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_Solicitud_Vacaciones_x_empleado" />
+          <NavigationProperty Name="ro_NominasPagosCheques_det" Relationship="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_NominasPagosCheques_det" />
         </EntityType>
         <EntityType Name="vwro_empleado_datos_generales">
           <Key>
@@ -10258,6 +10368,90 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="IdTipo_op_acta_finiquito" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdTipo_op_sueldo_por_pagar" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ro_NominasPagosCheques">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTransaccion" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAnu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnu" Type="DateTime" Precision="3" />
+          <Property Name="FechaTransac" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaUltModi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui" FromRole="ro_NominasPagosCheques" ToRole="ro_Nomina_Tipoliqui" />
+          <NavigationProperty Name="ro_NominasPagosCheques_det" Relationship="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques" FromRole="ro_NominasPagosCheques" ToRole="ro_NominasPagosCheques_det" />
+        </EntityType>
+        <EntityType Name="ro_NominasPagosCheques_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTransaccion" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="IdEmpresa_op" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_empleado" FromRole="ro_NominasPagosCheques_det" ToRole="ro_empleado" />
+          <NavigationProperty Name="ro_NominasPagosCheques" Relationship="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques" FromRole="ro_NominasPagosCheques_det" ToRole="ro_NominasPagosCheques" />
+        </EntityType>
+        <Association Name="FK_ro_NominasPagosCheques_det_ro_empleado">
+          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="0..1" />
+          <End Type="Model_rrhh.ro_NominasPagosCheques_det" Role="ro_NominasPagosCheques_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_NominasPagosCheques_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui">
+          <End Type="Model_rrhh.ro_Nomina_Tipoliqui" Role="ro_Nomina_Tipoliqui" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_NominasPagosCheques" Role="ro_NominasPagosCheques" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_Nomina_Tipoliqui">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Principal>
+            <Dependent Role="ro_NominasPagosCheques">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques">
+          <End Type="Model_rrhh.ro_NominasPagosCheques" Role="ro_NominasPagosCheques" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_NominasPagosCheques_det" Role="ro_NominasPagosCheques_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_NominasPagosCheques">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTransaccion" />
+            </Principal>
+            <Dependent Role="ro_NominasPagosCheques_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12381,6 +12575,41 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spRo_procesa_Rol_bono" FunctionName="Model_rrhh.Store.spRo_procesa_Rol_bono" />
+          <EntitySetMapping Name="ro_NominasPagosCheques">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_NominasPagosCheques">
+              <MappingFragment StoreEntitySet="ro_NominasPagosCheques">
+                <ScalarProperty Name="FechaUltModi" ColumnName="FechaUltModi" />
+                <ScalarProperty Name="FechaTransac" ColumnName="FechaTransac" />
+                <ScalarProperty Name="FechaAnu" ColumnName="FechaAnu" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="MotivoAnu" ColumnName="MotivoAnu" />
+                <ScalarProperty Name="IdUsuarioAnu" ColumnName="IdUsuarioAnu" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNomina_TipoLiqui" ColumnName="IdNomina_TipoLiqui" />
+                <ScalarProperty Name="IdNomina_Tipo" ColumnName="IdNomina_Tipo" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_NominasPagosCheques_det">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_NominasPagosCheques_det">
+              <MappingFragment StoreEntitySet="ro_NominasPagosCheques_det">
+                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
+                <ScalarProperty Name="IdEmpresa_op" ColumnName="IdEmpresa_op" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
