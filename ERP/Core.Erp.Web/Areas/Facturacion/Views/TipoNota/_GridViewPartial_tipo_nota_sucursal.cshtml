@@ -60,10 +60,21 @@
             column.Width = Unit.Percentage(50);
             column.EditorProperties().ComboBox(p =>
             {
-                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(100);
                 p.TextField = "pc_Cuenta";
                 p.ValueField = "IdCtaCble";
                 p.ValueType = typeof(string);
+                p.Columns.Add(c =>
+                {
+                    c.Caption = "ID";
+                    c.FieldName = "IdCtaCble";
+                    c.Width = Unit.Percentage(30);
+                });
+                p.Columns.Add(c =>
+                {
+                    c.Caption = "Cuenta";
+                    c.FieldName = "pc_Cuenta";
+                    c.Width = Unit.Percentage(70);
+                });
                 p.DataSource = ViewBag.lst_cuenta;
             });
         });

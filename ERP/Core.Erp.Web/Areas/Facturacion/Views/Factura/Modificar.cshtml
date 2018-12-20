@@ -1,11 +1,13 @@
 ﻿@model Core.Erp.Info.Facturacion.fa_factura_Info
 @{
-    ViewBag.Title = "Modificar factura";
-    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    {
-        Response.Redirect("~/Account/Login");
-    }
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Modificar factura";
+                if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+                {
+                    Response.Redirect("~/Account/Login");
+                }
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
@@ -13,10 +15,10 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.vt_tipoDoc)
-    @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal"})
+    @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal" })
     @Html.HiddenFor(q => q.IdBodega)
     @Html.HiddenFor(q => q.IdCbteVta)
-    @Html.HiddenFor(q => q.IdPuntoVta, new { @id = "IdPuntoVta"})
+    @Html.HiddenFor(q => q.IdPuntoVta, new { @id = "IdPuntoVta" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     <div class="row" id="DivSuperAdmin" hidden>
@@ -36,17 +38,17 @@
         </div>
     </div>
 
-        <div class="row">
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-12">
-                <div class="col-md-12">
-                    <div class="alert alert-warning alert-dismissible" id="DivMensajeCliente" hidden>
-                        <h4>
-                            <i class="icon fa fa-warning"></i> <label id="txtMensajeCliente">MENSAJE</label>
-                        </h4>
-                    </div>
+                <div class="alert alert-warning alert-dismissible" id="DivMensajeCliente" hidden>
+                    <h4>
+                        <i class="icon fa fa-warning"></i> <label id="txtMensajeCliente">MENSAJE</label>
+                    </h4>
                 </div>
             </div>
         </div>
+    </div>
 
     if (ViewBag.mensaje != null)
     {
@@ -61,7 +63,7 @@
                 </div>
             </div>
         </div>
-        
+
     }
 
     <div class="modal fade" id="ModalDesbloqueo" role="dialog">
@@ -150,7 +152,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control",  @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -359,6 +361,30 @@
             </div>
         </div>
     </div>
+    <br />
+    <div class="row" id="DivEfectivo">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_Total">Total</label>
+                    @Html.TextBoxFor(q => q.vt_Total, new { @id = "vt_Total", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_ValorEfectivo">Efectivo</label>
+                    @Html.TextBoxFor(q => q.vt_ValorEfectivo, new { @id = "vt_ValorEfectivo", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.vt_ValorEfectivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vt_Cambio">Cambio</label>
+                    @Html.TextBoxFor(q => q.vt_Cambio, new { @id = "vt_Cambio", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -389,8 +415,10 @@
         $("#valor_abono").change(function () {
             CargarCuotas();
         });
+        $("#vt_ValorEfectivo").keyup(function () {
+            CalcularCambio();
+        });
     });
-
         function BuscarProducto(Secuencia) {
         $("#Secuencia").text(Secuencia);
         var datos = {
