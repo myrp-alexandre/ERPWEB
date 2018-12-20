@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Erp.Info.RRHH;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,212 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_NominasPagosCheques_Data
     {
+        public List<ro_NominasPagosCheques_Info> get_list(int IdEmpresa, DateTime Fechainicio, DateTime FechaFin, bool mostrar_anulados)
+        {
+            try
+            {
+                List<ro_NominasPagosCheques_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                        Lista = (from q in Context.ro_NominasPagosCheques
+                                 where q.IdEmpresa == IdEmpresa
+                                 select new ro_NominasPagosCheques_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdTransaccion = q.IdTransaccion,
+                                     IdNomina_Tipo = q.IdNomina_Tipo,
+                                     IdNomina_TipoLiqui = q.IdNomina_TipoLiqui,
+                                     IdPeriodo = q.IdPeriodo,
+                                     Observacion=q.Observacion,
+                                     Estado=q.Estado
+
+
+                                 }).ToList();
+                    
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ro_NominasPagosCheques_Info get_info(int IdEmpresa, decimal IdTransaccion)
+        {
+            try
+            {
+
+                ro_NominasPagosCheques_Info info = new ro_NominasPagosCheques_Info();
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_NominasPagosCheques Entity = Context.ro_NominasPagosCheques.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdTransaccion == IdTransaccion);
+                    if (Entity == null) return null;
+
+                    info = new ro_NominasPagosCheques_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdTransaccion = Entity.IdTransaccion,
+                        IdNomina_Tipo = Entity.IdNomina_Tipo,
+                        IdNomina_TipoLiqui = Entity.IdNomina_TipoLiqui,
+                        IdPeriodo = Entity.IdPeriodo,
+                        Observacion = Entity.Observacion,
+                        Estado = Entity.Estado
+
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public decimal get_id(int IdEmpresa)
+        {
+            try
+            {
+                decimal ID = 1;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    var lst = from q in Context.ro_NominasPagosCheques
+                              where q.IdEmpresa == IdEmpresa
+                              select q;
+
+                    if (lst.Count() > 0)
+                        ID = lst.Max(q => q.IdTransaccion) + 1;
+                }
+
+                return ID;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool guardarDB(ro_NominasPagosCheques_Info info)
+        {
+            try
+            {
+                int secuencia = 1;
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_NominasPagosCheques Entity = new ro_NominasPagosCheques
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdTransaccion = info.IdTransaccion =Convert.ToInt32( get_id(info.IdEmpresa)),
+                        IdNomina_Tipo = info.IdNomina_Tipo,
+                        IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
+                        IdPeriodo = info.IdPeriodo,
+                        Observacion = info.Observacion,
+                        Estado = info.Estado = true,
+                        IdUsuario = info.IdUsuario,
+                        FechaTransac = info.FechaTransac = DateTime.Now
+                    };
+                    Context.ro_NominasPagosCheques.Add(Entity);
+                    //foreach (var item in info.detalle)
+                    //{
+                    //    ro_NominasPagosCheques_det Entity_ = new ro_NominasPagosCheques_det
+                    //    {
+                    //        IdEmpresa = item.IdEmpresa,
+                    //        IdTransaccion = item.IdTransaccion = info.IdTransaccion,
+                    //        IdSucursal = item.IdSucursal,
+                    //        IdEmpleado = item.IdEmpleado,
+                    //        Valor = item.Valor,
+                    //        pagacheque = item.pagacheque,
+                    //        Secuencia = secuencia
+                    //    };
+                    //    Context.ro_NominasPagosCheques_det.Add(Entity_);
+                    //    secuencia++;
+                    //}
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool modificarDB(ro_NominasPagosCheques_Info info)
+        {
+            try
+            {
+                int secuencia = 1;
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_NominasPagosCheques Entity = Context.ro_NominasPagosCheques.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTransaccion == info.IdTransaccion);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.IdNomina_Tipo = info.IdNomina_Tipo;
+                    Entity.IdNomina_TipoLiqui = info.IdNomina_TipoLiqui;
+                    Entity.IdPeriodo = info.IdPeriodo;
+                    Entity.Observacion = info.Observacion;
+                    var detalle = Context.ro_NominasPagosCheques_det.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdTransaccion == info.IdTransaccion);
+                    Context.ro_NominasPagosCheques_det.RemoveRange(detalle);
+                    foreach (var item in info.detalle)
+                    {
+                        ro_NominasPagosCheques_det Entity_ = new ro_NominasPagosCheques_det
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdTransaccion = item.IdTransaccion,
+                            IdSucursal = item.IdSucursal,
+                            Secuencia = secuencia,
+                            IdEmpleado = item.IdEmpleado,
+                            Valor = item.Valor,
+                        };
+                        Context.ro_NominasPagosCheques_det.Add(Entity_);
+                        secuencia++;
+                    }
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool anularDB(ro_NominasPagosCheques_Info info)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_NominasPagosCheques Entity = Context.ro_NominasPagosCheques.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTransaccion == info.IdTransaccion);
+                    if (Entity == null)
+                        return false;
+                    Entity.Estado = info.Estado = false;
+                    Entity.IdUsuarioAnu = info.IdUsuarioAnu;
+                    Entity.FechaAnu = info.FechaAnu = DateTime.Now;
+                    var detalle = Context.ro_NominasPagosCheques_det.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdTransaccion == info.IdTransaccion);
+                    Context.ro_NominasPagosCheques_det.RemoveRange(detalle);
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
