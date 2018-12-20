@@ -11,6 +11,8 @@ namespace Core.Erp.Data.Inventario
 {
     public class in_Producto_Data
     {
+        #region Combo bajo demanda
+
         public List<in_Producto_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
@@ -237,6 +239,8 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+        #endregion
+        #region Funciones
 
         public List<in_Producto_Info> get_list_stock_lotes(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto_padre)
         {
@@ -698,7 +702,7 @@ namespace Core.Erp.Data.Inventario
             });
             return Lista;
         }
-
+        #endregion
         #region metodo baja demanda
 
         public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, cl_enumeradores.eTipoBusquedaProducto Busqueda, cl_enumeradores.eModulo Modulo, decimal IdProductoPadre)
@@ -1083,6 +1087,7 @@ namespace Core.Erp.Data.Inventario
         }
 
         #endregion
+        #region Validaciones
 
         public bool validar_anulacion(int IdEmpresa, decimal IdProducto, ref string mensaje)
         {
@@ -1157,6 +1162,191 @@ namespace Core.Erp.Data.Inventario
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+        #endregion
+    
+        public bool GuardarDbImportacion(List<in_categorias_Info> Lista_Categoria, List<in_linea_Info> Lista_Linea, List<in_grupo_Info> Lista_Grupo, List<in_subgrupo_Info> Lista_Subgrupo, List<in_presentacion_Info> Lista_Presentacion, List<in_Marca_Info> Lista_Marca, List<in_Producto_Info> Lista_Producto)
+        {
+            try
+            {
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    if(Lista_Categoria.Count>0)
+                    {
+                        foreach (var item in Lista_Categoria)
+                        {
+                            in_categorias Entity_Cat = new in_categorias
+                            {
+                                ca_Categoria= item.ca_Categoria,
+                                cod_categoria = item.cod_categoria,
+                                Estado = item.Estado="A",
+                                IdCategoria = item.IdCategoria,
+                                IdCtaCble_venta = item.IdCtaCble_venta,
+                                IdCtaCtble_Costo = item.IdCtaCtble_Costo,
+                                IdCtaCtble_Inve = item.IdCtaCtble_Inve,
+                                IdEmpresa = item.IdEmpresa,
+                                IdUsuario = item.IdUsuario
+                            };
+                            Context.in_categorias.Add(Entity_Cat);
+                        }
+                    }
+
+                    if (Lista_Linea.Count > 0)
+                    {
+                        foreach (var item in Lista_Linea)
+                        {
+                            in_linea Entity_Lin = new in_linea
+                            {
+                                IdLinea = item.IdLinea,
+                                cod_linea = item.cod_linea,
+                                Estado = item.Estado = "A",
+                                IdCategoria = item.IdCategoria,
+                                IdEmpresa = item.IdEmpresa,
+                                IdUsuario = item.IdUsuario,
+                                observacion = item.observacion
+                            };
+                            Context.in_linea.Add(Entity_Lin);
+                        }
+                    }
+
+                    if (Lista_Grupo.Count > 0)
+                    {
+                        foreach (var item in Lista_Grupo)
+                        {
+                            in_grupo Entity_Gru = new in_grupo
+                            {
+                                IdLinea = item.IdLinea,
+                                IdGrupo = item.IdGrupo,
+                                cod_grupo = item.cod_grupo,
+                                nom_grupo = item.nom_grupo,
+                                Estado = item.Estado = "A",
+                                IdCategoria = item.IdCategoria,
+                                IdEmpresa = item.IdEmpresa,
+                                IdUsuario = item.IdUsuario,
+                                observacion = item.observacion
+                            };
+                            Context.in_grupo.Add(Entity_Gru);
+                        }
+                    }
+
+
+                    if (Lista_Subgrupo.Count > 0)
+                    {
+                        foreach (var item in Lista_Subgrupo)
+                        {
+                            in_subgrupo Entity_Sub = new in_subgrupo
+                            {
+                                IdLinea = item.IdLinea,
+                                IdGrupo = item.IdGrupo,
+                                cod_subgrupo =item.cod_subgrupo,
+                                nom_subgrupo = item.nom_subgrupo,
+                                IdSubgrupo = item.IdSubgrupo,
+                                Estado = item.Estado = "A",
+                                IdCategoria = item.IdCategoria,
+                                IdEmpresa = item.IdEmpresa,
+                                IdUsuario = item.IdUsuario,
+                                observacion = item.observacion
+                            };
+                            Context.in_subgrupo.Add(Entity_Sub);
+                        }
+                    }
+                    if (Lista_Presentacion.Count > 0)
+                    {
+                        foreach (var item in Lista_Presentacion)
+                        {
+                            in_presentacion Entity_Pre = new in_presentacion
+                            {
+                                IdPresentacion = item.IdPresentacion,
+                                nom_presentacion = item.nom_presentacion,
+                                estado = item.estado = "A",
+                            };
+                            Context.in_presentacion.Add(Entity_Pre);
+                        }
+                    }
+
+                    if (Lista_Marca.Count > 0)
+                    {
+                        foreach (var item in Lista_Marca)
+                        {
+                            in_Marca Entity_Mar = new in_Marca
+                            {
+                                IdMarca = item.IdMarca,
+                                Descripcion = item.Descripcion,
+                                Estado = item.Estado = "A",
+                                IdEmpresa = item.IdEmpresa,
+                                IdUsuario = item.IdUsuario,
+                            };
+                            Context.in_Marca.Add(Entity_Mar);
+                        }
+                    }
+
+                    if (Lista_Producto.Count > 0)
+                    {
+                        foreach (var item in Lista_Producto)
+                        {
+                            in_Producto Entity_Pro = new in_Producto
+                            {
+                                IdPresentacion = item.IdPresentacion,
+                                IdProducto = item.IdProducto,
+                                Estado = item.Estado = "A",
+                                IdCategoria = item.IdCategoria,
+                                IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
+                                IdEmpresa = item.IdEmpresa,
+                                IdGrupo = item.IdGrupo,
+                                IdLinea = item.IdLinea,
+                                IdMarca = item.IdMarca,
+                                IdProductoTipo = item.IdProductoTipo,
+                                IdProducto_padre = item.IdProducto_padre,
+                                IdSubGrupo = item.IdSubGrupo,
+                                IdUnidadMedida = item.IdUnidadMedida,
+                                IdUnidadMedida_Consumo = item.IdUnidadMedida_Consumo,
+                                IdUsuario = item.IdUsuario,
+                                Aparece_modu_Activo_F = item.Aparece_modu_Activo_F,
+                                Aparece_modu_Compras = item.Aparece_modu_Compras,
+                                Aparece_modu_Inventario = item.Aparece_modu_Inventario,
+                                Aparece_modu_Ventas = item.Aparece_modu_Ventas,
+                                lote_fecha_fab = item.lote_fecha_fab,
+                                lote_fecha_vcto = item.lote_fecha_vcto,
+                                lote_num_lote = item.lote_num_lote,
+                                porcentaje_2 = item.porcentaje_2,
+                                porcentaje_3 = item.porcentaje_3,
+                                porcentaje_4 = item.porcentaje_4,
+                                porcentaje_5 = item.porcentaje_5,
+                                precio_1 = item.precio_1,
+                                precio_2 = item.precio_2,
+                                precio_3 = item.precio_3,
+                                precio_4 = item.precio_4,
+                                precio_5 = item.precio_5,
+                                pr_codigo = item.pr_codigo,
+                                pr_codigo2 = item.pr_codigo2,
+                                pr_codigo_barra = item.pr_codigo_barra,
+                                pr_descripcion = item.pr_descripcion,
+                                pr_descripcion_2 = item.pr_descripcion_2,
+                                pr_imagen = item.pr_imagen,
+                                pr_observacion = item.pr_observacion,
+                                se_distribuye = item.se_distribuye,
+                                signo_2 = item.signo_2,
+                                signo_3 = item.signo_3,
+                                signo_4 = item.signo_4,
+                                signo_5 = item.signo_5
+                                
+
+                            };
+                            Context.in_Producto.Add(Entity_Pro);
+                        }
+                    }
+
+                    Context.SaveChanges();
+
+
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
