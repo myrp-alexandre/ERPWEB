@@ -132,10 +132,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 };
                 model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
                 var lst_producto_x_bodega = bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa));
+                var lst_producto_x_nivel = bus_producto_x_NivelDescuento.get_list(Convert.ToInt32(SessionFixed.IdEmpresa));
+                
                 model.pr_imagen = new byte[0];
                 list_producto_composicion.set_list(model.lst_producto_composicion, model.IdTransaccionSession);
                 Lis_in_producto_x_tb_bodega_Info_List.set_list(lst_producto_x_bodega, model.IdTransaccionSession);
-                list_producto_x_fa_NivelDescuento.set_list(model.list_producto_x_fa_NivelDescuento, model.IdTransaccionSession);
+                list_producto_x_fa_NivelDescuento.set_list(lst_producto_x_nivel, model.IdTransaccionSession);
 
                 cargar_combos(model);
                 return View(model);
@@ -549,7 +551,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
                 var lista = list_producto_x_fa_NivelDescuento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-                if (lista.Where(v => v.IdNivel == info_det.IdNivel && v.IdEmpresa == info_det.IdEmpresa).Count() == 0)
+                if (lista.Where(v => v.IdNivel == info_det.IdNivel).Count() == 0)
                     list_producto_x_fa_NivelDescuento.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             }

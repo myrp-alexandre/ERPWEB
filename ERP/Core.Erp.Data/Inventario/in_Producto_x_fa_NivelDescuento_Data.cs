@@ -9,6 +9,34 @@ namespace Core.Erp.Data.Inventario
 {
     public class in_Producto_x_fa_NivelDescuento_Data
     {
+        public List<in_Producto_x_fa_NivelDescuento_Info> get_list_nuevo(int IdEmpresa)
+        {            
+            List<in_Producto_x_fa_NivelDescuento_Info> lista = null;
+            try
+            {
+                int secuencia = 1;
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {                    
+                    lista = (from q in Context.fa_NivelDescuento
+                             where q.IdEmpresa == IdEmpresa && q.Estado == true
+                             select new in_Producto_x_fa_NivelDescuento_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 Descripcion = q.Descripcion,
+                                 IdNivel = q.IdNivel,
+                                 Porcentaje = q.Porcentaje,
+                             }).ToList();
+
+                }
+                lista.ForEach(v => v.Secuencia = secuencia++);
+                return lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<in_Producto_x_fa_NivelDescuento_Info> get_list(int IdEmpresa, decimal IdProducto)
         {
             try

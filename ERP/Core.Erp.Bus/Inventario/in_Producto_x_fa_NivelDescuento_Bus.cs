@@ -11,6 +11,18 @@ namespace Core.Erp.Bus.Inventario
     public class in_Producto_x_fa_NivelDescuento_Bus
     {
         in_Producto_x_fa_NivelDescuento_Data odata = new in_Producto_x_fa_NivelDescuento_Data();
+        public List<in_Producto_x_fa_NivelDescuento_Info> get_list(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_nuevo(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public List<in_Producto_x_fa_NivelDescuento_Info> get_list(int IdEmpresa, decimal IdProducto)
         {
