@@ -11,7 +11,7 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdEmpleado,IdNovedad);
+                return odata.get_list(IdEmpresa,IdNovedad);
             }
             catch (Exception)
             {
