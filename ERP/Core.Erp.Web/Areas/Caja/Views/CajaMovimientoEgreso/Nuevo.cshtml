@@ -191,6 +191,7 @@
     }
     function GrupoComboBox_BeginCallback(s, e) {
         e.customArgs["IdCtaCble"] = GridView_comprobante_detalle.GetEditor("IdCtaCble").GetValue();
-        e.customArgs["cb_Fecha"] = cm_fecha.GetValue();
+        e.customArgs["cb_Fecha"] = new Date(moment(cm_fecha.GetValue(), "DD/MM/YYYY"));
+        console.log(e.customArgs["cb_Fecha"]);
     }
 </script>

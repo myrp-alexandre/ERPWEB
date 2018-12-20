@@ -85,10 +85,13 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         }
 
-        public ActionResult CargarGrupo(DateTime cb_Fecha, string IdCtaCble = "")
+        public ActionResult CargarGrupo()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
+            DateTime cb_Fecha = DateTime.Now;
+                string fecha = Request.Params["cb_Fecha"] != null && !string.IsNullOrEmpty(Request.Params["cb_Fecha"].ToString()) ? Request.Params["cb_Fecha"].ToString() : "";
+            string IdCtaCble = Request.Params["IdCtaCble"] != null ? Request.Params["IdCtaCble"].ToString() : "";
             return GridViewExtension.GetComboBoxCallbackResult(p =>
             {
                 p.TextField = "Descripcion";

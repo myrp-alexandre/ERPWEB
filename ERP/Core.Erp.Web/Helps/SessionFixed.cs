@@ -18,6 +18,7 @@ namespace Core.Erp.Web.Helps
         string IdNivelDescuento { get; set; }
         string NombreImagen { get; set; }
         string EsSuperAdmin { get; set; }
+        string FechaPresupuesto { get; set; }
 
     }
 
@@ -97,6 +98,11 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.EsSuperAdmin; }
             set { _sessionValueProvider.EsSuperAdmin = value; }
         }
+        public static string FechaPresupuesto
+        {
+            get { return _sessionValueProvider.FechaPresupuesto; }
+            set { _sessionValueProvider.FechaPresupuesto = value; }
+        }
     }
 
     public class WebSessionValueProvider : ISessionValueProvider
@@ -114,6 +120,7 @@ namespace Core.Erp.Web.Helps
         private const string _IdNivelDescuento = "IdNivelDescuento";
         private const string _NombreImagen = "NombreImagen";
         private const string _EsSuperAdmin = "EsSuperAdmin";
+        private const string _FechaPresupuesto = "FechaPresupuesto";
 
         public string TipoPersona
         {
@@ -180,6 +187,11 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_EsSuperAdmin]; }
             set { HttpContext.Current.Session[_EsSuperAdmin] = value; }
+        }
+        public string FechaPresupuesto
+        {
+            get { return (string)HttpContext.Current.Session[_FechaPresupuesto]; }
+            set { HttpContext.Current.Session[_FechaPresupuesto] = value; }
         }
     }
 }
