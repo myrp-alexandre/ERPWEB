@@ -136,12 +136,14 @@ namespace Core.Erp.Data.Caja
                 cp_parametros Entity_p = Context_cxp.cp_parametros.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                 caj_parametro Entity_pc = Context.caj_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                 cp_orden_pago_tipo_x_empresa Entity_op_tipo = Context_cxp.cp_orden_pago_tipo_x_empresa.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipo_op == cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString()).FirstOrDefault();
-                if (Entity_p == null || Entity_pc == null || Entity_op_tipo == null)
+                caj_Caja Caja = Context.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == info.IdCaja).FirstOrDefault();
+                if (Entity_p == null || Entity_pc == null || Entity_op_tipo == null || Caja == null)
                     return false;
                 int IdTipoCbte_NC = Convert.ToInt32(Entity_p.pa_TipoCbte_NC);
                 int IdTipoCbte_EG = Entity_pc.IdTipoCbteCble_MoviCaja_Egr;
                 int IdTipoCbte_op = Convert.ToInt32(Entity_op_tipo.IdTipoCbte_OP);
                 int IdTipoCbte_IN = Entity_pc.IdTipoCbteCble_MoviCaja_Ing;
+                int IdSucursal = Convert.ToInt32(Caja.IdSucursal);
                 #endregion
 
                 #region Cabecera
@@ -180,6 +182,7 @@ namespace Core.Erp.Data.Caja
                     cp_orden_pago op = new cp_orden_pago
                     {
                         IdEmpresa = Entity_c.IdEmpresa,
+                        IdSucursal = IdSucursal,
                         IdOrdenPago = IdOrdenPago++,
                         Observacion = "Caja #" + Entity_c.IdConciliacion_Caja,
                         IdTipo_op = cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString(),
@@ -336,6 +339,7 @@ namespace Core.Erp.Data.Caja
                             cp_orden_pago op = new cp_orden_pago
                             {
                                 IdEmpresa  = Entity_c.IdEmpresa,
+                                IdSucursal = IdSucursal,
                                 IdOrdenPago = IdOrdenPago++,
                                 Observacion = "Caja #" + Entity_c.IdConciliacion_Caja,
                                 IdTipo_op = cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString(),
@@ -682,6 +686,7 @@ namespace Core.Erp.Data.Caja
                             cp_orden_pago op = new cp_orden_pago
                             {
                                 IdEmpresa = info.IdEmpresa,
+                                IdSucursal = IdSucursal,
                                 IdOrdenPago = IdOrdenPago++,
                                 Observacion = "Caja #" + info.IdConciliacion_Caja,
                                 IdTipo_op = cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString(),
@@ -1032,8 +1037,8 @@ namespace Core.Erp.Data.Caja
                     cp_orden_pago op = new cp_orden_pago
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdOrdenPago = IdOrdenPago++,
                         IdSucursal = IdSucursal,
+                        IdOrdenPago = IdOrdenPago++,
                         Observacion = "Caja #" + info.IdConciliacion_Caja,
                         IdTipo_op = cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString(),
                         IdTipo_Persona = info.IdTipoPersona,

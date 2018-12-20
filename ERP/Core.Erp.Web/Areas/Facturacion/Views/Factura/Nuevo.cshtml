@@ -12,7 +12,6 @@
 <script>
     $(function () {
         CargarPuntosDeVenta();
-        MostrarOcultarEfectivo();
         get_info_termino_pago();
         GetUltimoDocumento();
         ValidarGrid();
@@ -23,9 +22,6 @@
         });
         $("#vt_plazo").change(function () {
             cargar_fecha_vencimiento();
-        });
-        $("#EnumeradorCobro").change(function () {
-            MostrarOcultarEfectivo();
         });
         $("#IdSucursal").change(function () {
             CargarPuntosDeVenta();
@@ -41,13 +37,6 @@
             CalcularCambio();
         });
     });
-
-    function MostrarOcultarEfectivo() {
-        if ($("#EnumeradorCobro").val() == "EFEC") {
-            $("#DivEfectivo").show();
-        } else
-            $("#DivEfectivo").hide();
-    }
     function ValidarCliente() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -956,7 +945,7 @@
         </div>
     </div>
     <br />
-    <div class="row" id="DivEfectivo" hidden>
+    <div class="row" id="DivEfectivo" >
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">

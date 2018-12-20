@@ -4,6 +4,7 @@ using Core.Erp.Info.Facturacion;
 using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
@@ -104,5 +105,25 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+    }
+
+    public class fa_cliente_tipo_List
+    {
+        string Variable = "fa_cliente_tipo_Info";
+        public List<fa_cliente_tipo_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<fa_cliente_tipo_Info> list = new List<fa_cliente_tipo_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<fa_cliente_tipo_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<fa_cliente_tipo_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
     }
 }

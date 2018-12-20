@@ -49,7 +49,7 @@ namespace Core.Erp.Data.RRHH
                 {
                     Lista = (from q in Context.vwro_empleado_combo
                              where q.IdEmpresa == IdEmpresa
-                             && estado.Contains(q.em_status)
+                             && (q.em_status== "EST_LIQ" || q.em_status== "EST_PLQ")
                              select new ro_empleado_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

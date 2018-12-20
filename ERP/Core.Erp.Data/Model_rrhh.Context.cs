@@ -125,6 +125,8 @@ namespace Core.Erp.Data
         public DbSet<vwro_empleado_novedad_det> vwro_empleado_novedad_det { get; set; }
         public DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
         public DbSet<ro_Parametros> ro_Parametros { get; set; }
+        public DbSet<ro_NominasPagosCheques> ro_NominasPagosCheques { get; set; }
+        public DbSet<ro_NominasPagosCheques_det> ro_NominasPagosCheques_det { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

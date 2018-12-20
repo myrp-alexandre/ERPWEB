@@ -87,9 +87,9 @@
             this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell50 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
-            this.estado_noveda = new DevExpress.XtraReports.Parameters.Parameter();
-            this.IdRubro = new DevExpress.XtraReports.Parameters.Parameter();
-            this.IdEmpleado = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_estado_novedad = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdRubro = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdEmpleado = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -669,22 +669,22 @@
             this.xrPageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo2.TextFormatString = "Página {0} de {1}";
             // 
-            // estado_noveda
+            // p_estado_novedad
             // 
-            this.estado_noveda.Name = "estado_noveda";
-            this.estado_noveda.Visible = false;
+            this.p_estado_novedad.Name = "p_estado_novedad";
+            this.p_estado_novedad.Visible = false;
             // 
-            // IdRubro
+            // p_IdRubro
             // 
-            this.IdRubro.Name = "IdRubro";
-            this.IdRubro.Visible = false;
+            this.p_IdRubro.Name = "p_IdRubro";
+            this.p_IdRubro.Visible = false;
             // 
-            // IdEmpleado
+            // p_IdEmpleado
             // 
-            this.IdEmpleado.Name = "IdEmpleado";
-            this.IdEmpleado.Type = typeof(decimal);
-            this.IdEmpleado.ValueInfo = "0";
-            this.IdEmpleado.Visible = false;
+            this.p_IdEmpleado.Name = "p_IdEmpleado";
+            this.p_IdEmpleado.Type = typeof(decimal);
+            this.p_IdEmpleado.ValueInfo = "0";
+            this.p_IdEmpleado.Visible = false;
             // 
             // ROL_009_Rpt
             // 
@@ -709,9 +709,9 @@
             this.p_IdEmpresa,
             this.p_fecha_inicio,
             this.p_fecha_fin,
-            this.estado_noveda,
-            this.IdRubro,
-            this.IdEmpleado});
+            this.p_estado_novedad,
+            this.p_IdRubro,
+            this.p_IdEmpleado});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_009_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
@@ -784,8 +784,8 @@
         private DevExpress.XtraReports.UI.XRTableCell lbl_fecha;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell50;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
-        public DevExpress.XtraReports.Parameters.Parameter estado_noveda;
-        public DevExpress.XtraReports.Parameters.Parameter IdRubro;
-        public DevExpress.XtraReports.Parameters.Parameter IdEmpleado;
+        public DevExpress.XtraReports.Parameters.Parameter p_estado_novedad;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdRubro;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdEmpleado;
     }
 }

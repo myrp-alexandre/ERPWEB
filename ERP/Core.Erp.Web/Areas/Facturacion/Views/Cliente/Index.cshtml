@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Core.Erp.Web.Helps
+@{
     ViewBag.Title = "Cliente";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -8,6 +9,11 @@
 }
 @using (Html.BeginForm())
 {
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-primary" href="@Url.Action("Importar","Cliente",new { Area = "Facturacion", IdEmpresa = SessionFixed.IdEmpresa },null)">Importar desde excel</a>
+        </div>
+    </div>
 
     @Html.Action("GridViewPartial_cliente")
 

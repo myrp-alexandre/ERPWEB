@@ -53,7 +53,7 @@ namespace Core.Erp.Info.Helps
         public bool mostrar_nov_pen { get; set; }
         public bool mostrar_todas_nov { get; set; }
         public int IdSucursal { get; set; }
-        public decimal IdEmpleado { get; set; }
+        public decimal? IdEmpleado { get; set; }
         public string[]  estado_novedad { get; set; }
         public string IdRubro { get; set; }
 

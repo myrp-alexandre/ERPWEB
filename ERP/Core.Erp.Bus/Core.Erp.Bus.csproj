@@ -228,6 +228,7 @@
     <Compile Include="Inventario\in_ProductoTipo_Bus.cs" />
     <Compile Include="Inventario\in_Producto_Bus.cs" />
     <Compile Include="Inventario\in_Producto_Composicion_Bus.cs" />
+    <Compile Include="Inventario\in_Producto_x_fa_NivelDescuento_Bus.cs" />
     <Compile Include="Inventario\in_producto_x_tb_bodega_Bus.cs" />
     <Compile Include="Inventario\in_producto_x_tb_bodega_Costo_Historico_Bus.cs" />
     <Compile Include="Inventario\in_subgrupo_Bus.cs" />
@@ -388,6 +389,8 @@
     <Compile Include="RRHH\ro_HorasProfesores_det_Bus.cs" />
     <Compile Include="RRHH\ro_marcaciones_tipo_Bus.cs" />
     <Compile Include="RRHH\ro_marcaciones_x_empleado_Bus.cs" />
+    <Compile Include="RRHH\ro_NominasPagosCheques_Bus.cs" />
+    <Compile Include="RRHH\ro_NominasPagosCheques_det_Bus.cs" />
     <Compile Include="RRHH\ro_Nomina_Tipoliqui_Bus.cs" />
     <Compile Include="RRHH\ro_nomina_tipo_Bus.cs" />
     <Compile Include="RRHH\ro_nomina_x_horas_extras_Bus.cs" />

@@ -9,7 +9,6 @@
 
 namespace Core.Erp.Data
 {
-
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -72,6 +71,7 @@ namespace Core.Erp.Data
         public DbSet<in_ProductoTipo> in_ProductoTipo { get; set; }
         public DbSet<vwin_Producto_para_composicion> vwin_Producto_para_composicion { get; set; }
         public DbSet<in_parametro> in_parametro { get; set; }
+        public DbSet<in_Producto_x_fa_NivelDescuento> in_Producto_x_fa_NivelDescuento { get; set; }
     
         public virtual ObjectResult<spSys_inv_Reversar_aprobacion_Result> spSys_inv_Reversar_aprobacion(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi, Nullable<bool> borar)
         {

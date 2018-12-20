@@ -11,8 +11,6 @@ namespace Core.Erp.Info.Facturacion
     {
         public int IdEmpresa { get; set; }
         public int Idtipo_cliente { get; set; }
-
-        [Required(ErrorMessage = "El campo código es obligatorio")]
         [StringLength(10, MinimumLength = 0, ErrorMessage = "el campo código debe tener máximo 10")]
         public string Cod_cliente_tipo { get; set; }
         [Required(ErrorMessage = "El campo descripción es obligatorio")]

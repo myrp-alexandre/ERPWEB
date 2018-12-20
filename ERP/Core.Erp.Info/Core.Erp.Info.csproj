@@ -257,6 +257,7 @@
     <Compile Include="Inventario\in_ProductoTipo_Info.cs" />
     <Compile Include="Inventario\in_Producto_Composicion_Info.cs" />
     <Compile Include="Inventario\in_Producto_Info.cs" />
+    <Compile Include="Inventario\in_Producto_x_fa_NivelDescuento_Info.cs" />
     <Compile Include="Inventario\in_producto_x_tb_bodega_Costo_Historico_Info.cs" />
     <Compile Include="Inventario\in_producto_x_tb_bodega_Info.cs" />
     <Compile Include="Inventario\in_subgrupo_Info.cs" />
@@ -420,6 +421,8 @@
     <Compile Include="RRHH\ro_HorasProfesores_Info.cs" />
     <Compile Include="RRHH\ro_marcaciones_tipo_Info.cs" />
     <Compile Include="RRHH\ro_marcaciones_x_empleado_Info.cs" />
+    <Compile Include="RRHH\ro_NominasPagosCheques_det_Info.cs" />
+    <Compile Include="RRHH\ro_NominasPagosCheques_Info.cs" />
     <Compile Include="RRHH\ro_Nomina_Tipoliqui_Info.cs" />
     <Compile Include="RRHH\ro_nomina_tipo_Info.cs" />
     <Compile Include="RRHH\ro_nomina_x_horas_extras_det_Info.cs" />

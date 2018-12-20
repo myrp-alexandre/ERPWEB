@@ -457,6 +457,18 @@
           <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Cantidad" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="in_Producto_x_fa_NivelDescuento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdNivel" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdNivel" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="Porcentaje" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="in_producto_x_tb_bodega">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1749,6 +1761,20 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_in_Producto_x_fa_NivelDescuento_in_Producto">
+          <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="1" />
+          <End Role="in_Producto_x_fa_NivelDescuento" Type="Self.in_Producto_x_fa_NivelDescuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="in_Producto_x_fa_NivelDescuento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega">
           <End Role="in_producto_x_tb_bodega" Type="Self.in_producto_x_tb_bodega" Multiplicity="1" />
           <End Role="in_producto_x_tb_bodega_Costo_Historico" Type="Self.in_producto_x_tb_bodega_Costo_Historico" Multiplicity="*" />
@@ -1954,6 +1980,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
           <EntitySet Name="in_presentacion" EntityType="Self.in_presentacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_Producto" EntityType="Self.in_Producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_Producto_Composicion" EntityType="Self.in_Producto_Composicion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="in_Producto_x_fa_NivelDescuento" EntityType="Self.in_Producto_x_fa_NivelDescuento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_producto_x_tb_bodega" EntityType="Self.in_producto_x_tb_bodega" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_producto_x_tb_bodega_Costo_Historico" EntityType="Self.in_producto_x_tb_bodega_Costo_Historico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_ProductoTipo" EntityType="Self.in_ProductoTipo" Schema="dbo" store:Type="Tables" />
@@ -2436,6 +2463,10 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
           <AssociationSet Name="FK_in_Producto_in_UnidadMedida1" Association="Self.FK_in_Producto_in_UnidadMedida1">
             <End Role="in_UnidadMedida" EntitySet="in_UnidadMedida" />
             <End Role="in_Producto" EntitySet="in_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_Producto_x_fa_NivelDescuento_in_Producto" Association="Self.FK_in_Producto_x_fa_NivelDescuento_in_Producto">
+            <End Role="in_Producto" EntitySet="in_Producto" />
+            <End Role="in_Producto_x_fa_NivelDescuento" EntitySet="in_Producto_x_fa_NivelDescuento" />
           </AssociationSet>
           <AssociationSet Name="FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega" Association="Self.FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega">
             <End Role="in_producto_x_tb_bodega" EntitySet="in_producto_x_tb_bodega" />
@@ -2926,6 +2957,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
           <NavigationProperty Name="in_producto_x_tb_bodega" Relationship="Model_inventario.FK_in_producto_x_tb_bodega_in_Producto" FromRole="in_Producto" ToRole="in_producto_x_tb_bodega" />
           <NavigationProperty Name="in_ConsignacionDet" Relationship="Model_inventario.FK_in_consignacion_det_in_Producto" FromRole="in_Producto" ToRole="in_ConsignacionDet" />
           <NavigationProperty Name="in_ProductoTipo" Relationship="Model_inventario.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
+          <NavigationProperty Name="in_Producto_x_fa_NivelDescuento" Relationship="Model_inventario.FK_in_Producto_x_fa_NivelDescuento_in_Producto" FromRole="in_Producto" ToRole="in_Producto_x_fa_NivelDescuento" />
         </EntityType>
         <EntityType Name="in_Producto_Composicion">
           <Key>
@@ -4230,6 +4262,11 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
             <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
             <End Role="in_parametro" EntitySet="in_parametro" />
           </AssociationSet>
+          <EntitySet Name="in_Producto_x_fa_NivelDescuento" EntityType="Model_inventario.in_Producto_x_fa_NivelDescuento" />
+          <AssociationSet Name="FK_in_Producto_x_fa_NivelDescuento_in_Producto" Association="Model_inventario.FK_in_Producto_x_fa_NivelDescuento_in_Producto">
+            <End Role="in_Producto" EntitySet="in_Producto" />
+            <End Role="in_Producto_x_fa_NivelDescuento" EntitySet="in_Producto_x_fa_NivelDescuento" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spSys_inv_Reversar_aprobacion_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -4800,6 +4837,33 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
             <Dependent Role="in_parametro">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="P_IdProductoTipo_para_lote_0" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="in_Producto_x_fa_NivelDescuento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdNivel" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Porcentaje" Type="Double" Nullable="false" />
+          <NavigationProperty Name="in_Producto" Relationship="Model_inventario.FK_in_Producto_x_fa_NivelDescuento_in_Producto" FromRole="in_Producto_x_fa_NivelDescuento" ToRole="in_Producto" />
+        </EntityType>
+        <Association Name="FK_in_Producto_x_fa_NivelDescuento_in_Producto">
+          <End Type="Model_inventario.in_Producto" Role="in_Producto" Multiplicity="1" />
+          <End Type="Model_inventario.in_Producto_x_fa_NivelDescuento" Role="in_Producto_x_fa_NivelDescuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="in_Producto_x_fa_NivelDescuento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5762,6 +5826,17 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
                 <ScalarProperty Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" ColumnName="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" />
                 <ScalarProperty Name="IdMovi_inven_tipo_ingresoBodegaDestino" ColumnName="IdMovi_inven_tipo_ingresoBodegaDestino" />
                 <ScalarProperty Name="IdMovi_inven_tipo_egresoBodegaOrigen" ColumnName="IdMovi_inven_tipo_egresoBodegaOrigen" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_Producto_x_fa_NivelDescuento">
+            <EntityTypeMapping TypeName="Model_inventario.in_Producto_x_fa_NivelDescuento">
+              <MappingFragment StoreEntitySet="in_Producto_x_fa_NivelDescuento">
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
