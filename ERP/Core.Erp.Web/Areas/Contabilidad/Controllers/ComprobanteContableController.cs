@@ -89,8 +89,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
-            DateTime cb_Fecha = Request.Params["cb_Fecha"] != null && !string.IsNullOrEmpty(Request.Params["cb_Fecha"].ToString()) ? Convert.ToDateTime(Request.Params["cb_Fecha"]).Date : DateTime.Now.Date; 
-            string IdCtaCble = Request.Params["IdCtaCble"] != null ? Request.Params["IdCtaCble"].ToString() : "";
+            DateTime cb_Fecha = Request.Params["pre_fecha"] != null && !string.IsNullOrEmpty(Request.Params["pre_fecha"].ToString()) ? Convert.ToDateTime(Request.Params["pre_fecha"]).Date : DateTime.Now.Date; 
+            string IdCtaCble = Request.Params["pre_IdCtaCble"] != null ? Request.Params["pre_IdCtaCble"].ToString() : "";
             return GridViewExtension.GetComboBoxCallbackResult(p =>
             {
                 p.TextField = "Descripcion";

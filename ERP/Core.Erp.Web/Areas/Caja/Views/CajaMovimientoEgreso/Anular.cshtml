@@ -179,7 +179,7 @@
         GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
     }
     function GrupoComboBox_BeginCallback(s, e) {
-        e.customArgs["IdCtaCble"] = GridView_comprobante_detalle.GetEditor("IdCtaCble").GetValue();
-        e.customArgs["cb_Fecha"] = cm_fecha.GetValue();
+        e.customArgs["pre_IdCtaCble"] = GridView_comprobante_detalle.GetEditor("IdCtaCble").GetValue();
+        e.customArgs["pre_fecha"] = moment(cm_fecha.GetDate()).format('DD/MM/YYYY');
     }
 </script>
