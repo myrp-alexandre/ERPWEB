@@ -18,7 +18,6 @@
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_pago_formapago" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_pago_tipo" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_pago_tipo_x_empresa" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_pago_x_nomina" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_pagos_sri" Width="1.5" PointX="10.5" PointY="29" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_pais_sri" Width="1.5" PointX="8.25" PointY="31" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_proveedor" Width="1.5" PointX="5.25" PointY="50.625" IsExpanded="true" />
@@ -72,7 +71,6 @@
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_formapago" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_tipo" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago" />
-        <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_pago_x_nomina_cp_orden_pago" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

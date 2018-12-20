@@ -17,7 +17,6 @@ namespace Core.Erp.Data
         public cp_orden_pago()
         {
             this.cp_orden_pago_det = new HashSet<cp_orden_pago_det>();
-            this.cp_orden_pago_x_nomina = new HashSet<cp_orden_pago_x_nomina>();
         }
     
         public int IdEmpresa { get; set; }
@@ -47,6 +46,5 @@ namespace Core.Erp.Data
         public virtual cp_orden_pago_formapago cp_orden_pago_formapago { get; set; }
         public virtual cp_orden_pago_tipo cp_orden_pago_tipo { get; set; }
         public virtual ICollection<cp_orden_pago_det> cp_orden_pago_det { get; set; }
-        public virtual ICollection<cp_orden_pago_x_nomina> cp_orden_pago_x_nomina { get; set; }
     }
 }

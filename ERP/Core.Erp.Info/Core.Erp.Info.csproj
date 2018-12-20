@@ -149,7 +149,6 @@
     <Compile Include="CuentasPorPagar\cp_orden_pago_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_tipo_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_orden_pago_tipo_x_empresa_Info.cs" />
-    <Compile Include="CuentasPorPagar\cp_orden_pago_x_nomina_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_pagos_sri_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_pais_sri_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_parametros_Info.cs" />

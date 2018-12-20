@@ -40,7 +40,6 @@ namespace Core.Erp.Data
         public DbSet<cp_orden_pago_formapago> cp_orden_pago_formapago { get; set; }
         public DbSet<cp_orden_pago_tipo> cp_orden_pago_tipo { get; set; }
         public DbSet<cp_orden_pago_tipo_x_empresa> cp_orden_pago_tipo_x_empresa { get; set; }
-        public DbSet<cp_orden_pago_x_nomina> cp_orden_pago_x_nomina { get; set; }
         public DbSet<cp_pagos_sri> cp_pagos_sri { get; set; }
         public DbSet<cp_pais_sri> cp_pais_sri { get; set; }
         public DbSet<cp_proveedor> cp_proveedor { get; set; }
