@@ -657,8 +657,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdMovi_inven_tipo.Value = IdMovi_inven_tipo;
             model.p_IdNumMovi.Value = IdNumMovi;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
+            model.usuario = SessionFixed.IdUsuario.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
             if (IdNumMovi == 0)
                 model.RequestParameters = false;
             return View(model);
