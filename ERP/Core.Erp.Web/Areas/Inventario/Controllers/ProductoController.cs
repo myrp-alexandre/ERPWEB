@@ -808,7 +808,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = Lista_Subgrupo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_SubgupoPro_importacion", model);
+            return PartialView("_GridViewPartial_SubgrupoPro_importacion", model);
         }
         public ActionResult GridViewPartial_PresentacionPro_importacion()
         {
@@ -926,9 +926,42 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     }
                     else
                         cont++;
+
+
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        in_grupo_Info info = new in_grupo_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdLinea = Convert.ToInt32(reader.GetValue(0)),
+                            cod_grupo = Convert.ToString(reader.GetValue(1)),
+                            nom_grupo = Convert.ToString(reader.GetValue(2)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        ListaGrupo.Add(info);
+                    }
+                    else
+                        cont++;
+
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        in_subgrupo_Info info = new in_subgrupo_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdLinea = Convert.ToInt32(reader.GetValue(0)),
+                            cod_subgrupo = Convert.ToString(reader.GetValue(1)),
+                            nom_subgrupo = Convert.ToString(reader.GetValue(2)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        ListaSubgrupo.Add(info);
+                    }
+                    else
+                        cont++;
                 }
                 Lista_Categoria.set_list(ListaCategoria, IdTransaccionSession);
                 Lista_Linea.set_list(ListaLinea, IdTransaccionSession);
+                Lista_Grupo.set_list(ListaGrupo, IdTransaccionSession);
+                Lista_Subgrupo.set_list(ListaSubgrupo, IdTransaccionSession);
 
                 #endregion
 
