@@ -14,7 +14,8 @@ namespace Core.Erp.Info.Compras
         [Required(ErrorMessage = ("el campo sucursal es obligatorio"))]
         public int IdSucursal { get; set; }
         public decimal IdOrdenCompra { get; set; }
-        [Required(ErrorMessage = ("el campo Proveedor es obligatorio"))]
+        [Required(ErrorMessage = ("el campo proveedor es obligatorio"))]
+        [Range(1,int.MaxValue,ErrorMessage ="El campo proveedor es obligatorio")]
         public decimal IdProveedor { get; set; }
         public string oc_NumDocumento { get; set; }
         [Required(ErrorMessage = ("el campo termino pago es obligatorio"))]
