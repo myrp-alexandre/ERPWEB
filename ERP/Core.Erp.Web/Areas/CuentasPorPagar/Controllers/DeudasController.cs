@@ -153,14 +153,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region Aprobacion de facturas por proveedor
         public ActionResult Index3()
         {
+            Session["list_facturas_seleccionadas"] = null;
             return View();
         }
         [ValidateInput(false)]
         public ActionResult GridViewPartial_aprobacion_facturas()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+            List<cp_orden_giro_aprobacion_Info> model = new List<cp_orden_giro_aprobacion_Info>();
+            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_aprobacion_Info>;
             return PartialView("_GridViewPartial_aprobacion_facturas", model);
         }
         public ActionResult GridViewPartial_facturas_con_saldos()
@@ -691,11 +692,21 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public JsonResult guardar_aprobacion(string Ids)
         {
            
-            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+            List<cp_orden_giro_aprobacion_Info> model = new List<cp_orden_giro_aprobacion_Info>();
+            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_aprobacion_Info>;
             foreach (var item in model)
             {
-                bus_orden_giro.Generar_OP_x_orden_giro(item);
+                bus_orden_giro.Generar_OP_x_orden_giro(new cp_orden_giro_Info
+                {
+                    IdEmpresa = item.IdEmpresa,
+                    IdTipoCbte_Ogiro = item.IdTipoCbte_Ogiro,
+                    IdCbteCble_Ogiro = item.IdCbteCble_Ogiro,
+                    IdProveedor = item.IdProveedor,
+                    IdTipoFlujo = item.IdTipoFlujo,
+                    co_factura = item.co_factura,
+                    co_valorpagar = item.co_valorpagar,
+                    nom_tipo_Documento = item.nom_tipo_Documento
+                });
             }
             Session["list_facturas_seleccionadas"] = null;
             return Json("", JsonRequestBehavior.AllowGet);
@@ -707,21 +718,40 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 string[] array = Ids.Split(',');
                 var output = array.GroupBy(q => q).ToList();
                 List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-                List<cp_orden_giro_Info> list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
+                List<cp_orden_giro_aprobacion_Info> list_facturas_seleccionadas = new List<cp_orden_giro_aprobacion_Info>();
                 model = Session["list_ordenes_giro"] as List<cp_orden_giro_Info>;
-                list_facturas_seleccionadas = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+                list_facturas_seleccionadas = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_aprobacion_Info>;
                 if (list_facturas_seleccionadas == null)
-                    list_facturas_seleccionadas = new List<cp_orden_giro_Info>();
+                    list_facturas_seleccionadas = new List<cp_orden_giro_aprobacion_Info>();
                 foreach (var item in output)
                 {
                     if (item.Key != "")
                     {
-                        var lista_tmp = model.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key));
-                        if (lista_tmp.Count() == 1 & list_facturas_seleccionadas.Where(v => v.IdCbteCble_Ogiro == Convert.ToDecimal(item.Key)).Count() == 0)// agrego si existe y no esta repetida
+                        var lista_tmp = model.Where(v => v.SecuencialID == item.Key);
+                        if (lista_tmp.Count() == 1 & list_facturas_seleccionadas.Where(v => v.SecuencialID == item.Key).Count() == 0)// agrego si existe y no esta repetida
                         {
                             var info_add = lista_tmp.FirstOrDefault();
                             info_add.co_valorpagar = (double)info_add.Saldo_OG;
-                            list_facturas_seleccionadas.Add(info_add);
+
+                            list_facturas_seleccionadas.Add(new cp_orden_giro_aprobacion_Info{
+                                IdEmpresa = info_add.IdEmpresa,
+                                IdTipoCbte_Ogiro = info_add.IdTipoCbte_Ogiro,
+                                IdCbteCble_Ogiro = info_add.IdCbteCble_Ogiro,
+                                co_factura = info_add.co_factura,
+                                co_fechaOg = info_add.co_fechaOg,
+                                co_FechaFactura_vct = info_add.co_FechaFactura_vct,
+                                Tipo_Vcto = info_add.Tipo_Vcto,
+                                Saldo_OG = info_add.Saldo_OG,
+                                co_valorpagar = info_add.co_valorpagar,
+                                IdProveedor = info_add.IdProveedor,
+                                SecuencialID = info_add.SecuencialID,
+                                nom_tipo_Documento = info_add.nom_tipo_Documento,
+                                info_proveedor = new cp_proveedor_Info{
+                                    info_persona = new tb_persona_Info{
+                                        pe_nombreCompleto = info_add.info_proveedor.info_persona.pe_nombreCompleto
+                                    }
+                                }
+                            });
                         }
                     }
                 }
@@ -823,35 +853,31 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         #region editar y eliminar detalle lista de aprobacion
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdate_og([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_giro_Info info_det)
+        public ActionResult EditingUpdate_og([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_giro_aprobacion_Info info_det)
         {
-
-
-            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+            List<cp_orden_giro_aprobacion_Info> model = new List<cp_orden_giro_aprobacion_Info>();
+            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_aprobacion_Info>;
             if (model.Count() > 0)
             {
-                cp_orden_giro_Info edited_info = model.Where(m => m.IdCbteCble_Ogiro == info_det.IdCbteCble_Ogiro).First();
-
+                cp_orden_giro_aprobacion_Info edited_info = model.Where(m => m.SecuencialID == info_det.SecuencialID).FirstOrDefault();
+                info_det.co_serie = "0";
+                info_det.IdProveedor = 1;
                 edited_info.co_valorpagar = info_det.co_valorpagar;
             }
             
             return PartialView("_GridViewPartial_aprobacion_facturas", model);
         }
-        public ActionResult EditingDelete_og(decimal IdCbteCble_Ogiro)
+        public ActionResult EditingDelete_og(string SecuencialID)
         {
-            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_Info>;
+            List<cp_orden_giro_aprobacion_Info> model = new List<cp_orden_giro_aprobacion_Info>();
+            model = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_aprobacion_Info>;
             if (model.Count() > 0)
             {
-                cp_orden_giro_Info edited_info = model.Where(m => m.IdCbteCble_Ogiro == IdCbteCble_Ogiro).First();
+                cp_orden_giro_aprobacion_Info edited_info = model.Where(m => m.SecuencialID == SecuencialID).FirstOrDefault();
                 model.Remove(edited_info);
                 Session["list_facturas_seleccionadas"] = model;
             }
-
             return PartialView("_GridViewPartial_aprobacion_facturas", model);
-
-
         }
 
         #endregion

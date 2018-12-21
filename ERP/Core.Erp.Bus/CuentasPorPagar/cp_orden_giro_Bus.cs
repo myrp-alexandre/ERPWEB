@@ -576,7 +576,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 bus_op = new cp_orden_pago_Bus();
                 info_op.IdEmpresa = info.IdEmpresa;
                 info_op.IdTipo_op = info_tipo_op.IdTipo_op;
-                info_op.Observacion = "Por cancelacion de la factura # "+info.co_factura;
+                info_op.Observacion = "Por cancelacion de la "+info.nom_tipo_Documento+" "+info.co_factura;
                 info_op.IdTipo_Persona = "PROVEE";
                 info_op.IdPersona = IdPersona;
                 info_op.IdEntidad = info.IdProveedor;
@@ -594,7 +594,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_op_det.IdCbteCble_cxp = info.IdCbteCble_Ogiro;
                 info_op_det.IdTipoCbte_cxp = info.IdTipoCbte_Ogiro;
                 info_op_det.Valor_a_pagar = info.co_valorpagar;
-                info_op_det.Referencia = "Pago factura # "+info.co_factura;
+                info_op_det.Referencia = info.nom_tipo_Documento+" "+ info.co_factura;
                 info_op_det.IdFormaPago = "CHEQUE";
                 info_op_det.Fecha_Pago = DateTime.Now;
                 info_op_det.IdEstadoAprobacion = info_tipo_op.IdEstadoAprobacion;
