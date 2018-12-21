@@ -8,6 +8,7 @@ namespace Core.Erp.Info.RRHH
 {
    public class ro_NominasPagosCheques_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdTransaccion { get; set; }
         public int IdNomina_Tipo { get; set; }
