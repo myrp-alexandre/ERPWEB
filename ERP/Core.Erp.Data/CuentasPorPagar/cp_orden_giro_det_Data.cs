@@ -91,6 +91,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                     }).ToList();
                 }
 
+                Lista.ForEach(q => q.SecuencialID = Convert.ToDecimal(q.IdOrdenCompra).ToString("0000000000") + Convert.ToInt32(q.Secuencia_oc).ToString("0000"));
+
                 return Lista;
             }
             catch (Exception)

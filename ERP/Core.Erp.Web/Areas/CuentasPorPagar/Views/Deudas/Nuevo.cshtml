@@ -20,9 +20,31 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
     function MostrarModalOC() {
-        GridView_deuda_det_PorIngresar.PerformCallback();
-        $("#ModalOc").modal("show");
-        GridView_deuda_det_PorIngresar.UnselectRows();
+        if (IdProveedor.GetValue > 0) {
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                IdSucursal: $("#IdSucursal").val(),
+                IdSucursal: IdProveedor.GetValue(),
+                IdTransaccionSession: $("#IdTransaccionSession").val()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("GetListOcPorIngresar", "Deudas", new { Area = "CuentasPorPagar" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                },
+                error: function (error) {
+                }
+            });
+            GridView_deuda_det_PorIngresar.PerformCallback();
+            $("#ModalOc").modal("show");
+            GridView_deuda_det_PorIngresar.UnselectRows();
+        }
     }
     var selectedIDs;
     function OnBeginCallback(s, e) {

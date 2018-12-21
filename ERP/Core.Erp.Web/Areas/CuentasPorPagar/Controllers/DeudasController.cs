@@ -664,6 +664,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json(list_tipo_doc, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetListOcPorIngresar(int IdEmpresa = 0, int IdSucursal = 0, decimal IdProveedor = 0, decimal IdTransaccionSession = 0)
+        {
+            List_det_PorIngresar.set_list(bus_det.GetListPorIngresar(IdEmpresa, IdSucursal, IdProveedor),IdTransaccionSession);
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult armar_diario(decimal IdProveedor = 0, double co_subtotal_iva = 0, double co_subtotal_siniva = 0, double co_valoriva = 0, double co_total = 0, string observacion="", decimal IdTransaccionSession = 0)
         {
             int IdEmpresa=Convert.ToInt32( SessionFixed.IdEmpresa);
@@ -771,13 +777,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             if (Ids != null)
             {
+                var lst = List_det_PorIngresar.get_list(IdTransaccionSession);
                 string[] array = Ids.Split(',');
                 var output = array.GroupBy(q => q).ToList();                
                 foreach (var item in output)
                 {
                     if (!string.IsNullOrEmpty(item.Key))
                     {
-                        
+                        var info_add = lst.Where(q => q.SecuencialID == item.Key).FirstOrDefault();
+                        List_det.AddRow(info_add, IdTransaccionSession);
                     }
                 }
                 
