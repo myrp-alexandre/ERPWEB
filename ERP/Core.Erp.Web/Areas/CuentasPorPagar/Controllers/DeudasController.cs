@@ -374,7 +374,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 model.info_retencion.detalle.ForEach(item =>
                 {
                     cp_codigo_SRI_Info info_ = bus_sri.get_info(model.IdEmpresa, item.IdCodigo_SRI);
-                    item.IdCodigo_SRI = info_.IdCodigo_SRI;
+                    item.re_Codigo_impuesto = info_.codigoSRI;
                     if (info_.IdTipoSRI == "COD_RET_IVA")
                     {
                         model.info_retencion.re_Tiene_RFuente = "S";
@@ -455,6 +455,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_retencion = bus_retencion.get_info(model.IdEmpresa, model.IdCbteCble_Ogiro, model.IdTipoCbte_Ogiro);
             model.info_retencion = bus_retencion.get_info(model.info_retencion.IdEmpresa, model.info_retencion.IdRetencion);
 
+            if (model.info_retencion.IdEmpresa == 0)
+            {
+                tb_sis_Documento_Tipo_Talonario_Info info_documento = new tb_sis_Documento_Tipo_Talonario_Info();
+                info_documento = bus_documento.get_info_ultimo_no_usado(IdEmpresa, cl_enumeradores.eTipoDocumento.RETEN.ToString());
+                model.info_retencion.serie1 = info_documento.Establecimiento;
+                model.info_retencion.serie2 = info_documento.PuntoEmision;
+                model.info_retencion.NumRetencion = info_documento.NumDocumento;
+                
+            }
+
             List_ct_cbtecble_det_List_retencion.set_list(model.info_retencion.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             List_cp_retencion_det.set_list(model.info_retencion.detalle, model.IdTransaccionSession);
             cargar_combos(model);
@@ -490,7 +500,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 model.info_retencion.detalle.ForEach(item =>
                 {
                     cp_codigo_SRI_Info info_ = bus_sri.get_info(model.IdEmpresa, item.IdCodigo_SRI);
-                    item.IdCodigo_SRI = info_.IdCodigo_SRI;
+                    item.re_Codigo_impuesto = info_.codigoSRI;
                     if (info_.IdTipoSRI == "COD_RET_IVA")
                     {
                         model.info_retencion.re_Tiene_RFuente = "S";
