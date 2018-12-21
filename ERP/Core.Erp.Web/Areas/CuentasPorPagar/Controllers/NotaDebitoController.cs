@@ -224,29 +224,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json(list_tipo_doc, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult armar_diario(decimal IdProveedor = 0, double cn_subtotal_iva = 0, double cn_subtotal_siniva = 0,
-            double valoriva = 0, double total = 0, string observacion = "")
+        public JsonResult armar_diario(int IdEmpresa = 0, decimal IdProveedor = 0, double cn_subtotal_iva = 0, double cn_subtotal_siniva = 0,
+            double valoriva = 0, double total = 0, string observacion = "", decimal IdTransaccionSession = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            if (Session["info_proveedor"] == null)
-            {
-                info_proveedor = bus_prov.get_info(IdEmpresa, IdProveedor);
-                Session["info_proveedor"] = info_proveedor;
-            }
-            else
-                info_proveedor = Session["info_proveedor"] as cp_proveedor_Info;
+            info_proveedor = bus_prov.get_info(IdEmpresa, IdProveedor);
+            info_parametro = bus_param.get_info(IdEmpresa);
 
-
-            if (Session["info_parametro"] == null)
-            {
-                info_parametro = bus_param.get_info(IdEmpresa);
-                Session["info_parametro"] = info_parametro;
-            }
-            else
-                info_parametro = Session["info_parametro"] as cp_parametros_Info;
-
-
-            Lis_ct_cbtecble_det_List_nd.delete_detail_New_details(info_proveedor, info_parametro, cn_subtotal_iva, cn_subtotal_siniva, valoriva, total, observacion);
+            Lis_ct_cbtecble_det_List_nd.delete_detail_New_details(info_proveedor, info_parametro, cn_subtotal_iva, cn_subtotal_siniva, valoriva, total, observacion,IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
        
@@ -260,12 +244,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+            var param = bus_param.get_info(IdEmpresa);
             cp_nota_DebCre_Info model = new cp_nota_DebCre_Info
             {
                 IdEmpresa = IdEmpresa,
                 Fecha_contable = DateTime.Now,
                 cn_fecha = DateTime.Now,
                 cn_Fecha_vcto = DateTime.Now,
+                IdTipoCbte_Nota = (int)param.pa_TipoCbte_NC,
                 PaisPago = "593",
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
@@ -280,16 +266,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             model.DebCre = "D";
             model.info_comrobante = new ct_cbtecble_Info();
-            if (Session["info_parametro"] != null)
-            {
-                info_parametro = Session["info_parametro"] as cp_parametros_Info;
-                model.info_comrobante.IdTipoCbte = (int)info_parametro.pa_TipoCbte_ND;
-            }
+            model.info_comrobante.IdTipoCbte = model.IdTipoCbte_Nota;
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List_nd.get_list(model.IdTransaccionSession);
 
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
             if (!validar(model, ref mensaje))
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 ViewBag.mensaje = mensaje;
                 cargar_combos_detalle();
@@ -297,6 +280,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             if (!bus_orden_giro.guardarDB(model))
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                ViewBag.mensaje = "Ha ocurrido un error, comuníquese con sistemas";
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 cargar_combos_detalle();
                 return View(model);
@@ -332,6 +317,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (!validar(model, ref mensaje))
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 ViewBag.mensaje = mensaje;
                 cargar_combos_detalle();
@@ -339,6 +325,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             if (!bus_orden_giro.modificarDB(model))
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 return View(model);
             }
@@ -367,6 +354,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_orden_giro.anularDB(model))
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 return View(model);
             }
@@ -452,12 +440,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
 
         public void delete_detail_New_details(cp_proveedor_Info info_proveedor, cp_parametros_Info info_parametro, double cn_subtotal_iva = 0,
-            double cn_subtotal_siniva = 0, double cn_valoriva = 0, double cn_total = 0, string observacion = "")
+            double cn_subtotal_siniva = 0, double cn_valoriva = 0, double cn_total = 0, string observacion = "", decimal IdTransaccionSession = 0)
         {
             try
             {
-
-                HttpContext.Current.Session["ct_cbtecble_det_Info" + Convert.ToString(SessionFixed.IdTransaccionSessionActual)] = null;
+                set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
 
                 // cuenta total
                 ct_cbtecble_det_Info cbtecble_det_total_Info = new ct_cbtecble_det_Info();
@@ -468,19 +455,21 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cbtecble_det_total_Info.dc_Valor_haber = cn_total;
                 cbtecble_det_total_Info.dc_Valor = cn_total * -1;
                 cbtecble_det_total_Info.dc_Observacion = observacion;
-                AddRow(cbtecble_det_total_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                AddRow(cbtecble_det_total_Info, IdTransaccionSession);
 
-
-                // cuenta iva
-                ct_cbtecble_det_Info cbtecble_det_iva_Info = new ct_cbtecble_det_Info();
-                cbtecble_det_iva_Info.secuencia = 2;
-                cbtecble_det_iva_Info.IdEmpresa = 0;
-                cbtecble_det_iva_Info.IdTipoCbte = 1;
-                cbtecble_det_iva_Info.IdCtaCble = info_parametro.pa_ctacble_iva;
-                cbtecble_det_iva_Info.dc_Valor_debe = cn_valoriva;
-                cbtecble_det_iva_Info.dc_Valor = cn_valoriva;
-                cbtecble_det_iva_Info.dc_Observacion = observacion;
-                AddRow(cbtecble_det_iva_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                if (cn_subtotal_iva > 0)
+                {
+                    // cuenta iva
+                    ct_cbtecble_det_Info cbtecble_det_iva_Info = new ct_cbtecble_det_Info();
+                    cbtecble_det_iva_Info.secuencia = 2;
+                    cbtecble_det_iva_Info.IdEmpresa = 0;
+                    cbtecble_det_iva_Info.IdTipoCbte = 1;
+                    cbtecble_det_iva_Info.IdCtaCble = info_parametro.pa_ctacble_iva;
+                    cbtecble_det_iva_Info.dc_Valor_debe = cn_valoriva;
+                    cbtecble_det_iva_Info.dc_Valor = cn_valoriva;
+                    cbtecble_det_iva_Info.dc_Observacion = observacion;
+                    AddRow(cbtecble_det_iva_Info, IdTransaccionSession);
+                }
 
                 // cuenta sbtotal
                 ct_cbtecble_det_Info cbtecble_det_sub_Info = new ct_cbtecble_det_Info();
@@ -491,7 +480,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cbtecble_det_sub_Info.dc_Valor_debe = cn_subtotal_iva + cn_subtotal_siniva;
                 cbtecble_det_sub_Info.dc_Valor = cn_subtotal_iva + cn_subtotal_siniva;
                 cbtecble_det_sub_Info.dc_Observacion = observacion;
-                AddRow(cbtecble_det_sub_Info, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+                AddRow(cbtecble_det_sub_Info, IdTransaccionSession);
             }
             catch (Exception)
             {

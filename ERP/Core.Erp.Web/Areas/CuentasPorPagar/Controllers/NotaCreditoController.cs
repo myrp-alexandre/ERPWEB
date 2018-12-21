@@ -133,7 +133,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             };
             List_op.set_list(model.lst_det_canc_op = new List<cp_orden_pago_cancelaciones_Info>(),model.IdTransaccionSession);
             Lis_ct_cbtecble_det_List_nc.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa,0,"");
             return View(model);
         }
 
@@ -147,7 +147,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (model.info_comrobante.lst_ct_cbtecble_det==null)
             {
                 ViewBag.mensaje = "Falta diario contable";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 cargar_combos_detalle();
                 return View(model);
 
@@ -209,7 +209,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (model.info_comrobante.lst_ct_cbtecble_det == null)
             {
                 ViewBag.mensaje = "Falta detalle de pago";
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 cargar_combos_detalle();
                 return View(model);
             }
@@ -217,7 +217,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 cargar_combos_detalle();
                 ViewBag.mensaje = mensaje;
                 return View(model);
@@ -226,7 +226,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_orden_giro.modificarDB(model))
             {
-                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdTipoNota);
+                cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -265,7 +265,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (!bus_orden_giro.anularDB(model))
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa,model.IdProveedor,model.IdIden_credito.ToString());
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -331,7 +331,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
         #region cargar combos
 
-        private void cargar_combos(int IdEmpresa, decimal IdProveedor = 0, string IdTipoSRI = "")
+        private void cargar_combos(int IdEmpresa, decimal IdProveedor, string IdTipoSRI)
         {
           
 

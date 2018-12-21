@@ -70,6 +70,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.ip = " ";
                    if( data.guardarDB(info))
                     {
+                        if (info.lst_det_canc_op == null)
+                            return true;
                         data_cancelacion = new cp_orden_pago_cancelaciones_Data();
                         foreach (var item in info.lst_det_canc_op)
                         {
@@ -127,6 +129,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     {
                         data_cancelacion = new cp_orden_pago_cancelaciones_Data();
                         data_cancelacion.ElimarDB(info.IdEmpresa, info.IdTipoCbte_Nota, info.IdCbteCble_Nota);
+                        if (info.lst_det_canc_op == null)
+                            return true;
                         foreach (var item in info.lst_det_canc_op)
                         {
                             info_cancelacion.IdEmpresa = info.IdEmpresa;
