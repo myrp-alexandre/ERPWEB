@@ -8,7 +8,7 @@
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Deudas", Action = "EditingUpdate_og", Area = "CuentasPorPagar" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Deudas", Action = "EditingDelete_og", Area = "CuentasPorPagar" };
 
-        settings.KeyFieldName = "IdCbteCble_Ogiro";
+        settings.KeyFieldName = "SecuencialID";
         settings.Width = Unit.Percentage(100);
 
         settings.CommandColumn.Visible = true;
@@ -33,7 +33,7 @@
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
-
+        
         settings.Columns.Add(column =>
         {
             column.FieldName = "co_factura";
@@ -51,7 +51,7 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "info_proveedor.info_persona.pe_razonSocial";
+            column.FieldName = "info_proveedor.info_persona.pe_nombreCompleto";
             column.Caption = "Proveedor";
             column.Width = Unit.Percentage(40);
             column.PropertiesEdit.DisplayFormatString = "d";

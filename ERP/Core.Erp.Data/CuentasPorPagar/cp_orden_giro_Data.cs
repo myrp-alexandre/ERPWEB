@@ -535,6 +535,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  Total_Pagado = q.Total_Pagado,
                                  Saldo_OG = q.Saldo_OG,
                                  Fecha_Transac = q.co_FechaFactura_vct,
+                                 nom_tipo_Documento = q.nom_tipo_Documento,
                                  info_proveedor = new cp_proveedor_Info
                                  {
                                      IdPersona = q.IdPersona,
@@ -542,6 +543,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                      {
                                          pe_razonSocial = q.nom_proveedor,
                                          IdPersona = q.IdPersona,
+                                         pe_nombreCompleto = q.nom_proveedor
                                      }
                                  },
 
@@ -549,7 +551,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 }
                 Lista.ForEach(item =>
                 {
-
+                    item.SecuencialID = item.IdEmpresa.ToString("00") + item.IdTipoCbte_Ogiro.ToString("00") + item.IdCbteCble_Ogiro.ToString("000000000");
                     item.co_FechaFactura_vct = item.Fecha_Transac == null ? DateTime.Now.Date : Convert.ToDateTime(item.Fecha_Transac);
                     TimeSpan ts = Convert.ToDateTime(item.Fecha_Transac == null ? DateTime.Now.Date : Convert.ToDateTime(item.Fecha_Transac)) - Convert.ToDateTime(DateTime.Now);
                     int dias = ts.Days;
