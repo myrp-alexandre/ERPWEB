@@ -127,7 +127,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         co_estado = Entity.co_estado,
                         IdTipoSRI = Entity.IdTipoSRI,
                         co_f_valides_desde = Entity.co_f_valides_desde,
-                        co_f_valides_hasta = Entity.co_f_valides_hasta
+                        co_f_valides_hasta = Entity.co_f_valides_hasta,                        
                     };
                 }
                 return info;
@@ -137,7 +137,42 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-        
+
+        public cp_codigo_SRI_Info get_info(int IdEmpresa, int IdCodigoSRI)
+        {
+            try
+            {
+                cp_codigo_SRI_Info info = new cp_codigo_SRI_Info();
+                using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
+                {
+                    cp_codigo_SRI Entity = Context.cp_codigo_SRI.FirstOrDefault(q => q.IdCodigo_SRI == IdCodigoSRI);
+                    if (Entity == null) return null;
+                    info = new cp_codigo_SRI_Info
+                    {
+                        IdCodigo_SRI = Entity.IdCodigo_SRI,
+                        codigoSRI = Entity.codigoSRI,
+                        co_descripcion = Entity.co_descripcion,
+                        co_codigoBase = Entity.co_codigoBase,
+                        co_porRetencion = Entity.co_porRetencion,
+                        co_estado = Entity.co_estado,
+                        IdTipoSRI = Entity.IdTipoSRI,
+                        co_f_valides_desde = Entity.co_f_valides_desde,
+                        co_f_valides_hasta = Entity.co_f_valides_hasta,
+                        info_codigo_ctacble = new cp_codigo_SRI_x_CtaCble_Info
+                        {
+                            IdCtaCble = Context.cp_codigo_SRI_x_CtaCble.Where(q=>q.IdEmpresa == IdEmpresa && q.idCodigo_SRI == IdCodigoSRI).FirstOrDefault() == null ? null : Context.cp_codigo_SRI_x_CtaCble.Where(q => q.IdEmpresa == IdEmpresa && q.idCodigo_SRI == IdCodigoSRI).FirstOrDefault().IdCtaCble
+                        }
+
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool guardarDB(cp_codigo_SRI_Info info)
         {
             try

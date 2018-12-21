@@ -78,13 +78,11 @@ namespace Core.Erp.Info.CuentasPorPagar
 
         public cp_proveedor_Info info_proveedor { get; set; }
         public ct_cbtecble_Info info_comrobante { get; set; }
-        public List<cp_orden_pago_det_Info> lst_detalle_op { get; set; }
+        public List<cp_orden_pago_cancelaciones_Info> lst_det_canc_op { get; set; }
         public cp_nota_DebCre_Info()
         {
             info_proveedor = new cp_proveedor_Info();
             info_comrobante = new ct_cbtecble_Info();
-
-            lst_detalle_op = new List<cp_orden_pago_det_Info>();
         }
 
         // campos que no existen en la tabla

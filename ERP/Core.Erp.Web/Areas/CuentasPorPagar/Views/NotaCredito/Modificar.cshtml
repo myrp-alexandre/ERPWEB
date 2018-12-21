@@ -42,7 +42,7 @@
         e.customArgs["selectedIDs"] = selectedIDs;
     }
     function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdOrdenPago", GetSelectedFieldValuesCallback);
+        s.GetSelectedFieldValues("IdOrdenPago_op", GetSelectedFieldValuesCallback);
     }
     function GetSelectedFieldValuesCallback(values) {
         //Capture all selected keys
@@ -52,7 +52,8 @@
 
     function seleccionar_op() {
         var datos = {
-            Ids: selectedIDs
+            Ids: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -80,6 +81,7 @@
 {
 
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCbteCble_Nota)
     @Html.HiddenFor(q => q.IdTipoCbte_Nota)
     <div class="row">
@@ -107,7 +109,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.cn_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cn_fecha" })
+                        @Html.DevExpress().DateEditFor(q=> q.cn_fecha, settings =>
+                    {
+                        settings.Name = "cn_fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.cn_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -119,7 +129,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fecha_contable, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_contable" })
+                        @Html.DevExpress().DateEditFor(q=> q.Fecha_contable, settings =>
+                    {
+                        settings.Name = "Fecha_contable";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha_contable, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -309,20 +327,21 @@
 
                 <div class="row">
                     <div class="col-md-12">
-
-                        <div class="col-md-12">
+                        <div class="col-md-1">
                             <div class="form-group">
-
-                                <button type="button" class="btn btn-primary" onclick="op_con_saldo()">
-                                    Buscar OP
+                                <button type="button" class="btn btn-primary form-control" onclick="op_con_saldo()" title="Buscar OP">
                                     <i class="fa fa-search"></i>
                                 </button>
-                                @Html.Action("GridViewPartial_nota_credito_det")
-
-
                             </div>
                         </div>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_nota_credito_det")
+                        </div>
                     </div>
                 </div>
             </div>
@@ -401,17 +420,8 @@
 <script>
 
 
-                    $(function () {
-                        //Date picker
-                        $('#cn_fecha').datepicker({
-                            autoclose: true
-                        })
-                        $('#Fecha_contable').datepicker({
-                            autoclose: true
-                        })
-                        $('#Fecha_inicio').datepicker({
-                            autoclose: true
-                        })
+    $(function () {
+        ocultar_mostrar_div();
 
 
                         $("#cn_num_doc_modificado").change(function () {
@@ -427,12 +437,6 @@
                         });
                     });
 
-                    // funciones calcular total
-                    $("#cn_fecha").change(function () {
-                        var d = new Date($("#cn_fecha").val());
-                        $('#Fecha_contable').datepicker("setDate", moment(d).format("DD/MM/YYYY"));
-
-                    });
                     $("#cn_subtotal_iva").keyup(function () {
 
                         actualizar_valores();
@@ -545,7 +549,8 @@
                 cn_subtotal_siniva: $("#cn_subtotal_siniva").val(),
                 valoriva: $("#cn_valoriva").val(),
                 total: $("#cn_total").val(),
-                observacion: $("#observacion").val()
+                observacion: $("#observacion").val(),
+                IdTransaccionSession: $("#IdTransaccionSession").val()
             }
             $.ajax({
                 type: 'POST',
