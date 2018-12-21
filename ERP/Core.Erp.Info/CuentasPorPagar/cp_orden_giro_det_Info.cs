@@ -39,6 +39,11 @@ namespace Core.Erp.Info.CuentasPorPagar
 
         #region Campos que no existen en la tabla
         public string pr_descripcion { get; set; }
+        public System.DateTime oc_fecha { get; set; }
+        public double do_Cantidad { get; set; }
+        public double Saldo { get; set; }
+        public string oc_observacion { get; set; }
+        public string NomUnidadMedida { get; set; }
         #endregion
 
     }

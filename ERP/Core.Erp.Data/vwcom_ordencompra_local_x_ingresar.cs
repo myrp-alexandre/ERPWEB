@@ -39,5 +39,6 @@ namespace Core.Erp.Data
         public string pr_descripcion { get; set; }
         public double CantidadIngresada { get; set; }
         public double Saldo { get; set; }
+        public string NomUnidadMedida { get; set; }
     }
 }

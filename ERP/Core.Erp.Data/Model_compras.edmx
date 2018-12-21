@@ -248,6 +248,7 @@ warning 6002: The table/view 'DBERP.dbo.vwcom_ordencompra_local_x_ingresar' does
             <PropertyRef Name="IdUnidadMedida" />
             <PropertyRef Name="CantidadIngresada" />
             <PropertyRef Name="Saldo" />
+            <PropertyRef Name="NomUnidadMedida" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -274,6 +275,7 @@ warning 6002: The table/view 'DBERP.dbo.vwcom_ordencompra_local_x_ingresar' does
           <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" />
           <Property Name="CantidadIngresada" Type="float" Nullable="false" />
           <Property Name="Saldo" Type="float" Nullable="false" />
+          <Property Name="NomUnidadMedida" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -519,7 +521,8 @@ warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not ha
     [vwcom_ordencompra_local_x_ingresar].[IdUnidadMedida] AS [IdUnidadMedida], 
     [vwcom_ordencompra_local_x_ingresar].[pr_descripcion] AS [pr_descripcion], 
     [vwcom_ordencompra_local_x_ingresar].[CantidadIngresada] AS [CantidadIngresada], 
-    [vwcom_ordencompra_local_x_ingresar].[Saldo] AS [Saldo]
+    [vwcom_ordencompra_local_x_ingresar].[Saldo] AS [Saldo], 
+    [vwcom_ordencompra_local_x_ingresar].[NomUnidadMedida] AS [NomUnidadMedida]
     FROM [dbo].[vwcom_ordencompra_local_x_ingresar] AS [vwcom_ordencompra_local_x_ingresar]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcom_ordencompra_local_det" EntityType="Self.vwcom_ordencompra_local_det" store:Type="Views" store:Schema="web">
@@ -1101,6 +1104,7 @@ warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not ha
             <PropertyRef Name="IdUnidadMedida" />
             <PropertyRef Name="CantidadIngresada" />
             <PropertyRef Name="Saldo" />
+            <PropertyRef Name="NomUnidadMedida" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
@@ -1127,6 +1131,7 @@ warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not ha
           <Property Name="pr_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CantidadIngresada" Type="Double" Nullable="false" />
           <Property Name="Saldo" Type="Double" Nullable="false" />
+          <Property Name="NomUnidadMedida" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1374,6 +1379,7 @@ warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not ha
           <EntitySetMapping Name="vwcom_ordencompra_local_x_ingresar">
             <EntityTypeMapping TypeName="Model_compras.vwcom_ordencompra_local_x_ingresar">
               <MappingFragment StoreEntitySet="vwcom_ordencompra_local_x_ingresar">
+                <ScalarProperty Name="NomUnidadMedida" ColumnName="NomUnidadMedida" />
                 <ScalarProperty Name="Saldo" ColumnName="Saldo" />
                 <ScalarProperty Name="CantidadIngresada" ColumnName="CantidadIngresada" />
                 <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />

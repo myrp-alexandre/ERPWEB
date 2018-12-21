@@ -51,6 +51,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         ct_cbtecble_det_List_re List_ct_cbtecble_det_List_retencion = new ct_cbtecble_det_List_re();
         cp_retencion_det_lst List_cp_retencion_det = new cp_retencion_det_lst();
         cp_retencion_Bus bus_retencion = new cp_retencion_Bus();
+        cp_orden_giro_det_PorIngresar_List List_det_PorIngresar = new cp_orden_giro_det_PorIngresar_List();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -766,6 +767,23 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult AgregarOC(string Ids = "", decimal IdTransaccionSession = 0)
+        {
+            if (Ids != null)
+            {
+                string[] array = Ids.Split(',');
+                var output = array.GroupBy(q => q).ToList();                
+                foreach (var item in output)
+                {
+                    if (!string.IsNullOrEmpty(item.Key))
+                    {
+                        
+                    }
+                }
+                
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Detalle de inventario
@@ -777,6 +795,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.lst_det = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();            
             return PartialView("_GridViewPartial_deudas_det", model);
+        }
+
+        public ActionResult GridViewPartial_deudas_det_PorIngresar()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            
+            var model = List_det_PorIngresar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_deudas_det_PorIngresar", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -1018,6 +1046,25 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
     }
 
+    public class cp_orden_giro_det_PorIngresar_List
+    {
+        string Variable = "cp_orden_giro_det_PorIngresar";
+        public List<cp_orden_giro_det_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<cp_orden_giro_det_Info> list = new List<cp_orden_giro_det_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<cp_orden_giro_det_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<cp_orden_giro_det_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
     public class cp_orden_giro_det_Info_List
     {
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
