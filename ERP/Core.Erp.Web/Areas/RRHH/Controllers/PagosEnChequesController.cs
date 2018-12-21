@@ -81,7 +81,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             };
 
-           // model.detalle = bus_pago_detalle.get_list(IdEmpresa, IdNomina_Tipo_Tipo, IdNomina_Tipo_TipoLiqui, IdPeriodo, "");
+            model.detalle = bus_pago_detalle.get_lis(IdEmpresa, IdNomina_Tipo_Tipo, IdNomina_Tipo_TipoLiqui, IdPeriodo, "");
             ro_NominasPagosCheques_det_Info_list.set_list(model.detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(0);
             return View(model);
