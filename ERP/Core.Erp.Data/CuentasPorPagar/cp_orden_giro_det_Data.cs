@@ -36,7 +36,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  PorIva = q.PorIva,
                                  ValorIva = q.ValorIva,
                                  Total = q.Total,
-                                 IdCtaCbleGasto = q.IdCtaCbleGasto,
+                                 IdCtaCbleInv = q.IdCtaCbleGasto,
                                  IdUnidadMedida = q.IdUnidadMedida,
                                  pr_descripcion = q.pr_descripcion
                              }).ToList();

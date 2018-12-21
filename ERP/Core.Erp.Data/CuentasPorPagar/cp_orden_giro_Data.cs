@@ -91,7 +91,12 @@ namespace Core.Erp.Data.CuentasPorPagar
                                 Subtotal = item.Subtotal,
                                 ValorIva = item.ValorIva,
                                 Total = item.Total,
-                                IdCtaCbleGasto = item.IdCtaCbleGasto
+                                IdCtaCbleInv = item.IdCtaCbleInv,
+
+                                IdEmpresa_oc = item.IdEmpresa_oc,
+                                IdSucursal_oc = item.IdSucursal_oc,
+                                IdOrdenCompra = item.IdOrdenCompra,
+                                Secuencia_oc = item.Secuencia_oc
                             });
                         }
 
@@ -205,7 +210,11 @@ namespace Core.Erp.Data.CuentasPorPagar
                                 Subtotal = item.Subtotal,
                                 ValorIva = item.ValorIva,
                                 Total = item.Total,
-                                IdCtaCbleGasto = item.IdCtaCbleGasto
+                                IdCtaCbleInv = item.IdCtaCbleInv,
+                                IdEmpresa_oc = item.IdEmpresa_oc,
+                                IdSucursal_oc = item.IdSucursal_oc,
+                                IdOrdenCompra = item.IdOrdenCompra,
+                                Secuencia_oc = item.Secuencia_oc
                             });
                         }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Erp.Info.CuentasPorPagar
 {
@@ -29,7 +30,13 @@ namespace Core.Erp.Info.CuentasPorPagar
         public double PorIva { get; set; }
         public double ValorIva { get; set; }
         public double Total { get; set; }
-        public string IdCtaCbleGasto { get; set; }
+        public string IdCtaCbleInv { get; set; }
+
+        public Nullable<int> IdEmpresa_oc { get; set; }
+        public Nullable<int> IdSucursal_oc { get; set; }
+        public Nullable<decimal> IdOrdenCompra { get; set; }
+        public Nullable<int> Secuencia_oc { get; set; }
+
         #region Campos que no existen en la tabla
         public string pr_descripcion { get; set; }
         #endregion

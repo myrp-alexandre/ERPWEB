@@ -1736,6 +1736,9 @@
     <Compile Include="vwcom_ordencompra_local_det.cs">
       <DependentUpon>Model_compras.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwcom_ordencompra_local_x_ingresar.cs">
+      <DependentUpon>Model_compras.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWCONTA_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
