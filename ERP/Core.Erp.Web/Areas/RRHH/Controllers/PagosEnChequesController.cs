@@ -80,7 +80,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
             };
-
             ro_NominasPagosCheques_det_Info_list.set_list(model.detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(0);
             return View(model);
@@ -95,7 +94,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.detalle = ro_NominasPagosCheques_det_Info_list.get_list(model.IdTransaccionSession);
             if (model.detalle == null || model.detalle.Count() == 0)
             {
-                ViewBag.mensaje = "No existe detalle para el archivo";
+                ViewBag.mensaje = "No existe detalle para el pago";
                 cargar_combos(model.IdNomina_Tipo);
                 return View(model);
             }

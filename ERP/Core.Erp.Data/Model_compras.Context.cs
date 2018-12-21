@@ -37,5 +37,6 @@ namespace Core.Erp.Data
         public DbSet<com_comprador> com_comprador { get; set; }
         public DbSet<com_ordencompra_local> com_ordencompra_local { get; set; }
         public DbSet<vwcom_ordencompra_local> vwcom_ordencompra_local { get; set; }
+        public DbSet<vwcom_ordencompra_local_x_ingresar> vwcom_ordencompra_local_x_ingresar { get; set; }
     }
 }

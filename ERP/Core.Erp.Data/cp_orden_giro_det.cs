@@ -30,7 +30,11 @@ namespace Core.Erp.Data
         public double PorIva { get; set; }
         public double ValorIva { get; set; }
         public double Total { get; set; }
-        public string IdCtaCbleGasto { get; set; }
+        public string IdCtaCbleInv { get; set; }
+        public Nullable<int> IdEmpresa_oc { get; set; }
+        public Nullable<int> IdSucursal_oc { get; set; }
+        public Nullable<decimal> IdOrdenCompra { get; set; }
+        public Nullable<int> Secuencia_oc { get; set; }
     
         public virtual cp_orden_giro cp_orden_giro { get; set; }
     }

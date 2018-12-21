@@ -782,16 +782,24 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#txtMensaje").text(data);
+                $("#txtMensaje").text(data.mensaje);
+                $("#vt_Total").val(data.Total);
                 if (data.length > 0) {
                     $("#divMensaje").show();
                 } else {
                     $("#divMensaje").hide();
                 }
+                CalcularCambio();
             },
             error: function (error) {
             }
         });
+    }
+
+    function CalcularCambio() {
+        var Total = Number($("#vt_Total").val());
+        var Efectivo = Number($("#vt_ValorEfectivo").val());
+        $("#vt_Cambio").val((Efectivo - Total).toFixed(2));
     }
 
     function ValidarCliente() {

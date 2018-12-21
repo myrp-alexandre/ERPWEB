@@ -9545,6 +9545,7 @@
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_MarcaPro_importacion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_PresentacionPro_importacion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_ProductoPro_importacion.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_deudas_det_PorIngresar.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9659,7 +9660,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

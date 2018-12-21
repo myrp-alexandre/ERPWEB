@@ -16,10 +16,10 @@ namespace Core.Erp.Data
     {
         public cp_orden_giro()
         {
-            this.cp_orden_giro_det = new HashSet<cp_orden_giro_det>();
             this.cp_orden_giro_pagos_sri = new HashSet<cp_orden_giro_pagos_sri>();
             this.cp_orden_giro_x_in_Ing_Egr_Inven = new HashSet<cp_orden_giro_x_in_Ing_Egr_Inven>();
             this.cp_retencion = new HashSet<cp_retencion>();
+            this.cp_orden_giro_det = new HashSet<cp_orden_giro_det>();
         }
     
         public int IdEmpresa { get; set; }
@@ -80,9 +80,9 @@ namespace Core.Erp.Data
         public virtual cp_codigo_SRI cp_codigo_SRI2 { get; set; }
         public virtual cp_pais_sri cp_pais_sri { get; set; }
         public virtual cp_proveedor cp_proveedor { get; set; }
-        public virtual ICollection<cp_orden_giro_det> cp_orden_giro_det { get; set; }
         public virtual ICollection<cp_orden_giro_pagos_sri> cp_orden_giro_pagos_sri { get; set; }
         public virtual ICollection<cp_orden_giro_x_in_Ing_Egr_Inven> cp_orden_giro_x_in_Ing_Egr_Inven { get; set; }
         public virtual ICollection<cp_retencion> cp_retencion { get; set; }
+        public virtual ICollection<cp_orden_giro_det> cp_orden_giro_det { get; set; }
     }
 }

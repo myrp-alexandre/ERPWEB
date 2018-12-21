@@ -51,6 +51,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         ct_cbtecble_det_List_re List_ct_cbtecble_det_List_retencion = new ct_cbtecble_det_List_re();
         cp_retencion_det_lst List_cp_retencion_det = new cp_retencion_det_lst();
         cp_retencion_Bus bus_retencion = new cp_retencion_Bus();
+        cp_orden_giro_det_PorIngresar_List List_det_PorIngresar = new cp_orden_giro_det_PorIngresar_List();
+        cp_codigo_SRI_Bus bus_sri = new cp_codigo_SRI_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -366,14 +368,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_retencion.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List_retencion.get_list(model.IdTransaccionSession);
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
 
-
+            
             if (model.info_retencion.detalle.Count()>0)
             {
-                var  lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
                 model.info_retencion.detalle.ForEach(item =>
                 {
-                    cp_codigo_SRI_Info info_ = lst_codigo_retencion.Where(v => v.codigoSRI == item.re_Codigo_impuesto).FirstOrDefault();
-                    item.IdCodigo_SRI = info_.IdCodigo_SRI;
+                    cp_codigo_SRI_Info info_ = bus_sri.get_info(model.IdEmpresa, item.IdCodigo_SRI);
+                    item.re_Codigo_impuesto = info_.codigoSRI;
                     if (info_.IdTipoSRI == "COD_RET_IVA")
                     {
                         model.info_retencion.re_Tiene_RFuente = "S";
@@ -454,6 +455,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_retencion = bus_retencion.get_info(model.IdEmpresa, model.IdCbteCble_Ogiro, model.IdTipoCbte_Ogiro);
             model.info_retencion = bus_retencion.get_info(model.info_retencion.IdEmpresa, model.info_retencion.IdRetencion);
 
+            if (model.info_retencion.IdEmpresa == 0)
+            {
+                tb_sis_Documento_Tipo_Talonario_Info info_documento = new tb_sis_Documento_Tipo_Talonario_Info();
+                info_documento = bus_documento.get_info_ultimo_no_usado(IdEmpresa, cl_enumeradores.eTipoDocumento.RETEN.ToString());
+                model.info_retencion.serie1 = info_documento.Establecimiento;
+                model.info_retencion.serie2 = info_documento.PuntoEmision;
+                model.info_retencion.NumRetencion = info_documento.NumDocumento;
+                
+            }
+
             List_ct_cbtecble_det_List_retencion.set_list(model.info_retencion.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             List_cp_retencion_det.set_list(model.info_retencion.detalle, model.IdTransaccionSession);
             cargar_combos(model);
@@ -485,12 +496,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
 
             if (model.info_retencion.detalle.Count() > 0)
-            {
-                var lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
+            {                
                 model.info_retencion.detalle.ForEach(item =>
                 {
-                    cp_codigo_SRI_Info info_ = lst_codigo_retencion.Where(v => v.codigoSRI == item.re_Codigo_impuesto).FirstOrDefault();
-                    item.IdCodigo_SRI = info_.IdCodigo_SRI;
+                    cp_codigo_SRI_Info info_ = bus_sri.get_info(model.IdEmpresa, item.IdCodigo_SRI);
+                    item.re_Codigo_impuesto = info_.codigoSRI;
                     if (info_.IdTipoSRI == "COD_RET_IVA")
                     {
                         model.info_retencion.re_Tiene_RFuente = "S";
@@ -663,6 +673,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json(list_tipo_doc, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetListOcPorIngresar(int IdEmpresa = 0, int IdSucursal = 0, decimal IdProveedor = 0, decimal IdTransaccionSession = 0)
+        {
+            List_det_PorIngresar.set_list(bus_det.GetListPorIngresar(IdEmpresa, IdSucursal, IdProveedor),IdTransaccionSession);
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult armar_diario(decimal IdProveedor = 0, double co_subtotal_iva = 0, double co_subtotal_siniva = 0, double co_valoriva = 0, double co_total = 0, string observacion="", decimal IdTransaccionSession = 0)
         {
             int IdEmpresa=Convert.ToInt32( SessionFixed.IdEmpresa);
@@ -766,6 +782,24 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult AgregarOC(string Ids = "", decimal IdTransaccionSession = 0)
+        {
+            if (Ids != null)
+            {
+                var lst = List_det_PorIngresar.get_list(IdTransaccionSession);
+                string[] array = Ids.Split(',');
+                var output = array.GroupBy(q => q).ToList();                
+                foreach (var item in output)
+                {
+                    if (!string.IsNullOrEmpty(item.Key))
+                    {
+                        var info_add = lst.Where(q => q.SecuencialID == item.Key).FirstOrDefault();
+                        List_det.AddRow(info_add, IdTransaccionSession);
+                    }
+                }
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Detalle de inventario
@@ -779,12 +813,25 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_deudas_det", model);
         }
 
+        public ActionResult GridViewPartial_deudas_det_PorIngresar()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            
+            var model = List_det_PorIngresar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_deudas_det_PorIngresar", model);
+        }
+
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNewDetalle([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_giro_det_Info info_det)
         {
             var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
             if (producto != null)
+            {
                 info_det.pr_descripcion = producto.pr_descripcion_combo;
+                info_det.IdCtaCbleInv = producto.IdCtaCtble_Inve;
+            }
 
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -798,7 +845,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
             if (producto != null)
+            {
                 info_det.pr_descripcion = producto.pr_descripcion_combo;
+                info_det.IdCtaCbleInv = producto.IdCtaCtble_Inve;
+            }
 
             if (ModelState.IsValid)
                 List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -1018,8 +1068,28 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
     }
 
+    public class cp_orden_giro_det_PorIngresar_List
+    {
+        string Variable = "cp_orden_giro_det_PorIngresar";
+        public List<cp_orden_giro_det_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<cp_orden_giro_det_Info> list = new List<cp_orden_giro_det_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<cp_orden_giro_det_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<cp_orden_giro_det_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
     public class cp_orden_giro_det_Info_List
     {
+        in_categorias_Bus bus_categoria = new in_categorias_Bus();
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         string Variable = "cp_orden_giro_det_Info";
         public List<cp_orden_giro_det_Info> get_list(decimal IdTransaccionSession)
@@ -1052,6 +1122,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 info_det.PorIva = 0;
             info_det.ValorIva = Math.Round(info_det.Subtotal * (info_det.PorIva / 100), 2, MidpointRounding.AwayFromZero);
             info_det.Total = Math.Round(info_det.Subtotal + info_det.ValorIva,2,MidpointRounding.AwayFromZero);
+            
             list.Add(info_det);
         }
 
@@ -1075,7 +1146,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 edited_info.PorIva = 0;
             edited_info.ValorIva = Math.Round(edited_info.Subtotal * (edited_info.PorIva / 100), 2, MidpointRounding.AwayFromZero);
             edited_info.Total = Math.Round(edited_info.Subtotal + edited_info.ValorIva, 2, MidpointRounding.AwayFromZero);
-
+            edited_info.IdCtaCbleInv = info_det.IdCtaCbleInv;
 
         }
 

@@ -551,6 +551,18 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 {
                     mensaje = "EL número de autorización no tiene la longitud correcta";
                 }
+
+                if(info.info_retencion.detalle.Count()>0)
+                {
+                    if(info.info_retencion.info_comprobante!=null)
+                        if (info.info_retencion.info_comprobante.lst_ct_cbtecble_det != null)
+                            info.info_retencion.info_comprobante.lst_ct_cbtecble_det.ForEach(item =>
+                    {
+                        if (item.IdCtaCble == null | item.IdCtaCble == "")
+                            mensaje = "Falta cuenta contable en diario de retencion";
+                    });
+
+                }
                 return mensaje;
 
             }
