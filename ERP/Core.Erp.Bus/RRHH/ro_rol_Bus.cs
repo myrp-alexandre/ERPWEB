@@ -28,9 +28,7 @@ namespace Core.Erp.Bus.RRHH
         cp_orden_pago_tipo_x_empresa_Info info_tipo_op = new cp_orden_pago_tipo_x_empresa_Info();
         cp_orden_pago_Bus bus_op = new cp_orden_pago_Bus();
         ro_Comprobantes_Contables_Data ro_comprobante = new ro_Comprobantes_Contables_Data();
-        cp_orden_pago_x_nomina_Data data_op_x_empleado = new cp_orden_pago_x_nomina_Data();
-        List<cp_orden_pago_x_nomina_Info> lst_op_x_nomina = new List<cp_orden_pago_x_nomina_Info>();
-
+       
         #endregion
         public List< ro_rol_Info> get_list_nominas(int IdEmpresa )
         {

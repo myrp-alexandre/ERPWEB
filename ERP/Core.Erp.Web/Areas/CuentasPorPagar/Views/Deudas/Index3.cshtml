@@ -2,13 +2,12 @@
 <script type="text/javascript">
 
     function fac_con_saldo()
-    {
-            GridViewPartial_facturas_con_saldos.PerformCallback();
-            $("#fac_con_saldo").modal("show");
+    {        
+        GridViewPartial_facturas_con_saldos.PerformCallback();
+        $("#fac_con_saldo").modal("show");        
+        GridViewPartial_facturas_con_saldos.UnselectRows();
     };
     function cerrar() {
-        //GridViewPartial_distribuidos.PerformCallback();
-        //GridViewPartial_por_distribuir.PerformCallback();
         $("#fac_con_saldo").modal("hide");
     };
 
@@ -20,7 +19,7 @@
         e.customArgs["selectedIDs"] = selectedIDs;
     }
     function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdCbteCble_Ogiro", GetSelectedFieldValuesCallback);
+        s.GetSelectedFieldValues("SecuencialID", GetSelectedFieldValuesCallback);
     }
     function GetSelectedFieldValuesCallback(values) {
         //Capture all selected keys
@@ -95,15 +94,25 @@
     
     <div class="row">
         <div class="col-md-12">
-            <button type="button" class="btn btn-primary" onclick="fac_con_saldo()">
-                <i class="fa fa-search"></i>
-            </button>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary form-control" onclick="fac_con_saldo()" title="Buscar deudas">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>                
+            </div>
         </div>
     </div>
 
-        @Html.Action("GridViewPartial_aprobacion_facturas")
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_aprobacion_facturas")
+            </div>
+        </div>
+    </div>
+        
         <div class="modal-footer">
-
             <button type="button" class="btn btn-primary" onclick="guardar()" id="btn_guardar">Guardar</button>
         </div>
         }

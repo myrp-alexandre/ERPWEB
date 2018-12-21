@@ -114,6 +114,14 @@
         GridView_DebitoBanco_op.PerformCallback();
     }
 
+    function OnSelectedCtaCbleChanged() {
+        GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
+    }
+    function GrupoComboBox_BeginCallback(s, e) {
+        e.customArgs["pre_IdCtaCble"] = GridView_comprobante_detalle.GetEditor("IdCtaCble").GetValue();
+        e.customArgs["pre_fecha"] = moment(cb_Fecha.GetDate()).format('DD/MM/YYYY');
+    }
+
 </script>
 
 @using (Html.BeginForm("Modificar", "NotaDeDebitoBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
@@ -171,7 +179,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdBanco_acreditacion">Tipo flujo*</label>
+                    <label for="IdBanco_acreditacion">Tipo flujo</label>
                     @Html.Partial("_CmbFlujo_ND_B", Model.IdTipoFlujo)
                     @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
                 </div>

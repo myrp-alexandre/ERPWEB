@@ -122,21 +122,20 @@ namespace Core.Erp.Data.RRHH
                         FechaTransac = info.FechaTransac = DateTime.Now
                     };
                     Context.ro_NominasPagosCheques.Add(Entity);
-                    //foreach (var item in info.detalle)
-                    //{
-                    //    ro_NominasPagosCheques_det Entity_ = new ro_NominasPagosCheques_det
-                    //    {
-                    //        IdEmpresa = item.IdEmpresa,
-                    //        IdTransaccion = item.IdTransaccion = info.IdTransaccion,
-                    //        IdSucursal = item.IdSucursal,
-                    //        IdEmpleado = item.IdEmpleado,
-                    //        Valor = item.Valor,
-                    //        pagacheque = item.pagacheque,
-                    //        Secuencia = secuencia
-                    //    };
-                    //    Context.ro_NominasPagosCheques_det.Add(Entity_);
-                    //    secuencia++;
-                    //}
+                    foreach (var item in info.detalle)
+                    {
+                        ro_NominasPagosCheques_det Entity_ = new ro_NominasPagosCheques_det
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdTransaccion = item.IdTransaccion = info.IdTransaccion,
+                            IdSucursal = item.IdSucursal,
+                            IdEmpleado = item.IdEmpleado,
+                            Valor = item.Valor,
+                            Secuencia = secuencia
+                        };
+                        Context.ro_NominasPagosCheques_det.Add(Entity_);
+                        secuencia++;
+                    }
                     Context.SaveChanges();
                 }
                 return true;

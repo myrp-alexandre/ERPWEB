@@ -369,10 +369,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew_ret([ModelBinder(typeof(DevExpressEditorsBinder))]  cp_retencion_det_Info info_det)
         {
+            int IdEmpresa = Convert.ToInt32(string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? "0" : SessionFixed.IdEmpresa);
             cp_codigo_SRI_Info info_codifo_sri = new cp_codigo_SRI_Info();
             List<cp_retencion_det_Info> model = new List<cp_retencion_det_Info>();
-            var lista_cp_codigo_SRI = lst_codigo_retencion.get_list();
-            info_codifo_sri = lista_cp_codigo_SRI.Where(v => v.IdCodigo_SRI == info_det.IdCodigo_SRI).FirstOrDefault();
+            info_codifo_sri = bus_codigo_SRI.get_info(IdEmpresa, info_det.IdCodigo_SRI);
+            
             info_det.re_Porcen_retencion = info_codifo_sri.co_porRetencion;
             if (info_codifo_sri.IdTipoSRI == "COD_RET_IVA")
             {
@@ -418,10 +419,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate_ret([ModelBinder(typeof(DevExpressEditorsBinder))] cp_retencion_det_Info info_det)
         {
+            int IdEmpresa = Convert.ToInt32(string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? "0" : SessionFixed.IdEmpresa);
             cp_codigo_SRI_Info info_codifo_sri = new cp_codigo_SRI_Info();
             List<cp_retencion_det_Info> model = new List<cp_retencion_det_Info>();
-            var lista_cp_codigo_SRI = lst_codigo_retencion.get_list();
-            info_codifo_sri = lista_cp_codigo_SRI.Where(v => v.IdCodigo_SRI == info_det.IdCodigo_SRI).FirstOrDefault();
+            info_codifo_sri = bus_codigo_SRI.get_info(IdEmpresa, info_det.IdCodigo_SRI);
             info_det.re_Porcen_retencion = info_codifo_sri.co_porRetencion;
             if (info_codifo_sri.IdTipoSRI == "COD_RET_IVA")
             {
@@ -650,6 +651,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             cp_retencion_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Idsecuencia == info_det.Idsecuencia).First();
             edited_info.re_Codigo_impuesto = info_det.re_Codigo_impuesto;
             edited_info.IdCodigo_SRI = info_det.IdCodigo_SRI;
+            edited_info.IdCtacble = info_det.IdCtacble;
             edited_info.re_baseRetencion = info_det.re_baseRetencion;
             edited_info.re_Porcen_retencion = info_det.re_Porcen_retencion;
             edited_info.re_valor_retencion = Math.Round((double)info_det.re_valor_retencion, 2, MidpointRounding.AwayFromZero);

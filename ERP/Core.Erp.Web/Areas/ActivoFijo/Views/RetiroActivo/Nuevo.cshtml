@@ -185,36 +185,45 @@
 <script>
     $(function () {
 
-    $("#IdActivoFijo").change(function () {
+        $("#IdActivoFijo").change(function () {
             get_valores();
         });
 
-    function get_valores(){
+        function get_valores() {
 
-        var id = IdActivoFijo.GetValue();
-        var datos = {
-            IdActivoFijo: id
-        }
-    $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("get_valores", "RetiroActivo", new { Area = "ActivoFijo" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-
-                $("#ValorActivo").val(data.v_activo);
-                $("#Valor_Tot_Bajas").val(data.v_baja);
-                $("#Valor_Tot_Mejora").val(data.v_mejora);
-                $("#Valor_Depre_Acu").val(data.v_depr_acum);
-                $("#Valor_Neto").val(data.v_neto);
-
-            },
-            error: function (error) {
+            var id = IdActivoFijo.GetValue();
+            var datos = {
+                IdActivoFijo: id
             }
-        });
-    };
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_valores", "RetiroActivo", new { Area = "ActivoFijo" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    $("#ValorActivo").val(data.v_activo);
+                    $("#Valor_Tot_Bajas").val(data.v_baja);
+                    $("#Valor_Tot_Mejora").val(data.v_mejora);
+                    $("#Valor_Depre_Acu").val(data.v_depr_acum);
+                    $("#Valor_Neto").val(data.v_neto);
+
+                },
+                error: function (error) {
+                }
+            });
+        };
+    });
+
+    function OnSelectedCtaCbleChanged() {
+        GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
+    }
+    function GrupoComboBox_BeginCallback(s, e) {
+        e.customArgs["pre_IdCtaCble"] = GridView_comprobante_detalle.GetEditor("IdCtaCble").GetValue();
+        e.customArgs["pre_fecha"] = moment(Fecha_Retiro.GetDate()).format('DD/MM/YYYY');
+    }
 </script>

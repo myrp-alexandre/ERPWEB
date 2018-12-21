@@ -65,7 +65,7 @@
             column.Width = Unit.Percentage(20);
             column.EditorProperties().ComboBox(p =>
             {
-                p.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "CargarGrupo", TextField = "Descripcion" };
+                p.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "CargarGrupo", Area = "Contabilidad" };
                 p.TextField = "Descripcion";
                 p.ValueField = "IdGrupo";
                 p.ValueType = typeof(int);

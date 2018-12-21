@@ -5,7 +5,7 @@
         settings.Name = "GridViewPartial_facturas_con_saldos";
         settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_facturas_con_saldos" };
 
-        settings.KeyFieldName = "IdCbteCble_Ogiro";
+        settings.KeyFieldName = "SecuencialID";
         //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
@@ -14,7 +14,7 @@
         settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
         settings.Settings.ShowFilterRow = true;
         settings.Settings.ShowHeaderFilterButton = true;
-        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
 
 
         //Configuracion responsive

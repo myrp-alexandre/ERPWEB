@@ -46,7 +46,18 @@ namespace Core.Erp.Bus.CuentasPorPagar
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
 
+        public cp_codigo_SRI_Info get_info(int IdEmpresa, int IdCodigoSRI)
+        {
+            try
+            {
+                return odata.get_info(IdEmpresa, IdCodigoSRI);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

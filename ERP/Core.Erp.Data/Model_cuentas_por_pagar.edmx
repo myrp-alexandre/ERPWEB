@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model_cuentas_por_pagar.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model_cuentas_por_pagar.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cp_codigo_SRI">
           <Key>
             <PropertyRef Name="IdCodigo_SRI" />
@@ -237,7 +237,11 @@
           <Property Name="PorIva" Type="float" Nullable="false" />
           <Property Name="ValorIva" Type="float" Nullable="false" />
           <Property Name="Total" Type="float" Nullable="false" />
-          <Property Name="IdCtaCbleGasto" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCbleInv" Type="varchar" MaxLength="20" />
+          <Property Name="IdEmpresa_oc" Type="int" />
+          <Property Name="IdSucursal_oc" Type="int" />
+          <Property Name="IdOrdenCompra" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Secuencia_oc" Type="int" />
         </EntityType>
         <EntityType Name="cp_orden_giro_pagos_sri">
           <Key>
@@ -389,25 +393,6 @@
           <Property Name="Buscar_FactxPagar" Type="char" MaxLength="1" />
           <Property Name="IdCtaCble_Credito" Type="varchar" MaxLength="20" />
           <Property Name="Dispara_Alerta" Type="bit" />
-        </EntityType>
-        <EntityType Name="cp_orden_pago_x_nomina">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdNominaTipo" />
-            <PropertyRef Name="IdNominaTipoLiqui" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdRubro" />
-          </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdNominaTipo" Type="int" Nullable="false" />
-          <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
-          <Property Name="IdPeriodo" Type="int" Nullable="false" />
-          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdRubro" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdEmpresa_op" Type="int" Nullable="false" />
-          <Property Name="IdOrdenPago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Observacion" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="cp_pagos_sri">
           <Key>
@@ -607,8 +592,8 @@
           <Property Name="Codigo_Secuenciales_Transaccion" Type="varchar" MaxLength="250" />
           <Property Name="Sustento_Tributario" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_codigo_SRI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwcp_codigo_SRI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcp_codigo_SRI">
           <Key>
             <PropertyRef Name="IdCodigo_SRI" />
@@ -633,8 +618,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_codigo_SRI' no tiene definida
           <Property Name="IdTipoSRI" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_giro_x_pagar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwcp_orden_giro_x_pagar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcp_orden_giro_x_pagar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -701,8 +686,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_giro_x_pagar' no tiene 
           <Property Name="Valor_cuota" Type="float" />
           <Property Name="IdTipoMovi" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_pago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwcp_orden_pago' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcp_orden_pago">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -742,8 +727,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_pago' no tiene definida
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwcp_nota_DebCre' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwcp_nota_DebCre' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcp_nota_DebCre">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -826,8 +811,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_nota_DebCre' no tiene definid
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="pe_razonSocial" Type="varchar" MaxLength="150" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwcp_orden_giro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwcp_orden_giro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcp_orden_giro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -904,8 +889,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_orden_giro' no tiene definida
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwcp_orden_giro_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwcp_orden_giro_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcp_orden_giro_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -941,11 +926,15 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_orden_giro_det' no tiene defi
           <Property Name="PorIva" Type="float" Nullable="false" />
           <Property Name="ValorIva" Type="float" Nullable="false" />
           <Property Name="Total" Type="float" Nullable="false" />
-          <Property Name="IdCtaCbleGasto" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCbleInv" Type="varchar" MaxLength="20" />
           <Property Name="pr_descripcion" Type="nvarchar" MaxLength="713" />
+          <Property Name="IdEmpresa_oc" Type="int" />
+          <Property Name="IdSucursal_oc" Type="int" />
+          <Property Name="IdOrdenCompra" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Secuencia_oc" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwcp_proveedor_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwcp_proveedor_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcp_proveedor_consulta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -964,8 +953,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_proveedor_consulta' no tiene 
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pr_estado" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwcp_retencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwcp_retencion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcp_retencion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1011,8 +1000,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_retencion' no tiene definida 
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwcp_retencion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwcp_retencion_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1346,20 +1335,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_retencion_det' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_cp_orden_pago_x_nomina_cp_orden_pago">
-          <End Role="cp_orden_pago" Type="Self.cp_orden_pago" Multiplicity="1" />
-          <End Role="cp_orden_pago_x_nomina" Type="Self.cp_orden_pago_x_nomina" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cp_orden_pago">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenPago" />
-            </Principal>
-            <Dependent Role="cp_orden_pago_x_nomina">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenPago" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_cp_proveedor_cp_codigo_SRI">
           <End Role="cp_codigo_SRI" Type="Self.cp_codigo_SRI" Multiplicity="0..1" />
           <End Role="cp_proveedor" Type="Self.cp_proveedor" Multiplicity="*" />
@@ -1501,7 +1476,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_retencion_det' no tiene defin
           <EntitySet Name="cp_orden_pago_formapago" EntityType="Self.cp_orden_pago_formapago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_orden_pago_tipo" EntityType="Self.cp_orden_pago_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_orden_pago_tipo_x_empresa" EntityType="Self.cp_orden_pago_tipo_x_empresa" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="cp_orden_pago_x_nomina" EntityType="Self.cp_orden_pago_x_nomina" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_pagos_sri" EntityType="Self.cp_pagos_sri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_pais_sri" EntityType="Self.cp_pais_sri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_parametros" EntityType="Self.cp_parametros" Schema="dbo" store:Type="Tables" />
@@ -1513,272 +1487,276 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_retencion_det' no tiene defin
           <EntitySet Name="cp_TipoDocumento" EntityType="Self.cp_TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwcp_codigo_SRI" EntityType="Self.vwcp_codigo_SRI" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwcp_codigo_SRI].[IdEmpresa] AS [IdEmpresa], 
-[vwcp_codigo_SRI].[IdCodigo_SRI] AS [IdCodigo_SRI], 
-[vwcp_codigo_SRI].[codigoSRI] AS [codigoSRI], 
-[vwcp_codigo_SRI].[co_codigoBase] AS [co_codigoBase], 
-[vwcp_codigo_SRI].[co_descripcion] AS [co_descripcion], 
-[vwcp_codigo_SRI].[co_porRetencion] AS [co_porRetencion], 
-[vwcp_codigo_SRI].[co_f_valides_desde] AS [co_f_valides_desde], 
-[vwcp_codigo_SRI].[co_f_valides_hasta] AS [co_f_valides_hasta], 
-[vwcp_codigo_SRI].[co_estado] AS [co_estado], 
-[vwcp_codigo_SRI].[IdTipoSRI] AS [IdTipoSRI], 
-[vwcp_codigo_SRI].[IdCtaCble] AS [IdCtaCble]
-FROM [dbo].[vwcp_codigo_SRI] AS [vwcp_codigo_SRI]</DefiningQuery>
+    [vwcp_codigo_SRI].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_codigo_SRI].[IdCodigo_SRI] AS [IdCodigo_SRI], 
+    [vwcp_codigo_SRI].[codigoSRI] AS [codigoSRI], 
+    [vwcp_codigo_SRI].[co_codigoBase] AS [co_codigoBase], 
+    [vwcp_codigo_SRI].[co_descripcion] AS [co_descripcion], 
+    [vwcp_codigo_SRI].[co_porRetencion] AS [co_porRetencion], 
+    [vwcp_codigo_SRI].[co_f_valides_desde] AS [co_f_valides_desde], 
+    [vwcp_codigo_SRI].[co_f_valides_hasta] AS [co_f_valides_hasta], 
+    [vwcp_codigo_SRI].[co_estado] AS [co_estado], 
+    [vwcp_codigo_SRI].[IdTipoSRI] AS [IdTipoSRI], 
+    [vwcp_codigo_SRI].[IdCtaCble] AS [IdCtaCble]
+    FROM [dbo].[vwcp_codigo_SRI] AS [vwcp_codigo_SRI]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_orden_giro_x_pagar" EntityType="Self.vwcp_orden_giro_x_pagar" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwcp_orden_giro_x_pagar].[IdEmpresa] AS [IdEmpresa], 
-[vwcp_orden_giro_x_pagar].[IdCbteCble_Ogiro] AS [IdCbteCble_Ogiro], 
-[vwcp_orden_giro_x_pagar].[IdTipoCbte_Ogiro] AS [IdTipoCbte_Ogiro], 
-[vwcp_orden_giro_x_pagar].[IdOrden_giro_Tipo] AS [IdOrden_giro_Tipo], 
-[vwcp_orden_giro_x_pagar].[IdProveedor] AS [IdProveedor], 
-[vwcp_orden_giro_x_pagar].[co_serie] AS [co_serie], 
-[vwcp_orden_giro_x_pagar].[co_factura] AS [co_factura], 
-[vwcp_orden_giro_x_pagar].[co_FechaFactura] AS [co_FechaFactura], 
-[vwcp_orden_giro_x_pagar].[co_observacion] AS [co_observacion], 
-[vwcp_orden_giro_x_pagar].[IdSucursal] AS [IdSucursal], 
-[vwcp_orden_giro_x_pagar].[co_fechaOg] AS [co_fechaOg], 
-[vwcp_orden_giro_x_pagar].[co_subtotal_iva] AS [co_subtotal_iva], 
-[vwcp_orden_giro_x_pagar].[co_subtotal_siniva] AS [co_subtotal_siniva], 
-[vwcp_orden_giro_x_pagar].[co_baseImponible] AS [co_baseImponible], 
-[vwcp_orden_giro_x_pagar].[co_Por_iva] AS [co_Por_iva], 
-[vwcp_orden_giro_x_pagar].[co_valoriva] AS [co_valoriva], 
-[vwcp_orden_giro_x_pagar].[co_total] AS [co_total], 
-[vwcp_orden_giro_x_pagar].[co_valorpagar] AS [co_valorpagar], 
-[vwcp_orden_giro_x_pagar].[Total_Pagado] AS [Total_Pagado], 
-[vwcp_orden_giro_x_pagar].[Saldo_OG] AS [Saldo_OG], 
-[vwcp_orden_giro_x_pagar].[nom_tipo_Documento] AS [nom_tipo_Documento], 
-[vwcp_orden_giro_x_pagar].[nom_proveedor] AS [nom_proveedor], 
-[vwcp_orden_giro_x_pagar].[CodTipoCbte] AS [CodTipoCbte], 
-[vwcp_orden_giro_x_pagar].[tc_TipoCbte] AS [tc_TipoCbte], 
-[vwcp_orden_giro_x_pagar].[IdTipo_op] AS [IdTipo_op], 
-[vwcp_orden_giro_x_pagar].[IdEstadoAprobacion] AS [IdEstadoAprobacion], 
-[vwcp_orden_giro_x_pagar].[co_FechaFactura_vct] AS [co_FechaFactura_vct], 
-[vwcp_orden_giro_x_pagar].[IdTipoFlujo] AS [IdTipoFlujo], 
-[vwcp_orden_giro_x_pagar].[nom_flujo] AS [nom_flujo], 
-[vwcp_orden_giro_x_pagar].[IdPersona] AS [IdPersona], 
-[vwcp_orden_giro_x_pagar].[cod_Documento] AS [cod_Documento], 
-[vwcp_orden_giro_x_pagar].[Estado] AS [Estado], 
-[vwcp_orden_giro_x_pagar].[en_conci_caja] AS [en_conci_caja], 
-[vwcp_orden_giro_x_pagar].[IdCuota] AS [IdCuota], 
-[vwcp_orden_giro_x_pagar].[Secuencia] AS [Secuencia], 
-[vwcp_orden_giro_x_pagar].[Valor_cuota] AS [Valor_cuota], 
-[vwcp_orden_giro_x_pagar].[IdTipoMovi] AS [IdTipoMovi]
-FROM [dbo].[vwcp_orden_giro_x_pagar] AS [vwcp_orden_giro_x_pagar]</DefiningQuery>
+    [vwcp_orden_giro_x_pagar].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_orden_giro_x_pagar].[IdCbteCble_Ogiro] AS [IdCbteCble_Ogiro], 
+    [vwcp_orden_giro_x_pagar].[IdTipoCbte_Ogiro] AS [IdTipoCbte_Ogiro], 
+    [vwcp_orden_giro_x_pagar].[IdOrden_giro_Tipo] AS [IdOrden_giro_Tipo], 
+    [vwcp_orden_giro_x_pagar].[IdProveedor] AS [IdProveedor], 
+    [vwcp_orden_giro_x_pagar].[co_serie] AS [co_serie], 
+    [vwcp_orden_giro_x_pagar].[co_factura] AS [co_factura], 
+    [vwcp_orden_giro_x_pagar].[co_FechaFactura] AS [co_FechaFactura], 
+    [vwcp_orden_giro_x_pagar].[co_observacion] AS [co_observacion], 
+    [vwcp_orden_giro_x_pagar].[IdSucursal] AS [IdSucursal], 
+    [vwcp_orden_giro_x_pagar].[co_fechaOg] AS [co_fechaOg], 
+    [vwcp_orden_giro_x_pagar].[co_subtotal_iva] AS [co_subtotal_iva], 
+    [vwcp_orden_giro_x_pagar].[co_subtotal_siniva] AS [co_subtotal_siniva], 
+    [vwcp_orden_giro_x_pagar].[co_baseImponible] AS [co_baseImponible], 
+    [vwcp_orden_giro_x_pagar].[co_Por_iva] AS [co_Por_iva], 
+    [vwcp_orden_giro_x_pagar].[co_valoriva] AS [co_valoriva], 
+    [vwcp_orden_giro_x_pagar].[co_total] AS [co_total], 
+    [vwcp_orden_giro_x_pagar].[co_valorpagar] AS [co_valorpagar], 
+    [vwcp_orden_giro_x_pagar].[Total_Pagado] AS [Total_Pagado], 
+    [vwcp_orden_giro_x_pagar].[Saldo_OG] AS [Saldo_OG], 
+    [vwcp_orden_giro_x_pagar].[nom_tipo_Documento] AS [nom_tipo_Documento], 
+    [vwcp_orden_giro_x_pagar].[nom_proveedor] AS [nom_proveedor], 
+    [vwcp_orden_giro_x_pagar].[CodTipoCbte] AS [CodTipoCbte], 
+    [vwcp_orden_giro_x_pagar].[tc_TipoCbte] AS [tc_TipoCbte], 
+    [vwcp_orden_giro_x_pagar].[IdTipo_op] AS [IdTipo_op], 
+    [vwcp_orden_giro_x_pagar].[IdEstadoAprobacion] AS [IdEstadoAprobacion], 
+    [vwcp_orden_giro_x_pagar].[co_FechaFactura_vct] AS [co_FechaFactura_vct], 
+    [vwcp_orden_giro_x_pagar].[IdTipoFlujo] AS [IdTipoFlujo], 
+    [vwcp_orden_giro_x_pagar].[nom_flujo] AS [nom_flujo], 
+    [vwcp_orden_giro_x_pagar].[IdPersona] AS [IdPersona], 
+    [vwcp_orden_giro_x_pagar].[cod_Documento] AS [cod_Documento], 
+    [vwcp_orden_giro_x_pagar].[Estado] AS [Estado], 
+    [vwcp_orden_giro_x_pagar].[en_conci_caja] AS [en_conci_caja], 
+    [vwcp_orden_giro_x_pagar].[IdCuota] AS [IdCuota], 
+    [vwcp_orden_giro_x_pagar].[Secuencia] AS [Secuencia], 
+    [vwcp_orden_giro_x_pagar].[Valor_cuota] AS [Valor_cuota], 
+    [vwcp_orden_giro_x_pagar].[IdTipoMovi] AS [IdTipoMovi]
+    FROM [dbo].[vwcp_orden_giro_x_pagar] AS [vwcp_orden_giro_x_pagar]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_orden_pago" EntityType="Self.vwcp_orden_pago" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-[vwcp_orden_pago].[IdEmpresa] AS [IdEmpresa], 
-[vwcp_orden_pago].[IdOrdenPago] AS [IdOrdenPago], 
-[vwcp_orden_pago].[IdTipo_op] AS [IdTipo_op], 
-[vwcp_orden_pago].[IdTipo_Persona] AS [IdTipo_Persona], 
-[vwcp_orden_pago].[IdPersona] AS [IdPersona], 
-[vwcp_orden_pago].[IdEntidad] AS [IdEntidad], 
-[vwcp_orden_pago].[Fecha] AS [Fecha], 
-[vwcp_orden_pago].[IdEstadoAprobacion] AS [IdEstadoAprobacion], 
-[vwcp_orden_pago].[IdFormaPago] AS [IdFormaPago], 
-[vwcp_orden_pago].[Estado] AS [Estado], 
-[vwcp_orden_pago].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-[vwcp_orden_pago].[Total_OP] AS [Total_OP], 
-[vwcp_orden_pago].[Total_cancelado] AS [Total_cancelado], 
-[vwcp_orden_pago].[Saldo] AS [Saldo], 
-[vwcp_orden_pago].[Observacion] AS [Observacion], 
-[vwcp_orden_pago].[IdTipoFlujo] AS [IdTipoFlujo], 
-[vwcp_orden_pago].[nom_tipoFlujo] AS [nom_tipoFlujo], 
-[vwcp_orden_pago].[EstadoCancelacion] AS [EstadoCancelacion], 
-[vwcp_orden_pago].[Descripcion] AS [Descripcion], 
-[vwcp_orden_pago].[IdSucursal] AS [IdSucursal], 
-[vwcp_orden_pago].[Su_Descripcion] AS [Su_Descripcion]
-FROM [dbo].[vwcp_orden_pago] AS [vwcp_orden_pago]</DefiningQuery>
+    [vwcp_orden_pago].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_orden_pago].[IdOrdenPago] AS [IdOrdenPago], 
+    [vwcp_orden_pago].[IdTipo_op] AS [IdTipo_op], 
+    [vwcp_orden_pago].[IdTipo_Persona] AS [IdTipo_Persona], 
+    [vwcp_orden_pago].[IdPersona] AS [IdPersona], 
+    [vwcp_orden_pago].[IdEntidad] AS [IdEntidad], 
+    [vwcp_orden_pago].[Fecha] AS [Fecha], 
+    [vwcp_orden_pago].[IdEstadoAprobacion] AS [IdEstadoAprobacion], 
+    [vwcp_orden_pago].[IdFormaPago] AS [IdFormaPago], 
+    [vwcp_orden_pago].[Estado] AS [Estado], 
+    [vwcp_orden_pago].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwcp_orden_pago].[Total_OP] AS [Total_OP], 
+    [vwcp_orden_pago].[Total_cancelado] AS [Total_cancelado], 
+    [vwcp_orden_pago].[Saldo] AS [Saldo], 
+    [vwcp_orden_pago].[Observacion] AS [Observacion], 
+    [vwcp_orden_pago].[IdTipoFlujo] AS [IdTipoFlujo], 
+    [vwcp_orden_pago].[nom_tipoFlujo] AS [nom_tipoFlujo], 
+    [vwcp_orden_pago].[EstadoCancelacion] AS [EstadoCancelacion], 
+    [vwcp_orden_pago].[Descripcion] AS [Descripcion], 
+    [vwcp_orden_pago].[IdSucursal] AS [IdSucursal], 
+    [vwcp_orden_pago].[Su_Descripcion] AS [Su_Descripcion]
+    FROM [dbo].[vwcp_orden_pago] AS [vwcp_orden_pago]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_nota_DebCre" EntityType="Self.vwcp_nota_DebCre" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwcp_nota_DebCre].[IdEmpresa] AS [IdEmpresa], 
-[vwcp_nota_DebCre].[IdCbteCble_Nota] AS [IdCbteCble_Nota], 
-[vwcp_nota_DebCre].[IdTipoCbte_Nota] AS [IdTipoCbte_Nota], 
-[vwcp_nota_DebCre].[DebCre] AS [DebCre], 
-[vwcp_nota_DebCre].[IdTipoNota] AS [IdTipoNota], 
-[vwcp_nota_DebCre].[IdProveedor] AS [IdProveedor], 
-[vwcp_nota_DebCre].[IdSucursal] AS [IdSucursal], 
-[vwcp_nota_DebCre].[cn_fecha] AS [cn_fecha], 
-[vwcp_nota_DebCre].[Fecha_contable] AS [Fecha_contable], 
-[vwcp_nota_DebCre].[cn_Fecha_vcto] AS [cn_Fecha_vcto], 
-[vwcp_nota_DebCre].[cn_serie1] AS [cn_serie1], 
-[vwcp_nota_DebCre].[cn_serie2] AS [cn_serie2], 
-[vwcp_nota_DebCre].[cn_Nota] AS [cn_Nota], 
-[vwcp_nota_DebCre].[cn_observacion] AS [cn_observacion], 
-[vwcp_nota_DebCre].[cn_subtotal_iva] AS [cn_subtotal_iva], 
-[vwcp_nota_DebCre].[cn_subtotal_siniva] AS [cn_subtotal_siniva], 
-[vwcp_nota_DebCre].[cn_baseImponible] AS [cn_baseImponible], 
-[vwcp_nota_DebCre].[cn_Por_iva] AS [cn_Por_iva], 
-[vwcp_nota_DebCre].[cn_valoriva] AS [cn_valoriva], 
-[vwcp_nota_DebCre].[cn_Ice_base] AS [cn_Ice_base], 
-[vwcp_nota_DebCre].[cn_Ice_por] AS [cn_Ice_por], 
-[vwcp_nota_DebCre].[cn_Ice_valor] AS [cn_Ice_valor], 
-[vwcp_nota_DebCre].[cn_Serv_por] AS [cn_Serv_por], 
-[vwcp_nota_DebCre].[cn_Serv_valor] AS [cn_Serv_valor], 
-[vwcp_nota_DebCre].[cn_BaseSeguro] AS [cn_BaseSeguro], 
-[vwcp_nota_DebCre].[cn_total] AS [cn_total], 
-[vwcp_nota_DebCre].[cn_vaCoa] AS [cn_vaCoa], 
-[vwcp_nota_DebCre].[cn_Autorizacion] AS [cn_Autorizacion], 
-[vwcp_nota_DebCre].[cn_Autorizacion_Imprenta] AS [cn_Autorizacion_Imprenta], 
-[vwcp_nota_DebCre].[cn_num_doc_modificado] AS [cn_num_doc_modificado], 
-[vwcp_nota_DebCre].[IdCod_ICE] AS [IdCod_ICE], 
-[vwcp_nota_DebCre].[IdTipoServicio] AS [IdTipoServicio], 
-[vwcp_nota_DebCre].[IdIden_credito] AS [IdIden_credito], 
-[vwcp_nota_DebCre].[IdCtaCble_Acre] AS [IdCtaCble_Acre], 
-[vwcp_nota_DebCre].[IdCtaCble_IVA] AS [IdCtaCble_IVA], 
-[vwcp_nota_DebCre].[Estado] AS [Estado], 
-[vwcp_nota_DebCre].[IdCbteCble_Anulacion] AS [IdCbteCble_Anulacion], 
-[vwcp_nota_DebCre].[IdTipoCbte_Anulacion] AS [IdTipoCbte_Anulacion], 
-[vwcp_nota_DebCre].[cn_tipoLocacion] AS [cn_tipoLocacion], 
-[vwcp_nota_DebCre].[cod_nota] AS [cod_nota], 
-[vwcp_nota_DebCre].[fecha_autorizacion] AS [fecha_autorizacion], 
-[vwcp_nota_DebCre].[PagoSujetoRetencion] AS [PagoSujetoRetencion], 
-[vwcp_nota_DebCre].[ConvenioTributacion] AS [ConvenioTributacion], 
-[vwcp_nota_DebCre].[PaisPago] AS [PaisPago], 
-[vwcp_nota_DebCre].[PagoLocExt] AS [PagoLocExt], 
-[vwcp_nota_DebCre].[IdCentroCosto] AS [IdCentroCosto], 
-[vwcp_nota_DebCre].[IdTipoFlujo] AS [IdTipoFlujo], 
-[vwcp_nota_DebCre].[pe_apellido] AS [pe_apellido], 
-[vwcp_nota_DebCre].[pe_nombre] AS [pe_nombre], 
-[vwcp_nota_DebCre].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-[vwcp_nota_DebCre].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-[vwcp_nota_DebCre].[pe_razonSocial] AS [pe_razonSocial]
-FROM [web].[vwcp_nota_DebCre] AS [vwcp_nota_DebCre]</DefiningQuery>
+    [vwcp_nota_DebCre].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_nota_DebCre].[IdCbteCble_Nota] AS [IdCbteCble_Nota], 
+    [vwcp_nota_DebCre].[IdTipoCbte_Nota] AS [IdTipoCbte_Nota], 
+    [vwcp_nota_DebCre].[DebCre] AS [DebCre], 
+    [vwcp_nota_DebCre].[IdTipoNota] AS [IdTipoNota], 
+    [vwcp_nota_DebCre].[IdProveedor] AS [IdProveedor], 
+    [vwcp_nota_DebCre].[IdSucursal] AS [IdSucursal], 
+    [vwcp_nota_DebCre].[cn_fecha] AS [cn_fecha], 
+    [vwcp_nota_DebCre].[Fecha_contable] AS [Fecha_contable], 
+    [vwcp_nota_DebCre].[cn_Fecha_vcto] AS [cn_Fecha_vcto], 
+    [vwcp_nota_DebCre].[cn_serie1] AS [cn_serie1], 
+    [vwcp_nota_DebCre].[cn_serie2] AS [cn_serie2], 
+    [vwcp_nota_DebCre].[cn_Nota] AS [cn_Nota], 
+    [vwcp_nota_DebCre].[cn_observacion] AS [cn_observacion], 
+    [vwcp_nota_DebCre].[cn_subtotal_iva] AS [cn_subtotal_iva], 
+    [vwcp_nota_DebCre].[cn_subtotal_siniva] AS [cn_subtotal_siniva], 
+    [vwcp_nota_DebCre].[cn_baseImponible] AS [cn_baseImponible], 
+    [vwcp_nota_DebCre].[cn_Por_iva] AS [cn_Por_iva], 
+    [vwcp_nota_DebCre].[cn_valoriva] AS [cn_valoriva], 
+    [vwcp_nota_DebCre].[cn_Ice_base] AS [cn_Ice_base], 
+    [vwcp_nota_DebCre].[cn_Ice_por] AS [cn_Ice_por], 
+    [vwcp_nota_DebCre].[cn_Ice_valor] AS [cn_Ice_valor], 
+    [vwcp_nota_DebCre].[cn_Serv_por] AS [cn_Serv_por], 
+    [vwcp_nota_DebCre].[cn_Serv_valor] AS [cn_Serv_valor], 
+    [vwcp_nota_DebCre].[cn_BaseSeguro] AS [cn_BaseSeguro], 
+    [vwcp_nota_DebCre].[cn_total] AS [cn_total], 
+    [vwcp_nota_DebCre].[cn_vaCoa] AS [cn_vaCoa], 
+    [vwcp_nota_DebCre].[cn_Autorizacion] AS [cn_Autorizacion], 
+    [vwcp_nota_DebCre].[cn_Autorizacion_Imprenta] AS [cn_Autorizacion_Imprenta], 
+    [vwcp_nota_DebCre].[cn_num_doc_modificado] AS [cn_num_doc_modificado], 
+    [vwcp_nota_DebCre].[IdCod_ICE] AS [IdCod_ICE], 
+    [vwcp_nota_DebCre].[IdTipoServicio] AS [IdTipoServicio], 
+    [vwcp_nota_DebCre].[IdIden_credito] AS [IdIden_credito], 
+    [vwcp_nota_DebCre].[IdCtaCble_Acre] AS [IdCtaCble_Acre], 
+    [vwcp_nota_DebCre].[IdCtaCble_IVA] AS [IdCtaCble_IVA], 
+    [vwcp_nota_DebCre].[Estado] AS [Estado], 
+    [vwcp_nota_DebCre].[IdCbteCble_Anulacion] AS [IdCbteCble_Anulacion], 
+    [vwcp_nota_DebCre].[IdTipoCbte_Anulacion] AS [IdTipoCbte_Anulacion], 
+    [vwcp_nota_DebCre].[cn_tipoLocacion] AS [cn_tipoLocacion], 
+    [vwcp_nota_DebCre].[cod_nota] AS [cod_nota], 
+    [vwcp_nota_DebCre].[fecha_autorizacion] AS [fecha_autorizacion], 
+    [vwcp_nota_DebCre].[PagoSujetoRetencion] AS [PagoSujetoRetencion], 
+    [vwcp_nota_DebCre].[ConvenioTributacion] AS [ConvenioTributacion], 
+    [vwcp_nota_DebCre].[PaisPago] AS [PaisPago], 
+    [vwcp_nota_DebCre].[PagoLocExt] AS [PagoLocExt], 
+    [vwcp_nota_DebCre].[IdCentroCosto] AS [IdCentroCosto], 
+    [vwcp_nota_DebCre].[IdTipoFlujo] AS [IdTipoFlujo], 
+    [vwcp_nota_DebCre].[pe_apellido] AS [pe_apellido], 
+    [vwcp_nota_DebCre].[pe_nombre] AS [pe_nombre], 
+    [vwcp_nota_DebCre].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwcp_nota_DebCre].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwcp_nota_DebCre].[pe_razonSocial] AS [pe_razonSocial]
+    FROM [web].[vwcp_nota_DebCre] AS [vwcp_nota_DebCre]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_orden_giro" EntityType="Self.vwcp_orden_giro" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwcp_orden_giro].[IdEmpresa] AS [IdEmpresa], 
-[vwcp_orden_giro].[IdCbteCble_Ogiro] AS [IdCbteCble_Ogiro], 
-[vwcp_orden_giro].[IdTipoCbte_Ogiro] AS [IdTipoCbte_Ogiro], 
-[vwcp_orden_giro].[IdOrden_giro_Tipo] AS [IdOrden_giro_Tipo], 
-[vwcp_orden_giro].[IdProveedor] AS [IdProveedor], 
-[vwcp_orden_giro].[co_fechaOg] AS [co_fechaOg], 
-[vwcp_orden_giro].[co_serie] AS [co_serie], 
-[vwcp_orden_giro].[co_factura] AS [co_factura], 
-[vwcp_orden_giro].[co_FechaFactura] AS [co_FechaFactura], 
-[vwcp_orden_giro].[co_FechaContabilizacion] AS [co_FechaContabilizacion], 
-[vwcp_orden_giro].[co_FechaFactura_vct] AS [co_FechaFactura_vct], 
-[vwcp_orden_giro].[co_plazo] AS [co_plazo], 
-[vwcp_orden_giro].[co_observacion] AS [co_observacion], 
-[vwcp_orden_giro].[co_subtotal_iva] AS [co_subtotal_iva], 
-[vwcp_orden_giro].[co_subtotal_siniva] AS [co_subtotal_siniva], 
-[vwcp_orden_giro].[co_baseImponible] AS [co_baseImponible], 
-[vwcp_orden_giro].[co_Por_iva] AS [co_Por_iva], 
-[vwcp_orden_giro].[co_valoriva] AS [co_valoriva], 
-[vwcp_orden_giro].[IdCod_ICE] AS [IdCod_ICE], 
-[vwcp_orden_giro].[co_total] AS [co_total], 
-[vwcp_orden_giro].[co_vaCoa] AS [co_vaCoa], 
-[vwcp_orden_giro].[IdIden_credito] AS [IdIden_credito], 
-[vwcp_orden_giro].[IdCod_101] AS [IdCod_101], 
-[vwcp_orden_giro].[co_valorpagar] AS [co_valorpagar], 
-[vwcp_orden_giro].[IdTipoFlujo] AS [IdTipoFlujo], 
-[vwcp_orden_giro].[IdTipoServicio] AS [IdTipoServicio], 
-[vwcp_orden_giro].[Estado] AS [Estado], 
-[vwcp_orden_giro].[IdSucursal] AS [IdSucursal], 
-[vwcp_orden_giro].[PagoLocExt] AS [PagoLocExt], 
-[vwcp_orden_giro].[PaisPago] AS [PaisPago], 
-[vwcp_orden_giro].[ConvenioTributacion] AS [ConvenioTributacion], 
-[vwcp_orden_giro].[PagoSujetoRetencion] AS [PagoSujetoRetencion], 
-[vwcp_orden_giro].[BseImpNoObjDeIva] AS [BseImpNoObjDeIva], 
-[vwcp_orden_giro].[fecha_autorizacion] AS [fecha_autorizacion], 
-[vwcp_orden_giro].[Num_Autorizacion] AS [Num_Autorizacion], 
-[vwcp_orden_giro].[Num_Autorizacion_Imprenta] AS [Num_Autorizacion_Imprenta], 
-[vwcp_orden_giro].[cp_es_comprobante_electronico] AS [cp_es_comprobante_electronico], 
-[vwcp_orden_giro].[Tipodoc_a_Modificar] AS [Tipodoc_a_Modificar], 
-[vwcp_orden_giro].[estable_a_Modificar] AS [estable_a_Modificar], 
-[vwcp_orden_giro].[ptoEmi_a_Modificar] AS [ptoEmi_a_Modificar], 
-[vwcp_orden_giro].[num_docu_Modificar] AS [num_docu_Modificar], 
-[vwcp_orden_giro].[aut_doc_Modificar] AS [aut_doc_Modificar], 
-[vwcp_orden_giro].[IdTipoMovi] AS [IdTipoMovi], 
-[vwcp_orden_giro].[pe_apellido] AS [pe_apellido], 
-[vwcp_orden_giro].[pe_nombre] AS [pe_nombre], 
-[vwcp_orden_giro].[pe_razonSocial] AS [pe_razonSocial], 
-[vwcp_orden_giro].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-[vwcp_orden_giro].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-[vwcp_orden_giro].[Descripcion] AS [Descripcion]
-FROM [web].[vwcp_orden_giro] AS [vwcp_orden_giro]</DefiningQuery>
+    [vwcp_orden_giro].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_orden_giro].[IdCbteCble_Ogiro] AS [IdCbteCble_Ogiro], 
+    [vwcp_orden_giro].[IdTipoCbte_Ogiro] AS [IdTipoCbte_Ogiro], 
+    [vwcp_orden_giro].[IdOrden_giro_Tipo] AS [IdOrden_giro_Tipo], 
+    [vwcp_orden_giro].[IdProveedor] AS [IdProveedor], 
+    [vwcp_orden_giro].[co_fechaOg] AS [co_fechaOg], 
+    [vwcp_orden_giro].[co_serie] AS [co_serie], 
+    [vwcp_orden_giro].[co_factura] AS [co_factura], 
+    [vwcp_orden_giro].[co_FechaFactura] AS [co_FechaFactura], 
+    [vwcp_orden_giro].[co_FechaContabilizacion] AS [co_FechaContabilizacion], 
+    [vwcp_orden_giro].[co_FechaFactura_vct] AS [co_FechaFactura_vct], 
+    [vwcp_orden_giro].[co_plazo] AS [co_plazo], 
+    [vwcp_orden_giro].[co_observacion] AS [co_observacion], 
+    [vwcp_orden_giro].[co_subtotal_iva] AS [co_subtotal_iva], 
+    [vwcp_orden_giro].[co_subtotal_siniva] AS [co_subtotal_siniva], 
+    [vwcp_orden_giro].[co_baseImponible] AS [co_baseImponible], 
+    [vwcp_orden_giro].[co_Por_iva] AS [co_Por_iva], 
+    [vwcp_orden_giro].[co_valoriva] AS [co_valoriva], 
+    [vwcp_orden_giro].[IdCod_ICE] AS [IdCod_ICE], 
+    [vwcp_orden_giro].[co_total] AS [co_total], 
+    [vwcp_orden_giro].[co_vaCoa] AS [co_vaCoa], 
+    [vwcp_orden_giro].[IdIden_credito] AS [IdIden_credito], 
+    [vwcp_orden_giro].[IdCod_101] AS [IdCod_101], 
+    [vwcp_orden_giro].[co_valorpagar] AS [co_valorpagar], 
+    [vwcp_orden_giro].[IdTipoFlujo] AS [IdTipoFlujo], 
+    [vwcp_orden_giro].[IdTipoServicio] AS [IdTipoServicio], 
+    [vwcp_orden_giro].[Estado] AS [Estado], 
+    [vwcp_orden_giro].[IdSucursal] AS [IdSucursal], 
+    [vwcp_orden_giro].[PagoLocExt] AS [PagoLocExt], 
+    [vwcp_orden_giro].[PaisPago] AS [PaisPago], 
+    [vwcp_orden_giro].[ConvenioTributacion] AS [ConvenioTributacion], 
+    [vwcp_orden_giro].[PagoSujetoRetencion] AS [PagoSujetoRetencion], 
+    [vwcp_orden_giro].[BseImpNoObjDeIva] AS [BseImpNoObjDeIva], 
+    [vwcp_orden_giro].[fecha_autorizacion] AS [fecha_autorizacion], 
+    [vwcp_orden_giro].[Num_Autorizacion] AS [Num_Autorizacion], 
+    [vwcp_orden_giro].[Num_Autorizacion_Imprenta] AS [Num_Autorizacion_Imprenta], 
+    [vwcp_orden_giro].[cp_es_comprobante_electronico] AS [cp_es_comprobante_electronico], 
+    [vwcp_orden_giro].[Tipodoc_a_Modificar] AS [Tipodoc_a_Modificar], 
+    [vwcp_orden_giro].[estable_a_Modificar] AS [estable_a_Modificar], 
+    [vwcp_orden_giro].[ptoEmi_a_Modificar] AS [ptoEmi_a_Modificar], 
+    [vwcp_orden_giro].[num_docu_Modificar] AS [num_docu_Modificar], 
+    [vwcp_orden_giro].[aut_doc_Modificar] AS [aut_doc_Modificar], 
+    [vwcp_orden_giro].[IdTipoMovi] AS [IdTipoMovi], 
+    [vwcp_orden_giro].[pe_apellido] AS [pe_apellido], 
+    [vwcp_orden_giro].[pe_nombre] AS [pe_nombre], 
+    [vwcp_orden_giro].[pe_razonSocial] AS [pe_razonSocial], 
+    [vwcp_orden_giro].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwcp_orden_giro].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwcp_orden_giro].[Descripcion] AS [Descripcion]
+    FROM [web].[vwcp_orden_giro] AS [vwcp_orden_giro]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_orden_giro_det" EntityType="Self.vwcp_orden_giro_det" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwcp_orden_giro_det].[IdEmpresa] AS [IdEmpresa], 
-[vwcp_orden_giro_det].[IdCbteCble_Ogiro] AS [IdCbteCble_Ogiro], 
-[vwcp_orden_giro_det].[IdTipoCbte_Ogiro] AS [IdTipoCbte_Ogiro], 
-[vwcp_orden_giro_det].[Secuencia] AS [Secuencia], 
-[vwcp_orden_giro_det].[IdProducto] AS [IdProducto], 
-[vwcp_orden_giro_det].[IdUnidadMedida] AS [IdUnidadMedida], 
-[vwcp_orden_giro_det].[Cantidad] AS [Cantidad], 
-[vwcp_orden_giro_det].[CostoUni] AS [CostoUni], 
-[vwcp_orden_giro_det].[PorDescuento] AS [PorDescuento], 
-[vwcp_orden_giro_det].[DescuentoUni] AS [DescuentoUni], 
-[vwcp_orden_giro_det].[CostoUniFinal] AS [CostoUniFinal], 
-[vwcp_orden_giro_det].[Subtotal] AS [Subtotal], 
-[vwcp_orden_giro_det].[IdCod_Impuesto_Iva] AS [IdCod_Impuesto_Iva], 
-[vwcp_orden_giro_det].[PorIva] AS [PorIva], 
-[vwcp_orden_giro_det].[ValorIva] AS [ValorIva], 
-[vwcp_orden_giro_det].[Total] AS [Total], 
-[vwcp_orden_giro_det].[IdCtaCbleGasto] AS [IdCtaCbleGasto], 
-[vwcp_orden_giro_det].[pr_descripcion] AS [pr_descripcion]
-FROM [web].[vwcp_orden_giro_det] AS [vwcp_orden_giro_det]</DefiningQuery>
+    [vwcp_orden_giro_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_orden_giro_det].[IdCbteCble_Ogiro] AS [IdCbteCble_Ogiro], 
+    [vwcp_orden_giro_det].[IdTipoCbte_Ogiro] AS [IdTipoCbte_Ogiro], 
+    [vwcp_orden_giro_det].[Secuencia] AS [Secuencia], 
+    [vwcp_orden_giro_det].[IdProducto] AS [IdProducto], 
+    [vwcp_orden_giro_det].[IdUnidadMedida] AS [IdUnidadMedida], 
+    [vwcp_orden_giro_det].[Cantidad] AS [Cantidad], 
+    [vwcp_orden_giro_det].[CostoUni] AS [CostoUni], 
+    [vwcp_orden_giro_det].[PorDescuento] AS [PorDescuento], 
+    [vwcp_orden_giro_det].[DescuentoUni] AS [DescuentoUni], 
+    [vwcp_orden_giro_det].[CostoUniFinal] AS [CostoUniFinal], 
+    [vwcp_orden_giro_det].[Subtotal] AS [Subtotal], 
+    [vwcp_orden_giro_det].[IdCod_Impuesto_Iva] AS [IdCod_Impuesto_Iva], 
+    [vwcp_orden_giro_det].[PorIva] AS [PorIva], 
+    [vwcp_orden_giro_det].[ValorIva] AS [ValorIva], 
+    [vwcp_orden_giro_det].[Total] AS [Total], 
+    [vwcp_orden_giro_det].[IdCtaCbleInv] AS [IdCtaCbleInv], 
+    [vwcp_orden_giro_det].[pr_descripcion] AS [pr_descripcion], 
+    [vwcp_orden_giro_det].[IdEmpresa_oc] AS [IdEmpresa_oc], 
+    [vwcp_orden_giro_det].[IdSucursal_oc] AS [IdSucursal_oc], 
+    [vwcp_orden_giro_det].[IdOrdenCompra] AS [IdOrdenCompra], 
+    [vwcp_orden_giro_det].[Secuencia_oc] AS [Secuencia_oc]
+    FROM [web].[vwcp_orden_giro_det] AS [vwcp_orden_giro_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_proveedor_consulta" EntityType="Self.vwcp_proveedor_consulta" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwcp_proveedor_consulta].[IdEmpresa] AS [IdEmpresa], 
-[vwcp_proveedor_consulta].[IdProveedor] AS [IdProveedor], 
-[vwcp_proveedor_consulta].[pr_codigo] AS [pr_codigo], 
-[vwcp_proveedor_consulta].[IdPersona] AS [IdPersona], 
-[vwcp_proveedor_consulta].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-[vwcp_proveedor_consulta].[IdClaseProveedor] AS [IdClaseProveedor], 
-[vwcp_proveedor_consulta].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-[vwcp_proveedor_consulta].[pr_estado] AS [pr_estado]
-FROM [web].[vwcp_proveedor_consulta] AS [vwcp_proveedor_consulta]</DefiningQuery>
+    [vwcp_proveedor_consulta].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_proveedor_consulta].[IdProveedor] AS [IdProveedor], 
+    [vwcp_proveedor_consulta].[pr_codigo] AS [pr_codigo], 
+    [vwcp_proveedor_consulta].[IdPersona] AS [IdPersona], 
+    [vwcp_proveedor_consulta].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwcp_proveedor_consulta].[IdClaseProveedor] AS [IdClaseProveedor], 
+    [vwcp_proveedor_consulta].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwcp_proveedor_consulta].[pr_estado] AS [pr_estado]
+    FROM [web].[vwcp_proveedor_consulta] AS [vwcp_proveedor_consulta]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_retencion" EntityType="Self.vwcp_retencion" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwcp_retencion].[IdEmpresa] AS [IdEmpresa], 
-[vwcp_retencion].[IdRetencion] AS [IdRetencion], 
-[vwcp_retencion].[CodDocumentoTipo] AS [CodDocumentoTipo], 
-[vwcp_retencion].[serie1] AS [serie1], 
-[vwcp_retencion].[serie2] AS [serie2], 
-[vwcp_retencion].[NumRetencion] AS [NumRetencion], 
-[vwcp_retencion].[NAutorizacion] AS [NAutorizacion], 
-[vwcp_retencion].[Fecha_Autorizacion] AS [Fecha_Autorizacion], 
-[vwcp_retencion].[fecha] AS [fecha], 
-[vwcp_retencion].[observacion] AS [observacion], 
-[vwcp_retencion].[re_Tiene_RTiva] AS [re_Tiene_RTiva], 
-[vwcp_retencion].[co_serie] AS [co_serie], 
-[vwcp_retencion].[co_factura] AS [co_factura], 
-[vwcp_retencion].[co_subtotal_iva] AS [co_subtotal_iva], 
-[vwcp_retencion].[co_subtotal_siniva] AS [co_subtotal_siniva], 
-[vwcp_retencion].[co_baseImponible] AS [co_baseImponible], 
-[vwcp_retencion].[co_valoriva] AS [co_valoriva], 
-[vwcp_retencion].[pe_apellido] AS [pe_apellido], 
-[vwcp_retencion].[pe_nombre] AS [pe_nombre], 
-[vwcp_retencion].[pe_razonSocial] AS [pe_razonSocial], 
-[vwcp_retencion].[re_Tiene_RFuente] AS [re_Tiene_RFuente], 
-[vwcp_retencion].[ct_IdTipoCbte] AS [ct_IdTipoCbte], 
-[vwcp_retencion].[ct_IdCbteCble] AS [ct_IdCbteCble], 
-[vwcp_retencion].[IdProveedor] AS [IdProveedor], 
-[vwcp_retencion].[Estado] AS [Estado], 
-[vwcp_retencion].[pe_nombreCompleto] AS [pe_nombreCompleto]
-FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
+    [vwcp_retencion].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_retencion].[IdRetencion] AS [IdRetencion], 
+    [vwcp_retencion].[CodDocumentoTipo] AS [CodDocumentoTipo], 
+    [vwcp_retencion].[serie1] AS [serie1], 
+    [vwcp_retencion].[serie2] AS [serie2], 
+    [vwcp_retencion].[NumRetencion] AS [NumRetencion], 
+    [vwcp_retencion].[NAutorizacion] AS [NAutorizacion], 
+    [vwcp_retencion].[Fecha_Autorizacion] AS [Fecha_Autorizacion], 
+    [vwcp_retencion].[fecha] AS [fecha], 
+    [vwcp_retencion].[observacion] AS [observacion], 
+    [vwcp_retencion].[re_Tiene_RTiva] AS [re_Tiene_RTiva], 
+    [vwcp_retencion].[co_serie] AS [co_serie], 
+    [vwcp_retencion].[co_factura] AS [co_factura], 
+    [vwcp_retencion].[co_subtotal_iva] AS [co_subtotal_iva], 
+    [vwcp_retencion].[co_subtotal_siniva] AS [co_subtotal_siniva], 
+    [vwcp_retencion].[co_baseImponible] AS [co_baseImponible], 
+    [vwcp_retencion].[co_valoriva] AS [co_valoriva], 
+    [vwcp_retencion].[pe_apellido] AS [pe_apellido], 
+    [vwcp_retencion].[pe_nombre] AS [pe_nombre], 
+    [vwcp_retencion].[pe_razonSocial] AS [pe_razonSocial], 
+    [vwcp_retencion].[re_Tiene_RFuente] AS [re_Tiene_RFuente], 
+    [vwcp_retencion].[ct_IdTipoCbte] AS [ct_IdTipoCbte], 
+    [vwcp_retencion].[ct_IdCbteCble] AS [ct_IdCbteCble], 
+    [vwcp_retencion].[IdProveedor] AS [IdProveedor], 
+    [vwcp_retencion].[Estado] AS [Estado], 
+    [vwcp_retencion].[pe_nombreCompleto] AS [pe_nombreCompleto]
+    FROM [web].[vwcp_retencion] AS [vwcp_retencion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_retencion_det" EntityType="Self.vwcp_retencion_det" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-[vwcp_retencion_det].[IdEmpresa] AS [IdEmpresa], 
-[vwcp_retencion_det].[IdRetencion] AS [IdRetencion], 
-[vwcp_retencion_det].[Idsecuencia] AS [Idsecuencia], 
-[vwcp_retencion_det].[re_tipoRet] AS [re_tipoRet], 
-[vwcp_retencion_det].[re_baseRetencion] AS [re_baseRetencion], 
-[vwcp_retencion_det].[IdCodigo_SRI] AS [IdCodigo_SRI], 
-[vwcp_retencion_det].[re_Codigo_impuesto] AS [re_Codigo_impuesto], 
-[vwcp_retencion_det].[re_Porcen_retencion] AS [re_Porcen_retencion], 
-[vwcp_retencion_det].[re_valor_retencion] AS [re_valor_retencion], 
-[vwcp_retencion_det].[re_estado] AS [re_estado], 
-[vwcp_retencion_det].[IdCtaCble] AS [IdCtaCble]
-FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
+    [vwcp_retencion_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_retencion_det].[IdRetencion] AS [IdRetencion], 
+    [vwcp_retencion_det].[Idsecuencia] AS [Idsecuencia], 
+    [vwcp_retencion_det].[re_tipoRet] AS [re_tipoRet], 
+    [vwcp_retencion_det].[re_baseRetencion] AS [re_baseRetencion], 
+    [vwcp_retencion_det].[IdCodigo_SRI] AS [IdCodigo_SRI], 
+    [vwcp_retencion_det].[re_Codigo_impuesto] AS [re_Codigo_impuesto], 
+    [vwcp_retencion_det].[re_Porcen_retencion] AS [re_Porcen_retencion], 
+    [vwcp_retencion_det].[re_valor_retencion] AS [re_valor_retencion], 
+    [vwcp_retencion_det].[re_estado] AS [re_estado], 
+    [vwcp_retencion_det].[IdCtaCble] AS [IdCtaCble]
+    FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_cp_codigo_SRI_cp_codigo_SRI_tipo" Association="Self.FK_cp_codigo_SRI_cp_codigo_SRI_tipo">
             <End Role="cp_codigo_SRI_tipo" EntitySet="cp_codigo_SRI_tipo" />
@@ -1871,10 +1849,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <AssociationSet Name="FK_cp_orden_pago_tipo_x_empresa_cp_orden_pago_tipo" Association="Self.FK_cp_orden_pago_tipo_x_empresa_cp_orden_pago_tipo">
             <End Role="cp_orden_pago_tipo" EntitySet="cp_orden_pago_tipo" />
             <End Role="cp_orden_pago_tipo_x_empresa" EntitySet="cp_orden_pago_tipo_x_empresa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cp_orden_pago_x_nomina_cp_orden_pago" Association="Self.FK_cp_orden_pago_x_nomina_cp_orden_pago">
-            <End Role="cp_orden_pago" EntitySet="cp_orden_pago" />
-            <End Role="cp_orden_pago_x_nomina" EntitySet="cp_orden_pago_x_nomina" />
           </AssociationSet>
           <AssociationSet Name="FK_cp_proveedor_cp_codigo_SRI" Association="Self.FK_cp_proveedor_cp_codigo_SRI">
             <End Role="cp_codigo_SRI" EntitySet="cp_codigo_SRI" />
@@ -2199,26 +2173,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <Property Name="IdCtaCble_Credito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Dispara_Alerta" Type="Boolean" />
           <NavigationProperty Name="cp_orden_pago_tipo" Relationship="Self.FK_cp_orden_pago_tipo_x_empresa_cp_orden_pago_tipo" FromRole="cp_orden_pago_tipo_x_empresa" ToRole="cp_orden_pago_tipo" />
-        </EntityType>
-        <EntityType Name="cp_orden_pago_x_nomina">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdNominaTipo" />
-            <PropertyRef Name="IdNominaTipoLiqui" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdRubro" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdRubro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdEmpresa_op" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenPago" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="cp_orden_pago" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_x_nomina_cp_orden_pago" FromRole="cp_orden_pago_x_nomina" ToRole="cp_orden_pago" />
         </EntityType>
         <EntityType Name="cp_pagos_sri">
           <Key>
@@ -2679,7 +2633,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <EntitySet Name="cp_orden_pago_formapago" EntityType="Self.cp_orden_pago_formapago" />
           <EntitySet Name="cp_orden_pago_tipo" EntityType="Self.cp_orden_pago_tipo" />
           <EntitySet Name="cp_orden_pago_tipo_x_empresa" EntityType="Self.cp_orden_pago_tipo_x_empresa" />
-          <EntitySet Name="cp_orden_pago_x_nomina" EntityType="Self.cp_orden_pago_x_nomina" />
           <EntitySet Name="cp_pagos_sri" EntityType="Self.cp_pagos_sri" />
           <EntitySet Name="cp_pais_sri" EntityType="Self.cp_pais_sri" />
           <EntitySet Name="cp_proveedor" EntityType="Self.cp_proveedor" />
@@ -2786,9 +2739,7 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           </AssociationSet>
           <EntitySet Name="vwcp_orden_giro" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro" />
           <EntitySet Name="vwcp_orden_giro_x_pagar" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_x_pagar" />
-          <EntitySet Name="cp_orden_giro_det" EntityType="Model_cuentas_por_pagar.cp_orden_giro_det" />
           <EntitySet Name="cp_orden_giro_x_in_Ing_Egr_Inven" EntityType="Model_cuentas_por_pagar.cp_orden_giro_x_in_Ing_Egr_Inven" />
-          <EntitySet Name="vwcp_orden_giro_det" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_det" />
           <EntitySet Name="cp_parametros" EntityType="Model_cuentas_por_pagar.cp_parametros" />
           <EntitySet Name="vwcp_retencion_det" EntityType="Model_cuentas_por_pagar.vwcp_retencion_det" />
           <EntitySet Name="vwcp_retencion" EntityType="Model_cuentas_por_pagar.vwcp_retencion" />
@@ -2812,10 +2763,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <AssociationSet Name="FK_cp_orden_giro_cp_proveedor" Association="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_proveedor">
             <End Role="cp_proveedor" EntitySet="cp_proveedor" />
             <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cp_orden_giro_det_cp_orden_giro" Association="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro">
-            <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
-            <End Role="cp_orden_giro_det" EntitySet="cp_orden_giro_det" />
           </AssociationSet>
           <AssociationSet Name="FK_cp_orden_giro_pagos_sri_cp_orden_giro" Association="Model_cuentas_por_pagar.FK_cp_orden_giro_pagos_sri_cp_orden_giro">
             <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
@@ -2843,9 +2790,11 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
             <End Role="cp_orden_pago" EntitySet="cp_orden_pago" />
             <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
           </AssociationSet>
-          <AssociationSet Name="FK_cp_orden_pago_x_nomina_cp_orden_pago" Association="Model_cuentas_por_pagar.FK_cp_orden_pago_x_nomina_cp_orden_pago">
-            <End Role="cp_orden_pago" EntitySet="cp_orden_pago" />
-            <End Role="cp_orden_pago_x_nomina" EntitySet="cp_orden_pago_x_nomina" />
+          <EntitySet Name="cp_orden_giro_det" EntityType="Model_cuentas_por_pagar.cp_orden_giro_det" />
+          <EntitySet Name="vwcp_orden_giro_det" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_det" />
+          <AssociationSet Name="FK_cp_orden_giro_det_cp_orden_giro" Association="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro">
+            <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
+            <End Role="cp_orden_giro_det" EntitySet="cp_orden_giro_det" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spcp_Get_Data_orden_pago_con_cancelacion_data_Result">
@@ -3182,32 +3131,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <Property Name="Valor_cuota" Type="Double" />
           <Property Name="IdTipoMovi" Type="Int32" />
         </EntityType>
-        <EntityType Name="cp_orden_giro_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCbteCble_Ogiro" />
-            <PropertyRef Name="IdTipoCbte_Ogiro" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdTipoCbte_Ogiro" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Double" Nullable="false" />
-          <Property Name="CostoUni" Type="Double" Nullable="false" />
-          <Property Name="PorDescuento" Type="Double" Nullable="false" />
-          <Property Name="DescuentoUni" Type="Double" Nullable="false" />
-          <Property Name="CostoUniFinal" Type="Double" Nullable="false" />
-          <Property Name="Subtotal" Type="Double" Nullable="false" />
-          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="PorIva" Type="Double" Nullable="false" />
-          <Property Name="ValorIva" Type="Double" Nullable="false" />
-          <Property Name="Total" Type="Double" Nullable="false" />
-          <Property Name="IdCtaCbleGasto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="cp_orden_giro" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro" FromRole="cp_orden_giro_det" ToRole="cp_orden_giro" />
-        </EntityType>
         <EntityType Name="cp_orden_giro_x_in_Ing_Egr_Inven">
           <Key>
             <PropertyRef Name="og_IdEmpresa" />
@@ -3226,44 +3149,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <Property Name="inv_IdMovi_inven_tipo" Type="Int32" Nullable="false" />
           <Property Name="inv_IdNumMovi" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="cp_orden_giro" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_x_in_Ing_Egr_Inven_cp_orden_giro" FromRole="cp_orden_giro_x_in_Ing_Egr_Inven" ToRole="cp_orden_giro" />
-        </EntityType>
-        <EntityType Name="vwcp_orden_giro_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCbteCble_Ogiro" />
-            <PropertyRef Name="IdTipoCbte_Ogiro" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="IdUnidadMedida" />
-            <PropertyRef Name="Cantidad" />
-            <PropertyRef Name="CostoUni" />
-            <PropertyRef Name="PorDescuento" />
-            <PropertyRef Name="DescuentoUni" />
-            <PropertyRef Name="CostoUniFinal" />
-            <PropertyRef Name="Subtotal" />
-            <PropertyRef Name="IdCod_Impuesto_Iva" />
-            <PropertyRef Name="PorIva" />
-            <PropertyRef Name="ValorIva" />
-            <PropertyRef Name="Total" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdTipoCbte_Ogiro" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Double" Nullable="false" />
-          <Property Name="CostoUni" Type="Double" Nullable="false" />
-          <Property Name="PorDescuento" Type="Double" Nullable="false" />
-          <Property Name="DescuentoUni" Type="Double" Nullable="false" />
-          <Property Name="CostoUniFinal" Type="Double" Nullable="false" />
-          <Property Name="Subtotal" Type="Double" Nullable="false" />
-          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="PorIva" Type="Double" Nullable="false" />
-          <Property Name="ValorIva" Type="Double" Nullable="false" />
-          <Property Name="Total" Type="Double" Nullable="false" />
-          <Property Name="IdCtaCbleGasto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pr_descripcion" Type="String" MaxLength="713" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="cp_parametros">
           <Key>
@@ -3420,10 +3305,10 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <NavigationProperty Name="cp_codigo_SRI2" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_codigo_SRI2" FromRole="cp_orden_giro" ToRole="cp_codigo_SRI" />
           <NavigationProperty Name="cp_pais_sri" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_pais_sri" FromRole="cp_orden_giro" ToRole="cp_pais_sri" />
           <NavigationProperty Name="cp_proveedor" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_proveedor" FromRole="cp_orden_giro" ToRole="cp_proveedor" />
-          <NavigationProperty Name="cp_orden_giro_det" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_orden_giro_det" />
           <NavigationProperty Name="cp_orden_giro_pagos_sri" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_pagos_sri_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_orden_giro_pagos_sri" />
           <NavigationProperty Name="cp_orden_giro_x_in_Ing_Egr_Inven" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_x_in_Ing_Egr_Inven_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_orden_giro_x_in_Ing_Egr_Inven" />
           <NavigationProperty Name="cp_retencion" Relationship="Model_cuentas_por_pagar.FK_cp_retencion_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_retencion" />
+          <NavigationProperty Name="cp_orden_giro_det" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_orden_giro_det" />
         </EntityType>
         <Association Name="FK_cp_orden_giro_cp_codigo_SRI">
           <End Type="Model_cuentas_por_pagar.cp_codigo_SRI" Role="cp_codigo_SRI" Multiplicity="0..1" />
@@ -3484,22 +3369,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
             <Dependent Role="cp_orden_giro">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdProveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_cp_orden_giro_det_cp_orden_giro">
-          <End Type="Model_cuentas_por_pagar.cp_orden_giro" Role="cp_orden_giro" Multiplicity="1" />
-          <End Type="Model_cuentas_por_pagar.cp_orden_giro_det" Role="cp_orden_giro_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cp_orden_giro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCbteCble_Ogiro" />
-              <PropertyRef Name="IdTipoCbte_Ogiro" />
-            </Principal>
-            <Dependent Role="cp_orden_giro_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCbteCble_Ogiro" />
-              <PropertyRef Name="IdTipoCbte_Ogiro" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3582,7 +3451,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
           <NavigationProperty Name="cp_orden_pago_formapago" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_formapago" FromRole="cp_orden_pago" ToRole="cp_orden_pago_formapago" />
           <NavigationProperty Name="cp_orden_pago_tipo" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_tipo" FromRole="cp_orden_pago" ToRole="cp_orden_pago_tipo" />
           <NavigationProperty Name="cp_orden_pago_det" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago" FromRole="cp_orden_pago" ToRole="cp_orden_pago_det" />
-          <NavigationProperty Name="cp_orden_pago_x_nomina" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_x_nomina_cp_orden_pago" FromRole="cp_orden_pago" ToRole="cp_orden_pago_x_nomina" />
         </EntityType>
         <EntityType Name="vwcp_orden_pago">
           <Key>
@@ -3661,17 +3529,91 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_cp_orden_pago_x_nomina_cp_orden_pago">
-          <End Type="Model_cuentas_por_pagar.cp_orden_pago" Role="cp_orden_pago" Multiplicity="1" />
-          <End Type="Model_cuentas_por_pagar.cp_orden_pago_x_nomina" Role="cp_orden_pago_x_nomina" Multiplicity="*" />
+        <EntityType Name="cp_orden_giro_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble_Ogiro" />
+            <PropertyRef Name="IdTipoCbte_Ogiro" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipoCbte_Ogiro" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Double" Nullable="false" />
+          <Property Name="CostoUni" Type="Double" Nullable="false" />
+          <Property Name="PorDescuento" Type="Double" Nullable="false" />
+          <Property Name="DescuentoUni" Type="Double" Nullable="false" />
+          <Property Name="CostoUniFinal" Type="Double" Nullable="false" />
+          <Property Name="Subtotal" Type="Double" Nullable="false" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorIva" Type="Double" Nullable="false" />
+          <Property Name="ValorIva" Type="Double" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="IdCtaCbleInv" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_oc" Type="Int32" />
+          <Property Name="IdSucursal_oc" Type="Int32" />
+          <Property Name="IdOrdenCompra" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Secuencia_oc" Type="Int32" />
+          <NavigationProperty Name="cp_orden_giro" Relationship="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro" FromRole="cp_orden_giro_det" ToRole="cp_orden_giro" />
+        </EntityType>
+        <EntityType Name="vwcp_orden_giro_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCbteCble_Ogiro" />
+            <PropertyRef Name="IdTipoCbte_Ogiro" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdUnidadMedida" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="CostoUni" />
+            <PropertyRef Name="PorDescuento" />
+            <PropertyRef Name="DescuentoUni" />
+            <PropertyRef Name="CostoUniFinal" />
+            <PropertyRef Name="Subtotal" />
+            <PropertyRef Name="IdCod_Impuesto_Iva" />
+            <PropertyRef Name="PorIva" />
+            <PropertyRef Name="ValorIva" />
+            <PropertyRef Name="Total" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipoCbte_Ogiro" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUnidadMedida" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Double" Nullable="false" />
+          <Property Name="CostoUni" Type="Double" Nullable="false" />
+          <Property Name="PorDescuento" Type="Double" Nullable="false" />
+          <Property Name="DescuentoUni" Type="Double" Nullable="false" />
+          <Property Name="CostoUniFinal" Type="Double" Nullable="false" />
+          <Property Name="Subtotal" Type="Double" Nullable="false" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorIva" Type="Double" Nullable="false" />
+          <Property Name="ValorIva" Type="Double" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="IdCtaCbleInv" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pr_descripcion" Type="String" MaxLength="713" FixedLength="false" Unicode="true" />
+          <Property Name="IdEmpresa_oc" Type="Int32" />
+          <Property Name="IdSucursal_oc" Type="Int32" />
+          <Property Name="IdOrdenCompra" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Secuencia_oc" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_cp_orden_giro_det_cp_orden_giro">
+          <End Type="Model_cuentas_por_pagar.cp_orden_giro" Role="cp_orden_giro" Multiplicity="1" />
+          <End Type="Model_cuentas_por_pagar.cp_orden_giro_det" Role="cp_orden_giro_det" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="cp_orden_pago">
+            <Principal Role="cp_orden_giro">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenPago" />
+              <PropertyRef Name="IdCbteCble_Ogiro" />
+              <PropertyRef Name="IdTipoCbte_Ogiro" />
             </Principal>
-            <Dependent Role="cp_orden_pago_x_nomina">
+            <Dependent Role="cp_orden_giro_det">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenPago" />
+              <PropertyRef Name="IdCbteCble_Ogiro" />
+              <PropertyRef Name="IdTipoCbte_Ogiro" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3931,21 +3873,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
                 <ScalarProperty Name="Buscar_FactxPagar" ColumnName="Buscar_FactxPagar" />
                 <ScalarProperty Name="IdCtaCble_Credito" ColumnName="IdCtaCble_Credito" />
                 <ScalarProperty Name="Dispara_Alerta" ColumnName="Dispara_Alerta" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="cp_orden_pago_x_nomina">
-            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_orden_pago_x_nomina">
-              <MappingFragment StoreEntitySet="cp_orden_pago_x_nomina">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
-                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-                <ScalarProperty Name="IdEmpresa_op" ColumnName="IdEmpresa_op" />
-                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4391,29 +4318,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="cp_orden_giro_det">
-            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_orden_giro_det">
-              <MappingFragment StoreEntitySet="cp_orden_giro_det">
-                <ScalarProperty Name="IdCtaCbleGasto" ColumnName="IdCtaCbleGasto" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="ValorIva" ColumnName="ValorIva" />
-                <ScalarProperty Name="PorIva" ColumnName="PorIva" />
-                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="CostoUniFinal" ColumnName="CostoUniFinal" />
-                <ScalarProperty Name="DescuentoUni" ColumnName="DescuentoUni" />
-                <ScalarProperty Name="PorDescuento" ColumnName="PorDescuento" />
-                <ScalarProperty Name="CostoUni" ColumnName="CostoUni" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
-                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="cp_orden_giro_x_in_Ing_Egr_Inven">
             <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_orden_giro_x_in_Ing_Egr_Inven">
               <MappingFragment StoreEntitySet="cp_orden_giro_x_in_Ing_Egr_Inven">
@@ -4424,30 +4328,6 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
                 <ScalarProperty Name="og_IdTipoCbte_Ogiro" ColumnName="og_IdTipoCbte_Ogiro" />
                 <ScalarProperty Name="og_IdCbteCble_Ogiro" ColumnName="og_IdCbteCble_Ogiro" />
                 <ScalarProperty Name="og_IdEmpresa" ColumnName="og_IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwcp_orden_giro_det">
-            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_orden_giro_det">
-              <MappingFragment StoreEntitySet="vwcp_orden_giro_det">
-                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
-                <ScalarProperty Name="IdCtaCbleGasto" ColumnName="IdCtaCbleGasto" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="ValorIva" ColumnName="ValorIva" />
-                <ScalarProperty Name="PorIva" ColumnName="PorIva" />
-                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="CostoUniFinal" ColumnName="CostoUniFinal" />
-                <ScalarProperty Name="DescuentoUni" ColumnName="DescuentoUni" />
-                <ScalarProperty Name="PorDescuento" ColumnName="PorDescuento" />
-                <ScalarProperty Name="CostoUni" ColumnName="CostoUni" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
-                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4637,6 +4517,61 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="cp_orden_giro_det">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_orden_giro_det">
+              <MappingFragment StoreEntitySet="cp_orden_giro_det">
+                <ScalarProperty Name="Secuencia_oc" ColumnName="Secuencia_oc" />
+                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
+                <ScalarProperty Name="IdSucursal_oc" ColumnName="IdSucursal_oc" />
+                <ScalarProperty Name="IdEmpresa_oc" ColumnName="IdEmpresa_oc" />
+                <ScalarProperty Name="IdCtaCbleInv" ColumnName="IdCtaCbleInv" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ValorIva" ColumnName="ValorIva" />
+                <ScalarProperty Name="PorIva" ColumnName="PorIva" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="CostoUniFinal" ColumnName="CostoUniFinal" />
+                <ScalarProperty Name="DescuentoUni" ColumnName="DescuentoUni" />
+                <ScalarProperty Name="PorDescuento" ColumnName="PorDescuento" />
+                <ScalarProperty Name="CostoUni" ColumnName="CostoUni" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
+                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcp_orden_giro_det">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_orden_giro_det">
+              <MappingFragment StoreEntitySet="vwcp_orden_giro_det">
+                <ScalarProperty Name="Secuencia_oc" ColumnName="Secuencia_oc" />
+                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
+                <ScalarProperty Name="IdSucursal_oc" ColumnName="IdSucursal_oc" />
+                <ScalarProperty Name="IdEmpresa_oc" ColumnName="IdEmpresa_oc" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdCtaCbleInv" ColumnName="IdCtaCbleInv" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ValorIva" ColumnName="ValorIva" />
+                <ScalarProperty Name="PorIva" ColumnName="PorIva" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="CostoUniFinal" ColumnName="CostoUniFinal" />
+                <ScalarProperty Name="DescuentoUni" ColumnName="DescuentoUni" />
+                <ScalarProperty Name="PorDescuento" ColumnName="PorDescuento" />
+                <ScalarProperty Name="CostoUni" ColumnName="CostoUni" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdUnidadMedida" ColumnName="IdUnidadMedida" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
+                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -4653,7 +4588,7 @@ FROM [web].[vwcp_retencion_det] AS [vwcp_retencion_det]</DefiningQuery>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>

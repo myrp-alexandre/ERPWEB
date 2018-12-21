@@ -21,6 +21,7 @@
     }
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdTipoCbte_Nota)
     @Html.HiddenFor(q => q.IdCbteCble_Nota)
 
     <div class="row">
@@ -72,7 +73,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.cn_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cn_fecha" })
+                        @Html.DevExpress().DateEditFor(q=> q.cn_fecha, settings =>
+                   {
+                       settings.Name = "cn_fecha";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                         @Html.ValidationMessageFor(q => q.cn_fecha, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -84,7 +93,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.TextBoxFor(q => q.Fecha_contable, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_contable" })
+                        @Html.DevExpress().DateEditFor(q=> q.Fecha_contable, settings =>
+                   {
+                       settings.Name = "Fecha_contable";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha_contable, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -308,14 +325,6 @@
 <script>
         ocultar_mostrar_div();
                     $(function () {
-                        //Date picker
-                        $('#cn_fecha').datepicker({
-                            autoclose: true
-                        })
-                        $('#Fecha_contable').datepicker({
-                            autoclose: true
-                        })
-
                         $("#cn_num_doc_modificado").change(function () {
                             rellenar_ceros();
 
@@ -329,13 +338,6 @@
                         });
                     });
 
-                    // funciones calcular total
-                    $("#cn_fecha").change(function () {
-                        var d = new Date($("#cn_fecha").val());
-                        d = moment(d).format("DD/MM/YYYY");
-                        $('#Fecha_contable').datepicker("setDate", moment(d).format("DD/MM/YYYY"));
-
-                    });
                     $("#cn_subtotal_iva").keyup(function () {
 
                         actualizar_valores();
@@ -446,12 +448,14 @@
         else
         {
             var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
                 IdProveedor: IdProveedor.GetValue(),
                 cn_subtotal_iva: $("#cn_subtotal_iva").val(),
                 cn_subtotal_siniva: $("#cn_subtotal_siniva").val(),
                 valoriva: $("#cn_valoriva").val(),
                 total: $("#cn_total").val(),
-                observacion: $("#observacion").val()
+                observacion: $("#observacion").val(),
+                IdTransaccionSession: $("#IdTransaccionSession").val(),
             }
             $.ajax({
                 type: 'POST',

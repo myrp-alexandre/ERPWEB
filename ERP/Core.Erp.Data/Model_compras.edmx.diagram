@@ -28,6 +28,7 @@
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_com_TerminoPago" />
         <AssociationConnector Association="Model_compras.FK_com_ordencompra_local_det_com_ordencompra_local" />
         <EntityTypeShape EntityType="Model_compras.vwcom_ordencompra_local" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="Model_compras.vwcom_ordencompra_local_x_ingresar" Width="1.5" PointX="7.375" PointY="11.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

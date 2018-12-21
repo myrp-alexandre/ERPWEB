@@ -2,6 +2,8 @@
 using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Helps;
 using System;
+using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
@@ -91,4 +93,24 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
     }
+    public class in_presentacion_List
+    {
+        string Variable = "in_presentacion_Info";
+        public List<in_presentacion_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<in_presentacion_Info> list = new List<in_presentacion_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<in_presentacion_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<in_presentacion_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
 }

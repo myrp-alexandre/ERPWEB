@@ -21,97 +21,114 @@
 {
 
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCbteCble_Nota)
     @Html.HiddenFor(q => q.IdTipoCbte_Nota)
 
-    <div class="row">
+<div class="row">
+    <div class="col-md-6">
         <div class="col-md-6">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                </div>
+            <div class="form-group">
+                <label for="IdSucursal">Sucursal*</label>
+                @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdOrden_giro_Tipo">Tipo nota*</label>
-                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "Key", "Value"), new { @class = "form-control", @id = "IdTipoNota" })
-                    @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
-                </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="IdOrden_giro_Tipo">Tipo nota*</label>
+                @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "Key", "Value"), new { @class = "form-control", @id = "IdTipoNota" })
+                @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
             </div>
-            <div class="col-md-11">
-                <div class="form-group">
-                    <label for="IdProveedor">Proveedor*</label>
-                    @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
-                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="col-md-11">
+            <div class="form-group">
+                <label for="IdProveedor">Proveedor*</label>
+                @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
+                @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label for=""></label>
-                    <a type="button" class="btn btn-primary form-control " href="@Url.Action("Nuevo","Proveedor",new { Area = "CuentasPorPagar", IdEmpresa = Model.IdEmpresa },null)" target="_blank">+</a>
+        <div class="col-md-1">
+            <div class="form-group">
+                <label for=""></label>
+                <a type="button" class="btn btn-primary form-control " href="@Url.Action("Nuevo","Proveedor",new { Area = "CuentasPorPagar", IdEmpresa = Model.IdEmpresa },null)" target="_blank">+</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="IdBanco_acreditacion">Tipo flujo</label>
+                @Html.Partial("_CmbFlujo_ND", Model.IdTipoFlujo)
+                @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="cn_fecha">Fecha documentos*</label>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    @Html.DevExpress().DateEditFor(q=> q.cn_fecha, settings =>
+               {
+                   settings.Name = "cn_fecha";
+                   settings.Properties.UseMaskBehavior = true;
+                   settings.Properties.EditFormat = EditFormat.Date;
+                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+               }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.cn_fecha, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdBanco_acreditacion">Tipo flujo</label>
-                    @Html.Partial("_CmbFlujo_ND", Model.IdTipoFlujo)
-                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="Fecha_contable">Fecha contabilización*</label>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    @Html.DevExpress().DateEditFor(q=> q.Fecha_contable, settings =>
+               {
+                   settings.Name = "Fecha_contable";
+                   settings.Properties.UseMaskBehavior = true;
+                   settings.Properties.EditFormat = EditFormat.Date;
+                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+               }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.Fecha_contable, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="cn_fecha">Fecha documentos*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.TextBoxFor(q => q.cn_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "cn_fecha" })
-                        @Html.ValidationMessageFor(q => q.cn_fecha, "", new { @class = "text-danger" })
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="cn_Fecha_vcto">Fecha vencimiento*</label>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="Fecha_contable">Fecha contabilización*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.TextBoxFor(q => q.Fecha_contable, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "Fecha_contable" })
-                        @Html.ValidationMessageFor(q => q.Fecha_contable, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="cn_Fecha_vcto">Fecha vencimiento*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q=> q.cn_Fecha_vcto, settings =>
-                    {
-                        settings.Name = "cn_Fecha_vcto";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.cn_Fecha_vcto, "", new { @class = "text-danger" })
-                    </div>
+                    @Html.DevExpress().DateEditFor(q=> q.cn_Fecha_vcto, settings =>
+                {
+                    settings.Name = "cn_Fecha_vcto";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.cn_Fecha_vcto, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
+</div>
     <div class="row" id="div_tipo">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -308,20 +325,9 @@
 
 
 <script>
-    ocultar_mostrar_div();
-            $(function () {
-                        //Date picker
-                        $('#cn_fecha').datepicker({
-                            autoclose: true
-                        })
-                        $('#Fecha_contable').datepicker({
-                            autoclose: true
-                        })
-                        $('#Fecha_inicio').datepicker({
-                            autoclose: true
-                        })
-
-
+    
+    $(function () {
+        ocultar_mostrar_div();
                         $("#cn_num_doc_modificado").change(function () {
                             rellenar_ceros();
 
@@ -333,13 +339,6 @@
                         $("#IdTipoNota").change(function () {
                             ocultar_mostrar_div();
                         });
-                    });
-
-                    // funciones calcular total
-                    $("#cn_fecha").change(function () {
-                        var d = new Date($("#cn_fecha").val());
-                        $('#Fecha_contable').datepicker("setDate", moment(d).format("DD/MM/YYYY"));
-
                     });
                     $("#cn_subtotal_iva").keyup(function () {
 
@@ -448,12 +447,14 @@
         else
         {
             var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
                 IdProveedor: IdProveedor.GetValue(),
                 cn_subtotal_iva: $("#cn_subtotal_iva").val(),
                 cn_subtotal_siniva: $("#cn_subtotal_siniva").val(),
                 valoriva: $("#cn_valoriva").val(),
                 total: $("#cn_total").val(),
-                observacion: $("#observacion").val()
+                observacion: $("#observacion").val(),
+                IdTransaccionSession: $("#IdTransaccionSession").val(),
             }
             $.ajax({
                 type: 'POST',

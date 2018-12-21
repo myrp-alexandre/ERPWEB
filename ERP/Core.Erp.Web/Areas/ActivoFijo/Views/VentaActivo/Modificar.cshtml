@@ -43,15 +43,15 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.DevExpress().DateEditFor(q=> q.Fecha_Venta, settings =>
-                    {
-                        settings.Name = "Fecha_Venta";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
+                        @Html.DevExpress().DateEditFor(q => q.Fecha_Venta, settings =>
+                   {
+                       settings.Name = "Fecha_Venta";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha_Venta, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -64,23 +64,23 @@
                 <div class="form-group">
                     <label for="IdActivoFijo">Activo fijo*</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdActivoFijo, settings =>
-                         {
-                             settings.Name = "IdActivoFijo";
-                             settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                             settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                             settings.Properties.Columns.Add("IdActivoFijo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                             settings.Properties.Columns.Add("Af_Nombre", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
-                            //Campo ID
-                            settings.Properties.ValueField = "IdActivoFijo";
-                             settings.Properties.ValueType = typeof(int);
-                             settings.Properties.TextField = "Af_Nombre";
-                            //Boton para seleccionar ningun registro
-                            settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                             settings.Properties.NullText = "== Seleccione ==";
-                             settings.Properties.DropDownButton.Enabled = false;
-                             settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                             settings.ReadOnly = true;
-                         }).BindList(ViewBag.lst_fijo).GetHtml()
+               {
+                   settings.Name = "IdActivoFijo";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdActivoFijo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("Af_Nombre", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdActivoFijo";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "Af_Nombre";
+                   //Boton para seleccionar ningun registro
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownButton.Enabled = false;
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.ReadOnly = true;
+               }).BindList(ViewBag.lst_fijo).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdActivoFijo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -199,3 +199,13 @@
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
+}
+    <script>
+            function OnSelectedCtaCbleChanged() {
+        GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
+    }
+    function GrupoComboBox_BeginCallback(s, e) {
+        e.customArgs["pre_IdCtaCble"] = GridView_comprobante_detalle.GetEditor("IdCtaCble").GetValue();
+        e.customArgs["pre_fecha"] = moment(Fecha_Venta.GetDate()).format('DD/MM/YYYY');
+    }
+    </script>

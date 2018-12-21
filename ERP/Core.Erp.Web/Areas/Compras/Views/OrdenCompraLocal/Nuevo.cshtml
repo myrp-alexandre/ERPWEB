@@ -41,14 +41,15 @@
                     @Html.ValidationMessageFor(q => q.IdEstado_cierre, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdMotivo">Motivo</label>
                     @Html.DropDownListFor(q => q.IdMotivo, new SelectList(ViewBag.lst_motivo, "IdMotivo", "Descripcion"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdMotivo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-offset-1 col-md-2">
                 <div class="form-group">
                     <label for="oc_fecha">Fecha*</label>
                     <div class="input-group date">
@@ -68,6 +69,37 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdProveedor">Proveedor*</label>
+                    @Html.Partial("_CmbProveedor_COM", Model.IdProveedor)
+                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+           
+
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdTerminoPago">Termino pago*</label>
+                    @Html.DropDownListFor(q => q.IdTerminoPago, new SelectList(ViewBag.lst_termino, "IdTerminoPago", "Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="oc_plazo">Plazo*</label>
+                    @Html.TextBoxFor(q => q.oc_plazo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.oc_plazo, "", new { @class = "text-danger" })
+                </div>
+            </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="oc_fechaVencimiento">Fecha vencimiento*</label>
@@ -75,31 +107,21 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        @Html.DevExpress().DateEditFor(q=> q.oc_fechaVencimiento, settings =>
-                    {
-                        settings.Name = "oc_fechaVencimiento";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
+                        @Html.DevExpress().DateEditFor(q => q.oc_fechaVencimiento, settings =>
+                   {
+                       settings.Name = "oc_fechaVencimiento";
+                       settings.Properties.UseMaskBehavior = true;
+                       settings.Properties.EditFormat = EditFormat.Date;
+                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   }).GetHtml()
                         @Html.ValidationMessageFor(q => q.oc_fechaVencimiento, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdProveedor">Proveedor*</label>
-                    @Html.Partial("_CmbProveedor_COM", Model.IdProveedor)
-                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
-                </div>
-            </div>
+          
         </div>
     </div>
 
@@ -117,21 +139,6 @@
                     <label for="IdDepartamento">Departamento</label>
                     @Html.DropDownListFor(q => q.IdDepartamento, new SelectList(ViewBag.lst_dep, "IdDepartamento", "nom_departamento"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdDepartamento, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdTerminoPago">Termino pago*</label>
-                    @Html.DropDownListFor(q => q.IdTerminoPago, new SelectList(ViewBag.lst_termino, "IdTerminoPago", "Descripcion"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="oc_plazo">Plazo*</label>
-                    @Html.TextBoxFor(q => q.oc_plazo, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.oc_plazo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
