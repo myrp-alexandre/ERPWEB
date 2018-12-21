@@ -7,22 +7,23 @@
         settings.Width = Unit.Percentage(100);
         //CConfiguracion responsive
 
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.EditForm;
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "NotaCredito", Action = "EditingUpdate_op", Area = "CuentasPorPagar" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "NotaCredito", Action = "EditingDelete_op", Area = "CuentasPorPagar" };
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
-        settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowEditButton = true;
-        settings.CommandColumn.ShowDeleteButton = true;
-
-
+        //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
+        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = false;
 
-        settings.SettingsPager.Visible = true;
-        settings.Settings.ShowGroupPanel = false;
-        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
 
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
@@ -32,68 +33,31 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
 
+        settings.Columns.Add("IdOrdenPago_op", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("Referencia", "# Documento").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdOrdenPago";
-            column.Caption = "ID";
-            column.Width = Unit.Percentage(5);
-
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "Fecha_Fa_Prov";
+            column.Caption = "Fecha";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Nom_Beneficiario";
-            column.Caption = "Beneficiario";
             column.Width = Unit.Percentage(40);
-
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-
+            column.FieldName = "pe_nombreCompleto";
+            column.Caption = "Beneficiario";
         });
-    settings.Columns.Add(column =>
-    {
-        column.FieldName = "Referencia";
-        column.Caption = "Observación";
-        column.Width = Unit.Percentage(40);
-
-        column.EditFormSettings.Visible = DefaultBoolean.False;
-
-    });
-    
         settings.Columns.Add(column =>
-{
-    column.FieldName = "Saldo_x_Pagar_OP";
-    column.Caption = "$Saldo op";
-    column.Width = Unit.Percentage(10);
-    column.EditorProperties().SpinEdit(sp =>
-    {
-        sp.MinValue = 0;
-        sp.MaxValue = 999999999;
-        sp.Width = Unit.Percentage(100);
-        column.PropertiesEdit.DisplayFormatString = "n2";
-
-    });
-    column.EditFormSettings.Visible = DefaultBoolean.False;
-
-});
-
-    settings.Columns.Add(column =>
-    {
-        column.FieldName = "Valor_a_pagar";
-        column.Caption = "$Valor a cancelar";
-        column.Width = Unit.Percentage(10);
-        column.EditorProperties().SpinEdit(sp =>
         {
-            sp.MinValue = 0;
-            sp.MaxValue = 999999999;
-            sp.Width = Unit.Percentage(100);
-            column.PropertiesEdit.DisplayFormatString = "n2";
-
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "MontoAplicado";
+            column.Caption = "Valor aprobado";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
-
-    });
-
-
+        settings.Settings.ShowFooter = true;
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "MontoAplicado");
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
     if (ViewData["EditError"] != null)
     {
