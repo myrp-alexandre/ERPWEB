@@ -1082,6 +1082,7 @@
     <Build Include="dbo\Tables\in_Producto_x_fa_NivelDescuento.sql" />
     <Build Include="dbo\Tables\ro_NominasPagosCheques_det.sql" />
     <Build Include="dbo\Tables\ro_NominasPagosCheques.sql" />
+    <Build Include="dbo\Views\vwpro_Fabricacion.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

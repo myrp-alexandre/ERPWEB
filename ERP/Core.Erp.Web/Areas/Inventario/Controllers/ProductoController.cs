@@ -16,6 +16,8 @@ using Core.Erp.Info.General;
 using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 using Core.Erp.Bus.Facturacion;
 using Core.Erp.Info.Facturacion;
+using System.IO;
+using ExcelDataReader;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
@@ -40,6 +42,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
 
         private string mensaje;
+
+        in_Prod_List Lista_Producto = new in_Prod_List();
+        in_categorias_List Lista_Categoria = new in_categorias_List();
+        in_linea_List Lista_Linea = new in_linea_List();
+        in_grupo_List Lista_Grupo = new in_grupo_List();
+        in_subgrupo_List Lista_Subgrupo = new in_subgrupo_List();
+        in_Marca_List Lista_Marca = new in_Marca_List();
+        in_presentacion_List Lista_Presentacion = new in_presentacion_List();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -701,14 +711,16 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
+     /*   #region Imagen
+
         const string UploadDirectory = "~/Content/imagenes/";
 
         public UploadedFile UploadControlUpload()
         {
             UploadControlExtension.GetUploadedFiles("UploadControl", Producto_imagen.UploadValidationSettings, Producto_imagen.FileUploadComplete);
-            
+
             byte[] model = Producto_imagen.pr_imagen;
-            UploadedFile file=new UploadedFile();
+            UploadedFile file = new UploadedFile();
             return file;
         }
 
@@ -718,8 +730,113 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             byte[] model = Producto_imagen.pr_imagen;
             if (model == null)
                 model = new byte[0];
-            return PartialView("_Producto_imagen",model);
+            return PartialView("_Producto_imagen", model);
         }
+        #endregion*/
+
+
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            in_Producto_Info model = new in_Producto_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(in_Producto_Info model)
+        {
+            try
+            {
+                var ListaCategoria = Lista_Categoria.get_list(model.IdTransaccionSession);
+                var ListaLinea = Lista_Linea.get_list(model.IdTransaccionSession);
+                var ListaGrupo = Lista_Grupo.get_list(model.IdTransaccionSession);
+                var ListaSubgrupo = Lista_Subgrupo.get_list(model.IdTransaccionSession);
+                var ListaPresentacion = Lista_Presentacion.get_list(model.IdTransaccionSession);
+                var ListaMarca = Lista_Marca.get_list(model.IdTransaccionSession);
+                var ListaProducto = Lista_Producto.get_list(model.IdTransaccionSession);
+                
+                if (!bus_producto.GuardarDbImportacion(ListaCategoria, ListaLinea, ListaGrupo, ListaSubgrupo, ListaPresentacion, ListaMarca, ListaProducto))
+                {
+                    ViewBag.mensaje = "Error al importar el archivo";
+                    return View(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.error = ex.Message.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult GridViewPartial_CategoriaPro_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Categoria.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_CategoriaPro_importacion", model);
+        }
+        public ActionResult GridViewPartial_LineaPro_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Linea.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_LineaPro_importacion", model);
+        }
+        public ActionResult GridViewPartial_GrupoPro_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Grupo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_GrupoPro_importacion", model);
+        }
+        public ActionResult GridViewPartial_SubgrupoPro_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Subgrupo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_SubgrupoPro_importacion", model);
+        }
+        public ActionResult GridViewPartial_PresentacionPro_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Presentacion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_PresentacionPro_importacion", model);
+        }
+        public ActionResult GridViewPartial_MarcaPro_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Marca.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_MarcaPro_importacion", model);
+        }
+        public ActionResult GridViewPartial_ProductoPro_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Producto.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ProductoPro_importacion", model);
+        }
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
 
     }
     public class Producto_imagen
@@ -732,14 +849,213 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         };
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
-
             if (e.UploadedFile.IsValid)
             {
                 pr_imagen = e.UploadedFile.FileBytes;
             }
         }
-     }
-    
+    }
+    public class UploadControlSettings
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+
+            in_categorias_List Lista_Categoria = new in_categorias_List();
+            in_linea_List Lista_Linea = new in_linea_List();
+            in_grupo_List Lista_Grupo = new in_grupo_List();
+            in_subgrupo_List Lista_Subgrupo = new in_subgrupo_List();
+            in_presentacion_List Lista_Presentacion = new in_presentacion_List();
+            in_Marca_List Lista_Marca = new in_Marca_List();
+            in_Prod_List Lista_Producto = new in_Prod_List();
+
+            List<in_categorias_Info> ListaCategoria = new List<in_categorias_Info>();
+            List<in_linea_Info> ListaLinea = new List<in_linea_Info>();
+            List<in_grupo_Info> ListaGrupo = new List<in_grupo_Info>();
+            List<in_subgrupo_Info> ListaSubgrupo = new List<in_subgrupo_Info>();
+            List<in_presentacion_Info> ListaPresentacion = new List<in_presentacion_Info>();
+            List<in_Marca_Info> ListaMarca = new List<in_Marca_Info>();
+            List<in_Producto_Info> ListaProducto = new List<in_Producto_Info>();
+
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                #region Categoria                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        in_categorias_Info info = new in_categorias_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdCategoria = Convert.ToString(reader.GetValue(0)),
+                            cod_categoria = reader.GetString(1),
+                            ca_Categoria = reader.GetString(2), 
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+
+                        ListaCategoria.Add(info);
+                    }
+                    else
+                        cont++;
+
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        in_linea_Info info = new in_linea_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdLinea = Convert.ToInt32(reader.GetValue(0)),
+                            cod_linea = Convert.ToString(reader.GetValue(1)),
+                            nom_linea = Convert.ToString(reader.GetValue(2)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        ListaLinea.Add(info);
+                    }
+                    else
+                        cont++;
+
+
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        in_grupo_Info info = new in_grupo_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdLinea = Convert.ToInt32(reader.GetValue(0)),
+                            cod_grupo = Convert.ToString(reader.GetValue(1)),
+                            nom_grupo = Convert.ToString(reader.GetValue(2)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        ListaGrupo.Add(info);
+                    }
+                    else
+                        cont++;
+
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        in_subgrupo_Info info = new in_subgrupo_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdLinea = Convert.ToInt32(reader.GetValue(0)),
+                            cod_subgrupo = Convert.ToString(reader.GetValue(1)),
+                            nom_subgrupo = Convert.ToString(reader.GetValue(2)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        ListaSubgrupo.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                Lista_Categoria.set_list(ListaCategoria, IdTransaccionSession);
+                Lista_Linea.set_list(ListaLinea, IdTransaccionSession);
+                Lista_Grupo.set_list(ListaGrupo, IdTransaccionSession);
+                Lista_Subgrupo.set_list(ListaSubgrupo, IdTransaccionSession);
+
+                #endregion
+
+                cont = 0;
+                //Para avanzar a la siguiente hoja de excel
+                reader.NextResult();
+
+
+                cont = 0;
+                reader.NextResult();
+
+                #region Presentacion                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        in_presentacion_Info info = new in_presentacion_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdPresentacion = Convert.ToString(reader.GetValue(0)),
+                            nom_presentacion = Convert.ToString(reader.GetValue(1))
+                        };
+                        ListaPresentacion.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                Lista_Presentacion.set_list(ListaPresentacion, IdTransaccionSession);
+                #endregion
+
+                cont = 0;
+                reader.NextResult();
+
+                #region Marca                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        in_Marca_Info info = new in_Marca_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdMarca = Convert.ToInt32(reader.GetValue(0)),
+                            Descripcion = Convert.ToString(reader.GetValue(1)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+
+                        ListaMarca.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                Lista_Marca.set_list(ListaMarca, IdTransaccionSession);
+                #endregion
+
+                cont = 0;
+                reader.NextResult();
+
+                #region Producto   
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        in_Producto_Info info = new in_Producto_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdUsuario = SessionFixed.IdUsuario,
+                            IdProducto = Convert.ToInt32(reader.GetValue(0)),
+                            pr_descripcion = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(1))) ? null : Convert.ToString(reader.GetValue(1)),
+                            IdMarca = Convert.ToInt32(reader.GetValue(2)),
+                            IdPresentacion = Convert.ToString(reader.GetValue(3)),
+                            IdCategoria = Convert.ToString(reader.GetValue(4)),
+                            IdLinea = Convert.ToInt32(reader.GetValue(5)),
+                            IdGrupo = Convert.ToInt32(reader.GetValue(6)),
+                            IdSubGrupo = Convert.ToInt32(reader.GetValue(7)),
+                            IdCod_Impuesto_Iva = Convert.ToString(reader.GetValue(8)),
+                            IdUnidadMedida = Convert.ToString(reader.GetValue(9)),
+                            precio_1 = Convert.ToDouble(reader.GetValue(10)),
+                        };
+
+                        ListaProducto.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                Lista_Producto.set_list(ListaProducto, IdTransaccionSession);
+                #endregion
+
+                cont = 0;
+                reader.NextResult();
+
+            }
+        }
+    }
+
     public class in_Producto_Composicion_List
     {
         in_Producto_Bus bus_producto = new in_Producto_Bus();
@@ -917,4 +1233,25 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             list.Remove(list.Where(m => m.Secuencia == secuencia).First());
         }
     }
+
+    public class in_Prod_List
+    {
+        string Variable = "in_Producto_Info";
+        public List<in_Producto_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<in_Producto_Info> list = new List<in_Producto_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<in_Producto_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<in_Producto_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
 }

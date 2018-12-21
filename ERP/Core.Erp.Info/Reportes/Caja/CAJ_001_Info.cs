@@ -29,5 +29,7 @@ namespace Core.Erp.Info.Reportes.Caja
         public string tc_TipoCbte { get; set; }
         public string IdCtaCble { get; set; }
         public string pe_nombreCompleto { get; set; }
+        
+
     }
 }

@@ -158,8 +158,15 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         {
             model.IdUsuario = SessionFixed.IdUsuario;
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
+            if (!ModelState.IsValid)
+            {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos(model.IdEmpresa);
+                return View(model);
+            }
             if (!bus_ordencompra.guardarDB(model))
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }

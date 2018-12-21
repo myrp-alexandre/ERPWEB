@@ -119,6 +119,11 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             {
                 return false;
             }
+            if (i_validar.IdTipoFlujo == null)
+            {
+                mensaje = "El campo tipo flujo es obligatorio";
+                return false;
+            }
             if (i_validar.lst_det_ing.Count == 0)
             {
                 msg = "No ha seleccionado ingresos a ser depositados";

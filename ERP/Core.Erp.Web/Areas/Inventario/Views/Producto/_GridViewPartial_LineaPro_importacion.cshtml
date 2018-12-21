@@ -1,11 +1,11 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_tipocobro";
-        settings.CallbackRouteValues = new { Controller = "TipoCobro", Action = "GridViewPartial_tipocobro" };
-        settings.KeyFieldName = "IdCobro_tipo";
+        settings.Name = "GridViewPartial_LineaPro_importacion";
+        settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "GridViewPartial_LineaPro_importacion" };
         settings.Width = Unit.Percentage(100);
-
+        settings.KeyFieldName = "IdLinea";
+        settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -48,52 +48,11 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        //Evento para pintar de rojo las filas anuladas
-        settings.HtmlRowPrepared = (s, e) =>
-        {
-            if (Convert.ToString(e.GetValue("Estado")) == "I")
-            {
-                e.Row.ForeColor = System.Drawing.Color.Red;
-            }
-        };
-        settings.Columns.Add(c =>
-        {
-            c.Caption = "#";
-            c.SetDataItemTemplateContent(tc =>
-            {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
-                {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa, IdCobro_tipo = DataBinder.Eval(tc.DataItem, "IdCobro_tipo") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa, IdCobro_tipo = DataBinder.Eval(tc.DataItem, "IdCobro_tipo") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                }
-            });
-            c.SetHeaderTemplateContent(tc =>
-            {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
-                );
-            });
-            c.Settings.AllowDragDrop = DefaultBoolean.False;
-            c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(150);
-        });
+        settings.Columns.Add("IdLinea", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("cod_linea", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("nom_linea", "Descripción").Width = Unit.Percentage(70);
 
-        settings.Columns.Add("IdCobro_tipo", "Código").Width = Unit.Percentage(20);
-        settings.Columns.Add("tc_abreviatura", "Abreviatura").Width = Unit.Percentage(20);
-        settings.Columns.Add("tc_descripcion", "Descripción").Width = Unit.Percentage(50);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EstadoBool";
-            column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
-            column.EditorProperties().CheckBox(sp =>
-            {
-
-            });
-        });
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }
 @grid.Bind(Model).GetHtml()
