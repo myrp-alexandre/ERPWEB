@@ -40,5 +40,6 @@ namespace Core.Erp.Data
         public double CantidadIngresada { get; set; }
         public double Saldo { get; set; }
         public string NomUnidadMedida { get; set; }
+        public string IdCtaCtble_Inve { get; set; }
     }
 }

@@ -424,7 +424,6 @@
     <Build Include="dbo\Views\vwfa_ContabilizarNotaCredDeb_x_sucursal.sql" />
     <Build Include="dbo\Views\vwin_Ing_Egr_Inven_det_x_Producto.sql" />
     <Build Include="dbo\Views\vwin_transferencia_x_in_movi_inve_agrupada_para_recosteo.sql" />
-    <Build Include="dbo\Views\vwcom_TerminoPago.sql" />
     <Build Include="dbo\Views\vwin_movi_inve_x_cbteCble_Datos.sql" />
     <Build Include="dbo\Views\vwin_Transferencia_x_Ing_Egr_Inven.sql" />
     <Build Include="dbo\Views\vwfa_creditos_debitos_con_saldo.sql" />
@@ -817,7 +816,6 @@
     <Build Include="dbo\Views\vwin_producto_x_sucursal.sql" />
     <Build Include="dbo\Views\vwin_Presentacion.sql" />
     <Build Include="web\Views\vwfa_guia_remision_det.sql" />
-    <Build Include="dbo\Views\vwcom_Catalogo_IdAuto_numeric.sql" />
     <Build Include="dbo\Views\vwin_prt_transferencia.sql" />
     <Build Include="dbo\Views\vwin_presupuesto.sql" />
     <Build Include="web\Views\vwfa_notaCreDeb.sql" />
@@ -837,27 +835,21 @@
     <Build Include="dbo\Views\vwfa_proforma_det_por_facturar.sql" />
     <Build Include="dbo\Views\vwin_Producto_Marca_Tipo_Categoria.sql" />
     <Build Include="web\Views\VWFAC_007.sql" />
-    <Build Include="dbo\Views\vwcom_EstadoAnulacion.sql" />
     <Build Include="dbo\Views\vwRo_Rubros_x_Empresa.sql" />
     <Build Include="dbo\Views\vwin_Producto_Pedidos_Egresos_x_Bodega.sql" />
     <Build Include="web\Views\VWFAC_008.sql" />
-    <Build Include="dbo\Views\vwcom_EstadoAprob_List_Req.sql" />
     <Build Include="dbo\Views\vwRo_Solicitud_Vacaciones.sql" />
     <Build Include="dbo\Views\vwin_producto_x_tb_bodega_stock_x_lote.sql" />
     <Build Include="dbo\Views\vwin_Producto_Stock.sql" />
     <Build Include="web\Views\VWFAC_008_aplicaciones.sql" />
-    <Build Include="dbo\Views\vwcom_EstadoAprobacion.sql" />
     <Build Include="Fj_servindustrias\Views\vwct_distribucion_gastos_x_periodo_det_para_distribuir.sql" />
     <Build Include="dbo\Views\vwro_Solicitud_Vacaciones_x_empleado.sql" />
     <Build Include="dbo\Views\vwin_Producto_Stock_x_Bodega.sql" />
     <Build Include="web\Views\VWFAC_009.sql" />
-    <Build Include="dbo\Views\vwcom_EstadoAprobacion_sol_compra.sql" />
     <Build Include="dbo\Views\vwin_Producto_Stock_x_producto.sql" />
     <Build Include="web\Views\VWIMP_001.sql" />
-    <Build Include="dbo\Views\vwcom_EstadoRecibido.sql" />
     <Build Include="dbo\Views\vwin_Producto_Stock_x_Sucursal.sql" />
     <Build Include="web\Views\vwimp_gastos_no_asignados.sql" />
-    <Build Include="dbo\Views\vwcom_MotivoRequerimiento.sql" />
     <Build Include="dbo\Views\vwro_TipoContrato.sql" />
     <Build Include="dbo\Views\vwin_producto_Ult_Costo_Hist_x_Bod.sql" />
     <Build Include="web\Views\vwin_Ing_Egr_Inven_det.sql" />
@@ -1083,6 +1075,7 @@
     <Build Include="dbo\Tables\ro_NominasPagosCheques_det.sql" />
     <Build Include="dbo\Tables\ro_NominasPagosCheques.sql" />
     <Build Include="dbo\Views\vwpro_Fabricacion.sql" />
+    <Build Include="dbo\Views\vwcom_ordencompra_local_x_ingresar.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

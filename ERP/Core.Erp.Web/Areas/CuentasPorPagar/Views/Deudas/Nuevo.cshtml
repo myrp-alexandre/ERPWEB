@@ -20,11 +20,11 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
     function MostrarModalOC() {
-        if (IdProveedor.GetValue > 0) {
+        if (IdProveedor.GetValue() > 0) {
             var datos = {
                 IdEmpresa: $("#IdEmpresa").val(),
                 IdSucursal: $("#IdSucursal").val(),
-                IdSucursal: IdProveedor.GetValue(),
+                IdProveedor: IdProveedor.GetValue(),
                 IdTransaccionSession: $("#IdTransaccionSession").val()
             }
             $.ajax({
@@ -74,7 +74,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridView_deuda_det_PorIngresar.PerformCallback();
+                GridView_deuda_det.PerformCallback();
                 $("#ModalOc").modal("hide");
             },
             error: function (error) {
@@ -82,6 +82,35 @@
         });
         $("#btn_guardar").disabled = false;
     }
+    function SetValorRetencion(s, e) {
+        var datos = {
+            IdCodigoSRI: s.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetValorRetencion", "Retencion",new { Area = "CuentasPorPagar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var valor = 0;
+                if (data.IdTipoSRI == "COD_RET_IVA")
+                {
+                    valor = $("#co_valoriva").val();
+                }
+                else
+                {
+                    valor = parseFloat($("#co_subtotal_iva").val()) + parseFloat($("#co_subtotal_siniva").val());
+                }
+                GridViewPartial_retencion_det.GetEditor('re_baseRetencion').SetValue(valor);
+            },
+            error: function (error) {
+            }
+        });
+    };
 </script>
 @using (Html.BeginForm("Nuevo", "Deudas", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -481,7 +510,7 @@
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_detalle">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-12">
+                        <div class="col-md-1">
                             <div class="form-group">
                                 <button type="button" class="btn btn-primary form-control" onclick="MostrarModalOC()" title="Buscar órdenes">
                                     <i class="fa fa-search"></i>
@@ -494,7 +523,7 @@
                     <div class="col-md-12">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="co_observacion">Detalle</label>
+                                <label for="co_observacion"></label>
                                 @Html.Action("GridViewPartial_deudas_det")
                             </div>
                         </div>

@@ -45,6 +45,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string oc_observacion { get; set; }
         public string NomUnidadMedida { get; set; }
         public string SecuencialID { get; set; }
+        public double CantidadIngresada { get; set; }
         #endregion
 
     }

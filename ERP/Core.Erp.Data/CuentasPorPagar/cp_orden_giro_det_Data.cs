@@ -87,7 +87,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                         do_Cantidad = q.do_Cantidad,
                         Saldo = q.Saldo,
                         oc_observacion = q.oc_observacion,
-                        NomUnidadMedida = q.NomUnidadMedida
+                        NomUnidadMedida = q.NomUnidadMedida,
+                        CantidadIngresada = q.CantidadIngresada,
+                        IdCtaCbleInv = q.IdCtaCtble_Inve
                     }).ToList();
                 }
 

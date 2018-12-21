@@ -52,6 +52,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_retencion_det_lst List_cp_retencion_det = new cp_retencion_det_lst();
         cp_retencion_Bus bus_retencion = new cp_retencion_Bus();
         cp_orden_giro_det_PorIngresar_List List_det_PorIngresar = new cp_orden_giro_det_PorIngresar_List();
+        cp_codigo_SRI_Bus bus_sri = new cp_codigo_SRI_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -367,13 +368,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_retencion.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List_retencion.get_list(model.IdTransaccionSession);
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
 
-
+            
             if (model.info_retencion.detalle.Count()>0)
             {
-                var  lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
                 model.info_retencion.detalle.ForEach(item =>
                 {
-                    cp_codigo_SRI_Info info_ = lst_codigo_retencion.Where(v => v.codigoSRI == item.re_Codigo_impuesto).FirstOrDefault();
+                    cp_codigo_SRI_Info info_ = bus_sri.get_info(model.IdEmpresa, item.IdCodigo_SRI);
                     item.IdCodigo_SRI = info_.IdCodigo_SRI;
                     if (info_.IdTipoSRI == "COD_RET_IVA")
                     {
@@ -486,11 +486,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
 
             if (model.info_retencion.detalle.Count() > 0)
-            {
-                var lst_codigo_retencion = Session["lst_codigo_retencion"] as List<cp_codigo_SRI_Info>;
+            {                
                 model.info_retencion.detalle.ForEach(item =>
                 {
-                    cp_codigo_SRI_Info info_ = lst_codigo_retencion.Where(v => v.codigoSRI == item.re_Codigo_impuesto).FirstOrDefault();
+                    cp_codigo_SRI_Info info_ = bus_sri.get_info(model.IdEmpresa, item.IdCodigo_SRI);
                     item.IdCodigo_SRI = info_.IdCodigo_SRI;
                     if (info_.IdTipoSRI == "COD_RET_IVA")
                     {
@@ -788,7 +787,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                         List_det.AddRow(info_add, IdTransaccionSession);
                     }
                 }
-                
             }
             return Json("", JsonRequestBehavior.AllowGet);
         }
@@ -820,7 +818,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
             if (producto != null)
+            {
                 info_det.pr_descripcion = producto.pr_descripcion_combo;
+                info_det.IdCtaCbleInv = producto.IdCtaCtble_Inve;
+            }
 
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -834,7 +835,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             var producto = bus_producto.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdProducto);
             if (producto != null)
+            {
                 info_det.pr_descripcion = producto.pr_descripcion_combo;
+                info_det.IdCtaCbleInv = producto.IdCtaCtble_Inve;
+            }
 
             if (ModelState.IsValid)
                 List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -1075,6 +1079,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     }
     public class cp_orden_giro_det_Info_List
     {
+        in_categorias_Bus bus_categoria = new in_categorias_Bus();
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         string Variable = "cp_orden_giro_det_Info";
         public List<cp_orden_giro_det_Info> get_list(decimal IdTransaccionSession)
@@ -1107,6 +1112,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 info_det.PorIva = 0;
             info_det.ValorIva = Math.Round(info_det.Subtotal * (info_det.PorIva / 100), 2, MidpointRounding.AwayFromZero);
             info_det.Total = Math.Round(info_det.Subtotal + info_det.ValorIva,2,MidpointRounding.AwayFromZero);
+            
             list.Add(info_det);
         }
 
@@ -1130,7 +1136,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 edited_info.PorIva = 0;
             edited_info.ValorIva = Math.Round(edited_info.Subtotal * (edited_info.PorIva / 100), 2, MidpointRounding.AwayFromZero);
             edited_info.Total = Math.Round(edited_info.Subtotal + edited_info.ValorIva, 2, MidpointRounding.AwayFromZero);
-
+            edited_info.IdCtaCbleInv = info_det.IdCtaCbleInv;
 
         }
 
