@@ -115,6 +115,14 @@
         GridView_comprobante_detalle.PerformCallback();
         GridView_DebitoBanco_op.PerformCallback();
     }
+
+    function OnSelectedCtaCbleChanged() {
+        GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
+    }
+    function GrupoComboBox_BeginCallback(s, e) {
+        e.customArgs["pre_IdCtaCble"] = GridView_comprobante_detalle.GetEditor("IdCtaCble").GetValue();
+        e.customArgs["pre_fecha"] = moment(cb_Fecha.GetDate()).format('DD/MM/YYYY');
+    }
 </script>
 
 @using (Html.BeginForm("Nuevo", "NotaDeDebitoBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
@@ -266,7 +274,8 @@
             </div>
 
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_diario">
-                @Html.Action("GridViewPartial_comprobante_detalle_Credito", new { Area = "Banco", Controller = "NotaDeCreditoBanco" })
+                @*@Html.Action("GridViewPartial_comprobante_detalle_Credito", new { Area = "Banco", Controller = "NotaDeCreditoBanco" })*@
+                @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
             </div>
         </div>
     </div>
