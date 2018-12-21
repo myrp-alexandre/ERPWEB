@@ -80,7 +80,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdGrupoCble">Grupo contable</label>
-                    @Html.DropDownListFor(q => q.IdGrupoCble, new SelectList(ViewBag.lst_grupo_contabe, "IdGrupoCble", "gc_GrupoCble"), new { @class = "form-control", @id = "IdGrupoCble" })
+                    @Html.DropDownListFor(q => q.IdGrupoCble, new SelectList(ViewBag.lst_grupo_contabe, "IdGrupoCble", "gc_GrupoCble"), new { @class = "form-control", @id = "IdGrupoCble", @disabled="disabled" })
                     @Html.ValidationMessageFor(q => q.IdGrupoCble, "", new { @class = "text-danger" })
                 </div>
             </div>
