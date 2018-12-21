@@ -1,6 +1,6 @@
-﻿@model Core.Erp.Info.RRHH.ro_archivos_bancos_generacion_Info
+﻿@model Core.Erp.Info.RRHH.ro_NominasPagosCheques_Info
 @{
-    ViewBag.Title = "Anular archivo de transferencia";
+    ViewBag.Title = "Anular pago";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -17,10 +17,10 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Anular", "ArchivosTransferencias", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "PagosEnCheques", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdArchivo)
+    @Html.HiddenFor(q => q.IdTransaccion)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     <div class="row">
@@ -28,15 +28,15 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdNomina_Tipo">Nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
-                    @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
+                    @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdNomina_TipoLiqui">Tipo liquidación de nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNominaTipo, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
-                    @Html.ValidationMessageFor(q => q.IdNominaTipo, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                    @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
@@ -44,24 +44,6 @@
                     <label for="FechaInicio">Periodo*</label>
                     @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), new { @class = "form-control", @id = "IdPeriodo" })
                     @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdBanco">Banco*</label>
-                    @Html.DropDownListFor(q => q.IdCuentaBancaria, new SelectList(ViewBag.lst_cuenta_bancarias, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
-                    @Html.ValidationMessageFor(q => q.IdCuentaBancaria, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdBanco">Tipo de archivo*</label>
-                    @Html.DropDownListFor(q => q.IdProceso, new SelectList(ViewBag.lst_proceso, "IdProceso", "NombreProceso"), new { @class = "form-control", @id = "IdProceso" })
-                    @Html.ValidationMessageFor(q => q.IdProceso, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -81,7 +63,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index","ArchivosTransferencias",new { Area = "RRHH" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","PagosEnCheques",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -206,7 +188,7 @@
                 $.ajax({
                     type: 'POST',
                     data: JSON.stringify(datos),
-                    url: '@Url.Action("CargarEmpleados", "ArchivosTransferencias", new { Area = "RRHH" })',
+                    url: '@Url.Action("CargarEmpleados", "PagosEnCheques", new { Area = "RRHH" })',
                     async: false,
                     bDeferRender: true,
                     bProcessing: true,
