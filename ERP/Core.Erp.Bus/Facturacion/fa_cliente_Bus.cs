@@ -60,7 +60,7 @@ namespace Core.Erp.Bus.Facturacion
         public bool guardarDB(fa_cliente_Info info)
         {
             try
-            {
+            {                
                 if (info.IdPersona == 0)
                 {
                     info.info_persona = odata_per.armar_info(info.info_persona);

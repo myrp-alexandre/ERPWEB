@@ -132,11 +132,21 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             model.IdUsuario = Session["IdUsuario"].ToString();
-            if (!bus_cliente.guardarDB(model))
+            if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc)))
             {
+                if (!bus_cliente.guardarDB(model))
+                {
+                    cargar_combos(model);
+                    return View(model);
+                }
+            }
+            else
+            {
+                ViewBag.mensaje = "Número identificación inválida";
                 cargar_combos(model);
                 return View(model);
             }
+            
             return RedirectToAction("Index");
         }
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdCliente = 0)
@@ -172,6 +182,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             model.lst_fa_cliente_contactos.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdCliente = model.IdCliente; });
+
             if (!bus_cliente_contacto.guardarDB(model.lst_fa_cliente_contactos))
             {
                 cargar_combos(model);
@@ -183,6 +194,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 cargar_combos(model);
                 return View(model);
             }
+           
             return RedirectToAction("Index");
         }
         public ActionResult Anular(int IdEmpresa = 0 , decimal IdCliente = 0)

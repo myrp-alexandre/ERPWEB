@@ -229,5 +229,82 @@ namespace Core.Erp.Info.Helps
         }
 
 
+        public static Boolean ValidaCedula(string cedula)
+        {
+            try
+            {
+                var longitud_cedula = cedula.Length;
+                int[] coeficinetes = {2,1,2,1,2,1,2,1,2};
+                var num_provincias = 24;
+                var total = 0;
+
+                var tercer_digito = 6;
+                var longitud = 10;
+
+                if(longitud == longitud_cedula)
+                {
+                    var provincia = Convert.ToInt32(string.Concat(cedula[0], cedula[1]));
+                    var digito_tres = Convert.ToInt32(cedula[2]+string.Empty);
+
+                    if (provincia > 0 && provincia <= num_provincias && (digito_tres >=0 && digito_tres <= tercer_digito))
+                    {
+                        var digito_verificador_recibido = Convert.ToInt32(cedula[9] + string.Empty);
+                        for (var a = 0; a < coeficinetes.Length; a++)
+                        {
+                            var valor = Convert.ToInt32(coeficinetes[a] * cedula[a]);
+                            total = valor > 10 ? total + (valor - 9) : total + valor;                                                                        
+                        }
+                        var digito_verificador_obtenido = total > 10 ? (total % 10) != 0 ? 10 - (total % 10) : (total % 10) : total;
+
+                        return digito_verificador_recibido == digito_verificador_obtenido;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }           
+        }
+
+        public static Boolean ValidaIdentificacion(string tipo_documento, string naturaleza, string cedula_ruc)
+        {
+            try
+            {
+                if (naturaleza == "NATU")
+                {
+                    if (tipo_documento == "CED")
+                    {
+                        return ValidaCedula(cedula_ruc);
+                    }
+                    else
+                    {
+                        var longitud_ruc = 13;
+                        var establecimiento = "001";
+                        var tercer_digito = 6;
+
+                        if (longitud_ruc == cedula_ruc.Length)
+                        {
+                            var provincia = Convert.ToInt32(string.Concat(cedula_ruc[0], cedula_ruc[1]));
+                            var digito_tres = Convert.ToInt32(cedula_ruc[2] + string.Empty);
+
+                            if (provincia >= 1 && provincia <= 24 && digito_tres >= 0 && digito_tres <= tercer_digito)
+                            {
+                                return cedula_ruc.Substring(10, 3) == establecimiento && (ValidaCedula(cedula_ruc.Substring(0, 10)));
+                            }
+                        }
+                        return false;
+                    }
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
     }
 }
