@@ -1076,6 +1076,7 @@
     <Build Include="dbo\Tables\ro_NominasPagosCheques.sql" />
     <Build Include="dbo\Views\vwpro_Fabricacion.sql" />
     <Build Include="dbo\Views\vwcom_ordencompra_local_x_ingresar.sql" />
+    <Build Include="dbo\Tables\cp_SolicitudPago.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />
