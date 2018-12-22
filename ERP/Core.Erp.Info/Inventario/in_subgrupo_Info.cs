@@ -24,14 +24,21 @@ namespace Core.Erp.Info.Inventario
         public string observacion { get; set; }
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
+        #region Campos de auditoria
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string MotiAnula { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+
+        #endregion
+
+        #region Campos que no existn en la tabla
+        public string NomCategoria { get; set; }
+        public string NomLinea { get; set; }
+        public string NomGrupo { get; set; }
+        #endregion
     }
 }
