@@ -91,6 +91,7 @@
             this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.fr_firmas = new DevExpress.XtraReports.UI.FormattingRule();
+            this.fr_firma = new DevExpress.XtraReports.UI.FormattingRule();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -442,6 +443,7 @@
             // 
             this.xrTableCell12.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell12.ForeColor = System.Drawing.Color.White;
+            this.xrTableCell12.FormattingRules.Add(this.fr_firma);
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.StylePriority.UseBorders = false;
             this.xrTableCell12.StylePriority.UseForeColor = false;
@@ -473,6 +475,7 @@
             // 
             this.xrTableCell11.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell11.ForeColor = System.Drawing.Color.White;
+            this.xrTableCell11.FormattingRules.Add(this.fr_firma);
             this.xrTableCell11.Name = "xrTableCell11";
             this.xrTableCell11.StylePriority.UseBorders = false;
             this.xrTableCell11.StylePriority.UseForeColor = false;
@@ -695,6 +698,14 @@
             this.fr_firmas.Formatting.Visible = DevExpress.Utils.DefaultBoolean.True;
             this.fr_firmas.Name = "fr_firmas";
             // 
+            // fr_firma
+            // 
+            this.fr_firma.Condition = "[CodTipoCbteBan]=\'NCBA\'";
+            this.fr_firma.Formatting.Borders = DevExpress.XtraPrinting.BorderSide.Top;
+            this.fr_firma.Formatting.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fr_firma.Formatting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fr_firma.Name = "fr_firma";
+            // 
             // BAN_002_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -707,6 +718,8 @@
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
+            this.FormattingRuleSheet.AddRange(new DevExpress.XtraReports.UI.FormattingRule[] {
+            this.fr_firma});
             this.Margins = new System.Drawing.Printing.Margins(38, 38, 38, 40);
             this.PageHeight = 1169;
             this.PageWidth = 827;
@@ -792,5 +805,6 @@
         private DevExpress.XtraReports.UI.XRTable xrTable7;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell12;
+        private DevExpress.XtraReports.UI.FormattingRule fr_firma;
     }
 }

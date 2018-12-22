@@ -958,18 +958,20 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                         in_Producto_Info info = new in_Producto_Info
                         {
                             IdEmpresa = IdEmpresa,
-                            IdUsuario = SessionFixed.IdUsuario,
                             IdProducto = Convert.ToInt32(reader.GetValue(0)),
-                            pr_descripcion = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(1))) ? null : Convert.ToString(reader.GetValue(1)),
-                            IdMarca = Convert.ToInt32(reader.GetValue(2)),
-                            IdPresentacion = Convert.ToString(reader.GetValue(3)),
-                            IdCategoria = Convert.ToString(reader.GetValue(4)),
-                            IdLinea = Convert.ToInt32(reader.GetValue(5)),
-                            IdGrupo = Convert.ToInt32(reader.GetValue(6)),
-                            IdSubGrupo = Convert.ToInt32(reader.GetValue(7)),
-                            IdCod_Impuesto_Iva = Convert.ToString(reader.GetValue(8)),
-                            IdUnidadMedida = Convert.ToString(reader.GetValue(9)),
-                            precio_1 = Convert.ToDouble(reader.GetValue(10)),
+                            pr_codigo = Convert.ToString(reader.GetValue(1)),
+                            pr_descripcion = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)),
+                            IdMarca = Convert.ToInt32(reader.GetValue(3)),
+                            IdPresentacion = Convert.ToString(reader.GetValue(4)),
+                            IdCategoria = Convert.ToString(reader.GetValue(5)),
+                            IdLinea = Convert.ToInt32(reader.GetValue(6)),
+                            IdGrupo = Convert.ToInt32(reader.GetValue(7)),
+                            IdSubGrupo = Convert.ToInt32(reader.GetValue(8)),
+                            IdCod_Impuesto_Iva = Convert.ToString(reader.GetValue(9)),
+                            IdUnidadMedida = Convert.ToString(reader.GetValue(10)),
+                            IdUnidadMedida_Consumo = Convert.ToString(reader.GetValue(11)),
+                            precio_1 = Convert.ToDouble(reader.GetValue(12)),
+                            
                         };
 
                         ListaProducto.Add(info);
