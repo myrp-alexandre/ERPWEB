@@ -13,15 +13,8 @@ FROM            (SELECT        rol.IdEmpresa, rol.IdRol, rol.IdNominaTipo, rol.I
                              (SELECT        archivo.IdEmpresa, archivo.IdNomina, archivo.IdNominaTipo, archivo.IdPeriodo, archivo_det.IdSucursal, archivo_det.IdEmpleado, SUM(archivo_det.Valor) AS Valor
                                FROM            dbo.ro_archivos_bancos_generacion AS archivo INNER JOIN
                                                          dbo.ro_archivos_bancos_generacion_x_empleado AS archivo_det ON archivo.IdEmpresa = archivo_det.IdEmpresa AND archivo.IdArchivo = archivo_det.IdArchivo AND archivo.estado = 'A'
-                               GROUP BY archivo.IdEmpresa, archivo.IdNomina, archivo.IdNominaTipo, archivo.IdPeriodo, archivo_det.IdEmpleado, archivo_det.IdSucursal
-                               UNION ALL
-                               SELECT        nom_pa_cheq.IdEmpresa, nom_pa_cheq.IdNomina_Tipo, nom_pa_cheq.IdNomina_TipoLiqui, nom_pa_cheq.IdPeriodo, nom_pa_cheq_det.IdSucursal, nom_pa_cheq_det.IdEmpleado, SUM(nom_pa_cheq_det.Valor) 
-                                                        AS Expr1
-                               FROM            dbo.ro_NominasPagosCheques AS nom_pa_cheq INNER JOIN
-                                                        dbo.ro_NominasPagosCheques_det AS nom_pa_cheq_det ON nom_pa_cheq.IdEmpresa = nom_pa_cheq_det.IdEmpresa AND nom_pa_cheq.IdTransaccion = nom_pa_cheq_det.IdTransaccion
-                               GROUP BY nom_pa_cheq.IdEmpresa, nom_pa_cheq.IdNomina_Tipo, nom_pa_cheq.IdNomina_TipoLiqui, nom_pa_cheq.IdPeriodo, nom_pa_cheq_det.IdEmpleado, nom_pa_cheq_det.IdSucursal) AS pago ON 
-                         pago.IdEmpresa = rol_1.IdEmpresa AND pago.IdNomina = rol_1.IdNominaTipo AND pago.IdNominaTipo = rol_1.IdNominaTipoLiqui AND pago.IdPeriodo = rol_1.IdPeriodo AND pago.IdEmpleado = rol_1.IdEmpleado AND 
-                         pago.IdSucursal = rol_1.IdSucursal
+                               GROUP BY archivo.IdEmpresa, archivo.IdNomina, archivo.IdNominaTipo, archivo.IdPeriodo, archivo_det.IdEmpleado, archivo_det.IdSucursal) AS pago ON pago.IdEmpresa = rol_1.IdEmpresa AND 
+                         pago.IdNomina = rol_1.IdNominaTipo AND pago.IdNominaTipo = rol_1.IdNominaTipoLiqui AND pago.IdPeriodo = rol_1.IdPeriodo AND pago.IdEmpleado = rol_1.IdEmpleado AND pago.IdSucursal = rol_1.IdSucursal
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_rol_detalle_saldo_por_pagar';
 
@@ -32,7 +25,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[23] 4[5] 2[52] 3) )"
+         Configuration = "(H (1[67] 4[5] 2[6] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -110,10 +103,10 @@ Begin DesignProperties =
          End
          Begin Table = "pago"
             Begin Extent = 
-               Top = 6
-               Left = 1392
-               Bottom = 136
-               Right = 1562
+               Top = 8
+               Left = 1546
+               Bottom = 238
+               Right = 1713
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -156,6 +149,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_rol_detalle_saldo_por_pagar';
+
+
 
 
 

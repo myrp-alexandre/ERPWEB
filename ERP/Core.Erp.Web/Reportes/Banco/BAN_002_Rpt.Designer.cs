@@ -68,6 +68,7 @@
             this.xrTable7 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow6 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.fr_firma = new DevExpress.XtraReports.UI.FormattingRule();
             this.xrTable8 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow14 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -91,7 +92,6 @@
             this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.fr_firmas = new DevExpress.XtraReports.UI.FormattingRule();
-            this.fr_firma = new DevExpress.XtraReports.UI.FormattingRule();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -450,6 +450,14 @@
             this.xrTableCell12.Text = "Aprobado por";
             this.xrTableCell12.Weight = 1D;
             // 
+            // fr_firma
+            // 
+            this.fr_firma.Condition = "[CodTipoCbteBan]=\'NCBA\'";
+            this.fr_firma.Formatting.Borders = DevExpress.XtraPrinting.BorderSide.Top;
+            this.fr_firma.Formatting.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fr_firma.Formatting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fr_firma.Name = "fr_firma";
+            // 
             // xrTable8
             // 
             this.xrTable8.Borders = DevExpress.XtraPrinting.BorderSide.Top;
@@ -474,12 +482,13 @@
             // xrTableCell11
             // 
             this.xrTableCell11.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrTableCell11.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'Elaborado por: \', [Nombre] )")});
             this.xrTableCell11.ForeColor = System.Drawing.Color.White;
             this.xrTableCell11.FormattingRules.Add(this.fr_firma);
             this.xrTableCell11.Name = "xrTableCell11";
             this.xrTableCell11.StylePriority.UseBorders = false;
             this.xrTableCell11.StylePriority.UseForeColor = false;
-            this.xrTableCell11.Text = "Elaborado por";
             this.xrTableCell11.Weight = 1D;
             // 
             // SubReporte_cancelaciones
@@ -697,14 +706,6 @@
             this.fr_firmas.Formatting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.fr_firmas.Formatting.Visible = DevExpress.Utils.DefaultBoolean.True;
             this.fr_firmas.Name = "fr_firmas";
-            // 
-            // fr_firma
-            // 
-            this.fr_firma.Condition = "[CodTipoCbteBan]=\'NCBA\'";
-            this.fr_firma.Formatting.Borders = DevExpress.XtraPrinting.BorderSide.Top;
-            this.fr_firma.Formatting.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fr_firma.Formatting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.fr_firma.Name = "fr_firma";
             // 
             // BAN_002_Rpt
             // 
