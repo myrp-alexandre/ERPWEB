@@ -29,33 +29,36 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
+            cargar_combos_consulta();
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            cargar_combos_consulta();
+
             return View(model);
 
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_archivo_transferencia(DateTime? Fecha_ini, DateTime? Fecha_fin, decimal? IdSucursal = 0)
+        public ActionResult GridViewPartial_pagos_cheques(DateTime? Fecha_ini, DateTime? Fecha_fin, decimal? IdSucursal = 0)
         {
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_archivo.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, true);
-            return PartialView("_GridViewPartial_archivo_transferencia", model);
+            return PartialView("_GridViewPartial_pagos_cheques", model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_archivo_transferencia_det()
+        public ActionResult GridViewPartial_pagos_cheques_det()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             ro_NominasPagosCheques_Info model = new ro_NominasPagosCheques_Info();
             model.detalle = ro_NominasPagosCheques_det_Info_list.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_archivo_transferencia_det", model);
+            return PartialView("_GridViewPartial_pagos_cheques", model);
 
 
         }
@@ -211,9 +214,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.lst_periodos = lst_periodos;
         }
 
-       
-        #endregion
 
+        #endregion
+        private void cargar_combos_consulta()
+        {
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
         #region funciones del detalle
 
         [HttpPost, ValidateInput(false)]
