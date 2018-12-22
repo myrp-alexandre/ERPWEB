@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.RRHH
   public  class ro_NominasPagosCheques_det_Bus
     {
         ro_NominasPagosCheques_det_Data odata = new ro_NominasPagosCheques_det_Data();
-        public List<ro_NominasPagosCheques_det_Info> get_lis(int IdEmpresa, decimal IdTransaccion)
+        public List<ro_NominasPagosCheques_det_Info> get_list(int IdEmpresa, decimal IdTransaccion)
         {
             try
             {
-                return odata.get_lis(IdEmpresa, IdTransaccion);
+                return odata.get_list(IdEmpresa, IdTransaccion);
             }
             catch (Exception)
             {
@@ -23,5 +23,19 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public List<ro_NominasPagosCheques_det_Info> get_list(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo, string TipoCuenta)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, IdNominaTipo, IdNominaTipoLiqui, IdPeriodo, TipoCuenta);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+
+    }
 }

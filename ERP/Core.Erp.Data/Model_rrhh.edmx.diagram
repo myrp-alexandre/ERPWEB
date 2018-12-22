@@ -218,6 +218,8 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui" />
         <AssociationConnector Association="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_NominasPagosCheques" Width="1.5" PointX="23.75" PointY="14.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_NominasPagosCheques_det" Width="1.5" PointX="0.75" PointY="25.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -126,7 +126,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
-            model.detalle = bus_pago_detalle.get_lis(IdEmpresa, IdTransaccion);
+            model.detalle = bus_pago_detalle.get_list(IdEmpresa, IdTransaccion);
             ro_NominasPagosCheques_det_Info_list.set_list(model.detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(model.IdNomina_Tipo);
             return View(model);
@@ -164,7 +164,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_NominasPagosCheques_Info model = bus_archivo.get_info(IdEmpresa, IdTransaccion);
             if (model == null)
                 return RedirectToAction("Index");
-            model.detalle = bus_pago_detalle.get_lis(IdEmpresa, IdTransaccion);
+            model.detalle = bus_pago_detalle.get_list(IdEmpresa, IdTransaccion);
             ro_NominasPagosCheques_det_Info_list.set_list(model.detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(model.IdNomina_Tipo);
             return View(model);
