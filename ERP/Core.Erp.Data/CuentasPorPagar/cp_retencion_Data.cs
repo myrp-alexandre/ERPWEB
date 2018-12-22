@@ -200,6 +200,7 @@ namespace Core.Erp.Data.CuentasPorPagar
         {
             try
             {
+                int sec = 1;
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     var contact = Context.cp_retencion.FirstOrDefault(minfo => minfo.IdEmpresa == info.IdEmpresa && minfo.IdRetencion == info.IdRetencion);
@@ -209,6 +210,30 @@ namespace Core.Erp.Data.CuentasPorPagar
                         contact.IdUsuarioUltMod = info.IdUsuarioUltMod;
                         contact.Fecha_UltMod = info.Fecha_UltMod;
                         contact.ip = info.ip;
+                        if (info.detalle != null)
+                        {
+                            var lista = Context.cp_retencion_det.Where(minfo => minfo.IdEmpresa == info.IdEmpresa && minfo.IdRetencion == info.IdRetencion);
+                            Context.cp_retencion_det.RemoveRange(lista);
+
+                            foreach (var item in info.detalle)
+                            {
+                                cp_retencion_det Entity = new cp_retencion_det
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdRetencion = info.IdRetencion,
+                                    Idsecuencia = sec,
+                                    re_tipoRet = item.re_tipoRet,
+                                    re_baseRetencion = (double)item.re_baseRetencion,
+                                    IdCodigo_SRI = item.IdCodigo_SRI,
+                                    re_Codigo_impuesto = item.re_Codigo_impuesto,
+                                    re_valor_retencion = Math.Round((double)item.re_valor_retencion, 2, MidpointRounding.AwayFromZero),
+                                    re_Porcen_retencion = (double)item.re_Porcen_retencion,
+                                    re_estado = "A"
+                                };
+                                Context.cp_retencion_det.Add(Entity);
+                                sec++;
+                            }
+                        }
                         Context.SaveChanges();
                        
                     }
