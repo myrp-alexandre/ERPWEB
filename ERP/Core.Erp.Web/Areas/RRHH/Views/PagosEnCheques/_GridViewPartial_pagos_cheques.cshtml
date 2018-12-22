@@ -83,38 +83,38 @@
 
 
 
-        settings.Columns.Add("IdArchivo","ID").Width = Unit.Percentage(8);
-        settings.Columns.Add("Descripcion", "Nómina").Width = Unit.Percentage(22);
-        settings.Columns.Add("DescripcionProcesoNomina", "Nómina tipo").Width = Unit.Percentage(8);
-        settings.Columns.Add("NombreProceso", "Archivo").Width = Unit.Percentage(8);
+        settings.Columns.Add("IdTransaccion","ID").Width = Unit.Percentage(8);
+        //settings.Columns.Add("Descripcion", "Nómina").Width = Unit.Percentage(22);
+        //settings.Columns.Add("DescripcionProcesoNomina", "Nómina tipo").Width = Unit.Percentage(8);
+        //settings.Columns.Add("NombreProceso", "Archivo").Width = Unit.Percentage(8);
 
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "pe_FechaIni";
-            column.Caption = "Fecha inicio";
-            column.Width = Unit.Percentage(8);
-            column.PropertiesEdit.DisplayFormatString = "d";
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "pe_FechaIni";
+        //    column.Caption = "Fecha inicio";
+        //    column.Width = Unit.Percentage(8);
+        //    column.PropertiesEdit.DisplayFormatString = "d";
 
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "pe_FechaFin";
-            column.Caption = "Fecha fin";
-            column.Width = Unit.Percentage(8);
-            column.PropertiesEdit.DisplayFormatString = "d";
+        //});
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "pe_FechaFin";
+        //    column.Caption = "Fecha fin";
+        //    column.Width = Unit.Percentage(8);
+        //    column.PropertiesEdit.DisplayFormatString = "d";
 
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EstadoBool";
-            column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
-            column.EditorProperties().CheckBox(sp =>
-            {
+        //});
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "EstadoBool";
+        //    column.Caption = "Estado";
+        //    column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        //    column.EditorProperties().CheckBox(sp =>
+        //    {
 
-            });
-        });
+        //    });
+        //});
         settings.Columns.Add(column =>
         {
             column.SetDataItemTemplateContent(c =>

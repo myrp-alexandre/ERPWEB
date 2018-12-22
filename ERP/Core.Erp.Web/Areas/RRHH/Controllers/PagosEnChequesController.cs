@@ -58,7 +58,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             ro_NominasPagosCheques_Info model = new ro_NominasPagosCheques_Info();
             model.detalle = ro_NominasPagosCheques_det_Info_list.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_pagos_cheques", model);
+            return PartialView("_GridViewPartial_pagos_cheques_det", model);
 
 
         }

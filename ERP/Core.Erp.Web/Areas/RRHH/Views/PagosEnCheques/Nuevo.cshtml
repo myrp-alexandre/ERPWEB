@@ -54,7 +54,6 @@
                 <div class="form-group">
                     <label for="detalle">Detalle del archivo</label>
                     @Html.Action("GridViewPartial_pagos_cheques_det")
-                    @Html.ValidationMessageFor(q => q.detalle, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -72,13 +71,8 @@
 
 
 <script>
-    $("#IdBanco").change(function () {
-        $("#IdProceso").empty();
-        cargar_procesos();
-        cargar_empleados();
-
-    });
-    $("#IdProceso").change(function () {
+    $("#IdNomina_Tipo").change(function () {
+        cargar_tipo_liquidacion_nomina();
         cargar_empleados();
 
     });
@@ -119,10 +113,9 @@
     };
 
 
+    function cargar_tipo_liquidacion_nomina() {
+        $("#IdNomina_TipoLiqui").empty();
 
-
-    cargar_tipo_liquidacion_nomina();
-            function cargar_tipo_liquidacion_nomina() {
                 var datos = {
                     IdNomina: $("#IdNomina_Tipo").val()
                 }
