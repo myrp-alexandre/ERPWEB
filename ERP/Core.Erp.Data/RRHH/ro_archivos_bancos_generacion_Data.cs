@@ -187,7 +187,7 @@ namespace Core.Erp.Data.RRHH
                         IdCuentaBancaria=info.IdCuentaBancaria,
                         estado=info.estado="A",
                         IdUsuario=info.IdUsuario,
-                        IdRol=info.IdRol,
+                        IdRol=null,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
                     };
                     Context.ro_archivos_bancos_generacion.Add(Entity);
