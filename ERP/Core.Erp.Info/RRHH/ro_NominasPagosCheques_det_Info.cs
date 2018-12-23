@@ -29,6 +29,7 @@ namespace Core.Erp.Info.RRHH
         public string pe_cedulaRuc { get; set; }
         public double Saldo { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public decimal IdPersona { get; set; }
 
 
         #endregion

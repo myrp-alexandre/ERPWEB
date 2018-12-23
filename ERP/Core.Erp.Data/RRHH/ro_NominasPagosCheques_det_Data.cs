@@ -75,7 +75,8 @@ namespace Core.Erp.Data.RRHH
                                  Saldo = q.Saldo,
                                  IdSucursal = q.IdSucursal,
                                  em_NumCta = q.em_NumCta,
-                                 em_tipoCta = q.em_tipoCta
+                                 em_tipoCta = q.em_tipoCta,
+                                 IdPersona=q.IdPersona
 
 
                              }).ToList();

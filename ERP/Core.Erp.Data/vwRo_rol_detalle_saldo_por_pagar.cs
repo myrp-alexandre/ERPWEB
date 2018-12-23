@@ -32,5 +32,6 @@ namespace Core.Erp.Data
         public double Saldo { get; set; }
         public string em_NumCta { get; set; }
         public string em_tipoCta { get; set; }
+        public decimal IdPersona { get; set; }
     }
 }
