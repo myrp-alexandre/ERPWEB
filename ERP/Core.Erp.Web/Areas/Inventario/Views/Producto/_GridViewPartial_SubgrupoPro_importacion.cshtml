@@ -48,9 +48,14 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdSubgrupo", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("cod_subgrupo", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("nom_Subgrupo", "Descripción").Width = Unit.Percentage(70);
+        settings.Columns.Add("IdCategoria", "ID").Width = Unit.Percentage(15);
+        settings.Columns.Add("NomCategoria", "Categoría").Width = Unit.Percentage(15);
+        settings.Columns.Add("IdLinea", "ID").Width = Unit.Percentage(15);
+        settings.Columns.Add("NomLinea", "Línea").Width = Unit.Percentage(15);
+        settings.Columns.Add("IdGrupo", "ID").Width = Unit.Percentage(15);
+        settings.Columns.Add("NomGrupo", "Grupo").Width = Unit.Percentage(15);
+        settings.Columns.Add("IdSubgrupo", "ID").Width = Unit.Percentage(15);
+        settings.Columns.Add("nom_Subgrupo", "Subgrupo").Width = Unit.Percentage(15);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

@@ -711,7 +711,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
-     /*   #region Imagen
+        #region Imagen
 
         const string UploadDirectory = "~/Content/imagenes/";
 
@@ -732,11 +732,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 model = new byte[0];
             return PartialView("_Producto_imagen", model);
         }
-        #endregion*/
+        #endregion
 
 
         #region Importacion
-        public ActionResult UploadControlUpload()
+        public ActionResult UploadControlUploadImp()
         {
             UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
             return null;
@@ -880,9 +880,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                         in_subgrupo_Info info = new in_subgrupo_Info
                         {
                             IdEmpresa = IdEmpresa,
-                            IdLinea = Convert.ToInt32(reader.GetValue(0)),
-                            cod_subgrupo = Convert.ToString(reader.GetValue(1)),
-                            nom_subgrupo = Convert.ToString(reader.GetValue(2)),
+                            IdCategoria = Convert.ToString(reader.GetValue(0)),
+                            NomCategoria = Convert.ToString(reader.GetValue(1)),
+                            IdLinea = Convert.ToInt32(reader.GetValue(2)),
+                            NomLinea = Convert.ToString(reader.GetValue(3)),
+                            IdGrupo = Convert.ToInt32(reader.GetValue(4)),
+                            NomGrupo = Convert.ToString(reader.GetValue(5)),
+                            IdSubgrupo = Convert.ToInt32(reader.GetValue(6)),
+                            nom_subgrupo = Convert.ToString(reader.GetValue(7)),
                             IdUsuario = SessionFixed.IdUsuario
                         };
                         ListaSubgrupo.Add(info);
@@ -897,10 +902,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cont = 0;
                 //Para avanzar a la siguiente hoja de excel
                 reader.NextResult();
-
-
-                cont = 0;
-                reader.NextResult();
+               
 
                 #region Presentacion                
                 while (reader.Read())

@@ -65,7 +65,7 @@
                 @Html.DevExpress().UploadControl(settings =>
            {
                settings.Name = "UploadControlFile";
-               settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUpload" };
+               settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUploadImp" };
                settings.ShowUploadButton = true;
                settings.ShowProgressPanel = true;
                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
