@@ -187,12 +187,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
    
-        public JsonResult CargarEmpleados(int IdProceso = 0, int IdNomina_Tipo_Tipo = 0, int IdNomina_Tipo_TipoLiqui = 0, int IdPeriodo = 0, decimal IdTransaccionSession = 0)
+        public JsonResult CargarEmpleados( int IdNomina_Tipo_Tipo = 0, int IdNomina_Tipo_TipoLiqui = 0, int IdPeriodo = 0, decimal IdTransaccionSession = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             string TipoCuenta = "";
 
-          //  var detalle = bus_pago_detalle.get_list(IdEmpresa, IdNomina_Tipo_Tipo, IdNomina_Tipo_TipoLiqui, IdPeriodo, TipoCuenta);
+           var detalle = bus_pago_detalle.get_list(IdEmpresa, IdNomina_Tipo_Tipo, IdNomina_Tipo_TipoLiqui, IdPeriodo, TipoCuenta);
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
