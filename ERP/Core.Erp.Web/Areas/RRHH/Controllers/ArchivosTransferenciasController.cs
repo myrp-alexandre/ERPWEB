@@ -226,7 +226,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
 
-        public JsonResult CargarEmpleados( int IdProceso  = 0, int IdNomina_Tipo=0, int IdNomina_TipoLiqui=0, int IdPeriodo=0, decimal  IdTransaccionSession=0)
+        public JsonResult CargarEmpleados( int IdProceso  = 0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0, decimal  IdTransaccionSession=0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             string TipoCuenta = "";
