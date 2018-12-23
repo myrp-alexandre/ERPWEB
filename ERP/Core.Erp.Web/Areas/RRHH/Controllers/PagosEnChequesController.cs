@@ -193,7 +193,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             string TipoCuenta = "";
 
            var detalle = bus_pago_detalle.get_list(IdEmpresa, IdNomina_Tipo_Tipo, IdNomina_Tipo_TipoLiqui, IdPeriodo, TipoCuenta);
-
+            ro_NominasPagosCheques_det_Info_list.set_list(detalle, IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
