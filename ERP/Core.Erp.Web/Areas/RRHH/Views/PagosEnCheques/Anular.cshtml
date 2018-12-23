@@ -53,8 +53,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="detalle">Detalle del archivo</label>
-                    @Html.Action("GridViewPartial_archivo_transferencia_det")
-                    @Html.ValidationMessageFor(q => q.detalle, "", new { @class = "text-danger" })
+                    @Html.Action("GridViewPartial_pagos_cheques_det")
                 </div>
             </div>
         </div>
@@ -62,7 +61,7 @@
 
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-danger">Anular</button>
+        <button type="submit" class="btn btn-danger">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","PagosEnCheques",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
@@ -72,13 +71,14 @@
 
 
 <script>
-    $("#IdBanco").change(function () {
-        $("#IdProceso").empty();
-        cargar_procesos();
+    $(function () {
+        cargar_tipo_liquidacion_nomina();
+        cargar_periodos_x_nomina();
         cargar_empleados();
-
     });
-    $("#IdProceso").change(function () {
+
+    $("#IdNomina_Tipo").change(function () {
+        cargar_tipo_liquidacion_nomina();
         cargar_empleados();
 
     });
@@ -90,39 +90,10 @@
         cargar_empleados();
     });
 
-    function cargar_procesos() {
-        $("#IdProceso").empty();
 
-                var datos = {
-                    IdBanco: $("#IdBanco").val()
-                }
+    function cargar_tipo_liquidacion_nomina() {
+        $("#IdNomina_TipoLiqui").empty();
 
-                $.ajax({
-                    type: 'POST',
-                    data: JSON.stringify(datos),
-                    url: '@Url.Action("get_list_procesos", "ProcesosBancariosPorEmpresa", new { Area = "General" })',
-                    async: false,
-                    bDeferRender: true,
-                    bProcessing: true,
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (data) {
-
-                        $.each(data, function (i, row) {
-                            $("#IdProceso").append("<option value=" + row.IdProceso + ">" + row.NombreProceso + "</option>");
-
-                        });
-                    },
-                    error: function (error) {
-                    }
-                });
-    };
-
-
-
-
-    cargar_tipo_liquidacion_nomina();
-            function cargar_tipo_liquidacion_nomina() {
                 var datos = {
                     IdNomina: $("#IdNomina_Tipo").val()
                 }
@@ -177,7 +148,6 @@
 
             function cargar_empleados() {
                 var datos = {
-                    IdProceso: $("#IdProceso").val(),
                     IdNomina_Tipo: $("#IdNomina_Tipo").val(),
                     IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
                     IdPeriodo: $("#IdPeriodo").val(),
@@ -195,7 +165,7 @@
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
-                        GridViewPartial_archivo_transferencia_det.PerformCallback();
+                        GridViewPartial_pagos_cheques_det.PerformCallback();
                     },
                     error: function (error) {
                     }
@@ -203,10 +173,5 @@
     };
 
 
-    $(function () {
-        cargar_procesos();
-        cargar_tipo_liquidacion_nomina();
-        cargar_periodos_x_nomina();
-    });
 
 </script>
