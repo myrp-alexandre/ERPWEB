@@ -9538,9 +9538,6 @@
     <Content Include="Areas\RRHH\Views\PagosEnCheques\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\PagosEnCheques\Nuevo.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\Importar.cshtml" />
-    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_LineaPro_importacion.cshtml" />
-    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_CategoriaPro_importacion.cshtml" />
-    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_GrupoPro_importacion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_SubgrupoPro_importacion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_MarcaPro_importacion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_PresentacionPro_importacion.cshtml" />

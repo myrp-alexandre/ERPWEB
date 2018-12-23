@@ -191,11 +191,11 @@ namespace Core.Erp.Bus.Inventario
         }
 
 
-        public bool GuardarDbImportacion(List<in_categorias_Info> Lista_Categoria, List<in_linea_Info> Lista_Linea, List<in_grupo_Info> Lista_Grupo, List<in_subgrupo_Info> Lista_Subgrupo, List<in_presentacion_Info> Lista_Presentacion, List<in_Marca_Info> Lista_Marca, List<in_Producto_Info> Lista_Producto)
+        public bool GuardarDbImportacion( List<in_subgrupo_Info> Lista_Subgrupo, List<in_presentacion_Info> Lista_Presentacion, List<in_Marca_Info> Lista_Marca, List<in_Producto_Info> Lista_Producto)
         {
             try
             {
-                return odata.GuardarDbImportacion(Lista_Categoria, Lista_Linea, Lista_Grupo, Lista_Subgrupo, Lista_Presentacion, Lista_Marca, Lista_Producto);
+                return odata.GuardarDbImportacion(Lista_Subgrupo, Lista_Presentacion, Lista_Marca, Lista_Producto);
             }
             catch (Exception)
             {

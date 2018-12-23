@@ -29,9 +29,6 @@
 
     function OnFileUploadComplete(s, e)
     {
-        GridViewPartial_CategoriaPro_importacion.PerformCallback();
-        GridViewPartial_LineaPro_importacion.PerformCallback();
-        GridViewPartial_GrupoPro_importacion.PerformCallback();
         GridViewPartial_SubgrupoPro_importacion.PerformCallback();
         GridViewPartial_PresentacionPro_importacion.PerformCallback();
         GridViewPartial_MarcaPro_importacion.PerformCallback();
@@ -87,16 +84,7 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_categoria" aria-controls="vales" role="tab" data-toggle="tab">Categoría</a>
-            </li>
-            <li>
-                <a href="#tab_linea" aria-controls="vales" role="tab" data-toggle="tab">Línea</a>
-            </li>            
-            <li>
-                <a href="#tab_grupo" aria-controls="vales" role="tab" data-toggle="tab">Grupo</a>
-            </li>
-            <li>
-                <a href="#tab_subgrupo" aria-controls="vales" role="tab" data-toggle="tab">Subgrupo</a>
+                <a href="#tab_categoria" aria-controls="vales" role="tab" data-toggle="tab">Categorización</a>
             </li>
             <li>
                 <a href="#tab_presentacion" aria-controls="vales" role="tab" data-toggle="tab">Presentación</a>
@@ -109,35 +97,6 @@
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_categoria">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_CategoriaPro_importacion")
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_linea">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_LineaPro_importacion")
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_grupo">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_GrupoPro_importacion")
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_subgrupo">
                 <div class="row">
