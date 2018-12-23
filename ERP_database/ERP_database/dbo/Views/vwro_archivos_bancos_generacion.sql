@@ -1,8 +1,8 @@
 ﻿CREATE VIEW dbo.vwro_archivos_bancos_generacion
 AS
 SELECT        dbo.ro_archivos_bancos_generacion.IdEmpresa, dbo.ro_archivos_bancos_generacion.IdArchivo, dbo.ro_archivos_bancos_generacion.IdNomina, dbo.ro_archivos_bancos_generacion.IdNominaTipo, 
-                         dbo.ro_archivos_bancos_generacion.IdPeriodo, dbo.ro_archivos_bancos_generacion.IdCuentaBancaria, dbo.ro_archivos_bancos_generacion.IdProceso, dbo.ro_archivos_bancos_generacion.IdRol, 
-                         dbo.ro_Nomina_Tipo.Descripcion, dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, dbo.ro_periodo.pe_FechaIni, dbo.ro_periodo.pe_FechaFin, dbo.tb_banco_procesos_bancarios_x_empresa.NombreProceso, 
+                         dbo.ro_archivos_bancos_generacion.IdPeriodo, dbo.ro_archivos_bancos_generacion.IdCuentaBancaria, dbo.ro_archivos_bancos_generacion.IdProceso, dbo.ro_Nomina_Tipo.Descripcion, 
+                         dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, dbo.ro_periodo.pe_FechaIni, dbo.ro_periodo.pe_FechaFin, dbo.tb_banco_procesos_bancarios_x_empresa.NombreProceso, 
                          dbo.ro_archivos_bancos_generacion.estado
 FROM            dbo.ro_Nomina_Tipoliqui INNER JOIN
                          dbo.ro_Nomina_Tipo ON dbo.ro_Nomina_Tipoliqui.IdEmpresa = dbo.ro_Nomina_Tipo.IdEmpresa AND dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo = dbo.ro_Nomina_Tipo.IdNomina_Tipo INNER JOIN
@@ -19,7 +19,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'n ColumnWidths = 9
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'in ColumnWidths = 9
          Width = 284
          Width = 1500
          Width = 1500
@@ -52,13 +52,15 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_archivos_bancos_generacion';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[62] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[21] 4[5] 2[48] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -191,5 +193,7 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begi', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_archivos_bancos_generacion';
+      Beg', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_archivos_bancos_generacion';
+
+
 
