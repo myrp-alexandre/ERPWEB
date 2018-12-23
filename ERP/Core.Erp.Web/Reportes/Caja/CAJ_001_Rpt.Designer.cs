@@ -647,7 +647,7 @@
             // xrTableCell34
             // 
             this.xrTableCell34.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'Elaborado por: \', [Nombre] )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'Elaborado por: \',[Nombre])")});
             this.xrTableCell34.Name = "xrTableCell34";
             this.xrTableCell34.Weight = 1D;
             // 

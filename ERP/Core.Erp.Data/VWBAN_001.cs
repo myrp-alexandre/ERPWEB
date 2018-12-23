@@ -31,5 +31,6 @@ namespace Core.Erp.Data
         public double dc_Valor { get; set; }
         public double dc_Valor_Debe { get; set; }
         public Nullable<double> dc_Valor_Haber { get; set; }
+        public string Nombre { get; set; }
     }
 }
