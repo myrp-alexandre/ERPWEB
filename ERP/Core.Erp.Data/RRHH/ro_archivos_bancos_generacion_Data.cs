@@ -29,7 +29,6 @@ namespace Core.Erp.Data.RRHH
                                      IdCuentaBancaria=q.IdCuentaBancaria,
                                      IdProceso=q.IdProceso,
                                      estado = q.estado,
-                                    IdRol=q.IdRol,
                                      EstadoBool = q.estado == "A" ? true : false,
                                      Descripcion=q.Descripcion,
                                      DescripcionProcesoNomina=q.DescripcionProcesoNomina,
@@ -53,7 +52,6 @@ namespace Core.Erp.Data.RRHH
                                      IdCuentaBancaria = q.IdCuentaBancaria,
                                      IdProceso = q.IdProceso,
                                      estado = q.estado,
-                                     IdRol = q.IdRol,
                                      EstadoBool = q.estado == "A" ? true : false,
                                      Descripcion = q.Descripcion,
                                      DescripcionProcesoNomina = q.DescripcionProcesoNomina,
@@ -94,7 +92,6 @@ namespace Core.Erp.Data.RRHH
                         IdCuentaBancaria = Entity.IdCuentaBancaria,
                         IdProceso = Entity.IdProceso,
                         estado = Entity.estado,
-                        IdRol = Entity.IdRol,
                         EstadoBool = Entity.estado == "A" ? true : false,
                         
                     };
@@ -131,7 +128,6 @@ namespace Core.Erp.Data.RRHH
                         IdCuentaBancaria = Entity.IdCuentaBancaria,
                         IdProceso = Entity.IdProceso,
                         estado = Entity.estado,
-                        IdRol = Entity.IdRol,
                         EstadoBool = Entity.estado == "A" ? true : false,
 
                     };

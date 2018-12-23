@@ -99,7 +99,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(model.IdTransaccionSession);
-            model.IdRol = 1;
             if (model.detalle == null || model.detalle.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para el archivo";

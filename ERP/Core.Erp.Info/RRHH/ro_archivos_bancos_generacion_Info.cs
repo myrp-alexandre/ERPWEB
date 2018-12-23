@@ -31,7 +31,6 @@ namespace Core.Erp.Info.RRHH
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public decimal IdRol { get; set; }
         public string MotiAnula { get; set; }
         public bool EstadoBool { get; set; }
 
