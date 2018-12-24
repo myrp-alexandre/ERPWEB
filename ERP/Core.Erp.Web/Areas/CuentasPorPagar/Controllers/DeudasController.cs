@@ -310,6 +310,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 co_FechaContabilizacion = DateTime.Now.Date,
                 co_FechaFactura_vct = DateTime.Now.Date,
                 PaisPago = "593",
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdTipoServicio = cl_enumeradores.eTipoServicioCXP.SERVI.ToString(),
                 info_cuota = new cp_cuotas_x_doc_Info
                 {
