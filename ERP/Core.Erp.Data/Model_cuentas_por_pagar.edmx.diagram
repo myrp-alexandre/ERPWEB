@@ -71,6 +71,8 @@
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_giro_det" Width="1.5" PointX="12.75" PointY="48.25" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_det" Width="1.5" PointX="16.375" PointY="4.75" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_det_cp_orden_giro" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_SolicitudPago" Width="1.5" PointX="7.5" PointY="52.875" />
+        <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_SolicitudPago_cp_proveedor" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
