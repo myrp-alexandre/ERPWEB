@@ -19,7 +19,8 @@ namespace Core.Erp.Data
             this.com_ordencompra_local = new HashSet<com_ordencompra_local>();
         }
     
-        public string IdTerminoPago { get; set; }
+        public int IdEmpresa { get; set; }
+        public int IdTerminoPago { get; set; }
         public string Descripcion { get; set; }
         public int Dias { get; set; }
         public string Estado { get; set; }
