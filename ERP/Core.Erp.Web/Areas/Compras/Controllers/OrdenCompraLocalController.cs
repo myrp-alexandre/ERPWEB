@@ -103,7 +103,7 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
 
         private void cargar_combos(int IdEmpresa)
         {
-            var lst_termino = bus_termino.get_list(false);
+            var lst_termino = bus_termino.get_list(IdEmpresa, false);
             ViewBag.lst_termino = lst_termino;
 
             var lst_apro = bus_catalogo.get_list(cl_enumeradores.eTipoCatalogoCOM.EST_APRO.ToString(), false);
