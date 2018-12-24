@@ -1,10 +1,5 @@
 @using System.Web.UI.WebControls;
-@functions{
-    protected void ExpandAll(MVCxGridView gridView)
-    {
-        gridView.ExpandAll();
-    }
-}
+
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
@@ -24,9 +19,11 @@
         settings.SettingsContextMenu.Enabled = false;
         settings.SettingsBehavior.EnableCustomizationWindow = false;
 
-        settings.SettingsPager.Visible = true;
-        settings.Settings.ShowGroupPanel = false;
-        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        //Configuración filtro por columna
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
 
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
@@ -42,21 +39,15 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "oc_observacion";
-            column.Caption = "Observación";
-            column.GroupIndex = 0;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "oc_fecha";
-            column.Caption = "Fecha";
-            column.GroupIndex = 0;
+            column.FieldName = "IdOrdenCompra";
+            column.Caption = "# OC";
+            column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(30);
         });
         settings.Columns.Add(column =>
         {
@@ -84,18 +75,6 @@
         });
 
         settings.SettingsBehavior.AllowSort = false;
-
-        settings.PreRender = (sender, e) =>
-        {
-            MVCxGridView gridView = (MVCxGridView)sender;
-            ExpandAll(gridView);
-        };
-
-        settings.BeforeGetCallbackResult = (sender, e) =>
-        {
-            MVCxGridView gridView = (MVCxGridView)sender;
-            ExpandAll(gridView);
-        };
         
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
