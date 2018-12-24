@@ -53,7 +53,7 @@
                         $.each(data, function (i, row) {
                             $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
                         });
-                        $("#IdNomina_TipoLiqui").val(2);
+                       // $("#IdNomina_TipoLiqui").val(2);
                     },
                     error: function (error) {
                     }
@@ -97,7 +97,7 @@
     @Html.HiddenFor(q => q.IdTransaccion)
     @Html.HiddenFor(q => q.IdNomina_Tipo)
     @Html.HiddenFor(q => q.IdNomina_TipoLiqui)
-    @Html.HiddenFor(q => q.IdPeriodo)
+    //@Html.HiddenFor(q => q.IdPeriodo)
 
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
@@ -120,7 +120,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaInicio">Periodo*</label>
-                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), new { @class = "form-control", @id = "IdPeriodo", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), new { @class = "form-control", @id = "IdPeriodo"})
                     @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
