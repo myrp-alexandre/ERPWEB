@@ -216,7 +216,7 @@ warning 6002: The table/view 'DBERP.dbo.vwcom_ordencompra_local' does not have a
           <Property Name="Total" Type="float" />
           <Property Name="IdEstadoAprobacion_cat" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="EstadoAprobacion" Type="varchar" MaxLength="11" Nullable="false" />
-          <Property Name="oc_observacion" Type="varchar" MaxLength="1000" />
+          <Property Name="oc_observacion" Type="varchar(max)" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
           <Property Name="IdEstado_cierre" Type="varchar" MaxLength="25" />
           <Property Name="EstadoCierre" Type="varchar" MaxLength="9" Nullable="false" />
@@ -632,7 +632,6 @@ warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not ha
           </AssociationSet>
           <EntitySet Name="vwcom_ordencompra_local_det" EntityType="Model_compras.vwcom_ordencompra_local_det" />
           <EntitySet Name="com_comprador" EntityType="Model_compras.com_comprador" />
-          <EntitySet Name="vwcom_ordencompra_local" EntityType="Model_compras.vwcom_ordencompra_local" />
           <EntitySet Name="vwcom_ordencompra_local_x_ingresar" EntityType="Model_compras.vwcom_ordencompra_local_x_ingresar" />
           <EntitySet Name="com_ordencompra_local" EntityType="Model_compras.com_ordencompra_local" />
           <EntitySet Name="com_TerminoPago" EntityType="Model_compras.com_TerminoPago" />
@@ -664,6 +663,7 @@ warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not ha
             <End Role="com_ordencompra_local" EntitySet="com_ordencompra_local" />
             <End Role="com_ordencompra_local_det" EntitySet="com_ordencompra_local_det" />
           </AssociationSet>
+          <EntitySet Name="vwcom_ordencompra_local" EntityType="Model_compras.vwcom_ordencompra_local" />
           </EntityContainer>
         <EntityType Name="com_catalogo">
           <Key>
@@ -906,37 +906,6 @@ warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not ha
           <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="com_ordencompra_local" Relationship="Model_compras.FK_com_ordencompra_local_com_comprador" FromRole="com_comprador" ToRole="com_ordencompra_local" />
         </EntityType>
-        <EntityType Name="vwcom_ordencompra_local">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdOrdenCompra" />
-            <PropertyRef Name="oc_fecha" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="IdEstadoAprobacion_cat" />
-            <PropertyRef Name="EstadoAprobacion" />
-            <PropertyRef Name="EstadoCierre" />
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="oc_plazo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenCompra" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Codigo" Type="String" MaxLength="29" FixedLength="false" Unicode="false" />
-          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="oc_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Total" Type="Double" />
-          <Property Name="IdEstadoAprobacion_cat" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="EstadoAprobacion" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="oc_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdEstado_cierre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="EstadoCierre" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="TerminoPago" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="oc_plazo" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="vwcom_ordencompra_local_x_ingresar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1144,6 +1113,37 @@ warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwcom_ordencompra_local">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdOrdenCompra" />
+            <PropertyRef Name="oc_fecha" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdEstadoAprobacion_cat" />
+            <PropertyRef Name="EstadoAprobacion" />
+            <PropertyRef Name="EstadoCierre" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="oc_plazo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenCompra" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="29" FixedLength="false" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="oc_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="IdEstadoAprobacion_cat" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoAprobacion" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="oc_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstado_cierre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoCierre" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="TerminoPago" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="oc_plazo" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1317,29 +1317,6 @@ warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwcom_ordencompra_local">
-            <EntityTypeMapping TypeName="Model_compras.vwcom_ordencompra_local">
-              <MappingFragment StoreEntitySet="vwcom_ordencompra_local">
-                <ScalarProperty Name="oc_plazo" ColumnName="oc_plazo" />
-                <ScalarProperty Name="TerminoPago" ColumnName="TerminoPago" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="EstadoCierre" ColumnName="EstadoCierre" />
-                <ScalarProperty Name="IdEstado_cierre" ColumnName="IdEstado_cierre" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="oc_observacion" ColumnName="oc_observacion" />
-                <ScalarProperty Name="EstadoAprobacion" ColumnName="EstadoAprobacion" />
-                <ScalarProperty Name="IdEstadoAprobacion_cat" ColumnName="IdEstadoAprobacion_cat" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="oc_fecha" ColumnName="oc_fecha" />
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwcom_ordencompra_local_x_ingresar">
             <EntityTypeMapping TypeName="Model_compras.vwcom_ordencompra_local_x_ingresar">
               <MappingFragment StoreEntitySet="vwcom_ordencompra_local_x_ingresar">
@@ -1417,6 +1394,29 @@ warning 6002: The table/view 'DBERP.web.vwcom_ordencompra_local_det' does not ha
                 <ScalarProperty Name="Dias" ColumnName="Dias" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcom_ordencompra_local">
+            <EntityTypeMapping TypeName="Model_compras.vwcom_ordencompra_local">
+              <MappingFragment StoreEntitySet="vwcom_ordencompra_local">
+                <ScalarProperty Name="oc_plazo" ColumnName="oc_plazo" />
+                <ScalarProperty Name="TerminoPago" ColumnName="TerminoPago" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="EstadoCierre" ColumnName="EstadoCierre" />
+                <ScalarProperty Name="IdEstado_cierre" ColumnName="IdEstado_cierre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="oc_observacion" ColumnName="oc_observacion" />
+                <ScalarProperty Name="EstadoAprobacion" ColumnName="EstadoAprobacion" />
+                <ScalarProperty Name="IdEstadoAprobacion_cat" ColumnName="IdEstadoAprobacion_cat" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="oc_fecha" ColumnName="oc_fecha" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdOrdenCompra" ColumnName="IdOrdenCompra" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

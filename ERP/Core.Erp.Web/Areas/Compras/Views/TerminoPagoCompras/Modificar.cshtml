@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Compras.com_TerminoPago_Info
 @{
-    ViewBag.Title = "Modificar termino";
+    ViewBag.Title = "Modificar término de pago";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -11,20 +11,14 @@
 
 @using (Html.BeginForm("Modificar", "TerminoPagoCompras", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-   @Html.HiddenFor(q=>q.IdTerminoPago)
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTerminoPago)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdTerminoPago">Código*</label>
-                    @Html.TextBoxFor(q => q.IdTerminoPago, new { @class = "form-control", @disabled = "disabled" })
-                    @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
                     <label for="Dias">Días*</label>
-                    @Html.TextBoxFor(q => q.Dias, new { @class = "form-control"})
+                    @Html.TextBoxFor(q => q.Dias, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Dias, "", new { @class = "text-danger" })
                 </div>
             </div>

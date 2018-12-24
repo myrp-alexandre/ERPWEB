@@ -1,4 +1,5 @@
 @using System.Web.UI.WebControls;
+@using Core.Erp.Web.Helps;
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
@@ -64,8 +65,8 @@
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdTerminoPago = DataBinder.Eval(tc.DataItem, "IdTerminoPago") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdTerminoPago = DataBinder.Eval(tc.DataItem, "IdTerminoPago") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTerminoPago = DataBinder.Eval(tc.DataItem, "IdTerminoPago") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTerminoPago = DataBinder.Eval(tc.DataItem, "IdTerminoPago") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -73,7 +74,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = SessionFixed.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
@@ -81,8 +82,8 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdTerminoPago", "Código").Width = Unit.Percentage(20);
-        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(50);
+        settings.Columns.Add("IdTerminoPago", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(60);
         settings.Columns.Add("Dias", "Días").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
