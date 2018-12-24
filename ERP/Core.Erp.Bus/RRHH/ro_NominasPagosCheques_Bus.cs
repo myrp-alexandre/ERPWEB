@@ -82,6 +82,12 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                foreach (var item in info.detalle)
+                {
+                    bus_orden.anularDB(item.info_orden_pago);
+                    item.IdEmpresa_op = info.IdEmpresa;
+                    item.IdOrdenPago = item.info_orden_pago.IdOrdenPago;
+                }
                 return odata.anularDB(info);
             }
             catch (Exception)
@@ -122,6 +128,7 @@ namespace Core.Erp.Bus.RRHH
                             IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
                             Estado = "A",
                             Fecha_Transac = DateTime.Now,
+                            IdSucursal=item.IdSucursal,
                             detalle = new List<cp_orden_pago_det_Info>
                             {
                                 new cp_orden_pago_det_Info

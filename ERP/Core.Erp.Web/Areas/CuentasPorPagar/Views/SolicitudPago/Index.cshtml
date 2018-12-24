@@ -1,10 +1,8 @@
-﻿
-
-@model Core.Erp.Info.Helps.cl_filtros_Info
+﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 @{
 
     {
-        ViewBag.Title = "Devolución";
+        ViewBag.Title = "Solicitud de pago";
         if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
         {
             Response.Redirect("~/Account/Login");
@@ -14,7 +12,7 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Index", "DevolucionInventario", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "SolicitudPago", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     <div class="box ">
@@ -43,7 +41,7 @@
                             @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                        <div class="col-md-2">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>
                             <div class="input-group date">
@@ -102,8 +100,8 @@
             </div>
         </div>
         <div class="box-body">
-       
-                 @Html.Action("GridViewPartial_devolucion", new {IdSucursal = Model.IdSucursal, Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin })
+
+            @Html.Action("GridViewPartial_solicitud_pago", new { IdSucursal = Model.IdSucursal, Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin })
 
 
         </div>

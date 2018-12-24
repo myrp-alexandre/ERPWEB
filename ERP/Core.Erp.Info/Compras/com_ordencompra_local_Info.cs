@@ -19,7 +19,7 @@ namespace Core.Erp.Info.Compras
         public decimal IdProveedor { get; set; }
         public string oc_NumDocumento { get; set; }
         [Required(ErrorMessage = ("el campo termino pago es obligatorio"))]
-        public string IdTerminoPago { get; set; }
+        public int IdTerminoPago { get; set; }
         [Required(ErrorMessage = ("el campo plazo es obligatorio"))]
         public int oc_plazo { get; set; }
         public System.DateTime oc_fecha { get; set; }
@@ -54,7 +54,7 @@ namespace Core.Erp.Info.Compras
         public Nullable<System.DateTime> FechaAprobacion { get; set; }
         public List<com_ordencompra_local_det_Info> lst_det { get; set; }
         public Nullable<double> Total { get; set; }
-
+        public string TerminoPago { get; set; }
     }
     public class com_orden_aprobacion_Info
     {

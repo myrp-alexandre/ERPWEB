@@ -9,15 +9,19 @@ namespace Core.Erp.Data.CuentasPorPagar
 {
   public  class cp_SolicitudPago_Data
     {
-        public List<cp_SolicitudPago_Info> GetList(int IdEmpresa , bool mostrar_anulados)
+        public List<cp_SolicitudPago_Info> GetList(int IdEmpresa , int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin, bool mostrar_anulados)
         {
             try
             {
-                List<cp_SolicitudPago_Info> Lista;
+
+                Fecha_ini = Fecha_ini.Date;
+                Fecha_fin = Fecha_fin.Date; List<cp_SolicitudPago_Info> Lista;
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     if(mostrar_anulados)
-                    Lista = Context.cp_SolicitudPago.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new cp_SolicitudPago_Info
+                    Lista = Context.cp_SolicitudPago.Where(q => q.IdEmpresa == IdEmpresa
+                             && q.IdSucursal == IdSucursal
+                             && Fecha_ini <= q.Fecha && q.Fecha <= Fecha_fin).Select(q => new cp_SolicitudPago_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdSolicitud = q.IdSolicitud,
@@ -31,7 +35,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                     }).ToList();
 
                     else
-                        Lista =  Context.cp_SolicitudPago.Where(q => q.IdEmpresa == IdEmpresa
+                        Lista =  Context.cp_SolicitudPago.Where(q => q.IdEmpresa == IdEmpresa 
+                        && q.IdSucursal == IdSucursal
+                        && Fecha_ini <= q.Fecha && q.Fecha <= Fecha_fin
                         && q.Estado == true).Select(q => new cp_SolicitudPago_Info
                         {
                             IdEmpresa = q.IdEmpresa,

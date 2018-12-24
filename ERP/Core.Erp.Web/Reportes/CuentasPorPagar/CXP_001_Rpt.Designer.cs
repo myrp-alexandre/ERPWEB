@@ -648,7 +648,7 @@
             // xrTableCell27
             // 
             this.xrTableCell27.Name = "xrTableCell27";
-            this.xrTableCell27.Text = "Código";
+            this.xrTableCell27.Text = "ID";
             this.xrTableCell27.Weight = 1.6D;
             // 
             // xrTableCell28
