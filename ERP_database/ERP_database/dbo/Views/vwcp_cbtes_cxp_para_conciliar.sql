@@ -6,7 +6,7 @@ SELECT        cp_orden_giro.IdEmpresa, tb_sucursal.Su_Descripcion, 'FP - ' + cp_
                          cp_orden_giro.co_observacion, cp_orden_giro.IdEmpresa AS IdEmpresa_cxp, cp_orden_giro.IdTipoCbte_Ogiro AS IdTipoCbte_cxp, 
                          cp_orden_giro.IdCbteCble_Ogiro AS IdCbteCble_cxp, ISNULL(vwcp_Total_cancelado_x_cbte_cxp.Total_Cancelado, 0) AS Total_Cancelado, cp_orden_giro.co_total, 
                          cp_orden_giro.co_valorpagar, cp_orden_giro.co_valorpagar - ISNULL(vwcp_Total_cancelado_x_cbte_cxp.Total_Cancelado, 0) AS Saldo, cp_proveedor.IdPersona, 
-                         'PROVEE' AS IdTipoPersona, cp_proveedor.IdCtaCble_CXP, cp_proveedor.IdCtaCble_Anticipo
+                         'PROVEE' AS IdTipoPersona, cp_proveedor.IdCtaCble_CXP, null IdCtaCble_Anticipo
 FROM            cp_orden_giro INNER JOIN
                          cp_proveedor ON cp_orden_giro.IdEmpresa = cp_proveedor.IdEmpresa AND cp_orden_giro.IdProveedor = cp_proveedor.IdProveedor INNER JOIN
                          tb_sucursal ON cp_orden_giro.IdEmpresa = tb_sucursal.IdEmpresa AND cp_orden_giro.IdSucursal = tb_sucursal.IdSucursal INNER JOIN
@@ -22,7 +22,7 @@ SELECT        cp_nota_DebCre.IdEmpresa, tb_sucursal.Su_Descripcion, 'Nota de deb
                           AS Referencia, cp_nota_DebCre.cn_fecha AS Expr1, cp_nota_DebCre.cn_fecha AS Expr2, cp_nota_DebCre.cn_observacion, cp_nota_DebCre.IdEmpresa AS Expr3, 
                          cp_nota_DebCre.IdTipoCbte_Nota, cp_nota_DebCre.IdCbteCble_Nota AS Expr4, ISNULL(vwcp_Total_cancelado_x_cbte_cxp.Total_Cancelado, 0) AS Total_Cancelado, 
                          cp_nota_DebCre.cn_total, cp_nota_DebCre.cn_total AS Valor_a_Pagar, cp_nota_DebCre.cn_total - ISNULL(vwcp_Total_cancelado_x_cbte_cxp.Total_Cancelado, 0) 
-                         AS Saldo, cp_proveedor.IdPersona, 'PROVEE' AS IdTipoPersona, cp_proveedor.IdCtaCble_CXP, cp_proveedor.IdCtaCble_Anticipo
+                         AS Saldo, cp_proveedor.IdPersona, 'PROVEE' AS IdTipoPersona, cp_proveedor.IdCtaCble_CXP, null IdCtaCble_Anticipo
 FROM            cp_nota_DebCre INNER JOIN
                          cp_proveedor ON cp_nota_DebCre.IdEmpresa = cp_proveedor.IdEmpresa AND cp_nota_DebCre.IdProveedor = cp_proveedor.IdProveedor INNER JOIN
                          tb_sucursal ON cp_nota_DebCre.IdEmpresa = tb_sucursal.IdEmpresa AND cp_nota_DebCre.IdSucursal = tb_sucursal.IdSucursal LEFT OUTER JOIN
