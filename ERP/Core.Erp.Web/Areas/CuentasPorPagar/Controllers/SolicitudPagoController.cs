@@ -9,6 +9,8 @@ using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -54,14 +56,31 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_GridViewPartial_solicitud_pago", model);
         }
         #endregion
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbProveedor_CXP()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbProveedor_CXP", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
+        }
+        #endregion
         #region Acciones
         public ActionResult Nuevo()
         {
             cp_SolicitudPago_Info model = new cp_SolicitudPago_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                Solicitante = Convert.ToString(SessionFixed.IdUsuario)
+                Fecha = DateTime.Now,
             };
+            cargar_combos(model.IdEmpresa);
             return View();
         }
 
@@ -70,6 +89,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             if (!bus_solicitud.GuardarDB(model))
             {
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -79,9 +99,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             cp_SolicitudPago_Info model = bus_solicitud.GetInfo(IdEmpresa, IdSolicitud);
             if (model == null)
-            {
                 return RedirectToAction("Index");
-            }
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -90,6 +109,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             if (!bus_solicitud.ModificarDB(model))
             {
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -99,9 +119,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             cp_SolicitudPago_Info model = bus_solicitud.GetInfo(IdEmpresa, IdSolicitud);
             if (model == null)
-            {
                 return RedirectToAction("Index");
-            }
+            cargar_combos(IdEmpresa);
             return View(model);
         }
 
@@ -110,6 +129,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             if (!bus_solicitud.AnularDB(model))
             {
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
