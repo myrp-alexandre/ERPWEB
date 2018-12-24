@@ -12,16 +12,6 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#FechaOP').datepicker({
-            autoclose: true
-        });
-        $("#Fecha_ini").change(function () {
-            GetSaldoAnterior();
-        });
-        $("#Fecha_fin").change(function () {
-            GetSaldoAnterior();
-            GetIngresos();
-        });
         $("#IdPeriodo").change(function () {
             GetPeriodo();
             GetSaldoAnterior();
@@ -36,13 +26,11 @@
             IdEntidad.SetValue(null);
         });
 
-
         $("#IdEstadoCierre").change(function () {
             MostrarOcultarOP();
         });
 
         GetIdCtaCbleCaja();
-        GetPeriodo();
         GetSaldoAnterior();
         GetIngresos();
         $("#link_op").hide();
@@ -113,10 +101,8 @@
     }
 
     function GetSaldoAnterior() {
-        var d = Fecha_ini.GetValue();
-        console.log(d);
         var datos = {
-            FechaCorte: d,
+            FechaCorte: Fecha_ini.GetDate(),
             IdCtaCble: $("#IdCtaCble").val()
         }
         $.ajax({
@@ -173,8 +159,11 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data.IdEmpresa != 0) {
-                    Fecha_ini.SetValue(data.pe_FechaIni);
-                    Fecha_fin.SetValue(data.pe_FechaFin);
+                    
+                    var d1 = new Date(data.pe_FechaIni.match(/\d+/)[0] * 1);
+                    var d2 = new Date(data.pe_FechaFin.match(/\d+/)[0] * 1);
+                    Fecha_ini.SetValue(d1);
+                    Fecha_fin.SetValue(d2);
                 }
             },
             error: function (error) {
@@ -184,7 +173,7 @@
 
     function GetIngresos() {
         var datos = {
-            FechaFin: Fecha_fin.GetValue(),
+            FechaFin: Fecha_fin.GetDate(),
             IdCaja: $("#IdCaja").val(),
             IdTransaccionFixed: $("#IdTransaccionSession").val()
         }
@@ -257,7 +246,7 @@
             }
 
         });
-        $('#FechaOP').datepicker("setDate", moment(new Date()).format("DD/MM/YYYY"));
+        //$('#FechaOP').datepicker("setDate", moment(new Date()).format("DD/MM/YYYY"));
         GridView_comprobante_detalle.PerformCallback();
     }
 </script>
@@ -359,13 +348,14 @@
                 <div class="form-group">
                     <label for="Fecha_ini">Desde*</label>
                     @Html.DevExpress().DateEditFor(q => q.Fecha_ini, settings =>
-                       {
-                           settings.Name = "Fecha_ini";
-                           settings.Properties.UseMaskBehavior = true;
-                           settings.Properties.EditFormat = EditFormat.Date;
-                           settings.Properties.EditFormatString = "dd/MM/yyyy";
-                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+               {
+                   settings.Name = "Fecha_ini";
+                   settings.Properties.UseMaskBehavior = true;
+                   settings.Properties.EditFormat = EditFormat.Date;
+                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.ClientSideEvents.ValueChanged = "function(s,e){GetSaldoAnterior();}";
                        }).GetHtml()
                     @Html.ValidationMessageFor(q => q.Fecha_ini, "", new { @class = "text-danger" })
                 </div>
@@ -381,6 +371,7 @@
                         settings.Properties.EditFormatString = "dd/MM/yyyy";
                         settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        settings.Properties.ClientSideEvents.ValueChanged = "function(s,e){GetIngresos();}";
                     }).GetHtml()
                     @Html.ValidationMessageFor(q => q.Fecha_fin, "", new { @class = "text-danger" })
                 </div>

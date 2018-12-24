@@ -287,7 +287,6 @@
     <Build Include="dbo\Tables\cp_conciliacion_Caja_det_Ing_Caja.sql" />
     <Build Include="dbo\Tables\caj_parametro.sql" />
     <Build Include="dbo\Tables\tb_banco.sql" />
-    <Build Include="dbo\Tables\cp_proveedor_Autorizacion.sql" />
     <Build Include="dbo\Tables\ro_empleado_x_titulos.sql" />
     <Build Include="dbo\Tables\fa_TerminoPago.sql" />
     <Build Include="dbo\Tables\cp_proveedor_clase.sql" />
@@ -298,7 +297,6 @@
     <Build Include="dbo\Tables\com_catalogo.sql" />
     <Build Include="dbo\Tables\cp_nota_DebCre.sql" />
     <Build Include="dbo\Tables\tb_banco_procesos_bancarios_x_empresa.sql" />
-    <Build Include="dbo\Tables\cp_proveedor_contactos.sql" />
     <Build Include="dbo\Tables\com_catalogo_tipo.sql" />
     <Build Include="dbo\Tables\in_Producto_Composicion.sql" />
     <Build Include="dbo\Tables\in_spSys_inv_Reversar_aprobacion_ct_cbtecble.sql" />
@@ -737,7 +735,6 @@
     <Build Include="dbo\Views\vwRo_MotivoPrestamo.sql" />
     <Build Include="dbo\Views\vwcxc_cobros_x_vta_nota_x_RetIVA.sql" />
     <Build Include="dbo\Views\vwba_transferencia.sql" />
-    <Build Include="dbo\Views\vwcp_orden_pago_Anticipo_Saldo.sql" />
     <Build Include="dbo\Views\vwRo_Nomina_Empleado_x_Rubro.sql" />
     <Build Include="dbo\Views\vwin_guia_x_traspaso_bodega.sql" />
     <Build Include="dbo\Views\vwcxc_cobros_x_vta_nota_x_RetIVA_Sumatoria.sql" />
@@ -747,7 +744,6 @@
     <Build Include="dbo\Views\vwin_Guia_x_traspaso_bodega_x_ordencompra_local_det.sql" />
     <Build Include="dbo\Views\vwro_horario_planificacion_det.sql" />
     <Build Include="dbo\Views\vwcxc_cobros_x_vta_x_RetIva_x_Cliente_x_AnioMes.sql" />
-    <Build Include="dbo\Views\vwcp_ProveedorRuc.sql" />
     <Build Include="dbo\Views\vwin_in_Guia_x_traspaso_bodega_x_in_transferencia_det.sql" />
     <Build Include="dbo\Views\vwro_nomina_x_horas_extras_aprobadas.sql" />
     <Build Include="dbo\Views\vwcxc_conciliacion.sql" />
