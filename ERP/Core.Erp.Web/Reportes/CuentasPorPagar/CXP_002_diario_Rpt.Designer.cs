@@ -190,7 +190,7 @@
             // xrTableCell1
             // 
             this.xrTableCell1.Name = "xrTableCell1";
-            this.xrTableCell1.Text = "Código";
+            this.xrTableCell1.Text = "ID";
             this.xrTableCell1.Weight = 0.57876520053646618D;
             // 
             // xrTableCell2
