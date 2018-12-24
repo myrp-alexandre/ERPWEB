@@ -122,6 +122,7 @@ namespace Core.Erp.Bus.RRHH
                             IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
                             Estado = "A",
                             Fecha_Transac = DateTime.Now,
+                            IdSucursal=item.IdSucursal,
                             detalle = new List<cp_orden_pago_det_Info>
                             {
                                 new cp_orden_pago_det_Info

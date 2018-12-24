@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[com_TerminoPago] (
-    [IdTerminoPago]   VARCHAR (25)  NOT NULL,
+    [IdEmpresa]       INT           NOT NULL,
+    [IdTerminoPago]   INT           NOT NULL,
     [Descripcion]     VARCHAR (500) NOT NULL,
     [Dias]            INT           NOT NULL,
     [Estado]          VARCHAR (1)   NOT NULL,
@@ -9,8 +10,10 @@
     [IdUsuarioUltAnu] VARCHAR (50)  NULL,
     [Fecha_UltAnu]    DATETIME      NULL,
     [MotiAnula]       VARCHAR (50)  NULL,
-    CONSTRAINT [PK_in_TerminoPago] PRIMARY KEY CLUSTERED ([IdTerminoPago] ASC)
+    CONSTRAINT [PK_in_TerminoPago] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdTerminoPago] ASC)
 );
+
+
 
 
 

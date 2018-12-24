@@ -388,11 +388,9 @@
                 }
             }
 
-        var datos = {
+        var datos = {            
+            IdEmpresa: $("#IdEmpresa").val(),
             pe_cedulaRuc: cedula,
-            IdEmpresa: $("#IdEmpresa").val()
-
-
         }
         $.ajax({
             type: 'POST',
@@ -412,7 +410,7 @@
                 }
                 else
                 {
-                    if (data.IdPersona != 0 && data.IdCliente == 0) {
+                    if (data.IdPersona != 0 && data.IdProveedor == 0) {
                         $("#pe_nombre").val(data.info_persona.pe_nombre);
                         $("#pe_apellido").val(data.info_persona.pe_apellido);
                         $("#pe_nombreCompleto").val(data.info_persona.pe_nombreCompleto);

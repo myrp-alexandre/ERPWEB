@@ -23,7 +23,7 @@ namespace Core.Erp.Data
         public int IdSucursal { get; set; }
         public decimal IdOrdenCompra { get; set; }
         public decimal IdProveedor { get; set; }
-        public string IdTerminoPago { get; set; }
+        public int IdTerminoPago { get; set; }
         public int oc_plazo { get; set; }
         public System.DateTime oc_fecha { get; set; }
         public string oc_observacion { get; set; }
