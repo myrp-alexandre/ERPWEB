@@ -19,6 +19,10 @@ namespace Core.Erp.Info.RRHH
         public int IdEmpresa_op { get; set; }
         public decimal IdOrdenPago { get; set; }
 
+        public int IdEmpresa_dc { get; set; }
+        public int IdTipoCbte { get; set; }
+        public decimal IdCbteCble { get; set; }
+        public int Secuancia_op { get; set; }
 
         #region camp. vista
         public cp_orden_pago_Info info_orden_pago { get; set; }

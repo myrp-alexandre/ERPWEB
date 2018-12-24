@@ -33,6 +33,12 @@ namespace Core.Erp.Data.RRHH
                                  pe_nombre = q.pe_nombre,
                                  pe_cedulaRuc = q.pe_cedulaRuc,
                                  pe_nombreCompleto = q.pe_apellido + " " + q.pe_nombre,
+                                 IdEmpresa_op=q.IdEmpresa_op,
+                                 IdOrdenPago=q.IdOrdenPago,
+                                 Secuancia_op=q.Secuancia_op,
+                                 IdEmpresa_dc=q.IdEmpresa_dc,
+                                 IdTipoCbte=q.IdTipoCbte,
+                                 IdCbteCble=q.IdCbteCble
 
 
                              }).ToList();

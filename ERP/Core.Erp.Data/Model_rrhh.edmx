@@ -921,7 +921,11 @@
           <Property Name="Observacion" Type="varchar(max)" />
           <Property Name="Valor" Type="float" Nullable="false" />
           <Property Name="IdEmpresa_op" Type="int" Nullable="false" />
+          <Property Name="Secuancia_op" Type="int" Nullable="false" />
           <Property Name="IdOrdenPago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpresa_dc" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar">
           <Key>
@@ -2188,6 +2192,10 @@ warning 6002: The table/view 'DBERP.dbo.vwro_NominasPagosCheques_det' does not h
             <PropertyRef Name="IdOrdenPago" />
             <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdEmpresa_dc" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="Secuancia_op" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdTransaccion" Type="int" Nullable="false" />
@@ -2205,6 +2213,10 @@ warning 6002: The table/view 'DBERP.dbo.vwro_NominasPagosCheques_det' does not h
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpresa_dc" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuancia_op" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_participacion_utilidad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4866,7 +4878,11 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_NominasPagosCheques_det].[pe_apellido] AS [pe_apellido], 
     [vwro_NominasPagosCheques_det].[pe_nombre] AS [pe_nombre], 
     [vwro_NominasPagosCheques_det].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-    [vwro_NominasPagosCheques_det].[IdPersona] AS [IdPersona]
+    [vwro_NominasPagosCheques_det].[IdPersona] AS [IdPersona], 
+    [vwro_NominasPagosCheques_det].[IdEmpresa_dc] AS [IdEmpresa_dc], 
+    [vwro_NominasPagosCheques_det].[IdTipoCbte] AS [IdTipoCbte], 
+    [vwro_NominasPagosCheques_det].[IdCbteCble] AS [IdCbteCble], 
+    [vwro_NominasPagosCheques_det].[Secuancia_op] AS [Secuancia_op]
     FROM [dbo].[vwro_NominasPagosCheques_det] AS [vwro_NominasPagosCheques_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_participacion_utilidad" EntityType="Self.vwro_participacion_utilidad" store:Type="Views" store:Schema="dbo">
@@ -7838,7 +7854,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_NominasPagosCheques" EntitySet="ro_NominasPagosCheques" />
             <End Role="ro_NominasPagosCheques_det" EntitySet="ro_NominasPagosCheques_det" />
           </AssociationSet>
-          <EntitySet Name="vwro_NominasPagosCheques" EntityType="Model_rrhh.vwro_NominasPagosCheques" />
           <EntitySet Name="ro_archivos_bancos_generacion" EntityType="Model_rrhh.ro_archivos_bancos_generacion" />
           <EntitySet Name="vwro_archivos_bancos_generacion" EntityType="Model_rrhh.vwro_archivos_bancos_generacion" />
           <AssociationSet Name="FK_ro_archivos_bancos_generacion_ro_periodo_x_ro_Nomina_TipoLiqui" Association="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_periodo_x_ro_Nomina_TipoLiqui">
@@ -7849,8 +7864,9 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_archivos_bancos_generacion" EntitySet="ro_archivos_bancos_generacion" />
             <End Role="ro_archivos_bancos_generacion_x_empleado" EntitySet="ro_archivos_bancos_generacion_x_empleado" />
           </AssociationSet>
-          <EntitySet Name="vwro_NominasPagosCheques_det" EntityType="Model_rrhh.vwro_NominasPagosCheques_det" />
           <EntitySet Name="vwRo_rol_detalle_saldo_por_pagar" EntityType="Model_rrhh.vwRo_rol_detalle_saldo_por_pagar" />
+          <EntitySet Name="vwro_NominasPagosCheques" EntityType="Model_rrhh.vwro_NominasPagosCheques" />
+          <EntitySet Name="vwro_NominasPagosCheques_det" EntityType="Model_rrhh.vwro_NominasPagosCheques_det" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -10340,6 +10356,10 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_empleado" FromRole="ro_NominasPagosCheques_det" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_NominasPagosCheques" Relationship="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques" FromRole="ro_NominasPagosCheques_det" ToRole="ro_NominasPagosCheques" />
+          <Property Name="Secuancia_op" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_dc" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
         <Association Name="FK_ro_NominasPagosCheques_det_ro_empleado">
           <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="0..1" />
@@ -10385,31 +10405,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwro_NominasPagosCheques">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdTransaccion" />
-            <PropertyRef Name="IdNomina_Tipo" />
-            <PropertyRef Name="IdNomina_TipoLiqui" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="DescripcionProcesoNomina" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="pe_FechaIni" />
-            <PropertyRef Name="pe_FechaFin" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTransaccion" Type="Int32" Nullable="false" />
-          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
-        </EntityType>
         <EntityType Name="ro_archivos_bancos_generacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -10495,35 +10490,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwro_NominasPagosCheques_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdTransaccion" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="Valor" />
-            <PropertyRef Name="IdEmpresa_op" />
-            <PropertyRef Name="IdOrdenPago" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdPersona" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTransaccion" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="IdEmpresa_op" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_tipoCta" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="em_NumCta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-        </EntityType>
         <EntityType Name="vwRo_rol_detalle_saldo_por_pagar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -10560,6 +10526,68 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="em_NumCta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="em_tipoCta" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="vwro_NominasPagosCheques">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+            <PropertyRef Name="IdNomina_Tipo" />
+            <PropertyRef Name="IdNomina_TipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="pe_FechaIni" />
+            <PropertyRef Name="pe_FechaFin" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTransaccion" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="vwro_NominasPagosCheques_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="IdEmpresa_op" />
+            <PropertyRef Name="IdOrdenPago" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdEmpresa_dc" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="Secuancia_op" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTransaccion" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="IdEmpresa_op" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_tipoCta" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="em_NumCta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_dc" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuancia_op" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -12641,6 +12669,10 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySetMapping Name="ro_NominasPagosCheques_det">
             <EntityTypeMapping TypeName="Model_rrhh.ro_NominasPagosCheques_det">
               <MappingFragment StoreEntitySet="ro_NominasPagosCheques_det">
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa_dc" ColumnName="IdEmpresa_dc" />
+                <ScalarProperty Name="Secuancia_op" ColumnName="Secuancia_op" />
                 <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
                 <ScalarProperty Name="IdEmpresa_op" ColumnName="IdEmpresa_op" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
@@ -12648,23 +12680,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwro_NominasPagosCheques">
-            <EntityTypeMapping TypeName="Model_rrhh.vwro_NominasPagosCheques">
-              <MappingFragment StoreEntitySet="vwro_NominasPagosCheques">
-                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
-                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdNomina_TipoLiqui" ColumnName="IdNomina_TipoLiqui" />
-                <ScalarProperty Name="IdNomina_Tipo" ColumnName="IdNomina_Tipo" />
                 <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
@@ -12710,28 +12725,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwro_NominasPagosCheques_det">
-            <EntityTypeMapping TypeName="Model_rrhh.vwro_NominasPagosCheques_det">
-              <MappingFragment StoreEntitySet="vwro_NominasPagosCheques_det">
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
-                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
-                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
-                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
-                <ScalarProperty Name="IdEmpresa_op" ColumnName="IdEmpresa_op" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwRo_rol_detalle_saldo_por_pagar">
             <EntityTypeMapping TypeName="Model_rrhh.vwRo_rol_detalle_saldo_por_pagar">
               <MappingFragment StoreEntitySet="vwRo_rol_detalle_saldo_por_pagar">
@@ -12753,6 +12746,49 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
                 <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_NominasPagosCheques">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_NominasPagosCheques">
+              <MappingFragment StoreEntitySet="vwro_NominasPagosCheques">
+                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
+                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNomina_TipoLiqui" ColumnName="IdNomina_TipoLiqui" />
+                <ScalarProperty Name="IdNomina_Tipo" ColumnName="IdNomina_Tipo" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_NominasPagosCheques_det">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_NominasPagosCheques_det">
+              <MappingFragment StoreEntitySet="vwro_NominasPagosCheques_det">
+                <ScalarProperty Name="Secuancia_op" ColumnName="Secuancia_op" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa_dc" ColumnName="IdEmpresa_dc" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="em_NumCta" ColumnName="em_NumCta" />
+                <ScalarProperty Name="em_tipoCta" ColumnName="em_tipoCta" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
+                <ScalarProperty Name="IdEmpresa_op" ColumnName="IdEmpresa_op" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
