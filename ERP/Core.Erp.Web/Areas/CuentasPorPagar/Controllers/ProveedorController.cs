@@ -109,6 +109,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 IdEmpresa = IdEmpresa,
                 IdClaseProveedor = 1,
+                IdCiudad = "09",
                 info_persona = new Info.General.tb_persona_Info
                 {
                     pe_Naturaleza = "NATU",
