@@ -79,10 +79,10 @@ namespace Core.Erp.Data
         public virtual cp_codigo_SRI cp_codigo_SRI1 { get; set; }
         public virtual cp_codigo_SRI cp_codigo_SRI2 { get; set; }
         public virtual cp_pais_sri cp_pais_sri { get; set; }
-        public virtual cp_proveedor cp_proveedor { get; set; }
         public virtual ICollection<cp_orden_giro_pagos_sri> cp_orden_giro_pagos_sri { get; set; }
         public virtual ICollection<cp_orden_giro_x_in_Ing_Egr_Inven> cp_orden_giro_x_in_Ing_Egr_Inven { get; set; }
         public virtual ICollection<cp_retencion> cp_retencion { get; set; }
         public virtual ICollection<cp_orden_giro_det> cp_orden_giro_det { get; set; }
+        public virtual cp_proveedor cp_proveedor { get; set; }
     }
 }

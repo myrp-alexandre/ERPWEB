@@ -2,7 +2,7 @@
 AS
 SELECT        prov.IdEmpresa, 'PROVEE' + '-' + CAST(prov.IdPersona AS varchar(20)) + '-' + CAST(prov.IdProveedor AS varchar(20)) AS IdBeneficiario, 'PROVEE' AS IdTipo_Persona, prov.IdPersona, 
                          prov.IdProveedor AS IdEntidad, prov.pr_codigo AS Codigo, pers.pe_nombreCompleto AS Nombre, pers.pe_nombreCompleto pr_girar_cheque_a, pers.pe_razonSocial, pers.pe_cedulaRuc, pers.pe_Naturaleza, prov.IdCtaCble_CXP AS IdCtaCble, 
-                         prov.IdCentroCosot AS IdCentroCosto, NULL AS IdSubCentroCosto, prov.IdCtaCble_Anticipo, prov.IdCtaCble_Gasto, prov.pr_estado AS Estado, prov.IdTipoCta_acreditacion_cat, prov.num_cta_acreditacion, 
+                         null AS IdCentroCosto, NULL AS IdSubCentroCosto, null IdCtaCble_Anticipo, prov.IdCtaCble_Gasto, prov.pr_estado AS Estado, prov.IdTipoCta_acreditacion_cat, prov.num_cta_acreditacion, 
                          prov.IdBanco_acreditacion, pers.pe_apellido, pers.pe_nombre, pers.pe_nombreCompleto, pers.IdTipoDocumento, pers.pe_direccion, null pe_telefonoCasa, pers.pe_celular, pers.pe_correo
 FROM            tb_persona AS pers INNER JOIN
                          cp_proveedor AS prov ON pers.IdPersona = prov.IdPersona
