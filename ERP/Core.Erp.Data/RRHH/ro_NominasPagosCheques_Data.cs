@@ -107,6 +107,7 @@ namespace Core.Erp.Data.RRHH
             try
             {
                 int secuencia = 1;
+
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_NominasPagosCheques Entity = new ro_NominasPagosCheques
@@ -122,8 +123,10 @@ namespace Core.Erp.Data.RRHH
                         FechaTransac = info.FechaTransac = DateTime.Now
                     };
                     Context.ro_NominasPagosCheques.Add(Entity);
+
                     foreach (var item in info.detalle)
                     {
+                       
                         ro_NominasPagosCheques_det Entity_ = new ro_NominasPagosCheques_det
                         {
                             IdEmpresa = item.IdEmpresa,

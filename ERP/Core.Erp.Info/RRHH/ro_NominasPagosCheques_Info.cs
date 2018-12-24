@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Core.Erp.Info.CuentasPorPagar;
 namespace Core.Erp.Info.RRHH
 {
    public class ro_NominasPagosCheques_Info

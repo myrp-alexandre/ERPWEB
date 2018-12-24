@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Erp.Info.CuentasPorPagar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace Core.Erp.Info.RRHH
 
 
         #region camp. vista
+        public cp_orden_pago_Info info_orden_pago { get; set; }
+
         public double? ValorCancelado { get; set; }
         public string em_codigo { get; set; }
         public string em_tipoCta { get; set; }

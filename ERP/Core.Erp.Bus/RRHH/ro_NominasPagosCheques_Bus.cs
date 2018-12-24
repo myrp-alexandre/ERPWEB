@@ -15,6 +15,7 @@ namespace Core.Erp.Bus.RRHH
    public class ro_NominasPagosCheques_Bus
     {
         ro_NominasPagosCheques_Data odata = new ro_NominasPagosCheques_Data();
+        cp_orden_pago_Bus bus_orden = new cp_orden_pago_Bus();
         public List<ro_NominasPagosCheques_Info> get_list(int IdEmpresa, DateTime Fechainicio, DateTime fechafin, bool estado)
         {
             try
@@ -45,6 +46,15 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+
+                 get_op_x_empleados(info);
+
+                foreach (var item in info.detalle)
+                {
+                    bus_orden.guardarDB(item.info_orden_pago);
+                    item.IdEmpresa_op = info.IdEmpresa;
+                    item.IdOrdenPago = item.info_orden_pago.IdOrdenPago;
+                }
                 return odata.guardarDB(info);
             }
             catch (Exception)
@@ -82,11 +92,13 @@ namespace Core.Erp.Bus.RRHH
         }
 
         // generar ordenes de pagos
-        public List<cp_orden_pago_Info> get_op_x_empleados(ro_NominasPagosCheques_Info info)
+        public ro_NominasPagosCheques_Info get_op_x_empleados(ro_NominasPagosCheques_Info info)
         {
             try
             {
-                List<cp_orden_pago_Info> lista_op = new List<cp_orden_pago_Info>();
+                ro_Parametros_Data data_param = new ro_Parametros_Data();
+                var parametro = data_param.get_info(info.IdEmpresa);
+                cp_orden_pago_Info info_orden = new cp_orden_pago_Info();
                 ro_periodo_Bus bus_periodo = new ro_periodo_Bus();
                 var periodo = bus_periodo.get_info(info.IdEmpresa, info.IdPeriodo);
                 cp_orden_pago_tipo_x_empresa_Bus bus_tipo_op = new cp_orden_pago_tipo_x_empresa_Bus();
@@ -96,8 +108,7 @@ namespace Core.Erp.Bus.RRHH
 
                 {
 
-                    lista_op.Add(
-                        new cp_orden_pago_Info
+                    info_orden=new cp_orden_pago_Info
                         {
 
                             IdEmpresa = item.IdEmpresa,
@@ -120,7 +131,7 @@ namespace Core.Erp.Bus.RRHH
                                     Valor_a_pagar=item.Valor,
                                     Referencia="Periodo "+info.IdPeriodo,
                                     Fecha_Pago=periodo.pe_FechaFin,
-                                    IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
+                                    IdEstadoAprobacion = info_tipo_op.IdEstadoAprobacion,
                                     IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
                                 }
                             },
@@ -159,10 +170,10 @@ namespace Core.Erp.Bus.RRHH
 
                             }
 
-                        });
-
+                        };
+                    item.info_orden_pago = info_orden;
                 });
-                return lista_op;
+                return info;
             }
             catch (Exception)
             {
