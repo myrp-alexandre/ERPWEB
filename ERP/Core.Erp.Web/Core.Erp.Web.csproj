@@ -311,6 +311,7 @@
     <Compile Include="Areas\CuentasPorPagar\Controllers\ParametrosCXPController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ProveedorController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\RetencionController.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\SolicitudPagoController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\TipoCodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\TipoOrdenPagoController.cs" />
     <Compile Include="Areas\CuentasPorPagar\CuentasPorPagarAreaRegistration.cs" />
@@ -9543,6 +9544,8 @@
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_PresentacionPro_importacion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_ProductoPro_importacion.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_deudas_det_PorIngresar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_solicitud_pago.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9657,6 +9660,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

@@ -1,0 +1,27 @@
+@{
+	var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView_solicitud_pago";
+        settings.CallbackRouteValues = new { Controller = "SolicitudPago", Action = "GridViewPartial_solicitud_pago" };
+
+
+		settings.KeyFieldName = "IdSolicitud";
+
+		settings.SettingsPager.Visible = true;
+		settings.Settings.ShowGroupPanel = true;
+		settings.Settings.ShowFilterRow = true;
+		settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+		settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+		settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+		settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+		settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+		settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+				settings.Columns.Add("IdSolicitud");
+				settings.Columns.Add("IdSucursal");
+				settings.Columns.Add("Fecha");
+				settings.Columns.Add("Concepto");
+				settings.Columns.Add("Estado");
+			});
+}
+@grid.Bind(Model).GetHtml()
