@@ -17,7 +17,7 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                        Lista = (from q in Context.ro_NominasPagosCheques
+                        Lista = (from q in Context.vwro_NominasPagosCheques
                                  where q.IdEmpresa == IdEmpresa
                                  select new ro_NominasPagosCheques_Info
                                  {
@@ -27,7 +27,11 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina_TipoLiqui = q.IdNomina_TipoLiqui,
                                      IdPeriodo = q.IdPeriodo,
                                      Observacion=q.Observacion,
-                                     Estado=q.Estado
+                                     Estado=q.Estado,
+                                     Descripcion=q.Descripcion,
+                                     DescripcionProcesoNomina=q.DescripcionProcesoNomina,
+                                     pe_FechaFin=q.pe_FechaFin,
+                                     pe_FechaIni=q.pe_FechaIni
 
 
                                  }).ToList();
@@ -107,6 +111,7 @@ namespace Core.Erp.Data.RRHH
             try
             {
                 int secuencia = 1;
+
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_NominasPagosCheques Entity = new ro_NominasPagosCheques
@@ -122,8 +127,10 @@ namespace Core.Erp.Data.RRHH
                         FechaTransac = info.FechaTransac = DateTime.Now
                     };
                     Context.ro_NominasPagosCheques.Add(Entity);
+
                     foreach (var item in info.detalle)
                     {
+                       
                         ro_NominasPagosCheques_det Entity_ = new ro_NominasPagosCheques_det
                         {
                             IdEmpresa = item.IdEmpresa,
@@ -131,7 +138,13 @@ namespace Core.Erp.Data.RRHH
                             IdSucursal = item.IdSucursal,
                             IdEmpleado = item.IdEmpleado,
                             Valor = item.Valor,
-                            Secuencia = secuencia
+                            Secuencia = secuencia,
+                            IdEmpresa_op=info.IdEmpresa,
+                            IdOrdenPago=item.IdOrdenPago,
+                            Secuancia_op=item.Secuancia_op,
+                            IdEmpresa_dc=item.IdEmpresa_dc,
+                            IdTipoCbte=item.IdTipoCbte,
+                            IdCbteCble=item.IdCbteCble
                         };
                         Context.ro_NominasPagosCheques_det.Add(Entity_);
                         secuencia++;
@@ -201,8 +214,8 @@ namespace Core.Erp.Data.RRHH
                     Entity.Estado = info.Estado = false;
                     Entity.IdUsuarioAnu = info.IdUsuarioAnu;
                     Entity.FechaAnu = info.FechaAnu = DateTime.Now;
-                    var detalle = Context.ro_NominasPagosCheques_det.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdTransaccion == info.IdTransaccion);
-                    Context.ro_NominasPagosCheques_det.RemoveRange(detalle);
+                    string sql = "Update ro_NominasPagosCheques_det set Estado=0 where IdEmpresa='"+info.IdEmpresa+ "'  and IdTransaccion='"+info.IdTransaccion+"'";
+                    Context.Database.ExecuteSqlCommand(sql);
                     Context.SaveChanges();
                 }
 

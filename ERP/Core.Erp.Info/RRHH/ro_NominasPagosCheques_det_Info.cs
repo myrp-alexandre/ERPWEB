@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Erp.Info.CuentasPorPagar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,28 @@ namespace Core.Erp.Info.RRHH
         public double Valor { get; set; }
         public int IdEmpresa_op { get; set; }
         public decimal IdOrdenPago { get; set; }
+
+        public int IdEmpresa_dc { get; set; }
+        public int IdTipoCbte { get; set; }
+        public decimal IdCbteCble { get; set; }
+        public int Secuancia_op { get; set; }
+
+        #region camp. vista
+        public cp_orden_pago_Info info_orden_pago { get; set; }
+
+        public double? ValorCancelado { get; set; }
+        public string em_codigo { get; set; }
+        public string em_tipoCta { get; set; }
+        public string em_NumCta { get; set; }
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public double Saldo { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public decimal IdPersona { get; set; }
+
+
+        #endregion
 
     }
 }

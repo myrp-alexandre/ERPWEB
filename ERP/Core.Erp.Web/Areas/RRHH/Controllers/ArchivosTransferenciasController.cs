@@ -99,7 +99,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(model.IdTransaccionSession);
-            model.IdRol = 1;
             if (model.detalle == null || model.detalle.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para el archivo";
@@ -226,7 +225,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
 
-        public JsonResult CargarEmpleados( int IdProceso  = 0, int IdNomina_Tipo=0, int IdNomina_TipoLiqui=0, int IdPeriodo=0, decimal  IdTransaccionSession=0)
+        public JsonResult CargarEmpleados( int IdProceso  = 0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0, decimal  IdTransaccionSession=0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             string TipoCuenta = "";

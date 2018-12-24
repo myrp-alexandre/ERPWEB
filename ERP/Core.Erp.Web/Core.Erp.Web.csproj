@@ -311,6 +311,7 @@
     <Compile Include="Areas\CuentasPorPagar\Controllers\ParametrosCXPController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\ProveedorController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\RetencionController.cs" />
+    <Compile Include="Areas\CuentasPorPagar\Controllers\SolicitudPagoController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\TipoCodigoSRIController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\TipoOrdenPagoController.cs" />
     <Compile Include="Areas\CuentasPorPagar\CuentasPorPagarAreaRegistration.cs" />
@@ -419,6 +420,7 @@
     <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridExportDemoOptions.cs" />
     <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridDataOutputDemosHelper.cs" />
     <Compile Include="Areas\RRHH\Controllers\ActaFiniquitoController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\AjustesAnticipoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ArchivosActualizacionSueldoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ArchivosTransferenciasController.cs" />
     <Compile Include="Areas\RRHH\Controllers\AreaController.cs" />
@@ -459,6 +461,7 @@
     <Compile Include="Areas\RRHH\Controllers\RdepController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubroController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubrosCalculadosController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\SancionesPorAtrasoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TipoGastosPersonalesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TipoGastosPersonalesAnualController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TipoPrestamoController.cs" />
@@ -9538,14 +9541,17 @@
     <Content Include="Areas\RRHH\Views\PagosEnCheques\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\PagosEnCheques\Nuevo.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\Importar.cshtml" />
-    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_LineaPro_importacion.cshtml" />
-    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_CategoriaPro_importacion.cshtml" />
-    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_GrupoPro_importacion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_SubgrupoPro_importacion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_MarcaPro_importacion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_PresentacionPro_importacion.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_ProductoPro_importacion.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_deudas_det_PorIngresar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Index.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_solicitud_pago.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_CmbProveedor_CXP.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9628,6 +9634,8 @@
     <Folder Include="Areas\Produccion\Views\Shared\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
+    <Folder Include="Areas\RRHH\Views\AjustesAnticipo\" />
+    <Folder Include="Areas\RRHH\Views\SancionesPorAtraso\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\activofijo\" />

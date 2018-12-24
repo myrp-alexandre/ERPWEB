@@ -1,27 +1,29 @@
-﻿CREATE VIEW [web].[VWBAN_001]
-AS
-SELECT        ba_Cbte_Ban_tipo.CodTipoCbteBan, ba_Cbte_Ban.IdEmpresa, ba_Cbte_Ban.IdCbteCble, ba_Cbte_Ban.IdTipocbte, ba_Cbte_Ban.IdBanco, ba_Banco_Cuenta.ba_descripcion, ba_Cbte_Ban.cb_Fecha, 
-                         ba_Cbte_Ban.cb_Observacion, ba_Cbte_Ban.Estado, ba_Cbte_Ban.IdTipoNota, ba_tipo_nota.Descripcion AS Descripcion_TipoNota, 'Ninguno' AS NomBeneficiario, ct_cbtecble_det.IdCtaCble, ct_plancta.pc_Cuenta, 
-                         ct_cbtecble_det.dc_Valor, CASE WHEN ct_cbtecble_det.dc_Valor > 0 THEN ct_cbtecble_det.dc_Valor ELSE 0 END AS dc_Valor_Debe, CASE WHEN ct_cbtecble_det.dc_Valor < 0 THEN ABS(ct_cbtecble_det.dc_Valor) 
-                         ELSE 0 END AS dc_Valor_Haber
-FROM            ct_cbtecble_det INNER JOIN
-                         ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
-                         ba_Cbte_Ban_tipo INNER JOIN
-                         ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo ON ba_Cbte_Ban_tipo.CodTipoCbteBan = ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.CodTipoCbteBan INNER JOIN
-                         ba_Cbte_Ban ON ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.IdEmpresa = ba_Cbte_Ban.IdEmpresa AND ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.IdTipoCbteCble = ba_Cbte_Ban.IdTipocbte INNER JOIN
-                         ba_Banco_Cuenta ON ba_Cbte_Ban.IdEmpresa = ba_Banco_Cuenta.IdEmpresa AND ba_Cbte_Ban.IdBanco = ba_Banco_Cuenta.IdBanco INNER JOIN
-                         ba_tipo_nota ON ba_Cbte_Ban.IdEmpresa = ba_tipo_nota.IdEmpresa AND ba_Cbte_Ban.IdTipoNota = ba_tipo_nota.IdTipoNota ON ct_cbtecble_det.IdEmpresa = ba_Cbte_Ban.IdEmpresa AND 
-                         ct_cbtecble_det.IdTipoCbte = ba_Cbte_Ban.IdTipocbte AND ct_cbtecble_det.IdCbteCble = ba_Cbte_Ban.IdCbteCble
+﻿CREATE view web.VWBAN_001
+as
+
+SELECT        dbo.ba_Cbte_Ban_tipo.CodTipoCbteBan, dbo.ba_Cbte_Ban.IdEmpresa, dbo.ba_Cbte_Ban.IdCbteCble, dbo.ba_Cbte_Ban.IdTipocbte, dbo.ba_Cbte_Ban.IdBanco, dbo.ba_Banco_Cuenta.ba_descripcion, 
+                         dbo.ba_Cbte_Ban.cb_Fecha, dbo.ba_Cbte_Ban.cb_Observacion, dbo.ba_Cbte_Ban.Estado, dbo.ba_Cbte_Ban.IdTipoNota, dbo.ba_tipo_nota.Descripcion AS Descripcion_TipoNota, 'Ninguno' AS NomBeneficiario, 
+                         dbo.ct_cbtecble_det.IdCtaCble, dbo.ct_plancta.pc_Cuenta, dbo.ct_cbtecble_det.dc_Valor, CASE WHEN ct_cbtecble_det.dc_Valor > 0 THEN ct_cbtecble_det.dc_Valor ELSE 0 END AS dc_Valor_Debe, 
+                         CASE WHEN ct_cbtecble_det.dc_Valor < 0 THEN ABS(ct_cbtecble_det.dc_Valor) ELSE 0 END AS dc_Valor_Haber, dbo.seg_usuario.Nombre
+FROM            dbo.ct_cbtecble_det INNER JOIN
+                         dbo.ct_plancta ON dbo.ct_cbtecble_det.IdEmpresa = dbo.ct_plancta.IdEmpresa AND dbo.ct_cbtecble_det.IdCtaCble = dbo.ct_plancta.IdCtaCble INNER JOIN
+                         dbo.ba_Cbte_Ban_tipo INNER JOIN
+                         dbo.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo ON dbo.ba_Cbte_Ban_tipo.CodTipoCbteBan = dbo.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.CodTipoCbteBan INNER JOIN
+                         dbo.ba_Cbte_Ban ON dbo.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.IdEmpresa = dbo.ba_Cbte_Ban.IdEmpresa AND dbo.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.IdTipoCbteCble = dbo.ba_Cbte_Ban.IdTipocbte INNER JOIN
+                         dbo.ba_Banco_Cuenta ON dbo.ba_Cbte_Ban.IdEmpresa = dbo.ba_Banco_Cuenta.IdEmpresa AND dbo.ba_Cbte_Ban.IdBanco = dbo.ba_Banco_Cuenta.IdBanco INNER JOIN
+                         dbo.ba_tipo_nota ON dbo.ba_Cbte_Ban.IdEmpresa = dbo.ba_tipo_nota.IdEmpresa AND dbo.ba_Cbte_Ban.IdTipoNota = dbo.ba_tipo_nota.IdTipoNota ON dbo.ct_cbtecble_det.IdEmpresa = dbo.ba_Cbte_Ban.IdEmpresa AND 
+                         dbo.ct_cbtecble_det.IdTipoCbte = dbo.ba_Cbte_Ban.IdTipocbte AND dbo.ct_cbtecble_det.IdCbteCble = dbo.ba_Cbte_Ban.IdCbteCble LEFT OUTER JOIN
+                         dbo.seg_usuario ON dbo.ba_Cbte_Ban.IdUsuario = dbo.seg_usuario.IdUsuario
 WHERE        (NOT EXISTS
                              (SELECT        IdEmpresa, Idcancelacion, Secuencia, IdEmpresa_op, IdOrdenPago_op, Secuencia_op, IdEmpresa_op_padre, IdOrdenPago_op_padre, Secuencia_op_padre, IdEmpresa_cxp, IdTipoCbte_cxp, IdCbteCble_cxp, 
                                                          IdEmpresa_pago, IdTipoCbte_pago, IdCbteCble_pago, MontoAplicado, SaldoAnterior, SaldoActual, Observacion, fechaTransaccion
-                               FROM            cp_orden_pago_cancelaciones AS f
-                               WHERE        (IdEmpresa_pago = ba_Cbte_Ban.IdEmpresa) AND (IdTipoCbte_pago = ba_Cbte_Ban.IdTipocbte) AND (IdCbteCble_pago = ba_Cbte_Ban.IdCbteCble)))
+                               FROM            dbo.cp_orden_pago_cancelaciones AS f
+                               WHERE        (IdEmpresa_pago = dbo.ba_Cbte_Ban.IdEmpresa) AND (IdTipoCbte_pago = dbo.ba_Cbte_Ban.IdTipocbte) AND (IdCbteCble_pago = dbo.ba_Cbte_Ban.IdCbteCble)))
 UNION ALL
 SELECT        dbo.ba_Cbte_Ban_tipo.CodTipoCbteBan, dbo.ba_Cbte_Ban.IdEmpresa, dbo.ba_Cbte_Ban.IdCbteCble, dbo.ba_Cbte_Ban.IdTipocbte, dbo.ba_Cbte_Ban.IdBanco, dbo.ba_Banco_Cuenta.ba_descripcion, 
                          dbo.ba_Cbte_Ban.cb_Fecha, dbo.ba_Cbte_Ban.cb_Observacion, dbo.ba_Cbte_Ban.Estado, dbo.ba_Cbte_Ban.IdTipoNota, dbo.ba_tipo_nota.Descripcion AS Descripcion_TipoNota, dbo.tb_persona.pe_nombreCompleto, 
                          dbo.ct_cbtecble_det.IdCtaCble, dbo.ct_plancta.pc_Cuenta, dbo.ct_cbtecble_det.dc_Valor, CASE WHEN ct_cbtecble_det.dc_Valor > 0 THEN ct_cbtecble_det.dc_Valor ELSE 0 END AS dc_Valor_Debe, 
-                         CASE WHEN ct_cbtecble_det.dc_Valor < 0 THEN ABS(ct_cbtecble_det.dc_Valor) ELSE 0 END AS dc_Valor_Haber
+                         CASE WHEN ct_cbtecble_det.dc_Valor < 0 THEN ABS(ct_cbtecble_det.dc_Valor) ELSE 0 END AS dc_Valor_Haber, dbo.seg_usuario.Nombre
 FROM            dbo.ba_Banco_Cuenta INNER JOIN
                          dbo.ba_Cbte_Ban ON dbo.ba_Banco_Cuenta.IdEmpresa = dbo.ba_Cbte_Ban.IdEmpresa AND dbo.ba_Banco_Cuenta.IdBanco = dbo.ba_Cbte_Ban.IdBanco INNER JOIN
                          dbo.ba_tipo_nota ON dbo.ba_Cbte_Ban.IdEmpresa = dbo.ba_tipo_nota.IdEmpresa AND dbo.ba_Cbte_Ban.IdTipoNota = dbo.ba_tipo_nota.IdTipoNota INNER JOIN
@@ -35,7 +37,8 @@ FROM            dbo.ba_Banco_Cuenta INNER JOIN
                          dbo.ba_Cbte_Ban.IdTipocbte = dbo.cp_orden_pago_cancelaciones.IdTipoCbte_pago INNER JOIN
                          dbo.ba_Cbte_Ban_tipo INNER JOIN
                          dbo.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo ON dbo.ba_Cbte_Ban_tipo.CodTipoCbteBan = dbo.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.CodTipoCbteBan ON 
-                         dbo.ba_Cbte_Ban.IdEmpresa = dbo.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.IdEmpresa AND dbo.ba_Cbte_Ban.IdTipocbte = dbo.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.IdTipoCbteCble
+                         dbo.ba_Cbte_Ban.IdEmpresa = dbo.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.IdEmpresa AND dbo.ba_Cbte_Ban.IdTipocbte = dbo.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.IdTipoCbteCble LEFT OUTER JOIN
+                         dbo.seg_usuario ON dbo.ba_Cbte_Ban.IdUsuario = dbo.seg_usuario.IdUsuario
 GROUP BY dbo.ba_Cbte_Ban_tipo.CodTipoCbteBan, dbo.ba_Cbte_Ban.IdEmpresa, dbo.ba_Cbte_Ban.IdCbteCble, dbo.ba_Cbte_Ban.IdTipocbte, dbo.ba_Cbte_Ban.IdBanco, dbo.ba_Banco_Cuenta.ba_descripcion, 
                          dbo.ba_Cbte_Ban.cb_Fecha, dbo.ba_Cbte_Ban.cb_Observacion, dbo.ba_Cbte_Ban.Estado, dbo.ba_Cbte_Ban.IdTipoNota, dbo.ba_tipo_nota.Descripcion, dbo.tb_persona.pe_nombreCompleto, dbo.ct_cbtecble_det.IdCtaCble, 
-                         dbo.ct_plancta.pc_Cuenta, dbo.ct_cbtecble_det.dc_Valor, dbo.ct_cbtecble_det.secuencia
+                         dbo.ct_plancta.pc_Cuenta, dbo.ct_cbtecble_det.dc_Valor, dbo.ct_cbtecble_det.secuencia, dbo.seg_usuario.Nombre

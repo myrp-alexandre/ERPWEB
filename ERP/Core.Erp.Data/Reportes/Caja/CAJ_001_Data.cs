@@ -43,7 +43,8 @@ namespace Core.Erp.Data.Reportes.Caja
                                  Estado = q.Estado,
                                  tc_TipoCbte = q.tc_TipoCbte,
                                  IdCtaCble =q.IdCtaCble,
-                                 pe_nombreCompleto = q.pe_nombreCompleto
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 Nombre = q.Nombre
 
                              }).ToList();
                 }

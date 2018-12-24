@@ -1,6 +1,7 @@
 ﻿using Core.Erp.Bus.Compras;
 using Core.Erp.Info.Compras;
 using Core.Erp.Web.Helps;
+using System;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Compras.Controllers
@@ -19,35 +20,34 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_terminopago_com()
         {
-            var model = bus_termino.get_list(true);
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_termino.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_terminopago_com", model);
         }
         #endregion
 
         #region Acciones
-        public ActionResult Nuevo ()
+        public ActionResult Nuevo (int IdEmpresa = 0)
         {
-            com_TerminoPago_Info model = new com_TerminoPago_Info();
+            com_TerminoPago_Info model = new com_TerminoPago_Info
+            {
+                IdEmpresa = IdEmpresa
+            };
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(com_TerminoPago_Info model)
         {
-            if (bus_termino.validar_existe_idTermino(model.IdTerminoPago))
-            {
-                ViewBag.mensaje = "El código ya se encuentra registrado";
-                return View(model);
-            }
             if (!bus_termino.guardarDB(model))
             {
                 return View(model);
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Modificar(string IdTerminoPago = "")
+        public ActionResult Modificar(int IdEmpresa = 0, int IdTerminoPago = 0)
         {
-            com_TerminoPago_Info model = bus_termino.get_info(IdTerminoPago);
+            com_TerminoPago_Info model = bus_termino.get_info(IdEmpresa, IdTerminoPago);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
@@ -63,9 +63,9 @@ namespace Core.Erp.Web.Areas.Compras.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Anular(string IdTerminoPago = "")
+        public ActionResult Anular(int IdEmpresa = 0, int IdTerminoPago = 0)
         {
-            com_TerminoPago_Info model = bus_termino.get_info(IdTerminoPago);
+            com_TerminoPago_Info model = bus_termino.get_info(IdEmpresa,IdTerminoPago);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);

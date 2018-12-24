@@ -17,8 +17,7 @@ namespace Core.Erp.Info.Inventario
         public string Codigo { get; set; }
         public int IdSucursalDest { get; set; }
         public int IdBodegaDest { get; set; }
-        [Required(ErrorMessage = ("El campo observación es obligatorio"))]
-        [StringLength(1000, MinimumLength = 1, ErrorMessage = ("El campo descripción debe tener mínimo 1 caracter máximo 1000"))]
+        [StringLength(500, MinimumLength = 1, ErrorMessage = ("El campo descripción debe tener mínimo 1 caracter máximo 500"))]
         public string tr_Observacion { get; set; }
         public System.DateTime tr_fecha { get; set; }
         public Nullable<int> IdEmpresa_Ing_Egr_Inven_Origen { get; set; }

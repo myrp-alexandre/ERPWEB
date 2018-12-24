@@ -132,11 +132,21 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             model.IdUsuario = Session["IdUsuario"].ToString();
-            if (!bus_cliente.guardarDB(model))
+            if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc)))
             {
+                if (!bus_cliente.guardarDB(model))
+                {
+                    cargar_combos(model);
+                    return View(model);
+                }
+            }
+            else
+            {
+                ViewBag.mensaje = "Número identificación inválida";
                 cargar_combos(model);
                 return View(model);
             }
+            
             return RedirectToAction("Index");
         }
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdCliente = 0)
@@ -172,6 +182,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             model.lst_fa_cliente_contactos.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdCliente = model.IdCliente; });
+
             if (!bus_cliente_contacto.guardarDB(model.lst_fa_cliente_contactos))
             {
                 cargar_combos(model);
@@ -183,6 +194,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 cargar_combos(model);
                 return View(model);
             }
+           
             return RedirectToAction("Index");
         }
         public ActionResult Anular(int IdEmpresa = 0 , decimal IdCliente = 0)
@@ -252,21 +264,24 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
                 foreach (var item in Lista_TipoCliente)
                 {
-                    //if (!bus_cliente_tipo.guardarDB(item))
-                    //{
-                    //    ViewBag.mensaje = "Error al importar el archivo";
-                    //    return View(model);
-                    //}
-                }
-
-                foreach (var item in Lista_Cliente)
-                {
-                    if (!bus_cliente.guardarDB_importacion(item))
+                    if (!bus_cliente_tipo.guardarDB(item))
                     {
                         ViewBag.mensaje = "Error al importar el archivo";
                         return View(model);
                     }
                 }
+
+                foreach (var item in Lista_Cliente)
+                {
+                    if ((cl_funciones.ValidaIdentificacion(item.info_persona.IdTipoDocumento, item.info_persona.pe_Naturaleza, item.info_persona.pe_cedulaRuc)))
+                    {
+                        if (!bus_cliente.guardarDB_importacion(item))
+                        {
+                            ViewBag.mensaje = "Error al importar el archivo";
+                            return View(model);
+                        }
+                    }
+            }
             }
             catch (Exception ex)
             {
@@ -559,12 +574,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             Telefono = Convert.ToString(reader.GetValue(10)),
 
                         };
+
                         info.lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>();
                         info.lst_fa_cliente_contactos.Add(info_cliente_contacto);
                         info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
                         info.info_persona = info_persona_prov;
 
                         Lista_Cliente.Add(info);
+                        
                     }
                     else
                         cont++;

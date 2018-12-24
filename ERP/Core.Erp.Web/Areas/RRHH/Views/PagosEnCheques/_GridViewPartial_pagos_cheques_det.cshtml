@@ -1,13 +1,13 @@
 
 @using System.Web.UI.WebControls;
-@model Core.Erp.Info.RRHH.ro_archivos_bancos_generacion_Info
+@model Core.Erp.Info.RRHH.ro_NominasPagosCheques_Info
 
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_pagos_cheques_det";
         settings.CallbackRouteValues = new { Controller = "PagosEnCheques", Action = "GridViewPartial_pagos_cheques_det" };
-        settings.KeyFieldName = "IdArchivo";
+        settings.KeyFieldName = "IdTransaccion";
         settings.Width = Unit.Percentage(100);
 
 

@@ -21,7 +21,6 @@ namespace Core.Erp.Data
         public int IdPeriodo { get; set; }
         public int IdCuentaBancaria { get; set; }
         public int IdProceso { get; set; }
-        public decimal IdRol { get; set; }
         public string Descripcion { get; set; }
         public string DescripcionProcesoNomina { get; set; }
         public System.DateTime pe_FechaIni { get; set; }

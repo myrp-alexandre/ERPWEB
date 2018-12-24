@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Core.Erp.Info.CuentasPorPagar;
 namespace Core.Erp.Info.RRHH
 {
    public class ro_NominasPagosCheques_Info
@@ -26,5 +26,11 @@ namespace Core.Erp.Info.RRHH
 
         public List<ro_NominasPagosCheques_det_Info> detalle { get; set; }
 
+        #region campo visa
+        public string DescripcionProcesoNomina { get; set; }
+        public string Descripcion { get; set; }
+        public System.DateTime pe_FechaIni { get; set; }
+        public System.DateTime pe_FechaFin { get; set; }
+        #endregion
     }
 }

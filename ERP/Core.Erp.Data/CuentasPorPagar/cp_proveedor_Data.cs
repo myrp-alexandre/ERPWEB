@@ -88,22 +88,15 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdPersona = Entity.IdPersona,
                         IdClaseProveedor = Entity.IdClaseProveedor,
                         IdCiudad = Entity.IdCiudad,
-                        idCredito_Predeter = Entity.idCredito_Predeter,
                         IdBanco_acreditacion = Entity.IdBanco_acreditacion,
-                        IdCentroCosot = Entity.IdCentroCosot,
                         IdCtaCble_CXP = Entity.IdCtaCble_CXP,
                         IdCtaCble_Gasto = Entity.IdCtaCble_Gasto,
-                        IdPunto_cargo = Entity.IdPunto_cargo,
-                        IdPunto_cargo_grupo = Entity.IdPunto_cargo_grupo,
                         IdTipoCta_acreditacion_cat = Entity.IdTipoCta_acreditacion_cat,
-                        codigoSRI_101_Predeter = Entity.codigoSRI_101_Predeter,
-                        codigoSRI_ICE_Predeter = Entity.codigoSRI_ICE_Predeter,
                         pr_contribuyenteEspecial_bool = Entity.pr_contribuyenteEspecial == "S" ? true : false,
                         es_empresa_relacionada = Entity.es_empresa_relacionada,
                         num_cta_acreditacion = Entity.num_cta_acreditacion,
                         pr_codigo = Entity.pr_codigo,
                         pr_plazo = Entity.pr_plazo,
-                        representante_legal = Entity.representante_legal,
                         pr_estado = Entity.pr_estado,
                         pr_correo = Entity.pr_correo,
                         pr_direccion = Entity.pr_direccion,
@@ -169,20 +162,13 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdPersona = info.IdPersona,
                         IdClaseProveedor = info.IdClaseProveedor,
                         IdCiudad = info.IdCiudad,
-                        idCredito_Predeter = info.idCredito_Predeter,
                         IdBanco_acreditacion = info.IdBanco_acreditacion,
-                        IdCentroCosot = info.IdCentroCosot,
                         IdCtaCble_CXP = info.IdCtaCble_CXP,
                         IdCtaCble_Gasto = info.IdCtaCble_Gasto,
-                        IdPunto_cargo = info.IdPunto_cargo,
-                        IdPunto_cargo_grupo = info.IdPunto_cargo_grupo,
                         IdTipoCta_acreditacion_cat = info.IdTipoCta_acreditacion_cat,
-                        codigoSRI_101_Predeter = info.codigoSRI_101_Predeter,
-                        codigoSRI_ICE_Predeter = info.codigoSRI_ICE_Predeter,
                         num_cta_acreditacion = info.num_cta_acreditacion,
                         pr_codigo = info.pr_codigo,
                         pr_plazo = info.pr_plazo,
-                        representante_legal = info.representante_legal,
                         pr_estado = info.pr_estado="A",
                         pr_contribuyenteEspecial = info.pr_contribuyenteEspecial_bool == true ? "S" : "N",
                         es_empresa_relacionada = info.es_empresa_relacionada,
@@ -218,16 +204,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                     Entity.IdPersona = info.IdPersona;
                     Entity.IdClaseProveedor = info.IdClaseProveedor;
                     Entity.IdCiudad = info.IdCiudad;
-                    Entity.idCredito_Predeter = info.idCredito_Predeter;
                     Entity.IdBanco_acreditacion = info.IdBanco_acreditacion;
-                    Entity.IdCentroCosot = info.IdCentroCosot;
                     Entity.IdCtaCble_CXP = (info.IdCtaCble_CXP)== "== Seleccione =="?null: info.IdCtaCble_CXP;
                     Entity.IdCtaCble_Gasto =  (info.IdCtaCble_Gasto) == "== Seleccione ==" ? null : info.IdCtaCble_Gasto;
-                    Entity.IdPunto_cargo = info.IdPunto_cargo;
-                    Entity.IdPunto_cargo_grupo = info.IdPunto_cargo_grupo;
                     Entity.IdTipoCta_acreditacion_cat = info.IdTipoCta_acreditacion_cat;
-                    Entity.codigoSRI_101_Predeter = info.codigoSRI_101_Predeter;
-                    Entity.codigoSRI_ICE_Predeter = info.codigoSRI_ICE_Predeter;
                     Entity.num_cta_acreditacion = info.num_cta_acreditacion;
                     Entity.pr_codigo = info.pr_codigo;
                     Entity.pr_plazo = info.pr_plazo;

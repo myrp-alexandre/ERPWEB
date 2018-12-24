@@ -711,7 +711,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
-     /*   #region Imagen
+        #region Imagen
 
         const string UploadDirectory = "~/Content/imagenes/";
 
@@ -732,11 +732,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 model = new byte[0];
             return PartialView("_Producto_imagen", model);
         }
-        #endregion*/
+        #endregion
 
 
         #region Importacion
-        public ActionResult UploadControlUpload()
+        public ActionResult UploadControlUploadImp()
         {
             UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
             return null;
@@ -762,15 +762,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         {
             try
             {
-                var ListaCategoria = Lista_Categoria.get_list(model.IdTransaccionSession);
-                var ListaLinea = Lista_Linea.get_list(model.IdTransaccionSession);
-                var ListaGrupo = Lista_Grupo.get_list(model.IdTransaccionSession);
                 var ListaSubgrupo = Lista_Subgrupo.get_list(model.IdTransaccionSession);
                 var ListaPresentacion = Lista_Presentacion.get_list(model.IdTransaccionSession);
                 var ListaMarca = Lista_Marca.get_list(model.IdTransaccionSession);
                 var ListaProducto = Lista_Producto.get_list(model.IdTransaccionSession);
                 
-                if (!bus_producto.GuardarDbImportacion(ListaCategoria, ListaLinea, ListaGrupo, ListaSubgrupo, ListaPresentacion, ListaMarca, ListaProducto))
+                if (!bus_producto.GuardarDbImportacion(ListaSubgrupo, ListaPresentacion, ListaMarca, ListaProducto))
                 {
                     ViewBag.mensaje = "Error al importar el archivo";
                     return View(model);
@@ -785,24 +782,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
 
             return RedirectToAction("Index");
-        }
-        public ActionResult GridViewPartial_CategoriaPro_importacion()
-        {
-            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var model = Lista_Categoria.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_CategoriaPro_importacion", model);
-        }
-        public ActionResult GridViewPartial_LineaPro_importacion()
-        {
-            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var model = Lista_Linea.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_LineaPro_importacion", model);
-        }
-        public ActionResult GridViewPartial_GrupoPro_importacion()
-        {
-            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var model = Lista_Grupo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_GrupoPro_importacion", model);
         }
         public ActionResult GridViewPartial_SubgrupoPro_importacion()
         {
@@ -898,59 +877,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
-                        in_categorias_Info info = new in_categorias_Info
-                        {
-                            IdEmpresa = IdEmpresa,
-                            IdCategoria = Convert.ToString(reader.GetValue(0)),
-                            cod_categoria = reader.GetString(1),
-                            ca_Categoria = reader.GetString(2), 
-                            IdUsuario = SessionFixed.IdUsuario
-                        };
-
-                        ListaCategoria.Add(info);
-                    }
-                    else
-                        cont++;
-
-                    if (!reader.IsDBNull(0) && cont > 0)
-                    {
-                        in_linea_Info info = new in_linea_Info
-                        {
-                            IdEmpresa = IdEmpresa,
-                            IdLinea = Convert.ToInt32(reader.GetValue(0)),
-                            cod_linea = Convert.ToString(reader.GetValue(1)),
-                            nom_linea = Convert.ToString(reader.GetValue(2)),
-                            IdUsuario = SessionFixed.IdUsuario
-                        };
-                        ListaLinea.Add(info);
-                    }
-                    else
-                        cont++;
-
-
-                    if (!reader.IsDBNull(0) && cont > 0)
-                    {
-                        in_grupo_Info info = new in_grupo_Info
-                        {
-                            IdEmpresa = IdEmpresa,
-                            IdLinea = Convert.ToInt32(reader.GetValue(0)),
-                            cod_grupo = Convert.ToString(reader.GetValue(1)),
-                            nom_grupo = Convert.ToString(reader.GetValue(2)),
-                            IdUsuario = SessionFixed.IdUsuario
-                        };
-                        ListaGrupo.Add(info);
-                    }
-                    else
-                        cont++;
-
-                    if (!reader.IsDBNull(0) && cont > 0)
-                    {
                         in_subgrupo_Info info = new in_subgrupo_Info
                         {
                             IdEmpresa = IdEmpresa,
-                            IdLinea = Convert.ToInt32(reader.GetValue(0)),
-                            cod_subgrupo = Convert.ToString(reader.GetValue(1)),
-                            nom_subgrupo = Convert.ToString(reader.GetValue(2)),
+                            IdCategoria = Convert.ToString(reader.GetValue(0)),
+                            NomCategoria = Convert.ToString(reader.GetValue(1)),
+                            IdLinea = Convert.ToInt32(reader.GetValue(2)),
+                            NomLinea = Convert.ToString(reader.GetValue(3)),
+                            IdGrupo = Convert.ToInt32(reader.GetValue(4)),
+                            NomGrupo = Convert.ToString(reader.GetValue(5)),
+                            IdSubgrupo = Convert.ToInt32(reader.GetValue(6)),
+                            nom_subgrupo = Convert.ToString(reader.GetValue(7)),
                             IdUsuario = SessionFixed.IdUsuario
                         };
                         ListaSubgrupo.Add(info);
@@ -958,9 +895,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     else
                         cont++;
                 }
-                Lista_Categoria.set_list(ListaCategoria, IdTransaccionSession);
-                Lista_Linea.set_list(ListaLinea, IdTransaccionSession);
-                Lista_Grupo.set_list(ListaGrupo, IdTransaccionSession);
                 Lista_Subgrupo.set_list(ListaSubgrupo, IdTransaccionSession);
 
                 #endregion
@@ -968,10 +902,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cont = 0;
                 //Para avanzar a la siguiente hoja de excel
                 reader.NextResult();
-
-
-                cont = 0;
-                reader.NextResult();
+               
 
                 #region Presentacion                
                 while (reader.Read())
@@ -1027,18 +958,20 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                         in_Producto_Info info = new in_Producto_Info
                         {
                             IdEmpresa = IdEmpresa,
-                            IdUsuario = SessionFixed.IdUsuario,
                             IdProducto = Convert.ToInt32(reader.GetValue(0)),
-                            pr_descripcion = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(1))) ? null : Convert.ToString(reader.GetValue(1)),
-                            IdMarca = Convert.ToInt32(reader.GetValue(2)),
-                            IdPresentacion = Convert.ToString(reader.GetValue(3)),
-                            IdCategoria = Convert.ToString(reader.GetValue(4)),
-                            IdLinea = Convert.ToInt32(reader.GetValue(5)),
-                            IdGrupo = Convert.ToInt32(reader.GetValue(6)),
-                            IdSubGrupo = Convert.ToInt32(reader.GetValue(7)),
-                            IdCod_Impuesto_Iva = Convert.ToString(reader.GetValue(8)),
-                            IdUnidadMedida = Convert.ToString(reader.GetValue(9)),
-                            precio_1 = Convert.ToDouble(reader.GetValue(10)),
+                            pr_codigo = Convert.ToString(reader.GetValue(1)),
+                            pr_descripcion = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)),
+                            IdMarca = Convert.ToInt32(reader.GetValue(3)),
+                            IdPresentacion = Convert.ToString(reader.GetValue(4)),
+                            IdCategoria = Convert.ToString(reader.GetValue(5)),
+                            IdLinea = Convert.ToInt32(reader.GetValue(6)),
+                            IdGrupo = Convert.ToInt32(reader.GetValue(7)),
+                            IdSubGrupo = Convert.ToInt32(reader.GetValue(8)),
+                            IdCod_Impuesto_Iva = Convert.ToString(reader.GetValue(9)),
+                            IdUnidadMedida = Convert.ToString(reader.GetValue(10)),
+                            IdUnidadMedida_Consumo = Convert.ToString(reader.GetValue(11)),
+                            precio_1 = Convert.ToDouble(reader.GetValue(12)),
+                            
                         };
 
                         ListaProducto.Add(info);

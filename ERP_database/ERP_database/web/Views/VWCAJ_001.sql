@@ -1,28 +1,29 @@
-﻿CREATE VIEW [web].[VWCAJ_001]
+﻿CREATE VIEW web.VWCAJ_001
 AS
-SELECT dbo.ct_cbtecble_det.IdEmpresa, dbo.ct_cbtecble_det.IdTipoCbte, dbo.ct_cbtecble_det.IdCbteCble, dbo.ct_cbtecble_det.secuencia, dbo.ct_plancta.pc_Cuenta, dbo.ct_cbtecble_det.dc_Valor, 
-                  CASE WHEN ct_cbtecble_det.dc_Valor > 0 THEN ct_cbtecble_det.dc_Valor ELSE 0 END AS dc_Valor_Debe, CASE WHEN ct_cbtecble_det.dc_Valor < 0 THEN ABS(ct_cbtecble_det.dc_Valor) ELSE 0 END AS dc_Valor_Haber, 
-                  dbo.cxc_cobro_tipo.tc_descripcion, dbo.caj_Caja_Movimiento_det.cr_Valor, dbo.caj_Caja_Movimiento.cm_Signo, dbo.caj_Caja_Movimiento.IdTipoMovi, dbo.caj_Caja_Movimiento_Tipo.tm_descripcion, 
-                  dbo.caj_Caja_Movimiento.cm_observacion, dbo.caj_Caja_Movimiento.IdCaja, dbo.caj_Caja.ca_Descripcion, dbo.caj_Caja_Movimiento.cm_fecha, dbo.caj_Caja_Movimiento.Estado, dbo.ct_cbtecble_tipo.tc_TipoCbte, 
-                  dbo.ct_cbtecble_det.IdCtaCble, dbo.tb_persona.pe_nombreCompleto
-FROM     dbo.caj_Caja_Movimiento INNER JOIN
-                  dbo.caj_Caja_Movimiento_det ON dbo.caj_Caja_Movimiento.IdEmpresa = dbo.caj_Caja_Movimiento_det.IdEmpresa AND dbo.caj_Caja_Movimiento.IdCbteCble = dbo.caj_Caja_Movimiento_det.IdCbteCble AND 
-                  dbo.caj_Caja_Movimiento.IdTipocbte = dbo.caj_Caja_Movimiento_det.IdTipocbte INNER JOIN
-                  dbo.caj_Caja ON dbo.caj_Caja_Movimiento.IdEmpresa = dbo.caj_Caja.IdEmpresa AND dbo.caj_Caja_Movimiento.IdCaja = dbo.caj_Caja.IdCaja INNER JOIN
-                  dbo.ct_cbtecble_det ON dbo.caj_Caja_Movimiento_det.IdEmpresa = dbo.ct_cbtecble_det.IdEmpresa AND dbo.caj_Caja_Movimiento_det.IdTipocbte = dbo.ct_cbtecble_det.IdTipoCbte AND 
-                  dbo.caj_Caja_Movimiento_det.IdCbteCble = dbo.ct_cbtecble_det.IdCbteCble INNER JOIN
-                  dbo.ct_plancta ON dbo.ct_cbtecble_det.IdEmpresa = dbo.ct_plancta.IdEmpresa AND dbo.ct_cbtecble_det.IdCtaCble = dbo.ct_plancta.IdCtaCble INNER JOIN
-                  dbo.cxc_cobro_tipo ON dbo.caj_Caja_Movimiento_det.IdCobro_tipo = dbo.cxc_cobro_tipo.IdCobro_tipo INNER JOIN
-                  dbo.caj_Caja_Movimiento_Tipo ON dbo.caj_Caja_Movimiento.IdEmpresa = dbo.caj_Caja_Movimiento_Tipo.IdEmpresa AND dbo.caj_Caja_Movimiento.IdTipoMovi = dbo.caj_Caja_Movimiento_Tipo.IdTipoMovi INNER JOIN
-                  dbo.ct_cbtecble_tipo ON dbo.ct_cbtecble_det.IdEmpresa = dbo.ct_cbtecble_tipo.IdEmpresa AND dbo.ct_cbtecble_det.IdTipoCbte = dbo.ct_cbtecble_tipo.IdTipoCbte INNER JOIN
-                  dbo.tb_persona ON dbo.caj_Caja_Movimiento.IdPersona = dbo.tb_persona.IdPersona
+SELECT        dbo.ct_cbtecble_det.IdEmpresa, dbo.ct_cbtecble_det.IdTipoCbte, dbo.ct_cbtecble_det.IdCbteCble, dbo.ct_cbtecble_det.secuencia, dbo.ct_plancta.pc_Cuenta, dbo.ct_cbtecble_det.dc_Valor, 
+                         CASE WHEN ct_cbtecble_det.dc_Valor > 0 THEN ct_cbtecble_det.dc_Valor ELSE 0 END AS dc_Valor_Debe, CASE WHEN ct_cbtecble_det.dc_Valor < 0 THEN ABS(ct_cbtecble_det.dc_Valor) ELSE 0 END AS dc_Valor_Haber, 
+                         dbo.cxc_cobro_tipo.tc_descripcion, dbo.caj_Caja_Movimiento_det.cr_Valor, dbo.caj_Caja_Movimiento.cm_Signo, dbo.caj_Caja_Movimiento.IdTipoMovi, dbo.caj_Caja_Movimiento_Tipo.tm_descripcion, 
+                         dbo.caj_Caja_Movimiento.cm_observacion, dbo.caj_Caja_Movimiento.IdCaja, dbo.caj_Caja.ca_Descripcion, dbo.caj_Caja_Movimiento.cm_fecha, dbo.caj_Caja_Movimiento.Estado, dbo.ct_cbtecble_tipo.tc_TipoCbte, 
+                         dbo.ct_cbtecble_det.IdCtaCble, dbo.tb_persona.pe_nombreCompleto, dbo.seg_usuario.Nombre
+FROM            dbo.caj_Caja_Movimiento INNER JOIN
+                         dbo.caj_Caja_Movimiento_det ON dbo.caj_Caja_Movimiento.IdEmpresa = dbo.caj_Caja_Movimiento_det.IdEmpresa AND dbo.caj_Caja_Movimiento.IdCbteCble = dbo.caj_Caja_Movimiento_det.IdCbteCble AND 
+                         dbo.caj_Caja_Movimiento.IdTipocbte = dbo.caj_Caja_Movimiento_det.IdTipocbte INNER JOIN
+                         dbo.caj_Caja ON dbo.caj_Caja_Movimiento.IdEmpresa = dbo.caj_Caja.IdEmpresa AND dbo.caj_Caja_Movimiento.IdCaja = dbo.caj_Caja.IdCaja INNER JOIN
+                         dbo.ct_cbtecble_det ON dbo.caj_Caja_Movimiento_det.IdEmpresa = dbo.ct_cbtecble_det.IdEmpresa AND dbo.caj_Caja_Movimiento_det.IdTipocbte = dbo.ct_cbtecble_det.IdTipoCbte AND 
+                         dbo.caj_Caja_Movimiento_det.IdCbteCble = dbo.ct_cbtecble_det.IdCbteCble INNER JOIN
+                         dbo.ct_plancta ON dbo.ct_cbtecble_det.IdEmpresa = dbo.ct_plancta.IdEmpresa AND dbo.ct_cbtecble_det.IdCtaCble = dbo.ct_plancta.IdCtaCble INNER JOIN
+                         dbo.cxc_cobro_tipo ON dbo.caj_Caja_Movimiento_det.IdCobro_tipo = dbo.cxc_cobro_tipo.IdCobro_tipo INNER JOIN
+                         dbo.caj_Caja_Movimiento_Tipo ON dbo.caj_Caja_Movimiento.IdEmpresa = dbo.caj_Caja_Movimiento_Tipo.IdEmpresa AND dbo.caj_Caja_Movimiento.IdTipoMovi = dbo.caj_Caja_Movimiento_Tipo.IdTipoMovi INNER JOIN
+                         dbo.ct_cbtecble_tipo ON dbo.ct_cbtecble_det.IdEmpresa = dbo.ct_cbtecble_tipo.IdEmpresa AND dbo.ct_cbtecble_det.IdTipoCbte = dbo.ct_cbtecble_tipo.IdTipoCbte INNER JOIN
+                         dbo.tb_persona ON dbo.caj_Caja_Movimiento.IdPersona = dbo.tb_persona.IdPersona LEFT OUTER JOIN
+                         dbo.seg_usuario ON dbo.caj_Caja.IdUsuario = dbo.seg_usuario.IdUsuario
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[75] 4[5] 2[2] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -84,7 +85,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = -480
+         Top = -192
          Left = 0
       End
       Begin Tables = 
@@ -110,10 +111,10 @@ Begin DesignProperties =
          End
          Begin Table = "caj_Caja"
             Begin Extent = 
-               Top = 343
-               Left = 48
-               Bottom = 506
-               Right = 296
+               Top = 243
+               Left = 164
+               Bottom = 513
+               Right = 412
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -153,11 +154,13 @@ Begin DesignProperties =
                Top = 1015
                Left = 48
                Bottom = 1178
-        ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWCAJ_001';
+         ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWCAJ_001';
+
+
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Right = 265
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Right = 265
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -168,6 +171,26 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Rig
                Left = 48
                Bottom = 1346
                Right = 256
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "tb_persona"
+            Begin Extent = 
+               Top = 1350
+               Left = 38
+               Bottom = 1480
+               Right = 270
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "seg_usuario"
+            Begin Extent = 
+               Top = 263
+               Left = 573
+               Bottom = 525
+               Right = 821
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -199,6 +222,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Rig
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWCAJ_001';
+
+
 
 
 GO

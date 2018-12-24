@@ -1168,91 +1168,129 @@ namespace Core.Erp.Data.Inventario
         }
         #endregion
     
-        public bool GuardarDbImportacion(List<in_categorias_Info> Lista_Categoria, List<in_linea_Info> Lista_Linea, List<in_grupo_Info> Lista_Grupo, List<in_subgrupo_Info> Lista_Subgrupo, List<in_presentacion_Info> Lista_Presentacion, List<in_Marca_Info> Lista_Marca, List<in_Producto_Info> Lista_Producto)
+        public bool GuardarDbImportacion( List<in_subgrupo_Info> Lista_Subgrupo, List<in_presentacion_Info> Lista_Presentacion, List<in_Marca_Info> Lista_Marca, List<in_Producto_Info> Lista_Producto)
         {
             try
             {
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    if(Lista_Categoria.Count>0)
-                    {
-                        foreach (var item in Lista_Categoria)
-                        {
-                            in_categorias Entity_Cat = new in_categorias
-                            {
-                                ca_Categoria= item.ca_Categoria,
-                                cod_categoria = item.cod_categoria,
-                                Estado = item.Estado="A",
-                                IdCategoria = item.IdCategoria,
-                                IdCtaCble_venta = item.IdCtaCble_venta,
-                                IdCtaCtble_Costo = item.IdCtaCtble_Costo,
-                                IdCtaCtble_Inve = item.IdCtaCtble_Inve,
-                                IdEmpresa = item.IdEmpresa,
-                                IdUsuario = item.IdUsuario
-                            };
-                            Context.in_categorias.Add(Entity_Cat);
-                        }
-                    }
-
-                    if (Lista_Linea.Count > 0)
-                    {
-                        foreach (var item in Lista_Linea)
-                        {
-                            in_linea Entity_Lin = new in_linea
-                            {
-                                IdLinea = item.IdLinea,
-                                cod_linea = item.cod_linea,
-                                Estado = item.Estado = "A",
-                                IdCategoria = item.IdCategoria,
-                                IdEmpresa = item.IdEmpresa,
-                                IdUsuario = item.IdUsuario,
-                                observacion = item.observacion
-                            };
-                            Context.in_linea.Add(Entity_Lin);
-                        }
-                    }
-
-                    if (Lista_Grupo.Count > 0)
-                    {
-                        foreach (var item in Lista_Grupo)
-                        {
-                            in_grupo Entity_Gru = new in_grupo
-                            {
-                                IdLinea = item.IdLinea,
-                                IdGrupo = item.IdGrupo,
-                                cod_grupo = item.cod_grupo,
-                                nom_grupo = item.nom_grupo,
-                                Estado = item.Estado = "A",
-                                IdCategoria = item.IdCategoria,
-                                IdEmpresa = item.IdEmpresa,
-                                IdUsuario = item.IdUsuario,
-                                observacion = item.observacion
-                            };
-                            Context.in_grupo.Add(Entity_Gru);
-                        }
-                    }
-
 
                     if (Lista_Subgrupo.Count > 0)
                     {
+                        #region Categoria 
+                        List<in_categorias_Info> Lista_Categoria;
+
+                        Lista_Categoria = (from q in Lista_Subgrupo
+                                           group q by new
+                                           {
+                                               q.IdEmpresa,
+                                               q.IdCategoria,
+                                               q.NomCategoria
+                                           } into Grupo
+                                           select new in_categorias_Info
+                                           {
+                                               IdEmpresa = Grupo.Key.IdEmpresa,
+                                               IdCategoria = Grupo.Key.IdCategoria,
+                                               ca_Categoria = Grupo.Key.NomCategoria
+
+                                           }).ToList();
+
+                        foreach (var item in Lista_Categoria)
+                        {
+                            Context.in_categorias.Add(new in_categorias
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdCategoria = item.IdCategoria,
+                                ca_Categoria = item.ca_Categoria,
+                                Estado = "A"
+                            });
+                        }
+                        #endregion
+                        #region Linea
+                        List<in_linea> Lista_Linea;
+                        Lista_Linea = (from q in Lista_Subgrupo
+                                       group q by new
+                                       {
+                                           q.IdEmpresa, 
+                                           q.IdCategoria,
+                                           q.IdLinea,
+                                           q.NomLinea
+                                       } into Grupo
+                                       select new in_linea
+                                       {
+
+                                           IdEmpresa = Grupo.Key.IdEmpresa,
+                                           IdCategoria = Grupo.Key.IdCategoria,
+                                           IdLinea = Grupo.Key.IdLinea,
+                                           nom_linea = Grupo.Key.NomLinea
+                                       }).ToList();
+                        foreach (var item in Lista_Linea)
+                        {
+                            Context.in_linea.Add(new in_linea
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdCategoria = item.IdCategoria,
+                                IdLinea = item.IdLinea,
+                                nom_linea = item.nom_linea,
+                                Estado = "A"
+                            });
+                        }
+                        #endregion
+                        #region Grupo
+
+                        List<in_grupo_Info> Lista_Grupo;
+                        Lista_Grupo = (from q in Lista_Subgrupo
+                                       group q by new
+                                       {
+                                           q.IdEmpresa,
+                                           q.IdCategoria,
+                                           q.NomCategoria,
+                                           q.IdLinea,
+                                           q.NomLinea,
+                                           q.IdGrupo,
+                                           q.NomGrupo,
+                                       } into Grupo
+                                       select new in_grupo_Info
+                                       {
+                                           IdEmpresa = Grupo.Key.IdEmpresa,
+                                           IdCategoria = Grupo.Key.IdCategoria,
+                                           IdLinea = Grupo.Key.IdLinea,
+                                           IdGrupo = Grupo.Key.IdGrupo,
+                                           nom_grupo = Grupo.Key.NomGrupo
+
+                                       }).ToList();
+
+                        foreach (var item in Lista_Grupo)
+                        {
+                            Context.in_grupo.Add(new in_grupo
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdCategoria = item.IdCategoria,
+                                IdLinea = item.IdLinea,
+                                IdGrupo = item.IdGrupo,
+                                nom_grupo = item.nom_grupo,
+                                Estado = "A"
+
+                            });
+                        }
+                        #endregion
+                        
                         foreach (var item in Lista_Subgrupo)
                         {
                             in_subgrupo Entity_Sub = new in_subgrupo
                             {
+                                IdEmpresa = item.IdEmpresa,
+                                IdCategoria = item.IdCategoria,
                                 IdLinea = item.IdLinea,
                                 IdGrupo = item.IdGrupo,
-                                cod_subgrupo =item.cod_subgrupo,
-                                nom_subgrupo = item.nom_subgrupo,
                                 IdSubgrupo = item.IdSubgrupo,
+                                nom_subgrupo = item.nom_subgrupo,
                                 Estado = item.Estado = "A",
-                                IdCategoria = item.IdCategoria,
-                                IdEmpresa = item.IdEmpresa,
-                                IdUsuario = item.IdUsuario,
-                                observacion = item.observacion
                             };
                             Context.in_subgrupo.Add(Entity_Sub);
                         }
                     }
+
                     if (Lista_Presentacion.Count > 0)
                     {
                         foreach (var item in Lista_Presentacion)

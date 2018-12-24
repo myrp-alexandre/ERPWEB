@@ -328,6 +328,9 @@
     <Compile Include="cp_retencion_x_ct_cbtecble.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cp_SolicitudPago.cs">
+      <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="cp_TipoDocumento.cs">
       <DependentUpon>Model_cuentas_por_pagar.tt</DependentUpon>
     </Compile>
@@ -401,6 +404,7 @@
     <Compile Include="CuentasPorPagar\cp_retencion_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_retencion_det_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_retencion_x_ct_cbtecble_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_SolicitudPago_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_TipoDocumento_Data.cs" />
     <Compile Include="cxc_Catalogo.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
@@ -2193,6 +2197,12 @@
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_marcaciones_x_empleado.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwro_NominasPagosCheques.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwro_NominasPagosCheques_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_nomina_sin_percebir_sueldo.cs">

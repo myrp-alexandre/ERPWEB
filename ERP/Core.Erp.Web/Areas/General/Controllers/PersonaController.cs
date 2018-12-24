@@ -53,11 +53,22 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 cargar_combos();
                 return View(model);
             }
-            if (!bus_persona.guardarDB(model))
+
+            if ((cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc)))
             {
+                if (!bus_persona.guardarDB(model))
+                {
+                    cargar_combos();
+                    return View(model);
+                }
+            }
+            else
+            {
+                ViewBag.mensaje = "Número identificación inválida";
                 cargar_combos();
                 return View(model);
             }
+
             return RedirectToAction("Index", "Persona");
         }
 
@@ -79,11 +90,21 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Modificar(tb_persona_Info model)
         {
-            if (!bus_persona.modificarDB(model))
+            if ((cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc)))
             {
+                if (!bus_persona.modificarDB(model))
+                {
+                    cargar_combos();
+                    return View(model);
+                }
+            }
+            else
+            {
+                ViewBag.mensaje = "Número identificación inválida";
                 cargar_combos();
                 return View(model);
             }
+            
             return RedirectToAction("Index", "Persona");
         }
 

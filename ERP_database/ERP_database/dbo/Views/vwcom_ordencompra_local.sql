@@ -94,6 +94,16 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
+         Begin Table = "s"
+            Begin Extent = 
+               Top = 0
+               Left = 0
+               Bottom = 129
+               Right = 246
+            End
+            DisplayFlags = 280
+            TopColumn = 4
+         End
          Begin Table = "pro"
             Begin Extent = 
                Top = 0
@@ -114,15 +124,15 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "s"
+         Begin Table = "d"
             Begin Extent = 
-               Top = 0
-               Left = 0
-               Bottom = 129
-               Right = 246
+               Top = 6
+               Left = 286
+               Bottom = 136
+               Right = 477
             End
             DisplayFlags = 280
-            TopColumn = 4
+            TopColumn = 0
          End
          Begin Table = "com"
             Begin Extent = 
@@ -143,17 +153,9 @@ Begin DesignProperties =
             End
             DisplayFlags = 280
             TopColumn = 0
-         End
-         Begin Table = "d"
-            Begin Extent = 
-               Top = 6
-               Left = 286
-               Bottom = 136
-               Right = 477
-            End
-            DisplayFlags = 280
-            TopColumn = 0
          En', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwcom_ordencompra_local';
+
+
 
 
 

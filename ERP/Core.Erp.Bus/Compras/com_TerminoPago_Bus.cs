@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Compras
     public class com_TerminoPago_Bus
     {
         com_TerminoPago_Data odata = new com_TerminoPago_Data();
-        public List<com_TerminoPago_Info> get_list(bool mostrar_anulados)
+        public List<com_TerminoPago_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(mostrar_anulados);
+                return odata.get_list(IdEmpresa, mostrar_anulados);
             }
             catch (Exception)
             {
@@ -24,24 +24,11 @@ namespace Core.Erp.Bus.Compras
             }
         }
 
-        public com_TerminoPago_Info get_info(string IdTerminoPago)
+        public com_TerminoPago_Info get_info(int IdEmpresa, int IdTerminoPago)
         {
             try
             {
-                return odata.get_info(IdTerminoPago);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public bool validar_existe_idTermino(string IdTerminoPago)
-        {
-            try
-            {
-                return odata.validar_existe_idTermino(IdTerminoPago);
+                return odata.get_info(IdEmpresa, IdTerminoPago);
             }
             catch (Exception)
             {
