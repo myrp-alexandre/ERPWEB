@@ -12,20 +12,13 @@
 
 <script type="text/javascript">
     $(function () {
-        //Date picker
-        //$('#Fecha_ini').datepicker({
-        //    autoclose: true
-        //})
-        //$('#Fecha_fin').datepicker({
-        //    autoclose: true
-        //})
         $('#FechaOP').datepicker({
             autoclose: true
-        })
+        });
         $("#Fecha_ini").change(function () {
             GetSaldoAnterior();
         });
-        $("#Fecha_ini").change(function () {
+        $("#Fecha_fin").change(function () {
             GetSaldoAnterior();
             GetIngresos();
         });
@@ -121,6 +114,7 @@
 
     function GetSaldoAnterior() {
         var d = Fecha_ini.GetValue();
+        console.log(d);
         var datos = {
             FechaCorte: d,
             IdCtaCble: $("#IdCtaCble").val()
@@ -181,8 +175,6 @@
                 if (data.IdEmpresa != 0) {
                     Fecha_ini.SetValue(data.pe_FechaIni);
                     Fecha_fin.SetValue(data.pe_FechaFin);
-                    //$('#Fecha_ini').datepicker("setDate", moment(data.pe_FechaIni).format("DD/MM/YYYY"));
-                    //$('#Fecha_fin').datepicker("setDate", moment(data.pe_FechaFin).format("DD/MM/YYYY"));
                 }
             },
             error: function (error) {
@@ -366,7 +358,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Fecha_ini">Desde*</label>
-                    @Html.DevExpress().DateEditFor(q => q.Fecha_fin, settings =>
+                    @Html.DevExpress().DateEditFor(q => q.Fecha_ini, settings =>
                     {
                         settings.Name = "Fecha_ini";
                         settings.Properties.UseMaskBehavior = true;
@@ -524,3 +516,5 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+
+
