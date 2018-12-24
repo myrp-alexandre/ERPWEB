@@ -388,9 +388,21 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public JsonResult GetPeriodo(int IdPeriodo = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var resultado = bus_periodo.get_info(IdEmpresa, IdPeriodo);
+            var resultado = new ct_periodo_Info();
+            //var resultado = bus_periodo.get_info(IdEmpresa, IdPeriodo);
+
+            DateTime fecha_actual = DateTime.Now;
+            DateTime Inicio = DateTime.MinValue;
+            DateTime Fin = DateTime.MinValue;
+            Inicio = fecha_actual.AddDays(1 - Convert.ToDouble(fecha_actual.DayOfWeek));
+            Fin = fecha_actual.AddDays(5 - Convert.ToDouble(fecha_actual.DayOfWeek));
+
+            resultado.IdEmpresa = IdEmpresa;
+            resultado.pe_FechaIni = Inicio;
+            resultado.pe_FechaFin = Fin;
             if (resultado == null)
                 resultado = new ct_periodo_Info();
+
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Calcular(double SaldoContableAnterior = 0, decimal IdTransaccionFixed = 0)
