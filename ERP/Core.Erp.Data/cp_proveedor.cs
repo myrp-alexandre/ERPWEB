@@ -26,24 +26,16 @@ namespace Core.Erp.Data
         public decimal IdPersona { get; set; }
         public string pr_codigo { get; set; }
         public string pr_contribuyenteEspecial { get; set; }
-        public Nullable<int> pr_plazo { get; set; }
-        public string representante_legal { get; set; }
+        public int pr_plazo { get; set; }
         public string pr_estado { get; set; }
         public string IdCiudad { get; set; }
-        public Nullable<int> idCredito_Predeter { get; set; }
-        public Nullable<int> codigoSRI_ICE_Predeter { get; set; }
-        public Nullable<int> codigoSRI_101_Predeter { get; set; }
-        public string IdCentroCosot { get; set; }
         public string IdCtaCble_CXP { get; set; }
-        public string IdCtaCble_Anticipo { get; set; }
         public string IdCtaCble_Gasto { get; set; }
         public int IdClaseProveedor { get; set; }
         public string MotivoAnulacion { get; set; }
         public string IdTipoCta_acreditacion_cat { get; set; }
         public string num_cta_acreditacion { get; set; }
         public Nullable<int> IdBanco_acreditacion { get; set; }
-        public Nullable<int> IdPunto_cargo { get; set; }
-        public Nullable<int> IdPunto_cargo_grupo { get; set; }
         public bool es_empresa_relacionada { get; set; }
         public string pr_telefonos { get; set; }
         public string pr_celular { get; set; }
@@ -56,12 +48,9 @@ namespace Core.Erp.Data
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
     
-        public virtual cp_codigo_SRI cp_codigo_SRI { get; set; }
-        public virtual cp_codigo_SRI cp_codigo_SRI1 { get; set; }
-        public virtual cp_codigo_SRI cp_codigo_SRI2 { get; set; }
         public virtual ICollection<cp_nota_DebCre> cp_nota_DebCre { get; set; }
-        public virtual cp_proveedor_clase cp_proveedor_clase { get; set; }
         public virtual ICollection<cp_orden_giro> cp_orden_giro { get; set; }
+        public virtual cp_proveedor_clase cp_proveedor_clase { get; set; }
         public virtual ICollection<cp_SolicitudPago> cp_SolicitudPago { get; set; }
     }
 }
