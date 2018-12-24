@@ -17,7 +17,7 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                        Lista = (from q in Context.ro_NominasPagosCheques
+                        Lista = (from q in Context.vwro_NominasPagosCheques
                                  where q.IdEmpresa == IdEmpresa
                                  select new ro_NominasPagosCheques_Info
                                  {
@@ -27,7 +27,11 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina_TipoLiqui = q.IdNomina_TipoLiqui,
                                      IdPeriodo = q.IdPeriodo,
                                      Observacion=q.Observacion,
-                                     Estado=q.Estado
+                                     Estado=q.Estado,
+                                     Descripcion=q.Descripcion,
+                                     DescripcionProcesoNomina=q.DescripcionProcesoNomina,
+                                     pe_FechaFin=q.pe_FechaFin,
+                                     pe_FechaIni=q.pe_FechaIni
 
 
                                  }).ToList();
