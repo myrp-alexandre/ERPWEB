@@ -34,5 +34,6 @@ namespace Core.Erp.Data
         public int IdTipoCbte { get; set; }
         public decimal IdCbteCble { get; set; }
         public int Secuancia_op { get; set; }
+        public bool Estado { get; set; }
     }
 }
