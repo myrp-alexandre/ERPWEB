@@ -235,10 +235,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 foreach (var item in Lista_Proveedor)
                 {
-                    if (!bus_proveedor.guardarDB_importacion(item))
+                    if ((cl_funciones.ValidaIdentificacion(item.info_persona.IdTipoDocumento, item.info_persona.pe_Naturaleza, item.info_persona.pe_cedulaRuc)))
                     {
-                        ViewBag.mensaje = "Error al importar el archivo";
-                        return View(model);
+                        if (!bus_proveedor.guardarDB_importacion(item))
+                        {
+                            ViewBag.mensaje = "Error al importar el archivo";
+                            return View(model);
+                        }
                     }
                 }                
             }
@@ -413,6 +416,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                             pr_correo = Convert.ToString(reader.GetValue(8)),
                             IdUsuario = SessionFixed.IdUsuario
                         };
+
                         info.info_persona = info_persona_prov;
                         Lista_Proveedor.Add(info);
 

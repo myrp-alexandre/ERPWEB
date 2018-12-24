@@ -31,7 +31,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Estado = q.Estado,
                         Fecha = q.Fecha,
                         Solicitante = q.Solicitante,
-                        Valor = q.Valor
+                        Valor = q.Valor,
+                        IdUsuarioCreacion = q.IdUsuarioCreacion
                     }).ToList();
 
                     else
@@ -48,7 +49,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                             Estado = q.Estado,
                             Fecha = q.Fecha,
                             Solicitante = q.Solicitante,
-                            Valor = q.Valor
+                            Valor = q.Valor,
+                        IdUsuarioCreacion = q.IdUsuarioCreacion
                         }).ToList();
                 }
                 return Lista;
@@ -79,7 +81,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Estado = Entity.Estado,
                         Fecha = Entity.Fecha,
                         Solicitante = Entity.Solicitante,
-                        Valor = Entity.Valor
+                        Valor = Entity.Valor,
+                        IdUsuarioCreacion = Entity.IdUsuarioCreacion
                     };
                 }
                 return info;
