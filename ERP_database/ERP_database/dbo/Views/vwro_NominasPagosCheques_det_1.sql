@@ -3,7 +3,8 @@ AS
 SELECT        dbo.ro_NominasPagosCheques_det.IdEmpresa, dbo.ro_NominasPagosCheques_det.IdTransaccion, dbo.ro_NominasPagosCheques_det.Secuencia, dbo.ro_NominasPagosCheques_det.IdSucursal, 
                          dbo.ro_NominasPagosCheques_det.IdEmpleado, dbo.ro_NominasPagosCheques_det.Observacion, dbo.ro_NominasPagosCheques_det.Valor, dbo.ro_NominasPagosCheques_det.IdEmpresa_op, 
                          dbo.ro_NominasPagosCheques_det.IdOrdenPago, dbo.ro_empleado.em_codigo, dbo.ro_empleado.em_tipoCta, dbo.ro_empleado.em_NumCta, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, 
-                         dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.IdPersona
+                         dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.IdPersona, dbo.ro_NominasPagosCheques_det.IdEmpresa_dc, dbo.ro_NominasPagosCheques_det.IdTipoCbte, dbo.ro_NominasPagosCheques_det.IdCbteCble, 
+                         dbo.ro_NominasPagosCheques_det.Secuancia_op, dbo.ro_NominasPagosCheques_det.Estado
 FROM            dbo.ro_NominasPagosCheques INNER JOIN
                          dbo.ro_NominasPagosCheques_det ON dbo.ro_NominasPagosCheques.IdEmpresa = dbo.ro_NominasPagosCheques_det.IdEmpresa AND 
                          dbo.ro_NominasPagosCheques.IdTransaccion = dbo.ro_NominasPagosCheques_det.IdTransaccion INNER JOIN
@@ -14,12 +15,14 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'50
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' 1350
          Or = 1350
       End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_NominasPagosCheques_det';
+
+
 
 
 GO
@@ -28,7 +31,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[75] 4[5] 2[3] 3) )"
+         Configuration = "(H (1[72] 4[5] 2[8] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -96,40 +99,40 @@ Begin DesignProperties =
       Begin Tables = 
          Begin Table = "ro_NominasPagosCheques"
             Begin Extent = 
-               Top = 6
+               Top = 4
                Left = 38
                Bottom = 136
-               Right = 235
+               Right = 362
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "ro_NominasPagosCheques_det"
             Begin Extent = 
-               Top = 0
-               Left = 324
-               Bottom = 250
-               Right = 494
+               Top = 14
+               Left = 390
+               Bottom = 264
+               Right = 560
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 3
          End
          Begin Table = "ro_empleado"
             Begin Extent = 
                Top = 0
-               Left = 563
+               Left = 639
                Bottom = 309
-               Right = 852
+               Right = 928
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "tb_persona"
             Begin Extent = 
-               Top = 138
-               Left = 38
-               Bottom = 397
-               Right = 270
+               Top = 89
+               Left = 1005
+               Bottom = 348
+               Right = 1237
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -166,5 +169,7 @@ Begin DesignProperties =
          GroupBy = 1350
          Filter = 1350
          Or = 1350
-         Or = 13', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_NominasPagosCheques_det';
+         Or =', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_NominasPagosCheques_det';
+
+
 

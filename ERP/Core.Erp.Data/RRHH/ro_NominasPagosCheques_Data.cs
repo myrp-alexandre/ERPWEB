@@ -140,7 +140,11 @@ namespace Core.Erp.Data.RRHH
                             Valor = item.Valor,
                             Secuencia = secuencia,
                             IdEmpresa_op=info.IdEmpresa,
-                            IdOrdenPago=item.IdOrdenPago
+                            IdOrdenPago=item.IdOrdenPago,
+                            Secuancia_op=item.Secuancia_op,
+                            IdEmpresa_dc=item.IdEmpresa_dc,
+                            IdTipoCbte=item.IdTipoCbte,
+                            IdCbteCble=item.IdCbteCble
                         };
                         Context.ro_NominasPagosCheques_det.Add(Entity_);
                         secuencia++;
@@ -210,8 +214,8 @@ namespace Core.Erp.Data.RRHH
                     Entity.Estado = info.Estado = false;
                     Entity.IdUsuarioAnu = info.IdUsuarioAnu;
                     Entity.FechaAnu = info.FechaAnu = DateTime.Now;
-                    var detalle = Context.ro_NominasPagosCheques_det.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdTransaccion == info.IdTransaccion);
-                    Context.ro_NominasPagosCheques_det.RemoveRange(detalle);
+                    string sql = "Update ro_NominasPagosCheques_det set Estado=0 where IdEmpresa='"+info.IdEmpresa+ "'  and IdTransaccion='"+info.IdTransaccion+"'";
+                    Context.Database.ExecuteSqlCommand(sql);
                     Context.SaveChanges();
                 }
 

@@ -22,7 +22,12 @@ namespace Core.Erp.Data
         public string Observacion { get; set; }
         public double Valor { get; set; }
         public int IdEmpresa_op { get; set; }
+        public int Secuancia_op { get; set; }
         public decimal IdOrdenPago { get; set; }
+        public int IdEmpresa_dc { get; set; }
+        public int IdTipoCbte { get; set; }
+        public decimal IdCbteCble { get; set; }
+        public bool Estado { get; set; }
     
         public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_NominasPagosCheques ro_NominasPagosCheques { get; set; }

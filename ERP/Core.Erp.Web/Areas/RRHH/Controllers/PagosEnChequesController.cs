@@ -162,6 +162,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
             ro_NominasPagosCheques_Info model = bus_archivo.get_info(IdEmpresa, IdTransaccion);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             if (model == null)
                 return RedirectToAction("Index");
             model.detalle = bus_pago_detalle.get_list(IdEmpresa, IdTransaccion);

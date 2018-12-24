@@ -30,5 +30,10 @@ namespace Core.Erp.Data
         public string pe_nombre { get; set; }
         public string pe_cedulaRuc { get; set; }
         public decimal IdPersona { get; set; }
+        public int IdEmpresa_dc { get; set; }
+        public int IdTipoCbte { get; set; }
+        public decimal IdCbteCble { get; set; }
+        public int Secuancia_op { get; set; }
+        public bool Estado { get; set; }
     }
 }

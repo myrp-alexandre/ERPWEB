@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Bus.Contabilidad;
 
 namespace Core.Erp.Bus.RRHH
 {
@@ -16,6 +17,8 @@ namespace Core.Erp.Bus.RRHH
     {
         ro_NominasPagosCheques_Data odata = new ro_NominasPagosCheques_Data();
         cp_orden_pago_Bus bus_orden = new cp_orden_pago_Bus();
+        ct_cbtecble_Bus bus_comprobante = new ct_cbtecble_Bus();
+        ct_cbtecble_det_Bus bus_comprobante_det = new ct_cbtecble_det_Bus();
         public List<ro_NominasPagosCheques_Info> get_list(int IdEmpresa, DateTime Fechainicio, DateTime fechafin, bool estado)
         {
             try
@@ -54,6 +57,11 @@ namespace Core.Erp.Bus.RRHH
                     bus_orden.guardarDB(item.info_orden_pago);
                     item.IdEmpresa_op = info.IdEmpresa;
                     item.IdOrdenPago = item.info_orden_pago.IdOrdenPago;
+                    item.Secuancia_op = 1;
+                    item.IdEmpresa_dc = info.IdEmpresa;
+                    item.IdTipoCbte = item.info_orden_pago.info_comprobante.IdTipoCbte;
+                    item.IdCbteCble = item.info_orden_pago.info_comprobante.IdCbteCble;
+
                 }
                 return odata.guardarDB(info);
             }
@@ -84,11 +92,15 @@ namespace Core.Erp.Bus.RRHH
             {
                 foreach (var item in info.detalle)
                 {
+                    item.info_orden_pago = new cp_orden_pago_Info();
+                    item.info_orden_pago.IdEmpresa = info.IdEmpresa;
+                    item.info_orden_pago.IdOrdenPago = item.IdOrdenPago;
+                    item.info_orden_pago.info_comprobante = bus_comprobante.get_info(item.IdEmpresa, item.IdTipoCbte, item.IdCbteCble);
+                    item.info_orden_pago.info_comprobante.lst_ct_cbtecble_det = bus_comprobante_det.get_list(item.IdEmpresa, item.IdTipoCbte, item.IdCbteCble);
                     bus_orden.anularDB(item.info_orden_pago);
-                    item.IdEmpresa_op = info.IdEmpresa;
-                    item.IdOrdenPago = item.info_orden_pago.IdOrdenPago;
                 }
                 return odata.anularDB(info);
+                
             }
             catch (Exception)
             {
