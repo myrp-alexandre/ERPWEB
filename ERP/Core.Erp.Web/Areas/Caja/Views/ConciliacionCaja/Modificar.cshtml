@@ -14,13 +14,6 @@
 
     $(function () {
         //Date picker
-        $('#Fecha_ini').datepicker({
-            autoclose: true
-        })
-        $('#Fecha_fin').datepicker({
-            autoclose: true
-           
-        })
         $('#FechaOP').datepicker({
             autoclose: true
         })
@@ -180,8 +173,9 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data.IdEmpresa != 0) {
-                    //$('#Fecha_ini').datepicker("setDate", moment(data.pe_FechaIni).format("DD/MM/YYYY"));
-                    //$('#Fecha_fin').datepicker("setDate", moment(data.pe_FechaFin).format("DD/MM/YYYY"));
+                    console.log(data);
+                    Fecha_ini.SetValue(data.pe_FechaIni);
+                    Fecha_fin.SetValue(data.pe_FechaFin);
                 }
             },
             error: function (error) {
@@ -366,7 +360,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Fecha_ini">Desde*</label>
-                    @Html.DevExpress().DateEditFor(q => q.Fecha_fin, settings =>
+                    @Html.DevExpress().DateEditFor(q => q.Fecha_ini, settings =>
                     {
                         settings.Name = "Fecha_ini";
                         settings.Properties.UseMaskBehavior = true;
