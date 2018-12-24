@@ -82,6 +82,12 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                foreach (var item in info.detalle)
+                {
+                    bus_orden.anularDB(item.info_orden_pago);
+                    item.IdEmpresa_op = info.IdEmpresa;
+                    item.IdOrdenPago = item.info_orden_pago.IdOrdenPago;
+                }
                 return odata.anularDB(info);
             }
             catch (Exception)
