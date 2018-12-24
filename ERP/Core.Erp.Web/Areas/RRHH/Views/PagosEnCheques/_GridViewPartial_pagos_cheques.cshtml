@@ -5,7 +5,7 @@
         settings.CallbackRouteValues = new { Controller = "PagosEnCheques", Action = "GridViewPartial_pagos_cheques_det",  Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin, IdSucursal = ViewBag.IdSucursal };
 
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdArchivo";
+        settings.KeyFieldName = "IdTransaccion";
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -51,7 +51,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToBoolean(e.GetValue("Estado")) == true)
+            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -61,11 +61,11 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "estado")) == "A")
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(tc.DataItem, "IdArchivo") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(tc.DataItem, "IdArchivo") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTransaccion = DataBinder.Eval(tc.DataItem, "IdTransaccion") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTransaccion = DataBinder.Eval(tc.DataItem, "IdTransaccion") },
                             new { onclick = "return confirm('¿Está IdEmpresa de que desea anular el registro?')" })
                     );
                 }
@@ -120,7 +120,7 @@
             {
                 if (Convert.ToString(DataBinder.Eval(c.DataItem, "estado")) == "A")
                 {
-                    ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("get_archivo", "ArchivosTransferencias", new { Area = "RRHH", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(c.DataItem, "IdArchivo") }, Request.Url.Scheme) + "');\"></span>");
+                    ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("get_archivo", "ArchivosTransferencias", new { Area = "RRHH", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdTransaccion = DataBinder.Eval(c.DataItem, "IdTransaccion") }, Request.Url.Scheme) + "');\"></span>");
                 }
             });
             column.Width = Unit.Percentage(5);
