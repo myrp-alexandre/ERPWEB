@@ -9548,8 +9548,8 @@
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_solicitud_pago.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Nuevo.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_CmbProveedor_CXP.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Nuevo - Copia.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Nuevo - Copia - Copia.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
