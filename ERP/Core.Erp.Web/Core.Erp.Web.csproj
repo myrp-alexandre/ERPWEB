@@ -420,6 +420,7 @@
     <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridExportDemoOptions.cs" />
     <Compile Include="Areas\Reportes\Views\RRHHReportes\PivotGridDataOutputDemosHelper.cs" />
     <Compile Include="Areas\RRHH\Controllers\ActaFiniquitoController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\AjustesAnticipoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ArchivosActualizacionSueldoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ArchivosTransferenciasController.cs" />
     <Compile Include="Areas\RRHH\Controllers\AreaController.cs" />
@@ -460,6 +461,7 @@
     <Compile Include="Areas\RRHH\Controllers\RdepController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubroController.cs" />
     <Compile Include="Areas\RRHH\Controllers\RubrosCalculadosController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\SancionesPorAtrasoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TipoGastosPersonalesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TipoGastosPersonalesAnualController.cs" />
     <Compile Include="Areas\RRHH\Controllers\TipoPrestamoController.cs" />
@@ -9632,6 +9634,8 @@
     <Folder Include="Areas\Produccion\Views\Shared\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
+    <Folder Include="Areas\RRHH\Views\AjustesAnticipo\" />
+    <Folder Include="Areas\RRHH\Views\SancionesPorAtraso\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
     <Folder Include="Content\imagenes\activofijo\" />

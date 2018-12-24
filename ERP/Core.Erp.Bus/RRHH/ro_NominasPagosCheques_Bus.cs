@@ -98,8 +98,6 @@ namespace Core.Erp.Bus.RRHH
                     item.info_orden_pago.info_comprobante = bus_comprobante.get_info(item.IdEmpresa, item.IdTipoCbte, item.IdCbteCble);
                     item.info_orden_pago.info_comprobante.lst_ct_cbtecble_det = bus_comprobante_det.get_list(item.IdEmpresa, item.IdTipoCbte, item.IdCbteCble);
                     bus_orden.anularDB(item.info_orden_pago);
-                    item.IdEmpresa_op = info.IdEmpresa;
-                    item.IdOrdenPago = item.info_orden_pago.IdOrdenPago;
                 }
                 return odata.anularDB(info);
                 
