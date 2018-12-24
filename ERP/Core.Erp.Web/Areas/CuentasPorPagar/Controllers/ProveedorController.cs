@@ -109,6 +109,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 IdEmpresa = IdEmpresa,
                 IdClaseProveedor = 1,
+                IdCiudad = "09",
                 info_persona = new Info.General.tb_persona_Info
                 {
                     pe_Naturaleza = "NATU",
@@ -123,11 +124,21 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ActionResult Nuevo(cp_proveedor_Info model)
         {
             model.IdUsuario = Session["IdUsuario"].ToString();
-            if (!bus_proveedor.guardarDB(model))
+            if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc)))
             {
+                if (!bus_proveedor.guardarDB(model))
+                {
+                    cargar_combos(model.IdEmpresa);
+                    return View(model);
+                }
+            }
+            else
+            {
+                ViewBag.mensaje = "Número identificación inválida";
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
+
             return RedirectToAction("Index");
         }
 
@@ -144,12 +155,22 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ActionResult Modificar(cp_proveedor_Info model)
         {
             model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
-            if(!bus_proveedor.modificarDB(model))
+
+            if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc)))
             {
+                if (!bus_proveedor.modificarDB(model))
+                {
+                    cargar_combos(model.IdEmpresa);
+                    return View(model);
+                }
+            }
+            else
+            {
+                ViewBag.mensaje = "Número identificación inválida";
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
         }
         public ActionResult Anular(int IdEmpresa = 0 , decimal IdProveedor = 0)
         {

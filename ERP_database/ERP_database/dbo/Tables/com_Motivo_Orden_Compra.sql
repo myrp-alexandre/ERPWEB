@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[com_Motivo_Orden_Compra] (
     [IdEmpresa]       INT           NOT NULL,
     [IdMotivo]        INT           NOT NULL,
-    [Cod_Motivo]      VARCHAR (20)  NOT NULL,
-    [Descripcion]     VARCHAR (250) NOT NULL,
+    [Cod_Motivo]      VARCHAR (50)  NULL,
+    [Descripcion]     VARCHAR (500) NOT NULL,
     [estado]          CHAR (1)      NOT NULL,
     [Fecha_Transac]   DATETIME      NULL,
     [Fecha_UltMod]    DATETIME      NULL,

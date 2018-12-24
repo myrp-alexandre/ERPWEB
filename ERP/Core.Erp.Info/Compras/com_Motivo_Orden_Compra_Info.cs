@@ -11,13 +11,10 @@ namespace Core.Erp.Info.Compras
     {
         public int IdEmpresa { get; set; }
         public int IdMotivo { get; set; }
-        [Required(ErrorMessage = ("el campo código es obligatorio"))]
         [StringLength(20, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 20")]
-
         public string Cod_Motivo { get; set; }
         [Required(ErrorMessage = ("el campo descripción es obligatorio"))]
         [StringLength(250, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 250")]
-
         public string Descripcion { get; set; }
         public string estado { get; set; }
         public bool EstadoBool { get; set; }

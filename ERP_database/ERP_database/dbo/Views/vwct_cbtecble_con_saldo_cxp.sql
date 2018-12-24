@@ -58,7 +58,7 @@ WHERE        (OP.IdTipo_op = 'ANTI_PROVEE') AND (OPD.IdCbteCble_cxp IS NOT NULL)
 UNION ALL
 SELECT        A.IdEmpresa, A.IdCbteCble_Nota, A.IdTipoCbte_Nota, A.cn_fecha, A.cn_observacion, A.cn_observacion AS referncia, D .tc_TipoCbte, a.cn_total AS Valor_Cbte, ISNULL(B.Total_Pagado, 0) AS Valor_Cancelado_cbte, 
                          round(a.cn_total - ISNULL(B.Total_Pagado, 0), 2) AS Valor_saldo_cbte, CASE WHEN A.DebCre = 'c' THEN 'NOTA-CRED' ELSE 'NOTA-DEB' END AS Tipo, NULL AS Expr1, NULL AS Expr2, NULL AS Expr3, 
-                         P.IdCtaCble_CXP AS IdCtaCble, P.IdCtaCble_Anticipo AS IdCtaAnticipo, pe_nombreCompleto AS Beneficiario, P.IdProveedor
+                         P.IdCtaCble_CXP AS IdCtaCble, null AS IdCtaAnticipo, pe_nombreCompleto AS Beneficiario, P.IdProveedor
 FROM            dbo.cp_nota_DebCre AS A INNER JOIN
                          dbo.cp_proveedor AS P ON A.IdEmpresa = P.IdEmpresa AND A.IdProveedor = P.IdProveedor INNER JOIN
                          dbo.vwct_cbtecble_det_TotalDiario AS C ON A.IdEmpresa = C.IdEmpresa AND A.IdTipoCbte_Nota = C.IdTipoCbte AND A.IdCbteCble_Nota = C.IdCbteCble INNER JOIN
