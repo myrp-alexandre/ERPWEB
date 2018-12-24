@@ -138,7 +138,9 @@ namespace Core.Erp.Data.RRHH
                             IdSucursal = item.IdSucursal,
                             IdEmpleado = item.IdEmpleado,
                             Valor = item.Valor,
-                            Secuencia = secuencia
+                            Secuencia = secuencia,
+                            IdEmpresa_op=info.IdEmpresa,
+                            IdOrdenPago=item.IdOrdenPago
                         };
                         Context.ro_NominasPagosCheques_det.Add(Entity_);
                         secuencia++;
