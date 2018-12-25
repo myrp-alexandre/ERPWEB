@@ -32,7 +32,16 @@
                     @Html.ValidationMessageFor(q => q.CodCbteCble, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    <div class="form-group">
+                        @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                        @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="IdTipoCbte">Tipo comprobante</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte, settings =>

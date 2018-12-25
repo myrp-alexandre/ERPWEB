@@ -19,7 +19,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     {
 
                         IdEmpresa = Info.IdEmpresa,
-                        Idcancelacion = Info.Secuencia = get_id(Info.IdEmpresa),
+                        Idcancelacion = Info.Idcancelacion = get_id(Info.IdEmpresa),
                         Secuencia = Info.Secuencia,
                         IdEmpresa_op = Info.IdEmpresa_op,
                         IdOrdenPago_op = Info.IdOrdenPago_op,
@@ -128,13 +128,13 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
 
-        public bool ElimarDB(int IdEmpresa_cxp, int IdTipoCbte_cxp, decimal IdCbteCble_cxp)
+        public bool ElimarDB(int IdEmpresa_pago, int IdTipoCbte_pago, decimal IdCbteCble_pago)
         {
             try
             {
                 using (Entities_cuentas_por_pagar Contex = new Entities_cuentas_por_pagar())
                 {
-                    string sql = "Delete cp_orden_pago_cancelaciones where IdEmpresa_cxp='" + IdEmpresa_cxp+ "' and IdTipoCbte_cxp='"+IdTipoCbte_cxp+ "' and IdCbteCble_cxp='"+IdCbteCble_cxp+"'";
+                    string sql = "Delete cp_orden_pago_cancelaciones where IdEmpresa_pago='" + IdEmpresa_pago+ "' and IdTipoCbte_pago='"+IdTipoCbte_pago+ "' and IdCbteCble_pago='"+IdCbteCble_pago+"'";
                     Contex.Database.ExecuteSqlCommand(sql);
                 }
              

@@ -132,8 +132,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.re_EstaImpresa = "N";
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Fecha = (DateTime)info.fecha;
-                info.info_comprobante.cb_Anio = info.info_comprobante.cb_Fecha.Year;
-                info.info_comprobante.cb_mes = info.info_comprobante.cb_Fecha.Month;
+
+                //REVISA CARLOS FALTA IDSUCURSAL
+
                 info.info_comprobante.cb_Estado = "A";
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
@@ -187,8 +188,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.re_EstaImpresa = "N";
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Fecha = (DateTime)info.fecha;
-                info.info_comprobante.cb_Anio = info.info_comprobante.cb_Fecha.Year;
-                info.info_comprobante.cb_mes = info.info_comprobante.cb_Fecha.Month;
+
+                //REVISA CARLOS FALTA IDSUCURSAL
+
                 info.info_comprobante.cb_Estado = "A";
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
@@ -257,8 +259,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.re_EstaImpresa = "N";
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Fecha = (DateTime)info.fecha;
-                info.info_comprobante.cb_Anio = info.info_comprobante.cb_Fecha.Year;
-                info.info_comprobante.cb_mes = info.info_comprobante.cb_Fecha.Month;
+
+                //REVISA CARLOS FALTA IDSUCURSAL
+
                 info.info_comprobante.cb_Estado = "A";
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;

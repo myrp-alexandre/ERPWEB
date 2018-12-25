@@ -16,9 +16,9 @@ namespace Core.Erp.Data
     {
         public ba_Catalogo()
         {
+            this.ba_Conciliacion = new HashSet<ba_Conciliacion>();
             this.ba_Cbte_Ban = new HashSet<ba_Cbte_Ban>();
             this.ba_Cbte_Ban1 = new HashSet<ba_Cbte_Ban>();
-            this.ba_Conciliacion = new HashSet<ba_Conciliacion>();
         }
     
         public string IdCatalogo { get; set; }
@@ -36,8 +36,8 @@ namespace Core.Erp.Data
         public string MotiAnula { get; set; }
     
         public virtual ba_CatalogoTipo ba_CatalogoTipo { get; set; }
+        public virtual ICollection<ba_Conciliacion> ba_Conciliacion { get; set; }
         public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
         public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban1 { get; set; }
-        public virtual ICollection<ba_Conciliacion> ba_Conciliacion { get; set; }
     }
 }

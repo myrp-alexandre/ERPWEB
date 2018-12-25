@@ -305,8 +305,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdTipoCbte = IdTipoCbte,
                         IdCbteCble = data_ct.get_id(info.IdEmpresa, IdTipoCbte),
                         cb_Fecha = cab.cr_fecha.Date,
-                        cb_Anio = cab.cr_fecha.Year,
-                        cb_mes = cab.cr_fecha.Month,
+                        IdSucursal = info.IdSucursal,
                         IdPeriodo = Convert.ToInt32(cab.cr_fecha.ToString("yyyyMM")),
                         cb_Observacion = cab.cr_observacion,
                         cb_Estado = "A",
@@ -617,8 +616,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                             IdTipoCbte = IdTipoCbte,
                             IdCbteCble = data_ct.get_id(info.IdEmpresa, IdTipoCbte),
                             cb_Fecha = info.cr_fecha.Date,
-                            cb_Anio = info.cr_fecha.Year,
-                            cb_mes = info.cr_fecha.Month,
+                            IdSucursal = info.IdSucursal,
                             IdPeriodo = Convert.ToInt32(info.cr_fecha.ToString("yyyyMM")),
                             cb_Observacion = info.cr_observacion,
                             cb_Estado = "A",
@@ -734,8 +732,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         if (diario == null)
                             return false;
                         diario.cb_Fecha = info.cr_fecha.Date;
-                        diario.cb_Anio = info.cr_fecha.Year;
-                        diario.cb_mes = info.cr_fecha.Month;
+                        diario.IdSucursal = info.IdSucursal;
                         diario.IdPeriodo = Convert.ToInt32(info.cr_fecha.ToString("yyyyMM"));
                         diario.cb_Observacion = info.cr_observacion;
                         diario.IdUsuarioUltModi = info.IdUsuarioUltMod;

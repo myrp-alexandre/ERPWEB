@@ -158,8 +158,9 @@ namespace Core.Erp.Bus.RRHH
                             {
                                 IdEmpresa = info.IdEmpresa,
                                 cb_Fecha = periodo.pe_FechaFin,
-                                cb_Anio = periodo.pe_FechaFin.Year,
-                                cb_mes = periodo.pe_FechaFin.Month,
+
+                                //REVISA CARLOS FALTA IDSUCURSAL
+
                                 IdTipoCbte = 1,
                                 cb_Estado = "A",
                                 IdPeriodo = Convert.ToInt32(periodo.pe_FechaFin.Year.ToString() + periodo.pe_FechaFin.Month.ToString().PadLeft(2, '0')),

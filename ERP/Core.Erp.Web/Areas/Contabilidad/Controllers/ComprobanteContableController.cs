@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.General;
 using Core.Erp.Bus.Presupuesto;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.Helps;
@@ -22,28 +23,47 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         string mensaje = string.Empty;
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         pre_Grupo_Bus bus_grupo = new pre_Grupo_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         #endregion
 
         #region Index
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = string.IsNullOrEmpty(SessionFixed.IdSucursal) ? 0 : Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            CargarCombosConsulta(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            CargarCombosConsulta(model.IdEmpresa);
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_comprobante_contable(DateTime? fecha_ini, DateTime? fecha_fin)
+        public ActionResult GridViewPartial_comprobante_contable(DateTime? fecha_ini, DateTime? fecha_fin, int IdEmpresa = 0, int IdSucursal = 0)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<ct_cbtecble_Info> model = bus_comprobante.get_list(IdEmpresa, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            ViewBag.IdEmpresa = IdEmpresa;
+            ViewBag.IdSucursal = IdSucursal;
+            List<ct_cbtecble_Info> model = bus_comprobante.get_list(IdEmpresa, IdSucursal, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_comprobante_contable", model);
+        }
+
+        public void CargarCombosConsulta(int IdEmpresa)
+        {
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new Info.General.tb_sucursal_Info
+            {
+                IdSucursal = 0,
+                Su_Descripcion = "Todos"
+            });
+            ViewBag.lst_sucursal = lst_sucursal;
         }
 
         #endregion
@@ -51,7 +71,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         #region Metodos
         private bool validar(ct_cbtecble_Info i_validar, ref string msg)
         {
-            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.CONTA, ref msg))
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cb_Fecha, cl_enumeradores.eModulo.CONTA, ref mensaje))
             {
                 return false;
             }
@@ -76,13 +96,14 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
             return true;
         }
-        private void cargar_combos()
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+        private void cargar_combos(int IdEmpresa)
+        {            
             ct_cbtecble_tipo_Bus bus_tipo_comprobante = new ct_cbtecble_tipo_Bus();
             var lst_tipo_comprobante = bus_tipo_comprobante.get_list(IdEmpresa, false);
             ViewBag.lst_tipo_comprobante = lst_tipo_comprobante;
 
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
         }
 
         public ActionResult CargarGrupo()
@@ -119,7 +140,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             };
             model.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det, model.IdTransaccionSession);
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             cargar_combos_detalle();
             return View(model);
         }
@@ -130,14 +151,14 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(model.IdTransaccionSession);
             if (!validar(model,ref mensaje))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_comprobante.guardarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -158,7 +179,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det,model.IdTransaccionSession);
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
 
@@ -168,14 +189,14 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
             model.IdUsuarioUltModi = Session["IdUsuario"].ToString();            
             if (!bus_comprobante.modificarDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -197,7 +218,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det, model.IdTransaccionSession);
-            cargar_combos();
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
@@ -206,7 +227,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             model.IdUsuarioAnu = SessionFixed.IdUsuario;
             if (!bus_comprobante.anularDB(model))
             {
-                cargar_combos();
+                cargar_combos(model.IdEmpresa);
                 return View(model);
             }
             return RedirectToAction("Index");

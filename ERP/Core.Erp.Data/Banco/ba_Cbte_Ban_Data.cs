@@ -170,8 +170,7 @@ namespace Core.Erp.Data.Banco
                     cb_Fecha = info.cb_Fecha.Date,
                     cb_Observacion = info.cb_Observacion,
                     IdPeriodo = info.IdPeriodo,
-                    cb_Anio = info.cb_Fecha.Year,
-                    cb_mes = info.cb_Fecha.Month,
+                    IdSucursal = info.IdSucursal,
                     cb_FechaTransac = DateTime.Now,
                     cb_Estado = "A",
                     cb_Valor = info.cb_Valor,
@@ -386,8 +385,7 @@ namespace Core.Erp.Data.Banco
                 diario.cb_Fecha = info.cb_Fecha.Date;
                 diario.cb_Observacion = info.cb_Observacion;
                 diario.IdPeriodo = info.IdPeriodo;
-                diario.cb_Anio = info.cb_Fecha.Year;
-                diario.cb_mes = info.cb_Fecha.Month;
+                diario.IdSucursal = info.IdSucursal;
                 diario.cb_Valor = info.cb_Valor;
                 diario.cb_FechaUltModi = DateTime.Now;
                 diario.IdUsuarioUltModi = info.IdUsuario;

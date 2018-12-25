@@ -30,7 +30,7 @@ namespace Core.Erp.Data
         public string cb_giradoA { get; set; }
         public Nullable<decimal> IdPersona { get; set; }
         public string pe_nombreCompleto { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
+        public int IdSucursal { get; set; }
         public string Su_Descripcion { get; set; }
         public Nullable<bool> Imprimir_Solo_el_cheque { get; set; }
     }

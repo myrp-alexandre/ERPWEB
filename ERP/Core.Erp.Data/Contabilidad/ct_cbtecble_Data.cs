@@ -2,69 +2,62 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Contabilidad
 {
     public class ct_cbtecble_Data
     {
-        public List<ct_cbtecble_Info> get_list(int IdEmpresa, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
+        public List<ct_cbtecble_Info> get_list(int IdEmpresa,int IdSucursal, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
                 fecha_ini = fecha_ini.Date;
                 fecha_fin = fecha_fin.Date;
+                int IdSucursal_ini = IdSucursal;
+                int IdSucursal_fin = IdSucursal == 0 ? 999999 : IdSucursal;
                 List<ct_cbtecble_Info> Lista;
                 using (Entities_contabilidad Context = new Entities_contabilidad())
                 {
                     if(mostrar_anulados)
-                    Lista = (from q in Context.ct_cbtecble
-                             join t in Context.ct_cbtecble_tipo
-                             on new { q.IdEmpresa, q.IdTipoCbte} equals new {t.IdEmpresa,t.IdTipoCbte}
+                    Lista = (from q in Context.vwct_cbtecble
                              where q.IdEmpresa == IdEmpresa
                              && fecha_ini <= q.cb_Fecha && q.cb_Fecha <= fecha_fin
+                             && IdSucursal_ini <= q.IdSucursal && q.IdSucursal <= IdSucursal_fin
                              orderby q.cb_Fecha descending
                              select new ct_cbtecble_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
-                                 cb_Anio = q.cb_Anio,
                                  cb_Estado = q.cb_Estado,
                                  cb_Fecha = q.cb_Fecha,
-                                 cb_mes = q.cb_mes,
                                  cb_Observacion = q.cb_Observacion,
                                  cb_Valor = q.cb_Valor,
                                  CodCbteCble = q.CodCbteCble,
                                  IdCbteCble = q.IdCbteCble,
-                                 IdPeriodo = q.IdPeriodo,
                                  IdTipoCbte = q.IdTipoCbte,
-                                 tc_TipoCbte = t.tc_TipoCbte,
-
+                                 tc_TipoCbte = q.tc_TipoCbte,
+                                 Su_Descripcion = q.Su_Descripcion,
                                  EstadoBool = q.cb_Estado == "A" ? true : false
                              }).ToList();
 
                     else
-                        Lista = (from q in Context.ct_cbtecble
-                                 join t in Context.ct_cbtecble_tipo
-                                 on new { q.IdEmpresa, q.IdTipoCbte } equals new { t.IdEmpresa, t.IdTipoCbte }
+                        Lista = (from q in Context.vwct_cbtecble
                                  where q.IdEmpresa == IdEmpresa
                                  && fecha_ini <= q.cb_Fecha && q.cb_Fecha <= fecha_fin
+                                 && IdSucursal_ini <= q.IdSucursal && q.IdSucursal <= IdSucursal_fin
                                  && q.cb_Estado == "A"
                                  orderby q.cb_Fecha descending
                                  select new ct_cbtecble_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
-                                     cb_Anio = q.cb_Anio,
                                      cb_Estado = q.cb_Estado,
-                                     cb_Fecha = q.cb_Fecha,
-                                     cb_mes = q.cb_mes,
+                                     cb_Fecha = q.cb_Fecha,                                     
                                      cb_Observacion = q.cb_Observacion,
                                      cb_Valor = q.cb_Valor,
                                      CodCbteCble = q.CodCbteCble,
                                      IdCbteCble = q.IdCbteCble,
-                                     IdPeriodo = q.IdPeriodo,
+                                     Su_Descripcion = q.Su_Descripcion,
                                      IdTipoCbte = q.IdTipoCbte,
-                                     tc_TipoCbte = t.tc_TipoCbte,
+                                     tc_TipoCbte = q.tc_TipoCbte,
 
                                      EstadoBool = q.cb_Estado == "A" ? true : false
                                  }).ToList();
@@ -90,10 +83,9 @@ namespace Core.Erp.Data.Contabilidad
                     info = new ct_cbtecble_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
-                        cb_Anio = Entity.cb_Anio,
                         cb_Estado = Entity.cb_Estado,
                         cb_Fecha = Entity.cb_Fecha,
-                        cb_mes = Entity.cb_mes,
+                        IdSucursal = info.IdSucursal,
                         cb_Observacion = Entity.cb_Observacion,
                         cb_Valor = Entity.cb_Valor,
                         CodCbteCble = Entity.CodCbteCble,
@@ -149,10 +141,9 @@ namespace Core.Erp.Data.Contabilidad
                     {
 
                         IdEmpresa = info.IdEmpresa,
-                        cb_Anio = info.cb_Fecha.Year,
                         cb_Estado = info.cb_Estado="A",
                         cb_Fecha = info.cb_Fecha.Date,
-                        cb_mes = info.cb_Fecha.Month,
+                        IdSucursal = info.IdSucursal,
                         cb_Observacion = info.cb_Observacion,
                         cb_Valor = info.cb_Valor,
                         CodCbteCble = info.CodCbteCble,
@@ -201,9 +192,9 @@ namespace Core.Erp.Data.Contabilidad
                     ct_cbtecble Entity = Context.ct_cbtecble.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoCbte == info.IdTipoCbte && q.IdCbteCble == info.IdCbteCble);
                     if (Entity == null) return false;
 
-                    Entity.cb_Anio = info.cb_Fecha.Year;
+                    
                     Entity.cb_Fecha = info.cb_Fecha.Date;
-                    Entity.cb_mes = info.cb_Fecha.Month;
+                    Entity.IdSucursal = info.IdSucursal;
                     Entity.cb_Observacion = info.cb_Observacion;
                     Entity.cb_Valor = info.cb_Valor;
                     Entity.CodCbteCble = info.CodCbteCble;
@@ -267,10 +258,9 @@ namespace Core.Erp.Data.Contabilidad
                         IdEmpresa = Entity.IdEmpresa,
                         IdTipoCbte = e_tipo.IdTipoCbte_Anul,
                         IdCbteCble = get_id(Entity.IdEmpresa, e_tipo.IdTipoCbte_Anul),
-                        cb_Anio = DateTime.Now.Year,
+                        IdSucursal = info.IdSucursal,
                         cb_Estado = Entity.cb_Estado = "A",
                         cb_Fecha = DateTime.Now.Date,
-                        cb_mes = DateTime.Now.Month,
                         cb_Observacion = "**REVERSO DE DIARIO tipo: "+ Entity.IdTipoCbte.ToString()+ " #cbte: "+ Entity.IdCbteCble.ToString()+"** "+ Entity.cb_Observacion,
                         cb_Valor = Entity.cb_Valor,
                         CodCbteCble = "ANU"+ Entity.CodCbteCble,

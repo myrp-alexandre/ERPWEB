@@ -164,8 +164,7 @@ namespace Core.Erp.Bus.Importacion
                 info.info_comrobante = new Info.Contabilidad.ct_cbtecble_Info();
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.cb_Fecha = (DateTime)info.oe_fecha;
-                info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
-                info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
+                info.info_comrobante.IdSucursal = Convert.ToInt32(info.IdSucursal_inv);
                 info.info_comrobante.cb_Estado = "A";
                 info.info_comrobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
@@ -212,8 +211,7 @@ namespace Core.Erp.Bus.Importacion
                 info.info_comrobante = new Info.Contabilidad.ct_cbtecble_Info();
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.cb_Fecha = (DateTime)info.oe_fecha;
-                info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
-                info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
+                info.info_comrobante.IdSucursal = (info.IdSucursal_inv) == null ? 0 : Convert.ToInt32(info.IdSucursal_inv);
                 info.info_comrobante.cb_Estado = "A";
                 info.info_comrobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;

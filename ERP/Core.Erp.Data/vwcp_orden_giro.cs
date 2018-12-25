@@ -41,7 +41,7 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdTipoFlujo { get; set; }
         public string IdTipoServicio { get; set; }
         public string Estado { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
+        public int IdSucursal { get; set; }
         public string PagoLocExt { get; set; }
         public string PaisPago { get; set; }
         public string ConvenioTributacion { get; set; }
