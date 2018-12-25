@@ -23,7 +23,7 @@
     [IdTipoFlujo]              NUMERIC (18)  NULL,
     [IdTipoNota]               INT           NULL,
     [ValorEnLetras]            VARCHAR (MAX) NULL,
-    [IdSucursal]               INT           NULL,
+    [IdSucursal]               INT           NOT NULL,
     [IdEstado_Cbte_Ban_cat]    VARCHAR (50)  NULL,
     [IdEstado_Preaviso_ch_cat] VARCHAR (50)  NULL,
     [IdEstado_cheque_cat]      VARCHAR (50)  NULL,
@@ -42,6 +42,8 @@
     CONSTRAINT [FK_ba_Cbte_Ban_tb_persona] FOREIGN KEY ([IdPersona_Girado_a]) REFERENCES [dbo].[tb_persona] ([IdPersona]),
     CONSTRAINT [FK_ba_Cbte_Ban_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 
 
 GO
