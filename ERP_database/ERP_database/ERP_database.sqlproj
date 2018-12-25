@@ -1077,6 +1077,7 @@
     <Build Include="dbo\Tables\cp_SolicitudPago.sql" />
     <Build Include="dbo\Views\vwro_NominasPagosCheques_det_1.sql" />
     <Build Include="dbo\Views\vwro_NominasPagosCheques_1.sql" />
+    <Build Include="dbo\Views\vwcaj_Caja_Movimiento_por_conciliar.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />
