@@ -45,5 +45,18 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
+        public List<ro_rol_detalle_Info> get_list_ajustar_anticipo(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo)
+        {
+            try
+            {
+                return odata.get_list_ajustar_anticipo(idEmpresa, idNominaTipo, idNominaTipoLiqui, idPeriodo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
