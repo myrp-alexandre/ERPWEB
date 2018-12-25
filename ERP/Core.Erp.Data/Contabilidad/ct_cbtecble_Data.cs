@@ -85,7 +85,7 @@ namespace Core.Erp.Data.Contabilidad
                         IdEmpresa = Entity.IdEmpresa,
                         cb_Estado = Entity.cb_Estado,
                         cb_Fecha = Entity.cb_Fecha,
-                        IdSucursal = info.IdSucursal,
+                        IdSucursal = Entity.IdSucursal,
                         cb_Observacion = Entity.cb_Observacion,
                         cb_Valor = Entity.cb_Valor,
                         CodCbteCble = Entity.CodCbteCble,
