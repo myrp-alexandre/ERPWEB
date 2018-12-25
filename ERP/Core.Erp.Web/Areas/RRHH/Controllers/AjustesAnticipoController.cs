@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Bus.RRHH;
+using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
@@ -16,12 +17,31 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         #region clases
         ro_rol_detalle_Info_list ro_rol_detalle_Info_list = new ro_rol_detalle_Info_list();
+        List<ro_nomina_tipo_Info> lista_nomina = new List<ro_nomina_tipo_Info>();
+        ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
+        ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
+        List<ro_Nomina_Tipoliqui_Info> lst_nomina_tipo = new List<ro_Nomina_Tipoliqui_Info>();
+        ro_periodo_x_ro_Nomina_TipoLiqui_Bus bus_periodos_x_nomina = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
+        List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lst_periodos = new List<ro_periodo_x_ro_Nomina_TipoLiqui_Info>();
+        ro_rol_detalle_Bus bus_rol = new ro_rol_detalle_Bus();
         #endregion
         public ActionResult Index()
         {
+            cargar_combos(0, 0);
             return View();
         }
-        
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            var lista = ro_rol_detalle_Info_list.get_list(model.IdTransaccionSession);
+            return View();
+        }
+        public ActionResult GridViewPartial_ajuste_anticipo()
+        {
+            List<ro_rol_detalle_Info> model = new List<ro_rol_detalle_Info>();
+            model = ro_rol_detalle_Info_list.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ajuste_anticipo", model);
+        }
         #region funciones del detalle
 
         [HttpPost, ValidateInput(false)]
@@ -44,6 +64,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
+        private void cargar_combos(int IdNomina_Tipo, int IdNomina_Tipo_Liqui)
+        {
+            try
+            {
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                lista_nomina = bus_nomina.get_list(IdEmpresa, false);
+                lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina_Tipo);
+                lst_periodos = bus_periodos_x_nomina.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_Tipo_Liqui);
+                ViewBag.lst_nomina = lista_nomina;
+                ViewBag.lst_nomina_tipo = lst_nomina_tipo;
+                ViewBag.lst_periodos = lst_periodos;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         #endregion
     }
