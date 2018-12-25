@@ -10,6 +10,7 @@ namespace Core.Erp.Bus.Caja
     {
         caj_Caja_Movimiento_Data odata = new caj_Caja_Movimiento_Data();
         ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
+        caj_Caja_Data odata_caja = new caj_Caja_Data();
         public List<caj_Caja_Movimiento_Info> get_list(int IdEmpresa, string cm_signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
@@ -40,8 +41,9 @@ namespace Core.Erp.Bus.Caja
         {
             try
             {
+                var caja = odata_caja.get_info(info.IdEmpresa, info.IdCaja);
                 //Como necesito que exista un diario para que el movimiento herede sus PK, armo un diario en base a lo que ingresen en la pantalla
-                info.info_ct_cbtecble = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, info.IdTipocbte, info.IdCbteCble, info.cm_observacion, info.cm_fecha);
+                info.info_ct_cbtecble = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, caja.IdSucursal, info.IdTipocbte, info.IdCbteCble, info.cm_observacion, info.cm_fecha);
                 //Guardo el diario
                 if (odata_ct.guardarDB(info.info_ct_cbtecble))
                 {//Si el diario se guarda exitosamente entonces paso los PK al movimiento de caja
@@ -65,7 +67,8 @@ namespace Core.Erp.Bus.Caja
         {
             try
             {
-               var info_ct_cbtecble = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, info.IdTipocbte, info.IdCbteCble, info.cm_observacion, info.cm_fecha);
+                var caja = odata_caja.get_info(info.IdEmpresa, info.IdCaja);
+                var info_ct_cbtecble = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, caja.IdSucursal, info.IdTipocbte, info.IdCbteCble, info.cm_observacion, info.cm_fecha);
 
                if(odata_ct.modificarDB(info_ct_cbtecble))
                 {

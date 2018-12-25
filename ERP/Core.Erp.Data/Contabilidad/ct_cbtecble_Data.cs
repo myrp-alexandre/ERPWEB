@@ -325,7 +325,7 @@ namespace Core.Erp.Data.Contabilidad
             }
         }
 
-        public ct_cbtecble_Info armar_info(List<ct_cbtecble_det_Info> lista, int IdEmpresa, int IdTipoCbte, decimal IdCbteCble, string Observacion, DateTime Fecha)
+        public ct_cbtecble_Info armar_info(List<ct_cbtecble_det_Info> lista, int IdEmpresa, int IdSucursal, int IdTipoCbte, decimal IdCbteCble, string Observacion, DateTime Fecha)
         {
             try
             {
@@ -334,6 +334,7 @@ namespace Core.Erp.Data.Contabilidad
                     IdEmpresa = IdEmpresa,
                     IdTipoCbte = IdTipoCbte,
                     IdCbteCble = IdCbteCble,
+                    IdSucursal = IdSucursal,
                     cb_Observacion = Observacion,
                     cb_Fecha = Fecha,
                     cb_Valor = lista.Sum(q=>q.dc_Valor_debe)

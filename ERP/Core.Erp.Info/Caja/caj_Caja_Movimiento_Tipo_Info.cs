@@ -27,9 +27,6 @@ namespace Core.Erp.Info.Caja
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string MotivoAnulacion { get; set; }
-        public Nullable<int> IdTipoMovi_grupo { get; set; }
     }
 }

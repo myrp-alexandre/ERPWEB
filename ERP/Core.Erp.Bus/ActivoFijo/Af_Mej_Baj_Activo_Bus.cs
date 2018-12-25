@@ -11,6 +11,7 @@ namespace Core.Erp.Bus.ActivoFijo
         Af_Mej_Baj_Activo_Data odata = new Af_Mej_Baj_Activo_Data();
         ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
         Af_Parametros_Data odata_af_param = new Af_Parametros_Data();
+        Af_Activo_fijo_Data odata_af = new Af_Activo_fijo_Data();
         public List<Af_Mej_Baj_Activo_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
@@ -46,7 +47,8 @@ namespace Core.Erp.Bus.ActivoFijo
                 //Obtengo el tipo dependiendo si es mejora o baja
                 int IdTipoCbte = info.Id_Tipo == "Mejo_Acti" ? param.IdTipoCbteMejora : param.IdTipoCbteBaja;
                 //Armo un diario pasando los parametros que pida
-                var info_cbte = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, IdTipoCbte, 0, (info.Id_Tipo == "Mejo_Acti" ? "MEJORA - " : "BAJA - ") + info.Motivo, info.Fecha_MejBaj);
+                var af = odata_af.get_info(info.IdEmpresa, info.IdActivoFijo);
+                var info_cbte = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, af.IdSucursal, IdTipoCbte, 0, (info.Id_Tipo == "Mejo_Acti" ? "MEJORA - " : "BAJA - ") + info.Motivo, info.Fecha_MejBaj);
                 //Guardo el diario
                 if (odata_ct.guardarDB(info_cbte))
                 {
@@ -73,7 +75,8 @@ namespace Core.Erp.Bus.ActivoFijo
         {
             try
             {
-                var info_cbte = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, Convert.ToInt32(info.IdTipoCbte), Convert.ToInt32(info.IdCbteCble), (info.Id_Tipo == "Mejo_Acti" ? "MEJORA - " : "BAJA - ") + info.Motivo, info.Fecha_MejBaj);
+                var af = odata_af.get_info(info.IdEmpresa, info.IdActivoFijo);
+                var info_cbte = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, af.IdSucursal, Convert.ToInt32(info.IdTipoCbte), Convert.ToInt32(info.IdCbteCble), (info.Id_Tipo == "Mejo_Acti" ? "MEJORA - " : "BAJA - ") + info.Motivo, info.Fecha_MejBaj);
                 //Modifico el diario
                 if (odata_ct.modificarDB(info_cbte))
                 {

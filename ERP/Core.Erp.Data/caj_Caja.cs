@@ -22,7 +22,7 @@ namespace Core.Erp.Data
     
         public int IdEmpresa { get; set; }
         public int IdCaja { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
+        public int IdSucursal { get; set; }
         public string ca_Codigo { get; set; }
         public string ca_Descripcion { get; set; }
         public string IdCtaCble { get; set; }
@@ -30,8 +30,6 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string Estado { get; set; }
         public string IdUsuario_Responsable { get; set; }
         public string IdUsuarioUltAnu { get; set; }

@@ -44,7 +44,7 @@ namespace Core.Erp.Bus.ActivoFijo
             try
             {
                 var i_param = odata_param.get_info(info.IdEmpresa);
-                var info_ct_cbtecble = odata_ct.armar_info(info.lst_detalle_ct, info.IdEmpresa, i_param.IdTipoCbte, 0, "Depreciación "+info.IdPeriodo.ToString() + info.Descripcion, info.Fecha_Depreciacion);
+                var info_ct_cbtecble = odata_ct.armar_info(info.lst_detalle_ct, info.IdEmpresa, 1, i_param.IdTipoCbte, 0, "Depreciación "+info.IdPeriodo.ToString() + info.Descripcion, info.Fecha_Depreciacion);
                 if (odata_ct.guardarDB(info_ct_cbtecble))
                 {
                     info.IdEmpresa_ct = info_ct_cbtecble.IdEmpresa;
@@ -68,7 +68,7 @@ namespace Core.Erp.Bus.ActivoFijo
         {
             try
             {
-                var info_ct_cbtecble = odata_ct.armar_info(info.lst_detalle_ct, info.IdEmpresa, Convert.ToInt32(info.IdTipoCbte), Convert.ToDecimal(info.IdCbteCble), info.Descripcion, info.Fecha_Depreciacion);
+                var info_ct_cbtecble = odata_ct.armar_info(info.lst_detalle_ct, info.IdEmpresa, 1, Convert.ToInt32(info.IdTipoCbte), Convert.ToDecimal(info.IdCbteCble), info.Descripcion, info.Fecha_Depreciacion);
                 if (odata_ct.modificarDB(info_ct_cbtecble))
                 {
                     if (odata.modificarDB(info))

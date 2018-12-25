@@ -44,10 +44,10 @@ namespace Core.Erp.Data
         public Nullable<int> IdTipoCbte_mov_caj { get; set; }
         public Nullable<decimal> IdCbteCble_mov_caj { get; set; }
     
-        public virtual caj_Caja caj_Caja { get; set; }
         public virtual caj_Caja_Movimiento caj_Caja_Movimiento { get; set; }
         public virtual ICollection<cp_conciliacion_Caja_det> cp_conciliacion_Caja_det { get; set; }
         public virtual ICollection<cp_conciliacion_Caja_det_Ing_Caja> cp_conciliacion_Caja_det_Ing_Caja { get; set; }
         public virtual ICollection<cp_conciliacion_Caja_det_x_ValeCaja> cp_conciliacion_Caja_det_x_ValeCaja { get; set; }
+        public virtual caj_Caja caj_Caja { get; set; }
     }
 }
