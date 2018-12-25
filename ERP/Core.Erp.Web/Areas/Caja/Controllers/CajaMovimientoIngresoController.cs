@@ -109,7 +109,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst_tipo = bus_tipo.get_list(IdEmpresa,"+", false, true);
             ViewBag.lst_tipo = lst_tipo;
             
-            var lst_caja = bus_caja.get_list(IdEmpresa, false);
+            var lst_caja = bus_caja.get_list(IdEmpresa, SessionFixed.IdUsuario);
             ViewBag.lst_caja = lst_caja;
             
             var lst_cobro = bus_cobro.get_list(false);

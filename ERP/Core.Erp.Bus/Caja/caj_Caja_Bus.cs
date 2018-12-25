@@ -22,6 +22,19 @@ namespace Core.Erp.Bus.Caja
             }
         }
 
+        public List<caj_Caja_Info> get_list(int IdEmpresa, string IdUsuario)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa, IdUsuario);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public caj_Caja_Info get_info(int IdEmpresa, int IdCaja)
         {
             try
