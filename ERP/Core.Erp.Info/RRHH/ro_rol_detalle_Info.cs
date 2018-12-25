@@ -34,6 +34,7 @@ namespace Core.Erp.Info.RRHH
         public string ru_tipo { get; set; }
 
         public decimal? Valor_ { get; set; }
+        public bool check { get; set; }
 
         #endregion
 

@@ -33,8 +33,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
-            var lista = ro_rol_detalle_Info_list.get_list(model.IdTransaccionSession);
-            return View();
+            var lista = ro_rol_detalle_Info_list.get_list(model.IdTransaccionSession).Where(v=>v.check==true).ToList();
+          if(!  bus_rol.ajustar_anticipo(lista))
+            return View(model);
+           return RedirectToAction("Index", "ProcesarRol");
         }
         public ActionResult GridViewPartial_ajuste_anticipo()
         {

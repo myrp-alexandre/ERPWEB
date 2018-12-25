@@ -58,5 +58,18 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
+        public bool ajustar_anticipo(List<ro_rol_detalle_Info> lista)
+        {
+            try
+            {
+                return odata.ajustar_anticipo(lista);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

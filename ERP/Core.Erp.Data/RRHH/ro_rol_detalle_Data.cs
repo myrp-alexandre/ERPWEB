@@ -168,5 +168,30 @@ namespace Core.Erp.Data.RRHH
         }
 
 
+        public bool ajustar_anticipo(List<ro_rol_detalle_Info> lista)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    foreach (var item in lista)
+                    {
+                        ro_rol_detalle Entity = Context.ro_rol_detalle.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdEmpleado == item.IdEmpleado 
+                        && q.IdRol == item.IdRol && q.IdRubro==item.IdRubro);
+                        if(Entity!=null)
+                        Entity.Valor = item.Valor;
+                        Context.SaveChanges();
+
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
