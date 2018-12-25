@@ -82,10 +82,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 IdEmpresa = IdEmpresa,
                 Fecha = DateTime.Now.Date,
                 IdPeriodo = Convert.ToInt32(DateTime.Now.Date.ToString("yyyyMM")),
-                Fecha_ini = new DateTime(DateTime.Now.Year
-                ,DateTime.Now.Month
-                ,1),
-                Fecha_fin = new DateTime((DateTime.Now.Month == 12 ? (DateTime.Now.Year+1) : DateTime.Now.Year), (DateTime.Now.Month == 12 ? 1 : (DateTime.Now.Month + 1)), 1).AddDays(-1),
+                Fecha_ini = DateTime.Now.Date.AddDays(-(int)DateTime.Now.Date.DayOfWeek+1),
+                Fecha_fin = (DateTime.Now.Date.AddDays(-(int)DateTime.Now.Date.DayOfWeek+1)).AddDays(5).AddSeconds(-1),
                 FechaOP = DateTime.Now,
                 IdEstadoCierre = cl_enumeradores.eEstadoCierreCaja.EST_CIE_ABI.ToString(),
                 lst_det_fact = new List<cp_conciliacion_Caja_det_Info>(),

@@ -246,7 +246,7 @@
             }
 
         });
-        //$('#FechaOP').datepicker("setDate", moment(new Date()).format("DD/MM/YYYY"));
+        FechaOP.SetDate(new Date());        
         GridView_comprobante_detalle.PerformCallback();
     }
 </script>
@@ -459,10 +459,19 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_op">
                 <div class="row">
+
                     <div class="col-md-offset-10 col-md-2">
                         <div class="form-group">
-                            <label for="FechaOP">Fecha*</label>
-                            @Html.TextBoxFor(q => q.FechaOP, "{0:dd/MM/yyyy}", new { @id = "FechaOP", @class = "form-control" })
+                            <label for="FechaOP">Hasta*</label>
+                            @Html.DevExpress().DateEditFor(q => q.FechaOP, settings =>
+                            {
+                                settings.Name = "FechaOP";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);                        
+                            }).GetHtml()
                             @Html.ValidationMessageFor(q => q.FechaOP, "", new { @class = "text-danger" })
                         </div>
                     </div>
