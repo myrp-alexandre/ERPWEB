@@ -10,13 +10,15 @@ namespace Core.Erp.Data.Caja
 {
     public class caj_Caja_Movimiento_Data
     {
-        public List<caj_Caja_Movimiento_Info> get_list (int IdEmpresa, string cm_signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
+        public List<caj_Caja_Movimiento_Info> get_list (int IdEmpresa, int IdCaja, string cm_signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
                 fecha_ini = fecha_ini.Date;
                 fecha_fin = fecha_fin.Date;
                 List<caj_Caja_Movimiento_Info> Lista;
+                int IdCaja_ini = IdCaja;
+                int IdCaja_fin = IdCaja == 0 ? 999999 : IdCaja;
                 using (Entities_caja Context = new Entities_caja())
                 {
                     if (mostrar_anulados)
@@ -24,6 +26,7 @@ namespace Core.Erp.Data.Caja
                                  where q.IdEmpresa == IdEmpresa
                                  && q.cm_Signo == cm_signo
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
+                                 && IdCaja_ini <= q.IdCaja && q.IdCaja <= IdCaja_fin
                                  orderby q.IdCbteCble descending
                                  select new caj_Caja_Movimiento_Info
                                  {
@@ -47,6 +50,7 @@ namespace Core.Erp.Data.Caja
                                  where q.IdEmpresa == IdEmpresa
                                  && q.cm_Signo == cm_signo
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
+                                 && IdCaja_ini <= q.IdCaja && q.IdCaja <= IdCaja_fin
                                  && q.Estado =="A"
                                  orderby q.IdCbteCble descending
                                  select new caj_Caja_Movimiento_Info

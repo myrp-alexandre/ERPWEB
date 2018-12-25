@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.Caja
         caj_Caja_Movimiento_Data odata = new caj_Caja_Movimiento_Data();
         ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
         caj_Caja_Data odata_caja = new caj_Caja_Data();
-        public List<caj_Caja_Movimiento_Info> get_list(int IdEmpresa, string cm_signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
+        public List<caj_Caja_Movimiento_Info> get_list(int IdEmpresa, int IdCaja, string cm_signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, cm_signo, mostrar_anulados, fecha_ini, fecha_fin);
+                return odata.get_list(IdEmpresa, IdCaja, cm_signo, mostrar_anulados, fecha_ini, fecha_fin);
             }
             catch (Exception)
             {

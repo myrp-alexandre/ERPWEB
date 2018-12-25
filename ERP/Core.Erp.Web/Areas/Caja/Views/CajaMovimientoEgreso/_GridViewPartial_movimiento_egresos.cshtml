@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_movimiento_egresos";
-        settings.CallbackRouteValues = new { Controller = "CajaMovimientoEgreso", Action = "GridViewPartial_movimiento_egresos" };
+        settings.CallbackRouteValues = new { Controller = "CajaMovimientoEgreso", Action = "GridViewPartial_movimiento_egresos", fecha_ini = ViewBag.fecha_ini, fecha_fin = ViewBag.fecha_fin, IdEmpresa = ViewBag.IdEmpresa, IdCaja = ViewBag.IdCaja };
         settings.KeyFieldName = "IdCbteCble";
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
@@ -71,7 +71,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = ViewBag.IdEmpresa }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

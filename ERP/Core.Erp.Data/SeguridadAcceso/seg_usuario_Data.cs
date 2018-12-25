@@ -107,7 +107,7 @@ namespace Core.Erp.Data.SeguridadAcceso
 
                 using (Entities_seguridad_acceso Context = new Entities_seguridad_acceso())
                 {
-                    seg_usuario Entity = Context.seg_usuario.FirstOrDefault(q => q.IdUsuario == IdUsuario);
+                    seg_usuario Entity = Context.seg_usuario.FirstOrDefault(q => q.IdUsuario.ToLower() == IdUsuario.ToLower());
                     if (Entity == null) return null;
                     info = new seg_usuario_Info
                     {

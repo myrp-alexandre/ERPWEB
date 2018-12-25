@@ -7,28 +7,16 @@ namespace Core.Erp.Info.Helps
     {
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
-
         [Required(ErrorMessage = "El campo fecha inicio es obligatorio")]
         [DataType(DataType.Date, ErrorMessage = "El campo fecha inicio debe ser una fecha en formato dd/MM/yyyy")]
         public DateTime fecha_ini { get; set; }
         [Required(ErrorMessage = "El campo fecha fin es obligatorio")]
         [DataType(DataType.Date, ErrorMessage = "El campo fecha fin debe ser una fecha en formato dd/MM/yyyy")]
         public DateTime fecha_fin { get; set; }
-        public bool mostrar_registros_0 { get; set; }
         public string IdCtaCble { get; set; }
-        public decimal IdCliente { get; set; }
         public bool mostrarAnulados { get; set; }
         public bool mostrar_observacion_completa { get; set; }
-
-        #region Filtros inventario
-
-
-        public string IdPais_embarque { get; set; }
-
-
-
-        #endregion
-
+        
         #region Filtros activo
         public int IdActivoFijoTipo { get; set; }
         public int IdCategoriaAF { get; set; }
@@ -49,14 +37,10 @@ namespace Core.Erp.Info.Helps
         #region filtros de RRHH
         public int IdTipoNomina { get; set; }
         public int IdNomina { get; set; }
-        public bool mostrar_nov_can { get; set; }
-        public bool mostrar_nov_pen { get; set; }
-        public bool mostrar_todas_nov { get; set; }
         public int IdSucursal { get; set; }
         public decimal? IdEmpleado { get; set; }
         public string[]  estado_novedad { get; set; }
         public string IdRubro { get; set; }
-
         #endregion
 
         #region filtros de Presupuesto
@@ -72,7 +56,22 @@ namespace Core.Erp.Info.Helps
 
     }
 
-
+    public class cl_filtros_caja_Info
+    {
+        public int IdEmpresa { get; set; }
+        [Required(ErrorMessage = "El campo fecha inicio es obligatorio")]
+        [DataType(DataType.Date, ErrorMessage = "El campo fecha inicio debe ser una fecha en formato dd/MM/yyyy")]
+        public DateTime fecha_ini { get; set; }
+        [Required(ErrorMessage = "El campo fecha fin es obligatorio")]
+        [DataType(DataType.Date, ErrorMessage = "El campo fecha fin debe ser una fecha en formato dd/MM/yyyy")]
+        public DateTime fecha_fin { get; set; }
+        public int IdCaja { get; set; }
+        public cl_filtros_caja_Info()
+        {
+            fecha_ini = DateTime.Now.Date.AddMonths(-1);
+            fecha_fin = DateTime.Now.Date;
+        }
+    }
 
     public class cl_filtros_importacion_Info
     {

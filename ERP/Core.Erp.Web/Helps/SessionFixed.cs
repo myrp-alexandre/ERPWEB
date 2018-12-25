@@ -5,7 +5,6 @@ namespace Core.Erp.Web.Helps
     public interface ISessionValueProvider
     {
         string TipoPersona { get; set; }
-
         string IdEmpresa { get; set; }
         string IdUsuario { get; set; }
         string NomEmpresa { get; set; }
@@ -18,8 +17,7 @@ namespace Core.Erp.Web.Helps
         string IdNivelDescuento { get; set; }
         string NombreImagen { get; set; }
         string EsSuperAdmin { get; set; }
-        string FechaPresupuesto { get; set; }
-
+        string IdCaja { get; set; }
     }
 
     public static class SessionFixed
@@ -98,29 +96,29 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.EsSuperAdmin; }
             set { _sessionValueProvider.EsSuperAdmin = value; }
         }
-        public static string FechaPresupuesto
+        public static string IdCaja
         {
-            get { return _sessionValueProvider.FechaPresupuesto; }
-            set { _sessionValueProvider.FechaPresupuesto = value; }
+            get { return _sessionValueProvider.IdCaja; }
+            set { _sessionValueProvider.IdCaja = value; }
         }
     }
 
     public class WebSessionValueProvider : ISessionValueProvider
     {
-        private const string _IdTipoPersona = "PERSONA";
-        private const string _IdUsuario = "IdUsuario";
-        private const string _IdEmpresa = "IdEmpresa";
-        private const string _NomEmpresa = "FIXED";
-        private const string _IdProducto_padre_dist = "IdProducto_padre_dist";
-        private const string _IdEntidad = "IdEntidadParam";
-        private const string _IdSucursal = "IdSucursal";
-        private const string _em_direccion = "em_direccion";
-        private const string _IdTransaccionSession = "IdTransaccionSesssion";
-        private const string _IdTransaccionSessionActual = "IdTransaccionSessionActual";
-        private const string _IdNivelDescuento = "IdNivelDescuento";
-        private const string _NombreImagen = "NombreImagen";
-        private const string _EsSuperAdmin = "EsSuperAdmin";
-        private const string _FechaPresupuesto = "FechaPresupuesto";
+        private const string _IdTipoPersona = "Fx_PERSONA";
+        private const string _IdUsuario = "Fx_IdUsuario";
+        private const string _IdEmpresa = "Fx_IdEmpresa";
+        private const string _NomEmpresa = "Fx_FIXED";
+        private const string _IdProducto_padre_dist = "Fx_IdProducto_padre_dist";
+        private const string _IdEntidad = "Fx_IdEntidadParam";
+        private const string _IdSucursal = "Fx_IdSucursal";
+        private const string _em_direccion = "Fx_em_direccion";
+        private const string _IdTransaccionSession = "Fx_IdTransaccionSesssion";
+        private const string _IdTransaccionSessionActual = "Fx_IdTransaccionSessionActual";
+        private const string _IdNivelDescuento = "Fx_IdNivelDescuento";
+        private const string _NombreImagen = "Fx_NombreImagen";
+        private const string _EsSuperAdmin = "Fx_EsSuperAdmin";
+        private const string _IdCaja = "Fx_IdCaja";
 
         public string TipoPersona
         {
@@ -188,10 +186,10 @@ namespace Core.Erp.Web.Helps
             get { return (string)HttpContext.Current.Session[_EsSuperAdmin]; }
             set { HttpContext.Current.Session[_EsSuperAdmin] = value; }
         }
-        public string FechaPresupuesto
+        public string IdCaja
         {
-            get { return (string)HttpContext.Current.Session[_FechaPresupuesto]; }
-            set { HttpContext.Current.Session[_FechaPresupuesto] = value; }
+            get { return (string)HttpContext.Current.Session[_IdCaja]; }
+            set { HttpContext.Current.Session[_IdCaja] = value; }
         }
     }
 }

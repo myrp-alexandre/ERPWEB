@@ -1,9 +1,11 @@
-﻿using Core.Erp.Bus.General;
+﻿using Core.Erp.Bus.Caja;
+using Core.Erp.Bus.General;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.General;
 using Core.Erp.Info.SeguridadAcceso;
 using Core.Erp.Web.Helps;
 using Core.Erp.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -16,7 +18,8 @@ namespace Core.Erp.Web.Controllers
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-        seg_Menu_Bus bus_menu = new seg_Menu_Bus();    
+        seg_Menu_Bus bus_menu = new seg_Menu_Bus();
+        caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -80,20 +83,26 @@ namespace Core.Erp.Web.Controllers
             Session["IdSucursal"] = model.IdSucursal;
             Session["em_direccion"] = info_empresa.em_direccion;
             SessionFixed.NomEmpresa = info_empresa.em_nombre;
-            SessionFixed.IdUsuario = model.IdUsuario;
+            
             SessionFixed.IdEmpresa = model.IdEmpresa.ToString();
             SessionFixed.IdSucursal = model.IdSucursal.ToString();
             SessionFixed.em_direccion = info_empresa.em_direccion;
-            SessionFixed.IdTransaccionSession = string.IsNullOrEmpty(SessionFixed.IdTransaccionSession) ? "1" : SessionFixed.IdTransaccionSession;
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            SessionFixed.IdTransaccionSession = string.IsNullOrEmpty(SessionFixed.IdTransaccionSession) ? "1" : (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;            
             
             var usuario = bus_usuario.get_info(model.IdUsuario);
-            SessionFixed.EsSuperAdmin = usuario.es_super_admin.ToString();
-            if (usuario != null && usuario.IdMenu != null)
-            {                
-                var menu = bus_menu.get_info((int)usuario.IdMenu);
-                if (menu != null && !string.IsNullOrEmpty(menu.web_nom_Action))
-                    return RedirectToAction(menu.web_nom_Action, menu.web_nom_Controller, new { Area = menu.web_nom_Area });                
+            if (usuario != null )
+            {
+                SessionFixed.IdUsuario = usuario.IdUsuario;
+                SessionFixed.EsSuperAdmin = usuario.es_super_admin.ToString();
+                SessionFixed.IdCaja = bus_caja.GetIdCajaPorUsuario(model.IdEmpresa, SessionFixed.IdUsuario).ToString();
+
+                if (usuario.IdMenu != null)
+                {
+                    var menu = bus_menu.get_info((int)usuario.IdMenu);
+                    if (menu != null && !string.IsNullOrEmpty(menu.web_nom_Action))
+                        return RedirectToAction(menu.web_nom_Action, menu.web_nom_Controller, new { Area = menu.web_nom_Area });
+                }                
             }
             return RedirectToAction("Index","Home");
         }
