@@ -1,7 +1,5 @@
 
 @using System.Web.UI.WebControls;
-@model Core.Erp.Info.RRHH.ro_archivos_bancos_generacion_Info
-
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
@@ -135,4 +133,4 @@
     });
 
 }
-@grid.Bind(Model.detalle).GetHtml()
+@grid.Bind(Model).GetHtml()
