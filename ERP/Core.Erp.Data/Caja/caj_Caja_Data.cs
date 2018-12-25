@@ -61,6 +61,41 @@ namespace Core.Erp.Data.Caja
             }
         }
 
+        public List<caj_Caja_Info> get_list(int IdEmpresa, string IdUsuario)
+        {
+            try
+            {
+                List<caj_Caja_Info> Lista;
+                using (Entities_caja Context = new Entities_caja())
+                {
+                        Lista = (from q in Context.caj_Caja
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdUsuario == IdUsuario
+                                 && q.Estado == "A"
+                                 select new caj_Caja_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     ca_Codigo = q.ca_Codigo,
+                                     Estado = q.Estado,
+                                     IdCaja = q.IdCaja,
+                                     IdCtaCble = q.IdCtaCble,
+                                     IdSucursal = q.IdSucursal,
+                                     ca_Descripcion = q.ca_Descripcion,
+                                     IdUsuario_Responsable = q.IdUsuario_Responsable,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
+                                 }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public caj_Caja_Info get_info(int IdEmpresa, int IdCaja)
         {
             try

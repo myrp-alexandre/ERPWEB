@@ -173,7 +173,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst_periodo = bus_periodo.get_list(IdEmpresa, false);
             ViewBag.lst_periodo = lst_periodo;
 
-            var lst_caja = bus_caja.get_list(IdEmpresa, false);
+            var lst_caja = bus_caja.get_list(IdEmpresa, SessionFixed.IdUsuario);
             ViewBag.lst_caja = lst_caja;
 
             Dictionary<string, string> lst = new Dictionary<string, string>();

@@ -28,7 +28,6 @@ namespace Core.Erp.Data.Caja
                                  tm_descripcion = q.tm_descripcion,
                                  SeDeposita = q.SeDeposita,
                                  tm_Signo = q.tm_Signo,
-                                 IdTipoMovi_grupo = q.IdTipoMovi_grupo,
                                  IdCtaCble = q.IdCtaCble,
 
                                  EstadoBool = q.Estado == "A" ? true : false
@@ -46,7 +45,6 @@ namespace Core.Erp.Data.Caja
                                      tm_descripcion = q.tm_descripcion,
                                      SeDeposita = q.SeDeposita,
                                      tm_Signo = q.tm_Signo,
-                                     IdTipoMovi_grupo = q.IdTipoMovi_grupo,
                                      IdCtaCble = q.IdCtaCble,
 
                                      EstadoBool = q.Estado == "A" ? true : false
@@ -83,7 +81,6 @@ namespace Core.Erp.Data.Caja
                                      tm_descripcion = q.tm_descripcion,
                                      SeDeposita = q.SeDeposita,
                                      tm_Signo = q.tm_Signo,
-                                     IdTipoMovi_grupo = q.IdTipoMovi_grupo,
                                      IdCtaCble = q.IdCtaCble
                                  }).ToList();
                         else
@@ -99,7 +96,6 @@ namespace Core.Erp.Data.Caja
                                          tm_descripcion = q.tm_descripcion,
                                          SeDeposita = q.SeDeposita,
                                          tm_Signo = q.tm_Signo,
-                                         IdTipoMovi_grupo = q.IdTipoMovi_grupo,
                                          IdCtaCble = q.IdCtaCble
                                      }).ToList();
                     }
@@ -118,7 +114,6 @@ namespace Core.Erp.Data.Caja
                                      tm_descripcion = q.tm_descripcion,
                                      SeDeposita = q.SeDeposita,
                                      tm_Signo = q.tm_Signo,
-                                     IdTipoMovi_grupo = q.IdTipoMovi_grupo,
                                      IdCtaCble = q.IdCtaCble,
 
                                  }).ToList();
@@ -136,7 +131,6 @@ namespace Core.Erp.Data.Caja
                                          tm_descripcion = q.tm_descripcion,
                                          SeDeposita = q.SeDeposita,
                                          tm_Signo = q.tm_Signo,
-                                         IdTipoMovi_grupo = q.IdTipoMovi_grupo,
                                          IdCtaCble = q.IdCtaCble,
 
                                      }).ToList();
@@ -169,8 +163,6 @@ namespace Core.Erp.Data.Caja
                         SeDeposita = Entity.SeDeposita,
                         tm_Signo = Entity.tm_Signo,
                         IdCtaCble = Entity.IdCtaCble,
-                        IdTipoMovi_grupo = Entity.IdTipoMovi_grupo
-
                     };
                 }
                 return info;
@@ -218,7 +210,6 @@ namespace Core.Erp.Data.Caja
                         tm_descripcion = info.tm_descripcion,
                         SeDeposita = info.SeDeposita,
                         tm_Signo = info.tm_Signo,
-                        IdTipoMovi_grupo = info.IdTipoMovi_grupo,
                         IdCtaCble = info.IdCtaCble,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
@@ -245,7 +236,6 @@ namespace Core.Erp.Data.Caja
                     caj_Caja_Movimiento_Tipo Entity = Context.caj_Caja_Movimiento_Tipo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoMovi == info.IdTipoMovi);
                     if (Entity == null) return false;
 
-                    Entity.IdTipoMovi_grupo = info.IdTipoMovi_grupo;
                     Entity.tm_descripcion = info.tm_descripcion;
                     Entity.SeDeposita = info.SeDeposita;
                     Entity.tm_Signo = info.tm_Signo;

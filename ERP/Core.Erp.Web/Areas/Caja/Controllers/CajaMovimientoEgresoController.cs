@@ -122,13 +122,12 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             i_validar.cm_valor = i_validar.info_caj_Caja_Movimiento_det.cr_Valor;
             return true;
         }
-        [ValidateInput(false)]
         private void cargar_combos(int IdEmpresa)
         {
             var lst_tipo = bus_tipo.get_list(IdEmpresa,"-", false,true);
             ViewBag.lst_tipo = lst_tipo;
 
-            var lst_caja = bus_caja.get_list(IdEmpresa, false);
+            var lst_caja = bus_caja.get_list(IdEmpresa, SessionFixed.IdUsuario);
             ViewBag.lst_caja = lst_caja;
 
             var lst_cobro = bus_cobro.get_list(false);

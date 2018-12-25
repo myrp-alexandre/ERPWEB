@@ -35,7 +35,6 @@ namespace Core.Erp.Data
         public string ip { get; set; }
         public string MotivoAnulacion { get; set; }
         public bool SeDeposita { get; set; }
-        public Nullable<int> IdTipoMovi_grupo { get; set; }
     
         public virtual ICollection<caj_Caja_Movimiento> caj_Caja_Movimiento { get; set; }
     }

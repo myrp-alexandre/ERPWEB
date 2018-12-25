@@ -119,7 +119,7 @@ namespace Core.Erp.Data.Caja
             try
             {
                 using (Entities_caja Context = new Entities_caja())
-                {
+                {                    
                     caj_Caja_Movimiento Entity = new caj_Caja_Movimiento
                     {
                         IdEmpresa = info.IdEmpresa,

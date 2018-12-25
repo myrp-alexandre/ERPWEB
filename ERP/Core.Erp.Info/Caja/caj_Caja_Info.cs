@@ -12,7 +12,7 @@ namespace Core.Erp.Info.Caja
     
         public int IdEmpresa { get; set; }
         public int IdCaja { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
+        public int IdSucursal { get; set; }
         public string ca_Codigo { get; set; }
 
         [Required(ErrorMessage = ("el campo descripción es obligatorio"))]

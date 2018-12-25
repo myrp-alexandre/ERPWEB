@@ -11,6 +11,7 @@ namespace Core.Erp.Bus.ActivoFijo
         Af_Retiro_Activo_Data odata = new Af_Retiro_Activo_Data();
         ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
         Af_Parametros_Data odata_af_param = new Af_Parametros_Data();
+        Af_Activo_fijo_Data odata_af = new Af_Activo_fijo_Data();
 
         public List<Af_Retiro_Activo_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
@@ -44,8 +45,9 @@ namespace Core.Erp.Bus.ActivoFijo
             {
                 //obtengo info de param AF
                 var param = odata_af_param.get_info(info.IdEmpresa);
+                var af = odata_af.get_info(info.IdEmpresa, info.IdActivoFijo);
                 //armar un diario pasando los parametros que pida
-                var info_cbte = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, param.IdTipoCbteRetiro, 0, info.Concepto_Retiro, info.Fecha_Retiro);
+                var info_cbte = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, af.IdSucursal,  param.IdTipoCbteRetiro, 0, info.Concepto_Retiro, info.Fecha_Retiro);
                 //guardo en el diario
                 if(odata_ct.guardarDB(info_cbte))
                 {
@@ -74,9 +76,11 @@ namespace Core.Erp.Bus.ActivoFijo
         {
             try
             {
-                var info_cbte = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, Convert.ToInt32(info.IdTipoCbte), Convert.ToDecimal(info.IdCbteCble), info.Concepto_Retiro, info.Fecha_Retiro);
+                var af = odata_af.get_info(info.IdEmpresa, info.IdActivoFijo);
+                //armar un diario pasando los parametros que pida
+                var info_cbte = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, af.IdSucursal, Convert.ToInt32(info.IdTipoCbte), 0, info.Concepto_Retiro, info.Fecha_Retiro);
                 //modifico el diario
-                if(odata_ct.modificarDB(info_cbte))
+                if (odata_ct.modificarDB(info_cbte))
                 {
                     if(odata.modificarDB(info))
                     {
