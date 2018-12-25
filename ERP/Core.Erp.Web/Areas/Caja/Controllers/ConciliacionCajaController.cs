@@ -55,18 +55,47 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         }
         #endregion
 
-        #region Acciones
+        #region Index
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_caja_Info model = new cl_filtros_caja_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdCaja = string.IsNullOrEmpty(SessionFixed.IdCaja) ? 0 : Convert.ToInt32(SessionFixed.IdCaja)
+            };
+            CargarCombosConsulta(model.IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Index(cl_filtros_Info model)
+        public ActionResult Index(cl_filtros_caja_Info model)
         {
+            CargarCombosConsulta(model.IdEmpresa);
             return View(model);
         }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_conciliacion_caja(DateTime fecha_ini, DateTime fecha_fin, int IdEmpresa = 0, int IdCaja = 0)
+        {
+            ViewBag.fecha_ini = fecha_ini;
+            ViewBag.fecha_fin = fecha_fin;
+            ViewBag.IdEmpresa = IdEmpresa;
+            ViewBag.idCaja = IdCaja;
+            var model = bus_conciliacion.get_list(IdEmpresa, IdCaja, fecha_ini, fecha_fin);
+            return PartialView("_GridViewPartial_conciliacion_caja", model);
+        }
+        public void CargarCombosConsulta(int IdEmpresa)
+        {
+            var lst_caja = bus_caja.get_list(IdEmpresa, false);
+            lst_caja.Add(new caj_Caja_Info
+            {
+                IdCaja = 0,
+                ca_Descripcion = "Todos"
+            });
+            ViewBag.lst_caja = lst_caja;
+        }
+        #endregion
+        #region Acciones        
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
             #region Validar Session
@@ -75,6 +104,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info
             {
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
@@ -89,8 +119,9 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 lst_det_fact = new List<cp_conciliacion_Caja_det_Info>(),
                 lst_det_ing = new List<cp_conciliacion_Caja_det_Ing_Caja_Info>(),
                 lst_det_vale = new List<cp_conciliacion_Caja_det_x_ValeCaja_Info>(),
-                lst_det_ct = new List<ct_cbtecble_det_Info>()
-            };
+                lst_det_ct = new List<ct_cbtecble_det_Info>(),                
+                IdCaja = string.IsNullOrEmpty(SessionFixed.IdCaja) ? 0 : Convert.ToInt32(SessionFixed.IdCaja)
+            };            
 
             list_det.set_list(model.lst_det_fact, model.IdTransaccionSession);
             list_vale.set_list(model.lst_det_vale,model.IdTransaccionSession);
@@ -128,12 +159,14 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 model.FechaOP = DateTime.Now;
             if(model == null)
                 return RedirectToAction("Index");
+
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det_fact = bus_det.get_list(model.IdEmpresa, model.IdConciliacion_Caja);
             list_det.set_list(model.lst_det_fact, model.IdTransaccionSession);
@@ -173,7 +206,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst_periodo = bus_periodo.get_list(IdEmpresa, false);
             ViewBag.lst_periodo = lst_periodo;
 
-            var lst_caja = bus_caja.get_list(IdEmpresa, SessionFixed.IdUsuario);
+            var lst_caja = bus_caja.get_list(IdEmpresa, false);
             ViewBag.lst_caja = lst_caja;
 
             Dictionary<string, string> lst = new Dictionary<string, string>();
@@ -252,15 +285,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         }
         #endregion
 
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_conciliacion_caja(DateTime fecha_ini, DateTime fecha_fin)
-        {
-            ViewBag.fecha_ini = fecha_ini;
-            ViewBag.fecha_fin = fecha_fin;
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_conciliacion.get_list(IdEmpresa, fecha_ini, fecha_fin);
-            return PartialView("_GridViewPartial_conciliacion_caja", model);
-        }
+        
 
         #region Vales
         [ValidateInput(false)]

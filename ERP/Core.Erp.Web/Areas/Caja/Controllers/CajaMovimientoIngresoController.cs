@@ -36,25 +36,41 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         #region Index
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_caja_Info model = new cl_filtros_caja_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdCaja = string.IsNullOrEmpty(SessionFixed.IdCaja) ? 0 : Convert.ToInt32(SessionFixed.IdCaja)
+            };
+            CargarCombosConsulta(model.IdEmpresa);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Index(cl_filtros_Info model)
+        public ActionResult Index(cl_filtros_caja_Info model)
         {
+            CargarCombosConsulta(model.IdEmpresa);
             return View(model);
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_movimiento(DateTime? fecha_ini, DateTime? fecha_fin)
+        public ActionResult GridViewPartial_movimiento(DateTime? fecha_ini, DateTime? fecha_fin, int IdEmpresa = 0, int IdCaja = 0 )
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<caj_Caja_Movimiento_Info> model = bus_caja_mov.get_list(IdEmpresa, "+", true, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            ViewBag.IdEmpresa = IdEmpresa;
+            ViewBag.IdCaja = IdCaja;
+            List<caj_Caja_Movimiento_Info> model = bus_caja_mov.get_list(IdEmpresa, IdCaja, "+", true, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_movimiento", model);
         }
-
+        public void CargarCombosConsulta(int IdEmpresa)
+        {
+            var lst_caja = bus_caja.get_list(IdEmpresa, false);
+            lst_caja.Add(new caj_Caja_Info
+            {
+                IdCaja = 0,
+                ca_Descripcion = "Todos"
+            });
+            ViewBag.lst_caja = lst_caja;
+        }
         #endregion
 
         #region Metodos
@@ -109,7 +125,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst_tipo = bus_tipo.get_list(IdEmpresa,"+", false, true);
             ViewBag.lst_tipo = lst_tipo;
             
-            var lst_caja = bus_caja.get_list(IdEmpresa, SessionFixed.IdUsuario);
+            var lst_caja = bus_caja.get_list(IdEmpresa, false);
             ViewBag.lst_caja = lst_caja;
             
             var lst_cobro = bus_cobro.get_list(false);
@@ -150,8 +166,9 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                     IdCobro_tipo = "EFEC"
                 },
                 cm_fecha = DateTime.Now,
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
-            };
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                IdCaja = string.IsNullOrEmpty(SessionFixed.IdCaja) ? 0 : Convert.ToInt32(SessionFixed.IdCaja)
+            };            
             model.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det,model.IdTransaccionSession);
             cargar_combos_detalle();

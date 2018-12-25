@@ -9,11 +9,11 @@ namespace Core.Erp.Bus.Caja
     {
         cp_conciliacion_Caja_Data odata = new cp_conciliacion_Caja_Data();
 
-        public List<cp_conciliacion_Caja_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<cp_conciliacion_Caja_Info> get_list(int IdEmpresa, int IdCaja, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, Fecha_ini, Fecha_fin);
+                return odata.get_list(IdEmpresa, IdCaja, Fecha_ini, Fecha_fin);
             }
             catch (Exception)
             {

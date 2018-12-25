@@ -1,7 +1,7 @@
-﻿@model Core.Erp.Info.Helps.cl_filtros_Info
+﻿@model Core.Erp.Info.Helps.cl_filtros_caja_Info
 
 @{
-    ViewBag.Title = "Egresos";
+    ViewBag.Title = "Egresos de caja";
 
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -11,8 +11,9 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index","CajaMovimientoEgreso",FormMethod.Post, new { @role = "form", @class = "form" }))
 {
+    @Html.HiddenFor(q=>q.IdEmpresa)
     <div class="box ">
         <div class="box-header with-border">
             <div class="row">
@@ -33,6 +34,15 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdCaja">Caja*</label>
+                            <div class="form-group">
+                                @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja" })
+                                @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>
@@ -92,7 +102,7 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_movimiento_egresos", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
+            @Html.Action("GridViewPartial_movimiento_egresos", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin, IdEmpresa = Model.IdEmpresa, IdCaja = Model.IdCaja })
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

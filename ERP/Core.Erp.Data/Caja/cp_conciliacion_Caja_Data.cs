@@ -13,17 +13,19 @@ namespace Core.Erp.Data.Caja
         cp_orden_pago_Data data_op = new cp_orden_pago_Data();
         ct_cbtecble_Data data_ct = new ct_cbtecble_Data();
         cp_orden_pago_cancelaciones_Data data_can = new cp_orden_pago_cancelaciones_Data();        
-        public List<cp_conciliacion_Caja_Info> get_list(int IdEmpresa, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<cp_conciliacion_Caja_Info> get_list(int IdEmpresa, int IdCaja, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
             {
                 List<cp_conciliacion_Caja_Info> Lista;
-
+                int IdCaja_ini = IdCaja;
+                int IdCaja_fin = IdCaja == 0 ? 999999 : IdCaja;
                 using (Entities_caja Context = new Entities_caja())
                 {
                     Lista = (from q in Context.cp_conciliacion_Caja
                              where q.IdEmpresa == IdEmpresa
                              && Fecha_ini <= q.Fecha && q.Fecha <= Fecha_fin
+                             && IdCaja_ini <= q.IdCaja && q.IdCaja <= IdCaja_fin
                              orderby q.IdConciliacion_Caja descending
                              select new cp_conciliacion_Caja_Info
                              {
