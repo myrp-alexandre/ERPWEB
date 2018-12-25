@@ -36,14 +36,13 @@
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdTipoCbte" Type="int" Nullable="false" />
           <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="CodCbteCble" Type="varchar" MaxLength="20" />
           <Property Name="IdPeriodo" Type="int" Nullable="false" />
           <Property Name="cb_Fecha" Type="datetime" Nullable="false" />
           <Property Name="cb_Valor" Type="float" Nullable="false" />
           <Property Name="cb_Observacion" Type="varchar(max)" />
           <Property Name="cb_Estado" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="cb_Anio" Type="int" Nullable="false" />
-          <Property Name="cb_mes" Type="int" Nullable="false" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="IdUsuarioAnu" Type="varchar" MaxLength="20" />
           <Property Name="cb_MotivoAnu" Type="varchar" MaxLength="100" />
@@ -341,8 +340,36 @@
           <Property Name="ventasEstab" Type="numeric" Precision="20" Scale="2" Nullable="false" />
           <Property Name="ivaComp" Type="numeric" Precision="20" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_cbtecble_con_ctacble_acreedora' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwct_cbtecble' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwct_cbtecble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="tc_Interno" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="cb_Valor" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="cb_Estado" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="tc_TipoCbte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="tc_Interno" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="cb_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="cb_Valor" Type="float" Nullable="false" />
+          <Property Name="CodCbteCble" Type="varchar" MaxLength="20" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="cb_Observacion" Type="varchar(max)" />
+          <Property Name="cb_Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tc_TipoCbte" Type="char" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwct_cbtecble_con_ctacble_acreedora' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwct_cbtecble_con_ctacble_acreedora">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -354,10 +381,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_cbtecble_con_ctacble_acreedor
           <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdCtaCble_Acreedora" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwpre_Grupo_x_CtaCble' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwct_RevisionContableFacturas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwct_RevisionContableFacturas">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -424,18 +449,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
             <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdCtaCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_cbtecble_ct_anio_fiscal">
-          <End Role="ct_anio_fiscal" Type="Self.ct_anio_fiscal" Multiplicity="1" />
-          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_anio_fiscal">
-              <PropertyRef Name="IdanioFiscal" />
-            </Principal>
-            <Dependent Role="ct_cbtecble">
-              <PropertyRef Name="cb_Anio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -631,6 +644,22 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
           <EntitySet Name="ATS_exportaciones" EntityType="Self.ATS_exportaciones" Schema="EntidadRegulatoria" store:Type="Tables" />
           <EntitySet Name="ATS_retenciones" EntityType="Self.ATS_retenciones" Schema="EntidadRegulatoria" store:Type="Tables" />
           <EntitySet Name="ATS_ventas" EntityType="Self.ATS_ventas" Schema="EntidadRegulatoria" store:Type="Tables" />
+          <EntitySet Name="vwct_cbtecble" EntityType="Self.vwct_cbtecble" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwct_cbtecble].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_cbtecble].[IdTipoCbte] AS [IdTipoCbte], 
+    [vwct_cbtecble].[IdCbteCble] AS [IdCbteCble], 
+    [vwct_cbtecble].[tc_Interno] AS [tc_Interno], 
+    [vwct_cbtecble].[cb_Fecha] AS [cb_Fecha], 
+    [vwct_cbtecble].[cb_Valor] AS [cb_Valor], 
+    [vwct_cbtecble].[CodCbteCble] AS [CodCbteCble], 
+    [vwct_cbtecble].[IdSucursal] AS [IdSucursal], 
+    [vwct_cbtecble].[cb_Observacion] AS [cb_Observacion], 
+    [vwct_cbtecble].[cb_Estado] AS [cb_Estado], 
+    [vwct_cbtecble].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwct_cbtecble].[tc_TipoCbte] AS [tc_TipoCbte]
+    FROM [dbo].[vwct_cbtecble] AS [vwct_cbtecble]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="Self.vwct_cbtecble_con_ctacble_acreedora" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwct_cbtecble_con_ctacble_acreedora].[IdEmpresa] AS [IdEmpresa], 
@@ -667,10 +696,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
           <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
             <End Role="ct_plancta" EntitySet="ct_plancta" />
             <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_ct_anio_fiscal" Association="Self.FK_ct_cbtecble_ct_anio_fiscal">
-            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
           </AssociationSet>
           <AssociationSet Name="FK_ct_cbtecble_ct_cbtecble_tipo" Association="Self.FK_ct_cbtecble_ct_cbtecble_tipo">
             <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
@@ -734,7 +759,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
           <Property Name="af_fechaFin" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="af_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_cbtecble" />
           <NavigationProperty Name="ct_periodo" Relationship="Self.FK_ct_periodo_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_periodo" />
         </EntityType>
         <EntityType Name="ct_anio_fiscal_x_cuenta_utilidad">
@@ -750,40 +774,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
           <Property Name="IdTipoCbte_cbte_cierre" Type="Int32" />
           <Property Name="IdCbteCble_cbte_cierre" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="ct_anio_fiscal" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_anio_fiscal" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_cbtecble" />
           <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_plancta" />
-        </EntityType>
-        <EntityType Name="ct_cbtecble">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdTipoCbte" />
-            <PropertyRef Name="IdCbteCble" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="CodCbteCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cb_Valor" Type="Double" Nullable="false" />
-          <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="cb_Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="cb_Anio" Type="Int32" Nullable="false" />
-          <Property Name="cb_mes" Type="Int32" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="cb_MotivoAnu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="cb_FechaAnu" Type="DateTime" Precision="3" />
-          <Property Name="cb_FechaTransac" Type="DateTime" Precision="3" />
-          <Property Name="cb_FechaUltModi" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ct_anio_fiscal" Relationship="Self.FK_ct_cbtecble_ct_anio_fiscal" FromRole="ct_cbtecble" ToRole="ct_anio_fiscal" />
-          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
-          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="Self.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble" ToRole="ct_cbtecble_tipo" />
-          <NavigationProperty Name="ct_periodo" Relationship="Self.FK_ct_cbtecble_ct_periodo" FromRole="ct_cbtecble" ToRole="ct_periodo" />
-          <NavigationProperty Name="ct_cbtecble_Reversado" Relationship="Self.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
-          <NavigationProperty Name="ct_cbtecble_Reversado1" Relationship="Self.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
-          <NavigationProperty Name="ct_cbtecble_det" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_det" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_cbtecble" />
         </EntityType>
         <EntityType Name="ct_cbtecble_Reversado">
           <Key>
@@ -801,9 +793,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
           <Property Name="IdTipoCbte_Anu" Type="Int32" Nullable="false" />
           <Property Name="IdCbteCble_Anu" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ip" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble_Reversado" ToRole="ct_cbtecble" />
-          <NavigationProperty Name="ct_cbtecble1" Relationship="Self.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble_Reversado" ToRole="ct_cbtecble" />
-        </EntityType>
+          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble_Reversado" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_cbtecble1" Relationship="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble_Reversado" ToRole="ct_cbtecble" />
+          </EntityType>
         <EntityType Name="ct_cbtecble_tipo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -824,9 +816,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_cbtecble" />
           <NavigationProperty Name="ct_parametro" Relationship="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
           <NavigationProperty Name="ct_parametro1" Relationship="Model_contabilidad.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_cbtecble" />
           </EntityType>
         <EntityType Name="ct_grupocble">
           <Key>
@@ -855,7 +847,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
           <Property Name="pe_cerrado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pe_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ct_anio_fiscal" Relationship="Self.FK_ct_periodo_ct_anio_fiscal" FromRole="ct_periodo" ToRole="ct_anio_fiscal" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_ct_periodo" FromRole="ct_periodo" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_ct_periodo" FromRole="ct_periodo" ToRole="ct_cbtecble" />
         </EntityType>
         <EntityType Name="ct_plancta_nivel">
           <Key>
@@ -1056,18 +1048,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ct_cbtecble_ct_anio_fiscal">
-          <End Role="ct_anio_fiscal" Type="Self.ct_anio_fiscal" Multiplicity="1" />
-          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_anio_fiscal">
-              <PropertyRef Name="IdanioFiscal" />
-            </Principal>
-            <Dependent Role="ct_cbtecble">
-              <PropertyRef Name="cb_Anio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ct_periodo_ct_anio_fiscal">
           <End Role="ct_anio_fiscal" Type="Self.ct_anio_fiscal" Multiplicity="1" />
           <End Role="ct_periodo" Type="Self.ct_periodo" Multiplicity="*" />
@@ -1080,86 +1060,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble">
-          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="0..1" />
-          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Principal>
-            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
-              <PropertyRef Name="IdEmpresa_cbte_cierre" />
-              <PropertyRef Name="IdTipoCbte_cbte_cierre" />
-              <PropertyRef Name="IdCbteCble_cbte_cierre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_cbtecble_ct_cbtecble_tipo">
-          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="1" />
-          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-            </Principal>
-            <Dependent Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_cbtecble_ct_periodo">
-          <End Role="ct_periodo" Type="Self.ct_periodo" Multiplicity="1" />
-          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_periodo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPeriodo" />
-            </Principal>
-            <Dependent Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPeriodo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble">
-          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
-          <End Role="ct_cbtecble_Reversado" Type="Self.ct_cbtecble_Reversado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_Reversado">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble1">
-          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
-          <End Role="ct_cbtecble_Reversado" Type="Self.ct_cbtecble_Reversado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-              <PropertyRef Name="IdCbteCble" />
-            </Principal>
-            <Dependent Role="ct_cbtecble_Reversado">
-              <PropertyRef Name="IdEmpresa_Anu" />
-              <PropertyRef Name="IdTipoCbte_Anu" />
-              <PropertyRef Name="IdCbteCble_Anu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities_contabilidad" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ct_anio_fiscal" EntityType="Self.ct_anio_fiscal" />
           <EntitySet Name="ct_anio_fiscal_x_cuenta_utilidad" EntityType="Self.ct_anio_fiscal_x_cuenta_utilidad" />
-          <EntitySet Name="ct_cbtecble" EntityType="Self.ct_cbtecble" />
           <EntitySet Name="ct_cbtecble_Reversado" EntityType="Self.ct_cbtecble_Reversado" />
           <EntitySet Name="ct_cbtecble_tipo" EntityType="Self.ct_cbtecble_tipo" />
           <EntitySet Name="ct_grupocble" EntityType="Self.ct_grupocble" />
@@ -1176,33 +1079,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
             <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
             <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
           </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_ct_anio_fiscal" Association="Self.FK_ct_cbtecble_ct_anio_fiscal">
-            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-          </AssociationSet>
           <AssociationSet Name="FK_ct_periodo_ct_anio_fiscal" Association="Self.FK_ct_periodo_ct_anio_fiscal">
             <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
             <End Role="ct_periodo" EntitySet="ct_periodo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble">
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_ct_cbtecble_tipo" Association="Self.FK_ct_cbtecble_ct_cbtecble_tipo">
-            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_ct_periodo" Association="Self.FK_ct_cbtecble_ct_periodo">
-            <End Role="ct_periodo" EntitySet="ct_periodo" />
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble" Association="Self.FK_ct_cbtecble_Reversado_ct_cbtecble">
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble1" Association="Self.FK_ct_cbtecble_Reversado_ct_cbtecble1">
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
           </AssociationSet>
           <FunctionImport Name="generarATS" ReturnType="Collection(Model_contabilidad.generarATS_Result)">
             <Parameter Name="idempresa" Mode="In" Type="Int32" />
@@ -1236,14 +1115,36 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
             <End Role="ct_plancta" EntitySet="ct_plancta" />
           </AssociationSet>
           <EntitySet Name="ct_cbtecble_det" EntityType="Model_contabilidad.ct_cbtecble_det" />
-          <AssociationSet Name="FK_ct_cbtecble_det_ct_cbtecble" Association="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble">
-            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
-            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_ct_cbtecble_det_ct_plancta" Association="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta">
             <End Role="ct_plancta" EntitySet="ct_plancta" />
             <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
           </AssociationSet>
+          <EntitySet Name="ct_cbtecble" EntityType="Model_contabilidad.ct_cbtecble" />
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" Association="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_ct_cbtecble_tipo" Association="Model_contabilidad.FK_ct_cbtecble_ct_cbtecble_tipo">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_ct_periodo" Association="Model_contabilidad.FK_ct_cbtecble_ct_periodo">
+            <End Role="ct_periodo" EntitySet="ct_periodo" />
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_cbtecble" Association="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble" Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble1" Association="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
+          </AssociationSet>
+          <EntitySet Name="vwct_cbtecble" EntityType="Model_contabilidad.vwct_cbtecble" />
         </EntityContainer>
         <ComplexType Name="generarATS_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -1433,9 +1334,97 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
           <Property Name="dc_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="dc_para_conciliar" Type="Boolean" />
           <Property Name="IdGrupoPresupuesto" Type="Int32" />
-          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble_det" ToRole="ct_cbtecble" />
           <NavigationProperty Name="ct_plancta" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_cbtecble_det" ToRole="ct_plancta" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble_det" ToRole="ct_cbtecble" />
         </EntityType>
+        <Association Name="FK_ct_cbtecble_det_ct_plancta">
+          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ct_cbtecble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="CodCbteCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cb_Valor" Type="Double" Nullable="false" />
+          <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cb_MotivoAnu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cb_FechaAnu" Type="DateTime" Precision="3" />
+          <Property Name="cb_FechaTransac" Type="DateTime" Precision="3" />
+          <Property Name="cb_FechaUltModi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="Model_contabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
+          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="Model_contabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble" ToRole="ct_cbtecble_tipo" />
+          <NavigationProperty Name="ct_periodo" Relationship="Model_contabilidad.FK_ct_cbtecble_ct_periodo" FromRole="ct_cbtecble" ToRole="ct_periodo" />
+          <NavigationProperty Name="ct_cbtecble_det" Relationship="Model_contabilidad.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_det" />
+          <NavigationProperty Name="ct_cbtecble_Reversado" Relationship="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
+          <NavigationProperty Name="ct_cbtecble_Reversado1" Relationship="Model_contabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
+        </EntityType>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_cbtecble">
+          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="0..1" />
+          <End Type="Model_contabilidad.ct_anio_fiscal_x_cuenta_utilidad" Role="ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdEmpresa_cbte_cierre" />
+              <PropertyRef Name="IdTipoCbte_cbte_cierre" />
+              <PropertyRef Name="IdCbteCble_cbte_cierre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_ct_cbtecble_tipo">
+          <End Type="Model_contabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_ct_periodo">
+          <End Type="Model_contabilidad.ct_periodo" Role="ct_periodo" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_periodo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPeriodo" />
+            </Principal>
+            <Dependent Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ct_cbtecble_det_ct_cbtecble">
           <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="1" />
           <End Type="Model_contabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
@@ -1452,20 +1441,64 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ct_cbtecble_det_ct_plancta">
-          <End Type="Model_contabilidad.ct_plancta" Role="ct_plancta" Multiplicity="1" />
-          <End Type="Model_contabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
+        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble">
+          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_cbtecble_Reversado" Role="ct_cbtecble_Reversado" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ct_plancta">
+            <Principal Role="ct_cbtecble">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
             </Principal>
-            <Dependent Role="ct_cbtecble_det">
+            <Dependent Role="ct_cbtecble_Reversado">
               <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble1">
+          <End Type="Model_contabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="1" />
+          <End Type="Model_contabilidad.ct_cbtecble_Reversado" Role="ct_cbtecble_Reversado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_Reversado">
+              <PropertyRef Name="IdEmpresa_Anu" />
+              <PropertyRef Name="IdTipoCbte_Anu" />
+              <PropertyRef Name="IdCbteCble_Anu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwct_cbtecble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="tc_Interno" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="cb_Valor" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="cb_Estado" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="tc_TipoCbte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="tc_Interno" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cb_Valor" Type="Double" Nullable="false" />
+          <Property Name="CodCbteCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tc_TipoCbte" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1492,30 +1525,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
                 <ScalarProperty Name="IdEmpresa_cbte_cierre" ColumnName="IdEmpresa_cbte_cierre" />
                 <ScalarProperty Name="IdTipoCbte_cbte_cierre" ColumnName="IdTipoCbte_cbte_cierre" />
                 <ScalarProperty Name="IdCbteCble_cbte_cierre" ColumnName="IdCbteCble_cbte_cierre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ct_cbtecble">
-            <EntityTypeMapping TypeName="Model_contabilidad.ct_cbtecble">
-              <MappingFragment StoreEntitySet="ct_cbtecble">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
-                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
-                <ScalarProperty Name="CodCbteCble" ColumnName="CodCbteCble" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
-                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
-                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
-                <ScalarProperty Name="cb_Estado" ColumnName="cb_Estado" />
-                <ScalarProperty Name="cb_Anio" ColumnName="cb_Anio" />
-                <ScalarProperty Name="cb_mes" ColumnName="cb_mes" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdUsuarioAnu" ColumnName="IdUsuarioAnu" />
-                <ScalarProperty Name="cb_MotivoAnu" ColumnName="cb_MotivoAnu" />
-                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
-                <ScalarProperty Name="cb_FechaAnu" ColumnName="cb_FechaAnu" />
-                <ScalarProperty Name="cb_FechaTransac" ColumnName="cb_FechaTransac" />
-                <ScalarProperty Name="cb_FechaUltModi" ColumnName="cb_FechaUltModi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1848,6 +1857,47 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwct_RevisionContableFacturas' no 
                 <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
                 <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_cbtecble">
+            <EntityTypeMapping TypeName="Model_contabilidad.ct_cbtecble">
+              <MappingFragment StoreEntitySet="ct_cbtecble">
+                <ScalarProperty Name="cb_FechaUltModi" ColumnName="cb_FechaUltModi" />
+                <ScalarProperty Name="cb_FechaTransac" ColumnName="cb_FechaTransac" />
+                <ScalarProperty Name="cb_FechaAnu" ColumnName="cb_FechaAnu" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="cb_MotivoAnu" ColumnName="cb_MotivoAnu" />
+                <ScalarProperty Name="IdUsuarioAnu" ColumnName="IdUsuarioAnu" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="cb_Estado" ColumnName="cb_Estado" />
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="CodCbteCble" ColumnName="CodCbteCble" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_cbtecble">
+            <EntityTypeMapping TypeName="Model_contabilidad.vwct_cbtecble">
+              <MappingFragment StoreEntitySet="vwct_cbtecble">
+                <ScalarProperty Name="tc_TipoCbte" ColumnName="tc_TipoCbte" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="cb_Estado" ColumnName="cb_Estado" />
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="CodCbteCble" ColumnName="CodCbteCble" />
+                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="tc_Interno" ColumnName="tc_Interno" />
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />

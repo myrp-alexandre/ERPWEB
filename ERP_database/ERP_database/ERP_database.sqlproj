@@ -267,12 +267,10 @@
     <Build Include="dbo\Tables\seg_usuario_x_tb_sis_reporte.sql" />
     <Build Include="dbo\Tables\cp_orden_pago_tipo_x_empresa.sql" />
     <Build Include="dbo\Tables\ro_empleado_x_horario.sql" />
-    <Build Include="dbo\Tables\caj_Caja_Movimiento_Tipo_grupo.sql" />
     <Build Include="dbo\Tables\cxc_cobro_x_caj_Caja_Movimiento.sql" />
     <Build Include="dbo\Tables\ro_rubro_tipo.sql" />
     <Build Include="dbo\Tables\cp_pagos_sri.sql" />
     <Build Include="dbo\Tables\tb_provincia.sql" />
-    <Build Include="dbo\Tables\caj_Caja_Movimiento_Tipo_x_CtaCble.sql" />
     <Build Include="dbo\Tables\in_Recosteo_Productos_x_movi_inve_detalle.sql" />
     <Build Include="dbo\Tables\cxc_cobro_x_ct_cbtecble.sql" />
     <Build Include="dbo\Tables\cp_pais_sri.sql" />
@@ -563,7 +561,6 @@
     <Build Include="web\Views\VWCXP_006_diario.sql" />
     <Build Include="dbo\Views\vwro_Acta_Finiquito_det_Vac_dec.sql" />
     <Build Include="dbo\Views\vwcp_orden_pago_con_cancelacion_pagado_con_CbteBan.sql" />
-    <Build Include="dbo\Views\vwcaj_Caja_Movimiento_det_cancelado.sql" />
     <Build Include="web\Views\VWROL_014.sql" />
     <Build Include="web\Views\VWINV_001.sql" />
     <Build Include="Fj_servindustrias\Views\vwFAC_FJ_Rpt001.sql" />
@@ -646,14 +643,12 @@
     <Build Include="dbo\Views\vwct_centro_costo.sql" />
     <Build Include="web\Views\vwba_Conciliacion_det_IngEgr_x_conciliar.sql" />
     <Build Include="dbo\Views\vwba_Catalogo_IdAuto_numeric.sql" />
-    <Build Include="dbo\Views\vwcaj_caj_Caja_Movimiento.sql" />
     <Build Include="dbo\Views\vwct_centro_costo_sub_centro_costo.sql" />
     <Build Include="dbo\Views\vwro_empleado_datos_generales.sql" />
     <Build Include="web\Views\vwba_Talonario_cheques_x_banco_ID.sql" />
     <Build Include="dbo\Views\vwba_Cbte_Ban_beneficiario.sql" />
     <Build Include="dbo\Views\vwcaj_Caja_Movimiento_x_Conciliar.sql" />
     <Build Include="dbo\Views\vwro_Empleado_Novedades.sql" />
-    <Build Include="dbo\Views\vwct_ComprobanteContable.sql" />
     <Build Include="dbo\Views\vwro_empleado_Novedad.sql" />
     <Build Include="web\Views\VWBAN_005.sql" />
     <Build Include="dbo\Views\vwba_Cbte_Ban_detallePagos.sql" />
@@ -779,17 +774,14 @@
     <Build Include="dbo\Views\vwRo_Prestamo_Detalle.sql" />
     <Build Include="dbo\Views\vwin_movi_inve_detalle_para_stock_a_la_fecha.sql" />
     <Build Include="dbo\Views\vwfa_proforma_det.sql" />
-    <Build Include="dbo\Views\vwcaj_caj_Caja.sql" />
     <Build Include="dbo\Views\vwcxc_cobros_x_ND_x_RetIva_x_Cliente_x_AnioMes.sql" />
     <Build Include="dbo\Views\vwtb_parroquia.sql" />
     <Build Include="dbo\Views\vwRo_Prestamo_TotalCobrado.sql" />
     <Build Include="dbo\Views\vwin_movi_inve_detalle_x_com_ordencompra_local_det_TotalCant.sql" />
-    <Build Include="dbo\Views\vwcaj_Caja_Movimiento_Tipo.sql" />
     <Build Include="dbo\Views\vwcxc_conciliacion_Det_Anticipo.sql" />
     <Build Include="dbo\Views\vwtb_provincia.sql" />
     <Build Include="dbo\Views\vwin_movi_inve_detalle_x_Contabilizar_x_ctacbles.sql" />
     <Build Include="dbo\Views\vwimp_orden_compra_ext_con_saldo.sql" />
-    <Build Include="dbo\Views\vwcaj_Caja_Movimiento_Tipo_conCta.sql" />
     <Build Include="dbo\Views\vwcxc_conciliacion_Det_Cobro.sql" />
     <Build Include="web\Views\VWCXP_007.sql" />
     <Build Include="dbo\Views\vwin_movi_inve_fecha_costeo_recomendada_x_sucursal.sql" />
@@ -996,11 +988,7 @@
     <Build Include="web\Views\VWROL_018.sql" />
     <Build Include="web\Views\VWROL_019.sql" />
     <Build Include="dbo\Tables\tbsys_ProductosConCosto0.sql" />
-    <Build Include="dbo\Views\XXXSTOCKNEGATIVO.sql" />
-    <Build Include="dbo\Views\XXXPRODUCTOSFACTURADOSCON0.sql" />
-    <Build Include="dbo\Views\XXXPADRESDIFERENTESAHIJOS.sql" />
     <Build Include="dbo\Views\XXXINGRESOSCOSTO0.sql" />
-    <Build Include="dbo\Views\XXXCARTERA.sql" />
     <Build Include="dbo\Stored Procedures\spsys_fa_reversar_anulacion_factura.sql" />
     <Build Include="dbo\Stored Procedures\spsys_actualizar_costo_ingresos.sql" />
     <Build Include="web\Views\VWCXP_001_detalle.sql" />
@@ -1078,6 +1066,7 @@
     <Build Include="dbo\Views\vwro_NominasPagosCheques_det_1.sql" />
     <Build Include="dbo\Views\vwro_NominasPagosCheques_1.sql" />
     <Build Include="dbo\Views\vwcaj_Caja_Movimiento_por_conciliar.sql" />
+    <Build Include="dbo\Views\vwct_cbtecble.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

@@ -2,9 +2,6 @@
 using Core.Erp.Info.Contabilidad;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Contabilidad
 {
@@ -12,11 +9,11 @@ namespace Core.Erp.Bus.Contabilidad
     {
         ct_cbtecble_Data odata = new ct_cbtecble_Data();
 
-        public List<ct_cbtecble_Info> get_list(int IdEmpresa, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
+        public List<ct_cbtecble_Info> get_list(int IdEmpresa, int IdSucursal, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, mostrar_anulados, fecha_ini, fecha_fin);
+                return odata.get_list(IdEmpresa, IdSucursal, mostrar_anulados, fecha_ini, fecha_fin);
             }
             catch (Exception)
             {

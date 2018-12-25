@@ -43,9 +43,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 var prov = bus_proveedor.get_info(info.IdEmpresa, info.IdProveedor);
 
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
+                info.info_comrobante.IdSucursal = info.IdSucursal;
                 info.info_comrobante.cb_Fecha = (DateTime)info.Fecha_contable;
-                info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
-                info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
                 info.info_comrobante.cb_Estado = "A";
                 info.info_comrobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
@@ -74,14 +73,14 @@ namespace Core.Erp.Bus.CuentasPorPagar
                             return true;
                         data_cancelacion = new cp_orden_pago_cancelaciones_Data();
                         foreach (var item in info.lst_det_canc_op)
-                        {
+                         {
                             info_cancelacion.IdEmpresa = info.IdEmpresa;
                             info_cancelacion.Idcancelacion = 0;
                             info_cancelacion.Secuencia = 1;
 
                             info_cancelacion.IdEmpresa_op = info.IdEmpresa;
                             info_cancelacion.IdOrdenPago_op = item.IdOrdenPago_op;
-                            info_cancelacion.Secuencia_op = item.Secuencia;
+                            info_cancelacion.Secuencia_op = item.Secuencia_op;
 
                             info_cancelacion.IdEmpresa_cxp = info.IdEmpresa;
                             info_cancelacion.IdTipoCbte_cxp = item.IdTipoCbte_cxp;
@@ -114,8 +113,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comrobante.IdTipoCbte = info.IdTipoCbte_Nota;
                 info.info_comrobante.IdCbteCble = info.IdCbteCble_Nota;
                 info.info_comrobante.cb_Fecha = (DateTime)info.Fecha_contable;
-                info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
-                info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
+                info.info_comrobante.IdSucursal = info.IdSucursal;
                 info.info_comrobante.cb_Estado = "A";
                 info.info_comrobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
@@ -139,7 +137,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
                             info_cancelacion.IdEmpresa_op = info.IdEmpresa;
                             info_cancelacion.IdOrdenPago_op = item.IdOrdenPago_op;
-                            info_cancelacion.Secuencia_op = item.Secuencia;
+                            info_cancelacion.Secuencia_op = item.Secuencia_op;
 
                             info_cancelacion.IdEmpresa_cxp = info.IdEmpresa;
                             info_cancelacion.IdTipoCbte_cxp = item.IdTipoCbte_cxp;
@@ -171,8 +169,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comrobante.IdTipoCbte = info.IdTipoCbte_Nota;
                 info.info_comrobante.IdCbteCble = info.IdCbteCble_Nota;
                 info.info_comrobante.cb_Fecha = (DateTime)info.Fecha_contable;
-                info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
-                info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
+                info.info_comrobante.IdSucursal = info.IdSucursal;
                 info.info_comrobante.cb_Estado = "A";
                 info.info_comrobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;

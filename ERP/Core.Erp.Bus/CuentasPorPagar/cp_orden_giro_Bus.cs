@@ -71,8 +71,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.co_baseImponible = info.co_subtotal_iva + info.co_subtotal_siniva;
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.cb_Fecha =(DateTime) info.co_FechaContabilizacion;
-                info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
-                info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
+                info.info_comrobante.IdSucursal = info.IdSucursal;
                 info.info_comrobante.cb_Estado = "A";
                 info.info_comrobante.IdPeriodo =Convert.ToInt32( info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2,'0'));
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
@@ -159,8 +158,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                             info.info_retencion.info_comprobante.IdCbteCble = info.IdCbteCble_Ogiro;
                             info.info_retencion.info_comprobante.cb_Estado = info.Estado;
                             info.info_retencion.info_comprobante.cb_Valor = info.co_valorpagar;
-                            info.info_retencion.info_comprobante.cb_Anio = info.info_comrobante.cb_Anio;
-                            info.info_retencion.info_comprobante.cb_mes = info.info_comrobante.cb_mes;
+                            info.info_retencion.info_comprobante.IdSucursal = info.IdSucursal;
                             info.info_retencion.info_comprobante.cb_Observacion = "Comprobante contable de retencion #"+info.info_retencion.serie1+" "+info.info_retencion.serie2+" "+info.info_retencion.NumRetencion;
 
 
@@ -216,8 +214,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comrobante.IdTipoCbte = info.IdTipoCbte_Ogiro;
                 info.info_comrobante.IdCbteCble = info.IdCbteCble_Ogiro;
                 info.info_comrobante.cb_Fecha = (DateTime)info.co_FechaContabilizacion;
-                info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
-                info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
+                info.info_comrobante.IdSucursal = info.IdSucursal;
                 info.info_comrobante.cb_Estado = "A";
                 info.info_comrobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
@@ -299,25 +296,17 @@ namespace Core.Erp.Bus.CuentasPorPagar
                             info.info_retencion.info_comprobante.IdCbteCble = info.IdCbteCble_Ogiro;
                             info.info_retencion.info_comprobante.cb_Estado = info.Estado;
                             info.info_retencion.info_comprobante.cb_Valor = info.co_valorpagar;
-                            info.info_retencion.info_comprobante.cb_Anio = info.info_comrobante.cb_Anio;
-                            info.info_retencion.info_comprobante.cb_mes = info.info_comrobante.cb_mes;
+                            info.info_retencion.info_comprobante.IdSucursal = info.IdSucursal;
                             info.info_retencion.info_comprobante.cb_Observacion = "Comprobante contable de retencion #" + info.info_retencion.serie1 + " " + info.info_retencion.serie2 + " " + info.info_retencion.NumRetencion;
                             bus_contabilidad.guardarDB(info.info_retencion.info_comprobante);
-
-
-
-
                         }
-
                     }
-
                 }
                 #endregion
                 return true;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -327,8 +316,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
             {
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
                 info.info_comrobante.cb_Fecha = (DateTime)info.co_FechaContabilizacion;
-                info.info_comrobante.cb_Anio = info.info_comrobante.cb_Fecha.Year;
-                info.info_comrobante.cb_mes = info.info_comrobante.cb_Fecha.Month;
+                info.info_comrobante.IdSucursal = info.IdSucursal;
                 info.info_comrobante.cb_Estado = "A";
                 info.info_comrobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
@@ -373,7 +361,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         info.info_retencion.IdCbteCble_Ogiro = info.IdCbteCble_Ogiro;
                         info.info_retencion.IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro;
                         info.info_retencion.Fecha_Autorizacion = info.fecha_autorizacion;
-                        info.info_retencion.Descripcion = info.Descripcion;
+                        info.info_retencion.Descripcion = info.Descripcion;                        
                         info.info_retencion.Estado = "A";
                         info.info_retencion.fecha = info.co_fechaOg;
                         info.info_retencion.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
@@ -396,8 +384,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                             info.info_retencion.info_comprobante.IdCbteCble = info.IdCbteCble_Ogiro;
                             info.info_retencion.info_comprobante.cb_Estado = info.Estado;
                             info.info_retencion.info_comprobante.cb_Valor = info.co_valorpagar;
-                            info.info_retencion.info_comprobante.cb_Anio = info.info_comrobante.cb_Anio;
-                            info.info_retencion.info_comprobante.cb_mes = info.info_comrobante.cb_mes;
+                            info.info_retencion.info_comprobante.IdSucursal = info.IdSucursal;
                             info.info_retencion.info_comprobante.cb_Observacion = "Comprobante contable de retencion #" + info.info_retencion.serie1 + " " + info.info_retencion.serie2 + " " + info.info_retencion.NumRetencion;
                             bus_contabilidad.anularDB(info.info_retencion.info_comprobante);
 

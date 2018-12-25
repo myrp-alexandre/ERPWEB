@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[caj_Caja] (
     [IdEmpresa]             INT           NOT NULL,
     [IdCaja]                INT           NOT NULL,
-    [IdSucursal]            INT           NULL,
+    [IdSucursal]            INT           NOT NULL,
     [ca_Codigo]             VARCHAR (50)  NULL,
     [ca_Descripcion]        VARCHAR (50)  NOT NULL,
     [IdCtaCble]             VARCHAR (20)  NULL,
@@ -9,8 +9,6 @@
     [Fecha_Transac]         DATETIME      NULL,
     [IdUsuarioUltMod]       VARCHAR (50)  NULL,
     [Fecha_UltMod]          DATETIME      NULL,
-    [nom_pc]                VARCHAR (50)  NULL,
-    [ip]                    VARCHAR (50)  NULL,
     [Estado]                VARCHAR (1)   NULL,
     [IdUsuario_Responsable] VARCHAR (50)  NULL,
     [IdUsuarioUltAnu]       VARCHAR (50)  NULL,
@@ -21,4 +19,6 @@
     CONSTRAINT [FK_caj_Caja_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa]),
     CONSTRAINT [FK_caj_Caja_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 

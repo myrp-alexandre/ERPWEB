@@ -15,9 +15,7 @@
     [ip]               VARCHAR (25)  NULL,
     [MotivoAnulacion]  VARCHAR (200) NULL,
     [SeDeposita]       BIT           NOT NULL,
-    [IdTipoMovi_grupo] INT           NULL,
     CONSTRAINT [PK_ba_Caja_TipoMovimiento] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdTipoMovi] ASC),
-    CONSTRAINT [FK_caj_Caja_Movimiento_Tipo_caj_Caja_Movimiento_Tipo_grupo] FOREIGN KEY ([IdTipoMovi_grupo]) REFERENCES [dbo].[caj_Caja_Movimiento_Tipo_grupo] ([IdTipoMovi_grupo]),
     CONSTRAINT [FK_caj_Caja_Movimiento_Tipo_ct_plancta] FOREIGN KEY ([IdEmpresa], [IdCtaCble]) REFERENCES [dbo].[ct_plancta] ([IdEmpresa], [IdCtaCble])
 );
 

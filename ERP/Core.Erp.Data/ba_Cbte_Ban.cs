@@ -43,7 +43,7 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdTipoFlujo { get; set; }
         public Nullable<int> IdTipoNota { get; set; }
         public string ValorEnLetras { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
+        public int IdSucursal { get; set; }
         public string IdEstado_Cbte_Ban_cat { get; set; }
         public string IdEstado_Preaviso_ch_cat { get; set; }
         public string IdEstado_cheque_cat { get; set; }

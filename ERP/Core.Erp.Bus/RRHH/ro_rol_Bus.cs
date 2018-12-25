@@ -356,8 +356,9 @@ namespace Core.Erp.Bus.RRHH
                 info_diario.IdTipoCbte = TipoComprobante;
                 info_diario.cb_Fecha = info.Fechacontabilizacion;
                 info_diario.IdPeriodo = Convert.ToInt32(info.Fechacontabilizacion.Year.ToString() + info.Fechacontabilizacion.Month.ToString().PadLeft(2, '0'));
-                info_diario.cb_Anio = info.Fechacontabilizacion.Year;
-                info_diario.cb_mes = info.Fechacontabilizacion.Month;
+                
+                //REVISA CARLOS FALTA IDSUCURSAL
+
                 info_diario.cb_Observacion = "Contabilización rol general del periodo "+info.IdPeriodo.ToString();
                 info_diario.cb_Valor = info.lst_sueldo_x_pagar.Sum(v=>v.dc_Valor);
                 info_diario.IdUsuario = info.UsuarioIngresa;
@@ -383,8 +384,9 @@ namespace Core.Erp.Bus.RRHH
                 info_diario.IdTipoCbte = TipoComprobante;
                 info_diario.cb_Fecha = info.Fechacontabilizacion;
                 info_diario.IdPeriodo = Convert.ToInt32(info.Fechacontabilizacion.Year.ToString() + info.Fechacontabilizacion.Month.ToString().PadLeft(2, '0'));
-                info_diario.cb_Anio = info.Fechacontabilizacion.Year;
-                info_diario.cb_mes = info.Fechacontabilizacion.Month;
+                
+                //REVISA CARLOS FALTA IDSUCURSAL
+
                 info_diario.cb_Observacion = "Contabilización rol general del periodo " + info.IdPeriodo.ToString();
                 info_diario.cb_Valor = info.lst_sueldo_x_pagar.Sum(v => v.dc_Valor);
                 info_diario.IdUsuario = info.UsuarioIngresa;

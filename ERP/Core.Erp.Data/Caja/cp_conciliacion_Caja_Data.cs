@@ -206,8 +206,7 @@ namespace Core.Erp.Data.Caja
                         cb_Fecha = info.FechaOP.Date,
                         cb_Observacion = op.Observacion,
                         IdPeriodo = Convert.ToInt32(info.FechaOP.ToString("yyyyMM")),
-                        cb_Anio = info.FechaOP.Year,
-                        cb_mes = info.FechaOP.Month,
+                        IdSucursal = IdSucursal,
                         cb_FechaTransac = DateTime.Now,
                         cb_Estado = "A"
                     };
@@ -257,8 +256,7 @@ namespace Core.Erp.Data.Caja
                             cb_Fecha = info.FechaOP,
                             cb_Observacion = "Caja # " + info.IdConciliacion_Caja + " Reposición",
                             IdPeriodo = Convert.ToInt32(info.FechaOP.ToString("yyyyMM")),
-                            cb_Anio = info.FechaOP.Year,
-                            cb_mes = info.FechaOP.Month,
+                            IdSucursal = IdSucursal,
                             cb_FechaTransac = DateTime.Now,
                             cb_Estado = "A",
                             cb_Valor = info.lst_det_ct.Sum(q => q.dc_Valor_debe),
@@ -382,8 +380,7 @@ namespace Core.Erp.Data.Caja
                                 cb_Fecha = op.Fecha,
                                 cb_Observacion = op.Observacion,
                                 IdPeriodo = Convert.ToInt32(op.Fecha.ToString("yyyyMM")),
-                                cb_Anio = op.Fecha.Year,
-                                cb_mes = op.Fecha.Month,
+                                IdSucursal = IdSucursal,
                                 cb_FechaTransac = DateTime.Now,
                                 cb_Estado = "A"
                             };
@@ -506,8 +503,7 @@ namespace Core.Erp.Data.Caja
                             cb_Fecha = item.fecha,
                             cb_Observacion = "Caja # "+info.IdConciliacion_Caja + " " + item.Observacion,
                             IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM")),
-                            cb_Anio = item.fecha.Year,
-                            cb_mes = item.fecha.Month,
+                            IdSucursal = IdSucursal,
                             cb_FechaTransac = DateTime.Now,
                             cb_Estado = "A",
                             cb_Valor = item.valor,
@@ -729,8 +725,7 @@ namespace Core.Erp.Data.Caja
                                 cb_Fecha = op.Fecha,
                                 cb_Observacion = op.Observacion,
                                 IdPeriodo = Convert.ToInt32(op.Fecha.ToString("yyyyMM")),
-                                cb_Anio = op.Fecha.Year,
-                                cb_mes = op.Fecha.Month,
+                                IdSucursal = IdSucursal,
                                 cb_FechaTransac = DateTime.Now,
                                 cb_Estado = "A"
                             };
@@ -861,8 +856,7 @@ namespace Core.Erp.Data.Caja
                             cb_Fecha = item.fecha,
                             cb_Observacion = "Caja # " + info.IdConciliacion_Caja +" "+ item.Observacion,
                             IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM")),
-                            cb_Anio = item.fecha.Year,
-                            cb_mes = item.fecha.Month,
+                            IdSucursal = IdSucursal,
                             cb_FechaTransac = DateTime.Now,
                             cb_Estado = "A",
                             cb_Valor = item.valor,
@@ -933,8 +927,7 @@ namespace Core.Erp.Data.Caja
                             diario.cb_Fecha = item.fecha;
                             diario.cb_Observacion = item.Observacion;
                             diario.IdPeriodo = Convert.ToInt32(item.fecha.ToString("yyyyMM"));
-                            diario.cb_Anio = item.fecha.Year;
-                            diario.cb_mes = item.fecha.Month;
+                            diario.IdSucursal = IdSucursal;
                             diario.cb_FechaUltModi = DateTime.Now;
                             diario.cb_Valor = item.valor;
                             diario.IdUsuarioUltModi = info.IdUsuario;
@@ -1061,8 +1054,7 @@ namespace Core.Erp.Data.Caja
                         cb_Fecha = info.FechaOP.Date,
                         cb_Observacion = op.Observacion,
                         IdPeriodo = Convert.ToInt32(info.FechaOP.ToString("yyyyMM")),
-                        cb_Anio = info.FechaOP.Year,
-                        cb_mes = info.FechaOP.Month,
+                        IdSucursal = IdSucursal,
                         cb_FechaTransac = DateTime.Now,
                         cb_Estado = "A"
                     };
@@ -1116,8 +1108,7 @@ namespace Core.Erp.Data.Caja
                         cb_Fecha = info.FechaOP,
                         cb_Observacion = "Caja # " + info.IdConciliacion_Caja + " Reposición",
                         IdPeriodo = Convert.ToInt32(info.FechaOP.ToString("yyyyMM")),
-                        cb_Anio = info.FechaOP.Year,
-                        cb_mes = info.FechaOP.Month,
+                        IdSucursal = IdSucursal,
                         cb_FechaTransac = DateTime.Now,
                         cb_Estado = "A",
                         cb_Valor = info.lst_det_ct.Sum(q => q.dc_Valor_debe),

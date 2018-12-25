@@ -22,5 +22,6 @@ namespace Core.Erp.Info.Reportes.Contabilidad
         public Nullable<double> dc_Valor_Haber { get; set; }
         public string tc_TipoCbte { get; set; }
         public string dc_Observacion { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }

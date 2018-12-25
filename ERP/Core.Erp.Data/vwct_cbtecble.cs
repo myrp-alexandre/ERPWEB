@@ -12,23 +12,19 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VWBAN_006
+    public partial class vwct_cbtecble
     {
         public int IdEmpresa { get; set; }
         public int IdTipoCbte { get; set; }
         public decimal IdCbteCble { get; set; }
-        public int secuencia { get; set; }
-        public string cb_giradoA { get; set; }
-        public string ValorEnLetras { get; set; }
-        public string Descripcion_Ciudad { get; set; }
-        public double cb_Valor { get; set; }
+        public string tc_Interno { get; set; }
         public System.DateTime cb_Fecha { get; set; }
+        public double cb_Valor { get; set; }
+        public string CodCbteCble { get; set; }
+        public int IdSucursal { get; set; }
         public string cb_Observacion { get; set; }
-        public string IdCtaCble { get; set; }
-        public string pc_Cuenta { get; set; }
-        public double dc_Valor { get; set; }
-        public double dc_Valor_Debe { get; set; }
-        public Nullable<double> dc_Valor_Haber { get; set; }
-        public string cb_Cheque { get; set; }
+        public string cb_Estado { get; set; }
+        public string Su_Descripcion { get; set; }
+        public string tc_TipoCbte { get; set; }
     }
 }
