@@ -167,7 +167,7 @@
              function cargar_empleados() {
                 var datos = {
                     IdNomina_Tipo: $("#IdNomina_Tipo").val(),
-                    IdNomina_Tipo_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
+                    IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
                     IdPeriodo: $("#IdPeriodo").val(),
                     IdTransaccionSession: $("#IdTransaccionSession").val()
                     
@@ -176,7 +176,7 @@
                 $.ajax({
                     type: 'POST',
                     data: JSON.stringify(datos),
-                    url: '@Url.Action("CargarEmpleados", "ArchivosTransferencias", new { Area = "RRHH" })',
+                    url: '@Url.Action("CargarEmpleados", "AjustesAnticipo", new { Area = "RRHH" })',
                     async: false,
                     bDeferRender: true,
                     bProcessing: true,
