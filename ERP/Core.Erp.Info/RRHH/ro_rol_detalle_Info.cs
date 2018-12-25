@@ -29,6 +29,8 @@ namespace Core.Erp.Info.RRHH
         public decimal IdEntidad { get; set; }
         public System.DateTime pe_FechaFin { get; set; }
         public string pe_nombreCompleato { get; set; }
+        public string pe_cedulaRuc { get; set; }
+
         public string ru_tipo { get; set; }
 
         public decimal? Valor_ { get; set; }

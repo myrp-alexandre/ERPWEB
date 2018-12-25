@@ -131,6 +131,42 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
+        public List<ro_rol_detalle_Info> get_list_ajustar_anticipo(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo)
+        {
+            try
+            {
+                List<ro_rol_detalle_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from q in Context.vwRo_rol_detalle_saldo_por_pagar
+                             where q.IdEmpresa == IdEmpresa
+                                   && q.IdEmpresa == IdEmpresa
+                                   && q.IdNominaTipo == IdNominaTipo
+                                   && q.IdNominaTipoLiqui == IdNominaTipoLiqui
+                                   && q.IdPeriodo == IdPeriodo
+                                   && q.Saldo > 0
+                             select new ro_rol_detalle_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdEmpleado = q.IdEmpleado,
+                                 pe_nombreCompleato = q.pe_nombreCompleto,
+                                 pe_cedulaRuc = q.pe_cedulaRuc,
+                                 Valor = q.ValorGanado,
+                               
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Core.Erp.Info.RRHH;
+﻿using Core.Erp.Bus.RRHH;
+using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
@@ -33,7 +34,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_ajuste_anticipo", model);
         }
 
-       
+        public JsonResult CargarEmpleados(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, decimal IdTransaccionSession = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ro_rol_detalle_Bus bus_rol = new ro_rol_detalle_Bus();
+            var detalle = bus_rol.get_list_ajustar_anticipo(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
+            ro_rol_detalle_Info_list.set_list(detalle, Convert.ToDecimal(IdTransaccionSession));
+            
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+
         #endregion
     }
 
