@@ -9552,6 +9552,8 @@
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_CmbProveedor_CXP.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\AjustesAnticipo\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\AjustesAnticipo\_GridViewPartial_ajuste_anticipo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9634,7 +9636,6 @@
     <Folder Include="Areas\Produccion\Views\Shared\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
-    <Folder Include="Areas\RRHH\Views\AjustesAnticipo\" />
     <Folder Include="Areas\RRHH\Views\SancionesPorAtraso\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
