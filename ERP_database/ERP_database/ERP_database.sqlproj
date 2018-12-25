@@ -267,12 +267,10 @@
     <Build Include="dbo\Tables\seg_usuario_x_tb_sis_reporte.sql" />
     <Build Include="dbo\Tables\cp_orden_pago_tipo_x_empresa.sql" />
     <Build Include="dbo\Tables\ro_empleado_x_horario.sql" />
-    <Build Include="dbo\Tables\caj_Caja_Movimiento_Tipo_grupo.sql" />
     <Build Include="dbo\Tables\cxc_cobro_x_caj_Caja_Movimiento.sql" />
     <Build Include="dbo\Tables\ro_rubro_tipo.sql" />
     <Build Include="dbo\Tables\cp_pagos_sri.sql" />
     <Build Include="dbo\Tables\tb_provincia.sql" />
-    <Build Include="dbo\Tables\caj_Caja_Movimiento_Tipo_x_CtaCble.sql" />
     <Build Include="dbo\Tables\in_Recosteo_Productos_x_movi_inve_detalle.sql" />
     <Build Include="dbo\Tables\cxc_cobro_x_ct_cbtecble.sql" />
     <Build Include="dbo\Tables\cp_pais_sri.sql" />
@@ -563,7 +561,6 @@
     <Build Include="web\Views\VWCXP_006_diario.sql" />
     <Build Include="dbo\Views\vwro_Acta_Finiquito_det_Vac_dec.sql" />
     <Build Include="dbo\Views\vwcp_orden_pago_con_cancelacion_pagado_con_CbteBan.sql" />
-    <Build Include="dbo\Views\vwcaj_Caja_Movimiento_det_cancelado.sql" />
     <Build Include="web\Views\VWROL_014.sql" />
     <Build Include="web\Views\VWINV_001.sql" />
     <Build Include="Fj_servindustrias\Views\vwFAC_FJ_Rpt001.sql" />
@@ -781,12 +778,10 @@
     <Build Include="dbo\Views\vwtb_parroquia.sql" />
     <Build Include="dbo\Views\vwRo_Prestamo_TotalCobrado.sql" />
     <Build Include="dbo\Views\vwin_movi_inve_detalle_x_com_ordencompra_local_det_TotalCant.sql" />
-    <Build Include="dbo\Views\vwcaj_Caja_Movimiento_Tipo.sql" />
     <Build Include="dbo\Views\vwcxc_conciliacion_Det_Anticipo.sql" />
     <Build Include="dbo\Views\vwtb_provincia.sql" />
     <Build Include="dbo\Views\vwin_movi_inve_detalle_x_Contabilizar_x_ctacbles.sql" />
     <Build Include="dbo\Views\vwimp_orden_compra_ext_con_saldo.sql" />
-    <Build Include="dbo\Views\vwcaj_Caja_Movimiento_Tipo_conCta.sql" />
     <Build Include="dbo\Views\vwcxc_conciliacion_Det_Cobro.sql" />
     <Build Include="web\Views\VWCXP_007.sql" />
     <Build Include="dbo\Views\vwin_movi_inve_fecha_costeo_recomendada_x_sucursal.sql" />
