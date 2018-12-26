@@ -9560,6 +9560,7 @@
     <Content Include="Areas\RRHH\Views\PrestamosAbono\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\PrestamosAprobacion\_GridViewPartial_prestamos_aprobacion.cshtml" />
     <Content Include="Areas\RRHH\Views\PrestamosAprobacion\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\HorarioPlanificacion\_CmbEmpleado_Planificacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

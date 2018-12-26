@@ -9,6 +9,8 @@ using DevExpress.Web.Mvc;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.General;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -30,6 +32,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_horario_planificacion_Info info = new ro_horario_planificacion_Info();
         int IdEmpresa = 0;
         #endregion
+        #region Combo bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_Planificacion()
+        {
+            ro_horario_planificacion_det_Info model = new ro_horario_planificacion_det_Info();
+            return PartialView("_CmbEmpleado_Planificacion", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        #endregion
+        #region Acciones
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -119,9 +138,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        #endregion
+
         [ValidateInput(false)]
-
-
         public ActionResult Consultar(DateTime fi, DateTime ff, int IdNomina=0, int IdSucursal=0, int IdDivision=0, int IdArea=0, int IdDepartamento=0, int IdCargo=0,int IdHorario=0)
         {
 
