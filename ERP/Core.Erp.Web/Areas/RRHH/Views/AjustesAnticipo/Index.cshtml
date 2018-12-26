@@ -32,7 +32,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="FechaInicio">Nómina*</label>
-                            @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
+                            @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo", @disabled = "disabled" })
                             @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="FechaInicio">Proceso de la nómina*</label>
-                            @Html.DropDownListFor(q => q.IdTipoNomina, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                            @Html.DropDownListFor(q => q.IdTipoNomina, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui", @disabled="disabled" })
                             @Html.ValidationMessageFor(q => q.IdTipoNomina, "", new { @class = "text-danger" })
                         </div>
                     </div>

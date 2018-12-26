@@ -153,6 +153,8 @@ namespace Core.Erp.Data.RRHH
                                  pe_nombreCompleato = q.pe_nombreCompleto,
                                  pe_cedulaRuc = q.pe_cedulaRuc,
                                  Valor = q.ValorGanado,
+                                 IdRol=q.IdRol,
+                                 IdRubro=q.IdRubro
                                
                              }).ToList();
 

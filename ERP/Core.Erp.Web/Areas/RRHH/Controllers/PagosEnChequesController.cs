@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Banco;
 using Core.Erp.Bus.General;
-
+using Core.Erp.Bus.CuentasPorPagar;
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class PagosEnChequesController : Controller
@@ -22,7 +22,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_NominasPagosCheques_det_Bus bus_pago_detalle = new ro_NominasPagosCheques_det_Bus();
         ro_NominasPagosCheques_det_Info_list ro_NominasPagosCheques_det_Info_list = new ro_NominasPagosCheques_det_Info_list();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
-
+        ro_Parametros_Bus bus_parametro = new ro_Parametros_Bus();
+        cp_orden_pago_tipo_x_empresa_Bus bus_tipo_op = new cp_orden_pago_tipo_x_empresa_Bus();
         #endregion
 
         #region Vistas
@@ -92,9 +93,27 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Nuevo(ro_NominasPagosCheques_Info model)
         {
 
-
-
+            var parametros = bus_parametro.get_info(model.IdEmpresa);
+            if (parametros == null)
+                parametros = new ro_Parametros_Info();
+            var tipo_op = bus_tipo_op.get_info(model.IdEmpresa, parametros.IdTipo_op_sueldo_por_pagar);
             model.detalle = ro_NominasPagosCheques_det_Info_list.get_list(model.IdTransaccionSession);
+            if(tipo_op==null)
+            {
+                ViewBag.mensaje = "No existe parametros para las ordenes de pagos";
+                cargar_combos(model.IdNomina_Tipo);
+                return View(model);
+            }
+            else
+            {
+                if(tipo_op.IdCtaCble==null || tipo_op.IdCtaCble_Credito==null)
+                {
+                    ViewBag.mensaje = "No existe cuenta contable en tipo de orden de pago";
+                    cargar_combos(model.IdNomina_Tipo);
+                    return View(model);
+
+                }
+            }
             if (model.detalle == null || model.detalle.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para el pago";
