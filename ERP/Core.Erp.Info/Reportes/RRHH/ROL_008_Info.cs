@@ -8,20 +8,17 @@ namespace Core.Erp.Info.Reportes.RRHH
 {
     public class ROL_008_Info
     {
+
         public string CedulaRuc { get; set; }
         public decimal IdEmpleado { get; set; }
         public decimal IdPrestamo { get; set; }
         public int IdEmpresa { get; set; }
         public System.DateTime Fecha { get; set; }
         public double MontoSol { get; set; }
-        public double TasaInteres { get; set; }
-        public double TotalPrestamo { get; set; }
         public int NumCuotas { get; set; }
         public string Observacion { get; set; }
         public int NumCuota { get; set; }
         public double SaldoInicial { get; set; }
-        public double Interes { get; set; }
-        public double AbonoCapital { get; set; }
         public double TotalCuota { get; set; }
         public double Saldo { get; set; }
         public System.DateTime FechaPago { get; set; }

@@ -43,7 +43,42 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public List<ro_prestamo_detalle_Info> get_list_cuota_pendientes(int IdEmpresa, decimal IdPrestamo)
+        {
+            try
+            {
+                List<ro_prestamo_detalle_Info> Lista;
 
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from q in Context.ro_prestamo_detalle
+                             where q.IdEmpresa == IdEmpresa
+                                   & q.IdPrestamo == IdPrestamo
+                                   && q.EstadoPago=="PEN"
+                             select new ro_prestamo_detalle_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdPrestamo = q.IdPrestamo,
+                                 NumCuota = q.NumCuota,
+                                 SaldoInicial = q.SaldoInicial,
+                                 TotalCuota = q.TotalCuota,
+                                 Saldo = q.Saldo,
+                                 FechaPago = q.FechaPago,
+                                 EstadoPago = q.EstadoPago,
+                                 Observacion_det = q.Observacion_det,
+                                 IdNominaTipoLiqui = q.IdNominaTipoLiqui
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public double get_valor_cuotas_pendientes(int IdEmpresa, decimal IdEmpleado)
         {
             try
