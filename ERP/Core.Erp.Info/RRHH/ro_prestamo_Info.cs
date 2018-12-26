@@ -50,7 +50,7 @@ namespace Core.Erp.Info.RRHH
         public double Valor_pendiente { get; set; }
         public string pe_nombre_completo { get; set; }
         public string ru_descripcion { get; set; }
-
+        public double Monto_aplicado { get; set; }
         public List<ro_prestamo_detalle_Info> lst_detalle { get; set; }
 
         public void ro_prestamo_detalle_Info()

@@ -20,5 +20,11 @@ namespace Core.Erp.Info.RRHH
         public string Observacion_det { get; set; }
         public int IdNominaTipoLiqui { get; set; }
 
+
+        #region campo vista
+        public double ValorAplicado { get; set; }
+
+        #endregion
+
     }
 }

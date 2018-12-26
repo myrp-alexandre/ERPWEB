@@ -270,7 +270,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 return RedirectToAction("Index");
             model.lst_detalle = bus_detalle.get_list(IdEmpresa, IdPrestamo);
             if(model.lst_detalle.Count()>0)
-            model.Valor_pendiente = model.lst_detalle.Sum(v=>v.NumCuota);
+            model.Valor_pendiente = model.lst_detalle.Sum(v=>v.TotalCuota);
             Lis_ro_prestamo_detalle_lst.set_list(model.lst_detalle, model.IdTransaccionSession);
             cargar_combos();
             return View(model);
@@ -389,7 +389,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GenerarPrestamo(int IdEmpresa=0, double Valor_pendiente=0, decimal IdTransaccionSession=0)
+        public ActionResult AplicarAbono(int IdEmpresa=0, double Valor_pendiente = 0, double Monto_aplicado = 0, decimal IdTransaccionSession=0)
         {
 
 
@@ -400,7 +400,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             foreach (var item in detalle)
             {
-               
+              if(Monto_aplicado > item.TotalCuota)
+                {
+                    item.ValorAplicado = item.TotalCuota;
+                    Monto_aplicado = Monto_aplicado - item.TotalCuota;
+                }
+              else
+                {
+
+                    item.ValorAplicado = Monto_aplicado;
+                    break;
+                }
             }
             return Json("", JsonRequestBehavior.AllowGet);
         }
