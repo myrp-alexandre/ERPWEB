@@ -869,9 +869,10 @@
         }
     };
     // armar diario contable
-
     function armar_diario() {
+        if (IdProveedor.GetValue() > 0) {
             var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
             IdProveedor :  IdProveedor.GetValue(),
             co_subtotal_iva : $("#co_subtotal_iva").val(),
             co_subtotal_siniva : $("#co_subtotal_siniva").val(),
@@ -890,12 +891,17 @@
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                 GridViewPartial_deudas_dc.PerformCallback();
+                    $("#co_subtotal_iva").val(data.SubtotalIVA);
+                    $("#co_subtotal_siniva").val(data.Subtotal0);
+                    $("#co_valoriva").val(data.IVA);
+                    $("#co_Por_iva").val(12);
+                    $("#co_total").val(data.Total); 
+                    GridViewPartial_deudas_dc.PerformCallback();
                 },
                 error: function (error) {
                 }
             });
-
+        }
     };
 
 

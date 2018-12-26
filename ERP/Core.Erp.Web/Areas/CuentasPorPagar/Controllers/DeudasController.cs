@@ -63,7 +63,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return PartialView("_CmbProveedor_CXP", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
-       {
+        {
             return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
         }
         public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
@@ -145,7 +145,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_deudas_sin_ret()
         {
-            int IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_orden_giro.get_lst_sin_ret(IdEmpresa, DateTime.Now, DateTime.Now);
             return PartialView("_GridViewPartial_deudas_sin_ret", model);
         }
@@ -201,7 +201,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_deudas_dc", model);
         }
-     
+
         #endregion
 
         #region Funciones cargar combos
@@ -272,7 +272,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
             ViewBag.lst_cuentas = lst_cuentas;
 
-            var lst_grupos = bus_grupo.GetList(IdEmpresa,false);
+            var lst_grupos = bus_grupo.GetList(IdEmpresa, false);
             ViewBag.lst_grupos = lst_grupos;
         }
         private bool validar(cp_orden_giro_Info i_validar, ref string msg)
@@ -322,7 +322,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     serie2 = info_documento.PuntoEmision,
                     NumRetencion = info_documento.NumDocumento
                 }
-    
+
             };
             List_cp_retencion_det.set_list(new List<cp_retencion_det_Info>(), model.IdTransaccionSession);
             List_ct_cbtecble_det_List_retencion.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);
@@ -342,7 +342,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             if (bus_orden_giro.si_existe(model))
             {
-                ViewBag.mensaje = "El documento "+model.co_serie+" "+ model.co_factura+", ya se encuentra registrado";
+                ViewBag.mensaje = "El documento " + model.co_serie + " " + model.co_factura + ", ya se encuentra registrado";
                 cargar_combos(model);
                 cargar_combos_detalle();
                 if (model.info_cuota.Fecha_inicio.Year == 1)
@@ -350,7 +350,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
             }
 
-            if (info_parametro== null)
+            if (info_parametro == null)
             {
                 ViewBag.mensaje = "Falta parametrizar el módulo de cuentas por pagar";
                 cargar_combos(model);
@@ -369,8 +369,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_retencion.info_comprobante.lst_ct_cbtecble_det = List_ct_cbtecble_det_List_retencion.get_list(model.IdTransaccionSession);
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
 
-            
-            if (model.info_retencion.detalle.Count()>0)
+
+            if (model.info_retencion.detalle.Count() > 0)
             {
                 model.info_retencion.detalle.ForEach(item =>
                 {
@@ -390,7 +390,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             }
             model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
-            if(Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession).Count()==0)
+            if (Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession).Count() == 0)
             {
                 ViewBag.mensaje = "Falta diario contable";
                 cargar_combos(model);
@@ -400,7 +400,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
 
             }
-            
+
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
@@ -432,7 +432,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0 , int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -446,11 +446,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return RedirectToAction("Index");
             if (model.info_comrobante.lst_ct_cbtecble_det == null)
                 model.info_comrobante.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
-            Lis_ct_cbtecble_det_List.set_list( model.info_comrobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
+            Lis_ct_cbtecble_det_List.set_list(model.info_comrobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             if (model.info_cuota.lst_cuotas_det == null)
                 model.info_cuota.lst_cuotas_det = new List<cp_cuotas_x_doc_det_Info>();
             List_cp_retencion_det.set_list(model.info_retencion.detalle, model.IdTransaccionSession);
-            Lis_cp_cuotas_x_doc_det_Info.set_list( model.info_cuota.lst_cuotas_det, model.IdTransaccionSession);
+            Lis_cp_cuotas_x_doc_det_Info.set_list(model.info_cuota.lst_cuotas_det, model.IdTransaccionSession);
             List_det.set_list(bus_det.get_list(model.IdEmpresa, model.IdTipoCbte_Ogiro, model.IdCbteCble_Ogiro), model.IdTransaccionSession);
 
             model.info_retencion = bus_retencion.get_info(model.IdEmpresa, model.IdCbteCble_Ogiro, model.IdTipoCbte_Ogiro);
@@ -463,7 +463,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 model.info_retencion.serie1 = info_documento.Establecimiento;
                 model.info_retencion.serie2 = info_documento.PuntoEmision;
                 model.info_retencion.NumRetencion = info_documento.NumDocumento;
-                
+
             }
 
             List_ct_cbtecble_det_List_retencion.set_list(model.info_retencion.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
@@ -479,8 +479,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             info_proveedor = bus_prov.get_info(model.IdEmpresa, model.IdProveedor);
             info_parametro = bus_param.get_info(model.IdEmpresa);
 
-            
-            if(info_parametro==null)
+
+            if (info_parametro == null)
             {
                 ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
                 cargar_combos(model);
@@ -497,7 +497,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
 
             if (model.info_retencion.detalle.Count() > 0)
-            {                
+            {
                 model.info_retencion.detalle.ForEach(item =>
                 {
                     cp_codigo_SRI_Info info_ = bus_sri.get_info(model.IdEmpresa, item.IdCodigo_SRI);
@@ -516,8 +516,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             }
 
-            
-            if(model.info_comrobante.lst_ct_cbtecble_det.Count()==0)
+
+            if (model.info_comrobante.lst_ct_cbtecble_det.Count() == 0)
             {
                 ViewBag.mensaje = "Falta diario contable";
                 cargar_combos(model);
@@ -525,7 +525,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
 
             }
-           
+
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
@@ -550,9 +550,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular(int IdEmpresa= 0 , int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdTipoCbte_Ogiro = 0, decimal IdCbteCble_Ogiro = 0)
         {
-           
+
 
             cp_orden_giro_Info model = bus_orden_giro.get_info(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
             #region Validar Session
@@ -590,24 +590,24 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             info_parametro = bus_param.get_info(model.IdEmpresa);
 
             if (info_parametro == null)
-           
+
             {
                 ViewBag.mensaje = "Falta parametros del modulo cuenta por pagar";
                 cargar_combos(model);
                 cargar_combos_detalle();
                 return View(model);
             }
-           
 
 
 
-                model.info_comrobante = new ct_cbtecble_Info();
-                model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
-            
-                model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
-            
-            
-           
+
+            model.info_comrobante = new ct_cbtecble_Info();
+            model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
+
+            model.info_comrobante.lst_ct_cbtecble_det = Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession);
+
+
+
 
 
             model.info_retencion.detalle = List_cp_retencion_det.get_list(model.IdTransaccionSession);
@@ -660,15 +660,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
 
         #region json
-        public JsonResult calcular_cuotas(DateTime Fecha_inicio,int Num_cuotas=0, int Dias_plazo = 0, double Total_a_pagar=0, decimal IdTransaccionSession = 0)
+        public JsonResult calcular_cuotas(DateTime Fecha_inicio, int Num_cuotas = 0, int Dias_plazo = 0, double Total_a_pagar = 0, decimal IdTransaccionSession = 0)
         {
 
-            lst_detalle_cuotas = bus_detalle_cuotas.calcular_cuotas(Fecha_inicio, Num_cuotas,Dias_plazo, Total_a_pagar);
-            Lis_cp_cuotas_x_doc_det_Info.set_list(lst_detalle_cuotas,IdTransaccionSession);
+            lst_detalle_cuotas = bus_detalle_cuotas.calcular_cuotas(Fecha_inicio, Num_cuotas, Dias_plazo, Total_a_pagar);
+            Lis_cp_cuotas_x_doc_det_Info.set_list(lst_detalle_cuotas, IdTransaccionSession);
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
-        public JsonResult get_list_tipo_doc(int IdEmpresa= 0 , decimal IdProveedor = 0, string codigoSRI = "")
+        public JsonResult get_list_tipo_doc(int IdEmpresa = 0, decimal IdProveedor = 0, string codigoSRI = "")
         {
             var list_tipo_doc = bus_tipo_documento.get_list(IdEmpresa, IdProveedor, codigoSRI);
             return Json(list_tipo_doc, JsonRequestBehavior.AllowGet);
@@ -676,35 +676,108 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public JsonResult GetListOcPorIngresar(int IdEmpresa = 0, int IdSucursal = 0, decimal IdProveedor = 0, decimal IdTransaccionSession = 0)
         {
-            List_det_PorIngresar.set_list(bus_det.GetListPorIngresar(IdEmpresa, IdSucursal, IdProveedor),IdTransaccionSession);
+            List_det_PorIngresar.set_list(bus_det.GetListPorIngresar(IdEmpresa, IdSucursal, IdProveedor), IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult armar_diario(decimal IdProveedor = 0, double co_subtotal_iva = 0, double co_subtotal_siniva = 0, double co_valoriva = 0, double co_total = 0, string observacion="", decimal IdTransaccionSession = 0)
+        public JsonResult armar_diario(decimal IdProveedor = 0, double co_subtotal_iva = 0, double co_subtotal_siniva = 0, double co_valoriva = 0, double co_total = 0, string observacion = "", decimal IdTransaccionSession = 0)
         {
-            int IdEmpresa=Convert.ToInt32( SessionFixed.IdEmpresa);
-            if (Session["info_proveedor"] == null)
-            {
-                info_proveedor = bus_prov.get_info(IdEmpresa, IdProveedor);
-                Session["info_proveedor"] = info_proveedor;
-            }
-            else
-                info_proveedor = Session["info_proveedor"] as cp_proveedor_Info;
-
-
-            if (Session["info_parametro"] == null)
-            {
-                info_parametro = bus_param.get_info(IdEmpresa);
-                Session["info_parametro"]=info_parametro ;
-            }
-            else
-                info_parametro = Session["info_parametro"] as cp_parametros_Info;
-
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            info_proveedor = bus_prov.get_info(IdEmpresa, IdProveedor);
             info_parametro = bus_param.get_info(IdEmpresa);
 
+            double Subtotal0 = 0;
+            double SubtotalIVA = 0;
+            double IVA = 0;
+            double Total = 0;
+            double Diferencia = 0;
 
-            Lis_ct_cbtecble_det_List.delete_detail_New_details(info_proveedor, info_parametro, co_subtotal_iva, co_subtotal_siniva, co_valoriva, co_total, observacion, IdTransaccionSession);
-            return Json("", JsonRequestBehavior.AllowGet);
+            Lis_ct_cbtecble_det_List.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
+            var lst_det = List_det.get_list(IdTransaccionSession);
+            if (lst_det.Count == 0)
+            {
+                Subtotal0 = Math.Round(co_subtotal_siniva,2,MidpointRounding.AwayFromZero);
+                SubtotalIVA = Math.Round(co_subtotal_iva,2,MidpointRounding.AwayFromZero);
+                IVA = Math.Round(co_valoriva,2,MidpointRounding.AwayFromZero);
+                Total = Math.Round(co_total,2,MidpointRounding.AwayFromZero);
+            }else
+            {
+                Subtotal0 = Math.Round(lst_det.Where(q=>q.PorIva == 0).Sum(q=>q.Subtotal), 2, MidpointRounding.AwayFromZero);
+                SubtotalIVA = Math.Round(lst_det.Where(q => q.PorIva > 0).Sum(q => q.Subtotal), 2, MidpointRounding.AwayFromZero);
+                IVA = Math.Round(lst_det.Sum(q => q.ValorIva), 2, MidpointRounding.AwayFromZero);
+                Total = Math.Round(lst_det.Sum(q => q.Total), 2, MidpointRounding.AwayFromZero);
+            }
+            Diferencia = Math.Round(Subtotal0 + SubtotalIVA + IVA - Total, 2);
+            if (Math.Round(Diferencia, 2) > 0)
+                Total += Diferencia;
+            else
+                Subtotal0 += Math.Abs(Diferencia);
+
+            #region Armar diario sin inventario
+
+            #region Proveedor
+            Lis_ct_cbtecble_det_List.AddRow(new ct_cbtecble_det_Info
+            {
+                IdCtaCble = info_proveedor.IdCtaCble_CXP,
+                dc_Valor_haber = Math.Round(Total, 2, MidpointRounding.AwayFromZero),
+                dc_Valor = Math.Round(Total * -1, 2, MidpointRounding.AwayFromZero),
+                dc_Observacion = observacion,
+            }, IdTransaccionSession);
+            #endregion
+
+            #region I.V.A.
+            if (IVA > 0)
+            {                
+                Lis_ct_cbtecble_det_List.AddRow(new ct_cbtecble_det_Info
+                {
+                    IdCtaCble = info_parametro.pa_ctacble_iva,
+                    dc_Valor_debe = Math.Round(IVA, 2),
+                    dc_Valor = Math.Round(IVA, 2),
+                    dc_Observacion = observacion,
+                }, IdTransaccionSession);                
+            }
+            #endregion
+
+            #region Subtotal
+            if (lst_det.Count == 0)
+            {
+                Lis_ct_cbtecble_det_List.AddRow(new ct_cbtecble_det_Info
+                {
+                    IdCtaCble = info_proveedor.IdCtaCble_Gasto,
+                    dc_Valor_debe = Math.Round(Subtotal0 + SubtotalIVA, 2),
+                    dc_Valor = Math.Round(Subtotal0 + SubtotalIVA, 2),
+                    dc_Observacion = observacion
+                }, IdTransaccionSession);
+            }
+            else
+            {
+                var lst_g = (from q in lst_det
+                             group q by new { q.IdCtaCbleInv } into g
+                             select new
+                             {
+                                 IdCtaCble = g.Key.IdCtaCbleInv,
+                                 Valor = g.Sum(q => q.Subtotal)
+                             }).ToList();
+
+                int cont = 1;
+                foreach (var item in lst_g)
+                {
+                    ct_cbtecble_det_Info det = new ct_cbtecble_det_Info
+                    {
+                        IdCtaCble = item.IdCtaCble,
+                        dc_Valor_debe = Math.Round(item.Valor + (cont == lst_g.Count ? Diferencia : 0), 2),
+                        dc_Valor = Math.Round(item.Valor + (cont == lst_g.Count ? Diferencia : 0), 2),
+                        dc_Observacion = observacion
+                    };
+                    Lis_ct_cbtecble_det_List.AddRow(det, IdTransaccionSession);
+                    cont++;
+                }
+            }
+            #endregion
+
+            #endregion
+
+            return Json(new { Subtotal0 = Subtotal0, SubtotalIVA = SubtotalIVA, IVA = IVA, Total = Total}, JsonRequestBehavior.AllowGet);
         }
         public JsonResult guardar_aprobacion(string Ids)
         {
@@ -1010,63 +1083,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.secuencia == secuencia).First());
-        }
-
-        public void delete_detail_New_details(cp_proveedor_Info info_proveedor, cp_parametros_Info info_parametro , double co_subtotal_iva = 0, 
-            double co_subtotal_siniva = 0, double co_valoriva = 0, double co_total = 0, string observacion="", decimal IdTransaccionSession = 0)
-        {
-            try
-            {
-                if (info_proveedor == null)
-                {
-                    return;
-                }
-                set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
-
-                // cuenta total
-                ct_cbtecble_det_Info cbtecble_det_total_Info = new ct_cbtecble_det_Info();
-                cbtecble_det_total_Info.secuencia = 3;
-                cbtecble_det_total_Info.IdEmpresa = 0;
-                cbtecble_det_total_Info.IdTipoCbte = 1;
-                cbtecble_det_total_Info.IdCtaCble = info_proveedor.IdCtaCble_CXP;
-                cbtecble_det_total_Info.dc_Valor_haber = Math.Round(co_total, 2);
-                cbtecble_det_total_Info.dc_Valor =Math.Round( co_total * -1,2);
-                cbtecble_det_total_Info.dc_Observacion = observacion;
-                AddRow(cbtecble_det_total_Info, IdTransaccionSession);
-
-                if (co_valoriva != 0)
-                {
-                    // cuenta iva
-                    ct_cbtecble_det_Info cbtecble_det_iva_Info = new ct_cbtecble_det_Info();
-                    cbtecble_det_iva_Info.secuencia = 2;
-                    cbtecble_det_iva_Info.IdEmpresa = 0;
-                    cbtecble_det_iva_Info.IdTipoCbte = 1;
-                    cbtecble_det_iva_Info.IdCtaCble = info_parametro.pa_ctacble_iva;
-                    cbtecble_det_iva_Info.dc_Valor_debe =  Math.Round(co_valoriva, 2);
-                    cbtecble_det_iva_Info.dc_Valor =Math.Round( co_valoriva,2);
-                    cbtecble_det_iva_Info.dc_Observacion = observacion;
-                    AddRow(cbtecble_det_iva_Info, IdTransaccionSession);
-                }
-                // cuenta sbtotal
-                ct_cbtecble_det_Info cbtecble_det_sub_Info = new ct_cbtecble_det_Info();
-                cbtecble_det_sub_Info.secuencia = 1;
-                cbtecble_det_sub_Info.IdEmpresa = 0;
-                cbtecble_det_sub_Info.IdTipoCbte = 1;
-                cbtecble_det_sub_Info.IdCtaCble = info_parametro.pa_ctacble_deudora;
-                cbtecble_det_sub_Info.dc_Valor_debe =Math.Round( co_subtotal_iva + co_subtotal_siniva,2);              
-                cbtecble_det_sub_Info.dc_Valor = Math.Round(co_subtotal_iva + co_subtotal_siniva, 2);
-                cbtecble_det_sub_Info.dc_Observacion = observacion;
-                AddRow(cbtecble_det_sub_Info, IdTransaccionSession);
-               
-              
-
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
-        }
+        }        
     }
 
     public class cp_orden_giro_det_PorIngresar_List
