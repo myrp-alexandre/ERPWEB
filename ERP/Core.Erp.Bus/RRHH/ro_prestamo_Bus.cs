@@ -39,7 +39,7 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
-                return odata.aprobar_prestamo(IdEmpresa, Lista);
+                return odata.aprobar_prestamo(IdEmpresa, Lista, IdUsuarioAprueba);
             }
             catch (Exception)
             {
