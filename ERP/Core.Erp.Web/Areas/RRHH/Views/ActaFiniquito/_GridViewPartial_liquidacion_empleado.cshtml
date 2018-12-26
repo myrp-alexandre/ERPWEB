@@ -119,6 +119,7 @@
             column.PropertiesEdit.DisplayFormatString = "c2";
         });
 
+
         settings.Columns.Add(column =>
         {
             column.Caption = "#";
@@ -127,15 +128,10 @@
             {
                 if (Convert.ToString(DataBinder.Eval(container.DataItem, "EstadoContrato")) != "ECT_LIQ")
                 {
-                   
-                    Html.DevExpress().HyperLink(hyperlink =>
-                    {
-                        var IdActaFiniquito = DataBinder.Eval(container.DataItem, "IdActaFiniquito");
-
-                        hyperlink.Properties.Text = "Liquidar A.F";
-                        hyperlink.NavigateUrl = Url.Action("Liquidar", "ActaFiniquito", new { IdActaFiniquito = IdActaFiniquito });
-                    }).Render();
-
+                    ViewContext.Writer.Write(
+                      Html.ActionLink("Liquidar A.F", "Liquidar", new { IdActaFiniquito = DataBinder.Eval(container.DataItem, "IdActaFiniquito") },
+                          new { onclick = "return confirm('¿Está seguro de que desea liquidar el registro?')" })
+                  );
                 }
             });
         });
