@@ -52,7 +52,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                List<ro_empleado_Info> model = bus_empleado.get_list(IdEmpresa, false);
+                List<ro_empleado_Info> model = bus_empleado.get_list(IdEmpresa, true);
                 return PartialView("_GridViewPartial_empleados", model);
             }
             catch (Exception)
@@ -103,7 +103,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     em_fechaIngaRol = DateTime.Now,
                     em_fechaSalida = DateTime.Now,
-                    IdSucursal = 1
+                    IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                    Pago_por_horas = true,
+                    GozaMasDeQuinceDiasVaciones = false
                 };
                 info.em_foto = new byte[0];
 

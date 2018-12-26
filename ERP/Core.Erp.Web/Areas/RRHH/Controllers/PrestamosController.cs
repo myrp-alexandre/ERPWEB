@@ -255,6 +255,41 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Abono(decimal IdEmpleado, decimal IdPrestamo)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ro_prestamo_Info model = bus_prestamos.get_info(IdEmpresa, IdEmpleado, IdPrestamo);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.lst_detalle = bus_detalle.get_list(IdEmpresa, IdPrestamo);
+            Lis_ro_prestamo_detalle_lst.set_list(model.lst_detalle, model.IdTransaccionSession);
+            cargar_combos();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Abono(ro_prestamo_Info model)
+        {
+            model.lst_detalle = Lis_ro_prestamo_detalle_lst.get_list(model.IdTransaccionSession);
+
+            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.Fecha_UltAnu = DateTime.Now;
+
+            if (!bus_prestamos.anularDB(model))
+            {
+                cargar_combos();
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+
         #endregion
 
         #region funciones del detalle
@@ -349,6 +384,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             info.descuento_quincena = descuento_quincena;
             info = bus_prestamos.get_calculo_prestamo(info);
             Lis_ro_prestamo_detalle_lst.set_list(info.lst_detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GenerarPrestamo(int IdEmpresa=0, double Valor_pendiente, decimal IdTransaccionSession)
+        {
+
+
+            info.IdEmpresa = IdEmpresa;
+            info.Valor_pendiente = Valor_pendiente;
+           
+         var detalle=   Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return Json("", JsonRequestBehavior.AllowGet);
         }
 

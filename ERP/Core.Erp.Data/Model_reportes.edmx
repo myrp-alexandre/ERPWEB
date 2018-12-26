@@ -19,8 +19,8 @@
           <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWACTF_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWACTF_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACTF_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -61,8 +61,8 @@ warning 6002: The table/view 'DBERP.web.VWACTF_001' does not have a primary key 
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWACTF_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWACTF_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACTF_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -102,8 +102,8 @@ warning 6002: The table/view 'DBERP.web.VWACTF_002' does not have a primary key 
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWACTF_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWACTF_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACTF_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -141,8 +141,8 @@ warning 6002: The table/view 'DBERP.web.VWACTF_003' does not have a primary key 
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWBAN_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWBAN_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_001">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -179,8 +179,8 @@ warning 6002: The table/view 'DBERP.web.VWBAN_001' does not have a primary key d
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWBAN_001_cancelaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWBAN_001_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_001_cancelaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -204,8 +204,8 @@ warning 6002: The table/view 'DBERP.web.VWBAN_001_cancelaciones' does not have a
           <Property Name="IdTipoCbte_pago" Type="int" Nullable="false" />
           <Property Name="IdCbteCble_pago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWBAN_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWBAN_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_002">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -241,8 +241,8 @@ warning 6002: The table/view 'DBERP.web.VWBAN_002' does not have a primary key d
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWBAN_002_cancelaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWBAN_002_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_002_cancelaciones">
           <Key>
             <PropertyRef Name="mba_IdEmpresa" />
@@ -261,8 +261,8 @@ warning 6002: The table/view 'DBERP.web.VWBAN_002_cancelaciones' does not have a
           <Property Name="Observacion" Type="varchar(max)" />
           <Property Name="monto" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWBAN_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWBAN_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_003">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -297,8 +297,8 @@ warning 6002: The table/view 'DBERP.web.VWBAN_003' does not have a primary key d
           <Property Name="cb_Cheque" Type="varchar" MaxLength="50" />
           <Property Name="cb_giradoA" Type="varchar" MaxLength="150" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWBAN_005' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWBAN_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_005">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -307,6 +307,7 @@ warning 6002: The table/view 'DBERP.web.VWBAN_005' does not have a primary key d
             <PropertyRef Name="Descripcion_Ciudad" />
             <PropertyRef Name="cb_Valor" />
             <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="Estado" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdTipocbte" Type="int" Nullable="false" />
@@ -316,9 +317,12 @@ warning 6002: The table/view 'DBERP.web.VWBAN_005' does not have a primary key d
           <Property Name="Descripcion_Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="cb_Valor" Type="float" Nullable="false" />
           <Property Name="cb_Fecha" Type="date" Nullable="false" />
+          <Property Name="cb_Cheque" Type="varchar" MaxLength="50" />
+          <Property Name="cb_Cheque_numero" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWBAN_006' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWBAN_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_006">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -350,8 +354,8 @@ warning 6002: The table/view 'DBERP.web.VWBAN_006' does not have a primary key d
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="cb_Cheque" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWBAN_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWBAN_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_007">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -386,8 +390,8 @@ warning 6002: The table/view 'DBERP.web.VWBAN_007' does not have a primary key d
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdCatalogo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCAJ_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCAJ_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -433,8 +437,8 @@ warning 6002: The table/view 'DBERP.web.VWCAJ_001' does not have a primary key d
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCAJ_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCAJ_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_002">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -483,8 +487,8 @@ warning 6002: The table/view 'DBERP.web.VWCAJ_002' does not have a primary key d
           <Property Name="valor_a_reponer" Type="float" />
           <Property Name="NombreCaja" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCAJ_002_ingresos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCAJ_002_ingresos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_002_ingresos">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -507,8 +511,8 @@ warning 6002: The table/view 'DBERP.web.VWCAJ_002_ingresos' does not have a prim
           <Property Name="cm_observacion" Type="varchar(max)" />
           <Property Name="cm_fecha" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCOMP_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCOMP_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCOMP_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -570,8 +574,8 @@ warning 6002: The table/view 'DBERP.web.VWCOMP_001' does not have a primary key 
           <Property Name="Subtotal0" Type="float" Nullable="false" />
           <Property Name="DescuentoTotal" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCONTA_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCONTA_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -602,8 +606,8 @@ warning 6002: The table/view 'DBERP.web.VWCONTA_001' does not have a primary key
           <Property Name="dc_Observacion" Type="varchar(max)" />
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXC_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -650,8 +654,8 @@ warning 6002: The table/view 'DBERP.web.VWCXC_001' does not have a primary key d
           <Property Name="cr_NumDocumento" Type="varchar" MaxLength="100" />
           <Property Name="cr_TotalCobro" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXC_001_diario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_001_diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_001_diario">
           <Key>
             <PropertyRef Name="cbr_IdEmpresa" />
@@ -679,8 +683,8 @@ warning 6002: The table/view 'DBERP.web.VWCXC_001_diario' does not have a primar
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXC_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -717,8 +721,8 @@ warning 6002: The table/view 'DBERP.web.VWCXC_002' does not have a primary key d
           <Property Name="vt_total" Type="float" />
           <Property Name="PorcentajeRet" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXC_002_diario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_002_diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_002_diario">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -750,8 +754,8 @@ warning 6002: The table/view 'DBERP.web.VWCXC_002_diario' does not have a primar
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXC_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -778,8 +782,8 @@ warning 6002: The table/view 'DBERP.web.VWCXC_003' does not have a primary key d
           <Property Name="TotalRTE" Type="float" />
           <Property Name="cr_fecha" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXC_006' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_006">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -823,8 +827,8 @@ warning 6002: The table/view 'DBERP.web.VWCXC_006' does not have a primary key d
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Saldo" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXC_006_sin_comision' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_006_sin_comision' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_006_sin_comision">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -868,8 +872,8 @@ warning 6002: The table/view 'DBERP.web.VWCXC_006_sin_comision' does not have a 
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Saldo" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -930,8 +934,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_001' does not have a primary key d
           <Property Name="dc_Valor_Haber" Type="float" />
           <Property Name="dc_Observacion" Type="varchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_001_detalle' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_001_detalle' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_001_detalle">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -972,8 +976,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_001_detalle' does not have a prima
           <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="pr_descripcion_2" Type="nvarchar" MaxLength="500" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1006,8 +1010,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_002' does not have a primary key d
           <Property Name="re_Porcen_retencion" Type="float" Nullable="false" />
           <Property Name="re_valor_retencion" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_002_diario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_002_diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_002_diario">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1032,8 +1036,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_002_diario' does not have a primar
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1081,8 +1085,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_003' does not have a primary key d
           <Property Name="Tipo_doc" Type="varchar" MaxLength="7" Nullable="false" />
           <Property Name="num_documento" Type="varchar" MaxLength="15" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_003_cancelaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_003_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_003_cancelaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1106,8 +1110,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_003_cancelaciones' does not have a
           <Property Name="IdTipoCbte_pago" Type="int" Nullable="false" />
           <Property Name="IdCbteCble_pago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_004' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1154,8 +1158,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_004' does not have a primary key d
           <Property Name="IdEstadoAprobacion" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="estado_apro" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_005' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_005">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1185,8 +1189,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_005' does not have a primary key d
           <Property Name="Observacion" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_005_cancelaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_005_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_005_cancelaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1208,8 +1212,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_005_cancelaciones' does not have a
           <Property Name="IdEmpresa_conciliacion" Type="int" Nullable="false" />
           <Property Name="IdConciliacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_006' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_006">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1249,8 +1253,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_006' does not have a primary key d
           <Property Name="co_valoriva" Type="float" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_006_diario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_006_diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_006_diario">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1277,8 +1281,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_006_diario' does not have a primar
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_007">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -1337,8 +1341,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_007' does not have a primary key d
           <Property Name="re_tipoRet" Type="char" MaxLength="3" />
           <Property Name="Num_Autorizacion_OG" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWCXP_009' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_009">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1395,8 +1399,8 @@ warning 6002: The table/view 'DBERP.web.VWCXP_009' does not have a primary key d
           <Property Name="co_descripcion" Type="varchar" MaxLength="350" Nullable="false" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1452,8 +1456,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_001' does not have a primary key d
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
           <Property Name="vt_fecha" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1539,8 +1543,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_003' does not have a primary key d
           <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
           <Property Name="pe_razonSocial" Type="varchar" MaxLength="150" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_003_cuotas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003_cuotas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_003_cuotas">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -1628,8 +1632,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_003_cuotas' does not have a primar
           <Property Name="pe_razonSocial" Type="varchar" MaxLength="150" />
           <Property Name="orden" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_004' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1683,8 +1687,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_004' does not have a primary key d
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_005' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_005">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1728,8 +1732,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_005' does not have a primary key d
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" />
           <Property Name="Su_CodigoEstablecimiento" Type="varchar" MaxLength="30" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_006' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_006">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1788,8 +1792,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_006' does not have a primary key d
           <Property Name="lote_fecha_vcto" Type="datetime" />
           <Property Name="IdProducto_padre" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_007">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1849,8 +1853,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_007' does not have a primary key d
           <Property Name="Num_Coutas" Type="int" Nullable="false" />
           <Property Name="vt_Observacion" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_008' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_008">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1911,8 +1915,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_008' does not have a primary key d
           <Property Name="sc_total" Type="float" Nullable="false" />
           <Property Name="No_Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_008_aplicaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_008_aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_008_aplicaciones">
           <Key>
             <PropertyRef Name="IdEmpresa_nt" />
@@ -1933,8 +1937,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_008_aplicaciones' does not have a 
           <Property Name="NumFactura" Type="varchar" MaxLength="49" />
           <Property Name="vt_fecha" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_009' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_009">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1972,8 +1976,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_009' does not have a primary key d
           <Property Name="gi_cantidad" Type="float" Nullable="false" />
           <Property Name="pr_descripcion" Type="nvarchar" MaxLength="702" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWFAC_012' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_012' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_012">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2009,8 +2013,8 @@ warning 6002: The table/view 'DBERP.web.VWFAC_012' does not have a primary key d
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
           <Property Name="bo_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWIMP_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWIMP_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWIMP_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2059,8 +2063,8 @@ warning 6002: The table/view 'DBERP.web.VWIMP_001' does not have a primary key d
           <Property Name="Descripcion_Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="od_total_fob" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWIMP_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWIMP_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWIMP_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2145,8 +2149,8 @@ warning 6002: The table/view 'DBERP.web.VWIMP_002' does not have a primary key d
           <Property Name="IdUnidadMedida" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Descripcion_Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWIMP_002_gastos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWIMP_002_gastos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWIMP_002_gastos">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2161,8 +2165,8 @@ warning 6002: The table/view 'DBERP.web.VWIMP_002_gastos' does not have a primar
           <Property Name="dc_Observacion" Type="varchar(max)" />
           <Property Name="gt_orden" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWIMP_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWIMP_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWIMP_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2206,8 +2210,8 @@ warning 6002: The table/view 'DBERP.web.VWIMP_003' does not have a primary key d
           <Property Name="od_costo" Type="float" Nullable="false" />
           <Property Name="oe_fecha" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWINV_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWINV_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWINV_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2258,8 +2262,8 @@ warning 6002: The table/view 'DBERP.web.VWINV_001' does not have a primary key d
           <Property Name="tm_descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NomUsuario" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWINV_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWINV_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWINV_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2310,8 +2314,8 @@ warning 6002: The table/view 'DBERP.web.VWINV_002' does not have a primary key d
           <Property Name="tm_descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NomUsuario" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWINV_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWINV_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWINV_007">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2357,8 +2361,8 @@ warning 6002: The table/view 'DBERP.web.VWINV_007' does not have a primary key d
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Codigo" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWINV_008' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWINV_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWINV_008">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2393,8 +2397,8 @@ warning 6002: The table/view 'DBERP.web.VWINV_008' does not have a primary key d
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" />
           <Property Name="bo_Descripcion" Type="nchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWINV_011' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWINV_011' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWINV_011">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2445,8 +2449,8 @@ warning 6002: The table/view 'DBERP.web.VWINV_011' does not have a primary key d
           <Property Name="tm_descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NomUsuario" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWINV_014' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWINV_014' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWINV_014">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2491,8 +2495,8 @@ warning 6002: The table/view 'DBERP.web.VWINV_014' does not have a primary key d
           <Property Name="Costo" Type="float" Nullable="false" />
           <Property Name="ObservacionDet" Type="varchar(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWPRE_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWPRE_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWPRE_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2533,8 +2537,8 @@ warning 6002: The table/view 'DBERP.web.VWPRE_001' does not have a primary key d
           <Property Name="IdUsuarioAprobacion" Type="varchar" MaxLength="50" />
           <Property Name="FechaAprobacion" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWPRO_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWPRO_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWPRO_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2584,8 +2588,8 @@ warning 6002: The table/view 'DBERP.web.VWPRO_001' does not have a primary key d
           <Property Name="Tipo" Type="varchar" MaxLength="18" Nullable="false" />
           <Property Name="Movimiento" Type="varchar" MaxLength="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_001' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_001">
           <Key>
             <PropertyRef Name="IdEmpleado" />
@@ -2653,8 +2657,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_001' does not have a primary key d
           <Property Name="Periodo" Type="varchar" MaxLength="64" />
           <Property Name="em_ruc" Type="nvarchar" MaxLength="13" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_002' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_002">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -2692,8 +2696,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_002' does not have a primary key d
           <Property Name="ru_orden" Type="int" Nullable="false" />
           <Property Name="em_ruc" Type="nvarchar" MaxLength="13" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_003' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2725,8 +2729,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_003' does not have a primary key d
           <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EstadoCobro" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_004' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2763,8 +2767,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_004' does not have a primary key d
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
           <Property Name="IdUtilidad" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_005' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_005">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2815,8 +2819,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_005' does not have a primary key d
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_006' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_006">
           <Key>
             <PropertyRef Name="pe_cedulaRuc" />
@@ -2877,8 +2881,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_006' does not have a primary key d
           <Property Name="Valor_Cancelar" Type="float" Nullable="false" />
           <Property Name="Iess" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_007' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_007">
           <Key>
             <PropertyRef Name="pe_cedulaRuc" />
@@ -2924,8 +2928,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_007' does not have a primary key d
           <Property Name="em_fechaIngaRol" Type="datetime" />
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_008' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_008">
           <Key>
             <PropertyRef Name="CedulaRuc" />
@@ -2934,14 +2938,10 @@ warning 6002: The table/view 'DBERP.web.VWROL_008' does not have a primary key d
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="Fecha" />
             <PropertyRef Name="MontoSol" />
-            <PropertyRef Name="TasaInteres" />
-            <PropertyRef Name="TotalPrestamo" />
             <PropertyRef Name="NumCuotas" />
             <PropertyRef Name="Observacion" />
             <PropertyRef Name="NumCuota" />
             <PropertyRef Name="SaldoInicial" />
-            <PropertyRef Name="Interes" />
-            <PropertyRef Name="AbonoCapital" />
             <PropertyRef Name="TotalCuota" />
             <PropertyRef Name="Saldo" />
             <PropertyRef Name="FechaPago" />
@@ -2958,19 +2958,15 @@ warning 6002: The table/view 'DBERP.web.VWROL_008' does not have a primary key d
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="MontoSol" Type="float" Nullable="false" />
-          <Property Name="TasaInteres" Type="float" Nullable="false" />
-          <Property Name="TotalPrestamo" Type="float" Nullable="false" />
           <Property Name="NumCuotas" Type="int" Nullable="false" />
-          <Property Name="Observacion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" Nullable="false" />
           <Property Name="NumCuota" Type="int" Nullable="false" />
           <Property Name="SaldoInicial" Type="float" Nullable="false" />
-          <Property Name="Interes" Type="float" Nullable="false" />
-          <Property Name="AbonoCapital" Type="float" Nullable="false" />
           <Property Name="TotalCuota" Type="float" Nullable="false" />
           <Property Name="Saldo" Type="float" Nullable="false" />
           <Property Name="FechaPago" Type="datetime" Nullable="false" />
           <Property Name="EstadoPago" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="ObservacionCuota" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ObservacionCuota" Type="varchar(max)" Nullable="false" />
           <Property Name="RubroDescripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CodigoEmpleado" Type="varchar" MaxLength="50" />
           <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
@@ -2979,8 +2975,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_008' does not have a primary key d
           <Property Name="descuento_quincena" Type="bit" Nullable="false" />
           <Property Name="descuento_men_quin" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_009' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_009">
           <Key>
             <PropertyRef Name="CedulaRuc" />
@@ -3014,8 +3010,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_009' does not have a primary key d
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_010' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_010' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_010">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3038,8 +3034,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_010' does not have a primary key d
           <Property Name="em_fechaIngaRol" Type="datetime" />
           <Property Name="antiguedad_string" Type="varchar" MaxLength="57" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_011' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_011' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_011">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3096,8 +3092,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_011' does not have a primary key d
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_014' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_014' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_014">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3120,8 +3116,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_014' does not have a primary key d
           <Property Name="Fondos_Reservas" Type="varchar" MaxLength="30" />
           <Property Name="IdDivision" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_016' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_016' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_016">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3156,8 +3152,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_016' does not have a primary key d
           <Property Name="Contrato" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="IdTipoCatalogo" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_018' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_018' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_018">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3195,8 +3191,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_018' does not have a primary key d
           <Property Name="Fecha_Desde" Type="datetime" Nullable="false" />
           <Property Name="Fecha_Hasta" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_019' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_019' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_019">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3237,8 +3233,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_019' does not have a primary key d
           <Property Name="FechaFin" Type="date" />
           <Property Name="ru_codRolGen" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWROL_020">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3690,7 +3686,10 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
     [VWBAN_005].[ValorEnLetras] AS [ValorEnLetras], 
     [VWBAN_005].[Descripcion_Ciudad] AS [Descripcion_Ciudad], 
     [VWBAN_005].[cb_Valor] AS [cb_Valor], 
-    [VWBAN_005].[cb_Fecha] AS [cb_Fecha]
+    [VWBAN_005].[cb_Fecha] AS [cb_Fecha], 
+    [VWBAN_005].[cb_Cheque] AS [cb_Cheque], 
+    [VWBAN_005].[cb_Cheque_numero] AS [cb_Cheque_numero], 
+    [VWBAN_005].[Estado] AS [Estado]
     FROM [web].[VWBAN_005] AS [VWBAN_005]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWBAN_006" EntityType="Self.VWBAN_006" store:Type="Views" store:Schema="web">
@@ -5226,14 +5225,10 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
     [VWROL_008].[IdEmpresa] AS [IdEmpresa], 
     [VWROL_008].[Fecha] AS [Fecha], 
     [VWROL_008].[MontoSol] AS [MontoSol], 
-    [VWROL_008].[TasaInteres] AS [TasaInteres], 
-    [VWROL_008].[TotalPrestamo] AS [TotalPrestamo], 
     [VWROL_008].[NumCuotas] AS [NumCuotas], 
     [VWROL_008].[Observacion] AS [Observacion], 
     [VWROL_008].[NumCuota] AS [NumCuota], 
     [VWROL_008].[SaldoInicial] AS [SaldoInicial], 
-    [VWROL_008].[Interes] AS [Interes], 
-    [VWROL_008].[AbonoCapital] AS [AbonoCapital], 
     [VWROL_008].[TotalCuota] AS [TotalCuota], 
     [VWROL_008].[Saldo] AS [Saldo], 
     [VWROL_008].[FechaPago] AS [FechaPago], 
@@ -5634,24 +5629,6 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
           <Property Name="dc_Valor_Haber" Type="Double" />
           <Property Name="cb_Cheque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cb_giradoA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="VWBAN_005">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdTipocbte" />
-            <PropertyRef Name="IdCbteCble" />
-            <PropertyRef Name="Descripcion_Ciudad" />
-            <PropertyRef Name="cb_Valor" />
-            <PropertyRef Name="cb_Fecha" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipocbte" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="cb_giradoA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="ValorEnLetras" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion_Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="cb_Valor" Type="Double" Nullable="false" />
-          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="VWBAN_006">
           <Key>
@@ -7401,59 +7378,6 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
           <Property Name="em_fechaIngaRol" Type="DateTime" Precision="3" />
           <Property Name="ca_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="VWROL_008">
-          <Key>
-            <PropertyRef Name="CedulaRuc" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="IdPrestamo" />
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="Fecha" />
-            <PropertyRef Name="MontoSol" />
-            <PropertyRef Name="TasaInteres" />
-            <PropertyRef Name="TotalPrestamo" />
-            <PropertyRef Name="NumCuotas" />
-            <PropertyRef Name="Observacion" />
-            <PropertyRef Name="NumCuota" />
-            <PropertyRef Name="SaldoInicial" />
-            <PropertyRef Name="Interes" />
-            <PropertyRef Name="AbonoCapital" />
-            <PropertyRef Name="TotalCuota" />
-            <PropertyRef Name="Saldo" />
-            <PropertyRef Name="FechaPago" />
-            <PropertyRef Name="EstadoPago" />
-            <PropertyRef Name="ObservacionCuota" />
-            <PropertyRef Name="RubroDescripcion" />
-            <PropertyRef Name="descuento_mensual" />
-            <PropertyRef Name="descuento_quincena" />
-            <PropertyRef Name="descuento_men_quin" />
-          </Key>
-          <Property Name="CedulaRuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdPrestamo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="MontoSol" Type="Double" Nullable="false" />
-          <Property Name="TasaInteres" Type="Double" Nullable="false" />
-          <Property Name="TotalPrestamo" Type="Double" Nullable="false" />
-          <Property Name="NumCuotas" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NumCuota" Type="Int32" Nullable="false" />
-          <Property Name="SaldoInicial" Type="Double" Nullable="false" />
-          <Property Name="Interes" Type="Double" Nullable="false" />
-          <Property Name="AbonoCapital" Type="Double" Nullable="false" />
-          <Property Name="TotalCuota" Type="Double" Nullable="false" />
-          <Property Name="Saldo" Type="Double" Nullable="false" />
-          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EstadoPago" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ObservacionCuota" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RubroDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CodigoEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="descuento_mensual" Type="Boolean" Nullable="false" />
-          <Property Name="descuento_quincena" Type="Boolean" Nullable="false" />
-          <Property Name="descuento_men_quin" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="VWROL_010">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7562,7 +7486,6 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
           <EntitySet Name="VWBAN_001_cancelaciones" EntityType="Self.VWBAN_001_cancelaciones" />
           <EntitySet Name="VWBAN_002_cancelaciones" EntityType="Self.VWBAN_002_cancelaciones" />
           <EntitySet Name="VWBAN_003" EntityType="Self.VWBAN_003" />
-          <EntitySet Name="VWBAN_005" EntityType="Self.VWBAN_005" />
           <EntitySet Name="VWBAN_006" EntityType="Self.VWBAN_006" />
           <EntitySet Name="VWBAN_007" EntityType="Self.VWBAN_007" />
           <EntitySet Name="VWCAJ_002_ingresos" EntityType="Self.VWCAJ_002_ingresos" />
@@ -7603,7 +7526,6 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
           <EntitySet Name="VWROL_005" EntityType="Self.VWROL_005" />
           <EntitySet Name="VWROL_006" EntityType="Self.VWROL_006" />
           <EntitySet Name="VWROL_007" EntityType="Self.VWROL_007" />
-          <EntitySet Name="VWROL_008" EntityType="Self.VWROL_008" />
           <EntitySet Name="VWROL_010" EntityType="Self.VWROL_010" />
           <EntitySet Name="VWROL_011" EntityType="Self.VWROL_011" />
           <EntitySet Name="VWROL_014" EntityType="Self.VWROL_014" />
@@ -7870,6 +7792,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
           <EntitySet Name="VWCAJ_001" EntityType="Model_reportes.VWCAJ_001" />
           <EntitySet Name="VWBAN_001" EntityType="Model_reportes.VWBAN_001" />
           <EntitySet Name="VWCONTA_001" EntityType="Model_reportes.VWCONTA_001" />
+          <EntitySet Name="VWBAN_005" EntityType="Model_reportes.VWBAN_005" />
+          <EntitySet Name="VWROL_008" EntityType="Model_reportes.VWROL_008" />
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -9446,6 +9370,73 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
           <Property Name="dc_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="VWBAN_005">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="Descripcion_Ciudad" />
+            <PropertyRef Name="cb_Valor" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="cb_giradoA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ValorEnLetras" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_Ciudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Valor" Type="Double" Nullable="false" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cb_Cheque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Cheque_numero" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VWROL_008">
+          <Key>
+            <PropertyRef Name="CedulaRuc" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdPrestamo" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="MontoSol" />
+            <PropertyRef Name="NumCuotas" />
+            <PropertyRef Name="Observacion" />
+            <PropertyRef Name="NumCuota" />
+            <PropertyRef Name="SaldoInicial" />
+            <PropertyRef Name="TotalCuota" />
+            <PropertyRef Name="Saldo" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="EstadoPago" />
+            <PropertyRef Name="ObservacionCuota" />
+            <PropertyRef Name="RubroDescripcion" />
+            <PropertyRef Name="descuento_mensual" />
+            <PropertyRef Name="descuento_quincena" />
+            <PropertyRef Name="descuento_men_quin" />
+          </Key>
+          <Property Name="CedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPrestamo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MontoSol" Type="Double" Nullable="false" />
+          <Property Name="NumCuotas" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NumCuota" Type="Int32" Nullable="false" />
+          <Property Name="SaldoInicial" Type="Double" Nullable="false" />
+          <Property Name="TotalCuota" Type="Double" Nullable="false" />
+          <Property Name="Saldo" Type="Double" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstadoPago" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ObservacionCuota" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RubroDescripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descuento_mensual" Type="Boolean" Nullable="false" />
+          <Property Name="descuento_quincena" Type="Boolean" Nullable="false" />
+          <Property Name="descuento_men_quin" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9595,20 +9586,6 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
                 <ScalarProperty Name="dc_Valor_Haber" ColumnName="dc_Valor_Haber" />
                 <ScalarProperty Name="cb_Cheque" ColumnName="cb_Cheque" />
                 <ScalarProperty Name="cb_giradoA" ColumnName="cb_giradoA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VWBAN_005">
-            <EntityTypeMapping TypeName="Model_reportes.VWBAN_005">
-              <MappingFragment StoreEntitySet="VWBAN_005">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
-                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
-                <ScalarProperty Name="cb_giradoA" ColumnName="cb_giradoA" />
-                <ScalarProperty Name="ValorEnLetras" ColumnName="ValorEnLetras" />
-                <ScalarProperty Name="Descripcion_Ciudad" ColumnName="Descripcion_Ciudad" />
-                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
-                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -10765,38 +10742,6 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
                 <ScalarProperty Name="Gozadas_Pgadas" ColumnName="Gozadas_Pgadas" />
                 <ScalarProperty Name="em_fechaIngaRol" ColumnName="em_fechaIngaRol" />
                 <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VWROL_008">
-            <EntityTypeMapping TypeName="Model_reportes.VWROL_008">
-              <MappingFragment StoreEntitySet="VWROL_008">
-                <ScalarProperty Name="CedulaRuc" ColumnName="CedulaRuc" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="MontoSol" ColumnName="MontoSol" />
-                <ScalarProperty Name="TasaInteres" ColumnName="TasaInteres" />
-                <ScalarProperty Name="TotalPrestamo" ColumnName="TotalPrestamo" />
-                <ScalarProperty Name="NumCuotas" ColumnName="NumCuotas" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="NumCuota" ColumnName="NumCuota" />
-                <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
-                <ScalarProperty Name="Interes" ColumnName="Interes" />
-                <ScalarProperty Name="AbonoCapital" ColumnName="AbonoCapital" />
-                <ScalarProperty Name="TotalCuota" ColumnName="TotalCuota" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
-                <ScalarProperty Name="EstadoPago" ColumnName="EstadoPago" />
-                <ScalarProperty Name="ObservacionCuota" ColumnName="ObservacionCuota" />
-                <ScalarProperty Name="RubroDescripcion" ColumnName="RubroDescripcion" />
-                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="descuento_mensual" ColumnName="descuento_mensual" />
-                <ScalarProperty Name="descuento_quincena" ColumnName="descuento_quincena" />
-                <ScalarProperty Name="descuento_men_quin" ColumnName="descuento_men_quin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -12201,6 +12146,51 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWBAN_005">
+            <EntityTypeMapping TypeName="Model_reportes.VWBAN_005">
+              <MappingFragment StoreEntitySet="VWBAN_005">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="cb_Cheque_numero" ColumnName="cb_Cheque_numero" />
+                <ScalarProperty Name="cb_Cheque" ColumnName="cb_Cheque" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
+                <ScalarProperty Name="Descripcion_Ciudad" ColumnName="Descripcion_Ciudad" />
+                <ScalarProperty Name="ValorEnLetras" ColumnName="ValorEnLetras" />
+                <ScalarProperty Name="cb_giradoA" ColumnName="cb_giradoA" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWROL_008">
+            <EntityTypeMapping TypeName="Model_reportes.VWROL_008">
+              <MappingFragment StoreEntitySet="VWROL_008">
+                <ScalarProperty Name="descuento_men_quin" ColumnName="descuento_men_quin" />
+                <ScalarProperty Name="descuento_quincena" ColumnName="descuento_quincena" />
+                <ScalarProperty Name="descuento_mensual" ColumnName="descuento_mensual" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
+                <ScalarProperty Name="RubroDescripcion" ColumnName="RubroDescripcion" />
+                <ScalarProperty Name="ObservacionCuota" ColumnName="ObservacionCuota" />
+                <ScalarProperty Name="EstadoPago" ColumnName="EstadoPago" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="TotalCuota" ColumnName="TotalCuota" />
+                <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
+                <ScalarProperty Name="NumCuota" ColumnName="NumCuota" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="NumCuotas" ColumnName="NumCuotas" />
+                <ScalarProperty Name="MontoSol" ColumnName="MontoSol" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="CedulaRuc" ColumnName="CedulaRuc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

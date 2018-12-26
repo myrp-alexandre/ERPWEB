@@ -16,5 +16,8 @@ namespace Core.Erp.Info.Reportes.Banco
         public string Descripcion_Ciudad { get; set; }
         public double cb_Valor { get; set; }
         public System.DateTime cb_Fecha { get; set; }
+        public string cb_Cheque { get; set; }
+        public Nullable<decimal> cb_Cheque_numero { get; set; }
+        public string Estado { get; set; }
     }
 }
