@@ -63,6 +63,88 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+        public List<ro_prestamo_Info> get_list_aprobacion(int IdEmpresa, DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                DateTime fi = Convert.ToDateTime(fechaInicio.ToShortDateString());
+                DateTime ff = Convert.ToDateTime(fechaFin.ToShortDateString());
+
+                List<ro_prestamo_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from q in Context.vwRo_Prestamo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.Fecha >= fi
+                             && q.Fecha <= ff
+                             select new ro_prestamo_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdPrestamo = q.IdPrestamo,
+                                 descuento_mensual = q.descuento_mensual,
+                                 descuento_men_quin = q.descuento_men_quin,
+                                 descuento_quincena = q.descuento_quincena,
+                                 IdEmpleado = q.IdEmpleado,
+                                 IdRubro = q.IdRubro,
+                                 Estado = q.Estado,
+                                 Fecha = q.Fecha,
+                                 MontoSol = q.MontoSol,
+                                 NumCuotas = q.NumCuotas,
+                                 Fecha_PriPago = q.Fecha_PriPago,
+                                 Observacion = q.Observacion,
+                                 IdTipoCbte = q.IdTipoCbte,
+                                 IdCbteCble = q.IdCbteCble,
+                                 IdOrdenPago = q.IdOrdenPago,
+                                 pe_nombre_completo = q.pe_apellido + " " + q.pe_nombre,
+                                 Valor_pendiente = q.Valor_pendiente,
+                                 TotalCobrado = q.TotalCobrado,
+                                 ru_descripcion = q.ru_descripcion,
+
+                                 EstadoBool = q.Estado
+
+
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool aprobar_prestamo(int IdEmpresa, string[] Lista, string IdUsuarioAprueba)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    foreach (var item in Lista)
+                    {
+                        var IdPrestamo = Convert.ToDecimal(item);
+                        ro_prestamo Entity = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
+                        if (Entity != null)
+                        {
+                            Entity.IdUsuarioAprueba = IdUsuarioAprueba;
+                            Entity.EstadoAprob = "APROB";
+                        }
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public ro_prestamo_Info get_info(int IdEmpresa, decimal IdEmpleado, decimal IdPrestamo)
         {
             try
