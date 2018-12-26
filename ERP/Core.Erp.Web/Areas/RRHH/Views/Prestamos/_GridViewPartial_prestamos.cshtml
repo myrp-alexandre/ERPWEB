@@ -54,7 +54,7 @@
             };
             settings.HtmlRowPrepared = (s, e) =>
             {
-                if (Convert.ToString(e.GetValue("Estado")) == "I")
+                if (Convert.ToBoolean(e.GetValue("Estado")) == false)
                 {
                     e.Row.ForeColor = System.Drawing.Color.Red;
                 }
@@ -64,7 +64,7 @@
                 c.Caption = "#";
                 c.SetDataItemTemplateContent(tc =>
                 {
-                    if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "TotalCobrado")) == 0)
+                    if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "TotalCobrado")) == 0)
                     {
                         ViewContext.Writer.Write(
                              Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdPrestamo = DataBinder.Eval(tc.DataItem, "IdPrestamo") }) + "&nbsp;" +
@@ -87,7 +87,7 @@
             });
 
             settings.Columns.Add("IdPrestamo","ID").Width=Unit.Percentage(5);
-            settings.Columns.Add("pe_nombre_completo","Empleado").Width = Unit.Percentage(27);
+            settings.Columns.Add("pe_nombre_completo","Empleado").Width = Unit.Percentage(20);
             settings.Columns.Add("ru_descripcion", "Rubro").Width = Unit.Percentage(10);
             settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(20);
             settings.Columns.Add(column =>
@@ -116,33 +116,39 @@
 
                 });
             });
-            settings.Columns.Add(column =>
+
+
+
+            settings.Columns.Add(c =>
             {
-                column.FieldName = "TotalCobrado";
-                column.Caption = "$Cobrado";
-                column.Width = Unit.Percentage(8);
-                column.EditorProperties().SpinEdit(sp =>
+                c.Caption = "Aplicar";
+                c.SetDataItemTemplateContent(tc =>
                 {
-                    sp.MinValue = 0;
-                    sp.MaxValue = 999999999;
-                    sp.Width = Unit.Percentage(100);
-                    column.PropertiesEdit.DisplayFormatString = "n2";
+                    if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "TotalCobrado")) == 0)
+                    {
+                        ViewContext.Writer.Write(
+                             Html.ActionLink("Abono", "Abono", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdPrestamo = DataBinder.Eval(tc.DataItem, "IdPrestamo") },
+                                new { onclick = "return confirm('¿Está seguro de que desea aplicar abono al prestamos?')" })
+                        );
+                    }
 
                 });
+               
+                c.Settings.AllowDragDrop = DefaultBoolean.False;
+                c.Settings.AllowSort = DefaultBoolean.False;
+                c.Width = Unit.Percentage(10);
             });
+
+
+
+
             settings.Columns.Add(column =>
             {
-                column.FieldName = "Valor_pendiente";
-                column.Caption = "$Pendiente";
-                column.Width = Unit.Percentage(8);
-                column.EditorProperties().SpinEdit(sp =>
+                column.SetDataItemTemplateContent(c =>
                 {
-                    sp.MinValue = 0;
-                    sp.MaxValue = 999999999;
-                    sp.Width = Unit.Percentage(100);
-                    column.PropertiesEdit.DisplayFormatString = "n2";
-
+                    ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_008", "RRHHReportes", new { Area = "Reportes", IdPrestamo = DataBinder.Eval(c.DataItem, "IdPrestamo") }, Request.Url.Scheme) + "');\"></span>");
                 });
+                column.Width = System.Web.UI.WebControls.Unit.Percentage(4);
             });
             settings.Columns.Add(column =>
             {
@@ -153,14 +159,6 @@
                 {
 
                 });
-            });
-            settings.Columns.Add(column =>
-            {
-                column.SetDataItemTemplateContent(c =>
-                {
-                    ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_008", "RRHHReportes", new { Area = "Reportes", IdPrestamo = DataBinder.Eval(c.DataItem, "IdPrestamo") }, Request.Url.Scheme) + "');\"></span>");
-                });
-                column.Width = System.Web.UI.WebControls.Unit.Percentage(4);
             });
 
         });

@@ -21,6 +21,7 @@
 
 @using (Html.BeginForm("Modificar", "HorarioPlanificacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdPlanificacion)
 
@@ -123,7 +124,7 @@
 
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdDepartamento">Deaprtamento</label>
+                    <label for="IdDepartamento">Departamento</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdDepartamento, settings =>
                {
                    settings.Name = "IdDepartamento";
@@ -211,12 +212,12 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="cb_Observacion">Observación</label>
-                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                    <label for="IdEmpleado">Empleado</label>
+                    @Html.Partial("_CmbEmpleado_Planificacion", Model)
+
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdCargo">Horario</label>
@@ -229,7 +230,7 @@
                    settings.Properties.Columns.Add("Descripcion", "Horario").Width = System.Web.UI.WebControls.Unit.Percentage(90);
                    //Campo ID
                    settings.Properties.ValueField = "IdHorario";
-                   settings.Properties.ValueType = typeof(decimal);
+                   settings.Properties.ValueType = typeof(int);
                    settings.Properties.TextField = "Descripcion";
                    //Boton para seleccionar ningun registro
                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
@@ -242,13 +243,23 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <div class="box-footer">
+                        <label for=""></label>
                         <button type="button" onclick="Buscar();" id="btnconsultar" class="btn btn-primary">Buscar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                        <a class="btn btn-default" href="@Url.Action("Index","HorarioPlanificacion",new { Area = "RRHH", @id="grid"},null)">Cancelar</a>
                     </div>
                 </div>
             </div>
 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cb_Observacion">Observación</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -261,24 +272,30 @@
             </div>
         </div>
     </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","HorarioPlanificacion",new { Area = "RRHH", @id="grid"},null)">Cancelar</a>
+    </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
 
 <script>
-             function Buscar()
-            {
-                 var datos = {
-                     fi: FechaInicio.GetValue(),
-                     ff: FechaFin.GetValue(),
-                     IdNomina: IdNomina.GetValue(),
-                     IdSucursal: IdSucursal.GetValue(),
-                     IdDivision: IdDivision.GetValue(),
-                     IdArea: IdArea.GetValue(),
-                     IdDepartamento: IdDepartamento.GetValue(),
-                     IdCargo: IdCargo.GetValue(),
-                     IdHorario: IdHorario.GetValue()
+            function Buscar() {
+                var datos = {
+                    fi: FechaInicio.GetValue(),
+                    ff: FechaFin.GetValue(),
+                    IdNomina: IdNomina.GetValue(),
+                    IdSucursal: IdSucursal.GetValue(),
+                    IdDivision: IdDivision.GetValue(),
+                    IdArea: IdArea.GetValue(),
+                    IdDepartamento: IdDepartamento.GetValue(),
+                    IdCargo: IdCargo.GetValue(),
+                    IdEmpleado: IdEmpleado.GetValue(),
+                    IdHorario: IdHorario.GetValue(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val()
 
 
                 }
@@ -291,15 +308,13 @@
                     bProcessing: true,
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
-                    success: function (data)
-                    {
+                    success: function (data) {
 
                         GridViewPartial_horario_planificacion_det.PerformCallback();
 
                     },
-                    error: function (error)
-                    {
+                    error: function (error) {
                     }
-                    });
-};
+                });
+            };
 </script>

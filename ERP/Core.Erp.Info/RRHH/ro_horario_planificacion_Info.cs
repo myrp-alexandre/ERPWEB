@@ -8,6 +8,7 @@ namespace Core.Erp.Info.RRHH
 {
   public  class ro_horario_planificacion_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdPlanificacion { get; set; }
         public string Observacion { get; set; }
@@ -41,5 +42,6 @@ namespace Core.Erp.Info.RRHH
             lst_planificacion_det = new List<ro_horario_planificacion_det_Info>();
         }
 
+        public decimal IdEmpleado { get; set; }
     }
 }

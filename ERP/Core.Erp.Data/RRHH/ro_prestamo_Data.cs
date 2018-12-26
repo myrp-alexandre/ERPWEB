@@ -8,6 +8,7 @@ namespace Core.Erp.Data.RRHH
 {
   public  class ro_prestamo_Data
     {
+        ro_Parametros_Data odata = new ro_Parametros_Data();
         public List<ro_prestamo_Info> get_list(int IdEmpresa, DateTime fechaInicio, DateTime fechaFin)
         {
             try
@@ -130,6 +131,7 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                var ro_parametro = odata.get_info(info.IdEmpresa);
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_prestamo Entity = new ro_prestamo
@@ -141,12 +143,13 @@ namespace Core.Erp.Data.RRHH
                         descuento_quincena = info.descuento_quincena,
                         IdEmpleado = info.IdEmpleado,
                         IdRubro = info.IdRubro,
-                        Fecha=info.Fecha.Date,
-                        MontoSol=info.MontoSol,
-                        NumCuotas=info.NumCuotas,
-                        Fecha_PriPago=info.Fecha_PriPago.Date,
-                        Observacion=info.Observacion,
+                        Fecha = info.Fecha.Date,
+                        MontoSol = info.MontoSol,
+                        NumCuotas = info.NumCuotas,
+                        Fecha_PriPago = info.Fecha_PriPago.Date,
+                        Observacion = info.Observacion,
                         Estado = info.Estado = true,
+                        EstadoAprob = ro_parametro.EstadoCreacionPrestamos,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
                     };
@@ -165,6 +168,7 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                var ro_parametro = odata.get_info(info.IdEmpresa);
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_prestamo Entity = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado && q.IdPrestamo == info.IdPrestamo);
@@ -182,6 +186,7 @@ namespace Core.Erp.Data.RRHH
                         Entity.Observacion = info.Observacion;
                         Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                         Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
+                        Entity.EstadoAprob = ro_parametro.EstadoCreacionPrestamos;
                         Context.SaveChanges();
                 }
 
