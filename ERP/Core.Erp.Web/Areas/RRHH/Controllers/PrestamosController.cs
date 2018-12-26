@@ -387,7 +387,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GenerarPrestamo(int IdEmpresa=0, double Valor_pendiente, decimal IdTransaccionSession)
+        public ActionResult GenerarPrestamo(int IdEmpresa=0, double Valor_pendiente=0, decimal IdTransaccionSession=0)
         {
 
 
