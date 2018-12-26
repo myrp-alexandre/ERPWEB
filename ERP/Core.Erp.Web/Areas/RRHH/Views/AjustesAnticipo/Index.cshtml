@@ -12,10 +12,10 @@
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(v=>v.IdTransaccionSession, new { @id= " IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="box ">
         <div class="box-header with-border">
-           
+
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fa fa-minus"></i>
@@ -92,7 +92,7 @@
     </div>
 
 }
-    <script>
+<script>
 
 
     $("#IdNomina_Tipo").change(function () {
@@ -167,7 +167,7 @@
                     IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
                     IdPeriodo: $("#IdPeriodo").val(),
                     IdTransaccionSession: $("#IdTransaccionSession").val()
-                    
+
                 }
 
                 $.ajax({
@@ -190,5 +190,5 @@
 
 
 
-    </script>
+</script>
 

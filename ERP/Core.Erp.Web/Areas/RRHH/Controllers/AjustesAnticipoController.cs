@@ -123,6 +123,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             ro_rol_detalle_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdEmpleado == info_det.IdEmpleado).First();
             edited_info.Valor = info_det.Valor;
+            edited_info.check = true;
 
 
         }
