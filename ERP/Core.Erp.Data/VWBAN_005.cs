@@ -25,5 +25,7 @@ namespace Core.Erp.Data
         public string cb_Cheque { get; set; }
         public Nullable<decimal> cb_Cheque_numero { get; set; }
         public string Estado { get; set; }
+        public int IdBanco { get; set; }
+        public string cb_Observacion { get; set; }
     }
 }
