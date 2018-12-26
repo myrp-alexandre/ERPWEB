@@ -142,12 +142,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
 
         [ValidateInput(false)]
-        public ActionResult Consultar(DateTime fi, DateTime ff, int IdNomina=0, int IdSucursal=0, int IdDivision=0, int IdArea=0, int IdDepartamento=0, int IdCargo=0,int IdHorario=0)
+        public ActionResult Consultar(DateTime fi, DateTime ff, int IdNomina=0, int IdSucursal=0, int IdDivision=0, int IdArea=0, int IdDepartamento=0, int IdCargo=0,decimal IdEmpleado = 0 ,int IdHorario=0)
         {
 
            
             IdEmpresa =Convert.ToInt32( Session["IdEmpresa"].ToString());
-            info = bus_planificacion.get_list(IdEmpresa, IdNomina,IdSucursal,IdDivision,IdArea,IdDepartamento,IdCargo,fi,ff,IdHorario);
+            info = bus_planificacion.get_list(IdEmpresa, IdNomina,IdSucursal,IdDivision,IdArea,IdDepartamento,IdCargo, IdEmpleado, fi,ff,IdHorario);
             lst_planificacion_det.set_list(info.lst_planificacion_det);
              return Json("", JsonRequestBehavior.AllowGet);
     }

@@ -26,11 +26,11 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public ro_horario_planificacion_Info get_list(int IdEmpresa, int IdNomina, int IdSucursal, int IdDivision, int IdArea, int IdDepartamento, int IdCargo, DateTime fi, DateTime ff, int IdHorario)
+        public ro_horario_planificacion_Info get_list(int IdEmpresa, int IdNomina, int IdSucursal, int IdDivision, int IdArea, int IdDepartamento, int IdCargo, decimal IdEmpleado ,DateTime fi, DateTime ff, int IdHorario)
         {
             try
             {
-              lst_empleados=  odata_det.get_list(IdEmpresa, IdNomina,IdSucursal,IdDivision,IdArea,IdDepartamento,IdCargo);
+              lst_empleados=  odata_det.get_list(IdEmpresa, IdNomina,IdSucursal,IdDivision,IdArea,IdDepartamento,IdCargo, IdEmpleado);
               return  get_planificacion(fi, ff,IdHorario);
             }
             catch (Exception)
