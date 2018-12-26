@@ -21,19 +21,14 @@ namespace Core.Erp.Data
         public string pe_apellido { get; set; }
         public string IdRubro { get; set; }
         public string ru_descripcion { get; set; }
-        public decimal IdEmpleado_Aprueba { get; set; }
-        public string pe_nombre_apru { get; set; }
-        public string pe_apellido_apru { get; set; }
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
         public System.DateTime Fecha { get; set; }
         public double MontoSol { get; set; }
         public double TotalCobrado { get; set; }
         public double Valor_pendiente { get; set; }
-        public double TasaInteres { get; set; }
         public int NumCuotas { get; set; }
         public System.DateTime Fecha_PriPago { get; set; }
         public string Observacion { get; set; }
-        public string Tipo_Calculo { get; set; }
         public string MotiAnula { get; set; }
         public string pe_cedulaRuc { get; set; }
         public int IdTipoPersona { get; set; }

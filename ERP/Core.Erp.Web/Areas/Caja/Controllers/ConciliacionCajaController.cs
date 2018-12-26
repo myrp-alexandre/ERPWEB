@@ -27,6 +27,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         cp_conciliacion_Caja_det_List list_det = new cp_conciliacion_Caja_det_List();
         cp_conciliacion_Caja_det_x_ValeCaja_List list_vale = new cp_conciliacion_Caja_det_x_ValeCaja_List();
+        cp_conciliacion_Caja_det_x_ValeCaja_List list_vale_recorrer = new cp_conciliacion_Caja_det_x_ValeCaja_List();
         cp_conciliacion_Caja_det_Ing_Caja_List list_ing = new cp_conciliacion_Caja_det_Ing_Caja_List();
         ct_cbtecble_det_List list_ct = new ct_cbtecble_det_List();  
         
@@ -293,6 +294,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_det.get_list_x_movimientos_caja(IdEmpresa);
+            
             return PartialView("_GridViewPartial_conciliacion_caja_movimiento", model);
         }
 
@@ -302,6 +304,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
             model.lst_det_vale = list_vale.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            list_vale_recorrer.set_list(model.lst_det_vale, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_conciliacion_vales", model);
         }
 
@@ -483,7 +486,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             if (Ids != null)
             {
-                var lst = list_vale.get_list(IdTransaccionSession);
+                var lst = list_vale_recorrer.get_list(IdTransaccionSession);
+               
                 string[] array = Ids.Split(',');
                 //var output = array.GroupBy(q => q).ToList();
                 foreach (var item in array)

@@ -33,26 +33,21 @@ namespace Core.Erp.Data.RRHH
                                  descuento_quincena=q.descuento_quincena,
                                  IdEmpleado = q.IdEmpleado,
                                  IdRubro = q.IdRubro,
-                                 IdEmpleado_Aprueba = q.IdEmpleado_Aprueba,
                                  Estado = q.Estado,
                                  Fecha = q.Fecha,
                                  MontoSol = q.MontoSol,
-                                 TasaInteres = q.TasaInteres,
-                                 TotalPrestamo = q.MontoSol,                             
                                  NumCuotas = q.NumCuotas,
                                  Fecha_PriPago = q.Fecha_PriPago,
                                  Observacion = q.Observacion,
-                                 Tipo_Calculo = q.Tipo_Calculo,
                                  IdTipoCbte = q.IdTipoCbte,
                                  IdCbteCble = q.IdCbteCble,
                                  IdOrdenPago = q.IdOrdenPago,
-
                                  pe_nombre_completo=q.pe_apellido+" "+q.pe_nombre,
                                  Valor_pendiente=q.Valor_pendiente,
                                  TotalCobrado=q.TotalCobrado,
                                  ru_descripcion=q.ru_descripcion,
 
-                                 EstadoBool = q.Estado == "A" ? true : false
+                                 EstadoBool = q.Estado
 
 
                              }).ToList();
@@ -87,16 +82,12 @@ namespace Core.Erp.Data.RRHH
                         descuento_quincena = Entity.descuento_quincena,
                         IdEmpleado = Entity.IdEmpleado,
                         IdRubro = Entity.IdRubro,
-                        IdEmpleado_Aprueba = Entity.IdEmpleado_Aprueba,
                         Estado = Entity.Estado,
                         Fecha = Entity.Fecha,
                         MontoSol = Entity.MontoSol,
-                        TasaInteres = Entity.TasaInteres,
-                        TotalPrestamo = Entity.TotalPrestamo,
                         NumCuotas = Entity.NumCuotas,
                         Fecha_PriPago = Entity.Fecha_PriPago,
                         Observacion = Entity.Observacion,
-                        Tipo_Calculo = Entity.Tipo_Calculo,
                         IdTipoCbte = Entity.IdTipoCbte,
                         IdCbteCble = Entity.IdCbteCble,
                         IdOrdenPago = Entity.IdOrdenPago
@@ -150,16 +141,12 @@ namespace Core.Erp.Data.RRHH
                         descuento_quincena = info.descuento_quincena,
                         IdEmpleado = info.IdEmpleado,
                         IdRubro = info.IdRubro,
-                        IdEmpleado_Aprueba = info.IdEmpleado_Aprueba,
                         Fecha=info.Fecha.Date,
                         MontoSol=info.MontoSol,
-                        TasaInteres=info.TasaInteres,
-                        TotalPrestamo=info.TotalPrestamo,
                         NumCuotas=info.NumCuotas,
                         Fecha_PriPago=info.Fecha_PriPago.Date,
                         Observacion=info.Observacion,
-                        Tipo_Calculo=info.Tipo_Calculo,
-                        Estado = info.Estado = "A",
+                        Estado = info.Estado = true,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
                     };
@@ -188,18 +175,14 @@ namespace Core.Erp.Data.RRHH
                         Entity.descuento_quincena = info.descuento_quincena;
                         Entity.IdEmpleado = info.IdEmpleado;
                         Entity.IdRubro = info.IdRubro;
-                        Entity.IdEmpleado_Aprueba = info.IdEmpleado_Aprueba;
                         Entity.Fecha = info.Fecha.Date;
                         Entity.MontoSol = info.MontoSol;
-                        Entity.TasaInteres = info.TasaInteres;
-                        Entity.TotalPrestamo = info.TotalPrestamo;
                         Entity.NumCuotas = info.NumCuotas;
                         Entity.Fecha_PriPago = info.Fecha_PriPago.Date;
                         Entity.Observacion = info.Observacion;
-                        Entity.Tipo_Calculo = info.Tipo_Calculo;
-                    Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
-                    Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
-                    Context.SaveChanges();
+                        Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
+                        Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
+                        Context.SaveChanges();
                 }
 
                 return true;
@@ -219,7 +202,7 @@ namespace Core.Erp.Data.RRHH
                     ro_prestamo Entity = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado && q.IdPrestamo == info.IdPrestamo);
                     if (Entity == null)
                         return false;
-                    Entity.Estado = info.Estado = "I";
+                    Entity.Estado = info.Estado = false;
                     Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                     Entity.Fecha_UltAnu = info.Fecha_UltAnu = DateTime.Now;
                     Context.SaveChanges();

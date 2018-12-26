@@ -60,8 +60,6 @@ namespace Core.Erp.Data
         public DbSet<ro_participacion_utilidad_empleado> ro_participacion_utilidad_empleado { get; set; }
         public DbSet<ro_periodo> ro_periodo { get; set; }
         public DbSet<ro_periodo_x_ro_Nomina_TipoLiqui> ro_periodo_x_ro_Nomina_TipoLiqui { get; set; }
-        public DbSet<ro_prestamo> ro_prestamo { get; set; }
-        public DbSet<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }
         public DbSet<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
         public DbSet<ro_Tipo_Prestamo> ro_Tipo_Prestamo { get; set; }
         public DbSet<ro_turno> ro_turno { get; set; }
@@ -75,7 +73,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_nomina_x_horas_extras_det> vwro_nomina_x_horas_extras_det { get; set; }
         public DbSet<vwro_participacion_utilidad> vwro_participacion_utilidad { get; set; }
         public DbSet<vwro_participacion_utilidad_empleado> vwro_participacion_utilidad_empleado { get; set; }
-        public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
         public DbSet<vwro_rubro_tipo> vwro_rubro_tipo { get; set; }
         public DbSet<ro_tabla_Impu_Renta> ro_tabla_Impu_Renta { get; set; }
         public DbSet<vwro_empleado_x_Proyeccion_Gastos_Personales> vwro_empleado_x_Proyeccion_Gastos_Personales { get; set; }
@@ -129,6 +126,9 @@ namespace Core.Erp.Data
         public DbSet<vwro_NominasPagosCheques> vwro_NominasPagosCheques { get; set; }
         public DbSet<ro_NominasPagosCheques_det> ro_NominasPagosCheques_det { get; set; }
         public DbSet<vwro_NominasPagosCheques_det> vwro_NominasPagosCheques_det { get; set; }
+        public DbSet<ro_prestamo> ro_prestamo { get; set; }
+        public DbSet<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }
+        public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

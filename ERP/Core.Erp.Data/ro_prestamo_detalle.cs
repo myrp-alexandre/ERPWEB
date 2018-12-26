@@ -18,13 +18,11 @@ namespace Core.Erp.Data
         public decimal IdPrestamo { get; set; }
         public int NumCuota { get; set; }
         public double SaldoInicial { get; set; }
-        public double Interes { get; set; }
-        public double AbonoCapital { get; set; }
         public double TotalCuota { get; set; }
         public double Saldo { get; set; }
         public System.DateTime FechaPago { get; set; }
         public string EstadoPago { get; set; }
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
         public string Observacion_det { get; set; }
         public int IdNominaTipoLiqui { get; set; }
     
