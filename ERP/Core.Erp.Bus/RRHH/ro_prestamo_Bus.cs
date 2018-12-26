@@ -119,7 +119,7 @@ namespace Core.Erp.Bus.RRHH
                 double valor_cuota = info.MontoSol / info.NumCuotas;
                 double saldo = info.MontoSol;
                 DateTime fecha_pago = info.Fecha_PriPago;
-                info.TotalPrestamo = info.MontoSol;
+                info.MontoSol = info.MontoSol;
                 List<ro_prestamo_detalle_Info> listaDetalle = new List<ro_prestamo_detalle_Info>();
                 for (int i = 1; i <= periodo; i++)
                 {
@@ -164,7 +164,7 @@ namespace Core.Erp.Bus.RRHH
                 double valor_cuota = info.MontoSol / info.NumCuotas;
                 double saldo = info.MontoSol;
                 DateTime fecha_pago = info.Fecha_PriPago;
-                info.TotalPrestamo = info.MontoSol;
+                info.MontoSol = info.MontoSol;
                 List<ro_prestamo_detalle_Info> listaDetalle = new List<ro_prestamo_detalle_Info>();
                 for (int i = 1; i <= periodo; i++)
                 {
@@ -210,7 +210,7 @@ namespace Core.Erp.Bus.RRHH
                 double valor_cuota = info.MontoSol / info.NumCuotas;
                 double saldo = info.MontoSol;
                 DateTime fecha_pago = info.Fecha_PriPago;
-                info.TotalPrestamo = info.MontoSol;
+                info.MontoSol = info.MontoSol;
                 List<ro_prestamo_detalle_Info> listaDetalle = new List<ro_prestamo_detalle_Info>();
                 for (int i = 1; i <= periodo; i++)
                 {
