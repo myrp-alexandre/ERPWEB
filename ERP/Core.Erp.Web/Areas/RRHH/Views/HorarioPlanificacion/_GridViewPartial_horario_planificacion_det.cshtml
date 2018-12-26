@@ -12,7 +12,7 @@
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "HorarioPlanificacion", Action = "EditingUpdate", Area = "RRHH" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "HorarioPlanificacion", Action = "EditingDelete", Area = "RRHH" };
 
-        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.Visible = false;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
 
@@ -124,6 +124,7 @@
             });
         });
 
+        settings.ClientSideEvents.BeginCallback = "function(s,e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();}";
     });
 
 }
