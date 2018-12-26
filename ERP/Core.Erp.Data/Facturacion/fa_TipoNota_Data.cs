@@ -121,7 +121,8 @@ namespace Core.Erp.Data.Facturacion
                         No_Descripcion = Entity.No_Descripcion,
                         Tipo = Entity.Tipo,
                         Estado = Entity.Estado,
-                        GeneraMoviInven = Entity.GeneraMoviInven == null ? false : Convert.ToBoolean(Entity.GeneraMoviInven)
+                        GeneraMoviInven = Entity.GeneraMoviInven ,
+                        IdCtaCble = Entity.IdCtaCble
                     };
                 }
                 return info;
@@ -169,23 +170,13 @@ namespace Core.Erp.Data.Facturacion
                         Tipo = info.Tipo,
                         Estado = info.Estado="A",
                         GeneraMoviInven = info.GeneraMoviInven,
+                        IdCtaCble = info.IdCtaCble,
 
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     };
                     Context.fa_TipoNota.Add(Entity);
-                    foreach (var item in info.Lst_fa_TipoNota_x_Empresa_x_Sucursal)
-                    {
-                        fa_TipoNota_x_Empresa_x_Sucursal det = new fa_TipoNota_x_Empresa_x_Sucursal
-                        {
-                            IdEmpresa = info.IdEmpresa,
-                            IdSucursal = item.IdSucursal,
-                            IdTipoNota = info.IdTipoNota,
-                            IdCtaCble = item.IdCtaCble
-                        };
-                        Context.fa_TipoNota_x_Empresa_x_Sucursal.Add(det);
-                    }
-                        Context.SaveChanges();
+                    Context.SaveChanges();
                 }
                 return true;
             }
@@ -208,28 +199,11 @@ namespace Core.Erp.Data.Facturacion
                     Entity.No_Descripcion = info.No_Descripcion;
                     Entity.Tipo = info.Tipo;
                     Entity.GeneraMoviInven = info.GeneraMoviInven;
+                    Entity.IdCtaCble = info.IdCtaCble;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
                     
-                    var lst = Context.fa_TipoNota_x_Empresa_x_Sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoNota == info.IdTipoNota).ToList();
-                    foreach (var item in lst)
-                    {
-                        Context.fa_TipoNota_x_Empresa_x_Sucursal.Remove(item);
-                    }
-                    foreach (var item in info.Lst_fa_TipoNota_x_Empresa_x_Sucursal)
-                    {
-                        fa_TipoNota_x_Empresa_x_Sucursal det = new fa_TipoNota_x_Empresa_x_Sucursal
-                        {
-                            IdEmpresa = info.IdEmpresa,
-                            IdSucursal = item.IdSucursal,
-                            IdTipoNota = info.IdTipoNota, 
-                            IdCtaCble = item.IdCtaCble
-                        };
-                        Context.fa_TipoNota_x_Empresa_x_Sucursal.Add(det);
-                    }
-
-
                     Context.SaveChanges();
                 }
                 return true;

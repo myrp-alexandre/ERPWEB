@@ -22,6 +22,7 @@ namespace Core.Erp.Info.Facturacion
         [StringLength(150, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 150")]
         public string No_Descripcion { get; set; }
         public bool GeneraMoviInven { get; set; }
+        [Required(ErrorMessage = ("el campo cuenta contable es obligatorio"))]
         public string IdCtaCble { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
@@ -32,9 +33,6 @@ namespace Core.Erp.Info.Facturacion
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
         public string MotiAnula { get; set; }
-
-        //campos que no existen en la tabla
-
-        public List<fa_TipoNota_x_Empresa_x_Sucursal_Info> Lst_fa_TipoNota_x_Empresa_x_Sucursal { get; set; }
+        
     }
 }
