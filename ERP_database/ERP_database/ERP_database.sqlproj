@@ -354,7 +354,6 @@
     <Build Include="dbo\Tables\com_Motivo_Orden_Compra.sql" />
     <Build Include="dbo\Tables\ct_cbtecble_Plantilla_det.sql" />
     <Build Include="dbo\Tables\ro_Nomina_Tipo.sql" />
-    <Build Include="dbo\Tables\tb_parametro_tipo.sql" />
     <Build Include="web\Tables\Af_SPACTF_004_detalle.sql" />
     <Build Include="dbo\Tables\com_ordencompra_local.sql" />
     <Build Include="dbo\Tables\Af_Parametros.sql" />

@@ -14,9 +14,16 @@
     [IdTipo_op_prestamos]            VARCHAR (20) NOT NULL,
     [IdTipo_op_acta_finiquito]       VARCHAR (20) NOT NULL,
     [IdTipo_op_sueldo_por_pagar]     VARCHAR (20) NOT NULL,
+    [EstadoCreacionPrestamos]        VARCHAR (10) NOT NULL,
     CONSTRAINT [PK_ro_Parametros] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC),
+    CONSTRAINT [FK_ro_Parametros_cp_orden_pago_tipo_x_empresa] FOREIGN KEY ([IdEmpresa], [IdTipo_op_acta_finiquito]) REFERENCES [dbo].[cp_orden_pago_tipo_x_empresa] ([IdEmpresa], [IdTipo_op]),
+    CONSTRAINT [FK_ro_Parametros_cp_orden_pago_tipo_x_empresa1] FOREIGN KEY ([IdEmpresa], [IdTipo_op_prestamos]) REFERENCES [dbo].[cp_orden_pago_tipo_x_empresa] ([IdEmpresa], [IdTipo_op]),
+    CONSTRAINT [FK_ro_Parametros_cp_orden_pago_tipo_x_empresa2] FOREIGN KEY ([IdEmpresa], [IdTipo_op_sueldo_por_pagar]) REFERENCES [dbo].[cp_orden_pago_tipo_x_empresa] ([IdEmpresa], [IdTipo_op]),
+    CONSTRAINT [FK_ro_Parametros_ro_catalogo] FOREIGN KEY ([EstadoCreacionPrestamos]) REFERENCES [dbo].[ro_catalogo] ([CodCatalogo]),
     CONSTRAINT [FK_ro_Parametros_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa])
 );
+
+
 
 
 

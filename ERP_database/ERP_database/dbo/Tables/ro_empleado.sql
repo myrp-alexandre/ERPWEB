@@ -60,6 +60,8 @@
     [Valor_horas_matutino]                 FLOAT (53)    NULL,
     [Valor_horas_brigada]                  FLOAT (53)    NULL,
     [Valor_horas_extras]                   FLOAT (53)    NULL,
+    [GozaMasDeQuinceDiasVaciones]          BIT           NOT NULL,
+    [DiasVacaciones]                       FLOAT (53)    NOT NULL,
     CONSTRAINT [PK_ro_empleado] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdEmpleado] ASC),
     CONSTRAINT [FK_ro_empleado_ct_plancta] FOREIGN KEY ([IdEmpresa], [IdCtaCble_Emplea]) REFERENCES [dbo].[ct_plancta] ([IdEmpresa], [IdCtaCble]),
     CONSTRAINT [FK_ro_empleado_ro_Cargo] FOREIGN KEY ([IdEmpresa], [IdCargo]) REFERENCES [dbo].[ro_cargo] ([IdEmpresa], [IdCargo]),
@@ -74,6 +76,8 @@
     CONSTRAINT [FK_ro_empleado_tb_persona] FOREIGN KEY ([IdPersona]) REFERENCES [dbo].[tb_persona] ([IdPersona]),
     CONSTRAINT [FK_ro_empleado_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 
 
 

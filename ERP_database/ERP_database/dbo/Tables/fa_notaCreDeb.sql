@@ -35,11 +35,13 @@
     CONSTRAINT [FK_fa_notaCreDeb_fa_cliente] FOREIGN KEY ([IdEmpresa], [IdCliente]) REFERENCES [dbo].[fa_cliente] ([IdEmpresa], [IdCliente]),
     CONSTRAINT [FK_fa_notaCreDeb_fa_cliente_contactos] FOREIGN KEY ([IdEmpresa], [IdCliente], [IdContacto]) REFERENCES [dbo].[fa_cliente_contactos] ([IdEmpresa], [IdCliente], [IdContacto]),
     CONSTRAINT [FK_fa_notaCreDeb_fa_PuntoVta] FOREIGN KEY ([IdEmpresa], [IdSucursal], [IdPuntoVta]) REFERENCES [dbo].[fa_PuntoVta] ([IdEmpresa], [IdSucursal], [IdPuntoVta]),
-    CONSTRAINT [FK_fa_notaCreDeb_fa_TipoNota] FOREIGN KEY ([IdTipoNota]) REFERENCES [dbo].[fa_TipoNota] ([IdTipoNota]),
+    CONSTRAINT [FK_fa_notaCreDeb_fa_TipoNota1] FOREIGN KEY ([IdEmpresa], [IdTipoNota]) REFERENCES [dbo].[fa_TipoNota] ([IdEmpresa], [IdTipoNota]),
     CONSTRAINT [FK_fa_notaCreDeb_in_devolucion_inven] FOREIGN KEY ([dev_IdEmpresa], [dev_IdDev_Inven]) REFERENCES [dbo].[in_devolucion_inven] ([IdEmpresa], [IdDev_Inven]),
     CONSTRAINT [FK_fa_notaCreDeb_tb_bodega] FOREIGN KEY ([IdEmpresa], [IdSucursal], [IdBodega]) REFERENCES [dbo].[tb_bodega] ([IdEmpresa], [IdSucursal], [IdBodega]),
     CONSTRAINT [FK_fa_notaCreDeb_tb_sis_Documento_Tipo_Talonario] FOREIGN KEY ([IdEmpresa], [CodDocumentoTipo], [Serie2], [Serie1], [NumNota_Impresa]) REFERENCES [dbo].[tb_sis_Documento_Tipo_Talonario] ([IdEmpresa], [CodDocumentoTipo], [PuntoEmision], [Establecimiento], [NumDocumento])
 );
+
+
 
 
 
