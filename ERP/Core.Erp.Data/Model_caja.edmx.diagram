@@ -28,6 +28,7 @@
         <AssociationConnector Association="Model_caja.FK_caj_Caja_Movimiento_caj_Caja" />
         <AssociationConnector Association="Model_caja.FK_cp_conciliacion_Caja_caj_Caja" />
         <AssociationConnector Association="Model_caja.FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo" />
+        <EntityTypeShape EntityType="Model_caja.vwcaj_Caja_Movimiento_por_conciliar" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

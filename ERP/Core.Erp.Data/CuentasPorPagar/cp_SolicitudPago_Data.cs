@@ -128,7 +128,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdProveedor = info.IdProveedor,
                         Concepto = info.Concepto,
                         Estado = true,
-                        Fecha = info.Fecha,
+                        Fecha = info.Fecha.Date,
                         Solicitante = info.Solicitante,
                         Valor = info.Valor,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
@@ -159,7 +159,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     Entity.IdSucursal = info.IdSucursal;
                     Entity.IdProveedor = info.IdProveedor;
                     Entity.Concepto = info.Concepto;
-                    Entity.Fecha = info.Fecha;
+                    Entity.Fecha = info.Fecha.Date;
                     Entity.Solicitante = info.Solicitante;
                     Entity.Valor = info.Valor;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;

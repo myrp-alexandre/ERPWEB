@@ -30,6 +30,10 @@ namespace Core.Erp.Info.Caja
         public string Observacion { get; set; }
         public string pe_nombreCompleto { get; set; }
         public bool se_modifico { get; set; }
+
+        public string tm_descripcion { get; set; }
+        public string IdTipo_Persona { get; set; }
+        public decimal IdEntidad { get; set; }
         #endregion
 
     }

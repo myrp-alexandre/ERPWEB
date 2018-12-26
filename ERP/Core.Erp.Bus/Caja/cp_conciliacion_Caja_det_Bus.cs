@@ -34,5 +34,18 @@ namespace Core.Erp.Bus.Caja
                 throw;
             }
         }
+
+        public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> get_list_x_movimientos_caja(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_x_movimientos_caja(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -22,7 +22,14 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Solicitante">Solicitante*</label>
+                    @Html.TextBoxFor(q => q.Solicitante, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Solicitante, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-4 col-md-2">
                 <div class="form-group">
                     <label for="">Fecha*</label>
                     <div class="input-group date">
@@ -55,14 +62,7 @@
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Solicitante">Solicitante*</label>
-                    @Html.TextBoxFor(q => q.Solicitante, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Solicitante, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="Valor">Valor*</label>
                     @Html.TextBoxFor(q => q.Valor, new { @class = "form-control" })
