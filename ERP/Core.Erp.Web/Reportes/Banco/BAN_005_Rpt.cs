@@ -21,9 +21,12 @@ namespace Core.Erp.Web.Reportes.Banco
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdTipocbte = p_IdTipocbte.Value == null ? 0 : Convert.ToInt32(p_IdTipocbte.Value);
             decimal IdCbteCble = p_IdCbteCble.Value == null ? 0 : Convert.ToDecimal(p_IdCbteCble.Value);
+            int NumDesde = p_NumDesde.Value == null ? 0 : Convert.ToInt32(p_NumDesde.Value);
+            int NumHasta = p_NumHasta.Value == null ? 0 : Convert.ToInt32(p_NumHasta.Value);
+            int IdBanco = p_IdBanco.Value == null ? 0 : Convert.ToInt32(p_IdBanco.Value);
 
             BAN_005_Bus bus_rpt = new BAN_005_Bus();
-            List<BAN_005_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdTipocbte, IdCbteCble);
+            List<BAN_005_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdTipocbte, IdCbteCble, NumDesde, NumHasta, IdBanco);
             this.DataSource = lst_rpt;
         }
     }

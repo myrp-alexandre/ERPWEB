@@ -58,6 +58,9 @@
             this.xrLabel7 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel8 = new DevExpress.XtraReports.UI.XRLabel();
+            this.p_NumDesde = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_NumHasta = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdBanco = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -355,6 +358,21 @@
             this.xrLabel8.StylePriority.UseFont = false;
             this.xrLabel8.TextFormatString = "{0:dd-MM-yy}";
             // 
+            // p_NumDesde
+            // 
+            this.p_NumDesde.Name = "p_NumDesde";
+            this.p_NumDesde.Visible = false;
+            // 
+            // p_NumHasta
+            // 
+            this.p_NumHasta.Name = "p_NumHasta";
+            this.p_NumHasta.Visible = false;
+            // 
+            // p_IdBanco
+            // 
+            this.p_IdBanco.Name = "p_IdBanco";
+            this.p_IdBanco.Visible = false;
+            // 
             // BAN_006_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -374,7 +392,10 @@
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_IdTipoCbte,
-            this.p_IdCbteCble});
+            this.p_IdCbteCble,
+            this.p_NumDesde,
+            this.p_NumHasta,
+            this.p_IdBanco});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.BAN_006_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
@@ -411,5 +432,8 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel7;
         private DevExpress.XtraReports.UI.XRLabel xrLabel1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel8;
+        public DevExpress.XtraReports.Parameters.Parameter p_NumDesde;
+        public DevExpress.XtraReports.Parameters.Parameter p_NumHasta;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdBanco;
     }
 }

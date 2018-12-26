@@ -9559,6 +9559,9 @@
     <Content Include="Areas\RRHH\Views\PrestamosAprobacion\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\HorarioPlanificacion\_CmbEmpleado_Planificacion.cshtml" />
     <Content Include="Areas\RRHH\Views\Prestamos\Abono.cshtml" />
+    <Content Include="Areas\RRHH\Views\Prestamos\_GridViewPartial_prestamos_abono_det.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\BAN_006_Masivo.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\BAN_005_Masivo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9675,6 +9678,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

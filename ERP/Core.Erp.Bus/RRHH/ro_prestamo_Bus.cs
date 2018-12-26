@@ -22,6 +22,31 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
+        public List<ro_prestamo_Info> get_list_aprobacion(int IdEmpresa, DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                return odata.get_list_aprobacion(IdEmpresa, fechaInicio, fechaFin);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool aprobar_prestamo(int IdEmpresa, string[] Lista, string IdUsuarioAprueba)
+        {
+            try
+            {
+                return odata.aprobar_prestamo(IdEmpresa, Lista, IdUsuarioAprueba);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public ro_prestamo_Info get_info(int IdEmpresa, decimal IdEmpleado, decimal IdPrestamo)
         {
             try
