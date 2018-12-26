@@ -387,6 +387,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GenerarPrestamo(int IdEmpresa=0, double Valor_pendiente, decimal IdTransaccionSession)
+        {
+
+
+            info.IdEmpresa = IdEmpresa;
+            info.Valor_pendiente = Valor_pendiente;
+           
+         var detalle=   Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
     }
 

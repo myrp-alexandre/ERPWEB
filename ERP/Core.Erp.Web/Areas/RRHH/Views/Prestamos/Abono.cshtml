@@ -12,8 +12,8 @@
 @using (Html.BeginForm("Abono", "Prestamos", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdPrestamo);
-    @Html.HiddenFor(q => q.IdTransaccionSession);
-    @Html.HiddenFor(q => q.IdEmpresa);
+    @Html.HiddenFor(q => q.IdTransaccionSession,new { @id= "IdTransaccionSession" } );
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" });
 
     <div class="row">
         <div class="col-md-12">
@@ -40,93 +40,74 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Valor">Monto solicitado*</label>
-                    @Html.TextBoxFor(q => q.MontoSol, new { @class = "form-control", @id = "MontoSol",   })
+                    @Html.TextBoxFor(q => q.MontoSol, new { @class = "form-control", @id = "MontoSol", })
                     @Html.ValidationMessageFor(q => q.MontoSol, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="Fecha_PriPago">Fecha primer pago*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q=> q.Fecha_PriPago, settings =>
-                    {
-                        settings.Name = "Fecha_PriPago";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.Fecha_PriPago, "", new { @class = "text-danger" })
+                    <label for="Valor">Saldo*</label>
+                    @Html.TextBoxFor(q => q.Valor_pendiente, new { @class = "form-control", @id = "Valor_pendiente", })
+                    @Html.ValidationMessageFor(q => q.Valor_pendiente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="box-footer">
+                        <button type="button" onclick="Aplicar();" id="btnconsultar" class="btn btn-primary">Aplicar</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="Valor">Nímero cuotas*</label>
-                    @Html.TextBoxFor(q => q.NumCuotas, new { @class = "form-control", @id = "NumCuotas" })
-                    @Html.ValidationMessageFor(q => q.NumCuotas, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            
-           
-           
         </div>
-
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="Valor">Observaciones*</label>
-                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Valor">Observaciones*</label>
+                            @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
+
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
 
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Valor">Detalle prestamos*</label>
+                            @Html.Action("GridViewPartial_prestamos_det")
 
-                <div class="form-group">
-                    <label for="Valor">Detalle prestamos*</label>
-                    @Html.Action("GridViewPartial_prestamos_det")
-
+                        </div>
+                    </div>
                 </div>
+
             </div>
-        </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a class="btn btn-default" href="@Url.Action("Index","Prestamos",new { Area = "RRHH" },null)">Cancelar</a>
+            </div>
 
-    </div>
-    <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Prestamos",new { Area = "RRHH" },null)">Cancelar</a>
-    </div>
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+            }
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-}
-
-<script>
+            <script>
     function Generar()
             {
-                 var datos = {
-                     MontoSol: $("#MontoSol").val(),
-                     Fecha_PriPago: Fecha_PriPago.GetValuel(),
-                     NumCuotas: $("#NumCuotas").val(),
-                     descuento_mensual: descuento_mensual.GetValue(),
-                     descuento_quincena: descuento_quincena.GetValue(),
-                     descuento_men_quin: descuento_men_quin.GetValue()
+        var datos = {
+                     IdEmpresa: $("#IdEmpresa").val(),
+                     Valor_pendiente: $("#Valor_pendiente").val(),
+                     IdTransaccionSession: $("#IdTransaccionSession").val()
                 }
                 $.ajax({
                     type: 'POST',
                     data: JSON.stringify(datos),
-                    url: '@Url.Action("GenerarPrestamo", "Prestamos", new { Area = "RRHH" })',
+                    url: '@Url.Action("AplicarAbono", "Prestamos", new { Area = "RRHH" })',
                     async: false,
                     bDeferRender: true,
                     bProcessing: true,
@@ -143,4 +124,4 @@
                     }
                     });
 };
-</script>
+            </script>
