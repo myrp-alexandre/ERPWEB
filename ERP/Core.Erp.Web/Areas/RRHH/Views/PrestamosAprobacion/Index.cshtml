@@ -8,10 +8,27 @@
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
+    var selectedIDs;
 
-@using (Html.BeginForm())
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdPrestamo", GetSelectedFieldValuesCallback);
+
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+</script>
+@using (Html.BeginForm("Index", "PrestamosAprobacion", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
-
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="box ">
         <div class="box-header with-border">
             <div class="row">
@@ -93,14 +110,47 @@
         <div class="box-body">
             @Html.Action("GridViewPartial_prestamos_aprobacion", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal })
         </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" id="btn_aprobar" onclick="aprobar();">Aprobar</button>
+                            @*<button type="button" class="btn btn-danger" id="btn_rechazar" onclick="aprobar();">Anular</button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- /.box-body -->
         <div class="box-footer">
             [@Session["IdEmpresa"]] @Session["nom_empresa"]
         </div>
         <!-- /.box-footer-->
     </div>
-
-
 }
-
+<script type="text/javascript">
+     function aprobar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IDs: selectedIDs,
+            }
+        $("#btn_aprobar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("aprobar", "AprobacionPrestamo", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
 

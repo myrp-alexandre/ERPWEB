@@ -83,6 +83,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipocbte, IdCbteCble, "ESTCBENT");
             return View(model);
         }
+        public ActionResult BAN_005_Masivo(int IdTipocbte = 0, decimal IdCbteCble = 0, int NumDesde = 0, int NumHasta = 0, int IdBanco = 0)
+        {
+            BAN_005_Rpt model = new BAN_005_Rpt();
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdTipocbte.Value = IdTipocbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
+            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipocbte, IdCbteCble, "ESTCBENT");
+            return View(model);
+        }
+
         public ActionResult BAN_006(int IdTipoCbte = 0, decimal IdCbteCble = 0)
         {
             BAN_006_Rpt model = new BAN_006_Rpt();

@@ -34,6 +34,10 @@
             settings.Settings.ShowHeaderFilterButton = true;
             settings.SettingsBehavior.AllowSelectByRowClick = true;
 
+            //Configuración checkbox
+            settings.CommandColumn.Visible = true;
+            settings.CommandColumn.ShowSelectCheckbox = true;
+            settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
 
             settings.SettingsExport.EnableClientSideExportAPI = true;
             settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
@@ -163,6 +167,8 @@
                 column.Width = System.Web.UI.WebControls.Unit.Percentage(4);
             });
 
+            settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+            settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
         });
 }
 @grid.Bind(Model).GetHtml()
