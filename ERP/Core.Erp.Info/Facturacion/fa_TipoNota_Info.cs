@@ -33,9 +33,6 @@ namespace Core.Erp.Info.Facturacion
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
         public string MotiAnula { get; set; }
-
-        //campos que no existen en la tabla
-
-        public List<fa_TipoNota_x_Empresa_x_Sucursal_Info> Lst_fa_TipoNota_x_Empresa_x_Sucursal { get; set; }
+        
     }
 }
