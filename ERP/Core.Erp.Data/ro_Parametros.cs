@@ -29,5 +29,8 @@ namespace Core.Erp.Data
         public string IdTipo_op_prestamos { get; set; }
         public string IdTipo_op_acta_finiquito { get; set; }
         public string IdTipo_op_sueldo_por_pagar { get; set; }
+        public string EstadoCreacionPrestamos { get; set; }
+    
+        public virtual ro_catalogo ro_catalogo { get; set; }
     }
 }

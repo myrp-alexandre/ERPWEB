@@ -106,6 +106,8 @@ namespace Core.Erp.Data
         public Nullable<double> Valor_horas_matutino { get; set; }
         public Nullable<double> Valor_horas_brigada { get; set; }
         public Nullable<double> Valor_horas_extras { get; set; }
+        public bool GozaMasDeQuinceDiasVaciones { get; set; }
+        public double DiasVacaciones { get; set; }
     
         public virtual ICollection<ro_Acta_Finiquito> ro_Acta_Finiquito { get; set; }
         public virtual ICollection<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }

@@ -29,5 +29,7 @@ namespace Core.Erp.Data
         public Nullable<double> Valor_maximo_horas_mat { get; set; }
         public Nullable<double> Valor_horas_brigada { get; set; }
         public Nullable<double> Valor_horas_extras { get; set; }
+        public bool GozaMasDeQuinceDiasVaciones { get; set; }
+        public double DiasVacaciones { get; set; }
     }
 }

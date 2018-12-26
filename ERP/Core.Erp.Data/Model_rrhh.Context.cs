@@ -112,13 +112,10 @@ namespace Core.Erp.Data
         public DbSet<vwro_HorasProfesores_det> vwro_HorasProfesores_det { get; set; }
         public DbSet<vwro_nomina_sin_percebir_sueldo> vwro_nomina_sin_percebir_sueldo { get; set; }
         public DbSet<ro_empleado> ro_empleado { get; set; }
-        public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
-        public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public DbSet<ro_FormulaHorasRecargo> ro_FormulaHorasRecargo { get; set; }
         public DbSet<vwRo_Solicitud_Vacaciones> vwRo_Solicitud_Vacaciones { get; set; }
         public DbSet<vwro_empleado_novedad_det> vwro_empleado_novedad_det { get; set; }
         public DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
-        public DbSet<ro_Parametros> ro_Parametros { get; set; }
         public DbSet<ro_NominasPagosCheques> ro_NominasPagosCheques { get; set; }
         public DbSet<ro_archivos_bancos_generacion> ro_archivos_bancos_generacion { get; set; }
         public DbSet<vwro_archivos_bancos_generacion> vwro_archivos_bancos_generacion { get; set; }
@@ -129,6 +126,9 @@ namespace Core.Erp.Data
         public DbSet<ro_prestamo> ro_prestamo { get; set; }
         public DbSet<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }
         public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
+        public DbSet<ro_Parametros> ro_Parametros { get; set; }
+        public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
+        public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
