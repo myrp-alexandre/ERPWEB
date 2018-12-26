@@ -29,6 +29,17 @@
         <div class="col-md-6">
             <div class="col-md-12">
                 <div class="form-group">
+                    <label for="IdCtaCble">Cuenta contable*</label>
+                    @Html.Partial("_CmbCuenta_TipoNota", Model)
+                    @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="col-md-12">
+                <div class="form-group">
                     <label for="Tipo">Tipo*</label>
                     @Html.DropDownListFor(q => q.Tipo, new SelectList(ViewBag.lst_tipos, "Key", "Value"), new { @class = "form-control", @id = "Tipo" })
                     @Html.ValidationMessageFor(q => q.Tipo, "", new { @class = "form", @role = "text-danger" })
@@ -36,10 +47,16 @@
             </div>
         </div>
 
-        <div class="col-md-6" id="div_movimiento">
+        <div class="col-md-3" id="div_movimiento">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="GeneraMoviInven">@Html.CheckBoxFor(q => q.GeneraMoviInven, new { @id = "GeneraMoviInven" }) Genera movimiento inventario</label>
+                    <label for=""></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.GeneraMoviInven, settings =>
+               {
+                   settings.Name = "GeneraMoviInven";
+                   settings.Text = "Genera movimiento inventario";
+               }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.GeneraMoviInven, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
