@@ -61,7 +61,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.lst_caja= lst_caja;
 
 
-            var lst_tiponota = bus_tiponota.get_list("D", false);
+            var lst_tiponota = bus_tiponota.get_list(IdEmpresa, "D", false);
             ViewBag.lst_tiponota = lst_tiponota;
         }
 

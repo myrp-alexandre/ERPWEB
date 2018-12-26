@@ -12,8 +12,6 @@ namespace Core.Erp.Info.RRHH
         public decimal IdPrestamo { get; set; }
         public int NumCuota { get; set; }
         public double SaldoInicial { get; set; }
-        public double Interes { get; set; }
-        public double AbonoCapital { get; set; }
         public double TotalCuota { get; set; }
         public double Saldo { get; set; }
         public System.DateTime FechaPago { get; set; }

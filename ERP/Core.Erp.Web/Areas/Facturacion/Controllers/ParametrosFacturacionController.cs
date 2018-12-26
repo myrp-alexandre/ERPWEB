@@ -64,7 +64,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_caja = bus_caja.get_list(IdEmpresa, false);
             ViewBag.lst_caja = lst_caja;
 
-            var lst_nota = bus_nota.get_list(false);
+            var lst_nota = bus_nota.get_list(IdEmpresa, false);
             ViewBag.lst_nota = lst_nota;
         }
 

@@ -9,11 +9,11 @@ namespace Core.Erp.Bus.Facturacion
     {
         fa_TipoNota_Data odata = new fa_TipoNota_Data();
     
-        public List<fa_TipoNota_Info> get_list(bool mostrar_anulados)
+        public List<fa_TipoNota_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(mostrar_anulados);
+                return odata.get_list(IdEmpresa, mostrar_anulados);
             }
             catch (Exception)
             {
@@ -21,11 +21,11 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
-        public List<fa_TipoNota_Info> get_list(string Tipo, bool mostrar_anulados)
+        public List<fa_TipoNota_Info> get_list(int IdEmpresa, string Tipo, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(Tipo, mostrar_anulados);
+                return odata.get_list(IdEmpresa, Tipo, mostrar_anulados);
             }
             catch (Exception)
             {
@@ -33,11 +33,11 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
-        public fa_TipoNota_Info get_info(int IdTipoNota)
+        public fa_TipoNota_Info get_info(int IdEmpresa, int IdTipoNota)
         {
             try
             {
-                return odata.get_info(IdTipoNota);
+                return odata.get_info(IdEmpresa, IdTipoNota);
             }
             catch (Exception)
             {
@@ -45,7 +45,6 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
-
         public bool guardarDB(fa_TipoNota_Info info)
         {
             try
