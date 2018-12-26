@@ -1,4 +1,5 @@
 @using System.Web.UI.WebControls;
+@using Core.Erp.Web.Helps;
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
@@ -114,7 +115,7 @@
                 q.MinValue = 0;
                 q.Width = Unit.Percentage(100);
             });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
@@ -130,7 +131,7 @@
                 p.ValueType = typeof(string);
                 p.DataSource = ViewBag.lst_impuesto;
             });
-            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
@@ -180,8 +181,15 @@
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "pd_iva").DisplayFormat = "{0:n2}";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "pd_total").DisplayFormat = "{0:n2}";
         settings.Settings.ShowFooter = true;
-
-        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdCliente'] = IdCliente.GetValue(); e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        settings.CellEditorInitialize = (sender, e) =>
+        {
+            if (e.Column.FieldName == "pd_por_descuento_uni" && SessionFixed.EsSuperAdmin != "True")
+            {
+                MVCxGridView g = sender as MVCxGridView;
+                e.Editor.ReadOnly = true;
+            }
+        };
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdCliente'] = IdCliente.GetValue(); e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); e.customArgs['NivelDescuento'] = $('#IdNivel').val();}";
     });
 }
 @grid.Bind(Model).GetHtml()
