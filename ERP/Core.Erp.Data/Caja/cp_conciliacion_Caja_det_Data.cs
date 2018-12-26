@@ -112,7 +112,7 @@ namespace Core.Erp.Data.Caja
                              where q.IdEmpresa == IdEmpresa
                              select new cp_conciliacion_Caja_det_x_ValeCaja_Info
                              {
-                                 IdEmpresa_movcaja = q.IdEmpresa,
+                                 IdEmpresa = q.IdEmpresa,
                                  IdTipocbte_movcaja = q.IdTipocbte,
                                  IdCbteCble_movcaja = q.IdCbteCble,
                                  IdConciliacion_Caja = q.IdCaja,
