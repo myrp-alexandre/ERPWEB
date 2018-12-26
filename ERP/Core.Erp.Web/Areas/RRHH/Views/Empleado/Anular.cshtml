@@ -142,13 +142,7 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-
-
-        </div>
-    </div>
+    
     <div id="Tabs" role="tabpanel">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
@@ -557,9 +551,8 @@
                     </div>
                 </div>
 
-                <div class="row" id="horas">
+                <div class="row">
                     <div class="col-md-12">
-
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="Pago_por_horas"></label>
@@ -567,51 +560,52 @@
                            {
                                settings.Name = "Pago_por_horas";
                                settings.Text = "Pago por horas";
-
+                               settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_horas();}";
                            }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.Pago_por_horas, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Valor_horas">Valor hora vespertina</label>
-                                @Html.TextBoxFor(q => q.Valor_horas_vespertina, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Valor_horas_vespertina, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Valor_maximo_horas">Horas máxima vespertina</label>
-                                @Html.TextBoxFor(q => q.Valor_maximo_horas_vesp, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Valor_maximo_horas_vesp, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Valor_horas">Valor hora matutina</label>
-                                @Html.TextBoxFor(q => q.Valor_horas_matutino, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Valor_horas_matutino, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Valor_maximo_horas">Horas máxima matutina</label>
-                                @Html.TextBoxFor(q => q.Valor_maximo_horas_mat, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Valor_maximo_horas_mat, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Valor_horas">Valor hora brigada</label>
-                                @Html.TextBoxFor(q => q.Valor_horas_brigada, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Valor_horas_brigada, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                        <div id="DivPagoHoras">
 
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_horas">Valor hora vespertina</label>
+                                    @Html.TextBoxFor(q => q.Valor_horas_vespertina, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_horas_vespertina, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_maximo_horas">Horas máxima vespertina</label>
+                                    @Html.TextBoxFor(q => q.Valor_maximo_horas_vesp, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_maximo_horas_vesp, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_horas">Valor hora matutina</label>
+                                    @Html.TextBoxFor(q => q.Valor_horas_matutino, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_horas_matutino, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_maximo_horas">Horas máxima matutina</label>
+                                    @Html.TextBoxFor(q => q.Valor_maximo_horas_mat, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_maximo_horas_mat, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_horas">Valor hora brigada</label>
+                                    @Html.TextBoxFor(q => q.Valor_horas_brigada, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_horas_brigada, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
-
 
                 <div class="row">
                     <div class="col-md-12">
@@ -660,13 +654,32 @@
                                 @Html.ValidationMessageFor(q => q.Tiene_ingresos_compartidos, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
+
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="GozaMasDeQuinceDiasVaciones"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.GozaMasDeQuinceDiasVaciones, settings =>
+                           {
+                               settings.Name = "GozaMasDeQuinceDiasVaciones";
+                               settings.Text = "Goza más de 15 días de vacaciones";
+                               settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){dias_vacaciones();}";
+                           }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.GozaMasDeQuinceDiasVaciones, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div id="Divdias">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="DiasVacaciones">Días vacaciones</label>
+                                    @Html.TextBoxFor(q => q.DiasVacaciones, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.DiasVacaciones, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-
-
-
-
 
             </div>
 
@@ -806,7 +819,7 @@
     </div>
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-danger">Guardar</button>
+        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Empleado", new { Area ="RRHH" }, null)">Cancelar</a>
     </div>
 
@@ -820,6 +833,8 @@
 
 
 <script>
+    mostrar_horas();
+    dias_vacaciones();
     $("#pe_cedulaRuc").keyup(function () {
         validar();
     });
@@ -846,14 +861,67 @@
     }
 
     function mostrar_horas() {
-        if (!Pago_por_horas.GetValue()) {
-            $("#horas").show();
-
+        var Pago = Pago_por_horas.GetValue();
+        if (Pago == true) {
+            $("#DivPagoHoras").show();
         }
         else {
-            $("#horas").hide();
+            $("#DivPagoHoras").hide();
         }
     };
 
+
+    function dias_vacaciones() {
+        var dias = GozaMasDeQuinceDiasVaciones.GetValue();
+        if (dias == true) {
+            $("#Divdias").show();
+        }
+        else {
+            $("#Divdias").hide();
+        }
+    };
+
+    function nombre_imagen() {
+        var datos = {
+            IdEmpleado: $("#IdEmpleado").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("nombre_imagen", "Empleado", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
+    function actualizar_div() {
+        var datos = {
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizar_div", "ActivoFijo", new { Area = "ActivoFijo" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+
+                //$("#uploadedImage").load();
+              //  $("#uploadedImage").attr("src",//Url.Content(Core.Erp.Web.Helps.SessionFixed.NombreImagen));
+
+            },
+            error: function (error) {
+                    }
+                });
+    }
 
 </script>
