@@ -455,6 +455,8 @@
     <Compile Include="Areas\RRHH\Controllers\PeriodoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PeriodosPorNominaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PermisoEmpleadoController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\PrestamosAbonoController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\PrestamosAprobacionController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PrestamosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProcesarRolController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProyeccionDeGastosController.cs" />
@@ -9285,7 +9287,6 @@
     <Content Include="Areas\Inventario\Views\Revision\Index.cshtml" />
     <Content Include="Areas\Inventario\Views\Revision\_CmbProductoPadre_Revision.cshtml" />
     <Content Include="Areas\RRHH\Views\Prestamos\_CmbEmpleado_prestamos.cshtml" />
-    <Content Include="Areas\RRHH\Views\Prestamos\_CmbEmpleado_autoriza.cshtml" />
     <Content Include="Areas\RRHH\Views\Vacaciones\_CmbEmpleado_vacaciones.cshtml" />
     <Content Include="Areas\RRHH\Views\Vacaciones\_CmbEmpleado_autoriza_vacaciones.cshtml" />
     <Content Include="Areas\Compras\Views\OrdenCompraLocal\_CmbProducto_Compras.cshtml" />
@@ -9556,6 +9557,10 @@
     <Content Include="Areas\RRHH\Views\AjustesAnticipo\_GridViewPartial_ajuste_anticipo.cshtml" />
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_caja_movimiento.cshtml" />
     <Content Include="Areas\Facturacion\Views\TipoNota\_CmbCuenta_TipoNota.cshtml" />
+    <Content Include="Areas\RRHH\Views\PrestamosAbono\_GridViewPartial_prestamos_abono.cshtml" />
+    <Content Include="Areas\RRHH\Views\PrestamosAbono\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\PrestamosAprobacion\_GridViewPartial_prestamos_aprobacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\PrestamosAprobacion\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9638,6 +9643,7 @@
     <Folder Include="Areas\Produccion\Views\Shared\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
+    <Folder Include="Areas\RRHH\Views\AprobacionPrestamos\" />
     <Folder Include="Areas\RRHH\Views\SancionesPorAtraso\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
