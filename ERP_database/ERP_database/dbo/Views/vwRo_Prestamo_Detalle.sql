@@ -2,12 +2,10 @@
 AS
 SELECT        dbo.ro_prestamo.IdEmpresa, dbo.ro_prestamo.IdEmpleado, dbo.ro_prestamo.IdPrestamo, dbo.ro_prestamo.IdRubro, dbo.ro_rubro_tipo.ru_codRolGen, dbo.ro_rubro_tipo.ru_descripcion, 
                          dbo.ro_prestamo.Estado AS EstadoPrestamo, dbo.ro_prestamo_detalle.Saldo, dbo.ro_prestamo_detalle.FechaPago, dbo.ro_prestamo_detalle.EstadoPago, dbo.ro_prestamo_detalle.Estado AS EstadoDetalle, 
-                         dbo.ro_prestamo_detalle.TotalCuota, dbo.ro_prestamo_detalle.NumCuota, dbo.ro_prestamo_detalle.SaldoInicial, dbo.ro_prestamo_detalle.Interes, dbo.ro_prestamo_detalle.AbonoCapital, 
-                         dbo.ro_prestamo_detalle.IdNominaTipoLiqui
+                         dbo.ro_prestamo_detalle.TotalCuota, dbo.ro_prestamo_detalle.NumCuota, dbo.ro_prestamo_detalle.SaldoInicial, dbo.ro_prestamo_detalle.IdNominaTipoLiqui
 FROM            dbo.ro_prestamo INNER JOIN
                          dbo.ro_prestamo_detalle ON dbo.ro_prestamo.IdEmpresa = dbo.ro_prestamo_detalle.IdEmpresa AND dbo.ro_prestamo.IdPrestamo = dbo.ro_prestamo_detalle.IdPrestamo INNER JOIN
                          dbo.ro_rubro_tipo ON dbo.ro_prestamo.IdRubro = dbo.ro_rubro_tipo.IdRubro AND dbo.ro_prestamo.IdEmpresa = dbo.ro_rubro_tipo.IdEmpresa
-
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 

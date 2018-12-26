@@ -1,35 +1,75 @@
-﻿CREATE TABLE [dbo].[ro_prestamo] (
-    [IdEmpresa]          INT           NOT NULL,
-    [IdPrestamo]         NUMERIC (18)  NOT NULL,
-    [IdEmpleado]         NUMERIC (18)  NOT NULL,
-    [IdRubro]            VARCHAR (50)  NOT NULL,
-    [IdEmpleado_Aprueba] NUMERIC (18)  NOT NULL,
-    [descuento_mensual]  BIT           NOT NULL,
-    [descuento_quincena] BIT           NOT NULL,
-    [descuento_men_quin] BIT           NOT NULL,
-    [Estado]             CHAR (1)      NOT NULL,
-    [Fecha]              DATETIME      NOT NULL,
-    [MontoSol]           FLOAT (53)    NOT NULL,
-    [TasaInteres]        FLOAT (53)    NOT NULL,
-    [TotalPrestamo]      FLOAT (53)    NOT NULL,
-    [NumCuotas]          INT           NOT NULL,
-    [Fecha_PriPago]      DATETIME      NOT NULL,
-    [Observacion]        VARCHAR (250) NOT NULL,
-    [Tipo_Calculo]       VARCHAR (1)   NULL,
-    [IdUsuario]          VARCHAR (20)  NOT NULL,
-    [Fecha_Transac]      DATETIME      NOT NULL,
-    [IdUsuarioUltMod]    VARCHAR (20)  NULL,
-    [Fecha_UltMod]       DATETIME      NULL,
-    [IdUsuarioUltAnu]    VARCHAR (20)  NULL,
-    [Fecha_UltAnu]       DATETIME      NULL,
-    [nom_pc]             VARCHAR (50)  NULL,
-    [ip]                 VARCHAR (25)  NULL,
-    [MotiAnula]          VARCHAR (200) NULL,
-    [IdTipoCbte]         INT           NULL,
-    [IdCbteCble]         NUMERIC (9)   NULL,
-    [IdOrdenPago]        NUMERIC (9)   NULL,
-    CONSTRAINT [PK_ro_prestamo] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdPrestamo] ASC),
-    CONSTRAINT [FK_ro_prestamo_ro_empleado] FOREIGN KEY ([IdEmpresa], [IdEmpleado]) REFERENCES [dbo].[ro_empleado] ([IdEmpresa], [IdEmpleado]),
-    CONSTRAINT [FK_ro_prestamo_ro_rubro_tipo] FOREIGN KEY ([IdEmpresa], [IdRubro]) REFERENCES [dbo].[ro_rubro_tipo] ([IdEmpresa], [IdRubro])
-);
+﻿
+CREATE TABLE [dbo].[ro_prestamo](
+	[IdEmpresa] [int] NOT NULL,
+	[IdPrestamo] [numeric](18, 0) NOT NULL,
+	[IdEmpleado] [numeric](18, 0) NOT NULL,
+	[IdRubro] [varchar](50) NOT NULL,
+	[descuento_mensual] [bit] NOT NULL,
+	[descuento_quincena] [bit] NOT NULL,
+	[descuento_men_quin] [bit] NOT NULL,
+	[descuento_ben_soc] [bit] NOT NULL,
+	[Estado] [bit] NOT NULL,
+	[Fecha] [datetime] NOT NULL,
+	[MontoSol] [float] NOT NULL,
+	[NumCuotas] [int] NOT NULL,
+	[Fecha_PriPago] [date] NOT NULL,
+	[Observacion] [varchar](max) NOT NULL,
+	[IdEmpresa_dc] [int] NULL,
+	[IdTipoCbte] [int] NULL,
+	[IdCbteCble] [numeric](18, 0) NULL,
+	[IdEmpresa_op] [int] NULL,
+	[IdOrdenPago] [numeric](18, 0) NULL,
+	[IdUsuarioAprueba] [varchar](50) NULL,
+	[EstadoAprob] [varchar](10) NULL,
+	[IdUsuario] [varchar](20) NOT NULL,
+	[Fecha_Transac] [datetime] NOT NULL,
+	[IdUsuarioUltMod] [varchar](20) NULL,
+	[Fecha_UltMod] [datetime] NULL,
+	[IdUsuarioUltAnu] [varchar](20) NULL,
+	[Fecha_UltAnu] [datetime] NULL,
+	[MotiAnula] [varchar](200) NULL,
+ CONSTRAINT [PK_ro_prestamo] PRIMARY KEY CLUSTERED 
+(
+	[IdEmpresa] ASC,
+	[IdPrestamo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[ro_prestamo]  WITH CHECK ADD  CONSTRAINT [FK_ro_prestamo_cp_orden_pago] FOREIGN KEY([IdEmpresa_op], [IdOrdenPago])
+REFERENCES [dbo].[cp_orden_pago] ([IdEmpresa], [IdOrdenPago])
+GO
+
+ALTER TABLE [dbo].[ro_prestamo] CHECK CONSTRAINT [FK_ro_prestamo_cp_orden_pago]
+GO
+
+ALTER TABLE [dbo].[ro_prestamo]  WITH CHECK ADD  CONSTRAINT [FK_ro_prestamo_ct_cbtecble] FOREIGN KEY([IdEmpresa_dc], [IdTipoCbte], [IdCbteCble])
+REFERENCES [dbo].[ct_cbtecble] ([IdEmpresa], [IdTipoCbte], [IdCbteCble])
+GO
+
+ALTER TABLE [dbo].[ro_prestamo] CHECK CONSTRAINT [FK_ro_prestamo_ct_cbtecble]
+GO
+
+ALTER TABLE [dbo].[ro_prestamo]  WITH CHECK ADD  CONSTRAINT [FK_ro_prestamo_ro_catalogo] FOREIGN KEY([EstadoAprob])
+REFERENCES [dbo].[ro_catalogo] ([CodCatalogo])
+GO
+
+ALTER TABLE [dbo].[ro_prestamo] CHECK CONSTRAINT [FK_ro_prestamo_ro_catalogo]
+GO
+
+ALTER TABLE [dbo].[ro_prestamo]  WITH NOCHECK ADD  CONSTRAINT [FK_ro_prestamo_ro_empleado] FOREIGN KEY([IdEmpresa], [IdEmpleado])
+REFERENCES [dbo].[ro_empleado] ([IdEmpresa], [IdEmpleado])
+GO
+
+ALTER TABLE [dbo].[ro_prestamo] CHECK CONSTRAINT [FK_ro_prestamo_ro_empleado]
+GO
+
+ALTER TABLE [dbo].[ro_prestamo]  WITH CHECK ADD  CONSTRAINT [FK_ro_prestamo_ro_rubro_tipo] FOREIGN KEY([IdEmpresa], [IdRubro])
+REFERENCES [dbo].[ro_rubro_tipo] ([IdEmpresa], [IdRubro])
+GO
+
+ALTER TABLE [dbo].[ro_prestamo] CHECK CONSTRAINT [FK_ro_prestamo_ro_rubro_tipo]
+GO
+
 

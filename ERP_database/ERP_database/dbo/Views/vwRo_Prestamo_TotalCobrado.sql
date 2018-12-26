@@ -2,7 +2,7 @@
 AS
 SELECT        IdEmpresa, IdPrestamo, SUM(TotalCuota) AS TotalCobrado
 FROM            dbo.ro_prestamo_detalle
-WHERE        (Estado = 'A')
+WHERE        (Estado = 1)
 GROUP BY IdEmpresa, IdPrestamo, EstadoPago
 HAVING        (EstadoPago = 'CAN') OR
                          (EstadoPago = 'ABO')
