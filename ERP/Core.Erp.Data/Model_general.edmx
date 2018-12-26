@@ -130,26 +130,21 @@
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="codigo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="em_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="codigo" Type="varchar" MaxLength="50" />
+          <Property Name="em_nombre" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="RazonSocial" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="NombreComercial" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="ContribuyenteEspecial" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="ObligadoAllevarConta" Type="varchar" MaxLength="2" Nullable="false" />
-          <Property Name="em_ruc" Type="nvarchar" MaxLength="13" Nullable="false" />
-          <Property Name="em_gerente" Type="nvarchar" MaxLength="50" />
-          <Property Name="em_contador" Type="nvarchar" MaxLength="150" />
-          <Property Name="em_rucContador" Type="nvarchar" MaxLength="20" />
-          <Property Name="em_telefonos" Type="varchar" MaxLength="100" />
-          <Property Name="em_fax" Type="char" MaxLength="20" />
-          <Property Name="em_notificacion" Type="int" />
-          <Property Name="em_direccion" Type="varchar" MaxLength="300" Nullable="false" />
-          <Property Name="em_tel_int" Type="varchar" MaxLength="50" />
+          <Property Name="em_ruc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="em_gerente" Type="varchar" MaxLength="50" />
+          <Property Name="em_contador" Type="varchar" MaxLength="150" />
+          <Property Name="em_rucContador" Type="varchar" MaxLength="50" />
+          <Property Name="em_telefonos" Type="varchar" MaxLength="200" />
+          <Property Name="em_direccion" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="em_logo" Type="image" />
-          <Property Name="em_fondo" Type="image" />
-          <Property Name="em_fechaInicioContable" Type="datetime" Nullable="false" />
+          <Property Name="em_fechaInicioContable" Type="date" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="em_fechaInicioActividad" Type="datetime" />
+          <Property Name="em_fechaInicioActividad" Type="date" Nullable="false" />
           <Property Name="cod_entidad_dinardap" Type="varchar" MaxLength="50" />
           <Property Name="em_Email" Type="varchar" MaxLength="300" />
         </EntityType>
@@ -555,15 +550,15 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_banco_procesos_bancarios_x_em
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdProceso" />
             <PropertyRef Name="IdProceso_bancario_tipo" />
-            <PropertyRef Name="IdBanco" />
             <PropertyRef Name="ba_descripcion" />
             <PropertyRef Name="CodigoLegal" />
             <PropertyRef Name="NombreProceso" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="Expr1" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdProceso" Type="int" Nullable="false" />
           <Property Name="IdProceso_bancario_tipo" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="IdBanco" Type="int" Nullable="false" />
           <Property Name="Codigo_Empresa" Type="varchar" MaxLength="50" />
           <Property Name="ba_descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CodigoLegal" Type="varchar" MaxLength="10" Nullable="false" />
@@ -571,6 +566,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_banco_procesos_bancarios_x_em
           <Property Name="IdTipoNota" Type="int" />
           <Property Name="Se_contabiliza" Type="bit" />
           <Property Name="estado" Type="varchar" MaxLength="1" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="Expr1" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_Ciudad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -657,16 +654,18 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_bodega_x_sucursal' no tiene d
             <PropertyRef Name="IdBodega" />
             <PropertyRef Name="bo_Descripcion" />
             <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="Estado" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="IdBodega" Type="int" Nullable="false" />
           <Property Name="cod_bodega" Type="varchar" MaxLength="50" />
-          <Property Name="bo_Descripcion" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="bo_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="cod_punto_emision" Type="char" MaxLength="3" />
           <Property Name="bo_manejaFacturacion" Type="nchar" MaxLength="1" />
           <Property Name="codigo" Type="varchar" MaxLength="10" />
-          <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1070,14 +1069,15 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
     [vwtb_banco_procesos_bancarios_x_empresa].[IdEmpresa] AS [IdEmpresa], 
     [vwtb_banco_procesos_bancarios_x_empresa].[IdProceso] AS [IdProceso], 
     [vwtb_banco_procesos_bancarios_x_empresa].[IdProceso_bancario_tipo] AS [IdProceso_bancario_tipo], 
-    [vwtb_banco_procesos_bancarios_x_empresa].[IdBanco] AS [IdBanco], 
     [vwtb_banco_procesos_bancarios_x_empresa].[Codigo_Empresa] AS [Codigo_Empresa], 
     [vwtb_banco_procesos_bancarios_x_empresa].[ba_descripcion] AS [ba_descripcion], 
     [vwtb_banco_procesos_bancarios_x_empresa].[CodigoLegal] AS [CodigoLegal], 
     [vwtb_banco_procesos_bancarios_x_empresa].[NombreProceso] AS [NombreProceso], 
     [vwtb_banco_procesos_bancarios_x_empresa].[IdTipoNota] AS [IdTipoNota], 
     [vwtb_banco_procesos_bancarios_x_empresa].[Se_contabiliza] AS [Se_contabiliza], 
-    [vwtb_banco_procesos_bancarios_x_empresa].[estado] AS [estado]
+    [vwtb_banco_procesos_bancarios_x_empresa].[estado] AS [estado], 
+    [vwtb_banco_procesos_bancarios_x_empresa].[IdBanco] AS [IdBanco], 
+    [vwtb_banco_procesos_bancarios_x_empresa].[Expr1] AS [Expr1]
     FROM [dbo].[vwtb_banco_procesos_bancarios_x_empresa] AS [vwtb_banco_procesos_bancarios_x_empresa]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwtb_Ciudad" EntityType="Self.vwtb_Ciudad" store:Type="Views" store:Schema="dbo">
@@ -1136,7 +1136,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
     [vwtb_bodega_x_sucursal].[cod_punto_emision] AS [cod_punto_emision], 
     [vwtb_bodega_x_sucursal].[bo_manejaFacturacion] AS [bo_manejaFacturacion], 
     [vwtb_bodega_x_sucursal].[codigo] AS [codigo], 
-    [vwtb_bodega_x_sucursal].[Su_Descripcion] AS [Su_Descripcion]
+    [vwtb_bodega_x_sucursal].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwtb_bodega_x_sucursal].[Estado] AS [Estado]
     FROM [web].[vwtb_bodega_x_sucursal] AS [vwtb_bodega_x_sucursal]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwtb_comprobantes_no_autorizados" EntityType="Self.vwtb_comprobantes_no_autorizados" store:Type="Views" store:Schema="web">
@@ -1278,7 +1279,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <EntitySet Name="tb_CatalogoTipo" EntityType="Model_general.tb_CatalogoTipo" />
           <EntitySet Name="tb_ciudad" EntityType="Model_general.tb_ciudad" />
           <EntitySet Name="tb_dia" EntityType="Model_general.tb_dia" />
-          <EntitySet Name="tb_empresa" EntityType="Model_general.tb_empresa" />
           <EntitySet Name="tb_mes" EntityType="Model_general.tb_mes" />
           <EntitySet Name="tb_modulo" EntityType="Model_general.tb_modulo" />
           <EntitySet Name="tb_moneda" EntityType="Model_general.tb_moneda" />
@@ -1353,10 +1353,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             <End Role="tb_ciudad" EntitySet="tb_ciudad" />
             <End Role="tb_parroquia" EntitySet="tb_parroquia" />
           </AssociationSet>
-          <AssociationSet Name="FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" Association="Model_general.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa">
-            <End Role="tb_empresa" EntitySet="tb_empresa" />
-            <End Role="tb_sis_Documento_Tipo_x_Empresa" EntitySet="tb_sis_Documento_Tipo_x_Empresa" />
-          </AssociationSet>
           <AssociationSet Name="FK_tb_sis_formulario_tb_modulo" Association="Model_general.FK_tb_sis_formulario_tb_modulo">
             <End Role="tb_modulo" EntitySet="tb_modulo" />
             <End Role="tb_sis_formulario" EntitySet="tb_sis_formulario" />
@@ -1396,10 +1392,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <EntitySet Name="tb_sis_reporte" EntityType="Model_general.tb_sis_reporte" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Model_general.tb_sis_reporte_x_seg_usuario" />
           <EntitySet Name="tbl_TransaccionesAutorizadas" EntityType="Model_general.tbl_TransaccionesAutorizadas" />
-          <AssociationSet Name="FK_tb_sis_reporte_x_seg_usuario_tb_empresa" Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa">
-            <End Role="tb_empresa" EntitySet="tb_empresa" />
-            <End Role="tb_sis_reporte_x_seg_usuario" EntitySet="tb_sis_reporte_x_seg_usuario" />
-          </AssociationSet>
           <AssociationSet Name="FK_tb_sis_reporte_tb_modulo" Association="Model_general.FK_tb_sis_reporte_tb_modulo">
             <End Role="tb_modulo" EntitySet="tb_modulo" />
             <End Role="tb_sis_reporte" EntitySet="tb_sis_reporte" />
@@ -1422,6 +1414,15 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <AssociationSet Name="FK_tb_bodega_tb_sucursal" Association="Model_general.FK_tb_bodega_tb_sucursal">
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
             <End Role="tb_bodega" EntitySet="tb_bodega" />
+          </AssociationSet>
+          <EntitySet Name="tb_empresa" EntityType="Model_general.tb_empresa" />
+          <AssociationSet Name="FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" Association="Model_general.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_sis_Documento_Tipo_x_Empresa" EntitySet="tb_sis_Documento_Tipo_x_Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_reporte_x_seg_usuario_tb_empresa" Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_sis_reporte_x_seg_usuario" EntitySet="tb_sis_reporte_x_seg_usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_tb_sucursal_tb_empresa" Association="Model_general.FK_tb_sucursal_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
@@ -1562,37 +1563,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <Property Name="sdia" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="nemonico" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
           <Property Name="sdiaIngles" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="tb_empresa">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RazonSocial" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="NombreComercial" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="ContribuyenteEspecial" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="ObligadoAllevarConta" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="em_ruc" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
-          <Property Name="em_gerente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="em_contador" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="em_rucContador" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="em_telefonos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="em_fax" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="em_notificacion" Type="Int32" />
-          <Property Name="em_direccion" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="em_tel_int" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_logo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="em_fondo" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="em_fechaInicioContable" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="em_fechaInicioActividad" Type="DateTime" Precision="3" />
-          <Property Name="cod_entidad_dinardap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="em_Email" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_sis_Documento_Tipo_x_Empresa" Relationship="Model_general.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" FromRole="tb_empresa" ToRole="tb_sis_Documento_Tipo_x_Empresa" />
-          <NavigationProperty Name="tb_sis_reporte_x_seg_usuario" Relationship="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa" FromRole="tb_empresa" ToRole="tb_sis_reporte_x_seg_usuario" />
-          <NavigationProperty Name="tb_sucursal" Relationship="Model_general.FK_tb_sucursal_tb_empresa" FromRole="tb_empresa" ToRole="tb_sucursal" />
         </EntityType>
         <EntityType Name="tb_mes">
           <Key>
@@ -1804,8 +1774,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Posicion" Type="Int32" Nullable="false" />
           <Property Name="ApareceCombo_FileReporte" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="tb_empresa" Relationship="Model_general.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" FromRole="tb_sis_Documento_Tipo_x_Empresa" ToRole="tb_empresa" />
           <NavigationProperty Name="tb_sis_Documento_Tipo_Talonario" Relationship="Model_general.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo_x_Empresa" FromRole="tb_sis_Documento_Tipo_x_Empresa" ToRole="tb_sis_Documento_Tipo_Talonario" />
+          <NavigationProperty Name="tb_empresa" Relationship="Model_general.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" FromRole="tb_sis_Documento_Tipo_x_Empresa" ToRole="tb_empresa" />
         </EntityType>
         <EntityType Name="tb_sis_formulario">
           <Key>
@@ -2113,18 +2083,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa">
-          <End Type="Model_general.tb_empresa" Role="tb_empresa" Multiplicity="1" />
-          <End Type="Model_general.tb_sis_Documento_Tipo_x_Empresa" Role="tb_sis_Documento_Tipo_x_Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_empresa">
-              <PropertyRef Name="IdEmpresa" />
-            </Principal>
-            <Dependent Role="tb_sis_Documento_Tipo_x_Empresa">
-              <PropertyRef Name="IdEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tb_sis_formulario_tb_modulo">
           <End Type="Model_general.tb_modulo" Role="tb_modulo" Multiplicity="1" />
           <End Type="Model_general.tb_sis_formulario" Role="tb_sis_formulario" Multiplicity="*" />
@@ -2269,8 +2227,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_empresa" Relationship="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa" FromRole="tb_sis_reporte_x_seg_usuario" ToRole="tb_empresa" />
           <NavigationProperty Name="tb_sis_reporte" Relationship="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_sis_reporte" FromRole="tb_sis_reporte_x_seg_usuario" ToRole="tb_sis_reporte" />
+          <NavigationProperty Name="tb_empresa" Relationship="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa" FromRole="tb_sis_reporte_x_seg_usuario" ToRole="tb_empresa" />
         </EntityType>
         <EntityType Name="tbl_TransaccionesAutorizadas">
           <Key>
@@ -2284,18 +2242,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FechaTransaccion" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <Association Name="FK_tb_sis_reporte_x_seg_usuario_tb_empresa">
-          <End Type="Model_general.tb_empresa" Role="tb_empresa" Multiplicity="1" />
-          <End Type="Model_general.tb_sis_reporte_x_seg_usuario" Role="tb_sis_reporte_x_seg_usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_empresa">
-              <PropertyRef Name="IdEmpresa" />
-            </Principal>
-            <Dependent Role="tb_sis_reporte_x_seg_usuario">
-              <PropertyRef Name="IdEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tb_sis_reporte_tb_modulo">
           <End Type="Model_general.tb_modulo" Role="tb_modulo" Multiplicity="1" />
           <End Type="Model_general.tb_sis_reporte" Role="tb_sis_reporte" Multiplicity="*" />
@@ -2327,16 +2273,18 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             <PropertyRef Name="IdBodega" />
             <PropertyRef Name="bo_Descripcion" />
             <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="Estado" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
           <Property Name="IdBodega" Type="Int32" Nullable="false" />
           <Property Name="cod_bodega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="bo_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="bo_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="cod_punto_emision" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="bo_manejaFacturacion" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="vwtb_banco_procesos_bancarios_x_empresa">
           <Key>
@@ -2347,6 +2295,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             <PropertyRef Name="ba_descripcion" />
             <PropertyRef Name="CodigoLegal" />
             <PropertyRef Name="NombreProceso" />
+            <PropertyRef Name="Expr1" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdProceso" Type="Int32" Nullable="false" />
@@ -2359,6 +2308,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <Property Name="IdTipoNota" Type="Int32" />
           <Property Name="Se_contabiliza" Type="Boolean" />
           <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Expr1" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_persona_tipo">
           <Key>
@@ -2475,6 +2425,56 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             <Dependent Role="tb_bodega">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tb_empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_nombre" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="NombreComercial" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ContribuyenteEspecial" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="em_ruc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_gerente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_contador" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="em_rucContador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_telefonos" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="em_direccion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="em_logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="em_fechaInicioContable" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="em_fechaInicioActividad" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cod_entidad_dinardap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_Email" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_sis_Documento_Tipo_x_Empresa" Relationship="Model_general.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" FromRole="tb_empresa" ToRole="tb_sis_Documento_Tipo_x_Empresa" />
+          <NavigationProperty Name="tb_sis_reporte_x_seg_usuario" Relationship="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa" FromRole="tb_empresa" ToRole="tb_sis_reporte_x_seg_usuario" />
+          <NavigationProperty Name="tb_sucursal" Relationship="Model_general.FK_tb_sucursal_tb_empresa" FromRole="tb_empresa" ToRole="tb_sucursal" />
+        </EntityType>
+        <Association Name="FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa">
+          <End Type="Model_general.tb_empresa" Role="tb_empresa" Multiplicity="1" />
+          <End Type="Model_general.tb_sis_Documento_Tipo_x_Empresa" Role="tb_sis_Documento_Tipo_x_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="tb_sis_Documento_Tipo_x_Empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sis_reporte_x_seg_usuario_tb_empresa">
+          <End Type="Model_general.tb_empresa" Role="tb_empresa" Multiplicity="1" />
+          <End Type="Model_general.tb_sis_reporte_x_seg_usuario" Role="tb_sis_reporte_x_seg_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="tb_sis_reporte_x_seg_usuario">
+              <PropertyRef Name="IdEmpresa" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2618,35 +2618,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
                 <ScalarProperty Name="nemonico" ColumnName="nemonico" />
                 <ScalarProperty Name="sdia" ColumnName="sdia" />
                 <ScalarProperty Name="idDia" ColumnName="idDia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_empresa">
-            <EntityTypeMapping TypeName="Model_general.tb_empresa">
-              <MappingFragment StoreEntitySet="tb_empresa">
-                <ScalarProperty Name="em_Email" ColumnName="em_Email" />
-                <ScalarProperty Name="cod_entidad_dinardap" ColumnName="cod_entidad_dinardap" />
-                <ScalarProperty Name="em_fechaInicioActividad" ColumnName="em_fechaInicioActividad" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="em_fechaInicioContable" ColumnName="em_fechaInicioContable" />
-                <ScalarProperty Name="em_fondo" ColumnName="em_fondo" />
-                <ScalarProperty Name="em_logo" ColumnName="em_logo" />
-                <ScalarProperty Name="em_tel_int" ColumnName="em_tel_int" />
-                <ScalarProperty Name="em_direccion" ColumnName="em_direccion" />
-                <ScalarProperty Name="em_notificacion" ColumnName="em_notificacion" />
-                <ScalarProperty Name="em_fax" ColumnName="em_fax" />
-                <ScalarProperty Name="em_telefonos" ColumnName="em_telefonos" />
-                <ScalarProperty Name="em_rucContador" ColumnName="em_rucContador" />
-                <ScalarProperty Name="em_contador" ColumnName="em_contador" />
-                <ScalarProperty Name="em_gerente" ColumnName="em_gerente" />
-                <ScalarProperty Name="em_ruc" ColumnName="em_ruc" />
-                <ScalarProperty Name="ObligadoAllevarConta" ColumnName="ObligadoAllevarConta" />
-                <ScalarProperty Name="ContribuyenteEspecial" ColumnName="ContribuyenteEspecial" />
-                <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
-                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
-                <ScalarProperty Name="em_nombre" ColumnName="em_nombre" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3051,6 +3022,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <EntitySetMapping Name="vwtb_bodega_x_sucursal">
             <EntityTypeMapping TypeName="Model_general.vwtb_bodega_x_sucursal">
               <MappingFragment StoreEntitySet="vwtb_bodega_x_sucursal">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="bo_manejaFacturacion" ColumnName="bo_manejaFacturacion" />
@@ -3066,6 +3038,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <EntitySetMapping Name="vwtb_banco_procesos_bancarios_x_empresa">
             <EntityTypeMapping TypeName="Model_general.vwtb_banco_procesos_bancarios_x_empresa">
               <MappingFragment StoreEntitySet="vwtb_banco_procesos_bancarios_x_empresa">
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="Se_contabiliza" ColumnName="Se_contabiliza" />
                 <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
@@ -3160,6 +3133,30 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_empresa">
+            <EntityTypeMapping TypeName="Model_general.tb_empresa">
+              <MappingFragment StoreEntitySet="tb_empresa">
+                <ScalarProperty Name="em_Email" ColumnName="em_Email" />
+                <ScalarProperty Name="cod_entidad_dinardap" ColumnName="cod_entidad_dinardap" />
+                <ScalarProperty Name="em_fechaInicioActividad" ColumnName="em_fechaInicioActividad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="em_fechaInicioContable" ColumnName="em_fechaInicioContable" />
+                <ScalarProperty Name="em_logo" ColumnName="em_logo" />
+                <ScalarProperty Name="em_direccion" ColumnName="em_direccion" />
+                <ScalarProperty Name="em_telefonos" ColumnName="em_telefonos" />
+                <ScalarProperty Name="em_rucContador" ColumnName="em_rucContador" />
+                <ScalarProperty Name="em_contador" ColumnName="em_contador" />
+                <ScalarProperty Name="em_gerente" ColumnName="em_gerente" />
+                <ScalarProperty Name="em_ruc" ColumnName="em_ruc" />
+                <ScalarProperty Name="ContribuyenteEspecial" ColumnName="ContribuyenteEspecial" />
+                <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="em_nombre" ColumnName="em_nombre" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
