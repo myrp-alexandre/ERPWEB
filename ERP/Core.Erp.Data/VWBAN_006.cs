@@ -30,5 +30,8 @@ namespace Core.Erp.Data
         public double dc_Valor_Debe { get; set; }
         public Nullable<double> dc_Valor_Haber { get; set; }
         public string cb_Cheque { get; set; }
+        public Nullable<decimal> cb_Cheque_numero { get; set; }
+        public int IdBanco { get; set; }
+        public string Expr1 { get; set; }
     }
 }
