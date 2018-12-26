@@ -455,7 +455,6 @@
     <Compile Include="Areas\RRHH\Controllers\PeriodoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PeriodosPorNominaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PermisoEmpleadoController.cs" />
-    <Compile Include="Areas\RRHH\Controllers\PrestamosAbonoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PrestamosAprobacionController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PrestamosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProcesarRolController.cs" />
@@ -9556,8 +9555,6 @@
     <Content Include="Areas\RRHH\Views\AjustesAnticipo\_GridViewPartial_ajuste_anticipo.cshtml" />
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_caja_movimiento.cshtml" />
     <Content Include="Areas\Facturacion\Views\TipoNota\_CmbCuenta_TipoNota.cshtml" />
-    <Content Include="Areas\RRHH\Views\PrestamosAbono\_GridViewPartial_prestamos_abono.cshtml" />
-    <Content Include="Areas\RRHH\Views\PrestamosAbono\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\PrestamosAprobacion\_GridViewPartial_prestamos_aprobacion.cshtml" />
     <Content Include="Areas\RRHH\Views\PrestamosAprobacion\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\HorarioPlanificacion\_CmbEmpleado_Planificacion.cshtml" />
