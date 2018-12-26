@@ -777,9 +777,13 @@
             // xrTableCell50
             // 
             this.xrTableCell50.Borders = DevExpress.XtraPrinting.BorderSide.Top;
+            this.xrTableCell50.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell50.Name = "xrTableCell50";
             this.xrTableCell50.StylePriority.UseBorders = false;
-            this.xrTableCell50.Text = "Revisado por :";
+            this.xrTableCell50.StylePriority.UseFont = false;
+            this.xrTableCell50.StylePriority.UseTextAlignment = false;
+            this.xrTableCell50.Text = "Revisado por";
+            this.xrTableCell50.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrTableCell50.Weight = 1.0444444444444445D;
             // 
             // xrTable7
@@ -804,9 +808,13 @@
             // xrTableCell12
             // 
             this.xrTableCell12.Borders = DevExpress.XtraPrinting.BorderSide.Top;
+            this.xrTableCell12.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.StylePriority.UseBorders = false;
-            this.xrTableCell12.Text = "Aprobado por :";
+            this.xrTableCell12.StylePriority.UseFont = false;
+            this.xrTableCell12.StylePriority.UseTextAlignment = false;
+            this.xrTableCell12.Text = "Aprobado por";
+            this.xrTableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrTableCell12.Weight = 1.125D;
             // 
             // xrTable6
@@ -819,7 +827,7 @@
             this.xrTable6.SizeF = new System.Drawing.SizeF(235F, 20F);
             this.xrTable6.StylePriority.UseFont = false;
             this.xrTable6.StylePriority.UseTextAlignment = false;
-            this.xrTable6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTable6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // xrTableRow13
             // 
@@ -831,9 +839,11 @@
             // xrTableCell49
             // 
             this.xrTableCell49.Borders = DevExpress.XtraPrinting.BorderSide.Top;
+            this.xrTableCell49.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell49.Name = "xrTableCell49";
             this.xrTableCell49.StylePriority.UseBorders = false;
-            this.xrTableCell49.Text = "Elaborado por :";
+            this.xrTableCell49.StylePriority.UseFont = false;
+            this.xrTableCell49.Text = "Elaborado por";
             this.xrTableCell49.Weight = 1.175D;
             // 
             // p_IdEmpresa

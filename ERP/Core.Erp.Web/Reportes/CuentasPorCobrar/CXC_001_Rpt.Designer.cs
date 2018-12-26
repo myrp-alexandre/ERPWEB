@@ -578,7 +578,7 @@
             this.xrTable7,
             this.xrTable6,
             this.xrTable5});
-            this.ReportFooter.HeightF = 118.75F;
+            this.ReportFooter.HeightF = 113.75F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // Subreporte_diario
@@ -595,9 +595,9 @@
             this.xrTable7.Name = "xrTable7";
             this.xrTable7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow13});
-            this.xrTable7.SizeF = new System.Drawing.SizeF(150F, 25F);
+            this.xrTable7.SizeF = new System.Drawing.SizeF(150F, 20F);
             this.xrTable7.StylePriority.UseTextAlignment = false;
-            this.xrTable7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTable7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // xrTableRow13
             // 
@@ -609,7 +609,7 @@
             // xrTableCell27
             // 
             this.xrTableCell27.Borders = DevExpress.XtraPrinting.BorderSide.Top;
-            this.xrTableCell27.Font = new System.Drawing.Font("Times New Roman", 9F);
+            this.xrTableCell27.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell27.Name = "xrTableCell27";
             this.xrTableCell27.StylePriority.UseBorders = false;
             this.xrTableCell27.StylePriority.UseFont = false;
@@ -622,9 +622,9 @@
             this.xrTable6.Name = "xrTable6";
             this.xrTable6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow12});
-            this.xrTable6.SizeF = new System.Drawing.SizeF(150F, 25F);
+            this.xrTable6.SizeF = new System.Drawing.SizeF(150F, 20F);
             this.xrTable6.StylePriority.UseTextAlignment = false;
-            this.xrTable6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTable6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // xrTableRow12
             // 
@@ -636,7 +636,7 @@
             // xrTableCell28
             // 
             this.xrTableCell28.Borders = DevExpress.XtraPrinting.BorderSide.Top;
-            this.xrTableCell28.Font = new System.Drawing.Font("Times New Roman", 9F);
+            this.xrTableCell28.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell28.Name = "xrTableCell28";
             this.xrTableCell28.StylePriority.UseBorders = false;
             this.xrTableCell28.StylePriority.UseFont = false;
