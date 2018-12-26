@@ -27,8 +27,19 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
         public ActionResult Index()
         {
+
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdNomina = 1;
+            model.IdTipoNomina = 1;
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             cargar_combos(0, 0);
-            return View();
+            return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
