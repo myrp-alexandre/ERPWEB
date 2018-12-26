@@ -14,7 +14,7 @@ namespace Core.Erp.Info.General
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 50")]
         public string codigo { get; set; }
         [Required(ErrorMessage = "El campo nombre es obligatorio")]
-        [StringLength(100, MinimumLength = 1, ErrorMessage = "el campo nombre debe tener mínimo 1 caracter y máximo 100")]
+        [StringLength(300, MinimumLength = 1, ErrorMessage = "el campo nombre debe tener mínimo 1 caracter y máximo 300")]
         public string em_nombre { get; set; }
         [Required(ErrorMessage = "El campo razón social es obligatorio")]
         [StringLength(300, MinimumLength = 1, ErrorMessage = "el campo razón social debe tener mínimo 1 caracter y máximo 300")]
@@ -25,34 +25,26 @@ namespace Core.Erp.Info.General
         [Required(ErrorMessage = "El campo # contribuyente especial es obligatorio")]
         [StringLength(5, MinimumLength = 1, ErrorMessage = "el campo # contribuyente debe tener mínimo 1 caracter y máximo 5")]
         public string ContribuyenteEspecial { get; set; }
-        public string ObligadoAllevarConta { get; set; }
         [Required(ErrorMessage = "El campo RUC es obligatorio")]
-        [StringLength(26, MinimumLength = 1, ErrorMessage = "el campo RUC debe tener mínimo 1 caracter y máximo 26")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo RUC debe tener mínimo 1 caracter y máximo 50")]
         public string em_ruc { get; set; }
-        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo nombre gerente debe tener mínimo 0 caracter y máximo 100")]
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo nombre gerente debe tener mínimo 0 caracter y máximo 50")]
         public string em_gerente { get; set; }
-        [StringLength(300, MinimumLength = 0, ErrorMessage = "el campo nombre contador debe tener mínimo 0 caracter y máximo 300")]
+        [StringLength(150, MinimumLength = 0, ErrorMessage = "el campo nombre contador debe tener mínimo 0 caracter y máximo 150")]
         public string em_contador { get; set; }
-        [StringLength(40, MinimumLength = 0, ErrorMessage = "el campo RUC contador debe tener mínimo 0 caracter y máximo 40")]
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo RUC contador debe tener mínimo 0 caracter y máximo 50")]
         public string em_rucContador { get; set; }
-        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo teléfonos debe tener mínimo 0 caracter y máximo 100")]
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo teléfonos debe tener mínimo 0 caracter y máximo 200")]
         public string em_telefonos { get; set; }
-        [StringLength(20, MinimumLength = 0, ErrorMessage = "el campo fax debe tener mínimo 0 caracter y máximo 20")]
-        public string em_fax { get; set; }
-        public Nullable<int> em_notificacion { get; set; }
         [Required(ErrorMessage = "El campo dirección es obligatorio")]
-        [StringLength(300, MinimumLength = 0, ErrorMessage = "el campo dirección debe tener mínimo 0 caracter y máximo 300")]
+        [StringLength(1000, MinimumLength = 0, ErrorMessage = "el campo dirección debe tener mínimo 0 caracter y máximo 1000")]
         public string em_direccion { get; set; }
-        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo teléfonos internacionales debe tener mínimo 0 caracter y máximo 50")]
-        public string em_tel_int { get; set; }
         public byte[] em_logo { get; set; }
-        public byte[] em_fondo { get; set; }
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "El campo fecha inicio contable es obligatorio")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime em_fechaInicioContable { get; set; }
         public string Estado { get; set; }
-        public bool EstadoBool { get; set; }
         public Nullable<System.DateTime> em_fechaInicioActividad { get; set; }
         [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo código entidad debe tener mínimo 0 caracter y máximo 50")]
         public string cod_entidad_dinardap { get; set; }
@@ -60,6 +52,7 @@ namespace Core.Erp.Info.General
         public string em_Email { get; set; }
 
         //Campo para la vista
-        public bool ObligadoAllevarConta_bool { get; set; }
+        //public bool ObligadoAllevarConta_bool { get; set; }
+        public bool EstadoBool { get; set; }
     }
 }
