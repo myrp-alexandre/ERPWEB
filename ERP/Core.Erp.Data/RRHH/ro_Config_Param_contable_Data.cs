@@ -116,8 +116,8 @@ namespace Core.Erp.Data.RRHH
                              IdRubro = item.IdRubro,
                              IdCentroCosto = item.IdCentroCosto,
                              DebCre = item.DebCre,
-                             IdCtaCble = item.IdCtaCble,
-                             IdCtaCble_Haber = item.IdCtaCble_Haber
+                             IdCtaCble = (item.IdCtaCble)==""?null: item.IdCtaCble,
+                             IdCtaCble_Haber = (item.IdCtaCble_Haber) == "" ? null : item.IdCtaCble_Haber
                          };
                         Context. ro_Config_Param_contable.Add(Entity);
                     }
