@@ -121,7 +121,8 @@ namespace Core.Erp.Data.Facturacion
                         No_Descripcion = Entity.No_Descripcion,
                         Tipo = Entity.Tipo,
                         Estado = Entity.Estado,
-                        GeneraMoviInven = Entity.GeneraMoviInven == null ? false : Convert.ToBoolean(Entity.GeneraMoviInven)
+                        GeneraMoviInven = Entity.GeneraMoviInven ,
+                        IdCtaCble = Entity.IdCtaCble
                     };
                 }
                 return info;
@@ -169,6 +170,7 @@ namespace Core.Erp.Data.Facturacion
                         Tipo = info.Tipo,
                         Estado = info.Estado="A",
                         GeneraMoviInven = info.GeneraMoviInven,
+                        IdCtaCble = info.IdCtaCble,
 
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
@@ -208,6 +210,7 @@ namespace Core.Erp.Data.Facturacion
                     Entity.No_Descripcion = info.No_Descripcion;
                     Entity.Tipo = info.Tipo;
                     Entity.GeneraMoviInven = info.GeneraMoviInven;
+                    Entity.IdCtaCble = info.IdCtaCble;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;

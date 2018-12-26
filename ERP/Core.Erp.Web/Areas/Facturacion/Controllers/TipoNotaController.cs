@@ -9,6 +9,8 @@ using Core.Erp.Info.Facturacion;
 using Core.Erp.Bus.General;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Web.Helps;
+using Core.Erp.Info.Contabilidad;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
@@ -42,6 +44,24 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             ViewBag.lst_tipos = lst_tipos;
         }
 
+        #endregion
+
+        #region Metodos ComboBox bajo demanda
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        public ActionResult CmbCuenta_TipoNota()
+        {
+            fa_TipoNota_Info model = new fa_TipoNota_Info();
+            return PartialView("_CmbCuenta_TipoNota", model);
+        }
+     
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #region Acciones
