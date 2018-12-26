@@ -10,6 +10,8 @@ using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
+using Core.Erp.Info.SeguridadAcceso;
+using Core.Erp.Bus.SeguridadAcceso;
 using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
@@ -19,6 +21,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region Variables
         cp_SolicitudPago_Bus bus_solicitud = new cp_SolicitudPago_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         #endregion
         #region Index
 
@@ -80,8 +83,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 Fecha = DateTime.Now,
             };
+            seg_usuario_Info mod = bus_usuario.get_info(SessionFixed.IdUsuario);
+            model.Solicitante = mod.Nombre;
             cargar_combos(model.IdEmpresa);
-            return View();
+            return View(model);
         }
 
         [HttpPost]
