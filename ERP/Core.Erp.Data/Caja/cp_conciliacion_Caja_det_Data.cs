@@ -99,5 +99,42 @@ namespace Core.Erp.Data.Caja
                 throw;
             }
         }
+
+        public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> get_list_x_movimientos_caja(int IdEmpresa)
+        {
+            try
+            {
+                List<cp_conciliacion_Caja_det_x_ValeCaja_Info> Lista;
+
+                using (Entities_caja Context = new Entities_caja())
+                {
+                    Lista = (from q in Context.vwcaj_Caja_Movimiento_por_conciliar
+                             where q.IdEmpresa == IdEmpresa
+                             select new cp_conciliacion_Caja_det_x_ValeCaja_Info
+                             {
+                                 IdEmpresa_movcaja = q.IdEmpresa,
+                                 IdTipocbte_movcaja = q.IdTipocbte,
+                                 IdCbteCble_movcaja = q.IdCbteCble,
+                                 IdConciliacion_Caja = q.IdCaja,
+                                 idTipoMovi = q.IdTipoMovi,
+                                 tm_descripcion = q.tm_descripcion,
+                                 valor = q.cm_valor,
+                                 Observacion = q.cm_observacion,
+                                 fecha = q.cm_fecha,
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 IdTipo_Persona = q.IdTipo_Persona,
+                                 IdEntidad = q.IdEntidad,
+                                 IdPersona = q.IdPersona
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

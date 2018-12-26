@@ -100,6 +100,55 @@
         $("#FacturasModal").modal("hide");
     }
 
+    var selectedCajaIDs;
+    function Caja_OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedCajaIDs"] = selectedCajaIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function Caja_OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdCbteCble_movcaja", Caja_GetSelectedFieldValuesCallback);
+    }
+    function Caja_GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedCajaIDs = values.join(',');
+        console.log(selectedCajaIDs);
+    }
+
+    function MostrarCajaMovimientoConciliacionModal() {
+        selectedCajaIDs = "";
+        GridViewPartial_conciliacion_caja_movimiento.PerformCallback();
+        GridViewPartial_conciliacion_caja_movimiento.UnselectRows();
+        $("#CajaMovimientoModal").modal("show");
+    }
+
+    function AddCajaMovimiento()
+    {
+        var datos = {
+            IDs: selectedCajaIDs,
+            IdTransaccionFixed: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("AgregarCajaMovimiento", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        selectedCajaIDs = "";
+        GridViewPartial_conciliacion_caja_movimiento.PerformCallback();
+        GridViewPartial_conciliacion_caja_movimiento.UnselectRows();
+        GridViewPartial_conciliacion_caja_movimiento.PerformCallback();
+        $("#CajaMovimientoModal").modal("hide");
+    }
+
     function GetSaldoAnterior() {
         var datos = {
             FechaCorte: Fecha_ini.GetDate(),
@@ -159,7 +208,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data.IdEmpresa != 0) {
-                    
+
                     var d1 = new Date(data.pe_FechaIni.match(/\d+/)[0] * 1);
                     var d2 = new Date(data.pe_FechaFin.match(/\d+/)[0] * 1);
                     Fecha_ini.SetValue(d1);
@@ -246,7 +295,7 @@
             }
 
         });
-        FechaOP.SetDate(new Date());        
+        FechaOP.SetDate(new Date());
         GridView_comprobante_detalle.PerformCallback();
     }
 </script>
@@ -284,6 +333,25 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aceptar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="CajaMovimientoModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Movimientos de caja</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("GridViewPartial_conciliacion_caja_movimiento")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="AddCajaMovimiento();">Aceptar</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -452,6 +520,14 @@
                 @Html.Action("GridViewPartial_conciliacion_facturas")
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_vales">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" id="btn_buscar_og" onclick="MostrarCajaMovimientoConciliacionModal();">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <br />
                 @Html.Action("GridViewPartial_conciliacion_vales")
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_ingresos">

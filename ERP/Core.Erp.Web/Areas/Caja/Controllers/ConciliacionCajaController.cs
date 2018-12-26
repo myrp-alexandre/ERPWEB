@@ -285,9 +285,17 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         }
         #endregion
 
-        
+
 
         #region Vales
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_conciliacion_caja_movimiento()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_det.get_list_x_movimientos_caja(IdEmpresa);
+            return PartialView("_GridViewPartial_conciliacion_caja_movimiento", model);
+        }
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_conciliacion_vales()
         {
@@ -299,7 +307,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNewVale([ModelBinder(typeof(DevExpressEditorsBinder))] cp_conciliacion_Caja_det_x_ValeCaja_Info info_det)
-        {            
+        {
             if (ModelState.IsValid)
                 list_vale.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
@@ -469,6 +477,25 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                 }
             };
             list_ct.set_list(lst_det, IdTransaccionFixed);
+        }
+
+        public JsonResult AgregarCajaMovimiento(string Ids = "", decimal IdTransaccionSession = 0)
+        {
+            if (Ids != null)
+            {
+                var lst = list_vale.get_list(IdTransaccionSession);
+                string[] array = Ids.Split(',');
+                //var output = array.GroupBy(q => q).ToList();
+                foreach (var item in array)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        var info_add = lst.Where(q => q.IdCbteCble_movcaja == Convert.ToDecimal(item) ).FirstOrDefault();
+                        list_vale.AddRow(info_add, IdTransaccionSession);
+                    }
+                }
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
 

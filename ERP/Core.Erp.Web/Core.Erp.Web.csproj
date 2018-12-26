@@ -9554,6 +9554,7 @@
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\AjustesAnticipo\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\AjustesAnticipo\_GridViewPartial_ajuste_anticipo.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\_GridViewPartial_conciliacion_caja_movimiento.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
