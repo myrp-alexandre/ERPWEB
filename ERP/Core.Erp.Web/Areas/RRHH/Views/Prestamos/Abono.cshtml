@@ -54,8 +54,15 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
+                    <label for="Valor">Valor aplicar*</label>
+                    @Html.TextBoxFor(q => q.Monto_aplicado, new { @class = "form-control", @id = "Monto_aplicado", })
+                    @Html.ValidationMessageFor(q => q.Monto_aplicado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
                     <div class="box-footer">
-                        <button type="button" onclick="Aplicar();" id="btnconsultar" class="btn btn-primary">Aplicar</button>
+                        <button type="button" onclick="Generar();" id="btnconsultar" class="btn btn-primary">Aplicar</button>
                     </div>
                 </div>
             </div>
@@ -102,6 +109,7 @@
         var datos = {
                      IdEmpresa: $("#IdEmpresa").val(),
                      Valor_pendiente: $("#Valor_pendiente").val(),
+                     Monto_aplicado: $("#Monto_aplicado").val(),
                      IdTransaccionSession: $("#IdTransaccionSession").val()
                 }
                 $.ajax({
