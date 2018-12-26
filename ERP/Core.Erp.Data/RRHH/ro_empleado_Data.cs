@@ -238,7 +238,9 @@ namespace Core.Erp.Data.RRHH
                         Valor_horas_matutino = info.Valor_horas_matutino,
                         Valor_maximo_horas_mat = info.Valor_maximo_horas_mat,
                         Valor_maximo_horas_vesp=info.Valor_maximo_horas_vesp,
-                        Valor_horas_extras=info.Valor_horas_extras
+                        Valor_horas_extras=info.Valor_horas_extras,
+                        DiasVacaciones = info.DiasVacaciones,
+                        GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones
                     };
                 }
 
@@ -338,7 +340,9 @@ namespace Core.Erp.Data.RRHH
                         Valor_horas_matutino = info.Valor_horas_matutino,
                         Valor_maximo_horas_mat = info.Valor_maximo_horas_mat,
                         Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp,
-                        Valor_horas_extras = info.Valor_horas_extras
+                        Valor_horas_extras = info.Valor_horas_extras,
+                        DiasVacaciones = info.DiasVacaciones,
+                        GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones
 
 
                     };
@@ -431,6 +435,8 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdUsuario = info.IdUsuarioUltModi;
                         Entity.Fecha_UltMod = info.Fecha_Transaccion = DateTime.Now;
                         Entity.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
+                        Entity.DiasVacaciones = info.DiasVacaciones;
+                        Entity.GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones;
                     var foto = Context.ro_EmpleadoFoto.FirstOrDefault(v => v.IdEmpresa ==info. IdEmpresa && v.IdEmpleado ==info.IdEmpleado);
                     if(foto!=null)
                     Context.ro_EmpleadoFoto.Remove(foto);

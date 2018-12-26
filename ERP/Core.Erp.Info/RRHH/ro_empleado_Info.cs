@@ -103,6 +103,8 @@ namespace Core.Erp.Info.RRHH
         public Nullable<double> Valor_horas_extras { get; set; }
 
 
+        public bool GozaMasDeQuinceDiasVaciones { get; set; }
+        public double DiasVacaciones { get; set; }
 
 
         #region datos personas
