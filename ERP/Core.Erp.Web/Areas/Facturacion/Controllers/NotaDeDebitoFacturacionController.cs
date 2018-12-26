@@ -336,7 +336,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             lst_naturaleza.Add("SRI", "Autorizado por el SRI");
             ViewBag.lst_naturaleza = lst_naturaleza;
 
-            var lst_tipo_nota = bus_tipo_nota.get_list("D", false);
+            var lst_tipo_nota = bus_tipo_nota.get_list(model.IdEmpresa, "D", false);
             ViewBag.lst_tipo_nota = lst_tipo_nota;
         }
         private bool validar(fa_notaCreDeb_Info i_validar, ref string msg)

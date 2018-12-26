@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Facturacion
 {
     public class fa_TipoNota_Data
     {
-        public List<fa_TipoNota_Info> get_list(bool mostrar_anulados)
+        public List<fa_TipoNota_Info> get_list(int IdEmpresa  , bool mostrar_anulados)
         {
             try
             {
@@ -18,8 +18,10 @@ namespace Core.Erp.Data.Facturacion
                 {
                     if (mostrar_anulados)
                         Lista = (from q in Context.fa_TipoNota
+                                 where q.IdEmpresa == IdEmpresa
                                  select new fa_TipoNota_Info
                                  {
+                                     IdEmpresa = q.IdEmpresa,
                                      IdTipoNota = q.IdTipoNota,
                                      CodTipoNota = q.CodTipoNota,
                                      No_Descripcion = q.No_Descripcion,
@@ -31,9 +33,11 @@ namespace Core.Erp.Data.Facturacion
                     else
 
                         Lista = (from q in Context.fa_TipoNota
-                                 where q.Estado == "A"
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.Estado == "A"
                                  select new fa_TipoNota_Info
                                  {
+                                     IdEmpresa = q.IdEmpresa,
                                      IdTipoNota = q.IdTipoNota,
                                      CodTipoNota = q.CodTipoNota,
                                      No_Descripcion = q.No_Descripcion,
@@ -51,7 +55,7 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
-        public List<fa_TipoNota_Info> get_list( string Tipo, bool mostrar_anulados)
+        public List<fa_TipoNota_Info> get_list(int IdEmpresa, string Tipo, bool mostrar_anulados)
         {
             try
             {
@@ -60,9 +64,11 @@ namespace Core.Erp.Data.Facturacion
                 {
                     if(mostrar_anulados)
                     Lista = (from q in Context.fa_TipoNota
-                             where q.Tipo == Tipo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.Tipo == Tipo
                              select new fa_TipoNota_Info
                              {
+                                 IdEmpresa = q.IdEmpresa,
                                  IdTipoNota = q.IdTipoNota,
                                  CodTipoNota = q.CodTipoNota,
                                  No_Descripcion = q.No_Descripcion,
@@ -74,10 +80,12 @@ namespace Core.Erp.Data.Facturacion
                     else
                     {
                         Lista = (from q in Context.fa_TipoNota
-                                 where q.Tipo == Tipo
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.Tipo == Tipo
                                  && q.Estado=="A"
                                  select new fa_TipoNota_Info
                                  {
+                                     IdEmpresa = q.IdEmpresa,
                                      IdTipoNota = q.IdTipoNota,
                                      CodTipoNota = q.CodTipoNota,
                                      No_Descripcion = q.No_Descripcion,
@@ -96,17 +104,18 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
-        public fa_TipoNota_Info get_info(int IdTipoNota)
+        public fa_TipoNota_Info get_info(int IdEmpresa, int IdTipoNota)
         {
             try
             {
                 fa_TipoNota_Info info = new fa_TipoNota_Info();
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    fa_TipoNota Entity = Context.fa_TipoNota.FirstOrDefault(q => q.IdTipoNota == IdTipoNota);
+                    fa_TipoNota Entity = Context.fa_TipoNota.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdTipoNota == IdTipoNota);
                     if (Entity == null) return null;
                     info = new fa_TipoNota_Info
                     {
+                        IdEmpresa = Entity.IdEmpresa,
                         IdTipoNota = Entity.IdTipoNota,
                         CodTipoNota = Entity.CodTipoNota,
                         No_Descripcion = Entity.No_Descripcion,
@@ -123,7 +132,7 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
-        private int get_id()
+        private int get_id(int IdEmpresa)
         {
 
             try
@@ -132,6 +141,7 @@ namespace Core.Erp.Data.Facturacion
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
                     var lst = from q in Context.fa_TipoNota
+                              where q.IdEmpresa == IdEmpresa
                               select q;
                     if (lst.Count() > 0)
                         ID = lst.Max(q => q.IdTipoNota) + 1;
@@ -144,7 +154,6 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
-
         public bool guardarDB(fa_TipoNota_Info info)
         {
             try
@@ -153,8 +162,8 @@ namespace Core.Erp.Data.Facturacion
                 {
                     fa_TipoNota Entity = new fa_TipoNota
                     {
-
-                        IdTipoNota = info.IdTipoNota=get_id(),
+                        IdEmpresa = info.IdEmpresa,
+                        IdTipoNota = info.IdTipoNota=get_id(info.IdEmpresa),
                         CodTipoNota = info.CodTipoNota,
                         No_Descripcion = info.No_Descripcion,
                         Tipo = info.Tipo,
@@ -186,7 +195,6 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
-
         public bool modificarDB(fa_TipoNota_Info info)
         {
             try

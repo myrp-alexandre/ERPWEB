@@ -21,7 +21,7 @@ namespace Core.Erp.Info.Facturacion
         [Required(ErrorMessage = ("el campo descripción es obligatorio"))]
         [StringLength(150, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 150")]
         public string No_Descripcion { get; set; }
-        public Nullable<bool> GeneraMoviInven { get; set; }
+        public bool GeneraMoviInven { get; set; }
         public string IdCtaCble { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

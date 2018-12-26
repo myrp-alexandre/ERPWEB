@@ -231,6 +231,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNewFacturas(string IDs = "", decimal IdTransaccionSession = 0, int IdTipoNota = 0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (IDs != "")
             {
                 string[] array = IDs.Split(',');
@@ -239,7 +240,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     List_cruce.DeleteRow(item,IdTransaccionSession);
                 }
             }
-            var tipo = bus_tipo_nota.get_info(IdTipoNota);
+            var tipo = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
             var list = List_cruce.get_list(IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
             if (tipo.GeneraMoviInven)
             {
@@ -340,7 +341,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             lst_naturaleza.Add("SRI", "Autorizado por el SRI");            
             ViewBag.lst_naturaleza = lst_naturaleza;
 
-            var lst_tipo_nota = bus_tipo_nota.get_list("C",false);
+            var lst_tipo_nota = bus_tipo_nota.get_list(model.IdEmpresa, "C",false);
             ViewBag.lst_tipo_nota = lst_tipo_nota;
         }
         private bool validar(fa_notaCreDeb_Info i_validar, ref string msg)

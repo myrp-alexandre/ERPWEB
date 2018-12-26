@@ -723,7 +723,7 @@
           <Property Name="CodTipoNota" Type="varchar" MaxLength="20" />
           <Property Name="Tipo" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="No_Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="GeneraMoviInven" Type="bit" />
+          <Property Name="GeneraMoviInven" Type="bit" Nullable="false" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_Transac" Type="datetime" />
@@ -5041,7 +5041,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
           <Property Name="CodTipoNota" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="No_Descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="GeneraMoviInven" Type="Boolean" />
+          <Property Name="GeneraMoviInven" Type="Boolean" Nullable="false" />
           <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />

@@ -49,7 +49,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var lst_tipo_comprobante = bus_tipo_comprobante.get_list(IdEmpresa, false);
             ViewBag.lst_tipo_comprobante = lst_tipo_comprobante;
 
-            var lst_tipo = bus_tipo.get_list(false);
+            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
 
             var lst_cta = bus_cta.get_list(IdEmpresa, false, false);

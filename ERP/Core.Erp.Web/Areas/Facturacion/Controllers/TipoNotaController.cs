@@ -30,7 +30,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_tiponota()
         {
-            var model = bus_tiponota.get_list(true);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = bus_tiponota.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_tiponota", model);
         }
         private void cargar_combos()
@@ -75,7 +76,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar( int  IdTipoNota = 0)
+        public ActionResult Modificar( int IdEmpresa = 0, int  IdTipoNota = 0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -84,7 +85,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
             
-            fa_TipoNota_Info model = bus_tiponota.get_info(IdTipoNota);            
+            fa_TipoNota_Info model = bus_tiponota.get_info(IdEmpresa, IdTipoNota);            
             if (model == null)
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
@@ -106,7 +107,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Anular( int IdTipoNota = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdTipoNota = 0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -115,7 +116,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            fa_TipoNota_Info model = bus_tiponota.get_info(IdTipoNota);
+            fa_TipoNota_Info model = bus_tiponota.get_info(IdEmpresa, IdTipoNota);
             if (model == null)
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);

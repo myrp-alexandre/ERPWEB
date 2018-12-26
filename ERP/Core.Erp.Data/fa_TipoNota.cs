@@ -24,7 +24,7 @@ namespace Core.Erp.Data
         public string CodTipoNota { get; set; }
         public string Tipo { get; set; }
         public string No_Descripcion { get; set; }
-        public Nullable<bool> GeneraMoviInven { get; set; }
+        public bool GeneraMoviInven { get; set; }
         public string IdCtaCble { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
