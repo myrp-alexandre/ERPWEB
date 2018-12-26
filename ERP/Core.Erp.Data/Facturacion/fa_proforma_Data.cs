@@ -75,7 +75,8 @@ namespace Core.Erp.Data.Facturacion
                         estado = Entity.estado,
                         IdBodega = Entity.IdBodega,
                         IdVendedor = Entity.IdVendedor,
-                        pr_dias_entrega = Entity.pr_dias_entrega
+                        pr_dias_entrega = Entity.pr_dias_entrega,
+                        IdNivel = Entity.IdNivel
                     };
 
                 }
@@ -136,6 +137,7 @@ namespace Core.Erp.Data.Facturacion
                         IdBodega = info.IdBodega,
                         IdVendedor = info.IdVendedor,
                         pr_dias_entrega = info.pr_dias_entrega,
+                        IdNivel = info.IdNivel,
 
                         IdUsuario_creacion = info.IdUsuario_creacion,
                         fecha_creacion = DateTime.Now
@@ -196,7 +198,7 @@ namespace Core.Erp.Data.Facturacion
                     Entity.IdBodega = info.IdBodega;
                     Entity.IdVendedor = info.IdVendedor;
                     Entity.pr_dias_entrega = info.pr_dias_entrega;
-
+                    Entity.IdNivel = info.IdNivel;
                     Entity.IdUsuario_modificacion = info.IdUsuario_modificacion;
                     Entity.fecha_modificacion = DateTime.Now;
 

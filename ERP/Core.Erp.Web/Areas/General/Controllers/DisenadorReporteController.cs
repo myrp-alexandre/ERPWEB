@@ -25,14 +25,14 @@ namespace Core.Erp.Web.Areas.General.Controllers
         #region Acciones
         public ActionResult Nuevo()
         {
-            return View();
+            tb_sis_reporte_diseno_Info model = new tb_sis_reporte_diseno_Info();
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(tb_sis_reporte_diseno_Info model)
         {
-           
-                return View();
+                return View(model);
         }
 
         public ActionResult Modificar(string IdReporte = "")
