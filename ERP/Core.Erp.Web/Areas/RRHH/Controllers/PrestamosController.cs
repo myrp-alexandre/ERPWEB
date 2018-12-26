@@ -269,6 +269,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_detalle = bus_detalle.get_list(IdEmpresa, IdPrestamo);
+            if(model.lst_detalle.Count()>0)
+            model.Valor_pendiente = model.lst_detalle.Sum(v=>v.NumCuota);
             Lis_ro_prestamo_detalle_lst.set_list(model.lst_detalle, model.IdTransaccionSession);
             cargar_combos();
             return View(model);
@@ -394,7 +396,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             info.IdEmpresa = IdEmpresa;
             info.Valor_pendiente = Valor_pendiente;
            
-         var detalle=   Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var detalle=   Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            foreach (var item in detalle)
+            {
+               
+            }
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
