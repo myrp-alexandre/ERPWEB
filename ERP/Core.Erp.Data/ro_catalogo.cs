@@ -22,6 +22,7 @@ namespace Core.Erp.Data
             this.ro_empleado2 = new HashSet<ro_empleado>();
             this.ro_empleado3 = new HashSet<ro_empleado>();
             this.ro_prestamo = new HashSet<ro_prestamo>();
+            this.ro_Parametros = new HashSet<ro_Parametros>();
         }
     
         public string CodCatalogo { get; set; }
@@ -47,5 +48,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_empleado> ro_empleado2 { get; set; }
         public virtual ICollection<ro_empleado> ro_empleado3 { get; set; }
         public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
+        public virtual ICollection<ro_Parametros> ro_Parametros { get; set; }
     }
 }

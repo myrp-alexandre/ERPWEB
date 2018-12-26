@@ -9,6 +9,8 @@ using DevExpress.Web.Mvc;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Bus.CuentasPorPagar;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class ParametrosContableController : Controller
@@ -26,7 +28,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Bus bus_configuracion_cta_x_sueldo = new ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar_Bus();
         ct_cbtecble_tipo_Bus bus_comprobante_tipo = new ct_cbtecble_tipo_Bus();
         cp_orden_pago_tipo_x_empresa_Bus bus_tipo_op = new cp_orden_pago_tipo_x_empresa_Bus();
-
         int IdEmpresa = 0;
         #endregion
         public ActionResult Index()
@@ -65,13 +66,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
        
         private void cargar_combos()
         {
-            IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            IdEmpresa =Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa,false);
             ViewBag.lst_rubro = bus_rubro.get_list(IdEmpresa, false);
             ViewBag.lst_comprobante_tipo = bus_comprobante_tipo.get_list(IdEmpresa, false);
             ViewBag.lst_rubro = bus_rubro.get_list_rub_concepto(IdEmpresa);
             ViewBag.lst_tipo_op = bus_tipo_op.get_list(IdEmpresa);
+            ViewBag.lst_estado_prestamo = bus_catalogo.get_list_x_tipo(42);
 
         }
         [ValidateInput(false)]
