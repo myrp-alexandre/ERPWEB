@@ -40,5 +40,6 @@ namespace Core.Erp.Info.RRHH
         {
             lst_planificacion_det = new List<ro_horario_planificacion_det_Info>();
         }
+
     }
 }

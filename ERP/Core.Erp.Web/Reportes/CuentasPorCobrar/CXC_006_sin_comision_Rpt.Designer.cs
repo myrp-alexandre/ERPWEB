@@ -230,11 +230,11 @@
             // xrTableCell27
             // 
             this.xrTableCell27.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            this.xrTableCell27.Font = new System.Drawing.Font("Verdana", 10F);
+            this.xrTableCell27.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell27.Name = "xrTableCell27";
             this.xrTableCell27.StylePriority.UseBorders = false;
             this.xrTableCell27.StylePriority.UseFont = false;
-            this.xrTableCell27.Text = "FACTURAS QUE NO APLICARAN COMISION";
+            this.xrTableCell27.Text = "FACTURAS QUE NO APLICARAN COMISIÓN";
             this.xrTableCell27.Weight = 5.5D;
             // 
             // xrTableRow6

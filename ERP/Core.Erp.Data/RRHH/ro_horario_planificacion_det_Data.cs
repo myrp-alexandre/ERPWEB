@@ -49,7 +49,7 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-        public List<ro_horario_planificacion_det_Info> get_list(int IdEmpresa, int IdNomina, int IdSucursal, int IdDivision, int IdArea, int IdDepartamento, int IdCargo)
+        public List<ro_horario_planificacion_det_Info> get_list(int IdEmpresa, int IdNomina, int IdSucursal, int IdDivision, int IdArea, int IdDepartamento, int IdCargo, decimal IdEmpleado)
         {
             try
             {
@@ -66,8 +66,10 @@ namespace Core.Erp.Data.RRHH
                 int iddepartamento_fin;
                 int idcargo_inicio;
                 int idcargo_fin;
+                decimal IdEmpleado_inicio;
+                decimal IdEmpleado_fin;
                 #endregion
-                if(IdNomina==0 )
+                if (IdNomina==0 )
                 {idnomina_inicio = 0;idnomina_fin = 99; }else { idnomina_inicio = IdNomina; idnomina_fin = IdNomina; }
 
                 if (IdSucursal == 0)
@@ -85,6 +87,9 @@ namespace Core.Erp.Data.RRHH
                 if (IdCargo == 0)
                 { idcargo_inicio = 0; idcargo_fin = 9999; }else { idcargo_inicio = IdCargo; idcargo_fin = IdCargo; }
 
+                if (IdEmpleado == 0)
+                { IdEmpleado_inicio = 0; IdEmpleado_fin = 9999; }
+                else { IdEmpleado_inicio = IdEmpleado; IdEmpleado_fin = IdEmpleado; }
                 List<ro_horario_planificacion_det_Info> Lista;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
@@ -107,6 +112,10 @@ namespace Core.Erp.Data.RRHH
 
                               && q.IdCargo >= idcargo_inicio
                              && q.IdCargo <= idcargo_fin
+
+                              && q.IdEmpleado >= IdEmpleado_inicio
+                             && q.IdEmpleado <= IdEmpleado_fin
+
                              select new ro_horario_planificacion_det_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

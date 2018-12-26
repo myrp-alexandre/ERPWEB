@@ -36,7 +36,7 @@
        </div>
 
 
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Tipo">Tipo*</label>
@@ -46,10 +46,16 @@
             </div>
         </div>
 
-        <div class="col-md-6" id="div_movimiento">
+        <div class="col-md-3" id="div_movimiento">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="GeneraMoviInven">@Html.CheckBoxFor(q => q.GeneraMoviInven, new { @id = "GeneraMoviInven" }) Genera movimiento inventario</label>
+                    <label for=""></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.GeneraMoviInven, settings =>
+               {
+                   settings.Name = "GeneraMoviInven";
+                   settings.Text = "Genera movimiento inventario";
+               }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.GeneraMoviInven, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -82,9 +88,6 @@
         ocultar_mostrar_div_movimiento();
 
         $("#Tipo").change(function () {
-            ocultar_mostrar_div_movimiento();
-        });
-        $("#GeneraMoviInven").change(function () {
             ocultar_mostrar_div_movimiento();
         });
     })

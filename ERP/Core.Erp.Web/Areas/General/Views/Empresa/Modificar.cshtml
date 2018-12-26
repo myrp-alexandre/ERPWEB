@@ -49,14 +49,6 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
-                            <div class="checkbox">
-                                <label for="ObligadoAllevarConta_bool">
-                                    @Html.CheckBoxFor(q => q.ObligadoAllevarConta_bool) Obligado a llevar contabilidad
-                                </label>
-                            </div>
-                        </div>
-
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Fecha inicio contable*</label>
@@ -193,13 +185,6 @@
                                 @Html.ValidationMessageFor(q => q.em_telefonos, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="em_tel_int">Teléfonos internacionales</label>
-                                @Html.TextBoxFor(q => q.em_tel_int, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.em_tel_int, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -212,22 +197,8 @@
                                 @Html.ValidationMessageFor(q => q.em_Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="em_fax">Fax</label>
-                                @Html.TextBoxFor(q => q.em_fax, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.em_fax, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
             </div>
 
             <div role="tabpanel" class="tab-pane" id="tb_info_laboral">

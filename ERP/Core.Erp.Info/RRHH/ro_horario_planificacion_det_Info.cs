@@ -29,6 +29,6 @@ namespace Core.Erp.Info.RRHH
         public DateTime? fecha { get; set; }
         public int Secuencia { get; set; }
 
-
+       
     }
 }

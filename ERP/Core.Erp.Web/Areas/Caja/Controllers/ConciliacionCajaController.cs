@@ -294,7 +294,8 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_det.get_list_x_movimientos_caja(IdEmpresa);
-            
+            list_vale_recorrer.set_list(model, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
             return PartialView("_GridViewPartial_conciliacion_caja_movimiento", model);
         }
 
@@ -304,7 +305,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             cp_conciliacion_Caja_Info model = new cp_conciliacion_Caja_Info();
             model.lst_det_vale = list_vale.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            list_vale_recorrer.set_list(model.lst_det_vale, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            
             return PartialView("_GridViewPartial_conciliacion_vales", model);
         }
 
