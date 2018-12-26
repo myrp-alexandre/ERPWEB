@@ -145,7 +145,7 @@
 
         GridViewPartial_conciliacion_caja_movimiento.PerformCallback();
         GridViewPartial_conciliacion_caja_movimiento.UnselectRows();
-        GridViewPartial_conciliacion_vales.PerformCallback();
+        GridView_conciliacion_vales.PerformCallback();
         $("#CajaMovimientoModal").modal("hide");
     }
 
@@ -208,7 +208,6 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data.IdEmpresa != 0) {
-
                     var d1 = new Date(data.pe_FechaIni.match(/\d+/)[0] * 1);
                     var d2 = new Date(data.pe_FechaFin.match(/\d+/)[0] * 1);
                     Fecha_ini.SetValue(d1);

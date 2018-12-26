@@ -27,12 +27,9 @@
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="padding-top: 20px">
-
             <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_general">
-
                 <div class="row">
                     <div class="col-md-12">
-
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="ContribuyenteEspecial">Código</label>
@@ -47,7 +44,6 @@
                                 @Html.ValidationMessageFor(q => q.ContribuyenteEspecial, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Fecha inicio contable*</label>
@@ -56,14 +52,14 @@
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     @Html.DevExpress().DateEditFor(q => q.em_fechaInicioContable, settings =>
-                           {
-                               settings.Name = "em_fechaInicioContable";
-                               settings.Properties.UseMaskBehavior = true;
-                               settings.Properties.EditFormat = EditFormat.Date;
-                               settings.Properties.EditFormatString = "dd/MM/yyyy";
-                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           }).GetHtml()
+                                       {
+                                           settings.Name = "em_fechaInicioContable";
+                                           settings.Properties.UseMaskBehavior = true;
+                                           settings.Properties.EditFormat = EditFormat.Date;
+                                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.em_fechaInicioContable, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -184,11 +180,6 @@
                                 @Html.ValidationMessageFor(q => q.em_telefonos, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="em_Email">Email</label>

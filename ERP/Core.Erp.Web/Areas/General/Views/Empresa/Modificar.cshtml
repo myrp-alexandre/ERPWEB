@@ -13,8 +13,6 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
 
-
-
     <div id="Tabs" role="tabpanel">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
@@ -24,16 +22,15 @@
             <li>
                 <a href="#tb_info_laboral" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Logo</a>
             </li>
-           
+
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="padding-top: 20px">
 
             <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_general">
-               
                 <div class="row">
                     <div class="col-md-12">
-                        
+
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="ContribuyenteEspecial">Código</label>
@@ -185,11 +182,6 @@
                                 @Html.ValidationMessageFor(q => q.em_telefonos, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="em_Email">Email</label>
@@ -197,10 +189,9 @@
                                 @Html.ValidationMessageFor(q => q.em_Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
-
             <div role="tabpanel" class="tab-pane" id="tb_info_laboral">
                 <div class="row">
                     <div class="col-md-12">
@@ -208,35 +199,28 @@
                             <div class="form-group">
                                 <label for="codigo">Logo</label>
                                 @Html.DevExpress().BinaryImage(
-                    settings =>
-                    {
-                        settings.Name = "pr_imagen";
-                        settings.CallbackRouteValues = new { Controller = "Empresa", Action = "get_imagen" };
-                    }).Bind((Model.em_logo).ToArray()).GetHtml()
+                                    settings =>
+                                    {
+                                        settings.Name = "pr_imagen";
+                                        settings.CallbackRouteValues = new { Controller = "Empresa", Action = "get_imagen" };
+                                    }).Bind((Model.em_logo).ToArray()).GetHtml()
 
 
                                 @Html.DevExpress().UploadControl(settings =>
-               {
+                                {
 
-                   settings.Name = "UploadControl";
-                   settings.CallbackRouteValues = new { Controller = "Empresa", Action = "UploadControlUpload" };
-                   settings.ShowUploadButton = true;
-                   settings.ShowProgressPanel = true;
-               }).GetHtml()
-
-
+                                    settings.Name = "UploadControl";
+                                    settings.CallbackRouteValues = new { Controller = "Empresa", Action = "UploadControlUpload" };
+                                    settings.ShowUploadButton = true;
+                                    settings.ShowProgressPanel = true;
+                                }).GetHtml()
                             </div>
                         </div>
                     </div>
-                        </div>
-                    </div>
-
-
-
-
-
                 </div>
             </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

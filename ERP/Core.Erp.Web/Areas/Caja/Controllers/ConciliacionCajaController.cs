@@ -436,6 +436,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult Calcular(double SaldoContableAnterior = 0, decimal IdTransaccionFixed = 0)
         {
             var lst_ing = list_ing.get_list(IdTransaccionFixed);
