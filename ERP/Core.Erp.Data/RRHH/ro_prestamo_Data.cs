@@ -323,13 +323,15 @@ namespace Core.Erp.Data.RRHH
             try
             {
                 ro_Parametros Entity_ro_parametros = Context.ro_Parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
-                
+                cp_orden_pago_tipo_x_empresa Entity_op_tipo = Context_cxp.cp_orden_pago_tipo_x_empresa.Where(q => q.IdEmpresa == IdEmpresa && q.IdTipo_op == Entity_ro_parametros.IdTipo_op_prestamos).FirstOrDefault();
+
                 decimal IdOrdenPago = 1;
+                decimal IdCbteCble_OP = 1;
 
                 foreach (var item in Lista)
                 {
                     var IdPrestamo = Convert.ToDecimal(item);
-                    vwRo_Prestamo Entity_Prestamo = Context.vwRo_Prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
+                   ro_prestamo Entity_Prestamo = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
 
                     if (Entity_Prestamo != null)
                     {
@@ -339,64 +341,99 @@ namespace Core.Erp.Data.RRHH
 
                     if (Entity_ro_parametros.genera_op_x_pago == true)
                     {
+                        IdOrdenPago = data_op.get_id(Entity_Prestamo.IdEmpresa);
+                        IdCbteCble_OP = data_ct.get_id(Entity_Prestamo.IdEmpresa, Entity_ro_parametros.IdTipoCbte_AsientoSueldoXPagar);
+                        ro_empleado Entity_Empleado = Context.ro_empleado.Where(q=> q.IdEmpresa == Entity_Prestamo.IdEmpresa && q.IdEmpleado == Entity_Prestamo.IdEmpleado).FirstOrDefault();                        
 
+                        cp_orden_pago op = new cp_orden_pago
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdSucursal = Entity_Empleado.IdSucursal,
+                            IdOrdenPago = IdOrdenPago,
+                            Observacion = "Prestamo #" + Entity_Prestamo.IdPrestamo,
+                            IdTipo_op = Entity_ro_parametros.IdTipo_op_prestamos,
+                            IdTipo_Persona = cl_enumeradores.eTipoPersona.EMPLEA.ToString(),
+                            IdPersona = Entity_Empleado.IdPersona,
+                            IdEntidad = Entity_Prestamo.IdEmpleado,
+                            Fecha = DateTime.Now.Date,
+                            IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
+                            IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
+                            Estado = "A"
+                        };
+
+                        Entity_Prestamo.IdEmpresa_op = op.IdEmpresa;                        
+                        Entity_Prestamo.IdOrdenPago = op.IdOrdenPago;                        
+
+                        Context_cxp.cp_orden_pago.Add(op);
+
+                        ct_cbtecble diario = new ct_cbtecble
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdTipoCbte = Entity_ro_parametros.IdTipoCbte_AsientoSueldoXPagar,
+                            IdCbteCble = IdCbteCble_OP,
+                            cb_Fecha = DateTime.Now.Date,
+                            cb_Observacion = op.Observacion,
+                            IdPeriodo = Convert.ToInt32(DateTime.Now.Date.ToString("yyyyMM")),
+                            IdSucursal = Entity_Empleado.IdSucursal,
+                            cb_FechaTransac = DateTime.Now,
+                            cb_Estado = "A"
+                        };
+
+                        Entity_Prestamo.IdTipoCbte = diario.IdTipoCbte;
+                        Entity_Prestamo.IdCbteCble = diario.IdCbteCble;
+
+                        Context_ct.ct_cbtecble.Add(diario);
+
+                        ct_cbtecble_det diario_det = new ct_cbtecble_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = 1,
+                            IdCtaCble = Entity_op_tipo.IdCtaCble,
+                            dc_Valor = Math.Round(Convert.ToDouble(Entity_Prestamo.MontoSol), 2, MidpointRounding.AwayFromZero),
+                        };
+
+                        Context_ct.ct_cbtecble_det.Add(diario_det);
+
+                        ct_cbtecble_det diario_det_ = new ct_cbtecble_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = 2,
+                            IdCtaCble = Entity_op_tipo.IdCtaCble_Credito,
+                            dc_Valor = Math.Round(Convert.ToDouble(Entity_Prestamo.MontoSol), 2, MidpointRounding.AwayFromZero)*-1
+                        };
+
+                        Context_ct.ct_cbtecble_det.Add(diario_det_);
+
+                        cp_orden_pago_det op_det = new cp_orden_pago_det
+                        {
+                            IdEmpresa = op.IdEmpresa,
+                            IdOrdenPago = op.IdOrdenPago,
+                            Secuencia = 1,
+
+                            IdEmpresa_cxp = diario.IdEmpresa,
+                            IdTipoCbte_cxp = diario.IdTipoCbte,
+                            IdCbteCble_cxp = diario.IdCbteCble,
+
+                            Valor_a_pagar = Convert.ToDouble(Entity_Prestamo.MontoSol),
+                            IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
+                            IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
+                            Fecha_Pago = op.Fecha
+                        };
+
+                        Context_cxp.cp_orden_pago_det.Add(op_det);
                     }
-                    //IdOrdenPago = data_op.get_id(Entity_Prestamo.IdEmpresa);
-                    //IdCbteCble_OP = data_ct.get_id(Entity_Prestamo.IdEmpresa, IdTipoCbte_op);
-
-                    //cp_orden_pago op = new cp_orden_pago
-                    //{
-                    //    IdEmpresa = Entity_Prestamo.IdEmpresa,
-                    //    IdSucursal = 1,
-                    //    IdOrdenPago = IdOrdenPago++,
-                    //    Observacion = "Prestamo #" + Entity_Prestamo.IdPrestamo,
-                    //    IdTipo_op = cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString(),
-                    //    IdTipo_Persona = Entity_Prestamo.IdTipoPersona,
-                    //    IdPersona = Entity_Prestamo.IdPersona,
-                    //    IdEntidad = Entity_Prestamo.IdEmpleado,
-                    //    Fecha = DateTime.Now.Date,
-                    //    IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
-                    //    IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
-                    //    Estado = "A"
-                    //};
-
-                    //ct_cbtecble diario = new ct_cbtecble
-                    //{
-                    //    IdEmpresa = Entity_Prestamo.IdEmpresa,
-                    //    IdTipoCbte = IdTipoCbte_op,
-                    //    IdCbteCble = IdCbteCble_OP,
-                    //    cb_Fecha = DateTime.Now.Date,
-                    //    cb_Observacion = op.Observacion,
-                    //    IdPeriodo = Convert.ToInt32(DateTime.Now.Date.ToString("yyyyMM")),
-                    //    IdSucursal = IdSucursal,
-                    //    cb_FechaTransac = DateTime.Now,
-                    //    cb_Estado = "A"
-                    //};
-                    //Context_ct.ct_cbtecble.Add(diario);
-
-                    //int sec = 1;
-                    //foreach (var item in info.lst_det_ct)
-                    //{
-                    //    ct_cbtecble_det diario_det = new ct_cbtecble_det
-                    //    {
-                    //        IdEmpresa = diario.IdEmpresa,
-                    //        IdTipoCbte = diario.IdTipoCbte,
-                    //        IdCbteCble = diario.IdCbteCble,
-                    //        secuencia = sec++,
-                    //        IdCtaCble = item.IdCtaCble,
-                    //        dc_Valor = Math.Round(Convert.ToDouble(item.dc_Valor), 2, MidpointRounding.AwayFromZero),
-                    //    };
-                    //    Context_ct.ct_cbtecble_det.Add(diario_det);
-                    //}
-
-
-                    Context.SaveChanges();
+                                        
                     Context_ct.SaveChanges();
                     Context_cxp.SaveChanges();
-
-                    Context.Dispose();
+                    Context.SaveChanges();
+                    
                     Context_ct.Dispose();                    
                     Context_cxp.Dispose();
+                    Context.Dispose();
                 }
 
                 return true;
