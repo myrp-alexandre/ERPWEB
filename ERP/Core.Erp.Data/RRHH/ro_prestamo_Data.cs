@@ -4,11 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.RRHH;
+using Core.Erp.Info.Helps;
+using Core.Erp.Data.CuentasPorPagar;
+using Core.Erp.Data.Contabilidad;
+
 namespace Core.Erp.Data.RRHH
 {
   public  class ro_prestamo_Data
     {
         ro_Parametros_Data odata = new ro_Parametros_Data();
+        cp_orden_pago_Data data_op = new cp_orden_pago_Data();
+        ct_cbtecble_Data data_ct = new ct_cbtecble_Data();
+
         public List<ro_prestamo_Info> get_list(int IdEmpresa, DateTime fechaInicio, DateTime fechaFin)
         {
             try
@@ -309,21 +316,87 @@ namespace Core.Erp.Data.RRHH
 
         public bool aprobar_prestamo(int IdEmpresa, string[] Lista, string IdUsuarioAprueba)
         {
+            Entities_rrhh Context = new Entities_rrhh();
+            Entities_cuentas_por_pagar Context_cxp = new Entities_cuentas_por_pagar();
+            Entities_contabilidad Context_ct = new Entities_contabilidad();
+
             try
             {
-                using (Entities_rrhh Context = new Entities_rrhh())
+                ro_Parametros Entity_ro_parametros = Context.ro_Parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                
+                decimal IdOrdenPago = 1;
+
+                foreach (var item in Lista)
                 {
-                    foreach (var item in Lista)
+                    var IdPrestamo = Convert.ToDecimal(item);
+                    vwRo_Prestamo Entity_Prestamo = Context.vwRo_Prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
+
+                    if (Entity_Prestamo != null)
                     {
-                        var IdPrestamo = Convert.ToDecimal(item);
-                        ro_prestamo Entity = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
-                        if (Entity != null)
-                        {
-                            Entity.IdUsuarioAprueba = IdUsuarioAprueba;
-                            Entity.EstadoAprob = "APROB";
-                        }
-                        Context.SaveChanges();
+                        Entity_Prestamo.IdUsuarioAprueba = IdUsuarioAprueba;
+                        Entity_Prestamo.EstadoAprob = "APROB";
                     }
+
+                    if (Entity_ro_parametros.genera_op_x_pago == true)
+                    {
+
+                    }
+                    //IdOrdenPago = data_op.get_id(Entity_Prestamo.IdEmpresa);
+                    //IdCbteCble_OP = data_ct.get_id(Entity_Prestamo.IdEmpresa, IdTipoCbte_op);
+
+                    //cp_orden_pago op = new cp_orden_pago
+                    //{
+                    //    IdEmpresa = Entity_Prestamo.IdEmpresa,
+                    //    IdSucursal = 1,
+                    //    IdOrdenPago = IdOrdenPago++,
+                    //    Observacion = "Prestamo #" + Entity_Prestamo.IdPrestamo,
+                    //    IdTipo_op = cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString(),
+                    //    IdTipo_Persona = Entity_Prestamo.IdTipoPersona,
+                    //    IdPersona = Entity_Prestamo.IdPersona,
+                    //    IdEntidad = Entity_Prestamo.IdEmpleado,
+                    //    Fecha = DateTime.Now.Date,
+                    //    IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
+                    //    IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
+                    //    Estado = "A"
+                    //};
+
+                    //ct_cbtecble diario = new ct_cbtecble
+                    //{
+                    //    IdEmpresa = Entity_Prestamo.IdEmpresa,
+                    //    IdTipoCbte = IdTipoCbte_op,
+                    //    IdCbteCble = IdCbteCble_OP,
+                    //    cb_Fecha = DateTime.Now.Date,
+                    //    cb_Observacion = op.Observacion,
+                    //    IdPeriodo = Convert.ToInt32(DateTime.Now.Date.ToString("yyyyMM")),
+                    //    IdSucursal = IdSucursal,
+                    //    cb_FechaTransac = DateTime.Now,
+                    //    cb_Estado = "A"
+                    //};
+                    //Context_ct.ct_cbtecble.Add(diario);
+
+                    //int sec = 1;
+                    //foreach (var item in info.lst_det_ct)
+                    //{
+                    //    ct_cbtecble_det diario_det = new ct_cbtecble_det
+                    //    {
+                    //        IdEmpresa = diario.IdEmpresa,
+                    //        IdTipoCbte = diario.IdTipoCbte,
+                    //        IdCbteCble = diario.IdCbteCble,
+                    //        secuencia = sec++,
+                    //        IdCtaCble = item.IdCtaCble,
+                    //        dc_Valor = Math.Round(Convert.ToDouble(item.dc_Valor), 2, MidpointRounding.AwayFromZero),
+                    //    };
+                    //    Context_ct.ct_cbtecble_det.Add(diario_det);
+                    //}
+
+
+                    Context.SaveChanges();
+                    Context_ct.SaveChanges();
+                    Context_cxp.SaveChanges();
+
+                    Context.Dispose();
+                    Context_ct.Dispose();                    
+                    Context_cxp.Dispose();
                 }
 
                 return true;

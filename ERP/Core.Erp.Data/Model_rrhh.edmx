@@ -2352,7 +2352,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_Prestamo' no tiene definida n
           <Property Name="Observacion" Type="varchar(max)" Nullable="false" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdTipoPersona" Type="int" Nullable="false" />
+          <Property Name="IdTipoPersona" Type="varchar" MaxLength="6" Nullable="false" />
           <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdTipoCbte" Type="int" />
           <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" />
@@ -2361,6 +2361,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_Prestamo' no tiene definida n
           <Property Name="descuento_quincena" Type="bit" Nullable="false" />
           <Property Name="descuento_men_quin" Type="bit" Nullable="false" />
           <Property Name="EstadoAprob" Type="varchar" MaxLength="10" />
+          <Property Name="IdUsuarioAprueba" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -4993,7 +4994,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
     [vwRo_Prestamo].[descuento_mensual] AS [descuento_mensual], 
     [vwRo_Prestamo].[descuento_quincena] AS [descuento_quincena], 
     [vwRo_Prestamo].[descuento_men_quin] AS [descuento_men_quin], 
-    [vwRo_Prestamo].[EstadoAprob] AS [EstadoAprob]
+    [vwRo_Prestamo].[EstadoAprob] AS [EstadoAprob], 
+    [vwRo_Prestamo].[IdUsuarioAprueba] AS [IdUsuarioAprueba]
     FROM [dbo].[vwRo_Prestamo] AS [vwRo_Prestamo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_rol" EntityType="Self.vwro_rol" store:Type="Views" store:Schema="dbo">
@@ -10658,7 +10660,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Property Name="Observacion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoPersona" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoPersona" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="IdTipoCbte" Type="Int32" />
           <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" />
@@ -10667,6 +10669,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Property Name="descuento_quincena" Type="Boolean" Nullable="false" />
           <Property Name="descuento_men_quin" Type="Boolean" Nullable="false" />
           <Property Name="EstadoAprob" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioAprueba" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -12845,6 +12848,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <EntitySetMapping Name="vwRo_Prestamo">
             <EntityTypeMapping TypeName="Model_rrhh.vwRo_Prestamo">
               <MappingFragment StoreEntitySet="vwRo_Prestamo">
+                <ScalarProperty Name="IdUsuarioAprueba" ColumnName="IdUsuarioAprueba" />
                 <ScalarProperty Name="EstadoAprob" ColumnName="EstadoAprob" />
                 <ScalarProperty Name="descuento_men_quin" ColumnName="descuento_men_quin" />
                 <ScalarProperty Name="descuento_quincena" ColumnName="descuento_quincena" />

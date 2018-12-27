@@ -31,7 +31,7 @@ namespace Core.Erp.Data
         public string Observacion { get; set; }
         public string MotiAnula { get; set; }
         public string pe_cedulaRuc { get; set; }
-        public int IdTipoPersona { get; set; }
+        public string IdTipoPersona { get; set; }
         public decimal IdPersona { get; set; }
         public Nullable<int> IdTipoCbte { get; set; }
         public Nullable<decimal> IdCbteCble { get; set; }
@@ -40,5 +40,6 @@ namespace Core.Erp.Data
         public bool descuento_quincena { get; set; }
         public bool descuento_men_quin { get; set; }
         public string EstadoAprob { get; set; }
+        public string IdUsuarioAprueba { get; set; }
     }
 }
