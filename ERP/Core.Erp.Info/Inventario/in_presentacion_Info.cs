@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Inventario
 {
     public class in_presentacion_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         [Key]
         [Required(ErrorMessage = ("El campo código es obligatorio"))]

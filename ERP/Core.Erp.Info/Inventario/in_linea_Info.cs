@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Inventario
 {
     public class in_linea_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public string IdCategoria { get; set; }
         public int IdLinea { get; set; }

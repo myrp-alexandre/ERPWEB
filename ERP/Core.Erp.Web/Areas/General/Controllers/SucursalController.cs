@@ -84,4 +84,24 @@ namespace Core.Erp.Web.Areas.General.Controllers
 
         #endregion
     }
+    public class tb_sucursal_List
+    {
+        string Variable = "tb_sucursal_Info";
+        public List<tb_sucursal_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<tb_sucursal_Info> list = new List<tb_sucursal_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<tb_sucursal_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<tb_sucursal_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
 }

@@ -119,7 +119,6 @@ namespace Core.Erp.Info.Helps
     public class cl_filtros_banco_Info
     {
         public int IdEmpresa { get; set; }
-
         public int IdBanco { get; set; }
         public decimal? IdPersona { get; set; }
         public string Estado { get; set; }
@@ -130,6 +129,8 @@ namespace Core.Erp.Info.Helps
             fecha_ini = DateTime.Now.Date.AddMonths(-1);
             fecha_fin = DateTime.Now.Date;
         }
+        public int NumDesde { get; set; }
+        public int NumHasta { get; set; }
     }
 
     public class cl_filtros_contabilidad_Info
