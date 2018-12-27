@@ -154,7 +154,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
+    }
 
-      
+    public class ro_turno_List
+    {
+        string Variable = "ro_turno_Info";
+        public List<ro_turno_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ro_turno_Info> list = new List<ro_turno_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ro_turno_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ro_turno_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
     }
 }

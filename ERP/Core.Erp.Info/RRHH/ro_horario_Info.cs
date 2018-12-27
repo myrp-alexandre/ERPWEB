@@ -9,6 +9,7 @@ namespace Core.Erp.Info.RRHH
 {
   public  class ro_horario_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdHorario { get; set; }
         [DataType(DataType.Time)]

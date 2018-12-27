@@ -8537,11 +8537,11 @@
     <Content Include="Areas\Facturacion\Views\Cliente\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\Cliente\Index.cshtml" />
     <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente.cshtml" />
-    <Content Include="Areas\RRHH\Views\CatalogoRRHH\Anular.cshtml" />
-    <Content Include="Areas\RRHH\Views\CatalogoRRHH\Index.cshtml" />
-    <Content Include="Areas\RRHH\Views\CatalogoRRHH\Modificar.cshtml" />
-    <Content Include="Areas\RRHH\Views\CatalogoRRHH\Nuevo.cshtml" />
-    <Content Include="Areas\RRHH\Views\CatalogoRRHH\_GridViewPartial_catalogos.cshtml" />
+    <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\CatalogoRRHH\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\CatalogoRRHH\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\CatalogoRRHH\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\CatalogoRRHH\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\CatalogoRRHH\_GridViewPartial_catalogos.cshtml" />
     <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\Modificar.cshtml" />
@@ -9570,7 +9570,9 @@
     <Content Include="Areas\Banco\Views\BancoCuenta\Importar.cshtml" />
     <Content Include="Areas\Banco\Views\BancoCuenta\_GridViewPartial_Banco_importacion.cshtml" />
     <Content Include="Areas\Banco\Views\BancoCuenta\_GridViewPartial_Documento_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\Empleado\Importar.cshtml" />
     <Content Include="Areas\Banco\Views\BancoCuenta\Disenar.cshtml" />
+
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

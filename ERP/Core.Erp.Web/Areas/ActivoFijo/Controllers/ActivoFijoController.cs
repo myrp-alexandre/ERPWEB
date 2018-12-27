@@ -530,14 +530,8 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 //e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);
             }
         }
-
-
-
-
-
-
-
     }
+    #endregion
     public class UploadControlSettings
     {
         public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
@@ -767,7 +761,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
             }
         }
     }
-    #endregion
+    
 
     public class Af_Activo_fijo_CtaCble_List
     {

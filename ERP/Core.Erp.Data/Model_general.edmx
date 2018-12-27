@@ -195,6 +195,15 @@
           <Property Name="nom_pc" Type="varchar" MaxLength="50" />
           <Property Name="ip" Type="varchar" MaxLength="25" />
         </EntityType>
+        <EntityType Name="tb_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCod_Impuesto" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Porcentaje" Type="float" Nullable="false" />
+          <Property Name="EsMultiSucursal" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="tb_parroquia">
           <Key>
             <PropertyRef Name="IdParroquia" />
@@ -738,6 +747,18 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_parametro_tb_sis_Impuesto">
+          <End Role="tb_sis_Impuesto" Type="Self.tb_sis_Impuesto" Multiplicity="1" />
+          <End Role="tb_parametro" Type="Self.tb_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Impuesto">
+              <PropertyRef Name="IdCod_Impuesto" />
+            </Principal>
+            <Dependent Role="tb_parametro">
+              <PropertyRef Name="IdCod_Impuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_parroquia_tb_ciudad">
           <End Role="tb_ciudad" Type="Self.tb_ciudad" Multiplicity="1" />
           <End Role="tb_parroquia" Type="Self.tb_parroquia" Multiplicity="*" />
@@ -1041,6 +1062,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <EntitySet Name="tb_modulo" EntityType="Self.tb_modulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_moneda" EntityType="Self.tb_moneda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_pais" EntityType="Self.tb_pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_parametro" EntityType="Self.tb_parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_parroquia" EntityType="Self.tb_parroquia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_persona" EntityType="Self.tb_persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_persona_tipo" EntityType="Self.tb_persona_tipo" Schema="dbo" store:Type="Tables" />
@@ -1169,6 +1191,10 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <AssociationSet Name="FK_tb_ciudad_tb_provincia" Association="Self.FK_tb_ciudad_tb_provincia">
             <End Role="tb_provincia" EntitySet="tb_provincia" />
             <End Role="tb_ciudad" EntitySet="tb_ciudad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_parametro_tb_sis_Impuesto" Association="Self.FK_tb_parametro_tb_sis_Impuesto">
+            <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
+            <End Role="tb_parametro" EntitySet="tb_parametro" />
           </AssociationSet>
           <AssociationSet Name="FK_tb_parroquia_tb_ciudad" Association="Self.FK_tb_parroquia_tb_ciudad">
             <End Role="tb_ciudad" EntitySet="tb_ciudad" />
@@ -1427,6 +1453,11 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <AssociationSet Name="FK_tb_sucursal_tb_empresa" Association="Model_general.FK_tb_sucursal_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+          </AssociationSet>
+          <EntitySet Name="tb_parametro" EntityType="Model_general.tb_parametro" />
+          <AssociationSet Name="FK_tb_parametro_tb_sis_Impuesto" Association="Model_general.FK_tb_parametro_tb_sis_Impuesto">
+            <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
+            <End Role="tb_parametro" EntitySet="tb_parametro" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="tb_banco">
@@ -1805,6 +1836,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <Property Name="IdTipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_sis_Impuesto_Tipo" Relationship="Model_general.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" FromRole="tb_sis_Impuesto" ToRole="tb_sis_Impuesto_Tipo" />
           <NavigationProperty Name="tb_sis_Impuesto_x_ctacble" Relationship="Model_general.FK_tb_sis_Impuesto_x_ctacble_tb_sis_Impuesto" FromRole="tb_sis_Impuesto" ToRole="tb_sis_Impuesto_x_ctacble" />
+          <NavigationProperty Name="tb_parametro" Relationship="Model_general.FK_tb_parametro_tb_sis_Impuesto" FromRole="tb_sis_Impuesto" ToRole="tb_parametro" />
         </EntityType>
         <EntityType Name="tb_sis_Impuesto_Tipo">
           <Key>
@@ -2490,6 +2522,28 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCod_Impuesto" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Porcentaje" Type="Double" Nullable="false" />
+          <Property Name="EsMultiSucursal" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tb_sis_Impuesto" Relationship="Model_general.FK_tb_parametro_tb_sis_Impuesto" FromRole="tb_parametro" ToRole="tb_sis_Impuesto" />
+        </EntityType>
+        <Association Name="FK_tb_parametro_tb_sis_Impuesto">
+          <End Type="Model_general.tb_sis_Impuesto" Role="tb_sis_Impuesto" Multiplicity="1" />
+          <End Type="Model_general.tb_parametro" Role="tb_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Impuesto">
+              <PropertyRef Name="IdCod_Impuesto" />
+            </Principal>
+            <Dependent Role="tb_parametro">
+              <PropertyRef Name="IdCod_Impuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
 
       </Schema>
     </edmx:ConceptualModels>
@@ -3157,6 +3211,16 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
                 <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
                 <ScalarProperty Name="em_nombre" ColumnName="em_nombre" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_parametro">
+            <EntityTypeMapping TypeName="Model_general.tb_parametro">
+              <MappingFragment StoreEntitySet="tb_parametro">
+                <ScalarProperty Name="EsMultiSucursal" ColumnName="EsMultiSucursal" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdCod_Impuesto" ColumnName="IdCod_Impuesto" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

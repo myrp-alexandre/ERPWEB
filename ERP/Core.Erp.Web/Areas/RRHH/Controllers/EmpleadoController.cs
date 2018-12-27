@@ -13,6 +13,7 @@ using DevExpress.Web;
 using System.IO;
 using Microsoft.SqlServer.Server;
 using Core.Erp.Web.Helps;
+using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -35,6 +36,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ct_punto_cargo_Bus bus_puntocargo = new ct_punto_cargo_Bus();
         ro_horario_Bus bus_horario = new ro_horario_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+
+        tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
+        ro_rubro_tipo_Info_list ListaRubro = new ro_rubro_tipo_Info_list();
+        ro_horario_List ListaHorario = new ro_horario_List();
+        ro_turno_List ListaTurno = new ro_turno_List();
+        ro_empleado_info_list ListaEmpleado = new ro_empleado_info_list();
+        ro_contrato_List ListaContrato = new ro_contrato_List();
+        ro_cargaFamiliar_List ListaCargasFamiliares = new ro_cargaFamiliar_List();
+        ro_rol_detalle_x_rubro_acumulado_List ListaProvisionesAcumuladas = new ro_rol_detalle_x_rubro_acumulado_List();
+        //ro_rubro_tipo_Info_list ListaVacaciones = new ro_rubro_tipo_Info_list();
+
         public static byte[] imagen { get; set; }
         public decimal IdEmpleado { get; set; }
         public static UploadedFile file { get; set; }
@@ -396,6 +408,75 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return Json(SessionFixed.NombreImagen, JsonRequestBehavior.AllowGet);
         }
 
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            ro_empleado_Info model = new ro_empleado_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(ro_empleado_Info model)
+        {
+            try
+            {
+                var Lista_Rubro = ListaRubro.get_list();
+                var Lista_Horario = ListaHorario.get_list(model.IdTransaccionSession);
+                var Lista_Turno = ListaTurno.get_list(model.IdTransaccionSession);
+                var Lista_Empleado = ListaEmpleado.get_list();
+                var Lista_Contrato = ListaContrato.get_list(model.IdTransaccionSession);
+                var Lista_CargasFamiliares = ListaCargasFamiliares.get_list(model.IdTransaccionSession);
+                var Lista_ProvisionesAcumuladas= ListaProvisionesAcumuladas.get_list(model.IdTransaccionSession);
+                //var Lista_Vacaciones = ListaVacaciones.get_list(model.IdTransaccionSession);
+
+                //if (!bus_empleado.guardarDB_importacion(Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_Contrato, Lista_CargasFamiliares, Lista_Vacaciones))
+                //{
+                //    ViewBag.mensaje = "Error al importar el archivo";
+                //    return View(model);
+                //}
+            }
+            catch (Exception ex)
+            {
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.error = ex.Message.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        //public ActionResult GridViewPartial_Rubro_importacion()
+        //{
+        //    SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+        //    var model = ListaRubro.get_list();
+        //    return PartialView("_GridViewPartial_departamentoAF_importacion", model);
+        //}
+
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 
 
@@ -452,7 +533,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             HttpContext.Current.Session[variable] = list;
         }
+    }
 
+    public class ro_rol_detalle_x_rubro_acumulado_List
+    {
+        string Variable = "ro_cargaFamiliar_Info";
+        public List<ro_rol_detalle_x_rubro_acumulado_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ro_rol_detalle_x_rubro_acumulado_Info> list = new List<ro_rol_detalle_x_rubro_acumulado_Info>();
 
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ro_rol_detalle_x_rubro_acumulado_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ro_rol_detalle_x_rubro_acumulado_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
     }
 }
