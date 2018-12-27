@@ -128,7 +128,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             public static byte[] pr_imagen { get; set; }
             public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
             {
-                AllowedFileExtensions = new string[] { ".jpg", ".jpeg" },
+                AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".png" },
                 MaxFileSize = 4000000
             };
             public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
