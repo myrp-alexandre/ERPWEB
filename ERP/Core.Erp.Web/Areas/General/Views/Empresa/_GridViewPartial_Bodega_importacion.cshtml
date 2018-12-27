@@ -48,8 +48,9 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdSucursal", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("IDBodega", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdEmpresa", "Id Empresa").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdSucursal", "Id Sucursal").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdBodega", "Id Bodega").Width = Unit.Percentage(10);
         settings.Columns.Add("cod_bodega", "Código").Width = Unit.Percentage(20);
         settings.Columns.Add("bo_Descripcion", "Descripción").Width = Unit.Percentage(30);
         settings.Columns.Add("IdCtaCtble_Inve", "Cuenta contable de inventario").Width = Unit.Percentage(20);

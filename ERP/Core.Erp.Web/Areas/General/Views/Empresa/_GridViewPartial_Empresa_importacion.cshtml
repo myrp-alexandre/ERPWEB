@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_Emppresa_importacion";
-        settings.CallbackRouteValues = new { Controller = "Empresa", Action = "GridViewPartial_Emppresa_importacion" };
+        settings.Name = "GridViewPartial_Empresa_importacion";
+        settings.CallbackRouteValues = new { Controller = "Empresa", Action = "GridViewPartial_Empresa_importacion" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdEmpresa";
         settings.Width = Unit.Percentage(100);
@@ -51,25 +51,28 @@
         settings.Columns.Add("IdEmpresa", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("codigo", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("em_nombre", "Descripción").Width = Unit.Percentage(10);
-        settings.Columns.Add("NombreComercial", "Nombre comercial").Width = Unit.Percentage(10);
+        settings.Columns.Add("RazonSocial", "Razón social").Width = Unit.Percentage(10);
+        settings.Columns.Add("NombreComercial", "Nombre comercial").Width = Unit.Percentage(10); 
+        settings.Columns.Add("ContribuyenteEspecial", "Contribuyente especial").Width = Unit.Percentage(10);
         settings.Columns.Add("em_ruc", "RUC").Width = Unit.Percentage(10);
         settings.Columns.Add("em_gerente", "Gerente").Width = Unit.Percentage(10);
         settings.Columns.Add("em_contador", "Contador").Width = Unit.Percentage(10);
+        settings.Columns.Add("em_rucContador", "RUC Contador").Width = Unit.Percentage(10);
         settings.Columns.Add("em_telefonos", "Télefonos").Width = Unit.Percentage(10);
         settings.Columns.Add("em_direccion", "Dirección").Width = Unit.Percentage(10);
-        settings.Columns.Add("em_fechaInicioContable", "Fecha inicio contable").Width = Unit.Percentage(10);
-        //settings.Columns.Add(column =>
-        //{
-        //    column.FieldName = "em_fechaInicioContable";
-        //    column.Caption = "Fecha inicio contable";
-        //    column.Width = Unit.Percentage(10);
-        //    column.PropertiesEdit.DisplayFormatString = "d";
-        //    column.EditorProperties().DateEdit(sp =>
-        //    {
-        //        column.PropertiesEdit.DisplayFormatString = "d";
-        //        sp.Width = Unit.Percentage(100);
-        //    });
-        //});
+        //settings.Columns.Add("em_fechaInicioContable", "Fecha inicio contable").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "em_fechaInicioContable";
+            column.Caption = "Fecha inicio contable";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
         settings.Columns.Add("cod_entidad_dinardap", "Código DINARDAP").Width = Unit.Percentage(10);
         settings.Columns.Add("em_Email", "Email").Width = Unit.Percentage(10);
 
