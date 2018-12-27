@@ -215,7 +215,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ba_Banco_Cbte_List ListaCbte = new ba_Banco_Cbte_List();
             List<ba_Cbte_Ban_Info> Lista_Cbte = new List<ba_Cbte_Ban_Info>();
             tb_banco_Bus bus_banco = new tb_banco_Bus();
-
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
 
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
@@ -247,12 +247,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                             
 
                         };
-
+                        #region GetInfo
                         tb_banco_Info banco = bus_banco.get_info(info.IdBanco);
                         info.ba_descripcion = banco.ba_descripcion + " " + info.ba_Tipo + " " + info.ba_Num_Cuenta;
                         info.MostrarVistaPreviaCheque = false;
                         info.Imprimir_Solo_el_cheque = false;
                         Lista_Banco.Add(info);
+                        #endregion
+
                     }
                     else
                         cont++;
@@ -273,7 +275,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                         {
                             IdEmpresa = IdEmpresa,
                             IdTipo_Persona = Convert.ToString(reader.GetValue(0)),
-                            IdSucursal = Convert.ToInt32(reader.GetValue(1)),
+                            Su_Descripcion = Convert.ToString(reader.GetValue(1)),
                             IdBanco = Convert.ToInt32(reader.GetValue(2)),
                             cb_Fecha = Convert.ToDateTime(reader.GetValue(3)),
                             cb_Observacion = Convert.ToString(reader.GetValue(4)),
@@ -282,7 +284,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
                             IdUsuario = SessionFixed.IdUsuario,
                         };
-                  }
+                        #region GetInfo
+                        tb_sucursal_Info sucursal = bus_sucursal.GetInfo(IdEmpresa, info.Su_Descripcion);
+                        info.Su_Descripcion = sucursal.Su_Descripcion;
+                        info.IdSucursal = sucursal.IdSucursal;
+                        Lista_Cbte.Add(info);
+                        #endregion
+                    }
                     else
                         cont++;
                 }

@@ -273,5 +273,38 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
+
+        public tb_sucursal_Info GetInfo(int IdEmpresa, string CodigoEstablecimiento)
+        {
+            try
+            {
+                tb_sucursal_Info info = new tb_sucursal_Info();
+                using (Entities_general Context = new Entities_general())
+                {
+                    tb_sucursal Entity = Context.tb_sucursal.Where(q => q.IdEmpresa == IdEmpresa && q.Su_CodigoEstablecimiento == CodigoEstablecimiento).FirstOrDefault();
+                    if (Entity == null) return null;
+                     info = new tb_sucursal_Info
+                    {
+                         IdEmpresa = Entity.IdEmpresa,
+                         IdSucursal = Entity.IdSucursal,
+                         Su_Descripcion = Entity.Su_Descripcion,
+                         codigo = Entity.codigo,
+                         Estado = Entity.Estado,
+                         Es_establecimiento = Entity.Es_establecimiento,
+                         Su_CodigoEstablecimiento = Entity.Su_CodigoEstablecimiento,
+                         Su_Direccion = Entity.Su_Direccion,
+                         Su_JefeSucursal = Entity.Su_JefeSucursal,
+                         Su_Ubicacion = Entity.Su_Ubicacion,
+                         Su_Ruc = Entity.Su_Ruc,
+                         Su_Telefonos = Entity.Su_Telefonos                         
+                     };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

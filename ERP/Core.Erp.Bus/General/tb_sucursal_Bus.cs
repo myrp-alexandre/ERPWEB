@@ -83,5 +83,17 @@ namespace Core.Erp.Bus.General
                 throw;
             }
         }
+        public tb_sucursal_Info GetInfo(int IdEmpresa, string CodigoEstablecimiento)
+        {
+            try
+            {
+                return odata.GetInfo(IdEmpresa, CodigoEstablecimiento);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

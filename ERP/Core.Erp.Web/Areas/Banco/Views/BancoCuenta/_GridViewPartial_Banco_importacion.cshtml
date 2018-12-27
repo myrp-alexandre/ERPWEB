@@ -48,7 +48,7 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdBanco_Financiero", "Cuenta bancaria").Width = Unit.Percentage(10);
+        settings.Columns.Add("ba_descripcion", "Cuenta bancaria").Width = Unit.Percentage(10);
         settings.Columns.Add("IdBanco", "Id Banco").Width = Unit.Percentage(10);
         settings.Columns.Add("ba_Tipo", "Tipo cuenta").Width = Unit.Percentage(20);
         settings.Columns.Add("ba_Num_Cuenta", "Número de cuenta").Width = Unit.Percentage(10);
