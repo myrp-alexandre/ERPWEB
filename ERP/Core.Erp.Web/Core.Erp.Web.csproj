@@ -9568,6 +9568,7 @@
     <Content Include="Areas\General\Views\Empresa\_GridViewPartial_Bodega_importacion.cshtml" />
     <Content Include="Areas\Banco\Views\BancoCuenta\Importar.cshtml" />
     <Content Include="Areas\Banco\Views\BancoCuenta\_GridViewPartial_Banco_importacion.cshtml" />
+    <Content Include="Areas\Banco\Views\BancoCuenta\_GridViewPartial_Documento_importacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
