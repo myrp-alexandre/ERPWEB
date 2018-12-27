@@ -430,6 +430,7 @@
     <Compile Include="Areas\RRHH\Controllers\CatalogoRRHHController.cs" />
     <Compile Include="Areas\RRHH\Controllers\CatalogoTipoRRHHController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ContratoController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\ControlDeMarcacionesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\DepartamentoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\DepartamentoPorAreaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\DivisionController.cs" />
@@ -9566,6 +9567,9 @@
     <Content Include="Areas\General\Views\Empresa\_GridViewPartial_Empresa_importacion.cshtml" />
     <Content Include="Areas\General\Views\Empresa\_GridViewPartial_Sucursal_importacion.cshtml" />
     <Content Include="Areas\General\Views\Empresa\_GridViewPartial_Bodega_importacion.cshtml" />
+    <Content Include="Areas\Banco\Views\BancoCuenta\Importar.cshtml" />
+    <Content Include="Areas\Banco\Views\BancoCuenta\_GridViewPartial_Banco_importacion.cshtml" />
+    <Content Include="Areas\Banco\Views\BancoCuenta\_GridViewPartial_Documento_importacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9649,6 +9653,7 @@
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
     <Folder Include="Areas\RRHH\Views\AprobacionPrestamos\" />
+    <Folder Include="Areas\RRHH\Views\ControlDeMarcaciones\" />
     <Folder Include="Areas\RRHH\Views\SancionesPorAtraso\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />

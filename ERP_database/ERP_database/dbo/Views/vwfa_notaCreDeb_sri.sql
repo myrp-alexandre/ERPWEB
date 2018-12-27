@@ -3,7 +3,7 @@ AS
 SELECT        dbo.fa_notaCreDeb.IdEmpresa, dbo.fa_notaCreDeb.IdSucursal, dbo.fa_notaCreDeb.IdBodega, dbo.fa_notaCreDeb.IdNota, dbo.fa_notaCreDeb.CreDeb, 
                          dbo.fa_notaCreDeb.CodNota, dbo.fa_notaCreDeb.Serie1, dbo.fa_notaCreDeb.Serie2, dbo.fa_notaCreDeb.IdCliente, dbo.fa_notaCreDeb.no_fecha, 
                          dbo.fa_notaCreDeb.Estado, dbo.fa_notaCreDeb.NaturalezaNota, dbo.fa_notaCreDeb.NumAutorizacion, dbo.tb_empresa.RazonSocial, 
-                         dbo.tb_empresa.NombreComercial, dbo.tb_empresa.ContribuyenteEspecial, dbo.tb_empresa.ObligadoAllevarConta, dbo.tb_empresa.em_ruc, 
+                         dbo.tb_empresa.NombreComercial, dbo.tb_empresa.ContribuyenteEspecial,  'SI'ObligadoAllevarConta, dbo.tb_empresa.em_ruc, 
                          dbo.tb_empresa.em_direccion, dbo.tb_sucursal.Su_Descripcion, dbo.tb_sucursal.Su_Direccion, dbo.tb_persona.pe_razonSocial AS cl_RazonSocial, 
                          dbo.tb_persona.pe_nombreCompleto, dbo.tb_persona.IdTipoDocumento, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_correo, 
                          dbo.fa_notaCreDeb.NumNota_Impresa, dbo.fa_factura.vt_serie1 + '-' + dbo.fa_factura.vt_serie2 + '-' + dbo.fa_factura.vt_NumFactura AS num_Factura, 
@@ -30,7 +30,7 @@ UNION
 SELECT        dbo.fa_notaCreDeb.IdEmpresa, dbo.fa_notaCreDeb.IdSucursal, dbo.fa_notaCreDeb.IdBodega, dbo.fa_notaCreDeb.IdNota, dbo.fa_notaCreDeb.CreDeb, 
                          dbo.fa_notaCreDeb.CodNota, dbo.fa_notaCreDeb.Serie1, dbo.fa_notaCreDeb.Serie2, dbo.fa_notaCreDeb.IdCliente, dbo.fa_notaCreDeb.no_fecha, 
                          dbo.fa_notaCreDeb.Estado, dbo.fa_notaCreDeb.NaturalezaNota, dbo.fa_notaCreDeb.NumAutorizacion, dbo.tb_empresa.RazonSocial, 
-                         dbo.tb_empresa.NombreComercial, dbo.tb_empresa.ContribuyenteEspecial, dbo.tb_empresa.ObligadoAllevarConta, dbo.tb_empresa.em_ruc, 
+                         dbo.tb_empresa.NombreComercial, dbo.tb_empresa.ContribuyenteEspecial,  'SI'ObligadoAllevarConta, dbo.tb_empresa.em_ruc, 
                          dbo.tb_empresa.em_direccion, dbo.tb_sucursal.Su_Descripcion, dbo.tb_sucursal.Su_Direccion, dbo.tb_persona.pe_razonSocial AS cl_RazonSocial, 
                          dbo.tb_persona.pe_nombreCompleto, dbo.tb_persona.IdTipoDocumento, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_correo, 
                          dbo.fa_notaCreDeb.NumNota_Impresa, CASE WHEN fa_notaCreDeb_Doc_Modif.NumNota_Impresa IS NULL 

@@ -145,7 +145,7 @@ namespace Core.Erp.Data.Contabilidad
                         cb_Fecha = info.cb_Fecha.Date,
                         IdSucursal = info.IdSucursal,
                         cb_Observacion = info.cb_Observacion,
-                        cb_Valor = info.cb_Valor,
+                        cb_Valor = info.lst_ct_cbtecble_det.Where(q=> q.dc_Valor > 0).Sum(q=>q.dc_Valor),
                         CodCbteCble = info.CodCbteCble,
                         IdCbteCble = info.IdCbteCble=get_id(info.IdEmpresa, info.IdTipoCbte),
                         IdPeriodo = info.IdPeriodo = Convert.ToInt32(info.cb_Fecha.Year.ToString()+ info.cb_Fecha.Month.ToString("00")),
@@ -196,7 +196,7 @@ namespace Core.Erp.Data.Contabilidad
                     Entity.cb_Fecha = info.cb_Fecha.Date;
                     Entity.IdSucursal = info.IdSucursal;
                     Entity.cb_Observacion = info.cb_Observacion;
-                    Entity.cb_Valor = info.cb_Valor;
+                    Entity.cb_Valor = info.lst_ct_cbtecble_det.Where(q => q.dc_Valor > 0).Sum(q => q.dc_Valor);
                     Entity.CodCbteCble = info.CodCbteCble;
                     Entity.IdPeriodo = info.IdPeriodo = Convert.ToInt32(info.cb_Fecha.ToString("yyyyMM"));
 

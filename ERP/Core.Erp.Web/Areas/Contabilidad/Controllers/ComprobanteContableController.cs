@@ -5,11 +5,14 @@ using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 
 namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 {
@@ -18,12 +21,14 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
     {
         #region Variables
         ct_cbtecble_Bus bus_comprobante = new ct_cbtecble_Bus();
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         ct_cbtecble_det_Bus bus_comprobante_detalle = new ct_cbtecble_det_Bus();
         ct_cbtecble_det_List list_ct_cbtecble_det = new ct_cbtecble_det_List();
         string mensaje = string.Empty;
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         pre_Grupo_Bus bus_grupo = new pre_Grupo_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
         #endregion
 
         #region Index
@@ -303,9 +308,118 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             return PartialView("_GridViewPartial_comprobante_detalle", model);
         }
         #endregion
+
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettingscbte.UploadValidationSettings, UploadControlSettingscbte.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            ct_cbtecble_Info model = new ct_cbtecble_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(ct_cbtecble_Info model)
+        {
+            try
+            {
+                var ListaDet = list_ct_cbtecble_det.get_list(model.IdTransaccionSession);
+                model.lst_ct_cbtecble_det = ListaDet;
+            }
+            catch (Exception ex)
+            {
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.error = ex.Message.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
-    
-public class ct_cbtecble_det_List
+
+    public class UploadControlSettingscbte
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            ct_plancta_Bus bus_ctacble = new ct_plancta_Bus();
+            ct_cbtecble_det_List ListaDet = new ct_cbtecble_det_List();
+            List<ct_cbtecble_det_Info> Lista_Det = new List<ct_cbtecble_det_Info>();
+
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
+
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                var SecDet = 1;
+                #region Presupuesto                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        var IdCtaCble = Convert.ToString(reader.GetValue(1));
+                        ct_plancta_Info infoCtaCble = bus_ctacble.get_info(IdEmpresa, IdCtaCble);
+
+                        if(infoCtaCble!= null)
+                        {
+                            ct_cbtecble_det_Info info = new ct_cbtecble_det_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                secuencia = SecDet++,
+                                IdCtaCble = IdCtaCble,
+                                Descripcion = infoCtaCble.pc_Cuenta,
+                                dc_Valor = Convert.ToDouble(reader.GetValue(2)) > 0 ? Convert.ToDouble(reader.GetValue(2)) : (Convert.ToDouble(reader.GetValue(3)) * -1),
+                                dc_Valor_debe = Convert.ToDouble(reader.GetValue(2)),
+                                dc_Valor_haber = Convert.ToDouble(reader.GetValue(3))
+                            };
+                            Lista_Det.Add(info);
+                        }                        
+                    }
+                    else
+                        cont++;
+                }
+                ListaDet.set_list(Lista_Det, IdTransaccionSession);
+                #endregion
+            }
+        }
+    }
+    public class ct_cbtecble_det_List
     {
         string variable = "ct_cbtecble_det_Info";
         public List<ct_cbtecble_det_Info> get_list(decimal IdTransaccionSession)

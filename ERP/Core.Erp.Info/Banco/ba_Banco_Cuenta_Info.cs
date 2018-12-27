@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Banco
 {
     public class ba_Banco_Cuenta_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdBanco { get; set; }
         [Required(ErrorMessage = "El campo descripción es obligatorio")]

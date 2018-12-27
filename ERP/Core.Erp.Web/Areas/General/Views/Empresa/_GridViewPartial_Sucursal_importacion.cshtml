@@ -48,10 +48,12 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdSucursal", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdEmpresa", "Id Empresa").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdSucursal", "Id Sucursal").Width = Unit.Percentage(10);
         settings.Columns.Add("codigo", "Código").Width = Unit.Percentage(10);
         settings.Columns.Add("Su_Descripcion", "Descripción").Width = Unit.Percentage(10);
         settings.Columns.Add("Su_CodigoEstablecimiento", "Código de establecimiento").Width = Unit.Percentage(10);
+        settings.Columns.Add("Su_JefeSucursal", "Jefe sucursal").Width = Unit.Percentage(10);
         settings.Columns.Add("Su_Ruc", "RUC").Width = Unit.Percentage(10);
         settings.Columns.Add("Su_Telefonos", "Télefonos").Width = Unit.Percentage(10);
         settings.Columns.Add("Su_Direccion", "Dirección").Width = Unit.Percentage(10);

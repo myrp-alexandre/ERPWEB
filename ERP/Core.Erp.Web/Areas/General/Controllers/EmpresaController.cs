@@ -258,20 +258,21 @@ namespace Core.Erp.Web.Areas.General.Controllers
                     {
                         tb_empresa_Info info = new tb_empresa_Info
                         {
-                            IdEmpresa = IdEmpresa,
-                            codigo = Convert.ToString(reader.GetValue(0)),
-                            em_nombre = Convert.ToString(reader.GetValue(1)),
-                            RazonSocial = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)),
-                            NombreComercial = Convert.ToString(reader.GetValue(3)),
-                            em_ruc = Convert.ToString(reader.GetValue(4)),
-                            em_gerente = Convert.ToString(reader.GetValue(5)),
-                            em_contador = Convert.ToString(reader.GetValue(6)),
-                            em_rucContador = Convert.ToString(reader.GetValue(7)),
-                            em_telefonos = Convert.ToString(reader.GetValue(8)),
-                            em_direccion = Convert.ToString(reader.GetValue(9)),
-                            em_fechaInicioContable = Convert.ToDateTime(reader.GetValue(10)),
-                            cod_entidad_dinardap = Convert.ToString(reader.GetValue(11)),
-                            em_Email = Convert.ToString(reader.GetValue(12))
+                            IdEmpresa = Convert.ToInt32(reader.GetValue(0)),
+                            codigo = Convert.ToString(reader.GetValue(1)),
+                            em_nombre = Convert.ToString(reader.GetValue(2)),
+                            RazonSocial = Convert.ToString(reader.GetValue(3)),
+                            NombreComercial = Convert.ToString(reader.GetValue(4)),
+                            ContribuyenteEspecial = Convert.ToString(reader.GetValue(5)),
+                            em_ruc = Convert.ToString(reader.GetValue(6)),
+                            em_gerente = Convert.ToString(reader.GetValue(7)),
+                            em_contador = Convert.ToString(reader.GetValue(8)),
+                            em_rucContador = Convert.ToString(reader.GetValue(9)),
+                            em_telefonos = Convert.ToString(reader.GetValue(10)),
+                            em_direccion = Convert.ToString(reader.GetValue(11)),
+                            em_fechaInicioContable = reader.GetDateTime(12),
+                            cod_entidad_dinardap = Convert.ToString(reader.GetValue(13)),
+                            em_Email = Convert.ToString(reader.GetValue(14))
                         };
                         Lista_Empresa.Add(info);
                     }
@@ -291,12 +292,12 @@ namespace Core.Erp.Web.Areas.General.Controllers
                     {
                         tb_sucursal_Info info = new tb_sucursal_Info
                         {
-                            IdEmpresa = IdEmpresa,
-                            IdSucursal = Convert.ToInt32(reader.GetValue(0)),
-                            codigo = reader.GetString(1),
-                            Su_Descripcion = reader.GetString(2),
-                            Su_CodigoEstablecimiento = Convert.ToString(reader.GetValue(3)),
-                            Su_Ruc = Convert.ToString(reader.GetValue(4)),
+                            IdEmpresa = Convert.ToInt32(reader.GetValue(0)),
+                            IdSucursal = Convert.ToInt32(reader.GetValue(1)),
+                            codigo = Convert.ToString(reader.GetValue(2)),
+                            Su_Descripcion = Convert.ToString(reader.GetValue(3)),
+                            Su_CodigoEstablecimiento = Convert.ToString(reader.GetValue(4)),
+                            Su_Ruc = Convert.ToString(reader.GetValue(5)),
                             Su_JefeSucursal = Convert.ToString(reader.GetValue(6)),
                             Su_Telefonos = Convert.ToString(reader.GetValue(7)),
                             Su_Direccion = Convert.ToString(reader.GetValue(8)),
@@ -321,13 +322,13 @@ namespace Core.Erp.Web.Areas.General.Controllers
                     {
                         tb_bodega_Info info = new tb_bodega_Info
                         {
-                            IdEmpresa = IdEmpresa,
-                            IdSucursal = Convert.ToInt32(reader.GetValue(0)),
+                            IdEmpresa = Convert.ToInt32(reader.GetValue(0)),
+                            IdSucursal = Convert.ToInt32(reader.GetValue(1)),
                             IdBodega = Convert.ToInt32(reader.GetValue(1)),
-                            cod_bodega = reader.GetString(2),
-                            bo_Descripcion = Convert.ToString(reader.GetValue(3)),
-                            IdCtaCtble_Inve = Convert.ToString(reader.GetValue(4)),
-                             IdUsuario = SessionFixed.IdUsuario
+                            cod_bodega = Convert.ToString(reader.GetValue(2)),
+                            bo_Descripcion = Convert.ToString(reader.GetValue(4)),
+                            IdCtaCtble_Inve = Convert.ToString(reader.GetValue(5)),
+                            IdUsuario = SessionFixed.IdUsuario
                         };
                         Lista_Bodega.Add(info);
                     }

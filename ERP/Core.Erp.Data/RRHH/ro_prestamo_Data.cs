@@ -4,11 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.RRHH;
+using Core.Erp.Info.Helps;
+using Core.Erp.Data.CuentasPorPagar;
+using Core.Erp.Data.Contabilidad;
+
 namespace Core.Erp.Data.RRHH
 {
   public  class ro_prestamo_Data
     {
         ro_Parametros_Data odata = new ro_Parametros_Data();
+        cp_orden_pago_Data data_op = new cp_orden_pago_Data();
+        ct_cbtecble_Data data_ct = new ct_cbtecble_Data();
+
         public List<ro_prestamo_Info> get_list(int IdEmpresa, DateTime fechaInicio, DateTime fechaFin)
         {
             try
@@ -115,34 +122,7 @@ namespace Core.Erp.Data.RRHH
 
                 throw;
             }
-        }
-
-        public bool aprobar_prestamo(int IdEmpresa, string[] Lista, string IdUsuarioAprueba)
-        {
-            try
-            {
-                using (Entities_rrhh Context = new Entities_rrhh())
-                {
-                    foreach (var item in Lista)
-                    {
-                        var IdPrestamo = Convert.ToDecimal(item);
-                        ro_prestamo Entity = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
-                        if (Entity != null)
-                        {
-                            Entity.IdUsuarioAprueba = IdUsuarioAprueba;
-                            Entity.EstadoAprob = "APROB";
-                        }
-                        Context.SaveChanges();
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        }        
 
         public ro_prestamo_Info get_info(int IdEmpresa, decimal IdEmpleado, decimal IdPrestamo)
         {
@@ -330,6 +310,136 @@ namespace Core.Erp.Data.RRHH
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public bool aprobar_prestamo(int IdEmpresa, string[] Lista, string IdUsuarioAprueba)
+        {
+            Entities_rrhh Context = new Entities_rrhh();
+            Entities_cuentas_por_pagar Context_cxp = new Entities_cuentas_por_pagar();
+            Entities_contabilidad Context_ct = new Entities_contabilidad();
+
+            try
+            {
+                ro_Parametros Entity_ro_parametros = Context.ro_Parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                cp_orden_pago_tipo_x_empresa Entity_op_tipo = Context_cxp.cp_orden_pago_tipo_x_empresa.Where(q => q.IdEmpresa == IdEmpresa && q.IdTipo_op == Entity_ro_parametros.IdTipo_op_prestamos).FirstOrDefault();
+
+                decimal IdOrdenPago = 1;
+                decimal IdCbteCble_OP = 1;
+
+                foreach (var item in Lista)
+                {
+                    var IdPrestamo = Convert.ToDecimal(item);
+                   ro_prestamo Entity_Prestamo = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdPrestamo == IdPrestamo);
+
+                    if (Entity_Prestamo != null)
+                    {
+                        Entity_Prestamo.IdUsuarioAprueba = IdUsuarioAprueba;
+                        Entity_Prestamo.EstadoAprob = "APROB";
+                    }
+
+                    if (Entity_ro_parametros.genera_op_x_pago == true)
+                    {
+                        IdOrdenPago = data_op.get_id(Entity_Prestamo.IdEmpresa);
+                        IdCbteCble_OP = data_ct.get_id(Entity_Prestamo.IdEmpresa, Entity_ro_parametros.IdTipoCbte_AsientoSueldoXPagar);
+                        ro_empleado Entity_Empleado = Context.ro_empleado.Where(q=> q.IdEmpresa == Entity_Prestamo.IdEmpresa && q.IdEmpleado == Entity_Prestamo.IdEmpleado).FirstOrDefault();                        
+
+                        cp_orden_pago op = new cp_orden_pago
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdSucursal = Entity_Empleado.IdSucursal,
+                            IdOrdenPago = IdOrdenPago,
+                            Observacion = "Prestamo #" + Entity_Prestamo.IdPrestamo,
+                            IdTipo_op = Entity_ro_parametros.IdTipo_op_prestamos,
+                            IdTipo_Persona = cl_enumeradores.eTipoPersona.EMPLEA.ToString(),
+                            IdPersona = Entity_Empleado.IdPersona,
+                            IdEntidad = Entity_Prestamo.IdEmpleado,
+                            Fecha = DateTime.Now.Date,
+                            IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
+                            IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
+                            Estado = "A"
+                        };
+
+                        Entity_Prestamo.IdEmpresa_op = op.IdEmpresa;                        
+                        Entity_Prestamo.IdOrdenPago = op.IdOrdenPago;                        
+
+                        Context_cxp.cp_orden_pago.Add(op);
+
+                        ct_cbtecble diario = new ct_cbtecble
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdTipoCbte = Entity_ro_parametros.IdTipoCbte_AsientoSueldoXPagar,
+                            IdCbteCble = IdCbteCble_OP,
+                            cb_Fecha = DateTime.Now.Date,
+                            cb_Observacion = op.Observacion,
+                            IdPeriodo = Convert.ToInt32(DateTime.Now.Date.ToString("yyyyMM")),
+                            IdSucursal = Entity_Empleado.IdSucursal,
+                            cb_FechaTransac = DateTime.Now,
+                            cb_Estado = "A"
+                        };
+
+                        Entity_Prestamo.IdTipoCbte = diario.IdTipoCbte;
+                        Entity_Prestamo.IdCbteCble = diario.IdCbteCble;
+
+                        Context_ct.ct_cbtecble.Add(diario);
+
+                        ct_cbtecble_det diario_det = new ct_cbtecble_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = 1,
+                            IdCtaCble = Entity_op_tipo.IdCtaCble,
+                            dc_Valor = Math.Round(Convert.ToDouble(Entity_Prestamo.MontoSol), 2, MidpointRounding.AwayFromZero),
+                        };
+
+                        Context_ct.ct_cbtecble_det.Add(diario_det);
+
+                        ct_cbtecble_det diario_det_ = new ct_cbtecble_det
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = 2,
+                            IdCtaCble = Entity_op_tipo.IdCtaCble_Credito,
+                            dc_Valor = Math.Round(Convert.ToDouble(Entity_Prestamo.MontoSol), 2, MidpointRounding.AwayFromZero)*-1
+                        };
+
+                        Context_ct.ct_cbtecble_det.Add(diario_det_);
+
+                        cp_orden_pago_det op_det = new cp_orden_pago_det
+                        {
+                            IdEmpresa = op.IdEmpresa,
+                            IdOrdenPago = op.IdOrdenPago,
+                            Secuencia = 1,
+
+                            IdEmpresa_cxp = diario.IdEmpresa,
+                            IdTipoCbte_cxp = diario.IdTipoCbte,
+                            IdCbteCble_cxp = diario.IdCbteCble,
+
+                            Valor_a_pagar = Convert.ToDouble(Entity_Prestamo.MontoSol),
+                            IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
+                            IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
+                            Fecha_Pago = op.Fecha
+                        };
+
+                        Context_cxp.cp_orden_pago_det.Add(op_det);
+                    }
+                                        
+                    Context_ct.SaveChanges();
+                    Context_cxp.SaveChanges();
+                    Context.SaveChanges();
+                    
+                    Context_ct.Dispose();                    
+                    Context_cxp.Dispose();
+                    Context.Dispose();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

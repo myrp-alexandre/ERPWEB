@@ -442,6 +442,9 @@
     <Compile Include="RRHH\ro_rubros_calculados_Info.cs" />
     <Compile Include="RRHH\ro_rubro_acumulados_Info.cs" />
     <Compile Include="RRHH\ro_rubro_tipo_Info.cs" />
+    <Compile Include="RRHH\ro_SancionesPorMarcaciones_det_Info.cs" />
+    <Compile Include="RRHH\ro_SancionesPorMarcaciones_Info.cs" />
+    <Compile Include="RRHH\ro_SancionesPorMarcaciones_x_novedad_Info.cs" />
     <Compile Include="RRHH\ro_Solicitud_Vacaciones_x_empleado_Info.cs" />
     <Compile Include="RRHH\ro_tabla_Impu_Renta_Info.cs" />
     <Compile Include="RRHH\ro_tipo_gastos_personales_Info.cs" />
