@@ -9,6 +9,7 @@ namespace Core.Erp.Info.General
 {
     public class tb_empresa_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         [Required(ErrorMessage ="El campo código es obligatorio")]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 50")]

@@ -216,5 +216,96 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
+
+        public bool GuardarDbImportacion(List<tb_empresa_Info> Lista_Empresa, List<tb_sucursal_Info> Lista_Sucursal, List<tb_bodega_Info> Lista_Bodega)
+        {
+            try
+            {
+                using (Entities_general Context = new Entities_general())
+                {
+
+
+                    if (Lista_Empresa.Count > 0)
+                    {
+                        foreach (var item in Lista_Empresa)
+                        {
+                            tb_empresa Entity_Emp = new tb_empresa
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                codigo = item.codigo,
+                                em_nombre = item.em_nombre,
+                                RazonSocial = item.RazonSocial,
+                                NombreComercial = item.NombreComercial,
+                                ContribuyenteEspecial = item.ContribuyenteEspecial,
+                                em_gerente = item.em_gerente,
+                                em_contador = item.em_contador,
+                                em_rucContador = item.em_rucContador,
+                                em_telefonos = item.em_telefonos,
+                                em_direccion = item.em_direccion,
+                                em_fechaInicioContable = item.em_fechaInicioContable,
+                                cod_entidad_dinardap = item.cod_entidad_dinardap,
+                                em_Email = item.em_Email,
+                                Estado = item.Estado = "A"
+                            };
+                            Context.tb_empresa.Add(Entity_Emp);
+                        }
+                    }
+
+                    if (Lista_Sucursal.Count > 0)
+                    {
+                        foreach (var item in Lista_Sucursal)
+                        {
+                            tb_sucursal Entity_Sur = new tb_sucursal
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdSucursal = item.IdSucursal,
+                                codigo = item.codigo,
+                                Su_Descripcion = item.Su_Descripcion,
+                                Su_CodigoEstablecimiento = item.Su_CodigoEstablecimiento,
+                                Su_Ruc = item.Su_Ruc,
+                                Su_JefeSucursal = item.Su_JefeSucursal,
+                                Su_Telefonos = item.Su_Telefonos,
+                                Su_Direccion = item.Su_Direccion,
+                                Estado = item.Estado = "A",
+                                IdUsuario = item.IdUsuario,
+                            };
+                            Context.tb_sucursal.Add(Entity_Sur);
+                        }
+                    }
+
+                    if (Lista_Bodega.Count > 0)
+                    {
+                        foreach (var item in Lista_Bodega)
+                        {
+                            tb_bodega Entity_Bod = new tb_bodega
+                            {
+
+                                IdEmpresa = item.IdEmpresa,
+                                IdSucursal = item.IdSucursal,
+                                IdBodega = item.IdBodega,
+                                cod_bodega = item.cod_bodega,
+                                bo_Descripcion = item.bo_Descripcion,
+                                IdCtaCtble_Inve = item.IdCtaCtble_Inve,
+                                Estado = item.Estado = "A",
+                                IdUsuario = item.IdUsuario,
+
+                            };
+                            Context.tb_bodega.Add(Entity_Bod);
+                        }
+                    }
+
+                    Context.SaveChanges();
+
+
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

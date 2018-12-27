@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Inventario
 {
     public class in_Marca_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdMarca { get; set; }
         [Required(ErrorMessage = ("El campo descripción es obligatorio"))]

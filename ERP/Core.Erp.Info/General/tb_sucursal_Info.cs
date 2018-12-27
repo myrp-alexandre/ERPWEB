@@ -9,6 +9,7 @@ namespace Core.Erp.Info.General
 {
     public class tb_sucursal_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public string codigo { get; set; }

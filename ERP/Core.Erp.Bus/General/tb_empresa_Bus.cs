@@ -72,6 +72,18 @@ namespace Core.Erp.Bus.General
                 throw;
             }
         }
+        public bool GuardarDbImportacion(List<tb_empresa_Info> Lista_Empresa, List<tb_sucursal_Info> Lista_Sucursal, List<tb_bodega_Info> Lista_Bodega)
+        {
+            try
+            {
+                return odata.GuardarDbImportacion(Lista_Empresa, Lista_Sucursal, Lista_Bodega);
+            }   
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
     }
 }

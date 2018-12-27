@@ -9562,6 +9562,10 @@
     <Content Include="Areas\RRHH\Views\Prestamos\_GridViewPartial_prestamos_abono_det.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_006_Masivo.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_005_Masivo.cshtml" />
+    <Content Include="Areas\General\Views\Empresa\Importar.cshtml" />
+    <Content Include="Areas\General\Views\Empresa\_GridViewPartial_Empresa_importacion.cshtml" />
+    <Content Include="Areas\General\Views\Empresa\_GridViewPartial_Sucursal_importacion.cshtml" />
+    <Content Include="Areas\General\Views\Empresa\_GridViewPartial_Bodega_importacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

@@ -19,12 +19,12 @@ namespace Core.Erp.Web.Reportes.Banco
         private void BAN_006_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
 
-            int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdTipoCbte = p_IdTipoCbte.Value == null ? 0 : Convert.ToInt32(p_IdTipoCbte.Value);
-            decimal IdCbteCble = p_IdCbteCble.Value == null ? 0 : Convert.ToDecimal(p_IdCbteCble.Value);
-            int NumDesde = p_NumDesde.Value == null ? 0 : Convert.ToInt32(p_NumDesde.Value);
-            int NumHasta = p_NumHasta.Value == null ? 0 : Convert.ToInt32(p_NumHasta.Value);
-            int IdBanco = p_IdBanco.Value == null ? 0 : Convert.ToInt32(p_IdBanco.Value);
+            int IdEmpresa = string.IsNullOrEmpty((p_IdEmpresa.Value).ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            int IdTipoCbte = string.IsNullOrEmpty((p_IdTipoCbte.Value).ToString()) ? 0 : Convert.ToInt32(p_IdTipoCbte.Value);
+            decimal IdCbteCble = string.IsNullOrEmpty((p_IdCbteCble.Value).ToString()) ? 0 : Convert.ToDecimal(p_IdCbteCble.Value);
+            int NumDesde = string.IsNullOrEmpty((p_NumDesde.Value).ToString()) ? 0 : Convert.ToInt32(p_NumDesde.Value);
+            int NumHasta = string.IsNullOrEmpty((p_NumHasta.Value).ToString()) ? 0 : Convert.ToInt32(p_NumHasta.Value);
+            int IdBanco = string.IsNullOrEmpty((p_IdBanco.Value).ToString()) ? 0 : Convert.ToInt32(p_IdBanco.Value);
 
             BAN_006_Bus bus_rpt = new BAN_006_Bus();
             List<BAN_006_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdTipoCbte, IdCbteCble, NumDesde, NumHasta, IdBanco);

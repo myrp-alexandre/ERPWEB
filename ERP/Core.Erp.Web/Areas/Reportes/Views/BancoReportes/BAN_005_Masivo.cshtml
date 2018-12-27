@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.Reportes.Banco.BAN_005_Info
+﻿@model Core.Erp.Info.Helps.cl_filtros_banco_Info
 @{
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
     ViewBag.Title = "BAN_007";
@@ -40,14 +40,14 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="NumDesde">#Desde</label>
-                            @Html.TextBoxFor(q => q.NumDesde, new { @class = "form-control", @id = "ba_num_digito_cheq" })
+                            @Html.TextBoxFor(q => q.NumDesde, new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.NumDesde, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="NumDesde">#Hasta</label>
-                            @Html.TextBoxFor(q => q.NumHasta, new { @class = "form-control", @id = "ba_num_digito_cheq" })
+                            @Html.TextBoxFor(q => q.NumHasta, new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.NumHasta, "", new { @class = "text-danger" })
                         </div>
                     </div>
