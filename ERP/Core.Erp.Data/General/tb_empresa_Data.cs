@@ -286,7 +286,7 @@ namespace Core.Erp.Data.General
                                 IdBodega = item.IdBodega,
                                 cod_bodega = item.cod_bodega,
                                 bo_Descripcion = item.bo_Descripcion,
-                                IdCtaCtble_Inve = item.IdCtaCtble_Inve,
+                                IdCtaCtble_Inve = string.IsNullOrEmpty(item.IdCtaCtble_Inve) ? null : item.IdCtaCtble_Inve,
                                 Estado = item.Estado = "A",
                                 IdUsuario = item.IdUsuario,
 

@@ -84,8 +84,9 @@
 
 
         settings.Columns.Add("IdBanco", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("ba_descripcion", "Descripción").Width = Unit.Percentage(50);
-        settings.Columns.Add("ba_Num_Cuenta", "Número de cuenta").Width = Unit.Percentage(20);
+        settings.Columns.Add("ba_descripcion", "Descripción").Width = Unit.Percentage(40);
+        settings.Columns.Add("ba_Num_Cuenta", "Número de cuenta").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdCtaCble", "Cuenta contable").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
@@ -95,6 +96,15 @@
             {
 
             });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-cog\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("Disenar", "BancoCuenta", new { Area = "Banco", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdBanco = DataBinder.Eval(c.DataItem, "IdBanco")}, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
         });
     });
 }

@@ -81,13 +81,14 @@ namespace Core.Erp.Data.Banco
                         IdCtaCble = Entity.IdCtaCble,
                         Imprimir_Solo_el_cheque = Entity.Imprimir_Solo_el_cheque,
                         IdBanco_Financiero = Entity.IdBanco_Financiero,
+                        ReporteCheque = Entity.ReporteCheque,
+                        ReporteChequeComprobante = Entity.ReporteChequeComprobante
                     };
                 }
                 return info;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -230,6 +231,30 @@ namespace Core.Erp.Data.Banco
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public bool GuardarDisenioDB(int IdEmpresa, int IdBanco, byte[] Disenio)
+        {
+            try
+            {
+                using (Entities_banco db = new Entities_banco())
+                {
+                    var Entity = db.ba_Banco_Cuenta.Where(q => q.IdEmpresa == IdEmpresa && q.IdBanco == IdBanco).FirstOrDefault();
+                    if (Entity == null)
+                        return false;
+
+                    if (Entity.Imprimir_Solo_el_cheque)
+                        Entity.ReporteCheque = Disenio;
+                    else
+                        Entity.ReporteChequeComprobante = Disenio;
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
