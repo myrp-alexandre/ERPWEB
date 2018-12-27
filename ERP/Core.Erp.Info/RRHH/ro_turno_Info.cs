@@ -9,6 +9,7 @@ namespace Core.Erp.Info.RRHH
 {
    public class ro_turno_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdTurno { get; set; }
         [Required(ErrorMessage = "El campo descripción es obligatorio")]
