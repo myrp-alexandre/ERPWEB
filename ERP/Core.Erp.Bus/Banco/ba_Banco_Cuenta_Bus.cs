@@ -17,7 +17,17 @@ namespace Core.Erp.Bus.Banco
             }
             catch (Exception)
             {
-
+                throw;
+            }
+        }
+        public bool GuardarDisenioDB(int IdEmpresa, int IdBanco, byte[] Disenio)
+        {
+            try
+            {
+                return odata.GuardarDisenioDB(IdEmpresa, IdBanco, Disenio);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

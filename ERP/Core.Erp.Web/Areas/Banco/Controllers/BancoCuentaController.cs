@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.Mvc;
 using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 using System.Linq;
+using Core.Erp.Web.Reportes.Banco;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
@@ -197,9 +198,51 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         #endregion
 
+        #region Diseñador
+        public ActionResult Disenar(int IdEmpresa = 0, int IdBanco = 0)
+        {
+            var model = bus_cuenta.get_info(IdEmpresa, IdBanco);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            if (!model.Imprimir_Solo_el_cheque)
+                model.ReporteCheque = model.ReporteChequeComprobante;
+            
+            if (model.ReporteCheque == null)
+            {
+                MemoryStream ms = new MemoryStream();
+                if (!model.Imprimir_Solo_el_cheque)
+                {
+                    BAN_006_Rpt rpt = new BAN_006_Rpt();
+                    rpt.SaveLayoutToXml(ms);
+                    ms.Position = 0;
+                    model.ReporteCheque = ms.ToArray();
+                }else
+                {
+                    BAN_005_Rpt rpt = new BAN_005_Rpt();
+                    rpt.SaveLayoutToXml(ms);
+                    ms.Position = 0;
+                    model.ReporteCheque = ms.ToArray();
+                }                    
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Disenar(ba_Banco_Cuenta_Info model)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdBanco = Request.Params["fx_IdBanco"] != null ? Convert.ToInt32(Request.Params["fx_IdBanco"]) : 0;
+            model.ReporteCheque = ReportDesignerExtension.GetReportXml("ReportDesigner");
+            bus_cuenta.GuardarDisenioDB(IdEmpresa, IdBanco, model.ReporteCheque);
+            return View(model);
+        }
+        #endregion
+
     }
-    
-    
+
+
     public class UploadControlSettings
     {
         public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
