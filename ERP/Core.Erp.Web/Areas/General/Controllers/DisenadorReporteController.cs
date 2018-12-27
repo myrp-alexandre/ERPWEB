@@ -1,5 +1,8 @@
 ﻿using Core.Erp.Info.General;
 using Core.Erp.Web.Helps;
+using Core.Erp.Web.Reportes.Facturacion;
+using DevExpress.Web.Mvc;
+using System.IO;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
@@ -26,15 +29,23 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public ActionResult Nuevo()
         {
             tb_sis_reporte_diseno_Info model = new tb_sis_reporte_diseno_Info();
+            FAC_003_Rpt rpt = new FAC_003_Rpt();
+            MemoryStream ms = new MemoryStream();
+            rpt.SaveLayoutToXml(ms);
+            ms.Position = 0;
+            model.File_Disenio_Reporte = ms.ToArray();
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(tb_sis_reporte_diseno_Info model)
         {
-                return View(model);
-        }
-
+            byte[] reportLayout = ReportDesignerExtension.GetReportXml("ReportDesigner");
+            model.File_Disenio_Reporte = reportLayout;
+            return View(model);
+        }       
+        
+        
         public ActionResult Modificar(string IdReporte = "")
         {
            
