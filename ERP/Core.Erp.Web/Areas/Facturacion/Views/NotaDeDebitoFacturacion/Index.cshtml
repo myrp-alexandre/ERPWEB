@@ -1,4 +1,5 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
+@using Core.Erp.Web.Helps
 @{
     ViewBag.Title = "Notas de débito";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -96,8 +97,21 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_NotaDebitoFacturacion", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="btn btn-primary" href="@Url.Action("Importar","NotaDeDebitoFacturacion",new { Area = "Facturacion", IdEmpresa = SessionFixed.IdEmpresa },null)">Importar desde excel</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.Action("GridViewPartial_NotaDebitoFacturacion", new { IdSucursal = Model.IdSucursal, fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin })
+                </div>
+            </div>
         </div>
+
         <!-- /.box-body -->
         <div class="box-footer">
             [@Session["IdEmpresa"]] @Session["nom_empresa"]
