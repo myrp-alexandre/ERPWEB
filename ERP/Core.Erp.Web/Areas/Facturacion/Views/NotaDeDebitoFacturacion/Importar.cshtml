@@ -14,7 +14,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("ActualizarVariablesSession", "BancoCuenta", new { Area = "Banco" })',
+            url: '@Url.Action("ActualizarVariablesSession", "NotaDeDebitoFacturacion", new { Area = "Facturacion" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -34,7 +34,7 @@
 
 </script>
 
-@using (Html.BeginForm("Importar", "BancoCuenta", FormMethod.Post, new { @role = "form", @id = "form" }))
+@using (Html.BeginForm("Importar", "NotaDeDebitoFacturacion", FormMethod.Post, new { @role = "form", @id = "form" }))
 {
     if (ViewBag.mensaje != null)
     {

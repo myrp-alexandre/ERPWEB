@@ -626,6 +626,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             fa_notaCreDeb_List ListaFactura = new fa_notaCreDeb_List();
             List<fa_notaCreDeb_Info> Lista_Factura = new List<fa_notaCreDeb_Info>();
             fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -658,12 +659,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     else
                         cont++;
                 }
+                ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
+                var ListSucursal = bus_sucursal.get_list(IdEmpresa, false);
                 var ListFact = ListaFactura.get_list(IdTransaccionSession);
                 var ListCliente = bus_cliente.get_list(IdEmpresa, false);
                 var lst = (from q in ListCliente
                            join c in ListFact
                            on q.info_persona.pe_cedulaRuc equals c.Nombres
-
                            select new fa_notaCreDeb_Info
                            {
                                IdEmpresa = c.IdEmpresa,
@@ -677,7 +679,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                sc_observacion = c.sc_observacion
                            }).ToList();
                 Lista_Factura = lst;
-                ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
                 #endregion
                 cont = 0;
                 //Para avanzar a la siguiente hoja de excel
