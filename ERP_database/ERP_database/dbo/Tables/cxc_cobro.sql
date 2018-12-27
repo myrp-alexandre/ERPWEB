@@ -36,7 +36,8 @@
     CONSTRAINT [FK_cxc_cobro_caj_Caja] FOREIGN KEY ([IdEmpresa], [IdCaja]) REFERENCES [dbo].[caj_Caja] ([IdEmpresa], [IdCaja]),
     CONSTRAINT [FK_cxc_cobro_cxc_cobro_tipo] FOREIGN KEY ([IdCobro_tipo]) REFERENCES [dbo].[cxc_cobro_tipo] ([IdCobro_tipo]),
     CONSTRAINT [FK_cxc_cobro_fa_cliente] FOREIGN KEY ([IdEmpresa], [IdCliente]) REFERENCES [dbo].[fa_cliente] ([IdEmpresa], [IdCliente]),
-    CONSTRAINT [FK_cxc_cobro_fa_TipoNota] FOREIGN KEY ([IdTipoNotaCredito]) REFERENCES [dbo].[fa_TipoNota] ([IdTipoNota]),
     CONSTRAINT [FK_cxc_cobro_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 

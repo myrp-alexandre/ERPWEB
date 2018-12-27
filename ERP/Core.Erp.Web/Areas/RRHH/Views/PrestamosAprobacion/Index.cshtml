@@ -7,7 +7,7 @@
     }
     Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
 }
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
 <script type="text/javascript">
     var selectedIDs;
 
@@ -139,7 +139,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("aprobar", "AprobacionPrestamo", new { Area = "RRHH" })',
+            url: '@Url.Action("aprobar", "PrestamosAprobacion", new { Area = "RRHH" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
