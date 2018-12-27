@@ -430,6 +430,7 @@
     <Compile Include="Areas\RRHH\Controllers\CatalogoRRHHController.cs" />
     <Compile Include="Areas\RRHH\Controllers\CatalogoTipoRRHHController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ContratoController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\ControlDeMarcacionesController.cs" />
     <Compile Include="Areas\RRHH\Controllers\DepartamentoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\DepartamentoPorAreaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\DivisionController.cs" />
@@ -9652,6 +9653,7 @@
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
     <Folder Include="Areas\RRHH\Views\AprobacionPrestamos\" />
+    <Folder Include="Areas\RRHH\Views\ControlDeMarcaciones\" />
     <Folder Include="Areas\RRHH\Views\SancionesPorAtraso\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
