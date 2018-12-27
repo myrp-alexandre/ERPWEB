@@ -9572,7 +9572,7 @@
     <Content Include="Areas\Banco\Views\BancoCuenta\_GridViewPartial_Documento_importacion.cshtml" />
     <Content Include="Areas\RRHH\Views\Empleado\Importar.cshtml" />
     <Content Include="Areas\Banco\Views\BancoCuenta\Disenar.cshtml" />
-
+    <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_Rubro_importacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

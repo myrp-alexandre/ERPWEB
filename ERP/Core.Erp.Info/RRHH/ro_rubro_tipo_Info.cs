@@ -43,6 +43,7 @@ namespace Core.Erp.Info.RRHH
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public bool rub_acumula_descuento { get; set; }
+        public bool rub_acumula { get; set; }
 
     }
 }

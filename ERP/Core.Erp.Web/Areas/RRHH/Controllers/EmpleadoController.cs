@@ -14,6 +14,7 @@ using System.IO;
 using Microsoft.SqlServer.Server;
 using Core.Erp.Web.Helps;
 using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
+using ExcelDataReader;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -45,7 +46,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_contrato_List ListaContrato = new ro_contrato_List();
         ro_cargaFamiliar_List ListaCargasFamiliares = new ro_cargaFamiliar_List();
         ro_rol_detalle_x_rubro_acumulado_List ListaProvisionesAcumuladas = new ro_rol_detalle_x_rubro_acumulado_List();
-        //ro_rubro_tipo_Info_list ListaVacaciones = new ro_rubro_tipo_Info_list();
+        ro_historico_vacaciones_x_empleado_Info_list ListaVacaciones = new ro_historico_vacaciones_x_empleado_Info_list();
 
         public static byte[] imagen { get; set; }
         public decimal IdEmpleado { get; set; }
@@ -411,7 +412,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #region Importacion
         public ActionResult UploadControlUpload()
         {
-            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_Importacion.UploadValidationSettings, UploadControlSettings_Importacion.FileUploadComplete);
             return null;
         }
         public ActionResult Importar(int IdEmpresa = 0)
@@ -442,7 +443,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 var Lista_Contrato = ListaContrato.get_list(model.IdTransaccionSession);
                 var Lista_CargasFamiliares = ListaCargasFamiliares.get_list(model.IdTransaccionSession);
                 var Lista_ProvisionesAcumuladas= ListaProvisionesAcumuladas.get_list(model.IdTransaccionSession);
-                //var Lista_Vacaciones = ListaVacaciones.get_list(model.IdTransaccionSession);
+                var Lista_Vacaciones = ListaVacaciones.get_list();
 
                 //if (!bus_empleado.guardarDB_importacion(Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_Contrato, Lista_CargasFamiliares, Lista_Vacaciones))
                 //{
@@ -461,12 +462,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return RedirectToAction("Index");
         }
 
-        //public ActionResult GridViewPartial_Rubro_importacion()
-        //{
-        //    SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-        //    var model = ListaRubro.get_list();
-        //    return PartialView("_GridViewPartial_departamentoAF_importacion", model);
-        //}
+        public ActionResult GridViewPartial_Rubro_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaRubro.get_list();
+            return PartialView("_GridViewPartial_Rubro_importacion", model);
+        }
 
         public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
         {
@@ -506,14 +507,92 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 //e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);
             }
         }
-
-
-
-
-
-
-
     }
+
+    #region Upload Excel
+    public class UploadControlSettings_Importacion
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            ro_empleado_Bus bus_empleado = new ro_empleado_Bus();           
+
+            ro_rubro_tipo_Info_list ListaRubro = new ro_rubro_tipo_Info_list();
+            List<ro_rubro_tipo_Info> Lista_Rubro = new List<ro_rubro_tipo_Info>();
+            ro_horario_List ListaHorario = new ro_horario_List();
+            List<ro_horario_Info> Lista_Horario = new List<ro_horario_Info>();
+            ro_turno_List ListaTurno = new ro_turno_List();
+            List<ro_turno_Info> Lista_Turno = new List<ro_turno_Info>();
+            ro_empleado_info_list ListaEmpleado = new ro_empleado_info_list();
+            List<ro_empleado_Info> Lista_Empleado = new List<ro_empleado_Info>();
+            ro_contrato_List ListaContrato = new ro_contrato_List();
+            List<ro_contrato_Info> Lista_Contrato = new List<ro_contrato_Info>();
+            ro_cargaFamiliar_List ListaCargasFamiliares = new ro_cargaFamiliar_List();
+            List<ro_cargaFamiliar_Info> Lista_CargasFamiliares = new List<ro_cargaFamiliar_Info>();
+            ro_rol_detalle_x_rubro_acumulado_List ListaProvisionesAcumuladas = new ro_rol_detalle_x_rubro_acumulado_List();
+            List<ro_rol_detalle_x_rubro_acumulado_Info> Lista_ProvisionesAcumuladas = new List<ro_rol_detalle_x_rubro_acumulado_Info>();
+            ro_historico_vacaciones_x_empleado_Info_list ListaVacaciones = new ro_historico_vacaciones_x_empleado_Info_list();
+            List<ro_historico_vacaciones_x_empleado_Info> Lista_Vacaciones = new List<ro_historico_vacaciones_x_empleado_Info>();
+
+
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
+
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                #region Rubro                
+                while (reader.Read())
+                {
+                    var orden = 0;
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+
+                        ro_rubro_tipo_Info info = new ro_rubro_tipo_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdRubro = Convert.ToString(reader.GetValue(0)),
+                            rub_codigo = Convert.ToString(reader.GetString(1)),
+                            ru_codRolGen = Convert.ToString(reader.GetString(2)),
+                            ru_descripcion = Convert.ToString(reader.GetValue(3)),
+                            NombreCorto = Convert.ToString(reader.GetValue(4)),
+                            ru_tipo = Convert.ToString(reader.GetValue(6)),
+                            ru_estado = Convert.ToString(reader.GetValue(7)),
+                            ru_orden = orden++,
+                            rub_concep = false,
+                            rub_ctacon = Convert.ToString(reader.GetValue(9)),
+                            rub_provision = Convert.ToString(reader.GetValue(7)) == "SI" ? true : false,
+                            rub_nocontab = Convert.ToString(reader.GetValue(8)) == "SI" ? true : false,
+                            rub_aplica_IESS = Convert.ToString(reader.GetValue(6)) == "SI" ? true : false,
+                            rub_acumula = false,
+                            rub_acumula_descuento = false
+                        };
+                        Lista_Rubro.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                ListaRubro.set_list(Lista_Rubro);
+                #endregion
+
+                //cont = 0;
+                //Para avanzar a la siguiente hoja de excel
+                //reader.NextResult();
+            }
+        }
+    }
+    #endregion
 
     public class ro_empleado_info_list
     {
@@ -537,7 +616,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
     public class ro_rol_detalle_x_rubro_acumulado_List
     {
-        string Variable = "ro_cargaFamiliar_Info";
+        string Variable = "ro_rol_detalle_x_rubro_acumulado_Info";
         public List<ro_rol_detalle_x_rubro_acumulado_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
