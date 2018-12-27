@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.RRHH;
+﻿using Core.Erp.Bus.CuentasPorPagar;
+using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
@@ -14,6 +15,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
     {
         ro_prestamo_Bus bus_prestamos = new ro_prestamo_Bus();
         ro_prestamo_List list_prestamos_aprobar = new ro_prestamo_List();
+        ro_Parametros_Bus bus_parametros = new ro_Parametros_Bus();
+        cp_orden_pago_tipo_x_empresa_Bus bus_orden_pago_tipo_x_empresa = new cp_orden_pago_tipo_x_empresa_Bus();
         // GET: RRHH/PrestamosAprobacion
         public ActionResult Index()
         {
@@ -46,6 +49,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public JsonResult aprobar(int IdEmpresa = 0, string Ids = "")
         {
+            var info_parametros = bus_parametros.get_info(IdEmpresa);
+            var info_op_tipo = bus_orden_pago_tipo_x_empresa.get_info(IdEmpresa, info_parametros.IdTipo_op_prestamos);
+
             string[] array = Ids.Split(',');
             string IdUsuarioAprueba = SessionFixed.IdUsuario;
 
@@ -55,9 +61,16 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             else
             {
-                var resultado_orden = bus_prestamos.aprobar_prestamo(IdEmpresa, array, IdUsuarioAprueba);
-                return Json(resultado_orden, JsonRequestBehavior.AllowGet);
-            }
+                if (string.IsNullOrEmpty(info_op_tipo.IdCtaCble) || string.IsNullOrEmpty(info_op_tipo.IdCtaCble_Credito))
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var resultado_orden = bus_prestamos.aprobar_prestamo(IdEmpresa, array, IdUsuarioAprueba);
+                    return Json(resultado_orden, JsonRequestBehavior.AllowGet);
+                }                
+            }         
         }
     }
 

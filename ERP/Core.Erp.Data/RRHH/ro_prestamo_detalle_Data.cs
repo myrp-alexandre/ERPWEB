@@ -196,7 +196,7 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    string sql = "update ro_prestamo_detalle set Estado='I' where IdEmpresa='" + info.IdEmpresa + "'  and IdPrestamo='" + info.IdPrestamo + "'";
+                    string sql = "update ro_prestamo_detalle set Estado= 0 where IdEmpresa='" + info.IdEmpresa + "'  and IdPrestamo='" + info.IdPrestamo + "'";
                     Context.Database.ExecuteSqlCommand(sql);
                 }
 

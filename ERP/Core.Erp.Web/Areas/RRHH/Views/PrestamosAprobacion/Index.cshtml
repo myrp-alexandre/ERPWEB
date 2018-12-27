@@ -146,7 +146,12 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#myform").submit();
+                if (data == false) {
+                    alert("Parametrizar cuentas contables en tipo de orden de pago por empresa");
+                }
+                else {
+                    $("#myform").submit();
+                }                                
             },
             error: function (error) {
             }

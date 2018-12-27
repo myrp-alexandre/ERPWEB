@@ -54,7 +54,7 @@ namespace Core.Erp.Data.RRHH
                                  Valor_pendiente=q.Valor_pendiente,
                                  TotalCobrado=q.TotalCobrado,
                                  ru_descripcion=q.ru_descripcion,
-
+                                 EstadoAprob = q.EstadoAprob,
                                  EstadoBool = q.Estado
 
 
@@ -379,6 +379,7 @@ namespace Core.Erp.Data.RRHH
                             cb_Estado = "A"
                         };
 
+                        Entity_Prestamo.IdEmpresa_dc = diario.IdEmpresa;
                         Entity_Prestamo.IdTipoCbte = diario.IdTipoCbte;
                         Entity_Prestamo.IdCbteCble = diario.IdCbteCble;
 
