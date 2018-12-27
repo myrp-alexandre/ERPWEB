@@ -48,27 +48,13 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("CodActivoFijo", "Codigo").Width = Unit.Percentage(5);
-        settings.Columns.Add("Af_Descripcion", "Descripción").Width = Unit.Percentage(16);
-        settings.Columns.Add("Af_Porcentaje_depre", "%").Width = Unit.Percentage(5);
-        settings.Columns.Add("Af_anio_depreciacion", "Años").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdCtaCble_Activo", "Cta Cble").Width = Unit.Percentage(8);
-        settings.Columns.Add("IdCtaCble_Dep_Acum", "Cta Dep").Width = Unit.Percentage(8);
-        settings.Columns.Add("IdCtaCble_Gastos_Depre", "Cta Gastos").Width = Unit.Percentage(8);
-        settings.Columns.Add("IdCtaCble_CostoVenta", "Cta Costo").Width = Unit.Percentage(8);
-        settings.Columns.Add("IdCtaCble_Mejora", "Cta Mejora").Width = Unit.Percentage(8);
-        settings.Columns.Add("IdCtaCble_Baja", "Cta Baja").Width = Unit.Percentage(8);
-        settings.Columns.Add("IdCtaCble_Retiro", "Cta Retiro").Width = Unit.Percentage(8);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Se_Deprecia";
-            column.Caption = "Se deprecia";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(8);
-            column.EditorProperties().CheckBox(sp =>
-            {
+        settings.Columns.Add("IdBanco_Financiero", "Cuenta bancaria").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdBanco", "Id Banco").Width = Unit.Percentage(10);
+        settings.Columns.Add("ba_Tipo", "Tipo cuenta").Width = Unit.Percentage(20);
+        settings.Columns.Add("ba_Num_Cuenta", "Número de cuenta").Width = Unit.Percentage(10);
+        settings.Columns.Add("ba_num_digito_cheq", "Número de dígitos por cheque").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdCtaCble", "Cta contable").Width = Unit.Percentage(20);
 
-            });
-        });
        
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

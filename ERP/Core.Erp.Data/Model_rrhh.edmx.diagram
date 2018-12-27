@@ -221,6 +221,18 @@
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="26.375" PointY="18.75" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Parametros_ro_catalogo" />
         <EntityTypeShape EntityType="Model_rrhh.vwRo_Prestamo" Width="1.5" PointX="21.375" PointY="22.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_SancionesPorMarcaciones" Width="1.5" PointX="12.75" PointY="97.5" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_SancionesPorMarcaciones_det" Width="1.5" PointX="27.875" PointY="58.875" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_SancionesPorMarcaciones_x_novedad" Width="1.5" PointX="24" PointY="44.875" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_SancionesPorMarcaciones" Width="1.5" PointX="23.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_SancionesPorMarcaciones_det" Width="1.5" PointX="25.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_SancionesPorMarcaciones_x_novedad" Width="1.5" PointX="26.375" PointY="0.75" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_tipo" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_x_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

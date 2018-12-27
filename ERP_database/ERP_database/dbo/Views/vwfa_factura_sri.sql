@@ -2,7 +2,7 @@
 AS
 SELECT        dbo.fa_factura.IdEmpresa, dbo.fa_factura.IdSucursal, dbo.fa_factura.IdBodega, dbo.fa_factura.IdCbteVta, dbo.fa_factura.vt_tipoDoc, dbo.fa_factura.vt_serie1, dbo.fa_factura.vt_serie2, 
                          dbo.fa_factura.vt_autorizacion, dbo.fa_factura.vt_NumFactura, dbo.fa_factura.IdCliente, dbo.fa_factura.vt_fecha, dbo.fa_factura.Estado, dbo.tb_empresa.RazonSocial, dbo.tb_empresa.NombreComercial, 
-                         dbo.tb_empresa.ContribuyenteEspecial, dbo.tb_empresa.ObligadoAllevarConta, dbo.tb_empresa.em_ruc, dbo.tb_empresa.em_direccion, dbo.tb_sucursal.Su_Descripcion, dbo.tb_sucursal.Su_Direccion, 
+                         dbo.tb_empresa.ContribuyenteEspecial, 'SI'ObligadoAllevarConta, dbo.tb_empresa.em_ruc, dbo.tb_empresa.em_direccion, dbo.tb_sucursal.Su_Descripcion, dbo.tb_sucursal.Su_Direccion, 
                          dbo.tb_persona.pe_razonSocial AS cl_RazonSocial, dbo.tb_persona.pe_nombreCompleto, dbo.tb_persona.IdTipoDocumento, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_correo, dbo.fa_factura.vt_plazo, 
                          dbo.fa_factura.vt_Observacion, dbo.fa_factura.vt_fech_venc
 FROM            dbo.fa_factura INNER JOIN

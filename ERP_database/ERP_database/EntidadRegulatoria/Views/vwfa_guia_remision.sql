@@ -7,7 +7,7 @@ SELECT        dbo.fa_guia_remision.IdEmpresa, dbo.fa_guia_remision.IdSucursal, d
                          dbo.fa_guia_remision.placa, dbo.fa_guia_remision.ruta, dbo.fa_guia_remision.Direccion_Origen, dbo.fa_guia_remision.Direccion_Destino, dbo.tb_transportista.Cedula, dbo.tb_transportista.Nombre, 
                          dbo.fa_cliente_contactos.Nombres, dbo.fa_cliente_contactos.Telefono, dbo.fa_cliente_contactos.Celular, dbo.fa_cliente_contactos.Correo, dbo.fa_cliente_contactos.Direccion, dbo.tb_persona.pe_cedulaRuc, 
                          dbo.tb_persona.pe_nombreCompleto, dbo.tb_persona.IdTipoDocumento, dbo.tb_persona.pe_Naturaleza, dbo.tb_empresa.em_nombre, dbo.tb_empresa.RazonSocial, dbo.tb_empresa.NombreComercial, dbo.tb_empresa.em_ruc, 
-                         dbo.tb_empresa.em_telefonos, dbo.tb_empresa.ContribuyenteEspecial, dbo.tb_empresa.ObligadoAllevarConta, dbo.tb_empresa.em_Email, dbo.tb_empresa.em_direccion, dbo.fa_factura.vt_serie1, dbo.fa_factura.vt_serie2, 
+                         dbo.tb_empresa.em_telefonos, dbo.tb_empresa.ContribuyenteEspecial,  'SI'ObligadoAllevarConta, dbo.tb_empresa.em_Email, dbo.tb_empresa.em_direccion, dbo.fa_factura.vt_serie1, dbo.fa_factura.vt_serie2, 
                          dbo.fa_factura.vt_NumFactura, dbo.fa_factura.vt_fecha
 FROM            dbo.tb_transportista INNER JOIN
                          dbo.fa_guia_remision ON dbo.tb_transportista.IdEmpresa = dbo.fa_guia_remision.IdEmpresa AND dbo.tb_transportista.IdTransportista = dbo.fa_guia_remision.IdTransportista INNER JOIN

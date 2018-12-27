@@ -1,10 +1,10 @@
 ﻿/*select * from tb_empresa where IdEmpresa in(1,2)*/
 CREATE VIEW dbo.vwtb_empresa_x_Usuario
 AS
-SELECT dbo.tb_empresa.IdEmpresa, dbo.tb_empresa.codigo, dbo.tb_empresa.em_nombre, dbo.tb_empresa.RazonSocial, dbo.tb_empresa.NombreComercial, dbo.tb_empresa.ContribuyenteEspecial, dbo.tb_empresa.ObligadoAllevarConta, 
-                  dbo.tb_empresa.em_ruc, dbo.tb_empresa.em_gerente, dbo.tb_empresa.em_contador, dbo.tb_empresa.em_rucContador, dbo.tb_empresa.em_telefonos, dbo.tb_empresa.em_notificacion, dbo.tb_empresa.em_direccion, 
-                  dbo.tb_empresa.em_tel_int, dbo.tb_empresa.em_logo, dbo.tb_empresa.em_fondo, dbo.tb_empresa.em_fechaInicioContable, dbo.tb_empresa.Estado, dbo.tb_empresa.em_fechaInicioActividad, dbo.seg_Usuario_x_Empresa.IdUsuario, 
-                  dbo.tb_empresa.cod_entidad_dinardap, dbo.tb_empresa.em_Email, dbo.tb_empresa.em_fax
+SELECT dbo.tb_empresa.IdEmpresa, dbo.tb_empresa.codigo, dbo.tb_empresa.em_nombre, dbo.tb_empresa.RazonSocial, dbo.tb_empresa.NombreComercial, dbo.tb_empresa.ContribuyenteEspecial, 
+                  dbo.tb_empresa.em_ruc, dbo.tb_empresa.em_gerente, dbo.tb_empresa.em_contador, dbo.tb_empresa.em_rucContador, dbo.tb_empresa.em_telefonos,  dbo.tb_empresa.em_direccion, 
+                  dbo.tb_empresa.em_logo, dbo.tb_empresa.em_fechaInicioContable, dbo.tb_empresa.Estado, dbo.tb_empresa.em_fechaInicioActividad, dbo.seg_Usuario_x_Empresa.IdUsuario, 
+                  dbo.tb_empresa.cod_entidad_dinardap, dbo.tb_empresa.em_Email
 FROM     dbo.seg_Usuario_x_Empresa INNER JOIN
                   dbo.tb_empresa ON dbo.seg_Usuario_x_Empresa.IdEmpresa = dbo.tb_empresa.IdEmpresa
 GO

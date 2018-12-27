@@ -2,6 +2,7 @@
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.Banco;
+using Core.Erp.Info.General;
 using Core.Erp.Web.Helps;
 using DevExpress.Web.Mvc;
 using ExcelDataReader;
@@ -22,6 +23,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         tb_banco_Bus bus_banco = new tb_banco_Bus();
         ct_plancta_Bus bus_cuentacontable = new ct_plancta_Bus();
         ba_Banco_Cuenta_List ListaBanco = new ba_Banco_Cuenta_List();
+        ba_Banco_Cbte_List ListaCbte = new ba_Banco_Cbte_List();
         tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
 
         #endregion
@@ -176,7 +178,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var model = ListaBanco.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_Banco_importacion", model);
         }
-        
+
+        public ActionResult GridViewPartial_Documento_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaCbte.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_Documento_importacion", model);
+        }
+
         public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
         {
             string retorno = string.Empty;
@@ -188,6 +197,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
     }
+    
+    
     public class UploadControlSettings
     {
         public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
@@ -201,6 +212,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
          
             ba_Banco_Cuenta_List ListaBanco = new ba_Banco_Cuenta_List();
             List<ba_Banco_Cuenta_Info> Lista_Banco = new List<ba_Banco_Cuenta_Info>();
+            ba_Banco_Cbte_List ListaCbte = new ba_Banco_Cbte_List();
+            List<ba_Cbte_Ban_Info> Lista_Cbte = new List<ba_Cbte_Ban_Info>();
+            tb_banco_Bus bus_banco = new tb_banco_Bus();
 
 
             int cont = 0;
@@ -223,14 +237,21 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                         ba_Banco_Cuenta_Info info = new ba_Banco_Cuenta_Info
                         {
                             IdEmpresa = IdEmpresa,
-                            IdBanco_Financiero = Convert.ToInt32(reader.GetValue(0)),
-                            IdBanco = Convert.ToInt32(reader.GetValue(1)),
+                            IdBanco = Convert.ToInt32(reader.GetValue(0)),
+                            IdBanco_Financiero = Convert.ToInt32(reader.GetValue(1)),
                             ba_Tipo = Convert.ToString(reader.GetValue(2)),
                             ba_Num_Cuenta = Convert.ToString(reader.GetValue(3)),
                             ba_num_digito_cheq = Convert.ToInt32(reader.GetValue(4)),
-                            IdCtaCble = Convert.ToString(reader.GetValue(6)),
-                            IdUsuario = SessionFixed.IdUsuario
+                            IdCtaCble = Convert.ToString(reader.GetValue(5)),
+                            IdUsuario = SessionFixed.IdUsuario,
+                            
+
                         };
+
+                        tb_banco_Info banco = bus_banco.get_info(info.IdBanco);
+                        info.ba_descripcion = banco.ba_descripcion + " " + info.ba_Tipo + " " + info.ba_Num_Cuenta;
+                        info.MostrarVistaPreviaCheque = false;
+                        info.Imprimir_Solo_el_cheque = false;
                         Lista_Banco.Add(info);
                     }
                     else
@@ -242,7 +263,32 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 cont = 0;
                 //Para avanzar a la siguiente hoja de excel
                 reader.NextResult();
-               
+
+                #region Cbte                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        ba_Cbte_Ban_Info info = new ba_Cbte_Ban_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdTipo_Persona = Convert.ToString(reader.GetValue(0)),
+                            IdSucursal = Convert.ToInt32(reader.GetValue(1)),
+                            IdBanco = Convert.ToInt32(reader.GetValue(2)),
+                            cb_Fecha = Convert.ToDateTime(reader.GetValue(3)),
+                            cb_Observacion = Convert.ToString(reader.GetValue(4)),
+                            cb_Valor = Convert.ToInt32(reader.GetValue(5)),
+                            
+
+                            IdUsuario = SessionFixed.IdUsuario,
+                        };
+                  }
+                    else
+                        cont++;
+                }
+                ListaCbte.set_list(Lista_Cbte, IdTransaccionSession);
+                #endregion
+
             }
         }
     }
@@ -262,6 +308,26 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
 
         public void set_list(List<ba_Banco_Cuenta_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
+    public class ba_Banco_Cbte_List
+    {
+        string Variable = "ba_Cbte_Ban_Info";
+        public List<ba_Cbte_Ban_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ba_Cbte_Ban_Info> list = new List<ba_Cbte_Ban_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ba_Cbte_Ban_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ba_Cbte_Ban_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }

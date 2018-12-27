@@ -5,7 +5,7 @@ SELECT        dbo.cp_retencion.IdEmpresa, dbo.cp_retencion.IdRetencion, dbo.cp_r
                          dbo.tb_persona.pe_telfono_Contacto, dbo.cp_proveedor.IdProveedor, dbo.cp_orden_giro.co_serie, dbo.cp_orden_giro.co_factura, 
                          dbo.cp_orden_giro.co_FechaFactura, dbo.cp_orden_giro.IdOrden_giro_Tipo, dbo.tb_persona.IdTipoDocumento, dbo.cp_orden_giro.IdSucursal, 
                          dbo.tb_sucursal.Su_Descripcion, dbo.tb_sucursal.Su_Direccion, dbo.tb_empresa.RazonSocial, dbo.tb_empresa.NombreComercial, 
-                         dbo.tb_empresa.ContribuyenteEspecial, dbo.tb_empresa.ObligadoAllevarConta, dbo.tb_empresa.em_ruc, dbo.tb_empresa.em_direccion, 
+                         dbo.tb_empresa.ContribuyenteEspecial,  'SI'ObligadoAllevarConta, dbo.tb_empresa.em_ruc, dbo.tb_empresa.em_direccion, 
                          dbo.cp_retencion.Estado
 FROM            dbo.cp_proveedor INNER JOIN
                          dbo.cp_retencion ON dbo.cp_proveedor.IdEmpresa = dbo.cp_retencion.IdEmpresa INNER JOIN
