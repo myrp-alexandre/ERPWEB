@@ -303,5 +303,35 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public bool Abono(ro_prestamo_Info info)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_prestamo Entity = Context.ro_prestamo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado && q.IdPrestamo == info.IdPrestamo);
+                    if (Entity == null)
+                        return false;
+                    Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                    Entity.Fecha_UltAnu = info.Fecha_UltAnu = DateTime.Now;
+                    foreach (var item in info.lst_detalle)
+                    {
+                        ro_prestamo_detalle Entity_det = Context.ro_prestamo_detalle.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdPrestamo == info.IdPrestamo
+                        && q.NumCuota == item.NumCuota);
+                        Entity_det.EstadoPago = item.EstadoPago;
+                        Context.SaveChanges();
+
+                    }
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

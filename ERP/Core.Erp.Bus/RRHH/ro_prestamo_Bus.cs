@@ -134,6 +134,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public bool Abono(ro_prestamo_Info info)
+        {
+            try
+            {
+                return odata.Abono(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public ro_prestamo_Info get_calculomensual(ro_prestamo_Info info)
         {

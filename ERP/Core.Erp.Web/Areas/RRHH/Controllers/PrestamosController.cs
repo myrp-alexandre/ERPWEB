@@ -293,7 +293,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
             model.Fecha_UltAnu = DateTime.Now;
 
-            if (!bus_prestamos.anularDB(model))
+            if (!bus_prestamos.Abono(model))
             {
                 cargar_combos();
                 return View(model);
@@ -413,11 +413,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     item.ValorAplicado = item.TotalCuota;
                     Monto_aplicado = Monto_aplicado - item.TotalCuota;
+                    item.EstadoPago = "ABON";
                 }
               else
                 {
 
                     item.ValorAplicado = Monto_aplicado;
+                    item.EstadoPago = "ABON";
+
                     break;
                 }
             }
