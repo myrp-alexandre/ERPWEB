@@ -233,6 +233,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" />
         <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" />
         <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_marcaciones_x_planificacion_horario" Width="1.5" PointX="23.375" PointY="26.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

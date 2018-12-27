@@ -2221,6 +2221,9 @@
     <Compile Include="vwro_marcaciones_x_empleado.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwro_marcaciones_x_planificacion_horario.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwro_NominasPagosCheques.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>

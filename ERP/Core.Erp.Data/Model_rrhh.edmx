@@ -2119,6 +2119,41 @@ warning 6002: The table/view 'DBERP.dbo.vwro_marcaciones_x_empleado' does not ha
           <Property Name="ma_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_marcaciones_x_planificacion_horario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwro_marcaciones_x_planificacion_horario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdHorario" />
+            <PropertyRef Name="IdCalendadrio" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="time_entrada1" />
+            <PropertyRef Name="time_salida1" />
+            <PropertyRef Name="es_fechaRegistro" />
+            <PropertyRef Name="HoraIni" />
+            <PropertyRef Name="HoraFin" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdHorario" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdCalendadrio" Type="int" Nullable="false" />
+          <Property Name="Sueldo" Type="float" />
+          <Property Name="IdNomina" Type="int" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="em_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="time_entrada1" Type="time" Precision="0" Nullable="false" />
+          <Property Name="time_salida1" Type="time" Precision="0" Nullable="false" />
+          <Property Name="es_fechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="HoraIni" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HoraFin" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_nomina_sin_percebir_sueldo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_sin_percebir_sueldo">
           <Key>
@@ -5062,6 +5097,27 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_marcaciones_x_empleado].[cargo] AS [cargo], 
     [vwro_marcaciones_x_empleado].[ma_descripcion] AS [ma_descripcion]
     FROM [dbo].[vwro_marcaciones_x_empleado] AS [vwro_marcaciones_x_empleado]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwro_marcaciones_x_planificacion_horario" EntityType="Self.vwro_marcaciones_x_planificacion_horario" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwro_marcaciones_x_planificacion_horario].[IdEmpresa] AS [IdEmpresa], 
+    [vwro_marcaciones_x_planificacion_horario].[IdEmpleado] AS [IdEmpleado], 
+    [vwro_marcaciones_x_planificacion_horario].[IdSucursal] AS [IdSucursal], 
+    [vwro_marcaciones_x_planificacion_horario].[IdHorario] AS [IdHorario], 
+    [vwro_marcaciones_x_planificacion_horario].[IdCalendadrio] AS [IdCalendadrio], 
+    [vwro_marcaciones_x_planificacion_horario].[Sueldo] AS [Sueldo], 
+    [vwro_marcaciones_x_planificacion_horario].[IdNomina] AS [IdNomina], 
+    [vwro_marcaciones_x_planificacion_horario].[pe_nombre] AS [pe_nombre], 
+    [vwro_marcaciones_x_planificacion_horario].[pe_apellido] AS [pe_apellido], 
+    [vwro_marcaciones_x_planificacion_horario].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwro_marcaciones_x_planificacion_horario].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwro_marcaciones_x_planificacion_horario].[em_codigo] AS [em_codigo], 
+    [vwro_marcaciones_x_planificacion_horario].[time_entrada1] AS [time_entrada1], 
+    [vwro_marcaciones_x_planificacion_horario].[time_salida1] AS [time_salida1], 
+    [vwro_marcaciones_x_planificacion_horario].[es_fechaRegistro] AS [es_fechaRegistro], 
+    [vwro_marcaciones_x_planificacion_horario].[HoraIni] AS [HoraIni], 
+    [vwro_marcaciones_x_planificacion_horario].[HoraFin] AS [HoraFin]
+    FROM [dbo].[vwro_marcaciones_x_planificacion_horario] AS [vwro_marcaciones_x_planificacion_horario]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_nomina_sin_percebir_sueldo" EntityType="Self.vwro_nomina_sin_percebir_sueldo" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -8140,6 +8196,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_SancionesPorMarcaciones" EntitySet="ro_SancionesPorMarcaciones" />
             <End Role="ro_SancionesPorMarcaciones_det" EntitySet="ro_SancionesPorMarcaciones_det" />
           </AssociationSet>
+          <EntitySet Name="vwro_marcaciones_x_planificacion_horario" EntityType="Model_rrhh.vwro_marcaciones_x_planificacion_horario" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -11263,6 +11320,39 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwro_marcaciones_x_planificacion_horario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdHorario" />
+            <PropertyRef Name="IdCalendadrio" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="time_entrada1" />
+            <PropertyRef Name="time_salida1" />
+            <PropertyRef Name="es_fechaRegistro" />
+            <PropertyRef Name="HoraIni" />
+            <PropertyRef Name="HoraFin" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdHorario" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCalendadrio" Type="Int32" Nullable="false" />
+          <Property Name="Sueldo" Type="Double" />
+          <Property Name="IdNomina" Type="Int32" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="time_entrada1" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="time_salida1" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="es_fechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HoraIni" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HoraFin" Type="Time" Nullable="false" Precision="7" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13580,6 +13670,29 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdAjuste" ColumnName="IdAjuste" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_marcaciones_x_planificacion_horario">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_marcaciones_x_planificacion_horario">
+              <MappingFragment StoreEntitySet="vwro_marcaciones_x_planificacion_horario">
+                <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
+                <ScalarProperty Name="HoraIni" ColumnName="HoraIni" />
+                <ScalarProperty Name="es_fechaRegistro" ColumnName="es_fechaRegistro" />
+                <ScalarProperty Name="time_salida1" ColumnName="time_salida1" />
+                <ScalarProperty Name="time_entrada1" ColumnName="time_entrada1" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="IdCalendadrio" ColumnName="IdCalendadrio" />
+                <ScalarProperty Name="IdHorario" ColumnName="IdHorario" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

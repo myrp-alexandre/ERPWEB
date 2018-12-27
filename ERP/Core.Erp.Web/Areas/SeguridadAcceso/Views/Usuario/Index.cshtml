@@ -3,7 +3,7 @@
     ViewBag.Title = "Usuarios";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
-        Response.Redirect("~/Account/Login");
+        //Response.Redirect("~/Account/Login");
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }

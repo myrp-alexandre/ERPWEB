@@ -332,25 +332,32 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                         info.Su_Descripcion = sucursal.Su_Descripcion;
                         info.IdSucursal = sucursal.IdSucursal;
 
-                        var ListCuenta = ListaBanco.get_list(IdTransaccionSession);
-
-                        var lst = (from q in ListCuenta
-                                   join c in Lista_Cbte
-                                   on q.IdBanco equals c.IdBanco
-                                   select new ba_Cbte_Ban_Info
-                                   {
-                                       IdEmpresa = q.IdEmpresa,
-                                       ba_descripcion = c.ba_descripcion,
-                                       IdBanco = q.IdBanco
-                                       
-                                   }).ToList();
-
-                        Lista_Cbte = lst;
+                        Lista_Cbte.Add(info);
                         #endregion
                     }
                     else
                         cont++;
                 }
+                var ListCuenta = ListaBanco.get_list(IdTransaccionSession);
+
+                var lst = (from q in ListCuenta
+                           join c in Lista_Cbte
+                           on q.IdBanco equals c.IdBanco
+                           select new ba_Cbte_Ban_Info
+                           {
+                               IdEmpresa = c.IdEmpresa,
+                               IdTipo_Persona = c.IdTipo_Persona,
+                               IdSucursal = c.IdSucursal,
+                               ba_descripcion = q.ba_descripcion,
+                               Su_Descripcion = c.Su_Descripcion,
+                               IdBanco = c.IdBanco,
+                               cb_Valor = c.cb_Valor,
+                               cb_Fecha = c.cb_Fecha,
+                               cb_Observacion = c.cb_Observacion
+
+                           }).ToList();
+
+                Lista_Cbte = lst;
                 ListaCbte.set_list(Lista_Cbte, IdTransaccionSession);
                 #endregion
 
