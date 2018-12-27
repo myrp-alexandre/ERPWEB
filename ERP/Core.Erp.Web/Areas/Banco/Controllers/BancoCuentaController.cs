@@ -12,6 +12,7 @@ using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
+using System.Linq;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
@@ -288,7 +289,21 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                         tb_sucursal_Info sucursal = bus_sucursal.GetInfo(IdEmpresa, info.Su_Descripcion);
                         info.Su_Descripcion = sucursal.Su_Descripcion;
                         info.IdSucursal = sucursal.IdSucursal;
-                        Lista_Cbte.Add(info);
+
+                        var ListCuenta = ListaBanco.get_list(IdTransaccionSession);
+
+                        var lst = (from q in ListCuenta
+                                   join c in Lista_Cbte
+                                   on q.IdBanco equals c.IdBanco
+                                   select new ba_Cbte_Ban_Info
+                                   {
+                                       IdEmpresa = q.IdEmpresa,
+                                       ba_descripcion = c.ba_descripcion,
+                                       IdBanco = q.IdBanco
+                                       
+                                   }).ToList();
+
+                        Lista_Cbte = lst;
                         #endregion
                     }
                     else
