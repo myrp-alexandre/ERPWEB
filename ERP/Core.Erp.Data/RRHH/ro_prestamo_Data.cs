@@ -79,6 +79,7 @@ namespace Core.Erp.Data.RRHH
                              where q.IdEmpresa == IdEmpresa
                              && q.Fecha >= fi
                              && q.Fecha <= ff
+                             && q.EstadoAprob == "PEND"
                              select new ro_prestamo_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -89,6 +90,7 @@ namespace Core.Erp.Data.RRHH
                                  IdEmpleado = q.IdEmpleado,
                                  IdRubro = q.IdRubro,
                                  Estado = q.Estado,
+                                 EstadoAprob = q.EstadoAprob,
                                  Fecha = q.Fecha,
                                  MontoSol = q.MontoSol,
                                  NumCuotas = q.NumCuotas,
@@ -100,11 +102,8 @@ namespace Core.Erp.Data.RRHH
                                  pe_nombre_completo = q.pe_apellido + " " + q.pe_nombre,
                                  Valor_pendiente = q.Valor_pendiente,
                                  TotalCobrado = q.TotalCobrado,
-                                 ru_descripcion = q.ru_descripcion,
-
+                                 ru_descripcion = q.ru_descripcion,                                 
                                  EstadoBool = q.Estado
-
-
                              }).ToList();
 
                 }

@@ -54,6 +54,11 @@
             };
             settings.HtmlRowPrepared = (s, e) =>
             {
+                if (Convert.ToString(e.GetValue("EstadoAprob")) == "APROB")
+                {
+                    e.Row.ForeColor = System.Drawing.Color.Blue;
+                }
+
                 if (Convert.ToBoolean(e.GetValue("Estado")) == false)
                 {
                     e.Row.ForeColor = System.Drawing.Color.Red;
@@ -64,7 +69,7 @@
                 c.Caption = "#";
                 c.SetDataItemTemplateContent(tc =>
                 {
-                    if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "TotalCobrado")) == 0)
+                    if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && Convert.ToString(DataBinder.Eval(tc.DataItem, "EstadoAprob")) == "PEND" && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "TotalCobrado")) == 0)
                     {
                         ViewContext.Writer.Write(
                              Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdPrestamo = DataBinder.Eval(tc.DataItem, "IdPrestamo") }) + "&nbsp;" +
@@ -88,8 +93,8 @@
 
             settings.Columns.Add("IdPrestamo","ID").Width=Unit.Percentage(5);
             settings.Columns.Add("pe_nombre_completo","Empleado").Width = Unit.Percentage(20);
-            settings.Columns.Add("ru_descripcion", "Rubro").Width = Unit.Percentage(10);
-            settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(20);
+            settings.Columns.Add("ru_descripcion", "Rubro").Width = Unit.Percentage(15);
+            settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(18);
             settings.Columns.Add(column =>
             {
                 column.FieldName = "Fecha_PriPago";
@@ -124,7 +129,7 @@
                 c.Caption = "Aplicar";
                 c.SetDataItemTemplateContent(tc =>
                 {
-                    if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "TotalCobrado")) == 0)
+                    if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true && Convert.ToString(DataBinder.Eval(tc.DataItem, "EstadoAprob")) == "PEND"  && Convert.ToInt32(DataBinder.Eval(tc.DataItem, "TotalCobrado")) == 0)
                     {
                         ViewContext.Writer.Write(
                              Html.ActionLink("Abono", "Abono", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdPrestamo = DataBinder.Eval(tc.DataItem, "IdPrestamo") },
@@ -133,10 +138,10 @@
                     }
 
                 });
-               
+
                 c.Settings.AllowDragDrop = DefaultBoolean.False;
                 c.Settings.AllowSort = DefaultBoolean.False;
-                c.Width = Unit.Percentage(10);
+                c.Width = Unit.Percentage(5);
             });
 
 

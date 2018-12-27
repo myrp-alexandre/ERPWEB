@@ -212,7 +212,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_NominasPagosCheques" />
         <EntityTypeShape EntityType="Model_rrhh.ro_prestamo" Width="1.5" PointX="11.25" PointY="49.375" />
         <EntityTypeShape EntityType="Model_rrhh.ro_prestamo_detalle" Width="1.5" PointX="13.5" PointY="50.375" />
-        <EntityTypeShape EntityType="Model_rrhh.vwRo_Prestamo" Width="1.5" PointX="25.375" PointY="11.75" />
         <AssociationConnector Association="Model_rrhh.FK_ro_prestamo_ro_catalogo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_prestamo_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_prestamo_detalle_ro_prestamo" />
@@ -221,6 +220,7 @@
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_combo" Width="1.5" PointX="11.375" PointY="18.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="26.375" PointY="18.75" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Parametros_ro_catalogo" />
+        <EntityTypeShape EntityType="Model_rrhh.vwRo_Prestamo" Width="1.5" PointX="21.375" PointY="22.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

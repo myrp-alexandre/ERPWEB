@@ -43,7 +43,9 @@ namespace Core.Erp.Info.RRHH
         public string MotiAnula { get; set; }
         public Nullable<int> IdTipoCbte { get; set; }
         public Nullable<decimal> IdCbteCble { get; set; }
-        public Nullable<decimal> IdOrdenPago { get; set; }
+        public Nullable<decimal> IdOrdenPago { get; set; }    
+        public string IdUsuarioAprueba { get; set; }
+        public string EstadoAprob { get; set; }
 
 
         public double TotalCobrado { get; set; }

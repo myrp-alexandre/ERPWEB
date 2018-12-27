@@ -13,17 +13,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
     public class PrestamosAprobacionController : Controller
     {
         ro_prestamo_Bus bus_prestamos = new ro_prestamo_Bus();
+        ro_prestamo_List list_prestamos_aprobar = new ro_prestamo_List();
         // GET: RRHH/PrestamosAprobacion
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            model.IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+            list_prestamos_aprobar.get_list(model.IdTransaccionSession);
+
             return View(model);
         }
 
@@ -42,6 +48,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             string[] array = Ids.Split(',');
             string IdUsuarioAprueba = SessionFixed.IdUsuario;
+
             if (string.IsNullOrEmpty(Ids))
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
@@ -51,6 +58,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 var resultado_orden = bus_prestamos.aprobar_prestamo(IdEmpresa, array, IdUsuarioAprueba);
                 return Json(resultado_orden, JsonRequestBehavior.AllowGet);
             }
+        }
+    }
+
+    public class ro_prestamo_List
+    {
+        string variable = "ro_prestamo_Info";
+        public List<ro_prestamo_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ro_prestamo_Info> list = new List<ro_prestamo_Info>();
+
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ro_prestamo_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+        }
+        public void set_list(List<ro_prestamo_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
     }
 }
