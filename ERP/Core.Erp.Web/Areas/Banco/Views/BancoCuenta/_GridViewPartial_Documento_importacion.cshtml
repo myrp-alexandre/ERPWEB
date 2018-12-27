@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_Banco_importacion";
-        settings.CallbackRouteValues = new { Controller = "BancoCuenta", Action = "GridViewPartial_Banco_importacion" };
+        settings.Name = "GridViewPartial_Documento_importacion";
+        settings.CallbackRouteValues = new { Controller = "BancoCuenta", Action = "GridViewPartial_Documento_importacion" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdBanco";
         settings.Width = Unit.Percentage(100);
@@ -48,12 +48,12 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdBanco_Financiero", "Cuenta bancaria").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdBanco", "Id Banco").Width = Unit.Percentage(10);
-        settings.Columns.Add("ba_Tipo", "Tipo cuenta").Width = Unit.Percentage(20);
-        settings.Columns.Add("ba_Num_Cuenta", "Número de cuenta").Width = Unit.Percentage(10);
-        settings.Columns.Add("ba_num_digito_cheq", "Número de dígitos por cheque").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdCtaCble", "Cta contable").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdTipo_Persona", "Tipo").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdBanco", "Establecimiento").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdBanco", "Cuenta bancaria").Width = Unit.Percentage(20);
+        settings.Columns.Add("cb_Fecha", "Fecha").Width = Unit.Percentage(10);
+        settings.Columns.Add("cb_Observación", "Observación").Width = Unit.Percentage(10);
+        settings.Columns.Add("cb_Valor", "Valor").Width = Unit.Percentage(20);
 
        
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
