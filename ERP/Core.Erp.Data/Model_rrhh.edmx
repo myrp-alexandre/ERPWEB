@@ -1233,6 +1233,61 @@
           <Property Name="IdRubro_horas_extras" Type="varchar" MaxLength="50" />
           <Property Name="IdRubro_bono_x_antiguedad" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ro_SancionesPorMarcaciones">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdAjuste" Type="int" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="int" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="int" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FecaFin" Type="date" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuario" Type="bit" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ro_SancionesPorMarcaciones_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdAjuste" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdCalendario" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdTipoMarcaciones" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="EsHoraHorario" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EsHoraMarcacion" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Minutos" Type="float" Nullable="false" />
+          <Property Name="IdRegistro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ro_SancionesPorMarcaciones_x_novedad">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdAjuste" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdNovedad" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpresa_nov" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="int" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ro_Solicitud_Vacaciones_x_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1361,8 +1416,8 @@
           <Property Name="ip" Type="varchar" MaxLength="25" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_ActaFiniquito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwRo_ActaFiniquito' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_ActaFiniquito">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -1414,8 +1469,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_ActaFiniquito' no tiene defin
           <Property Name="CodCatalogo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="EstadoContrato" Type="varchar" MaxLength="10" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_archivos_bancos_generacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_archivos_bancos_generacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_archivos_bancos_generacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1446,8 +1501,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_archivos_bancos_generacion' n
           <Property Name="NombreProceso" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_archivos_bancos_generacion_x_empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_archivos_bancos_generacion_x_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_archivos_bancos_generacion_x_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1482,8 +1537,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_archivos_bancos_generacion_x_
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="Secuencia" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_combo">
           <Key>
             <PropertyRef Name="pe_cedulaRuc" />
@@ -1513,8 +1568,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_combo' no tiene defi
           <Property Name="GozaMasDeQuinceDiasVaciones" Type="bit" Nullable="false" />
           <Property Name="DiasVacaciones" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_datos_generales' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_datos_generales">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1613,8 +1668,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_datos_generales' no 
           <Property Name="GozaMasDeQuinceDiasVaciones" Type="bit" Nullable="false" />
           <Property Name="DiasVacaciones" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_Novedad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_Novedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_Novedad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1644,8 +1699,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_Novedad' no tiene de
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Observacion" Type="varchar(max)" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_novedad_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_novedad_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_novedad_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1668,8 +1723,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_novedad_det' no tien
           <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rub_codigo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_Empleado_Novedades' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_Empleado_Novedades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_Empleado_Novedades">
           <Key>
             <PropertyRef Name="IdEmpleado" />
@@ -1710,8 +1765,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_Empleado_Novedades' no tiene 
           <Property Name="Su_Descripcion" Type="nchar" MaxLength="60" Nullable="false" />
           <Property Name="IdSucursal" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_ro_rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_ro_rubro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_ro_rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1746,8 +1801,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_ro_rubro' no tiene
           <Property Name="FechaFin" Type="date" />
           <Property Name="es_indifinido" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_rubro_acumulado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_rubro_acumulado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_rubro_acumulado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1769,8 +1824,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_rubro_acumulado' n
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_titulos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_titulos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_titulos">
           <Key>
             <PropertyRef Name="CodCatalogo" />
@@ -1803,8 +1858,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_titulos' no tiene 
           <Property Name="IdTitulo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_EmpleadoNovedadCargaMasiva">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1833,8 +1888,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva' n
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DescripcionProcesoNomina" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_EmpleadoNovedadCargaMasiva_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1859,8 +1914,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva_de
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleados_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleados_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleados_consulta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1881,8 +1936,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleados_consulta' no tiene 
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
           <Property Name="em_fechaIngaRol" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_Historico_Liquidacion_Vacaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_Historico_Liquidacion_Vacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_Historico_Liquidacion_Vacaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1918,8 +1973,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_Historico_Liquidacion_Vacacio
           <Property Name="Fecha_Hasta" Type="datetime" Nullable="false" />
           <Property Name="Fecha_Retorno" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_horario_planificacion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_horario_planificacion_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_horario_planificacion_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1960,8 +2015,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_horario_planificacion_det' no
           <Property Name="fecha" Type="date" />
           <Property Name="IdCalendario" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_HorasProfesores' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_HorasProfesores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_HorasProfesores">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1985,8 +2040,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_HorasProfesores' no tiene def
           <Property Name="DescripcionProcesoNomina" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_HorasProfesores_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_HorasProfesores_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_HorasProfesores_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2027,8 +2082,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_HorasProfesores_det' no tiene
           <Property Name="ValorHora" Type="float" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_marcaciones_x_empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_marcaciones_x_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_marcaciones_x_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2063,8 +2118,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_marcaciones_x_empleado' no ti
           <Property Name="cargo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ma_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_sin_percebir_sueldo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_nomina_sin_percebir_sueldo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_sin_percebir_sueldo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2087,8 +2142,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_sin_percebir_sueldo' n
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_x_horas_extras_aprobadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_aprobadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_x_horas_extras_aprobadas">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2111,8 +2166,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_x_horas_extras_aprobad
           <Property Name="Valor50" Type="float" Nullable="false" />
           <Property Name="Valor100" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_x_horas_extras_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_x_horas_extras_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2161,8 +2216,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_x_horas_extras_det' no
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_NominasPagosCheques' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_NominasPagosCheques' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_NominasPagosCheques">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2188,8 +2243,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_NominasPagosCheques' no tiene
           <Property Name="pe_FechaIni" Type="smalldatetime" Nullable="false" />
           <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_NominasPagosCheques_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_NominasPagosCheques_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_NominasPagosCheques_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2229,8 +2284,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_NominasPagosCheques_det' no t
           <Property Name="Secuancia_op" Type="int" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_participacion_utilidad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_participacion_utilidad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_participacion_utilidad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2266,8 +2321,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_participacion_utilidad' no ti
           <Property Name="IdUtilidad" Type="int" Nullable="false" />
           <Property Name="Estado" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_participacion_utilidad_empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_participacion_utilidad_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_participacion_utilidad_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2311,8 +2366,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_participacion_utilidad_emplea
           <Property Name="UtilidadDerechoIndividual" Type="float" Nullable="false" />
           <Property Name="UtilidadCargaFamiliar" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_Prestamo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwRo_Prestamo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_Prestamo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2363,8 +2418,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_Prestamo' no tiene definida n
           <Property Name="EstadoAprob" Type="varchar" MaxLength="10" />
           <Property Name="IdUsuarioAprueba" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_rol' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rol">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2396,8 +2451,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rol' no tiene definida ningun
           <Property Name="IdRol" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Expr1" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_rol_detalle_saldo_por_pagar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwRo_rol_detalle_saldo_por_pagar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_rol_detalle_saldo_por_pagar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2435,8 +2490,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_rol_detalle_saldo_por_pagar' 
           <Property Name="em_tipoCta" Type="varchar" MaxLength="25" />
           <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rubro_tipo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_rubro_tipo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rubro_tipo">
           <Key>
             <PropertyRef Name="ru_descripcion" />
@@ -2446,8 +2501,104 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rubro_tipo' no tiene definida
           <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_Solicitud_Vacaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_SancionesPorMarcaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwro_SancionesPorMarcaciones">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+            <PropertyRef Name="IdNomina_Tipo" />
+            <PropertyRef Name="IdNomina_TipoLiqui" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="FecaFin" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdAjuste" Type="int" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="int" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="int" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FecaFin" Type="date" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="DescripcionProcesoNomina" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_SancionesPorMarcaciones_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwro_SancionesPorMarcaciones_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdCalendario" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdTipoMarcaciones" />
+            <PropertyRef Name="EsHoraHorario" />
+            <PropertyRef Name="EsHoraMarcacion" />
+            <PropertyRef Name="Minutos" />
+            <PropertyRef Name="IdRegistro" />
+            <PropertyRef Name="es_fechaRegistro" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdAjuste" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdCalendario" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdTipoMarcaciones" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="EsHoraHorario" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EsHoraMarcacion" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Minutos" Type="float" Nullable="false" />
+          <Property Name="IdRegistro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="es_fechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="em_codigo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_SancionesPorMarcaciones_x_novedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwro_SancionesPorMarcaciones_x_novedad">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdNovedad" />
+            <PropertyRef Name="IdEmpresa_nov" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdNomina_Tipo" />
+            <PropertyRef Name="IdNomina_TipoLiqui" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdAjuste" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdNovedad" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpresa_nov" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="int" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="em_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwRo_Solicitud_Vacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_Solicitud_Vacaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2500,8 +2651,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_Solicitud_Vacaciones' no tien
           <Property Name="IdLiquidacion" Type="int" />
           <Property Name="Estado_liquidacion" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.EntidadRegulatoria.vwrdep_IngrEgr_x_Empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.EntidadRegulatoria.vwrdep_IngrEgr_x_Empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwrdep_IngrEgr_x_Empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2535,8 +2686,8 @@ advertencia 6002: La tabla o vista 'DBERP.EntidadRegulatoria.vwrdep_IngrEgr_x_Em
           <Property Name="Utilidades" Type="float" Nullable="false" />
           <Property Name="IngresoVarios" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.EntidadRegulatoria.vwro_ArchivosIess' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.EntidadRegulatoria.vwro_ArchivosIess' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_ArchivosIess">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2570,8 +2721,8 @@ advertencia 6002: La tabla o vista 'DBERP.EntidadRegulatoria.vwro_ArchivosIess' 
           <Property Name="IdPeriodo" Type="int" Nullable="false" />
           <Property Name="Sueldo" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwro_empleado_x_Proyeccion_Gastos_Personales' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwro_empleado_x_Proyeccion_Gastos_Personales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_Proyeccion_Gastos_Personales">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2590,8 +2741,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_empleado_x_Proyeccion_Gastos_
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="estado" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rol_detalle_generar_op">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -4192,6 +4343,92 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_tipo">
+          <End Role="ro_marcaciones_tipo" Type="Self.ro_marcaciones_tipo" Multiplicity="1" />
+          <End Role="ro_SancionesPorMarcaciones_det" Type="Self.ro_SancionesPorMarcaciones_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_marcaciones_tipo">
+              <PropertyRef Name="IdTipoMarcaciones" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones_det">
+              <PropertyRef Name="IdTipoMarcaciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_x_empleado">
+          <End Role="ro_marcaciones_x_empleado" Type="Self.ro_marcaciones_x_empleado" Multiplicity="1" />
+          <End Role="ro_SancionesPorMarcaciones_det" Type="Self.ro_SancionesPorMarcaciones_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_marcaciones_x_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRegistro" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRegistro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones">
+          <End Role="ro_SancionesPorMarcaciones" Type="Self.ro_SancionesPorMarcaciones" Multiplicity="1" />
+          <End Role="ro_SancionesPorMarcaciones_det" Type="Self.ro_SancionesPorMarcaciones_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_SancionesPorMarcaciones">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAjuste" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAjuste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui">
+          <End Role="ro_Nomina_Tipoliqui" Type="Self.ro_Nomina_Tipoliqui" Multiplicity="1" />
+          <End Role="ro_SancionesPorMarcaciones" Type="Self.ro_SancionesPorMarcaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_Nomina_Tipoliqui">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad">
+          <End Role="ro_empleado_Novedad" Type="Self.ro_empleado_Novedad" Multiplicity="1" />
+          <End Role="ro_SancionesPorMarcaciones_x_novedad" Type="Self.ro_SancionesPorMarcaciones_x_novedad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado_Novedad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNovedad" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones_x_novedad">
+              <PropertyRef Name="IdEmpresa_nov" />
+              <PropertyRef Name="IdNovedad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui">
+          <End Role="ro_Nomina_Tipoliqui" Type="Self.ro_Nomina_Tipoliqui" Multiplicity="1" />
+          <End Role="ro_SancionesPorMarcaciones_x_novedad" Type="Self.ro_SancionesPorMarcaciones_x_novedad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_Nomina_Tipoliqui">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones_x_novedad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado">
           <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
           <End Role="ro_Solicitud_Vacaciones_x_empleado" Type="Self.ro_Solicitud_Vacaciones_x_empleado" Multiplicity="*" />
@@ -4380,6 +4617,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <EntitySet Name="ro_rol_detalle_x_rubro_acumulado" EntityType="Self.ro_rol_detalle_x_rubro_acumulado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_rubro_tipo" EntityType="Self.ro_rubro_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_rubros_calculados" EntityType="Self.ro_rubros_calculados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_SancionesPorMarcaciones" EntityType="Self.ro_SancionesPorMarcaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_SancionesPorMarcaciones_det" EntityType="Self.ro_SancionesPorMarcaciones_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_SancionesPorMarcaciones_x_novedad" EntityType="Self.ro_SancionesPorMarcaciones_x_novedad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_Solicitud_Vacaciones_x_empleado" EntityType="Self.ro_Solicitud_Vacaciones_x_empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_tabla_Impu_Renta" EntityType="Self.ro_tabla_Impu_Renta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_tipo_gastos_personales" EntityType="Self.ro_tipo_gastos_personales" Schema="dbo" store:Type="Tables" />
@@ -5046,6 +5286,61 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
     [vwro_rubro_tipo].[IdEmpresa] AS [IdEmpresa]
     FROM [dbo].[vwro_rubro_tipo] AS [vwro_rubro_tipo]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwro_SancionesPorMarcaciones" EntityType="Self.vwro_SancionesPorMarcaciones" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwro_SancionesPorMarcaciones].[IdEmpresa] AS [IdEmpresa], 
+    [vwro_SancionesPorMarcaciones].[IdAjuste] AS [IdAjuste], 
+    [vwro_SancionesPorMarcaciones].[IdNomina_Tipo] AS [IdNomina_Tipo], 
+    [vwro_SancionesPorMarcaciones].[IdNomina_TipoLiqui] AS [IdNomina_TipoLiqui], 
+    [vwro_SancionesPorMarcaciones].[FechaInicio] AS [FechaInicio], 
+    [vwro_SancionesPorMarcaciones].[FecaFin] AS [FecaFin], 
+    [vwro_SancionesPorMarcaciones].[Observacion] AS [Observacion], 
+    [vwro_SancionesPorMarcaciones].[Estado] AS [Estado], 
+    [vwro_SancionesPorMarcaciones].[DescripcionProcesoNomina] AS [DescripcionProcesoNomina], 
+    [vwro_SancionesPorMarcaciones].[Descripcion] AS [Descripcion]
+    FROM [dbo].[vwro_SancionesPorMarcaciones] AS [vwro_SancionesPorMarcaciones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwro_SancionesPorMarcaciones_det" EntityType="Self.vwro_SancionesPorMarcaciones_det" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwro_SancionesPorMarcaciones_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwro_SancionesPorMarcaciones_det].[IdAjuste] AS [IdAjuste], 
+    [vwro_SancionesPorMarcaciones_det].[Secuencia] AS [Secuencia], 
+    [vwro_SancionesPorMarcaciones_det].[IdCalendario] AS [IdCalendario], 
+    [vwro_SancionesPorMarcaciones_det].[IdEmpleado] AS [IdEmpleado], 
+    [vwro_SancionesPorMarcaciones_det].[IdSucursal] AS [IdSucursal], 
+    [vwro_SancionesPorMarcaciones_det].[IdTipoMarcaciones] AS [IdTipoMarcaciones], 
+    [vwro_SancionesPorMarcaciones_det].[EsHoraHorario] AS [EsHoraHorario], 
+    [vwro_SancionesPorMarcaciones_det].[EsHoraMarcacion] AS [EsHoraMarcacion], 
+    [vwro_SancionesPorMarcaciones_det].[Minutos] AS [Minutos], 
+    [vwro_SancionesPorMarcaciones_det].[IdRegistro] AS [IdRegistro], 
+    [vwro_SancionesPorMarcaciones_det].[Observacion] AS [Observacion], 
+    [vwro_SancionesPorMarcaciones_det].[es_fechaRegistro] AS [es_fechaRegistro], 
+    [vwro_SancionesPorMarcaciones_det].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwro_SancionesPorMarcaciones_det].[pe_apellido] AS [pe_apellido], 
+    [vwro_SancionesPorMarcaciones_det].[pe_nombre] AS [pe_nombre], 
+    [vwro_SancionesPorMarcaciones_det].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwro_SancionesPorMarcaciones_det].[em_codigo] AS [em_codigo]
+    FROM [dbo].[vwro_SancionesPorMarcaciones_det] AS [vwro_SancionesPorMarcaciones_det]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwro_SancionesPorMarcaciones_x_novedad" EntityType="Self.vwro_SancionesPorMarcaciones_x_novedad" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwro_SancionesPorMarcaciones_x_novedad].[IdEmpresa] AS [IdEmpresa], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[IdAjuste] AS [IdAjuste], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[Secuencia] AS [Secuencia], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[IdNovedad] AS [IdNovedad], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[IdEmpresa_nov] AS [IdEmpresa_nov], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[IdEmpleado] AS [IdEmpleado], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[IdNomina_Tipo] AS [IdNomina_Tipo], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[IdNomina_TipoLiqui] AS [IdNomina_TipoLiqui], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[Valor] AS [Valor], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[FechaPago] AS [FechaPago], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[em_codigo] AS [em_codigo], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[pe_apellido] AS [pe_apellido], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[pe_nombre] AS [pe_nombre], 
+    [vwro_SancionesPorMarcaciones_x_novedad].[pe_nombreCompleto] AS [pe_nombreCompleto]
+    FROM [dbo].[vwro_SancionesPorMarcaciones_x_novedad] AS [vwro_SancionesPorMarcaciones_x_novedad]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwRo_Solicitud_Vacaciones" EntityType="Self.vwRo_Solicitud_Vacaciones" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwRo_Solicitud_Vacaciones].[IdEmpresa] AS [IdEmpresa], 
@@ -5593,6 +5888,30 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <AssociationSet Name="FK_ro_rubros_calculados_ro_rubro_tipo9" Association="Self.FK_ro_rubros_calculados_ro_rubro_tipo9">
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_rubros_calculados" EntitySet="ro_rubros_calculados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_tipo" Association="Self.FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_tipo">
+            <End Role="ro_marcaciones_tipo" EntitySet="ro_marcaciones_tipo" />
+            <End Role="ro_SancionesPorMarcaciones_det" EntitySet="ro_SancionesPorMarcaciones_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_x_empleado" Association="Self.FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_x_empleado">
+            <End Role="ro_marcaciones_x_empleado" EntitySet="ro_marcaciones_x_empleado" />
+            <End Role="ro_SancionesPorMarcaciones_det" EntitySet="ro_SancionesPorMarcaciones_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" Association="Self.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones">
+            <End Role="ro_SancionesPorMarcaciones" EntitySet="ro_SancionesPorMarcaciones" />
+            <End Role="ro_SancionesPorMarcaciones_det" EntitySet="ro_SancionesPorMarcaciones_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" Association="Self.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui">
+            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_SancionesPorMarcaciones" EntitySet="ro_SancionesPorMarcaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" Association="Self.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad">
+            <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
+            <End Role="ro_SancionesPorMarcaciones_x_novedad" EntitySet="ro_SancionesPorMarcaciones_x_novedad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" Association="Self.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui">
+            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_SancionesPorMarcaciones_x_novedad" EntitySet="ro_SancionesPorMarcaciones_x_novedad" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" Association="Self.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
@@ -6162,6 +6481,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_EmpleadoNovedadCargaMasiva" />
           <NavigationProperty Name="ro_HorasProfesores" Relationship="Model_rrhh.FK_ro_HorasProfesores_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_HorasProfesores" />
           <NavigationProperty Name="ro_NominasPagosCheques" Relationship="Model_rrhh.FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_NominasPagosCheques" />
+          <NavigationProperty Name="ro_SancionesPorMarcaciones" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_SancionesPorMarcaciones" />
+          <NavigationProperty Name="ro_SancionesPorMarcaciones_x_novedad" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_SancionesPorMarcaciones_x_novedad" />
         </EntityType>
         <EntityType Name="ro_nomina_x_horas_extras">
           <Key>
@@ -7789,6 +8110,36 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             <End Role="ro_Parametros" EntitySet="ro_Parametros" />
           </AssociationSet>
           <EntitySet Name="vwRo_Prestamo" EntityType="Model_rrhh.vwRo_Prestamo" />
+          <EntitySet Name="ro_SancionesPorMarcaciones" EntityType="Model_rrhh.ro_SancionesPorMarcaciones" />
+          <EntitySet Name="ro_SancionesPorMarcaciones_det" EntityType="Model_rrhh.ro_SancionesPorMarcaciones_det" />
+          <EntitySet Name="ro_SancionesPorMarcaciones_x_novedad" EntityType="Model_rrhh.ro_SancionesPorMarcaciones_x_novedad" />
+          <EntitySet Name="vwro_SancionesPorMarcaciones" EntityType="Model_rrhh.vwro_SancionesPorMarcaciones" />
+          <EntitySet Name="vwro_SancionesPorMarcaciones_det" EntityType="Model_rrhh.vwro_SancionesPorMarcaciones_det" />
+          <EntitySet Name="vwro_SancionesPorMarcaciones_x_novedad" EntityType="Model_rrhh.vwro_SancionesPorMarcaciones_x_novedad" />
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad">
+            <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
+            <End Role="ro_SancionesPorMarcaciones_x_novedad" EntitySet="ro_SancionesPorMarcaciones_x_novedad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_tipo" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_tipo">
+            <End Role="ro_marcaciones_tipo" EntitySet="ro_marcaciones_tipo" />
+            <End Role="ro_SancionesPorMarcaciones_det" EntitySet="ro_SancionesPorMarcaciones_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_x_empleado" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_x_empleado">
+            <End Role="ro_marcaciones_x_empleado" EntitySet="ro_marcaciones_x_empleado" />
+            <End Role="ro_SancionesPorMarcaciones_det" EntitySet="ro_SancionesPorMarcaciones_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui">
+            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_SancionesPorMarcaciones" EntitySet="ro_SancionesPorMarcaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui">
+            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_SancionesPorMarcaciones_x_novedad" EntitySet="ro_SancionesPorMarcaciones_x_novedad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones">
+            <End Role="ro_SancionesPorMarcaciones" EntitySet="ro_SancionesPorMarcaciones" />
+            <End Role="ro_SancionesPorMarcaciones_det" EntitySet="ro_SancionesPorMarcaciones_det" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -7874,6 +8225,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Property Name="IdTipoMarcaciones" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ma_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" FromRole="ro_marcaciones_tipo" ToRole="ro_marcaciones_x_empleado" />
+          <NavigationProperty Name="ro_SancionesPorMarcaciones_det" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_tipo" FromRole="ro_marcaciones_tipo" ToRole="ro_SancionesPorMarcaciones_det" />
         </EntityType>
         <EntityType Name="ro_permiso_x_empleado">
           <Key>
@@ -8076,6 +8428,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <NavigationProperty Name="ro_HorasProfesores_det" Relationship="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_HorasProfesores_det" />
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" FromRole="ro_empleado_Novedad" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_empleado1" Relationship="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" FromRole="ro_empleado_Novedad" ToRole="ro_empleado" />
+          <NavigationProperty Name="ro_SancionesPorMarcaciones_x_novedad" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" FromRole="ro_empleado_Novedad" ToRole="ro_SancionesPorMarcaciones_x_novedad" />
           </EntityType>
         <EntityType Name="ro_empleado_novedad_det">
           <Key>
@@ -8569,6 +8922,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <NavigationProperty Name="ro_marcaciones_tipo" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" FromRole="ro_marcaciones_x_empleado" ToRole="ro_marcaciones_tipo" />
           <NavigationProperty Name="ro_Nomina_Tipo" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_Nomina_Tipo" FromRole="ro_marcaciones_x_empleado" ToRole="ro_Nomina_Tipo" />
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" FromRole="ro_marcaciones_x_empleado" ToRole="ro_empleado" />
+          <NavigationProperty Name="ro_SancionesPorMarcaciones_det" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_x_empleado" FromRole="ro_marcaciones_x_empleado" ToRole="ro_SancionesPorMarcaciones_det" />
         </EntityType>
         <Association Name="FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo">
           <End Type="Model_rrhh.ro_marcaciones_tipo" Role="ro_marcaciones_tipo" Multiplicity="1" />
@@ -10671,6 +11025,244 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Property Name="EstadoAprob" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuarioAprueba" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ro_SancionesPorMarcaciones">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAjuste" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FecaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario" Type="Boolean" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" FromRole="ro_SancionesPorMarcaciones" ToRole="ro_Nomina_Tipoliqui" />
+          <NavigationProperty Name="ro_SancionesPorMarcaciones_det" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" FromRole="ro_SancionesPorMarcaciones" ToRole="ro_SancionesPorMarcaciones_det" />
+        </EntityType>
+        <EntityType Name="ro_SancionesPorMarcaciones_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAjuste" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCalendario" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoMarcaciones" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EsHoraHorario" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EsHoraMarcacion" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Minutos" Type="Double" Nullable="false" />
+          <Property Name="IdRegistro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_marcaciones_tipo" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_tipo" FromRole="ro_SancionesPorMarcaciones_det" ToRole="ro_marcaciones_tipo" />
+          <NavigationProperty Name="ro_marcaciones_x_empleado" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_x_empleado" FromRole="ro_SancionesPorMarcaciones_det" ToRole="ro_marcaciones_x_empleado" />
+          <NavigationProperty Name="ro_SancionesPorMarcaciones" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" FromRole="ro_SancionesPorMarcaciones_det" ToRole="ro_SancionesPorMarcaciones" />
+        </EntityType>
+        <EntityType Name="ro_SancionesPorMarcaciones_x_novedad">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAjuste" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ro_empleado_Novedad" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" FromRole="ro_SancionesPorMarcaciones_x_novedad" ToRole="ro_empleado_Novedad" />
+          <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" FromRole="ro_SancionesPorMarcaciones_x_novedad" ToRole="ro_Nomina_Tipoliqui" />
+        </EntityType>
+        <EntityType Name="vwro_SancionesPorMarcaciones">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+            <PropertyRef Name="IdNomina_Tipo" />
+            <PropertyRef Name="IdNomina_TipoLiqui" />
+            <PropertyRef Name="FechaInicio" />
+            <PropertyRef Name="FecaFin" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="DescripcionProcesoNomina" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAjuste" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FecaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="DescripcionProcesoNomina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwro_SancionesPorMarcaciones_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdCalendario" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdTipoMarcaciones" />
+            <PropertyRef Name="EsHoraHorario" />
+            <PropertyRef Name="EsHoraMarcacion" />
+            <PropertyRef Name="Minutos" />
+            <PropertyRef Name="IdRegistro" />
+            <PropertyRef Name="es_fechaRegistro" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAjuste" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCalendario" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoMarcaciones" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EsHoraHorario" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EsHoraMarcacion" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Minutos" Type="Double" Nullable="false" />
+          <Property Name="IdRegistro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="es_fechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwro_SancionesPorMarcaciones_x_novedad">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdNovedad" />
+            <PropertyRef Name="IdEmpresa_nov" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="IdNomina_Tipo" />
+            <PropertyRef Name="IdNomina_TipoLiqui" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="FechaPago" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAjuste" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdNovedad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_nov" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad">
+          <End Type="Model_rrhh.ro_empleado_Novedad" Role="ro_empleado_Novedad" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_SancionesPorMarcaciones_x_novedad" Role="ro_SancionesPorMarcaciones_x_novedad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado_Novedad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNovedad" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones_x_novedad">
+              <PropertyRef Name="IdEmpresa_nov" />
+              <PropertyRef Name="IdNovedad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_tipo">
+          <End Type="Model_rrhh.ro_marcaciones_tipo" Role="ro_marcaciones_tipo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_SancionesPorMarcaciones_det" Role="ro_SancionesPorMarcaciones_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_marcaciones_tipo">
+              <PropertyRef Name="IdTipoMarcaciones" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones_det">
+              <PropertyRef Name="IdTipoMarcaciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_det_ro_marcaciones_x_empleado">
+          <End Type="Model_rrhh.ro_marcaciones_x_empleado" Role="ro_marcaciones_x_empleado" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_SancionesPorMarcaciones_det" Role="ro_SancionesPorMarcaciones_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_marcaciones_x_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRegistro" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRegistro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui">
+          <End Type="Model_rrhh.ro_Nomina_Tipoliqui" Role="ro_Nomina_Tipoliqui" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_SancionesPorMarcaciones" Role="ro_SancionesPorMarcaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_Nomina_Tipoliqui">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui">
+          <End Type="Model_rrhh.ro_Nomina_Tipoliqui" Role="ro_Nomina_Tipoliqui" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_SancionesPorMarcaciones_x_novedad" Role="ro_SancionesPorMarcaciones_x_novedad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_Nomina_Tipoliqui">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones_x_novedad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones">
+          <End Type="Model_rrhh.ro_SancionesPorMarcaciones" Role="ro_SancionesPorMarcaciones" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_SancionesPorMarcaciones_det" Role="ro_SancionesPorMarcaciones_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_SancionesPorMarcaciones">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAjuste" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAjuste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12874,6 +13466,120 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
                 <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_SancionesPorMarcaciones">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_SancionesPorMarcaciones">
+              <MappingFragment StoreEntitySet="ro_SancionesPorMarcaciones">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="FecaFin" ColumnName="FecaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="IdNomina_TipoLiqui" ColumnName="IdNomina_TipoLiqui" />
+                <ScalarProperty Name="IdNomina_Tipo" ColumnName="IdNomina_Tipo" />
+                <ScalarProperty Name="IdAjuste" ColumnName="IdAjuste" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_SancionesPorMarcaciones_det">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_SancionesPorMarcaciones_det">
+              <MappingFragment StoreEntitySet="ro_SancionesPorMarcaciones_det">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
+                <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+                <ScalarProperty Name="EsHoraMarcacion" ColumnName="EsHoraMarcacion" />
+                <ScalarProperty Name="EsHoraHorario" ColumnName="EsHoraHorario" />
+                <ScalarProperty Name="IdTipoMarcaciones" ColumnName="IdTipoMarcaciones" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdCalendario" ColumnName="IdCalendario" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdAjuste" ColumnName="IdAjuste" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_SancionesPorMarcaciones_x_novedad">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_SancionesPorMarcaciones_x_novedad">
+              <MappingFragment StoreEntitySet="ro_SancionesPorMarcaciones_x_novedad">
+                <ScalarProperty Name="IdNomina_TipoLiqui" ColumnName="IdNomina_TipoLiqui" />
+                <ScalarProperty Name="IdNomina_Tipo" ColumnName="IdNomina_Tipo" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa_nov" ColumnName="IdEmpresa_nov" />
+                <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdAjuste" ColumnName="IdAjuste" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_SancionesPorMarcaciones">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_SancionesPorMarcaciones">
+              <MappingFragment StoreEntitySet="vwro_SancionesPorMarcaciones">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DescripcionProcesoNomina" ColumnName="DescripcionProcesoNomina" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="FecaFin" ColumnName="FecaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="IdNomina_TipoLiqui" ColumnName="IdNomina_TipoLiqui" />
+                <ScalarProperty Name="IdNomina_Tipo" ColumnName="IdNomina_Tipo" />
+                <ScalarProperty Name="IdAjuste" ColumnName="IdAjuste" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_SancionesPorMarcaciones_det">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_SancionesPorMarcaciones_det">
+              <MappingFragment StoreEntitySet="vwro_SancionesPorMarcaciones_det">
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="es_fechaRegistro" ColumnName="es_fechaRegistro" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
+                <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+                <ScalarProperty Name="EsHoraMarcacion" ColumnName="EsHoraMarcacion" />
+                <ScalarProperty Name="EsHoraHorario" ColumnName="EsHoraHorario" />
+                <ScalarProperty Name="IdTipoMarcaciones" ColumnName="IdTipoMarcaciones" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdCalendario" ColumnName="IdCalendario" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdAjuste" ColumnName="IdAjuste" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_SancionesPorMarcaciones_x_novedad">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_SancionesPorMarcaciones_x_novedad">
+              <MappingFragment StoreEntitySet="vwro_SancionesPorMarcaciones_x_novedad">
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IdNomina_TipoLiqui" ColumnName="IdNomina_TipoLiqui" />
+                <ScalarProperty Name="IdNomina_Tipo" ColumnName="IdNomina_Tipo" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa_nov" ColumnName="IdEmpresa_nov" />
+                <ScalarProperty Name="IdNovedad" ColumnName="IdNovedad" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdAjuste" ColumnName="IdAjuste" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
