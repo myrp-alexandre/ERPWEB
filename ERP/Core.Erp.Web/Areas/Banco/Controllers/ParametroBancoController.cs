@@ -26,7 +26,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ba_parametros_Info model = bus_parametro.get_info(IdEmpresa);
             if (model == null)
-                model = new ba_parametros_Info();
+                model = new ba_parametros_Info { IdEmpresa = IdEmpresa };
             cargar_combos(IdEmpresa);
             return View(model);
         }

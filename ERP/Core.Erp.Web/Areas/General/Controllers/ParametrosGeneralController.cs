@@ -18,11 +18,12 @@ namespace Core.Erp.Web.Areas.General.Controllers
         #endregion
 
         #region Index
-        public ActionResult Index(int IdEmpresa = 0)
+        public ActionResult Index()
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             tb_parametro_Info model = bus_parametro.GetInfo(IdEmpresa);
             if (model == null)
-                model = new tb_parametro_Info();
+                model = new tb_parametro_Info { IdEmpresa = IdEmpresa };
             cargar_combos();
             return View(model);
         }
