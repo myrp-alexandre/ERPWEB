@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
 {
-    [SessionTimeout]
+//    [SessionTimeout]
     public class MenuPorEmpresaPorUsuarioController : Controller
     {
         #region Index

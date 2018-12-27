@@ -14,7 +14,7 @@ using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 
 namespace Core.Erp.Web.Areas.General.Controllers
 {
-    [SessionTimeout]
+   // [SessionTimeout]
 
     public class EmpresaController : Controller
     {
@@ -150,10 +150,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public ActionResult Importar(int IdEmpresa = 0)
         {
             #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            SessionFixed.IdTransaccionSession = "999999";
+            SessionFixed.IdTransaccionSessionActual = "999999";
             #endregion
 
             tb_empresa_Info model = new tb_empresa_Info
@@ -325,8 +323,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
                         {
                             IdEmpresa = Convert.ToInt32(reader.GetValue(0)),
                             IdSucursal = Convert.ToInt32(reader.GetValue(1)),
-                            IdBodega = Convert.ToInt32(reader.GetValue(1)),
-                            cod_bodega = Convert.ToString(reader.GetValue(2)),
+                            IdBodega = Convert.ToInt32(reader.GetValue(2)),
+                            cod_bodega = Convert.ToString(reader.GetValue(3)),
                             bo_Descripcion = Convert.ToString(reader.GetValue(4)),
                             IdCtaCtble_Inve = Convert.ToString(reader.GetValue(5)),
                             IdUsuario = SessionFixed.IdUsuario

@@ -12,7 +12,7 @@ using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.SeguridadAcceso.Controllers
 {
-    [SessionTimeout]
+    //[SessionTimeout]
     public class MenuPorEmpresaController : Controller
     {
         #region Index
