@@ -28,8 +28,7 @@ namespace Core.Erp.Data.Banco
                                       ba_Tipo = q.ba_Tipo,
                                       Estado = q.Estado,
                                       IdBanco = q.IdBanco,
-                                      IdCtaCble = q.IdCtaCble,
-                                      ReporteSolo_Cheque = q.ReporteSolo_Cheque,
+                                      IdCtaCble = q.IdCtaCble,                                      
 
                                      EstadoBool = q.Estado == "A" ? true : false
 
@@ -47,8 +46,7 @@ namespace Core.Erp.Data.Banco
                                      ba_Tipo = q.ba_Tipo,
                                      Estado = q.Estado,
                                      IdBanco = q.IdBanco,
-                                     IdCtaCble = q.IdCtaCble,
-                                     ReporteSolo_Cheque = q.ReporteSolo_Cheque,
+                                     IdCtaCble = q.IdCtaCble,                                     
 
                                      EstadoBool = q.Estado == "A" ? true : false
 
@@ -81,9 +79,7 @@ namespace Core.Erp.Data.Banco
                         Estado = Entity.Estado,
                         IdBanco = Entity.IdBanco,
                         IdCtaCble = Entity.IdCtaCble,
-                        ReporteSolo_Cheque = Entity.ReporteSolo_Cheque,
-                        MostrarVistaPreviaCheque = Entity.MostrarVistaPreviaCheque == Convert.ToBoolean(Entity.MostrarVistaPreviaCheque),
-                        Imprimir_Solo_el_cheque = Entity.Imprimir_Solo_el_cheque == Convert.ToBoolean(Entity.Imprimir_Solo_el_cheque),
+                        Imprimir_Solo_el_cheque = Entity.Imprimir_Solo_el_cheque,
                         IdBanco_Financiero = Entity.IdBanco_Financiero,
                     };
                 }
@@ -132,12 +128,9 @@ namespace Core.Erp.Data.Banco
                         ba_num_digito_cheq = info.ba_num_digito_cheq,
                         ba_Tipo = info.ba_Tipo,
                         IdCtaCble = info.IdCtaCble,
-                        ReporteSolo_Cheque = info.ReporteSolo_Cheque,
-                        MostrarVistaPreviaCheque = info.MostrarVistaPreviaCheque == Convert.ToBoolean(info.MostrarVistaPreviaCheque),
-                        Imprimir_Solo_el_cheque = info.Imprimir_Solo_el_cheque == Convert.ToBoolean(info.Imprimir_Solo_el_cheque),
+                        Imprimir_Solo_el_cheque = info.Imprimir_Solo_el_cheque,
                         IdBanco_Financiero = info.IdBanco_Financiero,
                         
-
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     };
@@ -166,10 +159,8 @@ namespace Core.Erp.Data.Banco
                     Entity.ba_num_digito_cheq = info.ba_num_digito_cheq;
                     Entity.ba_Tipo = info.ba_Tipo;
                     Entity.IdCtaCble = info.IdCtaCble;
-                    Entity.ReporteSolo_Cheque = info.ReporteSolo_Cheque;
-                    Entity.IdBanco_Financiero = info.IdBanco_Financiero;
-                    Entity.MostrarVistaPreviaCheque = info.MostrarVistaPreviaCheque == Convert.ToBoolean(info.MostrarVistaPreviaCheque);
-                    Entity.Imprimir_Solo_el_cheque = info.Imprimir_Solo_el_cheque == Convert.ToBoolean(info.Imprimir_Solo_el_cheque);
+                    Entity.IdBanco_Financiero = info.IdBanco_Financiero;                    
+                    Entity.Imprimir_Solo_el_cheque = info.Imprimir_Solo_el_cheque;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
@@ -228,8 +219,6 @@ namespace Core.Erp.Data.Banco
                                 Estado = item.Estado="A",
                                 ba_descripcion = item.ba_descripcion,
                                 Imprimir_Solo_el_cheque = item.Imprimir_Solo_el_cheque,
-                                ReporteSolo_Cheque = item.ReporteSolo_Cheque,
-                                MostrarVistaPreviaCheque = item.MostrarVistaPreviaCheque                            
                              };
                             Context.ba_Banco_Cuenta.Add(Entity);
                             Context.SaveChanges();

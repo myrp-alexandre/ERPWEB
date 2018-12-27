@@ -25,7 +25,6 @@ namespace Core.Erp.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<ba_Banco_Cuenta> ba_Banco_Cuenta { get; set; }
         public DbSet<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito> ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito { get; set; }
         public DbSet<ba_Catalogo> ba_Catalogo { get; set; }
         public DbSet<ba_CatalogoTipo> ba_CatalogoTipo { get; set; }
@@ -44,5 +43,6 @@ namespace Core.Erp.Data
         public DbSet<ba_TipoFlujo> ba_TipoFlujo { get; set; }
         public DbSet<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
         public DbSet<vwba_Cbte_Ban> vwba_Cbte_Ban { get; set; }
+        public DbSet<ba_Banco_Cuenta> ba_Banco_Cuenta { get; set; }
     }
 }

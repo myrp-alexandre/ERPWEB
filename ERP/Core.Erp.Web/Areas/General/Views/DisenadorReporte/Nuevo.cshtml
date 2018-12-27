@@ -8,18 +8,16 @@
     //}
     Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
 }
-
 @using (Html.BeginForm("Nuevo", "DisenadorReporte", FormMethod.Post, new { @class = "form", @role = "form" }))
-{ 
-    
+{    
     @Html.DevExpress().ReportDesigner(settings =>
-    {        
-        settings.Name = "File_Disenio_Reporte";
-    }).Bind(new Core.Erp.Web.Reportes.Facturacion.FAC_003_Rpt()).GetHtml()
+    {
+        settings.Name = "ReportDesigner";
+        settings.SaveCallbackRouteValues = new { Controller = "DisenadorReporte", Action = "Nuevo", Area = "General"};
+    }).Bind(Model.File_Disenio_Reporte).GetHtml()
     
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","DisenadorReporte",new { Area = "General" },null)">Cancelar</a>
     </div>
 }
-

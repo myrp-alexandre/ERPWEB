@@ -20,25 +20,22 @@ namespace Core.Erp.Info.Banco
         public int ba_num_digito_cheq { get; set; }
         [Required(ErrorMessage = "El campo cuenta contable es obligatoria")]
         public string IdCtaCble { get; set; }
+        public string Estado { get; set; }
+        public bool EstadoBool { get; set; }
+        public byte[] ReporteChequeComprobante { get; set; }
+        public byte[] ReporteCheque { get; set; }
+        public bool Imprimir_Solo_el_cheque { get; set; }
+        public int IdBanco_Financiero { get; set; }
+
         #region Campos de auditoria
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
         #endregion
-
-        public string Estado { get; set; }
-        public bool EstadoBool { get; set; }
-        public byte[] Reporte { get; set; }
-        public byte[] ReporteSolo_Cheque { get; set; }
-        public Nullable<bool> MostrarVistaPreviaCheque { get; set; }
-        public Nullable<bool> Imprimir_Solo_el_cheque { get; set; }
-        public Nullable<int> IdBanco_Financiero { get; set; }
 
     }
 }

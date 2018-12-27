@@ -16,9 +16,9 @@ namespace Core.Erp.Data
     {
         public ba_Banco_Cuenta()
         {
+            this.ba_Cbte_Ban = new HashSet<ba_Cbte_Ban>();
             this.ba_Conciliacion = new HashSet<ba_Conciliacion>();
             this.ba_Talonario_cheques_x_banco = new HashSet<ba_Talonario_cheques_x_banco>();
-            this.ba_Cbte_Ban = new HashSet<ba_Cbte_Ban>();
         }
     
         public int IdEmpresa { get; set; }
@@ -32,20 +32,17 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string Estado { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
-        public byte[] Reporte { get; set; }
-        public byte[] ReporteSolo_Cheque { get; set; }
-        public Nullable<bool> MostrarVistaPreviaCheque { get; set; }
-        public Nullable<bool> Imprimir_Solo_el_cheque { get; set; }
-        public Nullable<int> IdBanco_Financiero { get; set; }
+        public byte[] ReporteChequeComprobante { get; set; }
+        public byte[] ReporteCheque { get; set; }
+        public bool Imprimir_Solo_el_cheque { get; set; }
+        public int IdBanco_Financiero { get; set; }
     
+        public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
         public virtual ICollection<ba_Conciliacion> ba_Conciliacion { get; set; }
         public virtual ICollection<ba_Talonario_cheques_x_banco> ba_Talonario_cheques_x_banco { get; set; }
-        public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
     }
 }

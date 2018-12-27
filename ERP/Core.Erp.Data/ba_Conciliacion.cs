@@ -41,8 +41,8 @@ namespace Core.Erp.Data
         public string MotivoAnulacion { get; set; }
         public string co_Observacion { get; set; }
     
-        public virtual ba_Banco_Cuenta ba_Banco_Cuenta { get; set; }
         public virtual ba_Catalogo ba_Catalogo { get; set; }
         public virtual ICollection<ba_Conciliacion_det_IngEgr> ba_Conciliacion_det_IngEgr { get; set; }
+        public virtual ba_Banco_Cuenta ba_Banco_Cuenta { get; set; }
     }
 }

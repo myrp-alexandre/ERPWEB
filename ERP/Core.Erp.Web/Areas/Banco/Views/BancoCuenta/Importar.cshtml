@@ -30,6 +30,7 @@
     function OnFileUploadComplete(s, e)
     {
         GridViewPartial_Banco_importacion.PerformCallback();
+        GridViewPartial_Documento_importacion.PerformCallback();
     }
 
 </script>
@@ -82,8 +83,11 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_banco" aria-controls="vales" role="tab" data-toggle="tab">Banco</a>
-            </li>     
+                <a href="#tab_banco" aria-controls="vales" role="tab" data-toggle="tab">Cuentas bancarias</a>
+            </li>
+            <li class="">
+                <a href="#tab_doc" aria-controls="vales" role="tab" data-toggle="tab">Documentos</a>
+            </li>        
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_banco">
@@ -95,7 +99,15 @@
                     </div>
                 </div>
             </div>
-
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_doc">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_Documento_importacion")
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     

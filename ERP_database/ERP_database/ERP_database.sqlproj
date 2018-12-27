@@ -631,7 +631,6 @@
     <Build Include="dbo\Views\vwRo_Division_Area_dep_rubro.sql" />
     <Build Include="web\Views\VWACTF_003.sql" />
     <Build Include="dbo\Views\vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar.sql" />
-    <Build Include="dbo\Views\vwba_ba_Banco_Cuenta.sql" />
     <Build Include="web\Views\VWCONTA_001.sql" />
     <Build Include="dbo\Views\vwct_cbtecble_det_TotalDiario.sql" />
     <Build Include="web\Views\vwba_Cbte_Ban.sql" />
