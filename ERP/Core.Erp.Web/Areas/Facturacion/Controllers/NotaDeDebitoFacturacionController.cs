@@ -10,10 +10,14 @@ using Core.Erp.Web.Areas.Inventario.Controllers;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using DevExpress.Web.Mvc;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
@@ -43,6 +47,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_TipoNota_x_Empresa_x_Sucursal_Bus bus_tipo_nota_x_sucursal = new fa_TipoNota_x_Empresa_x_Sucursal_Bus();
         fa_TipoNota_x_Empresa_x_Sucursal_Bus bus_nota_x_empresa_sucursal = new fa_TipoNota_x_Empresa_x_Sucursal_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+
+        tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
+        fa_notaCreDeb_List Lista_Factura = new fa_notaCreDeb_List();
         #endregion
 
         #region Index
@@ -545,5 +552,158 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+        #region Importacion
+        public ActionResult UploadControlUploadImp()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettingsND.UploadValidationSettings, UploadControlSettingsND.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            fa_notaCreDeb_Info model = new fa_notaCreDeb_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(fa_notaCreDeb_Info model)
+        {
+            try
+            {
+                var ListaFactura = Lista_Factura.get_list(model.IdTransaccionSession);
+
+                //if (!bus_producto.GuardarDbImportacion())
+                //{
+                //    ViewBag.mensaje = "Error al importar el archivo";
+                //    return View(model);
+                //}
+            }
+            catch (Exception ex)
+            {
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+                ViewBag.error = ex.Message.ToString();
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
+        public ActionResult GridViewPartial_Factura_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Factura.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_Factura_importacion", model);
+        }
+
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
     }
+    public class UploadControlSettingsND
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            fa_notaCreDeb_List ListaFactura = new fa_notaCreDeb_List();
+            List<fa_notaCreDeb_Info> Lista_Factura = new List<fa_notaCreDeb_Info>();
+            fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                #region Saldo Fact                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        fa_notaCreDeb_Info info = new fa_notaCreDeb_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdSucursal = Convert.ToInt32(reader.GetValue(0)),
+                            Ruc = Convert.ToString(reader.GetValue(1)),
+                            CodDocumentoTipo = Convert.ToString(reader.GetValue(2)),
+                            sc_total = Convert.ToDouble(reader.GetValue(3)),
+                            sc_saldo = Convert.ToDouble(reader.GetValue(4)),
+                            no_fecha = Convert.ToDateTime(reader.GetValue(5)),
+                            no_fecha_venc = Convert.ToDateTime(reader.GetValue(6)),
+                            sc_observacion = Convert.ToString(reader.GetValue(7)),
+                            IdUsuario = SessionFixed.IdUsuario
+                        };
+                        Lista_Factura.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                var ListFact = ListaFactura.get_list(IdTransaccionSession);
+                var ListCliente = bus_cliente.get_list(IdEmpresa, false);
+                var lst = (from q in ListCliente
+                           join c in ListFact
+                           on q.info_persona.pe_cedulaRuc equals c.Nombres
+
+                           select new fa_notaCreDeb_Info
+                           {
+                               IdEmpresa = c.IdEmpresa,
+                               IdSucursal = c.IdSucursal,
+                               Ruc = q.info_persona.pe_cedulaRuc,
+                               CodDocumentoTipo = c.CodDocumentoTipo,
+                               sc_total = c.sc_total,
+                               sc_saldo = c.sc_saldo,
+                               no_fecha = c.no_fecha,
+                               no_fecha_venc = c.no_fecha_venc,
+                               sc_observacion = c.sc_observacion
+                           }).ToList();
+                Lista_Factura = lst;
+                ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
+                #endregion
+                cont = 0;
+                //Para avanzar a la siguiente hoja de excel
+                reader.NextResult();
+            }
+        }
+    }
+
+    public class fa_notaCreDeb_List
+    {
+        string Variable = "fa_notaCreDeb_Info";
+        public List<fa_notaCreDeb_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<fa_notaCreDeb_Info> list = new List<fa_notaCreDeb_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<fa_notaCreDeb_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<fa_notaCreDeb_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
 }

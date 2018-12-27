@@ -31,7 +31,14 @@ namespace Core.Erp.Info.Facturacion
         public string Estado { get; set; }
         public string NaturalezaNota { get; set; }
         public string IdCtaCble_TipoNota { get; set; }
-        
+
+        // campos que no existen en la tabla
+
+        public string Ruc { get; set; }
+        public string Nombres { get; set; }
+        public Nullable<double> sc_total { get; set; }
+        public Nullable<double> sc_saldo { get; set; }
+
         #region Campos de auditoria
         public string IdUsuario { get; set; }
         public string IdUsuarioUltMod { get; set; }

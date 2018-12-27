@@ -1,10 +1,10 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_Documento_importacion";
-        settings.CallbackRouteValues = new { Controller = "BancoCuenta", Action = "GridViewPartial_Documento_importacion" };
+        settings.Name = "GridViewPartial_Factura_importacion";
+        settings.CallbackRouteValues = new { Controller = "NotaDeDebitoFacturacion", Action = "GridViewPartial_Factura_importacion" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdBanco";
+        settings.KeyFieldName = "IdNota";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -48,12 +48,14 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdTipo_Persona", "Tipo").Width = Unit.Percentage(10);
-        settings.Columns.Add("Su_Descripcion", "Establecimiento").Width = Unit.Percentage(10);
-        settings.Columns.Add("ba_descripcion", "Cuenta bancaria").Width = Unit.Percentage(20);
+        settings.Columns.Add("Su_Descripcion", "Establecimiento").Width = Unit.Percentage(30);
+        settings.Columns.Add("Ruc", "RUC").Width = Unit.Percentage(10);
+        settings.Columns.Add("CodDocumentoTipo", "Documento").Width = Unit.Percentage(20);
+        settings.Columns.Add("sc_total", "Total").Width = Unit.Percentage(10);
+        settings.Columns.Add("sc_saldo", "Saldo").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "cb_Fecha";
+            column.FieldName = "no_fecha";
             column.Caption = "Fecha";
             column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "d";
@@ -63,8 +65,19 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("cb_Observacion", "Observación").Width = Unit.Percentage(30);
-        settings.Columns.Add("cb_Valor", "Valor").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "no_fecha_venc";
+            column.Caption = "Fecha vencimiento";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add("sc_observacion", "Observación").Width = Unit.Percentage(20);
 
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
