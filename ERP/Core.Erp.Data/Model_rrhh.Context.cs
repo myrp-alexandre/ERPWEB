@@ -9,11 +9,13 @@
 
 namespace Core.Erp.Data
 {
+
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
+
 
     public partial class Entities_rrhh : DbContext
     {
@@ -135,6 +137,7 @@ namespace Core.Erp.Data
         public DbSet<vwro_SancionesPorMarcaciones> vwro_SancionesPorMarcaciones { get; set; }
         public DbSet<vwro_SancionesPorMarcaciones_det> vwro_SancionesPorMarcaciones_det { get; set; }
         public DbSet<vwro_SancionesPorMarcaciones_x_novedad> vwro_SancionesPorMarcaciones_x_novedad { get; set; }
+        public DbSet<vwro_marcaciones_x_planificacion_horario> vwro_marcaciones_x_planificacion_horario { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
