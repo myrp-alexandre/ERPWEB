@@ -17,6 +17,7 @@ namespace Core.Erp.Data
         public tb_sis_Impuesto()
         {
             this.tb_sis_Impuesto_x_ctacble = new HashSet<tb_sis_Impuesto_x_ctacble>();
+            this.tb_parametro = new HashSet<tb_parametro>();
         }
     
         public string IdCod_Impuesto { get; set; }
@@ -30,5 +31,6 @@ namespace Core.Erp.Data
     
         public virtual tb_sis_Impuesto_Tipo tb_sis_Impuesto_Tipo { get; set; }
         public virtual ICollection<tb_sis_Impuesto_x_ctacble> tb_sis_Impuesto_x_ctacble { get; set; }
+        public virtual ICollection<tb_parametro> tb_parametro { get; set; }
     }
 }

@@ -76,6 +76,8 @@
         <AssociationConnector Association="Model_general.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" />
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa" />
         <AssociationConnector Association="Model_general.FK_tb_sucursal_tb_empresa" />
+        <EntityTypeShape EntityType="Model_general.tb_parametro" Width="1.5" PointX="12.25" PointY="0.75" />
+        <AssociationConnector Association="Model_general.FK_tb_parametro_tb_sis_Impuesto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
