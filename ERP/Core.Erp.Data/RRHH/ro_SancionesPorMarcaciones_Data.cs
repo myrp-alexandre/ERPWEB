@@ -55,7 +55,7 @@ namespace Core.Erp.Data.RRHH
                     entity.FecaFin = info.FecaFin;
                     entity.Observacion = info.Observacion;
                     entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
-                    entity.Fecha_UltMod=DateTime.Now,
+                    entity.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();
                
                         }
