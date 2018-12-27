@@ -587,6 +587,7 @@
     <Compile Include="General\tb_modulo_Data.cs" />
     <Compile Include="General\tb_moneda_Data.cs" />
     <Compile Include="General\tb_pais_Data.cs" />
+    <Compile Include="General\tb_parametro_Data.cs" />
     <Compile Include="General\tb_parroquia_Data.cs" />
     <Compile Include="General\tb_persona_Data.cs" />
     <Compile Include="General\tb_persona_tipo_Data.cs" />
@@ -1606,6 +1607,9 @@
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_pais.cs">
+      <DependentUpon>Model_general.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_parametro.cs">
       <DependentUpon>Model_general.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_parroquia.cs">

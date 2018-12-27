@@ -12,9 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
-
+    
     public partial class Entities_general : DbContext
     {
         public Entities_general()
@@ -71,5 +69,6 @@ namespace Core.Erp.Data
         public DbSet<vwtb_TarjetaCredito_x_cp_proveedor> vwtb_TarjetaCredito_x_cp_proveedor { get; set; }
         public DbSet<tb_sucursal> tb_sucursal { get; set; }
         public DbSet<tb_empresa> tb_empresa { get; set; }
+        public DbSet<tb_parametro> tb_parametro { get; set; }
     }
 }
