@@ -242,7 +242,7 @@ namespace Core.Erp.Data.General
                                 em_rucContador = item.em_rucContador,
                                 em_telefonos = item.em_telefonos,
                                 em_direccion = item.em_direccion,
-                                em_fechaInicioContable = item.em_fechaInicioContable,
+                                em_fechaInicioContable = item.em_fechaInicioContable.Date,
                                 cod_entidad_dinardap = item.cod_entidad_dinardap,
                                 em_Email = item.em_Email,
                                 Estado = item.Estado = "A"

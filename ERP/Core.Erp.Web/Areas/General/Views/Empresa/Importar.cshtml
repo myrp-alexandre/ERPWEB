@@ -1,6 +1,6 @@
-﻿@model Core.Erp.Info.ActivoFijo.Af_Activo_fijo_Info
+﻿@model Core.Erp.Info.General.tb_empresa_Info
 @{
-    ViewBag.Title = "Importar activo fijo";
+    ViewBag.Title = "Importar empresa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,13 +14,13 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("ActualizarVariablesSession", "ActivoFijo", new { Area = "ActivoFijo"})',
+            url: '@Url.Action("ActualizarVariablesSession", "Empresa", new { Area = "General"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
-            success: function (data) {
+            success: function (data) {UploadControlUp
             },
             error: function (error) {
             }
@@ -29,16 +29,14 @@
 
     function OnFileUploadComplete(s, e)
     {
-        GridViewPartial_tipoAF_importacion.PerformCallback();  
-        GridViewPartial_categoriaAF_importacion.PerformCallback();
-        GridViewPartial_departamentoAF_importacion.PerformCallback();
-        GridViewPartial_catalogoAF_importacion.PerformCallback();
-        GridViewPartial_ActivoFijo_importacion.PerformCallback();
+        GridViewPartial_Empresa_importacion.PerformCallback();  
+        GridViewPartial_Sucursal_importacion.PerformCallback();
+        GridViewPartial_Bodega_importacion.PerformCallback();
     }
 
 </script>
 
-@using (Html.BeginForm("Importar", "ActivoFijo", FormMethod.Post, new { @role = "form", @id = "form" }))
+@using (Html.BeginForm("Importar", "Empresa", FormMethod.Post, new { @role = "form", @id = "form" }))
 {
     if (ViewBag.mensaje != null)
     {
@@ -67,7 +65,7 @@
                 @Html.DevExpress().UploadControl(settings =>
            {
                settings.Name = "UploadControlFile";
-               settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "UploadControlUpload" };
+               settings.CallbackRouteValues = new { Controller = "Empresa", Action = "UploadControlUp" };
                settings.ShowUploadButton = true;
                settings.ShowProgressPanel = true;
                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -86,84 +84,46 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_tipo" aria-controls="vales" role="tab" data-toggle="tab">Tipo</a>
+                <a href="#tab_empresa" aria-controls="vales" role="tab" data-toggle="tab">Empresa</a>
             </li>
             <li>
-                <a href="#tab_categoria" aria-controls="vales" role="tab" data-toggle="tab">Categoría</a>
+                <a href="#tab_sucursal" aria-controls="vales" role="tab" data-toggle="tab">Sucursal</a>
             </li>            
             <li>
-                <a href="#tab_departamentos" aria-controls="vales" role="tab" data-toggle="tab">Departamento</a>
-            </li>
-            <li>
-                <a href="#tab_catalogos" aria-controls="vales" role="tab" data-toggle="tab">Catálogos</a>
-            </li>
-            <li>
-                <a href="#tab_activo_fijo" aria-controls="vales" role="tab" data-toggle="tab">Activo fijo</a>
-            </li>
-            <li>
-                <a href="#tab_gastos_depreciacion" aria-controls="vales" role="tab" data-toggle="tab">Gastos depreciación</a>
+                <a href="#tab_bodega" aria-controls="vales" role="tab" data-toggle="tab">Bodega</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_tipo">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_empresa">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_tipoAF_importacion")
+                            @Html.Action("GridViewPartial_Empresa_importacion")
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_categoria">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_sucursal">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_categoriaAF_importacion")
+                            @Html.Action("GridViewPartial_Sucursal_importacion")
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_departamentos">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_bodega">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_departamentoAF_importacion")
+                            @Html.Action("GridViewPartial_Bodega_importacion")
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_catalogos">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_catalogoAF_importacion")
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_activo_fijo">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_ActivoFijo_importacion")
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_gastos_depreciacion">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_ActivoFijo_CtaCble_importacion")
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     

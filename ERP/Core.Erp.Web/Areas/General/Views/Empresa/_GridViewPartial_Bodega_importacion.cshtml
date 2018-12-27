@@ -1,10 +1,10 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_catalogoAF_importacion";
-        settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "GridViewPartial_catalogoAF_importacion" };
+        settings.Name = "GridViewPartial_Bodega_importacion";
+        settings.CallbackRouteValues = new { Controller = "Empresa", Action = "GridViewPartial_Bodega_importacion" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdCatalogo";
+        settings.KeyFieldName = "IdBodega";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -48,9 +48,11 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdCatalogo", "ID").Width = Unit.Percentage(80);
-        settings.Columns.Add("IdTipoCatalogo", "Tipo").Width = Unit.Percentage(80);
-        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(80);
+        settings.Columns.Add("IdSucursal", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("IDBodega", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("cod_bodega", "Código").Width = Unit.Percentage(20);
+        settings.Columns.Add("bo_Descripcion", "Descripción").Width = Unit.Percentage(30);
+        settings.Columns.Add("IdCtaCtble_Inve", "Cuenta contable de inventario").Width = Unit.Percentage(20);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
