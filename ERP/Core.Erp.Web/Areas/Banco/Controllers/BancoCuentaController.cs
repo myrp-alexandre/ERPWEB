@@ -251,7 +251,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                         #region GetInfo
                         tb_banco_Info banco = bus_banco.get_info(info.IdBanco);
                         info.ba_descripcion = banco.ba_descripcion + " " + info.ba_Tipo + " " + info.ba_Num_Cuenta;
-                        info.MostrarVistaPreviaCheque = false;
                         info.Imprimir_Solo_el_cheque = false;
                         Lista_Banco.Add(info);
                         #endregion

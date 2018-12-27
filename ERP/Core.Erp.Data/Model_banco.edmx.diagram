@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0e61d39509f54dd483bc4ba58c2fe408" Name="Diagram1">
-        <EntityTypeShape EntityType="Model_banco.ba_Banco_Cuenta" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_banco.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_banco.ba_Catalogo" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_banco.ba_CatalogoTipo" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
@@ -20,8 +19,6 @@
         <EntityTypeShape EntityType="Model_banco.vwba_Conciliacion_det_IngEgr" Width="1.5" PointX="12.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_banco.vwba_Conciliacion_det_IngEgr_x_conciliar" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_banco.vwba_Talonario_cheques_x_banco_ID" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
-        <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_ba_Banco_Cuenta" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_banco.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" ManuallyRouted="false" />
         <AssociationConnector Association="Model_banco.FK_ba_Catalogo_ba_CatalogoTipo" ManuallyRouted="false" />
         <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_ba_Catalogo" ManuallyRouted="false" />
         <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_det_IngEgr_ba_Conciliacion" ManuallyRouted="false" />
@@ -30,12 +27,15 @@
         <AssociationConnector Association="Model_banco.FK_ba_TipoFlujo_ba_TipoFlujo" />
         <EntityTypeShape EntityType="Model_banco.ba_Cbte_Ban" Width="1.5" PointX="15.625" PointY="7.5" />
         <EntityTypeShape EntityType="Model_banco.vwba_Cbte_Ban" Width="1.5" PointX="15.375" PointY="0.75" />
-        <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta" />
         <AssociationConnector Association="Model_banco.FK_ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_ba_Cbte_Ban1" />
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_Catalogo" />
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_Catalogo1" />
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_tipo_nota" />
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_TipoFlujo" />
+        <EntityTypeShape EntityType="Model_banco.ba_Banco_Cuenta" Width="1.5" PointX="0.75" PointY="15.625" />
+        <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta" />
+        <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_ba_Banco_Cuenta" />
+        <AssociationConnector Association="Model_banco.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

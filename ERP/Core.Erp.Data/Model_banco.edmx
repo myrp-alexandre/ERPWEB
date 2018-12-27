@@ -21,17 +21,14 @@
           <Property Name="Fecha_Transac" Type="datetime" />
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
           <Property Name="Fecha_UltMod" Type="datetime" />
-          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
-          <Property Name="ip" Type="varchar" MaxLength="50" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
-          <Property Name="Reporte" Type="varbinary(max)" />
-          <Property Name="ReporteSolo_Cheque" Type="varbinary(max)" />
-          <Property Name="MostrarVistaPreviaCheque" Type="bit" />
-          <Property Name="Imprimir_Solo_el_cheque" Type="bit" />
-          <Property Name="IdBanco_Financiero" Type="int" />
+          <Property Name="ReporteChequeComprobante" Type="varbinary(max)" />
+          <Property Name="ReporteCheque" Type="varbinary(max)" />
+          <Property Name="Imprimir_Solo_el_cheque" Type="bit" Nullable="false" />
+          <Property Name="IdBanco_Financiero" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
           <Key>
@@ -246,8 +243,8 @@
           <Property Name="Tipo" Type="varchar" MaxLength="3" />
           <Property Name="cod_flujo" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -285,8 +282,8 @@ warning 6002: The table/view 'DBERP.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposi
           <Property Name="mba_IdTipocbte" Type="int" Nullable="false" />
           <Property Name="mba_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -318,8 +315,8 @@ warning 6002: The table/view 'DBERP.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposi
           <Property Name="IdCaja" Type="int" Nullable="false" />
           <Property Name="ca_Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwba_Conciliacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_Conciliacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Conciliacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -356,8 +353,8 @@ warning 6002: The table/view 'DBERP.dbo.vwba_Conciliacion' does not have a prima
           <Property Name="IdEstado_Concil_Cat" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="co_SaldoBanco_EstCta" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwba_Cbte_Ban' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwba_Cbte_Ban' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Cbte_Ban">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -394,8 +391,8 @@ warning 6002: The table/view 'DBERP.web.vwba_Cbte_Ban' does not have a primary k
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Imprimir_Solo_el_cheque" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwba_Conciliacion_det_IngEgr' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwba_Conciliacion_det_IngEgr' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Conciliacion_det_IngEgr">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -426,8 +423,8 @@ warning 6002: The table/view 'DBERP.web.vwba_Conciliacion_det_IngEgr' does not h
           <Property Name="IdConciliacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Secuencia" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwba_Conciliacion_det_IngEgr_x_conciliar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwba_Conciliacion_det_IngEgr_x_conciliar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Conciliacion_det_IngEgr_x_conciliar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -454,8 +451,8 @@ warning 6002: The table/view 'DBERP.web.vwba_Conciliacion_det_IngEgr_x_conciliar
           <Property Name="cb_Cheque" Type="varchar" MaxLength="50" />
           <Property Name="tc_TipoCbte" Type="char" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Talonario_cheques_x_banco_ID">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -819,37 +816,6 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model_banco" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ba_Banco_Cuenta">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdBanco" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdBanco" Type="Int32" Nullable="false" />
-          <Property Name="ba_descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ba_Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ba_Num_Cuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ba_num_digito_cheq" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Reporte" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="ReporteSolo_Cheque" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="MostrarVistaPreviaCheque" Type="Boolean" />
-          <Property Name="Imprimir_Solo_el_cheque" Type="Boolean" />
-          <Property Name="IdBanco_Financiero" Type="Int32" />
-          <NavigationProperty Name="ba_Conciliacion" Relationship="Self.FK_ba_Conciliacion_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Conciliacion" />
-          <NavigationProperty Name="ba_Talonario_cheques_x_banco" Relationship="Self.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Talonario_cheques_x_banco" />
-          <NavigationProperty Name="ba_Cbte_Ban" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Cbte_Ban" />
-        </EntityType>
         <EntityType Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
           <Key>
             <PropertyRef Name="mcj_IdEmpresa" />
@@ -938,9 +904,9 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="co_Observacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ba_Banco_Cuenta" Relationship="Self.FK_ba_Conciliacion_ba_Banco_Cuenta" FromRole="ba_Conciliacion" ToRole="ba_Banco_Cuenta" />
           <NavigationProperty Name="ba_Catalogo" Relationship="Self.FK_ba_Conciliacion_ba_Catalogo" FromRole="ba_Conciliacion" ToRole="ba_Catalogo" />
           <NavigationProperty Name="ba_Conciliacion_det_IngEgr" Relationship="Self.FK_ba_Conciliacion_det_IngEgr_ba_Conciliacion" FromRole="ba_Conciliacion" ToRole="ba_Conciliacion_det_IngEgr" />
+          <NavigationProperty Name="ba_Banco_Cuenta" Relationship="Model_banco.FK_ba_Conciliacion_ba_Banco_Cuenta" FromRole="ba_Conciliacion" ToRole="ba_Banco_Cuenta" />
         </EntityType>
         <EntityType Name="ba_Conciliacion_det_IngEgr">
           <Key>
@@ -987,7 +953,7 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuario_Anu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ba_Banco_Cuenta" Relationship="Self.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" FromRole="ba_Talonario_cheques_x_banco" ToRole="ba_Banco_Cuenta" />
+          <NavigationProperty Name="ba_Banco_Cuenta" Relationship="Model_banco.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" FromRole="ba_Talonario_cheques_x_banco" ToRole="ba_Banco_Cuenta" />
         </EntityType>
         <EntityType Name="ba_tipo_nota">
           <Key>
@@ -1172,34 +1138,6 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
           <Property Name="IdBanco" Type="Int32" Nullable="false" />
           <Property Name="Num_cheque" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
-        <Association Name="FK_ba_Conciliacion_ba_Banco_Cuenta">
-          <End Role="ba_Banco_Cuenta" Type="Self.ba_Banco_Cuenta" Multiplicity="1" />
-          <End Role="ba_Conciliacion" Type="Self.ba_Conciliacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ba_Banco_Cuenta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdBanco" />
-            </Principal>
-            <Dependent Role="ba_Conciliacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdBanco" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta">
-          <End Role="ba_Banco_Cuenta" Type="Self.ba_Banco_Cuenta" Multiplicity="1" />
-          <End Role="ba_Talonario_cheques_x_banco" Type="Self.ba_Talonario_cheques_x_banco" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ba_Banco_Cuenta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdBanco" />
-            </Principal>
-            <Dependent Role="ba_Talonario_cheques_x_banco">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdBanco" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ba_Catalogo_ba_CatalogoTipo">
           <End Role="ba_CatalogoTipo" Type="Self.ba_CatalogoTipo" Multiplicity="1" />
           <End Role="ba_Catalogo" Type="Self.ba_Catalogo" Multiplicity="*" />
@@ -1239,7 +1177,6 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Entities_banco" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ba_Banco_Cuenta" EntityType="Self.ba_Banco_Cuenta" />
           <EntitySet Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="Self.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" />
           <EntitySet Name="ba_Catalogo" EntityType="Self.ba_Catalogo" />
           <EntitySet Name="ba_CatalogoTipo" EntityType="Self.ba_CatalogoTipo" />
@@ -1254,14 +1191,6 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
           <EntitySet Name="vwba_Conciliacion_det_IngEgr" EntityType="Self.vwba_Conciliacion_det_IngEgr" />
           <EntitySet Name="vwba_Conciliacion_det_IngEgr_x_conciliar" EntityType="Self.vwba_Conciliacion_det_IngEgr_x_conciliar" />
           <EntitySet Name="vwba_Talonario_cheques_x_banco_ID" EntityType="Self.vwba_Talonario_cheques_x_banco_ID" />
-          <AssociationSet Name="FK_ba_Conciliacion_ba_Banco_Cuenta" Association="Self.FK_ba_Conciliacion_ba_Banco_Cuenta">
-            <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
-            <End Role="ba_Conciliacion" EntitySet="ba_Conciliacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" Association="Self.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta">
-            <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
-            <End Role="ba_Talonario_cheques_x_banco" EntitySet="ba_Talonario_cheques_x_banco" />
-          </AssociationSet>
           <AssociationSet Name="FK_ba_Catalogo_ba_CatalogoTipo" Association="Self.FK_ba_Catalogo_ba_CatalogoTipo">
             <End Role="ba_CatalogoTipo" EntitySet="ba_CatalogoTipo" />
             <End Role="ba_Catalogo" EntitySet="ba_Catalogo" />
@@ -1282,10 +1211,6 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
           </AssociationSet>
           <EntitySet Name="ba_Cbte_Ban" EntityType="Model_banco.ba_Cbte_Ban" />
           <EntitySet Name="vwba_Cbte_Ban" EntityType="Model_banco.vwba_Cbte_Ban" />
-          <AssociationSet Name="FK_ba_Cbte_Ban_ba_Banco_Cuenta" Association="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta">
-            <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
-            <End Role="ba_Cbte_Ban" EntitySet="ba_Cbte_Ban" />
-          </AssociationSet>
           <AssociationSet Name="FK_ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_ba_Cbte_Ban1" Association="Model_banco.FK_ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_ba_Cbte_Ban1">
             <End Role="ba_Cbte_Ban" EntitySet="ba_Cbte_Ban" />
             <End Role="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntitySet="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" />
@@ -1305,6 +1230,19 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
           <AssociationSet Name="FK_ba_Cbte_Ban_ba_TipoFlujo" Association="Model_banco.FK_ba_Cbte_Ban_ba_TipoFlujo">
             <End Role="ba_TipoFlujo" EntitySet="ba_TipoFlujo" />
             <End Role="ba_Cbte_Ban" EntitySet="ba_Cbte_Ban" />
+          </AssociationSet>
+          <EntitySet Name="ba_Banco_Cuenta" EntityType="Model_banco.ba_Banco_Cuenta" />
+          <AssociationSet Name="FK_ba_Cbte_Ban_ba_Banco_Cuenta" Association="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta">
+            <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
+            <End Role="ba_Cbte_Ban" EntitySet="ba_Cbte_Ban" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_Conciliacion_ba_Banco_Cuenta" Association="Model_banco.FK_ba_Conciliacion_ba_Banco_Cuenta">
+            <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
+            <End Role="ba_Conciliacion" EntitySet="ba_Conciliacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" Association="Model_banco.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta">
+            <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
+            <End Role="ba_Talonario_cheques_x_banco" EntitySet="ba_Talonario_cheques_x_banco" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ba_parametros">
@@ -1395,12 +1333,12 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
           <Property Name="IdPersona" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdEntidad" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdTipo_Persona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ba_Banco_Cuenta" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta" FromRole="ba_Cbte_Ban" ToRole="ba_Banco_Cuenta" />
           <NavigationProperty Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" Relationship="Model_banco.FK_ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_ba_Cbte_Ban1" FromRole="ba_Cbte_Ban" ToRole="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" />
           <NavigationProperty Name="ba_Catalogo" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_Catalogo" FromRole="ba_Cbte_Ban" ToRole="ba_Catalogo" />
           <NavigationProperty Name="ba_Catalogo1" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_Catalogo1" FromRole="ba_Cbte_Ban" ToRole="ba_Catalogo" />
           <NavigationProperty Name="ba_tipo_nota" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_tipo_nota" FromRole="ba_Cbte_Ban" ToRole="ba_tipo_nota" />
           <NavigationProperty Name="ba_TipoFlujo" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_TipoFlujo" FromRole="ba_Cbte_Ban" ToRole="ba_TipoFlujo" />
+          <NavigationProperty Name="ba_Banco_Cuenta" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta" FromRole="ba_Cbte_Ban" ToRole="ba_Banco_Cuenta" />
         </EntityType>
         <EntityType Name="vwba_Cbte_Ban">
           <Key>
@@ -1438,20 +1376,6 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
           <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Imprimir_Solo_el_cheque" Type="Boolean" />
         </EntityType>
-        <Association Name="FK_ba_Cbte_Ban_ba_Banco_Cuenta">
-          <End Type="Model_banco.ba_Banco_Cuenta" Role="ba_Banco_Cuenta" Multiplicity="1" />
-          <End Type="Model_banco.ba_Cbte_Ban" Role="ba_Cbte_Ban" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ba_Banco_Cuenta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdBanco" />
-            </Principal>
-            <Dependent Role="ba_Cbte_Ban">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdBanco" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_ba_Cbte_Ban1">
           <End Type="Model_banco.ba_Cbte_Ban" Role="ba_Cbte_Ban" Multiplicity="1" />
           <End Type="Model_banco.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" Role="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" Multiplicity="*" />
@@ -1520,40 +1444,82 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ba_Banco_Cuenta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdBanco" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="ba_descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ba_Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ba_Num_Cuenta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ba_num_digito_cheq" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ReporteChequeComprobante" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ReporteCheque" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Imprimir_Solo_el_cheque" Type="Boolean" Nullable="false" />
+          <Property Name="IdBanco_Financiero" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ba_Cbte_Ban" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Cbte_Ban" />
+          <NavigationProperty Name="ba_Conciliacion" Relationship="Model_banco.FK_ba_Conciliacion_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Conciliacion" />
+          <NavigationProperty Name="ba_Talonario_cheques_x_banco" Relationship="Model_banco.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Talonario_cheques_x_banco" />
+        </EntityType>
+        <Association Name="FK_ba_Cbte_Ban_ba_Banco_Cuenta">
+          <End Type="Model_banco.ba_Banco_Cuenta" Role="ba_Banco_Cuenta" Multiplicity="1" />
+          <End Type="Model_banco.ba_Cbte_Ban" Role="ba_Cbte_Ban" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Banco_Cuenta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="ba_Cbte_Ban">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ba_Conciliacion_ba_Banco_Cuenta">
+          <End Type="Model_banco.ba_Banco_Cuenta" Role="ba_Banco_Cuenta" Multiplicity="1" />
+          <End Type="Model_banco.ba_Conciliacion" Role="ba_Conciliacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Banco_Cuenta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="ba_Conciliacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta">
+          <End Type="Model_banco.ba_Banco_Cuenta" Role="ba_Banco_Cuenta" Multiplicity="1" />
+          <End Type="Model_banco.ba_Talonario_cheques_x_banco" Role="ba_Talonario_cheques_x_banco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Banco_Cuenta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="ba_Talonario_cheques_x_banco">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Model_bancoStoreContainer" CdmEntityContainer="Entities_banco">
-          <EntitySetMapping Name="ba_Banco_Cuenta">
-            <EntityTypeMapping TypeName="Model_banco.ba_Banco_Cuenta">
-              <MappingFragment StoreEntitySet="ba_Banco_Cuenta">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
-                <ScalarProperty Name="ba_Tipo" ColumnName="ba_Tipo" />
-                <ScalarProperty Name="ba_Num_Cuenta" ColumnName="ba_Num_Cuenta" />
-                <ScalarProperty Name="ba_num_digito_cheq" ColumnName="ba_num_digito_cheq" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
-                <ScalarProperty Name="ip" ColumnName="ip" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
-                <ScalarProperty Name="Reporte" ColumnName="Reporte" />
-                <ScalarProperty Name="ReporteSolo_Cheque" ColumnName="ReporteSolo_Cheque" />
-                <ScalarProperty Name="MostrarVistaPreviaCheque" ColumnName="MostrarVistaPreviaCheque" />
-                <ScalarProperty Name="Imprimir_Solo_el_cheque" ColumnName="Imprimir_Solo_el_cheque" />
-                <ScalarProperty Name="IdBanco_Financiero" ColumnName="IdBanco_Financiero" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
             <EntityTypeMapping TypeName="Model_banco.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
               <MappingFragment StoreEntitySet="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
@@ -1898,6 +1864,31 @@ warning 6002: The table/view 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' does 
                 <ScalarProperty Name="CodTipoCbteBan" ColumnName="CodTipoCbteBan" />
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_Banco_Cuenta">
+            <EntityTypeMapping TypeName="Model_banco.ba_Banco_Cuenta">
+              <MappingFragment StoreEntitySet="ba_Banco_Cuenta">
+                <ScalarProperty Name="IdBanco_Financiero" ColumnName="IdBanco_Financiero" />
+                <ScalarProperty Name="Imprimir_Solo_el_cheque" ColumnName="Imprimir_Solo_el_cheque" />
+                <ScalarProperty Name="ReporteCheque" ColumnName="ReporteCheque" />
+                <ScalarProperty Name="ReporteChequeComprobante" ColumnName="ReporteChequeComprobante" />
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="ba_num_digito_cheq" ColumnName="ba_num_digito_cheq" />
+                <ScalarProperty Name="ba_Num_Cuenta" ColumnName="ba_Num_Cuenta" />
+                <ScalarProperty Name="ba_Tipo" ColumnName="ba_Tipo" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
