@@ -99,6 +99,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_prestamos_det", model);
         }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_prestamos_abono_det()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lis_ro_prestamo_detalle_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_prestamos_abono_det", model);
+        }
         #endregion
 
         #region Acciones
@@ -412,6 +421,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     break;
                 }
             }
+            Lis_ro_prestamo_detalle_lst.set_list(detalle, IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
 

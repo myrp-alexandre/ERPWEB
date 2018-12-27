@@ -86,7 +86,7 @@
 
                         <div class="form-group">
                             <label for="Valor">Detalle prestamos*</label>
-                            @Html.Action("GridViewPartial_prestamos_det")
+                            @Html.Action("GridViewPartial_prestamos_abono_det")
 
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                     success: function (data)
                     {
 
-                        GridViewPartial_prestamos_det.PerformCallback();
+                        GridViewPartial_prestamos_abono_det.PerformCallback();
 
                     },
                     error: function (error)

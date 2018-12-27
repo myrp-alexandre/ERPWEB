@@ -2,8 +2,8 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_prestamos_det";
-        settings.CallbackRouteValues = new { Controller = "Prestamos", Action = "GridViewPartial_prestamos_det" };
+        settings.Name = "GridViewPartial_prestamos_abono_det";
+        settings.CallbackRouteValues = new { Controller = "Prestamos", Action = "GridViewPartial_prestamos_abono_det" };
         settings.KeyFieldName = "NumCuota";
         settings.Width = Unit.Percentage(100);
 
@@ -83,6 +83,21 @@
 
             });
         });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ValorAplicado";
+            column.Caption = "$Valor aplicado";
+            column.Width = Unit.Percentage(15);
+            column.EditorProperties().SpinEdit(sp =>
+            {
+                sp.MinValue = 0;
+                sp.MaxValue = 999999999;
+                sp.Width = Unit.Percentage(100);
+                column.PropertiesEdit.DisplayFormatString = "n2";
+
+            });
+        });
+        
         settings.Columns.Add(column =>
         {
             column.FieldName = "Observacion_det";
