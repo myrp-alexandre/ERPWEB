@@ -268,7 +268,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             }
         }
     }
-
     public class ct_plancta_List
     {
         string Variable = "ct_plancta_Info";

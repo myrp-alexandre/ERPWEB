@@ -8,7 +8,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
+    function OnFileUploadStart(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ActualizarVariablesSession", "ComprobanteContable", new { Area = "Contabilidad" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
 
+    function OnFileUploadComplete(s, e)
+    {
+        GridView_comprobante_detalle.PerformCallback();
+    }
+
+</script>
 @using (Html.BeginForm("Nuevo", "ComprobanteContable", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     if (ViewBag.mensaje != null)
@@ -94,6 +121,24 @@
                     @Html.TextBoxFor(q => q.cb_Observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.cb_Observacion, "", new { @class = "text-danger" })
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <label for="Descripcion">Importar detalle</label>
+                @Html.DevExpress().UploadControl(settings =>
+               {
+                   settings.Name = "UploadControlFile";
+                   settings.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "UploadControlUpload" };
+                   settings.ShowUploadButton = true;
+                   settings.ShowProgressPanel = true;
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.NullText = "Selecciona el archivo...";
+                   settings.ClientSideEvents.FilesUploadStart = "OnFileUploadStart";
+                   settings.ClientSideEvents.FileUploadComplete = "OnFileUploadComplete";
+               }).GetHtml()
             </div>
         </div>
     </div>
