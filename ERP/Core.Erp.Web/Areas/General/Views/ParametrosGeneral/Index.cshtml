@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="">Impuesto*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_imp, "IdCod_Impuesto", "nom_impuesto"), new { @class = "form-control", })
+                    @Html.DropDownListFor(q => q.IdCod_Impuesto, new SelectList(ViewBag.lst_imp, "IdCod_Impuesto", "nom_impuesto"), new { @class = "form-control", })
                     @Html.ValidationMessageFor(q => q.IdCod_Impuesto, "", new { @class = "text-danger" })
                 </div>
             </div>
