@@ -274,6 +274,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
                             cod_entidad_dinardap = Convert.ToString(reader.GetValue(13)),
                             em_Email = Convert.ToString(reader.GetValue(14))
                         };
+                        info.em_fechaInicioActividad = info.em_fechaInicioContable;
                         Lista_Empresa.Add(info);
                     }
                     else
