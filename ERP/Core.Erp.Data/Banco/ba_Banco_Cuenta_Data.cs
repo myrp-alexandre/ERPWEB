@@ -212,6 +212,36 @@ namespace Core.Erp.Data.Banco
             }
         }
 
+        public bool GuardarDbImportacion(List<ba_Banco_Cuenta_Info> Lista_Banco)
+        {
+            try
+            {
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    if(Lista_Banco.Count>0)
+                    {
+                        foreach (var item in Lista_Banco)
+                        {
+                            ba_Banco_Cuenta Entity = new ba_Banco_Cuenta
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdBanco = item.IdBanco,
+                                ba_Tipo = item.ba_Tipo,
+                                ba_Num_Cuenta = item.ba_Num_Cuenta,
+                                ba_num_digito_cheq = item.ba_num_digito_cheq,
+                                IdCtaCble = item.IdCtaCble
+                            };
+                            Context.ba_Banco_Cuenta.Add(Entity);
+                        }                        
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
     }
 }

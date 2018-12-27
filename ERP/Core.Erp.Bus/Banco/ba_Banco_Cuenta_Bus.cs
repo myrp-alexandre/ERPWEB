@@ -73,5 +73,18 @@ namespace Core.Erp.Bus.Banco
             }
         }
 
+        public bool GuardarDbImportacion(List<ba_Banco_Cuenta_Info> Lista_Banco)
+        {
+            try
+            {
+                return odata.GuardarDbImportacion(Lista_Banco);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
