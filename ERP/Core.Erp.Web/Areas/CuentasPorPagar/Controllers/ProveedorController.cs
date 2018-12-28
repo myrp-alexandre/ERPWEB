@@ -349,16 +349,17 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 reader.NextResult();
 
                 #region Proveedor   
-                var Lista_Persona = bus_persona.get_list(false);
-                tb_persona_List ListaPersona = new tb_persona_List();
-                ListaPersona.set_list(Lista_Persona, IdTransaccionSession);
+                var lst_persona = bus_persona.get_list(false);
 
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
-                        var info_persona = ListaPersona.get_list(IdTransaccionSession).Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
-                        var info_persona_prov = info_persona;
+                        tb_persona_Info info_persona = new tb_persona_Info();
+                        tb_persona_Info info_persona_prov = new tb_persona_Info();
+
+                        info_persona = lst_persona.Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
+                        info_persona_prov = info_persona;
 
                         if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3)) ))
                         {
@@ -378,7 +379,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                                     pe_celular = Convert.ToString(reader.GetValue(11)),
                                     pe_correo = Convert.ToString(reader.GetValue(8)),
                                 };
-                                Lista_Persona.Add(info_);
+
                                 info_persona_prov = info_;
                             }
                             else
@@ -420,7 +421,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                             };
 
                             info.info_persona = info_persona_prov;
-                            Lista_Proveedor.Add(info);
+
+                            if (Lista_Proveedor.Where(q => q.info_persona.pe_cedulaRuc == info_persona_prov.pe_cedulaRuc).Count() == 0)
+                                Lista_Proveedor.Add(info);
+
+
                         }                        
                     }
                     else

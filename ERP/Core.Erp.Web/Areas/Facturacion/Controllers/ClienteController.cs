@@ -497,9 +497,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 reader.NextResult();
 
                 #region Cliente   
-                var Lista_Persona = bus_persona.get_list(false);
-                tb_persona_List ListaPersona = new tb_persona_List();
-                ListaPersona.set_list(Lista_Persona, IdTransaccionSession);
+                var lst_persona = bus_persona.get_list(false);
 
                 while (reader.Read())
                 {
@@ -509,7 +507,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         tb_persona_Info info_persona_cliente = new tb_persona_Info();
 
                         var cc = Convert.ToString(reader.GetValue(3));
-                        info_persona = ListaPersona.get_list(IdTransaccionSession).Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
+                        info_persona = lst_persona.Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
                         info_persona_cliente = info_persona;
 
                         if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3))))
@@ -530,7 +528,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                     pe_celular = Convert.ToString(reader.GetValue(11)),
                                     pe_correo = Convert.ToString(reader.GetValue(8)),
                                 };
-                                Lista_Persona.Add(info_);
                                 info_persona_cliente = info_;
                             }
                             else
@@ -554,6 +551,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             {
                                 IdEmpresa = IdEmpresa,
                                 IdPersona = info_persona_cliente.IdPersona,
+                                IdCliente = Convert.ToInt32(reader.GetValue(0)),
                                 Codigo = Convert.ToString(reader.GetValue(1)),
                                 Idtipo_cliente = Convert.ToInt32(reader.GetValue(13)),
                                 cl_plazo = Convert.ToInt32(reader.GetValue(15)),
@@ -586,7 +584,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
                             info.info_persona = info_persona_cliente;
 
-                            Lista_Cliente.Add(info);
+                            if (Lista_Cliente.Where(q => q.info_persona.pe_cedulaRuc == info_persona_cliente.pe_cedulaRuc).Count() == 0)
+                                Lista_Cliente.Add(info);
+
+
                         }
                     }
                     else

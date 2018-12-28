@@ -45,6 +45,9 @@ namespace Core.Erp.Info.RRHH
         public string Empleado { get; set; }
         public string Contrato { get; set; }
 
+        public string nomina_tipo_descripcion { get; set; }
+        public string contrato_tipo_descripcion { get; set; }
+        public string cedula_ruc { get; set; }
         public Nullable<System.DateTime> em_fechaSalida { get; set; }
 
         public int anio_ing { get; set; }

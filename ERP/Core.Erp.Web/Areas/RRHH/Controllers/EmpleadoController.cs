@@ -18,6 +18,7 @@ using ExcelDataReader;
 using System.Globalization;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Areas.General.Controllers;
+using static Core.Erp.Web.Areas.RRHH.Controllers.UploadControlSettings_Importacion;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -59,6 +60,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_departamento_List ListaDepartamento = new ro_departamento_List();
         List<ro_cargo_Info> Lista_Cargo = new List<ro_cargo_Info>();
         ro_cargo_List ListaCargo = new ro_cargo_List();
+        List<ro_nomina_tipo_Info> Lista_TipoNomina = new List<ro_nomina_tipo_Info>();
+        ro_nomina_tipo_List ListaTipoNomina = new ro_nomina_tipo_List();
+        List<ro_empleado_x_rubro_acumulado_Info> Lista_RubrosAcumulados = new List<ro_empleado_x_rubro_acumulado_Info>();
+        ro_empleado_x_rubro_acumulado_List ListaRubrosAcumulados = new ro_empleado_x_rubro_acumulado_List();
 
         public static byte[] imagen { get; set; }
         public decimal IdEmpleado { get; set; }
@@ -456,17 +461,20 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 var Lista_Area = ListaArea.get_list(model.IdTransaccionSession);
                 var Lista_Departamento = ListaDepartamento.get_list(model.IdTransaccionSession);
                 var Lista_Cargo = ListaCargo.get_list(model.IdTransaccionSession);
+                var Lista_Contrato = ListaContrato.get_list(model.IdTransaccionSession);
+                var Lista_TipoNomina = ListaTipoNomina.get_list(model.IdTransaccionSession);
+                var Lista_RubrosAcumulados = ListaRubrosAcumulados.get_list(model.IdTransaccionSession);
+                var Lista_CargasFamiliares = ListaCargasFamiliares.get_list(model.IdTransaccionSession);
+                var Lista_ProvisionesAcumuladas = ListaProvisionesAcumuladas.get_list(model.IdTransaccionSession);
+                var Lista_Vacaciones = ListaVacaciones.get_list();
 
-                //var Lista_Contrato = ListaContrato.get_list(model.IdTransaccionSession);
-                //var Lista_CargasFamiliares = ListaCargasFamiliares.get_list(model.IdTransaccionSession);
-                //var Lista_ProvisionesAcumuladas = ListaProvisionesAcumuladas.get_list(model.IdTransaccionSession);
-                //var Lista_Vacaciones = ListaVacaciones.get_list();
-
-                //if (!bus_empleado.guardarDB_importacion(Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_Contrato, Lista_CargasFamiliares, Lista_Vacaciones))
-                //{
-                //    ViewBag.mensaje = "Error al importar el archivo";
-                //    return View(model);
-                //}
+                if (!bus_empleado.guardarDB_importacion(lista_division, Lista_Area, Lista_Departamento, Lista_Cargo,
+                                                        Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_RubrosAcumulados, Lista_TipoNomina, Lista_Contrato, 
+                                                        Lista_CargasFamiliares, Lista_ProvisionesAcumuladas, Lista_Vacaciones))
+                {
+                    ViewBag.mensaje = "Error al importar el archivo";
+                    return View(model);
+                }
             }
             catch (Exception ex)
             {
@@ -596,6 +604,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
             ro_cargo_Bus bus_cargo = new ro_cargo_Bus();
             ro_departamento_Bus bus_departamento = new ro_departamento_Bus();
+            ro_catalogo_Bus bus_catalogorrhh = new ro_catalogo_Bus();
 
             ro_rubro_tipo_Info_list ListaRubro = new ro_rubro_tipo_Info_list();
             List<ro_rubro_tipo_Info> Lista_Rubro = new List<ro_rubro_tipo_Info>();
@@ -650,7 +659,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             rub_nocontab = Convert.ToString(reader.GetValue(8)) == "SI" ? true : false,
                             rub_aplica_IESS = Convert.ToString(reader.GetValue(6)) == "SI" ? true : false,
                             rub_acumula = false,
-                            rub_acumula_descuento = false
+                            rub_acumula_descuento = false,
+                            IdUsuario = SessionFixed.IdUsuario                            
                         };
                         Lista_Rubro.Add(info);
                     }
@@ -682,7 +692,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             ToleranciaReg_lunh = Convert.ToInt32(reader.GetValue(4)),
                             SalLunch = new TimeSpan(Convert.ToDateTime(reader.GetValue(5)).Hour, Convert.ToDateTime(reader.GetValue(5)).Minute, Convert.ToDateTime(reader.GetValue(5)).Second),
                             RegLunch = new TimeSpan(Convert.ToDateTime(reader.GetValue(6)).Hour, Convert.ToDateTime(reader.GetValue(6)).Minute, Convert.ToDateTime(reader.GetValue(6)).Second),
-                            Descripcion = Convert.ToString(reader.GetValue(7))
+                            Descripcion = Convert.ToString(reader.GetValue(7)),
+                            IdUsuario = SessionFixed.IdUsuario,
+                            Estado = "A"
                         };
                         Lista_Horario.Add(info);
                     }
@@ -715,7 +727,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             Jueves = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
                             Viernes = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
                             Sabado = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
-                            Domingo = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false
+                            Domingo = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
+                            IdUsuario = SessionFixed.IdUsuario,
+                            Estado = "A"
                         };
                         Lista_Turno.Add(info);
                     }
@@ -732,14 +746,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 reader.NextResult();
 
                 #region Empleado  
-                //var Lista_Persona = bus_persona.get_list(false);
-                //tb_persona_List ListaPersona = new tb_persona_List();
-                //ListaPersona.set_list(Lista_Persona, IdTransaccionSession);
                 var lst_persona = bus_persona.get_list(false);
-
-                //var Lista_Bancos = bus_banco.get_list(false);
-                //tb_banco_List ListaBancos = new tb_banco_List();
-                //ListaBancos.set_list(Lista_Bancos, IdTransaccionSession);
                 var lst_banco = bus_banco.get_list(false);
 
                 while (reader.Read())
@@ -797,7 +804,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             }
 
                             ro_empleado_Info info = new ro_empleado_Info
-                            {   
+                            {
 
                                 IdEmpresa = IdEmpresa,
                                 IdEmpleado = Convert.ToDecimal(reader.GetValue(0)),
@@ -855,8 +862,58 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                             info.info_persona = info_persona_empleado;
 
-                            Lista_Empleado.Add(info);
+                            if (Lista_Empleado.Where(q => q.info_persona.pe_cedulaRuc == info_persona_empleado.pe_cedulaRuc).Count() == 0)
+                                Lista_Empleado.Add(info);
 
+                            #region RubrosAcumulados 
+                            List<ro_empleado_x_rubro_acumulado_Info> Lista_RubrosAcumulados = new List<ro_empleado_x_rubro_acumulado_Info>();
+                            ro_empleado_x_rubro_acumulado_List ListaRubrosAcumulados = new ro_empleado_x_rubro_acumulado_List();
+
+                            //DIII
+                            var xiii = Convert.ToString(reader.GetValue(32));
+                            var xiv = Convert.ToString(reader.GetValue(33));
+                            var fdr = Convert.ToString(reader.GetValue(34));
+
+                            if (xiii == "SI")
+                            {
+                                ro_empleado_x_rubro_acumulado_Info info_rubro_acumulado = new ro_empleado_x_rubro_acumulado_Info
+                                {
+                                    IdEmpresa = IdEmpresa,
+                                    IdEmpleado = info.IdEmpleado,
+                                    IdRubro = "290"
+                                };
+
+                                Lista_RubrosAcumulados.Add(info_rubro_acumulado);
+                            }
+
+                            //DIV
+                            if (xiv == "SI")
+                            {
+                                ro_empleado_x_rubro_acumulado_Info info_rubro_acumulado = new ro_empleado_x_rubro_acumulado_Info
+                                {
+                                    IdEmpresa = IdEmpresa,
+                                    IdEmpleado = info.IdEmpleado,
+                                    IdRubro = "289"
+                                };
+
+                                Lista_RubrosAcumulados.Add(info_rubro_acumulado);
+                            }
+
+                            //FDR
+                            if (fdr == "SI")
+                            {
+                                ro_empleado_x_rubro_acumulado_Info info_rubro_acumulado = new ro_empleado_x_rubro_acumulado_Info
+                                {
+                                    IdEmpresa = IdEmpresa,
+                                    IdEmpleado = info.IdEmpleado,
+                                    IdRubro = "296"
+                                };
+
+                                Lista_RubrosAcumulados.Add(info_rubro_acumulado);
+                            }
+
+                            ListaRubrosAcumulados.set_list(Lista_RubrosAcumulados, IdTransaccionSession);
+                            #endregion
                         }
                     }
                     else
@@ -886,8 +943,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 lista_division.ForEach(
                      item =>
                      {
-
                          item.IdDivision = secuncia;
+                         item.estado = "A";
+                         item.IdUsuario = SessionFixed.IdUsuario;
                          secuncia++;
                      }
                     );
@@ -917,6 +975,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                      {
                          item.IdDivision = 1;
                          item.IdArea = secuencia;
+                         item.estado = "A";
+                         item.IdUsuario = SessionFixed.IdUsuario;
                          secuencia++;
                      }
                     );
@@ -946,6 +1006,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                      item =>
                      {
                          item.IdDepartamento = IdDepartamento;
+                         item.Estado = "A";
+                         item.IdUsuario = SessionFixed.IdUsuario;
                          IdDepartamento++;
                      }
                     );
@@ -975,6 +1037,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                      item =>
                      {
                          item.IdCargo = IdCargo;
+                         item.Estado = "A";
+                         item.IdUsuario = SessionFixed.IdUsuario;
                          IdCargo++;
                      }
                     );
@@ -993,6 +1057,74 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     }
                 );
                 #endregion
+
+                //Para avanzar a la siguiente hoja de excel
+                cont = 0;
+                reader.NextResult();
+
+                #region Contrato   
+                var lst_catalogo_contrato = bus_catalogorrhh.get_list_x_tipo(2);
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        ro_contrato_Info info = new ro_contrato_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            cedula_ruc = Convert.ToString(reader.GetValue(0)),
+                            contrato_tipo_descripcion = Convert.ToString(reader.GetValue(1)),
+                            FechaInicio = Convert.ToDateTime(reader.GetValue(2)),                            
+                            FechaFin = Convert.ToDateTime(reader.GetValue(3)),
+                            Sueldo = Convert.ToDouble(reader.GetValue(4)),
+                            nomina_tipo_descripcion = Convert.ToString(reader.GetValue(5)),
+                        };
+                        Lista_Contrato.Add(info);
+                    }
+                    else
+                    {
+                        cont++;
+                    }
+                }
+                ListaContrato.set_list(Lista_Contrato, IdTransaccionSession);                
+
+                #region TipoNomina 
+                List<ro_nomina_tipo_Info> Lista_TipoNomina;
+                ro_nomina_tipo_List ListaTipoNomina = new ro_nomina_tipo_List();
+
+                Lista_TipoNomina = (from q in Lista_Contrato
+                                    group q by new
+                                       {
+                                           q.IdEmpresa,
+                                           q.nomina_tipo_descripcion,
+                                       } into TipoNomina
+                                        select new ro_nomina_tipo_Info
+                                       {
+                                           IdEmpresa = TipoNomina.Key.IdEmpresa,
+                                           Descripcion = TipoNomina.Key.nomina_tipo_descripcion
+                                        }).ToList();
+
+                int IdTipoNomina = 1;
+                Lista_TipoNomina.ForEach(
+                     item =>
+                     {
+                         item.IdNomina_Tipo = IdTipoNomina;
+                         IdTipoNomina++;
+                     }
+                    );
+
+                ListaTipoNomina.set_list(Lista_TipoNomina, IdTransaccionSession);
+                #endregion
+
+                Lista_Contrato.ForEach(
+                    item =>
+                    {
+                        item.IdNomina = ListaTipoNomina.get_list(IdTransaccionSession).Where(v => v.Descripcion == item.nomina_tipo_descripcion).FirstOrDefault().IdNomina_Tipo;
+                        item.IdContrato_Tipo = lst_catalogo_contrato.Where(q => q.ca_descripcion == item.contrato_tipo_descripcion).FirstOrDefault().CodCatalogo;
+                    }
+                );
+                #endregion
+
             };
         }
     }

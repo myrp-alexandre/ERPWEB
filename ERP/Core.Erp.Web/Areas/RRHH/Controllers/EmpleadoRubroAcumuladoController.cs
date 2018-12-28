@@ -178,4 +178,24 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
        
     }
+
+    public class ro_empleado_x_rubro_acumulado_List
+    {
+        string Variable = "ro_empleado_x_rubro_acumulado_Info";
+        public List<ro_empleado_x_rubro_acumulado_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ro_empleado_x_rubro_acumulado_Info> list = new List<ro_empleado_x_rubro_acumulado_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ro_empleado_x_rubro_acumulado_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ro_empleado_x_rubro_acumulado_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
 }

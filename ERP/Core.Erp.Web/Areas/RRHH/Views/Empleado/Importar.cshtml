@@ -33,7 +33,7 @@
         GridViewPartial_Horario_importacion.PerformCallback();
         GridViewPartial_Turno_importacion.PerformCallback();
         GridViewPartial_Empleado_importacion.PerformCallback();
-        //GridViewPartial_Contrato_importacion.PerformCallback();
+        GridViewPartial_Contrato_importacion.PerformCallback();
         //GridViewPartial_CargaFamiliar_importacion.PerformCallback();
         //GridViewPartial_ProvisionesAcumuladas_importacion.PerformCallback();
         //GridViewPartial_Vacaciones_importacion.PerformCallback();
@@ -41,7 +41,7 @@
 
 </script>
 
-@using (Html.BeginForm("Importar", "ActivoFijo", FormMethod.Post, new { @role = "form", @id = "form" }))
+@using (Html.BeginForm("Importar", "Empleado", FormMethod.Post, new { @role = "form", @id = "form" }))
 {
     if (ViewBag.mensaje != null)
     {
@@ -150,20 +150,11 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_empleado">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            @*@Html.Action("GridViewPartial_Empleado_importacion")*@
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_contrato">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @*@Html.Action("GridViewPartial_Contrato_importacion")*@
+                            @Html.Action("GridViewPartial_Contrato_importacion")
                         </div>
                     </div>
                 </div>
