@@ -15,6 +15,9 @@ using Microsoft.SqlServer.Server;
 using Core.Erp.Web.Helps;
 using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 using ExcelDataReader;
+using System.Globalization;
+using Core.Erp.Info.Helps;
+using Core.Erp.Web.Areas.General.Controllers;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -469,6 +472,55 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_Rubro_importacion", model);
         }
 
+        public ActionResult GridViewPartial_Horario_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaHorario.get_list((Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)));
+            return PartialView("_GridViewPartial_Horario_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_Turno_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaTurno.get_list((Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)));
+            return PartialView("_GridViewPartial_Turno_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_Empleado_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaEmpleado.get_list();
+            return PartialView("_GridViewPartial_Empleado_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_Contrato_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaContrato.get_list((Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)));
+            return PartialView("_GridViewPartial_Contrato_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_CargaFamiliar_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaCargasFamiliares.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_CargaFamiliar_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_ProvisionesAcumuladas_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaProvisionesAcumuladas.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ProvisionesAcumuladas_importacion", model);
+        }
+
+        public ActionResult GridViewPartial_Vacaciones_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaVacaciones.get_list();
+            return PartialView("_GridViewPartial_Vacaciones_importacion", model);
+        }
+
         public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
         {
             string retorno = string.Empty;
@@ -520,7 +572,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
             #region Variables
-            ro_empleado_Bus bus_empleado = new ro_empleado_Bus();           
+            ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
+            tb_persona_Bus bus_persona = new tb_persona_Bus();
+            ro_division_Bus bus_division = new ro_division_Bus();
+            ro_area_Bus bus_area = new ro_area_Bus();
+            tb_pais_Bus bus_pais = new tb_pais_Bus();
+            tb_provincia_Bus bus_provincia = new tb_provincia_Bus();
+            tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
+            ro_cargo_Bus bus_cargo = new ro_cargo_Bus();
+            ro_departamento_Bus bus_departamento = new ro_departamento_Bus();
 
             ro_rubro_tipo_Info_list ListaRubro = new ro_rubro_tipo_Info_list();
             List<ro_rubro_tipo_Info> Lista_Rubro = new List<ro_rubro_tipo_Info>();
@@ -581,14 +641,217 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                         Lista_Rubro.Add(info);
                     }
                     else
+                    {
                         cont++;
+                    }                        
                 }
                 ListaRubro.set_list(Lista_Rubro);
                 #endregion
 
-                //cont = 0;
                 //Para avanzar a la siguiente hoja de excel
-                //reader.NextResult();
+                cont = 0;
+                reader.NextResult();
+
+                #region Horario                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+
+                        //ro_horario_Info info = new ro_horario_Info
+                        //{
+                        //    IdEmpresa = IdEmpresa,
+                        //    IdHorario = Convert.ToDecimal(reader.GetValue(0)),
+                        //    HoraIni = TimeSpan.Parse(Convert.ToString(reader.GetValue(1))),
+                        //    HoraFin = TimeSpan.Parse(Convert.ToString(reader.GetValue(2))),
+                        //    ToleranciaEnt = Convert.ToInt32(reader.GetValue(3)),
+                        //    ToleranciaReg_lunh = Convert.ToInt32(reader.GetValue(4)),
+                        //    SalLunch = TimeSpan.Parse(Convert.ToString(reader.GetValue(5))),
+                        //    RegLunch = TimeSpan.Parse(Convert.ToString(reader.GetValue(6))),
+                        //    Descripcion = Convert.ToString(reader.GetValue(7))
+                        //};
+                        //Lista_Horario.Add(info);
+                    }
+                    else
+                    {
+                        cont++;
+                    }
+                }
+                ListaHorario.set_list(Lista_Horario, IdTransaccionSession);
+                #endregion
+
+                //Para avanzar a la siguiente hoja de excel
+                cont = 0;
+                reader.NextResult();
+
+                #region Turno                
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+
+                        ro_turno_Info info = new ro_turno_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdTurno = Convert.ToDecimal(reader.GetValue(0)),
+                            tu_descripcion = Convert.ToString(reader.GetValue(1)),
+                            Lunes = Convert.ToString(reader.GetValue(1))== "SI" ? true : false,
+                            Martes = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
+                            Miercoles = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
+                            Jueves = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
+                            Viernes = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
+                            Sabado = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
+                            Domingo = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false
+                        };
+                        Lista_Turno.Add(info);
+                    }
+                    else
+                    {
+                        cont++;
+                    }
+                }
+                ListaTurno.set_list(Lista_Turno, IdTransaccionSession);
+                #endregion
+
+                //Para avanzar a la siguiente hoja de excel
+                cont = 0;
+                reader.NextResult();
+
+                #region Empleado  
+                var Lista_Persona = bus_persona.get_list(false);
+                tb_persona_List ListaPersona = new tb_persona_List();
+                ListaPersona.set_list(Lista_Persona, IdTransaccionSession);
+
+                //var Lista_Departamento = bus_departamento.get_list(IdEmpresa, false);
+                //ro_departamento_List ListaDepartamento = new ro_departamento_List();
+                //ListaDepartamento.set_list(Lista_Departamento, IdTransaccionSession);
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        var info_persona = ListaPersona.get_list(IdTransaccionSession).Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(2))).FirstOrDefault();
+                        var info_persona_empleado = info_persona;
+                        var Naturaleza = "NATU";
+                        var cedula_ruc = Convert.ToString(reader.GetValue(2));
+                        var tipo_doc = Convert.ToString(reader.GetValue(3));
+
+                        //var info_departamento = ListaDepartamento.Where(q => q.de_descripcion == Convert.ToString(reader.GetValue(35)));
+
+                        if (cl_funciones.ValidaIdentificacion(tipo_doc, Naturaleza, cedula_ruc))
+                        {
+                            if (info_persona == null)
+                            {
+                                tb_persona_Info info_ = new tb_persona_Info
+                                {
+                                    pe_Naturaleza = Naturaleza,
+                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(4)),
+                                    pe_apellido = Convert.ToString(reader.GetValue(5)),
+                                    pe_nombre = Convert.ToString(reader.GetValue(4)),
+                                    IdTipoDocumento = Convert.ToString(reader.GetValue(3)),
+                                    pe_cedulaRuc = Convert.ToString(reader.GetValue(2)),
+                                    pe_direccion = Convert.ToString(reader.GetValue(6)),
+                                    pe_telfono_Contacto = Convert.ToString(reader.GetValue(7)),
+                                    pe_celular = Convert.ToString(reader.GetValue(8)),
+                                    pe_correo = Convert.ToString(reader.GetValue(9)),
+                                    pe_sexo = Convert.ToString(reader.GetValue(10)),
+                                    IdEstadoCivil = Convert.ToString(reader.GetValue(11)),
+                                    pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(12))
+                                };
+
+                                Lista_Persona.Add(info_);
+                                info_persona_empleado = info_;
+                            }
+                            else
+                            {
+                                info_persona_empleado = bus_persona.get_info(info_persona.IdPersona);
+
+                                info_persona_empleado.pe_Naturaleza = Naturaleza;
+                                info_persona_empleado.pe_nombreCompleto = Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(4));
+                                info_persona_empleado.pe_apellido = Convert.ToString(reader.GetValue(5));
+                                info_persona_empleado.pe_nombre = Convert.ToString(reader.GetValue(4));
+                                info_persona_empleado.IdTipoDocumento = Convert.ToString(reader.GetValue(3));
+                                info_persona_empleado.pe_cedulaRuc = Convert.ToString(reader.GetValue(2));
+                                info_persona_empleado.pe_direccion = Convert.ToString(reader.GetValue(6));
+                                info_persona_empleado.pe_telfono_Contacto = Convert.ToString(reader.GetValue(7));
+                                info_persona_empleado.pe_celular = Convert.ToString(reader.GetValue(8));
+                                info_persona_empleado.pe_correo = Convert.ToString(reader.GetValue(9));
+                                info_persona_empleado.pe_sexo = Convert.ToString(reader.GetValue(10));
+                                info_persona_empleado.IdEstadoCivil = Convert.ToString(reader.GetValue(11));
+                                info_persona_empleado.pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(2));
+                            }
+
+                            ro_empleado_Info info = new ro_empleado_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdEmpleado = Convert.ToDecimal(reader.GetValue(0)),
+                                IdPersona = info_persona_empleado.IdPersona,
+                                IdSucursal = 1,
+                                IdTipoEmpleado = "NO",
+                                //em_codigo = ,
+                                Codigo_Biometrico = Convert.ToString(reader.GetValue(1)),
+                                em_lugarNacimiento = Convert.ToString(reader.GetValue(35)),
+                                em_fechaIngaRol = Convert.ToDateTime(reader.GetValue(13)),
+                                em_tipoCta = Convert.ToString(reader.GetValue(20)),
+                                em_NumCta = Convert.ToString(reader.GetValue(21)),
+                                em_estado = Convert.ToString(reader.GetValue(35)),
+                                IdCodSectorial = Convert.ToInt32(reader.GetValue(16)),
+                                //IdDepartamento = Convert.ToInt32(reader.GetValue(39)),
+                                //IdTipoSangre = Convert.ToString(reader.GetValue(22)),
+                                //IdCargo = Convert.ToInt32(reader.GetValue(35)),
+                                IdCtaCble_Emplea = null,
+                                IdCiudad = Convert.ToString(reader.GetValue(35)),
+                                em_mail = Convert.ToString(reader.GetValue(9)),
+                                IdTipoLicencia = null,
+                                IdBanco = Convert.ToString(reader.GetValue(19)),
+                                //IdArea = Convert.ToInt32(reader.GetValue(38)),
+                                //IdDivision = Convert.ToInt32(reader.GetValue(37)),
+                                por_discapacidad = 0,
+                                carnet_conadis = null,
+                                talla_pant = Convert.ToDouble(reader.GetValue(23)),
+                                talla_camisa = Convert.ToString(reader.GetValue(24)),
+                                talla_zapato = Convert.ToDouble(reader.GetValue(25)),
+                                em_status = "A",
+                                IdCondicionDiscapacidadSRI = null,
+                                IdTipoIdentDiscapacitadoSustitutoSRI = null,
+                                IdentDiscapacitadoSustitutoSRI = null,
+                                IdAplicaConvenioDobleImposicionSRI = null,
+                                IdTipoResidenciaSRI = null,
+                                IdTipoSistemaSalarioNetoSRI = null,
+                                es_AcreditaHorasExtras = Convert.ToString(reader.GetValue(18))== "SI" ? true : false,
+                                IdTipoAnticipo = null,
+                                ValorAnticipo = null,
+                                CodigoSectorial = Convert.ToString(reader.GetValue(16)),
+                                em_AnticipoSueldo = null,
+                                Marca_Biometrico = Convert.ToString(reader.GetValue(17)) == "SI" ? true : false,
+                                //IdHorario = Convert.ToInt32(reader.GetValue(41)),
+                                //Tiene_ingresos_compartidos = false,
+                                IdUsuario = SessionFixed.IdUsuario,
+                                Fecha_Transaccion = DateTime.Now,
+                                Pago_por_horas = Convert.ToString(reader.GetValue(26)) == "SI" ? true : false,
+                                Valor_horas_vespertina = Convert.ToDouble(reader.GetValue(28)),
+                                Valor_horas_brigada = Convert.ToDouble(reader.GetValue(31)),
+                                Valor_horas_matutino = Convert.ToDouble(reader.GetValue(27)),
+                                //Valor_maximo_horas_mat = Convert.ToDouble(reader.GetValue(35)),
+                                //Valor_maximo_horas_vesp = Convert.ToDouble(reader.GetValue(35)),
+                                Valor_horas_extras = null,
+                                //DiasVacaciones = 0,
+                                //GozaMasDeQuinceDiasVaciones = false,
+                            };
+
+                            info.info_persona = info_persona_empleado;
+
+                            Lista_Empleado.Add(info);
+
+                        }
+                    }
+                    else
+                    {
+                        cont++;
+                    }
+                }
+                ListaEmpleado.set_list(Lista_Empleado);
+                #endregion
             }
         }
     }

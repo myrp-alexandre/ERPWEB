@@ -505,86 +505,89 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
+                        var cc = Convert.ToString(reader.GetValue(3));
                         var info_persona = ListaPersona.get_list(IdTransaccionSession).Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
                         var info_persona_prov = info_persona;
 
-                        if (info_persona == null)
+                        if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3))))
                         {
-                            tb_persona_Info info_ = new tb_persona_Info
+                            if (info_persona == null)
                             {
-                                pe_Naturaleza = Convert.ToString(reader.GetValue(4)),
-                                pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7)),
-                                pe_razonSocial = Convert.ToString(reader.GetValue(5)),
-                                pe_apellido = Convert.ToString(reader.GetValue(6)),
-                                pe_nombre = Convert.ToString(reader.GetValue(7)),
-                                IdTipoDocumento = Convert.ToString(reader.GetValue(2)),
-                                pe_cedulaRuc = Convert.ToString(reader.GetValue(3)),
-                                pe_direccion = Convert.ToString(reader.GetValue(9)),
-                                pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)),
-                                pe_celular = Convert.ToString(reader.GetValue(11)),
-                                pe_correo = Convert.ToString(reader.GetValue(8)),
+                                tb_persona_Info info_ = new tb_persona_Info
+                                {
+                                    pe_Naturaleza = Convert.ToString(reader.GetValue(4)),
+                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7)),
+                                    pe_razonSocial = Convert.ToString(reader.GetValue(5)),
+                                    pe_apellido = Convert.ToString(reader.GetValue(6)),
+                                    pe_nombre = Convert.ToString(reader.GetValue(7)),
+                                    IdTipoDocumento = Convert.ToString(reader.GetValue(2)),
+                                    pe_cedulaRuc = Convert.ToString(reader.GetValue(3)),
+                                    pe_direccion = Convert.ToString(reader.GetValue(9)),
+                                    pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)),
+                                    pe_celular = Convert.ToString(reader.GetValue(11)),
+                                    pe_correo = Convert.ToString(reader.GetValue(8)),
+                                };
+                                Lista_Persona.Add(info_);
+                                info_persona_prov = info_;
+                            }
+                            else
+                            {
+                                info_persona_prov = bus_persona.get_info(info_persona.IdPersona);
+                                var x = Convert.ToString(reader.GetValue(4));
+                                info_persona_prov.pe_Naturaleza = x;
+                                info_persona_prov.pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7));
+                                info_persona_prov.pe_razonSocial = Convert.ToString(reader.GetValue(5));
+                                info_persona_prov.pe_apellido = Convert.ToString(reader.GetValue(6));
+                                info_persona_prov.pe_nombre = Convert.ToString(reader.GetValue(7));
+                                info_persona_prov.IdTipoDocumento = Convert.ToString(reader.GetValue(2));
+                                info_persona_prov.pe_cedulaRuc = Convert.ToString(reader.GetValue(3));
+                                info_persona_prov.pe_direccion = Convert.ToString(reader.GetValue(9));
+                                info_persona_prov.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
+                                info_persona_prov.pe_celular = Convert.ToString(reader.GetValue(11));
+                                info_persona_prov.pe_correo = Convert.ToString(reader.GetValue(8));
+                            }
+
+                            fa_cliente_Info info = new fa_cliente_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdPersona = info_persona_prov.IdPersona,
+                                Codigo = Convert.ToString(reader.GetValue(1)),
+                                Idtipo_cliente = Convert.ToInt32(reader.GetValue(13)),
+                                cl_plazo = Convert.ToInt32(reader.GetValue(15)),
+                                cl_Cupo = Convert.ToDouble(reader.GetValue(16)),
+                                IdCtaCble_cxc_Credito = Convert.ToString(reader.GetValue(14)),
+                                es_empresa_relacionada = (Convert.ToString(reader.GetValue(12)) == "SI") ? true : false,
+                                EsClienteExportador = false,
+                                IdNivel = 1,
+                                IdTipoCredito = "CON",
+                                FormaPago = "01",
+                                IdUsuario = SessionFixed.IdUsuario
                             };
-                            Lista_Persona.Add(info_);
-                            info_persona_prov = info_;
+
+                            fa_cliente_contactos_Info info_cliente_contacto = new fa_cliente_contactos_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdContacto = 1,
+                                IdCiudad = Convert.ToString(reader.GetValue(18)),
+                                IdParroquia = Convert.ToString(reader.GetValue(19)),
+                                Celular = Convert.ToString(reader.GetValue(11)),
+                                Correo = Convert.ToString(reader.GetValue(8)),
+                                Direccion = Convert.ToString(reader.GetValue(9)),
+                                Nombres = (Convert.ToString(reader.GetValue(4)) == "NATU") ? Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7)) : Convert.ToString(reader.GetValue(5)),
+                                Telefono = Convert.ToString(reader.GetValue(10)),
+
+                            };
+
+                            info.lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>();
+                            info.lst_fa_cliente_contactos.Add(info_cliente_contacto);
+                            info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
+                            info.info_persona = info_persona_prov;
+
+                            Lista_Cliente.Add(info);
                         }
-                        else
-                        {
-                            info_persona_prov = bus_persona.get_info(info_persona.IdPersona);
-
-                            info_persona_prov.pe_Naturaleza = Convert.ToString(reader.GetValue(4));
-                            info_persona_prov.pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7));
-                            info_persona_prov.pe_razonSocial = Convert.ToString(reader.GetValue(5));
-                            info_persona_prov.pe_apellido = Convert.ToString(reader.GetValue(6));
-                            info_persona_prov.pe_nombre = Convert.ToString(reader.GetValue(7));
-                            info_persona_prov.IdTipoDocumento = Convert.ToString(reader.GetValue(2));
-                            info_persona_prov.pe_cedulaRuc = Convert.ToString(reader.GetValue(3));
-                            info_persona_prov.pe_direccion = Convert.ToString(reader.GetValue(9));
-                            info_persona_prov.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
-                            info_persona_prov.pe_celular = Convert.ToString(reader.GetValue(11));
-                            info_persona_prov.pe_correo = Convert.ToString(reader.GetValue(8));
-                        }
-
-                        fa_cliente_Info info = new fa_cliente_Info
-                        {
-                            IdEmpresa = IdEmpresa,
-                            IdPersona = info_persona_prov.IdPersona,
-                            Codigo = Convert.ToString(reader.GetValue(1)),
-                            Idtipo_cliente = Convert.ToInt32(reader.GetValue(13)),
-                            cl_plazo = Convert.ToInt32(reader.GetValue(15)),
-                            cl_Cupo = Convert.ToDouble(reader.GetValue(16)),
-                            IdCtaCble_cxc_Credito = Convert.ToString(reader.GetValue(14)),
-                            es_empresa_relacionada = (Convert.ToString(reader.GetValue(12)) == "SI") ? true : false,                            
-                            EsClienteExportador = false,
-                            IdNivel = 1,
-                            IdTipoCredito = "CON",
-                            FormaPago = "01",
-                            IdUsuario = SessionFixed.IdUsuario
-                        };
-
-                        fa_cliente_contactos_Info info_cliente_contacto = new fa_cliente_contactos_Info
-                        {
-                            IdEmpresa = IdEmpresa,
-                            IdContacto = 1,
-                            IdCiudad = Convert.ToString(reader.GetValue(18)),
-                            IdParroquia = Convert.ToString(reader.GetValue(19)),
-                            Celular = Convert.ToString(reader.GetValue(11)),
-                            Correo = Convert.ToString(reader.GetValue(8)),
-                            Direccion = Convert.ToString(reader.GetValue(9)),
-                            Nombres = (Convert.ToString(reader.GetValue(4)) == "NATU") ? Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7)) : Convert.ToString(reader.GetValue(5)),
-                            Telefono = Convert.ToString(reader.GetValue(10)),
-
-                        };
-
-                        info.lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>();
-                        info.lst_fa_cliente_contactos.Add(info_cliente_contacto);
-                        info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
-                        info.info_persona = info_persona_prov;
-
-                        Lista_Cliente.Add(info);
-                        
                     }
                     else
-                        cont++;
+                        cont++;                    
                 }
                 ListaCliente.set_list(Lista_Cliente, IdTransaccionSession);
                 #endregion

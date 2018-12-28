@@ -1,11 +1,11 @@
 @using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings =>
-    {
-        settings.Name = "GridViewPartial_cliente_importacion";
-        settings.CallbackRouteValues = new { Controller = "Cliente", Action = "GridViewPartial_cliente_importacion" };
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridViewPartial_CargaFamiliar_importacion";
+        settings.CallbackRouteValues = new { Controller = "Empleado", Action = "GridViewPartial_CargaFamiliar_importacion" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdCliente";
+        settings.KeyFieldName = "IdRubro";
+        settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -48,15 +48,44 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdCliente", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("Codigo", "Descripción").Width = Unit.Percentage(20);
-        settings.Columns.Add("info_persona.pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(20);
-        settings.Columns.Add("info_persona.pe_razonSocial", "Razon Social").Width = Unit.Percentage(25);
-        settings.Columns.Add("Idtipo_cliente", "Tipo cliente").Width = Unit.Percentage(20);
-        settings.Columns.Add("IdTipoCredito", "Tipo credito").Width = Unit.Percentage(20);
-        settings.Columns.Add("cl_plazo", "Plazo").Width = Unit.Percentage(20);
-        settings.Columns.Add("cl_Cupo", "Cupo").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdRubro", "Codigo").Width = Unit.Percentage(5);
+        settings.Columns.Add("rub_codigo", "Descripción").Width = Unit.Percentage(16);
+        settings.Columns.Add("ru_codRolGen", "Cta Mejora").Width = Unit.Percentage(8);
+        settings.Columns.Add("ru_descripcion", "%").Width = Unit.Percentage(5);
+        settings.Columns.Add("NombreCorto", "Años").Width = Unit.Percentage(10);
+        settings.Columns.Add("rub_ctacon", "Cta Baja").Width = Unit.Percentage(8);
+        settings.Columns.Add("ru_tipo", "Cta Cble").Width = Unit.Percentage(8);
 
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "rub_aplica_IESS";
+            column.Caption = "Aplica IESS";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(8);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "rub_nocontab";
+            column.Caption = "Contabiliza";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(8);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "rub_provision";
+            column.Caption = "Provisiona";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(8);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

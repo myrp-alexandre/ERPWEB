@@ -1,11 +1,11 @@
 @using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings =>
-    {
-        settings.Name = "GridViewPartial_cliente_importacion";
-        settings.CallbackRouteValues = new { Controller = "Cliente", Action = "GridViewPartial_cliente_importacion" };
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridViewPartial_Horario_importacion";
+        settings.CallbackRouteValues = new { Controller = "Empleado", Action = "GridViewPartial_Horario_importacion" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdCliente";
+        settings.KeyFieldName = "IdHorario";
+        settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -48,14 +48,14 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdCliente", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("Codigo", "Descripción").Width = Unit.Percentage(20);
-        settings.Columns.Add("info_persona.pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(20);
-        settings.Columns.Add("info_persona.pe_razonSocial", "Razon Social").Width = Unit.Percentage(25);
-        settings.Columns.Add("Idtipo_cliente", "Tipo cliente").Width = Unit.Percentage(20);
-        settings.Columns.Add("IdTipoCredito", "Tipo credito").Width = Unit.Percentage(20);
-        settings.Columns.Add("cl_plazo", "Plazo").Width = Unit.Percentage(20);
-        settings.Columns.Add("cl_Cupo", "Cupo").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdHorario", "Codigo").Width = Unit.Percentage(5);
+        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(20);
+        settings.Columns.Add("HoraIni", "HoraIni").Width = Unit.Percentage(10);
+        settings.Columns.Add("HoraFin", "HoraFin").Width = Unit.Percentage(10);
+        settings.Columns.Add("ToleranciaEnt", "ToleranciaEnt").Width = Unit.Percentage(10);
+        settings.Columns.Add("ToleranciaReg_lunh", "ToleranciaReg_lunh").Width = Unit.Percentage(10);
+        settings.Columns.Add("SalLunch", "SalLunch").Width = Unit.Percentage(10);
+        settings.Columns.Add("RegLunch", "RegLunch").Width = Unit.Percentage(10);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

@@ -1,6 +1,6 @@
-﻿@model Core.Erp.Info.ActivoFijo.Af_Activo_fijo_Info
+﻿@model Core.Erp.Info.RRHH.ro_empleado_Info
 @{
-    ViewBag.Title = "Importar activo fijo";
+    ViewBag.Title = "Importar RRHH";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("ActualizarVariablesSession", "ActivoFijo", new { Area = "ActivoFijo"})',
+            url: '@Url.Action("ActualizarVariablesSession", "Empleado", new { Area = "RRHH"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -29,11 +29,14 @@
 
     function OnFileUploadComplete(s, e)
     {
-        GridViewPartial_tipoAF_importacion.PerformCallback();  
-        GridViewPartial_categoriaAF_importacion.PerformCallback();
-        GridViewPartial_departamentoAF_importacion.PerformCallback();
-        GridViewPartial_catalogoAF_importacion.PerformCallback();
-        GridViewPartial_ActivoFijo_importacion.PerformCallback();
+        GridViewPartial_Rubro_importacion.PerformCallback();
+        GridViewPartial_Horario_importacion.PerformCallback();
+        GridViewPartial_Turno_importacion.PerformCallback();
+        GridViewPartial_Empleado_importacion.PerformCallback();
+        //GridViewPartial_Contrato_importacion.PerformCallback();
+        //GridViewPartial_CargaFamiliar_importacion.PerformCallback();
+        //GridViewPartial_ProvisionesAcumuladas_importacion.PerformCallback();
+        //GridViewPartial_Vacaciones_importacion.PerformCallback();
     }
 
 </script>
@@ -67,7 +70,7 @@
                 @Html.DevExpress().UploadControl(settings =>
            {
                settings.Name = "UploadControlFile";
-               settings.CallbackRouteValues = new { Controller = "ActivoFijo", Action = "UploadControlUpload" };
+               settings.CallbackRouteValues = new { Controller = "Empleado", Action = "UploadControlUpload" };
                settings.ShowUploadButton = true;
                settings.ShowProgressPanel = true;
                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -86,80 +89,108 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_tipo" aria-controls="vales" role="tab" data-toggle="tab">Tipo</a>
+                <a href="#tab_rubro" aria-controls="vales" role="tab" data-toggle="tab">Rubros</a>
             </li>
             <li>
-                <a href="#tab_categoria" aria-controls="vales" role="tab" data-toggle="tab">Categoría</a>
+                <a href="#tab_horario" aria-controls="vales" role="tab" data-toggle="tab">Horarios</a>
             </li>            
             <li>
-                <a href="#tab_departamentos" aria-controls="vales" role="tab" data-toggle="tab">Departamento</a>
+                <a href="#tab_turno" aria-controls="vales" role="tab" data-toggle="tab">Turnos</a>
             </li>
             <li>
-                <a href="#tab_catalogos" aria-controls="vales" role="tab" data-toggle="tab">Catálogos</a>
+                <a href="#tab_empleado" aria-controls="vales" role="tab" data-toggle="tab">Empleados</a>
             </li>
             <li>
-                <a href="#tab_activo_fijo" aria-controls="vales" role="tab" data-toggle="tab">Activo fijo</a>
+                <a href="#tab_contrato" aria-controls="vales" role="tab" data-toggle="tab">Contratos</a>
             </li>
             <li>
-                <a href="#tab_gastos_depreciacion" aria-controls="vales" role="tab" data-toggle="tab">Gastos depreciación</a>
+                <a href="#tab_cargas_familiares" aria-controls="vales" role="tab" data-toggle="tab">Cargas familiares</a>
+            </li>
+            <li>
+                <a href="#tab_provisiones_acumuladas" aria-controls="vales" role="tab" data-toggle="tab">Provisiones acumuladas</a>
+            </li>
+            <li>
+                <a href="#tab_vacaciones" aria-controls="vales" role="tab" data-toggle="tab">Vacaciones</a>
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_tipo">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_rubro">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_tipoAF_importacion")
+                            @Html.Action("GridViewPartial_Rubro_importacion")
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_categoria">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_horario">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_categoriaAF_importacion")
+                            @Html.Action("GridViewPartial_Horario_importacion")
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_departamentos">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_turno">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_departamentoAF_importacion")
+                            @Html.Action("GridViewPartial_Turno_importacion")
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_catalogos">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_empleado">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_catalogoAF_importacion")
+                            @*@Html.Action("GridViewPartial_Rubro_importacion")*@
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_activo_fijo">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_empleado">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_ActivoFijo_importacion")
+                            @Html.Action("GridViewPartial_Empleado_importacion")
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_gastos_depreciacion">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_contrato">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_ActivoFijo_CtaCble_importacion")
+                            @*@Html.Action("GridViewPartial_Contrato_importacion")*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cargas_familiares">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @*@Html.Action("GridViewPartial_CargaFamiliar_importacion")*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_provisiones_acumuladas">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                           @* @Html.Action("GridViewPartial_ProvisionesAcumuladas_importacion")*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_vacaciones">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @*@Html.Action("GridViewPartial_Vacaciones_importacion")*@
                         </div>
                     </div>
                 </div>

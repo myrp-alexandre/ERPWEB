@@ -9569,6 +9569,13 @@
     <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_Rubro_importacion.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\Importar.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\_GridViewPartial_Factura_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_Vacaciones_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_Horario_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_Turno_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_Empleado_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_Contrato_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_CargaFamiliar_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_ProvisionesAcumuladas_importacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
