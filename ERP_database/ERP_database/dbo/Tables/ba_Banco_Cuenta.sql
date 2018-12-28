@@ -5,7 +5,7 @@
     [ba_Tipo]                  VARCHAR (50)    NOT NULL,
     [ba_Num_Cuenta]            VARCHAR (50)    NOT NULL,
     [ba_num_digito_cheq]       INT             NOT NULL,
-    [IdCtaCble]                VARCHAR (20)    NOT NULL,
+    [IdCtaCble]                VARCHAR (20)    NULL,
     [IdUsuario]                VARCHAR (50)    NULL,
     [Fecha_Transac]            DATETIME        NULL,
     [IdUsuarioUltMod]          VARCHAR (50)    NULL,

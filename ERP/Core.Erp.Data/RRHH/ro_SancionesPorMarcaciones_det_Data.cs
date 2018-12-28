@@ -9,7 +9,7 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_SancionesPorMarcaciones_det_Data
     {
-       public List<ro_SancionesPorMarcaciones_det_Info> get_list(int IdEmpresa, int IdAjuste)
+       public List<ro_SancionesPorMarcaciones_det_Info> get_list(int IdEmpresa, decimal IdAjuste)
         {
             try
             {
@@ -82,6 +82,19 @@ namespace Core.Erp.Data.RRHH
                              }).ToList();
                 }
 
+                lista.ForEach(item =>
+               {
+                   if(item.time_entrada1>item.HoraIni)
+                   {
+                       item.Minutos = item.time_entrada1.TotalHours - item.HoraIni.TotalHours;
+                   }
+
+                   if (item.time_salida1 < item.HoraFin)
+                   {
+                       item.Minutos = item.Minutos+( item.time_salida1.TotalHours - item.HoraFin.TotalHours);
+                   }
+               }
+                );
                 return lista;
             }
             catch (Exception)
