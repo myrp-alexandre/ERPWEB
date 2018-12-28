@@ -153,8 +153,26 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                 throw;
             }
+        }        
+    }
+
+    public class ro_cargo_List
+    {
+        string Variable = "ro_cargo_Info";
+        public List<ro_cargo_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ro_cargo_Info> list = new List<ro_cargo_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ro_cargo_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        
+        public void set_list(List<ro_cargo_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
     }
 }

@@ -36,7 +36,7 @@
         <AssociationConnector Association="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta" />
         <AssociationConnector Association="Model_banco.FK_ba_Conciliacion_ba_Banco_Cuenta" />
         <AssociationConnector Association="Model_banco.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

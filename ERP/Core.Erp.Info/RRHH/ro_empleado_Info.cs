@@ -136,7 +136,11 @@ namespace Core.Erp.Info.RRHH
         #endregion
 
 
-
+        public string de_descripcion { get; set; }
+        public string ar_descripcion { get; set; }
+        public string di_descripcion { get; set; }
+        public string ca_descripcion { get; set; }
+        public string ba_descripcion { get; set; }
 
         //
         public int? IdTipoNomina { get; set; }

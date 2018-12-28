@@ -9576,6 +9576,13 @@
     <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_Contrato_importacion.cshtml" />
     <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_CargaFamiliar_importacion.cshtml" />
     <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_ProvisionesAcumuladas_importacion.cshtml" />
+    <Content Include="Areas\RRHH\Views\ControlDeMarcaciones\_GridViewPartial_control_marcaciones.cshtml" />
+    <Content Include="Areas\RRHH\Views\ControlDeMarcaciones\_GridViewPartial_control_marcaciones_det.cshtml" />
+    <Content Include="Areas\RRHH\Views\ControlDeMarcaciones\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\ControlDeMarcaciones\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\ControlDeMarcaciones\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\ControlDeMarcaciones\Anular.cshtml" />
+
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9659,7 +9666,6 @@
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\RRHH\Models\" />
     <Folder Include="Areas\RRHH\Views\AprobacionPrestamos\" />
-    <Folder Include="Areas\RRHH\Views\ControlDeMarcaciones\" />
     <Folder Include="Areas\RRHH\Views\SancionesPorAtraso\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\file\" />
@@ -9693,7 +9699,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

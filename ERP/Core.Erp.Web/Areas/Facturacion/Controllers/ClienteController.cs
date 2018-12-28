@@ -505,9 +505,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
+                        tb_persona_Info info_persona = new tb_persona_Info();
+                        tb_persona_Info info_persona_cliente = new tb_persona_Info();
+
                         var cc = Convert.ToString(reader.GetValue(3));
-                        var info_persona = ListaPersona.get_list(IdTransaccionSession).Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
-                        var info_persona_prov = info_persona;
+                        info_persona = ListaPersona.get_list(IdTransaccionSession).Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
+                        info_persona_cliente = info_persona;
 
                         if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3))))
                         {
@@ -528,29 +531,29 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                     pe_correo = Convert.ToString(reader.GetValue(8)),
                                 };
                                 Lista_Persona.Add(info_);
-                                info_persona_prov = info_;
+                                info_persona_cliente = info_;
                             }
                             else
                             {
-                                info_persona_prov = bus_persona.get_info(info_persona.IdPersona);
+                                info_persona_cliente = bus_persona.get_info(info_persona.IdPersona);
                                 var x = Convert.ToString(reader.GetValue(4));
-                                info_persona_prov.pe_Naturaleza = x;
-                                info_persona_prov.pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7));
-                                info_persona_prov.pe_razonSocial = Convert.ToString(reader.GetValue(5));
-                                info_persona_prov.pe_apellido = Convert.ToString(reader.GetValue(6));
-                                info_persona_prov.pe_nombre = Convert.ToString(reader.GetValue(7));
-                                info_persona_prov.IdTipoDocumento = Convert.ToString(reader.GetValue(2));
-                                info_persona_prov.pe_cedulaRuc = Convert.ToString(reader.GetValue(3));
-                                info_persona_prov.pe_direccion = Convert.ToString(reader.GetValue(9));
-                                info_persona_prov.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
-                                info_persona_prov.pe_celular = Convert.ToString(reader.GetValue(11));
-                                info_persona_prov.pe_correo = Convert.ToString(reader.GetValue(8));
+                                info_persona_cliente.pe_Naturaleza = x;
+                                info_persona_cliente.pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7));
+                                info_persona_cliente.pe_razonSocial = Convert.ToString(reader.GetValue(5));
+                                info_persona_cliente.pe_apellido = Convert.ToString(reader.GetValue(6));
+                                info_persona_cliente.pe_nombre = Convert.ToString(reader.GetValue(7));
+                                info_persona_cliente.IdTipoDocumento = Convert.ToString(reader.GetValue(2));
+                                info_persona_cliente.pe_cedulaRuc = Convert.ToString(reader.GetValue(3));
+                                info_persona_cliente.pe_direccion = Convert.ToString(reader.GetValue(9));
+                                info_persona_cliente.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
+                                info_persona_cliente.pe_celular = Convert.ToString(reader.GetValue(11));
+                                info_persona_cliente.pe_correo = Convert.ToString(reader.GetValue(8));
                             }
 
                             fa_cliente_Info info = new fa_cliente_Info
                             {
                                 IdEmpresa = IdEmpresa,
-                                IdPersona = info_persona_prov.IdPersona,
+                                IdPersona = info_persona_cliente.IdPersona,
                                 Codigo = Convert.ToString(reader.GetValue(1)),
                                 Idtipo_cliente = Convert.ToInt32(reader.GetValue(13)),
                                 cl_plazo = Convert.ToInt32(reader.GetValue(15)),
@@ -581,7 +584,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             info.lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>();
                             info.lst_fa_cliente_contactos.Add(info_cliente_contacto);
                             info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
-                            info.info_persona = info_persona_prov;
+                            info.info_persona = info_persona_cliente;
 
                             Lista_Cliente.Add(info);
                         }

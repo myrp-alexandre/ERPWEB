@@ -371,7 +371,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-      
+
         public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
         {
 
@@ -445,7 +445,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 var Lista_Empleado = ListaEmpleado.get_list();
                 var Lista_Contrato = ListaContrato.get_list(model.IdTransaccionSession);
                 var Lista_CargasFamiliares = ListaCargasFamiliares.get_list(model.IdTransaccionSession);
-                var Lista_ProvisionesAcumuladas= ListaProvisionesAcumuladas.get_list(model.IdTransaccionSession);
+                var Lista_ProvisionesAcumuladas = ListaProvisionesAcumuladas.get_list(model.IdTransaccionSession);
                 var Lista_Vacaciones = ListaVacaciones.get_list();
 
                 //if (!bus_empleado.guardarDB_importacion(Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_Contrato, Lista_CargasFamiliares, Lista_Vacaciones))
@@ -577,6 +577,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_division_Bus bus_division = new ro_division_Bus();
             ro_area_Bus bus_area = new ro_area_Bus();
             tb_pais_Bus bus_pais = new tb_pais_Bus();
+            tb_banco_Bus bus_banco = new tb_banco_Bus();
             tb_provincia_Bus bus_provincia = new tb_provincia_Bus();
             tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
             ro_cargo_Bus bus_cargo = new ro_cargo_Bus();
@@ -598,7 +599,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             List<ro_rol_detalle_x_rubro_acumulado_Info> Lista_ProvisionesAcumuladas = new List<ro_rol_detalle_x_rubro_acumulado_Info>();
             ro_historico_vacaciones_x_empleado_Info_list ListaVacaciones = new ro_historico_vacaciones_x_empleado_Info_list();
             List<ro_historico_vacaciones_x_empleado_Info> Lista_Vacaciones = new List<ro_historico_vacaciones_x_empleado_Info>();
-
 
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
@@ -643,7 +643,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     else
                     {
                         cont++;
-                    }                        
+                    }
                 }
                 ListaRubro.set_list(Lista_Rubro);
                 #endregion
@@ -658,19 +658,19 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
 
-                        //ro_horario_Info info = new ro_horario_Info
-                        //{
-                        //    IdEmpresa = IdEmpresa,
-                        //    IdHorario = Convert.ToDecimal(reader.GetValue(0)),
-                        //    HoraIni = TimeSpan.Parse(Convert.ToString(reader.GetValue(1))),
-                        //    HoraFin = TimeSpan.Parse(Convert.ToString(reader.GetValue(2))),
-                        //    ToleranciaEnt = Convert.ToInt32(reader.GetValue(3)),
-                        //    ToleranciaReg_lunh = Convert.ToInt32(reader.GetValue(4)),
-                        //    SalLunch = TimeSpan.Parse(Convert.ToString(reader.GetValue(5))),
-                        //    RegLunch = TimeSpan.Parse(Convert.ToString(reader.GetValue(6))),
-                        //    Descripcion = Convert.ToString(reader.GetValue(7))
-                        //};
-                        //Lista_Horario.Add(info);
+                        ro_horario_Info info = new ro_horario_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdHorario = Convert.ToDecimal(reader.GetValue(0)),
+                            HoraIni = new TimeSpan(Convert.ToDateTime(reader.GetValue(1)).Hour, Convert.ToDateTime(reader.GetValue(1)).Minute, Convert.ToDateTime(reader.GetValue(1)).Second),
+                            HoraFin = new TimeSpan(Convert.ToDateTime(reader.GetValue(2)).Hour, Convert.ToDateTime(reader.GetValue(2)).Minute, Convert.ToDateTime(reader.GetValue(2)).Second),
+                            ToleranciaEnt = Convert.ToInt32(reader.GetValue(3)),
+                            ToleranciaReg_lunh = Convert.ToInt32(reader.GetValue(4)),
+                            SalLunch = TimeSpan.Parse(Convert.ToString(reader.GetValue(5))),
+                            RegLunch = TimeSpan.Parse(Convert.ToString(reader.GetValue(6))),
+                            Descripcion = Convert.ToString(reader.GetValue(7))
+                        };
+                        Lista_Horario.Add(info);
                     }
                     else
                     {
@@ -695,7 +695,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             IdEmpresa = IdEmpresa,
                             IdTurno = Convert.ToDecimal(reader.GetValue(0)),
                             tu_descripcion = Convert.ToString(reader.GetValue(1)),
-                            Lunes = Convert.ToString(reader.GetValue(1))== "SI" ? true : false,
+                            Lunes = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
                             Martes = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
                             Miercoles = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
                             Jueves = Convert.ToString(reader.GetValue(1)) == "SI" ? true : false,
@@ -722,21 +722,20 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 tb_persona_List ListaPersona = new tb_persona_List();
                 ListaPersona.set_list(Lista_Persona, IdTransaccionSession);
 
-                //var Lista_Departamento = bus_departamento.get_list(IdEmpresa, false);
-                //ro_departamento_List ListaDepartamento = new ro_departamento_List();
-                //ListaDepartamento.set_list(Lista_Departamento, IdTransaccionSession);
+                var Lista_Bancos = bus_banco.get_list(false);
+                tb_banco_List ListaBancos = new tb_banco_List();
+                ListaBancos.set_list(Lista_Bancos, IdTransaccionSession);
 
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
-                        var info_persona = ListaPersona.get_list(IdTransaccionSession).Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(2))).FirstOrDefault();
-                        var info_persona_empleado = info_persona;
+                        tb_persona_Info info_persona = ListaPersona.get_list(IdTransaccionSession).Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(2))).FirstOrDefault();
+                        tb_persona_Info info_persona_empleado = info_persona;
                         var Naturaleza = "NATU";
                         var cedula_ruc = Convert.ToString(reader.GetValue(2));
                         var tipo_doc = Convert.ToString(reader.GetValue(3));
-
-                        //var info_departamento = ListaDepartamento.Where(q => q.de_descripcion == Convert.ToString(reader.GetValue(35)));
+                        var IdHorario = ListaHorario.get_list(IdTransaccionSession).Where(v => v.Descripcion == Convert.ToString(reader.GetValue(41))).FirstOrDefault().IdHorario;
 
                         if (cl_funciones.ValidaIdentificacion(tipo_doc, Naturaleza, cedula_ruc))
                         {
@@ -788,7 +787,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 IdPersona = info_persona_empleado.IdPersona,
                                 IdSucursal = 1,
                                 IdTipoEmpleado = "NO",
-                                //em_codigo = ,
+                                em_codigo = Convert.ToString(reader.GetValue(1)),
                                 Codigo_Biometrico = Convert.ToString(reader.GetValue(1)),
                                 em_lugarNacimiento = Convert.ToString(reader.GetValue(35)),
                                 em_fechaIngaRol = Convert.ToDateTime(reader.GetValue(13)),
@@ -796,16 +795,16 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 em_NumCta = Convert.ToString(reader.GetValue(21)),
                                 em_estado = Convert.ToString(reader.GetValue(35)),
                                 IdCodSectorial = Convert.ToInt32(reader.GetValue(16)),
-                                //IdDepartamento = Convert.ToInt32(reader.GetValue(39)),
-                                //IdTipoSangre = Convert.ToString(reader.GetValue(22)),
-                                //IdCargo = Convert.ToInt32(reader.GetValue(35)),
+                                de_descripcion = Convert.ToString(reader.GetValue(39)),
+                                IdTipoSangre = Convert.ToString(reader.GetValue(22)),
+                                ca_descripcion = Convert.ToString(reader.GetValue(40)),
                                 IdCtaCble_Emplea = null,
                                 IdCiudad = Convert.ToString(reader.GetValue(35)),
                                 em_mail = Convert.ToString(reader.GetValue(9)),
                                 IdTipoLicencia = null,
-                                IdBanco = Convert.ToString(reader.GetValue(19)),
-                                //IdArea = Convert.ToInt32(reader.GetValue(38)),
-                                //IdDivision = Convert.ToInt32(reader.GetValue(37)),
+                                ba_descripcion = Convert.ToString(reader.GetValue(19)),
+                                ar_descripcion = Convert.ToString(reader.GetValue(38)),
+                                di_descripcion = Convert.ToString(reader.GetValue(37)),
                                 por_discapacidad = 0,
                                 carnet_conadis = null,
                                 talla_pant = Convert.ToDouble(reader.GetValue(23)),
@@ -818,25 +817,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 IdAplicaConvenioDobleImposicionSRI = null,
                                 IdTipoResidenciaSRI = null,
                                 IdTipoSistemaSalarioNetoSRI = null,
-                                es_AcreditaHorasExtras = Convert.ToString(reader.GetValue(18))== "SI" ? true : false,
+                                es_AcreditaHorasExtras = Convert.ToString(reader.GetValue(18)) == "SI" ? true : false,
                                 IdTipoAnticipo = null,
                                 ValorAnticipo = null,
                                 CodigoSectorial = Convert.ToString(reader.GetValue(16)),
                                 em_AnticipoSueldo = null,
                                 Marca_Biometrico = Convert.ToString(reader.GetValue(17)) == "SI" ? true : false,
-                                //IdHorario = Convert.ToInt32(reader.GetValue(41)),
-                                //Tiene_ingresos_compartidos = false,
+                                IdHorario = Convert.ToInt32(IdHorario),
+                                Tiene_ingresos_compartidos = false,
                                 IdUsuario = SessionFixed.IdUsuario,
                                 Fecha_Transaccion = DateTime.Now,
                                 Pago_por_horas = Convert.ToString(reader.GetValue(26)) == "SI" ? true : false,
                                 Valor_horas_vespertina = Convert.ToDouble(reader.GetValue(28)),
                                 Valor_horas_brigada = Convert.ToDouble(reader.GetValue(31)),
                                 Valor_horas_matutino = Convert.ToDouble(reader.GetValue(27)),
-                                //Valor_maximo_horas_mat = Convert.ToDouble(reader.GetValue(35)),
-                                //Valor_maximo_horas_vesp = Convert.ToDouble(reader.GetValue(35)),
                                 Valor_horas_extras = null,
-                                //DiasVacaciones = 0,
-                                //GozaMasDeQuinceDiasVaciones = false,
+                                DiasVacaciones = 15,
+                                GozaMasDeQuinceDiasVaciones = false,
                             };
 
                             info.info_persona = info_persona_empleado;
@@ -851,8 +848,135 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     }
                 }
                 ListaEmpleado.set_list(Lista_Empleado);
+
+                #region division 
+                List<ro_division_Info> lista_division;
+                ro_division_List ListaDivision = new ro_division_List();
+
+                lista_division = (from q in Lista_Empleado
+                                  group q by new
+                                  {
+                                      q.IdEmpresa,
+                                      q.di_descripcion,
+                                  } into Grupo
+                                  select new ro_division_Info
+                                  {
+                                      IdEmpresa = Grupo.Key.IdEmpresa,
+                                      Descripcion = Grupo.Key.di_descripcion
+
+                                  }).ToList();
+                int secuncia = 1;
+                lista_division.ForEach(
+                     item =>
+                     {
+
+                         item.IdDivision = secuncia;
+                         secuncia++;
+                     }
+                    );
+
+                ListaDivision.set_list(lista_division, IdTransaccionSession);
                 #endregion
-            }
+
+                #region Area 
+                List<ro_area_Info> Lista_Area;
+                ro_area_List ListaArea = new ro_area_List();
+
+                Lista_Area = (from q in Lista_Empleado
+                              group q by new
+                              {
+                                  q.IdEmpresa,
+                                  q.ar_descripcion,
+                              } into Area
+                              select new ro_area_Info
+                              {
+                                  IdEmpresa = Area.Key.IdEmpresa,
+                                  Descripcion = Area.Key.ar_descripcion
+
+                              }).ToList();
+                int secuencia = 1;
+                Lista_Area.ForEach(
+                     item =>
+                     {
+                         item.IdDivision = 1;
+                         item.IdArea = secuencia;
+                         secuencia++;
+                     }
+                    );
+
+                ListaArea.set_list(Lista_Area, IdTransaccionSession);
+                #endregion
+
+                #region Departamento 
+                List<ro_departamento_Info> Lista_Departamento;
+                ro_departamento_List ListaDepartamento = new ro_departamento_List();
+
+                Lista_Departamento = (from q in Lista_Empleado
+                                      group q by new
+                                      {
+                                          q.IdEmpresa,
+                                          q.de_descripcion,
+                                      } into Departamento
+                                      select new ro_departamento_Info
+                                      {
+                                          IdEmpresa = Departamento.Key.IdEmpresa,
+                                          de_descripcion = Departamento.Key.de_descripcion
+
+                                      }).ToList();
+
+                int IdDepartamento = 1;
+                Lista_Departamento.ForEach(
+                     item =>
+                     {
+                         item.IdDepartamento = IdDepartamento;
+                         IdDepartamento++;
+                     }
+                    );
+
+                ListaDepartamento.set_list(Lista_Departamento, IdTransaccionSession);
+                #endregion
+
+                #region Cargo 
+                List<ro_cargo_Info> Lista_Cargo;
+                ro_cargo_List ListaCargo = new ro_cargo_List();
+
+                Lista_Cargo = (from q in Lista_Empleado
+                                      group q by new
+                                      {
+                                          q.IdEmpresa,
+                                          q.ca_descripcion,
+                                      } into Departamento
+                                      select new ro_cargo_Info
+                                      {
+                                          IdEmpresa = Departamento.Key.IdEmpresa,
+                                          ca_descripcion = Departamento.Key.ca_descripcion
+
+                                      }).ToList();
+
+                int IdCargo = 1;
+                Lista_Cargo.ForEach(
+                     item =>
+                     {
+                         item.IdCargo = IdCargo;
+                         IdCargo++;
+                     }
+                    );
+
+                ListaCargo.set_list(Lista_Cargo, IdTransaccionSession);
+                #endregion
+
+                Lista_Empleado.ForEach(
+                    item =>
+                    {
+                        item.IdDivision = ListaDivision.get_list(IdTransaccionSession).Where(v => v.Descripcion == item.di_descripcion).FirstOrDefault().IdDivision;
+                        item.IdArea = ListaArea.get_list(IdTransaccionSession).Where(v => v.Descripcion == item.ar_descripcion).FirstOrDefault().IdArea;
+                        item.IdDepartamento = ListaDepartamento.get_list(IdTransaccionSession).Where(v => v.de_descripcion == item.de_descripcion).FirstOrDefault().IdDepartamento;
+                        item.IdCargo = ListaCargo.get_list(IdTransaccionSession).Where(v => v.ca_descripcion == item.ca_descripcion).FirstOrDefault().IdCargo;    
+                        //item.IdBanco = ListaBancos.get_list(IdTransaccionSession).Where(v => v.ba_descripcion == item.ba_descripcion).FirstOrDefault().IdBanco;
+                    }
+                );
+                #endregion
+            };
         }
     }
     #endregion

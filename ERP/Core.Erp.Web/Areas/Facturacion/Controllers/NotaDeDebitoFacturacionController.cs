@@ -644,9 +644,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         fa_notaCreDeb_Info info = new fa_notaCreDeb_Info
                         {
                             IdEmpresa = IdEmpresa,
-                            IdSucursal = Convert.ToInt32(reader.GetValue(0)),
+                            CodDocumentoTipo = Convert.ToString(reader.GetValue(0)),
                             Ruc = Convert.ToString(reader.GetValue(1)),
-                            CodDocumentoTipo = Convert.ToString(reader.GetValue(2)),
+                            CodNota = Convert.ToString(reader.GetValue(2)),
                             sc_total = Convert.ToDouble(reader.GetValue(3)),
                             sc_saldo = Convert.ToDouble(reader.GetValue(4)),
                             no_fecha = Convert.ToDateTime(reader.GetValue(5)),
@@ -665,13 +665,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 var ListCliente = bus_cliente.get_list(IdEmpresa, false);
                 var lst = (from q in ListCliente
                            join c in ListFact
-                           on q.info_persona.pe_cedulaRuc equals c.Nombres
+                           on q.info_persona.pe_cedulaRuc equals c.Ruc
+                           join s in ListSucursal on c.CodDocumentoTipo equals s.Su_CodigoEstablecimiento
                            select new fa_notaCreDeb_Info
                            {
                                IdEmpresa = c.IdEmpresa,
-                               IdSucursal = c.IdSucursal,
+                               IdSucursal = s.IdSucursal,
                                Ruc = q.info_persona.pe_cedulaRuc,
-                               CodDocumentoTipo = c.CodDocumentoTipo,
+                               CodNota = c.CodNota,
                                sc_total = c.sc_total,
                                sc_saldo = c.sc_saldo,
                                no_fecha = c.no_fecha,
@@ -679,6 +680,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                sc_observacion = c.sc_observacion
                            }).ToList();
                 Lista_Factura = lst;
+                ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
+
                 #endregion
                 cont = 0;
                 //Para avanzar a la siguiente hoja de excel
