@@ -286,7 +286,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                             ba_Tipo = Convert.ToString(reader.GetValue(2)),
                             ba_Num_Cuenta = Convert.ToString(reader.GetValue(3)),
                             ba_num_digito_cheq = Convert.ToInt32(reader.GetValue(4)),
-                            IdCtaCble = Convert.ToString(reader.GetValue(5)),
+                            IdCtaCble = null,
                             IdUsuario = SessionFixed.IdUsuario,
                             
 
