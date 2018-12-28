@@ -26,5 +26,13 @@ namespace Core.Erp.Info.RRHH
         public string pe_nombre { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string em_codigo { get; set; }
+
+
+        #region campos vistas
+        public System.TimeSpan time_entrada1 { get; set; }
+        public System.TimeSpan time_salida1 { get; set; }
+        public System.TimeSpan HoraIni { get; set; }
+        public System.TimeSpan HoraFin { get; set; }
+        #endregion
     }
 }
