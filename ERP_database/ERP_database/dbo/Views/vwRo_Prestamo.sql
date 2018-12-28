@@ -1,4 +1,5 @@
-﻿CREATE view [vwRo_Prestamo] as
+﻿CREATE VIEW dbo.vwRo_Prestamo
+AS
 SELECT        pres.IdEmpresa, pres.IdPrestamo, pres.IdEmpleado, per_emp.pe_nombre, per_emp.pe_apellido, pres.IdRubro, rub.ru_descripcion, pres.Estado, pres.Fecha, pres.MontoSol, ISNULL(estado_can.TotalCobrado, 0) 
                          AS TotalCobrado, ISNULL(pres.MontoSol - estado_can.TotalCobrado, 0) AS Valor_pendiente, pres.NumCuotas, pres.Fecha_PriPago, pres.Observacion, pres.MotiAnula, per_emp.pe_cedulaRuc, 'EMPLEA' AS IdTipoPersona, 
                          per_emp.IdPersona, pres.IdTipoCbte, pres.IdCbteCble, pres.IdOrdenPago, pres.descuento_mensual, pres.descuento_quincena, pres.descuento_men_quin, pres.EstadoAprob, pres.IdUsuarioAprueba
