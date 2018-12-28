@@ -53,7 +53,7 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = ("el campo correo es obligatorio"))]
         public string em_mail { get; set; }
         public string IdTipoLicencia { get; set; }
-        public string IdBanco { get; set; }
+        public Nullable<int> IdBanco { get; set; }
 
         [Required(ErrorMessage = ("el campo área es obligatorio"))]
 

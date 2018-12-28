@@ -23,7 +23,7 @@
     [IdCiudad]                             VARCHAR (25)  NULL,
     [em_mail]                              VARCHAR (50)  NULL,
     [IdTipoLicencia]                       VARCHAR (10)  NULL,
-    [IdBanco]                              VARCHAR (10)  NULL,
+    [IdBanco]                              INT           NULL,
     [IdArea]                               INT           NULL,
     [IdDivision]                           INT           NULL,
     [IdUsuario]                            VARCHAR (20)  NULL,
@@ -72,10 +72,13 @@
     CONSTRAINT [FK_ro_empleado_ro_Departamento] FOREIGN KEY ([IdEmpresa], [IdDepartamento]) REFERENCES [dbo].[ro_Departamento] ([IdEmpresa], [IdDepartamento]),
     CONSTRAINT [FK_ro_empleado_ro_Division] FOREIGN KEY ([IdEmpresa], [IdDivision]) REFERENCES [dbo].[ro_Division] ([IdEmpresa], [IdDivision]),
     CONSTRAINT [FK_ro_empleado_ro_empleado] FOREIGN KEY ([IdEmpresa], [IdEmpleado_Supervisor]) REFERENCES [dbo].[ro_empleado] ([IdEmpresa], [IdEmpleado]),
+    CONSTRAINT [FK_ro_empleado_tb_banco] FOREIGN KEY ([IdBanco]) REFERENCES [dbo].[tb_banco] ([IdBanco]),
     CONSTRAINT [FK_ro_empleado_tb_ciudad] FOREIGN KEY ([IdCiudad]) REFERENCES [dbo].[tb_ciudad] ([IdCiudad]),
     CONSTRAINT [FK_ro_empleado_tb_persona] FOREIGN KEY ([IdPersona]) REFERENCES [dbo].[tb_persona] ([IdPersona]),
     CONSTRAINT [FK_ro_empleado_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 
 
 

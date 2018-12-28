@@ -12,10 +12,9 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
+    using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
@@ -128,15 +127,15 @@ namespace Core.Erp.Data
         public DbSet<ro_Parametros> ro_Parametros { get; set; }
         public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
+        public DbSet<vwro_marcaciones_x_planificacion_horario> vwro_marcaciones_x_planificacion_horario { get; set; }
+        public DbSet<ro_empleado> ro_empleado { get; set; }
+        public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
         public DbSet<ro_SancionesPorMarcaciones> ro_SancionesPorMarcaciones { get; set; }
         public DbSet<ro_SancionesPorMarcaciones_det> ro_SancionesPorMarcaciones_det { get; set; }
         public DbSet<ro_SancionesPorMarcaciones_x_novedad> ro_SancionesPorMarcaciones_x_novedad { get; set; }
         public DbSet<vwro_SancionesPorMarcaciones> vwro_SancionesPorMarcaciones { get; set; }
         public DbSet<vwro_SancionesPorMarcaciones_det> vwro_SancionesPorMarcaciones_det { get; set; }
         public DbSet<vwro_SancionesPorMarcaciones_x_novedad> vwro_SancionesPorMarcaciones_x_novedad { get; set; }
-        public DbSet<vwro_marcaciones_x_planificacion_horario> vwro_marcaciones_x_planificacion_horario { get; set; }
-        public DbSet<ro_empleado> ro_empleado { get; set; }
-        public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
