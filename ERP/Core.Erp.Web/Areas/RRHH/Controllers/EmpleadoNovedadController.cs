@@ -50,8 +50,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         
         public ActionResult CmbRubro_EmpNov()
         {
-            ro_empleado_novedad_det_Info model = new  ro_empleado_novedad_det_Info();
-            return PartialView("_CmbRubro_EmpNov", model);
+            return PartialView("_CmbRubro_EmpNov", "");
         }
         public List<ro_rubro_tipo_Info> get_list_bajo_demanda_rubro(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
@@ -169,8 +168,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult Modificar(int IdEmpleado, decimal IdNovedad)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_empleado_novedad_Info model = bus_novedad.get_info(IdEmpresa, IdEmpleado, IdNovedad);
+            model.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_novedad_det = bus_novedad_detalle_bus.get_list(IdEmpresa, IdEmpleado, IdNovedad);
