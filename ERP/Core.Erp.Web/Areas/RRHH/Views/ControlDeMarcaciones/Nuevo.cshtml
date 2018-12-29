@@ -24,14 +24,15 @@
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
 <div class="row">
-    <div class="col-md-3">
-        <div class="form-group">
-            <label for="IdNomina_Tipo">Nómina*</label>
-            @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
-            @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="IdNomina_Tipo">Nómina*</label>
+                @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
+                @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="col-md-4">
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="Fecha">Buscar marcaciones desde*</label>
                 <div class="input-group date">
@@ -50,8 +51,8 @@
                     @Html.ValidationMessageFor(q => q.FechaInicio, "", new { @class = "text-danger" })
                 </div>
             </div>
-    </div>
-    <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="Fecha">Hasta*</label>
                 <div class="input-group date">
@@ -71,6 +72,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </div>
     <div class="row">
         <div class="col-md-12">
