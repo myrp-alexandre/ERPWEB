@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Bus.General;
+using Core.Erp.Data.General;
 using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
 using System;
@@ -9,6 +10,8 @@ namespace Core.Erp.Bus.RRHH
     public class ro_empleado_Bus
     {
         ro_empleado_Data odata = new ro_empleado_Data();
+        tb_persona_Data odata_per = new tb_persona_Data();
+
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public List<ro_empleado_Info> get_list_combo(int IdEmpresa)
         {
@@ -193,5 +196,23 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public bool guardarDB_importacion(List<ro_division_Info> Lista_Division, List<ro_area_Info> Lista_Area, List<ro_departamento_Info> Lista_Departamento,List<ro_cargo_Info> Lista_Cargo,
+                                        List<ro_rubro_tipo_Info> Lista_Rubro, List<ro_horario_Info> Lista_Horario, List<ro_turno_Info> Lista_Turno, List<ro_empleado_Info> Lista_Empleado, List<ro_empleado_x_rubro_acumulado_Info> Lista_RubrosAcumulados, List<ro_nomina_tipo_Info> Lista_TipoNomina, List<ro_contrato_Info> Lista_Contrato,
+                                        List<ro_cargaFamiliar_Info> Lista_CargasFamiliares, List<ro_rol_detalle_x_rubro_acumulado_Info> Lista_ProvisionesAcumuladas, List<ro_historico_vacaciones_x_empleado_Info> Lista_VacacionesList)
+        {
+            try
+            {
+                return odata.guardarDB_importacion(Lista_Division, Lista_Area, Lista_Departamento, Lista_Cargo,
+                                                Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_RubrosAcumulados, Lista_TipoNomina, Lista_Contrato,
+                                                Lista_CargasFamiliares, Lista_ProvisionesAcumuladas, Lista_VacacionesList);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+    }
 }
