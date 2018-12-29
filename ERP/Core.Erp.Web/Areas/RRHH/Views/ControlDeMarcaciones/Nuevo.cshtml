@@ -20,7 +20,7 @@
 @using (Html.BeginForm("Nuevo", "ControlDearcaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdTransaccion)
+    @Html.HiddenFor(q => q.IdAjuste)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id= "IdTransaccionSession" })
 
     <div class="row">
@@ -39,13 +39,7 @@
                     @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="FechaInicio">Periodo*</label>
-                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), new { @class = "form-control", @id = "IdPeriodo" })
-                    @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
-                </div>
-            </div>
+           
         </div>
     </div>
     <div class="row">
@@ -53,7 +47,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="detalle">Detalle del archivo</label>
-                    @Html.Action("GridViewPartial_pagos_cheques_det")
+                    @Html.Action("GridViewPartial_control_marcaciones_det")
                 </div>
             </div>
         </div>

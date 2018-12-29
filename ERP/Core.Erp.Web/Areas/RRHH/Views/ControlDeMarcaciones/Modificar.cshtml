@@ -94,7 +94,7 @@
 @using (Html.BeginForm("Modificar", "ControlDearcaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdTransaccion)
+    @Html.HiddenFor(q => q.IdAjuste)
     @Html.HiddenFor(q => q.IdNomina_Tipo)
     @Html.HiddenFor(q => q.IdNomina_TipoLiqui)
     //@Html.HiddenFor(q => q.IdPeriodo)
@@ -117,13 +117,7 @@
                     @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="FechaInicio">Periodo*</label>
-                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), new { @class = "form-control", @id = "IdPeriodo"})
-                    @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
-                </div>
-            </div>
+           
         </div>
     </div>
     <div class="row">
