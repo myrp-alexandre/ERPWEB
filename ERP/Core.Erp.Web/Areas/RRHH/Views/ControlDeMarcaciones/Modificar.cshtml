@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_SancionesPorMarcaciones_Info
 @{
-    ViewBag.Title = "Modificar pago";
+    ViewBag.Title = "Modificar revision de marcaciones";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -112,7 +112,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IdNomina_TipoLiqui">Tipo liquidación de nómina*</label>
+                    <label for="IdNomina_TipoLiqui">Aplicar descuento en:*</label>
                     @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
@@ -124,7 +124,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="detalle">Detalle del archivo</label>
+                    <label for="detalle">Detalle del marcaciones</label>
                     @Html.Action("GridViewPartial_pagos_cheques_det")
                 </div>
             </div>
