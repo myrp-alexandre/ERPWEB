@@ -50,7 +50,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         
         public ActionResult CmbRubro_EmpNov()
         {
-            return PartialView("_CmbRubro_EmpNov", "");
+            ro_empleado_novedad_det_Info model = new  ro_empleado_novedad_det_Info();
+            return PartialView("_CmbRubro_EmpNov", model);
         }
         public List<ro_rubro_tipo_Info> get_list_bajo_demanda_rubro(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
