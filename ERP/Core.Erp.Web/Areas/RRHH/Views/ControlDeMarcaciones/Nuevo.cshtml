@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.RRHH.ro_NominasPagosCheques_Info
+﻿@model Core.Erp.Info.RRHH.ro_SancionesPorMarcaciones_Info
 @{
     ViewBag.Title = "Nueva pago";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -17,7 +17,7 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Nuevo", "PagosEnCheques", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "ControlDearcaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdTransaccion)
@@ -62,7 +62,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","PagosEnCheques",new { Area = "RRHH" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","ControlDearcaciones",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
