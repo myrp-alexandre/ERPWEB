@@ -57,7 +57,8 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
-
+                DateTime fi = FechaInicio.Date;
+                DateTime ff = FechaFin.Date;
                 List<ro_SancionesPorMarcaciones_det_Info> lista;
                 using (Entities_rrhh context = new Entities_rrhh())
                 {
@@ -65,8 +66,8 @@ namespace Core.Erp.Data.RRHH
 
                              where q.IdEmpleado == IdEmpresa
                              && q.IdNomina == IdNomina
-                             && q.es_fechaRegistro<=FechaFin
-                             && q.es_fechaRegistro>=FechaInicio
+                             && q.es_fechaRegistro<=ff
+                             && q.es_fechaRegistro>=fi
                              select new ro_SancionesPorMarcaciones_det_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
