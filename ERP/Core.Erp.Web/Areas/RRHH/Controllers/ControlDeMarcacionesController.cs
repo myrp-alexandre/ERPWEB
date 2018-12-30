@@ -189,7 +189,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
 
-        public JsonResult CargarEmpleados(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, decimal IdTransaccionSession = 0)
+        public JsonResult CargarEmpleados( DateTime FechaInicio , DateTime FechaFin, int IdNomina_Tipo = 0, decimal IdTransaccionSession = 0)
         {
            
             return Json("", JsonRequestBehavior.AllowGet);

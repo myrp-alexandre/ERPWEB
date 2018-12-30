@@ -59,21 +59,21 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    @Html.DevExpress().DateEditFor(q=> q.FecaFin, settings =>
-                {
-                    settings.Name = "FecaFin";
-                    settings.Properties.UseMaskBehavior = true;
-                    settings.Properties.EditFormat = EditFormat.Date;
-                    settings.Properties.EditFormatString = "dd/MM/yyyy";
-                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.FecaFin, "", new { @class = "text-danger" })
+                    @Html.DevExpress().DateEditFor(q=> q.FechaFin, settings =>
+               {
+                   settings.Name = "FechaFin";
+                   settings.Properties.UseMaskBehavior = true;
+                   settings.Properties.EditFormat = EditFormat.Date;
+                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+               }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.FechaFin, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
         <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Buscar</button>
+            <button type="button" onclick="buscar_marcaciones();" class="btn btn-primary">Buscar</button>
         </div>
     </div>
 </div>
@@ -134,86 +134,12 @@
 
 
 <script>
-    $(function () {
-        cargar_tipo_liquidacion_nomina();
-        cargar_periodos_x_nomina();
-        cargar_empleados();
-    });
-
-    $("#IdNomina_Tipo").change(function () {
-        cargar_tipo_liquidacion_nomina();
-        cargar_empleados();
-
-    });
-    $("#IdNomina_TipoLiqui").change(function () {
-        $("#IdPeriodo").empty();
-        cargar_periodos_x_nomina();
-    });
-    $("#IdPeriodo").change(function () {
-        cargar_empleados();
-    });
-
-
-    function cargar_tipo_liquidacion_nomina() {
-        $("#IdNomina_TipoLiqui").empty();
-
+  
+    function buscar_marcaciones() {
                 var datos = {
-                    IdNomina: $("#IdNomina_Tipo").val()
-                }
-
-                $.ajax({
-                    type: 'POST',
-                    data: JSON.stringify(datos),
-                    url: '@Url.Action("get_lst_nomina_tipo_liq", "NominaTipoLiquidacion", new { Area = "RRHH" })',
-                    async: false,
-                    bDeferRender: true,
-                    bProcessing: true,
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (data) {
-
-                        $.each(data, function (i, row) {
-                            $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
-                        });
-                        $("#IdNomina_TipoLiqui").val(2);
-                    },
-                    error: function (error) {
-                    }
-                });
-    };
-
-
-    function cargar_periodos_x_nomina() {
-        var datos = {
-            IdNomina: $("#IdNomina_Tipo").val(),
-            IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
-        }
-
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("get_lst_periodo_x_nomina","PeriodosPorNomina", new { Area = "RRHH" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-
-                $.each(data, function (i, row) {
-                    $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
-                });
-            },
-            error: function (error) {
-            }
-        });
-    };
-
-            function cargar_empleados() {
-                var datos = {
+                    FechaInicio: FechaInicio.GetValue(),
+                    FechaFin: FechaFinGetValue(),
                     IdNomina_Tipo: $("#IdNomina_Tipo").val(),
-                    IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
-                    IdPeriodo: $("#IdPeriodo").val(),
                     IdTransaccionSession: $("#IdTransaccionSession").val()
 
                 }
@@ -228,7 +154,7 @@
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
-                        GridViewPartial_pagos_cheques_det.PerformCallback();
+                        GridViewPartial_control_marcaciones_det.PerformCallback();
                     },
                     error: function (error) {
                     }

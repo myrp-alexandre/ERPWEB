@@ -27,7 +27,7 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina_Tipo = q.IdNomina_Tipo,
                                      IdNomina_TipoLiqui = q.IdNomina_TipoLiqui,
                                      FechaInicio = q.FechaInicio,
-                                     FecaFin = q.FecaFin,
+                                     FechaFin = q.FecaFin,
                                      Observacion = q.Observacion,
                                      Descripcion=q.Descripcion,
                                      DescripcionProcesoNomina=q.DescripcionProcesoNomina
@@ -56,7 +56,7 @@ namespace Core.Erp.Data.RRHH
                         IdAjuste=get_id(info.IdEmpresa),
                         IdNomina_Tipo=info.IdNomina_Tipo,
                         IdNomina_TipoLiqui=info.IdNomina_TipoLiqui,
-                        FechaInicio=info.FechaInicio, FecaFin=info.FecaFin,
+                        FechaInicio=info.FechaInicio, FecaFin=info.FechaFin,
                         Observacion=info.Observacion,
                         Fecha_Transac=DateTime.Now,
                         Estado=true
@@ -85,7 +85,7 @@ namespace Core.Erp.Data.RRHH
                     if (entity == null)
                         return false;
                     entity.FechaInicio = info.FechaInicio;
-                    entity.FecaFin = info.FecaFin;
+                    entity.FecaFin = info.FechaFin;
                     entity.Observacion = info.Observacion;
                     entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     entity.Fecha_UltMod = DateTime.Now;
@@ -144,7 +144,7 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_Tipo = entity.IdNomina_Tipo,
                         IdNomina_TipoLiqui = entity.IdNomina_TipoLiqui,
                         FechaInicio = entity.FechaInicio,
-                        FecaFin = entity.FecaFin,
+                        FechaFin = entity.FecaFin,
                         Observacion = entity.Observacion,
                     };
 
