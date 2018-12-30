@@ -27,10 +27,11 @@ namespace Core.Erp.Data.RRHH
                                      IdNomina_Tipo = q.IdNomina_Tipo,
                                      IdNomina_TipoLiqui = q.IdNomina_TipoLiqui,
                                      FechaInicio = q.FechaInicio,
-                                     FechaFin = q.FecaFin,
+                                     FechaFin = q.FechaFin,
                                      Observacion = q.Observacion,
                                      Descripcion=q.Descripcion,
-                                     DescripcionProcesoNomina=q.DescripcionProcesoNomina
+                                     DescripcionProcesoNomina=q.DescripcionProcesoNomina,
+                                     FechaNovedades=q.FechaNovedades
                                  }).ToList();
                 }
 
@@ -56,10 +57,11 @@ namespace Core.Erp.Data.RRHH
                         IdAjuste=get_id(info.IdEmpresa),
                         IdNomina_Tipo=info.IdNomina_Tipo,
                         IdNomina_TipoLiqui=info.IdNomina_TipoLiqui,
-                        FechaInicio=info.FechaInicio, FecaFin=info.FechaFin,
+                        FechaInicio=info.FechaInicio, FechaFin=info.FechaFin,
                         Observacion=info.Observacion,
                         Fecha_Transac=DateTime.Now,
-                        Estado=true
+                        Estado=true,
+                        FechaNovedades=info.FechaNovedades
 
                     };
                     Context.ro_SancionesPorMarcaciones.Add(entity);
@@ -85,8 +87,9 @@ namespace Core.Erp.Data.RRHH
                     if (entity == null)
                         return false;
                     entity.FechaInicio = info.FechaInicio;
-                    entity.FecaFin = info.FechaFin;
+                    entity.FechaFin = info.FechaFin;
                     entity.Observacion = info.Observacion;
+                    entity.FechaNovedades = info.FechaNovedades;
                     entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     entity.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();
@@ -144,8 +147,9 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_Tipo = entity.IdNomina_Tipo,
                         IdNomina_TipoLiqui = entity.IdNomina_TipoLiqui,
                         FechaInicio = entity.FechaInicio,
-                        FechaFin = entity.FecaFin,
+                        FechaFin = entity.FechaFin,
                         Observacion = entity.Observacion,
+                        FechaNovedades=entity.FechaNovedades
                     };
 
                     return info;

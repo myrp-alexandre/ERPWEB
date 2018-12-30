@@ -98,7 +98,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
            
             if (model.detalle == null || model.detalle.Count() == 0)
             {
-                ViewBag.mensaje = "No existe detalle para el pago";
+                ViewBag.mensaje = "No existe detalle de marcaciones";
                 cargar_combos(model.IdNomina_Tipo);
                 return View(model);
             }
@@ -139,7 +139,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.detalle = ro_SancionesPorMarcaciones_det_Info_list.get_list(model.IdTransaccionSession);
             if (model.detalle == null || model.detalle.Count() == 0)
             {
-                ViewBag.mensaje = "No existe detalle para el arhivo";
+                ViewBag.mensaje = "No existe detalle de marcaciones";
                 cargar_combos(model.IdNomina_Tipo);
                 return View(model);
             }
@@ -189,10 +189,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
 
-        public JsonResult CargarEmpleados( DateTime FechaInicio , DateTime FechaFin, int IdNomina_Tipo = 0, decimal IdTransaccionSession = 0)
+        public JsonResult get_marcaciones( DateTime FechaInicio , DateTime FechaFin, int IdNomina_Tipo = 0, decimal IdTransaccionSession = 0)
         {
-           
-            return Json("", JsonRequestBehavior.AllowGet);
+             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+             var lista=    bus_sanciones_det.get_list(IdEmpresa, IdNomina_Tipo, FechaInicio, FechaFin);
+             ro_SancionesPorMarcaciones_det_Info_list.set_list(lista, IdTransaccionSession);
+             return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
 

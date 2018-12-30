@@ -147,7 +147,7 @@
                 $.ajax({
                     type: 'POST',
                     data: JSON.stringify(datos),
-                    url: '@Url.Action("CargarEmpleados", "PagosEnCheques", new { Area = "RRHH" })',
+                    url: '@Url.Action("get_marcaciones", "ControlDeMarcaciones", new { Area = "RRHH" })',
                     async: false,
                     bDeferRender: true,
                     bProcessing: true,

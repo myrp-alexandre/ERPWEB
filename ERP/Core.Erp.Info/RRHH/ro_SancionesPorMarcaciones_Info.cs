@@ -15,6 +15,8 @@ namespace Core.Erp.Info.RRHH
         public int IdNomina_TipoLiqui { get; set; }
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime FechaFin { get; set; }
+        public System.DateTime FechaNovedades { get; set; }
+
         public string Observacion { get; set; }
         public bool Estado { get; set; }
         public Nullable<bool> IdUsuario { get; set; }
