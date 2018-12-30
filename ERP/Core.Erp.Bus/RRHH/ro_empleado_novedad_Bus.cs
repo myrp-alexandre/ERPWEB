@@ -86,16 +86,7 @@ namespace Core.Erp.Bus.RRHH
             try
             {
 
-                odata_det = new ro_empleado_novedad_det_Data();
-                info.TotalValor = info.lst_novedad_det.Sum(v => v.Valor);
-                info.NumCoutas = info.lst_novedad_det.Count();
-                if (odata.anularDB(info))
-                {
-                    info.lst_novedad_det.ForEach(q => { q.IdEmpresa = info.IdEmpresa; q.IdNomina_tipo = info.IdNomina_Tipo; q.IdNomina_Tipo_Liq = info.IdNomina_TipoLiqui; q.IdEmpleado = info.IdEmpleado; q.IdNovedad = info.IdNovedad; });
-                  return  odata_det.AnularD(info);
-                }
-                else
-                    return false;
+                return odata.anularDB(info);
             }
             catch (Exception)
             {

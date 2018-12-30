@@ -21,7 +21,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
         ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
         ro_empleado_novedad_det_Bus bus_novedad_detalle_bus = new ro_empleado_novedad_det_Bus();
-        ro_empleado_novedad_det_lst lst_det = new ro_empleado_novedad_det_lst();
+        ro_empleado_novedad_det_lst ro_empleado_novedad_det_lst = new ro_empleado_novedad_det_lst();
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         ro_contrato_Bus bus_contrato = new ro_contrato_Bus();
@@ -94,7 +94,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
-            model.lst_novedad_det = lst_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.lst_novedad_det = ro_empleado_novedad_det_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
         #endregion
@@ -111,7 +111,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     lst_novedad_det = new List<ro_empleado_novedad_det_Info>()
             };
             model.lst_novedad_det = new List<ro_empleado_novedad_det_Info>();
-            lst_det.set_list(model.lst_novedad_det, model.IdTransaccionSession);
+            ro_empleado_novedad_det_lst.set_list(model.lst_novedad_det, model.IdTransaccionSession);
             cargar_combos(0);
             cargar_combos_detalle();
             return View(model);
@@ -123,7 +123,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
 
 
-            model.lst_novedad_det = lst_det.get_list(model.IdTransaccionSession);
+            model.lst_novedad_det = ro_empleado_novedad_det_lst.get_list(model.IdTransaccionSession);
             if (model.lst_novedad_det == null || model.lst_novedad_det.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para la novedad";
@@ -137,7 +137,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 lst_rubros = Session["rubros"] as List<ro_rubro_tipo_Info>;
                 if (lst_rubros.Count() > 0)
                 {
-                    if (lst_rubros.Where(v => v.IdRubro == item.IdRubro).FirstOrDefault().rub_acumula_descuento)
+                    if (lst_rubros.Where(v => v.IdRubro == item.IdRubro && v.rub_acumula_descuento==true && v.ru_tipo=="E").Count() >0)
                     {
                         double sueldo = 0;
                         double valor_acumulado = 0;
@@ -169,12 +169,19 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult Modificar(int IdEmpleado, decimal IdNovedad)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_empleado_novedad_Info model = bus_novedad.get_info(IdEmpresa, IdEmpleado, IdNovedad);
+            model.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_novedad_det = bus_novedad_detalle_bus.get_list(IdEmpresa, IdEmpleado, IdNovedad);
-            lst_det.set_list(model.lst_novedad_det, model.IdTransaccionSession);
+            ro_empleado_novedad_det_lst.set_list(model.lst_novedad_det, model.IdTransaccionSession);
             cargar_combos_detalle();
             cargar_combos(model.IdNomina_Tipo);
             return View(model);
@@ -183,7 +190,32 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost]
         public ActionResult Modificar(ro_empleado_novedad_Info model)
         {
-            model.lst_novedad_det = lst_det.get_list(model.IdTransaccionSession);
+            model.lst_novedad_det = ro_empleado_novedad_det_lst.get_list(model.IdTransaccionSession);
+
+            foreach (var item in model.lst_novedad_det)
+            {
+                item.Valor = Math.Round(item.Valor, 2);
+                lst_rubros = Session["rubros"] as List<ro_rubro_tipo_Info>;
+                if (lst_rubros.Count() > 0)
+                {
+                    if (lst_rubros.Where(v => v.IdRubro == item.IdRubro && v.rub_acumula_descuento == true && v.ru_tipo == "E").Count() > 0)
+                    {
+                        double sueldo = 0;
+                        double valor_acumulado = 0;
+                        DateTime fechai = new DateTime(item.FechaPago.Year, item.FechaPago.Month, 1);
+                        DateTime fechaf = fechai.AddMonths(1).AddDays(-1);
+                        valor_acumulado = (double)bus_novedad_detalle_bus.get_valor_acumulado_del_mes_x_rubro(model.IdEmpresa, model.IdEmpleado, item.IdRubro, fechai, fechaf);
+                        sueldo = (double)bus_contrato.get_sueldo_actual(model.IdEmpresa, model.IdEmpleado);
+                        if ((valor_acumulado + item.Valor) > (sueldo) * 0.10)
+                        {
+                            ViewBag.mensaje = "Ha excedido el valor de multa permitido por la ley";
+                            cargar_combos(model.IdNomina_Tipo);
+                            return View(model);
+                        }
+
+                    }
+                }
+            }
             if (model.lst_novedad_det == null || model.lst_novedad_det.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para la planificación";
@@ -208,14 +240,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.lst_novedad_det = bus_novedad_detalle_bus.get_list(IdEmpresa, IdEmpleado, IdNovedad);
-            lst_det.set_list(model.lst_novedad_det, model.IdTransaccionSession);
+            ro_empleado_novedad_det_lst.set_list(model.lst_novedad_det, model.IdTransaccionSession);
             cargar_combos(model.IdNomina_Tipo);
             return View(model);
         }
         [HttpPost]
         public ActionResult Anular(ro_empleado_novedad_Info model)
         {
-            model.lst_novedad_det = lst_det.get_list(model.IdTransaccionSession);
+            model.lst_novedad_det = ro_empleado_novedad_det_lst.get_list(model.IdTransaccionSession);
 
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
@@ -244,9 +276,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_novedad_det_Info info_det)
         {
             if (ModelState.IsValid)
-                lst_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                ro_empleado_novedad_det_lst.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
-            model.lst_novedad_det = lst_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.lst_novedad_det = ro_empleado_novedad_det_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
 
@@ -254,17 +286,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_novedad_det_Info info_det)
         {
             if (ModelState.IsValid)
-                lst_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                ro_empleado_novedad_det_lst.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
-            model.lst_novedad_det = lst_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.lst_novedad_det = ro_empleado_novedad_det_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_novedad_det_Info info_det)
         {
-            lst_det.DeleteRow(info_det.Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ro_empleado_novedad_det_lst.DeleteRow(info_det.Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_empleado_novedad_Info model = new ro_empleado_novedad_Info();
-            model.lst_novedad_det = lst_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.lst_novedad_det = ro_empleado_novedad_det_lst.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
         #endregion
@@ -300,19 +332,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public void AddRow(ro_empleado_novedad_det_Info info_det, decimal IdTransaccionSession)
         {
+            ro_rubro_tipo_Bus bus_rub = new ro_rubro_tipo_Bus();
+            var info_rubro = bus_rub.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdRubro);
             List<ro_empleado_novedad_det_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            info_det.ru_descripcion = info_rubro.ru_descripcion;
+
             list.Add(info_det);
         }
 
         public void UpdateRow(ro_empleado_novedad_det_Info info_det, decimal IdTransaccionSession)
         {
+            ro_rubro_tipo_Bus bus_rub = new ro_rubro_tipo_Bus();
+            var info_rubro = bus_rub.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdRubro);
             ro_empleado_novedad_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdNovedad = info_det.IdNovedad;
             edited_info.IdRubro = info_det.IdRubro;
             edited_info.Valor = info_det.Valor;
             edited_info.Observacion = info_det.Observacion;
-            edited_info.ru_descripcion = info_det.ru_descripcion;
+            edited_info.ru_descripcion = info_rubro.ru_descripcion;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)

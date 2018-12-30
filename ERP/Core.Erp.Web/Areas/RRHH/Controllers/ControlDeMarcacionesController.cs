@@ -41,23 +41,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_pagos_cheques(DateTime? Fecha_ini, DateTime? Fecha_fin, decimal? IdSucursal = 0)
+        public ActionResult GridViewPartial_control_marcaciones(DateTime? Fecha_ini, DateTime? Fecha_fin, decimal? IdSucursal = 0)
         {
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_sanciones.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
-            return PartialView("_GridViewPartial_pagos_cheques", model);
+            return PartialView("_GridViewPartial_control_marcaciones", model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_pagos_cheques_det()
+        public ActionResult GridViewPartial_control_marcaciones_det()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             ro_SancionesPorMarcaciones_Info model = new ro_SancionesPorMarcaciones_Info();
             model.detalle = ro_SancionesPorMarcaciones_det_Info_list.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_pagos_cheques_det", model);
+            return PartialView("_GridViewPartial_control_marcaciones_det", model);
 
 
         }

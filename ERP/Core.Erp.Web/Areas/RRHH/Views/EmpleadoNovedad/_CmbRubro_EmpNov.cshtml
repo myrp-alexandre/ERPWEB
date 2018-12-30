@@ -1,7 +1,7 @@
 ﻿
 @using System.Web.UI.WebControls;
 @{
-   var comboBox = Html.DevExpress().ComboBox(settings =>
+    var comboBox = Html.DevExpress().ComboBox(settings =>
     {
         settings.Name = "IdRubro";
         settings.Width = Unit.Percentage(100);
@@ -22,8 +22,8 @@
         settings.Properties.FilterMinLength = 3;
 
     })
-    .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoNovedadController().get_list_bajo_demanda_rubro, new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoNovedadController().get_info_bajo_demanda_rubro)
-    .Bind(Model.IdRubro);
+     .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoNovedadController().get_list_bajo_demanda_rubro,
+      new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoNovedadController().get_info_bajo_demanda_rubro).Bind((Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_novedad_det_Info) || Model.GetType() == typeof(List<Core.Erp.Info.RRHH.ro_empleado_novedad_det_Info>)) ? "" : (Model == null ? "" : Model));
 
 }
 @comboBox.GetHtml()

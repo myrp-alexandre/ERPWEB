@@ -9,6 +9,8 @@ namespace Core.Erp.Data.RRHH
 {
   public  class ro_empleado_novedad_Data
     {
+
+        ro_empleado_Data data_empleado = new ro_empleado_Data();
         public List<ro_empleado_novedad_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin)
         {
             try
@@ -110,6 +112,7 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                int IdSucursa = data_empleado.get_info(info.IdEmpresa, info.IdEmpleado).IdSucursal;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_empleado_Novedad Entity = new ro_empleado_Novedad
@@ -120,7 +123,7 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_TipoLiqui=info.IdNomina_TipoLiqui,
                         IdEmpleado=info.IdEmpleado,
                         Fecha=info.Fecha.Date,
-                        
+                        IdSucursal=IdSucursa,
                         Observacion=info.Observacion,                     
                         Estado = info.Estado = "A",
                         IdUsuario = info.IdUsuario,

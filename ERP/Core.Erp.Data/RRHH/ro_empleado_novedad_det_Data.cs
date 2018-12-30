@@ -153,7 +153,7 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    string sql = "delete ro_empleado_novedad_det where IdEmpresa='"+info.IdEmpresa+ "' and IdEmpleado='"+info.IdEmpleado+ "' and IdNovedad='"+info.IdNovedad+"'";
+                    string sql = "delete ro_empleado_novedad_det where IdEmpresa='"+info.IdEmpresa+ "' and  IdNovedad='"+info.IdNovedad+"'";
                     Context.Database.ExecuteSqlCommand(sql);
                 }
 
@@ -165,24 +165,7 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-        public bool AnularD(ro_empleado_novedad_Info info)
-        {
-            try
-            {
-                using (Entities_rrhh Context = new Entities_rrhh())
-                {
-                    string sql = "update ro_empleado_novedad_det set Estado='I' where IdEmpresa='" + info.IdEmpresa + "' and IdEmpleado='" + info.IdEmpleado + "' and IdNovedad='" + info.IdNovedad + "'";
-                    Context.Database.ExecuteSqlCommand(sql);
-                }
-
-                return true;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+  
 
         public decimal get_valor_acumulado_del_mes_x_rubro(int IdEmpresa, decimal IdEmpleado, string IdRubro, DateTime Fi, DateTime Ff)
         {
