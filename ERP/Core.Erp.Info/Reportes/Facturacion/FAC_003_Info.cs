@@ -37,5 +37,10 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public string Su_Telefonos { get; set; }
         public string Su_Direccion { get; set; }
         public string FormaDePago { get; set; }
+        public string IdCatalogo_FormaPago { get; set; }
+        public double vt_ValorEfectivo { get; set; }
+        public double vt_Cambio { get; set; }
+        public string vt_autorizacion { get; set; }
+        public Nullable<System.DateTime> Fecha_Autorizacion { get; set; }
     }
 }

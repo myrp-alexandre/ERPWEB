@@ -48,12 +48,17 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                      Su_Descripcion = q.Su_Descripcion,
                                      Su_Direccion = q.Su_Direccion,
                                      Su_Telefonos = q.Su_Telefonos,
-                                     vt_Total = q.vt_Total
+                                     vt_Total = q.vt_Total,
+                                     Fecha_Autorizacion = q.Fecha_Autorizacion,
+                                     IdCatalogo_FormaPago = q.IdCatalogo_FormaPago,
+                                     vt_autorizacion = q.vt_autorizacion,
+                                     vt_Cambio = q.vt_Cambio,
+                                     vt_ValorEfectivo = q.vt_ValorEfectivo
                                  }).ToList();
                     
                     
                 }
-                return Lista/*.OrderBy(q => q.Secuencia).ThenBy(q => q.orden).ToList()*/;
+                return Lista;
             }
             catch (Exception)
             {

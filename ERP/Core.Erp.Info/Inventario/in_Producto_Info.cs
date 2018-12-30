@@ -57,18 +57,6 @@ namespace Core.Erp.Info.Inventario
         [StringLength(50, MinimumLength = 0, ErrorMessage = "El campo código de lote debe tener máximo 50 caracteres")]
         public string lote_num_lote { get; set; }
         public double precio_1 { get; set; }
-        public double precio_2 { get; set; }
-        public string signo_2 { get; set; }
-        public double porcentaje_2 { get; set; }
-        public double precio_3 { get; set; }
-        public string signo_3 { get; set; }
-        public double porcentaje_3 { get; set; }
-        public double precio_4 { get; set; }
-        public string signo_4 { get; set; }
-        public double porcentaje_4 { get; set; }
-        public double precio_5 { get; set; }
-        public string signo_5 { get; set; }
-        public double porcentaje_5 { get; set; }
         public bool se_distribuye { get; set; }
         public byte[] pr_logo { get; set; }
 

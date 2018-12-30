@@ -1,93 +1,30 @@
-﻿CREATE PROCEDURE web.SPFAC_010
+﻿CREATE PROCEDURE [web].[SPFAC_010]
 (
 @IdEmpresa int,
-@IdProducto_ini numeric,
-@IdProducto_fin numeric,
-@IdCategoria varchar(20),
-@IdLinea int,
-@IdGrupo int,
-@IdSubGrupo int,
-@IdMarcaIni int,
-@IdMarcaFin int
+@IdSucursalIni int, 
+@IdSucursalFin int,
+@FechaIni datetime,
+@FechaFin datetime
 )
 AS
-
-delete [web].[fa_SPFAC_010]
-
-INSERT INTO [web].[fa_SPFAC_010]
-           ([IdEmpresa]
-           ,[IdProducto]
-           ,[IdProductoTipo]
-           ,[IdMarca]
-           ,[IdCategoria]
-           ,[IdLinea]
-           ,[IdGrupo]
-           ,[IdSubGrupo]
-           ,[IdPresentacion]
-           ,[NomProducto]
-           ,[NomPresentacion]
-           ,[NomMarca]
-           ,[NomTipoProducto]
-           ,[NomCategoria]
-           ,[NomLinea]
-           ,[NomGrupo]
-           ,[NomSubGrupo]
-           ,[PRECIO1]
-           ,[PRECIO2]
-           ,[PRECIO3]
-           ,[PRECIO4]
-           ,[PRECIO5]
-           ,[Estado])
-
-SELECT        in_Producto.IdEmpresa, in_Producto.IdProducto, in_Producto.IdProductoTipo, in_Producto.IdMarca, in_Producto.IdCategoria, in_Producto.IdLinea, in_Producto.IdGrupo, in_Producto.IdSubGrupo, in_Producto.IdPresentacion, 
-                         in_Producto.pr_descripcion AS NomProducto, in_presentacion.nom_presentacion AS NomPresentacion, in_Marca.Descripcion AS NomMarca, in_ProductoTipo.tp_descripcion AS NomTipoProducto, 
-                         in_categorias.ca_Categoria AS NomCategoria, in_linea.nom_linea AS NomLinea, in_grupo.nom_grupo AS NomGrupo, in_subgrupo.nom_subgrupo AS NomSubGrupo, in_Producto.precio_1 AS PRECIO1, 
-                         in_Producto.precio_2 AS PRECIO2, in_Producto.precio_3 AS PRECIO3, in_Producto.precio_4 AS PRECIO4, in_Producto.precio_5 AS PRECIO5, in_Producto.Estado
-FROM            in_ProductoTipo RIGHT OUTER JOIN
-                         in_Producto LEFT OUTER JOIN
-                         in_Marca ON in_Producto.IdEmpresa = in_Marca.IdEmpresa AND in_Producto.IdMarca = in_Marca.IdMarca ON in_ProductoTipo.IdEmpresa = in_Producto.IdEmpresa AND 
-                         in_ProductoTipo.IdProductoTipo = in_Producto.IdProductoTipo LEFT OUTER JOIN
-                         in_presentacion ON in_Producto.IdEmpresa = in_presentacion.IdEmpresa AND in_Producto.IdPresentacion = in_presentacion.IdPresentacion LEFT OUTER JOIN
-                         in_grupo INNER JOIN
-                         in_subgrupo ON in_grupo.IdEmpresa = in_subgrupo.IdEmpresa AND in_grupo.IdCategoria = in_subgrupo.IdCategoria AND in_grupo.IdLinea = in_subgrupo.IdLinea AND in_grupo.IdGrupo = in_subgrupo.IdGrupo INNER JOIN
-                         in_linea ON in_grupo.IdEmpresa = in_linea.IdEmpresa AND in_grupo.IdCategoria = in_linea.IdCategoria AND in_grupo.IdLinea = in_linea.IdLinea INNER JOIN
-                         in_categorias ON in_linea.IdEmpresa = in_categorias.IdEmpresa AND in_linea.IdCategoria = in_categorias.IdCategoria ON in_Producto.IdEmpresa = in_subgrupo.IdEmpresa AND 
-                         in_Producto.IdCategoria = in_subgrupo.IdCategoria AND in_Producto.IdLinea = in_subgrupo.IdLinea AND in_Producto.IdGrupo = in_subgrupo.IdGrupo AND in_Producto.IdSubGrupo = in_subgrupo.IdSubgrupo
-WHERE        (in_Producto.IdProducto_padre IS NULL) AND (in_Producto.Estado = 'A') AND in_Producto.IdEmpresa = @IdEmpresa AND in_Producto.IdMarca BETWEEN @IdMarcaIni AND @IdMarcaFin AND in_Producto.IdProducto BETWEEN @IdProducto_ini AND @IdProducto_fin
-
-
-BEGIN --FILTRO POR CATEGORIZACION
-	IF(@IdCategoria != '')
-	BEGIN
-		IF(@IdLinea != 0)
-			BEGIN
-				IF(@IdGrupo != 0)
-					BEGIN
-						IF(@IdSubGrupo != 0)
-							BEGIN
-								DELETE [web].[fa_SPFAC_010] 
-								WHERE IdCategoria !=  @IdCategoria
-								AND IdLinea != @IdLinea
-								AND IdGrupo != @IdGrupo
-								AND IdSubGrupo != @IdSubGrupo
-							END
-						ELSE
-							DELETE [web].[fa_SPFAC_010] 
-							WHERE IdCategoria !=  @IdCategoria
-							AND IdLinea != @IdLinea
-							AND IdGrupo != @IdGrupo
-
-					END
-				ELSE
-					DELETE [web].[fa_SPFAC_010] 
-					WHERE IdCategoria != @IdCategoria
-					AND IdLinea != @IdLinea
-			END
-		ELSE
-			DELETE [web].[fa_SPFAC_010] 
-			WHERE IdCategoria <> @IdCategoria
-
-	END
-END
-
-SELECT * FROM [web].[fa_SPFAC_010]
+SELECT        c.IdEmpresa, c.IdSucursal, c.IdBodega, c.IdCbteVta, c.vt_serie1 + '-' + c.vt_serie2 + '-' + c.vt_NumFactura AS vt_NumFactura, c.IdCliente, per.pe_nombreCompleto, cat.Nombre AS NombreFormaPago, c.IdCatalogo_FormaPago, c.Estado, 
+                         c.vt_fecha, ve.Ve_Vendedor, c.IdVendedor, tb_sucursal.Su_Descripcion, tb_sucursal.Su_Telefonos, tb_sucursal.Su_Direccion, tb_sucursal.Su_Ruc,
+						 d.SubtotalIVA, d.SubtotalSinIVA, d.vt_iva, d.vt_total
+FROM            fa_factura AS c INNER JOIN
+                         fa_cliente AS cli ON c.IdEmpresa = cli.IdEmpresa AND c.IdCliente = cli.IdCliente INNER JOIN
+                         tb_persona AS per ON cli.IdPersona = per.IdPersona INNER JOIN
+                         fa_Vendedor AS ve ON c.IdEmpresa = ve.IdEmpresa AND c.IdVendedor = ve.IdVendedor INNER JOIN
+                         tb_sucursal ON c.IdEmpresa = tb_sucursal.IdEmpresa AND c.IdSucursal = tb_sucursal.IdSucursal LEFT OUTER JOIN
+                         fa_catalogo AS cat ON c.IdCatalogo_FormaPago = cat.IdCatalogo
+						 left join(
+							SELECT        IdEmpresa, IdSucursal, IdBodega, IdCbteVta, sum(SubtotalSinIVA) SubtotalSinIVA, sum(SubtotalIVA) SubtotalIVA, sum(vt_iva)vt_iva, sum(vt_total)vt_total
+							FROM            (SELECT        fa_factura.IdEmpresa, fa_factura.IdSucursal, fa_factura.IdBodega, fa_factura.IdCbteVta, CASE WHEN fa_factura_det.vt_por_iva = 0 THEN fa_factura_det.vt_Subtotal ELSE 0 END AS SubtotalSinIVA, 
+							CASE WHEN fa_factura_det.vt_por_iva > 0 THEN fa_factura_det.vt_Subtotal ELSE 0 END AS SubtotalIVA, fa_factura_det.vt_iva, fa_factura_det.vt_Subtotal * fa_factura_det.vt_iva AS vt_total
+							FROM            fa_factura INNER JOIN
+							fa_factura_det ON fa_factura.IdEmpresa = fa_factura_det.IdEmpresa AND fa_factura.IdSucursal = fa_factura_det.IdSucursal AND fa_factura.IdBodega = fa_factura_det.IdBodega AND 
+							fa_factura.IdCbteVta = fa_factura_det.IdCbteVta
+							where fa_factura.IdEmpresa = @IdEmpresa and fa_factura.IdSucursal between @IdSucursalIni and @IdSucursalFin and fa_factura.vt_fecha between @FechaIni and @FechaFin
+							) AS Det
+							GROUP BY IdEmpresa, IdSucursal, IdBodega, IdCbteVta
+						 ) as d on c.IdEmpresa = d.IdEmpresa and c.IdSucursal = d.IdSucursal and c.IdBodega = d.IdBodega and c.IdCbteVta = d.IdCbteVta
+						 where c.IdEmpresa = @IdEmpresa and c.IdSucursal between @IdSucursalIni and @IdSucursalFin and c.vt_fecha between @FechaIni and @FechaFin

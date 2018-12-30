@@ -19,38 +19,10 @@ namespace Core.Erp.Data.Reportes.Facturacion
 
                 int IdMarca_ini = IdMarca;
                 int IdMarca_fin = IdMarca == 0 ? 9999 : IdMarca;
-                List<FAC_010_Info> Lista;
+                List<FAC_010_Info> Lista = new List<FAC_010_Info>();
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPFAC_010(IdEmpresa, IdProducto_ini, IdPrducto_fin, IdCategoria, IdLinea, IdGrupo, IdSubGrupo, IdMarca_ini, IdMarca_fin)
-                             select new FAC_010_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdProducto = q.IdProducto, 
-                                 IdCategoria = q.IdCategoria,
-                                 IdLinea = q.IdLinea, 
-                                 IdGrupo = q.IdGrupo,
-                                 IdSubGrupo = q.IdSubGrupo,
-                                 Estado =q.Estado,
-                                 IdMarca = q.IdMarca,
-                                 IdPresentacion = q.IdPresentacion,
-                                 IdProductoTipo = q.IdProductoTipo,
-                                 NomCategoria = q.NomCategoria,
-                                 NomGrupo = q.NomGrupo,
-                                 NomLinea = q.NomLinea,
-                                 NomMarca = q.NomMarca,
-                                 NomPresentacion = q.NomPresentacion,
-                                NomProducto = q.NomProducto,
-                                 NomSubGrupo = q.NomSubGrupo,
-                                 NomTipoProducto = q.NomTipoProducto,
-                                 PRECIO1 = q.PRECIO1,
-                                 PRECIO2 = q.PRECIO2,
-                                 PRECIO3 = q.PRECIO3,
-                                 PRECIO4 =q.PRECIO4,
-                                 PRECIO5 = q.PRECIO5
-                                 
-
-                             }).ToList();
+                    
                 }
                 return Lista;
             }

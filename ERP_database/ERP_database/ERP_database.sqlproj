@@ -812,7 +812,6 @@
     <Build Include="dbo\Views\vwIMP_Rpt002.sql" />
     <Build Include="dbo\Views\vwro_rubro_tipo.sql" />
     <Build Include="dbo\Views\vwfa_factura_sin_guia.sql" />
-    <Build Include="dbo\Views\vwin_producto.sql" />
     <Build Include="web\Views\vwfa_notaCreDeb_x_fa_factura_NotaDeb.sql" />
     <Build Include="dbo\Views\vwfa_proforma.sql" />
     <Build Include="web\Views\VWFAC_006.sql" />
@@ -961,7 +960,6 @@
     <Build Include="EntidadRegulatoria\Views\vwrdep_IngrEgr_x_Empleado.sql" />
     <Build Include="EntidadRegulatoria\Views\vwrdep_gastos_x_rubros_deducibles.sql" />
     <Build Include="web\Tables\fa_SPFAC_010.sql" />
-    <Build Include="web\Stored Procedures\SPFAC_010.sql" />
     <Build Include="web\Stored Procedures\SPCXC_005.sql" />
     <Build Include="web\Stored Procedures\SPINV_012.sql" />
     <Build Include="web\Stored Procedures\SPINV_004.sql" />
@@ -1071,6 +1069,7 @@
     <Build Include="dbo\Views\vwro_SancionesPorMarcaciones_x_novedad_1.sql" />
     <Build Include="dbo\Views\vwro_SancionesPorMarcaciones_det_1.sql" />
     <Build Include="dbo\Views\vwro_SancionesPorMarcaciones_1.sql" />
+    <Build Include="web\Stored Procedures\SPFAC_010.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

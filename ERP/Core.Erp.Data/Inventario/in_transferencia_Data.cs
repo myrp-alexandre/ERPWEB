@@ -79,8 +79,6 @@ namespace Core.Erp.Data.Inventario
                         tr_fecha = Convert.ToDateTime(info.tr_fecha.ToShortDateString()),
                         Estado = "A",
                         IdUsuario = (info.IdUsuario == null) ? "" : info.IdUsuario,
-                        ip = (info.ip == null) ? "" : info.ip,
-                        nom_pc = (info.nom_pc == null) ? "" : info.nom_pc,
                         IdEstadoAprobacion_cat = info.IdEstadoAprobacion_cat,
                         Codigo = info.Codigo,
                     };

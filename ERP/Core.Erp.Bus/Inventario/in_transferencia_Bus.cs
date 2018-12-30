@@ -121,8 +121,6 @@ namespace Core.Erp.Bus.Inventario
                 ingreso.CodMoviInven = "0";
                 ingreso.cm_fecha = info.tr_fecha;
                 ingreso.IdUsuario = info.IdUsuario;
-                ingreso.nom_pc = info.nom_pc;
-                ingreso.ip = info.ip;
                 ingreso.Fecha_Transac = info.tr_fecha;
                 ingreso.signo = "+";
                 ingreso.IdSucursal = info.IdSucursalDest;
@@ -142,8 +140,6 @@ namespace Core.Erp.Bus.Inventario
                 egreso.CodMoviInven = "0";
                 egreso.cm_fecha = info.tr_fecha;
                 egreso.IdUsuario = info.IdUsuario;
-                egreso.nom_pc = info.nom_pc;
-                egreso.ip = info.ip;
                 egreso.Fecha_Transac = info.tr_fecha;
                 egreso.signo = "-";
                 egreso.IdSucursal = info.IdSucursalDest;
