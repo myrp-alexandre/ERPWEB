@@ -73,11 +73,11 @@ namespace Core.Erp.Data
         public DbSet<fa_cliente_tipo> fa_cliente_tipo { get; set; }
         public DbSet<vwfa_PuntoVta> vwfa_PuntoVta { get; set; }
         public DbSet<fa_formaPago> fa_formaPago { get; set; }
-        public DbSet<fa_factura> fa_factura { get; set; }
         public DbSet<fa_NivelDescuento> fa_NivelDescuento { get; set; }
         public DbSet<fa_PuntoVta> fa_PuntoVta { get; set; }
         public DbSet<fa_cliente> fa_cliente { get; set; }
         public DbSet<fa_TipoNota> fa_TipoNota { get; set; }
         public DbSet<fa_proforma> fa_proforma { get; set; }
+        public DbSet<fa_factura> fa_factura { get; set; }
     }
 }
