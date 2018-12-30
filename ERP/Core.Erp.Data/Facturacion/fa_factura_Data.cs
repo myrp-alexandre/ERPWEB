@@ -155,7 +155,8 @@ namespace Core.Erp.Data.Facturacion
                         Estado = Entity.Estado,
                         esta_impresa = Entity.esta_impresa,
                         valor_abono = Entity.valor_abono,
-                        IdNivel = Entity.IdNivel
+                        IdNivel = Entity.IdNivel,
+                        IdCatalogo_FormaPago = Entity.IdCatalogo_FormaPago,
                     };
                 }
                 return info;
