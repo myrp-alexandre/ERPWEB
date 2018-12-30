@@ -123,6 +123,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Nuevo(fa_cliente_Info model)
         {
+            string return_naturaleza = "";
             model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(model.IdTransaccionSession);
             model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
@@ -132,8 +133,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             model.IdUsuario = Session["IdUsuario"].ToString();
-            if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc)))
+            if (cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc, ref return_naturaleza))
             {
+                model.info_persona.pe_Naturaleza = return_naturaleza;
                 if (!bus_cliente.guardarDB(model))
                 {
                     cargar_combos(model);
@@ -273,14 +275,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
                 foreach (var item in Lista_Cliente)
                 {
-                    if ((cl_funciones.ValidaIdentificacion(item.info_persona.IdTipoDocumento, item.info_persona.pe_Naturaleza, item.info_persona.pe_cedulaRuc)))
-                    {
+                    //if ((cl_funciones.ValidaIdentificacion(item.info_persona.IdTipoDocumento, item.info_persona.pe_Naturaleza, item.info_persona.pe_cedulaRuc)))
+                    //{
                         if (!bus_cliente.guardarDB_importacion(item))
                         {
                             ViewBag.mensaje = "Error al importar el archivo";
                             return View(model);
                         }
-                    }
+                    //}
             }
             }
             catch (Exception ex)
@@ -503,6 +505,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
+                        var return_naturaleza="";
+
                         tb_persona_Info info_persona = new tb_persona_Info();
                         tb_persona_Info info_persona_cliente = new tb_persona_Info();
 
@@ -510,7 +514,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         info_persona = lst_persona.Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
                         info_persona_cliente = info_persona;
 
-                        if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3))))
+                        if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3)), ref return_naturaleza ))
                         {
                             if (info_persona == null)
                             {
@@ -546,6 +550,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                 info_persona_cliente.pe_celular = Convert.ToString(reader.GetValue(11));
                                 info_persona_cliente.pe_correo = Convert.ToString(reader.GetValue(8));
                             }
+
+                            info_persona_cliente.pe_Naturaleza = return_naturaleza;
 
                             fa_cliente_Info info = new fa_cliente_Info
                             {
@@ -586,8 +592,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
                             if (Lista_Cliente.Where(q => q.info_persona.pe_cedulaRuc == info_persona_cliente.pe_cedulaRuc).Count() == 0)
                                 Lista_Cliente.Add(info);
-
-
                         }
                     }
                     else
