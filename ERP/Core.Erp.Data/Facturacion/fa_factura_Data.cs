@@ -139,17 +139,14 @@ namespace Core.Erp.Data.Facturacion
                         vt_serie2 = Entity.vt_serie2,
                         vt_NumFactura = Entity.vt_NumFactura,
                         Fecha_Autorizacion = Entity.fecha_primera_cuota,
-                        vt_anio = Entity.vt_anio,
                         vt_autorizacion = Entity.vt_autorizacion,
                         vt_fecha = Entity.vt_fecha,
                         vt_fech_venc = Entity.vt_fech_venc,
-                        vt_mes = Entity.vt_mes,
                         IdCliente = Entity.IdCliente,
                         IdContacto = Entity.IdContacto,
                         IdVendedor = Entity.IdVendedor,
                         vt_plazo = Entity.vt_plazo,
                         vt_Observacion = Entity.vt_Observacion,
-                        IdPeriodo = Entity.IdPeriodo,
                         vt_tipo_venta = Entity.vt_tipo_venta,
                         IdCaja = Entity.IdCaja,
                         IdPuntoVta = Entity.IdPuntoVta,
@@ -220,17 +217,15 @@ namespace Core.Erp.Data.Facturacion
                     vt_serie2 = info.vt_serie2,
                     vt_NumFactura = info.vt_NumFactura,
                     Fecha_Autorizacion = info.Fecha_Autorizacion,
-                    vt_anio = info.vt_anio,
                     vt_autorizacion = info.vt_autorizacion,
                     vt_fecha = info.vt_fecha.Date,
                     vt_fech_venc = info.vt_fech_venc.Date,
-                    vt_mes = info.vt_mes,
                     IdCliente = info.IdCliente,
                     IdContacto = info.IdContacto,
                     IdVendedor = info.IdVendedor,
                     vt_plazo = info.vt_plazo,
                     vt_Observacion = string.IsNullOrEmpty(info.vt_Observacion) ? "" : info.vt_Observacion,
-                    IdPeriodo = info.IdPeriodo,
+                    IdCatalogo_FormaPago = info.IdCatalogo_FormaPago,
                     vt_tipo_venta = info.vt_tipo_venta,
                     IdCaja = info.IdCaja,
                     IdPuntoVta = info.IdPuntoVta,
@@ -439,7 +434,7 @@ namespace Core.Erp.Data.Facturacion
                     IdCbteCble = 0,
                     cb_Fecha = info.vt_fecha.Date,
                     IdSucursal = info.IdSucursal,
-                    IdPeriodo = info.IdPeriodo,
+                    
                     IdUsuario = info.IdUsuario,
                     IdUsuarioUltModi = info.IdUsuarioUltModi,
                     cb_Observacion = "FACT# " + info.vt_serie1 + "-" + info.vt_serie2 + "-" + info.vt_NumFactura + " " + "CLIENTE: " + nomContacto + " " + info.vt_Observacion,
@@ -697,17 +692,15 @@ namespace Core.Erp.Data.Facturacion
                 #region Cabecera
                 fa_factura Entity = db_f.fa_factura.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCbteVta == info.IdCbteVta);
                 if (Entity == null) return false;
-
-                Entity.vt_anio = info.vt_anio;
+                
                 Entity.vt_fecha = info.vt_fecha.Date;
                 Entity.vt_fech_venc = info.vt_fech_venc.Date;
-                Entity.vt_mes = info.vt_mes;
                 Entity.IdCliente = info.IdCliente;
                 Entity.IdContacto = info.IdContacto;
                 Entity.IdVendedor = info.IdVendedor;
                 Entity.vt_plazo = info.vt_plazo;
                 Entity.vt_Observacion = string.IsNullOrEmpty(info.vt_Observacion) ? "" : info.vt_Observacion;
-                Entity.IdPeriodo = info.IdPeriodo;
+                Entity.IdCatalogo_FormaPago = info.IdCatalogo_FormaPago;
                 Entity.vt_tipo_venta = info.vt_tipo_venta;
                 Entity.fecha_primera_cuota = info.fecha_primera_cuota;
                 Entity.valor_abono = info.valor_abono;

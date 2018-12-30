@@ -38,14 +38,12 @@ namespace Core.Erp.Data
         public Nullable<int> IdContacto { get; set; }
         public int IdVendedor { get; set; }
         public int IdNivel { get; set; }
+        public string IdCatalogo_FormaPago { get; set; }
         public System.DateTime vt_fecha { get; set; }
         public decimal vt_plazo { get; set; }
         public System.DateTime vt_fech_venc { get; set; }
         public string vt_tipo_venta { get; set; }
         public string vt_Observacion { get; set; }
-        public int IdPeriodo { get; set; }
-        public int vt_anio { get; set; }
-        public int vt_mes { get; set; }
         public string Estado { get; set; }
         public int IdCaja { get; set; }
         public string IdUsuario { get; set; }
@@ -64,6 +62,8 @@ namespace Core.Erp.Data
         public double vt_ValorEfectivo { get; set; }
         public double vt_Cambio { get; set; }
     
+        public virtual fa_catalogo fa_catalogo { get; set; }
+        public virtual fa_cliente fa_cliente { get; set; }
         public virtual fa_cliente_contactos fa_cliente_contactos { get; set; }
         public virtual ICollection<fa_cuotas_x_doc> fa_cuotas_x_doc { get; set; }
         public virtual ICollection<fa_factura_det> fa_factura_det { get; set; }
@@ -73,6 +73,5 @@ namespace Core.Erp.Data
         public virtual ICollection<fa_factura_x_ct_cbtecble> fa_factura_x_ct_cbtecble { get; set; }
         public virtual ICollection<fa_factura_x_fa_guia_remision> fa_factura_x_fa_guia_remision { get; set; }
         public virtual ICollection<fa_factura_x_in_Ing_Egr_Inven> fa_factura_x_in_Ing_Egr_Inven { get; set; }
-        public virtual fa_cliente fa_cliente { get; set; }
     }
 }

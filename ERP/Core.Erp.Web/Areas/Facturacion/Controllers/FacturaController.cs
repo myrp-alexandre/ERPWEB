@@ -196,9 +196,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
             i_validar.lst_cuota = List_cuotas.get_list(i_validar.IdTransaccionSession);
             i_validar.IdBodega = (int)bus_punto_venta.get_info(i_validar.IdEmpresa, i_validar.IdSucursal, Convert.ToInt32(i_validar.IdPuntoVta)).IdBodega;
-            i_validar.IdPeriodo = Convert.ToInt32(i_validar.vt_fecha.ToString("yyyyMM"));
-            i_validar.vt_mes = i_validar.vt_fecha.Month;
-            i_validar.vt_anio = i_validar.vt_fecha.Year;
             i_validar.IdCaja = 1;
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltModi = SessionFixed.IdUsuario;
