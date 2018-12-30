@@ -203,10 +203,28 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
-                return odata.guardarDB_importacion(Lista_Division, Lista_Area, Lista_Departamento, Lista_Cargo,
+                foreach (var item in Lista_Empleado)
+                {
+                    if (item.info_persona.IdPersona == 0)
+                    {
+                        item.info_persona = odata_per.armar_info(item.info_persona);
+                        if (odata_per.guardarDB(item.info_persona))
+                        {
+                            item.IdPersona = item.info_persona.IdPersona;
+                            return odata.guardarDB_importacion(Lista_Division, Lista_Area, Lista_Departamento, Lista_Cargo,
                                                 Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_RubrosAcumulados, Lista_TipoNomina, Lista_Contrato,
                                                 Lista_CargasFamiliares, Lista_ProvisionesAcumuladas, Lista_VacacionesList);
-
+                        }
+                    }
+                    else
+                    {
+                        if(odata_per.modificarDB(item.info_persona))
+                            return odata.guardarDB_importacion(Lista_Division, Lista_Area, Lista_Departamento, Lista_Cargo,
+                                                Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_RubrosAcumulados, Lista_TipoNomina, Lista_Contrato,
+                                                Lista_CargasFamiliares, Lista_ProvisionesAcumuladas, Lista_VacacionesList);
+                    }
+                }
+                return true;                  
             }
             catch (Exception)
             {

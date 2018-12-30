@@ -638,7 +638,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 #region Rubro                
                 while (reader.Read())
                 {
-                    var orden = 0;
+                    var orden = 1;
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
 
@@ -646,12 +646,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                         {
                             IdEmpresa = IdEmpresa,
                             IdRubro = Convert.ToString(reader.GetValue(0)),
-                            rub_codigo = Convert.ToString(reader.GetString(1)),
-                            ru_codRolGen = Convert.ToString(reader.GetString(2)),
+                            rub_codigo = Convert.ToString(reader.GetString(2)),
+                            ru_codRolGen = Convert.ToString(reader.GetString(1)),
                             ru_descripcion = Convert.ToString(reader.GetValue(3)),
                             NombreCorto = Convert.ToString(reader.GetValue(4)),
-                            ru_tipo = Convert.ToString(reader.GetValue(6)),
-                            ru_estado = Convert.ToString(reader.GetValue(7)),
+                            ru_tipo = Convert.ToString(reader.GetValue(5)),
+                            ru_estado = "A",
                             ru_orden = orden++,
                             rub_concep = false,
                             rub_ctacon = Convert.ToString(reader.GetValue(9)),
@@ -748,6 +748,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 #region Empleado  
                 var lst_persona = bus_persona.get_list(false);
                 var lst_banco = bus_banco.get_list(false);
+                var lst_catalogo_tipo_empleado = bus_catalogorrhh.get_list_x_tipo(8);
+                //var lst_ciudad = bus_ciudad.get_list();
+                List<ro_empleado_x_rubro_acumulado_Info> Lista_RubrosAcumulados = new List<ro_empleado_x_rubro_acumulado_Info>();
+                ro_empleado_x_rubro_acumulado_List ListaRubrosAcumulados = new ro_empleado_x_rubro_acumulado_List();
+                var IdEmpleado_guardar = 1;
 
                 while (reader.Read())
                 {
@@ -758,7 +763,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                         var Naturaleza = "NATU";
                         var cedula_ruc = Convert.ToString(reader.GetValue(2));
                         var tipo_doc = Convert.ToString(reader.GetValue(3));
+                        var tipo_empleado = lst_catalogo_tipo_empleado.Where(q => q.CodCatalogo == Convert.ToString(reader.GetValue(14))).FirstOrDefault();
                         var IdHorario = ListaHorario.get_list(IdTransaccionSession).Where(v => v.Descripcion == Convert.ToString(reader.GetValue(41))).FirstOrDefault().IdHorario;
+                        //var IdCiudad_empleado = Convert.ToString(reader.GetValue(35));
 
                         if (cl_funciones.ValidaIdentificacion(tipo_doc, Naturaleza, cedula_ruc))
                         {
@@ -800,42 +807,42 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 info_persona_empleado.pe_correo = Convert.ToString(reader.GetValue(9));
                                 info_persona_empleado.pe_sexo = Convert.ToString(reader.GetValue(10));
                                 info_persona_empleado.IdEstadoCivil = Convert.ToString(reader.GetValue(11));
-                                info_persona_empleado.pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(2));
+                                info_persona_empleado.pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(12));
                             }
 
                             ro_empleado_Info info = new ro_empleado_Info
                             {
-
                                 IdEmpresa = IdEmpresa,
-                                IdEmpleado = Convert.ToDecimal(reader.GetValue(0)),
+                                IdEmpleado = IdEmpleado_guardar++,
                                 pe_cedulaRuc = info_persona_empleado.pe_cedulaRuc,
                                 IdPersona = info_persona_empleado.IdPersona,
                                 IdSucursal = 1,
-                                IdTipoEmpleado = "NO",
+                                IdTipoEmpleado = (tipo_empleado==null) ? "NO": tipo_empleado.CodCatalogo,
                                 em_codigo = Convert.ToString(reader.GetValue(1)),
                                 Codigo_Biometrico = Convert.ToString(reader.GetValue(1)),
                                 em_lugarNacimiento = Convert.ToString(reader.GetValue(35)),
                                 em_fechaIngaRol = Convert.ToDateTime(reader.GetValue(13)),
                                 em_tipoCta = Convert.ToString(reader.GetValue(20)),
                                 em_NumCta = Convert.ToString(reader.GetValue(21)),
-                                em_estado = Convert.ToString(reader.GetValue(35)),
+                                em_estado = "A",
                                 CodigoSectorial = Convert.ToString(reader.GetValue(16)),
                                 de_descripcion = Convert.ToString(reader.GetValue(39)),
                                 IdTipoSangre = Convert.ToString(reader.GetValue(22)),
                                 ca_descripcion = Convert.ToString(reader.GetValue(40)),
                                 IdCtaCble_Emplea = null,
-                                IdCiudad = Convert.ToString(reader.GetValue(35)),
+                                IdCiudad = null,
                                 em_mail = Convert.ToString(reader.GetValue(9)),
                                 IdTipoLicencia = null,
                                 ba_descripcion = Convert.ToString(reader.GetValue(19)),
                                 ar_descripcion = Convert.ToString(reader.GetValue(38)),
                                 di_descripcion = Convert.ToString(reader.GetValue(37)),
+                                ho_descripcion = Convert.ToString(reader.GetValue(41)),
                                 por_discapacidad = 0,
                                 carnet_conadis = null,
                                 talla_pant = Convert.ToDouble(reader.GetValue(23)),
                                 talla_camisa = Convert.ToString(reader.GetValue(24)),
                                 talla_zapato = Convert.ToDouble(reader.GetValue(25)),
-                                em_status = "A",
+                                em_status = "EST_ACT",
                                 IdCondicionDiscapacidadSRI = null,
                                 IdTipoIdentDiscapacitadoSustitutoSRI = null,
                                 IdentDiscapacitadoSustitutoSRI = null,
@@ -857,7 +864,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 Valor_horas_matutino = Convert.ToDouble(reader.GetValue(27)),
                                 Valor_horas_extras = null,
                                 DiasVacaciones = 15,
-                                GozaMasDeQuinceDiasVaciones = false,
+                                GozaMasDeQuinceDiasVaciones = false
                             };
 
                             info.info_persona = info_persona_empleado;
@@ -865,10 +872,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             if (Lista_Empleado.Where(q => q.info_persona.pe_cedulaRuc == info_persona_empleado.pe_cedulaRuc).Count() == 0)
                                 Lista_Empleado.Add(info);
 
-                            #region RubrosAcumulados 
-                            List<ro_empleado_x_rubro_acumulado_Info> Lista_RubrosAcumulados = new List<ro_empleado_x_rubro_acumulado_Info>();
-                            ro_empleado_x_rubro_acumulado_List ListaRubrosAcumulados = new ro_empleado_x_rubro_acumulado_List();
-
+                            #region RubrosAcumulados                             
                             //DIII
                             var xiii = Convert.ToString(reader.GetValue(32));
                             var xiv = Convert.ToString(reader.GetValue(33));
@@ -879,8 +883,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 ro_empleado_x_rubro_acumulado_Info info_rubro_acumulado = new ro_empleado_x_rubro_acumulado_Info
                                 {
                                     IdEmpresa = IdEmpresa,
+                                    pe_cedulaRuc = info_persona_empleado.pe_cedulaRuc,
                                     IdEmpleado = info.IdEmpleado,
-                                    IdRubro = "290"
+                                    IdRubro = "290",
+                                    UsuarioIngresa = SessionFixed.IdUsuario,
+                                    FechaIngresa = DateTime.Now
                                 };
 
                                 Lista_RubrosAcumulados.Add(info_rubro_acumulado);
@@ -892,8 +899,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 ro_empleado_x_rubro_acumulado_Info info_rubro_acumulado = new ro_empleado_x_rubro_acumulado_Info
                                 {
                                     IdEmpresa = IdEmpresa,
+                                    pe_cedulaRuc = info_persona_empleado.pe_cedulaRuc,
                                     IdEmpleado = info.IdEmpleado,
-                                    IdRubro = "289"
+                                    IdRubro = "289",
+                                    UsuarioIngresa = SessionFixed.IdUsuario,
+                                    FechaIngresa = DateTime.Now
                                 };
 
                                 Lista_RubrosAcumulados.Add(info_rubro_acumulado);
@@ -905,8 +915,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 ro_empleado_x_rubro_acumulado_Info info_rubro_acumulado = new ro_empleado_x_rubro_acumulado_Info
                                 {
                                     IdEmpresa = IdEmpresa,
+                                    pe_cedulaRuc = info_persona_empleado.pe_cedulaRuc,
                                     IdEmpleado = info.IdEmpleado,
-                                    IdRubro = "296"
+                                    IdRubro = "296",
+                                    UsuarioIngresa = SessionFixed.IdUsuario,
+                                    FechaIngresa = DateTime.Now
                                 };
 
                                 Lista_RubrosAcumulados.Add(info_rubro_acumulado);
@@ -1062,24 +1075,39 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cont = 0;
                 reader.NextResult();
 
-                #region Contrato   
+                #region Contrato                  
                 var lst_catalogo_contrato = bus_catalogorrhh.get_list_x_tipo(2);
 
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
-                        ro_contrato_Info info = new ro_contrato_Info
+                        var IdCont = 0;
+                        var cedula_contrato = Convert.ToString(reader.GetValue(0));
+                        var InfoEmpleadoContrato = Lista_Empleado.Where(v => v.pe_cedulaRuc == cedula_contrato).FirstOrDefault();
+
+                        if (InfoEmpleadoContrato != null)
                         {
-                            IdEmpresa = IdEmpresa,
-                            cedula_ruc = Convert.ToString(reader.GetValue(0)),
-                            contrato_tipo_descripcion = Convert.ToString(reader.GetValue(1)),
-                            FechaInicio = Convert.ToDateTime(reader.GetValue(2)),                            
-                            FechaFin = Convert.ToDateTime(reader.GetValue(3)),
-                            Sueldo = Convert.ToDouble(reader.GetValue(4)),
-                            nomina_tipo_descripcion = Convert.ToString(reader.GetValue(5)),
-                        };
-                        Lista_Contrato.Add(info);
+                            IdCont++;
+                            ro_contrato_Info info = new ro_contrato_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdContrato = IdCont,
+                                cedula_ruc = Convert.ToString(reader.GetValue(0)),
+                                contrato_tipo_descripcion = Convert.ToString(reader.GetValue(1)),
+                                FechaInicio = Convert.ToDateTime(reader.GetValue(2)),
+                                FechaFin = Convert.ToDateTime(reader.GetValue(3)),
+                                Sueldo = Convert.ToDouble(reader.GetValue(4)),
+                                nomina_tipo_descripcion = Convert.ToString(reader.GetValue(5)),
+                                NumDocumento = Convert.ToString(reader.GetValue(0)),
+                                IdEmpleado = InfoEmpleadoContrato.IdEmpleado,
+                                IdUsuario = SessionFixed.IdUsuario,
+                                Fecha_Transac = DateTime.Now,
+                                Observacion = "Importación de Empleados mediante Plantilla",
+                                Estado = "A"
+                            };
+                            Lista_Contrato.Add(info);
+                        }                        
                     }
                     else
                     {
@@ -1100,16 +1128,19 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                        } into TipoNomina
                                         select new ro_nomina_tipo_Info
                                        {
-                                           IdEmpresa = TipoNomina.Key.IdEmpresa,
-                                           Descripcion = TipoNomina.Key.nomina_tipo_descripcion
-                                        }).ToList();
+                                            IdEmpresa = TipoNomina.Key.IdEmpresa,
+                                            Descripcion = TipoNomina.Key.nomina_tipo_descripcion,
+                                            IdUsuario = SessionFixed.IdUsuario,
+                                            FechaTransac = DateTime.Now,
+                                            Estado = "A"
+            }).ToList();
 
                 int IdTipoNomina = 1;
                 Lista_TipoNomina.ForEach(
                      item =>
                      {
-                         item.IdNomina_Tipo = IdTipoNomina;
-                         IdTipoNomina++;
+                        item.IdNomina_Tipo = IdTipoNomina;
+                        IdTipoNomina++;                         
                      }
                     );
 

@@ -537,182 +537,275 @@ namespace Core.Erp.Data.RRHH
 
             try
             {
-                if (Lista_Division.Count > 0)
+                foreach (var item in Lista_Division)
                 {
-                    foreach (var item in Lista_Division)
+                    //var IdDivision = data_division.get_id(item.IdEmpresa);
+                    ro_Division Entity_division = new ro_Division
                     {
-                        var IdDivision = data_division.get_id(item.IdEmpresa);
-                        ro_Division Entity_division = new ro_Division
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdDivision = item.IdDivision,
-                            Descripcion = item.Descripcion,
-                            estado = item.estado,
-                            IdUsuario = item.IdUsuario,
-                            Fecha_Transac = DateTime.Now
+                        IdEmpresa = item.IdEmpresa,
+                        IdDivision = item.IdDivision,
+                        Descripcion = item.Descripcion,
+                        estado = item.estado,
+                        IdUsuario = item.IdUsuario,
+                        Fecha_Transac = DateTime.Now
 
-                        };
+                    };
 
-                        Context_rrhh.ro_Division.Add(Entity_division);
-                    }
-
-                    foreach (var item in Lista_Area)
-                    {
-                        var IdArea = data_area.get_id(item.IdEmpresa);
-                        ro_area Entity_area = new ro_area
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdDivision = item.IdDivision,
-                            IdArea = IdArea,
-                            Descripcion = item.Descripcion,
-                            estado = item.estado,
-                            IdUsuario = item.IdUsuario,
-                            Fecha_Transac = DateTime.Now
-                        };
-
-                        Context_rrhh.ro_area.Add(Entity_area);
-                    }
-
-                    foreach (var item in Lista_Departamento)
-                    {
-                        var IdDepartamento = data_departamento.get_id(item.IdEmpresa);
-                        ro_Departamento Entity_departamento = new ro_Departamento
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdDepartamento = IdDepartamento,
-                            de_descripcion = item.de_descripcion,
-                            Estado = item.Estado,
-                            IdUsuario = item.IdUsuario,
-                            Fecha_Transac = DateTime.Now
-                        };
-
-                        Context_rrhh.ro_Departamento.Add(Entity_departamento);
-                    }
-
-                    foreach (var item in Lista_Cargo)
-                    {
-                        var IdCargo = data_cargo.get_id(item.IdEmpresa);
-                        ro_cargo Entity_cargo = new ro_cargo
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdCargo = IdCargo,
-                            ca_descripcion = item.ca_descripcion,
-                            Estado = item.Estado,
-                            IdUsuario = item.IdUsuario,
-                            Fecha_Transac = DateTime.Now
-                        };
-
-                        Context_rrhh.ro_cargo.Add(Entity_cargo);
-                    }
-
-                    foreach (var item in Lista_Rubro)
-                    {
-                        var IdRubro = data_rubro.get_id(item.IdEmpresa);
-                        ro_rubro_tipo Entity_rubro = new ro_rubro_tipo
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdRubro = IdRubro.ToString(),
-                            rub_codigo = item.rub_codigo,
-                            ru_codRolGen = item.ru_codRolGen,
-                            ru_descripcion = item.ru_descripcion,
-                            NombreCorto = item.NombreCorto,
-                            ru_tipo = item.ru_tipo,
-                            ru_estado = item.ru_estado,
-                            ru_orden = item.ru_orden,
-                            rub_concep = item.rub_concep,
-                            rub_ctacon = item.rub_ctacon,
-                            rub_provision = item.rub_provision,
-                            rub_nocontab = item.rub_nocontab,
-                            rub_aplica_IESS = item.rub_aplica_IESS,
-                            rub_acumula = item.rub_acumula,
-                            rub_acumula_descuento = item.rub_acumula_descuento,
-                            IdUsuario = item.IdUsuario,
-                            Fecha_Transac = DateTime.Now
-                        };
-
-                        Context_rrhh.ro_rubro_tipo.Add(Entity_rubro);
-                    }
-
-                    foreach (var item in Lista_Horario)
-                    {
-                        var IdHorario = data_horario.get_id(item.IdEmpresa);
-                        ro_horario Entity_horario = new ro_horario
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdHorario = IdHorario,
-                            HoraIni = item.HoraIni,
-                            HoraFin = item.HoraFin,
-                            ToleranciaEnt = item.ToleranciaEnt,
-                            ToleranciaReg_lunh = item.ToleranciaReg_lunh,
-                            SalLunch = item.SalLunch,
-                            RegLunch = item.RegLunch,
-                            Descripcion = item.Descripcion,
-                            Estado = item.Estado,
-                            IdUsuario = item.IdUsuario,
-                            Fecha_Transac = DateTime.Now
-                        };
-
-                        Context_rrhh.ro_horario.Add(Entity_horario);
-                    }
-
-                    foreach (var item in Lista_Turno)
-                    {
-                        var IdTurno = data_turno.get_id(item.IdEmpresa);
-                        ro_turno Entity_turno = new ro_turno
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdTurno = IdTurno,
-                            tu_descripcion = item.tu_descripcion,
-                            Lunes = item.Lunes,
-                            Martes = item.Martes,
-                            Miercoles = item.Miercoles,
-                            Jueves = item.Jueves,
-                            Viernes = item.Viernes,
-                            Sabado = item.Sabado,
-                            Domingo = item.Domingo,
-                            Estado = item.Estado,
-                            IdUsuario = item.IdUsuario,
-                            Fecha_Transac = DateTime.Now
-                        };
-
-                        Context_rrhh.ro_turno.Add(Entity_turno);
-                    }
-
-                    foreach (var item in Lista_Empleado)
-                    {
-                        //tb_persona Entity_persona = new tb_persona
-                        //{
-                        //    pe_cedulaRuc = item.info_persona.pe_cedulaRuc
-                        //};
-
-                        //var existe = data_persona.validar_existe_cedula(item.info_persona.pe_cedulaRuc);
-                        //if (existe == 0)
-                        //{
-                        //    data_persona.guardarDB(Entity_persona);
-                        //}
-                        //else
-                        //{
-
-                        //}
-
-                        var IdEmpleado = data_turno.get_id(item.IdEmpresa);
-                        ro_empleado Entity_empleado = new ro_empleado
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdEmpleado = IdEmpleado,                            
-                            IdUsuario = item.IdUsuario,
-                            Fecha_Transaccion = item.Fecha_Transaccion
-                        };
-
-                        Context_rrhh.ro_empleado.Add(Entity_empleado);
-                    }
-
-                    Context_general.SaveChanges();
-                    Context_rrhh.SaveChanges();
-
-                    Context_general.Dispose();
-                    Context_rrhh.Dispose();
+                    Context_rrhh.ro_Division.Add(Entity_division);
                 }
+
+                foreach (var item in Lista_Area)
+                {
+                    //var IdArea = data_area.get_id(item.IdEmpresa);
+                    ro_area Entity_area = new ro_area
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdDivision = item.IdDivision,
+                        IdArea = item.IdArea,
+                        Descripcion = item.Descripcion,
+                        estado = item.estado,
+                        IdUsuario = item.IdUsuario,
+                        Fecha_Transac = DateTime.Now
+                    };
+
+                    Context_rrhh.ro_area.Add(Entity_area);
+                }
+
+                foreach (var item in Lista_Departamento)
+                {
+                    //var IdDepartamento = data_departamento.get_id(item.IdEmpresa);
+                    ro_Departamento Entity_departamento = new ro_Departamento
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdDepartamento = item.IdDepartamento,
+                        de_descripcion = item.de_descripcion,
+                        Estado = item.Estado,
+                        IdUsuario = item.IdUsuario,
+                        Fecha_Transac = DateTime.Now
+                    };
+
+                    Context_rrhh.ro_Departamento.Add(Entity_departamento);
+                }
+
+                foreach (var item in Lista_Cargo)
+                {
+                    //var IdCargo = data_cargo.get_id(item.IdEmpresa);
+                    ro_cargo Entity_cargo = new ro_cargo
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdCargo = item.IdCargo,
+                        ca_descripcion = item.ca_descripcion,
+                        Estado = item.Estado,
+                        IdUsuario = item.IdUsuario,
+                        Fecha_Transac = DateTime.Now
+                    };
+
+                    Context_rrhh.ro_cargo.Add(Entity_cargo);
+                }
+
+                foreach (var item in Lista_Rubro)
+                {
+                    //var IdRubro = data_rubro.get_id(item.IdEmpresa);
+                    ro_rubro_tipo Entity_rubro = new ro_rubro_tipo
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdRubro = item.IdRubro,
+                        rub_codigo = item.rub_codigo,
+                        ru_codRolGen = item.ru_codRolGen,
+                        ru_descripcion = item.ru_descripcion,
+                        NombreCorto = item.NombreCorto,
+                        ru_tipo = item.ru_tipo,
+                        ru_estado = item.ru_estado,
+                        ru_orden = item.ru_orden,
+                        rub_concep = item.rub_concep,
+                        rub_ctacon = item.rub_ctacon,
+                        rub_provision = item.rub_provision,
+                        rub_nocontab = item.rub_nocontab,
+                        rub_aplica_IESS = item.rub_aplica_IESS,
+                        rub_acumula = item.rub_acumula,
+                        rub_acumula_descuento = item.rub_acumula_descuento,
+                        IdUsuario = item.IdUsuario,
+                        Fecha_Transac = DateTime.Now
+                    };
+
+                    Context_rrhh.ro_rubro_tipo.Add(Entity_rubro);
+                }
+
+                foreach (var item in Lista_Horario)
+                {
+                    //var IdHorario = data_horario.get_id(item.IdEmpresa);
+                    ro_horario Entity_horario = new ro_horario
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdHorario = item.IdHorario,
+                        HoraIni = item.HoraIni,
+                        HoraFin = item.HoraFin,
+                        ToleranciaEnt = item.ToleranciaEnt,
+                        ToleranciaReg_lunh = item.ToleranciaReg_lunh,
+                        SalLunch = item.SalLunch,
+                        RegLunch = item.RegLunch,
+                        Descripcion = item.Descripcion,
+                        Estado = item.Estado,
+                        IdUsuario = item.IdUsuario,
+                        Fecha_Transac = DateTime.Now
+                    };
+
+                    Context_rrhh.ro_horario.Add(Entity_horario);
+                }
+
+                foreach (var item in Lista_Turno)
+                {
+                    //var IdTurno = data_turno.get_id(item.IdEmpresa);
+                    ro_turno Entity_turno = new ro_turno
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdTurno = item.IdTurno,
+                        tu_descripcion = item.tu_descripcion,
+                        Lunes = item.Lunes,
+                        Martes = item.Martes,
+                        Miercoles = item.Miercoles,
+                        Jueves = item.Jueves,
+                        Viernes = item.Viernes,
+                        Sabado = item.Sabado,
+                        Domingo = item.Domingo,
+                        Estado = item.Estado,
+                        IdUsuario = item.IdUsuario,
+                        Fecha_Transac = DateTime.Now
+                    };
+
+                    Context_rrhh.ro_turno.Add(Entity_turno);
+                }
+
+                foreach (var item in Lista_Empleado)
+                {
+                    ro_empleado Entity_empleado = new ro_empleado
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdEmpleado = item.IdEmpleado,
+                        IdEmpleado_Supervisor = null,
+                        IdPersona = item.IdPersona,
+                        IdSucursal = item.IdSucursal,
+                        IdTipoEmpleado = item.IdTipoEmpleado,
+                        em_codigo = item.em_codigo,
+                        Codigo_Biometrico = item.Codigo_Biometrico,
+                        em_lugarNacimiento = item.em_lugarNacimiento,
+                        em_CarnetIees = null,
+                        em_cedulaMil = null,
+                        em_fechaSalida = null,
+                        em_fechaIngaRol = item.em_fechaIngaRol,
+                        em_tipoCta = item.em_tipoCta,
+                        em_NumCta = item.em_NumCta,
+                        em_estado = item.em_estado,
+                        IdCodSectorial = null,
+                        IdDepartamento = item.IdDepartamento,
+                        IdTipoSangre = item.IdTipoSangre,
+                        IdCargo = item.IdCargo,
+                        IdCtaCble_Emplea = item.IdCtaCble_Emplea,
+                        IdCiudad = item.IdCiudad,
+                        em_mail = item.em_mail,
+                        IdTipoLicencia = item.IdTipoLicencia,
+                        IdBanco = item.IdBanco,
+                        IdArea = item.IdArea,
+                        IdDivision = item.IdDivision,
+                        IdUsuario = item.IdUsuario,
+                        Fecha_Transaccion = item.Fecha_Transaccion,
+                        IdUsuarioUltModi = null,
+                        Fecha_UltMod = null,
+                        IdUsuarioUltAnu = null,
+                        Fecha_UltAnu = null,
+                        MotivoAnulacion = null,
+                        por_discapacidad = item.por_discapacidad,
+                        carnet_conadis = item.carnet_conadis,
+                        talla_pant = item.talla_pant,
+                        talla_camisa = item.talla_camisa,
+                        talla_zapato = item.talla_zapato,
+                        em_status = item.em_status,
+                        IdCondicionDiscapacidadSRI = item.IdCondicionDiscapacidadSRI,
+                        IdTipoIdentDiscapacitadoSustitutoSRI = item.IdTipoIdentDiscapacitadoSustitutoSRI,
+                        IdentDiscapacitadoSustitutoSRI = item.IdentDiscapacitadoSustitutoSRI,
+                        IdAplicaConvenioDobleImposicionSRI = item.IdAplicaConvenioDobleImposicionSRI,
+                        IdTipoResidenciaSRI = item.IdTipoResidenciaSRI,
+                        IdTipoSistemaSalarioNetoSRI = item.IdTipoSistemaSalarioNetoSRI,
+                        es_AcreditaHorasExtras = item.es_AcreditaHorasExtras,
+                        CodigoSectorial = item.CodigoSectorial,
+                        IdTipoAnticipo = item.IdTipoAnticipo,
+                        ValorAnticipo = item.ValorAnticipo,
+                        em_AnticipoSueldo = item.em_AnticipoSueldo,
+                        Marca_Biometrico = item.Marca_Biometrico,
+                        IdHorario = item.IdHorario,
+                        Tiene_ingresos_compartidos = item.Tiene_ingresos_compartidos,
+                        Pago_por_horas = item.Pago_por_horas,
+                        Valor_maximo_horas_mat = null,
+                        Valor_maximo_horas_vesp = null,
+                        Valor_horas_vespertina = item.Valor_horas_vespertina,
+                        Valor_horas_matutino = item.Valor_horas_matutino,
+                        Valor_horas_brigada = item.Valor_horas_brigada,
+                        Valor_horas_extras = item.Valor_horas_extras,
+                        GozaMasDeQuinceDiasVaciones = item.GozaMasDeQuinceDiasVaciones,
+                        DiasVacaciones = item.DiasVacaciones
+                    };
+
+                    Context_rrhh.ro_empleado.Add(Entity_empleado);
+                }
+
+                //foreach (var item in Lista_RubrosAcumulados)
+                //{
+                //    ro_empleado_x_rubro_acumulado Entity_RubroAcumulado = new ro_empleado_x_rubro_acumulado
+                //    {
+                //        IdEmpresa = item.IdEmpresa,
+                //        IdEmpleado = item.IdEmpleado,
+                //        IdRubro =item.IdRubro,
+                //        UsuarioIngresa = item.UsuarioIngresa,
+                //        FechaIngresa = item.FechaIngresa
+                //    };
+
+                //    Context_rrhh.ro_empleado_x_rubro_acumulado.Add(Entity_RubroAcumulado);
+                //}
+
+                //foreach (var item in Lista_TipoNomina)
+                //{
+                //    ro_Nomina_Tipo Entity_TipoNomina = new ro_Nomina_Tipo
+                //    {
+                //        IdEmpresa = item.IdEmpresa,
+                //        IdNomina_Tipo = item.IdNomina_Tipo,
+                //        Descripcion = item.Descripcion,
+                //        IdUsuario = item.IdUsuario,
+                //        IdUsuarioAnu = null,
+                //        MotivoAnu = null,
+                //        IdUsuarioUltModi = null,
+                //        FechaAnu = null,
+                //        FechaTransac = item.FechaTransac,
+                //        FechaUltModi = null,
+                //        Estado = item.Estado                        
+                //    };
+
+                //    Context_rrhh.ro_Nomina_Tipo.Add(Entity_TipoNomina);
+                //}
+
+
+                foreach (var item in Lista_Contrato)
+                {
+                    ro_contrato Entity_contrato = new ro_contrato
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdContrato = item.IdContrato,
+                        IdContrato_Tipo = item.IdContrato_Tipo,
+                        IdEmpleado = item.IdEmpleado,
+                        FechaInicio = item.FechaInicio,
+                        FechaFin = item.FechaFin,
+                        Sueldo = item.Sueldo,
+                        NumDocumento = item.NumDocumento,
+                        IdNomina = item.IdNomina,
+                        Observacion = item.Observacion,
+                        IdUsuario = item.IdUsuario,
+                        Estado = item.Estado,
+                        Fecha_Transac = item.Fecha_Transac
+                    };
+                    Context_rrhh.ro_contrato.Add(Entity_contrato);
+                }
+
+                Context_rrhh.SaveChanges();
+                Context_rrhh.Dispose();                
                 return true;
             }
             catch (Exception)
