@@ -237,11 +237,14 @@ namespace Core.Erp.Info.Helps
                 int[] coeficientes = {2,1,2,1,2,1,2,1,2};
                 var num_provincias = 24;
                 var total = 0;
-
+                var digito_coeficiente = 0;
+                var digito_ruc = 0;
                 var tercer_digito = 6;
                 var longitud = 10;
+                var valor = 0;
+                var valor_ = 0;
 
-                if(longitud == longitud_cedula)
+                if (longitud == longitud_cedula)
                 {
                     var provincia = Convert.ToInt32(string.Concat(cedula[0], cedula[1]));
                     var digito_tres = Convert.ToInt32(cedula[2]+string.Empty);
@@ -251,8 +254,12 @@ namespace Core.Erp.Info.Helps
                         var digito_verificador_recibido = Convert.ToInt32(cedula[9] + string.Empty);
                         for (var a = 0; a < coeficientes.Length; a++)
                         {
-                            var valor = Convert.ToInt32(coeficientes[a] * cedula[a]);
-                            total = valor > 10 ? total + (valor - 9) : total + valor;                                                                        
+                            digito_coeficiente = coeficientes[a];
+                            digito_ruc = Convert.ToInt32(cedula[a] + string.Empty);
+                            valor = digito_coeficiente * digito_ruc;
+                            valor_ = valor >= 10 ? (valor - 9) : valor;
+
+                            total =  total + valor_;                                                                        
                         }
                         var digito_verificador_obtenido = total > 10 ? (total % 10) != 0 ? 10 - (total % 10) : (total % 10) : total;
 

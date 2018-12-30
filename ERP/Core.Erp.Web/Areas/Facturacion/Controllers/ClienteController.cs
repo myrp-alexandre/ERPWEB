@@ -552,7 +552,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             }
 
                             info_persona_cliente.pe_Naturaleza = return_naturaleza;
-
+                            var CtaCbleClase = Lista_ClienteTipo.Where(q => q.Idtipo_cliente == Convert.ToInt32(reader.GetValue(13))).FirstOrDefault();
                             fa_cliente_Info info = new fa_cliente_Info
                             {
                                 IdEmpresa = IdEmpresa,
@@ -562,10 +562,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                 Idtipo_cliente = Convert.ToInt32(reader.GetValue(13)),
                                 cl_plazo = Convert.ToInt32(reader.GetValue(15)),
                                 cl_Cupo = Convert.ToDouble(reader.GetValue(16)),
-                                IdCtaCble_cxc_Credito = null,
+                                IdCtaCble_cxc_Credito = CtaCbleClase==null ? null: CtaCbleClase.IdCtaCble_CXC_Cred,
                                 es_empresa_relacionada = (Convert.ToString(reader.GetValue(12)) == "SI") ? true : false,
                                 EsClienteExportador = false,
-                                IdNivel = 1,
+                                IdNivel = 3,
                                 IdTipoCredito = "CON",
                                 FormaPago = "01",
                                 IdUsuario = SessionFixed.IdUsuario
