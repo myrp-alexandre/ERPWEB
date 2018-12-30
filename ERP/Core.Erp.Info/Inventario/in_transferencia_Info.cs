@@ -36,8 +36,6 @@ namespace Core.Erp.Info.Inventario
         public Nullable<System.DateTime> tr_fecha_transaccion { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string motivo_anula { get; set; }
         public string IdEstadoAprobacion_cat { get; set; }
 

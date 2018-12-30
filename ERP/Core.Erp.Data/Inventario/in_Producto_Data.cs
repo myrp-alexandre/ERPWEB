@@ -320,18 +320,6 @@ namespace Core.Erp.Data.Inventario
                         lote_fecha_vcto = Entity.lote_fecha_vcto,
                         lote_num_lote = Entity.lote_num_lote,
                         precio_1 = Entity.precio_1 == null ? 0 : Convert.ToDouble(Entity.precio_1),
-                        precio_2 = Entity.precio_2 == null ? 0 : Convert.ToDouble(Entity.precio_2),
-                        signo_2 = Entity.signo_2,
-                        porcentaje_2 = Entity.porcentaje_2 == null ? 0 : Convert.ToDouble(Entity.porcentaje_2),
-                        precio_3 = Entity.precio_3 == null ? 0 : Convert.ToDouble(Entity.precio_3),
-                        signo_3 = Entity.signo_3,
-                        porcentaje_3 = Entity.porcentaje_3 == null ? 0 : Convert.ToDouble(Entity.porcentaje_3),
-                        precio_4 = Entity.precio_4 == null ? 0 : Convert.ToDouble(Entity.precio_4),
-                        signo_4 = Entity.signo_4,
-                        porcentaje_4 = Entity.porcentaje_4 == null ? 0 : Convert.ToDouble(Entity.porcentaje_4),
-                        precio_5 = Entity.precio_5 == null ? 0 : Convert.ToDouble(Entity.precio_5),
-                        signo_5 = Entity.signo_5,
-                        porcentaje_5 = Entity.porcentaje_5 == null ? 0 : Convert.ToDouble(Entity.porcentaje_5),
                         se_distribuye = Entity.se_distribuye == null ? false : Convert.ToBoolean(Entity.se_distribuye),
                         pr_imagen=Entity.pr_imagen,
                         IdCtaCtble_Inve = Entity.in_categorias.IdCtaCtble_Inve,
@@ -408,18 +396,6 @@ namespace Core.Erp.Data.Inventario
                         lote_fecha_vcto = info.lote_fecha_vcto,
                         lote_num_lote = info.lote_num_lote,
                         precio_1 = info.precio_1,
-                        precio_2 = info.precio_2,
-                        signo_2 = info.signo_2,
-                        porcentaje_2 = info.porcentaje_2,
-                        precio_3 = info.precio_3,
-                        signo_3 = info.signo_3,
-                        porcentaje_3 = info.porcentaje_3,
-                        precio_4 = info.precio_4,
-                        signo_4 = info.signo_4,
-                        porcentaje_4 = info.porcentaje_4,
-                        precio_5 = info.precio_5,
-                        signo_5 = info.signo_5,
-                        porcentaje_5 = info.porcentaje_5,
                         se_distribuye = info.se_distribuye,
                         pr_imagen = info.pr_imagen,
                         IdUsuario = info.IdUsuario,
@@ -594,18 +570,6 @@ namespace Core.Erp.Data.Inventario
                     Entity.lote_fecha_vcto = info.lote_fecha_vcto;
                     Entity.lote_num_lote = info.lote_num_lote;
                     Entity.precio_1 = info.precio_1;
-                    Entity.precio_2 = info.precio_2;
-                    Entity.signo_2 = info.signo_2;
-                    Entity.porcentaje_2 = info.porcentaje_2;
-                    Entity.precio_3 = info.precio_3;
-                    Entity.signo_3 = info.signo_3;
-                    Entity.porcentaje_3 = info.porcentaje_3;
-                    Entity.precio_4 = info.precio_4;
-                    Entity.signo_4 = info.signo_4;
-                    Entity.porcentaje_4 = info.porcentaje_4;
-                    Entity.precio_5 = info.precio_5;
-                    Entity.signo_5 = info.signo_5;
-                    Entity.porcentaje_5 = info.porcentaje_5;
                     Entity.se_distribuye = info.se_distribuye;
                     Entity.pr_imagen = info.pr_imagen;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
@@ -613,18 +577,6 @@ namespace Core.Erp.Data.Inventario
                     string SQL = "UPDATE in_Producto SET pr_descripcion = '" + info.pr_descripcion +
                         "', pr_descripcion_2 = '" + info.pr_descripcion_2 +
                         "', precio_1 = " + info.precio_1 +
-                        ", precio_2 = " + info.precio_2 +
-                        ", precio_3 = " + info.precio_3 +
-                        ", precio_4 = " + info.precio_4 +
-                        ", precio_5 = " + info.precio_5 +
-                        ", signo_2 = '" + info.signo_2 +
-                        "', signo_3 = '" + info.signo_3 +
-                        "', signo_4 = '" + info.signo_4 +
-                        "', signo_5 = '" + info.signo_5 +
-                        "', porcentaje_2 = " + info.porcentaje_2 +
-                        ", porcentaje_3 = " + info.porcentaje_3 +
-                        ", porcentaje_4 = " + info.porcentaje_4 +
-                        ", porcentaje_5 = " + info.porcentaje_5 +
                         ", IdCod_Impuesto_Iva = '" + info.IdCod_Impuesto_Iva +
                         "', pr_codigo = '" + info.pr_codigo +
                         "', pr_codigo2 = '" + info.pr_codigo2 +
@@ -1349,15 +1301,7 @@ namespace Core.Erp.Data.Inventario
                                 lote_fecha_fab = item.lote_fecha_fab,
                                 lote_fecha_vcto = item.lote_fecha_vcto,
                                 lote_num_lote = item.lote_num_lote,
-                                porcentaje_2 = item.porcentaje_2,
-                                porcentaje_3 = item.porcentaje_3,
-                                porcentaje_4 = item.porcentaje_4,
-                                porcentaje_5 = item.porcentaje_5,
                                 precio_1 = item.precio_1,
-                                precio_2 = item.precio_2,
-                                precio_3 = item.precio_3,
-                                precio_4 = item.precio_4,
-                                precio_5 = item.precio_5,
                                 pr_codigo = item.pr_codigo,
                                 pr_codigo2 = item.pr_codigo2,
                                 pr_codigo_barra = item.pr_codigo_barra,
@@ -1365,13 +1309,7 @@ namespace Core.Erp.Data.Inventario
                                 pr_descripcion_2 = item.pr_descripcion_2,
                                 pr_imagen = item.pr_imagen,
                                 pr_observacion = item.pr_observacion,
-                                se_distribuye = item.se_distribuye,
-                                signo_2 = item.signo_2,
-                                signo_3 = item.signo_3,
-                                signo_4 = item.signo_4,
-                                signo_5 = item.signo_5
-                                
-
+                                se_distribuye = item.se_distribuye,      
                             };
                             Context.in_Producto.Add(Entity_Pro);
                         }

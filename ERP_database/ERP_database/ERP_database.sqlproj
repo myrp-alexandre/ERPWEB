@@ -1069,6 +1069,7 @@
     <Build Include="dbo\Views\vwro_SancionesPorMarcaciones_x_novedad_1.sql" />
     <Build Include="dbo\Views\vwro_SancionesPorMarcaciones_det_1.sql" />
     <Build Include="dbo\Views\vwro_SancionesPorMarcaciones_1.sql" />
+    <Build Include="web\Stored Procedures\SPFAC_010.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />
