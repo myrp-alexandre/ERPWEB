@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE web.SPFAC_010
+﻿CREATE PROCEDURE [web].[SPFAC_010]
 (
 @IdEmpresa int,
 @IdSucursalIni int, 
@@ -7,7 +7,7 @@
 @FechaFin datetime
 )
 AS
-SELECT        c.IdEmpresa, c.IdSucursal, c.IdBodega, c.IdCbteVta, c.vt_serie1 + '-' + c.vt_serie2 + '-' + c.vt_NumFactura AS Expr1, c.IdCliente, per.pe_nombreCompleto, cat.Nombre AS NombreFormaPago, c.IdCatalogo_FormaPago, c.Estado, 
+SELECT        c.IdEmpresa, c.IdSucursal, c.IdBodega, c.IdCbteVta, c.vt_serie1 + '-' + c.vt_serie2 + '-' + c.vt_NumFactura AS vt_NumFactura, c.IdCliente, per.pe_nombreCompleto, cat.Nombre AS NombreFormaPago, c.IdCatalogo_FormaPago, c.Estado, 
                          c.vt_fecha, ve.Ve_Vendedor, c.IdVendedor, tb_sucursal.Su_Descripcion, tb_sucursal.Su_Telefonos, tb_sucursal.Su_Direccion, tb_sucursal.Su_Ruc,
 						 d.SubtotalIVA, d.SubtotalSinIVA, d.vt_iva, d.vt_total
 FROM            fa_factura AS c INNER JOIN
