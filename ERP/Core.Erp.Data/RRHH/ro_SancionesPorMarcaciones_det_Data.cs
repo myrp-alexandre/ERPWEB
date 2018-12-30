@@ -92,12 +92,12 @@ namespace Core.Erp.Data.RRHH
                    if(item.time_entrada1>item.HoraIni  && item.time_entrada1.TotalHours > 0)
                    {
                        
-                       item.Minutos = (item.time_entrada1.TotalHours - item.HoraIni.TotalHours);
+                       item.Minutos = (item.time_entrada1.TotalMinutes - item.HoraIni.TotalMinutes);
                    }
 
                    if (item.time_salida1 < item.HoraFin && item.time_salida1.TotalHours > 0)
                    {
-                       item.Minutos = item.Minutos+( item.time_salida1.TotalHours - item.HoraFin.TotalHours);
+                       item.Minutos = item.Minutos+( item.HoraFin.TotalMinutes - item.time_salida1.TotalMinutes);
                    }
                }
                 );
