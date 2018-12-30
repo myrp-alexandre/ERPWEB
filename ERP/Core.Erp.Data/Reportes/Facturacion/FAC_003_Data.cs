@@ -48,7 +48,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                      Su_Descripcion = q.Su_Descripcion,
                                      Su_Direccion = q.Su_Direccion,
                                      Su_Telefonos = q.Su_Telefonos,
-                                     Expr1 = q.Expr1
+                                     vt_Total = q.vt_Total
                                  }).ToList();
                     
                     

@@ -27,7 +27,7 @@ namespace Core.Erp.Data
         public double DescuentoTotal { get; set; }
         public double SubtotalConDscto { get; set; }
         public double vt_iva { get; set; }
-        public double Expr1 { get; set; }
+        public double vt_Total { get; set; }
         public double vt_por_iva { get; set; }
         public double SubtotalIVA { get; set; }
         public double SubtotalSinIVA { get; set; }
@@ -42,5 +42,10 @@ namespace Core.Erp.Data
         public string Su_Telefonos { get; set; }
         public string Su_Direccion { get; set; }
         public string FormaDePago { get; set; }
+        public string IdCatalogo_FormaPago { get; set; }
+        public double vt_ValorEfectivo { get; set; }
+        public double vt_Cambio { get; set; }
+        public string vt_autorizacion { get; set; }
+        public Nullable<System.DateTime> Fecha_Autorizacion { get; set; }
     }
 }

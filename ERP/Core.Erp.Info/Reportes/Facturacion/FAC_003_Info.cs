@@ -22,7 +22,7 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public double DescuentoTotal { get; set; }
         public double SubtotalConDscto { get; set; }
         public double vt_iva { get; set; }
-        public double Expr1 { get; set; }
+        public double vt_Total { get; set; }
         public double vt_por_iva { get; set; }
         public double SubtotalIVA { get; set; }
         public double SubtotalSinIVA { get; set; }
