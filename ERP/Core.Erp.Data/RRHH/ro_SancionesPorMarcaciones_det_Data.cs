@@ -29,15 +29,14 @@ namespace Core.Erp.Data.RRHH
                                  IdEmpleado = q.IdEmpleado,
                                  IdSucursal = q.IdSucursal,
                                  IdTipoMarcaciones = q.IdTipoMarcaciones,
-                                 EsHoraHorario = q.EsHoraHorario,
-                                 EsHoraMarcacion = q.EsHoraMarcacion,
-                                 es_fechaRegistro = q.es_fechaRegistro,
+                                 time_entrada1 = q.EsHoraIngreso,
+                                 time_salida1 = q.EsHoraSalida,
+                                 es_fechaRegistro = q.FechaRegistro,
                                  pe_cedulaRuc = q.pe_cedulaRuc,
                                  pe_apellido = q.pe_apellido,
                                  pe_nombre = q.pe_nombre,
                                  pe_nombreCompleto = q.pe_nombreCompleto,
                                  em_codigo = q.em_codigo,
-                                 IdRegistro = q.IdRegistro,
                                  Minutos = q.Minutos,
                                  Observacion = q.Observacion
                              }).ToList();
@@ -92,12 +91,12 @@ namespace Core.Erp.Data.RRHH
                    if(item.time_entrada1>item.HoraIni  && item.time_entrada1.TotalHours > 0)
                    {
                        
-                       item.Minutos = (item.time_entrada1.TotalHours - item.HoraIni.TotalHours);
+                       item.Minutos = (item.time_entrada1.TotalMinutes - item.HoraIni.TotalMinutes);
                    }
 
                    if (item.time_salida1 < item.HoraFin && item.time_salida1.TotalHours > 0)
                    {
-                       item.Minutos = item.Minutos+( item.time_salida1.TotalHours - item.HoraFin.TotalHours);
+                       item.Minutos = item.Minutos+( item.HoraFin.TotalMinutes - item.time_salida1.TotalMinutes);
                    }
                }
                 );

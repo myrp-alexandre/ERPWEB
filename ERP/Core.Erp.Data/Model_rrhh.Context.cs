@@ -97,7 +97,6 @@ namespace Core.Erp.Data
         public DbSet<ro_EmpleadoNovedadCargaMasiva_det> ro_EmpleadoNovedadCargaMasiva_det { get; set; }
         public DbSet<vwro_EmpleadoNovedadCargaMasiva_det> vwro_EmpleadoNovedadCargaMasiva_det { get; set; }
         public DbSet<vwro_EmpleadoNovedadCargaMasiva> vwro_EmpleadoNovedadCargaMasiva { get; set; }
-        public DbSet<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
         public DbSet<vwro_marcaciones_x_empleado> vwro_marcaciones_x_empleado { get; set; }
         public DbSet<ro_contrato> ro_contrato { get; set; }
         public DbSet<vwro_rol> vwro_rol { get; set; }
@@ -130,12 +129,13 @@ namespace Core.Erp.Data
         public DbSet<vwro_marcaciones_x_planificacion_horario> vwro_marcaciones_x_planificacion_horario { get; set; }
         public DbSet<ro_empleado> ro_empleado { get; set; }
         public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
+        public DbSet<vwro_SancionesPorMarcaciones_x_novedad> vwro_SancionesPorMarcaciones_x_novedad { get; set; }
+        public DbSet<vwro_SancionesPorMarcaciones> vwro_SancionesPorMarcaciones { get; set; }
+        public DbSet<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
+        public DbSet<ro_SancionesPorMarcaciones> ro_SancionesPorMarcaciones { get; set; }
         public DbSet<ro_SancionesPorMarcaciones_det> ro_SancionesPorMarcaciones_det { get; set; }
         public DbSet<ro_SancionesPorMarcaciones_x_novedad> ro_SancionesPorMarcaciones_x_novedad { get; set; }
         public DbSet<vwro_SancionesPorMarcaciones_det> vwro_SancionesPorMarcaciones_det { get; set; }
-        public DbSet<vwro_SancionesPorMarcaciones_x_novedad> vwro_SancionesPorMarcaciones_x_novedad { get; set; }
-        public DbSet<ro_SancionesPorMarcaciones> ro_SancionesPorMarcaciones { get; set; }
-        public DbSet<vwro_SancionesPorMarcaciones> vwro_SancionesPorMarcaciones { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

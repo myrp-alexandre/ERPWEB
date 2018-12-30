@@ -14,11 +14,6 @@ namespace Core.Erp.Data
     
     public partial class ro_marcaciones_x_empleado
     {
-        public ro_marcaciones_x_empleado()
-        {
-            this.ro_SancionesPorMarcaciones_det = new HashSet<ro_SancionesPorMarcaciones_det>();
-        }
-    
         public int IdEmpresa { get; set; }
         public decimal IdRegistro { get; set; }
         public int IdCalendadrio { get; set; }
@@ -40,9 +35,8 @@ namespace Core.Erp.Data
         public string nom_pc { get; set; }
         public string Motivo_Anu { get; set; }
     
+        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_marcaciones_tipo ro_marcaciones_tipo { get; set; }
         public virtual ro_Nomina_Tipo ro_Nomina_Tipo { get; set; }
-        public virtual ro_empleado ro_empleado { get; set; }
-        public virtual ICollection<ro_SancionesPorMarcaciones_det> ro_SancionesPorMarcaciones_det { get; set; }
     }
 }
