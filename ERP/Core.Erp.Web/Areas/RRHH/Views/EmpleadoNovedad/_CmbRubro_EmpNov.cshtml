@@ -22,11 +22,8 @@
         settings.Properties.FilterMinLength = 3;
 
     })
-    //.BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoNovedadController().get_list_bajo_demanda_rubro, new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoNovedadController().get_info_bajo_demanda_rubro)
-    //.Bind(Model);
-
-    //.BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoNovedadController().get_list_bajo_demanda_rubro,
-    //  new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoNovedadController().get_list_bajo_demanda_rubro).Bind((Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_novedad_det_Info) || Model.GetType() == typeof(List<Core.Erp.Info.RRHH.ro_empleado_novedad_det_Info>)) ? "" : (Model == 0 ? "" : Model));
+     .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoNovedadController().get_list_bajo_demanda_rubro,
+      new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoNovedadController().get_info_bajo_demanda_rubro).Bind((Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_novedad_det_Info) || Model.GetType() == typeof(List<Core.Erp.Info.RRHH.ro_empleado_novedad_det_Info>)) ? "" : (Model == null ? "" : Model));
 
 }
 @comboBox.GetHtml()
