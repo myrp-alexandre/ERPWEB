@@ -200,7 +200,8 @@ BEGIN --RELLENO VENTAS POR PERIODOS
 						FROM            fa_factura AS FC INNER JOIN
 						fa_factura_det AS FD ON FC.IdEmpresa = FD.IdEmpresa AND FC.IdSucursal = FD.IdSucursal AND FC.IdBodega = FD.IdBodega AND FC.IdCbteVta = FD.IdCbteVta INNER JOIN
 						in_Producto AS P ON FD.IdEmpresa = P.IdEmpresa AND FD.IdProducto = P.IdProducto
-						WHERE FC.IdEmpresa = @IdEmpresa AND FC.IdPeriodo = @PeriodoIni and P.IdMarca between @IdMarcaIni and @IdMarcaFin
+						WHERE FC.IdEmpresa = @IdEmpresa AND CAST(CAST(YEAR(FC.vt_fecha) AS VARCHAR(4))
++ RIGHT('00'+CAST(MONTH(FC.vt_fecha) AS VARCHAR(2)),2) AS INT) = @PeriodoIni and P.IdMarca between @IdMarcaIni and @IdMarcaFin
 						) G group by G.IdEmpresa, G.IdProducto
 					) A WHERE web.in_SPINV_010.IdEmpresa = @IdEmpresa AND web.in_SPINV_010.IdProducto = A.IdProducto
 					AND web.in_SPINV_010.IdUsuario = @IdUsuario and web.in_SPINV_010.IdAnio = @AnioInicio				
