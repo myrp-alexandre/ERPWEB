@@ -520,7 +520,6 @@
     <Build Include="dbo\Views\vwfa_notaCreDeb_x_fa_factura_NotaDeb_sin_cobros.sql" />
     <Build Include="dbo\Views\vwcp_nota_DebCre.sql" />
     <Build Include="dbo\Views\vwCXC_EstadoCta_x_Cliente.sql" />
-    <Build Include="web\Views\VWFAC_003_cuotas.sql" />
     <Build Include="dbo\Views\vwtb_persona_beneficiario.sql" />
     <Build Include="web\Views\VWCXP_002.sql" />
     <Build Include="dbo\Views\vwin_Ing_Egr_Inven_distribucion_det.sql" />

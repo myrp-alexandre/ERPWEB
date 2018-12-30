@@ -1894,9 +1894,6 @@
     <Compile Include="VWFAC_003.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
-    <Compile Include="VWFAC_003_cuotas.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
-    </Compile>
     <Compile Include="VWFAC_004.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>

@@ -44,10 +44,8 @@ namespace Core.Erp.Info.Facturacion
         public System.DateTime vt_fech_venc { get; set; }
         [Required(ErrorMessage = "El campo término de pago es obligatorio")]
         public string vt_tipo_venta { get; set; }
+        public string IdCatalogo_FormaPago { get; set; }
         public string vt_Observacion { get; set; }
-        public int IdPeriodo { get; set; }
-        public int vt_anio { get; set; }
-        public int vt_mes { get; set; }
         public string Estado { get; set; }
         [Required(ErrorMessage = "El campo caja es obligatorio")]
         [Range(1, int.MaxValue, ErrorMessage = "El campo caja es obligatorio")]
