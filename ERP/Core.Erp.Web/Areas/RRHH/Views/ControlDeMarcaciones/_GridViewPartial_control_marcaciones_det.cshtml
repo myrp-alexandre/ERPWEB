@@ -46,6 +46,12 @@
         settings.CommandColumn.ShowSelectCheckbox = true;
         settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
 
+
+        //Configuración click derecho
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.EnableRowMenu = DefaultBoolean.False;
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdEmpleado";

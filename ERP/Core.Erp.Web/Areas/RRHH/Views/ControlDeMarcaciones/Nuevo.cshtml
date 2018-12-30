@@ -140,8 +140,8 @@
 
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","ControlDearcaciones",new { Area = "RRHH" },null)">Cancelar</a>
+        <button type="submit" onclick="Guardar();" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","ControlDeMarcaciones",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -211,6 +211,31 @@
                 });
     };
 
-
+     function Guardar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IDs: selectedIDs,
+            MotivoAprobacion: $("#MotivoAprobacion").val(),
+            IdFormaPago: IdFormaPago.GetValue(),
+            IdUsuarioAprobacion: $("#IdUsuarioAprobacion").val()
+            }
+        $("#btn_aprobar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GuardarMarcaciones", "ControlDeMarcaciones", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#MotivoAprobacion").val("");
+                $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+    }
 
 </script>
