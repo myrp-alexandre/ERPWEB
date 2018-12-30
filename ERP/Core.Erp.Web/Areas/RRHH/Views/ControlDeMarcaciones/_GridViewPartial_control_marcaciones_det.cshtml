@@ -95,7 +95,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "HoraIni";
+            column.FieldName = "time_entrada1";
             column.Caption = "Ingreso";
             column.Width = Unit.Percentage(10);
             column.EditorProperties().TextBox(sp =>
@@ -138,6 +138,8 @@
 
             });
         });
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
 
 }
