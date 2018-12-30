@@ -562,7 +562,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                 Idtipo_cliente = Convert.ToInt32(reader.GetValue(13)),
                                 cl_plazo = Convert.ToInt32(reader.GetValue(15)),
                                 cl_Cupo = Convert.ToDouble(reader.GetValue(16)),
-                                IdCtaCble_cxc_Credito = Convert.ToString(reader.GetValue(14)),
+                                IdCtaCble_cxc_Credito = null,
                                 es_empresa_relacionada = (Convert.ToString(reader.GetValue(12)) == "SI") ? true : false,
                                 EsClienteExportador = false,
                                 IdNivel = 1,

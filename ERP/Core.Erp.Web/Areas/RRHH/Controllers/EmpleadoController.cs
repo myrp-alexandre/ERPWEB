@@ -760,6 +760,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     {
                         tb_persona_Info info_persona = lst_persona.Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(2))).FirstOrDefault();
                         tb_persona_Info info_persona_empleado = info_persona;
+                        var return_naturaleza = "";
                         var Naturaleza = "NATU";
                         var cedula_ruc = Convert.ToString(reader.GetValue(2));
                         var tipo_doc = Convert.ToString(reader.GetValue(3));
@@ -767,7 +768,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                         var IdHorario = ListaHorario.get_list(IdTransaccionSession).Where(v => v.Descripcion == Convert.ToString(reader.GetValue(41))).FirstOrDefault().IdHorario;
                         //var IdCiudad_empleado = Convert.ToString(reader.GetValue(35));
 
-                        if (cl_funciones.ValidaIdentificacion(tipo_doc, Naturaleza, cedula_ruc))
+                        if (cl_funciones.ValidaIdentificacion(tipo_doc, Naturaleza, cedula_ruc, ref return_naturaleza ))
                         {
                             if (info_persona == null)
                             {
@@ -788,7 +789,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(12))
                                 };
 
-                                //Lista_Persona.Add(info_);
                                 info_persona_empleado = info_;
                             }
                             else
@@ -809,6 +809,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 info_persona_empleado.IdEstadoCivil = Convert.ToString(reader.GetValue(11));
                                 info_persona_empleado.pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(12));
                             }
+
+                            info_persona_empleado.pe_Naturaleza = return_naturaleza;
 
                             ro_empleado_Info info = new ro_empleado_Info
                             {

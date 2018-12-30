@@ -47,6 +47,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Nuevo(tb_persona_Info model)
         {
+            var return_naturaleza = "";
             if (bus_persona.validar_existe_cedula(model.pe_cedulaRuc) != 0)
             {
                 ViewBag.mensaje = "El número de documento ya se encuentra registrado";
@@ -54,8 +55,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
                 return View(model);
             }
 
-            if ((cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc)))
+            if ((cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc, ref return_naturaleza)))
             {
+                model.pe_Naturaleza = return_naturaleza;
                 if (!bus_persona.guardarDB(model))
                 {
                     cargar_combos();
@@ -90,8 +92,10 @@ namespace Core.Erp.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Modificar(tb_persona_Info model)
         {
-            if ((cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc)))
+            var return_naturaleza = "";
+            if ((cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc, ref return_naturaleza)))
             {
+                model.pe_Naturaleza = return_naturaleza;
                 if (!bus_persona.modificarDB(model))
                 {
                     cargar_combos();

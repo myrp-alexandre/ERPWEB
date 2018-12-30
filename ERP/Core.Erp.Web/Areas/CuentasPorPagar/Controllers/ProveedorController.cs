@@ -123,9 +123,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Nuevo(cp_proveedor_Info model)
         {
+            var return_naturaleza = "";
             model.IdUsuario = Session["IdUsuario"].ToString();
-            if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc)))
+            if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc, ref return_naturaleza)))
             {
+                model.info_persona.pe_Naturaleza = return_naturaleza;
                 if (!bus_proveedor.guardarDB(model))
                 {
                     cargar_combos(model.IdEmpresa);
@@ -154,10 +156,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Modificar(cp_proveedor_Info model)
         {
+            var return_naturaleza = "";
             model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
 
-            if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc)))
+            if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc, ref return_naturaleza)))
             {
+                model.info_persona.pe_Naturaleza = return_naturaleza;
                 if (!bus_proveedor.modificarDB(model))
                 {
                     cargar_combos(model.IdEmpresa);
@@ -221,22 +225,24 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             try
             {
+                var return_naturaleza = "";
                 var Lista_Proveedor = ListaProveedor.get_list(model.IdTransaccionSession);
                 var Lista_ClaseProveedor = ListaClaseProveedor.get_list(model.IdTransaccionSession);
 
-                //foreach (var item in Lista_ClaseProveedor)
-                //{
-                //    if (!bus_claseproveedor.guardarDB(item))
-                //    {
-                //        ViewBag.mensaje = "Error al importar el archivo";
-                //        return View(model);
-                //    }
-                //}
+                foreach (var item in Lista_ClaseProveedor)
+                {
+                    if (!bus_claseproveedor.guardarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }
 
                 foreach (var item in Lista_Proveedor)
                 {
-                    if ((cl_funciones.ValidaIdentificacion(item.info_persona.IdTipoDocumento, item.info_persona.pe_Naturaleza, item.info_persona.pe_cedulaRuc)))
+                    if ((cl_funciones.ValidaIdentificacion(item.info_persona.IdTipoDocumento, item.info_persona.pe_Naturaleza, item.info_persona.pe_cedulaRuc, ref return_naturaleza)))
                     {
+                        item.info_persona.pe_Naturaleza = return_naturaleza;
                         if (!bus_proveedor.guardarDB_importacion(item))
                         {
                             ViewBag.mensaje = "Error al importar el archivo";
@@ -357,11 +363,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     {
                         tb_persona_Info info_persona = new tb_persona_Info();
                         tb_persona_Info info_persona_prov = new tb_persona_Info();
-
+                        var return_naturaleza = "";
                         info_persona = lst_persona.Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
                         info_persona_prov = info_persona;
 
-                        if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3)) ))
+                        if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3)), ref return_naturaleza ))
                         {
                             if (info_persona == null)
                             {
@@ -398,6 +404,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                                 info_persona_prov.pe_celular = Convert.ToString(reader.GetValue(11));
                                 info_persona_prov.pe_correo = Convert.ToString(reader.GetValue(8));
                             }
+
+                            info_persona_prov.pe_Naturaleza = return_naturaleza;
 
                             cp_proveedor_Info info = new cp_proveedor_Info
                             {
