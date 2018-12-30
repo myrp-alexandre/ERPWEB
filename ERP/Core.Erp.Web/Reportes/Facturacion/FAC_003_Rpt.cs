@@ -30,44 +30,12 @@ namespace Core.Erp.Web.Reportes.Facturacion
 
             FAC_003_Bus bus_rpt = new FAC_003_Bus();
             List<FAC_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, mostrar_cuotas);
-            //if (lst_rpt.Count > 0)
-            //{
-            //    lbl_valorenletras.Text = funciones.NumeroALetras(lst_rpt.Sum(q=>q.vt_total).ToString());
-            //}
-            //if (lst_rpt.Where(q => q.orden > 0).Count() > 0)
-            //{
-            //    float Height = tbl_factura.Rows[1].HeightF;
-            //    tbl_factura.Rows.Remove(tbl_factura.Rows[1]);
-            //    tbl_factura.HeightF -= Height;
-            //    Detail.HeightF = 16;
-            //}
-            
+            if (lst_rpt.Count > 0)
+            {
+                lbl_ValorEnLetras.Text = funciones.NumeroALetras(lst_rpt.Sum(q => q.vt_Total).ToString());
+            }
+
             this.DataSource = lst_rpt;
-        }
-
-        private void xrTable4_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-
-        }
-
-        private void xrTable3_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-
-        }
-
-        private void xrTable1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-
-        }
-
-        private void lbl_valorenletras_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-
-        }
-
-        private void xrTable2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-
         }
     }
 }
