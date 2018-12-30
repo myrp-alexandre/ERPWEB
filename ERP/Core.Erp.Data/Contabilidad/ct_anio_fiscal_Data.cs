@@ -101,18 +101,19 @@ namespace Core.Erp.Data.Contabilidad
                 {
                     if (Context.ct_anio_fiscal_x_cuenta_utilidad.Where(q => q.IdEmpresa == info.info_anio_ctautil.IdEmpresa && q.IdanioFiscal == info.IdanioFiscal).FirstOrDefault() != null)                    
                         return modificarDB(info);
-                    
 
-                    ct_anio_fiscal Entity = new ct_anio_fiscal()
+                    if (Context.ct_anio_fiscal.Where(q => q.IdanioFiscal == info.IdanioFiscal).FirstOrDefault() == null)
                     {
-                        IdanioFiscal = info.IdanioFiscal,
-                        af_fechaIni = info.af_fechaIni,
-                        af_estado = info.af_estado="A",
-                        af_fechaFin = info.af_fechaFin
-                       
-                    };
-                    Context.ct_anio_fiscal.Add(Entity);
-                                 
+                        ct_anio_fiscal Entity = new ct_anio_fiscal()
+                        {
+                            IdanioFiscal = info.IdanioFiscal,
+                            af_fechaIni = info.af_fechaIni,
+                            af_estado = info.af_estado = "A",
+                            af_fechaFin = info.af_fechaFin
+
+                        };
+                        Context.ct_anio_fiscal.Add(Entity);
+                    }           
                         ct_anio_fiscal_x_cuenta_utilidad Entity_det = new ct_anio_fiscal_x_cuenta_utilidad
                         {
                             IdEmpresa = info.info_anio_ctautil.IdEmpresa,
