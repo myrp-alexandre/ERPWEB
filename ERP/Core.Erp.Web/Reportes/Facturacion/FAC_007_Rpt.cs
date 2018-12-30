@@ -20,9 +20,9 @@ namespace Core.Erp.Web.Reportes.Facturacion
 
         private void FAC_007_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-            lbl_usuario.Text = usuario;
-            lbl_empresa.Text = empresa;
+            //lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+            //lbl_usuario.Text = usuario;
+            //lbl_empresa.Text = empresa;
 
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
