@@ -21,12 +21,39 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  && q.IdCbteVta == IdCbteVta
                                  select new FAC_003_Info
                                  {
-
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdBodega = q.IdBodega,
+                                     IdCbteVta = q.IdCbteVta,
+                                     IdProducto = q.IdProducto,
+                                     IdSucursal = q.IdSucursal,
+                                     vt_cantidad = q.vt_cantidad,
+                                     vt_fecha = q.vt_fecha,
+                                     vt_iva = q.vt_iva,
+                                     vt_NumFactura = q.vt_NumFactura,
+                                     vt_Precio = q.vt_Precio,
+                                     vt_por_iva = q.vt_por_iva,
+                                     cli_cedulaRuc = q.cli_cedulaRuc,
+                                     cli_correo = q.cli_correo,
+                                     cli_direccion = q.cli_direccion,
+                                     cli_Nombre = q.cli_Nombre,
+                                     cli_Telefonos = q.cli_Telefonos,
+                                     DescuentoTotal = q.DescuentoTotal,
+                                     FormaDePago = q.FormaDePago,
+                                     pr_descripcion = q.pr_descripcion,
+                                     Secuencia = q.Secuencia,
+                                     SubtotalConDscto = q.SubtotalConDscto,
+                                     SubtotalIVA =  q.SubtotalIVA,
+                                     SubtotalSinDscto = q.SubtotalSinDscto,
+                                     SubtotalSinIVA = q.SubtotalSinIVA,
+                                     Su_Descripcion = q.Su_Descripcion,
+                                     Su_Direccion = q.Su_Direccion,
+                                     Su_Telefonos = q.Su_Telefonos,
+                                     Expr1 = q.Expr1
                                  }).ToList();
                     
                     
                 }
-                return Lista.OrderBy(q => q.Secuencia).ThenBy(q => q.orden).ToList();
+                return Lista/*.OrderBy(q => q.Secuencia).ThenBy(q => q.orden).ToList()*/;
             }
             catch (Exception)
             {
