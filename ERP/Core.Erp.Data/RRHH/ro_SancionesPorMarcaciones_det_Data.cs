@@ -64,7 +64,7 @@ namespace Core.Erp.Data.RRHH
                 {
                     lista = (from q in context.vwro_marcaciones_x_planificacion_horario
 
-                             where q.IdEmpleado == IdEmpresa
+                             where q.IdEmpresa == IdEmpresa
                              && q.IdNomina == IdNomina
                              && q.es_fechaRegistro<=ff
                              && q.es_fechaRegistro>=fi
@@ -80,6 +80,10 @@ namespace Core.Erp.Data.RRHH
                                  pe_nombre = q.pe_nombre,
                                  pe_nombreCompleto = q.pe_nombreCompleto,
                                  em_codigo = q.em_codigo,
+                                 time_entrada1=q.time_entrada1,
+                                 time_salida1=q.time_salida1,
+                                 HoraIni=q.HoraIni,
+                                 HoraFin=q.HoraFin
                              }).ToList();
                 }
 

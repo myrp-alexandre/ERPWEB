@@ -65,8 +65,16 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "em_tipoCta";
-            column.Caption = "Tipo cta.";
+            column.FieldName = "es_fechaRegistro";
+            column.Caption = "Fecha";
+            column.Width = Unit.Percentage(8);
+            column.PropertiesEdit.DisplayFormatString = "d";
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "HoraIni";
+            column.Caption = "Hora ingreso";
             column.Width = Unit.Percentage(10);
             column.EditorProperties().TextBox(sp =>
             {
@@ -76,8 +84,8 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "em_NumCta";
-            column.Caption = "# cuenta";
+            column.FieldName = "HoraIni";
+            column.Caption = "Ingreso";
             column.Width = Unit.Percentage(10);
             column.EditorProperties().TextBox(sp =>
             {
@@ -86,52 +94,39 @@
             });
         });
 
-
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Valor";
-            column.Caption = "Total";
+            column.FieldName = "HoraFin";
+            column.Caption = "Hora salida";
             column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
+            column.EditorProperties().TextBox(sp =>
             {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
                 sp.Width = Unit.Percentage(100);
 
             });
         });
-
         settings.Columns.Add(column =>
         {
-            column.FieldName = "ValorCancelado";
-            column.Caption = "Total cancelado";
+            column.FieldName = "time_salida1";
+            column.Caption = "Salio";
             column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
+            column.EditorProperties().TextBox(sp =>
             {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
                 sp.Width = Unit.Percentage(100);
 
             });
         });
-
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Saldo";
-            column.Caption = "Saldo";
+            column.FieldName = "Minutos";
+            column.Caption = "Minutos";
             column.Width = Unit.Percentage(10);
-            column.EditorProperties().SpinEdit(sp =>
+            column.EditorProperties().TextBox(sp =>
             {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
                 sp.Width = Unit.Percentage(100);
 
             });
         });
-        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor");
-        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "ValorCancelado");
-        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Saldo");
-
     });
 
 }
