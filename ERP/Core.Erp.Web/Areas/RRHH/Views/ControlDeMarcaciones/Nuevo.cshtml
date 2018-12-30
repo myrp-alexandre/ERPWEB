@@ -140,7 +140,7 @@
 
 
     <div class="box-footer">
-        <button type="submit" onclick="Guardar();" class="btn btn-primary">Guardar</button>
+        <button type="submit" onclick="Guardar();" class="btn btn-primary" id="btn_aprobar">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","ControlDeMarcaciones",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
@@ -214,10 +214,7 @@
      function Guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IDs: selectedIDs,
-            MotivoAprobacion: $("#MotivoAprobacion").val(),
-            IdFormaPago: IdFormaPago.GetValue(),
-            IdUsuarioAprobacion: $("#IdUsuarioAprobacion").val()
+            IDs: selectedIDs
             }
         $("#btn_aprobar").attr("disabled", true);
         $.ajax({

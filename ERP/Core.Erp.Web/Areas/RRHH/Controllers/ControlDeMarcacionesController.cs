@@ -22,6 +22,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_SancionesPorMarcaciones_det_Info_list ro_SancionesPorMarcaciones_det_Info_list = new ro_SancionesPorMarcaciones_det_Info_list();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         ro_Parametros_Bus bus_parametro = new ro_Parametros_Bus();
+        ro_SancionesPorMarcaciones_x_novedad_Info_list ro_SancionesPorMarcaciones_x_novedad_Info_list = new ro_SancionesPorMarcaciones_x_novedad_Info_list();
         #endregion
 
         #region Vistas
@@ -196,6 +197,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
              ro_SancionesPorMarcaciones_det_Info_list.set_list(lista, IdTransaccionSession);
              return Json("", JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult AgregarOC(string Ids = "", decimal IdTransaccionSession = 0)
+        {
+            if (Ids != null)
+            {
+                var lst = ro_SancionesPorMarcaciones_det_Info_list.get_list(IdTransaccionSession);
+                string[] array = Ids.Split(',');
+                var output = array.GroupBy(q => q).ToList();
+                foreach (var item in output)
+                {
+                    if (!string.IsNullOrEmpty(item.Key))
+                    {
+                        var info_add = lst.Where(q => q.Secuencia.ToString() == item.Key).FirstOrDefault();
+                        ro_SancionesPorMarcaciones_x_novedad_Info_list.AddRow(info_add, IdTransaccionSession);
+                    }
+                }
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region cargar combos
@@ -237,13 +257,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_SancionesPorMarcaciones_det_Info info_det)
         {
-            ro_SancionesPorMarcaciones_det_Info_list.DeleteRow(Convert.ToDecimal(info_det.IdEmpleado), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ro_SancionesPorMarcaciones_det_Info_list.DeleteRow(Convert.ToInt32(info_det.Secuencia), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_SancionesPorMarcaciones_Info model = new ro_SancionesPorMarcaciones_Info();
             model.detalle = ro_SancionesPorMarcaciones_det_Info_list.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_archivo_transferencia_det", model);
         }
         #endregion
-
+        
     }
 
     public class ro_SancionesPorMarcaciones_det_Info_list
@@ -267,14 +287,47 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public void UpdateRow(ro_SancionesPorMarcaciones_det_Info info_det, decimal IdTransaccionSession)
         {
-            ro_SancionesPorMarcaciones_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdEmpleado == info_det.IdEmpleado).First();
+            ro_SancionesPorMarcaciones_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
           //  edited_info.Valor = info_det.Valor;
+        }
+
+
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
+        {
+            List<ro_SancionesPorMarcaciones_det_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+    }
+
+    public class ro_SancionesPorMarcaciones_x_novedad_Info_list
+    {
+        string variable = "ro_SancionesPorMarcaciones_x_novedad_Info";
+        public List<ro_SancionesPorMarcaciones_x_novedad_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ro_SancionesPorMarcaciones_x_novedad_Info> list = new List<ro_SancionesPorMarcaciones_x_novedad_Info>();
+
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ro_SancionesPorMarcaciones_x_novedad_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ro_SancionesPorMarcaciones_x_novedad_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void UpdateRow(ro_SancionesPorMarcaciones_x_novedad_Info info_det, decimal IdTransaccionSession)
+        {
+            ro_SancionesPorMarcaciones_x_novedad_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdEmpleado == info_det.IdEmpleado).First();
+            //  edited_info.Valor = info_det.Valor;
         }
 
 
         public void DeleteRow(decimal IdEmpleado, decimal IdTransaccionSession)
         {
-            List<ro_SancionesPorMarcaciones_det_Info> list = get_list(IdTransaccionSession);
+            List<ro_SancionesPorMarcaciones_x_novedad_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.IdEmpleado == IdEmpleado).First());
         }
     }
