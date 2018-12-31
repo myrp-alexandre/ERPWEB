@@ -468,7 +468,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 var Lista_ProvisionesAcumuladas = ListaProvisionesAcumuladas.get_list(model.IdTransaccionSession);
                 var Lista_Vacaciones = ListaVacaciones.get_list();
 
-                if (!bus_empleado.guardarDB_importacion(lista_division, Lista_Area, Lista_Departamento, Lista_Cargo,
+                if (!bus_empleado.guardarDB_importacion(Convert.ToInt32(SessionFixed.IdEmpresa), lista_division, Lista_Area, Lista_Departamento, Lista_Cargo,
                                                         Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_RubrosAcumulados, Lista_TipoNomina, Lista_Contrato, 
                                                         Lista_CargasFamiliares, Lista_ProvisionesAcumuladas, Lista_Vacaciones))
                 {
@@ -648,7 +648,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             IdEmpresa = IdEmpresa,
                             IdRubro = Convert.ToString(reader.GetValue(0)),
                             rub_codigo = Convert.ToString(reader.GetString(2)),
-                            ru_codRolGen = Convert.ToString(reader.GetString(1)),
+                            ru_codRolGen = (Convert.ToString(reader.GetString(1))).Trim(),
                             ru_descripcion = Convert.ToString(reader.GetValue(3)),
                             NombreCorto = Convert.ToString(reader.GetValue(4)),
                             ru_tipo = Convert.ToString(reader.GetValue(5)),
@@ -760,11 +760,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
-                        tb_persona_Info info_persona = lst_persona.Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(2))).FirstOrDefault();
+                        var cedula_ruc = (Convert.ToString(reader.GetValue(2)).Trim());
+
+                        tb_persona_Info info_persona = lst_persona.Where(q => q.pe_cedulaRuc.Trim() == cedula_ruc).FirstOrDefault();
                         tb_persona_Info info_persona_empleado = info_persona;
                         var return_naturaleza = "";
                         var Naturaleza = "NATU";
-                        var cedula_ruc = Convert.ToString(reader.GetValue(2));
+                        
                         var tipo_doc = Convert.ToString(reader.GetValue(3));
                         var tipo_empleado = lst_catalogo_tipo_empleado.Where(q => q.CodCatalogo == Convert.ToString(reader.GetValue(14))).FirstOrDefault();
                         var desc_sexo = Convert.ToString(reader.GetValue(10)).Trim();

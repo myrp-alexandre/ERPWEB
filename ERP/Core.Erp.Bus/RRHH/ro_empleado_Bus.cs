@@ -197,7 +197,7 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public bool guardarDB_importacion(List<ro_division_Info> Lista_Division, List<ro_area_Info> Lista_Area, List<ro_departamento_Info> Lista_Departamento,List<ro_cargo_Info> Lista_Cargo,
+        public bool guardarDB_importacion(int IdEmpresa, List<ro_division_Info> Lista_Division, List<ro_area_Info> Lista_Area, List<ro_departamento_Info> Lista_Departamento,List<ro_cargo_Info> Lista_Cargo,
                                         List<ro_rubro_tipo_Info> Lista_Rubro, List<ro_horario_Info> Lista_Horario, List<ro_turno_Info> Lista_Turno, List<ro_empleado_Info> Lista_Empleado, List<ro_empleado_x_rubro_acumulado_Info> Lista_RubrosAcumulados, List<ro_nomina_tipo_Info> Lista_TipoNomina, List<ro_contrato_Info> Lista_Contrato,
                                         List<ro_cargaFamiliar_Info> Lista_CargasFamiliares, List<ro_rol_detalle_x_rubro_acumulado_Info> Lista_ProvisionesAcumuladas, List<ro_historico_vacaciones_x_empleado_Info> Lista_VacacionesList)
         {
@@ -223,7 +223,7 @@ namespace Core.Erp.Bus.RRHH
                 }
                 if (Lista_Empleado.Count == count)
                 {
-                    return odata.guardarDB_importacion(Lista_Division, Lista_Area, Lista_Departamento, Lista_Cargo,
+                    return odata.guardarDB_importacion(IdEmpresa, Lista_Division, Lista_Area, Lista_Departamento, Lista_Cargo,
                                                     Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_RubrosAcumulados, Lista_TipoNomina, Lista_Contrato,
                                                     Lista_CargasFamiliares, Lista_ProvisionesAcumuladas, Lista_VacacionesList);
                 }

@@ -9,6 +9,18 @@ namespace Core.Erp.Info.Reportes.Facturacion
     public class FAC_006_Info
     {
         public int IdEmpresa { get; set; }
+        public string em_nombre { get; set; }
+        public string em_ruc { get; set; }
+        public string Su_CodigoEstablecimiento { get; set; }
+        public string Su_Descripcion { get; set; }
+        public string Su_Direccion { get; set; }
+        public string Su_Telefonos { get; set; }
+        public decimal IdCliente { get; set; }
+        public string nombre_cliente { get; set; }
+        public string ced_ruc_cliente { get; set; }
+        public string direccion_cliente { get; set; }
+        public string celular_cliente { get; set; }
+        public string telefono_cliente { get; set; }
         public int IdSucursal { get; set; }
         public decimal IdProforma { get; set; }
         public int Secuencia { get; set; }
