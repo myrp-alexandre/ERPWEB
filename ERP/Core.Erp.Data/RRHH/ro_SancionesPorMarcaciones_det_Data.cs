@@ -55,6 +55,7 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                int Secuencia = 1;
                 DateTime fi = FechaInicio.Date;
                 DateTime ff = FechaFin.Date;
                 List<ro_SancionesPorMarcaciones_det_Info> lista;
@@ -81,7 +82,8 @@ namespace Core.Erp.Data.RRHH
                                  time_entrada1=q.time_entrada1,
                                  time_salida1=q.time_salida1,
                                  HoraIni=q.HoraIni,
-                                 HoraFin=q.HoraFin
+                                 HoraFin=q.HoraFin,
+                                 Sueldo=  q.Sueldo
                              }).ToList();
                 }
 
@@ -97,6 +99,8 @@ namespace Core.Erp.Data.RRHH
                    {
                        item.Minutos = item.Minutos+( item.HoraFin.TotalMinutes - item.time_salida1.TotalMinutes);
                    }
+                   item.Secuencia = Secuencia;
+                   Secuencia++;
                }
                 );
                 return lista;
