@@ -21,14 +21,16 @@ namespace Core.Erp.Data
         public decimal IdEmpleado { get; set; }
         public int IdSucursal { get; set; }
         public string IdTipoMarcaciones { get; set; }
-        public System.TimeSpan EsHoraHorario { get; set; }
-        public System.TimeSpan EsHoraMarcacion { get; set; }
+        public System.TimeSpan EsHoraIngreso { get; set; }
+        public System.TimeSpan HoraIngreso { get; set; }
+        public System.TimeSpan EsHoraSalida { get; set; }
+        public System.TimeSpan HoraSalio { get; set; }
         public double Minutos { get; set; }
-        public decimal IdRegistro { get; set; }
         public string Observacion { get; set; }
+        public System.DateTime FechaRegistro { get; set; }
     
+        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_marcaciones_tipo ro_marcaciones_tipo { get; set; }
-        public virtual ro_marcaciones_x_empleado ro_marcaciones_x_empleado { get; set; }
         public virtual ro_SancionesPorMarcaciones ro_SancionesPorMarcaciones { get; set; }
     }
 }

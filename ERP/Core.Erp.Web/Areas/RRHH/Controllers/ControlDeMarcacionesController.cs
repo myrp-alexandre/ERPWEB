@@ -23,6 +23,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
         ro_Parametros_Bus bus_parametro = new ro_Parametros_Bus();
         ro_SancionesPorMarcaciones_x_novedad_Info_list ro_SancionesPorMarcaciones_x_novedad_Info_list = new ro_SancionesPorMarcaciones_x_novedad_Info_list();
+        List<ro_SancionesPorMarcaciones_det_Info> lst_grabar = new List<ro_SancionesPorMarcaciones_det_Info>();
+
         #endregion
 
         #region Vistas
@@ -198,8 +200,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
              return Json("", JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult AgregarOC(string Ids = "", decimal IdTransaccionSession = 0)
+        public JsonResult GuardarMarcaciones(string Ids = "", decimal IdTransaccionSession = 0)
         {
+            ro_SancionesPorMarcaciones_Info model = new ro_SancionesPorMarcaciones_Info();
             if (Ids != null)
             {
                 var lst = ro_SancionesPorMarcaciones_det_Info_list.get_list(IdTransaccionSession);
@@ -210,9 +213,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     if (!string.IsNullOrEmpty(item.Key))
                     {
                         var info_add = lst.Where(q => q.Secuencia.ToString() == item.Key).FirstOrDefault();
-                        ro_SancionesPorMarcaciones_x_novedad_Info_list.AddRow(info_add, IdTransaccionSession);
+                        lst_grabar.Add(info_add);
                     }
                 }
+                model.detalle = new List<ro_SancionesPorMarcaciones_det_Info>();
+                model.detalle = lst_grabar;
+                bus_sanciones.guardarDB(model);
             }
             return Json("", JsonRequestBehavior.AllowGet);
         }

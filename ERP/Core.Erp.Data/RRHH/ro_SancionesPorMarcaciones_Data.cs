@@ -64,6 +64,20 @@ namespace Core.Erp.Data.RRHH
                         FechaNovedades=info.FechaNovedades
 
                     };
+                    foreach (var item in info.detalle)
+                    {
+
+                        ro_SancionesPorMarcaciones_det entity_det = new ro_SancionesPorMarcaciones_det
+                        {
+                            IdEmpresa=info.IdEmpresa,
+                            IdSucursal=item.IdSucursal,
+                            IdAjuste=info.IdAjuste,
+                            IdCalendario=item.IdCalendario,
+                            IdEmpleado=item.IdEmpleado,
+                             
+
+                        };
+                    }
                     Context.ro_SancionesPorMarcaciones.Add(entity);
                 }
 

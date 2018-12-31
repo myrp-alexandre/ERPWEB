@@ -15,6 +15,7 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+
                 return odata.guardarDB(info);
             }
             catch (Exception)
