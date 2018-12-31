@@ -188,7 +188,7 @@ namespace Core.Erp.Bus.RRHH
 
             try
             {
-                int periodo = 24;
+                int periodo = 12;
                 for (int i = 1; i <= periodo; i++)
                 {
                     DateTime k = new DateTime(anio, i, 1);
