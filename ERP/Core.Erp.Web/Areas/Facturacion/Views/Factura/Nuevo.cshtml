@@ -13,7 +13,6 @@
     $(function () {
         CargarPuntosDeVenta();
         get_info_termino_pago();
-        GetUltimoDocumento();
         ValidarGrid();
         ValidarCliente();        
         $("#vt_tipo_venta").change(function () {
@@ -25,10 +24,6 @@
         });
         $("#IdSucursal").change(function () {
             CargarPuntosDeVenta();
-            GetUltimoDocumento();
-        });
-        $("#IdPuntoVta").change(function () {
-            GetUltimoDocumento();
         });
         $("#valor_abono").change(function () {
             CargarCuotas();
@@ -373,30 +368,7 @@
         });
     }
 
-       function GetUltimoDocumento() {
-        var datos = {
-            IdSucursal: $("#IdSucursal").val(),
-            IdPuntoVta: $("#IdPuntoVta").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetUltimoDocumento", "Factura",new { Area = "Facturacion"})',
-            async: false,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#vt_serie1").val(data.Establecimiento);
-                $("#vt_serie2").val(data.PuntoEmision);
-                $("#vt_NumFactura").val(data.NumDocumento);
-            },
-            error: function (error) {
-            }
-        });
-        }
-
-
-        function CargarCuotas() {
+       function CargarCuotas() {
             var datos = {
                 FechaPrimerPago: fecha_primera_cuota.GetDate(),
                     IdTerminoPago: $("#vt_tipo_venta").val(),
@@ -743,25 +715,11 @@
                     @Html.ValidationMessageFor(q => q.IdContacto, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label for="vt_serie1">Establecimiento*</label>
-                    @Html.TextBoxFor(q => q.vt_serie1, new { @class = "form-control", @id = "vt_serie1" })
-                    @Html.ValidationMessageFor(q => q.vt_serie1, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="vt_serie2">Pto. Emisión*</label>
-                    @Html.TextBoxFor(q => q.vt_serie2, new { @class = "form-control", @id = "vt_serie2" })
-                    @Html.ValidationMessageFor(q => q.vt_serie2, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="vt_NumFactura"># Documento*</label>
-                    @Html.TextBoxFor(q => q.vt_NumFactura, new { @class = "form-control", @id = "vt_NumFactura" })
-                    @Html.ValidationMessageFor(q => q.vt_NumFactura, "", new { @class = "text-danger" })
+                    <label for="pf_observacion">Observación</label>
+                    @Html.TextBoxFor(q => q.vt_Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.vt_Observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
@@ -804,9 +762,9 @@
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="EnumeradorCobro">Tipo de cobro*</label>
-                                @Html.DropDownListFor(q => q.EnumeradorCobro, new SelectList(ViewBag.lst_enumerador_cobro, "Key", "Value"), new { @class = "form-control", @id = "EnumeradorCobro" })
-                                @Html.ValidationMessageFor(q => q.EnumeradorCobro, "", new { @class = "text-danger" })
+                                <label for="IdCatalogo_FormaPago">Forma de pago*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogo_FormaPago, new SelectList(ViewBag.lst_formapago, "IdCatalogo", "Nombre"), new { @class = "form-control", @id = "EnumeradorCobro" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogo_FormaPago, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -879,13 +837,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="pf_observacion">Observación</label>
-                                @Html.TextBoxFor(q => q.vt_Observacion, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.vt_Observacion, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                        
                     </div>
                     <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
                         <div class="row">

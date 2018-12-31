@@ -53,6 +53,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         cxc_cobro_tipo_Bus bus_tipo_cobro = new cxc_cobro_tipo_Bus();
         fa_NivelDescuento_Bus bus_nivelDescuento = new fa_NivelDescuento_Bus();
+        fa_catalogo_Bus bus_catalogo = new fa_catalogo_Bus();
         #endregion
 
         #region Index
@@ -148,11 +149,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_NivelDescuento = bus_nivelDescuento.GetList(model.IdEmpresa, false);
             ViewBag.lst_NivelDescuento = lst_NivelDescuento;
 
-            Dictionary<string, string> lst_enumerador_cobro = new Dictionary<string, string>();
-            lst_enumerador_cobro.Add(cl_enumeradores.eCobroFactura.EFEC.ToString(), "EFECTIVO");
-            lst_enumerador_cobro.Add(cl_enumeradores.eCobroFactura.CRED.ToString(), "CREDITO");            
-            lst_enumerador_cobro.Add(cl_enumeradores.eCobroFactura.TARJ.ToString(), "TARJETA DE CREDITO");            
-            ViewBag.lst_enumerador_cobro = lst_enumerador_cobro;
+            var lst_formapago = bus_catalogo.get_list((int)cl_enumeradores.eTipoCatalogoFact.FormaDePago, false);            
+            ViewBag.lst_formapago = lst_formapago;
         }
         private bool validar(fa_factura_Info i_validar, ref string msg)
         {
@@ -200,7 +198,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltModi = SessionFixed.IdUsuario;
 
-            if (i_validar.IdCbteVta == 0)
+            #region ValidacionDeTalonario
+            /*
+             if (i_validar.IdCbteVta == 0)
             {
                 var talonario = bus_talonario.get_info(i_validar.IdEmpresa, i_validar.vt_tipoDoc, i_validar.vt_serie1, i_validar.vt_serie2, i_validar.vt_NumFactura);
                 if (talonario == null)
@@ -219,7 +219,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     return false;
                 }                
             }
+             */
+            #endregion
 
+            #region ValidacionCupoCredito
             if (!bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, i_validar.lst_det.Sum(q => q.vt_total), ref MsgValidaciones))
             {
                 var info_usuarios = bus_usuario.get_info(string.IsNullOrEmpty(i_validar.IdUsuarioAut) ? "" : i_validar.IdUsuarioAut);
@@ -241,8 +244,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     return false;
                 }
             }
+            #endregion
 
-            if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa,i_validar.IdCliente,ref MsgValidaciones))
+            #region ValidacionCarteraVencida
+            if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa, i_validar.IdCliente, ref MsgValidaciones))
             {
                 var info_usuario = bus_usuario.get_info(string.IsNullOrEmpty(i_validar.IdUsuarioAut) ? "" : i_validar.IdUsuarioAut);
 
@@ -264,7 +269,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     return false;
                 }
             }
+            #endregion
 
+            #region ValidarStock
             var lst_validar = i_validar.lst_det.Select(q => new in_Producto_Stock_Info
             {
                 IdEmpresa = i_validar.IdEmpresa,
@@ -277,10 +284,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 CantidadAnterior = q.CantidadAnterior,
                 SeDestribuye = (bool)q.se_distribuye
             }).ToList();
+
             if (!bus_producto.validar_stock(lst_validar, ref msg))
             {
                 return false;
             }
+            #endregion
+
 
             return true;
         }
@@ -581,6 +591,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+
             fa_factura_Info model = new fa_factura_Info
             {
                 IdEmpresa = IdEmpresa,

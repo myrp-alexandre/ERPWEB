@@ -239,7 +239,8 @@ namespace Core.Erp.Data.Facturacion
                     vt_Total = info.vt_Total,
                     vt_Cambio = info.vt_Cambio,
                     vt_ValorEfectivo = info.vt_ValorEfectivo,
-                    IdNivel = info.IdNivel
+                    IdNivel = info.IdNivel,
+                    
                 });
                 #endregion
 
@@ -711,7 +712,6 @@ namespace Core.Erp.Data.Facturacion
                 Entity.IdNivel = info.IdNivel;
                 Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                 Entity.Fecha_UltMod = DateTime.Now;
-
 
                 #endregion
                 var contacto = db_f.fa_cliente_contactos.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente && q.IdContacto == info.IdContacto).FirstOrDefault();
