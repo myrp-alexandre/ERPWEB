@@ -35,10 +35,10 @@
 </script>
 @using (Html.BeginForm("Nuevo", "ControlDeMarcaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdAjuste)
-    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdAjuste, new { @id = "IdAjuste" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -133,7 +133,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Valor">Observaciones</label>
-                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" ,@id= "Observacion" })
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", @id = "Observacion" })
                     @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
                 </div>
             </div>

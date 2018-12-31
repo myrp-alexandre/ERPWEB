@@ -37,6 +37,7 @@ namespace Core.Erp.Info.RRHH
         public System.TimeSpan HoraIni { get; set; }
         public System.TimeSpan HoraFin { get; set; }
         public Nullable<double> Sueldo { get; set; }
+        public bool seleccionado { get; set; }
 
         #endregion
     }

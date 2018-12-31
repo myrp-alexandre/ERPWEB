@@ -28,6 +28,7 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                odata = new ro_SancionesPorMarcaciones_det_Data();
                 return odata.get_list(IdEmpresa, IdAjuste);
             }
             catch (Exception)

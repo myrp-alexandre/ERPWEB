@@ -19,7 +19,7 @@ namespace Core.Erp.Data.RRHH
                 {
                     lista = (from q in context.vwro_SancionesPorMarcaciones_x_novedad
 
-                             where q.IdEmpleado == IdEmpresa
+                             where q.IdEmpresa == IdEmpresa
                              && q.IdAjuste == IdAjuste
                              select new ro_SancionesPorMarcaciones_x_novedad_Info
                              {

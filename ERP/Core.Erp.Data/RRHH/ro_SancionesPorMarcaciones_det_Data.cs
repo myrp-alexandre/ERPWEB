@@ -18,7 +18,7 @@ namespace Core.Erp.Data.RRHH
                 {
                     lista = (from q in context.vwro_SancionesPorMarcaciones_det
 
-                             where q.IdEmpleado == IdEmpresa
+                             where q.IdEmpresa == IdEmpresa
                              && q.IdAjuste == IdAjuste
                              select new ro_SancionesPorMarcaciones_det_Info
                              {
@@ -28,8 +28,11 @@ namespace Core.Erp.Data.RRHH
                                  IdCalendario = q.IdCalendario,
                                  IdEmpleado = q.IdEmpleado,
                                  IdSucursal = q.IdSucursal,
-                                 time_entrada1 = q.EsHoraIngreso,
-                                 time_salida1 = q.EsHoraSalida,
+                                 EsHoraIngreso = q.HoraIngreso,
+                                 time_entrada1 = q.HoraIngreso,
+                                 time_salida1 = q.HoraSalio,
+                                 HoraIni = q.EsHoraIngreso,
+                                 HoraFin = q.EsHoraSalida,
                                  es_fechaRegistro = q.FechaRegistro,
                                  pe_cedulaRuc = q.pe_cedulaRuc,
                                  pe_apellido = q.pe_apellido,
@@ -37,7 +40,9 @@ namespace Core.Erp.Data.RRHH
                                  pe_nombreCompleto = q.pe_nombreCompleto,
                                  em_codigo = q.em_codigo,
                                  Minutos = q.Minutos,
-                                 Observacion = q.Observacion
+                                 Observacion = q.Observacion,
+                                 
+                                 seleccionado=true
                              }).ToList();
                 }
 
@@ -103,7 +108,7 @@ namespace Core.Erp.Data.RRHH
                    Secuencia++;
                }
                 );
-                return lista;
+                return lista.Where(v=>v.Minutos>0).ToList();
             }
             catch (Exception)
             {
