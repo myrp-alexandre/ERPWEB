@@ -565,7 +565,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                 IdCtaCble_cxc_Credito = CtaCbleClase==null ? null: CtaCbleClase.IdCtaCble_CXC_Cred,
                                 es_empresa_relacionada = (Convert.ToString(reader.GetValue(12)) == "SI") ? true : false,
                                 EsClienteExportador = false,
-                                IdNivel = 3,
+                                IdNivel = 1,
                                 IdTipoCredito = "CON",
                                 FormaPago = "01",
                                 IdUsuario = SessionFixed.IdUsuario
