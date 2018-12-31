@@ -190,7 +190,7 @@
                     FechaInicio: FechaInicio.GetValue(),
                     FechaFin: FechaFin.GetValue(),
                     IdNomina_Tipo: $("#IdNomina_Tipo").val(),
-                    IdTransaccionSession: $("#IdTransaccionSession").val()
+                    IdTransaccionSession: $("#IdTransaccionSession").val(),
 
                 }
 
@@ -214,6 +214,12 @@
      function Guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
+            IdNomina_Tipo: $("#IdNomina_Tipo").val(),
+            IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
+            FechaInicio: FechaInicio.GetValue(),
+            FechaFin: FechaFin.GetValue(),
+            Fecha_PriPago: Fecha_PriPago.GetValue(),
+
             IDs: selectedIDs
             }
         $("#btn_aprobar").attr("disabled", true);

@@ -69,6 +69,7 @@ namespace Core.Erp.Data.RRHH
                         FechaNovedades = info.FechaNovedades
 
                     };
+                    Context.ro_SancionesPorMarcaciones.Add(entity);
                     foreach (var item in info.detalle)
                     {
 
@@ -90,8 +91,9 @@ namespace Core.Erp.Data.RRHH
 
 
                         };
+                        Context.ro_SancionesPorMarcaciones_det.Add(entity_det);
+
                     }
-                    Context.ro_SancionesPorMarcaciones.Add(entity);
 
                     // agrupnado para obter vlor para novedad
                     var lista_novedades = (from q in info.detalle
