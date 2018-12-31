@@ -46,6 +46,20 @@
             EST_CONCI = 4,
             EST_PAG = 5
         }
+
+        public enum eTipoCatalogoFact
+        {
+            FormaDePago = 15            
+        }
+
+        public enum eCatalogoFact
+        {
+            EFEC,
+            TARCRE,
+            CRED,
+            TARDEB
+        }
+
         public enum eTipoBusquedaProducto
         {
             SOLOPADRES,

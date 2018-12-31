@@ -1,4 +1,4 @@
-﻿using Core.Erp.Bus.Banco;
+﻿ using Core.Erp.Bus.Banco;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
@@ -83,34 +83,41 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipocbte, IdCbteCble, "ESTCBENT");
             return View(model);
         }
-        public ActionResult BAN_005_Masivo(int IdTipocbte = 0, decimal IdCbteCble = 0, int NumDesde = 0, int NumHasta = 0, int IdBanco = 0)
-        {
-            BAN_005_Rpt report = new BAN_005_Rpt();
-            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
-            report.p_IdTipocbte.Value = IdTipocbte;
-            report.p_IdCbteCble.Value = IdCbteCble;
-            report.p_NumDesde.Value = NumDesde;
-            report.p_NumHasta.Value = NumHasta;
-            report.p_IdBanco.Value = IdBanco;
-            cargar_banco(Convert.ToInt32(SessionFixed.IdEmpresa));
-            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipocbte, IdCbteCble, "ESTCBENT");
-            ViewBag.Report = report;
-            return View();
-        }
-        [HttpPost]
         public ActionResult BAN_005_Masivo()
         {
+            cl_filtros_banco_Info model = new cl_filtros_banco_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdBanco = 0,
+                NumDesde = 0 , 
+                NumHasta = 0
+            };
             BAN_005_Rpt report = new BAN_005_Rpt();
             report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             report.p_IdTipocbte.Value = 0;
             report.p_IdCbteCble.Value = 0;
-            report.p_NumDesde.Value = 0;
-            report.p_NumHasta.Value = 0;
-            report.p_IdBanco.Value = 0;
+            report.p_NumDesde.Value = model.NumDesde;
+            report.p_NumHasta.Value = model.NumHasta;
+            report.p_IdBanco.Value = model.IdBanco;
+            cargar_banco(Convert.ToInt32(SessionFixed.IdEmpresa));
+            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), 0, 0, "ESTCBENT");
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult BAN_005_Masivo(cl_filtros_banco_Info model)
+        {
+            BAN_005_Rpt report = new BAN_005_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdTipocbte.Value = 0;
+            report.p_IdCbteCble.Value = 0;
+            report.p_NumDesde.Value = model.NumDesde;
+            report.p_NumHasta.Value = model.NumHasta;
+            report.p_IdBanco.Value = model.IdBanco;
             bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), 0, 0, "ESTCBENT");
             ViewBag.Report = report;
             cargar_banco(Convert.ToInt32(SessionFixed.IdEmpresa));
-            return View();
+            return View(model);
         }
         public ActionResult BAN_006(int IdTipoCbte = 0, decimal IdCbteCble = 0)
         {

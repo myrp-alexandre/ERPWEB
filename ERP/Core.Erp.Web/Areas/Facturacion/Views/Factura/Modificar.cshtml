@@ -223,9 +223,9 @@
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="IdNivel">Tipo de cobro*</label>
-                                @Html.DropDownListFor(q => q.EnumeradorCobro, new SelectList(ViewBag.lst_enumerador_cobro, "Key", "Value"), new { @class = "form-control", @id = "EnumeradorCobro" })
-                                @Html.ValidationMessageFor(q => q.EnumeradorCobro, "", new { @class = "text-danger" })
+                                <label for="IdCatalogo_FormaPago">Forma de pago*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogo_FormaPago, new SelectList(ViewBag.lst_formapago, "IdCatalogo", "Nombre"), new { @class = "form-control", @id = "EnumeradorCobro" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogo_FormaPago, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-6">

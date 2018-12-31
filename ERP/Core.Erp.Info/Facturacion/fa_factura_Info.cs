@@ -55,7 +55,6 @@ namespace Core.Erp.Info.Facturacion
         public Nullable<System.DateTime> fecha_primera_cuota { get; set; }
         public Nullable<double> valor_abono { get; set; }
 
-        public string EnumeradorCobro { get; set; }
         public int IdNivel { get; set; }
         public double vt_Total { get; set; }
         public double vt_ValorEfectivo { get; set; }

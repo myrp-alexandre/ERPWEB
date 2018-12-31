@@ -32,11 +32,18 @@
         //Capture all selected keys
         selectedIDs = values.join(',');
     }
+    $(function () {
+        // GridViewPartial_control_marcaciones_det.GetSelectedFieldValues("Secuencia", GridViewPartial_control_marcaciones_det.GetSelectedFieldValuesCallback);
+        function OnSelectionChanged(s, e) {
+            s.GetSelectedFieldValues("Secuencia", GetSelectedFieldValuesCallback);
+
+        }
+    });
 </script>
 @using (Html.BeginForm("Anular", "ControlDeMarcaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdAjuste)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdAjuste, new { @id = "IdAjuste" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     <div class="row">
@@ -88,9 +95,7 @@
                     </div>
                 </div>
             </div>
-            <div class="box-footer">
-                <button type="button" onclick="buscar_marcaciones();" class="btn btn-primary">Buscar</button>
-            </div>
+          
         </div>
     </div>
     <div class="row">
@@ -154,7 +159,7 @@
 
 
     <div class="box-footer">
-        <button type="button" onclick="Guardar();" class="btn btn-primary" id="btn_aprobar">Guardar</button>
+        <button type="button" onclick="Guardar();" class="btn btn-danger" id="btn_aprobar">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","ControlDeMarcaciones",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
@@ -226,8 +231,10 @@
     };
 
      function Guardar() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
+         var datos = {
+
+             IdEmpresa: $("#IdEmpresa").val(),
+             IdAjuste: $("#IdAjuste").val(),
             IdNomina_Tipo: $("#IdNomina_Tipo").val(),
             IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
             FechaInicio: FechaInicio.GetValue(),
@@ -242,7 +249,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("GuardarMarcaciones", "ControlDeMarcaciones", new { Area = "RRHH" })',
+            url: '@Url.Action("AnularMarcaciones", "ControlDeMarcaciones", new { Area = "RRHH" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
