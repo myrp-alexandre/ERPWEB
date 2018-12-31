@@ -200,8 +200,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
              ro_SancionesPorMarcaciones_det_Info_list.set_list(lista, IdTransaccionSession);
              return Json("", JsonRequestBehavior.AllowGet);
         }
+        
+        public JsonResult GuardarMarcaciones(int IdEmpresa, int IdNomina_Tipo, int IdNomina_TipoLiqui,
+            DateTime? FechaInicio, DateTime? FechaFin, DateTime? FechaNovedades, string Observacion=""
 
-        public JsonResult GuardarMarcaciones(int IdEmpresa=0, int IdNomina_Tipo=0, int IdNomina_TipoLiqui=0, string Ids = "", decimal IdTransaccionSession = 0)
+            , string Ids = "", decimal IdTransaccionSession = 0)
         {
             ro_SancionesPorMarcaciones_Info model = new ro_SancionesPorMarcaciones_Info();
             if (Ids != null)
@@ -219,9 +222,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 }
                 model.detalle = new List<ro_SancionesPorMarcaciones_det_Info>();
                 model.detalle = lst_grabar;
+                model.IdEmpresa = IdEmpresa;
                 model.IdNomina_Tipo = IdNomina_Tipo;
                 model.IdNomina_TipoLiqui = IdNomina_TipoLiqui;
-                model.IdEmpresa = IdEmpresa;
+                model.FechaFin =Convert.ToDateTime( FechaFin);
+                model.FechaInicio =Convert.ToDateTime( FechaInicio);
+                model.FechaNovedades =Convert.ToDateTime( FechaNovedades);
+                model.Observacion = Observacion;
                 bus_sanciones.guardarDB(model);
             }
             return Json("", JsonRequestBehavior.AllowGet);
