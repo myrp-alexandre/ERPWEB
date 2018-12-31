@@ -67,7 +67,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
 
         #region acciones
-        public ActionResult Nuevo(int IdEmpresa = 0, int IdNomina_Tipo_Tipo = 0, int IdNomina_Tipo_TipoLiqui = 0, int IdPeriodo = 0)
+        public ActionResult Nuevo()
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -78,8 +78,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_SancionesPorMarcaciones_Info model = new ro_SancionesPorMarcaciones_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdNomina_Tipo = IdNomina_Tipo_Tipo,
-                IdNomina_TipoLiqui = IdNomina_Tipo_TipoLiqui,
+                FechaInicio = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                FechaFin = DateTime.Now.AddMonths(1).AddDays(-1),
+                FechaNovedades=DateTime.Now,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
 
 
@@ -200,7 +201,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
              return Json("", JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GuardarMarcaciones(string Ids = "", decimal IdTransaccionSession = 0)
+        public JsonResult GuardarMarcaciones(int IdEmpresa=0, int IdNomina_Tipo=0, int IdNomina_TipoLiqui=0, string Ids = "", decimal IdTransaccionSession = 0)
         {
             ro_SancionesPorMarcaciones_Info model = new ro_SancionesPorMarcaciones_Info();
             if (Ids != null)
@@ -218,6 +219,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 }
                 model.detalle = new List<ro_SancionesPorMarcaciones_det_Info>();
                 model.detalle = lst_grabar;
+                model.IdNomina_Tipo = IdNomina_Tipo;
+                model.IdNomina_TipoLiqui = IdNomina_TipoLiqui;
+                model.IdEmpresa = IdEmpresa;
                 bus_sanciones.guardarDB(model);
             }
             return Json("", JsonRequestBehavior.AllowGet);

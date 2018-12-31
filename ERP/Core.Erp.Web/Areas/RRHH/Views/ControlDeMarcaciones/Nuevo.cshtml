@@ -190,7 +190,7 @@
                     FechaInicio: FechaInicio.GetValue(),
                     FechaFin: FechaFin.GetValue(),
                     IdNomina_Tipo: $("#IdNomina_Tipo").val(),
-                    IdTransaccionSession: $("#IdTransaccionSession").val()
+                    IdTransaccionSession: $("#IdTransaccionSession").val(),
 
                 }
 
@@ -214,6 +214,8 @@
      function Guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
+            IdNomina_Tipo: $("#IdNomina_Tipo").val(),
+            IdNomina_TipoLiquio: $("#IdNomina_TipoLiquio").val(),
             IDs: selectedIDs
             }
         $("#btn_aprobar").attr("disabled", true);
