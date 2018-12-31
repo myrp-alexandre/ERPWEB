@@ -278,7 +278,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_SancionesPorMarcaciones_det_Info_list.DeleteRow(Convert.ToInt32(info_det.Secuencia), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_SancionesPorMarcaciones_Info model = new ro_SancionesPorMarcaciones_Info();
             model.detalle = ro_SancionesPorMarcaciones_det_Info_list.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_archivo_transferencia_det", model);
+            return PartialView("_GridViewPartial_control_marcaciones_det", model);
         }
         #endregion
         

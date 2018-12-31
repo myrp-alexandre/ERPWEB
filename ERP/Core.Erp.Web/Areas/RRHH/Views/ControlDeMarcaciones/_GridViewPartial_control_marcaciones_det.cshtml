@@ -11,17 +11,22 @@
         settings.Width = Unit.Percentage(100);
 
 
-        //settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
-        //settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ArchivosTransferencias", Action = "EditingUpdate", Area = "RRHH" };
-        //settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ArchivosTransferencias", Action = "EditingDelete", Area = "RRHH" };
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ControlDeMarcaciones", Action = "EditingUpdate", Area = "RRHH" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ControlDeMarcaciones", Action = "EditingDelete", Area = "RRHH" };
 
         settings.CommandColumn.Visible = false;
-        settings.CommandColumn.ShowEditButton = false;
-        settings.CommandColumn.ShowDeleteButton = false;
-        settings.Settings.ShowFooter = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowEditButton = true;
 
-        //settings.SettingsContextMenu.Enabled = true;
-        //settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
+        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
@@ -62,17 +67,19 @@
                 sp.Width = Unit.Percentage(100);
 
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Nombres";
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(30);
             column.EditorProperties().TextBox(sp =>
             {
                 sp.Width = Unit.Percentage(100);
 
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
@@ -80,6 +87,7 @@
             column.Caption = "Fecha";
             column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
         settings.Columns.Add(column =>
@@ -92,6 +100,8 @@
                 sp.Width = Unit.Percentage(100);
 
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
         settings.Columns.Add(column =>
         {
@@ -103,6 +113,8 @@
                 sp.Width = Unit.Percentage(100);
 
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
 
         settings.Columns.Add(column =>
@@ -115,6 +127,8 @@
                 sp.Width = Unit.Percentage(100);
 
             });
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+
         });
         settings.Columns.Add(column =>
         {
@@ -131,7 +145,7 @@
         {
             column.FieldName = "Minutos";
             column.Caption = "Minutos";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.EditorProperties().TextBox(sp =>
             {
                 sp.Width = Unit.Percentage(100);

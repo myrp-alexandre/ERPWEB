@@ -132,7 +132,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="Valor">Observaciones*</label>
+                    <label for="Valor">Observaciones</label>
                     @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" ,@id= "Observacion" })
                     @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
                 </div>
@@ -154,7 +154,7 @@
 
 
     <div class="box-footer">
-        <button type="submit" onclick="Guardar();" class="btn btn-primary" id="btn_aprobar">Guardar</button>
+        <button type="button" onclick="Guardar();" class="btn btn-primary" id="btn_aprobar">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","ControlDeMarcaciones",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
@@ -232,7 +232,7 @@
             IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
             FechaInicio: FechaInicio.GetValue(),
             FechaFin: FechaFin.GetValue(),
-            FechaNovedades: Fecha_PriPago.GetValue(),
+            FechaNovedades: FechaNovedades.GetValue(),
             Observacion: $("#Observacion").val(),
             IDs: selectedIDs,
             IdTransaccionSession: $("#IdTransaccionSession").val(),
@@ -249,8 +249,9 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#myform").submit();
-            },
+             window.location.href = '@Url.Action("Index", "ControlDeMarcaciones", new { Area = "RRHH" })';
+
+           },
             error: function (error) {
             }
         });

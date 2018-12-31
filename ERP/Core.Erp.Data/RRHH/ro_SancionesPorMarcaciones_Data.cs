@@ -87,12 +87,14 @@ namespace Core.Erp.Data.RRHH
                             HoraSalio = item.time_salida1,
                             Minutos = item.Minutos,
                             FechaRegistro = item.es_fechaRegistro,
+                            Secuencia=secuancia
                         };
                         Context.ro_SancionesPorMarcaciones_det.Add(entity_det);
-
+                        secuancia++;
                     }
 
                     // agrupnado para obter valor para novedad
+                    secuancia = 1;
                     var lista_novedades = (from q in info.detalle
                                            group q by new
                                            {
@@ -133,7 +135,7 @@ namespace Core.Erp.Data.RRHH
                         ro_empleado_novedad_det novedad_det = new ro_empleado_novedad_det
                         {
                             IdEmpresa = info.IdEmpresa,
-                            IdNovedad = item.IdNovedad,
+                            IdNovedad = IdNovedad,
                             IdRubro = "200",
                             Valor = item.Valor * (((Convert.ToDouble(item.Sueldo)) / 240) / 60),
                             FechaPago = info.FechaNovedades,
@@ -157,7 +159,7 @@ namespace Core.Erp.Data.RRHH
                         };
                         Context.ro_SancionesPorMarcaciones_x_novedad.Add(novedad_x_sanc);
                         IdNovedad++;
-                    
+                        secuancia++;
                     }
 
                     Context.SaveChanges();
