@@ -215,7 +215,11 @@
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdNomina_Tipo: $("#IdNomina_Tipo").val(),
-            IdNomina_TipoLiquio: $("#IdNomina_TipoLiquio").val(),
+            IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
+            FechaInicio: FechaInicio.GetValue(),
+            FechaFin: FechaFin.GetValue(),
+            Fecha_PriPago: Fecha_PriPago.GetValue(),
+
             IDs: selectedIDs
             }
         $("#btn_aprobar").attr("disabled", true);
