@@ -31,7 +31,8 @@ namespace Core.Erp.Data.RRHH
                                      Observacion = q.Observacion,
                                      Descripcion=q.Descripcion,
                                      DescripcionProcesoNomina=q.DescripcionProcesoNomina,
-                                     FechaNovedades=q.FechaNovedades
+                                     FechaNovedades=q.FechaNovedades,
+                                     
                                  }).ToList();
                 }
 
@@ -48,20 +49,24 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
-                using (Entities_rrhh Context=new Entities_rrhh())
+                ro_empleado_novedad_Data odata_novedad = new ro_empleado_novedad_Data();
+
+                decimal IdNovedad = odata_novedad.get_id(info.IdEmpresa);
+                int secuancia = 1;
+                using (Entities_rrhh Context = new Entities_rrhh())
                 {
 
                     ro_SancionesPorMarcaciones entity = new ro_SancionesPorMarcaciones
                     {
-                        IdEmpresa=info.IdEmpresa,
-                        IdAjuste=get_id(info.IdEmpresa),
-                        IdNomina_Tipo=info.IdNomina_Tipo,
-                        IdNomina_TipoLiqui=info.IdNomina_TipoLiqui,
-                        FechaInicio=info.FechaInicio, FechaFin=info.FechaFin,
-                        Observacion=info.Observacion,
-                        Fecha_Transac=DateTime.Now,
-                        Estado=true,
-                        FechaNovedades=info.FechaNovedades
+                        IdEmpresa = info.IdEmpresa,
+                        IdAjuste = get_id(info.IdEmpresa),
+                        IdNomina_Tipo = info.IdNomina_Tipo,
+                        IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
+                        FechaInicio = info.FechaInicio, FechaFin = info.FechaFin,
+                        Observacion = info.Observacion,
+                        Fecha_Transac = DateTime.Now,
+                        Estado = true,
+                        FechaNovedades = info.FechaNovedades
 
                     };
                     foreach (var item in info.detalle)
@@ -69,24 +74,93 @@ namespace Core.Erp.Data.RRHH
 
                         ro_SancionesPorMarcaciones_det entity_det = new ro_SancionesPorMarcaciones_det
                         {
-                            IdEmpresa=info.IdEmpresa,
-                            IdSucursal=item.IdSucursal,
-                            IdAjuste=info.IdAjuste,
-                            IdCalendario=item.IdCalendario,
-                            IdEmpleado=item.IdEmpleado,
-                            EsHoraIngreso=item.HoraIni,
-                            HoraIngreso=item.time_entrada1,
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = item.IdSucursal,
+                            IdAjuste = info.IdAjuste,
+                            IdCalendario = item.IdCalendario,
+                            IdEmpleado = item.IdEmpleado,
+                            EsHoraIngreso = item.HoraIni,
+                            HoraIngreso = item.time_entrada1,
 
-                            EsHoraSalida=item.HoraFin,
+                            EsHoraSalida = item.HoraFin,
                             HoraSalio = item.time_salida1,
 
                             Minutos = item.Minutos,
-                            FechaRegistro=item.FechaRegistro,
-                              
+                            FechaRegistro = item.FechaRegistro,
+
 
                         };
                     }
                     Context.ro_SancionesPorMarcaciones.Add(entity);
+
+                    // agrupnado para obter vlor para novedad
+                    var lista_novedades = (from q in info.detalle
+                                           group q by new
+                                           {
+                                               q.IdEmpresa,
+                                               q.IdSucursal,
+                                               q.IdEmpleado,
+                                               q.Minutos,
+                                               q.Sueldo
+                                           } into Grupo
+                                           select new ro_SancionesPorMarcaciones_x_novedad_Info
+                                           {
+                                               IdEmpresa = Grupo.Key.IdEmpresa,
+                                               IdSucursal = Grupo.Key.IdSucursal,
+                                               IdEmpleado = Grupo.Key.IdEmpleado,
+                                               Valor = Grupo.Sum(s => s.Minutos),
+                                               Sueldo = Grupo.Key.Sueldo
+
+                                           }).ToList();
+                    // grabando novedades
+                    foreach (var item in lista_novedades)
+                    {
+                        ro_empleado_Novedad novedad = new ro_empleado_Novedad
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = item.IdSucursal,
+                            IdNovedad = IdNovedad,
+                            IdEmpleado = item.IdEmpleado,
+                            IdNomina_Tipo = info.IdNomina_Tipo,
+                            IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
+                            Observacion="Novedad generada por proceso del sistema fecha descuento "+info.FechaNovedades.ToString().Substring(0,10),
+                            Fecha = info.FechaNovedades,
+                            Estado = "A",
+                            Fecha_Transac = DateTime.Now,
+                        };
+                        Context.ro_empleado_Novedad.Add(novedad);
+
+                        ro_empleado_novedad_det novedad_det = new ro_empleado_novedad_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdNovedad = item.IdNovedad,
+                            IdRubro = "200",
+                            Valor = item.Valor * (((Convert.ToDouble(item.Sueldo)) / 240) / 60),
+                            FechaPago = info.FechaNovedades,
+                            EstadoCobro = "PEN",
+                            Observacion = "Novedad generda por proceso del sistema",
+                            Secuencia = 1,
+
+                        };
+                        Context.ro_empleado_novedad_det.Add(novedad_det);
+
+                        ro_SancionesPorMarcaciones_x_novedad novedad_x_sanc = new ro_SancionesPorMarcaciones_x_novedad
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdAjuste = info.IdAjuste,
+                            Secuencia=secuancia,
+                            IdNovedad=item.IdNovedad,
+                            IdEmpresa_nov=info.IdEmpresa,
+                            IdEmpleado=item.IdEmpleado,
+                            IdNomina_Tipo=info.IdNomina_Tipo,
+                            IdNomina_TipoLiqui=info.IdNomina_TipoLiqui
+                        };
+                        Context.ro_SancionesPorMarcaciones_x_novedad.Add(novedad_x_sanc);
+                        IdNovedad++;
+                    
+                    }
+
+
                 }
 
                 return true;

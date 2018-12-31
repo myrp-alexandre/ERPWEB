@@ -23,5 +23,9 @@ namespace Core.Erp.Info.RRHH
         public string pe_apellido { get; set; }
         public string pe_nombre { get; set; }
         public string pe_nombreCompleto { get; set; }
+
+        public int IdSucursal { get; set; }
+        public Nullable<double> Sueldo { get; set; }
+
     }
 }
