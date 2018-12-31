@@ -19,7 +19,7 @@ namespace Core.Erp.Info.RRHH
 
         public string Observacion { get; set; }
         public bool Estado { get; set; }
-        public Nullable<bool> IdUsuario { get; set; }
+        public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }

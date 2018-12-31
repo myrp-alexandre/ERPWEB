@@ -229,6 +229,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 model.FechaInicio =Convert.ToDateTime( FechaInicio);
                 model.FechaNovedades =Convert.ToDateTime( FechaNovedades);
                 model.Observacion = Observacion;
+                model.IdUsuario = SessionFixed.IdUsuario;
                 bus_sanciones.guardarDB(model);
             }
             return Json("", JsonRequestBehavior.AllowGet);

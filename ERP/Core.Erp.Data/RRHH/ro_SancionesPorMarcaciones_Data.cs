@@ -59,12 +59,13 @@ namespace Core.Erp.Data.RRHH
                     ro_SancionesPorMarcaciones entity = new ro_SancionesPorMarcaciones
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdAjuste = get_id(info.IdEmpresa),
+                        IdAjuste = info.IdAjuste= get_id(info.IdEmpresa),
                         IdNomina_Tipo = info.IdNomina_Tipo,
                         IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
                         FechaInicio = info.FechaInicio, FechaFin = info.FechaFin,
                         Observacion = info.Observacion,
                         Fecha_Transac = DateTime.Now,
+                        IdUsuario=info.IdUsuario,
                         Estado = true,
                         FechaNovedades = info.FechaNovedades
 
@@ -82,20 +83,16 @@ namespace Core.Erp.Data.RRHH
                             IdEmpleado = item.IdEmpleado,
                             EsHoraIngreso = item.HoraIni,
                             HoraIngreso = item.time_entrada1,
-
                             EsHoraSalida = item.HoraFin,
                             HoraSalio = item.time_salida1,
-
                             Minutos = item.Minutos,
-                            FechaRegistro = item.FechaRegistro,
-
-
+                            FechaRegistro = item.es_fechaRegistro,
                         };
                         Context.ro_SancionesPorMarcaciones_det.Add(entity_det);
 
                     }
 
-                    // agrupnado para obter vlor para novedad
+                    // agrupnado para obter valor para novedad
                     var lista_novedades = (from q in info.detalle
                                            group q by new
                                            {
@@ -129,6 +126,7 @@ namespace Core.Erp.Data.RRHH
                             Fecha = info.FechaNovedades,
                             Estado = "A",
                             Fecha_Transac = DateTime.Now,
+                            IdUsuario=info.IdUsuario
                         };
                         Context.ro_empleado_Novedad.Add(novedad);
 
@@ -142,8 +140,8 @@ namespace Core.Erp.Data.RRHH
                             EstadoCobro = "PEN",
                             Observacion = "Novedad generda por proceso del sistema",
                             Secuencia = 1,
-
                         };
+                        novedad_det.Valor = Math.Round(novedad_det.Valor, 2);
                         Context.ro_empleado_novedad_det.Add(novedad_det);
 
                         ro_SancionesPorMarcaciones_x_novedad novedad_x_sanc = new ro_SancionesPorMarcaciones_x_novedad
@@ -151,7 +149,7 @@ namespace Core.Erp.Data.RRHH
                             IdEmpresa = info.IdEmpresa,
                             IdAjuste = info.IdAjuste,
                             Secuencia=secuancia,
-                            IdNovedad=item.IdNovedad,
+                            IdNovedad=novedad.IdNovedad,
                             IdEmpresa_nov=info.IdEmpresa,
                             IdEmpleado=item.IdEmpleado,
                             IdNomina_Tipo=info.IdNomina_Tipo,
@@ -162,12 +160,12 @@ namespace Core.Erp.Data.RRHH
                     
                     }
 
-
+                    Context.SaveChanges();
                 }
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

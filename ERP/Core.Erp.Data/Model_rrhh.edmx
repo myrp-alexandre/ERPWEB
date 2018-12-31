@@ -1247,11 +1247,11 @@
           <Property Name="FechaNovedades" Type="date" Nullable="false" />
           <Property Name="Observacion" Type="varchar(max)" />
           <Property Name="Estado" Type="bit" Nullable="false" />
-          <Property Name="IdUsuario" Type="bit" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
           <Property Name="Fecha_Transac" Type="datetime" />
-          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
           <Property Name="Fecha_UltMod" Type="datetime" />
-          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="50" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
         </EntityType>
@@ -6526,8 +6526,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_EmpleadoNovedadCargaMasiva" Relationship="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_EmpleadoNovedadCargaMasiva" />
           <NavigationProperty Name="ro_HorasProfesores" Relationship="Model_rrhh.FK_ro_HorasProfesores_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_HorasProfesores" />
           <NavigationProperty Name="ro_NominasPagosCheques" Relationship="Model_rrhh.FK_ro_NominasPagosCheques_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_NominasPagosCheques" />
-          <NavigationProperty Name="ro_SancionesPorMarcaciones" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_SancionesPorMarcaciones" />
           <NavigationProperty Name="ro_SancionesPorMarcaciones_x_novedad" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_SancionesPorMarcaciones_x_novedad" />
+          <NavigationProperty Name="ro_SancionesPorMarcaciones" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" FromRole="ro_Nomina_Tipoliqui" ToRole="ro_SancionesPorMarcaciones" />
         </EntityType>
         <EntityType Name="ro_nomina_x_horas_extras">
           <Key>
@@ -8146,7 +8146,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySet Name="vwro_SancionesPorMarcaciones_x_novedad" EntityType="Model_rrhh.vwro_SancionesPorMarcaciones_x_novedad" />
           <EntitySet Name="vwro_SancionesPorMarcaciones" EntityType="Model_rrhh.vwro_SancionesPorMarcaciones" />
           <EntitySet Name="ro_marcaciones_x_empleado" EntityType="Model_rrhh.ro_marcaciones_x_empleado" />
-          <EntitySet Name="ro_SancionesPorMarcaciones" EntityType="Model_rrhh.ro_SancionesPorMarcaciones" />
           <EntitySet Name="ro_SancionesPorMarcaciones_x_novedad" EntityType="Model_rrhh.ro_SancionesPorMarcaciones_x_novedad" />
           <AssociationSet Name="FK_ro_marcaciones_x_empleado_ro_empleado" Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
@@ -8164,10 +8163,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_Nomina_Tipo" EntitySet="ro_Nomina_Tipo" />
             <End Role="ro_marcaciones_x_empleado" EntitySet="ro_marcaciones_x_empleado" />
           </AssociationSet>
-          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui">
-            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
-            <End Role="ro_SancionesPorMarcaciones" EntitySet="ro_SancionesPorMarcaciones" />
-          </AssociationSet>
           <AssociationSet Name="FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui">
             <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
             <End Role="ro_SancionesPorMarcaciones_x_novedad" EntitySet="ro_SancionesPorMarcaciones_x_novedad" />
@@ -8177,6 +8172,11 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <AssociationSet Name="FK_ro_SancionesPorMarcaciones_det_ro_empleado" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_SancionesPorMarcaciones_det" EntitySet="ro_SancionesPorMarcaciones_det" />
+          </AssociationSet>
+          <EntitySet Name="ro_SancionesPorMarcaciones" EntityType="Model_rrhh.ro_SancionesPorMarcaciones" />
+          <AssociationSet Name="FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui">
+            <End Role="ro_Nomina_Tipoliqui" EntitySet="ro_Nomina_Tipoliqui" />
+            <End Role="ro_SancionesPorMarcaciones" EntitySet="ro_SancionesPorMarcaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones">
             <End Role="ro_SancionesPorMarcaciones" EntitySet="ro_SancionesPorMarcaciones" />
@@ -11115,30 +11115,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_marcaciones_tipo" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" FromRole="ro_marcaciones_x_empleado" ToRole="ro_marcaciones_tipo" />
           <NavigationProperty Name="ro_Nomina_Tipo" Relationship="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_Nomina_Tipo" FromRole="ro_marcaciones_x_empleado" ToRole="ro_Nomina_Tipo" />
         </EntityType>
-        <EntityType Name="ro_SancionesPorMarcaciones">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAjuste" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAjuste" Type="Int32" Nullable="false" />
-          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
-          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FechaNovedades" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuario" Type="Boolean" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" FromRole="ro_SancionesPorMarcaciones" ToRole="ro_Nomina_Tipoliqui" />
-          <NavigationProperty Name="ro_SancionesPorMarcaciones_det" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" FromRole="ro_SancionesPorMarcaciones" ToRole="ro_SancionesPorMarcaciones_det" />
-        </EntityType>
         <EntityType Name="ro_SancionesPorMarcaciones_x_novedad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -11207,22 +11183,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Dependent Role="ro_marcaciones_x_empleado">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdNomina" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui">
-          <End Type="Model_rrhh.ro_Nomina_Tipoliqui" Role="ro_Nomina_Tipoliqui" Multiplicity="1" />
-          <End Type="Model_rrhh.ro_SancionesPorMarcaciones" Role="ro_SancionesPorMarcaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ro_Nomina_Tipoliqui">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNomina_Tipo" />
-              <PropertyRef Name="IdNomina_TipoLiqui" />
-            </Principal>
-            <Dependent Role="ro_SancionesPorMarcaciones">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNomina_Tipo" />
-              <PropertyRef Name="IdNomina_TipoLiqui" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -11311,6 +11271,46 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Dependent Role="ro_SancionesPorMarcaciones_det">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ro_SancionesPorMarcaciones">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAjuste" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAjuste" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_Tipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina_TipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaNovedades" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_Nomina_Tipoliqui" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" FromRole="ro_SancionesPorMarcaciones" ToRole="ro_Nomina_Tipoliqui" />
+          <NavigationProperty Name="ro_SancionesPorMarcaciones_det" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" FromRole="ro_SancionesPorMarcaciones" ToRole="ro_SancionesPorMarcaciones_det" />
+        </EntityType>
+        <Association Name="FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui">
+          <End Type="Model_rrhh.ro_Nomina_Tipoliqui" Role="ro_Nomina_Tipoliqui" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_SancionesPorMarcaciones" Role="ro_SancionesPorMarcaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_Nomina_Tipoliqui">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
+            </Principal>
+            <Dependent Role="ro_SancionesPorMarcaciones">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNomina_Tipo" />
+              <PropertyRef Name="IdNomina_TipoLiqui" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -13596,28 +13596,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ro_SancionesPorMarcaciones">
-            <EntityTypeMapping TypeName="Model_rrhh.ro_SancionesPorMarcaciones">
-              <MappingFragment StoreEntitySet="ro_SancionesPorMarcaciones">
-                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="FechaNovedades" ColumnName="FechaNovedades" />
-                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="IdNomina_TipoLiqui" ColumnName="IdNomina_TipoLiqui" />
-                <ScalarProperty Name="IdNomina_Tipo" ColumnName="IdNomina_Tipo" />
-                <ScalarProperty Name="IdAjuste" ColumnName="IdAjuste" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ro_SancionesPorMarcaciones_x_novedad">
             <EntityTypeMapping TypeName="Model_rrhh.ro_SancionesPorMarcaciones_x_novedad">
               <MappingFragment StoreEntitySet="ro_SancionesPorMarcaciones_x_novedad">
@@ -13670,6 +13648,28 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdCalendario" ColumnName="IdCalendario" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdAjuste" ColumnName="IdAjuste" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_SancionesPorMarcaciones">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_SancionesPorMarcaciones">
+              <MappingFragment StoreEntitySet="ro_SancionesPorMarcaciones">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="FechaNovedades" ColumnName="FechaNovedades" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="IdNomina_TipoLiqui" ColumnName="IdNomina_TipoLiqui" />
+                <ScalarProperty Name="IdNomina_Tipo" ColumnName="IdNomina_Tipo" />
                 <ScalarProperty Name="IdAjuste" ColumnName="IdAjuste" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
