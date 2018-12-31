@@ -234,6 +234,76 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             return Json("", JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ModificarMarcaciones(int IdEmpresa,int IdAjuste, int IdNomina_Tipo, int IdNomina_TipoLiqui,
+            DateTime? FechaInicio, DateTime? FechaFin, DateTime? FechaNovedades, string Observacion = ""
+
+            , string Ids = "", decimal IdTransaccionSession = 0)
+        {
+            ro_SancionesPorMarcaciones_Info model = new ro_SancionesPorMarcaciones_Info();
+            if (Ids != null)
+            {
+                var lst = ro_SancionesPorMarcaciones_det_Info_list.get_list(IdTransaccionSession);
+                string[] array = Ids.Split(',');
+                var output = array.GroupBy(q => q).ToList();
+                foreach (var item in output)
+                {
+                    if (!string.IsNullOrEmpty(item.Key))
+                    {
+                        var info_add = lst.Where(q => q.Secuencia.ToString() == item.Key).FirstOrDefault();
+                        lst_grabar.Add(info_add);
+                    }
+                }
+                model.detalle = new List<ro_SancionesPorMarcaciones_det_Info>();
+                model.detalle = lst_grabar;
+                model.IdEmpresa = IdEmpresa;
+                model.IdAjuste = IdAjuste;
+                model.IdNomina_Tipo = IdNomina_Tipo;
+                model.IdNomina_TipoLiqui = IdNomina_TipoLiqui;
+                model.FechaFin = Convert.ToDateTime(FechaFin);
+                model.FechaInicio = Convert.ToDateTime(FechaInicio);
+                model.FechaNovedades = Convert.ToDateTime(FechaNovedades);
+                model.Observacion = Observacion;
+                model.IdUsuario = SessionFixed.IdUsuario;
+                bus_sanciones.modificarDB(model);
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult AnularMarcaciones(int IdEmpresa, int IdAjuste, int IdNomina_Tipo, int IdNomina_TipoLiqui,
+           DateTime? FechaInicio, DateTime? FechaFin, DateTime? FechaNovedades, string Observacion = ""
+
+           , string Ids = "", decimal IdTransaccionSession = 0)
+        {
+            ro_SancionesPorMarcaciones_Info model = new ro_SancionesPorMarcaciones_Info();
+            if (Ids != null)
+            {
+                var lst = ro_SancionesPorMarcaciones_det_Info_list.get_list(IdTransaccionSession);
+                string[] array = Ids.Split(',');
+                var output = array.GroupBy(q => q).ToList();
+                foreach (var item in output)
+                {
+                    if (!string.IsNullOrEmpty(item.Key))
+                    {
+                        var info_add = lst.Where(q => q.Secuencia.ToString() == item.Key).FirstOrDefault();
+                        lst_grabar.Add(info_add);
+                    }
+                }
+                model.detalle = new List<ro_SancionesPorMarcaciones_det_Info>();
+                model.detalle = lst_grabar;
+                model.IdEmpresa = IdEmpresa;
+                model.IdAjuste = IdAjuste;
+                model.IdNomina_Tipo = IdNomina_Tipo;
+                model.IdNomina_TipoLiqui = IdNomina_TipoLiqui;
+                model.FechaFin = Convert.ToDateTime(FechaFin);
+                model.FechaInicio = Convert.ToDateTime(FechaInicio);
+                model.FechaNovedades = Convert.ToDateTime(FechaNovedades);
+                model.Observacion = Observacion;
+                model.IdUsuario = SessionFixed.IdUsuario;
+                bus_sanciones.anularDB(model);
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region cargar combos
@@ -270,7 +340,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ro_SancionesPorMarcaciones_det_Info_list.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_SancionesPorMarcaciones_Info model = new ro_SancionesPorMarcaciones_Info();
             model.detalle = ro_SancionesPorMarcaciones_det_Info_list.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_archivo_transferencia_det", model);
+            return PartialView("_GridViewPartial_control_marcaciones_det", model);
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_SancionesPorMarcaciones_det_Info info_det)
@@ -306,7 +376,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public void UpdateRow(ro_SancionesPorMarcaciones_det_Info info_det, decimal IdTransaccionSession)
         {
             ro_SancionesPorMarcaciones_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
-          //  edited_info.Valor = info_det.Valor;
+            edited_info.Minutos = info_det.Minutos;
         }
 
 
