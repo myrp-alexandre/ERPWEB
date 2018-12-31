@@ -421,6 +421,7 @@ namespace Core.Erp.Data.General
                 pe_cedulaRuc = info.pe_cedulaRuc,
                 pe_Naturaleza = info.pe_Naturaleza,
                 IdTipoDocumento = info.IdTipoDocumento,
+                pe_razonSocial = info.pe_razonSocial,
 
                 //Campos opcionales
                 pe_direccion = info.pe_direccion,

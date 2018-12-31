@@ -282,7 +282,7 @@ namespace Core.Erp.Info.Helps
                 if (tipo_documento == "CED")
                 {
                     return_naturaleza = "NATU";
-                    return ValidaCedula(cedula_ruc);                    
+                    return ValidaCedula(cedula_ruc.Trim());                    
                 }
                 else
                 {

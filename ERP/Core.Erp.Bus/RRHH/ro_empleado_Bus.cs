@@ -203,6 +203,7 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
+                var count = 0;
                 foreach (var item in Lista_Empleado)
                 {
                     if (item.info_persona.IdPersona == 0)
@@ -211,20 +212,22 @@ namespace Core.Erp.Bus.RRHH
                         if (odata_per.guardarDB(item.info_persona))
                         {
                             item.IdPersona = item.info_persona.IdPersona;
-                            return odata.guardarDB_importacion(Lista_Division, Lista_Area, Lista_Departamento, Lista_Cargo,
-                                                Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_RubrosAcumulados, Lista_TipoNomina, Lista_Contrato,
-                                                Lista_CargasFamiliares, Lista_ProvisionesAcumuladas, Lista_VacacionesList);
+                            count++;
                         }
                     }
                     else
                     {
-                        if(odata_per.modificarDB(item.info_persona))
-                            return odata.guardarDB_importacion(Lista_Division, Lista_Area, Lista_Departamento, Lista_Cargo,
-                                                Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_RubrosAcumulados, Lista_TipoNomina, Lista_Contrato,
-                                                Lista_CargasFamiliares, Lista_ProvisionesAcumuladas, Lista_VacacionesList);
+                        odata_per.modificarDB(item.info_persona);
+                        count++;
                     }
                 }
-                return true;                  
+                if (Lista_Empleado.Count == count)
+                {
+                    return odata.guardarDB_importacion(Lista_Division, Lista_Area, Lista_Departamento, Lista_Cargo,
+                                                    Lista_Rubro, Lista_Horario, Lista_Turno, Lista_Empleado, Lista_RubrosAcumulados, Lista_TipoNomina, Lista_Contrato,
+                                                    Lista_CargasFamiliares, Lista_ProvisionesAcumuladas, Lista_VacacionesList);
+                }
+                return true;           
             }
             catch (Exception)
             {

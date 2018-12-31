@@ -704,7 +704,7 @@ namespace Core.Erp.Data.RRHH
                         IdCiudad = item.IdCiudad,
                         em_mail = item.em_mail,
                         IdTipoLicencia = item.IdTipoLicencia,
-                        IdBanco = item.IdBanco,
+                        IdBanco = item.IdBanco == 0 ? null : item.IdBanco,
                         IdArea = item.IdArea,
                         IdDivision = item.IdDivision,
                         IdUsuario = item.IdUsuario,
@@ -732,7 +732,7 @@ namespace Core.Erp.Data.RRHH
                         ValorAnticipo = item.ValorAnticipo,
                         em_AnticipoSueldo = item.em_AnticipoSueldo,
                         Marca_Biometrico = item.Marca_Biometrico,
-                        IdHorario = item.IdHorario,
+                        IdHorario = item.IdHorario == 0 ? null : item.IdHorario,
                         Tiene_ingresos_compartidos = item.Tiene_ingresos_compartidos,
                         Pago_por_horas = item.Pago_por_horas,
                         Valor_maximo_horas_mat = null,
@@ -783,26 +783,26 @@ namespace Core.Erp.Data.RRHH
                 //}
 
 
-                foreach (var item in Lista_Contrato)
-                {
-                    ro_contrato Entity_contrato = new ro_contrato
-                    {
-                        IdEmpresa = item.IdEmpresa,
-                        IdContrato = item.IdContrato,
-                        IdContrato_Tipo = item.IdContrato_Tipo,
-                        IdEmpleado = item.IdEmpleado,
-                        FechaInicio = item.FechaInicio,
-                        FechaFin = item.FechaFin,
-                        Sueldo = item.Sueldo,
-                        NumDocumento = item.NumDocumento,
-                        IdNomina = item.IdNomina,
-                        Observacion = item.Observacion,
-                        IdUsuario = item.IdUsuario,
-                        Estado = item.Estado,
-                        Fecha_Transac = item.Fecha_Transac
-                    };
-                    Context_rrhh.ro_contrato.Add(Entity_contrato);
-                }
+                //foreach (var item in Lista_Contrato)
+                //{
+                //    ro_contrato Entity_contrato = new ro_contrato
+                //    {
+                //        IdEmpresa = item.IdEmpresa,
+                //        IdContrato = item.IdContrato,
+                //        IdContrato_Tipo = item.IdContrato_Tipo,
+                //        IdEmpleado = item.IdEmpleado,
+                //        FechaInicio = item.FechaInicio,
+                //        FechaFin = item.FechaFin,
+                //        Sueldo = item.Sueldo,
+                //        NumDocumento = item.NumDocumento,
+                //        IdNomina = item.IdNomina,
+                //        Observacion = item.Observacion,
+                //        IdUsuario = item.IdUsuario,
+                //        Estado = item.Estado,
+                //        Fecha_Transac = item.Fecha_Transac
+                //    };
+                //    Context_rrhh.ro_contrato.Add(Entity_contrato);
+                //}
 
                 Context_rrhh.SaveChanges();
                 Context_rrhh.Dispose();                

@@ -374,7 +374,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                                 tb_persona_Info info_ = new tb_persona_Info
                                 {
                                     pe_Naturaleza = Convert.ToString(reader.GetValue(4)),
-                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7)),
+                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(5)),
                                     pe_razonSocial = Convert.ToString(reader.GetValue(5)),
                                     pe_apellido = Convert.ToString(reader.GetValue(6)),
                                     pe_nombre = Convert.ToString(reader.GetValue(7)),
@@ -393,7 +393,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                                 info_persona_prov = bus_persona.get_info(info_persona.IdPersona);
 
                                 info_persona_prov.pe_Naturaleza = Convert.ToString(reader.GetValue(4));
-                                info_persona_prov.pe_nombreCompleto = Convert.ToString(reader.GetValue(6)) + ' ' + Convert.ToString(reader.GetValue(7));
+                                info_persona_prov.pe_nombreCompleto = Convert.ToString(reader.GetValue(5));
                                 info_persona_prov.pe_razonSocial = Convert.ToString(reader.GetValue(5));
                                 info_persona_prov.pe_apellido = Convert.ToString(reader.GetValue(6));
                                 info_persona_prov.pe_nombre = Convert.ToString(reader.GetValue(7));
@@ -412,7 +412,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                                 IdEmpresa = IdEmpresa,
                                 IdProveedor = Convert.ToInt32(reader.GetValue(0)),
                                 IdPersona = info_persona_prov.IdPersona,
-                                IdCiudad = "01",
+                                IdCiudad = "09",
                                 pr_codigo = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(1))) ? null : Convert.ToString(reader.GetValue(1)),
                                 pr_plazo = Convert.ToInt32(reader.GetValue(19)),
                                 IdCtaCble_CXP = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(15))) ? null : Convert.ToString(reader.GetValue(15)),
@@ -425,7 +425,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                                 pr_celular = Convert.ToString(reader.GetValue(11)),
                                 pr_direccion = Convert.ToString(reader.GetValue(9)),
                                 pr_correo = Convert.ToString(reader.GetValue(8)),
-                                IdUsuario = SessionFixed.IdUsuario
+                                IdUsuario = SessionFixed.IdUsuario,
+                                
                             };
 
                             info.info_persona = info_persona_prov;
