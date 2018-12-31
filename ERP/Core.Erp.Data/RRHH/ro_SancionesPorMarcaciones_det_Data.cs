@@ -28,7 +28,6 @@ namespace Core.Erp.Data.RRHH
                                  IdCalendario = q.IdCalendario,
                                  IdEmpleado = q.IdEmpleado,
                                  IdSucursal = q.IdSucursal,
-                                 IdTipoMarcaciones = q.IdTipoMarcaciones,
                                  time_entrada1 = q.EsHoraIngreso,
                                  time_salida1 = q.EsHoraSalida,
                                  es_fechaRegistro = q.FechaRegistro,

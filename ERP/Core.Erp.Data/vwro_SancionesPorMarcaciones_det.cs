@@ -20,7 +20,6 @@ namespace Core.Erp.Data
         public int IdCalendario { get; set; }
         public decimal IdEmpleado { get; set; }
         public int IdSucursal { get; set; }
-        public string IdTipoMarcaciones { get; set; }
         public double Minutos { get; set; }
         public string Observacion { get; set; }
         public string pe_nombreCompleto { get; set; }

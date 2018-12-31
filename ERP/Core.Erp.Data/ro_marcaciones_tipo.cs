@@ -17,13 +17,11 @@ namespace Core.Erp.Data
         public ro_marcaciones_tipo()
         {
             this.ro_marcaciones_x_empleado = new HashSet<ro_marcaciones_x_empleado>();
-            this.ro_SancionesPorMarcaciones_det = new HashSet<ro_SancionesPorMarcaciones_det>();
         }
     
         public string IdTipoMarcaciones { get; set; }
         public string ma_descripcion { get; set; }
     
         public virtual ICollection<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
-        public virtual ICollection<ro_SancionesPorMarcaciones_det> ro_SancionesPorMarcaciones_det { get; set; }
     }
 }

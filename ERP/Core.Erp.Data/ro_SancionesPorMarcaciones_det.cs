@@ -20,7 +20,6 @@ namespace Core.Erp.Data
         public int IdCalendario { get; set; }
         public decimal IdEmpleado { get; set; }
         public int IdSucursal { get; set; }
-        public string IdTipoMarcaciones { get; set; }
         public System.TimeSpan EsHoraIngreso { get; set; }
         public System.TimeSpan HoraIngreso { get; set; }
         public System.TimeSpan EsHoraSalida { get; set; }
@@ -30,7 +29,6 @@ namespace Core.Erp.Data
         public System.DateTime FechaRegistro { get; set; }
     
         public virtual ro_empleado ro_empleado { get; set; }
-        public virtual ro_marcaciones_tipo ro_marcaciones_tipo { get; set; }
         public virtual ro_SancionesPorMarcaciones ro_SancionesPorMarcaciones { get; set; }
     }
 }
