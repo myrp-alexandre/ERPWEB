@@ -74,7 +74,15 @@ namespace Core.Erp.Data.RRHH
                             IdAjuste=info.IdAjuste,
                             IdCalendario=item.IdCalendario,
                             IdEmpleado=item.IdEmpleado,
-                             
+                            EsHoraIngreso=item.HoraIni,
+                            HoraIngreso=item.time_entrada1,
+
+                            EsHoraSalida=item.HoraFin,
+                            HoraSalio = item.time_salida1,
+
+                            Minutos = item.Minutos,
+                            FechaRegistro=item.FechaRegistro,
+                              
 
                         };
                     }
