@@ -161,9 +161,11 @@ namespace Core.Erp.Data.RRHH
                                  Valor_horas_matutino=q.Valor_horas_matutino,
                                  Valor_horas_vespertina=q.Valor_horas_vespertina,
                                  Valor_horas_brigada=q.Valor_horas_brigada,
-                                 Valor_maximo_horas_vesp=q.Valor_maximo_horas_vesp,
+                                 Valor_hora_adicionales = q.Valor_hora_adicionales,
+                                 Valor_hora_control_salida = q.Valor_hora_control_salida,
+                                 Valor_maximo_horas_vesp =q.Valor_maximo_horas_vesp,
                                  Valor_maximo_horas_mat=q.Valor_maximo_horas_mat,
-                                 Valor_horas_extras=q.Valor_horas_extras
+                                
                                 
                              }).ToList();
 
@@ -250,11 +252,12 @@ namespace Core.Erp.Data.RRHH
                         pe_fechaNacimiento = info.pe_fechaNacimiento,
                         Pago_por_horas = info.Pago_por_horas,
                         Valor_horas_vespertina = info.Valor_horas_vespertina,
-                        Valor_horas_brigada = info.Valor_horas_brigada,
                         Valor_horas_matutino = info.Valor_horas_matutino,
+                        Valor_horas_brigada = info.Valor_horas_brigada,
+                        Valor_hora_adicionales = info.Valor_hora_adicionales,
+                        Valor_hora_control_salida=info.Valor_hora_control_salida,
                         Valor_maximo_horas_mat = info.Valor_maximo_horas_mat,
                         Valor_maximo_horas_vesp=info.Valor_maximo_horas_vesp,
-                        Valor_horas_extras=info.Valor_horas_extras,
                         DiasVacaciones = info.DiasVacaciones,
                         GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones
                     };
@@ -357,9 +360,11 @@ namespace Core.Erp.Data.RRHH
                         Valor_horas_vespertina = info.Valor_horas_vespertina,
                         Valor_horas_brigada = info.Valor_horas_brigada,
                         Valor_horas_matutino = info.Valor_horas_matutino,
+                        Valor_hora_adicionales = info.Valor_hora_adicionales,
+                        Valor_hora_control_salida = info.Valor_hora_control_salida,
                         Valor_maximo_horas_mat = info.Valor_maximo_horas_mat,
                         Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp,
-                        Valor_horas_extras = info.Valor_horas_extras,
+                       
                         DiasVacaciones = info.DiasVacaciones,
                         GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones
                     };
@@ -476,7 +481,8 @@ namespace Core.Erp.Data.RRHH
                             Valor_horas_matutino = info.Valor_horas_matutino,
                             Valor_maximo_horas_mat = info.Valor_maximo_horas_mat,
                             Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp,
-                            Valor_horas_extras = info.Valor_horas_extras,
+                            Valor_hora_adicionales = info.Valor_hora_adicionales,
+                            Valor_hora_control_salida=info.Valor_hora_control_salida,
                             DiasVacaciones = info.DiasVacaciones,
                             GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones,
                             IdEmpleadoPAdre=info.IdEmpleado
@@ -531,7 +537,8 @@ namespace Core.Erp.Data.RRHH
                         Entity.Valor_horas_matutino = info.Valor_horas_matutino;
                         Entity.Valor_maximo_horas_mat = info.Valor_maximo_horas_mat;
                         Entity.Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp;
-                        Entity.Valor_horas_extras = info.Valor_horas_extras;
+                        Entity.Valor_hora_adicionales = info.Valor_hora_adicionales;
+                        Entity.Valor_hora_control_salida = info.Valor_hora_control_salida;
                         Entity.IdArea = info.IdArea;
                         Entity.IdDivision = info.IdDivision;
                         Entity.Fecha_UltMod = info.Fecha_UltMod  ;
@@ -621,7 +628,8 @@ namespace Core.Erp.Data.RRHH
                             Valor_horas_matutino = info.Valor_horas_matutino,
                             Valor_maximo_horas_mat = info.Valor_maximo_horas_mat,
                             Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp,
-                            Valor_horas_extras = info.Valor_horas_extras,
+                            Valor_hora_adicionales = info.Valor_hora_adicionales,
+                            Valor_hora_control_salida=info.Valor_hora_control_salida,
                             DiasVacaciones = info.DiasVacaciones,
                             GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones,
                             IdEmpleadoPAdre = info.IdEmpleado
@@ -899,7 +907,7 @@ namespace Core.Erp.Data.RRHH
                         Valor_horas_vespertina = item.Valor_horas_vespertina,
                         Valor_horas_matutino = item.Valor_horas_matutino,
                         Valor_horas_brigada = item.Valor_horas_brigada,
-                        Valor_horas_extras = item.Valor_horas_extras,
+                        Valor_hora_adicionales = item.Valor_hora_adicionales,
                         GozaMasDeQuinceDiasVaciones = item.GozaMasDeQuinceDiasVaciones,
                         DiasVacaciones = item.DiasVacaciones
                     };

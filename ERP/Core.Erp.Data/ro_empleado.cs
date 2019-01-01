@@ -107,7 +107,8 @@ namespace Core.Erp.Data
         public Nullable<double> Valor_horas_vespertina { get; set; }
         public Nullable<double> Valor_horas_matutino { get; set; }
         public Nullable<double> Valor_horas_brigada { get; set; }
-        public Nullable<double> Valor_horas_extras { get; set; }
+        public Nullable<double> Valor_hora_adicionales { get; set; }
+        public Nullable<double> Valor_hora_control_salida { get; set; }
         public bool GozaMasDeQuinceDiasVaciones { get; set; }
         public double DiasVacaciones { get; set; }
         public Nullable<decimal> IdEmpleadoPAdre { get; set; }

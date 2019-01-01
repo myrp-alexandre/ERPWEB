@@ -870,7 +870,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 Valor_horas_vespertina = Convert.ToDouble(reader.GetValue(28)),
                                 Valor_horas_brigada = Convert.ToDouble(reader.GetValue(31)),
                                 Valor_horas_matutino = Convert.ToDouble(reader.GetValue(27)),
-                                Valor_horas_extras = null,
+                                Valor_hora_adicionales = null,
                                 DiasVacaciones = 15,
                                 GozaMasDeQuinceDiasVaciones = false
                             };

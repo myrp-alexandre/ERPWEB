@@ -101,7 +101,8 @@ namespace Core.Erp.Info.RRHH
         public Nullable<double> Valor_maximo_horas_vesp { get; set; }
         public Nullable<double> Valor_maximo_horas_mat { get; set; }
         public Nullable<double> Valor_horas_brigada { get; set; }
-        public Nullable<double> Valor_horas_extras { get; set; }
+        public Nullable<double> Valor_hora_adicionales { get; set; }
+        public Nullable<double> Valor_hora_control_salida { get; set; }
 
 
         public bool GozaMasDeQuinceDiasVaciones { get; set; }
