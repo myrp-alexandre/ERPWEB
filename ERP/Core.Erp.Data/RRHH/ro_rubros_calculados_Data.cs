@@ -40,9 +40,10 @@ namespace Core.Erp.Data.RRHH
                         IdRubro_horas_matutina = Entity.IdRubro_horas_matutina,
                         IdRubro_horas_brigadas = Entity.IdRubro_horas_brigadas,
                         IdRubro_horas_vespertina = Entity.IdRubro_horas_vespertina,
-                        IdRubro_horas_extras = Entity.IdRubro_horas_extras,
+                        IdRubro_horas_adicionales = Entity.IdRubro_horas_adicionales,
                         IdRubro_horas_recargo = Entity.IdRubro_horas_recargo,
-                        IdRubro_bono_x_antiguedad=Entity.IdRubro_bono_x_antiguedad
+                        IdRubro_bono_x_antiguedad=Entity.IdRubro_bono_x_antiguedad,
+                        IdRubro_horas_control_salida=Entity.IdRubro_horas_control_salida
                     };
                 }
 
@@ -105,9 +106,10 @@ namespace Core.Erp.Data.RRHH
                         IdRubro_horas_matutina = info.IdRubro_horas_matutina,
                         IdRubro_horas_vespertina = info.IdRubro_horas_vespertina,
                         IdRubro_horas_brigadas = info.IdRubro_horas_brigadas,
-                        IdRubro_horas_extras = info.IdRubro_horas_extras,
+                        IdRubro_horas_adicionales = info.IdRubro_horas_adicionales,
                         IdRubro_horas_recargo = info.IdRubro_horas_recargo,
-                        IdRubro_bono_x_antiguedad=info.IdRubro_bono_x_antiguedad
+                        IdRubro_bono_x_antiguedad=info.IdRubro_bono_x_antiguedad,
+                        IdRubro_horas_control_salida=info.IdRubro_horas_control_salida
 
                     };
                     Context.ro_rubros_calculados.Add(Entity);
@@ -136,24 +138,23 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdRubro_tot_egr = info.IdRubro_tot_egr;
                         Entity.IdRubro_tot_ing = info.IdRubro_tot_ing;
                         Entity.IdRubro_tot_pagar = info.IdRubro_tot_pagar;
-
-                         Entity.IdRubro_aporte_patronal = info.IdRubro_aporte_patronal;
-                         Entity.IdRubro_fondo_reserva = info.IdRubro_fondo_reserva;
-                         Entity.IdRubro_prov_vac = info.IdRubro_prov_vac;
-                         Entity.IdRubro_prov_DIII = info.IdRubro_prov_DIII;
-                         Entity.IdRubro_prov_DIV = info.IdRubro_prov_DIV;
-                         Entity.IdRubro_prov_FR = info.IdRubro_prov_FR;
-                         Entity.IdRubro_DIII = info.IdRubro_DIII;
-                         Entity.IdRubro_DIV = info.IdRubro_DIV;
-                         Entity.IdRubro_IR = info.IdRubro_IR;
+                        Entity.IdRubro_aporte_patronal = info.IdRubro_aporte_patronal;
+                        Entity.IdRubro_fondo_reserva = info.IdRubro_fondo_reserva;
+                        Entity.IdRubro_prov_vac = info.IdRubro_prov_vac;
+                        Entity.IdRubro_prov_DIII = info.IdRubro_prov_DIII;
+                        Entity.IdRubro_prov_DIV = info.IdRubro_prov_DIV;
+                        Entity.IdRubro_prov_FR = info.IdRubro_prov_FR;
+                        Entity.IdRubro_DIII = info.IdRubro_DIII;
+                        Entity.IdRubro_DIV = info.IdRubro_DIV;
+                        Entity.IdRubro_IR = info.IdRubro_IR;
                         Entity.IdRubro_horas_vespertina = info.IdRubro_horas_vespertina;
                         Entity.IdRubro_horas_matutina = info.IdRubro_horas_matutina;
                         Entity.IdRubro_horas_brigadas = info.IdRubro_horas_brigadas;
-                        Entity.IdRubro_horas_extras = info.IdRubro_horas_extras;
+                        Entity.IdRubro_horas_adicionales = info.IdRubro_horas_adicionales;
                         Entity.IdRubro_horas_recargo = info.IdRubro_horas_recargo;
-                    Entity.IdRubro_bono_x_antiguedad = info.IdRubro_bono_x_antiguedad;
-
-                    Context.SaveChanges();
+                        Entity.IdRubro_bono_x_antiguedad = info.IdRubro_bono_x_antiguedad;
+                        Entity.IdRubro_horas_control_salida = info.IdRubro_horas_control_salida;
+                       Context.SaveChanges();
                 }
 
                 return true;

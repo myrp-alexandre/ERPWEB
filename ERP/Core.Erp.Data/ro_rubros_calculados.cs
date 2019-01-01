@@ -33,8 +33,9 @@ namespace Core.Erp.Data
         public string IdRubro_horas_matutina { get; set; }
         public string IdRubro_horas_vespertina { get; set; }
         public string IdRubro_horas_brigadas { get; set; }
+        public string IdRubro_horas_adicionales { get; set; }
+        public string IdRubro_horas_control_salida { get; set; }
         public string IdRubro_horas_recargo { get; set; }
-        public string IdRubro_horas_extras { get; set; }
         public string IdRubro_bono_x_antiguedad { get; set; }
     
         public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }

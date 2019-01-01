@@ -363,9 +363,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             #region horas extras
                             if (!reader.IsDBNull(5))
                             {
-                                if (rubros_calculados.IdRubro_horas_extras != null)
+                                if (rubros_calculados.IdRubro_horas_adicionales != null)
                                 {
-                                    var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_extras);
+                                    var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_adicionales);
                                     if (rubros != null)
                                     {
                                         ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
@@ -377,7 +377,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                             em_codigo = empleado.em_codigo,
                                             Secuencia = cont,
                                             IdEmpleado = empleado.IdEmpleado,
-                                            IdRubro = rubros_calculados.IdRubro_horas_extras,
+                                            IdRubro = rubros_calculados.IdRubro_horas_adicionales,
                                             ru_descripcion = rubros.ru_descripcion,
                                             ValorHora = Convert.ToDouble(empleado.Valor_horas_extras)
 
