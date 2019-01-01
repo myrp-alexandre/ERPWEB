@@ -191,10 +191,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 msg = "La factura no tiene valor, por favor revise";
                 return false;
             }
-
             i_validar.lst_cuota = List_cuotas.get_list(i_validar.IdTransaccionSession);
-            i_validar.IdBodega = (int)bus_punto_venta.get_info(i_validar.IdEmpresa, i_validar.IdSucursal, Convert.ToInt32(i_validar.IdPuntoVta)).IdBodega;
-            i_validar.IdCaja = 1;
+
+            #region Talonario
+            var pto_vta = bus_punto_venta.get_info(i_validar.IdEmpresa, i_validar.IdSucursal, Convert.ToInt32(i_validar.IdPuntoVta));
+            i_validar.IdBodega = pto_vta.IdBodega;
+            i_validar.vt_serie1 = pto_vta.cod_PuntoVta;
+            i_validar.vt_serie2 = pto_vta.Su_CodigoEstablecimiento;
+            i_validar.IdCaja = pto_vta.IdCaja;
+            #endregion
+
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltModi = SessionFixed.IdUsuario;
 

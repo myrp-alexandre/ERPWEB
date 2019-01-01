@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Facturacion
 {
@@ -91,7 +89,7 @@ namespace Core.Erp.Data.Facturacion
                 fa_PuntoVta_Info info = new fa_PuntoVta_Info();
                 using (Entities_facturacion Context = new Entities_facturacion())
                 {
-                    fa_PuntoVta Entity = Context.fa_PuntoVta.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal  && q.IdPuntoVta == IdPuntoVta);
+                    var Entity = Context.vwfa_PuntoVta.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal  && q.IdPuntoVta == IdPuntoVta);
                     if (Entity == null) return null;
                     info = new fa_PuntoVta_Info
                     {
@@ -102,8 +100,8 @@ namespace Core.Erp.Data.Facturacion
                         cod_PuntoVta = Entity.cod_PuntoVta,
                         nom_PuntoVta = Entity.nom_PuntoVta,
                         estado = Entity.estado,
-                        IdNivel = Entity.IdNivel
-
+                        Su_CodigoEstablecimiento = Entity.Su_CodigoEstablecimiento,
+                        IdCaja = Entity.IdCaja
                     };
                 }
                 return info;
@@ -155,7 +153,7 @@ namespace Core.Erp.Data.Facturacion
                         cod_PuntoVta = info.cod_PuntoVta,
                          nom_PuntoVta = info.nom_PuntoVta,
                         estado = info.estado = true,
-                        IdNivel = info.IdNivel
+                        IdCaja = info.IdCaja
                     };
                     Context.fa_PuntoVta.Add(Entity);
                     Context.SaveChanges();
@@ -180,7 +178,7 @@ namespace Core.Erp.Data.Facturacion
                     
                     Entity.cod_PuntoVta = info.cod_PuntoVta;
                     Entity.nom_PuntoVta = info.nom_PuntoVta;
-                    Entity.IdNivel = info.IdNivel;
+                    Entity.IdCaja = info.IdCaja;
 
                     Context.SaveChanges();
                 

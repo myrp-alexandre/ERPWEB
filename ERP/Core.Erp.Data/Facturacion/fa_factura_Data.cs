@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Data.Contabilidad;
+using Core.Erp.Data.General;
 using Core.Erp.Data.Inventario;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.Facturacion;
@@ -13,6 +14,9 @@ namespace Core.Erp.Data.Facturacion
 {
    public class fa_factura_Data
     {
+        #region Variables
+        tb_sis_Documento_Tipo_Talonario_Data odata_tal = new tb_sis_Documento_Tipo_Talonario_Data();
+        #endregion
         public List<fa_factura_consulta_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
@@ -157,6 +161,7 @@ namespace Core.Erp.Data.Facturacion
                         valor_abono = Entity.valor_abono,
                         IdNivel = Entity.IdNivel,
                         IdCatalogo_FormaPago = Entity.IdCatalogo_FormaPago,
+                        vt_ValorEfectivo = Entity.vt_ValorEfectivo,                        
                     };
                 }
                 return info;
@@ -206,7 +211,7 @@ namespace Core.Erp.Data.Facturacion
                 #region Factura
 
                 #region Cabecera
-                db_f.fa_factura.Add(new fa_factura
+                var factura = new fa_factura
                 {
                     IdEmpresa = info.IdEmpresa,
                     IdSucursal = info.IdSucursal,
@@ -240,8 +245,9 @@ namespace Core.Erp.Data.Facturacion
                     vt_Cambio = info.vt_Cambio,
                     vt_ValorEfectivo = info.vt_ValorEfectivo,
                     IdNivel = info.IdNivel,
-                    
-                });
+
+                };
+                
                 #endregion
 
                 #region Detalle
@@ -304,18 +310,14 @@ namespace Core.Erp.Data.Facturacion
                 #endregion
 
                 var contacto = db_f.fa_cliente_contactos.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente && q.IdContacto == info.IdContacto).FirstOrDefault();
-
-                db_f.SaveChanges();
-
                 #region Talonario
-                using (Entities_general Context = new Entities_general())
-                {
-                    var talonario = Context.tb_sis_Documento_Tipo_Talonario.Where(q => q.IdEmpresa == info.IdEmpresa && q.CodDocumentoTipo == info.vt_tipoDoc && q.Establecimiento == info.vt_serie1 && q.PuntoEmision == info.vt_serie2 && q.NumDocumento == info.vt_NumFactura).FirstOrDefault();
-                    if (talonario != null)
-                        talonario.Usado = true;
-                    Context.SaveChanges();
-                }
+                var tal = odata_tal.GetUltimoNoUsadoFacElec(info.IdEmpresa, info.vt_tipoDoc, info.vt_serie1, info.vt_serie2);
+                if (tal != null)
+                    factura.vt_NumFactura = tal.NumDocumento;
                 #endregion
+
+                db_f.fa_factura.Add(factura);
+                db_f.SaveChanges();                
 
                 #region Inventario
                 var parametro = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();

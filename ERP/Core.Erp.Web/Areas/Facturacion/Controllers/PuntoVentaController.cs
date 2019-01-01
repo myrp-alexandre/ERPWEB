@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.General;
 using Core.Erp.Web.Helps;
+using Core.Erp.Bus.Caja;
 
 namespace Core.Erp.Web.Areas.Facturacion.Controllers
 {
@@ -44,10 +45,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             lst_signos.Add("+", "+");
             ViewBag.lst_signos = lst_signos;
 
-            fa_NivelDescuento_Bus bus_nivel = new fa_NivelDescuento_Bus();
-            var lst_nivel = bus_nivel.GetList(model.IdEmpresa, false);
-            ViewBag.lst_nivel = lst_nivel;
-
+            caj_Caja_Bus bus_caja = new caj_Caja_Bus();
+            var lst_caja = bus_caja.get_list(model.IdEmpresa, false);
+            ViewBag.lst_caja = lst_caja;
         }
         #endregion
         #region Acciones

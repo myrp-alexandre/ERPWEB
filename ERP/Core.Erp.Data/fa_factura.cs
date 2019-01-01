@@ -68,10 +68,10 @@ namespace Core.Erp.Data
         public virtual ICollection<fa_cuotas_x_doc> fa_cuotas_x_doc { get; set; }
         public virtual ICollection<fa_factura_det> fa_factura_det { get; set; }
         public virtual fa_NivelDescuento fa_NivelDescuento { get; set; }
-        public virtual fa_PuntoVta fa_PuntoVta { get; set; }
         public virtual fa_Vendedor fa_Vendedor { get; set; }
         public virtual ICollection<fa_factura_x_ct_cbtecble> fa_factura_x_ct_cbtecble { get; set; }
         public virtual ICollection<fa_factura_x_fa_guia_remision> fa_factura_x_fa_guia_remision { get; set; }
         public virtual ICollection<fa_factura_x_in_Ing_Egr_Inven> fa_factura_x_in_Ing_Egr_Inven { get; set; }
+        public virtual fa_PuntoVta fa_PuntoVta { get; set; }
     }
 }

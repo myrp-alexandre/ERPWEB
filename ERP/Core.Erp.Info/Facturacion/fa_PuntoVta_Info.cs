@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Core.Erp.Info.Facturacion
 {
@@ -22,9 +17,11 @@ namespace Core.Erp.Info.Facturacion
         public bool estado { get; set; }
         [Required(ErrorMessage = "El campo bodega es obligatorio")]
         public int IdBodega { get; set; }
-        public int IdNivel { get; set; }
-        //campos que no existen en la tabla
-        public string Su_Descripcion { get; set; }
+        public int IdCaja { get; set; }
 
+        #region Campos que no existen en la tabla
+        public string Su_Descripcion { get; set; }
+        public string Su_CodigoEstablecimiento { get; set; }
+        #endregion
     }
 }

@@ -21,7 +21,8 @@ namespace Core.Erp.Data
         public string cod_PuntoVta { get; set; }
         public string nom_PuntoVta { get; set; }
         public bool estado { get; set; }
-        public Nullable<int> IdBodega { get; set; }
+        public int IdBodega { get; set; }
         public string Su_CodigoEstablecimiento { get; set; }
+        public int IdCaja { get; set; }
     }
 }

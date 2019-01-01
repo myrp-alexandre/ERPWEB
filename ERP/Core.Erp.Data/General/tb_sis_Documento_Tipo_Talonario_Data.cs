@@ -61,7 +61,6 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-
         public tb_sis_Documento_Tipo_Talonario_Info get_info(int IdEmpresa, string CodDocumentoTipo, string Establecimiento, string PuntoEmision, string NumDocumento)
         {
             try
@@ -95,7 +94,6 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-
         public bool guardarDB(tb_sis_Documento_Tipo_Talonario_Info info)
         {
             try
@@ -128,7 +126,6 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-
         public bool modificarDB(tb_sis_Documento_Tipo_Talonario_Info info)
         {
             try
@@ -154,7 +151,6 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-
         public bool anularDB(tb_sis_Documento_Tipo_Talonario_Info info)
         {
             try
@@ -174,9 +170,7 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-
         /// crear una funcion donde recibe parametro idEmpresa, CodDocumentotipo, establecimiento y pto emision, select a la base devuelve max.numdoc
-
         public string get_NumeroDocumentoInicial (int IdEmpresa, string CodDcumentoTipo, string Establecimiento, string PuntoEmision)
         {
             try
@@ -205,7 +199,6 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-
         public tb_sis_Documento_Tipo_Talonario_Info get_info_ultimo_no_usado(int IdEmpresa, string CodDocumentoTipo)
         {
             try
@@ -288,7 +281,6 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-
         public bool modificar_estado_usadoDB(tb_sis_Documento_Tipo_Talonario_Info info)
         {
             try
@@ -308,7 +300,50 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
+        
+        public tb_sis_Documento_Tipo_Talonario_Info GetUltimoNoUsadoFacElec(int IdEmpresa, string CodDocumentoTipo, string Establecimiento, string PuntoEmision)
+        {
+            try
+            {
+                tb_sis_Documento_Tipo_Talonario_Info info = new tb_sis_Documento_Tipo_Talonario_Info();
 
+                using (Entities_general db = new Entities_general())
+                {
+                    var q = (from A in db.tb_sis_Documento_Tipo_Talonario
+                             where A.IdEmpresa == IdEmpresa
+                             && A.CodDocumentoTipo == CodDocumentoTipo
+                             && A.Establecimiento == Establecimiento
+                             && A.PuntoEmision == PuntoEmision
+                             && A.Usado == false
+                             && A.Estado == "A"
+                             && A.es_Documento_Electronico == true
+                             select A.NumDocumento).Min();
+                    if (q != null)
+                    {
+                        string UltRegistro = q.ToString();
+                        var Entity = db.tb_sis_Documento_Tipo_Talonario.Where(v => v.IdEmpresa == IdEmpresa && v.CodDocumentoTipo == CodDocumentoTipo && v.Establecimiento == Establecimiento && v.PuntoEmision == PuntoEmision && v.Estado == "A" && v.Usado == false).FirstOrDefault();
+                        if (Entity != null)
+                        {
+                            Entity.Usado = true;
+                            db.SaveChanges();
+                            info = new tb_sis_Documento_Tipo_Talonario_Info
+                            {
+                                IdEmpresa = Entity.IdEmpresa,
+                                Establecimiento = Entity.Establecimiento,
+                                PuntoEmision = Entity.PuntoEmision,
+                                NumDocumento = Entity.NumDocumento,
+                                CodDocumentoTipo = Entity.CodDocumentoTipo,                                
+                            };
+                        }
+                    }
+                }
 
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
