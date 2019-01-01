@@ -263,6 +263,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     empleado.Valor_horas_vespertina = 0;
                                 if (empleado.Valor_horas_brigada == null)
                                     empleado.Valor_horas_brigada = 0;
+                                if (empleado.Valor_hora_adicionales == null)
+                                    empleado.Valor_hora_adicionales = 0;
+                                if (empleado.Valor_hora_control_salida == null)
+                                    empleado.Valor_hora_control_salida = 0;
+
                             #region Horas matutinas
 
                             if (!reader.IsDBNull(2))
