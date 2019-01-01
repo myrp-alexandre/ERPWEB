@@ -1,6 +1,5 @@
 ﻿
 
-
 CREATE PROCEDURE [dbo].[spRo_procesa_Rol] (
 @IdEmpresa int,
 @IdNomina numeric,
@@ -156,7 +155,7 @@ and pre.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa
 and pred.IdNominaTipoLiqui=@IdNominaTipo
 and pred.FechaPago between @Fi and @Ff
-and pred.Estado='A'
+and pred.Estado=1
 and pred.EstadoPago='PEN'
 and (emp.em_status!='EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
@@ -196,13 +195,16 @@ select
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
                          dbo.ro_rol ON rol_det.IdEmpresa = dbo.ro_rol.IdEmpresa AND rol_det.IdRol = dbo.ro_rol.IdRol INNER JOIN
-                         dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado
+                         dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
+                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado
 
 where rol_det.IdEmpresa=@IdEmpresa
 and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
-and rub.ru_tipo='I' and rub.rub_aplica_IESS=1
+and rub.ru_tipo='I' 
+and rub.rub_aplica_IESS=1
+and cont.IdNomina=1
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
 
