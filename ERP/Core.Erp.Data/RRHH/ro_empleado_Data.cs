@@ -296,6 +296,9 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                ro_rubros_calculados_Data ru_calclados = new ro_rubros_calculados_Data();
+
+                var info_rub_calculados = ru_calclados.get_info(info.IdEmpresa);
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     ro_empleado Entity = new ro_empleado
@@ -363,19 +366,48 @@ namespace Core.Erp.Data.RRHH
 
                     };
                     Context.ro_empleado.Add(Entity);
-                    if (info.info_foto != null)
+                    if (info_rub_calculados != null)
                     {
-                        if (info.info_foto.Foto != null)
-                            if (info.info_foto.Foto.Length != 0)
+                        if(info_rub_calculados.IdRubro_DIII!=null)
+                        {
+                            ro_empleado_x_rubro_acumulado d3 = new ro_empleado_x_rubro_acumulado
                             {
-                                ro_EmpleadoFoto entity_foto = new ro_EmpleadoFoto
-                                {
-                                    IdEmpresa = info.IdEmpresa,
-                                    IdEmpleado = info.IdEmpleado,
-                                    Foto = info.info_foto.Foto
-                                };
-                                Context.ro_EmpleadoFoto.Add(entity_foto);
-                            }
+                                IdEmpresa = info.IdEmpresa,
+                                IdEmpleado=info.IdEmpleado,
+                                IdRubro=info_rub_calculados.IdRubro_DIII,
+                                FechaIngresa=DateTime.Now,
+                                UsuarioIngresa=info.IdUsuario
+                            
+                            };
+                            Context.ro_empleado_x_rubro_acumulado.Add(d3);
+                        }
+                        if (info_rub_calculados.IdRubro_DIV != null)
+                        {
+                            ro_empleado_x_rubro_acumulado d4 = new ro_empleado_x_rubro_acumulado
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdEmpleado = info.IdEmpleado,
+                                IdRubro = info_rub_calculados.IdRubro_DIV,
+                                FechaIngresa = DateTime.Now,
+                                UsuarioIngresa = info.IdUsuario
+
+                            };
+                            Context.ro_empleado_x_rubro_acumulado.Add(d4);
+                        }
+
+                        if (info_rub_calculados.IdRubro_fondo_reserva != null)
+                        {
+                            ro_empleado_x_rubro_acumulado fr = new ro_empleado_x_rubro_acumulado
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdEmpleado = info.IdEmpleado,
+                                IdRubro = info_rub_calculados.IdRubro_fondo_reserva,
+                                FechaIngresa = DateTime.Now,
+                                UsuarioIngresa = info.IdUsuario
+
+                            };
+                            Context.ro_empleado_x_rubro_acumulado.Add(fr);
+                        }
                     }
                     
                     Context.SaveChanges();
