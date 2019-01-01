@@ -485,9 +485,8 @@
                                {
                                    settings.Name = "IdHorario";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {2}";
-                                   settings.Properties.Columns.Add("HoraIni", "Hora ingreso").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                   settings.Properties.Columns.Add("HoraFin", "Hora salida").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                                   settings.Properties.DisplayFormatString = "[{0}]";
+                                   settings.Properties.Columns.Add("Descripcion", "Horario").Width = System.Web.UI.WebControls.Unit.Percentage(50);
                                    //Campo ID
                                    settings.Properties.ValueField = "IdHorario";
                                    settings.Properties.ValueType = typeof(int);
