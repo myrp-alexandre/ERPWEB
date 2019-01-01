@@ -360,7 +360,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             }
                             #endregion
 
-                            #region horas extras
+                            #region horas Adicionales
                             if (!reader.IsDBNull(5))
                             {
                                 if (rubros_calculados.IdRubro_horas_adicionales != null)
@@ -392,6 +392,38 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             }
                             #endregion
 
+
+                            #region horas control salida
+                            if (!reader.IsDBNull(6))
+                            {
+                                if (rubros_calculados.IdRubro_horas_adicionales != null)
+                                {
+                                    var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_control_salida);
+                                    if (rubros != null)
+                                    {
+                                        ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
+                                        {
+                                            NumHoras = Convert.ToDouble(reader.GetDouble(6)),
+                                            pe_cedulaRuc = cedua,
+                                            pe_apellido = empleado.Empleado,
+                                            IdSucursal = empleado.IdSucursal,
+                                            em_codigo = empleado.em_codigo,
+                                            Secuencia = cont,
+                                            IdEmpleado = empleado.IdEmpleado,
+                                            IdRubro = rubros_calculados.IdRubro_horas_adicionales,
+                                            ru_descripcion = rubros.ru_descripcion,
+                                            ValorHora = Convert.ToDouble(empleado.Valor_horas_brigada)
+
+
+                                        };
+                                        info.Valor = Convert.ToDouble(empleado.Valor_horas_extras * info.NumHoras);
+                                        info.Secuencia = lista_novedades.Count() + 1;
+                                        if (info.Valor > 0)
+                                            lista_novedades.Add(info);
+                                    }
+                                }
+                            }
+                            #endregion
 
                             #region horas adicionales
                             if ((horas_vesp+horas_mat)*(formula_horas.Dividendo/formula_horas.Divisor)>0)
