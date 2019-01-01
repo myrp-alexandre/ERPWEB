@@ -1,7 +1,7 @@
 ﻿CREATE VIEW dbo.vwfa_PuntoVta
 AS
 SELECT        dbo.fa_PuntoVta.IdEmpresa, dbo.fa_PuntoVta.IdSucursal, dbo.tb_sucursal.Su_Descripcion, dbo.fa_PuntoVta.IdPuntoVta, dbo.fa_PuntoVta.cod_PuntoVta, dbo.fa_PuntoVta.nom_PuntoVta, dbo.fa_PuntoVta.estado, 
-                         dbo.fa_PuntoVta.IdBodega, dbo.tb_sucursal.Su_CodigoEstablecimiento
+                         dbo.fa_PuntoVta.IdBodega, dbo.tb_sucursal.Su_CodigoEstablecimiento, dbo.fa_PuntoVta.IdCaja
 FROM            dbo.fa_PuntoVta INNER JOIN
                          dbo.tb_sucursal ON dbo.fa_PuntoVta.IdEmpresa = dbo.tb_sucursal.IdEmpresa AND dbo.fa_PuntoVta.IdSucursal = dbo.tb_sucursal.IdSucursal
 GO
@@ -76,16 +76,6 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "fa_PuntoVta"
-            Begin Extent = 
-               Top = 0
-               Left = 316
-               Bottom = 189
-               Right = 525
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "tb_sucursal"
             Begin Extent = 
                Top = 0
@@ -95,6 +85,16 @@ Begin DesignProperties =
             End
             DisplayFlags = 280
             TopColumn = 0
+         End
+         Begin Table = "fa_PuntoVta"
+            Begin Extent = 
+               Top = 0
+               Left = 316
+               Bottom = 189
+               Right = 525
+            End
+            DisplayFlags = 280
+            TopColumn = 1
          End
       End
    End
@@ -134,6 +134,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwfa_PuntoVta';
+
+
 
 
 GO
