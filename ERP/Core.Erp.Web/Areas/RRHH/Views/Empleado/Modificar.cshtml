@@ -24,19 +24,14 @@
 {
     @Html.HiddenFor(q => q.IdPersona);
     @Html.HiddenFor(q => q.IdEmpresa);
-    @Html.HiddenFor(q => q.IdEmpleado, new { @id= "IdEmpleado" });
+    @Html.HiddenFor(q => q.IdEmpleado);
     <div class="row">
         <div class="col-md-12">
-
-
             <div class="col-md-2">
-
-
-
                 <script type="text/javascript">
                     function onUploadControlFileUploadComplete(s, e) {
                         if (e.isValid)
-                           // $("#uploadedImage").attr("src", e.callbackData);
+                            $("#uploadedImage").attr("src", e.callbackData);
                         setElementVisible("uploadedImage", e.isValid);
                     }
                     function onImageLoad() {
@@ -60,18 +55,7 @@
                     <div id="dragZone">
                         <span class="dragZoneText">Seleccione una foto</span>
                     </div>
-                    @*<img id="uploadedImage" src="~/Content/imagenes/empleados/@ViewBag.foto" alt="" style="display: none" onload="onImageLoad()" />*@
-                    @Html.DevExpress().BinaryImage(
-                               settings =>
-                               {
-                                   settings.Name = "em_foto";
-                                   settings.CallbackRouteValues = new { Controller = "Empresa", Action = "get_imagen" };
-                                   settings.Properties.ImageSizeMode = ImageSizeMode.FitProportional;
-                                   settings.Properties.EnableServerResize = true;
-                                   settings.Width = Unit.Percentage(100);
-                                   settings.Height = Unit.Percentage(100);
-
-                               }).Bind((Model.em_foto).ToArray()).GetHtml()
+                    <img id="uploadedImage" src="#" alt="" style="display: none" onload="onImageLoad()" />
                     <div id="dropZone" style="display: none">
                         <span class="dropZoneText">Drop an image here</span>
                     </div>
@@ -155,12 +139,6 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-
-
-        </div>
-    </div>
     <div id="Tabs" role="tabpanel">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
@@ -176,7 +154,9 @@
             <li>
                 <a href="#tb_info_adicional" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Información adicional</a>
             </li>
-
+            <li>
+                <a href="#tb_info_pago_hora" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Información pago en horas</a>
+            </li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="padding-top: 20px">
@@ -199,7 +179,6 @@
                                    settings.Properties.TextField = "Descripcion_Ciudad";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_ciudad).GetHtml()
@@ -303,7 +282,6 @@
                                    settings.Properties.TextField = "ba_descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_banco).GetHtml()
@@ -349,7 +327,6 @@
                                    settings.Properties.TextField = "Su_Descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                                }).BindList(ViewBag.lst_sucursal).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
@@ -371,7 +348,6 @@
                                    settings.Properties.TextField = "ca_descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_cargo).GetHtml()
@@ -394,7 +370,6 @@
                                    settings.Properties.TextField = "Empleado";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_empleado).GetHtml()
@@ -424,7 +399,6 @@
                                    settings.Properties.TextField = "Descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_division).GetHtml()
@@ -448,7 +422,6 @@
                                    settings.Properties.TextField = "Descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_area).GetHtml()
@@ -472,7 +445,6 @@
                                    settings.Properties.TextField = "de_descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_departamento).GetHtml()
@@ -498,7 +470,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="IdHorario">Horario</label>
+                                <label for="IdHorario">Horario*</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdHorario, settings =>
                                {
                                    settings.Name = "IdHorario";
@@ -511,7 +483,6 @@
                                    settings.Properties.TextField = "HoraIni";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_horario).GetHtml()
@@ -568,71 +539,10 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Pago_por_horas"></label>
-                                @Html.DevExpress().CheckBoxFor(q => q.Pago_por_horas, settings =>
-                           {
-                               settings.Name = "Pago_por_horas";
-                               settings.Text = "Pago por horas";
-                               settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_horas();}";
-                           }).GetHtml()
-                                @Html.ValidationMessageFor(q => q.Pago_por_horas, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div id="DivPagoHoras">
-
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="Valor_horas">Valor hora vespertina</label>
-                                    @Html.TextBoxFor(q => q.Valor_horas_vespertina, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.Valor_horas_vespertina, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="Valor_maximo_horas">Horas máxima vespertina</label>
-                                    @Html.TextBoxFor(q => q.Valor_maximo_horas_vesp, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.Valor_maximo_horas_vesp, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="Valor_horas">Valor hora matutina</label>
-                                    @Html.TextBoxFor(q => q.Valor_horas_matutino, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.Valor_horas_matutino, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="Valor_maximo_horas">Horas máxima matutina</label>
-                                    @Html.TextBoxFor(q => q.Valor_maximo_horas_mat, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.Valor_maximo_horas_mat, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="Valor_horas">Valor hora brigada</label>
-                                    @Html.TextBoxFor(q => q.Valor_horas_brigada, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.Valor_horas_brigada, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="Valor_horas">Valor hora extra</label>
-                                @Html.TextBoxFor(q => q.Valor_horas_extras, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.Valor_horas_extras, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+
 
                         <div class="col-md-2">
                             <div class="form-group">
@@ -698,6 +608,7 @@
                     </div>
                 </div>
 
+
             </div>
 
             <div role="tabpanel" class="tab-pane" id="tb_info_adicional">
@@ -718,7 +629,6 @@
                                    settings.Properties.TextField = "ca_descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_tipo_discapacidad).GetHtml()
@@ -759,7 +669,6 @@
                                    settings.Properties.TextField = "ca_descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_tipo_doc_sustutuido).GetHtml()
@@ -831,6 +740,86 @@
             </div>
 
 
+            <div role="tabpanel" class="tab-pane" id="tb_info_pago_hora">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Pago_por_horas"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.Pago_por_horas, settings =>
+                           {
+                               settings.Name = "Pago_por_horas";
+                               settings.Text = "Pago por horas";
+                               settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_horas();}";
+                           }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.Pago_por_horas, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div id="DivPagoHoras">
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_horas">Valor hora vespertina</label>
+                                    @Html.TextBoxFor(q => q.Valor_horas_vespertina, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_horas_vespertina, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_maximo_horas">Horas máxima vespertina</label>
+                                    @Html.TextBoxFor(q => q.Valor_maximo_horas_vesp, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_maximo_horas_vesp, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_horas">Valor hora matutina</label>
+                                    @Html.TextBoxFor(q => q.Valor_horas_matutino, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_horas_matutino, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_maximo_horas">Horas máxima matutina</label>
+                                    @Html.TextBoxFor(q => q.Valor_maximo_horas_mat, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_maximo_horas_mat, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_horas">Valor hora brigada</label>
+                                    @Html.TextBoxFor(q => q.Valor_horas_brigada, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_horas_brigada, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_horas">Valor hora adicionales</label>
+                                    @Html.TextBoxFor(q => q.Valor_hora_adicionales, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_hora_adicionales, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Valor_horas">Valor hora control salida</label>
+                                    @Html.TextBoxFor(q => q.Valor_hora_control_salida, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.Valor_hora_control_salida, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                </div>
+            </div>
+
 
         </div>
     </div>
@@ -855,6 +844,7 @@
     $("#pe_cedulaRuc").keyup(function () {
         validar();
     });
+
     function validar() {
         var tipo_doc = $("#IdTipoDocumento").val();
         var cedula = $("#pe_cedulaRuc").val();
@@ -900,7 +890,7 @@
 
     function nombre_imagen() {
         var datos = {
-            IdEmpleado: $("#IdEmpleado").val()
+            IdEmpresa: $("#IdActivoFijo").val()
         }
         $.ajax({
             type: 'POST',
@@ -923,7 +913,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("actualizar_div", "ActivoFijo", new { Area = "ActivoFijo" })',
+            url: '@Url.Action("nombre_imagen", "Empleado", new { Area = "RRHH" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -931,7 +921,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
 
-               
+
                 //$("#uploadedImage").load();
               //  $("#uploadedImage").attr("src",//Url.Content(Core.Erp.Web.Helps.SessionFixed.NombreImagen));
 
@@ -940,5 +930,6 @@
                     }
                 });
     }
+
 
 </script>

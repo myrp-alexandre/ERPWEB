@@ -179,7 +179,6 @@
                                    settings.Properties.TextField = "Descripcion_Ciudad";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_ciudad).GetHtml()
@@ -283,7 +282,6 @@
                                    settings.Properties.TextField = "ba_descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_banco).GetHtml()
@@ -329,7 +327,6 @@
                                    settings.Properties.TextField = "Su_Descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                                }).BindList(ViewBag.lst_sucursal).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
@@ -351,7 +348,6 @@
                                    settings.Properties.TextField = "ca_descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_cargo).GetHtml()
@@ -374,7 +370,6 @@
                                    settings.Properties.TextField = "Empleado";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_empleado).GetHtml()
@@ -404,7 +399,6 @@
                                    settings.Properties.TextField = "Descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_division).GetHtml()
@@ -428,7 +422,6 @@
                                    settings.Properties.TextField = "Descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_area).GetHtml()
@@ -452,7 +445,6 @@
                                    settings.Properties.TextField = "de_descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_departamento).GetHtml()
@@ -478,7 +470,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="IdHorario">Horario</label>
+                                <label for="IdHorario">Horario*</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdHorario, settings =>
                                {
                                    settings.Name = "IdHorario";
@@ -491,7 +483,6 @@
                                    settings.Properties.TextField = "HoraIni";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_horario).GetHtml()
@@ -638,7 +629,6 @@
                                    settings.Properties.TextField = "ca_descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_tipo_discapacidad).GetHtml()
@@ -679,7 +669,6 @@
                                    settings.Properties.TextField = "ca_descripcion";
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.NullText = "== Seleccione ==";
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
                                }).BindList(ViewBag.lst_tipo_doc_sustutuido).GetHtml()
