@@ -366,6 +366,8 @@ namespace Core.Erp.Data.RRHH
 
                     };
                     Context.ro_empleado.Add(Entity);
+
+
                     if (info_rub_calculados != null)
                     {
                         if(info_rub_calculados.IdRubro_DIII!=null)
@@ -414,7 +416,75 @@ namespace Core.Erp.Data.RRHH
                             Context.ro_empleado_x_rubro_acumulado.Add(fr);
                         }
                     }
-                    
+
+                    #region si tiene ingresos compartidos
+                    if (info.Tiene_ingresos_compartidos)
+                    {
+                        ro_empleado Entity_comp = new ro_empleado
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdEmpleado = info.IdEmpleado + 1,
+                            IdEmpleado_Supervisor = info.IdEmpleado_Supervisor,
+                            IdPersona = info.IdPersona,
+                            IdSucursal = info.IdSucursal,
+                            IdTipoEmpleado = info.IdTipoEmpleado,
+                            em_codigo = (info.em_codigo) == null ? info.IdEmpleado.ToString() : info.em_codigo,
+                            Codigo_Biometrico = info.Codigo_Biometrico,
+                            em_lugarNacimiento = info.em_lugarNacimiento,
+                            em_CarnetIees = info.em_CarnetIees,
+                            em_cedulaMil = info.em_cedulaMil,
+                            em_fechaSalida = info.em_fechaSalida,
+                            em_fechaIngaRol = info.em_fechaIngaRol,
+                            em_tipoCta = info.em_tipoCta,
+                            em_NumCta = info.em_NumCta,
+                            em_estado = info.em_estado,
+                            IdCodSectorial = info.IdCodSectorial,
+                            IdDepartamento = info.IdDepartamento,
+                            IdTipoSangre = info.IdTipoSangre,
+                            IdCargo = info.IdCargo,
+                            IdCtaCble_Emplea = info.IdCtaCble_Emplea,
+                            IdCiudad = info.IdCiudad,
+                            em_mail = info.em_mail,
+                            IdTipoLicencia = info.IdTipoLicencia,
+                            IdBanco = info.IdBanco,
+                            IdArea = info.IdArea,
+                            IdDivision = info.IdDivision,
+                            Fecha_UltMod = info.Fecha_UltMod,
+                            por_discapacidad = info.por_discapacidad,
+                            carnet_conadis = info.carnet_conadis,
+                            talla_pant = info.talla_pant,
+                            talla_camisa = info.talla_camisa,
+                            talla_zapato = info.talla_zapato,
+                            em_status = info.em_status,
+                            IdCondicionDiscapacidadSRI = info.IdCondicionDiscapacidadSRI,
+                            IdTipoIdentDiscapacitadoSustitutoSRI = info.IdTipoIdentDiscapacitadoSustitutoSRI,
+                            IdentDiscapacitadoSustitutoSRI = info.IdentDiscapacitadoSustitutoSRI,
+                            IdAplicaConvenioDobleImposicionSRI = info.IdAplicaConvenioDobleImposicionSRI,
+                            IdTipoResidenciaSRI = info.IdTipoResidenciaSRI,
+                            IdTipoSistemaSalarioNetoSRI = info.IdTipoSistemaSalarioNetoSRI,
+                            es_AcreditaHorasExtras = info.es_AcreditaHorasExtras,
+                            IdTipoAnticipo = info.IdTipoAnticipo,
+                            ValorAnticipo = info.ValorAnticipo,
+                            CodigoSectorial = info.CodigoSectorial,
+                            em_AnticipoSueldo = info.em_AnticipoSueldo,
+                            Marca_Biometrico = info.Marca_Biometrico,
+                            IdHorario = info.IdHorario,
+                            Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos,
+                            IdUsuario = info.IdUsuario,
+                            Fecha_Transaccion = info.Fecha_Transaccion = DateTime.Now,
+                            Pago_por_horas = info.Pago_por_horas,
+                            Valor_horas_vespertina = info.Valor_horas_vespertina,
+                            Valor_horas_brigada = info.Valor_horas_brigada,
+                            Valor_horas_matutino = info.Valor_horas_matutino,
+                            Valor_maximo_horas_mat = info.Valor_maximo_horas_mat,
+                            Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp,
+                            Valor_horas_extras = info.Valor_horas_extras,
+                            DiasVacaciones = info.DiasVacaciones,
+                            GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones
+                        };
+                        Context.ro_empleado.Add(Entity_comp);
+                    }
+                    #endregion
                     Context.SaveChanges();
                 }
                 return true;

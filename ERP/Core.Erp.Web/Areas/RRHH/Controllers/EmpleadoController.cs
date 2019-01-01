@@ -107,6 +107,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     return View(info);
                 }
                 info.IdEmpresa = GetIdEmpresa();
+                info.IdUsuario = SessionFixed.IdUsuario;
                 if (!bus_empleado.guardarDB(info))
                 {
                     if (info.em_foto == null)
