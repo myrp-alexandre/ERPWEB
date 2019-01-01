@@ -375,7 +375,9 @@ namespace Core.Erp.Data.RRHH
                                 IdEmpresa = info.IdEmpresa,
                                 IdEmpleado=info.IdEmpleado,
                                 IdRubro=info_rub_calculados.IdRubro_DIII,
-                                FechaIngresa=DateTime.Now,
+                                Fec_Inicio_Acumulacion = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                                Fec_Fin_Acumulacion= new DateTime(DateTime.Now.Year,11, 30),
+                                FechaIngresa =DateTime.Now,
                                 UsuarioIngresa=info.IdUsuario
                             
                             };
@@ -388,7 +390,10 @@ namespace Core.Erp.Data.RRHH
                                 IdEmpresa = info.IdEmpresa,
                                 IdEmpleado = info.IdEmpleado,
                                 IdRubro = info_rub_calculados.IdRubro_DIV,
+                                Fec_Inicio_Acumulacion = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                                Fec_Fin_Acumulacion = new DateTime(DateTime.Now.Year, 11, 30),
                                 FechaIngresa = DateTime.Now,
+
                                 UsuarioIngresa = info.IdUsuario
 
                             };
