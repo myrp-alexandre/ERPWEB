@@ -5,6 +5,7 @@ SELECT        dbo.ro_empleado.IdEmpresa, dbo.ro_empleado.IdEmpleado, dbo.tb_pers
 FROM            dbo.tb_persona INNER JOIN
                          dbo.ro_empleado ON dbo.tb_persona.IdPersona = dbo.ro_empleado.IdPersona INNER JOIN
                          dbo.ro_cargo ON dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa AND dbo.ro_empleado.IdCargo = dbo.ro_cargo.IdCargo
+WHERE        (dbo.ro_empleado.IdEmpleadoPAdre IS NULL)
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -12,7 +13,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[48] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[25] 4[5] 2[63] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -96,7 +97,7 @@ Begin DesignProperties =
                Right = 597
             End
             DisplayFlags = 280
-            TopColumn = 1
+            TopColumn = 48
          End
          Begin Table = "ro_cargo"
             Begin Extent = 
@@ -147,6 +148,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleados_consulta';
+
+
 
 
 GO
