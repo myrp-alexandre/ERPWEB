@@ -28,7 +28,7 @@ namespace Core.Erp.Data
         public string Observacion { get; set; }
         public System.DateTime FechaRegistro { get; set; }
     
-        public virtual ro_empleado ro_empleado { get; set; }
         public virtual ro_SancionesPorMarcaciones ro_SancionesPorMarcaciones { get; set; }
+        public virtual ro_empleado ro_empleado { get; set; }
     }
 }

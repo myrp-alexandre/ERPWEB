@@ -182,8 +182,21 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_Parametros_ro_catalogo" />
         <EntityTypeShape EntityType="Model_rrhh.vwRo_Prestamo" Width="1.5" PointX="21.375" PointY="22.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_marcaciones_x_planificacion_horario" Width="1.5" PointX="23.375" PointY="26.75" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_empleado" Width="1.5" PointX="9" PointY="52.875" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="26.375" PointY="17.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_SancionesPorMarcaciones_x_novedad" Width="1.5" PointX="26.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_SancionesPorMarcaciones" Width="1.5" PointX="27.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_marcaciones_x_empleado" Width="1.5" PointX="23.625" PointY="38.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_SancionesPorMarcaciones_x_novedad" Width="1.5" PointX="21" PointY="44.875" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_Nomina_Tipo" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_SancionesPorMarcaciones_det" Width="1.5" PointX="15" PointY="78.375" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_SancionesPorMarcaciones_det" Width="1.5" PointX="23.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_SancionesPorMarcaciones" Width="1.5" PointX="12.75" PointY="97.375" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_empleado" Width="1.5" PointX="9" PointY="52.375" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_datos_generales" Width="1.5" PointX="26.375" PointY="11.75" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_CargaFamiliar_ro_empleado" />
@@ -200,6 +213,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_empleado1" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_rubro_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_ro_tipoNomina_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_rubro_acumulado" />
@@ -210,6 +224,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_historico_vacaciones_x_empleado_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_horario_planificacion_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_nomina_x_horas_extras_det_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_NominasPagosCheques_det_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_participacion_utilidad_empleado_ro_empleado" />
@@ -217,22 +232,8 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_permiso_x_empleado_ro_empleado1" />
         <AssociationConnector Association="Model_rrhh.FK_ro_prestamo_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_SancionesPorMarcaciones_x_novedad" Width="1.5" PointX="26.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_SancionesPorMarcaciones" Width="1.5" PointX="27.375" PointY="5.75" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_marcaciones_x_empleado" Width="1.5" PointX="23.625" PointY="38.75" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_SancionesPorMarcaciones_x_novedad" Width="1.5" PointX="21" PointY="44.875" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_Nomina_Tipo" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_SancionesPorMarcaciones_det" Width="1.5" PointX="15" PointY="78.375" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_SancionesPorMarcaciones_det" Width="1.5" PointX="23.375" PointY="11.75" />
         <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_empleado" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_SancionesPorMarcaciones" Width="1.5" PointX="12.75" PointY="97.375" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_ro_Nomina_Tipoliqui" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_SancionesPorMarcaciones" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

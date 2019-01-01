@@ -86,5 +86,6 @@ namespace Core.Erp.Data
         public Nullable<double> Valor_horas_extras { get; set; }
         public bool GozaMasDeQuinceDiasVaciones { get; set; }
         public double DiasVacaciones { get; set; }
+        public Nullable<decimal> IdEmpleadoPAdre { get; set; }
     }
 }
