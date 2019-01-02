@@ -67,7 +67,9 @@
             c.Width = Unit.Percentage(5);
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" &&( Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado_liquidacion"))==null) || Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado_liquidacion")) == "I")
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A"
+                 && ( Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado_liquidacion"))==null)
+                || Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado_liquidacion")) == "I")
                 {
                     ViewContext.Writer.Write(
                          Html.ActionLink("Modificar", "Modificar", new { IdEmpleado = DataBinder.Eval(tc.DataItem, "IdEmpleado"), IdSolicitud = DataBinder.Eval(tc.DataItem, "IdSolicitud") }) + "&nbsp;" +
