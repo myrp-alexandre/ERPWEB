@@ -642,65 +642,66 @@ namespace Core.Erp.Data.RRHH
                         else
                         {
                             ro_empleado Entity_padre = Context.ro_empleado.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleadoPAdre == info.IdEmpleado);
-                            if (Entity == null)
-                                return false;
-                            Entity_padre.IdEmpleado_Supervisor = info.IdEmpleado_Supervisor;
-                            Entity_padre.IdPersona = info.IdPersona;
-                            Entity_padre.IdSucursal = info.IdSucursal;
-                            Entity_padre.IdTipoEmpleado = info.IdTipoEmpleado;
-                            Entity_padre.em_codigo = info.em_codigo;
-                            Entity_padre.Codigo_Biometrico = info.Codigo_Biometrico;
-                            Entity_padre.em_lugarNacimiento = info.em_lugarNacimiento;
-                            Entity_padre.em_CarnetIees = info.em_CarnetIees;
-                            Entity_padre.em_cedulaMil = info.em_cedulaMil;
-                            Entity_padre.em_fechaIngaRol = info.em_fechaIngaRol;
-                            Entity_padre.em_tipoCta = info.em_tipoCta;
-                            Entity_padre.em_NumCta = info.em_NumCta;
-                            Entity_padre.em_estado = info.em_estado;
-                            Entity_padre.IdCodSectorial = info.IdCodSectorial;
-                            Entity_padre.IdDepartamento = info.IdDepartamento;
-                            Entity_padre.IdTipoSangre = info.IdTipoSangre;
-                            Entity_padre.IdCargo = info.IdCargo;
-                            Entity_padre.IdCtaCble_Emplea = info.IdCtaCble_Emplea;
-                            Entity_padre.IdCiudad = info.IdCiudad;
-                            Entity_padre.em_mail = info.em_mail;
-                            Entity_padre.IdTipoLicencia = info.IdTipoLicencia;
-                            Entity_padre.IdBanco = info.IdBanco;
-                            Entity_padre.Pago_por_horas = info.Pago_por_horas;
-                            Entity_padre.Valor_horas_vespertina = info.Valor_horas_vespertina;
-                            Entity_padre.Valor_horas_brigada = info.Valor_horas_brigada;
-                            Entity_padre.Valor_horas_matutino = info.Valor_horas_matutino;
-                            Entity_padre.Valor_maximo_horas_mat = info.Valor_maximo_horas_mat;
-                            Entity_padre.Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp;
-                            Entity_padre.Valor_hora_adicionales = info.Valor_hora_adicionales;
-                            Entity_padre.Valor_hora_control_salida = info.Valor_hora_control_salida;
-                            Entity_padre.IdArea = info.IdArea;
-                            Entity_padre.IdDivision = info.IdDivision;
-                            Entity_padre.Fecha_UltMod = info.Fecha_UltMod;
-                            Entity_padre.por_discapacidad = info.por_discapacidad;
-                            Entity_padre.carnet_conadis = info.carnet_conadis;
-                            Entity_padre.talla_pant = info.talla_pant;
-                            Entity_padre.talla_camisa = info.talla_camisa;
-                            Entity_padre.talla_zapato = info.talla_zapato;
-                            Entity_padre.em_status = info.em_status;
-                            Entity_padre.IdCondicionDiscapacidadSRI = info.IdCondicionDiscapacidadSRI;
-                            Entity_padre.IdTipoIdentDiscapacitadoSustitutoSRI = info.IdTipoIdentDiscapacitadoSustitutoSRI;
-                            Entity_padre.IdentDiscapacitadoSustitutoSRI = info.IdentDiscapacitadoSustitutoSRI;
-                            Entity_padre.IdAplicaConvenioDobleImposicionSRI = info.IdAplicaConvenioDobleImposicionSRI;
-                            Entity_padre.IdTipoResidenciaSRI = info.IdTipoResidenciaSRI;
-                            Entity_padre.IdTipoSistemaSalarioNetoSRI = info.IdTipoSistemaSalarioNetoSRI;
-                            Entity_padre.es_AcreditaHorasExtras = info.es_AcreditaHorasExtras;
-                            Entity_padre.IdTipoAnticipo = info.IdTipoAnticipo;
-                            Entity_padre.ValorAnticipo = info.ValorAnticipo;
-                            Entity_padre.CodigoSectorial = info.CodigoSectorial;
-                            Entity_padre.em_AnticipoSueldo = info.em_AnticipoSueldo;
-                            Entity_padre.Marca_Biometrico = info.Marca_Biometrico;
-                            Entity_padre.IdHorario = info.IdHorario;
-                            Entity_padre.IdUsuario = info.IdUsuarioUltModi;
-                            Entity_padre.Fecha_UltMod = info.Fecha_Transaccion = DateTime.Now;
-                            Entity_padre.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
-                            Entity_padre.DiasVacaciones = info.DiasVacaciones;
-                            Entity_padre.GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones;
+                            if (Entity_padre != null)
+                            {
+                                Entity_padre.IdEmpleado_Supervisor = (info.IdEmpleado_Supervisor) == null ? null : info.IdEmpleado_Supervisor;
+                                Entity_padre.IdPersona = info.IdPersona;
+                                Entity_padre.IdSucursal = info.IdSucursal;
+                                Entity_padre.IdTipoEmpleado = info.IdTipoEmpleado;
+                                Entity_padre.em_codigo = info.em_codigo;
+                                Entity_padre.Codigo_Biometrico = info.Codigo_Biometrico;
+                                Entity_padre.em_lugarNacimiento = info.em_lugarNacimiento;
+                                Entity_padre.em_CarnetIees = info.em_CarnetIees;
+                                Entity_padre.em_cedulaMil = info.em_cedulaMil;
+                                Entity_padre.em_fechaIngaRol = info.em_fechaIngaRol;
+                                Entity_padre.em_tipoCta = info.em_tipoCta;
+                                Entity_padre.em_NumCta = info.em_NumCta;
+                                Entity_padre.em_estado = info.em_estado;
+                                Entity_padre.IdCodSectorial = info.IdCodSectorial;
+                                Entity_padre.IdDepartamento = info.IdDepartamento;
+                                Entity_padre.IdTipoSangre = info.IdTipoSangre;
+                                Entity_padre.IdCargo = info.IdCargo;
+                                Entity_padre.IdCtaCble_Emplea = info.IdCtaCble_Emplea;
+                                Entity_padre.IdCiudad = info.IdCiudad;
+                                Entity_padre.em_mail = info.em_mail;
+                                Entity_padre.IdTipoLicencia = info.IdTipoLicencia;
+                                Entity_padre.IdBanco = info.IdBanco;
+                                Entity_padre.Pago_por_horas = info.Pago_por_horas;
+                                Entity_padre.Valor_horas_vespertina = info.Valor_horas_vespertina;
+                                Entity_padre.Valor_horas_brigada = info.Valor_horas_brigada;
+                                Entity_padre.Valor_horas_matutino = info.Valor_horas_matutino;
+                                Entity_padre.Valor_maximo_horas_mat = info.Valor_maximo_horas_mat;
+                                Entity_padre.Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp;
+                                Entity_padre.Valor_hora_adicionales = info.Valor_hora_adicionales;
+                                Entity_padre.Valor_hora_control_salida = info.Valor_hora_control_salida;
+                                Entity_padre.IdArea = info.IdArea;
+                                Entity_padre.IdDivision = info.IdDivision;
+                                Entity_padre.Fecha_UltMod = info.Fecha_UltMod;
+                                Entity_padre.por_discapacidad = info.por_discapacidad;
+                                Entity_padre.carnet_conadis = info.carnet_conadis;
+                                Entity_padre.talla_pant = info.talla_pant;
+                                Entity_padre.talla_camisa = info.talla_camisa;
+                                Entity_padre.talla_zapato = info.talla_zapato;
+                                Entity_padre.em_status = info.em_status;
+                                Entity_padre.IdCondicionDiscapacidadSRI = info.IdCondicionDiscapacidadSRI;
+                                Entity_padre.IdTipoIdentDiscapacitadoSustitutoSRI = info.IdTipoIdentDiscapacitadoSustitutoSRI;
+                                Entity_padre.IdentDiscapacitadoSustitutoSRI = info.IdentDiscapacitadoSustitutoSRI;
+                                Entity_padre.IdAplicaConvenioDobleImposicionSRI = info.IdAplicaConvenioDobleImposicionSRI;
+                                Entity_padre.IdTipoResidenciaSRI = info.IdTipoResidenciaSRI;
+                                Entity_padre.IdTipoSistemaSalarioNetoSRI = info.IdTipoSistemaSalarioNetoSRI;
+                                Entity_padre.es_AcreditaHorasExtras = info.es_AcreditaHorasExtras;
+                                Entity_padre.IdTipoAnticipo = info.IdTipoAnticipo;
+                                Entity_padre.ValorAnticipo = info.ValorAnticipo;
+                                Entity_padre.CodigoSectorial = info.CodigoSectorial;
+                                Entity_padre.em_AnticipoSueldo = info.em_AnticipoSueldo;
+                                Entity_padre.Marca_Biometrico = info.Marca_Biometrico;
+                                Entity_padre.IdHorario = info.IdHorario;
+                                Entity_padre.IdUsuario = info.IdUsuarioUltModi;
+                                Entity_padre.Fecha_UltMod = info.Fecha_Transaccion = DateTime.Now;
+                                Entity_padre.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
+                                Entity_padre.DiasVacaciones = info.DiasVacaciones;
+                                Entity_padre.GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones;
+                            }
                         }
                     }
                     #endregion
@@ -729,7 +730,7 @@ namespace Core.Erp.Data.RRHH
                     Entity.Fecha_UltAnu = info.Fecha_UltAnu = DateTime.Now;
                     if(info.Tiene_ingresos_compartidos)
                     {
-                        ro_empleado Entity_comp = Context.ro_empleado.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado);
+                        ro_empleado Entity_comp = Context.ro_empleado.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleadoPAdre == info.IdEmpleado);
                         if (Entity_comp == null)
                             return false;
                         Entity_comp.em_estado = info.em_estado = "I";
