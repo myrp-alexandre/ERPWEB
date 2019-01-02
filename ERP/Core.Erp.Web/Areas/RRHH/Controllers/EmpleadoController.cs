@@ -786,7 +786,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     pe_apellido = Convert.ToString(reader.GetValue(5)),
                                     pe_nombre = Convert.ToString(reader.GetValue(4)),
                                     IdTipoDocumento = Convert.ToString(reader.GetValue(3)),
-                                    pe_cedulaRuc = Convert.ToString(reader.GetValue(2)),
+                                    pe_cedulaRuc = cedula_ruc,
                                     pe_direccion = Convert.ToString(reader.GetValue(6)),
                                     pe_telfono_Contacto = Convert.ToString(reader.GetValue(7)),
                                     pe_celular = Convert.ToString(reader.GetValue(8)),
@@ -807,7 +807,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 info_persona_empleado.pe_apellido = Convert.ToString(reader.GetValue(5));
                                 info_persona_empleado.pe_nombre = Convert.ToString(reader.GetValue(4));
                                 info_persona_empleado.IdTipoDocumento = Convert.ToString(reader.GetValue(3));
-                                info_persona_empleado.pe_cedulaRuc = Convert.ToString(reader.GetValue(2));
+                                info_persona_empleado.pe_cedulaRuc = cedula_ruc;
                                 info_persona_empleado.pe_direccion = Convert.ToString(reader.GetValue(6));
                                 info_persona_empleado.pe_telfono_Contacto = Convert.ToString(reader.GetValue(7));
                                 info_persona_empleado.pe_celular = Convert.ToString(reader.GetValue(8));
@@ -822,7 +822,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             {
                                 IdEmpresa = IdEmpresa,
                                 IdEmpleado = IdEmpleado_guardar++,
-                                pe_cedulaRuc = info_persona_empleado.pe_cedulaRuc,
+                                pe_cedulaRuc = cedula_ruc,
                                 IdPersona = info_persona_empleado.IdPersona,
                                 IdSucursal = Convert.ToInt32(reader.GetValue(36)),
                                 IdTipoEmpleado = (tipo_empleado==null) ? "NO": tipo_empleado.CodCatalogo,
