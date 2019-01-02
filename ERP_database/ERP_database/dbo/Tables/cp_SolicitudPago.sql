@@ -8,6 +8,7 @@
     [Estado]                BIT            NOT NULL,
     [Valor]                 FLOAT (53)     NOT NULL,
     [Solicitante]           VARCHAR (1000) NOT NULL,
+	[GiradoA]           VARCHAR (1000) NOT NULL,
     [IdUsuarioCreacion]     VARCHAR (50)   NULL,
     [FechaCreacion]         DATETIME       NULL,
     [IdUsuarioModificacion] VARCHAR (50)   NULL,
