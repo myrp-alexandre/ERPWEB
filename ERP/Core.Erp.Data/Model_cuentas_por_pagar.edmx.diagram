@@ -59,8 +59,8 @@
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_nota_DebCre_cp_proveedor" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_proveedor_cp_proveedor_clase" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_SolicitudPago_cp_proveedor" />
-        <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_giro" Width="1.5" PointX="10.5" PointY="33.125" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.vwcp_orden_giro" Width="1.5" PointX="18.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_giro" Width="1.5" PointX="10.5" PointY="33" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_codigo_SRI" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_codigo_SRI1" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_cp_codigo_SRI2" />
