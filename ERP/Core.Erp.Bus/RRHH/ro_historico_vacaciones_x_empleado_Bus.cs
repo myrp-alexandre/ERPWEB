@@ -173,11 +173,11 @@ namespace Core.Erp.Bus.RRHH
                     }
                     int minAnio = 5;
                     int maxDiasGanados =Convert.ToInt32( info_empleado.DiasVacaciones);
-                    int minDiasGanados = 15;
+                    int minDiasGanados = Convert.ToInt32(info_empleado.DiasVacaciones);
                     int diasGanados = 0;
                     int contDiasGanados = 0;
                     //VALIDA SI TIENE MAS DE 1 AÑO
-                    if (dias > 360)
+                    if (dias > 180)
                     {
                         fechaNueva = fechaIngreso;
                         //RECORRE LA CANTIDAD DE AÑOS QUE TIENE DE SERVICIO
@@ -224,8 +224,8 @@ namespace Core.Erp.Bus.RRHH
                         info.IdEmpleado = info_empleado.IdEmpleado;
                         info.FechaIni = Convert.ToDateTime(info_empleado.em_fechaIngaRol);
                         info.FechaFin = Convert.ToDateTime(Convert.ToDateTime(info_empleado.em_fechaIngaRol).AddYears(1).AddDays(-1));
-                        info.DiasGanado = Convert.ToInt32(dias * 15) / 360;
-                        info.DiasPendientes = Convert.ToInt32(dias * 15) / 360;
+                        info.DiasGanado = Convert.ToInt32(dias* info_empleado.DiasVacaciones) / 360;
+                        info.DiasPendientes = Convert.ToInt32(dias * info_empleado.DiasVacaciones) / 360;
                         info.Descripcion = info.FechaIni.Date.ToString() + " " + info.FechaFin.Date.ToString() + " " + info.DiasGanado.ToString();
                         info.IdVacacion = IdVacacion + 1;
                         info.IdPeriodo_Inicio = Convert.ToInt32(info.FechaIni.ToString("ddMMyyyy"));

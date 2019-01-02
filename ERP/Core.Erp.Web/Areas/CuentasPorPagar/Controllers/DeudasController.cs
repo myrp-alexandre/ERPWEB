@@ -300,7 +300,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             #endregion
 
             tb_sis_Documento_Tipo_Talonario_Info info_documento = new tb_sis_Documento_Tipo_Talonario_Info();
-            info_documento = bus_documento.get_info_ultimo_no_usado(IdEmpresa, cl_enumeradores.eTipoDocumento.RETEN.ToString());
+            info_documento = bus_documento.get_info_ultimo_no_usado(IdEmpresa, cl_enumeradores.eTipoDocumento.RETEN.ToString(), Convert.ToInt32(SessionFixed.IdSucursal));
 
             cp_orden_giro_Info model = new cp_orden_giro_Info
             {
@@ -455,11 +455,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             model.info_retencion = bus_retencion.get_info(model.IdEmpresa, model.IdCbteCble_Ogiro, model.IdTipoCbte_Ogiro);
             model.info_retencion = bus_retencion.get_info(model.info_retencion.IdEmpresa, model.info_retencion.IdRetencion);
-
+            
             if (model.info_retencion.IdEmpresa == 0)
             {
                 tb_sis_Documento_Tipo_Talonario_Info info_documento = new tb_sis_Documento_Tipo_Talonario_Info();
-                info_documento = bus_documento.get_info_ultimo_no_usado(IdEmpresa, cl_enumeradores.eTipoDocumento.RETEN.ToString());
+                info_documento = bus_documento.get_info_ultimo_no_usado(IdEmpresa, cl_enumeradores.eTipoDocumento.RETEN.ToString(), Convert.ToInt32(SessionFixed.IdSucursal));
                 model.info_retencion.serie1 = info_documento.Establecimiento;
                 model.info_retencion.serie2 = info_documento.PuntoEmision;
                 model.info_retencion.NumRetencion = info_documento.NumDocumento;

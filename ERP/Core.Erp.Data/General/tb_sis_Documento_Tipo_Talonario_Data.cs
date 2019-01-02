@@ -199,7 +199,7 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
-        public tb_sis_Documento_Tipo_Talonario_Info get_info_ultimo_no_usado(int IdEmpresa, string CodDocumentoTipo)
+        public tb_sis_Documento_Tipo_Talonario_Info get_info_ultimo_no_usado(int IdEmpresa, string CodDocumentoTipo, int IdSucursal)
         {
             try
             {
@@ -209,6 +209,7 @@ namespace Core.Erp.Data.General
                     var q = (from A in Context.tb_sis_Documento_Tipo_Talonario
                              where A.IdEmpresa == IdEmpresa
                              && A.CodDocumentoTipo == CodDocumentoTipo
+                             && A.IdSucursal==IdSucursal
                              && A.Usado == false
                              && A.Estado == "A"
                              select A.NumDocumento).Min();
