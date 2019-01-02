@@ -47,7 +47,7 @@ namespace Core.Erp.Data.RRHH
                                      pe_nombre_completo=q.pe_apellido+" "+q.pe_nombre,
                                      Estado = q.Estado,
                                      IdLiquidacion=q.IdLiquidacion,
-                                     Estado_liquidacion=q.Estado_liquidacion==null?"A":q.Estado_liquidacion,
+                                     Estado_liquidacion=q.Estado_liquidacion,
                                      EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                     
