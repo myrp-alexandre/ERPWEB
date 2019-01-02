@@ -48,8 +48,13 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdNota", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdSucursal", "Sucursal").Width = Unit.Percentage(40);
+        settings.Columns.Add("IdCbteCble_Nota", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdSucursal", "Sucursal").Width = Unit.Percentage(10);
+        settings.Columns.Add("cod_nota", "Documento").Width = Unit.Percentage(10);
+        settings.Columns.Add("Fecha_contable", "Fecha Contable").Width = Unit.Percentage(10);
+        settings.Columns.Add("cn_Fecha_vcto", "Fecha Vcto").Width = Unit.Percentage(10);
+        settings.Columns.Add("cn_total", "Total").Width = Unit.Percentage(10);
+        settings.Columns.Add("cn_observacion", "Observacion").Width = Unit.Percentage(30);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
