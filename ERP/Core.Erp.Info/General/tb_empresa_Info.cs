@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace Core.Erp.Info.General
 {
@@ -55,5 +56,6 @@ namespace Core.Erp.Info.General
         //Campo para la vista
         //public bool ObligadoAllevarConta_bool { get; set; }
         public bool EstadoBool { get; set; }
+        public Image em_logo_imagen { get; set; }
     }
 }
