@@ -178,7 +178,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Nuevo(Af_Activo_fijo_Info model)
         {
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario;
             model.LstDet = List_det.get_list(model.IdTransaccionSession);
             if (!bus_activo.guardarDB(model))
             {
@@ -224,7 +224,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Modificar(Af_Activo_fijo_Info model)
         {
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             model.LstDet = List_det.get_list(model.IdTransaccionSession);
 
             if (!bus_activo.modificarDB(model))
@@ -251,7 +251,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Anular(Af_Activo_fijo_Info model)
         {
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             model.LstDet = List_det.get_list(model.IdTransaccionSession);
             if (!bus_activo.anularDB(model))
             {
