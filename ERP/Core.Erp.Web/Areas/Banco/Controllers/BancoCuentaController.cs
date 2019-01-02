@@ -83,6 +83,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Nuevo(ba_Banco_Cuenta_Info model)
         {
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_cuenta.guardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -102,6 +103,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Modificar(ba_Banco_Cuenta_Info model)
         {
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_cuenta.modificarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -120,6 +122,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Anular(ba_Banco_Cuenta_Info model)
         {
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             if (!bus_cuenta.anularDB(model))
             {
                 cargar_combos(model.IdEmpresa);

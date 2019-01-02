@@ -32,7 +32,11 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             lbl_empresa.Text = empresa.em_nombre;
             lbl_direccion.Text = empresa.em_direccion;
             lbl_telefonos.Text = empresa.em_telefonos;
-            
+
+            lbl_emp.Text = empresa.em_nombre;
+            lbl_dir.Text = empresa.em_direccion;
+            lbl_telef.Text = empresa.em_telefonos;
+
         }
     }
 }
