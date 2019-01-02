@@ -225,7 +225,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             try
             {
-                var return_naturaleza = "";
                 var Lista_Proveedor = ListaProveedor.get_list(model.IdTransaccionSession);
                 var Lista_ClaseProveedor = ListaClaseProveedor.get_list(model.IdTransaccionSession);
 
@@ -240,7 +239,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 foreach (var item in Lista_Proveedor)
                 {
-                    item.info_persona.pe_Naturaleza = return_naturaleza;
+                    //item.info_persona.pe_Naturaleza = return_naturaleza;
                     if (!bus_proveedor.guardarDB_importacion(item))
                     {
                         ViewBag.mensaje = "Error al importar el archivo";
@@ -363,7 +362,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                         tb_persona_Info info_persona = new tb_persona_Info();
                         tb_persona_Info info_persona_prov = new tb_persona_Info();
                         var return_naturaleza = "";
-                        info_persona = lst_persona.Where(q => q.pe_cedulaRuc == cedula_ruc).FirstOrDefault();
+                        info_persona = lst_persona.Where(q => q.pe_cedulaRuc.Trim() == cedula_ruc.Trim()).FirstOrDefault();
                         info_persona_prov = info_persona;
 
                         if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), cedula_ruc, ref return_naturaleza ))

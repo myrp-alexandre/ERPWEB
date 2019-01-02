@@ -35,35 +35,66 @@
 
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-3">
+        <div class="col-md-6">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
                     @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdBodega">Bodega</label>
                     @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
                     @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdProveedor">Proveedor*</label>
+                    @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
+                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdOrden_giro_Tipo">Sustento tributario*</label>
+                    @Html.DropDownListFor(q => q.IdIden_credito, new SelectList(ViewBag.lst_codigos_sri, "IdCodigo_SRI", "co_descripcion"), new { @class = "form-control", @id = "IdIden_credito" })
+                    @Html.ValidationMessageFor(q => q.IdIden_credito, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdOrden_giro_Tipo">Tipo documento*</label>
+                    @Html.DropDownListFor(q => q.IdOrden_giro_Tipo, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "IdOrden_giro_Tipo" })
+                    @Html.ValidationMessageFor(q => q.IdOrden_giro_Tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="co_observacion">Observación*</label>
+                    @Html.TextBoxFor(q => q.co_observacion, new { @class = "form-control", @id = "observacion" })
+                    @Html.ValidationMessageFor(q => q.co_observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdTipoServicio">Tipo de servicio</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoServicio, setting =>
                {
                    setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                    setting.Properties.Items.Add("BIENES", "BIEN");
-                   setting.Properties.Items.Add("SERVICIOS","SERVI");
-                   setting.Properties.Items.Add("MIXTO","AMBAS");
+                   setting.Properties.Items.Add("SERVICIOS", "SERVI");
+                   setting.Properties.Items.Add("MIXTO", "AMBAS");
                }).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdTipoServicio, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="co_FechaFactura">Fecha*</label>
                     <div class="input-group date">
@@ -84,7 +115,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="co_FechaContabilizacion">Fecha contabilización*</label>
                     <div class="input-group date">
@@ -104,20 +135,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label for="IdProveedor">Proveedor*</label>
-                    @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
-                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                    <label for="co_plazo"># Solicitud</label>
+                    @Html.TextBoxFor(q => q.IdSolicitudPago, new { @class = "form-control", @id = "IdSolicitudPago" })
+                    @Html.ValidationMessageFor(q => q.IdSolicitudPago, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="co_plazo">Plazo*</label>
                     @Html.TextBoxFor(q => q.co_plazo, new { @class = "form-control", @id = "co_plazo" })
@@ -144,24 +169,17 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdOrden_giro_Tipo">Sustento tributario*</label>
-                    @Html.DropDownListFor(q => q.IdIden_credito, new SelectList(ViewBag.lst_codigos_sri, "IdCodigo_SRI", "co_descripcion"), new { @class = "form-control", @id = "IdIden_credito" })
-                    @Html.ValidationMessageFor(q => q.IdIden_credito, "", new { @class = "text-danger" })
+                    <label for="IdBanco_acreditacion">Tipo flujo*</label>
+                    @Html.Partial("_CmbFlujo_Deudas", Model.IdTipoFlujo)
+                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="co_serie">Serie*</label>
-                    @Html.TextBoxFor(q => q.co_serie, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.co_serie, new { @class = "form-control", @id = "co_serie" })
                     @Html.ValidationMessageFor(q => q.co_serie, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -172,7 +190,7 @@
                     @Html.ValidationMessageFor(q => q.co_factura, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="co_factura">Número autorización*</label>
                     @Html.TextBoxFor(q => q.Num_Autorizacion, new { @class = "form-control" })
@@ -182,38 +200,6 @@
         </div>
     </div>
 
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdOrden_giro_Tipo">Tipo documento*</label>
-                    @Html.DropDownListFor(q => q.IdOrden_giro_Tipo, new SelectList(ViewBag.lst_tipo_doc, "CodTipoDocumento", "Descripcion"), new { @class = "form-control", @id = "IdOrden_giro_Tipo" })
-                    @Html.ValidationMessageFor(q => q.IdOrden_giro_Tipo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdBanco_acreditacion">Tipo flujo*</label>
-                    @Html.Partial("_CmbFlujo_Deudas", Model.IdTipoFlujo)
-                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="co_observacion">Observación*</label>
-                    @Html.TextBoxFor(q => q.co_observacion, new { @class = "form-control", @id = "observacion" })
-                    @Html.ValidationMessageFor(q => q.co_observacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">

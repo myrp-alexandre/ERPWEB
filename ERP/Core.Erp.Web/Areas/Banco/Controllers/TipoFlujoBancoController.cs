@@ -49,7 +49,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Nuevo(ba_TipoFlujo_Info model)
         {
-            if(!bus_flujo.guardarDB(model))
+            model.IdUsuario = SessionFixed.IdUsuario;
+            if (!bus_flujo.guardarDB(model))
             {
                 cargar_combo(model.IdEmpresa);
                 return View(model);
@@ -68,6 +69,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Modificar(ba_TipoFlujo_Info model)
         {
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_flujo.modificarDB(model))
             {
                 cargar_combo(model.IdEmpresa);
@@ -86,6 +88,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Anular(ba_TipoFlujo_Info model)
         {
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             if (!bus_flujo.anularDB(model))
             {
                 cargar_combo(model.IdEmpresa);

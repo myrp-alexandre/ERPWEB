@@ -220,6 +220,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Anular(ba_Conciliacion_Info model)
         {
+            model.IdUsuario_Anu = SessionFixed.IdUsuario;
             if (!bus_conciliacion.anularDB(model))
             {
                 ViewBag.mensaje = "No se pudo guardar el registro";

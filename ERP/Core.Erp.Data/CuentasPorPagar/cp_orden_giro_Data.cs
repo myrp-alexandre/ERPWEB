@@ -65,8 +65,19 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Estado = "A",
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now,
-                        IdBodega = info.IdBodega
+                        IdBodega = info.IdBodega,                        
                     };
+
+                    #region Solicitud
+                    if (info.IdSolicitudPago != null)
+                    {
+                        decimal IdSolicitud = Convert.ToDecimal(info.IdSolicitudPago);
+                        var Solicitud = Context.cp_SolicitudPago.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSolicitud == IdSolicitud).FirstOrDefault();
+                        if (Solicitud != null)
+                            Entity.IdSolicitudPago = Solicitud.IdSolicitud;
+                    }                   
+                    #endregion
+
 
                     if (info.lst_det.Count > 0)
                     {
@@ -183,7 +194,17 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.aut_doc_Modificar = info.aut_doc_Modificar;
                         Entity.IdTipoMovi = info.IdTipoMovi;
                         Entity.IdBodega = info.IdBodega;
-                    };
+
+                        #region Solicitud
+                        if (info.IdSolicitudPago != null)
+                        {
+                            decimal IdSolicitud = Convert.ToDecimal(info.IdSolicitudPago);
+                            var Solicitud = Context.cp_SolicitudPago.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSolicitud == IdSolicitud).FirstOrDefault();
+                            if (Solicitud != null)
+                                Entity.IdSolicitudPago = Solicitud.IdSolicitud;
+                        }
+                        #endregion
+                    }
 
                     if (info.lst_det.Count > 0)
                     {
@@ -644,7 +665,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdTipoMovi = Entity.IdTipoMovi,
                         Estado = Entity.Estado,
                         IdBodega = Entity.IdBodega,
-                        
+                        IdSolicitudPago = Entity.IdSolicitudPago
                     };
                 }
                 return info;
