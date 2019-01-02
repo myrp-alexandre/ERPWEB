@@ -10,11 +10,14 @@ using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using DevExpress.Web.Mvc;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -35,10 +38,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_parametros_Bus bus_param = new cp_parametros_Bus();
         ct_cbtecble_det_List_nd Lis_ct_cbtecble_det_List_nd = new ct_cbtecble_det_List_nd();
         cp_orden_pago_Bus bus_orden_pago = new cp_orden_pago_Bus();
+        cp_nota_DebCre_Bus bus_notaDebCre = new cp_nota_DebCre_Bus();
         List<cp_orden_pago_det_Info> lst_detalle_op = new List<cp_orden_pago_det_Info>();
         cp_orden_pago_cancelaciones_Bus bus_orden_pago_cancelaciones = new cp_orden_pago_cancelaciones_Bus();
         List<cp_orden_pago_det_Info> list_op_seleccionadas = new List<cp_orden_pago_det_Info>();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+        List<cp_nota_DebCre_Info> Lista_NotaDebito = new List<cp_nota_DebCre_Info>();
+        cp_nota_DebCre_List ListaNotaDebito = new cp_nota_DebCre_List();
+        tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
         string mensaje = string.Empty;
         #endregion
         #region Metodos ComboBox bajo demanda flujo
@@ -394,7 +401,159 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         #endregion
 
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadValidationSettings_imp.UploadValidationSettings, UploadValidationSettings_imp.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            cp_nota_DebCre_Info model = new cp_nota_DebCre_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(cp_nota_DebCre_Info model)
+        {
+            try
+            {
+                var Lista_NotaDebito = ListaNotaDebito.get_list(model.IdTransaccionSession);
+
+                foreach (var item in Lista_NotaDebito)
+                {
+                    if (!bus_notaDebCre.guardarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.error = ex.Message.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult GridViewPartial_notadebito_importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaNotaDebito.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_notadebito_importacion", model);
+        }
+        #endregion
     }
+
+    #region Importacion Excel
+    public class UploadValidationSettings_imp
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            List<cp_nota_DebCre_Info> Lista_NotaDebito = new List<cp_nota_DebCre_Info>();
+            cp_nota_DebCre_List ListaNotaDebito = new cp_nota_DebCre_List();
+            int cont = 0;
+            int IdCbteCble_Nota = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            cp_parametros_Bus bus_cp_parametros = new cp_parametros_Bus();
+            #endregion
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                #region NotaDebito     
+                var info_cp_parametro = bus_cp_parametros.get_info(IdEmpresa);
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    { 
+                        var ruc_proveedor = Convert.ToString(reader.GetValue(1)).Trim();
+                        var info_proveedor = bus_proveedor.get_info_x_num_cedula(IdEmpresa, ruc_proveedor);
+                        var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+                        var Su_CodigoEstablecimiento = Convert.ToString(reader.GetValue(0)).Trim();
+                        
+                        cp_nota_DebCre_Info info = new cp_nota_DebCre_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdCbteCble_Nota = IdCbteCble_Nota++,
+                            IdTipoCbte_Nota = Convert.ToInt32(info_cp_parametro.pa_TipoCbte_ND),
+                            DebCre = "D",
+                            IdTipoNota = "T_TIP_NOTA_INT",
+                            IdProveedor = info_proveedor.IdProveedor,
+                            IdSucursal = lst_sucursal.Where(q=> q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal,
+                            cn_fecha = Convert.ToDateTime(reader.GetValue(5)),
+                            Fecha_contable = Convert.ToDateTime(reader.GetValue(5)),
+                            cn_Fecha_vcto = Convert.ToDateTime(reader.GetValue(6)),
+                            cn_observacion = Convert.ToString(reader.GetValue(7)),
+                            cn_subtotal_iva = 0,
+                            cn_subtotal_siniva = Convert.ToDouble(reader.GetValue(4)),
+                            cn_baseImponible = 0,
+                            cn_Por_iva = 12,
+                            cn_valoriva = 0,
+                            cn_Ice_base = 0,
+                            cn_Ice_por = 0,
+                            cn_Ice_valor = 0,
+                            cn_Serv_por = 0,
+                            cn_Serv_valor = 0,
+                            cn_BaseSeguro = 0,
+                            cn_total = Convert.ToDecimal(reader.GetValue(4)),
+                            cn_vaCoa = "N",
+                            IdUsuario = SessionFixed.IdUsuario,
+                            Fecha_Transac = DateTime.Now
+                        };
+
+                        ct_cbtecble_Info info_comprobante = new ct_cbtecble_Info
+                        {
+
+                        };
+
+                        cp_orden_pago_cancelaciones_Info det_canc_op = new cp_orden_pago_cancelaciones_Info
+                        {
+
+                        };
+
+                        info.info_comrobante = info_comprobante;
+                        //info.lst_det_canc_op = det_canc_op;
+
+                        Lista_NotaDebito.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                ListaNotaDebito.set_list(Lista_NotaDebito, IdTransaccionSession);
+                #endregion
+            }
+        }
+    }
+    #endregion
 
     public class ct_cbtecble_det_List_nd
     {
@@ -484,11 +643,28 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-
     }
 
+    public class cp_nota_DebCre_List
+    {
+        string Variable = "cp_nota_DebCre_Info";
+        public List<cp_nota_DebCre_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<cp_nota_DebCre_Info> list = new List<cp_nota_DebCre_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<cp_nota_DebCre_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<cp_nota_DebCre_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
 }

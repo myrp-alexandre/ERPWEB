@@ -1,5 +1,7 @@
 ﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Data;
 using Core.Erp.Data.CuentasPorPagar;
+using Core.Erp.Data.Facturacion;
 using Core.Erp.Data.General;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Info.General;
@@ -90,13 +92,14 @@ namespace Core.Erp.Bus.CuentasPorPagar
             {
 
                 // ultima retencion no usada
-                info_talonario = data_talonario.get_info_ultimo_no_usado(IdEmpresa, "RETEN");
                 info_orden_giro = o_data_orden_giro.get_info_retencion(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
-
+                tb_sucursal_Data data_sucursal = new tb_sucursal_Data();
+                var sucursal = data_sucursal.get_info(info_orden_giro.IdEmpresa, info_orden_giro.IdSucursal);
+               
                 info_retencion.IdEmpresa = info_orden_giro.IdEmpresa;
                 info_retencion.IdProveedor = info_orden_giro.IdProveedor;
-                info_retencion.serie1 = info_talonario.Establecimiento;
-                info_retencion.serie2 = info_talonario.PuntoEmision;
+                info_retencion.serie1 = sucursal.Su_CodigoEstablecimiento;
+                info_retencion.serie2 = "001";
                 info_retencion.NumRetencion = info_talonario.NumDocumento;
                 info_retencion.IdTipoCbte_Ogiro = info_orden_giro.IdTipoCbte_Ogiro;
                 info_retencion.IdCbteCble_Ogiro = info_orden_giro.IdCbteCble_Ogiro;
@@ -124,7 +127,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
             {
                 odata = new cp_retencion_Data();
                 info.IdEmpresa_Ogiro = info.IdEmpresa;
-                info.CodDocumentoTipo = "RETEN";
+                info.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
                 if(info.re_Tiene_RFuente == null) 
                  info.re_Tiene_RFuente="N";
                 if (info.re_Tiene_RTiva == null)
@@ -134,11 +137,12 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.cb_Fecha = (DateTime)info.fecha;
 
                 //REVISA CARLOS FALTA IDSUCURSAL
-
+                info_orden_giro = o_data_orden_giro.get_info_retencion(info.IdEmpresa,Convert.ToInt32( info.IdTipoCbte_Ogiro),Convert.ToInt32( info.IdCbteCble_Ogiro));
                 info.info_comprobante.cb_Estado = "A";
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Observacion = info.observacion;
+                info.info_comprobante.IdSucursal = info_orden_giro.IdSucursal;
                 if (bus_comprobante.guardarDB(info.info_comprobante))
                 {
                     if (odata.guardarDB(info))
@@ -318,11 +322,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     mensaje = "Ingrese serie de la retención";
                     return mensaje;
                 }
-                if (info.NumRetencion == "" | info.NumRetencion == null)
-                {
-                    mensaje = "No existe talonario de retención";
-                    return mensaje;
-                }
+                
                 if (info.co_factura == "" | info.co_factura == null)
                 {
                     mensaje = "Ingrese el número del documento";

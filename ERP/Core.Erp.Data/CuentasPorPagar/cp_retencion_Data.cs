@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Erp.Data.General;
 using Core.Erp.Info.CuentasPorPagar;
+using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
+
 namespace Core.Erp.Data.CuentasPorPagar
 {
    public class cp_retencion_Data
@@ -133,6 +137,8 @@ namespace Core.Erp.Data.CuentasPorPagar
         public Boolean guardarDB(cp_retencion_Info info)
         {
             Boolean res = true;
+            tb_sis_Documento_Tipo_Talonario_Data odata_talonario = new tb_sis_Documento_Tipo_Talonario_Data();
+            var info_documento = odata_talonario.GetUltimoNoUsadoFacElec(info.IdEmpresa, cl_enumeradores.eTipoDocumento.RETEN.ToString(), info.serie1, info.serie2);
             try
             {
                 int secuencia = 1;
@@ -148,9 +154,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro,
                         IdRetencion = info.IdRetencion = get_id(info.IdEmpresa),
                         CodDocumentoTipo = info.CodDocumentoTipo,
-                        serie1 = info.serie1,
-                        serie2 = info.serie2,
-                        NumRetencion = info.NumRetencion,
+                        serie1 = info_documento.Establecimiento,
+                        serie2 = info_documento.PuntoEmision,
+                        NumRetencion = info_documento.NumDocumento,
                         NAutorizacion = info.NAutorizacion,
                         observacion = info.observacion,
                         fecha = Convert.ToDateTime(info.fecha.ToShortDateString()),

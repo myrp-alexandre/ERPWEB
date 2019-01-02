@@ -20,7 +20,7 @@
 @using (Html.BeginForm("Nuevo", "Retencion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-    @Html.HiddenFor(q => q.IdEmpresa, new { @id="IdEmpresa"})
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdProveedor, new { @id = "IdProveedor" })
     @Html.HiddenFor(q => q.IdRetencion, new { @id = "IdRetencion" })
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
@@ -31,6 +31,8 @@
     @Html.HiddenFor(q => q.co_subtotal_iva)
     @Html.HiddenFor(q => q.co_subtotal_siniva)
     @Html.HiddenFor(q => q.co_baseImponible)
+    @Html.HiddenFor(q => q.serie1)
+    @Html.HiddenFor(q => q.serie2)
 
 
     <div class="row">
@@ -102,27 +104,7 @@
                     @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label for="co_total">Estb.</label>
-                    @Html.TextBoxFor(q => q.serie1, new { @class = "form-control", @id = "serie1" })
-                    @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label for="co_total">Pto.</label>
-                    @Html.TextBoxFor(q => q.serie2, new { @class = "form-control", @id = "serie2" })
-                    @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="co_total"># Retención</label>
-                    @Html.TextBoxFor(q => q.NumRetencion, new { @class = "form-control", @id = "NumRetencion" })
-                    @Html.ValidationMessageFor(q => q.co_baseImponible, "", new { @class = "text-danger" })
-                </div>
-            </div>
+
         </div>
     </div>
 
