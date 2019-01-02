@@ -15,7 +15,7 @@
     @Html.HiddenFor(q => q.IdSolicitud)
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
                     @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
@@ -50,6 +50,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 
