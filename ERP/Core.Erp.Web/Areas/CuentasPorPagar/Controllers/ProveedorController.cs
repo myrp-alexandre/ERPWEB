@@ -240,14 +240,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 foreach (var item in Lista_Proveedor)
                 {
-                    if ((cl_funciones.ValidaIdentificacion(item.info_persona.IdTipoDocumento, item.info_persona.pe_Naturaleza, item.info_persona.pe_cedulaRuc, ref return_naturaleza)))
+                    item.info_persona.pe_Naturaleza = return_naturaleza;
+                    if (!bus_proveedor.guardarDB_importacion(item))
                     {
-                        item.info_persona.pe_Naturaleza = return_naturaleza;
-                        if (!bus_proveedor.guardarDB_importacion(item))
-                        {
-                            ViewBag.mensaje = "Error al importar el archivo";
-                            return View(model);
-                        }
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
                     }
                 }                
             }

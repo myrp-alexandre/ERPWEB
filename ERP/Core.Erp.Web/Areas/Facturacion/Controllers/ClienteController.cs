@@ -275,15 +275,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
                 foreach (var item in Lista_Cliente)
                 {
-                    //if ((cl_funciones.ValidaIdentificacion(item.info_persona.IdTipoDocumento, item.info_persona.pe_Naturaleza, item.info_persona.pe_cedulaRuc)))
-                    //{
-                        if (!bus_cliente.guardarDB_importacion(item))
-                        {
-                            ViewBag.mensaje = "Error al importar el archivo";
-                            return View(model);
-                        }
-                    //}
-            }
+                    if (!bus_cliente.guardarDB_importacion(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }
             }
             catch (Exception ex)
             {

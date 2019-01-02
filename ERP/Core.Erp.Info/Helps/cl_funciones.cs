@@ -313,7 +313,8 @@ namespace Core.Erp.Info.Helps
                                 if (digito_tres <= tercer_digito_persona_natural)
                                 {
                                     return_naturaleza = "NATU";
-                                    return cedula_ruc.Substring(10, 3) == establecimiento && (ValidaCedula(cedula_ruc.Substring(0, 10)));                                    
+                                    var establecimiento_prov = cedula_ruc.Substring(10, 3);
+                                    return (establecimiento_prov == establecimiento && (ValidaCedula(cedula_ruc.Substring(0, 10))));                                    
                                 }
 
                                 if (digito_tres == tercer_digito_sector_publico)
