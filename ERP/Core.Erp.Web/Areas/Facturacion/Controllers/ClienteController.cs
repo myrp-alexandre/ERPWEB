@@ -506,15 +506,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
                         var return_naturaleza="";
-
+                        var cedula_ruc = (Convert.ToString(reader.GetValue(3))).Trim();
                         tb_persona_Info info_persona = new tb_persona_Info();
                         tb_persona_Info info_persona_cliente = new tb_persona_Info();
 
-                        var cc = Convert.ToString(reader.GetValue(3));
-                        info_persona = lst_persona.Where(q => q.pe_cedulaRuc == Convert.ToString(reader.GetValue(3))).FirstOrDefault();
+                        info_persona = lst_persona.Where(q => q.pe_cedulaRuc == cedula_ruc).FirstOrDefault();
                         info_persona_cliente = info_persona;
 
-                        if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3)), ref return_naturaleza ))
+                        if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(4)), cedula_ruc, ref return_naturaleza ))
                         {
                             if (info_persona == null)
                             {
@@ -526,7 +525,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                     pe_apellido = Convert.ToString(reader.GetValue(6)),
                                     pe_nombre = Convert.ToString(reader.GetValue(7)),
                                     IdTipoDocumento = Convert.ToString(reader.GetValue(2)),
-                                    pe_cedulaRuc = Convert.ToString(reader.GetValue(3)),
+                                    pe_cedulaRuc = cedula_ruc,
                                     pe_direccion = Convert.ToString(reader.GetValue(9)),
                                     pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)),
                                     pe_celular = Convert.ToString(reader.GetValue(11)),
@@ -544,7 +543,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                 info_persona_cliente.pe_apellido = Convert.ToString(reader.GetValue(6));
                                 info_persona_cliente.pe_nombre = Convert.ToString(reader.GetValue(7));
                                 info_persona_cliente.IdTipoDocumento = Convert.ToString(reader.GetValue(2));
-                                info_persona_cliente.pe_cedulaRuc = Convert.ToString(reader.GetValue(3));
+                                info_persona_cliente.pe_cedulaRuc = cedula_ruc;
                                 info_persona_cliente.pe_direccion = Convert.ToString(reader.GetValue(9));
                                 info_persona_cliente.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
                                 info_persona_cliente.pe_celular = Convert.ToString(reader.GetValue(11));
