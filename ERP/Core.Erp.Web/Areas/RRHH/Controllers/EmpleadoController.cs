@@ -880,7 +880,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             if (Lista_Empleado.Where(q => q.info_persona.pe_cedulaRuc == info_persona_empleado.pe_cedulaRuc).Count() == 0)
                                 Lista_Empleado.Add(info);
 
-                            #region RubrosAcumulados                             
+                            #region RubrosAcumulados    
+                            ro_rubros_calculados_Bus bus_rubros_acumulados = new ro_rubros_calculados_Bus();
+                            var info_rubros = bus_rubros_acumulados.get_info(IdEmpresa);
+
                             //DIII
                             var xiii = Convert.ToString(reader.GetValue(32));
                             var xiv = Convert.ToString(reader.GetValue(33));
@@ -893,7 +896,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     IdEmpresa = IdEmpresa,
                                     pe_cedulaRuc = info_persona_empleado.pe_cedulaRuc,
                                     IdEmpleado = info.IdEmpleado,
-                                    IdRubro = "290",
+                                    IdRubro = info_rubros.IdRubro_DIII,
                                     UsuarioIngresa = SessionFixed.IdUsuario,
                                     FechaIngresa = DateTime.Now
                                 };
@@ -909,7 +912,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     IdEmpresa = IdEmpresa,
                                     pe_cedulaRuc = info_persona_empleado.pe_cedulaRuc,
                                     IdEmpleado = info.IdEmpleado,
-                                    IdRubro = "289",
+                                    IdRubro = info_rubros.IdRubro_DIV,
                                     UsuarioIngresa = SessionFixed.IdUsuario,
                                     FechaIngresa = DateTime.Now
                                 };
@@ -925,7 +928,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     IdEmpresa = IdEmpresa,
                                     pe_cedulaRuc = info_persona_empleado.pe_cedulaRuc,
                                     IdEmpleado = info.IdEmpleado,
-                                    IdRubro = "296",
+                                    IdRubro = info_rubros.IdRubro_fondo_reserva,
                                     UsuarioIngresa = SessionFixed.IdUsuario,
                                     FechaIngresa = DateTime.Now
                                 };
