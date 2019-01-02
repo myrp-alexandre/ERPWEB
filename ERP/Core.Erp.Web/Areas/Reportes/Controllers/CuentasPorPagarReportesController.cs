@@ -238,6 +238,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+        public ActionResult CXP_011(decimal IdSolicitud = 0)
+        {
+            CXP_011_Rpt model = new CXP_011_Rpt();
+            model.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            model.p_IdSolicitud.Value = IdSolicitud;
+            model.RequestParameters = false;
+            return View(model);
+        }
 
 
     }
