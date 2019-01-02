@@ -50,7 +50,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Nuevo(Af_Catalogo_Info model)
         {
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (bus_catalogo.validar_existe_IdCatalogo(model.IdCatalogo))
             {
                 ViewBag.mensaje = "El código ya se encuentra registrado";
@@ -81,6 +81,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Modificar(Af_Catalogo_Info model)
         {
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_catalogo.modificarDB(model))
             {
                 ViewBag.IdTipoCatalogo = model.IdTipoCatalogo;
@@ -103,6 +104,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
         [HttpPost]
         public ActionResult Anular(Af_Catalogo_Info model)
         {
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             if (!bus_catalogo.anularDB(model))
             {
                 ViewBag.IdTipoCatalogo = model.IdTipoCatalogo;

@@ -670,7 +670,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                            select new fa_notaCreDeb_Info
                            {
                                IdEmpresa = c.IdEmpresa,
-                               IdSucursal = s.IdSucursal,
+                               CodDocumentoTipo = s.Su_CodigoEstablecimiento,
                                Ruc = q.info_persona.pe_cedulaRuc,
                                CodNota = c.CodNota,
                                sc_total = c.sc_total,

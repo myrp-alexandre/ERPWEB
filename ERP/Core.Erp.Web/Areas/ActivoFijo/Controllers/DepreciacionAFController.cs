@@ -164,7 +164,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            model.IdUsuario = Session["IdUsuario"].ToString();            
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_depreciacion.guardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -204,7 +204,7 @@ namespace Core.Erp.Web.Areas.ActivoFijo.Controllers
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_depreciacion.modificarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
