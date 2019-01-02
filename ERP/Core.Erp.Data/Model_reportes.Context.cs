@@ -102,6 +102,7 @@ namespace Core.Erp.Data
         public DbSet<VWFAC_003> VWFAC_003 { get; set; }
         public DbSet<VWFAC_007> VWFAC_007 { get; set; }
         public DbSet<VWFAC_006> VWFAC_006 { get; set; }
+        public DbSet<VWCXP_011> VWCXP_011 { get; set; }
     
         public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario, Nullable<int> idActivoFijoTipo_ini, Nullable<int> idActivoFijoTipo_fin, Nullable<int> idCategoria_ini, Nullable<int> idCategoria_fin, string estado_Proceso)
         {

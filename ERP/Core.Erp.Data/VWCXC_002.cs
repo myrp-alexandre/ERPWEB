@@ -34,6 +34,6 @@ namespace Core.Erp.Data
         public Nullable<double> vt_Subtotal { get; set; }
         public Nullable<double> vt_iva { get; set; }
         public Nullable<double> vt_total { get; set; }
-        public Nullable<double> PorcentajeRet { get; set; }
+        public double PorcentajeRet { get; set; }
     }
 }
