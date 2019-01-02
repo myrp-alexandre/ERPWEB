@@ -286,8 +286,6 @@ namespace Core.Erp.Data.Contabilidad
                     if (Entity == null) return false;
                     Entity.pc_Cuenta = info.pc_Cuenta;
                     Entity.pc_clave_corta = info.pc_clave_corta;
-                    Entity.IdGrupoCble = info.IdGrupoCble;
-                    Entity.pc_Naturaleza = info.pc_Naturaleza;
                     Entity.pc_EsMovimiento = info.pc_EsMovimiento_bool == true ? "S" : "N";
                     Context.SaveChanges();
                 }
