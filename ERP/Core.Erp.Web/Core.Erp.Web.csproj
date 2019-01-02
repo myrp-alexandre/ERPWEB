@@ -9593,6 +9593,7 @@
     <Content Include="Areas\RRHH\Views\ControlDeMarcaciones\Anular.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\Importar.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_GridViewPartial_notadebito_importacion.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_011.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
