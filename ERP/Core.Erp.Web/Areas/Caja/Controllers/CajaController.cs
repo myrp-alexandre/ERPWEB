@@ -83,6 +83,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [HttpPost]
         public ActionResult Nuevo(caj_Caja_Info model)
         {
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_caja.guardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -101,6 +102,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [HttpPost]
         public ActionResult Modificar(caj_Caja_Info model)
         {
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_caja.modificarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -119,6 +121,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [HttpPost]
         public ActionResult Anular(caj_Caja_Info model)
         {
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             if (!bus_caja.anularDB(model))
             {
                 cargar_combos(model.IdEmpresa);

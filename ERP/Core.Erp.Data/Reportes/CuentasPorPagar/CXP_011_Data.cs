@@ -30,7 +30,8 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                         pe_nombreCompleto = q.pe_nombreCompleto,
                         Solicitante = q.Solicitante,
                         Su_Descripcion = q.Su_Descripcion,
-                        Valor = q.Valor
+                        Valor = q.Valor,
+                        Nombre = q.Nombre
                     }).ToList();
                 }
                 return Lista;

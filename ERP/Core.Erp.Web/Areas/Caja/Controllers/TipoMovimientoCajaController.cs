@@ -84,6 +84,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [HttpPost]
         public ActionResult Nuevo(caj_Caja_Movimiento_Tipo_Info model)
         {
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_tipomovimiento.guardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -103,6 +104,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [HttpPost]
         public ActionResult Modificar(caj_Caja_Movimiento_Tipo_Info model)
         {
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_tipomovimiento.modificarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -122,6 +124,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         [HttpPost]
         public ActionResult Anular(caj_Caja_Movimiento_Tipo_Info model)
         {
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             if (!bus_tipomovimiento.anularDB(model))
             {
                 cargar_combos(model.IdEmpresa);

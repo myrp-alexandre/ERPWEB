@@ -92,6 +92,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Nuevo(cp_SolicitudPago_Info model)
         {
+            model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             if (!bus_solicitud.GuardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -112,6 +113,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Modificar(cp_SolicitudPago_Info model)
         {
+            model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             if (!bus_solicitud.ModificarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -132,6 +134,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [HttpPost]
         public ActionResult Anular(cp_SolicitudPago_Info model)
         {
+            model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_solicitud.AnularDB(model))
             {
                 cargar_combos(model.IdEmpresa);

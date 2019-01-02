@@ -242,6 +242,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Nuevo(ba_Cbte_Ban_Info model)
         {
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!validar(model,ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -267,6 +268,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.CHEQ))
             {
                 ViewBag.mensaje = "No se pudo modificar el registro";
