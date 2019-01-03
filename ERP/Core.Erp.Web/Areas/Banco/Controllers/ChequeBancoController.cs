@@ -343,10 +343,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult GridViewPartial_cheque_op_x_cruzar()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            List<cp_orden_pago_cancelaciones_Info> model;
-                model = new List<cp_orden_pago_cancelaciones_Info>();
-
-
+            var model = ListPorCruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_cheque_op_x_cruzar",model);
         }
 
@@ -368,7 +365,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 if (IdEntidad == 0)
                     lst_x_cruzar = new List<cp_orden_pago_cancelaciones_Info>();
                 else
-                    lst_x_cruzar = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, SessionFixed.TipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false,0);
+                    lst_x_cruzar = ListPorCruzar.get_list(IdTransaccionSession);
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
@@ -392,16 +389,24 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         #region Json
 
-        public JsonResult GetListPorCruzar(int IdEmpresa = 0, decimal IdTransaccion = 0, string IdTipoPersona = "", decimal IdEntidad = 0, decimal IdSolicitudPago = 0)
+        public JsonResult GetListPorCruzar(int IdEmpresa = 0, decimal IdTransaccionSession = 0, string IdTipoPersona = "", decimal IdEntidad = 0, decimal IdSolicitudPago = 0)
         {
+            string retorno = string.Empty;
             var lst = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, IdTipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false,IdSolicitudPago);
-            if(IdSolicitudPago == 0)
-               ListPorCruzar.set_list(lst, IdTransaccion);
+            if (IdSolicitudPago == 0)
+            {
+                ListPorCruzar.set_list(lst, IdTransaccionSession);
+                retorno = "S";
+            }
             else
             {
-
+                foreach (var item in lst)
+                {
+                    List_op.AddRow(item, IdTransaccionSession);
+                }
+                retorno = "N";
             }
-            return Json("",JsonRequestBehavior.AllowGet);
+            return Json(retorno,JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, decimal IdTransaccionSession = 0)

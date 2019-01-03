@@ -25,8 +25,6 @@
     });
     var selectedIDs;
     function OnBeginCallback(s, e) {
-        e.customArgs["TipoPersona"] = $("#IdTipo_Persona").val();
-        e.customArgs["Entidad"] = IdEntidad.GetValue();
         e.customArgs["selectedIDs"] = selectedIDs;
     }
     function OnSelectionChanged(s, e) {
@@ -38,9 +36,35 @@
     }
     function MostrarModal() {
         selectedIDs = "";
-        GridView_cheque_op_x_cruzar.PerformCallback();
-        GridView_cheque_op_x_cruzar.UnselectRows();
-        $("#OpModal").modal("show");
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdTipoPersona: $("#IdTipo_Persona").val(),
+            IdEntidad: IdEntidad.GetValue(),
+            IdSolicitudPago: $("#IdSolicitudPago").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetListPorCruzar", "ChequeBanco",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == "S") {
+                    GridView_cheque_op_x_cruzar.PerformCallback();
+                    GridView_cheque_op_x_cruzar.UnselectRows();
+                    $("#OpModal").modal("show");
+                } else {
+                    GridView_cheque_op.PerformCallback();
+                }
+            },
+            error: function (error) {
+            }
+        });        
     }
 
     function AddOP() {

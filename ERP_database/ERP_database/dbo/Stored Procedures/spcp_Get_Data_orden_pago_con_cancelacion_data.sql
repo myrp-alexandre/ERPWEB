@@ -9,7 +9,8 @@ CREATE PROCEDURE [dbo].[spcp_Get_Data_orden_pago_con_cancelacion_data]
 @IdEntidad_fin numeric,
 @IdEstado_Aprobacion varchar(10),
 @IdUsuario varchar(20),
-@mostrar_saldo_0 bit
+@mostrar_saldo_0 bit,
+@IdSolicitudPago numeric
 )
 AS
 BEGIN
@@ -31,7 +32,7 @@ select		@IdUsuario, cp_orden_pago.IdEmpresa, cp_orden_pago.IdTipo_op, cp_orden_p
 FROM     cp_orden_pago INNER JOIN
                   cp_orden_pago_det ON cp_orden_pago.IdEmpresa = cp_orden_pago_det.IdEmpresa AND cp_orden_pago.IdOrdenPago = cp_orden_pago_det.IdOrdenPago LEFT JOIN
                   cp_orden_pago_cancelaciones ON cp_orden_pago_det.IdEmpresa = cp_orden_pago_cancelaciones.IdEmpresa_op AND cp_orden_pago_det.IdOrdenPago = cp_orden_pago_cancelaciones.IdOrdenPago_op AND 
-                  cp_orden_pago_det.Secuencia = cp_orden_pago_cancelaciones.Secuencia_op
+                  cp_orden_pago_det.Secuencia = cp_orden_pago_cancelaciones.Secuencia_op 
 WHERE cp_orden_pago.IdEmpresa = @IdEmpresa and cp_orden_pago.IdTipo_Persona like '%'+@IdTipoPersona+'%' and cp_orden_pago.IdEntidad between @IdEntidad_ini and @IdEntidad_fin
 and cp_orden_pago.IdEstadoAprobacion like '%'+@IdEstado_Aprobacion+'%' and cp_orden_pago.IdPersona between @IdPersona_ini and @IdPersona_fin AND cp_orden_pago.Estado = 'A'
 GROUP BY cp_orden_pago.IdEmpresa, cp_orden_pago.IdTipo_op,cp_orden_pago_det.Referencia, cp_orden_pago.IdOrdenPago, cp_orden_pago_det.Secuencia, cp_orden_pago.IdTipo_Persona, cp_orden_pago.IdPersona, cp_orden_pago.IdEntidad, cp_orden_pago.Fecha, 
@@ -46,7 +47,7 @@ END
 
 update [cp_orden_pago_con_cancelacion_data] 
 set 
- Nom_Beneficiario=ben.pe_apellido+' '+ben.pe_nombre
+ Nom_Beneficiario=ben.pe_nombreCompleto
 ,Girar_Cheque_a=ben.pr_girar_cheque_a
 ,IdCtaCble=ben.IdCtaCble
 ,Nom_Beneficiario_2=ben.Nombre
@@ -60,9 +61,10 @@ set Referencia=doc.Codigo+'#' + CAST( CAST( OG.co_factura AS NUMERIC)  AS VARCHA
 ,Referencia2=doc.Codigo+'#' + CAST( CAST(OG.co_factura AS NUMERIC) AS VARCHAR(20))
 ,Fecha_Fa_Prov=OG.co_FechaFactura
 ,Fecha_Venc_Fac_Prov=OG.co_FechaFactura_vct
+,Girar_Cheque_a = isnull(sol.GiradoA,Girar_Cheque_a)
 FROM            [cp_orden_pago_con_cancelacion_data]  AS data INNER JOIN
                          cp_orden_giro AS OG ON data.IdEmpresa_cxp = OG.IdEmpresa AND data.IdTipoCbte_cxp = OG.IdTipoCbte_Ogiro AND data.IdCbteCble_cxp = OG.IdCbteCble_Ogiro INNER JOIN
-                         cp_TipoDocumento AS doc ON OG.IdOrden_giro_Tipo = doc.CodTipoDocumento
+                         cp_TipoDocumento AS doc ON OG.IdOrden_giro_Tipo = doc.CodTipoDocumento left join cp_SolicitudPago as sol on og.IdEmpresa = sol.IdEmpresa and sol.IdSolicitud = og.IdSolicitudPago
 where data.IdUsuario = @IdUsuario
 
 update [cp_orden_pago_con_cancelacion_data]  
@@ -72,7 +74,7 @@ else 'ND#' + ND.cn_Nota
 END 
 ,Referencia2=CASE WHEN ND.cn_Nota is NULL  or ND.cn_Nota='' THEN  +'ND#:' + cast(ND.IdCbteCble_Nota as varchar(20)) 
 else 'ND#' + ND.cn_Nota
-END 
+END
 
 ,Fecha_Fa_Prov=ND.cn_fecha
 ,Fecha_Venc_Fac_Prov=ND.cn_Fecha_vcto
@@ -87,6 +89,19 @@ set Referencia='OP#' + cast([cp_orden_pago_con_cancelacion_data] .IdOrdenPago as
 ,fecha_fa_prov=fecha_op
 ,fecha_venc_fac_prov=fecha_op
 WHERE Referencia is null and @IdUsuario = IdUsuario
+
+IF(@IdSolicitudPago != 0)
+BEGIN
+	delete cp_orden_pago_con_cancelacion_data
+	where not exists(
+	select * from cp_orden_giro as f
+	where f.IdEmpresa = @IdEmpresa
+	and f.IdSolicitudPago = @IdSolicitudPago
+	and cp_orden_pago_con_cancelacion_data.IdEmpresa_cxp = f.IdEmpresa
+	and cp_orden_pago_con_cancelacion_data.IdTipoCbte_cxp = f.IdTipoCbte_Ogiro
+	and cp_orden_pago_con_cancelacion_data.IdCbteCble_cxp = f.IdCbteCble_Ogiro
+	) and cp_orden_pago_con_cancelacion_data.IdUsuario = @IdUsuario
+END
 
 SELECT ISNULL(ROW_NUMBER() OVER (ORDER BY IdUsuario),0) AS IdRow, IdUsuario, IdEmpresa, IdTipo_op, Referencia, Referencia2, IdOrdenPago, Secuencia_OP, IdTipoPersona, IdPersona, IdEntidad, Fecha_OP, Fecha_Fa_Prov, Fecha_Venc_Fac_Prov, Observacion, Nom_Beneficiario, Girar_Cheque_a, 
                   Valor_a_pagar, Valor_estimado_a_pagar_OP, Total_cancelado_OP, Saldo_x_Pagar_OP, IdEstadoAprobacion, IdFormaPago, Fecha_Pago, IdCtaCble, IdCentroCosto, IdSubCentro_Costo, Cbte_cxp, Estado, Nom_Beneficiario_2, 
