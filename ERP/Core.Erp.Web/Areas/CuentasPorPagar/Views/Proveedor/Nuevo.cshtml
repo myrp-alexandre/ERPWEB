@@ -21,7 +21,6 @@
                 <i class="icon fa fa-warning"></i> @ViewBag.mensaje
             </h4>
         </div>
-
     }
     <div class="row">
         <div class="col-md-12">
@@ -54,7 +53,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_persona.pe_Naturaleza">Naturaleza*</label>
-                    @Html.DropDownListFor(q => q.info_persona.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.info_persona.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza" })
                     @Html.ValidationMessageFor(q => q.info_persona.pe_Naturaleza, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -72,6 +71,7 @@
                     <label for="info_persona.pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.info_persona.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc" })
                     @Html.ValidationMessageFor(q => q.info_persona.pe_cedulaRuc, "", new { @class = "text-danger" })
+                    <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                 </div>
             </div>
         </div>
@@ -216,46 +216,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IdCtaCble_CXP">Cta. Cble. CXP*</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_CXP, settings =>
-                           {
-                               settings.Name = "IdCtaCble_CXP";
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                               settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                               settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                               settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-                               //Campo ID
-                               settings.Properties.ValueField = "IdCtaCble";
-                               settings.Properties.ValueType = typeof(string);
-                               settings.Properties.TextField = "pc_Cuenta";
-                               //Boton para seleccionar ningun registro
-                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                               settings.Properties.NullText = "== Seleccione ==";
-                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                           }).BindList(ViewBag.lst_cuentas).GetHtml()
+                                @Html.Partial("_CmbCtaCbleCXP_Proveedor", Model.IdCtaCble_CXP)
                                 @Html.ValidationMessageFor(q => q.IdCtaCble_CXP, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IdCtaCble_Gasto">Cta. Cble. Gasto</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdCtaCble_Gasto, settings =>
-                           {
-                               settings.Name = "IdCtaCble_Gasto";
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                               settings.Properties.Columns.Add("IdCtaCble", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                               settings.Properties.Columns.Add("pc_Cuenta", "Cuenta").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                               settings.Properties.Columns.Add("pc_Cuenta_padre", "Cuenta padre").Width = System.Web.UI.WebControls.Unit.Percentage(40);
-                               //Campo ID
-                               settings.Properties.ValueField = "IdCtaCble";
-                               settings.Properties.ValueType = typeof(string);
-                               settings.Properties.TextField = "pc_Cuenta";
-                               //Boton para seleccionar ningun registro
-                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                               settings.Properties.NullText = "== Seleccione ==";
-                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                           }).BindList(ViewBag.lst_cuentas).GetHtml()
+                                @Html.Partial("_CmbCtaCbleGasto_Proveedor", Model.IdCtaCble_Gasto)
                                 @Html.ValidationMessageFor(q => q.IdCtaCble_Gasto, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -306,8 +274,13 @@
 
 <script>
     $(function () {
+        $("#error_documento").hide();
         get_info_clase_proveedor();
-    });    
+    });
+
+    $("#pe_cedulaRuc").blur(function () {
+        Validar_cedula_ruc();
+    });
 
     $("#pe_apellido").keyup(function () {
         actualizar_nombre_completo();
@@ -388,7 +361,7 @@
                 }
             }
 
-        var datos = {            
+        var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             pe_cedulaRuc: cedula,
         }
@@ -466,8 +439,8 @@
                     if (data.length == 0) {
                         console.log("NO DATA!")
                     } else {
-                        IdCtaCble_CXP.SetValue(data.IdCtaCble_CXP);
-                        IdCtaCble_Gasto.SetValue(data.IdCtaCble_Gasto);
+                        $("#IdCtaCble_CXP").val(data.IdCtaCble_CXP);
+                        $("#IdCtaCble_Gasto").val(data.IdCtaCble_Gasto);
                     }
                 },
                 error: function (error) {
@@ -475,12 +448,38 @@
                 }
             });
         } else {
-            IdCtaCble_CXP.SetValue(null);
-            IdCtaCble_Gasto.SetValue(null);
+            $("#IdCtaCble_CXP").val(null);
+            $("#IdCtaCble_Gasto").val(null);
         }
     }
 
+    function Validar_cedula_ruc() {
+        var datos = {
+            tipo_documento: $("#IdTipoDocumento").val(),
+            cedula_ruc: $("#pe_cedulaRuc").val(),
+        }
 
-
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Validar_cedula_ruc", "Persona", new { Area = "General" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.isValid == true) {
+                    $("#error_documento").hide();
+                    $("#pe_Naturaleza").val(data.return_naturaleza);
+                }
+                else {
+                    $("#error_documento").show();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    };
 
 </script>

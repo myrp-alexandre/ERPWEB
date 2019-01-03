@@ -147,7 +147,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 return false;
             }
-            return true;
+
+            if (i_validar.IdEntidad == 0)
+            {
+                msg = "El campo beneficiario es obligatorio";
+                return false;
+            }
+
+                return true;
         }
         #endregion
 
@@ -192,6 +199,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdEstadoAprobacion = info_param_op.IdEstadoAprobacion;
 
             string mensaje = bus_orden_pago.validar(model);
+
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model.IdEmpresa);

@@ -144,7 +144,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             else
             {
-                ViewBag.mensaje = "Número identificación inválida";
+                ViewBag.mensaje = "Número de identificación inválida";
                 cargar_combos(model);
                 return View(model);
             }

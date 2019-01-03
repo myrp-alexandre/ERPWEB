@@ -442,5 +442,69 @@ namespace Core.Erp.Data.Contabilidad
                 throw;
             }
         }
+
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<ct_plancta_Info> Lista = new List<ct_plancta_Info>();
+            Lista = get_list(skip, take, args.Filter, IdEmpresa);
+
+            return Lista;
+        }
+
+        public ct_plancta_Info get_info_demanda(string IdCtaCble, int IdEmpresa)
+        {
+            ct_plancta_Info info = new ct_plancta_Info();
+            using (Entities_contabilidad Contex = new Entities_contabilidad())
+            {
+                info = (from q in Contex.ct_plancta
+                        where q.IdCtaCble == IdCtaCble
+                        && q.IdEmpresa == IdEmpresa
+                        select new ct_plancta_Info
+                        {
+                            IdCtaCble = q.IdCtaCble,
+                            pc_Cuenta = q.pc_Cuenta
+                        }).FirstOrDefault();
+            }
+            return info;
+        }
+
+        public List<ct_plancta_Info> get_list(int skip, int take, string filter, int IdEmpresa)
+        {
+            try
+            {
+                List<ct_plancta_Info> Lista = new List<ct_plancta_Info>();
+                Entities_contabilidad Context = new Entities_contabilidad();
+                var lst = (from
+                          p in Context.ct_plancta
+                           where p.IdEmpresa == IdEmpresa
+                           && (p.IdCtaCble.ToString() + " " + p.pc_Cuenta).Contains(filter)                          
+                           select new
+                           {
+                               p.IdCtaCble,
+                               p.pc_Cuenta,
+                           })
+                             .OrderBy(p => p.IdCtaCble)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+                foreach (var q in lst)
+                {
+                    Lista.Add(new ct_plancta_Info
+                    {
+                        IdCtaCble = q.IdCtaCble,
+                        pc_Cuenta = q.pc_Cuenta,
+                    });
+                }
+                Context.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
