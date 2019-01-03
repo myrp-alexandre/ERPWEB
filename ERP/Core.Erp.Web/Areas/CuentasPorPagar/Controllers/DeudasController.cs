@@ -664,8 +664,53 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region json
         public JsonResult GetListOrdenesPorPagar(int IdEmpresa = 0, decimal IdSolicitudPago = 0)
         {
-            Session["list_ordenes_giro"] = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa, IdSolicitudPago);
-            
+            var lst  = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa, IdSolicitudPago);
+
+            if (IdSolicitudPago != 0)
+            {
+                #region Agregar por solicitud
+                List<cp_orden_giro_aprobacion_Info> list_facturas_seleccionadas = new List<cp_orden_giro_aprobacion_Info>();
+                list_facturas_seleccionadas = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_aprobacion_Info>;
+                if (list_facturas_seleccionadas == null)
+                    list_facturas_seleccionadas = new List<cp_orden_giro_aprobacion_Info>();
+
+                foreach (var item in lst)
+                {
+                    if (list_facturas_seleccionadas.Where(v => v.SecuencialID == item.SecuencialID).Count() == 0)// agrego si existe y no esta repetida
+                    {
+                        item.co_valorpagar = (double)item.Saldo_OG;
+
+                        list_facturas_seleccionadas.Add(new cp_orden_giro_aprobacion_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdTipoCbte_Ogiro = item.IdTipoCbte_Ogiro,
+                            IdCbteCble_Ogiro = item.IdCbteCble_Ogiro,
+                            co_factura = item.co_factura,
+                            co_fechaOg = item.co_fechaOg,
+                            co_FechaFactura_vct = item.co_FechaFactura_vct,
+                            Tipo_Vcto = item.Tipo_Vcto,
+                            Saldo_OG = item.Saldo_OG,
+                            co_valorpagar = item.co_valorpagar,
+                            IdProveedor = item.IdProveedor,
+                            SecuencialID = item.SecuencialID,
+                            nom_tipo_Documento = item.nom_tipo_Documento,
+                            info_proveedor = new cp_proveedor_Info
+                            {
+                                info_persona = new tb_persona_Info
+                                {
+                                    pe_nombreCompleto = item.info_proveedor.info_persona.pe_nombreCompleto
+                                }
+                            }
+                        });
+                    }
+
+                    Session["list_facturas_seleccionadas"] = list_facturas_seleccionadas;
+                }
+                #endregion
+            }
+            else
+                Session["list_ordenes_giro"] = lst;
+
             return Json("", JsonRequestBehavior.AllowGet);
         }
         public JsonResult calcular_cuotas(DateTime Fecha_inicio, int Num_cuotas = 0, int Dias_plazo = 0, double Total_a_pagar = 0, decimal IdTransaccionSession = 0)
