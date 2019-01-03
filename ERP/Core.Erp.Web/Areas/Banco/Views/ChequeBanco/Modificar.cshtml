@@ -41,11 +41,12 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if (data == "S") {
+                if (data.length == 0) {
                     GridView_cheque_op_x_cruzar.PerformCallback();
                     GridView_cheque_op_x_cruzar.UnselectRows();
                     $("#OpModal").modal("show");
                 } else {
+                    $("#cb_giradoA").val(data);
                     GridView_cheque_op.PerformCallback();
                 }
             },
@@ -317,8 +318,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-primary" id="btn_buscar_op" onclick="MostrarModal();">
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.TextBoxFor(q => q.IdSolicitudPago, new { @Id = "IdSolicitudPago", @class = "form-control", @placeholder = "# Solicitud" })
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-primary form-control" id="btn_buscar_op" onclick="MostrarModal();" title="Buscar órdenes">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>

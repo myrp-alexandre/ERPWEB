@@ -50,7 +50,7 @@ namespace Core.Erp.Data.Banco
                                  cb_giradoA = q.cb_giradoA,
                                  cb_Valor = q.cb_Valor,
                                  Imprimir_Solo_el_cheque = q.Imprimir_Solo_el_cheque,
-
+                                 IdBanco = q.IdBanco,
                                  EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                     else
@@ -78,7 +78,7 @@ namespace Core.Erp.Data.Banco
                                      cb_giradoA = q.cb_giradoA,
                                      cb_Valor = q.cb_Valor,
                                      Imprimir_Solo_el_cheque = q.Imprimir_Solo_el_cheque,
-
+                                     IdBanco = q.IdBanco,
                                      EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
                 }
