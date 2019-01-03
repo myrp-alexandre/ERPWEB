@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <label for="IdTipoDocumento">Tipo documento*</label>
                     @Html.DropDownListFor(q => q.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.IdTipoDocumento, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(q => q.IdTipoDocumento, "", new { @class = "text-danger" , @id = "IdTipoDocumento" })
                 </div>
             </div>
 
@@ -216,6 +216,10 @@
         })
     })
 
+    $("#pe_cedulaRuc").blur(function () {
+        Validar_cedula_ruc();
+    });
+
     $("#pe_apellido").keyup(function () {
         actualizar_nombre_completo();
     });
@@ -238,4 +242,33 @@
             $("#pe_nombreCompleto").val(razon_social)
         }
     }
+
+    function Validar_cedula_ruc() {
+        var datos = {
+            tipo_documento: $("#IdTipoDocumento").val(),
+            cedula_ruc: $("#pe_cedulaRuc").val(),
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Validar_cedula_ruc", "Persona", new { Area = "General" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                if (data.isValid == true) {
+                    //$("#pe_Naturaleza")
+                }
+                else {
+
+                }                                
+            },
+            error: function (error) {
+            }
+        });
+    };
 </script>
