@@ -303,9 +303,16 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-primary" id="btn_buscar_op" onclick="MostrarModal();">
-                            <i class="fa fa-search"></i>
-                        </button>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                @Html.TextBoxFor(q => q.IdSolicitudPago, new { @Id = "IdSolicitudPago", @class = "form-control", @placeholder = "# Solicitud" })
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-primary form-control" id="btn_buscar_op" onclick="MostrarModal();" title="Buscar órdenes">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <br />

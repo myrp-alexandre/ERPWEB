@@ -55,6 +55,7 @@ namespace Core.Erp.Info.Banco
         public string CodTipoCbteBan { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string Su_Descripcion { get; set; }
+        public Nullable<decimal> IdSolicitudPago { get; set; }
         public Nullable<bool> Imprimir_Solo_el_cheque { get; set; }
         #endregion
     }
