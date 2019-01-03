@@ -2673,12 +2673,12 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
             <End Role="cp_orden_giro" EntitySet="cp_orden_giro" />
             <End Role="cp_retencion" EntitySet="cp_retencion" />
           </AssociationSet>
+          <EntitySet Name="vwcp_orden_giro_x_pagar" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_x_pagar" />
           <EntitySet Name="cp_SolicitudPago" EntityType="Model_cuentas_por_pagar.cp_SolicitudPago" />
           <AssociationSet Name="FK_cp_SolicitudPago_cp_proveedor" Association="Model_cuentas_por_pagar.FK_cp_SolicitudPago_cp_proveedor">
             <End Role="cp_proveedor" EntitySet="cp_proveedor" />
             <End Role="cp_SolicitudPago" EntitySet="cp_SolicitudPago" />
           </AssociationSet>
-          <EntitySet Name="vwcp_orden_giro_x_pagar" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_x_pagar" />
           </EntityContainer>
         <ComplexType Name="spcp_Get_Data_orden_pago_con_cancelacion_data_Result">
           <Property Type="Int64" Name="IdRow" Nullable="false" />
@@ -3486,43 +3486,6 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="cp_SolicitudPago">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSolicitud" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSolicitud" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Concepto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="Solicitante" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="cp_proveedor" Relationship="Model_cuentas_por_pagar.FK_cp_SolicitudPago_cp_proveedor" FromRole="cp_SolicitudPago" ToRole="cp_proveedor" />
-        </EntityType>
-        <Association Name="FK_cp_SolicitudPago_cp_proveedor">
-          <End Type="Model_cuentas_por_pagar.cp_proveedor" Role="cp_proveedor" Multiplicity="1" />
-          <End Type="Model_cuentas_por_pagar.cp_SolicitudPago" Role="cp_SolicitudPago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cp_proveedor">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProveedor" />
-            </Principal>
-            <Dependent Role="cp_SolicitudPago">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="vwcp_orden_giro_x_pagar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3590,6 +3553,43 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
           <Property Name="IdTipoMovi" Type="Int32" />
           <Property Name="IdSolicitudPago" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="cp_SolicitudPago">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSolicitud" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Concepto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Solicitante" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cp_proveedor" Relationship="Model_cuentas_por_pagar.FK_cp_SolicitudPago_cp_proveedor" FromRole="cp_SolicitudPago" ToRole="cp_proveedor" />
+        </EntityType>
+        <Association Name="FK_cp_SolicitudPago_cp_proveedor">
+          <End Type="Model_cuentas_por_pagar.cp_proveedor" Role="cp_proveedor" Multiplicity="1" />
+          <End Type="Model_cuentas_por_pagar.cp_SolicitudPago" Role="cp_SolicitudPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_proveedor">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProveedor" />
+            </Principal>
+            <Dependent Role="cp_SolicitudPago">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4495,28 +4495,6 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="cp_SolicitudPago">
-            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_SolicitudPago">
-              <MappingFragment StoreEntitySet="cp_SolicitudPago">
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwcp_orden_giro_x_pagar">
             <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_orden_giro_x_pagar">
               <MappingFragment StoreEntitySet="vwcp_orden_giro_x_pagar">
@@ -4557,6 +4535,28 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
                 <ScalarProperty Name="IdOrden_giro_Tipo" ColumnName="IdOrden_giro_Tipo" />
                 <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
                 <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_SolicitudPago">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_SolicitudPago">
+              <MappingFragment StoreEntitySet="cp_SolicitudPago">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -155,8 +155,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region Aprobacion de facturas por proveedor
         public ActionResult Index3()
         {
+            cp_orden_giro_Info model = new cp_orden_giro_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
             Session["list_facturas_seleccionadas"] = null;
-            return View();
+            return View(model);
         }
         [ValidateInput(false)]
         public ActionResult GridViewPartial_aprobacion_facturas()
