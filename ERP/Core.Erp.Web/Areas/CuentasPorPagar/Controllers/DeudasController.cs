@@ -169,9 +169,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ActionResult GridViewPartial_facturas_con_saldos()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa);
-            Session["list_ordenes_giro"] = model;
+            List<cp_orden_giro_Info> model = (List<cp_orden_giro_Info>)Session["list_ordenes_giro"];            
             return PartialView("_GridViewPartial_facturas_con_saldos", model);
         }
         #endregion
@@ -660,6 +658,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
 
         #region json
+        public JsonResult GetListOrdenesPorPagar(int IdEmpresa = 0, decimal IdSolicitudPago = 0)
+        {
+            Session["list_ordenes_giro"] = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa, IdSolicitudPago);
+            
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
         public JsonResult calcular_cuotas(DateTime Fecha_inicio, int Num_cuotas = 0, int Dias_plazo = 0, double Total_a_pagar = 0, decimal IdTransaccionSession = 0)
         {
 

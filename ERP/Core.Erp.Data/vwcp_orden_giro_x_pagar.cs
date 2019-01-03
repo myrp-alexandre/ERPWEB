@@ -23,7 +23,7 @@ namespace Core.Erp.Data
         public string co_factura { get; set; }
         public System.DateTime co_FechaFactura { get; set; }
         public string co_observacion { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
+        public int IdSucursal { get; set; }
         public System.DateTime co_fechaOg { get; set; }
         public double co_subtotal_iva { get; set; }
         public double co_subtotal_siniva { get; set; }
@@ -51,5 +51,6 @@ namespace Core.Erp.Data
         public Nullable<int> Secuencia { get; set; }
         public Nullable<double> Valor_cuota { get; set; }
         public Nullable<int> IdTipoMovi { get; set; }
+        public Nullable<decimal> IdSolicitudPago { get; set; }
     }
 }

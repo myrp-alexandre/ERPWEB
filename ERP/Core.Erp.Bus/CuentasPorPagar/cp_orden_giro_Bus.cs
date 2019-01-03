@@ -52,11 +52,11 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-        public List<cp_orden_giro_Info> get_lst_orden_giro_x_pagar(int IdEmpresa)
+        public List<cp_orden_giro_Info> get_lst_orden_giro_x_pagar(int IdEmpresa, decimal IdSolicitudPago)
         {
             try
             {
-                return data.get_lst_orden_giro_x_pagar(IdEmpresa);
+                return data.get_lst_orden_giro_x_pagar(IdEmpresa,IdSolicitudPago);
             }
             catch (Exception)
             {
