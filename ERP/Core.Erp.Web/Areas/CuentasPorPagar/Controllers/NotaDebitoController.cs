@@ -526,22 +526,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                             cn_BaseSeguro = 0,
                             cn_total = Convert.ToDecimal(reader.GetValue(4)),
                             cn_vaCoa = "N",
+                            cod_nota = Convert.ToString(reader.GetValue(2)),
                             IdUsuario = SessionFixed.IdUsuario,
                             Fecha_Transac = DateTime.Now
                         };
-
-                        ct_cbtecble_Info info_comprobante = new ct_cbtecble_Info
-                        {
-
-                        };
-
-                        cp_orden_pago_cancelaciones_Info det_canc_op = new cp_orden_pago_cancelaciones_Info
-                        {
-
-                        };
-
-                        info.info_comrobante = info_comprobante;
-                        //info.lst_det_canc_op = det_canc_op;
 
                         Lista_NotaDebito.Add(info);
                     }

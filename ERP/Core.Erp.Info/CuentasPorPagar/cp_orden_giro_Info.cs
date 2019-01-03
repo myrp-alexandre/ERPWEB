@@ -74,21 +74,19 @@ namespace Core.Erp.Info.CuentasPorPagar
         public int Dias_Vencidos { get; set; }
         public double Total_Pagado { get; set; }
         public Nullable<double> Saldo_OG { get; set; }
+        public Nullable<decimal> IdSolicitudPago { get; set; }
         public Nullable<int> IdBodega { get; set; }
-        public cp_orden_giro_pagos_sri_Info info_forma_pago { get; set; }
+        
 
-        public bool seleccionado { get; set; }        
-
-        //campos que no existen en la tabla
-
+        #region Campos que no existen en la tabla
         public bool ConvenioTributacion_bool { get; set; }
         public bool PagoSujetoRetencion_bool { get; set; }
         public List<cp_orden_giro_det_Info> lst_det { get; set; }
         public string SecuencialID { get; set; }
-
-        public cp_retencion_Info info_retencion { get; set; }
         public string nom_tipo_Documento { get; set; }
-
+        #endregion
+        public cp_orden_giro_pagos_sri_Info info_forma_pago { get; set; }
+        public cp_retencion_Info info_retencion { get; set; }
         public cp_orden_giro_Info()
 
         {

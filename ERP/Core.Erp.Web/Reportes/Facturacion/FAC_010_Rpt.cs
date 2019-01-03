@@ -11,7 +11,9 @@ namespace Core.Erp.Web.Reportes.Facturacion
 {
     public partial class FAC_010_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
-        public string usuario { get; set; }
+        public List<FAC_010_Info> Lista { get; set; }
+    
+    public string usuario { get; set; }
         public string empresa { get; set; }
         public FAC_010_Rpt()
         {
@@ -27,12 +29,16 @@ namespace Core.Erp.Web.Reportes.Facturacion
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
             DateTime fecha_ini = p_fecha_ini.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
-            DateTime fech_fin = p_fecha_fin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);            
+            DateTime fech_fin = p_fecha_fin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
 
             FAC_010_Bus bus_rpt = new FAC_010_Bus();
             List<FAC_010_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, fecha_ini, fech_fin);
             this.DataSource = lst_rpt;
         }
 
+        private void resumen_forma_pago_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.DataSource = Lista;
+        }
     }
 }

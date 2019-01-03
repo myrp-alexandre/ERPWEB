@@ -94,6 +94,7 @@
             this.xrTableCell32 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell33 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.resumen_forma_pago = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable6 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow10 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell25 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -728,9 +729,18 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.resumen_forma_pago,
             this.xrTable6});
-            this.ReportFooter.HeightF = 34.99997F;
+            this.ReportFooter.HeightF = 87.08331F;
             this.ReportFooter.Name = "ReportFooter";
+            // 
+            // resumen_forma_pago
+            // 
+            this.resumen_forma_pago.LocationFloat = new DevExpress.Utils.PointFloat(1.589457E-05F, 54.08332F);
+            this.resumen_forma_pago.Name = "resumen_forma_pago";
+            this.resumen_forma_pago.ReportSource = new Core.Erp.Web.Reportes.Facturacion.FAC_010_resumen_forma_pago_Rpt();
+            this.resumen_forma_pago.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
+            this.resumen_forma_pago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.resumen_forma_pago_BeforePrint);
             // 
             // xrTable6
             // 
@@ -909,5 +919,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell27;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell28;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell34;
+        private DevExpress.XtraReports.UI.XRSubreport resumen_forma_pago;
     }
 }
