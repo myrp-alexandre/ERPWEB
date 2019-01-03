@@ -81,14 +81,22 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
         public ActionResult BAN_005(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0, int IdBanco = 0)
-        {
+       {
             BAN_005_Rpt model = new BAN_005_Rpt();
             model.p_IdEmpresa.Value = IdEmpresa;
             model.p_IdTipocbte.Value = IdTipocbte;
             model.p_IdCbteCble.Value = IdCbteCble;
-            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipocbte, IdCbteCble, "ESTCBENT");           
+            
+            #region Cargo diseño desde base
+            var banco = bus_banco.get_info(IdEmpresa, IdBanco);
+            if (banco.ReporteCheque != null && banco.ReporteCheque.Length > 0)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, banco.ReporteCheque);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
 
-            ViewBag.Reporte = model;
+            bus_cbte.modificarDB_EstadoCheque(IdEmpresa, IdTipocbte, IdCbteCble, "ESTCBENT");
             return View(model);
         }
         public ActionResult BAN_005_Masivo()
@@ -129,20 +137,21 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public ActionResult BAN_006(int IdEmpresa = 0, int IdTipoCbte = 0, decimal IdCbteCble = 0, int IdBanco = 0)
         {                        
-            var banco = bus_banco.get_info(IdEmpresa, IdBanco);
-            
             BAN_006_Rpt model = new BAN_006_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdTipoCbte.Value = IdTipoCbte;
             model.p_IdCbteCble.Value = IdCbteCble;
 
             #region Cargo diseño desde base
-            System.IO.File.WriteAllBytes(RootReporte, banco.ReporteChequeComprobante);
-            model.LoadLayout(RootReporte);
+            var banco = bus_banco.get_info(IdEmpresa, IdBanco);
+            if (banco.ReporteChequeComprobante != null && banco.ReporteChequeComprobante.Length > 0)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, banco.ReporteChequeComprobante);
+                model.LoadLayout(RootReporte);
+            }            
             #endregion
 
             bus_cbte.modificarDB_EstadoCheque(IdEmpresa, IdTipoCbte, IdCbteCble, "ESTCBENT");
-            ViewBag.Reporte = model;
             return View(model);
         }
         private void cargar_banco(int IdEmpresa)
