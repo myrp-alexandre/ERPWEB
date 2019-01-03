@@ -432,7 +432,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 foreach (var item in Lista_NotaDebito)
                 {
-                    if (!bus_notaDebCre.guardarDB(item))
+                    if (!bus_notaDebCre.guardar_importacionDB(item))
                     {
                         ViewBag.mensaje = "Error al importar el archivo";
                         return View(model);
@@ -473,7 +473,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             List<cp_nota_DebCre_Info> Lista_NotaDebito = new List<cp_nota_DebCre_Info>();
             cp_nota_DebCre_List ListaNotaDebito = new cp_nota_DebCre_List();
             int cont = 0;
-            int IdCbteCble_Nota = 0;
+            int IdCbteCble_Nota = 1;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
@@ -499,39 +499,42 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                         var info_proveedor = bus_proveedor.get_info_x_num_cedula(IdEmpresa, ruc_proveedor);
                         var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
                         var Su_CodigoEstablecimiento = Convert.ToString(reader.GetValue(0)).Trim();
-                        
-                        cp_nota_DebCre_Info info = new cp_nota_DebCre_Info
-                        {
-                            IdEmpresa = IdEmpresa,
-                            IdCbteCble_Nota = IdCbteCble_Nota++,
-                            IdTipoCbte_Nota = Convert.ToInt32(info_cp_parametro.pa_TipoCbte_ND),
-                            DebCre = "D",
-                            IdTipoNota = "T_TIP_NOTA_INT",
-                            IdProveedor = info_proveedor.IdProveedor,
-                            IdSucursal = lst_sucursal.Where(q=> q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal,
-                            cn_fecha = Convert.ToDateTime(reader.GetValue(5)),
-                            Fecha_contable = Convert.ToDateTime(reader.GetValue(5)),
-                            cn_Fecha_vcto = Convert.ToDateTime(reader.GetValue(6)),
-                            cn_observacion = Convert.ToString(reader.GetValue(7)),
-                            cn_subtotal_iva = 0,
-                            cn_subtotal_siniva = Convert.ToDouble(reader.GetValue(4)),
-                            cn_baseImponible = 0,
-                            cn_Por_iva = 12,
-                            cn_valoriva = 0,
-                            cn_Ice_base = 0,
-                            cn_Ice_por = 0,
-                            cn_Ice_valor = 0,
-                            cn_Serv_por = 0,
-                            cn_Serv_valor = 0,
-                            cn_BaseSeguro = 0,
-                            cn_total = Convert.ToDecimal(reader.GetValue(4)),
-                            cn_vaCoa = "N",
-                            cod_nota = Convert.ToString(reader.GetValue(2)),
-                            IdUsuario = SessionFixed.IdUsuario,
-                            Fecha_Transac = DateTime.Now
-                        };
 
-                        Lista_NotaDebito.Add(info);
+                        if (info_proveedor != null)
+                        {
+                            cp_nota_DebCre_Info info = new cp_nota_DebCre_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdCbteCble_Nota = IdCbteCble_Nota++,
+                                IdTipoCbte_Nota = Convert.ToInt32(info_cp_parametro.pa_TipoCbte_ND),
+                                DebCre = "D",
+                                IdTipoNota = "T_TIP_NOTA_INT",
+                                IdProveedor = info_proveedor.IdProveedor,
+                                IdSucursal = lst_sucursal.Where(q => q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal,
+                                cn_fecha = Convert.ToDateTime(reader.GetValue(5)),
+                                Fecha_contable = Convert.ToDateTime(reader.GetValue(5)),
+                                cn_Fecha_vcto = Convert.ToDateTime(reader.GetValue(6)),
+                                cn_observacion = Convert.ToString(reader.GetValue(7)),
+                                cn_subtotal_iva = 0,
+                                cn_subtotal_siniva = Convert.ToDouble(reader.GetValue(4)),
+                                cn_baseImponible = 0,
+                                cn_Por_iva = 12,
+                                cn_valoriva = 0,
+                                cn_Ice_base = 0,
+                                cn_Ice_por = 0,
+                                cn_Ice_valor = 0,
+                                cn_Serv_por = 0,
+                                cn_Serv_valor = 0,
+                                cn_BaseSeguro = 0,
+                                cn_total = Convert.ToDecimal(reader.GetValue(4)),
+                                cn_vaCoa = "N",
+                                cod_nota = Convert.ToString(reader.GetValue(2)),
+                                IdUsuario = SessionFixed.IdUsuario,
+                                Fecha_Transac = DateTime.Now
+                            };
+
+                            Lista_NotaDebito.Add(info);
+                        }                        
                     }
                     else
                         cont++;
