@@ -275,7 +275,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
         private in_Ing_Egr_Inven_Info armar_movi_inven(cp_orden_giro_Info info, cp_orden_giro_x_in_Ing_Egr_Inven rel)
         {
             Entities_inventario db_inv = new Entities_inventario();
@@ -335,7 +334,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
         public bool anularDB(cp_orden_giro_Info info)
         {
             try
@@ -531,14 +529,15 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-        public List<cp_orden_giro_Info> get_lst_orden_giro_x_pagar(int IdEmpresa)
+        public List<cp_orden_giro_Info> get_lst_orden_giro_x_pagar(int IdEmpresa, decimal IdSolicitudPago)
         {
             try
             {
                 List<cp_orden_giro_Info> Lista = null;
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-
+                    if (IdSolicitudPago == 0)
+                    {
                     Lista = (from q in Context.vwcp_orden_giro_x_pagar
                              where q.IdEmpresa == IdEmpresa
                              & q.Saldo_OG > 0
@@ -566,6 +565,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  Saldo_OG = q.Saldo_OG,
                                  Fecha_Transac = q.co_FechaFactura_vct,
                                  nom_tipo_Documento = q.nom_tipo_Documento,
+                                 IdSolicitudPago = q.IdSolicitudPago,
                                  info_proveedor = new cp_proveedor_Info
                                  {
                                      IdPersona = q.IdPersona,
@@ -578,6 +578,48 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  },
 
                              }).ToList();
+
+                    }else
+                        Lista = (from q in Context.vwcp_orden_giro_x_pagar
+                                 where q.IdEmpresa == IdEmpresa
+                                 & q.Saldo_OG > 0 && q.IdSolicitudPago == IdSolicitudPago
+                                 orderby q.co_fechaOg descending
+                                 select new cp_orden_giro_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdCbteCble_Ogiro = q.IdCbteCble_Ogiro,
+                                     IdTipoCbte_Ogiro = q.IdTipoCbte_Ogiro,
+                                     IdOrden_giro_Tipo = q.IdOrden_giro_Tipo,
+                                     IdProveedor = q.IdProveedor,
+                                     co_fechaOg = q.co_fechaOg,
+                                     co_serie = q.co_serie,
+                                     co_factura = q.cod_Documento + "-" + q.co_serie + "-" + q.co_factura,
+                                     co_FechaFactura = q.co_FechaFactura,
+                                     co_observacion = q.co_observacion,
+                                     co_subtotal_iva = q.co_subtotal_iva,
+                                     co_subtotal_siniva = q.co_subtotal_siniva,
+                                     co_baseImponible = q.co_baseImponible,
+                                     co_Por_iva = q.co_Por_iva,
+                                     co_valoriva = q.co_valoriva,
+                                     co_total = q.co_total,
+                                     co_valorpagar = q.co_valorpagar,
+                                     Total_Pagado = q.Total_Pagado,
+                                     Saldo_OG = q.Saldo_OG,
+                                     Fecha_Transac = q.co_FechaFactura_vct,
+                                     nom_tipo_Documento = q.nom_tipo_Documento,
+                                     IdSolicitudPago = q.IdSolicitudPago,
+                                     info_proveedor = new cp_proveedor_Info
+                                     {
+                                         IdPersona = q.IdPersona,
+                                         info_persona = new Info.General.tb_persona_Info
+                                         {
+                                             pe_razonSocial = q.nom_proveedor,
+                                             IdPersona = q.IdPersona,
+                                             pe_nombreCompleto = q.nom_proveedor
+                                         }
+                                     },
+
+                                 }).ToList();
                 }
                 Lista.ForEach(item =>
                 {

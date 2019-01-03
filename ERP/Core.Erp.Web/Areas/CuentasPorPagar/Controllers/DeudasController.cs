@@ -155,8 +155,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region Aprobacion de facturas por proveedor
         public ActionResult Index3()
         {
+            cp_orden_giro_Info model = new cp_orden_giro_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
             Session["list_facturas_seleccionadas"] = null;
-            return View();
+            return View(model);
         }
         [ValidateInput(false)]
         public ActionResult GridViewPartial_aprobacion_facturas()
@@ -169,9 +173,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ActionResult GridViewPartial_facturas_con_saldos()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa);
-            Session["list_ordenes_giro"] = model;
+            List<cp_orden_giro_Info> model = (List<cp_orden_giro_Info>)Session["list_ordenes_giro"];            
             return PartialView("_GridViewPartial_facturas_con_saldos", model);
         }
         #endregion
@@ -660,6 +662,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
 
         #region json
+        public JsonResult GetListOrdenesPorPagar(int IdEmpresa = 0, decimal IdSolicitudPago = 0)
+        {
+            Session["list_ordenes_giro"] = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa, IdSolicitudPago);
+            
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
         public JsonResult calcular_cuotas(DateTime Fecha_inicio, int Num_cuotas = 0, int Dias_plazo = 0, double Total_a_pagar = 0, decimal IdTransaccionSession = 0)
         {
 
