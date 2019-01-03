@@ -429,7 +429,7 @@ namespace Core.Erp.Data.CuentasPorPagar
             }
         }
         
-        public List<cp_orden_pago_det_Info> Get_List_orden_pago_con_saldo(int IdEmpresa, string IdTipo_op, decimal IdProveedor, string IdEstado_Aprobacion, string IdUsuario)
+        public List<cp_orden_pago_det_Info> Get_List_orden_pago_con_saldo(int IdEmpresa, string IdTipo_op, decimal IdProveedor, string IdEstado_Aprobacion, string IdUsuario, decimal IdSolicitudPago)
         {
             try
             {
@@ -441,7 +441,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                     try
                     {
-                        Lista = (from q in Contex.spcp_Get_Data_orden_pago_con_cancelacion_data(IdEmpresa, 1, 99999, "PROVEE", IdProveedor, IdProveedor, IdEstado_Aprobacion, IdUsuario, false)
+                        Lista = (from q in Contex.spcp_Get_Data_orden_pago_con_cancelacion_data(IdEmpresa, 1, 99999, "PROVEE", IdProveedor, IdProveedor, IdEstado_Aprobacion, IdUsuario, false, IdSolicitudPago)
                                  where q.IdTipo_op == IdTipo_op
                                  select new
                                  cp_orden_pago_det_Info

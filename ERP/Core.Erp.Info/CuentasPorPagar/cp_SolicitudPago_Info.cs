@@ -33,5 +33,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public string GiradoA { get; set; }
     }
 }

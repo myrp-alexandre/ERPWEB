@@ -6,6 +6,7 @@ using DevExpress.XtraReports.UI;
 using Core.Erp.Bus.Reportes.Facturacion;
 using Core.Erp.Info.Reportes.Facturacion;
 using System.Collections.Generic;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Reportes.Facturacion
 {
@@ -32,6 +33,18 @@ namespace Core.Erp.Web.Reportes.Facturacion
             FAC_007_Bus bus_rpt = new FAC_007_Bus();
             List<FAC_007_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
             this.DataSource = lst_rpt;
+
+
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+            var empresa = bus_empresa.get_info(IdEmpresa);
+            lbl_empresa.Text = empresa.em_nombre;
+            lbl_direccion.Text = empresa.em_direccion;
+            lbl_telefono.Text = empresa.em_telefonos;
+            lbl_correo.Text = empresa.em_Email;
+            lbl_ruc.Text = empresa.em_ruc;
+
+            ImageConverter obj = new ImageConverter();
+            lbl_imagen.Image = (Image)obj.ConvertFrom(empresa.em_logo);
         }
     }
 }

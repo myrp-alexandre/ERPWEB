@@ -31,7 +31,8 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                         Solicitante = q.Solicitante,
                         Su_Descripcion = q.Su_Descripcion,
                         Valor = q.Valor,
-                        Nombre = q.Nombre
+                        Nombre = q.Nombre,
+                        GiradoA = q.GiradoA
                     }).ToList();
                 }
                 return Lista;

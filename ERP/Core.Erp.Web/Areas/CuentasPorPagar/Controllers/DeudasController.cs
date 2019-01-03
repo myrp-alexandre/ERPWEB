@@ -155,8 +155,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region Aprobacion de facturas por proveedor
         public ActionResult Index3()
         {
+            cp_orden_giro_Info model = new cp_orden_giro_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
             Session["list_facturas_seleccionadas"] = null;
-            return View();
+            return View(model);
         }
         [ValidateInput(false)]
         public ActionResult GridViewPartial_aprobacion_facturas()
@@ -169,9 +173,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public ActionResult GridViewPartial_facturas_con_saldos()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<cp_orden_giro_Info> model = new List<cp_orden_giro_Info>();
-            model = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa);
-            Session["list_ordenes_giro"] = model;
+            List<cp_orden_giro_Info> model = (List<cp_orden_giro_Info>)Session["list_ordenes_giro"];            
             return PartialView("_GridViewPartial_facturas_con_saldos", model);
         }
         #endregion
@@ -660,6 +662,63 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
 
         #region json
+        public JsonResult GetListOrdenesPorPagar(int IdEmpresa = 0, decimal IdSolicitudPago = 0)
+        {
+
+            string retorno = string.Empty;
+            var lst  = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa, IdSolicitudPago);
+
+            if (IdSolicitudPago != 0)
+            {
+                #region Agregar por solicitud
+                List<cp_orden_giro_aprobacion_Info> list_facturas_seleccionadas = new List<cp_orden_giro_aprobacion_Info>();
+                list_facturas_seleccionadas = Session["list_facturas_seleccionadas"] as List<cp_orden_giro_aprobacion_Info>;
+                if (list_facturas_seleccionadas == null)
+                    list_facturas_seleccionadas = new List<cp_orden_giro_aprobacion_Info>();
+
+                foreach (var item in lst)
+                {
+                    if (list_facturas_seleccionadas.Where(v => v.SecuencialID == item.SecuencialID).Count() == 0)// agrego si existe y no esta repetida
+                    {
+                        item.co_valorpagar = (double)item.Saldo_OG;
+
+                        list_facturas_seleccionadas.Add(new cp_orden_giro_aprobacion_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdTipoCbte_Ogiro = item.IdTipoCbte_Ogiro,
+                            IdCbteCble_Ogiro = item.IdCbteCble_Ogiro,
+                            co_factura = item.co_factura,
+                            co_fechaOg = item.co_fechaOg,
+                            co_FechaFactura_vct = item.co_FechaFactura_vct,
+                            Tipo_Vcto = item.Tipo_Vcto,
+                            Saldo_OG = item.Saldo_OG,
+                            co_valorpagar = item.co_valorpagar,
+                            IdProveedor = item.IdProveedor,
+                            SecuencialID = item.SecuencialID,
+                            nom_tipo_Documento = item.nom_tipo_Documento,
+                            info_proveedor = new cp_proveedor_Info
+                            {
+                                info_persona = new tb_persona_Info
+                                {
+                                    pe_nombreCompleto = item.info_proveedor.info_persona.pe_nombreCompleto
+                                }
+                            }
+                        });
+                    }
+
+                    Session["list_facturas_seleccionadas"] = list_facturas_seleccionadas;
+                }
+                #endregion
+                retorno = "N";
+            }
+            else
+            {
+                Session["list_ordenes_giro"] = lst;
+                retorno = "S";
+            }
+
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult calcular_cuotas(DateTime Fecha_inicio, int Num_cuotas = 0, int Dias_plazo = 0, double Total_a_pagar = 0, decimal IdTransaccionSession = 0)
         {
 

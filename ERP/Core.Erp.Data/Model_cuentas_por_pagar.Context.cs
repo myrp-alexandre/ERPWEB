@@ -50,7 +50,6 @@ namespace Core.Erp.Data
         public DbSet<vwcp_proveedor_consulta> vwcp_proveedor_consulta { get; set; }
         public DbSet<vwcp_nota_DebCre> vwcp_nota_DebCre { get; set; }
         public DbSet<cp_proveedor_clase> cp_proveedor_clase { get; set; }
-        public DbSet<vwcp_orden_giro_x_pagar> vwcp_orden_giro_x_pagar { get; set; }
         public DbSet<cp_orden_giro_x_in_Ing_Egr_Inven> cp_orden_giro_x_in_Ing_Egr_Inven { get; set; }
         public DbSet<cp_parametros> cp_parametros { get; set; }
         public DbSet<vwcp_retencion_det> vwcp_retencion_det { get; set; }
@@ -59,12 +58,34 @@ namespace Core.Erp.Data
         public DbSet<vwcp_orden_pago> vwcp_orden_pago { get; set; }
         public DbSet<cp_orden_giro_det> cp_orden_giro_det { get; set; }
         public DbSet<vwcp_orden_giro_det> vwcp_orden_giro_det { get; set; }
-        public DbSet<cp_SolicitudPago> cp_SolicitudPago { get; set; }
         public DbSet<cp_proveedor> cp_proveedor { get; set; }
         public DbSet<vwcp_orden_giro> vwcp_orden_giro { get; set; }
         public DbSet<cp_orden_giro> cp_orden_giro { get; set; }
+        public DbSet<vwcp_orden_giro_x_pagar> vwcp_orden_giro_x_pagar { get; set; }
+        public DbSet<cp_SolicitudPago> cp_SolicitudPago { get; set; }
     
-        public virtual ObjectResult<spcp_Get_Data_orden_pago_con_cancelacion_data_Result> spcp_Get_Data_orden_pago_con_cancelacion_data(Nullable<int> idEmpresa, Nullable<decimal> idPersona_ini, Nullable<decimal> idPersona_fin, string idTipoPersona, Nullable<decimal> idEntidad_ini, Nullable<decimal> idEntidad_fin, string idEstado_Aprobacion, string idUsuario, Nullable<bool> mostrar_saldo_0)
+        public virtual ObjectResult<spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result> spcp_Get_Data_orden_pago_con_cancelacion_x_pago(Nullable<int> idEmpresa_pago, Nullable<int> idTipoCbte_pago, Nullable<decimal> idCbteCble_pago, string idUsuario)
+        {
+            var idEmpresa_pagoParameter = idEmpresa_pago.HasValue ?
+                new ObjectParameter("IdEmpresa_pago", idEmpresa_pago) :
+                new ObjectParameter("IdEmpresa_pago", typeof(int));
+    
+            var idTipoCbte_pagoParameter = idTipoCbte_pago.HasValue ?
+                new ObjectParameter("IdTipoCbte_pago", idTipoCbte_pago) :
+                new ObjectParameter("IdTipoCbte_pago", typeof(int));
+    
+            var idCbteCble_pagoParameter = idCbteCble_pago.HasValue ?
+                new ObjectParameter("IdCbteCble_pago", idCbteCble_pago) :
+                new ObjectParameter("IdCbteCble_pago", typeof(decimal));
+    
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result>("spcp_Get_Data_orden_pago_con_cancelacion_x_pago", idEmpresa_pagoParameter, idTipoCbte_pagoParameter, idCbteCble_pagoParameter, idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<spcp_Get_Data_orden_pago_con_cancelacion_data_Result> spcp_Get_Data_orden_pago_con_cancelacion_data(Nullable<int> idEmpresa, Nullable<decimal> idPersona_ini, Nullable<decimal> idPersona_fin, string idTipoPersona, Nullable<decimal> idEntidad_ini, Nullable<decimal> idEntidad_fin, string idEstado_Aprobacion, string idUsuario, Nullable<bool> mostrar_saldo_0, Nullable<decimal> idSolicitudPago)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
                 new ObjectParameter("IdEmpresa", idEmpresa) :
@@ -102,28 +123,11 @@ namespace Core.Erp.Data
                 new ObjectParameter("mostrar_saldo_0", mostrar_saldo_0) :
                 new ObjectParameter("mostrar_saldo_0", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spcp_Get_Data_orden_pago_con_cancelacion_data_Result>("spcp_Get_Data_orden_pago_con_cancelacion_data", idEmpresaParameter, idPersona_iniParameter, idPersona_finParameter, idTipoPersonaParameter, idEntidad_iniParameter, idEntidad_finParameter, idEstado_AprobacionParameter, idUsuarioParameter, mostrar_saldo_0Parameter);
-        }
+            var idSolicitudPagoParameter = idSolicitudPago.HasValue ?
+                new ObjectParameter("IdSolicitudPago", idSolicitudPago) :
+                new ObjectParameter("IdSolicitudPago", typeof(decimal));
     
-        public virtual ObjectResult<spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result> spcp_Get_Data_orden_pago_con_cancelacion_x_pago(Nullable<int> idEmpresa_pago, Nullable<int> idTipoCbte_pago, Nullable<decimal> idCbteCble_pago, string idUsuario)
-        {
-            var idEmpresa_pagoParameter = idEmpresa_pago.HasValue ?
-                new ObjectParameter("IdEmpresa_pago", idEmpresa_pago) :
-                new ObjectParameter("IdEmpresa_pago", typeof(int));
-    
-            var idTipoCbte_pagoParameter = idTipoCbte_pago.HasValue ?
-                new ObjectParameter("IdTipoCbte_pago", idTipoCbte_pago) :
-                new ObjectParameter("IdTipoCbte_pago", typeof(int));
-    
-            var idCbteCble_pagoParameter = idCbteCble_pago.HasValue ?
-                new ObjectParameter("IdCbteCble_pago", idCbteCble_pago) :
-                new ObjectParameter("IdCbteCble_pago", typeof(decimal));
-    
-            var idUsuarioParameter = idUsuario != null ?
-                new ObjectParameter("IdUsuario", idUsuario) :
-                new ObjectParameter("IdUsuario", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result>("spcp_Get_Data_orden_pago_con_cancelacion_x_pago", idEmpresa_pagoParameter, idTipoCbte_pagoParameter, idCbteCble_pagoParameter, idUsuarioParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spcp_Get_Data_orden_pago_con_cancelacion_data_Result>("spcp_Get_Data_orden_pago_con_cancelacion_data", idEmpresaParameter, idPersona_iniParameter, idPersona_finParameter, idTipoPersonaParameter, idEntidad_iniParameter, idEntidad_finParameter, idEstado_AprobacionParameter, idUsuarioParameter, mostrar_saldo_0Parameter, idSolicitudPagoParameter);
         }
     }
 }

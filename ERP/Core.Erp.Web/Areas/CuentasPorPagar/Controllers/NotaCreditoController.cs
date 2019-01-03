@@ -298,7 +298,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 string IdTipo_op = cl_enumeradores.eTipoOrdenPago.FACT_PROVEE.ToString();
                 string IdUsuario = SessionFixed.IdUsuario;
-                Session["list_op_por_proveedor"] = bus_orden_pago_cancelaciones.get_list_con_saldo(IdEmpresa,0,"PROVEE",IdProveedor, "",IdUsuario,false);
+                Session["list_op_por_proveedor"] = bus_orden_pago_cancelaciones.get_list_con_saldo(IdEmpresa,0,"PROVEE",IdProveedor, "",IdUsuario,false,0);
                 return Json("", JsonRequestBehavior.AllowGet);
             }
             catch (Exception)

@@ -14,7 +14,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     [SessionTimeout]
     public class BancoReportesController : Controller
     {
+        #region Variables
         ba_Cbte_Ban_Bus bus_cbte = new ba_Cbte_Ban_Bus();
+        ba_Banco_Cuenta_Bus bus_banco = new ba_Banco_Cuenta_Bus();
+        string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Cheque.repx";
+        #endregion
+
         #region Metodos ComboBox bajo demanda
 
         public ActionResult CmbPersona_Banco()
@@ -34,6 +39,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
 
         #endregion
+
         public ActionResult BAN_001( int IdTipoCbte = 0, decimal IdCbteCble = 0)
         {
             BAN_001_Rpt model = new BAN_001_Rpt();
@@ -74,13 +80,23 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
-        public ActionResult BAN_005(int IdTipocbte = 0, decimal IdCbteCble = 0)
-        {
+        public ActionResult BAN_005(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0, int IdBanco = 0)
+       {
             BAN_005_Rpt model = new BAN_005_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #region Cargo diseño desde base
+            var banco = bus_banco.get_info(IdEmpresa, IdBanco);
+            if (banco.ReporteCheque != null && banco.ReporteCheque.Length > 0)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, banco.ReporteCheque);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            model.p_IdEmpresa.Value = IdEmpresa;
             model.p_IdTipocbte.Value = IdTipocbte;
             model.p_IdCbteCble.Value = IdCbteCble;
-            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipocbte, IdCbteCble, "ESTCBENT");
+
+            bus_cbte.modificarDB_EstadoCheque(IdEmpresa, IdTipocbte, IdCbteCble, "ESTCBENT");
             return View(model);
         }
         public ActionResult BAN_005_Masivo()
@@ -101,6 +117,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdBanco.Value = model.IdBanco;
             cargar_banco(Convert.ToInt32(SessionFixed.IdEmpresa));
             bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), 0, 0, "ESTCBENT");
+            #region Cargo diseño desde base
+            if (model.IdBanco != 0)
+            {
+                var banco = bus_banco.get_info(model.IdEmpresa, model.IdBanco);
+                System.IO.File.WriteAllBytes(RootReporte, banco.ReporteChequeComprobante);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
             ViewBag.Report = report;
             return View(model);
         }
@@ -115,22 +139,40 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_NumHasta.Value = model.NumHasta;
             report.p_IdBanco.Value = model.IdBanco;
             bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), 0, 0, "ESTCBENT");
+            #region Cargo diseño desde base
+            if (model.IdBanco != 0)
+            {
+                var banco = bus_banco.get_info(model.IdEmpresa, model.IdBanco);
+                System.IO.File.WriteAllBytes(RootReporte, banco.ReporteChequeComprobante);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
             ViewBag.Report = report;
             cargar_banco(Convert.ToInt32(SessionFixed.IdEmpresa));
             return View(model);
         }
-        public ActionResult BAN_006(int IdTipoCbte = 0, decimal IdCbteCble = 0)
-        {
+        public ActionResult BAN_006(int IdEmpresa = 0, int IdTipoCbte = 0, decimal IdCbteCble = 0, int IdBanco = 0)
+        {                        
             BAN_006_Rpt model = new BAN_006_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #region Cargo diseño desde base
+            var banco = bus_banco.get_info(IdEmpresa, IdBanco);
+            if (banco.ReporteChequeComprobante != null && banco.ReporteChequeComprobante.Length > 0)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, banco.ReporteChequeComprobante);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            model.p_IdEmpresa.Value = IdEmpresa;
             model.p_IdTipoCbte.Value = IdTipoCbte;
-            model.p_IdCbteCble.Value = IdCbteCble;
-            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), IdTipoCbte, IdCbteCble, "ESTCBENT");
+            model.p_IdCbteCble.Value = IdCbteCble;            
+
+            bus_cbte.modificarDB_EstadoCheque(IdEmpresa, IdTipoCbte, IdCbteCble, "ESTCBENT");
             return View(model);
         }
         private void cargar_banco(int IdEmpresa)
         {
-            ba_Banco_Cuenta_Bus bus_banco = new ba_Banco_Cuenta_Bus();
+            
             var lst_banco = bus_banco.get_list(IdEmpresa, false);
             lst_banco.Add(new Info.Banco.ba_Banco_Cuenta_Info
             {
