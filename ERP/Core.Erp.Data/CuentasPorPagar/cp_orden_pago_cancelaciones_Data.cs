@@ -178,9 +178,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  Fecha_Fa_Prov = q.Fecha_Fa_Prov,
                                  Fecha_Venc_Fac_Prov = q.Fecha_Venc_Fac_Prov,
                                  Observacion = q.Observacion,
-                                 pe_nombreCompleto = q.Nom_Beneficiario,
+                                 //pe_nombreCompleto = q.Nom_Beneficiario,
                                  IdCtaCble = q.IdCtaCble,
-                                 MontoAplicado = q.Valor_a_pagar
+                                 MontoAplicado = q.Valor_a_pagar,
+                                 pe_nombreCompleto = q.Girar_Cheque_a
                              }).ToList();
                 }
 

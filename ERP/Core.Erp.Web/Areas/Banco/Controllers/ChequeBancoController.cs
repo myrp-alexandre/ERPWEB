@@ -360,12 +360,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (IDs != "")
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                decimal IdEntidad = Convert.ToDecimal(SessionFixed.IdEntidad);
-                List<cp_orden_pago_cancelaciones_Info> lst_x_cruzar;
-                if (IdEntidad == 0)
-                    lst_x_cruzar = new List<cp_orden_pago_cancelaciones_Info>();
-                else
-                    lst_x_cruzar = ListPorCruzar.get_list(IdTransaccionSession);
+                var lst_x_cruzar = ListPorCruzar.get_list(IdTransaccionSession);
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
@@ -396,15 +391,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (IdSolicitudPago == 0)
             {
                 ListPorCruzar.set_list(lst, IdTransaccionSession);
-                retorno = "S";
             }
             else
             {
                 foreach (var item in lst)
                 {
+                    retorno = item.pe_nombreCompleto;
                     List_op.AddRow(item, IdTransaccionSession);
                 }
-                retorno = "N";
             }
             return Json(retorno,JsonRequestBehavior.AllowGet);
         }
@@ -496,7 +490,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
                 HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<cp_orden_pago_cancelaciones_Info>)HttpContext.Current.Session["cp_orden_pago_cancelaciones_Info" + IdTransaccionSession.ToString()];
+            return (List<cp_orden_pago_cancelaciones_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
         public void set_list(List<cp_orden_pago_cancelaciones_Info> list, decimal IdTransaccionSession)

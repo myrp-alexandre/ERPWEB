@@ -95,9 +95,9 @@
             });
             column.Width = Unit.Percentage(5);
         });
-        settings.Columns.Add("IdCbteCble", "ID").Width = Unit.Percentage(5);
-        settings.Columns.Add("cb_Cheque", "# Cheque").Width = Unit.Percentage(7);
-        settings.Columns.Add("cb_giradoA", "Beneficiario").Width = Unit.Percentage(30);
+        settings.Columns.Add("IdCbteCble", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("cb_Cheque", "# Cheque").Width = Unit.Percentage(10);
+        settings.Columns.Add("cb_giradoA", "Beneficiario").Width = Unit.Percentage(40);
         settings.Columns.Add(column =>
         {
             column.FieldName = "cb_Fecha";
@@ -110,7 +110,7 @@
             column.FieldName = "cb_Valor";
             column.Caption = "Valor";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
-            column.Width = Unit.Percentage(8);
+            column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add(column =>
         {

@@ -70,7 +70,8 @@
         $("#btn_guardar").disabled = false;
     }
     function fac_con_saldo()
-    {  
+    {
+        selectedIDs = "";
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSolicitudPago : $("#IdSolicitudPago").val()
@@ -85,14 +86,16 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                if (data == "S") {
+                    GridViewPartial_facturas_con_saldos.PerformCallback();
+                    $("#fac_con_saldo").modal("show");
+                    GridViewPartial_facturas_con_saldos.UnselectRows();
+                } else
+                    GridViewPartial_aprobacion_facturas.PerformCallback();
             },
             error: function (error) {
             }
-        });   
-    
-        GridViewPartial_facturas_con_saldos.PerformCallback();
-        $("#fac_con_saldo").modal("show");        
-        GridViewPartial_facturas_con_saldos.UnselectRows();
+        });
     };
 
     function cerrar() {

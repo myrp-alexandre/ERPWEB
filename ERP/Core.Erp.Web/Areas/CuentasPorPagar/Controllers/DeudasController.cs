@@ -664,6 +664,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region json
         public JsonResult GetListOrdenesPorPagar(int IdEmpresa = 0, decimal IdSolicitudPago = 0)
         {
+
+            string retorno = string.Empty;
             var lst  = bus_orden_giro.get_lst_orden_giro_x_pagar(IdEmpresa, IdSolicitudPago);
 
             if (IdSolicitudPago != 0)
@@ -707,11 +709,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     Session["list_facturas_seleccionadas"] = list_facturas_seleccionadas;
                 }
                 #endregion
+                retorno = "N";
             }
             else
+            {
                 Session["list_ordenes_giro"] = lst;
+                retorno = "S";
+            }
 
-            return Json("", JsonRequestBehavior.AllowGet);
+            return Json(retorno, JsonRequestBehavior.AllowGet);
         }
         public JsonResult calcular_cuotas(DateTime Fecha_inicio, int Num_cuotas = 0, int Dias_plazo = 0, double Total_a_pagar = 0, decimal IdTransaccionSession = 0)
         {
