@@ -6,14 +6,16 @@ using DevExpress.XtraReports.UI;
 using Core.Erp.Bus.Reportes.Facturacion;
 using Core.Erp.Info.Reportes.Facturacion;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Erp.Web.Reportes.Facturacion
 {
     public partial class FAC_010_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
-        public List<FAC_010_Info> Lista { get; set; }
-    
-    public string usuario { get; set; }
+        List<FAC_010_Info> Lista = new List<FAC_010_Info>();
+        List<FAC_010_Info> Lista_detalle = new List<FAC_010_Info>();
+
+        public string usuario { get; set; }
         public string empresa { get; set; }
         public FAC_010_Rpt()
         {
@@ -33,12 +35,59 @@ namespace Core.Erp.Web.Reportes.Facturacion
 
             FAC_010_Bus bus_rpt = new FAC_010_Bus();
             List<FAC_010_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, fecha_ini, fech_fin);
+
+            Lista = (from q in lst_rpt
+                     group q by new
+                          {
+                              q.IdEmpresa,
+                              q.IdSucursal,
+                              q.IdCatalogo_FormaPago,
+                              q.NombreFormaPago,
+                              q.Ve_Vendedor
+                          } into Area
+                          select new FAC_010_Info
+                          {
+                              vt_total = Area.Sum(q=>q.vt_total),
+                              IdEmpresa = Area.Key.IdEmpresa,
+                              IdSucursal = Area.Key.IdSucursal,
+                              IdCatalogo_FormaPago = Area.Key.IdCatalogo_FormaPago,
+                              NombreFormaPago = Area.Key.NombreFormaPago,
+                              Ve_Vendedor = Area.Key.Ve_Vendedor
+                          }).ToList();
+
+            Lista_detalle = (from q in lst_rpt
+                     group q by new
+                     {
+                         q.IdEmpresa,
+                         q.IdSucursal,
+                         q.IdCatalogo_FormaPago,
+                         q.NombreFormaPago,
+                         q.vt_NumFactura,
+                         q.vt_fecha,
+                         q.vt_total
+                     } into Factura
+                     select new FAC_010_Info
+                     {
+                         IdEmpresa = Factura.Key.IdEmpresa,
+                         IdSucursal = Factura.Key.IdSucursal,
+                         IdCatalogo_FormaPago = Factura.Key.IdCatalogo_FormaPago,
+                         NombreFormaPago = Factura.Key.NombreFormaPago,                         
+                         vt_NumFactura = Factura.Key.vt_NumFactura,
+                         vt_fecha = Factura.Key.vt_fecha,
+                         vt_total = Factura.Key.vt_total
+                     }).ToList();
+
             this.DataSource = lst_rpt;
         }
 
         private void resumen_forma_pago_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             ((XRSubreport)sender).ReportSource.DataSource = Lista;
+        }
+
+        private void detalle_firma_pago_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.DataSource = Lista_detalle;
         }
     }
 }

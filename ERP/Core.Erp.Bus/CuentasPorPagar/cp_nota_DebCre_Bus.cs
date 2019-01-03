@@ -1,6 +1,8 @@
 ﻿using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.General;
+using Core.Erp.Data;
 using Core.Erp.Data.CuentasPorPagar;
+using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
@@ -15,7 +17,9 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_nota_DebCre_Data data = new cp_nota_DebCre_Data();
         ct_cbtecble_Bus bus_contabilidad = new ct_cbtecble_Bus();
         cp_cuotas_x_doc_Bus bus_cuotas = new cp_cuotas_x_doc_Bus();
-        ct_cbtecble_det_Bus bus_comrpbante_det = new ct_cbtecble_det_Bus();
+        ct_cbtecble_Bus bus_comprobante = new ct_cbtecble_Bus();
+        ct_cbtecble_det_Bus bus_comprobante_det = new ct_cbtecble_det_Bus();
+        cp_parametros_Bus bus_cp_parametro = new cp_parametros_Bus();
         tb_sis_Documento_Tipo_Talonario_Bus bus_talonario = new tb_sis_Documento_Tipo_Talonario_Bus();
         tb_sis_Documento_Tipo_Talonario_Info info_talonario=new tb_sis_Documento_Tipo_Talonario_Info();
         cp_orden_pago_cancelaciones_Data data_cancelacion = new cp_orden_pago_cancelaciones_Data();
@@ -203,7 +207,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 cp_nota_DebCre_Info info = new cp_nota_DebCre_Info();
                 info = data.get_info(IdEmpresa, IdTipoCbte_Nota, IdCbteCble_Nota);
                 info.info_comrobante = bus_contabilidad.get_info(IdEmpresa, IdTipoCbte_Nota, IdCbteCble_Nota);
-                info.info_comrobante.lst_ct_cbtecble_det = bus_comrpbante_det.get_list(IdEmpresa, IdTipoCbte_Nota, IdCbteCble_Nota);
+                info.info_comrobante.lst_ct_cbtecble_det = bus_comprobante_det.get_list(IdEmpresa, IdTipoCbte_Nota, IdCbteCble_Nota);
              
                 return info;
             }
@@ -345,7 +349,85 @@ namespace Core.Erp.Bus.CuentasPorPagar
         
 }
 
-    
+        public bool guardar_importacionDB(cp_nota_DebCre_Info info)
+        {
+            try
+            {
+                cp_proveedor_Bus bus_proveedor = new cp_proveedor_Bus();
+                var prov = bus_proveedor.get_info(info.IdEmpresa, info.IdProveedor);
+                var cp_parametros = bus_cp_parametro.get_info(info.IdEmpresa);
+                info.info_comrobante = new ct_cbtecble_Info();
+
+                ct_cbtecble_Info diario = new ct_cbtecble_Info
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdTipoCbte = info.IdTipoCbte_Nota,
+                    IdCbteCble = info.IdCbteCble_Nota,
+                    cb_Fecha = info.cn_fecha,
+                    cb_Observacion = info.cn_observacion,
+                    IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0')),
+                    IdSucursal = info.IdSucursal,
+                    cb_FechaTransac = DateTime.Now,
+                    cb_Estado = "A"
+                };
+
+                if (prov != null)
+                {
+                    if (info.cn_observacion == null)
+                        info.cn_observacion = "";
+                    diario.cb_Observacion = "Prov: " + prov.info_persona.pe_nombreCompleto + " " + info.cn_observacion;
+
+                }
+                else
+                    diario.cb_Observacion = info.cn_observacion;
+
+                info.info_comrobante = diario;
+                info.info_comrobante.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
+
+                ct_cbtecble_det_Info diario_det = new ct_cbtecble_det_Info
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdTipoCbte = diario.IdTipoCbte,
+                    IdCbteCble = diario.IdCbteCble,
+                    secuencia = 1,
+                    IdCtaCble = prov.IdCtaCble_CXP,
+                    dc_Valor = Math.Round(Convert.ToDouble(info.cn_total), 2, MidpointRounding.AwayFromZero),
+                };
+                info.info_comrobante.lst_ct_cbtecble_det.Add(diario_det);
+
+                ct_cbtecble_det_Info diario_det_ = new ct_cbtecble_det_Info
+                {
+                    IdEmpresa = diario.IdEmpresa,
+                    IdTipoCbte = diario.IdTipoCbte,
+                    IdCbteCble = diario.IdCbteCble,
+                    secuencia = 2,
+                    IdCtaCble = prov.IdCtaCble_CXP,
+                    dc_Valor = Math.Round(Convert.ToDouble(info.cn_total), 2, MidpointRounding.AwayFromZero) * -1
+                };
+                info.info_comrobante.lst_ct_cbtecble_det.Add(diario_det_);
+
+
+                if (bus_contabilidad.guardarDB(info.info_comrobante))
+                {
+                    info.IdTipoCbte_Nota = info.info_comrobante.IdTipoCbte;
+                    info.IdCbteCble_Nota = info.info_comrobante.IdCbteCble;
+                    info.Estado = "A";
+                    info.cn_vaCoa = "N";
+                    info.IdTipoNota = info.IdTipoNota;
+                    info.nom_pc = " ";
+                    info.ip = " ";
+                    if (data.guardarDB(info))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }
