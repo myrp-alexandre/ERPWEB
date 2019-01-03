@@ -8,7 +8,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script>
 
+    $("#GiradoA").val("");
+
+</script>
 @using (Html.BeginForm("Modificar", "SolicitudPago", FormMethod.Post, new { @class = "form", @role = "form" }))
 {    @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdSolicitud)
@@ -63,6 +67,13 @@
                     <label for="IdProveedor">Proveedor*</label>
                     @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="GiradoA">Girado a*</label>
+                    @Html.TextBoxFor(q => q.GiradoA, new { @class = "form-control", @id = "GiradoA" })
+                    @Html.ValidationMessageFor(q => q.GiradoA, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">

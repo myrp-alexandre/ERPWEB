@@ -21,6 +21,8 @@
         settings.Properties.Columns.Add("pe_cedulaRuc", "RUC", 20);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Proveedor", 70);
         settings.Properties.FilterMinLength = 3;
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e) {$('#GiradoA').val(s.GetText());}";
+
     })
     .BindList(new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.SolicitudPagoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.CuentasPorPagar.Controllers.SolicitudPagoController().get_info_bajo_demanda)
     .Bind(Model.GetType() == typeof(Core.Erp.Info.CuentasPorPagar.cp_SolicitudPago_Info) ? "" : (Model == 0 ? "" : Model));

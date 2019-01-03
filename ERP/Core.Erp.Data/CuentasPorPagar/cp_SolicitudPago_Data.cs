@@ -82,7 +82,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Fecha = Entity.Fecha,
                         Solicitante = Entity.Solicitante,
                         Valor = Entity.Valor,
-                        IdUsuarioCreacion = Entity.IdUsuarioCreacion
+                        IdUsuarioCreacion = Entity.IdUsuarioCreacion,
+                        GiradoA = Entity.GiradoA
                     };
                 }
                 return info;
@@ -132,7 +133,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Solicitante = info.Solicitante,
                         Valor = info.Valor,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
-                        FechaCreacion = DateTime.Now
+                        FechaCreacion = DateTime.Now,
+                        GiradoA = info.GiradoA
 
                     });
                     Context.SaveChanges();
@@ -164,6 +166,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     Entity.Valor = info.Valor;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
+                    Entity.GiradoA = info.GiradoA;
                     Context.SaveChanges();
                 }
                 return true;
