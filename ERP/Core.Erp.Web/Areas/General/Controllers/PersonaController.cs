@@ -66,7 +66,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             else
             {
-                ViewBag.mensaje = "Número identificación inválida";
+                ViewBag.mensaje = "Número de identificación inválida";
                 cargar_combos();
                 return View(model);
             }

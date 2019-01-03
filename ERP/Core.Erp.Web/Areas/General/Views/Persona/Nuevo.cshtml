@@ -46,9 +46,7 @@
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger", @id = "pe_cedulaRuc" })
                 </div>
-                <div class="alert alert-warning alert-dismissible" id="error_documento">
-                    <i class="icon fa fa-warning"></i><label>Número de documento incorrecto</label>
-                </div>
+                <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
             </div>
         </div>
     </div>
@@ -213,7 +211,7 @@
 
 <script>
     $(function () {
-        $("error_documento").hide();
+        $("#error_documento").hide();
         $('#pe_fechaNacimiento').datepicker({
             autoclose: true
         })
@@ -266,8 +264,7 @@
                     $("#pe_Naturaleza").val(data.return_naturaleza);
                 }
                 else {
-                    $("error_documento").show();
-                    //alert("documento incorrecto");
+                    $("#error_documento").show();
                 }                                
             },
             error: function (error) {
