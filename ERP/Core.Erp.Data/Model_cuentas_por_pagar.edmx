@@ -576,6 +576,7 @@
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
           <Property Name="Solicitante" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="GiradoA" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="50" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="50" />
@@ -3567,6 +3568,7 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
           <Property Name="Estado" Type="Boolean" Nullable="false" />
           <Property Name="Valor" Type="Double" Nullable="false" />
           <Property Name="Solicitante" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="GiradoA" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -4549,6 +4551,7 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="GiradoA" ColumnName="GiradoA" />
                 <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />

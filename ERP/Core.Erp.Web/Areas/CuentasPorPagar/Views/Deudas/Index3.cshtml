@@ -1,33 +1,8 @@
 ﻿@model Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info
 <script type="text/javascript">
 
-    function fac_con_saldo()
-    {        
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSolicitudPago = $("#IdSolicitudPago").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetListOrdenesPorPagar", "Deudas", new { Area = "CuentasPorPagar" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });        
-        GridViewPartial_facturas_con_saldos.PerformCallback();
-        $("#fac_con_saldo").modal("show");        
-        GridViewPartial_facturas_con_saldos.UnselectRows();
-    };
-    function cerrar() {
-        $("#fac_con_saldo").modal("hide");
-    };
+    
+   
 
 
 
@@ -94,7 +69,35 @@
         });
         $("#btn_guardar").disabled = false;
     }
+    function fac_con_saldo()
+    {  
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSolicitudPago : $("#IdSolicitudPago").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetListOrdenesPorPagar", "Deudas", new { Area = "CuentasPorPagar" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });   
+    
+        GridViewPartial_facturas_con_saldos.PerformCallback();
+        $("#fac_con_saldo").modal("show");        
+        GridViewPartial_facturas_con_saldos.UnselectRows();
+    };
 
+    function cerrar() {
+        $("#fac_con_saldo").modal("hide");
+    };
     
 </script>
 
@@ -114,7 +117,7 @@
         <div class="col-md-12">
             <div class="col-md-1">
                 <div class="form-group">
-                    @Html.TextBoxFor(q=>q.IdSolicitudPago, new { @Id= "IdSolicitudPago", @class = "form-control" })
+                    @Html.TextBoxFor(q=>q.IdSolicitudPago, new { @Id= "IdSolicitudPago", @class = "form-control", @placeholder = "# Solicitud"})
                 </div>
             </div>
             <div class="col-md-1">

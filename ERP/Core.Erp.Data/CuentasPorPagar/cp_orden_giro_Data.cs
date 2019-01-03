@@ -536,7 +536,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 List<cp_orden_giro_Info> Lista = null;
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    if (IdSolicitudPago == null)
+                    if (IdSolicitudPago == 0)
                     {
                     Lista = (from q in Context.vwcp_orden_giro_x_pagar
                              where q.IdEmpresa == IdEmpresa
