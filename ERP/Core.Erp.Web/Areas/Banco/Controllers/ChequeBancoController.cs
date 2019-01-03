@@ -368,7 +368,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 if (IdEntidad == 0)
                     lst_x_cruzar = new List<cp_orden_pago_cancelaciones_Info>();
                 else
-                    lst_x_cruzar = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, SessionFixed.TipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false);
+                    lst_x_cruzar = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, SessionFixed.TipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false,0);
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
@@ -394,7 +394,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public JsonResult GetListPorCruzar(int IdEmpresa = 0, decimal IdTransaccion = 0, string IdTipoPersona = "", decimal IdEntidad = 0, decimal IdSolicitudPago = 0)
         {
-            var lst = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, IdTipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false);
+            var lst = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, IdTipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false,IdSolicitudPago);
             if(IdSolicitudPago == 0)
                ListPorCruzar.set_list(lst, IdTransaccion);
             else
