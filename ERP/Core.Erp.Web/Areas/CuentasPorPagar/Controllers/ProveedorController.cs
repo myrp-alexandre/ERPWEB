@@ -370,8 +370,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                             IdClaseProveedor = Convert.ToInt32(reader.GetValue(0)),
                             cod_clase_proveedor = Convert.ToString(reader.GetValue(1)),
                             descripcion_clas_prove = Convert.ToString(reader.GetValue(2)),
-                            IdCtaCble_gasto = Convert.ToString(reader.GetValue(3)),
-                            IdCtaCble_CXP = Convert.ToString(reader.GetValue(4)),
+                            IdCtaCble_gasto = null,//Convert.ToString(reader.GetValue(3)),
+                            IdCtaCble_CXP = null,//Convert.ToString(reader.GetValue(4)),
                             IdUsuario = SessionFixed.IdUsuario
                         };
                         Lista_ClaseProveedor.Add(info);
