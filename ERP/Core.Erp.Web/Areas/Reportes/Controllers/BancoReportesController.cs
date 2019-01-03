@@ -83,10 +83,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult BAN_005(int IdEmpresa = 0, int IdTipocbte = 0, decimal IdCbteCble = 0, int IdBanco = 0)
        {
             BAN_005_Rpt model = new BAN_005_Rpt();
-            model.p_IdEmpresa.Value = IdEmpresa;
-            model.p_IdTipocbte.Value = IdTipocbte;
-            model.p_IdCbteCble.Value = IdCbteCble;
-            
             #region Cargo diseño desde base
             var banco = bus_banco.get_info(IdEmpresa, IdBanco);
             if (banco.ReporteCheque != null && banco.ReporteCheque.Length > 0)
@@ -95,6 +91,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 model.LoadLayout(RootReporte);
             }
             #endregion
+
+            model.p_IdEmpresa.Value = IdEmpresa;
+            model.p_IdTipocbte.Value = IdTipocbte;
+            model.p_IdCbteCble.Value = IdCbteCble;
 
             bus_cbte.modificarDB_EstadoCheque(IdEmpresa, IdTipocbte, IdCbteCble, "ESTCBENT");
             return View(model);
@@ -163,7 +163,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             }
             #endregion
 
-            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdEmpresa.Value = IdEmpresa;
             model.p_IdTipoCbte.Value = IdTipoCbte;
             model.p_IdCbteCble.Value = IdCbteCble;            
 
