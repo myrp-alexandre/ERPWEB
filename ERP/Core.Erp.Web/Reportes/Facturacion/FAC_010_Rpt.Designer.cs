@@ -83,7 +83,6 @@
             this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
@@ -94,7 +93,6 @@
             this.xrTableCell32 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell33 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
-            this.resumen_forma_pago = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable6 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow10 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell25 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -102,14 +100,17 @@
             this.xrTableCell27 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell28 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell34 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.detalle_firma_pago = new DevExpress.XtraReports.UI.XRSubreport();
+            this.resumen_forma_pago = new DevExpress.XtraReports.UI.XRSubreport();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -187,10 +188,10 @@
             this.xrTableCell18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdCliente]")});
             this.xrTableCell18.Name = "xrTableCell18";
-            this.xrTableCell18.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 0, 0, 0, 100F);
+            this.xrTableCell18.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
             this.xrTableCell18.StylePriority.UsePadding = false;
             this.xrTableCell18.StylePriority.UseTextAlignment = false;
-            this.xrTableCell18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrTableCell18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell18.Weight = 0.64866667327880867D;
             // 
             // xrTableCell19
@@ -212,6 +213,7 @@
             this.xrTableCell20.Name = "xrTableCell20";
             this.xrTableCell20.StylePriority.UseTextAlignment = false;
             this.xrTableCell20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrTableCell20.TextFormatString = "{0:n2}";
             this.xrTableCell20.Weight = 0.64866668141682937D;
             // 
             // xrTableCell22
@@ -221,6 +223,7 @@
             this.xrTableCell22.Name = "xrTableCell22";
             this.xrTableCell22.StylePriority.UseTextAlignment = false;
             this.xrTableCell22.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrTableCell22.TextFormatString = "{0:n2}";
             this.xrTableCell22.Weight = 0.6486666557312013D;
             // 
             // xrTableCell23
@@ -230,6 +233,7 @@
             this.xrTableCell23.Name = "xrTableCell23";
             this.xrTableCell23.StylePriority.UseTextAlignment = false;
             this.xrTableCell23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrTableCell23.TextFormatString = "{0:n2}";
             this.xrTableCell23.Weight = 0.64866667340596507D;
             // 
             // xrTableCell24
@@ -239,6 +243,7 @@
             this.xrTableCell24.Name = "xrTableCell24";
             this.xrTableCell24.StylePriority.UseTextAlignment = false;
             this.xrTableCell24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrTableCell24.TextFormatString = "{0:n2}";
             this.xrTableCell24.Weight = 0.64866655438741039D;
             // 
             // TopMargin
@@ -640,11 +645,6 @@
             this.xrTableCell8.Text = "Total";
             this.xrTableCell8.Weight = 0.64866655438741039D;
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.Facturacion.FAC_010_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // GroupHeader1
             // 
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
@@ -703,6 +703,7 @@
             this.xrTableCell30.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Sum([SubtotalSinIVA])")});
             this.xrTableCell30.Name = "xrTableCell30";
+            this.xrTableCell30.TextFormatString = "{0:n2}";
             this.xrTableCell30.Weight = 0.64866668141682937D;
             // 
             // xrTableCell31
@@ -710,6 +711,7 @@
             this.xrTableCell31.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Sum([SubtotalIVA])")});
             this.xrTableCell31.Name = "xrTableCell31";
+            this.xrTableCell31.TextFormatString = "{0:n2}";
             this.xrTableCell31.Weight = 0.6486666557312013D;
             // 
             // xrTableCell32
@@ -717,6 +719,7 @@
             this.xrTableCell32.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Sum([vt_iva])")});
             this.xrTableCell32.Name = "xrTableCell32";
+            this.xrTableCell32.TextFormatString = "{0:n2}";
             this.xrTableCell32.Weight = 0.64866667340596507D;
             // 
             // xrTableCell33
@@ -724,23 +727,17 @@
             this.xrTableCell33.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Sum([vt_total])")});
             this.xrTableCell33.Name = "xrTableCell33";
+            this.xrTableCell33.TextFormatString = "{0:n2}";
             this.xrTableCell33.Weight = 0.64866655438741039D;
             // 
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.detalle_firma_pago,
             this.resumen_forma_pago,
             this.xrTable6});
-            this.ReportFooter.HeightF = 87.08331F;
+            this.ReportFooter.HeightF = 119.375F;
             this.ReportFooter.Name = "ReportFooter";
-            // 
-            // resumen_forma_pago
-            // 
-            this.resumen_forma_pago.LocationFloat = new DevExpress.Utils.PointFloat(1.589457E-05F, 54.08332F);
-            this.resumen_forma_pago.Name = "resumen_forma_pago";
-            this.resumen_forma_pago.ReportSource = new Core.Erp.Web.Reportes.Facturacion.FAC_010_resumen_forma_pago_Rpt();
-            this.resumen_forma_pago.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
-            this.resumen_forma_pago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.resumen_forma_pago_BeforePrint);
             // 
             // xrTable6
             // 
@@ -784,6 +781,7 @@
             this.xrTableCell26.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Sum([SubtotalSinIVA])")});
             this.xrTableCell26.Name = "xrTableCell26";
+            this.xrTableCell26.TextFormatString = "{0:n2}";
             this.xrTableCell26.Weight = 0.64866668141682937D;
             // 
             // xrTableCell27
@@ -791,6 +789,7 @@
             this.xrTableCell27.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Sum([SubtotalIVA])")});
             this.xrTableCell27.Name = "xrTableCell27";
+            this.xrTableCell27.TextFormatString = "{0:n2}";
             this.xrTableCell27.Weight = 0.6486666557312013D;
             // 
             // xrTableCell28
@@ -798,6 +797,7 @@
             this.xrTableCell28.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Sum([vt_iva])")});
             this.xrTableCell28.Name = "xrTableCell28";
+            this.xrTableCell28.TextFormatString = "{0:n2}";
             this.xrTableCell28.Weight = 0.64866667340596507D;
             // 
             // xrTableCell34
@@ -805,7 +805,29 @@
             this.xrTableCell34.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Sum([vt_total])")});
             this.xrTableCell34.Name = "xrTableCell34";
+            this.xrTableCell34.TextFormatString = "{0:n2}";
             this.xrTableCell34.Weight = 0.64866655438741039D;
+            // 
+            // detalle_firma_pago
+            // 
+            this.detalle_firma_pago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 96.37502F);
+            this.detalle_firma_pago.Name = "detalle_firma_pago";
+            this.detalle_firma_pago.ReportSource = new Core.Erp.Web.Reportes.Facturacion.FAC_010_detalle_forma_pago_Rpte();
+            this.detalle_firma_pago.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
+            this.detalle_firma_pago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.detalle_firma_pago_BeforePrint);
+            // 
+            // resumen_forma_pago
+            // 
+            this.resumen_forma_pago.LocationFloat = new DevExpress.Utils.PointFloat(1.589457E-05F, 54.08332F);
+            this.resumen_forma_pago.Name = "resumen_forma_pago";
+            this.resumen_forma_pago.ReportSource = new Core.Erp.Web.Reportes.Facturacion.FAC_010_resumen_forma_pago_Rpt();
+            this.resumen_forma_pago.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
+            this.resumen_forma_pago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.resumen_forma_pago_BeforePrint);
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.Facturacion.FAC_010_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // FAC_010_Rpt
             // 
@@ -838,9 +860,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -920,5 +942,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell28;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell34;
         private DevExpress.XtraReports.UI.XRSubreport resumen_forma_pago;
+        private DevExpress.XtraReports.UI.XRSubreport detalle_firma_pago;
     }
 }

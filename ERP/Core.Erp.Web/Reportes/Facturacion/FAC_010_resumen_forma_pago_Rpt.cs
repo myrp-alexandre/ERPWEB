@@ -14,11 +14,11 @@ namespace Core.Erp.Web.Reportes.Facturacion
         public FAC_010_resumen_forma_pago_Rpt()
         {
             InitializeComponent();
-        }      
+        }
 
         private void FAC_010_resumen_forma_pago_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-           
+
         }
     }
 }
