@@ -109,6 +109,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 NumHasta = 0
             };
             BAN_005_Rpt report = new BAN_005_Rpt();
+            #region Cargo diseño desde base
+            if (model.IdBanco != 0)
+            {
+                var banco = bus_banco.get_info(model.IdEmpresa, model.IdBanco);
+                System.IO.File.WriteAllBytes(RootReporte, banco.ReporteChequeComprobante);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
             report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             report.p_IdTipocbte.Value = 0;
             report.p_IdCbteCble.Value = 0;
@@ -117,14 +125,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdBanco.Value = model.IdBanco;
             cargar_banco(Convert.ToInt32(SessionFixed.IdEmpresa));
             bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), 0, 0, "ESTCBENT");
-            #region Cargo diseño desde base
-            if (model.IdBanco != 0)
-            {
-                var banco = bus_banco.get_info(model.IdEmpresa, model.IdBanco);
-                System.IO.File.WriteAllBytes(RootReporte, banco.ReporteChequeComprobante);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+           
             ViewBag.Report = report;
             return View(model);
         }
@@ -132,13 +133,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult BAN_005_Masivo(cl_filtros_banco_Info model)
         {
             BAN_005_Rpt report = new BAN_005_Rpt();
-            report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdTipocbte.Value = 0;
-            report.p_IdCbteCble.Value = 0;
-            report.p_NumDesde.Value = model.NumDesde;
-            report.p_NumHasta.Value = model.NumHasta;
-            report.p_IdBanco.Value = model.IdBanco;
-            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), 0, 0, "ESTCBENT");
             #region Cargo diseño desde base
             if (model.IdBanco != 0)
             {
@@ -147,6 +141,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.LoadLayout(RootReporte);
             }
             #endregion
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdTipocbte.Value = 0;
+            report.p_IdCbteCble.Value = 0;
+            report.p_NumDesde.Value = model.NumDesde;
+            report.p_NumHasta.Value = model.NumHasta;
+            report.p_IdBanco.Value = model.IdBanco;
+            bus_cbte.modificarDB_EstadoCheque(Convert.ToInt32(SessionFixed.IdEmpresa), 0, 0, "ESTCBENT");
+           
             ViewBag.Report = report;
             cargar_banco(Convert.ToInt32(SessionFixed.IdEmpresa));
             return View(model);
