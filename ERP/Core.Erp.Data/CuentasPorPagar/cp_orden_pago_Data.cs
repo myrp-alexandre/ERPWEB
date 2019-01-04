@@ -282,6 +282,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdEstadoAprobacion = info.IdEstadoAprobacion;
                         Entity.IdFormaPago = info.IdFormaPago;
                         Entity.IdTipoFlujo = info.IdTipoFlujo;
+                        Entity.IdUsuarioUltMod = info.IdUsuario;
 
                         Context.SaveChanges();                        
                     }
