@@ -37,7 +37,8 @@ namespace Core.Erp.Data.Reportes.Banco
                                  cb_Cheque_numero = q.cb_Cheque_numero,
                                  Estado = q.Estado,
                                  cb_Observacion = q.cb_Observacion,
-                                 IdBanco = q.IdBanco
+                                 IdBanco = q.IdBanco,
+                                 NombreUsuario = q.NombreUsuario
                              }).ToList();
                     else
                         Lista = (from q in Context.VWBAN_005
@@ -60,7 +61,8 @@ namespace Core.Erp.Data.Reportes.Banco
                                      cb_Cheque_numero = q.cb_Cheque_numero,
                                      Estado = q.Estado,
                                      cb_Observacion = q.cb_Observacion,
-                                     IdBanco = q.IdBanco
+                                     IdBanco = q.IdBanco,
+                                     NombreUsuario = q.NombreUsuario
                                  }).ToList();
                 }
                 return Lista;

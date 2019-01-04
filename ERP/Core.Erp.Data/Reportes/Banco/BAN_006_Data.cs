@@ -42,7 +42,11 @@ namespace Core.Erp.Data.Reportes.Banco
                                  Descripcion_Ciudad = q.Descripcion_Ciudad,
                                  ValorEnLetras = q.ValorEnLetras,
                                  cb_Cheque_numero = q.cb_Cheque_numero,
-                                 IdBanco = q.IdBanco
+                                 IdBanco = q.IdBanco,
+                                 NombreUsuario = q.NombreUsuario,
+                                 ba_descripcion = q.ba_descripcion,
+                                 ba_Num_Cuenta = q.ba_Num_Cuenta,
+                                 ba_Tipo = q.ba_Tipo
                              }).ToList();
 
                     else
@@ -71,7 +75,11 @@ namespace Core.Erp.Data.Reportes.Banco
                                      Descripcion_Ciudad = q.Descripcion_Ciudad,
                                      ValorEnLetras = q.ValorEnLetras,
                                      cb_Cheque_numero = q.cb_Cheque_numero,
-                                     IdBanco = q.IdBanco
+                                     IdBanco = q.IdBanco,
+                                     NombreUsuario = q.NombreUsuario,
+                                     ba_descripcion = q.ba_descripcion,
+                                     ba_Num_Cuenta = q.ba_Num_Cuenta,
+                                     ba_Tipo = q.ba_Tipo
                                  }).ToList();
                 }
                 return Lista;
