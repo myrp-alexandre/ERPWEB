@@ -332,7 +332,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
 
             bus_orden_pago = new cp_orden_pago_Bus();
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
                 if (bus_orden_pago.anularDB(model))
                     return RedirectToAction("Index");
                 else
