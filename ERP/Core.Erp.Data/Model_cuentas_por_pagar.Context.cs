@@ -35,7 +35,6 @@ namespace Core.Erp.Data
         public DbSet<cp_nota_DebCre> cp_nota_DebCre { get; set; }
         public DbSet<cp_orden_giro_pagos_sri> cp_orden_giro_pagos_sri { get; set; }
         public DbSet<cp_orden_pago_cancelaciones> cp_orden_pago_cancelaciones { get; set; }
-        public DbSet<cp_orden_pago_det> cp_orden_pago_det { get; set; }
         public DbSet<cp_orden_pago_estado_aprob> cp_orden_pago_estado_aprob { get; set; }
         public DbSet<cp_orden_pago_formapago> cp_orden_pago_formapago { get; set; }
         public DbSet<cp_orden_pago_tipo> cp_orden_pago_tipo { get; set; }
@@ -63,6 +62,7 @@ namespace Core.Erp.Data
         public DbSet<cp_orden_giro> cp_orden_giro { get; set; }
         public DbSet<vwcp_orden_giro_x_pagar> vwcp_orden_giro_x_pagar { get; set; }
         public DbSet<cp_SolicitudPago> cp_SolicitudPago { get; set; }
+        public DbSet<cp_orden_pago_det> cp_orden_pago_det { get; set; }
     
         public virtual ObjectResult<spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result> spcp_Get_Data_orden_pago_con_cancelacion_x_pago(Nullable<int> idEmpresa_pago, Nullable<int> idTipoCbte_pago, Nullable<decimal> idCbteCble_pago, string idUsuario)
         {

@@ -344,7 +344,7 @@
           <Property Name="IdCbteCble_cxp" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdTipoCbte_cxp" Type="int" />
           <Property Name="Valor_a_pagar" Type="float" Nullable="false" />
-          <Property Name="Referencia" Type="varchar" MaxLength="50" />
+          <Property Name="Referencia" Type="varchar(max)" />
           <Property Name="IdFormaPago" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Fecha_Pago" Type="date" Nullable="false" />
           <Property Name="IdEstadoAprobacion" Type="varchar" MaxLength="10" Nullable="false" />
@@ -1976,7 +1976,7 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
           <Property Name="IdOrdenPago" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Secuencia_op" Type="Int32" />
           <NavigationProperty Name="cp_cuotas_x_doc" Relationship="Self.FK_cp_cuotas_x_doc_det_cp_cuotas_x_doc1" FromRole="cp_cuotas_x_doc_det" ToRole="cp_cuotas_x_doc" />
-          <NavigationProperty Name="cp_orden_pago_det" Relationship="Self.FK_cp_cuotas_x_doc_det_cp_orden_pago_det1" FromRole="cp_cuotas_x_doc_det" ToRole="cp_orden_pago_det" />
+          <NavigationProperty Name="cp_orden_pago_det" Relationship="Model_cuentas_por_pagar.FK_cp_cuotas_x_doc_det_cp_orden_pago_det1" FromRole="cp_cuotas_x_doc_det" ToRole="cp_orden_pago_det" />
         </EntityType>
         <EntityType Name="cp_nota_DebCre">
           <Key>
@@ -2085,36 +2085,9 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
           <Property Name="SaldoActual" Type="Double" Nullable="false" />
           <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fechaTransaccion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="cp_orden_pago_det" Relationship="Self.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det" FromRole="cp_orden_pago_cancelaciones" ToRole="cp_orden_pago_det" />
-          <NavigationProperty Name="cp_orden_pago_det1" Relationship="Self.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1" FromRole="cp_orden_pago_cancelaciones" ToRole="cp_orden_pago_det" />
-        </EntityType>
-        <EntityType Name="cp_orden_pago_det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdOrdenPago" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenPago" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpresa_cxp" Type="Int32" />
-          <Property Name="IdCbteCble_cxp" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdTipoCbte_cxp" Type="Int32" />
-          <Property Name="Valor_a_pagar" Type="Double" Nullable="false" />
-          <Property Name="Referencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdFormaPago" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Fecha_Pago" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdEstadoAprobacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdBanco" Type="Int32" />
-          <Property Name="IdUsuario_Aprobacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_hora_Aproba" Type="DateTime" Precision="3" />
-          <Property Name="Motivo_aproba" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="cp_cuotas_x_doc_det" Relationship="Self.FK_cp_cuotas_x_doc_det_cp_orden_pago_det1" FromRole="cp_orden_pago_det" ToRole="cp_cuotas_x_doc_det" />
-          <NavigationProperty Name="cp_orden_pago_cancelaciones" Relationship="Self.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det" FromRole="cp_orden_pago_det" ToRole="cp_orden_pago_cancelaciones" />
-          <NavigationProperty Name="cp_orden_pago_cancelaciones1" Relationship="Self.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1" FromRole="cp_orden_pago_det" ToRole="cp_orden_pago_cancelaciones" />
-          <NavigationProperty Name="cp_orden_pago_formapago" Relationship="Self.FK_cp_orden_pago_det_cp_orden_pago_formapago" FromRole="cp_orden_pago_det" ToRole="cp_orden_pago_formapago" />
-          <NavigationProperty Name="cp_orden_pago" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago" FromRole="cp_orden_pago_det" ToRole="cp_orden_pago" />
-        </EntityType>
+          <NavigationProperty Name="cp_orden_pago_det" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det" FromRole="cp_orden_pago_cancelaciones" ToRole="cp_orden_pago_det" />
+          <NavigationProperty Name="cp_orden_pago_det1" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1" FromRole="cp_orden_pago_cancelaciones" ToRole="cp_orden_pago_det" />
+          </EntityType>
         <EntityType Name="cp_orden_pago_estado_aprob">
           <Key>
             <PropertyRef Name="IdEstadoAprobacion" />
@@ -2131,8 +2104,8 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
           <Property Name="IdTipoTransaccion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CodModulo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoMovi_caj" Type="Int32" />
-          <NavigationProperty Name="cp_orden_pago_det" Relationship="Self.FK_cp_orden_pago_det_cp_orden_pago_formapago" FromRole="cp_orden_pago_formapago" ToRole="cp_orden_pago_det" />
           <NavigationProperty Name="cp_orden_pago" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_formapago" FromRole="cp_orden_pago_formapago" ToRole="cp_orden_pago" />
+          <NavigationProperty Name="cp_orden_pago_det" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago_formapago" FromRole="cp_orden_pago_formapago" ToRole="cp_orden_pago_det" />
         </EntityType>
         <EntityType Name="cp_orden_pago_tipo">
           <Key>
@@ -2399,22 +2372,6 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_cp_cuotas_x_doc_det_cp_orden_pago_det1">
-          <End Role="cp_orden_pago_det" Type="Self.cp_orden_pago_det" Multiplicity="0..1" />
-          <End Role="cp_cuotas_x_doc_det" Type="Self.cp_cuotas_x_doc_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cp_orden_pago_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenPago" />
-              <PropertyRef Name="Secuencia" />
-            </Principal>
-            <Dependent Role="cp_cuotas_x_doc_det">
-              <PropertyRef Name="IdEmpresa_op" />
-              <PropertyRef Name="IdOrdenPago" />
-              <PropertyRef Name="Secuencia_op" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_cp_orden_giro_pagos_sri_cp_pagos_sri">
           <End Role="cp_pagos_sri" Type="Self.cp_pagos_sri" Multiplicity="1" />
           <End Role="cp_orden_giro_pagos_sri" Type="Self.cp_orden_giro_pagos_sri" Multiplicity="*" />
@@ -2424,50 +2381,6 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
             </Principal>
             <Dependent Role="cp_orden_giro_pagos_sri">
               <PropertyRef Name="codigo_pago_sri" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_cp_orden_pago_cancelaciones_cp_orden_pago_det">
-          <End Role="cp_orden_pago_det" Type="Self.cp_orden_pago_det" Multiplicity="1" />
-          <End Role="cp_orden_pago_cancelaciones" Type="Self.cp_orden_pago_cancelaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cp_orden_pago_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenPago" />
-              <PropertyRef Name="Secuencia" />
-            </Principal>
-            <Dependent Role="cp_orden_pago_cancelaciones">
-              <PropertyRef Name="IdEmpresa_op" />
-              <PropertyRef Name="IdOrdenPago_op" />
-              <PropertyRef Name="Secuencia_op" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1">
-          <End Role="cp_orden_pago_det" Type="Self.cp_orden_pago_det" Multiplicity="0..1" />
-          <End Role="cp_orden_pago_cancelaciones" Type="Self.cp_orden_pago_cancelaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cp_orden_pago_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenPago" />
-              <PropertyRef Name="Secuencia" />
-            </Principal>
-            <Dependent Role="cp_orden_pago_cancelaciones">
-              <PropertyRef Name="IdEmpresa_op_padre" />
-              <PropertyRef Name="IdOrdenPago_op_padre" />
-              <PropertyRef Name="Secuencia_op_padre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_cp_orden_pago_det_cp_orden_pago_formapago">
-          <End Role="cp_orden_pago_formapago" Type="Self.cp_orden_pago_formapago" Multiplicity="1" />
-          <End Role="cp_orden_pago_det" Type="Self.cp_orden_pago_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cp_orden_pago_formapago">
-              <PropertyRef Name="IdFormaPago" />
-            </Principal>
-            <Dependent Role="cp_orden_pago_det">
-              <PropertyRef Name="IdFormaPago" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2520,7 +2433,6 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
           <EntitySet Name="cp_nota_DebCre" EntityType="Self.cp_nota_DebCre" />
           <EntitySet Name="cp_orden_giro_pagos_sri" EntityType="Self.cp_orden_giro_pagos_sri" />
           <EntitySet Name="cp_orden_pago_cancelaciones" EntityType="Self.cp_orden_pago_cancelaciones" />
-          <EntitySet Name="cp_orden_pago_det" EntityType="Self.cp_orden_pago_det" />
           <EntitySet Name="cp_orden_pago_estado_aprob" EntityType="Self.cp_orden_pago_estado_aprob" />
           <EntitySet Name="cp_orden_pago_formapago" EntityType="Self.cp_orden_pago_formapago" />
           <EntitySet Name="cp_orden_pago_tipo" EntityType="Self.cp_orden_pago_tipo" />
@@ -2557,25 +2469,9 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
             <End Role="cp_cuotas_x_doc" EntitySet="cp_cuotas_x_doc" />
             <End Role="cp_cuotas_x_doc_det" EntitySet="cp_cuotas_x_doc_det" />
           </AssociationSet>
-          <AssociationSet Name="FK_cp_cuotas_x_doc_det_cp_orden_pago_det1" Association="Self.FK_cp_cuotas_x_doc_det_cp_orden_pago_det1">
-            <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
-            <End Role="cp_cuotas_x_doc_det" EntitySet="cp_cuotas_x_doc_det" />
-          </AssociationSet>
           <AssociationSet Name="FK_cp_orden_giro_pagos_sri_cp_pagos_sri" Association="Self.FK_cp_orden_giro_pagos_sri_cp_pagos_sri">
             <End Role="cp_pagos_sri" EntitySet="cp_pagos_sri" />
             <End Role="cp_orden_giro_pagos_sri" EntitySet="cp_orden_giro_pagos_sri" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cp_orden_pago_cancelaciones_cp_orden_pago_det" Association="Self.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det">
-            <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
-            <End Role="cp_orden_pago_cancelaciones" EntitySet="cp_orden_pago_cancelaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1" Association="Self.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1">
-            <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
-            <End Role="cp_orden_pago_cancelaciones" EntitySet="cp_orden_pago_cancelaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cp_orden_pago_det_cp_orden_pago_formapago" Association="Self.FK_cp_orden_pago_det_cp_orden_pago_formapago">
-            <End Role="cp_orden_pago_formapago" EntitySet="cp_orden_pago_formapago" />
-            <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
           </AssociationSet>
           <AssociationSet Name="FK_cp_orden_pago_tipo_x_empresa_cp_orden_pago_tipo" Association="Self.FK_cp_orden_pago_tipo_x_empresa_cp_orden_pago_tipo">
             <End Role="cp_orden_pago_tipo" EntitySet="cp_orden_pago_tipo" />
@@ -2610,10 +2506,6 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
           <AssociationSet Name="FK_cp_orden_pago_cp_orden_pago_tipo" Association="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_tipo">
             <End Role="cp_orden_pago_tipo" EntitySet="cp_orden_pago_tipo" />
             <End Role="cp_orden_pago" EntitySet="cp_orden_pago" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cp_orden_pago_det_cp_orden_pago" Association="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago">
-            <End Role="cp_orden_pago" EntitySet="cp_orden_pago" />
-            <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
           </AssociationSet>
           <EntitySet Name="cp_orden_giro_det" EntityType="Model_cuentas_por_pagar.cp_orden_giro_det" />
           <EntitySet Name="vwcp_orden_giro_det" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_det" />
@@ -2682,6 +2574,27 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
             <Parameter Name="mostrar_saldo_0" Mode="In" Type="Boolean" />
             <Parameter Name="IdSolicitudPago" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <EntitySet Name="cp_orden_pago_det" EntityType="Model_cuentas_por_pagar.cp_orden_pago_det" />
+          <AssociationSet Name="FK_cp_cuotas_x_doc_det_cp_orden_pago_det1" Association="Model_cuentas_por_pagar.FK_cp_cuotas_x_doc_det_cp_orden_pago_det1">
+            <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
+            <End Role="cp_cuotas_x_doc_det" EntitySet="cp_cuotas_x_doc_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_orden_pago_det_cp_orden_pago" Association="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago">
+            <End Role="cp_orden_pago" EntitySet="cp_orden_pago" />
+            <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_orden_pago_cancelaciones_cp_orden_pago_det" Association="Model_cuentas_por_pagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det">
+            <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
+            <End Role="cp_orden_pago_cancelaciones" EntitySet="cp_orden_pago_cancelaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1" Association="Model_cuentas_por_pagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1">
+            <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
+            <End Role="cp_orden_pago_cancelaciones" EntitySet="cp_orden_pago_cancelaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cp_orden_pago_det_cp_orden_pago_formapago" Association="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago_formapago">
+            <End Role="cp_orden_pago_formapago" EntitySet="cp_orden_pago_formapago" />
+            <End Role="cp_orden_pago_det" EntitySet="cp_orden_pago_det" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result">
           <Property Type="Int64" Name="IdRow" Nullable="false" />
@@ -3028,20 +2941,6 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
             </Principal>
             <Dependent Role="cp_orden_pago">
               <PropertyRef Name="IdTipo_op" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_cp_orden_pago_det_cp_orden_pago">
-          <End Type="Model_cuentas_por_pagar.cp_orden_pago" Role="cp_orden_pago" Multiplicity="1" />
-          <End Type="Model_cuentas_por_pagar.cp_orden_pago_det" Role="cp_orden_pago_det" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cp_orden_pago">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenPago" />
-            </Principal>
-            <Dependent Role="cp_orden_pago_det">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdOrdenPago" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3594,6 +3493,107 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
           <Property Type="Decimal" Name="IdCbteCble_cxp" Nullable="true" Precision="18" Scale="0" />
           <Property Type="Int32" Name="IdBanco" Nullable="true" />
         </ComplexType>
+        <EntityType Name="cp_orden_pago_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdOrdenPago" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_cxp" Type="Int32" />
+          <Property Name="IdCbteCble_cxp" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdTipoCbte_cxp" Type="Int32" />
+          <Property Name="Valor_a_pagar" Type="Double" Nullable="false" />
+          <Property Name="Referencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdFormaPago" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Pago" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdEstadoAprobacion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco" Type="Int32" />
+          <Property Name="IdUsuario_Aprobacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_hora_Aproba" Type="DateTime" Precision="3" />
+          <Property Name="Motivo_aproba" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cp_cuotas_x_doc_det" Relationship="Model_cuentas_por_pagar.FK_cp_cuotas_x_doc_det_cp_orden_pago_det1" FromRole="cp_orden_pago_det" ToRole="cp_cuotas_x_doc_det" />
+          <NavigationProperty Name="cp_orden_pago" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago" FromRole="cp_orden_pago_det" ToRole="cp_orden_pago" />
+          <NavigationProperty Name="cp_orden_pago_cancelaciones" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det" FromRole="cp_orden_pago_det" ToRole="cp_orden_pago_cancelaciones" />
+          <NavigationProperty Name="cp_orden_pago_cancelaciones1" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1" FromRole="cp_orden_pago_det" ToRole="cp_orden_pago_cancelaciones" />
+          <NavigationProperty Name="cp_orden_pago_formapago" Relationship="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago_formapago" FromRole="cp_orden_pago_det" ToRole="cp_orden_pago_formapago" />
+        </EntityType>
+        <Association Name="FK_cp_cuotas_x_doc_det_cp_orden_pago_det1">
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago_det" Role="cp_orden_pago_det" Multiplicity="0..1" />
+          <End Type="Model_cuentas_por_pagar.cp_cuotas_x_doc_det" Role="cp_cuotas_x_doc_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_orden_pago_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenPago" />
+              <PropertyRef Name="Secuencia" />
+            </Principal>
+            <Dependent Role="cp_cuotas_x_doc_det">
+              <PropertyRef Name="IdEmpresa_op" />
+              <PropertyRef Name="IdOrdenPago" />
+              <PropertyRef Name="Secuencia_op" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_orden_pago_det_cp_orden_pago">
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago" Role="cp_orden_pago" Multiplicity="1" />
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago_det" Role="cp_orden_pago_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_orden_pago">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenPago" />
+            </Principal>
+            <Dependent Role="cp_orden_pago_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_orden_pago_cancelaciones_cp_orden_pago_det">
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago_det" Role="cp_orden_pago_det" Multiplicity="1" />
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago_cancelaciones" Role="cp_orden_pago_cancelaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_orden_pago_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenPago" />
+              <PropertyRef Name="Secuencia" />
+            </Principal>
+            <Dependent Role="cp_orden_pago_cancelaciones">
+              <PropertyRef Name="IdEmpresa_op" />
+              <PropertyRef Name="IdOrdenPago_op" />
+              <PropertyRef Name="Secuencia_op" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1">
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago_det" Role="cp_orden_pago_det" Multiplicity="0..1" />
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago_cancelaciones" Role="cp_orden_pago_cancelaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_orden_pago_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdOrdenPago" />
+              <PropertyRef Name="Secuencia" />
+            </Principal>
+            <Dependent Role="cp_orden_pago_cancelaciones">
+              <PropertyRef Name="IdEmpresa_op_padre" />
+              <PropertyRef Name="IdOrdenPago_op_padre" />
+              <PropertyRef Name="Secuencia_op_padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cp_orden_pago_det_cp_orden_pago_formapago">
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago_formapago" Role="cp_orden_pago_formapago" Multiplicity="1" />
+          <End Type="Model_cuentas_por_pagar.cp_orden_pago_det" Role="cp_orden_pago_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cp_orden_pago_formapago">
+              <PropertyRef Name="IdFormaPago" />
+            </Principal>
+            <Dependent Role="cp_orden_pago_det">
+              <PropertyRef Name="IdFormaPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3784,27 +3784,6 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
                 <ScalarProperty Name="SaldoActual" ColumnName="SaldoActual" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="fechaTransaccion" ColumnName="fechaTransaccion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="cp_orden_pago_det">
-            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_orden_pago_det">
-              <MappingFragment StoreEntitySet="cp_orden_pago_det">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdEmpresa_cxp" ColumnName="IdEmpresa_cxp" />
-                <ScalarProperty Name="IdCbteCble_cxp" ColumnName="IdCbteCble_cxp" />
-                <ScalarProperty Name="IdTipoCbte_cxp" ColumnName="IdTipoCbte_cxp" />
-                <ScalarProperty Name="Valor_a_pagar" ColumnName="Valor_a_pagar" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
-                <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha_Pago" />
-                <ScalarProperty Name="IdEstadoAprobacion" ColumnName="IdEstadoAprobacion" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="IdUsuario_Aprobacion" ColumnName="IdUsuario_Aprobacion" />
-                <ScalarProperty Name="fecha_hora_Aproba" ColumnName="fecha_hora_Aproba" />
-                <ScalarProperty Name="Motivo_aproba" ColumnName="Motivo_aproba" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4566,6 +4545,27 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="cp_orden_pago_det">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.cp_orden_pago_det">
+              <MappingFragment StoreEntitySet="cp_orden_pago_det">
+                <ScalarProperty Name="Motivo_aproba" ColumnName="Motivo_aproba" />
+                <ScalarProperty Name="fecha_hora_Aproba" ColumnName="fecha_hora_Aproba" />
+                <ScalarProperty Name="IdUsuario_Aprobacion" ColumnName="IdUsuario_Aprobacion" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdEstadoAprobacion" ColumnName="IdEstadoAprobacion" />
+                <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha_Pago" />
+                <ScalarProperty Name="IdFormaPago" ColumnName="IdFormaPago" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Valor_a_pagar" ColumnName="Valor_a_pagar" />
+                <ScalarProperty Name="IdTipoCbte_cxp" ColumnName="IdTipoCbte_cxp" />
+                <ScalarProperty Name="IdCbteCble_cxp" ColumnName="IdCbteCble_cxp" />
+                <ScalarProperty Name="IdEmpresa_cxp" ColumnName="IdEmpresa_cxp" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
