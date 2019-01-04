@@ -91,10 +91,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-
+            /*
             model.lst_tipo_mov_x_bodega.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdMovi_inven_tipo = model.IdMovi_inven_tipo; });
             bus_tipo_movimiento_x_bodega.guardarDB(model.lst_tipo_mov_x_bodega.Where(q => q.seleccionado == true).ToList());
-
+            */
             return RedirectToAction("Index");
         }
 
@@ -114,11 +114,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-
+            /*
             bus_tipo_movimiento_x_bodega.eliminarDB(model.IdEmpresa, model.IdMovi_inven_tipo);
             model.lst_tipo_mov_x_bodega.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdMovi_inven_tipo = model.IdMovi_inven_tipo; });
             bus_tipo_movimiento_x_bodega.guardarDB(model.lst_tipo_mov_x_bodega.Where(q=>q.seleccionado == true).ToList());
-
+            */
             return RedirectToAction("Index");
         }
 
