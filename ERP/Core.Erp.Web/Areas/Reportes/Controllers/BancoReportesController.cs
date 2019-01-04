@@ -132,7 +132,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         [HttpPost]
         public ActionResult BAN_005_Masivo(cl_filtros_banco_Info model)
         {
-            BAN_005_Rpt report = new BAN_005_Rpt();
+            BAN_006_Rpt report = new BAN_006_Rpt();
             #region Cargo diseño desde base
             if (model.IdBanco != 0)
             {
@@ -142,7 +142,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             }
             #endregion
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdTipocbte.Value = 0;
+            report.p_IdTipoCbte.Value = 0;
             report.p_IdCbteCble.Value = 0;
             report.p_NumDesde.Value = model.NumDesde;
             report.p_NumHasta.Value = model.NumHasta;
