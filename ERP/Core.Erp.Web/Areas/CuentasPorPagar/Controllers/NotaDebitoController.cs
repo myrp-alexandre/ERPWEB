@@ -432,10 +432,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
                 foreach (var item in Lista_NotaDebito)
                 {
-                    if (!bus_notaDebCre.guardar_importacionDB(item))
+                    if (item.IdProveedor != 0)
                     {
-                        ViewBag.mensaje = "Error al importar el archivo";
-                        return View(model);
+                        if (!bus_notaDebCre.guardar_importacionDB(item))
+                        {
+                            ViewBag.mensaje = "Error al importar el archivo";
+                            return View(model);
+                        }
                     }
                 }
             }
@@ -470,6 +473,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
             #region Variables
+            string ruc_proveedor = "";
             List<cp_nota_DebCre_Info> Lista_NotaDebito = new List<cp_nota_DebCre_Info>();
             cp_nota_DebCre_List ListaNotaDebito = new cp_nota_DebCre_List();
             int cont = 0;
@@ -494,13 +498,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
-                    { 
-                        var ruc_proveedor = Convert.ToString(reader.GetValue(1)).Trim();
+                    {
+                         ruc_proveedor = Convert.ToString(reader.GetValue(1)).Trim();
                         var info_proveedor = bus_proveedor.get_info_x_num_cedula(IdEmpresa, ruc_proveedor);
                         var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
                         var Su_CodigoEstablecimiento = Convert.ToString(reader.GetValue(0)).Trim();
-
-                        if (info_proveedor != null)
+                        if (info_proveedor != null && info_proveedor.IdProveedor != 0)
                         {
                             cp_nota_DebCre_Info info = new cp_nota_DebCre_Info
                             {
@@ -530,14 +533,53 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                                 cn_vaCoa = "N",
                                 cod_nota = Convert.ToString(reader.GetValue(2)),
                                 IdUsuario = SessionFixed.IdUsuario,
-                                Fecha_Transac = DateTime.Now
+                                Fecha_Transac = DateTime.Now,
+                                Nombre_proveedor= info_proveedor.info_persona.pe_razonSocial
                             };
 
                             Lista_NotaDebito.Add(info);
-                        }                        
+                        }
+                        else
+                        {
+                            cp_nota_DebCre_Info info = new cp_nota_DebCre_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdCbteCble_Nota = IdCbteCble_Nota++,
+                                IdTipoCbte_Nota = Convert.ToInt32(info_cp_parametro.pa_TipoCbte_ND),
+                                DebCre = "D",
+                                IdTipoNota = "T_TIP_NOTA_INT",
+                                cn_fecha = Convert.ToDateTime(reader.GetValue(5)),
+                                Fecha_contable = Convert.ToDateTime(reader.GetValue(5)),
+                                cn_Fecha_vcto = Convert.ToDateTime(reader.GetValue(6)),
+                                cn_observacion = Convert.ToString(reader.GetValue(7)),
+                                cn_subtotal_iva = 0,
+                                cn_subtotal_siniva = Convert.ToDouble(reader.GetValue(4)),
+                                cn_baseImponible = 0,
+                                cn_Por_iva = 12,
+                                cn_valoriva = 0,
+                                cn_Ice_base = 0,
+                                cn_Ice_por = 0,
+                                cn_Ice_valor = 0,
+                                cn_Serv_por = 0,
+                                cn_Serv_valor = 0,
+                                cn_BaseSeguro = 0,
+                                cn_total = Convert.ToDecimal(reader.GetValue(4)),
+                                cn_vaCoa = "N",
+                                cod_nota = Convert.ToString(reader.GetValue(2)),
+                                IdUsuario = SessionFixed.IdUsuario,
+                                Fecha_Transac = DateTime.Now,
+                                Nombre_proveedor = ruc_proveedor
+
+                            };
+                            Lista_NotaDebito.Add(info);
+                        }
                     }
                     else
+                    {
+
+                        
                         cont++;
+                    }
                 }
                 ListaNotaDebito.set_list(Lista_NotaDebito, IdTransaccionSession);
                 #endregion

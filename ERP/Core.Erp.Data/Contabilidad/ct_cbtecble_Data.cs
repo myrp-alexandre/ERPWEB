@@ -176,7 +176,7 @@ namespace Core.Erp.Data.Contabilidad
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

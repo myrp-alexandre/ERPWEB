@@ -365,9 +365,10 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     IdCbteCble = info.IdCbteCble_Nota,
                     cb_Fecha = info.cn_fecha,
                     cb_Observacion = info.cn_observacion,
-                    IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0')),
+                    IdPeriodo = Convert.ToInt32(info.cn_fecha.Year.ToString() + info.cn_fecha.Month.ToString().PadLeft(2, '0')),
                     IdSucursal = info.IdSucursal,
                     cb_FechaTransac = DateTime.Now,
+                    
                     cb_Estado = "A"
                 };
 

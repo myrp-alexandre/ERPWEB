@@ -48,7 +48,16 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
+        settings.HtmlRowPrepared = (s, e) =>
+        {
+            if (Convert.ToInt32(e.GetValue("IdSucursal")) == 0)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
+        };
         settings.Columns.Add("IdCbteCble_Nota", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("Nombre_proveedor", "Proveedor").Width = Unit.Percentage(10);
+
         settings.Columns.Add("IdSucursal", "Sucursal").Width = Unit.Percentage(10);
         settings.Columns.Add("cod_nota", "Documento").Width = Unit.Percentage(10);
         settings.Columns.Add("Fecha_contable", "Fecha Contable").Width = Unit.Percentage(10);

@@ -75,7 +75,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<decimal> IdTipoFlujo { get; set; }
         public Nullable<System.DateTime> fecha_autorizacion { get; set; }
         public string cod_nota { get; set; }
-
+        public string Nombre_proveedor { get; set; }
         public cp_proveedor_Info info_proveedor { get; set; }
         public ct_cbtecble_Info info_comrobante { get; set; }
         public List<cp_orden_pago_cancelaciones_Info> lst_det_canc_op { get; set; }
