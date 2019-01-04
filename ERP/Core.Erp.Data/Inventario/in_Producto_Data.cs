@@ -657,7 +657,7 @@ namespace Core.Erp.Data.Inventario
         #endregion
         #region metodo baja demanda
 
-        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, cl_enumeradores.eTipoBusquedaProducto Busqueda, cl_enumeradores.eModulo Modulo, decimal IdProductoPadre)
+        public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, cl_enumeradores.eTipoBusquedaProducto Busqueda, cl_enumeradores.eModulo Modulo, decimal IdProductoPadre, int IdSucursal)
         {
             var skip = args.BeginIndex;
             var take = args.EndIndex - args.BeginIndex + 1;
@@ -668,7 +668,7 @@ namespace Core.Erp.Data.Inventario
                     Lista = get_list(IdEmpresa, skip, take, args.Filter, 0);
                     break;
                 case cl_enumeradores.eTipoBusquedaProducto.SOLOHIJOS:
-                    Lista = get_list(IdEmpresa, skip, take, args.Filter,IdProductoPadre);
+                    Lista = get_list(IdEmpresa, skip, take, args.Filter, IdProductoPadre);
                     break;
                 case cl_enumeradores.eTipoBusquedaProducto.PORMODULO:
                     Lista = get_list(Modulo, IdEmpresa, skip, take, args.Filter);
@@ -678,12 +678,11 @@ namespace Core.Erp.Data.Inventario
                     break;
                 case cl_enumeradores.eTipoBusquedaProducto.TODOS_MENOS_PADRES:
                     Lista = get_list_todos_menos_padres(IdEmpresa, skip, take, args.Filter);
-
-                    
+                    break;
+                case cl_enumeradores.eTipoBusquedaProducto.PORSUCURSAL:
+                    Lista = get_list_PorSucursal(IdEmpresa, skip, take, args.Filter, IdSucursal);
                     break;
             }
-            
-            
             return Lista;
         }
 
@@ -977,6 +976,58 @@ namespace Core.Erp.Data.Inventario
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public List<in_Producto_Info> get_list_PorSucursal(int IdEmpresa, int skip, int take, string filter, int IdSucursal)
+        {
+            try
+            {
+                List<in_Producto_Info> Lista = new List<in_Producto_Info>();
+
+                Entities_inventario Context = new Entities_inventario();
+
+                var lst = (from
+                          p in Context.vwin_Producto_PorSucursal
+                           where p.IdEmpresa == IdEmpresa
+                           && p.IdSucursal == IdSucursal
+                            && (p.IdProducto.ToString() + " " + p.pr_descripcion).Contains(filter)
+                           select new
+                           {
+                               p.IdEmpresa,
+                               p.IdProducto,
+                               p.pr_descripcion,
+                               p.ca_Categoria,
+                               p.precio_1,
+                               p.Stock
+                           })
+                             .OrderBy(p => p.IdProducto)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+
+
+                foreach (var q in lst)
+                {
+                    Lista.Add(new in_Producto_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdProducto = q.IdProducto,
+                        pr_descripcion = q.pr_descripcion,
+                        nom_categoria = q.ca_Categoria,
+                        precio_1 = (double)q.precio_1,
+                        Stock = q.Stock
+                    });
+                }
+
+                Context.Dispose();
+                Lista = get_list_nombre_combo(Lista);
+                return Lista;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

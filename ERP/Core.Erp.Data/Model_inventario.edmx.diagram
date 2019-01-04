@@ -108,6 +108,7 @@
         <AssociationConnector Association="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven" />
         <AssociationConnector Association="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven1" />
         <AssociationConnector Association="Model_inventario.FK_in_transferencia_det_in_transferencia" />
+        <EntityTypeShape EntityType="Model_inventario.vwin_Producto_PorSucursal" Width="1.5" PointX="23.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
