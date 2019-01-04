@@ -180,8 +180,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             cp_orden_pago_Info model = new cp_orden_pago_Info
             {
                 IdEmpresa = IdEmpresa,
-                Fecha=DateTime.Now.Date
+                Fecha=DateTime.Now.Date,
+                IdTipo_Persona = "PROVEE"
             };
+            SessionFixed.TipoPersona = "PROVEE";
             cargar_combos(IdEmpresa);
             return View(model);
         }

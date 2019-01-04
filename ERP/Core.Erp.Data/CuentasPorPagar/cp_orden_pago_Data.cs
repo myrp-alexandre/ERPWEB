@@ -125,8 +125,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdFormaPago = Entity.IdFormaPago,
                         IdTipoFlujo = Entity.IdTipoFlujo,
                         Estado = Entity.Estado,
-                        IdSolicitudPago = Entity.IdSolicitudPago
-                        
+                        IdSolicitudPago = Entity.IdSolicitudPago,
+                        IdSucursal = Entity.IdSucursal
                     };
                     info.detalle
                           = (from q in Context.cp_orden_pago_det
@@ -294,6 +294,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdFormaPago = info.IdFormaPago;
                         Entity.IdTipoFlujo = info.IdTipoFlujo;
                         Entity.IdUsuarioUltMod = info.IdUsuario;
+                        Entity.IdSucursal = info.IdSucursal;
 
                         if (info.IdSolicitudPago != null)
                         {
