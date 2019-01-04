@@ -16,6 +16,7 @@ using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 using System.IO;
 using ExcelDataReader;
 using Core.Erp.Web.Areas.General.Controllers;
+using Core.Erp.Info.Contabilidad;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -54,6 +55,41 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         #endregion
 
+        #region Metodos ComboBox bajo demanda CtaCbleCXP
+        public ActionResult CmbCtaCbleCXP_Proveedor()
+        {
+            int model = new int();
+            return PartialView("_CmbCtaCbleCXP_Proveedor", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_ctacble_cxp(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            return bus_cuenta.get_list_bajo_demanda(args, IdEmpresa);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_ctacble_cxp(ListEditItemRequestedByValueEventArgs args)
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            return bus_cuenta.get_info_bajo_demanda(args, IdEmpresa);
+        }
+        #endregion
+
+        #region Metodos ComboBox bajo demanda CtaCbleGasto
+        public ActionResult CmbCtaCbleGasto_Proveedor()
+        {
+            int model = new int();
+            return PartialView("_CmbCtaCbleGasto_Proveedor", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_ctacble_gasto(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            return bus_cuenta.get_list_bajo_demanda(args, IdEmpresa);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_ctacble_gasto(ListEditItemRequestedByValueEventArgs args)
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            return bus_cuenta.get_info_bajo_demanda(args, IdEmpresa);
+        }
+        #endregion
 
         #region Index
         public ActionResult Index()
@@ -136,7 +172,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             else
             {
-                ViewBag.mensaje = "Número identificación inválida";
+                ViewBag.mensaje = "Número de identificación inválida";
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
@@ -170,11 +206,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             }
             else
             {
-                ViewBag.mensaje = "Número identificación inválida";
+                ViewBag.mensaje = "Número de identificación inválida";
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
         public ActionResult Anular(int IdEmpresa = 0 , decimal IdProveedor = 0)
         {

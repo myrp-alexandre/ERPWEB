@@ -284,7 +284,7 @@ namespace Core.Erp.Info.Helps
                     return_naturaleza = "NATU";
                     return ValidaCedula(cedula_ruc.Trim());                    
                 }
-                else
+                else if (tipo_documento == "RUC")
                 {
                     var longitud_ruc = 13;
                     var establecimiento = "001";
@@ -359,6 +359,11 @@ namespace Core.Erp.Info.Helps
                         return false;
                     }
                     return false;
+                }
+                else
+                {
+                    return_naturaleza = naturaleza;
+                    return true;
                 }
             }
             catch (Exception)

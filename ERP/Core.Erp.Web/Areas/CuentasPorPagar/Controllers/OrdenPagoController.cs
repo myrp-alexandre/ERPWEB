@@ -147,7 +147,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             {
                 return false;
             }
-            return true;
+
+            if (i_validar.IdEntidad == 0)
+            {
+                msg = "El campo beneficiario es obligatorio";
+                return false;
+            }
+
+                return true;
         }
         #endregion
 
@@ -190,8 +197,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
             model.info_comprobante.IdTipoCbte =(int) info_param_op.IdTipoCbte_OP;
             model.IdEstadoAprobacion = info_param_op.IdEstadoAprobacion;
-
+            model.IdUsuario = SessionFixed.IdUsuario;
             string mensaje = bus_orden_pago.validar(model);
+
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model.IdEmpresa);
@@ -243,6 +251,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             bus_orden_pago_tipo = new cp_orden_pago_tipo_x_empresa_Bus();
             bus_orden_pago = new cp_orden_pago_Bus();
             bus_cancelacion = new cp_orden_pago_cancelaciones_Bus();
+            model.IdUsuario = SessionFixed.IdUsuario;
+
             if (bus_cancelacion.si_existe_cancelacion(IdEmpresa, model.IdOrdenPago))
             {
                 mensaje = "La orden de pago tiene cancelaciones no se puede modificar";
@@ -324,7 +334,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
 
             bus_orden_pago = new cp_orden_pago_Bus();
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
                 if (bus_orden_pago.anularDB(model))
                     return RedirectToAction("Index");
                 else

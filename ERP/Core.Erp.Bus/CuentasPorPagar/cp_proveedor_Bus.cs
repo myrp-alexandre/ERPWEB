@@ -1,4 +1,5 @@
-﻿using Core.Erp.Data.CuentasPorPagar;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Data.CuentasPorPagar;
 using Core.Erp.Data.General;
 using Core.Erp.Info.CuentasPorPagar;
 using DevExpress.Web;
@@ -12,6 +13,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_proveedor_Data odata = new cp_proveedor_Data();
         tb_persona_Data odata_per = new tb_persona_Data();
 
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
         public List<cp_proveedor_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try
@@ -42,7 +44,10 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
-                if (info.IdPersona == 0)
+                bool si_grabo = false;
+                decimal IdPersona = bus_persona.validar_existe_cedula(info.info_persona.pe_cedulaRuc);
+
+                if (IdPersona == 0)
                 {
                     info.info_persona.pe_telfono_Contacto = info.pr_telefonos;
                     info.info_persona.pe_direccion = info.pr_direccion;
@@ -50,15 +55,22 @@ namespace Core.Erp.Bus.CuentasPorPagar
                     info.info_persona.pe_celular = info.pr_celular;
 
                     info.info_persona = odata_per.armar_info(info.info_persona);
-                    if (odata_per.guardarDB(info.info_persona))
-                    {
-                        info.IdPersona = info.info_persona.IdPersona;
-                        return odata.guardarDB(info);
-                    }
+
+                    si_grabo = bus_persona.guardarDB(info.info_persona);
                 }
                 else
-                    return odata.guardarDB(info);
-                return false;
+                {
+                    info.info_persona.IdPersona = IdPersona;
+                    si_grabo = bus_persona.modificarDB(info.info_persona);
+                }
+
+                if (si_grabo)
+                {
+                    info.IdPersona = info.info_persona.IdPersona;
+                    si_grabo = odata.guardarDB(info);
+                }
+
+                return si_grabo;
             
             }
             catch (Exception)

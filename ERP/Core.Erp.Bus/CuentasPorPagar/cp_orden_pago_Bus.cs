@@ -97,7 +97,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         }
 
         public Boolean guardarDB(cp_orden_pago_Info info)
-        {
+        {            
             var ObservacionComprobante = "";
             try
             {                
@@ -135,17 +135,17 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.IdSucursal = info.IdSucursal;
                 info.info_comprobante.cb_Estado = "A";
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
-                info.info_comprobante.IdEmpresa = info.IdEmpresa;
 
                 if (info_cliente != null || info_empleado != null || info_persona != null || info_proveedor != null)
                 {
                     if (info.Observacion == null)
                         info.Observacion = "";
                     info.info_comprobante.cb_Observacion = ObservacionComprobante;
-
                 }
                 else
+                {
                     info.info_comprobante.cb_Observacion = info.Observacion;
+                }                
 
                 if (bus_contabilidad.guardarDB(info.info_comprobante))
                 {                   
@@ -154,7 +154,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

@@ -27,5 +27,6 @@ namespace Core.Erp.Data
         public string Estado { get; set; }
         public int IdBanco { get; set; }
         public string cb_Observacion { get; set; }
+        public string NombreUsuario { get; set; }
     }
 }

@@ -104,7 +104,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             else
             {
-                ViewBag.mensaje = "Número identificación inválida";
+                ViewBag.mensaje = "Número de identificación inválida";
                 cargar_combos();
                 return View(model);
             }
@@ -134,10 +134,10 @@ namespace Core.Erp.Web.Areas.General.Controllers
         #endregion
 
         #region Json
-        public JsonResult Validar_cedula_ruc(string tipo_documento = "", string cedula_ruc = "")
+        public JsonResult Validar_cedula_ruc(string naturaleza = "", string tipo_documento = "", string cedula_ruc = "")
         {
             var return_naturaleza = "";
-            var isValid = cl_funciones.ValidaIdentificacion(tipo_documento, "", cedula_ruc, ref return_naturaleza);
+            var isValid = cl_funciones.ValidaIdentificacion(tipo_documento, naturaleza, cedula_ruc, ref return_naturaleza);
 
             return Json(new { isValid= isValid, return_naturaleza = return_naturaleza }, JsonRequestBehavior.AllowGet);
         }
