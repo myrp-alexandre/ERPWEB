@@ -88,6 +88,7 @@
             this.xrTableRow20 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_direccion = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow21 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell37 = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbl_telefonos = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
@@ -119,10 +120,9 @@
             this.xrTableRow23 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_dir = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow24 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell38 = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbl_telef = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
-            this.xrTableCell37 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell38 = new DevExpress.XtraReports.UI.XRTableCell();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable11)).BeginInit();
@@ -634,11 +634,18 @@
             this.xrTableRow21.Name = "xrTableRow21";
             this.xrTableRow21.Weight = 1D;
             // 
+            // xrTableCell37
+            // 
+            this.xrTableCell37.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Su_Descripcion]")});
+            this.xrTableCell37.Name = "xrTableCell37";
+            this.xrTableCell37.Weight = 0.64541532012380876D;
+            // 
             // lbl_telefonos
             // 
             this.lbl_telefonos.Name = "lbl_telefonos";
             this.lbl_telefonos.Text = "lbl_telefonos";
-            this.lbl_telefonos.Weight = 0.80021339962467408D;
+            this.lbl_telefonos.Weight = 1.3545846798761914D;
             // 
             // ReportHeader
             // 
@@ -912,11 +919,18 @@
             this.xrTableRow24.Name = "xrTableRow24";
             this.xrTableRow24.Weight = 1D;
             // 
+            // xrTableCell38
+            // 
+            this.xrTableCell38.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Su_Descripcion]")});
+            this.xrTableCell38.Name = "xrTableCell38";
+            this.xrTableCell38.Weight = 0.645415445963383D;
+            // 
             // lbl_telef
             // 
             this.lbl_telef.Name = "lbl_telef";
             this.lbl_telef.Text = "lbl_telefonos";
-            this.lbl_telef.Weight = 0.80021316569679812D;
+            this.lbl_telef.Weight = 1.354584554036617D;
             // 
             // lbl_imagen
             // 
@@ -924,20 +938,6 @@
             this.lbl_imagen.Name = "lbl_imagen";
             this.lbl_imagen.SizeF = new System.Drawing.SizeF(124.9167F, 74.99999F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            // 
-            // xrTableCell37
-            // 
-            this.xrTableCell37.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Su_Descripcion]")});
-            this.xrTableCell37.Name = "xrTableCell37";
-            this.xrTableCell37.Weight = 1.1997866003753259D;
-            // 
-            // xrTableCell38
-            // 
-            this.xrTableCell38.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Su_Descripcion]")});
-            this.xrTableCell38.Name = "xrTableCell38";
-            this.xrTableCell38.Weight = 1.1997868343032019D;
             // 
             // CXP_011_Rpt
             // 
