@@ -37,5 +37,6 @@ namespace Core.Erp.Data
         public string GeneraDiario { get; set; }
         public string IdEstadoAprobacion { get; set; }
         public string estado_apro { get; set; }
+        public string NombreUsuario { get; set; }
     }
 }

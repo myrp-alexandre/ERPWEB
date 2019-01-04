@@ -32,6 +32,9 @@ namespace Core.Erp.Data
         public string cb_Cheque { get; set; }
         public Nullable<decimal> cb_Cheque_numero { get; set; }
         public int IdBanco { get; set; }
-        public string Expr1 { get; set; }
+        public string NombreUsuario { get; set; }
+        public string ba_Num_Cuenta { get; set; }
+        public string ba_Tipo { get; set; }
+        public string ba_descripcion { get; set; }
     }
 }
