@@ -38,9 +38,9 @@ namespace Core.Erp.Data
         public string Motivo_aproba { get; set; }
     
         public virtual ICollection<cp_cuotas_x_doc_det> cp_cuotas_x_doc_det { get; set; }
-        public virtual cp_orden_pago cp_orden_pago { get; set; }
         public virtual ICollection<cp_orden_pago_cancelaciones> cp_orden_pago_cancelaciones { get; set; }
         public virtual ICollection<cp_orden_pago_cancelaciones> cp_orden_pago_cancelaciones1 { get; set; }
         public virtual cp_orden_pago_formapago cp_orden_pago_formapago { get; set; }
+        public virtual cp_orden_pago cp_orden_pago { get; set; }
     }
 }

@@ -125,6 +125,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdFormaPago = Entity.IdFormaPago,
                         IdTipoFlujo = Entity.IdTipoFlujo,
                         Estado = Entity.Estado,
+                        IdSolicitudPago = Entity.IdSolicitudPago
+                        
                     };
                     info.detalle
                           = (from q in Context.cp_orden_pago_det
@@ -223,6 +225,15 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
                     };
+
+                    if (info.IdSolicitudPago != null)
+                    {
+                        decimal IdSolicitudPago = Convert.ToDecimal(info.IdSolicitudPago);
+                        var sol = Context.cp_SolicitudPago.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSolicitud == IdSolicitudPago).FirstOrDefault();
+                        if (sol != null)
+                            Entity.IdSolicitudPago = sol.IdSolicitud;
+                    }
+
                     Context.cp_orden_pago.Add(Entity);
               
 
@@ -284,9 +295,19 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdTipoFlujo = info.IdTipoFlujo;
                         Entity.IdUsuarioUltMod = info.IdUsuario;
 
-                        Context.SaveChanges();                        
+                        if (info.IdSolicitudPago != null)
+                        {
+                            decimal IdSolicitudPago = Convert.ToDecimal(info.IdSolicitudPago);
+                            var sol = Context.cp_SolicitudPago.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSolicitud == IdSolicitudPago).FirstOrDefault();
+                            if (sol != null)
+                                Entity.IdSolicitudPago = sol.IdSolicitud;
+                            else
+                                Entity.IdSolicitudPago = null;
+                        }
+                        else
+                            Entity.IdSolicitudPago = null;
+                        Context.SaveChanges();        
                     }
-
                 }
 
                 return true;
