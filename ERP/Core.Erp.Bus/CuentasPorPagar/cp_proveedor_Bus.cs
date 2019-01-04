@@ -86,6 +86,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 if (info.IdPersona == 0)
                 {
                     info.info_persona = odata_per.armar_info(info.info_persona);
+                    info.info_persona.pe_nombreCompleto = (info.info_persona.pe_nombreCompleto == "" ? info.info_persona.pe_razonSocial : info.info_persona.pe_nombreCompleto);
                     if (odata_per.guardarDB(info.info_persona))
                     {
                         info.IdPersona = info.info_persona.IdPersona;
@@ -114,7 +115,20 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
-                return odata.modificarDB(info);
+                bool si_grabo = false;
+                var infoPersona = bus_persona.get_info(info.IdPersona);
+
+                if (infoPersona.IdPersona != 0)
+                {
+                    info.info_persona.pe_nombreCompleto = (info.info_persona.pe_nombreCompleto == "" ? info.info_persona.pe_razonSocial : info.info_persona.pe_nombreCompleto);
+                    si_grabo = odata_per.modificarDB(info.info_persona);
+
+                    if (si_grabo)
+                    {
+                        si_grabo = odata.modificarDB(info);
+                    }
+                }
+                return si_grabo;
             }
             catch (Exception)
             {

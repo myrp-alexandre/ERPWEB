@@ -201,7 +201,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     cp_proveedor Entity = Context.cp_proveedor.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdProveedor == info.IdProveedor);
                     if (Entity == null) return false;
 
-                    Entity.IdPersona = info.IdPersona;
+                    //Entity.IdPersona = info.IdPersona;
                     Entity.IdClaseProveedor = info.IdClaseProveedor;
                     Entity.IdCiudad = info.IdCiudad;
                     Entity.IdBanco_acreditacion = info.IdBanco_acreditacion;

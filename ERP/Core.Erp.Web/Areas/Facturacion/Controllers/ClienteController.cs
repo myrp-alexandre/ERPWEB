@@ -266,11 +266,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
                 foreach (var item in Lista_TipoCliente)
                 {
-                    if (!bus_cliente_tipo.guardarDB(item))
-                    {
-                        ViewBag.mensaje = "Error al importar el archivo";
-                        return View(model);
-                    }
+                    //if (!bus_cliente_tipo.guardarDB(item))
+                    //{
+                    //    ViewBag.mensaje = "Error al importar el archivo";
+                    //    return View(model);
+                    //}
                 }
 
                 foreach (var item in Lista_Cliente)
@@ -548,6 +548,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             }
 
                             info_persona_cliente.pe_Naturaleza = return_naturaleza;
+                            info_persona_cliente.pe_nombreCompleto = (info_persona_cliente.pe_razonSocial != "" ? info_persona_cliente.pe_razonSocial : (info_persona_cliente.pe_apellido+' '+info_persona.pe_nombre));
+
                             var CtaCbleClase = Lista_ClienteTipo.Where(q => q.Idtipo_cliente == Convert.ToInt32(reader.GetValue(13))).FirstOrDefault();
                             fa_cliente_Info info = new fa_cliente_Info
                             {

@@ -119,6 +119,7 @@
                     <label for="pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
+                    <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                 </div>
             </div>
             <div class="col-md-10">
@@ -839,6 +840,14 @@
 
 
 <script>
+    $(function () {
+        $("#error_documento").hide();
+    })
+
+    $("#pe_cedulaRuc").blur(function () {
+        Validar_cedula_ruc();
+    });
+
     mostrar_horas();
     dias_vacaciones();
     $("#pe_cedulaRuc").keyup(function () {
@@ -877,7 +886,7 @@
         }
     };
 
-    
+
     function dias_vacaciones() {
         var dias = GozaMasDeQuinceDiasVaciones.GetValue();
         if (dias == true) {
@@ -921,7 +930,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
 
-               
+
                 //$("#uploadedImage").load();
               //  $("#uploadedImage").attr("src",//Url.Content(Core.Erp.Web.Helps.SessionFixed.NombreImagen));
 
@@ -931,5 +940,33 @@
                 });
     }
 
+    function Validar_cedula_ruc() {
+        var datos = {
+            tipo_documento: $("#IdTipoDocumento").val(),
+            cedula_ruc: $("#pe_cedulaRuc").val(),
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Validar_cedula_ruc", "Persona", new { Area = "General" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                if (data.isValid == true) {
+                    $("#error_documento").hide();
+                }
+                else {
+                    $("#error_documento").show();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    };
 
 </script>

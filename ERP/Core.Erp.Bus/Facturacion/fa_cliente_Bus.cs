@@ -87,6 +87,7 @@ namespace Core.Erp.Bus.Facturacion
                 if (info.IdPersona == 0)
                 {
                     info.info_persona = odata_per.armar_info(info.info_persona);
+                    
                     if (odata_per.guardarDB(info.info_persona))
                     {
                         info.IdPersona = info.info_persona.IdPersona;
