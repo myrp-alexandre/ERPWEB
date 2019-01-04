@@ -297,7 +297,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             catch (Exception ex)
             {
-
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
                 SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());

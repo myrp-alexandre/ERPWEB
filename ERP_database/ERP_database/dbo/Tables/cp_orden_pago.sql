@@ -12,6 +12,7 @@
     [IdFormaPago]         VARCHAR (20)   NOT NULL,
     [Estado]              VARCHAR (1)    NOT NULL,
     [IdTipoFlujo]         NUMERIC (18)   NULL,
+    [IdSolicitudPago]     NUMERIC (18)   NULL,
     [IdUsuarioAprobacion] VARCHAR (20)   NULL,
     [MotivoAprobacion]    VARCHAR (1000) NULL,
     [FechaAprobacion]     DATETIME       NULL,
@@ -28,6 +29,8 @@
     CONSTRAINT [FK_cp_orden_pago_tb_persona] FOREIGN KEY ([IdPersona]) REFERENCES [dbo].[tb_persona] ([IdPersona]),
     CONSTRAINT [FK_cp_orden_pago_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 
 
 
