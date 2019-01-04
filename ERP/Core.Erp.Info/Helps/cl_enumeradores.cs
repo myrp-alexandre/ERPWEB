@@ -66,7 +66,8 @@
             SOLOHIJOS,
             PORMODULO,
             TODOS,
-            TODOS_MENOS_PADRES
+            TODOS_MENOS_PADRES,
+            PORSUCURSAL
         }        
 
         public enum eTipoCatalogoInventario

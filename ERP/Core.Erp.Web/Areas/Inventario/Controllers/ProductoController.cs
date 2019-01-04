@@ -65,11 +65,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         public List<in_Producto_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),cl_enumeradores.eTipoBusquedaProducto.SOLOHIJOS,cl_enumeradores.eModulo.INV,0);
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),cl_enumeradores.eTipoBusquedaProducto.SOLOHIJOS,cl_enumeradores.eModulo.INV,0,0);
         }
         public List<in_Producto_Info> get_list_bajo_demandaComposicion(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.TODOS_MENOS_PADRES, cl_enumeradores.eModulo.INV, 0);
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.TODOS_MENOS_PADRES, cl_enumeradores.eModulo.INV, 0,0);
         }
         public in_Producto_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
         {
@@ -297,7 +297,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             catch (Exception ex)
             {
-
                 if (model.pr_imagen == null)
                     model.pr_imagen = new byte[0];
                 SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());

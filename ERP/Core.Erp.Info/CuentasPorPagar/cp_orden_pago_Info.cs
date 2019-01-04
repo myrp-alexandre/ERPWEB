@@ -16,8 +16,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public int IdSucursal { get; set; }
         public string Su_Descripcion { get; set; }
         public decimal IdOrdenPago { get; set; }
-        [Required(ErrorMessage = "El campo observación es obligatorio")]
-        [StringLength(500, MinimumLength = 4, ErrorMessage = "La observación debe tener mínimo 4 caracteres y máximo 500")]
+        [Required(ErrorMessage = "El campo observación es obligatorio")]        
         public string Observacion { get; set; }
         [Required(ErrorMessage = "El campo tipo de orden de pago es obligatorio")]
         public string IdTipo_op { get; set; }
@@ -33,14 +32,17 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string IdFormaPago { get; set; }
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
+        public Nullable<decimal> IdSolicitudPago { get; set; }
+
+        #region Campos auditoria
         public string IdUsuario { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         [Required(ErrorMessage = "El campo observación es obligatorio")]
         [StringLength(150, MinimumLength = 3, ErrorMessage = "La observación debe tener mínimo 3 caracteres y máximo 150")]
         public string MotivoAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
+        #endregion
+
         public Nullable<decimal> IdTipoFlujo { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }        
         [Required(ErrorMessage = "El campo valor a pagar a cancelar es obligatorio")]
@@ -51,14 +53,8 @@ namespace Core.Erp.Info.CuentasPorPagar
         public List<cp_orden_pago_det_Info> detalle { get; set; }
         public string Nom_Beneficiario { get; set; }
         public Nullable<double> Total_OP { get; set; }
-        public bool check { get; set; }
         public ct_cbtecble_Info info_comprobante { get; set; }
-        public bool seleccionado { get; set; }
-        public decimal IdEmpleado { get; set; }
-        public string IdUsuarioAprobacion { get; set; }
-        public string MotivoAprobacion { get; set; }
-        public Nullable<System.DateTime> FechaAprobacion { get; set; }
-
+       
         public cp_orden_pago_Info()
         {
             detalle = new List<cp_orden_pago_det_Info>();
