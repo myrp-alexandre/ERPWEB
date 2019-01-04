@@ -210,7 +210,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
         public ActionResult Anular(int IdEmpresa = 0 , decimal IdProveedor = 0)
         {

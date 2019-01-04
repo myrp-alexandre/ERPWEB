@@ -123,7 +123,6 @@ namespace Core.Erp.Bus.RRHH
             }
             catch (Exception )
             {
-
                 throw;
             }
         }

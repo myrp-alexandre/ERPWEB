@@ -455,6 +455,7 @@
 
     function Validar_cedula_ruc() {
         var datos = {
+            naturaleza: $("#pe_Naturaleza").val(),
             tipo_documento: $("#IdTipoDocumento").val(),
             cedula_ruc: $("#pe_cedulaRuc").val(),
         }
@@ -469,6 +470,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                console.log(data);
                 if (data.isValid == true) {
                     $("#error_documento").hide();
                     $("#pe_Naturaleza").val(data.return_naturaleza);
