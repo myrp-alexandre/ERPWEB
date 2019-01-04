@@ -67,18 +67,10 @@
             c.SetDataItemTemplateContent(tc =>
             {
 
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstadoAprobacion")) == "PENDI")
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
-
                     ViewContext.Writer.Write(
                     Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdOrdenPago = DataBinder.Eval(tc.DataItem, "IdOrdenPago") }) + "&nbsp;" +
-                    Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdOrdenPago = DataBinder.Eval(tc.DataItem, "IdOrdenPago") },
-                    new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                }
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "IdEstadoAprobacion")) == "APRO")
-                {
-                    ViewContext.Writer.Write(
                     Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdOrdenPago = DataBinder.Eval(tc.DataItem, "IdOrdenPago") },
                     new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );

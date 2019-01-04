@@ -87,7 +87,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                 return false;
             }
 
-            if(i_validar.lst_ct_cbtecble_det.Sum(q => q.dc_Valor) != 0)
+            if(Math.Round(i_validar.lst_ct_cbtecble_det.Sum(q => q.dc_Valor),2) != 0)
             {
                 mensaje = "La suma de los detalles debe ser 0";
                 return false;
@@ -96,6 +96,12 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             if (i_validar.lst_ct_cbtecble_det.Where(q=>q.dc_Valor == 0).Count() > 0)
             {
                 mensaje = "Existen detalles con valor 0 en el debe o haber";
+                return false;
+            }
+
+            if (i_validar.lst_ct_cbtecble_det.Where(q => string.IsNullOrEmpty(q.IdCtaCble)).Count() > 0)
+            {
+                mensaje = "Existen detalles sin cuenta contable";
                 return false;
             }
 

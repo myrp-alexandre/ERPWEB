@@ -83,26 +83,11 @@
         });
 
         settings.Columns.Add("IdProducto","ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("pr_descripcion","Descripción").Width = Unit.Percentage(20);
+        settings.Columns.Add("pr_descripcion","Descripción").Width = Unit.Percentage(40);
         settings.Columns.Add("tp_descripcion", "Tipo").Width = Unit.Percentage(10);
         settings.Columns.Add("nom_presentacion", "Presentación").Width = Unit.Percentage(10);
         settings.Columns.Add("ma_descripcion", "Marca").Width = Unit.Percentage(10);
         settings.Columns.Add("nom_categoria", "Categoria").Width = Unit.Percentage(10);
-
-
-        settings.Columns.Add("lote_num_lote","Lote").Width = Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "lote_fecha_vcto";
-            column.Caption = "Fecha vcto.";
-            column.Width = Unit.Percentage(10);
-            column.PropertiesEdit.DisplayFormatString = "d";
-            column.EditorProperties().DateEdit(sp =>
-            {
-                column.PropertiesEdit.DisplayFormatString = "d";
-                sp.Width = Unit.Percentage(100);
-            });
-        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";

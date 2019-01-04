@@ -4,8 +4,6 @@ using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Inventario
 {
@@ -160,7 +158,6 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
         public List<in_Producto_Info> get_list_padres(int IdEmpresa, bool mostrar_anulados)
         {
             try
@@ -206,7 +203,6 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
         public List<in_Producto_Info> get_list_combo_hijo(int IdEmpresa, decimal IdProducto_padre)
         {
             try
@@ -323,10 +319,13 @@ namespace Core.Erp.Data.Inventario
                         se_distribuye = Entity.se_distribuye == null ? false : Convert.ToBoolean(Entity.se_distribuye),
                         pr_imagen=Entity.pr_imagen,
                         IdCtaCtble_Inve = Entity.in_categorias.IdCtaCtble_Inve,
-                        pr_descripcion_combo = Entity.pr_descripcion
+                        pr_descripcion_combo = Entity.pr_descripcion,
+                        ca_descripcion = Entity.in_categorias.ca_Categoria                        
                     };
                 }
-                
+
+                info.pr_descripcion_combo = info.pr_descripcion + " - " + info.ca_descripcion;
+
                 return info;
             }
             catch (Exception)
@@ -649,7 +648,7 @@ namespace Core.Erp.Data.Inventario
         {
             int OrdenVcto = 1;
             Lista.ForEach(V => {
-                V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : " - "+ V.ca_descripcion);
+                V.pr_descripcion = V.pr_descripcion + "-"+V.ca_descripcion;
                 V.pr_descripcion_combo = V.pr_descripcion;
                 V.OrdenVcto = OrdenVcto++;
             });
@@ -1157,6 +1156,7 @@ namespace Core.Erp.Data.Inventario
                                 Estado = "A"
                             });
                         }
+                        Context.SaveChanges();
                         #endregion
                         #region Linea
                         List<in_linea> Lista_Linea;
@@ -1187,6 +1187,7 @@ namespace Core.Erp.Data.Inventario
                                 Estado = "A"
                             });
                         }
+                        Context.SaveChanges();
                         #endregion
                         #region Grupo
 
@@ -1225,8 +1226,9 @@ namespace Core.Erp.Data.Inventario
 
                             });
                         }
+                        Context.SaveChanges();
                         #endregion
-                        
+
                         foreach (var item in Lista_Subgrupo)
                         {
                             in_subgrupo Entity_Sub = new in_subgrupo
@@ -1241,6 +1243,7 @@ namespace Core.Erp.Data.Inventario
                             };
                             Context.in_subgrupo.Add(Entity_Sub);
                         }
+                        Context.SaveChanges();
                     }
 
                     if (Lista_Presentacion.Count > 0)
@@ -1249,6 +1252,7 @@ namespace Core.Erp.Data.Inventario
                         {
                             in_presentacion Entity_Pre = new in_presentacion
                             {
+                                IdEmpresa = item.IdEmpresa,
                                 IdPresentacion = item.IdPresentacion,
                                 nom_presentacion = item.nom_presentacion,
                                 estado = item.estado = "A",
@@ -1272,47 +1276,49 @@ namespace Core.Erp.Data.Inventario
                             Context.in_Marca.Add(Entity_Mar);
                         }
                     }
+                    Context.SaveChanges();                    
 
                     if (Lista_Producto.Count > 0)
                     {
-                        foreach (var item in Lista_Producto)
-                        {
-                            in_Producto Entity_Pro = new in_Producto
-                            {
-                                IdPresentacion = item.IdPresentacion,
-                                IdProducto = item.IdProducto,
-                                Estado = item.Estado = "A",
-                                IdCategoria = item.IdCategoria,
-                                IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
-                                IdEmpresa = item.IdEmpresa,
-                                IdGrupo = item.IdGrupo,
-                                IdLinea = item.IdLinea,
-                                IdMarca = item.IdMarca,
-                                IdProductoTipo = item.IdProductoTipo,
-                                IdProducto_padre = item.IdProducto_padre,
-                                IdSubGrupo = item.IdSubGrupo,
-                                IdUnidadMedida = item.IdUnidadMedida,
-                                IdUnidadMedida_Consumo = item.IdUnidadMedida_Consumo,
-                                IdUsuario = item.IdUsuario,
-                                Aparece_modu_Activo_F = item.Aparece_modu_Activo_F,
-                                Aparece_modu_Compras = item.Aparece_modu_Compras,
-                                Aparece_modu_Inventario = item.Aparece_modu_Inventario,
-                                Aparece_modu_Ventas = item.Aparece_modu_Ventas,
-                                lote_fecha_fab = item.lote_fecha_fab,
-                                lote_fecha_vcto = item.lote_fecha_vcto,
-                                lote_num_lote = item.lote_num_lote,
-                                precio_1 = item.precio_1,
-                                pr_codigo = item.pr_codigo,
-                                pr_codigo2 = item.pr_codigo2,
-                                pr_codigo_barra = item.pr_codigo_barra,
-                                pr_descripcion = item.pr_descripcion,
-                                pr_descripcion_2 = item.pr_descripcion_2,
-                                pr_imagen = item.pr_imagen,
-                                pr_observacion = item.pr_observacion,
-                                se_distribuye = item.se_distribuye,      
-                            };
-                            Context.in_Producto.Add(Entity_Pro);
-                        }
+                        var lst = (from p in Lista_Producto
+                                   join c in Lista_Subgrupo
+                                   on new { p.IdCategoria, p.IdLinea, p.IdGrupo, IdSubGrupo = p.IdSubGrupo }
+                                   equals new { c.IdCategoria, c.IdLinea, c.IdGrupo, IdSubGrupo = c.IdSubgrupo }
+                                   select new in_Producto
+                                   {
+                                       IdPresentacion = p.IdPresentacion,
+                                       IdProducto = p.IdProducto,
+                                       Estado = p.Estado = "A",
+                                       IdCategoria = p.IdCategoria,
+                                       IdCod_Impuesto_Iva = p.IdCod_Impuesto_Iva,
+                                       IdEmpresa = p.IdEmpresa,
+                                       IdGrupo = p.IdGrupo,
+                                       IdLinea = p.IdLinea,
+                                       IdMarca = p.IdMarca,
+                                       IdProductoTipo = p.IdProductoTipo,
+                                       IdProducto_padre = p.IdProducto_padre,
+                                       IdSubGrupo = p.IdSubGrupo,
+                                       IdUnidadMedida = p.IdUnidadMedida,
+                                       IdUnidadMedida_Consumo = p.IdUnidadMedida_Consumo,
+                                       IdUsuario = p.IdUsuario,
+                                       Aparece_modu_Activo_F = p.Aparece_modu_Activo_F,
+                                       Aparece_modu_Compras = p.Aparece_modu_Compras,
+                                       Aparece_modu_Inventario = p.Aparece_modu_Inventario,
+                                       Aparece_modu_Ventas = p.Aparece_modu_Ventas,
+                                       lote_fecha_fab = p.lote_fecha_fab,
+                                       lote_fecha_vcto = p.lote_fecha_vcto,
+                                       lote_num_lote = p.lote_num_lote,
+                                       precio_1 = p.precio_1,
+                                       pr_codigo = p.pr_codigo,
+                                       pr_codigo2 = p.pr_codigo2,
+                                       pr_codigo_barra = p.pr_codigo_barra,
+                                       pr_descripcion = p.pr_descripcion,
+                                       pr_descripcion_2 = p.pr_descripcion_2,
+                                       pr_imagen = p.pr_imagen,
+                                       pr_observacion = p.pr_observacion,
+                                       se_distribuye = p.se_distribuye,
+                                   }).ToList();
+                        Context.in_Producto.AddRange(lst);
                     }
 
                     Context.SaveChanges();

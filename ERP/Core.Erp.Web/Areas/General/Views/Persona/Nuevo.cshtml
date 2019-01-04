@@ -27,7 +27,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="pe_Naturaleza">Naturaleza*</label>
-                    @Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza" })
                     @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -46,6 +46,7 @@
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger", @id = "pe_cedulaRuc" })
                 </div>
+                <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
             </div>
         </div>
     </div>
@@ -210,7 +211,7 @@
 
 <script>
     $(function () {
-
+        $("#error_documento").hide();
         $('#pe_fechaNacimiento').datepicker({
             autoclose: true
         })
@@ -245,6 +246,7 @@
 
     function Validar_cedula_ruc() {
         var datos = {
+            naturaleza: $("#pe_Naturaleza").val(),
             tipo_documento: $("#IdTipoDocumento").val(),
             cedula_ruc: $("#pe_cedulaRuc").val(),
         }
@@ -261,10 +263,11 @@
             success: function (data) {
                 console.log(data);
                 if (data.isValid == true) {
-                    //$("#pe_Naturaleza")
+                    $("#error_documento").hide();
+                    $("#pe_Naturaleza").val(data.return_naturaleza);
                 }
                 else {
-
+                    $("#error_documento").show();
                 }                                
             },
             error: function (error) {

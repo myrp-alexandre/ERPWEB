@@ -258,7 +258,7 @@ namespace Core.Erp.Data.Contabilidad
                         IdEmpresa = Entity.IdEmpresa,
                         IdTipoCbte = e_tipo.IdTipoCbte_Anul,
                         IdCbteCble = get_id(Entity.IdEmpresa, e_tipo.IdTipoCbte_Anul),
-                        IdSucursal = info.IdSucursal,
+                        IdSucursal = Entity.IdSucursal,
                         cb_Estado = Entity.cb_Estado = "A",
                         cb_Fecha = DateTime.Now.Date,
                         cb_Observacion = "**REVERSO DE DIARIO tipo: "+ Entity.IdTipoCbte.ToString()+ " #cbte: "+ Entity.IdCbteCble.ToString()+"** "+ Entity.cb_Observacion,

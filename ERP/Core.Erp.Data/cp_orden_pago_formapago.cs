@@ -16,8 +16,8 @@ namespace Core.Erp.Data
     {
         public cp_orden_pago_formapago()
         {
-            this.cp_orden_pago_det = new HashSet<cp_orden_pago_det>();
             this.cp_orden_pago = new HashSet<cp_orden_pago>();
+            this.cp_orden_pago_det = new HashSet<cp_orden_pago_det>();
         }
     
         public string IdFormaPago { get; set; }
@@ -26,7 +26,7 @@ namespace Core.Erp.Data
         public string CodModulo { get; set; }
         public Nullable<int> IdTipoMovi_caj { get; set; }
     
-        public virtual ICollection<cp_orden_pago_det> cp_orden_pago_det { get; set; }
         public virtual ICollection<cp_orden_pago> cp_orden_pago { get; set; }
+        public virtual ICollection<cp_orden_pago_det> cp_orden_pago_det { get; set; }
     }
 }

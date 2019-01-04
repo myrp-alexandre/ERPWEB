@@ -6,7 +6,7 @@
     [IdCbteCble_cxp]       NUMERIC (18)  NULL,
     [IdTipoCbte_cxp]       INT           NULL,
     [Valor_a_pagar]        FLOAT (53)    NOT NULL,
-    [Referencia]           VARCHAR (50)  NULL,
+    [Referencia]           VARCHAR (MAX) NULL,
     [IdFormaPago]          VARCHAR (20)  NOT NULL,
     [Fecha_Pago]           DATE          NOT NULL,
     [IdEstadoAprobacion]   VARCHAR (10)  NOT NULL,
@@ -20,6 +20,8 @@
     CONSTRAINT [FK_cp_orden_pago_det_cp_orden_pago_formapago] FOREIGN KEY ([IdFormaPago]) REFERENCES [dbo].[cp_orden_pago_formapago] ([IdFormaPago]),
     CONSTRAINT [FK_cp_orden_pago_det_ct_cbtecble] FOREIGN KEY ([IdEmpresa_cxp], [IdTipoCbte_cxp], [IdCbteCble_cxp]) REFERENCES [dbo].[ct_cbtecble] ([IdEmpresa], [IdTipoCbte], [IdCbteCble])
 );
+
+
 
 
 GO

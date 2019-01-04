@@ -283,14 +283,13 @@
     }
 }
 <script>
-
-
     function OnSelectedCiudadChanged() {
         GridView_cliente_contacto.GetEditor("IdParroquia").PerformCallback();
     }
     function ParroquiaComboBox_BeginCallBack(s, e) {
         e.customArgs["IdCiudad"] = GridView_cliente_contacto.GetEditor("IdCiudad").GetValue();
     }
+
     $(function () {
         get_list_parroquia();
     })
@@ -430,5 +429,4 @@
             IdCtaCble_cxc_Credito.SetValue(null);
         }
     }
-
 </script>

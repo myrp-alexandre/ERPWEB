@@ -11,13 +11,23 @@
 
 @using (Html.BeginForm("Modificar", "Persona", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
+
     @Html.HiddenFor(q => q.IdPersona)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="pe_Naturaleza">Naturaleza*</label>
-                    @Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza" })
                     @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -35,6 +45,7 @@
                     <label for="pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
+                    <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                 </div>
             </div>
         </div>
@@ -200,11 +211,15 @@
 
 <script>
     $(function () {
-
+        $("#error_documento").hide();
         $('#pe_fechaNacimiento').datepicker({
             autoclose: true
         })
     })
+
+    $("#pe_cedulaRuc").blur(function () {
+        Validar_cedula_ruc();
+    });
 
     $("#pe_apellido").keyup(function () {
         actualizar_nombre_completo();
@@ -228,4 +243,34 @@
             $("#pe_nombreCompleto").val(razon_social)
         }
     }
+
+    function Validar_cedula_ruc() {
+        var datos = {
+            naturaleza: $("#pe_Naturaleza").val(),
+            tipo_documento: $("#IdTipoDocumento").val(),
+            cedula_ruc: $("#pe_cedulaRuc").val(),
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Validar_cedula_ruc", "Persona", new { Area = "General" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.isValid == true) {
+                    $("#error_documento").hide();
+                    $("#pe_Naturaleza").val(data.return_naturaleza);
+                }
+                else {
+                    $("#error_documento").show();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    };
 </script>

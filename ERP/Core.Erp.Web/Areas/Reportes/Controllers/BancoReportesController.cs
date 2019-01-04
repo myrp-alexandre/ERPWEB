@@ -108,7 +108,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 NumDesde = 0 , 
                 NumHasta = 0
             };
-            BAN_005_Rpt report = new BAN_005_Rpt();
+            BAN_006_Rpt report = new BAN_006_Rpt();
             #region Cargo diseño desde base
             if (model.IdBanco != 0)
             {
@@ -118,7 +118,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             }
             #endregion
             report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
-            report.p_IdTipocbte.Value = 0;
+            report.p_IdTipoCbte.Value = 0;
             report.p_IdCbteCble.Value = 0;
             report.p_NumDesde.Value = model.NumDesde;
             report.p_NumHasta.Value = model.NumHasta;

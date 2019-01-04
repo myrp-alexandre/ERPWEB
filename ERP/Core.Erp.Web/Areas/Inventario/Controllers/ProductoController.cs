@@ -880,14 +880,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                         in_subgrupo_Info info = new in_subgrupo_Info
                         {
                             IdEmpresa = IdEmpresa,
-                            IdCategoria = Convert.ToString(reader.GetValue(0)),
-                            NomCategoria = Convert.ToString(reader.GetValue(1)),
+                            IdCategoria = Convert.ToString(reader.GetValue(0)).Trim(),
+                            NomCategoria = Convert.ToString(reader.GetValue(1)).Trim(),
                             IdLinea = Convert.ToInt32(reader.GetValue(2)),
-                            NomLinea = Convert.ToString(reader.GetValue(3)),
+                            NomLinea = Convert.ToString(reader.GetValue(3)).Trim(),
                             IdGrupo = Convert.ToInt32(reader.GetValue(4)),
-                            NomGrupo = Convert.ToString(reader.GetValue(5)),
+                            NomGrupo = Convert.ToString(reader.GetValue(5)).Trim(),
                             IdSubgrupo = Convert.ToInt32(reader.GetValue(6)),
-                            nom_subgrupo = Convert.ToString(reader.GetValue(7)),
+                            nom_subgrupo = Convert.ToString(reader.GetValue(7)).Trim(),
                             IdUsuario = SessionFixed.IdUsuario
                         };
                         ListaSubgrupo.Add(info);
@@ -959,8 +959,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                         {
                             IdEmpresa = IdEmpresa,
                             IdProducto = Convert.ToInt32(reader.GetValue(0)),
-                            pr_codigo = Convert.ToString(reader.GetValue(1)),
-                            pr_descripcion = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)),
+                            pr_codigo = Convert.ToString(reader.GetValue(1)).Trim(),
+                            pr_descripcion = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)).Trim(),
+                            pr_descripcion_2 = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)).Trim(),
                             IdMarca = Convert.ToInt32(reader.GetValue(3)),
                             IdPresentacion = Convert.ToString(reader.GetValue(4)),
                             IdCategoria = Convert.ToString(reader.GetValue(5)),
@@ -971,7 +972,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                             IdUnidadMedida = Convert.ToString(reader.GetValue(10)),
                             IdUnidadMedida_Consumo = Convert.ToString(reader.GetValue(11)),
                             precio_1 = Convert.ToDouble(reader.GetValue(12)),
-                            
+                            IdProductoTipo = 1
                         };
 
                         ListaProducto.Add(info);
