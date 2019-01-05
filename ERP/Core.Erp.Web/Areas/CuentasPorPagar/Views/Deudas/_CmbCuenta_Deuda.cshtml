@@ -6,7 +6,7 @@
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "CmbCuenta_comprobante_contable", Area = "Contabilidad" };
+        settings.CallbackRouteValues = new { Controller = "Deudas", Action = "CmbCuenta_Deuda", Area = "CuentasPorPagar" };
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "pc_Cuenta";
@@ -19,6 +19,6 @@
         settings.Properties.FilterMinLength = 3;
     })
      .BindList(new Core.Erp.Web.Areas.Contabilidad.Controllers.ComprobanteContableController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Contabilidad.Controllers.ComprobanteContableController().get_info_bajo_demanda)
-    .Bind((Model.GetType() == typeof(Core.Erp.Info.Contabilidad.ct_cbtecble_Info) || Model.GetType() == typeof(Core.Erp.Info.Contabilidad.ct_cbtecble_det_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Contabilidad.ct_cbtecble_det_Info>)) ? "" : Model);
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.Contabilidad.ct_cbtecble_Info) ||(Model.GetType() == typeof(Core.Erp.Info.CuentasPorPagar.cp_orden_giro_Info) || Model.GetType() == typeof(Core.Erp.Info.Contabilidad.ct_cbtecble_det_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Contabilidad.ct_cbtecble_det_Info>)) ? null : Model);
     }
 @comboBox.GetHtml()

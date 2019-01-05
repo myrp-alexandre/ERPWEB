@@ -651,9 +651,8 @@
         GridViewPartial_deudas_dc.GetEditor("IdGrupoPresupuesto").PerformCallback();
     }
     function GrupoComboBox_BeginCallback(s, e) {
-        e.customArgs["IdCtaCble"] = GridViewPartial_deudas_dc.GetEditor("IdCtaCble").GetValue();
-        e.customArgs["co_FechaFactura"] = moment(co_FechaFactura.GetDate()).format('DD/MM/YYYY');
-        e.customArgs["IdSucursal"] = $("#IdSucursal").val();
+        e.customArgs["pre_IdCtaCble"] = IdCtaCble.GetValue();
+        e.customArgs["pre_fecha"] = moment(co_FechaFactura.GetDate()).format('DD/MM/YYYY');
     }
 
     $(function () {

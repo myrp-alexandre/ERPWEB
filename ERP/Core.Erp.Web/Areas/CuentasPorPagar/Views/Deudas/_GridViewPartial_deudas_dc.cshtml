@@ -6,7 +6,7 @@
         settings.CallbackRouteValues = new { Controller = "Deudas", Action = "GridViewPartial_deudas_dc", Area = "CuentasPorPagar" };
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
-
+        settings.CommandColumn.ShowNewButtonInHeader = true;
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -18,7 +18,7 @@
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Deudas", Action = "EditingDelete", Area = "CuentasPorPagar" };
 
         settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
         settings.Settings.ShowFooter = true;
@@ -50,19 +50,19 @@
         {
             column.FieldName = "pc_Cuenta";
             column.Caption = "Cuenta";
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(35);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdCtaCble";
             column.Caption = "Cuenta";
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(35);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
-                Html.RenderPartial("Contabilidad/ComprobanteContable/_CmbCuenta_comprobante_contable", DataBinder.Eval(c.DataItem, "IdCtaCble"));
+                Html.RenderPartial("_CmbCuenta_Deuda", DataBinder.Eval(c.DataItem, "IdCtaCble"));
             });
         });
         settings.Columns.Add(column =>

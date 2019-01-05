@@ -11,8 +11,7 @@
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
-
-
+        
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ComprobanteContable", Action = "EditingAddNew", Area = "Contabilidad" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ComprobanteContable", Action = "EditingUpdate", Area = "Contabilidad" };

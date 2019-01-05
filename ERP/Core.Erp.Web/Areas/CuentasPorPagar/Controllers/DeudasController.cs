@@ -53,6 +53,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_retencion_Bus bus_retencion = new cp_retencion_Bus();
         cp_orden_giro_det_PorIngresar_List List_det_PorIngresar = new cp_orden_giro_det_PorIngresar_List();
         cp_codigo_SRI_Bus bus_sri = new cp_codigo_SRI_Bus();
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -71,6 +72,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
         }
         #endregion
+
+        public ActionResult CmbCuenta_Deuda()
+        {
+            ct_cbtecble_det_Info model = new ct_cbtecble_det_Info();
+            return PartialView("_CmbCuenta_Deuda", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demandaPlancta(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demandaPlancta(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
 
         #region Metodos ComboBox bajo demanda flujo
         ba_TipoFlujo_Bus bus_tipo = new ba_TipoFlujo_Bus();
@@ -253,26 +268,25 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             ViewBag.lst_sucursal = lst_sucursal;
         }
 
-        public ActionResult CargarGrupo(DateTime co_FechaFactura, int IdSucursal = 0, string IdCtaCble = "")
+        public ActionResult CargarGrupo()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
+            DateTime cb_Fecha = Request.Params["pre_fecha"] != null && !string.IsNullOrEmpty(Request.Params["pre_fecha"].ToString()) ? Convert.ToDateTime(Request.Params["pre_fecha"]).Date : DateTime.Now.Date;
+            string IdCtaCble = Request.Params["pre_IdCtaCble"] != null ? Request.Params["pre_IdCtaCble"].ToString() : "";
             return GridViewExtension.GetComboBoxCallbackResult(p =>
             {
                 p.TextField = "Descripcion";
                 p.ValueField = "IdGrupo";
                 p.ValueType = typeof(int);
-                p.BindList(bus_grupo.get_list_x_CtaCble(IdEmpresa, IdSucursal, IdCtaCble, co_FechaFactura));
+                p.BindList(bus_grupo.get_list_x_CtaCble(IdEmpresa, IdSucursal, IdCtaCble, cb_Fecha));
             });
         }
 
         private void cargar_combos_detalle()
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             pre_Grupo_Bus bus_grupo = new pre_Grupo_Bus();
-
-            var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false, true);
-            ViewBag.lst_cuentas = lst_cuentas;
 
             var lst_grupos = bus_grupo.GetList(IdEmpresa, false);
             ViewBag.lst_grupos = lst_grupos;
@@ -1099,6 +1113,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
     public class ct_cbtecble_det_List_fp
     {
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+
         string Variable = "ct_cbtecble_det_List_fp";
         public List<ct_cbtecble_det_Info> get_list(decimal IdTransaccionSession)
         {
@@ -1118,16 +1134,25 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public void AddRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
         {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
             info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
             info_det.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
             info_det.Descripcion = info_det.Descripcion;
+            if (!string.IsNullOrEmpty(info_det.IdCtaCble))
+            {
+                var cta = bus_plancta.get_info(IdEmpresa, info_det.IdCtaCble);
+                if (cta != null)
+                    info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            }
+            
             list.Add(info_det);
         }
 
         public void UpdateRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
         {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             ct_cbtecble_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
             edited_info.IdCtaCble = info_det.IdCtaCble;
             edited_info.dc_para_conciliar = info_det.dc_para_conciliar;
@@ -1136,6 +1161,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
             edited_info.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
             edited_info.Descripcion = info_det.Descripcion;
+
+            if (!string.IsNullOrEmpty(info_det.IdCtaCble))
+            {
+                var cta = bus_plancta.get_info(IdEmpresa, info_det.IdCtaCble);
+                if (cta != null)
+                    edited_info.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            }
         }
 
         public void DeleteRow(int secuencia, decimal IdTransaccionSession)
