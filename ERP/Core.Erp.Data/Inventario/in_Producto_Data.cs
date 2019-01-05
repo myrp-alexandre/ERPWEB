@@ -573,6 +573,7 @@ namespace Core.Erp.Data.Inventario
                     Entity.pr_imagen = info.pr_imagen;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
+                    /*
                     string SQL = "UPDATE in_Producto SET pr_descripcion = '" + info.pr_descripcion +
                         "', pr_descripcion_2 = '" + info.pr_descripcion_2 +
                         "', precio_1 = " + info.precio_1 +
@@ -591,7 +592,8 @@ namespace Core.Erp.Data.Inventario
                         "', pr_codigo_barra = '" + info.pr_codigo_barra +
                         "' where in_Producto.IdEmpresa = " + info.IdEmpresa + " AND in_Producto.IdProducto_padre = " + info.IdProducto;
                     int row = Context.Database.ExecuteSqlCommand(SQL);
-                    
+                    */
+
                     foreach (var item in info.lst_producto_x_bodega)
                     {
                         var prod_x_bos = Context.in_producto_x_tb_bodega.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdSucursal == item.IdSucursal && v.IdBodega == item.IdBodega && v.IdProducto == info.IdProducto).FirstOrDefault();
