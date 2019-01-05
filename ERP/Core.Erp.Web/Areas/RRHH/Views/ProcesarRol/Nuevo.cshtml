@@ -28,7 +28,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="FechaInicio">Proceso de la nómina*</label>
-                @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"),  new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                 @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -45,6 +45,16 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="IdSucursal">Sucursal*</label>
+            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+            @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-12">
@@ -65,13 +75,13 @@
 </div>
 <div id="Tabs" role="tabpanel">
     <ul class="nav nav-tabs" role="tablist">
-       
+
         <li class=" panel active">
             <a href="#tab_contratos_por_vencer" aria-controls="diario" role="tab" data-toggle="tab">Contratos por vencer</a>
         </li>
     </ul>
     <div class="tab-content" style="padding-top: 20px">
-       
+
         <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_contratos_por_vencer">
             <div class="row">
                 <div class="col-md-12">
