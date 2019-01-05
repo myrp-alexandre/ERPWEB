@@ -292,7 +292,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         private void cargar_combos_detalle()
         {
-            
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             /*
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();

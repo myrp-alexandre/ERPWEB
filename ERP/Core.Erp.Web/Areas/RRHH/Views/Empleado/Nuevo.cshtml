@@ -517,26 +517,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="em_fechaSalida">Fecha salida</label>
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    @Html.DevExpress().DateEditFor(q => q.em_fechaSalida, settings =>
-                           {
-                               settings.Name = "em_fechaSalida";
-                               settings.Properties.UseMaskBehavior = true;
-                               settings.Properties.EditFormat = EditFormat.Date;
-                               settings.Properties.EditFormatString = "dd/MM/yyyy";
-                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           }).GetHtml()
-                                    @Html.ValidationMessageFor(q => q.em_fechaSalida, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 
