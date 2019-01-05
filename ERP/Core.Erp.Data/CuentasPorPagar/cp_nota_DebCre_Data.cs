@@ -153,6 +153,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdEmpresa = info.IdEmpresa,
                         IdCbteCble_Nota = info.IdCbteCble_Nota,
                         IdTipoCbte_Nota = info.IdTipoCbte_Nota,
+                        cod_nota=info.cod_nota,
                         DebCre = info.DebCre,
                         IdProveedor = info.IdProveedor,
                         IdTipoNota = info.IdTipoNota,
@@ -222,6 +223,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdTipoNota = info.IdTipoNota;
                         Entity.IdSucursal = info.IdSucursal;
                         Entity.cn_fecha = info.cn_fecha;
+                        Entity.cod_nota = info.cod_nota;
                         Entity.Fecha_contable = info.Fecha_contable;
                         Entity.cn_Fecha_vcto = info.cn_Fecha_vcto.Date;
                         Entity.cn_Nota = info.cn_Nota;

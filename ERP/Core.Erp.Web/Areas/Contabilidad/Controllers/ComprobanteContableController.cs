@@ -4,6 +4,7 @@ using Core.Erp.Bus.Presupuesto;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using ExcelDataReader;
 using System;
@@ -29,6 +30,23 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         pre_Grupo_Bus bus_grupo = new pre_Grupo_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
+        #endregion
+
+        #region Metodos ComboBox bajo demanda
+
+        public ActionResult CmbCuenta_comprobante_contable()
+        {
+            ct_cbtecble_det_Info model = new ct_cbtecble_det_Info();
+            return PartialView("_CmbCuenta_comprobante_contable", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #region Index
@@ -286,6 +304,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
         {
+            var cuenta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
+            info_det.pc_Cuenta = info_det.IdCtaCble + " " + cuenta.pc_Cuenta;
             if (ModelState.IsValid)
                 list_ct_cbtecble_det.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ct_cbtecble_Info model = new ct_cbtecble_Info();
@@ -297,8 +317,14 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
         {
+           
             if (ModelState.IsValid)
+            {
+                var cuenta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
+                info_det.pc_Cuenta = info_det.IdCtaCble+" "+ cuenta.pc_Cuenta;
+
                 list_ct_cbtecble_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
             ct_cbtecble_Info model = new ct_cbtecble_Info();
             model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
@@ -451,6 +477,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
             info_det.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
             info_det.Descripcion = info_det.Descripcion;
+            info_det.pc_Cuenta = info_det.pc_Cuenta;
+
             list.Add(info_det);
         }
 
@@ -462,6 +490,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
             edited_info.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * - 1;
             edited_info.dc_Valor_debe = info_det.dc_Valor_debe;
             edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
+            edited_info.pc_Cuenta = info_det.pc_Cuenta;
 
             edited_info.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
             edited_info.Descripcion = info_det.Descripcion;

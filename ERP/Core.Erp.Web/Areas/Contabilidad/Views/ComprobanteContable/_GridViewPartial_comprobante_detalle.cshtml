@@ -38,24 +38,30 @@
         {
             e.NewValues["dc_Valor_haber"] = 0;
             e.NewValues["dc_Valor_debe"] = 0;
-            e.NewValues["IdCtaCble"] = null;
+            //e.NewValues["IdCtaCble"] = null;
             e.NewValues["IdGrupoPresupuesto"] = null;
-            e.NewValues["dc_para_conciliar"] = false;
+
         };
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pc_Cuenta";
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(30);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
 
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdCtaCble";
-            column.Caption = "Cuenta contable";
-            column.Width = Unit.Percentage(40);
-            column.EditorProperties().ComboBox(p =>
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(30);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
-                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
-                p.ValueField = "IdCtaCble";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_cuentas;
-                p.ClientSideEvents.SelectedIndexChanged = "OnSelectedCtaCbleChanged";
+                ViewContext.Writer.Write("<div id='ajaxDiv'>");
+                Html.RenderPartial("_CmbCuenta_comprobante_contable", DataBinder.Eval(c.DataItem, "IdCtaCble"));
+                ViewContext.Writer.Write("</div>");
             });
         });
         settings.Columns.Add(column =>
@@ -63,6 +69,7 @@
             column.FieldName = "IdGrupoPresupuesto";
             column.Caption = "Presupuesto";
             column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().ComboBox(p =>
             {
                 p.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "CargarGrupo", Area = "Contabilidad" };
@@ -80,6 +87,7 @@
             column.FieldName = "dc_Valor_debe";
             column.Caption = "Debe";
             column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -91,6 +99,7 @@
             column.FieldName = "dc_Valor_haber";
             column.Caption = "Haber";
             column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -99,6 +108,7 @@
         });
         settings.Columns.Add(column =>
         {
+            column.EditFormSettings.Visible = DefaultBoolean.False;
             column.FieldName = "dc_para_conciliar";
             column.Caption = "Se concilia";
             column.Width = Unit.Percentage(10);
