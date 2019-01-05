@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Contabilidad
                 List<ct_cbtecble_det_Info> Lista;
                 using (Entities_contabilidad Context = new Entities_contabilidad())
                 {
-                    Lista = (from q in Context.ct_cbtecble_det
+                    Lista = (from q in Context.vwct_cbtecble_det
                              where q.IdEmpresa == IdEmpresa
                              && q.IdTipoCbte == IdTipoCbte
                              && q.IdCbteCble == IdCbteCble
@@ -30,7 +30,8 @@ namespace Core.Erp.Data.Contabilidad
                                  IdTipoCbte = q.IdTipoCbte,
                                  secuencia = q.secuencia,
                                  dc_para_conciliar_null = q.dc_para_conciliar,
-                                 IdGrupoPresupuesto = q.IdGrupoPresupuesto
+                                 IdGrupoPresupuesto = q.IdGrupoPresupuesto,
+                                 pc_Cuenta = q.pc_Cuenta
                              }).ToList();
                 }
                 Lista.ForEach(q => { q.dc_Valor_debe = q.dc_Valor > 0 ? q.dc_Valor : 0; q.dc_Valor_haber = q.dc_Valor < 0 ? Math.Abs( q.dc_Valor) : 0; q.dc_para_conciliar = q.dc_para_conciliar_null == null ? false : Convert.ToBoolean(q.dc_para_conciliar_null); });

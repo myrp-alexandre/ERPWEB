@@ -15,6 +15,7 @@ namespace Core.Erp.Data
     using System.Data.Entity.Core.Objects;
     using System.Linq;
 
+
     public partial class Entities_contabilidad : DbContext
     {
         public Entities_contabilidad()
@@ -47,6 +48,7 @@ namespace Core.Erp.Data
         public DbSet<ct_cbtecble_det> ct_cbtecble_det { get; set; }
         public DbSet<ct_cbtecble> ct_cbtecble { get; set; }
         public DbSet<vwct_cbtecble> vwct_cbtecble { get; set; }
+        public DbSet<vwct_cbtecble_det> vwct_cbtecble_det { get; set; }
     
         public virtual ObjectResult<generarATS_Result> generarATS(Nullable<int> idempresa, Nullable<int> idPeriodo)
         {
