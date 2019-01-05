@@ -11,6 +11,7 @@ using Core.Erp.Info.Contabilidad;
 using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -27,6 +28,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_rol_Bus bus_rol = new ro_rol_Bus();
         ct_plancta_Bus bus_cuentas = new ct_plancta_Bus();
         int IdEmpresa = 0;
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+
         #endregion
 
 
@@ -85,7 +88,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos(0, 0);
                  ro_rol_Info info = new  ro_rol_Info
                  {
-                     IdNomina_Tipo = 1
+                     IdNomina_Tipo = 1,
+                     IdSucursal=Convert.ToInt32( SessionFixed.IdSucursal)
                  };
                 ViewBag.FechaCorte = DateTime.Now.Date;
                 return View(info);
@@ -359,6 +363,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ViewBag.lst_nomina = lista_nomina;
                 ViewBag.lst_nomina_tipo = lst_nomina_tipo;
                 ViewBag.lst_periodos = lst_periodos;
+                var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+                ViewBag.lst_sucursal = lst_sucursal;
 
             }
             catch (Exception)
