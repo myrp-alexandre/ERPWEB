@@ -7,9 +7,12 @@
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ComprobanteContable", Action = "EditingAddNew", Area = "Contabilidad" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ComprobanteContable", Action = "EditingUpdate", Area = "Contabilidad" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ComprobanteContable", Action = "EditingDelete", Area = "Contabilidad" };
@@ -46,22 +49,19 @@
         {
             column.FieldName = "pc_Cuenta";
             column.Caption = "Cuenta";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(40);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdCtaCble";
             column.Caption = "Cuenta";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(40);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<div id='ajaxDiv'>");
                 Html.RenderPartial("_CmbCuenta_comprobante_contable", DataBinder.Eval(c.DataItem, "IdCtaCble"));
-                ViewContext.Writer.Write("</div>");
             });
         });
         settings.Columns.Add(column =>
@@ -106,6 +106,7 @@
                 sp.MaxValue = 999999999;
             });
         });
+        /*
         settings.Columns.Add(column =>
         {
             column.EditFormSettings.Visible = DefaultBoolean.False;
@@ -118,6 +119,7 @@
 
             });
         });
+        */
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_debe").DisplayFormat = "Debe {0:c2}";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_haber").DisplayFormat = "Haber {0:c2}";
         settings.Settings.ShowFooter = true;

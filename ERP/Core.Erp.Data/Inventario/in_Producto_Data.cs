@@ -1017,7 +1017,7 @@ namespace Core.Erp.Data.Inventario
                         pr_descripcion = q.pr_descripcion,
                         nom_categoria = q.ca_Categoria,
                         precio_1 = (double)q.precio_1,
-                        Stock = q.Stock
+                        stock = (double)q.Stock
                     });
                 }
 
