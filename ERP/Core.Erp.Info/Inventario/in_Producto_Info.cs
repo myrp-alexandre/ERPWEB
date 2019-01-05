@@ -95,7 +95,6 @@ namespace Core.Erp.Info.Inventario
         public string IdUsuarioAut { get; set; }
         public int OrdenVcto { get; set; }
         public string IdCtaCtble_Inve { get; set; }
-        public double? Stock { get; set; }
         #endregion
     }
 
