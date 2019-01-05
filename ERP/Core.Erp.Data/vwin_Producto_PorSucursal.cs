@@ -12,20 +12,14 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ro_rol_detalle
+    public partial class vwin_Producto_PorSucursal
     {
         public int IdEmpresa { get; set; }
-        public decimal IdRol { get; set; }
-        public decimal IdEmpleado { get; set; }
-        public string IdRubro { get; set; }
-        public int Orden { get; set; }
-        public double Valor { get; set; }
-        public Nullable<bool> rub_visible_reporte { get; set; }
-        public string Observacion { get; set; }
         public int IdSucursal { get; set; }
-    
-        public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
-        public virtual ro_empleado ro_empleado { get; set; }
-        public virtual ro_rol ro_rol { get; set; }
+        public decimal IdProducto { get; set; }
+        public string pr_descripcion { get; set; }
+        public string ca_Categoria { get; set; }
+        public Nullable<double> Stock { get; set; }
+        public Nullable<double> precio_1 { get; set; }
     }
 }

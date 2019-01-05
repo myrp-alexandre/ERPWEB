@@ -19,7 +19,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && q.DebCre == DebCre
-                             && fecha_ini <= q.cn_fecha && q.cn_fecha <= fecha_fin
+                             && q.cn_fecha >= fecha_ini && q.cn_fecha <= fecha_fin
                              orderby q.IdCbteCble_Nota descending
                              select new cp_nota_DebCre_Info
                              {

@@ -108,13 +108,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 }
                 info.IdEmpresa = GetIdEmpresa();
                 info.IdUsuario = SessionFixed.IdUsuario;
+
                 if (!bus_empleado.guardarDB(info))
                 {
                     if (info.em_foto == null)
                         info.em_foto = new byte[0];
                     cargar_combos();
                     return View(info);
-                }
+                }                    
                 return RedirectToAction("Index");
             }
             catch (Exception)

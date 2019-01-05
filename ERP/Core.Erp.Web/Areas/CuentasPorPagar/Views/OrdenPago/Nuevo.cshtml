@@ -189,6 +189,13 @@
                     @Html.ValidationMessageFor(q => q.Valor_a_pagar, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdSolicitudPago"># Solicitud*</label>
+                    @Html.TextBoxFor(q => q.IdSolicitudPago, new { @class = "form-control", @id = "IdSolicitudPago" })
+                    @Html.ValidationMessageFor(q => q.IdSolicitudPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div id="Tabs" role="tabpanel">

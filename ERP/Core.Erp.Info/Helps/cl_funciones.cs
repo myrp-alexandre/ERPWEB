@@ -312,28 +312,33 @@ namespace Core.Erp.Info.Helps
                             {
                                 if (digito_tres <= tercer_digito_persona_natural)
                                 {
-                                    return_naturaleza = "NATU";
+                                    
                                     var establecimiento_prov = cedula_ruc.Substring(10, 3);
-                                    return (establecimiento_prov == establecimiento && (ValidaCedula(cedula_ruc.Substring(0, 10))));                                    
-                                }
+                                    var isValid_cedula = ValidaCedula(cedula_ruc.Substring(0, 10));
 
-                                if (digito_tres == tercer_digito_sector_publico)
-                                {
-                                    digito_verificador = Convert.ToInt32(cedula_ruc[8] + string.Empty);
-                                    int[] coeficientes = { 3, 2, 7, 6, 5, 4, 3, 2 };
-
-                                    for (var a = 0; a < coeficientes.Length; a++)
+                                    if (isValid_cedula == true && establecimiento_prov == establecimiento)
                                     {
-                                        digito_coeficiente = coeficientes[a];
-                                        digito_ruc = Convert.ToInt32(cedula_ruc[a] + string.Empty);
-                                        valor = digito_coeficiente * digito_ruc;
-                                        total = total + valor;
+                                        return_naturaleza = "NATU";
+                                        return true;
                                     }
+                                    else
+                                    {
+                                        digito_verificador = Convert.ToInt32(cedula_ruc[8] + string.Empty);
+                                        int[] coeficientes = { 3, 2, 7, 6, 5, 4, 3, 2 };
 
-                                    var digito_verificador_obtenido = (total % modulo) == 0 ? 0 : modulo - (total % modulo);
+                                        for (var a = 0; a < coeficientes.Length; a++)
+                                        {
+                                            digito_coeficiente = coeficientes[a];
+                                            digito_ruc = Convert.ToInt32(cedula_ruc[a] + string.Empty);
+                                            valor = digito_coeficiente * digito_ruc;
+                                            total = total + valor;
+                                        }
 
-                                    return_naturaleza = "JURI";
-                                    return digito_verificador == digito_verificador_obtenido;                                    
+                                        var digito_verificador_obtenido = (total % modulo) == 0 ? 0 : modulo - (total % modulo);
+
+                                        return_naturaleza = "JURI";
+                                        return digito_verificador == digito_verificador_obtenido;
+                                    }                                  
                                 }
 
                                 if (digito_tres == tercer_digito_persona_juridica)

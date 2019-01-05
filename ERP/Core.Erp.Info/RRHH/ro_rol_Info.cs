@@ -13,6 +13,7 @@ namespace Core.Erp.Info.RRHH
         public int IdEmpresa { get; set; }
         [Required(ErrorMessage = "El campo nómina es obligatorio")]
         public int IdNomina_Tipo { get; set; }
+        public int IdSucursal { get; set; }
         [Required(ErrorMessage = "El campo tipo de nómina es obligatorio")]
         public int IdNomina_TipoLiqui { get; set; }
         [Required(ErrorMessage = "El campo périodo es obligatorio")]
@@ -46,7 +47,9 @@ namespace Core.Erp.Info.RRHH
         public List<ct_cbtecble_det_Info> lst_sueldo_x_pagar { get; set; }
         public List<ct_cbtecble_det_Info> lst_provisiones { get; set; }
         public string region { get; set; }
-        public  ro_rol_Info()
+        public string Su_Descripcion { get; set; }
+
+        public ro_rol_Info()
         {
             lst_sueldo_x_pagar = new List<ct_cbtecble_det_Info>();
             lst_provisiones = new List<ct_cbtecble_det_Info>();

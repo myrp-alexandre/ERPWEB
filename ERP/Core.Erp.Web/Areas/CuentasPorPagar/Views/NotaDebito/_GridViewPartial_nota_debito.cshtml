@@ -100,7 +100,13 @@
             });
         });
         settings.Columns.Add("cn_observacion", "Observación").Width = Unit.Percentage(50);
-        settings.Columns.Add("cn_total", "Total").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "cn_total";
+            column.Caption = "Total";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.Width = Unit.Percentage(10);
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";

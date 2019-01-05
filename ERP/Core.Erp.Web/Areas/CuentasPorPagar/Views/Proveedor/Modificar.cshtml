@@ -14,7 +14,7 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdProveedor)
     @Html.HiddenFor(q => q.IdPersona)
-
+    @Html.HiddenFor(q => q.info_persona.IdPersona)
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -71,7 +71,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_persona.pe_cedulaRuc">Número documento*</label>
-                    @Html.TextBoxFor(q => q.info_persona.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc" })
+                    @Html.TextBoxFor(q => q.info_persona.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.info_persona.pe_cedulaRuc, "", new { @class = "text-danger" })
                     <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                 </div>

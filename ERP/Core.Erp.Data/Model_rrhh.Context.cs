@@ -15,7 +15,6 @@ namespace Core.Erp.Data
     using System.Data.Entity.Core.Objects;
     using System.Linq;
 
-
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
@@ -90,7 +89,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_empleado_Novedad> vwro_empleado_Novedad { get; set; }
         public DbSet<vwro_Empleado_Novedades> vwro_Empleado_Novedades { get; set; }
         public DbSet<ro_tipo_gastos_personales_tabla_valores_x_anio> ro_tipo_gastos_personales_tabla_valores_x_anio { get; set; }
-        public DbSet<ro_rol> ro_rol { get; set; }
         public DbSet<ro_rol_detalle> ro_rol_detalle { get; set; }
         public DbSet<vwro_rol_detalle_generar_op> vwro_rol_detalle_generar_op { get; set; }
         public DbSet<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
@@ -100,7 +98,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_EmpleadoNovedadCargaMasiva> vwro_EmpleadoNovedadCargaMasiva { get; set; }
         public DbSet<vwro_marcaciones_x_empleado> vwro_marcaciones_x_empleado { get; set; }
         public DbSet<ro_contrato> ro_contrato { get; set; }
-        public DbSet<vwro_rol> vwro_rol { get; set; }
         public DbSet<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }
         public DbSet<vwro_archivos_bancos_generacion_x_empleado> vwro_archivos_bancos_generacion_x_empleado { get; set; }
         public DbSet<ro_EmpleadoFoto> ro_EmpleadoFoto { get; set; }
@@ -137,6 +134,8 @@ namespace Core.Erp.Data
         public DbSet<ro_empleado> ro_empleado { get; set; }
         public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
+        public DbSet<ro_rol> ro_rol { get; set; }
+        public DbSet<vwro_rol> vwro_rol { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
@@ -322,7 +321,7 @@ namespace Core.Erp.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spROL_DecimoTercero", idEmpresaParameter, idPeriodoParameter, regionParameter, idUsuarioParameter, observacionParameter, idRolParameter);
         }
     
-        public virtual int spRo_procesa_Rol(Nullable<int> idEmpresa, Nullable<decimal> idNomina, Nullable<decimal> idNominaTipo, Nullable<decimal> idPEriodo, string idUsuario, string observacion, Nullable<int> idRol)
+        public virtual int spRo_procesa_Rol(Nullable<int> idEmpresa, Nullable<decimal> idNomina, Nullable<decimal> idNominaTipo, Nullable<decimal> idPEriodo, string idUsuario, string observacion, Nullable<int> idRol, Nullable<int> idSucursalInicio, Nullable<int> idSucursalFin)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
                 new ObjectParameter("IdEmpresa", idEmpresa) :
@@ -352,7 +351,15 @@ namespace Core.Erp.Data
                 new ObjectParameter("IdRol", idRol) :
                 new ObjectParameter("IdRol", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_procesa_Rol", idEmpresaParameter, idNominaParameter, idNominaTipoParameter, idPEriodoParameter, idUsuarioParameter, observacionParameter, idRolParameter);
+            var idSucursalInicioParameter = idSucursalInicio.HasValue ?
+                new ObjectParameter("IdSucursalInicio", idSucursalInicio) :
+                new ObjectParameter("IdSucursalInicio", typeof(int));
+    
+            var idSucursalFinParameter = idSucursalFin.HasValue ?
+                new ObjectParameter("IdSucursalFin", idSucursalFin) :
+                new ObjectParameter("IdSucursalFin", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRo_procesa_Rol", idEmpresaParameter, idNominaParameter, idNominaTipoParameter, idPEriodoParameter, idUsuarioParameter, observacionParameter, idRolParameter, idSucursalInicioParameter, idSucursalFinParameter);
         }
     
         public virtual ObjectResult<spROL_DecimosCSV_Result> spROL_DecimosCSV(Nullable<int> idEmpresa, Nullable<int> idRol, Nullable<int> idRubro)

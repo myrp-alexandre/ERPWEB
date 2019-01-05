@@ -22,6 +22,7 @@ namespace Core.Erp.Data
     
         public int IdEmpresa { get; set; }
         public decimal IdRol { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
         public int IdNominaTipo { get; set; }
         public int IdNominaTipoLiqui { get; set; }
         public int IdPeriodo { get; set; }

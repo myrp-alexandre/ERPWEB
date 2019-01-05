@@ -30,11 +30,11 @@ namespace Core.Erp.Bus.RRHH
         ro_Comprobantes_Contables_Data ro_comprobante = new ro_Comprobantes_Contables_Data();
        
         #endregion
-        public List< ro_rol_Info> get_list_nominas(int IdEmpresa )
+        public List< ro_rol_Info> get_list_nominas(int IdEmpresa, int IdSucursal)
         {
             try
             {
-                return odata.get_list_nominas(IdEmpresa);
+                return odata.get_list_nominas(IdEmpresa, IdSucursal);
             }
             catch (Exception)
             {
@@ -54,11 +54,11 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
-        public List<ro_rol_Info> get_list_decimos(int IdEmpresa)
+        public List<ro_rol_Info> get_list_decimos(int IdEmpresa, int IdSucursal)
         {
             try
             {
-                return odata.get_list_decimos(IdEmpresa);
+                return odata.get_list_decimos(IdEmpresa, IdSucursal);
             }
             catch (Exception)
             {

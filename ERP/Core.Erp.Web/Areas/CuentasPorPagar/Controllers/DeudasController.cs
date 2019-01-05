@@ -97,7 +97,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
         public List<in_Producto_Info> get_list_bajo_demanda_producto(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.COM, 0);
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORSUCURSAL, cl_enumeradores.eModulo.FAC, 0, Convert.ToInt32(SessionFixed.IdSucursal));
         }
         public in_Producto_Info get_info_bajo_demanda_producto(ListEditItemRequestedByValueEventArgs args)
         {
@@ -1189,16 +1189,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             List<cp_orden_giro_det_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : (list.Max(q => q.Secuencia) + 1);
-            info_det.DescuentoUni = Math.Round(info_det.CostoUni * (info_det.PorDescuento / 100), 2, MidpointRounding.AwayFromZero);
-            info_det.CostoUniFinal = Math.Round(info_det.CostoUni - info_det.DescuentoUni,2,MidpointRounding.AwayFromZero);
-            info_det.Subtotal = Math.Round(info_det.Cantidad * info_det.CostoUniFinal, 2, MidpointRounding.AwayFromZero);
+            info_det.DescuentoUni = info_det.CostoUni * (info_det.PorDescuento / 100);
+            info_det.CostoUniFinal = info_det.CostoUni - info_det.DescuentoUni;
+            info_det.Subtotal = info_det.Cantidad * info_det.CostoUniFinal;
             var impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto_Iva);
             if (impuesto != null)
                 info_det.PorIva = impuesto.porcentaje;                
             else
                 info_det.PorIva = 0;
-            info_det.ValorIva = Math.Round(info_det.Subtotal * (info_det.PorIva / 100), 2, MidpointRounding.AwayFromZero);
-            info_det.Total = Math.Round(info_det.Subtotal + info_det.ValorIva,2,MidpointRounding.AwayFromZero);
+            info_det.ValorIva = info_det.Subtotal * (info_det.PorIva / 100);
+            info_det.Total = info_det.Subtotal + info_det.ValorIva;
             
             list.Add(info_det);
         }
@@ -1213,18 +1213,17 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             edited_info.PorDescuento = info_det.PorDescuento;
             edited_info.IdCod_Impuesto_Iva = info_det.IdCod_Impuesto_Iva;
             edited_info.pr_descripcion = info_det.pr_descripcion;
-            edited_info.DescuentoUni = Math.Round(info_det.CostoUni * (info_det.PorDescuento / 100), 2, MidpointRounding.AwayFromZero);
-            edited_info.CostoUniFinal = Math.Round(info_det.CostoUni - info_det.DescuentoUni, 2, MidpointRounding.AwayFromZero);
-            edited_info.Subtotal = Math.Round(info_det.Cantidad * edited_info.CostoUniFinal, 2, MidpointRounding.AwayFromZero);
+            edited_info.DescuentoUni = info_det.CostoUni * (info_det.PorDescuento / 100);
+            edited_info.CostoUniFinal = info_det.CostoUni - edited_info.DescuentoUni;
+            edited_info.Subtotal = info_det.Cantidad * edited_info.CostoUniFinal;
             var impuesto = bus_impuesto.get_info(edited_info.IdCod_Impuesto_Iva);
             if (impuesto != null)
                 edited_info.PorIva = impuesto.porcentaje;
             else
                 edited_info.PorIva = 0;
-            edited_info.ValorIva = Math.Round(edited_info.Subtotal * (edited_info.PorIva / 100), 2, MidpointRounding.AwayFromZero);
-            edited_info.Total = Math.Round(edited_info.Subtotal + edited_info.ValorIva, 2, MidpointRounding.AwayFromZero);
+            edited_info.ValorIva = edited_info.Subtotal * (edited_info.PorIva / 100);
+            edited_info.Total = edited_info.Subtotal + edited_info.ValorIva;
             edited_info.IdCtaCbleInv = info_det.IdCtaCbleInv;
-
         }
 
         public void DeleteRow(int secuencia, decimal IdTransaccionSession)

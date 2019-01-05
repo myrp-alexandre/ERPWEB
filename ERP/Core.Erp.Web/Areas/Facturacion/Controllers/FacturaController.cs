@@ -119,8 +119,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         public List<in_Producto_Info> get_list_bajo_demandaProducto(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            List<in_Producto_Info> Lista = bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.FAC, 0);
-            return Lista;
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORSUCURSAL, cl_enumeradores.eModulo.FAC, 0, Convert.ToInt32(SessionFixed.IdSucursal));
         }
         public in_Producto_Info get_info_bajo_demandaProducto(ListEditItemRequestedByValueEventArgs args)
         {
@@ -196,8 +195,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             #region Talonario
             var pto_vta = bus_punto_venta.get_info(i_validar.IdEmpresa, i_validar.IdSucursal, Convert.ToInt32(i_validar.IdPuntoVta));
             i_validar.IdBodega = pto_vta.IdBodega;
-            i_validar.vt_serie1 = pto_vta.cod_PuntoVta;
-            i_validar.vt_serie2 = pto_vta.Su_CodigoEstablecimiento;
+            i_validar.vt_serie1 = pto_vta.Su_CodigoEstablecimiento;
+            i_validar.vt_serie2 = pto_vta.cod_PuntoVta;
             i_validar.IdCaja = pto_vta.IdCaja;
             #endregion
 

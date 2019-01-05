@@ -28,5 +28,8 @@ namespace Core.Erp.Data
         public System.DateTime pe_FechaFin { get; set; }
         public decimal IdRol { get; set; }
         public string Expr1 { get; set; }
+        public string Su_CodigoEstablecimiento { get; set; }
+        public string Su_Descripcion { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
     }
 }

@@ -32,6 +32,7 @@ namespace Core.Erp.Data
         public string IdFormaPago { get; set; }
         public string Estado { get; set; }
         public Nullable<decimal> IdTipoFlujo { get; set; }
+        public Nullable<decimal> IdSolicitudPago { get; set; }
         public string IdUsuarioAprobacion { get; set; }
         public string MotivoAprobacion { get; set; }
         public Nullable<System.DateTime> FechaAprobacion { get; set; }

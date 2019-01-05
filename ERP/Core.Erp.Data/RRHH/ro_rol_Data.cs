@@ -8,12 +8,13 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_rol_Data
     {
-        public List<ro_rol_Info> get_list_nominas(int IdEmpresa)
+        public List<ro_rol_Info> get_list_nominas(int IdEmpresa, int IdSucursal)
         {
             try
             {
+                int IdSucursalInicio = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
                 List<ro_rol_Info> Lista = new List<ro_rol_Info>();
-
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     Lista = (from ROL in Context.vwro_rol
@@ -21,6 +22,9 @@ namespace Core.Erp.Data.RRHH
                              &&( ROL.IdNominaTipoLiqui==2
                              || ROL.IdNominaTipoLiqui==1
                              || ROL.IdNominaTipoLiqui==6)
+                             && ROL.IdSucursal>=IdSucursalInicio
+                             && ROL.IdSucursal<=IdSucursalFin
+
                              select new ro_rol_Info
                              {
                                  IdEmpresa = ROL.IdEmpresa,
@@ -35,7 +39,9 @@ namespace Core.Erp.Data.RRHH
                                  Procesado = ROL.Procesado,
                                  Contabilizado = ROL.Contabilizado,
                                  pe_FechaIni = ROL.pe_FechaIni,
-                                 pe_FechaFin = ROL.pe_FechaFin
+                                 pe_FechaFin = ROL.pe_FechaFin,
+                                 Su_Descripcion = ROL.Su_Descripcion
+
 
                              }).ToList();
                 }
@@ -76,7 +82,9 @@ namespace Core.Erp.Data.RRHH
                                  Procesado = ROL.Procesado,
                                  Contabilizado = ROL.Contabilizado,
                                  pe_FechaIni = ROL.pe_FechaIni,
-                                 pe_FechaFin = ROL.pe_FechaFin
+                                 pe_FechaFin = ROL.pe_FechaFin,
+                                 Su_Descripcion = ROL.Su_Descripcion
+
 
                              }).ToList();
                 }
@@ -89,10 +97,12 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-        public List<ro_rol_Info> get_list_decimos(int IdEmpresa)
+        public List<ro_rol_Info> get_list_decimos(int IdEmpresa, int IdSucursal)
         {
             try
             {
+                int IdSucursalInicio = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
                 List<ro_rol_Info> Lista = new List<ro_rol_Info>();
 
                 using (Entities_rrhh Context = new Entities_rrhh())
@@ -101,6 +111,8 @@ namespace Core.Erp.Data.RRHH
                              where ROL.IdEmpresa == IdEmpresa
                              && ROL.IdNominaTipoLiqui <= 4
                              && ROL.IdNominaTipoLiqui >= 3
+                              && ROL.IdSucursal >= IdSucursalInicio
+                             && ROL.IdSucursal <= IdSucursalFin
                              select new ro_rol_Info
                              {
                                  IdEmpresa = ROL.IdEmpresa,
@@ -115,7 +127,8 @@ namespace Core.Erp.Data.RRHH
                                  Contabilizado = ROL.Contabilizado,
                                  pe_FechaIni = ROL.pe_FechaIni,
                                  pe_FechaFin = ROL.pe_FechaFin,
-                                 IdRol=ROL.IdRol
+                                 IdRol=ROL.IdRol,
+                                 Su_Descripcion=ROL.Su_Descripcion
 
                              }).ToList();
                 }
@@ -137,21 +150,24 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                     ro_rol Entity = Context. ro_rol.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdNominaTipo == IdNominaTipo 
-                     &&q.IdRol==IdRol && q.IdNominaTipoLiqui==IdNominaTipoLiqui && q.IdPeriodo==IdPeriodo);
-                    if (Entity == null) return null;
+                   
+                        ro_rol Entity = Context.ro_rol.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdNominaTipo == IdNominaTipo
+                       && q.IdRol == IdRol && q.IdNominaTipoLiqui == IdNominaTipoLiqui && q.IdPeriodo == IdPeriodo
+                       );
+                        if (Entity == null) return null;
 
-                    info = new  ro_rol_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdNomina_Tipo = Entity.IdNominaTipo,
-                        IdNomina_TipoLiqui = Entity.IdNominaTipoLiqui,
-                        IdPeriodo = Entity.IdPeriodo,
-                        Observacion = Entity.Observacion,
-                        Descripcion = Entity.Descripcion,
-                        Cerrado = Entity.Cerrado,
-                        IdRol=Entity.IdRol
-                    };
+                        info = new ro_rol_Info
+                        {
+                            IdEmpresa = Entity.IdEmpresa,
+                            IdNomina_Tipo = Entity.IdNominaTipo,
+                            IdNomina_TipoLiqui = Entity.IdNominaTipoLiqui,
+                            IdPeriodo = Entity.IdPeriodo,
+                            Observacion = Entity.Observacion,
+                            Descripcion = Entity.Descripcion,
+                            Cerrado = Entity.Cerrado,
+                            IdRol = Entity.IdRol
+                        };
+                    
                 }
                 info.Anio =Convert.ToInt32( info.IdPeriodo.ToString().Substring(0, 4));
                 return info;
@@ -166,12 +182,16 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                int IdSucursalInicio =info. IdSucursal;
+                int IdSucursalFin = info. IdSucursal == 0 ? 9999 :info. IdSucursal;
+
                 if (info.IdRol == 0)
                     info.IdRol = get_id(info.IdEmpresa);
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     if(info.IdNomina_Tipo==1 && info.IdNomina_TipoLiqui==2)
-                    Context.spRo_procesa_Rol(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo, info.UsuarioIngresa, info.Observacion,Convert.ToInt32( info.IdRol));
+                    Context.spRo_procesa_Rol(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo,
+                        info.UsuarioIngresa, info.Observacion,Convert.ToInt32( info.IdRol), IdSucursalInicio, IdSucursalFin);
                     if (info.IdNomina_Tipo == 1 && info.IdNomina_TipoLiqui == 1)
                         Context.spRo_procesa_Rol_anticipo(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo, info.UsuarioIngresa, info.Observacion, Convert.ToInt32(info.IdRol));
                     if (info.IdNomina_Tipo == 1 && info.IdNomina_TipoLiqui == 6)

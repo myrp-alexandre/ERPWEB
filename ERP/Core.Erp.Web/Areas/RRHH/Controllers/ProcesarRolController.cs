@@ -40,12 +40,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_ro_rol()
+        public ActionResult GridViewPartial_ro_rol(int IeEmpresa=0, int IdSucursal=0)
         {
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                List< ro_rol_Info> model = bus_rol.get_list_nominas(IdEmpresa);
+                List< ro_rol_Info> model = bus_rol.get_list_nominas(IdEmpresa, IdSucursal);
                 return PartialView("_GridViewPartial_ro_rol", model);
             }
             catch (Exception)

@@ -26,12 +26,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_pago_beneficios()
+        public ActionResult GridViewPartial_pago_beneficios(int IdEmpresa=0, int IdSucursal=0)
         {
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                List<ro_rol_Info> model = bus_rol.get_list_decimos(IdEmpresa);
+                List<ro_rol_Info> model = bus_rol.get_list_decimos(IdEmpresa, IdSucursal);
                 return PartialView("_GridViewPartial_pago_beneficios", model);
             }
             catch (Exception)

@@ -66,6 +66,7 @@ namespace Core.Erp.Data.Caja
                 {
                     Lista = (from q in Context.vwcp_orden_giro_x_pagar
                              where q.IdEmpresa == IdEmpresa
+                             && q.cod_Documento == "FACT"
                              && q.Saldo_OG > 0
                              select new cp_conciliacion_Caja_det_Info
                              {
