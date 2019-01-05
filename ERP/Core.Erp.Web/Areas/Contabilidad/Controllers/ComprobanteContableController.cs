@@ -292,8 +292,9 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         private void cargar_combos_detalle()
         {
-            /*
+            
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            /*
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false , true);
             ViewBag.lst_cuentas = lst_cuentas;
