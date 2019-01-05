@@ -461,27 +461,23 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var lst_fact = list_det.get_list(IdTransaccionFixed);
             var valor = Convert.ToDouble(lst_fact.Count == 0 ? 0 : lst_fact.Sum(q => q.Valor_a_aplicar)) + Convert.ToDouble(lst_vale.Count == 0 ? 0 : lst_vale.Sum(q => q.valor));
 
-            List<ct_cbtecble_det_Info> lst_det = new List<ct_cbtecble_det_Info>
-            {
-               //Debe
-                new ct_cbtecble_det_Info
-                {
-                    IdCtaCble = IdCtaCble,
-                    dc_Valor = Math.Abs(valor),
-                    dc_Valor_debe = Math.Abs(valor),
-                    secuencia = 1
+            list_ct.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionFixed);
 
-                },
-                //Haber
-                new ct_cbtecble_det_Info
-                {
-                    IdCtaCble = IdCtaCble,
-                    dc_Valor = Math.Abs(valor)*-1,
-                    dc_Valor_haber = Math.Abs(valor),
-                    secuencia = 2
-                }
-            };
-            list_ct.set_list(lst_det, IdTransaccionFixed);
+            //Debe
+            list_ct.AddRow(new ct_cbtecble_det_Info
+            {
+                IdCtaCble = IdCtaCble,
+                dc_Valor = Math.Abs(valor),
+                dc_Valor_debe = Math.Abs(valor),
+
+            }, IdTransaccionFixed);
+            //Haber
+            list_ct.AddRow(new ct_cbtecble_det_Info
+            {
+                IdCtaCble = IdCtaCble,
+                dc_Valor = Math.Abs(valor) * -1,
+                dc_Valor_haber = Math.Abs(valor),
+            }, IdTransaccionFixed);
         }
 
         public JsonResult AgregarCajaMovimiento(string Ids = "", decimal IdTransaccionSession = 0)

@@ -273,46 +273,37 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, int IdTipoNota = 0, decimal IdTransaccionSession = 0)
         {
+            List_ct.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
+
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
             var tipo_nota = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
-            List<ct_cbtecble_det_Info> lst_ct = new List<ct_cbtecble_det_Info>();
-            int secuencia = 1;
 
             //Debe
-            lst_ct.Add(new ct_cbtecble_det_Info
+            if (bco != null)
             {
-                IdCtaCble = bco.IdCtaCble,
-                secuencia = secuencia++,
-                dc_Valor = 0,
-                dc_Valor_haber = 0,
-                dc_para_conciliar = true
-            });
+                List_ct.AddRow(new ct_cbtecble_det_Info
+                {
+                    IdCtaCble = bco.IdCtaCble,
+                    dc_para_conciliar = true
+                },IdTransaccionSession);
+            }            
 
             //Haber
-            if (!string.IsNullOrEmpty(tipo_nota.IdCtaCble))
+            if (tipo_nota != null && !string.IsNullOrEmpty(tipo_nota.IdCtaCble))
             {
-                lst_ct.Add(new ct_cbtecble_det_Info
+                List_ct.AddRow(new ct_cbtecble_det_Info
                 {
                     IdCtaCble = tipo_nota.IdCtaCble,
-                    secuencia = secuencia++,
-                    dc_Valor = 0,
-                    dc_Valor_haber = 0,
-                    dc_para_conciliar = true
-                });
+                    dc_para_conciliar = false
+                }, IdTransaccionSession);
             }
             else
-            {                
-                lst_ct.Add(new ct_cbtecble_det_Info
+            {
+                List_ct.AddRow(new ct_cbtecble_det_Info
                 {
                     IdCtaCble = null,
-                    secuencia = secuencia++,
-                    dc_Valor = 0,
-                    dc_Valor_debe = 0
-                });
+                }, IdTransaccionSession);
             }
-
-            
-            List_ct.set_list(lst_ct,IdTransaccionSession);
             return Json(0, JsonRequestBehavior.AllowGet);
         }
         #endregion

@@ -405,31 +405,28 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, decimal IdTransaccionSession = 0)
         {
+            List_ct.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
             var lst_op = List_op.get_list(IdTransaccionSession);
 
-            List<ct_cbtecble_det_Info> lst_ct = new List<ct_cbtecble_det_Info>();
-            int secuencia = 1;
             foreach (var item in lst_op)
             {
                 //Debe
-                lst_ct.Add(new ct_cbtecble_det_Info
+                List_ct.AddRow(new ct_cbtecble_det_Info
                 {
                     IdCtaCble = item.IdCtaCble,
-                    secuencia = secuencia++,
                     dc_Valor = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero),
                     dc_Valor_debe = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero)
-                });
+                },IdTransaccionSession);
             }
-            lst_ct.Add(new ct_cbtecble_det_Info
+            List_ct.AddRow(new ct_cbtecble_det_Info
             {
                 IdCtaCble = bco.IdCtaCble,
-                secuencia = secuencia++,
                 dc_Valor = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero) * -1,
                 dc_Valor_haber = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero),
                 dc_para_conciliar = true
-            });
-            List_ct.set_list(lst_ct,IdTransaccionSession);
+            }, IdTransaccionSession);
+            
             return Json(Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
 

@@ -306,30 +306,30 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         #endregion
 
         public ActionResult armar_diario(int IdEmpresa = 0, int IdCaja = 0, int IdTipoMovi = 0, double valor = 0, decimal IdTransaccionSession = 0)
-        {            
+        {
             var i_caja = bus_caja.get_info(IdEmpresa, IdCaja);
             var i_tipo_movi = bus_tipo.get_info(IdEmpresa, IdTipoMovi);
 
-            List<ct_cbtecble_det_Info> lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>
+            list_ct_cbtecble_det.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
+
+            //Debe
+            list_ct_cbtecble_det.AddRow(new ct_cbtecble_det_Info
             {
-                //Debe
-                new ct_cbtecble_det_Info
-                {
-                    IdCtaCble = i_caja == null ? "" : i_caja.IdCtaCble,
-                    dc_Valor = Math.Abs(valor),
-                    dc_Valor_debe = Math.Abs(valor)
-                },
-                //Haber
-                new ct_cbtecble_det_Info
-                {
-                    IdCtaCble = i_tipo_movi == null ? "" : i_tipo_movi.IdCtaCble,
-                    dc_Valor = Math.Abs(valor)*-1,
-                    dc_Valor_haber = Math.Abs(valor)
-                }
-            };
-            list_ct_cbtecble_det.set_list(lst_ct_cbtecble_det, IdTransaccionSession);
+                IdCtaCble = i_caja == null ? null : i_caja.IdCtaCble,
+                dc_Valor = Math.Abs(valor),
+                dc_Valor_debe = Math.Abs(valor)
+            }, IdTransaccionSession);
+
+            //Haber
+            list_ct_cbtecble_det.AddRow(new ct_cbtecble_det_Info
+            {
+                IdCtaCble = i_tipo_movi == null ? "" : i_tipo_movi.IdCtaCble,
+                dc_Valor = Math.Abs(valor) * -1,
+                dc_Valor_haber = Math.Abs(valor)
+            }, IdTransaccionSession);
+
+
             return Json("", JsonRequestBehavior.AllowGet);
         }
-
     }
 }

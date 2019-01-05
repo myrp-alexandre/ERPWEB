@@ -598,6 +598,6 @@
     }
     function GrupoComboBox_BeginCallback(s, e) {
         e.customArgs["pre_IdCtaCble"] = IdCtaCble.GetValue();
-        e.customArgs["pre_fecha"] = moment(cb_Fecha.GetDate()).format('DD/MM/YYYY');
+        e.customArgs["pre_fecha"] = moment(FechaOP.GetDate()).format('DD/MM/YYYY');
     }
 </script>

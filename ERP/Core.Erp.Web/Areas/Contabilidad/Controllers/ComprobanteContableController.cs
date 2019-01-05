@@ -292,8 +292,9 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         private void cargar_combos_detalle()
         {
+            
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             /*
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             var lst_cuentas = bus_cuenta.get_list(IdEmpresa, false , true);
             ViewBag.lst_cuentas = lst_cuentas;
@@ -305,8 +306,6 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ct_cbtecble_det_Info info_det)
         {
-            var cuenta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
-            info_det.pc_Cuenta = info_det.IdCtaCble + " " + cuenta.pc_Cuenta;
             if (ModelState.IsValid)
                 list_ct_cbtecble_det.AddRow(info_det,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ct_cbtecble_Info model = new ct_cbtecble_Info();
@@ -320,12 +319,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
         {
            
             if (ModelState.IsValid)
-            {
-                var cuenta = bus_plancta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdCtaCble);
-                info_det.pc_Cuenta = info_det.IdCtaCble+" "+ cuenta.pc_Cuenta;
-
                 list_ct_cbtecble_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            }
+
             ct_cbtecble_Info model = new ct_cbtecble_Info();
             model.lst_ct_cbtecble_det = list_ct_cbtecble_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
@@ -454,6 +449,7 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
     }
     public class ct_cbtecble_det_List
     {
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         string variable = "ct_cbtecble_det_Info";
         public List<ct_cbtecble_det_Info> get_list(decimal IdTransaccionSession)
         {
@@ -473,24 +469,38 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
 
         public void AddRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
         {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+
             List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
             info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
             info_det.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;
             info_det.Descripcion = info_det.Descripcion;
-            info_det.pc_Cuenta = info_det.pc_Cuenta;
+            if (info_det.IdCtaCble != null)
+            {
+                var cta = bus_plancta.get_info(IdEmpresa, info_det.IdCtaCble);
+                if (cta != null)
+                    info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            }
+            
 
             list.Add(info_det);
         }
 
         public void UpdateRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
         {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+
             ct_cbtecble_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
             edited_info.IdCtaCble = info_det.IdCtaCble;
             edited_info.dc_para_conciliar = info_det.dc_para_conciliar;
             edited_info.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * - 1;
             edited_info.dc_Valor_debe = info_det.dc_Valor_debe;
             edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
+            
+            var cta = bus_plancta.get_info(IdEmpresa, info_det.IdCtaCble);
+            if (cta != null)
+                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
             edited_info.pc_Cuenta = info_det.pc_Cuenta;
 
             edited_info.IdGrupoPresupuesto = info_det.IdGrupoPresupuesto;

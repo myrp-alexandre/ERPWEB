@@ -40,32 +40,36 @@
         //Funcion para inicializar fila al presionar nuevo
         settings.InitNewRow = (s, e) =>
         {
-            e.NewValues["IdCtaCble"] = null;
-            e.NewValues["IdGrupo"] = null;
-            e.NewValues["dc_Valor_debe"] = 0;
             e.NewValues["dc_Valor_haber"] = 0;
-            e.NewValues["dc_para_conciliar"] = false;
+            e.NewValues["dc_Valor_debe"] = 0;
+            //e.NewValues["IdCtaCble"] = null;
+            e.NewValues["IdGrupoPresupuesto"] = null;
+
         };
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdCtaCble";
-            column.Caption = "Cuenta contable";
+            column.FieldName = "pc_Cuenta";
+            column.Caption = "Cuenta";
             column.Width = Unit.Percentage(40);
-            column.EditorProperties().ComboBox(p =>
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCtaCble";
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(40);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
-                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
-                p.ValueField = "IdCtaCble";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_cuentas;
-                p.ClientSideEvents.SelectedIndexChanged = "OnSelectedCtaCbleChanged";
+                Html.RenderPartial("Contabilidad/ComprobanteContable/_CmbCuenta_comprobante_contable", DataBinder.Eval(c.DataItem, "IdCtaCble"));
             });
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdGrupoPresupuesto";
             column.Caption = "Presupuesto";
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(20);
             column.EditorProperties().ComboBox(p =>
             {
                 p.CallbackRouteValues = new { Controller = "Deudas", Action = "CargarGrupo", TextField = "Descripcion" };
@@ -82,7 +86,7 @@
         {
             column.FieldName = "dc_Valor_debe";
             column.Caption = "Debe";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(15);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -93,13 +97,14 @@
         {
             column.FieldName = "dc_Valor_haber";
             column.Caption = "Haber";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(15);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
                 sp.MaxValue = 999999999;
             });
         });
+        /*
         settings.Columns.Add(column =>
         {
             column.FieldName = "dc_para_conciliar";
@@ -111,6 +116,7 @@
 
             });
         });
+        */
         settings.CellEditorInitialize = (sender, e) =>
         {
             ASPxEdit editor = (ASPxEdit)e.Editor;
