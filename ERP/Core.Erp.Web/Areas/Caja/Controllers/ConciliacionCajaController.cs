@@ -276,7 +276,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                     item.IdCtaCble_cxp = bus_plancta.get_CtaCble_acreedora(item.IdEmpresa_OGiro, item.IdTipoCbte_Ogiro, item.IdCbteCble_Ogiro);
                     if (string.IsNullOrEmpty(item.IdCtaCble_cxp))
                     {
-                        msg = "No se puede identificar la cuenta contable del documento "+item.co_factura;
+                        msg = "La cuenta contable de la "+item.Tipo_documento+"# "+item.co_factura+"No se encuentra registrada para el proveedor";
                         return false;
                     }
                 }
