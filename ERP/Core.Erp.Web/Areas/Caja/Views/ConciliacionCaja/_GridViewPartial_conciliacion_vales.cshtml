@@ -7,13 +7,19 @@
         settings.CallbackRouteValues = new { Controller = "ConciliacionCaja", Action = "GridViewPartial_conciliacion_vales", Area = "Caja" };
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ConciliacionCaja", Action = "EditingAddNewVale", Area = "Caja" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ConciliacionCaja", Action = "EditingUpdateVale", Area = "Caja" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ConciliacionCaja", Action = "EditingDeleteVale", Area = "Caja" };
 
+        settings.CommandColumn.ShowNewButtonInHeader = true;
         settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
 
