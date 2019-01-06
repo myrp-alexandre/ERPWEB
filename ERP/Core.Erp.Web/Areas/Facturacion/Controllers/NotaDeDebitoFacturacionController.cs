@@ -585,7 +585,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 {
                     if (item.IdCliente != 0)
                     {
-                        if (!bus_nota.guardar_importacionDB(item))
+                        if (!bus_nota.guardarDB(item))
                         {
                             ViewBag.mensaje = "Error al importar el archivo";
                             return View(model);
@@ -698,6 +698,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             };
 
                             info.lst_det = new List<fa_notaCreDeb_det_Info>();
+                            info.lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>();
 
                             fa_notaCreDeb_det_Info info_detalle = new fa_notaCreDeb_det_Info
                             {
@@ -727,8 +728,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                 sc_cantidad_factura = null
                             };
 
-                            info.lst_det.Add(info_detalle);
-
+                            info.lst_det.Add(info_detalle);                            
+                                                 
                             Lista_Factura.Add(info);
                         }
                         else
@@ -740,28 +741,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         cont++;
                 }
                 ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
-
-                //var ListFact = ListaFactura.get_list(IdTransaccionSession);
-                //var ListSucursal = bus_sucursal.get_list(IdEmpresa, false);                
-                //var ListCliente = bus_cliente.get_list(IdEmpresa, false);
-                //var lst = (from q in ListCliente
-                //           join c in ListFact
-                //           on q.info_persona.pe_cedulaRuc equals c.Ruc
-                //           join s in ListSucursal on c.CodDocumentoTipo equals s.Su_CodigoEstablecimiento
-                //           select new fa_notaCreDeb_Info
-                //           {
-                //               IdEmpresa = c.IdEmpresa,
-                //               CodDocumentoTipo = s.Su_CodigoEstablecimiento,
-                //               Ruc = q.info_persona.pe_cedulaRuc,
-                //               CodNota = c.CodNota,
-                //               sc_total = c.sc_total,
-                //               sc_saldo = c.sc_saldo,
-                //               no_fecha = c.no_fecha,
-                //               no_fecha_venc = c.no_fecha_venc,
-                //               sc_observacion = c.sc_observacion
-                //           }).ToList();
-                //Lista_Factura = lst;
-                //ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
                 #endregion
             }
         }

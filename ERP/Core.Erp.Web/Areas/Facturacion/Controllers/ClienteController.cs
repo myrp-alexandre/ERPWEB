@@ -266,11 +266,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
                 foreach (var item in Lista_TipoCliente)
                 {
-                    //if (!bus_cliente_tipo.guardarDB(item))
-                    //{
-                    //    ViewBag.mensaje = "Error al importar el archivo";
-                    //    return View(model);
-                    //}
+                    if (!bus_cliente_tipo.guardarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
                 }
 
                 foreach (var item in Lista_Cliente)

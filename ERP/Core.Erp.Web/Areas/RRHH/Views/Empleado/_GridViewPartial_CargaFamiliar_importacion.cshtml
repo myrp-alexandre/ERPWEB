@@ -48,44 +48,13 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdRubro", "Codigo").Width = Unit.Percentage(5);
-        settings.Columns.Add("rub_codigo", "Descripción").Width = Unit.Percentage(16);
-        settings.Columns.Add("ru_codRolGen", "Cta Mejora").Width = Unit.Percentage(8);
-        settings.Columns.Add("ru_descripcion", "%").Width = Unit.Percentage(5);
-        settings.Columns.Add("NombreCorto", "Años").Width = Unit.Percentage(10);
-        settings.Columns.Add("rub_ctacon", "Cta Baja").Width = Unit.Percentage(8);
-        settings.Columns.Add("ru_tipo", "Cta Cble").Width = Unit.Percentage(8);
+        settings.Columns.Add("IdCargaFamiliar", "Codigo").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdEmpleado", "IdEmpleado").Width = Unit.Percentage(10);
+        settings.Columns.Add("Cedula", "Cedula").Width = Unit.Percentage(10);
+        settings.Columns.Add("Nombres", "Nombres").Width = Unit.Percentage(30);
+        settings.Columns.Add("TipoFamiliar", "TipoFamiliar").Width = Unit.Percentage(10);
+        settings.Columns.Add("FechaNacimiento", "FechaNacimiento").Width = Unit.Percentage(20);
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "rub_aplica_IESS";
-            column.Caption = "Aplica IESS";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(8);
-            column.EditorProperties().CheckBox(sp =>
-            {
-
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "rub_nocontab";
-            column.Caption = "Contabiliza";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(8);
-            column.EditorProperties().CheckBox(sp =>
-            {
-
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "rub_provision";
-            column.Caption = "Provisiona";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(8);
-            column.EditorProperties().CheckBox(sp =>
-            {
-
-            });
-        });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

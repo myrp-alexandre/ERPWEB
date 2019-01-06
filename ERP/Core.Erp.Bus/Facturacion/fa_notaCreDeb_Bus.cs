@@ -84,21 +84,5 @@ namespace Core.Erp.Bus.Facturacion
                 throw;
             }
         }
-
-        public bool guardar_importacionDB(fa_notaCreDeb_Info info)
-        {
-            try
-            {
-                if (odata.guardar_importacionDB(info))
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
     }
 }
