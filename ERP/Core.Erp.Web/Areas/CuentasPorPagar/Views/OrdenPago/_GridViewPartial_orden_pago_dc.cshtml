@@ -17,10 +17,11 @@
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
-        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
-        settings.CommandColumn.ShowEditButton = false;
-        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
@@ -47,23 +48,45 @@
 
         settings.Columns.Add(column =>
         {
+            column.FieldName = "pc_Cuenta";
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(35);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
             column.FieldName = "IdCtaCble";
-            column.Caption = "Cuenta contable";
-            column.Width = Unit.Percentage(50);
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(35);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
+            {
+                Html.RenderPartial("_CmbCuenta_OP", DataBinder.Eval(c.DataItem, "IdCtaCble"));
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdGrupoPresupuesto";
+            column.Caption = "Presupuesto";
+            column.Width = Unit.Percentage(20);
             column.EditorProperties().ComboBox(p =>
             {
-                p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
-                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
-                p.ValueField = "IdCtaCble";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_cuentas;
+                p.CallbackRouteValues = new { Controller = "Deudas", Action = "CargarGrupo", TextField = "Descripcion" };
+                p.TextField = "Descripcion";
+                p.ValueField = "IdGrupo";
+                p.ValueType = typeof(int);
+                //p.ClientSideEvents.Init = "function(s,e){s.PerformCallback();}";
+                p.BindList(ViewBag.lst_grupos);
+                p.ClientSideEvents.BeginCallback = "GrupoComboBox_BeginCallback";
+                p.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
             });
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "dc_Valor_debe";
             column.Caption = "Debe";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(15);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -74,13 +97,14 @@
         {
             column.FieldName = "dc_Valor_haber";
             column.Caption = "Haber";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(15);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
                 sp.MaxValue = 999999999;
             });
         });
+        /*
         settings.Columns.Add(column =>
         {
             column.FieldName = "dc_para_conciliar";
@@ -91,6 +115,8 @@
 
             });
         });
+*/
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_debe");
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_haber");
     });

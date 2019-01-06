@@ -10,10 +10,14 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.Banco;
 using Core.Erp.Bus.General;
+using System.IO;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class ArchivosTransferenciasController : Controller
     {
+        string rutafile = System.IO.Path.GetTempPath() ;
+
         #region Variables
         ro_archivos_bancos_generacion_Bus bus_archivo = new ro_archivos_bancos_generacion_Bus();
         ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
@@ -25,7 +29,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ba_Banco_Cuenta_Bus bus_cuentas_bancarias = new ba_Banco_Cuenta_Bus();
         tb_banco_procesos_bancarios_x_empresa_Bus bus_procesos_bancarios = new tb_banco_procesos_bancarios_x_empresa_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-
+        tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         #endregion
 
         #region Vistas
@@ -196,7 +200,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
            
 
-            string archivo = "";
+            byte[] archivo;
             string NombreFile = "NCR";
             tb_banco_procesos_bancarios_x_empresa_Bus bus_tipo_file = new tb_banco_procesos_bancarios_x_empresa_Bus();
 
@@ -205,7 +209,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var tipo_file = bus_tipo_file.get_info(IdEmpresa, info_archivo.IdProceso);
             int secuancia = bus_archivo.get_secuencia_file(IdEmpresa, info_archivo.IdProceso, DateTime.Now.Date);
             info_archivo.TipoFile  = (cl_enumeradores.eTipoProcesoBancario)Enum.Parse(typeof(cl_enumeradores.eTipoProcesoBancario), tipo_file.IdProceso_bancario_tipo, true);
-            archivo = bus_archivo.GetArchivo(info_archivo);
 
             switch (info_archivo.TipoFile)
             {
@@ -218,8 +221,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 default:
                     break;
             }
-            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(archivo);
-            return File(byteArray, "application/xml", NombreFile + ".txt");
+            archivo = GetArchivo(info_archivo, NombreFile);
+            return File(archivo, "application/xml", NombreFile + ".txt");
 
 
         }
@@ -299,8 +302,155 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_archivo_transferencia_det", model);
         }
         #endregion
-       
 
+        #region Generar archivos
+
+        public byte[] GetArchivo(ro_archivos_bancos_generacion_Info info, string nombre_file)
+        {
+            try
+            {
+                switch (info.TipoFile)
+                {
+                    case cl_enumeradores.eTipoProcesoBancario.NCR:
+
+                      return   get_NCR(info, nombre_file);
+
+                    case cl_enumeradores.eTipoProcesoBancario.ROL_ELECTRONICO:
+
+                        return get_ROL_ELECTRONICO(info, nombre_file);
+
+                    default:
+                        return new byte[00000];
+                }
+
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #region Archivos para el banco de guayaquil
+
+        private byte[] get_NCR(ro_archivos_bancos_generacion_Info info, string NombreArchivo)
+        {
+            try
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
+                {
+                    foreach (var item in info.detalle)
+                    {
+                        string linea = "";
+                        double valor = Convert.ToDouble(item.Valor);
+                        double valorEntero = Math.Floor(valor);
+                        double valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+
+                        if (item.em_tipoCta == "COR" || item.em_tipoCta == "AHO")
+                        {
+                            if (item.em_tipoCta == "AHO")
+                                linea += "A";
+                            else
+                                linea += "C";
+                            linea += item.em_NumCta.PadLeft(10, '0');
+                            linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+                            linea += "EI";
+                            linea += "Y";
+                            linea += "01";
+                            linea += cl_funciones.QuitarTildes(item.pe_apellido + item.pe_nombre);
+                        }
+                        file.WriteLine(linea);
+
+                    }
+                }
+                byte[] filebyte = System.IO.File.ReadAllBytes(rutafile + NombreArchivo + ".txt");
+                return filebyte;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        private byte[] get_ROL_ELECTRONICO(ro_archivos_bancos_generacion_Info info, string NombreArchivo)
+        {
+            try
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                TextWriter tw = new StreamWriter(memoryStream);
+
+                var Info_proceso = bus_procesos_bancarios.get_info(info.IdEmpresa, info.IdProceso);
+                var info_empresa = bus_empresa.get_info(info.IdEmpresa);
+                info_empresa.RazonSocial = info_empresa.RazonSocial.Replace("S.A", "");
+                var info_cuenta = bus_cuentas_bancarias.get_info(info.IdEmpresa, Convert.ToInt32(info.IdCuentaBancaria));
+                double valor = 0;
+                double valorEntero = 0;
+                double valorDecimal = 0;
+                int secuencia = 0;
+
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
+                {
+
+                    foreach (var item in info.detalle)
+                    {
+                        string linea = "";
+                        if (item.em_tipoCta == "VRT")
+                        {
+                            if (secuencia == 0)
+                            {
+                                valor = Convert.ToDouble(info.detalle.Sum(v => v.Valor));
+                                valorEntero = Math.Floor(valor);
+                                valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+
+                                linea += "C";
+                                linea += Info_proceso.Codigo_Empresa;
+                                linea += info_cuenta.ba_Num_Cuenta.PadLeft(10, '0');
+                                if (info_empresa.RazonSocial.Length > 38)
+                                    linea += info_empresa.RazonSocial.Substring(0, 37);
+                                else
+                                    linea += info_empresa.RazonSocial.PadRight(37, ' ');
+                                linea += "C";
+                                linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+                                linea += DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
+                                linea += info.detalle.Count().ToString().PadLeft(5, '0');
+                            }
+                            else
+                            {
+                                valor = Convert.ToDouble(info.detalle.Sum(v => v.Valor));
+                                valorEntero = Math.Floor(valor);
+                                valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+                                linea += "D";
+                                linea += Info_proceso.Codigo_Empresa;
+                                linea += item.pe_cedulaRuc.PadLeft(10, '0');
+                                linea += item.pe_nombreCompleto.Substring(0, 17);
+                                linea += "C";
+                                linea += "                    ";
+                                linea += "N";
+                                linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+                                linea += "                                           ";
+                                linea += "0900000000";
+                            }
+                        }
+                        secuencia++;
+                        file.WriteLine(linea);
+
+                    }
+                }
+                byte[] filebyte = System.IO.File.ReadAllBytes(rutafile + NombreArchivo + ".txt");
+                return filebyte;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #endregion
 
     }
 

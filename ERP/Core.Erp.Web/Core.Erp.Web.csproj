@@ -9610,6 +9610,7 @@
     <Content Include="Areas\CuentasPorPagar\Views\Proveedor\_CmbCtaCbleGasto_Proveedor.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ComprobanteContable\_CmbCuenta_comprobante_contable.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\_CmbCuenta_Deuda.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_CmbCuenta_OP.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

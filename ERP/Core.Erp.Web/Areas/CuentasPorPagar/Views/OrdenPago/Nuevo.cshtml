@@ -24,6 +24,14 @@
             IdEntidad.SetValue(null);
         });
     });
+    function OnSelectedCtaCbleChanged() {
+        GridViewPartial_orden_pago_dc.GetEditor("IdGrupoPresupuesto").PerformCallback();
+    }
+    function GrupoComboBox_BeginCallback(s, e) {
+        e.customArgs["pre_IdCtaCble"] = IdCtaCble.GetValue();
+        e.customArgs["pre_fecha"] = moment(Fecha.GetDate()).format('DD/MM/YYYY');
+    }
+
     var selectedIDs;
     function OnBeginCallback(s, e) {
         e.customArgs["IdTipo_Persona"] = $("#IdTipo_Persona").val();
@@ -58,7 +66,6 @@
 </script>
 @using (Html.BeginForm("Nuevo", "OrdenPago", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdOrdenPago)
     @Html.HiddenFor(q => q.IdEstadoAprobacion)
@@ -261,9 +268,9 @@
                         IdTipo_op: IdTipo_op.GetValue(),
                         IdEntidad: IdEntidad.GetValue(),
                         Valor_a_pagar: $("#Valor_a_pagar").val(),
-                        observacion: $("#observacion").val()
-
-
+                        observacion: $("#observacion").val(),
+                        IdEmpresa: $("#IdEmpresa").val(),
+                        IdTransaccionSession: $("#IdTransaccionSession").val()
                     }
                     $.ajax({
                         type: 'POST',
