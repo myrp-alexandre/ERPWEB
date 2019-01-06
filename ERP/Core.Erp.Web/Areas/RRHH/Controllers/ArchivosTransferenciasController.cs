@@ -337,6 +337,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                System.IO.File.Delete(rutafile + NombreArchivo + ".txt");
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
                 {
                     foreach (var item in info.detalle)
