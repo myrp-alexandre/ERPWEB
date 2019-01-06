@@ -823,14 +823,14 @@
 <script>
     $(function () {
         $("#error_documento").hide();
+        mostrar_horas();
+        dias_vacaciones();
     })
 
     $("#pe_cedulaRuc").blur(function () {
         Validar_cedula_ruc();
     });
-
-    mostrar_horas();
-    dias_vacaciones();
+    
     $("#pe_cedulaRuc").keyup(function () {
         validar();
     });

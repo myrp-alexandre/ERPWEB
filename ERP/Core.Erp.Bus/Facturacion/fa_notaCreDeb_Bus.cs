@@ -1,4 +1,6 @@
-﻿using Core.Erp.Data.Facturacion;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Data.Facturacion;
+using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.Facturacion;
 using System;
 using System.Collections.Generic;
@@ -76,6 +78,22 @@ namespace Core.Erp.Bus.Facturacion
             try
             {
                 return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool guardar_importacionDB(fa_notaCreDeb_Info info)
+        {
+            try
+            {
+                if (odata.guardar_importacionDB(info))
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception)
             {

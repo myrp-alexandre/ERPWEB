@@ -108,14 +108,27 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 }
                 info.IdEmpresa = GetIdEmpresa();
                 info.IdUsuario = SessionFixed.IdUsuario;
+                var return_naturaleza = "";
 
-                if (!bus_empleado.guardarDB(info))
+                if (cl_funciones.ValidaIdentificacion(info.IdTipoDocumento, "", info.pe_cedulaRuc, ref return_naturaleza))
                 {
+                    if (!bus_empleado.guardarDB(info))
+                    {
+                        if (info.em_foto == null)
+                            info.em_foto = new byte[0];
+                        cargar_combos();
+                        return View(info);
+                    }
+                }
+                else
+                {
+                    ViewBag.mensaje = "Número de identificación inválida";
                     if (info.em_foto == null)
                         info.em_foto = new byte[0];
                     cargar_combos();
                     return View(info);
-                }                    
+                }
+                                      
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -166,15 +179,28 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     return View(info);
                 }
                 info.IdEmpresa = GetIdEmpresa();
-                if (!bus_empleado.modificarDB(info))
+                var return_naturaleza = "";
+
+                if (cl_funciones.ValidaIdentificacion(info.IdTipoDocumento, "", info.pe_cedulaRuc, ref return_naturaleza))
                 {
+                    if (!bus_empleado.modificarDB(info))
+                    {
+                        if (info.em_foto == null)
+                            info.em_foto = new byte[0];
+                        cargar_combos();
+                        return View(info);
+                    }
+                }
+                else
+                {
+                    ViewBag.mensaje = "Número de identificación inválida";
                     if (info.em_foto == null)
                         info.em_foto = new byte[0];
                     cargar_combos();
                     return View(info);
                 }
+                                
                 return RedirectToAction("Index");
-
             }
             catch (Exception)
             {
@@ -185,13 +211,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
-        public ActionResult Modificar(int Idempleado = 0)
+        public ActionResult Modificar(int IdEmpleado = 0)
         {
             try
             {
                 cargar_combos();
                 ro_empleado_Info info = new ro_empleado_Info();
-                info = bus_empleado.get_info(GetIdEmpresa(), Idempleado);
+                info = bus_empleado.get_info(GetIdEmpresa(), IdEmpleado);
                 if (info.em_foto == null)
                     info.em_foto = new byte[0];
 
@@ -210,9 +236,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 return View(info);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
         }
