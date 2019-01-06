@@ -18,9 +18,11 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "HorasExtras", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdHorasExtras)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
+    
 
 
     <div class="row">
@@ -46,7 +48,9 @@
                     @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
+
         </div>
+
     </div>
 
     <div class="row">
@@ -60,7 +64,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
-                <button type="submit" class="btn btn-primary">Procesar</button>
+                <button type="button" class="btn btn-primary" id="btn_guardar" onclick="calcular_horas();">Calcular horas extras</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
                 <a class="btn btn-default" href="@Url.Action("Index","HorasExtras",new { Area = "RRHH", @id="grid"},null)">Salir</a>
             </div>
         </div>
@@ -129,6 +134,36 @@
         });
     };
 
+    function calcular_horas() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdNomina: $("#IdNomina_Tipo").val(),
+            IdNomina_Tipo: $("#IdNomina_TipoLiqui").val(),
+            IdPeriodo: $("#IdPeriodo").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+
+            
+
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_horas_extras","HorasExtras", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                $.each(data, function (i, row) {
+                    $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
 
 
 </script>
