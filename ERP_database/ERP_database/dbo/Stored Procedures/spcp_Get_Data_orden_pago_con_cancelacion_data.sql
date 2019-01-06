@@ -49,7 +49,6 @@ update [cp_orden_pago_con_cancelacion_data]
 set 
  Nom_Beneficiario=ben.pe_nombreCompleto
 ,Girar_Cheque_a=ben.pr_girar_cheque_a
-,IdCtaCble=ben.IdCtaCble
 ,Nom_Beneficiario_2=ben.Nombre
 FROM            cp_orden_pago_con_cancelacion_data AS data INNER JOIN
                          vwtb_persona_beneficiario AS ben ON data.IdEmpresa = ben.IdEmpresa AND data.IdTipoPersona = ben.IdTipo_Persona 
@@ -102,6 +101,23 @@ BEGIN
 	and cp_orden_pago_con_cancelacion_data.IdCbteCble_cxp = f.IdCbteCble_Ogiro
 	) and cp_orden_pago_con_cancelacion_data.IdUsuario = @IdUsuario
 END
+
+UPDATE cp_orden_pago_con_cancelacion_data
+set IdCtaCble = A.IdCtaCble_Acreedora
+FROM
+(
+SELECT IdEmpresa, IdTipoCbte, IdCbteCble, IdCtaCble_Acreedora FROM vwct_cbtecble_con_ctacble_acreedora AS F
+WHERE EXISTS(
+SELECT R.IdEmpresa FROM cp_orden_pago_con_cancelacion_data AS R
+WHERE R.IdUsuario = @IdUsuario
+AND R.IdEmpresa = F.IdEmpresa
+AND R.IdTipoCbte_cxp = F.IdTipoCbte
+AND R.IdCbteCble_cxp = F.IdCbteCble
+)
+) A
+WHERE  cp_orden_pago_con_cancelacion_data.IdEmpresa_cxp = A.IdEmpresa
+AND cp_orden_pago_con_cancelacion_data.IdTipoCbte_cxp = A.IdTipoCbte
+AND cp_orden_pago_con_cancelacion_data.IdCbteCble_cxp = A.IdCbteCble
 
 SELECT ISNULL(ROW_NUMBER() OVER (ORDER BY IdUsuario),0) AS IdRow, IdUsuario, IdEmpresa, IdTipo_op, Referencia, Referencia2, IdOrdenPago, Secuencia_OP, IdTipoPersona, IdPersona, IdEntidad, Fecha_OP, Fecha_Fa_Prov, Fecha_Venc_Fac_Prov, Observacion, Nom_Beneficiario, Girar_Cheque_a, 
                   Valor_a_pagar, Valor_estimado_a_pagar_OP, Total_cancelado_OP, Saldo_x_Pagar_OP, IdEstadoAprobacion, IdFormaPago, Fecha_Pago, IdCtaCble, IdCentroCosto, IdSubCentro_Costo, Cbte_cxp, Estado, Nom_Beneficiario_2, 

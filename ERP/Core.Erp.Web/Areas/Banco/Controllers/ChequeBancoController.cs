@@ -81,7 +81,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbPersona_ChequeBanco()
         {
-            SessionFixed.TipoPersona = Request.Params["IdTipo_Persona"] != null ? Request.Params["IdTipo_Persona"].ToString() : SessionFixed.TipoPersona;
+            SessionFixed.TipoPersona = Request.Params["IdTipoPersona"] != null ? Request.Params["IdTipoPersona"].ToString() : SessionFixed.TipoPersona;
             decimal model = new decimal();
             return PartialView("_CmbPersona_ChequeBanco", model);
         }

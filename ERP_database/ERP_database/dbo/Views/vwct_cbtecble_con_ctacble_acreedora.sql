@@ -18,13 +18,9 @@ FROM            (SELECT        cbte_d.IdEmpresa, cbte_d.IdTipoCbte, cbte_d.IdCbt
                                                          FROM            dbo.cp_proveedor AS cl_pr
                                                          WHERE        (IdEmpresa = cbte_d.IdEmpresa) AND (IdCtaCble_CXP = cbte_d.IdCtaCble))
                           UNION ALL
-                          SELECT        A.IdEmpresa, A.IdTipoCbte, A.IdCbteCble, A.IdCtaCble AS IdCtaCble_Acreedora
-                          FROM            dbo.cp_orden_pago_det INNER JOIN
-                                                   dbo.cp_orden_pago ON dbo.cp_orden_pago_det.IdEmpresa = dbo.cp_orden_pago.IdEmpresa AND dbo.cp_orden_pago_det.IdOrdenPago = dbo.cp_orden_pago.IdOrdenPago INNER JOIN
-                                                   dbo.ct_cbtecble_det AS A ON dbo.cp_orden_pago_det.IdEmpresa_cxp = A.IdEmpresa AND dbo.cp_orden_pago_det.IdTipoCbte_cxp = A.IdTipoCbte AND 
-                                                   dbo.cp_orden_pago_det.IdCbteCble_cxp = A.IdCbteCble INNER JOIN
-                                                   dbo.vwtb_persona_beneficiario ON dbo.cp_orden_pago.IdEmpresa = dbo.vwtb_persona_beneficiario.IdEmpresa AND dbo.cp_orden_pago.IdTipo_Persona = dbo.vwtb_persona_beneficiario.IdTipo_Persona AND 
-                                                   dbo.cp_orden_pago.IdPersona = dbo.vwtb_persona_beneficiario.IdPersona AND dbo.cp_orden_pago.IdEntidad = dbo.vwtb_persona_beneficiario.IdEntidad AND 
-                                                   A.IdCtaCble = dbo.vwtb_persona_beneficiario.IdCtaCble
-                          WHERE        (A.dc_Valor < 0) AND (dbo.cp_orden_pago.IdTipo_op <> 'FACT_PROVEE')) AS Querry
+                          SELECT        d.IdEmpresa_cxp, d.IdTipoCbte_cxp, d.IdCbteCble_cxp, ct.IdCtaCble
+                          FROM            dbo.cp_orden_pago AS c INNER JOIN
+                                                   dbo.cp_orden_pago_det AS d ON c.IdEmpresa = d.IdEmpresa AND c.IdOrdenPago = d.IdOrdenPago LEFT OUTER JOIN
+                                                   dbo.ct_cbtecble_det AS ct ON d.IdEmpresa_cxp = ct.IdEmpresa AND d.IdCbteCble_cxp = ct.IdCbteCble AND d.IdTipoCbte_cxp = ct.IdTipoCbte
+                          WHERE        (c.IdTipo_op <> 'FACT_PROVEE') AND (ct.dc_Valor < 0)) AS Querry
 GROUP BY IdEmpresa, IdTipoCbte, IdCbteCble
