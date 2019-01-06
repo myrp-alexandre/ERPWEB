@@ -719,7 +719,94 @@ namespace Core.Erp.Data.Facturacion
 
                 throw;
             }
-        }       
+        }
+
+        public bool guardar_importacionDB(fa_notaCreDeb_Info info)
+        {
+            try
+            {
+                #region Variables
+                int Secuencia = 1;
+                ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
+                cxc_cobro_Data odata_cobr = new cxc_cobro_Data();
+                #endregion
+
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    #region Nota de debito credito
+
+                    #region Cabecera
+                    Context.fa_notaCreDeb.Add(new fa_notaCreDeb
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdSucursal = info.IdSucursal,
+                        IdBodega = info.IdBodega,
+                        IdNota = info.IdNota = get_id(info.IdEmpresa, info.IdSucursal, info.IdBodega),
+                        IdPuntoVta = info.IdPuntoVta,
+                        CodNota = info.CodNota,
+                        CreDeb = info.CreDeb.Trim(),
+                        CodDocumentoTipo = info.CodDocumentoTipo,
+                        Serie1 = info.Serie1,
+                        Serie2 = info.Serie2,
+                        NumNota_Impresa = info.NumNota_Impresa,
+                        NumAutorizacion = info.NumAutorizacion,
+                        Fecha_Autorizacion = info.Fecha_Autorizacion,
+                        IdCliente = info.IdCliente,
+                        IdContacto = info.IdContacto,
+                        no_fecha = info.no_fecha.Date,
+                        no_fecha_venc = info.no_fecha_venc.Date,
+                        IdTipoNota = info.IdTipoNota,
+                        sc_observacion = info.sc_observacion,
+                        Estado = info.Estado = "A",
+                        NaturalezaNota = info.NaturalezaNota,
+                        IdCtaCble_TipoNota = info.IdCtaCble_TipoNota,
+
+                        IdUsuario = info.IdUsuario
+                    });
+                    #endregion
+
+                    #region Detalle
+                    foreach (var item in info.lst_det)
+                    {
+                        Context.fa_notaCreDeb_det.Add(new fa_notaCreDeb_det
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdBodega = info.IdBodega,
+                            IdNota = info.IdNota,
+                            Secuencia = Secuencia++,
+                            IdProducto = item.IdProducto,
+                            sc_cantidad = item.sc_cantidad,
+                            sc_cantidad_factura = item.sc_cantidad_factura,
+                            sc_Precio = item.sc_Precio,
+                            sc_descUni = item.sc_descUni,
+                            sc_PordescUni = item.sc_PordescUni,
+                            sc_precioFinal = item.sc_precioFinal,
+                            vt_por_iva = item.vt_por_iva,
+                            sc_iva = item.sc_iva,
+                            IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
+                            sc_estado = "A",
+                            sc_subtotal = item.sc_subtotal,
+                            sc_total = item.sc_total,
+
+                            IdCentroCosto = item.IdCentroCosto,
+                            IdCentroCosto_sub_centro_costo = item.IdCentroCosto_sub_centro_costo,
+                            IdPunto_Cargo = item.IdPunto_Cargo,
+                            IdPunto_cargo_grupo = item.IdPunto_cargo_grupo
+                        });
+                    }
+                    #endregion
+                    Context.SaveChanges();
+                #endregion
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
 
