@@ -282,7 +282,7 @@ namespace Core.Erp.Info.Helps
                 if (tipo_documento == "CED")
                 {
                     return_naturaleza = "NATU";
-                    return ValidaCedula(cedula_ruc.Trim());                    
+                    return ValidaCedula(cedula_ruc.Trim());
                 }
                 else if (tipo_documento == "RUC")
                 {
@@ -312,7 +312,7 @@ namespace Core.Erp.Info.Helps
                             {
                                 if (digito_tres <= tercer_digito_persona_natural)
                                 {
-                                    
+
                                     var establecimiento_prov = cedula_ruc.Substring(10, 3);
                                     var isValid_cedula = ValidaCedula(cedula_ruc.Substring(0, 10));
 
@@ -338,7 +338,7 @@ namespace Core.Erp.Info.Helps
 
                                         return_naturaleza = "JURI";
                                         return digito_verificador == digito_verificador_obtenido;
-                                    }                                  
+                                    }
                                 }
 
                                 if (digito_tres == tercer_digito_persona_juridica)
@@ -359,7 +359,14 @@ namespace Core.Erp.Info.Helps
                                     return digito_verificador == digito_verificador_obtenido;
                                 }
                             }
-                            return false;
+                            else
+                            {
+                                if (cedula_ruc == "9999999999999")
+                                {
+                                    return_naturaleza = "JURI";
+                                    return true;
+                                }
+                            }
                         }
                         return false;
                     }
@@ -369,7 +376,7 @@ namespace Core.Erp.Info.Helps
                 {
                     return_naturaleza = naturaleza;
                     return true;
-                }
+                }             
             }
             catch (Exception)
             {

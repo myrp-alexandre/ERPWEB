@@ -579,13 +579,19 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             try
             {
-                var ListaFactura = Lista_Factura.get_list(model.IdTransaccionSession);
+                var ListaFactura = Lista_Factura.get_list(model.IdTransaccionSession);                
 
-                //if (!bus_producto.GuardarDbImportacion())
-                //{
-                //    ViewBag.mensaje = "Error al importar el archivo";
-                //    return View(model);
-                //}
+                foreach (var item in ListaFactura)
+                {
+                    if (item.IdCliente != 0)
+                    {
+                        if (!bus_nota.guardar_importacionDB(item))
+                        {
+                            ViewBag.mensaje = "Error al importar el archivo";
+                            return View(model);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -626,66 +632,137 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             fa_notaCreDeb_List ListaFactura = new fa_notaCreDeb_List();
             List<fa_notaCreDeb_Info> Lista_Factura = new List<fa_notaCreDeb_Info>();
             fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+            fa_cliente_contactos_Bus bus_cliente_contatos = new fa_cliente_contactos_Bus();
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            fa_parametro_Bus bus_fa_parametro = new fa_parametro_Bus();
+            fa_TipoNota_Bus bus_tipo_nota = new fa_TipoNota_Bus();
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+
             int cont = 0;
+            int IdNota = 1;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             #endregion
+
             Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
             if (stream.Length > 0)
             {
                 IExcelDataReader reader = null;
                 reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                #region Saldo Fact                
+
+                #region Saldo Fact      
+                var info_fa_parametro = bus_fa_parametro.get_info(IdEmpresa);
+                var IdTipoNota = 1; //default
+                var infoTipoNota = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
+
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
-                        fa_notaCreDeb_Info info = new fa_notaCreDeb_Info
+                        var Su_CodigoEstablecimiento = Convert.ToString(reader.GetValue(0)).Trim();
+                        var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+                        var IdSucursal = lst_sucursal.Where(q => q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal;
+                        var InfoCliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, Convert.ToString(reader.GetValue(1)));                                                
+                        var infoBodega = bus_bodega.get_info(IdEmpresa, IdSucursal, 1);
+                        if (InfoCliente != null && InfoCliente.IdCliente != 0)
                         {
-                            IdEmpresa = IdEmpresa,
-                            CodDocumentoTipo = Convert.ToString(reader.GetValue(0)),
-                            Ruc = Convert.ToString(reader.GetValue(1)),
-                            CodNota = Convert.ToString(reader.GetValue(2)),
-                            sc_total = Convert.ToDouble(reader.GetValue(3)),
-                            sc_saldo = Convert.ToDouble(reader.GetValue(4)),
-                            no_fecha = Convert.ToDateTime(reader.GetValue(5)),
-                            no_fecha_venc = Convert.ToDateTime(reader.GetValue(6)),
-                            sc_observacion = Convert.ToString(reader.GetValue(7)),
-                            IdUsuario = SessionFixed.IdUsuario
-                        };
-                        Lista_Factura.Add(info);
+                            //var InfoContactosCliente = bus_cliente_contatos.get_list(IdEmpresa, InfoCliente.IdCliente);
+                            var InfoContactosCliente = bus_cliente_contatos.get_info(IdEmpresa, InfoCliente.IdCliente, 1);
+                            fa_notaCreDeb_Info info = new fa_notaCreDeb_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdSucursal = IdSucursal,
+                                IdBodega = infoBodega.IdBodega,
+                                IdNota = IdNota++,
+                                dev_IdEmpresa = null,
+                                dev_IdDev_Inven = null,
+                                CodNota = Convert.ToString(reader.GetValue(2)),
+                                CreDeb = "D",
+                                CodDocumentoTipo = null,
+                                Serie1 = null,
+                                Serie2 = null,
+                                NumNota_Impresa = null,
+                                NumAutorizacion = null,
+                                Fecha_Autorizacion = null,
+                                IdCliente = InfoCliente.IdCliente,
+                                IdContacto = InfoContactosCliente.IdContacto,
+                                no_fecha = Convert.ToDateTime(reader.GetValue(5)),
+                                no_fecha_venc = Convert.ToDateTime(reader.GetValue(6)),
+                                IdTipoNota = infoTipoNota.IdTipoNota,
+                                sc_observacion = Convert.ToString(reader.GetValue(7)),
+                                IdUsuario = SessionFixed.IdUsuario,
+                                NaturalezaNota = null,
+                                IdCtaCble_TipoNota = infoTipoNota.IdCtaCble,
+                                IdPuntoVta = null,
+                                aprobada_enviar_sri = false
+                            };
+
+                            info.lst_det = new List<fa_notaCreDeb_det_Info>();
+
+                            fa_notaCreDeb_det_Info info_detalle = new fa_notaCreDeb_det_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdSucursal = lst_sucursal.Where(q => q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal,
+                                IdBodega = info.IdBodega,
+                                IdNota = info.IdNota,
+                                IdProducto = 1,
+                                sc_cantidad = 1,
+                                sc_Precio = Convert.ToDouble(reader.GetValue(4)),
+                                sc_descUni = 0,
+                                sc_PordescUni = 0,
+                                sc_precioFinal = Convert.ToDouble(reader.GetValue(4)),
+                                sc_subtotal = Convert.ToDouble(reader.GetValue(4)),
+                                sc_iva = 0,
+                                sc_total = Convert.ToDouble(reader.GetValue(4)),
+                                sc_costo = 0,
+                                sc_observacion = Convert.ToString(reader.GetValue(7)),
+                                sc_estado = "A",
+                                vt_por_iva = 0,
+                                IdPunto_Cargo = null,
+                                IdPunto_cargo_grupo = null,
+                                IdCod_Impuesto_Iva = "IVA0",
+                                IdCod_Impuesto_Ice = null,
+                                IdCentroCosto = null,
+                                IdCentroCosto_sub_centro_costo = null,
+                                sc_cantidad_factura = null
+                            };
+
+                            info.lst_det.Add(info_detalle);
+
+                            Lista_Factura.Add(info);
+                        }
+                        else
+                        {
+
+                        }                            
                     }
                     else
                         cont++;
                 }
                 ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
-                var ListSucursal = bus_sucursal.get_list(IdEmpresa, false);
-                var ListFact = ListaFactura.get_list(IdTransaccionSession);
-                var ListCliente = bus_cliente.get_list(IdEmpresa, false);
-                var lst = (from q in ListCliente
-                           join c in ListFact
-                           on q.info_persona.pe_cedulaRuc equals c.Ruc
-                           join s in ListSucursal on c.CodDocumentoTipo equals s.Su_CodigoEstablecimiento
-                           select new fa_notaCreDeb_Info
-                           {
-                               IdEmpresa = c.IdEmpresa,
-                               CodDocumentoTipo = s.Su_CodigoEstablecimiento,
-                               Ruc = q.info_persona.pe_cedulaRuc,
-                               CodNota = c.CodNota,
-                               sc_total = c.sc_total,
-                               sc_saldo = c.sc_saldo,
-                               no_fecha = c.no_fecha,
-                               no_fecha_venc = c.no_fecha_venc,
-                               sc_observacion = c.sc_observacion
-                           }).ToList();
-                Lista_Factura = lst;
-                ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
 
+                //var ListFact = ListaFactura.get_list(IdTransaccionSession);
+                //var ListSucursal = bus_sucursal.get_list(IdEmpresa, false);                
+                //var ListCliente = bus_cliente.get_list(IdEmpresa, false);
+                //var lst = (from q in ListCliente
+                //           join c in ListFact
+                //           on q.info_persona.pe_cedulaRuc equals c.Ruc
+                //           join s in ListSucursal on c.CodDocumentoTipo equals s.Su_CodigoEstablecimiento
+                //           select new fa_notaCreDeb_Info
+                //           {
+                //               IdEmpresa = c.IdEmpresa,
+                //               CodDocumentoTipo = s.Su_CodigoEstablecimiento,
+                //               Ruc = q.info_persona.pe_cedulaRuc,
+                //               CodNota = c.CodNota,
+                //               sc_total = c.sc_total,
+                //               sc_saldo = c.sc_saldo,
+                //               no_fecha = c.no_fecha,
+                //               no_fecha_venc = c.no_fecha_venc,
+                //               sc_observacion = c.sc_observacion
+                //           }).ToList();
+                //Lista_Factura = lst;
+                //ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
                 #endregion
-                cont = 0;
-                //Para avanzar a la siguiente hoja de excel
-                reader.NextResult();
             }
         }
     }

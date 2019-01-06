@@ -136,12 +136,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 in_Producto_Info model = new in_Producto_Info
                 {
                     IdEmpresa = IdEmpresa,
-                    IdCod_Impuesto_Iva = "IVA12",
+                    IdCod_Impuesto_Iva = "IVA0",
                     IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
-                    lst_producto_composicion = new List<in_Producto_Composicion_Info>()
+                    lst_producto_composicion = new List<in_Producto_Composicion_Info>(),
+                    IdUnidadMedida = "UNID",
+                    IdUnidadMedida_Consumo = "UNID"
                 };
                 model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-                var lst_producto_x_bodega = bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa));
+                var lst_producto_x_bodega = bus_producto_x_bodega.get_list(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSucursal));
                 var lst_producto_x_nivel = bus_producto_x_NivelDescuento.get_list(Convert.ToInt32(SessionFixed.IdEmpresa));
                 
                 model.pr_imagen = new byte[0];

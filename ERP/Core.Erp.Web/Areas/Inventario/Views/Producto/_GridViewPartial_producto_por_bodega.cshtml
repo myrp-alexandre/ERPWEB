@@ -4,16 +4,20 @@
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_producto_por_bodega";
         settings.CallbackRouteValues = new { Controller = "Producto", Action = "GridViewPartial_producto_por_bodega", IdProducto = Model == null ? 0 : Model.IdProducto };
-        settings.KeyFieldName = "Secuencia  ";
+        settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Producto", Action = "EditingAddNew_pro_x_bod" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Producto", Action = "EditingUpdate_pro_x_bod" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Producto", Action = "EditingDelete_pro_x_bod" };
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsBehavior.ConfirmDelete = true;
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
+        settings.CommandColumn.ShowNewButtonInHeader = true;
         settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowDeleteButton = true;
         settings.CommandColumn.ShowEditButton = true;
 

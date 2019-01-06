@@ -778,7 +778,8 @@ namespace Core.Erp.Data.RRHH
             Entities_rrhh Context_rrhh = new Entities_rrhh();
             Entities_general Context_general = new Entities_general();
             var IdRubro = data_rubro.get_id(IdEmpresa);
-
+            var IdEmpleado = get_id(IdEmpresa);
+            
             try
             {
                 foreach (var item in Lista_Division)
@@ -918,18 +919,18 @@ namespace Core.Erp.Data.RRHH
 
                     Context_rrhh.ro_turno.Add(Entity_turno);
                 }
-
+                
                 foreach (var item in Lista_Empleado)
                 {
                     ro_empleado Entity_empleado = new ro_empleado
                     {
                         IdEmpresa = item.IdEmpresa,
-                        IdEmpleado = item.IdEmpleado,
+                        IdEmpleado = IdEmpleado++,
                         IdEmpleado_Supervisor = null,
                         IdPersona = item.IdPersona,
                         IdSucursal = item.IdSucursal,
                         IdTipoEmpleado = item.IdTipoEmpleado,
-                        em_codigo = item.em_codigo,
+                        em_codigo = (item.em_codigo) == null ? IdEmpleado.ToString() : item.em_codigo,
                         Codigo_Biometrico = item.Codigo_Biometrico,
                         em_lugarNacimiento = item.em_lugarNacimiento,
                         em_CarnetIees = null,
@@ -991,19 +992,19 @@ namespace Core.Erp.Data.RRHH
                     Context_rrhh.ro_empleado.Add(Entity_empleado);
                 }
 
-                //foreach (var item in Lista_RubrosAcumulados)
-                //{
-                //    ro_empleado_x_rubro_acumulado Entity_RubroAcumulado = new ro_empleado_x_rubro_acumulado
-                //    {
-                //        IdEmpresa = item.IdEmpresa,
-                //        IdEmpleado = item.IdEmpleado,
-                //        IdRubro =item.IdRubro,
-                //        UsuarioIngresa = item.UsuarioIngresa,
-                //        FechaIngresa = item.FechaIngresa
-                //    };
+                foreach (var item in Lista_RubrosAcumulados)
+                {
+                    ro_empleado_x_rubro_acumulado Entity_RubroAcumulado = new ro_empleado_x_rubro_acumulado
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdEmpleado = item.IdEmpleado,
+                        IdRubro = item.IdRubro,
+                        UsuarioIngresa = item.UsuarioIngresa,
+                        FechaIngresa = item.FechaIngresa
+                    };
 
-                //    Context_rrhh.ro_empleado_x_rubro_acumulado.Add(Entity_RubroAcumulado);
-                //}
+                    Context_rrhh.ro_empleado_x_rubro_acumulado.Add(Entity_RubroAcumulado);
+                }
 
                 //foreach (var item in Lista_TipoNomina)
                 //{
