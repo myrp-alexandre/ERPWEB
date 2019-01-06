@@ -186,7 +186,8 @@ namespace Core.Erp.Data.RRHH
                     Entity.hora_extra100 = item.hora_extra100;
                     Entity.hora_atraso = item.hora_atraso;
                     Entity.hora_temprano = item.hora_temprano;
-                    Entity.hora_trabajada = item.hora_trabajada;                    Context.SaveChanges();
+                    Entity.hora_trabajada = item.hora_trabajada;
+                    Context.SaveChanges();
                 }
 
                 return true;

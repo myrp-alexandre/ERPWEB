@@ -9,6 +9,7 @@ namespace Core.Erp.Info.RRHH
 {
    public class ro_nomina_x_horas_extras_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdHorasExtras { get; set; }
         [Required(ErrorMessage = "El campo nómina es obligatorio")]

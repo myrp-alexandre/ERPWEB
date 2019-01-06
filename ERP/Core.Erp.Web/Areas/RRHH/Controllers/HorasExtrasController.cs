@@ -55,21 +55,27 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             cargar_combos_detalle();
             ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
-            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list();
+            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return PartialView("_GridViewPartial_aprobacion_horas_extras_det", model);
         }
 
         public ActionResult Aprobar(int IdNomina_Tipo, int IdNomina_TipoLiqui, int IdPeriodo, int IdHorasExtras)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
             model = bus_horas_extras.get_info(IdEmpresa, IdHorasExtras);
             if (model != null)
                 model.lst_nomina_horas_extras = bus_hora_extra_detalle.get_list(model.IdEmpresa, model.IdHorasExtras);
-            ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras);
-
+            ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             return View(model);
         }
         [HttpPost]
@@ -112,14 +118,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [ValidateInput(false)]
         public ActionResult Nuevo()
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             cargar_combos(0, 0);
             ro_nomina_x_horas_extras_Info info = new ro_nomina_x_horas_extras_Info();
+            info.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession) ;
             info.lst_nomina_horas_extras = new List<ro_nomina_x_horas_extras_det_Info>();
             return View(info);
         }
         [HttpPost]
         public ActionResult Nuevo(ro_nomina_x_horas_extras_Info model)
         {
+
             if (model == null)
                 return View(model);
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"].ToString());
@@ -133,14 +148,20 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         public ActionResult Modificar(int IdNomina_Tipo, int IdNomina_TipoLiqui, int IdPeriodo, int IdHorasExtras)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
             model = bus_horas_extras.get_info(IdEmpresa, IdHorasExtras);
             if (model != null)
                 model.lst_nomina_horas_extras = bus_hora_extra_detalle.get_list(model.IdEmpresa, model.IdHorasExtras);
-            ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras);
-
+            ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             return View(model);
         }
         [HttpPost]
@@ -159,14 +180,20 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         public ActionResult Anular(int IdNomina_Tipo, int IdNomina_TipoLiqui, int IdPeriodo, int IdHorasExtras)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
             IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
             model = bus_horas_extras.get_info(IdEmpresa, IdHorasExtras);
             if (model != null)
                 model.lst_nomina_horas_extras = bus_hora_extra_detalle.get_list(model.IdEmpresa, model.IdHorasExtras);
-            ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras);
-
+            ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             return View(model);
         }
         [HttpPost]
@@ -187,18 +214,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_nomina_x_horas_extras_det_Info info_det)
         {
             if (ModelState.IsValid)
-                ro_nomina_x_horas_extras_det_Info_list.UpdateRow(info_det);
+                ro_nomina_x_horas_extras_det_Info_list.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
-            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list();
+            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_horas_extras_det", model);
 
         }
 
         public ActionResult EditingDelete([ModelBinder(typeof(DevExpressEditorsBinder))] ro_nomina_x_horas_extras_det_Info info_det)
         {
-            ro_nomina_x_horas_extras_det_Info_list.DeleteRow(Convert.ToInt32(info_det.Secuencia));
+            ro_nomina_x_horas_extras_det_Info_list.DeleteRow(Convert.ToInt32(info_det.Secuencia), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
-            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list();
+            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_horas_extras_det", model);
 
         }
@@ -208,7 +235,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             cargar_combos_detalle();
             ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
-            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list();
+            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_horas_extras_det", model);
         }
         private void cargar_combos_detalle()
@@ -226,46 +253,59 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
 
+        public JsonResult get_horas_extras(int IdEmpresa = 0, int IdNomina = 0, int IdNomina_Tipo = 0, int IdPeriodo = 0, decimal IdTransaccionSession = 0)
+        {
+            ro_nomina_x_horas_extras_Info model = new ro_nomina_x_horas_extras_Info();
+            model.IdEmpresa = IdEmpresa;
+            model.IdNomina_Tipo = IdNomina;
+            model.IdNomina_TipoLiqui = IdNomina_Tipo;
+            model.IdPeriodo = IdPeriodo;
+            bus_horas_extras.ProcesarHorasExtras(model);
+            model.lst_nomina_horas_extras = bus_hora_extra_detalle.get_list(model.IdEmpresa, model.IdHorasExtras);
+            ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras, IdTransaccionSession);
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
     }
 
     public class ro_nomina_x_horas_extras_det_Info_list
     {
         string variable = "ro_nomina_x_horas_extras_det_Info";
-        public List<ro_nomina_x_horas_extras_det_Info> get_list()
+        public List<ro_nomina_x_horas_extras_det_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session[variable] == null)
+            if (HttpContext.Current.Session[variable+ IdTransaccionSession.ToString()] == null)
             {
                 List<ro_nomina_x_horas_extras_det_Info> list = new List<ro_nomina_x_horas_extras_det_Info>();
 
-                HttpContext.Current.Session[variable] = list;
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<ro_nomina_x_horas_extras_det_Info>)HttpContext.Current.Session[variable];
+            return (List<ro_nomina_x_horas_extras_det_Info>)HttpContext.Current.Session[variable+ IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<ro_nomina_x_horas_extras_det_Info> list)
+        public void set_list(List<ro_nomina_x_horas_extras_det_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session[variable] = list;
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(ro_nomina_x_horas_extras_det_Info info_det)
+        public void AddRow(ro_nomina_x_horas_extras_det_Info info_det, decimal IdTransaccionSession)
         {
-            List<ro_nomina_x_horas_extras_det_Info> list = get_list();
+            List<ro_nomina_x_horas_extras_det_Info> list = get_list(IdTransaccionSession);
             list.Add(info_det);
         }
 
-        public void UpdateRow(ro_nomina_x_horas_extras_det_Info info_det)
+        public void UpdateRow(ro_nomina_x_horas_extras_det_Info info_det, decimal IdTransaccionSession)
         {
 
-            ro_nomina_x_horas_extras_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
+            ro_nomina_x_horas_extras_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.hora_extra100 = info_det.hora_extra100;
             edited_info.hora_extra50 = info_det.hora_extra50;
             edited_info.hora_extra25 = info_det.hora_extra25;
 
         }
 
-        public void DeleteRow(int Secuencia)
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
-            List<ro_nomina_x_horas_extras_det_Info> list = get_list();
+            List<ro_nomina_x_horas_extras_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
 

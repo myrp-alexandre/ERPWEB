@@ -52,6 +52,21 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public bool ProcesarHorasExtras(ro_nomina_x_horas_extras_Info info)
+        {
+            try
+            {
+                if (odata.Procesar(info))
+                    return bus_detalle.calcular_horas_extras(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool modificarDB(ro_nomina_x_horas_extras_Info info)
         {
             try
