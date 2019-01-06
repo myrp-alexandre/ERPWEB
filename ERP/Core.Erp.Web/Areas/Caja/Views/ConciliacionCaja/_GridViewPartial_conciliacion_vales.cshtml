@@ -67,6 +67,20 @@
                 Html.RenderPartial("_ComboBoxPartial_persona", DataBinder.Eval(c.DataItem, "IdPersona"));
             });
         });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "fecha";
+            column.Caption = "Fecha";
+            column.Width = Unit.Percentage(15);
+            column.EditorProperties().DateEdit(p =>
+            {
+                p.Width = Unit.Percentage(100);
+                p.DisplayFormatString = "dd/MM/yyyy";
+                p.EditFormatString = "dd/MM/yyyy";
+            });
+        });
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "idTipoMovi";
@@ -81,18 +95,6 @@
                 p.ValueType = typeof(int);
                 p.BindList(new Core.Erp.Bus.Caja.caj_Caja_Movimiento_Tipo_Bus().get_list(Convert.ToInt32(Session["IdEmpresa"]),"-", false,false));
                 p.Columns.Add("tm_descripcion", "Tipo").Width = Unit.Percentage(100);
-            });
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "fecha";
-            column.Caption = "Fecha";
-            column.Width = Unit.Percentage(15);
-            column.EditorProperties().DateEdit(p =>
-            {
-                p.Width = Unit.Percentage(100);
-                p.DisplayFormatString = "dd/MM/yyyy";
-                p.EditFormatString = "dd/MM/yyyy";
             });
         });
 
@@ -121,6 +123,10 @@
                 p.Width = Unit.Percentage(100);
             });
         });
+
+
+        settings.Settings.ShowFooter = true;
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "valor").DisplayFormat = "Total {0:n2}";
         settings.ClientSideEvents.EndCallback = "Calcular";
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

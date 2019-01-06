@@ -11,6 +11,10 @@
         settings.Settings.ShowGroupPanel = false;
         settings.Settings.ShowFilterRow = true;
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ConciliacionCaja", Action = "EditingUpdateFactura", Area = "Caja" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ConciliacionCaja", Action = "EditingDeleteFactura", Area = "Caja" };
@@ -40,11 +44,12 @@
 
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(5);
             column.FieldName = "IdCbteCble_Ogiro";
             column.Caption = "ID";
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
+        /*
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
@@ -52,9 +57,10 @@
             column.Caption = "Tipo";
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
+        */
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(10);
             column.FieldName = "co_factura";
             column.Caption = "# Documento";
             column.EditFormSettings.Visible = DefaultBoolean.False;
@@ -69,7 +75,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(30);
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Proveedor";
             column.EditFormSettings.Visible = DefaultBoolean.False;
@@ -103,6 +109,16 @@
                 p.DisplayFormatString = "N2";
             });
         });
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-pencil\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("Modificar", "Deudas", new { Area = "CuentasPorPagar", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdTipoCbte_Ogiro = DataBinder.Eval(c.DataItem, "IdTipoCbte_Ogiro").ToString(), IdCbteCble_Ogiro = DataBinder.Eval(c.DataItem, "IdCbteCble_Ogiro").ToString() }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
+        settings.Settings.ShowFooter = true;
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor_a_aplicar").DisplayFormat = "Total {0:n2}";
         settings.ClientSideEvents.EndCallback = "Calcular";
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
