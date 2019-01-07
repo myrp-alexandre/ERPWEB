@@ -159,6 +159,7 @@ namespace Core.Erp.Data.RRHH
                 {
                     Context.Database.ExecuteSqlCommand("delete ro_nomina_x_horas_extras_det where IdEmpresa='" + IdEmpresa + "' and IdHorasExtras='" + IdHorasExtras + "'");
                     Context.ro_nomina_x_horas_extras_det.AddRange(lista);
+
                     Context.SaveChanges();
                 }
                 return true;

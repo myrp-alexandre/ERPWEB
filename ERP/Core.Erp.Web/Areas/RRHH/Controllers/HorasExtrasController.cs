@@ -136,6 +136,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Nuevo(ro_nomina_x_horas_extras_Info model)
         {
 
+
+            model.IdHorasExtras = bus_horas_extras.get_info(model.IdEmpresa, model.IdNomina_Tipo, model.IdNomina_TipoLiqui, model.IdPeriodo).IdHorasExtras;
             model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list(model.IdTransaccionSession);
             if (bus_horas_extras.guardarDB(model))
                 return RedirectToAction("Index");
