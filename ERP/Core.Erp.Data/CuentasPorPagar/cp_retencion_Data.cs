@@ -70,10 +70,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                     info = new cp_retencion_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
-                        IdProveedor=Entity.IdProveedor,
+                        IdProveedor = Entity.IdProveedor,
                         ct_IdTipoCbte = Entity.ct_IdTipoCbte,
                         ct_IdCbteCble = Entity.ct_IdCbteCble,
-                        IdRetencion = Entity.IdRetencion ,
+                        IdRetencion = Entity.IdRetencion,
                         CodDocumentoTipo = Entity.CodDocumentoTipo,
                         serie1 = Entity.serie1,
                         serie2 = Entity.serie2,
@@ -83,15 +83,15 @@ namespace Core.Erp.Data.CuentasPorPagar
                         fecha = Convert.ToDateTime(Entity.fecha.ToShortDateString()),
                         re_Tiene_RTiva = Entity.re_Tiene_RTiva,
                         re_Tiene_RFuente = Entity.re_Tiene_RFuente,
-                        co_baseImponible=Entity.co_baseImponible,
-                        co_serie=Entity.co_serie,
-                        co_factura=Entity.co_factura,
-                        co_subtotal_iva=Entity.co_subtotal_iva,
-                        co_subtotal_siniva=Entity.co_subtotal_siniva,
-                        co_valoriva=Entity.co_valoriva,
-                        pe_razonSocial=Entity.pe_razonSocial,
-                        
-                        
+                        co_baseImponible = Entity.co_baseImponible,
+                        co_serie = Entity.co_serie,
+                        co_factura = Entity.co_factura,
+                        co_subtotal_iva = Entity.co_subtotal_iva,
+                        co_subtotal_siniva = Entity.co_subtotal_siniva,
+                        co_valoriva = Entity.co_valoriva,
+                        pe_razonSocial = Entity.pe_razonSocial,
+                        IdTipoCbte_Ogiro = Entity.IdTipoCbte_Ogiro,
+                        IdCbteCble_Ogiro = Entity.IdCbteCble_Ogiro
                     };
                 }
                 return info;
@@ -117,6 +117,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdEmpresa = Entity.IdEmpresa,
                         IdRetencion = Entity.IdRetencion,
                         CodDocumentoTipo = Entity.CodDocumentoTipo,
+                        IdTipoCbte_Ogiro=Entity.IdTipoCbte_Ogiro,
+                        IdCbteCble_Ogiro=Entity.IdCbteCble_Ogiro,
+                        IdEmpresa_Ogiro=Entity.IdEmpresa_Ogiro,
                         serie1 = Entity.serie1,
                         serie2 = Entity.serie2,
                         NumRetencion = Entity.NumRetencion,
