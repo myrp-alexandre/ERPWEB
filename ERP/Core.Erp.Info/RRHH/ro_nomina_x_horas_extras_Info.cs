@@ -29,6 +29,7 @@ namespace Core.Erp.Info.RRHH
         public string nom_pc { get; set; }
         public string ip { get; set; }
         public string MotivoAnulacion { get; set; }
+        public string observacion { get; set; }
 
 
 
