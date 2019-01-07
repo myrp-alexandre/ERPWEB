@@ -51,10 +51,10 @@
         settings.Columns.Add("IdContrato", "Codigo").Width = Unit.Percentage(10);
         settings.Columns.Add("IdEmpleado", "IdEmpleado").Width = Unit.Percentage(10);
         settings.Columns.Add("contrato_tipo_descripcion", "Descripción").Width = Unit.Percentage(30);
-        settings.Columns.Add("FechaInicio", "Cta Mejora").Width = Unit.Percentage(10);
-        settings.Columns.Add("FechaFin", "%").Width = Unit.Percentage(10);
-        settings.Columns.Add("Sueldo", "Años").Width = Unit.Percentage(10);
-        settings.Columns.Add("nomina_tipo_descripcion", "Cta Baja").Width = Unit.Percentage(10);
+        settings.Columns.Add("FechaInicio", "FechaInicio ").Width = Unit.Percentage(10);
+        settings.Columns.Add("FechaFin", "Fecha Fin").Width = Unit.Percentage(10);
+        settings.Columns.Add("Sueldo", "Sueldo").Width = Unit.Percentage(10);
+        settings.Columns.Add("nomina_tipo_descripcion", "Tipo Nomina").Width = Unit.Percentage(10);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
