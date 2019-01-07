@@ -153,6 +153,69 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public bool guardarDB(ro_nomina_x_horas_extras_Info info)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_nomina_x_horas_extras entity = new ro_nomina_x_horas_extras()
+                    {
+                        IdEmpresa=info.IdEmpresa,
+                        IdHorasExtras=info.IdHorasExtras=get_id(info.IdEmpresa),
+                        IdNominaTipo=info.IdNomina_Tipo,
+                        IdNominaTipoLiqui=info.IdNomina_TipoLiqui,
+                        IdPeriodo=info.IdPeriodo,
+                        observacion=info.observacion,
+                        Estado=info.Estado="A",
+                        Fecha_Transac=info.Fecha_Transac=DateTime.Now,
+                        IdUsuario=info.IdUsuario,
+
+                    };
+                    var detalle = Context.ro_nomina_x_horas_extras_det.Where(v=>v.IdEmpresa==info.IdEmpresa&& v.IdHorasExtras== info.IdHorasExtras);
+                    Context.ro_nomina_x_horas_extras_det.RemoveRange(detalle);
+                    foreach (var item in info.lst_nomina_horas_extras)
+                    {
+                        ro_nomina_x_horas_extras_det content_det = new ro_nomina_x_horas_extras_det()
+                        {
+                            IdEmpresa=info.IdEmpresa,
+                            IdHorasExtras=info.IdHorasExtras,
+                            IdEmpleado=item.IdEmpleado,
+                            IdCalendario=item.IdCalendario,
+                            IdTurno=item.IdTurno,
+                            IdHorario=item.IdHorario,
+                            FechaRegistro=item.FechaRegistro,
+                            time_entrada1=item.time_entrada1,
+                            time_entrada2=item.time_entrada2,
+                            time_salida1=item.time_salida1,
+                            time_salida2=item.time_salida2,
+                            hora_extra25=item.hora_extra25,
+                            hora_extra50=item.hora_extra50,
+                            hora_extra100=item.hora_extra100,
+                            Valor25=item.Valor25,
+                            Valor50=item.Valor50,
+                            Valor100=item.Valor100,
+                            Sueldo_base=item.Sueldo_base,
+                            hora_atraso=item.hora_atraso,
+                            hora_temprano=item.hora_temprano,
+                            hora_trabajada=item.hora_trabajada,
+                            es_HorasExtrasAutorizadas=item.es_HorasExtrasAutorizadas
+
+                        };
+                        Context.ro_nomina_x_horas_extras_det.Add(content_det);
+                    }
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool anularDB(ro_nomina_x_horas_extras_Info info)
         {
             try
