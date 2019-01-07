@@ -407,6 +407,7 @@
     <Compile Include="CuentasPorPagar\cp_retencion_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_retencion_det_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_retencion_x_ct_cbtecble_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_SolicitudPagoDet_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_SolicitudPago_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_TipoDocumento_Data.cs" />
     <Compile Include="cxc_Catalogo.cs">
