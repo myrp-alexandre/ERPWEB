@@ -70,6 +70,8 @@
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_formapago" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_pago_cp_orden_pago_tipo" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_pago_det_cp_orden_pago" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_SolicitudPagoDet" Width="1.5" PointX="9.75" PointY="53.75" />
+        <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_SolicitudPagoDet_cp_SolicitudPago" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

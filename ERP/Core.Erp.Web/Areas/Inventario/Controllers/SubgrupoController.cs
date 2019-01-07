@@ -34,6 +34,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_subgrupo(int IdEmpresa = 0 , string IdCategoria = "", int IdLinea = 0, int IdGrupo = 0)
         {
+            ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdCategoria = IdCategoria;
             ViewBag.IdLinea = IdLinea;
             ViewBag.IdGrupo = IdGrupo;

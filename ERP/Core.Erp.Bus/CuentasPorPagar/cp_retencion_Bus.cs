@@ -98,6 +98,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                
                 info_retencion.IdEmpresa = info_orden_giro.IdEmpresa;
                 info_retencion.IdProveedor = info_orden_giro.IdProveedor;
+                info_retencion.IdSucursal = info_orden_giro.IdSucursal;
                 info_retencion.serie1 = sucursal.Su_CodigoEstablecimiento;
                 info_retencion.serie2 = "001";
                 info_retencion.NumRetencion = info_talonario.NumDocumento;
@@ -113,6 +114,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_retencion.pe_razonSocial = info_orden_giro.info_proveedor.info_persona.pe_razonSocial;
                 info_retencion.observacion = info_orden_giro.co_observacion;
                 info_retencion.fecha = info_orden_giro.co_FechaFactura;
+                
                 return info_retencion;
             }
             catch (Exception)
@@ -125,6 +127,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
+
                 odata = new cp_retencion_Data();
                 info.IdEmpresa_Ogiro = info.IdEmpresa;
                 info.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
@@ -142,7 +145,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Observacion = info.observacion;
-                info.info_comprobante.IdSucursal = info_orden_giro.IdSucursal;
+                info.info_comprobante.IdSucursal = info.IdSucursal;
                 if (bus_comprobante.guardarDB(info.info_comprobante))
                 {
                     if (odata.guardarDB(info))
@@ -183,6 +186,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
             try
             {
                 odata = new cp_retencion_Data();
+                cp_orden_giro_Data odata_og = new cp_orden_giro_Data();
                 info.IdEmpresa_Ogiro = info.IdEmpresa;
                 info.CodDocumentoTipo = "RETEN";
                 if (info.re_Tiene_RFuente == null)
@@ -199,6 +203,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Observacion = info.observacion;
+                info.info_comprobante.IdSucursal = info.IdSucursal;
+                
                 if (info.info_comprobante.IdCbteCble != 0)
                 {
                     if (bus_comprobante.modificarDB(info.info_comprobante))

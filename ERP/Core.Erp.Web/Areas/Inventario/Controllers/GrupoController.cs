@@ -26,6 +26,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_grupo(int IdEmpresa= 0 , string IdCategoria = "", int IdLinea = 0)
         {
+            ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdCategoria = IdCategoria;
             ViewBag.IdLinea = IdLinea;
             var model = bus_grupo.get_list(IdEmpresa,IdCategoria, IdLinea, true);

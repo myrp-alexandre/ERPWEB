@@ -723,7 +723,7 @@ namespace Core.Erp.Data.CuentasPorPagar
             {
                 cp_orden_giro_Info info = new cp_orden_giro_Info();
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
-                {
+                {   
                     vwcp_orden_giro Entity = Context.vwcp_orden_giro.FirstOrDefault(q => q.IdEmpresa == IdEmpresa
                     && q.IdTipoCbte_Ogiro == IdTipoCbte_Ogiro
                     && q.IdCbteCble_Ogiro == IdCbteCble_Ogiro);
