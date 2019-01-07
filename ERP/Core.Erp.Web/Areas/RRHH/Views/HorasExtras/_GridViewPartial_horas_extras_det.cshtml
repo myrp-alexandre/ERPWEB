@@ -17,8 +17,6 @@
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
 
-        settings.SettingsContextMenu.Enabled = true;
-        settings.SettingsBehavior.EnableCustomizationWindow = true;
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
@@ -54,7 +52,7 @@
         {
             column.FieldName = "pe_cedulaRuc";
             column.Caption = "Cédula";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
@@ -62,7 +60,7 @@
         {
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Empleado";
-            column.Width = Unit.Percentage(25);
+            column.Width = Unit.Percentage(20);
             column.EditFormSettings.Visible = DefaultBoolean.False;
 
         });
@@ -70,7 +68,7 @@
         {
             column.FieldName = "FechaRegistro";
             column.Caption = "Fecha";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "d";
             column.EditorProperties().DateEdit(sp =>
             {
@@ -83,7 +81,7 @@
         {
             column.FieldName = "time_entrada1";
             column.Caption = "Ingreso";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
@@ -91,7 +89,7 @@
         {
             column.FieldName = "time_salida1";
             column.Caption = "Salida";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
 
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
@@ -99,7 +97,7 @@
         {
             column.FieldName = "hora_trabajada";
             column.Caption = "H. trabajadas";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "n2";
             column.EditorProperties().TextBox(sp =>
             {
@@ -113,7 +111,7 @@
         {
             column.FieldName = "hora_extra25";
             column.Caption = "HE 25";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "n2";
             column.EditorProperties().TextBox(sp =>
             {
@@ -127,7 +125,7 @@
         {
             column.FieldName = "hora_extra50";
             column.Caption = "HE 50";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "n2";
             column.EditorProperties().TextBox(sp =>
             {
@@ -140,7 +138,7 @@
         {
             column.FieldName = "hora_extra100";
             column.Caption = "HE 100";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "n2";
             column.EditorProperties().TextBox(sp =>
             {

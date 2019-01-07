@@ -39,5 +39,9 @@ namespace Core.Erp.Data
         public string tu_descripcion { get; set; }
         public string ca_descripcion { get; set; }
         public string pe_cedulaRuc { get; set; }
+        public double Valor25 { get; set; }
+        public double Valor50 { get; set; }
+        public double Valor100 { get; set; }
+        public double Sueldo_base { get; set; }
     }
 }

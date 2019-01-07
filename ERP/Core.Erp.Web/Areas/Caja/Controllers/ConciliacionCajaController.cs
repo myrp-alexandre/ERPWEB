@@ -39,6 +39,14 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         string mensaje = string.Empty;
         #endregion
 
+        #region Combobox bajo demanda flujo
+        public ActionResult CmbFlujo_ConciliacionCaja()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbFlujo_ConciliacionCaja", model);
+        }
+        #endregion
+
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbPersona_ConciliacionCaja()
         {
@@ -293,7 +301,9 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public ActionResult GridViewPartial_conciliacion_caja_movimiento()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_det.get_list_x_movimientos_caja(IdEmpresa);
+            int IdCaja = Request.Params["IdCajaConciliacion"] != null ? Convert.ToInt32(Request.Params["IdCajaConciliacion"]) : 0;
+            
+            var model = bus_det.get_list_x_movimientos_caja(IdEmpresa, IdCaja);
             list_vale_x_ingresar.set_list(model, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             return PartialView("_GridViewPartial_conciliacion_caja_movimiento", model);
@@ -350,7 +360,16 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public ActionResult GridViewPartial_conciliacion_facturas_x_cruzar()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_det.get_list_x_pagar(IdEmpresa);
+            int IdCaja = Request.Params["IdCajaConciliacion"] != null ? Convert.ToInt32(Request.Params["IdCajaConciliacion"]) : 0;
+            List<cp_conciliacion_Caja_det_Info> model;
+            if (IdCaja != 0)
+            {
+                var Caja = bus_caja.get_info(IdEmpresa, IdCaja);
+                model = bus_det.get_list_x_pagar(IdEmpresa, Caja.IdSucursal);
+            }
+            else
+                model = new List<cp_conciliacion_Caja_det_Info>();
+            
             return PartialView("_GridViewPartial_conciliacion_facturas_x_cruzar", model);
         }
 
@@ -363,12 +382,12 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             return PartialView("_GridViewPartial_conciliacion_facturas", model);
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNewFactura(string IDs = "", decimal IdTransaccionFixed = 0)
+        public ActionResult EditingAddNewFactura(string IDs = "", decimal IdTransaccionFixed = 0, int IdCaja = 0, int IdEmpresa = 0)
         {
             if (IDs != "")
             {
-                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                var lst_x_cruzar = bus_det.get_list_x_pagar(IdEmpresa);
+                var caja = bus_caja.get_info(IdEmpresa, IdCaja);
+                var lst_x_cruzar = bus_det.get_list_x_pagar(IdEmpresa,caja.IdSucursal);
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
@@ -409,7 +428,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             if(FechaCorte != null)
                 resultado = bus_plancta.get_saldo_anterior(IdEmpresa, IdCtaCble, Convert.ToDateTime(FechaCorte));
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            return Json(Math.Round(resultado,2,MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetIdCtaCbleCaja(int IdCaja = 0)

@@ -57,6 +57,7 @@
             //Pass all selected keys to GridView callback action
         e.customArgs["selectedIDs"] = selectedIDs;
         e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+        e.customArgs['IdCajaConciliacion'] = $('#IdCaja').val();
         }
     function OnSelectionChanged(s, e) {
         s.GetSelectedFieldValues("IdCbteCble_Ogiro", GetSelectedFieldValuesCallback);
@@ -77,7 +78,9 @@
 
         var datos = {
             IDs: selectedIDs,
-            IdTransaccionFixed: $("#IdTransaccionSession").val()
+            IdTransaccionFixed: $("#IdTransaccionSession").val(),
+            IdCaja: $("#IdCaja").val(),
+            IdEmpresa: $("#IdEmpresa").val(),            
         }
         $.ajax({
             type: 'POST',
@@ -105,6 +108,7 @@
         //Pass all selected keys to GridView callback action
         e.customArgs["selectedCajaIDs"] = selectedCajaIDs;
         e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+        e.customArgs['IdCajaConciliacion'] = $('#IdCaja').val();
     }
     function Caja_OnSelectionChanged(s, e) {
         s.GetSelectedFieldValues("IdCbteCble_movcaja", Caja_GetSelectedFieldValuesCallback);
@@ -164,8 +168,8 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#Saldo_cont_al_periodo").val(Math.round(Number(data), 2));
-                $("#Saldo_cont_al_periodoR").val(Math.round(Number(data), 2));
+                $("#Saldo_cont_al_periodo").val(data);
+                $("#Saldo_cont_al_periodoR").val(data);
             },
             error: function (error) {
             }
@@ -421,7 +425,7 @@
                    settings.Properties.EditFormatString = "dd/MM/yyyy";
                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                   settings.Properties.ClientSideEvents.ValueChanged = "function(s,e){GetSaldoAnterior();}";
+                   settings.Properties.ClientSideEvents.ValueChanged = "function(s,e){GetSaldoAnterior(); Calcular();}";
                        }).GetHtml()
                     @Html.ValidationMessageFor(q => q.Fecha_ini, "", new { @class = "text-danger" })
                 </div>
@@ -437,7 +441,7 @@
                         settings.Properties.EditFormatString = "dd/MM/yyyy";
                         settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                        settings.Properties.ClientSideEvents.ValueChanged = "function(s,e){GetIngresos();}";
+                        settings.Properties.ClientSideEvents.ValueChanged = "function(s,e){GetIngresos(); Calcular();}";
                     }).GetHtml()
                     @Html.ValidationMessageFor(q => q.Fecha_fin, "", new { @class = "text-danger" })
                 </div>
@@ -519,8 +523,8 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_vales">
                 <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-primary" id="btn_buscar_og" onclick="MostrarCajaMovimientoConciliacionModal();">
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-primary form-control" id="btn_buscar_og" onclick="MostrarCajaMovimientoConciliacionModal();">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -533,8 +537,14 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_op">
                 <div class="row">
-
-                    <div class="col-md-offset-10 col-md-2">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="IdTipoFlujo">Tipo flujo*</label>
+                            @Html.Partial("_CmbFlujo_ConciliacionCaja", Model.IdTipoFlujo)
+                            @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="FechaOP">Hasta*</label>
                             @Html.DevExpress().DateEditFor(q => q.FechaOP, settings =>
@@ -544,7 +554,7 @@
                                 settings.Properties.EditFormat = EditFormat.Date;
                                 settings.Properties.EditFormatString = "dd/MM/yyyy";
                                 settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);                        
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                             }).GetHtml()
                             @Html.ValidationMessageFor(q => q.FechaOP, "", new { @class = "text-danger" })
                         </div>

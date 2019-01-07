@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_nomina_x_horas_extras_Info
 @{
-    ViewBag.Title = "Calculo horas extras";
+    ViewBag.Title = "Modificar horas extras calculadas";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -18,8 +18,10 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "HorasExtras", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdHorasExtras)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
 
 
 
@@ -28,25 +30,27 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaInicio">Nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_Tipo" })
+                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
                     @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaFin">Tipo liquidación nómina*</label>
-                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), "== Seleccione ==", new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                     @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="FechaFin">Período*</label>
-                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "Descripcion"), "== Seleccione ==", new { @class = "form-control", @id = "IdPeriodo" })
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodo, "IdPeriodo", "Descripcion"), new { @class = "form-control", @id = "IdPeriodo" })
                     @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
                 </div>
             </div>
+
         </div>
+
     </div>
 
     <div class="row">
@@ -60,7 +64,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
-                <button type="submit" class="btn btn-primary">Procesar</button>
+                <button type="button" class="btn btn-primary" id="btn_guardar" onclick="calcular_horas();">Calcular horas extras</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
                 <a class="btn btn-default" href="@Url.Action("Index","HorasExtras",new { Area = "RRHH", @id="grid"},null)">Salir</a>
             </div>
         </div>
@@ -71,6 +76,13 @@
 }
 
 <script>
+    $(function () {
+        cargar_tipo_liquidacion_nomina();
+        cargar_periodos_x_nomina();
+
+    });
+
+
        $("#IdNomina_Tipo").change(function () {
            $("#IdNomina_TipoLiqui").empty();
              cargar_tipo_liquidacion_nomina();
@@ -99,6 +111,8 @@
                     $.each(data, function (i, row) {
                         $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
                     });
+                    $("#IdNomina_TipoLiqui").val(2);
+
                 },
                 error: function (error) {
                 }
@@ -129,6 +143,34 @@
         });
     };
 
+    function calcular_horas() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdNomina: $("#IdNomina_Tipo").val(),
+            IdNomina_Tipo: $("#IdNomina_TipoLiqui").val(),
+            IdPeriodo: $("#IdPeriodo").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+
+
+
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_horas_extras","HorasExtras", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_horas_extras_det.PerformCallback();
+
+            },
+            error: function (error) {
+            }
+        });
+    };
 
 
 </script>

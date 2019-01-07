@@ -139,12 +139,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                     cp_orden_pago_det Entity = Context.cp_orden_pago_det.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdOrdenPago == info.IdOrdenPago);
                     if (Entity != null)
                     {
-                        Entity.Referencia = info.Referencia.Length >50?info.Referencia.Substring(0,40):info.Referencia;
                         Entity.Valor_a_pagar = info.Valor_a_pagar;
-                        Entity.Referencia = info.Referencia;
-                        Entity.IdFormaPago = info.IdFormaPago;
-                        Entity.Fecha_Pago = info.Fecha_Pago;
-                        Entity.fecha_hora_Aproba = DateTime.Now;
                         Context.SaveChanges();
                     }
                 }

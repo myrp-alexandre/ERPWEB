@@ -23,5 +23,6 @@ namespace Core.Erp.Data
         public double Valor25 { get; set; }
         public double Valor50 { get; set; }
         public double Valor100 { get; set; }
+        public int IdSucursal { get; set; }
     }
 }

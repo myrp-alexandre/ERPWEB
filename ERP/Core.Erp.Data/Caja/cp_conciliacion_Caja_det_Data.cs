@@ -56,7 +56,7 @@ namespace Core.Erp.Data.Caja
             }
         }        
 
-        public List<cp_conciliacion_Caja_det_Info> get_list_x_pagar(int IdEmpresa)
+        public List<cp_conciliacion_Caja_det_Info> get_list_x_pagar(int IdEmpresa, int IdSucursal)
         {
             try
             {
@@ -66,10 +66,12 @@ namespace Core.Erp.Data.Caja
                 {
                     Lista = (from q in Context.vwcp_orden_giro_x_pagar
                              where q.IdEmpresa == IdEmpresa
+                             && q.IdSucursal == IdSucursal
                              && q.cod_Documento == "FACT"
                              && q.Saldo_OG > 0
                              select new cp_conciliacion_Caja_det_Info
                              {
+                                 IdEmpresa = q.IdEmpresa,
                                  IdEmpresa_OGiro = q.IdEmpresa,
                                  IdTipoCbte_Ogiro = q.IdTipoCbte_Ogiro,
                                  IdCbteCble_Ogiro = q.IdCbteCble_Ogiro,
@@ -101,7 +103,7 @@ namespace Core.Erp.Data.Caja
             }
         }
 
-        public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> get_list_x_movimientos_caja(int IdEmpresa)
+        public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> get_list_x_movimientos_caja(int IdEmpresa, int IdCaja)
         {
             try
             {
@@ -111,6 +113,7 @@ namespace Core.Erp.Data.Caja
                 {
                     Lista = (from q in Context.vwcaj_Caja_Movimiento_por_conciliar
                              where q.IdEmpresa == IdEmpresa
+                             && q.IdCaja == IdCaja
                              select new cp_conciliacion_Caja_det_x_ValeCaja_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

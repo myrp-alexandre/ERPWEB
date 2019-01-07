@@ -2,7 +2,7 @@
 AS
 SELECT        he_det.IdEmpresa, he_det.IdHorasExtras, he_det.IdEmpleado, he_det.IdCalendario, he_det.IdTurno, he_det.IdHorario, he_det.FechaRegistro, he_det.time_entrada1, he_det.time_entrada2, he_det.time_salida1, 
                          he_det.time_salida2, he_det.hora_extra25, he_det.hora_extra50, he_det.hora_extra100, he_det.hora_atraso, he_det.hora_temprano, he_det.hora_trabajada, he_det.es_HorasExtrasAutorizadas, horario.Descripcion AS Horario, 
-                         per.pe_nombreCompleto, per.pe_apellido, per.pe_nombre, turno.tu_descripcion, car.ca_descripcion, per.pe_cedulaRuc
+                         per.pe_nombreCompleto, per.pe_apellido, per.pe_nombre, turno.tu_descripcion, car.ca_descripcion, per.pe_cedulaRuc, he_det.Valor25, he_det.Valor50, he_det.Valor100, he_det.Sueldo_base
 FROM            dbo.ro_contrato AS cont INNER JOIN
                          dbo.tb_persona AS per INNER JOIN
                          dbo.ro_empleado AS emp ON per.IdPersona = emp.IdPersona ON cont.IdEmpresa = emp.IdEmpresa AND cont.IdEmpleado = emp.IdEmpleado INNER JOIN
@@ -18,7 +18,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[58] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[85] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -138,11 +138,11 @@ Begin DesignProperties =
             Begin Extent = 
                Top = 35
                Left = 223
-               Bottom = 298
+               Bottom = 313
                Right = 467
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 10
          End
          Begin Table = "turno"
             Begin Extent = 
@@ -152,11 +152,13 @@ Begin DesignProperties =
                Right = 1263
             End
             DisplayFlags = 280
-            TopCol', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_x_horas_extras_det';
+            TopCo', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_x_horas_extras_det';
+
+
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'umn = 0
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'lumn = 0
          End
          Begin Table = "car"
             Begin Extent = 
@@ -222,6 +224,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'umn = 0
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_x_horas_extras_det';
+
+
 
 
 GO
