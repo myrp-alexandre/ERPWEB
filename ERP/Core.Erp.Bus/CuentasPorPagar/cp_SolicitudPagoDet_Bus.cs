@@ -13,7 +13,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         cp_SolicitudPagoDet_Data odata = new cp_SolicitudPagoDet_Data();
 
 
-        public List<cp_SolicitudPago_Info> GetListPorPagar(int IdEmpresa, int IdSucursal)
+        public List<cp_SolicitudPagoDet_Info> GetListPorPagar(int IdEmpresa, int IdSucursal)
         {
             try
             {

@@ -183,8 +183,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst = bus_pago_Det.GetListPorPagar(IdEmpresa, IdSucursal);
             if (lst.Count() == 0)
                 resultado = false;
-            var det = List_det_x_cruzar.get_list(IdTransaccionSession);
-            List_det_x_cruzar.set_list(det, IdTransaccionSession);
+            List_det_x_cruzar.set_list(lst, IdTransaccionSession);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
@@ -197,7 +196,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var model = List_det_x_cruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_aprobacion", model);
         }
-        public ActionResult GridViewPartial_aprobacion_solicitud(decimal IdFabricacion = 0)
+        public ActionResult GridViewPartial_aprobacion_solicitud()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
