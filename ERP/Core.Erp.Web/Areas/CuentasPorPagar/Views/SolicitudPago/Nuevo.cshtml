@@ -41,7 +41,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("GetListPorPagar", "Solicitud", new { Area = "CuentasPorPagar" })',
+            url: '@Url.Action("GetListPorPagar", "SolicitudPago", new { Area = "CuentasPorPagar" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -55,7 +55,7 @@
             error: function (error) {
             }
         });
-        GridViewPartial_aprobacion_solicitud.PerformCallback();
+        GridViewPartial_aprobacion.PerformCallback();
     };
 
     function AddFacturas() {
@@ -66,7 +66,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNew", "Solicitud", new { Area = "CuentasPorPagar" })',
+            url: '@Url.Action("EditingAddNew", "SolicitudPago", new { Area = "CuentasPorPagar" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -78,8 +78,9 @@
             }
         });
         selectedIDs = "";
+        GridViewPartial_aprobacion.PerformCallback();
+        GridViewPartial_aprobacion.UnselectRows();
         GridViewPartial_aprobacion_solicitud.PerformCallback();
-        GridViewPartial_aprobacion_solicitud.UnselectRows();
         $("#ModalFacturas").modal("hide");
     };
 </script>
@@ -100,7 +101,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    @Html.Action("GridViewPartial_aprobacion_solicitud")
+                    @Html.Action("GridViewPartial_aprobacion")
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aceptar</button>
