@@ -96,7 +96,7 @@ namespace Core.Erp.Data.General
                         break;
                     case "CLIENTE":
                         Entities_facturacion context_f = new Entities_facturacion();
-                        var lstf = context_f.vwfa_cliente_consulta.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == "A" && (q.IdCliente.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdPersona).Skip(skip).Take(take);
+                        var lstf = context_f.vwfa_cliente_consulta.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == "A" && (q.IdCliente.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdCliente).Skip(skip).Take(take);
                         foreach (var q in lstf)
                         {
                             Lista.Add(new tb_persona_Info
@@ -111,7 +111,7 @@ namespace Core.Erp.Data.General
                         break;
                     case "EMPLEA":
                         Entities_rrhh context_e = new Entities_rrhh();
-                        var lstr = context_e.vwro_empleados_consulta.Where(q => q.IdEmpresa == IdEmpresa && q.em_estado == "A" && (q.IdEmpleado.ToString() + " " + q.pe_cedulaRuc + " " + q.Empleado).Contains(filter)).OrderBy(q => q.IdPersona).Skip(skip).Take(take);
+                        var lstr = context_e.vwro_empleados_consulta.Where(q => q.IdEmpresa == IdEmpresa && q.em_estado == "A" && (q.IdEmpleado.ToString() + " " + q.pe_cedulaRuc + " " + q.Empleado).Contains(filter)).OrderBy(q => q.IdEmpleado).Skip(skip).Take(take);
                         foreach (var q in lstr)
                         {
                             Lista.Add(new tb_persona_Info
@@ -126,7 +126,7 @@ namespace Core.Erp.Data.General
                         break;
                     case "PROVEE":
                         Entities_cuentas_por_pagar context_p = new Entities_cuentas_por_pagar();
-                        var lstp = context_p.vwcp_proveedor_consulta.Where(q=>q.IdEmpresa == IdEmpresa && q.pr_estado == "A" && (q.IdProveedor.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdPersona).Skip(skip).Take(take);
+                        var lstp = context_p.vwcp_proveedor_consulta.Where(q=>q.IdEmpresa == IdEmpresa && q.pr_estado == "A" && (q.IdProveedor.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdProveedor).Skip(skip).Take(take);
                         foreach (var q in lstp)
                         {
                             Lista.Add(new tb_persona_Info

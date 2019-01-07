@@ -12,16 +12,17 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class cp_pagos_sri
+    public partial class cp_SolicitudPagoDet
     {
-        public cp_pagos_sri()
-        {
-            this.cp_orden_giro_pagos_sri = new HashSet<cp_orden_giro_pagos_sri>();
-        }
+        public int IdEmpresa { get; set; }
+        public decimal IdSolicitud { get; set; }
+        public int Secuencia { get; set; }
+        public int IdEmpresa_cxp { get; set; }
+        public int IdTipoCbte_cxp { get; set; }
+        public int IdCbteCble_cxp { get; set; }
+        public string TipoDocumento { get; set; }
+        public double ValorAPagar { get; set; }
     
-        public string formas_pago_sri { get; set; }
-        public string codigo_pago_sri { get; set; }
-    
-        public virtual ICollection<cp_orden_giro_pagos_sri> cp_orden_giro_pagos_sri { get; set; }
+        public virtual cp_SolicitudPago cp_SolicitudPago { get; set; }
     }
 }

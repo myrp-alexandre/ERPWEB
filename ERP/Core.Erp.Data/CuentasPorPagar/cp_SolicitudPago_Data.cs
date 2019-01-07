@@ -33,7 +33,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Solicitante = q.Solicitante,
                         Valor = q.Valor,
                         IdUsuarioCreacion = q.IdUsuarioCreacion
-                    }).ToList();
+                    }).OrderByDescending(q=>q.IdSolicitud).ToList();
 
                     else
                         Lista =  Context.cp_SolicitudPago.Where(q => q.IdEmpresa == IdEmpresa 
@@ -51,7 +51,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                             Solicitante = q.Solicitante,
                             Valor = q.Valor,
                         IdUsuarioCreacion = q.IdUsuarioCreacion
-                        }).ToList();
+                        }).OrderByDescending(q => q.IdSolicitud).ToList();
                 }
                 return Lista;
             }
