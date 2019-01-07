@@ -137,6 +137,23 @@ namespace Core.Erp.Data.CuentasPorPagar
                         GiradoA = info.GiradoA
 
                     });
+                    if(info.lst_det.Count>0)
+                    {
+                        foreach (var item in info.lst_det)
+                        {
+                            Context.cp_SolicitudPagoDet.Add(new cp_SolicitudPagoDet
+                            {
+                                IdEmpresa = info.IdEmpresa, 
+                                IdEmpresa_cxp = item.IdEmpresa_cxp,
+                                IdCbteCble_cxp = item.IdCbteCble_cxp,
+                                IdTipoCbte_cxp = item.IdTipoCbte_cxp,
+                                TipoDocumento = item.TipoDocumento,
+                                IdSolicitud = info.IdSolicitud,
+                                Secuencia = item.Secuencia,
+                                ValorAPagar = item.ValorAPagar
+                            });
+                        }
+                    }
                     Context.SaveChanges();
                 }
                 return true;

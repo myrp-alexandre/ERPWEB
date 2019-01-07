@@ -18,31 +18,44 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdSolicitud)
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
-                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Solicitante">Solicitante*</label>
-                    @Html.TextBoxFor(q => q.Solicitante, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Solicitante, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-offset-4 col-md-2" >
-                <div class="form-group">
-                    <label for="">Fecha*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos generales</a>
+            </li>
+            <li>
+                <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Deudas a aplicar</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdSucursal">Sucursal*</label>
+                                @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                                @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                        @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Solicitante">Solicitante*</label>
+                                @Html.TextBoxFor(q => q.Solicitante, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Solicitante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-offset-4 col-md-2">
+                            <div class="form-group">
+                                <label for="">Fecha*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
                            {
                                settings.Name = "Fecha";
                                settings.Properties.UseMaskBehavior = true;
@@ -51,61 +64,108 @@
                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                            }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="IdProveedor">Proveedor*</label>
+                                @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
+                                @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="GiradoA">Girado a*</label>
+                                @Html.TextBoxFor(q => q.GiradoA, new { @class = "form-control", @id = "GiradoA" })
+                                @Html.ValidationMessageFor(q => q.GiradoA, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Valor">Valor*</label>
+                                @Html.TextBoxFor(q => q.Valor, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Valor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Concepto">Descripción*</label>
+                                @Html.TextBoxFor(q => q.Concepto, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Concepto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane " style="margin-left: 1em;" id="tab_detalle">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Concepto"></label>
+                                @Html.Action("GridViewPartial_aprobacion_facturas")
+                           </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
 
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdProveedor">Proveedor*</label>
-                    @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
-                    @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
-                </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="GiradoA">Girado a*</label>
-                    @Html.TextBoxFor(q => q.GiradoA, new { @class = "form-control" , @id= "GiradoA" })
-                    @Html.ValidationMessageFor(q => q.GiradoA, "", new { @class = "text-danger" })
-                </div>
+
+
+
+
+
+
+
+
+
             </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="Valor">Valor*</label>
-                    @Html.TextBoxFor(q => q.Valor, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Valor, "", new { @class = "text-danger" })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a class="btn btn-default" href="@Url.Action("Index","SolicitudPago",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
                 </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="Concepto">Descripción*</label>
-                    @Html.TextBoxFor(q => q.Concepto, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.Concepto, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","SolicitudPago",new { Area = "CuentasPorPagar" },null)">Cancelar</a>
-    </div>
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
-}
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+                }
