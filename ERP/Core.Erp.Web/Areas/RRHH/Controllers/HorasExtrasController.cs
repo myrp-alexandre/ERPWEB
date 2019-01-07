@@ -129,15 +129,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ro_nomina_x_horas_extras_Info info = new ro_nomina_x_horas_extras_Info();
             info.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession) ;
             info.lst_nomina_horas_extras = new List<ro_nomina_x_horas_extras_det_Info>();
+            info.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             return View(info);
         }
         [HttpPost]
         public ActionResult Nuevo(ro_nomina_x_horas_extras_Info model)
         {
 
-            if (model == null)
-                return View(model);
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"].ToString());
+            model.lst_nomina_horas_extras = ro_nomina_x_horas_extras_det_Info_list.get_list(model.IdTransaccionSession);
             if (bus_horas_extras.guardarDB(model))
                 return RedirectToAction("Index");
             else
@@ -261,6 +260,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.IdNomina_TipoLiqui = IdNomina_Tipo;
             model.IdPeriodo = IdPeriodo;
             bus_horas_extras.ProcesarHorasExtras(model);
+            model= bus_horas_extras.get_info(model.IdEmpresa, model.IdNomina_Tipo, model.IdNomina_TipoLiqui, model.IdPeriodo);
             model.lst_nomina_horas_extras = bus_hora_extra_detalle.get_list(model.IdEmpresa, model.IdHorasExtras);
             ro_nomina_x_horas_extras_det_Info_list.set_list(model.lst_nomina_horas_extras, IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);

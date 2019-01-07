@@ -24,9 +24,10 @@ namespace Core.Erp.Data.RRHH
 
                                  select new ro_nomina_x_horas_extras_det_Info
                                  {
-
                                      IdEmpresa = q.IdEmpresa,
                                      IdHorasExtras = q.IdHorasExtras,
+                                     IdEmpleado = q.IdEmpleado,
+                                     IdCalendario=q.IdCalendario,
                                      IdTurno = q.IdTurno,
                                      IdHorario = q.IdHorario,
                                      FechaRegistro = q.FechaRegistro,
@@ -37,10 +38,13 @@ namespace Core.Erp.Data.RRHH
                                      hora_extra25 = q.hora_extra25,
                                      hora_extra50 = q.hora_extra50,
                                      hora_extra100 = q.hora_extra100,
+                                     Valor25=q.Valor25,
+                                     Valor50=q.Valor50,
+                                     Valor100=q.Valor100,
+                                     Sueldo_base=q.Sueldo_base,
                                      hora_atraso = q.hora_atraso,
                                      hora_temprano = q.hora_temprano,
                                      hora_trabajada = q.hora_trabajada,
-                                     IdEmpleado = q.IdEmpleado,
                                      pe_cedulaRuc = q.pe_cedulaRuc,
                                      pe_nombreCompleto = q.pe_apellido + " " + q.pe_nombre,
                                      ca_descripcion = q.ca_descripcion,

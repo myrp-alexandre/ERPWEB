@@ -155,10 +155,8 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                GridViewPartial_horas_extras_det.PerformCallback();
 
-                $.each(data, function (i, row) {
-                    $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
-                });
             },
             error: function (error) {
             }
