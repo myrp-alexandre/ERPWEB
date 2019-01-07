@@ -301,7 +301,8 @@ namespace Core.Erp.Data.RRHH
                                 IdEmpleado=p.IdEmpleado,
                                 Valor25=p.Valor25,
                                 Valor50=p.Valor50,
-                                Valor100=p.Valor100
+                                Valor100=p.Valor100,
+                                IdSucursal=p.IdSucursal
                              }).ToList();
                 }
                 return new List<ro_nomina_x_horas_extras_det_Info>(Lista);

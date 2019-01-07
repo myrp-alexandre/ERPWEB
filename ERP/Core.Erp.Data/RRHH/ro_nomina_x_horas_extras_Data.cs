@@ -283,6 +283,7 @@ namespace Core.Erp.Data.RRHH
                             {
                                 IdNovedad=IdNovedad,
                                 IdEmpresa = info.IdEmpresa,
+                                IdSucursal=item.IdSucursal,
                                 IdEmpleado = item.IdEmpleado,
                                 IdNomina_Tipo = info.IdNomina_Tipo,
                                 IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
@@ -301,7 +302,9 @@ namespace Core.Erp.Data.RRHH
                                 Valor = item.Valor25,
                                 FechaPago = info_periodo.pe_FechaFin,
                                 IdRubro = "7",
-                                Observacion = "Hora extra al 25 % corrspondiente al periodo " + info.IdPeriodo.ToString()
+                                Observacion = "Hora extra al 25 % corrspondiente al periodo " + info.IdPeriodo.ToString(),
+                                EstadoCobro = "PEN"
+
                             };
                             content.ro_empleado_novedad_det.Add(info_det_25);
 
@@ -314,6 +317,7 @@ namespace Core.Erp.Data.RRHH
                             ro_empleado_Novedad info_novedad_50 = new ro_empleado_Novedad()
                             {
                                 IdNovedad=IdNovedad,
+                                IdSucursal = item.IdSucursal,
                                 IdEmpresa = info.IdEmpresa,
                                 IdEmpleado = item.IdEmpleado,
                                 IdNomina_Tipo = info.IdNomina_Tipo,
@@ -333,7 +337,9 @@ namespace Core.Erp.Data.RRHH
                                 Valor = item.Valor50,
                                 FechaPago = info_periodo.pe_FechaFin,
                                 IdRubro = "8",
-                                Observacion = "Hora extra al 50 % corrspondiente al periodo " + info.IdPeriodo.ToString()
+                                Observacion = "Hora extra al 50 % corrspondiente al periodo " + info.IdPeriodo.ToString(),
+                                EstadoCobro = "PEN"
+
                             };
                             content.ro_empleado_novedad_det.Add(info_det_50);
 
@@ -344,6 +350,7 @@ namespace Core.Erp.Data.RRHH
                             ro_empleado_Novedad info_novedad_100 = new ro_empleado_Novedad()
                             {
                                 IdNovedad=IdNovedad,
+                                IdSucursal = item.IdSucursal,
                                 IdEmpresa = info.IdEmpresa,
                                 IdEmpleado = item.IdEmpleado,
                                 IdNomina_Tipo = info.IdNomina_Tipo,
@@ -363,7 +370,8 @@ namespace Core.Erp.Data.RRHH
                                 Valor = item.Valor100,
                                 FechaPago = info_periodo.pe_FechaFin,
                                 IdRubro = "8",
-                                Observacion = "Hora extra al 100 % corrspondiente al periodo " + info.IdPeriodo.ToString()
+                                Observacion = "Hora extra al 100 % corrspondiente al periodo " + info.IdPeriodo.ToString(),
+                                EstadoCobro="PEN"
                             };
                             content.ro_empleado_novedad_det.Add(info_det_100);
 

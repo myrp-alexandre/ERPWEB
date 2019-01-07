@@ -15,6 +15,7 @@ namespace Core.Erp.Data
     using System.Data.Entity.Core.Objects;
     using System.Linq;
 
+
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
@@ -69,7 +70,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_empleados_consulta> vwro_empleados_consulta { get; set; }
         public DbSet<vwro_Historico_Liquidacion_Vacaciones> vwro_Historico_Liquidacion_Vacaciones { get; set; }
         public DbSet<vwro_horario_planificacion_det> vwro_horario_planificacion_det { get; set; }
-        public DbSet<vwro_nomina_x_horas_extras_aprobadas> vwro_nomina_x_horas_extras_aprobadas { get; set; }
         public DbSet<vwro_participacion_utilidad> vwro_participacion_utilidad { get; set; }
         public DbSet<vwro_participacion_utilidad_empleado> vwro_participacion_utilidad_empleado { get; set; }
         public DbSet<vwro_rubro_tipo> vwro_rubro_tipo { get; set; }
@@ -136,6 +136,7 @@ namespace Core.Erp.Data
         public DbSet<ro_rol> ro_rol { get; set; }
         public DbSet<vwro_rol> vwro_rol { get; set; }
         public DbSet<vwro_nomina_x_horas_extras_det> vwro_nomina_x_horas_extras_det { get; set; }
+        public DbSet<vwro_nomina_x_horas_extras_aprobadas> vwro_nomina_x_horas_extras_aprobadas { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

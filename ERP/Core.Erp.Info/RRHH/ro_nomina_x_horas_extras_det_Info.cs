@@ -30,7 +30,7 @@ namespace Core.Erp.Info.RRHH
         public double hora_temprano { get; set; }
         public double hora_trabajada { get; set; }
         public bool es_HorasExtrasAutorizadas { get; set; }
-
+        public int IdSucursal { get; set; }
 
 
 
