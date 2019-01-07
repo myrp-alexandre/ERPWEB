@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_aprobacion";
+        settings.Name = "GridView_aprobacion";
         settings.CallbackRouteValues = new { Controller = "SolicitudPago", Action = "GridViewPartial_aprobacion" };
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
@@ -80,11 +80,9 @@
         });
 
 
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
 
-    if (ViewData["EditError"] != null)
-    {
-        grid.SetEditErrorText((string)ViewData["EditError"]);
-    }
 }
 @grid.Bind(Model).GetHtml()

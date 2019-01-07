@@ -403,7 +403,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                         item.re_tipoRet = "RTF";
                     }
                 });
-
             }
             model.info_cuota.lst_cuotas_det = Lis_cp_cuotas_x_doc_det_Info.get_list(model.IdTransaccionSession);
             if (Lis_ct_cbtecble_det_List.get_list(model.IdTransaccionSession).Count() == 0)
@@ -471,7 +470,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             model.info_retencion = bus_retencion.get_info(model.IdEmpresa, model.IdCbteCble_Ogiro, model.IdTipoCbte_Ogiro);
             model.info_retencion = bus_retencion.get_info(model.info_retencion.IdEmpresa, model.info_retencion.IdRetencion);
-            
             if (model.info_retencion.IdEmpresa == 0)
             {
                 tb_sis_Documento_Tipo_Talonario_Info info_documento = new tb_sis_Documento_Tipo_Talonario_Info();

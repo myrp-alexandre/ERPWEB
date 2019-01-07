@@ -20,5 +20,6 @@ namespace Core.Erp.Info.CuentasPorPagar
         //campos que no existen en la tabla
 
         public DateTime Fecha { get; set; }
+        public cp_proveedor_Info info_proveedor { get; set; }
     }
 }

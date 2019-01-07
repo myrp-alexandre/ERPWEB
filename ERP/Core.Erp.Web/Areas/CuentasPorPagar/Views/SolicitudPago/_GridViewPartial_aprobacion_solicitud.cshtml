@@ -33,7 +33,7 @@
         settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
-        
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "TipoDocumento";
@@ -78,8 +78,8 @@
             column.EditFormSettings.Visible = DefaultBoolean.False;
             column.ReadOnly = false;
         });
-        
-                settings.Columns.Add(column =>
+
+        settings.Columns.Add(column =>
         {
             column.FieldName = "ValorAPagar";
             column.Caption = "Valor a pagar";
@@ -92,13 +92,8 @@
 
             });
         });
-
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
 
     });
-
-    if (ViewData["EditError"] != null)
-    {
-        grid.SetEditErrorText((string)ViewData["EditError"]);
-    }
 }
 @grid.Bind(Model).GetHtml()
