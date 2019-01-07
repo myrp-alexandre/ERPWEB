@@ -25,11 +25,23 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }   
-        public ro_nomina_x_horas_extras_Info get_info(int IdEmpresa, int IdCargo)
+        public ro_nomina_x_horas_extras_Info get_info(int IdEmpresa, int IdHoraExtra)
         {
             try
             {
-                return odata.get_info(IdEmpresa, IdCargo);
+                return odata.get_info(IdEmpresa, IdHoraExtra);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public ro_nomina_x_horas_extras_Info get_info(int IdEmpresa, int IdNomina_Tipo, int IdNomina_TipoLiqui, int IdPeriodo)
+        {
+            try
+            {
+                return odata.get_info(IdEmpresa, IdNomina_Tipo,IdNomina_TipoLiqui, IdPeriodo);
             }
             catch (Exception)
             {
@@ -41,10 +53,8 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
-                if (odata.Procesar(info))
-                    return bus_detalle.calcular_horas_extras(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
-                else
-                    return false;
+                return (odata.guardarDB(info));
+                    
             }
             catch (Exception)
             {

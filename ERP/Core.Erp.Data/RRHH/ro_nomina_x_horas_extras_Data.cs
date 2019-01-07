@@ -88,6 +88,39 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public ro_nomina_x_horas_extras_Info get_info(int IdEmpresa, int IdNomina_Tipo, int IdNomina_TipoLiqui, int IdPeriodo)
+        {
+            try
+            {
+                ro_nomina_x_horas_extras_Info info = new ro_nomina_x_horas_extras_Info();
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_nomina_x_horas_extras Entity = Context.ro_nomina_x_horas_extras.FirstOrDefault(q => q.IdEmpresa == IdEmpresa 
+                    && q.IdNominaTipo == IdNomina_Tipo
+                    && q.IdNominaTipoLiqui==IdNomina_TipoLiqui
+                    && q.IdPeriodo==IdPeriodo
+                    && q.Estado=="A");
+                    if (Entity == null) return null;
+
+                    info = new ro_nomina_x_horas_extras_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdHorasExtras = Entity.IdHorasExtras,
+                        IdNomina_Tipo = Entity.IdNominaTipo,
+                        IdNomina_TipoLiqui = Entity.IdNominaTipoLiqui,
+                        IdPeriodo = Entity.IdPeriodo,
+
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public int get_id(int IdEmpresa)
         {
             try
@@ -159,19 +192,7 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_nomina_x_horas_extras entity = new ro_nomina_x_horas_extras()
-                    {
-                        IdEmpresa=info.IdEmpresa,
-                        IdHorasExtras=info.IdHorasExtras=get_id(info.IdEmpresa),
-                        IdNominaTipo=info.IdNomina_Tipo,
-                        IdNominaTipoLiqui=info.IdNomina_TipoLiqui,
-                        IdPeriodo=info.IdPeriodo,
-                        observacion=info.observacion,
-                        Estado=info.Estado="A",
-                        Fecha_Transac=info.Fecha_Transac=DateTime.Now,
-                        IdUsuario=info.IdUsuario,
-
-                    };
+                    
                     var detalle = Context.ro_nomina_x_horas_extras_det.Where(v=>v.IdEmpresa==info.IdEmpresa&& v.IdHorasExtras== info.IdHorasExtras);
                     Context.ro_nomina_x_horas_extras_det.RemoveRange(detalle);
                     foreach (var item in info.lst_nomina_horas_extras)
@@ -192,9 +213,9 @@ namespace Core.Erp.Data.RRHH
                             hora_extra25=item.hora_extra25,
                             hora_extra50=item.hora_extra50,
                             hora_extra100=item.hora_extra100,
-                            Valor25=item.Valor25,
-                            Valor50=item.Valor50,
-                            Valor100=item.Valor100,
+                            Valor25= Math.Round(  ((item.Sueldo_base/240)*1.25)  *item.hora_extra25,2),
+                            Valor50=Math.Round(   ((item.Sueldo_base / 240)*1.5) * item.hora_extra50,2),
+                            Valor100=Math.Round(  ((item.Sueldo_base / 240)*2) * item.hora_extra100,2),
                             Sueldo_base=item.Sueldo_base,
                             hora_atraso=item.hora_atraso,
                             hora_temprano=item.hora_temprano,
