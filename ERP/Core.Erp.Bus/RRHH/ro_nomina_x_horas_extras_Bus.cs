@@ -109,7 +109,7 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
-                return bus_detalle.aprobarHE(info);
+                return odata.AprobarHE(info);
             }
             catch (Exception)
             {

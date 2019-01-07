@@ -260,5 +260,129 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+        public bool AprobarHE(ro_nomina_x_horas_extras_Info info)
+        {
+            try
+            {
+                ro_empleado_novedad_Data odata_novedad = new ro_empleado_novedad_Data();
+                decimal IdNovedad = odata_novedad.get_id(info.IdEmpresa);
+                ro_nomina_x_horas_extras_det_Data odata = new ro_nomina_x_horas_extras_det_Data();
+                ro_periodo_Data bus_periodo = new ro_periodo_Data();
+                ro_periodo_Info info_periodo = new ro_periodo_Info();
+                info_periodo = bus_periodo.get_info(info.IdEmpresa, info.IdPeriodo);
+                var  lst_horas_extras_aprobar = odata.get_lst_horas_extras_aprobar(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo);
+                using (Entities_rrhh content=new Entities_rrhh())
+                {
+                    foreach (var item in lst_horas_extras_aprobar)
+                    {
+                        if (item.Valor25 > 0)
+                        {
+                            IdNovedad++;
+                            ro_empleado_Novedad info_novedad_25 = new ro_empleado_Novedad()
+                            {
+                                IdNovedad=IdNovedad,
+                                IdEmpresa = info.IdEmpresa,
+                                IdEmpleado = item.IdEmpleado,
+                                IdNomina_Tipo = info.IdNomina_Tipo,
+                                IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
+                                Observacion = "Hora extra al 25 % corrspondiente al periodo " + info.IdPeriodo.ToString(),
+                                Fecha_Transac = DateTime.Now,
+                                IdUsuario = info.IdUsuario,
+                                Fecha = info_periodo.pe_FechaFin,
+                                Estado = "A"
+                            };
+                            content.ro_empleado_Novedad.Add(info_novedad_25);
+                            ro_empleado_novedad_det info_det_25 = new ro_empleado_novedad_det()
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdNovedad = IdNovedad,
+                                Secuencia = 1,
+                                Valor = item.Valor25,
+                                FechaPago = info_periodo.pe_FechaFin,
+                                IdRubro = "7",
+                                Observacion = "Hora extra al 25 % corrspondiente al periodo " + info.IdPeriodo.ToString()
+                            };
+                            content.ro_empleado_novedad_det.Add(info_det_25);
+
+                        };
+
+
+                        if (item.Valor50 > 0)
+                        {
+                            IdNovedad++;
+                            ro_empleado_Novedad info_novedad_50 = new ro_empleado_Novedad()
+                            {
+                                IdNovedad=IdNovedad,
+                                IdEmpresa = info.IdEmpresa,
+                                IdEmpleado = item.IdEmpleado,
+                                IdNomina_Tipo = info.IdNomina_Tipo,
+                                IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
+                                Observacion = "Hora extra al 50 % corrspondiente al periodo " + info.IdPeriodo.ToString(),
+                                Fecha_Transac = DateTime.Now,
+                                IdUsuario = info.IdUsuario,
+                                Fecha = info_periodo.pe_FechaFin,
+                                Estado = "A"
+                            };
+                            content.ro_empleado_Novedad.Add(info_novedad_50);
+                            ro_empleado_novedad_det info_det_50 = new ro_empleado_novedad_det()
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdNovedad = IdNovedad,
+                                Secuencia = 1,
+                                Valor = item.Valor50,
+                                FechaPago = info_periodo.pe_FechaFin,
+                                IdRubro = "8",
+                                Observacion = "Hora extra al 50 % corrspondiente al periodo " + info.IdPeriodo.ToString()
+                            };
+                            content.ro_empleado_novedad_det.Add(info_det_50);
+
+                        };
+
+                        if (item.Valor50 > 0)
+                        {
+                            ro_empleado_Novedad info_novedad_100 = new ro_empleado_Novedad()
+                            {
+                                IdNovedad=IdNovedad,
+                                IdEmpresa = info.IdEmpresa,
+                                IdEmpleado = item.IdEmpleado,
+                                IdNomina_Tipo = info.IdNomina_Tipo,
+                                IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
+                                Observacion = "Hora extra al 50 % corrspondiente al periodo " + info.IdPeriodo.ToString(),
+                                Fecha_Transac = DateTime.Now,
+                                IdUsuario = info.IdUsuario,
+                                Fecha = info_periodo.pe_FechaFin,
+                                Estado = "A"
+                            };
+                            content.ro_empleado_Novedad.Add(info_novedad_100);
+                            ro_empleado_novedad_det info_det_100 = new ro_empleado_novedad_det()
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdNovedad = IdNovedad,
+                                Secuencia = 1,
+                                Valor = item.Valor100,
+                                FechaPago = info_periodo.pe_FechaFin,
+                                IdRubro = "8",
+                                Observacion = "Hora extra al 100 % corrspondiente al periodo " + info.IdPeriodo.ToString()
+                            };
+                            content.ro_empleado_novedad_det.Add(info_det_100);
+
+                        };
+                    }
+                    content.SaveChanges();
+                    odata.Modificar_estado_aprobacion(info.IdHorasExtras, 1);
+
+
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }
