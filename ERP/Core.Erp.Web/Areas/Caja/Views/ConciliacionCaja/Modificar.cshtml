@@ -90,7 +90,9 @@
 
         var datos = {
             IDs: selectedIDs,
-            IdTransaccionFixed: $("#IdTransaccionSession").val()
+            IdTransaccionFixed: $("#IdTransaccionSession").val(),
+            IdCaja: $("#IdCaja").val(),
+            IdEmpresa: $("#IdEmpresa").val()
         }
         $.ajax({
             type: 'POST',

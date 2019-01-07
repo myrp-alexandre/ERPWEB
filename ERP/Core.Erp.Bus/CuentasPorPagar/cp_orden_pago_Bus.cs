@@ -220,6 +220,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
                     foreach (var item in info.detalle)
                     {
+                        item.IdEmpresa = info.IdEmpresa;
+                        item.IdOrdenPago = info.IdOrdenPago;
                         odata_detalle.modificarDB(item);
 
                     }

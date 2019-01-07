@@ -316,16 +316,16 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             list_ct_cbtecble_det.AddRow(new ct_cbtecble_det_Info
             {
                 IdCtaCble = i_caja == null ? null : i_caja.IdCtaCble,
-                dc_Valor = Math.Abs(valor),
-                dc_Valor_debe = Math.Abs(valor)
+                dc_Valor = Math.Abs(valor)*-1,
+                dc_Valor_haber = Math.Abs(valor)
             }, IdTransaccionSession);
 
             //Haber
             list_ct_cbtecble_det.AddRow(new ct_cbtecble_det_Info
             {
                 IdCtaCble = i_tipo_movi == null ? "" : i_tipo_movi.IdCtaCble,
-                dc_Valor = Math.Abs(valor) * -1,
-                dc_Valor_haber = Math.Abs(valor)
+                dc_Valor = Math.Abs(valor),
+                dc_Valor_debe = Math.Abs(valor)
             }, IdTransaccionSession);
 
 

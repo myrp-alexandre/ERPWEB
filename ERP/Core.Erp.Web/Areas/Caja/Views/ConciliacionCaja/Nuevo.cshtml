@@ -77,7 +77,9 @@
 
         var datos = {
             IDs: selectedIDs,
-            IdTransaccionFixed: $("#IdTransaccionSession").val()
+            IdTransaccionFixed: $("#IdTransaccionSession").val(),
+            IdCaja: $("#IdCaja").val(),
+            IdEmpresa: $("#IdEmpresa").val(),            
         }
         $.ajax({
             type: 'POST',
@@ -164,8 +166,8 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#Saldo_cont_al_periodo").val(Math.round(Number(data), 2));
-                $("#Saldo_cont_al_periodoR").val(Math.round(Number(data), 2));
+                $("#Saldo_cont_al_periodo").val(data);
+                $("#Saldo_cont_al_periodoR").val(data);
             },
             error: function (error) {
             }

@@ -22,11 +22,11 @@ namespace Core.Erp.Bus.Caja
             }
         }
 
-        public List<cp_conciliacion_Caja_det_Info> get_list_x_pagar(int IdEmpresa)
+        public List<cp_conciliacion_Caja_det_Info> get_list_x_pagar(int IdEmpresa, int IdSucursal)
         {
             try
             {
-                return odata.get_list_x_pagar(IdEmpresa);
+                return odata.get_list_x_pagar(IdEmpresa, IdSucursal);
             }
             catch (Exception)
             {
