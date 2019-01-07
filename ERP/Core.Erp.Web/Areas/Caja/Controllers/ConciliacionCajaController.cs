@@ -39,6 +39,14 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         string mensaje = string.Empty;
         #endregion
 
+        #region Combobox bajo demanda flujo
+        public ActionResult CmbFlujo_ConciliacionCaja()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbFlujo_ConciliacionCaja", model);
+        }
+        #endregion
+
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbPersona_ConciliacionCaja()
         {
@@ -293,7 +301,9 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public ActionResult GridViewPartial_conciliacion_caja_movimiento()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_det.get_list_x_movimientos_caja(IdEmpresa);
+            int IdCaja = Request.Params["IdCajaConciliacion"] != null ? Convert.ToInt32(Request.Params["IdCajaConciliacion"]) : 0;
+            
+            var model = bus_det.get_list_x_movimientos_caja(IdEmpresa, IdCaja);
             list_vale_x_ingresar.set_list(model, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             return PartialView("_GridViewPartial_conciliacion_caja_movimiento", model);
@@ -418,7 +428,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             if(FechaCorte != null)
                 resultado = bus_plancta.get_saldo_anterior(IdEmpresa, IdCtaCble, Convert.ToDateTime(FechaCorte));
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            return Json(Math.Round(resultado,2,MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetIdCtaCbleCaja(int IdCaja = 0)

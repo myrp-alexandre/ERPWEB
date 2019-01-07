@@ -103,7 +103,7 @@ namespace Core.Erp.Data.Caja
             }
         }
 
-        public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> get_list_x_movimientos_caja(int IdEmpresa)
+        public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> get_list_x_movimientos_caja(int IdEmpresa, int IdCaja)
         {
             try
             {
@@ -113,6 +113,7 @@ namespace Core.Erp.Data.Caja
                 {
                     Lista = (from q in Context.vwcaj_Caja_Movimiento_por_conciliar
                              where q.IdEmpresa == IdEmpresa
+                             && q.IdCaja == IdCaja
                              select new cp_conciliacion_Caja_det_x_ValeCaja_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

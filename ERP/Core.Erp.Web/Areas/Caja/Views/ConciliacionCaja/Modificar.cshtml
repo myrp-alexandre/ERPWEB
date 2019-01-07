@@ -70,6 +70,7 @@
             //Pass all selected keys to GridView callback action
         e.customArgs["selectedIDs"] = selectedIDs;
         e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+        e.customArgs['IdCajaConciliacion'] = $('#IdCaja').val();
         }
     function OnSelectionChanged(s, e) {
         s.GetSelectedFieldValues("IdCbteCble_Ogiro", GetSelectedFieldValuesCallback);
@@ -79,6 +80,54 @@
             selectedIDs = values.join(',');
     }
 
+    var selectedCajaIDs;
+    function Caja_OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedCajaIDs"] = selectedCajaIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+        e.customArgs['IdCajaConciliacion'] = $('#IdCaja').val();
+    }
+    function Caja_OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdCbteCble_movcaja", Caja_GetSelectedFieldValuesCallback);
+    }
+    function Caja_GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedCajaIDs = values.join(',');
+        console.log(selectedCajaIDs);
+    }
+    function MostrarCajaMovimientoConciliacionModal() {
+        selectedCajaIDs = "";
+        GridViewPartial_conciliacion_caja_movimiento.PerformCallback();
+        GridViewPartial_conciliacion_caja_movimiento.UnselectRows();
+        $("#CajaMovimientoModal").modal("show");
+    }
+
+    function AddCajaMovimiento()
+    {
+        var datos = {
+            Ids: selectedCajaIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("AgregarCajaMovimiento", "ConciliacionCaja",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+
+        GridViewPartial_conciliacion_caja_movimiento.PerformCallback();
+        GridViewPartial_conciliacion_caja_movimiento.UnselectRows();
+        GridView_conciliacion_vales.PerformCallback();
+        $("#CajaMovimientoModal").modal("hide");
+    }
     function MostrarModal() {
         selectedIDs = "";
         GridView_conciliacion_facturas_x_cruzar.PerformCallback();
@@ -306,6 +355,25 @@
         </div>
     </div>
 
+    <div class="modal fade" id="CajaMovimientoModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Movimientos de caja</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("GridViewPartial_conciliacion_caja_movimiento")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="AddCajaMovimiento();">Aceptar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -455,8 +523,8 @@
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_facturas">
                 <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-primary" id="btn_buscar_og" onclick="MostrarModal();">
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-primary form-control" id="btn_buscar_og" onclick="MostrarModal();">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -465,6 +533,14 @@
                 @Html.Action("GridViewPartial_conciliacion_facturas")
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_vales">
+                <div class="row">
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-primary form-control" id="btn_buscar_og" onclick="MostrarCajaMovimientoConciliacionModal();">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <br />
                 @Html.Action("GridViewPartial_conciliacion_vales")
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_ingresos">
@@ -472,7 +548,14 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_op">
                 <div class="row">
-                    <div class="col-md-offset-10 col-md-2">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="IdTipoFlujo">Tipo flujo*</label>
+                            @Html.Partial("_CmbFlujo_ConciliacionCaja", Model.IdTipoFlujo)
+                            @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="FechaOP">Fecha*</label>
                             @Html.TextBoxFor(q => q.FechaOP, "{0:dd/MM/yyyy}", new { @id = "FechaOP", @class = "form-control" })
@@ -520,12 +603,12 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-    <script type="text/javascript">
-        function OnSelectedCtaCbleChanged() {
-            GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
-        }
-        function GrupoComboBox_BeginCallback(s, e) {
-            e.customArgs["pre_IdCtaCble"] = IdCtaCble.GetValue();
-            e.customArgs["pre_fecha"] = moment(FechaOP.GetDate()).format('DD/MM/YYYY');
-        }
-    </script>
+<script type="text/javascript">
+    function OnSelectedCtaCbleChanged() {
+        GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
+    }
+    function GrupoComboBox_BeginCallback(s, e) {
+        e.customArgs["pre_IdCtaCble"] = IdCtaCble.GetValue();
+        e.customArgs["pre_fecha"] = moment(FechaOP.GetDate()).format('DD/MM/YYYY');
+    }
+</script>

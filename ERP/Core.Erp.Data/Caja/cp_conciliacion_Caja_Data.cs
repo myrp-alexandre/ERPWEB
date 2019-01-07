@@ -184,15 +184,16 @@ namespace Core.Erp.Data.Caja
                     cp_orden_pago op = new cp_orden_pago
                     {
                         IdEmpresa = Entity_c.IdEmpresa,
+                        IdTipoFlujo = Entity_c.IdTipoFlujo,
                         IdSucursal = IdSucursal,
                         IdOrdenPago = IdOrdenPago++,
-                        Observacion = "Caja #" + Entity_c.IdConciliacion_Caja,
+                        Observacion = "Caja #" + Entity_c.IdConciliacion_Caja + " "+info.ObservacionOP,
                         IdTipo_op = cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString(),
                         IdTipo_Persona = info.IdTipoPersona,
                         IdPersona = info.IdPersona,
                         IdEntidad = info.IdEntidad,
                         Fecha = info.FechaOP.Date,
-                        IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
+                        IdEstadoAprobacion = "APRO",
                         IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
                         Estado = "A"
                     };
@@ -209,7 +210,7 @@ namespace Core.Erp.Data.Caja
                         cb_Observacion = op.Observacion,
                         IdPeriodo = Convert.ToInt32(info.FechaOP.ToString("yyyyMM")),
                         IdSucursal = IdSucursal,
-                        cb_FechaTransac = DateTime.Now,
+                        cb_FechaTransac = DateTime.Now,                        
                         cb_Estado = "A"
                     };
                     Context_ct.ct_cbtecble.Add(diario);
@@ -1033,8 +1034,9 @@ namespace Core.Erp.Data.Caja
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdSucursal = IdSucursal,
+                        IdTipoFlujo = info.IdTipoFlujo,
                         IdOrdenPago = IdOrdenPago++,
-                        Observacion = "Caja #" + info.IdConciliacion_Caja,
+                        Observacion = "Caja #" + info.IdConciliacion_Caja+" "+info.ObservacionOP,
                         IdTipo_op = cl_enumeradores.eTipoOrdenPago.OTROS_CONC.ToString(),
                         IdTipo_Persona = info.IdTipoPersona,
                         IdPersona = info.IdPersona,

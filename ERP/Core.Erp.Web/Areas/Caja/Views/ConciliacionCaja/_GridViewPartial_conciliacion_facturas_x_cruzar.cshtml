@@ -59,8 +59,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
-        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
-        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdCajaConciliacion'] = $('#IdCaja').val(); }";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";        
     });
 }
 @grid.Bind(Model).GetHtml()
