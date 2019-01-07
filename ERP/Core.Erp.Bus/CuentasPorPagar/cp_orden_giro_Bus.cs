@@ -68,6 +68,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
+                var param = bus_parametro.get_info(info.IdEmpresa);
                 var prov = bus_proveedor.get_info(info.IdEmpresa, info.IdProveedor);
                 info.co_baseImponible = info.co_subtotal_iva + info.co_subtotal_siniva;
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
@@ -159,8 +160,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                             info.info_retencion.info_comprobante.IdEmpresa = info.IdEmpresa;
                             info.info_retencion.info_comprobante.cb_Fecha = info.co_fechaOg;
                             info.info_retencion.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
-                            info.info_retencion.info_comprobante.IdTipoCbte = info.IdTipoCbte_Ogiro;
-                            info.info_retencion.info_comprobante.IdCbteCble = info.IdCbteCble_Ogiro;
+                            info.info_retencion.info_comprobante.IdTipoCbte = (int)info.info_retencion.ct_IdTipoCbte;
+                            info.info_retencion.info_comprobante.IdCbteCble = 0;
                             info.info_retencion.info_comprobante.cb_Estado = info.Estado;
                             info.info_retencion.info_comprobante.cb_Valor = info.co_valorpagar;
                             info.info_retencion.info_comprobante.IdSucursal = info.IdSucursal;
@@ -278,6 +279,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         info.info_retencion.IdCbteCble_Ogiro = info.IdCbteCble_Ogiro;
                         info.info_retencion.IdTipoCbte_Ogiro = info.IdTipoCbte_Ogiro;
                         info.info_retencion.Fecha_Autorizacion = info.fecha_autorizacion;
+                        info.info_retencion.IdSucursal = info.IdSucursal;
                         info.info_retencion.Descripcion = info.Descripcion;
                         info.info_retencion.Estado = "A";
                         info.info_retencion.fecha = info.co_fechaOg;
@@ -288,22 +290,13 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         info.info_retencion.re_Tiene_RFuente = "S";
                         info.info_retencion.re_Tiene_RTiva = "S";
                         info.info_retencion.IdUsuario = info.IdUsuario;
-                        info.info_retencion.observacion = "Retencion de factuta #" + info.co_serie + '-' + info.co_factura;
+                        info.info_retencion.observacion = "Retencion de factura #" + info.co_serie + '-' + info.co_factura;
                         info.info_retencion.Fecha_Transac = Convert.ToDateTime(info.Fecha_Transac);
                         info.info_retencion.aprobada_enviar_sri = false;
 
                         if (bus_retencion.modificarDB(info.info_retencion))
                         {
-                            info.info_retencion.info_comprobante.IdEmpresa = info.IdEmpresa;
-                            info.info_retencion.info_comprobante.cb_Fecha = info.co_fechaOg;
-                            info.info_retencion.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
-                            info.info_retencion.info_comprobante.IdTipoCbte = info.IdTipoCbte_Ogiro;
-                            info.info_retencion.info_comprobante.IdCbteCble = info.IdCbteCble_Ogiro;
-                            info.info_retencion.info_comprobante.cb_Estado = info.Estado;
-                            info.info_retencion.info_comprobante.cb_Valor = info.co_valorpagar;
-                            info.info_retencion.info_comprobante.IdSucursal = info.IdSucursal;
-                            info.info_retencion.info_comprobante.cb_Observacion = "Comprobante contable de retencion #" + info.info_retencion.serie1 + " " + info.info_retencion.serie2 + " " + info.info_retencion.NumRetencion;
-                            bus_contabilidad.guardarDB(info.info_retencion.info_comprobante);
+                            
                         }
                     }
                 }
@@ -410,8 +403,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-
-
         public cp_orden_giro_Info get_info(int IdEmpresa, int IdTipoCbte_Ogiro, decimal IdCbteCble_Ogiro)
         {
             try
@@ -435,7 +426,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-
         public string validar(cp_orden_giro_Info info)
         {
             try
@@ -564,8 +554,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 throw;
             }
         }
-
-
         public bool Generar_OP_x_orden_giro(cp_orden_giro_Info info)
         {
             try

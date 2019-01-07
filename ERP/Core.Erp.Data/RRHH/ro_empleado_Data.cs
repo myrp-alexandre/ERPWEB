@@ -1040,16 +1040,6 @@ namespace Core.Erp.Data.RRHH
                         Fecha_Transac = item.Fecha_Transac
                     };
                     Context_rrhh.ro_contrato.Add(Entity_contrato);
-
-                    ro_empleado_x_ro_tipoNomina Entity_Empleado_x_Nomina = new ro_empleado_x_ro_tipoNomina
-                    {
-                        IdEmpresa = item.IdEmpresa,
-                        IdEmpleado = item.IdEmpleado,
-                        IdTipoNomina = Convert.ToInt32(item.IdNomina),
-                        observacion = null
-                    };
-
-                    Context_rrhh.ro_empleado_x_ro_tipoNomina.Add(Entity_Empleado_x_Nomina);
                 }
 
                 //foreach (var item in Lista_CargasFamiliares)

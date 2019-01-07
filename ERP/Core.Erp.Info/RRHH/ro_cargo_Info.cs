@@ -11,7 +11,7 @@ namespace Core.Erp.Info.RRHH
         public int IdEmpresa { get; set; }
         public int IdCargo { get; set; }
         [Required(ErrorMessage = "El campo descripción es obligatorio")]
-        [StringLength(50, MinimumLength = 4, ErrorMessage = "La descripción debe tener mínimo 4 caracteres y máximo 100")]
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "La descripción debe tener mínimo 4 caracteres y máximo 500")]
         public string ca_descripcion { get; set; }
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }

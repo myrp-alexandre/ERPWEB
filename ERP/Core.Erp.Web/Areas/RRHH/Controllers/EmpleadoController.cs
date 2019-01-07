@@ -897,7 +897,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 Valor_horas_matutino = Convert.ToDouble(reader.GetValue(27)),
                                 Valor_hora_adicionales = null,
                                 DiasVacaciones = 15,
-                                GozaMasDeQuinceDiasVaciones = false
+                                GozaMasDeQuinceDiasVaciones = false                                
                             };
 
                             info.info_persona = info_persona_empleado;

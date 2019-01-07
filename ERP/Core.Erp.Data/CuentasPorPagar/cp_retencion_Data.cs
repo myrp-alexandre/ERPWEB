@@ -7,13 +7,12 @@ using Core.Erp.Data.General;
 using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
+using Core.Erp.Data.Contabilidad;
 
 namespace Core.Erp.Data.CuentasPorPagar
 {
    public class cp_retencion_Data
     {
-
-
         public List<cp_retencion_Info> get_list(int IdEmpresa, DateTime Fechaini, DateTime FechaFin)
         {
             try
@@ -101,8 +100,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
-
         public cp_retencion_Info get_info(int IdEmpresa_Ogiro, decimal IdCbteCble_Ogiro,int IdTipoCbte_Ogiro)
         {
             try
@@ -144,13 +141,10 @@ namespace Core.Erp.Data.CuentasPorPagar
             var info_documento = odata_talonario.GetUltimoNoUsadoFacElec(info.IdEmpresa, cl_enumeradores.eTipoDocumento.RETEN.ToString(), info.serie1, info.serie2);
             try
             {
-                int secuencia = 1;
-
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    cp_retencion Entity = new cp_retencion
+                    Context.cp_retencion.Add(new cp_retencion
                     {
-
                         IdEmpresa = info.IdEmpresa,
                         IdEmpresa_Ogiro = info.IdEmpresa_Ogiro,
                         IdCbteCble_Ogiro = info.IdCbteCble_Ogiro,
@@ -162,25 +156,23 @@ namespace Core.Erp.Data.CuentasPorPagar
                         NumRetencion = info_documento.NumDocumento,
                         NAutorizacion = info.NAutorizacion,
                         observacion = info.observacion,
-                        fecha = Convert.ToDateTime(info.fecha.ToShortDateString()),
+                        fecha = info.fecha.Date,
                         re_Tiene_RTiva = info.re_Tiene_RTiva,
                         re_Tiene_RFuente = info.re_Tiene_RFuente,
                         re_EstaImpresa = info.re_EstaImpresa,
                         Estado = "A",
                         Fecha_Transac = DateTime.Now,
                         IdUsuario = info.IdUsuario,
-                        nom_pc = info.nom_pc,
-                        ip = info.ip,
-                    };
-                    Context.cp_retencion.Add(Entity);
+                    });
 
+                    int Secuencia = 1;
                     foreach (var item in info.detalle)
                     {
-                        cp_retencion_det Entity_det = new cp_retencion_det
+                        Context.cp_retencion_det.Add(new cp_retencion_det
                         {
                             IdEmpresa = info.IdEmpresa,
                             IdRetencion = info.IdRetencion,
-                            Idsecuencia=secuencia,
+                            Idsecuencia = Secuencia++,
                             re_tipoRet = item.re_tipoRet,
                             re_Codigo_impuesto=item.re_Codigo_impuesto,
                             re_baseRetencion=(double)item.re_baseRetencion,
@@ -189,12 +181,29 @@ namespace Core.Erp.Data.CuentasPorPagar
                             IdCodigo_SRI=item.IdCodigo_SRI,
                             IdUsuario=info.IdUsuario,
                             re_estado="A"
-                        };
-                        secuencia++;
-                        Context.cp_retencion_det.Add(Entity_det);
+                        });                        
                     }
-
                     Context.SaveChanges();
+
+                    if (Math.Round((double)info.detalle.Sum(q=>q.re_valor_retencion),2) > 0.01)
+                    {
+                        ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
+                        var param = Context.cp_parametros.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                        var diario = odata_ct.armar_info(info.info_comprobante.lst_ct_cbtecble_det, info.IdEmpresa, info.IdSucursal, (int)param.pa_IdTipoCbte_x_Retencion, 0, "", info.fecha);
+                        odata_ct.guardarDB(diario);
+
+                        Context.cp_retencion_x_ct_cbtecble.Add(new cp_retencion_x_ct_cbtecble
+                        {
+                            rt_IdEmpresa = info.IdEmpresa,
+                            rt_IdRetencion = info.IdRetencion,
+
+                            ct_IdEmpresa = diario.IdEmpresa,
+                            ct_IdTipoCbte = diario.IdTipoCbte,
+                            ct_IdCbteCble = diario.IdCbteCble,
+                            Observacion = "Relacion"
+                        });
+                        Context.SaveChanges();
+                    }
                 }
             
                 return res;
@@ -244,7 +253,37 @@ namespace Core.Erp.Data.CuentasPorPagar
                             }
                         }
                         Context.SaveChanges();
-                       
+
+                        if (Math.Round((double)info.detalle.Sum(q => q.re_valor_retencion), 2) > 0.01)
+                        {
+                            ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
+                            var param = Context.cp_parametros.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                            var diario = odata_ct.armar_info(info.info_comprobante.lst_ct_cbtecble_det, info.IdEmpresa, info.IdSucursal, (info.info_comprobante.IdTipoCbte == 0 ? Convert.ToInt32(param.pa_IdTipoCbte_x_Retencion) : info.info_comprobante.IdTipoCbte), 0, info.observacion, info.fecha);
+                            
+                            var rel = Context.cp_retencion_x_ct_cbtecble.Where(q => q.rt_IdEmpresa == info.IdEmpresa && q.rt_IdRetencion == info.IdRetencion).FirstOrDefault();
+                            if (rel == null)
+                            {
+                                if (odata_ct.guardarDB(diario))
+                                {
+                                    Context.cp_retencion_x_ct_cbtecble.Add(new cp_retencion_x_ct_cbtecble
+                                    {
+                                        rt_IdEmpresa = info.IdEmpresa,
+                                        rt_IdRetencion = info.IdRetencion,
+
+                                        ct_IdEmpresa = diario.IdEmpresa,
+                                        ct_IdTipoCbte = diario.IdTipoCbte,
+                                        ct_IdCbteCble = diario.IdCbteCble,
+                                        Observacion = "Relacion"
+                                    });
+                                    Context.SaveChanges();
+                                }
+                            }
+                            else
+                            {
+                                diario.IdCbteCble = rel.ct_IdCbteCble;
+                                odata_ct.modificarDB(diario);
+                            }
+                        }
                     }
                 }
                 return true;
@@ -309,6 +348,5 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-
     }
 }
