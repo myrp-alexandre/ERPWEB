@@ -165,7 +165,8 @@ namespace Core.Erp.Web.Areas.Contabilidad.Controllers
                 IdEmpresa = IdEmpresa,
                 cb_Fecha = DateTime.Now,
                 IdTipoCbte = 1,
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             model.lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>();
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det, model.IdTransaccionSession);
