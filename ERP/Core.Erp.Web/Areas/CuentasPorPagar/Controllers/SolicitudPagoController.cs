@@ -13,6 +13,7 @@ using Core.Erp.Info.General;
 using Core.Erp.Info.SeguridadAcceso;
 using Core.Erp.Bus.SeguridadAcceso;
 using DevExpress.Web;
+using Core.Erp.Bus.Inventario;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -178,13 +179,55 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public JsonResult GetListPorPagar(int IdEmpresa = 0 , int IdSucursal = 0, decimal IdTransaccionSession = 0)
         {
-            string retorno = string.Empty;
+            bool resultado = true;
             var lst = bus_pago_Det.GetListPorPagar(IdEmpresa, IdSucursal);
-            List_det_x_cruzar.get_list(IdTransaccionSession);
-            return Json("", JsonRequestBehavior.AllowGet);
+            if (lst.Count() == 0)
+                resultado = false;
+            var det = List_det_x_cruzar.get_list(IdTransaccionSession);
+            List_det_x_cruzar.set_list(det, IdTransaccionSession);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
+        #region Detalle
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_aprobacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_det_x_cruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_aprobacion", model);
+        }
+        public ActionResult GridViewPartial_aprobacion_solicitud(decimal IdFabricacion = 0)
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_aprobacion_solicitud", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNewIngreso([ModelBinder(typeof(DevExpressEditorsBinder))] cp_SolicitudPagoDet_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+           var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_fabricacion_det_ing", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateIngreso([ModelBinder(typeof(DevExpressEditorsBinder))] cp_SolicitudPagoDet_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_fabricacion_det_ing", model);
+        }
+        public ActionResult EditingDeleteIngreso(int Secuencia)
+        {
+            List_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_fabricacion_det_ing", model);
+        }
+
+        #endregion
+
     }
     public class cp_SolicitudPago_det_List
     {

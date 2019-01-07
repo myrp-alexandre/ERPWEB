@@ -9613,6 +9613,7 @@
     <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_CmbCuenta_OP.cshtml" />
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_CmbFlujo_ConciliacionCaja.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_aprobacion_solicitud.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_aprobacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
