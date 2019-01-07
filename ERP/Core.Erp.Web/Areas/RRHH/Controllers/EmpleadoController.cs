@@ -1141,6 +1141,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 IdUsuario = SessionFixed.IdUsuario,
                                 Fecha_Transac = DateTime.Now,
                                 Observacion = "Importación de Empleados mediante Plantilla",
+                                EstadoContrato = cl_enumeradores.eEstadoContratoRRHH.ECT_ACT.ToString(),
                                 Estado = "A"
                             };
                             Lista_Contrato.Add(info);
