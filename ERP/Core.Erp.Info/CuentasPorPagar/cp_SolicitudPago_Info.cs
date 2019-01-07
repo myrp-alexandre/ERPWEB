@@ -9,6 +9,7 @@ namespace Core.Erp.Info.CuentasPorPagar
 {
     public class cp_SolicitudPago_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdSolicitud { get; set; }
         [Required(ErrorMessage = ("el campo sucursal es obligatorio"))]
@@ -34,6 +35,9 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
         public string GiradoA { get; set; }
+        //campos que no existen en la tabla
+        public List<cp_SolicitudPagoDet_Info> lst_det { get; set; }
+
         public cp_proveedor_Info info_proveedor { get; set; }
 
     }

@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_area_x_departamento" Width="1.5" PointX="3" PointY="63.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_Capacitaciones_x_Empleado" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_cargaFamiliar" Width="1.5" PointX="14.25" PointY="62.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_cargo" Width="1.5" PointX="6.75" PointY="57.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_catalogo" Width="1.5" PointX="6.75" PointY="67.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_catalogoTipo" Width="1.5" PointX="4.5" PointY="68.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.ro_Comprobantes_Contables" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
@@ -51,7 +50,6 @@
         <EntityTypeShape EntityType="Model_rrhh.vwro_participacion_utilidad_empleado" Width="1.5" PointX="2.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_rubro_tipo" Width="1.5" PointX="14.75" PointY="15.75" IsExpanded="true" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_Detalle_ro_Acta_Finiquito" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_cargo" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_area_ro_Division" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_area_x_departamento_ro_area" ManuallyRouted="false" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Config_Param_contable_ro_area" ManuallyRouted="false" />
@@ -190,7 +188,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_CargaFamiliar_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Cargo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo1" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Catalogo2" />
@@ -232,6 +229,9 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_ro_periodo_x_ro_Nomina_TipoLiqui" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_ro_rol" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_x_rubro_acumulado_ro_rol" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_cargo" Width="1.5" PointX="15.375" PointY="1" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_ro_cargo" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Cargo" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_nomina_x_horas_extras_det" Width="1.5" PointX="25.375" PointY="27.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_nomina_x_horas_extras_aprobadas" Width="1.5" PointX="7.375" PointY="13.75" />
         </Diagram>

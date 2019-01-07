@@ -19,7 +19,7 @@ namespace Core.Erp.Data
         public int Secuencia { get; set; }
         public int IdEmpresa_cxp { get; set; }
         public int IdTipoCbte_cxp { get; set; }
-        public int IdCbteCble_cxp { get; set; }
+        public decimal IdCbteCble_cxp { get; set; }
         public string TipoDocumento { get; set; }
         public double ValorAPagar { get; set; }
     
