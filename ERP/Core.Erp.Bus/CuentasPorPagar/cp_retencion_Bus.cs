@@ -98,6 +98,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                
                 info_retencion.IdEmpresa = info_orden_giro.IdEmpresa;
                 info_retencion.IdProveedor = info_orden_giro.IdProveedor;
+                info_retencion.IdSucursal = info_orden_giro.IdSucursal;
                 info_retencion.serie1 = sucursal.Su_CodigoEstablecimiento;
                 info_retencion.serie2 = "001";
                 info_retencion.NumRetencion = info_talonario.NumDocumento;
@@ -144,7 +145,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Observacion = info.observacion;
-                info.info_comprobante.IdSucursal = info_orden_giro.IdSucursal;
+                info.info_comprobante.IdSucursal = info.IdSucursal;
                 if (bus_comprobante.guardarDB(info.info_comprobante))
                 {
                     if (odata.guardarDB(info))
@@ -202,6 +203,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Observacion = info.observacion;
+                info.info_comprobante.IdSucursal = info.IdSucursal;
                 
                 if (info.info_comprobante.IdCbteCble != 0)
                 {

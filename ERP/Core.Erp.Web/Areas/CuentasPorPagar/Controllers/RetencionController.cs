@@ -187,6 +187,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             Session["info_param_op"] = bus_parametros.get_info(IdEmpresa);
             cp_retencion_Info model = new cp_retencion_Info();
             model = bus_retencion.get_info(IdEmpresa, IdRetencion);
+            model.IdSucursal = model.info_comprobante.IdSucursal;
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_ct_cbtecble_det_List.set_list(model.info_comprobante.lst_ct_cbtecble_det, model.IdTransaccionSession);
             List_cp_retencion_det.set_list(model.detalle, model.IdTransaccionSession);
