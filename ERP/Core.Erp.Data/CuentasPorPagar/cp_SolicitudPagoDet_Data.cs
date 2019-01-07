@@ -25,8 +25,13 @@ namespace Core.Erp.Data.CuentasPorPagar
                              select new cp_SolicitudPagoDet_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
+                                 IdEmpresa_cxp = q.IdEmpresa,
+                                 IdTipoCbte_cxp = q.IdTipoCbte_Ogiro,
+                                 IdCbteCble_cxp = q.IdCbteCble_Ogiro,
                                  TipoDocumento = q.cod_Documento,
-                                 ValorAPagar = q.co_valorpagar
+                                 ValorAPagar = q.co_valorpagar,
+                                 Fecha = q.co_fechaOg,
+
 
                              }).ToList();
                 }

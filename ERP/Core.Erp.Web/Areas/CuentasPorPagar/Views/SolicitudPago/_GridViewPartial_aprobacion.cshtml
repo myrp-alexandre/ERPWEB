@@ -64,37 +64,7 @@
             column.ReadOnly = false;
         });
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Fecha";
-            column.Caption = "Fecha";
-            column.Width = Unit.Percentage(10);
-            column.PropertiesEdit.DisplayFormatString = "d";
-            column.EditorProperties().DateEdit(sp =>
-            {
-                column.PropertiesEdit.DisplayFormatString = "d";
-                sp.Width = Unit.Percentage(100);
-            });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-            column.ReadOnly = false;
-        });
 
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Saldo_OG";
-            column.Caption = "Saldo";
-            column.Width = Unit.Percentage(5);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-                column.PropertiesEdit.DisplayFormatString = "n2";
-            });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-
-        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "ValorAPagar";
