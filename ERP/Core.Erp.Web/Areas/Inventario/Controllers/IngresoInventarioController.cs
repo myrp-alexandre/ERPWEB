@@ -11,6 +11,9 @@ using Core.Erp.Bus.General;
 using DevExpress.Web;
 using Core.Erp.Web.Helps;
 using Core.Erp.Bus.Contabilidad;
+using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
+using System.IO;
+using ExcelDataReader;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
@@ -26,8 +29,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         tb_bodega_Bus bus_bodega;
-
-
+        tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();        
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -289,8 +291,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
-
-
         #region Json
         public JsonResult CargarBodega(int IdEmpresa = 0, int IdSucursal = 0)
         {
@@ -299,8 +299,76 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-          #endregion
+        #endregion
+
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadValidationSettings_imp.UploadValidationSettings, UploadValidationSettings_imp.FileUploadComplete);
+            return null;
+        }
+        #endregion
     }
+
+    #region Importacion Excel
+    public class UploadValidationSettings_imp
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            List<in_Ing_Egr_Inven_det_Info> Lista_IngresoInventarioDet = new List<in_Ing_Egr_Inven_det_Info>();
+            in_Ing_Egr_Inven_det_List ListaIngresoInventario = new in_Ing_Egr_Inven_det_List();
+            in_Producto_Bus bus_producto = new in_Producto_Bus();
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();            
+            #endregion
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                #region Ingreso Inventario     
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        var id_producto = Convert.ToDecimal(reader.GetValue(2));
+                        var costo_total = Convert.ToDouble(reader.GetValue(5));
+                        var cantidad = Convert.ToDouble(reader.GetValue(4));
+                        var lst_producto = bus_producto.get_list(IdEmpresa, false);
+
+                        in_Ing_Egr_Inven_det_Info info_detalle = new in_Ing_Egr_Inven_det_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdProducto = id_producto,
+                            pr_descripcion = lst_producto.Where(q=>q.IdProducto == id_producto).FirstOrDefault().pr_descripcion,
+                            IdUnidadMedida_sinConversion = "UNID",
+                            dm_cantidad_sinConversion = cantidad,
+                            mv_costo_sinConversion = costo_total/cantidad
+                        };
+
+                        Lista_IngresoInventarioDet.Add(info_detalle);
+                    }
+                    else
+                    {
+                        cont++;
+                    }
+                }
+                ListaIngresoInventario.set_list(Lista_IngresoInventarioDet, IdTransaccionSession);
+                #endregion
+            }
+        }
+    }
+    #endregion
 
     public class in_Ing_Egr_Inven_det_List
     {

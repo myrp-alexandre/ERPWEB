@@ -816,7 +816,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     pe_telfono_Contacto = Convert.ToString(reader.GetValue(7)),
                                     pe_celular = Convert.ToString(reader.GetValue(8)),
                                     pe_correo = Convert.ToString(reader.GetValue(9)),
-                                    pe_sexo = sexo==null ? null : sexo.CodCatalogo,
+                                    pe_sexo = desc_sexo,
                                     IdEstadoCivil = Convert.ToString(reader.GetValue(11)),
                                     pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(12))
                                 };
@@ -837,7 +837,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 info_persona_empleado.pe_telfono_Contacto = Convert.ToString(reader.GetValue(7));
                                 info_persona_empleado.pe_celular = Convert.ToString(reader.GetValue(8));
                                 info_persona_empleado.pe_correo = Convert.ToString(reader.GetValue(9));
-                                info_persona_empleado.pe_sexo = sexo == null ? null : sexo.CodCatalogo;
+                                info_persona_empleado.pe_sexo = desc_sexo;
                                 info_persona_empleado.IdEstadoCivil = Convert.ToString(reader.GetValue(11));
                                 info_persona_empleado.pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(12));
                             }
@@ -861,7 +861,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 CodigoSectorial = (Convert.ToString(reader.GetValue(16))).Trim(),
                                 de_descripcion = Convert.ToString(reader.GetValue(39)),
                                 IdTipoSangre = Convert.ToString(reader.GetValue(22)),
-                                ca_descripcion = Convert.ToString(reader.GetValue(40)),
+                                ca_descripcion = Convert.ToString(reader.GetValue(40)).Trim(),
                                 IdCtaCble_Emplea = null,
                                 IdCiudad = Convert.ToString(reader.GetValue(35)),
                                 em_mail = Convert.ToString(reader.GetValue(9)),
@@ -1137,6 +1137,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 nomina_tipo_descripcion = Convert.ToString(reader.GetValue(5)),
                                 NumDocumento = Convert.ToString(reader.GetValue(0)),
                                 IdEmpleado = InfoEmpleadoContrato.IdEmpleado,
+                                IdNomina = Convert.ToInt32(reader.GetValue(5)),
                                 IdUsuario = SessionFixed.IdUsuario,
                                 Fecha_Transac = DateTime.Now,
                                 Observacion = "Importación de Empleados mediante Plantilla",
@@ -1152,85 +1153,85 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 }
                 ListaContrato.set_list(Lista_Contrato, IdTransaccionSession);
 
-                #region TipoNomina 
-                List<ro_nomina_tipo_Info> Lista_TipoNomina;
-                ro_nomina_tipo_List ListaTipoNomina = new ro_nomina_tipo_List();
+                //#region TipoNomina 
+                //List<ro_nomina_tipo_Info> Lista_TipoNomina;
+                //ro_nomina_tipo_List ListaTipoNomina = new ro_nomina_tipo_List();
 
-                Lista_TipoNomina = (from q in Lista_Contrato
-                                    group q by new
-                                    {
-                                        q.IdEmpresa,
-                                        q.nomina_tipo_descripcion,
-                                    } into TipoNomina
-                                    select new ro_nomina_tipo_Info
-                                    {
-                                        IdEmpresa = TipoNomina.Key.IdEmpresa,
-                                        Descripcion = TipoNomina.Key.nomina_tipo_descripcion,
-                                        IdUsuario = SessionFixed.IdUsuario,
-                                        FechaTransac = DateTime.Now,
-                                        Estado = "A"
-                                    }).ToList();
+                //Lista_TipoNomina = (from q in Lista_Contrato
+                //                    group q by new
+                //                    {
+                //                        q.IdEmpresa,
+                //                        q.nomina_tipo_descripcion,
+                //                    } into TipoNomina
+                //                    select new ro_nomina_tipo_Info
+                //                    {
+                //                        IdEmpresa = TipoNomina.Key.IdEmpresa,
+                //                        Descripcion = TipoNomina.Key.nomina_tipo_descripcion,
+                //                        IdUsuario = SessionFixed.IdUsuario,
+                //                        FechaTransac = DateTime.Now,
+                //                        Estado = "A"
+                //                    }).ToList();
 
-                int IdTipoNomina = 1;
-                Lista_TipoNomina.ForEach(
-                     item =>
-                     {
-                         item.IdNomina_Tipo = IdTipoNomina;
-                         IdTipoNomina++;
-                     }
-                    );
+                //int IdTipoNomina = 1;
+                //Lista_TipoNomina.ForEach(
+                //     item =>
+                //     {
+                //         item.IdNomina_Tipo = IdTipoNomina;
+                //         IdTipoNomina++;
+                //     }
+                //    );
 
-                ListaTipoNomina.set_list(Lista_TipoNomina, IdTransaccionSession);
-                #endregion
+                //ListaTipoNomina.set_list(Lista_TipoNomina, IdTransaccionSession);
+                //#endregion
 
                 Lista_Contrato.ForEach(
                     item =>
                     {
-                        item.IdNomina = ListaTipoNomina.get_list(IdTransaccionSession).Where(v => v.Descripcion == item.nomina_tipo_descripcion).FirstOrDefault().IdNomina_Tipo;
-                        item.IdContrato_Tipo = lst_catalogo_contrato.Where(q => q.ca_descripcion == item.contrato_tipo_descripcion).FirstOrDefault().CodCatalogo;
+                        //item.IdNomina = ListaTipoNomina.get_list(IdTransaccionSession).Where(v => v.Descripcion == item.nomina_tipo_descripcion).FirstOrDefault().IdNomina_Tipo;
+                        item.IdContrato_Tipo = lst_catalogo_contrato.Where(q => q.ca_descripcion.ToString().ToUpper() == item.contrato_tipo_descripcion.ToString().ToUpper()).FirstOrDefault().CodCatalogo;
                     }
                 );
-                #endregion
+                #endregion                
 
                 //Para avanzar a la siguiente hoja de excel
                 cont = 0;
                 reader.NextResult();
 
                 #region CargasFamiliares             
-                while (reader.Read())
-                {
-                    var IdCargaFamiliar = 1;
-                    var cedula_carga = Convert.ToString(reader.GetValue(1)).Trim();
-                    var cedula_empleado = Convert.ToString(reader.GetValue(0)).Trim();
-                    var tipo_familiar = Convert.ToString(reader.GetValue(5)).Trim();
-                    var InfoEmpleado = Lista_Empleado.Where(v => v.pe_cedulaRuc == cedula_empleado).FirstOrDefault();
-                    var lst_ro_catalogo = bus_catalogorrhh.get_list_x_tipo(3);
+                //while (reader.Read())
+                //{
+                //    var IdCargaFamiliar = 1;
+                //    var cedula_carga = Convert.ToString(reader.GetValue(1)).Trim();
+                //    var cedula_empleado = Convert.ToString(reader.GetValue(0)).Trim();
+                //    var tipo_familiar = Convert.ToString(reader.GetValue(5)).Trim();
+                //    var InfoEmpleado = Lista_Empleado.Where(v => v.pe_cedulaRuc == cedula_empleado).FirstOrDefault();
+                //    var lst_ro_catalogo = bus_catalogorrhh.get_list_x_tipo(3);
 
-                    if (!reader.IsDBNull(0) && cont > 0)
-                    {
+                //    if (!reader.IsDBNull(0) && cont > 0)
+                //    {
 
-                        ro_cargaFamiliar_Info info = new ro_cargaFamiliar_Info
-                        {
-                            IdEmpresa = IdEmpresa,
-                            IdCargaFamiliar = IdCargaFamiliar++,
-                            IdEmpleado = InfoEmpleado.IdEmpleado,
-                            Cedula = cedula_carga,
-                            Sexo = "SEXO_MAS",
-                            TipoFamiliar = lst_ro_catalogo.Where(q=>q.ca_descripcion == tipo_familiar).FirstOrDefault().CodCatalogo,
-                            Nombres = Convert.ToString(reader.GetValue(2))+" "+ Convert.ToString(reader.GetValue(3)),
-                            FechaNacimiento = Convert.ToDateTime(reader.GetValue(4)),
-                            Estado = "A",
-                            FechaDefucion = null,
-                            capacidades_especiales = false                            
-                        };
-                        Lista_CargasFamiliares.Add(info);
-                    }
-                    else
-                    {
-                        cont++;
-                    }
-                }
-                ListaCargasFamiliares.set_list(Lista_CargasFamiliares, IdTransaccionSession);
+                //        ro_cargaFamiliar_Info info = new ro_cargaFamiliar_Info
+                //        {
+                //            IdEmpresa = IdEmpresa,
+                //            IdCargaFamiliar = IdCargaFamiliar++,
+                //            IdEmpleado = InfoEmpleado.IdEmpleado,
+                //            Cedula = cedula_carga,
+                //            Sexo = "SEXO_MAS",
+                //            TipoFamiliar = lst_ro_catalogo.Where(q=>q.ca_descripcion == tipo_familiar).FirstOrDefault().CodCatalogo,
+                //            Nombres = Convert.ToString(reader.GetValue(2))+" "+ Convert.ToString(reader.GetValue(3)),
+                //            FechaNacimiento = Convert.ToDateTime(reader.GetValue(4)),
+                //            Estado = "A",
+                //            FechaDefucion = null,
+                //            capacidades_especiales = false                            
+                //        };
+                //        Lista_CargasFamiliares.Add(info);
+                //    }
+                //    else
+                //    {
+                //        cont++;
+                //    }
+                //}
+                //ListaCargasFamiliares.set_list(Lista_CargasFamiliares, IdTransaccionSession);
                 #endregion
             };
         }
