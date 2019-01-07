@@ -46,7 +46,8 @@
 
     function AddOP() {
         var datos = {
-            IDs: selectedIDs
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
