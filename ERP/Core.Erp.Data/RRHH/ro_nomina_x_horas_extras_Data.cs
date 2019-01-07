@@ -172,15 +172,14 @@ namespace Core.Erp.Data.RRHH
                         IdUsuario=info.IdUsuario,
 
                     };
-                    var info_horas= Context.ro_nomina_x_horas_extras.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdNominaTipo == info.IdNomina_Tipo && v.IdNominaTipoLiqui==info.IdNomina_TipoLiqui && v.IdPeriodo==info.IdPeriodo).FirstOrDefault();
-                    var detalle = Context.ro_nomina_x_horas_extras_det.Where(v=>v.IdEmpresa==info.IdEmpresa&& v.IdHorasExtras== info_horas.IdHorasExtras);
+                    var detalle = Context.ro_nomina_x_horas_extras_det.Where(v=>v.IdEmpresa==info.IdEmpresa&& v.IdHorasExtras== info.IdHorasExtras);
                     Context.ro_nomina_x_horas_extras_det.RemoveRange(detalle);
                     foreach (var item in info.lst_nomina_horas_extras)
                     {
                         ro_nomina_x_horas_extras_det content_det = new ro_nomina_x_horas_extras_det()
                         {
                             IdEmpresa=info.IdEmpresa,
-                            IdHorasExtras=info_horas.IdHorasExtras,
+                            IdHorasExtras=info.IdHorasExtras,
                             IdEmpleado=item.IdEmpleado,
                             IdCalendario=item.IdCalendario,
                             IdTurno=item.IdTurno,
