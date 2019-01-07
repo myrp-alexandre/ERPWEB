@@ -24,7 +24,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         cp_SolicitudPago_det_List List_det = new cp_SolicitudPago_det_List();
-        cp_SolicitudPago_x_cruzar_List List_det_x_cruzar = new cp_SolicitudPago_x_cruzar_List();
+        cp_SolicitudPago_x_cruzar List_det_x_cruzar = new cp_SolicitudPago_x_cruzar();
         cp_SolicitudPagoDet_Bus bus_pago_Det = new cp_SolicitudPagoDet_Bus();
         #endregion
         #region Index
@@ -97,7 +97,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             };
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
-            List_det_x_cruzar.set_list(model.lst_det, model.IdTransaccionSession);
             seg_usuario_Info mod = bus_usuario.get_info(SessionFixed.IdUsuario);
             model.Solicitante = mod.Nombre;
             cargar_combos(model.IdEmpresa);
@@ -109,7 +108,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
-            model.lst_det = List_det_x_cruzar.get_list(model.IdTransaccionSession);
             if (!bus_solicitud.GuardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -131,7 +129,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
-            List_det_x_cruzar.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -184,11 +181,12 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (lst.Count() == 0)
                 resultado = false;
             List_det_x_cruzar.set_list(lst, IdTransaccionSession);
+           
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
-        #region Detalle
+        #region Det
         [ValidateInput(false)]
         public ActionResult GridViewPartial_aprobacion()
         {
@@ -196,33 +194,56 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var model = List_det_x_cruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_aprobacion", model);
         }
-        public ActionResult GridViewPartial_aprobacion_solicitud()
+        [HttpPost, ValidateInput(false)]
+
+        public ActionResult EditingAddNewAS(string IDs = "", decimal IdTransaccionSession = 0)
+        {
+            if (!string.IsNullOrEmpty(IDs))
+            {
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                var lst = List_det_x_cruzar.get_list(IdTransaccionSession);
+                string[] array = IDs.Split(',');
+                foreach (var item in array)
+                {
+                    var info_det = lst.Where(q => q.Secuencia == Convert.ToInt32(item)).FirstOrDefault();
+                    if (info_det != null)
+                        List_det.AddRow(info_det, IdTransaccionSession);
+                }
+            }
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_aprobacion_solicitud", model);
+        }
+
+
+        #endregion
+        #region DEtalle
+        public ActionResult GridViewPartial_aprobacion_solicitud(int IdEmpresa = 0 , int IdSucursal = 0)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_aprobacion_solicitud", model);
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNewIngreso([ModelBinder(typeof(DevExpressEditorsBinder))] cp_SolicitudPagoDet_Info info_det)
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] cp_SolicitudPagoDet_Info info_det)
         {
             if (ModelState.IsValid)
                 List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_fabricacion_det_ing", model);
+            return PartialView("_GridViewPartial_aprobacion_solicitud", model);
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdateIngreso([ModelBinder(typeof(DevExpressEditorsBinder))] cp_SolicitudPagoDet_Info info_det)
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] cp_SolicitudPagoDet_Info info_det)
         {
             if (ModelState.IsValid)
                 List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_fabricacion_det_ing", model);
+            return PartialView("_GridViewPartial_aprobacion_solicitud", model);
         }
-        public ActionResult EditingDeleteIngreso(int Secuencia)
+        public ActionResult EditingDelete(int Secuencia)
         {
             List_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_fabricacion_det_ing", model);
+            return PartialView("_GridViewPartial_aprobacion_solicitud", model);
         }
 
         #endregion
@@ -230,21 +251,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     }
     public class cp_SolicitudPago_det_List
     {
-        string variable = "cp_SolicitudPagoDet_Info";
         public List<cp_SolicitudPagoDet_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
+            if (HttpContext.Current.Session["cp_SolicitudPagoDet_Info" + IdTransaccionSession.ToString()] == null)
             {
                 List<cp_SolicitudPagoDet_Info> list = new List<cp_SolicitudPagoDet_Info>();
 
-                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+                HttpContext.Current.Session["cp_SolicitudPagoDet_Info" + IdTransaccionSession.ToString()] = list;
             }
-            return (List<cp_SolicitudPagoDet_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+            return (List<cp_SolicitudPagoDet_Info>)HttpContext.Current.Session["cp_SolicitudPagoDet_Info" + IdTransaccionSession.ToString()];
         }
 
         public void set_list(List<cp_SolicitudPagoDet_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+            HttpContext.Current.Session["cp_SolicitudPagoDet_Info" + IdTransaccionSession.ToString()] = list;
         }
 
         public void AddRow(cp_SolicitudPagoDet_Info info_det, decimal IdTransaccionSession)
@@ -268,9 +288,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
     }
 
-    public class cp_SolicitudPago_x_cruzar_List
+    public class cp_SolicitudPago_x_cruzar
     {
-        string Variable = "cp_SolicitudPagoDet_x_cruzar_Info";
+        string Variable = "cp_SolicitudPago_x_cruzar";
         public List<cp_SolicitudPagoDet_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)

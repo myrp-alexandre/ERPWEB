@@ -31,6 +31,18 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  TipoDocumento = q.cod_Documento,
                                  ValorAPagar = q.co_valorpagar,
                                  Fecha = q.co_fechaOg,
+                                 info_proveedor = new cp_proveedor_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdPersona = q.IdPersona,
+                                     info_persona = new Info.General.tb_persona_Info
+                                     {
+                                         IdPersona = q.IdPersona,
+                                         pe_nombreCompleto = q.nom_proveedor,
+                                         pe_razonSocial = q.nom_proveedor
+
+                                     }
+                                 }
 
 
                              }).ToList();
