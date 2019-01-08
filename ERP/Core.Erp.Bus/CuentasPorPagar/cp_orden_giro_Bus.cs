@@ -68,7 +68,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
         {
             try
             {
-                var param = bus_parametro.get_info(info.IdEmpresa);
                 var prov = bus_proveedor.get_info(info.IdEmpresa, info.IdProveedor);
                 info.co_baseImponible = info.co_subtotal_iva + info.co_subtotal_siniva;
                 info.info_comrobante.IdEmpresa = info.IdEmpresa;
@@ -134,7 +133,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
 
                         tb_sucursal_Data data_sucursal = new tb_sucursal_Data();
                         var sucursal = data_sucursal.get_info(info.IdEmpresa, info.IdSucursal);
-                        
+                        info.info_retencion.IdSucursal = info.IdSucursal;
                         info.info_retencion.IdEmpresa = info.IdEmpresa;
                         info.info_retencion.IdProveedor = info.IdProveedor;
                         info.info_retencion.IdEmpresa_Ogiro = info.IdEmpresa;
@@ -151,50 +150,13 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         info.info_retencion.re_Tiene_RFuente = "S";
                         info.info_retencion.re_Tiene_RTiva = "S";
                         info.info_retencion.IdUsuario = info.IdUsuario;
-                        info.info_retencion.observacion = "Retencion de factuta #" + info.co_serie +'-'+ info.co_factura;
+                        info.info_retencion.observacion = "Retencion de factura #" + info.co_serie +'-'+ info.co_factura;
                         info.info_retencion.Fecha_Transac = Convert.ToDateTime(info.Fecha_Transac);
                         info.info_retencion.aprobada_enviar_sri = false;
 
                         if (bus_retencion.guardarDB(info.info_retencion))
                         {
-                            info.info_retencion.info_comprobante.IdEmpresa = info.IdEmpresa;
-                            info.info_retencion.info_comprobante.cb_Fecha = info.co_fechaOg;
-                            info.info_retencion.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comrobante.cb_Fecha.Year.ToString() + info.info_comrobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
-                            info.info_retencion.info_comprobante.IdTipoCbte = (int)info.info_retencion.ct_IdTipoCbte;
-                            info.info_retencion.info_comprobante.IdCbteCble = 0;
-                            info.info_retencion.info_comprobante.cb_Estado = info.Estado;
-                            info.info_retencion.info_comprobante.cb_Valor = info.co_valorpagar;
-                            info.info_retencion.info_comprobante.IdSucursal = info.IdSucursal;
-                            info.info_retencion.info_comprobante.cb_Observacion = "Comprobante contable de retencion #"+info.info_retencion.serie1+" "+info.info_retencion.serie2+" "+info.info_retencion.NumRetencion;
-
-
-                            if ( bus_contabilidad.guardarDB(info.info_retencion.info_comprobante))
-                            {
-                                cp_retencion_x_ct_cbtecble_Info info_comp_x_retencion = new cp_retencion_x_ct_cbtecble_Info();
-                                cp_retencion_x_ct_cbtecble_Data data_comp_x_retencion = new cp_retencion_x_ct_cbtecble_Data();
-
-                                info_comp_x_retencion.ct_IdEmpresa = info.IdEmpresa;
-                                info_comp_x_retencion.rt_IdRetencion = info.info_retencion.IdRetencion;
-                                info_comp_x_retencion.ct_IdTipoCbte = info.info_retencion.info_comprobante.IdTipoCbte;
-                                info_comp_x_retencion.ct_IdCbteCble = info.info_retencion.info_comprobante.IdCbteCble;
-                                info_comp_x_retencion.Observacion = info.info_retencion.observacion;
-                                info_comp_x_retencion.rt_IdEmpresa = info.info_retencion.IdEmpresa;
-
-                                data_comp_x_retencion.guardarDB(info_comp_x_retencion);
-
-
-                                tb_sis_Documento_Tipo_Talonario_Info info_talonario = new tb_sis_Documento_Tipo_Talonario_Info();
-                                
-                                info_talonario.IdEmpresa = info.IdEmpresa;
-                                info_talonario.Establecimiento = info.info_retencion.serie1;
-                                info_talonario.PuntoEmision = info.info_retencion.serie2;
-                                info_talonario.NumDocumento = info.info_retencion.NumRetencion;
-                                info_talonario.Usado = true;
-                                info_talonario.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
-                                data_talonario.modificar_estado_usadoDB(info_talonario);
-
-                            }
-
+                           
                         }
 
                     }

@@ -189,7 +189,9 @@ namespace Core.Erp.Data.CuentasPorPagar
                     {
                         ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
                         var param = Context.cp_parametros.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                        var diario = odata_ct.armar_info(info.info_comprobante.lst_ct_cbtecble_det, info.IdEmpresa, info.IdSucursal, (int)param.pa_IdTipoCbte_x_Retencion, 0, "", info.fecha);
+                        var diario = odata_ct.armar_info(info.info_comprobante.lst_ct_cbtecble_det, info.IdEmpresa, info.IdSucursal, (int)param.pa_IdTipoCbte_x_Retencion, 0,
+                            "Comprobante contable de retención #" + info.serie1 + " " + info.serie2 + " " + info.NumRetencion
+                        , info.fecha);
                         odata_ct.guardarDB(diario);
 
                         Context.cp_retencion_x_ct_cbtecble.Add(new cp_retencion_x_ct_cbtecble
@@ -258,7 +260,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         {
                             ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
                             var param = Context.cp_parametros.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                            var diario = odata_ct.armar_info(info.info_comprobante.lst_ct_cbtecble_det, info.IdEmpresa, info.IdSucursal, (info.info_comprobante.IdTipoCbte == 0 ? Convert.ToInt32(param.pa_IdTipoCbte_x_Retencion) : info.info_comprobante.IdTipoCbte), 0, info.observacion, info.fecha);
+                            var diario = odata_ct.armar_info(info.info_comprobante.lst_ct_cbtecble_det, info.IdEmpresa, info.IdSucursal, (info.info_comprobante.IdTipoCbte == 0 ? Convert.ToInt32(param.pa_IdTipoCbte_x_Retencion) : info.info_comprobante.IdTipoCbte), 0,
+                                "Comprobante contable de retención #" + info.serie1 + " " + info.serie2 + " " + info.NumRetencion, info.fecha);
                             
                             var rel = Context.cp_retencion_x_ct_cbtecble.Where(q => q.rt_IdEmpresa == info.IdEmpresa && q.rt_IdRetencion == info.IdRetencion).FirstOrDefault();
                             if (rel == null)
