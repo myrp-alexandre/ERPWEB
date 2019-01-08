@@ -674,6 +674,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
 
         #region json
+        public JsonResult ValidarCompraSucursales(int IdEmpresa = 0, decimal IdProveedor = 0)
+        {
+            List<tb_sucursal_Info> lst_sucursal = new List<tb_sucursal_Info>();
+
+            if (IdProveedor != 0)
+            {
+                var prov = bus_proveedor.get_info(IdEmpresa, IdProveedor);
+                if (prov != null && prov.info_persona.pe_cedulaRuc == SessionFixed.Ruc)
+                    lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);                
+            }
+            
+            return Json(lst_sucursal, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetListOrdenesPorPagar(int IdEmpresa = 0)
         {
 

@@ -83,7 +83,7 @@ namespace Core.Erp.Web.Controllers
             Session["IdSucursal"] = model.IdSucursal;
             Session["em_direccion"] = info_empresa.em_direccion;
             SessionFixed.NomEmpresa = info_empresa.em_nombre;
-            
+            SessionFixed.Ruc = info_empresa.em_ruc;
             SessionFixed.IdEmpresa = model.IdEmpresa.ToString();
             SessionFixed.IdSucursal = model.IdSucursal.ToString();
             SessionFixed.em_direccion = info_empresa.em_direccion;

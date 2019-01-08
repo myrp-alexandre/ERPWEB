@@ -65,7 +65,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Estado = "A",
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now,
-                        IdBodega = info.IdBodega,                        
+                        IdBodega = info.IdBodega,    
+                        IdSucursal_cxp = info.IdSucursal_cxp
                     };
                                        
                     if (info.lst_det.Count > 0)
@@ -183,7 +184,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.aut_doc_Modificar = info.aut_doc_Modificar;
                         Entity.IdTipoMovi = info.IdTipoMovi;
                         Entity.IdBodega = info.IdBodega;
-
+                        Entity.IdSucursal_cxp = info.IdSucursal_cxp;
                     }
 
                     if (info.lst_det.Count > 0)

@@ -20,6 +20,8 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 <script type="text/javascript">
+   
+
     function MostrarModalOC() {
         if (IdProveedor.GetValue() > 0) {
             var datos = {
@@ -165,7 +167,7 @@
                     @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
                     @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>            
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdOrden_giro_Tipo">Sustento tributario*</label>
@@ -244,7 +246,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-offset-4 col-md-4">
+            <div class="col-md-4">
+                <div class="form-group" hidden id="DivSucursalCxp">
+                    <label for="IdSucursal_cxp">Sucursal compra*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal_cxp, new SelectList(new List<Core.Erp.Info.General.tb_sucursal_Info>(), "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal_cxp" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal_cxp, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="co_plazo">Plazo*</label>
                     @Html.TextBoxFor(q => q.co_plazo, new { @class = "form-control", @id = "co_plazo" })
@@ -270,7 +279,7 @@
                         @Html.ValidationMessageFor(q => q.co_FechaFactura_vct, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>            
+            </div>
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdBanco_acreditacion">Tipo flujo*</label>
@@ -684,10 +693,14 @@
     });
     $("#co_plazo").change(function () {
         var plazo = Number($("#co_plazo").val());
-        if (plazo > 0) {
-            var new_date = moment(co_FechaFactura.GetDate(), "DD-MM-YYYY").add(plazo, 'days');
-            co_FechaFactura_vct.SetDate(new Date(new_date));
-        };
+        if (plazo != 0) {
+
+            var date = new Date(moment(co_FechaFactura.GetValue(), "DD/MM/YYYY").add(plazo, 'days'));
+            co_FechaFactura_vct.SetValue(date);
+        }
+        else
+            co_FechaFactura_vct.SetValue(co_FechaFactura.GetValue());
+
     });
 
     $("#IdIden_credito").change(function () {
@@ -864,11 +877,12 @@
 
 
     function get_info_proveedor() {
-
-
+        $("#IdSucursal_cxp").empty();
+        $("#DivSucursalCxp").hide();
 
         if (IdProveedor.GetValue() > 0)  {
             var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
                 IdProveedor: IdProveedor.GetValue()
             }
             $.ajax({
@@ -881,17 +895,30 @@
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    if (data.pr_plazo == 0)
-                    {
-                        $("#co_plazo").val(1);
-                    }
-                    else
-                    {
-                        var date = moment(co_FechaFactura.GetValue(), "DD-MM-YYYY").add(data.pr_plazo, 'days');
-                        co_FechaFactura_vct.SetValue(new Date(moment(date).format("DD/MM/YYYY")));
-                    }
 
+                    $("#co_plazo").val(data.pr_plazo);
 
+                    var date = moment(co_FechaFactura.GetValue(), "DD-MM-YYYY").add(data.pr_plazo, 'days');
+                    co_FechaFactura_vct.SetValue(new Date(moment(date).format("DD/MM/YYYY")));
+                },
+                error: function (error) {
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("ValidarCompraSucursales", "Deudas", new { Area = "CuentasPorPagar" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    
+                    $.each(data, function (i, row) {
+                        $("#IdSucursal_cxp").append("<option value=" + row.IdSucursal + ">" + row.Su_Descripcion + "</option>");
+                        $("#DivSucursalCxp").show();
+                    });
                 },
                 error: function (error) {
                 }

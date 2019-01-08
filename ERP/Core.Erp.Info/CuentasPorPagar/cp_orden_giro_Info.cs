@@ -51,6 +51,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string MotivoAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public int IdSucursal { get; set; }
+        public Nullable<int> IdSucursal_cxp { get; set; }
         public string PagoLocExt { get; set; }
         public string PaisPago { get; set; }
         public string ConvenioTributacion { get; set; }
