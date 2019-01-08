@@ -116,7 +116,7 @@
         });
     cargar_tipo_liquidacion_nomina();
     cargar_periodos_x_nomina();
-
+    get_sig_periodo();
 
         function cargar_tipo_liquidacion_nomina() {
             var datos = {
@@ -163,7 +163,7 @@
                 $.each(data, function (i, row) {
                     $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
                 });
-                get_sig_periodo();
+               
             },
             error: function (error) {
             }

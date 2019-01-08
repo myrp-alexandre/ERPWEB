@@ -186,18 +186,22 @@ namespace Core.Erp.Data.RRHH
             {
                 int IdPeriodo = 0;
 
+
                 using (Entities_rrhh contet=new Entities_rrhh())
                 {
-                    IdPeriodo = (from q in contet.ro_periodo_x_ro_Nomina_TipoLiqui
-                                 where q.IdEmpresa==IdEmpresa
-                                 && q.IdNomina_Tipo==IdNomina_Tipo
-                                 && q.IdNomina_TipoLiqui==IdNomina_TipoLiqui
-                                 && q.Procesado=="N"
-                                 select IdPeriodo).Min();
+                    var lst = from q in contet.ro_periodo_x_ro_Nomina_TipoLiqui
+                              where q.IdEmpresa == IdEmpresa
+                              && q.IdNomina_Tipo==IdNomina_Tipo
+                              && q.IdNomina_TipoLiqui==IdNomina_TipoLiqui
+                              && q.Procesado=="N"
+                              select q;
+
+                    if (lst.Count() > 0)
+                        IdPeriodo = lst.Min(q => q.IdPeriodo);
                 }
                 return IdPeriodo;
             }
-            catch (Exception)
+            catch (Exception )
             {
 
                 throw;

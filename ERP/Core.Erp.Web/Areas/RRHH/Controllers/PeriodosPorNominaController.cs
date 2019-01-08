@@ -119,7 +119,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
-        public JsonResult get_sig_periodo(int IdEmpresa, int IdNomina = 0, int IdNomina_Tipo = 0)
+        public JsonResult get_sig_periodo(int IdEmpresa=0, int IdNomina = 0, int IdNomina_Tipo = 0)
         {
             try
             {
