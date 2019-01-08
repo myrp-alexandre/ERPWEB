@@ -9,7 +9,7 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Nuevo", "ProcesarRol", FormMethod.Post, new { @class = "form", @role = "form" }))
-{@Html.HiddenFor(q => q.IdEmpresa);
+{@Html.HiddenFor(q => q.IdEmpresa, new { @id="IdEmpresa"});
 @Html.HiddenFor(q => q.IdRol);
 
 <div class="row">
@@ -163,12 +163,35 @@
                 $.each(data, function (i, row) {
                     $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
                 });
+                get_sig_periodo();
             },
             error: function (error) {
             }
         });
     };
 
+    function get_sig_periodo() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdNomina: $("#IdNomina_Tipo").val(),
+            IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
+        }
 
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_sig_periodo", "PeriodosPorNomina", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#IdPeriodo").val(data);
+            },
+            error: function (error) {
+            }
+        });
+    };
 
 </script>

@@ -7,7 +7,9 @@ CREATE PROCEDURE [dbo].[spRo_procesa_Rol_anticipo] (
 @IdPEriodo numeric,
 @IdUsuario varchar(50),
 @Observacion varchar(500),
-@IdRol int
+@IdRol int,
+@IdSucursalInicio int,
+@IdSucursalFin int
 )
 AS
 
@@ -37,8 +39,10 @@ declare
 @Ff date,
 @IdRubro_calculado varchar(50),
 @Dias_trabajados int,
-@Anio float
-
+@Anio float,
+@IdSucursal int,
+@IdRubroTotalING varchar(50),
+@IdRubroTotalEGR varchar(50)
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------obteniendo fecha del perido------------------- ----------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,11 +55,11 @@ if((select  COUNT(idrol) from ro_rol where IdEmpresa=@IdEmpresa and @IdRol=IdRol
 update ro_rol set UsuarioModifica=@IdUsuario, FechaModifica=GETDATE() where IdEmpresa=@IdEmpresa and @IdRol=IdRol
 else
 insert into ro_rol
-(IdEmpresa,	IdRol,	IdNominaTipo,		IdNominaTipoLiqui,		IdPeriodo,			Descripcion,				Observacion,				Cerrado,			FechaIngresa,
+(IdEmpresa,	IdRol,IdSucursal,	IdNominaTipo,		IdNominaTipoLiqui,		IdPeriodo,			Descripcion,				Observacion,				Cerrado,			FechaIngresa,
 UsuarioIngresa,	FechaModifica,		UsuarioModifica,		FechaAnula,			UsuarioAnula,				MotivoAnula,				UsuarioCierre,		FechaCierre,
 IdCentroCosto)
 values
-(@IdEmpresa	, @IdRol	,@IdNomina			,@IdNominaTipo			,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
+(@IdEmpresa	, @IdRol, case when @IdSucursalInicio=0then NULL else @IdSucursalInicio end	,@IdNomina			,@IdNominaTipo			,@IdPEriodo			,@observacion				,@observacion				,'N'				,GETDATE()
 ,@IdUsuario		,null				,null					,null				,null						,null						,null				,null
 ,null)
 
@@ -87,8 +91,8 @@ where cont.IdEmpresa=@IdEmpresa
 and cont.IdNomina=@IdNomina
 and cont.EstadoContrato!='ECT_LIQ'
 and (emp.em_status!='EST_LIQ')
-and CAST( cont.FechaInicio as date)<=@Ff
-
+and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
+and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando sueldo al personal que no se les paga por horas-------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,6 +112,8 @@ and cont.IdNomina=@IdNomina
 and cont.EstadoContrato!='ECT_LIQ'
 and (emp.em_status!='EST_LIQ')
 and CAST( cont.FechaInicio as date)<=@Ff
+and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
+and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 and emp.Pago_por_horas=0
 
 
@@ -143,10 +149,10 @@ and cont.IdNomina=@IdNomina
 and cont.EstadoContrato!='ECT_LIQ'
 and (emp.em_status!='EST_LIQ')
 and CAST( cont.FechaInicio as date)<=@Ff
+and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
+and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 and emp.Pago_por_horas=1
 
-
-select * from ro_periodo
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------buscando novedades del periodo e insertando al rol detalle-----------------------------------------------------------------------<
@@ -173,6 +179,7 @@ and novc.Estado='A'
 and nov.EstadoCobro='PEN'
 and (emp.em_status!='EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
+and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by novc.IdEmpresa,novc.IdEmpleado,nov.IdRubro,rub.ru_orden,rub.ru_descripcion, emp.IdSucursal
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -193,11 +200,12 @@ and pre.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa
 and pred.IdNominaTipoLiqui=@IdNominaTipo
 and pred.FechaPago between @Fi and @Ff
-and pred.Estado='A'
+and pred.Estado=1
 and pred.EstadoPago='PEN'
 and (emp.em_status!='EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 AND (emp.em_fechaSalida IS NULL OR emp.em_fechaSalida BETWEEN @Fi and @Ff)
+and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------buscando rubros fijos e insertando al rol detalle-------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -221,6 +229,7 @@ and (rub_fij.es_indifinido=1 or ( @Fi between rub_fij.FechaFin and rub_fij.Fecha
 and (emp.em_status!='EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 AND (emp.em_fechaSalida IS NULL OR emp.em_fechaSalida BETWEEN @Fi and @Ff)
+and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando total ingreso por empleado-------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -267,6 +276,7 @@ where rol_det.IdEmpresa=@IdEmpresa
 and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
+and rol_det.IdRol=@IdRol
 and rub.ru_tipo='E'
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
@@ -278,14 +288,14 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculandoliquido a recibir--------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-
+select @IdRubroTotalEGR=IdRubro_tot_egr, @IdRubroTotalING=IdRubro_tot_ing from ro_rubros_calculados where IdEmpresa=@IdEmpresa
 select @IdRubro_calculado= IdRubro_tot_pagar from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1000'			,(ISNULL( [500],0) -ISNULL( [900],0))
+@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1000'			,(ISNULL( [22],0) -ISNULL( [23],0))
 ,1						,'Liquido a recibir'	
 FROM (
     SELECT 
@@ -298,11 +308,12 @@ FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
 	 and IdNominaTipo=@IdNomina
 	 and IdNominaTipoLiqui=@IdNominaTipo
 	 and IdPeriodo=@IdPEriodo
+	 and rol_det.IdRol=@IdRol
 ) as s
 PIVOT
 (
    max([Valor])
-    FOR [IdRubro] IN ([500],[900])
+    FOR [IdRubro] IN ([22],[23])
 )AS pvt
 
 

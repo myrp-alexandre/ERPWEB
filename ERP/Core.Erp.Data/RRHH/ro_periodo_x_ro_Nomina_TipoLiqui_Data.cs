@@ -180,5 +180,28 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public int get_siguinte_periodo_a_procesar(int IdEmpresa, int IdNomina_Tipo,int IdNomina_TipoLiqui)
+        {
+            try
+            {
+                int IdPeriodo = 0;
+
+                using (Entities_rrhh contet=new Entities_rrhh())
+                {
+                    IdPeriodo = (from q in contet.ro_periodo_x_ro_Nomina_TipoLiqui
+                                 where q.IdEmpresa==IdEmpresa
+                                 && q.IdNomina_Tipo==IdNomina_Tipo
+                                 && q.IdNomina_TipoLiqui==IdNomina_TipoLiqui
+                                 && q.Procesado=="N"
+                                 select IdPeriodo).Min();
+                }
+                return IdPeriodo;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

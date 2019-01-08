@@ -42,7 +42,8 @@ declare
 @SueldoBasico float,
 @Por_apor_pers_iess float,
 @por_apor_per_patr float,
-@IdSucursal int
+@IdSucursal int,
+@IdRubro_Provision varchar(50)
 end
 
 select @SueldoBasico= Sueldo_basico,@Por_apor_pers_iess= Porcentaje_aporte_pers, @por_apor_per_patr=Porcentaje_aporte_patr from ro_Parametros where IdEmpresa=@IdEmpresa
@@ -217,6 +218,7 @@ and ro_rol.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='I' 
 and rub.rub_aplica_IESS=1
 and cont.IdNomina=1
+and rol_det.IdRol=@IdRol
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
@@ -245,6 +247,7 @@ and ro_rol.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='I' 
 and rub.rub_aplica_IESS=1
 and cont.IdNomina=1
+and rol_det.IdRol=@IdRol
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
@@ -256,7 +259,8 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando fondo de reserva----------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_fondo_reserva from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_fondo_reserva,@IdRubro_Provision=IdRubro_prov_FR from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+
 insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,			IdEmpleado,			IdRubro,			Orden,			Valor
 ,rub_visible_reporte,	Observacion)
@@ -279,7 +283,7 @@ and  not exists(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum
 where acum.IdEmpresa= @IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro='296')
+and acum.IdRubro=@IdRubro_Provision)
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
@@ -287,7 +291,7 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando decimo tercer sueldo-------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_DIII from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_DIII, @IdRubro_Provision=IdRubro_DIII from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
 ,rub_visible_reporte,	Observacion)
@@ -303,12 +307,12 @@ and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='I' and rub.rub_aplica_IESS=1
---and DATEDIFF(day ,emp.em_fechaIngaRol,@Ff)>360
+and rol_det.IdRol=@IdRol
 and rol_det.IdEmpleado not in(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum 
 where acum.IdEmpresa= emp.IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro='290'
+and acum.IdRubro=@IdRubro_Provision
 and acum.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa)
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
@@ -318,7 +322,7 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando decimo cuarto sueldo-------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_DIV from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_DIV, @IdRubro_Provision=IdRubro_DIV from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
 ,rub_visible_reporte,	Observacion)
@@ -334,7 +338,7 @@ and emp.IdEmpleado not in(select acum.IdEmpleado from ro_empleado_x_rubro_acumul
 where acum.IdEmpresa= emp.IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro='289'
+and acum.IdRubro=@IdRubro_Provision
 and acum.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa)
 AND emp.IdEmpresa=@IdEmpresa
@@ -375,7 +379,7 @@ insert into ro_rol_detalle
 
 
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'100'			,sum(rol_det.Valor)
+@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'500'			,sum(rol_det.Valor)
 ,1						,'Total ingresos'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -400,7 +404,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol, emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,'199'			,
+@IdEmpresa				,@IdRol, emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,'600'			,
 
 isnull( (
 select ISNULL(valor,0) from (
@@ -424,6 +428,7 @@ and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
 and rol_det.IdRubro=500
+and rol_det.IdRol=@IdRol
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -436,7 +441,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'200'			,sum(rol_det.Valor)
+@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'1000'			,sum(rol_det.Valor)
 ,1						,'Total Egreso'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -448,6 +453,7 @@ and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='E'
+and rol_det.IdRol=@IdRol
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
@@ -466,7 +472,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1000'			,(ISNULL( [500],0) -ISNULL( [900],0))
+@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1500'			,(ISNULL( [500],0) -ISNULL( [900],0))
 ,1						,'Liquido a recibir'	
 FROM (
     SELECT 
@@ -479,6 +485,7 @@ FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
 	 and IdNominaTipo=@IdNomina
 	 and IdNominaTipoLiqui=@IdNominaTipo
 	 and IdPeriodo=@IdPEriodo
+	 and rol_det.IdRol=@IdRol
 	 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 ) as s
 PIVOT
@@ -504,12 +511,12 @@ PIVOT
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando fondo de reserva----------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_prov_FR from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_prov_FR,@IdRubro_Provision=IdRubro_fondo_reserva from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle_x_rubro_acumulado
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,						Valor, Estado
 )
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,			ROUND( sum(rol_det.Valor)*0.0833,2),'PEN'
+@IdEmpresa				,@IdRol				,emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,			ROUND( sum(rol_det.Valor)*@por_apor_per_patr,2),'PEN'
 
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -525,9 +532,10 @@ and  not exists(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum
 where acum.IdEmpresa= emp.IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro='296'
+and acum.IdRubro=@IdRubro_Provision
 and emp.idempresa=@idempresa
 and acum.IdEmpresa=@IdEmpresa)
+and rol_det.IdRol=@IdRol
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
@@ -535,7 +543,7 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando decimo tercer sueldo-------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_prov_DIII from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_prov_DIII,@IdRubro_Provision=IdRubro_DIII from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle_x_rubro_acumulado
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,						Valor, Estado
 )
@@ -555,9 +563,10 @@ and   exists(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum
 where acum.IdEmpresa= emp.IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro='290'
+and acum.IdRubro=@IdRubro_Provision
 and acum.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa)
+and rol_det.IdRol=@IdRol
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
@@ -566,7 +575,7 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando decimo cuarto sueldo-------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_prov_DIV from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_prov_DIV, @IdRubro_Provision=IdRubro_DIV from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle_x_rubro_acumulado
 (IdEmpresa,				IdRol,			idSucursal,						IdEmpleado,			IdRubro,						Valor,	Estado
 )
@@ -581,7 +590,7 @@ and   exists(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum
 where acum.IdEmpresa= emp.IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro='289'
+and acum.IdRubro=@IdRubro_Provision
 and acum.IdEmpresa=@IdEmpresa
 and emp.IdEmpresa=@IdEmpresa)
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
@@ -608,6 +617,7 @@ and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='I' and rub.rub_aplica_IESS=1
+and rol_det.IdRol=@IdRol
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal, emp.Pago_por_horas
@@ -626,7 +636,7 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando fondo de reserva----------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_prov_FR from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_prov_FR,@IdRubro_Provision=IdRubro_fondo_reserva from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
 ,rub_visible_reporte,	Observacion)
@@ -643,12 +653,13 @@ and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
 and rub.ru_tipo='I' and rub.rub_aplica_IESS=1
+and rol_det.IdRol=@IdRol
 and DATEDIFF(day ,emp.em_fechaIngaRol,@Ff)>360
 and   exists(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum 
 where acum.IdEmpresa= @IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro='296')
+and acum.IdRubro=@IdRubro_Provision)
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
@@ -656,7 +667,7 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando decimo tercer sueldo-------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_prov_DIII from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_prov_DIII,@IdRubro_Provision=IdRubro_DIII from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,			IdEmpleado,			IdRubro,			Orden,			Valor
 ,rub_visible_reporte,	Observacion)
@@ -677,7 +688,8 @@ and   exists(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum
 where acum.IdEmpresa= @IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro='290')
+and rol_det.IdRol=@IdRol
+and acum.IdRubro=@IdRubro_Provision)
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
@@ -686,7 +698,7 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando decimo cuarto sueldo-------------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_prov_DIV from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_prov_DIV,@IdRubro_Provision=IdRubro_DIV from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,					IdEmpleado,			IdRubro,			Orden,			Valor
 ,rub_visible_reporte,	Observacion)
@@ -702,8 +714,9 @@ and   exists(select acum.IdEmpleado from ro_empleado_x_rubro_acumulado acum
 where acum.IdEmpresa= @IdEmpresa
 and acum.IdEmpresa=emp.IdEmpresa
 and acum.IdEmpleado=emp.IdEmpleado
-and acum.IdRubro='289')
+and acum.IdRubro=@IdRubro_Provision)
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
+
 and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
 group by emp.IdEmpresa,emp.IdEmpleado, emp.em_fechaSalida, cont.FechaInicio, cont.FechaFin, emp.em_status, emp.IdSucursal, emp.Pago_por_horas, emp.em_fechaIngaRol
 

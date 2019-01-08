@@ -18,7 +18,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[85] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[58] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -80,7 +80,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = 0
+         Top = -192
          Left = 0
       End
       Begin Tables = 
@@ -138,11 +138,11 @@ Begin DesignProperties =
             Begin Extent = 
                Top = 35
                Left = 223
-               Bottom = 313
+               Bottom = 298
                Right = 467
             End
             DisplayFlags = 280
-            TopColumn = 10
+            TopColumn = 2
          End
          Begin Table = "turno"
             Begin Extent = 
@@ -152,13 +152,15 @@ Begin DesignProperties =
                Right = 1263
             End
             DisplayFlags = 280
-            TopCo', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_x_horas_extras_det';
+            Top', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_x_horas_extras_det';
+
+
 
 
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'lumn = 0
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'Column = 0
          End
          Begin Table = "car"
             Begin Extent = 
@@ -224,6 +226,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'lumn = 0
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_x_horas_extras_det';
+
+
 
 
 
