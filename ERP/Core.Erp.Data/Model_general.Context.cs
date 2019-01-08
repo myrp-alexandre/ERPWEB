@@ -70,5 +70,6 @@ namespace Core.Erp.Data
         public DbSet<tb_empresa> tb_empresa { get; set; }
         public DbSet<tb_parametro> tb_parametro { get; set; }
         public DbSet<tb_sucursal> tb_sucursal { get; set; }
+        public DbSet<tb_sis_reporte_x_tb_empresa> tb_sis_reporte_x_tb_empresa { get; set; }
     }
 }

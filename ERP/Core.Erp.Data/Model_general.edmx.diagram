@@ -78,6 +78,9 @@
         <EntityTypeShape EntityType="Model_general.tb_sucursal" Width="1.5" PointX="13" PointY="12.25" />
         <AssociationConnector Association="Model_general.FK_tb_bodega_tb_sucursal" />
         <AssociationConnector Association="Model_general.FK_tb_sucursal_tb_empresa" />
+        <EntityTypeShape EntityType="Model_general.tb_sis_reporte_x_tb_empresa" Width="1.5" PointX="20" PointY="20.375" />
+        <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_empresa" />
+        <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
