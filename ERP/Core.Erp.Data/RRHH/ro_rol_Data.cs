@@ -193,7 +193,7 @@ namespace Core.Erp.Data.RRHH
                     Context.spRo_procesa_Rol(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo,
                         info.UsuarioIngresa, info.Observacion,Convert.ToInt32( info.IdRol), IdSucursalInicio, IdSucursalFin);
                     if (info.IdNomina_Tipo == 1 && info.IdNomina_TipoLiqui == 1)
-                        Context.spRo_procesa_Rol_anticipo(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo, info.UsuarioIngresa, info.Observacion, Convert.ToInt32(info.IdRol));
+                        Context.spRo_procesa_Rol_anticipo(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo, info.UsuarioIngresa, info.Observacion, Convert.ToInt32(info.IdRol),IdSucursalInicio, IdSucursalFin);
                     if (info.IdNomina_Tipo == 1 && info.IdNomina_TipoLiqui == 6)
                         Context.spRo_procesa_Rol_bono(info.IdEmpresa, info.IdNomina_Tipo, info.IdNomina_TipoLiqui, info.IdPeriodo, info.UsuarioIngresa, info.Observacion, Convert.ToInt32(info.IdRol));
 

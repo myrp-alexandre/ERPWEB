@@ -160,7 +160,7 @@
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCargo" Type="int" Nullable="false" />
-          <Property Name="ca_descripcion" Type="varchar(max)" />
+          <Property Name="ca_descripcion" Type="varchar(max)" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_Transac" Type="datetime" />
@@ -1422,8 +1422,8 @@
           <Property Name="ip" Type="varchar" MaxLength="25" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_ActaFiniquito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwRo_ActaFiniquito' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_ActaFiniquito">
           <Key>
             <PropertyRef Name="NombreCompleto" />
@@ -1475,8 +1475,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_ActaFiniquito' no tiene defin
           <Property Name="CodCatalogo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="EstadoContrato" Type="varchar" MaxLength="10" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_archivos_bancos_generacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_archivos_bancos_generacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_archivos_bancos_generacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1507,8 +1507,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_archivos_bancos_generacion' n
           <Property Name="NombreProceso" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_archivos_bancos_generacion_x_empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_archivos_bancos_generacion_x_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_archivos_bancos_generacion_x_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1543,8 +1543,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_archivos_bancos_generacion_x_
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="Secuencia" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_combo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_combo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_combo">
           <Key>
             <PropertyRef Name="pe_cedulaRuc" />
@@ -1575,8 +1575,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_combo' no tiene defi
           <Property Name="Valor_hora_adicionales" Type="float" />
           <Property Name="Valor_hora_control_salida" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_datos_generales' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_datos_generales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_datos_generales">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1677,8 +1677,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_datos_generales' no 
           <Property Name="Valor_hora_adicionales" Type="float" />
           <Property Name="Valor_hora_control_salida" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_Novedad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_Novedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_Novedad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1708,8 +1708,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_Novedad' no tiene de
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Observacion" Type="varchar(max)" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_novedad_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_novedad_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_novedad_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1732,8 +1732,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_novedad_det' no tien
           <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rub_codigo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_Empleado_Novedades' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_Empleado_Novedades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_Empleado_Novedades">
           <Key>
             <PropertyRef Name="IdEmpleado" />
@@ -1774,8 +1774,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_Empleado_Novedades' no tiene 
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="IdSucursal" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_ro_rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_ro_rubro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_ro_rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1810,8 +1810,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_ro_rubro' no tiene
           <Property Name="FechaFin" Type="date" />
           <Property Name="es_indifinido" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_rubro_acumulado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_rubro_acumulado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_rubro_acumulado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1833,8 +1833,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_rubro_acumulado' n
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_titulos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_titulos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_titulos">
           <Key>
             <PropertyRef Name="CodCatalogo" />
@@ -1867,8 +1867,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleado_x_titulos' no tiene 
           <Property Name="IdTitulo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_EmpleadoNovedadCargaMasiva">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1897,8 +1897,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva' n
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DescripcionProcesoNomina" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_EmpleadoNovedadCargaMasiva_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1923,8 +1923,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_EmpleadoNovedadCargaMasiva_de
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleados_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleados_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleados_consulta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1945,8 +1945,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_empleados_consulta' no tiene 
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
           <Property Name="em_fechaIngaRol" Type="datetime" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_Historico_Liquidacion_Vacaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_Historico_Liquidacion_Vacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_Historico_Liquidacion_Vacaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1982,8 +1982,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_Historico_Liquidacion_Vacacio
           <Property Name="Fecha_Hasta" Type="datetime" Nullable="false" />
           <Property Name="Fecha_Retorno" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_horario_planificacion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_horario_planificacion_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_horario_planificacion_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2024,8 +2024,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_horario_planificacion_det' no
           <Property Name="fecha" Type="date" />
           <Property Name="IdCalendario" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_HorasProfesores' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_HorasProfesores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_HorasProfesores">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2049,8 +2049,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_HorasProfesores' no tiene def
           <Property Name="DescripcionProcesoNomina" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_HorasProfesores_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_HorasProfesores_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_HorasProfesores_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2091,8 +2091,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_HorasProfesores_det' no tiene
           <Property Name="ValorHora" Type="float" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_marcaciones_x_empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_marcaciones_x_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_marcaciones_x_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2127,8 +2127,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_marcaciones_x_empleado' no ti
           <Property Name="cargo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ma_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_marcaciones_x_planificacion_horario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_marcaciones_x_planificacion_horario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_marcaciones_x_planificacion_horario">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2162,8 +2162,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_marcaciones_x_planificacion_h
           <Property Name="HoraIni" Type="time" Precision="7" Nullable="false" />
           <Property Name="HoraFin" Type="time" Precision="7" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_sin_percebir_sueldo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_nomina_sin_percebir_sueldo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_sin_percebir_sueldo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2186,8 +2186,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_sin_percebir_sueldo' n
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_x_horas_extras_aprobadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_aprobadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_x_horas_extras_aprobadas">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2199,7 +2199,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_x_horas_extras_aprobad
             <PropertyRef Name="Valor25" />
             <PropertyRef Name="Valor50" />
             <PropertyRef Name="Valor100" />
-            <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdHorasExtras" Type="int" Nullable="false" />
@@ -2210,10 +2209,9 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_x_horas_extras_aprobad
           <Property Name="Valor25" Type="float" Nullable="false" />
           <Property Name="Valor50" Type="float" Nullable="false" />
           <Property Name="Valor100" Type="float" Nullable="false" />
-          <Property Name="IdSucursal" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_x_horas_extras_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_nomina_x_horas_extras_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2235,10 +2233,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_x_horas_extras_det' no
             <PropertyRef Name="tu_descripcion" />
             <PropertyRef Name="ca_descripcion" />
             <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="Valor25" />
-            <PropertyRef Name="Valor50" />
-            <PropertyRef Name="Valor100" />
-            <PropertyRef Name="Sueldo_base" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdHorasExtras" Type="int" Nullable="false" />
@@ -2265,13 +2259,9 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_nomina_x_horas_extras_det' no
           <Property Name="tu_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Valor25" Type="float" Nullable="false" />
-          <Property Name="Valor50" Type="float" Nullable="false" />
-          <Property Name="Valor100" Type="float" Nullable="false" />
-          <Property Name="Sueldo_base" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_NominasPagosCheques' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_NominasPagosCheques' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_NominasPagosCheques">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2297,8 +2287,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_NominasPagosCheques' no tiene
           <Property Name="pe_FechaIni" Type="smalldatetime" Nullable="false" />
           <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_NominasPagosCheques_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_NominasPagosCheques_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_NominasPagosCheques_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2338,8 +2328,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_NominasPagosCheques_det' no t
           <Property Name="Secuancia_op" Type="int" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_participacion_utilidad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_participacion_utilidad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_participacion_utilidad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2375,8 +2365,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_participacion_utilidad' no ti
           <Property Name="IdUtilidad" Type="int" Nullable="false" />
           <Property Name="Estado" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_participacion_utilidad_empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_participacion_utilidad_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_participacion_utilidad_empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2420,8 +2410,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_participacion_utilidad_emplea
           <Property Name="UtilidadDerechoIndividual" Type="float" Nullable="false" />
           <Property Name="UtilidadCargaFamiliar" Type="float" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_Prestamo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwRo_Prestamo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_Prestamo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2472,8 +2462,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_Prestamo' no tiene definida n
           <Property Name="EstadoAprob" Type="varchar" MaxLength="10" />
           <Property Name="IdUsuarioAprueba" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_rol' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rol">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2508,8 +2498,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rol' no tiene definida ningun
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
           <Property Name="IdSucursal" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_rol_detalle_saldo_por_pagar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwRo_rol_detalle_saldo_por_pagar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_rol_detalle_saldo_por_pagar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2547,8 +2537,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_rol_detalle_saldo_por_pagar' 
           <Property Name="em_tipoCta" Type="varchar" MaxLength="25" />
           <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rubro_tipo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_rubro_tipo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rubro_tipo">
           <Key>
             <PropertyRef Name="ru_descripcion" />
@@ -2558,8 +2548,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_rubro_tipo' no tiene definida
           <Property Name="ru_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_SancionesPorMarcaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_SancionesPorMarcaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_SancionesPorMarcaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2585,8 +2575,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_SancionesPorMarcaciones' no t
           <Property Name="FechaFin" Type="date" Nullable="false" />
           <Property Name="FechaNovedades" Type="date" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_SancionesPorMarcaciones_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_SancionesPorMarcaciones_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_SancionesPorMarcaciones_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2623,8 +2613,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_SancionesPorMarcaciones_det' 
           <Property Name="FechaRegistro" Type="date" Nullable="false" />
           <Property Name="HoraSalio" Type="time" Precision="7" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_SancionesPorMarcaciones_x_novedad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_SancionesPorMarcaciones_x_novedad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_SancionesPorMarcaciones_x_novedad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2656,8 +2646,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwro_SancionesPorMarcaciones_x_nov
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_Solicitud_Vacaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwRo_Solicitud_Vacaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwRo_Solicitud_Vacaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2710,8 +2700,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwRo_Solicitud_Vacaciones' no tien
           <Property Name="IdLiquidacion" Type="int" />
           <Property Name="Estado_liquidacion" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.EntidadRegulatoria.vwrdep_IngrEgr_x_Empleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.EntidadRegulatoria.vwrdep_IngrEgr_x_Empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwrdep_IngrEgr_x_Empleado">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2745,8 +2735,8 @@ advertencia 6002: La tabla o vista 'DBERP.EntidadRegulatoria.vwrdep_IngrEgr_x_Em
           <Property Name="Utilidades" Type="float" Nullable="false" />
           <Property Name="IngresoVarios" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.EntidadRegulatoria.vwro_ArchivosIess' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.EntidadRegulatoria.vwro_ArchivosIess' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_ArchivosIess">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2780,8 +2770,8 @@ advertencia 6002: La tabla o vista 'DBERP.EntidadRegulatoria.vwro_ArchivosIess' 
           <Property Name="IdPeriodo" Type="int" Nullable="false" />
           <Property Name="Sueldo" Type="float" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwro_empleado_x_Proyeccion_Gastos_Personales' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwro_empleado_x_Proyeccion_Gastos_Personales' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_Proyeccion_Gastos_Personales">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2800,8 +2790,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_empleado_x_Proyeccion_Gastos_
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="estado" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_rol_detalle_generar_op">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -4575,6 +4565,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
           <Parameter Name="Observacion" Type="varchar" Mode="In" />
           <Parameter Name="IdRol" Type="int" Mode="In" />
+          <Parameter Name="IdSucursalInicio" Type="int" Mode="In" />
+          <Parameter Name="IdSucursalFin" Type="int" Mode="In" />
         </Function>
         <Function Name="spRo_procesa_Rol_bono" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -5175,8 +5167,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
     [vwro_nomina_x_horas_extras_aprobadas].[IdEmpleado] AS [IdEmpleado], 
     [vwro_nomina_x_horas_extras_aprobadas].[Valor25] AS [Valor25], 
     [vwro_nomina_x_horas_extras_aprobadas].[Valor50] AS [Valor50], 
-    [vwro_nomina_x_horas_extras_aprobadas].[Valor100] AS [Valor100], 
-    [vwro_nomina_x_horas_extras_aprobadas].[IdSucursal] AS [IdSucursal]
+    [vwro_nomina_x_horas_extras_aprobadas].[Valor100] AS [Valor100]
     FROM [dbo].[vwro_nomina_x_horas_extras_aprobadas] AS [vwro_nomina_x_horas_extras_aprobadas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_nomina_x_horas_extras_det" EntityType="Self.vwro_nomina_x_horas_extras_det" store:Type="Views" store:Schema="dbo">
@@ -5205,11 +5196,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
     [vwro_nomina_x_horas_extras_det].[pe_nombre] AS [pe_nombre], 
     [vwro_nomina_x_horas_extras_det].[tu_descripcion] AS [tu_descripcion], 
     [vwro_nomina_x_horas_extras_det].[ca_descripcion] AS [ca_descripcion], 
-    [vwro_nomina_x_horas_extras_det].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-    [vwro_nomina_x_horas_extras_det].[Valor25] AS [Valor25], 
-    [vwro_nomina_x_horas_extras_det].[Valor50] AS [Valor50], 
-    [vwro_nomina_x_horas_extras_det].[Valor100] AS [Valor100], 
-    [vwro_nomina_x_horas_extras_det].[Sueldo_base] AS [Sueldo_base]
+    [vwro_nomina_x_horas_extras_det].[pe_cedulaRuc] AS [pe_cedulaRuc]
     FROM [dbo].[vwro_nomina_x_horas_extras_det] AS [vwro_nomina_x_horas_extras_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_NominasPagosCheques" EntityType="Self.vwro_NominasPagosCheques" store:Type="Views" store:Schema="dbo">
@@ -7787,15 +7774,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
             <End Role="ro_HorasProfesores_det" EntitySet="ro_HorasProfesores_det" />
           </AssociationSet>
           <EntitySet Name="vwro_HorasProfesores_det" EntityType="Model_rrhh.vwro_HorasProfesores_det" />
-          <FunctionImport Name="spRo_procesa_Rol_anticipo">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="IdNomina" Mode="In" Type="Decimal" />
-            <Parameter Name="IdNominaTipo" Mode="In" Type="Decimal" />
-            <Parameter Name="IdPEriodo" Mode="In" Type="Decimal" />
-            <Parameter Name="IdUsuario" Mode="In" Type="String" />
-            <Parameter Name="Observacion" Mode="In" Type="String" />
-            <Parameter Name="IdRol" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="vwro_nomina_sin_percebir_sueldo" EntityType="Model_rrhh.vwro_nomina_sin_percebir_sueldo" />
           <EntitySet Name="ro_FormulaHorasRecargo" EntityType="Model_rrhh.ro_FormulaHorasRecargo" />
           <EntitySet Name="vwRo_Solicitud_Vacaciones" EntityType="Model_rrhh.vwRo_Solicitud_Vacaciones" />
@@ -8133,6 +8111,17 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           </AssociationSet>
           <EntitySet Name="vwro_nomina_x_horas_extras_det" EntityType="Model_rrhh.vwro_nomina_x_horas_extras_det" />
           <EntitySet Name="vwro_nomina_x_horas_extras_aprobadas" EntityType="Model_rrhh.vwro_nomina_x_horas_extras_aprobadas" />
+          <FunctionImport Name="spRo_procesa_Rol_anticipo">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdNomina" Mode="In" Type="Decimal" />
+            <Parameter Name="IdNominaTipo" Mode="In" Type="Decimal" />
+            <Parameter Name="IdPEriodo" Mode="In" Type="Decimal" />
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="Observacion" Mode="In" Type="String" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursalInicio" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursalFin" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -11298,7 +11287,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdCargo" Type="Int32" Nullable="false" />
-          <Property Name="ca_descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ca_descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
@@ -12960,7 +12949,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spRo_procesa_Rol_anticipo" FunctionName="Model_rrhh.Store.spRo_procesa_Rol_anticipo" />
           <EntitySetMapping Name="vwro_nomina_sin_percebir_sueldo">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_nomina_sin_percebir_sueldo">
               <MappingFragment StoreEntitySet="vwro_nomina_sin_percebir_sueldo">
@@ -13735,10 +13723,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <EntitySetMapping Name="vwro_nomina_x_horas_extras_det">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_nomina_x_horas_extras_det">
               <MappingFragment StoreEntitySet="vwro_nomina_x_horas_extras_det">
-                <ScalarProperty Name="Sueldo_base" ColumnName="Sueldo_base" />
-                <ScalarProperty Name="Valor100" ColumnName="Valor100" />
-                <ScalarProperty Name="Valor50" ColumnName="Valor50" />
-                <ScalarProperty Name="Valor25" ColumnName="Valor25" />
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
                 <ScalarProperty Name="tu_descripcion" ColumnName="tu_descripcion" />
@@ -13770,7 +13754,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
           <EntitySetMapping Name="vwro_nomina_x_horas_extras_aprobadas">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_nomina_x_horas_extras_aprobadas">
               <MappingFragment StoreEntitySet="vwro_nomina_x_horas_extras_aprobadas">
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="Valor100" ColumnName="Valor100" />
                 <ScalarProperty Name="Valor50" ColumnName="Valor50" />
                 <ScalarProperty Name="Valor25" ColumnName="Valor25" />
@@ -13783,6 +13766,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwro_rol_detalle_generar_op' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spRo_procesa_Rol_anticipo" FunctionName="Model_rrhh.Store.spRo_procesa_Rol_anticipo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
