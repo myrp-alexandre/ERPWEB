@@ -4,7 +4,7 @@ SELECT        dbo.cp_retencion.IdEmpresa, dbo.cp_retencion.IdRetencion, dbo.cp_r
                          dbo.cp_retencion.Fecha_Autorizacion, dbo.cp_retencion.fecha, dbo.cp_retencion.observacion, dbo.cp_retencion.re_Tiene_RTiva, dbo.cp_orden_giro.co_serie, dbo.cp_orden_giro.co_factura, dbo.cp_orden_giro.co_subtotal_iva, 
                          dbo.cp_orden_giro.co_subtotal_siniva, dbo.cp_orden_giro.co_baseImponible, dbo.cp_orden_giro.co_valoriva, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.tb_persona.pe_razonSocial, 
                          dbo.cp_retencion.re_Tiene_RFuente, dbo.cp_retencion_x_ct_cbtecble.ct_IdTipoCbte, dbo.cp_retencion_x_ct_cbtecble.ct_IdCbteCble, dbo.cp_proveedor.IdProveedor, dbo.cp_retencion.Estado, 
-                         dbo.tb_persona.pe_nombreCompleto, dbo.cp_retencion.IdEmpresa_Ogiro, dbo.cp_retencion.IdCbteCble_Ogiro, dbo.cp_retencion.IdTipoCbte_Ogiro, dbo.cp_orden_giro.IdSucursal
+                         dbo.tb_persona.pe_nombreCompleto, dbo.cp_retencion.IdEmpresa_Ogiro, dbo.cp_retencion.IdCbteCble_Ogiro, dbo.cp_retencion.IdTipoCbte_Ogiro, dbo.cp_orden_giro.IdSucursal, dbo.cp_orden_giro.IdSucursal_cxp
 FROM            dbo.cp_retencion INNER JOIN
                          dbo.cp_orden_giro ON dbo.cp_retencion.IdEmpresa_Ogiro = dbo.cp_orden_giro.IdEmpresa AND dbo.cp_retencion.IdCbteCble_Ogiro = dbo.cp_orden_giro.IdCbteCble_Ogiro AND 
                          dbo.cp_retencion.IdTipoCbte_Ogiro = dbo.cp_orden_giro.IdTipoCbte_Ogiro INNER JOIN
@@ -50,6 +50,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'vwcp_retencion';
+
+
 
 
 
@@ -144,7 +146,7 @@ Begin DesignProperties =
                Right = 937
             End
             DisplayFlags = 280
-            TopColumn = 18
+            TopColumn = 25
          End
          Begin Table = "cp_proveedor"
             Begin Extent = 
@@ -197,6 +199,8 @@ Begin DesignProperties =
          Width = 1500
          Width = 1500
          Width = 1500', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'vwcp_retencion';
+
+
 
 
 

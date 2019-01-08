@@ -1,5 +1,4 @@
-﻿
---exec [dbo].[spcp_Get_Data_orden_pago_con_cancelacion_data] 1,1195,1195,'PROVEE',212,212,'APRO','admin',0
+﻿--exec [dbo].[spcp_Get_Data_orden_pago_con_cancelacion_data] 1,1195,1195,'PROVEE',212,212,'APRO','admin',0
 CREATE PROCEDURE [dbo].[spcp_Get_Data_orden_pago_con_cancelacion_data]
 (
 @IdEmpresa int,
@@ -60,10 +59,11 @@ set Referencia=doc.Codigo+'#' + CAST( CAST( OG.co_factura AS NUMERIC)  AS VARCHA
 ,Referencia2=doc.Codigo+'#' + CAST( CAST(OG.co_factura AS NUMERIC) AS VARCHAR(20))
 ,Fecha_Fa_Prov=OG.co_FechaFactura
 ,Fecha_Venc_Fac_Prov=OG.co_FechaFactura_vct
-,Girar_Cheque_a = Girar_Cheque_a
+,Girar_Cheque_a = ISNULL(suc.Su_Descripcion, Girar_Cheque_a)
 FROM            [cp_orden_pago_con_cancelacion_data]  AS data INNER JOIN
                          cp_orden_giro AS OG ON data.IdEmpresa_cxp = OG.IdEmpresa AND data.IdTipoCbte_cxp = OG.IdTipoCbte_Ogiro AND data.IdCbteCble_cxp = OG.IdCbteCble_Ogiro INNER JOIN
-                         cp_TipoDocumento AS doc ON OG.IdOrden_giro_Tipo = doc.CodTipoDocumento 
+                         cp_TipoDocumento AS doc ON OG.IdOrden_giro_Tipo = doc.CodTipoDocumento  LEFT JOIN tb_sucursal AS Suc
+						 on og.IdEmpresa = suc.IdEmpresa and og.IdSucursal_cxp = suc.IdSucursal
 where data.IdUsuario = @IdUsuario
 
 update [cp_orden_pago_con_cancelacion_data]  

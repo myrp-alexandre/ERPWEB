@@ -30,6 +30,7 @@
     [IdPersona]                NUMERIC (18)  NULL,
     [IdEntidad]                NUMERIC (18)  NULL,
     [IdTipo_Persona]           VARCHAR (20)  NULL,
+    [IdSolicitudPago]          NUMERIC (18)  NULL,
     CONSTRAINT [PK_ba_Cbte_Ban] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdCbteCble] ASC, [IdTipocbte] ASC),
     CONSTRAINT [FK_ba_Cbte_Ban_ba_Banco_Cuenta] FOREIGN KEY ([IdEmpresa], [IdBanco]) REFERENCES [dbo].[ba_Banco_Cuenta] ([IdEmpresa], [IdBanco]),
     CONSTRAINT [FK_ba_Cbte_Ban_ba_Catalogo] FOREIGN KEY ([IdEstado_Cbte_Ban_cat]) REFERENCES [dbo].[ba_Catalogo] ([IdCatalogo]),
@@ -42,6 +43,8 @@
     CONSTRAINT [FK_ba_Cbte_Ban_tb_persona] FOREIGN KEY ([IdPersona_Girado_a]) REFERENCES [dbo].[tb_persona] ([IdPersona]),
     CONSTRAINT [FK_ba_Cbte_Ban_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 
 
 
