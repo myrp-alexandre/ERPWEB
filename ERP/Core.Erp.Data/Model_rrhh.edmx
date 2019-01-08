@@ -2199,6 +2199,7 @@ warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_aprobadas' do
             <PropertyRef Name="Valor25" />
             <PropertyRef Name="Valor50" />
             <PropertyRef Name="Valor100" />
+            <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdHorasExtras" Type="int" Nullable="false" />
@@ -2209,6 +2210,7 @@ warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_aprobadas' do
           <Property Name="Valor25" Type="float" Nullable="false" />
           <Property Name="Valor50" Type="float" Nullable="false" />
           <Property Name="Valor100" Type="float" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2233,6 +2235,10 @@ warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_det' does not
             <PropertyRef Name="tu_descripcion" />
             <PropertyRef Name="ca_descripcion" />
             <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="Valor25" />
+            <PropertyRef Name="Valor50" />
+            <PropertyRef Name="Valor100" />
+            <PropertyRef Name="Sueldo_base" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdHorasExtras" Type="int" Nullable="false" />
@@ -2257,8 +2263,12 @@ warning 6002: The table/view 'DBERP.dbo.vwro_nomina_x_horas_extras_det' does not
           <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
           <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
           <Property Name="tu_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ca_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ca_descripcion" Type="varchar(max)" Nullable="false" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Valor25" Type="float" Nullable="false" />
+          <Property Name="Valor50" Type="float" Nullable="false" />
+          <Property Name="Valor100" Type="float" Nullable="false" />
+          <Property Name="Sueldo_base" Type="float" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_NominasPagosCheques' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5167,7 +5177,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_nomina_x_horas_extras_aprobadas].[IdEmpleado] AS [IdEmpleado], 
     [vwro_nomina_x_horas_extras_aprobadas].[Valor25] AS [Valor25], 
     [vwro_nomina_x_horas_extras_aprobadas].[Valor50] AS [Valor50], 
-    [vwro_nomina_x_horas_extras_aprobadas].[Valor100] AS [Valor100]
+    [vwro_nomina_x_horas_extras_aprobadas].[Valor100] AS [Valor100], 
+    [vwro_nomina_x_horas_extras_aprobadas].[IdSucursal] AS [IdSucursal]
     FROM [dbo].[vwro_nomina_x_horas_extras_aprobadas] AS [vwro_nomina_x_horas_extras_aprobadas]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_nomina_x_horas_extras_det" EntityType="Self.vwro_nomina_x_horas_extras_det" store:Type="Views" store:Schema="dbo">
@@ -5196,7 +5207,11 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_nomina_x_horas_extras_det].[pe_nombre] AS [pe_nombre], 
     [vwro_nomina_x_horas_extras_det].[tu_descripcion] AS [tu_descripcion], 
     [vwro_nomina_x_horas_extras_det].[ca_descripcion] AS [ca_descripcion], 
-    [vwro_nomina_x_horas_extras_det].[pe_cedulaRuc] AS [pe_cedulaRuc]
+    [vwro_nomina_x_horas_extras_det].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwro_nomina_x_horas_extras_det].[Valor25] AS [Valor25], 
+    [vwro_nomina_x_horas_extras_det].[Valor50] AS [Valor50], 
+    [vwro_nomina_x_horas_extras_det].[Valor100] AS [Valor100], 
+    [vwro_nomina_x_horas_extras_det].[Sueldo_base] AS [Sueldo_base]
     FROM [dbo].[vwro_nomina_x_horas_extras_det] AS [vwro_nomina_x_horas_extras_det]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_NominasPagosCheques" EntityType="Self.vwro_NominasPagosCheques" store:Type="Views" store:Schema="dbo">
@@ -8109,8 +8124,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_cargo" EntitySet="ro_cargo" />
             <End Role="ro_empleado" EntitySet="ro_empleado" />
           </AssociationSet>
-          <EntitySet Name="vwro_nomina_x_horas_extras_det" EntityType="Model_rrhh.vwro_nomina_x_horas_extras_det" />
-          <EntitySet Name="vwro_nomina_x_horas_extras_aprobadas" EntityType="Model_rrhh.vwro_nomina_x_horas_extras_aprobadas" />
           <FunctionImport Name="spRo_procesa_Rol_anticipo">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdNomina" Mode="In" Type="Decimal" />
@@ -8122,6 +8135,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Parameter Name="IdSucursalInicio" Mode="In" Type="Int32" />
             <Parameter Name="IdSucursalFin" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="vwro_nomina_x_horas_extras_aprobadas" EntityType="Model_rrhh.vwro_nomina_x_horas_extras_aprobadas" />
+          <EntitySet Name="vwro_nomina_x_horas_extras_det" EntityType="Model_rrhh.vwro_nomina_x_horas_extras_det" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -11330,6 +11345,30 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwro_nomina_x_horas_extras_aprobadas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdHorasExtras" />
+            <PropertyRef Name="IdNominaTipo" />
+            <PropertyRef Name="IdNominaTipoLiqui" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="Valor25" />
+            <PropertyRef Name="Valor50" />
+            <PropertyRef Name="Valor100" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdHorasExtras" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Valor25" Type="Double" Nullable="false" />
+          <Property Name="Valor50" Type="Double" Nullable="false" />
+          <Property Name="Valor100" Type="Double" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="vwro_nomina_x_horas_extras_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -11379,36 +11418,12 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="tu_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Valor25" Type="Double" Nullable="false" />
           <Property Name="Valor50" Type="Double" Nullable="false" />
           <Property Name="Valor100" Type="Double" Nullable="false" />
           <Property Name="Sueldo_base" Type="Double" Nullable="false" />
-        </EntityType>
-        <EntityType Name="vwro_nomina_x_horas_extras_aprobadas">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdHorasExtras" />
-            <PropertyRef Name="IdNominaTipo" />
-            <PropertyRef Name="IdNominaTipoLiqui" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="Valor25" />
-            <PropertyRef Name="Valor50" />
-            <PropertyRef Name="Valor100" />
-            <PropertyRef Name="IdSucursal" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdHorasExtras" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
-          <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Valor25" Type="Double" Nullable="false" />
-          <Property Name="Valor50" Type="Double" Nullable="false" />
-          <Property Name="Valor100" Type="Double" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -13720,9 +13735,30 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spRo_procesa_Rol_anticipo" FunctionName="Model_rrhh.Store.spRo_procesa_Rol_anticipo" />
+          <EntitySetMapping Name="vwro_nomina_x_horas_extras_aprobadas">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_nomina_x_horas_extras_aprobadas">
+              <MappingFragment StoreEntitySet="vwro_nomina_x_horas_extras_aprobadas">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Valor100" ColumnName="Valor100" />
+                <ScalarProperty Name="Valor50" ColumnName="Valor50" />
+                <ScalarProperty Name="Valor25" ColumnName="Valor25" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
+                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
+                <ScalarProperty Name="IdHorasExtras" ColumnName="IdHorasExtras" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="vwro_nomina_x_horas_extras_det">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_nomina_x_horas_extras_det">
               <MappingFragment StoreEntitySet="vwro_nomina_x_horas_extras_det">
+                <ScalarProperty Name="Sueldo_base" ColumnName="Sueldo_base" />
+                <ScalarProperty Name="Valor100" ColumnName="Valor100" />
+                <ScalarProperty Name="Valor50" ColumnName="Valor50" />
+                <ScalarProperty Name="Valor25" ColumnName="Valor25" />
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
                 <ScalarProperty Name="tu_descripcion" ColumnName="tu_descripcion" />
@@ -13751,22 +13787,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwro_nomina_x_horas_extras_aprobadas">
-            <EntityTypeMapping TypeName="Model_rrhh.vwro_nomina_x_horas_extras_aprobadas">
-              <MappingFragment StoreEntitySet="vwro_nomina_x_horas_extras_aprobadas">
-                <ScalarProperty Name="Valor100" ColumnName="Valor100" />
-                <ScalarProperty Name="Valor50" ColumnName="Valor50" />
-                <ScalarProperty Name="Valor25" ColumnName="Valor25" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
-                <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
-                <ScalarProperty Name="IdHorasExtras" ColumnName="IdHorasExtras" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spRo_procesa_Rol_anticipo" FunctionName="Model_rrhh.Store.spRo_procesa_Rol_anticipo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
