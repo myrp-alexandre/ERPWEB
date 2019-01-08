@@ -74,8 +74,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public int Dias_Vencidos { get; set; }
         public double Total_Pagado { get; set; }
         public Nullable<double> Saldo_OG { get; set; }
-        public Nullable<decimal> IdSolicitudPago { get; set; }
-        public Nullable<int> IdBodega { get; set; }
+        public int IdBodega { get; set; }
         
 
         #region Campos que no existen en la tabla

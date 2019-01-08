@@ -96,7 +96,6 @@ namespace Core.Erp.Data.General
                         Su_CodigoEstablecimiento = q.Su_CodigoEstablecimiento,
                         Su_Direccion = q.Su_Direccion,
                         Su_JefeSucursal = q.Su_JefeSucursal,
-                        Su_Ubicacion = q.Su_Ubicacion,
                         Su_Ruc = q.Su_Ruc,
                         Su_Telefonos = q.Su_Telefonos,
                         
@@ -193,7 +192,6 @@ namespace Core.Erp.Data.General
                         codigo = info.codigo,
                         Su_Descripcion = info.Su_Descripcion,
                         Su_CodigoEstablecimiento = info.Su_CodigoEstablecimiento,
-                        Su_Ubicacion = info.Su_Ubicacion,
                         Su_Ruc = info.Su_Ruc,
                         Su_JefeSucursal = info.Su_JefeSucursal,
                         Su_Telefonos = info.Su_Telefonos,
@@ -228,7 +226,6 @@ namespace Core.Erp.Data.General
                     Entity.codigo = info.codigo;
                     Entity.Su_Descripcion = info.Su_Descripcion;
                     Entity.Su_CodigoEstablecimiento = info.Su_CodigoEstablecimiento;
-                    Entity.Su_Ubicacion = info.Su_Ubicacion;
                     Entity.Su_Ruc = info.Su_Ruc;
                     Entity.Su_JefeSucursal = info.Su_JefeSucursal;
                     Entity.Su_Telefonos = info.Su_Telefonos;
@@ -294,7 +291,6 @@ namespace Core.Erp.Data.General
                          Su_CodigoEstablecimiento = Entity.Su_CodigoEstablecimiento,
                          Su_Direccion = Entity.Su_Direccion,
                          Su_JefeSucursal = Entity.Su_JefeSucursal,
-                         Su_Ubicacion = Entity.Su_Ubicacion,
                          Su_Ruc = Entity.Su_Ruc,
                          Su_Telefonos = Entity.Su_Telefonos                         
                      };

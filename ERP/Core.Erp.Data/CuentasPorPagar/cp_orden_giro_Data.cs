@@ -67,18 +67,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now,
                         IdBodega = info.IdBodega,                        
                     };
-
-                    #region Solicitud
-                    if (info.IdSolicitudPago != null)
-                    {
-                        decimal IdSolicitud = Convert.ToDecimal(info.IdSolicitudPago);
-                        var Solicitud = Context.cp_SolicitudPago.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSolicitud == IdSolicitud).FirstOrDefault();
-                        if (Solicitud != null)
-                            Entity.IdSolicitudPago = Solicitud.IdSolicitud;
-                    }                   
-                    #endregion
-
-
+                                       
                     if (info.lst_det.Count > 0)
                     {
                         int secuencia = 1;
@@ -195,15 +184,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Entity.IdTipoMovi = info.IdTipoMovi;
                         Entity.IdBodega = info.IdBodega;
 
-                        #region Solicitud
-                        if (info.IdSolicitudPago != null)
-                        {
-                            decimal IdSolicitud = Convert.ToDecimal(info.IdSolicitudPago);
-                            var Solicitud = Context.cp_SolicitudPago.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSolicitud == IdSolicitud).FirstOrDefault();
-                            if (Solicitud != null)
-                                Entity.IdSolicitudPago = Solicitud.IdSolicitud;
-                        }
-                        #endregion
                     }
 
                     if (info.lst_det.Count > 0)
@@ -529,15 +509,13 @@ namespace Core.Erp.Data.CuentasPorPagar
                 throw;
             }
         }
-        public List<cp_orden_giro_Info> get_lst_orden_giro_x_pagar(int IdEmpresa, decimal IdSolicitudPago)
+        public List<cp_orden_giro_Info> get_lst_orden_giro_x_pagar(int IdEmpresa)
         {
             try
             {
                 List<cp_orden_giro_Info> Lista = null;
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    if (IdSolicitudPago == 0)
-                    {
                     Lista = (from q in Context.vwcp_orden_giro_x_pagar
                              where q.IdEmpresa == IdEmpresa
                              & q.Saldo_OG > 0
@@ -565,7 +543,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  Saldo_OG = q.Saldo_OG,
                                  Fecha_Transac = q.co_FechaFactura_vct,
                                  nom_tipo_Documento = q.nom_tipo_Documento,
-                                 IdSolicitudPago = q.IdSolicitudPago,
                                  info_proveedor = new cp_proveedor_Info
                                  {
                                      IdPersona = q.IdPersona,
@@ -579,49 +556,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                              }).ToList();
 
-                    }else
-                        Lista = (from q in Context.vwcp_orden_giro_x_pagar
-                                 where q.IdEmpresa == IdEmpresa
-                                 & q.Saldo_OG > 0 && q.IdSolicitudPago == IdSolicitudPago
-                                 orderby q.co_fechaOg descending
-                                 select new cp_orden_giro_Info
-                                 {
-                                     IdEmpresa = q.IdEmpresa,
-                                     IdCbteCble_Ogiro = q.IdCbteCble_Ogiro,
-                                     IdTipoCbte_Ogiro = q.IdTipoCbte_Ogiro,
-                                     IdOrden_giro_Tipo = q.IdOrden_giro_Tipo,
-                                     IdProveedor = q.IdProveedor,
-                                     co_fechaOg = q.co_fechaOg,
-                                     co_serie = q.co_serie,
-                                     co_factura = q.cod_Documento + "-" + q.co_serie + "-" + q.co_factura,
-                                     co_FechaFactura = q.co_FechaFactura,
-                                     co_observacion = q.co_observacion,
-                                     co_subtotal_iva = q.co_subtotal_iva,
-                                     co_subtotal_siniva = q.co_subtotal_siniva,
-                                     co_baseImponible = q.co_baseImponible,
-                                     co_Por_iva = q.co_Por_iva,
-                                     co_valoriva = q.co_valoriva,
-                                     co_total = q.co_total,
-                                     co_valorpagar = q.co_valorpagar,
-                                     Total_Pagado = q.Total_Pagado,
-                                     Saldo_OG = q.Saldo_OG,
-                                     Fecha_Transac = q.co_FechaFactura_vct,
-                                     nom_tipo_Documento = q.nom_tipo_Documento,
-                                     IdSolicitudPago = q.IdSolicitudPago,
-                                     info_proveedor = new cp_proveedor_Info
-                                     {
-                                         IdPersona = q.IdPersona,
-                                         info_persona = new Info.General.tb_persona_Info
-                                         {
-                                             pe_razonSocial = q.nom_proveedor,
-                                             IdPersona = q.IdPersona,
-                                             pe_nombreCompleto = q.nom_proveedor
-                                         }
-                                     },
-
-                                 }).ToList();
-                }
-                Lista.ForEach(item =>
+                    Lista.ForEach(item =>
                 {
                     item.SecuencialID = item.IdEmpresa.ToString("00") + item.IdTipoCbte_Ogiro.ToString("00") + item.IdCbteCble_Ogiro.ToString("000000000");
                     item.co_FechaFactura_vct = item.Fecha_Transac == null ? DateTime.Now.Date : Convert.ToDateTime(item.Fecha_Transac);
@@ -641,8 +576,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         item.Tipo_Vcto = "X_VENCER";
                     }
                 });
-                return Lista;
-
+                    return Lista;
+                }
             }
             catch (Exception)
             {
@@ -707,7 +642,6 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdTipoMovi = Entity.IdTipoMovi,
                         Estado = Entity.Estado,
                         IdBodega = Entity.IdBodega,
-                        IdSolicitudPago = Entity.IdSolicitudPago
                     };
                 }
                 return info;

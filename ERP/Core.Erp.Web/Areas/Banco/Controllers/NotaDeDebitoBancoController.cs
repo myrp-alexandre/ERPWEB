@@ -335,7 +335,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (IdEntidad == 0)
                 model = new List<cp_orden_pago_cancelaciones_Info>();
             else
-                model = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, SessionFixed.TipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false,0);
+                model = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, SessionFixed.TipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false);
             return PartialView("_GridViewPartial_DebitoBanco_op_x_cruzar", model);
         }
 
@@ -357,7 +357,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 if (IdEntidad == 0)
                     lst_x_cruzar = new List<cp_orden_pago_cancelaciones_Info>();
                 else
-                    lst_x_cruzar = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, SessionFixed.TipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false,0);
+                    lst_x_cruzar = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, SessionFixed.TipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false);
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {

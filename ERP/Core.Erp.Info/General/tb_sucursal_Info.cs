@@ -18,8 +18,6 @@ namespace Core.Erp.Info.General
         public string Su_Descripcion { get; set; }
         [StringLength(30, MinimumLength = 0, ErrorMessage = "El campo establecimiento debe tener mínimo 0 caracter y máximo 30")]
         public string Su_CodigoEstablecimiento { get; set; }
-        [StringLength(20, MinimumLength = 0, ErrorMessage = "El campo ubicación debe tener mínimo 0 caracter y máximo 20")]
-        public string Su_Ubicacion { get; set; }
         [StringLength(15, MinimumLength = 0, ErrorMessage = "El campo ruc debe tener mínimo 0 caracter y máximo 15")]
         public string Su_Ruc { get; set; }
         [StringLength(100, MinimumLength = 0, ErrorMessage = "El campo ruc debe tener mínimo 0 caracter y máximo 100")]

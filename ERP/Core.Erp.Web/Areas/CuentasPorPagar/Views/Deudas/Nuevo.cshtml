@@ -244,14 +244,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="co_plazo"># Solicitud</label>
-                    @Html.TextBoxFor(q => q.IdSolicitudPago, new { @class = "form-control", @id = "IdSolicitudPago" })
-                    @Html.ValidationMessageFor(q => q.IdSolicitudPago, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-offset-4 col-md-4">
                 <div class="form-group">
                     <label for="co_plazo">Plazo*</label>
                     @Html.TextBoxFor(q => q.co_plazo, new { @class = "form-control", @id = "co_plazo" })
