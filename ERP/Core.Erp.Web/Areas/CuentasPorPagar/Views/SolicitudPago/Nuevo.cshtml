@@ -26,11 +26,13 @@
             selectedIDs = values.join(',');
         };
 
+    //function MostrarModalFacturas() {
+    //    BuscarFacturas();
+    //    $("#ModalFacturas").modal("show");
+    //};
     function MostrarModalFacturas() {
-        BuscarFacturas();
-        $("#ModalFacturas").modal("show");
-    };
-    function BuscarFacturas() {
+
+        selectedIDs = "";
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSucursal: $("#IdSucursal").val(),
@@ -46,19 +48,20 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if (data == false) {
-                    alert("No existen resultados para los filtros aplicados");
-                }
+
+                GridView_aprobacion.PerformCallback();
+                GridView_aprobacion.UnselectRows();
+                $("#ModalFacturas").modal("show");
             },
             error: function (error) {
             }
         });
-        GridView_aprobacion.PerformCallback();
     };
 
     function AddFacturas() {
         var datos = {
             IDs: selectedIDs,
+            IdEmpresa: $("#IdEmpresa").val(),
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
@@ -80,7 +83,7 @@
         GridView_aprobacion.UnselectRows();
         GridView_aprobacion_solicitud.PerformCallback();
         $("#ModalFacturas").modal("hide");
-    };
+    }
 </script>
 
 @using (Html.BeginForm("Nuevo", "SolicitudPago", FormMethod.Post, new { @class = "form", @role = "form" }))
