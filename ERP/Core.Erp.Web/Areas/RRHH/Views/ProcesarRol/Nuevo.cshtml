@@ -116,7 +116,7 @@
         });
     cargar_tipo_liquidacion_nomina();
     cargar_periodos_x_nomina();
-    get_sig_periodo();
+   // get_sig_periodo();
 
         function cargar_tipo_liquidacion_nomina() {
             var datos = {
@@ -145,6 +145,7 @@
 
     function cargar_periodos_x_nomina() {
         var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
             IdNomina: $("#IdNomina_Tipo").val(),
             IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
         }

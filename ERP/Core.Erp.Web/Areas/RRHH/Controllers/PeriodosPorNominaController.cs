@@ -104,7 +104,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
-        public JsonResult get_lst_periodo_x_nomina(int IdEmpresa, int IdNomina = 0, int IdNomina_Tipo = 0)
+        public JsonResult get_lst_periodo_x_nomina(int IdEmpresa=0, int IdNomina = 0, int IdNomina_Tipo = 0)
         {
             try
             {
