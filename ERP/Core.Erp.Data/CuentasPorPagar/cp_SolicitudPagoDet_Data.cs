@@ -14,6 +14,7 @@ namespace Core.Erp.Data.CuentasPorPagar
         {
             try
             {
+                int secuencia = 1;
                 List<cp_SolicitudPagoDet_Info> Lista;
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
@@ -47,6 +48,7 @@ namespace Core.Erp.Data.CuentasPorPagar
 
                              }).ToList();
                 }
+                Lista.ForEach(v=>v.Secuencia=secuencia++);
                 return Lista;
             }
             catch (Exception)
