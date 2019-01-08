@@ -180,6 +180,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst = bus_pago_Det.GetListPorPagar(IdEmpresa, IdSucursal);
             if (lst.Count() == 0)
                 resultado = false;
+            var det = List_det_x_cruzar.get_list(IdTransaccionSession);
             List_det_x_cruzar.set_list(lst, IdTransaccionSession);
            
             return Json(resultado, JsonRequestBehavior.AllowGet);
@@ -195,12 +196,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var model = List_det_x_cruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_aprobacion", model);
         }
-        [HttpPost, ValidateInput(false)]
-
-        public ActionResult EditingAddNewAS(string IDs = "", decimal IdTransaccionSession = 0)
+        public JsonResult EditingAddNewAS(string IDs = "", decimal IdTransaccionSession = 0)
         {
-            
-            if (IDs != "")
+            bool resultado = true;
+            if (!string.IsNullOrEmpty(IDs))
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 var lst = List_det_x_cruzar.get_list(IdTransaccionSession);
@@ -213,7 +212,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 }
             }
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_aprobacion_solicitud", model);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -292,7 +291,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
     public class cp_SolicitudPago_x_cruzar
     {
-        string Variable = "cp_SolicitudPago_x_cruzar";
+        string Variable = "cp_SolicitudPagoDet_Info";
         public List<cp_SolicitudPagoDet_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
