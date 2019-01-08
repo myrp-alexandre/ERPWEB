@@ -72,5 +72,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public int get_siguinte_periodo_a_procesar(int IdEmpresa, int IdNomina_Tipo, int IdNomina_TipoLiqui)
+        {
+            try
+            {
+                return odata.get_siguinte_periodo_a_procesar(IdEmpresa,IdNomina_Tipo,IdNomina_TipoLiqui);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@ using Core.Erp.Info.SeguridadAcceso;
 using Core.Erp.Bus.SeguridadAcceso;
 using DevExpress.Web;
 using Core.Erp.Bus.Inventario;
-
+    
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
     public class SolicitudPagoController : Controller
@@ -97,6 +97,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
             };
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
+            List_det_x_cruzar.set_list(model.lst_det, model.IdTransaccionSession);
             seg_usuario_Info mod = bus_usuario.get_info(SessionFixed.IdUsuario);
             model.Solicitante = mod.Nombre;
             cargar_combos(model.IdEmpresa);
@@ -108,6 +109,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
+            model.lst_det = List_det_x_cruzar.get_list(model.IdTransaccionSession);
             if (!bus_solicitud.GuardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -180,8 +182,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst = bus_pago_Det.GetListPorPagar(IdEmpresa, IdSucursal);
             if (lst.Count() == 0)
                 resultado = false;
-            var det = List_det_x_cruzar.get_list(IdTransaccionSession);
-            List_det_x_cruzar.set_list(lst, IdTransaccionSession);
+            var det = List_det_x_cruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List_det_x_cruzar.set_list(lst, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
            
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
@@ -202,13 +204,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (!string.IsNullOrEmpty(IDs))
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                var lst = List_det_x_cruzar.get_list(IdTransaccionSession);
+                var lst = List_det_x_cruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
                     var info_det = lst.Where(q => q.Secuencia == Convert.ToInt32(item)).FirstOrDefault();
                     if (info_det != null)
-                        List_det.AddRow(info_det, IdTransaccionSession);
+                        List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 }
             }
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -218,7 +220,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         #endregion
         #region DEtalle
-        public ActionResult GridViewPartial_aprobacion_solicitud(int IdEmpresa = 0 , int IdSucursal = 0)
+        public ActionResult GridViewPartial_aprobacion_solicitud()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -291,7 +293,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
     public class cp_SolicitudPago_x_cruzar
     {
-        string Variable = "cp_SolicitudPagoDet_Info";
+        string Variable = "cp_SolicitudPago_x_cruzar";
         public List<cp_SolicitudPagoDet_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)

@@ -5,7 +5,7 @@ SELECT        he.IdEmpresa, he.IdHorasExtras, he.IdNominaTipo, he.IdNominaTipoLi
 FROM            dbo.ro_nomina_x_horas_extras AS he INNER JOIN
                          dbo.ro_nomina_x_horas_extras_det AS he_det ON he.IdEmpresa = he_det.IdEmpresa AND he.IdHorasExtras = he_det.IdHorasExtras INNER JOIN
                          dbo.ro_empleado ON he_det.IdEmpresa = dbo.ro_empleado.IdEmpresa AND he_det.IdEmpleado = dbo.ro_empleado.IdEmpleado
-WHERE        (he_det.es_HorasExtrasAutorizadas = 0)
+WHERE        (he_det.es_HorasExtrasAutorizadas = 1)
 GROUP BY he.IdEmpresa, he.IdHorasExtras, he.IdNominaTipo, he.IdNominaTipoLiqui, he.IdPeriodo, he_det.IdEmpleado, dbo.ro_empleado.IdSucursal
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_x_horas_extras_aprobadas';
@@ -17,7 +17,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[85] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[77] 4[5] 2[1] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -87,18 +87,18 @@ Begin DesignProperties =
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 136
+               Bottom = 235
                Right = 246
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 7
          End
          Begin Table = "he_det"
             Begin Extent = 
-               Top = 26
-               Left = 492
-               Bottom = 156
-               Right = 736
+               Top = 23
+               Left = 474
+               Bottom = 153
+               Right = 718
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -106,9 +106,9 @@ Begin DesignProperties =
          Begin Table = "ro_empleado"
             Begin Extent = 
                Top = 6
-               Left = 774
-               Bottom = 436
-               Right = 1079
+               Left = 756
+               Bottom = 336
+               Right = 1061
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -119,17 +119,6 @@ Begin DesignProperties =
    End
    Begin DataPane = 
       Begin ParameterDefaults = ""
-      End
-      Begin ColumnWidths = 9
-         Width = 284
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
       End
    End
    Begin CriteriaPane = 
@@ -151,4 +140,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_x_horas_extras_aprobadas';
+
+
 
