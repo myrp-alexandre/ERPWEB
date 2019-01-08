@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[ro_cargo] (
     [IdEmpresa]               INT           NOT NULL,
     [IdCargo]                 INT           NOT NULL,
-    [ca_descripcion]          VARCHAR (50)  NOT NULL,
+    [ca_descripcion]          VARCHAR (MAX) NOT NULL,
     [Estado]                  CHAR (1)      NOT NULL,
     [IdUsuario]               VARCHAR (20)  NULL,
     [Fecha_Transac]           DATETIME      NULL,
@@ -16,4 +16,6 @@
     CONSTRAINT [PK_ro_Cargo] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdCargo] ASC),
     CONSTRAINT [FK_ro_cargo_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa])
 );
+
+
 

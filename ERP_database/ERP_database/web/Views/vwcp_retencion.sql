@@ -4,7 +4,7 @@ SELECT        dbo.cp_retencion.IdEmpresa, dbo.cp_retencion.IdRetencion, dbo.cp_r
                          dbo.cp_retencion.Fecha_Autorizacion, dbo.cp_retencion.fecha, dbo.cp_retencion.observacion, dbo.cp_retencion.re_Tiene_RTiva, dbo.cp_orden_giro.co_serie, dbo.cp_orden_giro.co_factura, dbo.cp_orden_giro.co_subtotal_iva, 
                          dbo.cp_orden_giro.co_subtotal_siniva, dbo.cp_orden_giro.co_baseImponible, dbo.cp_orden_giro.co_valoriva, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.tb_persona.pe_razonSocial, 
                          dbo.cp_retencion.re_Tiene_RFuente, dbo.cp_retencion_x_ct_cbtecble.ct_IdTipoCbte, dbo.cp_retencion_x_ct_cbtecble.ct_IdCbteCble, dbo.cp_proveedor.IdProveedor, dbo.cp_retencion.Estado, 
-                         dbo.tb_persona.pe_nombreCompleto
+                         dbo.tb_persona.pe_nombreCompleto, dbo.cp_retencion.IdEmpresa_Ogiro, dbo.cp_retencion.IdCbteCble_Ogiro, dbo.cp_retencion.IdTipoCbte_Ogiro, dbo.cp_orden_giro.IdSucursal
 FROM            dbo.cp_retencion INNER JOIN
                          dbo.cp_orden_giro ON dbo.cp_retencion.IdEmpresa_Ogiro = dbo.cp_orden_giro.IdEmpresa AND dbo.cp_retencion.IdCbteCble_Ogiro = dbo.cp_orden_giro.IdCbteCble_Ogiro AND 
                          dbo.cp_retencion.IdTipoCbte_Ogiro = dbo.cp_orden_giro.IdTipoCbte_Ogiro INNER JOIN
@@ -52,13 +52,15 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'vwcp_retencion';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[65] 4[5] 2[14] 3) )"
+         Configuration = "(H (1[39] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -132,17 +134,17 @@ Begin DesignProperties =
                Right = 236
             End
             DisplayFlags = 280
-            TopColumn = 7
+            TopColumn = 9
          End
          Begin Table = "cp_orden_giro"
             Begin Extent = 
-               Top = 185
-               Left = 403
-               Bottom = 508
-               Right = 662
+               Top = 53
+               Left = 678
+               Bottom = 540
+               Right = 937
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 18
          End
          Begin Table = "cp_proveedor"
             Begin Extent = 
@@ -194,5 +196,7 @@ Begin DesignProperties =
          Width = 1500
          Width = 1500
          Width = 1500
-         Width = 1500', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'vwcp_retencion';
+         Width = 1500', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'vwcp_retencion';
+
+
 

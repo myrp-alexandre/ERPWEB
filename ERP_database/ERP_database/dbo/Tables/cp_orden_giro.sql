@@ -34,7 +34,8 @@
     [MotivoAnu]                     VARCHAR (150)  NULL,
     [Fecha_UltAnu]                  DATETIME       NULL,
     [IdSucursal]                    INT            NOT NULL,
-    [IdBodega]                      INT            NULL,
+    [IdBodega]                      INT            NOT NULL,
+    [IdSucursal_cxp]                INT            NULL,
     [PagoLocExt]                    VARCHAR (3)    NULL,
     [PaisPago]                      VARCHAR (5)    NULL,
     [ConvenioTributacion]           VARCHAR (2)    NULL,
@@ -51,7 +52,6 @@
     [aut_doc_Modificar]             VARCHAR (100)  NULL,
     [IdTipoMovi]                    INT            NULL,
     [aprobada_enviar_sri]           BIT            NOT NULL,
-    [IdSolicitudPago]               NUMERIC (18)   NULL,
     CONSTRAINT [PK_cp_orden_giro] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdCbteCble_Ogiro] ASC, [IdTipoCbte_Ogiro] ASC),
     CONSTRAINT [FK_cp_orden_giro_ba_TipoFlujo] FOREIGN KEY ([IdEmpresa], [IdTipoFlujo]) REFERENCES [dbo].[ba_TipoFlujo] ([IdEmpresa], [IdTipoFlujo]),
     CONSTRAINT [FK_cp_orden_giro_caj_Caja_Movimiento_Tipo] FOREIGN KEY ([IdEmpresa], [IdTipoMovi]) REFERENCES [dbo].[caj_Caja_Movimiento_Tipo] ([IdEmpresa], [IdTipoMovi]),
@@ -61,8 +61,11 @@
     CONSTRAINT [FK_cp_orden_giro_cp_pais_sri] FOREIGN KEY ([PaisPago]) REFERENCES [dbo].[cp_pais_sri] ([Codigo]),
     CONSTRAINT [FK_cp_orden_giro_cp_proveedor] FOREIGN KEY ([IdEmpresa], [IdProveedor]) REFERENCES [dbo].[cp_proveedor] ([IdEmpresa], [IdProveedor]),
     CONSTRAINT [FK_cp_orden_giro_ct_cbtecble] FOREIGN KEY ([IdEmpresa], [IdTipoCbte_Ogiro], [IdCbteCble_Ogiro]) REFERENCES [dbo].[ct_cbtecble] ([IdEmpresa], [IdTipoCbte], [IdCbteCble]),
-    CONSTRAINT [FK_cp_orden_giro_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
+    CONSTRAINT [FK_cp_orden_giro_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal]),
+    CONSTRAINT [FK_cp_orden_giro_tb_sucursal1] FOREIGN KEY ([IdEmpresa], [IdSucursal_cxp]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 
 
 

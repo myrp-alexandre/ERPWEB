@@ -1,4 +1,5 @@
-﻿--exec [dbo].[spcp_Get_Data_orden_pago_con_cancelacion_data] 1,1195,1195,'PROVEE',212,212,'APRO','admin',0
+﻿
+--exec [dbo].[spcp_Get_Data_orden_pago_con_cancelacion_data] 1,1195,1195,'PROVEE',212,212,'APRO','admin',0
 CREATE PROCEDURE [dbo].[spcp_Get_Data_orden_pago_con_cancelacion_data]
 (
 @IdEmpresa int,
@@ -9,8 +10,7 @@ CREATE PROCEDURE [dbo].[spcp_Get_Data_orden_pago_con_cancelacion_data]
 @IdEntidad_fin numeric,
 @IdEstado_Aprobacion varchar(10),
 @IdUsuario varchar(20),
-@mostrar_saldo_0 bit,
-@IdSolicitudPago numeric
+@mostrar_saldo_0 bit
 )
 AS
 BEGIN
@@ -60,10 +60,10 @@ set Referencia=doc.Codigo+'#' + CAST( CAST( OG.co_factura AS NUMERIC)  AS VARCHA
 ,Referencia2=doc.Codigo+'#' + CAST( CAST(OG.co_factura AS NUMERIC) AS VARCHAR(20))
 ,Fecha_Fa_Prov=OG.co_FechaFactura
 ,Fecha_Venc_Fac_Prov=OG.co_FechaFactura_vct
-,Girar_Cheque_a = isnull(sol.GiradoA,Girar_Cheque_a)
+,Girar_Cheque_a = Girar_Cheque_a
 FROM            [cp_orden_pago_con_cancelacion_data]  AS data INNER JOIN
                          cp_orden_giro AS OG ON data.IdEmpresa_cxp = OG.IdEmpresa AND data.IdTipoCbte_cxp = OG.IdTipoCbte_Ogiro AND data.IdCbteCble_cxp = OG.IdCbteCble_Ogiro INNER JOIN
-                         cp_TipoDocumento AS doc ON OG.IdOrden_giro_Tipo = doc.CodTipoDocumento left join cp_SolicitudPago as sol on og.IdEmpresa = sol.IdEmpresa and sol.IdSolicitud = og.IdSolicitudPago
+                         cp_TipoDocumento AS doc ON OG.IdOrden_giro_Tipo = doc.CodTipoDocumento 
 where data.IdUsuario = @IdUsuario
 
 update [cp_orden_pago_con_cancelacion_data]  
@@ -89,18 +89,6 @@ set Referencia='OP#' + cast([cp_orden_pago_con_cancelacion_data] .IdOrdenPago as
 ,fecha_venc_fac_prov=fecha_op
 WHERE Referencia is null and @IdUsuario = IdUsuario
 
-IF(@IdSolicitudPago != 0)
-BEGIN
-	delete cp_orden_pago_con_cancelacion_data
-	where not exists(
-	select * from cp_orden_giro as f
-	where f.IdEmpresa = @IdEmpresa
-	and f.IdSolicitudPago = @IdSolicitudPago
-	and cp_orden_pago_con_cancelacion_data.IdEmpresa_cxp = f.IdEmpresa
-	and cp_orden_pago_con_cancelacion_data.IdTipoCbte_cxp = f.IdTipoCbte_Ogiro
-	and cp_orden_pago_con_cancelacion_data.IdCbteCble_cxp = f.IdCbteCble_Ogiro
-	) and cp_orden_pago_con_cancelacion_data.IdUsuario = @IdUsuario
-END
 
 UPDATE cp_orden_pago_con_cancelacion_data
 set IdCtaCble = A.IdCtaCble_Acreedora
