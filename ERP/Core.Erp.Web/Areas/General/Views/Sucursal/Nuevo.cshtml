@@ -12,6 +12,7 @@
 @using (Html.BeginForm("Nuevo", "Sucursal", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdSucursal)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -28,16 +29,28 @@
                     @Html.ValidationMessageFor(m => m.Su_CodigoEstablecimiento, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-2">
                 <div class="form-group">
                     <div class="checkbox">
-                        @Html.CheckBoxFor(q => q.Es_establecimiento)
-                        <label for="Es_establecimiento">Es establecimiento</label>
+                        @Html.DevExpress().CheckBoxFor(q => q.Es_establecimiento, settings =>
+                            {
+                                settings.Name = "Es_establecimiento";
+                                settings.Text = "Es establecimiento ";
+
+                            }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.Es_establecimiento, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdCtaCble_cxp">Cuenta contable por pagar</label>
+                            @Html.Partial("_CmbCuenta_Sucursal", Model)
+                            @Html.ValidationMessageFor(m => m.IdCtaCble_cxp, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

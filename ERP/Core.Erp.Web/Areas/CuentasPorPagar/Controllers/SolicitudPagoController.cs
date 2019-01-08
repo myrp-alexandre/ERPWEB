@@ -199,7 +199,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public ActionResult EditingAddNewAS(string IDs = "", decimal IdTransaccionSession = 0)
         {
-            if (!string.IsNullOrEmpty(IDs))
+            
+            if (IDs != "")
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 var lst = List_det_x_cruzar.get_list(IdTransaccionSession);
