@@ -342,7 +342,6 @@
     <Compile Include="Areas\General\Controllers\CatalogoTipoController.cs" />
     <Compile Include="Areas\General\Controllers\CiudadController.cs" />
     <Compile Include="Areas\General\Controllers\ComprobantesSinAutorizacionController.cs" />
-    <Compile Include="Areas\General\Controllers\DisenadorReporteController.cs" />
     <Compile Include="Areas\General\Controllers\EmpresaController.cs" />
     <Compile Include="Areas\General\Controllers\ImagenesController.cs" />
     <Compile Include="Areas\General\Controllers\ImpuestoController.cs" />
@@ -8977,11 +8976,6 @@
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbCliente_Facturacion.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_003.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_004.cshtml" />
-    <Content Include="Areas\General\Views\DisenadorReporte\_GridViewPartial_disenador_reporte.cshtml" />
-    <Content Include="Areas\General\Views\DisenadorReporte\Anular.cshtml" />
-    <Content Include="Areas\General\Views\DisenadorReporte\Index.cshtml" />
-    <Content Include="Areas\General\Views\DisenadorReporte\Modificar.cshtml" />
-    <Content Include="Areas\General\Views\DisenadorReporte\Nuevo.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\Index.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\AplicarRetencion.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\CobranzaRetenciones\_GridViewPartial_cobranza_ret.cshtml" />
