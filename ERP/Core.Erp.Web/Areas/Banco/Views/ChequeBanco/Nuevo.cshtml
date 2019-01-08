@@ -35,6 +35,31 @@
         //Capture all selected keys
         selectedIDs = values.join(',');
     }
+    function ImportarSolicitud() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSolicitudPago: $("#IdSolicitudPago").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ImportarSolicitud", "ChequeBanco",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.GiradoA.length > 0) {
+                    $("#cb_giradoA").val(data.GiradoA);
+                    $("#cb_Observacion").val(data.Observacion);
+                }                
+            },
+            error: function (error) {
+            }
+        });      
+    }
+
     function MostrarModal() {
         selectedIDs = "";
 
@@ -54,15 +79,11 @@
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data.length == 0) {
-                    GridView_cheque_op_x_cruzar.PerformCallback();
-                    GridView_cheque_op_x_cruzar.UnselectRows();
-                    $("#OpModal").modal("show");
-                } else {
-                    $("#cb_giradoA").val(data);
-                    GridView_cheque_op.PerformCallback();
-                }
+            success: function (data) {                
+                GridView_cheque_op_x_cruzar.PerformCallback();
+                GridView_cheque_op_x_cruzar.UnselectRows();
+                $("#OpModal").modal("show");
+                              
             },
             error: function (error) {
             }
@@ -72,7 +93,8 @@
     function AddOP() {
         var datos = {
             IDs: selectedIDs,
-            IdTransaccionSession: $("#IdTransaccionSession").val()
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdEmpresa: $("#IdEmpresa").val()
         }
         $.ajax({
             type: 'POST',
@@ -84,6 +106,8 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                $("#cb_giradoA").val(data.GiradoA);
+                $("#cb_Observacion").val(data.Observacion);
             },
             error: function (error) {
             }
@@ -323,13 +347,18 @@
                 </div>
                 <div class="row">
                     <div class="col-md-1">
+                        <button type="button" class="btn btn-primary form-control" id="btn_buscar_op" onclick="MostrarModal();" title="Buscar órdenes">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-offset-9 col-md-1">
                         <div class="form-group">
                             @Html.TextBoxFor(q => q.IdSolicitudPago, new { @Id = "IdSolicitudPago", @class = "form-control", @placeholder = "# Solicitud" })
                         </div>
                     </div>
                     <div class="col-md-1">
-                        <button type="button" class="btn btn-primary form-control" id="btn_buscar_op" onclick="MostrarModal();" title="Buscar órdenes">
-                            <i class="fa fa-search"></i>
+                        <button type="button" class="btn btn-primary form-control" id="btn_importar_solicitud" onclick="ImportarSolicitud();" title="Importar solicitud">
+                            <i class="fa fa-download"></i>
                         </button>
                     </div>
                 </div>

@@ -128,6 +128,7 @@ namespace Core.Erp.Data.Banco
                         IdPersona = Entity.IdPersona == null ? 0 : Convert.ToDecimal(Entity.IdPersona),
                         IdEntidad = Entity.IdEntidad == null ? 0 : Convert.ToDecimal(Entity.IdEntidad),
                         IdTipo_Persona = Entity.IdTipo_Persona,
+                        IdSolicitudPago = Entity.IdSolicitudPago
                     };
                 }
 
@@ -171,6 +172,7 @@ namespace Core.Erp.Data.Banco
                     cb_Observacion = info.cb_Observacion,
                     IdPeriodo = info.IdPeriodo,
                     IdSucursal = info.IdSucursal,
+                    
                     cb_FechaTransac = DateTime.Now,
                     cb_Estado = "A",
                     cb_Valor = info.cb_Valor,
@@ -220,6 +222,7 @@ namespace Core.Erp.Data.Banco
                     IdPersona = info.IdPersona,
                     IdEntidad = info.IdEntidad,
                     IdTipo_Persona = info.IdTipo_Persona,
+                    IdSolicitudPago = info.IdSolicitudPago,
 
                     IdUsuario = info.IdUsuario,
                     Fecha_Transac = info.Fecha_Transac,
@@ -437,7 +440,7 @@ namespace Core.Erp.Data.Banco
                         IdPersona = info.IdPersona,
                         IdEntidad = info.IdEntidad,
                         IdTipo_Persona = info.IdTipo_Persona,
-
+                        IdSolicitudPago = info.IdSolicitudPago,
                         IdUsuarioUltMod = info.IdUsuarioUltMod,
                         Fecha_UltMod = DateTime.Now
                     });
@@ -465,6 +468,7 @@ namespace Core.Erp.Data.Banco
                     mov_ban.IdTipo_Persona = info.IdTipo_Persona;
                     mov_ban.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     mov_ban.Fecha_UltMod = DateTime.Now;
+                    mov_ban.IdSolicitudPago = info.IdSolicitudPago;
                 }
                 #endregion
 

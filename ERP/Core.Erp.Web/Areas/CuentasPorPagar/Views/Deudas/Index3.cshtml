@@ -73,8 +73,7 @@
     {
         selectedIDs = "";
         var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSolicitudPago : $("#IdSolicitudPago").val()
+            IdEmpresa: $("#IdEmpresa").val()
         }
         $.ajax({
             type: 'POST',
@@ -113,6 +112,17 @@
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(q=>q.IdEmpresa, new { @id = "IdEmpresa"})
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary form-control" onclick="fac_con_saldo()" title="Buscar deudas">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>                
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">

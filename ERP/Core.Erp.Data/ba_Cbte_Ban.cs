@@ -50,12 +50,13 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdPersona { get; set; }
         public Nullable<decimal> IdEntidad { get; set; }
         public string IdTipo_Persona { get; set; }
+        public Nullable<decimal> IdSolicitudPago { get; set; }
     
+        public virtual ba_Banco_Cuenta ba_Banco_Cuenta { get; set; }
         public virtual ICollection<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito> ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito { get; set; }
         public virtual ba_Catalogo ba_Catalogo { get; set; }
         public virtual ba_Catalogo ba_Catalogo1 { get; set; }
         public virtual ba_tipo_nota ba_tipo_nota { get; set; }
         public virtual ba_TipoFlujo ba_TipoFlujo { get; set; }
-        public virtual ba_Banco_Cuenta ba_Banco_Cuenta { get; set; }
     }
 }

@@ -37,6 +37,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         string mensaje = string.Empty;
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         cp_orden_pago_cancelaciones_PorCruzar ListPorCruzar = new cp_orden_pago_cancelaciones_PorCruzar();
+        cp_SolicitudPago_Bus bus_solicitud = new cp_SolicitudPago_Bus();
         #endregion
 
         #region Index
@@ -354,23 +355,44 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return PartialView("_GridViewPartial_cheque_op", model);
         }
 
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNew(string IDs = "", decimal IdTransaccionSession = 0)
+        public JsonResult ImportarSolicitud(int IdEmpresa = 0, decimal IdSolicitudPago = 0)
         {
+            string GiradoA = string.Empty;
+            string Observacion = "Canc./";
+
+            var solicitud = bus_solicitud.GetInfo(IdEmpresa, IdSolicitudPago);
+            if (solicitud != null)
+            {
+                GiradoA = solicitud.GiradoA;
+                Observacion = solicitud.Concepto;
+            }
+
+            return Json(new { GiradoA = GiradoA, Observacion = Observacion }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public JsonResult EditingAddNew(string IDs = "", decimal IdTransaccionSession = 0, int IdEmpresa = 0)
+        {
+            string GiradoA = string.Empty;
+            string Observacion = "Canc./";
+            
             if (IDs != "")
             {
-                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 var lst_x_cruzar = ListPorCruzar.get_list(IdTransaccionSession);
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
                     var info_det = lst_x_cruzar.Where(q => q.IdOrdenPago_op == Convert.ToInt32(item)).FirstOrDefault();
                     if (info_det != null)
-                        List_op.AddRow(info_det,IdTransaccionSession);
+                    {
+                        GiradoA = info_det.pe_nombreCompleto;
+                        Observacion += info_det.Referencia + "/ ";
+                        List_op.AddRow(info_det, IdTransaccionSession);
+                    }
                 }
             }
             var model = List_op.get_list(IdTransaccionSession);
-            return PartialView("_GridViewPartial_cheque_op", model);
+            return Json(new { GiradoA = GiradoA, Observacion = Observacion }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult EditingDeleteFactura(decimal IdOrdenPago_op)
@@ -384,23 +406,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         #region Json
 
-        public JsonResult GetListPorCruzar(int IdEmpresa = 0, decimal IdTransaccionSession = 0, string IdTipoPersona = "", decimal IdEntidad = 0, decimal IdSolicitudPago = 0)
+        public JsonResult GetListPorCruzar(int IdEmpresa = 0, decimal IdTransaccionSession = 0, string IdTipoPersona = "", decimal IdEntidad = 0)
         {
-            string retorno = string.Empty;
             var lst = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, IdTipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false);
-            if (IdSolicitudPago == 0)
-            {
-                ListPorCruzar.set_list(lst, IdTransaccionSession);
-            }
-            else
-            {
-                foreach (var item in lst)
-                {
-                    retorno = item.pe_nombreCompleto;
-                    List_op.AddRow(item, IdTransaccionSession);
-                }
-            }
-            return Json(retorno,JsonRequestBehavior.AllowGet);
+            ListPorCruzar.set_list(lst, IdTransaccionSession);
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, decimal IdTransaccionSession = 0)

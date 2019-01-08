@@ -41,8 +41,8 @@ namespace Core.Erp.Data
         public DbSet<vwba_Talonario_cheques_x_banco_ID> vwba_Talonario_cheques_x_banco_ID { get; set; }
         public DbSet<ba_parametros> ba_parametros { get; set; }
         public DbSet<ba_TipoFlujo> ba_TipoFlujo { get; set; }
-        public DbSet<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
         public DbSet<vwba_Cbte_Ban> vwba_Cbte_Ban { get; set; }
         public DbSet<ba_Banco_Cuenta> ba_Banco_Cuenta { get; set; }
+        public DbSet<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
     }
 }
