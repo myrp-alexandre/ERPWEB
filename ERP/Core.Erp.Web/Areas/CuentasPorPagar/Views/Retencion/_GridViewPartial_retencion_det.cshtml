@@ -11,7 +11,8 @@
 
         settings.Width = Unit.Percentage(100);
         settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
 
@@ -46,7 +47,7 @@
         {
             column.FieldName = "IdCodigo_SRI";
             column.Caption = "Código";
-            column.Width = Unit.Percentage(60);
+            column.Width = Unit.Percentage(50);
             column.EditorProperties().ComboBox(p =>
             {
 
@@ -70,7 +71,7 @@
             column.FieldName = "re_baseRetencion";
             column.Caption = "Base";
             //column.ReadOnly = true;
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
 
         });
         settings.Columns.Add(column =>
@@ -78,7 +79,7 @@
             column.FieldName = "re_Porcen_retencion";
             column.Caption = "Porcentaje";
             //column.ReadOnly = true;
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
@@ -86,7 +87,7 @@
             column.FieldName = "re_valor_retencion";
             column.Caption = "Valor retenido";
             //column.ReadOnly = true;
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
