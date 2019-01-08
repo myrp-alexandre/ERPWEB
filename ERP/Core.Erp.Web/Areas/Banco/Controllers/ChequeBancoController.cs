@@ -387,7 +387,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public JsonResult GetListPorCruzar(int IdEmpresa = 0, decimal IdTransaccionSession = 0, string IdTipoPersona = "", decimal IdEntidad = 0, decimal IdSolicitudPago = 0)
         {
             string retorno = string.Empty;
-            var lst = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, IdTipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false,IdSolicitudPago);
+            var lst = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, IdTipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false);
             if (IdSolicitudPago == 0)
             {
                 ListPorCruzar.set_list(lst, IdTransaccionSession);
