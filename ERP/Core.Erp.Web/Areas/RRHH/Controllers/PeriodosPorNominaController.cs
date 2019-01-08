@@ -23,7 +23,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> model = bus_periodo_por_nomina.get_list(GetIdEmpresa(),IdNominaTipo,IdNominaTipoLiq);
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> model = bus_periodo_por_nomina.get_list(IdEmpresa,IdNominaTipo,IdNominaTipoLiq);
                 return PartialView("_GridViewPartial_nomina_tipoLiq", model);
             }
             catch (Exception)
@@ -40,7 +41,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    info.IdEmpresa = GetIdEmpresa();
+                    info.IdEmpresa =Convert.ToInt32(SessionFixed.IdEmpresa);
                     if (!bus_periodo_por_nomina.guardarDB(info))
                         return View(info);
                     else
@@ -92,8 +93,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-
-                return View(bus_periodo_por_nomina.get_info(GetIdEmpresa(), IdNomina_Tipo, IdNominaTipoLiq, IdPeriodo));
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                return View(bus_periodo_por_nomina.get_info(IdEmpresa, IdNomina_Tipo, IdNominaTipoLiq, IdPeriodo));
 
             }
             catch (Exception)
@@ -103,12 +104,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
         }
 
-        public JsonResult get_lst_periodo_x_nomina(int IdNomina = 0, int IdNomina_Tipo = 0)
+        public JsonResult get_lst_periodo_x_nomina(int IdEmpresa, int IdNomina = 0, int IdNomina_Tipo = 0)
         {
             try
             {
                 List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lst_periodos_x_nominas = new List<ro_periodo_x_ro_Nomina_TipoLiqui_Info>();
-                lst_periodos_x_nominas = bus_periodo_por_nomina.get_list(GetIdEmpresa(), IdNomina, IdNomina_Tipo);
+                lst_periodos_x_nominas = bus_periodo_por_nomina.get_list(IdEmpresa, IdNomina, IdNomina_Tipo);
                 return Json(lst_periodos_x_nominas, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -122,7 +123,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                int IdPeriodo = bus_periodo_por_nomina.get_siguinte_periodo_a_procesar(GetIdEmpresa(), IdNomina, IdNomina_Tipo);
+                int IdPeriodo = bus_periodo_por_nomina.get_siguinte_periodo_a_procesar(IdEmpresa, IdNomina, IdNomina_Tipo);
                 return Json(IdPeriodo, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -131,20 +132,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 throw;
             }
         }
-        private int GetIdEmpresa()
-        {
-            try
-            {
-                if (SessionFixed.IdEmpresa==null)
-                    return Convert.ToInt32(Convert.ToInt32(SessionFixed.IdEmpresa));
-                else
-                    return 0;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+ 
     }
 }

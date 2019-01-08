@@ -89,7 +89,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                  ro_rol_Info info = new  ro_rol_Info
                  {
                      IdNomina_Tipo = 1,
-                     IdSucursal=Convert.ToInt32( SessionFixed.IdSucursal)
+                     IdSucursal=Convert.ToInt32( SessionFixed.IdSucursal),
+                     IdEmpresa=Convert.ToInt32( SessionFixed.IdEmpresa)
                  };
                 ViewBag.FechaCorte = DateTime.Now.Date;
                 return View(info);
