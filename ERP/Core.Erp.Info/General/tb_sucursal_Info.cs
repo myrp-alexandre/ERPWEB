@@ -38,5 +38,6 @@ namespace Core.Erp.Info.General
         public bool EstadoBool { get; set; }
         public string MotiAnula { get; set; }
         public bool Es_establecimiento { get; set; }
+        public string IdCtaCble_cxp { get; set; }
     }
 }

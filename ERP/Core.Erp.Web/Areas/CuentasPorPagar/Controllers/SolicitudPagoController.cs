@@ -187,6 +187,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         #endregion
         #region Det
+
         [ValidateInput(false)]
         public ActionResult GridViewPartial_aprobacion()
         {

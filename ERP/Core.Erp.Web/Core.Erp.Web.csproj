@@ -9615,6 +9615,7 @@
     <Content Include="Areas\Inventario\Views\IngresoInventario\Importar.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_aprobacion_solicitud.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_aprobacion.cshtml" />
+    <Content Include="Areas\General\Views\Sucursal\_CmbCuenta_Sucursal.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

@@ -98,6 +98,7 @@ namespace Core.Erp.Data.General
                         Su_JefeSucursal = q.Su_JefeSucursal,
                         Su_Ruc = q.Su_Ruc,
                         Su_Telefonos = q.Su_Telefonos,
+                        IdCtaCble_cxp = q.IdCtaCble_cxp
                         
                     }).FirstOrDefault();
 
@@ -198,6 +199,7 @@ namespace Core.Erp.Data.General
                         Su_Direccion = info.Su_Direccion,
                         Es_establecimiento = info.Es_establecimiento,
                         Estado = info.Estado = "A",
+                        IdCtaCble_cxp = info.IdCtaCble_cxp,
 
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
@@ -231,6 +233,7 @@ namespace Core.Erp.Data.General
                     Entity.Su_Telefonos = info.Su_Telefonos;
                     Entity.Su_Direccion = info.Su_Direccion;
                     Entity.Es_establecimiento = info.Es_establecimiento;
+                    Entity.IdCtaCble_cxp = info.IdCtaCble_cxp;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
