@@ -40,7 +40,6 @@
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_giro_x_in_Ing_Egr_Inven" Width="1.5" PointX="12.75" PointY="32.125" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_parametros" Width="1.5" PointX="16.375" PointY="17.75" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.vwcp_retencion_det" Width="1.5" PointX="14.375" PointY="7.75" />
-        <EntityTypeShape EntityType="Model_cuentas_por_pagar.vwcp_retencion" Width="1.5" PointX="14.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.vwcp_orden_pago" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.cp_orden_giro_det" Width="1.5" PointX="12.75" PointY="48.25" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_det" Width="1.5" PointX="16.375" PointY="4.75" />
@@ -72,6 +71,7 @@
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_orden_giro_x_in_Ing_Egr_Inven_cp_orden_giro" />
         <AssociationConnector Association="Model_cuentas_por_pagar.FK_cp_retencion_cp_orden_giro" />
         <EntityTypeShape EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_x_pagar" Width="1.5" PointX="7.375" PointY="16.75" />
+        <EntityTypeShape EntityType="Model_cuentas_por_pagar.vwcp_retencion" Width="1.5" PointX="9.375" PointY="16.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

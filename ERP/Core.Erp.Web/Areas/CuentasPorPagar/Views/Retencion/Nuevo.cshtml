@@ -20,11 +20,12 @@
 @using (Html.BeginForm("Nuevo", "Retencion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdSucursal_cxp, new { @id = "IdSucursal_cxp" })
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdProveedor, new { @id = "IdProveedor" })
     @Html.HiddenFor(q => q.IdRetencion, new { @id = "IdRetencion" })
+
     @Html.HiddenFor(q => q.IdSucursal)
-    
     @Html.HiddenFor(q => q.IdTipoCbte_Ogiro)
     @Html.HiddenFor(q => q.IdCbteCble_Ogiro)
     @Html.HiddenFor(q => q.co_serie)
@@ -223,8 +224,10 @@
 
     function armar_diario_retencion() {
                 var datos = {
-                    IdProveedor: $("#IdProveedor").val(),
-                    IdTransaccionSession: $("#IdTransaccionSession").val()
+                    IdEmpresa: $("#IdEmpresa").val(),
+                    IdProveedor: IdProveedor.GetValue(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val(),
+                    IdSucursal_cxp: $("#IdSucursal_cxp").val(),
                 }
                 $.ajax({
                     type: 'POST',

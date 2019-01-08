@@ -247,9 +247,9 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="form-group" hidden id="DivSucursalCxp">
+                <div class="form-group" id="DivSucursalCxp">
                     <label for="IdSucursal_cxp">Sucursal compra*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal_cxp, new SelectList(new List<Core.Erp.Info.General.tb_sucursal_Info>(), "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal_cxp" })
+                    @Html.DropDownListFor(q => q.IdSucursal_cxp, new SelectList(ViewBag.lst_sucursales, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal_cxp" })
                     @Html.ValidationMessageFor(q => q.IdSucursal_cxp, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -658,13 +658,12 @@
         e.customArgs["pre_fecha"] = moment(co_FechaFactura.GetDate()).format('DD/MM/YYYY');
     }
 
-    $(function () {
-        $("#IdSucursal").change(function () {
-            cargar_bodega();
-        });
+    ValidarCompraSucursales();
+    
+    $("#IdSucursal").change(function () {
+        cargar_bodega();
     });
-
-
+    
     $("#co_subtotal_iva").change(function () {
 
         actualizar_valores();
@@ -849,7 +848,8 @@
             co_valoriva : $("#co_valoriva").val(),
             co_total : $("#co_total").val(),
             observacion: $("#observacion").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdSucursal_cxp: $("#IdSucursal_cxp").val(),
             }
             $.ajax({
                 type: 'POST',
@@ -876,9 +876,7 @@
 
 
 
-    function get_info_proveedor() {
-        $("#IdSucursal_cxp").empty();
-        $("#DivSucursalCxp").hide();
+    function get_info_proveedor() {      
 
         if (IdProveedor.GetValue() > 0)  {
             var datos = {
@@ -904,7 +902,16 @@
                 error: function (error) {
                 }
             });
-            $.ajax({
+            ValidarCompraSucursales();
+        }
+    };
+
+    function ValidarCompraSucursales() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdProveedor: IdProveedor.GetValue()
+        }
+        $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
                 url: '@Url.Action("ValidarCompraSucursales", "Deudas", new { Area = "CuentasPorPagar" })',
@@ -913,18 +920,16 @@
                 bProcessing: true,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    
-                    $.each(data, function (i, row) {
-                        $("#IdSucursal_cxp").append("<option value=" + row.IdSucursal + ">" + row.Su_Descripcion + "</option>");
-                        $("#DivSucursalCxp").show();
-                    });
+            success: function (data) {
+                if (data == "S") {
+                    $("#DivSucursalCxp").show();
+                } else
+                    $("#DivSucursalCxp").hide();
                 },
                 error: function (error) {
                 }
             });
-        }
-    };
+    }
 
     function cargar_bodega() {
         $("#IdBodega").empty();
@@ -981,9 +986,11 @@
 
      function armar_diario_retencion() {
 
-                var datos = {
+         var datos = {
+                    IdEmpresa: $("#IdEmpresa").val(),
                     IdProveedor: IdProveedor.GetValue(),
-                    IdTransaccionSession: $("#IdTransaccionSession").val()
+                    IdTransaccionSession: $("#IdTransaccionSession").val(),
+                    IdSucursal_cxp: $("#IdSucursal_cxp").val(),
                 }
                 $.ajax({
                     type: 'POST',

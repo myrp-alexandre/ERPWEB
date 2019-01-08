@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Core.Erp.Info.Contabilidad;
 namespace Core.Erp.Info.CuentasPorPagar
 {
-  public  class cp_orden_giro_Info
+    public class cp_orden_giro_Info
     {
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
@@ -26,6 +26,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<System.DateTime> co_FechaContabilizacion { get; set; }
         public System.DateTime co_FechaFactura_vct { get; set; }
         public int co_plazo { get; set; }
+        [Required(ErrorMessage ="El campo observación es obligatorio")]
         public string co_observacion { get; set; }
         public double co_subtotal_iva { get; set; }
         public double co_subtotal_siniva { get; set; }

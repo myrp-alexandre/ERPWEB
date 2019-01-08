@@ -239,7 +239,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var lst_sucursales = bus_sucursal.get_list(model.IdEmpresa, false);
             ViewBag.lst_sucursales = lst_sucursales;
 
-            var lst_bodega = bus_bodega.get_list(model.IdEmpresa, model.IdSucursal == null ? 0 : (int)model.IdSucursal, false);
+            var lst_bodega = bus_bodega.get_list(model.IdEmpresa, model.IdSucursal, false);
             ViewBag.lst_bodega = lst_bodega;
 
             if (model.IdProveedor != 0)
@@ -676,16 +676,16 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #region json
         public JsonResult ValidarCompraSucursales(int IdEmpresa = 0, decimal IdProveedor = 0)
         {
-            List<tb_sucursal_Info> lst_sucursal = new List<tb_sucursal_Info>();
+            string retorno = string.Empty;
 
             if (IdProveedor != 0)
             {
                 var prov = bus_proveedor.get_info(IdEmpresa, IdProveedor);
                 if (prov != null && prov.info_persona.pe_cedulaRuc == SessionFixed.Ruc)
-                    lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);                
+                    retorno = "S";
             }
             
-            return Json(lst_sucursal, JsonRequestBehavior.AllowGet);
+            return Json(retorno, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetListOrdenesPorPagar(int IdEmpresa = 0)
@@ -719,10 +719,15 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult armar_diario(decimal IdProveedor = 0, double co_subtotal_iva = 0, double co_subtotal_siniva = 0, double co_valoriva = 0, double co_total = 0, string observacion = "", decimal IdTransaccionSession = 0)
+        public JsonResult armar_diario(decimal IdProveedor = 0, double co_subtotal_iva = 0, double co_subtotal_siniva = 0, double co_valoriva = 0, double co_total = 0, string observacion = "", decimal IdTransaccionSession = 0, int IdSucursal_cxp = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             info_proveedor = bus_prov.get_info(IdEmpresa, IdProveedor);
+            if (info_proveedor.info_persona.pe_cedulaRuc == SessionFixed.Ruc)
+            {
+                var sucursal = bus_sucursal.get_info(IdEmpresa, IdSucursal_cxp);
+                info_proveedor.IdCtaCble_CXP = sucursal.IdCtaCble_cxp;
+            }
             info_parametro = bus_param.get_info(IdEmpresa);
 
             double Subtotal0 = 0;

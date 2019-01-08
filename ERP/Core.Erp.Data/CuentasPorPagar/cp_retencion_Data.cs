@@ -90,7 +90,8 @@ namespace Core.Erp.Data.CuentasPorPagar
                         co_valoriva = Entity.co_valoriva,
                         pe_razonSocial = Entity.pe_razonSocial,
                         IdTipoCbte_Ogiro = Entity.IdTipoCbte_Ogiro,
-                        IdCbteCble_Ogiro = Entity.IdCbteCble_Ogiro
+                        IdCbteCble_Ogiro = Entity.IdCbteCble_Ogiro,
+                        IdSucursal_cxp = Entity.IdSucursal_cxp
                     };
                 }
                 return info;

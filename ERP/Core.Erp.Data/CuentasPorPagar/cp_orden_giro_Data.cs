@@ -643,6 +643,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         IdTipoMovi = Entity.IdTipoMovi,
                         Estado = Entity.Estado,
                         IdBodega = Entity.IdBodega,
+                        IdSucursal_cxp = Entity.IdSucursal_cxp
                     };
                 }
                 return info;

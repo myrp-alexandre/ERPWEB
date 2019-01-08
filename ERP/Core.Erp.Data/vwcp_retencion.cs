@@ -44,5 +44,6 @@ namespace Core.Erp.Data
         public Nullable<decimal> IdCbteCble_Ogiro { get; set; }
         public Nullable<int> IdTipoCbte_Ogiro { get; set; }
         public int IdSucursal { get; set; }
+        public Nullable<int> IdSucursal_cxp { get; set; }
     }
 }

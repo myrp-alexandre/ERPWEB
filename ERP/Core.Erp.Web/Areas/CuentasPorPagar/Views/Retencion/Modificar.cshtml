@@ -21,7 +21,9 @@
 {
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdProveedor, new { @id = "IdProveedor" })
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdSucursal_cxp, new { @id = "IdSucursal_cxp" })
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+
     @Html.HiddenFor(q => q.IdRetencion)
     @Html.HiddenFor(q => q.ct_IdCbteCble)
     @Html.HiddenFor(q => q.ct_IdTipoCbte)
@@ -246,8 +248,10 @@
     function armar_diario_retencion() {
 
                 var datos = {
-                    IdProveedor: $("#IdProveedor").val(),
-                    IdTransaccionSession: $("#IdTransaccionSession").val()
+                    IdEmpresa: $("#IdEmpresa").val(),
+                    IdProveedor: IdProveedor.GetValue(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val(),
+                    IdSucursal_cxp: $("#IdSucursal_cxp").val(),
                 }
                 $.ajax({
                     type: 'POST',

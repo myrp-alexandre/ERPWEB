@@ -95,7 +95,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_orden_giro = o_data_orden_giro.get_info_retencion(IdEmpresa, IdTipoCbte_Ogiro, IdCbteCble_Ogiro);
                 tb_sucursal_Data data_sucursal = new tb_sucursal_Data();
                 var sucursal = data_sucursal.get_info(info_orden_giro.IdEmpresa, info_orden_giro.IdSucursal);
-               
+
+                info_retencion.IdSucursal_cxp = info_orden_giro.IdSucursal_cxp;
                 info_retencion.IdEmpresa = info_orden_giro.IdEmpresa;
                 info_retencion.IdProveedor = info_orden_giro.IdProveedor;
                 info_retencion.IdSucursal = info_orden_giro.IdSucursal;

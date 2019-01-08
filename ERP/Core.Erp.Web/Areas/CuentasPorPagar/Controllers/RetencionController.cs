@@ -10,6 +10,7 @@ using Core.Erp.Bus.Contabilidad;
 using DevExpress.Web.Mvc;
 using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 {
@@ -29,6 +30,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_codigo_SRI_List lst_codigo_retencion = new cp_codigo_SRI_List();
         cp_codigo_SRI_Bus bus_codigo_ret = new cp_codigo_SRI_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         #endregion
         #region vistas
         public ActionResult Index()
@@ -465,17 +467,20 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         #endregion
         #region json
 
-        public JsonResult armar_diario_retencion(decimal IdProveedor = 0, decimal IdTransaccionSession = 0)
+        public JsonResult armar_diario_retencion(int IdEmpresa = 0, decimal IdProveedor = 0, decimal IdTransaccionSession = 0, int IdSucursal_cxp = 0)
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-
-            var datos = bus_proveedor.get_info(IdEmpresa, IdProveedor);
-            if (datos == null)
-                datos = new cp_proveedor_Info();
-            var detalle_ret = List_cp_retencion_det.get_list(IdTransaccionSession);
-            var param_op = bus_parametros.get_info(IdEmpresa);
-            List_ct_cbtecble_det_List.delete_detail_New_details(param_op, detalle_ret, IdTransaccionSession, datos.IdCtaCble_CXP);
-
+            if (IdProveedor != 0)
+            {
+                var proveedor = bus_proveedor.get_info(IdEmpresa, IdProveedor);
+                if (proveedor.info_persona.pe_cedulaRuc == SessionFixed.Ruc)
+                {
+                    var sucursal = bus_sucursal.get_info(IdEmpresa, IdSucursal_cxp);
+                    proveedor.IdCtaCble_CXP = sucursal.IdCtaCble_cxp;
+                }
+                var detalle_ret = List_cp_retencion_det.get_list(IdTransaccionSession);
+                var param_op = bus_parametros.get_info(IdEmpresa);
+                List_ct_cbtecble_det_List.delete_detail_New_details(param_op, detalle_ret, IdTransaccionSession, proveedor.IdCtaCble_CXP);
+            }
             return Json("", JsonRequestBehavior.AllowGet);
         }
 

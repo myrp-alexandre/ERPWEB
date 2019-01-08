@@ -64,6 +64,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string co_serie { get; set; }
         public string co_factura { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<int> IdSucursal_cxp { get; set; }
 
         public List<cp_retencion_det_Info> detalle { get; set; }
         public ct_cbtecble_Info info_comprobante { get; set; }
