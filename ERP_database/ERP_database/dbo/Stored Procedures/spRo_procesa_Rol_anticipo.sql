@@ -123,7 +123,7 @@ and emp.Pago_por_horas=0
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando sueldo por días trabajados al personal que  se les paga por horas-------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
-select @IdRubro_calculado= IdRubro_sueldo from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
+select @IdRubro_calculado= IdRubro_sueldo, @IdRubroTotalING=IdRubro_tot_ing from ro_rubros_calculados where IdEmpresa=@IdEmpresa-- obteniendo el idrubro desde parametros
 
 insert into ro_rol_detalle
 (IdEmpresa,				IdRol,			IdSucursal,						IdEmpleado,			IdRubro,			Orden,			Valor
@@ -139,7 +139,7 @@ FROM            dbo.ro_rol AS rol INNER JOIN
                          dbo.ro_periodo AS peri ON pe_x_nom.IdEmpresa = peri.IdEmpresa AND pe_x_nom.IdPeriodo = peri.IdPeriodo INNER JOIN
                          dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
                          dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado
-						 and rol_det.idrubro=500
+						 and rol_det.idrubro=@IdRubroTotalING
 						 and emp.Pago_por_horas=1
 						 and peri.pe_anio=case when peri.pe_mes=1 then DATEPART(year, @Fi)-1 else  DATEPART(year, peri.pe_FechaIni) end
 						 and peri.pe_mes=case when peri.pe_mes=1 then 12 else  DATEPART(MONTH, @Fi)-1 end
