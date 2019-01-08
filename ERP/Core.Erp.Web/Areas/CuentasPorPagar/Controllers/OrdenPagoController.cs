@@ -522,7 +522,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
-            info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
+            info_det.dc_Valor = Math.Round((info_det.dc_Valor_debe), 2) > 0 ? Math.Round((info_det.dc_Valor_debe), 2) : Math.Round((info_det.dc_Valor_haber * -1), 2);
 
             if (!string.IsNullOrEmpty(info_det.IdCtaCble))
             {
@@ -540,9 +540,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             ct_cbtecble_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
             edited_info.IdCtaCble = info_det.IdCtaCble;
             edited_info.dc_para_conciliar = info_det.dc_para_conciliar;
-            edited_info.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
-            edited_info.dc_Valor_debe = info_det.dc_Valor_debe;
-            edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
+            edited_info.dc_Valor = Math.Round((info_det.dc_Valor_debe), 2)> 0 ? Math.Round((info_det.dc_Valor_debe), 2) : Math.Round((info_det.dc_Valor_haber * -1), 2);
+            edited_info.dc_Valor_debe = Math.Round((info_det.dc_Valor_debe), 2);
+            edited_info.dc_Valor_haber = Math.Round((info_det.dc_Valor_haber), 2);
             if (!string.IsNullOrEmpty(info_det.IdCtaCble))
             {
                 var cta = bus_plancta.get_info(IdEmpresa, info_det.IdCtaCble);

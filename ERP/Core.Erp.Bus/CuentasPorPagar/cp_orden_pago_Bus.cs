@@ -268,7 +268,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 if (info.info_comprobante.lst_ct_cbtecble_det.Count() == 0)
                     mensaje = "No existe diario contable";
 
-                if (info.info_comprobante.lst_ct_cbtecble_det.Sum(v=>v.dc_Valor)!=0)                    
+                if (Math.Round(info.info_comprobante.lst_ct_cbtecble_det.Sum(v=>v.dc_Valor), 2)!=0)                    
                     mensaje = "El diario contable esta descudrado";
                 if (info.IdEstadoAprobacion == null)
                     mensaje = "Falta esta aprovación en tipo OP";

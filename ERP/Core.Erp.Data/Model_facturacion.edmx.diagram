@@ -98,8 +98,8 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_ct_cbtecble_fa_factura" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_fa_guia_remision_fa_factura" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_in_Ing_Egr_Inven_fa_factura" />
-        <EntityTypeShape EntityType="Model_facturacion.fa_PuntoVta" Width="1.5" PointX="19.375" PointY="10" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_PuntoVta" Width="1.5" PointX="19.375" PointY="17.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_PuntoVta" Width="1.5" PointX="0.75" PointY="22" />
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_PuntoVta" />
         <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_fa_PuntoVta" />
         </Diagram>

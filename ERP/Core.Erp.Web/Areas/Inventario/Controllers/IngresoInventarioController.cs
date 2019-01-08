@@ -347,7 +347,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                         var cantidad = Convert.ToDouble(reader.GetValue(5));
                         var info_producto = lst_producto.Where(q => q.pr_codigo == pr_codigo_producto).FirstOrDefault();
 
-                        if (info_producto != null && info_producto.IdProducto!=0)
+                        if ((info_producto != null && info_producto.IdProducto!=0) && (costo_total > 0 && cantidad > 0))
                         {
                             in_Ing_Egr_Inven_det_Info info_detalle = new in_Ing_Egr_Inven_det_Info
                             {
@@ -356,11 +356,11 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                                 pr_descripcion = lst_producto.Where(q => q.IdProducto == info_producto.IdProducto).FirstOrDefault().pr_descripcion,
                                 IdUnidadMedida_sinConversion = "UNID",
                                 dm_cantidad_sinConversion = cantidad,
-                                mv_costo_sinConversion = costo_total / cantidad
+                                mv_costo_sinConversion = costo_total / cantidad,                                
                             };
 
-                            Lista_IngresoInventarioDet.Add(info_detalle);
-                        }                                               
+                            Lista_IngresoInventarioDet.Add(info_detalle);                         
+                        }
                     }
                     else
                     {
