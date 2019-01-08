@@ -27,6 +27,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                              where item.IdEmpresa == IdEmpresa
                              && item.fecha>=Fechaini
                              && item.fecha<=FechaFin
+                             orderby item.IdRetencion descending
                              select new cp_retencion_Info
                              {
 

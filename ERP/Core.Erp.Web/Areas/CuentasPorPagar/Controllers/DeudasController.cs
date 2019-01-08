@@ -415,7 +415,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
 
             }
-
+            if (info_proveedor.info_persona.pe_cedulaRuc != SessionFixed.Ruc)
+                model.IdSucursal_cxp = null;
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")
             {
@@ -539,6 +540,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return View(model);
 
             }
+            if (info_proveedor.info_persona.pe_cedulaRuc != SessionFixed.Ruc)
+                model.IdSucursal_cxp = null;
 
             string mensaje = bus_orden_giro.validar(model);
             if (mensaje != "")

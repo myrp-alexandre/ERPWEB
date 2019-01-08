@@ -22,6 +22,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                              && q.Fecha>=Fecha_ini
                              && q.Fecha <= Fecha_fin
                              && q.IdSucursal == IdSucursal
+                             orderby q.IdOrdenPago descending
                              select new cp_orden_pago_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
