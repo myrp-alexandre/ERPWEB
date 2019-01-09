@@ -129,9 +129,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-            //model.lst_det = bus_pago_Det.GetListPorPagar(IdEmpresa, IdSucursal);
-            model.lst_det = List_det_x_cruzar.get_list(model.IdTransaccionSession);
+            model.lst_det = bus_pago_Det.GetListPorPagar(IdEmpresa, IdSucursal);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
+            
+
             cargar_combos(IdEmpresa);
             return View(model);
         }

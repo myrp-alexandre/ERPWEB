@@ -39,7 +39,8 @@ namespace Core.Erp.Data.Reportes.Banco
                                  dc_Valor_Haber = q.dc_Valor_Haber,
                                  IdCtaCble = q.IdCtaCble,
                                  pc_Cuenta = q.pc_Cuenta,
-                                 Nombre = q.Nombre
+                                 Nombre = q.Nombre,
+                                 Su_Descripcion = q.Su_Descripcion
                              }).ToList();
                 }
                 return Lista;
