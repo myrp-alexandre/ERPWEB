@@ -340,6 +340,15 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult Imprimir(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, int IdPuntoVta = 0)
+        {
+            var pto_vta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+
+            
+
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult GetLineaDetalle(int Secuencia = 0, decimal IdTransaccionSession = 0)
         {
             fa_factura_det_Info lineaF = new fa_factura_det_Info();
