@@ -39,7 +39,9 @@ namespace Core.Erp.Data.Reportes.Banco
                                  dc_Valor_Debe = q.dc_Valor_Debe,
                                  dc_Valor_Haber = q.dc_Valor_Haber,
                                  cb_Cheque = q.cb_Cheque,
-                                 cb_giradoA = q.cb_giradoA
+                                 cb_giradoA = q.cb_giradoA,
+                                 NombreUsuario = q.NombreUsuario,
+                                 Su_Descripcion = q.Su_Descripcion
                              }).ToList();
                 }
                 return Lista;

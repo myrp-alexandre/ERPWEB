@@ -101,7 +101,8 @@ namespace Core.Erp.Data.Facturacion
                         nom_PuntoVta = Entity.nom_PuntoVta,
                         estado = Entity.estado,
                         Su_CodigoEstablecimiento = Entity.Su_CodigoEstablecimiento,
-                        IdCaja = Entity.IdCaja
+                        IdCaja = Entity.IdCaja,
+                        IPImpresora = Entity.IPImpresora
                     };
                 }
                 return info;
@@ -153,7 +154,8 @@ namespace Core.Erp.Data.Facturacion
                         cod_PuntoVta = info.cod_PuntoVta,
                          nom_PuntoVta = info.nom_PuntoVta,
                         estado = info.estado = true,
-                        IdCaja = info.IdCaja
+                        IdCaja = info.IdCaja,
+                        IPImpresora = info.IPImpresora
                     };
                     Context.fa_PuntoVta.Add(Entity);
                     Context.SaveChanges();
@@ -179,6 +181,7 @@ namespace Core.Erp.Data.Facturacion
                     Entity.cod_PuntoVta = info.cod_PuntoVta;
                     Entity.nom_PuntoVta = info.nom_PuntoVta;
                     Entity.IdCaja = info.IdCaja;
+                    Entity.IPImpresora = info.IPImpresora;
 
                     Context.SaveChanges();
                 

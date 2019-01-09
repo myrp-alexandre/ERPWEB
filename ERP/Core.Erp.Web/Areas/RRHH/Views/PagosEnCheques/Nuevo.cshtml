@@ -1,6 +1,6 @@
-﻿@model Core.Erp.Info.RRHH.ro_SancionesPorMarcaciones_Info
+﻿@model Core.Erp.Info.RRHH.ro_NominasPagosCheques_Info
 @{
-    ViewBag.Title = "Nueva control de marcaciones";
+    ViewBag.Title = "Nuevo pagos en cheques";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -17,11 +17,11 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Nuevo", "ControlDeMarcaciones", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "PagosEnCheques", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id="IdEmpresa"})
     @Html.HiddenFor(q => q.IdTransaccion)
-    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id= "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     <div class="row">
         <div class="col-md-12">
@@ -39,7 +39,13 @@
                     @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
             </div>
-            
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="FechaInicio">Periodo*</label>
+                    @Html.DropDownListFor(q => q.IdPeriodo, new SelectList(ViewBag.lst_periodos, "IdPeriodo", "Descripcion"), new { @class = "form-control", @id = "IdPeriodo" })
+                    @Html.ValidationMessageFor(q => q.IdPeriodo, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -56,7 +62,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","ControlDeMarcaciones",new { Area = "RRHH" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","PagosEnCheques",new { Area = "RRHH" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
@@ -79,6 +85,7 @@
     $("#IdNomina_TipoLiqui").change(function () {
         $("#IdPeriodo").empty();
         cargar_periodos_x_nomina();
+        cargar_empleados();
     });
     $("#IdPeriodo").change(function () {
         cargar_empleados();
@@ -116,6 +123,7 @@
 
     function cargar_periodos_x_nomina() {
         var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
             IdNomina: $("#IdNomina_Tipo").val(),
             IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
         }
@@ -146,7 +154,7 @@
                     IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
                     IdPeriodo: $("#IdPeriodo").val(),
                     IdTransaccionSession: $("#IdTransaccionSession").val()
-                    
+
                 }
 
                 $.ajax({
@@ -167,5 +175,5 @@
     };
 
 
- 
+
 </script>

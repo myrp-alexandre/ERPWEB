@@ -1,10 +1,14 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using Core.Erp.Web.Reportes.Facturacion;
 using DevExpress.Web.Mvc;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
@@ -14,6 +18,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
     {
         #region Variables
         tb_sis_reporte_x_tb_empresa_Bus bus_reporte_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
+        
         #endregion
         #region Index / Metodo
 
@@ -101,23 +106,22 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public ActionResult Disenar(int IdEmpresa = 0, string CodReporte = "")
         {
             var reporte = bus_reporte.get_info(CodReporte);
-
-            if (reporte == null)
-                return RedirectToAction("Index");
-
             var model = bus_reporte_x_emp.GetInfo(IdEmpresa, CodReporte);
-            
-            
 
-            if (model.ReporteDisenio == null)
+            XtraReport rpt = GetReport(reporte.Nom_Carpeta + "." + reporte.rpt_clase_rpt);
+            if (model == null)
             {
-                
-                /*BAN_006_Rpt rpt = new BAN_006_Rpt();
-                    rpt.SaveLayoutToXml(ms);
-                    ms.Position = 0;
-                    model.ReporteDisenio = ms.ToArray();*/
+                MemoryStream ms = new MemoryStream();
+                rpt.SaveLayoutToXml(ms);
+                ms.Position = 0;
+                model = new tb_sis_reporte_x_tb_empresa_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    CodReporte = CodReporte,
+                    ReporteDisenio = ms.ToArray()
+                };
             }
-
+            
             return View(model);
         }
 
@@ -131,6 +135,31 @@ namespace Core.Erp.Web.Areas.General.Controllers
             model.CodReporte = CodReporte; 
             bus_reporte_x_emp.GuardarDB(model);
             return View(model);
+        }
+        #endregion
+
+        #region Get XtraReport
+        public XtraReport GetReport(string Reporte)
+        {
+            Assembly Ensamblado;
+            
+            Ensamblado = Assembly.GetExecutingAssembly();            
+
+            Object ObjFrm;
+            Type tipo = Ensamblado.GetType("Core.Erp.Web.Reportes." + Reporte);
+
+            AssemblyName assemName = Ensamblado.GetName();
+            
+            if (tipo == null)
+            {
+                return null;
+            }
+            else
+            {
+                ObjFrm = Activator.CreateInstance(tipo);
+                XtraReport Rpt = (XtraReport)ObjFrm;
+                return Rpt;
+            }
         }
         #endregion
     }

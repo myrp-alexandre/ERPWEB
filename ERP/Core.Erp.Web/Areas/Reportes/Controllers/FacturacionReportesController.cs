@@ -20,6 +20,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         fa_factura_Bus bus_factura = new fa_factura_Bus();
+        tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
+        string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
 
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbCliente_Facturacion()
@@ -270,14 +272,27 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult FAC_003(int IdSucursal = 0, int IdBodega= 0, decimal IdCbteVta= 0)
         {
             FAC_003_Rpt model = new FAC_003_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_003");            
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            model.p_IdEmpresa.Value = IdEmpresa;
             model.p_IdBodega.Value = IdBodega;
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdCbteVta.Value = IdCbteVta;
-            model.p_mostrar_cuotas.Value = bus_factura.MostrarCuotasRpt(Convert.ToInt32(Session["IdEmpresa"]),IdSucursal,IdBodega,IdCbteVta);
+            model.p_mostrar_cuotas.Value = bus_factura.MostrarCuotasRpt(IdEmpresa,IdSucursal,IdBodega,IdCbteVta);
             model.RequestParameters = false;
             model.DefaultPrinterSettingsUsing.UsePaperKind = false;
-            bus_factura.modificarEstadoImpresion(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, IdBodega, IdCbteVta, true);
+            //bus_factura.modificarEstadoImpresion(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, IdBodega, IdCbteVta, true);
+
+
             return View(model);
         }
 

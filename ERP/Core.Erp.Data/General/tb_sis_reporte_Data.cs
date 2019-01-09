@@ -68,7 +68,9 @@ namespace Core.Erp.Data.General
                         rpt_vista = Entity.rpt_vista,
                         se_muestra_administrador_reportes = Entity.se_muestra_administrador_reportes,
                         rpt_muestra_disenador_reporte=Entity.se_muestra_administrador_reportes,
-                        CodModulo = Entity.CodModulo
+                        CodModulo = Entity.CodModulo,
+
+                        Nom_Carpeta = Entity.tb_modulo.Nom_Carpeta
                     };
                 }
                 return info;

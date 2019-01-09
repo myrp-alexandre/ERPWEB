@@ -48,11 +48,18 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="nom_PuntoVta">Descripción*</label>
                     @Html.TextBoxFor(q => q.nom_PuntoVta, new { @class = "form-control", @id = "pr_codigo" })
                     @Html.ValidationMessageFor(q => q.nom_PuntoVta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IPImpresora">IP impresión directa</label>
+                    @Html.TextBoxFor(q => q.IPImpresora, new { @class = "form-control", @id = "pr_codigo" })
+                    @Html.ValidationMessageFor(q => q.IPImpresora, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

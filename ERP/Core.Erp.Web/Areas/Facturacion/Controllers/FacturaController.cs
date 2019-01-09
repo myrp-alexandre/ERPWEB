@@ -11,8 +11,10 @@ using Core.Erp.Info.Helps;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Areas.Inventario.Controllers;
 using Core.Erp.Web.Helps;
+using Core.Erp.Web.Reportes.Facturacion;
 using DevExpress.Web;
 using DevExpress.Web.Mvc;
+using DevExpress.XtraPrinting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
         fa_factura_det_List List_det = new fa_factura_det_List();
         string mensaje = string.Empty;
+        string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
         in_Producto_List List_producto = new in_Producto_List();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         in_ProductoTipo_Bus bus_producto_tipo = new in_ProductoTipo_Bus();
@@ -228,6 +231,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             #endregion
 
             #region ValidacionCupoCredito
+            /*
             if (!bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, i_validar.lst_det.Sum(q => q.vt_total), ref MsgValidaciones))
             {
                 var info_usuarios = bus_usuario.get_info(string.IsNullOrEmpty(i_validar.IdUsuarioAut) ? "" : i_validar.IdUsuarioAut);
@@ -248,10 +252,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     msg = null;
                     return false;
                 }
-            }
+            }*/
             #endregion
 
             #region ValidacionCarteraVencida
+            /*
             if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa, i_validar.IdCliente, ref MsgValidaciones))
             {
                 var info_usuario = bus_usuario.get_info(string.IsNullOrEmpty(i_validar.IdUsuarioAut) ? "" : i_validar.IdUsuarioAut);
@@ -274,6 +279,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     return false;
                 }
             }
+            */
             #endregion
 
             #region ValidarStock
@@ -321,20 +327,54 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             string mensaje = string.Empty;
             string mensaje_cupo = string.Empty;
-
+            /*
             if (IdCliente != 0)
             {
                 bus_factura.ValidarCarteraVencida(IdEmpresa, IdCliente, ref mensaje);
 
                 bus_cliente.ValidarCupoCreditoCliente(IdEmpresa, 0, 0, 0, "FACT", IdCliente, List_det.get_list(IdTransaccionSession).Sum(q => q.vt_total), ref mensaje_cupo);
             }            
-
+            */
             if (string.IsNullOrEmpty(mensaje))
                 mensaje = mensaje_cupo;
             else
                 mensaje += !string.IsNullOrEmpty(mensaje_cupo) ? (", Además " + mensaje_cupo) : "";
 
             return Json(mensaje, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Imprimir(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, int IdPuntoVta = 0)
+        {
+            
+            var pto_vta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+            if(pto_vta != null)
+            {
+                tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
+                FAC_003_Rpt model = new FAC_003_Rpt();
+                #region Cargo diseño desde base
+                var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_003");
+                if (reporte != null)
+                {
+                    System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                    model.LoadLayout(RootReporte);
+                }
+                #endregion
+                model.p_IdEmpresa.Value = IdEmpresa;
+                model.p_IdBodega.Value = IdBodega;
+                model.p_IdSucursal.Value = IdSucursal;
+                model.p_IdCbteVta.Value = IdCbteVta;
+                model.p_mostrar_cuotas.Value = false;
+                model.RequestParameters = false;
+                model.DefaultPrinterSettingsUsing.UsePaperKind = false;
+                model.PrinterName = pto_vta.IPImpresora;
+                model.CreateDocument();
+                PrintToolBase tool = new PrintToolBase(model.PrintingSystem);
+                if(string.IsNullOrEmpty(pto_vta.IPImpresora))
+                tool.Print();
+                else
+                    tool.Print(pto_vta.IPImpresora);
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetLineaDetalle(int Secuencia = 0, decimal IdTransaccionSession = 0)
@@ -636,7 +676,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             };
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal, IdBodega = model.IdBodega, IdCbteVta = model.IdCbteVta});
         }
         public ActionResult Modificar(int IdEmpresa = 0 , int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
         {
@@ -681,7 +722,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 cargar_combos(model);
                 return View(model);
             };
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal, IdBodega = model.IdBodega, IdCbteVta = model.IdCbteVta });
         }
         public ActionResult Anular(int IdEmpresa = 0 , int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
         {

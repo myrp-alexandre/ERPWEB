@@ -10,16 +10,54 @@
                 Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-
+<script type="text/javascript">
+    function Imprimir() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
+            IdBodega: $("#IdBodega").val(),
+            IdCbteVta: $("#IdCbteVta").val(),
+            IdPuntoVta: $("#IdPuntoVta").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Imprimir", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
 @using (Html.BeginForm("Modificar", "Factura", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.vt_tipoDoc)
     @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal" })
-    @Html.HiddenFor(q => q.IdBodega)
-    @Html.HiddenFor(q => q.IdCbteVta)
+    @Html.HiddenFor(q => q.IdBodega, new { @id = "IdBodega" })
+    @Html.HiddenFor(q => q.IdCbteVta, new { @id = "IdCbteVta" })
     @Html.HiddenFor(q => q.IdPuntoVta, new { @id = "IdPuntoVta" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-10 col-md-1">
+                <button type="button" class="btn btn-primary form-control" id="btn_imprimir" onclick="Imprimir();" title="Imprimir">
+                    <i class="fa fa-print"></i>
+                </button>
+            </div>
+            <div class="col-md-1">
+                <a type="button" class="btn btn-primary form-control " href="@Url.Action("Nuevo","Factura",new { Area = "Facturacion", IdEmpresa = Model.IdEmpresa },null)">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br />
 
     <div class="row" id="DivSuperAdmin" hidden>
         <div class="col-md-6">
