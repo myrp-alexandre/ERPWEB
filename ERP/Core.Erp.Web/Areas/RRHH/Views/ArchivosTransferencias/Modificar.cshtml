@@ -19,7 +19,7 @@
 
 @using (Html.BeginForm("Modificar", "ArchivosTransferencias", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdArchivo)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
@@ -138,8 +138,6 @@
 
 
 
-
-    cargar_tipo_liquidacion_nomina();
             function cargar_tipo_liquidacion_nomina() {
                 var datos = {
                     IdNomina: $("#IdNomina_Tipo").val()
@@ -159,7 +157,6 @@
                         $.each(data, function (i, row) {
                             $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
                         });
-                        $("#IdNomina_TipoLiqui").val(2);
                     },
                     error: function (error) {
                     }
@@ -169,6 +166,7 @@
 
     function cargar_periodos_x_nomina() {
         var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
             IdNomina: $("#IdNomina_Tipo").val(),
             IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
         }
