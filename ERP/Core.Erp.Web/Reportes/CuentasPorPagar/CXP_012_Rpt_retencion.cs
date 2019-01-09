@@ -21,9 +21,7 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
 
         private void CXP_012_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-            lbl_empresa.Text = empresa;
-            lbl_usuario.Text = usuario;
+           
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             decimal IdRetencion = p_IdRetencion.Value == null ? 0 : Convert.ToDecimal(p_IdRetencion.Value);
 
