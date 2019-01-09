@@ -308,7 +308,7 @@
             // 
             this.xrTableCell19.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Valor]")});
-            this.xrTableCell19.Font = new System.Drawing.Font("Verdana", 8F);
+            this.xrTableCell19.Font = new System.Drawing.Font("Verdana", 9F);
             this.xrTableCell19.Name = "xrTableCell19";
             this.xrTableCell19.StylePriority.UseFont = false;
             this.xrTableCell19.TextFormatString = "{0:n2}";
@@ -723,7 +723,7 @@
             // 
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Valor]")});
-            this.xrTableCell5.Font = new System.Drawing.Font("Verdana", 8F);
+            this.xrTableCell5.Font = new System.Drawing.Font("Verdana", 9F);
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StylePriority.UseFont = false;
             this.xrTableCell5.TextFormatString = "{0:n2}";

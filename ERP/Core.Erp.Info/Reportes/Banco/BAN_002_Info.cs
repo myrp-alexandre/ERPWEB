@@ -26,5 +26,6 @@ namespace Core.Erp.Info.Reportes.Banco
         public double dc_Valor_Debe { get; set; }
         public Nullable<double> dc_Valor_Haber { get; set; }
         public string Nombre { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }

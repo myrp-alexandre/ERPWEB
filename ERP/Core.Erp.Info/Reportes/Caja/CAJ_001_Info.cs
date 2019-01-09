@@ -8,6 +8,7 @@ namespace Core.Erp.Info.Reportes.Caja
 {
     public class CAJ_001_Info
     {
+
         public int IdEmpresa { get; set; }
         public int IdTipoCbte { get; set; }
         public decimal IdCbteCble { get; set; }
@@ -30,7 +31,6 @@ namespace Core.Erp.Info.Reportes.Caja
         public string IdCtaCble { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string Nombre { get; set; }
-
-
+        public string Su_Descripcion { get; set; }
     }
 }

@@ -26,5 +26,7 @@ namespace Core.Erp.Info.Reportes.Banco
         public Nullable<double> dc_Valor_Haber { get; set; }
         public string cb_Cheque { get; set; }
         public string cb_giradoA { get; set; }
+        public string NombreUsuario { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }

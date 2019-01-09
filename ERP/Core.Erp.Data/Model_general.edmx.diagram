@@ -81,7 +81,7 @@
         <EntityTypeShape EntityType="Model_general.tb_sis_reporte_x_tb_empresa" Width="1.5" PointX="20" PointY="20.375" />
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_empresa" />
         <AssociationConnector Association="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

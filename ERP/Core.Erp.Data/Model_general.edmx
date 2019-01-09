@@ -545,7 +545,7 @@
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="CodReporte" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ReporteChequeComprobante" Type="varbinary(max)" />
+          <Property Name="ReporteDisenio" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tbl_TransaccionesAutorizadas">
           <Key>
@@ -1508,7 +1508,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             <End Role="tb_sis_reporte" EntitySet="tb_sis_reporte" />
             <End Role="tb_sis_reporte_x_tb_empresa" EntitySet="tb_sis_reporte_x_tb_empresa" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="tb_banco">
           <Key>
             <PropertyRef Name="IdBanco" />
@@ -2600,7 +2600,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ReporteChequeComprobante" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ReporteDisenio" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="tb_empresa" Relationship="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_empresa" FromRole="tb_sis_reporte_x_tb_empresa" ToRole="tb_empresa" />
           <NavigationProperty Name="tb_sis_reporte" Relationship="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte" FromRole="tb_sis_reporte_x_tb_empresa" ToRole="tb_sis_reporte" />
         </EntityType>
@@ -2628,8 +2628,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -3310,7 +3309,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <EntitySetMapping Name="tb_sis_reporte_x_tb_empresa">
             <EntityTypeMapping TypeName="Model_general.tb_sis_reporte_x_tb_empresa">
               <MappingFragment StoreEntitySet="tb_sis_reporte_x_tb_empresa">
-                <ScalarProperty Name="ReporteChequeComprobante" ColumnName="ReporteChequeComprobante" />
+                <ScalarProperty Name="ReporteDisenio" ColumnName="ReporteDisenio" />
                 <ScalarProperty Name="CodReporte" ColumnName="CodReporte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
