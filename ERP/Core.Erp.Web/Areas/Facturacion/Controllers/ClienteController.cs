@@ -29,7 +29,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_cliente_x_fa_Vendedor_x_sucursal_list List_fa_cliente_x_fa_Vendedor_x_sucursal = new fa_cliente_x_fa_Vendedor_x_sucursal_list();
         fa_cliente_x_fa_Vendedor_x_sucursal_Bus bus_fa_vendedor = new fa_cliente_x_fa_Vendedor_x_sucursal_Bus();
         tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
-        tb_parroquia_List ListParroquia = new tb_parroquia_List();
+        tb_parroquia_List ListaParroquia = new tb_parroquia_List();
         List<tb_parroquia_Info> Lista_Parroquia = new List<tb_parroquia_Info>();
         tb_persona_List ListaPersona = new tb_persona_List();
         fa_cliente_tipo_List ListaTipoCliente = new fa_cliente_tipo_List();
@@ -60,6 +60,20 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             return PartialView("_GridViewPartial_cliente", model);
         }
 
+        public ActionResult cmb_parroquia()
+        {
+            try
+            {
+                List<tb_parroquia_Info> model = new List<tb_parroquia_Info>();
+                model = ListaParroquia.get_list();
+
+                return PartialView("_cmb_parroquia", model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
         #region Metodos
         private void cargar_combos(fa_cliente_Info info)
@@ -91,7 +105,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             var lst_tipo_naturaleza = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPONATPER), false);
             ViewBag.lst_tipo_naturaleza = lst_tipo_naturaleza;
         }
-
         #endregion
         #region Acciones
 
@@ -169,7 +182,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = bus_fa_vendedor.get_list(IdEmpresa, IdCliente);
             List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
-            model.lst_fa_cliente_contactos = bus_cliente_contacto.get_list(IdEmpresa, IdCliente);
+            model.info_fa_cliente_contactos = bus_cliente_contacto.get_list(IdEmpresa, IdCliente).FirstOrDefault();
             List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
             cargar_combos(model);
             return View(model);
@@ -325,9 +338,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public JsonResult get_parroquias(string IdCiudad = "")
         {
-            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             var resultado = (bus_parroquia.get_list(IdCiudad, false));
-            ListParroquia.set_list(resultado, IdTransaccionSession);
+            ListaParroquia.set_list(resultado);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
