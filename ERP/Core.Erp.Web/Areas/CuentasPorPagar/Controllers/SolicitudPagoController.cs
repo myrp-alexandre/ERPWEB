@@ -129,11 +129,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             cp_SolicitudPago_Info model = bus_solicitud.GetInfo(IdEmpresa, IdSolicitud);
             if (model == null)
                 return RedirectToAction("Index");
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det = bus_pago_Det.GetListPorPagar(IdEmpresa, IdSucursal);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
-            
-
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -163,6 +161,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         }
 
         [HttpPost]
+
         public ActionResult Anular(cp_SolicitudPago_Info model)
         {
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
