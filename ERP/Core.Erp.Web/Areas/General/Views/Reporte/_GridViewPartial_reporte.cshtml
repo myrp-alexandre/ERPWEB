@@ -87,6 +87,15 @@
             });
             column.Width = Unit.Percentage(5);
         });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-cog\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("Disenar", "Reporte", new { Area = "General", IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa, CodReporte = DataBinder.Eval(c.DataItem, "CodReporte") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

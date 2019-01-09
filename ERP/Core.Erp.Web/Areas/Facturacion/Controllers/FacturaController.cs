@@ -228,6 +228,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             #endregion
 
             #region ValidacionCupoCredito
+            /*
             if (!bus_cliente.ValidarCupoCreditoCliente(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdBodega, i_validar.IdCbteVta, "FACT", i_validar.IdCliente, i_validar.lst_det.Sum(q => q.vt_total), ref MsgValidaciones))
             {
                 var info_usuarios = bus_usuario.get_info(string.IsNullOrEmpty(i_validar.IdUsuarioAut) ? "" : i_validar.IdUsuarioAut);
@@ -248,10 +249,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     msg = null;
                     return false;
                 }
-            }
+            }*/
             #endregion
 
             #region ValidacionCarteraVencida
+            /*
             if (bus_factura.ValidarCarteraVencida(i_validar.IdEmpresa, i_validar.IdCliente, ref MsgValidaciones))
             {
                 var info_usuario = bus_usuario.get_info(string.IsNullOrEmpty(i_validar.IdUsuarioAut) ? "" : i_validar.IdUsuarioAut);
@@ -274,6 +276,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     return false;
                 }
             }
+            */
             #endregion
 
             #region ValidarStock
@@ -321,14 +324,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             string mensaje = string.Empty;
             string mensaje_cupo = string.Empty;
-
+            /*
             if (IdCliente != 0)
             {
                 bus_factura.ValidarCarteraVencida(IdEmpresa, IdCliente, ref mensaje);
 
                 bus_cliente.ValidarCupoCreditoCliente(IdEmpresa, 0, 0, 0, "FACT", IdCliente, List_det.get_list(IdTransaccionSession).Sum(q => q.vt_total), ref mensaje_cupo);
             }            
-
+            */
             if (string.IsNullOrEmpty(mensaje))
                 mensaje = mensaje_cupo;
             else

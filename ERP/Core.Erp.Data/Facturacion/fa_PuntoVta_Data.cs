@@ -101,7 +101,8 @@ namespace Core.Erp.Data.Facturacion
                         nom_PuntoVta = Entity.nom_PuntoVta,
                         estado = Entity.estado,
                         Su_CodigoEstablecimiento = Entity.Su_CodigoEstablecimiento,
-                        IdCaja = Entity.IdCaja
+                        IdCaja = Entity.IdCaja,
+                        
                     };
                 }
                 return info;

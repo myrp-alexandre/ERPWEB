@@ -18,6 +18,7 @@ namespace Core.Erp.Web.Areas.General.Controllers
     {
         #region Variables
         tb_sis_reporte_x_tb_empresa_Bus bus_reporte_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
+        
         #endregion
         #region Index / Metodo
 
@@ -104,17 +105,23 @@ namespace Core.Erp.Web.Areas.General.Controllers
         #region Diseñador
         public ActionResult Disenar(int IdEmpresa = 0, string CodReporte = "")
         {
+            var reporte = bus_reporte.get_info(CodReporte);
             var model = bus_reporte_x_emp.GetInfo(IdEmpresa, CodReporte);
-            
-            if (model.ReporteDisenio == null)
+
+            XtraReport rpt = GetReport(reporte.Nom_Carpeta + "." + reporte.rpt_clase_rpt);
+            if (model == null)
             {
                 MemoryStream ms = new MemoryStream();
-                XtraReport rpt = GetReport(model.Nom_Carpeta+"."+model.Reporte);
                 rpt.SaveLayoutToXml(ms);
                 ms.Position = 0;
-                model.ReporteDisenio = ms.ToArray();
+                model = new tb_sis_reporte_x_tb_empresa_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    CodReporte = CodReporte,
+                    ReporteDisenio = ms.ToArray()
+                };
             }
-
+            
             return View(model);
         }
 
@@ -135,17 +142,11 @@ namespace Core.Erp.Web.Areas.General.Controllers
         public XtraReport GetReport(string Reporte)
         {
             Assembly Ensamblado;
-            string nombre_dll = "";
-            string Nom_asambly = "";
             
-            Nom_asambly = "Core.Erp.Web";
-            nombre_dll = Nom_asambly + ".dll";
-
-            //cargando la dll
-            Ensamblado = Assembly.LoadFrom(nombre_dll);            
+            Ensamblado = Assembly.GetExecutingAssembly();            
 
             Object ObjFrm;
-            Type tipo = Ensamblado.GetType(Nom_asambly + "." + Reporte);
+            Type tipo = Ensamblado.GetType("Core.Erp.Web.Reportes." + Reporte);
 
             AssemblyName assemName = Ensamblado.GetName();
             
