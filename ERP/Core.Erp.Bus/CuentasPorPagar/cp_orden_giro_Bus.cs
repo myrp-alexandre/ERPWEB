@@ -354,7 +354,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         }
 
                     }
-
                 }
                 #endregion
                 return true;

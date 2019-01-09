@@ -43,7 +43,6 @@
         <EntityTypeShape EntityType="Model_rrhh.vwRo_ActaFiniquito" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_rubro_acumulado" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_titulos" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_empleados_consulta" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_Historico_Liquidacion_Vacaciones" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_horario_planificacion_det" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_participacion_utilidad" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
@@ -234,6 +233,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Cargo" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_nomina_x_horas_extras_aprobadas" Width="1.5" PointX="7.375" PointY="13.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_nomina_x_horas_extras_det" Width="1.5" PointX="25.375" PointY="27.75" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_empleados_consulta" Width="1.5" PointX="5.375" PointY="17.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
