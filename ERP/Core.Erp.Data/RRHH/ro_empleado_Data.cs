@@ -95,7 +95,7 @@ namespace Core.Erp.Data.RRHH
                     if (mostrar_anulados)
                         Lista = (from q in Context.vwro_empleados_consulta
                                  where q.IdEmpresa == IdEmpresa
-                                 
+                                 && q.IdSucursal == IdSucursal
                                  select new ro_empleado_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -113,6 +113,7 @@ namespace Core.Erp.Data.RRHH
                     else
                         Lista = (from q in Context.vwro_empleados_consulta
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal == IdSucursal
                                  && q.em_estado == "A"
                                  select new ro_empleado_Info
                                  {

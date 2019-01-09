@@ -19,7 +19,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     if(mostrar_anulados)
-                    Lista = Context.cp_SolicitudPago.Where(q => q.IdEmpresa == IdEmpresa
+                    Lista = Context.vwcp_SolicitudPago.Where(q => q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
                              && Fecha_ini <= q.Fecha && q.Fecha <= Fecha_fin).Select(q => new cp_SolicitudPago_Info
                     {
@@ -33,7 +33,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Solicitante = q.Solicitante,
                         Valor = q.Valor,
                         IdUsuarioCreacion = q.IdUsuarioCreacion
-                    }).OrderByDescending(q=>q.IdSolicitud).ToList();
+                             }).OrderByDescending(q=>q.IdSolicitud).ToList();
 
                     else
                         Lista =  Context.cp_SolicitudPago.Where(q => q.IdEmpresa == IdEmpresa 
