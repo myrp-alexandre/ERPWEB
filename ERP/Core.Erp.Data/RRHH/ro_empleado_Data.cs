@@ -84,7 +84,7 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-        public List<ro_empleado_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<ro_empleado_Info> get_list(int IdEmpresa, int IdSucursal, bool mostrar_anulados)
         {
             try
             {
@@ -95,6 +95,7 @@ namespace Core.Erp.Data.RRHH
                     if (mostrar_anulados)
                         Lista = (from q in Context.vwro_empleados_consulta
                                  where q.IdEmpresa == IdEmpresa
+                                 
                                  select new ro_empleado_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

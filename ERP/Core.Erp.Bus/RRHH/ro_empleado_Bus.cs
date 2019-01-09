@@ -52,11 +52,11 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public List<ro_empleado_Info> get_list(int IdEmpresa, bool estado)
+        public List<ro_empleado_Info> get_list(int IdEmpresa, int IdSucursal, bool estado)
         {
             try
             {
-                return odata.get_list(IdEmpresa, estado);
+                return odata.get_list(IdEmpresa, IdSucursal, estado);
             }
             catch (Exception)
             {

@@ -13,6 +13,9 @@
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+
+    
     <div class="box ">
         <div class="box-header with-border">
 
@@ -43,7 +46,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="FechaInicio">Proceso de la nómina*</label>
-                            @Html.DropDownListFor(q => q.IdTipoNomina, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui", @disabled="disabled" })
+                            @Html.DropDownListFor(q => q.IdTipoNomina, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui", @disabled = "disabled" })
                             @Html.ValidationMessageFor(q => q.IdTipoNomina, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -136,6 +139,7 @@
 
     function cargar_periodos_x_nomina() {
         var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
             IdNomina: $("#IdNomina_Tipo").val(),
             IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
         }

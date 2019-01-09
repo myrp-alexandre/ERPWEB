@@ -37,6 +37,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdNomina = 1;
             model.IdTipoNomina = 1;
+            model.IdEmpresa=Convert.ToInt32( SessionFixed.IdEmpresa);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             cargar_combos(0, 0);
             return View(model);
