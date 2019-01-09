@@ -472,7 +472,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1500'			,(ISNULL( [500],0) -ISNULL( [900],0))
+@IdEmpresa				,@IdRol				,IdSucursal			,IdEmpleado		,@IdRubro_calculado	,'1500'			,(ISNULL( [22],0) -ISNULL( [23],0))
 ,1						,'Liquido a recibir'	
 FROM (
     SELECT 
@@ -491,7 +491,7 @@ FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
 PIVOT
 (
    max([Valor])
-    FOR [IdRubro] IN ([500],[900])
+    FOR [IdRubro] IN ([22],[23])
 )AS pvt
 
 
