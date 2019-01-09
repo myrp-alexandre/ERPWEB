@@ -185,15 +185,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="FormaPago">Nombre de Contacto*</label>
-                                @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Nombres, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Nombres, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Nombres, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Nombres, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="FormaPago">Correo*</label>
-                                @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Correo, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Correo, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Correo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Correo, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -203,22 +203,22 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="IdTipoCredito">Teléfono*</label>
-                                @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Telefono, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Telefono, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Telefono, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Telefono, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="cl_plazo">Celular*</label>
-                                @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Celular, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Celular, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Celular, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Celular, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="FormaPago">Dirección*</label>
-                                @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Direccion, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Nombres, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Direccion, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Nombres, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -244,14 +244,14 @@
                                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                                        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_parroquias();}";
                                    }).BindList(ViewBag.lst_ciudad).GetHtml()
-                                    @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.IdCiudad, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(q => q.IdCiudad, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="cl_plazo">Parroquia*</label>
-                                @Html.DropDownListFor(q => q.info_fa_cliente_contactos.IdParroquia, new SelectList(ViewBag.lst_parroquia, "IdParroquia", "nom_parroquia"), new { @class = "form-control", @id = "IdParroquia" })
-                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.IdParroquia, "", new { @class = "text-danger" })
+                                @Html.Action("cmb_parroquia", Model.IdParroquia)
+                                @Html.ValidationMessageFor(q => q.IdParroquia, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -372,10 +372,6 @@
         get_info_tipo_cliente();
     })
 
-    $("#IdCiudad").change(function () {
-        get_parroquias();
-    });
-
     $("#pe_cedulaRuc").blur(function () {
         Validar_cedula_ruc();
     });
@@ -426,9 +422,10 @@
 
 
 
-    $("#pe_nombreCompleto").change(function () {
-        agregar_contacto();
-    });
+    //$("#pe_nombreCompleto").change(function () {
+    //    agregar_contacto();
+    //});
+
     function actualizar_nombre_completo() {
         var apellido = $("#pe_apellido").val();
         var nombre = $("#pe_nombre").val();
@@ -626,11 +623,8 @@
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                console.log(data);
-                $.each(data, function (i, row) {
-                    $("#IdParroquia").append("<option value=" + row.IdParroquia + ">" + row.nom_parroquia + "</option>");
-                });
+            success: function (data) {              
+                IdParroquia.PerformCallback();
             },
             error: function (error) {
             }

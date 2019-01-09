@@ -41,6 +41,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public string GiradoA { get; set; }
         //campos que no existen en la tabla
         public List<cp_SolicitudPagoDet_Info> lst_det { get; set; }
+        public string pe_nombreCompleto { get; set; }
 
     }
 }

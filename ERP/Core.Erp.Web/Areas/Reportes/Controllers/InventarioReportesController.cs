@@ -173,7 +173,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdCategoria = "",
                 IdMarca = 0,
                 IdProducto = 0,
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdLinea = 0,
+                IdGrupo = 0,
+                IdSubGrupo = 0
             };
 
             cargar_combos(model);
@@ -182,13 +185,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdBodega.Value = model.IdBodega;
             report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
-            report.p_IdCategoria.Value = model.IdCategoria;
+            report.p_IdCategoria.Value = model.IdCategoria == null ? "" : model.IdCategoria;
             report.p_IdLinea.Value = model.IdLinea;
             report.p_IdGrupo.Value = model.IdGrupo;
             report.p_IdSubgrupo.Value = model.IdSubGrupo;
+            report.p_IdMarca.Value = model.IdMarca;
             report.p_fecha_corte.Value = model.fecha_fin;
             report.p_mostrar_stock_0.Value = model.mostrar_saldos_en_0;
-            report.p_IdMarca.Value = model.IdMarca;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
 

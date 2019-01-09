@@ -12,14 +12,22 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwro_empleado_x_Proyeccion_Gastos_Personales
+    public partial class vwcp_SolicitudPago
     {
         public int IdEmpresa { get; set; }
-        public decimal IdTransaccion { get; set; }
-        public decimal IdEmpleado { get; set; }
-        public int AnioFiscal { get; set; }
-        public string pe_cedulaRuc { get; set; }
+        public decimal IdSolicitud { get; set; }
+        public int IdSucursal { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public decimal IdProveedor { get; set; }
+        public string Concepto { get; set; }
+        public bool Estado { get; set; }
+        public double Valor { get; set; }
+        public string Solicitante { get; set; }
+        public string GiradoA { get; set; }
+        public string pr_codigo { get; set; }
+        public string pe_razonSocial { get; set; }
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
         public string pe_nombreCompleto { get; set; }
-        public bool estado { get; set; }
     }
 }

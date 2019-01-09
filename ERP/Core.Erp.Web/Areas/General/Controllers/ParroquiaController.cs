@@ -144,20 +144,20 @@ namespace Core.Erp.Web.Areas.General.Controllers
     public class tb_parroquia_List
     {
         string Variable = "tb_parroquia_Info";
-        public List<tb_parroquia_Info> get_list(decimal IdTransaccionSession)
+        public List<tb_parroquia_Info> get_list()
         {
-            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            if (HttpContext.Current.Session[Variable] == null)
             {
                 List<tb_parroquia_Info> list = new List<tb_parroquia_Info>();
 
-                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+                HttpContext.Current.Session[Variable] = list;
             }
-            return (List<tb_parroquia_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+            return (List<tb_parroquia_Info>)HttpContext.Current.Session[Variable];
         }
 
-        public void set_list(List<tb_parroquia_Info> list, decimal IdTransaccionSession)
+        public void set_list(List<tb_parroquia_Info> list)
         {
-            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            HttpContext.Current.Session[Variable] = list;
         }
     }
 }
