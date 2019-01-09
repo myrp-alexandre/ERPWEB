@@ -32,11 +32,11 @@ namespace Core.Erp.Data.CuentasPorPagar
                         Fecha = q.Fecha,
                         Solicitante = q.Solicitante,
                         Valor = q.Valor,
-                        IdUsuarioCreacion = q.IdUsuarioCreacion
+                        pe_nombreCompleto = q.pe_nombreCompleto
                              }).OrderByDescending(q=>q.IdSolicitud).ToList();
 
                     else
-                        Lista =  Context.cp_SolicitudPago.Where(q => q.IdEmpresa == IdEmpresa 
+                        Lista =  Context.vwcp_SolicitudPago.Where(q => q.IdEmpresa == IdEmpresa 
                         && q.IdSucursal == IdSucursal
                         && Fecha_ini <= q.Fecha && q.Fecha <= Fecha_fin
                         && q.Estado == true).Select(q => new cp_SolicitudPago_Info
@@ -50,7 +50,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                             Fecha = q.Fecha,
                             Solicitante = q.Solicitante,
                             Valor = q.Valor,
-                        IdUsuarioCreacion = q.IdUsuarioCreacion
+                            pe_nombreCompleto = q.pe_nombreCompleto
                         }).OrderByDescending(q => q.IdSolicitud).ToList();
                 }
                 return Lista;
