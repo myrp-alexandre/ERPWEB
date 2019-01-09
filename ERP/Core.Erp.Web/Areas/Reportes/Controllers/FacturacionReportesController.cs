@@ -363,8 +363,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         public ActionResult FAC_007(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             FAC_007_Rpt model = new FAC_007_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_007");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+            model.p_IdEmpresa.Value = IdEmpresa;
             model.p_IdBodega.Value = IdBodega;
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdCbteVta.Value = IdCbteVta;
