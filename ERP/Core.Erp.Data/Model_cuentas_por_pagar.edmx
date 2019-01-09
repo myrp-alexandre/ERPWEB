@@ -624,8 +624,8 @@
           <Property Name="Codigo_Secuenciales_Transaccion" Type="varchar" MaxLength="250" />
           <Property Name="Sustento_Tributario" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwcp_codigo_SRI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_codigo_SRI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_codigo_SRI">
           <Key>
             <PropertyRef Name="IdCodigo_SRI" />
@@ -650,8 +650,8 @@ warning 6002: The table/view 'DBERP.dbo.vwcp_codigo_SRI' does not have a primary
           <Property Name="IdTipoSRI" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwcp_orden_giro_x_pagar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_giro_x_pagar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro_x_pagar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -718,8 +718,8 @@ warning 6002: The table/view 'DBERP.dbo.vwcp_orden_giro_x_pagar' does not have a
           <Property Name="Valor_cuota" Type="float" />
           <Property Name="IdTipoMovi" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwcp_orden_pago' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_pago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_pago">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -759,8 +759,40 @@ warning 6002: The table/view 'DBERP.dbo.vwcp_orden_pago' does not have a primary
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwcp_nota_DebCre' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_SolicitudPago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwcp_SolicitudPago">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSolicitud" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="Concepto" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Solicitante" />
+            <PropertyRef Name="GiradoA" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSolicitud" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="IdProveedor" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Concepto" Type="varchar(max)" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="Solicitante" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="GiradoA" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="pr_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="pe_razonSocial" Type="varchar" MaxLength="150" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_nota_DebCre' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_nota_DebCre">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -843,8 +875,8 @@ warning 6002: The table/view 'DBERP.web.vwcp_nota_DebCre' does not have a primar
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="pe_razonSocial" Type="varchar" MaxLength="150" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwcp_orden_giro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_orden_giro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -922,8 +954,8 @@ warning 6002: The table/view 'DBERP.web.vwcp_orden_giro' does not have a primary
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwcp_orden_giro_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_orden_giro_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -966,8 +998,8 @@ warning 6002: The table/view 'DBERP.web.vwcp_orden_giro_det' does not have a pri
           <Property Name="IdOrdenCompra" Type="numeric" Precision="18" Scale="0" />
           <Property Name="Secuencia_oc" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwcp_proveedor_consulta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_proveedor_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_proveedor_consulta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -986,8 +1018,8 @@ warning 6002: The table/view 'DBERP.web.vwcp_proveedor_consulta' does not have a
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pr_estado" Type="varchar" MaxLength="1" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwcp_retencion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_retencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_retencion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1039,8 +1071,8 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion' does not have a primary 
           <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="IdSucursal_cxp" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_retencion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_retencion_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1598,6 +1630,25 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
     [vwcp_orden_pago].[IdSucursal] AS [IdSucursal], 
     [vwcp_orden_pago].[Su_Descripcion] AS [Su_Descripcion]
     FROM [dbo].[vwcp_orden_pago] AS [vwcp_orden_pago]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwcp_SolicitudPago" EntityType="Self.vwcp_SolicitudPago" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwcp_SolicitudPago].[IdEmpresa] AS [IdEmpresa], 
+    [vwcp_SolicitudPago].[IdSolicitud] AS [IdSolicitud], 
+    [vwcp_SolicitudPago].[IdSucursal] AS [IdSucursal], 
+    [vwcp_SolicitudPago].[Fecha] AS [Fecha], 
+    [vwcp_SolicitudPago].[IdProveedor] AS [IdProveedor], 
+    [vwcp_SolicitudPago].[Concepto] AS [Concepto], 
+    [vwcp_SolicitudPago].[Estado] AS [Estado], 
+    [vwcp_SolicitudPago].[Valor] AS [Valor], 
+    [vwcp_SolicitudPago].[Solicitante] AS [Solicitante], 
+    [vwcp_SolicitudPago].[GiradoA] AS [GiradoA], 
+    [vwcp_SolicitudPago].[pr_codigo] AS [pr_codigo], 
+    [vwcp_SolicitudPago].[pe_razonSocial] AS [pe_razonSocial], 
+    [vwcp_SolicitudPago].[pe_apellido] AS [pe_apellido], 
+    [vwcp_SolicitudPago].[pe_nombre] AS [pe_nombre], 
+    [vwcp_SolicitudPago].[pe_nombreCompleto] AS [pe_nombreCompleto]
+    FROM [dbo].[vwcp_SolicitudPago] AS [vwcp_SolicitudPago]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_nota_DebCre" EntityType="Self.vwcp_nota_DebCre" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -2642,6 +2693,7 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
           </FunctionImport>
           <EntitySet Name="vwcp_orden_giro_x_pagar" EntityType="Model_cuentas_por_pagar.vwcp_orden_giro_x_pagar" />
           <EntitySet Name="vwcp_retencion" EntityType="Model_cuentas_por_pagar.vwcp_retencion" />
+          <EntitySet Name="vwcp_SolicitudPago" EntityType="Model_cuentas_por_pagar.vwcp_SolicitudPago" />
           </EntityContainer>
         <ComplexType Name="spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result">
           <Property Type="Int64" Name="IdRow" Nullable="false" />
@@ -3678,6 +3730,36 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
           <Property Name="IdSucursal_cxp" Type="Int32" />
         </EntityType>
+        <EntityType Name="vwcp_SolicitudPago">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSolicitud" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="IdProveedor" />
+            <PropertyRef Name="Concepto" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Solicitante" />
+            <PropertyRef Name="GiradoA" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSolicitud" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdProveedor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Concepto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Solicitante" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="GiradoA" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="pr_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_razonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4665,6 +4747,27 @@ warning 6002: The table/view 'DBERP.web.vwcp_retencion_det' does not have a prim
                 <ScalarProperty Name="serie1" ColumnName="serie1" />
                 <ScalarProperty Name="CodDocumentoTipo" ColumnName="CodDocumentoTipo" />
                 <ScalarProperty Name="IdRetencion" ColumnName="IdRetencion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcp_SolicitudPago">
+            <EntityTypeMapping TypeName="Model_cuentas_por_pagar.vwcp_SolicitudPago">
+              <MappingFragment StoreEntitySet="vwcp_SolicitudPago">
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_razonSocial" ColumnName="pe_razonSocial" />
+                <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
+                <ScalarProperty Name="GiradoA" ColumnName="GiradoA" />
+                <ScalarProperty Name="Solicitante" ColumnName="Solicitante" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

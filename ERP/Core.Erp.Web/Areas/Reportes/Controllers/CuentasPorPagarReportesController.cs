@@ -15,6 +15,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     public class CuentasPorPagarReportesController : Controller
     {
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+        tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
+        string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
+
         #region Metodos ComboBox bajo demanda
         public ActionResult CmbProveedor_CXP()
         {
@@ -248,12 +251,25 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public ActionResult CXP_012(decimal IdRetencion = 0)
         {
-            CXP_012_Rpt model = new CXP_012_Rpt();
+            CXP_012_Rpt_retencion model = new CXP_012_Rpt_retencion();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXP_012");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+
             model.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
             model.p_IdRetencion.Value = IdRetencion;
             model.usuario = SessionFixed.IdUsuario;
             model.empresa = SessionFixed.NomEmpresa;
             model.RequestParameters = false;
+            model.DefaultPrinterSettingsUsing.UsePaperKind = false;
+
             return View(model);
         }
 
