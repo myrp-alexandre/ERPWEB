@@ -222,7 +222,7 @@ namespace Core.Erp.Data.CuentasPorPagar
                                  Observacion = q.Observacion,
                                  pe_nombreCompleto = q.Nom_Beneficiario,
                                  IdCtaCble = q.IdCtaCble,
-                                 MontoAplicado = q.Valor_a_pagar
+                                 MontoAplicado = q.Saldo_x_Pagar_OP
                              }).ToList();
                 }
 
