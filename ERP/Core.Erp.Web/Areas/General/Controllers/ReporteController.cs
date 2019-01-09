@@ -1,7 +1,10 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
 using Core.Erp.Web.Helps;
+using DevExpress.Web.Mvc;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
@@ -9,6 +12,9 @@ namespace Core.Erp.Web.Areas.General.Controllers
     [SessionTimeout]
     public class ReporteController : Controller
     {
+        #region Variables
+        tb_sis_reporte_x_tb_empresa_Bus bus_reporte_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
+        #endregion
         #region Index / Metodo
 
         tb_sis_reporte_Bus bus_reporte = new tb_sis_reporte_Bus();
@@ -91,5 +97,41 @@ namespace Core.Erp.Web.Areas.General.Controllers
 
         #endregion
 
+        #region Diseñador
+        public ActionResult Disenar(int IdEmpresa = 0, string CodReporte = "")
+        {
+            var reporte = bus_reporte.get_info(CodReporte);
+
+            if (reporte == null)
+                return RedirectToAction("Index");
+
+            var model = bus_reporte_x_emp.GetInfo(IdEmpresa, CodReporte);
+            
+            
+
+            if (model.ReporteDisenio == null)
+            {
+                
+                /*BAN_006_Rpt rpt = new BAN_006_Rpt();
+                    rpt.SaveLayoutToXml(ms);
+                    ms.Position = 0;
+                    model.ReporteDisenio = ms.ToArray();*/
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Disenar(tb_sis_reporte_x_tb_empresa_Info model)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            string CodReporte = Request.Params["fx_CodReporte"] != null ? Request.Params["fx_CodReporte"].ToString() : "";
+            model.ReporteDisenio = ReportDesignerExtension.GetReportXml("ReportDesigner");
+            model.IdEmpresa = IdEmpresa;
+            model.CodReporte = CodReporte; 
+            bus_reporte_x_emp.GuardarDB(model);
+            return View(model);
+        }
+        #endregion
     }
 }

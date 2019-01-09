@@ -538,6 +538,15 @@
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="CodReporte" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="tb_sis_reporte_x_tb_empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="CodReporte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="CodReporte" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReporteChequeComprobante" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tbl_TransaccionesAutorizadas">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -550,8 +559,8 @@
           <Property Name="Observacion" Type="varchar(max)" />
           <Property Name="FechaTransaccion" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwtb_banco_procesos_bancarios_x_empresa' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_banco_procesos_bancarios_x_empresa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_banco_procesos_bancarios_x_empresa">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -576,8 +585,8 @@ warning 6002: The table/view 'DBERP.dbo.vwtb_banco_procesos_bancarios_x_empresa'
           <Property Name="IdBanco" Type="int" Nullable="false" />
           <Property Name="Expr1" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwtb_Ciudad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_Ciudad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_Ciudad">
           <Key>
             <PropertyRef Name="IdCiudad" />
@@ -594,16 +603,16 @@ warning 6002: The table/view 'DBERP.dbo.vwtb_Ciudad' does not have a primary key
           <Property Name="IdPais" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="IdProvincia" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwtb_ciudad_id' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_ciudad_id' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_ciudad_id">
           <Key>
             <PropertyRef Name="IdCiudad" />
           </Key>
           <Property Name="IdCiudad" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwtb_pais' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_pais">
           <Key>
             <PropertyRef Name="Nombre" />
@@ -611,24 +620,24 @@ warning 6002: The table/view 'DBERP.dbo.vwtb_pais' does not have a primary key d
           <Property Name="IdPais" Type="numeric" Precision="18" Scale="0" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwtb_parroquia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_parroquia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_parroquia">
           <Key>
             <PropertyRef Name="IdParroquia" />
           </Key>
           <Property Name="IdParroquia" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwtb_provincia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_provincia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_provincia">
           <Key>
             <PropertyRef Name="IdProvincia" />
           </Key>
           <Property Name="IdProvincia" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.dbo.vwtb_TarjetaCredito_x_cp_proveedor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_TarjetaCredito_x_cp_proveedor' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_TarjetaCredito_x_cp_proveedor">
           <Key>
             <PropertyRef Name="IdTarjeta" />
@@ -652,8 +661,8 @@ warning 6002: The table/view 'DBERP.dbo.vwtb_TarjetaCredito_x_cp_proveedor' does
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="IdTransaccion" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwtb_bodega_x_sucursal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwtb_bodega_x_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_bodega_x_sucursal">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -674,8 +683,8 @@ warning 6002: The table/view 'DBERP.web.vwtb_bodega_x_sucursal' does not have a 
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_comprobantes_no_autorizados">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1023,6 +1032,30 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_sis_reporte_x_tb_empresa_tb_empresa">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_sis_reporte_x_tb_empresa" Type="Self.tb_sis_reporte_x_tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="tb_sis_reporte_x_tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte">
+          <End Role="tb_sis_reporte" Type="Self.tb_sis_reporte" Multiplicity="1" />
+          <End Role="tb_sis_reporte_x_tb_empresa" Type="Self.tb_sis_reporte_x_tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_reporte">
+              <PropertyRef Name="CodReporte" />
+            </Principal>
+            <Dependent Role="tb_sis_reporte_x_tb_empresa">
+              <PropertyRef Name="CodReporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_sucursal_tb_empresa">
           <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
           <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="*" />
@@ -1083,6 +1116,7 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
           <EntitySet Name="tbl_usuario_ftp" EntityType="Self.tbl_usuario_ftp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte" EntityType="Self.tb_sis_reporte" Schema="web" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte_x_seg_usuario" EntityType="Self.tb_sis_reporte_x_seg_usuario" Schema="web" store:Type="Tables" />
+          <EntitySet Name="tb_sis_reporte_x_tb_empresa" EntityType="Self.tb_sis_reporte_x_tb_empresa" Schema="web" store:Type="Tables" />
           <EntitySet Name="tbl_TransaccionesAutorizadas" EntityType="Self.tbl_TransaccionesAutorizadas" Schema="web" store:Type="Tables" />
           <EntitySet Name="vwtb_banco_procesos_bancarios_x_empresa" EntityType="Self.vwtb_banco_procesos_bancarios_x_empresa" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1282,6 +1316,14 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
             <End Role="tb_sis_reporte" EntitySet="tb_sis_reporte" />
             <End Role="tb_sis_reporte_x_seg_usuario" EntitySet="tb_sis_reporte_x_seg_usuario" />
           </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_reporte_x_tb_empresa_tb_empresa" Association="Self.FK_tb_sis_reporte_x_tb_empresa_tb_empresa">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_sis_reporte_x_tb_empresa" EntitySet="tb_sis_reporte_x_tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte" Association="Self.FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte">
+            <End Role="tb_sis_reporte" EntitySet="tb_sis_reporte" />
+            <End Role="tb_sis_reporte_x_tb_empresa" EntitySet="tb_sis_reporte_x_tb_empresa" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_sucursal_tb_empresa" Association="Self.FK_tb_sucursal_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
@@ -1456,6 +1498,15 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
           <AssociationSet Name="FK_tb_sucursal_tb_empresa" Association="Model_general.FK_tb_sucursal_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+          </AssociationSet>
+          <EntitySet Name="tb_sis_reporte_x_tb_empresa" EntityType="Model_general.tb_sis_reporte_x_tb_empresa" />
+          <AssociationSet Name="FK_tb_sis_reporte_x_tb_empresa_tb_empresa" Association="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_empresa">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_sis_reporte_x_tb_empresa" EntitySet="tb_sis_reporte_x_tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte" Association="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte">
+            <End Role="tb_sis_reporte" EntitySet="tb_sis_reporte" />
+            <End Role="tb_sis_reporte_x_tb_empresa" EntitySet="tb_sis_reporte_x_tb_empresa" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="tb_banco">
@@ -2247,6 +2298,7 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
           <Property Name="Se_Mustra_Disenador_rpt" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tb_modulo" Relationship="Model_general.FK_tb_sis_reporte_tb_modulo" FromRole="tb_sis_reporte" ToRole="tb_modulo" />
           <NavigationProperty Name="tb_sis_reporte_x_seg_usuario" Relationship="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_sis_reporte" FromRole="tb_sis_reporte" ToRole="tb_sis_reporte_x_seg_usuario" />
+          <NavigationProperty Name="tb_sis_reporte_x_tb_empresa" Relationship="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte" FromRole="tb_sis_reporte" ToRole="tb_sis_reporte_x_tb_empresa" />
         </EntityType>
         <EntityType Name="tb_sis_reporte_x_seg_usuario">
           <Key>
@@ -2440,6 +2492,7 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
           <NavigationProperty Name="tb_sis_Documento_Tipo_x_Empresa" Relationship="Model_general.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" FromRole="tb_empresa" ToRole="tb_sis_Documento_Tipo_x_Empresa" />
           <NavigationProperty Name="tb_sis_reporte_x_seg_usuario" Relationship="Model_general.FK_tb_sis_reporte_x_seg_usuario_tb_empresa" FromRole="tb_empresa" ToRole="tb_sis_reporte_x_seg_usuario" />
           <NavigationProperty Name="tb_sucursal" Relationship="Model_general.FK_tb_sucursal_tb_empresa" FromRole="tb_empresa" ToRole="tb_sucursal" />
+          <NavigationProperty Name="tb_sis_reporte_x_tb_empresa" Relationship="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_empresa" FromRole="tb_empresa" ToRole="tb_sis_reporte_x_tb_empresa" />
         </EntityType>
         <Association Name="FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa">
           <End Type="Model_general.tb_empresa" Role="tb_empresa" Multiplicity="1" />
@@ -2537,6 +2590,41 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
             </Principal>
             <Dependent Role="tb_sucursal">
               <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tb_sis_reporte_x_tb_empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="CodReporte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReporteChequeComprobante" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="tb_empresa" Relationship="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_empresa" FromRole="tb_sis_reporte_x_tb_empresa" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_sis_reporte" Relationship="Model_general.FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte" FromRole="tb_sis_reporte_x_tb_empresa" ToRole="tb_sis_reporte" />
+        </EntityType>
+        <Association Name="FK_tb_sis_reporte_x_tb_empresa_tb_empresa">
+          <End Type="Model_general.tb_empresa" Role="tb_empresa" Multiplicity="1" />
+          <End Type="Model_general.tb_sis_reporte_x_tb_empresa" Role="tb_sis_reporte_x_tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="tb_sis_reporte_x_tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sis_reporte_x_tb_empresa_tb_sis_reporte">
+          <End Type="Model_general.tb_sis_reporte" Role="tb_sis_reporte" Multiplicity="1" />
+          <End Type="Model_general.tb_sis_reporte_x_tb_empresa" Role="tb_sis_reporte_x_tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_reporte">
+              <PropertyRef Name="CodReporte" />
+            </Principal>
+            <Dependent Role="tb_sis_reporte_x_tb_empresa">
+              <PropertyRef Name="CodReporte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3215,6 +3303,15 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_reporte_x_tb_empresa">
+            <EntityTypeMapping TypeName="Model_general.tb_sis_reporte_x_tb_empresa">
+              <MappingFragment StoreEntitySet="tb_sis_reporte_x_tb_empresa">
+                <ScalarProperty Name="ReporteChequeComprobante" ColumnName="ReporteChequeComprobante" />
+                <ScalarProperty Name="CodReporte" ColumnName="CodReporte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

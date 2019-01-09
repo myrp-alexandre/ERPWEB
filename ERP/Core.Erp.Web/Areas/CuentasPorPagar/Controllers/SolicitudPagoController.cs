@@ -93,11 +93,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 Fecha = DateTime.Now,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
-                lst_det = new List<cp_SolicitudPagoDet_Info>()
-
+                lst_det = new List<cp_SolicitudPagoDet_Info>(),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
-            List_det_x_cruzar.set_list(model.lst_det, model.IdTransaccionSession);
             seg_usuario_Info mod = bus_usuario.get_info(SessionFixed.IdUsuario);
             model.Solicitante = mod.Nombre;
             cargar_combos(model.IdEmpresa);
@@ -109,7 +108,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
-            model.lst_det = List_det_x_cruzar.get_list(model.IdTransaccionSession);
             if (!bus_solicitud.GuardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -126,10 +124,13 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+            int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             cp_SolicitudPago_Info model = bus_solicitud.GetInfo(IdEmpresa, IdSolicitud);
             if (model == null)
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            //model.lst_det = bus_pago_Det.GetListPorPagar(IdEmpresa, IdSucursal);
+            model.lst_det = List_det_x_cruzar.get_list(model.IdTransaccionSession);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
@@ -178,14 +179,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public JsonResult GetListPorPagar(int IdEmpresa = 0 , int IdSucursal = 0, decimal IdTransaccionSession = 0)
         {
-            bool resultado = true;
             var lst = bus_pago_Det.GetListPorPagar(IdEmpresa, IdSucursal);
-            if (lst.Count() == 0)
-                resultado = false;
-            var det = List_det_x_cruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            List_det_x_cruzar.set_list(lst, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+             List_det_x_cruzar.set_list(lst, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
            
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -198,23 +195,23 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var model = List_det_x_cruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_aprobacion", model);
         }
-        public JsonResult EditingAddNewAS(string IDs = "", decimal IdTransaccionSession = 0)
+
+        [HttpPost, ValidateInput(false)]
+        public JsonResult EditingAddNewAS(string IDs = "", decimal IdTransaccionSession = 0, int IdEmpresa = 0)
         {
-            bool resultado = true;
-            if (!string.IsNullOrEmpty(IDs))
+            if (IDs!="")
             {
-                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                var lst = List_det_x_cruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                var lst = List_det_x_cruzar.get_list(IdTransaccionSession);
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
                     var info_det = lst.Where(q => q.Secuencia == Convert.ToInt32(item)).FirstOrDefault();
                     if (info_det != null)
-                        List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                        List_det.AddRow(info_det, IdTransaccionSession);
                 }
             }
-            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            var model = List_det.get_list(IdTransaccionSession);
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
 
@@ -226,14 +223,14 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_aprobacion_solicitud", model);
         }
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] cp_SolicitudPagoDet_Info info_det)
-        {
-            if (ModelState.IsValid)
-                List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-           var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_aprobacion_solicitud", model);
-        }
+        //[HttpPost, ValidateInput(false)]
+        //public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] cp_SolicitudPagoDet_Info info_det)
+        //{
+        //    if (ModelState.IsValid)
+        //        List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //   var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //    return PartialView("_GridViewPartial_aprobacion_solicitud", model);
+        //}
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] cp_SolicitudPagoDet_Info info_det)
         {

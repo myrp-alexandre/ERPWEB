@@ -192,6 +192,7 @@
     <Compile Include="General\tb_sis_reporte_Bus.cs" />
     <Compile Include="General\tb_sis_reporte_diseno_Bus.cs" />
     <Compile Include="General\tb_sis_reporte_x_seg_usuario_Bus.cs" />
+    <Compile Include="General\tb_sis_reporte_x_tb_empresa_Bus.cs" />
     <Compile Include="General\tb_sucursal_Bus.cs" />
     <Compile Include="General\tb_TarjetaCredito_Bus.cs" />
     <Compile Include="General\tb_TarjetaCredito_x_cp_proveedor_Bus.cs" />

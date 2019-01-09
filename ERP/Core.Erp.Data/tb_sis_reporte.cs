@@ -17,6 +17,7 @@ namespace Core.Erp.Data
         public tb_sis_reporte()
         {
             this.tb_sis_reporte_x_seg_usuario = new HashSet<tb_sis_reporte_x_seg_usuario>();
+            this.tb_sis_reporte_x_tb_empresa = new HashSet<tb_sis_reporte_x_tb_empresa>();
         }
     
         public string CodReporte { get; set; }
@@ -40,5 +41,6 @@ namespace Core.Erp.Data
     
         public virtual tb_modulo tb_modulo { get; set; }
         public virtual ICollection<tb_sis_reporte_x_seg_usuario> tb_sis_reporte_x_seg_usuario { get; set; }
+        public virtual ICollection<tb_sis_reporte_x_tb_empresa> tb_sis_reporte_x_tb_empresa { get; set; }
     }
 }

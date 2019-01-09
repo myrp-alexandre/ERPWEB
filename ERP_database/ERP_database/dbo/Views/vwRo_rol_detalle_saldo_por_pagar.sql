@@ -9,7 +9,7 @@ FROM            (SELECT        rol.IdEmpresa, rol.IdRol, rol.IdNominaTipo, rol.I
                           FROM            dbo.ro_rol AS rol INNER JOIN
                                                     dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol INNER JOIN
                                                     dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
-                                                    dbo.tb_persona AS persona ON emp.IdPersona = persona.IdPersona AND rol_det.IdRubro = 950) AS rol_1 LEFT OUTER JOIN
+                                                    dbo.tb_persona AS persona ON emp.IdPersona = persona.IdPersona AND rol_det.IdRubro = 24) AS rol_1 LEFT OUTER JOIN
                              (SELECT        archivo.IdEmpresa, archivo.IdNomina, archivo.IdNominaTipo, archivo.IdPeriodo, archivo_det.IdSucursal, archivo_det.IdEmpleado, SUM(archivo_det.Valor) AS Valor
                                FROM            dbo.ro_archivos_bancos_generacion AS archivo INNER JOIN
                                                          dbo.ro_archivos_bancos_generacion_x_empleado AS archivo_det ON archivo.IdEmpresa = archivo_det.IdEmpresa AND archivo.IdArchivo = archivo_det.IdArchivo AND archivo.estado = 'A'
@@ -32,7 +32,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[14] 4[5] 2[63] 3) )"
+         Configuration = "(H (1[14] 4[5] 2[33] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -125,8 +125,19 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
+      Begin ColumnWidths = 20
          Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -156,6 +167,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_rol_detalle_saldo_por_pagar';
+
+
 
 
 
