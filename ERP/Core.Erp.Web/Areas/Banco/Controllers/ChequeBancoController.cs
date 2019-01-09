@@ -194,14 +194,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 msg = "Los valores ingresados no concuerdan con el valor del diario";
                 return false;
             }
-            if (i_validar.IdCbteCble == 0)
-            {
-                i_validar.cb_Observacion += " Canc./ ";
-                foreach (var item in i_validar.lst_det_canc_op)
-                {
-                    i_validar.cb_Observacion += item.Referencia + "/";
-                }
-            }            
             i_validar.IdPeriodo = Convert.ToInt32(i_validar.cb_Fecha.ToString("yyyyMM"));
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
