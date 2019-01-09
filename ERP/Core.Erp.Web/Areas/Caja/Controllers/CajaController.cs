@@ -4,6 +4,7 @@ using Core.Erp.Bus.General;
 using Core.Erp.Bus.SeguridadAcceso;
 using Core.Erp.Info.Caja;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using System;
@@ -42,14 +43,28 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         #region Index
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos(model.IdEmpresa);
+            return View(model);
         }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            cargar_combos(model.IdEmpresa);
+            return View(model);
+        }
+       
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_caja()
+        public ActionResult GridViewPartial_caja(int IdSucursal=0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<caj_Caja_Info> model = bus_caja.get_list(IdEmpresa, true);
+            ViewBag.IdSucursal = IdSucursal;
+            var model = bus_caja.GetList(IdEmpresa, IdSucursal, true);
             return PartialView("_GridViewPartial_caja", model);
         }
 
