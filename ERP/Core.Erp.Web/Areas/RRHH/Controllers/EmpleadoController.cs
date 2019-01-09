@@ -74,23 +74,33 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos(model.IdEmpresa);
+            return View(model);
         }
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_empleados()
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
         {
-            try
-            {
-                IdEmpresa = GetIdEmpresa();
-                List<ro_empleado_Info> model = bus_empleado.get_list(IdEmpresa, true);
-                return PartialView("_GridViewPartial_empleados", model);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            cargar_combos(model.IdEmpresa);
+            return View(model);
+        }
+        private void cargar_combos(int IdEmpresa)
+        {
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_empleados(int IdSucursal = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.IdSucursal = IdSucursal;
+            var model = bus_empleado.get_list(IdEmpresa,  IdSucursal, true);
+            return PartialView("_GridViewPartial_empleados", model);
+           
         }
         [HttpPost]
         public ActionResult Nuevo(ro_empleado_Info info)
