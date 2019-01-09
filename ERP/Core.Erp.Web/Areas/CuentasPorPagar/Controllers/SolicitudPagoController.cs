@@ -93,9 +93,10 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 Fecha = DateTime.Now,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
-                lst_det = new List<cp_SolicitudPagoDet_Info>(),
+                
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
+            model.lst_det = new List<cp_SolicitudPagoDet_Info>();
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             seg_usuario_Info mod = bus_usuario.get_info(SessionFixed.IdUsuario);
             model.Solicitante = mod.Nombre;
@@ -142,7 +143,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             model.lst_det = List_det.get_list(model.IdTransaccionSession);
-            model.lst_det = List_det_x_cruzar.get_list(model.IdTransaccionSession);
             if (!bus_solicitud.ModificarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -158,7 +158,6 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
-            List_det_x_cruzar.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }

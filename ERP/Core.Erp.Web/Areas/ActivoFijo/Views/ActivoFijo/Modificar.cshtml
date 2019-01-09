@@ -13,7 +13,7 @@
 @using (Html.BeginForm("Modificar", "ActivoFijo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa);
-    @Html.HiddenFor(q => q.IdTransaccionSession);
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" });
     @Html.HiddenFor(q => q.Estado_Proceso);
     @Html.HiddenFor(q => q.IdActivoFijo, new { @id = "IdActivoFijo" });
 

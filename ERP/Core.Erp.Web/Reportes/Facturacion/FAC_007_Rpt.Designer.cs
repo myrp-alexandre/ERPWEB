@@ -1280,6 +1280,7 @@
             this.xrTableCell58.Summary = xrSummary7;
             this.xrTableCell58.Text = "VALOR TOTAL";
             this.xrTableCell58.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrTableCell58.TextFormatString = "{0:n2}";
             this.xrTableCell58.Weight = 0.73188407960446544D;
             // 
             // xrTable6
