@@ -31,5 +31,9 @@ namespace Core.Erp.Info.Reportes.CuentasPorPagar
         public double re_Porcen_retencion { get; set; }
         public double re_valor_retencion { get; set; }
         public string co_descripcion { get; set; }
+        public string pr_direccion { get; set; }
+        public string Descripcion { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string pe_nombreCompleto { get; set; }
     }
 }
