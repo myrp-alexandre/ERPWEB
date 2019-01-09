@@ -184,11 +184,22 @@
                     <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="FormaPago">Nombre de Contacto</label>
+                                <label for="FormaPago">Nombre de Contacto*</label>
                                 @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Nombres, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Nombres, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="FormaPago">Correo*</label>
+                                @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Correo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Correo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="IdTipoCredito">Teléfono*</label>
@@ -201,6 +212,46 @@
                                 <label for="cl_plazo">Celular*</label>
                                 @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Celular, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Celular, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="FormaPago">Dirección</label>
+                                @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Direccion, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Nombres, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">                        
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdTipoCredito">Ciudad*</label>
+                                    @Html.DevExpress().ComboBoxFor(q => q.info_fa_cliente_contactos.IdCiudad, settings =>
+                                   {
+                                       settings.Name = "IdCiudad";
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                       settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                       settings.Properties.Columns.Add("Descripcion_Ciudad", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                       //Campo ID
+                                       settings.Properties.ValueField = "IdCiudad";
+                                       settings.Properties.ValueType = typeof(string);
+                                       settings.Properties.TextField = "Descripcion_Ciudad";
+                                       //Boton para seleccionar ningun registro
+                                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_parroquias();}";
+                                   }).BindList(ViewBag.lst_ciudad).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.IdCiudad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="cl_plazo">Parroquia*</label>
+                                @Html.DropDownListFor(q => q.info_fa_cliente_contactos.IdParroquia, new SelectList(ViewBag.lst_parroquia, "IdParroquia", "nom_parroquia"), new { @class = "form-control", @id = "IdParroquia" })
+                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.IdParroquia, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -307,12 +358,12 @@
     }
 }
 <script>
-    function OnSelectedCiudadChanged() {
-        GridView_cliente_contacto.GetEditor("IdParroquia").PerformCallback();
-    }
-    function ParroquiaComboBox_BeginCallBack(s, e) {
-        e.customArgs["IdCiudad"] = GridView_cliente_contacto.GetEditor("IdCiudad").GetValue();
-    }
+    //function OnSelectedCiudadChanged() {
+    //    GridView_cliente_contacto.GetEditor("IdParroquia").PerformCallback();
+    //}
+    //function ParroquiaComboBox_BeginCallBack(s, e) {
+    //    e.customArgs["IdCiudad"] = GridView_cliente_contacto.GetEditor("IdCiudad").GetValue();
+    //}
 
     $(function () {
         $("#error_documento").hide();
@@ -320,6 +371,10 @@
         get_info_termino_pago();
         get_info_tipo_cliente();
     })
+
+    $("#IdCiudad").change(function () {
+        get_parroquias();
+    });
 
     $("#pe_cedulaRuc").blur(function () {
         Validar_cedula_ruc();
@@ -343,6 +398,9 @@
         get_info_x_num_cedula();
     });
 
+    $("#IdTipoCredito").change(function () {
+        get_info_termino_pago();
+    });
 
     $("#pe_cedulaRuc").keyup(function () {
         var tipo_doc = $("#IdTipoDocumento").val();
@@ -548,6 +606,31 @@
                 else {
                     $("#error_documento").show();
                 }
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+    function get_parroquias() {
+        var datos = {
+            IdCiudad: IdCiudad.GetValue(),
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_parroquias", "Cliente", new { Area = "Facturacion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                $.each(data, function (i, row) {
+                    $("#IdParroquia").append("<option value=" + row.IdParroquia + ">" + row.nom_parroquia + "</option>");
+                });
             },
             error: function (error) {
             }

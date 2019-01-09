@@ -29,6 +29,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         fa_cliente_x_fa_Vendedor_x_sucursal_list List_fa_cliente_x_fa_Vendedor_x_sucursal = new fa_cliente_x_fa_Vendedor_x_sucursal_list();
         fa_cliente_x_fa_Vendedor_x_sucursal_Bus bus_fa_vendedor = new fa_cliente_x_fa_Vendedor_x_sucursal_Bus();
         tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
+        tb_parroquia_List ListParroquia = new tb_parroquia_List();
+        List<tb_parroquia_Info> Lista_Parroquia = new List<tb_parroquia_Info>();
         tb_persona_List ListaPersona = new tb_persona_List();
         fa_cliente_tipo_List ListaTipoCliente = new fa_cliente_tipo_List();
         fa_cliente_List ListaCliente = new fa_cliente_List();
@@ -42,9 +44,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         private bool validar(fa_cliente_Info i_validar, ref string msg)
         {
-            if (i_validar.lst_fa_cliente_contactos.Count == 0)
+            if (i_validar.info_fa_cliente_contactos == null)
             {
-                mensaje = "Debe ingresar al menos un contacto";
+                mensaje = "Debe ingresar datos de contacto";
                 return false;
             }
 
@@ -111,10 +113,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     pe_Naturaleza = "NATU",
                     IdTipoDocumento = "CED"
                 },
-                lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>(),
+                //lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>(),
+                info_fa_cliente_contactos = new fa_cliente_contactos_Info(),
                 Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>()
             };
-            List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
+            //List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
             List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
             cargar_combos(model);
             cargar_combos_det();
@@ -125,7 +128,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             string return_naturaleza = "";
             model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(model.IdTransaccionSession);
-            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(model.IdTransaccionSession);
+            //model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model);
@@ -308,16 +311,25 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region Json
-        public ActionResult get_parroquias(string IdCiudad = "")
-        {            
-            return GridViewExtension.GetComboBoxCallbackResult(p =>
-            {
-                p.CallbackRouteValues = new { Controller = "Cliente", Action = "get_parroquias" };
-                p.TextField = "nom_parroquia";
-                p.ValueField = "IdParroquia";
-                p.ValueType = typeof(string);
-                p.BindList(bus_parroquia.get_list(IdCiudad, false));
-            });
+        //public ActionResult get_parroquias(string IdCiudad = "")
+        //{
+        //    return GridViewExtension.GetComboBoxCallbackResult(p =>
+        //    {
+        //        p.CallbackRouteValues = new { Controller = "Cliente", Action = "get_parroquias" };
+        //        p.TextField = "nom_parroquia";
+        //        p.ValueField = "IdParroquia";
+        //        p.ValueType = typeof(string);
+        //        p.BindList(bus_parroquia.get_list(IdCiudad, false));
+        //    });
+        //}
+
+        public JsonResult get_parroquias(string IdCiudad = "")
+        {
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            var resultado = (bus_parroquia.get_list(IdCiudad, false));
+            ListParroquia.set_list(resultado, IdTransaccionSession);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult get_info_termino_pago(string IdTerminoPago = "")

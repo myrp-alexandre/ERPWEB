@@ -3,6 +3,7 @@ using Core.Erp.Info.General;
 using Core.Erp.Web.Helps;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
@@ -135,9 +136,28 @@ namespace Core.Erp.Web.Areas.General.Controllers
             }
             catch (Exception)
             {
-
                throw;
             }
+        }
+    }
+
+    public class tb_parroquia_List
+    {
+        string Variable = "tb_parroquia_Info";
+        public List<tb_parroquia_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<tb_parroquia_Info> list = new List<tb_parroquia_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<tb_parroquia_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<tb_parroquia_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
     }
 }

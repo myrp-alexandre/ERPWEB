@@ -240,23 +240,23 @@ namespace Core.Erp.Data.Facturacion
                         Fecha_Transac = DateTime.Now
                     };
                     Context.fa_cliente.Add(Entity);
-                    foreach (var item in info.lst_fa_cliente_contactos)
-                    {
+                    //foreach (var item in info.lst_fa_cliente_contactos)
+                    //{
                         fa_cliente_contactos Entity_det = new fa_cliente_contactos
                         {
                             IdEmpresa = Entity.IdEmpresa,
                             IdCliente = Entity.IdCliente,
-                            IdContacto = item.IdContacto,
-                            IdCiudad = item.IdCiudad,
-                            IdParroquia = item.IdParroquia,
-                            Celular = item.Celular,
-                            Correo = item.Correo,
-                            Direccion = item.Direccion,
-                            Nombres = item.Nombres,
-                            Telefono = item.Telefono
+                            IdContacto = info.info_fa_cliente_contactos.IdContacto,
+                            IdCiudad = info.info_fa_cliente_contactos.IdCiudad,
+                            IdParroquia = info.info_fa_cliente_contactos.IdParroquia,
+                            Celular = info.info_fa_cliente_contactos.Celular,
+                            Correo = info.info_fa_cliente_contactos.Correo,
+                            Direccion = info.info_fa_cliente_contactos.Direccion,
+                            Nombres = info.info_fa_cliente_contactos.Nombres,
+                            Telefono = info.info_fa_cliente_contactos.Telefono
                         };
                         Context.fa_cliente_contactos.Add(Entity_det);
-                    }
+                    //}
 
                     foreach (var item in info.Lst_fa_cliente_x_fa_Vendedor_x_sucursal)
                     {
