@@ -172,7 +172,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdCategoria = "",
                 IdMarca = 0,
-                IdProducto = 0
+                IdProducto = 0,
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
 
             cargar_combos(model);
