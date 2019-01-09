@@ -342,6 +342,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     foreach (var item in info.detalle)
                     {
+                        item.em_NumCta = item.em_NumCta.Trim();
                         string linea = "";
                         double valor = Convert.ToDouble(item.Valor);
                         double valorEntero = Math.Floor(valor);
