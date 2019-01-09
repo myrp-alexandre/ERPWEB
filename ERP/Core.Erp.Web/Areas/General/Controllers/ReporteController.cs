@@ -1,10 +1,14 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
+using Core.Erp.Web.Reportes.Facturacion;
 using DevExpress.Web.Mvc;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.General.Controllers
@@ -100,22 +104,15 @@ namespace Core.Erp.Web.Areas.General.Controllers
         #region Diseñador
         public ActionResult Disenar(int IdEmpresa = 0, string CodReporte = "")
         {
-            var reporte = bus_reporte.get_info(CodReporte);
-
-            if (reporte == null)
-                return RedirectToAction("Index");
-
             var model = bus_reporte_x_emp.GetInfo(IdEmpresa, CodReporte);
             
-            
-
             if (model.ReporteDisenio == null)
             {
-                
-                /*BAN_006_Rpt rpt = new BAN_006_Rpt();
-                    rpt.SaveLayoutToXml(ms);
-                    ms.Position = 0;
-                    model.ReporteDisenio = ms.ToArray();*/
+                MemoryStream ms = new MemoryStream();
+                XtraReport rpt = GetReport(model.Nom_Carpeta+"."+model.Reporte);
+                rpt.SaveLayoutToXml(ms);
+                ms.Position = 0;
+                model.ReporteDisenio = ms.ToArray();
             }
 
             return View(model);
@@ -131,6 +128,37 @@ namespace Core.Erp.Web.Areas.General.Controllers
             model.CodReporte = CodReporte; 
             bus_reporte_x_emp.GuardarDB(model);
             return View(model);
+        }
+        #endregion
+
+        #region Get XtraReport
+        public XtraReport GetReport(string Reporte)
+        {
+            Assembly Ensamblado;
+            string nombre_dll = "";
+            string Nom_asambly = "";
+            
+            Nom_asambly = "Core.Erp.Web";
+            nombre_dll = Nom_asambly + ".dll";
+
+            //cargando la dll
+            Ensamblado = Assembly.LoadFrom(nombre_dll);            
+
+            Object ObjFrm;
+            Type tipo = Ensamblado.GetType(Nom_asambly + "." + Reporte);
+
+            AssemblyName assemName = Ensamblado.GetName();
+            
+            if (tipo == null)
+            {
+                return null;
+            }
+            else
+            {
+                ObjFrm = Activator.CreateInstance(tipo);
+                XtraReport Rpt = (XtraReport)ObjFrm;
+                return Rpt;
+            }
         }
         #endregion
     }

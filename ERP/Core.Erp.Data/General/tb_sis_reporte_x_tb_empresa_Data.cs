@@ -21,7 +21,9 @@ namespace Core.Erp.Data.General
                         {
                             IdEmpresa = Entity.IdEmpresa,
                             CodReporte = Entity.CodReporte,
-                            ReporteDisenio = Entity.ReporteDisenio
+                            ReporteDisenio = Entity.ReporteDisenio,
+                            Nom_Carpeta = Entity.tb_sis_reporte.tb_modulo.Nom_Carpeta,
+                            Reporte = Entity.tb_sis_reporte.nom_reporte
                         };
                 }
 

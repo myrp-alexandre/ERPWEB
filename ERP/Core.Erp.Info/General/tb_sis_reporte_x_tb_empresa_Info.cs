@@ -11,5 +11,7 @@ namespace Core.Erp.Info.General
         public int IdEmpresa { get; set; }
         public string CodReporte { get; set; }
         public byte[] ReporteDisenio { get; set; }
+        public string Nom_Carpeta { get; set; }
+        public string Reporte { get; set; }
     }
 }

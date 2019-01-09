@@ -9610,6 +9610,7 @@
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_aprobacion_solicitud.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_aprobacion.cshtml" />
     <Content Include="Areas\General\Views\Sucursal\_CmbCuenta_Sucursal.cshtml" />
+    <Content Include="Areas\General\Views\Reporte\Disenar.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9720,13 +9721,16 @@
       <Project>{88b2d2d3-d771-484c-abf1-699ba4fb801b}</Project>
       <Name>Core.Erp.Bus</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Erp.Data\Core.Erp.Data.csproj">
+      <Project>{A52F3B91-B460-4FFB-AA55-A667DC60DB43}</Project>
+      <Name>Core.Erp.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Erp.Info\Core.Erp.Info.csproj">
       <Project>{b08cccbc-a2ed-4505-89e2-dccfc4abbd46}</Project>
       <Name>Core.Erp.Info</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
