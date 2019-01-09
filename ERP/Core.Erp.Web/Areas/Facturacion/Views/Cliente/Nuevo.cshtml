@@ -14,6 +14,7 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdPersona, new { @id = "IdPersona" })
+    @Html.HiddenFor(q => q.info_fa_cliente_contactos.IdContacto, new { @id = "IdContacto" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -172,15 +173,38 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_contactos_telefonos">
-
-                <div class="row">
+                @*<div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             @Html.Action("GridViewPartial_cliente_contacto")
                         </div>
                     </div>
+                </div>*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="FormaPago">Nombre de Contacto</label>
+                                @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Nombres, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Nombres, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdTipoCredito">Teléfono*</label>
+                                @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Telefono, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Telefono, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="cl_plazo">Celular*</label>
+                                @Html.TextBoxFor(q => q.info_fa_cliente_contactos.Celular, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.info_fa_cliente_contactos.Celular, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_financiera">
                 <div class="row">

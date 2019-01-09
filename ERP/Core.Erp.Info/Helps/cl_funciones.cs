@@ -249,7 +249,7 @@ namespace Core.Erp.Info.Helps
                     var provincia = Convert.ToInt32(string.Concat(cedula[0], cedula[1]));
                     var digito_tres = Convert.ToInt32(cedula[2]+string.Empty);
 
-                    if (provincia > 0 && provincia <= num_provincias && (digito_tres >=0 && digito_tres <= tercer_digito))
+                    if (( provincia == 30 || (provincia > 0 && provincia <= num_provincias)) && (digito_tres >=0 && digito_tres <= tercer_digito))
                     {
                         var digito_verificador_recibido = Convert.ToInt32(cedula[9] + string.Empty);
                         for (var a = 0; a < coeficientes.Length; a++)

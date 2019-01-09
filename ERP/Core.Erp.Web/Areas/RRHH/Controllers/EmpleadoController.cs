@@ -851,8 +851,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 IdPersona = info_persona_empleado.IdPersona,
                                 IdSucursal = Convert.ToInt32(reader.GetValue(36)),
                                 IdTipoEmpleado = (tipo_empleado==null) ? "NO": tipo_empleado.CodCatalogo,
-                                em_codigo = Convert.ToString(reader.GetValue(1)),
-                                Codigo_Biometrico = Convert.ToString(reader.GetValue(1)),
+                                em_codigo = (Convert.ToString(reader.GetValue(1))!= "") ? Convert.ToString(reader.GetValue(1)) : null,
+                                Codigo_Biometrico = (Convert.ToString(reader.GetValue(1))!= "") ? Convert.ToString(reader.GetValue(1)) : null,
                                 em_lugarNacimiento = Convert.ToString(reader.GetValue(35)),
                                 em_fechaIngaRol = Convert.ToDateTime(reader.GetValue(13)),
                                 em_tipoCta = Convert.ToString(reader.GetValue(20)),
@@ -1132,7 +1132,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 cedula_ruc = Convert.ToString(reader.GetValue(0)),
                                 contrato_tipo_descripcion = Convert.ToString(reader.GetValue(1)),
                                 FechaInicio = Convert.ToDateTime(reader.GetValue(2)),
-                                FechaFin = Convert.ToDateTime(reader.GetValue(3)),
+                                FechaFin = (Convert.ToDateTime(reader.GetValue(3)).Year ==1) ? new DateTime(2050,01,01) : Convert.ToDateTime(reader.GetValue(3)),
                                 Sueldo = Convert.ToDouble(reader.GetValue(4)),
                                 nomina_tipo_descripcion = Convert.ToString(reader.GetValue(5)),
                                 NumDocumento = Convert.ToString(reader.GetValue(0)),
@@ -1144,7 +1144,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 EstadoContrato = cl_enumeradores.eEstadoContratoRRHH.ECT_ACT.ToString(),
                                 Estado = "A"
                             };
-                            Lista_Contrato.Add(info);
+
+                            if (Lista_Contrato.Where(q => q.cedula_ruc == info.cedula_ruc).Count() == 0)
+                                Lista_Contrato.Add(info);
                         }
                     }
                     else

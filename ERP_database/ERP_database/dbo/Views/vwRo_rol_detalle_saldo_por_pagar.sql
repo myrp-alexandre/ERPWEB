@@ -1,5 +1,4 @@
-﻿/*where (rol.ValorGanado - pago.Valor) > 0
-where rol.IdPeriodo=201804*/
+﻿
 CREATE VIEW dbo.vwRo_rol_detalle_saldo_por_pagar
 AS
 SELECT        rol_1.IdEmpresa, rol_1.IdRol, rol_1.IdNominaTipo, rol_1.IdNominaTipoLiqui, rol_1.IdPeriodo, rol_1.IdEmpleado, rol_1.IdRubro, rol_1.ValorGanado, rol_1.IdSucursal, rol_1.em_codigo, rol_1.pe_apellido, rol_1.pe_nombre, 

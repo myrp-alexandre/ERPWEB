@@ -93,8 +93,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 Fecha = DateTime.Now,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
-                lst_det = new List<cp_SolicitudPagoDet_Info>()
-
+                lst_det = new List<cp_SolicitudPagoDet_Info>(),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             seg_usuario_Info mod = bus_usuario.get_info(SessionFixed.IdUsuario);

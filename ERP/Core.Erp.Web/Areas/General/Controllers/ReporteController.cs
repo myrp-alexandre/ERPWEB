@@ -112,11 +112,10 @@ namespace Core.Erp.Web.Areas.General.Controllers
             if (model.ReporteDisenio == null)
             {
                 
-                /*
-                BAN_006_Rpt rpt = new BAN_006_Rpt();
+                /*BAN_006_Rpt rpt = new BAN_006_Rpt();
                     rpt.SaveLayoutToXml(ms);
                     ms.Position = 0;
-                    model.ReporteDisenio = ms.ToArray();                */
+                    model.ReporteDisenio = ms.ToArray();*/
             }
 
             return View(model);
