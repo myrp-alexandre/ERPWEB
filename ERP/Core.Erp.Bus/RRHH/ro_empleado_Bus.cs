@@ -82,7 +82,6 @@ namespace Core.Erp.Bus.RRHH
         {
             try
             {
-                info.IdSucursal = 1;
                 bool si_grabo = false;
                 info.info_persona.pe_Naturaleza = "NATU";
                 info.info_persona.pe_nombreCompleto = info.info_persona.pe_apellido + " " + info.info_persona.pe_nombre;
@@ -132,7 +131,6 @@ namespace Core.Erp.Bus.RRHH
 
             try
             {
-                info.IdSucursal = 1;
                 bool si_grabo = false;
                 info.info_persona.pe_Naturaleza = "NATU";
                 info.info_persona.pe_nombreCompleto = info.pe_apellido + " " + info.pe_nombre;
