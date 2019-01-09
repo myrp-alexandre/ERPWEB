@@ -59,7 +59,8 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     Lista = (from q in Context.vwRo_rol_detalle_saldo_por_pagar
-                             where q.IdEmpresa == IdEmpresa
+                             where q.em_NumCta !=null
+                             && q.em_NumCta!=""
                                    && q.IdEmpresa == IdEmpresa
                                    && q.IdNominaTipo== IdNominaTipo
                                    && q.IdNominaTipoLiqui== IdNominaTipoLiqui
