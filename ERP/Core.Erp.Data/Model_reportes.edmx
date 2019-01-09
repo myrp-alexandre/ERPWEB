@@ -1453,6 +1453,51 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_011' no tiene definida ningu
           <Property Name="GiradoA" Type="varchar" MaxLength="1000" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_012' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWCXP_012">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRetencion" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="observacion" />
+            <PropertyRef Name="re_Tiene_RTiva" />
+            <PropertyRef Name="re_Tiene_RFuente" />
+            <PropertyRef Name="co_serie" />
+            <PropertyRef Name="co_factura" />
+            <PropertyRef Name="co_FechaFactura" />
+            <PropertyRef Name="re_tipoRet" />
+            <PropertyRef Name="re_baseRetencion" />
+            <PropertyRef Name="IdCodigo_SRI" />
+            <PropertyRef Name="re_Codigo_impuesto" />
+            <PropertyRef Name="re_Porcen_retencion" />
+            <PropertyRef Name="re_valor_retencion" />
+            <PropertyRef Name="co_descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdRetencion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CodDocumentoTipo" Type="varchar" MaxLength="20" />
+          <Property Name="serie1" Type="varchar" MaxLength="3" />
+          <Property Name="serie2" Type="varchar" MaxLength="3" />
+          <Property Name="NumRetencion" Type="varchar" MaxLength="20" />
+          <Property Name="NAutorizacion" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_Autorizacion" Type="datetime" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="observacion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="re_Tiene_RTiva" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="re_Tiene_RFuente" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="co_serie" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="co_factura" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="co_FechaFactura" Type="datetime" Nullable="false" />
+          <Property Name="pe_razonSocial" Type="varchar" MaxLength="150" />
+          <Property Name="re_tipoRet" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="re_baseRetencion" Type="float" Nullable="false" />
+          <Property Name="IdCodigo_SRI" Type="int" Nullable="false" />
+          <Property Name="re_Codigo_impuesto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="re_Porcen_retencion" Type="float" Nullable="false" />
+          <Property Name="re_valor_retencion" Type="float" Nullable="false" />
+          <Property Name="co_descripcion" Type="varchar" MaxLength="350" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_001">
           <Key>
@@ -4315,6 +4360,33 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
     [VWCXP_011].[Nombre] AS [Nombre], 
     [VWCXP_011].[GiradoA] AS [GiradoA]
     FROM [web].[VWCXP_011] AS [VWCXP_011]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWCXP_012" EntityType="Self.VWCXP_012" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWCXP_012].[IdEmpresa] AS [IdEmpresa], 
+    [VWCXP_012].[IdRetencion] AS [IdRetencion], 
+    [VWCXP_012].[CodDocumentoTipo] AS [CodDocumentoTipo], 
+    [VWCXP_012].[serie1] AS [serie1], 
+    [VWCXP_012].[serie2] AS [serie2], 
+    [VWCXP_012].[NumRetencion] AS [NumRetencion], 
+    [VWCXP_012].[NAutorizacion] AS [NAutorizacion], 
+    [VWCXP_012].[Fecha_Autorizacion] AS [Fecha_Autorizacion], 
+    [VWCXP_012].[fecha] AS [fecha], 
+    [VWCXP_012].[observacion] AS [observacion], 
+    [VWCXP_012].[re_Tiene_RTiva] AS [re_Tiene_RTiva], 
+    [VWCXP_012].[re_Tiene_RFuente] AS [re_Tiene_RFuente], 
+    [VWCXP_012].[co_serie] AS [co_serie], 
+    [VWCXP_012].[co_factura] AS [co_factura], 
+    [VWCXP_012].[co_FechaFactura] AS [co_FechaFactura], 
+    [VWCXP_012].[pe_razonSocial] AS [pe_razonSocial], 
+    [VWCXP_012].[re_tipoRet] AS [re_tipoRet], 
+    [VWCXP_012].[re_baseRetencion] AS [re_baseRetencion], 
+    [VWCXP_012].[IdCodigo_SRI] AS [IdCodigo_SRI], 
+    [VWCXP_012].[re_Codigo_impuesto] AS [re_Codigo_impuesto], 
+    [VWCXP_012].[re_Porcen_retencion] AS [re_Porcen_retencion], 
+    [VWCXP_012].[re_valor_retencion] AS [re_valor_retencion], 
+    [VWCXP_012].[co_descripcion] AS [co_descripcion]
+    FROM [web].[VWCXP_012] AS [VWCXP_012]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWFAC_001" EntityType="Self.VWFAC_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -7324,6 +7396,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <EntitySet Name="VWBAN_002" EntityType="Model_reportes.VWBAN_002" />
           <EntitySet Name="VWBAN_003" EntityType="Model_reportes.VWBAN_003" />
           <EntitySet Name="VWCAJ_001" EntityType="Model_reportes.VWCAJ_001" />
+          <EntitySet Name="VWCXP_012" EntityType="Model_reportes.VWCXP_012" />
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -9321,6 +9394,49 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VWCXP_012">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRetencion" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="observacion" />
+            <PropertyRef Name="re_Tiene_RTiva" />
+            <PropertyRef Name="re_Tiene_RFuente" />
+            <PropertyRef Name="co_serie" />
+            <PropertyRef Name="co_factura" />
+            <PropertyRef Name="co_FechaFactura" />
+            <PropertyRef Name="re_tipoRet" />
+            <PropertyRef Name="re_baseRetencion" />
+            <PropertyRef Name="IdCodigo_SRI" />
+            <PropertyRef Name="re_Codigo_impuesto" />
+            <PropertyRef Name="re_Porcen_retencion" />
+            <PropertyRef Name="re_valor_retencion" />
+            <PropertyRef Name="co_descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdRetencion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodDocumentoTipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NumRetencion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="re_Tiene_RTiva" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="re_Tiene_RFuente" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="co_serie" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="co_factura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="co_FechaFactura" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pe_razonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="re_tipoRet" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="re_baseRetencion" Type="Double" Nullable="false" />
+          <Property Name="IdCodigo_SRI" Type="Int32" Nullable="false" />
+          <Property Name="re_Codigo_impuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="re_Porcen_retencion" Type="Double" Nullable="false" />
+          <Property Name="re_valor_retencion" Type="Double" Nullable="false" />
+          <Property Name="co_descripcion" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -12053,6 +12169,35 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
                 <ScalarProperty Name="secuencia" ColumnName="secuencia" />
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCXP_012">
+            <EntityTypeMapping TypeName="Model_reportes.VWCXP_012">
+              <MappingFragment StoreEntitySet="VWCXP_012">
+                <ScalarProperty Name="co_descripcion" ColumnName="co_descripcion" />
+                <ScalarProperty Name="re_valor_retencion" ColumnName="re_valor_retencion" />
+                <ScalarProperty Name="re_Porcen_retencion" ColumnName="re_Porcen_retencion" />
+                <ScalarProperty Name="re_Codigo_impuesto" ColumnName="re_Codigo_impuesto" />
+                <ScalarProperty Name="IdCodigo_SRI" ColumnName="IdCodigo_SRI" />
+                <ScalarProperty Name="re_baseRetencion" ColumnName="re_baseRetencion" />
+                <ScalarProperty Name="re_tipoRet" ColumnName="re_tipoRet" />
+                <ScalarProperty Name="pe_razonSocial" ColumnName="pe_razonSocial" />
+                <ScalarProperty Name="co_FechaFactura" ColumnName="co_FechaFactura" />
+                <ScalarProperty Name="co_factura" ColumnName="co_factura" />
+                <ScalarProperty Name="co_serie" ColumnName="co_serie" />
+                <ScalarProperty Name="re_Tiene_RFuente" ColumnName="re_Tiene_RFuente" />
+                <ScalarProperty Name="re_Tiene_RTiva" ColumnName="re_Tiene_RTiva" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
+                <ScalarProperty Name="NAutorizacion" ColumnName="NAutorizacion" />
+                <ScalarProperty Name="NumRetencion" ColumnName="NumRetencion" />
+                <ScalarProperty Name="serie2" ColumnName="serie2" />
+                <ScalarProperty Name="serie1" ColumnName="serie1" />
+                <ScalarProperty Name="CodDocumentoTipo" ColumnName="CodDocumentoTipo" />
+                <ScalarProperty Name="IdRetencion" ColumnName="IdRetencion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

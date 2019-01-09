@@ -1037,6 +1037,7 @@ namespace Core.Erp.Data.RRHH
                         Observacion = item.Observacion,
                         IdUsuario = item.IdUsuario,
                         Estado = item.Estado,
+                        EstadoContrato = item.EstadoContrato,
                         Fecha_Transac = item.Fecha_Transac
                     };
                     Context_rrhh.ro_contrato.Add(Entity_contrato);
