@@ -46,6 +46,6 @@ namespace Core.Erp.Info.General
         public int orden { get; set; }
         public string observacion { get; set; }
         public bool rpt_muestra_disenador_reporte { get; set; }
-
+        public string Nom_Carpeta { get; set; }
     }
 }
