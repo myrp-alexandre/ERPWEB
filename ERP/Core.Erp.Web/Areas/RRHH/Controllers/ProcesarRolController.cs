@@ -27,7 +27,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_rol_detalle_Bus bus_detalle = new ro_rol_detalle_Bus();
         ro_rol_Bus bus_rol = new ro_rol_Bus();
         ct_plancta_Bus bus_cuentas = new ct_plancta_Bus();
-        int IdEmpresa = 0;
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
 
         #endregion
@@ -35,7 +34,19 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combo_consulta(model.IdEmpresa);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            cargar_combo_consulta(model.IdEmpresa);
+            return View(model);
         }
         public ActionResult Index2()
         {
@@ -43,11 +54,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_ro_rol(int IeEmpresa=0, int IdSucursal=0)
+        public ActionResult GridViewPartial_ro_rol( int IdSucursal=0)
         {
             try
             {
-                IdEmpresa = GetIdEmpresa();
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                ViewBag.IdSucursal = IdSucursal;
                 List< ro_rol_Info> model = bus_rol.get_list_nominas(IdEmpresa, IdSucursal);
                 return PartialView("_GridViewPartial_ro_rol", model);
             }
@@ -131,7 +143,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 ViewBag.IdRol = IdRol;
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
-                IdEmpresa = GetIdEmpresa();
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 ro_rol_Info model = bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
                 ViewBag.FechaCorte = DateTime.Now;
                 return View(model);
@@ -179,7 +191,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
-                IdEmpresa = GetIdEmpresa();
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol));
 
             }
@@ -217,7 +229,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
-                IdEmpresa = GetIdEmpresa();
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol));
 
             }
@@ -283,7 +295,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
                 cargar_combo_detalle();
-                IdEmpresa = GetIdEmpresa();
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 ro_rol_Info model = new ro_rol_Info();
                 model = bus_rol.get_info_contabilizar(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, IdRol);
                 Session["lst_sueldo_pagar"] = model.lst_sueldo_x_pagar;
@@ -327,7 +339,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 cargar_combos(IdNomina_Tipo, IdNomina_TipoLiqui);
-                IdEmpresa = GetIdEmpresa();
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 return View(bus_rol.get_info(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo,IdRol));
 
             }
@@ -357,7 +369,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                IdEmpresa = GetIdEmpresa();
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 lista_nomina = bus_nomina.get_list(IdEmpresa, false);
                 lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina_Tipo);
                 lst_periodos = bus_periodos_x_nomina.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_Tipo_Liqui);
@@ -367,6 +379,22 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
                 ViewBag.lst_sucursal = lst_sucursal;
 
+                
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void cargar_combo_consulta(int IdEmpresa)
+        {
+            try
+            {
+                var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+                ViewBag.lst_sucursal = lst_sucursal;
             }
             catch (Exception)
             {
@@ -378,7 +406,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                IdEmpresa = GetIdEmpresa();                
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 ViewBag.lst_cuentas = bus_cuentas.get_list(IdEmpresa,false,true);
 
             }
@@ -417,7 +445,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                IdEmpresa = GetIdEmpresa();
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 List<ro_rol_Info> model = bus_rol.get_list_nominas_cerradas(IdEmpresa);
                 return PartialView("_GridViewPartial_nominas_cerradas", model);
             }

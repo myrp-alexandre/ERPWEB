@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_ro_rol";
-        settings.CallbackRouteValues = new { Controller = "ProcesarRol", Action = "GridViewPartial_ro_rol" };
+        settings.CallbackRouteValues = new { Controller = "ProcesarRol", Action = "GridViewPartial_ro_rol", IdSucursal = ViewBag.IdSucursal };
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdPeriodo";
