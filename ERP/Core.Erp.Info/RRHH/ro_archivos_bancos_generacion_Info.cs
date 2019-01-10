@@ -23,7 +23,7 @@ namespace Core.Erp.Info.RRHH
         public int IdCuentaBancaria { get; set; }
         [Required(ErrorMessage = "El campo proceso bancario  es obligatorio")]
         public int IdProceso { get; set; }
-       
+        public int? IdSucursal { get; set; }
         public string estado { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
