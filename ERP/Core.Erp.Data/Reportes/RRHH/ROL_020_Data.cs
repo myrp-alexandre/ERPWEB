@@ -1,4 +1,5 @@
-﻿using Core.Erp.Info.Reportes.RRHH;
+﻿using Core.Erp.Info.Helps;
+using Core.Erp.Info.Reportes.RRHH;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,17 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_020_Data
     {
-        public List<ROL_020_Info> GetList(int IdEmpresa, int IdNominaTipo, int IdNomina, int IdPeriodo, int IdSucursal)
+        public List<ROL_020_Info> GetList(int IdEmpresa, int IdNominaTipo, int IdNomina, int IdPeriodo, int IdSucursal, string IdProceso_bancario_tipo)
         {
             try
             {
+
+                string TipoCuenta = "";
+                if (IdProceso_bancario_tipo == cl_enumeradores.eTipoProcesoBancario.NCR.ToString())
+                    TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.AHO.ToString() + "," + cl_enumeradores.eTipoCuentaRRHH.COR.ToString();
+                else
+                    TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.VRT.ToString();
+
                 List<ROL_020_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
@@ -21,6 +29,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                      && q.IdNominaTipo == IdNominaTipo
                      && q.IdNomina == IdNomina
                      && q.IdPeriodo == IdPeriodo
+                     && TipoCuenta.Contains(q.TipoCuenta)
                     ).Select(q => new ROL_020_Info
                     {
                         IdEmpresa = q.IdEmpresa,
