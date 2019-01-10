@@ -1,11 +1,14 @@
 ﻿using Core.Erp.Bus.Caja;
 using Core.Erp.Bus.Contabilidad;
 using Core.Erp.Bus.CuentasPorCobrar;
+using Core.Erp.Bus.CuentasPorPagar;
 using Core.Erp.Bus.General;
 using Core.Erp.Info.Caja;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.CuentasPorPagar;
 using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
+using Core.Erp.Web.Areas.Banco.Controllers;
 using Core.Erp.Web.Areas.Contabilidad.Controllers;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
@@ -32,7 +35,9 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         string mensaje = string.Empty;
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         cxc_cobro_tipo_Bus bus_cobro = new cxc_cobro_tipo_Bus();
-
+        cp_orden_pago_cancelaciones_Bus bus_cancelaciones = new cp_orden_pago_cancelaciones_Bus();
+        cp_orden_pago_cancelaciones_PorCruzar ListPorCruzar = new cp_orden_pago_cancelaciones_PorCruzar();
+        cp_orden_pago_cancelaciones_List List_op = new cp_orden_pago_cancelaciones_List();
         #endregion
 
         #region Combo box bajo demanda
@@ -305,7 +310,17 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
 
         #endregion
 
-        public ActionResult armar_diario(int IdEmpresa = 0, int IdCaja = 0, int IdTipoMovi = 0, double valor = 0, decimal IdTransaccionSession = 0)
+        #region Json
+        public JsonResult GetListPorCruzar(int IdEmpresa = 0, decimal IdTransaccionSession = 0, string IdTipoPersona = "", decimal IdEntidad = 0)
+        {
+            var lst = bus_cancelaciones.get_list_con_saldo(IdEmpresa, 0, IdTipoPersona, IdEntidad, "APRO", SessionFixed.IdUsuario, false);
+            ListPorCruzar.set_list(lst, IdTransaccionSession);
+
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+        
+
+        public JsonResult armar_diario(int IdEmpresa = 0, int IdCaja = 0, int IdTipoMovi = 0, double valor = 0, decimal IdTransaccionSession = 0)
         {
             var i_caja = bus_caja.get_info(IdEmpresa, IdCaja);
             var i_tipo_movi = bus_tipo.get_info(IdEmpresa, IdTipoMovi);
@@ -316,20 +331,90 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             list_ct_cbtecble_det.AddRow(new ct_cbtecble_det_Info
             {
                 IdCtaCble = i_caja == null ? null : i_caja.IdCtaCble,
-                dc_Valor = Math.Abs(valor)*-1,
-                dc_Valor_haber = Math.Abs(valor)
+                dc_Valor = Math.Round(Math.Abs(valor), 2, MidpointRounding.AwayFromZero) * -1,
+                dc_Valor_haber = Math.Round(Math.Abs(valor), 2, MidpointRounding.AwayFromZero)
             }, IdTransaccionSession);
 
             //Haber
+            var ListOp = List_op.get_list(IdTransaccionSession);
+            if (ListOp.Count > 0)
+            {
+                foreach (var item in ListOp)
+                {
+                    list_ct_cbtecble_det.AddRow(new ct_cbtecble_det_Info
+                    {
+                        IdCtaCble = item.IdCtaCble,
+                        dc_Valor = Math.Round(Math.Abs(item.MontoAplicado), 2, MidpointRounding.AwayFromZero),
+                        dc_Valor_debe = Math.Round(Math.Abs(item.MontoAplicado), 2, MidpointRounding.AwayFromZero)
+                    }, IdTransaccionSession);
+                }
+            }
+            else
             list_ct_cbtecble_det.AddRow(new ct_cbtecble_det_Info
             {
                 IdCtaCble = i_tipo_movi == null ? "" : i_tipo_movi.IdCtaCble,
-                dc_Valor = Math.Abs(valor),
-                dc_Valor_debe = Math.Abs(valor)
+                dc_Valor = Math.Round(Math.Abs(valor),2,MidpointRounding.AwayFromZero),
+                dc_Valor_debe = Math.Round(Math.Abs(valor),2,MidpointRounding.AwayFromZero)
             }, IdTransaccionSession);
 
 
-            return Json("", JsonRequestBehavior.AllowGet);
+            return Json(new { EsOp = ListOp.Count > 0 ? "S" : "N", Valor = Math.Round(ListOp.Sum(q=>q.MontoAplicado))}, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
+        #region Detalles
+        public ActionResult GridViewPartial_egreso_op_x_cruzar()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListPorCruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_egreso_op_x_cruzar", model);
+        }
+
+        public ActionResult GridViewPartial_egreso_op()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_op.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_egreso_op", model);
+        }
+        [HttpPost, ValidateInput(false)]
+        public JsonResult EditingAddNew(string IDs = "", decimal IdTransaccionSession = 0, int IdEmpresa = 0)
+        {
+            string GiradoA = string.Empty;
+            string Observacion = "Canc./";
+
+            if (IDs != "")
+            {
+                var lst_x_cruzar = ListPorCruzar.get_list(IdTransaccionSession);
+                string[] array = IDs.Split(',');
+                foreach (var item in array)
+                {
+                    var info_det = lst_x_cruzar.Where(q => q.IdOrdenPago_op == Convert.ToInt32(item)).FirstOrDefault();
+                    if (info_det != null)
+                    {
+                        GiradoA = info_det.pe_nombreCompleto;
+                        Observacion += info_det.Referencia + "/ ";
+                        List_op.AddRow(info_det, IdTransaccionSession);
+                    }
+                }
+            }
+            var model = List_op.get_list(IdTransaccionSession);
+            return Json(new { GiradoA = GiradoA, Observacion = Observacion }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_pago_cancelaciones_Info info_det)
+        {
+            List_op.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_op.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_egreso_op", model);
+        }
+        public ActionResult EditingDelete(decimal IdOrdenPago_op)
+        {
+            decimal IdTransaccionSession = Convert.ToDecimal(string.IsNullOrEmpty(SessionFixed.IdTransaccionSessionActual) ? "0" : SessionFixed.IdTransaccionSessionActual);
+            List_op.DeleteRow(IdOrdenPago_op, IdTransaccionSession);
+            var model = List_op.get_list(IdTransaccionSession);
+            return PartialView("_GridViewPartial_egreso_op", model);
+        }
+        #endregion
     }
 }
