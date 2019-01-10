@@ -804,6 +804,12 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_012_Rpt_retencion.Designer.cs">
       <DependentUpon>CXP_012_Rpt_retencion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_013_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_013_Rpt.Designer.cs">
+      <DependentUpon>CXP_013_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Facturacion\FAC_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9627,6 +9633,7 @@
     <Content Include="Areas\Facturacion\Views\Cliente\_cmb_parroquia.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\_GridViewPartial_egreso_op_x_cruzar.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\_GridViewPartial_egreso_op.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_013.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9906,6 +9913,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_012_Rpt_retencion.resx">
       <DependentUpon>CXP_012_Rpt_retencion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_013_Rpt.resx">
+      <DependentUpon>CXP_013_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_001_Rpt.resx">
       <DependentUpon>FAC_001_Rpt.cs</DependentUpon>

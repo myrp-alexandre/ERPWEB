@@ -271,5 +271,18 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult CXP_013(decimal IdRetencion = 0)
+        {
+            CXP_013_Rpt model = new CXP_013_Rpt();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            model.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
+            model.p_IdRetencion.Value = IdRetencion;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            model.RequestParameters = false;
+
+            return View(model);
+        }
     }
 }
