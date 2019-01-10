@@ -536,7 +536,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info_op.IdEstadoAprobacion = info_tipo_op.IdEstadoAprobacion;
                 info_op.IdFormaPago = "CHEQUE";
                 info_op.Estado = "A";
-                info_op.IdSucursal = 1;
+                info_op.IdSucursal = info.IdSucursal;
                 info_op.Fecha = DateTime.Now.Date;
                 
                 // crear detalle de op
