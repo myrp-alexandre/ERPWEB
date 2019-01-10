@@ -16,29 +16,7 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             InitializeComponent();
         }
         List<CXP_012_Info> lst_rpt = new List<CXP_012_Info>();
-        private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdRetencion"].Value = p_IdRetencion.Value == null ? 0 : Convert.ToDecimal(p_IdRetencion.Value);
-            ((XRSubreport)sender).ReportSource.RequestParameters = false;
-        }
-
-        private void xrSubreport2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdRetencion"].Value = p_IdRetencion.Value == null ? 0 : Convert.ToDecimal(p_IdRetencion.Value);
-            ((XRSubreport)sender).ReportSource.RequestParameters = false;
-        }
-
-        private void xrSubreport3_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdRetencion"].Value = p_IdRetencion.Value == null ? 0 : Convert.ToDecimal(p_IdRetencion.Value);
-            ((XRSubreport)sender).ReportSource.RequestParameters = false;
-        }
-
-        
+       
 
         private void CXP_012_Rpt_BeforePrint_1(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
@@ -58,6 +36,29 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
 
                 throw;
             }
+        }
+
+        private void SubReporte_RIDE1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdRetencion"].Value = p_IdRetencion.Value == null ? 0 : Convert.ToDecimal(p_IdRetencion.Value);
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+        }
+
+        private void SubReporte_RIDE2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdRetencion"].Value = p_IdRetencion.Value == null ? 0 : Convert.ToDecimal(p_IdRetencion.Value);
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+
+        }
+
+        private void SubReporte_RIDE3_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdRetencion"].Value = p_IdRetencion.Value == null ? 0 : Convert.ToDecimal(p_IdRetencion.Value);
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+
         }
     }
 }

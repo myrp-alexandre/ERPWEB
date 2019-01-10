@@ -154,7 +154,7 @@
             this.xrTableCell23.Text = "re_Procen_re";
             this.xrTableCell23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell23.TextFormatString = "{0:n2}";
-            this.xrTableCell23.Weight = 1.1084016107022767D;
+            this.xrTableCell23.Weight = 0.99756144642289946D;
             // 
             // xrTableCell24
             // 
@@ -167,7 +167,7 @@
             this.xrTableCell24.Text = "z";
             this.xrTableCell24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell24.TextFormatString = "{0:n2}";
-            this.xrTableCell24.Weight = 1.2769714856711925D;
+            this.xrTableCell24.Weight = 1.3878116499505697D;
             // 
             // TopMargin
             // 

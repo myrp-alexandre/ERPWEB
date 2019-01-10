@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
-            this.xrSubreport3 = new DevExpress.XtraReports.UI.XRSubreport();
-            this.xrSubreport2 = new DevExpress.XtraReports.UI.XRSubreport();
-            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdRetencion = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.SubReporte_RIDE3 = new DevExpress.XtraReports.UI.XRSubreport();
+            this.SubReporte_RIDE2 = new DevExpress.XtraReports.UI.XRSubreport();
+            this.SubReporte_RIDE1 = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -49,30 +49,6 @@
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            // 
-            // xrSubreport3
-            // 
-            this.xrSubreport3.LocationFloat = new DevExpress.Utils.PointFloat(43.87514F, 354.3333F);
-            this.xrSubreport3.Name = "xrSubreport3";
-            this.xrSubreport3.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
-            this.xrSubreport3.SizeF = new System.Drawing.SizeF(763.1249F, 23F);
-            this.xrSubreport3.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport3_BeforePrint);
-            // 
-            // xrSubreport2
-            // 
-            this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(43.87503F, 234.4583F);
-            this.xrSubreport2.Name = "xrSubreport2";
-            this.xrSubreport2.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
-            this.xrSubreport2.SizeF = new System.Drawing.SizeF(763.1249F, 23F);
-            this.xrSubreport2.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport2_BeforePrint);
-            // 
-            // xrSubreport1
-            // 
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(43.87503F, 100F);
-            this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(763.1249F, 23.00001F);
-            this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
             // 
             // TopMargin
             // 
@@ -110,11 +86,35 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrSubreport3,
-            this.xrSubreport2,
-            this.xrSubreport1});
+            this.SubReporte_RIDE3,
+            this.SubReporte_RIDE2,
+            this.SubReporte_RIDE1});
             this.ReportHeader.HeightF = 400.25F;
             this.ReportHeader.Name = "ReportHeader";
+            // 
+            // SubReporte_RIDE3
+            // 
+            this.SubReporte_RIDE3.LocationFloat = new DevExpress.Utils.PointFloat(43.87514F, 377.25F);
+            this.SubReporte_RIDE3.Name = "SubReporte_RIDE3";
+            this.SubReporte_RIDE3.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
+            this.SubReporte_RIDE3.SizeF = new System.Drawing.SizeF(763.1247F, 23F);
+            this.SubReporte_RIDE3.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubReporte_RIDE3_BeforePrint);
+            // 
+            // SubReporte_RIDE2
+            // 
+            this.SubReporte_RIDE2.LocationFloat = new DevExpress.Utils.PointFloat(43.87514F, 229.1666F);
+            this.SubReporte_RIDE2.Name = "SubReporte_RIDE2";
+            this.SubReporte_RIDE2.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
+            this.SubReporte_RIDE2.SizeF = new System.Drawing.SizeF(763.1248F, 23F);
+            this.SubReporte_RIDE2.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubReporte_RIDE2_BeforePrint);
+            // 
+            // SubReporte_RIDE1
+            // 
+            this.SubReporte_RIDE1.LocationFloat = new DevExpress.Utils.PointFloat(43.87514F, 74.95833F);
+            this.SubReporte_RIDE1.Name = "SubReporte_RIDE1";
+            this.SubReporte_RIDE1.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
+            this.SubReporte_RIDE1.SizeF = new System.Drawing.SizeF(763.1247F, 23F);
+            this.SubReporte_RIDE1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubReporte_RIDE1_BeforePrint);
             // 
             // CXP_012_Rpt
             // 
@@ -145,12 +145,12 @@
         private DevExpress.XtraReports.UI.DetailBand Detail;
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
-        private DevExpress.XtraReports.UI.XRSubreport xrSubreport3;
-        private DevExpress.XtraReports.UI.XRSubreport xrSubreport2;
-        private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
         public DevExpress.XtraReports.Parameters.Parameter p_IdRetencion;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
+        private DevExpress.XtraReports.UI.XRSubreport SubReporte_RIDE1;
+        private DevExpress.XtraReports.UI.XRSubreport SubReporte_RIDE2;
+        private DevExpress.XtraReports.UI.XRSubreport SubReporte_RIDE3;
     }
 }
