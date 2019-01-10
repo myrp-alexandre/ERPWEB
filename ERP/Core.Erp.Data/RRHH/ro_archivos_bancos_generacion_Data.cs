@@ -93,6 +93,7 @@ namespace Core.Erp.Data.RRHH
                         IdProceso = Entity.IdProceso,
                         estado = Entity.estado,
                         EstadoBool = Entity.estado == "A" ? true : false,
+                        IdSucursal=Entity.IdSucursal
                         
                     };
                 }
