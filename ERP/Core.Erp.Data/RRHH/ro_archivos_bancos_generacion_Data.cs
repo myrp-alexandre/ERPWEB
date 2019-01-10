@@ -35,8 +35,8 @@ namespace Core.Erp.Data.RRHH
                                      pe_FechaIni=q.pe_FechaIni,
                                      pe_FechaFin=q.pe_FechaFin,
                                      NombreProceso = q.NombreProceso,
-                                     IdPeriodo = q.IdPeriodo
-
+                                     IdPeriodo = q.IdPeriodo,
+                                     IdSucursal = q.IdSucursal
 
                                  }).ToList();
                     else
@@ -57,7 +57,8 @@ namespace Core.Erp.Data.RRHH
                                      DescripcionProcesoNomina = q.DescripcionProcesoNomina,
                                      pe_FechaIni = q.pe_FechaIni,
                                      pe_FechaFin = q.pe_FechaFin,
-                                     NombreProceso=q.NombreProceso
+                                     NombreProceso=q.NombreProceso,
+                                     IdSucursal = q.IdSucursal
                                  }).ToList();
                 }
 
