@@ -123,6 +123,18 @@
             });
             column.Width = Unit.Percentage(5);
         });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "OP";
+            column.SetDataItemTemplateContent(c =>
+            {
+                if (DataBinder.Eval(c.DataItem, "IdOrdenPago_op") != null)
+                {
+                    ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("CXP_004", "CuentasPorPagarReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa_op").ToString(), IdOrdenPago = DataBinder.Eval(c.DataItem, "IdOrdenPago_op") }, Request.Url.Scheme) + "');\"></span>");
+                }
+            });
+            column.Width = Unit.Percentage(5);
+        });
     });
 }
 @grid.Bind(Model).GetHtml()

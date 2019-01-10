@@ -39,7 +39,9 @@ namespace Core.Erp.Data.Caja
                                  Total_fact_vale = q.Total_fact_vale,
                                  IdEstadoCierre = q.IdEstadoCierre,
                                  Fecha_ini = q.Fecha_ini,
-                                 Fecha_fin = q.Fecha_fin
+                                 Fecha_fin = q.Fecha_fin,
+                                 IdEmpresa_op = q.IdEmpresa_op,
+                                 IdOrdenPago_op = q.IdOrdenPago_op
                              }).ToList();
                 }
 
