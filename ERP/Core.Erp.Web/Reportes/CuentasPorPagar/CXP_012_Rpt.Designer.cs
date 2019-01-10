@@ -52,7 +52,7 @@
             // 
             // xrSubreport3
             // 
-            this.xrSubreport3.LocationFloat = new DevExpress.Utils.PointFloat(43.87504F, 323.0833F);
+            this.xrSubreport3.LocationFloat = new DevExpress.Utils.PointFloat(43.87514F, 354.3333F);
             this.xrSubreport3.Name = "xrSubreport3";
             this.xrSubreport3.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
             this.xrSubreport3.SizeF = new System.Drawing.SizeF(763.1249F, 23F);
@@ -60,7 +60,7 @@
             // 
             // xrSubreport2
             // 
-            this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(43.87504F, 178.2083F);
+            this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(43.87503F, 234.4583F);
             this.xrSubreport2.Name = "xrSubreport2";
             this.xrSubreport2.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
             this.xrSubreport2.SizeF = new System.Drawing.SizeF(763.1249F, 23F);
@@ -68,10 +68,10 @@
             // 
             // xrSubreport1
             // 
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(33.87505F, 60.41667F);
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(43.87503F, 100F);
             this.xrSubreport1.Name = "xrSubreport1";
             this.xrSubreport1.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(773.1249F, 23.00001F);
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(763.1249F, 23.00001F);
             this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
             // 
             // TopMargin
