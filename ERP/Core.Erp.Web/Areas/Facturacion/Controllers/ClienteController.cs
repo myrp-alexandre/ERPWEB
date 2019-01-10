@@ -121,10 +121,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 IdEmpresa = IdEmpresa,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 Idtipo_cliente = 1,
+                IdCiudad = "09",
+                IdParroquia = "09",
                 info_persona = new Info.General.tb_persona_Info
                 {
                     pe_Naturaleza = "NATU",
-                    IdTipoDocumento = "CED"
+                    IdTipoDocumento = "CED",                    
                 },
                 //lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>(),
                 info_fa_cliente_contactos = new fa_cliente_contactos_Info(),
