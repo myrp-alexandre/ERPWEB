@@ -48,7 +48,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  pe_cedulaRuc=q.pe_cedulaRuc,
                                  Descripcion=q.Descripcion,
                                  pr_direccion=q.pr_direccion
-
+                                 
                                  
                              }).ToList();
                 }
