@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrSubreport3 = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrSubreport2 = new DevExpress.XtraReports.UI.XRSubreport();
@@ -36,6 +37,9 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdRetencion = new DevExpress.XtraReports.Parameters.Parameter();
+            this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -47,7 +51,7 @@
             // 
             // xrSubreport3
             // 
-            this.xrSubreport3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 104.125F);
+            this.xrSubreport3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 61.20834F);
             this.xrSubreport3.Name = "xrSubreport3";
             this.xrSubreport3.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
             this.xrSubreport3.SizeF = new System.Drawing.SizeF(840F, 23F);
@@ -55,7 +59,7 @@
             // 
             // xrSubreport2
             // 
-            this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 59.95833F);
+            this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 38.20834F);
             this.xrSubreport2.Name = "xrSubreport2";
             this.xrSubreport2.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
             this.xrSubreport2.SizeF = new System.Drawing.SizeF(840F, 23F);
@@ -75,7 +79,7 @@
             this.xrSubreport1,
             this.xrSubreport2,
             this.xrSubreport3});
-            this.TopMargin.HeightF = 137.125F;
+            this.TopMargin.HeightF = 100.6667F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -101,18 +105,33 @@
             this.p_IdRetencion.ValueInfo = "0";
             this.p_IdRetencion.Visible = false;
             // 
+            // GroupHeader1
+            // 
+            this.GroupHeader1.HeightF = 0F;
+            this.GroupHeader1.Name = "GroupHeader1";
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.CuentasPorPagar.CXP_012_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
+            // 
             // CXP_012_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.Detail,
             this.TopMargin,
-            this.BottomMargin});
-            this.Margins = new System.Drawing.Printing.Margins(0, 0, 137, 35);
+            this.BottomMargin,
+            this.GroupHeader1});
+            this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
+            this.objectDataSource1});
+            this.DataSource = this.objectDataSource1;
+            this.Margins = new System.Drawing.Printing.Margins(0, 0, 101, 35);
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_IdRetencion});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXP_012_Rpt_BeforePrint_1);
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -127,5 +146,7 @@
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
         public DevExpress.XtraReports.Parameters.Parameter p_IdRetencion;
+        private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
+        private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
     }
 }
