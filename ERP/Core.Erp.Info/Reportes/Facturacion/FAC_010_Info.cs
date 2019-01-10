@@ -20,7 +20,7 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public string Estado { get; set; }
         public System.DateTime vt_fecha { get; set; }
         public string Ve_Vendedor { get; set; }
-        public int IdVendedor { get; set; }
+        public string IdVendedor { get; set; }
         public string Su_Descripcion { get; set; }
         public string Su_Telefonos { get; set; }
         public string Su_Direccion { get; set; }
