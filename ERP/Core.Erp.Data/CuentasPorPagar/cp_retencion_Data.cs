@@ -13,18 +13,20 @@ namespace Core.Erp.Data.CuentasPorPagar
 {
    public class cp_retencion_Data
     {
-        public List<cp_retencion_Info> get_list(int IdEmpresa, DateTime Fechaini, DateTime FechaFin)
+        public List<cp_retencion_Info> get_list(int IdEmpresa, DateTime Fechaini, DateTime FechaFin, int IdSucursal)
         {
             try
             {
 
                 Fechaini = Convert.ToDateTime(Fechaini.ToShortDateString());
                 FechaFin = Convert.ToDateTime(FechaFin.ToShortDateString());
+
                 List<cp_retencion_Info> lista = new List<cp_retencion_Info>();
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
                     lista = (from item in Context.vwcp_retencion
                              where item.IdEmpresa == IdEmpresa
+                             && item.IdSucursal == IdSucursal
                              && item.fecha>=Fechaini
                              && item.fecha<=FechaFin
                              orderby item.IdRetencion descending
