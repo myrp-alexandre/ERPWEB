@@ -342,6 +342,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     foreach (var item in info.detalle)
                     {
+                        if(item.pe_cedulaRuc== "0920256153")
+                        {
+
+                        }
+
                         item.em_NumCta = item.em_NumCta.Trim();
                         string linea = "";
                         double valor = Convert.ToDouble(item.Valor);
@@ -355,7 +360,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             else
                                 linea += "C";
                             linea += item.em_NumCta.PadLeft(10, '0');
-                            linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+                            if(valorDecimal!=0)
+                            linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2,'0')).PadLeft(15, '0');
+                            else
+                             linea += (valorEntero.ToString()+"00").PadLeft(15, '0');
                             linea += "EI";
                             linea += "Y";
                             linea += "01";
@@ -433,7 +441,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += "C";
                                 linea += "                    ";
                                 linea += "N";
-                                linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+
+                                if (valorDecimal != 0)
+                                    linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
+                                else
+                                    linea += (valorEntero.ToString() + "00").PadLeft(15, '0');
+
+
                                 linea += "                                           ";
                                 linea += "0900000000";
                                 file.WriteLine(linea);
@@ -451,7 +465,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += "C";
                                 linea += "                    ";
                                 linea += "N";
-                                linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+
+                                if (valorDecimal != 0)
+                                    linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
+                                else
+                                    linea += (valorEntero.ToString() + "00").PadLeft(15, '0');
                                 linea += "                                           ";
                                 linea += "0900000000";
                                 file.WriteLine(linea);
