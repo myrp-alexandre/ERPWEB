@@ -36,6 +36,7 @@ namespace Core.Erp.Info.RRHH
         public bool genera_op_x_pago { get; set; }
         public bool Genera_op_x_pago_x_empleao { get; set; }
         public string EstadoCreacionPrestamos { get; set; }
+        public double Porcentaje_anticipo { get; set; }
 
         public List<ro_Config_Param_contable_Info> lst_cta_x_rubros { get; set; }
         public List<ro_Config_Param_contable_Info> lst_cta_x_provisiones { get; set; }

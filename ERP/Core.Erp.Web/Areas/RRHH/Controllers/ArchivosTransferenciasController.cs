@@ -381,6 +381,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                System.IO.File.Delete(rutafile + NombreArchivo + ".txt");
                 MemoryStream memoryStream = new MemoryStream();
                 TextWriter tw = new StreamWriter(memoryStream);
 
@@ -418,6 +419,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
                                 linea += DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
                                 linea += info.detalle.Count().ToString().PadLeft(5, '0');
+                                file.WriteLine(linea);
+
+                                // prime empleado
+                                linea = "";
+                                valor = Convert.ToDouble(info.detalle.Sum(v => v.Valor));
+                                valorEntero = Math.Floor(valor);
+                                valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+                                linea += "D";
+                                linea += Info_proceso.Codigo_Empresa;
+                                linea += item.pe_cedulaRuc.PadLeft(10, '0');
+                                linea += item.pe_nombreCompleto.Substring(0, 17);
+                                linea += "C";
+                                linea += "                    ";
+                                linea += "N";
+                                linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+                                linea += "                                           ";
+                                linea += "0900000000";
+                                file.WriteLine(linea);
+
                             }
                             else
                             {
@@ -434,10 +454,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
                                 linea += "                                           ";
                                 linea += "0900000000";
+                                file.WriteLine(linea);
                             }
                         }
                         secuencia++;
-                        file.WriteLine(linea);
 
                     }
                 }
