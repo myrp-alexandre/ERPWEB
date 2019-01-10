@@ -345,7 +345,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     foreach (var item in info.detalle)
                     {
-                        if(item.pe_cedulaRuc== "0920256153")
+                        if(item.pe_cedulaRuc== "0912646684")
                         {
 
                         }
@@ -434,7 +434,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                                 // prime empleado
                                 linea = "";
-                                valor = Convert.ToDouble(info.detalle.Sum(v => v.Valor));
+                                valor = Convert.ToDouble(item.Valor);
                                 valorEntero = Math.Floor(valor);
                                 valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
                                 linea += "D";
@@ -458,7 +458,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             }
                             else
                             {
-                                valor = Convert.ToDouble(info.detalle.Sum(v => v.Valor));
+                                valor = Convert.ToDouble(item.Valor);
                                 valorEntero = Math.Floor(valor);
                                 valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
                                 linea += "D";

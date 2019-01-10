@@ -432,7 +432,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return PartialView(model);
         }
 
-        public ActionResult ROL_020(int IdNominaTipo = 0, int IdNomina = 0, int IdPeriodo = 0, int IdSucursal=0)
+        public ActionResult ROL_020(int IdNominaTipo = 0, int IdNomina = 0, int IdPeriodo = 0, int IdSucursal=0, string IdProceso_bancario_tipo="")
         {
             ROL_020_Rpt model = new ROL_020_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -442,6 +442,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdSucursal.Value = IdSucursal;
             model.usuario = SessionFixed.IdUsuario.ToString();
             model.empresa = SessionFixed.NomEmpresa.ToString();
+            model.p_IdProceso_bancario_tipo.Value = IdProceso_bancario_tipo;
             return View(model);
         }
 

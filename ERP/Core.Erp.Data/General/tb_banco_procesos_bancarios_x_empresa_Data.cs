@@ -176,7 +176,7 @@ namespace Core.Erp.Data.General
             {
                 using (Entities_general Context = new Entities_general())
                 {
-                    tb_banco_procesos_bancarios_x_empresa Entity = Context.tb_banco_procesos_bancarios_x_empresa.FirstOrDefault(q => q.IdProceso == info.IdProceso);
+                    tb_banco_procesos_bancarios_x_empresa Entity = Context.tb_banco_procesos_bancarios_x_empresa.FirstOrDefault(q => q.IdProceso == info.IdProceso && q.IdEmpresa==info.IdEmpresa);
                     if (Entity == null)
                         return false;
                     Entity.IdProceso_bancario_tipo = info.IdProceso_bancario_tipo;

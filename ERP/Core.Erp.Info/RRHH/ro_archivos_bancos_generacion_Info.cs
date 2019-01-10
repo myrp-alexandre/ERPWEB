@@ -40,6 +40,8 @@ namespace Core.Erp.Info.RRHH
         public System.DateTime pe_FechaIni { get; set; }
         public System.DateTime pe_FechaFin { get; set; }
         public string NombreProceso { get; set; }
+        public string IdProceso_bancario_tipo { get; set; }
+
         #endregion
         public cl_enumeradores.eTipoProcesoBancario TipoFile { get; set; }
         public List < ro_archivos_bancos_generacion_x_empleado_Info> detalle { get; set; }

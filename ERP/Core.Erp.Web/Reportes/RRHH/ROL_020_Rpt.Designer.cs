@@ -91,6 +91,7 @@
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdProceso_bancario_tipo = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -690,6 +691,11 @@
             this.p_IdSucursal.ValueInfo = "0";
             this.p_IdSucursal.Visible = false;
             // 
+            // p_IdProceso_bancario_tipo
+            // 
+            this.p_IdProceso_bancario_tipo.Name = "p_IdProceso_bancario_tipo";
+            this.p_IdProceso_bancario_tipo.Visible = false;
+            // 
             // ROL_020_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -712,7 +718,8 @@
             this.p_IdNominaTipo,
             this.p_IdNomina,
             this.p_IdPeriodo,
-            this.p_IdSucursal});
+            this.p_IdSucursal,
+            this.p_IdProceso_bancario_tipo});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_020_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -789,5 +796,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell28;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell29;
         public DevExpress.XtraReports.Parameters.Parameter p_IdSucursal;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdProceso_bancario_tipo;
     }
 }
