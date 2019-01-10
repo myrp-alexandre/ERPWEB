@@ -48,7 +48,6 @@ namespace Core.Erp.Info.Facturacion
 
         //datos de contacto
         public int IdContacto { get; set; }
-        public string Nombres { get; set; }
         public string Telefono { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }

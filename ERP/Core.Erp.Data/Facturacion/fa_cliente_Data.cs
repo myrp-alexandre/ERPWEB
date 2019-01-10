@@ -102,8 +102,7 @@ namespace Core.Erp.Data.Facturacion
                 };
 
                 fa_cliente_contactos Entity_contacto = Context_f.fa_cliente_contactos.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
-                info.IdContacto = Entity_contacto.IdContacto;
-                info.Nombres = Entity_contacto.Nombres;
+                info.IdContacto = Entity_contacto.IdContacto;                
                 info.Correo = Entity_contacto.Correo;
                 info.Direccion = Entity_contacto.Direccion;
                 info.Telefono = Entity_contacto.Telefono;
@@ -266,7 +265,7 @@ namespace Core.Erp.Data.Facturacion
                             Celular = info.Celular,
                             Correo = info.Correo,
                             Direccion = info.Direccion,
-                            Nombres = info.Nombres,
+                            Nombres = info.info_persona.pe_nombreCompleto,
                             Telefono = info.Telefono
                         };
                         Context.fa_cliente_contactos.Add(Entity_det);
