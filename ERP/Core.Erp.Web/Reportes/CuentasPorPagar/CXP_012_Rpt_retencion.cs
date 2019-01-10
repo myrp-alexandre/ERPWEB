@@ -21,12 +21,9 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
 
         private void CXP_012_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-           
-            int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            decimal IdRetencion = p_IdRetencion.Value == null ? 0 : Convert.ToDecimal(p_IdRetencion.Value);
-
+          
             CXP_012_Bus bus_rpt = new CXP_012_Bus();
-            List<CXP_012_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdRetencion);
+            List<CXP_012_Info> lst_rpt = bus_rpt.get_list(Convert.ToInt32( p_IdEmpresa.Value),Convert.ToInt32( p_IdRetencion.Value));
             this.DataSource = lst_rpt;
         }
     }

@@ -251,7 +251,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public ActionResult CXP_012(decimal IdRetencion = 0)
         {
-            CXP_012_Rpt_retencion model = new CXP_012_Rpt_retencion();
+            CXP_012_Rpt model = new CXP_012_Rpt();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
             #region Cargo diseño desde base
@@ -265,8 +265,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             model.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
             model.p_IdRetencion.Value = IdRetencion;
-            model.usuario = SessionFixed.IdUsuario;
-            model.empresa = SessionFixed.NomEmpresa;
             model.RequestParameters = false;
             model.DefaultPrinterSettingsUsing.UsePaperKind = false;
 
