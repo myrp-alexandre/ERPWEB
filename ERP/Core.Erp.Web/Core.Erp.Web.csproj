@@ -798,6 +798,12 @@
     <Compile Include="Reportes\CuentasPorPagar\CXP_012_Rpt.Designer.cs">
       <DependentUpon>CXP_012_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_012_Rpt_retencion.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorPagar\CXP_012_Rpt_retencion.Designer.cs">
+      <DependentUpon>CXP_012_Rpt_retencion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Facturacion\FAC_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9739,6 +9745,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -9894,6 +9901,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_012_Rpt.resx">
       <DependentUpon>CXP_012_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_012_Rpt_retencion.resx">
+      <DependentUpon>CXP_012_Rpt_retencion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_001_Rpt.resx">
       <DependentUpon>FAC_001_Rpt.cs</DependentUpon>

@@ -10,6 +10,7 @@ using Core.Erp.Info.Helps;
 using Core.Erp.Web.Areas.Contabilidad.Controllers;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -387,6 +388,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return Json(new { GiradoA = GiradoA, Observacion = Observacion }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateFactura([ModelBinder(typeof(DevExpressEditorsBinder))] cp_orden_pago_cancelaciones_Info info_det)
+        {
+            List_op.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_op.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_cheque_op", model);
+        }
+
         public ActionResult EditingDeleteFactura(decimal IdOrdenPago_op)
         {
             decimal IdTransaccionSession = Convert.ToDecimal(string.IsNullOrEmpty(SessionFixed.IdTransaccionSessionActual) ? "0" : SessionFixed.IdTransaccionSessionActual);
@@ -471,6 +480,14 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             if (list.Where(q => q.IdOrdenPago_op == info_det.IdOrdenPago_op).Count() == 0)
                 list.Add(info_det);
+        }
+        public void UpdateRow(cp_orden_pago_cancelaciones_Info info_det, decimal IdTransaccionSession)
+        {
+            cp_orden_pago_cancelaciones_Info info = get_list(IdTransaccionSession).Where(q=>q.IdOrdenPago_op == info_det.IdOrdenPago_op).FirstOrDefault();
+            if(info != null)
+            {
+                info.MontoAplicado = info_det.MontoAplicado;
+            }
         }
 
         public void DeleteRow(decimal IdOrdenPago_op, decimal IdTransaccionSession)

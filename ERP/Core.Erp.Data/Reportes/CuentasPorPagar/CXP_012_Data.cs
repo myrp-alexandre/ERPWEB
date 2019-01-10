@@ -33,17 +33,23 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  observacion = q.observacion,
                                  re_Tiene_RTiva = q.re_Tiene_RTiva,
                                  re_Tiene_RFuente = q.re_Tiene_RFuente,
-                                 co_serie = q.co_serie,
+                                 co_serie = q.co_factura,
                                  co_factura = q.co_factura,
                                  co_FechaFactura = q.co_FechaFactura,
-                                 pe_razonSocial = q.pe_razonSocial,
+                                 pe_razonSocial = q.pe_nombreCompleto,
                                  re_tipoRet = q.re_tipoRet,
                                  re_baseRetencion = q.re_baseRetencion,
                                  IdCodigo_SRI = q.IdCodigo_SRI,
                                  re_Codigo_impuesto = q.re_Codigo_impuesto,
                                  re_Porcen_retencion = q.re_Porcen_retencion,
                                  re_valor_retencion = q.re_valor_retencion,
-                                 co_descripcion = q.co_descripcion                                 
+                                 co_descripcion = q.co_descripcion ,
+                                 pe_nombreCompleto=q.pe_nombreCompleto,
+                                 pe_cedulaRuc=q.pe_cedulaRuc,
+                                 Descripcion=q.Descripcion,
+                                 pr_direccion=q.pr_direccion
+
+                                 
                              }).ToList();
                 }
                 return Lista;

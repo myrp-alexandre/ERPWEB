@@ -1,7 +1,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_caja";
-        settings.CallbackRouteValues = new { Controller = "Caja", Action = "GridViewPartial_caja" };
+        settings.CallbackRouteValues = new { Controller = "Caja", Action = "GridViewPartial_caja", IdSucursal = ViewBag.IdSucursal };
         settings.KeyFieldName = "IdCaja";
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
 
