@@ -19,15 +19,16 @@ namespace Core.Erp.Data.RRHH
                 {
                     Lista = (from ROL in Context.vwro_rol
                              where ROL.IdEmpresa == IdEmpresa
-                             &&( ROL.IdNominaTipoLiqui==2
-                             || ROL.IdNominaTipoLiqui==1
-                             || ROL.IdNominaTipoLiqui==6)
-                             && ROL.IdSucursal>=IdSucursalInicio
-                             && ROL.IdSucursal<=IdSucursalFin
+                             && (ROL.IdNominaTipoLiqui == 2
+                             || ROL.IdNominaTipoLiqui == 1
+                             || ROL.IdNominaTipoLiqui == 6)
+                             && ROL.IdSucursal >= IdSucursalInicio
+                             && ROL.IdSucursal <= IdSucursalFin
 
                              select new ro_rol_Info
                              {
                                  IdEmpresa = ROL.IdEmpresa,
+                                 IdSucursal = ROL.IdSucursal,
                                  IdRol=ROL.IdRol,
                                  IdNomina_Tipo = ROL.IdNominaTipo,
                                  IdNomina_TipoLiqui = ROL.IdNominaTipoLiqui,
@@ -182,8 +183,8 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
-                int IdSucursalInicio =info. IdSucursal;
-                int IdSucursalFin = info. IdSucursal == 0 ? 9999 :info. IdSucursal;
+                int IdSucursalInicio =Convert.ToInt32(info. IdSucursal);
+                int IdSucursalFin = Convert.ToInt32(info.IdSucursal) == 0 ? 9999 : Convert.ToInt32(info. IdSucursal);
 
                 if (info.IdRol == 0)
                     info.IdRol = get_id(info.IdEmpresa);

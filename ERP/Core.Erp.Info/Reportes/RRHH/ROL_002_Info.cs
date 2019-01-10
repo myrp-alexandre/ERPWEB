@@ -31,6 +31,6 @@ namespace Core.Erp.Info.Reportes.RRHH
         public double Egreso { get; set; }
 
         public string mes_nom { get; set; }
-
+        public int IdSucursal { get; set; }
     }
 }
