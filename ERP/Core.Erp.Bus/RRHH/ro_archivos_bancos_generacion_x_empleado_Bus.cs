@@ -24,11 +24,11 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public List<ro_archivos_bancos_generacion_x_empleado_Info> get_list(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo, string TipoCuenta)
+        public List<ro_archivos_bancos_generacion_x_empleado_Info> get_list(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo, string TipoCuenta, int IdSucursal)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdNominaTipo,IdNominaTipoLiqui,IdPeriodo, TipoCuenta);
+                return odata.get_list(IdEmpresa, IdNominaTipo,IdNominaTipoLiqui,IdPeriodo, TipoCuenta, IdSucursal);
             }
             catch (Exception)
             {
