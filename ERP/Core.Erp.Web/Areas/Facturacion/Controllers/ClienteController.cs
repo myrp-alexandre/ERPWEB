@@ -44,12 +44,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         private bool validar(fa_cliente_Info i_validar, ref string msg)
         {
-            if (i_validar.Nombres == null)
-            {
-                mensaje = "Debe ingresar datos de contacto";
-                return false;
-            }
-
             return true;
         }
         [ValidateInput(false)]
@@ -58,21 +52,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_cliente.get_list(IdEmpresa, true);
             return PartialView("_GridViewPartial_cliente", model);
-        }
-
-        public ActionResult cmb_parroquia()
-        {
-            try
-            {
-                List<tb_parroquia_Info> model = new List<tb_parroquia_Info>();
-                model = ListaParroquia.get_list();
-
-                return PartialView("_cmb_parroquia", model);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
         #endregion
         #region Metodos
@@ -190,8 +169,6 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
 
             //List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
-            var resultado = (bus_parroquia.get_list(model.IdCiudad, false));
-            ListaParroquia.set_list(resultado);
 
             cargar_combos(model);
             return View(model);
@@ -211,7 +188,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             //model.lst_fa_cliente_contactos.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdCliente = model.IdCliente; });
             fa_cliente_contactos_Info info_contacto = new fa_cliente_contactos_Info();
             info_contacto.IdContacto = model.IdContacto;
-            info_contacto.Nombres = model.Nombres;
+            info_contacto.Nombres = "";
             info_contacto.Direccion = model.Direccion;
             info_contacto.Correo = model.Correo;
             info_contacto.Telefono = model.Telefono;
@@ -342,24 +319,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region Json
-        //public ActionResult get_parroquias(string IdCiudad = "")
-        //{
-        //    return GridViewExtension.GetComboBoxCallbackResult(p =>
-        //    {
-        //        p.CallbackRouteValues = new { Controller = "Cliente", Action = "get_parroquias" };
-        //        p.TextField = "nom_parroquia";
-        //        p.ValueField = "IdParroquia";
-        //        p.ValueType = typeof(string);
-        //        p.BindList(bus_parroquia.get_list(IdCiudad, false));
-        //    });
-        //}
 
-        public JsonResult get_parroquias(string IdCiudad = "")
+        public ActionResult cmb_parroquia()
         {
-            var resultado = (bus_parroquia.get_list(IdCiudad, false));
-            ListaParroquia.set_list(resultado);
-
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            string IdCiudad = (Request.Params["fx_IdCiudad"] != null) ? Request.Params["fx_IdCiudad"].ToString() : "";
+            return PartialView("_cmb_parroquia", new fa_cliente_Info { IdCiudad = IdCiudad});
         }
 
         public JsonResult get_info_termino_pago(string IdTerminoPago = "")
