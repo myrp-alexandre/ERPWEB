@@ -206,7 +206,7 @@
             this.xrLabel3,
             this.xrLabel2,
             this.xrLabel1});
-            this.PageHeader.HeightF = 99.16668F;
+            this.PageHeader.HeightF = 75.20834F;
             this.PageHeader.Name = "PageHeader";
             // 
             // xrLabel6
