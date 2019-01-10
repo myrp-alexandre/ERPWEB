@@ -106,11 +106,18 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="Sueldo_basico">Salario básico*</label>
                                 @Html.TextBoxFor(q => q.Sueldo_basico, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.Sueldo_basico, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Sueldo_basico">% anticipo*</label>
+                                @Html.TextBoxFor(q => q.Porcentaje_anticipo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Porcentaje_anticipo, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -127,30 +134,30 @@
                                 @Html.ValidationMessageFor(q => q.Porcentaje_aporte_pers, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="IdTipo_op">Estado prestamos*</label>
-                                        @Html.DevExpress().ComboBoxFor(q => q.EstadoCreacionPrestamos, settings =>
-                                           {
-                                               settings.Name = "EstadoCreacionPrestamos";
-                                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                               settings.Properties.Columns.Add("CodCatalogo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                                               settings.Properties.Columns.Add("ca_descripcion", "Catalogo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                                               //Campo ID
-                                               settings.Properties.ValueField = "CodCatalogo";
-                                               settings.Properties.ValueType = typeof(string);
-                                               settings.Properties.TextField = "ca_descripcion";
-                                               //Boton para seleccionar ningun registro
-                                               settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                           }).BindList(ViewBag.lst_estado_prestamo).GetHtml()
-                                        @Html.ValidationMessageFor(q => q.EstadoCreacionPrestamos, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                          
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdTipo_op">Estado prestamos*</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.EstadoCreacionPrestamos, settings =>
+                                   {
+                                       settings.Name = "EstadoCreacionPrestamos";
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                       settings.Properties.Columns.Add("CodCatalogo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                       settings.Properties.Columns.Add("ca_descripcion", "Catalogo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                       //Campo ID
+                                       settings.Properties.ValueField = "CodCatalogo";
+                                       settings.Properties.ValueType = typeof(string);
+                                       settings.Properties.TextField = "ca_descripcion";
+                                       //Boton para seleccionar ningun registro
+                                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                   }).BindList(ViewBag.lst_estado_prestamo).GetHtml()
+                                @Html.ValidationMessageFor(q => q.EstadoCreacionPrestamos, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
