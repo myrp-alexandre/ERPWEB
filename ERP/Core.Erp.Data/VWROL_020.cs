@@ -32,5 +32,6 @@ namespace Core.Erp.Data
         public string Descripcion { get; set; }
         public System.DateTime pe_FechaIni { get; set; }
         public System.DateTime pe_FechaFin { get; set; }
+        public int IdSucursal { get; set; }
     }
 }

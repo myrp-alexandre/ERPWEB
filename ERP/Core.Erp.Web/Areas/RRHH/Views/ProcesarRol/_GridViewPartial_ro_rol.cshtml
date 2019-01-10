@@ -137,7 +137,7 @@
 
             column.SetDataItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_001", "RRHHReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdNomina_Tipo = DataBinder.Eval(c.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(c.DataItem, "IdPeriodo") }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_001", "RRHHReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdNomina_Tipo = DataBinder.Eval(c.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(c.DataItem, "IdPeriodo"), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal") }, Request.Url.Scheme) + "');\"></span>");
             });
             column.Width = System.Web.UI.WebControls.Unit.Percentage(6);
         });
@@ -147,7 +147,7 @@
             column.SetDataItemTemplateContent(c =>
             {
 
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_002", "RRHHReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdNomina_Tipo = DataBinder.Eval(c.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(c.DataItem, "IdPeriodo") }, Request.Url.Scheme) + "');\"></span>");
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_002", "RRHHReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdNomina_Tipo = DataBinder.Eval(c.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(c.DataItem, "IdPeriodo"), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal") }, Request.Url.Scheme) + "');\"></span>");
             });
             column.Width = System.Web.UI.WebControls.Unit.Percentage(6);
         });

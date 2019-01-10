@@ -8,7 +8,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
    public class ROL_001_Data
     {
-        public List<ROL_001_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo)
+        public List<ROL_001_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo, int IdSucursal)
         {
             try
             {
@@ -17,6 +17,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                 {
                     Lista = (from q in Context.VWROL_001
                              where q.IdEmpresa == IdEmpresa
+                             && ((IdSucursal!=0) ? q.IdSucursal == IdSucursal : 1==1) 
                              && q.IdNominaTipo == IdNomina
                              && q.IdNominaTipoLiqui == IdNominaTipo
                              && q.IdPeriodo == IdPeriodo
