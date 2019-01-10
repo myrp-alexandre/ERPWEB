@@ -100,6 +100,20 @@ namespace Core.Erp.Data.Facturacion
                     IdNivel = Entity.IdNivel,
                     EsClienteExportador = Entity.EsClienteExportador
                 };
+
+                fa_cliente_contactos Entity_contacto = Context_f.fa_cliente_contactos.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
+                info.IdContacto = Entity_contacto.IdContacto;
+                info.Nombres = Entity_contacto.Nombres;
+                info.Correo = Entity_contacto.Correo;
+                info.Direccion = Entity_contacto.Direccion;
+                info.Telefono = Entity_contacto.Telefono;
+                info.Celular = Entity_contacto.Celular;
+                info.IdCiudad = Entity_contacto.IdCiudad;
+                info.IdParroquia = Entity_contacto.IdParroquia;
+
+                tb_ciudad Entity_ciudad = Context_g.tb_ciudad.Where(q => q.IdCiudad == info.IdCiudad).FirstOrDefault();
+                info.Descripcion_Ciudad = Entity_ciudad.Descripcion_Ciudad;
+
                 tb_persona Entity_p = Context_g.tb_persona.Where(q => q.IdPersona == info.IdPersona).FirstOrDefault();
                 info.info_persona = new Info.General.tb_persona_Info
                 {
@@ -246,14 +260,14 @@ namespace Core.Erp.Data.Facturacion
                         {
                             IdEmpresa = Entity.IdEmpresa,
                             IdCliente = Entity.IdCliente,
-                            IdContacto = info.info_fa_cliente_contactos.IdContacto,
-                            IdCiudad = info.info_fa_cliente_contactos.IdCiudad,
-                            IdParroquia = info.info_fa_cliente_contactos.IdParroquia,
-                            Celular = info.info_fa_cliente_contactos.Celular,
-                            Correo = info.info_fa_cliente_contactos.Correo,
-                            Direccion = info.info_fa_cliente_contactos.Direccion,
-                            Nombres = info.info_fa_cliente_contactos.Nombres,
-                            Telefono = info.info_fa_cliente_contactos.Telefono
+                            IdContacto = 1,
+                            IdCiudad = info.IdCiudad,
+                            IdParroquia = info.IdParroquia,
+                            Celular = info.Celular,
+                            Correo = info.Correo,
+                            Direccion = info.Direccion,
+                            Nombres = info.Nombres,
+                            Telefono = info.Telefono
                         };
                         Context.fa_cliente_contactos.Add(Entity_det);
                     //}

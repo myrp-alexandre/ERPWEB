@@ -35,11 +35,11 @@ namespace Core.Erp.Bus.Facturacion
             }
         }
 
-        public bool guardarDB(List<fa_cliente_contactos_Info> Lista)
+        public bool guardarDB(fa_cliente_contactos_Info info)
         {
             try
             {
-                return odata.guardarDB(Lista);
+                return odata.guardarDB(info);
             }
             catch (Exception)
             {

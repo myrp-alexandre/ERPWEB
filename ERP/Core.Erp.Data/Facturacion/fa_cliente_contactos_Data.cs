@@ -129,5 +129,52 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
+
+        public bool guardarDB(fa_cliente_contactos_Info info)
+        {
+            try
+            {
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                        fa_cliente_contactos Entity = Context.fa_cliente_contactos.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente && q.IdContacto == info.IdContacto);
+                        if (Entity == null)
+                        {
+                            Entity = new fa_cliente_contactos
+
+                            {
+                                IdEmpresa = Entity.IdEmpresa,
+                                IdCliente = Entity.IdCliente,
+                                IdContacto = Entity.IdContacto,
+                                IdCiudad = Entity.IdCiudad,
+                                IdParroquia = Entity.IdParroquia,
+                                Celular = Entity.Celular,
+                                Correo = Entity.Correo,
+                                Direccion = Entity.Direccion,
+                                Nombres = Entity.Nombres,
+                                Telefono = Entity.Telefono
+                            };
+                            Context.fa_cliente_contactos.Add(Entity);
+                        }
+                        else
+                        {
+                            Entity.IdCiudad = Entity.IdCiudad;
+                            Entity.IdParroquia = Entity.IdParroquia;
+                            Entity.Celular = Entity.Celular;
+                            Entity.Correo = Entity.Correo;
+                            Entity.Direccion = Entity.Direccion;
+                            Entity.Nombres = Entity.Nombres;
+                            Entity.Telefono = Entity.Telefono;
+                        };
+                        Context.SaveChanges();
+                    }
+                return true;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

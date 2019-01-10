@@ -2,7 +2,7 @@
 @{
     var comboBox = Html.DevExpress().ComboBox(settings =>
     {
-        settings.Name = "info_fa_cliente_contactos.IdParroquia";
+        settings.Name = "IdParroquia";
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
@@ -16,6 +16,6 @@
 
         settings.Properties.ValueType = typeof(string);
     })
-    .BindList(Model);
+    .Bind(Model);
 }
 @comboBox.GetHtml()
