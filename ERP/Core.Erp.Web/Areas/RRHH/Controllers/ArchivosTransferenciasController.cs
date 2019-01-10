@@ -90,8 +90,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             };
            
-            model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo,"");
-            ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(model.detalle, Convert.ToDecimal( SessionFixed.IdTransaccionSession));
             cargar_combos(0);
             return View(model);
         }
@@ -228,7 +226,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
 
-        public JsonResult CargarEmpleados( int IdProceso  = 0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0, decimal  IdTransaccionSession=0)
+        public JsonResult CargarEmpleados( int IdProceso  = 0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0, 
+            int IdSucursal=0,
+            decimal  IdTransaccionSession=0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             string TipoCuenta = "";
@@ -247,7 +247,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 else
                     TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.VRT.ToString();
 
-                var detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, TipoCuenta);
+                var detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, TipoCuenta, IdSucursal);
                 ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(detalle, Convert.ToDecimal(IdTransaccionSession));
             }
             return Json("", JsonRequestBehavior.AllowGet);
@@ -269,6 +269,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             var lst_proceso = bus_procesos_bancarios.get_list(IdEmpresa, false);
             ViewBag.lst_proceso = lst_proceso;
+
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
 
             List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lst_periodos = new List<ro_periodo_x_ro_Nomina_TipoLiqui_Info>();
             ViewBag.lst_periodos = lst_periodos;

@@ -27,6 +27,13 @@
         <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
                     <label for="IdNomina_Tipo">Nómina*</label>
                     @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
                     @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
@@ -199,6 +206,7 @@
                     IdNomina_Tipo: $("#IdNomina_Tipo").val(),
                     IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val(),
                     IdPeriodo: $("#IdPeriodo").val(),
+                    IdSucursal: $("#IdSucursal").val(),
                     IdTransaccionSession: $("#IdTransaccionSession").val()
                     
                 }
