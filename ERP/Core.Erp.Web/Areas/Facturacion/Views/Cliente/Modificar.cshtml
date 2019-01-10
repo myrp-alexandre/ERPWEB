@@ -13,6 +13,7 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCliente)
+    @Html.HiddenFor(q => q.IdContacto)
     @Html.HiddenFor(q => q.IdPersona, new { @id = "IdPersona" })
     if (ViewBag.mensaje != null)
     {
@@ -175,14 +176,89 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_contactos_telefonos">
-
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="FormaPago">Nombre de Contacto*</label>
+                                @Html.TextBoxFor(q => q.Nombres, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Nombres, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="FormaPago">Correo*</label>
+                                @Html.TextBoxFor(q => q.Correo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Correo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdTipoCredito">Teléfono*</label>
+                                @Html.TextBoxFor(q => q.Telefono, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Telefono, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="cl_plazo">Celular*</label>
+                                @Html.TextBoxFor(q => q.Celular, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Celular, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="FormaPago">Dirección*</label>
+                                @Html.TextBoxFor(q => q.Direccion, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.Nombres, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdTipoCredito">Ciudad*</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdCiudad, settings =>
+                                   {
+                                       settings.Name = "IdCiudad";
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                       settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                       settings.Properties.Columns.Add("Descripcion_Ciudad", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                       //Campo ID
+                                       settings.Properties.ValueField = "IdCiudad";
+                                       settings.Properties.ValueType = typeof(string);
+                                       settings.Properties.TextField = "Descripcion_Ciudad";
+                                       //Boton para seleccionar ningun registro
+                                       settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_parroquias();}";
+                                   }).BindList(ViewBag.lst_ciudad).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdCiudad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="cl_plazo">Parroquia*</label>
+                                @Html.Action("cmb_parroquia", Model.IdParroquia)
+                                @Html.ValidationMessageFor(q => q.IdParroquia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             @Html.Action("GridViewPartial_cliente_contacto")
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_informacion_financiera">
                 <div class="row">
