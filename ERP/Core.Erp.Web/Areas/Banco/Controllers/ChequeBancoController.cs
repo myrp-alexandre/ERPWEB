@@ -30,7 +30,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         cp_orden_pago_cancelaciones_Bus bus_cancelaciones = new cp_orden_pago_cancelaciones_Bus();
         ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
-        cp_orden_pago_cancelaciones_List List_op = new cp_orden_pago_cancelaciones_List();
+        
         ct_cbtecble_det_List List_ct = new ct_cbtecble_det_List();
         ba_Talonario_cheques_x_banco_Bus bus_talonario = new ba_Talonario_cheques_x_banco_Bus();
         ct_cbtecble_det_Bus bus_det_ct = new ct_cbtecble_det_Bus();
@@ -38,6 +38,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         string mensaje = string.Empty;
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         cp_orden_pago_cancelaciones_PorCruzar ListPorCruzar = new cp_orden_pago_cancelaciones_PorCruzar();
+        cp_orden_pago_cancelaciones_List List_op = new cp_orden_pago_cancelaciones_List();
         cp_SolicitudPago_Bus bus_solicitud = new cp_SolicitudPago_Bus();
         #endregion
 
