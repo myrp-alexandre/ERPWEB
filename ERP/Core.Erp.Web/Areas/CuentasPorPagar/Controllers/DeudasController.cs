@@ -823,7 +823,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     IdTipoFlujo = item.IdTipoFlujo,
                     co_factura = item.co_factura,
                     co_valorpagar = item.co_valorpagar,
-                    nom_tipo_Documento = item.nom_tipo_Documento
+                    nom_tipo_Documento = item.nom_tipo_Documento,
+                    IdSucursal = (int)item.IdSucursal
                 });
             }
             Session["list_facturas_seleccionadas"] = null;
@@ -868,7 +869,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                                     info_persona = new tb_persona_Info{
                                         pe_nombreCompleto = info_add.info_proveedor.info_persona.pe_nombreCompleto
                                     }
-                                }
+                                },
+                                IdSucursal = info_add.IdSucursal
                             });
                         }
                     }
