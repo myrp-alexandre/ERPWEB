@@ -432,13 +432,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return PartialView(model);
         }
 
-        public ActionResult ROL_020(int IdNominaTipo = 0, int IdNomina = 0, int IdPeriodo = 0)
+        public ActionResult ROL_020(int IdNominaTipo = 0, int IdNomina = 0, int IdPeriodo = 0, int IdSucursal=0)
         {
             ROL_020_Rpt model = new ROL_020_Rpt();
             model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdNominaTipo.Value = IdNominaTipo;
             model.p_IdNomina.Value = IdNomina;
             model.p_IdPeriodo.Value = IdPeriodo;
+            model.p_IdSucursal.Value = IdSucursal;
             model.usuario = SessionFixed.IdUsuario.ToString();
             model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
