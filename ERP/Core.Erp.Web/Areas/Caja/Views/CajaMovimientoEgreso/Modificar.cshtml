@@ -8,7 +8,107 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script>
+    function AddOP() {
+        var datos = {
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdEmpresa: $("#IdEmpresa").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EditingAddNew", "ChequeBanco",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.EsOp == "S") {
+                    $("#cr_Valor").val(data.Valor)
+                }
+            },
+            error: function (error) {
+            }
+        });
+        selectedIDs = "";
+        GridView_egreso_op_x_cruzar.PerformCallback();
+        GridView_egreso_op_x_cruzar.UnselectRows();
+        GridView_egreso_op.PerformCallback();
+        $("#OpModal").modal("hide");
+    }
 
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+        e.customArgs["selectedIDs"] = selectedIDs;
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdOrdenPago_op", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+    function MostrarModal() {
+        selectedIDs = "";
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdTipoPersona: $("#IdTipoPersona").val(),
+            IdEntidad: IdEntidad.GetValue(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetListPorCruzar", "CajaMovimientoEgreso",new { Area = "Caja"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridView_egreso_op_x_cruzar.PerformCallback();
+                GridView_egreso_op_x_cruzar.UnselectRows();
+                $("#OpModal").modal("show");
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function armar_diario() {
+        var caja = $("#IdCaja").val();
+        var tipo_movimiento = $("#IdTipoMovi").val();
+        var monto = $("#cr_Valor").val();
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdCaja: caja,
+            IdTipoMovi: tipo_movimiento,
+            valor: monto,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("armar_diario", "CajaMovimientoEgreso", new { Area = "Caja" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridView_comprobante_detalle.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
 @using (Html.BeginForm("Modificar", "CajaMovimientoEgreso", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
@@ -119,14 +219,40 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_cheque" aria-controls="facturas" role="tab" data-toggle="tab">Diario contable</a>
+            </li>
+            <li>
+                <a href="#tab_op" aria-controls="vales" role="tab" data-toggle="tab">Ordenes de pago</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_cheque">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_op">
+                <div class="row">
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-primary form-control" id="btn_buscar_op" onclick="MostrarModal();" title="Buscar órdenes">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <br />
+                @Html.Action("GridViewPartial_egreso_op")
+            </div>
         </div>
+
     </div>
 
     <div class="box-footer">
@@ -156,33 +282,33 @@
     });
 
     function armar_diario() {
-        var caja = $("#IdCaja").val();
-        var tipo_movimiento = $("#IdTipoMovi").val();
-        var monto = $("#cr_Valor").val();
+                        var caja = $("#IdCaja").val();
+                        var tipo_movimiento = $("#IdTipoMovi").val();
+                        var monto = $("#cr_Valor").val();
 
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdCaja: caja,
-            IdTipoMovi: tipo_movimiento,
-            valor: monto,
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("armar_diario", "CajaMovimientoIngreso", new { Area = "Caja" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                GridView_comprobante_detalle.PerformCallback();
-            },
-            error: function (error) {
-            }
-        });
-    }
+                        var datos = {
+                            IdEmpresa: $("#IdEmpresa").val(),
+                            IdCaja: caja,
+                            IdTipoMovi: tipo_movimiento,
+                            valor: monto,
+                            IdTransaccionSession: $("#IdTransaccionSession").val()
+                        }
+                        $.ajax({
+                            type: 'POST',
+                            data: JSON.stringify(datos),
+                            url: '@Url.Action("armar_diario", "CajaMovimientoEgreso", new { Area = "Caja" })',
+                            async: false,
+                            bDeferRender: true,
+                            bProcessing: true,
+                            dataType: 'json',
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+                                GridView_comprobante_detalle.PerformCallback();
+                            },
+                            error: function (error) {
+                            }
+                        });
+                    }
 
     function OnSelectedCtaCbleChanged() {
         GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();

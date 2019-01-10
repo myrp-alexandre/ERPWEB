@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.CuentasPorPagar;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -54,6 +55,7 @@ namespace Core.Erp.Info.Caja
         public caj_Caja_Movimiento_det_Info info_caj_Caja_Movimiento_det { get; set; }
         public ct_cbtecble_Info info_ct_cbtecble { get; set; }
         public List<ct_cbtecble_det_Info> lst_ct_cbtecble_det { get; set; }
+        public List<cp_orden_pago_cancelaciones_Info> lst_det_canc_op { get; set; }
 
     }
 }

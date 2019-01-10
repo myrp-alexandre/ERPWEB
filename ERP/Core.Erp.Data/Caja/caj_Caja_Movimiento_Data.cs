@@ -1,4 +1,5 @@
-﻿using Core.Erp.Info.Caja;
+﻿using Core.Erp.Data.CuentasPorPagar;
+using Core.Erp.Info.Caja;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -159,6 +160,37 @@ namespace Core.Erp.Data.Caja
                     Context.caj_Caja_Movimiento_det.Add(Entity_det);
                     Context.SaveChanges();
                 }
+
+                using (Entities_cuentas_por_pagar db = new Entities_cuentas_por_pagar())
+                {
+                    cp_orden_pago_cancelaciones_Data odata_can = new cp_orden_pago_cancelaciones_Data();
+                    int secuencia = 1;
+                    decimal IdCancelacion = odata_can.get_id(info.IdEmpresa);
+                    foreach (var item in info.lst_det_canc_op)
+                    {
+                        db.cp_orden_pago_cancelaciones.Add(new cp_orden_pago_cancelaciones
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            Idcancelacion = IdCancelacion,
+                            Secuencia = secuencia++,
+
+                            IdEmpresa_op = info.IdEmpresa,
+                            IdOrdenPago_op = item.IdOrdenPago_op,
+                            Secuencia_op = 1,
+                            
+                            IdEmpresa_cxp = item.IdEmpresa_cxp,
+                            IdTipoCbte_cxp = item.IdTipoCbte_cxp,
+                            IdCbteCble_cxp = item.IdCbteCble_cxp,
+
+                            IdEmpresa_pago = info.IdEmpresa,
+                            IdTipoCbte_pago = info.IdTipocbte,
+                            IdCbteCble_pago = info.IdCbteCble,
+
+                            MontoAplicado = item.MontoAplicado
+                        });
+                        db.SaveChanges();          
+                    }                    
+                }
                 return true;
             }
             catch (Exception)
@@ -198,6 +230,40 @@ namespace Core.Erp.Data.Caja
                     Entity.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();
                 }
+
+                using (Entities_cuentas_por_pagar db = new Entities_cuentas_por_pagar())
+                {
+                    var lst = db.cp_orden_pago_cancelaciones.Where(q => q.IdEmpresa_pago == info.IdEmpresa && q.IdTipoCbte_pago == info.IdTipocbte && q.IdCbteCble_pago == info.IdCbteCble).ToList();
+                    db.cp_orden_pago_cancelaciones.RemoveRange(lst);
+
+                    cp_orden_pago_cancelaciones_Data odata_can = new cp_orden_pago_cancelaciones_Data();
+                    int secuencia = 1;
+                    decimal IdCancelacion = odata_can.get_id(info.IdEmpresa);
+                    foreach (var item in info.lst_det_canc_op)
+                    {
+                        db.cp_orden_pago_cancelaciones.Add(new cp_orden_pago_cancelaciones
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            Idcancelacion = IdCancelacion,
+                            Secuencia = secuencia++,
+
+                            IdEmpresa_op = info.IdEmpresa,
+                            IdOrdenPago_op = item.IdOrdenPago_op,
+                            Secuencia_op = 1,
+
+                            IdEmpresa_cxp = item.IdEmpresa_cxp,
+                            IdTipoCbte_cxp = item.IdTipoCbte_cxp,
+                            IdCbteCble_cxp = item.IdCbteCble_cxp,
+
+                            IdEmpresa_pago = info.IdEmpresa,
+                            IdTipoCbte_pago = info.IdTipocbte,
+                            IdCbteCble_pago = info.IdCbteCble,
+
+                            MontoAplicado = item.MontoAplicado
+                        });
+                        db.SaveChanges();
+                    }
+                }
                 return true;
             }
             catch (Exception)
@@ -224,6 +290,13 @@ namespace Core.Erp.Data.Caja
 
                     Context.Database.ExecuteSqlCommand("DELETE cp_conciliacion_Caja_det_x_ValeCaja WHERE IdEmpresa_movcaja = " + info.IdEmpresa+ " AND IdTipocbte_movcaja = " + info.IdTipocbte+ " AND IdCbteCble_movcaja = " + info.IdCbteCble);
                 }
+                using (Entities_cuentas_por_pagar db = new Entities_cuentas_por_pagar())
+                {
+                    var lst = db.cp_orden_pago_cancelaciones.Where(q => q.IdEmpresa_pago == info.IdEmpresa && q.IdTipoCbte_pago == info.IdTipocbte && q.IdCbteCble_pago == info.IdCbteCble).ToList();
+                    db.cp_orden_pago_cancelaciones.RemoveRange(lst);
+                    db.SaveChanges();
+                }
+
                 return true;
             }
             catch (Exception)

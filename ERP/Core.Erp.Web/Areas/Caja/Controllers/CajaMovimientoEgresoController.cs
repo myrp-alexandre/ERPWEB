@@ -116,7 +116,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
                     return false;
                 }
             }
-            if (i_validar.lst_ct_cbtecble_det.Sum(q => q.dc_Valor) != 0)
+            if (Math.Round(i_validar.lst_ct_cbtecble_det.Sum(q => q.dc_Valor),2,MidpointRounding.AwayFromZero) != 0)
             {
                 mensaje = "La suma de los detalles debe ser 0, por favor verifique";
                 return false;
@@ -142,6 +142,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             }
 
             i_validar.cm_valor = i_validar.info_caj_Caja_Movimiento_det.cr_Valor;
+            i_validar.lst_det_canc_op = List_op.get_list(i_validar.IdTransaccionSession);
             return true;
         }
         private void cargar_combos(int IdEmpresa)
@@ -250,6 +251,11 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_ct_cbtecble_det = bus_comprobante_detalle.get_list(IdEmpresa, IdTipocbte, IdCbteCble);
             list_ct_cbtecble_det.set_list(model.lst_ct_cbtecble_det,model.IdTransaccionSession);
+
+            model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
+            List_op.set_list(model.lst_det_canc_op, model.IdTransaccionSession);
+
+            SessionFixed.TipoPersona = model.IdTipo_Persona;
 
             cargar_combos(IdEmpresa);
             return View(model);
