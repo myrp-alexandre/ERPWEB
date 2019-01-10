@@ -22,9 +22,6 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
 
         private void CXP_013_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            //lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-            //lbl_empresa.Text = empresa;
-            //lbl_usuario.Text = usuario;
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             decimal IdRetencion = p_IdRetencion.Value == null ? 0 : Convert.ToDecimal(p_IdRetencion.Value);
 
@@ -35,10 +32,9 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var empresa = bus_empresa.get_info(IdEmpresa);
             lbl_empresa.Text = empresa.em_nombre;
-            lbl_direccion.Text = empresa.em_direccion;
-            lbl_telefono.Text = empresa.em_telefonos;
-            lbl_correo.Text = empresa.em_Email;
             lbl_ruc.Text = empresa.em_ruc;
+            lbl_telefono.Text = empresa.em_telefonos;
+            lbl_correo.Text = empresa.em_Email;            
 
             ImageConverter obj = new ImageConverter();
             lbl_imagen.Image = (Image)obj.ConvertFrom(empresa.em_logo);

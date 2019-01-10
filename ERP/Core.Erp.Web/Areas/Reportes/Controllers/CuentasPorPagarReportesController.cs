@@ -276,11 +276,21 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             CXP_013_Rpt model = new CXP_013_Rpt();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXP_013");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+
             model.p_IdEmpresa.Value = SessionFixed.IdEmpresa;
             model.p_IdRetencion.Value = IdRetencion;
             model.usuario = SessionFixed.IdUsuario;
             model.empresa = SessionFixed.NomEmpresa;
             model.RequestParameters = false;
+            model.DefaultPrinterSettingsUsing.UsePaperKind = false;
 
             return View(model);
         }
