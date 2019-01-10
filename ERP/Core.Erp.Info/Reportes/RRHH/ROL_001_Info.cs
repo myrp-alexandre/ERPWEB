@@ -8,9 +8,9 @@ namespace Core.Erp.Info.Reportes.RRHH
 {
    public class ROL_001_Info
     {
-        public int IdEmpresa { get; set; }
-        public int IdNominaTipo { get; set; }
-        public int IdNominaTipoLiqui { get; set; }
+        public Nullable<int> IdEmpresa { get; set; }
+        public Nullable<int> IdNominaTipo { get; set; }
+        public Nullable<int> IdNominaTipoLiqui { get; set; }
         public string Descripcion { get; set; }
         public string Observacion { get; set; }
         public string Cerrado { get; set; }
@@ -23,16 +23,16 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string pe_nombreCompleto { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string em_codigo { get; set; }
-        public int IdDepartamento { get; set; }
-        public int IdArea { get; set; }
-        public int IdDivision { get; set; }
+        public Nullable<int> IdDepartamento { get; set; }
+        public Nullable<int> IdArea { get; set; }
+        public Nullable<int> IdDivision { get; set; }
         public string Area { get; set; }
         public string Division { get; set; }
-        public System.DateTime pe_FechaIni { get; set; }
-        public System.DateTime pe_FechaFin { get; set; }
+        public Nullable<System.DateTime> pe_FechaIni { get; set; }
+        public Nullable<System.DateTime> pe_FechaFin { get; set; }
         public string pe_estado { get; set; }
         public string Nomina { get; set; }
-        public int IdPeriodo { get; set; }
+        public Nullable<int> IdPeriodo { get; set; }
         public string ru_codRolGen { get; set; }
         public string pe_apellido { get; set; }
         public string ru_descripcion { get; set; }
@@ -43,6 +43,8 @@ namespace Core.Erp.Info.Reportes.RRHH
         public Nullable<System.DateTime> em_fechaIngaRol { get; set; }
         public string Periodo { get; set; }
         public string em_ruc { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
+
         public string Empleado { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.RRHH
    public class ROL_002_Data
     {
 
-        public List<ROL_002_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo)
+        public List<ROL_002_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo, int IdSucursal)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 
                     Context.SPROL_002(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo);
                     Lista = (from q in Context.VWROL_002
-
+                             where (q.IdSucursal == 0 ? 1==1 : q.IdSucursal == IdSucursal)
                              select new ROL_002_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

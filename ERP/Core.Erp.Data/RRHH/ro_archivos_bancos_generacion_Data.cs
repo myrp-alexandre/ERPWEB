@@ -79,7 +79,7 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_archivos_bancos_generacion Entity = Context.ro_archivos_bancos_generacion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdArchivo == IdArchivo);
+                    vwro_archivos_bancos_generacion Entity = Context.vwro_archivos_bancos_generacion.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdArchivo == IdArchivo);
                     if (Entity == null) return null;
 
                     info = new ro_archivos_bancos_generacion_Info

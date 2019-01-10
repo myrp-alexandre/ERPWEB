@@ -32,5 +32,6 @@ namespace Core.Erp.Data
         public string em_status { get; set; }
         public int ru_orden { get; set; }
         public string em_ruc { get; set; }
+        public int IdSucursal { get; set; }
     }
 }

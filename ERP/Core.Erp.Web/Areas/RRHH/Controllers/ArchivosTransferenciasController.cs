@@ -90,8 +90,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             };
            
-            model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo,"");
-            ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(model.detalle, Convert.ToDecimal( SessionFixed.IdTransaccionSession));
             cargar_combos(0);
             return View(model);
         }
@@ -228,7 +226,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
 
-        public JsonResult CargarEmpleados( int IdProceso  = 0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0, decimal  IdTransaccionSession=0)
+        public JsonResult CargarEmpleados( int IdProceso  = 0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo=0, 
+            int IdSucursal=0,
+            decimal  IdTransaccionSession=0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             string TipoCuenta = "";
@@ -247,7 +247,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 else
                     TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.VRT.ToString();
 
-                var detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, TipoCuenta);
+                var detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, TipoCuenta, IdSucursal);
                 ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(detalle, Convert.ToDecimal(IdTransaccionSession));
             }
             return Json("", JsonRequestBehavior.AllowGet);
@@ -269,6 +269,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             var lst_proceso = bus_procesos_bancarios.get_list(IdEmpresa, false);
             ViewBag.lst_proceso = lst_proceso;
+
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
 
             List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lst_periodos = new List<ro_periodo_x_ro_Nomina_TipoLiqui_Info>();
             ViewBag.lst_periodos = lst_periodos;
@@ -342,6 +345,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 {
                     foreach (var item in info.detalle)
                     {
+                        if(item.pe_cedulaRuc== "0920256153")
+                        {
+
+                        }
+
                         item.em_NumCta = item.em_NumCta.Trim();
                         string linea = "";
                         double valor = Convert.ToDouble(item.Valor);
@@ -355,7 +363,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             else
                                 linea += "C";
                             linea += item.em_NumCta.PadLeft(10, '0');
-                            linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+                            if(valorDecimal!=0)
+                            linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2,'0')).PadLeft(15, '0');
+                            else
+                             linea += (valorEntero.ToString()+"00").PadLeft(15, '0');
                             linea += "EI";
                             linea += "Y";
                             linea += "01";
@@ -381,6 +392,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                System.IO.File.Delete(rutafile + NombreArchivo + ".txt");
                 MemoryStream memoryStream = new MemoryStream();
                 TextWriter tw = new StreamWriter(memoryStream);
 
@@ -418,6 +430,31 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
                                 linea += DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
                                 linea += info.detalle.Count().ToString().PadLeft(5, '0');
+                                file.WriteLine(linea);
+
+                                // prime empleado
+                                linea = "";
+                                valor = Convert.ToDouble(info.detalle.Sum(v => v.Valor));
+                                valorEntero = Math.Floor(valor);
+                                valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+                                linea += "D";
+                                linea += Info_proceso.Codigo_Empresa;
+                                linea += item.pe_cedulaRuc.PadLeft(10, '0');
+                                linea += item.pe_nombreCompleto.Substring(0, 17);
+                                linea += "C";
+                                linea += "                    ";
+                                linea += "N";
+
+                                if (valorDecimal != 0)
+                                    linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
+                                else
+                                    linea += (valorEntero.ToString() + "00").PadLeft(15, '0');
+
+
+                                linea += "                                           ";
+                                linea += "0900000000";
+                                file.WriteLine(linea);
+
                             }
                             else
                             {
@@ -431,13 +468,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += "C";
                                 linea += "                    ";
                                 linea += "N";
-                                linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
+
+                                if (valorDecimal != 0)
+                                    linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
+                                else
+                                    linea += (valorEntero.ToString() + "00").PadLeft(15, '0');
                                 linea += "                                           ";
                                 linea += "0900000000";
+                                file.WriteLine(linea);
                             }
                         }
                         secuencia++;
-                        file.WriteLine(linea);
 
                     }
                 }

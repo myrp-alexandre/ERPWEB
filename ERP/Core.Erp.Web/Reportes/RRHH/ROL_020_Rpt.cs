@@ -27,9 +27,10 @@ namespace Core.Erp.Web.Reportes.RRHH
             int IdNominaTipo = string.IsNullOrEmpty(p_IdNominaTipo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdNominaTipo.Value);
             int IdNomina = string.IsNullOrEmpty(p_IdNomina.Value.ToString()) ? 0 : Convert.ToInt32(p_IdNomina.Value);
             int IdPeriodo = string.IsNullOrEmpty(p_IdPeriodo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdPeriodo.Value);
+            int IdSucursal = string.IsNullOrEmpty(p_IdSucursal.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSucursal.Value);
 
             ROL_020_Bus bus_rpt = new ROL_020_Bus();
-            List<ROL_020_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdNominaTipo, IdNomina, IdPeriodo);
+            List<ROL_020_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdNominaTipo, IdNomina, IdPeriodo, IdSucursal);
             this.DataSource = lst_rpt;
         }
     }

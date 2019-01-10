@@ -50,7 +50,7 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-        public List<ro_archivos_bancos_generacion_x_empleado_Info> get_list(int IdEmpresa,int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo, string Tipocta)
+        public List<ro_archivos_bancos_generacion_x_empleado_Info> get_list(int IdEmpresa,int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo, string Tipocta, int IdSucursal)
         {
             try
             {
@@ -67,6 +67,7 @@ namespace Core.Erp.Data.RRHH
                                    && q.IdPeriodo==IdPeriodo
                                    && Tipocta.Contains(q.em_tipoCta)
                                    && q.Saldo>0
+                                   && q.IdSucursal== IdSucursal
                              select new ro_archivos_bancos_generacion_x_empleado_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

@@ -27,5 +27,6 @@ namespace Core.Erp.Data
         public System.DateTime pe_FechaFin { get; set; }
         public string NombreProceso { get; set; }
         public string estado { get; set; }
+        public int IdSucursal { get; set; }
     }
 }

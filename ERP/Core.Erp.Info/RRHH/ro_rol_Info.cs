@@ -13,7 +13,7 @@ namespace Core.Erp.Info.RRHH
         public int IdEmpresa { get; set; }
         [Required(ErrorMessage = "El campo nómina es obligatorio")]
         public int IdNomina_Tipo { get; set; }
-        public int IdSucursal { get; set; }
+        public int? IdSucursal { get; set; }
         [Required(ErrorMessage = "El campo tipo de nómina es obligatorio")]
         public int IdNomina_TipoLiqui { get; set; }
         [Required(ErrorMessage = "El campo périodo es obligatorio")]
