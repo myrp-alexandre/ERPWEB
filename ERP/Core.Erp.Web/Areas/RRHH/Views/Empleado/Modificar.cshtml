@@ -117,7 +117,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="pe_cedulaRuc">Número documento*</label>
-                    @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc", @readonly = "readonly" })
+                    @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc"})
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
                     <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                 </div>
