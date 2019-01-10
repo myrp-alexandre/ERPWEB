@@ -46,7 +46,9 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  GeneraDiario = q.GeneraDiario,
                                  IdEstadoAprobacion = q.IdEstadoAprobacion,
                                  estado_apro = q.estado_apro,
-                                 NombreUsuario = q.NombreUsuario
+                                 NombreUsuario = q.NombreUsuario,
+                                 Su_Descripcion = q.Su_Descripcion
+                                 
                              }).ToList();
                 }
                 return Lista;
