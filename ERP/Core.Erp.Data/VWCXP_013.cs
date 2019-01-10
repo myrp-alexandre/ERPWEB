@@ -33,5 +33,6 @@ namespace Core.Erp.Data
         public string pr_telefonos { get; set; }
         public Nullable<System.DateTime> Fecha_Autorizacion { get; set; }
         public string NAutorizacion { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }

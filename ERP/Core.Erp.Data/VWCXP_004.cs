@@ -38,5 +38,6 @@ namespace Core.Erp.Data
         public string IdEstadoAprobacion { get; set; }
         public string estado_apro { get; set; }
         public string NombreUsuario { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }

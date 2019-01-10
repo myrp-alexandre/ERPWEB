@@ -98,12 +98,12 @@ namespace Core.Erp.Data
         public DbSet<VWCXP_011> VWCXP_011 { get; set; }
         public DbSet<VWBAN_005> VWBAN_005 { get; set; }
         public DbSet<VWBAN_006> VWBAN_006 { get; set; }
-        public DbSet<VWCXP_004> VWCXP_004 { get; set; }
         public DbSet<VWBAN_001> VWBAN_001 { get; set; }
         public DbSet<VWBAN_002> VWBAN_002 { get; set; }
         public DbSet<VWBAN_003> VWBAN_003 { get; set; }
         public DbSet<VWCAJ_001> VWCAJ_001 { get; set; }
         public DbSet<VWCXP_012> VWCXP_012 { get; set; }
+        public DbSet<VWCXP_004> VWCXP_004 { get; set; }
         public DbSet<VWCXP_013> VWCXP_013 { get; set; }
     
         public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario, Nullable<int> idActivoFijoTipo_ini, Nullable<int> idActivoFijoTipo_fin, Nullable<int> idCategoria_ini, Nullable<int> idCategoria_fin, string estado_Proceso)
