@@ -34,8 +34,8 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdRetencion = new DevExpress.XtraReports.Parameters.Parameter();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.SubReporte_RIDE3 = new DevExpress.XtraReports.UI.XRSubreport();
             this.SubReporte_RIDE2 = new DevExpress.XtraReports.UI.XRSubreport();
             this.SubReporte_RIDE1 = new DevExpress.XtraReports.UI.XRSubreport();
@@ -78,23 +78,23 @@
             this.p_IdRetencion.ValueInfo = "0";
             this.p_IdRetencion.Visible = false;
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.CuentasPorPagar.CXP_012_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.SubReporte_RIDE3,
             this.SubReporte_RIDE2,
             this.SubReporte_RIDE1});
-            this.ReportHeader.HeightF = 400.25F;
+            this.ReportHeader.HeightF = 588.77F;
             this.ReportHeader.Name = "ReportHeader";
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.CuentasPorPagar.CXP_012_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // SubReporte_RIDE3
             // 
-            this.SubReporte_RIDE3.LocationFloat = new DevExpress.Utils.PointFloat(43.87514F, 377.25F);
+            this.SubReporte_RIDE3.LocationFloat = new DevExpress.Utils.PointFloat(7.39F, 565.77F);
             this.SubReporte_RIDE3.Name = "SubReporte_RIDE3";
             this.SubReporte_RIDE3.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
             this.SubReporte_RIDE3.SizeF = new System.Drawing.SizeF(763.1247F, 23F);
@@ -102,7 +102,7 @@
             // 
             // SubReporte_RIDE2
             // 
-            this.SubReporte_RIDE2.LocationFloat = new DevExpress.Utils.PointFloat(43.87514F, 229.1666F);
+            this.SubReporte_RIDE2.LocationFloat = new DevExpress.Utils.PointFloat(7.39F, 377.03F);
             this.SubReporte_RIDE2.Name = "SubReporte_RIDE2";
             this.SubReporte_RIDE2.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
             this.SubReporte_RIDE2.SizeF = new System.Drawing.SizeF(763.1248F, 23F);
@@ -110,7 +110,7 @@
             // 
             // SubReporte_RIDE1
             // 
-            this.SubReporte_RIDE1.LocationFloat = new DevExpress.Utils.PointFloat(43.87514F, 74.95833F);
+            this.SubReporte_RIDE1.LocationFloat = new DevExpress.Utils.PointFloat(7.39F, 119.71F);
             this.SubReporte_RIDE1.Name = "SubReporte_RIDE1";
             this.SubReporte_RIDE1.ReportSource = new Core.Erp.Web.Reportes.CuentasPorPagar.CXP_012_Rpt_retencion();
             this.SubReporte_RIDE1.SizeF = new System.Drawing.SizeF(763.1247F, 23F);
