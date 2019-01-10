@@ -352,7 +352,7 @@ namespace Core.Erp.Data.RRHH
                         IdTipoAnticipo	=info.	IdTipoAnticipo	,
                         ValorAnticipo	=info.	ValorAnticipo	,
                         CodigoSectorial	=info.	CodigoSectorial	,
-                        //em_AnticipoSueldo	=info.	em_AnticipoSueldo	,
+                        em_AnticipoSueldo	=info.em_AnticipoSueldo	,
                         Marca_Biometrico	=info.	Marca_Biometrico	,
                         IdHorario	=info.	IdHorario	,
                         Tiene_ingresos_compartidos=info.Tiene_ingresos_compartidos,
@@ -560,7 +560,7 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdTipoAnticipo = info.IdTipoAnticipo  ;
                         Entity.ValorAnticipo = info.ValorAnticipo   ;
                         Entity.CodigoSectorial = info.CodigoSectorial ;
-                        //Entity.em_AnticipoSueldo = info.em_AnticipoSueldo   ;
+                        Entity.em_AnticipoSueldo = info.em_AnticipoSueldo   ;
                         Entity.Marca_Biometrico = info.Marca_Biometrico    ;
                         Entity.IdHorario = info.IdHorario   ;
                         Entity.IdUsuario = info.IdUsuarioUltModi;
