@@ -824,7 +824,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                     co_factura = item.co_factura,
                     co_valorpagar = item.co_valorpagar,
                     nom_tipo_Documento = item.nom_tipo_Documento,
-                    IdSucursal = (int)item.IdSucursal
+                    IdSucursal = (int)item.IdSucursal,
+                    IdUsuario = SessionFixed.IdUsuario
                 });
             }
             Session["list_facturas_seleccionadas"] = null;
@@ -871,6 +872,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                                     }
                                 },
                                 IdSucursal = info_add.IdSucursal
+                                ,IdUsuario = SessionFixed.IdUsuario
                             });
                         }
                     }

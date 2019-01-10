@@ -195,7 +195,8 @@ namespace Core.Erp.Data.Caja
                         Fecha = info.FechaOP.Date,
                         IdEstadoAprobacion = "APRO",
                         IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
-                        Estado = "A"
+                        Estado = "A",
+                        IdUsuario = info.IdUsuario
                     };
                     Entity_c.IdEmpresa_op = op.IdEmpresa;
                     Entity_c.IdOrdenPago_op = op.IdOrdenPago;
@@ -350,7 +351,8 @@ namespace Core.Erp.Data.Caja
                                 Fecha = Convert.ToDateTime(Entity_c.Fecha_fin).Date,
                                 IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
                                 IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.EFEC.ToString(),
-                                Estado = "A"
+                                Estado = "A",
+                                IdUsuario = info.IdUsuario
                             };
                             item.IdEmpresa_OP = op.IdEmpresa;
                             item.IdOrdenPago_OP = op.IdOrdenPago;
@@ -1044,7 +1046,8 @@ namespace Core.Erp.Data.Caja
                         Fecha = info.FechaOP.Date,
                         IdEstadoAprobacion = Entity_op_tipo.IdEstadoAprobacion,
                         IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
-                        Estado = "A"
+                        Estado = "A",
+                        IdUsuario = info.IdUsuario
                     };
                     info.IdEmpresa_op = op.IdEmpresa;
                     info.IdOrdenPago_op = op.IdOrdenPago;
@@ -1060,7 +1063,8 @@ namespace Core.Erp.Data.Caja
                         IdPeriodo = Convert.ToInt32(info.FechaOP.ToString("yyyyMM")),
                         IdSucursal = IdSucursal,
                         cb_FechaTransac = DateTime.Now,
-                        cb_Estado = "A"
+                        cb_Estado = "A",
+                        IdUsuario = info.IdUsuario
                     };
                     Context_ct.ct_cbtecble.Add(diario);
 

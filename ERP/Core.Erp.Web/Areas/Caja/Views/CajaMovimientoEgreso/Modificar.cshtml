@@ -18,16 +18,14 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNew", "ChequeBanco",new { Area = "Banco"})',
+            url: '@Url.Action("EditingAddNew", "CajaMovimientoEgreso",new { Area = "Caja"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if (data.EsOp == "S") {
-                    $("#cr_Valor").val(data.Valor)
-                }
+
             },
             error: function (error) {
             }
@@ -52,7 +50,7 @@
         selectedIDs = values.join(',');
     }
 
-    function MostrarModal() {
+function MostrarModal() {
         selectedIDs = "";
 
         var datos = {
@@ -102,6 +100,9 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                if (data.EsOp == "S") {
+                    $("#cr_Valor").val(data.Valor)
+                }
                 GridView_comprobante_detalle.PerformCallback();
             },
             error: function (error) {
@@ -124,6 +125,26 @@
         </div>
 
     }
+    <div class="modal fade" id="OpModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ordenes de pago</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("GridViewPartial_egreso_op_x_cruzar")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="AddOP();">Aceptar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -303,6 +324,9 @@
                             dataType: 'json',
                             contentType: 'application/json; charset=utf-8',
                             success: function (data) {
+                                if (data.EsOp == "S") {
+                                    $("#cr_Valor").val(data.Valor)
+                                }
                                 GridView_comprobante_detalle.PerformCallback();
                             },
                             error: function (error) {

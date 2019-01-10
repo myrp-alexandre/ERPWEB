@@ -332,17 +332,25 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             var i_tipo_movi = bus_tipo.get_info(IdEmpresa, IdTipoMovi);
 
             list_ct_cbtecble_det.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
-
-            //Debe
-            list_ct_cbtecble_det.AddRow(new ct_cbtecble_det_Info
+            var ListOp = List_op.get_list(IdTransaccionSession);
+            if (ListOp.Count > 0)
+            {
+                list_ct_cbtecble_det.AddRow(new ct_cbtecble_det_Info
+                {
+                    IdCtaCble = i_caja == null ? null : i_caja.IdCtaCble,
+                    dc_Valor = Math.Round(ListOp.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero) * -1,
+                    dc_Valor_haber = Math.Round(ListOp.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero)
+                }, IdTransaccionSession);
+            }
+            else
+                list_ct_cbtecble_det.AddRow(new ct_cbtecble_det_Info
             {
                 IdCtaCble = i_caja == null ? null : i_caja.IdCtaCble,
                 dc_Valor = Math.Round(Math.Abs(valor), 2, MidpointRounding.AwayFromZero) * -1,
                 dc_Valor_haber = Math.Round(Math.Abs(valor), 2, MidpointRounding.AwayFromZero)
             }, IdTransaccionSession);
 
-            //Haber
-            var ListOp = List_op.get_list(IdTransaccionSession);
+            //Haber            
             if (ListOp.Count > 0)
             {
                 foreach (var item in ListOp)
@@ -364,7 +372,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             }, IdTransaccionSession);
 
 
-            return Json(new { EsOp = ListOp.Count > 0 ? "S" : "N", Valor = Math.Round(ListOp.Sum(q=>q.MontoAplicado))}, JsonRequestBehavior.AllowGet);
+            return Json(new { EsOp = ListOp.Count > 0 ? "S" : "N", Valor = Math.Round(ListOp.Sum(q=>q.MontoAplicado),2,MidpointRounding.AwayFromZero)}, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

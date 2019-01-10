@@ -173,11 +173,11 @@ namespace Core.Erp.Data.Caja
                             IdEmpresa = info.IdEmpresa,
                             Idcancelacion = IdCancelacion,
                             Secuencia = secuencia++,
-
+                            fechaTransaccion = DateTime.Now,
                             IdEmpresa_op = info.IdEmpresa,
                             IdOrdenPago_op = item.IdOrdenPago_op,
                             Secuencia_op = 1,
-                            
+
                             IdEmpresa_cxp = item.IdEmpresa_cxp,
                             IdTipoCbte_cxp = item.IdTipoCbte_cxp,
                             IdCbteCble_cxp = item.IdCbteCble_cxp,
@@ -186,7 +186,10 @@ namespace Core.Erp.Data.Caja
                             IdTipoCbte_pago = info.IdTipocbte,
                             IdCbteCble_pago = info.IdCbteCble,
 
-                            MontoAplicado = item.MontoAplicado
+                            SaldoActual = 0,
+                            SaldoAnterior = 0,
+                            MontoAplicado = item.MontoAplicado,
+                            Observacion = "Pago chaja chica"
                         });
                         db.SaveChanges();          
                     }                    
@@ -246,7 +249,7 @@ namespace Core.Erp.Data.Caja
                             IdEmpresa = info.IdEmpresa,
                             Idcancelacion = IdCancelacion,
                             Secuencia = secuencia++,
-
+                            fechaTransaccion = DateTime.Now,
                             IdEmpresa_op = info.IdEmpresa,
                             IdOrdenPago_op = item.IdOrdenPago_op,
                             Secuencia_op = 1,
@@ -259,7 +262,10 @@ namespace Core.Erp.Data.Caja
                             IdTipoCbte_pago = info.IdTipocbte,
                             IdCbteCble_pago = info.IdCbteCble,
 
-                            MontoAplicado = item.MontoAplicado
+                            SaldoActual  = 0,
+                            SaldoAnterior = 0,
+                            MontoAplicado = item.MontoAplicado,
+                            Observacion = "Pago chaja chica"
                         });
                         db.SaveChanges();
                     }
