@@ -44,7 +44,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         }
         private bool validar(fa_cliente_Info i_validar, ref string msg)
         {
-            if (i_validar.info_fa_cliente_contactos == null)
+            if (i_validar.Nombres == null)
             {
                 mensaje = "Debe ingresar datos de contacto";
                 return false;
@@ -102,8 +102,13 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
             var lst_tipo_doc = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODOC), false);
             ViewBag.lst_tipo_doc = lst_tipo_doc;
+
             var lst_tipo_naturaleza = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPONATPER), false);
             ViewBag.lst_tipo_naturaleza = lst_tipo_naturaleza;
+
+            tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
+            var lst_ciudad = bus_ciudad.get_list("", false);
+            ViewBag.lst_ciudad = lst_ciudad;
         }
         #endregion
         #region Acciones
@@ -126,11 +131,10 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     pe_Naturaleza = "NATU",
                     IdTipoDocumento = "CED"
                 },
-                //lst_fa_cliente_contactos = new List<fa_cliente_contactos_Info>(),
-                info_fa_cliente_contactos = new fa_cliente_contactos_Info(),
+
                 Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>()
             };
-            //List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
+
             List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
             cargar_combos(model);
             cargar_combos_det();
@@ -141,7 +145,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             string return_naturaleza = "";
             model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(model.IdTransaccionSession);
-            //model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(model.IdTransaccionSession);
+
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model);
@@ -182,8 +186,11 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = bus_fa_vendedor.get_list(IdEmpresa, IdCliente);
             List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
-            model.info_fa_cliente_contactos = bus_cliente_contacto.get_list(IdEmpresa, IdCliente).FirstOrDefault();
-            List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
+
+            //List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
+            var resultado = (bus_parroquia.get_list(model.IdCiudad, false));
+            ListaParroquia.set_list(resultado);
+
             cargar_combos(model);
             return View(model);
         }
@@ -192,16 +199,25 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             model.IdUsuarioUltMod = SessionFixed.IdUsuario.ToString();
             model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = List_fa_cliente_x_fa_Vendedor_x_sucursal.get_list(model.IdTransaccionSession);
-            model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(model.IdTransaccionSession);
+            //model.lst_fa_cliente_contactos = List_fa_cliente_contactos.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 cargar_combos(model);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            model.lst_fa_cliente_contactos.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdCliente = model.IdCliente; });
+            //model.lst_fa_cliente_contactos.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdCliente = model.IdCliente; });
+            fa_cliente_contactos_Info info_contacto = new fa_cliente_contactos_Info();
+            info_contacto.IdContacto = model.IdContacto;
+            info_contacto.Nombres = model.Nombres;
+            info_contacto.Direccion = model.Direccion;
+            info_contacto.Correo = model.Correo;
+            info_contacto.Telefono = model.Telefono;
+            info_contacto.Celular = model.Celular;
+            info_contacto.IdCiudad = model.IdCiudad;
+            info_contacto.IdParroquia = model.IdParroquia;
 
-            if (!bus_cliente_contacto.guardarDB(model.lst_fa_cliente_contactos))
+            if (!bus_cliente_contacto.guardarDB(info_contacto))
             {
                 cargar_combos(model);
                 return View(model);

@@ -9,7 +9,61 @@ namespace Core.Erp.Data.Caja
 {
     public class caj_Caja_Data
     {
-        public List<caj_Caja_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<caj_Caja_Info> GetList(int IdEmpresa, int IdSucursal, bool mostrar_anulados)
+        {
+            try
+            {
+                List<caj_Caja_Info> Lista;
+                using (Entities_caja Context = new Entities_caja())
+                {
+                    if (mostrar_anulados)
+                        Lista = (from q in Context.caj_Caja
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal == IdSucursal
+                                 select new caj_Caja_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     ca_Codigo = q.ca_Codigo,
+                                      Estado = q.Estado,
+                                      IdCaja = q.IdCaja,
+                                      IdCtaCble = q.IdCtaCble,
+                                      IdSucursal = q.IdSucursal,
+                                     ca_Descripcion = q.ca_Descripcion,
+                                     IdUsuario_Responsable = q.IdUsuario_Responsable,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
+                                 }).ToList();
+                    else
+                        Lista = (from q in Context.caj_Caja
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal == IdSucursal
+                                 && q.Estado == "A"
+                                 select new caj_Caja_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     ca_Codigo = q.ca_Codigo,
+                                     Estado = q.Estado,
+                                     IdCaja = q.IdCaja,
+                                     IdCtaCble = q.IdCtaCble,
+                                     IdSucursal = q.IdSucursal,
+                                     ca_Descripcion = q.ca_Descripcion,
+                                     IdUsuario_Responsable = q.IdUsuario_Responsable,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
+                                 }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<caj_Caja_Info> get_list(int IdEmpresa,  bool mostrar_anulados)
         {
             try
             {
@@ -23,10 +77,10 @@ namespace Core.Erp.Data.Caja
                                  {
                                      IdEmpresa = q.IdEmpresa,
                                      ca_Codigo = q.ca_Codigo,
-                                      Estado = q.Estado,
-                                      IdCaja = q.IdCaja,
-                                      IdCtaCble = q.IdCtaCble,
-                                      IdSucursal = q.IdSucursal,
+                                     Estado = q.Estado,
+                                     IdCaja = q.IdCaja,
+                                     IdCtaCble = q.IdCtaCble,
+                                     IdSucursal = q.IdSucursal,
                                      ca_Descripcion = q.ca_Descripcion,
                                      IdUsuario_Responsable = q.IdUsuario_Responsable,
 

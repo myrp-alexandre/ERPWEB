@@ -43,17 +43,18 @@ namespace Core.Erp.Info.Facturacion
         public tb_persona_Info info_persona { get; set; }
         public string Descripcion_tip_cliente { get; set; }
         public List<fa_cliente_contactos_Info> lst_fa_cliente_contactos { get; set; }
-        public fa_cliente_contactos_Info info_fa_cliente_contactos { get; set; }
         public List<fa_cliente_x_fa_Vendedor_x_sucursal_Info> Lst_fa_cliente_x_fa_Vendedor_x_sucursal { get; set; }
         public int IdVendedor { get; set; }
 
         //datos de contacto
+        public int IdContacto { get; set; }
         public string Nombres { get; set; }
         public string Telefono { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string IdCiudad { get; set; }
+        public string Descripcion_Ciudad { get; set; }
         public string IdParroquia { get; set; }
     }
 }

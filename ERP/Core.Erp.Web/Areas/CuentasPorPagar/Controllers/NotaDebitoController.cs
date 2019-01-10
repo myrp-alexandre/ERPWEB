@@ -503,6 +503,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                         var info_proveedor = bus_proveedor.get_info_x_num_cedula(IdEmpresa, ruc_proveedor);
                         var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
                         var Su_CodigoEstablecimiento = Convert.ToString(reader.GetValue(0)).Trim();
+                        var IdSucursal = Convert.ToInt32(reader.GetValue(0));
+
                         if (info_proveedor != null && info_proveedor.IdProveedor != 0)
                         {
                             cp_nota_DebCre_Info info = new cp_nota_DebCre_Info
@@ -513,7 +515,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                                 DebCre = "D",
                                 IdTipoNota = "T_TIP_NOTA_INT",
                                 IdProveedor = info_proveedor.IdProveedor,
-                                IdSucursal = lst_sucursal.Where(q => q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal,
+                                //IdSucursal = lst_sucursal.Where(q => q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal,
+                                IdSucursal = IdSucursal,
                                 cn_fecha = Convert.ToDateTime(reader.GetValue(5)),
                                 Fecha_contable = Convert.ToDateTime(reader.GetValue(5)),
                                 cn_Fecha_vcto = Convert.ToDateTime(reader.GetValue(6)),

@@ -8,8 +8,20 @@ namespace Core.Erp.Bus.Caja
     public class caj_Caja_Bus
     {
         caj_Caja_Data odata = new caj_Caja_Data();
-    
-        public List<caj_Caja_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        
+        public List<caj_Caja_Info> GetList(int IdEmpresa, int IdSucursal, bool mostrar_anulados)
+        {
+            try
+            {
+                return odata.GetList(IdEmpresa, IdSucursal, mostrar_anulados);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<caj_Caja_Info> get_list(int IdEmpresa,  bool mostrar_anulados)
         {
             try
             {

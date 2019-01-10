@@ -14,7 +14,7 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdPersona, new { @id = "IdPersona" })
-    @Html.HiddenFor(q => q.info_fa_cliente_contactos.IdContacto, new { @id = "IdContacto" })
+    @Html.HiddenFor(q => q.IdContacto, new { @id = "IdContacto" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -228,7 +228,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="IdTipoCredito">Ciudad*</label>
-                                    @Html.DevExpress().ComboBoxFor(q => q.info_fa_cliente_contactos.IdCiudad, settings =>
+                                    @Html.DevExpress().ComboBoxFor(q => q.IdCiudad, settings =>
                                    {
                                        settings.Name = "IdCiudad";
                                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
