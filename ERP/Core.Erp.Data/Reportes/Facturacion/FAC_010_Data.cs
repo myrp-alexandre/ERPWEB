@@ -15,11 +15,12 @@ namespace Core.Erp.Data.Reportes.Facturacion
             {
                 int IdSucursalIni = IdSucursal;
                 int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
-
+                var fecha_inicio = fecha_ini.Date;
+                var fecha_fin_ = fecha_fin.Date;
                 List<FAC_010_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPFAC_010(IdEmpresa, IdSucursalIni, IdSucursalFin, fecha_ini, fecha_fin)
+                    Lista = (from q in Context.SPFAC_010(IdEmpresa, IdSucursalIni, IdSucursalFin, fecha_inicio, fecha_fin_)
                              select new FAC_010_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
