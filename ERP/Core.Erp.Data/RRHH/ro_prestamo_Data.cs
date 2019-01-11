@@ -30,8 +30,8 @@ namespace Core.Erp.Data.RRHH
                 {
                     Lista = (from q in Context.vwRo_Prestamo
                              where q.IdEmpresa == IdEmpresa
-                             && q.Fecha>=fi
-                             &&q.Fecha<=ff
+                             && q.Fecha_registro>=fi
+                             &&q.Fecha_registro <= ff
                              select new ro_prestamo_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

@@ -14,7 +14,6 @@ namespace Core.Erp.Data
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
@@ -114,7 +113,6 @@ namespace Core.Erp.Data
         public DbSet<vwro_NominasPagosCheques_det> vwro_NominasPagosCheques_det { get; set; }
         public DbSet<ro_prestamo> ro_prestamo { get; set; }
         public DbSet<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }
-        public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
         public DbSet<vwro_marcaciones_x_planificacion_horario> vwro_marcaciones_x_planificacion_horario { get; set; }
         public DbSet<vwro_SancionesPorMarcaciones_x_novedad> vwro_SancionesPorMarcaciones_x_novedad { get; set; }
         public DbSet<vwro_SancionesPorMarcaciones> vwro_SancionesPorMarcaciones { get; set; }
@@ -136,6 +134,7 @@ namespace Core.Erp.Data
         public DbSet<ro_Parametros> ro_Parametros { get; set; }
         public DbSet<vwro_archivos_bancos_generacion> vwro_archivos_bancos_generacion { get; set; }
         public DbSet<ro_archivos_bancos_generacion> ro_archivos_bancos_generacion { get; set; }
+        public DbSet<vwRo_Prestamo> vwRo_Prestamo { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

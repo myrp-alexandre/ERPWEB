@@ -266,7 +266,8 @@
         public enum eTipoProcesoBancario
         {
             NCR,
-            ROL_ELECTRONICO
+            ROL_ELECTRONICO,
+            NCR_TRASN
         }
         
     }

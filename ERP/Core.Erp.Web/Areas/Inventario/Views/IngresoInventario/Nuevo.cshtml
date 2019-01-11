@@ -164,38 +164,37 @@
     }
 }
 
-    <script type="text/javascript">
-
-        $(function () {
-            CargarBodega();
-            $("#IdSucursal").change(function () {
-                CargarBodega();
-            });
-        });
+<script type="text/javascript">
+$(function () {
+    CargarBodega();
+    $("#IdSucursal").change(function () {
+        CargarBodega();
+    });
+});
 function CargarBodega() {
-        $("#IdBodega").empty();
+$("#IdBodega").empty();
 
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#IdSucursal").val()
-        }
+var datos = {
+    IdEmpresa: $("#IdEmpresa").val(),
+    IdSucursal: $("#IdSucursal").val()
+}
 
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("CargarBodega", "IngresoInventario", new { Area = "Inventario" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            $.each(data, function (i, row) {
-            $("#IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
-            });
-            },
-            error: function (error) {
-            }
-            });
-    };
+$.ajax({
+    type: 'POST',
+    data: JSON.stringify(datos),
+    url: '@Url.Action("CargarBodega", "IngresoInventario", new { Area = "Inventario" })',
+    async: false,
+    bDeferRender: true,
+    bProcessing: true,
+    dataType: 'json',
+    contentType: 'application/json; charset=utf-8',
+    success: function (data) {
+    $.each(data, function (i, row) {
+        $("#IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+    });
+    },
+    error: function (error) {
+    }
+    });
+};
 </script>

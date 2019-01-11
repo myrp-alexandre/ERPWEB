@@ -163,6 +163,7 @@ namespace Core.Erp.Data.RRHH
                             IdNomina_Tipo = Entity.IdNominaTipo,
                             IdNomina_TipoLiqui = Entity.IdNominaTipoLiqui,
                             IdPeriodo = Entity.IdPeriodo,
+                            IdSucursal = Entity.IdSucursal,
                             Observacion = Entity.Observacion,
                             Descripcion = Entity.Descripcion,
                             Cerrado = Entity.Cerrado,

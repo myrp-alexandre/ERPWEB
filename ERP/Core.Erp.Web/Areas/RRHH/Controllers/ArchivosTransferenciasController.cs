@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using Core.Erp.Bus.Banco;
 using Core.Erp.Bus.General;
 using System.IO;
+using Core.Erp.Info.General;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -36,6 +37,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
+            model.IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
+
             cargar_combos_consulta();
             return View(model);
         }
@@ -48,13 +51,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_archivo_transferencia(DateTime? Fecha_ini, DateTime? Fecha_fin ,decimal? IdSucursal = 0)
+        public ActionResult GridViewPartial_archivo_transferencia(DateTime? Fecha_ini, DateTime? Fecha_fin ,int? IdSucursal = 0)
         {
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-            ViewBag.IdSucursal = IdSucursal;
+            ViewBag.IdSucursal = IdSucursal== null ? 0 : IdSucursal;
+
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_archivo.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, true);
+            var model = bus_archivo.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, ViewBag.IdSucursal, true);
             return PartialView("_GridViewPartial_archivo_transferencia", model);
         }
 
@@ -281,6 +285,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = 0,
+                Su_Descripcion = "TODOS"
+            });
+
             ViewBag.lst_sucursal = lst_sucursal;
         }
         #endregion
@@ -386,6 +398,56 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
 
+        private byte[] get_NCR_OTRO(ro_archivos_bancos_generacion_Info info, string NombreArchivo)
+        {
+            try
+            {
+                System.IO.File.Delete(rutafile + NombreArchivo + ".txt");
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
+                {
+                    foreach (var item in info.detalle)
+                    {
+                        if (item.pe_cedulaRuc == "0912646684")
+                        {
+
+                        }
+
+                        item.em_NumCta = item.em_NumCta.Trim();
+                        string linea = "";
+                        double valor = Convert.ToDouble(item.Valor);
+                        double valorEntero = Math.Floor(valor);
+                        double valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+
+                        if (item.em_tipoCta == "COR" || item.em_tipoCta == "AHO")
+                        {
+                            if (item.em_tipoCta == "AHO")
+                                linea += "A";
+                            else
+                                linea += "C";
+                            linea += item.em_NumCta.PadLeft(10, '0');
+                            linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
+
+                            linea += "EI";
+                            linea += "Y";
+                            linea += "01";
+                            linea += cl_funciones.QuitarTildes(item.pe_apellido + item.pe_nombre);
+                        }
+                        file.WriteLine(linea);
+
+                    }
+                }
+                byte[] filebyte = System.IO.File.ReadAllBytes(rutafile + NombreArchivo + ".txt");
+                return filebyte;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         private byte[] get_ROL_ELECTRONICO(ro_archivos_bancos_generacion_Info info, string NombreArchivo)
         {
             try
@@ -421,9 +483,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += Info_proceso.Codigo_Empresa;
                                 linea += info_cuenta.ba_Num_Cuenta.PadLeft(10, '0');
                                 if (info_empresa.RazonSocial.Length > 38)
-                                    linea += info_empresa.RazonSocial.Substring(0, 37);
+                                    linea += info_empresa.RazonSocial.Substring(0, 38);
                                 else
-                                    linea += info_empresa.RazonSocial.PadRight(37, ' ');
+                                    linea += info_empresa.RazonSocial.PadRight(38, ' ');
                                 linea += "C";
                                 linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
                                 linea += DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
