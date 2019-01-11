@@ -32,5 +32,6 @@ namespace Core.Erp.Info.Reportes.Caja
         public Nullable<System.DateTime> Fecha_fin { get; set; }
         public Nullable<double> valor_a_reponer { get; set; }
         public string NombreCaja { get; set; }
+        public string tm_descripcion { get; set; }
     }
 }

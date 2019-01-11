@@ -44,12 +44,13 @@ namespace Core.Erp.Data.Reportes.Caja
                                  TIPO = q.TIPO,
                                  Fecha_fin = q.Fecha_fin,
                                  Fecha_ini = q.Fecha_ini,
-                                 NombreCaja = q.NombreCaja
+                                 NombreCaja = q.NombreCaja,
+                                 tm_descripcion = q.tm_descripcion
                              }).ToList();
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
