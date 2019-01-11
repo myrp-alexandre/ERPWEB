@@ -15,6 +15,8 @@ namespace Core.Erp.Data.Inventario
             {
                 fecha_ini = fecha_ini.Date;
                 fecha_fin = fecha_fin.Date;
+                int IdSucursalIni = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
                 List<in_Ing_Egr_Inven_Info> Lista;
                 using (Entities_inventario Context = new Entities_inventario())
                 {
@@ -24,7 +26,8 @@ namespace Core.Erp.Data.Inventario
                                  on new { q.IdEmpresa, q.IdMovi_inven_tipo} equals new { t.IdEmpresa, t.IdMovi_inven_tipo}
                                  where q.IdEmpresa == IdEmpresa
                                  && q.signo == signo 
-                                 && q.IdSucursal == IdSucursal
+                                 && IdSucursalIni <= q.IdSucursal
+                                 && q.IdSucursal <= IdSucursalFin
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
                                  orderby new { q.cm_fecha } descending
                                  select new in_Ing_Egr_Inven_Info
@@ -52,6 +55,8 @@ namespace Core.Erp.Data.Inventario
                                  on new { q.IdEmpresa, q.IdMovi_inven_tipo } equals new { t.IdEmpresa, t.IdMovi_inven_tipo }
                                  where q.IdEmpresa == IdEmpresa
                                  && q.signo == signo
+                                 && IdSucursalIni <= q.IdSucursal
+                                 && q.IdSucursal <= IdSucursalFin
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
                                  && q.Estado == "A"
                                  orderby new { q.cm_fecha } descending
