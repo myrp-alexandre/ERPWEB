@@ -34,6 +34,7 @@ namespace Core.Erp.Data
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
     
         public virtual ro_periodo_x_ro_Nomina_TipoLiqui ro_periodo_x_ro_Nomina_TipoLiqui { get; set; }
         public virtual ICollection<ro_archivos_bancos_generacion_x_empleado> ro_archivos_bancos_generacion_x_empleado { get; set; }

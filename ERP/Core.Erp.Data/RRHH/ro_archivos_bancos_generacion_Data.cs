@@ -14,12 +14,14 @@ namespace Core.Erp.Data.RRHH
             try
             {
                 List<ro_archivos_bancos_generacion_Info> Lista;
-
+                DateTime fi = Fechainicio.Date;
+                DateTime ff = FechaFin.Date;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    if (mostrar_anulados)
                         Lista = (from q in Context.vwro_archivos_bancos_generacion
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.pe_FechaIni>=fi
+                                 && q.pe_FechaIni<=ff
                                  select new ro_archivos_bancos_generacion_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -37,32 +39,11 @@ namespace Core.Erp.Data.RRHH
                                      NombreProceso = q.NombreProceso,
                                      IdPeriodo = q.IdPeriodo,
                                      IdSucursal = q.IdSucursal,
-                                     IdProceso_bancario_tipo=q.IdProceso_bancario_tipo
+                                     IdProceso_bancario_tipo=q.IdProceso_bancario_tipo,
+                                     Su_Descripcion=q.Su_Descripcion
 
                                  }).ToList();
-                    else
-                        Lista = (from q in Context.vwro_archivos_bancos_generacion
-                                 where q.IdEmpresa == IdEmpresa
-                                 && q.estado == "A"
-                                 select new ro_archivos_bancos_generacion_Info
-                                 {
-                                     IdEmpresa = q.IdEmpresa,
-                                     IdArchivo = q.IdArchivo,
-                                     IdNomina = q.IdNomina,
-                                     IdNominaTipo = q.IdNominaTipo,
-                                     IdCuentaBancaria = q.IdCuentaBancaria,
-                                     IdProceso = q.IdProceso,
-                                     estado = q.estado,
-                                     EstadoBool = q.estado == "A" ? true : false,
-                                     Descripcion = q.Descripcion,
-                                     DescripcionProcesoNomina = q.DescripcionProcesoNomina,
-                                     pe_FechaIni = q.pe_FechaIni,
-                                     pe_FechaFin = q.pe_FechaFin,
-                                     NombreProceso=q.NombreProceso,
-                                     IdSucursal = q.IdSucursal,
-                                     IdProceso_bancario_tipo = q.IdProceso_bancario_tipo
-
-                                 }).ToList();
+                    
                 }
 
                 return Lista;
@@ -188,6 +169,7 @@ namespace Core.Erp.Data.RRHH
                         IdCuentaBancaria=info.IdCuentaBancaria,
                         estado=info.estado="A",
                         IdUsuario=info.IdUsuario,
+                        IdSucursal=info.IdSucursal,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
                     };
                     Context.ro_archivos_bancos_generacion.Add(Entity);
@@ -230,6 +212,7 @@ namespace Core.Erp.Data.RRHH
                     Entity.IdCuentaBancaria = info.IdCuentaBancaria;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
+                    Entity.IdSucursal = info.IdSucursal;
                     var detalle = Context.ro_archivos_bancos_generacion_x_empleado.Where(v =>v.IdEmpresa==info.IdEmpresa&& v.IdArchivo==info.IdArchivo);
                     Context.ro_archivos_bancos_generacion_x_empleado.RemoveRange(detalle);
                     foreach (var item in info.detalle)

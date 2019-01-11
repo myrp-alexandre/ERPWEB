@@ -101,9 +101,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             {
                 IdEmpresa = IdEmpresa,
                 tr_fecha = DateTime.Now,
-                IdMovi_inven_tipo_SucuOrig = i_param.P_IdMovi_inven_tipo_default_egr,
-                IdMovi_inven_tipo_SucuDest = i_param.P_IdMovi_inven_tipo_default_ing
-
+                IdSucursalOrigen = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdMovi_inven_tipo_SucuOrig = i_param.IdMovi_inven_tipo_egresoBodegaOrigen,
+                IdMovi_inven_tipo_SucuDest = i_param.IdMovi_inven_tipo_ingresoBodegaDestino
             };
             cargar_combos(IdEmpresa);
             return View(model);

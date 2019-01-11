@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Inventario.in_transferencia_Info
 @{
-    ViewBag.Title = "Nuevo ingreso";
+    ViewBag.Title = "Nueva transferencia de inventario";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -12,6 +12,9 @@
 @using (Html.BeginForm("Nuevo", "TransferenciasInventario", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id= "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdMovi_inven_tipo_SucuOrig)
+    @Html.HiddenFor(q => q.IdMovi_inven_tipo_SucuDest)
+
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -30,7 +33,7 @@
                     @Html.ValidationMessageFor(q => q.Codigo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-offset-6 col-md-3">
                 <div class="form-group">
                     <label for="tr_fecha">Fecha</label>
                     <div class="input-group date">
@@ -68,20 +71,6 @@
                     @Html.ValidationMessageFor(q => q.IdBodegaOrigen, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdMovi_inven_tipo_SucuOrig">Tipo movimiento origen*</label>
-                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_SucuOrig, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo" })
-                    @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_SucuOrig, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdMovi_inven_tipo_SucuOrig">Motivo*</label>
-                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_SucuOrig, new SelectList(ViewBag.lst_motivo, "IdMotivo_Inv", "Desc_mov_inv"), new { @class = "form-control", @id = "IdMotivo_Inv" })
-                    @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_SucuOrig, "", new { @class = "text-danger" })
-                </div>
-            </div>
         </div>
     </div>
 
@@ -99,20 +88,6 @@
                     <label for="IdBodegaDest">Bodega destino</label>
                     @Html.DropDownListFor(q => q.IdBodegaDest, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodegaDest" })
                     @Html.ValidationMessageFor(q => q.IdBodegaDest, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdMovi_inven_tipo_SucuDest">Tipo movimiento destino*</label>
-                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_SucuDest, new SelectList(ViewBag.lst_tipo, "IdMovi_inven_tipo", "tm_descripcion"), new { @class = "form-control", @id = "IdMovi_inven_tipo_SucuDest" })
-                    @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_SucuDest, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdMovi_inven_tipo_SucuDest">Motivo destino*</label>
-                    @Html.DropDownListFor(q => q.IdMovi_inven_tipo_SucuDest, new SelectList(ViewBag.lst_motivo, "IdMotivo_Inv", "Desc_mov_inv"), new { @class = "form-control", @id = "IdMovi_inven_tipo_SucuDest" })
-                    @Html.ValidationMessageFor(q => q.IdMovi_inven_tipo_SucuDest, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

@@ -85,5 +85,17 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+        public int get_id_movimiento(int IdEmpresa, string signo)
+        {
+            try
+            {
+                return odata.get_id_movimiento(IdEmpresa, signo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

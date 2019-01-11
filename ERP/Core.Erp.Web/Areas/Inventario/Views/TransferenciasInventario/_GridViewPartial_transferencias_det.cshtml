@@ -12,7 +12,8 @@
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "TransferenciasInventario", Action = "EditingDelete", Area = "Inventario" };
 
         settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
 
@@ -42,7 +43,7 @@
         {
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(60);
+            column.Width = Unit.Percentage(50);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
@@ -65,6 +66,7 @@
             column.FieldName = "IdUnidadMedida";
             column.Caption = "Unidad de medida";
             column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
             column.EditorProperties().ComboBox(p =>
             {
                 p.Columns.Add("descripcion", "Descripción").Width = Unit.Percentage(100);
@@ -78,7 +80,7 @@
         {
             column.FieldName = "dt_cantidad";
             column.Caption = "cantidad";
-            column.Width = Unit.Percentage(15);
+            column.Width = Unit.Percentage(20);
 
         });
 

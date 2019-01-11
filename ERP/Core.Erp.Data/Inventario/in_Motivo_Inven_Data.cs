@@ -241,5 +241,29 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+
+        public int get_id_movimiento(int IdEmpresa, string signo)
+        {
+            try
+            {
+                int ID = 0;
+
+                using (Entities_inventario db = new Entities_inventario())
+                {
+                    var motivo = db.in_Motivo_Inven.Where(q => q.IdEmpresa == IdEmpresa && q.Tipo_Ing_Egr == (signo == "+" ? "ING" : "EGR") && q.Genera_Movi_Inven == "S").FirstOrDefault();
+                    if (motivo == null)
+                        return ID;
+                    else
+                        ID = motivo.IdMotivo_Inv;
+                }
+
+                return ID;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
