@@ -95,11 +95,10 @@
             this.xrTableRow14 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_empresa = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow15 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
             this.sucursal = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow16 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lll = new DevExpress.XtraReports.UI.XRTableCell();
+            this.lbl_direccion = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow17 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow18 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -120,7 +119,7 @@
             this.xrTableCell14 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow7 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lbl_mail = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrtab = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow5 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -753,22 +752,9 @@
             // xrTableRow15
             // 
             this.xrTableRow15.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell3,
             this.sucursal});
             this.xrTableRow15.Name = "xrTableRow15";
             this.xrTableRow15.Weight = 1D;
-            // 
-            // xrTableCell3
-            // 
-            this.xrTableCell3.Borders = DevExpress.XtraPrinting.BorderSide.Left;
-            this.xrTableCell3.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTableCell3.Name = "xrTableCell3";
-            this.xrTableCell3.StylePriority.UseBorders = false;
-            this.xrTableCell3.StylePriority.UseFont = false;
-            this.xrTableCell3.StylePriority.UseTextAlignment = false;
-            this.xrTableCell3.Text = "Dir. Matriz:";
-            this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell3.Weight = 2.5003112406728749D;
             // 
             // sucursal
             // 
@@ -781,13 +767,13 @@
             this.sucursal.StylePriority.UseFont = false;
             this.sucursal.StylePriority.UseTextAlignment = false;
             this.sucursal.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.sucursal.Weight = 7.4998959951853372D;
+            this.sucursal.Weight = 10.000207235858213D;
             // 
             // xrTableRow16
             // 
             this.xrTableRow16.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
             this.xrTableCell4,
-            this.lll});
+            this.lbl_direccion});
             this.xrTableRow16.Name = "xrTableRow16";
             this.xrTableRow16.Weight = 1D;
             // 
@@ -803,16 +789,14 @@
             this.xrTableCell4.Text = "Dir. Sucursal:";
             this.xrTableCell4.Weight = 2.5003113169826552D;
             // 
-            // lll
+            // lbl_direccion
             // 
-            this.lll.Borders = DevExpress.XtraPrinting.BorderSide.Right;
-            this.lll.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Su_Descripcion]")});
-            this.lll.Font = new System.Drawing.Font("Verdana", 8F);
-            this.lll.Name = "lll";
-            this.lll.StylePriority.UseBorders = false;
-            this.lll.StylePriority.UseFont = false;
-            this.lll.Weight = 7.4998962240830078D;
+            this.lbl_direccion.Borders = DevExpress.XtraPrinting.BorderSide.Right;
+            this.lbl_direccion.Font = new System.Drawing.Font("Verdana", 8F);
+            this.lbl_direccion.Name = "lbl_direccion";
+            this.lbl_direccion.StylePriority.UseBorders = false;
+            this.lbl_direccion.StylePriority.UseFont = false;
+            this.lbl_direccion.Weight = 7.4998962240830078D;
             // 
             // xrTableRow17
             // 
@@ -964,7 +948,7 @@
             // 
             this.xrTableRow7.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
             this.xrTableCell19,
-            this.lbl_mail});
+            this.xrtab});
             this.xrTableRow7.Name = "xrTableRow7";
             this.xrTableRow7.Weight = 1D;
             // 
@@ -974,10 +958,12 @@
             this.xrTableCell19.Text = "MAIL";
             this.xrTableCell19.Weight = 1D;
             // 
-            // lbl_mail
+            // xrtab
             // 
-            this.lbl_mail.Name = "lbl_mail";
-            this.lbl_mail.Weight = 2D;
+            this.xrtab.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pr_correo]")});
+            this.xrtab.Name = "xrtab";
+            this.xrtab.Weight = 2D;
             // 
             // xrTable5
             // 
@@ -1088,7 +1074,7 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow15;
         private DevExpress.XtraReports.UI.XRTableCell sucursal;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow16;
-        private DevExpress.XtraReports.UI.XRTableCell lll;
+        private DevExpress.XtraReports.UI.XRTableCell lbl_direccion;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow17;
         private DevExpress.XtraReports.UI.XRPictureBox lbl_imagen;
         private DevExpress.XtraReports.UI.XRTable xrTable3;
@@ -1137,7 +1123,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell52;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow32;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell53;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
@@ -1162,6 +1147,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell14;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow7;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell19;
-        private DevExpress.XtraReports.UI.XRTableCell lbl_mail;
+        private DevExpress.XtraReports.UI.XRTableCell xrtab;
     }
 }
