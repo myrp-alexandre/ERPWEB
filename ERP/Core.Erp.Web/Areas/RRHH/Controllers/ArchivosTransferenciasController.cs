@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using Core.Erp.Bus.Banco;
 using Core.Erp.Bus.General;
 using System.IO;
+using Core.Erp.Info.General;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -36,6 +37,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info();
+            model.IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
+
             cargar_combos_consulta();
             return View(model);
         }
@@ -48,13 +51,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_archivo_transferencia(DateTime? Fecha_ini, DateTime? Fecha_fin ,decimal? IdSucursal = 0)
+        public ActionResult GridViewPartial_archivo_transferencia(DateTime? Fecha_ini, DateTime? Fecha_fin ,int? IdSucursal = 0)
         {
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-            ViewBag.IdSucursal = IdSucursal;
+            ViewBag.IdSucursal = IdSucursal== null ? 0 : IdSucursal;
+
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_archivo.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, true);
+            var model = bus_archivo.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, ViewBag.IdSucursal, true);
             return PartialView("_GridViewPartial_archivo_transferencia", model);
         }
 
@@ -281,6 +285,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = 0,
+                Su_Descripcion = "TODOS"
+            });
+
             ViewBag.lst_sucursal = lst_sucursal;
         }
         #endregion

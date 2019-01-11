@@ -9,19 +9,24 @@ namespace Core.Erp.Data.RRHH
 {
   public  class ro_archivos_bancos_generacion_Data
     {
-        public List<ro_archivos_bancos_generacion_Info> get_list(int IdEmpresa,  DateTime Fechainicio, DateTime FechaFin, bool mostrar_anulados)
+        public List<ro_archivos_bancos_generacion_Info> get_list(int IdEmpresa,  DateTime Fechainicio, DateTime FechaFin, int IdSucursal, bool mostrar_anulados)
         {
             try
             {
                 List<ro_archivos_bancos_generacion_Info> Lista;
                 DateTime fi = Fechainicio.Date;
                 DateTime ff = FechaFin.Date;
+                int IdSucursalIni = (IdSucursal==0)?0: IdSucursal;
+                int IdSucursalFin = (IdSucursal == 0) ? 99999: IdSucursal;
+
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                         Lista = (from q in Context.vwro_archivos_bancos_generacion
                                  where q.IdEmpresa == IdEmpresa
                                  && q.pe_FechaIni>=fi
                                  && q.pe_FechaIni<=ff
+                                 && q.IdSucursal >= IdSucursalIni 
+                                 && q.IdSucursal <= IdSucursalFin
                                  select new ro_archivos_bancos_generacion_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
