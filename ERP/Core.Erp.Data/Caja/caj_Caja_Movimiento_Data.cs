@@ -166,39 +166,41 @@ namespace Core.Erp.Data.Caja
                     cp_orden_pago_cancelaciones_Data odata_can = new cp_orden_pago_cancelaciones_Data();
                     int secuencia = 1;
                     decimal IdCancelacion = odata_can.get_id(info.IdEmpresa);
-                    foreach (var item in info.lst_det_canc_op)
+                    if (info.lst_det_canc_op != null)
                     {
-                        db.cp_orden_pago_cancelaciones.Add(new cp_orden_pago_cancelaciones
+                        foreach (var item in info.lst_det_canc_op)
                         {
-                            IdEmpresa = info.IdEmpresa,
-                            Idcancelacion = IdCancelacion,
-                            Secuencia = secuencia++,
-                            fechaTransaccion = DateTime.Now,
-                            IdEmpresa_op = info.IdEmpresa,
-                            IdOrdenPago_op = item.IdOrdenPago_op,
-                            Secuencia_op = 1,
+                            db.cp_orden_pago_cancelaciones.Add(new cp_orden_pago_cancelaciones
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                Idcancelacion = IdCancelacion,
+                                Secuencia = secuencia++,
+                                fechaTransaccion = DateTime.Now,
+                                IdEmpresa_op = info.IdEmpresa,
+                                IdOrdenPago_op = item.IdOrdenPago_op,
+                                Secuencia_op = 1,
 
-                            IdEmpresa_cxp = item.IdEmpresa_cxp,
-                            IdTipoCbte_cxp = item.IdTipoCbte_cxp,
-                            IdCbteCble_cxp = item.IdCbteCble_cxp,
+                                IdEmpresa_cxp = item.IdEmpresa_cxp,
+                                IdTipoCbte_cxp = item.IdTipoCbte_cxp,
+                                IdCbteCble_cxp = item.IdCbteCble_cxp,
 
-                            IdEmpresa_pago = info.IdEmpresa,
-                            IdTipoCbte_pago = info.IdTipocbte,
-                            IdCbteCble_pago = info.IdCbteCble,
+                                IdEmpresa_pago = info.IdEmpresa,
+                                IdTipoCbte_pago = info.IdTipocbte,
+                                IdCbteCble_pago = info.IdCbteCble,
 
-                            SaldoActual = 0,
-                            SaldoAnterior = 0,
-                            MontoAplicado = item.MontoAplicado,
-                            Observacion = "Pago chaja chica"
-                        });
-                        db.SaveChanges();          
-                    }                    
+                                SaldoActual = 0,
+                                SaldoAnterior = 0,
+                                MontoAplicado = item.MontoAplicado,
+                                Observacion = "Pago chaja chica"
+                            });
+                            db.SaveChanges();
+                        }
+                    }                   
                 }
                 return true;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -242,39 +244,41 @@ namespace Core.Erp.Data.Caja
                     cp_orden_pago_cancelaciones_Data odata_can = new cp_orden_pago_cancelaciones_Data();
                     int secuencia = 1;
                     decimal IdCancelacion = odata_can.get_id(info.IdEmpresa);
-                    foreach (var item in info.lst_det_canc_op)
+                    if (info.lst_det_canc_op != null)
                     {
-                        db.cp_orden_pago_cancelaciones.Add(new cp_orden_pago_cancelaciones
+                        foreach (var item in info.lst_det_canc_op)
                         {
-                            IdEmpresa = info.IdEmpresa,
-                            Idcancelacion = IdCancelacion,
-                            Secuencia = secuencia++,
-                            fechaTransaccion = DateTime.Now,
-                            IdEmpresa_op = info.IdEmpresa,
-                            IdOrdenPago_op = item.IdOrdenPago_op,
-                            Secuencia_op = 1,
+                            db.cp_orden_pago_cancelaciones.Add(new cp_orden_pago_cancelaciones
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                Idcancelacion = IdCancelacion,
+                                Secuencia = secuencia++,
+                                fechaTransaccion = DateTime.Now,
+                                IdEmpresa_op = info.IdEmpresa,
+                                IdOrdenPago_op = item.IdOrdenPago_op,
+                                Secuencia_op = 1,
 
-                            IdEmpresa_cxp = item.IdEmpresa_cxp,
-                            IdTipoCbte_cxp = item.IdTipoCbte_cxp,
-                            IdCbteCble_cxp = item.IdCbteCble_cxp,
+                                IdEmpresa_cxp = item.IdEmpresa_cxp,
+                                IdTipoCbte_cxp = item.IdTipoCbte_cxp,
+                                IdCbteCble_cxp = item.IdCbteCble_cxp,
 
-                            IdEmpresa_pago = info.IdEmpresa,
-                            IdTipoCbte_pago = info.IdTipocbte,
-                            IdCbteCble_pago = info.IdCbteCble,
+                                IdEmpresa_pago = info.IdEmpresa,
+                                IdTipoCbte_pago = info.IdTipocbte,
+                                IdCbteCble_pago = info.IdCbteCble,
 
-                            SaldoActual  = 0,
-                            SaldoAnterior = 0,
-                            MontoAplicado = item.MontoAplicado,
-                            Observacion = "Pago chaja chica"
-                        });
-                        db.SaveChanges();
+                                SaldoActual = 0,
+                                SaldoAnterior = 0,
+                                MontoAplicado = item.MontoAplicado,
+                                Observacion = "Pago chaja chica"
+                            });
+                            db.SaveChanges();
+                        }
                     }
                 }
                 return true;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
