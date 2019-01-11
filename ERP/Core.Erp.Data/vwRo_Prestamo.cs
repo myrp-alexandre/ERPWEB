@@ -41,5 +41,6 @@ namespace Core.Erp.Data
         public bool descuento_men_quin { get; set; }
         public string EstadoAprob { get; set; }
         public string IdUsuarioAprueba { get; set; }
+        public Nullable<System.DateTime> Fecha_registro { get; set; }
     }
 }

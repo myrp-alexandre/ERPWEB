@@ -386,6 +386,56 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
 
+        private byte[] get_NCR_OTRO(ro_archivos_bancos_generacion_Info info, string NombreArchivo)
+        {
+            try
+            {
+                System.IO.File.Delete(rutafile + NombreArchivo + ".txt");
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
+                {
+                    foreach (var item in info.detalle)
+                    {
+                        if (item.pe_cedulaRuc == "0912646684")
+                        {
+
+                        }
+
+                        item.em_NumCta = item.em_NumCta.Trim();
+                        string linea = "";
+                        double valor = Convert.ToDouble(item.Valor);
+                        double valorEntero = Math.Floor(valor);
+                        double valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
+
+                        if (item.em_tipoCta == "COR" || item.em_tipoCta == "AHO")
+                        {
+                            if (item.em_tipoCta == "AHO")
+                                linea += "A";
+                            else
+                                linea += "C";
+                            linea += item.em_NumCta.PadLeft(10, '0');
+                            linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
+
+                            linea += "EI";
+                            linea += "Y";
+                            linea += "01";
+                            linea += cl_funciones.QuitarTildes(item.pe_apellido + item.pe_nombre);
+                        }
+                        file.WriteLine(linea);
+
+                    }
+                }
+                byte[] filebyte = System.IO.File.ReadAllBytes(rutafile + NombreArchivo + ".txt");
+                return filebyte;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         private byte[] get_ROL_ELECTRONICO(ro_archivos_bancos_generacion_Info info, string NombreArchivo)
         {
             try
@@ -421,9 +471,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += Info_proceso.Codigo_Empresa;
                                 linea += info_cuenta.ba_Num_Cuenta.PadLeft(10, '0');
                                 if (info_empresa.RazonSocial.Length > 38)
-                                    linea += info_empresa.RazonSocial.Substring(0, 37);
+                                    linea += info_empresa.RazonSocial.Substring(0, 38);
                                 else
-                                    linea += info_empresa.RazonSocial.PadRight(37, ' ');
+                                    linea += info_empresa.RazonSocial.PadRight(38, ' ');
                                 linea += "C";
                                 linea += (valorEntero.ToString() + valorDecimal.ToString()).PadLeft(15, '0');
                                 linea += DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0');
