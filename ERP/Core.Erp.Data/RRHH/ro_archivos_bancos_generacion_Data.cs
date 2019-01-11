@@ -20,7 +20,7 @@ namespace Core.Erp.Data.RRHH
                 {
                         Lista = (from q in Context.vwro_archivos_bancos_generacion
                                  where q.IdEmpresa == IdEmpresa
-                                 && q.pe_FechaIni>=ff
+                                 && q.pe_FechaIni>=fi
                                  && q.pe_FechaIni<=ff
                                  select new ro_archivos_bancos_generacion_Info
                                  {
