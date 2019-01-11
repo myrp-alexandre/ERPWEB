@@ -10,11 +10,11 @@ namespace Core.Erp.Bus.Inventario
         in_Ing_Egr_Inven_Data odata = new in_Ing_Egr_Inven_Data();
         in_Ing_Egr_Inven_det_Data odata_det = new in_Ing_Egr_Inven_det_Data();
 
-        public List<in_Ing_Egr_Inven_Info> get_list(int IdEmpresa, string signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
+        public List<in_Ing_Egr_Inven_Info> get_list(int IdEmpresa, string signo, int IdSucursal, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, signo, mostrar_anulados, fecha_ini, fecha_fin);
+                return odata.get_list(IdEmpresa, signo, IdSucursal, mostrar_anulados, fecha_ini, fecha_fin);
             }
             catch (Exception)
             {

@@ -51,23 +51,29 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #region Vistas
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
-
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            cargar_combos(model.IdEmpresa);
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_ingreso_inventario(DateTime? fecha_ini, DateTime? fecha_fin)
+        public ActionResult GridViewPartial_ingreso_inventario(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0)
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<in_Ing_Egr_Inven_Info> model = bus_ing_inv.get_list(IdEmpresa, "+", true, ViewBag.fecha_ini, ViewBag.fecha_fin);
+            ViewBag.IdSucursal = IdSucursal;
+            List<in_Ing_Egr_Inven_Info> model = bus_ing_inv.get_list(IdEmpresa, "+", IdSucursal, true, ViewBag.fecha_ini, ViewBag.fecha_fin);
             return PartialView("_GridViewPartial_ingreso_inventario", model);
         }
         #endregion
@@ -283,6 +289,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = 0,
+                Su_Descripcion = "TODOS"
+            });
             ViewBag.lst_sucursal = lst_sucursal;
 
             tb_bodega_Bus bus_bodega = new tb_bodega_Bus();

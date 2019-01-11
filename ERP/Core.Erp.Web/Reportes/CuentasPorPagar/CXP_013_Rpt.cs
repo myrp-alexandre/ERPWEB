@@ -33,7 +33,7 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             var empresa = bus_empresa.get_info(IdEmpresa);
             lbl_empresa.Text = empresa.em_nombre;
             lbl_ruc.Text = empresa.em_ruc;
-            lbl_mail.Text = empresa.em_Email;            
+            lbl_direccion.Text = empresa.em_direccion;
 
             ImageConverter obj = new ImageConverter();
             lbl_imagen.Image = (Image)obj.ConvertFrom(empresa.em_logo);

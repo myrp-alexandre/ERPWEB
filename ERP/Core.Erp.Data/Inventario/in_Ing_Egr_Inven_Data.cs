@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Inventario
 {
     public class in_Ing_Egr_Inven_Data
     {
-        public List<in_Ing_Egr_Inven_Info> get_list (int IdEmpresa, string signo, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
+        public List<in_Ing_Egr_Inven_Info> get_list (int IdEmpresa, string signo,int IdSucursal, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
@@ -24,6 +24,7 @@ namespace Core.Erp.Data.Inventario
                                  on new { q.IdEmpresa, q.IdMovi_inven_tipo} equals new { t.IdEmpresa, t.IdMovi_inven_tipo}
                                  where q.IdEmpresa == IdEmpresa
                                  && q.signo == signo 
+                                 && q.IdSucursal == IdSucursal
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
                                  orderby new { q.cm_fecha } descending
                                  select new in_Ing_Egr_Inven_Info
