@@ -95,10 +95,11 @@
             });
             column.Width = Unit.Percentage(5);
         });
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10);
         settings.Columns.Add("IdCbteCble", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("cb_Cheque", "# Cheque").Width = Unit.Percentage(10);
         settings.Columns.Add("ba_descripcion", "Cuenta").Width = Unit.Percentage(20);
-        settings.Columns.Add("cb_giradoA", "Beneficiario").Width = Unit.Percentage(40);
+        settings.Columns.Add("cb_giradoA", "Beneficiario").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
             column.FieldName = "cb_Fecha";
