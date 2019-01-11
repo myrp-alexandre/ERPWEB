@@ -14,6 +14,8 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
+                FechaInicio = FechaInicio.Date;
+                FechaFin = FechaFin.Date;
                 List<in_transferencia_Info> Lista=null;
 
                 using (Entities_inventario Context = new Entities_inventario())
@@ -22,7 +24,7 @@ namespace Core.Erp.Data.Inventario
                              where q.IdEmpresa == IdEmpresa
                              && q.tr_fecha>=FechaInicio
                              && q.tr_fecha<=FechaFin
-                             && q.IdSucursalDest==IdSucursal
+                             && q.IdSucursalOrigen==IdSucursal
                              select new in_transferencia_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -130,8 +132,7 @@ namespace Core.Erp.Data.Inventario
                     in_transferencia Entity = contex.in_transferencia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa 
                     && q.IdBodegaOrigen == info.IdBodegaOrigen && q.IdSucursalOrigen == info.IdSucursalOrigen
                     && q.IdTransferencia == info.IdTransferencia );
-
-
+                    
                     Entity.tr_Observacion = info.tr_Observacion;
                     Entity.Codigo = info.Codigo==null?"":info.Codigo;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
@@ -158,9 +159,6 @@ namespace Core.Erp.Data.Inventario
                         contex.in_transferencia_det.Add(addressDeta);
                     }
                     contex.SaveChanges();
-
-
-
                     return true;
 
                 }
@@ -181,10 +179,11 @@ namespace Core.Erp.Data.Inventario
                     && q.IdBodegaOrigen == info.IdBodegaOrigen && q.IdSucursalOrigen == info.IdSucursalOrigen
                     && q.IdTransferencia == info.IdTransferencia);
 
-
+                    Entity.IdEmpresa_Ing_Egr_Inven_Origen = info.IdEmpresa_Ing_Egr_Inven_Origen;
                     Entity.IdSucursal_Ing_Egr_Inven_Origen = info.IdSucursal_Ing_Egr_Inven_Origen;
                     Entity.IdMovi_inven_tipo_SucuOrig = info.IdMovi_inven_tipo_SucuOrig;
                     Entity.IdNumMovi_Ing_Egr_Inven_Origen = info.IdNumMovi_Ing_Egr_Inven_Origen;
+
                     Entity.IdEmpresa_Ing_Egr_Inven_Destino = info.IdEmpresa_Ing_Egr_Inven_Destino;
                     Entity.IdSucursal_Ing_Egr_Inven_Destino = info.IdSucursal_Ing_Egr_Inven_Destino;
                     Entity.IdMovi_inven_tipo_SucuDest = info.IdMovi_inven_tipo_SucuDest;

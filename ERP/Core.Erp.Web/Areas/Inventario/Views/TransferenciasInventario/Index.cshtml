@@ -1,7 +1,7 @@
 ﻿@model Core.Erp.Info.Helps.cl_filtros_Info
 
 @{
-    ViewBag.Title = "Orden compra";
+    ViewBag.Title = "Transferencias de inventario";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -11,7 +11,7 @@
 
 
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Index", "OrdenCompraLocal", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "TransferenciasInventario", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     <div class="box ">
