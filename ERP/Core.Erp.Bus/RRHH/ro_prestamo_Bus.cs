@@ -184,6 +184,8 @@ namespace Core.Erp.Bus.RRHH
                     info.lst_detalle.Add(item);
                     
                 }
+
+
                 return info;
             }
             catch (Exception )
