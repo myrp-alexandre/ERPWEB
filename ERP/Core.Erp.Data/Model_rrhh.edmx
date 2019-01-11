@@ -74,6 +74,7 @@
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
           <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+          <Property Name="IdSucursal" Type="int" />
         </EntityType>
         <EntityType Name="ro_archivos_bancos_generacion_x_empleado">
           <Key>
@@ -1493,7 +1494,6 @@ warning 6002: The table/view 'DBERP.dbo.vwro_archivos_bancos_generacion' does no
             <PropertyRef Name="pe_FechaFin" />
             <PropertyRef Name="NombreProceso" />
             <PropertyRef Name="estado" />
-            <PropertyRef Name="IdSucursal" />
             <PropertyRef Name="IdProceso_bancario_tipo" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
@@ -1509,8 +1509,9 @@ warning 6002: The table/view 'DBERP.dbo.vwro_archivos_bancos_generacion' does no
           <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
           <Property Name="NombreProceso" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="IdProceso_bancario_tipo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_archivos_bancos_generacion_x_empleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -4747,8 +4748,9 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_archivos_bancos_generacion].[pe_FechaFin] AS [pe_FechaFin], 
     [vwro_archivos_bancos_generacion].[NombreProceso] AS [NombreProceso], 
     [vwro_archivos_bancos_generacion].[estado] AS [estado], 
+    [vwro_archivos_bancos_generacion].[IdProceso_bancario_tipo] AS [IdProceso_bancario_tipo], 
     [vwro_archivos_bancos_generacion].[IdSucursal] AS [IdSucursal], 
-    [vwro_archivos_bancos_generacion].[IdProceso_bancario_tipo] AS [IdProceso_bancario_tipo]
+    [vwro_archivos_bancos_generacion].[Su_Descripcion] AS [Su_Descripcion]
     FROM [dbo].[vwro_archivos_bancos_generacion] AS [vwro_archivos_bancos_generacion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_archivos_bancos_generacion_x_empleado" EntityType="Self.vwro_archivos_bancos_generacion_x_empleado" store:Type="Views" store:Schema="dbo">
@@ -9444,6 +9446,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ro_periodo_x_ro_Nomina_TipoLiqui" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_ro_periodo_x_ro_Nomina_TipoLiqui" FromRole="ro_archivos_bancos_generacion" ToRole="ro_periodo_x_ro_Nomina_TipoLiqui" />
           <NavigationProperty Name="ro_archivos_bancos_generacion_x_empleado" Relationship="Model_rrhh.FK_ro_archivos_bancos_generacion_x_empleado_ro_archivos_bancos_generacion" FromRole="ro_archivos_bancos_generacion" ToRole="ro_archivos_bancos_generacion_x_empleado" />
+          <Property Name="IdSucursal" Type="Int32" />
         </EntityType>
         <Association Name="FK_ro_archivos_bancos_generacion_ro_periodo_x_ro_Nomina_TipoLiqui">
           <End Type="Model_rrhh.ro_periodo_x_ro_Nomina_TipoLiqui" Role="ro_periodo_x_ro_Nomina_TipoLiqui" Multiplicity="1" />
@@ -11428,7 +11431,6 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <PropertyRef Name="pe_FechaFin" />
             <PropertyRef Name="NombreProceso" />
             <PropertyRef Name="estado" />
-            <PropertyRef Name="IdSucursal" />
             <PropertyRef Name="IdProceso_bancario_tipo" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
@@ -11444,8 +11446,9 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="NombreProceso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
           <Property Name="IdProceso_bancario_tipo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -13071,6 +13074,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySetMapping Name="ro_archivos_bancos_generacion">
             <EntityTypeMapping TypeName="Model_rrhh.ro_archivos_bancos_generacion">
               <MappingFragment StoreEntitySet="ro_archivos_bancos_generacion">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
                 <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
                 <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
@@ -13796,8 +13800,9 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySetMapping Name="vwro_archivos_bancos_generacion">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_archivos_bancos_generacion">
               <MappingFragment StoreEntitySet="vwro_archivos_bancos_generacion">
-                <ScalarProperty Name="IdProceso_bancario_tipo" ColumnName="IdProceso_bancario_tipo" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdProceso_bancario_tipo" ColumnName="IdProceso_bancario_tipo" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="NombreProceso" ColumnName="NombreProceso" />
                 <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />

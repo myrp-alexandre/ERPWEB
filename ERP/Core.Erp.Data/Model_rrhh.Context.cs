@@ -14,8 +14,6 @@ namespace Core.Erp.Data
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-
-
     public partial class Entities_rrhh : DbContext
     {
         public Entities_rrhh()
