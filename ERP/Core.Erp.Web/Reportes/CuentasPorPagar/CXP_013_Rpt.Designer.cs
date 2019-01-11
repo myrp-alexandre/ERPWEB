@@ -758,7 +758,7 @@
             // 
             // sucursal
             // 
-            this.sucursal.Borders = DevExpress.XtraPrinting.BorderSide.Right;
+            this.sucursal.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right)));
             this.sucursal.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Su_Descripcion]")});
             this.sucursal.Font = new System.Drawing.Font("Verdana", 8F);

@@ -35,5 +35,7 @@ namespace Core.Erp.Info.Reportes.CuentasPorPagar
         public string Descripcion { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
+        //
+        public string Fecha_rep { get; set; }
     }
 }

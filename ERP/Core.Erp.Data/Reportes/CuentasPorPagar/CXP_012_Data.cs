@@ -51,6 +51,23 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  
                                  
                              }).ToList();
+                    foreach (var item in Lista)
+                    {
+                        item.Fecha_rep = item.fecha.ToString().Substring(3,7);
+                    }
+                    int cont = 4;
+                    if(Lista.Count()!=4)
+                    {
+                        cont =cont-Lista.Count();
+                        while (cont>0)
+                        {
+                            CXP_012_Info info = new CXP_012_Info();
+                            info.Fecha_rep = "";
+                            Lista.Add(info);
+                            cont = cont -1;
+                        }
+                    }
+                   
                 }
                 return Lista;
             }

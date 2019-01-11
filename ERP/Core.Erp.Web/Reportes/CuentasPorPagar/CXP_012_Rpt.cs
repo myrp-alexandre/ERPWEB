@@ -25,7 +25,7 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
 
                 int IdEmpresa = p_IdEmpresa == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
                 decimal IdRetencion = p_IdRetencion.Value == null ? 0 : Convert.ToDecimal(p_IdRetencion.Value);
-
+                
 
                 CXP_012_Bus bus_rpt = new CXP_012_Bus();
                 lst_rpt = bus_rpt.get_list(IdEmpresa, IdRetencion);
