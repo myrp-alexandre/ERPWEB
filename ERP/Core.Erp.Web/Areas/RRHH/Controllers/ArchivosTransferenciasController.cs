@@ -363,10 +363,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             else
                                 linea += "C";
                             linea += item.em_NumCta.PadLeft(10, '0');
-                            if(valorDecimal!=0)
                             linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2,'0')).PadLeft(15, '0');
-                            else
-                             linea += (valorEntero.ToString()+"00").PadLeft(15, '0');
+                            
                             linea += "EI";
                             linea += "Y";
                             linea += "01";
@@ -444,13 +442,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += "C";
                                 linea += "                    ";
                                 linea += "N";
-
-                                if (valorDecimal != 0)
-                                    linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
-                                else
-                                    linea += (valorEntero.ToString() + "00").PadLeft(15, '0');
-
-
+                                linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
                                 linea += "                                           ";
                                 linea += "0900000000";
                                 file.WriteLine(linea);
@@ -468,11 +460,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += "C";
                                 linea += "                    ";
                                 linea += "N";
-
-                                if (valorDecimal != 0)
-                                    linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
-                                else
-                                    linea += (valorEntero.ToString() + "00").PadLeft(15, '0');
+                                linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
                                 linea += "                                           ";
                                 linea += "0900000000";
                                 file.WriteLine(linea);
