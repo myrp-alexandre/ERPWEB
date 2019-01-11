@@ -169,6 +169,7 @@ namespace Core.Erp.Data.RRHH
                         IdCuentaBancaria=info.IdCuentaBancaria,
                         estado=info.estado="A",
                         IdUsuario=info.IdUsuario,
+                        IdSucursal=info.IdSucursal,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
                     };
                     Context.ro_archivos_bancos_generacion.Add(Entity);
@@ -211,6 +212,7 @@ namespace Core.Erp.Data.RRHH
                     Entity.IdCuentaBancaria = info.IdCuentaBancaria;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
+                    Entity.IdSucursal = info.IdSucursal;
                     var detalle = Context.ro_archivos_bancos_generacion_x_empleado.Where(v =>v.IdEmpresa==info.IdEmpresa&& v.IdArchivo==info.IdArchivo);
                     Context.ro_archivos_bancos_generacion_x_empleado.RemoveRange(detalle);
                     foreach (var item in info.detalle)
