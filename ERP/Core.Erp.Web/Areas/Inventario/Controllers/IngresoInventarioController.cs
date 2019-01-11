@@ -14,6 +14,7 @@ using Core.Erp.Bus.Contabilidad;
 using static Core.Erp.Info.General.tb_sis_log_error_InfoList;
 using System.IO;
 using ExcelDataReader;
+using Core.Erp.Info.General;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
 {
