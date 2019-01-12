@@ -88,7 +88,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Metodos
-        private void cargar_combos(int IdEmpresa)
+        private void cargar_combos(int IdEmpresa, int IdSucursal)
         {
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
@@ -96,7 +96,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var lst_tipo_nota = bus_tipo_nota.get_list(IdEmpresa, cl_enumeradores.eTipoCbteBancario.NCBA.ToString(), false);
             ViewBag.lst_tipo_nota = lst_tipo_nota;
 
-            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, false);
+            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, IdSucursal, false);
             ViewBag.lst_banco_cuenta = lst_banco_cuenta;
         }
         private bool validar(ba_Cbte_Ban_Info i_validar, ref string msg)
@@ -171,7 +171,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             };
             SessionFixed.TipoPersona = model.IdTipo_Persona;
             List_ct.set_list(model.lst_det_ct, model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, model.IdSucursal);
             return View(model);
         }
 
@@ -181,13 +181,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
             if (!bus_cbteban.guardarDB(model, cl_enumeradores.eTipoCbteBancario.NCBA))
             {
                 ViewBag.mensaje = "No se pudo guardar el registro";
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 
@@ -200,13 +200,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
             if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.NCBA))
             {
                 ViewBag.mensaje = "No se pudo modificar el registro";
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 
@@ -227,7 +227,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, model.IdSucursal);
             SessionFixed.TipoPersona = model.IdTipo_Persona;
             return View(model);
         }
@@ -246,7 +246,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, model.IdSucursal);
             return View(model);
         }
 
@@ -257,7 +257,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!bus_cbteban.anularDB(model))
             {
                 ViewBag.mensaje = "No se pudo anular el registro";
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 

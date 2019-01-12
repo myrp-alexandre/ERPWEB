@@ -16,9 +16,10 @@ namespace Core.Erp.Data
     {
         public ba_Banco_Cuenta()
         {
+            this.ba_Banco_Cuenta_x_tb_sucursal = new HashSet<ba_Banco_Cuenta_x_tb_sucursal>();
+            this.ba_Cbte_Ban = new HashSet<ba_Cbte_Ban>();
             this.ba_Conciliacion = new HashSet<ba_Conciliacion>();
             this.ba_Talonario_cheques_x_banco = new HashSet<ba_Talonario_cheques_x_banco>();
-            this.ba_Cbte_Ban = new HashSet<ba_Cbte_Ban>();
         }
     
         public int IdEmpresa { get; set; }
@@ -41,8 +42,9 @@ namespace Core.Erp.Data
         public bool Imprimir_Solo_el_cheque { get; set; }
         public int IdBanco_Financiero { get; set; }
     
+        public virtual ICollection<ba_Banco_Cuenta_x_tb_sucursal> ba_Banco_Cuenta_x_tb_sucursal { get; set; }
+        public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
         public virtual ICollection<ba_Conciliacion> ba_Conciliacion { get; set; }
         public virtual ICollection<ba_Talonario_cheques_x_banco> ba_Talonario_cheques_x_banco { get; set; }
-        public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
     }
 }

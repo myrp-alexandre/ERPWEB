@@ -40,7 +40,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult GridViewPartial_cuentas()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_cuenta.get_list(IdEmpresa, true);
+            var model = bus_cuenta.get_list(IdEmpresa, 0, true);
             return PartialView("_GridViewPartial_cuentas", model);
         }
         #endregion

@@ -35,6 +35,7 @@ namespace Core.Erp.Info.Banco
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
+        public int IdSucursal { get; set; }
         #endregion
 
     }

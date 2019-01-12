@@ -82,7 +82,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             });
             ViewBag.lst_sucursal = lst_sucursal;
         }
-        private void cargar_combos(int IdEmpresa)
+        private void cargar_combos(int IdEmpresa, int IdSucursal)
         {
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
@@ -96,7 +96,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             var lst_banco = bus_banco.get_list(false);
             ViewBag.lst_banco = lst_banco;
 
-            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, false);
+            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa,IdSucursal, false);
             ViewBag.lst_banco_cuenta = lst_banco_cuenta;
         }
 
@@ -220,7 +220,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                 lst_det = new List<cxc_cobro_det_Info>(),
             };
             list_det.set_list(new List<cxc_cobro_det_Info>(), model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa,model.IdSucursal);
             return View(model);
         }
         [HttpPost]
@@ -230,14 +230,14 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             if (!validar(model,ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
             model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_cobro.guardarDB(model))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 
@@ -259,7 +259,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
             list_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.IdEntidad = model.IdCliente;
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, model.IdSucursal);
             return View(model);
         }
 
@@ -270,14 +270,14 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
             model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_cobro.modificarDB(model))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 
@@ -299,7 +299,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
             list_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.IdEntidad = model.IdCliente;
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, model.IdSucursal);
             return View(model);
         }
 
@@ -310,7 +310,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             if (!bus_cobro.anularDB(model))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 

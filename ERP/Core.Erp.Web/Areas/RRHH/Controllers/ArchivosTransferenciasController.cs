@@ -94,7 +94,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             };
            
-            cargar_combos(0);
+            cargar_combos(0,Convert.ToInt32(SessionFixed.IdSucursal));
             return View(model);
         }
 
@@ -108,7 +108,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (model.detalle == null || model.detalle.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para el archivo";
-                cargar_combos(model.IdNomina);
+                cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
 
@@ -118,7 +118,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_archivo.guardarDB(model))
             {
-                cargar_combos(model.IdNomina);
+                cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -138,7 +138,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 return RedirectToAction("Index");
             model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdArchivo);
             ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(model.detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-            cargar_combos(model.IdNomina);
+            cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
             return View(model);
         }
 
@@ -149,14 +149,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (model.detalle == null || model.detalle.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle para el arhivo";
-                cargar_combos(model.IdNomina);
+                cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
             model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
             if (!bus_archivo.modificarDB(model))
             {
-                cargar_combos(model.IdNomina);
+                cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -176,7 +176,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 return RedirectToAction("Index");
             model.detalle = bus_archivo_detalle.get_list(IdEmpresa, IdArchivo);
             ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(model.detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-            cargar_combos(model.IdNomina);
+            cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
             return View(model);
         }
         [HttpPost]
@@ -189,7 +189,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             model.Fecha_UltAnu = DateTime.Now;
             if (!bus_archivo.anularDB(model))
             {
-                cargar_combos(model.IdNomina);
+                cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -260,7 +260,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         #region cargar combos
 
-        private void cargar_combos(int IdNomina)
+        private void cargar_combos(int IdNomina, int IdSucursal)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
@@ -268,7 +268,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina);
 
-            var lst_cuenta_bancarias = bus_cuentas_bancarias.get_list(IdEmpresa, false);
+            var lst_cuenta_bancarias = bus_cuentas_bancarias.get_list(IdEmpresa, IdSucursal, false);
             ViewBag.lst_cuenta_bancarias = lst_cuenta_bancarias;
 
             var lst_proceso = bus_procesos_bancarios.get_list(IdEmpresa, false);

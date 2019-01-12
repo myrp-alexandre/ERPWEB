@@ -46,12 +46,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Metodos
-        private void cargar_combos(int IdEmpresa)
+        private void cargar_combos(int IdEmpresa, int IdSucursal)
         {
             var lst_periodo = bus_periodo.get_list(IdEmpresa, false);
             ViewBag.lst_periodo = lst_periodo;
 
-            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, false);
+            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, IdSucursal, false);
             ViewBag.lst_banco_cuenta = lst_banco_cuenta;
 
             Dictionary<string, string> lst_estado = new Dictionary<string, string>();
@@ -106,7 +106,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (bco != null && periodo != null)
                 model.lst_det = bus_det.get_list_x_conciliar(model.IdEmpresa, model.IdBanco, bco.IdCtaCble, periodo.pe_FechaFin);            
             List_det.set_list(model.lst_det);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal) );
             return View(model);
         }
 
@@ -116,13 +116,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!validar(model,ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
             if (!bus_conciliacion.guardarDB(model))
             {
                 ViewBag.mensaje = "No se pudo guardar el registro";
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
 
@@ -181,7 +181,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var periodo = bus_periodo.get_info(IdEmpresa, model.IdPeriodo);
             model.lst_det.AddRange(bus_det.get_list_x_conciliar(IdEmpresa, model.IdBanco, bco.IdCtaCble, periodo.pe_FechaFin.Date));
             List_det.set_list(model.lst_det);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
             return View(model);
         }
         [HttpPost]
@@ -190,13 +190,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
             if (!bus_conciliacion.modificarDB(model))
             {
                 ViewBag.mensaje = "No se pudo guardar el registro";
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
 
@@ -214,7 +214,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var periodo = bus_periodo.get_info(IdEmpresa, model.IdPeriodo);
             model.lst_det.AddRange(bus_det.get_list_x_conciliar(IdEmpresa, model.IdBanco, bco.IdCtaCble, periodo.pe_FechaFin.Date));
             List_det.set_list(model.lst_det);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
             return View(model);
         }
         [HttpPost]
@@ -224,7 +224,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!bus_conciliacion.anularDB(model))
             {
                 ViewBag.mensaje = "No se pudo guardar el registro";
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
 
