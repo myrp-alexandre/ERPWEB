@@ -14,7 +14,35 @@
         $("#IdBanco").change(function () {
             armar_diario();
         });
+
+            $("#IdSucursal").change(function () {
+                GetListBancoPorSucursal();
+            });
     });
+function GetListBancoPorSucursal() {
+        $("#IdBanco").empty();
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetListBancoPorSucursal", "BancoCuenta",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdBanco").append("<option value=" + row.IdBanco + ">" + row.ba_descripcion+ "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    }
     var selectedIDs;
     function OnBeginCallback(s, e) {
         e.customArgs["selectedIDs"] = selectedIDs;
