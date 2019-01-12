@@ -96,6 +96,19 @@ namespace Core.Erp.Bus.Inventario
             return odata.get_info_bajo_demanda(args, IdEmpresa);
         }
 
+        public bool ValidarCodigoExists(int IdEmpresa, string Codigo)
+        {
+            try
+            {
+                return odata.ValidarCodigoExists(IdEmpresa, Codigo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public in_Producto_Info get_info(int IdEmpresa, decimal IdProducto)
         {
             try

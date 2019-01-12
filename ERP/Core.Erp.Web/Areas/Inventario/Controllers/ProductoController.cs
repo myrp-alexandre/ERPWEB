@@ -861,7 +861,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List<in_presentacion_Info> ListaPresentacion = new List<in_presentacion_Info>();
             List<in_Marca_Info> ListaMarca = new List<in_Marca_Info>();
             List<in_Producto_Info> ListaProducto = new List<in_Producto_Info>();
-
+            in_Producto_Bus bus_producto = new in_Producto_Bus();
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -956,27 +956,29 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
-                        in_Producto_Info info = new in_Producto_Info
+                        if (!bus_producto.ValidarCodigoExists(IdEmpresa, Convert.ToString(reader.GetValue(1)).Trim()))
                         {
-                            IdEmpresa = IdEmpresa,
-                            IdProducto = Convert.ToInt32(reader.GetValue(0)),
-                            pr_codigo = Convert.ToString(reader.GetValue(1)).Trim(),
-                            pr_descripcion = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)).Trim(),
-                            pr_descripcion_2 = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)).Trim(),
-                            IdMarca = Convert.ToInt32(reader.GetValue(3)),
-                            IdPresentacion = Convert.ToString(reader.GetValue(4)),
-                            IdCategoria = Convert.ToString(reader.GetValue(5)),
-                            IdLinea = Convert.ToInt32(reader.GetValue(6)),
-                            IdGrupo = Convert.ToInt32(reader.GetValue(7)),
-                            IdSubGrupo = Convert.ToInt32(reader.GetValue(8)),
-                            IdCod_Impuesto_Iva = Convert.ToString(reader.GetValue(9)),
-                            IdUnidadMedida = Convert.ToString(reader.GetValue(10)),
-                            IdUnidadMedida_Consumo = Convert.ToString(reader.GetValue(11)),
-                            precio_1 = Convert.ToDouble(reader.GetValue(12)),
-                            IdProductoTipo = 1
-                        };
-
-                        ListaProducto.Add(info);
+                            in_Producto_Info info = new in_Producto_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdProducto = Convert.ToInt32(reader.GetValue(0)),
+                                pr_codigo = Convert.ToString(reader.GetValue(1)).Trim(),
+                                pr_descripcion = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)).Trim(),
+                                pr_descripcion_2 = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? null : Convert.ToString(reader.GetValue(2)).Trim(),
+                                IdMarca = Convert.ToInt32(reader.GetValue(3)),
+                                IdPresentacion = Convert.ToString(reader.GetValue(4)),
+                                IdCategoria = Convert.ToString(reader.GetValue(5)),
+                                IdLinea = Convert.ToInt32(reader.GetValue(6)),
+                                IdGrupo = Convert.ToInt32(reader.GetValue(7)),
+                                IdSubGrupo = Convert.ToInt32(reader.GetValue(8)),
+                                IdCod_Impuesto_Iva = Convert.ToString(reader.GetValue(9)),
+                                IdUnidadMedida = Convert.ToString(reader.GetValue(10)),
+                                IdUnidadMedida_Consumo = Convert.ToString(reader.GetValue(11)),
+                                precio_1 = Convert.ToDouble(reader.GetValue(12)),
+                                IdProductoTipo = 1,
+                            };
+                            ListaProducto.Add(info);
+                        }                        
                     }
                     else
                         cont++;
