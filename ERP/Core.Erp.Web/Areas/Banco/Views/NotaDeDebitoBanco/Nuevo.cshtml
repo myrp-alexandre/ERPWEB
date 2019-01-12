@@ -9,123 +9,6 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-<script type="text/javascript">
-    $(function () {
-        $("#IdBanco").change(function () {
-            armar_diario();
-        });
-        $("#IdTipoNota").change(function () {
-            armar_diario();
-        });
-        $("#IdTipo_Persona").change(function () {
-            vaciar_detalles();
-            IdEntidad.SetValue(null);
-        });
-        armar_diario();
-    });
-    var selectedIDs;
-    function OnBeginCallback(s, e) {
-        e.customArgs["IdTipo_Persona"] = $("#IdTipo_Persona").val();
-        e.customArgs["Entidad"] = IdEntidad.GetValue();
-        e.customArgs["selectedIDs"] = selectedIDs;
-    }
-
-    function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdOrdenPago_op", GetSelectedFieldValuesCallback);
-    }
-    function GetSelectedFieldValuesCallback(values) {
-        //Capture all selected keys
-        selectedIDs = values.join(',');
-    }
-    function MostrarModal() {
-        selectedIDs = "";
-        GridView_DebitoBanco_op_x_cruzar.PerformCallback();
-        GridView_DebitoBanco_op_x_cruzar.UnselectRows();
-        $("#OpModal").modal("show");
-    }
-
-    function AddOP() {
-        var datos = {
-            IDs: selectedIDs,
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNew", "NotaDeDebitoBanco",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });
-        selectedIDs = "";
-        GridView_DebitoBanco_op_x_cruzar.PerformCallback();
-        GridView_DebitoBanco_op_x_cruzar.UnselectRows();
-        GridView_DebitoBanco_op.PerformCallback();
-        $("#OpModal").modal("hide");
-    }
-
-    function armar_diario() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdBanco: $("#IdBanco").val(),
-            IdTipoNota: $("#IdTipoNota").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("armar_diario", "NotaDeDebitoBanco",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                GridView_comprobante_detalle.PerformCallback();
-                $("#cb_Valor").val(data);
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-    function vaciar_detalles() {
-        var datos = {
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("vaciar_detalle", "ChequeBanco",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });
-        GridView_comprobante_detalle.PerformCallback();
-        GridView_DebitoBanco_op.PerformCallback();
-    }
-
-    function OnSelectedCtaCbleChanged() {
-        GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
-    }
-    function GrupoComboBox_BeginCallback(s, e) {
-        e.customArgs["pre_IdCtaCble"] = GridView_comprobante_detalle.GetEditor("IdCtaCble").GetValue();
-        e.customArgs["pre_fecha"] = moment(cb_Fecha.GetDate()).format('DD/MM/YYYY');
-    }
-</script>
-
 @using (Html.BeginForm("Nuevo", "NotaDeDebitoBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
@@ -220,7 +103,7 @@
             <div class="col-md-2 col-md-offset-4">
                 <div class="form-group">
                     <label for="cb_Valor">Valor</label>
-                    @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control", @readonly = "readonly" })
+                    @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control" })
                 </div>
             </div>
         </div>
@@ -290,3 +173,175 @@
     }
 }
 
+<script type="text/javascript">
+    $(function () {
+
+            $("#IdSucursal").change(function () {
+                GetListBancoPorSucursal();
+            });
+        $("#IdBanco").change(function () {
+            armar_diario();
+        });
+        $("#IdTipoNota").change(function () {
+            armar_diario();
+        });
+        $("#IdTipo_Persona").change(function () {
+            vaciar_detalles();
+            IdEntidad.SetValue(null);
+        });
+        armar_diario();
+    });
+
+    $("#cb_Valor").blur(function () {
+        SetValorDiario();
+    });
+
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        e.customArgs["IdTipo_Persona"] = $("#IdTipo_Persona").val();
+        e.customArgs["Entidad"] = IdEntidad.GetValue();
+        e.customArgs["selectedIDs"] = selectedIDs;
+    }
+
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdOrdenPago_op", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+    function MostrarModal() {
+        selectedIDs = "";
+        GridView_DebitoBanco_op_x_cruzar.PerformCallback();
+        GridView_DebitoBanco_op_x_cruzar.UnselectRows();
+        $("#OpModal").modal("show");
+    }
+
+    function SetValorDiario() {
+        var datos = {
+            cb_Valor: $("#cb_Valor").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetValorDiario", "NotaDeCreditoBanco", new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                GridView_comprobante_detalle.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function AddOP() {
+        var datos = {
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EditingAddNew", "NotaDeDebitoBanco",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        selectedIDs = "";
+        GridView_DebitoBanco_op_x_cruzar.PerformCallback();
+        GridView_DebitoBanco_op_x_cruzar.UnselectRows();
+        GridView_DebitoBanco_op.PerformCallback();
+        $("#OpModal").modal("hide");
+    }
+
+    function armar_diario() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdBanco: $("#IdBanco").val(),
+            IdTipoNota: $("#IdTipoNota").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("armar_diario", "NotaDeDebitoBanco",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridView_comprobante_detalle.PerformCallback();
+                $("#cb_Valor").val(data);
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function vaciar_detalles() {
+        var datos = {
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("vaciar_detalle", "ChequeBanco",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        GridView_comprobante_detalle.PerformCallback();
+        GridView_DebitoBanco_op.PerformCallback();
+    }
+
+    function OnSelectedCtaCbleChanged() {
+        GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
+    }
+    function GrupoComboBox_BeginCallback(s, e) {
+        e.customArgs["pre_IdCtaCble"] = IdCtaCble.GetValue();
+        e.customArgs["pre_fecha"] = moment(cb_Fecha.GetDate()).format('DD/MM/YYYY');
+    }
+function GetListBancoPorSucursal() {
+        $("#IdBanco").empty();
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetListBancoPorSucursal", "BancoCuenta",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdBanco").append("<option value=" + row.IdBanco + ">" + row.ba_descripcion+ "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>

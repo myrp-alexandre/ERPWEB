@@ -131,6 +131,9 @@
     <Compile Include="ba_Banco_Cuenta.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
+    <Compile Include="ba_Banco_Cuenta_x_tb_sucursal.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
     <Compile Include="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>

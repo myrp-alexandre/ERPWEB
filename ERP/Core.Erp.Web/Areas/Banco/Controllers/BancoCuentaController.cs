@@ -40,7 +40,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult GridViewPartial_cuentas()
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var model = bus_cuenta.get_list(IdEmpresa, true);
+            var model = bus_cuenta.get_list(IdEmpresa, 0, true);
             return PartialView("_GridViewPartial_cuentas", model);
         }
         #endregion
@@ -243,6 +243,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         #endregion
 
+        #region Json
+        public JsonResult GetListBancoPorSucursal(int IdEmpresa = 0, int IdSucursal = 0)
+        {
+            var lst = bus_cuenta.get_list(IdEmpresa, IdSucursal, false);
+            return Json(lst, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 
 

@@ -36,9 +36,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Metodos
-        private void cargar_combos(int IdEmpresa )
+        private void cargar_combos(int IdEmpresa, int IdSucursal )
         {
-            var lst_banco = bus_banco.get_list(IdEmpresa, false);
+            var lst_banco = bus_banco.get_list(IdEmpresa,IdSucursal, false);
             ViewBag.lst_banco = lst_banco;
         }
 
@@ -49,10 +49,10 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             ba_Talonario_cheques_x_banco_Info model = new ba_Talonario_cheques_x_banco_Info
             {
-               IdEmpresa = IdEmpresa,
+               IdEmpresa = IdEmpresa,               
                Estado_bool = true
             };
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
             return View(model);
         }
 
@@ -82,7 +82,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 };
                 if (!bus_talonario.guardarDB(info))
                 {
-                    cargar_combos(model.IdEmpresa);
+                    cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                     return View(model);
                 }
                 secuencia++;
@@ -95,7 +95,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ba_Talonario_cheques_x_banco_Info model = bus_talonario.get_info(IdEmpresa, IdBanco, Num_cheque);
                 if (model == null) 
             return RedirectToAction("Index");
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
             return View(model);
         }
 
@@ -104,7 +104,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             if(!bus_talonario.modificarDB(model))
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
             return RedirectToAction("Index");

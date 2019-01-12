@@ -175,7 +175,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         private void cargar_banco(int IdEmpresa)
         {
             
-            var lst_banco = bus_banco.get_list(IdEmpresa, false);
+            var lst_banco = bus_banco.get_list(IdEmpresa,0, false);
             lst_banco.Add(new Info.Banco.ba_Banco_Cuenta_Info
             {
                 IdBanco = 0,

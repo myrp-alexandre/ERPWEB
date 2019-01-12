@@ -88,7 +88,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Metodos
-        private void cargar_combos(int IdEmpresa)
+        private void cargar_combos(int IdEmpresa, int IdSucursal)
         {
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
@@ -96,7 +96,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var lst_tipo_nota = bus_tipo_nota.get_list(IdEmpresa, cl_enumeradores.eTipoCbteBancario.NCBA.ToString(), false);
             ViewBag.lst_tipo_nota = lst_tipo_nota;
 
-            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, false);
+            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, IdSucursal, false);
             ViewBag.lst_banco_cuenta = lst_banco_cuenta;
         }
         private bool validar(ba_Cbte_Ban_Info i_validar, ref string msg)
@@ -171,7 +171,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             };
             SessionFixed.TipoPersona = model.IdTipo_Persona;
             List_ct.set_list(model.lst_det_ct, model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, model.IdSucursal);
             return View(model);
         }
 
@@ -181,13 +181,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
             if (!bus_cbteban.guardarDB(model, cl_enumeradores.eTipoCbteBancario.NCBA))
             {
                 ViewBag.mensaje = "No se pudo guardar el registro";
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 
@@ -200,13 +200,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
             if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.NCBA))
             {
                 ViewBag.mensaje = "No se pudo modificar el registro";
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 
@@ -227,7 +227,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, model.IdSucursal);
             SessionFixed.TipoPersona = model.IdTipo_Persona;
             return View(model);
         }
@@ -246,7 +246,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(IdEmpresa, model.IdSucursal);
             return View(model);
         }
 
@@ -257,7 +257,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (!bus_cbteban.anularDB(model))
             {
                 ViewBag.mensaje = "No se pudo anular el registro";
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 
@@ -269,7 +269,28 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public JsonResult k(decimal IdTransaccionSession = 0)
         {
             var lst_ct = List_ct.get_list(IdTransaccionSession);
-            return Json(Math.Round(lst_ct.Sum(q => q.dc_Valor_debe),2,MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
+            return Json(Math.Round(lst_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SetValorDiario(float cb_Valor = 0, decimal IdTransaccionSession = 0)
+        {
+            var lst_ct = List_ct.get_list(IdTransaccionSession);
+            foreach (var item in lst_ct)
+            {
+                if (item.secuencia == 1)
+                {
+                    item.dc_Valor_debe = Math.Round(cb_Valor, 2, MidpointRounding.AwayFromZero);
+                    item.dc_Valor_haber = 0;
+                }
+                else
+                {
+                    item.dc_Valor_debe = 0;
+                    item.dc_Valor_haber = Math.Round(cb_Valor, 2, MidpointRounding.AwayFromZero);
+                }
+
+                item.dc_Valor = item.dc_Valor_debe > 0 ? item.dc_Valor_debe : item.dc_Valor_haber * -1;
+            }
+            
+            return Json(lst_ct, JsonRequestBehavior.AllowGet);
         }
         public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, int IdTipoNota = 0, decimal IdTransaccionSession = 0)
         {

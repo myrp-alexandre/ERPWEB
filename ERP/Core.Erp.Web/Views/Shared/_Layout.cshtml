@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="~/AdminLTE/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="~/AdminLTE/dist/css/skins/skin-blue-light.min.css">
+    <link rel="stylesheet" href="~/AdminLTE/dist/css/skins/skin-green-light.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -57,7 +57,7 @@
             new Script { ExtensionSuite = ExtensionSuite.TreeList }
         )
 </head>
-<body class="skin-blue layout-top-nav">
+<body class="skin-green-light layout-top-nav">
     <div class="wrapper">
         <header class="main-header">
 
@@ -98,9 +98,10 @@
                                         <a class="btn btn-primary" href="@Url.Action("Consulta","ReportesPorUsuario",new { Area = "General" },null)">Reportes</a>
                                         <a class="btn btn-default glyphicon glyphicon-expand" href="@Url.Action("Index","VisorDeVideo",new { Area = "General"},null)"></a>
                                     </div>
-                                   
+
                                     <div class="modal-body">
-                                        @Html.DevExpress().TreeView(settings => {
+                                        @Html.DevExpress().TreeView(settings =>
+                                   {
                                        settings.Name = "treeViewMenu";
                                        settings.EnableHotTrack = true;
                                        var Nodes = new List<Core.Erp.Info.SeguridadAcceso.seg_Menu_x_Empresa_x_Usuario_Info>();
@@ -120,7 +121,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                         [@Core.Erp.Web.Helps.SessionFixed.IdEmpresa] @Core.Erp.Web.Helps.SessionFixed.NomEmpresa                        
+                        [@Core.Erp.Web.Helps.SessionFixed.IdEmpresa] @Core.Erp.Web.Helps.SessionFixed.NomEmpresa
                     </div>
                     <!-- /.box-footer-->
                 </div>
@@ -138,7 +139,6 @@
              immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div>
-
 
     <!-- ./wrapper -->
 
