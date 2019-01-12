@@ -103,7 +103,7 @@
             <div class="col-md-2 col-md-offset-4">
                 <div class="form-group">
                     <label for="cb_Valor">Valor</label>
-                    @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control", @readonly = "readonly" })
+                    @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control" })
                 </div>
             </div>
         </div>
@@ -187,6 +187,11 @@
         });
         armar_diario();
     });
+
+    $("#cb_Valor").blur(function () {
+        SetValorDiario();
+    });
+
     var selectedIDs;
     function OnBeginCallback(s, e) {
         e.customArgs["IdTipo_Persona"] = $("#IdTipo_Persona").val();
@@ -206,6 +211,29 @@
         GridView_DebitoBanco_op_x_cruzar.PerformCallback();
         GridView_DebitoBanco_op_x_cruzar.UnselectRows();
         $("#OpModal").modal("show");
+    }
+
+    function SetValorDiario() {
+        var datos = {
+            cb_Valor: $("#cb_Valor").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetValorDiario", "NotaDeCreditoBanco", new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                GridView_comprobante_detalle.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
     }
 
     function AddOP() {
@@ -285,7 +313,7 @@
         GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
     }
     function GrupoComboBox_BeginCallback(s, e) {
-        e.customArgs["pre_IdCtaCble"] = GridView_comprobante_detalle.GetEditor("IdCtaCble").GetValue();
+        e.customArgs["pre_IdCtaCble"] = IdCtaCble.GetValue();
         e.customArgs["pre_fecha"] = moment(cb_Fecha.GetDate()).format('DD/MM/YYYY');
     }
 </script>

@@ -278,13 +278,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             {
                 if (item.secuencia == 1)
                 {
-                    item.dc_Valor_debe = cb_Valor;
+                    item.dc_Valor_debe = Math.Round(cb_Valor, 2, MidpointRounding.AwayFromZero);
                     item.dc_Valor_haber = 0;
                 }
                 else
                 {
                     item.dc_Valor_debe = 0;
-                    item.dc_Valor_haber = cb_Valor;
+                    item.dc_Valor_haber = Math.Round(cb_Valor, 2, MidpointRounding.AwayFromZero);
                 }
 
                 item.dc_Valor = item.dc_Valor_debe > 0 ? item.dc_Valor_debe : item.dc_Valor_haber * -1;

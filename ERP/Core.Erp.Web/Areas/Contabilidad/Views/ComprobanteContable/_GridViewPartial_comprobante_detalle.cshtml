@@ -87,6 +87,7 @@
         {
             column.FieldName = "dc_Valor_debe";
             column.Caption = "Debe";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(15);
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().SpinEdit(sp =>
@@ -99,6 +100,7 @@
         {
             column.FieldName = "dc_Valor_haber";
             column.Caption = "Haber";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(15);
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().SpinEdit(sp =>
