@@ -269,7 +269,28 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public JsonResult GetValorTotal(decimal IdTransaccionSession = 0)
         {
             var lst_ct = List_ct.get_list(IdTransaccionSession);
-            return Json(Math.Round(lst_ct.Sum(q => q.dc_Valor_debe),2,MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
+            return Json(Math.Round(lst_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SetValorDiario(float cb_Valor = 0, decimal IdTransaccionSession = 0)
+        {
+            var lst_ct = List_ct.get_list(IdTransaccionSession);
+            foreach (var item in lst_ct)
+            {
+                if (item.secuencia == 1)
+                {
+                    item.dc_Valor_debe = cb_Valor;
+                    item.dc_Valor_haber = 0;
+                }
+                else
+                {
+                    item.dc_Valor_debe = 0;
+                    item.dc_Valor_haber = cb_Valor;
+                }
+
+                item.dc_Valor = item.dc_Valor_debe > 0 ? item.dc_Valor_debe : item.dc_Valor_haber * -1;
+            }
+            
+            return Json(lst_ct, JsonRequestBehavior.AllowGet);
         }
         public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, int IdTipoNota = 0, decimal IdTransaccionSession = 0)
         {
