@@ -1,4 +1,5 @@
-﻿using Core.Erp.Bus.RRHH;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
@@ -24,6 +25,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_periodo_x_ro_Nomina_TipoLiqui_Bus bus_periodos_x_nomina = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
         List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lst_periodos = new List<ro_periodo_x_ro_Nomina_TipoLiqui_Info>();
         ro_rol_detalle_Bus bus_rol = new ro_rol_detalle_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         #endregion
         public ActionResult Index()
         {
@@ -68,11 +70,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_ajuste_anticipo", model);
         }
 
-        public JsonResult CargarEmpleados(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, decimal IdTransaccionSession = 0)
+        public JsonResult CargarEmpleados(int IdNomina_Tipo = 0, int IdSucursal=0, int IdNomina_TipoLiqui = 0, int IdPeriodo = 0, decimal IdTransaccionSession = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ro_rol_detalle_Bus bus_rol = new ro_rol_detalle_Bus();
-            var detalle = bus_rol.get_list_ajustar_anticipo(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
+            var detalle = bus_rol.get_list_ajustar_anticipo(IdEmpresa,IdSucursal, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo);
             ro_rol_detalle_Info_list.set_list(detalle, Convert.ToDecimal(IdTransaccionSession));
             
             return Json("", JsonRequestBehavior.AllowGet);
@@ -89,6 +91,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 ViewBag.lst_nomina = lista_nomina;
                 ViewBag.lst_nomina_tipo = lst_nomina_tipo;
                 ViewBag.lst_periodos = lst_periodos;
+                ViewBag.lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+
 
             }
             catch (Exception)

@@ -131,7 +131,7 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-        public List<ro_rol_detalle_Info> get_list_ajustar_anticipo(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo)
+        public List<ro_rol_detalle_Info> get_list_ajustar_anticipo(int IdEmpresa, int IdSucursal, int IdNominaTipo, int IdNominaTipoLiqui, int IdPeriodo)
         {
             try
             {
@@ -145,6 +145,7 @@ namespace Core.Erp.Data.RRHH
                                    && q.IdNominaTipo == IdNominaTipo
                                    && q.IdNominaTipoLiqui == IdNominaTipoLiqui
                                    && q.IdPeriodo == IdPeriodo
+                                   && q.IdSucursal==IdSucursal
                                    && q.Saldo > 0
                              select new ro_rol_detalle_Info
                              {

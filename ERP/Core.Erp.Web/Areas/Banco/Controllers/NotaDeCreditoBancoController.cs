@@ -266,7 +266,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Json
-        public JsonResult GetValorTotal(decimal IdTransaccionSession = 0)
+        public JsonResult k(decimal IdTransaccionSession = 0)
         {
             var lst_ct = List_ct.get_list(IdTransaccionSession);
             return Json(Math.Round(lst_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);

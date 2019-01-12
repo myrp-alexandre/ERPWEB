@@ -45,11 +45,11 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public List<ro_rol_detalle_Info> get_list_ajustar_anticipo(int idEmpresa, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo)
+        public List<ro_rol_detalle_Info> get_list_ajustar_anticipo(int idEmpresa, int IdSucursal, int idNominaTipo, int idNominaTipoLiqui, int idPeriodo)
         {
             try
             {
-                return odata.get_list_ajustar_anticipo(idEmpresa, idNominaTipo, idNominaTipoLiqui, idPeriodo);
+                return odata.get_list_ajustar_anticipo(idEmpresa,IdSucursal, idNominaTipo, idNominaTipoLiqui, idPeriodo);
             }
             catch (Exception)
             {

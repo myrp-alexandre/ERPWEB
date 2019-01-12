@@ -276,6 +276,26 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
+        public bool ValidarCodigoExists(int IdEmpresa, string Codigo)
+        {
+            try
+            {
+                Codigo = Codigo.Trim();
+                using (Entities_inventario db = new Entities_inventario())
+                {
+                    var pro = db.in_Producto.Where(q => q.IdEmpresa == IdEmpresa && q.pr_codigo == Codigo).FirstOrDefault();
+                    if (pro == null)
+                        return false;
+                    else
+                        return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public in_Producto_Info get_info(int IdEmpresa, decimal IdProducto)
         {
             try
