@@ -380,6 +380,28 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Json
+        public JsonResult SetValorDiario(float cb_Valor = 0, decimal IdTransaccionSession = 0)
+        {
+            var lst_ct = List_ct.get_list(IdTransaccionSession);
+            foreach (var item in lst_ct)
+            {
+                if (item.secuencia == 1)
+                {
+                    item.dc_Valor_debe = Math.Round(cb_Valor, 2, MidpointRounding.AwayFromZero);
+                    item.dc_Valor_haber = 0;
+                }
+                else
+                {
+                    item.dc_Valor_debe = 0;
+                    item.dc_Valor_haber = Math.Round(cb_Valor, 2, MidpointRounding.AwayFromZero);
+                }
+
+                item.dc_Valor = item.dc_Valor_debe > 0 ? item.dc_Valor_debe : item.dc_Valor_haber * -1;
+            }
+
+            return Json(lst_ct, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult armar_diario(int IdEmpresa =  0, int IdBanco = 0, int IdTipoNota = 0, decimal IdTransaccionSession = 0)
         {
             List_ct.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
