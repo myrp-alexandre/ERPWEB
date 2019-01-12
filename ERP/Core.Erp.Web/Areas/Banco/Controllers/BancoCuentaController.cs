@@ -27,6 +27,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ba_Banco_Cuenta_List ListaBanco = new ba_Banco_Cuenta_List();
         ba_Banco_Cbte_List ListaCbte = new ba_Banco_Cbte_List();
         tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
+        ba_Banco_Cuenta_x_tb_sucursal_Bus bus_cta_det = new ba_Banco_Cuenta_x_tb_sucursal_Bus();
+        ba_Banco_Det_List List_Det = new ba_Banco_Det_List();
 
         #endregion
 
@@ -72,10 +74,20 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_Banco_Cuenta_Info model = new ba_Banco_Cuenta_Info
             {
-                IdEmpresa = IdEmpresa
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+
             };
+            model.lstDet = new List<ba_Banco_Cuenta_x_tb_sucursal_Info>();
+            List_Det.set_list(model.lstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -84,6 +96,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult Nuevo(ba_Banco_Cuenta_Info model)
         {
             model.IdUsuario = SessionFixed.IdUsuario;
+            model.lstDet = List_Det.get_list(model.IdTransaccionSession);
             if (!bus_cuenta.guardarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -94,9 +107,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult Modificar(int IdEmpresa = 0, int IdBanco = 0)
 
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_Banco_Cuenta_Info model = bus_cuenta.get_info(IdEmpresa,IdBanco);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.lstDet = bus_cta_det.GetList(IdEmpresa, IdBanco);
+            List_Det.set_list(model.lstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -104,6 +126,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult Modificar(ba_Banco_Cuenta_Info model)
         {
             model.IdUsuarioUltMod = SessionFixed.IdUsuario;
+            model.lstDet = List_Det.get_list(model.IdTransaccionSession);
             if (!bus_cuenta.modificarDB(model))
             {
                 cargar_combos(model.IdEmpresa);
@@ -116,6 +139,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ba_Banco_Cuenta_Info model = bus_cuenta.get_info(IdEmpresa, IdBanco);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.lstDet = bus_cta_det.GetList(IdEmpresa, IdBanco);
+            List_Det.set_list(model.lstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -250,6 +276,54 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region Detalle
+        private void cargar_combos_Detalle()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_cuentas_x_sucursal()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            cargar_combos_Detalle();
+            var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_cuentas_x_sucursal", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Banco_Cuenta_x_tb_sucursal_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_Det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_Detalle();
+            return PartialView("_GridViewPartial_cuentas_x_sucursal", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Banco_Cuenta_x_tb_sucursal_Info info_det)
+        {
+
+            if (ModelState.IsValid)
+                List_Det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_Detalle();
+            return PartialView("_GridViewPartial_cuentas_x_sucursal", model);
+        }
+        public ActionResult EditingDelete(int Secuencia)
+        {
+            List_Det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_Detalle();
+            return PartialView("_GridViewPartial_cuentas_x_sucursal", model);
+        }
+        #endregion
+
     }
 
 
@@ -412,6 +486,51 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public void set_list(List<ba_Cbte_Ban_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
+    public class ba_Banco_Det_List
+    {
+        string Variable = "ba_Banco_Cuenta_x_tb_sucursal_Info";
+        public List<ba_Banco_Cuenta_x_tb_sucursal_Info> get_list(decimal IdTransaccionSession)
+        {
+
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ba_Banco_Cuenta_x_tb_sucursal_Info> list = new List<ba_Banco_Cuenta_x_tb_sucursal_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ba_Banco_Cuenta_x_tb_sucursal_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ba_Banco_Cuenta_x_tb_sucursal_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(ba_Banco_Cuenta_x_tb_sucursal_Info info_det, decimal IdTransaccionSession)
+        {
+            List<ba_Banco_Cuenta_x_tb_sucursal_Info> list = get_list(IdTransaccionSession);
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            info_det.IdSucursal = info_det.IdSucursal;
+
+
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(ba_Banco_Cuenta_x_tb_sucursal_Info info_det, decimal IdTransaccionSession)
+        {
+            ba_Banco_Cuenta_x_tb_sucursal_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.IdSucursal = info_det.IdSucursal;
+            edited_info.IdBanco = info_det.IdBanco;
+            edited_info.Secuencia = info_det.Secuencia;
+        }
+
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
+        {
+            List<ba_Banco_Cuenta_x_tb_sucursal_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
 
