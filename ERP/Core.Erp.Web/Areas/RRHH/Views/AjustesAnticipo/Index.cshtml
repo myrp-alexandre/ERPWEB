@@ -29,13 +29,15 @@
             </div>
         </div>
         <div class="box-body">
+            <div class="row">
 
-            <div class="col-md-12">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="IdSucursal">Sucursal*</label>
-                        @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
-                        @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="IdSucursal">Sucursal*</label>
+                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                            @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,8 +81,8 @@
                 <button type="submit" class="btn btn-primary" id="btn_guardar">Guardar</button>
             </div>
         </div>
-        <!-- /.box-body -->
-    </div>
+            <!-- /.box-body -->
+        </div>
 
     <div class="box">
         <div class="box-header with-border">
