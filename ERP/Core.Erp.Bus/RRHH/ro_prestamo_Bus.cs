@@ -185,6 +185,15 @@ namespace Core.Erp.Bus.RRHH
                     
                 }
 
+                double diferencia =info.MontoSol- info.lst_detalle.Sum(v => v.TotalCuota);
+                if(diferencia!=0)
+                {
+                    foreach (var item in info.lst_detalle)
+                    {
+                        item.TotalCuota = item.TotalCuota + diferencia;
+                        break;
+                    }
+                }
 
                 return info;
             }
