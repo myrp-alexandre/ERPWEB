@@ -80,6 +80,7 @@
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
+            this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField41 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField42 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField43 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
@@ -108,7 +109,6 @@
             this.xrPivotGridField39 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField40 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
-            this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -560,6 +560,7 @@
             this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
             this.xrPivotGrid1.OptionsPrint.MergeColumnFieldValues = false;
             this.xrPivotGrid1.OptionsPrint.MergeRowFieldValues = false;
+            this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.True;
             this.xrPivotGrid1.OptionsView.RowTotalsLocation = DevExpress.XtraPivotGrid.PivotRowTotalsLocation.Tree;
             this.xrPivotGrid1.OptionsView.RowTreeOffset = 10;
             this.xrPivotGrid1.OptionsView.RowTreeWidth = 220;
@@ -570,6 +571,14 @@
             this.xrPivotGrid1.OptionsView.ShowRowGrandTotalHeader = false;
             this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(397.2917F, 81.25F);
+            // 
+            // pivotGridField4
+            // 
+            this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.pivotGridField4.AreaIndex = 0;
+            this.pivotGridField4.Caption = "Sucursal";
+            this.pivotGridField4.FieldName = "Su_Descripcion";
+            this.pivotGridField4.Name = "pivotGridField4";
             // 
             // xrPivotGridField41
             // 
@@ -794,14 +803,6 @@
             this.p_IdSucursal.Type = typeof(short);
             this.p_IdSucursal.ValueInfo = "0";
             this.p_IdSucursal.Visible = false;
-            // 
-            // pivotGridField4
-            // 
-            this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.pivotGridField4.AreaIndex = 0;
-            this.pivotGridField4.Caption = "Sucursal";
-            this.pivotGridField4.FieldName = "Su_Descripcion";
-            this.pivotGridField4.Name = "pivotGridField4";
             // 
             // ROL_001_Rpt
             // 
