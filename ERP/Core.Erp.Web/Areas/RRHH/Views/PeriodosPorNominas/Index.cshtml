@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.General.tb_sis_reporte_x_seg_usuario_Info
+﻿@model Core.Erp.Info.RRHH.ro_periodo_x_ro_Nomina_TipoLiqui_Info
 @{
     ViewBag.Title = "Asignación de reportes por usuario";
 
@@ -60,38 +60,47 @@
 @using (Html.BeginForm("Index", "ReportesPorUsuario", FormMethod.Post, new { role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdTransaccionSession)
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="IdEmpresa">Empresa</label>
-                @Html.DropDownListFor(q => q.IdEmpresa, new SelectList(ViewBag.lst_empresa, "IdEmpresa", "em_nombre"), new { @class = "form-control", @id = "IdEmpresa" })
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="IdUsuario">Usuario</label>
-                @Html.DropDownListFor(q => q.IdUsuario, new SelectList(ViewBag.lst_usuario, "IdUsuario", "Nombre"), new { @class = "form-control", @id = "IdUsuario" })
-            </div>
-        </div>
-    </div>
-</div>
-<div class="box-footer">
-    <button type="submit" class="btn btn-default" id="btn_buscar">Buscar</button>
-    <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
-</div>
 
-<div class="row">
-    <div class="col-md-6">
+    <div class="row">
         <div class="col-md-12">
-            @Html.Action("GridViewPartial_ReportesPorAsignar")
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="FechaInicio">Nómina*</label>
+                    @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="row">
         <div class="col-md-12">
-            @Html.Action("GridViewPartial_ReportesAsignados")
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="FechaInicio">Proceso de la nómina*</label>
+                    @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-default" id="btn_buscar">Buscar</button>
+        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_perioos")
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_periodos_por_nominas")
+            </div>
+        </div>
+    </div>
 
 }
