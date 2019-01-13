@@ -29,7 +29,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             #endregion
             ro_periodo_x_ro_Nomina_TipoLiqui_Info model = new ro_periodo_x_ro_Nomina_TipoLiqui_Info
             {
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
+                IdEmpresa=Convert.ToInt32(SessionFixed.IdEmpresa)
             };
             cargar_combos(0,0);
             return View(model);
@@ -76,8 +77,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "")
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-           // periodos_x_nominas.eliminarDB(IdEmpresa, IdUsuario);
-          //  var resultado = bus_reporte_x_usuario.guardarDB(List_det.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList(), IdEmpresa, IdUsuario);
+
+            var lista_grabar = List_det.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList();
+                var resultado = periodos_x_nominas.guardarDB(lista_grabar);
             return Json("", JsonRequestBehavior.AllowGet);
         }
         

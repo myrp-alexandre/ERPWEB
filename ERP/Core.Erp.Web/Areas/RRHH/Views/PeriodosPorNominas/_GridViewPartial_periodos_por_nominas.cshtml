@@ -6,7 +6,10 @@
         settings.CallbackRouteValues = new { Controller = "PeriodosPorNominas", Action = "GridViewPartial_periodos_por_nominas" };
         settings.KeyFieldName = "IdPeriodo";
         settings.Width = Unit.Percentage(100);
-        settings.SettingsText.Title = "Periodos por nominas";
+
+        //Configuracion cabecera
+        settings.Settings.ShowTitlePanel = true;
+        settings.SettingsText.Title = "Periodos asignados";
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -36,7 +39,7 @@
         //Configuracion exportacion
         settings.SettingsExport.EnableClientSideExportAPI = true;
         settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
-       
+
         settings.SettingsExport.RenderBrick = (sender, e) =>
         {
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
@@ -45,14 +48,7 @@
         settings.Columns.Add("IdPeriodo", "Periodo").Width = Unit.Percentage(20);
         settings.Columns.Add("pe_FechaIni", "Fecha inicio").Width = Unit.Percentage(40);
         settings.Columns.Add("pe_FechaFin", "Fecha fin").Width = Unit.Percentage(35);
-        settings.Columns.Add(column =>
-        {
-            column.SetDataItemTemplateContent(c =>
-            {
-                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('"+Url.Action(DataBinder.Eval(c.DataItem, "mvc_accion").ToString(), DataBinder.Eval(c.DataItem, "mvc_controlador").ToString(), new { Area = DataBinder.Eval(c.DataItem, "mvc_area").ToString() }, Request.Url.Scheme)+"');\"></span>");
-            });
-            column.Width = Unit.Percentage(5);
-        });
+
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
 
     });
