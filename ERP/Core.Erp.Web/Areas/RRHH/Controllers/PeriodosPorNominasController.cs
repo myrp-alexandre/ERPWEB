@@ -17,6 +17,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         ro_periodo_x_ro_Nomina_TipoLiqui_Info_list List_det = new ro_periodo_x_ro_Nomina_TipoLiqui_Info_list();
         ro_periodo_x_ro_Nomina_TipoLiqui_Bus periodos_x_nominas = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
+        ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
+        ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
         public ActionResult Index()
         {
             #region Validar Session
@@ -29,24 +31,29 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
-            cargar_combos();
+            cargar_combos(0,0);
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(ro_periodo_x_ro_Nomina_TipoLiqui_Info model)
         {
-            cargar_combos();
+            cargar_combos(model.IdNomina_Tipo, model.IdNomina_TipoLiqui);
             List_det.set_list(periodos_x_nominas.get_list(model.IdEmpresa, model.IdNomina_Tipo, model.IdNomina_TipoLiqui), model.IdTransaccionSession);
             return View(model);
         }
-        private void cargar_combos()
+        private void cargar_combos(int IdNomina_Tipo, int IdNomina_Tipo_Liqui)
         {
-           
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lista_nomina = bus_nomina.get_list(IdEmpresa, false);
+            var lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina_Tipo);
+            ViewBag.lst_nomina = lista_nomina;
+            ViewBag.lst_nomina_tipo = lst_nomina_tipo;
+
         }
         #endregion
         #region grillas
 
-       
+
         public ActionResult GridViewPartial_periodos()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
