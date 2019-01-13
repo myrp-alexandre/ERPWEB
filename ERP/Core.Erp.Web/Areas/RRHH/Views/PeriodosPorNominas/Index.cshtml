@@ -12,7 +12,7 @@
 <script>
     function EditingUpdate(ID) {
         var datos = {
-            CodReporte: ID
+            IdPeriodo: ID
         }
         $.ajax({
             type: 'POST',
@@ -28,8 +28,8 @@
             error: function (error) {
             }
         });
-        GridView_periodos.PerformCallback();
-        GridView_periodos_por_nominas.PerformCallback();
+        GridViewPartial_periodos.PerformCallback();
+        GridViewPartial_periodos_por_nominas.PerformCallback();
     }
 
     function guardar() {
@@ -59,7 +59,8 @@
 
 @using (Html.BeginForm("Index", "PeriodosPorNominas", FormMethod.Post, new { role = "form", @class = "form", @id = "myform" }))
 {
-    @Html.HiddenFor(q => q.IdTransaccionSession)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id= "IdTransaccionSession" })
+        @Html.HiddenFor(q => q.IdEmpresa)
 
     <div class="row">
         <div class="col-md-12">
@@ -109,7 +110,6 @@
         $(function ()
         {
             cargar_tipo_liquidacion_nomina();
-            cargar_periodos_x_nomina();
         });
 $("#IdNomina_Tipo").change(function () {
         $("#IdNomina_TipoLiqui").empty();
@@ -117,11 +117,6 @@ $("#IdNomina_Tipo").change(function () {
 
         });
 
-    $("#IdNomina_TipoLiqui").change(function () {
-           $("#IdPeriodo").empty();
-            cargar_periodos_x_nomina();
-        });
-   
 
 
         function cargar_tipo_liquidacion_nomina() {

@@ -38,8 +38,9 @@ namespace Core.Erp.Data.RRHH
 
                     
                         Lista.AddRange((from q in Context.ro_periodo
-                                        where !Context.ro_periodo_x_ro_Nomina_TipoLiqui.Any(meu => meu.IdEmpresa == q.IdEmpresa && meu.IdNomina_Tipo == IdNominTipo && meu.IdNomina_TipoLiqui == IdNominaTipo_liq)
+                                        where !Context.ro_periodo_x_ro_Nomina_TipoLiqui.Any(meu => meu.IdEmpresa == q.IdEmpresa && meu.IdPeriodo==q.IdPeriodo&& meu.IdNomina_Tipo == IdNominTipo && meu.IdNomina_TipoLiqui == IdNominaTipo_liq)
                                         && q.pe_estado == "A"
+                                        && q.IdEmpresa==IdEmpresa
                                         select new ro_periodo_x_ro_Nomina_TipoLiqui_Info
                                         {
                                             IdEmpresa = IdEmpresa,

@@ -29,7 +29,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             #endregion
             ro_periodo_x_ro_Nomina_TipoLiqui_Info model = new ro_periodo_x_ro_Nomina_TipoLiqui_Info
             {
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
+                IdEmpresa=Convert.ToInt32(SessionFixed.IdEmpresa)
             };
             cargar_combos(0,0);
             return View(model);
