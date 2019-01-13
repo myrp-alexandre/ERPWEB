@@ -8,15 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-<script>
 
-    function MostarPrecios() {
-        $("#contrasena_admin").val("");
-        $("#ModalMostrarPrecios").modal("show");
-
-    }
-
-</script>
 @using (Html.BeginForm("Anular", "Producto", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
@@ -131,14 +123,6 @@
                             <label for="Aparece_modu_Compras">@Html.CheckBoxFor(q => q.Aparece_modu_Compras, new { @id = "Aparece_modu_Compras" }) Compras</label>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-
-                    <button type="button" class="btn btn-primary" id="btn_desbloquear" onclick="MostarPrecios();">
-                        <i class="fa fa-lock"></i> Mostrar precios
-                    </button>
                 </div>
             </div>
         </div>
@@ -310,40 +294,7 @@
 
         </div>
     </div>
-
-    <div class="modal fade" id="ModalMostrarPrecios" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Ingrese la contraseña Administrador</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group has-feedback">
-                                @Html.TextBoxFor(q => q.IdUsuarioAut, new { @class = "form-control", @placeholder = "Usuario", @id = "IdUsuarioAut" })
-                                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-                            </div>
-                            <div class="form-group has-feedback">
-                                @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @placeholder = "Contraseña desbloqueo", @id = "contrasena_admin" })
-                                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary" onclick="MostrarPrecios();">Mostrar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Producto", new { Area = "Inventario" }, null)">Cancelar</a>
@@ -355,7 +306,6 @@
 <script>
         $(function () {
 
-            $("#link_precios").hide();
             get_info_producto_tipo();
             ValidarTabImagen();
         });
@@ -375,52 +325,6 @@
         $("#IdGrupo").change(function () {
             cargar_subgrupos();
         });
-        $("#signo_2").change(function () {
-            calcular_precio_2("SIGNO");
-        });
-        $("#porcentaje_2").keyup(function () {
-            calcular_precio_2("PORCENTAJE");
-        });
-        $("#precio_2").keyup(function () {
-            calcular_precio_2("VALOR");
-        });
-
-        $("#signo_3").change(function () {
-            calcular_precio_3("SIGNO");
-        });
-        $("#porcentaje_3").keyup(function () {
-            calcular_precio_3("PORCENTAJE");
-        });
-        $("#precio_3").keyup(function () {
-            calcular_precio_3("VALOR");
-        });
-
-        $("#signo_4").change(function () {
-            calcular_precio_4("SIGNO");
-        });
-        $("#porcentaje_4").keyup(function () {
-            calcular_precio_4("PORCENTAJE");
-        });
-        $("#precio_4").keyup(function () {
-            calcular_precio_4("VALOR");
-        });
-
-        $("#signo_5").change(function () {
-            calcular_precio_5("SIGNO");
-        });
-        $("#porcentaje_5").keyup(function () {
-            calcular_precio_5("PORCENTAJE");
-        });
-        $("#precio_5").keyup(function () {
-            calcular_precio_5("VALOR");
-        });
-        $("#precio_1").keyup(function () {
-            calcular_precio_2("PORCENTAJE");
-            calcular_precio_3("PORCENTAJE");
-            calcular_precio_4("PORCENTAJE");
-            calcular_precio_5("PORCENTAJE");
-        });
-
         function cargar_lineas() {
             $("#IdLinea").empty();
             $("#IdGrupo").empty();
@@ -528,168 +432,6 @@
         }
     }
 
-    function calcular_precio_2(tipo) {
-        var precio_1 = Number($("#precio_1").val());
-        var precio = Number($("#precio_2").val());
-        var signo = $("#signo_2").val();
-        var porcentaje = Number($("#porcentaje_2").val());
-        var resultado;
-        switch (tipo) {
-            case "SIGNO":
-                if (signo == "-") {
-                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
-                } else {
-                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
-                }
-                $("#precio_2").val(Math.abs(Round(resultado, 2)));
-                break;
-            case "PORCENTAJE":
-                if (signo == "-") {
-                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
-                } else {
-                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
-                }
-                $("#precio_2").val(Math.abs(Round(resultado, 2)));
-                break;
-            case "VALOR":
-                if (precio_1 > precio) {
-                    $("#signo_2").val("-");
-                    resultado = 100 - ((precio / precio_1) * 100);
-                    $("#porcentaje_2").val(Math.abs(Round(resultado, 2)));
-                } else
-                    if (precio > precio_1) {
-                        $("#signo_2").val("+");
-                        resultado = 100 - ((precio / precio_1) * 100);
-                        $("#porcentaje_2").val(Math.abs(Round(resultado, 2)));
-                    } else {
-                        $("#signo_2").val("-");
-                        $("#porcentaje_2").val(0);
-                    }
-                break;
-        }
-    }
-    function calcular_precio_3(tipo) {
-        var precio_1 = Number($("#precio_1").val());
-        var precio = Number($("#precio_3").val());
-        var signo = $("#signo_3").val();
-        var porcentaje = Number($("#porcentaje_3").val());
-        var resultado;
-        switch (tipo) {
-            case "SIGNO":
-                if (signo == "-") {
-                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
-                } else {
-                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
-                }
-                $("#precio_3").val(Math.abs(Round(resultado, 2)));
-                break;
-            case "PORCENTAJE":
-                if (signo == "-") {
-                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
-                } else {
-                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
-                }
-                $("#precio_3").val(Math.abs(Round(resultado, 2)));
-                break;
-            case "VALOR":
-                if (precio_1 > precio) {
-                    $("#signo_3").val("-");
-                    resultado = 100 - ((precio / precio_1) * 100);
-                    $("#porcentaje_3").val(Math.abs(Round(resultado, 2)));
-                } else
-                    if (precio > precio_1) {
-                        $("#signo_3").val("+");
-                        resultado = 100 - ((precio / precio_1) * 100);
-                        $("#porcentaje_3").val(Math.abs(Round(resultado, 2)));
-                    } else {
-                        $("#signo_3").val("-");
-                        $("#porcentaje_3").val(0);
-                    }
-                break;
-        }
-    }
-
-    function calcular_precio_4(tipo) {
-        var precio_1 = Number($("#precio_1").val());
-        var precio = Number($("#precio_4").val());
-        var signo = $("#signo_4").val();
-        var porcentaje = Number($("#porcentaje_4").val());
-        var resultado;
-        switch (tipo) {
-            case "SIGNO":
-                if (signo == "-") {
-                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
-                } else {
-                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
-                }
-                $("#precio_4").val(Math.abs(Round(resultado, 2)));
-                break;
-            case "PORCENTAJE":
-                if (signo == "-") {
-                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
-                } else {
-                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
-                }
-                $("#precio_4").val(Math.abs(Round(resultado, 2)));
-                break;
-            case "VALOR":
-                if (precio_1 > precio) {
-                    $("#signo_4").val("-");
-                    resultado = 100 - ((precio / precio_1) * 100);
-                    $("#porcentaje_4").val(Math.abs(Round(resultado, 2)));
-                } else
-                    if (precio > precio_1) {
-                        $("#signo_4").val("+");
-                        resultado = 100 - ((precio / precio_1) * 100);
-                        $("#porcentaje_4").val(Math.abs(Round(resultado, 2)));
-                    } else {
-                        $("#signo_4").val("-");
-                        $("#porcentaje_4").val(0);
-                    }
-                break;
-        }
-    }
-
-    function calcular_precio_5(tipo) {
-        var precio_1 = Number($("#precio_1").val());
-        var precio = Number($("#precio_5").val());
-        var signo = $("#signo_5").val();
-        var porcentaje = Number($("#porcentaje_5").val());
-        var resultado;
-        switch (tipo) {
-            case "SIGNO":
-                if (signo == "-") {
-                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
-                } else {
-                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
-                }
-                $("#precio_5").val(Math.abs(Round(resultado, 2)));
-                break;
-            case "PORCENTAJE":
-                if (signo == "-") {
-                    resultado = precio_1 - (precio_1 * (porcentaje / 100));
-                } else {
-                    resultado = precio_1 + (precio_1 * (porcentaje / 100));
-                }
-                $("#precio_5").val(Math.abs(Round(resultado, 2)));
-                break;
-            case "VALOR":
-                if (precio_1 > precio) {
-                    $("#signo_5").val("-");
-                    resultado = 100 - ((precio / precio_1) * 100);
-                    $("#porcentaje_5").val(Math.abs(Round(resultado, 2)));
-                } else
-                    if (precio > precio_1) {
-                        $("#signo_5").val("+");
-                        resultado = 100 - ((precio / precio_1) * 100);
-                        $("#porcentaje_5").val(Math.abs(Round(resultado, 2)));
-                    } else {
-                        $("#signo_5").val("-");
-                        $("#porcentaje_5").val(0);
-                    }
-                break;
-        }
-    }
 
     function get_info_producto_tipo() {
         var tipo = $("#IdProductoTipo").val();
@@ -735,37 +477,4 @@
         }
     }
 
-    function MostrarPrecios() {
-
-        var datos = {
-            IdUsuarioAut: $("#IdUsuarioAut").val(),
-            contrasena_admin: $("#contrasena_admin").val(),
-            IdProducto: $("#IdProducto").val(),
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("MostrarPrecios", "Producto",new { Area = "Inventario"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data == "AUTORIZADO") {
-                    $("#link_precios").show();
-                    $("#link_general").click();
-                }
-                else {
-                    $("#link_precios").hide();
-                    $("#link_general").click();
-
-                }
-
-            },
-            error: function (error) {
-            }
-        });
-        $("#ModalMostrarPrecios").modal("hide");
-    }
 </script>
