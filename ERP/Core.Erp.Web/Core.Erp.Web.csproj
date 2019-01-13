@@ -907,6 +907,12 @@
     <Compile Include="Reportes\Facturacion\FAC_012_Rpt.Designer.cs">
       <DependentUpon>FAC_012_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_013_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_013_Rpt.Designer.cs">
+      <DependentUpon>FAC_013_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Importacion\IMP_002_gastos_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>

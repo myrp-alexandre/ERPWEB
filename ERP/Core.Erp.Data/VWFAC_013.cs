@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VWFAC_006
+    public partial class VWFAC_013
     {
         public int IdEmpresa { get; set; }
         public string Su_CodigoEstablecimiento { get; set; }
@@ -26,28 +26,28 @@ namespace Core.Erp.Data
         public string direccion_cliente { get; set; }
         public string celular_cliente { get; set; }
         public string telefono_cliente { get; set; }
-        public decimal IdProforma { get; set; }
+        public Nullable<decimal> IdProforma { get; set; }
         public int Secuencia { get; set; }
         public string nom_TerminoPago { get; set; }
-        public int pf_plazo { get; set; }
-        public string pf_codigo { get; set; }
-        public System.DateTime pf_fecha { get; set; }
-        public bool estado { get; set; }
-        public string pf_atencion_a { get; set; }
+        public decimal vt_plazo { get; set; }
+        public string CodCbteVta { get; set; }
+        public System.DateTime vt_fecha { get; set; }
+        public string Estado { get; set; }
         public string Codigo { get; set; }
         public string Ve_Vendedor { get; set; }
-        public double pd_cantidad { get; set; }
-        public double pd_precio { get; set; }
-        public double pd_por_descuento_uni { get; set; }
-        public double pd_descuento_uni { get; set; }
-        public double pd_precio_final { get; set; }
-        public double pd_subtotal { get; set; }
-        public double pd_por_iva { get; set; }
-        public double pd_iva { get; set; }
+        public double vt_cantidad { get; set; }
+        public double vt_Precio { get; set; }
+        public double vt_PorDescUnitario { get; set; }
+        public double vt_DescUnitario { get; set; }
+        public double vt_PrecioFinal { get; set; }
+        public double vt_Subtotal { get; set; }
+        public double vt_por_iva { get; set; }
+        public double vt_iva { get; set; }
         public double pd_total { get; set; }
         public string pr_observacion { get; set; }
         public decimal IdProducto { get; set; }
-        public int pr_dias_entrega { get; set; }
-        public string pf_observacion { get; set; }
+        public string vt_Observacion { get; set; }
+        public int IdBodega { get; set; }
+        public decimal IdCbteVta { get; set; }
     }
 }
