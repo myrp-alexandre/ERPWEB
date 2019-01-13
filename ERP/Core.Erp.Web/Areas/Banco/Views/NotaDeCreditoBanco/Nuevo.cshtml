@@ -111,7 +111,6 @@
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_diario">
-                @*@Html.Action("GridViewPartial_comprobante_detalle_Credito")*@
                 @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
             </div>
         </div>
@@ -129,8 +128,20 @@
     $(function () {
         $("#IdSucursal").change(function () {
             GetListBancoPorSucursal();
+            armar_diario();
         });
-    })
+        $("#IdBanco").change(function () {
+            armar_diario();
+        });
+        $("#IdTipoNota").change(function () {
+            armar_diario();
+        });
+        $("#cb_Valor").change(function () {
+            armar_diario();
+        });
+        armar_diario();
+    })    
+
 function GetListBancoPorSucursal() {
         $("#IdBanco").empty();
         var datos = {
@@ -154,60 +165,24 @@ function GetListBancoPorSucursal() {
             error: function (error) {
             }
         });
-    }
+}
+
     function OnSelectedCtaCbleChanged() {
         GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
     }
+
     function GrupoComboBox_BeginCallback(s, e) {
         e.customArgs["pre_IdCtaCble"] = IdCtaCble.GetValue();
         e.customArgs["pre_fecha"] = moment(cb_Fecha.GetDate()).format('DD/MM/YYYY');
     }
-
-    $(function () {
-        $("#IdBanco").change(function () {
-            armar_diario();
-        });
-        $("#IdTipoNota").change(function () {
-            armar_diario();
-        });
-        armar_diario();
-    });
-
-    $("#cb_Valor").blur(function () {
-        SetValorDiario();
-    });
-
-    function SetValorDiario() {
-        var datos = {
-            cb_Valor: $("#cb_Valor").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("SetValorDiario", "NotaDeCreditoBanco", new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                console.log(data);
-                GridView_comprobante_detalle.PerformCallback();
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-    var selectedIDs;
 
     function armar_diario() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdBanco: $("#IdBanco").val(),
             IdTipoNota: $("#IdTipoNota").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            Valor: $("#cb_Valor").val()
         }
         $.ajax({
             type: 'POST',
@@ -219,34 +194,10 @@ function GetListBancoPorSucursal() {
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                //$("#cb_Valor").val(data);
             },
             error: function (error) {
             }
         });
         GridView_comprobante_detalle.PerformCallback();
     }
-
-    function GetValorTotal() {
-        var datos = {
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetValorTotal", "NotaDeCreditoBanco",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                //$("#cb_Valor").val(data);
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-
 </script>

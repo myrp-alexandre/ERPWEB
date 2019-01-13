@@ -266,33 +266,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Json
-        public JsonResult k(decimal IdTransaccionSession = 0)
-        {
-            var lst_ct = List_ct.get_list(IdTransaccionSession);
-            return Json(Math.Round(lst_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult SetValorDiario(float cb_Valor = 0, decimal IdTransaccionSession = 0)
-        {
-            var lst_ct = List_ct.get_list(IdTransaccionSession);
-            foreach (var item in lst_ct)
-            {
-                if (item.secuencia == 1)
-                {
-                    item.dc_Valor_debe = Math.Round(cb_Valor, 2, MidpointRounding.AwayFromZero);
-                    item.dc_Valor_haber = 0;
-                }
-                else
-                {
-                    item.dc_Valor_debe = 0;
-                    item.dc_Valor_haber = Math.Round(cb_Valor, 2, MidpointRounding.AwayFromZero);
-                }
-
-                item.dc_Valor = item.dc_Valor_debe > 0 ? item.dc_Valor_debe : item.dc_Valor_haber * -1;
-            }
-            
-            return Json(lst_ct, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, int IdTipoNota = 0, decimal IdTransaccionSession = 0)
+        public JsonResult armar_diario(int IdEmpresa = 0, int IdBanco = 0, int IdTipoNota = 0, decimal IdTransaccionSession = 0, double Valor = 0)
         {
             List_ct.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
 
@@ -305,6 +279,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 List_ct.AddRow(new ct_cbtecble_det_Info
                 {
                     IdCtaCble = bco.IdCtaCble,
+                    dc_Valor = Math.Round(Valor, 2, MidpointRounding.AwayFromZero),
+                    dc_Valor_debe = Math.Round(Valor, 2, MidpointRounding.AwayFromZero),
                     dc_para_conciliar = true
                 },IdTransaccionSession);
             }            
@@ -315,6 +291,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 List_ct.AddRow(new ct_cbtecble_det_Info
                 {
                     IdCtaCble = tipo_nota.IdCtaCble,
+                    dc_Valor = Math.Round(Valor, 2, MidpointRounding.AwayFromZero) *-1,
+                    dc_Valor_haber = Math.Round(Valor, 2, MidpointRounding.AwayFromZero),
                     dc_para_conciliar = false
                 }, IdTransaccionSession);
             }
@@ -322,6 +300,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             {
                 List_ct.AddRow(new ct_cbtecble_det_Info
                 {
+                    dc_Valor = Math.Round(Valor, 2, MidpointRounding.AwayFromZero)*-1,
+                    dc_Valor_haber = Math.Round(Valor, 2, MidpointRounding.AwayFromZero),
                     IdCtaCble = null,
                 }, IdTransaccionSession);
             }
