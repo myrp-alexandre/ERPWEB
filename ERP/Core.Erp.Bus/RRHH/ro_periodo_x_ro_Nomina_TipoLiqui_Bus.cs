@@ -46,6 +46,18 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
+        public bool guardarDB(List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> info)
+        {
+            try
+            {
+                return odata.guardarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool guardarDB(ro_periodo_x_ro_Nomina_TipoLiqui_Info info)
         {
             try
@@ -59,7 +71,7 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-      
+
         public bool anularDB(ro_periodo_x_ro_Nomina_TipoLiqui_Info info)
         {
             try

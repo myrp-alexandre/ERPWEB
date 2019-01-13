@@ -76,8 +76,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "")
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-           // periodos_x_nominas.eliminarDB(IdEmpresa, IdUsuario);
-          //  var resultado = bus_reporte_x_usuario.guardarDB(List_det.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList(), IdEmpresa, IdUsuario);
+
+            var lista_grabar = List_det.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList();
+                var resultado = periodos_x_nominas.guardarDB(lista_grabar);
             return Json("", JsonRequestBehavior.AllowGet);
         }
         

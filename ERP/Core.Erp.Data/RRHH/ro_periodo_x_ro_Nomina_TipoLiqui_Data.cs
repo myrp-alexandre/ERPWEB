@@ -9,38 +9,48 @@ namespace Core.Erp.Data.RRHH
   public  class ro_periodo_x_ro_Nomina_TipoLiqui_Data
     {
 
-        public List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> get_list(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiq)
+        public List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> get_list(int IdEmpresa, int IdNominTipo, int IdNominaTipo_liq)
         {
             try
             {
                 List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> Lista;
-
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    Lista = (from q in Context.ro_periodo_x_ro_Nomina_TipoLiqui
-                             join p in Context.ro_periodo
-                             on q.IdPeriodo equals p.IdPeriodo
+                    Lista = (from q in Context.ro_periodo
+                             join r in Context.ro_periodo_x_ro_Nomina_TipoLiqui
+                             on new { q.IdEmpresa , q.IdPeriodo} equals new { r.IdEmpresa, r.IdPeriodo }
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdNomina_Tipo == IdNominaTipo
-                             && q.IdNomina_TipoLiqui == IdNominaTipoLiq
-                             && q.IdEmpresa == p.IdEmpresa
+                             && r.IdNomina_Tipo == IdNominTipo
+                             && r.IdNomina_TipoLiqui==IdNominaTipo_liq
                              select new ro_periodo_x_ro_Nomina_TipoLiqui_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
-                                 IdNomina_Tipo = q.IdNomina_Tipo,
-                                 IdNomina_TipoLiqui = q.IdNomina_TipoLiqui,
                                  IdPeriodo=q.IdPeriodo,
-                                 Contabilizado = q.Contabilizado,
-                                 Cerrado = q.Cerrado,
-                                 Procesado = q.Procesado,
-                                 pe_FechaIni = p.pe_FechaIni,
-                                 pe_FechaFin = p.pe_FechaFin
+                                  IdNomina_Tipo=r.IdNomina_Tipo,
+                                  IdNomina_TipoLiqui=r.IdNomina_TipoLiqui,
+                                  Procesado=r.Procesado,
+                                  Cerrado=r.Cerrado,
+                                  Contabilizado=r.Contabilizado,
+                                  pe_FechaFin=q.pe_FechaFin,
+                                  pe_FechaIni=q.pe_FechaIni,
+                                 seleccionado = true
                              }).ToList();
-                }
-                  Lista.ForEach(v => v.descripcion = v.pe_FechaIni.ToString("dd/MM/yyyy").Substring(0, 10) + "                  al                  " + v.pe_FechaFin.ToString("dd/MM/yyyy").Substring(0, 10));
-               
-                return Lista;
 
+                    
+                        Lista.AddRange((from q in Context.ro_periodo
+                                        where !Context.ro_periodo_x_ro_Nomina_TipoLiqui.Any(meu => meu.IdEmpresa == q.IdEmpresa && meu.IdNomina_Tipo == IdNominTipo && meu.IdNomina_TipoLiqui == IdNominaTipo_liq)
+                                        && q.pe_estado == "A"
+                                        select new ro_periodo_x_ro_Nomina_TipoLiqui_Info
+                                        {
+                                            IdEmpresa = IdEmpresa,
+                                            IdPeriodo = q.IdPeriodo,
+                                            pe_FechaFin = q.pe_FechaFin,
+                                            pe_FechaIni = q.pe_FechaIni,
+                                            seleccionado = false
+                                        }).ToList());
+                    
+                }
+                return Lista;
             }
             catch (Exception)
             {
@@ -130,6 +140,37 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public bool guardarDB(List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lista)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    foreach (var item in lista)
+                    {
+                        ro_periodo_x_ro_Nomina_TipoLiqui Entity = new ro_periodo_x_ro_Nomina_TipoLiqui
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdNomina_Tipo = item.IdNomina_Tipo,
+                            IdNomina_TipoLiqui = item.IdNomina_TipoLiqui,
+                            Procesado = "N",
+                            Cerrado = "N",
+                            Contabilizado = "N"
+                        };
+                        Context.ro_periodo_x_ro_Nomina_TipoLiqui.Add(Entity);
+                    }
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public bool guardarDB(ro_periodo_x_ro_Nomina_TipoLiqui_Info info)
         {
             try
@@ -142,7 +183,7 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_Tipo = info.IdNomina_Tipo,
                         IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
                         Procesado = "N",
-                        Cerrado ="N",
+                        Cerrado = "N",
                         Contabilizado = "N"
                     };
                     Context.ro_periodo_x_ro_Nomina_TipoLiqui.Add(Entity);
@@ -155,7 +196,7 @@ namespace Core.Erp.Data.RRHH
 
                 throw;
             }
-        }    
+        }
         public bool anularDB(ro_periodo_x_ro_Nomina_TipoLiqui_Info info)
         {
             try
