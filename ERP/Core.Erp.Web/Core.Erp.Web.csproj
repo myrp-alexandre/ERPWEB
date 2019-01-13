@@ -9084,7 +9084,6 @@
     <Content Include="Areas\Importacion\Views\GastosImportacion\_CmbCuenta_Gasto.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_exportaciones.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_anulados.cshtml" />
-    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle_Credito.cshtml" />
     <Content Include="Areas\Importacion\Views\ParametrosImportacion\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\CatalogoTipoImportacion\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\CatalogoTipoImportacion\_GridViewPartial_cat_tipo_imp.cshtml" />
@@ -9634,6 +9633,7 @@
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\_GridViewPartial_egreso_op_x_cruzar.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\_GridViewPartial_egreso_op.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_013.cshtml" />
+    <Content Include="Areas\Banco\Views\BancoCuenta\_GridViewPartial_cuentas_x_sucursal.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9754,6 +9754,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

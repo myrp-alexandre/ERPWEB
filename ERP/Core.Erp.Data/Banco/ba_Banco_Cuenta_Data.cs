@@ -129,7 +129,7 @@ namespace Core.Erp.Data.Banco
             {
                 using (Entities_banco Context = new Entities_banco())
                 {
-                    ba_Banco_Cuenta Entity = new ba_Banco_Cuenta
+                    Context.ba_Banco_Cuenta.Add(new ba_Banco_Cuenta 
                     {
                         IdEmpresa = info.IdEmpresa,
                         Estado = info.Estado = "A",
@@ -144,8 +144,24 @@ namespace Core.Erp.Data.Banco
 
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
-                    };
-                    Context.ba_Banco_Cuenta.Add(Entity);
+                    });
+
+
+                   if(info.lstDet.Count>0)
+                    {
+                        foreach (var item in info.lstDet)
+                        {
+                            Context.ba_Banco_Cuenta_x_tb_sucursal.Add(new ba_Banco_Cuenta_x_tb_sucursal
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdBanco = info.IdBanco,
+                                IdSucursal = item.IdSucursal,
+                                Secuencia = item.Secuencia
+
+                            });
+                        }
+                    }
+                       
                     Context.SaveChanges();
                 }
                 return true;
@@ -175,6 +191,24 @@ namespace Core.Erp.Data.Banco
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
+
+
+                    var lst_det = Context.ba_Banco_Cuenta_x_tb_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdBanco == info.IdBanco).ToList();
+                    Context.ba_Banco_Cuenta_x_tb_sucursal.RemoveRange(lst_det);
+                    if (info.lstDet.Count > 0)
+                    {
+                        foreach (var item in info.lstDet)
+                        {
+                            Context.ba_Banco_Cuenta_x_tb_sucursal.Add(new ba_Banco_Cuenta_x_tb_sucursal
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdBanco = info.IdBanco,
+                                IdSucursal = item.IdSucursal,
+                                Secuencia = item.Secuencia
+
+                            });
+                        }
+                    }
                     Context.SaveChanges();
                 }
                 return true;

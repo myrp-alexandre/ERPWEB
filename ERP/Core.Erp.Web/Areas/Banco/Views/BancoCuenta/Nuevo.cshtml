@@ -12,6 +12,7 @@
 @using (Html.BeginForm("Nuevo", "BancoCuenta", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -96,6 +97,17 @@
                     <label for="Imprimir_Solo_el_cheque">Tipo de impresión</label>
                     @Html.DropDownListFor(q => q.Imprimir_Solo_el_cheque, new SelectList(ViewBag.lst_impresion, "Key", "Value"), new { @class = "form-control", @id = "ba_Tipo" })
                     @Html.ValidationMessageFor(q => q.Imprimir_Solo_el_cheque, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Detalle</label>
+                    @Html.Action("GridViewPartial_cuentas_x_sucursal")
                 </div>
             </div>
         </div>

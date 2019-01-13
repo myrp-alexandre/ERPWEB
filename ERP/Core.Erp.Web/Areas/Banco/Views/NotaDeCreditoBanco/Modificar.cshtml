@@ -15,7 +15,6 @@
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdTipocbte)
     @Html.HiddenFor(q => q.IdCbteCble)
-    @Html.HiddenFor(q => q.IdBanco)
 
     if (ViewBag.mensaje != null)
     {
@@ -78,7 +77,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdBanco">Cuenta bancaria:*</label>
-                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco", @disabled = "disabled" })
+                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
                     @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -125,12 +124,23 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-<script type="text/javascript">
+<script>
     $(function () {
         $("#IdSucursal").change(function () {
             GetListBancoPorSucursal();
+            armar_diario();
+        });
+        $("#IdBanco").change(function () {
+            armar_diario();
+        });
+        $("#IdTipoNota").change(function () {
+            armar_diario();
+        });
+        $("#cb_Valor").change(function () {
+            armar_diario();
         });
     })
+
 function GetListBancoPorSucursal() {
         $("#IdBanco").empty();
         var datos = {
@@ -154,58 +164,24 @@ function GetListBancoPorSucursal() {
             error: function (error) {
             }
         });
-    }
+}
+
     function OnSelectedCtaCbleChanged() {
         GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
     }
+
     function GrupoComboBox_BeginCallback(s, e) {
         e.customArgs["pre_IdCtaCble"] = IdCtaCble.GetValue();
         e.customArgs["pre_fecha"] = moment(cb_Fecha.GetDate()).format('DD/MM/YYYY');
     }
-
-    $(function () {
-        $("#IdBanco").change(function () {
-            armar_diario();
-        });
-        $("#IdTipoNota").change(function () {
-            armar_diario();
-        });
-    });
-
-    $("#cb_Valor").blur(function () {
-        SetValorDiario();
-    });
-
-    function SetValorDiario() {
-        var datos = {
-            cb_Valor: $("#cb_Valor").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("SetValorDiario", "NotaDeCreditoBanco", new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                GridView_comprobante_detalle.PerformCallback();
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-    var selectedIDs;
 
     function armar_diario() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdBanco: $("#IdBanco").val(),
             IdTipoNota: $("#IdTipoNota").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            Valor: $("#cb_Valor").val()
         }
         $.ajax({
             type: 'POST',
@@ -217,34 +193,10 @@ function GetListBancoPorSucursal() {
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridView_comprobante_detalle.PerformCallback();
-                $("#cb_Valor").val(data);
             },
             error: function (error) {
             }
         });
+        GridView_comprobante_detalle.PerformCallback();
     }
-
-    function GetValorTotal() {
-        var datos = {
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetValorTotal", "NotaDeCreditoBanco",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                $("#cb_Valor").val(data);
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-
 </script>
