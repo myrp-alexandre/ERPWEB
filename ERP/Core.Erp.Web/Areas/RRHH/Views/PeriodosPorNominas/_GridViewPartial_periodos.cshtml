@@ -4,11 +4,11 @@
         settings.Name = "GridViewPartial_periodos";
         settings.CallbackRouteValues = new { Controller = "PeriodosPorNominas", Action = "GridViewPartial_periodos" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "CodReporte";
+        settings.KeyFieldName = "IdPeriodo";
 
         //Configuracion cabecera
         settings.Settings.ShowTitlePanel = true;
-        settings.SettingsText.Title = "Por asignar";
+        settings.SettingsText.Title = "Periodos";
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -40,7 +40,7 @@
         settings.Columns.Add(column =>
         {
             column.Caption = "*";
-            column.FieldName = "CodReporte";
+            column.FieldName = "IdPeriodo";
             column.Width = Unit.Percentage(20);
             column.UnboundType = DevExpress.Data.UnboundColumnType.String;
             column.SetDataItemTemplateContent(c =>
