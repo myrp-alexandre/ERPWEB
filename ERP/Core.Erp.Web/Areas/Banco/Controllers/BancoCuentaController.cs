@@ -83,10 +83,10 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ba_Banco_Cuenta_Info model = new ba_Banco_Cuenta_Info
             {
                 IdEmpresa = IdEmpresa,
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
+                lstDet = new List<ba_Banco_Cuenta_x_tb_sucursal_Info>()
 
             };
-            model.lstDet = new List<ba_Banco_Cuenta_x_tb_sucursal_Info>();
             List_Det.set_list(model.lstDet, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
@@ -284,6 +284,10 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
             var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
+
+
+            var lst_banco = bus_banco.get_list(false);
+            ViewBag.lst_banco = lst_banco;
         }
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cuentas_x_sucursal()
