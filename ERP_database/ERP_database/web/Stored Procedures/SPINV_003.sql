@@ -1,4 +1,5 @@
-﻿--EXEC web.SPINV_003 1,1,9999,1,9999,1,999999,'',0,0,0,'2018/05/30',1,0,9999
+﻿
+--EXEC web.SPINV_003 2,2,2,1,1,0,99999,'3',29,0,0,'09/09/2019',0,0,9999
 CREATE PROCEDURE [web].[SPINV_003]
 (
 @IdEmpresa int,
@@ -36,36 +37,27 @@ BEGIN --INSERTO EN TABLA PK DE PRODUCTOS A MOSTRAR
 END
 
 BEGIN --FILTRO POR CATEGORIZACION
-	IF(@IdCategoria != '')
+	IF(@IdCategoria <> '')
 	BEGIN
+		DELETE web.in_SPINV_003 
+		WHERE IdCategoria <>  @IdCategoria
+
 		IF(@IdLinea != 0)
 			BEGIN
+				DELETE web.in_SPINV_003 
+				WHERE IdLinea != @IdLinea
+
 				IF(@IdGrupo != 0)
 					BEGIN
+					DELETE web.in_SPINV_003 
+					WHERE IdGrupo != @IdGrupo
 						IF(@IdSubGrupo != 0)
 							BEGIN
 								DELETE web.in_SPINV_003 
-								WHERE IdCategoria !=  @IdCategoria
-								AND IdLinea != @IdLinea
-								AND IdGrupo != @IdGrupo
-								AND IdSubGrupo != @IdSubGrupo
+								WHERE IdSubGrupo != @IdSubGrupo
 							END
-						ELSE
-							DELETE web.in_SPINV_003 
-							WHERE IdCategoria !=  @IdCategoria
-							AND IdLinea != @IdLinea
-							AND IdGrupo != @IdGrupo
-
-					END
-				ELSE
-					DELETE web.in_SPINV_003 
-					WHERE IdCategoria != @IdCategoria
-					AND IdLinea != @IdLinea
-			END
-		ELSE
-			DELETE web.in_SPINV_003 
-			WHERE IdCategoria <> @IdCategoria
-
+					END					
+			END	
 	END
 END
 

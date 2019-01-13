@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [web].[SPFAC_010]
+﻿
+CREATE PROCEDURE [web].[SPFAC_010]
 (
 @IdEmpresa int,
 @IdSucursalIni int, 
@@ -8,7 +9,7 @@
 )
 AS
 SELECT        c.IdEmpresa, c.IdSucursal, c.IdBodega, c.IdCbteVta, c.vt_serie1 + '-' + c.vt_serie2 + '-' + c.vt_NumFactura AS vt_NumFactura, c.IdCliente, per.pe_nombreCompleto, cat.Nombre AS NombreFormaPago, c.IdCatalogo_FormaPago, c.Estado, 
-                         c.vt_fecha, ve.Ve_Vendedor, c.IdVendedor, tb_sucursal.Su_Descripcion, tb_sucursal.Su_Telefonos, tb_sucursal.Su_Direccion, tb_sucursal.Su_Ruc,
+                         c.vt_fecha, c.IdUsuario Ve_Vendedor, c.IdUsuario IdVendedor, tb_sucursal.Su_Descripcion, tb_sucursal.Su_Telefonos, tb_sucursal.Su_Direccion, tb_sucursal.Su_Ruc,
 						 d.SubtotalIVA, d.SubtotalSinIVA, d.vt_iva, d.vt_total
 FROM            fa_factura AS c INNER JOIN
                          fa_cliente AS cli ON c.IdEmpresa = cli.IdEmpresa AND c.IdCliente = cli.IdCliente INNER JOIN
@@ -19,7 +20,7 @@ FROM            fa_factura AS c INNER JOIN
 						 left join(
 							SELECT        IdEmpresa, IdSucursal, IdBodega, IdCbteVta, sum(SubtotalSinIVA) SubtotalSinIVA, sum(SubtotalIVA) SubtotalIVA, sum(vt_iva)vt_iva, sum(vt_total)vt_total
 							FROM            (SELECT        fa_factura.IdEmpresa, fa_factura.IdSucursal, fa_factura.IdBodega, fa_factura.IdCbteVta, CASE WHEN fa_factura_det.vt_por_iva = 0 THEN fa_factura_det.vt_Subtotal ELSE 0 END AS SubtotalSinIVA, 
-							CASE WHEN fa_factura_det.vt_por_iva > 0 THEN fa_factura_det.vt_Subtotal ELSE 0 END AS SubtotalIVA, fa_factura_det.vt_iva, fa_factura_det.vt_Subtotal * fa_factura_det.vt_iva AS vt_total
+							CASE WHEN fa_factura_det.vt_por_iva > 0 THEN fa_factura_det.vt_Subtotal ELSE 0 END AS SubtotalIVA, fa_factura_det.vt_iva, fa_factura_det.vt_Subtotal + fa_factura_det.vt_iva AS vt_total
 							FROM            fa_factura INNER JOIN
 							fa_factura_det ON fa_factura.IdEmpresa = fa_factura_det.IdEmpresa AND fa_factura.IdSucursal = fa_factura_det.IdSucursal AND fa_factura.IdBodega = fa_factura_det.IdBodega AND 
 							fa_factura.IdCbteVta = fa_factura_det.IdCbteVta

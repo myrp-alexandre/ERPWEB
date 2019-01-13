@@ -1,15 +1,22 @@
-﻿CREATE VIEW dbo.vwcp_cp_retencion_x_empresa
+﻿CREATE VIEW dbo.vwcp_SolicitudPago
 AS
-SELECT        dbo.cp_retencion.IdEmpresa, dbo.tb_empresa.em_ruc, dbo.cp_retencion.serie1 + '-' + dbo.cp_retencion.serie2 AS serie, dbo.cp_retencion.NumRetencion, dbo.cp_retencion.IdRetencion
-FROM            dbo.tb_empresa INNER JOIN
-                         dbo.cp_retencion ON dbo.tb_empresa.IdEmpresa = dbo.cp_retencion.IdEmpresa
+SELECT        dbo.cp_SolicitudPago.IdEmpresa, dbo.cp_SolicitudPago.IdSolicitud, dbo.cp_SolicitudPago.IdSucursal, dbo.cp_SolicitudPago.Fecha, dbo.cp_SolicitudPago.IdProveedor, dbo.cp_SolicitudPago.Concepto, 
+                         dbo.cp_SolicitudPago.Estado, dbo.cp_SolicitudPago.Valor, dbo.cp_SolicitudPago.Solicitante, dbo.cp_SolicitudPago.GiradoA, dbo.cp_proveedor.pr_codigo, dbo.tb_persona.pe_razonSocial, dbo.tb_persona.pe_apellido, 
+                         dbo.tb_persona.pe_nombre, dbo.tb_persona.pe_nombreCompleto
+FROM            dbo.cp_SolicitudPago INNER JOIN
+                         dbo.cp_proveedor ON dbo.cp_SolicitudPago.IdEmpresa = dbo.cp_proveedor.IdEmpresa AND dbo.cp_SolicitudPago.IdProveedor = dbo.cp_proveedor.IdProveedor INNER JOIN
+                         dbo.tb_persona ON dbo.cp_proveedor.IdPersona = dbo.tb_persona.IdPersona
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwcp_SolicitudPago';
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[61] 4[1] 2[21] 3) )"
+         Configuration = "(H (1[54] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -75,22 +82,32 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "tb_empresa"
+         Begin Table = "cp_SolicitudPago"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 267
-               Right = 257
+               Bottom = 419
+               Right = 247
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "cp_retencion"
+         Begin Table = "cp_proveedor"
             Begin Extent = 
-               Top = 0
-               Left = 396
-               Bottom = 295
-               Right = 605
+               Top = 6
+               Left = 285
+               Bottom = 293
+               Right = 517
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "tb_persona"
+            Begin Extent = 
+               Top = 6
+               Left = 555
+               Bottom = 321
+               Right = 787
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -102,8 +119,9 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
+      Begin ColumnWidths = 10
          Width = 284
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -132,11 +150,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwcp_cp_retencion_x_empresa';
-
-
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwcp_cp_retencion_x_empresa';
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwcp_SolicitudPago';
 

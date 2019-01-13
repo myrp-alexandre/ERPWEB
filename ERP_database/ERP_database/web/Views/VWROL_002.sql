@@ -2,7 +2,8 @@
 AS
 SELECT        dbo.tb_persona.pe_nombreCompleto AS NombreCompleto, dbo.tb_persona.pe_cedulaRuc AS Ruc, dbo.ro_rubro_tipo.ru_descripcion AS RubroDescripcion, web.ro_SPROL_002.IdEmpresa, web.ro_SPROL_002.IdNominaTipo, 
                          web.ro_SPROL_002.IdNominaTipoLiqui, web.ro_SPROL_002.IdPeriodo, web.ro_SPROL_002.IdEmpleado, web.ro_SPROL_002.Valor, dbo.ro_cargo.ca_descripcion AS Cargo, dbo.tb_persona.pe_apellido, 
-                         dbo.tb_persona.pe_nombre, dbo.ro_periodo.pe_FechaIni, dbo.ro_periodo.pe_FechaFin, dbo.ro_rubro_tipo.ru_tipo, dbo.ro_empleado.em_status, dbo.ro_rubro_tipo.ru_orden, dbo.tb_empresa.em_ruc
+                         dbo.tb_persona.pe_nombre, dbo.ro_periodo.pe_FechaIni, dbo.ro_periodo.pe_FechaFin, dbo.ro_rubro_tipo.ru_tipo, dbo.ro_empleado.em_status, dbo.ro_rubro_tipo.ru_orden, dbo.tb_empresa.em_ruc, 
+                         dbo.ro_empleado.IdSucursal
 FROM            dbo.ro_rubro_tipo INNER JOIN
                          dbo.ro_empleado INNER JOIN
                          dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
@@ -18,7 +19,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[36] 4[5] 2[47] 3) )"
+         Configuration = "(H (1[54] 4[5] 2[25] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -81,7 +82,7 @@ Begin DesignProperties =
    Begin DiagramPane = 
       Begin Origin = 
          Top = 0
-         Left = 0
+         Left = -97
       End
       Begin Tables = 
          Begin Table = "ro_rubro_tipo"
@@ -102,17 +103,27 @@ Begin DesignProperties =
                Right = 969
             End
             DisplayFlags = 280
-            TopColumn = 42
+            TopColumn = 0
          End
          Begin Table = "tb_persona"
             Begin Extent = 
-               Top = 126
-               Left = 168
-               Bottom = 341
-               Right = 400
+               Top = 155
+               Left = 288
+               Bottom = 370
+               Right = 520
             End
             DisplayFlags = 280
             TopColumn = 0
+         End
+         Begin Table = "ro_SPROL_002 (web)"
+            Begin Extent = 
+               Top = 6
+               Left = 438
+               Bottom = 136
+               Right = 630
+            End
+            DisplayFlags = 280
+            TopColumn = 3
          End
          Begin Table = "ro_cargo"
             Begin Extent = 
@@ -140,17 +151,9 @@ Begin DesignProperties =
                Left = 1068
                Bottom = 244
                Right = 1287
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "ro_SPROL_002 (web)"
-            Begin Extent = 
-               Top = 6
-               Left = 438
-               Bottom = 136
-               Right = 630
-            End', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_002';
+            End', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_002';
+
+
 
 
 GO
@@ -219,6 +222,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_002';
+
+
 
 
 GO

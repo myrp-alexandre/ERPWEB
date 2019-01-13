@@ -42,12 +42,13 @@ declare
 @Anio float,
 @IdSucursal int,
 @IdRubroTotalING varchar(50),
-@IdRubroTotalEGR varchar(50)
+@IdRubroTotalEGR varchar(50),
+@Porcentaje_anticipo float
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------obteniendo fecha del perido------------------- ----------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
 select @Fi= pe_FechaIni, @Ff=pe_FechaFin, @Anio=pe_anio from ro_periodo where IdEmpresa=@IdEmpresa and IdPeriodo=@IdPEriodo
-
+select @Porcentaje_anticipo=Porcentaje_anticipo from ro_Parametros where IdEmpresa=@IdEmpresa
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------preparando la cabecera del rol general-------- ----------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -67,8 +68,7 @@ values
 -------------eliminando detalle--------------------------- ----------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
 delete ro_rol_detalle_x_rubro_acumulado  where IdEmpresa=@IdEmpresa and IdRol=@IdRol
-delete ro_rol_detalle 
-where ro_rol_detalle.IdEmpresa=@IdEmpresa and @IdRol=IdRol
+delete ro_rol_detalle where ro_rol_detalle.IdEmpresa=@IdEmpresa and @IdRol=IdRol
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ and cont.IdNomina=@IdNomina
 and cont.EstadoContrato!='ECT_LIQ'
 and (emp.em_status!='EST_LIQ')
 and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
-and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
+and emp.IdSucursal = @IdSucursalFin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando sueldo al personal que no se les paga por horas-------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select 
-@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,cont.sueldo/30* ((dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol, emp.em_status, emp.em_fechaSalida)))*2*0.25
+@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,ISNULL( ROUND( cont.sueldo/30* ((dbo.calcular_dias_trabajados(@Fi,@Ff,emp.em_fechaIngaRol, emp.em_status, emp.em_fechaSalida)))*2*emp.em_AnticipoSueldo,2),0)
 ,1						,'Sueldo base'		
 FROM            dbo.ro_contrato AS cont INNER JOIN
                 dbo.ro_empleado AS emp ON cont.IdEmpresa = emp.IdEmpresa AND cont.IdEmpleado = emp.IdEmpleado
@@ -113,7 +113,7 @@ and cont.EstadoContrato!='ECT_LIQ'
 and (emp.em_status!='EST_LIQ')
 and CAST( cont.FechaInicio as date)<=@Ff
 and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
-and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
+and emp.IdSucursal = @IdSucursalFin
 and emp.Pago_por_horas=0
 
 
@@ -130,7 +130,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select 
-@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,rol_det.valor*0.25
+@IdEmpresa				,@IdRol,		emp.IdSucursal			,cont.IdEmpleado		,@IdRubro_calculado	,'1' ,ISNULL( ROUND( rol_det.valor*emp.em_AnticipoSueldo,2),0)
 ,1						,'Sueldo base'		
 FROM            dbo.ro_rol AS rol INNER JOIN
                          dbo.ro_rol_detalle AS rol_det ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol INNER JOIN
@@ -149,7 +149,7 @@ and cont.IdNomina=@IdNomina
 and cont.EstadoContrato!='ECT_LIQ'
 and CAST( cont.FechaInicio as date)<=@Ff
 and (emp.em_status!='EST_LIQ' and isnull( emp.em_fechaSalida, @Ff) between @Fi and @Ff )
-and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
+and emp.IdSucursal = @IdSucursalFin
 and emp.Pago_por_horas=1
 
 
@@ -178,7 +178,7 @@ and novc.Estado='A'
 and nov.EstadoCobro='PEN'
 and (emp.em_status!='EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
-and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
+and emp.IdSucursal = @IdSucursalFin
 group by novc.IdEmpresa,novc.IdEmpleado,nov.IdRubro,rub.ru_orden,rub.ru_descripcion, emp.IdSucursal
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -204,7 +204,7 @@ and pred.EstadoPago='PEN'
 and (emp.em_status!='EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 AND (emp.em_fechaSalida IS NULL OR emp.em_fechaSalida BETWEEN @Fi and @Ff)
-and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
+and emp.IdSucursal = @IdSucursalFin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------buscando rubros fijos e insertando al rol detalle-------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -228,7 +228,7 @@ and (rub_fij.es_indifinido=1 or ( @Fi between rub_fij.FechaFin and rub_fij.Fecha
 and (emp.em_status!='EST_LIQ')
 and CAST( emp.em_fechaIngaRol as date)<=@Ff
 AND (emp.em_fechaSalida IS NULL OR emp.em_fechaSalida BETWEEN @Fi and @Ff)
-and emp.IdSucursal between @IdSucursalInicio and @IdSucursalFin
+and emp.IdSucursal= @IdSucursalFin
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------calculando total ingreso por empleado-------------------------------------------------------------------------------------------<
 ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -250,6 +250,7 @@ where rol_det.IdEmpresa=@IdEmpresa
 and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
+and ro_rol.IdSucursal= @IdSucursalFin
 and rub.ru_tipo='I'
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
@@ -276,6 +277,7 @@ and ro_rol.IdNominaTipo=@IdNomina
 and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
 and ro_rol.IdPeriodo=@IdPEriodo
 and rol_det.IdRol=@IdRol
+and rol_det.IdSucursal = @IdSucursalFin
 and rub.ru_tipo='E'
 group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNominaTipoLiqui,ro_rol.IdPeriodo, emp.IdSucursal
 
@@ -307,6 +309,7 @@ FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
 	 and IdNominaTipo=@IdNomina
 	 and IdNominaTipoLiqui=@IdNominaTipo
 	 and IdPeriodo=@IdPEriodo
+and rol_det.IdSucursal = @IdSucursalFin
 	 and rol_det.IdRol=@IdRol
 ) as s
 PIVOT

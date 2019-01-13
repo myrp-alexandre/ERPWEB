@@ -2,7 +2,8 @@
 AS
 SELECT        pres.IdEmpresa, pres.IdPrestamo, pres.IdEmpleado, per_emp.pe_nombre, per_emp.pe_apellido, pres.IdRubro, rub.ru_descripcion, pres.Estado, pres.Fecha, pres.MontoSol, ISNULL(estado_can.TotalCobrado, 0) 
                          AS TotalCobrado, ISNULL(pres.MontoSol - estado_can.TotalCobrado, 0) AS Valor_pendiente, pres.NumCuotas, pres.Fecha_PriPago, pres.Observacion, pres.MotiAnula, per_emp.pe_cedulaRuc, 'EMPLEA' AS IdTipoPersona, 
-                         per_emp.IdPersona, pres.IdTipoCbte, pres.IdCbteCble, pres.IdOrdenPago, pres.descuento_mensual, pres.descuento_quincena, pres.descuento_men_quin, pres.EstadoAprob, pres.IdUsuarioAprueba
+                         per_emp.IdPersona, pres.IdTipoCbte, pres.IdCbteCble, pres.IdOrdenPago, pres.descuento_mensual, pres.descuento_quincena, pres.descuento_men_quin, pres.EstadoAprob, pres.IdUsuarioAprueba, 
+                         CAST(pres.Fecha_Transac AS date) AS Fecha_registro
 FROM            dbo.ro_prestamo AS pres INNER JOIN
                          dbo.ro_empleado AS emp ON pres.IdEmpresa = emp.IdEmpresa AND pres.IdEmpleado = emp.IdEmpleado INNER JOIN
                          dbo.tb_persona AS per_emp ON emp.IdPersona = per_emp.IdPersona INNER JOIN
@@ -14,7 +15,26 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' = 1440
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'0
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
          Alias = 900
          Table = 1170
          Output = 720
@@ -33,13 +53,15 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_Prestamo';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[68] 4[5] 2[10] 3) )"
+         Configuration = "(H (1[13] 4[5] 2[34] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -107,50 +129,50 @@ Begin DesignProperties =
       Begin Tables = 
          Begin Table = "pres"
             Begin Extent = 
-               Top = 66
-               Left = 583
-               Bottom = 196
-               Right = 785
+               Top = 48
+               Left = 640
+               Bottom = 367
+               Right = 842
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 11
          End
          Begin Table = "emp"
             Begin Extent = 
-               Top = 131
-               Left = 8
-               Bottom = 261
-               Right = 297
+               Top = 48
+               Left = 214
+               Bottom = 178
+               Right = 503
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "per_emp"
             Begin Extent = 
-               Top = 402
-               Left = 38
-               Bottom = 532
-               Right = 270
+               Top = 65
+               Left = 47
+               Bottom = 195
+               Right = 279
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "rub"
             Begin Extent = 
-               Top = 534
-               Left = 38
-               Bottom = 664
-               Right = 256
+               Top = 236
+               Left = 291
+               Bottom = 366
+               Right = 509
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "estado_can"
             Begin Extent = 
-               Top = 130
-               Left = 816
-               Bottom = 243
-               Right = 986
+               Top = 55
+               Left = 889
+               Bottom = 168
+               Right = 1059
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -162,7 +184,7 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 11
+      Begin ColumnWidths = 29
          Width = 284
          Width = 1500
          Width = 1500
@@ -174,9 +196,10 @@ Begin DesignProperties =
          Width = 1500
          Width = 1500
          Width = 1500
-      End
-   End
-   Begin CriteriaPane = 
-      Begin ColumnWidths = 11
-         Column', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_Prestamo';
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 150', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwRo_Prestamo';
+
+
 

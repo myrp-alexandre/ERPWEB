@@ -1,10 +1,12 @@
 ﻿CREATE VIEW dbo.vwro_empleados_consulta
 AS
 SELECT        dbo.ro_empleado.IdEmpresa, dbo.ro_empleado.IdEmpleado, dbo.tb_persona.IdPersona, dbo.ro_cargo.ca_descripcion, dbo.tb_persona.pe_apellido + ' ' + dbo.tb_persona.pe_nombre AS Empleado, 
-                         dbo.tb_persona.pe_cedulaRuc, dbo.ro_empleado.em_estado, dbo.ro_empleado.em_status, dbo.ro_empleado.em_codigo, dbo.ro_empleado.em_fechaIngaRol
+                         dbo.tb_persona.pe_cedulaRuc, dbo.ro_empleado.em_estado, dbo.ro_empleado.em_status, dbo.ro_empleado.em_codigo, dbo.ro_empleado.em_fechaIngaRol, dbo.ro_empleado.IdSucursal, 
+                         dbo.tb_sucursal.Su_Descripcion
 FROM            dbo.tb_persona INNER JOIN
                          dbo.ro_empleado ON dbo.tb_persona.IdPersona = dbo.ro_empleado.IdPersona INNER JOIN
-                         dbo.ro_cargo ON dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa AND dbo.ro_empleado.IdCargo = dbo.ro_cargo.IdCargo
+                         dbo.ro_cargo ON dbo.ro_empleado.IdEmpresa = dbo.ro_cargo.IdEmpresa AND dbo.ro_empleado.IdCargo = dbo.ro_cargo.IdCargo INNER JOIN
+                         dbo.tb_sucursal ON dbo.ro_empleado.IdEmpresa = dbo.tb_sucursal.IdEmpresa AND dbo.ro_empleado.IdSucursal = dbo.tb_sucursal.IdSucursal
 WHERE        (dbo.ro_empleado.IdEmpleadoPAdre IS NULL)
 
 GO
@@ -13,7 +15,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[25] 4[5] 2[63] 3) )"
+         Configuration = "(H (1[83] 4[5] 2[7] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -97,14 +99,24 @@ Begin DesignProperties =
                Right = 597
             End
             DisplayFlags = 280
-            TopColumn = 48
+            TopColumn = 0
          End
          Begin Table = "ro_cargo"
             Begin Extent = 
-               Top = 6
-               Left = 635
-               Bottom = 254
-               Right = 852
+               Top = 194
+               Left = 587
+               Bottom = 442
+               Right = 804
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "tb_sucursal"
+            Begin Extent = 
+               Top = 1
+               Left = 894
+               Bottom = 244
+               Right = 1124
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -116,8 +128,9 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 10
+      Begin ColumnWidths = 11
          Width = 284
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -141,17 +154,25 @@ Begin DesignProperties =
          SortOrder = 1410
          GroupBy = 1350
          Filter = 1350
-         Or = 1350
+         Or = 13', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleados_consulta';
+
+
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleados_consulta';
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'50
          Or = 1350
          Or = 1350
       End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleados_consulta';
-
-
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleados_consulta';
 

@@ -1,76 +1,21 @@
-﻿CREATE view web.VWFAC_006 as
-SELECT
-	dbo.fa_proforma_det.IdEmpresa,
-	dbo.tb_empresa.em_nombre,
-	dbo.tb_empresa.em_ruc,
-	dbo.tb_sucursal.Su_CodigoEstablecimiento,
-	dbo.tb_sucursal.Su_Descripcion,
-	dbo.tb_sucursal.Su_Direccion,
-	dbo.tb_sucursal.Su_Telefonos,
-	dbo.fa_proforma_det.IdSucursal,
-	dbo.fa_proforma.IdCliente,
-	dbo.tb_persona.pe_nombreCompleto AS nombre_cliente,
-	dbo.tb_persona.pe_cedulaRuc AS ced_ruc_cliente,
-	dbo.tb_persona.pe_direccion AS direccion_cliente,
-	dbo.tb_persona.pe_celular AS celular_cliente,
-	dbo.tb_persona.pe_telfono_Contacto AS telefono_cliente,
-	dbo.fa_proforma_det.IdProforma,
-	dbo.fa_proforma_det.Secuencia,
-	dbo.fa_TerminoPago.nom_TerminoPago,
-	dbo.fa_proforma.pf_plazo,
-	dbo.fa_proforma.pf_codigo,
-	dbo.fa_proforma.pf_fecha,
-	dbo.fa_proforma.estado,
-	dbo.fa_proforma.pf_atencion_a,
-	dbo.fa_Vendedor.Codigo,
-	dbo.fa_Vendedor.Ve_Vendedor,
-	dbo.in_Producto.pr_descripcion + ' ' + dbo.in_presentacion.nom_presentacion AS pr_descripcion,
-	dbo.fa_proforma_det.pd_cantidad,
-	dbo.fa_proforma_det.pd_precio,
-	dbo.fa_proforma_det.pd_por_descuento_uni,
-	dbo.fa_proforma_det.pd_descuento_uni,
-	dbo.fa_proforma_det.pd_precio_final,
-	dbo.fa_proforma_det.pd_subtotal,
-	dbo.fa_proforma_det.pd_por_iva,
-	dbo.fa_proforma_det.pd_iva,
-	dbo.fa_proforma_det.pd_subtotal + dbo.fa_proforma_det.pd_iva AS pd_total,
-	dbo.in_Marca.Descripcion AS nom_marca,
-	dbo.in_presentacion.nom_presentacion AS nom_modelo,
-	dbo.in_Producto.pr_observacion,
-	dbo.fa_proforma_det.IdProducto,
-	dbo.fa_proforma.pr_dias_entrega,
-	dbo.fa_proforma.pf_observacion,
-	IIF (
-		dbo.in_Producto.se_distribuye != 1,
-		dbo.in_Producto.lote_num_lote,
-		NULL
-	) lote_num_lote,
-	IIF (
-		dbo.in_Producto.se_distribuye != 1,
-		dbo.in_Producto.lote_fecha_vcto,
-		NULL
-	) lote_fecha_vcto,
-	in_Producto.IdProducto_padre
-FROM
-	dbo.fa_proforma
-INNER JOIN dbo.fa_proforma_det ON dbo.fa_proforma.IdEmpresa = dbo.fa_proforma_det.IdEmpresa
-AND dbo.fa_proforma.IdSucursal = dbo.fa_proforma_det.IdSucursal
-AND dbo.fa_proforma.IdProforma = dbo.fa_proforma_det.IdProforma
-INNER JOIN dbo.tb_empresa ON dbo.tb_empresa.IdEmpresa = dbo.fa_proforma_det.IdEmpresa
-INNER JOIN dbo.tb_sucursal ON dbo.tb_sucursal.IdSucursal = dbo.fa_proforma_det.IdSucursal
-AND dbo.tb_sucursal.IdEmpresa = dbo.fa_proforma_det.IdEmpresa
-INNER JOIN dbo.fa_cliente ON dbo.fa_cliente.IdCliente = dbo.fa_proforma.IdCliente
-AND dbo.fa_cliente.IdEmpresa = dbo.fa_proforma_det.IdEmpresa
-INNER JOIN dbo.tb_persona ON dbo.tb_persona.IdPersona = dbo.fa_cliente.IdPersona
-INNER JOIN dbo.in_Producto ON dbo.fa_proforma_det.IdEmpresa = dbo.in_Producto.IdEmpresa
-AND dbo.fa_proforma_det.IdProducto = dbo.in_Producto.IdProducto
-INNER JOIN dbo.fa_Vendedor ON dbo.fa_proforma.IdEmpresa = dbo.fa_Vendedor.IdEmpresa
-AND dbo.fa_proforma.IdVendedor = dbo.fa_Vendedor.IdVendedor
-INNER JOIN dbo.fa_TerminoPago ON dbo.fa_proforma.IdTerminoPago = dbo.fa_TerminoPago.IdTerminoPago
-INNER JOIN dbo.in_presentacion ON dbo.in_Producto.IdEmpresa = dbo.in_presentacion.IdEmpresa
-AND dbo.in_Producto.IdPresentacion = dbo.in_presentacion.IdPresentacion
-INNER JOIN dbo.in_Marca ON dbo.in_Producto.IdEmpresa = dbo.in_Marca.IdEmpresa
-AND dbo.in_Producto.IdMarca = dbo.in_Marca.IdMarca
+﻿CREATE view  web.VWFAC_006
+as
+SELECT dbo.fa_proforma_det.IdEmpresa, dbo.tb_sucursal.Su_CodigoEstablecimiento, dbo.tb_sucursal.Su_Descripcion, dbo.tb_sucursal.Su_Direccion, dbo.tb_sucursal.Su_Telefonos, dbo.fa_proforma_det.IdSucursal, dbo.fa_proforma.IdCliente, 
+                  dbo.tb_persona.pe_nombreCompleto AS nombre_cliente, dbo.tb_persona.pe_cedulaRuc AS ced_ruc_cliente, dbo.tb_persona.pe_direccion AS direccion_cliente, dbo.tb_persona.pe_celular AS celular_cliente, 
+                  dbo.tb_persona.pe_telfono_Contacto AS telefono_cliente, dbo.fa_proforma_det.IdProforma, dbo.fa_proforma_det.Secuencia, dbo.fa_TerminoPago.nom_TerminoPago, dbo.fa_proforma.pf_plazo, dbo.fa_proforma.pf_codigo, 
+                  dbo.fa_proforma.pf_fecha, dbo.fa_proforma.estado, dbo.fa_proforma.pf_atencion_a, dbo.fa_Vendedor.Codigo, dbo.fa_Vendedor.Ve_Vendedor, dbo.fa_proforma_det.pd_cantidad, dbo.fa_proforma_det.pd_precio, 
+                  dbo.fa_proforma_det.pd_por_descuento_uni, dbo.fa_proforma_det.pd_descuento_uni, dbo.fa_proforma_det.pd_precio_final, dbo.fa_proforma_det.pd_subtotal, dbo.fa_proforma_det.pd_por_iva, dbo.fa_proforma_det.pd_iva, 
+                  dbo.fa_proforma_det.pd_subtotal + dbo.fa_proforma_det.pd_iva AS pd_total, dbo.in_Producto.pr_observacion, dbo.fa_proforma_det.IdProducto, dbo.fa_proforma.pr_dias_entrega, dbo.fa_proforma.pf_observacion, 
+                  dbo.in_Producto.pr_descripcion
+FROM     dbo.fa_proforma INNER JOIN
+                  dbo.fa_proforma_det ON dbo.fa_proforma.IdEmpresa = dbo.fa_proforma_det.IdEmpresa AND dbo.fa_proforma.IdSucursal = dbo.fa_proforma_det.IdSucursal AND 
+                  dbo.fa_proforma.IdProforma = dbo.fa_proforma_det.IdProforma INNER JOIN
+                  dbo.fa_cliente ON dbo.fa_cliente.IdCliente = dbo.fa_proforma.IdCliente AND dbo.fa_proforma.IdEmpresa = dbo.fa_cliente.IdEmpresa INNER JOIN
+                  dbo.tb_persona ON dbo.tb_persona.IdPersona = dbo.fa_cliente.IdPersona INNER JOIN
+                  dbo.fa_Vendedor ON dbo.fa_proforma.IdEmpresa = dbo.fa_Vendedor.IdEmpresa AND dbo.fa_proforma.IdVendedor = dbo.fa_Vendedor.IdVendedor INNER JOIN
+                  dbo.fa_TerminoPago ON dbo.fa_proforma.IdTerminoPago = dbo.fa_TerminoPago.IdTerminoPago LEFT OUTER JOIN
+                  dbo.tb_sucursal ON dbo.tb_sucursal.IdSucursal = dbo.fa_proforma_det.IdSucursal AND dbo.tb_sucursal.IdEmpresa = dbo.fa_proforma_det.IdEmpresa LEFT OUTER JOIN
+                  dbo.in_Producto ON dbo.fa_proforma_det.IdEmpresa = dbo.in_Producto.IdEmpresa AND dbo.fa_proforma_det.IdProducto = dbo.in_Producto.IdProducto
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
@@ -139,7 +84,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = 0
+         Top = -120
          Left = 0
       End
       Begin Tables = 
@@ -151,24 +96,54 @@ Begin DesignProperties =
                Right = 299
             End
             DisplayFlags = 280
-            TopColumn = 5
+            TopColumn = 0
          End
          Begin Table = "fa_proforma_det"
             Begin Extent = 
-               Top = 175
-               Left = 48
-               Bottom = 338
-               Right = 290
+               Top = 136
+               Left = 724
+               Bottom = 299
+               Right = 966
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "tb_sucursal"
+            Begin Extent = 
+               Top = 185
+               Left = 1468
+               Bottom = 348
+               Right = 1740
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "fa_cliente"
+            Begin Extent = 
+               Top = 0
+               Left = 634
+               Bottom = 163
+               Right = 890
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "tb_persona"
+            Begin Extent = 
+               Top = 7
+               Left = 1276
+               Bottom = 170
+               Right = 1550
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "in_Producto"
             Begin Extent = 
-               Top = 343
-               Left = 48
-               Bottom = 506
-               Right = 323
+               Top = 336
+               Left = 1063
+               Bottom = 499
+               Right = 1338
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -179,7 +154,13 @@ Begin DesignProperties =
                Left = 48
                Bottom = 674
                Right = 256
-            End
+          ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWFAC_006';
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  End
             DisplayFlags = 280
             TopColumn = 0
          End
@@ -193,30 +174,6 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "in_presentacion"
-            Begin Extent = 
-               Top = 847
-               Left = 48
-               Bottom = 1010
-               Right = 264
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "in_Marca"
-            Begin Extent = 
-               Top = 1015
-               Left = 48
-               Bottom = 1178
-               Right = 256
-           ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWFAC_006';
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
       End
    End
    Begin SQLPane = 
@@ -224,19 +181,30 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' End
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+      End
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
-         Table = 1170
+         Table = 1176
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
+         SortType = 1356
+         SortOrder = 1416
          GroupBy = 1350
-         Filter = 1350
+         Filter = 1356
          Or = 1350
          Or = 1350
          Or = 1350
@@ -244,6 +212,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWFAC_006';
+
+
 
 
 GO

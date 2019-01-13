@@ -1,9 +1,7 @@
 ﻿CREATE view web.VWROL_020 as
-SELECT     ROW_NUMBER() OVER(ORDER BY archiv.IdEmpresa DESC) AS Secuancia,  
-
-        archiv.IdEmpresa, archiv.IdArchivo, archiv.IdNomina, archiv.IdNominaTipo, archiv.IdPeriodo, archiv.IdCuentaBancaria, archiv.IdProceso, archv_det.Valor, 
-                         CASE WHEN emp.em_tipoCta = 'AHO' THEN 'A' WHEN emp.em_tipoCta = 'COR' THEN 'C' ELSE 'E' END AS em_tipoCta, CASE WHEN emp.em_tipoCta = 'VRT' THEN emp.em_NumCta ELSE per.pe_cedulaRuc END AS em_NumCta, 
-                         per.pe_apellido + ' ' + per.pe_nombre AS Nombres, per.pe_cedulaRuc, emp.em_codigo, nom_tip.DescripcionProcesoNomina, nom.Descripcion, periodo.pe_FechaIni, periodo.pe_FechaFin
+SELECT        ROW_NUMBER() OVER (ORDER BY archiv.IdEmpresa DESC) AS Secuancia, archiv.IdEmpresa, archiv.IdArchivo, archiv.IdNomina, archiv.IdNominaTipo, archiv.IdPeriodo, archiv.IdCuentaBancaria, archiv.IdProceso, 
+archv_det.Valor, CASE WHEN emp.em_tipoCta = 'AHO' THEN 'A' WHEN emp.em_tipoCta = 'COR' THEN 'C' ELSE 'E' END AS em_tipoCta, emp.em_NumCta AS em_NumCta, per.pe_apellido + ' ' + per.pe_nombre AS Nombres, 
+per.pe_cedulaRuc, emp.em_codigo, nom_tip.DescripcionProcesoNomina, nom.Descripcion, periodo.pe_FechaIni, periodo.pe_FechaFin, archv_det.IdSucursal, emp.em_tipoCta as TipoCuenta
 FROM            dbo.ro_archivos_bancos_generacion AS archiv INNER JOIN
                          dbo.ro_archivos_bancos_generacion_x_empleado AS archv_det ON archiv.IdEmpresa = archv_det.IdEmpresa AND archiv.IdArchivo = archv_det.IdArchivo INNER JOIN
                          dbo.ro_empleado AS emp ON archv_det.IdEmpresa = emp.IdEmpresa AND archv_det.IdEmpleado = emp.IdEmpleado INNER JOIN

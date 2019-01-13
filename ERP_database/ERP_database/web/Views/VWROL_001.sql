@@ -5,7 +5,7 @@ SELECT        dbo.ro_rol.IdEmpresa, dbo.ro_rol.IdNominaTipo, dbo.ro_rol.IdNomina
                          dbo.ro_Departamento.IdDepartamento, dbo.ro_area.IdArea, dbo.ro_Division.IdDivision, dbo.ro_area.Descripcion AS Area, dbo.ro_Division.Descripcion AS Division, dbo.ro_periodo.pe_FechaIni, dbo.ro_periodo.pe_FechaFin, 
                          dbo.ro_periodo.pe_estado, dbo.ro_Nomina_Tipo.Descripcion AS Nomina, dbo.ro_rol.IdPeriodo, dbo.ro_rubro_tipo.ru_codRolGen, dbo.tb_persona.pe_apellido, dbo.ro_rubro_tipo.ru_descripcion, dbo.ro_rubro_tipo.NombreCorto, 
                          dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, dbo.ro_rol_detalle.Valor, dbo.tb_sucursal.Su_Descripcion, dbo.ro_empleado.em_fechaIngaRol, CONVERT(varchar(10), dbo.ro_periodo.pe_FechaIni, 103) 
-                         + '  AL ' + CONVERT(varchar(10), dbo.ro_periodo.pe_FechaFin, 103) + '      [ ' + CAST(dbo.ro_periodo.IdPeriodo AS VARCHAR) + ']' AS Periodo, dbo.tb_empresa.em_ruc
+                         + '  AL ' + CONVERT(varchar(10), dbo.ro_periodo.pe_FechaFin, 103) + '      [ ' + CAST(dbo.ro_periodo.IdPeriodo AS VARCHAR) + ']' AS Periodo, dbo.tb_empresa.em_ruc, dbo.ro_rol.IdSucursal
 FROM            dbo.ro_Division INNER JOIN
                          dbo.tb_sucursal INNER JOIN
                          dbo.ro_empleado INNER JOIN
@@ -35,7 +35,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[35] 4[35] 2[9] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -97,46 +97,26 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = -192
+         Top = 0
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "ro_area"
+         Begin Table = "ro_Division"
             Begin Extent = 
-               Top = 6
-               Left = 38
-               Bottom = 136
-               Right = 217
+               Top = 666
+               Left = 258
+               Bottom = 796
+               Right = 437
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "ro_periodo"
+         Begin Table = "tb_sucursal"
             Begin Extent = 
-               Top = 6
-               Left = 255
-               Bottom = 136
-               Right = 476
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "ro_rol"
-            Begin Extent = 
-               Top = 138
+               Top = 1062
                Left = 38
-               Bottom = 268
-               Right = 230
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "ro_rol_detalle"
-            Begin Extent = 
-               Top = 270
-               Left = 38
-               Bottom = 400
-               Right = 301
+               Bottom = 1192
+               Right = 268
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -168,21 +148,33 @@ Begin DesignProperties =
                Bottom = 268
                Right = 447
             End
-      ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_001';
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_area"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 217
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "tb_empresa"
+            Begin Extent = 
+               Top = 363
+               Left = 412
+               Bottom = 485
+               Right = 631
+            End
+   ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_001';
+
+
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "ro_Nomina_Tipo"
-            Begin Extent = 
-               Top = 666
-               Left = 38
-               Bottom = 796
-               Right = 220
-            End
-            DisplayFlags = 280
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'         DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "ro_rubro_tipo"
@@ -191,6 +183,16 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Disp
                Left = 38
                Bottom = 928
                Right = 277
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_rol_detalle"
+            Begin Extent = 
+               Top = 270
+               Left = 38
+               Bottom = 400
+               Right = 301
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -205,35 +207,45 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Disp
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "tb_sucursal"
-            Begin Extent = 
-               Top = 1062
-               Left = 38
-               Bottom = 1192
-               Right = 268
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "ro_Division"
+         Begin Table = "ro_Nomina_Tipo"
             Begin Extent = 
                Top = 666
-               Left = 258
+               Left = 38
                Bottom = 796
-               Right = 437
+               Right = 220
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "tb_empresa"
+         Begin Table = "ro_rol"
             Begin Extent = 
-               Top = 363
-               Left = 412
-               Bottom = 485
-               Right = 631
+               Top = 138
+               Left = 38
+               Bottom = 268
+               Right = 230
             End
             DisplayFlags = 280
-            TopColumn = 6
+            TopColumn = 2
+         End
+         Begin Table = "ro_periodo_x_ro_Nomina_TipoLiqui"
+            Begin Extent = 
+               Top = 1194
+               Left = 38
+               Bottom = 1324
+               Right = 235
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "ro_periodo"
+            Begin Extent = 
+               Top = 6
+               Left = 255
+               Bottom = 136
+               Right = 476
+            End
+            DisplayFlags = 280
+            TopColumn = 0
          End
       End
    End
@@ -242,8 +254,35 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Disp
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
+      Begin ColumnWidths = 36
          Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -259,7 +298,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Disp
          Column = 1440
          Alias = 900
          Table = 1170
-         Output = 720
+         Output = 1410
          Append = 1400
          NewValue = 1170
          SortType = 1350
@@ -273,6 +312,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Disp
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_001';
+
+
 
 
 GO
