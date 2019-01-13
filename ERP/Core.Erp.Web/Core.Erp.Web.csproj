@@ -9644,6 +9644,7 @@
     <Content Include="Areas\RRHH\Views\PeriodosPorNominas\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\PeriodosPorNominas\_GridViewPartial_periodos_por_nominas.cshtml" />
     <Content Include="Areas\RRHH\Views\PeriodosPorNominas\_GridViewPartial_periodos.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_013.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
