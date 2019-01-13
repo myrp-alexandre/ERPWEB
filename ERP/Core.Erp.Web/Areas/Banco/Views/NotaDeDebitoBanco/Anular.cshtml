@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Banco.ba_Cbte_Ban_Info
 @{
-    ViewBag.Title = "Anular débito";
+    ViewBag.Title = "Anular débito bancario";
     Layout = "~/Views/Shared/_Layout.cshtml";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -14,9 +14,12 @@
         $("#IdBanco").change(function () {
             armar_diario();
         });
-
+        $("#cb_Valor").change(function () {
+            armar_diario();
+        });
         $("#IdSucursal").change(function () {
             GetListBancoPorSucursal();
+            armar_diario();
         });
     });
 function GetListBancoPorSucursal() {
@@ -93,7 +96,8 @@ function GetListBancoPorSucursal() {
             IdEmpresa: $("#IdEmpresa").val(),
             IdBanco: $("#IdBanco").val(),
             IdTipoNota: $("#IdTipoNota").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            Valor: $("#cb_Valor").val()
         }
         $.ajax({
             type: 'POST',

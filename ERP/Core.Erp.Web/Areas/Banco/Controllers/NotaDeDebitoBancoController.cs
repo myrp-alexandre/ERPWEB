@@ -380,29 +380,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         #endregion
 
         #region Json
-        public JsonResult SetValorDiario(float cb_Valor = 0, decimal IdTransaccionSession = 0)
-        {
-            var lst_ct = List_ct.get_list(IdTransaccionSession);
-            foreach (var item in lst_ct)
-            {
-                if (item.secuencia == 1)
-                {
-                    item.dc_Valor_debe = Math.Round(cb_Valor, 2, MidpointRounding.AwayFromZero);
-                    item.dc_Valor_haber = 0;
-                }
-                else
-                {
-                    item.dc_Valor_debe = 0;
-                    item.dc_Valor_haber = Math.Round(cb_Valor, 2, MidpointRounding.AwayFromZero);
-                }
-
-                item.dc_Valor = item.dc_Valor_debe > 0 ? item.dc_Valor_debe : item.dc_Valor_haber * -1;
-            }
-
-            return Json(lst_ct, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult armar_diario(int IdEmpresa =  0, int IdBanco = 0, int IdTipoNota = 0, decimal IdTransaccionSession = 0)
+        public JsonResult armar_diario(int IdEmpresa =  0, int IdBanco = 0, int IdTipoNota = 0, decimal IdTransaccionSession = 0, double Valor = 0)
         {
             List_ct.set_list(new List<ct_cbtecble_det_Info>(), IdTransaccionSession);
 
@@ -410,40 +388,46 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var tipo_nota = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
             var lst_op = List_op.get_list(IdTransaccionSession);
 
-            if (tipo_nota == null || string.IsNullOrEmpty(tipo_nota.IdCtaCble))
+            if (lst_op.Count > 0)
             {
                 foreach (var item in lst_op)
                 {
                     //Debe
                     List_ct.AddRow(new ct_cbtecble_det_Info
                     {
-                        IdCtaCble = item.IdCtaCble,
+                        IdCtaCble =  item.IdCtaCble,
                         dc_Valor = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero),
                         dc_Valor_debe = Math.Round(item.MontoAplicado, 2, MidpointRounding.AwayFromZero)
                     }, IdTransaccionSession);
                 }
+                List_ct.AddRow(new ct_cbtecble_det_Info
+                {
+                    IdCtaCble = bco == null ? null : bco.IdCtaCble,
+                    dc_Valor = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero) * -1,
+                    dc_Valor_haber = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero),
+                    dc_para_conciliar = true
+                }, IdTransaccionSession);
             }
             else
             {
                 //Debe
                 List_ct.AddRow(new ct_cbtecble_det_Info
                 {
-                    IdCtaCble = tipo_nota.IdCtaCble,
-                    dc_Valor = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero),
-                    dc_Valor_debe = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero)
+                    IdCtaCble = tipo_nota == null || string.IsNullOrEmpty(tipo_nota.IdCtaCble) ? null : tipo_nota.IdCtaCble,
+                    dc_Valor = Math.Round(Valor, 2, MidpointRounding.AwayFromZero),
+                    dc_Valor_debe = Math.Round(Valor, 2, MidpointRounding.AwayFromZero)
+                }, IdTransaccionSession);
+
+                List_ct.AddRow(new ct_cbtecble_det_Info
+                {
+                    IdCtaCble = bco == null ? null : bco.IdCtaCble,
+                    dc_Valor = Math.Round(Valor, 2, MidpointRounding.AwayFromZero) * -1,
+                    dc_Valor_haber = Math.Round(Valor, 2, MidpointRounding.AwayFromZero),
+                    dc_para_conciliar = true
                 }, IdTransaccionSession);
             }
-
-            
-            List_ct.AddRow(new ct_cbtecble_det_Info
-            {
-                IdCtaCble = bco.IdCtaCble,
-                dc_Valor = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero) * -1,
-                dc_Valor_haber = Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero),
-                dc_para_conciliar = true
-            }, IdTransaccionSession);
-
-            return Json(Math.Round(lst_op.Sum(q => q.MontoAplicado), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
+            Valor = lst_op.Count > 0 ? lst_op.Sum(q => q.MontoAplicado) : Valor;
+            return Json(Math.Round(Valor, 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
 
         public void vaciar_detalle(decimal IdTransaccionSession = 0)

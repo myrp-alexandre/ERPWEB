@@ -9084,7 +9084,6 @@
     <Content Include="Areas\Importacion\Views\GastosImportacion\_CmbCuenta_Gasto.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_exportaciones.cshtml" />
     <Content Include="Areas\Contabilidad\Views\ATS\_GridViewPartial_anulados.cshtml" />
-    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_comprobante_detalle_Credito.cshtml" />
     <Content Include="Areas\Importacion\Views\ParametrosImportacion\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\CatalogoTipoImportacion\Index.cshtml" />
     <Content Include="Areas\Importacion\Views\CatalogoTipoImportacion\_GridViewPartial_cat_tipo_imp.cshtml" />

@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.Banco.ba_Cbte_Ban_Info
 @{
-    ViewBag.Title = "Modificar débito";
+    ViewBag.Title = "Modificar débito bancario";
     Layout = "~/Views/Shared/_Layout.cshtml";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -23,8 +23,11 @@
         });
             $("#IdSucursal").change(function () {
                 GetListBancoPorSucursal();
+                armar_diario();
             });
-
+            $("#cb_Valor").change(function () {
+                armar_diario();
+            });
     });
 function GetListBancoPorSucursal() {
         $("#IdBanco").empty();
@@ -100,7 +103,8 @@ function GetListBancoPorSucursal() {
             IdEmpresa: $("#IdEmpresa").val(),
             IdBanco: $("#IdBanco").val(),
             IdTipoNota: $("#IdTipoNota").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            Valor: $("#cb_Valor").val()
         }
         $.ajax({
             type: 'POST',
@@ -247,7 +251,7 @@ function GetListBancoPorSucursal() {
             <div class="col-md-2 col-md-offset-4">
                 <div class="form-group">
                     <label for="cb_Valor">Valor</label>
-                    @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control", @readonly = "readonly" })
+                    @Html.TextBoxFor(q => q.cb_Valor, new { @id = "cb_Valor", @class = "form-control" })
                 </div>
             </div>
         </div>
