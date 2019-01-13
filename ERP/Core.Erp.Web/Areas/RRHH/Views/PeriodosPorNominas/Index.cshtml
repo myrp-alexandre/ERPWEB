@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.RRHH.ro_periodo_x_ro_Nomina_TipoLiqui_Info
 @{
-    ViewBag.Title = "Asignación de reportes por usuario";
+    ViewBag.Title = "Periodos por nominas";
 
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -17,7 +17,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("EditingUpdate", "ReportesPorUsuario",new { Area = "General"})',
+            url: '@Url.Action("EditingUpdate", "PeriodosPorNominas",new { Area = "RRHH"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -28,20 +28,20 @@
             error: function (error) {
             }
         });
-        GridView_ReportesPorAsignar.PerformCallback();
-        GridView_ReportesAsignados.PerformCallback();
+        GridView_periodos.PerformCallback();
+        GridView_periodos_por_nominas.PerformCallback();
     }
 
     function guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IdUsuario: $("#IdUsuario").val(),
+            IdPeriodo: $("#IdPeriodo").val(),
         }
         $("#btn_guardar").attr("disabled", true);
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "ReportesPorUsuario", new { Area = "General" })',
+            url: '@Url.Action("guardar", "PeriodosPorNominas", new { Area = "RRHH" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -57,7 +57,7 @@
     }
 </script>
 
-@using (Html.BeginForm("Index", "ReportesPorUsuario", FormMethod.Post, new { role = "form", @class = "form", @id = "myform" }))
+@using (Html.BeginForm("Index", "PeriodosPorNominas", FormMethod.Post, new { role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdTransaccionSession)
 
@@ -104,3 +104,48 @@
     </div>
 
 }
+
+    <script>
+        $(function ()
+        {
+            cargar_tipo_liquidacion_nomina();
+            cargar_periodos_x_nomina();
+        });
+$("#IdNomina_Tipo").change(function () {
+        $("#IdNomina_TipoLiqui").empty();
+             cargar_tipo_liquidacion_nomina();
+
+        });
+
+    $("#IdNomina_TipoLiqui").change(function () {
+           $("#IdPeriodo").empty();
+            cargar_periodos_x_nomina();
+        });
+   
+
+
+        function cargar_tipo_liquidacion_nomina() {
+            var datos = {
+                IdNomina: $("#IdNomina_Tipo").val()
+            }
+
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_lst_nomina_tipo_liq", "NominaTipoLiquidacion", new { Area = "RRHH" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                $.each(data, function (i, row) {
+                $("#IdNomina_TipoLiqui").append("<option value=" + row.IdNomina_TipoLiqui + ">" + row.DescripcionProcesoNomina + "</option>");
+                });
+                },
+                error: function (error) {
+                }
+                });
+                };
+    </script>

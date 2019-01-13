@@ -6,7 +6,10 @@
         settings.CallbackRouteValues = new { Controller = "PeriodosPorNominas", Action = "GridViewPartial_periodos_por_nominas" };
         settings.KeyFieldName = "IdPeriodo";
         settings.Width = Unit.Percentage(100);
-        settings.SettingsText.Title = "Periodos por nominas";
+
+        //Configuracion cabecera
+        settings.Settings.ShowTitlePanel = true;
+        settings.SettingsText.Title = "Periodos asignados";
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
