@@ -23,8 +23,6 @@ namespace Core.Erp.Data.Reportes.Facturacion
                              select new FAC_006_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
-                                 em_nombre = q.em_nombre,
-                                 em_ruc = q.em_ruc,
                                  IdSucursal = q.IdSucursal,
                                  Su_CodigoEstablecimiento = q.Su_CodigoEstablecimiento,
                                  Su_Descripcion = q.Su_Descripcion,
@@ -46,7 +44,6 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  pf_atencion_a = q.pf_atencion_a,
                                  Codigo = q.Codigo,
                                  Ve_Vendedor = q.Ve_Vendedor,
-                                 pr_descripcion = q.pr_descripcion,
                                  pd_cantidad = q.pd_cantidad,
                                  pd_precio = q.pd_precio,
                                  pd_descuento_uni = q.pd_descuento_uni,
@@ -58,29 +55,9 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  pd_total = q.pd_total,
                                  pr_dias_entrega = q.pr_dias_entrega,
                                  IdProducto = q.IdProducto,
-                                 nom_marca = q.nom_marca,
-                                 nom_modelo = q.nom_modelo,
                                  pr_observacion = q.pr_observacion,
-                                 lote_fecha_vcto = q.lote_fecha_vcto,
-                                 lote_num_lote = q.lote_num_lote,
                                  pf_observacion = q.pf_observacion,
-                                 IdProducto_padre = q.IdProducto_padre
                              }).ToList();
-                }
-                if (mostrar_imagen)
-                {
-                    using (Entities_inventario Context = new Entities_inventario())
-                    {
-                        foreach (var item in Lista)
-                        {
-                            var producto = Context.in_Producto.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdProducto == (item.IdProducto_padre == null ? item.IdProducto : item.IdProducto_padre)).FirstOrDefault();
-                            if (producto != null && producto.pr_imagen != null)
-                            {
-                                item.pr_imagen = producto.pr_imagen;
-                                item.Detalle ="MARCA: " + item.nom_marca + " \r\nMODELO: " + item.nom_modelo + (producto.pr_observacion == null ? "" : "\r\nCARACTERISTICAS:\r\n" + producto.pr_observacion);
-                            }
-                        }
-                    }
                 }
                 return Lista;
             }
