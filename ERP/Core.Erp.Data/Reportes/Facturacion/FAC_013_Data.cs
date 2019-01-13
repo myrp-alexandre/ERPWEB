@@ -57,9 +57,10 @@ namespace Core.Erp.Data.Reportes.Facturacion
                         vt_por_iva = q.vt_por_iva,
                         vt_Precio = q.vt_Precio,
                         vt_PrecioFinal = q.vt_PrecioFinal,
-                        vt_Subtotal = q.vt_Subtotal
+                        vt_Subtotal = q.vt_Subtotal,
+                            pr_descripcion = q.pr_descripcion
 
-                    }).ToList();
+                        }).ToList();
                 }
                 return Lista;
             }

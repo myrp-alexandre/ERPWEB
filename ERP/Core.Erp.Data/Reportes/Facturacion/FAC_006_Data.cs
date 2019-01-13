@@ -57,6 +57,7 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  IdProducto = q.IdProducto,
                                  pr_observacion = q.pr_observacion,
                                  pf_observacion = q.pf_observacion,
+                                 pr_descripcion = q.pr_descripcion
                              }).ToList();
                 }
                 return Lista;

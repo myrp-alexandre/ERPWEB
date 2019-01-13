@@ -1823,6 +1823,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_006' no tiene definida ningu
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="pr_dias_entrega" Type="int" Nullable="false" />
           <Property Name="pf_observacion" Type="varchar(max)" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -2110,6 +2111,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_013' no tiene definida ningu
           <Property Name="vt_Observacion" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="IdBodega" Type="int" Nullable="false" />
           <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.VWIMP_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -4657,7 +4659,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
     [VWFAC_006].[pr_observacion] AS [pr_observacion], 
     [VWFAC_006].[IdProducto] AS [IdProducto], 
     [VWFAC_006].[pr_dias_entrega] AS [pr_dias_entrega], 
-    [VWFAC_006].[pf_observacion] AS [pf_observacion]
+    [VWFAC_006].[pf_observacion] AS [pf_observacion], 
+    [VWFAC_006].[pr_descripcion] AS [pr_descripcion]
     FROM [web].[VWFAC_006] AS [VWFAC_006]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWFAC_007" EntityType="Self.VWFAC_007" store:Type="Views" store:Schema="web">
@@ -4829,7 +4832,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
     [VWFAC_013].[IdProducto] AS [IdProducto], 
     [VWFAC_013].[vt_Observacion] AS [vt_Observacion], 
     [VWFAC_013].[IdBodega] AS [IdBodega], 
-    [VWFAC_013].[IdCbteVta] AS [IdCbteVta]
+    [VWFAC_013].[IdCbteVta] AS [IdCbteVta], 
+    [VWFAC_013].[pr_descripcion] AS [pr_descripcion]
     FROM [web].[VWFAC_013] AS [VWFAC_013]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWIMP_001" EntityType="Self.VWIMP_001" store:Type="Views" store:Schema="web">
@@ -9589,6 +9593,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="pr_dias_entrega" Type="Int32" Nullable="false" />
           <Property Name="pf_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pr_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VWFAC_013">
           <Key>
@@ -9652,6 +9657,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <Property Name="vt_Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IdBodega" Type="Int32" Nullable="false" />
           <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -12405,6 +12411,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <EntitySetMapping Name="VWFAC_006">
             <EntityTypeMapping TypeName="Model_reportes.VWFAC_006">
               <MappingFragment StoreEntitySet="VWFAC_006">
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
                 <ScalarProperty Name="pf_observacion" ColumnName="pf_observacion" />
                 <ScalarProperty Name="pr_dias_entrega" ColumnName="pr_dias_entrega" />
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
@@ -12446,6 +12453,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <EntitySetMapping Name="VWFAC_013">
             <EntityTypeMapping TypeName="Model_reportes.VWFAC_013">
               <MappingFragment StoreEntitySet="VWFAC_013">
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
                 <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />

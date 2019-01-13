@@ -49,5 +49,6 @@ namespace Core.Erp.Data
         public decimal IdProducto { get; set; }
         public int pr_dias_entrega { get; set; }
         public string pf_observacion { get; set; }
+        public string pr_descripcion { get; set; }
     }
 }

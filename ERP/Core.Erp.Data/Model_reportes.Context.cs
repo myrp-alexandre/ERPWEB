@@ -15,6 +15,7 @@ namespace Core.Erp.Data
     using System.Data.Entity.Core.Objects;
     using System.Linq;
 
+
     public partial class Entities_reportes : DbContext
     {
         public Entities_reportes()
