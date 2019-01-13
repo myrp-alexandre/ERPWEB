@@ -647,7 +647,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 lst_cuota = new List<fa_cuotas_x_doc_Info>(),
                 vt_tipoDoc = "FACT",
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
-                DescuentoReadOnly = false
+                DescuentoReadOnly = false,
+                IdCatalogo_FormaPago = "EFEC"
             };
             
             List_det.set_list(model.lst_det, model.IdTransaccionSession);

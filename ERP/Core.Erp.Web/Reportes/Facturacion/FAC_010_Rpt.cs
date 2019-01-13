@@ -1,10 +1,7 @@
-﻿using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using DevExpress.XtraReports.UI;
-using Core.Erp.Bus.Reportes.Facturacion;
+﻿using Core.Erp.Bus.Reportes.Facturacion;
 using Core.Erp.Info.Reportes.Facturacion;
+using DevExpress.XtraReports.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 

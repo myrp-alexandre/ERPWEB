@@ -186,15 +186,20 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             //model.lst_fa_cliente_contactos.ForEach(q => { q.IdEmpresa = model.IdEmpresa; q.IdCliente = model.IdCliente; });
-            fa_cliente_contactos_Info info_contacto = new fa_cliente_contactos_Info();
-            info_contacto.IdContacto = model.IdContacto;
-            info_contacto.Nombres = "";
-            info_contacto.Direccion = model.Direccion;
-            info_contacto.Correo = model.Correo;
-            info_contacto.Telefono = model.Telefono;
-            info_contacto.Celular = model.Celular;
-            info_contacto.IdCiudad = model.IdCiudad;
-            info_contacto.IdParroquia = model.IdParroquia;
+            fa_cliente_contactos_Info info_contacto = new fa_cliente_contactos_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdCliente = model.IdCliente,
+                IdContacto = model.IdContacto,
+                Nombres = "",
+                Direccion = model.Direccion,
+                Correo = model.Correo,
+                Telefono = model.Telefono,
+                Celular = model.Celular,
+                IdCiudad = model.IdCiudad,
+                IdParroquia = model.IdParroquia,
+            };
+            
 
             if (!bus_cliente_contacto.guardarDB(info_contacto))
             {

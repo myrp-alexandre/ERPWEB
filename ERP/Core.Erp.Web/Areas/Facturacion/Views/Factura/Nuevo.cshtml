@@ -14,7 +14,7 @@
         CargarPuntosDeVenta();
         get_info_termino_pago();
         ValidarGrid();
-        ValidarCliente();        
+        ValidarCliente();
         $("#vt_tipo_venta").change(function () {
             get_info_termino_pago();
             CargarCuotas();
@@ -529,6 +529,18 @@
         var Efectivo = Number($("#vt_ValorEfectivo").val());
         $("#vt_Cambio").val((Efectivo - Total).toFixed(2));
     }
+
+    function CrearModificarCliente() {
+        if(IdCliente.GetValue() > 0)
+        {
+            var win = window.open(window.location.origin+"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+IdCliente.GetValue(), '_blank');
+            win.focus();
+        }else
+        {
+            var win = window.open(window.location.origin+"/Facturacion/Cliente/Nuevo?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+            win.focus();
+        }
+    }
 </script>
 
 @using (Html.BeginForm("Nuevo", "Factura", FormMethod.Post, new { @class = "form", @role = "form" }))
@@ -705,9 +717,9 @@
             <div class="col-md-1">
                 <div class="form-group">
                     <label for="IdCliente"></label>
-                    <a type="button" class="btn btn-primary form-control " href="@Url.Action("Nuevo","Cliente",new { Area = "Facturacion", IdEmpresa = Model.IdEmpresa },null)" target="_blank">
-                        <i class="fa fa-plus"></i>
-                    </a>
+                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarCliente();">
+                        <i class="fa fa-external-link-square"></i>
+                    </button>
                 </div>
             </div>
             <div class="col-md-12">
