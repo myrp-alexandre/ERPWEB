@@ -8,6 +8,8 @@ namespace Core.Erp.Info.RRHH
 {
    public class ro_periodo_x_ro_Nomina_TipoLiqui_Info
     {
+
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdNomina_Tipo { get; set; }
         public int IdNomina_TipoLiqui { get; set; }
@@ -21,5 +23,6 @@ namespace Core.Erp.Info.RRHH
         public System.DateTime pe_FechaIni { get; set; }
         public System.DateTime pe_FechaFin { get; set; }
         public string descripcion { get; set; }
+        public bool seleccionado { get; set; }
     }
 }
