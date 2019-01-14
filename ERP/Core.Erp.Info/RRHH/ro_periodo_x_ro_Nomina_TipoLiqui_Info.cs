@@ -24,5 +24,7 @@ namespace Core.Erp.Info.RRHH
         public System.DateTime pe_FechaFin { get; set; }
         public string descripcion { get; set; }
         public bool seleccionado { get; set; }
+        public bool esta_base { get; set; }
+
     }
 }

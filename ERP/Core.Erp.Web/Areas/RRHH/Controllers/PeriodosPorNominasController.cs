@@ -74,12 +74,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         #endregion
         #region Json
-        public JsonResult guardar(int IdEmpresa = 0, string IdUsuario = "")
+        public JsonResult guardar(int IdEmpresa = 0,int IdNomina_Tipo=0,int IdNomina_TipoLiqui=0)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             var lista_grabar = List_det.get_list(Convert.ToInt32(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == true).ToList();
-                var resultado = periodos_x_nominas.guardarDB(lista_grabar);
+                var resultado = periodos_x_nominas.guardarDB(lista_grabar, IdEmpresa,IdNomina_Tipo,IdNomina_TipoLiqui);
             return Json("", JsonRequestBehavior.AllowGet);
         }
         

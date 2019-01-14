@@ -45,10 +45,49 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdPeriodo", "Periodo").Width = Unit.Percentage(20);
-        settings.Columns.Add("pe_FechaIni", "Fecha inicio").Width = Unit.Percentage(40);
-        settings.Columns.Add("pe_FechaFin", "Fecha fin").Width = Unit.Percentage(35);
+        settings.Columns.Add("IdPeriodo", "Periodo").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_FechaIni";
+            column.Caption = "Fecha incio";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_FechaFin";
+            column.Caption = "Fecha fin";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add("Procesado", "Procesado").Width = Unit.Percentage(8);
 
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.FieldName = "IdPeriodo";
+            column.Width = Unit.Percentage(20);
+            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            column.SetDataItemTemplateContent(c =>
+            {
+                Html.DevExpress().Button(settingsBtn =>
+                {
+                    settingsBtn.Name = "btn" + c.KeyValue;
+                    settingsBtn.Text = "Eliminar";
+                    settingsBtn.ClientSideEvents.Click = "function(s, e) {EditingUpdate('" + c.KeyValue + "');}";
+                }).Render();
+            });
+        });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
 
     });

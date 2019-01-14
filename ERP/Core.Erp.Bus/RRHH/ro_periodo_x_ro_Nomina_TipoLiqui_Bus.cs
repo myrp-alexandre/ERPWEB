@@ -46,11 +46,11 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public bool guardarDB(List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> info)
+        public bool guardarDB(List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> info, int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiq)
         {
             try
             {
-                return odata.guardarDB(info);
+                return odata.guardarDB(info, IdEmpresa,IdNominaTipo,IdNominaTipoLiq);
             }
             catch (Exception)
             {

@@ -33,7 +33,9 @@ namespace Core.Erp.Data.RRHH
                                   Contabilizado=r.Contabilizado,
                                   pe_FechaFin=q.pe_FechaFin,
                                   pe_FechaIni=q.pe_FechaIni,
-                                 seleccionado = true
+                                  seleccionado = true,
+                                  esta_base=true
+                                  
                              }).ToList();
 
                     
@@ -141,30 +143,37 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
-        public bool guardarDB(List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lista)
+        public bool guardarDB(List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> lista, int IdEmpresa, int IdNomina_Tipo, int IdNomina_TipoLiqui)
         {
             try
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
+                    var lst_periodos = Context.ro_periodo_x_ro_Nomina_TipoLiqui.Where(v => v.IdEmpresa == IdEmpresa
+                      && v.IdNomina_Tipo == IdNomina_Tipo && v.IdNomina_TipoLiqui == IdNomina_TipoLiqui
+                      && v.Procesado == "N");
+                      Context.ro_periodo_x_ro_Nomina_TipoLiqui.RemoveRange(lst_periodos);
+
                     foreach (var item in lista)
                     {
                         ro_periodo_x_ro_Nomina_TipoLiqui Entity = new ro_periodo_x_ro_Nomina_TipoLiqui
                         {
-                            IdEmpresa = item.IdEmpresa,
-                            IdNomina_Tipo = item.IdNomina_Tipo,
-                            IdNomina_TipoLiqui = item.IdNomina_TipoLiqui,
+                            IdEmpresa = IdEmpresa,
+                            IdNomina_Tipo = IdNomina_Tipo,
+                            IdNomina_TipoLiqui = IdNomina_TipoLiqui,
+                            IdPeriodo=item.IdPeriodo,
                             Procesado = "N",
                             Cerrado = "N",
                             Contabilizado = "N"
                         };
+                        if(item.Procesado!="S" )
                         Context.ro_periodo_x_ro_Nomina_TipoLiqui.Add(Entity);
                     }
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 throw;

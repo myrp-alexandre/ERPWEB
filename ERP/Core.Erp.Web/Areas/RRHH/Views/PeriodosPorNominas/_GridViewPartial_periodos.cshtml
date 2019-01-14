@@ -33,9 +33,31 @@
         settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
-        settings.Columns.Add("IdPeriodo", "Periodo").Width = Unit.Percentage(20);
-        settings.Columns.Add("pe_FechaIni", "Fecha inicio").Width = Unit.Percentage(40);
-        settings.Columns.Add("pe_FechaFin", "Fecha fin").Width = Unit.Percentage(35);
+        settings.Columns.Add("IdPeriodo", "Periodo").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_FechaIni";
+            column.Caption = "Fecha incio";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_FechaFin";
+            column.Caption = "Fecha fin";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "d";
+            column.EditorProperties().DateEdit(sp =>
+            {
+                column.PropertiesEdit.DisplayFormatString = "d";
+                sp.Width = Unit.Percentage(100);
+            });
+        });
 
         settings.Columns.Add(column =>
         {

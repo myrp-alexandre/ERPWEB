@@ -35,7 +35,8 @@
     function guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IdPeriodo: $("#IdPeriodo").val(),
+            IdNomina_Tipo: $("#IdNomina_Tipo").val(),
+            IdNomina_TipoLiqui: $("#IdNomina_TipoLiqui").val()
         }
         $("#btn_guardar").attr("disabled", true);
         $.ajax({
@@ -109,9 +110,10 @@
     <script>
         $(function ()
         {
+            $("#IdNomina_TipoLiqui").empty();
             cargar_tipo_liquidacion_nomina();
         });
-$("#IdNomina_Tipo").change(function () {
+        $("#IdNomina_Tipo").change(function () {
         $("#IdNomina_TipoLiqui").empty();
              cargar_tipo_liquidacion_nomina();
 
