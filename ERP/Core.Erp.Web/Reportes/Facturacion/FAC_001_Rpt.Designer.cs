@@ -429,7 +429,7 @@
             // 
             // lbl_empresa
             // 
-            this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 8F);
+            this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 12F);
             this.lbl_empresa.Name = "lbl_empresa";
             this.lbl_empresa.StylePriority.UseFont = false;
             this.lbl_empresa.StylePriority.UseTextAlignment = false;

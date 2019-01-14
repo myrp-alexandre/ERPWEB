@@ -288,7 +288,7 @@
             // lbl_empresa
             // 
             this.lbl_empresa.Dpi = 96F;
-            this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 8F);
+            this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 12F);
             this.lbl_empresa.Name = "lbl_empresa";
             this.lbl_empresa.Padding = new DevExpress.XtraPrinting.PaddingInfo(77, 0, 0, 0, 96F);
             this.lbl_empresa.StylePriority.UseFont = false;

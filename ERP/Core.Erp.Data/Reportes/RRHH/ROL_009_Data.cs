@@ -1,4 +1,5 @@
-﻿using Core.Erp.Info.Reportes.RRHH;
+﻿using Core.Erp.Info.Helps;
+using Core.Erp.Info.Reportes.RRHH;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,10 @@ namespace Core.Erp.Data.Reportes.RRHH
                 decimal IdEmpleadoInicio = IdEmpleado;
                 decimal IdEmpleadoFin = IdEmpleado == 0 ? 9999 : IdEmpleado;
 
+                if(estado_novedad== "System.String[]" || estado_novedad=="")
+                {
+                    estado_novedad = "CAN,PEN";
+                }
                 List<ROL_009_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
@@ -27,7 +32,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                              where q.IdEmpresa == IdEmpresa
                              && q.FechaPago>=fecha_inicio
                              && q.FechaPago<= fecha_fin
-                             && q.EstadoCobro.Contains(estado_novedad)
+                             && estado_novedad.Contains(q.EstadoCobro)
                              && q.IdEmpleado>=IdEmpleadoInicio
                              && q.IdEmpleado<=IdEmpleadoFin
 

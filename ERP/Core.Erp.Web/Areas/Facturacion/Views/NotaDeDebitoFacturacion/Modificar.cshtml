@@ -7,7 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script>
     $(function () {
         CargarPuntosDeVenta();
@@ -273,9 +273,16 @@
         });
            GridView_CruceND.PerformCallback();
     }
-
+    function CrearModificarCliente() {
+        if (IdCliente.GetValue() > 0) {
+            var win = window.open(window.location.origin + "/Facturacion/Cliente/Modificar?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente=" + IdCliente.GetValue(), '_blank');
+            win.focus();
+        } else {
+            var win = window.open(window.location.origin + "/Facturacion/Cliente/Nuevo?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+            win.focus();
+        }
+    }
 </script>
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Modificar", "NotaDeDebitoFacturacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -351,11 +358,19 @@
                     @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <div class="form-group">
                     <label for="IdCliente">Cliente*</label>
                     @Html.Partial("_CmbCliente_NotaDebitoFacturacion", Model.IdCliente)
                     @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdCliente"></label>
+                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarCliente();">
+                        <i class="fa fa-external-link-square"></i>
+                    </button>
                 </div>
             </div>
             <div class="col-md-12">

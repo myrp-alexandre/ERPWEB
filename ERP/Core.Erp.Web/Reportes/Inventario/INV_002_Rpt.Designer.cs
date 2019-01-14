@@ -627,13 +627,13 @@
             this.xrTable8,
             this.xrTable7,
             this.xrTable6});
-            this.ReportFooter.HeightF = 60.29175F;
+            this.ReportFooter.HeightF = 73.29175F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrTable5
             // 
             this.xrTable5.Font = new System.Drawing.Font("Times New Roman", 7F, System.Drawing.FontStyle.Bold);
-            this.xrTable5.LocationFloat = new DevExpress.Utils.PointFloat(100.0001F, 40.29172F);
+            this.xrTable5.LocationFloat = new DevExpress.Utils.PointFloat(100.0001F, 53.29172F);
             this.xrTable5.Name = "xrTable5";
             this.xrTable5.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow13});
@@ -664,7 +664,7 @@
             // xrTable8
             // 
             this.xrTable8.Font = new System.Drawing.Font("Times New Roman", 7F, System.Drawing.FontStyle.Bold);
-            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(309.4586F, 40.29172F);
+            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(309.4586F, 53.29172F);
             this.xrTable8.Name = "xrTable8";
             this.xrTable8.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow15});
@@ -693,7 +693,7 @@
             // xrTable7
             // 
             this.xrTable7.Font = new System.Drawing.Font("Times New Roman", 7F, System.Drawing.FontStyle.Bold);
-            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(515.0001F, 40.29175F);
+            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(515.0001F, 53.29175F);
             this.xrTable7.Name = "xrTable7";
             this.xrTable7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow14});

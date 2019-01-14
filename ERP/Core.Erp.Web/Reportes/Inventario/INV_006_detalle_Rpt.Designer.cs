@@ -538,8 +538,10 @@
             // 
             // lbl_empresa
             // 
+            this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 12F);
             this.lbl_empresa.Name = "lbl_empresa";
             this.lbl_empresa.Padding = new DevExpress.XtraPrinting.PaddingInfo(65, 0, 0, 0, 100F);
+            this.lbl_empresa.StylePriority.UseFont = false;
             this.lbl_empresa.StylePriority.UsePadding = false;
             this.lbl_empresa.Text = "lbl_empresa";
             this.lbl_empresa.Weight = 1.8156406093509052D;
