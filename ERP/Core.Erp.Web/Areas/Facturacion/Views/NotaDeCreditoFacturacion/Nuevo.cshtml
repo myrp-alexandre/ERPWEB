@@ -7,9 +7,11 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<script>
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
     $(function () {
+        CrearModificarCliente();
+
         CargarPuntosDeVenta();
         get_info_cliente();
         GetUltimoDocumento();
@@ -279,6 +281,7 @@
     }
 
     function CrearModificarCliente() {
+        console.log("sdsad");
         if (IdCliente.GetValue() > 0) {
             var win = window.open(window.location.origin + "/Facturacion/Cliente/Modificar?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente=" + IdCliente.GetValue(), '_blank');
             win.focus();
@@ -289,7 +292,7 @@
     }
 
 </script>
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
 
 @using (Html.BeginForm("Nuevo", "NotaDeCreditoFacturacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {

@@ -7,7 +7,7 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script>
     $(function () {
         CargarPuntosDeVenta();
@@ -286,7 +286,6 @@
             win.focus();
         }
 </script>
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
 @using (Html.BeginForm("Nuevo", "NotaDeDebitoFacturacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
