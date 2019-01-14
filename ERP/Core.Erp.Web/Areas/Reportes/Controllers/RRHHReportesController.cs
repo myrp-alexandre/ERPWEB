@@ -171,9 +171,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fecha_inicio.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
-            report.p_estado_novedad.Value = novedad == null ? "" : Convert.ToString(model.estado_novedad);
+            report.p_estado_novedad.Value = novedad;
             report.p_IdEmpleado.Value = model.IdEmpleado == null ? 0 : Convert.ToDecimal(model.IdEmpleado);
-            report.p_IdRubro.Value = model.IdRubro == null ? "" : Convert.ToString(model.IdEmpleado);
+            report.p_IdRubro.Value = model.IdRubro == null ? "" : Convert.ToString(model.IdRubro);
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
