@@ -697,8 +697,11 @@
             var date = new Date(moment(co_FechaFactura.GetValue(), "DD/MM/YYYY").add(plazo, 'days'));
             co_FechaFactura_vct.SetValue(date);
         }
-        else
-            co_FechaFactura_vct.SetValue(co_FechaFactura.GetValue());
+        else {
+            var date = new Date(moment(co_FechaFactura.GetValue(), "DD/MM/YYYY").add(0, 'days'));
+            co_FechaFactura_vct.SetValue(date);
+
+        }
 
     });
 
