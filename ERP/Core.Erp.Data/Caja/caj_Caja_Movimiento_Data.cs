@@ -223,7 +223,7 @@ namespace Core.Erp.Data.Caja
                     Entity.IdTipo_Persona = info.IdTipo_Persona;
                     Entity.IdEntidad = info.IdEntidad;
                     Entity.IdCaja = info.IdCaja;
-
+                    Entity.IdTipoMovi = info.IdTipoMovi;
                     caj_Caja_Movimiento_det Entity_det = Context.caj_Caja_Movimiento_det.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble);
                     if(Entity_det == null) return false;
 
