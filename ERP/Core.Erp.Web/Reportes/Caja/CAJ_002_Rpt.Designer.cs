@@ -435,7 +435,7 @@
             // 
             // lbl_empresa
             // 
-            this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold);
+            this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 12F);
             this.lbl_empresa.Name = "lbl_empresa";
             this.lbl_empresa.Padding = new DevExpress.XtraPrinting.PaddingInfo(78, 0, 0, 0, 100F);
             this.lbl_empresa.StylePriority.UseFont = false;
@@ -694,13 +694,13 @@
             this.xrTable8,
             this.xrTable9,
             this.xrTable5});
-            this.ReportFooter.HeightF = 57.50003F;
+            this.ReportFooter.HeightF = 73.50003F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrTable7
             // 
             this.xrTable7.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(446.4F, 37.50003F);
+            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(446.4F, 53.50003F);
             this.xrTable7.Name = "xrTable7";
             this.xrTable7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow11});
@@ -731,7 +731,7 @@
             // xrTable8
             // 
             this.xrTable8.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(60.00001F, 37.50003F);
+            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(60.00001F, 53.50003F);
             this.xrTable8.Name = "xrTable8";
             this.xrTable8.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow5});
@@ -761,7 +761,7 @@
             // 
             // xrTable9
             // 
-            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(786.9999F, 37.50003F);
+            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(786.9999F, 53.50003F);
             this.xrTable9.Name = "xrTable9";
             this.xrTable9.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow12});
