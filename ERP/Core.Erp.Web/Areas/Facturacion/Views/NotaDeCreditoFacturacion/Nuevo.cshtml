@@ -278,6 +278,16 @@
            GridView_CruceNC.PerformCallback();
     }
 
+    function CrearModificarCliente() {
+        if (IdCliente.GetValue() > 0) {
+            var win = window.open(window.location.origin + "/Facturacion/Cliente/Modificar?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente=" + IdCliente.GetValue(), '_blank');
+            win.focus();
+        } else {
+            var win = window.open(window.location.origin + "/Facturacion/Cliente/Nuevo?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+            win.focus();
+        }
+    }
+
 </script>
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
@@ -361,7 +371,9 @@
             <div class="col-md-1">
                 <div class="form-group">
                     <label for="IdCliente"></label>
-                    <a type="button" class="btn btn-primary form-control " href="@Url.Action("Nuevo","Cliente",new { Area = "Facturacion", IdEmpresa = Model.IdEmpresa },null)" target="_blank">+</a>
+                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarCliente();">
+                        <i class="fa fa-external-link-square"></i>
+                    </button>
                 </div>
             </div>
             <div class="col-md-12">
