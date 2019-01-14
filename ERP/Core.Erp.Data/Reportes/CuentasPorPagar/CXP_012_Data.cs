@@ -53,7 +53,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                              }).ToList();
                     foreach (var item in Lista)
                     {
-                        item.Fecha_rep = item.fecha.ToString().Substring(3,7);
+                        item.Fecha_rep = item.fecha.ToString().Substring(6,4);
                     }
                     int cont = 4;
                     if(Lista.Count()!=4)
