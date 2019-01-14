@@ -26,7 +26,7 @@ namespace Core.Erp.Data.Contabilidad
                                  dc_Observacion = q.dc_Observacion,
                                  dc_Valor = q.dc_Valor,
                                  IdCbteCble = q.IdCbteCble,
-                                 IdCtaCble = q.IdCtaCble,
+                                 IdCtaCble = q.IdCtaCble,                                 
                                  IdTipoCbte = q.IdTipoCbte,
                                  secuencia = q.secuencia,
                                  dc_para_conciliar_null = q.dc_para_conciliar,

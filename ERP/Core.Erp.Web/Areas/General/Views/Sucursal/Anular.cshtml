@@ -52,6 +52,24 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCtaCble_vtaIVA0">Cuenta contable Iva 0</label>
+                    @Html.Partial("_CmbCuenta_Sucursal_IVA0", Model)
+                    @Html.ValidationMessageFor(m => m.IdCtaCble_vtaIVA0, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCtaCble_vtaIVA">Cuenta contable Iva</label>
+                    @Html.Partial("_CmbCuenta_Sucursal_IVA", Model)
+                    @Html.ValidationMessageFor(m => m.IdCtaCble_vtaIVA, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Su_Descripcion">Descripción*</label>

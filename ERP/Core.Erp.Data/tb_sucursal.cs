@@ -38,6 +38,8 @@ namespace Core.Erp.Data
         public string MotiAnula { get; set; }
         public bool Es_establecimiento { get; set; }
         public string IdCtaCble_cxp { get; set; }
+        public string IdCtaCble_vtaIVA0 { get; set; }
+        public string IdCtaCble_vtaIVA { get; set; }
     
         public virtual ICollection<tb_bodega> tb_bodega { get; set; }
         public virtual tb_empresa tb_empresa { get; set; }

@@ -664,6 +664,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                         var IdSucursal = lst_sucursal.Where(q => q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal;
                         var InfoCliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, Convert.ToString(reader.GetValue(1)));                                                
                         var infoBodega = bus_bodega.get_info(IdEmpresa, IdSucursal, 1);
+
                         if (InfoCliente != null && InfoCliente.IdCliente != 0)
                         {
                             //var InfoContactosCliente = bus_cliente_contatos.get_list(IdEmpresa, InfoCliente.IdCliente);
@@ -689,7 +690,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                                 no_fecha = Convert.ToDateTime(reader.GetValue(5)),
                                 no_fecha_venc = Convert.ToDateTime(reader.GetValue(6)),
                                 IdTipoNota = infoTipoNota.IdTipoNota,
-                                sc_observacion = Convert.ToString(reader.GetValue(7)),
+                                sc_observacion = Convert.ToString(reader.GetValue(7)) == "" ? ("DOCUMENTO #"+ Convert.ToString(reader.GetValue(2))+" CLIENTE: "+ InfoCliente.info_persona.pe_nombreCompleto) : Convert.ToString(reader.GetValue(7)),
                                 IdUsuario = SessionFixed.IdUsuario,
                                 NaturalezaNota = null,
                                 IdCtaCble_TipoNota = infoTipoNota.IdCtaCble,
@@ -703,7 +704,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             fa_notaCreDeb_det_Info info_detalle = new fa_notaCreDeb_det_Info
                             {
                                 IdEmpresa = IdEmpresa,
-                                IdSucursal = lst_sucursal.Where(q => q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal,
+                                IdSucursal = IdSucursal,
                                 IdBodega = info.IdBodega,
                                 IdNota = info.IdNota,
                                 IdProducto = 1,
@@ -731,11 +732,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                             info.lst_det.Add(info_detalle);                            
                                                  
                             Lista_Factura.Add(info);
-                        }
-                        else
-                        {
-
-                        }                            
+                        }                           
                     }
                     else
                         cont++;

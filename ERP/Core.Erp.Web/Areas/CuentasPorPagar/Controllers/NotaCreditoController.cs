@@ -36,6 +36,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         cp_orden_pago_cancelaciones_Bus bus_orden_pago_cancelaciones = new cp_orden_pago_cancelaciones_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         cp_orden_pago_cancelaciones_List List_op = new cp_orden_pago_cancelaciones_List();
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         #endregion
         #region Metodos ComboBox bajo demanda
         tb_persona_Bus bus_persona = new tb_persona_Bus();
@@ -52,6 +53,24 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROVEE.ToString());
         }
+
+        #region CmbCuenta_NC
+
+        public ActionResult CmbCuenta_NC()
+        {
+            ct_cbtecble_det_Info model = new ct_cbtecble_det_Info();
+            return PartialView("_CmbCuenta_NC", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda_ctacble(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_ctacble(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         #endregion
 
         #region vistas partial

@@ -88,6 +88,8 @@ namespace Core.Erp.Web.Areas.General.Controllers
         #endregion
         #region Metodos ComboBox bajo demanda
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        
+        #region CmbCuenta_Sucursal
         public ActionResult CmbCuenta_Sucursal()
         {
             tb_sucursal_Info model = new tb_sucursal_Info();
@@ -102,6 +104,42 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
+        #endregion
+
+        #region CmbCuenta_Sucursal_IVA
+        public ActionResult CmbCuenta_Sucursal_IVA()
+        {
+            tb_sucursal_Info model = new tb_sucursal_Info();
+            return PartialView("_CmbCuenta_Sucursal_IVA", model);
+        }
+
+        public List<ct_plancta_Info> get_list_bajo_demanda_ctacble_iva(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_ctacble_iva(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
+        #region CmbCuenta_Sucursal_IVA0
+        public ActionResult CmbCuenta_Sucursal_IVA0()
+        {
+            tb_sucursal_Info model = new tb_sucursal_Info();
+            return PartialView("_CmbCuenta_Sucursal_IVA0", model);
+        }
+
+        public List<ct_plancta_Info> get_list_bajo_demanda_ctacble_iva0(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda_ctacble_iva0(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         #endregion
 
     }
