@@ -18,8 +18,8 @@ namespace Core.Erp.Data
         {
             this.tb_sis_Documento_Tipo_x_Empresa = new HashSet<tb_sis_Documento_Tipo_x_Empresa>();
             this.tb_sis_reporte_x_seg_usuario = new HashSet<tb_sis_reporte_x_seg_usuario>();
-            this.tb_sucursal = new HashSet<tb_sucursal>();
             this.tb_sis_reporte_x_tb_empresa = new HashSet<tb_sis_reporte_x_tb_empresa>();
+            this.tb_sucursal = new HashSet<tb_sucursal>();
         }
     
         public int IdEmpresa { get; set; }
@@ -43,7 +43,7 @@ namespace Core.Erp.Data
     
         public virtual ICollection<tb_sis_Documento_Tipo_x_Empresa> tb_sis_Documento_Tipo_x_Empresa { get; set; }
         public virtual ICollection<tb_sis_reporte_x_seg_usuario> tb_sis_reporte_x_seg_usuario { get; set; }
-        public virtual ICollection<tb_sucursal> tb_sucursal { get; set; }
         public virtual ICollection<tb_sis_reporte_x_tb_empresa> tb_sis_reporte_x_tb_empresa { get; set; }
+        public virtual ICollection<tb_sucursal> tb_sucursal { get; set; }
     }
 }

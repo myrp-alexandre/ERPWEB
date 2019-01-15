@@ -9645,6 +9645,9 @@
     <Content Include="Areas\RRHH\Views\PeriodosPorNominas\_GridViewPartial_periodos_por_nominas.cshtml" />
     <Content Include="Areas\RRHH\Views\PeriodosPorNominas\_GridViewPartial_periodos.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_013.cshtml" />
+    <Content Include="Areas\General\Views\Sucursal\_CmbCuenta_Sucursal_IVA.cshtml" />
+    <Content Include="Areas\General\Views\Sucursal\_CmbCuenta_Sucursal_IVA0.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\_CmbCuenta_NC.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

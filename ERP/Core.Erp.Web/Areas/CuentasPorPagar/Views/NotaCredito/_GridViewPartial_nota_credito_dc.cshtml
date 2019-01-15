@@ -7,6 +7,9 @@
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);
 
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "NotaCredito", Action = "EditingAddNew", Area = "CuentasPorPagar" };
@@ -14,14 +17,14 @@
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "NotaCredito", Action = "EditingDelete", Area = "CuentasPorPagar" };
 
         settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
-        settings.Settings.ShowFooter = true;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
 
+        settings.Settings.ShowFooter = true;
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
@@ -41,18 +44,38 @@
             e.NewValues["dc_para_conciliar"] = false;
         };
 
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "IdCtaCble";
+        //    column.Caption = "Cuenta contable";
+        //    column.Width = Unit.Percentage(60);
+        //    column.EditorProperties().ComboBox(p =>
+        //    {
+        //        p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
+        //        p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
+        //        p.ValueField = "IdCtaCble";
+        //        p.ValueType = typeof(string);
+        //        p.DataSource = ViewBag.lst_cuentas;
+        //    });
+        //});
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pc_Cuenta";
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(50);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdCtaCble";
-            column.Caption = "Cuenta contable";
-            column.Width = Unit.Percentage(60);
-            column.EditorProperties().ComboBox(p =>
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(50);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
-                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
-                p.ValueField = "IdCtaCble";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_cuentas;
+                Html.RenderPartial("_CmbCuenta_NC", DataBinder.Eval(c.DataItem, "IdCtaCble"));
             });
         });
         settings.Columns.Add(column =>
@@ -60,6 +83,7 @@
             column.FieldName = "dc_Valor_debe";
             column.Caption = "Debe";
             column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -71,6 +95,7 @@
             column.FieldName = "dc_Valor_haber";
             column.Caption = "Haber";
             column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -82,6 +107,7 @@
             column.FieldName = "dc_para_conciliar";
             column.Caption = "Se concilia";
             column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().CheckBox(sp =>
             {
 
@@ -89,7 +115,8 @@
         });
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_debe");
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "dc_Valor_haber");
-        
+
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 
 }

@@ -31,6 +31,18 @@
         });
     });
 
+    function CrearModificarCliente() {
+        if(IdCliente.GetValue() > 0)
+        {
+            var win = window.open(window.location.origin+"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+IdCliente.GetValue(), '_blank');
+            win.focus();
+        }else
+        {
+            var win = window.open(window.location.origin+"/Facturacion/Cliente/Nuevo?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+            win.focus();
+        }
+    }
+
     function MostrarModal() {
         GridView_LoteDebitoFacturacion.PerformCallback();
         $("#OpModal").modal("show");
@@ -275,16 +287,6 @@
         });
            GridView_CruceND.PerformCallback();
     }
-     function CrearModificarCliente() {
-        if(IdCliente.GetValue() > 0)
-        {
-            var win = window.open(window.location.origin+"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+IdCliente.GetValue(), '_blank');
-            win.focus();
-        }else
-        {
-            var win = window.open(window.location.origin+"/Facturacion/Cliente/Nuevo?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
-            win.focus();
-        }
 </script>
 
 @using (Html.BeginForm("Nuevo", "NotaDeDebitoFacturacion", FormMethod.Post, new { @class = "form", @role = "form" }))

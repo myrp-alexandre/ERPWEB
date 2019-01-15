@@ -39,5 +39,7 @@ namespace Core.Erp.Info.General
         public string MotiAnula { get; set; }
         public bool Es_establecimiento { get; set; }
         public string IdCtaCble_cxp { get; set; }
+        public string IdCtaCble_vtaIVA0 { get; set; }
+        public string IdCtaCble_vtaIVA { get; set; }        
     }
 }
