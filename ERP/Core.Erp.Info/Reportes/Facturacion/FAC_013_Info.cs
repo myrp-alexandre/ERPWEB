@@ -44,5 +44,6 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public int IdBodega { get; set; }
         public decimal IdCbteVta { get; set; }
         public string pr_descripcion { get; set; }
+        public string vt_NumFactura { get; set; }
     }
 }
