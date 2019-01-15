@@ -42,9 +42,6 @@ namespace Core.Erp.Info.RRHH
         public Nullable<int> IdPeriodo { get; set; }
         public string Observacion { get; set; }
 
-
-        [Required(ErrorMessage = "Detalle de la novedad es obligatorio")]
-
         public List<ro_empleado_novedad_det_Info> lst_novedad_det { get; set; }
         public string pe_apellido { get; set; }
         public string pe_nombre { get; set; }
