@@ -412,9 +412,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
-                fecha_ini = DateTime.Now,
-                fecha_fin = DateTime.Now,
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
 
             cargar_FAC010(model);

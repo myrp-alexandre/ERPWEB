@@ -87,11 +87,11 @@
      function CrearModificarProveedor() {
         if(IdProveedor.GetValue() > 0)
         {
-            var win = window.open(window.location.origin + "/CuentasPorPagar/Proveedor/Modificar?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdProveedor="+IdProveedor.GetValue(), '_blank');
+            var win = window.open(window.location.origin + "/FixedERP/CuentasPorPagar/Proveedor/Modificar?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdProveedor="+IdProveedor.GetValue(), '_blank');
             win.focus();
         }else
         {
-            var win = window.open(window.location.origin+"/CuentasPorPagar/Proveedor/Nuevo?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+            var win = window.open(window.location.origin +"/FixedERP/CuentasPorPagar/Proveedor/Nuevo?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
             win.focus();
         }
     }
@@ -161,14 +161,14 @@
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
-                           {
-                               settings.Name = "Fecha";
-                               settings.Properties.UseMaskBehavior = true;
-                               settings.Properties.EditFormat = EditFormat.Date;
-                               settings.Properties.EditFormatString = "dd/MM/yyyy";
-                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           }).GetHtml()
+                                       {
+                                           settings.Name = "Fecha";
+                                           settings.Properties.UseMaskBehavior = true;
+                                           settings.Properties.EditFormat = EditFormat.Date;
+                                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -182,6 +182,14 @@
                                 <label for="IdProveedor">Proveedor*</label>
                                 @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
                                 @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="IdCliente"></label>
+                                <button type="button" class="btn btn-primary form-control " onclick="CrearModificarProveedor();">
+                                    <i class="fa fa-external-link-square"></i>
+                                </button>
                             </div>
                         </div>
                         <div class="col-md-1">
