@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.RRHH;
+using DevExpress.Web;
+
 namespace Core.Erp.Data.RRHH
 {
    public class ro_area_Data
@@ -217,5 +219,68 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
+        public List<ro_area_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool estado)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<ro_area_Info> Lista = new List<ro_area_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter, estado);
+            return Lista;
+        }
+
+        public List<ro_area_Info> get_list(int IdEmpresa, int skip, int take, string filter, bool MostrarAnulados)
+        {
+            try
+            {
+                List<ro_area_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    if (MostrarAnulados)
+                        Lista = (from q in Context.ro_area
+                                 where q.IdEmpresa == IdEmpresa
+                                 && (q.IdArea.ToString() + " " + q.Descripcion).Contains(filter)
+                                 select new ro_area_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdArea = q.IdArea,
+                                     Descripcion = q.Descripcion,
+                                     estado = q.estado,
+                                     EstadoBool = q.estado == "A" ? true : false
+                                 })
+                                 .OrderBy(p => p.IdArea)
+                                 .Skip(skip)
+                                 .Take(take)
+                                 .ToList();
+                    else
+                        Lista = (from q in Context.ro_area
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.estado == "A"
+                                 && (q.IdArea.ToString() + " " + q.Descripcion).Contains(filter)
+                                 select new ro_area_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdArea = q.IdArea,
+                                     Descripcion = q.Descripcion,
+                                     estado = q.estado,
+                                     EstadoBool = q.estado == "A" ? true : false
+                                 })
+                                 .OrderBy(p => p.IdArea)
+                                 .Skip(skip)
+                                 .Take(take)
+                                 .ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ro_area_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            return get_info(IdEmpresa, args.Value == null ? 0 : (int)args.Value);
+        }
     }
 }

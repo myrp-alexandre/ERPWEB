@@ -102,6 +102,42 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_empleados", model);
            
         }
+
+        #region Combos bajo demanda
+        #region Division
+        public ActionResult CmbDivision()
+        {
+            ro_area_Info model = new ro_area_Info();
+            return PartialView("_CmbDivision", model);
+        }
+        public List<ro_division_Info> get_list_bajo_demanda_division(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_division.get_list_bajo_demanda_division(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ro_division_Info get_info_bajo_demanda_division(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_division.get_info_bajo_demanda_division(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
+        #region Area
+        public ActionResult CmbArea()
+        {
+            ro_area_Info model = new ro_area_Info();
+            return PartialView("_CmbArea", model);
+        }
+        public List<ro_area_Info> get_list_bajo_demanda_area(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ro_area_Info get_info_bajo_demanda_area(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
+        #endregion
+
         [HttpPost]
         public ActionResult Nuevo(ro_empleado_Info info)
         {
