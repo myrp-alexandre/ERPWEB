@@ -83,6 +83,19 @@
         GridView_aprobacion_solicitud.PerformCallback();
         $("#ModalFacturas").modal("hide");
     }
+
+     function CrearModificarProveedor() {
+        if(IdProveedor.GetValue() > 0)
+        {
+            var win = window.open(window.location.origin + "/FixedERP/CuentasPorPagar/Proveedor/Modificar?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdProveedor="+IdProveedor.GetValue(), '_blank');
+            win.focus();
+        }else
+        {
+            var win = window.open(window.location.origin +"/FixedERP/CuentasPorPagar/Proveedor/Nuevo?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+            win.focus();
+        }
+    }
+
 </script>
 
 
@@ -172,6 +185,14 @@
                                 <label for="IdProveedor">Proveedor*</label>
                                 @Html.Partial("_CmbProveedor_CXP", Model.IdProveedor)
                                 @Html.ValidationMessageFor(q => q.IdProveedor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="IdCliente"></label>
+                                <button type="button" class="btn btn-primary form-control " onclick="CrearModificarProveedor();">
+                                    <i class="fa fa-external-link-square"></i>
+                                </button>
                             </div>
                         </div>
                         <div class="col-md-4">
