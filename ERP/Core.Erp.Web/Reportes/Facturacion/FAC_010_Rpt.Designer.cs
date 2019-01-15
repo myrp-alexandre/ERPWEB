@@ -140,7 +140,7 @@
             this.xrTable4.Name = "xrTable4";
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow8});
-            this.xrTable4.SizeF = new System.Drawing.SizeF(750F, 25F);
+            this.xrTable4.SizeF = new System.Drawing.SizeF(1093F, 25F);
             this.xrTable4.StylePriority.UseBorders = false;
             this.xrTable4.StylePriority.UseFont = false;
             this.xrTable4.StylePriority.UseTextAlignment = false;
@@ -319,7 +319,7 @@
             this.xrTableRow3,
             this.xrTableRow4,
             this.xrTableRow5});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(750F, 110.6771F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(1093F, 110.6771F);
             this.xrTable1.StylePriority.UseBorderWidth = false;
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -503,7 +503,7 @@
             this.xrTable8.Name = "xrTable8";
             this.xrTable8.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow13});
-            this.xrTable8.SizeF = new System.Drawing.SizeF(750F, 20F);
+            this.xrTable8.SizeF = new System.Drawing.SizeF(1093F, 20F);
             this.xrTable8.StylePriority.UseBorders = false;
             this.xrTable8.StylePriority.UseFont = false;
             this.xrTable8.StylePriority.UseTextAlignment = false;
@@ -612,7 +612,7 @@
             this.xrTable3.Name = "xrTable3";
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow7});
-            this.xrTable3.SizeF = new System.Drawing.SizeF(750F, 25F);
+            this.xrTable3.SizeF = new System.Drawing.SizeF(1093F, 25F);
             this.xrTable3.StylePriority.UseBorders = false;
             this.xrTable3.StylePriority.UseFont = false;
             this.xrTable3.StylePriority.UseTextAlignment = false;
@@ -698,7 +698,7 @@
             this.xrTable5.Name = "xrTable5";
             this.xrTable5.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow9});
-            this.xrTable5.SizeF = new System.Drawing.SizeF(751.0002F, 25F);
+            this.xrTable5.SizeF = new System.Drawing.SizeF(1093F, 25F);
             this.xrTable5.StylePriority.UseBorders = false;
             this.xrTable5.StylePriority.UseFont = false;
             this.xrTable5.StylePriority.UseTextAlignment = false;
@@ -796,18 +796,18 @@
             // 
             // detalle_firma_pago
             // 
-            this.detalle_firma_pago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 49.91665F);
+            this.detalle_firma_pago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 49.91663F);
             this.detalle_firma_pago.Name = "detalle_firma_pago";
             this.detalle_firma_pago.ReportSource = new Core.Erp.Web.Reportes.Facturacion.FAC_010_detalle_forma_pago_Rpte();
-            this.detalle_firma_pago.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
+            this.detalle_firma_pago.SizeF = new System.Drawing.SizeF(1093F, 23F);
             this.detalle_firma_pago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.detalle_firma_pago_BeforePrint);
             // 
             // resumen_forma_pago
             // 
-            this.resumen_forma_pago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 95.33335F);
+            this.resumen_forma_pago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 95.33337F);
             this.resumen_forma_pago.Name = "resumen_forma_pago";
             this.resumen_forma_pago.ReportSource = new Core.Erp.Web.Reportes.Facturacion.FAC_010_resumen_forma_pago_Rpt();
-            this.resumen_forma_pago.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
+            this.resumen_forma_pago.SizeF = new System.Drawing.SizeF(1093F, 23F);
             this.resumen_forma_pago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.resumen_forma_pago_BeforePrint);
             // 
             // xrTable6
@@ -820,7 +820,7 @@
             this.xrTable6.Name = "xrTable6";
             this.xrTable6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow10});
-            this.xrTable6.SizeF = new System.Drawing.SizeF(751.0001F, 25F);
+            this.xrTable6.SizeF = new System.Drawing.SizeF(1093F, 25F);
             this.xrTable6.StylePriority.UseBorders = false;
             this.xrTable6.StylePriority.UseFont = false;
             this.xrTable6.StylePriority.UseTextAlignment = false;
@@ -948,9 +948,10 @@
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
             this.Font = new System.Drawing.Font("Verdana", 8F);
+            this.Landscape = true;
             this.Margins = new System.Drawing.Printing.Margins(38, 38, 38, 38);
-            this.PageHeight = 1169;
-            this.PageWidth = 827;
+            this.PageHeight = 827;
+            this.PageWidth = 1169;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
