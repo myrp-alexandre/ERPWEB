@@ -11,11 +11,12 @@
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "NotaCredito", Action = "EditingAddNew", Area = "CuentasPorPagar" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "NotaCredito", Action = "EditingUpdate", Area = "CuentasPorPagar" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "NotaCredito", Action = "EditingDelete", Area = "CuentasPorPagar" };
 
+        settings.CommandColumn.ShowNewButtonInHeader = true;
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;

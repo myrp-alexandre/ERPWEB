@@ -8,12 +8,12 @@ namespace Core.Erp.Bus.Reportes.Contabilidad
     public class CONTA_002_Bus
     {
         CONTA_002_Data odata = new CONTA_002_Data();
-    
-        public List<CONTA_002_Info> get_list(int IdEmpresa, string IdCtaCble, DateTime fechaIni, DateTime fechaFin)
+
+        public List<CONTA_002_Info> get_list(int IdEmpresa, string IdCtaCble, int IdSucursal, DateTime fechaIni, DateTime fechaFin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdCtaCble, fechaIni, fechaFin);
+                return odata.get_list(IdEmpresa, IdCtaCble, IdSucursal, fechaIni, fechaFin);
             }
             catch (Exception)
             {

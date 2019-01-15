@@ -142,29 +142,30 @@ namespace Core.Erp.Data.Facturacion
                             Entity = new fa_cliente_contactos
 
                             {
-                                IdEmpresa = Entity.IdEmpresa,
-                                IdCliente = Entity.IdCliente,
-                                IdContacto = Entity.IdContacto,
-                                IdCiudad = Entity.IdCiudad,
-                                IdParroquia = Entity.IdParroquia,
-                                Celular = Entity.Celular,
-                                Correo = Entity.Correo,
-                                Direccion = Entity.Direccion,
-                                Nombres = Entity.Nombres,
-                                Telefono = Entity.Telefono
+                                IdEmpresa = info.IdEmpresa,
+                                IdCliente = info.IdCliente,
+                                IdContacto = 1,
+                                IdCiudad = info.IdCiudad,
+                                IdParroquia = info.IdParroquia,
+                                Celular = info.Celular,
+                                Correo = info.Correo,
+                                Direccion = info.Direccion,
+                                Nombres = info.Nombres,
+                                Telefono = info.Telefono
                             };
                             Context.fa_cliente_contactos.Add(Entity);
                         }
                         else
                         {
-                            Entity.IdCiudad = Entity.IdCiudad;
-                            Entity.IdParroquia = Entity.IdParroquia;
-                            Entity.Celular = Entity.Celular;
-                            Entity.Correo = Entity.Correo;
-                            Entity.Direccion = Entity.Direccion;
-                            Entity.Nombres = Entity.Nombres;
-                            Entity.Telefono = Entity.Telefono;
+                            Entity.IdCiudad = info.IdCiudad;
+                            Entity.IdParroquia = info.IdParroquia;
+                            Entity.Celular = info.Celular;
+                            Entity.Correo = info.Correo;
+                            Entity.Direccion = info.Direccion;
+                            Entity.Nombres = info.Nombres;
+                            Entity.Telefono = info.Telefono;
                         };
+
                         Context.SaveChanges();
                     }
                 return true;

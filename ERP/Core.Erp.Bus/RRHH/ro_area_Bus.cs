@@ -85,11 +85,11 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public List<ro_area_Info> get_list_bajo_demanda_area(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool MostrarAnulados)
+        public List<ro_area_Info> get_list_bajo_demanda_area(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool MostrarAnulados, int IdDivision)
         {
             try
             {
-                return odata.get_list_bajo_demanda(args, IdEmpresa, MostrarAnulados);
+                return odata.get_list_bajo_demanda(args, IdEmpresa, MostrarAnulados, IdDivision);
             }
             catch (Exception)
             {
@@ -98,11 +98,11 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public ro_area_Info get_info_bajo_demanda_area(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        public ro_area_Info get_info_bajo_demanda_area(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, int IdDivision)
         {
             try
             {
-                return odata.get_info_bajo_demanda(args, IdEmpresa);
+                return odata.get_info_bajo_demanda(args, IdEmpresa, IdDivision);
             }
             catch (Exception ex)
             {
