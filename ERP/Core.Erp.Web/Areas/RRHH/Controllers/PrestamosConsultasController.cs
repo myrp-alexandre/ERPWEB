@@ -1,4 +1,6 @@
-﻿using Core.Erp.Info.General;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
 using System;
@@ -11,7 +13,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class PrestamosConsultasController : Controller
     {
-        // GET: RRHH/PrestamosConsultas
+        #region variables
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        #endregion
         public ActionResult Index()
         {
             return View();
