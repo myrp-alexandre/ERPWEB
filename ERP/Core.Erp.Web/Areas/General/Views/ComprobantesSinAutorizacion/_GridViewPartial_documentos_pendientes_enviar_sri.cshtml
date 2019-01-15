@@ -3,7 +3,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_documentos_pendientes_enviar_sri";
-        settings.CallbackRouteValues = new { Controller = "ComprobantesSinAutorizacion", Action = "GridViewPartial_documentos_pendientes_enviar_sri", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin};
+        settings.CallbackRouteValues = new { Controller = "ComprobantesSinAutorizacion", Action = "GridViewPartial_documentos_pendientes_enviar_sri", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin, IdEmpresa = ViewBag.IdEmpresa, IdSucursal = ViewBag.IdSucursal};
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "secuencia";
 
