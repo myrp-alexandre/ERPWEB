@@ -16,8 +16,10 @@ namespace Core.Erp.Data
     {
         public ba_TipoFlujo()
         {
-            this.ba_TipoFlujo1 = new HashSet<ba_TipoFlujo>();
             this.ba_Cbte_Ban = new HashSet<ba_Cbte_Ban>();
+            this.ba_Cbte_Ban_x_ba_TipoFlujo = new HashSet<ba_Cbte_Ban_x_ba_TipoFlujo>();
+            this.ba_TipoFlujo1 = new HashSet<ba_TipoFlujo>();
+            this.ba_TipoFlujo_PlantillaDet = new HashSet<ba_TipoFlujo_PlantillaDet>();
         }
     
         public int IdEmpresa { get; set; }
@@ -31,14 +33,14 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string MotiAnula { get; set; }
         public string Tipo { get; set; }
         public string cod_flujo { get; set; }
     
+        public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
+        public virtual ICollection<ba_Cbte_Ban_x_ba_TipoFlujo> ba_Cbte_Ban_x_ba_TipoFlujo { get; set; }
         public virtual ICollection<ba_TipoFlujo> ba_TipoFlujo1 { get; set; }
         public virtual ba_TipoFlujo ba_TipoFlujo2 { get; set; }
-        public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
+        public virtual ICollection<ba_TipoFlujo_PlantillaDet> ba_TipoFlujo_PlantillaDet { get; set; }
     }
 }
