@@ -2,23 +2,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Erp.Data.Reportes.Contabilidad
 {
     public class CONTA_002_Data
     {
-        public List<CONTA_002_Info> get_list(int IdEmpresa, string IdCtaCble, DateTime fechaIni, DateTime fechaFin)
+        public List<CONTA_002_Info> get_list(int IdEmpresa, string IdCtaCble, int IdSucursal, DateTime fechaIni, DateTime fechaFin)
         {
             try
             {
                 List<CONTA_002_Info> Lista;
                 fechaIni = fechaIni.Date;
                 fechaFin = fechaFin.Date;
+                int IdSucursalIni = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 99999 : IdSucursal;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPCONTA_002(IdEmpresa, IdCtaCble, fechaIni, fechaFin)
+                    Lista = (from q in Context.SPCONTA_002(IdEmpresa, IdSucursalIni, IdSucursalFin, IdCtaCble,  fechaIni, fechaFin)
                              select new CONTA_002_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

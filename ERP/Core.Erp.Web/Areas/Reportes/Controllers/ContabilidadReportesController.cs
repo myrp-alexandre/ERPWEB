@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.General;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
@@ -49,6 +50,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ct_plancta_Bus bus_cta = new ct_plancta_Bus();
             var lst_cta = bus_cta.get_list(IdEmpresa, false, false);
             ViewBag.lst_cta = lst_cta;
+
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new Info.General.tb_sucursal_Info
+            {
+                IdSucursal = 0,
+                Su_Descripcion = "TODOS"
+            });
+            ViewBag.lst_sucursal = lst_sucursal;
         }
         private void cargar_nivel()
         {
@@ -73,7 +83,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdCtaCble = "",
-                
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             cargar_combos(model.IdEmpresa);
             CONTA_002_Rpt report = new CONTA_002_Rpt();
@@ -81,8 +91,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdCtaCble.Value = model.IdCtaCble;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;
-            report.usuario = SessionFixed.IdUsuario.ToString();
-            report.empresa = SessionFixed.NomEmpresa.ToString();
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
             return View(model);
         }
@@ -94,8 +105,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdCtaCble.Value = model.IdCtaCble;
             report.p_fechaIni.Value = model.fecha_ini;
             report.p_fechaFin.Value = model.fecha_fin;
-            report.usuario = SessionFixed.IdUsuario.ToString();
-            report.empresa = SessionFixed.NomEmpresa.ToString();
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
             cargar_combos(model.IdEmpresa);
             ViewBag.Report = report;
             return View(model);
