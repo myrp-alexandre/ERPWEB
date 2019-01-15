@@ -460,6 +460,7 @@
     <Compile Include="Areas\RRHH\Controllers\PeriodosPorNominasController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PermisoEmpleadoController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PrestamosAprobacionController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\PrestamosConsultasController.cs" />
     <Compile Include="Areas\RRHH\Controllers\PrestamosController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProcesarRolController.cs" />
     <Compile Include="Areas\RRHH\Controllers\ProyeccionDeGastosController.cs" />
@@ -9648,6 +9649,9 @@
     <Content Include="Areas\General\Views\Sucursal\_CmbCuenta_Sucursal_IVA.cshtml" />
     <Content Include="Areas\General\Views\Sucursal\_CmbCuenta_Sucursal_IVA0.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaCredito\_CmbCuenta_NC.cshtml" />
+    <Content Include="Areas\RRHH\Views\PrestamosConsultas\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\PrestamosConsultas\_GridViewPartial_prestamos_consulta.cshtml" />
+    <Content Include="Areas\RRHH\Views\PrestamosConsultas\_GridViewPartial_prestamos_consulta_det.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
