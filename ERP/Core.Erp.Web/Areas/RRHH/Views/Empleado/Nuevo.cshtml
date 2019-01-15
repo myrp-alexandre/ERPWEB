@@ -19,7 +19,11 @@
 }
 
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-
+<script type="text/javascript">
+    function OnBeginCallback(s, e) {
+        e.customArgs["IdDivision"] = IdDivision.GetValue();
+    }
+</script>
 @using (Html.BeginForm("Nuevo", "Empleado", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdPersona);
@@ -50,7 +54,7 @@
                         else
                             el.hide();
                     }
-                </script>
+</script>
                 <div id="externalDropZone" class="dropZoneExternal">
                     <div id="dragZone">
                         <span class="dragZoneText">Seleccione una foto</span>

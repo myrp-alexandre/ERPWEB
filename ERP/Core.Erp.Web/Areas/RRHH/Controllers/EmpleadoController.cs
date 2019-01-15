@@ -123,16 +123,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #region Area
         public ActionResult CmbArea()
         {
+            SessionFixed.IdDivision = Request.Params["IdDivision"] != null ? Request.Params["IdDivision"].ToString() : SessionFixed.IdDivision;
             ro_area_Info model = new ro_area_Info();
             return PartialView("_CmbArea", model);
         }
         public List<ro_area_Info> get_list_bajo_demanda_area(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false, Convert.ToInt32(SessionFixed.IdDivision));
         }
         public ro_area_Info get_info_bajo_demanda_area(ListEditItemRequestedByValueEventArgs args)
         {
-            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdDivision));
         }
         #endregion
 

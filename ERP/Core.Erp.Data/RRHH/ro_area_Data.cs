@@ -219,16 +219,16 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-        public List<ro_area_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool estado)
+        public List<ro_area_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool estado, int IdDivision)
         {
             var skip = args.BeginIndex;
             var take = args.EndIndex - args.BeginIndex + 1;
             List<ro_area_Info> Lista = new List<ro_area_Info>();
-            Lista = get_list(IdEmpresa, skip, take, args.Filter, estado);
+            Lista = get_list(IdEmpresa, skip, take, args.Filter, estado, IdDivision);
             return Lista;
         }
 
-        public List<ro_area_Info> get_list(int IdEmpresa, int skip, int take, string filter, bool MostrarAnulados)
+        public List<ro_area_Info> get_list(int IdEmpresa, int skip, int take, string filter, bool MostrarAnulados, int IdDivision)
         {
             try
             {
@@ -239,6 +239,7 @@ namespace Core.Erp.Data.RRHH
                     if (MostrarAnulados)
                         Lista = (from q in Context.ro_area
                                  where q.IdEmpresa == IdEmpresa
+                                 &&q.IdDivision == IdDivision
                                  && (q.IdArea.ToString() + " " + q.Descripcion).Contains(filter)
                                  select new ro_area_Info
                                  {
@@ -255,6 +256,7 @@ namespace Core.Erp.Data.RRHH
                     else
                         Lista = (from q in Context.ro_area
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.IdDivision == IdDivision
                                  && q.estado == "A"
                                  && (q.IdArea.ToString() + " " + q.Descripcion).Contains(filter)
                                  select new ro_area_Info
@@ -278,9 +280,39 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-        public ro_area_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        public ro_area_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, int IdDivision)
         {
-            return get_info(IdEmpresa, args.Value == null ? 0 : (int)args.Value);
+            return get_info(IdEmpresa, args.Value == null ? 0 : (int)args.Value, IdDivision);
+        }
+
+        public ro_area_Info get_info(int IdEmpresa, int IdArea, int IdDivision)
+        {
+            try
+            {
+                ro_area_Info info = new ro_area_Info();
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_area Entity = Context.ro_area.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdArea == IdArea && q.IdDivision == IdDivision);
+                    if (Entity == null) return null;
+
+                    info = new ro_area_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdArea = Entity.IdArea,
+                        Descripcion = Entity.Descripcion,
+                        IdDivision = Entity.IdDivision,
+                        estado = Entity.estado,
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
