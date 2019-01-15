@@ -21,6 +21,18 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+        public List<ro_prestamo_Info> get_list(int IdEmpresa,decimal IdEmpleado)
+        {
+            try
+            {
+                return odata.get_list(IdEmpresa,IdEmpleado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public List<ro_prestamo_Info> get_list_aprobacion(int IdEmpresa, DateTime fechaInicio, DateTime fechaFin)
         {

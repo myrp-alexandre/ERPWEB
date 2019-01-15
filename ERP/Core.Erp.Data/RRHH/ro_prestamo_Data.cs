@@ -70,6 +70,58 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+        public List<ro_prestamo_Info> get_list(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+
+
+                List<ro_prestamo_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from q in Context.vwRo_Prestamo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdEmpleado ==IdEmpleado
+                             && q.Estado==true
+                             select new ro_prestamo_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdPrestamo = q.IdPrestamo,
+                                 descuento_mensual = q.descuento_mensual,
+                                 descuento_men_quin = q.descuento_men_quin,
+                                 descuento_quincena = q.descuento_quincena,
+                                 IdEmpleado = q.IdEmpleado,
+                                 IdRubro = q.IdRubro,
+                                 Estado = q.Estado,
+                                 Fecha = q.Fecha,
+                                 MontoSol = q.MontoSol,
+                                 NumCuotas = q.NumCuotas,
+                                 Fecha_PriPago = q.Fecha_PriPago,
+                                 Observacion = q.Observacion,
+                                 IdTipoCbte = q.IdTipoCbte,
+                                 IdCbteCble = q.IdCbteCble,
+                                 IdOrdenPago = q.IdOrdenPago,
+                                 pe_nombre_completo = q.pe_apellido + " " + q.pe_nombre,
+                                 Valor_pendiente = q.Valor_pendiente,
+                                 TotalCobrado = q.TotalCobrado,
+                                 ru_descripcion = q.ru_descripcion,
+                                 EstadoAprob = q.EstadoAprob,
+                                 EstadoBool = q.Estado
+
+
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public List<ro_prestamo_Info> get_list_aprobacion(int IdEmpresa, DateTime fechaInicio, DateTime fechaFin)
         {

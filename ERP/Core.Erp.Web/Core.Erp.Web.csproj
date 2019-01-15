@@ -9652,6 +9652,7 @@
     <Content Include="Areas\RRHH\Views\PrestamosConsultas\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\PrestamosConsultas\_GridViewPartial_prestamos_consulta.cshtml" />
     <Content Include="Areas\RRHH\Views\PrestamosConsultas\_GridViewPartial_prestamos_consulta_det.cshtml" />
+    <Content Include="Areas\RRHH\Views\PrestamosConsultas\_CmbEmpleado_prestamo_consulta.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
