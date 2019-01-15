@@ -173,6 +173,9 @@ namespace Core.Erp.Data.Caja
 
                     IdEmpresa_op = info.IdEmpresa_op,
                     IdOrdenPago_op = info.IdOrdenPago_op,
+
+                    IdUsuarioCreacion = info.IdUsuarioCreacion,
+                    FechaCreacion = DateTime.Now
                 };
 
                 if (info.IdEstadoCierre == cl_enumeradores.eEstadoCierreCaja.EST_CIE_CER.ToString())
@@ -1205,6 +1208,8 @@ namespace Core.Erp.Data.Caja
                 Entity.Total_fact_vale = info.Total_fact_vale;
                 Entity.Dif_x_pagar_o_cobrar = info.Dif_x_pagar_o_cobrar;
                 Entity.Total_Ing = info.Total_Ing;
+
+                Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                 #endregion
 
                 Context_ct.SaveChanges();

@@ -45,7 +45,8 @@ namespace Core.Erp.Data.Reportes.Caja
                                  Fecha_fin = q.Fecha_fin,
                                  Fecha_ini = q.Fecha_ini,
                                  NombreCaja = q.NombreCaja,
-                                 tm_descripcion = q.tm_descripcion
+                                 tm_descripcion = q.tm_descripcion,
+                                 IdUsuarioCreacion = q.IdUsuarioCreacion
                              }).ToList();
                 }
                 return Lista;
