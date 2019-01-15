@@ -46,21 +46,19 @@
             column.Width = Unit.Percentage(30);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
+        
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdRubro";
-            column.Caption = "Rubro";
-            column.Width = Unit.Percentage(30);
+            column.Caption = "ru_descripcion";
+            column.Width = Unit.Percentage(35);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
-                ViewContext.Writer.Write("<div id='ajaxDiv'>");
                 Html.RenderPartial("_CmbRubro_EmpNov", DataBinder.Eval(c.DataItem, "IdRubro"));
-                ViewContext.Writer.Write("</div>");
             });
         });
-
         settings.Columns.Add(column =>
         {
             column.FieldName = "FechaPago";

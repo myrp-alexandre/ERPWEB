@@ -72,6 +72,7 @@ namespace Core.Erp.Data.RRHH
                         select new ro_rubro_tipo_Info
                         {
                             IdEmpresa = q.IdEmpresa,
+                            IdRubro=q.IdRubro,
                             rub_codigo = q.rub_codigo,
                             ru_codRolGen = q.ru_codRolGen,
                             ru_descripcion = q.ru_descripcion,
