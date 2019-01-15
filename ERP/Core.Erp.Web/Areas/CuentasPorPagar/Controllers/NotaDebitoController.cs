@@ -103,6 +103,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             cargar_combos_sucursal();
@@ -126,8 +127,9 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
-            ViewBag.IdSucursal = IdSucursal;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.IdEmpresa = IdEmpresa;
+            ViewBag.IdSucursal = IdSucursal;
             var model = bus_orden_giro.get_lst(IdEmpresa, IdSucursal, "D", Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
             return PartialView("_GridViewPartial_nota_debito", model);
         }
