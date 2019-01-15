@@ -402,22 +402,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="IdDepartamento">Departamento*</label>
-                                @Html.DevExpress().ComboBoxFor(q => q.IdDepartamento, settings =>
-                               {
-                                   settings.Name = "IdDepartamento";
-                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                   settings.Properties.Columns.Add("IdDepartamento", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-                                   settings.Properties.Columns.Add("de_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                                   //Campo ID
-                                   settings.Properties.ValueField = "IdDepartamento";
-                                   settings.Properties.ValueType = typeof(int);
-                                   settings.Properties.TextField = "de_descripcion";
-                                   //Boton para seleccionar ningun registro
-                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-
-                               }).BindList(ViewBag.lst_departamento).GetHtml()
+                                @Html.Partial("_CmbDepartamento", Model.IdDepartamento)
                                 @Html.ValidationMessageFor(q => q.IdDepartamento, "", new { @class = "text-danger" })
                             </div>
                         </div>

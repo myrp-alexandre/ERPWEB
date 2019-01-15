@@ -8,7 +8,7 @@
         settings.Width = Unit.Percentage(100);
 
 
-        settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
         settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "NotaDebito", Action = "EditingAddNew", Area = "CuentasPorPagar" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "NotaDebito", Action = "EditingUpdate", Area = "CuentasPorPagar" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "NotaDebito", Action = "EditingDelete", Area = "CuentasPorPagar" };
@@ -36,7 +36,6 @@
         //Funcion para inicializar fila al presionar nuevo
         settings.InitNewRow = (s, e) =>
         {
-            e.NewValues["IdCtaCble"] = null;
             e.NewValues["dc_Valor_debe"] = 0;
             e.NewValues["dc_Valor_haber"] = 0;
             e.NewValues["dc_para_conciliar"] = false;
@@ -44,16 +43,21 @@
 
         settings.Columns.Add(column =>
         {
+            column.FieldName = "pc_Cuenta";
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(50);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
             column.FieldName = "IdCtaCble";
-            column.Caption = "Cuenta contable";
-            column.Width = Unit.Percentage(60);
-            column.EditorProperties().ComboBox(p =>
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(50);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
-                p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
-                p.ValueField = "IdCtaCble";
-                p.ValueType = typeof(string);
-                p.DataSource = ViewBag.lst_cuentas;
+                Html.RenderPartial("_CmbCuenta_ND", DataBinder.Eval(c.DataItem, "IdCtaCble"));
             });
         });
         settings.Columns.Add(column =>

@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
@@ -65,6 +66,32 @@ namespace Core.Erp.Bus.RRHH
             try
             {
                 return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ro_departamento_Info> get_list_bajo_demanda_departamento(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool MostrarAnulados)
+        {
+            try
+            {
+                return odata.get_list_bajo_demanda(args, IdEmpresa, MostrarAnulados);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ro_departamento_Info get_info_bajo_demanda_departamento(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_info_bajo_demanda(args, IdEmpresa);
             }
             catch (Exception)
             {

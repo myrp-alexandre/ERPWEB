@@ -137,6 +137,22 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         #endregion
 
+        #region Departamento
+        public ActionResult CmbDepartamento()
+        {
+            ro_departamento_Info model = new ro_departamento_Info();
+            return PartialView("_CmbDepartamento", model);
+        }
+        public List<ro_departamento_Info> get_list_bajo_demanda_departamento(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_departamento.get_list_bajo_demanda_departamento(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ro_departamento_Info get_info_bajo_demanda_departamento(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_departamento.get_info_bajo_demanda_departamento(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         #endregion
 
         [HttpPost]
