@@ -39,5 +39,6 @@ namespace Core.Erp.Data
         public Nullable<double> valor_a_reponer { get; set; }
         public string NombreCaja { get; set; }
         public string tm_descripcion { get; set; }
+        public string IdUsuarioCreacion { get; set; }
     }
 }
