@@ -1023,7 +1023,7 @@
             this.xrTableCell1.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseFont = false;
-            this.xrTableCell1.Text = "CLIENTE";
+            this.xrTableCell1.Text = "CLIENTE:";
             this.xrTableCell1.Weight = 0.93020835876464836D;
             // 
             // xrTableCell2
