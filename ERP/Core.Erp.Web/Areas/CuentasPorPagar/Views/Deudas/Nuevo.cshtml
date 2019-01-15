@@ -711,7 +711,11 @@
             get_list_tipo_doc();
         }
     });
-    $("#co_plazo").change(function () {
+    $("#co_plazo").change(function () {        
+        CambiarVcto();
+    });
+
+    function CambiarVcto() {
         var plazo = Number($("#co_plazo").val());
         if (plazo != 0) {
 
@@ -723,8 +727,7 @@
             co_FechaFactura_vct.SetValue(date);
 
         }
-
-    });
+    }
 
     $("#IdIden_credito").change(function () {
 
@@ -920,8 +923,7 @@
 
                     $("#co_plazo").val(data.pr_plazo);
 
-                    var date = moment(co_FechaFactura.GetValue(), "DD-MM-YYYY").add(data.pr_plazo, 'days');
-                    co_FechaFactura_vct.SetValue(new Date(moment(date).format("DD/MM/YYYY")));
+                    CambiarVcto();
                 },
                 error: function (error) {
                 }

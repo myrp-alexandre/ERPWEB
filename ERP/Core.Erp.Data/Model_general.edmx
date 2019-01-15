@@ -694,6 +694,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             <PropertyRef Name="IdCbteVta" />
             <PropertyRef Name="vt_fecha" />
             <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdSucursal" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="Tipo_documento" Type="varchar" MaxLength="5" Nullable="false" />
@@ -705,6 +706,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <Property Name="vt_fecha" Type="datetime" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="vt_Observacion" Type="varchar" MaxLength="1000" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_tb_banco_procesos_bancarios_x_empresa_tb_banco">
           <End Role="tb_banco" Type="Self.tb_banco" Multiplicity="1" />
@@ -1207,7 +1209,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
     [vwtb_comprobantes_no_autorizados].[Documento] AS [Documento], 
     [vwtb_comprobantes_no_autorizados].[vt_fecha] AS [vt_fecha], 
     [vwtb_comprobantes_no_autorizados].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-    [vwtb_comprobantes_no_autorizados].[vt_Observacion] AS [vt_Observacion]
+    [vwtb_comprobantes_no_autorizados].[vt_Observacion] AS [vt_Observacion], 
+    [vwtb_comprobantes_no_autorizados].[IdSucursal] AS [IdSucursal]
     FROM [web].[vwtb_comprobantes_no_autorizados] AS [vwtb_comprobantes_no_autorizados]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_tb_banco_procesos_bancarios_x_empresa_tb_banco" Association="Self.FK_tb_banco_procesos_bancarios_x_empresa_tb_banco">
@@ -1372,7 +1375,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <EntitySet Name="vwtb_pais" EntityType="Model_general.vwtb_pais" />
           <EntitySet Name="vwtb_parroquia" EntityType="Model_general.vwtb_parroquia" />
           <EntitySet Name="vwtb_provincia" EntityType="Model_general.vwtb_provincia" />
-          <EntitySet Name="vwtb_comprobantes_no_autorizados" EntityType="Model_general.vwtb_comprobantes_no_autorizados" />
           <AssociationSet Name="FK_tb_banco_procesos_bancarios_x_empresa_tb_banco" Association="Model_general.FK_tb_banco_procesos_bancarios_x_empresa_tb_banco">
             <End Role="tb_banco" EntitySet="tb_banco" />
             <End Role="tb_banco_procesos_bancarios_x_empresa" EntitySet="tb_banco_procesos_bancarios_x_empresa" />
@@ -1510,6 +1512,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             <End Role="tb_empresa" EntitySet="tb_empresa" />
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
           </AssociationSet>
+          <EntitySet Name="vwtb_comprobantes_no_autorizados" EntityType="Model_general.vwtb_comprobantes_no_autorizados" />
           </EntityContainer>
         <EntityType Name="tb_banco">
           <Key>
@@ -2002,25 +2005,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             <PropertyRef Name="IdProvincia" />
           </Key>
           <Property Name="IdProvincia" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="vwtb_comprobantes_no_autorizados">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="Tipo_documento" />
-            <PropertyRef Name="IdCbteVta" />
-            <PropertyRef Name="vt_fecha" />
-            <PropertyRef Name="pe_nombreCompleto" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="Tipo_documento" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="DocumentoDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Documento" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="vt_Observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_tb_banco_procesos_bancarios_x_empresa_tb_banco">
           <End Type="Model_general.tb_banco" Role="tb_banco" Multiplicity="1" />
@@ -2632,6 +2616,27 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwtb_comprobantes_no_autorizados">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="Tipo_documento" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Tipo_documento" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="DocumentoDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Documento" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="vt_Observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3099,22 +3104,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwtb_comprobantes_no_autorizados">
-            <EntityTypeMapping TypeName="Model_general.vwtb_comprobantes_no_autorizados">
-              <MappingFragment StoreEntitySet="vwtb_comprobantes_no_autorizados">
-                <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
-                <ScalarProperty Name="Documento" ColumnName="Documento" />
-                <ScalarProperty Name="DocumentoDoc" ColumnName="DocumentoDoc" />
-                <ScalarProperty Name="vt_serie2" ColumnName="vt_serie2" />
-                <ScalarProperty Name="vt_serie1" ColumnName="vt_serie1" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="Tipo_documento" ColumnName="Tipo_documento" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tb_sis_reporte">
             <EntityTypeMapping TypeName="Model_general.tb_sis_reporte">
               <MappingFragment StoreEntitySet="tb_sis_reporte">
@@ -3317,6 +3306,23 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_comprobantes_no_autorizados">
+            <EntityTypeMapping TypeName="Model_general.vwtb_comprobantes_no_autorizados">
+              <MappingFragment StoreEntitySet="vwtb_comprobantes_no_autorizados">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="DocumentoDoc" ColumnName="DocumentoDoc" />
+                <ScalarProperty Name="vt_serie2" ColumnName="vt_serie2" />
+                <ScalarProperty Name="vt_serie1" ColumnName="vt_serie1" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="Tipo_documento" ColumnName="Tipo_documento" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
