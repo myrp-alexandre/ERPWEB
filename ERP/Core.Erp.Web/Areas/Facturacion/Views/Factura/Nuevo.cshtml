@@ -533,12 +533,13 @@
     function CrearModificarCliente() {
         if(IdCliente.GetValue() > 0)
         {
-            var win = window.open(window.location.origin+"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+IdCliente.GetValue(), '_blank');
-            win.focus();
+             var win = window.open(window.location.hostname + "/Facturacion/Cliente/Modificar?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente=" + IdCliente.GetValue(), '_blank');
+             win.focus();
         }else
         {
-            var win = window.open(window.location.origin+"/Facturacion/Cliente/Nuevo?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
-            win.focus();
+           // var win = window.open(window.location.hostname + "/Facturacion/Cliente/Nuevo?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+          //win.focus();
+             window.location.href = '@Url.Action("Nuevo", "Cliente", new { Area = "Facturacion" , IdEmpresa= @Core.Erp.Web.Helps.SessionFixed.IdEmpresa + "&IdCliente=" + IdCliente.GetValue() })';
         }
     }
 </script>
