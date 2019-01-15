@@ -51,8 +51,10 @@
 
             <div class="col-md-1">
                 <div class="form-group">
-                    <label for=""></label>
-                    <a type="button" class="btn btn-primary form-control " href="@Url.Action("Nuevo","Proveedor",new { Area = "CuentasPorPagar", IdEmpresa = Model.IdEmpresa },null)" target="_blank">+</a>
+                    <label for="IdCliente"></label>
+                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarProveedor();">
+                        <i class="fa fa-external-link-square"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -469,5 +471,18 @@ function armar_diario() {
             }
         });
     }
-};
+    };
+
+     function CrearModificarProveedor() {
+        if(IdProveedor.GetValue() > 0)
+        {
+            var win = window.open(window.location.origin + "/CuentasPorPagar/Proveedor/Modificar?IdEmpresa=" +@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdProveedor="+IdProveedor.GetValue(), '_blank');
+            win.focus();
+        }else
+        {
+            var win = window.open(window.location.origin+"/CuentasPorPagar/Proveedor/Nuevo?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+            win.focus();
+        }
+    }
+	
 </script>
