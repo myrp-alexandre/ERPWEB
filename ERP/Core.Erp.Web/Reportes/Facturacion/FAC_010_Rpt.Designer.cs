@@ -796,7 +796,7 @@
             // 
             // detalle_firma_pago
             // 
-            this.detalle_firma_pago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 99.91665F);
+            this.detalle_firma_pago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 49.91665F);
             this.detalle_firma_pago.Name = "detalle_firma_pago";
             this.detalle_firma_pago.ReportSource = new Core.Erp.Web.Reportes.Facturacion.FAC_010_detalle_forma_pago_Rpte();
             this.detalle_firma_pago.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
@@ -804,7 +804,7 @@
             // 
             // resumen_forma_pago
             // 
-            this.resumen_forma_pago.LocationFloat = new DevExpress.Utils.PointFloat(0.0001220703F, 48.87498F);
+            this.resumen_forma_pago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 95.33335F);
             this.resumen_forma_pago.Name = "resumen_forma_pago";
             this.resumen_forma_pago.ReportSource = new Core.Erp.Web.Reportes.Facturacion.FAC_010_resumen_forma_pago_Rpt();
             this.resumen_forma_pago.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
