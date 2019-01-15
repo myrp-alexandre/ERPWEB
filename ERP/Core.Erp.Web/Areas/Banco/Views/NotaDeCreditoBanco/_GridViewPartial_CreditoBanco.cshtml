@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_CreditoBanco";
-        settings.CallbackRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "GridViewPartial_comprobante_detalle_Credito", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin, IdSucursal = ViewBag.IdSucursal };
+        settings.CallbackRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "GridViewPartial_CreditoBanco", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin, IdSucursal = ViewBag.IdSucursal };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCbteCble";
 
