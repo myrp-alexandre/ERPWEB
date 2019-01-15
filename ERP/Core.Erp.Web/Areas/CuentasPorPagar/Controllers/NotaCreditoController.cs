@@ -477,6 +477,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
     public class ct_cbtecble_det_List_nc
     {
         string Variable = "ct_cbtecble_det_Info";
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         public List<ct_cbtecble_det_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable +IdTransaccionSession.ToString()] == null)
@@ -495,20 +496,36 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
 
         public void AddRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
         {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             List<ct_cbtecble_det_Info> list = get_list(IdTransaccionSession);
             info_det.secuencia = list.Count == 0 ? 1 : list.Max(q => q.secuencia) + 1;
             info_det.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
+
+            if (info_det.IdCtaCble != null)
+            {
+                var cta = bus_plancta.get_info(IdEmpresa, info_det.IdCtaCble);
+                if (cta != null)
+                    info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            }
+
             list.Add(info_det);
         }
 
         public void UpdateRow(ct_cbtecble_det_Info info_det, decimal IdTransaccionSession)
         {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             ct_cbtecble_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.secuencia == info_det.secuencia).First();
+
             edited_info.IdCtaCble = info_det.IdCtaCble;
             edited_info.dc_para_conciliar = info_det.dc_para_conciliar;
             edited_info.dc_Valor = info_det.dc_Valor_debe > 0 ? info_det.dc_Valor_debe : info_det.dc_Valor_haber * -1;
             edited_info.dc_Valor_debe = info_det.dc_Valor_debe;
             edited_info.dc_Valor_haber = info_det.dc_Valor_haber;
+
+            var cta = bus_plancta.get_info(IdEmpresa, edited_info.IdCtaCble);
+            if (cta != null)
+                info_det.pc_Cuenta = cta.IdCtaCble + " - " + cta.pc_Cuenta;
+            edited_info.pc_Cuenta = info_det.pc_Cuenta;
         }
 
         public void DeleteRow(int secuencia, decimal IdTransaccionSession)
