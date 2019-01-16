@@ -29,8 +29,39 @@
 
         </div>
         <div class="box-body">
+
             <div class="row">
                 <div class="col-md-12">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IdRubro">Area</label>
+                            @Html.Partial("_CmbArea_roles", Model)
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IdRubro">Empleado</label>
+                            @Html.Partial("_CmbEmpleado_RRHH", Model)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IdRubro">Rubro</label>
+                            @Html.Partial("_CmbRubro_roles", Model)
+                            @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+
+
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>
@@ -148,20 +179,20 @@
                         </div>
                     </div>
 
-                    
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="IdRubro">Empleado</label>
-                            @Html.Partial("_CmbEmpleado_RRHH", Model)
-                        </div>
-                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="IdRubro">Rubro</label>
-                            @Html.Partial("_CmbRubro_roles", Model)
-                            @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
+                            <label for="IdTipoServicio">Tipo</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.TipoRubro, setting =>
+                       {
+                           setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           setting.Properties.Items.Add("Ingresos", "Ingresos");
+                           setting.Properties.Items.Add("Egresos", "Egresos");
+
+                       }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.TipoRubro, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
 
 
                 </div>
