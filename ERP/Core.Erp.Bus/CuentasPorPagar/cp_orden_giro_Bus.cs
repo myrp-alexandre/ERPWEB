@@ -255,11 +255,19 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         info.info_retencion.observacion = "Retencion de factura #" + info.co_serie + '-' + info.co_factura;
                         info.info_retencion.Fecha_Transac = Convert.ToDateTime(info.Fecha_Transac);
                         info.info_retencion.aprobada_enviar_sri = false;
-
-                        if (bus_retencion.modificarDB(info.info_retencion))
+                        if (info.info_retencion.IdRetencion != 0)
                         {
-                            
+                            if (bus_retencion.modificarDB(info.info_retencion))
+                            {
+
+                            }
+                        }else
+                            if (bus_retencion.guardarDB(info.info_retencion))
+                        {
+
                         }
+
+
                     }
                 }
                 #endregion
