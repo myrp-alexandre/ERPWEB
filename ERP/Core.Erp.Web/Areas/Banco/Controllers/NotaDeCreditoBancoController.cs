@@ -188,7 +188,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 lst_det_ct = new List<ct_cbtecble_det_Info>(),
                 IdBanco = 1,
                 IdTipoNota = 2,
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                list_det = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>()
             };
             SessionFixed.TipoPersona = model.IdTipo_Persona;
             List_ct.set_list(model.lst_det_ct, model.IdTransaccionSession);
@@ -250,9 +251,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             model.list_det = bus_Cbte_Ban_x_ba_TipoFlujo.GetList(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_Banco_Flujo_Det.set_list(model.list_det, model.IdTransaccionSession);
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             cargar_combos(IdEmpresa, model.IdSucursal);
             SessionFixed.TipoPersona = model.IdTipo_Persona;
@@ -268,12 +269,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
             ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
-            model.list_det = bus_Cbte_Ban_x_ba_TipoFlujo.GetList(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
-            List_Banco_Flujo_Det.set_list(model.list_det, model.IdTransaccionSession);
 
             if (model == null)
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            model.list_det = bus_Cbte_Ban_x_ba_TipoFlujo.GetList(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_Banco_Flujo_Det.set_list(model.list_det, model.IdTransaccionSession);
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             cargar_combos(IdEmpresa, model.IdSucursal);

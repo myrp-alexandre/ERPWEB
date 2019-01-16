@@ -42,13 +42,6 @@
                     @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
                 </div>
             </div>
-            @*<div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdBanco_acreditacion">Tipo flujo</label>
-                    @Html.Partial("_CmbFlujo_ND_C", Model.IdTipoFlujo)
-                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="cb_Fecha">Fecha:*</label>
@@ -122,7 +115,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="TipoFlujo">Detalle</label>
-                                @Html.Action("GridViewPartial_flujo_det")
+                                @Html.Action("GridViewPartial_flujo_det", new { Area = "Banco", Controller = "TipoFlujoBanco" })
                             </div>
                         </div>
                     </div>
