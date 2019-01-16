@@ -12,6 +12,8 @@
 
 <script type="text/javascript">
     $(function () {
+        CalcularValor();
+        CalcularPorcentaje();
         $("#IdBanco").change(function () {
             GetNumCheque();
             armar_diario();
@@ -26,7 +28,13 @@
         });
         GetNumCheque();
     });
+    function CalcularValor() {
+        var valor = Number($("#cb_valor").val());
+    }
 
+    function CalcularPorcentaje() {
+
+    }
     function GetListBancoPorSucursal() {
         $("#IdBanco").empty();
         var datos = {

@@ -90,6 +90,13 @@
 
 
 <script>
+
+    $(function () {
+        cargar_procesos();
+        cargar_tipo_liquidacion_nomina();
+        cargar_periodos_x_nomina();
+    });
+
     $("#IdBanco").change(function () {
         $("#IdProceso").empty();
         cargar_procesos();
@@ -101,7 +108,6 @@
 
     });
     $("#IdNomina_TipoLiqui").change(function () {
-        $("#IdPeriodo").empty();
         cargar_periodos_x_nomina();
     });
     $("#IdPeriodo").change(function () {
@@ -138,7 +144,8 @@
 
 
 
-            function cargar_tipo_liquidacion_nomina() {
+    function cargar_tipo_liquidacion_nomina() {
+        $("#IdNomina_TipoLiqui").empty();
                 var datos = {
                     IdNomina: $("#IdNomina_Tipo").val()
                 }
@@ -165,6 +172,8 @@
 
 
     function cargar_periodos_x_nomina() {
+        $("#IdPeriodo").empty();
+
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdNomina: $("#IdNomina_Tipo").val(),
@@ -219,10 +228,6 @@
     };
 
 
-    $(function () {
-        cargar_procesos();
-        cargar_tipo_liquidacion_nomina();
-        cargar_periodos_x_nomina();
-    });
+  
 
 </script>

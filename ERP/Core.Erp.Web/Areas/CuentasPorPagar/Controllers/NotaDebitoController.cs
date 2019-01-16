@@ -280,7 +280,8 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
                 cn_Fecha_vcto = DateTime.Now,
                 IdTipoCbte_Nota = (int)param.pa_TipoCbte_NC,
                 PaisPago = "593",
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             cargar_combos(model.IdEmpresa, model.IdProveedor, model.IdIden_credito.ToString());
             Lis_ct_cbtecble_det_List_nd.set_list(new List<ct_cbtecble_det_Info>(), model.IdTransaccionSession);

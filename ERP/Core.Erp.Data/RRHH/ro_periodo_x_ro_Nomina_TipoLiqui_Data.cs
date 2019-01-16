@@ -63,6 +63,55 @@ namespace Core.Erp.Data.RRHH
         }
 
 
+        public List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> get_list_peridos(int IdEmpresa, int IdNominTipo, int IdNominaTipo_liq)
+        {
+            try
+            {
+                List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> Lista;
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Lista = (from q in Context.ro_periodo
+                             join r in Context.ro_periodo_x_ro_Nomina_TipoLiqui
+                             on new { q.IdEmpresa, q.IdPeriodo } equals new { r.IdEmpresa, r.IdPeriodo }
+                             where q.IdEmpresa == IdEmpresa
+                             && r.IdNomina_Tipo == IdNominTipo
+                             && r.IdNomina_TipoLiqui == IdNominaTipo_liq
+                             select new ro_periodo_x_ro_Nomina_TipoLiqui_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdPeriodo = q.IdPeriodo,
+                                 IdNomina_Tipo = r.IdNomina_Tipo,
+                                 IdNomina_TipoLiqui = r.IdNomina_TipoLiqui,
+                                 Procesado = r.Procesado,
+                                 Cerrado = r.Cerrado,
+                                 Contabilizado = r.Contabilizado,
+                                 pe_FechaFin = q.pe_FechaFin,
+                                 pe_FechaIni = q.pe_FechaIni,
+                                 seleccionado = true,
+                                 esta_base = true
+
+                             }).ToList();
+
+
+                  
+
+                }
+
+                Lista.ForEach(v => v.descripcion = v.pe_FechaIni.ToString().Substring(0, 10) + " " + v.pe_FechaFin.ToString().Substring(0, 10)
+
+                    );
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+
         public List<ro_periodo_x_ro_Nomina_TipoLiqui_Info> get_list_utimo_periodo_aprocesar(int IdEmpresa, int IdNominaTipo, int IdNominaTipoLiq)
         {
             try
