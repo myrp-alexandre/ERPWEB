@@ -43,28 +43,33 @@
             column.FieldName = "Secuencia";
             column.Caption = "# ";
         });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Descricion";
+            column.Caption = "Tipo flujo";
+            column.Width = Unit.Percentage(40);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdTipoFlujo";
-            column.Caption = "Tipo de flujo";
-            column.Width = Unit.Percentage(50);
-            column.EditorProperties().ComboBox(p =>
+            column.Caption = "Tipo flujo";
+            column.Width = Unit.Percentage(40);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.Columns.Add("Descricion", "Descripción").Width = Unit.Percentage(100);
-                p.TextField = "Descricion";
-                p.ValueField = "IdTipoFlujo";
-                p.ValueType = typeof(decimal);
-                p.DataSource = ViewBag.lst_flujo;
+                Html.RenderPartial("_CmbFlujo_Tipo", DataBinder.Eval(c.DataItem, "IdTipoFlujo"));
             });
         });
-
-
         settings.Columns.Add(column =>
         {
             column.FieldName = "Porcentaje";
             column.Caption = "Porcentaje";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(7);
+            column.Width = Unit.Percentage(20);
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
@@ -76,7 +81,7 @@
             column.FieldName = "Valor";
             column.Caption = "Valor";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(7);
+            column.Width = Unit.Percentage(20);
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;

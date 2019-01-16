@@ -24,6 +24,18 @@ namespace Core.Erp.Bus.Inventario
             }
         }
 
+        public in_Producto_x_fa_NivelDescuento_Info GetInfo(int IdEmpresa, decimal IdProducto, int IdNivel)
+        {
+            try
+            {
+                return odata.GetInfo(IdEmpresa, IdProducto, IdNivel);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<in_Producto_x_fa_NivelDescuento_Info> get_list(int IdEmpresa, decimal IdProducto)
         {
             try

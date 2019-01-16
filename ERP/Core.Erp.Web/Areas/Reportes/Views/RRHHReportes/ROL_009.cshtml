@@ -36,14 +36,14 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="IdRubro">Area</label>
-                            @Html.Partial("_CmbArea_roles", Model)
+                            @Html.Partial("_CmbArea_roles", Model.IdArea)
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="IdRubro">Empleado</label>
-                            @Html.Partial("_CmbEmpleado_RRHH", Model)
+                            @Html.Partial("_CmbEmpleado_RRHH", Model.IdEmpleado)
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -185,8 +185,8 @@
                             @Html.DevExpress().ComboBoxFor(q => q.TipoRubro, setting =>
                        {
                            setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           setting.Properties.Items.Add("Ingresos", "Ingresos");
-                           setting.Properties.Items.Add("Egresos", "Egresos");
+                           setting.Properties.Items.Add("Ingreso", "I");
+                           setting.Properties.Items.Add("Egreso", "E");
 
                        }).GetHtml()
                             @Html.ValidationMessageFor(q => q.TipoRubro, "", new { @class = "text-danger" })

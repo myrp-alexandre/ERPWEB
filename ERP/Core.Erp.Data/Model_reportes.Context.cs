@@ -75,7 +75,6 @@ namespace Core.Erp.Data
         public DbSet<VWCXC_003> VWCXC_003 { get; set; }
         public DbSet<VWROL_016> VWROL_016 { get; set; }
         public DbSet<VWROL_018> VWROL_018 { get; set; }
-        public DbSet<VWROL_009> VWROL_009 { get; set; }
         public DbSet<VWCXP_001_detalle> VWCXP_001_detalle { get; set; }
         public DbSet<VWFAC_012> VWFAC_012 { get; set; }
         public DbSet<VWINV_014> VWINV_014 { get; set; }
@@ -106,6 +105,7 @@ namespace Core.Erp.Data
         public DbSet<VWCXC_002> VWCXC_002 { get; set; }
         public DbSet<VWCAJ_002> VWCAJ_002 { get; set; }
         public DbSet<VWCXP_001> VWCXP_001 { get; set; }
+        public DbSet<VWROL_009> VWROL_009 { get; set; }
     
         public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario, Nullable<int> idActivoFijoTipo_ini, Nullable<int> idActivoFijoTipo_fin, Nullable<int> idCategoria_ini, Nullable<int> idCategoria_fin, string estado_Proceso)
         {

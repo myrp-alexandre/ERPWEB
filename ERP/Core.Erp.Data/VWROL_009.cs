@@ -31,5 +31,7 @@ namespace Core.Erp.Data
         public string pe_apellido { get; set; }
         public string pe_nombre { get; set; }
         public string ca_descripcion { get; set; }
+        public Nullable<int> IdArea { get; set; }
+        public string ru_tipo { get; set; }
     }
 }

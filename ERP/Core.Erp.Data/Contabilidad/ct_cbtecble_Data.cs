@@ -341,6 +341,7 @@ namespace Core.Erp.Data.Contabilidad
                 };
                 info.lst_ct_cbtecble_det = lista;
                 info.lst_ct_cbtecble_det.ForEach(q => { q.IdEmpresa = IdEmpresa; q.IdTipoCbte = IdTipoCbte; q.IdCbteCble = IdCbteCble; });
+                
                 return info;
             }
             catch (Exception)

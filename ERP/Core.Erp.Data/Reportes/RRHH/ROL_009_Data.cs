@@ -10,7 +10,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
    public class ROL_009_Data
     {
-        public List<ROL_009_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin, string estado_novedad, string IdRubro, decimal IdEmpleado)
+        public List<ROL_009_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin, string estado_novedad, string IdRubro, decimal IdEmpleado, int IdArea, string TipoRubro)
         {
             try
             {
@@ -19,9 +19,16 @@ namespace Core.Erp.Data.Reportes.RRHH
                 decimal IdEmpleadoInicio = IdEmpleado;
                 decimal IdEmpleadoFin = IdEmpleado == 0 ? 9999 : IdEmpleado;
 
-                if(estado_novedad== "System.String[]" || estado_novedad=="")
+                int IdAreaInicio = IdArea;
+                int IdAreaFin = IdArea == 0 ? 9999 : IdArea;
+
+                if (estado_novedad== "System.String[]" || estado_novedad=="")
                 {
                     estado_novedad = "CAN,PEN";
+                }
+                if(TipoRubro=="")
+                {
+                    TipoRubro = "E";
                 }
                 List<ROL_009_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
@@ -36,6 +43,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdEmpleado>=IdEmpleadoInicio
                              && q.IdEmpleado<=IdEmpleadoFin
 
+                             && q.IdArea >= IdAreaInicio
+                             && q.IdArea <= IdAreaFin
+                             && q.ru_tipo==TipoRubro
                              select new ROL_009_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -65,6 +75,11 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdRubro==IdRubro
                                  && q.IdEmpleado >= IdEmpleadoInicio
                                  && q.IdEmpleado <= IdEmpleadoFin
+
+                                 && q.IdArea >= IdAreaInicio
+                                         && q.IdArea <= IdAreaFin
+                                         && q.ru_tipo == TipoRubro
+
                                  select new ROL_009_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

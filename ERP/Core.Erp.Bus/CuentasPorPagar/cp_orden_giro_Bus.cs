@@ -255,11 +255,19 @@ namespace Core.Erp.Bus.CuentasPorPagar
                         info.info_retencion.observacion = "Retencion de factura #" + info.co_serie + '-' + info.co_factura;
                         info.info_retencion.Fecha_Transac = Convert.ToDateTime(info.Fecha_Transac);
                         info.info_retencion.aprobada_enviar_sri = false;
-
-                        if (bus_retencion.modificarDB(info.info_retencion))
+                        if (info.info_retencion.IdRetencion != 0)
                         {
-                            
+                            if (bus_retencion.modificarDB(info.info_retencion))
+                            {
+
+                            }
+                        }else
+                            if (bus_retencion.guardarDB(info.info_retencion))
+                        {
+
                         }
+
+
                     }
                 }
                 #endregion
@@ -347,10 +355,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                             info.info_retencion.info_comprobante.IdSucursal = info.IdSucursal;
                             info.info_retencion.info_comprobante.cb_Observacion = "Comprobante contable de retencion #" + info.info_retencion.serie1 + " " + info.info_retencion.serie2 + " " + info.info_retencion.NumRetencion;
                             bus_contabilidad.anularDB(info.info_retencion.info_comprobante);
-
-
-
-
                         }
 
                     }

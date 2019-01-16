@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Banco
 {
    public class ba_Cbte_Ban_x_ba_TipoFlujo_Data
     {
-        public List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> GetList(int IdEmpresa, decimal IdTipoFlujo)
+        public List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> GetList(int IdEmpresa, int IdTipocbte, decimal IdCbteCble)
         {
             try
             {
@@ -17,7 +17,9 @@ namespace Core.Erp.Data.Banco
                 using (Entities_banco Context = new Entities_banco())
                 {
                     Lista = Context.ba_Cbte_Ban_x_ba_TipoFlujo.Where(q => q.IdEmpresa == IdEmpresa
-                    && q.IdTipoFlujo == IdTipoFlujo).Select(q => new ba_Cbte_Ban_x_ba_TipoFlujo_Info
+                    && q.IdTipocbte == IdTipocbte
+                    && q.IdCbteCble == IdCbteCble
+                    ).Select(q => new ba_Cbte_Ban_x_ba_TipoFlujo_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdTipoFlujo = q.IdTipoFlujo,
