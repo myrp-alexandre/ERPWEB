@@ -293,7 +293,7 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_area Entity = Context.ro_area.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdArea == IdArea && q.IdDivision == IdDivision);
+                    ro_area Entity = Context.ro_area.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdArea == IdArea);
                     if (Entity == null) return null;
 
                     info = new ro_area_Info

@@ -43,6 +43,7 @@ namespace Core.Erp.Info.Helps
         public string IdRubro { get; set; }
 
         public string TipoRubro { get; set; }
+        public int IdArea { get; set; }
         #endregion
 
         #region filtros de Presupuesto
