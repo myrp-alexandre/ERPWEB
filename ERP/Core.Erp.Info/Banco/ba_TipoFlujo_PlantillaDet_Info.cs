@@ -13,5 +13,8 @@ namespace Core.Erp.Info.Banco
         public int Secuencia { get; set; }
         public decimal IdTipoFlujo { get; set; }
         public double Porcentaje { get; set; }
+
+
+        public string Descricion { get; set; }
     }
 }
