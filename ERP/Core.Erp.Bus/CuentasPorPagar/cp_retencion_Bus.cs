@@ -132,8 +132,8 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 odata = new cp_retencion_Data();
                 info.IdEmpresa_Ogiro = info.IdEmpresa;
                 info.CodDocumentoTipo = cl_enumeradores.eTipoDocumento.RETEN.ToString();
-                if(info.re_Tiene_RFuente == null) 
-                 info.re_Tiene_RFuente="N";
+                if (info.re_Tiene_RFuente == null)
+                    info.re_Tiene_RFuente = "N";
                 if (info.re_Tiene_RTiva == null)
                     info.re_Tiene_RTiva = "N";
                 info.re_EstaImpresa = "N";
@@ -141,42 +141,22 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.cb_Fecha = (DateTime)info.fecha;
 
                 //REVISA CARLOS FALTA IDSUCURSAL
-                info_orden_giro = o_data_orden_giro.get_info_retencion(info.IdEmpresa,Convert.ToInt32( info.IdTipoCbte_Ogiro),Convert.ToInt32( info.IdCbteCble_Ogiro));
+                info_orden_giro = o_data_orden_giro.get_info_retencion(info.IdEmpresa, Convert.ToInt32(info.IdTipoCbte_Ogiro), Convert.ToInt32(info.IdCbteCble_Ogiro));
                 info.info_comprobante.cb_Estado = "A";
                 info.info_comprobante.IdPeriodo = Convert.ToInt32(info.info_comprobante.cb_Fecha.Year.ToString() + info.info_comprobante.cb_Fecha.Month.ToString().PadLeft(2, '0'));
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Observacion = info.observacion;
                 info.info_comprobante.IdSucursal = info.IdSucursal;
-                if (bus_comprobante.guardarDB(info.info_comprobante))
+                if (odata.guardarDB(info))
                 {
-                    if (odata.guardarDB(info))
-                    {
-                        info_comp_x_retencion.ct_IdEmpresa = info.IdEmpresa;
-                        info_comp_x_retencion.rt_IdRetencion = info.IdRetencion;
-                        info_comp_x_retencion.ct_IdTipoCbte = info.info_comprobante.IdTipoCbte;
-                        info_comp_x_retencion.ct_IdCbteCble = info.info_comprobante.IdCbteCble;
-                        info_comp_x_retencion.Observacion = info.observacion;
-                        data_comp_x_retencion.guardarDB(info_comp_x_retencion);
-
-
-                        info_talonario.IdEmpresa = info.IdEmpresa;
-                        info_talonario.Establecimiento = info.serie1;
-                        info_talonario.PuntoEmision = info.serie2;
-                        info_talonario.NumDocumento = info.NumRetencion;
-                        info_talonario.Usado = true;
-                        info_talonario.CodDocumentoTipo = "RETEN";
-                        data_talonario.modificar_estado_usadoDB(info_talonario);
-                        return true;
-                    }
-                    else
-                        return false;
-
+                    return true;
                 }
                 else
                     return false;
 
+
             }
-            catch (Exception )
+            catch (Exception)
             {
 
                 throw;
@@ -205,51 +185,10 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 info.info_comprobante.IdEmpresa = info.IdEmpresa;
                 info.info_comprobante.cb_Observacion = info.observacion;
                 info.info_comprobante.IdSucursal = info.IdSucursal;
-                
-                if (info.info_comprobante.IdCbteCble != 0)
-                {
-                    if (bus_comprobante.modificarDB(info.info_comprobante))
-                    {
-                        if (odata.modificarDB(info))
-                        {
-                            data_retencion_der.eliminarDB(info.IdEmpresa, info.IdRetencion);
-                            data_retencion_der.guardarDB(info);
-                            return true;
-                        }
-                        else
-                            return false;
 
-                    }
-                    else
-                        return false;
-                }
-                else
-                {
-                    if (bus_comprobante.guardarDB(info.info_comprobante))
-                    {
-                            info_comp_x_retencion.ct_IdEmpresa = info.IdEmpresa;
-                            info_comp_x_retencion.rt_IdRetencion = info.IdRetencion;
-                            info_comp_x_retencion.ct_IdTipoCbte = info.info_comprobante.IdTipoCbte;
-                            info_comp_x_retencion.ct_IdCbteCble = info.info_comprobante.IdCbteCble;
-                            info_comp_x_retencion.Observacion = info.observacion;
-                            data_comp_x_retencion.guardarDB(info_comp_x_retencion);
-
-
-                            info_talonario.IdEmpresa = info.IdEmpresa;
-                            info_talonario.Establecimiento = info.serie1;
-                            info_talonario.PuntoEmision = info.serie2;
-                            info_talonario.NumDocumento = info.NumRetencion;
-                            info_talonario.Usado = true;
-                            info_talonario.CodDocumentoTipo = "RETEN";
-                            data_talonario.modificar_estado_usadoDB(info_talonario);
-                            return true;
-                    }
-                    else
-                        return false;
-                }       
-
+                return odata.modificarDB(info);
             }
-            catch (Exception )
+            catch (Exception)
             {
 
                 throw;
