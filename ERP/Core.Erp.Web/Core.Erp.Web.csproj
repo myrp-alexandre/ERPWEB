@@ -266,6 +266,7 @@
     <Compile Include="Areas\Banco\Controllers\ParametroBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TalonarioChequeBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TipoFlujoBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\TipoFlujoPlantillaController.cs" />
     <Compile Include="Areas\Banco\Controllers\TipoNotaBancoController.cs" />
     <Compile Include="Areas\Caja\CajaAreaRegistration.cs" />
     <Compile Include="Areas\Caja\Controllers\CajaController.cs" />
@@ -9657,6 +9658,8 @@
     <Content Include="Areas\RRHH\Views\Empleado\_CmbDivision.cshtml" />
     <Content Include="Areas\RRHH\Views\Empleado\_CmbDepartamento.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\NotaDebito\_CmbCuenta_ND.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\_GridViewPartial_TipoFlujoPlantilla.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
