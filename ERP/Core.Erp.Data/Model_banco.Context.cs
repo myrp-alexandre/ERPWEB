@@ -51,5 +51,6 @@ namespace Core.Erp.Data
         public DbSet<ba_TipoFlujo_Plantilla> ba_TipoFlujo_Plantilla { get; set; }
         public DbSet<ba_TipoFlujo_PlantillaDet> ba_TipoFlujo_PlantillaDet { get; set; }
         public DbSet<vwba_TipoFlujoPlantillaDet> vwba_TipoFlujoPlantillaDet { get; set; }
+        public DbSet<vwba_Cbte_Ban_x_ba_TipoFlujo> vwba_Cbte_Ban_x_ba_TipoFlujo { get; set; }
     }
 }

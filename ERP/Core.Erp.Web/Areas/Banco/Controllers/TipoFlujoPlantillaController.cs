@@ -286,19 +286,11 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public void AddRow(ba_TipoFlujo_PlantillaDet_Info info_det, decimal IdTransaccionSession)
         {
             List<ba_TipoFlujo_PlantillaDet_Info> list = get_list(IdTransaccionSession);
-            //if (list.Count() > 1 )
-            //{
-                if (list.Where(q => q.IdTipoFlujo == info_det.IdTipoFlujo).Count() == 0)
-                {
-                    info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;                
-                    list.Add(info_det);
-                }
-            //}
-            //else
-            //{
-            //    info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-            //    list.Add(info_det);
-            //}           
+            if (list.Where(q => q.IdTipoFlujo == info_det.IdTipoFlujo).Count() == 0)
+            {
+                info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;                
+                list.Add(info_det);
+            }       
         }
 
         public void UpdateRow(ba_TipoFlujo_PlantillaDet_Info info_det, decimal IdTransaccionSession)

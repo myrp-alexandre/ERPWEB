@@ -1748,6 +1748,9 @@
     <Compile Include="vwba_Cbte_Ban.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwba_Cbte_Ban_x_ba_TipoFlujo.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwba_Conciliacion.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>

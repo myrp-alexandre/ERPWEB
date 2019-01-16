@@ -146,10 +146,17 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det)
         {
-        //    int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-        //    var flujo = bus_flujo.get_info(IdEmpresa, info_det.IdTipoFlujo);
-        //    if(flujo!=null)
-        //    info_det.Descricion = flujo.Descricion;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            if (info_det != null)
+                if (info_det.IdTipoFlujo != 0)
+                {
+                    ba_TipoFlujo_Info info_TipoFlujo = bus_flujo.get_info(IdEmpresa, info_det.IdTipoFlujo);
+                    if (info_TipoFlujo != null)
+                    {
+                        info_det.Descricion = info_TipoFlujo.Descricion;
+                    }
+                }
 
             if (ModelState.IsValid)
                 List_Det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -161,6 +168,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det)
         {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.IdTipoFlujo != 0)
+                {
+                    ba_TipoFlujo_Info info_TipoFlujo = bus_flujo.get_info(IdEmpresa, info_det.IdTipoFlujo);
+                    if (info_TipoFlujo != null)
+                    {
+                        info_det.IdTipoFlujo = info_TipoFlujo.IdTipoFlujo;
+                        info_det.Descricion = info_TipoFlujo.Descricion;
+                    }
+                }
+
             if (ModelState.IsValid)
                 List_Det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -200,14 +219,20 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public void AddRow(ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det, decimal IdTransaccionSession)
         {
             List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
-            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-            info_det.IdTipocbte = info_det.IdTipocbte;
-            info_det.IdCbteCble = info_det.IdCbteCble;
-            info_det.IdTipoFlujo = info_det.IdTipoFlujo;
-            info_det.Porcentaje = info_det.Porcentaje;
-            info_det.Valor = info_det.Valor;
 
-            list.Add(info_det);
+            if (list.Where(q => q.IdTipoFlujo == info_det.IdTipoFlujo).Count() == 0)
+            {
+                info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+                list.Add(info_det);
+            }
+
+            //info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            //info_det.IdTipocbte = info_det.IdTipocbte;
+            //info_det.IdCbteCble = info_det.IdCbteCble;
+            //info_det.IdTipoFlujo = info_det.IdTipoFlujo;
+            //info_det.Porcentaje = info_det.Porcentaje;
+            //info_det.Valor = info_det.Valor;
+            //list.Add(info_det);            
         }
 
         public void UpdateRow(ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det, decimal IdTransaccionSession)
@@ -217,6 +242,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             edited_info.IdCbteCble = info_det.IdCbteCble;
             edited_info.IdTipoFlujo = info_det.IdTipoFlujo;
             edited_info.Porcentaje = info_det.Porcentaje;
+            edited_info.Descricion = info_det.Descricion;
             edited_info.Valor = info_det.Valor;
             edited_info.Secuencia = info_det.Secuencia;
         }

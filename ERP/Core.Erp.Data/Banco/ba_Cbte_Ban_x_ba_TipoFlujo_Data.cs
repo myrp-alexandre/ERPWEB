@@ -16,7 +16,7 @@ namespace Core.Erp.Data.Banco
                 List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> Lista;
                 using (Entities_banco Context = new Entities_banco())
                 {
-                    Lista = Context.ba_Cbte_Ban_x_ba_TipoFlujo.Where(q => q.IdEmpresa == IdEmpresa
+                    Lista = Context.vwba_Cbte_Ban_x_ba_TipoFlujo.Where(q => q.IdEmpresa == IdEmpresa
                     && q.IdTipocbte == IdTipocbte
                     && q.IdCbteCble == IdCbteCble
                     ).Select(q => new ba_Cbte_Ban_x_ba_TipoFlujo_Info
@@ -27,7 +27,8 @@ namespace Core.Erp.Data.Banco
                         IdCbteCble = q.IdCbteCble,
                         Porcentaje = q.Porcentaje,
                         Secuencia = q.Secuencia,
-                        Valor = q.Valor
+                        Valor = q.Valor,
+                        Descricion = q.Descricion
                     }).ToList();
                 }
                 return Lista;

@@ -46,6 +46,7 @@
         <AssociationConnector Association="Model_banco.FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo" />
         <AssociationConnector Association="Model_banco.FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo_Plantilla" />
         <EntityTypeShape EntityType="Model_banco.vwba_TipoFlujoPlantillaDet" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="Model_banco.vwba_Cbte_Ban_x_ba_TipoFlujo" Width="1.5" PointX="0.75" PointY="11.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
