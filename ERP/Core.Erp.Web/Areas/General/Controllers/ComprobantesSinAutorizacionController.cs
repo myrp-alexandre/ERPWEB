@@ -21,25 +21,37 @@ namespace Core.Erp.Web.Areas.General.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
+            CargarCombos(model.IdEmpresa);
             return View(model);
         }
+
+        private void CargarCombos(int IdEmpresa)
+        {
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
+
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            CargarCombos(model.IdEmpresa);
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_documentos_pendientes_enviar_sri(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        public ActionResult GridViewPartial_documentos_pendientes_enviar_sri(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdEmpresa = 0, int IdSucursal = 0)
         {
-           
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            ViewBag.IdEmpresa = IdEmpresa;
+            ViewBag.IdSucursal = IdSucursal;
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
           
-            var model = bus_comprobantes.get_list(IdEmpresa,"", ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            var model = bus_comprobantes.get_list(IdEmpresa,"", ViewBag.Fecha_ini, ViewBag.Fecha_fin,IdSucursal);
             Lis_tb_comprobantes_sin_autorizacion_List.set_list(model);
             return PartialView("_GridViewPartial_documentos_pendientes_enviar_sri", model);
         }

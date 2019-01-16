@@ -47,5 +47,6 @@ namespace Core.Erp.Info.Reportes.CuentasPorPagar
         public string nom_punto_cargo { get; set; }
         public Nullable<int> IdPunto_cargo_grupo { get; set; }
         public string nom_punto_cargo_grupo { get; set; }
+        public string NombreUsuario { get; set; }
     }
 }

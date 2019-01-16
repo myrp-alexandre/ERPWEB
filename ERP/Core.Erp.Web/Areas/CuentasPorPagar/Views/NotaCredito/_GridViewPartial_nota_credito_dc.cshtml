@@ -45,21 +45,6 @@
             e.NewValues["dc_para_conciliar"] = false;
         };
 
-        //settings.Columns.Add(column =>
-        //{
-        //    column.FieldName = "IdCtaCble";
-        //    column.Caption = "Cuenta contable";
-        //    column.Width = Unit.Percentage(60);
-        //    column.EditorProperties().ComboBox(p =>
-        //    {
-        //        p.Columns.Add("IdCtaCble", "Código").Width = Unit.Percentage(30);
-        //        p.Columns.Add("pc_Cuenta", "Cuenta").Width = Unit.Percentage(70);
-        //        p.ValueField = "IdCtaCble";
-        //        p.ValueType = typeof(string);
-        //        p.DataSource = ViewBag.lst_cuentas;
-        //    });
-        //});
-
         settings.Columns.Add(column =>
         {
             column.FieldName = "pc_Cuenta";

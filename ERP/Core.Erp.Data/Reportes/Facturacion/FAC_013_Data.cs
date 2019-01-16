@@ -58,7 +58,8 @@ namespace Core.Erp.Data.Reportes.Facturacion
                         vt_Precio = q.vt_Precio,
                         vt_PrecioFinal = q.vt_PrecioFinal,
                         vt_Subtotal = q.vt_Subtotal,
-                            pr_descripcion = q.pr_descripcion
+                            pr_descripcion = q.pr_descripcion,
+                            vt_NumFactura = q.vt_NumFactura
 
                         }).ToList();
                 }

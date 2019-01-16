@@ -33,5 +33,7 @@ namespace Core.Erp.Info.Reportes.Caja
         public Nullable<double> valor_a_reponer { get; set; }
         public string NombreCaja { get; set; }
         public string tm_descripcion { get; set; }
+        public string IdUsuarioCreacion { get; set; }
+        public string NombreUsuario { get; set; }
     }
 }

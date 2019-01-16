@@ -39,6 +39,10 @@ namespace Core.Erp.Info.Caja
         public Nullable<int> IdEmpresa_mov_caj { get; set; }
         public Nullable<int> IdTipoCbte_mov_caj { get; set; }
         public Nullable<decimal> IdCbteCble_mov_caj { get; set; }
+        public string IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string IdUsuarioModificacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
 
         public List<cp_conciliacion_Caja_det_Info> lst_det_fact { get; set; }
         public List<cp_conciliacion_Caja_det_x_ValeCaja_Info> lst_det_vale { get; set; }

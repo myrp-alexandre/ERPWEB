@@ -13,6 +13,7 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdTipoFlujo)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -68,6 +69,7 @@
             </div>
         </div>
     </div>
+    
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","TipoFlujoBanco", new { Area = "Banco"  },null)">Cancelar</a>

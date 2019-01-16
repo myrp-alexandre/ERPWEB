@@ -9,13 +9,14 @@ namespace Core.Erp.Data.General
 {
    public class tb_comprobantes_sin_autorizacion_Data
     {
-        public List<tb_comprobantes_sin_autorizacion_Info> get_list(int IdEmpresa, string Tipo_doc, DateTime Fecha_ini, DateTime Fecha_fin)
+        public List<tb_comprobantes_sin_autorizacion_Info> get_list(int IdEmpresa, string Tipo_doc, DateTime Fecha_ini, DateTime Fecha_fin, int IdSucursal)
         {
             try
             {
                 Fecha_fin = Convert.ToDateTime(Fecha_fin.ToShortDateString());
                 Fecha_ini = Convert.ToDateTime(Fecha_ini.ToShortDateString());
-
+                int IdSucursalIni = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 99999 : IdSucursal;
                 int sec = 0;
                 List<tb_comprobantes_sin_autorizacion_Info> Lista;
                 using (Entities_general Context=new Entities_general())
@@ -26,6 +27,8 @@ namespace Core.Erp.Data.General
                                          where q.IdEmpresa==IdEmpresa
                                          && q.vt_fecha>=Fecha_ini
                                          && q.vt_fecha<=Fecha_fin
+                                         && IdSucursalIni <= q.IdSucursal
+                                         && q.IdSucursal <= IdSucursalFin
                                          select new tb_comprobantes_sin_autorizacion_Info
                                          {
                                              IdEmpresa = q.IdEmpresa,
@@ -45,6 +48,9 @@ namespace Core.Erp.Data.General
                                          where q.Tipo_documento == Tipo_doc
                                          where q.IdEmpresa == IdEmpresa
                                          && q.vt_fecha >= Fecha_ini
+                                         && q.vt_fecha <= Fecha_fin
+                                         && IdSucursalIni <= q.IdSucursal
+                                         && q.IdSucursal <= IdSucursalFin
                                          select new tb_comprobantes_sin_autorizacion_Info
                                          {
                                              IdEmpresa = q.IdEmpresa,

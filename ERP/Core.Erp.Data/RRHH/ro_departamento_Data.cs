@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.RRHH;
+using DevExpress.Web;
+
 namespace Core.Erp.Data.RRHH
 {
   public  class ro_departamento_Data
@@ -179,6 +181,68 @@ namespace Core.Erp.Data.RRHH
 
                 throw;
             }
+        }
+
+        public List<ro_departamento_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool estado)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<ro_departamento_Info> Lista = new List<ro_departamento_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter, estado);
+            return Lista;
+        }
+
+        public List<ro_departamento_Info> get_list(int IdEmpresa, int skip, int take, string filter, bool MostrarAnulados)
+        {
+            try
+            {
+                List<ro_departamento_Info> Lista;
+
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    if (MostrarAnulados)
+                        Lista = (from q in Context.ro_Departamento
+                                 where q.IdEmpresa == IdEmpresa
+                                 && (q.IdDepartamento.ToString() + " " + q.de_descripcion).Contains(filter)
+                                 select new ro_departamento_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdDepartamento = q.IdDepartamento,
+                                     de_descripcion = q.de_descripcion,
+                                     Estado = q.Estado
+                                 })
+                                 .OrderBy(p => p.IdDepartamento)
+                                 .Skip(skip)
+                                 .Take(take)
+                                 .ToList();
+                    else
+                        Lista = (from q in Context.ro_Departamento
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.Estado == "A"
+                                 && (q.IdDepartamento.ToString() + " " + q.de_descripcion).Contains(filter)
+                                 select new ro_departamento_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdDepartamento = q.IdDepartamento,
+                                     de_descripcion = q.de_descripcion,
+                                     Estado = q.Estado
+                                 })
+                                 .OrderBy(p => p.IdDepartamento)
+                                 .Skip(skip)
+                                 .Take(take)
+                                 .ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ro_departamento_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            return get_info(IdEmpresa, args.Value == null ? 0 : (int)args.Value);
         }
     }
 }
