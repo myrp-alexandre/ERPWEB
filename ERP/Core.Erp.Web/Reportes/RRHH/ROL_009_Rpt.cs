@@ -30,8 +30,12 @@ namespace Core.Erp.Web.Reportes.RRHH
             string IdRubro = string.IsNullOrEmpty(p_IdRubro.Value.ToString()) ? "" : Convert.ToString(p_IdRubro.Value);
             decimal IdEmpleado = string.IsNullOrEmpty(p_IdEmpleado.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpleado.Value);
 
+            int IdArea = string.IsNullOrEmpty(P_IdArea.Value.ToString()) ? 0 : Convert.ToInt32(P_IdArea.Value);
+            string TipoRubro = string.IsNullOrEmpty(P_TipoRubro.Value.ToString()) ? "" : Convert.ToString(P_TipoRubro.Value);
+
+
             ROL_009_Bus bus_rpt = new ROL_009_Bus();
-            List<ROL_009_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, fecha_inicio, fecha_fin,  estado_novedad, IdRubro, IdEmpleado);
+            List<ROL_009_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, fecha_inicio, fecha_fin,  estado_novedad, IdRubro, IdEmpleado, IdArea,TipoRubro);
             this.DataSource = lst_rpt;
         }
     }

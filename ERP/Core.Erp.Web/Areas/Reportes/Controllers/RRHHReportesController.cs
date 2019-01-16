@@ -170,7 +170,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdRubro.Value = model.IdRubro == null ? "" : Convert.ToString(model.IdEmpleado);
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
+            report.P_IdArea.Value = 1;
+            report.P_TipoRubro.Value = "E";
             ViewBag.Report = report;
+
             return View(model);
         }
         [HttpPost]
@@ -192,6 +195,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdRubro.Value = model.IdRubro == null ? "" : Convert.ToString(model.IdRubro);
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
+            report.P_IdArea.Value = model.IdArea;
+            report.P_TipoRubro.Value = model.TipoRubro;
             ViewBag.Report = report;
             return View(model);
         }

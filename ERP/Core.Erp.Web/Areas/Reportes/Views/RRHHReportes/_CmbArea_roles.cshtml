@@ -12,7 +12,7 @@
         settings.Properties.TextField = "Descripcion";
         settings.Properties.TextFormatString = "{0} {1}";
         settings.Properties.ValueField = "IdArea";
-        settings.Properties.ValueType = typeof(string);
+        settings.Properties.ValueType = typeof(int);
         settings.Properties.Columns.Add("IdArea", "ID", 5);
         settings.Properties.Columns.Add("Descripcion", "Area", 65);
         settings.Properties.FilterMinLength = 3;
@@ -21,7 +21,7 @@
         settings.Properties.NullText = "== Seleccione ==";
         settings.Properties.AllowNull = true;
     })
-    .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.RRHHReportesController().get_list_bajo_demanda_area,
-    new Core.Erp.Web.Areas.Reportes.Controllers.RRHHReportesController().get_info_bajo_demanda_area).Bind(Model.IdRubro);
+       .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.RRHHReportesController().get_list_bajo_demanda_area, new Core.Erp.Web.Areas.Reportes.Controllers.RRHHReportesController().get_info_bajo_demanda_area)
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.Helps.cl_filtros_Info) ? "" : (Model == 0 ? "" : Model));
 }
 @comboBox.GetHtml()

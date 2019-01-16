@@ -90,6 +90,8 @@
             this.p_estado_novedad = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdRubro = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdEmpleado = new DevExpress.XtraReports.Parameters.Parameter();
+            this.P_IdArea = new DevExpress.XtraReports.Parameters.Parameter();
+            this.P_TipoRubro = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -686,6 +688,18 @@
             this.p_IdEmpleado.ValueInfo = "0";
             this.p_IdEmpleado.Visible = false;
             // 
+            // P_IdArea
+            // 
+            this.P_IdArea.Name = "P_IdArea";
+            this.P_IdArea.Type = typeof(int);
+            this.P_IdArea.ValueInfo = "0";
+            this.P_IdArea.Visible = false;
+            // 
+            // P_TipoRubro
+            // 
+            this.P_TipoRubro.Name = "P_TipoRubro";
+            this.P_TipoRubro.Visible = false;
+            // 
             // ROL_009_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -711,7 +725,9 @@
             this.p_fecha_fin,
             this.p_estado_novedad,
             this.p_IdRubro,
-            this.p_IdEmpleado});
+            this.p_IdEmpleado,
+            this.P_IdArea,
+            this.P_TipoRubro});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_009_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
@@ -787,5 +803,7 @@
         public DevExpress.XtraReports.Parameters.Parameter p_estado_novedad;
         public DevExpress.XtraReports.Parameters.Parameter p_IdRubro;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpleado;
+        public DevExpress.XtraReports.Parameters.Parameter P_IdArea;
+        public DevExpress.XtraReports.Parameters.Parameter P_TipoRubro;
     }
 }
