@@ -146,6 +146,11 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det)
         {
+        //    int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+        //    var flujo = bus_flujo.get_info(IdEmpresa, info_det.IdTipoFlujo);
+        //    if(flujo!=null)
+        //    info_det.Descricion = flujo.Descricion;
+
             if (ModelState.IsValid)
                 List_Det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -156,7 +161,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det)
         {
-
             if (ModelState.IsValid)
                 List_Det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
