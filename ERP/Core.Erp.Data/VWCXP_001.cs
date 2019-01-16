@@ -45,5 +45,6 @@ namespace Core.Erp.Data
         public double dc_Valor_Debe { get; set; }
         public Nullable<double> dc_Valor_Haber { get; set; }
         public string dc_Observacion { get; set; }
+        public string NombreUsuario { get; set; }
     }
 }
