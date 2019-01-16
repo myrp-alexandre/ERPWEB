@@ -14,6 +14,7 @@
         settings.Properties.ValueField = "IdTipoFlujo";
         settings.Properties.ValueType = typeof(decimal);
 
+        settings.Properties.FilterMinLength = 3;
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
         settings.Properties.AllowNull = true;
 
@@ -21,7 +22,7 @@
         settings.Properties.Columns.Add("Descricion", "Descripción", 20);
     })
     .BindList(new Core.Erp.Web.Areas.Banco.Controllers.TipoFlujoBancoController().get_list_bajo_demandaFlujo, new Core.Erp.Web.Areas.Banco.Controllers.TipoFlujoBancoController().get_info_bajo_demandaFlujo)
-    .Bind(Model.IdTipoFlujo);
+    .Bind((Model.GetType() == typeof(Core.Erp.Info.Banco.ba_TipoFlujo_Info) || Model.GetType() == typeof(Core.Erp.Info.Banco.ba_Cbte_Ban_x_ba_TipoFlujo_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Banco.ba_Cbte_Ban_x_ba_TipoFlujo_Info>)) ? "" : Model);
 
 }
 @comboBox.GetHtml()
