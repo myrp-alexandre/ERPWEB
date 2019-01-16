@@ -41,6 +41,8 @@ namespace Core.Erp.Info.Helps
         public decimal? IdEmpleado { get; set; }
         public string[]  estado_novedad { get; set; }
         public string IdRubro { get; set; }
+
+        public string TipoRubro { get; set; }
         #endregion
 
         #region filtros de Presupuesto
