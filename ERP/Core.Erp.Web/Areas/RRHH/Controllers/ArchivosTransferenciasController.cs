@@ -220,6 +220,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 case cl_enumeradores.eTipoProcesoBancario.ROL_ELECTRONICO:
                     NombreFile = "ROL" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0') + tipo_file.Codigo_Empresa + "_" + secuancia.ToString().PadLeft(2, '0');
                     break;
+                case cl_enumeradores.eTipoProcesoBancario.NCR_TRASN:
+                    NombreFile = "NCR" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Day.ToString().PadLeft(2, '0') + tipo_file.Codigo_Empresa + "_" + secuancia.ToString().PadLeft(2, '0');
+                    break;
                 default:
                     break;
             }
@@ -246,10 +249,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             }
             else
             {
-                if (infoProceso.IdProceso_bancario_tipo == cl_enumeradores.eTipoProcesoBancario.NCR.ToString())
-                    TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.AHO.ToString() + "," + cl_enumeradores.eTipoCuentaRRHH.COR.ToString();
-                else
+                if (infoProceso.IdProceso_bancario_tipo == cl_enumeradores.eTipoProcesoBancario.ROL_ELECTRONICO.ToString())
                     TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.VRT.ToString();
+                else
+                    TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.AHO.ToString() + "," + cl_enumeradores.eTipoCuentaRRHH.COR.ToString();
 
                 var detalle = bus_archivo_detalle.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_TipoLiqui, IdPeriodo, TipoCuenta, IdSucursal);
                 ro_archivos_bancos_generacion_x_empleado_list_Info.set_list(detalle, Convert.ToDecimal(IdTransaccionSession));
@@ -333,6 +336,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     case cl_enumeradores.eTipoProcesoBancario.ROL_ELECTRONICO:
 
                         return get_ROL_ELECTRONICO(info, nombre_file);
+                    case cl_enumeradores.eTipoProcesoBancario.NCR_TRASN:
+
+                        return get_NCR_OTRO(info, nombre_file);
 
                     default:
                         return new byte[00000];
@@ -405,7 +411,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 tb_banco_procesos_bancarios_x_empresa_Info info_proceso = new tb_banco_procesos_bancarios_x_empresa_Info();
                 info_proceso = bus_procesos_bancarios.get_info(info.IdEmpresa, info.IdProceso);
 
-                System.IO.File.Delete(rutafile + NombreArchivo + ".txt");
+                try
+                {
+                    System.IO.File.Delete(rutafile + NombreArchivo + ".txt");
+                }
+                catch (Exception)
+                {
+
+                    
+                }
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
                 {
                     foreach (var item in info.detalle)
@@ -434,8 +448,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             linea += "XX";
                             linea += "Y";
                             linea += "01";
-                            linea += "                   ";
-                            linea += cl_funciones.QuitarTildes(item.pe_apellido + item.pe_nombre);
+                            linea += "                    ";
+                            if (item.pe_nombreCompleto.Length>18)
+                            linea += cl_funciones.QuitarTildes(item.pe_nombreCompleto).Substring(0,18);
+                            else
+                            linea += cl_funciones.QuitarTildes(item.pe_nombreCompleto).PadRight(18, ' ');
                             linea += "C";
                             linea += info_proceso.Codigo_Empresa;
                         }
