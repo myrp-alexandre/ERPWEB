@@ -78,6 +78,7 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             cargar_combos_sucursal();
@@ -99,10 +100,11 @@ namespace Core.Erp.Web.Areas.CuentasPorPagar.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_nota_credito(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : fecha_ini;
             ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : fecha_fin;
             ViewBag.IdSucursal = IdSucursal;
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ViewBag.IdEmpresa = IdEmpresa;
             List<cp_nota_DebCre_Info> model = new List<cp_nota_DebCre_Info>();
             model = bus_orden_giro.get_lst(IdEmpresa, IdSucursal, "C", Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
             return PartialView("_GridViewPartial_nota_credito", model);

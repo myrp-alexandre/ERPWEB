@@ -354,8 +354,8 @@
             this.xrTableCell35.Name = "xrTableCell35";
             this.xrTableCell35.StylePriority.UseBorders = false;
             this.xrTableCell35.StylePriority.UseFont = false;
-            this.xrTableCell35.Text = "Razón social/Nombres y apellidos:";
-            this.xrTableCell35.Weight = 1.2250334827668368D;
+            this.xrTableCell35.Text = "Razón social:";
+            this.xrTableCell35.Weight = 0.70461612251257943D;
             // 
             // xrTableCell36
             // 
@@ -364,7 +364,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[cli_Nombre]")});
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.StylePriority.UseBorders = false;
-            this.xrTableCell36.Weight = 0.9052383073749366D;
+            this.xrTableCell36.Weight = 1.825344168847703D;
             // 
             // xrTableCell37
             // 
@@ -374,7 +374,7 @@
             this.xrTableCell37.StylePriority.UseBorders = false;
             this.xrTableCell37.StylePriority.UseFont = false;
             this.xrTableCell37.Text = "Identificación:";
-            this.xrTableCell37.Weight = 0.51875210536281446D;
+            this.xrTableCell37.Weight = 0.53262293609612565D;
             // 
             // xrTableCell38
             // 
@@ -383,7 +383,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[cli_cedulaRuc]")});
             this.xrTableCell38.Name = "xrTableCell38";
             this.xrTableCell38.StylePriority.UseBorders = false;
-            this.xrTableCell38.Weight = 1.3509761044954125D;
+            this.xrTableCell38.Weight = 0.93741677254359246D;
             // 
             // xrTableRow20
             // 
@@ -413,7 +413,7 @@
             this.xrTableCell40.Name = "xrTableCell40";
             this.xrTableCell40.StylePriority.UseBorders = false;
             this.xrTableCell40.TextFormatString = "{0:dd/MM/yyyy}";
-            this.xrTableCell40.Weight = 1.4256555050854758D;
+            this.xrTableCell40.Weight = 1.8253440063039845D;
             // 
             // xrTableCell41
             // 
@@ -423,14 +423,14 @@
             this.xrTableCell41.StylePriority.UseBorders = false;
             this.xrTableCell41.StylePriority.UseFont = false;
             this.xrTableCell41.Text = "Guía de remisión:";
-            this.xrTableCell41.Weight = 0.64380739054495528D;
+            this.xrTableCell41.Weight = 0.63914791232004331D;
             // 
             // xrTableCell42
             // 
             this.xrTableCell42.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Right | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell42.Name = "xrTableCell42";
             this.xrTableCell42.StylePriority.UseBorders = false;
-            this.xrTableCell42.Weight = 1.2259208193132716D;
+            this.xrTableCell42.Weight = 0.83089179631967458D;
             // 
             // xrTable4
             // 

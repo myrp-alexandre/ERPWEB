@@ -2,6 +2,7 @@
 using Core.Erp.Data.General;
 using Core.Erp.Data.Inventario;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.CuentasPorCobrar;
 using Core.Erp.Info.Facturacion;
 using Core.Erp.Info.Inventario;
 using System;
@@ -1122,6 +1123,23 @@ namespace Core.Erp.Data.Facturacion
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        private cxc_cobro_Info GenerarCobro(fa_factura_Info fac)
+        {
+            try
+            {
+                cxc_cobro_Info cobro = new cxc_cobro_Info
+                {
+                    IdEmpresa = fac.IdEmpresa
+                };
+
+                return cobro;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

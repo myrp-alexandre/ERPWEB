@@ -9,6 +9,7 @@ namespace Core.Erp.Info.Banco
 {
     public class ba_TipoFlujo_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdTipoFlujo { get; set; }
         public Nullable<decimal> IdTipoFlujoPadre { get; set; }
@@ -29,5 +30,9 @@ namespace Core.Erp.Info.Banco
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
-    }
+
+        public List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> LstDet { get; set; }
+
+
+}
 }

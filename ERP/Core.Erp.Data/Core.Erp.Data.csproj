@@ -123,6 +123,7 @@
     <Compile Include="Banco\ba_CatalogoTipo_Data.cs" />
     <Compile Include="Banco\ba_Catalogo_Data.cs" />
     <Compile Include="Banco\ba_Cbte_Ban_Data.cs" />
+    <Compile Include="Banco\ba_Cbte_Ban_x_ba_TipoFlujo_Data.cs" />
     <Compile Include="Banco\ba_Conciliacion_Data.cs" />
     <Compile Include="Banco\ba_Conciliacion_det_IngEgr_Data.cs" />
     <Compile Include="Banco\ba_parametros_Data.cs" />

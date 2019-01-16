@@ -40,6 +40,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         #region Metodos ComboBox bajo rubros
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
+        ro_area_Bus bus_area = new ro_area_Bus();
         public ActionResult CmbRubro_roles()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -53,6 +54,21 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             return bus_rubro.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa),args);
         }
+
+        public ActionResult CmbArea_roles()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            return PartialView("_CmbArea_roles", model);
+        }
+        public List<ro_area_Info> get_list_bajo_demanda_area(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa),false,1);
+        }
+        public ro_area_Info get_info_bajo_demanda_area(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa),1);
+        }
+
         #endregion
         public ActionResult ROL_001(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0, int IdSucursal=0)
         {
@@ -200,8 +216,15 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         private void cargar_combos(int IdEmpresa)
         {
             ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
+            ro_area_Bus bus_area = new ro_area_Bus();
             var lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina = lst_nomina;
+
+            var lst_area = bus_area.get_list(IdEmpresa, false);
+            ViewBag.lst_nomina = lst_area;
+
+
+
         }
         public ActionResult ROL_012( )
         {
