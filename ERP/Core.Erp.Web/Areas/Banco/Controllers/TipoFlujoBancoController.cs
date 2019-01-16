@@ -13,7 +13,15 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 {
     public class TipoFlujoBancoController : Controller
     {
+        #region Variables
+
         ba_TipoFlujo_Bus bus_flujo = new ba_TipoFlujo_Bus();
+        ba_Banco_Flujo_Det_List List_Det = new ba_Banco_Flujo_Det_List();
+        ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_flujo_det = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
+        #endregion
+
+        #region Acciones
+
         public ActionResult Index()
         {
             return View();
@@ -39,10 +47,19 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_TipoFlujo_Info model = new ba_TipoFlujo_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
+                LstDet = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>()
             };
+            List_Det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combo(IdEmpresa);
             return View(model);
         }
@@ -50,6 +67,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult Nuevo(ba_TipoFlujo_Info model)
         {
             model.IdUsuario = SessionFixed.IdUsuario;
+            model.LstDet = List_Det.get_list(model.IdTransaccionSession);
             if (!bus_flujo.guardarDB(model))
             {
                 cargar_combo(model.IdEmpresa);
@@ -60,9 +78,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdTipoFlujo = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_TipoFlujo_Info model = bus_flujo.get_info(IdEmpresa, IdTipoFlujo);
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.LstDet = bus_flujo_det.GetList(IdEmpresa, IdTipoFlujo);
+            List_Det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combo(IdEmpresa);
             return View(model);
         }
@@ -70,6 +97,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult Modificar(ba_TipoFlujo_Info model)
         {
             model.IdUsuarioUltMod = SessionFixed.IdUsuario;
+            model.LstDet = List_Det.get_list(model.IdTransaccionSession);
             if (!bus_flujo.modificarDB(model))
             {
                 cargar_combo(model.IdEmpresa);
@@ -79,6 +107,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         public ActionResult Anular(int IdEmpresa = 0, decimal IdTipoFlujo = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             ba_TipoFlujo_Info model = bus_flujo.get_info(IdEmpresa, IdTipoFlujo);
             if (model == null)
                 return RedirectToAction("Index");
@@ -96,7 +130,101 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
 
+        #region Detalle
+        private void cargar_combos_Detalle()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_flujo = bus_flujo.get_list(IdEmpresa, false);
+            ViewBag.lst_flujo = lst_flujo;
+
+            
+        }
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_flujo_det()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            cargar_combos_Detalle();
+            var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_flujo_det", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_Det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_Detalle();
+            return PartialView("_GridViewPartial_flujo_det", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det)
+        {
+
+            if (ModelState.IsValid)
+                List_Det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_Detalle();
+            return PartialView("_GridViewPartial_flujo_det", model);
+        }
+        public ActionResult EditingDelete(int Secuencia)
+        {
+            List_Det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_Detalle();
+            return PartialView("_GridViewPartial_flujo_det", model);
+        }
+        #endregion
 
     }
+    public class ba_Banco_Flujo_Det_List
+    {
+        string Variable = "ba_Cbte_Ban_x_ba_TipoFlujo_Info";
+        public List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> get_list(decimal IdTransaccionSession)
+        {
+
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det, decimal IdTransaccionSession)
+        {
+            List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+
+
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det, decimal IdTransaccionSession)
+        {
+            ba_Cbte_Ban_x_ba_TipoFlujo_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.IdTipocbte = info_det.IdTipocbte;
+            edited_info.IdCbteCble = info_det.IdCbteCble;
+            edited_info.Porcentaje = info_det.Porcentaje;
+            edited_info.Valor = info_det.Valor;
+            edited_info.Secuencia = info_det.Secuencia;
+        }
+
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
+        {
+            List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+    }
+
 }
