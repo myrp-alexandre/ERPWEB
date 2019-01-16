@@ -8,6 +8,7 @@ using Core.Erp.Bus.Banco;
 using Core.Erp.Info.Banco;
 using Core.Erp.Web.Helps;
 using Core.Erp.Info.Helps;
+using DevExpress.Web;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
 {
@@ -18,6 +19,23 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ba_TipoFlujo_Bus bus_flujo = new ba_TipoFlujo_Bus();
         ba_Banco_Flujo_Det_List List_Det = new ba_Banco_Flujo_Det_List();
         ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_flujo_det = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
+        #endregion
+
+        #region Metodos ComboBox bajo demanda flujo
+        ba_TipoFlujo_Bus bus_tipo = new ba_TipoFlujo_Bus();
+        public ActionResult CmbFlujo_Tipo()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbFlujo_Tipo", model);
+        }
+        public List<ba_TipoFlujo_Info> get_list_bajo_demandaFlujo(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_tipo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public ba_TipoFlujo_Info get_info_bajo_demandaFlujo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_tipo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #region Acciones
@@ -47,19 +65,10 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            #endregion
             ba_TipoFlujo_Info model = new ba_TipoFlujo_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
-                LstDet = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>()
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
-            List_Det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combo(IdEmpresa);
             return View(model);
         }
@@ -67,7 +76,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult Nuevo(ba_TipoFlujo_Info model)
         {
             model.IdUsuario = SessionFixed.IdUsuario;
-            model.LstDet = List_Det.get_list(model.IdTransaccionSession);
             if (!bus_flujo.guardarDB(model))
             {
                 cargar_combo(model.IdEmpresa);
@@ -78,18 +86,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdTipoFlujo = 0)
         {
-            #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            #endregion
             ba_TipoFlujo_Info model = bus_flujo.get_info(IdEmpresa, IdTipoFlujo);
             if (model == null)
                 return RedirectToAction("Index");
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-            model.LstDet = bus_flujo_det.GetList(IdEmpresa, IdTipoFlujo);
-            List_Det.set_list(model.LstDet, model.IdTransaccionSession);
             cargar_combo(IdEmpresa);
             return View(model);
         }
@@ -97,7 +96,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         public ActionResult Modificar(ba_TipoFlujo_Info model)
         {
             model.IdUsuarioUltMod = SessionFixed.IdUsuario;
-            model.LstDet = List_Det.get_list(model.IdTransaccionSession);
             if (!bus_flujo.modificarDB(model))
             {
                 cargar_combo(model.IdEmpresa);
@@ -107,12 +105,6 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         public ActionResult Anular(int IdEmpresa = 0, decimal IdTipoFlujo = 0)
         {
-            #region Validar Session
-            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-            #endregion
             ba_TipoFlujo_Info model = bus_flujo.get_info(IdEmpresa, IdTipoFlujo);
             if (model == null)
                 return RedirectToAction("Index");
@@ -205,7 +197,11 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-
+            info_det.IdTipocbte = info_det.IdTipocbte;
+            info_det.IdCbteCble = info_det.IdCbteCble;
+            info_det.IdTipoFlujo = info_det.IdTipoFlujo;
+            info_det.Porcentaje = info_det.Porcentaje;
+            info_det.Valor = info_det.Valor;
 
             list.Add(info_det);
         }
@@ -215,6 +211,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ba_Cbte_Ban_x_ba_TipoFlujo_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdTipocbte = info_det.IdTipocbte;
             edited_info.IdCbteCble = info_det.IdCbteCble;
+            edited_info.IdTipoFlujo = info_det.IdTipoFlujo;
             edited_info.Porcentaje = info_det.Porcentaje;
             edited_info.Valor = info_det.Valor;
             edited_info.Secuencia = info_det.Secuencia;

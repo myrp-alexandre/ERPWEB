@@ -9662,6 +9662,7 @@
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Index.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\_GridViewPartial_flujo_det.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbArea_roles.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoBanco\_CmbFlujo_Tipo.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
