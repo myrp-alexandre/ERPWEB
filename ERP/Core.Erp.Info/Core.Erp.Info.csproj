@@ -67,6 +67,8 @@
     <Compile Include="Banco\ba_parametros_Info.cs" />
     <Compile Include="Banco\ba_Talonario_cheques_x_banco_Info.cs" />
     <Compile Include="Banco\ba_TipoFlujo_Info.cs" />
+    <Compile Include="Banco\ba_TipoFlujo_PlantillaDet_Info.cs" />
+    <Compile Include="Banco\ba_TipoFlujo_Plantilla_Info.cs" />
     <Compile Include="Banco\ba_tipo_nota_Info.cs" />
     <Compile Include="Caja\caj_Caja_Info.cs" />
     <Compile Include="Caja\caj_Caja_Movimiento_det_Info.cs" />

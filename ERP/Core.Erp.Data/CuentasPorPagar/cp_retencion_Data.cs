@@ -147,6 +147,10 @@ namespace Core.Erp.Data.CuentasPorPagar
             {
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
+                    var lstf = Context.cp_retencion.Where(q => q.IdEmpresa_Ogiro == info.IdEmpresa && q.IdTipoCbte_Ogiro == info.IdTipoCbte_Ogiro && q.IdCbteCble_Ogiro == info.IdCbteCble_Ogiro).FirstOrDefault();
+                    if (lstf != null)
+                        return false;
+                    
                     Context.cp_retencion.Add(new cp_retencion
                     {
                         IdEmpresa = info.IdEmpresa,
@@ -266,29 +270,31 @@ namespace Core.Erp.Data.CuentasPorPagar
                             var param = Context.cp_parametros.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                             var diario = odata_ct.armar_info(info.info_comprobante.lst_ct_cbtecble_det, info.IdEmpresa, info.IdSucursal, (info.info_comprobante.IdTipoCbte == 0 ? Convert.ToInt32(param.pa_IdTipoCbte_x_Retencion) : info.info_comprobante.IdTipoCbte), 0,
                                 "Comprobante contable de retención #" + info.serie1 + " " + info.serie2 + " " + info.NumRetencion, info.fecha);
-                            
-                            var rel = Context.cp_retencion_x_ct_cbtecble.Where(q => q.rt_IdEmpresa == info.IdEmpresa && q.rt_IdRetencion == info.IdRetencion).FirstOrDefault();
-                            if (rel == null)
+                            if (diario != null)
                             {
-                                if (odata_ct.guardarDB(diario))
+                                var rel = Context.cp_retencion_x_ct_cbtecble.Where(q => q.rt_IdEmpresa == info.IdEmpresa && q.rt_IdRetencion == info.IdRetencion).FirstOrDefault();
+                                if (rel == null)
                                 {
-                                    Context.cp_retencion_x_ct_cbtecble.Add(new cp_retencion_x_ct_cbtecble
+                                    if (odata_ct.guardarDB(diario))
                                     {
-                                        rt_IdEmpresa = info.IdEmpresa,
-                                        rt_IdRetencion = info.IdRetencion,
+                                        Context.cp_retencion_x_ct_cbtecble.Add(new cp_retencion_x_ct_cbtecble
+                                        {
+                                            rt_IdEmpresa = info.IdEmpresa,
+                                            rt_IdRetencion = info.IdRetencion,
 
-                                        ct_IdEmpresa = diario.IdEmpresa,
-                                        ct_IdTipoCbte = diario.IdTipoCbte,
-                                        ct_IdCbteCble = diario.IdCbteCble,
-                                        Observacion = "Relacion"
-                                    });
-                                    Context.SaveChanges();
+                                            ct_IdEmpresa = diario.IdEmpresa,
+                                            ct_IdTipoCbte = diario.IdTipoCbte,
+                                            ct_IdCbteCble = diario.IdCbteCble,
+                                            Observacion = "Relacion"
+                                        });
+                                        Context.SaveChanges();
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                diario.IdCbteCble = rel.ct_IdCbteCble;
-                                odata_ct.modificarDB(diario);
+                                else
+                                {
+                                    diario.IdCbteCble = rel.ct_IdCbteCble;
+                                    odata_ct.modificarDB(diario);
+                                }
                             }
                         }
                     }

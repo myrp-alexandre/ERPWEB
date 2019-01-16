@@ -29,8 +29,6 @@ namespace Core.Erp.Info.Banco
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public string MotiAnula { get; set; }
 
         public List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> LstDet { get; set; }
