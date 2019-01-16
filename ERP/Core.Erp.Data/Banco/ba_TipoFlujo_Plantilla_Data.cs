@@ -73,7 +73,7 @@ namespace Core.Erp.Data.Banco
             }
         }
 
-        public ba_TipoFlujo_Plantilla_Info get_info(int IdEmpresa, int IdPlantilla)
+        public ba_TipoFlujo_Plantilla_Info get_info(int IdEmpresa, decimal IdPlantilla)
         {
             try
             {
@@ -98,6 +98,128 @@ namespace Core.Erp.Data.Banco
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public bool GuardarBD(ba_TipoFlujo_Plantilla_Info info)
+        {
+            try
+            {
+                using (Entities_banco db = new Entities_banco())
+                {
+                    db.ba_TipoFlujo_Plantilla.Add(new ba_TipoFlujo_Plantilla
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdPlantilla = info.IdPlantilla = get_id(info.IdEmpresa),
+                        Descripcion = info.Descripcion,
+                        Desde = info.Desde,
+                        Hasta = info.Hasta,
+                        Estado = true,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = DateTime.Now
+                    });
+
+                    //detalle
+                    if (info.Lista_TipoFlujo_PlantillaDet != null)
+                    {
+                        int Secuencia = 1;
+                        foreach (var item in info.Lista_TipoFlujo_PlantillaDet)
+                        {
+                            db.ba_TipoFlujo_PlantillaDet.Add(new ba_TipoFlujo_PlantillaDet
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdPlantilla = info.IdPlantilla,
+                                Secuencia = Secuencia++,
+                                IdTipoFlujo = item.IdTipoFlujo,
+                                Porcentaje = item.Porcentaje                                
+                            });
+
+                        }
+                    }
+                    db.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool ModificarBD(ba_TipoFlujo_Plantilla_Info info)
+        {
+            try
+            {
+                using (Entities_banco db = new Entities_banco())
+                {
+                    ba_TipoFlujo_Plantilla entity = db.ba_TipoFlujo_Plantilla.Where(q => q.IdPlantilla == info.IdPlantilla && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+
+                    if (entity == null)
+                    {
+                        return false;
+                    }
+
+                    entity.Descripcion = info.Descripcion;
+                    entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    entity.FechaModificacion = DateTime.Now;
+
+                    var lst_det = db.ba_TipoFlujo_PlantillaDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdPlantilla == info.IdPlantilla).ToList();
+                    db.ba_TipoFlujo_PlantillaDet.RemoveRange(lst_det);
+
+                    if (info.Lista_TipoFlujo_PlantillaDet != null)
+                    {
+                        int Secuencia = 1;
+
+                        foreach (var item in info.Lista_TipoFlujo_PlantillaDet)
+                        {
+                            db.ba_TipoFlujo_PlantillaDet.Add(new ba_TipoFlujo_PlantillaDet
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdPlantilla = info.IdPlantilla,
+                                Secuencia = Secuencia++,
+                                IdTipoFlujo = item.IdTipoFlujo,
+                                Porcentaje = item.Porcentaje
+                            });
+                        }
+                    }
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool AnularBD(ba_TipoFlujo_Plantilla_Info info)
+        {
+            try
+            {
+                using (Entities_banco db = new Entities_banco())
+                {
+                    ba_TipoFlujo_Plantilla entity = db.ba_TipoFlujo_Plantilla.Where(q => q.IdPlantilla == info.IdPlantilla && q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+
+                    if (entity == null)
+                    {
+                        return false;
+                    }
+
+                    entity.Estado = false;
+                    entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
+                    entity.FechaAnulacion = DateTime.Now;
+                    entity.MotivoAnulacion = info.MotivoAnulacion;
+
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

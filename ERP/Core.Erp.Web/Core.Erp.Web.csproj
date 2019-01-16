@@ -9661,6 +9661,11 @@
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\_GridViewPartial_TipoFlujoPlantilla.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Index.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\_GridViewPartial_flujo_det.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\_GridViewPartial_TipoFlujoPlantillaDet.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\_CmbTipoFlujo.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Banco
 {
     public class ba_TipoFlujo_PlantillaDet_Data
     {
-        public List<ba_TipoFlujo_PlantillaDet_Info> get_list(int IdEmpresa, int IdPlantilla)
+        public List<ba_TipoFlujo_PlantillaDet_Info> get_list(int IdEmpresa, decimal IdPlantilla)
         {
             try
             {
@@ -17,13 +17,14 @@ namespace Core.Erp.Data.Banco
 
                 using (Entities_banco db = new Entities_banco())
                 {
-                    Lista = db.ba_TipoFlujo_PlantillaDet.Where(q => q.IdEmpresa == IdEmpresa && q.IdPlantilla == IdPlantilla).Select(q => new ba_TipoFlujo_PlantillaDet_Info
+                    Lista = db.vwba_TipoFlujoPlantillaDet.Where(q => q.IdEmpresa == IdEmpresa && q.IdPlantilla == IdPlantilla).Select(q => new ba_TipoFlujo_PlantillaDet_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdPlantilla = q.IdPlantilla,
                         Secuencia = q.Secuencia,
                         IdTipoFlujo = q.IdTipoFlujo,
-                        Porcentaje = q.Porcentaje
+                        Porcentaje = q.Porcentaje,
+                        Descricion = q.Descricion
                     }).ToList();
 
                     return Lista;

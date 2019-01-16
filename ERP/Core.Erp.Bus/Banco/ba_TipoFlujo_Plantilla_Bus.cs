@@ -25,7 +25,7 @@ namespace Core.Erp.Bus.Banco
             }
         }
 
-        public ba_TipoFlujo_Plantilla_Info GetInfo(int IdEmpresa, int IdPlantilla)
+        public ba_TipoFlujo_Plantilla_Info GetInfo(int IdEmpresa, decimal IdPlantilla)
         {
             try
             {
@@ -44,6 +44,45 @@ namespace Core.Erp.Bus.Banco
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public bool GuardarBD(ba_TipoFlujo_Plantilla_Info info)
+        {
+            try
+            {
+                return odata.GuardarBD(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool ModificarBD(ba_TipoFlujo_Plantilla_Info info)
+        {
+            try
+            {
+                return odata.ModificarBD(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool AnularBD(ba_TipoFlujo_Plantilla_Info info)
+        {
+            try
+            {
+                return odata.AnularBD(info);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
