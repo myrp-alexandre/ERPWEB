@@ -21,7 +21,7 @@
         settings.Properties.Columns.Add("Descricion", "Descripción", 20);
     })
     .BindList(new Core.Erp.Web.Areas.Banco.Controllers.TipoFlujoBancoController().get_list_bajo_demandaFlujo, new Core.Erp.Web.Areas.Banco.Controllers.TipoFlujoBancoController().get_info_bajo_demandaFlujo)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.Banco.ba_TipoFlujo_Info) ? "" : Model);
+    .Bind(Model.IdTipoFlujo);
 
 }
 @comboBox.GetHtml()

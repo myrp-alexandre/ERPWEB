@@ -25,7 +25,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ba_TipoFlujo_Bus bus_tipo = new ba_TipoFlujo_Bus();
         public ActionResult CmbFlujo_Tipo()
         {
-            decimal model = new decimal();
+            ba_TipoFlujo_Info model = new ba_TipoFlujo_Info();
             return PartialView("_CmbFlujo_Tipo", model);
         }
         public List<ba_TipoFlujo_Info> get_list_bajo_demandaFlujo(ListEditItemsRequestedByFilterConditionEventArgs args)
