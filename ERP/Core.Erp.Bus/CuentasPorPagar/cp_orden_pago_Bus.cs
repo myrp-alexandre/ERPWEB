@@ -241,6 +241,7 @@ namespace Core.Erp.Bus.CuentasPorPagar
                 oData = new cp_orden_pago_Data();
                 if (oData.anularDB(info))
                 {
+                    info.info_comprobante.IdEmpresa = info.IdEmpresa;
                     bus_contabilidad.anularDB(info.info_comprobante);
 
                 }

@@ -317,6 +317,10 @@ namespace Core.Erp.Data.CuentasPorPagar
                     var contact = Context.cp_retencion.FirstOrDefault(minfo => minfo.IdEmpresa == info.IdEmpresa && minfo.IdRetencion == info.IdRetencion);
                     if (contact != null)
                     {
+                        contact.IdEmpresa_Ogiro = null;
+                        contact.IdTipoCbte_Ogiro = null;
+                        contact.IdCbteCble_Ogiro = null;
+
                         contact.Estado = "I";
                         contact.observacion = "*ANULADO* " + contact.observacion;
                         contact.Fecha_UltAnu = info.Fecha_UltAnu;

@@ -355,10 +355,6 @@ namespace Core.Erp.Bus.CuentasPorPagar
                             info.info_retencion.info_comprobante.IdSucursal = info.IdSucursal;
                             info.info_retencion.info_comprobante.cb_Observacion = "Comprobante contable de retencion #" + info.info_retencion.serie1 + " " + info.info_retencion.serie2 + " " + info.info_retencion.NumRetencion;
                             bus_contabilidad.anularDB(info.info_retencion.info_comprobante);
-
-
-
-
                         }
 
                     }

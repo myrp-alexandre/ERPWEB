@@ -68,6 +68,30 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
+        public in_Producto_x_fa_NivelDescuento_Info GetInfo(int IdEmpresa, decimal IdProducto, int IdNivel)
+        {
+            try
+            {
+                in_Producto_x_fa_NivelDescuento_Info info;
+                using (Entities_inventario db = new Entities_inventario())
+                {
+                    info = db.in_Producto_x_fa_NivelDescuento.Where(q => q.IdEmpresa == IdEmpresa
+                    && q.IdProducto == IdProducto && q.IdNivel == IdNivel).Select(q=> new in_Producto_x_fa_NivelDescuento_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdNivel = q.IdNivel,
+                        IdProducto = q.IdProducto,
+                        Porcentaje = q.Porcentaje
+                    }).FirstOrDefault();
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool guardarDB(List<in_Producto_x_fa_NivelDescuento_Info> Lista)
         {
             try

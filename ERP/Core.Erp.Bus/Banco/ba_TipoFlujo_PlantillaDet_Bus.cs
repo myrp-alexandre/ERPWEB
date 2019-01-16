@@ -8,20 +8,21 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Banco
 {
-    public class ba_Cbte_Ban_x_ba_TipoFlujo_Bus
+    public class ba_TipoFlujo_PlantillaDet_Bus
     {
-        ba_Cbte_Ban_x_ba_TipoFlujo_Data odata = new ba_Cbte_Ban_x_ba_TipoFlujo_Data();
-        public List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> GetList(int IdEmpresa , int IdTipocbte, decimal IdCbteCble )
+        ba_TipoFlujo_PlantillaDet_Data odata_det = new ba_TipoFlujo_PlantillaDet_Data();
+
+        public List<ba_TipoFlujo_PlantillaDet_Info> GetList(int IdEmpresa, decimal IdPlantilla)
         {
             try
             {
-                return odata.GetList(IdEmpresa,IdTipocbte, IdCbteCble);
+                return odata_det.get_list(IdEmpresa, IdPlantilla);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+
     }
 }

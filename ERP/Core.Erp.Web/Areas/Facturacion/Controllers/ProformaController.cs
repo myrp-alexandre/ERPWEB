@@ -29,6 +29,7 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+        in_Producto_x_fa_NivelDescuento_Bus bus_nivelproducto = new in_Producto_x_fa_NivelDescuento_Bus();
         fa_proforma_det_Bus bus_det = new fa_proforma_det_Bus();
         in_Producto_List List_producto = new in_Producto_List();
         string mensaje = string.Empty;
@@ -454,14 +455,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     {
                         info_det.pd_precio = producto.precio_1;
                         int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
-                        var nivel = bus_nivel.GetInfo(IdEmpresa, nivel_precio);
+
+                        var nivelproducto = bus_nivelproducto.GetInfo(IdEmpresa, producto.IdProducto, nivel_precio);
+
                         if (SessionFixed.EsSuperAdmin == "False")
                         {
-                            info_det.pd_por_descuento_uni = nivel.Porcentaje;
+                            info_det.pd_por_descuento_uni = nivelproducto == null ? 0 : nivelproducto.Porcentaje;
                         }
                         else
                         {
-                            info_det.pd_por_descuento_uni = IdNivelDescuento > 1 ? nivel.Porcentaje : info_det.pd_por_descuento_uni;
+                            info_det.pd_por_descuento_uni = IdNivelDescuento > 1 ? (nivelproducto == null ? 0 : nivelproducto.Porcentaje) : info_det.pd_por_descuento_uni;
                         }
                     }
                 }
@@ -491,14 +494,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     {
                         info_det.pd_precio = producto.precio_1;
                         int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
-                        var nivel = bus_nivel.GetInfo(IdEmpresa, nivel_precio);
+
+                        var nivelproducto = bus_nivelproducto.GetInfo(IdEmpresa, producto.IdProducto, nivel_precio);
+
                         if (SessionFixed.EsSuperAdmin == "False")
                         {
-                            info_det.pd_por_descuento_uni = nivel.Porcentaje;
+                            info_det.pd_por_descuento_uni = nivelproducto == null ? 0 : nivelproducto.Porcentaje;
                         }
                         else
                         {
-                            info_det.pd_por_descuento_uni = IdNivelDescuento > 1 ? nivel.Porcentaje : info_det.pd_por_descuento_uni;
+                            info_det.pd_por_descuento_uni = IdNivelDescuento > 1 ? (nivelproducto == null ? 0 : nivelproducto.Porcentaje) : info_det.pd_por_descuento_uni;
                         }
                     }
                 }

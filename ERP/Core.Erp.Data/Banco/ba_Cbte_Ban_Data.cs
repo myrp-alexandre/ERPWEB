@@ -229,10 +229,29 @@ namespace Core.Erp.Data.Banco
                 });
                 #endregion
 
+                #region Flujo
+
+                if (info.list_det.Count > 0)
+                {
+                    foreach (var item in info.list_det)
+                    {
+                        Context_b.ba_Cbte_Ban_x_ba_TipoFlujo.Add(new ba_Cbte_Ban_x_ba_TipoFlujo
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdTipocbte = info.IdTipocbte,
+                            IdCbteCble = info.IdCbteCble,
+                            IdTipoFlujo = item.IdTipoFlujo,
+                            Valor = item.Valor,
+                            Porcentaje = item.Porcentaje,
+                            Secuencia = secuencia++
+                        });
+                    }
+                }
+                #endregion
                 switch (TipoCbteBanco)
                 {
                     case cl_enumeradores.eTipoCbteBancario.CHEQ:
-                        #region Guardo cancelaciones
+#region Guardo cancelaciones
                         Idcancelacion = odata_can.get_id(info.IdEmpresa);
                         secuencia = 1;
                         foreach (var item in info.lst_det_canc_op)
@@ -262,7 +281,7 @@ namespace Core.Erp.Data.Banco
                                 Observacion = item.Observacion
                             });
                         }
-                        #endregion
+#endregion
 
                         var cheque = Context_b.ba_Talonario_cheques_x_banco.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdBanco == info.IdBanco && q.Num_cheque == info.cb_Cheque).FirstOrDefault();
                         if(cheque != null)
@@ -274,7 +293,7 @@ namespace Core.Erp.Data.Banco
                         }
                         break;
                     case cl_enumeradores.eTipoCbteBancario.DEPO:
-                        #region Guardo ingresos
+#region Guardo ingresos
                         foreach (var item in info.lst_det_ing)
                         {
                             Context_b.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.Add(new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito
@@ -289,12 +308,12 @@ namespace Core.Erp.Data.Banco
                                 mcj_Secuencia = item.mcj_Secuencia
                             });
                         }
-                        #endregion
+#endregion
                         break;
                     case cl_enumeradores.eTipoCbteBancario.NCBA:
                         break;
                     case cl_enumeradores.eTipoCbteBancario.NDBA:
-                        #region Guardo cancelaciones
+#region Guardo cancelaciones
                         Idcancelacion = odata_can.get_id(info.IdEmpresa);
                         secuencia = 1;
                         foreach (var item in info.lst_det_canc_op)
@@ -324,7 +343,7 @@ namespace Core.Erp.Data.Banco
                                 Observacion = item.Observacion
                             });
                         }
-                        #endregion
+#endregion
                         break;
                 }
 
@@ -374,13 +393,13 @@ namespace Core.Erp.Data.Banco
             Entities_cuentas_por_pagar Context_cxp = new Entities_cuentas_por_pagar();
             try
             {
-                #region Variables
+#region Variables
                 string TipoCbteBancoS = TipoCbteBanco.ToString();
                 int secuencia = 1;
                 decimal Idcancelacion = 0;
-                #endregion
+#endregion
 
-                #region Diario
+#region Diario
                 var diario = Context_ct.ct_cbtecble.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoCbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble).FirstOrDefault();
                 if (diario == null)
                     return false;
@@ -410,7 +429,26 @@ namespace Core.Erp.Data.Banco
                     });
                 }
                 #endregion
+                var list_det = Context_b.ba_Cbte_Ban_x_ba_TipoFlujo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble).ToList();
+                Context_b.ba_Cbte_Ban_x_ba_TipoFlujo.RemoveRange(list_det);
 
+                if(info.list_det.Count>0)
+                {
+                    foreach (var item in info.list_det)
+                    {
+                        Context_b.ba_Cbte_Ban_x_ba_TipoFlujo.Add(new ba_Cbte_Ban_x_ba_TipoFlujo
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdTipocbte = info.IdTipocbte,
+                            IdCbteCble = info.IdCbteCble,
+                            IdTipoFlujo = item.IdTipoFlujo,
+                            Valor = item.Valor,
+                            Porcentaje = item.Porcentaje,
+                            Secuencia = secuencia++
+                        });
+                    }
+                }
+                
                 #region Cbte bancario
                 var mov_ban = Context_b.ba_Cbte_Ban.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble).FirstOrDefault();
                 if (mov_ban == null)
@@ -470,12 +508,12 @@ namespace Core.Erp.Data.Banco
                     mov_ban.Fecha_UltMod = DateTime.Now;
                     mov_ban.IdSolicitudPago = info.IdSolicitudPago;
                 }
-                #endregion
+#endregion
 
                 switch (TipoCbteBanco)
                 {
                     case cl_enumeradores.eTipoCbteBancario.CHEQ:
-                        #region Guardo cancelaciones
+#region Guardo cancelaciones
                         var lst_cancelaciones = Context_cxp.cp_orden_pago_cancelaciones.Where(q => q.IdEmpresa_pago == info.IdEmpresa && q.IdTipoCbte_pago == info.IdTipocbte && q.IdCbteCble_pago == info.IdCbteCble).ToList();
                         Context_cxp.cp_orden_pago_cancelaciones.RemoveRange(lst_cancelaciones);
                         Idcancelacion = odata_can.get_id(info.IdEmpresa);
@@ -507,10 +545,10 @@ namespace Core.Erp.Data.Banco
                                 Observacion = item.Observacion
                             });
                         }
-                        #endregion
+#endregion
                         break;
                     case cl_enumeradores.eTipoCbteBancario.DEPO:
-                        #region Guardo ingresos
+#region Guardo ingresos
                         var lst_ing = Context_b.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.Where(q => q.mba_IdEmpresa == info.IdEmpresa && q.mba_IdTipocbte == info.IdTipocbte && q.mba_IdCbteCble == info.IdCbteCble).ToList();
                         Context_b.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.RemoveRange(lst_ing);
                         foreach (var item in info.lst_det_ing)
@@ -527,12 +565,12 @@ namespace Core.Erp.Data.Banco
                                 mcj_Secuencia = item.mcj_Secuencia
                             });
                         }
-                        #endregion
+#endregion
                         break;
                     case cl_enumeradores.eTipoCbteBancario.NCBA:
                         break;
                     case cl_enumeradores.eTipoCbteBancario.NDBA:
-                        #region Guardo cancelaciones
+#region Guardo cancelaciones
                         var lst_cancelaciones_ndba = Context_cxp.cp_orden_pago_cancelaciones.Where(q => q.IdEmpresa_pago == info.IdEmpresa && q.IdTipoCbte_pago == info.IdTipocbte && q.IdCbteCble_pago == info.IdCbteCble).ToList();
                         Context_cxp.cp_orden_pago_cancelaciones.RemoveRange(lst_cancelaciones_ndba);
                         Idcancelacion = odata_can.get_id(info.IdEmpresa);
@@ -564,7 +602,7 @@ namespace Core.Erp.Data.Banco
                                 Observacion = item.Observacion
                             });
                         }
-                        #endregion
+#endregion
                         break;
                 }
 

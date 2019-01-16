@@ -410,6 +410,24 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_Conciliacion' no tiene defini
           <Property Name="co_SaldoBanco_EstCta" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_TipoFlujoPlantillaDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwba_TipoFlujoPlantillaDet">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPlantilla" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdTipoFlujo" />
+            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="Descricion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPlantilla" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Porcentaje" Type="float" Nullable="false" />
+          <Property Name="Descricion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.vwba_Cbte_Ban' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Cbte_Ban">
           <Key>
@@ -831,6 +849,16 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
     [vwba_Conciliacion].[IdEstado_Concil_Cat] AS [IdEstado_Concil_Cat], 
     [vwba_Conciliacion].[co_SaldoBanco_EstCta] AS [co_SaldoBanco_EstCta]
     FROM [dbo].[vwba_Conciliacion] AS [vwba_Conciliacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwba_TipoFlujoPlantillaDet" EntityType="Self.vwba_TipoFlujoPlantillaDet" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwba_TipoFlujoPlantillaDet].[IdEmpresa] AS [IdEmpresa], 
+    [vwba_TipoFlujoPlantillaDet].[IdPlantilla] AS [IdPlantilla], 
+    [vwba_TipoFlujoPlantillaDet].[Secuencia] AS [Secuencia], 
+    [vwba_TipoFlujoPlantillaDet].[IdTipoFlujo] AS [IdTipoFlujo], 
+    [vwba_TipoFlujoPlantillaDet].[Porcentaje] AS [Porcentaje], 
+    [vwba_TipoFlujoPlantillaDet].[Descricion] AS [Descricion]
+    FROM [dbo].[vwba_TipoFlujoPlantillaDet] AS [vwba_TipoFlujoPlantillaDet]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwba_Cbte_Ban" EntityType="Self.vwba_Cbte_Ban" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -1421,6 +1449,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
             <End Role="ba_TipoFlujo_Plantilla" EntitySet="ba_TipoFlujo_Plantilla" />
             <End Role="ba_TipoFlujo_PlantillaDet" EntitySet="ba_TipoFlujo_PlantillaDet" />
           </AssociationSet>
+          <EntitySet Name="vwba_TipoFlujoPlantillaDet" EntityType="Model_banco.vwba_TipoFlujoPlantillaDet" />
           </EntityContainer>
         <EntityType Name="ba_parametros">
           <Key>
@@ -1829,6 +1858,22 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwba_TipoFlujoPlantillaDet">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPlantilla" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdTipoFlujo" />
+            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="Descricion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPlantilla" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Porcentaje" Type="Double" Nullable="false" />
+          <Property Name="Descricion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2252,6 +2297,18 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <EntitySetMapping Name="ba_TipoFlujo_PlantillaDet">
             <EntityTypeMapping TypeName="Model_banco.ba_TipoFlujo_PlantillaDet">
               <MappingFragment StoreEntitySet="ba_TipoFlujo_PlantillaDet">
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwba_TipoFlujoPlantillaDet">
+            <EntityTypeMapping TypeName="Model_banco.vwba_TipoFlujoPlantillaDet">
+              <MappingFragment StoreEntitySet="vwba_TipoFlujoPlantillaDet">
+                <ScalarProperty Name="Descricion" ColumnName="Descricion" />
                 <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
                 <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
