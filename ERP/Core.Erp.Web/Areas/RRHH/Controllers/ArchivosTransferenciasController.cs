@@ -402,6 +402,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                tb_banco_procesos_bancarios_x_empresa_Info info_proceso = new tb_banco_procesos_bancarios_x_empresa_Info();
+                info_proceso = bus_procesos_bancarios.get_info(info.IdEmpresa, info.IdProceso);
+
                 System.IO.File.Delete(rutafile + NombreArchivo + ".txt");
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
                 {
@@ -424,14 +427,19 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                 linea += "A";
                             else
                                 linea += "C";
+
                             linea += item.em_NumCta.PadLeft(10, '0');
                             linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(15, '0');
 
-                            linea += "EI";
+                            linea += "XX";
                             linea += "Y";
                             linea += "01";
+                            linea += "                   ";
                             linea += cl_funciones.QuitarTildes(item.pe_apellido + item.pe_nombre);
+                            linea += "C";
+                            linea += info_proceso.Codigo_Empresa;
                         }
+
                         file.WriteLine(linea);
 
                     }
