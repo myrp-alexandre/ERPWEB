@@ -210,13 +210,6 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdBanco_acreditacion">Tipo flujo</label>
-                    @Html.Partial("_CmbFlujo_ND_B", Model.IdTipoFlujo)
-                    @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
-                </div>
-            </div>
             <div class="col-md-offset-1 col-md-2">
                 <div class="form-group">
                     <label for="cb_Fecha">Fecha:*</label>
@@ -277,6 +270,9 @@
             <li>
                 <a href="#tab_op" aria-controls="vales" role="tab" data-toggle="tab">Ordenes de pago</a>
             </li>
+            <li>
+                <a href="#tab_flujo" aria-controls="vales" role="tab" data-toggle="tab">Flujo</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_op">
@@ -309,6 +305,22 @@
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_diario">
                 @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
             </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_flujo">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="cb_Observacion">*</label>
+                                @Html.Action("GridViewPartial_flujo_det", new { Area = "Banco", Controller = "TipoFlujoBanco" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 

@@ -13,6 +13,7 @@ using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Banco.Controllers
@@ -32,6 +33,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ct_cbtecble_det_Bus bus_det_ct = new ct_cbtecble_det_Bus();
         string mensaje = string.Empty;
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+        ba_Banco_Flujo_Det_List_Deposito List_Flujo = new ba_Banco_Flujo_Det_List_Deposito();
+        ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_flujo = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
+
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -221,11 +225,13 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 IdEntidad = 0,
                 lst_det_canc_op = new List<cp_orden_pago_cancelaciones_Info>(),
                 lst_det_ct = new List<ct_cbtecble_det_Info>(),
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                list_det = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>()
             };
             SessionFixed.TipoPersona = model.IdTipo_Persona;
             List_ct.set_list(model.lst_det_ct, model.IdTransaccionSession);
             List_op.set_list(model.lst_det_canc_op, model.IdTransaccionSession);
+            List_Flujo.set_list(model.list_det, model.IdTransaccionSession);
             cargar_combos(IdEmpresa,model.IdSucursal);
             return View(model);
         }
@@ -233,6 +239,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Nuevo(ba_Cbte_Ban_Info model)
         {
+            model.list_det = List_Flujo.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -262,6 +269,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             if (model == null)
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            model.list_det = bus_flujo.GetList(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_Flujo.set_list(model.list_det, model.IdTransaccionSession);
             model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
@@ -274,6 +283,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Modificar(ba_Cbte_Ban_Info model)
         {
+            model.list_det = List_Flujo.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -301,8 +311,10 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             ba_Cbte_Ban_Info model = bus_cbteban.get_info(IdEmpresa, IdTipocbte, IdCbteCble);
             if (model == null)
                 return RedirectToAction("Index");
-            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            model.lst_det_ct = bus_det_ct.get_list(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            model.list_det = bus_flujo.GetList(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble);
+            List_Flujo.set_list(model.list_det, model.IdTransaccionSession);
             List_ct.set_list(model.lst_det_ct,model.IdTransaccionSession);
             model.lst_det_canc_op = bus_cancelaciones.get_list_x_pago(model.IdEmpresa, model.IdTipocbte, model.IdCbteCble, SessionFixed.IdUsuario);
             List_op.set_list(model.lst_det_canc_op, model.IdTransaccionSession);
@@ -439,4 +451,50 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         #endregion
     }
+    public class ba_Banco_Flujo_Det_List_ND
+    {
+        string Variable = "ba_Cbte_Ban_x_ba_TipoFlujo_Info";
+        public List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> get_list(decimal IdTransaccionSession)
+        {
+
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det, decimal IdTransaccionSession)
+        {
+            List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+
+
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(ba_Cbte_Ban_x_ba_TipoFlujo_Info info_det, decimal IdTransaccionSession)
+        {
+            ba_Cbte_Ban_x_ba_TipoFlujo_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.IdTipocbte = info_det.IdTipocbte;
+            edited_info.IdCbteCble = info_det.IdCbteCble;
+            edited_info.Porcentaje = info_det.Porcentaje;
+            edited_info.Valor = info_det.Valor;
+            edited_info.Secuencia = info_det.Secuencia;
+        }
+
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
+        {
+            List<ba_Cbte_Ban_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+    }
+
 }
