@@ -309,6 +309,16 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region Json
+        public JsonResult AutorizarSRI(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta)
+        {
+            string retorno = string.Empty;
+
+            if(bus_factura.modificarEstadoAutorizacion(IdEmpresa, IdSucursal, IdBodega, IdCbteVta))
+                retorno = "Autorización exitosa";
+            
+
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult Desbloquear(string Contrasenia = "")
         {
             string EstadoDesbloqueo = "";
