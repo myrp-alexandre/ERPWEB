@@ -35,7 +35,7 @@
         settings.InitNewRow = (s, e) =>
         {
             e.NewValues["IdSucursal"] = 0;
-            e.NewValues["IdCtaCble"] = 0;
+            e.NewValues["IdCtaCble"] = "";
         };
         settings.Columns.Add(column =>
         {
@@ -63,7 +63,7 @@
                 p.TextField = "pc_Cuenta";
                 p.TextField = "IdCtaCble";
                 p.ValueField = "IdCtaCble";
-                p.ValueType = typeof(int);
+                p.ValueType = typeof(string);
                 p.DataSource = ViewBag.lst_cta;
             });
         });

@@ -243,7 +243,7 @@ namespace Core.Erp.Data.Banco
                             IdTipoFlujo = item.IdTipoFlujo,
                             Valor = item.Valor,
                             Porcentaje = item.Porcentaje,
-                            Secuencia = secuencia++
+                            Secuencia = item.Secuencia
                         });
                     }
                 }
@@ -444,7 +444,7 @@ namespace Core.Erp.Data.Banco
                             IdTipoFlujo = item.IdTipoFlujo,
                             Valor = item.Valor,
                             Porcentaje = item.Porcentaje,
-                            Secuencia = secuencia++
+                            Secuencia = item.Secuencia
                         });
                     }
                 }

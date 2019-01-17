@@ -207,6 +207,22 @@
         e.customArgs["pre_IdCtaCble"] = IdCtaCble.GetValue();
         e.customArgs["pre_fecha"] = moment(cb_Fecha.GetDate()).format('DD/MM/YYYY');
     }
+
+    function CalcularPorcentaje() {
+        var valor = GridView_flujo_det.GetEditor('Valor').GetValue();
+        var ValorTotal = $("#cb_Valor").val();
+        var PorcentajeSet = (valor * 100) / ValorTotal
+
+        GridView_flujo_det.GetEditor('Porcentaje').SetValue(PorcentajeSet);
+    }
+
+    function CalcularValor() {
+        var porcentaje = GridView_flujo_det.GetEditor('Porcentaje').GetValue();
+        var ValorTotal = $("#cb_Valor").val();
+        var ValorSet = (ValorTotal * porcentaje) / 100
+
+        GridView_flujo_det.GetEditor('Valor').SetValue(ValorSet);
+    }
 </script>
 
 @using (Html.BeginForm("Modificar", "ChequeBanco", FormMethod.Post, new { @class = "form", @role = "form" }))
@@ -257,13 +273,13 @@
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>          
-            <div class="col-md-3">
+            @*<div class="col-md-3">
                 <div class="form-group">
                     <label for="IdBanco_acreditacion">Tipo flujo</label>
                     @Html.Partial("_CmbFlujo_Cheque", Model.IdTipoFlujo)
                     @Html.ValidationMessageFor(q => q.IdTipoFlujo, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>*@
             <div class="col-md-offset-4 col-md-2">
                 <div class="form-group">
                     <label for="cb_Fecha">Fecha:*</label>
@@ -399,18 +415,7 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_flujo">
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="cb_Observacion">*</label>
-                                @Html.Action("GridViewPartial_flujo_det", new { Area = "Banco", Controller = "TipoFlujoBanco" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                @Html.Action("GridViewPartial_flujo_det", new { Area = "Banco", Controller = "TipoFlujoBanco" })
             </div>
 
         </div>
