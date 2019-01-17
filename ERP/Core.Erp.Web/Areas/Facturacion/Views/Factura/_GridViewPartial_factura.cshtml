@@ -148,8 +148,8 @@
             column.Caption = "*";
             column.SetDataItemTemplateContent(c =>
             {
-                    ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_013", "FacturacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(c.DataItem, "IdCbteVta") }, Request.Url.Scheme) + "');\"></span>");
-                
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_013", "FacturacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(c.DataItem, "IdCbteVta") }, Request.Url.Scheme) + "');\"></span>");
+
             });
             column.Width = Unit.Percentage(5);
         });
@@ -173,6 +173,28 @@
             });
             column.Width = Unit.Percentage(5);
         });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Pr";
+            column.SetDataItemTemplateContent(c =>
+            {
+                
+                Html.DevExpress().Button(settingsBtn =>
+                {
+                    settingsBtn.Name = "btn" + DataBinder.Eval(c.DataItem, "IdEmpresa").ToString() + DataBinder.Eval(c.DataItem, "IdSucursal").ToString() + DataBinder.Eval(c.DataItem, "IdBodega").ToString() + DataBinder.Eval(c.DataItem, "IdCbteVta").ToString();
+
+                    settingsBtn.Text = "Enviar";
+                    settingsBtn.ClientSideEvents.Click = "function(s, e) {enviar_fact_sri('" + DataBinder.Eval(c.DataItem, "IdEmpresa").ToString() + "','" + DataBinder.Eval(c.DataItem, "IdSucursal").ToString() + "','" + DataBinder.Eval(c.DataItem, "IdBodega").ToString() + "', '" + DataBinder.Eval(c.DataItem, "IdCbteVta").ToString() + "');}";
+                 
+                }).Render();
+
+
+            });
+            column.Width = Unit.Percentage(5);
+        });
+
+
     });
 }
 @grid.Bind(Model).GetHtml()
