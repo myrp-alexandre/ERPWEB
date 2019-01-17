@@ -3,14 +3,14 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_flujo_det";
-        settings.CallbackRouteValues = new { Controller = "TipoFlujoBanco", Action = "GridViewPartial_flujo_det" };
+        settings.CallbackRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "GridViewPartial_flujo_det" };
         settings.KeyFieldName = "Secuencia";
 
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "TipoFlujoBanco", Action = "EditingAddNew", Area = "Banco" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "TipoFlujoBanco", Action = "EditingUpdate", Area = "Banco" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "TipoFlujoBanco", Action = "EditingDelete", Area = "Banco" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "EditingAddNewFlujo", Area = "Banco" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "EditingUpdateFlujo", Area = "Banco" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "NotaDeCreditoBanco", Action = "EditingDeleteFlujo", Area = "Banco" };
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -44,13 +44,13 @@
             column.Caption = "# ";
         });
 
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Descricion";
-            column.Caption = "Tipo flujo";
-            column.Width = Unit.Percentage(40);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "Descricion";
+        //    column.Caption = "Tipo flujo";
+        //    column.Width = Unit.Percentage(40);
+        //    column.EditFormSettings.Visible = DefaultBoolean.False;
+        //});
 
         settings.Columns.Add(column =>
         {
@@ -61,7 +61,7 @@
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
-                Html.RenderPartial("_CmbFlujo_Tipo", DataBinder.Eval(c.DataItem, "IdTipoFlujo"));
+                Html.RenderPartial("_CmbFlujo_NotaCredito", DataBinder.Eval(c.DataItem, "IdTipoFlujo"));
             });
         });
         settings.Columns.Add(column =>
@@ -70,10 +70,7 @@
             column.Caption = "Porcentaje";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(20);
-            column.SetDataItemTemplateContent(c =>
-            {
-                settings.ClientSideEvents.BeginCallback = "function(s, e) {CalcularValor();}";
-            });
+
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
@@ -86,10 +83,6 @@
             column.Caption = "Valor";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(20);
-            column.SetDataItemTemplateContent(c =>
-            {
-                settings.ClientSideEvents.BeginCallback = "function(s, e) {CalcularPorcentaje();}";
-            });
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
