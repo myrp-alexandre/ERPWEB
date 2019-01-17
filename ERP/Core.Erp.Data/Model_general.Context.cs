@@ -12,10 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
-
-
+    
     public partial class Entities_general : DbContext
     {
         public Entities_general()
@@ -74,6 +71,5 @@ namespace Core.Erp.Data
         public DbSet<tb_sis_reporte_x_tb_empresa> tb_sis_reporte_x_tb_empresa { get; set; }
         public DbSet<tb_sucursal> tb_sucursal { get; set; }
         public DbSet<vwtb_comprobantes_no_autorizados> vwtb_comprobantes_no_autorizados { get; set; }
-        public DbSet<vwtb_sis_Documento_Tipo_Talonario> vwtb_sis_Documento_Tipo_Talonario { get; set; }
     }
 }

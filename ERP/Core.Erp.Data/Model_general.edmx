@@ -640,26 +640,6 @@ warning 6002: The table/view 'DBERP.dbo.vwtb_provincia' does not have a primary 
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwtb_sis_Documento_Tipo_Talonario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="vwtb_sis_Documento_Tipo_Talonario">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="CodDocumentoTipo" />
-            <PropertyRef Name="Establecimiento" />
-            <PropertyRef Name="PuntoEmision" />
-            <PropertyRef Name="IdSucursal" />
-          </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="CodDocumentoTipo" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Establecimiento" Type="varchar" MaxLength="3" Nullable="false" />
-          <Property Name="PuntoEmision" Type="varchar" MaxLength="3" Nullable="false" />
-          <Property Name="NumDocumento" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="FechaCaducidad" Type="datetime" />
-          <Property Name="Usado" Type="bit" />
-          <Property Name="Estado" Type="char" MaxLength="1" />
-          <Property Name="IdSucursal" Type="int" Nullable="false" />
-          <Property Name="NumAutorizacion" Type="varchar" MaxLength="150" />
-          <Property Name="es_Documento_Electronico" Type="bit" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwtb_TarjetaCredito_x_cp_proveedor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwtb_TarjetaCredito_x_cp_proveedor">
@@ -1191,21 +1171,6 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
     [vwtb_provincia].[IdProvincia] AS [IdProvincia]
     FROM [dbo].[vwtb_provincia] AS [vwtb_provincia]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="vwtb_sis_Documento_Tipo_Talonario" EntityType="Self.vwtb_sis_Documento_Tipo_Talonario" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [vwtb_sis_Documento_Tipo_Talonario].[IdEmpresa] AS [IdEmpresa], 
-    [vwtb_sis_Documento_Tipo_Talonario].[CodDocumentoTipo] AS [CodDocumentoTipo], 
-    [vwtb_sis_Documento_Tipo_Talonario].[Establecimiento] AS [Establecimiento], 
-    [vwtb_sis_Documento_Tipo_Talonario].[PuntoEmision] AS [PuntoEmision], 
-    [vwtb_sis_Documento_Tipo_Talonario].[NumDocumento] AS [NumDocumento], 
-    [vwtb_sis_Documento_Tipo_Talonario].[FechaCaducidad] AS [FechaCaducidad], 
-    [vwtb_sis_Documento_Tipo_Talonario].[Usado] AS [Usado], 
-    [vwtb_sis_Documento_Tipo_Talonario].[Estado] AS [Estado], 
-    [vwtb_sis_Documento_Tipo_Talonario].[IdSucursal] AS [IdSucursal], 
-    [vwtb_sis_Documento_Tipo_Talonario].[NumAutorizacion] AS [NumAutorizacion], 
-    [vwtb_sis_Documento_Tipo_Talonario].[es_Documento_Electronico] AS [es_Documento_Electronico]
-    FROM [dbo].[vwtb_sis_Documento_Tipo_Talonario] AS [vwtb_sis_Documento_Tipo_Talonario]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="vwtb_TarjetaCredito_x_cp_proveedor" EntityType="Self.vwtb_TarjetaCredito_x_cp_proveedor" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwtb_TarjetaCredito_x_cp_proveedor].[IdTarjeta] AS [IdTarjeta], 
@@ -1550,7 +1515,6 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
           </AssociationSet>
           <EntitySet Name="vwtb_comprobantes_no_autorizados" EntityType="Model_general.vwtb_comprobantes_no_autorizados" />
-          <EntitySet Name="vwtb_sis_Documento_Tipo_Talonario" EntityType="Model_general.vwtb_sis_Documento_Tipo_Talonario" />
           </EntityContainer>
         <EntityType Name="tb_banco">
           <Key>
@@ -2675,26 +2639,6 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
           <Property Name="vt_Observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="vwtb_sis_Documento_Tipo_Talonario">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="CodDocumentoTipo" />
-            <PropertyRef Name="Establecimiento" />
-            <PropertyRef Name="PuntoEmision" />
-            <PropertyRef Name="IdSucursal" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="CodDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Establecimiento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="PuntoEmision" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="NumDocumento" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="FechaCaducidad" Type="DateTime" Precision="3" />
-          <Property Name="Usado" Type="Boolean" />
-          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="NumAutorizacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="es_Documento_Electronico" Type="Boolean" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3381,23 +3325,6 @@ warning 6002: The table/view 'DBERP.web.vwtb_comprobantes_no_autorizados' does n
                 <ScalarProperty Name="vt_serie1" ColumnName="vt_serie1" />
                 <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
                 <ScalarProperty Name="Tipo_documento" ColumnName="Tipo_documento" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwtb_sis_Documento_Tipo_Talonario">
-            <EntityTypeMapping TypeName="Model_general.vwtb_sis_Documento_Tipo_Talonario">
-              <MappingFragment StoreEntitySet="vwtb_sis_Documento_Tipo_Talonario">
-                <ScalarProperty Name="es_Documento_Electronico" ColumnName="es_Documento_Electronico" />
-                <ScalarProperty Name="NumAutorizacion" ColumnName="NumAutorizacion" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Usado" ColumnName="Usado" />
-                <ScalarProperty Name="FechaCaducidad" ColumnName="FechaCaducidad" />
-                <ScalarProperty Name="NumDocumento" ColumnName="NumDocumento" />
-                <ScalarProperty Name="PuntoEmision" ColumnName="PuntoEmision" />
-                <ScalarProperty Name="Establecimiento" ColumnName="Establecimiento" />
-                <ScalarProperty Name="CodDocumentoTipo" ColumnName="CodDocumentoTipo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

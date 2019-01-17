@@ -310,7 +310,7 @@ namespace Core.Erp.Data.General
 
                 using (Entities_general db = new Entities_general())
                 {
-                    var q = (from A in db.vwtb_sis_Documento_Tipo_Talonario
+                    var q = (from A in db.tb_sis_Documento_Tipo_Talonario
                              where A.IdEmpresa == IdEmpresa
                              && A.CodDocumentoTipo == CodDocumentoTipo
                              && A.Establecimiento == Establecimiento
