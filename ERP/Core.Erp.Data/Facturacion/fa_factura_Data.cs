@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Data.Contabilidad;
+using Core.Erp.Data.CuentasPorCobrar;
 using Core.Erp.Data.General;
 using Core.Erp.Data.Inventario;
 using Core.Erp.Info.Contabilidad;
@@ -17,6 +18,7 @@ namespace Core.Erp.Data.Facturacion
     {
         #region Variables
         tb_sis_Documento_Tipo_Talonario_Data odata_tal = new tb_sis_Documento_Tipo_Talonario_Data();
+        cxc_cobro_Data odata_cxc = new cxc_cobro_Data();
         #endregion
         public List<fa_factura_consulta_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
@@ -383,6 +385,25 @@ namespace Core.Erp.Data.Facturacion
                             });
                             db_f.SaveChanges();
                         }
+                }
+                #endregion
+
+                #region Cobranza
+                if (info.IdCatalogo_FormaPago == "EFEC")
+                {
+                    var cobro = GenerarCobroEfectivo(info);
+                    if (odata_cxc.guardarDB(cobro))
+                    {
+                        db_f.fa_factura_x_cxc_cobro.Add(new fa_factura_x_cxc_cobro
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdBodega = info.IdBodega,
+                            IdCbteVta = info.IdCbteVta,
+                            IdCobro = cobro.IdCobro
+                        });
+                        db_f.SaveChanges();
+                    }
                 }
                 #endregion
 
@@ -782,6 +803,7 @@ namespace Core.Erp.Data.Facturacion
                 #endregion
 
                 #endregion
+
                 db_f.SaveChanges();
 
                 #region Inventario
@@ -906,6 +928,26 @@ namespace Core.Erp.Data.Facturacion
                 }
                 #endregion
 
+                #region Cobranza
+                db_f.SPFAC_EliminarCobroEfectivo(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdCbteVta);
+                if (info.IdCatalogo_FormaPago == "EFEC")
+                {
+                    var cobro = GenerarCobroEfectivo(info);
+                    if (odata_cxc.guardarDB(cobro))
+                    {
+                        db_f.fa_factura_x_cxc_cobro.Add(new fa_factura_x_cxc_cobro
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdBodega = info.IdBodega,
+                            IdCbteVta = info.IdCbteVta,
+                            IdCobro = cobro.IdCobro
+                        });
+                        db_f.SaveChanges();
+                    }
+                }
+                #endregion
+
                 db_f.Dispose();
 
                 return true;
@@ -975,7 +1017,7 @@ namespace Core.Erp.Data.Facturacion
                             Entity.IdUsuarioUltAnu = null;
                             Entity.Estado = "A";
                         }
-
+                    Context.SPFAC_EliminarCobroEfectivo(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdCbteVta);
                     Context.SaveChanges();
                 }
 
@@ -1127,15 +1169,38 @@ namespace Core.Erp.Data.Facturacion
             }
         }
 
-        private cxc_cobro_Info GenerarCobro(fa_factura_Info fac)
+        private cxc_cobro_Info GenerarCobroEfectivo(fa_factura_Info fac)
         {
             try
             {
                 cxc_cobro_Info cobro = new cxc_cobro_Info
                 {
-                    IdEmpresa = fac.IdEmpresa
+                    IdEmpresa = fac.IdEmpresa,
+                    IdSucursal = fac.IdSucursal,
+                    IdCobro = 0,
+                    IdCobro_tipo = "EFEC",
+                    IdCliente = fac.IdCliente,
+                    cr_TotalCobro = Math.Round(fac.lst_det.Sum(q => q.vt_Subtotal + q.vt_iva), 2, MidpointRounding.AwayFromZero),
+                    cr_fecha = fac.vt_fecha,
+                    cr_fechaDocu = fac.vt_fecha,
+                    cr_fechaCobro = fac.vt_fecha,
+                    cr_observacion = "COBRO DE FACTURA # " + fac.vt_serie1 + "-" + fac.vt_serie2 + "-" + fac.vt_NumFactura,
+                    cr_estado = "A",
+                    IdCaja = fac.IdCaja
                 };
-
+                cobro.lst_det = new List<cxc_cobro_det_Info>();
+                cobro.lst_det.Add(new cxc_cobro_det_Info
+                {
+                    IdEmpresa = fac.IdEmpresa,
+                    IdSucursal = fac.IdSucursal,
+                    IdBodega_Cbte = fac.IdBodega,
+                    IdCbte_vta_nota = fac.IdCbteVta,
+                    dc_ValorPago = cobro.cr_TotalCobro,
+                    estado = "A",
+                    IdCobro_tipo_det = "EFEC",
+                    secuencial = 1,
+                    dc_TipoDocumento = fac.vt_tipoDoc
+                });
                 return cobro;
             }
             catch (Exception)

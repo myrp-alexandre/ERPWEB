@@ -12,7 +12,9 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
+
     public partial class Entities_facturacion : DbContext
     {
         public Entities_facturacion()
@@ -80,5 +82,26 @@ namespace Core.Erp.Data
         public DbSet<fa_PuntoVta> fa_PuntoVta { get; set; }
         public DbSet<vwfa_PuntoVta> vwfa_PuntoVta { get; set; }
         public DbSet<fa_factura_x_cxc_cobro> fa_factura_x_cxc_cobro { get; set; }
+    
+        public virtual int SPFAC_EliminarCobroEfectivo(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<decimal> idCbteVta)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idSucursalParameter = idSucursal.HasValue ?
+                new ObjectParameter("IdSucursal", idSucursal) :
+                new ObjectParameter("IdSucursal", typeof(int));
+    
+            var idBodegaParameter = idBodega.HasValue ?
+                new ObjectParameter("IdBodega", idBodega) :
+                new ObjectParameter("IdBodega", typeof(int));
+    
+            var idCbteVtaParameter = idCbteVta.HasValue ?
+                new ObjectParameter("IdCbteVta", idCbteVta) :
+                new ObjectParameter("IdCbteVta", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPFAC_EliminarCobroEfectivo", idEmpresaParameter, idSucursalParameter, idBodegaParameter, idCbteVtaParameter);
+        }
     }
 }

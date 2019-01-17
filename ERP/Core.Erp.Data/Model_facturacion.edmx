@@ -2137,6 +2137,12 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SPFAC_EliminarCobroEfectivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="IdBodega" Type="int" Mode="In" />
+          <Parameter Name="IdCbteVta" Type="numeric" Mode="In" />
+        </Function>
         <EntityContainer Name="Model_facturacionStoreContainer">
           <EntitySet Name="fa_CambioProducto" EntityType="Self.fa_CambioProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_CambioProductoDet" EntityType="Self.fa_CambioProductoDet" Schema="dbo" store:Type="Tables" />
@@ -3845,6 +3851,12 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
             <End Role="fa_factura" EntitySet="fa_factura" />
             <End Role="fa_factura_x_cxc_cobro" EntitySet="fa_factura_x_cxc_cobro" />
           </AssociationSet>
+          <FunctionImport Name="SPFAC_EliminarCobroEfectivo">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodega" Mode="In" Type="Int32" />
+            <Parameter Name="IdCbteVta" Mode="In" Type="Decimal" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="vwfa_factura_det">
           <Key>
@@ -6342,6 +6354,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPFAC_EliminarCobroEfectivo" FunctionName="Model_facturacion.Store.SPFAC_EliminarCobroEfectivo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
