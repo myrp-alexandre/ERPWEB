@@ -57,13 +57,27 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
-            cargar_combos(model.IdEmpresa);
+            CargarCombosConsulta(model.IdEmpresa);
             return View(model);
         }
+
+        private void CargarCombosConsulta(int IdEmpresa)
+        {
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSucursal = 0,
+                Su_Descripcion = "TODOS"
+            });
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
+
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
-            cargar_combos(model.IdEmpresa);
+            CargarCombosConsulta(model.IdEmpresa);
             return View(model);
         }
 
@@ -95,13 +109,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             in_Ing_Egr_Inven_Info model = new in_Ing_Egr_Inven_Info
             {
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdEmpresa = IdEmpresa,
                 cm_fecha = DateTime.Now,
                 signo = "+",
                 IdMovi_inven_tipo = i_param.P_IdMovi_inven_tipo_default_ing
             };
             List_in_Ing_Egr_Inven_det.set_list(new List<in_Ing_Egr_Inven_det_Info>(), model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -110,14 +125,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_ing_inv.guardarDB(model,"+"))
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -136,7 +151,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.lst_in_Ing_Egr_Inven_det = bus_det_ing_inv.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_in_Ing_Egr_Inven_det.set_list(model.lst_in_Ing_Egr_Inven_det,model.IdTransaccionSession);            
-            cargar_combos(IdEmpresa);
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -145,14 +160,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            model.IdUsuarioUltModi = Session["IdUsuario"].ToString();
+            model.IdUsuarioUltModi = SessionFixed.IdUsuario;
             if (!bus_ing_inv.modificarDB(model))
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -171,7 +186,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.lst_in_Ing_Egr_Inven_det = bus_det_ing_inv.get_list(IdEmpresa, IdSucursal, IdMovi_inven_tipo, IdNumMovi);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_in_Ing_Egr_Inven_det.set_list(model.lst_in_Ing_Egr_Inven_det, model.IdTransaccionSession);
-            cargar_combos(IdEmpresa);
+            cargar_combos(model);
             return View(model);
         }
         [HttpPost]
@@ -180,14 +195,14 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             model.lst_in_Ing_Egr_Inven_det = List_in_Ing_Egr_Inven_det.get_list(model.IdTransaccionSession);
             if (!validar(model, ref mensaje))
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
-            model.IdusuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdusuarioUltAnu = SessionFixed.IdUsuario;
             if (!bus_ing_inv.anularDB(model))
             {
-                cargar_combos(model.IdEmpresa);
+                cargar_combos(model);
                 return View(model);
             }
             return RedirectToAction("Index");
@@ -279,28 +294,22 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             }
             return true;
         }
-        private void cargar_combos(int IdEmpresa)
+        private void cargar_combos(in_Ing_Egr_Inven_Info model)
         {
             in_movi_inven_tipo_Bus bus_tipo = new in_movi_inven_tipo_Bus();
-            var lst_tipo = bus_tipo.get_list(IdEmpresa, false);
+            var lst_tipo = bus_tipo.get_list(model.IdEmpresa, false);
             ViewBag.lst_tipo = lst_tipo;
 
             in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
-            var lst_motivo = bus_motivo.get_list(IdEmpresa, cl_enumeradores.eTipoIngEgr.ING.ToString(), false);
+            var lst_motivo = bus_motivo.get_list(model.IdEmpresa, cl_enumeradores.eTipoIngEgr.ING.ToString(), false);
             ViewBag.lst_motivo = lst_motivo;
 
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-            lst_sucursal.Add(new tb_sucursal_Info
-            {
-                IdEmpresa = IdEmpresa,
-                IdSucursal = 0,
-                Su_Descripcion = "TODOS"
-            });
+            var lst_sucursal = bus_sucursal.get_list(model.IdEmpresa, false);
             ViewBag.lst_sucursal = lst_sucursal;
 
             tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
-            var lst_bodega = bus_bodega.get_list(IdEmpresa, false);
+            var lst_bodega = bus_bodega.get_list(model.IdEmpresa,model.IdSucursal, false);
             ViewBag.lst_bodega = lst_bodega;
         }
         #endregion

@@ -132,7 +132,8 @@ namespace Core.Erp.Data.Inventario
                     in_transferencia Entity = contex.in_transferencia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa 
                     && q.IdBodegaOrigen == info.IdBodegaOrigen && q.IdSucursalOrigen == info.IdSucursalOrigen
                     && q.IdTransferencia == info.IdTransferencia );
-                    
+
+                    Entity.tr_fecha = info.tr_fecha;
                     Entity.tr_Observacion = info.tr_Observacion;
                     Entity.Codigo = info.Codigo==null?"":info.Codigo;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
@@ -288,6 +289,13 @@ namespace Core.Erp.Data.Inventario
                         Estado = Entity.Estado,
                         IdEstadoAprobacion_cat = Entity.IdEstadoAprobacion_cat,
                         Codigo = Entity.Codigo,
+
+                        IdNumMovi_Ing_Egr_Inven_Origen = Entity.IdNumMovi_Ing_Egr_Inven_Origen,
+                        IdNumMovi_Ing_Egr_Inven_Destino = Entity.IdNumMovi_Ing_Egr_Inven_Destino,
+                        IdSucursal_Ing_Egr_Inven_Destino = Entity.IdSucursal_Ing_Egr_Inven_Destino,
+                        IdSucursal_Ing_Egr_Inven_Origen = Entity.IdSucursal_Ing_Egr_Inven_Origen,
+                        IdEmpresa_Ing_Egr_Inven_Destino = Entity.IdEmpresa_Ing_Egr_Inven_Destino,
+                        IdEmpresa_Ing_Egr_Inven_Origen = Entity.IdEmpresa_Ing_Egr_Inven_Origen
                     };
                 }
                 return info;
