@@ -1079,13 +1079,14 @@
     <Build Include="web\Views\VWCXP_012.sql" />
     <Build Include="dbo\Views\vwcp_SolicitudPago.sql" />
     <Build Include="dbo\Tables\ro_empleado_x_division_x_area.sql" />
-    <Build Include="dbo\Tables\ro_empleado_division_area_x_rol.sql" />
     <Build Include="dbo\Tables\FaltanteLibreria_.sql" />
     <Build Include="dbo\Tables\FaltanteAntorcha_.sql" />
     <Build Include="dbo\Tables\correos_.sql" />
     <Build Include="dbo\Tables\ba_TipoFlujo_PlantillaDet.sql" />
     <Build Include="dbo\Tables\ba_TipoFlujo_Plantilla.sql" />
     <Build Include="dbo\Tables\ba_Cbte_Ban_x_ba_TipoFlujo.sql" />
+    <Build Include="dbo\Views\vwba_TipoFlujoPlantillaDet.sql" />
+    <Build Include="dbo\Views\vwba_Cbte_Ban_x_ba_TipoFlujo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />
