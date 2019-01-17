@@ -12,6 +12,7 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
     function Imprimir() {
+
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSucursal: $("#IdSucursal").val(),
@@ -27,11 +28,24 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                if (data == "FAC_007") {
+                    var win = window.open(window.location.origin +"FixedERP/Reportes/FacturacionReportes/FAC_007?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
+                    win.focus();
+                }
+                if (data == "FAC_003") {
+                    var win = window.open(window.location.origin +"/FixedERP/Reportes/FacturacionReportes/FAC_003?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
+                    win.focus();
+                }
+                if (data == "FAC_013") {
+                    var win = window.open(window.location.origin +"/FixedERP/Reportes/FacturacionReportes/FAC_013?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
+                    win.focus();
+                }
             },
             error: function (error) {
             }
         });
     }
+
     function CrearModificarCliente() {
         if(IdCliente.GetValue() > 0)
         {

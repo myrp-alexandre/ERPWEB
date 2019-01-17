@@ -346,10 +346,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public JsonResult Imprimir(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, int IdPuntoVta = 0)
         {
-            
+            string reporte = string.Empty;
             var pto_vta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
             if(pto_vta != null)
             {
+                #region 
+                /*
                 tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
                 FAC_003_Rpt model = new FAC_003_Rpt();
                 #region Cargo diseño desde base
@@ -370,12 +372,15 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 model.PrinterName = pto_vta.IPImpresora;
                 model.CreateDocument();
                 PrintToolBase tool = new PrintToolBase(model.PrintingSystem);
-                if(string.IsNullOrEmpty(pto_vta.IPImpresora))
-                tool.Print();
+                if (string.IsNullOrEmpty(pto_vta.IPImpresora))
+                    tool.Print();
                 else
                     tool.Print(pto_vta.IPImpresora);
+                    */
+                #endregion
+                reporte = pto_vta.IPImpresora;
             }
-            return Json("", JsonRequestBehavior.AllowGet);
+            return Json(reporte, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetLineaDetalle(int Secuencia = 0, decimal IdTransaccionSession = 0)
