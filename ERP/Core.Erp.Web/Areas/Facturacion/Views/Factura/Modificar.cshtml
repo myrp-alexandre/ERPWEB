@@ -11,7 +11,38 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
+    function ImprimirRIDE() {
+        var win = window.open(window.location.origin +"/FixedERP/Reportes/FacturacionReportes/FAC_007?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
+        win.focus();
+    }
+    
+
+    function AutorizarSRI() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
+            IdBodega: $("#IdBodega").val(),
+            IdCbteVta: $("#IdCbteVta").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("AutorizarSRI", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.length > 0) {
+                    alert(data);
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+
     function Imprimir() {
+
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSucursal: $("#IdSucursal").val(),
@@ -27,11 +58,24 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                if (data == "FAC_007") {
+                    var win = window.open(window.location.origin +"/FixedERP/Reportes/FacturacionReportes/FAC_007?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
+                    win.focus();
+                }
+                if (data == "FAC_003") {
+                    var win = window.open(window.location.origin +"/FixedERP/Reportes/FacturacionReportes/FAC_003?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
+                    win.focus();
+                }
+                if (data == "FAC_013") {
+                    var win = window.open(window.location.origin +"/FixedERP/Reportes/FacturacionReportes/FAC_013?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
+                    win.focus();
+                }
             },
             error: function (error) {
             }
         });
     }
+
     function CrearModificarCliente() {
         if(IdCliente.GetValue() > 0)
         {
@@ -56,7 +100,18 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-offset-10 col-md-1">
+            <div class="col-md-offset-2 col-md-1">
+                <button type="button" class="btn btn-primary form-control" id="btn_imprimir" onclick="ImprimirRIDE();" title="Imprimir">
+                    <i class="fa fa-print"> RIDE</i>
+                </button>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-primary form-control" id="btn_imprimir" onclick="AutorizarSRI();" title="Autorizar SRI">
+                    <i class="fa fa-send"> SRI</i>
+                </button>
+            </div>
+
+            <div class="col-md-offset-2 col-md-1">
                 <button type="button" class="btn btn-primary form-control" id="btn_imprimir" onclick="Imprimir();" title="Imprimir">
                     <i class="fa fa-print"></i>
                 </button>
