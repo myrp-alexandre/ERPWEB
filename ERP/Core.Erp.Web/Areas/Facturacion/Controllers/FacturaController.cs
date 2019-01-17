@@ -626,6 +626,14 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             }
             List_cuotas.set_list(lst_cuotas,IdTransaccionSession);
         }
+
+        public JsonResult enviar_fact_sri(int IdEmpresa=0,int IdSucursal=0, int IdBodega=0, decimal IdCbteVta=0)
+        {
+          var valor=  bus_factura.modificarEstadoAutorizacion(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+
+            return Json(valor, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region Acciones

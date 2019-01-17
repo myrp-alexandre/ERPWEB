@@ -1208,5 +1208,28 @@ namespace Core.Erp.Data.Facturacion
                 throw;
             }
         }
+
+        public bool modificarEstadoAutorizacion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta)
+        {
+            try
+            {
+                using (Entities_facturacion Context = new Entities_facturacion())
+                {
+                    var Entity = Context.fa_factura.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta).FirstOrDefault();
+                    if (Entity != null)
+                    {
+                        Entity.aprobada_enviar_sri = true;
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
