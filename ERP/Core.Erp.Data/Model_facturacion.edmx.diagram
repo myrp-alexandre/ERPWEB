@@ -102,6 +102,8 @@
         <AssociationConnector Association="Model_facturacion.FK_fa_factura_fa_PuntoVta" />
         <AssociationConnector Association="Model_facturacion.FK_fa_notaCreDeb_fa_PuntoVta" />
         <EntityTypeShape EntityType="Model_facturacion.vwfa_PuntoVta" Width="1.5" PointX="19.375" PointY="9.75" />
+        <EntityTypeShape EntityType="Model_facturacion.fa_factura_x_cxc_cobro" Width="1.5" PointX="29.125" PointY="30.875" />
+        <AssociationConnector Association="Model_facturacion.FK_fa_factura_x_cxc_cobro_fa_factura" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

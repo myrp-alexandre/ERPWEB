@@ -79,5 +79,6 @@ namespace Core.Erp.Data
         public DbSet<fa_factura> fa_factura { get; set; }
         public DbSet<fa_PuntoVta> fa_PuntoVta { get; set; }
         public DbSet<vwfa_PuntoVta> vwfa_PuntoVta { get; set; }
+        public DbSet<fa_factura_x_cxc_cobro> fa_factura_x_cxc_cobro { get; set; }
     }
 }
