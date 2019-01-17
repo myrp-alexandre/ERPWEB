@@ -153,8 +153,16 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                     }
                 }
             }
-            
-           
+
+            if (i_validar.list_det.Count() > 0)
+            {
+                if (Math.Round(i_validar.list_det.Sum(q => q.Valor), 2, MidpointRounding.AwayFromZero) != i_validar.cb_Valor)
+                {
+                    mensaje = "La suma de los detalles del flujo debe ser igual a el valor del documento";
+                    return false;
+                }
+            }
+
             i_validar.IdPeriodo = Convert.ToInt32(i_validar.cb_Fecha.ToString("yyyyMM"));
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;

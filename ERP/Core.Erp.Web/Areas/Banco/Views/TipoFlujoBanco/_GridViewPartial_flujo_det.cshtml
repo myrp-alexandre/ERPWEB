@@ -27,6 +27,7 @@
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFooter = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
         //Configuracion responsive
@@ -68,34 +69,28 @@
         {
             column.FieldName = "Porcentaje";
             column.Caption = "Porcentaje";
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(20);
-            //column.SetDataItemTemplateContent(c =>
-            //{
-            //    settings.ClientSideEvents.BeginCallback = "function(s, e) {CalcularValor();}";
-            //});
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
                 q.Width = Unit.Percentage(100);
+                q.ClientSideEvents.ValueChanged = "function(s,e,){CalcularValor()}";
             });
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Valor";
             column.Caption = "Valor";
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(20);
-            //column.SetDataItemTemplateContent(c =>
-            //{
-            //    settings.ClientSideEvents.BeginCallback = "function(s, e) {CalcularPorcentaje();}";
-            //});
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
                 q.Width = Unit.Percentage(100);
+                q.ClientSideEvents.ValueChanged = "function(s,e,){CalcularPorcentaje()}";
             });
         });
+
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor");
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

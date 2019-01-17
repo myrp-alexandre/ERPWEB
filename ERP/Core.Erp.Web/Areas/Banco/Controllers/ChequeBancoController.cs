@@ -199,6 +199,16 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
                 msg = "Los valores ingresados no concuerdan con el valor del diario";
                 return false;
             }
+
+            if (i_validar.list_det.Count() > 0)
+            {
+                if (Math.Round(i_validar.list_det.Sum(q => q.Valor), 2, MidpointRounding.AwayFromZero) != Convert.ToDouble(i_validar.cb_Valor))
+                {
+                    mensaje = "La suma de los detalles del flujo debe ser igual a el valor del documento";
+                    return false;
+                }
+            }
+
             i_validar.IdPeriodo = Convert.ToInt32(i_validar.cb_Fecha.ToString("yyyyMM"));
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
@@ -265,14 +275,16 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Modificar(ba_Cbte_Ban_Info model)
         {
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
+            model.list_det = List_Flujo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
                 cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
-            }
-            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
-            model.list_det = List_Flujo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }            
+            
             if (!bus_cbteban.modificarDB(model, cl_enumeradores.eTipoCbteBancario.CHEQ))
             {
                 ViewBag.mensaje = "No se pudo modificar el registro";
@@ -464,6 +476,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             List_op.set_list(new List<cp_orden_pago_cancelaciones_Info>(), IdTransaccionSession);
             List_ct.set_list(new List<ct_cbtecble_det_Info>(),IdTransaccionSession);
+            List_Flujo.set_list(new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>(), IdTransaccionSession);
         }
         #endregion
     }
