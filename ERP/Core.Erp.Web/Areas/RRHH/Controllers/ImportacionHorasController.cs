@@ -279,7 +279,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     {
                                         ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                         {
-                                            NumHoras = Convert.ToDouble(reader.GetDouble(2)),
+                                            NumHoras = Convert.ToDouble(reader.GetValue(2)),
                                             pe_cedulaRuc = cedua,
                                             pe_apellido = empleado.Empleado,
                                             em_codigo = empleado.em_codigo,
@@ -310,7 +310,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     {
                                         ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                         {
-                                            NumHoras = Convert.ToDouble(reader.GetDouble(3)),
+                                            NumHoras = Convert.ToDouble(reader.GetValue(3)),
                                             pe_cedulaRuc = cedua,
                                             pe_apellido = empleado.Empleado,
                                             em_codigo = empleado.em_codigo,
@@ -343,7 +343,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     {
                                         ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                         {
-                                            NumHoras = Convert.ToDouble(reader.GetDouble(4)),
+                                            NumHoras = Convert.ToDouble(reader.GetValue(4)),
                                             pe_cedulaRuc = cedua,
                                             pe_apellido = empleado.Empleado,
                                             IdSucursal = empleado.IdSucursal,
@@ -375,7 +375,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     {
                                         ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                         {
-                                            NumHoras = Convert.ToDouble(reader.GetDouble(5)),
+                                            NumHoras = Convert.ToDouble(reader.GetValue(5)),
                                             pe_cedulaRuc = cedua,
                                             pe_apellido = empleado.Empleado,
                                             IdSucursal = empleado.IdSucursal,
@@ -408,7 +408,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     {
                                         ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                         {
-                                            NumHoras = Convert.ToDouble(reader.GetDouble(6)),
+                                            NumHoras = Convert.ToDouble(reader.GetValue(6)),
                                             pe_cedulaRuc = cedua,
                                             pe_apellido = empleado.Empleado,
                                             IdSucursal = empleado.IdSucursal,
@@ -417,7 +417,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                             IdEmpleado = empleado.IdEmpleado,
                                             IdRubro = rubros_calculados.IdRubro_horas_adicionales,
                                             ru_descripcion = rubros.ru_descripcion,
-                                            ValorHora = Convert.ToDouble(empleado.Valor_horas_brigada)
+                                            ValorHora = Convert.ToDouble(empleado.Valor_hora_adicionales)
 
 
                                         };
@@ -450,8 +450,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                             ru_descripcion = rubros.ru_descripcion,
                                         };
                                         info.ValorHora = 1.32;//Convert.ToDouble( empleado.Valor_hora_adicionales- empleado.Valor_horas_vespertina);
-                                        info.NumHoras = Math.Round(Convert.ToDouble((horas_vesp + horas_mat) * (formula_horas.Dividendo / formula_horas.Divisor)));
-                                        info.Valor = Convert.ToDouble(Convert.ToDouble(empleado.Valor_hora_adicionales - empleado.Valor_horas_vespertina) * info.NumHoras);
+                                        info.NumHoras =( Math.Round(Convert.ToDouble((horas_vesp + horas_mat) * (formula_horas.Dividendo / formula_horas.Divisor)))-160);
+                                        info.Valor =1.32 * info.NumHoras;
                                         info.Secuencia = lista_novedades.Count() + 1;
                                         if (info.Valor > 0)
                                             lista_novedades.Add(info);
