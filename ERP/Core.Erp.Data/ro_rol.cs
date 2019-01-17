@@ -18,6 +18,7 @@ namespace Core.Erp.Data
         {
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_rol_detalle_x_rubro_acumulado = new HashSet<ro_rol_detalle_x_rubro_acumulado>();
+            this.ro_empleado_division_area_x_rol = new HashSet<ro_empleado_division_area_x_rol>();
         }
     
         public int IdEmpresa { get; set; }
@@ -45,5 +46,6 @@ namespace Core.Erp.Data
         public virtual ro_periodo_x_ro_Nomina_TipoLiqui ro_periodo_x_ro_Nomina_TipoLiqui { get; set; }
         public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
         public virtual ICollection<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
+        public virtual ICollection<ro_empleado_division_area_x_rol> ro_empleado_division_area_x_rol { get; set; }
     }
 }

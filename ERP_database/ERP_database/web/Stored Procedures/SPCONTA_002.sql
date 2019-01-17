@@ -3,6 +3,8 @@
 CREATE PROC [web].[SPCONTA_002]
 (
 @IdEmpresa int,
+@IdSucursalIni int,
+@IdSucursalFin int,
 @IdCtaCble varchar(20),
 @FechaIni datetime,
 @FechaFin datetime
@@ -21,6 +23,7 @@ select @SaldoInicial = sum(d.dc_Valor) from ct_cbtecble_det d
 inner join ct_cbtecble c
 on c.IdEmpresa = d.IdEmpresa and c.IdTipoCbte = d.IdTipoCbte and c.IdCbteCble = d.IdCbteCble
 where c.IdEmpresa = @IdEmpresa and d.IdCtaCble = @IdCtaCble and c.cb_Fecha < @FechaIni
+and c.IdSucursal between @IdSucursalIni and @IdSucursalFin
 
 SET @SaldoInicial = CASE WHEN @SignoOperacion < 0 THEN @SaldoInicial *-1 ELSE @SaldoInicial END	
 
@@ -42,4 +45,5 @@ FROM            ct_cbtecble INNER JOIN
                          ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
                          ct_cbtecble_tipo ON ct_cbtecble.IdEmpresa = ct_cbtecble_tipo.IdEmpresa AND ct_cbtecble.IdTipoCbte = ct_cbtecble_tipo.IdTipoCbte
 where ct_cbtecble_det.IdEmpresa = @IdEmpresa and ct_cbtecble.cb_Fecha between @FechaIni and @FechaFin and ct_cbtecble_det.IdCtaCble = @IdCtaCble
+and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 ORDER BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble, ct_cbtecble.cb_Fecha, ct_cbtecble_det.IdTipoCbte, ct_cbtecble_det.IdCbteCble, ct_cbtecble_det.secuencia

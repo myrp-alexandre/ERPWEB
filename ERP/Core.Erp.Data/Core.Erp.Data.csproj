@@ -1253,6 +1253,9 @@
     <Compile Include="ro_EmpleadoNovedadCargaMasiva_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_empleado_division_area_x_rol.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_empleado_Novedad.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1263,6 +1266,9 @@
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="ro_empleado_proyeccion_gastos_det.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ro_empleado_x_division_x_area.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="ro_empleado_x_horario.cs">

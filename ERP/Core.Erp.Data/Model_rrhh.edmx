@@ -401,6 +401,21 @@
           <Property Name="DiasVacaciones" Type="float" Nullable="false" />
           <Property Name="IdEmpleadoPAdre" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="ro_empleado_division_area_x_rol">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdRol" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IDividion" Type="int" Nullable="false" />
+          <Property Name="IdArea" Type="int" Nullable="false" />
+          <Property Name="Porcentaje" Type="float" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="ro_empleado_Novedad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -469,6 +484,20 @@
           <Property Name="IdTipoGasto" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
           <Property Name="Observacion" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ro_empleado_x_division_x_area">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IDividion" Type="int" Nullable="false" />
+          <Property Name="IdArea" Type="int" Nullable="false" />
+          <Property Name="Porcentaje" Type="float" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ro_empleado_x_horario">
           <Key>
@@ -3067,6 +3096,30 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ro_contrato_ro_catalogo">
+          <End Role="ro_catalogo" Type="Self.ro_catalogo" Multiplicity="0..1" />
+          <End Role="ro_contrato" Type="Self.ro_contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="ro_contrato">
+              <PropertyRef Name="EstadoContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_contrato_ro_catalogo1">
+          <End Role="ro_catalogo" Type="Self.ro_catalogo" Multiplicity="1" />
+          <End Role="ro_contrato" Type="Self.ro_contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="ro_contrato">
+              <PropertyRef Name="IdContrato_Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ro_contrato_ro_empleado">
           <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
           <End Role="ro_contrato" Type="Self.ro_contrato" Multiplicity="*" />
@@ -3106,6 +3159,50 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Dependent Role="ro_DocumentoxEmp">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_division_area_x_rol_ro_area">
+          <End Role="ro_area" Type="Self.ro_area" Multiplicity="1" />
+          <End Role="ro_empleado_division_area_x_rol" Type="Self.ro_empleado_division_area_x_rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_area">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdDivision" />
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="ro_empleado_division_area_x_rol">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IDividion" />
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_division_area_x_rol_ro_empleado">
+          <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
+          <End Role="ro_empleado_division_area_x_rol" Type="Self.ro_empleado_division_area_x_rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_empleado_division_area_x_rol">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_division_area_x_rol_ro_rol">
+          <End Role="ro_rol" Type="Self.ro_rol" Multiplicity="1" />
+          <End Role="ro_empleado_division_area_x_rol" Type="Self.ro_empleado_division_area_x_rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rol">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="ro_empleado_division_area_x_rol">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3324,6 +3421,36 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <Dependent Role="ro_empleado1">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdEmpleadoPAdre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_x_division_x_area_ro_area">
+          <End Role="ro_area" Type="Self.ro_area" Multiplicity="1" />
+          <End Role="ro_empleado_x_division_x_area" Type="Self.ro_empleado_x_division_x_area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_area">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdDivision" />
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="ro_empleado_x_division_x_area">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IDividion" />
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_x_division_x_area_ro_empleado">
+          <End Role="ro_empleado" Type="Self.ro_empleado" Multiplicity="1" />
+          <End Role="ro_empleado_x_division_x_area" Type="Self.ro_empleado_x_division_x_area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_empleado_x_division_x_area">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4650,10 +4777,12 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySet Name="ro_Division" EntityType="Self.ro_Division" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_DocumentoxEmp" EntityType="Self.ro_DocumentoxEmp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado" EntityType="Self.ro_empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_empleado_division_area_x_rol" EntityType="Self.ro_empleado_division_area_x_rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_Novedad" EntityType="Self.ro_empleado_Novedad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_novedad_det" EntityType="Self.ro_empleado_novedad_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_proyeccion_gastos" EntityType="Self.ro_empleado_proyeccion_gastos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_proyeccion_gastos_det" EntityType="Self.ro_empleado_proyeccion_gastos_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ro_empleado_x_division_x_area" EntityType="Self.ro_empleado_x_division_x_area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_x_horario" EntityType="Self.ro_empleado_x_horario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_x_ro_rubro" EntityType="Self.ro_empleado_x_ro_rubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ro_empleado_x_ro_tipoNomina" EntityType="Self.ro_empleado_x_ro_tipoNomina" Schema="dbo" store:Type="Tables" />
@@ -5624,6 +5753,14 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_rubro_tipo" EntitySet="ro_rubro_tipo" />
             <End Role="ro_Config_Param_contable" EntitySet="ro_Config_Param_contable" />
           </AssociationSet>
+          <AssociationSet Name="FK_ro_contrato_ro_catalogo" Association="Self.FK_ro_contrato_ro_catalogo">
+            <End Role="ro_catalogo" EntitySet="ro_catalogo" />
+            <End Role="ro_contrato" EntitySet="ro_contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_contrato_ro_catalogo1" Association="Self.FK_ro_contrato_ro_catalogo1">
+            <End Role="ro_catalogo" EntitySet="ro_catalogo" />
+            <End Role="ro_contrato" EntitySet="ro_contrato" />
+          </AssociationSet>
           <AssociationSet Name="FK_ro_contrato_ro_empleado" Association="Self.FK_ro_contrato_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_contrato" EntitySet="ro_contrato" />
@@ -5635,6 +5772,18 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <AssociationSet Name="FK_ro_DocumentoxEmp_ro_empleado" Association="Self.FK_ro_DocumentoxEmp_ro_empleado">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_DocumentoxEmp" EntitySet="ro_DocumentoxEmp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_division_area_x_rol_ro_area" Association="Self.FK_ro_empleado_division_area_x_rol_ro_area">
+            <End Role="ro_area" EntitySet="ro_area" />
+            <End Role="ro_empleado_division_area_x_rol" EntitySet="ro_empleado_division_area_x_rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_division_area_x_rol_ro_empleado" Association="Self.FK_ro_empleado_division_area_x_rol_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_empleado_division_area_x_rol" EntitySet="ro_empleado_division_area_x_rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_division_area_x_rol_ro_rol" Association="Self.FK_ro_empleado_division_area_x_rol_ro_rol">
+            <End Role="ro_rol" EntitySet="ro_rol" />
+            <End Role="ro_empleado_division_area_x_rol" EntitySet="ro_empleado_division_area_x_rol" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_empleado_novedad_det_ro_empleado_Novedad" Association="Self.FK_ro_empleado_novedad_det_ro_empleado_Novedad">
             <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
@@ -5699,6 +5848,14 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <AssociationSet Name="FK_ro_empleado_ro_empleado1" Association="Self.FK_ro_empleado_ro_empleado1">
             <End Role="ro_empleado" EntitySet="ro_empleado" />
             <End Role="ro_empleado1" EntitySet="ro_empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_x_division_x_area_ro_area" Association="Self.FK_ro_empleado_x_division_x_area_ro_area">
+            <End Role="ro_area" EntitySet="ro_area" />
+            <End Role="ro_empleado_x_division_x_area" EntitySet="ro_empleado_x_division_x_area" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_x_division_x_area_ro_empleado" Association="Self.FK_ro_empleado_x_division_x_area_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_empleado_x_division_x_area" EntitySet="ro_empleado_x_division_x_area" />
           </AssociationSet>
           <AssociationSet Name="FK_ro_empleado_x_horario_ro_horario" Association="Self.FK_ro_empleado_x_horario_ro_horario">
             <End Role="ro_horario" EntitySet="ro_horario" />
@@ -6122,6 +6279,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_Division" Relationship="Self.FK_ro_area_ro_Division" FromRole="ro_area" ToRole="ro_Division" />
           <NavigationProperty Name="ro_area_x_departamento" Relationship="Self.FK_ro_area_x_departamento_ro_area" FromRole="ro_area" ToRole="ro_area_x_departamento" />
           <NavigationProperty Name="ro_Config_Param_contable" Relationship="Self.FK_ro_Config_Param_contable_ro_area" FromRole="ro_area" ToRole="ro_Config_Param_contable" />
+          <NavigationProperty Name="ro_empleado_division_area_x_rol" Relationship="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_area" FromRole="ro_area" ToRole="ro_empleado_division_area_x_rol" />
+          <NavigationProperty Name="ro_empleado_x_division_x_area" Relationship="Model_rrhh.FK_ro_empleado_x_division_x_area_ro_area" FromRole="ro_area" ToRole="ro_empleado_x_division_x_area" />
         </EntityType>
         <EntityType Name="ro_area_x_departamento">
           <Key>
@@ -6197,6 +6356,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_empleado2" Relationship="Model_rrhh.FK_ro_empleado_ro_Catalogo2" FromRole="ro_catalogo" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_empleado3" Relationship="Model_rrhh.FK_ro_empleado_ro_Catalogo3" FromRole="ro_catalogo" ToRole="ro_empleado" />
           <NavigationProperty Name="ro_Parametros" Relationship="Model_rrhh.FK_ro_Parametros_ro_catalogo" FromRole="ro_catalogo" ToRole="ro_Parametros" />
+          <NavigationProperty Name="ro_contrato" Relationship="Model_rrhh.FK_ro_contrato_ro_catalogo" FromRole="ro_catalogo" ToRole="ro_contrato" />
+          <NavigationProperty Name="ro_contrato1" Relationship="Model_rrhh.FK_ro_contrato_ro_catalogo1" FromRole="ro_catalogo" ToRole="ro_contrato" />
           </EntityType>
         <EntityType Name="ro_catalogoTipo">
           <Key>
@@ -8134,6 +8295,36 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_archivos_bancos_generacion_x_empleado" EntitySet="ro_archivos_bancos_generacion_x_empleado" />
           </AssociationSet>
           <EntitySet Name="vwRo_Prestamo" EntityType="Model_rrhh.vwRo_Prestamo" />
+          <EntitySet Name="ro_empleado_division_area_x_rol" EntityType="Model_rrhh.ro_empleado_division_area_x_rol" />
+          <EntitySet Name="ro_empleado_x_division_x_area" EntityType="Model_rrhh.ro_empleado_x_division_x_area" />
+          <AssociationSet Name="FK_ro_empleado_division_area_x_rol_ro_area" Association="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_area">
+            <End Role="ro_area" EntitySet="ro_area" />
+            <End Role="ro_empleado_division_area_x_rol" EntitySet="ro_empleado_division_area_x_rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_x_division_x_area_ro_area" Association="Model_rrhh.FK_ro_empleado_x_division_x_area_ro_area">
+            <End Role="ro_area" EntitySet="ro_area" />
+            <End Role="ro_empleado_x_division_x_area" EntitySet="ro_empleado_x_division_x_area" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_contrato_ro_catalogo" Association="Model_rrhh.FK_ro_contrato_ro_catalogo">
+            <End Role="ro_catalogo" EntitySet="ro_catalogo" />
+            <End Role="ro_contrato" EntitySet="ro_contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_contrato_ro_catalogo1" Association="Model_rrhh.FK_ro_contrato_ro_catalogo1">
+            <End Role="ro_catalogo" EntitySet="ro_catalogo" />
+            <End Role="ro_contrato" EntitySet="ro_contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_division_area_x_rol_ro_empleado" Association="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_empleado_division_area_x_rol" EntitySet="ro_empleado_division_area_x_rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_x_division_x_area_ro_empleado" Association="Model_rrhh.FK_ro_empleado_x_division_x_area_ro_empleado">
+            <End Role="ro_empleado" EntitySet="ro_empleado" />
+            <End Role="ro_empleado_x_division_x_area" EntitySet="ro_empleado_x_division_x_area" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ro_empleado_division_area_x_rol_ro_rol" Association="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_rol">
+            <End Role="ro_rol" EntitySet="ro_rol" />
+            <End Role="ro_empleado_division_area_x_rol" EntitySet="ro_empleado_division_area_x_rol" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -8843,6 +9034,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="EstadoContrato" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ro_Nomina_Tipo" Relationship="Model_rrhh.FK_ro_contrato_ro_Nomina_Tipo" FromRole="ro_contrato" ToRole="ro_Nomina_Tipo" />
           <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_contrato_ro_empleado" FromRole="ro_contrato" ToRole="ro_empleado" />
+          <NavigationProperty Name="ro_catalogo" Relationship="Model_rrhh.FK_ro_contrato_ro_catalogo" FromRole="ro_contrato" ToRole="ro_catalogo" />
+          <NavigationProperty Name="ro_catalogo1" Relationship="Model_rrhh.FK_ro_contrato_ro_catalogo1" FromRole="ro_contrato" ToRole="ro_catalogo" />
         </EntityType>
         <Association Name="FK_ro_contrato_ro_Nomina_Tipo">
           <End Type="Model_rrhh.ro_Nomina_Tipo" Role="ro_Nomina_Tipo" Multiplicity="0..1" />
@@ -10356,6 +10549,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_SancionesPorMarcaciones_det" Relationship="Model_rrhh.FK_ro_SancionesPorMarcaciones_det_ro_empleado" FromRole="ro_empleado" ToRole="ro_SancionesPorMarcaciones_det" />
           <NavigationProperty Name="ro_Solicitud_Vacaciones_x_empleado" Relationship="Model_rrhh.FK_ro_Solicitud_Vacaciones_x_empleado_ro_empleado" FromRole="ro_empleado" ToRole="ro_Solicitud_Vacaciones_x_empleado" />
           <NavigationProperty Name="ro_cargo" Relationship="Model_rrhh.FK_ro_empleado_ro_Cargo" FromRole="ro_empleado" ToRole="ro_cargo" />
+          <NavigationProperty Name="ro_empleado_division_area_x_rol" Relationship="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_division_area_x_rol" />
+          <NavigationProperty Name="ro_empleado_x_division_x_area" Relationship="Model_rrhh.FK_ro_empleado_x_division_x_area_ro_empleado" FromRole="ro_empleado" ToRole="ro_empleado_x_division_x_area" />
         </EntityType>
         <EntityType Name="vwro_empleado_combo">
           <Key>
@@ -11012,6 +11207,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <NavigationProperty Name="ro_periodo_x_ro_Nomina_TipoLiqui" Relationship="Model_rrhh.FK_ro_rol_ro_periodo_x_ro_Nomina_TipoLiqui" FromRole="ro_rol" ToRole="ro_periodo_x_ro_Nomina_TipoLiqui" />
           <NavigationProperty Name="ro_rol_detalle" Relationship="Model_rrhh.FK_ro_rol_detalle_ro_rol" FromRole="ro_rol" ToRole="ro_rol_detalle" />
           <NavigationProperty Name="ro_rol_detalle_x_rubro_acumulado" Relationship="Model_rrhh.FK_ro_rol_detalle_x_rubro_acumulado_ro_rol" FromRole="ro_rol" ToRole="ro_rol_detalle_x_rubro_acumulado" />
+          <NavigationProperty Name="ro_empleado_division_area_x_rol" Relationship="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_rol" FromRole="ro_rol" ToRole="ro_empleado_division_area_x_rol" />
         </EntityType>
         <EntityType Name="vwro_rol">
           <Key>
@@ -11453,6 +11649,138 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="IdUsuarioAprueba" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_registro" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="ro_empleado_division_area_x_rol">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdRol" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IDividion" Type="Int32" Nullable="false" />
+          <Property Name="IdArea" Type="Int32" Nullable="false" />
+          <Property Name="Porcentaje" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_area" Relationship="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_area" FromRole="ro_empleado_division_area_x_rol" ToRole="ro_area" />
+          <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_empleado" FromRole="ro_empleado_division_area_x_rol" ToRole="ro_empleado" />
+          <NavigationProperty Name="ro_rol" Relationship="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_rol" FromRole="ro_empleado_division_area_x_rol" ToRole="ro_rol" />
+        </EntityType>
+        <EntityType Name="ro_empleado_x_division_x_area">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IDividion" Type="Int32" Nullable="false" />
+          <Property Name="IdArea" Type="Int32" Nullable="false" />
+          <Property Name="Porcentaje" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ro_area" Relationship="Model_rrhh.FK_ro_empleado_x_division_x_area_ro_area" FromRole="ro_empleado_x_division_x_area" ToRole="ro_area" />
+          <NavigationProperty Name="ro_empleado" Relationship="Model_rrhh.FK_ro_empleado_x_division_x_area_ro_empleado" FromRole="ro_empleado_x_division_x_area" ToRole="ro_empleado" />
+        </EntityType>
+        <Association Name="FK_ro_empleado_division_area_x_rol_ro_area">
+          <End Type="Model_rrhh.ro_area" Role="ro_area" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_empleado_division_area_x_rol" Role="ro_empleado_division_area_x_rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_area">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdDivision" />
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="ro_empleado_division_area_x_rol">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IDividion" />
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_x_division_x_area_ro_area">
+          <End Type="Model_rrhh.ro_area" Role="ro_area" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_empleado_x_division_x_area" Role="ro_empleado_x_division_x_area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_area">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdDivision" />
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="ro_empleado_x_division_x_area">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IDividion" />
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_contrato_ro_catalogo">
+          <End Type="Model_rrhh.ro_catalogo" Role="ro_catalogo" Multiplicity="0..1" />
+          <End Type="Model_rrhh.ro_contrato" Role="ro_contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="ro_contrato">
+              <PropertyRef Name="EstadoContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_contrato_ro_catalogo1">
+          <End Type="Model_rrhh.ro_catalogo" Role="ro_catalogo" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_contrato" Role="ro_contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="ro_contrato">
+              <PropertyRef Name="IdContrato_Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_division_area_x_rol_ro_empleado">
+          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_empleado_division_area_x_rol" Role="ro_empleado_division_area_x_rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_empleado_division_area_x_rol">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_x_division_x_area_ro_empleado">
+          <End Type="Model_rrhh.ro_empleado" Role="ro_empleado" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_empleado_x_division_x_area" Role="ro_empleado_x_division_x_area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_empleado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Principal>
+            <Dependent Role="ro_empleado_x_division_x_area">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ro_empleado_division_area_x_rol_ro_rol">
+          <End Type="Model_rrhh.ro_rol" Role="ro_rol" Multiplicity="1" />
+          <End Type="Model_rrhh.ro_empleado_division_area_x_rol" Role="ro_empleado_division_area_x_rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ro_rol">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="ro_empleado_division_area_x_rol">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13819,6 +14147,33 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_empleado_division_area_x_rol">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_division_area_x_rol">
+              <MappingFragment StoreEntitySet="ro_empleado_division_area_x_rol">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IDividion" ColumnName="IDividion" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ro_empleado_x_division_x_area">
+            <EntityTypeMapping TypeName="Model_rrhh.ro_empleado_x_division_x_area">
+              <MappingFragment StoreEntitySet="ro_empleado_x_division_x_area">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="IDividion" ColumnName="IDividion" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

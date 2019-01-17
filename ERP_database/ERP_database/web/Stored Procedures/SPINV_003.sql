@@ -62,7 +62,7 @@ BEGIN --FILTRO POR CATEGORIZACION
 END
 
 BEGIN --ACTUALIZO STOCK Y COSTO A LA FECHA
-	UPDATE web.in_SPINV_003 SET Stock = ROUND(A.cantidad,2), Costo_total = ROUND(A.costo_total,2), Costo_promedio = IIF(ROUND(A.cantidad,2) = 0, 0 ,ROUND(A.costo_total / A.cantidad,2))
+	UPDATE web.in_SPINV_003 SET Stock = ROUND(A.cantidad,2), Costo_total = A.costo_total, Costo_promedio = IIF(A.cantidad = 0, 0 ,A.costo_total / A.cantidad)
 	FROM(
 	SELECT det.IdEmpresa, det.IdSucursal, det.IdBodega, det.IdProducto, sum(dm_cantidad) cantidad, sum(dm_cantidad * mv_costo) costo_total
 	FROM in_movi_inve cab inner join
