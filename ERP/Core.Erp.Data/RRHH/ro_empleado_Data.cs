@@ -422,6 +422,27 @@ namespace Core.Erp.Data.RRHH
                         }
                     }
 
+                    if(info.Tiene_ingresos_compartidos)
+                    {
+                        if(info.lst_empleado_area!=null)
+                        {
+                            foreach (var item in info.lst_empleado_area)
+                            {
+                                ro_empleado_x_division_x_area emp_div = new ro_empleado_x_division_x_area
+                                {
+                                    IdEmpresa=info.IdEmpresa,
+                                    IdEmpleado=info.IdEmpleado,
+                                    IdArea=item.IdArea,
+                                    IDividion=item.IDividion,
+                                    Observacion=item.Observacion,
+                                    Secuencia=item.Secuencia,
+                                    Porcentaje=item.Porcentaje
+                                };
+                                Context.ro_empleado_x_division_x_area.Add(emp_div);
+                            }
+                        }
+                    }
+
                     Context.SaveChanges();
                 }
                 return true;
@@ -498,6 +519,29 @@ namespace Core.Erp.Data.RRHH
                         Entity.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
                         Entity.DiasVacaciones = info.DiasVacaciones;
                         Entity.GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones;
+
+                    var lst_delete = Context.ro_empleado_x_division_x_area.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdEmpleado == info.IdEmpleado);
+                    Context.ro_empleado_x_division_x_area.RemoveRange(lst_delete);
+                    if (info.Tiene_ingresos_compartidos)
+                    {
+                        if (info.lst_empleado_area != null)
+                        {
+                           foreach (var item in info.lst_empleado_area)
+                            {
+                                ro_empleado_x_division_x_area emp_div = new ro_empleado_x_division_x_area
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdEmpleado = info.IdEmpleado,
+                                    IdArea = item.IdArea,
+                                    IDividion = item.IDividion,
+                                    Observacion = item.Observacion,
+                                    Secuencia = item.Secuencia,
+                                    Porcentaje=item.Porcentaje
+                                };
+                                Context.ro_empleado_x_division_x_area.Add(emp_div);
+                            }
+                        }
+                    }
 
                     Context.SaveChanges();
                 }

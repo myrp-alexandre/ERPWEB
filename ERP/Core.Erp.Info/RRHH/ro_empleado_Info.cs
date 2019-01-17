@@ -150,6 +150,7 @@ namespace Core.Erp.Info.RRHH
         [Required(ErrorMessage = ("el campo número de documento es obligatorio"))]
         public string pe_cedulaRuc { get; set; }
         public ro_EmpleadoFoto_Info info_foto { get; set; }
+        public List<ro_empleado_x_division_x_area_Info> lst_empleado_area { get; set; }
         public ro_empleado_Info()
         {
             info_persona = new tb_persona_Info();info_foto = new ro_EmpleadoFoto_Info();
