@@ -9,30 +9,6 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-<script>
-
-    function enviar_fact_sri(IdEmpresa, IdSucursal, IdBodega, IdCbteVta)
-    {
-            var datos = {
-                 IdEmpresa,
-                 IdSucursal ,
-                 IdBodega,
-                IdCbteVta
-            }
-            $.ajax({
-                type: 'POST',
-                data: JSON.stringify(datos),
-                url: '@Url.Action("enviar_fact_sri", "Factura",new { Area = "Facturacion"})',
-                async: false,
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                },
-                error: function (error) {
-                }
-            });
-    }
-</script>
 @using (Html.BeginForm("Index", "Factura", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)

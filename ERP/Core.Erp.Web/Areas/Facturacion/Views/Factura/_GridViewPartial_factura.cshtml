@@ -174,27 +174,7 @@
             column.Width = Unit.Percentage(5);
         });
 
-        settings.Columns.Add(column =>
-        {
-            column.Caption = "Pr";
-            column.SetDataItemTemplateContent(c =>
-            {
-                
-                Html.DevExpress().Button(settingsBtn =>
-                {
-                    settingsBtn.Name = "btn" + DataBinder.Eval(c.DataItem, "IdEmpresa").ToString() + DataBinder.Eval(c.DataItem, "IdSucursal").ToString() + DataBinder.Eval(c.DataItem, "IdBodega").ToString() + DataBinder.Eval(c.DataItem, "IdCbteVta").ToString();
-
-                    settingsBtn.Text = "Enviar";
-                    settingsBtn.ClientSideEvents.Click = "function(s, e) {enviar_fact_sri('" + DataBinder.Eval(c.DataItem, "IdEmpresa").ToString() + "','" + DataBinder.Eval(c.DataItem, "IdSucursal").ToString() + "','" + DataBinder.Eval(c.DataItem, "IdBodega").ToString() + "', '" + DataBinder.Eval(c.DataItem, "IdCbteVta").ToString() + "');}";
-                 
-                }).Render();
-
-
-            });
-            column.Width = Unit.Percentage(5);
-        });
-
-
+      
     });
 }
 @grid.Bind(Model).GetHtml()
