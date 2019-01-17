@@ -450,10 +450,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             linea += "01";
                             linea += "                    ";
                             if (item.pe_nombreCompleto.Length>18)
-                            linea += cl_funciones.QuitarTildes(item.pe_nombreCompleto).Substring(0,18);
+                            linea += cl_funciones.QuitarTildes(item.pe_nombreCompleto).Substring(0,17)+" ";
                             else
                             linea += cl_funciones.QuitarTildes(item.pe_nombreCompleto).PadRight(18, ' ');
-                            linea += "C";
                             linea += info_proceso.Codigo_Empresa;
                         }
 
