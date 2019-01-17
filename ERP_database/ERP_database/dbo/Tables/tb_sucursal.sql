@@ -18,10 +18,14 @@
     [MotiAnula]                VARCHAR (200) NULL,
     [Es_establecimiento]       BIT           NOT NULL,
     [IdCtaCble_cxp]            VARCHAR (20)  NULL,
+    [IdCtaCble_vtaIVA0]        VARCHAR (20)  NULL,
+    [IdCtaCble_vtaIVA]         VARCHAR (20)  NULL,
     CONSTRAINT [PK_tb_sucursal] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdSucursal] ASC),
     CONSTRAINT [FK_tb_sucursal_ct_plancta] FOREIGN KEY ([IdEmpresa], [IdCtaCble_cxp]) REFERENCES [dbo].[ct_plancta] ([IdEmpresa], [IdCtaCble]),
     CONSTRAINT [FK_tb_sucursal_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa])
 );
+
+
 
 
 

@@ -415,6 +415,7 @@
     <Compile Include="RRHH\ro_empleado_novedad_det_Info.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_Info.cs" />
     <Compile Include="RRHH\ro_empleado_proyeccion_gastos_det_Info.cs" />
+    <Compile Include="RRHH\ro_empleado_x_division_x_area_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_horario_Info.cs" />
     <Compile Include="RRHH\ro_empleado_proyeccion_gastos_Info.cs" />
     <Compile Include="RRHH\ro_empleado_x_ro_rubro_Info.cs" />

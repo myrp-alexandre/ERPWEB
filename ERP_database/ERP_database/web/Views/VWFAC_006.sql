@@ -84,7 +84,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = -120
+         Top = 0
          Left = 0
       End
       Begin Tables = 
@@ -96,54 +96,24 @@ Begin DesignProperties =
                Right = 299
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 5
          End
          Begin Table = "fa_proforma_det"
             Begin Extent = 
-               Top = 136
-               Left = 724
-               Bottom = 299
-               Right = 966
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "tb_sucursal"
-            Begin Extent = 
-               Top = 185
-               Left = 1468
-               Bottom = 348
-               Right = 1740
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "fa_cliente"
-            Begin Extent = 
-               Top = 0
-               Left = 634
-               Bottom = 163
-               Right = 890
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "tb_persona"
-            Begin Extent = 
-               Top = 7
-               Left = 1276
-               Bottom = 170
-               Right = 1550
+               Top = 175
+               Left = 48
+               Bottom = 338
+               Right = 290
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "in_Producto"
             Begin Extent = 
-               Top = 336
-               Left = 1063
-               Bottom = 499
-               Right = 1338
+               Top = 343
+               Left = 48
+               Bottom = 506
+               Right = 323
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -154,13 +124,7 @@ Begin DesignProperties =
                Left = 48
                Bottom = 674
                Right = 256
-          ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWFAC_006';
-
-
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  End
+            End
             DisplayFlags = 280
             TopColumn = 0
          End
@@ -174,6 +138,34 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  End
             DisplayFlags = 280
             TopColumn = 0
          End
+         Begin Table = "in_presentacion"
+            Begin Extent = 
+               Top = 847
+               Left = 48
+               Bottom = 1010
+               Right = 264
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "in_Marca"
+            Begin Extent = 
+               Top = 1015
+               Left = 48
+               Bottom = 1178
+               Right = 256
+           ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWFAC_006';
+
+
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
       End
    End
    Begin SQLPane = 
@@ -181,30 +173,19 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  End
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
-         Width = 284
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-         Width = 1200
-      End
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
-         Table = 1176
+         Table = 1170
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1356
-         SortOrder = 1416
+         SortType = 1350
+         SortOrder = 1410
          GroupBy = 1350
-         Filter = 1356
+         Filter = 1350
          Or = 1350
          Or = 1350
          Or = 1350
@@ -212,6 +193,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'  End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWFAC_006';
+
+
 
 
 

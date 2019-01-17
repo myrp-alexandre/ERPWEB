@@ -5,23 +5,36 @@ SELECT        dbo.cp_retencion.IdEmpresa, dbo.cp_retencion.IdRetencion, dbo.cp_r
                          dbo.cp_orden_giro.co_serie, dbo.cp_orden_giro.co_factura, dbo.cp_orden_giro.co_FechaFactura, dbo.cp_orden_giro.Num_Autorizacion, dbo.cp_orden_giro.Num_Autorizacion_Imprenta, dbo.tb_persona.pe_Naturaleza, 
                          dbo.tb_persona.IdTipoDocumento, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_nombreCompleto, dbo.tb_persona.pe_direccion, dbo.tb_persona.pe_telfono_Contacto, dbo.tb_persona.pe_celular, 
                          dbo.tb_persona.pe_correo, dbo.tb_persona.pe_razonSocial, dbo.tb_empresa.em_nombre, dbo.tb_empresa.RazonSocial, dbo.tb_empresa.NombreComercial, dbo.tb_empresa.ContribuyenteEspecial, 'SI' AS ObligadoAllevarConta, 
-                         dbo.tb_empresa.em_ruc, dbo.tb_empresa.em_direccion, dbo.tb_empresa.em_telefonos, dbo.tb_empresa.em_Email, dbo.cp_orden_giro.IdOrden_giro_Tipo
+                         dbo.tb_empresa.em_ruc, dbo.tb_empresa.em_direccion, dbo.tb_empresa.em_telefonos, dbo.tb_empresa.em_Email, dbo.cp_orden_giro.IdOrden_giro_Tipo, 
+                         dbo.tb_sis_Documento_Tipo_Talonario.es_Documento_Electronico
 FROM            dbo.cp_proveedor INNER JOIN
                          dbo.cp_orden_giro ON dbo.cp_proveedor.IdEmpresa = dbo.cp_orden_giro.IdEmpresa AND dbo.cp_proveedor.IdProveedor = dbo.cp_orden_giro.IdProveedor INNER JOIN
                          dbo.cp_retencion ON dbo.cp_orden_giro.IdEmpresa = dbo.cp_retencion.IdEmpresa_Ogiro AND dbo.cp_orden_giro.IdCbteCble_Ogiro = dbo.cp_retencion.IdCbteCble_Ogiro AND 
                          dbo.cp_orden_giro.IdTipoCbte_Ogiro = dbo.cp_retencion.IdTipoCbte_Ogiro INNER JOIN
                          dbo.tb_persona ON dbo.cp_proveedor.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
-                         dbo.tb_empresa ON dbo.cp_proveedor.IdEmpresa = dbo.tb_empresa.IdEmpresa AND dbo.cp_retencion.Estado = 'A' AND dbo.cp_retencion.aprobada_enviar_sri = 1
-WHERE        (dbo.cp_retencion.NumRetencion IS NOT NULL) AND (NOT EXISTS
-                             (SELECT        ID_REGISTRO, FECHA_CARGA, ESTADO
-                               FROM            EntidadRegulatoria.fa_elec_registros_generados
-                               WHERE        (ID_REGISTRO = SUBSTRING(dbo.tb_empresa.em_nombre, 0, 4) + '-' + 'RET' + '-' + dbo.cp_retencion.serie1 + '-' + dbo.cp_retencion.serie2 + '-' + dbo.cp_orden_giro.Num_Autorizacion_Imprenta)))
+                         dbo.tb_empresa ON dbo.cp_proveedor.IdEmpresa = dbo.tb_empresa.IdEmpresa AND dbo.cp_retencion.Estado = 'A' AND dbo.cp_retencion.aprobada_enviar_sri = 1 INNER JOIN
+                         dbo.tb_sis_Documento_Tipo_Talonario ON dbo.cp_retencion.IdEmpresa = dbo.tb_sis_Documento_Tipo_Talonario.IdEmpresa AND 
+                         dbo.cp_retencion.CodDocumentoTipo = dbo.tb_sis_Documento_Tipo_Talonario.CodDocumentoTipo AND dbo.cp_retencion.serie2 = dbo.tb_sis_Documento_Tipo_Talonario.PuntoEmision AND 
+                         dbo.cp_retencion.serie1 = dbo.tb_sis_Documento_Tipo_Talonario.Establecimiento AND dbo.cp_retencion.NumRetencion = dbo.tb_sis_Documento_Tipo_Talonario.NumDocumento
+WHERE        (dbo.cp_retencion.NumRetencion IS NOT NULL) AND (dbo.cp_retencion.Fecha_Autorizacion IS NULL) AND (dbo.tb_sis_Documento_Tipo_Talonario.es_Documento_Electronico = 1)
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'EntidadRegulatoria', @level1type = N'VIEW', @level1name = N'vwcp_retencion';
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' 1500
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'        Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -76,13 +89,15 @@ End
 
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[25] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[17] 4[47] 2[30] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -190,13 +205,23 @@ Begin DesignProperties =
          End
          Begin Table = "tb_empresa"
             Begin Extent = 
-               Top = 11
-               Left = 495
-               Bottom = 461
-               Right = 714
+               Top = 145
+               Left = 1159
+               Bottom = 595
+               Right = 1378
             End
             DisplayFlags = 280
             TopColumn = 1
+         End
+         Begin Table = "tb_sis_Documento_Tipo_Talonario"
+            Begin Extent = 
+               Top = 23
+               Left = 598
+               Bottom = 299
+               Right = 830
+            End
+            DisplayFlags = 280
+            TopColumn = 0
          End
       End
    End
@@ -207,19 +232,9 @@ Begin DesignProperties =
       End
       Begin ColumnWidths = 39
          Width = 284
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width =', @level0type = N'SCHEMA', @level0name = N'EntidadRegulatoria', @level1type = N'VIEW', @level1name = N'vwcp_retencion';
+ ', @level0type = N'SCHEMA', @level0name = N'EntidadRegulatoria', @level1type = N'VIEW', @level1name = N'vwcp_retencion';
+
+
 
 
 

@@ -21,6 +21,10 @@
     [IdEmpresa_mov_caj]     INT            NULL,
     [IdTipoCbte_mov_caj]    INT            NULL,
     [IdCbteCble_mov_caj]    NUMERIC (18)   NULL,
+    [IdUsuarioCreacion]     VARCHAR (50)   NULL,
+    [FechaCreacion]         DATETIME       NULL,
+    [IdUsuarioModificacion] VARCHAR (50)   NULL,
+    [FechaModificacion]     DATETIME       NULL,
     CONSTRAINT [PK_cp_conciliacion_Caja_] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdConciliacion_Caja] ASC),
     CONSTRAINT [FK_cp_conciliacion_Caja_ba_TipoFlujo] FOREIGN KEY ([IdEmpresa], [IdTipoFlujo]) REFERENCES [dbo].[ba_TipoFlujo] ([IdEmpresa], [IdTipoFlujo]),
     CONSTRAINT [FK_cp_conciliacion_Caja_caj_Caja] FOREIGN KEY ([IdEmpresa], [IdCaja]) REFERENCES [dbo].[caj_Caja] ([IdEmpresa], [IdCaja]),
@@ -30,4 +34,6 @@
     CONSTRAINT [FK_cp_conciliacion_Caja_ct_periodo] FOREIGN KEY ([IdEmpresa], [IdPeriodo]) REFERENCES [dbo].[ct_periodo] ([IdEmpresa], [IdPeriodo]),
     CONSTRAINT [FK_cp_conciliacion_Caja_ct_plancta] FOREIGN KEY ([IdEmpresa], [IdCtaCble]) REFERENCES [dbo].[ct_plancta] ([IdEmpresa], [IdCtaCble])
 );
+
+
 

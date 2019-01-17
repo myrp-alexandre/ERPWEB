@@ -2,7 +2,7 @@
     [IdEmpresa]        INT           NOT NULL,
     [IdTipoFlujo]      NUMERIC (18)  NOT NULL,
     [IdTipoFlujoPadre] NUMERIC (18)  NULL,
-    [Descricion]       VARCHAR (50)  NOT NULL,
+    [Descricion]       VARCHAR (MAX) NOT NULL,
     [Estado]           CHAR (1)      NOT NULL,
     [IdUsuario]        VARCHAR (20)  NULL,
     [Fecha_Transac]    DATETIME      NULL,
@@ -10,8 +10,6 @@
     [Fecha_UltMod]     DATETIME      NULL,
     [IdUsuarioUltAnu]  VARCHAR (20)  NULL,
     [Fecha_UltAnu]     DATETIME      NULL,
-    [nom_pc]           VARCHAR (50)  NULL,
-    [ip]               VARCHAR (25)  NULL,
     [MotiAnula]        VARCHAR (200) NULL,
     [Tipo]             VARCHAR (3)   NULL,
     [cod_flujo]        VARCHAR (50)  NULL,
@@ -19,4 +17,6 @@
     CONSTRAINT [FK_ba_TipoFlujo_ba_TipoFlujo] FOREIGN KEY ([IdEmpresa], [IdTipoFlujoPadre]) REFERENCES [dbo].[ba_TipoFlujo] ([IdEmpresa], [IdTipoFlujo]),
     CONSTRAINT [FK_ba_TipoFlujo_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa])
 );
+
+
 
