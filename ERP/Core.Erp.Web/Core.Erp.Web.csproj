@@ -9582,7 +9582,6 @@
     <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_ProductoPro_importacion.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\Deudas\_GridViewPartial_deudas_det_PorIngresar.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Index.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_solicitud_pago.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Nuevo.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_CmbProveedor_CXP.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\Modificar.cshtml" />
@@ -9633,8 +9632,6 @@
     <Content Include="Areas\CuentasPorPagar\Views\OrdenPago\_CmbCuenta_OP.cshtml" />
     <Content Include="Areas\Caja\Views\ConciliacionCaja\_CmbFlujo_ConciliacionCaja.cshtml" />
     <Content Include="Areas\Inventario\Views\IngresoInventario\Importar.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_aprobacion_solicitud.cshtml" />
-    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_aprobacion.cshtml" />
     <Content Include="Areas\General\Views\Sucursal\_CmbCuenta_Sucursal.cshtml" />
     <Content Include="Areas\General\Views\Reporte\Disenar.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorPagarReportes\CXP_012.cshtml" />
@@ -9670,6 +9667,7 @@
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\_CmbFlujo_Tipo.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_CmbFlujo_NotaCredito.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_flujo_det.cshtml" />
+    <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_solicitud_pago.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
