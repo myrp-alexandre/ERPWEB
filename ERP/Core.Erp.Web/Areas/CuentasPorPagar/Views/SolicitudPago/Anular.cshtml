@@ -8,11 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-<script>
 
-    $("#GiradoA").val("");
-
-</script>
 @using (Html.BeginForm("Anular", "SolicitudPago", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q=>q.IdEmpresa)

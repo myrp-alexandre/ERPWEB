@@ -38,6 +38,7 @@ namespace Core.Erp.Info.CuentasPorPagar
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
         [Required(ErrorMessage = ("el campo girado a es obligatorio"))]
+        [StringLength(1000, MinimumLength = 3, ErrorMessage = "el campo girado debe tener mínimo 3 caracter y máximo 1000")]
         public string GiradoA { get; set; }
         //campos que no existen en la tabla
         public List<cp_SolicitudPagoDet_Info> lst_det { get; set; }
