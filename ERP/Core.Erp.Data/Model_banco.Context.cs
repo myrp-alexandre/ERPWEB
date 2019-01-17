@@ -48,9 +48,11 @@ namespace Core.Erp.Data
         public DbSet<ba_Banco_Cuenta_x_tb_sucursal> ba_Banco_Cuenta_x_tb_sucursal { get; set; }
         public DbSet<ba_Cbte_Ban_x_ba_TipoFlujo> ba_Cbte_Ban_x_ba_TipoFlujo { get; set; }
         public DbSet<ba_TipoFlujo> ba_TipoFlujo { get; set; }
-        public DbSet<ba_TipoFlujo_Plantilla> ba_TipoFlujo_Plantilla { get; set; }
         public DbSet<ba_TipoFlujo_PlantillaDet> ba_TipoFlujo_PlantillaDet { get; set; }
         public DbSet<vwba_TipoFlujoPlantillaDet> vwba_TipoFlujoPlantillaDet { get; set; }
         public DbSet<vwba_Cbte_Ban_x_ba_TipoFlujo> vwba_Cbte_Ban_x_ba_TipoFlujo { get; set; }
+        public DbSet<ba_TipoFlujo_Plantilla> ba_TipoFlujo_Plantilla { get; set; }
+        public DbSet<ba_TipoFlujo_Movimiento> ba_TipoFlujo_Movimiento { get; set; }
+        public DbSet<vwba_TipoFlujo_Movimiento> vwba_TipoFlujo_Movimiento { get; set; }
     }
 }

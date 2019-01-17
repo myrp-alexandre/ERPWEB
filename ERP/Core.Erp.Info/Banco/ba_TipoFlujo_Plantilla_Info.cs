@@ -12,10 +12,6 @@ namespace Core.Erp.Info.Banco
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdPlantilla { get; set; }
-        [Required(ErrorMessage = ("el campo fecha desde es obligatorio"))]
-        public System.DateTime Desde { get; set; }
-        [Required(ErrorMessage = ("el campo fecha hasta es obligatorio"))]
-        public System.DateTime Hasta { get; set; }
         [Required(ErrorMessage = ("el campo descripción es obligatorio"))]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 200")]
         public string Descripcion { get; set; }

@@ -128,11 +128,11 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             model.Lista_TipoFlujo_PlantillaDet = TipoFlujo_PlantillaDet_Lista.get_list(model.IdTransaccionSession);
             model.IdUsuarioModificacion = Session["IdUsuario"].ToString();
 
-            //if (!Validar(model, ref mensaje))
-            //{
-            //    ViewBag.mensaje = mensaje;
-            //    return View(model);
-            //}
+            if (!Validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
 
             if (!bus_TipoFlujo_Plantilla.ModificarBD(model))
             {

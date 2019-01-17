@@ -12,16 +12,15 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ba_TipoFlujo_Plantilla
+    public partial class ba_TipoFlujo_Movimiento
     {
-        public ba_TipoFlujo_Plantilla()
-        {
-            this.ba_TipoFlujo_PlantillaDet = new HashSet<ba_TipoFlujo_PlantillaDet>();
-        }
-    
         public int IdEmpresa { get; set; }
-        public decimal IdPlantilla { get; set; }
-        public string Descripcion { get; set; }
+        public decimal IdMovimiento { get; set; }
+        public decimal IdTipoFlujo { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBanco { get; set; }
+        public double Valor { get; set; }
+        public System.DateTime Fecha { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -31,6 +30,7 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
-        public virtual ICollection<ba_TipoFlujo_PlantillaDet> ba_TipoFlujo_PlantillaDet { get; set; }
+        public virtual ba_Banco_Cuenta ba_Banco_Cuenta { get; set; }
+        public virtual ba_TipoFlujo ba_TipoFlujo { get; set; }
     }
 }

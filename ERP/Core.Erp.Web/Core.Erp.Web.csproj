@@ -266,6 +266,7 @@
     <Compile Include="Areas\Banco\Controllers\ParametroBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TalonarioChequeBancoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TipoFlujoBancoController.cs" />
+    <Compile Include="Areas\Banco\Controllers\TipoFlujoMovimientoController.cs" />
     <Compile Include="Areas\Banco\Controllers\TipoFlujoPlantillaController.cs" />
     <Compile Include="Areas\Banco\Controllers\TipoNotaBancoController.cs" />
     <Compile Include="Areas\Caja\CajaAreaRegistration.cs" />
@@ -9670,6 +9671,12 @@
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\_CmbFlujo_Tipo.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_CmbFlujo_NotaCredito.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_flujo_det.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\_CmbTipoFlujo.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\Nuevo.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\_GridViewPartial_TipoFlujoMovimiento.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\Index.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
