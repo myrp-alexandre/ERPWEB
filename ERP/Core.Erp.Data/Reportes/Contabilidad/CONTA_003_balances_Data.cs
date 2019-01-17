@@ -9,14 +9,16 @@ namespace Core.Erp.Data.Reportes.Contabilidad
 {
    public class CONTA_003_balances_Data
     {
-        public List<CONTA_003_balances_Info> get_list(int IdEmpresa, int IdAnio, DateTime fechaIni, DateTime fechaFin, string IdUsuario, int IdNivel, bool mostrarSaldo0, string balance)
+        public List<CONTA_003_balances_Info> get_list(int IdEmpresa, int IdAnio, DateTime fechaIni, DateTime fechaFin, string IdUsuario, int IdNivel, bool mostrarSaldo0, string balance, int IdSucursal)
         {
             try
             {
                 List<CONTA_003_balances_Info> Lista;
+                int IdSucursalIni = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 99999 : IdSucursal;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPCONTA_003_balances(IdEmpresa, IdAnio, fechaIni, fechaFin, IdUsuario, IdNivel, mostrarSaldo0, balance)
+                    Lista = (from q in Context.SPCONTA_003_balances(IdEmpresa, IdAnio, fechaIni, fechaFin, IdUsuario, IdNivel, mostrarSaldo0, balance,IdSucursalIni,IdSucursalFin)
                              select new CONTA_003_balances_Info
                              {
                                  IdUsuario = q.IdUsuario,

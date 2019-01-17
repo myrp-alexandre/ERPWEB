@@ -37,11 +37,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult CONTA_001(int IdTipoCbte = 0, decimal IdCbteCble = 0)
         {
             CONTA_001_Rpt model = new CONTA_001_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(Session["IdEmpresa"]);
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdTipoCbte.Value = IdTipoCbte;
             model.p_IdCbteCble.Value = IdCbteCble;
-            model.usuario = Session["IdUsuario"].ToString();
-            model.empresa = Session["nom_empresa"].ToString();
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
             model.RequestParameters = false;
             return View(model);
         }
@@ -117,11 +117,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_contabilidad_Info model = new cl_filtros_contabilidad_Info
             {
                 IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdNivel = 6,
                 balance = "ER"
             };
             model.IdAnio = model.fecha_fin.Year;
-
+            cargar_combos(model.IdEmpresa);
             CONTA_003_ER_Rpt report = new CONTA_003_ER_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
@@ -131,6 +132,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdNivel.Value = model.IdNivel;
             report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
             report.p_balance.Value = model.balance;
+            report.p_IdSucursal.Value = model.IdSucursal;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
@@ -154,6 +156,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdNivel.Value = model.IdNivel;
                 report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
                 report.p_balance.Value = model.balance;
+                report.p_IdSucursal.Value = model.IdSucursal;
                 report.usuario = SessionFixed.IdUsuario;
                 report.empresa = SessionFixed.NomEmpresa;
                 report.RequestParameters = false;
@@ -170,6 +173,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_IdNivel.Value = model.IdNivel;
                 report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
                 report.p_balance.Value = model.balance;
+                report.p_IdSucursal.Value = model.IdSucursal;
                 report.usuario = SessionFixed.IdUsuario;
                 report.empresa = SessionFixed.NomEmpresa;
                 report.RequestParameters = false;
@@ -185,6 +189,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.p_fechaFin.Value = model.fecha_fin;
                 report.p_IdUsuario.Value = SessionFixed.IdUsuario;
                 report.p_IdNivel.Value = model.IdNivel;
+                report.p_IdSucursal.Value = model.IdSucursal;
                 report.p_mostrarSaldo0.Value = model.mostrar_saldos_en_0;
                 report.p_balance.Value = model.balance;
                 report.usuario = SessionFixed.IdUsuario;
@@ -192,6 +197,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 report.RequestParameters = false;
                 ViewBag.Report = report;
             }
+            cargar_combos(model.IdEmpresa);
             cargar_nivel();
             return View(model);
         }
