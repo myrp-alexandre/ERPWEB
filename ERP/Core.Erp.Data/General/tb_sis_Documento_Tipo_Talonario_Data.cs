@@ -317,7 +317,7 @@ namespace Core.Erp.Data.General
                              && A.PuntoEmision == PuntoEmision
                              && A.Usado == false
                              && A.Estado == "A"
-                             && A.es_Documento_Electronico == true
+                             //&& A.es_Documento_Electronico == true
                              select A.NumDocumento).Min();
                     if (q != null)
                     {

@@ -39,8 +39,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
                               q.IdEmpresa,
                               q.IdSucursal,
                               q.IdCatalogo_FormaPago,
-                              q.NombreFormaPago,
-                              q.Ve_Vendedor
+                              q.NombreFormaPago
                           } into Area
                           select new FAC_010_Info
                           {
@@ -48,8 +47,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
                               IdEmpresa = Area.Key.IdEmpresa,
                               IdSucursal = Area.Key.IdSucursal,
                               IdCatalogo_FormaPago = Area.Key.IdCatalogo_FormaPago,
-                              NombreFormaPago = Area.Key.NombreFormaPago,
-                              Ve_Vendedor = Area.Key.Ve_Vendedor
+                              NombreFormaPago = Area.Key.NombreFormaPago
                           }).ToList();
 
             Lista_detalle = (from q in lst_rpt
