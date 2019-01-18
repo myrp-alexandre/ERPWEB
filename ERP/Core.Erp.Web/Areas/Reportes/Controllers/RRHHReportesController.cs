@@ -229,7 +229,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_nomina = lst_nomina;
 
             var lst_area = bus_area.get_list(IdEmpresa, false);
-            ViewBag.lst_nomina = lst_area;
+            ViewBag.lst_area = lst_area;
 
 
 

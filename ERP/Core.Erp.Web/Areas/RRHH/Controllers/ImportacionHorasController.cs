@@ -559,13 +559,20 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public void UpdateRow(ro_HorasProfesores_det_Info info_det)
         {
 
+            ro_rubro_tipo_Bus bus_rub = new ro_rubro_tipo_Bus();
+            var info_rubro = bus_rub.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdRubro);
+
             ro_empleado_Bus bus_emppleado = new ro_empleado_Bus();
             ro_empleado_Info info_empleado = new ro_empleado_Info();
             info_empleado = bus_emppleado.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdEmpleado);
+
             ro_HorasProfesores_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.NumHoras = info_det.NumHoras;
             edited_info.Valor = info_det.Valor;
             edited_info.ValorHora = info_det.ValorHora;
+            edited_info.IdRubro = info_det.IdRubro;
+            edited_info.IdEmpleado = info_empleado.IdEmpleado;
+            edited_info.ru_descripcion = info_rubro.ru_descripcion;
             edited_info.pe_apellido = info_empleado.pe_apellido + " " + info_empleado.pe_nombre;
         }
 
