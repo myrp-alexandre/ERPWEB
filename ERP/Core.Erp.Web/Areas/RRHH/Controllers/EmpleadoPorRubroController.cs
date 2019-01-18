@@ -91,7 +91,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 info.IdEmpresa = IdEmpresa;
                 if (ModelState.IsValid)
                 {
-                    info.Valor = Math.Round(info.Valor);
+                    info.Valor = Math.Round(info.Valor,2);
                     if (!bus_rubro_fijos.guardarDB(info))
                     {
                         cargar_combos(0);
@@ -138,7 +138,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    info.Valor = Math.Round(info.Valor);
+                    info.Valor = Math.Round(info.Valor,2);
                     info.IdEmpresa = GetIdEmpresa();
                     if (!bus_rubro_fijos.modificarDB(info))
                     {
