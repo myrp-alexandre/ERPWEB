@@ -268,6 +268,27 @@
           <Property Name="Tipo" Type="varchar" MaxLength="3" />
           <Property Name="cod_flujo" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ba_TipoFlujo_Movimiento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMovimiento" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMovimiento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="ba_TipoFlujo_Plantilla">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -275,8 +296,6 @@
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdPlantilla" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Desde" Type="date" Nullable="false" />
-          <Property Name="Hasta" Type="date" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="50" />
@@ -430,6 +449,34 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_Conciliacion' no tiene defini
           <Property Name="co_SaldoBanco_anterior" Type="float" Nullable="false" />
           <Property Name="IdEstado_Concil_Cat" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="co_SaldoBanco_EstCta" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_TipoFlujo_Movimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwba_TipoFlujo_Movimiento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMovimiento" />
+            <PropertyRef Name="IdTipoFlujo" />
+            <PropertyRef Name="Descricion" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMovimiento" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Descricion" Type="varchar(max)" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="ba_descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_TipoFlujoPlantillaDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -765,6 +812,34 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ba_TipoFlujo_Movimiento_ba_Banco_Cuenta">
+          <End Role="ba_Banco_Cuenta" Type="Self.ba_Banco_Cuenta" Multiplicity="1" />
+          <End Role="ba_TipoFlujo_Movimiento" Type="Self.ba_TipoFlujo_Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Banco_Cuenta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="ba_TipoFlujo_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ba_TipoFlujo_Movimiento_ba_TipoFlujo">
+          <End Role="ba_TipoFlujo" Type="Self.ba_TipoFlujo" Multiplicity="1" />
+          <End Role="ba_TipoFlujo_Movimiento" Type="Self.ba_TipoFlujo_Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_TipoFlujo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoFlujo" />
+            </Principal>
+            <Dependent Role="ba_TipoFlujo_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoFlujo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo">
           <End Role="ba_TipoFlujo" Type="Self.ba_TipoFlujo" Multiplicity="1" />
           <End Role="ba_TipoFlujo_PlantillaDet" Type="Self.ba_TipoFlujo_PlantillaDet" Multiplicity="*" />
@@ -808,6 +883,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <EntitySet Name="ba_Talonario_cheques_x_banco" EntityType="Self.ba_Talonario_cheques_x_banco" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_tipo_nota" EntityType="Self.ba_tipo_nota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_TipoFlujo" EntityType="Self.ba_TipoFlujo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ba_TipoFlujo_Movimiento" EntityType="Self.ba_TipoFlujo_Movimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_TipoFlujo_Plantilla" EntityType="Self.ba_TipoFlujo_Plantilla" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_TipoFlujo_PlantillaDet" EntityType="Self.ba_TipoFlujo_PlantillaDet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="Self.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" store:Type="Views" store:Schema="dbo">
@@ -883,6 +959,21 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
     [vwba_Conciliacion].[IdEstado_Concil_Cat] AS [IdEstado_Concil_Cat], 
     [vwba_Conciliacion].[co_SaldoBanco_EstCta] AS [co_SaldoBanco_EstCta]
     FROM [dbo].[vwba_Conciliacion] AS [vwba_Conciliacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwba_TipoFlujo_Movimiento" EntityType="Self.vwba_TipoFlujo_Movimiento" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwba_TipoFlujo_Movimiento].[IdEmpresa] AS [IdEmpresa], 
+    [vwba_TipoFlujo_Movimiento].[IdMovimiento] AS [IdMovimiento], 
+    [vwba_TipoFlujo_Movimiento].[IdTipoFlujo] AS [IdTipoFlujo], 
+    [vwba_TipoFlujo_Movimiento].[Descricion] AS [Descricion], 
+    [vwba_TipoFlujo_Movimiento].[IdSucursal] AS [IdSucursal], 
+    [vwba_TipoFlujo_Movimiento].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwba_TipoFlujo_Movimiento].[IdBanco] AS [IdBanco], 
+    [vwba_TipoFlujo_Movimiento].[ba_descripcion] AS [ba_descripcion], 
+    [vwba_TipoFlujo_Movimiento].[Valor] AS [Valor], 
+    [vwba_TipoFlujo_Movimiento].[Fecha] AS [Fecha], 
+    [vwba_TipoFlujo_Movimiento].[Estado] AS [Estado]
+    FROM [dbo].[vwba_TipoFlujo_Movimiento] AS [vwba_TipoFlujo_Movimiento]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwba_TipoFlujoPlantillaDet" EntityType="Self.vwba_TipoFlujoPlantillaDet" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1017,6 +1108,14 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <AssociationSet Name="FK_ba_TipoFlujo_ba_TipoFlujo" Association="Self.FK_ba_TipoFlujo_ba_TipoFlujo">
             <End Role="ba_TipoFlujo" EntitySet="ba_TipoFlujo" />
             <End Role="ba_TipoFlujo1" EntitySet="ba_TipoFlujo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_TipoFlujo_Movimiento_ba_Banco_Cuenta" Association="Self.FK_ba_TipoFlujo_Movimiento_ba_Banco_Cuenta">
+            <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
+            <End Role="ba_TipoFlujo_Movimiento" EntitySet="ba_TipoFlujo_Movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_TipoFlujo_Movimiento_ba_TipoFlujo" Association="Self.FK_ba_TipoFlujo_Movimiento_ba_TipoFlujo">
+            <End Role="ba_TipoFlujo" EntitySet="ba_TipoFlujo" />
+            <End Role="ba_TipoFlujo_Movimiento" EntitySet="ba_TipoFlujo_Movimiento" />
           </AssociationSet>
           <AssociationSet Name="FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo" Association="Self.FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo">
             <End Role="ba_TipoFlujo" EntitySet="ba_TipoFlujo" />
@@ -1457,7 +1556,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           </AssociationSet>
           <EntitySet Name="ba_Cbte_Ban_x_ba_TipoFlujo" EntityType="Model_banco.ba_Cbte_Ban_x_ba_TipoFlujo" />
           <EntitySet Name="ba_TipoFlujo" EntityType="Model_banco.ba_TipoFlujo" />
-          <EntitySet Name="ba_TipoFlujo_Plantilla" EntityType="Model_banco.ba_TipoFlujo_Plantilla" />
           <EntitySet Name="ba_TipoFlujo_PlantillaDet" EntityType="Model_banco.ba_TipoFlujo_PlantillaDet" />
           <AssociationSet Name="FK_ba_Cbte_Ban_ba_TipoFlujo" Association="Model_banco.FK_ba_Cbte_Ban_ba_TipoFlujo">
             <End Role="ba_TipoFlujo" EntitySet="ba_TipoFlujo" />
@@ -1479,12 +1577,23 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
             <End Role="ba_TipoFlujo" EntitySet="ba_TipoFlujo" />
             <End Role="ba_TipoFlujo_PlantillaDet" EntitySet="ba_TipoFlujo_PlantillaDet" />
           </AssociationSet>
+          <EntitySet Name="vwba_TipoFlujoPlantillaDet" EntityType="Model_banco.vwba_TipoFlujoPlantillaDet" />
+          <EntitySet Name="vwba_Cbte_Ban_x_ba_TipoFlujo" EntityType="Model_banco.vwba_Cbte_Ban_x_ba_TipoFlujo" />
+          <EntitySet Name="ba_TipoFlujo_Plantilla" EntityType="Model_banco.ba_TipoFlujo_Plantilla" />
           <AssociationSet Name="FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo_Plantilla" Association="Model_banco.FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo_Plantilla">
             <End Role="ba_TipoFlujo_Plantilla" EntitySet="ba_TipoFlujo_Plantilla" />
             <End Role="ba_TipoFlujo_PlantillaDet" EntitySet="ba_TipoFlujo_PlantillaDet" />
           </AssociationSet>
-          <EntitySet Name="vwba_TipoFlujoPlantillaDet" EntityType="Model_banco.vwba_TipoFlujoPlantillaDet" />
-          <EntitySet Name="vwba_Cbte_Ban_x_ba_TipoFlujo" EntityType="Model_banco.vwba_Cbte_Ban_x_ba_TipoFlujo" />
+          <EntitySet Name="ba_TipoFlujo_Movimiento" EntityType="Model_banco.ba_TipoFlujo_Movimiento" />
+          <AssociationSet Name="FK_ba_TipoFlujo_Movimiento_ba_Banco_Cuenta" Association="Model_banco.FK_ba_TipoFlujo_Movimiento_ba_Banco_Cuenta">
+            <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
+            <End Role="ba_TipoFlujo_Movimiento" EntitySet="ba_TipoFlujo_Movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_TipoFlujo_Movimiento_ba_TipoFlujo" Association="Model_banco.FK_ba_TipoFlujo_Movimiento_ba_TipoFlujo">
+            <End Role="ba_TipoFlujo" EntitySet="ba_TipoFlujo" />
+            <End Role="ba_TipoFlujo_Movimiento" EntitySet="ba_TipoFlujo_Movimiento" />
+          </AssociationSet>
+          <EntitySet Name="vwba_TipoFlujo_Movimiento" EntityType="Model_banco.vwba_TipoFlujo_Movimiento" />
           </EntityContainer>
         <EntityType Name="ba_parametros">
           <Key>
@@ -1662,6 +1771,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <NavigationProperty Name="ba_Cbte_Ban" Relationship="Model_banco.FK_ba_Cbte_Ban_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Cbte_Ban" />
           <NavigationProperty Name="ba_Conciliacion" Relationship="Model_banco.FK_ba_Conciliacion_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Conciliacion" />
           <NavigationProperty Name="ba_Talonario_cheques_x_banco" Relationship="Model_banco.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Talonario_cheques_x_banco" />
+          <NavigationProperty Name="ba_TipoFlujo_Movimiento" Relationship="Model_banco.FK_ba_TipoFlujo_Movimiento_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_TipoFlujo_Movimiento" />
         </EntityType>
         <EntityType Name="ba_Banco_Cuenta_x_tb_sucursal">
           <Key>
@@ -1772,26 +1882,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <NavigationProperty Name="ba_TipoFlujo1" Relationship="Model_banco.FK_ba_TipoFlujo_ba_TipoFlujo" FromRole="ba_TipoFlujo" ToRole="ba_TipoFlujo1" />
           <NavigationProperty Name="ba_TipoFlujo2" Relationship="Model_banco.FK_ba_TipoFlujo_ba_TipoFlujo" FromRole="ba_TipoFlujo1" ToRole="ba_TipoFlujo" />
           <NavigationProperty Name="ba_TipoFlujo_PlantillaDet" Relationship="Model_banco.FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo" FromRole="ba_TipoFlujo" ToRole="ba_TipoFlujo_PlantillaDet" />
-        </EntityType>
-        <EntityType Name="ba_TipoFlujo_Plantilla">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdPlantilla" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdPlantilla" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Desde" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Hasta" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ba_TipoFlujo_PlantillaDet" Relationship="Model_banco.FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo_Plantilla" FromRole="ba_TipoFlujo_Plantilla" ToRole="ba_TipoFlujo_PlantillaDet" />
+          <NavigationProperty Name="ba_TipoFlujo_Movimiento" Relationship="Model_banco.FK_ba_TipoFlujo_Movimiento_ba_TipoFlujo" FromRole="ba_TipoFlujo" ToRole="ba_TipoFlujo_Movimiento" />
         </EntityType>
         <EntityType Name="ba_TipoFlujo_PlantillaDet">
           <Key>
@@ -1879,20 +1970,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo_Plantilla">
-          <End Type="Model_banco.ba_TipoFlujo_Plantilla" Role="ba_TipoFlujo_Plantilla" Multiplicity="1" />
-          <End Type="Model_banco.ba_TipoFlujo_PlantillaDet" Role="ba_TipoFlujo_PlantillaDet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ba_TipoFlujo_Plantilla">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPlantilla" />
-            </Principal>
-            <Dependent Role="ba_TipoFlujo_PlantillaDet">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdPlantilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="vwba_TipoFlujoPlantillaDet">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1928,6 +2005,115 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <Property Name="Porcentaje" Type="Double" Nullable="false" />
           <Property Name="Valor" Type="Double" Nullable="false" />
           <Property Name="Descricion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ba_TipoFlujo_Plantilla">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPlantilla" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPlantilla" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ba_TipoFlujo_PlantillaDet" Relationship="Model_banco.FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo_Plantilla" FromRole="ba_TipoFlujo_Plantilla" ToRole="ba_TipoFlujo_PlantillaDet" />
+        </EntityType>
+        <Association Name="FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo_Plantilla">
+          <End Type="Model_banco.ba_TipoFlujo_Plantilla" Role="ba_TipoFlujo_Plantilla" Multiplicity="1" />
+          <End Type="Model_banco.ba_TipoFlujo_PlantillaDet" Role="ba_TipoFlujo_PlantillaDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_TipoFlujo_Plantilla">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPlantilla" />
+            </Principal>
+            <Dependent Role="ba_TipoFlujo_PlantillaDet">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPlantilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ba_TipoFlujo_Movimiento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMovimiento" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMovimiento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipoFlujo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ba_Banco_Cuenta" Relationship="Model_banco.FK_ba_TipoFlujo_Movimiento_ba_Banco_Cuenta" FromRole="ba_TipoFlujo_Movimiento" ToRole="ba_Banco_Cuenta" />
+          <NavigationProperty Name="ba_TipoFlujo" Relationship="Model_banco.FK_ba_TipoFlujo_Movimiento_ba_TipoFlujo" FromRole="ba_TipoFlujo_Movimiento" ToRole="ba_TipoFlujo" />
+        </EntityType>
+        <Association Name="FK_ba_TipoFlujo_Movimiento_ba_Banco_Cuenta">
+          <End Type="Model_banco.ba_Banco_Cuenta" Role="ba_Banco_Cuenta" Multiplicity="1" />
+          <End Type="Model_banco.ba_TipoFlujo_Movimiento" Role="ba_TipoFlujo_Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Banco_Cuenta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="ba_TipoFlujo_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ba_TipoFlujo_Movimiento_ba_TipoFlujo">
+          <End Type="Model_banco.ba_TipoFlujo" Role="ba_TipoFlujo" Multiplicity="1" />
+          <End Type="Model_banco.ba_TipoFlujo_Movimiento" Role="ba_TipoFlujo_Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_TipoFlujo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoFlujo" />
+            </Principal>
+            <Dependent Role="ba_TipoFlujo_Movimiento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoFlujo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwba_TipoFlujo_Movimiento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMovimiento" />
+            <PropertyRef Name="IdTipoFlujo" />
+            <PropertyRef Name="Descricion" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdBanco" />
+            <PropertyRef Name="ba_descripcion" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMovimiento" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipoFlujo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Descricion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="ba_descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2330,25 +2516,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ba_TipoFlujo_Plantilla">
-            <EntityTypeMapping TypeName="Model_banco.ba_TipoFlujo_Plantilla">
-              <MappingFragment StoreEntitySet="ba_TipoFlujo_Plantilla">
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Hasta" ColumnName="Hasta" />
-                <ScalarProperty Name="Desde" ColumnName="Desde" />
-                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ba_TipoFlujo_PlantillaDet">
             <EntityTypeMapping TypeName="Model_banco.ba_TipoFlujo_PlantillaDet">
               <MappingFragment StoreEntitySet="ba_TipoFlujo_PlantillaDet">
@@ -2382,6 +2549,61 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_TipoFlujo_Plantilla">
+            <EntityTypeMapping TypeName="Model_banco.ba_TipoFlujo_Plantilla">
+              <MappingFragment StoreEntitySet="ba_TipoFlujo_Plantilla">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_TipoFlujo_Movimiento">
+            <EntityTypeMapping TypeName="Model_banco.ba_TipoFlujo_Movimiento">
+              <MappingFragment StoreEntitySet="ba_TipoFlujo_Movimiento">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
+                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwba_TipoFlujo_Movimiento">
+            <EntityTypeMapping TypeName="Model_banco.vwba_TipoFlujo_Movimiento">
+              <MappingFragment StoreEntitySet="vwba_TipoFlujo_Movimiento">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Descricion" ColumnName="Descricion" />
+                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
+                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

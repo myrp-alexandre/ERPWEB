@@ -23,41 +23,11 @@
     @Html.HiddenFor(q => q.IdTransaccionSession);
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="Descripcion">Descripción*</label>
                     @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Descripcion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Descripcion">Fecha desde*</label>
-                    @Html.DevExpress().DateEditFor(q => q.Desde, settings =>
-               {
-                   settings.Name = "Desde";
-                   settings.Properties.UseMaskBehavior = true;
-                   settings.Properties.EditFormat = EditFormat.Date;
-                   settings.Properties.EditFormatString = "dd/MM/yyyy";
-                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-               }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.Desde, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="Descripcion">Fecha hasta*</label>
-                    @Html.DevExpress().DateEditFor(q => q.Hasta, settings =>
-                    {
-                        settings.Name = "Hasta";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.Hasta, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

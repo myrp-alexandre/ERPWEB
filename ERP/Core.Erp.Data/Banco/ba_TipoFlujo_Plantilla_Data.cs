@@ -24,8 +24,6 @@ namespace Core.Erp.Data.Banco
                             IdEmpresa = q.IdEmpresa,
                             IdPlantilla = q.IdPlantilla,
                             Descripcion = q.Descripcion,                            
-                            Desde = q.Desde,
-                            Hasta = q.Hasta,
                             Estado = q.Estado
                         }).ToList();
                     }
@@ -36,8 +34,6 @@ namespace Core.Erp.Data.Banco
                             IdEmpresa = q.IdEmpresa,
                             IdPlantilla = q.IdPlantilla,
                             Descripcion = q.Descripcion,
-                            Desde = q.Desde,
-                            Hasta = q.Hasta,
                             Estado = q.Estado
                         }).ToList();
                     }
@@ -88,8 +84,6 @@ namespace Core.Erp.Data.Banco
                         IdEmpresa = Entity.IdEmpresa,
                         IdPlantilla = Entity.IdPlantilla,
                         Descripcion = Entity.Descripcion,
-                        Desde = Entity.Desde,
-                        Hasta = Entity.Hasta,
                         Estado = Entity.Estado
                     };
                 }
@@ -113,8 +107,6 @@ namespace Core.Erp.Data.Banco
                         IdEmpresa = info.IdEmpresa,
                         IdPlantilla = info.IdPlantilla = get_id(info.IdEmpresa),
                         Descripcion = info.Descripcion,
-                        Desde = info.Desde,
-                        Hasta = info.Hasta,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now

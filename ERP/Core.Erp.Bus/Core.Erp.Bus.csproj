@@ -66,6 +66,7 @@
     <Compile Include="Banco\ba_parametros_Bus.cs" />
     <Compile Include="Banco\ba_Talonario_cheques_x_banco_Bus.cs" />
     <Compile Include="Banco\ba_TipoFlujo_Bus.cs" />
+    <Compile Include="Banco\ba_TipoFlujo_Movimiento_Bus.cs" />
     <Compile Include="Banco\ba_TipoFlujo_PlantillaDet_Bus.cs" />
     <Compile Include="Banco\ba_TipoFlujo_Plantilla_Bus.cs" />
     <Compile Include="Banco\ba_tipo_nota_Bus.cs" />

@@ -129,6 +129,7 @@
     <Compile Include="Banco\ba_parametros_Data.cs" />
     <Compile Include="Banco\ba_Talonario_cheques_x_banco_Data.cs" />
     <Compile Include="Banco\ba_TipoFlujo_Data.cs" />
+    <Compile Include="Banco\ba_TipoFlujo_Movimiento_Data.cs" />
     <Compile Include="Banco\ba_TipoFlujo_PlantillaDet_Data.cs" />
     <Compile Include="Banco\ba_TipoFlujo_Plantilla_Data.cs" />
     <Compile Include="Banco\ba_tipo_nota_Data.cs" />
@@ -169,6 +170,9 @@
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="ba_TipoFlujo.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ba_TipoFlujo_Movimiento.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="ba_TipoFlujo_Plantilla.cs">
@@ -1774,6 +1778,9 @@
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="vwba_TipoFlujoPlantillaDet.cs">
+      <DependentUpon>Model_banco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwba_TipoFlujo_Movimiento.cs">
       <DependentUpon>Model_banco.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCAJ_001.cs">

@@ -20,6 +20,7 @@ namespace Core.Erp.Data
             this.ba_Cbte_Ban_x_ba_TipoFlujo = new HashSet<ba_Cbte_Ban_x_ba_TipoFlujo>();
             this.ba_TipoFlujo1 = new HashSet<ba_TipoFlujo>();
             this.ba_TipoFlujo_PlantillaDet = new HashSet<ba_TipoFlujo_PlantillaDet>();
+            this.ba_TipoFlujo_Movimiento = new HashSet<ba_TipoFlujo_Movimiento>();
         }
     
         public int IdEmpresa { get; set; }
@@ -42,5 +43,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ba_TipoFlujo> ba_TipoFlujo1 { get; set; }
         public virtual ba_TipoFlujo ba_TipoFlujo2 { get; set; }
         public virtual ICollection<ba_TipoFlujo_PlantillaDet> ba_TipoFlujo_PlantillaDet { get; set; }
+        public virtual ICollection<ba_TipoFlujo_Movimiento> ba_TipoFlujo_Movimiento { get; set; }
     }
 }

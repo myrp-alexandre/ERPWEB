@@ -10,78 +10,6 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
         
-        var selectedIDs;
-        function OnBeginCallback(s, e) {
-            e.customArgs["selectedIDs"] = selectedIDs;
-            e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
-        };
-        function OnSelectionChanged(s, e) {
-            s.GetSelectedFieldValues("Secuencia", GetSelectedFieldValuesCallback);
-        };
-        function GetSelectedFieldValuesCallback(values) {
-            //Capture all selected keys
-            selectedIDs = values.join(',');
-        };
-
-    //function MostrarModalFacturas() {
-    //    BuscarFacturas();
-    //    $("#ModalFacturas").modal("show");
-    //};
-    function MostrarModalFacturas() {
-
-        selectedIDs = "";
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#IdSucursal").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetListPorPagar", "SolicitudPago", new { Area = "CuentasPorPagar" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-
-                GridView_aprobacion.PerformCallback();
-                GridView_aprobacion.UnselectRows();
-                $("#ModalFacturas").modal("show");
-            },
-            error: function (error) {
-            }
-        });
-    };
-
-    function AddFacturas() {
-        var datos = {
-            IDs: selectedIDs,
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNewAS", "SolicitudPago", new { Area = "CuentasPorPagar" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });
-        selectedIDs = "";
-        GridView_aprobacion.PerformCallback();
-        GridView_aprobacion.UnselectRows();
-        GridView_aprobacion_solicitud.PerformCallback();
-        $("#ModalFacturas").modal("hide");
-    }
-
      function CrearModificarProveedor() {
         if(IdProveedor.GetValue() > 0)
         {
@@ -104,39 +32,7 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdSolicitud)
-
-    <div class="modal fade" id="ModalFacturas" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Solicitudes</h4>
-                </div>
-
-                <div class="modal-body">
-                    @Html.Action("GridViewPartial_aprobacion")
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aceptar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="Tabs" role="tabpanel">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="active">
-                <a href="#tab_datos_generales" aria-controls="informacion_general" role="tab" data-toggle="tab">Datos generales</a>
-            </li>
-            <li>
-                <a href="#tab_detalle" aria-controls="detalle" role="tab" data-toggle="tab">Deudas a aplicar</a>
-            </li>
-        </ul>
-        <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_datos_generales">
-
+    
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-3">
@@ -193,7 +89,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="GiradoA">Girado a*</label>
                                 @Html.TextBoxFor(q => q.GiradoA, new { @class = "form-control", @id = "GiradoA" })
@@ -220,43 +116,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div role="tabpanel" class="tab-pane " style="margin-left: 1em;" id="tab_detalle">
-
-
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <button type="button" class="btn btn-primary form-control" id="btn_buscar" onclick="MostrarModalFacturas();" title="Buscar deudas">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="Concepto"></label>
-                                @Html.Action("GridViewPartial_aprobacion_solicitud")
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-
+   
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","SolicitudPago",new { Area = "CuentasPorPagar" },null)">Cancelar</a>

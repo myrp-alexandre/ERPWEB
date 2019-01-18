@@ -2,9 +2,9 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_TipoFlujoPlantilla";
-        settings.CallbackRouteValues = new { Controller = "TipoFlujoPlantilla", Action = "GridViewPartial_TipoFlujoPlantilla" };
-        settings.KeyFieldName = "IdPlantilla";
+        settings.Name = "GridViewPartial_TipoFlujoMovimiento";
+        settings.CallbackRouteValues = new { Controller = "TipoFlujoMovimiento", Action = "_GridViewPartial_TipoFlujoMovimiento" };
+        settings.KeyFieldName = "IdMovimiento";
         settings.Width = Unit.Percentage(100);
 
         //Configuración para que la grilla no muestre texto completo
@@ -66,8 +66,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPlantilla = DataBinder.Eval(tc.DataItem, "IdPlantilla") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPlantilla = DataBinder.Eval(tc.DataItem, "IdPlantilla") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMovimiento = DataBinder.Eval(tc.DataItem, "IdMovimiento") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMovimiento = DataBinder.Eval(tc.DataItem, "IdMovimiento") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -84,8 +84,24 @@
         });
 
 
-        settings.Columns.Add("IdPlantilla", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(70);
+        settings.Columns.Add("IdMovimiento", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("Descricion", "Tipo Flujo").Width = Unit.Percentage(10);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(20);
+        settings.Columns.Add("ba_descripcion", "Banco").Width = Unit.Percentage(24);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha";
+            column.Caption = "Fecha";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Width = Unit.Percentage(8);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Valor";
+            column.Caption = "Valor";
+            column.PropertiesEdit.DisplayFormatString = "{0:c2}";
+            column.Width = Unit.Percentage(8);
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";

@@ -20,6 +20,7 @@ namespace Core.Erp.Data
             this.ba_Cbte_Ban = new HashSet<ba_Cbte_Ban>();
             this.ba_Conciliacion = new HashSet<ba_Conciliacion>();
             this.ba_Talonario_cheques_x_banco = new HashSet<ba_Talonario_cheques_x_banco>();
+            this.ba_TipoFlujo_Movimiento = new HashSet<ba_TipoFlujo_Movimiento>();
         }
     
         public int IdEmpresa { get; set; }
@@ -46,5 +47,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
         public virtual ICollection<ba_Conciliacion> ba_Conciliacion { get; set; }
         public virtual ICollection<ba_Talonario_cheques_x_banco> ba_Talonario_cheques_x_banco { get; set; }
+        public virtual ICollection<ba_TipoFlujo_Movimiento> ba_TipoFlujo_Movimiento { get; set; }
     }
 }
