@@ -24,11 +24,11 @@ namespace Core.Erp.Bus.Banco
             }
         }
 
-        public List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> get_list_x_depositar(int IdEmpresa)
+        public List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> get_list_x_depositar(int IdEmpresa, int IdSucursal)
         {
             try
             {
-                return odata.get_list_x_depositar(IdEmpresa);
+                return odata.get_list_x_depositar(IdEmpresa, IdSucursal);
             }
             catch (Exception)
             {

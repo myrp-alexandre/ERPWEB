@@ -306,7 +306,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> model;
-            model = bus_det.get_list_x_depositar(IdEmpresa);
+            model = bus_det.get_list_x_depositar(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
             return PartialView("_GridViewPartial_DepositoBanco_x_cruzar", model);
         }
 
@@ -323,7 +323,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> lst_x_cruzar;
-                lst_x_cruzar = bus_det.get_list_x_depositar(IdEmpresa);
+                lst_x_cruzar = bus_det.get_list_x_depositar(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
