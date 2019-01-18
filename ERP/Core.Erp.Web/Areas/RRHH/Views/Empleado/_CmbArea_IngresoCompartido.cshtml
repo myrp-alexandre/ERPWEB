@@ -18,8 +18,6 @@
         settings.Properties.FilterMinLength = 3;
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['det_IdDivision'] =  IDividion.GetValue(); }";
     })
-//.BindList(new Core.Erp.Bus.RRHH.ro_area_Bus().get_list_bajo_demanda_area(Model.args , Model.IdEmpresa,false,Model.IdDivision))
-
     .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoController().get_list_bajo_demanda_area_ingresocompartido, new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoController().get_info_bajo_demanda_area_ingresocompartido)
     .Bind((Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_Info) || Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_x_division_x_area_Info) || Model.GetType() == typeof(List<Core.Erp.Info.RRHH.ro_empleado_x_division_x_area_Info>)) ? "" : Model);
    }
