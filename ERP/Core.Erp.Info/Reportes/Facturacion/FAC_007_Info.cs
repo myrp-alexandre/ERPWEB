@@ -41,5 +41,6 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public double vt_Cambio { get; set; }
         public string vt_autorizacion { get; set; }
         public Nullable<System.DateTime> Fecha_Autorizacion { get; set; }
+        public string vt_Observacion { get; set; }
     }
 }
