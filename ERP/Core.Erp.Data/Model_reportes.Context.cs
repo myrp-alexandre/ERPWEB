@@ -12,9 +12,10 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Linq;
-
+    
     public partial class Entities_reportes : DbContext
     {
         public Entities_reportes()
@@ -431,23 +432,6 @@ namespace Core.Erp.Data
                 new ObjectParameter("idperiodo", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SPROL_002", idempresaParameter, idnomina_tipoParameter, idnomina_Tipo_liqParameter, idperiodoParameter);
-        }
-    
-        public virtual ObjectResult<SPROL_012_Result> SPROL_012(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var fecha_desdeParameter = fecha_desde.HasValue ?
-                new ObjectParameter("Fecha_desde", fecha_desde) :
-                new ObjectParameter("Fecha_desde", typeof(System.DateTime));
-    
-            var fecha_hastaParameter = fecha_hasta.HasValue ?
-                new ObjectParameter("Fecha_hasta", fecha_hasta) :
-                new ObjectParameter("Fecha_hasta", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_012_Result>("SPROL_012", idEmpresaParameter, fecha_desdeParameter, fecha_hastaParameter);
         }
     
         public virtual ObjectResult<SPINV_005_Result> SPINV_005(Nullable<int> idEmpresa, Nullable<int> idSucursal_ini, Nullable<int> idSucursal_fin, Nullable<int> idBodega_ini, Nullable<int> idBodega_fin, Nullable<decimal> idProducto_ini, Nullable<decimal> idProducto_fin, Nullable<System.DateTime> fecha_ini, Nullable<System.DateTime> fecha_fin, string idUsuario, Nullable<bool> no_Mostrar_valores_en_0, Nullable<bool> mostrar_detallado, Nullable<decimal> idProductoPadre_ini, Nullable<decimal> idProductoPadre_fin)
@@ -983,6 +967,23 @@ namespace Core.Erp.Data
                 new ObjectParameter("IdSucursalFin", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCONTA_003_balances_Result>("SPCONTA_003_balances", idEmpresaParameter, idAnioParameter, fechaIniParameter, fechaFinParameter, idUsuarioParameter, idNivelParameter, mostrarSaldo0Parameter, balanceParameter, idSucursalIniParameter, idSucursalFinParameter);
+        }
+    
+        public virtual ObjectResult<SPROL_012_Result> SPROL_012(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_desde, Nullable<System.DateTime> fecha_hasta)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var fecha_desdeParameter = fecha_desde.HasValue ?
+                new ObjectParameter("Fecha_desde", fecha_desde) :
+                new ObjectParameter("Fecha_desde", typeof(System.DateTime));
+    
+            var fecha_hastaParameter = fecha_hasta.HasValue ?
+                new ObjectParameter("Fecha_hasta", fecha_hasta) :
+                new ObjectParameter("Fecha_hasta", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_012_Result>("SPROL_012", idEmpresaParameter, fecha_desdeParameter, fecha_hastaParameter);
         }
     }
 }
