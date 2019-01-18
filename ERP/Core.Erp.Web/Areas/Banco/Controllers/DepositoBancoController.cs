@@ -29,7 +29,9 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ct_cbtecble_det_Bus bus_det_ct = new ct_cbtecble_det_Bus();
         ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Bus bus_det = new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Bus();
         ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List List_ing = new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List();
+        ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal = new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal();
 
+        
         ba_Banco_Flujo_Det_List_Deposito List_Flujo = new ba_Banco_Flujo_Det_List_Deposito();
         ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_flujo = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
 
@@ -304,9 +306,10 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
 
         public ActionResult GridViewPartial_DepositoBanco_x_cruzar()
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> model;
-            model = bus_det.get_list_x_depositar(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
+            
+            List <ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> model;
+           model = ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal.get_list();
+
             return PartialView("_GridViewPartial_DepositoBanco_x_cruzar", model);
         }
 
@@ -323,7 +326,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> lst_x_cruzar;
-                lst_x_cruzar = bus_det.get_list_x_depositar(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
+                lst_x_cruzar = ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal.get_list();
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
@@ -371,6 +374,18 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             
             return Json(Math.Round(lst_op.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult Filtrar_GridViewPartial_DepositoBanco_x_cruzar(int IdSucursal = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> model;
+            model = bus_det.get_list_x_depositar(IdEmpresa, IdSucursal);
+
+            ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal.set_list(model);
+
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 
@@ -404,6 +419,27 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> list = get_list();
             list.Remove(list.Where(m => m.mcj_IdCbteCble == mcj_IdCbteCble).First());
         }
+    }
+
+    public class ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal
+    {
+        public List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> get_list()
+        {
+            if (HttpContext.Current.Session["ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal"] == null)
+            {
+                List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> list = new List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info>();
+
+                HttpContext.Current.Session["ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal"] = list;
+            }
+            return (List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info>)HttpContext.Current.Session["ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal"];
+        }
+
+
+        public void set_list(List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> list)
+        {
+            HttpContext.Current.Session["ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal"] = list;
+        }
+
     }
 
     public class ba_Banco_Flujo_Det_List_Deposito
