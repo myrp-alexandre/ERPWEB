@@ -155,9 +155,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                fecha_ini=DateTime.Now.AddMonths(-1),
-                fecha_fin=DateTime.Now.Date,
-                estado_novedad=  novedad
+                fecha_ini = DateTime.Now.AddMonths(-1),
+                fecha_fin = DateTime.Now.Date,
+                estado_novedad = novedad,
+                TipoRubro = "",
+                IdArea=0
+                
                 
             };
             cargar_combos(model.IdEmpresa);
@@ -170,8 +173,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdRubro.Value = model.IdRubro == null ? "" : Convert.ToString(model.IdEmpleado);
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
-            report.P_IdArea.Value = 1;
-            report.P_TipoRubro.Value = "E";
+            report.P_IdArea.Value = 0;
+            report.P_TipoRubro.Value = "";
             ViewBag.Report = report;
 
             return View(model);

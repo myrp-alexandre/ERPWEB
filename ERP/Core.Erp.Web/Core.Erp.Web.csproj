@@ -9679,6 +9679,8 @@
     <Content Include="Areas\RRHH\Views\Empleado\_CmbArea_IngresoCompartido.cshtml" />
     <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_IngresoCompartido.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\_GridViewPartial_TipoFlujoPlantilla_Asignar.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionHoras\_CmbRubro_impor_horas.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionHoras\_CmbEmpleado_imp_horas.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

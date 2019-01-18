@@ -9,12 +9,14 @@
 
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "ImportacionHoras", Action = "EditingAddNew", Area = "RRHH" };
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ImportacionHoras", Action = "EditingUpdate", Area = "RRHH" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ImportacionHoras", Action = "EditingDelete", Area = "RRHH" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowNewButton = true;
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -66,6 +68,7 @@
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "pe_apellido";
@@ -73,21 +76,53 @@
             column.Width = Unit.Percentage(25);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdRupe_apellidobro";
+            column.Caption = "Empleado";
+            column.Width = Unit.Percentage(25);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
+            {
+                Html.RenderPartial("_CmbEmpleado_imp_horas", DataBinder.Eval(c.DataItem, "IdEmpleado"));
+            });
+        });
+
+
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "ru_descripcion";
             column.Caption = "Rubro";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(25);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-        settings.Columns.Add("NumHoras", "#Horas").Width = Unit.Percentage(10);
-        settings.Columns.Add("ValorHora", "Valor hora").Width = Unit.Percentage(10);
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdRubro";
+            column.Caption = "ru_descripcion";
+            column.Width = Unit.Percentage(25);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
+            {
+                Html.RenderPartial("_CmbRubro_impor_horas", DataBinder.Eval(c.DataItem, "IdRubro"));
+            });
+        });
+
+
+
+        settings.Columns.Add("NumHoras", "#Horas").Width = Unit.Percentage(8);
+        settings.Columns.Add("ValorHora", "Valor hora").Width = Unit.Percentage(8);
 
         settings.Columns.Add(column =>
         {
             column.FieldName = "Valor";
             column.Caption = "Total";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
