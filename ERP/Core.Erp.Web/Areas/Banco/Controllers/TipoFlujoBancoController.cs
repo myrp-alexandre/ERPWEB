@@ -195,6 +195,32 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         #endregion
 
+        #region Json
+        public JsonResult actualizarGridDetFlujo(float Valor = 0)
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+
+            var ListaPlantillaTipoFlujo = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            var ListaDetFlujo = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>();
+            foreach (var item in ListaPlantillaTipoFlujo)
+            {
+                ListaDetFlujo.Add(new ba_Cbte_Ban_x_ba_TipoFlujo_Info
+                {
+                    Secuencia = item.Secuencia,
+                    IdTipoFlujo = item.IdTipoFlujo,
+                    Descricion = item.Descricion,
+                    Porcentaje = item.Porcentaje,
+                    Valor = (item.Porcentaje * Valor) / 100
+                });
+            }
+
+            List_Det.set_list(ListaDetFlujo, IdTransaccionSession);
+            return Json(ListaDetFlujo, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
     }
     public class ba_Banco_Flujo_Det_List
     {

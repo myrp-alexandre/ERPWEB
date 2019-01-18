@@ -23,9 +23,63 @@
         });
         $("#cb_Valor").change(function () {
             armar_diario();
+            actualizarGridDetFlujo();
         });
         armar_diario();
+        actualizarGridDetFlujo();
     })
+
+    function MostrarModalPlantilla() {
+        $("#PlantillaModal").modal("show");
+    }
+
+    function AgregarPlantilla(IdPlantilla) {
+        var datos = {
+            Valor: $("#cb_Valor").val(),
+            IdPlantillaTipoFlujo: IdPlantilla,
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_PlantillaTipoFlujo", "TipoFlujoPlantilla",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                GridView_flujo_det.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+
+        $("#PlantillaModal").modal("hide");
+
+    }
+
+    function actualizarGridDetFlujo() {
+        var datos = {
+            Valor: $("#cb_Valor").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizarGridDetFlujo", "TipoFlujoBanco",new { Area = "Banco"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                GridView_flujo_det.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
 
     function CalcularPorcentaje() {
         var valor = GridView_flujo_det.GetEditor('Valor').GetValue();
@@ -119,6 +173,33 @@ function GetListBancoPorSucursal() {
         </div>
 
     }
+
+    <div class="modal fade" id="PlantillaModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Plantilla tipo de flujo</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary" id="btn_buscar_plantilla" onclick="MostrarModalPlantilla();">
+                                <i class="fa fa-search" title="Plantilla Tipo de Flujo"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <br />
+                    @Html.Action("GridViewPartial_TipoFlujoPlantilla_Asignar", new { Area = "Banco", Controller = "TipoFlujoPlantilla" })
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -216,6 +297,14 @@ function GetListBancoPorSucursal() {
                 @Html.Action("GridViewPartial_comprobante_detalle", new { Area = "Contabilidad", Controller = "ComprobanteContable" })
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_flujo">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" id="btn_buscar_plantilla" onclick="MostrarModalPlantilla();">
+                            <i class="fa fa-search" title="Plantilla Tipo de Flujo"></i>
+                        </button>
+                    </div>
+                </div>
+                <br />
                 @Html.Action("GridViewPartial_flujo_det", new { Area = "Banco", Controller = "TipoFlujoBanco" })
             </div>
         </div>

@@ -20,6 +20,7 @@ namespace Core.Erp.Web.Helps
         string IdCaja { get; set; }
         string Ruc { get; set; }
         string IdDivision { get; set; }
+        string IdDivision_IC { get; set; }
     }
 
     public static class SessionFixed
@@ -114,6 +115,12 @@ namespace Core.Erp.Web.Helps
             get { return _sessionValueProvider.IdDivision; }
             set { _sessionValueProvider.IdDivision = value; }
         }
+
+        public static string IdDivision_IC
+        {
+            get { return _sessionValueProvider.IdDivision_IC; }
+            set { _sessionValueProvider.IdDivision_IC = value; }
+        }
     }
 
     public class WebSessionValueProvider : ISessionValueProvider
@@ -134,6 +141,7 @@ namespace Core.Erp.Web.Helps
         private const string _IdCaja = "Fx_IdCaja";
         private const string _Ruc = "Fx_Ruc";
         private const string _IdDivision = "Fx_IdDivision";
+        private const string _IdDivision_IC = "Fx_IdDivision_IC";
         
         public string TipoPersona
         {
@@ -216,6 +224,12 @@ namespace Core.Erp.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdDivision]; }
             set { HttpContext.Current.Session[_IdDivision] = value; }
+        }
+        
+        public string IdDivision_IC
+        {
+            get { return (string)HttpContext.Current.Session[_IdDivision_IC]; }
+            set { HttpContext.Current.Session[_IdDivision_IC] = value; }
         }
     }
 }

@@ -15,5 +15,8 @@ namespace Core.Erp.Info.RRHH
         public int IdArea { get; set; }
         public double Porcentaje { get; set; }
         public string Observacion { get; set; }
+
+        public string Descripcion_Division { get; set; }
+        public string Descripcion_Area { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         ba_TipoFlujo_Plantilla_Bus bus_TipoFlujo_Plantilla = new ba_TipoFlujo_Plantilla_Bus();
         ba_TipoFlujo_PlantillaDet_Bus bus_TipoFlujo_PlantillaDet = new ba_TipoFlujo_PlantillaDet_Bus();
         ba_TipoFlujo_PlantillaDet_List TipoFlujo_PlantillaDet_Lista = new ba_TipoFlujo_PlantillaDet_List();
+        ba_Banco_Flujo_Det_List List_Det = new ba_Banco_Flujo_Det_List();
         string mensaje = string.Empty;
         #endregion
 
@@ -55,6 +56,16 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             List<ba_TipoFlujo_Plantilla_Info> model = bus_TipoFlujo_Plantilla.GetList(IdEmpresa, true);
 
             return PartialView("_GridViewPartial_TipoFlujoPlantilla", model);
+        }
+        #endregion
+
+        #region Plantilla por asignar
+        public ActionResult GridViewPartial_TipoFlujoPlantilla_Asignar()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            List<ba_TipoFlujo_Plantilla_Info> model = bus_TipoFlujo_Plantilla.GetList(IdEmpresa, true);
+
+            return PartialView("_GridViewPartial_TipoFlujoPlantilla_Asignar", model);
         }
         #endregion
 
@@ -260,7 +271,34 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             }
             return true;
         }
-        #endregion        
+        #endregion
+
+        #region Json
+        public JsonResult cargar_PlantillaTipoFlujo(float Valor = 0, decimal IdPlantillaTipoFlujo = 0 )
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+
+            var ListaPlantillaTipoFlujo = bus_TipoFlujo_PlantillaDet.GetList(IdEmpresa, IdPlantillaTipoFlujo);
+            var ListaDetFlujo = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>();
+            var secuencia = 1;
+
+            foreach (var item in ListaPlantillaTipoFlujo)
+            {
+                ListaDetFlujo.Add(new ba_Cbte_Ban_x_ba_TipoFlujo_Info
+                {
+                    Secuencia = secuencia++,
+                    IdTipoFlujo = item.IdTipoFlujo,
+                    Descricion = item.Descricion,
+                    Porcentaje = item.Porcentaje,
+                    Valor = (item.Porcentaje * Valor)/100
+                });        
+            }            
+
+            List_Det.set_list(ListaDetFlujo, IdTransaccionSession);            
+            return Json(ListaDetFlujo, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 
     public class ba_TipoFlujo_PlantillaDet_List

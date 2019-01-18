@@ -23,6 +23,11 @@
     function OnBeginCallback(s, e) {
         e.customArgs["IdDivision"] = IdDivision.GetValue();
     }
+
+    function OnBeginCallback(s, e) {
+        e.customArgs["det_IdDivision"] = IDividion.GetValue();
+        console.log(e.customArgs["det_IdDivision"]);
+    }
 </script>
 @using (Html.BeginForm("Nuevo", "Empleado", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -161,6 +166,9 @@
             </li>
             <li>
                 <a href="#tb_info_pago_hora" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Información pago en horas</a>
+            </li>
+            <li>
+                <a href="#tb_info_ingresos_compartidos" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Información ingresos compartidos</a>
             </li>
         </ul>
         <!-- Tab panes -->
@@ -471,20 +479,20 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
 
                 <div class="row">
-                    <div class="col-md-12">  
+                    <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="Anticipo_Sueldo">% Anticipo Sueldo</label>
                                 @Html.TextBoxFor(q => q.em_AnticipoSueldo, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(q => q.em_AnticipoSueldo, "", new { @class = "text-danger" })
                             </div>
-                        </div>                      
+                        </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="es_AcreditaHorasExtras"></label>
@@ -510,7 +518,7 @@
                                 @Html.ValidationMessageFor(q => q.Marca_Biometrico, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        @*<div class="col-md-2">
                             <div class="form-group">
                                 <label for="es_AcreditaHorasExtras"></label>
                                 @Html.DevExpress().CheckBoxFor(q => q.Tiene_ingresos_compartidos, settings =>
@@ -521,7 +529,7 @@
                            }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.Tiene_ingresos_compartidos, "", new { @class = "text-danger" })
                             </div>
-                        </div>
+                        </div>*@
 
 
 
@@ -761,10 +769,32 @@
                 </div>
             </div>
 
+            <div role="tabpanel" class="tab-pane" id="tb_info_ingresos_compartidos">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="es_AcreditaHorasExtras"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.Tiene_ingresos_compartidos, settings =>
+                               {
+                                   settings.Name = "Tiene_ingresos_compartidos";
+                                   settings.Text = "Tiene ingresos compartidos";
+                                   settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_ingreso_compartido();}";
 
+                               }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.Tiene_ingresos_compartidos, "", new { @class = "text-danger", @id= "" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ingreso_compartido">
+                    <div class="col-md-12">
+                        @Html.Action("GridViewPartial_IngresoCompartido")
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Empleado", new { Area ="RRHH" }, null)">Cancelar</a>
@@ -783,16 +813,27 @@
     $(function () {
         $("#error_documento").hide();
         mostrar_horas();
+        mostrar_ingreso_compartido();
         dias_vacaciones();
     })
 
     $("#pe_cedulaRuc").blur(function () {
         Validar_cedula_ruc();
     });
-    
+
     $("#pe_cedulaRuc").keyup(function () {
         validar();
     });
+
+    function mostrar_ingreso_compartido() {
+        var IngresoCompartido = Tiene_ingresos_compartidos.GetValue();
+        if (IngresoCompartido == true) {
+            $("#ingreso_compartido").show();
+        }
+        else {
+            $("#ingreso_compartido").hide();
+        }
+    }
 
     function validar() {
         var tipo_doc = $("#IdTipoDocumento").val();
@@ -818,6 +859,7 @@
 
     function mostrar_horas() {
         var Pago = Pago_por_horas.GetValue();
+
         if (Pago == true) {
             $("#DivPagoHoras").show();
         }
@@ -908,5 +950,4 @@
             }
         });
     };
-
 </script>

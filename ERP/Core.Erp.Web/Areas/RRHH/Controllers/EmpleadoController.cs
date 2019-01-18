@@ -41,6 +41,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ct_punto_cargo_Bus bus_puntocargo = new ct_punto_cargo_Bus();
         ro_horario_Bus bus_horario = new ro_horario_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        ro_empleado_x_division_x_area_Bus bus_empleado_x_division_x_area = new ro_empleado_x_division_x_area_Bus();
 
         tb_sis_log_error_List SisLogError = new tb_sis_log_error_List();
         ro_rubro_tipo_Info_list ListaRubro = new ro_rubro_tipo_Info_list();
@@ -51,7 +52,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_cargaFamiliar_List ListaCargasFamiliares = new ro_cargaFamiliar_List();
         ro_rol_detalle_x_rubro_acumulado_List ListaProvisionesAcumuladas = new ro_rol_detalle_x_rubro_acumulado_List();
         ro_historico_vacaciones_x_empleado_Info_list ListaVacaciones = new ro_historico_vacaciones_x_empleado_Info_list();
-
+        
+        List<ro_empleado_x_division_x_area_Info> Lista_empleado_x_division_x_area = new List<ro_empleado_x_division_x_area_Info>();
+        ro_empleado_x_division_x_area_List ListaEmpleadoXDivisionXArea = new ro_empleado_x_division_x_area_List();
         List<ro_division_Info> lista_division = new List<ro_division_Info>();
         ro_division_List ListaDivision = new ro_division_List();
         List<ro_area_Info> Lista_Area = new List<ro_area_Info>();
@@ -65,6 +68,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         List<ro_empleado_x_rubro_acumulado_Info> Lista_RubrosAcumulados = new List<ro_empleado_x_rubro_acumulado_Info>();
         ro_empleado_x_rubro_acumulado_List ListaRubrosAcumulados = new ro_empleado_x_rubro_acumulado_List();
         List<ro_cargaFamiliar_Info> Lista_CargasFamiliares = new List<ro_cargaFamiliar_Info>();
+        string mensaje = string.Empty;
 
         public static byte[] imagen { get; set; }
         public decimal IdEmpleado { get; set; }
@@ -101,13 +105,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             var model = bus_empleado.get_list(IdEmpresa,  IdSucursal, true);
             return PartialView("_GridViewPartial_empleados", model);
            
-        }
+        }        
 
         #region Combos bajo demanda
         #region Division
         public ActionResult CmbDivision()
         {
-            ro_area_Info model = new ro_area_Info();
+            ro_empleado_Info model = new ro_empleado_Info();
             return PartialView("_CmbDivision", model);
         }
         public List<ro_division_Info> get_list_bajo_demanda_division(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -120,11 +124,27 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         #endregion
 
+        #region Division Ingreso Compartido
+        public ActionResult CmbDivision_IngresoCompartido()
+        {
+            ro_empleado_x_division_x_area_Info model = new ro_empleado_x_division_x_area_Info();
+            return PartialView("_CmbDivision_IngresoCompartido", model);
+        }
+        public List<ro_division_Info> get_list_bajo_demanda_division_ingresocompartido(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_division.get_list_bajo_demanda_division(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ro_division_Info get_info_bajo_demanda_division_ingresocompartido(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_division.get_info_bajo_demanda_division(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         #region Area
         public ActionResult CmbArea()
         {
             SessionFixed.IdDivision = Request.Params["IdDivision"] != null ? Request.Params["IdDivision"].ToString() : SessionFixed.IdDivision;
-            ro_area_Info model = new ro_area_Info();
+            ro_empleado_Info model = new ro_empleado_Info();
             return PartialView("_CmbArea", model);
         }
         public List<ro_area_Info> get_list_bajo_demanda_area(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -134,6 +154,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ro_area_Info get_info_bajo_demanda_area(ListEditItemRequestedByValueEventArgs args)
         {
             return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdDivision));
+        }
+        #endregion
+
+        #region Area Ingreso Compartido
+        public ActionResult CmbArea_IngresoCompartido()
+        {
+            SessionFixed.IdDivision_IC = Request.Params["det_IdDivision"] != null ? Request.Params["det_IdDivision"].ToString() : SessionFixed.IdDivision;
+            ro_empleado_x_division_x_area_Info model = new ro_empleado_x_division_x_area_Info();
+            return PartialView("_CmbArea_IngresoCompartido", model);
+        }
+        public List<ro_area_Info> get_list_bajo_demanda_area_ingresocompartido(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false, Convert.ToInt32(SessionFixed.IdDivision_IC));
+        }
+        public ro_area_Info get_info_bajo_demanda_area_ingresocompartido(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdDivision_IC));
         }
         #endregion
 
@@ -161,6 +198,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 string mensaje = "";
+                info.lst_empleado_area = ListaEmpleadoXDivisionXArea.get_list(info.IdTransaccionSession);
+
                 mensaje = Validar(info);
                 if (mensaje != "")
                 {
@@ -206,10 +245,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-
                 cargar_combos();
                 ro_empleado_Info info = new ro_empleado_Info
                 {
+                    IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                     em_fechaIngaRol = DateTime.Now,
                     em_fechaSalida = DateTime.Now,
                     IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
@@ -217,6 +256,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     GozaMasDeQuinceDiasVaciones = false
                 };
                 info.em_foto = new byte[0];
+                ListaEmpleadoXDivisionXArea.set_list(new List<ro_empleado_x_division_x_area_Info>(), info.IdTransaccionSession);
 
                 return View(info);
 
@@ -233,6 +273,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 string mensaje = "";
+                info.lst_empleado_area = ListaEmpleadoXDivisionXArea.get_list(info.IdTransaccionSession);
+
                 mensaje = Validar(info);
                 if (mensaje != "")
                 {
@@ -282,6 +324,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos();
                 ro_empleado_Info info = new ro_empleado_Info();
                 info = bus_empleado.get_info(GetIdEmpresa(), IdEmpleado);
+
+                info.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                info.lst_empleado_area = bus_empleado_x_division_x_area.GetList(info.IdEmpresa, info.IdEmpleado);
+                ListaEmpleadoXDivisionXArea.set_list(info.lst_empleado_area, info.IdTransaccionSession);
+
                 if (info.em_foto == null)
                     info.em_foto = new byte[0];
 
@@ -312,6 +359,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 string mensaje = "";
+
                 mensaje = Validar(info);
                 if (mensaje != "")
                 {
@@ -347,6 +395,10 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos();
                 ro_empleado_Info info = new ro_empleado_Info();
                 info = bus_empleado.get_info(GetIdEmpresa(), Idempleado);
+                info.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+                info.lst_empleado_area = bus_empleado_x_division_x_area.GetList(info.IdEmpresa, info.IdEmpleado);
+                ListaEmpleadoXDivisionXArea.set_list(info.lst_empleado_area, info.IdTransaccionSession);
+
                 if (info.em_foto == null)
                     info.em_foto = new byte[0];
 
@@ -516,6 +568,114 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             return Json(SessionFixed.NombreImagen, JsonRequestBehavior.AllowGet);
         }
+
+        #region Metodos de ingreso compartido
+        public ActionResult GridViewPartial_IngresoCompartido()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaEmpleadoXDivisionXArea.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_IngresoCompartido", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_x_division_x_area_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+
+            if (info_det != null)
+                if (info_det.IdArea != 0)
+                {
+                    ro_division_Info info_Division = bus_division.get_info(IdEmpresa, info_det.IDividion);
+                    ro_area_Info info_Area = bus_area.get_info(IdEmpresa, info_det.IdArea);
+                    if (info_Division != null)
+                    {
+                        info_det.Descripcion_Division = info_Division.Descripcion;
+                    }
+
+                    if (info_Area != null)
+                    {
+                        info_det.Descripcion_Area = info_Area.Descripcion;
+                    }
+                }
+
+            ListaEmpleadoXDivisionXArea.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = ListaEmpleadoXDivisionXArea.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_IngresoCompartido", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_x_division_x_area_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (info_det != null)
+                if (info_det.IdArea != 0)
+                {
+                    ro_division_Info info_Division = bus_division.get_info(IdEmpresa, info_det.IDividion);
+                    ro_area_Info info_Area = bus_area.get_info(IdEmpresa, info_det.IdArea);
+
+                    if (info_Division != null)
+                    {
+                        info_det.Descripcion_Division = info_Division.Descripcion;
+                    }
+
+                    if (info_Area != null)
+                    {
+                        info_det.Descripcion_Area = info_Area.Descripcion;
+                    }
+
+                }
+            ListaEmpleadoXDivisionXArea.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = ListaEmpleadoXDivisionXArea.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_IngresoCompartido", model);
+        }
+
+        public ActionResult EditingDelete(int Secuencia)
+        {
+            ListaEmpleadoXDivisionXArea.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ro_empleado_Info model = new ro_empleado_Info();
+            model.lst_empleado_area = ListaEmpleadoXDivisionXArea.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_IngresoCompartido", model.lst_empleado_area);
+        }
+
+        private bool Validar(ro_empleado_Info i_validar, ref string msg)
+        {
+            i_validar.lst_empleado_area = ListaEmpleadoXDivisionXArea.get_list(i_validar.IdTransaccionSession);
+
+            if (i_validar.Tiene_ingresos_compartidos == true)
+            {
+                if (i_validar.lst_empleado_area.Count == 0)
+                {
+                    mensaje = "Debe ingresar al menos registro en el detalle de ingreso compartido";
+                    return false;
+                }
+                else
+                {
+                    foreach (var item1 in i_validar.lst_empleado_area)
+                    {
+                        var contador = 0;
+                        foreach (var item2 in i_validar.lst_empleado_area)
+                        {
+                            if (item1.IdArea == item2.IdArea)
+                            {
+                                contador++;
+                            }
+
+                            if (contador > 1)
+                            {
+                                mensaje = "Existe areas repetidas en el detalle";
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            return true;
+        }
+        #endregion        
 
         #region Importacion
         public ActionResult UploadControlUpload()
@@ -1341,6 +1501,52 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public void set_list(List<ro_rol_detalle_x_rubro_acumulado_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
+    public class ro_empleado_x_division_x_area_List
+    {
+        string Variable = "ro_empleado_x_division_x_area_Info";
+        public List<ro_empleado_x_division_x_area_Info> get_list(decimal IdTransaccionSession)
+        {
+
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ro_empleado_x_division_x_area_Info> list = new List<ro_empleado_x_division_x_area_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ro_empleado_x_division_x_area_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ro_empleado_x_division_x_area_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(ro_empleado_x_division_x_area_Info info_det, decimal IdTransaccionSession)
+        {
+            List<ro_empleado_x_division_x_area_Info> list = get_list(IdTransaccionSession);
+            if (list.Where(q => q.IdArea == info_det.IdArea).Count() == 0)
+            {
+                info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+                list.Add(info_det);
+            }
+        }
+
+        public void UpdateRow(ro_empleado_x_division_x_area_Info info_det, decimal IdTransaccionSession)
+        {
+            ro_empleado_x_division_x_area_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.IDividion = info_det.IDividion;
+            edited_info.IdArea = info_det.IdArea;
+            edited_info.Porcentaje = info_det.Porcentaje;
+            edited_info.Observacion = info_det.Observacion;
+        }
+
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
+        {
+            List<ro_empleado_x_division_x_area_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
 }

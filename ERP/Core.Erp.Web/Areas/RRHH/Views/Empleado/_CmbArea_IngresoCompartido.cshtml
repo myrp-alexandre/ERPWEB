@@ -6,7 +6,7 @@
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.CallbackRouteValues = new { Controller = "Empleado", Action = "CmbArea", Area = "RRHH" };
+        settings.CallbackRouteValues = new { Controller = "Empleado", Action = "CmbArea_IngresoCompartido", Area = "RRHH" };
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "Descripcion";
@@ -17,9 +17,9 @@
         settings.Properties.Columns.Add("Descripcion", "Descripcion", 90);
         settings.Properties.FilterMinLength = 3;
         settings.Properties.FilterMinLength = 3;
-        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdDivision'] =  IdDivision.GetValue(); }";
+        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['det_IdDivision'] =  IDividion.GetValue(); }";
     })
-     .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoController().get_list_bajo_demanda_area, new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoController().get_info_bajo_demanda_area)
-    .Bind((Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_Info) || Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_area_Info) ) ? "" : Model);
+     .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoController().get_list_bajo_demanda_area_ingresocompartido, new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoController().get_info_bajo_demanda_area_ingresocompartido)   
+    .Bind((Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_Info) || Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_x_division_x_area_Info) || Model.GetType() == typeof(List<Core.Erp.Info.RRHH.ro_empleado_x_division_x_area_Info>)) ? "" : Model);
     }
 @comboBox.GetHtml()
