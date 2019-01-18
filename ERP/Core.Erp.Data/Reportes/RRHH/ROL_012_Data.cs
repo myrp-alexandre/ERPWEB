@@ -20,7 +20,6 @@ namespace Core.Erp.Data.Reportes.RRHH
                              select new ROL_012_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
-                                 IdTipoNomina = q.IdTipoNomina,
                                  IdDepartamento = q.IdDepartamento,
                                  IdEmpleado = q.IdEmpleado,
                                  IdPrestamo = q.IdPrestamo,
@@ -28,7 +27,6 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  pe_cedulaRuc = q.pe_cedulaRuc,
                                  pe_nombre = q.pe_nombre+" "+q.pe_apellido,
                                  EstadoPago = q.EstadoPago,
-                                 Descripcion = q.Descripcion,
                                  de_descripcion = q.de_descripcion,
                                  Total_Cancelado = q.Total_Cancelado,
                                  Total_Pendiente_pago = q.Total_Pendiente_pago,
