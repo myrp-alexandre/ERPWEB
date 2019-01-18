@@ -9675,6 +9675,8 @@
     <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\Modificar.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\Anular.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_solicitud_pago.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionHoras\_CmbRubro_impor_horas.cshtml" />
+    <Content Include="Areas\RRHH\Views\ImportacionHoras\_CmbEmpleado_imp_horas.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

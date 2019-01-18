@@ -1,8 +1,10 @@
 ﻿using Core.Erp.Bus.General;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using ExcelDataReader;
 using System;
@@ -34,7 +36,41 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         int IdEmpresa = 0;
         #endregion
 
+        #region Rubro bajo demanda
 
+
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_imp_horas()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbEmpleado_imp_horas", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+
+
+
+        public ActionResult CmbRubro_impor_horas()
+        {
+            ro_empleado_novedad_det_Info model = new ro_empleado_novedad_det_Info();
+            return PartialView("_CmbRubro_impor_horas", model);
+        }
+        public List<ro_rubro_tipo_Info> get_list_bajo_demanda_rubro(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_rubro.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public ro_rubro_tipo_Info get_info_bajo_demanda_rubro(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_rubro.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
+        }
+
+        #endregion
         #region Vistas
         public ActionResult Index()
         {
@@ -189,6 +225,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
 
         #region funciones del detalle
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_HorasProfesores_det_Info info_det)
+        {
+            if (ModelState.IsValid)
+                detalle.AddRow(info_det);
+            ro_HorasProfesores_Info model = new ro_HorasProfesores_Info();
+            model.detalle = detalle.get_list();
+            return PartialView("_GridViewPartial_importacion_horas_det", model);
+        }
+
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_HorasProfesores_det_Info info_det)
@@ -493,13 +540,33 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             HttpContext.Current.Session["ro_HorasProfesores_det_Info"] = list;
         }
 
+        public void AddRow(ro_HorasProfesores_det_Info info_det)
+        {
+            ro_rubro_tipo_Bus bus_rub = new ro_rubro_tipo_Bus();
+            var info_rubro = bus_rub.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdRubro);
+            ro_empleado_Bus bus_emppleado = new ro_empleado_Bus();
+            ro_empleado_Info info_empleado = new ro_empleado_Info();
+            info_empleado = bus_emppleado.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdEmpleado);
+
+            List<ro_HorasProfesores_det_Info> list = get_list();
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            info_det.ru_descripcion = info_rubro.ru_descripcion;
+            info_det.pe_apellido = info_empleado.pe_apellido + " " + info_empleado.pe_nombre;
+
+            list.Add(info_det);
+        }
 
         public void UpdateRow(ro_HorasProfesores_det_Info info_det)
         {
+
+            ro_empleado_Bus bus_emppleado = new ro_empleado_Bus();
+            ro_empleado_Info info_empleado = new ro_empleado_Info();
+            info_empleado = bus_emppleado.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), info_det.IdEmpleado);
             ro_HorasProfesores_det_Info edited_info = get_list().Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.NumHoras = info_det.NumHoras;
             edited_info.Valor = info_det.Valor;
             edited_info.ValorHora = info_det.ValorHora;
+            edited_info.pe_apellido = info_empleado.pe_apellido + " " + info_empleado.pe_nombre;
         }
 
         public void DeleteRow(int Secuencia)
