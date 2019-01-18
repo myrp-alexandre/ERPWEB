@@ -49,7 +49,7 @@ namespace Core.Erp.Data.Banco
             }
         }
 
-        public List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> get_list_x_depositar(int IdEmpresa)
+        public List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info> get_list_x_depositar(int IdEmpresa, int IdSucursal)
         {
             try
             {
@@ -59,6 +59,7 @@ namespace Core.Erp.Data.Banco
                 {
                     Lista = (from q in Context.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar
                              where q.IdEmpresa == IdEmpresa
+                             && q.cbr_IdSucursal==IdSucursal
                              select new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info
                              {
                                  mcj_IdEmpresa = q.IdEmpresa,
