@@ -8,7 +8,7 @@ namespace Core.Erp.Info.General
         public decimal IdImpresion { get; set; }
         public string CodReporte { get; set; }
         public string IPUsuario { get; set; }
-        public string IPMaquina { get; set; }
+        public string IPImpresora { get; set; }
         public string Parametros { get; set; }
         public string Usuario { get; set; }
         public string NombreEmpresa { get; set; }

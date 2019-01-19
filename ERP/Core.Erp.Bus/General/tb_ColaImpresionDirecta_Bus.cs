@@ -20,11 +20,23 @@ namespace Core.Erp.Bus.General
             }
         }
 
-        public tb_ColaImpresionDirecta_Info GetInfoPorImprimir(string IPMaquina)
+        public bool ModificarDB(tb_ColaImpresionDirecta_Info info)
         {
             try
             {
-                return odata.GetInfoPorImprimir(IPMaquina);
+                return odata.ModificarDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public tb_ColaImpresionDirecta_Info GetInfoPorImprimir(string IPUsuario)
+        {
+            try
+            {
+                return odata.GetInfoPorImprimir(IPUsuario);
             }
             catch (Exception)
             {
