@@ -491,5 +491,30 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             lista = bus.get_list(Convert.ToInt32( IdEmpresa),Convert.ToDecimal(IdEmpleado), Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
             return PartialView("_PivotGridROL_019", lista);
         }
+
+        public ActionResult ROL_021(int IdEmpresa=0, int IdSucursal = 0, int IdNomina = 0, int IdNominaTipo = 0, int IdPeriodo = 0, int IdDivision=0, int IdArea=0)
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal=IdSucursal,
+                IdNomina=IdNomina, IdTipoNomina=IdNominaTipo,
+                IdPeriodo=IdPeriodo,
+                IdArea=IdArea,
+                IdDivision=IdDivision
+            };
+            ROL_021_Rpt report = new ROL_021_Rpt();
+           
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ROL_021(cl_filtros_Info model)
+        {
+            ROL_021_Rpt report = new ROL_021_Rpt();
+           
+            ViewBag.Report = report;
+            return View(model);
+        }
     }
 }
