@@ -1162,6 +1162,12 @@
     <Compile Include="Reportes\RRHH\ROL_020_Rpt.Designer.cs">
       <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_021_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_021_Rpt.Designer.cs">
+      <DependentUpon>ROL_021_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -9681,6 +9687,7 @@
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\_GridViewPartial_TipoFlujoPlantilla_Asignar.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionHoras\_CmbRubro_impor_horas.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionHoras\_CmbEmpleado_imp_horas.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_021.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
