@@ -10145,6 +10145,9 @@
     <EmbeddedResource Include="Reportes\RRHH\ROL_020_Rpt.resx">
       <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_021_Rpt.resx">
+      <DependentUpon>ROL_021_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
