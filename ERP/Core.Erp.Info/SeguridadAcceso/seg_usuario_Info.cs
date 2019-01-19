@@ -26,6 +26,8 @@ namespace Core.Erp.Info.SeguridadAcceso
         public bool es_super_admin { get; set; }
         public string contrasena_admin { get; set; }
         public Nullable<int> IdMenu { get; set; }
+        public string IPMaquina { get; set; }
+        public string IPImpresora { get; set; }
         public List<seg_Usuario_x_Empresa_Info> lst_usuario_x_empresa { get; set; }
     }
 }
