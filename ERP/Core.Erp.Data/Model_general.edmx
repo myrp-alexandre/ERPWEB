@@ -125,8 +125,8 @@
           <Property Name="IdImpresion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="CodReporte" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IPUsuario" Type="varchar" MaxLength="1000" Nullable="false" />
-          <Property Name="IPImpresora" Type="varchar" MaxLength="1000" Nullable="false" />
-          <Property Name="Parametros" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="IPImpresora" Type="varchar" MaxLength="1000" />
+          <Property Name="Parametros" Type="varchar" MaxLength="1000" />
           <Property Name="Usuario" Type="varchar" MaxLength="1000" />
           <Property Name="NombreEmpresa" Type="varchar" MaxLength="1000" />
           <Property Name="FechaEnvio" Type="datetime" Nullable="false" />
@@ -2665,8 +2665,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <Property Name="IdImpresion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IPUsuario" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="IPImpresora" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Parametros" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IPImpresora" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Parametros" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Usuario" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="NombreEmpresa" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="FechaEnvio" Type="DateTime" Nullable="false" Precision="3" />
