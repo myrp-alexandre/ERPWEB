@@ -26,5 +26,6 @@ namespace Core.Erp.Data
         public string Decimo_Tercero { get; set; }
         public string Fondos_Reservas { get; set; }
         public Nullable<int> IdDivision { get; set; }
+        public string EstadoContrato { get; set; }
     }
 }

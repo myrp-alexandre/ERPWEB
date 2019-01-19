@@ -15,6 +15,7 @@
         settings.Settings.ShowFilterRow = true;
         settings.SettingsBehavior.AllowSelectByRowClick = false;
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "DepositoBanco", Action = "EditingDelete", Area = "Banco" };
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
 
         //Configuración click derecho
         settings.SettingsContextMenu.Enabled = true;

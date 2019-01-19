@@ -229,7 +229,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_fechaCorte.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
-            report.p_IdClienteContacto.Value = model.IdClienteContacto;
             report.p_MostrarSoloCarteraVencida.Value = model.Check1;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -247,7 +246,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSucursal.Value = model.IdSucursal;
             report.p_IdCliente.Value = model.IdCliente;
             report.p_MostrarSoloCarteraVencida.Value = model.Check1;
-            report.p_IdClienteContacto.Value = model.IdClienteContacto;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             cargar_combos(model);

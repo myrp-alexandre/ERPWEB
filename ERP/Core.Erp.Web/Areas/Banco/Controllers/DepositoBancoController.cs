@@ -354,7 +354,16 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             var bco = bus_banco_cuenta.get_info(IdEmpresa, IdBanco);
             var lst_op = List_ing.get_list();
 
-            foreach (var item in lst_op)
+            var lst = (from q in lst_op
+                       group q by q.IdCtaCble
+                      into g
+                       select new
+                       {
+                           IdCtaCble = g.Key,
+                           cr_Valor = g.Sum(q => q.cr_Valor)
+                       }).ToList();
+
+            foreach (var item in lst)
             {
                 //Haber
                 List_ct.AddRow(new ct_cbtecble_det_Info
@@ -367,12 +376,12 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
             List_ct.AddRow(new ct_cbtecble_det_Info
             {
                 IdCtaCble = bco.IdCtaCble,
-                dc_Valor = Math.Round(lst_op.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero),
-                dc_Valor_debe = Math.Round(lst_op.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero),
+                dc_Valor = Math.Round(lst.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero),
+                dc_Valor_debe = Math.Round(lst.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero),
                 dc_para_conciliar = true
             }, IdTransaccionSession);
             
-            return Json(Math.Round(lst_op.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
+            return Json(Math.Round(lst.Sum(q => q.cr_Valor), 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Filtrar_GridViewPartial_DepositoBanco_x_cruzar(int IdSucursal = 0)

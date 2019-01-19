@@ -30,30 +30,18 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="IdCliente">Cliente</label>
-                            @Html.Partial("_CmbCliente_Facturacion", Model.IdCliente)
-                            @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger", @id = "IdCliente" })
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="IdClienteContacto">Cliente contacto</label>
-                            @Html.DropDownListFor(q => q.IdClienteContacto, new SelectList(ViewBag.lst_contacto, "IdContacto", "Nombres", Model.IdClienteContacto), new { @class = "form-control", @id = "IdClienteContacto" })
-                            @Html.ValidationMessageFor(q => q.IdClienteContacto, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdSucursal">Sucursal</label>
                             @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion", Model.IdSucursal), new { @class = "form-control" })
                             @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="IdCliente">Cliente</label>
+                            @Html.Partial("_CmbCliente_Facturacion", Model.IdCliente)
+                            @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger", @id = "IdCliente" })
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -63,23 +51,23 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.DevExpress().DateEditFor(q=> q.fecha_fin, settings =>
-                            {
-                                settings.Name = "fecha_fin";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            }).GetHtml()
+                                @Html.DevExpress().DateEditFor(q => q.fecha_fin, settings =>
+                           {
+                               settings.Name = "fecha_fin";
+                               settings.Properties.UseMaskBehavior = true;
+                               settings.Properties.EditFormat = EditFormat.Date;
+                               settings.Properties.EditFormatString = "dd/MM/yyyy";
+                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <div class="checkbox">
-                                <label for="Check1">@Html.CheckBoxFor(q=>q.Check1) Mostrar solo cartera vencida</label>
+                                <label for="Check1">@Html.CheckBoxFor(q => q.Check1) Solo cartera vencida</label>
                             </div>
                         </div>
                     </div>
@@ -116,30 +104,3 @@
         <!-- /.box-footer-->
     </div>
 }
-    <script>
-            function cargar_cliente() {
-
-                $("#IdClienteContacto").empty();
-                var codigo = IdCliente.GetValue();
-
-                    var datos = {
-                        IdCliente: codigo
-                    }
-                    $.ajax({
-                        type: 'POST',
-                        data: JSON.stringify(datos),
-                        url: '@Url.Action("cargar_cliente", "FacturacionReportes",new { Area = "Reportes"})',
-                        async: false,
-                        dataType: 'json',
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (data) {
-                            $.each(data, function (i, row) {
-                                $("#IdClienteContacto").append("<option value=" + row.IdContacto + ">" + row.Nombres + "</option>");
-                                $("#IdClienteContacto").val("0");
-                        });
-                    },
-                    error: function (error) {
-                    }
-                });
-            };
-    </script>
