@@ -110,34 +110,34 @@ namespace Core.Erp.WindowsService
                         else
                             tool003.Print(Impresion.IPImpresora);
                         break;
-                    case "FAC_007":
-                        FAC_007_Rpt RPT_007 = new FAC_007_Rpt();
+                    case "FAC_013":
+                        FAC_013_Rpt RPT_013 = new FAC_013_Rpt();
 
                         #region Cargo diseño desde base                        
                         if (reporte != null)
                         {
                             System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                            RPT_007.LoadLayout(RootReporte);
+                            RPT_013.LoadLayout(RootReporte);
                         }
                         #endregion
 
                         #region Parametros
                         if (!string.IsNullOrEmpty(Impresion.Parametros))
                         {
-                            RPT_007.p_IdEmpresa.Value = Impresion.IdEmpresa;
-                            RPT_007.p_IdBodega.Value = IdBodega;
-                            RPT_007.p_IdSucursal.Value = IdSucursal;
-                            RPT_007.p_IdCbteVta.Value = IdCbteVta;
-                            RPT_007.PrinterName = Impresion.IPImpresora;
-                            RPT_007.CreateDocument();
+                            RPT_013.p_IdEmpresa.Value = Impresion.IdEmpresa;
+                            RPT_013.p_IdBodega.Value = IdBodega;
+                            RPT_013.p_IdSucursal.Value = IdSucursal;
+                            RPT_013.p_IdCbteVta.Value = IdCbteVta;
+                            RPT_013.PrinterName = Impresion.IPImpresora;
+                            RPT_013.CreateDocument();
                         }
                         #endregion
 
-                        PrintToolBase tool007 = new PrintToolBase(RPT_007.PrintingSystem);
+                        PrintToolBase tool013 = new PrintToolBase(RPT_013.PrintingSystem);
                         if (string.IsNullOrEmpty(Impresion.IPImpresora))
-                            tool007.Print();
+                            tool013.Print();
                         else
-                            tool007.Print(Impresion.IPImpresora);
+                            tool013.Print(Impresion.IPImpresora);
                         break;
                 }
                 #endregion
