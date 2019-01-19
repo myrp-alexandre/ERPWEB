@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model_seguridad_acceso.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model_seguridad_acceso.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="seg_Menu">
           <Key>
             <PropertyRef Name="IdMenu" />
@@ -65,6 +65,8 @@
           <Property Name="es_super_admin" Type="bit" Nullable="false" />
           <Property Name="contrasena_admin" Type="varchar(max)" />
           <Property Name="IdMenu" Type="int" />
+          <Property Name="IPUsuario" Type="varchar" MaxLength="1000" />
+          <Property Name="IPImpresora" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="seg_Usuario_x_Empresa">
           <Key>
@@ -226,11 +228,11 @@
           <EntitySet Name="seg_Usuario_x_Empresa" EntityType="Self.seg_Usuario_x_Empresa" />
           <EntitySet Name="seg_usuario_x_tb_sis_reporte" EntityType="Self.seg_usuario_x_tb_sis_reporte" />
           <EntitySet Name="seg_Menu" EntityType="Model_seguridad_acceso.seg_Menu" />
-          <EntitySet Name="seg_usuario" EntityType="Model_seguridad_acceso.seg_usuario" />
           <AssociationSet Name="FK_seg_Menu_x_Empresa_seg_Menu" Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu">
             <End Role="seg_Menu" EntitySet="seg_Menu" />
             <End Role="seg_Menu_x_Empresa" EntitySet="seg_Menu_x_Empresa" />
           </AssociationSet>
+          <EntitySet Name="seg_usuario" EntityType="Model_seguridad_acceso.seg_usuario" />
           <AssociationSet Name="FK_seg_usuario_seg_Menu" Association="Model_seguridad_acceso.FK_seg_usuario_seg_Menu">
             <End Role="seg_Menu" EntitySet="seg_Menu" />
             <End Role="seg_usuario" EntitySet="seg_usuario" />
@@ -269,6 +271,18 @@
           <NavigationProperty Name="seg_Menu_x_Empresa" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" FromRole="seg_Menu" ToRole="seg_Menu_x_Empresa" />
           <NavigationProperty Name="seg_usuario" Relationship="Model_seguridad_acceso.FK_seg_usuario_seg_Menu" FromRole="seg_Menu" ToRole="seg_usuario" />
         </EntityType>
+        <Association Name="FK_seg_Menu_x_Empresa_seg_Menu">
+          <End Type="Model_seguridad_acceso.seg_Menu" Role="seg_Menu" Multiplicity="1" />
+          <End Type="Model_seguridad_acceso.seg_Menu_x_Empresa" Role="seg_Menu_x_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seg_Menu">
+              <PropertyRef Name="IdMenu" />
+            </Principal>
+            <Dependent Role="seg_Menu_x_Empresa">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="seg_usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -288,23 +302,13 @@
           <Property Name="es_super_admin" Type="Boolean" Nullable="false" />
           <Property Name="contrasena_admin" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IdMenu" Type="Int32" />
+          <Property Name="IPUsuario" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IPImpresora" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="seg_Menu" Relationship="Model_seguridad_acceso.FK_seg_usuario_seg_Menu" FromRole="seg_usuario" ToRole="seg_Menu" />
           <NavigationProperty Name="seg_Menu_x_Empresa_x_Usuario" Relationship="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" FromRole="seg_usuario" ToRole="seg_Menu_x_Empresa_x_Usuario" />
           <NavigationProperty Name="seg_Usuario_x_Empresa" Relationship="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" FromRole="seg_usuario" ToRole="seg_Usuario_x_Empresa" />
           <NavigationProperty Name="seg_usuario_x_tb_sis_reporte" Relationship="Model_seguridad_acceso.FK_seg_usuario_x_tb_sis_reporte_seg_usuario" FromRole="seg_usuario" ToRole="seg_usuario_x_tb_sis_reporte" />
         </EntityType>
-        <Association Name="FK_seg_Menu_x_Empresa_seg_Menu">
-          <End Type="Model_seguridad_acceso.seg_Menu" Role="seg_Menu" Multiplicity="1" />
-          <End Type="Model_seguridad_acceso.seg_Menu_x_Empresa" Role="seg_Menu_x_Empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="seg_Menu">
-              <PropertyRef Name="IdMenu" />
-            </Principal>
-            <Dependent Role="seg_Menu_x_Empresa">
-              <PropertyRef Name="IdMenu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_seg_usuario_seg_Menu">
           <End Type="Model_seguridad_acceso.seg_Menu" Role="seg_Menu" Multiplicity="0..1" />
           <End Type="Model_seguridad_acceso.seg_usuario" Role="seg_usuario" Multiplicity="*" />
@@ -421,6 +425,8 @@
           <EntitySetMapping Name="seg_usuario">
             <EntityTypeMapping TypeName="Model_seguridad_acceso.seg_usuario">
               <MappingFragment StoreEntitySet="seg_usuario">
+                <ScalarProperty Name="IPImpresora" ColumnName="IPImpresora" />
+                <ScalarProperty Name="IPUsuario" ColumnName="IPUsuario" />
                 <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
                 <ScalarProperty Name="contrasena_admin" ColumnName="contrasena_admin" />
                 <ScalarProperty Name="es_super_admin" ColumnName="es_super_admin" />
@@ -455,7 +461,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>

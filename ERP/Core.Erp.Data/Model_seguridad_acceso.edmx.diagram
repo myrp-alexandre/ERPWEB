@@ -10,8 +10,8 @@
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Usuario_x_Empresa" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario_x_tb_sis_reporte" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_seguridad_acceso.seg_Menu" Width="1.5" PointX="5.75" PointY="1" />
-        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario" Width="1.5" PointX="8" PointY="5.5" />
         <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_seg_Menu" />
+        <EntityTypeShape EntityType="Model_seguridad_acceso.seg_usuario" Width="1.5" PointX="8" PointY="5.625" />
         <AssociationConnector Association="Model_seguridad_acceso.FK_seg_usuario_seg_Menu" />
         <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Menu_x_Empresa_x_Usuario_seg_usuario" />
         <AssociationConnector Association="Model_seguridad_acceso.FK_seg_Usuario_x_Empresa_seg_usuario" />

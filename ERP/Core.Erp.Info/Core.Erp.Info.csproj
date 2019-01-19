@@ -203,6 +203,7 @@
     <Compile Include="General\tb_CatalogoTipo_Info.cs" />
     <Compile Include="General\tb_Catalogo_Info.cs" />
     <Compile Include="General\tb_ciudad_Info.cs" />
+    <Compile Include="General\tb_ColaImpresionDirecta_Info.cs" />
     <Compile Include="General\tb_comprobantes_sin_autorizacion_Info.cs" />
     <Compile Include="General\tb_empresa_Info.cs" />
     <Compile Include="General\tb_mes_Info.cs" />

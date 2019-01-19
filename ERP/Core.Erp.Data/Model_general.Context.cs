@@ -71,5 +71,6 @@ namespace Core.Erp.Data
         public DbSet<tb_sis_reporte_x_tb_empresa> tb_sis_reporte_x_tb_empresa { get; set; }
         public DbSet<tb_sucursal> tb_sucursal { get; set; }
         public DbSet<vwtb_comprobantes_no_autorizados> vwtb_comprobantes_no_autorizados { get; set; }
+        public DbSet<tb_ColaImpresionDirecta> tb_ColaImpresionDirecta { get; set; }
     }
 }
