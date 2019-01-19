@@ -448,7 +448,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             #region horas control salida
                             if (!reader.IsDBNull(6))
                             {
-                                if (rubros_calculados.IdRubro_horas_adicionales != null)
+                                if (rubros_calculados.IdRubro_horas_control_salida != null)
                                 {
                                     var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_control_salida);
                                     if (rubros != null)
@@ -462,7 +462,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                             em_codigo = empleado.em_codigo,
                                             Secuencia = cont,
                                             IdEmpleado = empleado.IdEmpleado,
-                                            IdRubro = rubros_calculados.IdRubro_horas_adicionales,
+                                            IdRubro = rubros_calculados.IdRubro_horas_control_salida,
                                             ru_descripcion = rubros.ru_descripcion,
                                             ValorHora = Convert.ToDouble(empleado.Valor_hora_adicionales)
 
