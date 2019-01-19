@@ -119,7 +119,9 @@ namespace Core.Erp.Data.SeguridadAcceso
                         contrasena_admin = Entity.contrasena_admin,
                         ExigirDirectivaContrasenia = Entity.ExigirDirectivaContrasenia == null ? false : Convert.ToBoolean(Entity.ExigirDirectivaContrasenia),
                         CambiarContraseniaSgtSesion = Entity.CambiarContraseniaSgtSesion == null ? false : Convert.ToBoolean(Entity.CambiarContraseniaSgtSesion),
-                        IdMenu = Entity.IdMenu
+                        IdMenu = Entity.IdMenu,
+                        IPImpresora = Entity.IPImpresora,
+                        IPMaquina = Entity.IPUsuario
                     };
                 }
 

@@ -30,56 +30,49 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdUsuario">Usuario*</label>
-                    @Html.TextBoxFor(q => q.IdUsuario, new { @class = "form-control" })
+                    @Html.TextBoxFor(q => q.IdUsuario, new { @class = "form-control"})
                     @Html.ValidationMessageFor(q => q.IdUsuario, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="">Contraseña</label>
-                    @Html.TextBoxFor(q => q.Contrasena, new { @class = "form-control", @id = "contrasenia_usuario" })
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="Nombre">Nombre</label>
                     @Html.TextBoxFor(q => q.Nombre, new { @class = "form-control" })
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-9">
-                <div class="form-group" id="div_admin">
-                    <label for="contrasena_admin">Contraseña Administrador</label>
-                    @Html.PasswordFor(q => q.contrasena_admin, new { @class = "form-control", @id = "contrasena_admin" })
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IPMaquina">IP Máquina</label>
+                    @Html.TextBoxFor(q => q.IPMaquina, new { @class = "form-control" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
+                    <label for="IPImpresora">IP Impresora</label>
+                    @Html.TextBoxFor(q => q.IPImpresora, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            
+            <div class="col-md-3">
+                <div class="form-group">
                     <div class="checkbox">
                         <label for="es_super_admin">@Html.CheckBoxFor(q => q.es_super_admin, new { @id = "es_super_admin" }) ¿Es usuario Administrador?</label>
-                    </div>
-                    <div class="checkbox">
                         <label for="ExigirDirectivaContrasenia">@Html.CheckBoxFor(q => q.ExigirDirectivaContrasenia) Exigir directivas de contraseña</label>
-                    </div>
-                    <div class="checkbox">
                         <label for="CambiarContraseniaSgtSesion">@Html.CheckBoxFor(q => q.CambiarContraseniaSgtSesion) Cambiar contraseña el próximo inicio de sesión</label>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" id="div_admin" hidden>
+                    <label for="contrasena_admin">Contraseña Administrador</label>
+                    @Html.TextBoxFor(q => q.contrasena_admin, new { @class = "form-control", @id = "contrasena_admin" })
                 </div>
             </div>
         </div>
@@ -153,8 +146,4 @@
             $("#div_admin").hide();
     });
 
-
-    $(function () {
-        $("#div_admin").hide();
-    })
 </script>
