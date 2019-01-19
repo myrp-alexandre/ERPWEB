@@ -1,13 +1,10 @@
-﻿
---exec [web].[SPFAC_002] 1,1,1,57,57,1,9999,'2018/08/02'
+﻿--exec [web].[SPFAC_002] 2,2,2,1,99999,'2019/01/19',0
 CREATE PROCEDURE [web].[SPFAC_002]
 	@IdEmpresa as int,
 	@SucursalIni as int,
 	@SucursalFin as int,
 	@IdClienteIni as numeric,
 	@IdClienteFin as numeric,
-	@IdClienteContactoIni as int,
-	@IdClienteContactoFin as int,
 	@fechaCorte as datetime,
 	@MostrarSoloCarteraVencida bit
 AS
@@ -28,7 +25,7 @@ select      Facturas_y_notas_deb.IdEmpresa ,Facturas_y_notas_deb.IdSucursal,Fact
 			IIF( DATEDIFF( day,Facturas_y_notas_deb.vt_fech_venc,@fechaCorte )>90,  Facturas_y_notas_deb.Valor_Original - isnull( Cobros_x_fac.dc_ValorPago,0),0) Mayor_a_90Dias
 			,Facturas_y_notas_deb.vt_fech_venc,Facturas_y_notas_deb.vt_fecha,Facturas_y_notas_deb.Idtipo_cliente,DATEDIFF( day,Facturas_y_notas_deb.vt_fech_venc,@fechaCorte ) Dias_Vencidos,
 			ISNULL(cast( Facturas_y_notas_deb.Valor_Original-isnull( Cobros_x_fac.dc_ValorPago,0) as numeric(10,2)),0) Saldo,Facturas_y_notas_deb.pe_telefonoOfic, vt_Observacion, vt_plazo, IdContacto, NomContacto, TelefonoContacto
-
+			
  from 
 (
 	
@@ -44,7 +41,8 @@ select      Facturas_y_notas_deb.IdEmpresa ,Facturas_y_notas_deb.IdSucursal,Fact
                          tb_sucursal ON F.IdEmpresa = tb_sucursal.IdEmpresa AND F.IdSucursal = tb_sucursal.IdSucursal 
 						 INNER JOIN fa_cliente_contactos as con on F.IdEmpresa = con.IdEmpresa and f.IdCliente = con.IdCliente and f.IdContacto = con.IdContacto
 			WHERE				F.IdEmpresa = @IdEmpresa AND F.vt_fecha <= @fechaCorte and F.Estado='A' 
-			AND f.IdCliente between @IdClienteIni and @IdClienteFin and f.IdContacto between @IdClienteContactoIni and @IdClienteContactoFin
+			AND f.IdCliente between @IdClienteIni and @IdClienteFin
+			AND f.IdSucursal between @SucursalIni and @SucursalFin
 			GROUP BY            F.IdEmpresa,F.IdSucursal,F.IdBodega, dbo.fa_cliente.IdCliente, dbo.fa_cliente.Codigo,F.IdCbteVta, 
 								F.CodCbteVta,F.vt_tipoDoc,F.vt_serie1,F.vt_serie2,F.vt_NumFactura, 
 								dbo.tb_sucursal.Su_Descripcion, ltrim(dbo.tb_persona.pe_nombreCompleto) + '/'+ cast( fa_cliente.IdCliente as varchar(20)), dbo.tb_persona.pe_cedulaRuc,F.vt_fech_venc,F.vt_fecha,dbo.fa_cliente.Idtipo_cliente
@@ -60,7 +58,9 @@ SELECT			dbo.fa_notaCreDeb.IdEmpresa, dbo.fa_notaCreDeb.IdSucursal, dbo.fa_notaC
 				when  dbo.fa_notaCreDeb.CodDocumentoTipo is null then 'NTDB'
 				 else  dbo.fa_notaCreDeb.CodDocumentoTipo end as CodDocumentoTipo
 				, dbo.fa_notaCreDeb.Serie1, dbo.fa_notaCreDeb.Serie2, 
-				isnull( dbo.fa_notaCreDeb.NumNota_Impresa, dbo.fa_notaCreDeb.IdNota), dbo.tb_sucursal.Su_Descripcion, 
+				isnull( dbo.fa_notaCreDeb.NumNota_Impresa, dbo.fa_notaCreDeb.CodNota)+'/'+cast(fa_notaCreDeb.IdNota as varchar(10)), 
+				
+				dbo.tb_sucursal.Su_Descripcion, 
 				LTRIM(dbo.tb_persona.pe_nombreCompleto) + '/'+ cast( fa_cliente.IdCliente as varchar(20)) , dbo.tb_persona.pe_cedulaRuc, 
 				dbo.fa_notaCreDeb_det.sc_total, dbo.fa_notaCreDeb.no_fecha_venc,dbo.fa_notaCreDeb.no_fecha, dbo.fa_cliente.Idtipo_cliente,
 				dbo.tb_persona.pe_telfono_Contacto as pe_telefonoOfic, fa_notaCreDeb.sc_observacion,
@@ -74,6 +74,7 @@ FROM            fa_notaCreDeb INNER JOIN
 where           dbo.fa_notaCreDeb.IdEmpresa = @IdEmpresa and dbo.fa_notaCreDeb.CreDeb='D' and fa_notaCreDeb.no_fecha <= @fechaCorte
 				and dbo.fa_notaCreDeb.Estado='A' 
 				AND fa_notaCreDeb.IdCliente between @IdClienteIni and @IdClienteFin 
+				AND fa_notaCreDeb.IdSucursal between @SucursalIni and @SucursalFin
 				AND NOT EXISTS(
 				  SELECT        *
                                FROM            fa_notaCreDeb_x_fa_factura_NotaDeb Cruce

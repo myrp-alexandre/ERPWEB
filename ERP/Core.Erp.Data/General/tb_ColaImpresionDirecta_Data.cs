@@ -15,6 +15,7 @@ namespace Core.Erp.Data.General
                     db.tb_ColaImpresionDirecta.Add(new tb_ColaImpresionDirecta
                     {
                         IdEmpresa = info.IdEmpresa,
+                        IdImpresion = info.IdImpresion = GetID(info.IdEmpresa),
                         CodReporte = info.CodReporte,
                         IPUsuario = info.IPUsuario,
                         IPImpresora = info.IPImpresora,
@@ -87,11 +88,18 @@ namespace Core.Erp.Data.General
             }
         }
 
-        private decimal GetID()
+        private decimal GetID(int IdEmpresa)
         {
             try
             {
-
+                decimal ID = 1;
+                using (Entities_general db = new Entities_general())
+                {
+                    var lst = db.tb_ColaImpresionDirecta.Where(q => q.IdEmpresa == IdEmpresa).ToList();
+                    if (lst.Count > 0)
+                        ID = lst.Max(q => q.IdImpresion) +1;
+                }
+                return ID;
             }
             catch (Exception)
             {
