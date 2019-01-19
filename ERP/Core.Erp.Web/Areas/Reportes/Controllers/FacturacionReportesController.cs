@@ -220,7 +220,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal= Convert.ToInt32(SessionFixed.IdSucursal)
             };
             
             cargar_combos(model);
@@ -228,7 +229,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fechaCorte.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
-            report.p_IdCliente.Value = model.IdCliente;
+            report.p_IdCliente.Value = model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente);
             report.p_MostrarSoloCarteraVencida.Value = model.Check1;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -244,7 +245,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fechaCorte.Value = model.fecha_fin;
             report.p_IdSucursal.Value = model.IdSucursal;
-            report.p_IdCliente.Value = model.IdCliente;
+            report.p_IdCliente.Value = model.IdCliente == null ? 0 : Convert.ToDecimal(model.IdCliente);
             report.p_MostrarSoloCarteraVencida.Value = model.Check1;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;

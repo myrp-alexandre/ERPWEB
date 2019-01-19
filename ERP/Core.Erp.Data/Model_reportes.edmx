@@ -9674,7 +9674,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_020' no tiene definida ningu
           <Property Type="String" Name="vt_tipoDoc" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="vt_serie1" Nullable="true" MaxLength="3" />
           <Property Type="String" Name="vt_serie2" Nullable="true" MaxLength="3" />
-          <Property Type="String" Name="vt_NumFactura" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="vt_NumFactura" Nullable="true" MaxLength="31" />
           <Property Type="String" Name="Su_Descripcion" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="pe_nombreCompleto" Nullable="true" MaxLength="221" />
           <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
