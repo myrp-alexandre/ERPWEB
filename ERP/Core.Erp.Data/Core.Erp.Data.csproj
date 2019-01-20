@@ -1195,6 +1195,7 @@
     <Compile Include="Reportes\RRHH\ROL_019_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_018_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_020_Data.cs" />
+    <Compile Include="Reportes\RRHH\ROL_021_Data.cs" />
     <Compile Include="ro_Acta_Finiquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>

@@ -128,7 +128,7 @@ namespace Core.Erp.Data.RRHH
                         {
                             IdEmpresa = item.IdEmpresa,
                             IdNovedad = item.IdNovedad ,
-                            FechaPago = item.FechaPago,
+                            FechaPago = item.FechaPago.Date,
                             Secuencia=item.Secuencia,
                             IdRubro=item.IdRubro,
                             

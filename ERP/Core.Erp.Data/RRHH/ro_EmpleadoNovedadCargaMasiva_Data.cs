@@ -148,8 +148,7 @@ namespace Core.Erp.Data.RRHH
                         ro_empleado_Novedad entity_det = contex.ro_empleado_Novedad.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == item.IdEmpleado && q.IdNovedad == item.IdNovedad);
                         if (entity_det != null)
                         {
-                            //string sql = "update ro_empleado_Novedad set Estado='I' where IdEmpresa='" + info.IdEmpresa + "' and IdEmpleado='" + item.IdEmpleado + "' and IdNovedad='" + item.IdNovedad + "'";
-                            //contex.Database.ExecuteSqlCommand(sql);
+                            
                             entity_det.Estado = "I";
                             entity_det.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
                             entity_det.Fecha_UltAnu = DateTime.Now;
