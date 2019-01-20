@@ -1048,6 +1048,12 @@
     <Compile Include="Reportes\Produccion\PRO_001_Rpt.Designer.cs">
       <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_021_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_021_Rpt.Designer.cs">
+      <DependentUpon>ROL_021_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1161,12 +1167,6 @@
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_020_Rpt.Designer.cs">
       <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\RRHH\ROL_021_Rpt.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\RRHH\ROL_021_Rpt.Designer.cs">
-      <DependentUpon>ROL_021_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -9670,7 +9670,6 @@
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\_CmbTipoFlujo.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Modificar.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Anular.cshtml" />
-    <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbArea_roles.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\_CmbFlujo_Tipo.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_CmbFlujo_NotaCredito.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_flujo_det.cshtml" />
@@ -9688,6 +9687,9 @@
     <Content Include="Areas\RRHH\Views\ImportacionHoras\_CmbRubro_impor_horas.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionHoras\_CmbEmpleado_imp_horas.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_021.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbArea_reportes.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbDivision_reportes.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbSucursal_reportes_RRHH.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9808,6 +9810,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -10087,6 +10090,9 @@
     <EmbeddedResource Include="Reportes\Produccion\PRO_001_Rpt.resx">
       <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_021_Rpt.resx">
+      <DependentUpon>ROL_021_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -10143,9 +10149,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_020_Rpt.resx">
       <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_021_Rpt.resx">
-      <DependentUpon>ROL_021_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

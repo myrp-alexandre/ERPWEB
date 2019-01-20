@@ -3369,8 +3369,6 @@ warning 6002: The table/view 'DBERP.web.VWROL_020' does not have a primary key d
 warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VWROL_021">
           <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdRol" />
             <PropertyRef Name="IdNominaTipo" />
             <PropertyRef Name="IdNominaTipoLiqui" />
             <PropertyRef Name="IdPeriodo" />
@@ -3383,16 +3381,10 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
             <PropertyRef Name="ru_tipo" />
             <PropertyRef Name="rub_codigo" />
             <PropertyRef Name="ru_codRolGen" />
-            <PropertyRef Name="NumHoras" />
-            <PropertyRef Name="ValorHora" />
-            <PropertyRef Name="ca_descripcion" />
             <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="Rub_horas" />
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdEmpresa" />
           </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdRol" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdSucursal" Type="int" />
           <Property Name="IdNominaTipo" Type="int" Nullable="false" />
           <Property Name="IdNominaTipoLiqui" Type="int" Nullable="false" />
@@ -3408,16 +3400,15 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
           <Property Name="ru_tipo" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="rub_codigo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ru_codRolGen" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="NumHoras" Type="float" Nullable="false" />
-          <Property Name="ValorHora" Type="float" Nullable="false" />
-          <Property Name="ca_descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ca_descripcion" Type="varchar" MaxLength="250" />
           <Property Name="em_codigo" Type="varchar" MaxLength="50" />
           <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Rub_horas" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" />
           <Property Name="IdArea" Type="int" />
           <Property Name="IdDivision" Type="int" />
+          <Property Name="IdRol" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
         </EntityType>
         <Function Name="SPACTF_004_detalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -5649,8 +5640,6 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
           </EntitySet>
           <EntitySet Name="VWROL_021" EntityType="Self.VWROL_021" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
-    [VWROL_021].[IdEmpresa] AS [IdEmpresa], 
-    [VWROL_021].[IdRol] AS [IdRol], 
     [VWROL_021].[IdSucursal] AS [IdSucursal], 
     [VWROL_021].[IdNominaTipo] AS [IdNominaTipo], 
     [VWROL_021].[IdNominaTipoLiqui] AS [IdNominaTipoLiqui], 
@@ -5666,16 +5655,15 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
     [VWROL_021].[ru_tipo] AS [ru_tipo], 
     [VWROL_021].[rub_codigo] AS [rub_codigo], 
     [VWROL_021].[ru_codRolGen] AS [ru_codRolGen], 
-    [VWROL_021].[NumHoras] AS [NumHoras], 
-    [VWROL_021].[ValorHora] AS [ValorHora], 
     [VWROL_021].[ca_descripcion] AS [ca_descripcion], 
     [VWROL_021].[em_codigo] AS [em_codigo], 
     [VWROL_021].[IdEmpleado] AS [IdEmpleado], 
     [VWROL_021].[pe_cedulaRuc] AS [pe_cedulaRuc], 
     [VWROL_021].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-    [VWROL_021].[Rub_horas] AS [Rub_horas], 
     [VWROL_021].[IdArea] AS [IdArea], 
-    [VWROL_021].[IdDivision] AS [IdDivision]
+    [VWROL_021].[IdDivision] AS [IdDivision], 
+    [VWROL_021].[IdRol] AS [IdRol], 
+    [VWROL_021].[IdEmpresa] AS [IdEmpresa]
     FROM [web].[VWROL_021] AS [VWROL_021]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -9786,8 +9774,6 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
         </ComplexType>
         <EntityType Name="VWROL_021">
           <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdRol" />
             <PropertyRef Name="IdNominaTipo" />
             <PropertyRef Name="IdNominaTipoLiqui" />
             <PropertyRef Name="IdPeriodo" />
@@ -9800,16 +9786,10 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
             <PropertyRef Name="ru_tipo" />
             <PropertyRef Name="rub_codigo" />
             <PropertyRef Name="ru_codRolGen" />
-            <PropertyRef Name="NumHoras" />
-            <PropertyRef Name="ValorHora" />
-            <PropertyRef Name="ca_descripcion" />
             <PropertyRef Name="IdEmpleado" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="Rub_horas" />
+            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="IdEmpresa" />
           </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdRol" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="IdSucursal" Type="Int32" />
           <Property Name="IdNominaTipo" Type="Int32" Nullable="false" />
           <Property Name="IdNominaTipoLiqui" Type="Int32" Nullable="false" />
@@ -9825,16 +9805,15 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
           <Property Name="ru_tipo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="rub_codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ru_codRolGen" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="NumHoras" Type="Double" Nullable="false" />
-          <Property Name="ValorHora" Type="Double" Nullable="false" />
-          <Property Name="ca_descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ca_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="em_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Rub_horas" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IdArea" Type="Int32" />
           <Property Name="IdDivision" Type="Int32" />
+          <Property Name="IdRol" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -12682,16 +12661,15 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
           <EntitySetMapping Name="VWROL_021">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_021">
               <MappingFragment StoreEntitySet="VWROL_021">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
                 <ScalarProperty Name="IdArea" ColumnName="IdArea" />
-                <ScalarProperty Name="Rub_horas" ColumnName="Rub_horas" />
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="em_codigo" ColumnName="em_codigo" />
                 <ScalarProperty Name="ca_descripcion" ColumnName="ca_descripcion" />
-                <ScalarProperty Name="ValorHora" ColumnName="ValorHora" />
-                <ScalarProperty Name="NumHoras" ColumnName="NumHoras" />
                 <ScalarProperty Name="ru_codRolGen" ColumnName="ru_codRolGen" />
                 <ScalarProperty Name="rub_codigo" ColumnName="rub_codigo" />
                 <ScalarProperty Name="ru_tipo" ColumnName="ru_tipo" />
@@ -12707,8 +12685,6 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
                 <ScalarProperty Name="IdNominaTipoLiqui" ColumnName="IdNominaTipoLiqui" />
                 <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

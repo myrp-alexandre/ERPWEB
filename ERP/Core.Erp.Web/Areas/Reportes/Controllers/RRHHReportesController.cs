@@ -19,7 +19,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     [SessionTimeout]
     public class RRHHReportesController : Controller
     {
-        #region Metodos ComboBox bajo demanda
+        ro_division_Bus bus_division = new ro_division_Bus();
+        ro_area_Bus bus_area = new ro_area_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
+        ro_periodo_x_ro_Nomina_TipoLiqui_Bus bus_periodo_x_nominas = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
+        #region Metodos ComboBox bajo demanda empleado
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbEmpleado_RRHH()
         {
@@ -40,10 +45,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         #region Metodos ComboBox bajo rubros
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
-        ro_area_Bus bus_area = new ro_area_Bus();
         public ActionResult CmbRubro_roles()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model =new cl_filtros_Info();
             return PartialView("_CmbRubro_roles", model);
         }
         public List<ro_rubro_tipo_Info> get_list_bajo_demanda_rubro(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -55,21 +59,59 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return bus_rubro.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa),args);
         }
 
-        public ActionResult CmbArea_roles()
+        #endregion
+
+        #region metodo bajo demanda Division
+        public ActionResult CmbDivision_reportes()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
-            return PartialView("_CmbArea_roles", model);
+            int model = new int();
+            return PartialView("_CmbDivision_reportes", model);
+        }
+        public List<ro_division_Info> get_list_bajo_demanda_division(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_division.get_list_bajo_demanda_division(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ro_division_Info get_info_bajo_demanda_division(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_division.get_info_bajo_demanda_division(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
+
+        #region metodo bajo demanda Area
+        public ActionResult CmbArea_reportes()
+        {
+            SessionFixed.IdDivision = Request.Params["IdDivision"] != null ? Request.Params["IdDivision"].ToString() : SessionFixed.IdDivision;
+            int model = new int();
+            return PartialView("_CmbArea_reportes", model);
         }
         public List<ro_area_Info> get_list_bajo_demanda_area(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa),false,1);
+            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false, 1);
         }
         public ro_area_Info get_info_bajo_demanda_area(ListEditItemRequestedByValueEventArgs args)
         {
-            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa),1);
+            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), 1);
         }
-
         #endregion
+
+
+        #region metodo bajo demanda sucursal
+        public ActionResult CmbSucursalReportes_RRHH()
+        {
+            int model = new int();
+            return PartialView("_CmbSucursal_reportes_RRHH", model);
+        }
+        public List<tb_sucursal_Info> get_list_bajo_demanda_sucursal(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_sucursal.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public tb_sucursal_Info get_info_bajo_demanda_sucursal(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_sucursal.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa),args);
+        }
+        #endregion
+
         public ActionResult ROL_001(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0, int IdSucursal=0)
         {
             ROL_001_Rpt model = new ROL_001_Rpt();
@@ -224,12 +266,18 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         private void cargar_combos(int IdEmpresa)
         {
             ro_nomina_tipo_Bus bus_nomina = new ro_nomina_tipo_Bus();
-            ro_area_Bus bus_area = new ro_area_Bus();
+            
             var lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina = lst_nomina;
 
+            var lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);
+            ViewBag.lst_nomina_tipo = lst_nomina_tipo;
+
             var lst_area = bus_area.get_list(IdEmpresa, false);
             ViewBag.lst_area = lst_area;
+
+            var lst_periodos = bus_periodo_x_nominas.get_list_utimo_periodo_aprocesar(IdEmpresa, 0,0);
+            ViewBag.lst_periodos = lst_periodos;
 
 
 
@@ -492,19 +540,23 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return PartialView("_PivotGridROL_019", lista);
         }
 
-        public ActionResult ROL_021(int IdEmpresa=0, int IdSucursal = 0, int IdNomina = 0, int IdNominaTipo = 0, int IdPeriodo = 0, int IdDivision=0, int IdArea=0)
+        public ActionResult ROL_021(int IdEmpresa=0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0,  int IdPeriodo = 0, int IdSucursal=0)
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal=IdSucursal,
-                IdNomina=IdNomina, IdTipoNomina=IdNominaTipo,
+                IdNomina=IdNomina_Tipo,
+                IdTipoNomina =IdNomina_TipoLiqui,
                 IdPeriodo=IdPeriodo,
-                IdArea=IdArea,
-                IdDivision=IdDivision
             };
             ROL_021_Rpt report = new ROL_021_Rpt();
-           
+            report.p_IdEmpresa.Value = IdEmpresa;
+            report.p_IdNomina.Value = IdNomina_Tipo;
+            report.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
+            report.p_IdPeriodo.Value = IdPeriodo;
+            report.p_IdSucursal.Value = IdSucursal;
+            cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
             ViewBag.Report = report;
             return View(model);
         }
@@ -512,7 +564,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult ROL_021(cl_filtros_Info model)
         {
             ROL_021_Rpt report = new ROL_021_Rpt();
-           
+
+            cargar_combos(model.IdEmpresa);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdNomina.Value = model.IdNomina;
+            report.p_IdNominaTipo.Value = model.IdTipoNomina;
+            report.p_IdPeriodo.Value = model.IdPeriodo;
+            report.p_IdSucursal.Value = model.IdSucursal;
             ViewBag.Report = report;
             return View(model);
         }
