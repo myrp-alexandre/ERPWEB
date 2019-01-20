@@ -63,6 +63,7 @@ namespace Core.Erp.Data.RRHH
                         IdEmpresa = info.IdEmpresa,
                         IdCarga = info.IdCarga = Get_id(info.IdEmpresa),
                         FechaCarga = info.FechaCarga.Date,
+                        IdPeriodo=info.IdPeriodo=Convert.ToInt32( info.FechaCarga.Year.ToString()+info.FechaCarga.Month.ToString().PadLeft(2,'0')),
                         Observacion = info.Observacion,
                         IdNomina = info.IdNomina,
                         IdNominaTipo = info.IdNominaTipo,
