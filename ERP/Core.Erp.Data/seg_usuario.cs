@@ -36,6 +36,8 @@ namespace Core.Erp.Data
         public bool es_super_admin { get; set; }
         public string contrasena_admin { get; set; }
         public Nullable<int> IdMenu { get; set; }
+        public string IPUsuario { get; set; }
+        public string IPImpresora { get; set; }
     
         public virtual seg_Menu seg_Menu { get; set; }
         public virtual ICollection<seg_Menu_x_Empresa_x_Usuario> seg_Menu_x_Empresa_x_Usuario { get; set; }

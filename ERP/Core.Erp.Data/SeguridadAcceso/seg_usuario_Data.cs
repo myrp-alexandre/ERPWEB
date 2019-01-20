@@ -119,7 +119,9 @@ namespace Core.Erp.Data.SeguridadAcceso
                         contrasena_admin = Entity.contrasena_admin,
                         ExigirDirectivaContrasenia = Entity.ExigirDirectivaContrasenia == null ? false : Convert.ToBoolean(Entity.ExigirDirectivaContrasenia),
                         CambiarContraseniaSgtSesion = Entity.CambiarContraseniaSgtSesion == null ? false : Convert.ToBoolean(Entity.CambiarContraseniaSgtSesion),
-                        IdMenu = Entity.IdMenu
+                        IdMenu = Entity.IdMenu,
+                        IPImpresora = Entity.IPImpresora,
+                        IPMaquina = Entity.IPUsuario
                     };
                 }
 
@@ -149,6 +151,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                         contrasena_admin = info.contrasena_admin,
                         estado = info.estado = "A",
                         IdMenu = info.IdMenu == 0 ? null : info.IdMenu,
+                        IPImpresora = info.IPImpresora,
+                        IPUsuario = info.IPMaquina,
 
                         Fecha_Transaccion = info.Fecha_Transaccion
                     };
@@ -181,6 +185,8 @@ namespace Core.Erp.Data.SeguridadAcceso
                     Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                     Entity.Fecha_UltMod = info.Fecha_UltMod;
                     Entity.IdMenu = info.IdMenu == 0 ? null : info.IdMenu;
+                    Entity.IPImpresora = info.IPImpresora;
+                    Entity.IPUsuario = info.IPMaquina;
                     Context.SaveChanges();
                 }               
 
@@ -282,7 +288,6 @@ namespace Core.Erp.Data.SeguridadAcceso
                 List<seg_usuario_Info> Lista = new List<seg_usuario_Info>();
 
                 Entities_seguridad_acceso Context = new Entities_seguridad_acceso();
-
                 {
                     List<seg_usuario> ListaUsuarios;
                     ListaUsuarios = Context.seg_usuario.Where(q => q.estado == "A" && (q.IdUsuario + " " + q.Nombre).Contains(filter)).OrderBy(q => q.IdUsuario).Skip(skip).Take(take).ToList();
