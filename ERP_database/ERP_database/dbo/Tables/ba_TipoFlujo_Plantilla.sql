@@ -1,8 +1,6 @@
 ﻿CREATE TABLE [dbo].[ba_TipoFlujo_Plantilla] (
     [IdEmpresa]             INT           NOT NULL,
     [IdPlantilla]           NUMERIC (18)  NOT NULL,
-    [Desde]                 DATE          NOT NULL,
-    [Hasta]                 DATE          NOT NULL,
     [Descripcion]           VARCHAR (200) NOT NULL,
     [Estado]                BIT           NOT NULL,
     [IdUsuarioCreacion]     VARCHAR (50)  NULL,
@@ -14,4 +12,6 @@
     [MotivoAnulacion]       VARCHAR (MAX) NULL,
     CONSTRAINT [PK_ba_TipoFlujo_Plantilla] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdPlantilla] ASC)
 );
+
+
 

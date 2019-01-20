@@ -9,7 +9,9 @@ CREATE PROCEDURE [web].[SPCONTA_003_balances]
 @IdUsuario varchar(200),
 @IdNivel int,
 @MostrarSaldo0 bit,
-@Balance VARCHAR(2)
+@Balance VARCHAR(2),
+@IdSucursalIni int,
+@IdSucursalFin int
 )
 AS
 delete web.ct_CONTA_003_balances where IdUsuario = @IdUsuario
@@ -75,6 +77,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'BG') AND ct_cbtecble.cb_Fecha < @FechaIni and ct_cbtecble_det.dc_Valor > 0
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial, 0
@@ -83,6 +86,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND ct_cbtecble.cb_Fecha < @FechaIni and ct_cbtecble_det.dc_Valor > 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble, 0, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial
@@ -91,6 +95,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'BG') AND ct_cbtecble.cb_Fecha < @FechaIni and ct_cbtecble_det.dc_Valor < 0
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble, 0, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial
@@ -99,6 +104,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND ct_cbtecble.cb_Fecha < @FechaIni and ct_cbtecble_det.dc_Valor < 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			--UTILIDAD
@@ -108,6 +114,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND ct_cbtecble.cb_Fecha < @FechaIni and ct_cbtecble_det.dc_Valor > 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, @IdCtaCbleUtilidad, 0, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial
@@ -116,6 +123,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND ct_cbtecble.cb_Fecha < @FechaIni and ct_cbtecble_det.dc_Valor < 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa
 			) C
 	GROUP BY IdEmpresa, IdCtaCble
@@ -134,6 +142,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'BG') AND ct_cbtecble.cb_Fecha BETWEEN @FechaIni AND @FechaFin and ct_cbtecble_det.dc_Valor > 0
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial, 0
@@ -142,6 +151,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND ct_cbtecble.cb_Fecha BETWEEN @FechaIni AND @FechaFin and ct_cbtecble_det.dc_Valor > 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble, 0, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial
@@ -150,6 +160,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'BG') AND ct_cbtecble.cb_Fecha BETWEEN @FechaIni AND @FechaFin and ct_cbtecble_det.dc_Valor < 0
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble, 0, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial
@@ -158,6 +169,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND ct_cbtecble.cb_Fecha BETWEEN @FechaIni AND @FechaFin and ct_cbtecble_det.dc_Valor < 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			--UTILIDAD
@@ -167,6 +179,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND ct_cbtecble.cb_Fecha BETWEEN @FechaIni AND @FechaFin and ct_cbtecble_det.dc_Valor > 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, @IdCtaCbleUtilidad, 0, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial
@@ -175,6 +188,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND ct_cbtecble.cb_Fecha BETWEEN @FechaIni AND @FechaFin and ct_cbtecble_det.dc_Valor < 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa
 			) C
 	GROUP BY IdEmpresa, IdCtaCble
@@ -193,6 +207,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'BG') AND ct_cbtecble.cb_Fecha <= @FechaFin and ct_cbtecble_det.dc_Valor > 0
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial, 0
@@ -201,6 +216,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND ct_cbtecble.cb_Fecha <= @FechaFin and ct_cbtecble_det.dc_Valor > 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble, 0, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial
@@ -209,6 +225,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'BG') AND ct_cbtecble.cb_Fecha <= @FechaFin and ct_cbtecble_det.dc_Valor < 0
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble, 0, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial
@@ -217,6 +234,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND ct_cbtecble.cb_Fecha <= @FechaFin and ct_cbtecble_det.dc_Valor < 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)			
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa, ct_cbtecble_det.IdCtaCble
 			UNION ALL
 			--UTILIDAD
@@ -226,6 +244,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND cb_Fecha <= @FechaFin and ct_cbtecble_det.dc_Valor > 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa
 			UNION ALL
 			SELECT        ct_cbtecble_det.IdEmpresa, @IdCtaCbleUtilidad, 0, ABS(SUM(ct_cbtecble_det.dc_Valor)) AS DebitosSaldoInicial
@@ -234,6 +253,7 @@ FROM(
 							ct_plancta ON ct_cbtecble_det.IdEmpresa = ct_plancta.IdEmpresa AND ct_cbtecble_det.IdCtaCble = ct_plancta.IdCtaCble INNER JOIN
 							ct_grupocble ON ct_plancta.IdGrupoCble = ct_grupocble.IdGrupoCble
 			WHERE        ct_cbtecble.IdEmpresa = @IdEmpresa and (ct_grupocble.gc_estado_financiero = 'ER') AND cb_Fecha <= @FechaFin and ct_cbtecble_det.dc_Valor < 0 AND @IdAnio = YEAR(ct_cbtecble.cb_Fecha)
+			and ct_cbtecble.IdSucursal between @IdSucursalIni and @IdSucursalFin
 			GROUP BY ct_cbtecble_det.IdEmpresa
 			) C
 	GROUP BY IdEmpresa, IdCtaCble

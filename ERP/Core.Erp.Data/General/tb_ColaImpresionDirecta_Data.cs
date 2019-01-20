@@ -15,14 +15,16 @@ namespace Core.Erp.Data.General
                     db.tb_ColaImpresionDirecta.Add(new tb_ColaImpresionDirecta
                     {
                         IdEmpresa = info.IdEmpresa,
+                        IdImpresion = info.IdImpresion = GetID(info.IdEmpresa),
                         CodReporte = info.CodReporte,
                         IPUsuario = info.IPUsuario,
-                        IPMaquina = info.IPMaquina,
+                        IPImpresora = info.IPImpresora,
                         Parametros = info.Parametros,
                         Usuario = info.Usuario,
                         NombreEmpresa = info.NombreEmpresa,
                         FechaEnvio = DateTime.Now                        
                     });
+                    db.SaveChanges();
                 }
                 return true;
             }
@@ -32,13 +34,36 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public tb_ColaImpresionDirecta_Info GetInfoPorImprimir(string IPMaquina)
+        public bool ModificarDB(tb_ColaImpresionDirecta_Info info)
         {
             try
             {
                 using (Entities_general db = new Entities_general())
                 {
-                    var entity = db.tb_ColaImpresionDirecta.Where(q => q.IPMaquina == IPMaquina && q.FechaImpresion == null).FirstOrDefault();
+                    var Entity = db.tb_ColaImpresionDirecta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdImpresion == info.IdImpresion).FirstOrDefault();
+                    if (Entity == null)
+                        return false;
+                    Entity.FechaImpresion = DateTime.Now;
+                    Entity.Comentario = info.Comentario;
+
+                    db.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public tb_ColaImpresionDirecta_Info GetInfoPorImprimir(string IPUsuario)
+        {
+            try
+            {
+                using (Entities_general db = new Entities_general())
+                {
+                    var entity = db.tb_ColaImpresionDirecta.Where(q => q.IPUsuario == IPUsuario && q.FechaImpresion == null).FirstOrDefault();
                     if (entity == null)
                         return null;
                     return new tb_ColaImpresionDirecta_Info
@@ -47,7 +72,7 @@ namespace Core.Erp.Data.General
                         IdImpresion = entity.IdImpresion,
                         CodReporte = entity.CodReporte,
                         IPUsuario = entity.IPUsuario,
-                        IPMaquina = entity.IPMaquina,
+                        IPImpresora = entity.IPImpresora,
                         Parametros = entity.Parametros,
                         Usuario = entity.Usuario,
                         NombreEmpresa = entity.NombreEmpresa,
@@ -56,6 +81,25 @@ namespace Core.Erp.Data.General
                         Comentario = entity.Comentario
                     };
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private decimal GetID(int IdEmpresa)
+        {
+            try
+            {
+                decimal ID = 1;
+                using (Entities_general db = new Entities_general())
+                {
+                    var lst = db.tb_ColaImpresionDirecta.Where(q => q.IdEmpresa == IdEmpresa).ToList();
+                    if (lst.Count > 0)
+                        ID = lst.Max(q => q.IdImpresion) +1;
+                }
+                return ID;
             }
             catch (Exception)
             {

@@ -1087,6 +1087,12 @@
     <Build Include="dbo\Tables\ba_Cbte_Ban_x_ba_TipoFlujo.sql" />
     <Build Include="dbo\Views\vwba_TipoFlujoPlantillaDet.sql" />
     <Build Include="dbo\Views\vwba_Cbte_Ban_x_ba_TipoFlujo.sql" />
+    <Build Include="dbo\Tables\tb_ColaImpresionDirecta.sql" />
+    <Build Include="dbo\Tables\ro_empleado_division_area_x_rol.sql" />
+    <Build Include="dbo\Tables\fa_factura_x_cxc_cobro.sql" />
+    <Build Include="dbo\Tables\ba_TipoFlujo_Movimiento.sql" />
+    <Build Include="dbo\Views\vwba_TipoFlujo_Movimiento.sql" />
+    <Build Include="dbo\Stored Procedures\SPFAC_EliminarCobroEfectivo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

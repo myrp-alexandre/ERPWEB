@@ -1,4 +1,4 @@
-CREATE VIEW EntidadRegulatoria.vwfa_factura
+﻿CREATE VIEW EntidadRegulatoria.vwfa_factura
 AS
 SELECT        factura.IdEmpresa, factura.IdSucursal, factura.IdBodega, factura.IdCbteVta, factura.vt_serie1, factura.vt_serie2, factura.vt_NumFactura, factura.vt_fecha, factura.pe_Naturaleza, factura.IdTipoDocumento, factura.pe_cedulaRuc, 
                          factura.Nombres, factura.Telefono, factura.Celular, factura.Correo, factura.Direccion, factura.RazonSocial, factura.NombreComercial, factura.ContribuyenteEspecial, 'SI' AS ObligadoAllevarConta, factura.em_ruc, 
@@ -18,7 +18,7 @@ FROM            (SELECT        fac.IdEmpresa, fac.IdSucursal, fac.IdBodega, fac.
                                                     dbo.tb_sis_Documento_Tipo_Talonario ON fac.IdEmpresa = dbo.tb_sis_Documento_Tipo_Talonario.IdEmpresa AND fac.vt_tipoDoc = dbo.tb_sis_Documento_Tipo_Talonario.CodDocumentoTipo AND 
                                                     fac.vt_serie2 = dbo.tb_sis_Documento_Tipo_Talonario.PuntoEmision AND fac.vt_serie1 = dbo.tb_sis_Documento_Tipo_Talonario.Establecimiento AND 
                                                     fac.vt_NumFactura = dbo.tb_sis_Documento_Tipo_Talonario.NumDocumento
-                          WHERE        (dbo.tb_sis_Documento_Tipo_Talonario.es_Documento_Electronico = 1)) AS factura INNER JOIN
+                          WHERE        (dbo.tb_sis_Documento_Tipo_Talonario.es_Documento_Electronico = 1) AND (fac.aprobada_enviar_sri = 1)) AS factura INNER JOIN
                              (SELECT        IdEmpresa, IdSucursal, IdBodega, IdCbteVta, CAST(SUM(vt_Subtotal) AS numeric(10, 2)) AS Base_imponible, CAST(SUM(vt_iva) AS numeric(10, 2)) AS impuesto, CAST(SUM(vt_DescUnitario) AS numeric(10, 2)) 
                                                          AS totalDescuento, CAST(SUM(vt_Subtotal) AS numeric(10, 2)) AS total_sin_impuesto, CAST(SUM(vt_total) AS numeric(10, 2)) AS importeTotal
                                FROM            dbo.fa_factura_det
@@ -33,7 +33,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'350
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'50
          Or = 1350
          Or = 1350
       End
@@ -42,13 +42,15 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'EntidadRegulatoria', @level1type = N'VIEW', @level1name = N'vwfa_factura';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[21] 4[8] 2[23] 3) )"
+         Configuration = "(H (1[5] 4[5] 2[71] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -190,5 +192,7 @@ Begin DesignProperties =
          SortOrder = 1410
          GroupBy = 1350
          Filter = 1350
-         Or = 1', @level0type = N'SCHEMA', @level0name = N'EntidadRegulatoria', @level1type = N'VIEW', @level1name = N'vwfa_factura';
+         Or = 13', @level0type = N'SCHEMA', @level0name = N'EntidadRegulatoria', @level1type = N'VIEW', @level1name = N'vwfa_factura';
+
+
 
