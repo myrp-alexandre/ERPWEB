@@ -19,7 +19,22 @@ namespace Core.Erp.Web.Reportes.RRHH
         public string usuario { get; set; }
         public string empresa { get; set; }
 
-        private void VWROL_001_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+       
+
+        private void ROL_001_Rpt_AfterPrint(object sender, EventArgs e)
+        {
+            try
+            {
+                (sender as XtraReport).PrintingSystem.Document.AutoFitToPagesWidth = 1;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void ROL_021_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             try
             {
@@ -39,21 +54,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                 string TipoRubro = P_TipoRubro.Value == null ? "" : Convert.ToString(P_TipoRubro.Value);
 
                 ROL_021_Bus bus_rpt = new ROL_021_Bus();
-                List<ROL_021_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal,IdDivision,IdArea,TipoRubro);
+                List<ROL_021_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea, TipoRubro);
                 this.DataSource = lst_rpt;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        private void ROL_001_Rpt_AfterPrint(object sender, EventArgs e)
-        {
-            try
-            {
-                (sender as XtraReport).PrintingSystem.Document.AutoFitToPagesWidth = 1;
             }
             catch (Exception)
             {
