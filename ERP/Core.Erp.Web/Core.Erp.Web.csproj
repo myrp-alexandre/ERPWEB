@@ -1048,6 +1048,12 @@
     <Compile Include="Reportes\Produccion\PRO_001_Rpt.Designer.cs">
       <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_021_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_021_Rpt.Designer.cs">
+      <DependentUpon>ROL_021_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1161,12 +1167,6 @@
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_020_Rpt.Designer.cs">
       <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\RRHH\ROL_021_Rpt.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\RRHH\ROL_021_Rpt.Designer.cs">
-      <DependentUpon>ROL_021_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -9808,6 +9808,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -10087,6 +10088,9 @@
     <EmbeddedResource Include="Reportes\Produccion\PRO_001_Rpt.resx">
       <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_021_Rpt.resx">
+      <DependentUpon>ROL_021_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_001_Rpt.resx">
       <DependentUpon>ROL_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -10143,9 +10147,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_020_Rpt.resx">
       <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\RRHH\ROL_021_Rpt.resx">
-      <DependentUpon>ROL_021_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
