@@ -8585,11 +8585,11 @@
     <Content Include="Areas\Facturacion\Views\Cliente\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\Cliente\Index.cshtml" />
     <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente.cshtml" />
-    <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\CatalogoRRHH\Anular.cshtml" />
-    <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\CatalogoRRHH\Index.cshtml" />
-    <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\CatalogoRRHH\Modificar.cshtml" />
-    <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\CatalogoRRHH\Nuevo.cshtml" />
-    <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\CatalogoRRHH\_GridViewPartial_catalogos.cshtml" />
+    <Content Include="Areas\RRHH\Views\CatalogoRRHH\Anular.cshtml" />
+    <Content Include="Areas\RRHH\Views\CatalogoRRHH\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\CatalogoRRHH\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\CatalogoRRHH\Nuevo.cshtml" />
+    <Content Include="Areas\RRHH\Views\CatalogoRRHH\_GridViewPartial_catalogos.cshtml" />
     <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\Anular.cshtml" />
     <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\CatalogoTipoRRHH\Modificar.cshtml" />
