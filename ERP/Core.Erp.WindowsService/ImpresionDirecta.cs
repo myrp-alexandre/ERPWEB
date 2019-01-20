@@ -28,7 +28,7 @@ namespace Core.Erp.WindowsService
         {
             Timer aTimer = new System.Timers.Timer();
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            aTimer.Interval = TimeSpan.FromSeconds(5).TotalMilliseconds;
+            aTimer.Interval = TimeSpan.FromSeconds(3).TotalMilliseconds;
             aTimer.Enabled = true;
         }
 
