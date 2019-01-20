@@ -333,7 +333,6 @@
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.StylePriority.UseBorders = false;
             this.xrTableCell4.StylePriority.UseFont = false;
-            this.xrTableCell4.Text = "xrTableCell4";
             this.xrTableCell4.Weight = 0.424357024144577D;
             // 
             // xrTableRow2
