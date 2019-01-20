@@ -112,5 +112,7 @@ namespace Core.Erp.Info.Facturacion
         public bool EstadoBool { get; set; }
         public bool? esta_impresa { get; set; }
         public string vt_NumFactura { get; set; }
+        public string vt_autorizacion { get; set; }
+        public DateTime? Fecha_Autorizacion { get; set; }
     }
 }

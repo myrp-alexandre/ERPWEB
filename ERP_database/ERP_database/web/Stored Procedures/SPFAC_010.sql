@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [web].[SPFAC_010]
+﻿CREATE PROCEDURE [web].[SPFAC_010]
 (
 @IdEmpresa int,
 @IdSucursalIni int, 
@@ -18,7 +17,7 @@ FROM            fa_factura AS c INNER JOIN
                          tb_sucursal ON c.IdEmpresa = tb_sucursal.IdEmpresa AND c.IdSucursal = tb_sucursal.IdSucursal LEFT OUTER JOIN
                          fa_catalogo AS cat ON c.IdCatalogo_FormaPago = cat.IdCatalogo
 						 left join(
-							SELECT        IdEmpresa, IdSucursal, IdBodega, IdCbteVta, sum(SubtotalSinIVA) SubtotalSinIVA, sum(SubtotalIVA) SubtotalIVA, sum(vt_iva)vt_iva, sum(vt_total)vt_total
+							SELECT        IdEmpresa, IdSucursal, IdBodega, IdCbteVta, sum(SubtotalSinIVA) SubtotalSinIVA, round(sum(SubtotalIVA),2) SubtotalIVA, round(sum(vt_iva),2)vt_iva, round(sum(SubtotalIVA),2) + round(sum(vt_iva),2) vt_total
 							FROM            (SELECT        fa_factura.IdEmpresa, fa_factura.IdSucursal, fa_factura.IdBodega, fa_factura.IdCbteVta, CASE WHEN fa_factura_det.vt_por_iva = 0 THEN fa_factura_det.vt_Subtotal ELSE 0 END AS SubtotalSinIVA, 
 							CASE WHEN fa_factura_det.vt_por_iva > 0 THEN fa_factura_det.vt_Subtotal ELSE 0 END AS SubtotalIVA, fa_factura_det.vt_iva, fa_factura_det.vt_Subtotal + fa_factura_det.vt_iva AS vt_total
 							FROM            fa_factura INNER JOIN

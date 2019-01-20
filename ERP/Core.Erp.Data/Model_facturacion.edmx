@@ -1110,7 +1110,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_factura' no tiene definida ni
             <PropertyRef Name="IdBodega" />
             <PropertyRef Name="IdCbteVta" />
             <PropertyRef Name="vt_fecha" />
-            
+            <PropertyRef Name="Nombres" />
             <PropertyRef Name="Ve_Vendedor" />
             <PropertyRef Name="Estado" />
           </Key>
@@ -1132,6 +1132,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_factura' no tiene definida ni
           <Property Name="IdSucursal_in_eg_x_inv" Type="int" />
           <Property Name="IdMovi_inven_tipo_in_eg_x_inv" Type="int" />
           <Property Name="IdNumMovi_in_eg_x_inv" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fecha_Autorizacion" Type="datetime" />
+          <Property Name="vt_autorizacion" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.vwfa_factura_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -2393,7 +2395,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
     [vwfa_factura].[IdEmpresa_in_eg_x_inv] AS [IdEmpresa_in_eg_x_inv], 
     [vwfa_factura].[IdSucursal_in_eg_x_inv] AS [IdSucursal_in_eg_x_inv], 
     [vwfa_factura].[IdMovi_inven_tipo_in_eg_x_inv] AS [IdMovi_inven_tipo_in_eg_x_inv], 
-    [vwfa_factura].[IdNumMovi_in_eg_x_inv] AS [IdNumMovi_in_eg_x_inv]
+    [vwfa_factura].[IdNumMovi_in_eg_x_inv] AS [IdNumMovi_in_eg_x_inv], 
+    [vwfa_factura].[Fecha_Autorizacion] AS [Fecha_Autorizacion], 
+    [vwfa_factura].[vt_autorizacion] AS [vt_autorizacion]
     FROM [web].[vwfa_factura] AS [vwfa_factura]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_factura_det" EntityType="Self.vwfa_factura_det" store:Type="Views" store:Schema="web">
@@ -3689,7 +3693,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
             <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" EntitySet="fa_cliente_x_fa_Vendedor_x_sucursal" />
           </AssociationSet>
           <EntitySet Name="fa_parametro" EntityType="Model_facturacion.fa_parametro" />
-          <EntitySet Name="vwfa_factura" EntityType="Model_facturacion.vwfa_factura" />
           <EntitySet Name="fa_notaCreDeb_det" EntityType="Model_facturacion.fa_notaCreDeb_det" />
           <EntitySet Name="vwfa_notaCreDeb_det" EntityType="Model_facturacion.vwfa_notaCreDeb_det" />
           <AssociationSet Name="FK_fa_notaCreDeb_det_fa_notaCreDeb" Association="Model_facturacion.FK_fa_notaCreDeb_det_fa_notaCreDeb">
@@ -3857,6 +3860,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
             <Parameter Name="IdBodega" Mode="In" Type="Int32" />
             <Parameter Name="IdCbteVta" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <EntitySet Name="vwfa_factura" EntityType="Model_facturacion.vwfa_factura" />
           </EntityContainer>
         <EntityType Name="vwfa_factura_det">
           <Key>
@@ -4035,35 +4039,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
           <Property Name="NumeroDeItemProforma" Type="Int32" Nullable="false" />
           <Property Name="clave_desbloqueo_precios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="vwfa_factura">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdCbteVta" />
-            <PropertyRef Name="vt_fecha" />
-            <PropertyRef Name="Ve_Vendedor" />
-            <PropertyRef Name="Estado" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Nombres" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="vt_Subtotal0" Type="Double" />
-          <Property Name="vt_SubtotalIVA" Type="Double" />
-          <Property Name="vt_iva" Type="Double" />
-          <Property Name="vt_total" Type="Double" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="esta_impresa" Type="Boolean" />
-          <Property Name="IdEmpresa_in_eg_x_inv" Type="Int32" />
-          <Property Name="IdSucursal_in_eg_x_inv" Type="Int32" />
-          <Property Name="IdMovi_inven_tipo_in_eg_x_inv" Type="Int32" />
-          <Property Name="IdNumMovi_in_eg_x_inv" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="fa_notaCreDeb_det">
           <Key>
@@ -5198,6 +5173,38 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwfa_factura">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="Ve_Vendedor" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="vt_Subtotal0" Type="Double" />
+          <Property Name="vt_SubtotalIVA" Type="Double" />
+          <Property Name="vt_iva" Type="Double" />
+          <Property Name="vt_total" Type="Double" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="esta_impresa" Type="Boolean" />
+          <Property Name="IdEmpresa_in_eg_x_inv" Type="Int32" />
+          <Property Name="IdSucursal_in_eg_x_inv" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_in_eg_x_inv" Type="Int32" />
+          <Property Name="IdNumMovi_in_eg_x_inv" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
+          <Property Name="vt_autorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5864,30 +5871,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwfa_factura">
-            <EntityTypeMapping TypeName="Model_facturacion.vwfa_factura">
-              <MappingFragment StoreEntitySet="vwfa_factura">
-                <ScalarProperty Name="IdNumMovi_in_eg_x_inv" ColumnName="IdNumMovi_in_eg_x_inv" />
-                <ScalarProperty Name="IdMovi_inven_tipo_in_eg_x_inv" ColumnName="IdMovi_inven_tipo_in_eg_x_inv" />
-                <ScalarProperty Name="IdSucursal_in_eg_x_inv" ColumnName="IdSucursal_in_eg_x_inv" />
-                <ScalarProperty Name="IdEmpresa_in_eg_x_inv" ColumnName="IdEmpresa_in_eg_x_inv" />
-                <ScalarProperty Name="esta_impresa" ColumnName="esta_impresa" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="vt_total" ColumnName="vt_total" />
-                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
-                <ScalarProperty Name="vt_SubtotalIVA" ColumnName="vt_SubtotalIVA" />
-                <ScalarProperty Name="vt_Subtotal0" ColumnName="vt_Subtotal0" />
-                <ScalarProperty Name="Ve_Vendedor" ColumnName="Ve_Vendedor" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
-                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="fa_notaCreDeb_det">
             <EntityTypeMapping TypeName="Model_facturacion.fa_notaCreDeb_det">
               <MappingFragment StoreEntitySet="fa_notaCreDeb_det">
@@ -6355,6 +6338,32 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SPFAC_EliminarCobroEfectivo" FunctionName="Model_facturacion.Store.SPFAC_EliminarCobroEfectivo" />
+          <EntitySetMapping Name="vwfa_factura">
+            <EntityTypeMapping TypeName="Model_facturacion.vwfa_factura">
+              <MappingFragment StoreEntitySet="vwfa_factura">
+                <ScalarProperty Name="vt_autorizacion" ColumnName="vt_autorizacion" />
+                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
+                <ScalarProperty Name="IdNumMovi_in_eg_x_inv" ColumnName="IdNumMovi_in_eg_x_inv" />
+                <ScalarProperty Name="IdMovi_inven_tipo_in_eg_x_inv" ColumnName="IdMovi_inven_tipo_in_eg_x_inv" />
+                <ScalarProperty Name="IdSucursal_in_eg_x_inv" ColumnName="IdSucursal_in_eg_x_inv" />
+                <ScalarProperty Name="IdEmpresa_in_eg_x_inv" ColumnName="IdEmpresa_in_eg_x_inv" />
+                <ScalarProperty Name="esta_impresa" ColumnName="esta_impresa" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="vt_total" ColumnName="vt_total" />
+                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
+                <ScalarProperty Name="vt_SubtotalIVA" ColumnName="vt_SubtotalIVA" />
+                <ScalarProperty Name="vt_Subtotal0" ColumnName="vt_Subtotal0" />
+                <ScalarProperty Name="Ve_Vendedor" ColumnName="Ve_Vendedor" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
