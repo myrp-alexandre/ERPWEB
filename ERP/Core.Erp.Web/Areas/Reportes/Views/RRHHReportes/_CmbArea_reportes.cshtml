@@ -17,10 +17,9 @@
         settings.Properties.Columns.Add("Descripcion", "Descripcion", 90);
         settings.Properties.FilterMinLength = 3;
         settings.Properties.FilterMinLength = 3;
-        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdDivision'] =  IdDivision.GetValue(); }";
 
     })
-     .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoController().get_list_bajo_demanda_area, new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoController().get_info_bajo_demanda_area)
-    .Bind((Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_Info) || Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_area_Info) ) ? "" : Model);
+     .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.RRHHReportesController().get_list_bajo_demanda_area, new Core.Erp.Web.Areas.Reportes.Controllers.RRHHReportesController().get_info_bajo_demanda_area)
+    .Bind((Model.GetType() == typeof(Core.Erp.Info.Helps.cl_filtros_Info) || Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_area_Info) ) ? "" : Model);
     }
 @comboBox.GetHtml()

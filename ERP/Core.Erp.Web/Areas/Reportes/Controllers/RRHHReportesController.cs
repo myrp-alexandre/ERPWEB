@@ -47,7 +47,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         public ActionResult CmbRubro_roles()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_Info model =new cl_filtros_Info();
             return PartialView("_CmbRubro_roles", model);
         }
         public List<ro_rubro_tipo_Info> get_list_bajo_demanda_rubro(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -82,16 +82,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult CmbArea_reportes()
         {
             SessionFixed.IdDivision = Request.Params["IdDivision"] != null ? Request.Params["IdDivision"].ToString() : SessionFixed.IdDivision;
-            ro_empleado_Info model = new ro_empleado_Info();
+            int model = new int();
             return PartialView("_CmbArea_reportes", model);
         }
         public List<ro_area_Info> get_list_bajo_demanda_area(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false, Convert.ToInt32(SessionFixed.IdDivision));
+            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false, 1);
         }
         public ro_area_Info get_info_bajo_demanda_area(ListEditItemRequestedByValueEventArgs args)
         {
-            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdDivision));
+            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), 1);
         }
         #endregion
 
