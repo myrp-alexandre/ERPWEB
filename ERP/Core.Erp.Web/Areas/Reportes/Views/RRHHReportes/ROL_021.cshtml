@@ -36,21 +36,21 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdRubro">Sucursal</label>
-                            @Html.Partial("_CmbSucursal_reportes_RRHH", Model.IdEmpleado)
+                            @Html.Partial("_CmbSucursal_reportes_RRHH", Model.IdSucursal)
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdRubro">Division</label>
-                            @Html.Partial("_CmbDivision_reportes", Model)
-                            @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
+                            @Html.Partial("_CmbDivisin_reportes", Model)
+                            @Html.ValidationMessageFor(q => q.IdDivision, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdRubro">Area</label>
                             @Html.Partial("_CmbArea_roles", Model)
-                            @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdArea, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -149,7 +149,8 @@
     });
 
 
-            function cargar_tipo_liquidacion_nomina() {
+    function cargar_tipo_liquidacion_nomina() {
+        $("#IdNomina_TipoLiqui").empty();
                 var datos = {
                     IdNomina: $("#IdNomina_Tipo").val()
                 }

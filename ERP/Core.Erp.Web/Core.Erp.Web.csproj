@@ -9689,7 +9689,7 @@
     <Content Include="Areas\RRHH\Views\ImportacionHoras\_CmbEmpleado_imp_horas.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_021.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbArea_reportes.cshtml" />
-    <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbDivisin_reportes.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbDivision_reportes.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbSucursal_reportes_RRHH.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
