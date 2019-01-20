@@ -17,6 +17,7 @@
         settings.Properties.Columns.Add("Descripcion", "Descripcion", 90);
         settings.Properties.FilterMinLength = 3;
         settings.Properties.FilterMinLength = 3;
+        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdDivision'] =  IdDivision.GetValue(); }";
 
     })
      .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoController().get_list_bajo_demanda_area, new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoController().get_info_bajo_demanda_area)

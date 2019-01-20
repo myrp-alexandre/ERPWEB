@@ -9670,7 +9670,6 @@
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\_CmbTipoFlujo.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Modificar.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Anular.cshtml" />
-    <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbArea_roles.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\_CmbFlujo_Tipo.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_CmbFlujo_NotaCredito.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_GridViewPartial_flujo_det.cshtml" />

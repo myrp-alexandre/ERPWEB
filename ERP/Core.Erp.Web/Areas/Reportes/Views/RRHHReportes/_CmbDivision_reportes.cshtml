@@ -16,6 +16,7 @@
         settings.Properties.Columns.Add("IdDivision", "ID", 10);
         settings.Properties.Columns.Add("Descripcion", "Descripción", 90);
         settings.Properties.FilterMinLength = 3;
+
     })
       .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.RRHHReportesController().get_list_bajo_demanda_division, new Core.Erp.Web.Areas.Reportes.Controllers.RRHHReportesController().get_info_bajo_demanda_division)
     .Bind(Model.GetType() == typeof(Core.Erp.Info.Helps.cl_filtros_Info) ? "" : (Model == 0 ? "" : Model));
