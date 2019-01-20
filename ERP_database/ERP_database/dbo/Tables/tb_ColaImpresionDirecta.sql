@@ -3,8 +3,8 @@
     [IdImpresion]    NUMERIC (18)   NOT NULL,
     [CodReporte]     VARCHAR (50)   NOT NULL,
     [IPUsuario]      VARCHAR (1000) NOT NULL,
-    [IPImpresora]    VARCHAR (1000) NOT NULL,
-    [Parametros]     VARCHAR (1000) NOT NULL,
+    [IPImpresora]    VARCHAR (1000) NULL,
+    [Parametros]     VARCHAR (1000) NULL,
     [Usuario]        VARCHAR (1000) NULL,
     [NombreEmpresa]  VARCHAR (1000) NULL,
     [FechaEnvio]     DATETIME       NOT NULL,
@@ -12,4 +12,6 @@
     [Comentario]     VARCHAR (MAX)  NULL,
     CONSTRAINT [PK_tb_ColaImpresionDirecta] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdImpresion] ASC)
 );
+
+
 
