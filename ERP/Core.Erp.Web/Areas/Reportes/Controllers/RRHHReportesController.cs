@@ -540,18 +540,22 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return PartialView("_PivotGridROL_019", lista);
         }
 
-        public ActionResult ROL_021(int IdEmpresa=0, int IdSucursal = 0, int IdNomina = 0, int IdNominaTipo = 0, int IdPeriodo = 0, int IdDivision=0, int IdArea=0)
+        public ActionResult ROL_021(int IdEmpresa=0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0,  int IdPeriodo = 0, int IdSucursal=0)
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal=IdSucursal,
-                IdNomina=IdNomina, IdTipoNomina=IdNominaTipo,
+                IdNomina=IdNomina_Tipo,
+                IdTipoNomina =IdNomina_TipoLiqui,
                 IdPeriodo=IdPeriodo,
-                IdArea=IdArea,
-                IdDivision=IdDivision
             };
             ROL_021_Rpt report = new ROL_021_Rpt();
+            report.p_IdEmpresa.Value = IdEmpresa;
+            report.p_IdNomina.Value = IdNomina_Tipo;
+            report.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
+            report.p_IdPeriodo.Value = IdPeriodo;
+            report.p_IdSucursal.Value = IdSucursal;
             cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
             ViewBag.Report = report;
             return View(model);
@@ -560,7 +564,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult ROL_021(cl_filtros_Info model)
         {
             ROL_021_Rpt report = new ROL_021_Rpt();
+
             cargar_combos(model.IdEmpresa);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdNomina.Value = model.IdNomina;
+            report.p_IdNominaTipo.Value = model.IdTipoNomina;
+            report.p_IdPeriodo.Value = model.IdPeriodo;
+            report.p_IdSucursal.Value = model.IdSucursal;
             ViewBag.Report = report;
             return View(model);
         }
