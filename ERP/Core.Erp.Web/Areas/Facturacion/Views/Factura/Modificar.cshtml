@@ -15,7 +15,7 @@
         var win = window.open(window.location.origin +"/FixedERP/Reportes/FacturacionReportes/FAC_007?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
         win.focus();
     }
-    
+
 
     function AutorizarSRI() {
         var datos = {
@@ -40,8 +40,8 @@
             }
         });
     }
-
-    function Imprimir() {
+    @*
+        function Imprimir() {
 
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -75,7 +75,31 @@
             }
         });
     }
+    *@
+    function Imprimir() {
 
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
+            IdBodega: $("#IdBodega").val(),
+            IdCbteVta: $("#IdCbteVta").val(),
+            IdPuntoVta: $("#IdPuntoVta").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ImpresionRapida", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                alert("Impresión enviada exitósamente");
+            },
+            error: function (error) {
+            }
+        });
+    }
+    
     function CrearModificarCliente() {
         if(IdCliente.GetValue() > 0)
         {

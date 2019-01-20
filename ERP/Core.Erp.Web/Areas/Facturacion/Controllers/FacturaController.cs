@@ -338,20 +338,38 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
         {
             string mensaje = string.Empty;
             string mensaje_cupo = string.Empty;
-            /*
-            if (IdCliente != 0)
-            {
-                bus_factura.ValidarCarteraVencida(IdEmpresa, IdCliente, ref mensaje);
-
-                bus_cliente.ValidarCupoCreditoCliente(IdEmpresa, 0, 0, 0, "FACT", IdCliente, List_det.get_list(IdTransaccionSession).Sum(q => q.vt_total), ref mensaje_cupo);
-            }            
-            */
             if (string.IsNullOrEmpty(mensaje))
                 mensaje = mensaje_cupo;
             else
                 mensaje += !string.IsNullOrEmpty(mensaje_cupo) ? (", Además " + mensaje_cupo) : "";
 
             return Json(mensaje, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ImpresionRapida(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, int IdPuntoVta = 0)
+        {
+            string reporte = string.Empty;
+            tb_ColaImpresionDirecta_Bus bus_ColaImpresion = new tb_ColaImpresionDirecta_Bus();
+            seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
+            var usuario = bus_usuario.get_info(SessionFixed.IdUsuario);
+
+            var pto_vta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+            if (pto_vta != null)
+            {
+                bus_ColaImpresion.GuardarDB(new tb_ColaImpresionDirecta_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    CodReporte = pto_vta.IPImpresora,
+                    IPImpresora = usuario.IPImpresora,
+                    IPUsuario = usuario.IPMaquina,
+                    NombreEmpresa = SessionFixed.NomEmpresa,
+                    Usuario = SessionFixed.IdUsuario,
+                    //Nunca enviar IdEmpresa en Parametros
+                    Parametros = IdSucursal + "," + IdBodega + "," + IdCbteVta
+                });
+            }
+            
+            return Json(reporte, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Imprimir(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, int IdPuntoVta = 0)
