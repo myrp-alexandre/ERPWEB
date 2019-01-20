@@ -31,30 +31,25 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="IdRubro">Nomina</label>
-                            @Html.Partial("_CmbArea_roles", Model.IdArea)
-                        </div>
-                    </div>
+                    
 
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdRubro">Sucursal</label>
-                            @Html.Partial("_CmbEmpleado_RRHH", Model.IdEmpleado)
+                            @Html.Partial("_CmbSucursal_reportes_RRHH", Model.IdEmpleado)
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdRubro">Division</label>
-                            @Html.Partial("_CmbRubro_roles", Model)
+                            @Html.Partial("_CmbDivision_reportes", Model)
                             @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdRubro">Area</label>
-                            @Html.Partial("_CmbRubro_roles", Model)
+                            @Html.Partial("_CmbArea_roles", Model)
                             @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
                         </div>
                     </div>

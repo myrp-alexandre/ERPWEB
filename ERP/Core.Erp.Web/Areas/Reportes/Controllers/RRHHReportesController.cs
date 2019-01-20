@@ -19,7 +19,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
     [SessionTimeout]
     public class RRHHReportesController : Controller
     {
-        #region Metodos ComboBox bajo demanda
+        ro_division_Bus bus_division = new ro_division_Bus();
+        ro_area_Bus bus_area = new ro_area_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        #region Metodos ComboBox bajo demanda empleado
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult CmbEmpleado_RRHH()
         {
@@ -40,7 +43,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
         #region Metodos ComboBox bajo rubros
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
-        ro_area_Bus bus_area = new ro_area_Bus();
         public ActionResult CmbRubro_roles()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -55,21 +57,60 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return bus_rubro.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa),args);
         }
 
-        public ActionResult CmbArea_roles()
+        #endregion
+
+        #region metodo bajo demanda Division
+        public ActionResult CmbDivision_reportes()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
-            return PartialView("_CmbArea_roles", model);
+            ro_empleado_Info model = new ro_empleado_Info();
+            return PartialView("_CmbDivision_reportes", model);
+        }
+        public List<ro_division_Info> get_list_bajo_demanda_division(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_division.get_list_bajo_demanda_division(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ro_division_Info get_info_bajo_demanda_division(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_division.get_info_bajo_demanda_division(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
+
+        #region metodo bajo demanda Area
+        public ActionResult CmbArea()
+        {
+            SessionFixed.IdDivision = Request.Params["IdDivision"] != null ? Request.Params["IdDivision"].ToString() : SessionFixed.IdDivision;
+            ro_empleado_Info model = new ro_empleado_Info();
+            return PartialView("_CmbArea", model);
         }
         public List<ro_area_Info> get_list_bajo_demanda_area(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa),false,1);
+            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false, Convert.ToInt32(SessionFixed.IdDivision));
         }
         public ro_area_Info get_info_bajo_demanda_area(ListEditItemRequestedByValueEventArgs args)
         {
-            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa),1);
+            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdDivision));
         }
-
         #endregion
+
+
+        #region metodo bajo demanda sucursal
+        public ActionResult CmbSucursalReportes_RRHH()
+        {
+            SessionFixed.IdDivision = Request.Params["IdDivision"] != null ? Request.Params["IdDivision"].ToString() : SessionFixed.IdDivision;
+            ro_empleado_Info model = new ro_empleado_Info();
+            return PartialView("_CmbSucursalReportes_RRHH", model);
+        }
+        public List<tb_sucursal_Info> get_list_bajo_demanda_sucursal(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_sucursal.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public tb_sucursal_Info get_info_bajo_demanda_sucursal(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_sucursal.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa),args);
+        }
+        #endregion
+
         public ActionResult ROL_001(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0, int IdSucursal=0)
         {
             ROL_001_Rpt model = new ROL_001_Rpt();
