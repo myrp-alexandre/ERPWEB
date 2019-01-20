@@ -157,7 +157,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     if (tipo_cobro == null)
                         return false;
 
-                    
+
                     if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
                     {
                         var caja = Context_caj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == info.IdCaja).FirstOrDefault();
@@ -168,14 +168,11 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     else
                         if (tipo_cobro.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.TIP_COBRO.ToString())
                     {
-                        if (info.IdCobro_tipo == null)
+                        foreach (var item in info.lst_det)
                         {
-                            foreach (var item in info.lst_det)
-                            {
-                                var cta_x_tipo = Context_cxc.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdCobro_tipo == item.IdCobro_tipo_det && q.IdSucursal == item.IdSucursal).FirstOrDefault();
-                                if (cta_x_tipo != null)
-                                    item.IdCtaCble = cta_x_tipo.IdCtaCble;
-                            }
+                            var cta_x_tipo = Context_cxc.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdCobro_tipo == item.IdCobro_tipo_det && q.IdSucursal == item.IdSucursal).FirstOrDefault();
+                            if (cta_x_tipo != null)
+                                item.IdCtaCble = cta_x_tipo.IdCtaCble;
                         }
                     }
                 }

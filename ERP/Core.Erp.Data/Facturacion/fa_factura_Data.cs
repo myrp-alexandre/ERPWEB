@@ -57,6 +57,9 @@ namespace Core.Erp.Data.Facturacion
                                  IdMovi_inven_tipo_in_eg_x_inv = q.IdMovi_inven_tipo_in_eg_x_inv,
                                  IdNumMovi_in_eg_x_inv = q.IdNumMovi_in_eg_x_inv,
 
+                                 vt_autorizacion = q.vt_autorizacion,
+                                 Fecha_Autorizacion = q.Fecha_Autorizacion,
+
                                  EstadoBool = q.Estado == "A" ? true : false
 
                              }).ToList();
@@ -389,7 +392,7 @@ namespace Core.Erp.Data.Facturacion
                 #endregion
 
                 #region Cobranza
-                if (info.IdCatalogo_FormaPago == "EFEC")
+                if (info.IdCatalogo_FormaPago != "CRED")
                 {
                     var cobro = GenerarCobroEfectivo(info);
                     if (odata_cxc.guardarDB(cobro))
@@ -930,7 +933,7 @@ namespace Core.Erp.Data.Facturacion
 
                 #region Cobranza
                 db_f.SPFAC_EliminarCobroEfectivo(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdCbteVta);
-                if (info.IdCatalogo_FormaPago == "EFEC")
+                if (info.IdCatalogo_FormaPago != "CRED")
                 {
                     var cobro = GenerarCobroEfectivo(info);
                     if (odata_cxc.guardarDB(cobro))
@@ -1178,7 +1181,7 @@ namespace Core.Erp.Data.Facturacion
                     IdEmpresa = fac.IdEmpresa,
                     IdSucursal = fac.IdSucursal,
                     IdCobro = 0,
-                    IdCobro_tipo = "EFEC",
+                    IdCobro_tipo = fac.IdCatalogo_FormaPago == "EFEC" ? "EFEC" : "TARJ",
                     IdCliente = fac.IdCliente,
                     cr_TotalCobro = Math.Round(fac.lst_det.Sum(q => q.vt_Subtotal + q.vt_iva), 2, MidpointRounding.AwayFromZero),
                     cr_fecha = fac.vt_fecha,
@@ -1197,7 +1200,7 @@ namespace Core.Erp.Data.Facturacion
                     IdCbte_vta_nota = fac.IdCbteVta,
                     dc_ValorPago = cobro.cr_TotalCobro,
                     estado = "A",
-                    IdCobro_tipo_det = "EFEC",
+                    IdCobro_tipo_det = fac.IdCatalogo_FormaPago == "EFEC" ? "EFEC" : "TARJ",
                     secuencial = 1,
                     dc_TipoDocumento = fac.vt_tipoDoc
                 });
