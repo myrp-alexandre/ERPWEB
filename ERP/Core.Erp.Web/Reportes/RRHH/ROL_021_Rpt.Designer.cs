@@ -80,6 +80,7 @@
             this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField3 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField21 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField22 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField23 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
@@ -106,7 +107,9 @@
             this.p_IdNominaTipo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdPeriodo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
-            this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.P_IdArea = new DevExpress.XtraReports.Parameters.Parameter();
+            this.P_IdDivision = new DevExpress.XtraReports.Parameters.Parameter();
+            this.P_TipoRubro = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -583,6 +586,14 @@
             this.pivotGridField3.Name = "pivotGridField3";
             this.pivotGridField3.Width = 75;
             // 
+            // pivotGridField4
+            // 
+            this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
+            this.pivotGridField4.AreaIndex = 0;
+            this.pivotGridField4.Caption = "Tipo";
+            this.pivotGridField4.FieldName = "ca_descripcion";
+            this.pivotGridField4.Name = "pivotGridField4";
+            // 
             // xrPivotGridField21
             // 
             this.xrPivotGridField21.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
@@ -775,13 +786,24 @@
             this.p_IdSucursal.ValueInfo = "0";
             this.p_IdSucursal.Visible = false;
             // 
-            // pivotGridField4
+            // P_IdArea
             // 
-            this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
-            this.pivotGridField4.AreaIndex = 0;
-            this.pivotGridField4.Caption = "Tipo";
-            this.pivotGridField4.FieldName = "ca_descripcion";
-            this.pivotGridField4.Name = "pivotGridField4";
+            this.P_IdArea.Name = "P_IdArea";
+            this.P_IdArea.Type = typeof(int);
+            this.P_IdArea.ValueInfo = "0";
+            this.P_IdArea.Visible = false;
+            // 
+            // P_IdDivision
+            // 
+            this.P_IdDivision.Name = "P_IdDivision";
+            this.P_IdDivision.Type = typeof(int);
+            this.P_IdDivision.ValueInfo = "0";
+            this.P_IdDivision.Visible = false;
+            // 
+            // P_TipoRubro
+            // 
+            this.P_TipoRubro.Name = "P_TipoRubro";
+            this.P_TipoRubro.Visible = false;
             // 
             // ROL_021_Rpt
             // 
@@ -805,7 +827,10 @@
             this.p_IdNomina,
             this.p_IdNominaTipo,
             this.p_IdPeriodo,
-            this.p_IdSucursal});
+            this.p_IdSucursal,
+            this.P_IdArea,
+            this.P_IdDivision,
+            this.P_TipoRubro});
             this.Version = "17.2";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
@@ -893,5 +918,8 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdPeriodo;
         public DevExpress.XtraReports.Parameters.Parameter p_IdSucursal;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField4;
+        public DevExpress.XtraReports.Parameters.Parameter P_IdArea;
+        public DevExpress.XtraReports.Parameters.Parameter P_IdDivision;
+        public DevExpress.XtraReports.Parameters.Parameter P_TipoRubro;
     }
 }

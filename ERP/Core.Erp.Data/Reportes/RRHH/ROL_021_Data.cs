@@ -9,8 +9,8 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
    public class ROL_021_Data
     {
-        public List<ROL_021_Info> get_list(int IdEmpresa, int IdNomina, int IdSucursal, int IdArea, 
-            int IdDivision,int IdNominaTipo, int IdPeriodo, string tipoRubro)
+        public List<ROL_021_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo, 
+            int IdSucursal,int IdDivision, int IdArea, string tipoRubro)
         {
             try
             {

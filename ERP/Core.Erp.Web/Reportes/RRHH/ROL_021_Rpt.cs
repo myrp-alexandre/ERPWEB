@@ -34,9 +34,12 @@ namespace Core.Erp.Web.Reportes.RRHH
                 int IdNominaTipo = p_IdNominaTipo.Value == null ? 0 : Convert.ToInt32(p_IdNominaTipo.Value);
                 int IdPeriodo = p_IdPeriodo.Value == null ? 0 : Convert.ToInt32(p_IdPeriodo.Value);
                 int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
+                int IdDivision = P_IdDivision.Value == null ? 0 : Convert.ToInt32(P_IdDivision.Value);
+                int IdArea = P_IdArea.Value == null ? 0 : Convert.ToInt32(P_IdArea.Value);
+                string TipoRubro = P_TipoRubro.Value == null ? "" : Convert.ToString(P_TipoRubro.Value);
 
-                ROL_001_Bus bus_rpt = new ROL_001_Bus();
-                List<ROL_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
+                ROL_021_Bus bus_rpt = new ROL_021_Bus();
+                List<ROL_021_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal,IdDivision,IdArea,TipoRubro);
                 this.DataSource = lst_rpt;
             }
             catch (Exception)
