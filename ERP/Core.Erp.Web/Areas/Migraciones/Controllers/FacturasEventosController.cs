@@ -70,7 +70,7 @@ namespace Core.Erp.Web.Areas.Migraciones.Controllers
 
     public class FacturasEventos_Info_list
     {
-        string Variable = "tb_comprobantes_sin_autorizacion_List";
+        string Variable = "FacturasEventos_Info";
         public List<FacturasEventos_Info> get_list()
         {
             if (HttpContext.Current.Session[Variable] == null)
