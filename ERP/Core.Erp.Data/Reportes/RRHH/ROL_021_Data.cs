@@ -40,6 +40,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui==IdNominaTipo
+                                 && q.ru_tipo=="E"
                                  select new ROL_021_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -59,14 +60,11 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      ru_tipo=q.ru_tipo,
                                      rub_codigo=q.rub_codigo,
                                      ru_codRolGen=q.ru_codRolGen,
-                                     NumHoras=q.NumHoras,
-                                     ValorHora=q.ValorHora,
                                      ca_descripcion = q.ca_descripcion,
                                      em_codigo=q.em_codigo,
                                      IdEmpleado=q.IdEmpleado,
                                      pe_cedulaRuc=q.pe_cedulaRuc,
                                      pe_nombreCompleto=q.pe_nombreCompleto,
-                                     Rub_horas=q.Rub_horas,
                                      IdArea=q.IdArea,
                                      IdDivision=q.IdDivision
 

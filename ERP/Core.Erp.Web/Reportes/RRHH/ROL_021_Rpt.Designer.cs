@@ -75,7 +75,6 @@
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
-            this.xrPivotGridField43 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField44 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
@@ -514,7 +513,6 @@
             this.xrPivotGrid1.Appearance.Lines.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.xrPivotGrid1.Appearance.TotalCell.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold);
             this.xrPivotGrid1.Fields.AddRange(new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField[] {
-            this.xrPivotGridField43,
             this.xrPivotGridField44,
             this.pivotGridField1,
             this.pivotGridField2,
@@ -523,7 +521,6 @@
             this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
-            this.xrPivotGrid1.OptionsPrint.MergeColumnFieldValues = false;
             this.xrPivotGrid1.OptionsPrint.MergeRowFieldValues = false;
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.True;
             this.xrPivotGrid1.OptionsView.RowTotalsLocation = DevExpress.XtraPivotGrid.PivotRowTotalsLocation.Tree;
@@ -537,20 +534,12 @@
             this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(397.2917F, 81.25F);
             // 
-            // xrPivotGridField43
-            // 
-            this.xrPivotGridField43.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.xrPivotGridField43.AreaIndex = 1;
-            this.xrPivotGridField43.Caption = ".";
-            this.xrPivotGridField43.FieldName = "de_descripcion";
-            this.xrPivotGridField43.Name = "xrPivotGridField43";
-            // 
             // xrPivotGridField44
             // 
             this.xrPivotGridField44.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.xrPivotGridField44.AreaIndex = 0;
             this.xrPivotGridField44.Caption = "Empleado";
-            this.xrPivotGridField44.FieldName = "Empleado";
+            this.xrPivotGridField44.FieldName = "pe_nombreCompleto";
             this.xrPivotGridField44.MinWidth = 30;
             this.xrPivotGridField44.Name = "xrPivotGridField44";
             this.xrPivotGridField44.Width = 120;
@@ -582,7 +571,7 @@
             this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField3.AreaIndex = 2;
             this.pivotGridField3.Caption = "Rubros";
-            this.pivotGridField3.FieldName = "ru_codRolGen";
+            this.pivotGridField3.FieldName = "ru_descripcion";
             this.pivotGridField3.Name = "pivotGridField3";
             this.pivotGridField3.Width = 75;
             // 
@@ -907,7 +896,6 @@
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField34;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField35;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField36;
-        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField43;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField44;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell2;

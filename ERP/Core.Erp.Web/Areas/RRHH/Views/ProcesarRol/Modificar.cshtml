@@ -10,7 +10,7 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "ProcesarRol", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa);
+    @Html.HiddenFor(q => q.IdEmpresa, new { @IdEmpresa="IdEmpresa"});
     @Html.HiddenFor(q => q.IdRol);
 
     <div class="row">
@@ -115,6 +115,10 @@
 
 
 <script>
+    $(function () {
+        cargar_periodos_x_nomina();
+
+    });
 
 
     $("#IdNomina_Tipo").change(function () {
@@ -157,6 +161,7 @@
 
     function cargar_periodos_x_nomina() {
         var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
             IdNomina: $("#IdNomina_Tipo").val(),
             IdNomina_Tipo: $("#IdNomina_TipoLiqui").val()
         }

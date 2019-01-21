@@ -71,7 +71,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdNomina_TipoLiqui">Tipo liquidación de nómina*</label>
-                            @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
+                            @Html.DropDownListFor(q => q.IdTipoNomina, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                             @Html.ValidationMessageFor(q => q.IdTipoNomina, "", new { @class = "text-danger" })
                         </div>
                     </div>
