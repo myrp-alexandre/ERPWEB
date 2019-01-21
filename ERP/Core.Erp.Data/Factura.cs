@@ -38,5 +38,6 @@ namespace Core.Erp.Data
         public Nullable<int> lote { get; set; }
         public string recibos { get; set; }
         public Nullable<bool> aprobada_enviar_sri { get; set; }
+        public string estado_aprobacion { get; set; }
     }
 }

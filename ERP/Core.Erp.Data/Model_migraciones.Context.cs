@@ -12,7 +12,9 @@ namespace Core.Erp.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
+
     public partial class Entity_Eventos : DbContext
     {
         public Entity_Eventos()

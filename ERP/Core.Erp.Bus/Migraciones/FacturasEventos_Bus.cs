@@ -1,4 +1,5 @@
-﻿using Core.Erp.Info.Migraciones;
+﻿using Core.Erp.Data.Migraciones;
+using Core.Erp.Info.Migraciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,26 @@ namespace Core.Erp.Bus.Migraciones
 {
    public class FacturasEventos_Bus
     {
-
-        public List<FacturasEventos_Info> get_list()
+        FacturasEventos_Data odata = new FacturasEventos_Data();
+        public List<FacturasEventos_Info> get_list(DateTime FechaInicio, DateTime FechaFin)
         {
             try
             {
-                return new List<FacturasEventos_Info>();
+                return odata.get_lis(FechaInicio, FechaFin);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public bool ModificarEstado_aprobacion(FacturasEventos_Info info)
+        {
+            try
+            {
+                return odata.ModificarEstado_aprobacion(info);
             }
             catch (Exception)
             {

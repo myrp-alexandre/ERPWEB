@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Entity_evento.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Entity_evento.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Facturas">
           <Key>
             <PropertyRef Name="cod_fact" />
@@ -34,15 +34,18 @@
           <Property Name="lote" Type="int" />
           <Property Name="recibos" Type="varchar" MaxLength="50" />
           <Property Name="aprobada_enviar_sri" Type="bit" />
+          <Property Name="estado_aprobacion" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityContainer Name="Entity_eventoStoreContainer">
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Entity_evento" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entity_Eventos" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Facturas" EntityType="Entity_evento.Factura" />
+        </EntityContainer>
         <EntityType Name="Factura">
           <Key>
             <PropertyRef Name="cod_fact" />
@@ -72,10 +75,8 @@
           <Property Name="lote" Type="Int32" />
           <Property Name="recibos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="aprobada_enviar_sri" Type="Boolean" />
+          <Property Name="estado_aprobacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="Entity_Eventos" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Facturas" EntityType="Self.Factura" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -85,30 +86,31 @@
           <EntitySetMapping Name="Facturas">
             <EntityTypeMapping TypeName="Entity_evento.Factura">
               <MappingFragment StoreEntitySet="Facturas">
-                <ScalarProperty Name="cod_fact" ColumnName="cod_fact" />
-                <ScalarProperty Name="cod_evento" ColumnName="cod_evento" />
-                <ScalarProperty Name="nu_ced_ruc" ColumnName="nu_ced_ruc" />
-                <ScalarProperty Name="nu_ced_clte" ColumnName="nu_ced_clte" />
-                <ScalarProperty Name="nombres" ColumnName="nombres" />
-                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
-                <ScalarProperty Name="direccion" ColumnName="direccion" />
-                <ScalarProperty Name="telef" ColumnName="telef" />
-                <ScalarProperty Name="cant" ColumnName="cant" />
-                <ScalarProperty Name="v_unit" ColumnName="v_unit" />
-                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
-                <ScalarProperty Name="v_iva" ColumnName="v_iva" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="tipo_pago" ColumnName="tipo_pago" />
-                <ScalarProperty Name="observacion" ColumnName="observacion" />
-                <ScalarProperty Name="bd_est" ColumnName="bd_est" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="usuario" ColumnName="usuario" />
-                <ScalarProperty Name="lider" ColumnName="lider" />
-                <ScalarProperty Name="co_tarjeta" ColumnName="co_tarjeta" />
-                <ScalarProperty Name="ref" ColumnName="ref" />
-                <ScalarProperty Name="lote" ColumnName="lote" />
-                <ScalarProperty Name="recibos" ColumnName="recibos" />
+                <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
                 <ScalarProperty Name="aprobada_enviar_sri" ColumnName="aprobada_enviar_sri" />
+                <ScalarProperty Name="recibos" ColumnName="recibos" />
+                <ScalarProperty Name="lote" ColumnName="lote" />
+                <ScalarProperty Name="ref" ColumnName="ref" />
+                <ScalarProperty Name="co_tarjeta" ColumnName="co_tarjeta" />
+                <ScalarProperty Name="lider" ColumnName="lider" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="bd_est" ColumnName="bd_est" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="tipo_pago" ColumnName="tipo_pago" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="v_iva" ColumnName="v_iva" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="v_unit" ColumnName="v_unit" />
+                <ScalarProperty Name="cant" ColumnName="cant" />
+                <ScalarProperty Name="telef" ColumnName="telef" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="nu_ced_clte" ColumnName="nu_ced_clte" />
+                <ScalarProperty Name="nu_ced_ruc" ColumnName="nu_ced_ruc" />
+                <ScalarProperty Name="cod_evento" ColumnName="cod_evento" />
+                <ScalarProperty Name="cod_fact" ColumnName="cod_fact" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
