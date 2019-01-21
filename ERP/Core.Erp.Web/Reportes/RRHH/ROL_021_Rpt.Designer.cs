@@ -108,8 +108,8 @@
             this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField44 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
-            this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -319,7 +319,7 @@
             this.xrTableCell1.StylePriority.UseBorders = false;
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.StylePriority.UseTextAlignment = false;
-            this.xrTableCell1.Text = "ROL GENERAL DE PAGO";
+            this.xrTableCell1.Text = "REPORTE DE EGRESOS";
             this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrTableCell1.Weight = 2.57564292169823D;
             // 
@@ -789,13 +789,6 @@
             this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(397.2917F, 81.25F);
             // 
-            // GroupHeader1
-            // 
-            this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrPivotGrid1});
-            this.GroupHeader1.HeightF = 81.25F;
-            this.GroupHeader1.Name = "GroupHeader1";
-            // 
             // pivotGridField5
             // 
             this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
@@ -803,6 +796,13 @@
             this.pivotGridField5.Caption = "Area";
             this.pivotGridField5.FieldName = "Descripcion";
             this.pivotGridField5.Name = "pivotGridField5";
+            // 
+            // GroupHeader1
+            // 
+            this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrPivotGrid1});
+            this.GroupHeader1.HeightF = 81.25F;
+            this.GroupHeader1.Name = "GroupHeader1";
             // 
             // ROL_021_Rpt
             // 
