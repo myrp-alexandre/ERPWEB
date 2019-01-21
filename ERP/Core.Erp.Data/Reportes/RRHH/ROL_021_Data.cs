@@ -18,7 +18,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 
                 ro_rubros_calculados_Data oda_rubro_calculados = new ro_rubros_calculados_Data();
                 var info_rub_calculados = oda_rubro_calculados.get_info(IdEmpresa);
-                info_rub_calculados.IdRubro_bono_x_antiguedad = "56";
+                info_rub_calculados.IdRubro_bono_x_antiguedad = "70";
                 int IdSucursalInicio = IdSucursal;
                 int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
 
