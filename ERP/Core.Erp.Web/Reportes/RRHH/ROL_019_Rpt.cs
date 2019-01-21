@@ -23,9 +23,9 @@ namespace Core.Erp.Web.Reportes.RRHH
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
-            int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
-            int IdNominaTipoLiqui = p_IdNominaTipoLiqui.Value == null ? 0 : Convert.ToInt32(p_IdNominaTipoLiqui.Value);
+            int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            int IdSucursal = string.IsNullOrEmpty(p_IdSucursal.Value.ToString())? 0 : Convert.ToInt32(p_IdSucursal.Value);
+            int IdNominaTipoLiqui = string.IsNullOrEmpty(p_IdNominaTipoLiqui.Value.ToString()) ? 0 : Convert.ToInt32(p_IdNominaTipoLiqui.Value);
             DateTime fecha_ini = p_fecha_ini.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
             DateTime fecha_fin = p_fecha_fin.Value == null ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
 
