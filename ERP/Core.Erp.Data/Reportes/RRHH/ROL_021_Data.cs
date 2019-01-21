@@ -40,7 +40,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui==IdNominaTipo
-                                 && q.ru_tipo=="E"
+                                 && (q.ru_tipo=="E" ||q.IdRubro=="56")
                                  select new ROL_021_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
