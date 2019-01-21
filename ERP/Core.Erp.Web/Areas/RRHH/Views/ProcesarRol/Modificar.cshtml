@@ -115,10 +115,6 @@
 
 
 <script>
-    $(function () {
-        cargar_periodos_x_nomina();
-
-    });
 
 
     $("#IdNomina_Tipo").change(function () {
@@ -160,6 +156,8 @@
         };
 
     function cargar_periodos_x_nomina() {
+        $("#IdPeriodo").empty();
+
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdNomina: $("#IdNomina_Tipo").val(),
@@ -186,6 +184,10 @@
         });
     };
 
+    $(function () {
+        cargar_periodos_x_nomina();
+
+    });
 
 
 </script>

@@ -372,7 +372,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 lista_nomina = bus_nomina.get_list(IdEmpresa, false);
                 lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, IdNomina_Tipo);
-                lst_periodos = bus_periodos_x_nomina.get_list(IdEmpresa, IdNomina_Tipo, IdNomina_Tipo_Liqui);
+                lst_periodos = bus_periodos_x_nomina.get_list_utimo_periodo_aprocesar(IdEmpresa, IdNomina_Tipo, IdNomina_Tipo_Liqui);
                 ViewBag.lst_nomina = lista_nomina;
                 ViewBag.lst_nomina_tipo = lst_nomina_tipo;
                 ViewBag.lst_periodos = lst_periodos;
