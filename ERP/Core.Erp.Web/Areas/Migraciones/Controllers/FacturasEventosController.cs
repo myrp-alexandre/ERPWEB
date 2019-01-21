@@ -14,7 +14,7 @@ namespace Core.Erp.Web.Areas.Migraciones.Controllers
     public class FacturasEventosController : Controller
     {
         FacturasEventos_Bus bus_facturas = new FacturasEventos_Bus();
-        tb_comprobantes_sin_autorizacion_List Lis_tb_comprobantes_sin_autorizacion_List = new tb_comprobantes_sin_autorizacion_List();
+        FacturasEventos_Info_list Lis_tb_comprobantes_sin_autorizacion_List = new FacturasEventos_Info_list();
         #region vistas 
         public ActionResult Index()
         {
@@ -34,17 +34,15 @@ namespace Core.Erp.Web.Areas.Migraciones.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_documentos_pendientes_enviar_sri(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdEmpresa = 0, int IdSucursal = 0)
+        public ActionResult GridViewPartial_facturas_eventos(DateTime? Fecha_ini, DateTime? Fecha_fin)
         {
 
-            ViewBag.IdEmpresa = IdEmpresa;
-            ViewBag.IdSucursal = IdSucursal;
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
 
-            var model = bus_facturas.get_list();
+            var model = bus_facturas.get_list(ViewBag.Fecha_ini, ViewBag.Fecha_fin);
             Lis_tb_comprobantes_sin_autorizacion_List.set_list(model);
-            return PartialView("_GridViewPartial_documentos_pendientes_enviar_sri", model);
+            return PartialView("_GridViewPartial_facturas_eventos", model);
         }
 
         #endregion
@@ -59,9 +57,9 @@ namespace Core.Erp.Web.Areas.Migraciones.Controllers
             {
                 if (item.Key != "")
                 {
-                    //var info = Lis_tb_comprobantes_sin_autorizacion_List.get_list().Where(v => v.secuencia == Convert.ToDecimal(item.Key)).FirstOrDefault();
-                    //if (info != null)
-                       // bus_facturas.modificarEstado(info);
+                    var info = Lis_tb_comprobantes_sin_autorizacion_List.get_list().Where(v => v.cod_fact == Convert.ToDecimal(item.Key)).FirstOrDefault();
+                    if (info != null)
+                        bus_facturas.ModificarEstado_aprobacion(info);
                 }
             }
             return Json("", JsonRequestBehavior.AllowGet);
@@ -70,9 +68,9 @@ namespace Core.Erp.Web.Areas.Migraciones.Controllers
     }
 
 
-    public class tb_comprobantes_sin_autorizacion_List
+    public class FacturasEventos_Info_list
     {
-        string Variable = "tb_comprobantes_sin_autorizacion_List";
+        string Variable = "FacturasEventos_Info";
         public List<FacturasEventos_Info> get_list()
         {
             if (HttpContext.Current.Session[Variable] == null)

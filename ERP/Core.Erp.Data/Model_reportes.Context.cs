@@ -9,12 +9,12 @@
 
 namespace Core.Erp.Data
 {
+
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-
 
     public partial class Entities_reportes : DbContext
     {
@@ -80,7 +80,6 @@ namespace Core.Erp.Data
         public DbSet<VWFAC_012> VWFAC_012 { get; set; }
         public DbSet<VWINV_014> VWINV_014 { get; set; }
         public DbSet<VWCOMP_001> VWCOMP_001 { get; set; }
-        public DbSet<VWROL_019> VWROL_019 { get; set; }
         public DbSet<VWROL_003> VWROL_003 { get; set; }
         public DbSet<VWPRO_001> VWPRO_001 { get; set; }
         public DbSet<VWPRE_001> VWPRE_001 { get; set; }
@@ -103,11 +102,12 @@ namespace Core.Erp.Data
         public DbSet<VWFAC_006> VWFAC_006 { get; set; }
         public DbSet<VWFAC_013> VWFAC_013 { get; set; }
         public DbSet<VWCXC_002> VWCXC_002 { get; set; }
-        public DbSet<VWCAJ_002> VWCAJ_002 { get; set; }
         public DbSet<VWCXP_001> VWCXP_001 { get; set; }
         public DbSet<VWFAC_007> VWFAC_007 { get; set; }
         public DbSet<VWROL_009> VWROL_009 { get; set; }
         public DbSet<VWROL_021> VWROL_021 { get; set; }
+        public DbSet<VWROL_019> VWROL_019 { get; set; }
+        public DbSet<VWCAJ_002> VWCAJ_002 { get; set; }
     
         public virtual ObjectResult<SPACTF_004_detalle_Result> SPACTF_004_detalle(Nullable<int> idEmpresa, Nullable<System.DateTime> fecha_corte, string idUsuario, Nullable<int> idActivoFijoTipo_ini, Nullable<int> idActivoFijoTipo_fin, Nullable<int> idCategoria_ini, Nullable<int> idCategoria_fin, string estado_Proceso)
         {

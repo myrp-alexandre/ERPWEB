@@ -35,5 +35,6 @@ namespace Core.Erp.Info.Reportes.Caja
         public string tm_descripcion { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public string NombreUsuario { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }

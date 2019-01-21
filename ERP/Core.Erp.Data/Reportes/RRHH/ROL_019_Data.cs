@@ -9,12 +9,17 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_019_Data
     {
-        public List<ROL_019_Info> get_list(int IdEmpresa, decimal IdEmpleado, DateTime fecha_ini, DateTime fecha_fin)
+        public List<ROL_019_Info> get_list(int IdEmpresa, int IdSucursal, int IdNominaTipoLiqui, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
-                decimal IdEmpleadoIni = IdEmpleado;
-                decimal IdEmpleadoFin = IdEmpleado == 0 ? 9999 : IdEmpleado;
+
+                int IdSucursalIni = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
+
+                int IdNominaTipoLiquiIni = IdNominaTipoLiqui;
+                int IdNominaTipoLiquiFin = IdNominaTipoLiqui == 0 ? 9999 : IdNominaTipoLiqui;
+
                 fecha_fin = Convert.ToDateTime(fecha_fin.ToShortDateString());
                 fecha_ini = Convert.ToDateTime(fecha_ini.ToShortDateString());
                 List<ROL_019_Info> Lista;
@@ -22,35 +27,37 @@ namespace Core.Erp.Data.Reportes.RRHH
                 {
                     Lista = (from q in Context.VWROL_019
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdEmpleado >= IdEmpleadoIni 
-                             && q.IdEmpleado <= IdEmpleadoFin
-                             && q.FechaIni >= fecha_ini 
-                             && q.FechaIni <= fecha_fin
+                             && IdSucursalIni <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
+                             && IdNominaTipoLiquiIni <= q.IdNominaTipoLiqui && q.IdNominaTipoLiqui <= IdNominaTipoLiquiFin
+                             && fecha_ini <= q.FechaPago
+                             && q.FechaPago <= fecha_fin
                              select new ROL_019_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
-                                 IdNominaTipo = q.IdNominaTipo,
                                  IdNominaTipoLiqui = q.IdNominaTipoLiqui,
-                                 IdPeriodo = q.IdPeriodo,
                                  IdEmpleado = q.IdEmpleado,
                                  IdRubro = q.IdRubro,
-                                 Orden = q.Orden,
-                                 Valor = q.Valor,
-                                 Observacion = q.Observacion,
-                                 pe_anio = q.pe_anio,
-                                 pe_mes = q.pe_mes,
-                                 Division = q.Division,
-                                 Departamento = q.Departamento,
-                                 Cargo = q.Cargo,
-                                 Rubro = q.Rubro,
-                                 NominaTipo = q.NominaTipo,
+                                 FechaPago = q.FechaPago,
+                                 Descripcion = q.Descripcion,
+                                 em_codigo = q.em_codigo ,
+                                 Estado = q.Estado,
+                                 EstadoPago = q.EstadoPago,
+                                 IdArea = q.IdArea, 
+                                 IdDivision = q.IdDivision,
+                                 IdNomina = q.IdNomina,
+                                 IdPrestamo = q.IdPrestamo,
+                                 IdSucursal = q.IdSucursal,
                                  Nomina = q.Nomina,
-                                 Empleado = q.Empleado,
-                                 Cedula = q.Cedula,
-                                 ru_tipo = q.ru_tipo,
-                                 pe_FechaIni = q.FechaIni,
-                                 pe_FechaFin = q.FechaFin,
-                                 ru_codRolGen=q.ru_codRolGen
+                                 NumCuota = q.NumCuota,
+                                 Observacion_det = q.Observacion_det,
+                                 pe_apellido = q.pe_apellido,
+                                 pe_cedulaRuc = q.pe_cedulaRuc,
+                                pe_nombre = q.pe_nombre,
+                                Saldo = q.Saldo,
+                                SaldoInicial = q.SaldoInicial,
+                                Su_Descripcion = q.Su_Descripcion,
+                                TotalCuota = q.TotalCuota
+                                  
                              }).ToList();
                 }
                 return Lista;

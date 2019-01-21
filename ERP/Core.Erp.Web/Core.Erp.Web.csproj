@@ -1050,6 +1050,12 @@
     <Compile Include="Reportes\Produccion\PRO_001_Rpt.Designer.cs">
       <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_019_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_019_Rpt.Designer.cs">
+      <DependentUpon>ROL_019_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_021_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9694,7 +9700,7 @@
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbSucursal_reportes_RRHH.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbTipoNomina.cshtml" />
     <Content Include="Areas\Migraciones\Views\web.config" />
-    <Content Include="Areas\Migraciones\Views\FacturasEventos\_GridViewPartial_documentos_pendientes_enviar_sri.cshtml" />
+    <Content Include="Areas\Migraciones\Views\FacturasEventos\_GridViewPartial_facturas_eventos.cshtml" />
     <Content Include="Areas\Migraciones\Views\FacturasEventos\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -10097,6 +10103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Produccion\PRO_001_Rpt.resx">
       <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_019_Rpt.resx">
+      <DependentUpon>ROL_019_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_021_Rpt.resx">
       <DependentUpon>ROL_021_Rpt.cs</DependentUpon>

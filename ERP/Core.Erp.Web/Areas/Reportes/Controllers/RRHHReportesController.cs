@@ -294,6 +294,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_nomina = lst_nomina;
 
             var lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);
+            lst_nomina_tipo.Add(new ro_Nomina_Tipoliqui_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdNomina_TipoLiqui = 0,
+                Descripcion = "TODAS"
+            });
             ViewBag.lst_nomina_tipo = lst_nomina_tipo;
 
             var lst_area = bus_area.get_list(IdEmpresa, false);
@@ -302,6 +308,13 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_periodos = bus_periodo_x_nominas.get_list_utimo_periodo_aprocesar(IdEmpresa, 0,0);
             ViewBag.lst_periodos = lst_periodos;
 
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdEmpresa = IdEmpresa,
+                 IdSucursal = 0,
+                Su_Descripcion = "TODAS"
+            }); ViewBag.lst_sucursal = lst_sucursal;
 
 
         }
@@ -513,27 +526,76 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+        //public ActionResult ROL_019(cl_filtros_Info model)
+        //{
+        //    model.fecha_ini = new DateTime (DateTime.Now.Year, DateTime.Now.Month, 1);
+        //    DateTime FechaFin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        //    model.fecha_fin= FechaFin.AddMonths(1).AddDays(-1);
+          
+        //    model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
+        //    ViewBag.fecha_ini = model.fecha_ini;
+        //    ViewBag.fecha_fin = model.fecha_fin;
+        //    ViewBag.IdEmpresa = model.IdEmpresa;
+        //    ViewBag.IdEmpleado = model.IdEmpleado;
+
+        //    ViewBag.DemoOptions = ViewBag.DemoOptions ?? new PivotGridExportDemoOptions();
+
+        //    Session["IdEmpleado"] = model.IdEmpleado;
+        //    Session["fecha_ini"] = model.fecha_ini;
+        //    Session["fecha_fin"] = model.fecha_fin;
+
+        //    return PartialView(model);
+        //}
+
+        //[ValidateInput(false)]
+        //public ActionResult PivotGridROL_019(int? IdEmpresa, DateTime? fecha_ini, DateTime? fecha_fin, decimal ? IdEmpleado)
+        //{
+        //    List<ROL_019_Info> lista = new List<ROL_019_Info>();
+        //    IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+        //    fecha_ini =Convert.ToDateTime( Session["fecha_ini"] );
+        //    fecha_fin = Convert.ToDateTime(Session["fecha_fin"]);
+
+        //    if (IdEmpleado == null)
+        //        IdEmpleado = 0;
+        //    ROL_019_Bus bus = new ROL_019_Bus();
+        //    lista = bus.get_list(Convert.ToInt32( IdEmpresa),Convert.ToDecimal(IdEmpleado), Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
+        //    return PartialView("_PivotGridROL_019", lista);
+        //}
+        public ActionResult ROL_019()
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = 0,
+                IdNominaTipoLiqui = 0
+            };
+            ROL_019_Rpt report = new ROL_019_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa == 0 ? Convert.ToInt32(SessionFixed.IdEmpresa) : model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdNominaTipoLiqui.Value = model.IdNominaTipoLiqui;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
         public ActionResult ROL_019(cl_filtros_Info model)
         {
-            model.fecha_ini = new DateTime (DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime FechaFin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            model.fecha_fin= FechaFin.AddMonths(1).AddDays(-1);
-          
-            model.IdEmpresa =Convert.ToInt32( SessionFixed.IdEmpresa);
-            ViewBag.fecha_ini = model.fecha_ini;
-            ViewBag.fecha_fin = model.fecha_fin;
-            ViewBag.IdEmpresa = model.IdEmpresa;
-            ViewBag.IdEmpleado = model.IdEmpleado;
-
-            ViewBag.DemoOptions = ViewBag.DemoOptions ?? new PivotGridExportDemoOptions();
-
-            Session["IdEmpleado"] = model.IdEmpleado;
-            Session["fecha_ini"] = model.fecha_ini;
-            Session["fecha_fin"] = model.fecha_fin;
-
-            return PartialView(model);
+            ROL_019_Rpt report = new ROL_019_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa == 0 ? Convert.ToInt32(SessionFixed.IdEmpresa) : model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal == 0 ? Convert.ToInt32(SessionFixed.IdSucursal) : model.IdSucursal;
+            report.p_IdNominaTipoLiqui.Value = model.IdNominaTipoLiqui;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = report;
+            return View(model);
         }
-
         public ActionResult ROL_020(int IdNominaTipo = 0, int IdNomina = 0, int IdPeriodo = 0, int IdSucursal=0, string IdProceso_bancario_tipo="")
         {
             ROL_020_Rpt model = new ROL_020_Rpt();
@@ -546,21 +608,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa = SessionFixed.NomEmpresa.ToString();
             model.p_IdProceso_bancario_tipo.Value = IdProceso_bancario_tipo;
             return View(model);
-        }
-
-        [ValidateInput(false)]
-        public ActionResult PivotGridROL_019(int? IdEmpresa, DateTime? fecha_ini, DateTime? fecha_fin, decimal ? IdEmpleado)
-        {
-            List<ROL_019_Info> lista = new List<ROL_019_Info>();
-            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            fecha_ini =Convert.ToDateTime( Session["fecha_ini"] );
-            fecha_fin = Convert.ToDateTime(Session["fecha_fin"]);
-
-            if (IdEmpleado == null)
-                IdEmpleado = 0;
-            ROL_019_Bus bus = new ROL_019_Bus();
-            lista = bus.get_list(Convert.ToInt32( IdEmpresa),Convert.ToDecimal(IdEmpleado), Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
-            return PartialView("_PivotGridROL_019", lista);
         }
 
         public ActionResult ROL_021(int IdEmpresa=0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0,  int IdPeriodo = 0, int IdSucursal=0)
