@@ -47,10 +47,11 @@ namespace Core.Erp.Data
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
+        public Nullable<double> cod_prestamo { get; set; }
     
         public virtual ro_catalogo ro_catalogo { get; set; }
         public virtual ICollection<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }
-        public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
         public virtual ro_empleado ro_empleado { get; set; }
+        public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
     }
 }

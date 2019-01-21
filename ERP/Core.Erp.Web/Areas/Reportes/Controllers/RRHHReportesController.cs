@@ -571,6 +571,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdNominaTipo.Value = model.IdTipoNomina;
             report.p_IdPeriodo.Value = model.IdPeriodo;
             report.p_IdSucursal.Value = model.IdSucursal;
+            report.P_TipoRubro.Value = model.TipoRubro;
             ViewBag.Report = report;
             return View(model);
         }

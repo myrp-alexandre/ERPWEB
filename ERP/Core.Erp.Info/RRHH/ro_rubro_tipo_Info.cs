@@ -29,7 +29,7 @@ namespace Core.Erp.Info.RRHH
         public int ru_orden { get; set; }
         public bool rub_concep { get; set; }
         public string rub_ctacon { get; set; }
-        public Nullable<int> rub_grupo { get; set; }
+        public string rub_grupo { get; set; }
         public bool rub_provision { get; set; }
         public bool rub_nocontab { get; set; }
         public bool rub_aplica_IESS { get; set; }
