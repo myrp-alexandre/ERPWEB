@@ -32,11 +32,11 @@ namespace Core.Erp.Data.Reportes.RRHH
                 using (Entities_reportes Context = new Entities_reportes())
 
                 {
-                    if(tipoRubro=="E")
-
+                    if (tipoRubro == "E")
+                    {
                         Lista = (from q in Context.VWROL_021
                                  where q.IdEmpresa == IdEmpresa
-                                 && q.IdPeriodo==IdPeriodo
+                                 && q.IdPeriodo == IdPeriodo
                                  && q.IdDivision >= IdDivisionInicio
                                  && q.IdDivision <= IdDivisionFin
                                  && q.IdArea >= IdAreaInicio
@@ -45,40 +45,132 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdArea >= IdAreaInicio
                                  && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina
-                                 && q.IdNominaTipoLiqui==IdNominaTipo
-                                 && q.Valor>0
-                                 && (q.IdRubro==info_rub_calculados. IdRubro_bono_x_antiguedad || q.IdRubro == info_rub_calculados.IdRubro_tot_egr || q.ru_tipo == "E" )
+                                 && q.IdNominaTipoLiqui == IdNominaTipo
+                                 && q.Valor > 0
+                                 && (q.IdRubro == info_rub_calculados.IdRubro_bono_x_antiguedad || q.IdRubro == info_rub_calculados.IdRubro_tot_egr || q.ru_tipo == "E")
                                  select new ROL_021_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
-                                     IdRol=q.IdRol,
-                                     IdSucursal=q.IdSucursal,
-                                     IdNominaTipo=q.IdNominaTipo,
-                                     IdNominaTipoLiqui=q.IdNominaTipoLiqui,
-                                     IdPeriodo=q.IdPeriodo,
-                                     IdRubro=q.IdRubro,
-                                     Orden=q.Orden,
-                                     Valor=q.Valor,
-                                     rub_visible_reporte=q.rub_visible_reporte,
-                                     Observacion=q.Observacion,
+                                     IdRol = q.IdRol,
+                                     IdSucursal = q.IdSucursal,
+                                     IdNominaTipo = q.IdNominaTipo,
+                                     IdNominaTipoLiqui = q.IdNominaTipoLiqui,
+                                     IdPeriodo = q.IdPeriodo,
+                                     IdRubro = q.IdRubro,
+                                     Orden = q.Orden,
+                                     Valor = q.Valor,
+                                     rub_visible_reporte = q.rub_visible_reporte,
+                                     Observacion = q.Observacion,
                                      ru_descripcion = q.ru_descripcion,
                                      pe_FechaFin = q.pe_FechaFin,
-                                     pe_FechaIni=q.pe_FechaIni,
-                                     ru_tipo=q.ru_tipo,
-                                     rub_codigo=q.rub_codigo,
-                                     ru_codRolGen=q.ru_codRolGen,
+                                     pe_FechaIni = q.pe_FechaIni,
+                                     ru_tipo = q.ru_tipo,
+                                     rub_codigo = q.rub_codigo,
+                                     ru_codRolGen = q.ru_codRolGen,
                                      ca_descripcion = q.ca_descripcion,
-                                     em_codigo=q.em_codigo,
-                                     IdEmpleado=q.IdEmpleado,
-                                     pe_cedulaRuc=q.pe_cedulaRuc,
-                                     pe_nombreCompleto=q.pe_nombreCompleto,
-                                     IdArea=q.IdArea,
-                                     IdDivision=q.IdDivision,
-                                     Descripcion=q.Descripcion
+                                     em_codigo = q.em_codigo,
+                                     IdEmpleado = q.IdEmpleado,
+                                     pe_cedulaRuc = q.pe_cedulaRuc,
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     IdArea = q.IdArea,
+                                     IdDivision = q.IdDivision,
+                                     Descripcion = q.Descripcion
 
                                  }).ToList();
+                    }
+                    else if(tipoRubro == "I")
+                    {
+                        Lista = (from q in Context.VWROL_021
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdPeriodo == IdPeriodo
+                                 && q.IdDivision >= IdDivisionInicio
+                                 && q.IdDivision <= IdDivisionFin
+                                 && q.IdArea >= IdAreaInicio
+                                 && q.IdArea <= IdAreaFin
 
-                   
+                                 && q.IdArea >= IdAreaInicio
+                                 && q.IdArea <= IdAreaFin
+                                 && q.IdNominaTipo == IdNomina
+                                 && q.IdNominaTipoLiqui == IdNominaTipo
+                                 && q.Valor > 0
+                                 && (q.IdRubro == info_rub_calculados.IdRubro_tot_ing || q.ru_tipo == "I")
+                                 select new ROL_021_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdRol = q.IdRol,
+                                     IdSucursal = q.IdSucursal,
+                                     IdNominaTipo = q.IdNominaTipo,
+                                     IdNominaTipoLiqui = q.IdNominaTipoLiqui,
+                                     IdPeriodo = q.IdPeriodo,
+                                     IdRubro = q.IdRubro,
+                                     Orden = q.Orden,
+                                     Valor = q.Valor,
+                                     rub_visible_reporte = q.rub_visible_reporte,
+                                     Observacion = q.Observacion,
+                                     ru_descripcion = q.ru_descripcion,
+                                     pe_FechaFin = q.pe_FechaFin,
+                                     pe_FechaIni = q.pe_FechaIni,
+                                     ru_tipo = q.ru_tipo,
+                                     rub_codigo = q.rub_codigo,
+                                     ru_codRolGen = q.ru_codRolGen,
+                                     ca_descripcion = q.ca_descripcion,
+                                     em_codigo = q.em_codigo,
+                                     IdEmpleado = q.IdEmpleado,
+                                     pe_cedulaRuc = q.pe_cedulaRuc,
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     IdArea = q.IdArea,
+                                     IdDivision = q.IdDivision,
+                                     Descripcion = q.Descripcion
+
+                                 }).ToList();
+                    }
+                    else
+                    {
+                        Lista = (from q in Context.VWROL_021
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdPeriodo == IdPeriodo
+                                 && q.IdDivision >= IdDivisionInicio
+                                 && q.IdDivision <= IdDivisionFin
+                                 && q.IdArea >= IdAreaInicio
+                                 && q.IdArea <= IdAreaFin
+
+                                 && q.IdArea >= IdAreaInicio
+                                 && q.IdArea <= IdAreaFin
+                                 && q.IdNominaTipo == IdNomina
+                                 && q.IdNominaTipoLiqui == IdNominaTipo
+                                 && q.Valor > 0
+                                 && (q.IdRubro == info_rub_calculados.IdRubro_tot_pagar || q.IdRubro == info_rub_calculados.IdRubro_tot_ing || q.IdRubro == info_rub_calculados.IdRubro_tot_egr
+                                 || q.ru_tipo == "I" || q.ru_tipo == "E")
+                                 select new ROL_021_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdRol = q.IdRol,
+                                     IdSucursal = q.IdSucursal,
+                                     IdNominaTipo = q.IdNominaTipo,
+                                     IdNominaTipoLiqui = q.IdNominaTipoLiqui,
+                                     IdPeriodo = q.IdPeriodo,
+                                     IdRubro = q.IdRubro,
+                                     Orden = q.Orden,
+                                     Valor = q.Valor,
+                                     rub_visible_reporte = q.rub_visible_reporte,
+                                     Observacion = q.Observacion,
+                                     ru_descripcion = q.ru_descripcion,
+                                     pe_FechaFin = q.pe_FechaFin,
+                                     pe_FechaIni = q.pe_FechaIni,
+                                     ru_tipo = q.ru_tipo,
+                                     rub_codigo = q.rub_codigo,
+                                     ru_codRolGen = q.ru_codRolGen,
+                                     ca_descripcion = q.ca_descripcion,
+                                     em_codigo = q.em_codigo,
+                                     IdEmpleado = q.IdEmpleado,
+                                     pe_cedulaRuc = q.pe_cedulaRuc,
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     IdArea = q.IdArea,
+                                     IdDivision = q.IdDivision,
+                                     Descripcion = q.Descripcion
+
+                                 }).ToList();
+                    }
 
                 }
                 return Lista;

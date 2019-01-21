@@ -10,9 +10,9 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Modificar", "ProcesarRol", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa, new { @IdEmpresa="IdEmpresa"});
+    @Html.HiddenFor(q => q.IdEmpresa, new { @Id="IdEmpresa"});
     @Html.HiddenFor(q => q.IdRol);
-
+    @Html.HiddenFor(q => q.IdPeriodoSet);
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
@@ -156,6 +156,8 @@
         };
 
     function cargar_periodos_x_nomina() {
+        var IdPeriodoSet = $("#IdPeriodoSet").val();
+        console.log(IdPeriodoSet);
         $("#IdPeriodo").empty();
 
         var datos = {
@@ -174,10 +176,11 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-
                 $.each(data, function (i, row) {
                     $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
                 });
+
+                $("#IdPeriodo").val(IdPeriodoSet);
             },
             error: function (error) {
             }

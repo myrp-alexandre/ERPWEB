@@ -43,14 +43,12 @@
                         <div class="form-group">
                             <label for="IdRubro">Division</label>
                             @Html.Partial("_CmbDivision_reportes", Model.IdDivision)
-                            @Html.ValidationMessageFor(q => q.IdDivision, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdRubro">Area</label>
                             @Html.Partial("_CmbArea_reportes",Model.IdArea)
-                            @Html.ValidationMessageFor(q => q.IdArea, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -86,7 +84,7 @@
 
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="IdTipoServicio">Tipo rubros</label>
+                            <label for="IdTipoServicio">Tipo rubros*</label>
                             @Html.DevExpress().ComboBoxFor(q => q.TipoRubro, setting =>
                        {
                            setting.Width = System.Web.UI.WebControls.Unit.Percentage(100);
