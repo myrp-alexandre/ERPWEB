@@ -15,8 +15,10 @@ namespace Core.Erp.Data.Reportes.RRHH
         {
             try
             {
+
                 ro_rubros_calculados_Data oda_rubro_calculados = new ro_rubros_calculados_Data();
                 var info_rub_calculados = oda_rubro_calculados.get_info(IdEmpresa);
+                info_rub_calculados.IdRubro_bono_x_antiguedad = "56";
                 int IdSucursalInicio = IdSucursal;
                 int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
 
@@ -28,6 +30,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 
                 List<ROL_021_Info> Lista=new List<ROL_021_Info>();
                 using (Entities_reportes Context = new Entities_reportes())
+
                 {
                     if(tipoRubro=="E")
 
@@ -44,7 +47,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui==IdNominaTipo
                                  && q.Valor>0
-                                 && (q.ru_tipo=="E" ||q.IdRubro=="56" || q.IdRubro == info_rub_calculados.IdRubro_tot_egr)
+                                 && (q.IdRubro==info_rub_calculados. IdRubro_bono_x_antiguedad || q.IdRubro == info_rub_calculados.IdRubro_tot_egr || q.ru_tipo == "E" )
                                  select new ROL_021_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -74,6 +77,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      Descripcion=q.Descripcion
 
                                  }).ToList();
+
                    
 
                 }
