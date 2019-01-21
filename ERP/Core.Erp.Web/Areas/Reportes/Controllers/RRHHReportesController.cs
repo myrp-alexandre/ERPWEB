@@ -548,20 +548,20 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        [ValidateInput(false)]
-        public ActionResult PivotGridROL_019(int? IdEmpresa, DateTime? fecha_ini, DateTime? fecha_fin, decimal ? IdEmpleado)
-        {
-            List<ROL_019_Info> lista = new List<ROL_019_Info>();
-            IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            fecha_ini =Convert.ToDateTime( Session["fecha_ini"] );
-            fecha_fin = Convert.ToDateTime(Session["fecha_fin"]);
+        //[ValidateInput(false)]
+        //public ActionResult PivotGridROL_019(int? IdEmpresa, DateTime? fecha_ini, DateTime? fecha_fin, decimal ? IdEmpleado)
+        //{
+        //    List<ROL_019_Info> lista = new List<ROL_019_Info>();
+        //    IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+        //    fecha_ini =Convert.ToDateTime( Session["fecha_ini"] );
+        //    fecha_fin = Convert.ToDateTime(Session["fecha_fin"]);
 
-            if (IdEmpleado == null)
-                IdEmpleado = 0;
-            ROL_019_Bus bus = new ROL_019_Bus();
-            lista = bus.get_list(Convert.ToInt32( IdEmpresa),Convert.ToDecimal(IdEmpleado), Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
-            return PartialView("_PivotGridROL_019", lista);
-        }
+        //    if (IdEmpleado == null)
+        //        IdEmpleado = 0;
+        //    ROL_019_Bus bus = new ROL_019_Bus();
+        //    lista = bus.get_list(Convert.ToInt32( IdEmpresa),Convert.ToDecimal(IdEmpleado), Convert.ToDateTime(fecha_ini), Convert.ToDateTime(fecha_fin));
+        //    return PartialView("_PivotGridROL_019", lista);
+        //}
 
         public ActionResult ROL_021(int IdEmpresa=0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0,  int IdPeriodo = 0, int IdSucursal=0)
         {
