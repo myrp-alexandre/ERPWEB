@@ -463,6 +463,9 @@
     <Compile Include="cxc_Parametro.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Factura.cs">
+      <DependentUpon>Model_migraciones.tt</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\fa_CambioProductoDet_Data.cs" />
     <Compile Include="Facturacion\fa_CambioProducto_Data.cs" />
     <Compile Include="Facturacion\fa_catalogo_Data.cs" />
@@ -800,6 +803,7 @@
     <Compile Include="in_UnidadMedida_Equiv_conversion.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
+    <Compile Include="Migraciones\FacturasEventos_Data.cs" />
     <Compile Include="Model_activo_fijo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -979,6 +983,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_inventario.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model_migraciones.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_migraciones.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_migraciones.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_migraciones.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model_migraciones.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_migraciones.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model_presupuesto.Context.cs">
       <AutoGen>True</AutoGen>
@@ -2479,6 +2498,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_presupuesto.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Model_migraciones.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_migraciones.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model_migraciones.edmx.diagram">
+      <DependentUpon>Model_migraciones.edmx</DependentUpon>
+    </None>
     <None Include="Model_presupuesto.edmx.diagram">
       <DependentUpon>Model_presupuesto.edmx</DependentUpon>
     </None>
@@ -2620,6 +2646,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_inventario.edmx</DependentUpon>
       <LastGenOutput>Model_inventario.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model_migraciones.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_migraciones.edmx</DependentUpon>
+      <LastGenOutput>Model_migraciones.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model_migraciones.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_migraciones.edmx</DependentUpon>
+      <LastGenOutput>Model_migraciones.cs</LastGenOutput>
     </Content>
     <Content Include="Model_presupuesto.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
