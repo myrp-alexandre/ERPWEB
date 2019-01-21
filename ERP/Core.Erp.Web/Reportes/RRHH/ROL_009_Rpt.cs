@@ -24,6 +24,8 @@ namespace Core.Erp.Web.Reportes.RRHH
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            int IdSucursal = string.IsNullOrEmpty(p_IdSucursal.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSucursal.Value);
+            int IdTipo_Nomina = string.IsNullOrEmpty(p_IdTipo_Nomina.Value.ToString()) ? 0 : Convert.ToInt32(p_IdTipo_Nomina.Value);
             DateTime fecha_inicio = string.IsNullOrEmpty(p_fecha_inicio.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_inicio.Value);
             DateTime fecha_fin = string.IsNullOrEmpty(p_fecha_fin.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
             string estado_novedad = string.IsNullOrEmpty(p_estado_novedad.Value.ToString()) ? "" : Convert.ToString(p_estado_novedad.Value);
@@ -35,7 +37,7 @@ namespace Core.Erp.Web.Reportes.RRHH
 
 
             ROL_009_Bus bus_rpt = new ROL_009_Bus();
-            List<ROL_009_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, fecha_inicio, fecha_fin,  estado_novedad, IdRubro, IdEmpleado, IdArea,TipoRubro);
+            List<ROL_009_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdTipo_Nomina, fecha_inicio, fecha_fin,  estado_novedad, IdRubro, IdEmpleado, IdArea,TipoRubro);
             this.DataSource = lst_rpt;
         }
     }

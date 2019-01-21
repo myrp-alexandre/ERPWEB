@@ -4,29 +4,31 @@ namespace Core.Erp.Info.Reportes.RRHH
 {
     public class ROL_019_Info
     {
+
         public int IdEmpresa { get; set; }
-        public int? IdNominaTipo { get; set; }
-        public int? IdNominaTipoLiqui { get; set; }
-        public int? IdPeriodo { get; set; }
+        public decimal IdPrestamo { get; set; }
         public decimal IdEmpleado { get; set; }
         public string IdRubro { get; set; }
-        public int Orden { get; set; }
-        public double Valor { get; set; }
-        public string Observacion { get; set; }
-        public Nullable<int> pe_anio { get; set; }
-        public Nullable<int> pe_mes { get; set; }
-        public string Division { get; set; }
-        public string Departamento { get; set; }
-        public string Cargo { get; set; }
-        public string Rubro { get; set; }
-        public string NominaTipo { get; set; }
+        public int NumCuota { get; set; }
+        public double SaldoInicial { get; set; }
+        public double TotalCuota { get; set; }
+        public double Saldo { get; set; }
+        public System.DateTime FechaPago { get; set; }
+        public string EstadoPago { get; set; }
+        public bool Estado { get; set; }
+        public string Observacion_det { get; set; }
+        public int IdNominaTipoLiqui { get; set; }
+        public string em_codigo { get; set; }
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public int IdSucursal { get; set; }
+        public string Su_Descripcion { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<int> IdNomina { get; set; }
         public string Nomina { get; set; }
-        public string Cedula { get; set; }
-        public string Empleado { get; set; }
-        public string ru_tipo { get; set; }
-        public Nullable<System.DateTime> pe_FechaIni { get; set; }
-        public Nullable<System.DateTime> pe_FechaFin { get; set; }
-        public string ru_codRolGen { get; set; }
+        public Nullable<int> IdArea { get; set; }
+        public Nullable<int> IdDivision { get; set; }
 
     }
 }

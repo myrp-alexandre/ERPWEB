@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.RRHH;
 using Core.Erp.Info.RRHH;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 namespace Core.Erp.Bus.RRHH
@@ -71,6 +72,16 @@ namespace Core.Erp.Bus.RRHH
 
                 throw;
             }
+        }
+
+        public List<ro_nomina_tipo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            return odata.get_list_bajo_demanda(args, IdEmpresa);
+        }
+
+        public ro_nomina_tipo_Info get_info_bajo_demanda(int IdEmpresa, ListEditItemRequestedByValueEventArgs args)
+        {
+            return odata.get_info_bajo_demanda(IdEmpresa, args);
         }
     }
 }

@@ -63,7 +63,7 @@ namespace Core.Erp.Data.RRHH
 
                     ro_EmpleadoNovedadCargaMasiva entity = new ro_EmpleadoNovedadCargaMasiva
                     {
-                        IdEmpresa = info.IdEmpresa,
+                        IdEmpresa = info.IdEmpresa,     
                         IdCarga = info.IdCarga = Get_id(info.IdEmpresa),
                         FechaCarga = info.FechaCarga.Date,
                         Observacion = info.Observacion,
@@ -84,6 +84,7 @@ namespace Core.Erp.Data.RRHH
                         ro_empleado_Novedad Entity = new ro_empleado_Novedad
                         {
                             IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
                             IdNovedad = item.IdNovedad = IdNovedad,
                             IdNomina_Tipo = info.IdNomina,
                             IdNomina_TipoLiqui = info.IdNominaTipo,

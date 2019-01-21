@@ -10,7 +10,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
    public class ROL_009_Data
     {
-        public List<ROL_009_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin, string estado_novedad, string IdRubro, decimal IdEmpleado, int IdArea, string TipoRubro)
+        public List<ROL_009_Info> get_list(int IdEmpresa, int IdSucursal, int IdNomina_Tipo, DateTime fecha_inicio, DateTime fecha_fin, string estado_novedad, string IdRubro, decimal IdEmpleado, int IdArea, string TipoRubro)
         {
             try
             {
@@ -21,6 +21,12 @@ namespace Core.Erp.Data.Reportes.RRHH
 
                 int IdAreaInicio = IdArea;
                 int IdAreaFin = IdArea == 0 ? 9999 : IdArea;
+
+                int IdSucursalInicio = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
+
+                int IdNomina_TipoInicio = IdNomina_Tipo;
+                int IdNomina_TipoFin = IdNomina_Tipo == 0 ? 9999 : IdNomina_Tipo;
 
                 if (estado_novedad== "System.String[]" || estado_novedad=="")
                 {
@@ -37,12 +43,15 @@ namespace Core.Erp.Data.Reportes.RRHH
                     if(IdRubro=="")
                     Lista = (from q in Context.VWROL_009
                              where q.IdEmpresa == IdEmpresa
+                             && q.IdSucursal >= IdSucursalInicio
+                             && q.IdSucursal <= IdSucursalFin
+                             && q.IdNomina_Tipo >= IdNomina_TipoInicio
+                             && q.IdNomina_Tipo <= IdNomina_TipoFin
                              && q.FechaPago>=fecha_inicio
                              && q.FechaPago<= fecha_fin
                              && estado_novedad.Contains(q.EstadoCobro)
                              && q.IdEmpleado>=IdEmpleadoInicio
                              && q.IdEmpleado<=IdEmpleadoFin
-
                              && q.IdArea >= IdAreaInicio
                              && q.IdArea <= IdAreaFin
                              && q.ru_tipo==TipoRubro
@@ -64,18 +73,23 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  pe_apellido = q.pe_apellido,
                                  pe_nombre = q.pe_nombre,
                                  ca_descripcion = q.ca_descripcion, 
-                                 NombreCompleto = q.NombreCompleto
+                                 NombreCompleto = q.pe_apellido + " "+ q.pe_nombre,
+                                 Su_Descripcion = q.Su_Descripcion,
+                                 Descripcion_Nomina_Tipo = q.Descripcion_Nomina_Tipo
                              }).ToList();
                     else
                         Lista = (from q in Context.VWROL_009
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal >= IdSucursalInicio
+                                 && q.IdSucursal <= IdSucursalFin
+                                 && q.IdNomina_Tipo >= IdNomina_TipoInicio
+                                 && q.IdNomina_Tipo <= IdNomina_TipoFin
                                  && q.FechaPago >= fecha_inicio
                                  && q.FechaPago <= fecha_fin
                                  && estado_novedad.Contains(q.EstadoCobro)
                                  && q.IdRubro==IdRubro
                                  && q.IdEmpleado >= IdEmpleadoInicio
                                  && q.IdEmpleado <= IdEmpleadoFin
-
                                  && q.IdArea >= IdAreaInicio
                                          && q.IdArea <= IdAreaFin
                                          && q.ru_tipo == TipoRubro
@@ -98,14 +112,16 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      pe_apellido = q.pe_apellido,
                                      pe_nombre = q.pe_nombre,
                                      ca_descripcion = q.ca_descripcion,
-                                     NombreCompleto = q.NombreCompleto
+                                     NombreCompleto = q.pe_apellido + " " + q.pe_nombre,
+                                     Su_Descripcion = q.Su_Descripcion,
+                                     Descripcion_Nomina_Tipo = q.Descripcion_Nomina_Tipo
                                  }).ToList();
 
 
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

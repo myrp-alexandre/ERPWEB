@@ -47,7 +47,8 @@ namespace Core.Erp.Data.Reportes.Caja
                                  NombreCaja = q.NombreCaja,
                                  tm_descripcion = q.tm_descripcion,
                                  IdUsuarioCreacion = q.IdUsuarioCreacion,
-                                 NombreUsuario = q.NombreUsuario
+                                 NombreUsuario = q.NombreUsuario,
+                                 Su_Descripcion =  q.Su_Descripcion
                              }).ToList();
                 }
                 return Lista;

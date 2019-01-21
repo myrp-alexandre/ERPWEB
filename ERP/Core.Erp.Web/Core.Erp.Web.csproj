@@ -9692,6 +9692,7 @@
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbArea_reportes.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbDivision_reportes.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbSucursal_reportes_RRHH.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbTipoNomina.cshtml" />
     <Content Include="Areas\Migraciones\Views\web.config" />
     <Content Include="Areas\Migraciones\Views\FacturasEventos\_GridViewPartial_facturas_eventos.cshtml" />
     <Content Include="Areas\Migraciones\Views\FacturasEventos\Index.cshtml" />

@@ -77,12 +77,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             ro_EmpleadoNovedadCargaMasiva_Info model = new ro_EmpleadoNovedadCargaMasiva_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),                
                 FechaCarga = DateTime.Now,
                 IdNomina=1,
                 IdNominaTipo=2,
-                IdSucursal=1
-                
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+
             };
             model.detalle = new List<ro_EmpleadoNovedadCargaMasiva_det_Info>();
             detalle.set_list(model.detalle);
@@ -93,9 +93,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost]
         public ActionResult Nuevo(ro_EmpleadoNovedadCargaMasiva_Info model)
         {
-
-
-
             model.detalle = detalle.get_list();
             if (model.detalle == null || model.detalle.Count() == 0)
             {
