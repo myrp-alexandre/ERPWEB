@@ -1,4 +1,5 @@
-﻿using Core.Erp.Info.Reportes.RRHH;
+﻿using Core.Erp.Data.RRHH;
+using Core.Erp.Info.Reportes.RRHH;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace Core.Erp.Data.Reportes.RRHH
         {
             try
             {
-               
+                ro_rubros_calculados_Data oda_rubro_calculados = new ro_rubros_calculados_Data();
+                var info_rub_calculados = oda_rubro_calculados.get_info(IdEmpresa);
                 int IdSucursalInicio = IdSucursal;
                 int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
 
@@ -24,9 +26,10 @@ namespace Core.Erp.Data.Reportes.RRHH
                 int IdDivisionInicio = IdDivision;
                 int IdDivisionFin = IdDivision == 0 ? 9999 : IdDivision;
 
-                List<ROL_021_Info> Lista;
+                List<ROL_021_Info> Lista=new List<ROL_021_Info>();
                 using (Entities_reportes Context = new Entities_reportes())
                 {
+                    if(tipoRubro=="E")
 
                         Lista = (from q in Context.VWROL_021
                                  where q.IdEmpresa == IdEmpresa
@@ -40,7 +43,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui==IdNominaTipo
-                                 && (q.ru_tipo=="E" ||q.IdRubro=="56")
+                                 && (q.ru_tipo=="E" ||q.IdRubro=="56" || q.IdRubro == info_rub_calculados.IdRubro_tot_egr)
                                  select new ROL_021_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
