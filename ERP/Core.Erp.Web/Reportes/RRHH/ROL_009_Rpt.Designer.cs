@@ -92,6 +92,8 @@
             this.p_IdEmpleado = new DevExpress.XtraReports.Parameters.Parameter();
             this.P_IdArea = new DevExpress.XtraReports.Parameters.Parameter();
             this.P_TipoRubro = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdTipo_Nomina = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -700,6 +702,20 @@
             this.P_TipoRubro.Name = "P_TipoRubro";
             this.P_TipoRubro.Visible = false;
             // 
+            // p_IdSucursal
+            // 
+            this.p_IdSucursal.Name = "p_IdSucursal";
+            this.p_IdSucursal.Type = typeof(short);
+            this.p_IdSucursal.ValueInfo = "0";
+            this.p_IdSucursal.Visible = false;
+            // 
+            // p_IdTipo_Nomina
+            // 
+            this.p_IdTipo_Nomina.Name = "p_IdTipo_Nomina";
+            this.p_IdTipo_Nomina.Type = typeof(short);
+            this.p_IdTipo_Nomina.ValueInfo = "0";
+            this.p_IdTipo_Nomina.Visible = false;
+            // 
             // ROL_009_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -727,7 +743,9 @@
             this.p_IdRubro,
             this.p_IdEmpleado,
             this.P_IdArea,
-            this.P_TipoRubro});
+            this.P_TipoRubro,
+            this.p_IdSucursal,
+            this.p_IdTipo_Nomina});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_009_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
@@ -805,5 +823,7 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpleado;
         public DevExpress.XtraReports.Parameters.Parameter P_IdArea;
         public DevExpress.XtraReports.Parameters.Parameter P_TipoRubro;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdSucursal;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdTipo_Nomina;
     }
 }

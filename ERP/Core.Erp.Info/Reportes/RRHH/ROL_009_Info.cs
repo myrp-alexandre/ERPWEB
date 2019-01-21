@@ -27,8 +27,11 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string pe_nombre { get; set; }
         public Nullable<double> Num_Horas { get; set; }
         public string ca_descripcion { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
+        public string Su_Descripcion { get; set; }
+        public int IdNomina_Tipo { get; set; }
+        public string Descripcion_Nomina_Tipo { get; set; }
 
 
-        
     }
 }

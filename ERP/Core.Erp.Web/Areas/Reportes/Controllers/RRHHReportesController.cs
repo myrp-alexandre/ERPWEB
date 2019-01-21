@@ -22,6 +22,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         ro_division_Bus bus_division = new ro_division_Bus();
         ro_area_Bus bus_area = new ro_area_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        ro_nomina_tipo_Bus bus_tiponomina = new ro_nomina_tipo_Bus();
         ro_Nomina_Tipoliquiliqui_Bus bus_nomina_tipo = new ro_Nomina_Tipoliquiliqui_Bus();
         ro_periodo_x_ro_Nomina_TipoLiqui_Bus bus_periodo_x_nominas = new ro_periodo_x_ro_Nomina_TipoLiqui_Bus();
         #region Metodos ComboBox bajo demanda empleado
@@ -112,6 +113,22 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         #endregion
 
+        #region metodo bajo tipo nomina
+        public ActionResult CmbTipoNomina()
+        {
+            int model = new int();
+            return PartialView("_CmbTipoNomina", model);
+        }
+        public List<ro_nomina_tipo_Info> get_list_bajo_demanda_tiponomina(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_tiponomina.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public ro_nomina_tipo_Info get_info_bajo_demanda_tiponomina(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_tiponomina.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
+        }
+        #endregion
+
         public ActionResult ROL_001(int IdNomina_Tipo = 0, int IdNomina_TipoLiqui= 0, int IdPeriodo=0, int IdSucursal=0)
         {
             ROL_001_Rpt model = new ROL_001_Rpt();
@@ -197,6 +214,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdTipoNomina = 1,
                 fecha_ini = DateTime.Now.AddMonths(-1),
                 fecha_fin = DateTime.Now.Date,
                 estado_novedad = novedad,
@@ -208,6 +227,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cargar_combos(model.IdEmpresa);
             ROL_009_Rpt report = new ROL_009_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdTipo_Nomina.Value = model.IdTipoNomina;
             report.p_fecha_inicio.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_estado_novedad.Value = novedad == null ? "" : Convert.ToString(model.estado_novedad);
@@ -233,6 +254,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cargar_combos(model.IdEmpresa);
             ROL_009_Rpt report = new ROL_009_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdTipo_Nomina.Value = model.IdTipoNomina;
             report.p_fecha_inicio.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_estado_novedad.Value = novedad;
@@ -551,7 +574,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdPeriodo=IdPeriodo,
             };
             ROL_021_Rpt report = new ROL_021_Rpt();
-            report.p_IdEmpresa.Value = IdEmpresa;
+            report.p_IdEmpresa.Value = IdEmpresa== 0 ? Convert.ToInt32(SessionFixed.IdEmpresa)  : IdEmpresa;
             report.p_IdNomina.Value = IdNomina_Tipo;
             report.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
             report.p_IdPeriodo.Value = IdPeriodo;

@@ -82,8 +82,8 @@
         <EntityTypeShape EntityType="Model_reportes.VWCXC_002" Width="1.5" PointX="27.375" PointY="6.75" />
         <EntityTypeShape EntityType="Model_reportes.VWCAJ_002" Width="1.5" PointX="35.375" PointY="32.75" />
         <EntityTypeShape EntityType="Model_reportes.VWCXP_001" Width="1.5" PointX="7.375" PointY="36.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWROL_009" Width="1.5" PointX="23.375" PointY="33.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_007" Width="1.5" PointX="35.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_009" Width="1.5" PointX="23.375" PointY="33.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_021" Width="1.5" PointX="9.375" PointY="36.75" />
       </Diagram>
     </edmx:Diagrams>

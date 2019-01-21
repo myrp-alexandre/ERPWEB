@@ -9690,6 +9690,7 @@
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbArea_reportes.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbDivision_reportes.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbSucursal_reportes_RRHH.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbTipoNomina.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
