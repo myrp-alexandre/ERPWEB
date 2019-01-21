@@ -41,7 +41,7 @@ namespace Core.Erp.Info.Helps
         public decimal? IdEmpleado { get; set; }
         public string[]  estado_novedad { get; set; }
         public string IdRubro { get; set; }
-
+        public int IdNominaTipoLiqui { get; set; }
         public string TipoRubro { get; set; }
         public int IdArea { get; set; }
         public int IdDivision { get; set; }

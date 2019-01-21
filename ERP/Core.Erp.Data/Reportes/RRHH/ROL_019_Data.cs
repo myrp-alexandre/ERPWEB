@@ -19,6 +19,7 @@ namespace Core.Erp.Data.Reportes.RRHH
 
                 int IdNominaTipoLiquiIni = IdNominaTipoLiqui;
                 int IdNominaTipoLiquiFin = IdNominaTipoLiqui == 0 ? 9999 : IdNominaTipoLiqui;
+
                 fecha_fin = Convert.ToDateTime(fecha_fin.ToShortDateString());
                 fecha_ini = Convert.ToDateTime(fecha_ini.ToShortDateString());
                 List<ROL_019_Info> Lista;
@@ -26,11 +27,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                 {
                     Lista = (from q in Context.VWROL_019
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdSucursal >= IdSucursalIni
-                             && q.IdSucursal <= IdSucursalFin
-                             && q.IdNominaTipoLiqui >= IdNominaTipoLiquiIni
-                             && q.IdNominaTipoLiqui <= IdNominaTipoLiquiFin
-                             && q.FechaPago >= fecha_ini 
+                             && IdSucursalIni <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
+                             && IdNominaTipoLiquiIni <= q.IdNominaTipoLiqui && q.IdNominaTipoLiqui <= IdNominaTipoLiquiFin
+                             && fecha_ini <= q.FechaPago
                              && q.FechaPago <= fecha_fin
                              select new ROL_019_Info
                              {
