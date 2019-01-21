@@ -33,7 +33,6 @@
           <Property Name="ref" Type="int" />
           <Property Name="lote" Type="int" />
           <Property Name="recibos" Type="varchar" MaxLength="50" />
-          <Property Name="aprobada_enviar_sri" Type="bit" />
           <Property Name="estado_aprobacion" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityContainer Name="Entity_eventoStoreContainer">
@@ -74,7 +73,6 @@
           <Property Name="ref" Type="Int32" />
           <Property Name="lote" Type="Int32" />
           <Property Name="recibos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="aprobada_enviar_sri" Type="Boolean" />
           <Property Name="estado_aprobacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
@@ -87,7 +85,6 @@
             <EntityTypeMapping TypeName="Entity_evento.Factura">
               <MappingFragment StoreEntitySet="Facturas">
                 <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
-                <ScalarProperty Name="aprobada_enviar_sri" ColumnName="aprobada_enviar_sri" />
                 <ScalarProperty Name="recibos" ColumnName="recibos" />
                 <ScalarProperty Name="lote" ColumnName="lote" />
                 <ScalarProperty Name="ref" ColumnName="ref" />
