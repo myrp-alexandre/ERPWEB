@@ -274,6 +274,7 @@
     <Compile Include="Inventario\in_transferencia_Info.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Info.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Info.cs" />
+    <Compile Include="Migraciones\FacturasEventos_Info.cs" />
     <Compile Include="Presupuesto\pre_Grupo_Info.cs" />
     <Compile Include="Presupuesto\pre_Grupo_x_seg_usuario_Info.cs" />
     <Compile Include="Presupuesto\pre_Periodo_Info.cs" />
