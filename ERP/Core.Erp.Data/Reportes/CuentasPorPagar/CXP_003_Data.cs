@@ -45,7 +45,9 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  pe_nombreCompleto = q.pe_nombreCompleto,
                                  Tipo_doc = q.Tipo_doc,
                                  cn_subtotal_siniva = q.cn_subtotal_siniva,
-                                 num_documento = q.num_documento
+                                 num_documento = q.num_documento,
+                                 Su_Descripcion =q.Su_Descripcion
+
                              }).ToList();
                 }
                 return Lista;
