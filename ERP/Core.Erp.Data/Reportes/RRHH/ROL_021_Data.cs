@@ -43,6 +43,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui==IdNominaTipo
+                                 && q.Valor>0
                                  && (q.ru_tipo=="E" ||q.IdRubro=="56" || q.IdRubro == info_rub_calculados.IdRubro_tot_egr)
                                  select new ROL_021_Info
                                  {
@@ -69,7 +70,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      pe_cedulaRuc=q.pe_cedulaRuc,
                                      pe_nombreCompleto=q.pe_nombreCompleto,
                                      IdArea=q.IdArea,
-                                     IdDivision=q.IdDivision
+                                     IdDivision=q.IdDivision,
+                                     Descripcion=q.Descripcion
 
                                  }).ToList();
                    

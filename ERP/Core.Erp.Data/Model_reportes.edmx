@@ -3409,6 +3409,7 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
           <Property Name="IdDivision" Type="int" />
           <Property Name="IdRol" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <Function Name="SPACTF_004_detalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -5663,7 +5664,8 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
     [VWROL_021].[IdArea] AS [IdArea], 
     [VWROL_021].[IdDivision] AS [IdDivision], 
     [VWROL_021].[IdRol] AS [IdRol], 
-    [VWROL_021].[IdEmpresa] AS [IdEmpresa]
+    [VWROL_021].[IdEmpresa] AS [IdEmpresa], 
+    [VWROL_021].[Descripcion] AS [Descripcion]
     FROM [web].[VWROL_021] AS [VWROL_021]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -9814,6 +9816,7 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
           <Property Name="IdDivision" Type="Int32" />
           <Property Name="IdRol" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -12661,6 +12664,7 @@ warning 6002: The table/view 'DBERP.web.VWROL_021' does not have a primary key d
           <EntitySetMapping Name="VWROL_021">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_021">
               <MappingFragment StoreEntitySet="VWROL_021">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />

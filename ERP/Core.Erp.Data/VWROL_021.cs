@@ -38,5 +38,6 @@ namespace Core.Erp.Data
         public Nullable<int> IdDivision { get; set; }
         public decimal IdRol { get; set; }
         public int IdEmpresa { get; set; }
+        public string Descripcion { get; set; }
     }
 }
