@@ -17,9 +17,7 @@ namespace Core.Erp.Web.Reportes.RRHH
         }
 
         public string usuario { get; set; }
-        public string empresa { get; set; }
-
-       
+        public string empresa { get; set; }        
 
         private void ROL_001_Rpt_AfterPrint(object sender, EventArgs e)
         {
@@ -38,7 +36,7 @@ namespace Core.Erp.Web.Reportes.RRHH
         {
             try
             {
-                (sender as XtraReport).PrintingSystem.Document.AutoFitToPagesWidth = 1;
+                //(sender as XtraReport).PrintingSystem.Document.AutoFitToPagesWidth = 1;
 
                 lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
                 lbl_empresa.Text = empresa;

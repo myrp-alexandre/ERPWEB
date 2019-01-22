@@ -11,6 +11,7 @@
 @using (Html.BeginForm("ROL_021", "RRHHReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdPeriodoSet)
     <div class="box">
         <div class="box-header with-border">
             <div class="row">
@@ -136,6 +137,9 @@
 
 
 <script>
+    $(function () {
+        cargar_tipo_liquidacion_nomina();
+    });
 
     $("#IdNomina_Tipo").change(function () {
         cargar_tipo_liquidacion_nomina();
@@ -176,6 +180,8 @@
 
 
     function cargar_periodos_x_nomina() {
+        var IdPeriodoSet = $("#IdPeriodoSet").val();
+        console.log(IdPeriodoSet);
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdNomina: $("#IdNomina_Tipo").val(),
@@ -196,6 +202,8 @@
                 $.each(data, function (i, row) {
                     $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
                 });
+
+                $("#IdPeriodo").val(IdPeriodoSet);
             },
             error: function (error) {
             }

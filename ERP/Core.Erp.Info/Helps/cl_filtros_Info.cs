@@ -50,7 +50,7 @@ namespace Core.Erp.Info.Helps
 
         #region filtros de Presupuesto
         public decimal IdPeriodo { get; set; }
-
+        public decimal IdPeriodoSet { get; set; }
         #endregion
 
         public cl_filtros_Info()

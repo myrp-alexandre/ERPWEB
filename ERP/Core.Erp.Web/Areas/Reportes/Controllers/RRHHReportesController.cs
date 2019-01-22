@@ -619,6 +619,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdNomina=IdNomina_Tipo,
                 IdTipoNomina =IdNomina_TipoLiqui,
                 IdPeriodo=IdPeriodo,
+                IdPeriodoSet = IdPeriodo,
+                TipoRubro = "A"
             };
             ROL_021_Rpt report = new ROL_021_Rpt();
             report.p_IdEmpresa.Value = IdEmpresa== 0 ? Convert.ToInt32(SessionFixed.IdEmpresa)  : IdEmpresa;
