@@ -28,7 +28,7 @@ namespace Core.Erp.WindowsService
         {
             Timer aTimer = new System.Timers.Timer();
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            aTimer.Interval = TimeSpan.FromSeconds(3).TotalMilliseconds;
+            aTimer.Interval = TimeSpan.FromSeconds(2).TotalMilliseconds;
             aTimer.Enabled = true;
         }
 
@@ -105,6 +105,14 @@ namespace Core.Erp.WindowsService
                         #endregion
 
                         PrintToolBase tool003 = new PrintToolBase(RPT_003.PrintingSystem);
+                        for (int i = 0; i < Impresion.NumCopias; i++)
+                        {
+                            if (string.IsNullOrEmpty(Impresion.IPImpresora))
+                                tool003.Print();
+                            else
+                                tool003.Print(Impresion.IPImpresora);
+
+                        }
                         if (string.IsNullOrEmpty(Impresion.IPImpresora))
                             tool003.Print();
                         else
@@ -132,12 +140,15 @@ namespace Core.Erp.WindowsService
                             RPT_013.CreateDocument();
                         }
                         #endregion
-
                         PrintToolBase tool013 = new PrintToolBase(RPT_013.PrintingSystem);
-                        if (string.IsNullOrEmpty(Impresion.IPImpresora))
-                            tool013.Print();
-                        else
-                            tool013.Print(Impresion.IPImpresora);
+                        for (int i = 0; i < Impresion.NumCopias; i++)
+                        {
+                            if (string.IsNullOrEmpty(Impresion.IPImpresora))
+                                tool013.Print();
+                            else
+                                tool013.Print(Impresion.IPImpresora);
+
+                        }
                         break;
                 }
                 #endregion

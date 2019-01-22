@@ -22,7 +22,8 @@ namespace Core.Erp.Data.General
                         Parametros = info.Parametros,
                         Usuario = info.Usuario,
                         NombreEmpresa = info.NombreEmpresa,
-                        FechaEnvio = DateTime.Now                        
+                        FechaEnvio = DateTime.Now ,
+                        NumCopias = info.NumCopias                       
                     });
                     db.SaveChanges();
                 }
@@ -78,7 +79,8 @@ namespace Core.Erp.Data.General
                         NombreEmpresa = entity.NombreEmpresa,
                         FechaEnvio = entity.FechaEnvio,
                         FechaImpresion = entity.FechaImpresion,
-                        Comentario = entity.Comentario
+                        Comentario = entity.Comentario,
+                        NumCopias = entity.NumCopias
                     };
                 }
             }

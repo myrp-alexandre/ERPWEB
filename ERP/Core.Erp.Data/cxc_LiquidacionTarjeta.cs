@@ -12,21 +12,27 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class cxc_MotivoLiquidacionTarjeta
+    public partial class cxc_LiquidacionTarjeta
     {
-        public cxc_MotivoLiquidacionTarjeta()
+        public cxc_LiquidacionTarjeta()
         {
-            this.cxc_MotivoLiquidacionTarjeta_x_tb_sucursal = new HashSet<cxc_MotivoLiquidacionTarjeta_x_tb_sucursal>();
+            this.cxc_LiquidacionTarjeta_x_cxc_cobro = new HashSet<cxc_LiquidacionTarjeta_x_cxc_cobro>();
             this.cxc_LiquidacionTarjetaDet = new HashSet<cxc_LiquidacionTarjetaDet>();
         }
     
         public int IdEmpresa { get; set; }
-        public decimal IdMotivo { get; set; }
-        public string Descripcion { get; set; }
-        public bool ESRetenIVA { get; set; }
-        public bool ESRetenFTE { get; set; }
-        public double Porcentaje { get; set; }
+        public int IdSucursal { get; set; }
+        public decimal IdLiquidacion { get; set; }
+        public string Lote { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public int IdTarjeta { get; set; }
+        public int IdBanco { get; set; }
+        public string Observacion { get; set; }
         public bool Estado { get; set; }
+        public double Valor { get; set; }
+        public Nullable<int> IdEmpresa_ct { get; set; }
+        public Nullable<int> IdTipoCbte_ct { get; set; }
+        public Nullable<decimal> IdCbteCble_ct { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
@@ -35,7 +41,7 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
-        public virtual ICollection<cxc_MotivoLiquidacionTarjeta_x_tb_sucursal> cxc_MotivoLiquidacionTarjeta_x_tb_sucursal { get; set; }
+        public virtual ICollection<cxc_LiquidacionTarjeta_x_cxc_cobro> cxc_LiquidacionTarjeta_x_cxc_cobro { get; set; }
         public virtual ICollection<cxc_LiquidacionTarjetaDet> cxc_LiquidacionTarjetaDet { get; set; }
     }
 }
