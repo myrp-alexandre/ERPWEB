@@ -51,15 +51,23 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="nom_PuntoVta">Descripción*</label>
-                    @Html.TextBoxFor(q => q.nom_PuntoVta, new { @class = "form-control", @id = "pr_codigo" })
+                    @Html.TextBoxFor(q => q.nom_PuntoVta, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.nom_PuntoVta, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label for="IPImpresora">IP impresión directa</label>
+                    <label for="IPImpresora">Código reporte</label>
                     @Html.TextBoxFor(q => q.IPImpresora, new { @class = "form-control", @id = "pr_codigo" })
                     @Html.ValidationMessageFor(q => q.IPImpresora, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="NumCopias"># Copias</label>
+                    @Html.TextBoxFor(q => q.NumCopias, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.NumCopias, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
