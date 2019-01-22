@@ -16,14 +16,17 @@
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
-        settings.CommandColumn.ShowNewButtonInHeader = true;
-        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+        settings.CommandColumn.Visible = false;
         settings.CommandColumn.ShowNewButton = false;
-        settings.CommandColumn.ShowEditButton = true;
-        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.DeleteRow = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
