@@ -31,6 +31,10 @@
         <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_cobro_det_cxc_cobro_tipo" />
         <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" />
         <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_MotivoLiquidacionTarjeta" Width="1.5" PointX="14.375" PointY="14" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.cxc_MotivoLiquidacionTarjeta_x_tb_sucursal" Width="1.5" PointX="16.625" PointY="14.875" />
+        <EntityTypeShape EntityType="Model_cuentas_por_cobrar.vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal" Width="1.5" PointX="16.375" PointY="0.75" />
+        <AssociationConnector Association="Model_cuentas_por_cobrar.FK_cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_cxc_MotivoLiquidacionTarjeta" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

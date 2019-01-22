@@ -43,5 +43,8 @@ namespace Core.Erp.Data
         public DbSet<vwcxc_liquidacion_comisiones_det> vwcxc_liquidacion_comisiones_det { get; set; }
         public DbSet<vwcxc_liquidacion_comisiones_det_x_comisionar> vwcxc_liquidacion_comisiones_det_x_comisionar { get; set; }
         public DbSet<cxc_cobro_tipo> cxc_cobro_tipo { get; set; }
+        public DbSet<cxc_MotivoLiquidacionTarjeta> cxc_MotivoLiquidacionTarjeta { get; set; }
+        public DbSet<cxc_MotivoLiquidacionTarjeta_x_tb_sucursal> cxc_MotivoLiquidacionTarjeta_x_tb_sucursal { get; set; }
+        public DbSet<vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal> vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal { get; set; }
     }
 }
