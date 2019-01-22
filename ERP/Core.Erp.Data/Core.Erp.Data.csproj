@@ -456,6 +456,15 @@
     <Compile Include="cxc_cobro_x_ct_cbtecble.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cxc_LiquidacionTarjeta.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_LiquidacionTarjetaDet.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_LiquidacionTarjeta_x_cxc_cobro.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="cxc_liquidacion_comisiones.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
@@ -1930,6 +1939,9 @@
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcxc_cobro_para_retencion.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwcxc_LiquidacionTarjetaDet.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcxc_liquidacion_comisiones_det.cs">
