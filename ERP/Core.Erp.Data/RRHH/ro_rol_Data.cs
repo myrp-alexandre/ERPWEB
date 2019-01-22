@@ -24,7 +24,7 @@ namespace Core.Erp.Data.RRHH
                              || ROL.IdNominaTipoLiqui == 6)
                              && ROL.IdSucursal >= IdSucursalInicio
                              && ROL.IdSucursal <= IdSucursalFin
-
+                             orderby ROL.IdRol descending
                              select new ro_rol_Info
                              {
                                  IdEmpresa = ROL.IdEmpresa,

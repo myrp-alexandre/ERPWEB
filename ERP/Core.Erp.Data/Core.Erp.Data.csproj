@@ -402,6 +402,8 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_det_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Data.cs" />
@@ -454,10 +456,25 @@
     <Compile Include="cxc_cobro_x_ct_cbtecble.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="cxc_LiquidacionTarjeta.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_LiquidacionTarjetaDet.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_LiquidacionTarjeta_x_cxc_cobro.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="cxc_liquidacion_comisiones.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="cxc_liquidacion_comisiones_det.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_MotivoLiquidacionTarjeta.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cxc_MotivoLiquidacionTarjeta_x_tb_sucursal.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="cxc_Parametro.cs">
@@ -1924,10 +1941,16 @@
     <Compile Include="vwcxc_cobro_para_retencion.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwcxc_LiquidacionTarjetaDet.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwcxc_liquidacion_comisiones_det.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcxc_liquidacion_comisiones_det_x_comisionar.cs">
+      <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCXP_001.cs">

@@ -365,7 +365,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                     NombreEmpresa = SessionFixed.NomEmpresa,
                     Usuario = SessionFixed.IdUsuario,
                     //Nunca enviar IdEmpresa en Parametros
-                    Parametros = IdSucursal + "," + IdBodega + "," + IdCbteVta
+                    Parametros = IdSucursal + "," + IdBodega + "," + IdCbteVta,
+                    NumCopias = pto_vta.NumCopias
                 });
             }
             

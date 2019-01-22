@@ -303,6 +303,7 @@
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaRetencionesController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\LiquidacionComisionesController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\Controllers\MotivoLiquidacionController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\TipoCobroController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
@@ -9702,6 +9703,13 @@
     <Content Include="Areas\Migraciones\Views\web.config" />
     <Content Include="Areas\Migraciones\Views\FacturasEventos\_GridViewPartial_facturas_eventos.cshtml" />
     <Content Include="Areas\Migraciones\Views\FacturasEventos\Index.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\Index.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\_GridViewPartial_Motivo_Liquidacion.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\_CmbCuenta_Motivo_det.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\_GridViewPartial_motivo_x_sucursal.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9824,7 +9832,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\ActivoFijo\ACTF_001_Rpt.resx">
       <DependentUpon>ACTF_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

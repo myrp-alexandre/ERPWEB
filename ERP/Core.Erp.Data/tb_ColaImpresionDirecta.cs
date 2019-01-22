@@ -25,5 +25,6 @@ namespace Core.Erp.Data
         public System.DateTime FechaEnvio { get; set; }
         public Nullable<System.DateTime> FechaImpresion { get; set; }
         public string Comentario { get; set; }
+        public Nullable<int> NumCopias { get; set; }
     }
 }

@@ -12,19 +12,15 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwfa_PuntoVta
+    public partial class vwcxc_LiquidacionTarjetaDet
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
-        public string Su_Descripcion { get; set; }
-        public int IdPuntoVta { get; set; }
-        public string cod_PuntoVta { get; set; }
-        public string nom_PuntoVta { get; set; }
-        public bool estado { get; set; }
-        public int IdBodega { get; set; }
-        public string Su_CodigoEstablecimiento { get; set; }
-        public int IdCaja { get; set; }
-        public string IPImpresora { get; set; }
-        public Nullable<int> NumCopias { get; set; }
+        public decimal IdCobro { get; set; }
+        public Nullable<decimal> IdLiquidacion { get; set; }
+        public double cr_TotalCobro { get; set; }
+        public System.DateTime cr_fecha { get; set; }
+        public string cr_observacion { get; set; }
+        public string pe_nombreCompleto { get; set; }
     }
 }
