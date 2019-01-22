@@ -140,7 +140,7 @@ namespace Core.Erp.Data.CuentasPorPagar
             {
                 using (Entities_cuentas_por_pagar Context = new Entities_cuentas_por_pagar())
                 {
-                    cp_orden_pago_tipo_x_empresa Entity = Context.cp_orden_pago_tipo_x_empresa.FirstOrDefault(q => q.IdTipo_op == info.IdTipo_op);
+                    cp_orden_pago_tipo_x_empresa Entity = Context.cp_orden_pago_tipo_x_empresa.FirstOrDefault(q => q.IdTipo_op == info.IdTipo_op && q.IdEmpresa==info.IdEmpresa);
                     if (Entity == null) return false;
                     Entity.IdCtaCble = info.IdCtaCble;
                     Entity.IdCtaCble_Credito = info.IdCtaCble_Credito;
