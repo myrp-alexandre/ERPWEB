@@ -132,6 +132,7 @@
           <Property Name="FechaEnvio" Type="datetime" Nullable="false" />
           <Property Name="FechaImpresion" Type="datetime" />
           <Property Name="Comentario" Type="varchar(max)" />
+          <Property Name="NumCopias" Type="int" />
         </EntityType>
         <EntityType Name="tb_dia">
           <Key>
@@ -2672,6 +2673,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <Property Name="FechaEnvio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaImpresion" Type="DateTime" Precision="3" />
           <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NumCopias" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3366,6 +3368,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_comprobantes_no_autorizados' 
           <EntitySetMapping Name="tb_ColaImpresionDirecta">
             <EntityTypeMapping TypeName="Model_general.tb_ColaImpresionDirecta">
               <MappingFragment StoreEntitySet="tb_ColaImpresionDirecta">
+                <ScalarProperty Name="NumCopias" ColumnName="NumCopias" />
                 <ScalarProperty Name="Comentario" ColumnName="Comentario" />
                 <ScalarProperty Name="FechaImpresion" ColumnName="FechaImpresion" />
                 <ScalarProperty Name="FechaEnvio" ColumnName="FechaEnvio" />

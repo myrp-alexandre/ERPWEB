@@ -72,7 +72,7 @@ namespace Core.Erp.Data
         public virtual ICollection<fa_factura_x_ct_cbtecble> fa_factura_x_ct_cbtecble { get; set; }
         public virtual ICollection<fa_factura_x_fa_guia_remision> fa_factura_x_fa_guia_remision { get; set; }
         public virtual ICollection<fa_factura_x_in_Ing_Egr_Inven> fa_factura_x_in_Ing_Egr_Inven { get; set; }
-        public virtual fa_PuntoVta fa_PuntoVta { get; set; }
         public virtual fa_factura_x_cxc_cobro fa_factura_x_cxc_cobro { get; set; }
+        public virtual fa_PuntoVta fa_PuntoVta { get; set; }
     }
 }

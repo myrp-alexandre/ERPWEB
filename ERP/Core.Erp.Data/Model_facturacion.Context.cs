@@ -78,10 +78,10 @@ namespace Core.Erp.Data
         public DbSet<fa_TipoNota> fa_TipoNota { get; set; }
         public DbSet<fa_proforma> fa_proforma { get; set; }
         public DbSet<fa_factura> fa_factura { get; set; }
-        public DbSet<fa_PuntoVta> fa_PuntoVta { get; set; }
-        public DbSet<vwfa_PuntoVta> vwfa_PuntoVta { get; set; }
         public DbSet<fa_factura_x_cxc_cobro> fa_factura_x_cxc_cobro { get; set; }
         public DbSet<vwfa_factura> vwfa_factura { get; set; }
+        public DbSet<fa_PuntoVta> fa_PuntoVta { get; set; }
+        public DbSet<vwfa_PuntoVta> vwfa_PuntoVta { get; set; }
     
         public virtual int SPFAC_EliminarCobroEfectivo(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<decimal> idCbteVta)
         {
