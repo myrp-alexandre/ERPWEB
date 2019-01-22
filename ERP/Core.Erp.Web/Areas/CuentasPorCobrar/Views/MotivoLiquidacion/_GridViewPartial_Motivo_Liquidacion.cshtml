@@ -83,13 +83,31 @@
         });
 
         settings.Columns.Add("IdMotivo", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(70);
-        settings.Columns.Add("Porcentaje", "Porcentaje").Width = Unit.Percentage(10);
+        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(50);
         settings.Columns.Add(column =>
+        {
+            column.FieldName = "ESRetenFTE";
+            column.Caption = "Ret. FTE";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        }); settings.Columns.Add(column =>
+        {
+            column.FieldName = "ESRetenIVA";
+            column.Caption = "Ret. IVA";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+            settings.Columns.Add("Porcentaje", "Porcentaje").Width = Unit.Percentage(10);
+        }); settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {
 
