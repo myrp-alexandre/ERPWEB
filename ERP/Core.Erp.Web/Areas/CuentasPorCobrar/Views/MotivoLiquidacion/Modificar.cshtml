@@ -13,6 +13,7 @@
 
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdMotivo)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -60,6 +61,16 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Detalle</label>
+                    @Html.Action("GridViewPartial_motivo_x_sucursal")
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","MotivoLiquidacion",new { Area = "CuentasPorCobrar" },null)">Cancelar</a>

@@ -129,6 +129,20 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
                     });
+                    if(info.Lst_det.Count()>0)
+                    {
+                        foreach (var item in info.Lst_det)
+                        {
+                            Context.cxc_MotivoLiquidacionTarjeta_x_tb_sucursal.Add(new cxc_MotivoLiquidacionTarjeta_x_tb_sucursal
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdMotivo = info.IdMotivo,
+                                IdCtaCble = item.IdCtaCble,
+                                IdSucursal = item.IdSucursal,
+                                Secuencia = item.Secuencia
+                            });
+                        }
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -154,6 +168,23 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     Entity.Porcentaje = info.Porcentaje;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
+
+                    var lst_det = Context.cxc_MotivoLiquidacionTarjeta_x_tb_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMotivo == info.IdMotivo).ToList();
+                    Context.cxc_MotivoLiquidacionTarjeta_x_tb_sucursal.RemoveRange(lst_det);
+                    if (info.Lst_det.Count() > 0)
+                    {
+                        foreach (var item in info.Lst_det)
+                        {
+                            Context.cxc_MotivoLiquidacionTarjeta_x_tb_sucursal.Add(new cxc_MotivoLiquidacionTarjeta_x_tb_sucursal
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdMotivo = info.IdMotivo,
+                                IdCtaCble = item.IdCtaCble,
+                                IdSucursal = item.IdSucursal,
+                                Secuencia = item.Secuencia
+                            });
+                        }
+                    }
                     Context.SaveChanges();
                 }
                 return true;

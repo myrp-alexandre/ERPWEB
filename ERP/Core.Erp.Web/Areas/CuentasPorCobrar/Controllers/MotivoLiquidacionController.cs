@@ -159,6 +159,17 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Info info_det)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            if (info_det != null)
+                if (info_det.IdCtaCble != "")
+                {
+                    ct_plancta_Info info_cuenta = bus_plancta.get_info(IdEmpresa, info_det.IdCtaCble);
+                    if (info_cuenta != null)
+                    {
+                        info_det.pc_Cuenta = info_cuenta.pc_Cuenta;
+                    }
+                }
             if (ModelState.IsValid)
                 List_Det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -211,8 +222,9 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             List<cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
             info_det.IdSucursal = info_det.IdSucursal;
-
-
+            info_det.IdCtaCble = info_det.IdCtaCble;
+            info_det.pc_Cuenta = info_det.pc_Cuenta;
+            info_det.Su_Descripcion = info_det.Su_Descripcion;
             list.Add(info_det);
         }
 
