@@ -56,7 +56,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                 Saldo = q.Saldo,
                                 SaldoInicial = q.SaldoInicial,
                                 Su_Descripcion = q.Su_Descripcion,
-                                TotalCuota = q.TotalCuota
+                                TotalCuota = q.TotalCuota,
+                                ru_descripcion = q.ru_descripcion
                                   
                              }).ToList();
                 }

@@ -44,7 +44,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                     item =>
                     {
                        item.de_descripcion= item.de_descripcion.Trim();
-                        item.pe_nombre = item.pe_nombre + " " + item.pe_apellido;
+                        item.pe_nombre = item.pe_apellido + " " + item.pe_nombre;
                         if (item.Decimo_Cuarto == null)
                             item.Decimo_Cuarto = "No";
                         else

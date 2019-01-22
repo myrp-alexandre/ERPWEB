@@ -6,6 +6,7 @@ using DevExpress.XtraReports.UI;
 using System.Collections.Generic;
 using Core.Erp.Bus.Reportes.Contabilidad;
 using Core.Erp.Info.Reportes.Contabilidad;
+using Core.Erp.Bus.General;
 
 namespace Core.Erp.Web.Reportes.Contabilidad
 {
@@ -31,6 +32,12 @@ namespace Core.Erp.Web.Reportes.Contabilidad
             CONTA_001_Bus bus_rpt = new CONTA_001_Bus();
             List<CONTA_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdTipoCbte, IdCbteCble);
             this.DataSource = lst_rpt;
+
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+            var emp = bus_empresa.get_info(IdEmpresa);
+
+            ImageConverter obj = new ImageConverter();
+            lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
         }
     }
 }

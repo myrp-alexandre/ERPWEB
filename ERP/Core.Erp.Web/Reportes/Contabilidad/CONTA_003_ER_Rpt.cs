@@ -1,7 +1,9 @@
-﻿using Core.Erp.Bus.Reportes.Contabilidad;
+﻿using Core.Erp.Bus.General;
+using Core.Erp.Bus.Reportes.Contabilidad;
 using Core.Erp.Info.Reportes.Contabilidad;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Core.Erp.Web.Reportes.Contabilidad
 {
@@ -33,6 +35,11 @@ namespace Core.Erp.Web.Reportes.Contabilidad
             List<CONTA_003_balances_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdAnio, fechaIni, fechaFin, IdUsuario, IdNivel, mostrarSaldo0, balance,IdSucursal);
             this.DataSource = lst_rpt;
 
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+            var emp = bus_empresa.get_info(IdEmpresa);
+
+            ImageConverter obj = new ImageConverter();
+            lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
         }
     }
 }
