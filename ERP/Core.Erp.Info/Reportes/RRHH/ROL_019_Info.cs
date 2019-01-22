@@ -29,6 +29,6 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string Nomina { get; set; }
         public Nullable<int> IdArea { get; set; }
         public Nullable<int> IdDivision { get; set; }
-
+        public string ru_descripcion { get; set; }
     }
 }
