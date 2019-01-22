@@ -37,7 +37,8 @@ namespace Core.Erp.Data.Reportes.Contabilidad
                                  dc_Valor_Haber = q.dc_Valor_Haber,
                                  dc_Observacion = q.dc_Observacion,
                                  tc_TipoCbte = q.tc_TipoCbte,
-                                 Su_Descripcion = q.Su_Descripcion
+                                 Su_Descripcion = q.Su_Descripcion,
+                                 NombreUsuario = q.NombreUsuario
                              }).ToList();
                 }
 
