@@ -135,6 +135,8 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_det_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Info.cs" />
@@ -167,7 +169,7 @@
     <Compile Include="CuentasPorPagar\cp_SolicitudPagoDet_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_SolicitudPago_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_TipoDocumento_Info.cs" />
-    <Compile Include="cxc_LiquidacionTarjeta_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_Info.cs" />
     <Compile Include="Facturacion\fa_CambioProductoDet_Info.cs" />
     <Compile Include="Facturacion\fa_CambioProducto_Info.cs" />
     <Compile Include="Facturacion\fa_catalogo_Info.cs" />
@@ -477,7 +479,6 @@
     <Compile Include="SeguridadAcceso\seg_Usuario_x_Empresa_Info.cs" />
     <Compile Include="vwcaj_Caja_Movimiento_por_conciliar_Info.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

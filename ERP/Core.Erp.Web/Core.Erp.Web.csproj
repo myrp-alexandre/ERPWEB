@@ -303,6 +303,7 @@
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaRetencionesController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\LiquidacionComisionesController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\Controllers\LiquidacionTarjetaCreditoController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\MotivoLiquidacionController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\TipoCobroController.cs" />
@@ -9782,6 +9783,7 @@
     <Folder Include="Areas\Compras\Models\" />
     <Folder Include="Areas\Contabilidad\Models\" />
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
+    <Folder Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />
