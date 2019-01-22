@@ -9,7 +9,7 @@
 }
 
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Index", "NotaDeDebitoBanco", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "LiquidacionTarjetaCredito", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     <div class="box ">
         <div class="box-header with-border">
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_DebitoBanco", new {IdSucursal = Model.IdSucursal })
+            @Html.Action("GridViewPartial_LiquidacionTarjetaCredito", new {IdSucursal = Model.IdSucursal })
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

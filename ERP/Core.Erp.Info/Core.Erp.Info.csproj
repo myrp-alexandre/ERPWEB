@@ -136,6 +136,7 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_det_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_Info.cs" />
@@ -169,7 +170,6 @@
     <Compile Include="CuentasPorPagar\cp_SolicitudPagoDet_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_SolicitudPago_Info.cs" />
     <Compile Include="CuentasPorPagar\cp_TipoDocumento_Info.cs" />
-    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_Info.cs" />
     <Compile Include="Facturacion\fa_CambioProductoDet_Info.cs" />
     <Compile Include="Facturacion\fa_CambioProducto_Info.cs" />
     <Compile Include="Facturacion\fa_catalogo_Info.cs" />

@@ -173,5 +173,83 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
+
+        #region metodo baja demanda
+
+        public List<tb_TarjetaCredito_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<tb_TarjetaCredito_Info> Lista = new List<tb_TarjetaCredito_Info>();
+            Lista = get_list(skip, take, args.Filter);
+
+            return Lista;
+        }
+
+        public List<tb_TarjetaCredito_Info> get_list(int skip, int take, string filter)
+        {
+            try
+            {
+                List<tb_TarjetaCredito_Info> Lista;
+
+                using (Entities_general Context = new Entities_general())
+                {
+                    Lista = (from p in Context.tb_TarjetaCredito
+                             where (p.IdTarjeta.ToString() + " " + p.NombreTarjeta).Contains(filter)
+                             select new tb_TarjetaCredito_Info
+                             {
+                                IdTarjeta = p.IdTarjeta,
+                                NombreTarjeta = p.NombreTarjeta,
+                                Estado = p.Estado
+                             })
+                                .OrderBy(p => p.IdTarjeta)
+                                .Skip(skip)
+                                .Take(take)
+                                .ToList();
+
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public tb_TarjetaCredito_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info_demanda(Convert.ToInt32(args.Value));
+        }
+
+        public tb_TarjetaCredito_Info get_info_demanda(int IdTarjetaCredito)
+        {
+            try
+            {
+                tb_TarjetaCredito_Info info = new tb_TarjetaCredito_Info();
+                using (Entities_general Context = new Entities_general())
+                {
+                    info = (from q in Context.tb_TarjetaCredito
+                            where q.IdTarjeta == IdTarjetaCredito
+                            select new tb_TarjetaCredito_Info
+                            {
+                                IdTarjeta = q.IdTarjeta,
+                                NombreTarjeta = q.NombreTarjeta,
+                                Estado = q.Estado
+                            }).FirstOrDefault();
+                }
+
+                return info;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }       
+        #endregion
     }
 }

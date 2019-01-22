@@ -109,7 +109,9 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Bus.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_Bus.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_liquidacion_comisiones_det_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Bus.cs" />

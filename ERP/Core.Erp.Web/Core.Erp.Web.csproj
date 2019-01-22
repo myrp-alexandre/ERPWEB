@@ -9711,6 +9711,13 @@
     <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\Anular.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\_CmbCuenta_Motivo_det.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\_GridViewPartial_motivo_x_sucursal.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_LiquidacionTarjetaCredito.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Index.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_CmbTarjetaCredito.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_MotivosLiquidacion.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_CobrosLiquidacion.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_CobrosPendientesLiquidacion.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9774,6 +9781,7 @@
     <Content Include="Views\Account\CambiarContrasena.cshtml" />
     <Content Include="Views\Layout\_LayoutConsulta.cshtml" />
     <Content Include="Scripts\knockout-3.3.0.js" />
+    <Content Include="_GridViewPartial_LiquidacionTarjetaCredito.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -9783,7 +9791,6 @@
     <Folder Include="Areas\Compras\Models\" />
     <Folder Include="Areas\Contabilidad\Models\" />
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
-    <Folder Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />

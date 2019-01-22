@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.CuentasPorCobrar;
 using Core.Erp.Info;
+using Core.Erp.Info.CuentasPorCobrar;
 using System;
 using System.Collections.Generic;
 using System.Linq;

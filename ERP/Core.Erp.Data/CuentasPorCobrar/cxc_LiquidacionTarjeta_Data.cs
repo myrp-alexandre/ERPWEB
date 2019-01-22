@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info;
+using Core.Erp.Info.CuentasPorCobrar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,43 @@ namespace Core.Erp.Data.CuentasPorCobrar
 
                 using (Entities_cuentas_por_cobrar db = new Entities_cuentas_por_cobrar())
                 {
-
+                    if (MostrarAnulados)
+                        Lista = (from q in db.cxc_LiquidacionTarjeta
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal >= IdSucursalIni
+                                 && q.IdSucursal <= IdSucursalFin
+                                 orderby q.IdLiquidacion descending
+                                 select new cxc_LiquidacionTarjeta_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdSucursal = q.IdSucursal,
+                                     IdLiquidacion = q.IdLiquidacion,
+                                     Fecha = q.Fecha,
+                                     IdTarjeta = q.IdTarjeta,
+                                     Estado = q.Estado,
+                                     IdBanco = q.IdBanco,
+                                     Observacion = q.Observacion,
+                                     Valor = q.Valor
+                                 }).ToList();
+                    else
+                        Lista = (from q in db.cxc_LiquidacionTarjeta
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal >= IdSucursalIni
+                                 && q.IdSucursal <= IdSucursalFin
+                                 && q.Estado == true
+                                 orderby q.IdLiquidacion descending
+                                 select new cxc_LiquidacionTarjeta_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdSucursal = q.IdSucursal,
+                                     IdLiquidacion = q.IdLiquidacion,
+                                     Fecha = q.Fecha,
+                                     IdTarjeta = q.IdTarjeta,
+                                     Estado = q.Estado,
+                                     IdBanco = q.IdBanco,
+                                     Observacion = q.Observacion,
+                                     Valor = q.Valor
+                                 }).ToList();
                 }
                 return Lista;
             }
@@ -66,7 +103,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdSucursal = Entity.IdSucursal,
+                        IdLiquidacion = Entity.IdSucursal,
                         IdBanco = Entity.IdBanco,
+                        IdTarjeta = Entity.IdTarjeta,
                         Valor = Entity.Valor,
                         Fecha = Entity.Fecha,
                         Estado = Entity.Estado

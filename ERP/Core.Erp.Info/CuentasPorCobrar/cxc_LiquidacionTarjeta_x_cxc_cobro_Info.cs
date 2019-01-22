@@ -14,5 +14,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public int Secuencia { get; set; }
         public double Valor { get; set; }
         public decimal IdCobro { get; set; }
+
+        public DateTime cr_fecha { get; set; }
     }
 }

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Info
+namespace Core.Erp.Info.CuentasPorCobrar
 {
     public class cxc_LiquidacionTarjeta_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public decimal IdLiquidacion { get; set; }
