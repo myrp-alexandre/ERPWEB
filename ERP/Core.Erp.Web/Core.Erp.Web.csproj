@@ -9708,6 +9708,8 @@
     <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\Nuevo.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\_CmbCuenta_Motivo_det.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\_GridViewPartial_motivo_x_sucursal.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

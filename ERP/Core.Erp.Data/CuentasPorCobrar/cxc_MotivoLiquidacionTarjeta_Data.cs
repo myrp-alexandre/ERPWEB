@@ -25,7 +25,8 @@ namespace Core.Erp.Data.CuentasPorCobrar
                             Descripcion = q.Descripcion,
                             ESRetenFTE = q.ESRetenFTE,
                             ESRetenIVA = q.ESRetenIVA,
-                            Estado = q.Estado
+                            Estado = q.Estado,
+                            Porcentaje = q.Porcentaje
                         }).ToList();
                     }
                     else
@@ -71,7 +72,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         Descripcion = Entity.Descripcion,
                         ESRetenFTE = Entity.ESRetenFTE,
                         ESRetenIVA = Entity.ESRetenIVA,
-                        Estado = Entity.Estado
+                        Estado = Entity.Estado,
+                        Porcentaje = Entity.Porcentaje,
+
 
                     };
                 }
@@ -120,6 +123,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         Descripcion = info.Descripcion,
                         ESRetenFTE = info.ESRetenFTE,
                         ESRetenIVA = info.ESRetenIVA,
+                        Porcentaje = info.Porcentaje,
                         Estado = true,
 
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
@@ -147,6 +151,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     Entity.Descripcion = info.Descripcion;
                     Entity.ESRetenFTE = info.ESRetenFTE;
                     Entity.ESRetenIVA = info.ESRetenIVA;
+                    Entity.Porcentaje = info.Porcentaje;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
                     Context.SaveChanges();

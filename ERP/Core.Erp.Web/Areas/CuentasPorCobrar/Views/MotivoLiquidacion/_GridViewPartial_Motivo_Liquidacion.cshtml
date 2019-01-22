@@ -82,8 +82,9 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdMotivo", "ID").Width = Unit.Percentage(20);
+        settings.Columns.Add("IdMotivo", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(70);
+        settings.Columns.Add("Porcentaje", "Porcentaje").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";
