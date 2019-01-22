@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Erp.Info.Facturacion
 {
@@ -18,6 +19,7 @@ namespace Core.Erp.Info.Facturacion
         [Required(ErrorMessage = "El campo bodega es obligatorio")]
         public int IdBodega { get; set; }
         public int IdCaja { get; set; }
+        public Nullable<int> NumCopias { get; set; }
 
         #region Campos que no existen en la tabla
         public string Su_Descripcion { get; set; }

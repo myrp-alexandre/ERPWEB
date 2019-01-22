@@ -29,6 +29,7 @@ namespace Core.Erp.Data
         public int IdBodega { get; set; }
         public int IdCaja { get; set; }
         public string IPImpresora { get; set; }
+        public Nullable<int> NumCopias { get; set; }
     
         public virtual ICollection<fa_factura> fa_factura { get; set; }
         public virtual ICollection<fa_notaCreDeb> fa_notaCreDeb { get; set; }
