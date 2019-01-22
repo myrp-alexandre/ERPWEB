@@ -25,5 +25,6 @@ namespace Core.Erp.Data
         public string Su_CodigoEstablecimiento { get; set; }
         public int IdCaja { get; set; }
         public string IPImpresora { get; set; }
+        public Nullable<int> NumCopias { get; set; }
     }
 }

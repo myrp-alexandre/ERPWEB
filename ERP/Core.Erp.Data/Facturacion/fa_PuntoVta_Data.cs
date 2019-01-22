@@ -102,7 +102,8 @@ namespace Core.Erp.Data.Facturacion
                         estado = Entity.estado,
                         Su_CodigoEstablecimiento = Entity.Su_CodigoEstablecimiento,
                         IdCaja = Entity.IdCaja,
-                        IPImpresora = Entity.IPImpresora
+                        IPImpresora = Entity.IPImpresora,
+                        
                     };
                 }
                 return info;
