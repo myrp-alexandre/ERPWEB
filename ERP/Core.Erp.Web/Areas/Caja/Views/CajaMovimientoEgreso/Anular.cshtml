@@ -82,7 +82,7 @@
 
     function armar_diario() {
         var caja = $("#IdCaja").val();
-        var tipo_movimiento = $("#IdTipoMovi").val();
+        var tipo_movimiento = IdTipoMovi.GetValue();
         var monto = $("#cr_Valor").val();
 
         var datos = {
@@ -274,7 +274,7 @@
 
 function armar_diario() {
                         var caja = $("#IdCaja").val();
-                        var tipo_movimiento = $("#IdTipoMovi").val();
+                        var tipo_movimiento = IdTipoMovi.GetValue();
                         var monto = $("#cr_Valor").val();
 
                         var datos = {

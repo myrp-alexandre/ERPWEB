@@ -18,6 +18,7 @@
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
         settings.Properties.NullText = "== Seleccione ==";
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "armar_diario";
 
     })
     .BindList(new Core.Erp.Web.Areas.Caja.Controllers.CajaMovimientoEgresoController().get_list_bajo_demanda_TipoMovimiento_Egreso, new Core.Erp.Web.Areas.Caja.Controllers.CajaMovimientoEgresoController().get_info_bajo_demanda_TipoMovimiento_Egreso)
