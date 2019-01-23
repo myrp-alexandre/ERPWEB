@@ -6,6 +6,8 @@ using DevExpress.XtraReports.UI;
 using Core.Erp.Info.Reportes.RRHH;
 using Core.Erp.Bus.Reportes.RRHH;
 using System.Collections.Generic;
+using Core.Erp.Bus.General;
+
 namespace Core.Erp.Web.Reportes.RRHH
 {
     public partial class ROL_002_Rpt : DevExpress.XtraReports.UI.XtraReport
@@ -42,6 +44,13 @@ namespace Core.Erp.Web.Reportes.RRHH
                 ROL_002_Bus bus_rpt = new ROL_002_Bus();
                 List<ROL_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
                 this.DataSource = lst_rpt;
+
+
+                tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+                var emp = bus_empresa.get_info(IdEmpresa);
+
+                ImageConverter obj = new ImageConverter();
+                lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
             }
             catch (Exception)
             {

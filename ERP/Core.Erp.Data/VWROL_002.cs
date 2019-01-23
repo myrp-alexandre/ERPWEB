@@ -33,5 +33,9 @@ namespace Core.Erp.Data
         public int ru_orden { get; set; }
         public string em_ruc { get; set; }
         public int IdSucursal { get; set; }
+        public string Grupo { get; set; }
+        public string em_codigo { get; set; }
+        public string de_descripcion { get; set; }
+        public string Area { get; set; }
     }
 }
