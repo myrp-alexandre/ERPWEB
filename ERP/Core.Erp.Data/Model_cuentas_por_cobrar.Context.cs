@@ -49,6 +49,6 @@ namespace Core.Erp.Data
         public DbSet<cxc_LiquidacionTarjeta> cxc_LiquidacionTarjeta { get; set; }
         public DbSet<cxc_LiquidacionTarjeta_x_cxc_cobro> cxc_LiquidacionTarjeta_x_cxc_cobro { get; set; }
         public DbSet<cxc_LiquidacionTarjetaDet> cxc_LiquidacionTarjetaDet { get; set; }
-        public DbSet<vwcxc_LiquidacionTarjetaDet> vwcxc_LiquidacionTarjetaDet { get; set; }
+        public DbSet<vwcxc_LiquidacionTarjeta_x_cxc_cobro> vwcxc_LiquidacionTarjeta_x_cxc_cobro { get; set; }
     }
 }

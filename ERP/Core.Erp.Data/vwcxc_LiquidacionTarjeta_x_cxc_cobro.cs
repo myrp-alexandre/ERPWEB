@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwcxc_LiquidacionTarjetaDet
+    public partial class vwcxc_LiquidacionTarjeta_x_cxc_cobro
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }

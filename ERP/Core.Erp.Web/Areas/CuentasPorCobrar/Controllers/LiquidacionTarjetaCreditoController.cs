@@ -6,6 +6,7 @@ using Core.Erp.Info.General;
 using Core.Erp.Info.Helps;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -146,6 +147,31 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             var model = Lista_LiquidacionTarjetaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_MotivosLiquidacion", model);
         }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNewMotivo([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_LiquidacionTarjetaDet_Info info_det)
+        {
+            if (ModelState.IsValid)
+                Lista_LiquidacionTarjetaDet.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_LiquidacionTarjetaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_MotivosLiquidacion", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateMotivo([ModelBinder(typeof(DevExpressEditorsBinder))] cxc_LiquidacionTarjetaDet_Info info_det)
+        {
+            if (ModelState.IsValid)
+                Lista_LiquidacionTarjetaDet.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_LiquidacionTarjetaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_MotivosLiquidacion", model);
+        }
+
+        public ActionResult EditingDeleteMotivo(int Secuencia)
+        {
+            Lista_LiquidacionTarjetaDet.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_LiquidacionTarjetaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_MotivosLiquidacion", model);
+        }
         #endregion
 
         #region Acciones
@@ -174,7 +200,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         #region Json
         public JsonResult GetCobrosPendientes(int IdEmpresa = 0, int IdSucursal = 0, decimal IdTransaccionSession = 0)
         {
-            Lista_Liquidacion_x_cobro_pendiente.set_list(bus_LiquidacionTarjeta_cxc_cobro.get_list_cobros_pendientes(IdEmpresa, IdSucursal),IdTransaccionSession);
+            Lista_Liquidacion_x_cobro_pendiente.set_list(bus_LiquidacionTarjeta_cxc_cobro.GetList(IdEmpresa, IdSucursal,null),IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
