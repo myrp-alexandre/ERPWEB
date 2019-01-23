@@ -12,9 +12,9 @@
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Empleado", Action = "EditingAddNew", Area = "Banco" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Empleado", Action = "EditingUpdate", Area = "Banco" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Empleado", Action = "EditingDelete", Area = "Banco" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Empleado", Action = "EditingAddNew", Area = "RRHH" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Empleado", Action = "EditingUpdate", Area = "RRHH" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Empleado", Action = "EditingDelete", Area = "RRHH" };
 
         settings.CommandColumn.ShowNewButtonInHeader = true;
         settings.CommandColumn.Visible = true;
@@ -46,14 +46,14 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Descripcion";
+            column.FieldName = "Descripcion_Division";
             column.Caption = "División";
             column.Width = Unit.Percentage(20);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IDividion";
+            column.FieldName = "IDividion_det";
             column.Caption = "División";
             column.Width = Unit.Percentage(20);
             column.Visible = false;
@@ -65,21 +65,19 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Descripcion";
+            column.FieldName = "IdArea_det";
             column.Caption = "Area";
             column.Width = Unit.Percentage(20);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdArea";
-            column.Caption = "Area";
-            column.Width = Unit.Percentage(20);
-            column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
-            column.SetEditItemTemplateContent(c =>
+            column.EditorProperties().ComboBox(p =>
             {
-                Html.RenderPartial("_CmbArea_IngresoCompartido", DataBinder.Eval(c.DataItem, "IdArea"));
+                p.CallbackRouteValues = new { Controller = "Empleado", Action = "Cargar_CmbArea_IngresoCompartido", Area = "RRHH" };
+                p.TextField = "Descripcion";
+                p.ValueField = "IdArea";
+                p.ValueType = typeof(int);
+                p.BindList(ViewBag.lst_areas);
+                p.ClientSideEvents.BeginCallback = "AreaComboBox_BeginCallback";
+                p.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
             });
         });
         settings.Columns.Add(column =>

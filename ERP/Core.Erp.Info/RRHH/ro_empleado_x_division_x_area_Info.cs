@@ -17,6 +17,8 @@ namespace Core.Erp.Info.RRHH
         public string Observacion { get; set; }
 
         public string Descripcion_Division { get; set; }
-        public string Descripcion_Area { get; set; }
+        public string Descripcion { get; set; }
+        public int IDividion_det { get; set; }
+        public int IdArea_det { get; set; }
     }
 }
