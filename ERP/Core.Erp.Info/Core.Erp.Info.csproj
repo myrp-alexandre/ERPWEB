@@ -399,6 +399,7 @@
     <Compile Include="RRHH\MTE\ro_archivosCSV_Info.cs" />
     <Compile Include="RRHH\RDEP\Rdep.cs" />
     <Compile Include="RRHH\RDEP\Rdep_Info.cs" />
+    <Compile Include="RRHH\ROL_022_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Detalle_Info.cs" />
     <Compile Include="RRHH\ro_Acta_Finiquito_Info.cs" />
     <Compile Include="RRHH\ro_ArchivosIess_Info.cs" />

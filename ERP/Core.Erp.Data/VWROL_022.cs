@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class VWROL_002
+    public partial class VWROL_022
     {
         public string NombreCompleto { get; set; }
         public string Ruc { get; set; }
@@ -37,5 +37,8 @@ namespace Core.Erp.Data
         public string em_codigo { get; set; }
         public string de_descripcion { get; set; }
         public string Area { get; set; }
+        public Nullable<int> IdArea { get; set; }
+        public bool Pago_por_horas { get; set; }
+        public string IdRubro { get; set; }
     }
 }

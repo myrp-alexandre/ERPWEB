@@ -85,6 +85,7 @@
         <EntityTypeShape EntityType="Model_reportes.VWROL_019" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_014" Width="1.5" PointX="23.375" PointY="24.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_002" Width="1.5" PointX="15.375" PointY="36.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_022" Width="1.5" PointX="29.375" PointY="36.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
