@@ -52,6 +52,14 @@
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel21 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel20 = new DevExpress.XtraReports.UI.XRLabel();
+            this.p_IdNomina = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdNominaTipo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdPeriodo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
+            this.P_IdDivision = new DevExpress.XtraReports.Parameters.Parameter();
+            this.P_IdArea = new DevExpress.XtraReports.Parameters.Parameter();
+            this.P_TipoRubro = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -291,6 +299,62 @@
             this.xrLabel20.Text = "Elaborado por:";
             this.xrLabel20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
+            // p_IdNomina
+            // 
+            this.p_IdNomina.Name = "p_IdNomina";
+            this.p_IdNomina.Type = typeof(short);
+            this.p_IdNomina.ValueInfo = "0";
+            this.p_IdNomina.Visible = false;
+            // 
+            // p_IdEmpresa
+            // 
+            this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Type = typeof(short);
+            this.p_IdEmpresa.ValueInfo = "0";
+            this.p_IdEmpresa.Visible = false;
+            // 
+            // p_IdNominaTipo
+            // 
+            this.p_IdNominaTipo.Name = "p_IdNominaTipo";
+            this.p_IdNominaTipo.Type = typeof(short);
+            this.p_IdNominaTipo.ValueInfo = "0";
+            this.p_IdNominaTipo.Visible = false;
+            // 
+            // p_IdPeriodo
+            // 
+            this.p_IdPeriodo.Name = "p_IdPeriodo";
+            this.p_IdPeriodo.Type = typeof(short);
+            this.p_IdPeriodo.ValueInfo = "0";
+            this.p_IdPeriodo.Visible = false;
+            // 
+            // p_IdSucursal
+            // 
+            this.p_IdSucursal.Name = "p_IdSucursal";
+            this.p_IdSucursal.Type = typeof(short);
+            this.p_IdSucursal.ValueInfo = "0";
+            this.p_IdSucursal.Visible = false;
+            // 
+            // P_IdDivision
+            // 
+            this.P_IdDivision.Name = "P_IdDivision";
+            this.P_IdDivision.Type = typeof(short);
+            this.P_IdDivision.ValueInfo = "0";
+            this.P_IdDivision.Visible = false;
+            // 
+            // P_IdArea
+            // 
+            this.P_IdArea.Name = "P_IdArea";
+            this.P_IdArea.Type = typeof(short);
+            this.P_IdArea.ValueInfo = "0";
+            this.P_IdArea.Visible = false;
+            // 
+            // P_TipoRubro
+            // 
+            this.P_TipoRubro.Name = "P_TipoRubro";
+            this.P_TipoRubro.Type = typeof(short);
+            this.P_TipoRubro.ValueInfo = "0";
+            this.P_TipoRubro.Visible = false;
+            // 
             // ROL_022_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -304,7 +368,17 @@
             this.PageHeight = 827;
             this.PageWidth = 1169;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
+            this.p_IdNomina,
+            this.p_IdEmpresa,
+            this.p_IdNominaTipo,
+            this.p_IdPeriodo,
+            this.p_IdSucursal,
+            this.P_IdDivision,
+            this.P_IdArea,
+            this.P_TipoRubro});
             this.Version = "17.2";
+            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_022_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
@@ -336,5 +410,13 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel23;
         private DevExpress.XtraReports.UI.XRLabel xrLabel21;
         private DevExpress.XtraReports.UI.XRLabel xrLabel20;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdNomina;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdNominaTipo;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdPeriodo;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdSucursal;
+        public DevExpress.XtraReports.Parameters.Parameter P_IdDivision;
+        public DevExpress.XtraReports.Parameters.Parameter P_IdArea;
+        public DevExpress.XtraReports.Parameters.Parameter P_TipoRubro;
     }
 }
