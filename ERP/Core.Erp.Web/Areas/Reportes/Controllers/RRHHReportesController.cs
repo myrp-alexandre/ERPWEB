@@ -293,8 +293,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina = lst_nomina;
 
-            var lst_nomina_tipo = bus_tiponomina.get_list(IdEmpresa, false);
-            lst_nomina_tipo.Add(new ro_nomina_tipo_Info
+            var lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);
+            lst_nomina_tipo.Add(new ro_Nomina_Tipoliqui_Info
             {
                 IdEmpresa = IdEmpresa,
                 IdNomina_Tipo = 0,
@@ -303,6 +303,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_nomina_tipo = lst_nomina_tipo;
 
             var lst_area = bus_area.get_list(IdEmpresa, false);
+            lst_area.Add(new ro_area_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdArea = 0,
+                Descripcion = "TODAS"
+            });
             ViewBag.lst_area = lst_area;
 
             var lst_periodos = bus_periodo_x_nominas.get_list_utimo_periodo_aprocesar(IdEmpresa, 0,0);
@@ -385,12 +391,16 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdTipoNomina = 0
+                IdTipoNomina = 0,
+                IdArea = 0
             };
             cargar_combos(model.IdEmpresa);
             ROL_014_Rpt report = new ROL_014_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
+            report.p_IdArea.Value = model.IdArea;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
@@ -401,6 +411,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ROL_014_Rpt report = new ROL_014_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
+            report.p_IdArea.Value = model.IdArea;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }

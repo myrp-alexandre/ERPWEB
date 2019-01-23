@@ -1052,6 +1052,18 @@
     <Compile Include="Reportes\Produccion\PRO_001_Rpt.Designer.cs">
       <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_002_Egresos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_002_Egresos.Designer.cs">
+      <DependentUpon>ROL_002_Egresos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_002_Ingresos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_002_Ingresos.Designer.cs">
+      <DependentUpon>ROL_002_Ingresos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_019_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -10120,6 +10132,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Produccion\PRO_001_Rpt.resx">
       <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_002_Egresos.resx">
+      <DependentUpon>ROL_002_Egresos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_002_Ingresos.resx">
+      <DependentUpon>ROL_002_Ingresos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_019_Rpt.resx">
       <DependentUpon>ROL_019_Rpt.cs</DependentUpon>

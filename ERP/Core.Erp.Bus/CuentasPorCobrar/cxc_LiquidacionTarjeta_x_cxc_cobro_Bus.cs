@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.CuentasPorCobrar
     public class cxc_LiquidacionTarjeta_x_cxc_cobro_Bus
     {
         cxc_LiquidacionTarjeta_x_cxc_cobro_Data odata = new cxc_LiquidacionTarjeta_x_cxc_cobro_Data();
-        public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> get_list_cobros_pendientes(int IdEmpresa, int IdSucursal)
+        public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> GetList(int IdEmpresa, int IdSucursal, decimal? IdLiquidacion)
         {
             try
             {
-                return odata.get_list_cobros_pendientes(IdEmpresa, IdSucursal);
+                return odata.GetList(IdEmpresa, IdSucursal, IdLiquidacion);
             }
             catch (Exception)
             {

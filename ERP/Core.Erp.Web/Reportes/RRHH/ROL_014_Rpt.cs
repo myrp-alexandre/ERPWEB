@@ -26,9 +26,10 @@ namespace Core.Erp.Web.Reportes.RRHH
             lbl_usuario.Text = usuario;
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdTipoNomina = p_IdTipoNomina.Value == null ? 0 : Convert.ToInt32(p_IdTipoNomina.Value);
+            int IdArea = p_IdArea.Value == null ? 0 : Convert.ToInt32(p_IdArea.Value);
 
             ROL_014_Bus bus_rpt = new ROL_014_Bus();
-            List<ROL_014_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdTipoNomina);
+            List<ROL_014_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdTipoNomina, IdArea);
             this.DataSource = lst_rpt;
         }
     }

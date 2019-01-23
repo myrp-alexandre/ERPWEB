@@ -711,12 +711,6 @@
             this.pivotGridField4.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.pivotGridField4.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.pivotGridField4.Appearance.Cell.WordWrap = true;
-            this.pivotGridField4.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.pivotGridField4.Appearance.FieldHeader.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField4.Appearance.FieldHeader.WordWrap = true;
-            this.pivotGridField4.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.pivotGridField4.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField4.Appearance.FieldValue.WordWrap = true;
             this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField4.AreaIndex = 0;
             this.pivotGridField4.Caption = "Tipo";
@@ -730,14 +724,6 @@
             this.pivotGridField3.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.pivotGridField3.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.pivotGridField3.Appearance.Cell.WordWrap = true;
-            this.pivotGridField3.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.pivotGridField3.Appearance.FieldHeader.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField3.Appearance.FieldHeader.Trimming = System.Drawing.StringTrimming.Word;
-            this.pivotGridField3.Appearance.FieldHeader.WordWrap = true;
-            this.pivotGridField3.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.pivotGridField3.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.pivotGridField3.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField3.Appearance.FieldValue.WordWrap = true;
             this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField3.AreaIndex = 2;
             this.pivotGridField3.Caption = "Rubros";
@@ -753,12 +739,6 @@
             this.pivotGridField2.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.pivotGridField2.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.pivotGridField2.Appearance.Cell.WordWrap = true;
-            this.pivotGridField2.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.pivotGridField2.Appearance.FieldHeader.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField2.Appearance.FieldHeader.WordWrap = true;
-            this.pivotGridField2.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.pivotGridField2.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField2.Appearance.FieldValue.WordWrap = true;
             this.pivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField2.AreaIndex = 1;
             this.pivotGridField2.Caption = "Orden";
@@ -771,12 +751,6 @@
             this.pivotGridField1.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.pivotGridField1.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.pivotGridField1.Appearance.Cell.WordWrap = true;
-            this.pivotGridField1.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.pivotGridField1.Appearance.FieldHeader.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField1.Appearance.FieldHeader.WordWrap = true;
-            this.pivotGridField1.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.pivotGridField1.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField1.Appearance.FieldValue.WordWrap = true;
             this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField1.AreaIndex = 0;
             this.pivotGridField1.Caption = "Valor";
@@ -792,7 +766,7 @@
             this.xrPivotGridField44.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.xrPivotGridField44.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.xrPivotGridField44.Appearance.Cell.WordWrap = true;
-            this.xrPivotGridField44.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.xrPivotGridField44.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.xrPivotGridField44.Appearance.FieldHeader.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.xrPivotGridField44.Appearance.FieldHeader.WordWrap = true;
             this.xrPivotGridField44.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
@@ -856,6 +830,11 @@
             this.xrPivotGrid1.OptionsView.RowTotalsLocation = DevExpress.XtraPivotGrid.PivotRowTotalsLocation.Tree;
             this.xrPivotGrid1.OptionsView.RowTreeOffset = 40;
             this.xrPivotGrid1.OptionsView.RowTreeWidth = 300;
+            this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
+            this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
+            this.xrPivotGrid1.OptionsView.ShowColumnTotals = false;
+            this.xrPivotGrid1.OptionsView.ShowRowGrandTotalHeader = false;
+            this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(464.4583F, 82.29166F);
             // 
@@ -864,12 +843,6 @@
             this.pivotGridField5.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.pivotGridField5.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.pivotGridField5.Appearance.Cell.WordWrap = true;
-            this.pivotGridField5.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.pivotGridField5.Appearance.FieldHeader.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField5.Appearance.FieldHeader.WordWrap = true;
-            this.pivotGridField5.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.pivotGridField5.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField5.Appearance.FieldValue.WordWrap = true;
             this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.pivotGridField5.AreaIndex = 0;
             this.pivotGridField5.Caption = "Area";

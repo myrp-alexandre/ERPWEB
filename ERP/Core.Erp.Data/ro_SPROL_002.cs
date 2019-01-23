@@ -21,5 +21,7 @@ namespace Core.Erp.Data
         public int IdNominaTipo { get; set; }
         public int IdNominaTipoLiqui { get; set; }
         public double Valor { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdArea { get; set; }
     }
 }

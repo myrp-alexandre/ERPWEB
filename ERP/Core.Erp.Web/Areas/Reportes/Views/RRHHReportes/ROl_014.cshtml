@@ -29,6 +29,13 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Area</label>
+                            @Html.DropDownListFor(q => q.IdArea, new SelectList(ViewBag.lst_area, "IdArea", "Descripcion"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.IdArea, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="IdTipoNomina">Nomina</label>
