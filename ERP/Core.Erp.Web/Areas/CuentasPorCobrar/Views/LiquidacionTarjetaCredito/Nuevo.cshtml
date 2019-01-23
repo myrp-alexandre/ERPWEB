@@ -68,7 +68,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNew", "LiquidacionTarjetaCredito",new { Area = "Banco"})',
+            url: '@Url.Action("EditingAddNew", "LiquidacionTarjetaCredito",new { Area = "CuentasPorCobrar"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -198,7 +198,7 @@
             </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cobros_pendientes">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_cobros_pendientes">
                 <div class="row">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-primary" id="btn_buscar_cobrospendientes" onclick="MostrarModal();">
@@ -209,7 +209,7 @@
                 <br />
                 @Html.Action("GridViewPartial_CobrosLiquidacion")
             </div>
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_motivos_liquidacion">
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_motivos_liquidacion">
                 @Html.Action("GridViewPartial_MotivosLiquidacion")
             </div>
         </div>

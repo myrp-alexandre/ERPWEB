@@ -27,15 +27,16 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                  IdSucursal = q.IdSucursal,
                                  Valor = q.cr_TotalCobro,
                                  IdCobro = q.IdCobro,
-                                 cr_fecha = q.cr_fecha
+                                 cr_fecha = q.cr_fecha,
+                                 cr_observacion = q.cr_observacion,
+                                 pe_nombreCompleto = q.pe_nombreCompleto 
                              }).ToList();
                 }
 
                 return Lista;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw;
             }
         }
