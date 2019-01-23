@@ -394,7 +394,7 @@ namespace Core.Erp.Data.RRHH
                     if (Entity_ro_parametros.genera_op_x_pago == true)
                     {
                         IdOrdenPago = data_op.get_id(Entity_Prestamo.IdEmpresa);
-                        IdCbteCble_OP = data_ct.get_id(Entity_Prestamo.IdEmpresa, Entity_ro_parametros.IdTipoCbte_AsientoSueldoXPagar);
+                        IdCbteCble_OP = data_ct.get_id(Entity_Prestamo.IdEmpresa, Convert.ToInt32(Entity_op_tipo.IdTipoCbte_OP));
                         ro_empleado Entity_Empleado = Context.ro_empleado.Where(q=> q.IdEmpresa == Entity_Prestamo.IdEmpresa && q.IdEmpleado == Entity_Prestamo.IdEmpleado).FirstOrDefault();                        
 
                         cp_orden_pago op = new cp_orden_pago
@@ -421,7 +421,7 @@ namespace Core.Erp.Data.RRHH
                         ct_cbtecble diario = new ct_cbtecble
                         {
                             IdEmpresa = IdEmpresa,
-                            IdTipoCbte = Entity_ro_parametros.IdTipoCbte_AsientoSueldoXPagar,
+                            IdTipoCbte = Convert.ToInt32(Entity_op_tipo.IdTipoCbte_OP),
                             IdCbteCble = IdCbteCble_OP,
                             cb_Fecha = DateTime.Now.Date,
                             cb_Observacion = op.Observacion,

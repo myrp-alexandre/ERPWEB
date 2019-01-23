@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.CuentasPorCobrar.cxc_LiquidacionTarjeta_Info
 @{
-    ViewBag.Title = "Nueva liquidación de tarjeta de credito";
+    ViewBag.Title = "Nueva liquidación de tarjeta de crédito";
     Layout = "~/Views/Shared/_Layout.cshtml";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -107,7 +107,7 @@
         $("#CobrosModal").modal("hide");
     }
 </script>
-@using (Html.BeginForm("Nuevo", "LiquidacionTarjetaCredito", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "LiquidacionTarjetaCredito", FormMethod.Post, new { @class = "form", @role = "form", @id="PostForm" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -237,8 +237,8 @@
     </div>
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "LiquidacionTarjetaCredito", new { Area = "Banco" }, null)">Cancelar</a>
+        <button type="button" class="btn btn-primary" onclick="Post();" id="ButtonPost">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "LiquidacionTarjetaCredito", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

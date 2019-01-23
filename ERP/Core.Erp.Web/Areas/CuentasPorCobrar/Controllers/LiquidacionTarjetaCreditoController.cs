@@ -195,6 +195,13 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cargar_combos(IdEmpresa, model.IdSucursal);
             return View(model);
         }
+
+        public ActionResult Nuevo(cxc_LiquidacionTarjeta_Info model)
+        {
+            
+
+            return RedirectToAction("Index");
+        }
         #endregion
 
         #region Json

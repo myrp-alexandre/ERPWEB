@@ -67,7 +67,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
             }
         }
 
-        public int get_id(int IdEmpresa, int IdSucursal)
+        public decimal get_id(int IdEmpresa, int IdSucursal)
         {
 
             try
@@ -113,6 +113,28 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 }
 
                 return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool guardarDB(cxc_LiquidacionTarjeta_Info info)
+        {
+            try
+            {
+                using (Entities_cuentas_por_cobrar db = new Entities_cuentas_por_cobrar())
+                {
+                    var Entity = new cxc_LiquidacionTarjeta
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdSucursal = info.IdSucursal,
+                        IdLiquidacion = info.IdLiquidacion = get_id(info.IdEmpresa,info.IdSucursal)
+                    };
+                }
+
+                return true;
             }
             catch (Exception)
             {
