@@ -19,6 +19,7 @@
     var selectedIDs;
     function OnBeginCallback(s, e) {
         e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
     }
 
     function OnSelectionChanged(s, e) {
@@ -30,9 +31,29 @@
     }
     function MostrarModal() {        
         selectedIDs = "";
-        GridViewPartial_CobrosPendientesLiquidacion.PerformCallback();
-        GridViewPartial_CobrosPendientesLiquidacion.UnselectRows();
-        $("#CobrosModal").modal("show");
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetCobrosPendientes", "LiquidacionTarjetaCredito",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_CobrosPendientesLiquidacion.PerformCallback();
+                GridViewPartial_CobrosPendientesLiquidacion.UnselectRows();
+                $("#CobrosModal").modal("show");
+            },
+            error: function (error) {
+            }
+        });
+
     }
 
     function GetListBancoPorSucursal() {

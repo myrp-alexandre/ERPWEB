@@ -319,7 +319,7 @@ namespace Core.Erp.Data.Facturacion
                 #region Talonario
                 var tal = odata_tal.GetUltimoNoUsadoFacElec(info.IdEmpresa, info.vt_tipoDoc, info.vt_serie1, info.vt_serie2);
                 if (tal != null)
-                    factura.vt_NumFactura = tal.NumDocumento;
+                    factura.vt_NumFactura = info.vt_NumFactura = tal.NumDocumento;
                 #endregion
 
                 db_f.fa_factura.Add(factura);
