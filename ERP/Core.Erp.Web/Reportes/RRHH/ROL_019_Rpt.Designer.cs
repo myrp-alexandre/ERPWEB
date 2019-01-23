@@ -337,7 +337,7 @@
             this.lbl_empresa.StylePriority.UseTextAlignment = false;
             this.lbl_empresa.Text = "lbl_empresa";
             this.lbl_empresa.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.lbl_empresa.Weight = 1.7842876771942997D;
+            this.lbl_empresa.Weight = 1.8314466410237771D;
             // 
             // xrTableCell2
             // 
@@ -347,7 +347,7 @@
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "ROL_019";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell2.Weight = 0.21571232280570318D;
+            this.xrTableCell2.Weight = 0.16855335897622575D;
             // 
             // xrTableRow2
             // 
