@@ -22,9 +22,9 @@ namespace Core.Erp.Web.Reportes.CuentasPorCobrar
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
 
-            int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
-            decimal IdCobro = p_IdCobro.Value == null ? 0 : Convert.ToDecimal(p_IdCobro.Value);
+            int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString())? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            int IdSucursal = string.IsNullOrEmpty(p_IdSucursal.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSucursal.Value);
+            decimal IdCobro = string.IsNullOrEmpty(p_IdCobro.ToString()) ? 0 : Convert.ToDecimal(p_IdCobro.Value);
 
             CXC_001_Bus bus_rpt = new CXC_001_Bus();
             List<CXC_001_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdCobro);
