@@ -856,13 +856,6 @@
             this.xrPivotGrid1.OptionsView.RowTotalsLocation = DevExpress.XtraPivotGrid.PivotRowTotalsLocation.Tree;
             this.xrPivotGrid1.OptionsView.RowTreeOffset = 40;
             this.xrPivotGrid1.OptionsView.RowTreeWidth = 300;
-            this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnTotals = false;
-            this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
-            this.xrPivotGrid1.OptionsView.ShowFilterSeparatorBar = false;
-            this.xrPivotGrid1.OptionsView.ShowRowGrandTotalHeader = false;
-            this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(464.4583F, 82.29166F);
             // 
