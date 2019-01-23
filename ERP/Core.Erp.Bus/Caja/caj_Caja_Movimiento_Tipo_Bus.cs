@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.Caja;
 using Core.Erp.Info.Caja;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 
@@ -79,6 +80,31 @@ namespace Core.Erp.Bus.Caja
             try
             {
                 return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<caj_Caja_Movimiento_Tipo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string signo)
+        {
+            try
+            {
+                return odata.get_list_bajo_demanda(args, IdEmpresa, signo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public caj_Caja_Movimiento_Tipo_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_info_bajo_demanda(args, IdEmpresa);
             }
             catch (Exception)
             {

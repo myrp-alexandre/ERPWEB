@@ -24,6 +24,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         cxc_LiquidacionTarjetaDet_Bus bus_LiquidacionTarjetaDet = new cxc_LiquidacionTarjetaDet_Bus();
         cxc_LiquidacionTarjetaDet_List Lista_LiquidacionTarjetaDet = new cxc_LiquidacionTarjetaDet_List();
         cxc_LiquidacionTarjeta_x_cxc_cobro_List Lista_LiquidacionTarjeta_x_cxc_cobro = new cxc_LiquidacionTarjeta_x_cxc_cobro_List();
+        cxc_LiquidacionTarjeta_x_cxc_cobro_pendientes_List Lista_Liquidacion_x_cobro_pendiente = new cxc_LiquidacionTarjeta_x_cxc_cobro_pendientes_List();
         string mensaje = string.Empty;
         #endregion
 
@@ -97,11 +98,10 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         #region Grillas
         public ActionResult GridViewPartial_CobrosPendientesLiquidacion()
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            int IdSucursal = Convert.ToInt32(SessionFixed.IdEmpresa);
-
-            List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> model;          
-            model = bus_LiquidacionTarjeta_cxc_cobro.get_list_cobros_pendientes(IdEmpresa, IdSucursal);
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            
+            var model = Lista_Liquidacion_x_cobro_pendiente.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            
             return PartialView("_GridViewPartial_CobrosPendientesLiquidacion", model);
         }
 
@@ -109,7 +109,6 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         public JsonResult EditingAddNew(string IDs = "", decimal IdTransaccionSession = 0, int IdEmpresa = 0)
         {
             string GiradoA = string.Empty;
-            string Observacion = "Canc./";
 
             if (IDs != "")
             {
@@ -156,7 +155,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             cxc_LiquidacionTarjeta_Info model = new cxc_LiquidacionTarjeta_Info
             {
                 IdEmpresa = IdEmpresa,
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                Fecha = DateTime.Now.Date                
             };
 
             cargar_combos(IdEmpresa, model.IdSucursal);
@@ -168,6 +168,51 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
     public class cxc_LiquidacionTarjeta_x_cxc_cobro_List
     {
         string Variable = "cxc_LiquidacionTarjeta_x_cxc_cobro_Info";
+        public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> get_list(decimal IdTransaccionSession)
+        {
+
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> list = new List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(cxc_LiquidacionTarjeta_x_cxc_cobro_Info info_det, decimal IdTransaccionSession)
+        {
+            List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> list = get_list(IdTransaccionSession);
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+
+
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(cxc_LiquidacionTarjeta_x_cxc_cobro_Info info_det, decimal IdTransaccionSession)
+        {
+            cxc_LiquidacionTarjeta_x_cxc_cobro_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.IdCobro = info_det.IdCobro;
+            edited_info.IdLiquidacion = info_det.IdLiquidacion;
+            edited_info.Valor = info_det.Valor;
+            edited_info.Secuencia = info_det.Secuencia;
+        }
+
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
+        {
+            List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+    }
+
+    public class cxc_LiquidacionTarjeta_x_cxc_cobro_pendientes_List
+    {
+        string Variable = "cxc_LiquidacionTarjeta_x_cxc_cobro_pendientes_Info";
         public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> get_list(decimal IdTransaccionSession)
         {
 

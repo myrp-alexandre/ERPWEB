@@ -13,14 +13,11 @@
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
-        settings.SettingsBehavior.AllowSelectByRowClick = false;
-
-        //Configuración filtro por columna
-        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
         settings.Settings.ShowFilterRow = true;
-        settings.Settings.ShowHeaderFilterButton = true;
-        settings.SettingsBehavior.AllowSelectByRowClick = true;
-
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
 
         //Configuración checkbox
         settings.CommandColumn.Visible = true;
@@ -48,6 +45,8 @@
             column.Caption = "Fecha";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
         });
+        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(30);
+        settings.Columns.Add("cr_observacion", "Observación").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);

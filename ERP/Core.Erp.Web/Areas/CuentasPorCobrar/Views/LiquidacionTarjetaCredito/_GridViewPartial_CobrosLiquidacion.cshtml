@@ -38,7 +38,16 @@
 
 
         settings.Columns.Add("IdLiquidacion", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdCobro", "IdCobro").Width = Unit.Percentage(40);
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "cr_fecha";
+            column.Caption = "Fecha";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+        });
+        settings.Columns.Add("IdCobro", "IdCobro").Width = Unit.Percentage(10);
+        settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(30);
+        settings.Columns.Add("cr_observacion", "Observación").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);

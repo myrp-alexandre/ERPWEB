@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.Caja;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -278,5 +279,48 @@ namespace Core.Erp.Data.Caja
             }
         }
 
+        public List<caj_Caja_Movimiento_Tipo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string signo)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<caj_Caja_Movimiento_Tipo_Info> Lista = new List<caj_Caja_Movimiento_Tipo_Info>();
+            Lista = get_list(skip, take, args.Filter, IdEmpresa, signo);
+            return Lista;
+        }
+
+        public caj_Caja_Movimiento_Tipo_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            //La variable args del devexpress ya trae el ID seleccionado en la propiedad Value, se pasa el IdEmpresa porque es un filtro que no tiene
+            var IdTipoMovi = args.Value == null ? "" : args.Value.ToString();
+            return get_info(IdEmpresa, Convert.ToInt32(IdTipoMovi) );
+        }
+
+        public List<caj_Caja_Movimiento_Tipo_Info> get_list(int skip, int take, string filter, int IdEmpresa, string signo)
+        {
+            try
+            {
+                List<caj_Caja_Movimiento_Tipo_Info> Lista = new List<caj_Caja_Movimiento_Tipo_Info>();
+
+                Entities_caja Context = new Entities_caja();
+                {
+                    List<caj_Caja_Movimiento_Tipo> ListaTipoMovimiento;
+                    ListaTipoMovimiento = Context.caj_Caja_Movimiento_Tipo.Where(q => q.IdEmpresa == IdEmpresa && q.tm_Signo == signo && q.Estado == "A" && (q.IdTipoMovi + " " + q.tm_descripcion).Contains(filter)).OrderBy(q => q.IdTipoMovi).Skip(skip).Take(take).ToList();
+                    foreach (var q in ListaTipoMovimiento)
+                    {
+                        Lista.Add(new caj_Caja_Movimiento_Tipo_Info
+                        {
+                            IdTipoMovi = q.IdTipoMovi,
+                            tm_descripcion = q.tm_descripcion
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

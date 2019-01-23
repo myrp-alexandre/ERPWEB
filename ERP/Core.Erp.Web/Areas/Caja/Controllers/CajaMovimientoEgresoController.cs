@@ -56,6 +56,19 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), SessionFixed.TipoPersona);
         }
 
+        public ActionResult CmbTipoMovimiento_Egreso()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbTipoMovimiento_Egreso", model);
+        }
+        public List<caj_Caja_Movimiento_Tipo_Info> get_list_bajo_demanda_TipoMovimiento_Egreso(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_tipo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), "-");
+        }
+        public caj_Caja_Movimiento_Tipo_Info get_info_bajo_demanda_TipoMovimiento_Egreso(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_tipo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #region Index
