@@ -293,11 +293,11 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina = lst_nomina;
 
-            var lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);
-            lst_nomina_tipo.Add(new ro_Nomina_Tipoliqui_Info
+            var lst_nomina_tipo = bus_tiponomina.get_list(IdEmpresa, false);
+            lst_nomina_tipo.Add(new ro_nomina_tipo_Info
             {
                 IdEmpresa = IdEmpresa,
-                IdNomina_TipoLiqui = 0,
+                IdNomina_Tipo = 0,
                 Descripcion = "TODAS"
             });
             ViewBag.lst_nomina_tipo = lst_nomina_tipo;

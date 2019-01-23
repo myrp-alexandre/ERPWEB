@@ -9783,7 +9783,6 @@
     <Content Include="Views\Account\CambiarContrasena.cshtml" />
     <Content Include="Views\Layout\_LayoutConsulta.cshtml" />
     <Content Include="Scripts\knockout-3.3.0.js" />
-    <Content Include="_GridViewPartial_LiquidacionTarjetaCredito.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
