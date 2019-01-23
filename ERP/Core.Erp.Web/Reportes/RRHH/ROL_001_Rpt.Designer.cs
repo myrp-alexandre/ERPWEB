@@ -556,6 +556,7 @@
             this.pivotGridField3});
             this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
+            this.xrPivotGrid1.OptionsData.AutoExpandGroups = DevExpress.Utils.DefaultBoolean.True;
             this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
             this.xrPivotGrid1.OptionsPrint.MergeColumnFieldValues = false;
             this.xrPivotGrid1.OptionsPrint.MergeRowFieldValues = false;
@@ -563,12 +564,8 @@
             this.xrPivotGrid1.OptionsView.RowTotalsLocation = DevExpress.XtraPivotGrid.PivotRowTotalsLocation.Tree;
             this.xrPivotGrid1.OptionsView.RowTreeOffset = 10;
             this.xrPivotGrid1.OptionsView.RowTreeWidth = 220;
-            this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
             this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowFilterSeparatorBar = false;
-            this.xrPivotGrid1.OptionsView.ShowRowGrandTotalHeader = false;
-            this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(397.2917F, 81.25F);
             // 
             // pivotGridField4
