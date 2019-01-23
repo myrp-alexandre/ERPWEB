@@ -18,11 +18,10 @@
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
         settings.Properties.NullText = "== Seleccione ==";
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.Properties.FilterMinLength = 3;
 
     })
     .BindList(new Core.Erp.Web.Areas.Caja.Controllers.CajaMovimientoEgresoController().get_list_bajo_demanda_TipoMovimiento_Egreso, new Core.Erp.Web.Areas.Caja.Controllers.CajaMovimientoEgresoController().get_info_bajo_demanda_TipoMovimiento_Egreso)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.Caja.caj_Caja_Movimiento_Tipo_Info) ? "" : (Model == null ? "" : Model));
+    .Bind((Model.GetType() == typeof(Core.Erp.Info.Caja.caj_Caja_Movimiento_Tipo_Info) || Model == 0) ? "" : (Model == null ? "" : Model));
 
 
 }

@@ -19,9 +19,10 @@
 
         settings.Properties.Columns.Add("IdTarjeta", "ID", 10);
         settings.Properties.Columns.Add("NombreTarjeta", "NombreTarjeta", 20);
+        
     })
     .BindList(new Core.Erp.Web.Areas.CuentasPorCobrar.Controllers.LiquidacionTarjetaCreditoController().get_list_bajo_demanda, new Core.Erp.Web.Areas.CuentasPorCobrar.Controllers.LiquidacionTarjetaCreditoController().get_info_bajo_demanda)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.CuentasPorCobrar.cxc_LiquidacionTarjeta_Info) ? "" : Model);
+    .Bind((Model.GetType() == typeof(Core.Erp.Info.CuentasPorCobrar.cxc_LiquidacionTarjeta_Info) || Model == 0 )? "" : Model);
 
 }
 @comboBox.GetHtml()
