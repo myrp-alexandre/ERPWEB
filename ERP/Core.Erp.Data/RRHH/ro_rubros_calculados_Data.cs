@@ -43,7 +43,9 @@ namespace Core.Erp.Data.RRHH
                         IdRubro_horas_adicionales = Entity.IdRubro_horas_adicionales,
                         IdRubro_horas_recargo = Entity.IdRubro_horas_recargo,
                         IdRubro_bono_x_antiguedad=Entity.IdRubro_bono_x_antiguedad,
-                        IdRubro_horas_control_salida=Entity.IdRubro_horas_control_salida
+                        IdRubro_horas_control_salida=Entity.IdRubro_horas_control_salida,
+                        IdRubro_anticipo = Entity.IdRubro_anticipo,
+                        IdRubro_novedad_proceso = Entity.IdRubro_novedad_proceso
                     };
                 }
 
@@ -109,7 +111,10 @@ namespace Core.Erp.Data.RRHH
                         IdRubro_horas_adicionales = info.IdRubro_horas_adicionales,
                         IdRubro_horas_recargo = info.IdRubro_horas_recargo,
                         IdRubro_bono_x_antiguedad=info.IdRubro_bono_x_antiguedad,
-                        IdRubro_horas_control_salida=info.IdRubro_horas_control_salida
+                        IdRubro_horas_control_salida=info.IdRubro_horas_control_salida,
+                        IdRubro_novedad_proceso = info.IdRubro_novedad_proceso,
+                        IdRubro_anticipo = info.IdRubro_anticipo
+
 
                     };
                     Context.ro_rubros_calculados.Add(Entity);
@@ -154,6 +159,8 @@ namespace Core.Erp.Data.RRHH
                         Entity.IdRubro_horas_recargo = info.IdRubro_horas_recargo;
                         Entity.IdRubro_bono_x_antiguedad = info.IdRubro_bono_x_antiguedad;
                         Entity.IdRubro_horas_control_salida = info.IdRubro_horas_control_salida;
+                        Entity.IdRubro_novedad_proceso = info.IdRubro_novedad_proceso;
+                        Entity.IdRubro_anticipo = info.IdRubro_anticipo;
                        Context.SaveChanges();
                 }
 
