@@ -249,7 +249,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_tipo = lst_tipo;
 
             in_Motivo_Inven_Bus bus_motivo = new in_Motivo_Inven_Bus();
-            var lst_motivo = bus_motivo.get_list(model.IdEmpresa, cl_enumeradores.eTipoIngEgr.ING.ToString(), false);
+            var lst_motivo = bus_motivo.get_list(model.IdEmpresa, cl_enumeradores.eTipoIngEgr.EGR.ToString(), false);
             ViewBag.lst_motivo = lst_motivo;
 
             tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
