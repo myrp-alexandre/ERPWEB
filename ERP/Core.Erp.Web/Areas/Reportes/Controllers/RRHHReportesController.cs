@@ -293,8 +293,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_nomina = bus_nomina.get_list(IdEmpresa, false);
             ViewBag.lst_nomina = lst_nomina;
 
-            var lst_nomina_tipo = bus_tiponomina.get_list(IdEmpresa, false);
-            lst_nomina_tipo.Add(new ro_nomina_tipo_Info
+            var lst_nomina_tipo = bus_nomina_tipo.get_list(IdEmpresa, false);
+            lst_nomina_tipo.Add(new ro_Nomina_Tipoliqui_Info
             {
                 IdEmpresa = IdEmpresa,
                 IdNomina_Tipo = 0,
@@ -399,6 +399,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
             report.p_IdArea.Value = model.IdArea;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
@@ -410,6 +412,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
             report.p_IdArea.Value = model.IdArea;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
