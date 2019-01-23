@@ -76,6 +76,7 @@
             this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell50 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
+            this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
@@ -98,15 +99,15 @@
             this.Subreporte_Egresos.LocationFloat = new DevExpress.Utils.PointFloat(415.9999F, 136.875F);
             this.Subreporte_Egresos.Name = "Subreporte_Egresos";
             this.Subreporte_Egresos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_Egresos();
-            this.Subreporte_Egresos.SizeF = new System.Drawing.SizeF(335F, 20F);
+            this.Subreporte_Egresos.SizeF = new System.Drawing.SizeF(325F, 20F);
             this.Subreporte_Egresos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Subreporte_Egresos_BeforePrint);
             // 
             // Subreporte_Ingresos
             // 
-            this.Subreporte_Ingresos.LocationFloat = new DevExpress.Utils.PointFloat(0F, 136.875F);
+            this.Subreporte_Ingresos.LocationFloat = new DevExpress.Utils.PointFloat(9.999998F, 136.875F);
             this.Subreporte_Ingresos.Name = "Subreporte_Ingresos";
             this.Subreporte_Ingresos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_Ingresos();
-            this.Subreporte_Ingresos.SizeF = new System.Drawing.SizeF(399.53F, 20F);
+            this.Subreporte_Ingresos.SizeF = new System.Drawing.SizeF(325F, 20F);
             this.Subreporte_Ingresos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Subreporte_Ingresos_BeforePrint);
             // 
             // TopMargin
@@ -339,10 +340,8 @@
             // PageFooter
             // 
             this.PageFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable4,
-            this.xrTable2,
             this.xrTable8});
-            this.PageFooter.HeightF = 91.87502F;
+            this.PageFooter.HeightF = 20F;
             this.PageFooter.Name = "PageFooter";
             // 
             // xrTable4
@@ -424,7 +423,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable8.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(0F, 71.875F);
+            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable8.Name = "xrTable8";
             this.xrTable8.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow13});
@@ -527,6 +526,14 @@
             this.xrPageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo2.TextFormatString = "Página {0} de {1}";
             // 
+            // ReportFooter
+            // 
+            this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable2,
+            this.xrTable4});
+            this.ReportFooter.HeightF = 25F;
+            this.ReportFooter.Name = "ReportFooter";
+            // 
             // ROL_002_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -534,7 +541,8 @@
             this.TopMargin,
             this.BottomMargin,
             this.PageHeader,
-            this.PageFooter});
+            this.PageFooter,
+            this.ReportFooter});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
@@ -608,5 +616,6 @@
         private DevExpress.XtraReports.UI.XRTable xrTable2;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
+        private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
     }
 }
