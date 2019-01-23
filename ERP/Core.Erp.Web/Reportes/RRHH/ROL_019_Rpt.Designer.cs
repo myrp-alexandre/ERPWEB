@@ -155,7 +155,7 @@
             this.xrTableCell7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Observacion_det]")});
             this.xrTableCell7.Name = "xrTableCell7";
-            this.xrTableCell7.Weight = 2.1600000651041666D;
+            this.xrTableCell7.Weight = 2.0299998697916668D;
             // 
             // xrTableCell8
             // 
@@ -165,7 +165,7 @@
             this.xrTableCell8.StylePriority.UseTextAlignment = false;
             this.xrTableCell8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell8.TextFormatString = "{0:dd/MM/yyyy}";
-            this.xrTableCell8.Weight = 0.57599997558593741D;
+            this.xrTableCell8.Weight = 0.83600036621093732D;
             // 
             // xrTableCell9
             // 
@@ -175,7 +175,7 @@
             this.xrTableCell9.StylePriority.UseTextAlignment = false;
             this.xrTableCell9.Text = "Estado";
             this.xrTableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell9.Weight = 0.71999997558593754D;
+            this.xrTableCell9.Weight = 0.76000017089843752D;
             // 
             // xrTableCell10
             // 
@@ -188,7 +188,7 @@
             this.xrTableCell10.StylePriority.UseTextAlignment = false;
             this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell10.TextFormatString = "{0:n2}";
-            this.xrTableCell10.Weight = 0.77759990234375009D;
+            this.xrTableCell10.Weight = 0.60759951171875D;
             // 
             // TopMargin
             // 
@@ -286,26 +286,26 @@
             // 
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.Text = "Prestamo";
-            this.xrTableCell4.Weight = 2.0070000266857662D;
+            this.xrTableCell4.Weight = 1.8862079061070938D;
             // 
             // xrTableCell33
             // 
             this.xrTableCell33.Name = "xrTableCell33";
             this.xrTableCell33.Text = "Fecha";
-            this.xrTableCell33.Weight = 0.53519998746909547D;
+            this.xrTableCell33.Weight = 0.776783956409643D;
             // 
             // xrTableCell3
             // 
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.Text = " Estado pago";
-            this.xrTableCell3.Weight = 0.66899998770984492D;
+            this.xrTableCell3.Weight = 0.70616683592125151D;
             // 
             // xrTableCell34
             // 
             this.xrTableCell34.Multiline = true;
             this.xrTableCell34.Name = "xrTableCell34";
             this.xrTableCell34.Text = "Valor";
-            this.xrTableCell34.Weight = 0.72251995377904532D;
+            this.xrTableCell34.Weight = 0.56456125720576367D;
             // 
             // xrTable1
             // 
@@ -337,7 +337,7 @@
             this.lbl_empresa.StylePriority.UseTextAlignment = false;
             this.lbl_empresa.Text = "lbl_empresa";
             this.lbl_empresa.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.lbl_empresa.Weight = 1.7842876771942997D;
+            this.lbl_empresa.Weight = 1.8314466410237771D;
             // 
             // xrTableCell2
             // 
@@ -347,7 +347,7 @@
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "ROL_019";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell2.Weight = 0.21571232280570318D;
+            this.xrTableCell2.Weight = 0.16855335897622575D;
             // 
             // xrTableRow2
             // 
@@ -425,7 +425,7 @@
             this.xrTableCell16.StylePriority.UseTextAlignment = false;
             this.xrTableCell16.Text = "TOTAL";
             this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell16.Weight = 7.1419039701769851D;
+            this.xrTableCell16.Weight = 7.330666118854861D;
             // 
             // xrTableCell17
             // 
@@ -442,7 +442,7 @@
             this.xrTableCell17.Summary = xrSummary1;
             this.xrTableCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell17.TextFormatString = "{0:n2}";
-            this.xrTableCell17.Weight = 0.86342450788704062D;
+            this.xrTableCell17.Weight = 0.67466235920916517D;
             // 
             // PageFooter
             // 
@@ -549,10 +549,10 @@
             // 
             this.xrPageInfo2.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrPageInfo2.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(6.357829E-05F, 0F);
+            this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(22.70826F, 0F);
             this.xrPageInfo2.Name = "xrPageInfo2";
             this.xrPageInfo2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
-            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(85.99994F, 20F);
+            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(63.29174F, 20F);
             this.xrPageInfo2.StylePriority.UseBorders = false;
             this.xrPageInfo2.StylePriority.UseFont = false;
             this.xrPageInfo2.StylePriority.UsePadding = false;
@@ -650,7 +650,7 @@
             this.xrTableCell14.StylePriority.UseTextAlignment = false;
             this.xrTableCell14.Text = "TOTAL";
             this.xrTableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell14.Weight = 7.1419039701769851D;
+            this.xrTableCell14.Weight = 7.3306674200705046D;
             // 
             // xrTableCell15
             // 
@@ -667,7 +667,7 @@
             this.xrTableCell15.Summary = xrSummary2;
             this.xrTableCell15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell15.TextFormatString = "{0:n2}";
-            this.xrTableCell15.Weight = 0.86342450788704062D;
+            this.xrTableCell15.Weight = 0.67466105799352072D;
             // 
             // ROL_019_Rpt
             // 
