@@ -673,7 +673,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdPeriodoSet = IdPeriodo,
                 TipoRubro = "A"
             };
-            ROL_021_Rpt report = new ROL_021_Rpt();
+            ROL_022_Rpt report = new ROL_022_Rpt();
             report.p_IdEmpresa.Value = IdEmpresa == 0 ? Convert.ToInt32(SessionFixed.IdEmpresa) : IdEmpresa;
             report.p_IdNomina.Value = IdNomina_Tipo;
             report.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
@@ -686,7 +686,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         [HttpPost]
         public ActionResult ROL_022(cl_filtros_Info model)
         {
-            ROL_021_Rpt report = new ROL_021_Rpt();
+            ROL_022_Rpt report = new ROL_022_Rpt();
 
             cargar_combos(model.IdEmpresa);
             report.p_IdEmpresa.Value = model.IdEmpresa;

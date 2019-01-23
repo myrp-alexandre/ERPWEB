@@ -438,7 +438,7 @@
             this.xrLine4,
             this.xrLine5,
             this.xrLabel23});
-            this.ReportFooter.HeightF = 112.5F;
+            this.ReportFooter.HeightF = 133.3333F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrLabel20
