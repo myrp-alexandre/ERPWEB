@@ -459,8 +459,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcxc_liquidacion_comisiones_det_x
           <Property Name="PorComision" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwcxc_LiquidacionTarjetaDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="vwcxc_LiquidacionTarjetaDet">
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcxc_LiquidacionTarjeta_x_cxc_cobro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwcxc_LiquidacionTarjeta_x_cxc_cobro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdSucursal" />
@@ -921,17 +921,17 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
     [vwcxc_liquidacion_comisiones_det_x_comisionar].[PorComision] AS [PorComision]
     FROM [dbo].[vwcxc_liquidacion_comisiones_det_x_comisionar] AS [vwcxc_liquidacion_comisiones_det_x_comisionar]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="vwcxc_LiquidacionTarjetaDet" EntityType="Self.vwcxc_LiquidacionTarjetaDet" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="vwcxc_LiquidacionTarjeta_x_cxc_cobro" EntityType="Self.vwcxc_LiquidacionTarjeta_x_cxc_cobro" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [vwcxc_LiquidacionTarjetaDet].[IdEmpresa] AS [IdEmpresa], 
-    [vwcxc_LiquidacionTarjetaDet].[IdSucursal] AS [IdSucursal], 
-    [vwcxc_LiquidacionTarjetaDet].[IdCobro] AS [IdCobro], 
-    [vwcxc_LiquidacionTarjetaDet].[IdLiquidacion] AS [IdLiquidacion], 
-    [vwcxc_LiquidacionTarjetaDet].[cr_TotalCobro] AS [cr_TotalCobro], 
-    [vwcxc_LiquidacionTarjetaDet].[cr_fecha] AS [cr_fecha], 
-    [vwcxc_LiquidacionTarjetaDet].[cr_observacion] AS [cr_observacion], 
-    [vwcxc_LiquidacionTarjetaDet].[pe_nombreCompleto] AS [pe_nombreCompleto]
-    FROM [dbo].[vwcxc_LiquidacionTarjetaDet] AS [vwcxc_LiquidacionTarjetaDet]</DefiningQuery>
+    [vwcxc_LiquidacionTarjeta_x_cxc_cobro].[IdEmpresa] AS [IdEmpresa], 
+    [vwcxc_LiquidacionTarjeta_x_cxc_cobro].[IdSucursal] AS [IdSucursal], 
+    [vwcxc_LiquidacionTarjeta_x_cxc_cobro].[IdCobro] AS [IdCobro], 
+    [vwcxc_LiquidacionTarjeta_x_cxc_cobro].[IdLiquidacion] AS [IdLiquidacion], 
+    [vwcxc_LiquidacionTarjeta_x_cxc_cobro].[cr_TotalCobro] AS [cr_TotalCobro], 
+    [vwcxc_LiquidacionTarjeta_x_cxc_cobro].[cr_fecha] AS [cr_fecha], 
+    [vwcxc_LiquidacionTarjeta_x_cxc_cobro].[cr_observacion] AS [cr_observacion], 
+    [vwcxc_LiquidacionTarjeta_x_cxc_cobro].[pe_nombreCompleto] AS [pe_nombreCompleto]
+    FROM [dbo].[vwcxc_LiquidacionTarjeta_x_cxc_cobro] AS [vwcxc_LiquidacionTarjeta_x_cxc_cobro]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal" EntityType="Self.vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1446,7 +1446,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
           <EntitySet Name="cxc_LiquidacionTarjeta" EntityType="Model_cuentas_por_cobrar.cxc_LiquidacionTarjeta" />
           <EntitySet Name="cxc_LiquidacionTarjeta_x_cxc_cobro" EntityType="Model_cuentas_por_cobrar.cxc_LiquidacionTarjeta_x_cxc_cobro" />
           <EntitySet Name="cxc_LiquidacionTarjetaDet" EntityType="Model_cuentas_por_cobrar.cxc_LiquidacionTarjetaDet" />
-          <EntitySet Name="vwcxc_LiquidacionTarjetaDet" EntityType="Model_cuentas_por_cobrar.vwcxc_LiquidacionTarjetaDet" />
           <AssociationSet Name="FK_cxc_LiquidacionTarjeta_x_cxc_cobro_cxc_cobro" Association="Model_cuentas_por_cobrar.FK_cxc_LiquidacionTarjeta_x_cxc_cobro_cxc_cobro">
             <End Role="cxc_cobro" EntitySet="cxc_cobro" />
             <End Role="cxc_LiquidacionTarjeta_x_cxc_cobro" EntitySet="cxc_LiquidacionTarjeta_x_cxc_cobro" />
@@ -1463,6 +1462,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
             <End Role="cxc_MotivoLiquidacionTarjeta" EntitySet="cxc_MotivoLiquidacionTarjeta" />
             <End Role="cxc_LiquidacionTarjetaDet" EntitySet="cxc_LiquidacionTarjetaDet" />
           </AssociationSet>
+          <EntitySet Name="vwcxc_LiquidacionTarjeta_x_cxc_cobro" EntityType="Model_cuentas_por_cobrar.vwcxc_LiquidacionTarjeta_x_cxc_cobro" />
           </EntityContainer>
         <EntityType Name="vwcxc_cartera_x_cobrar">
           <Key>
@@ -1895,25 +1895,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
           <NavigationProperty Name="cxc_LiquidacionTarjeta" Relationship="Model_cuentas_por_cobrar.FK_cxc_LiquidacionTarjetaDet_cxc_LiquidacionTarjeta" FromRole="cxc_LiquidacionTarjetaDet" ToRole="cxc_LiquidacionTarjeta" />
           <NavigationProperty Name="cxc_MotivoLiquidacionTarjeta" Relationship="Model_cuentas_por_cobrar.FK_cxc_LiquidacionTarjetaDet_cxc_MotivoLiquidacionTarjeta" FromRole="cxc_LiquidacionTarjetaDet" ToRole="cxc_MotivoLiquidacionTarjeta" />
         </EntityType>
-        <EntityType Name="vwcxc_LiquidacionTarjetaDet">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdCobro" />
-            <PropertyRef Name="cr_TotalCobro" />
-            <PropertyRef Name="cr_fecha" />
-            <PropertyRef Name="cr_observacion" />
-            <PropertyRef Name="pe_nombreCompleto" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdLiquidacion" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="cr_TotalCobro" Type="Double" Nullable="false" />
-          <Property Name="cr_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="cr_observacion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
         <Association Name="FK_cxc_LiquidacionTarjeta_x_cxc_cobro_cxc_cobro">
           <End Type="Model_cuentas_por_cobrar.cxc_cobro" Role="cxc_cobro" Multiplicity="1" />
           <End Type="Model_cuentas_por_cobrar.cxc_LiquidacionTarjeta_x_cxc_cobro" Role="cxc_LiquidacionTarjeta_x_cxc_cobro" Multiplicity="*" />
@@ -1976,6 +1957,25 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwcxc_LiquidacionTarjeta_x_cxc_cobro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdCobro" />
+            <PropertyRef Name="cr_TotalCobro" />
+            <PropertyRef Name="cr_fecha" />
+            <PropertyRef Name="cr_observacion" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdLiquidacion" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="cr_TotalCobro" Type="Double" Nullable="false" />
+          <Property Name="cr_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cr_observacion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2464,9 +2464,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwcxc_LiquidacionTarjetaDet">
-            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.vwcxc_LiquidacionTarjetaDet">
-              <MappingFragment StoreEntitySet="vwcxc_LiquidacionTarjetaDet">
+          <EntitySetMapping Name="vwcxc_LiquidacionTarjeta_x_cxc_cobro">
+            <EntityTypeMapping TypeName="Model_cuentas_por_cobrar.vwcxc_LiquidacionTarjeta_x_cxc_cobro">
+              <MappingFragment StoreEntitySet="vwcxc_LiquidacionTarjeta_x_cxc_cobro">
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
                 <ScalarProperty Name="cr_observacion" ColumnName="cr_observacion" />
                 <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />

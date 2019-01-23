@@ -9,7 +9,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
 {
     public class cxc_LiquidacionTarjeta_x_cxc_cobro_Data
     {
-        public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> get_list_cobros_pendientes(int IdEmpresa, int IdSucursal)
+        public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> GetList(int IdEmpresa, int IdSucursal, decimal? IdLiquidacion)
         {
             try
             {
@@ -17,10 +17,10 @@ namespace Core.Erp.Data.CuentasPorCobrar
 
                 using (Entities_cuentas_por_cobrar Context = new Entities_cuentas_por_cobrar())
                 {
-                    Lista = (from q in Context.vwcxc_LiquidacionTarjetaDet
+                    Lista = (from q in Context.vwcxc_LiquidacionTarjeta_x_cxc_cobro
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
-                             && q.IdLiquidacion == null
+                             && q.IdLiquidacion == IdLiquidacion
                              select new cxc_LiquidacionTarjeta_x_cxc_cobro_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

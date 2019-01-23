@@ -1944,7 +1944,7 @@
     <Compile Include="vwcxc_cobro_para_retencion.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
-    <Compile Include="vwcxc_LiquidacionTarjetaDet.cs">
+    <Compile Include="vwcxc_LiquidacionTarjeta_x_cxc_cobro.cs">
       <DependentUpon>Model_cuentas_por_cobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcxc_liquidacion_comisiones_det.cs">
