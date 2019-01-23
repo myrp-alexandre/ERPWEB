@@ -44,7 +44,6 @@
         <EntityTypeShape EntityType="Model_reportes.VWROL_007" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_010" Width="1.5" PointX="28.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_011" Width="1.5" PointX="28.75" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_reportes.VWROL_014" Width="1.5" PointX="22.75" PointY="28.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_reportes.VWINV_001" Width="1.5" PointX="7.375" PointY="29.75" />
         <EntityTypeShape EntityType="Model_reportes.VWINV_002" Width="1.5" PointX="9.375" PointY="29.75" />
         <EntityTypeShape EntityType="Model_reportes.VWINV_011" Width="1.5" PointX="11.375" PointY="29.75" />
@@ -85,6 +84,7 @@
         <EntityTypeShape EntityType="Model_reportes.VWCAJ_002" Width="1.5" PointX="35.375" PointY="32.75" />
         <EntityTypeShape EntityType="Model_reportes.VWCONTA_001" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_019" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_014" Width="1.5" PointX="23.375" PointY="24.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
