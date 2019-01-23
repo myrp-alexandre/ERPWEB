@@ -1052,6 +1052,18 @@
     <Compile Include="Reportes\Produccion\PRO_001_Rpt.Designer.cs">
       <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_002_Egresos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_002_Egresos.Designer.cs">
+      <DependentUpon>ROL_002_Egresos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_002_Ingresos.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_002_Ingresos.Designer.cs">
+      <DependentUpon>ROL_002_Ingresos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_019_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1177,6 +1189,12 @@
     </Compile>
     <Compile Include="Reportes\RRHH\ROL_020_Rpt.Designer.cs">
       <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_022_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_022_Rpt.Designer.cs">
+      <DependentUpon>ROL_022_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -9691,7 +9709,6 @@
     <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\Anular.cshtml" />
     <Content Include="Areas\CuentasPorPagar\Views\SolicitudPago\_GridViewPartial_solicitud_pago.cshtml" />
     <Content Include="Areas\RRHH\Views\Empleado\_CmbDivision_IngresoCompartido.cshtml" />
-    <Content Include="Areas\RRHH\Views\Empleado\_CmbArea_IngresoCompartido.cshtml" />
     <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_IngresoCompartido.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\_GridViewPartial_TipoFlujoPlantilla_Asignar.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionHoras\_CmbRubro_impor_horas.cshtml" />
@@ -9720,6 +9737,7 @@
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_CobrosPendientesLiquidacion.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoIngreso\_CmbTipoMovimiento_Ingreso.cshtml" />
     <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\_CmbTipoMovimiento_Egreso.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_022.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -10122,6 +10140,12 @@
     <EmbeddedResource Include="Reportes\Produccion\PRO_001_Rpt.resx">
       <DependentUpon>PRO_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_002_Egresos.resx">
+      <DependentUpon>ROL_002_Egresos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_002_Ingresos.resx">
+      <DependentUpon>ROL_002_Ingresos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_019_Rpt.resx">
       <DependentUpon>ROL_019_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -10184,6 +10208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_020_Rpt.resx">
       <DependentUpon>ROL_020_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_022_Rpt.resx">
+      <DependentUpon>ROL_022_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

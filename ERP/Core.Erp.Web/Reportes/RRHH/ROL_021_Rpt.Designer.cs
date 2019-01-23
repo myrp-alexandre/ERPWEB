@@ -438,7 +438,7 @@
             this.xrLine4,
             this.xrLine5,
             this.xrLabel23});
-            this.ReportFooter.HeightF = 112.5F;
+            this.ReportFooter.HeightF = 133.3333F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrLabel20
@@ -853,7 +853,7 @@
             this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(464.4583F, 82.29166F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(464.4583F, 104.1667F);
             // 
             // pivotGridField5
             // 

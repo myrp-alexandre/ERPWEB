@@ -29,6 +29,7 @@
     @Html.HiddenFor(q => q.IdPersona);
     @Html.HiddenFor(q => q.IdEmpresa);
     @Html.HiddenFor(q => q.IdEmpleado);
+    @Html.HiddenFor(q => q.IdTransaccionSession);
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -161,6 +162,9 @@
             </li>
             <li>
                 <a href="#tb_info_pago_hora" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Información pago en horas</a>
+            </li>
+            <li>
+                <a href="#tb_info_ingresos_compartidos" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Información ingresos compartidos</a>
             </li>
         </ul>
         <!-- Tab panes -->
@@ -515,20 +519,6 @@
                                 @Html.ValidationMessageFor(q => q.Marca_Biometrico, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="es_AcreditaHorasExtras"></label>
-                                @Html.DevExpress().CheckBoxFor(q => q.Tiene_ingresos_compartidos, settings =>
-                           {
-                               settings.Name = "Tiene_ingresos_compartidos";
-                               settings.Text = "Tiene ingresos compartidos";
-
-                           }).GetHtml()
-                                @Html.ValidationMessageFor(q => q.Tiene_ingresos_compartidos, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-
 
                         <div class="col-md-2">
                             <div class="form-group">
@@ -766,6 +756,30 @@
                 </div>
             </div>
 
+            <div role="tabpanel" class="tab-pane" id="tb_info_ingresos_compartidos">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="es_AcreditaHorasExtras"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.Tiene_ingresos_compartidos, settings =>
+                               {
+                                   settings.Name = "Tiene_ingresos_compartidos";
+                                   settings.Text = "Tiene ingresos compartidos";
+                                   settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_ingreso_compartido();}";
+
+                               }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.Tiene_ingresos_compartidos, "", new { @class = "text-danger", @id = "" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ingreso_compartido">
+                    <div class="col-md-12">
+                        @Html.Action("GridViewPartial_IngresoCompartido")
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -789,6 +803,7 @@
         $("#error_documento").hide();
         mostrar_horas();
         dias_vacaciones();
+        mostrar_ingreso_compartido();
     })
 
     $("#pe_cedulaRuc").blur(function () {
@@ -798,6 +813,23 @@
     $("#pe_cedulaRuc").keyup(function () {
         validar();
     });
+
+    function OnSelectedDivisionChanged() {
+        GridViewPartial_IngresoCompartido.GetEditor("IdArea_det").PerformCallback();
+    }
+    function AreaComboBox_BeginCallback(s, e) {
+        e.customArgs["IdDivision_det"] = IDividion_det.GetValue();
+    }
+
+    function mostrar_ingreso_compartido() {
+        var IngresoCompartido = Tiene_ingresos_compartidos.GetValue();
+        if (IngresoCompartido == true) {
+            $("#ingreso_compartido").show();
+        }
+        else {
+            $("#ingreso_compartido").hide();
+        }
+    }
 
     function validar() {
         var tipo_doc = $("#IdTipoDocumento").val();

@@ -18,7 +18,7 @@ namespace Core.Erp.Data.RRHH
                 List<ro_empleado_x_division_x_area_Info> lista;
                 using (Entities_rrhh content=new Entities_rrhh())
                 {
-                    lista = (from q in content.ro_empleado_x_division_x_area
+                    lista = (from q in content.vwro_empleado_x_division_x_area
 
                              where q.IdEmpresa ==IdEmpresa
                              && q.IdEmpleado == IdEmpleado
@@ -31,7 +31,11 @@ namespace Core.Erp.Data.RRHH
                                  IdArea=q.IdArea,
                                  Secuencia=q.Secuencia,
                                  Porcentaje=q.Porcentaje,
-                                 Observacion=q.Observacion
+                                 Observacion=q.Observacion,
+                                 IdArea_det = q.IdArea,
+                                 IDividion_det = q.IDividion,
+                                 Descripcion_Division = q.DivisionDescripcion,
+                                 Descripcion = q.AreaDescripcion,                                 
                              }).ToList();
 
                 }

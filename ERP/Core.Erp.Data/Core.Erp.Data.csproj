@@ -1235,6 +1235,7 @@
     <Compile Include="Reportes\RRHH\ROL_018_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_020_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_021_Data.cs" />
+    <Compile Include="Reportes\RRHH\ROL_022_Data.cs" />
     <Compile Include="ro_Acta_Finiquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -2280,6 +2281,9 @@
     <Compile Include="VWROL_021.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="VWROL_022.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwRo_ActaFiniquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -2314,6 +2318,9 @@
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_empleado_novedad_det.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwro_empleado_x_division_x_area.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
     <Compile Include="vwro_empleado_x_Proyeccion_Gastos_Personales.cs">

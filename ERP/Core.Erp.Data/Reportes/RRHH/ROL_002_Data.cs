@@ -38,7 +38,16 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  pe_FechaIni = q.pe_FechaIni,
                                  pe_FechaFin = q.pe_FechaFin,
                                  IdNominaTipo = q.IdNominaTipo,
-                                 mes_nom = mes_nom_                           
+                                 mes_nom = mes_nom_,
+                                 Area = q.Area,
+                                 de_descripcion = q.de_descripcion,
+                                 em_codigo = q.em_codigo,
+                                 em_status = q.em_status,
+                                 Grupo = q.Grupo,
+                                 IdSucursal = q.IdSucursal,
+                                 pe_apellido = q.pe_apellido,
+                                 pe_nombre = q.pe_nombre,
+                                 ru_tipo = q.ru_tipo                        
                                  
                              }).ToList();
                 }

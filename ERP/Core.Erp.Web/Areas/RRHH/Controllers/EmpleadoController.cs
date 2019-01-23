@@ -158,19 +158,17 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
 
         #region Area Ingreso Compartido
-        public ActionResult CmbArea_IngresoCompartido()
+        public ActionResult Cargar_CmbArea_IngresoCompartido()
         {
-            SessionFixed.IdDivision_IC = Request.Params["det_IdDivision"] != null ? Request.Params["det_IdDivision"].ToString() : SessionFixed.IdDivision;
-            ro_empleado_x_division_x_area_Info model = new ro_empleado_x_division_x_area_Info();
-            return PartialView("_CmbArea_IngresoCompartido", model);
-        }
-        public List<ro_area_Info> get_list_bajo_demanda_area_ingresocompartido(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false, Convert.ToInt32(SessionFixed.IdDivision_IC));
-        }
-        public ro_area_Info get_info_bajo_demanda_area_ingresocompartido(ListEditItemRequestedByValueEventArgs args)
-        {
-            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdDivision_IC));
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+            var IdDivision = Request.Params["IdDivision_det"] != null ? Request.Params["IdDivision_det"].ToString() : "";
+            return GridViewExtension.GetComboBoxCallbackResult(p =>
+            {
+                p.TextField = "Descripcion";
+                p.ValueField = "IdArea";
+                p.ValueType = typeof(int);
+                p.BindList(bus_area.get_list(IdEmpresa, Convert.ToInt32(IdDivision)) );
+            });
         }
         #endregion
 
@@ -191,6 +189,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #endregion
 
         #endregion
+
+        private void cargar_combos_detalle()
+        {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_areas = bus_area.get_list(IdEmpresa, false);
+            ViewBag.lst_areas = lst_areas;
+        }
 
         [HttpPost]
         public ActionResult Nuevo(ro_empleado_Info info)
@@ -583,18 +588,20 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
 
             if (info_det != null)
-                if (info_det.IdArea != 0)
+                if (info_det.IdArea_det != 0)
                 {
-                    ro_division_Info info_Division = bus_division.get_info(IdEmpresa, info_det.IDividion);
-                    ro_area_Info info_Area = bus_area.get_info(IdEmpresa, info_det.IdArea);
+                    ro_division_Info info_Division = bus_division.get_info(IdEmpresa, info_det.IDividion_det);
+                    ro_area_Info info_Area = bus_area.get_info(IdEmpresa, info_det.IdArea_det);
                     if (info_Division != null)
                     {
+                        info_det.IDividion = info_det.IDividion_det;
                         info_det.Descripcion_Division = info_Division.Descripcion;
                     }
 
                     if (info_Area != null)
                     {
-                        info_det.Descripcion_Area = info_Area.Descripcion;
+                        info_det.IdArea = info_det.IdArea_det;
+                        info_det.Descripcion = info_Area.Descripcion;
                     }
                 }
 
@@ -609,19 +616,21 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
             if (info_det != null)
-                if (info_det.IdArea != 0)
+                if (info_det.IdArea_det != 0)
                 {
-                    ro_division_Info info_Division = bus_division.get_info(IdEmpresa, info_det.IDividion);
-                    ro_area_Info info_Area = bus_area.get_info(IdEmpresa, info_det.IdArea);
+                    ro_division_Info info_Division = bus_division.get_info(IdEmpresa, info_det.IDividion_det);
+                    ro_area_Info info_Area = bus_area.get_info(IdEmpresa, info_det.IdArea_det);
 
                     if (info_Division != null)
                     {
+                        info_det.IDividion = info_det.IDividion_det;
                         info_det.Descripcion_Division = info_Division.Descripcion;
                     }
 
                     if (info_Area != null)
                     {
-                        info_det.Descripcion_Area = info_Area.Descripcion;
+                        info_det.IdArea = info_det.IdArea_det;
+                        info_det.Descripcion = info_Area.Descripcion;
                     }
 
                 }
@@ -1538,7 +1547,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             ro_empleado_x_division_x_area_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IDividion = info_det.IDividion;
+            edited_info.IDividion_det = info_det.IDividion;
             edited_info.IdArea = info_det.IdArea;
+            edited_info.IdArea_det = info_det.IdArea;
+            edited_info.Descripcion = info_det.Descripcion;
+            edited_info.Descripcion_Division = info_det.Descripcion_Division;
             edited_info.Porcentaje = info_det.Porcentaje;
             edited_info.Observacion = info_det.Observacion;
         }
