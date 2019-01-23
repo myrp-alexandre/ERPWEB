@@ -13,5 +13,9 @@ namespace Core.Erp.Web.Reportes.RRHH
             InitializeComponent();
         }
 
+        private void ROL_002_Egresos_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
     }
 }

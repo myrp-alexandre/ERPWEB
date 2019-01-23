@@ -149,7 +149,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
             model.p_IdPeriodo.Value = IdPeriodo;
             model.p_IdSucursal.Value = IdSucursal;
-            model.empresa.Value = SessionFixed.NomEmpresa.ToString();
+            model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }
         public ActionResult ROL_003(decimal IdEmpleado=0, decimal IdNovedad=0)
