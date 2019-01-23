@@ -37,6 +37,8 @@ namespace Core.Erp.Data
         public string IdRubro_horas_control_salida { get; set; }
         public string IdRubro_horas_recargo { get; set; }
         public string IdRubro_bono_x_antiguedad { get; set; }
+        public string IdRubro_anticipo { get; set; }
+        public string IdRubro_novedad_proceso { get; set; }
     
         public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
         public virtual ro_rubro_tipo ro_rubro_tipo1 { get; set; }

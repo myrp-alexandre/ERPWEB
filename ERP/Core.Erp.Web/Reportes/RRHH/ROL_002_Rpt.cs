@@ -45,6 +45,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                 lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
 
                 Lista_ingreso = (from q in lst_rpt
+                                 where q.Ingresos > 0
                                  group q by new
                                  {
                                      q.IdEmpresa,
@@ -53,12 +54,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                                      q.IdNominaTipo,
                                      q.IdNominaTipoLiqui,
                                      q.RubroDescripcion,
-                                     q.Valor,
-                                     q.pe_nombre,
-                                     q.pe_apellido,
-                                     q.Area,
-                                     q.Cargo,
-                                     q.de_descripcion
+                                     q.Valor
                                  } into ing
                                  select new ROL_002_Info
                                  {
@@ -68,16 +64,12 @@ namespace Core.Erp.Web.Reportes.RRHH
                                      IdNominaTipo = ing.Key.IdNominaTipo,
                                      IdNominaTipoLiqui = ing.Key.IdNominaTipoLiqui,
                                      RubroDescripcion = ing.Key.RubroDescripcion,
-                                     Valor = ing.Key.Valor,
-                                     pe_nombre = ing.Key.pe_nombre,
-                                     pe_apellido = ing.Key.pe_apellido,
-                                     Area = ing.Key.Area,
-                                     Cargo = ing.Key.Cargo,
-                                     de_descripcion = ing.Key.de_descripcion,
+                                     Valor = ing.Key.Valor
 
                                  }).ToList();
 
                 Lista_egreso = (from q in lst_rpt
+                               where q.Egreso > 0
                                 group q by new
                                 {
                                     q.IdEmpresa,
@@ -86,12 +78,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                                     q.IdNominaTipo,
                                     q.IdNominaTipoLiqui,
                                     q.RubroDescripcion,
-                                    q.Valor,
-                                    q.pe_nombre,
-                                    q.pe_apellido,
-                                    q.Area,
-                                    q.Cargo,
-                                    q.de_descripcion
+                                    q.Valor
 
                                 } into egr
                                 select new ROL_002_Info
@@ -102,12 +89,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                                     IdNominaTipo = egr.Key.IdNominaTipo,
                                     IdNominaTipoLiqui = egr.Key.IdNominaTipoLiqui,
                                     RubroDescripcion = egr.Key.RubroDescripcion,
-                                    Valor = egr.Key.Valor,
-                                    pe_nombre = egr.Key.pe_nombre,
-                                    pe_apellido = egr.Key.pe_apellido,
-                                    Area = egr.Key.Area,
-                                    Cargo = egr.Key.Cargo,
-                                    de_descripcion = egr.Key.de_descripcion,
+                                    Valor = egr.Key.Valor
                                 }).ToList();
 
                 this.DataSource = lst_rpt;

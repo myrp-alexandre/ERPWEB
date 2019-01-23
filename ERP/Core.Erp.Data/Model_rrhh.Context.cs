@@ -9,11 +9,13 @@
 
 namespace Core.Erp.Data
 {
+
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
+
 
     public partial class Entities_rrhh : DbContext
     {
@@ -121,7 +123,6 @@ namespace Core.Erp.Data
         public DbSet<ro_SancionesPorMarcaciones_det> ro_SancionesPorMarcaciones_det { get; set; }
         public DbSet<vwro_SancionesPorMarcaciones_det> vwro_SancionesPorMarcaciones_det { get; set; }
         public DbSet<ro_SancionesPorMarcaciones> ro_SancionesPorMarcaciones { get; set; }
-        public DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
         public DbSet<ro_empleado> ro_empleado { get; set; }
         public DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
@@ -139,6 +140,7 @@ namespace Core.Erp.Data
         public DbSet<ro_empleado_x_division_x_area> ro_empleado_x_division_x_area { get; set; }
         public DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
         public DbSet<vwro_empleado_x_division_x_area> vwro_empleado_x_division_x_area { get; set; }
+        public DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {
