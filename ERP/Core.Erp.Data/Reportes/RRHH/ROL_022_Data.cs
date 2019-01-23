@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Data.RRHH;
+using Core.Erp.Info.Reportes.RRHH;
 using Core.Erp.Info.RRHH;
 using System;
 using System.Collections.Generic;

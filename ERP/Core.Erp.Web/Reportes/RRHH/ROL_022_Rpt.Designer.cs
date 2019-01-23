@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
@@ -60,7 +61,9 @@
             this.P_IdDivision = new DevExpress.XtraReports.Parameters.Parameter();
             this.P_IdArea = new DevExpress.XtraReports.Parameters.Parameter();
             this.P_TipoRubro = new DevExpress.XtraReports.Parameters.Parameter();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -355,6 +358,11 @@
             this.P_TipoRubro.ValueInfo = "0";
             this.P_TipoRubro.Visible = false;
             // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.RRHH.ROL_022_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
+            // 
             // ROL_022_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -363,6 +371,9 @@
             this.BottomMargin,
             this.ReportHeader,
             this.ReportFooter});
+            this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
+            this.objectDataSource1});
+            this.DataSource = this.objectDataSource1;
             this.Landscape = true;
             this.Margins = new System.Drawing.Printing.Margins(25, 25, 38, 38);
             this.PageHeight = 827;
@@ -380,6 +391,7 @@
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_022_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -418,5 +430,6 @@
         public DevExpress.XtraReports.Parameters.Parameter P_IdDivision;
         public DevExpress.XtraReports.Parameters.Parameter P_IdArea;
         public DevExpress.XtraReports.Parameters.Parameter P_TipoRubro;
+        private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
     }
 }

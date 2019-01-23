@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Info.RRHH
+namespace Core.Erp.Info.Reportes.RRHH
 {
-   public class ROL_022_Info
+    public class ROL_022_Info
     {
         public string NombreCompleto { get; set; }
         public string Ruc { get; set; }
