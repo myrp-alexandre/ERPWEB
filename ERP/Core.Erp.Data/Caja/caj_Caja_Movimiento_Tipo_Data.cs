@@ -292,7 +292,7 @@ namespace Core.Erp.Data.Caja
         {
             //La variable args del devexpress ya trae el ID seleccionado en la propiedad Value, se pasa el IdEmpresa porque es un filtro que no tiene
             var IdTipoMovi = args.Value == null ? "" : args.Value.ToString();
-            return get_info(IdEmpresa, Convert.ToInt32(IdTipoMovi) );
+            return get_info(IdEmpresa, string.IsNullOrEmpty(IdTipoMovi.ToString()) ? 0 : Convert.ToInt32(IdTipoMovi) );
         }
 
         public List<caj_Caja_Movimiento_Tipo_Info> get_list(int skip, int take, string filter, int IdEmpresa, string signo)

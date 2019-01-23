@@ -17,7 +17,8 @@
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "LiquidacionTarjetaCredito", Action = "EditingDeleteMotivo", Area = "CuentasPorCobrar" };
 
         settings.CommandColumn.Visible = true;
-        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
 
@@ -80,6 +81,9 @@
             });
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
+        settings.Settings.ShowFooter = true;
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor").DisplayFormat = "{0:c2}";
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }
 @grid.Bind(Model).GetHtml()
