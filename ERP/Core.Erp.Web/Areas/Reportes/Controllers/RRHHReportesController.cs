@@ -399,6 +399,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
             report.p_IdArea.Value = model.IdArea;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
@@ -410,6 +412,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
             report.p_IdArea.Value = model.IdArea;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
