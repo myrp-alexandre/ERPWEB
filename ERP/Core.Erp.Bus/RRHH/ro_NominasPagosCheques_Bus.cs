@@ -131,7 +131,7 @@ namespace Core.Erp.Bus.RRHH
 
                             IdEmpresa = item.IdEmpresa,
                             Observacion = "Cancelacion sueldo y salarios de " + item.pe_nombreCompleto,
-                            IdTipo_op = cl_enumeradores.eTipoOrdenPago.ANTI_PROVEE.ToString(),
+                            IdTipo_op = cl_enumeradores.eTipoOrdenPago.ANTI_EMPLE.ToString(),
                             IdTipo_Persona = cl_enumeradores.eTipoPersona.EMPLEA.ToString(),
                             IdPersona = item.IdPersona,
                             IdEntidad =Convert.ToDecimal( item.IdEmpleado),
