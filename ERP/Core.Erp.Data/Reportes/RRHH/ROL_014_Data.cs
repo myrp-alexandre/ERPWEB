@@ -9,11 +9,12 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_014_Data
     {
-        public List<ROL_014_Info> get_list(int IdEmpresa, int IdTipoNomina)
+        public List<ROL_014_Info> get_list(int IdEmpresa, int IdTipoNomina, int IdArea)
         {
             try
             {
-
+                int IdAreaIni = IdArea;
+                int IdAreaFin = IdArea == 0 ? 9999 : IdArea;
                 decimal IdTipoNominaInicio = IdTipoNomina;
                 decimal IdTipoNominaFin = IdTipoNomina == 0 ? 9999 : IdTipoNomina;
                 List<ROL_014_Info> Lista;
@@ -21,8 +22,10 @@ namespace Core.Erp.Data.Reportes.RRHH
                 {
                     Lista = (from q in Context.VWROL_014
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdTipoNomina >= IdTipoNominaInicio
+                             && IdTipoNominaInicio <= q.IdTipoNomina
                              && q.IdTipoNomina <= IdTipoNominaFin
+                             && IdAreaIni <= q.IdArea
+                             && q.IdArea <= IdAreaFin
                              select new ROL_014_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -36,7 +39,10 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  Decimo_Cuarto = q.Decimo_Cuarto,
                                  de_descripcion = q.de_descripcion,
                                  Decimo_Tercero = q.Decimo_Tercero,
-                                 Fondos_Reservas = q.Fondos_Reservas
+                                 Fondos_Reservas = q.Fondos_Reservas,
+                                 IdArea = q.IdArea,
+                                 Descripcion = q.Descripcion,
+                                 EstadoContrato = q.EstadoContrato
                              }).ToList();
                 }
                 Lista.ForEach(

@@ -8,9 +8,7 @@ namespace Core.Erp.Info.Reportes.RRHH
 {
     public class ROL_014_Info
     {
-        public int IdEmpresa { get; set; }
-        public decimal IdEmpleado { get; set; }
-        public int IdTipoNomina { get; set; }
+
         public int IdDepartamento { get; set; }
         public string de_descripcion { get; set; }
         public string pe_cedulaRuc { get; set; }
@@ -20,5 +18,11 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string Decimo_Tercero { get; set; }
         public string Fondos_Reservas { get; set; }
         public Nullable<int> IdDivision { get; set; }
+        public int IdEmpresa { get; set; }
+        public decimal IdEmpleado { get; set; }
+        public Nullable<int> IdTipoNomina { get; set; }
+        public string EstadoContrato { get; set; }
+        public Nullable<int> IdArea { get; set; }
+        public string Descripcion { get; set; }
     }
 }

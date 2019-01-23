@@ -112,7 +112,7 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
             if (IDs != "")
             {
-                var lst_x_cruzar = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(IdTransaccionSession);
+                var lst_x_cruzar = Lista_Liquidacion_x_cobro_pendiente.get_list(IdTransaccionSession);
                 string[] array = IDs.Split(',');
                 foreach (var item in array)
                 {
@@ -125,6 +125,12 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             }
             var model = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(IdTransaccionSession);
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult EditingDelete(int secuencia)
+        {
+            Lista_LiquidacionTarjeta_x_cxc_cobro.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_cobranza_det", model);
         }
 
         public ActionResult GridViewPartial_CobrosLiquidacion()
@@ -156,11 +162,20 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             {
                 IdEmpresa = IdEmpresa,
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
-                Fecha = DateTime.Now.Date                
+                Fecha = DateTime.Now.Date,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)           
             };
 
             cargar_combos(IdEmpresa, model.IdSucursal);
             return View(model);
+        }
+        #endregion
+
+        #region Json
+        public JsonResult GetCobrosPendientes(int IdEmpresa = 0, int IdSucursal = 0, decimal IdTransaccionSession = 0)
+        {
+            Lista_Liquidacion_x_cobro_pendiente.set_list(bus_LiquidacionTarjeta_cxc_cobro.get_list_cobros_pendientes(IdEmpresa, IdSucursal),IdTransaccionSession);
+            return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
     }
@@ -189,8 +204,6 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         {
             List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-
-
             list.Add(info_det);
         }
 
