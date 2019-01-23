@@ -2316,6 +2316,9 @@
     <Compile Include="vwro_empleado_novedad_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwro_empleado_x_division_x_area.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwro_empleado_x_Proyeccion_Gastos_Personales.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>

@@ -623,11 +623,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                     if (info_Division != null)
                     {
+                        info_det.IDividion = info_det.IDividion_det;
                         info_det.Descripcion_Division = info_Division.Descripcion;
                     }
 
                     if (info_Area != null)
                     {
+                        info_det.IdArea = info_det.IdArea_det;
                         info_det.Descripcion = info_Area.Descripcion;
                     }
 
@@ -1545,7 +1547,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             ro_empleado_x_division_x_area_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IDividion = info_det.IDividion;
+            edited_info.IDividion_det = info_det.IDividion;
             edited_info.IdArea = info_det.IdArea;
+            edited_info.IdArea_det = info_det.IdArea;
+            edited_info.Descripcion = info_det.Descripcion;
+            edited_info.Descripcion_Division = info_det.Descripcion_Division;
             edited_info.Porcentaje = info_det.Porcentaje;
             edited_info.Observacion = info_det.Observacion;
         }

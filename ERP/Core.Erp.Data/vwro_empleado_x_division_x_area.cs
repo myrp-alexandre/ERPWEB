@@ -12,10 +12,16 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwro_rubro_tipo
+    public partial class vwro_empleado_x_division_x_area
     {
-        public Nullable<int> IdRubro { get; set; }
-        public string ru_descripcion { get; set; }
         public int IdEmpresa { get; set; }
+        public decimal IdEmpleado { get; set; }
+        public int Secuencia { get; set; }
+        public int IDividion { get; set; }
+        public int IdArea { get; set; }
+        public double Porcentaje { get; set; }
+        public string Observacion { get; set; }
+        public string AreaDescripcion { get; set; }
+        public string DivisionDescripcion { get; set; }
     }
 }

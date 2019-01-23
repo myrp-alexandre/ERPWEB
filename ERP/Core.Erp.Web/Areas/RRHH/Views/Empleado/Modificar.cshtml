@@ -803,6 +803,7 @@
         $("#error_documento").hide();
         mostrar_horas();
         dias_vacaciones();
+        mostrar_ingreso_compartido();
     })
 
     $("#pe_cedulaRuc").blur(function () {
@@ -818,6 +819,16 @@
     }
     function AreaComboBox_BeginCallback(s, e) {
         e.customArgs["IdDivision_det"] = IDividion_det.GetValue();
+    }
+
+    function mostrar_ingreso_compartido() {
+        var IngresoCompartido = Tiene_ingresos_compartidos.GetValue();
+        if (IngresoCompartido == true) {
+            $("#ingreso_compartido").show();
+        }
+        else {
+            $("#ingreso_compartido").hide();
+        }
     }
 
     function validar() {
