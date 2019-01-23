@@ -34,5 +34,6 @@ namespace Core.Erp.Info.Reportes.RRHH
         public Nullable<int> IdArea { get; set; }
         public bool Pago_por_horas { get; set; }
         public string IdRubro { get; set; }
+        public string Rubro { get; set; }
     }
 }

@@ -57,6 +57,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      IdNominaTipoLiqui = q.IdNominaTipoLiqui,
                                      IdPeriodo = q.IdPeriodo,
                                      IdRubro = q.IdRubro,
+                                     Rubro = q.Rubro,
+                                     Area = q.Area,
                                      ru_orden = q.ru_orden,
                                      Valor = q.Valor,
                                      RubroDescripcion = q.RubroDescripcion,
@@ -94,6 +96,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      IdNominaTipoLiqui = q.IdNominaTipoLiqui,
                                      IdPeriodo = q.IdPeriodo,
                                      IdRubro = q.IdRubro,
+                                     Rubro = q.Rubro,
+                                     Area = q.Area,
                                      ru_orden = q.ru_orden,
                                      Valor = q.Valor,
                                      RubroDescripcion = q.RubroDescripcion,
@@ -140,6 +144,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      IdNominaTipoLiqui = q.IdNominaTipoLiqui,
                                      IdPeriodo = q.IdPeriodo,
                                      IdRubro = q.IdRubro,
+                                     Rubro = q.Rubro,
+                                     Area = q.Area,
                                      ru_orden = q.ru_orden,
                                      Valor = q.Valor,
                                      RubroDescripcion = q.RubroDescripcion,
@@ -151,7 +157,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      IdEmpleado = q.IdEmpleado,
                                      Ruc = q.Ruc,
                                      pe_apellido = q.pe_apellido,
-                                     IdArea = q.IdArea,
+                                     IdArea = q.IdArea,                                     
                                      NombreCompleto=q.NombreCompleto
 
                                  }).ToList();
