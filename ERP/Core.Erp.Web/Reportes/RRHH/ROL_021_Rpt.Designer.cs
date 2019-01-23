@@ -836,7 +836,7 @@
             this.xrPivotGrid1.OptionsView.ShowRowGrandTotalHeader = false;
             this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(464.4583F, 82.29166F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(464.4583F, 104.1667F);
             // 
             // pivotGridField5
             // 

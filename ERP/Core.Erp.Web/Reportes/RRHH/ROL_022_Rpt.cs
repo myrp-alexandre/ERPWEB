@@ -5,6 +5,8 @@ using System.ComponentModel;
 using DevExpress.XtraReports.UI;
 using Core.Erp.Bus.Reportes.RRHH;
 using Core.Erp.Info.RRHH;
+using Core.Erp.Info.Reportes.RRHH;
+using System.Collections.Generic;
 
 namespace Core.Erp.Web.Reportes.RRHH
 {
@@ -38,8 +40,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                 string TipoRubro = P_TipoRubro.Value == null ? "" : Convert.ToString(P_TipoRubro.Value);
 
                 ROL_022_Bus bus_rpt = new ROL_022_Bus();
-                //List<ROL_022_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea, TipoRubro);
-                //this.DataSource = lst_rpt;
+                List<ROL_022_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea, TipoRubro);
+                this.DataSource = lst_rpt;
             }
             catch (Exception)
             {
