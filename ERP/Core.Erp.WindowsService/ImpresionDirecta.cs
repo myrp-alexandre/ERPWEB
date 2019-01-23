@@ -28,7 +28,7 @@ namespace Core.Erp.WindowsService
         {
             Timer aTimer = new System.Timers.Timer();
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            aTimer.Interval = TimeSpan.FromSeconds(2).TotalMilliseconds;
+            aTimer.Interval = TimeSpan.FromSeconds(3).TotalMilliseconds;
             aTimer.Enabled = true;
         }
 
@@ -60,6 +60,8 @@ namespace Core.Erp.WindowsService
             var Impresion = bus_colaImpresion.GetInfoPorImprimir(IPLocal);
             if (Impresion == null)
                 return;
+
+            bus_colaImpresion.ModificarDB(Impresion);
             #endregion
 
             try
