@@ -766,6 +766,12 @@
             this.xrPivotGridField44.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.xrPivotGridField44.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.xrPivotGridField44.Appearance.Cell.WordWrap = true;
+            this.xrPivotGridField44.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.xrPivotGridField44.Appearance.FieldHeader.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.xrPivotGridField44.Appearance.FieldHeader.WordWrap = true;
+            this.xrPivotGridField44.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.xrPivotGridField44.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.xrPivotGridField44.Appearance.FieldValue.WordWrap = true;
             this.xrPivotGridField44.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.xrPivotGridField44.AreaIndex = 1;
             this.xrPivotGridField44.Caption = "Empleado";
