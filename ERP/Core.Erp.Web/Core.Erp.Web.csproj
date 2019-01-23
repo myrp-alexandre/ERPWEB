@@ -9718,6 +9718,8 @@
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_MotivosLiquidacion.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_CobrosLiquidacion.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_CobrosPendientesLiquidacion.cshtml" />
+    <Content Include="Areas\Caja\Views\CajaMovimientoIngreso\_CmbTipoMovimiento_Ingreso.cshtml" />
+    <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\_CmbTipoMovimiento_Egreso.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

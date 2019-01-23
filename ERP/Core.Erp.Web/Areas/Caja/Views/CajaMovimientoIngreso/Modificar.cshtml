@@ -65,10 +65,10 @@
                     @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdTipoMovi">Tipo movimiento*</label>
-                    @Html.DropDownListFor(q => q.IdTipoMovi, new SelectList(ViewBag.lst_tipo, "IdTipoMovi", "tm_descripcion"), new { @class = "form-control", @id = "IdTipoMovi" })
+                    @Html.Partial("_CmbTipoMovimiento_Ingreso", Model.IdTipoMovi)
                     @Html.ValidationMessageFor(q => q.IdTipoMovi, "", new { @class = "text-danger" })
                 </div>
             </div>
