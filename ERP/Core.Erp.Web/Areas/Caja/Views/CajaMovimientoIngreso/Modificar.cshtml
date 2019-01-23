@@ -8,7 +8,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
+    function armar_diario() {
+        var caja = $("#IdCaja").val();
+        var tipo_movimiento = IdTipoMovi.GetValue();
+        var monto = $("#cr_Valor").val();
 
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdCaja: caja,
+            IdTipoMovi: tipo_movimiento,
+            valor: monto,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("armar_diario", "CajaMovimientoIngreso", new { Area = "Caja" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridView_comprobante_detalle.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
 @using (Html.BeginForm("Modificar", "CajaMovimientoIngreso", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
@@ -153,17 +182,13 @@
     armar_diario();
     });
 
-    $("#IdTipoMovi").change(function () {
-        armar_diario();
-    });
-
     $("#cr_Valor").change(function () {
         armar_diario();
     });
 
     function armar_diario() {
         var caja = $("#IdCaja").val();
-        var tipo_movimiento = $("#IdTipoMovi").val();
+        var tipo_movimiento = IdTipoMovi.GetValue();
         var monto = $("#cr_Valor").val();
 
         var datos = {

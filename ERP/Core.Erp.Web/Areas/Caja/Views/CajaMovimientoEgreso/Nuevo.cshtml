@@ -82,7 +82,7 @@
 
     function armar_diario() {
         var caja = $("#IdCaja").val();
-        var tipo_movimiento = $("#IdTipoMovi").val();
+        var tipo_movimiento = IdTipoMovi.GetValue();
         var monto = $("#cr_Valor").val();
 
         var datos = {
@@ -206,7 +206,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_caj_Caja_Movimiento_det.IdCobro_tipo">Tipo cobro</label>
-                    @Html.DropDownListFor(q => q.info_caj_Caja_Movimiento_det.IdCobro_tipo, new SelectList(ViewBag.lst_cobro, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdTipoMovi" })
+                    @Html.DropDownListFor(q => q.info_caj_Caja_Movimiento_det.IdCobro_tipo, new SelectList(ViewBag.lst_cobro, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
                     @Html.ValidationMessageFor(q => q.info_caj_Caja_Movimiento_det.IdCobro_tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -308,17 +308,13 @@
                         armar_diario();
                     });
 
-                    $("#IdTipoMovi").change(function () {
-                        armar_diario();
-                    });
-
                     $("#cr_Valor").change(function () {
                         armar_diario();
                     });
 
                     function armar_diario() {
                         var caja = $("#IdCaja").val();
-                        var tipo_movimiento = $("#IdTipoMovi").val();
+                        var tipo_movimiento = IdTipoMovi.GetValue();
                         var monto = $("#cr_Valor").val();
 
                         var datos = {
