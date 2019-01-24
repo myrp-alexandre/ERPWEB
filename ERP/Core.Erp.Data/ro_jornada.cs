@@ -12,18 +12,18 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwro_rol_detalle_generar_op
+    public partial class ro_jornada
     {
         public int IdEmpresa { get; set; }
-        public int IdNominaTipo { get; set; }
-        public int IdNominaTipoLiqui { get; set; }
-        public int IdPeriodo { get; set; }
-        public decimal IdEmpleado { get; set; }
-        public string IdRubro { get; set; }
-        public double Valor { get; set; }
-        public System.DateTime pe_FechaIni { get; set; }
-        public System.DateTime pe_FechaFin { get; set; }
-        public decimal IdPersona { get; set; }
-        public string pe_nombreCompleto { get; set; }
+        public int IdJornada { get; set; }
+        public string codigo { get; set; }
+        public string Descripcion { get; set; }
+        public bool estado { get; set; }
+        public string IdUsuario { get; set; }
+        public System.DateTime Fecha_Transac { get; set; }
+        public string IdUsuarioUltMod { get; set; }
+        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
+        public string IdUsuarioUltAnu { get; set; }
+        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
     }
 }

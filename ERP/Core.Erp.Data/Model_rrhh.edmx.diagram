@@ -215,7 +215,11 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_division_x_area_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_division_area_x_rol_ro_rol" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_rubro_tipo" Width="1.5" PointX="9" PointY="81.25" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_division_x_area" Width="1.5" PointX="9.375" PointY="9.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_rubros_calculados" Width="1.5" PointX="11.25" PointY="82" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_jornada" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_jornada" Width="1.5" PointX="21.375" PointY="22.75" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_rubro_tipo" Width="1.5" PointX="9" PointY="81.125" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Acta_Finiquito_Detalle_ro_rubro_tipo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rubro_tipo_ro_catalogo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_Config_Param_contable_ro_rubro_tipo" />
@@ -226,8 +230,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_rubro_tipo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_prestamo_ro_rubro_tipo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rol_detalle_ro_rubro_tipo" />
-        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_division_x_area" Width="1.5" PointX="9.375" PointY="9.75" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_rubros_calculados" Width="1.5" PointX="11.25" PointY="82" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo1" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo10" />
