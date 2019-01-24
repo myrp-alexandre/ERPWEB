@@ -440,8 +440,9 @@
             this.xrPivotGrid1.OptionsView.ShowDataHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowTotalsForSingleValues = true;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(469.6667F, 104.1667F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(496.75F, 104.1667F);
             // 
             // pivotGridField5
             // 
@@ -488,10 +489,11 @@
             this.pivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.pivotGridField6.AreaIndex = 2;
             this.pivotGridField6.Caption = "RubroDescripcion";
+            this.pivotGridField6.ColumnValueLineCount = 3;
             this.pivotGridField6.FieldName = "RubroDescripcion";
             this.pivotGridField6.MinWidth = 100;
             this.pivotGridField6.Name = "pivotGridField6";
-            this.pivotGridField6.Width = 120;
+            this.pivotGridField6.Width = 150;
             // 
             // pivotGridField4
             // 
@@ -526,13 +528,14 @@
             this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField3.AreaIndex = 2;
             this.pivotGridField3.Caption = "Rubros";
-            this.pivotGridField3.ColumnValueLineCount = 3;
+            this.pivotGridField3.ColumnValueLineCount = 5;
             this.pivotGridField3.ExpandedInFieldsGroup = false;
             this.pivotGridField3.FieldName = "Rubro";
-            this.pivotGridField3.MinWidth = 100;
+            this.pivotGridField3.MinWidth = 75;
             this.pivotGridField3.Name = "pivotGridField3";
             this.pivotGridField3.Options.AllowExpand = DevExpress.Utils.DefaultBoolean.True;
             this.pivotGridField3.RowValueLineCount = 50;
+            this.pivotGridField3.Width = 75;
             // 
             // pivotGridField1
             // 

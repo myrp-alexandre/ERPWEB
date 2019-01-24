@@ -727,15 +727,16 @@
             this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField3.AreaIndex = 2;
             this.pivotGridField3.Caption = "Rubros";
-            this.pivotGridField3.ColumnValueLineCount = 3;
+            this.pivotGridField3.ColumnValueLineCount = 5;
             this.pivotGridField3.ExpandedInFieldsGroup = false;
             this.pivotGridField3.FieldName = "ru_descripcion";
-            this.pivotGridField3.MinWidth = 100;
+            this.pivotGridField3.MinWidth = 75;
             this.pivotGridField3.Name = "pivotGridField3";
             this.pivotGridField3.Options.AllowExpand = DevExpress.Utils.DefaultBoolean.True;
             this.pivotGridField3.Options.ShowGrandTotal = false;
             this.pivotGridField3.Options.ShowTotals = false;
             this.pivotGridField3.RowValueLineCount = 50;
+            this.pivotGridField3.Width = 75;
             // 
             // pivotGridField2
             // 
@@ -790,7 +791,7 @@
             this.xrPivotGridField44.FieldName = "pe_nombreCompleto";
             this.xrPivotGridField44.MinWidth = 100;
             this.xrPivotGridField44.Name = "xrPivotGridField44";
-            this.xrPivotGridField44.Width = 300;
+            this.xrPivotGridField44.Width = 200;
             // 
             // xrPivotGrid1
             // 
@@ -853,8 +854,9 @@
             this.xrPivotGrid1.OptionsView.ShowDataHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowTotalsForSingleValues = true;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(464.4583F, 114.1667F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(390.5F, 123.5417F);
             // 
             // pivotGridField5
             // 
@@ -872,7 +874,7 @@
             // 
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPivotGrid1});
-            this.GroupHeader1.HeightF = 114.1667F;
+            this.GroupHeader1.HeightF = 123.5417F;
             this.GroupHeader1.Name = "GroupHeader1";
             // 
             // ROL_021_Rpt

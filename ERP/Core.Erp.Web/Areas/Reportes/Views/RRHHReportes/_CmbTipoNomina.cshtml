@@ -21,6 +21,6 @@
         //settings.Properties.AllowNull = true;
     })
      .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.RRHHReportesController().get_list_bajo_demanda_tiponomina, new Core.Erp.Web.Areas.Reportes.Controllers.RRHHReportesController().get_info_bajo_demanda_tiponomina)
-    .Bind((Model.GetType() == typeof(Core.Erp.Info.Helps.cl_filtros_Info) || Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_nomina_tipo_Info)) ? "" : Model);
+    .Bind((Model.GetType() == typeof(Core.Erp.Info.Helps.cl_filtros_Info) || Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_nomina_tipo_Info)) || Model == 0 ? "" : Model);
 }
 @comboBox.GetHtml()

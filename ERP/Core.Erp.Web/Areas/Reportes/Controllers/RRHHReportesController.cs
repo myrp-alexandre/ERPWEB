@@ -393,15 +393,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdTipoNomina = 0,
-                IdArea = 0
+                IdArea = 0,
+                IdDivision = 0
             };
             cargar_combos(model.IdEmpresa);
             ROL_014_Rpt report = new ROL_014_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
             report.p_IdArea.Value = model.IdArea;
+            report.p_IdDivision.Value = model.IdDivision;
             report.usuario = SessionFixed.IdUsuario.ToString();
-            report.empresa = SessionFixed.NomEmpresa.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();            
             ViewBag.Report = report;
             return View(model);
         }
@@ -413,6 +415,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdTipoNomina.Value = model.IdTipoNomina;
             report.p_IdArea.Value = model.IdArea;
+            report.p_IdDivision.Value = model.IdDivision;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;

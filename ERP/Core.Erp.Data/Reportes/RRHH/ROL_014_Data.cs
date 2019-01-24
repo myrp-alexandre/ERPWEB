@@ -46,6 +46,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  Fondos_Reservas = q.Fondos_Reservas,
                                  IdArea = q.IdArea,
                                  Descripcion = q.Descripcion,
+                                 Division_Descripcion = q.Division_Descripcion,
                                  EstadoContrato = q.EstadoContrato
                              }).ToList();
                 }
