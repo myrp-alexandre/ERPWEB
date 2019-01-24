@@ -107,10 +107,16 @@
         $("#CobrosModal").modal("hide");
     }
 </script>
-@using (Html.BeginForm("Nuevo", "LiquidacionTarjetaCredito", FormMethod.Post, new { @class = "form", @role = "form", @id="PostForm" }))
+@using (Html.BeginForm("Modificar", "LiquidacionTarjetaCredito", FormMethod.Post, new { @class = "form", @role = "form", @id="PostForm" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdLiquidacion)
+    @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal"})
+
+    @Html.HiddenFor(q => q.IdEmpresa_ct)
+    @Html.HiddenFor(q => q.IdTipoCbte_ct)
+    @Html.HiddenFor(q => q.IdCbteCble_ct)
 
     if (ViewBag.mensaje != null)
     {
@@ -146,7 +152,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal:*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control" })
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>

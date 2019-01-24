@@ -326,7 +326,6 @@ namespace Core.Erp.Data.CuentasPorCobrar
                             Valor = item.Valor
                         });
                     }
-                    db.cxc_LiquidacionTarjeta.Add(Entity);
                     db.SaveChanges();
                     var cobro_tipo = db.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro_tipo == "TARJ").FirstOrDefault();
                     if (cobro_tipo != null)
