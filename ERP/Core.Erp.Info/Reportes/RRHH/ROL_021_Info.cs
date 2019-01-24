@@ -37,6 +37,6 @@ namespace Core.Erp.Info.Reportes.RRHH
         public Nullable<int> IdDivision { get; set; }
         public string Descripcion { get; set; }
         public string rub_grupo { get; set; }
-
+        public double? Dias { get; set; }
     }
 }
