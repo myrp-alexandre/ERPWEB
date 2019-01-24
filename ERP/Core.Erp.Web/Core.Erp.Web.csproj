@@ -9989,6 +9989,15 @@
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_006_sin_comision_Rpt.resx">
       <DependentUpon>CXC_006_sin_comision_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_007_Cobros_Rpt.resx">
+      <DependentUpon>CXC_007_Cobros_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_007_Diario_Rpt.resx">
+      <DependentUpon>CXC_007_Diario_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_007_Rpt.resx">
+      <DependentUpon>CXC_007_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorPagar\CXP_001_detalle_Rpt.resx">
       <DependentUpon>CXP_001_detalle_Rpt.cs</DependentUpon>
     </EmbeddedResource>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.CuentasPorCobrar
 {
-    class CXC_007_Diario_Bus
+    public class CXC_007_Diario_Bus
     {
         CXC_007_Diario_Data odata = new CXC_007_Diario_Data();
         public List<CXC_007_Diario_Info> GetList(int IdEmpresa, int IdSucursal, decimal IdLiquidacion)
