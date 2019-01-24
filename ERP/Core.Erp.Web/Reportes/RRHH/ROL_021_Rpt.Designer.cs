@@ -52,7 +52,7 @@
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.lblNombreReporte = new DevExpress.XtraReports.UI.XRTableCell();
             this.lbl_usuario = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_periodo = new DevExpress.XtraReports.UI.XRTableCell();
@@ -306,22 +306,22 @@
             // xrTableRow2
             // 
             this.xrTableRow2.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell1,
+            this.lblNombreReporte,
             this.lbl_usuario});
             this.xrTableRow2.Name = "xrTableRow2";
             this.xrTableRow2.Weight = 1D;
             // 
-            // xrTableCell1
+            // lblNombreReporte
             // 
-            this.xrTableCell1.Borders = DevExpress.XtraPrinting.BorderSide.Left;
-            this.xrTableCell1.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Italic);
-            this.xrTableCell1.Name = "xrTableCell1";
-            this.xrTableCell1.StylePriority.UseBorders = false;
-            this.xrTableCell1.StylePriority.UseFont = false;
-            this.xrTableCell1.StylePriority.UseTextAlignment = false;
-            this.xrTableCell1.Text = "REPORTE DE EGRESOS";
-            this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.xrTableCell1.Weight = 2.57564292169823D;
+            this.lblNombreReporte.Borders = DevExpress.XtraPrinting.BorderSide.Left;
+            this.lblNombreReporte.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Italic);
+            this.lblNombreReporte.Name = "lblNombreReporte";
+            this.lblNombreReporte.StylePriority.UseBorders = false;
+            this.lblNombreReporte.StylePriority.UseFont = false;
+            this.lblNombreReporte.StylePriority.UseTextAlignment = false;
+            this.lblNombreReporte.Text = "REPORTE DE EGRESOS";
+            this.lblNombreReporte.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.lblNombreReporte.Weight = 2.57564292169823D;
             // 
             // lbl_usuario
             // 
@@ -759,6 +759,7 @@
             this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField1.AreaIndex = 0;
             this.pivotGridField1.Caption = "Valor";
+            this.pivotGridField1.CellFormat.FormatString = "n2";
             this.pivotGridField1.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField1.EmptyCellText = "0.00";
             this.pivotGridField1.EmptyValueText = "0.00";
@@ -853,7 +854,7 @@
             this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(464.4583F, 104.1667F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(464.4583F, 114.1667F);
             // 
             // pivotGridField5
             // 
@@ -871,7 +872,7 @@
             // 
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPivotGrid1});
-            this.GroupHeader1.HeightF = 82.29166F;
+            this.GroupHeader1.HeightF = 114.1667F;
             this.GroupHeader1.Name = "GroupHeader1";
             // 
             // ROL_021_Rpt
@@ -934,7 +935,7 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow3;
         private DevExpress.XtraReports.UI.XRTableCell lbl_periodo;
         private DevExpress.XtraReports.UI.XRTableCell lbl_fecha;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell1;
+        private DevExpress.XtraReports.UI.XRTableCell lblNombreReporte;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField17;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField18;

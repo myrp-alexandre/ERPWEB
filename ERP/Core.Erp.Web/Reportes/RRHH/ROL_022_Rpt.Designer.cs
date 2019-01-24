@@ -39,13 +39,10 @@
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow4 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lbl_usuario = new DevExpress.XtraReports.UI.XRTableCell();
+            this.lblNombreReporte = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_periodo = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.xrLine3 = new DevExpress.XtraReports.UI.XRLine();
             this.xrLine4 = new DevExpress.XtraReports.UI.XRLine();
@@ -64,13 +61,16 @@
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
-            this.pivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField44 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField3 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
+            this.lbl_usuario = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -175,45 +175,25 @@
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrTableCell2.Weight = 2.57564297585542D;
             // 
-            // xrTableCell4
-            // 
-            this.xrTableCell4.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Top | DevExpress.XtraPrinting.BorderSide.Right)));
-            this.xrTableCell4.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrTableCell4.Name = "xrTableCell4";
-            this.xrTableCell4.StylePriority.UseBorders = false;
-            this.xrTableCell4.StylePriority.UseFont = false;
-            this.xrTableCell4.Weight = 0.424357024144577D;
-            // 
             // xrTableRow2
             // 
             this.xrTableRow2.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell1,
+            this.lblNombreReporte,
             this.lbl_usuario});
             this.xrTableRow2.Name = "xrTableRow2";
             this.xrTableRow2.Weight = 1D;
             // 
-            // xrTableCell1
+            // lblNombreReporte
             // 
-            this.xrTableCell1.Borders = DevExpress.XtraPrinting.BorderSide.Left;
-            this.xrTableCell1.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Italic);
-            this.xrTableCell1.Name = "xrTableCell1";
-            this.xrTableCell1.StylePriority.UseBorders = false;
-            this.xrTableCell1.StylePriority.UseFont = false;
-            this.xrTableCell1.StylePriority.UseTextAlignment = false;
-            this.xrTableCell1.Text = "REPORTE DE EGRESOS";
-            this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.xrTableCell1.Weight = 2.57564292169823D;
-            // 
-            // lbl_usuario
-            // 
-            this.lbl_usuario.Borders = DevExpress.XtraPrinting.BorderSide.Right;
-            this.lbl_usuario.Font = new System.Drawing.Font("Verdana", 7F);
-            this.lbl_usuario.Name = "lbl_usuario";
-            this.lbl_usuario.StylePriority.UseBorders = false;
-            this.lbl_usuario.StylePriority.UseFont = false;
-            this.lbl_usuario.StylePriority.UseTextAlignment = false;
-            this.lbl_usuario.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            this.lbl_usuario.Weight = 0.42435707830177D;
+            this.lblNombreReporte.Borders = DevExpress.XtraPrinting.BorderSide.Left;
+            this.lblNombreReporte.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Italic);
+            this.lblNombreReporte.Name = "lblNombreReporte";
+            this.lblNombreReporte.StylePriority.UseBorders = false;
+            this.lblNombreReporte.StylePriority.UseFont = false;
+            this.lblNombreReporte.StylePriority.UseTextAlignment = false;
+            this.lblNombreReporte.Text = "REPORTE DE EGRESOS";
+            this.lblNombreReporte.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.lblNombreReporte.Weight = 2.57564292169823D;
             // 
             // xrTableRow3
             // 
@@ -233,17 +213,6 @@
             this.lbl_periodo.StylePriority.UseTextAlignment = false;
             this.lbl_periodo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.lbl_periodo.Weight = 2.57564292169823D;
-            // 
-            // lbl_fecha
-            // 
-            this.lbl_fecha.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Right | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.lbl_fecha.Font = new System.Drawing.Font("Verdana", 7F);
-            this.lbl_fecha.Name = "lbl_fecha";
-            this.lbl_fecha.StylePriority.UseBorders = false;
-            this.lbl_fecha.StylePriority.UseFont = false;
-            this.lbl_fecha.StylePriority.UseTextAlignment = false;
-            this.lbl_fecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            this.lbl_fecha.Weight = 0.42435707830177D;
             // 
             // ReportFooter
             // 
@@ -435,37 +404,35 @@
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OptionsChartDataSource.DataProvideMode = DevExpress.XtraPivotGrid.PivotChartDataProvideMode.UseCustomSettings;
             this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
+            this.xrPivotGrid1.OptionsPrint.PrintColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid1.OptionsPrint.PrintDataHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintHeadersOnEveryPage = true;
             this.xrPivotGrid1.OptionsPrint.PrintUnusedFilterFields = false;
-            this.xrPivotGrid1.OptionsView.ColumnTotalsLocation = DevExpress.XtraPivotGrid.PivotTotalsLocation.Near;
-            this.xrPivotGrid1.OptionsView.RowTotalsLocation = DevExpress.XtraPivotGrid.PivotRowTotalsLocation.Tree;
             this.xrPivotGrid1.OptionsView.RowTreeOffset = 40;
             this.xrPivotGrid1.OptionsView.RowTreeWidth = 300;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
+            this.xrPivotGrid1.OptionsView.ShowColumnHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowColumnTotals = false;
-            this.xrPivotGrid1.OptionsView.ShowRowGrandTotalHeader = false;
-            this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
+            this.xrPivotGrid1.OptionsView.ShowCustomTotalsForSingleValues = true;
+            this.xrPivotGrid1.OptionsView.ShowDataHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(568.625F, 104.1667F);
             // 
-            // pivotGridField6
+            // pivotGridField5
             // 
-            this.pivotGridField6.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.pivotGridField6.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField6.Appearance.Cell.WordWrap = true;
-            this.pivotGridField6.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.pivotGridField6.Appearance.FieldHeader.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField6.Appearance.FieldHeader.WordWrap = true;
-            this.pivotGridField6.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.pivotGridField6.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField6.Appearance.FieldValue.WordWrap = true;
-            this.pivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.pivotGridField6.AreaIndex = 2;
-            this.pivotGridField6.Caption = "RubroDescripcion";
-            this.pivotGridField6.FieldName = "RubroDescripcion";
-            this.pivotGridField6.MinWidth = 100;
-            this.pivotGridField6.Name = "pivotGridField6";
+            this.pivotGridField5.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.pivotGridField5.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.pivotGridField5.Appearance.Cell.WordWrap = true;
+            this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.pivotGridField5.AreaIndex = 0;
+            this.pivotGridField5.Caption = "Area";
+            this.pivotGridField5.FieldName = "Area";
+            this.pivotGridField5.MinWidth = 100;
+            this.pivotGridField5.Name = "pivotGridField5";
             // 
             // xrPivotGridField44
             // 
@@ -486,22 +453,35 @@
             this.xrPivotGridField44.Name = "xrPivotGridField44";
             this.xrPivotGridField44.Width = 150;
             // 
-            // pivotGridField1
+            // pivotGridField6
             // 
-            this.pivotGridField1.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.pivotGridField1.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField1.Appearance.Cell.WordWrap = true;
-            this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
-            this.pivotGridField1.AreaIndex = 0;
-            this.pivotGridField1.Caption = "Valor";
-            this.pivotGridField1.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.pivotGridField1.EmptyCellText = "0.00";
-            this.pivotGridField1.EmptyValueText = "0.00";
-            this.pivotGridField1.FieldName = "Valor";
-            this.pivotGridField1.GrandTotalCellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.pivotGridField1.MinWidth = 100;
-            this.pivotGridField1.Name = "pivotGridField1";
-            this.pivotGridField1.UnboundFieldName = "pivotGridField1";
+            this.pivotGridField6.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.pivotGridField6.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.pivotGridField6.Appearance.Cell.WordWrap = true;
+            this.pivotGridField6.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.pivotGridField6.Appearance.FieldHeader.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.pivotGridField6.Appearance.FieldHeader.WordWrap = true;
+            this.pivotGridField6.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.pivotGridField6.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.pivotGridField6.Appearance.FieldValue.WordWrap = true;
+            this.pivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.pivotGridField6.AreaIndex = 2;
+            this.pivotGridField6.Caption = "RubroDescripcion";
+            this.pivotGridField6.FieldName = "RubroDescripcion";
+            this.pivotGridField6.MinWidth = 100;
+            this.pivotGridField6.Name = "pivotGridField6";
+            // 
+            // pivotGridField4
+            // 
+            this.pivotGridField4.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.pivotGridField4.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.pivotGridField4.Appearance.Cell.WordWrap = true;
+            this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
+            this.pivotGridField4.AreaIndex = 0;
+            this.pivotGridField4.Caption = "Tipo";
+            this.pivotGridField4.FieldName = "Grupo";
+            this.pivotGridField4.MinWidth = 100;
+            this.pivotGridField4.Name = "pivotGridField4";
             // 
             // pivotGridField2
             // 
@@ -524,6 +504,7 @@
             this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField3.AreaIndex = 2;
             this.pivotGridField3.Caption = "Rubros";
+            this.pivotGridField3.ColumnValueLineCount = 2;
             this.pivotGridField3.ExpandedInFieldsGroup = false;
             this.pivotGridField3.FieldName = "Rubro";
             this.pivotGridField3.MinWidth = 100;
@@ -531,29 +512,61 @@
             this.pivotGridField3.Options.AllowExpand = DevExpress.Utils.DefaultBoolean.True;
             this.pivotGridField3.RowValueLineCount = 50;
             // 
-            // pivotGridField4
+            // pivotGridField1
             // 
-            this.pivotGridField4.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.pivotGridField4.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField4.Appearance.Cell.WordWrap = true;
-            this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
-            this.pivotGridField4.AreaIndex = 0;
-            this.pivotGridField4.Caption = "Tipo";
-            this.pivotGridField4.FieldName = "Grupo";
-            this.pivotGridField4.MinWidth = 100;
-            this.pivotGridField4.Name = "pivotGridField4";
+            this.pivotGridField1.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.pivotGridField1.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.pivotGridField1.Appearance.Cell.WordWrap = true;
+            this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
+            this.pivotGridField1.AreaIndex = 0;
+            this.pivotGridField1.Caption = "Valor";
+            this.pivotGridField1.CellFormat.FormatString = "n2";
+            this.pivotGridField1.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField1.EmptyCellText = "0.00";
+            this.pivotGridField1.EmptyValueText = "0.00";
+            this.pivotGridField1.FieldName = "Valor";
+            this.pivotGridField1.GrandTotalCellFormat.FormatString = "n2";
+            this.pivotGridField1.GrandTotalCellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField1.MinWidth = 100;
+            this.pivotGridField1.Name = "pivotGridField1";
+            this.pivotGridField1.TotalCellFormat.FormatString = "n2";
+            this.pivotGridField1.TotalCellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField1.TotalValueFormat.FormatString = "n2";
+            this.pivotGridField1.TotalValueFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField1.UnboundFieldName = "pivotGridField1";
+            this.pivotGridField1.ValueFormat.FormatString = "n2";
+            this.pivotGridField1.ValueFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             // 
-            // pivotGridField5
+            // lbl_fecha
             // 
-            this.pivotGridField5.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.pivotGridField5.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField5.Appearance.Cell.WordWrap = true;
-            this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.pivotGridField5.AreaIndex = 0;
-            this.pivotGridField5.Caption = "Area";
-            this.pivotGridField5.FieldName = "Area";
-            this.pivotGridField5.MinWidth = 100;
-            this.pivotGridField5.Name = "pivotGridField5";
+            this.lbl_fecha.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Right | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.lbl_fecha.Font = new System.Drawing.Font("Verdana", 7F);
+            this.lbl_fecha.Name = "lbl_fecha";
+            this.lbl_fecha.StylePriority.UseBorders = false;
+            this.lbl_fecha.StylePriority.UseFont = false;
+            this.lbl_fecha.StylePriority.UseTextAlignment = false;
+            this.lbl_fecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.lbl_fecha.Weight = 0.42435707830177D;
+            // 
+            // lbl_usuario
+            // 
+            this.lbl_usuario.Borders = DevExpress.XtraPrinting.BorderSide.Right;
+            this.lbl_usuario.Font = new System.Drawing.Font("Verdana", 7F);
+            this.lbl_usuario.Name = "lbl_usuario";
+            this.lbl_usuario.StylePriority.UseBorders = false;
+            this.lbl_usuario.StylePriority.UseFont = false;
+            this.lbl_usuario.StylePriority.UseTextAlignment = false;
+            this.lbl_usuario.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.lbl_usuario.Weight = 0.42435707830177D;
+            // 
+            // xrTableCell4
+            // 
+            this.xrTableCell4.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Top | DevExpress.XtraPrinting.BorderSide.Right)));
+            this.xrTableCell4.Font = new System.Drawing.Font("Verdana", 7F);
+            this.xrTableCell4.Name = "xrTableCell4";
+            this.xrTableCell4.StylePriority.UseBorders = false;
+            this.xrTableCell4.StylePriority.UseFont = false;
+            this.xrTableCell4.Weight = 0.424357024144577D;
             // 
             // ROL_022_Rpt
             // 
@@ -601,13 +614,10 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell2;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow2;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell1;
-        private DevExpress.XtraReports.UI.XRTableCell lbl_usuario;
+        private DevExpress.XtraReports.UI.XRTableCell lblNombreReporte;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow3;
         private DevExpress.XtraReports.UI.XRTableCell lbl_periodo;
-        private DevExpress.XtraReports.UI.XRTableCell lbl_fecha;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.XRLine xrLine3;
         private DevExpress.XtraReports.UI.XRLine xrLine4;
@@ -633,5 +643,8 @@
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField4;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField5;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField6;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
+        private DevExpress.XtraReports.UI.XRTableCell lbl_usuario;
+        private DevExpress.XtraReports.UI.XRTableCell lbl_fecha;
     }
 }
