@@ -14,17 +14,17 @@ namespace Core.Erp.Data
     
     public partial class vwro_empleado_x_jornada
     {
-        public int IdSucursal { get; set; }
-        public Nullable<int> IdNomina { get; set; }
-        public string em_status { get; set; }
-        public bool Pago_por_horas { get; set; }
-        public string Empleado { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdEmpleado { get; set; }
+        public string Empleado { get; set; }
+        public string em_status { get; set; }
+        public Nullable<int> IdNomina { get; set; }
+        public int IdSucursal { get; set; }
+        public bool Pago_por_horas { get; set; }
         public Nullable<double> Valor_horas_matutino { get; set; }
         public Nullable<double> Valor_horas_vespertina { get; set; }
         public Nullable<double> Valor_horas_brigada { get; set; }
-        public Nullable<double> Valor_hora_adicionales { get; set; }
         public Nullable<double> Valor_hora_control_salida { get; set; }
+        public Nullable<double> Valor_hora_adicionales { get; set; }
     }
 }
