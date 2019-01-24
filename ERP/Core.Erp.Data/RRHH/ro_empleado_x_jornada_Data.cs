@@ -9,7 +9,7 @@ namespace Core.Erp.Data.RRHH
 {
     public class ro_empleado_x_jornada_Data
     {
-        public List<ro_empleado_x_jornada_Info> GetList(int IdEmpresa)
+        public List<ro_empleado_x_jornada_Info> GetList(int IdEmpresa, int IdJornada)
         {
             try
             {
@@ -17,6 +17,7 @@ namespace Core.Erp.Data.RRHH
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     Lista = Context.ro_empleado_x_jornada.Where(q => q.IdEmpresa == IdEmpresa
+                    && q.IdJornada == IdJornada
                     ).Select(q => new ro_empleado_x_jornada_Info
                     {
                         IdEmpresa = q.IdEmpresa,
