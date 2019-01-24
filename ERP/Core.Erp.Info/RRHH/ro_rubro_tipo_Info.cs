@@ -44,6 +44,7 @@ namespace Core.Erp.Info.RRHH
         public string ip { get; set; }
         public bool rub_acumula_descuento { get; set; }
         public bool rub_acumula { get; set; }
+        public bool se_distribuye { get; set; }
 
     }
 }
