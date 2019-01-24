@@ -62,7 +62,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdLiquidacion = DataBinder.Eval(tc.DataItem, "IdLiquidacion") }) + "&nbsp;" +
@@ -89,7 +89,6 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
-        settings.Columns.Add("IdTarjeta", "IdTarjeta").Width = Unit.Percentage(20);
         settings.Columns.Add("IdBanco", "IdBanco").Width = Unit.Percentage(20);        
         settings.Columns.Add(column =>
         {

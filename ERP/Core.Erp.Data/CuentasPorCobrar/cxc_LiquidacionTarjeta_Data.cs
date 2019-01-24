@@ -139,7 +139,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdBanco = info.IdBanco,
                         Observacion = info.Observacion,
                         Estado = info.Estado = true,
-                        Valor = info.Valor
+                        Valor = info.Valor = Math.Round(info.ListaCobros.Sum(q=>q.Valor),2,MidpointRounding.AwayFromZero)
                     };
                     int Secuencia = 1;
                     foreach (var item in info.ListaCobros)
@@ -171,6 +171,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                             Valor = item.Valor
                         });
                     }
+                    db.cxc_LiquidacionTarjeta.Add(Entity);
                     db.SaveChanges();
                     var cobro_tipo = db.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro_tipo == "TARJ").FirstOrDefault();
                     if (cobro_tipo != null)
@@ -217,9 +218,10 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     IdUsuario = info.IdUsuarioCreacion,
                     IdUsuarioUltMod = info.IdUsuarioModificacion,
                     Estado = "A",
+                    IdBanco = info.IdBanco,
                     cb_Valor = Math.Round(info.ListaCobros.Sum(q=>q.Valor),2,MidpointRounding.AwayFromZero),
                     IdSucursal = info.IdSucursal,
-                    cb_Observacion = "LIQUIDACION DE TARJETA #"+info.IdLiquidacion,
+                    cb_Observacion = "LIQ. TARJ. #"+info.IdLiquidacion+" "+info.Observacion,
                     lst_det_ct = new List<ct_cbtecble_det_Info>()
                 };
                 int Secuencia = 1;
@@ -245,7 +247,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 {
                     secuencia = Secuencia++,
                     IdCtaCble = IdCtaCble_tarjeta,
-                    dc_Valor = Math.Round(info.Valor, 2, MidpointRounding.AwayFromZero),
+                    dc_Valor = Math.Round(info.Valor, 2, MidpointRounding.AwayFromZero)*-1,
                 });
 
                 diario.lst_det_canc_op = new List<Info.CuentasPorPagar.cp_orden_pago_cancelaciones_Info>();
