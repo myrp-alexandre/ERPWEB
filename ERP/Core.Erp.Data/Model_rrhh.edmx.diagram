@@ -85,12 +85,9 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_proyeccion_gastos_det" Width="1.5" PointX="13.5" PointY="32.5" />
         <EntityTypeShape EntityType="Model_rrhh.ro_tipo_gastos_personales" Width="1.5" PointX="21.375" PointY="1.25" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_det_ro_empleado_proyeccion_gastos" />
-        <EntityTypeShape EntityType="Model_rrhh.ro_empleado_Novedad" Width="1.5" PointX="13.75" PointY="55.375" />
         <EntityTypeShape EntityType="Model_rrhh.ro_empleado_novedad_det" Width="1.5" PointX="23" PointY="56.125" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_Novedad" Width="1.5" PointX="11.375" PointY="13.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_Empleado_Novedades" Width="1.5" PointX="15.375" PointY="18.75" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_novedad_det_ro_empleado_Novedad" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_Nomina_Tipoliqui" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_Proyeccion_Gastos_Personales_ro_tipo_gastos_personales" />
         <EntityTypeShape EntityType="Model_rrhh.ro_tipo_gastos_personales_tabla_valores_x_anio" Width="1.5" PointX="23.625" PointY="1" />
         <AssociationConnector Association="Model_rrhh.FK_ro_tipo_gastos_personales_tabla_valores_x_anio_ro_tipo_gastos_personales" />
@@ -99,7 +96,6 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_rol_detalle_x_rubro_acumulado" Width="1.5" PointX="20.25" PointY="36.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_EmpleadoNovedadCargaMasiva" Width="1.5" PointX="12.75" PointY="26.125" />
         <EntityTypeShape EntityType="Model_rrhh.ro_EmpleadoNovedadCargaMasiva_det" Width="1.5" PointX="23" PointY="49.5" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" />
         <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_EmpleadoNovedadCargaMasiva" />
         <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_ro_Nomina_Tipoliqui" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_EmpleadoNovedadCargaMasiva_det" Width="1.5" PointX="21.375" PointY="5.75" />
@@ -114,7 +110,6 @@
         <EntityTypeShape EntityType="Model_rrhh.ro_HorasProfesores" Width="1.5" PointX="22.75" PointY="66.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_HorasProfesores_det" Width="1.5" PointX="25" PointY="59.75" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_HorasProfesores" Width="1.5" PointX="5.375" PointY="13.75" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad" />
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_HorasProfesores" />
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_ro_Nomina_Tipoliqui" />
         <EntityTypeShape EntityType="Model_rrhh.vwro_HorasProfesores_det" Width="1.5" PointX="19.375" PointY="22.75" />
@@ -138,7 +133,6 @@
         <EntityTypeShape EntityType="Model_rrhh.vwro_SancionesPorMarcaciones" Width="1.5" PointX="27.375" PointY="5.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_marcaciones_x_empleado" Width="1.5" PointX="23.625" PointY="38.75" />
         <EntityTypeShape EntityType="Model_rrhh.ro_SancionesPorMarcaciones_x_novedad" Width="1.5" PointX="21" PointY="44.875" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" />
         <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_marcaciones_tipo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_marcaciones_x_empleado_ro_Nomina_Tipo" />
         <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_Nomina_Tipoliqui" />
@@ -160,8 +154,6 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Departamento" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_Division" />
         <AssociationConnector Association="Model_rrhh.FK_ro_DocumentoxEmp_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" />
-        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_proyeccion_gastos_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_empleado" />
         <AssociationConnector Association="Model_rrhh.FK_ro_empleado_ro_empleado1" />
@@ -247,6 +239,18 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo6" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo8" />
         <AssociationConnector Association="Model_rrhh.FK_ro_rubros_calculados_ro_rubro_tipo9" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_jornada_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_jornada_ro_jornada" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_empleado_Novedad" Width="1.5" PointX="26.625" PointY="42.5" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_novedad_x_empleado" Width="1.5" PointX="9.375" PointY="27.75" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_empleado1" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_novedad_det_ro_empleado_Novedad" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_jornada" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_Novedad_ro_Nomina_Tipoliqui" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

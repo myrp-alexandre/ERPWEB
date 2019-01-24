@@ -23,7 +23,7 @@ namespace Core.Erp.Data
         public int IdNomina_Tipo { get; set; }
         public int IdNomina_TipoLiqui { get; set; }
     
-        public virtual ro_empleado_Novedad ro_empleado_Novedad { get; set; }
         public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
+        public virtual ro_empleado_Novedad ro_empleado_Novedad { get; set; }
     }
 }

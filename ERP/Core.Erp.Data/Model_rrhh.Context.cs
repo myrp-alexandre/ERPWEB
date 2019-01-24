@@ -80,7 +80,6 @@ namespace Core.Erp.Data
         public DbSet<ro_empleado_proyeccion_gastos> ro_empleado_proyeccion_gastos { get; set; }
         public DbSet<ro_empleado_proyeccion_gastos_det> ro_empleado_proyeccion_gastos_det { get; set; }
         public DbSet<ro_tipo_gastos_personales> ro_tipo_gastos_personales { get; set; }
-        public DbSet<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
         public DbSet<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
         public DbSet<vwro_empleado_Novedad> vwro_empleado_Novedad { get; set; }
         public DbSet<vwro_Empleado_Novedades> vwro_Empleado_Novedades { get; set; }
@@ -141,6 +140,8 @@ namespace Core.Erp.Data
         public DbSet<ro_empleado_x_jornada> ro_empleado_x_jornada { get; set; }
         public DbSet<ro_jornada> ro_jornada { get; set; }
         public DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
+        public DbSet<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
+        public DbSet<ro_novedad_x_empleado> ro_novedad_x_empleado { get; set; }
     
         public virtual int spRo_LiquidarEmpleado(Nullable<int> idEmpresa, Nullable<decimal> idActaFiniquito)
         {

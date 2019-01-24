@@ -30,6 +30,7 @@ namespace Core.Erp.Data
         public int IdNomina_Tipo { get; set; }
         public int IdNomina_TipoLiqui { get; set; }
         public System.DateTime Fecha { get; set; }
+        public Nullable<int> IdJornada { get; set; }
         public string IdUsuario { get; set; }
         public string Estado { get; set; }
         public System.DateTime Fecha_Transac { get; set; }
@@ -39,12 +40,13 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
     
+        public virtual ro_empleado ro_empleado { get; set; }
+        public virtual ro_empleado ro_empleado1 { get; set; }
         public virtual ICollection<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
+        public virtual ro_jornada ro_jornada { get; set; }
         public virtual ro_Nomina_Tipoliqui ro_Nomina_Tipoliqui { get; set; }
         public virtual ICollection<ro_EmpleadoNovedadCargaMasiva_det> ro_EmpleadoNovedadCargaMasiva_det { get; set; }
         public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
         public virtual ICollection<ro_SancionesPorMarcaciones_x_novedad> ro_SancionesPorMarcaciones_x_novedad { get; set; }
-        public virtual ro_empleado ro_empleado { get; set; }
-        public virtual ro_empleado ro_empleado1 { get; set; }
     }
 }

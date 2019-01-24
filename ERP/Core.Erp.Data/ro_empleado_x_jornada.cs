@@ -20,5 +20,8 @@ namespace Core.Erp.Data
         public int IdJornada { get; set; }
         public double ValorHora { get; set; }
         public int MaxNumHoras { get; set; }
+    
+        public virtual ro_empleado ro_empleado { get; set; }
+        public virtual ro_jornada ro_jornada { get; set; }
     }
 }

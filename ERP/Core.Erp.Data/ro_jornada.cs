@@ -14,6 +14,12 @@ namespace Core.Erp.Data
     
     public partial class ro_jornada
     {
+        public ro_jornada()
+        {
+            this.ro_empleado_x_jornada = new HashSet<ro_empleado_x_jornada>();
+            this.ro_empleado_Novedad = new HashSet<ro_empleado_Novedad>();
+        }
+    
         public int IdEmpresa { get; set; }
         public int IdJornada { get; set; }
         public string codigo { get; set; }
@@ -25,5 +31,8 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+    
+        public virtual ICollection<ro_empleado_x_jornada> ro_empleado_x_jornada { get; set; }
+        public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
     }
 }

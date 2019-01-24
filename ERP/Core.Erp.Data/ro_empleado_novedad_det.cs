@@ -23,7 +23,7 @@ namespace Core.Erp.Data
         public double Valor { get; set; }
         public string EstadoCobro { get; set; }
     
-        public virtual ro_empleado_Novedad ro_empleado_Novedad { get; set; }
         public virtual ro_rubro_tipo ro_rubro_tipo { get; set; }
+        public virtual ro_empleado_Novedad ro_empleado_Novedad { get; set; }
     }
 }

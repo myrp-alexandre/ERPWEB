@@ -21,8 +21,6 @@ namespace Core.Erp.Data
             this.ro_cargaFamiliar = new HashSet<ro_cargaFamiliar>();
             this.ro_contrato = new HashSet<ro_contrato>();
             this.ro_DocumentoxEmp = new HashSet<ro_DocumentoxEmp>();
-            this.ro_empleado_Novedad = new HashSet<ro_empleado_Novedad>();
-            this.ro_empleado_Novedad1 = new HashSet<ro_empleado_Novedad>();
             this.ro_empleado_proyeccion_gastos = new HashSet<ro_empleado_proyeccion_gastos>();
             this.ro_empleado1 = new HashSet<ro_empleado>();
             this.ro_empleado11 = new HashSet<ro_empleado>();
@@ -47,6 +45,9 @@ namespace Core.Erp.Data
             this.ro_Solicitud_Vacaciones_x_empleado = new HashSet<ro_Solicitud_Vacaciones_x_empleado>();
             this.ro_empleado_division_area_x_rol = new HashSet<ro_empleado_division_area_x_rol>();
             this.ro_empleado_x_division_x_area = new HashSet<ro_empleado_x_division_x_area>();
+            this.ro_empleado_x_jornada = new HashSet<ro_empleado_x_jornada>();
+            this.ro_empleado_Novedad = new HashSet<ro_empleado_Novedad>();
+            this.ro_empleado_Novedad1 = new HashSet<ro_empleado_Novedad>();
         }
     
         public int IdEmpresa { get; set; }
@@ -126,8 +127,6 @@ namespace Core.Erp.Data
         public virtual ro_Departamento ro_Departamento { get; set; }
         public virtual ro_Division ro_Division { get; set; }
         public virtual ICollection<ro_DocumentoxEmp> ro_DocumentoxEmp { get; set; }
-        public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
-        public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad1 { get; set; }
         public virtual ICollection<ro_empleado_proyeccion_gastos> ro_empleado_proyeccion_gastos { get; set; }
         public virtual ICollection<ro_empleado> ro_empleado1 { get; set; }
         public virtual ro_empleado ro_empleado2 { get; set; }
@@ -156,5 +155,8 @@ namespace Core.Erp.Data
         public virtual ro_cargo ro_cargo { get; set; }
         public virtual ICollection<ro_empleado_division_area_x_rol> ro_empleado_division_area_x_rol { get; set; }
         public virtual ICollection<ro_empleado_x_division_x_area> ro_empleado_x_division_x_area { get; set; }
+        public virtual ICollection<ro_empleado_x_jornada> ro_empleado_x_jornada { get; set; }
+        public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
+        public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad1 { get; set; }
     }
 }
