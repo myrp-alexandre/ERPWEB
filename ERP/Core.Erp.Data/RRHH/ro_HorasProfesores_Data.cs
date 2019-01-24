@@ -89,7 +89,8 @@ namespace Core.Erp.Data.RRHH
                             Observacion =item.ru_descripcion,
                             Estado = "A",
                             IdUsuario = info.IdUsuario,
-                            Fecha_Transac = info.Fecha_Transac = DateTime.Now
+                            Fecha_Transac = info.Fecha_Transac = DateTime.Now,
+                            IdJornada=item.IdJornada
                         };
                         Contex.ro_empleado_Novedad.Add(Entity);
 

@@ -103,7 +103,8 @@
             VESPERTINA,
             BRIGADA,
             HORA_ADICI,
-            HORA_CONT_SAL
+            HORA_CONT_SAL,
+            HORAS_RECARGO
 
         }
         public enum eTipoCuentaRRHH
