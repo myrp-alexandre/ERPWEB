@@ -441,6 +441,7 @@
     <Compile Include="RRHH\ro_horario_planificacion_Info.cs" />
     <Compile Include="RRHH\ro_HorasProfesores_det_Info.cs" />
     <Compile Include="RRHH\ro_HorasProfesores_Info.cs" />
+    <Compile Include="RRHH\ro_jornada_Info.cs" />
     <Compile Include="RRHH\ro_marcaciones_tipo_Info.cs" />
     <Compile Include="RRHH\ro_marcaciones_x_empleado_Info.cs" />
     <Compile Include="RRHH\ro_NominasPagosCheques_det_Info.cs" />
