@@ -251,6 +251,7 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" />
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad" />
         <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" />
+        <EntityTypeShape EntityType="Model_rrhh.vwro_empleado_x_jornada" Width="1.5" PointX="28.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

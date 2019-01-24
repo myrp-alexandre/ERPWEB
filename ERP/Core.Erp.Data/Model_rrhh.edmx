@@ -1888,6 +1888,28 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_division_x_area' does no
           <Property Name="DivisionDescripcion" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_jornada' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwro_empleado_x_jornada">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Pago_por_horas" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdNomina" Type="int" />
+          <Property Name="em_status" Type="varchar" MaxLength="10" />
+          <Property Name="Pago_por_horas" Type="bit" Nullable="false" />
+          <Property Name="Empleado" Type="varchar" MaxLength="201" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Valor_horas_matutino" Type="float" />
+          <Property Name="Valor_horas_vespertina" Type="float" />
+          <Property Name="Valor_horas_brigada" Type="float" />
+          <Property Name="Valor_hora_adicionales" Type="float" />
+          <Property Name="Valor_hora_control_salida" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_ro_rubro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vwro_empleado_x_ro_rubro">
           <Key>
@@ -5211,6 +5233,22 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_empleado_x_division_x_area].[DivisionDescripcion] AS [DivisionDescripcion]
     FROM [dbo].[vwro_empleado_x_division_x_area] AS [vwro_empleado_x_division_x_area]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwro_empleado_x_jornada" EntityType="Self.vwro_empleado_x_jornada" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwro_empleado_x_jornada].[IdSucursal] AS [IdSucursal], 
+    [vwro_empleado_x_jornada].[IdNomina] AS [IdNomina], 
+    [vwro_empleado_x_jornada].[em_status] AS [em_status], 
+    [vwro_empleado_x_jornada].[Pago_por_horas] AS [Pago_por_horas], 
+    [vwro_empleado_x_jornada].[Empleado] AS [Empleado], 
+    [vwro_empleado_x_jornada].[IdEmpresa] AS [IdEmpresa], 
+    [vwro_empleado_x_jornada].[IdEmpleado] AS [IdEmpleado], 
+    [vwro_empleado_x_jornada].[Valor_horas_matutino] AS [Valor_horas_matutino], 
+    [vwro_empleado_x_jornada].[Valor_horas_vespertina] AS [Valor_horas_vespertina], 
+    [vwro_empleado_x_jornada].[Valor_horas_brigada] AS [Valor_horas_brigada], 
+    [vwro_empleado_x_jornada].[Valor_hora_adicionales] AS [Valor_hora_adicionales], 
+    [vwro_empleado_x_jornada].[Valor_hora_control_salida] AS [Valor_hora_control_salida]
+    FROM [dbo].[vwro_empleado_x_jornada] AS [vwro_empleado_x_jornada]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwro_empleado_x_ro_rubro" EntityType="Self.vwro_empleado_x_ro_rubro" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwro_empleado_x_ro_rubro].[IdEmpresa] AS [IdEmpresa], 
@@ -8510,6 +8548,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <End Role="ro_empleado_Novedad" EntitySet="ro_empleado_Novedad" />
             <End Role="ro_SancionesPorMarcaciones_x_novedad" EntitySet="ro_SancionesPorMarcaciones_x_novedad" />
           </AssociationSet>
+          <EntitySet Name="vwro_empleado_x_jornada" EntityType="Model_rrhh.vwro_empleado_x_jornada" />
           </EntityContainer>
         <ComplexType Name="spro_nomina_x_pago_utilidad_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -12103,6 +12142,26 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwro_empleado_x_jornada">
+          <Key>
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Pago_por_horas" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEmpleado" />
+          </Key>
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdNomina" Type="Int32" />
+          <Property Name="em_status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Pago_por_horas" Type="Boolean" Nullable="false" />
+          <Property Name="Empleado" Type="String" MaxLength="201" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Valor_horas_matutino" Type="Double" />
+          <Property Name="Valor_horas_vespertina" Type="Double" />
+          <Property Name="Valor_horas_brigada" Type="Double" />
+          <Property Name="Valor_hora_adicionales" Type="Double" />
+          <Property Name="Valor_hora_control_salida" Type="Double" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14563,6 +14622,24 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
                 <ScalarProperty Name="IdEmpresa_Emp_Novedad" ColumnName="IdEmpresa_Emp_Novedad" />
                 <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwro_empleado_x_jornada">
+            <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_x_jornada">
+              <MappingFragment StoreEntitySet="vwro_empleado_x_jornada">
+                <ScalarProperty Name="Valor_hora_control_salida" ColumnName="Valor_hora_control_salida" />
+                <ScalarProperty Name="Valor_hora_adicionales" ColumnName="Valor_hora_adicionales" />
+                <ScalarProperty Name="Valor_horas_brigada" ColumnName="Valor_horas_brigada" />
+                <ScalarProperty Name="Valor_horas_vespertina" ColumnName="Valor_horas_vespertina" />
+                <ScalarProperty Name="Valor_horas_matutino" ColumnName="Valor_horas_matutino" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Pago_por_horas" ColumnName="Pago_por_horas" />
+                <ScalarProperty Name="em_status" ColumnName="em_status" />
+                <ScalarProperty Name="IdNomina" ColumnName="IdNomina" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

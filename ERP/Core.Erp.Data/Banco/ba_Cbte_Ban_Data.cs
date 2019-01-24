@@ -170,7 +170,7 @@ namespace Core.Erp.Data.Banco
                     IdCbteCble = info.IdCbteCble,
                     cb_Fecha = info.cb_Fecha.Date,
                     cb_Observacion = info.cb_Observacion,
-                    IdPeriodo = info.IdPeriodo,
+                    IdPeriodo = info.IdPeriodo = Convert.ToInt32(info.cb_Fecha.Date.ToString("yyyyMM")),
                     IdSucursal = info.IdSucursal,
                     
                     cb_FechaTransac = DateTime.Now,
@@ -230,7 +230,7 @@ namespace Core.Erp.Data.Banco
                 #endregion
 
                 #region Flujo
-
+                info.list_det = info.list_det == null ? new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>() : info.list_det;
                 if (info.list_det.Count > 0)
                 {
                     foreach (var item in info.list_det)

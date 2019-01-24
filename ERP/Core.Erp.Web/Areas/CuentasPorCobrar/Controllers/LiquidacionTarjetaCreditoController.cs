@@ -42,6 +42,8 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
         {
             i_validar.ListaDet = Lista_LiquidacionTarjetaDet.get_list(i_validar.IdTransaccionSession);
             i_validar.ListaCobros = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(i_validar.IdTransaccionSession);
+            i_validar.IdUsuarioCreacion = SessionFixed.IdUsuario;
+            i_validar.IdUsuarioModificacion = SessionFixed.IdUsuario;
 
             if (i_validar.ListaCobros.Count == 0)
             {
@@ -52,6 +54,12 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             if (i_validar.ListaDet.Where(q=> q.Valor == 0).Count() > 0)
             {
                 msg = "No pueden existir motivos con valor 0";
+                return false;
+            }
+            double Diferencia = i_validar.ListaCobros.Sum(q => q.Valor) - i_validar.ListaDet.Sum(q => q.Valor);
+            if (Math.Round(Diferencia,2,MidpointRounding.AwayFromZero) <= 0)
+            {
+                msg = "Los motivos de liquidación no deben superar el valor de los cobros a liquidar";
                 return false;
             }
 
@@ -225,6 +233,45 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
                 return View(model);
             }
             if (!bus_LiquidacionTarjeta.guardarDB(model))
+            {
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0, decimal IdLiquidacion = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            cxc_LiquidacionTarjeta_Info model = bus_LiquidacionTarjeta.GetInfo(IdEmpresa, IdSucursal, IdLiquidacion);
+            if(model == null)
+                return RedirectToAction("Index");
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            Lista_LiquidacionTarjetaDet.set_list(bus_LiquidacionTarjetaDet.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
+            Lista_LiquidacionTarjeta_x_cxc_cobro.set_list(bus_LiquidacionTarjeta_cxc_cobro.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
+
+            cargar_combos(IdEmpresa, model.IdSucursal);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(cxc_LiquidacionTarjeta_Info model)
+        {
+            if (!Validar(model, ref mensaje))
+            {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
+            if (!bus_LiquidacionTarjeta.modificarDB(model))
             {
                 cargar_combos(model.IdEmpresa, model.IdSucursal);
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();

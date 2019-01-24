@@ -149,7 +149,7 @@ namespace Core.Erp.Data.RRHH
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    Lista = (from q in Context.vwro_empleado_combo
+                    Lista = (from q in Context.vwro_empleado_x_jornada
                              where q.IdEmpresa == IdEmpresa
                              && q.Pago_por_horas==true
                              select new ro_empleado_Info
@@ -157,17 +157,13 @@ namespace Core.Erp.Data.RRHH
                                  IdEmpresa = q.IdEmpresa,
                                  IdEmpleado = q.IdEmpleado,
                                  Empleado = q.Empleado,
-                                 pe_cedulaRuc = q.pe_cedulaRuc,
                                  IdTipoNomina = q.IdNomina,
                                  IdSucursal = q.IdSucursal,
                                  Valor_horas_matutino=q.Valor_horas_matutino,
                                  Valor_horas_vespertina=q.Valor_horas_vespertina,
                                  Valor_horas_brigada=q.Valor_horas_brigada,
                                  Valor_hora_adicionales = q.Valor_hora_adicionales,
-                                 Valor_hora_control_salida = q.Valor_hora_control_salida,
-                                 Valor_maximo_horas_vesp =q.Valor_maximo_horas_vesp,
-                                 Valor_maximo_horas_mat=q.Valor_maximo_horas_mat,
-                                
+                                 Valor_hora_control_salida = q.Valor_hora_control_salida,                                
                                 
                              }).ToList();
 
