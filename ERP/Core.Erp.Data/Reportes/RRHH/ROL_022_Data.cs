@@ -42,7 +42,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  //&& q.IdDivision <= IdDivisionFin
                                  && q.IdArea >= IdAreaInicio
                                  && q.IdArea <= IdAreaFin
-
+                                 && IdSucursalInicio <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
                                  && q.IdArea >= IdAreaInicio
                                  && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina
@@ -81,7 +81,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdPeriodo == IdPeriodo
                                  && q.IdArea >= IdAreaInicio
                                  && q.IdArea <= IdAreaFin
-
+                                 && IdSucursalInicio <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
                                  && q.IdArea >= IdAreaInicio
                                  && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina
@@ -123,7 +123,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                 // && q.IdDivision <= IdDivisionFin
                                  && q.IdArea >= IdAreaInicio
                                  && q.IdArea <= IdAreaFin
-
+                                 && IdSucursalInicio <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
                                  && q.IdArea >= IdAreaInicio
                                  && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina

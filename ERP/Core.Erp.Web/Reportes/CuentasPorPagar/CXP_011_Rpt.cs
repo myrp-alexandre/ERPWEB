@@ -30,14 +30,10 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var empresa = bus_empresa.get_info(IdEmpresa);
             lbl_empresa.Text = empresa.em_nombre;
-            lbl_direccion.Text = empresa.em_direccion;
-            lbl_telefonos.Text = empresa.em_telefonos;
             ImageConverter obj = new ImageConverter();
             lbl_imagen.Image = (Image)obj.ConvertFrom(empresa.em_logo);
 
             lbl_emp.Text = empresa.em_nombre;
-            lbl_dir.Text = empresa.em_direccion;
-            lbl_telef.Text = empresa.em_telefonos;
             lbl_imag.Image = (Image)obj.ConvertFrom(empresa.em_logo);
 
         }
