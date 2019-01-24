@@ -27,7 +27,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 using (Entities_cuentas_por_cobrar db = new Entities_cuentas_por_cobrar())
                 {
                     if (MostrarAnulados)
-                        Lista = (from q in db.cxc_LiquidacionTarjeta
+                        Lista = (from q in db.vwcxc_LiquidacionTarjeta
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdSucursal >= IdSucursalIni
                                  && q.IdSucursal <= IdSucursalFin
@@ -41,10 +41,13 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                      Estado = q.Estado,
                                      IdBanco = q.IdBanco,
                                      Observacion = q.Observacion,
-                                     Valor = q.Valor
+                                     Valor = q.Valor,
+                                     Lote = q.Lote,
+                                     Su_Descripcion = q.Su_Descripcion,
+                                     ba_descripcion = q.ba_descripcion
                                  }).ToList();
                     else
-                        Lista = (from q in db.cxc_LiquidacionTarjeta
+                        Lista = (from q in db.vwcxc_LiquidacionTarjeta
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdSucursal >= IdSucursalIni
                                  && q.IdSucursal <= IdSucursalFin
@@ -59,7 +62,10 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                      Estado = q.Estado,
                                      IdBanco = q.IdBanco,
                                      Observacion = q.Observacion,
-                                     Valor = q.Valor
+                                     Valor = q.Valor,
+                                     Lote = q.Lote,
+                                     Su_Descripcion = q.Su_Descripcion,
+                                     ba_descripcion = q.ba_descripcion
                                  }).ToList();
                 }
                 return Lista;

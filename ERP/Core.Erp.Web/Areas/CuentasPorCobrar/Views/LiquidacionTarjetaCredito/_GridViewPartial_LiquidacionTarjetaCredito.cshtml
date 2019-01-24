@@ -81,7 +81,8 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdLiquidacion", "IdLiquidacion").Width = Unit.Percentage(10);
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(30);
+        settings.Columns.Add("IdLiquidacion", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Fecha";
@@ -89,7 +90,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
-        settings.Columns.Add("IdBanco", "IdBanco").Width = Unit.Percentage(20);        
+        settings.Columns.Add("ba_descripcion", "Banco").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Valor";
@@ -101,7 +102,7 @@
         {
             column.FieldName = "Estado";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
             column.EditorProperties().CheckBox(sp =>
             {
 

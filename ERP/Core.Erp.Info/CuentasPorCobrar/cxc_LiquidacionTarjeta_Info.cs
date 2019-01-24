@@ -8,6 +8,8 @@ namespace Core.Erp.Info.CuentasPorCobrar
 {
     public class cxc_LiquidacionTarjeta_Info
     {
+        
+
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
@@ -31,5 +33,7 @@ namespace Core.Erp.Info.CuentasPorCobrar
 
         public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> ListaCobros { get; set; }
         public List<cxc_LiquidacionTarjetaDet_Info> ListaDet { get; set; }
+        public string Su_Descripcion { get; set; }
+        public string ba_descripcion { get; set; }
     }
 }
