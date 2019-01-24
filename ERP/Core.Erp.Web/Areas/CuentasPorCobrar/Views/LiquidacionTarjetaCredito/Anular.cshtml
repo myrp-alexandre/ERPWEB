@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.CuentasPorCobrar.cxc_LiquidacionTarjeta_Info
 @{
-    ViewBag.Title = "Nueva liquidación de tarjeta de crédito";
+    ViewBag.Title = "Anular liquidación de tarjeta de crédito";
     Layout = "~/Views/Shared/_Layout.cshtml";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -204,6 +204,17 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="MotivoAnulacion">Motivo anulación*</label>
+                    @Html.TextAreaFor(q => q.MotivoAnulacion, new { @id = "cb_Observacion", @class = "form-control", @rows = 2 })
+                    @Html.ValidationMessageFor(q => q.MotivoAnulacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
@@ -233,7 +244,7 @@
     </div>
 
     <div class="box-footer">
-        <button type="button" class="btn btn-primary" onclick="Post();" id="ButtonPost">Guardar</button>
+        <button type="button" class="btn btn-danger" onclick="Post();" id="ButtonPost">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "LiquidacionTarjetaCredito", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
     </div>
     @section Scripts {

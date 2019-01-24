@@ -16,11 +16,11 @@
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
-        settings.CommandColumn.ShowNewButtonInHeader = false;
-        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
-        settings.CommandColumn.ShowEditButton = false;
-        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
@@ -42,15 +42,8 @@
         //Funcion para inicializar fila al presionar nuevo
         settings.InitNewRow = (s, e) =>
         {
-            e.NewValues["IdSucursal"] = 0;
+            e.NewValues["IdSucursal"] = null;
         };
-        settings.Columns.Add(column =>
-        {
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "Secuencia";
-            column.Caption = "# ";
-        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pc_Cuenta";

@@ -280,6 +280,41 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Anular(int IdEmpresa = 0, int IdSucursal = 0, decimal IdLiquidacion = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            cxc_LiquidacionTarjeta_Info model = bus_LiquidacionTarjeta.GetInfo(IdEmpresa, IdSucursal, IdLiquidacion);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            Lista_LiquidacionTarjetaDet.set_list(bus_LiquidacionTarjetaDet.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
+            Lista_LiquidacionTarjeta_x_cxc_cobro.set_list(bus_LiquidacionTarjeta_cxc_cobro.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
+
+            cargar_combos(IdEmpresa, model.IdSucursal);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Anular(cxc_LiquidacionTarjeta_Info model)
+        {
+            model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
+            if (!bus_LiquidacionTarjeta.anularDB(model))
+            {
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
         #endregion
 
         #region Json

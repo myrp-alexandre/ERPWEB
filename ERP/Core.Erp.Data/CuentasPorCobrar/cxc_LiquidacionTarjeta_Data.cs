@@ -380,7 +380,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     Entity.MotivoAnulacion = info.MotivoAnulacion;
                     Entity.FechaAnulacion = DateTime.Now;
-
+                    
                     var lst_cobros = db.cxc_LiquidacionTarjeta_x_cxc_cobro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdLiquidacion == info.IdLiquidacion).ToList();
                     db.cxc_LiquidacionTarjeta_x_cxc_cobro.RemoveRange(lst_cobros);
 
