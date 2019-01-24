@@ -1389,6 +1389,9 @@
     <Compile Include="ro_nomina_x_horas_extras_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_novedad_x_empleado.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_Parametros.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
