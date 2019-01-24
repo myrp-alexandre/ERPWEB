@@ -409,6 +409,7 @@
     <Compile Include="RRHH\ro_horario_planificacion_det_Bus.cs" />
     <Compile Include="RRHH\ro_HorasProfesores_Bus.cs" />
     <Compile Include="RRHH\ro_HorasProfesores_det_Bus.cs" />
+    <Compile Include="RRHH\ro_jornada_Bus.cs" />
     <Compile Include="RRHH\ro_marcaciones_tipo_Bus.cs" />
     <Compile Include="RRHH\ro_marcaciones_x_empleado_Bus.cs" />
     <Compile Include="RRHH\ro_NominasPagosCheques_Bus.cs" />

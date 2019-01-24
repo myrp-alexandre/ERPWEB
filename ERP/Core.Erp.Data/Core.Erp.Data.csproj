@@ -1504,6 +1504,7 @@
     <Compile Include="RRHH\ro_horario_planificacion_det_Data.cs" />
     <Compile Include="RRHH\ro_HorasProfesores_Data.cs" />
     <Compile Include="RRHH\ro_HorasProfesores_det_Data.cs" />
+    <Compile Include="RRHH\ro_jornada_Data.cs" />
     <Compile Include="RRHH\ro_marcaciones_tipo_Data.cs" />
     <Compile Include="RRHH\ro_marcaciones_x_empleado_Data.cs" />
     <Compile Include="RRHH\ro_NominasPagosCheques_Data.cs" />
