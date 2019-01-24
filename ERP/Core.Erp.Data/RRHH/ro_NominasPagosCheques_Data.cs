@@ -110,10 +110,11 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
+                int? orden = 0;
                 int secuencia = 1;
-
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
+                    var info_rubros_calculados = Context.ro_rubros_calculados.Where(v => v.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     ro_NominasPagosCheques Entity = new ro_NominasPagosCheques
                     {
                         IdEmpresa = info.IdEmpresa,
@@ -148,7 +149,41 @@ namespace Core.Erp.Data.RRHH
                         };
                         Context.ro_NominasPagosCheques_det.Add(Entity_);
                         secuencia++;
+
+
+                        if (info_rubros_calculados != null)
+                        {
+                            if (info_rubros_calculados.IdRubro_novedad_proceso != null)
+                            {
+                                var info_rol = Context.ro_rol.Where(v => v.IdEmpresa == info.IdEmpresa
+                                  && v.IdNominaTipo == info.IdNomina_Tipo
+                                  && v.IdNominaTipoLiqui == info.IdNomina_TipoLiqui
+                                  && v.IdPeriodo == info.IdPeriodo
+                                  && v.IdSucursal == item.IdSucursal
+                                ).FirstOrDefault();
+                                if (info_rol != null)
+                                {
+                                    orden = Context.ro_rubro_tipo.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdRubro == info_rubros_calculados.IdRubro_novedad_proceso).FirstOrDefault().ru_orden;
+                                    ro_rol_detalle rol_det = new ro_rol_detalle
+                                    {
+                                        IdEmpresa=info.IdEmpresa,
+                                        IdRol=info_rol.IdRol,
+                                        IdEmpleado=Convert.ToDecimal( item.IdEmpleado),
+                                        IdRubro=info_rubros_calculados.IdRubro_novedad_proceso,
+                                        Orden=orden==null?0:Convert.ToInt32( orden),
+                                        Valor=item.Valor,
+                                        rub_visible_reporte=true,
+                                        Observacion="Valorpago en cheque",
+                                        IdSucursal = item.IdSucursal,
+                                    };
+                                    Context.ro_rol_detalle.Add(rol_det);
+                                };
+                            }
+                        }
+
+
                     }
+
                     Context.SaveChanges();
                 }
                 return true;

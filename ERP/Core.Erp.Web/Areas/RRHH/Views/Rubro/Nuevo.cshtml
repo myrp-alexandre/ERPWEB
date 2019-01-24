@@ -122,89 +122,107 @@
         </div>
     </div>
 
+
+
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <div class="form-group">
-                    <label for="rub_nocontab"></label>
-                    @Html.DevExpress().CheckBoxFor(q => q.rub_nocontab, settings =>
+                    <label for="se_distribuye"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.se_distribuye, settings =>
+                           {
+                               settings.Name = "se_distribuye";
+                               settings.Text = "Se distribuye";
+
+                           }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.se_distribuye, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="rub_nocontab"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.rub_nocontab, settings =>
                        {
                            settings.Name = "rub_nocontab";
                            settings.Text = "Se contabiliza";
 
                        }).GetHtml()
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label for="rub_concep"></label>
-                    @Html.DevExpress().CheckBoxFor(q => q.rub_concep, settings =>
+                    <div class="form-group">
+                        <label for="rub_concep"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.rub_concep, settings =>
                        {
                            settings.Name = "rub_concep";
                            settings.Text = "Es un concepto";
 
                        }).GetHtml()
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label for="rub_aplica_IESS"></label>
-                    @Html.DevExpress().CheckBoxFor(q => q.rub_aplica_IESS, settings =>
+                    <div class="form-group">
+                        <label for="rub_aplica_IESS"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.rub_aplica_IESS, settings =>
                        {
                            settings.Name = "rub_aplica_IESS";
                            settings.Text = "Aplica IESS";
 
                        }).GetHtml()
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label for="rub_acumula_descuento"></label>
-                    @Html.DevExpress().CheckBoxFor(q => q.rub_acumula_descuento, settings =>
+                    <div class="form-group">
+                        <label for="rub_acumula_descuento"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.rub_acumula_descuento, settings =>
                        {
                            settings.Name = "rub_acumula_descuento";
                            settings.Text = "Acumula valor para descuento";
 
                        }).GetHtml()
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label for="rub_provision"></label>
-                    @Html.DevExpress().CheckBoxFor(q => q.rub_provision, settings =>
+                    <div class="form-group">
+                        <label for="rub_provision"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.rub_provision, settings =>
                        {
                            settings.Name = "rub_provision";
                            settings.Text = "Se provisiona";
 
                        }).GetHtml()
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Rubro",new { Area = "RRHH" },null)">Cancelar</a>
-    </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-}
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a class="btn btn-default" href="@Url.Action("Index","Rubro",new { Area = "RRHH" },null)">Cancelar</a>
+        </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+        }

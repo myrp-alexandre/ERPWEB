@@ -1,7 +1,6 @@
 ﻿CREATE TABLE [dbo].[ro_jornada] (
     [IdEmpresa]       INT           NOT NULL,
     [IdJornada]       INT           NOT NULL,
-    [IdRubro]         VARCHAR (50)  NOT NULL,
     [codigo]          VARCHAR (100) NULL,
     [Descripcion]     VARCHAR (MAX) NOT NULL,
     [estado]          BIT           NOT NULL,
@@ -13,4 +12,6 @@
     [Fecha_UltAnu]    DATETIME      NULL,
     CONSTRAINT [PK_ro_jornada] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdJornada] ASC)
 );
+
+
 

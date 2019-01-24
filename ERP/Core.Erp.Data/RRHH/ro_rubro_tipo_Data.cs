@@ -255,7 +255,8 @@ namespace Core.Erp.Data.RRHH
                         rub_ctacon = Entity.rub_ctacon,
                         ru_estado = Entity.ru_estado,
                         rub_aplica_IESS=Entity.rub_aplica_IESS,
-                        rub_acumula_descuento=Entity.rub_acumula_descuento
+                        rub_acumula_descuento=Entity.rub_acumula_descuento,
+                        se_distribuye = Entity.se_distribuye
                     };
                 }
 
@@ -315,7 +316,8 @@ namespace Core.Erp.Data.RRHH
                         IdUsuario = info.IdUsuario,
                         rub_acumula_descuento=info.rub_acumula_descuento,
                         ru_estado =  "A",
-                        Fecha_Transac =  DateTime.Now
+                        Fecha_Transac =  DateTime.Now,
+                        se_distribuye = info.se_distribuye
                     };
                     Context.ro_rubro_tipo.Add(Entity);
                     Context.SaveChanges();
@@ -351,7 +353,7 @@ namespace Core.Erp.Data.RRHH
                     Entity.rub_aplica_IESS = info.rub_aplica_IESS;
                     Entity.rub_provision = info.rub_provision;
                     Entity.rub_acumula_descuento = info.rub_acumula_descuento;
-
+                    Entity.se_distribuye = info.se_distribuye;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();
