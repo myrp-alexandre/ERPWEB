@@ -37,12 +37,38 @@ namespace Core.Erp.Bus.CuentasPorCobrar
             }
         }
 
-        public cxc_LiquidacionTarjeta_Info GetInfo(int IdEmpresa, int IdSucursal, decimal IdMovimiento)
+        public bool modificarDB(cxc_LiquidacionTarjeta_Info info)
+        {
+            try
+            {
+                return odata.modificarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool anularDB(cxc_LiquidacionTarjeta_Info info)
+        {
+            try
+            {
+                return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public cxc_LiquidacionTarjeta_Info GetInfo(int IdEmpresa, int IdSucursal, decimal IdLiquidacion)
         {
             try
             {
                 cxc_LiquidacionTarjeta_Info info = new cxc_LiquidacionTarjeta_Info();
-                info = odata.get_info(IdEmpresa, IdSucursal, IdMovimiento);
+                info = odata.get_info(IdEmpresa, IdSucursal, IdLiquidacion);
 
                 return info;
             }

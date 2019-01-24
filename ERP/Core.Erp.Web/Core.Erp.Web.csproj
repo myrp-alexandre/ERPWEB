@@ -9741,10 +9741,11 @@
     <Content Include="Areas\RRHH\Views\Jornada\_GridViewPartial_Jornada.cshtml" />
     <Content Include="Areas\RRHH\Views\Jornada\Nuevo.cshtml" />
     <Content Include="Areas\RRHH\Views\Jornada\Index.cshtml" />
-    <Content Include="Areas\RRHH\Views\Empleado\_CmbEmpleado_Jornada.cshtml" />
     <Content Include="Areas\RRHH\Views\Empleado\_GridViewPartial_empleado_jornada_det.cshtml" />
     <Content Include="Areas\RRHH\Views\Jornada\Modificar.cshtml" />
     <Content Include="Areas\RRHH\Views\Jornada\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

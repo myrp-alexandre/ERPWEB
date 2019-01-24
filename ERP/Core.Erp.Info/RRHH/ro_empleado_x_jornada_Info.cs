@@ -14,5 +14,7 @@ namespace Core.Erp.Info.RRHH
         public int IdJornada { get; set; }
         public double ValorHora { get; set; }
         public int MaxNumHoras { get; set; }
+
+        public string pe_nombre { get; set; }
     }
 }

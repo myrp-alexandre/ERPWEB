@@ -1,6 +1,6 @@
 ﻿@model Core.Erp.Info.CuentasPorCobrar.cxc_LiquidacionTarjeta_Info
 @{
-    ViewBag.Title = "Nueva liquidación de tarjeta de crédito";
+    ViewBag.Title = "Anular liquidación de tarjeta de crédito";
     Layout = "~/Views/Shared/_Layout.cshtml";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
@@ -107,10 +107,16 @@
         $("#CobrosModal").modal("hide");
     }
 </script>
-@using (Html.BeginForm("Nuevo", "LiquidacionTarjetaCredito", FormMethod.Post, new { @class = "form", @role = "form", @id="PostForm" }))
+@using (Html.BeginForm("Anular", "LiquidacionTarjetaCredito", FormMethod.Post, new { @class = "form", @role = "form", @id="PostForm" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdLiquidacion)
+    @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal"})
+
+    @Html.HiddenFor(q => q.IdEmpresa_ct)
+    @Html.HiddenFor(q => q.IdTipoCbte_ct)
+    @Html.HiddenFor(q => q.IdCbteCble_ct)
 
     if (ViewBag.mensaje != null)
     {
@@ -146,7 +152,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal:*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -198,6 +204,17 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="MotivoAnulacion">Motivo anulación*</label>
+                    @Html.TextAreaFor(q => q.MotivoAnulacion, new { @id = "cb_Observacion", @class = "form-control", @rows = 2 })
+                    @Html.ValidationMessageFor(q => q.MotivoAnulacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
@@ -227,7 +244,7 @@
     </div>
 
     <div class="box-footer">
-        <button type="button" class="btn btn-primary" onclick="Post();" id="ButtonPost">Guardar</button>
+        <button type="button" class="btn btn-danger" onclick="Post();" id="ButtonPost">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "LiquidacionTarjetaCredito", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
     </div>
     @section Scripts {

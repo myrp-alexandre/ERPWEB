@@ -16,19 +16,16 @@
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
-        settings.CommandColumn.ShowNewButtonInHeader = false;
-        settings.CommandColumn.Visible = false;
-        settings.CommandColumn.ShowNewButton = false;
-        settings.CommandColumn.ShowEditButton = false;
 
-        settings.CommandColumn.ShowDeleteButton = false;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
 
         settings.SettingsContextMenu.Enabled = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
-        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = true;
-        settings.SettingsContextMenu.RowMenuItemVisibility.DeleteRow = true;
-        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
 
+        settings.Settings.ShowFooter = true;
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
@@ -44,25 +41,18 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdEmpleado";
-            column.Caption = "Empleado";
-            column.Width = Unit.Percentage(30);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
-
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdEmpleado";
-            column.Caption = "pe_nombreCompleto";
-            column.Width = Unit.Percentage(35);
-            column.Visible = false;
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-            column.SetEditItemTemplateContent(c =>
+            column.FieldName = "IdJornada";
+            column.Caption = "Jornada";
+            column.Width = Unit.Percentage(50);
+            column.EditorProperties().ComboBox(p =>
             {
-                Html.RenderPartial("_CmbEmpleado_Jornada", DataBinder.Eval(c.DataItem, "IdEmpleado"));
+                p.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(100);
+                p.TextField = "Descripcion";
+                p.ValueField = "IdJornada";
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_jor;
             });
         });
-
         settings.Columns.Add(column =>
         {
             column.FieldName = "ValorHora";
@@ -88,7 +78,7 @@
                 sp.Width = Unit.Percentage(100);
 
             });
-        }); 
+        });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
 
     });

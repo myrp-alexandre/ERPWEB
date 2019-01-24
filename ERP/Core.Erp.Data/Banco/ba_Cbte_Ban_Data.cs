@@ -170,7 +170,7 @@ namespace Core.Erp.Data.Banco
                     IdCbteCble = info.IdCbteCble,
                     cb_Fecha = info.cb_Fecha.Date,
                     cb_Observacion = info.cb_Observacion,
-                    IdPeriodo = info.IdPeriodo,
+                    IdPeriodo = info.IdPeriodo = Convert.ToInt32(info.cb_Fecha.Date.ToString("yyyyMM")),
                     IdSucursal = info.IdSucursal,
                     
                     cb_FechaTransac = DateTime.Now,
@@ -230,7 +230,7 @@ namespace Core.Erp.Data.Banco
                 #endregion
 
                 #region Flujo
-
+                info.list_det = info.list_det == null ? new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>() : info.list_det;
                 if (info.list_det.Count > 0)
                 {
                     foreach (var item in info.list_det)
@@ -406,7 +406,7 @@ namespace Core.Erp.Data.Banco
                 
                 diario.cb_Fecha = info.cb_Fecha.Date;
                 diario.cb_Observacion = info.cb_Observacion;
-                diario.IdPeriodo = info.IdPeriodo;
+                diario.IdPeriodo = info.IdPeriodo = Convert.ToInt32(info.cb_Fecha.Date.ToString("yyyyMM"));
                 diario.IdSucursal = info.IdSucursal;
                 diario.cb_Valor = info.cb_Valor;
                 diario.cb_FechaUltModi = DateTime.Now;
@@ -431,8 +431,8 @@ namespace Core.Erp.Data.Banco
                 #endregion
                 var list_det = Context_b.ba_Cbte_Ban_x_ba_TipoFlujo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble).ToList();
                 Context_b.ba_Cbte_Ban_x_ba_TipoFlujo.RemoveRange(list_det);
-
-                if(info.list_det.Count>0)
+                info.list_det = info.list_det == null ? new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>() : info.list_det;
+                if (info.list_det.Count>0)
                 {
                     foreach (var item in info.list_det)
                     {
