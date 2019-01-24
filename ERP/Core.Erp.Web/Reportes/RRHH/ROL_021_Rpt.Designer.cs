@@ -110,6 +110,7 @@
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
             this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.pivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -717,6 +718,8 @@
             this.pivotGridField4.FieldName = "ca_descripcion";
             this.pivotGridField4.MinWidth = 100;
             this.pivotGridField4.Name = "pivotGridField4";
+            this.pivotGridField4.Options.ShowGrandTotal = false;
+            this.pivotGridField4.Options.ShowTotals = false;
             // 
             // pivotGridField3
             // 
@@ -725,7 +728,7 @@
             this.pivotGridField3.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.pivotGridField3.Appearance.Cell.WordWrap = true;
             this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
-            this.pivotGridField3.AreaIndex = 2;
+            this.pivotGridField3.AreaIndex = 3;
             this.pivotGridField3.Caption = "Rubros";
             this.pivotGridField3.ColumnValueLineCount = 5;
             this.pivotGridField3.ExpandedInFieldsGroup = false;
@@ -744,7 +747,7 @@
             this.pivotGridField2.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.pivotGridField2.Appearance.Cell.WordWrap = true;
             this.pivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
-            this.pivotGridField2.AreaIndex = 1;
+            this.pivotGridField2.AreaIndex = 2;
             this.pivotGridField2.Caption = "Orden";
             this.pivotGridField2.FieldName = "Orden";
             this.pivotGridField2.MinWidth = 100;
@@ -779,12 +782,6 @@
             this.xrPivotGridField44.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.xrPivotGridField44.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.xrPivotGridField44.Appearance.Cell.WordWrap = true;
-            this.xrPivotGridField44.Appearance.FieldHeader.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.xrPivotGridField44.Appearance.FieldHeader.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.xrPivotGridField44.Appearance.FieldHeader.WordWrap = true;
-            this.xrPivotGridField44.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.xrPivotGridField44.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.xrPivotGridField44.Appearance.FieldValue.WordWrap = true;
             this.xrPivotGridField44.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.xrPivotGridField44.AreaIndex = 1;
             this.xrPivotGridField44.Caption = "Empleado";
@@ -832,7 +829,8 @@
             this.pivotGridField2,
             this.pivotGridField3,
             this.pivotGridField4,
-            this.pivotGridField5});
+            this.pivotGridField5,
+            this.pivotGridField6});
             this.xrPivotGrid1.KeepTogether = false;
             this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPivotGrid1.LockedInUserDesigner = true;
@@ -876,6 +874,16 @@
             this.xrPivotGrid1});
             this.GroupHeader1.HeightF = 123.5417F;
             this.GroupHeader1.Name = "GroupHeader1";
+            // 
+            // pivotGridField6
+            // 
+            this.pivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
+            this.pivotGridField6.AreaIndex = 1;
+            this.pivotGridField6.Caption = "Grupo";
+            this.pivotGridField6.FieldName = "rub_grupo";
+            this.pivotGridField6.GrandTotalCellFormat.FormatString = "n2";
+            this.pivotGridField6.GrandTotalCellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField6.Name = "pivotGridField6";
             // 
             // ROL_021_Rpt
             // 
@@ -994,5 +1002,6 @@
         private DevExpress.XtraReports.UI.XRPivotGrid xrPivotGrid1;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField5;
+        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField6;
     }
 }
