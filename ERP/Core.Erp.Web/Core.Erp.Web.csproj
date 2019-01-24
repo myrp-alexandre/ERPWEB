@@ -9732,7 +9732,6 @@
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_LiquidacionTarjetaCredito.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Index.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Nuevo.cshtml" />
-    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_CmbTarjetaCredito.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_MotivosLiquidacion.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_CobrosLiquidacion.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_CobrosPendientesLiquidacion.cshtml" />

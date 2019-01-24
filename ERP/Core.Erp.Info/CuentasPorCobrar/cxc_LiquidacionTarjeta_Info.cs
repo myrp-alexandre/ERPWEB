@@ -14,7 +14,6 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public decimal IdLiquidacion { get; set; }
         public string Lote { get; set; }
         public System.DateTime Fecha { get; set; }
-        public int IdTarjeta { get; set; }
         public int IdBanco { get; set; }
         public string Observacion { get; set; }
         public bool Estado { get; set; }

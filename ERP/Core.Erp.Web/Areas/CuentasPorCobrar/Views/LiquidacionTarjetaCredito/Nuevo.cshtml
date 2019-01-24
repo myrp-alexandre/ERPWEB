@@ -182,23 +182,6 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdBanco">Tarjeta:*</label>
-                    @Html.Partial("_CmbTarjetaCredito", Model.IdTarjeta)
-                    @Html.ValidationMessageFor(q => q.IdTarjeta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="cb_Valor">Valor</label>
-                    @Html.TextBoxFor(q => q.Valor, new { @id = "Valor", @class = "form-control" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="cb_Observacion">Observación</label>

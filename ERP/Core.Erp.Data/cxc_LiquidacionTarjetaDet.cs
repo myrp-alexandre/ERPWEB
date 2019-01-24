@@ -22,7 +22,7 @@ namespace Core.Erp.Data
         public double Porcentaje { get; set; }
         public double Valor { get; set; }
     
-        public virtual cxc_LiquidacionTarjeta cxc_LiquidacionTarjeta { get; set; }
         public virtual cxc_MotivoLiquidacionTarjeta cxc_MotivoLiquidacionTarjeta { get; set; }
+        public virtual cxc_LiquidacionTarjeta cxc_LiquidacionTarjeta { get; set; }
     }
 }
