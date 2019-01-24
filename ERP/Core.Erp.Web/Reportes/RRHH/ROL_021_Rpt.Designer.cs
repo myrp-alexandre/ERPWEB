@@ -735,7 +735,6 @@
             this.pivotGridField3.FieldName = "ru_descripcion";
             this.pivotGridField3.MinWidth = 75;
             this.pivotGridField3.Name = "pivotGridField3";
-            this.pivotGridField3.Options.AllowExpand = DevExpress.Utils.DefaultBoolean.True;
             this.pivotGridField3.Options.ShowGrandTotal = false;
             this.pivotGridField3.Options.ShowTotals = false;
             this.pivotGridField3.RowValueLineCount = 50;
@@ -847,7 +846,6 @@
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
             this.xrPivotGrid1.OptionsView.ShowColumnHeaders = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnTotals = false;
             this.xrPivotGrid1.OptionsView.ShowCustomTotalsForSingleValues = true;
             this.xrPivotGrid1.OptionsView.ShowDataHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
