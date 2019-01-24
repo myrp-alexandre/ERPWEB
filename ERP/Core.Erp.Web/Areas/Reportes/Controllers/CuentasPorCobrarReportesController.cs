@@ -214,5 +214,18 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(report);
         }
+
+        public ActionResult CXC_007(int IdSucursal = 0, decimal IdLiquidacion = 0)
+        {
+            CXC_007_Rpt report = new CXC_007_Rpt();
+            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_IdSucursal.Value = IdSucursal;
+            report.p_IdLiquidacion.Value = IdLiquidacion;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            return View(report);
+        }
+
     }
 }
