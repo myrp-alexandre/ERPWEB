@@ -50,7 +50,21 @@ namespace Core.Erp.Web.Reportes.RRHH
                 int IdDivision = P_IdDivision.Value == null ? 0 : Convert.ToInt32(P_IdDivision.Value);
                 int IdArea = P_IdArea.Value == null ? 0 : Convert.ToInt32(P_IdArea.Value);
                 string TipoRubro = P_TipoRubro.Value == null ? "" : Convert.ToString(P_TipoRubro.Value);
-
+                switch (TipoRubro)
+                {
+                    case "I":
+                        lblNombreReporte.Text = "Ingresos";
+                        break;
+                    case "E":
+                        lblNombreReporte.Text = "Egresos";
+                        break;
+                    case "A":
+                        lblNombreReporte.Text = "Rol General";
+                        break;
+                    default:
+                        lblNombreReporte.Text = "Rol General";
+                        break;
+                }
                 ROL_021_Bus bus_rpt = new ROL_021_Bus();
                 List<ROL_021_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea, TipoRubro);
                 this.DataSource = lst_rpt;

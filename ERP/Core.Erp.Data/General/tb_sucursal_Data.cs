@@ -62,7 +62,8 @@ namespace Core.Erp.Data.General
             using (Entities_general Contex = new Entities_general())
             {
                 info = (from q in Contex.tb_sucursal
-                        where q.IdEmpresa == IdEmpresa         
+                        where q.IdEmpresa == IdEmpresa   
+                        && q.IdSucursal == value      
                         select new tb_sucursal_Info
                         {
                             IdSucursal = q.IdSucursal,
