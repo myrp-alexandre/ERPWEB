@@ -19,6 +19,7 @@
         </div>
     }
     @Html.HiddenFor(q => q.IdEmpresa);
+    @Html.HiddenFor(q => q.IdTransaccionSession);
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -33,6 +34,17 @@
                     <label for="Descripcion">Descripción*</label>
                     @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Detalle</label>
+                    @Html.Action("GridViewPartial_empleado_x_jornada")
                 </div>
             </div>
         </div>

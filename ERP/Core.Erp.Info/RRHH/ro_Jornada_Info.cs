@@ -8,6 +8,7 @@ namespace Core.Erp.Info.RRHH
 {
     public class ro_jornada_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdJornada { get; set; }
         public string codigo { get; set; }
@@ -19,5 +20,6 @@ namespace Core.Erp.Info.RRHH
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        public List<ro_empleado_x_jornada_Info> Lst_det { get; set; }
     }
 }
