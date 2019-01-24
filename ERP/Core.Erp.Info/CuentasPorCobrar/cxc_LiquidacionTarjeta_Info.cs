@@ -29,5 +29,8 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+
+        public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> ListaCobros { get; set; }
+        public List<cxc_LiquidacionTarjetaDet_Info> ListaDet { get; set; }
     }
 }
