@@ -111,7 +111,12 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdBanco = Entity.IdBanco,
                         Valor = Entity.Valor,
                         Fecha = Entity.Fecha,
-                        Estado = Entity.Estado
+                        Estado = Entity.Estado,
+                        IdEmpresa_ct = Entity.IdEmpresa_ct,
+                        IdTipoCbte_ct = Entity.IdTipoCbte_ct,
+                        IdCbteCble_ct = Entity.IdCbteCble_ct,
+                        Observacion = Entity.Observacion,
+                        Lote = Entity.Lote
                     };
                 }
 
@@ -139,7 +144,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdBanco = info.IdBanco,
                         Observacion = info.Observacion,
                         Estado = info.Estado = true,
-                        Valor = info.Valor = Math.Round(info.ListaCobros.Sum(q=>q.Valor),2,MidpointRounding.AwayFromZero)
+                        Valor = info.Valor = Math.Round(info.ListaCobros.Sum(q=>q.Valor),2,MidpointRounding.AwayFromZero),
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = DateTime.Now
                     };
                     int Secuencia = 1;
                     foreach (var item in info.ListaCobros)
@@ -180,9 +187,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         if (CbteBan != null)
                             if (data_cbteban.guardarDB(CbteBan, Info.Helps.cl_enumeradores.eTipoCbteBancario.NCBA))
                             {
-                                info.IdEmpresa_ct = CbteBan.IdEmpresa;
-                                info.IdTipoCbte_ct = CbteBan.IdTipocbte;
-                                info.IdCbteCble_ct = CbteBan.IdCbteCble;
+                                Entity.IdEmpresa_ct = info.IdEmpresa_ct = CbteBan.IdEmpresa;
+                                Entity.IdTipoCbte_ct = info.IdTipoCbte_ct = CbteBan.IdTipocbte;
+                                Entity.IdCbteCble_ct =  info.IdCbteCble_ct = CbteBan.IdCbteCble;
                                 db.SaveChanges();
                             }
                     }
@@ -260,6 +267,92 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     return null;
                 db_b.Dispose();
                 return diario;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool modificarDB(cxc_LiquidacionTarjeta_Info info)
+        {
+            try
+            {
+                using (Entities_cuentas_por_cobrar db = new Entities_cuentas_por_cobrar())
+                {
+                    var Entity = db.cxc_LiquidacionTarjeta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdLiquidacion == info.IdLiquidacion).FirstOrDefault();
+                    if (Entity == null) return false;
+                    
+                    Entity.Lote = info.Lote;
+                    Entity.Fecha = info.Fecha;
+                    Entity.IdBanco = info.IdBanco;
+                    Entity.Observacion = info.Observacion;
+                    Entity.Valor = info.Valor = Math.Round(info.ListaCobros.Sum(q => q.Valor), 2, MidpointRounding.AwayFromZero);
+                    Entity.IdUsuarioModificacion = info.IdUsuarioCreacion;
+                    Entity.FechaModificacion = DateTime.Now;
+                    
+                    int Secuencia = 1;
+                    var lst_cobros = db.cxc_LiquidacionTarjeta_x_cxc_cobro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdLiquidacion == info.IdLiquidacion).ToList();
+                    db.cxc_LiquidacionTarjeta_x_cxc_cobro.RemoveRange(lst_cobros);
+
+                    foreach (var item in info.ListaCobros)
+                    {
+                        db.cxc_LiquidacionTarjeta_x_cxc_cobro.Add(new cxc_LiquidacionTarjeta_x_cxc_cobro
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdLiquidacion = info.IdLiquidacion,
+                            Secuencia = Secuencia++,
+                            Valor = item.Valor,
+                            IdCobro = item.IdCobro
+                        });
+                    }
+                    Secuencia = 1;
+                    var lst_motivos = db.cxc_LiquidacionTarjetaDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdLiquidacion == info.IdLiquidacion).ToList();
+                    db.cxc_LiquidacionTarjetaDet.RemoveRange(lst_motivos);
+                    foreach (var item in info.ListaDet)
+                    {
+                        var motivo = db.cxc_MotivoLiquidacionTarjeta_x_tb_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdMotivo == item.IdMotivo).FirstOrDefault();
+                        if (motivo != null)
+                            item.IdCtaCble = motivo.IdCtaCble;
+                        db.cxc_LiquidacionTarjetaDet.Add(new cxc_LiquidacionTarjetaDet
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdLiquidacion = info.IdLiquidacion,
+                            Secuencia = Secuencia++,
+                            IdMotivo = item.IdMotivo,
+                            Porcentaje = item.Porcentaje,
+                            Valor = item.Valor
+                        });
+                    }
+                    db.cxc_LiquidacionTarjeta.Add(Entity);
+                    db.SaveChanges();
+                    var cobro_tipo = db.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro_tipo == "TARJ").FirstOrDefault();
+                    if (cobro_tipo != null)
+                    {
+                        var CbteBan = ArmarDiario(info, cobro_tipo.IdCtaCble);
+                        if (CbteBan != null)
+                            if (CbteBan.IdCbteCble == 0)
+                            {
+                                if (data_cbteban.guardarDB(CbteBan, Info.Helps.cl_enumeradores.eTipoCbteBancario.NCBA))
+                                {
+                                    Entity.IdEmpresa_ct = info.IdEmpresa_ct = CbteBan.IdEmpresa;
+                                    Entity.IdTipoCbte_ct = info.IdTipoCbte_ct = CbteBan.IdTipocbte;
+                                    Entity.IdCbteCble_ct = info.IdCbteCble_ct = CbteBan.IdCbteCble;
+                                    db.SaveChanges();
+                                }
+                            }else
+                            {
+                                if(data_cbteban.modificarDB(CbteBan,Info.Helps.cl_enumeradores.eTipoCbteBancario.NCBA))
+                                {
+
+                                }
+                            }                            
+                    }
+                }
+
+                return true;
             }
             catch (Exception)
             {

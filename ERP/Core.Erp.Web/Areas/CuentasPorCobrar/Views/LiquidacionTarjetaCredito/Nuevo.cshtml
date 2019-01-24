@@ -150,11 +150,18 @@
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdBanco">Cuenta bancaria:*</label>
                     @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
                     @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Lote">Lote:</label>
+                    @Html.TextBoxFor(q=> q.Lote, new { @id = "Lote", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Lote, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-offset-1 col-md-2">
