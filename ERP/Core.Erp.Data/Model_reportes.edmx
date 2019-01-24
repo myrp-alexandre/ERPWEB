@@ -3795,6 +3795,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="Fecha_desde" Type="date" Mode="In" />
           <Parameter Name="Fecha_hasta" Type="date" Mode="In" />
+          <Parameter Name="IdRubro" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SPROL_013" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="web">
           <Parameter Name="idempresa" Type="int" Mode="In" />
@@ -7720,11 +7721,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
             <Parameter Name="IdSucursalIni" Mode="In" Type="Int32" />
             <Parameter Name="IdSucursalFin" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SPROL_012" ReturnType="Collection(Model_reportes.SPROL_012_Result)">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="Fecha_desde" Mode="In" Type="DateTime" />
-            <Parameter Name="Fecha_hasta" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="VWFAC_007" EntityType="Model_reportes.VWFAC_007" />
           <FunctionImport Name="SPFAC_002" ReturnType="Collection(Model_reportes.SPFAC_002_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
@@ -7746,6 +7742,12 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <EntitySet Name="VWCXC_007" EntityType="Model_reportes.VWCXC_007" />
           <EntitySet Name="VWCXC_007_Cobros" EntityType="Model_reportes.VWCXC_007_Cobros" />
           <EntitySet Name="VWCXC_007_Diario" EntityType="Model_reportes.VWCXC_007_Diario" />
+          <FunctionImport Name="SPROL_012" ReturnType="Collection(Model_reportes.SPROL_012_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha_desde" Mode="In" Type="DateTime" />
+            <Parameter Name="Fecha_hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="IdRubro" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -9702,24 +9704,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <Property Type="Double" Name="SaldoCreditosNaturaleza" Nullable="false" />
           <Property Type="Double" Name="SaldoFinalNaturaleza" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="SPROL_012_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
-          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="IdPrestamo" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="pe_apellido" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="pe_nombre" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="EstadoPago" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="de_descripcion" Nullable="false" MaxLength="200" />
-          <Property Type="Double" Name="Total_Prestamo" Nullable="true" />
-          <Property Type="Double" Name="Total_Cancelado" Nullable="true" />
-          <Property Type="Double" Name="Total_Pendiente_pago" Nullable="true" />
-          <Property Type="String" Name="Observacion" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_PriPago" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Transac" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
-        </ComplexType>
         <EntityType Name="VWFAC_007">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -10233,6 +10217,26 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <Property Name="Debe" Type="Double" Nullable="false" />
           <Property Name="Haber" Type="Double" />
         </EntityType>
+        <ComplexType Name="SPROL_012_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdDepartamento" Nullable="false" />
+          <Property Type="Decimal" Name="IdEmpleado" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IdPrestamo" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="pe_apellido" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="pe_nombre" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="EstadoPago" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="de_descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Total_Prestamo" Nullable="true" />
+          <Property Type="Double" Name="Total_Cancelado" Nullable="true" />
+          <Property Type="Double" Name="Total_Pendiente_pago" Nullable="true" />
+          <Property Type="String" Name="Observacion" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_PriPago" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Transac" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="String" Name="IdRubro" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ru_descripcion" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12825,28 +12829,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPROL_012" FunctionName="Model_reportes.Store.SPROL_012">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model_reportes.SPROL_012_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="EstadoPago" ColumnName="EstadoPago" />
-                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
-                <ScalarProperty Name="Total_Prestamo" ColumnName="Total_Prestamo" />
-                <ScalarProperty Name="Total_Cancelado" ColumnName="Total_Cancelado" />
-                <ScalarProperty Name="Total_Pendiente_pago" ColumnName="Total_Pendiente_pago" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Fecha_PriPago" ColumnName="Fecha_PriPago" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="VWFAC_007">
             <EntityTypeMapping TypeName="Model_reportes.VWFAC_007">
               <MappingFragment StoreEntitySet="VWFAC_007">
@@ -13209,6 +13191,30 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPROL_012" FunctionName="Model_reportes.Store.SPROL_012">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model_reportes.SPROL_012_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdPrestamo" ColumnName="IdPrestamo" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="EstadoPago" ColumnName="EstadoPago" />
+                <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
+                <ScalarProperty Name="Total_Prestamo" ColumnName="Total_Prestamo" />
+                <ScalarProperty Name="Total_Cancelado" ColumnName="Total_Cancelado" />
+                <ScalarProperty Name="Total_Pendiente_pago" ColumnName="Total_Pendiente_pago" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Fecha_PriPago" ColumnName="Fecha_PriPago" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="ru_descripcion" ColumnName="ru_descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

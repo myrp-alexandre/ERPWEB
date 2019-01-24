@@ -8,11 +8,11 @@ namespace Core.Erp.Bus.Reportes.RRHH
     public class ROL_012_Bus
     {
         ROL_012_Data odata = new ROL_012_Data();
-        public List<ROL_012_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin)
+        public List<ROL_012_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin, string IdRubro)
         {
             try
             {
-                return odata.get_list(IdEmpresa, fecha_inicio, fecha_fin);
+                return odata.get_list(IdEmpresa, fecha_inicio, fecha_fin, IdRubro);
             }
             catch (Exception )
             {

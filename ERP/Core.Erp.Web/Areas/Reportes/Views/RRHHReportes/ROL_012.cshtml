@@ -30,6 +30,12 @@
 
             <div class="row">
                 <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Rubro</label>
+                            @Html.Partial("_CmbRubro_roles", Model.IdRubro)
+                        </div>
+                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>
@@ -37,44 +43,45 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.DevExpress().DateEditFor(q=> q.fecha_ini, settings =>
-                            {
-                                settings.Name = "fecha_ini";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            }).GetHtml()
-                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Fecha fin*</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
+                                    @Html.DevExpress().DateEditFor(q => q.fecha_ini, settings =>
+                                    {
+                                        settings.Name = "fecha_ini";
+                                        settings.Properties.UseMaskBehavior = true;
+                                        settings.Properties.EditFormat = EditFormat.Date;
+                                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
-                                @Html.DevExpress().DateEditFor(q=> q.fecha_fin, settings =>
-                            {
-                                settings.Name = "fecha_fin";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            }).GetHtml()
-                                @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
                             </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Fecha fin*</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        @Html.DevExpress().DateEditFor(q => q.fecha_fin, settings =>
+                                       {
+                                           settings.Name = "fecha_fin";
+                                           settings.Properties.UseMaskBehavior = true;
+                                           settings.Properties.EditFormat = EditFormat.Date;
+                                           settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                           settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                           settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       }).GetHtml()
+                                        @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
+                    <!-- /.box-body -->
                 </div>
-            </div>
-            <!-- /.box-body -->
-        </div>
+
     </div>
     <div class="box">
         <div class="box-header with-border">

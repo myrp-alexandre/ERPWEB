@@ -335,6 +335,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fecha_inicio.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_IdRubro.Value = model.IdRubro;            
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
@@ -347,6 +348,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fecha_inicio.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_IdRubro.Value = model.IdRubro;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;

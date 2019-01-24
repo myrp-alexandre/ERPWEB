@@ -9,14 +9,14 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
    public class ROL_012_Data
     {
-        public List<ROL_012_Info> get_list(int IdEmpresa,  DateTime fecha_inicio, DateTime fecha_fin)
+        public List<ROL_012_Info> get_list(int IdEmpresa,  DateTime fecha_inicio, DateTime fecha_fin, string IdRubro)
         {
             try
             {
                 List<ROL_012_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = (from q in Context.SPROL_012(IdEmpresa,  fecha_inicio, fecha_fin)
+                    Lista = (from q in Context.SPROL_012(IdEmpresa,  fecha_inicio, fecha_fin, IdRubro)
                              select new ROL_012_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -31,7 +31,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  Total_Cancelado = q.Total_Cancelado,
                                  Total_Pendiente_pago = q.Total_Pendiente_pago,
                                  Total_Prestamo = q.Total_Prestamo,
-                                 Observacion = q.Observacion
+                                 Observacion = q.Observacion,
+                                 IdRubro = q.IdRubro,
+                                 ru_descripcion = q.ru_descripcion
                              }).ToList();
                 }
                 return Lista;
