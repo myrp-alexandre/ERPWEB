@@ -70,6 +70,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         List<ro_cargaFamiliar_Info> Lista_CargasFamiliares = new List<ro_cargaFamiliar_Info>();
         string mensaje = string.Empty;
 
+        ro_empleado_x_jornada_Bus bus_jornada_det = new ro_empleado_x_jornada_Bus();
+        ro_Empleado_x_Jornada_empleado_List List_jornada_emp = new ro_Empleado_x_Jornada_empleado_List();
         public static byte[] imagen { get; set; }
         public decimal IdEmpleado { get; set; }
         public static UploadedFile file { get; set; }
@@ -204,7 +206,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 string mensaje = "";
                 info.lst_empleado_area = ListaEmpleadoXDivisionXArea.get_list(info.IdTransaccionSession);
-
+                info.lst_det = List_jornada_emp.get_list(info.IdTransaccionSession);
                 mensaje = Validar(info);
                 if (mensaje != "")
                 {
@@ -258,11 +260,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     em_fechaSalida = DateTime.Now,
                     IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                     Pago_por_horas = true,
-                    GozaMasDeQuinceDiasVaciones = false
+                    GozaMasDeQuinceDiasVaciones = false,
+                    lst_det = new List<ro_empleado_x_jornada_Info>()
                 };
                 info.em_foto = new byte[0];
                 ListaEmpleadoXDivisionXArea.set_list(new List<ro_empleado_x_division_x_area_Info>(), info.IdTransaccionSession);
-
+                List_jornada_emp.set_list(info.lst_det, info.IdTransaccionSession);
                 return View(info);
 
             }
@@ -279,6 +282,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             {
                 string mensaje = "";
                 info.lst_empleado_area = ListaEmpleadoXDivisionXArea.get_list(info.IdTransaccionSession);
+                info.lst_det = List_jornada_emp.get_list(info.IdTransaccionSession);
 
                 mensaje = Validar(info);
                 if (mensaje != "")
@@ -333,7 +337,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 info.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
                 info.lst_empleado_area = bus_empleado_x_division_x_area.GetList(info.IdEmpresa, info.IdEmpleado);
                 ListaEmpleadoXDivisionXArea.set_list(info.lst_empleado_area, info.IdTransaccionSession);
-
+                info.lst_det = bus_jornada_det.GetList(info.IdEmpresa, info.IdEmpleado);
+                List_jornada_emp.set_list(info.lst_det, info.IdTransaccionSession);
                 if (info.em_foto == null)
                     info.em_foto = new byte[0];
 
@@ -403,7 +408,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 info.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
                 info.lst_empleado_area = bus_empleado_x_division_x_area.GetList(info.IdEmpresa, info.IdEmpleado);
                 ListaEmpleadoXDivisionXArea.set_list(info.lst_empleado_area, info.IdTransaccionSession);
-
+                info.lst_det = bus_jornada_det.GetList(info.IdEmpresa, info.IdEmpleado);
+                List_jornada_emp.set_list(info.lst_det, info.IdTransaccionSession);
                 if (info.em_foto == null)
                     info.em_foto = new byte[0];
 
@@ -812,6 +818,61 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return Json(retorno, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        #region Metodos ComboBox bajo demanda
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_Jornada()
+        {
+            ro_empleado_x_jornada_Info model = new ro_empleado_x_jornada_Info();
+            return PartialView("_CmbEmpleado_Jornada", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+
+
+        #endregion
+        #region Detalle de jornada
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_empleado_jornada_det()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var model = List_jornada_emp.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_empleado_jornada_det", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNewJornada([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_x_jornada_Info info_det)
+        {
+            if (ModelState.IsValid)
+                List_jornada_emp.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_jornada_emp.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_empleado_jornada_det", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdateJornada([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_x_jornada_Info info_det)
+        {
+
+            if (ModelState.IsValid)
+                List_jornada_emp.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_jornada_emp.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_empleado_jornada_det", model);
+        }
+        public ActionResult EditingDeleteJornada(int Secuencia)
+        {
+            List_jornada_emp.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_jornada_emp.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_empleado_jornada_det", model);
+        }
+        #endregion
+
     }
 
 
@@ -1562,4 +1623,51 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
+
+    public class ro_Empleado_x_Jornada_empleado_List
+    {
+        string Variable = "ro_empleado_x_jornada_Info";
+        public List<ro_empleado_x_jornada_Info> get_list(decimal IdTransaccionSession)
+        {
+
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<ro_empleado_x_jornada_Info> list = new List<ro_empleado_x_jornada_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<ro_empleado_x_jornada_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<ro_empleado_x_jornada_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(ro_empleado_x_jornada_Info info_det, decimal IdTransaccionSession)
+        {
+            List<ro_empleado_x_jornada_Info> list = get_list(IdTransaccionSession);
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+
+
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(ro_empleado_x_jornada_Info info_det, decimal IdTransaccionSession)
+        {
+            ro_empleado_x_jornada_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.IdEmpleado = info_det.IdEmpleado;
+            edited_info.ValorHora = info_det.ValorHora;
+            edited_info.Secuencia = info_det.Secuencia;
+            edited_info.MaxNumHoras = info_det.MaxNumHoras;
+
+        }
+
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
+        {
+            List<ro_empleado_x_jornada_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+    }
+
 }

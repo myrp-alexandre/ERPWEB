@@ -4,14 +4,14 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_empleado_jornada_det";
-        settings.CallbackRouteValues = new { Controller = "Jornada", Action = "GridViewPartial_empleado_jornada_det" };
+        settings.CallbackRouteValues = new { Controller = "Empleado", Action = "GridViewPartial_empleado_jornada_det" };
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Jornada", Action = "EditingAddNew", Area = "RRHH" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Jornada", Action = "EditingUpdate", Area = "RRHH" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Jornada", Action = "EditingDelete", Area = "RRHH" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Empleado", Action = "EditingAddNewJornada", Area = "RRHH" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Empleado", Action = "EditingUpdateJornada", Area = "RRHH" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Empleado", Action = "EditingDeleteJornada", Area = "RRHH" };
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -21,6 +21,7 @@
         settings.CommandColumn.Visible = false;
         settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = false;
+
         settings.CommandColumn.ShowDeleteButton = false;
 
         settings.SettingsContextMenu.Enabled = true;

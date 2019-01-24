@@ -19,7 +19,6 @@
         </div>
     }
     @Html.HiddenFor(q => q.IdEmpresa);
-    @Html.HiddenFor(q => q.IdTransaccionSession);
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -39,16 +38,7 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="">Detalle</label>
-                    @Html.Action("GridViewPartial_empleado_x_jornada")
-                </div>
-            </div>
-        </div>
-    </div>
+ 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Jornada", new { Area ="RRHH" }, null)">Cancelar</a>
