@@ -1163,6 +1163,9 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_006_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_006_sin_comision_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Cobros_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Diario_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_detalle_Data.cs" />
     <Compile Include="Reportes\CuentasPorPagar\CXP_002_Data.cs" />
@@ -1939,6 +1942,15 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWCXC_006_sin_comision.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXC_007.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXC_007_Cobros.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VWCXC_007_Diario.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwcxc_cartera_x_cobrar.cs">

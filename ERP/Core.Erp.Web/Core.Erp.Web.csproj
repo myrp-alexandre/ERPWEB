@@ -699,6 +699,24 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_006_sin_comision_Rpt.Designer.cs">
       <DependentUpon>CXC_006_sin_comision_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Cobros_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Cobros_Rpt.Designer.cs">
+      <DependentUpon>CXC_007_Cobros_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Diario_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Diario_Rpt.Designer.cs">
+      <DependentUpon>CXC_007_Diario_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Rpt.Designer.cs">
+      <DependentUpon>CXC_007_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\CuentasPorPagar\CXP_001_detalle_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
