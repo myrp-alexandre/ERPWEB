@@ -481,35 +481,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                             }
                             #endregion
 
-                            #region horas recargo
-                            if ((horas_vesp+horas_mat)*(formula_horas.Dividendo/formula_horas.Divisor)>0)
-                            {
-                                if (rubros_calculados.IdRubro_horas_recargo != null)
-                                {
-                                    var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_recargo);
-                                    if (rubros != null)
-                                    {
-                                        ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
-                                        {
-                                            pe_cedulaRuc = cedua,
-                                            pe_apellido = empleado.Empleado,
-                                            IdSucursal = empleado.IdSucursal,
-                                            em_codigo = empleado.em_codigo,
-                                            Secuencia = cont,
-                                            IdEmpleado = empleado.IdEmpleado,
-                                            IdRubro = rubros_calculados.IdRubro_horas_recargo,
-                                            ru_descripcion = rubros.ru_descripcion,
-                                        };
-                                        info.ValorHora = 1.32;//Convert.ToDouble( empleado.Valor_hora_adicionales- empleado.Valor_horas_vespertina);
-                                        info.NumHoras =( Math.Round(Convert.ToDouble((horas_vesp + horas_mat) * (formula_horas.Dividendo / formula_horas.Divisor)))-160);
-                                        info.Valor =1.32 * info.NumHoras;
-                                        info.Secuencia = lista_novedades.Count() + 1;
-                                        if (info.Valor > 0)
-                                            lista_novedades.Add(info);
-                                    }
-                                }
-                            }
-                            #endregion
 
                         }
 
@@ -518,6 +489,54 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                     cont++;
                 }
+
+
+
+                foreach (var item in empleado_info_list.get_list())
+                {
+
+                    double mat_mas_ves = lista_novedades.Where(v => v.IdEmpleado == item.IdEmpleado).Sum(v => v.Valor);
+
+                    #region horas recargo
+                    if ((mat_mas_ves) * (formula_horas.Dividendo / formula_horas.Divisor) > 0)
+                    {
+                        if (rubros_calculados.IdRubro_horas_recargo != null)
+                        {
+                            var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_recargo);
+                            if (rubros != null)
+                            {
+                                ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
+                                {
+                                    pe_cedulaRuc = item.pe_cedulaRuc,
+                                    pe_apellido = item.Empleado,
+                                    IdSucursal = item.IdSucursal,
+                                    em_codigo = item.em_codigo,
+                                    Secuencia = cont,
+                                    IdEmpleado = item.IdEmpleado,
+                                    IdRubro = rubros_calculados.IdRubro_horas_recargo,
+                                    ru_descripcion = rubros.ru_descripcion,
+                                };
+                                info.ValorHora = 1.32;//Convert.ToDouble( empleado.Valor_hora_adicionales- empleado.Valor_horas_vespertina);
+                                info.NumHoras = (Math.Round(Convert.ToDouble((mat_mas_ves) * (formula_horas.Dividendo / formula_horas.Divisor))) - 160);
+                                info.Valor = 1.32 * info.NumHoras;
+                                info.Secuencia = lista_novedades.Count() + 1;
+                                if (info.Valor > 0)
+                                    lista_novedades.Add(info);
+                            }
+                        }
+                    }
+                    #endregion
+
+
+                }
+
+
+
+
+
+
+
+
 
                 EmpleadoNovedadCargaMasiva_detLis_Info.set_list(lista_novedades);
             }

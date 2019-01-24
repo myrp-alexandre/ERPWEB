@@ -30,5 +30,8 @@ namespace Core.Erp.Info.RRHH
         public double ValorHora { get; set; }
         public double Valor { get; set; }
 
+        public string codigo { get; set; }
+
+
     }
 }
