@@ -97,7 +97,15 @@
             ECT_LIQ,
             ECT_PLQ
         }
+        public enum eJornadaRRHH
+        {
+            MATUTINA,
+            VESPERTINA,
+            BRIGADA,
+            HORA_ADICI,
+            HORA_CONT_SAL
 
+        }
         public enum eTipoCuentaRRHH
         {
             AHO,
