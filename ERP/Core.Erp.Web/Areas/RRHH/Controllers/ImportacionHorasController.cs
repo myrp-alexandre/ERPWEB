@@ -287,6 +287,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
             double horas_mat = 0;
             double horas_vesp = 0;
+            string jornada = "";
             if (rubros_calculados == null)
                 return;
             Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
@@ -316,17 +317,18 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                     empleado.Valor_hora_control_salida = 0;
 
                             #region Horas matutinas
-
-                            if (!reader.IsDBNull(2))
+                            
+                            if (!reader.IsDBNull(2) )
                             {
-                                if (rubros_calculados.IdRubro_horas_matutina != null)
+                                jornada = Convert.ToString(reader.GetValue(2));
+                                if ( rubros_calculados.IdRubro_horas_matutina != null && jornada==cl_enumeradores.eJornadaRRHH.MATUTINA.ToString())
                                 {
                                     var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_matutina);
                                     if (rubros != null)
                                     {
                                         ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                         {
-                                            NumHoras = Convert.ToDouble(reader.GetValue(2)),
+                                            NumHoras = Convert.ToDouble(reader.GetValue(3)),
                                             pe_cedulaRuc = cedua,
                                             pe_apellido = empleado.Empleado,
                                             em_codigo = empleado.em_codigo,
@@ -344,13 +346,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                             lista_novedades.Add(info);
                                     }
                                 }
+                                
                             }
                             #endregion
 
                             #region horas vespertinas
-                            if (!reader.IsDBNull(3))
+                            if (!reader.IsDBNull(2))
                             {
-                                if (rubros_calculados.IdRubro_horas_vespertina != null)
+                                jornada = Convert.ToString(reader.GetValue(2));
+                                if (rubros_calculados.IdRubro_horas_vespertina != null && jornada == cl_enumeradores.eJornadaRRHH.VESPERTINA.ToString())
                                 {
                                     var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_vespertina);
                                     if (rubros != null)
@@ -367,48 +371,48 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                                             IdRubro = rubros_calculados.IdRubro_horas_vespertina,
                                             ru_descripcion = rubros.ru_descripcion,
                                             ValorHora = Convert.ToDouble(empleado.Valor_horas_vespertina)
-
-
                                         };
-                                        horas_vesp = info.NumHoras;
+                                        horas_mat = info.NumHoras;
                                         info.Valor = Convert.ToDouble(empleado.Valor_horas_vespertina * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
                                         if (info.Valor > 0)
                                             lista_novedades.Add(info);
                                     }
                                 }
+
                             }
                             #endregion
 
                             #region horas brigadas
-                            if (!reader.IsDBNull(4))
+                            if (!reader.IsDBNull(2))
                             {
-                                if (rubros_calculados.IdRubro_horas_brigadas != null)
+                                jornada = Convert.ToString(reader.GetValue(2));
+                                if (rubros_calculados.IdRubro_horas_vespertina != null && jornada == cl_enumeradores.eJornadaRRHH.VESPERTINA.ToString())
                                 {
-                                    var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_brigadas);
+                                    var rubros = ro_rubro_tipo_Info_list.get_list().FirstOrDefault(v => v.IdRubro == rubros_calculados.IdRubro_horas_vespertina);
                                     if (rubros != null)
                                     {
                                         ro_HorasProfesores_det_Info info = new ro_HorasProfesores_det_Info
                                         {
-                                            NumHoras = Convert.ToDouble(reader.GetValue(4)),
+                                            NumHoras = Convert.ToDouble(reader.GetValue(3)),
                                             pe_cedulaRuc = cedua,
                                             pe_apellido = empleado.Empleado,
-                                            IdSucursal = empleado.IdSucursal,
                                             em_codigo = empleado.em_codigo,
+                                            IdSucursal = empleado.IdSucursal,
                                             Secuencia = cont,
                                             IdEmpleado = empleado.IdEmpleado,
-                                            IdRubro = rubros_calculados.IdRubro_horas_brigadas,
+                                            IdRubro = rubros_calculados.IdRubro_horas_vespertina,
                                             ru_descripcion = rubros.ru_descripcion,
-                                            ValorHora = Convert.ToDouble(empleado.Valor_horas_brigada)
-
-
+                                            ValorHora = Convert.ToDouble(empleado.Valor_horas_vespertina)
                                         };
-                                        info.Valor = Convert.ToDouble(empleado.Valor_horas_brigada * info.NumHoras);
+                                        horas_mat = info.NumHoras;
+                                        info.Valor = Convert.ToDouble(empleado.Valor_horas_vespertina * info.NumHoras);
                                         info.Secuencia = lista_novedades.Count() + 1;
-                                        if(info.Valor>0)
-                                        lista_novedades.Add(info);
+                                        if (info.Valor > 0)
+                                            lista_novedades.Add(info);
                                     }
                                 }
+
                             }
                             #endregion
 
