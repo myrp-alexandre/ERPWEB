@@ -84,8 +84,9 @@
         });
 
 
-        settings.Columns.Add("IdJornada", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(70);
+        settings.Columns.Add("IdJornada", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("codigo", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(60);
         settings.Columns.Add(column =>
         {
             column.FieldName = "estado";

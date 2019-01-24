@@ -135,7 +135,7 @@ namespace Core.Erp.Bus.RRHH
                             IdTipo_Persona = cl_enumeradores.eTipoPersona.EMPLEA.ToString(),
                             IdPersona = item.IdPersona,
                             IdEntidad =Convert.ToDecimal( item.IdEmpleado),
-                            Fecha = periodo.pe_FechaFin,
+                            Fecha = DateTime.Now,
                             IdEstadoAprobacion = cl_enumeradores.eEstadoAprobacionOrdenPago.APRO.ToString(),
                             IdFormaPago = cl_enumeradores.eFormaPagoOrdenPago.CHEQUE.ToString(),
                             Estado = "A",
@@ -157,7 +157,7 @@ namespace Core.Erp.Bus.RRHH
                             info_comprobante = new ct_cbtecble_Info
                             {
                                 IdEmpresa = info.IdEmpresa,
-                                cb_Fecha = periodo.pe_FechaFin,
+                                cb_Fecha = DateTime.Now,
 
                                 //REVISA CARLOS FALTA IDSUCURSAL
 

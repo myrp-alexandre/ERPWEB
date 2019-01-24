@@ -25,8 +25,8 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Descripcion">Codigo</label>
-                    @Html.TextBoxFor(q => q.codigo, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.codigo, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(q => q.codigo, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.codigo, "", new { @class = "text-danger"})
                 </div>
             </div>
             <div class="col-md-9">
