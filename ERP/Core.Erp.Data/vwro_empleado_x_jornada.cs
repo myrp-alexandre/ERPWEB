@@ -26,5 +26,6 @@ namespace Core.Erp.Data
         public Nullable<double> Valor_horas_brigada { get; set; }
         public Nullable<double> Valor_hora_control_salida { get; set; }
         public Nullable<double> Valor_hora_adicionales { get; set; }
+        public string pe_cedulaRuc { get; set; }
     }
 }

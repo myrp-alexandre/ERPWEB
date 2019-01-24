@@ -163,7 +163,8 @@ namespace Core.Erp.Data.RRHH
                                  Valor_horas_vespertina=q.Valor_horas_vespertina,
                                  Valor_horas_brigada=q.Valor_horas_brigada,
                                  Valor_hora_adicionales = q.Valor_hora_adicionales,
-                                 Valor_hora_control_salida = q.Valor_hora_control_salida,                                
+                                 Valor_hora_control_salida = q.Valor_hora_control_salida,  
+                                 pe_cedulaRuc=q.pe_cedulaRuc
                                 
                              }).ToList();
 

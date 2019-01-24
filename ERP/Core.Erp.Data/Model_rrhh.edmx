@@ -1895,6 +1895,7 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_jornada' does not have a
             <PropertyRef Name="IdEmpleado" />
             <PropertyRef Name="IdSucursal" />
             <PropertyRef Name="Pago_por_horas" />
+            <PropertyRef Name="pe_cedulaRuc" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -1908,6 +1909,7 @@ warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_jornada' does not have a
           <Property Name="Valor_horas_brigada" Type="float" />
           <Property Name="Valor_hora_control_salida" Type="float" />
           <Property Name="Valor_hora_adicionales" Type="float" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwro_empleado_x_ro_rubro' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5246,7 +5248,8 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
     [vwro_empleado_x_jornada].[Valor_horas_vespertina] AS [Valor_horas_vespertina], 
     [vwro_empleado_x_jornada].[Valor_horas_brigada] AS [Valor_horas_brigada], 
     [vwro_empleado_x_jornada].[Valor_hora_control_salida] AS [Valor_hora_control_salida], 
-    [vwro_empleado_x_jornada].[Valor_hora_adicionales] AS [Valor_hora_adicionales]
+    [vwro_empleado_x_jornada].[Valor_hora_adicionales] AS [Valor_hora_adicionales], 
+    [vwro_empleado_x_jornada].[pe_cedulaRuc] AS [pe_cedulaRuc]
     FROM [dbo].[vwro_empleado_x_jornada] AS [vwro_empleado_x_jornada]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwro_empleado_x_ro_rubro" EntityType="Self.vwro_empleado_x_ro_rubro" store:Type="Views" store:Schema="dbo">
@@ -12148,6 +12151,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
             <PropertyRef Name="IdEmpleado" />
             <PropertyRef Name="IdSucursal" />
             <PropertyRef Name="Pago_por_horas" />
+            <PropertyRef Name="pe_cedulaRuc" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdEmpleado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
@@ -12161,6 +12165,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <Property Name="Valor_horas_brigada" Type="Double" />
           <Property Name="Valor_hora_control_salida" Type="Double" />
           <Property Name="Valor_hora_adicionales" Type="Double" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -14628,6 +14633,7 @@ warning 6002: The table/view 'DBERP.web.vwro_rol_detalle_generar_op' does not ha
           <EntitySetMapping Name="vwro_empleado_x_jornada">
             <EntityTypeMapping TypeName="Model_rrhh.vwro_empleado_x_jornada">
               <MappingFragment StoreEntitySet="vwro_empleado_x_jornada">
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="Valor_hora_adicionales" ColumnName="Valor_hora_adicionales" />
                 <ScalarProperty Name="Valor_hora_control_salida" ColumnName="Valor_hora_control_salida" />
                 <ScalarProperty Name="Valor_horas_brigada" ColumnName="Valor_horas_brigada" />
