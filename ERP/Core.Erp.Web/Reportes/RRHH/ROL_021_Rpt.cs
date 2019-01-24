@@ -53,16 +53,20 @@ namespace Core.Erp.Web.Reportes.RRHH
                 switch (TipoRubro)
                 {
                     case "I":
-                        lblNombreReporte.Text = "Ingresos";
+                        lblNombreReporte.Text = "Reporte de rubros de ingresos";
+                        xrPivotGrid1.OptionsView.ShowColumnTotals = true;
                         break;
                     case "E":
-                        lblNombreReporte.Text = "Egresos";
+                        lblNombreReporte.Text = "Reporte de rubros de descuento";
+                        xrPivotGrid1.OptionsView.ShowColumnTotals = false;
                         break;
                     case "A":
                         lblNombreReporte.Text = "Rol General";
+                        xrPivotGrid1.OptionsView.ShowColumnTotals = false;
                         break;
                     default:
                         lblNombreReporte.Text = "Rol General";
+                        xrPivotGrid1.OptionsView.ShowColumnTotals = false;
                         break;
                 }
                 ROL_021_Bus bus_rpt = new ROL_021_Bus();

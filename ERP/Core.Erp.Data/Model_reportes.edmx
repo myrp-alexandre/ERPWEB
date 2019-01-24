@@ -3520,7 +3520,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_021' no tiene definida ningu
           <Property Name="IdRol" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" />
-          <Property Name="rub_grupo" Type="varchar" MaxLength="10" />
+          <Property Name="rub_grupo" Type="varchar" MaxLength="250" />
+          <Property Name="Dias" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -5893,7 +5894,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
     [VWROL_021].[IdRol] AS [IdRol], 
     [VWROL_021].[IdEmpresa] AS [IdEmpresa], 
     [VWROL_021].[Descripcion] AS [Descripcion], 
-    [VWROL_021].[rub_grupo] AS [rub_grupo]
+    [VWROL_021].[rub_grupo] AS [rub_grupo], 
+    [VWROL_021].[Dias] AS [Dias]
     FROM [web].[VWROL_021] AS [VWROL_021]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWROL_022" EntityType="Self.VWROL_022" store:Type="Views" store:Schema="web">
@@ -10239,7 +10241,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <Property Name="IdRol" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="rub_grupo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="rub_grupo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Dias" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -13191,6 +13194,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <EntitySetMapping Name="VWROL_021">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_021">
               <MappingFragment StoreEntitySet="VWROL_021">
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
                 <ScalarProperty Name="rub_grupo" ColumnName="rub_grupo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />

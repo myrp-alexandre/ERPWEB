@@ -40,5 +40,6 @@ namespace Core.Erp.Data
         public int IdEmpresa { get; set; }
         public string Descripcion { get; set; }
         public string rub_grupo { get; set; }
+        public Nullable<double> Dias { get; set; }
     }
 }
