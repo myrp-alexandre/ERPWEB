@@ -9,10 +9,12 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_014_Data
     {
-        public List<ROL_014_Info> get_list(int IdEmpresa, int IdTipoNomina, int IdArea)
+        public List<ROL_014_Info> get_list(int IdEmpresa, int IdTipoNomina, int IdArea, int IdDivision)
         {
             try
             {
+                int IdDivisionIni = IdDivision;
+                int IdDivisionFin = IdDivision == 0 ? 9999 : IdDivision;
                 int IdAreaIni = IdArea;
                 int IdAreaFin = IdArea == 0 ? 9999 : IdArea;
                 decimal IdTipoNominaInicio = IdTipoNomina;
@@ -26,6 +28,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdTipoNomina <= IdTipoNominaFin
                              && IdAreaIni <= q.IdArea
                              && q.IdArea <= IdAreaFin
+                             && q.IdDivision >= IdDivisionIni
+                             && q.IdDivision <= IdDivisionFin
                              select new ROL_014_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

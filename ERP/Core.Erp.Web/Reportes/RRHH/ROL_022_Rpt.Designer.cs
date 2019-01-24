@@ -526,7 +526,7 @@
             this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField3.AreaIndex = 2;
             this.pivotGridField3.Caption = "Rubros";
-            this.pivotGridField3.ColumnValueLineCount = 2;
+            this.pivotGridField3.ColumnValueLineCount = 3;
             this.pivotGridField3.ExpandedInFieldsGroup = false;
             this.pivotGridField3.FieldName = "Rubro";
             this.pivotGridField3.MinWidth = 100;

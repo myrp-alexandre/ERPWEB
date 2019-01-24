@@ -31,15 +31,21 @@
                 <div class="col-md-12">
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label for="">División</label>
+                            @Html.Partial("_CmbDivision_reportes", Model.IdDivision)
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label for="">Area</label>
-                            @Html.DropDownListFor(q => q.IdArea, new SelectList(ViewBag.lst_area, "IdArea", "Descripcion"), new { @class = "form-control" })
-                            @Html.ValidationMessageFor(q => q.IdArea, "", new { @class = "text-danger" })
+                            @Html.Partial("_CmbArea_reportes", Model.IdArea)
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="IdTipoNomina">Nomina</label>
-                            @Html.DevExpress().ComboBoxFor(q => q.IdTipoNomina, settings =>
+                            @Html.Partial("_CmbTipoNomina", Model.IdTipoNomina)
+                            @*@Html.DevExpress().ComboBoxFor(q => q.IdTipoNomina, settings =>
                        {
                            settings.Name = "IdTipoNomina";
                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -56,7 +62,7 @@
                            settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                            settings.Properties.AllowNull = true;
                        }).BindList(ViewBag.lst_nomina).GetHtml()
-                            @Html.ValidationMessageFor(q => q.IdTipoNomina, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdTipoNomina, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
                 </div>
@@ -91,3 +97,7 @@
         <!-- /.box-footer-->
     </div>
 }
+<script type="text/javascript">
+
+
+</script>

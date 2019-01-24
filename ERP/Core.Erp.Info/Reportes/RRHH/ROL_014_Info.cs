@@ -24,5 +24,7 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string EstadoContrato { get; set; }
         public Nullable<int> IdArea { get; set; }
         public string Descripcion { get; set; }
+
+        public string Division_Descripcion { get; set; }
     }
 }
