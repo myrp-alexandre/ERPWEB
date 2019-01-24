@@ -11,18 +11,23 @@ namespace Core.Erp.Data.RRHH
     {
 
         ro_empleado_Data data_empleado = new ro_empleado_Data();
-        public List<ro_empleado_novedad_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin)
+        public List<ro_empleado_novedad_Info> get_list(int IdEmpresa, DateTime fecha_inicio, DateTime fecha_fin, int IdSucursal)
         {
             try
             {
                 fecha_inicio = fecha_inicio.Date;
                 fecha_fin = fecha_fin.Date;
+                var IdSucursalIni = IdSucursal == 0 ? 0 : IdSucursal;
+                var IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
+
                 List<ro_empleado_novedad_Info> Lista;
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                         Lista = (from q in Context.vwro_empleado_Novedad
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal >= IdSucursalIni
+                                 && q.IdSucursal <= IdSucursalFin
                                  && q.Fecha >= fecha_inicio
                                  && q.Fecha <= fecha_fin
                                  select new ro_empleado_novedad_Info

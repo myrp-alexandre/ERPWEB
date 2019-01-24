@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_empleado_novedad";
-        settings.CallbackRouteValues = new { Controller = "ImportacionNovedades", Action = "GridViewPartial_importacion_novedades", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin };
+        settings.CallbackRouteValues = new { Controller = "ImportacionNovedades", Action = "GridViewPartial_importacion_novedades", Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin, IdSucursal = ViewBag.IdSucursal };
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdNovedad";

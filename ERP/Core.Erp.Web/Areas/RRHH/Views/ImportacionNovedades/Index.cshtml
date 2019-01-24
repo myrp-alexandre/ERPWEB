@@ -30,6 +30,12 @@
         </div>
         <div class="box-body">
             <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="IdRubro">Sucursal</label>
+                        @Html.Partial("_CmbSucursal", Model.IdSucursal)
+                    </div>
+                </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="">Fecha inicio*</label>
@@ -89,7 +95,7 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_importacion_novedades", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin})
+            @Html.Action("GridViewPartial_importacion_novedades", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal})
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

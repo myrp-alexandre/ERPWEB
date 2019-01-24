@@ -11,17 +11,21 @@ namespace Core.Erp.Data.RRHH
     {
 
         ro_empleado_novedad_Data odata_novedad = new ro_empleado_novedad_Data();
-        public List<ro_EmpleadoNovedadCargaMasiva_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin)
+        public List<ro_EmpleadoNovedadCargaMasiva_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin, int IdSucursal)
         {
             try
             {
                 FechaFin = Convert.ToDateTime(FechaFin.Date.ToShortDateString());
                 FechaInicio = Convert.ToDateTime(FechaInicio.Date.ToShortDateString());
+                var IdSucursalIni = IdSucursal == 0 ? 0 : IdSucursal;
+                var IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
                 List<ro_EmpleadoNovedadCargaMasiva_Info> lista;
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                         lista = (from q in Context.vwro_EmpleadoNovedadCargaMasiva
                                  where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal >= IdSucursalIni
+                                 && q.IdSucursal <= IdSucursalFin
                                  && q.FechaCarga >= FechaInicio
                                  && q.FechaCarga <= FechaFin
                                  select new ro_EmpleadoNovedadCargaMasiva_Info

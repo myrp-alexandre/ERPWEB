@@ -15,6 +15,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ExcelDataReader;
+using Core.Erp.Info.General;
+using DevExpress.Web;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class ImportacionNovedadesController : Controller
@@ -34,8 +37,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
         int IdEmpresa = 0;
         #endregion
-
-    
+        
         #region Vistas
         public ActionResult Index()
         {
@@ -50,13 +52,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_importacion_novedades(DateTime? Fecha_ini, DateTime? Fecha_fin)
+        public ActionResult GridViewPartial_importacion_novedades(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal=0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
+            ViewBag.IdSucursal = IdSucursal == 0 ? Convert.ToInt32(SessionFixed.IdSucursal) : IdSucursal;
 
-            var model = bus_novedad.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, false);
+            var model = bus_novedad.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, ViewBag.IdSucursal, false);
             return PartialView("_GridViewPartial_importacion_novedades", model);
         }
 
@@ -155,8 +158,24 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         #endregion
 
+        #region metodo bajo demanda sucursal
+        public ActionResult CmbSucursal()
+        {
+            int model = new int();
+            return PartialView("_CmbSucursal", model);
+        }
+        public List<tb_sucursal_Info> get_list_bajo_demanda_sucursal(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_sucursal.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public tb_sucursal_Info get_info_bajo_demanda_sucursal(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_sucursal.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
+        }
+        #endregion
+
         #region funciones del detalle
-      
+
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_EmpleadoNovedadCargaMasiva_det_Info info_det)
         {

@@ -10,11 +10,11 @@ namespace Core.Erp.Bus.RRHH
    public class ro_EmpleadoNovedadCargaMasiva_Bus
     {
         ro_EmpleadoNovedadCargaMasiva_Data odata = new ro_EmpleadoNovedadCargaMasiva_Data();
-        public List<ro_EmpleadoNovedadCargaMasiva_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin, bool mostrar_anulados)
+        public List<ro_EmpleadoNovedadCargaMasiva_Info> get_list(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin, int IdSucursal, bool mostrar_anulados)
         {
             try
             {
-                return odata.get_list(IdEmpresa, FechaInicio, FechaFin);
+                return odata.get_list(IdEmpresa, FechaInicio, FechaFin, IdSucursal);
             }
             catch (Exception)
             {

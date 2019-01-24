@@ -34,6 +34,7 @@ namespace Core.Erp.Info.RRHH
         public string ru_descripcion { get; set; }
         public bool EstadoBool { get; set; }
 
+
         public List<ro_EmpleadoNovedadCargaMasiva_det_Info> detalle { get; set; }
     }
 }

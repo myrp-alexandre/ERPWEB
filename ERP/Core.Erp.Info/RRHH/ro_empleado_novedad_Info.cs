@@ -41,6 +41,7 @@ namespace Core.Erp.Info.RRHH
         public string IdCalendario { get; set; }
         public Nullable<int> IdPeriodo { get; set; }
         public string Observacion { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
 
         public List<ro_empleado_novedad_det_Info> lst_novedad_det { get; set; }
         public string pe_apellido { get; set; }
