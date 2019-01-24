@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Data.Banco;
+using Core.Erp.Data.Contabilidad;
 using Core.Erp.Info;
 using Core.Erp.Info.Banco;
 using Core.Erp.Info.Contabilidad;
@@ -15,6 +16,7 @@ namespace Core.Erp.Data.CuentasPorCobrar
     {
         #region Variables
         ba_Cbte_Ban_Data data_cbteban = new ba_Cbte_Ban_Data();
+        ct_cbtecble_Data data_cbtecble = new ct_cbtecble_Data();
         #endregion
         public List<cxc_LiquidacionTarjeta_Info> get_list(int IdEmpresa, int IdSucursal, bool MostrarAnulados)
         {
@@ -364,5 +366,45 @@ namespace Core.Erp.Data.CuentasPorCobrar
                 throw;
             }
         }
+
+        public bool anularDB(cxc_LiquidacionTarjeta_Info info)
+        {
+            try
+            {
+                using (Entities_cuentas_por_cobrar db = new Entities_cuentas_por_cobrar())
+                {
+                    var Entity = db.cxc_LiquidacionTarjeta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdLiquidacion == info.IdLiquidacion).FirstOrDefault();
+                    if (Entity == null) return false;
+
+                    Entity.Estado = false;
+                    Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
+                    Entity.MotivoAnulacion = info.MotivoAnulacion;
+                    Entity.FechaAnulacion = DateTime.Now;
+
+                    var lst_cobros = db.cxc_LiquidacionTarjeta_x_cxc_cobro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdLiquidacion == info.IdLiquidacion).ToList();
+                    db.cxc_LiquidacionTarjeta_x_cxc_cobro.RemoveRange(lst_cobros);
+
+                    db.SaveChanges();
+                    if (info.IdCbteCble_ct != null)
+                    {
+                        if (data_cbtecble.anularDB(new ct_cbtecble_Info { IdEmpresa = info.IdEmpresa, IdTipoCbte = (int)info.IdTipoCbte_ct, IdCbteCble = (decimal)info.IdCbteCble_ct, IdUsuarioAnu = info.IdUsuarioAnulacion, cb_MotivoAnu = info.MotivoAnulacion }))
+                        {
+                            if (data_cbteban.anularDB(new ba_Cbte_Ban_Info { IdEmpresa = info.IdEmpresa, IdTipocbte = (int)info.IdTipoCbte_ct, IdCbteCble = (decimal)info.IdCbteCble_ct, IdUsuario_Anu = info.IdUsuarioAnulacion, MotivoAnulacion = info.MotivoAnulacion }))
+                            {
+
+                            }
+                        }
+                        
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

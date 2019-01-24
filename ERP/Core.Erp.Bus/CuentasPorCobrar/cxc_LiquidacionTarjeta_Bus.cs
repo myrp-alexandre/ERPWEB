@@ -50,6 +50,19 @@ namespace Core.Erp.Bus.CuentasPorCobrar
             }
         }
 
+        public bool anularDB(cxc_LiquidacionTarjeta_Info info)
+        {
+            try
+            {
+                return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public cxc_LiquidacionTarjeta_Info GetInfo(int IdEmpresa, int IdSucursal, decimal IdLiquidacion)
         {
             try
