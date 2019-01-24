@@ -901,6 +901,85 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_006_sin_comision' no tiene d
           <Property Name="Saldo" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWCXC_007">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdMotivo" />
+            <PropertyRef Name="DescripcionMotivo" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="ba_descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdMotivo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DescripcionMotivo" Type="varchar(max)" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Lote" Type="varchar" MaxLength="1000" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdEmpresa_ct" Type="int" />
+          <Property Name="IdTipoCbte_ct" Type="int" />
+          <Property Name="IdCbteCble_ct" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ba_descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_007_Cobros' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWCXC_007_Cobros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="IdCobro" />
+            <PropertyRef Name="cr_fecha" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cr_observacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="IdCobro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cr_fecha" Type="datetime" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="cr_observacion" Type="varchar" MaxLength="700" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.web.VWCXC_007_Diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWCXC_007_Diario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="pc_Cuenta" />
+            <PropertyRef Name="secuencia" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="Debe" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="secuencia" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Debe" Type="float" Nullable="false" />
+          <Property Name="Haber" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.VWCXP_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXP_001">
           <Key>
@@ -4254,6 +4333,52 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
     [VWCXC_006_sin_comision].[pe_nombreCompleto] AS [pe_nombreCompleto], 
     [VWCXC_006_sin_comision].[Saldo] AS [Saldo]
     FROM [web].[VWCXC_006_sin_comision] AS [VWCXC_006_sin_comision]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWCXC_007" EntityType="Self.VWCXC_007" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWCXC_007].[IdEmpresa] AS [IdEmpresa], 
+    [VWCXC_007].[IdSucursal] AS [IdSucursal], 
+    [VWCXC_007].[IdLiquidacion] AS [IdLiquidacion], 
+    [VWCXC_007].[Secuencia] AS [Secuencia], 
+    [VWCXC_007].[IdMotivo] AS [IdMotivo], 
+    [VWCXC_007].[DescripcionMotivo] AS [DescripcionMotivo], 
+    [VWCXC_007].[Valor] AS [Valor], 
+    [VWCXC_007].[Su_Descripcion] AS [Su_Descripcion], 
+    [VWCXC_007].[Fecha] AS [Fecha], 
+    [VWCXC_007].[Lote] AS [Lote], 
+    [VWCXC_007].[Observacion] AS [Observacion], 
+    [VWCXC_007].[Estado] AS [Estado], 
+    [VWCXC_007].[IdEmpresa_ct] AS [IdEmpresa_ct], 
+    [VWCXC_007].[IdTipoCbte_ct] AS [IdTipoCbte_ct], 
+    [VWCXC_007].[IdCbteCble_ct] AS [IdCbteCble_ct], 
+    [VWCXC_007].[ba_descripcion] AS [ba_descripcion], 
+    [VWCXC_007].[NombreUsuario] AS [NombreUsuario]
+    FROM [web].[VWCXC_007] AS [VWCXC_007]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWCXC_007_Cobros" EntityType="Self.VWCXC_007_Cobros" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWCXC_007_Cobros].[IdEmpresa] AS [IdEmpresa], 
+    [VWCXC_007_Cobros].[IdSucursal] AS [IdSucursal], 
+    [VWCXC_007_Cobros].[IdLiquidacion] AS [IdLiquidacion], 
+    [VWCXC_007_Cobros].[Secuencia] AS [Secuencia], 
+    [VWCXC_007_Cobros].[Valor] AS [Valor], 
+    [VWCXC_007_Cobros].[IdCobro] AS [IdCobro], 
+    [VWCXC_007_Cobros].[cr_fecha] AS [cr_fecha], 
+    [VWCXC_007_Cobros].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWCXC_007_Cobros].[cr_observacion] AS [cr_observacion]
+    FROM [web].[VWCXC_007_Cobros] AS [VWCXC_007_Cobros]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWCXC_007_Diario" EntityType="Self.VWCXC_007_Diario" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWCXC_007_Diario].[IdEmpresa] AS [IdEmpresa], 
+    [VWCXC_007_Diario].[IdSucursal] AS [IdSucursal], 
+    [VWCXC_007_Diario].[IdLiquidacion] AS [IdLiquidacion], 
+    [VWCXC_007_Diario].[pc_Cuenta] AS [pc_Cuenta], 
+    [VWCXC_007_Diario].[secuencia] AS [secuencia], 
+    [VWCXC_007_Diario].[IdCtaCble] AS [IdCtaCble], 
+    [VWCXC_007_Diario].[Debe] AS [Debe], 
+    [VWCXC_007_Diario].[Haber] AS [Haber]
+    FROM [web].[VWCXC_007_Diario] AS [VWCXC_007_Diario]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWCXP_001" EntityType="Self.VWCXP_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -7618,6 +7743,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <EntitySet Name="VWROL_002" EntityType="Model_reportes.VWROL_002" />
           <EntitySet Name="VWROL_022" EntityType="Model_reportes.VWROL_022" />
           <EntitySet Name="VWROL_014" EntityType="Model_reportes.VWROL_014" />
+          <EntitySet Name="VWCXC_007" EntityType="Model_reportes.VWCXC_007" />
+          <EntitySet Name="VWCXC_007_Cobros" EntityType="Model_reportes.VWCXC_007_Cobros" />
+          <EntitySet Name="VWCXC_007_Diario" EntityType="Model_reportes.VWCXC_007_Diario" />
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -10031,6 +10159,79 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <Property Name="IdArea" Type="Int32" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Division_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VWCXC_007">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdMotivo" />
+            <PropertyRef Name="DescripcionMotivo" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="ba_descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdMotivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DescripcionMotivo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Lote" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdEmpresa_ct" Type="Int32" />
+          <Property Name="IdTipoCbte_ct" Type="Int32" />
+          <Property Name="IdCbteCble_ct" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ba_descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VWCXC_007_Cobros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="IdCobro" />
+            <PropertyRef Name="cr_fecha" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cr_observacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="cr_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cr_observacion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VWCXC_007_Diario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="pc_Cuenta" />
+            <PropertyRef Name="secuencia" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="Debe" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Debe" Type="Double" Nullable="false" />
+          <Property Name="Haber" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -12953,6 +13154,58 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="de_descripcion" ColumnName="de_descripcion" />
                 <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCXC_007">
+            <EntityTypeMapping TypeName="Model_reportes.VWCXC_007">
+              <MappingFragment StoreEntitySet="VWCXC_007">
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="IdCbteCble_ct" ColumnName="IdCbteCble_ct" />
+                <ScalarProperty Name="IdTipoCbte_ct" ColumnName="IdTipoCbte_ct" />
+                <ScalarProperty Name="IdEmpresa_ct" ColumnName="IdEmpresa_ct" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Lote" ColumnName="Lote" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="DescripcionMotivo" ColumnName="DescripcionMotivo" />
+                <ScalarProperty Name="IdMotivo" ColumnName="IdMotivo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCXC_007_Cobros">
+            <EntityTypeMapping TypeName="Model_reportes.VWCXC_007_Cobros">
+              <MappingFragment StoreEntitySet="VWCXC_007_Cobros">
+                <ScalarProperty Name="cr_observacion" ColumnName="cr_observacion" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />
+                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCXC_007_Diario">
+            <EntityTypeMapping TypeName="Model_reportes.VWCXC_007_Diario">
+              <MappingFragment StoreEntitySet="VWCXC_007_Diario">
+                <ScalarProperty Name="Haber" ColumnName="Haber" />
+                <ScalarProperty Name="Debe" ColumnName="Debe" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

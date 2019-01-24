@@ -10,16 +10,18 @@
 namespace Core.Erp.Data
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class SPACTF_004_resumen_Result
+    public partial class VWCXC_007_Cobros
     {
         public int IdEmpresa { get; set; }
-        public int IdActivoFijoTipo { get; set; }
-        public string IdUsuario { get; set; }
-        public string Af_Descripcion { get; set; }
-        public double Af_costo_compra { get; set; }
-        public double Valor_Depreciacion { get; set; }
-        public double Valor_ult_depreciacion { get; set; }
-        public double Costo_neto { get; set; }
+        public int IdSucursal { get; set; }
+        public decimal IdLiquidacion { get; set; }
+        public int Secuencia { get; set; }
+        public double Valor { get; set; }
+        public decimal IdCobro { get; set; }
+        public System.DateTime cr_fecha { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string cr_observacion { get; set; }
     }
 }
