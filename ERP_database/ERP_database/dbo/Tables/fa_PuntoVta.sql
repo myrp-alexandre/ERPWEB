@@ -8,10 +8,13 @@
     [IdBodega]     INT           NOT NULL,
     [IdCaja]       INT           NOT NULL,
     [IPImpresora]  VARCHAR (500) NULL,
+    [NumCopias]    INT           NULL,
     CONSTRAINT [PK_fa_PuntoVta] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdSucursal] ASC, [IdPuntoVta] ASC),
     CONSTRAINT [FK_fa_PuntoVta_caj_Caja] FOREIGN KEY ([IdEmpresa], [IdCaja]) REFERENCES [dbo].[caj_Caja] ([IdEmpresa], [IdCaja]),
     CONSTRAINT [FK_fa_PuntoVta_tb_sucursal] FOREIGN KEY ([IdEmpresa], [IdSucursal]) REFERENCES [dbo].[tb_sucursal] ([IdEmpresa], [IdSucursal])
 );
+
+
 
 
 

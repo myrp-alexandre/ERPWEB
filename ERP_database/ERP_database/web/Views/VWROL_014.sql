@@ -1,4 +1,5 @@
-﻿CREATE VIEW web.VWROL_014
+﻿/*order by dbo.tb_persona.pe_apellido asc*/
+CREATE VIEW web.VWROL_014
 AS
 SELECT        dbo.ro_Departamento.IdDepartamento, dbo.ro_Departamento.de_descripcion, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre,
                              (SELECT        RUBRO
@@ -10,11 +11,12 @@ SELECT        dbo.ro_Departamento.IdDepartamento, dbo.ro_Departamento.de_descrip
                              (SELECT        RUBRO
                                FROM            dbo.vwro_rubros_acumulados_x_empleados AS D
                                WHERE        (IdEmpleado = dbo.ro_empleado.IdEmpleado) AND (IdEmpresa = dbo.ro_empleado.IdEmpresa) AND (IdRubro = 19)) AS Fondos_Reservas, dbo.ro_empleado.IdDivision, dbo.ro_empleado.IdEmpresa, 
-                         dbo.ro_empleado.IdEmpleado, dbo.ro_contrato.IdNomina AS IdTipoNomina, dbo.ro_contrato.EstadoContrato
+                         dbo.ro_empleado.IdEmpleado, dbo.ro_contrato.IdNomina AS IdTipoNomina, dbo.ro_contrato.EstadoContrato, dbo.ro_empleado.IdArea, dbo.ro_area.Descripcion
 FROM            dbo.ro_empleado INNER JOIN
                          dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
                          dbo.ro_Departamento ON dbo.ro_empleado.IdEmpresa = dbo.ro_Departamento.IdEmpresa AND dbo.ro_empleado.IdDepartamento = dbo.ro_Departamento.IdDepartamento INNER JOIN
-                         dbo.ro_contrato ON dbo.ro_empleado.IdEmpresa = dbo.ro_contrato.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_contrato.IdEmpleado
+                         dbo.ro_contrato ON dbo.ro_empleado.IdEmpresa = dbo.ro_contrato.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_contrato.IdEmpleado INNER JOIN
+                         dbo.ro_area ON dbo.ro_empleado.IdEmpresa = dbo.ro_area.IdEmpresa AND dbo.ro_empleado.IdArea = dbo.ro_area.IdArea
 WHERE        (dbo.ro_empleado.em_status <> 'EST_LIQ') AND (dbo.ro_contrato.EstadoContrato = 'ECT_ACT')
 
 
@@ -23,7 +25,19 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'der = 1410
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'0
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
          GroupBy = 1350
          Filter = 1350
          Or = 1350
@@ -35,13 +49,15 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_014';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[24] 4[5] 2[67] 3) )"
+         Configuration = "(H (1[56] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -115,7 +131,7 @@ Begin DesignProperties =
                Right = 327
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 23
          End
          Begin Table = "tb_persona"
             Begin Extent = 
@@ -147,6 +163,16 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 7
          End
+         Begin Table = "ro_area"
+            Begin Extent = 
+               Top = 98
+               Left = 534
+               Bottom = 417
+               Right = 713
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
       End
    End
    Begin SQLPane = 
@@ -168,17 +194,7 @@ Begin DesignProperties =
          Width = 1500
          Width = 1500
          Width = 1500
-         Width = 1500
-      End
-   End
-   Begin CriteriaPane = 
-      Begin ColumnWidths = 11
-         Column = 1440
-         Alias = 900
-         Table = 1170
-         Output = 720
-         Append = 1400
-         NewValue = 1170
-         SortType = 1350
-         SortOr', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_014';
+         Width = 150', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_014';
+
+
 

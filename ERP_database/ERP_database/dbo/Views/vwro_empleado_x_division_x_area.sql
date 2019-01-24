@@ -1,13 +1,14 @@
-﻿CREATE VIEW dbo.vwro_nomina_sin_percebir_sueldo
+﻿CREATE VIEW dbo.vwro_empleado_x_division_x_area
 AS
-SELECT        dbo.ro_rol_detalle.IdEmpresa, dbo.ro_rol_detalle.IdRol, dbo.ro_rol_detalle.IdEmpleado, dbo.ro_rol_detalle.IdRubro, CAST(dbo.ro_rol_detalle.Valor AS numeric(10, 2)) AS Valor, dbo.ro_rol_detalle.IdSucursal, 
-                         dbo.ro_empleado.em_codigo, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.tb_persona.pe_nombreCompleto
-FROM            dbo.ro_rol_detalle INNER JOIN
-                         dbo.ro_empleado ON dbo.ro_rol_detalle.IdEmpresa = dbo.ro_empleado.IdEmpresa AND dbo.ro_rol_detalle.IdEmpleado = dbo.ro_empleado.IdEmpleado INNER JOIN
-                         dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona
-WHERE        (dbo.ro_rol_detalle.IdRubro = 24) AND (dbo.ro_rol_detalle.Valor <= 0)
+SELECT        dbo.ro_empleado_x_division_x_area.IdEmpresa, dbo.ro_empleado_x_division_x_area.IdEmpleado, dbo.ro_empleado_x_division_x_area.Secuencia, dbo.ro_empleado_x_division_x_area.IDividion, 
+                         dbo.ro_empleado_x_division_x_area.IdArea, dbo.ro_empleado_x_division_x_area.Porcentaje, dbo.ro_empleado_x_division_x_area.Observacion, dbo.ro_area.Descripcion AS AreaDescripcion, 
+                         dbo.ro_Division.Descripcion AS DivisionDescripcion
+FROM            dbo.ro_empleado_x_division_x_area INNER JOIN
+                         dbo.ro_area ON dbo.ro_empleado_x_division_x_area.IdEmpresa = dbo.ro_area.IdEmpresa AND dbo.ro_empleado_x_division_x_area.IDividion = dbo.ro_area.IdDivision AND 
+                         dbo.ro_empleado_x_division_x_area.IdArea = dbo.ro_area.IdArea INNER JOIN
+                         dbo.ro_Division ON dbo.ro_area.IdEmpresa = dbo.ro_Division.IdEmpresa AND dbo.ro_area.IdDivision = dbo.ro_Division.IdDivision
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_sin_percebir_sueldo';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_x_division_x_area';
 
 
 GO
@@ -16,7 +17,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[22] 4[5] 2[55] 3) )"
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -82,32 +83,32 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "ro_rol_detalle"
+         Begin Table = "ro_empleado_x_division_x_area"
             Begin Extent = 
                Top = 6
                Left = 38
                Bottom = 136
-               Right = 226
+               Right = 208
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "ro_empleado"
+         Begin Table = "ro_area"
             Begin Extent = 
-               Top = 138
-               Left = 38
-               Bottom = 268
-               Right = 327
+               Top = 6
+               Left = 246
+               Bottom = 136
+               Right = 425
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "tb_persona"
+         Begin Table = "ro_Division"
             Begin Extent = 
-               Top = 270
-               Left = 38
-               Bottom = 400
-               Right = 270
+               Top = 6
+               Left = 463
+               Bottom = 136
+               Right = 642
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -119,8 +120,9 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
+      Begin ColumnWidths = 10
          Width = 284
+         Width = 1500
          Width = 1500
          Width = 1500
          Width = 1500
@@ -149,5 +151,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_sin_percebir_sueldo';
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_x_division_x_area';
 

@@ -10,8 +10,11 @@
     [FechaEnvio]     DATETIME       NOT NULL,
     [FechaImpresion] DATETIME       NULL,
     [Comentario]     VARCHAR (MAX)  NULL,
+    [NumCopias]      INT            CONSTRAINT [DF_tb_ColaImpresionDirecta_NumCopias] DEFAULT ((0)) NULL,
     CONSTRAINT [PK_tb_ColaImpresionDirecta] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdImpresion] ASC)
 );
+
+
 
 
 

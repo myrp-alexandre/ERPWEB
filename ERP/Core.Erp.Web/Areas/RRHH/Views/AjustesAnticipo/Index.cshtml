@@ -47,7 +47,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="FechaInicio">Nómina*</label>
-                            @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo", @disabled = "disabled" })
+                            @Html.DropDownListFor(q => q.IdNomina, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo"})
                             @Html.ValidationMessageFor(q => q.IdNomina, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -109,6 +109,14 @@
 }
 <script>
 
+    $(function () {
+        cargar_tipo_liquidacion_nomina();
+        cargar_periodos_x_nomina();
+
+
+    });
+
+
 
     $("#IdNomina_Tipo").change(function () {
         $("#IdNomina_TipoLiqui").empty();
@@ -120,9 +128,7 @@
            $("#IdPeriodo").empty();
             cargar_periodos_x_nomina();
         });
-    cargar_tipo_liquidacion_nomina();
-    cargar_periodos_x_nomina();
-
+    
 
         function cargar_tipo_liquidacion_nomina() {
             var datos = {
@@ -150,6 +156,7 @@
         };
 
     function cargar_periodos_x_nomina() {
+        $("#IdPeriodo").empty();
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSucursal: $("#IdSucursal").val(),
@@ -168,10 +175,11 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-
+                console.log(data);
                 $.each(data, function (i, row) {
                     $("#IdPeriodo").append("<option value=" + row.IdPeriodo + ">" + row.descripcion + "</option>");
                 });
+
             },
             error: function (error) {
             }

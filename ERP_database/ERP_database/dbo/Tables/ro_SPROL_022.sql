@@ -1,4 +1,4 @@
-﻿CREATE TABLE [web].[ro_SPROL_002] (
+﻿CREATE TABLE [dbo].[ro_SPROL_022] (
     [IdEmpresa]         INT          NOT NULL,
     [IdEmpleado]        NUMERIC (18) NOT NULL,
     [IdRubro]           VARCHAR (10) NOT NULL,
@@ -8,8 +8,6 @@
     [Valor]             FLOAT (53)   NOT NULL,
     [IdSucursal]        INT          NOT NULL,
     [IdArea]            INT          NOT NULL,
-    CONSTRAINT [PK_ro_SPROL_002] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdEmpleado] ASC, [IdRubro] ASC)
+    CONSTRAINT [PK_ro_SPROL_022] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdEmpleado] ASC, [IdRubro] ASC)
 );
-
-
 

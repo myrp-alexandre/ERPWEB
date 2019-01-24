@@ -10,7 +10,7 @@
     [ru_orden]              INT          NOT NULL,
     [rub_concep]            BIT          NOT NULL,
     [rub_ctacon]            VARCHAR (20) NULL,
-    [rub_grupo]             INT          NULL,
+    [rub_grupo]             VARCHAR (10) NULL,
     [rub_provision]         BIT          NOT NULL,
     [rub_nocontab]          BIT          NOT NULL,
     [rub_aplica_IESS]       BIT          NOT NULL,
@@ -22,9 +22,14 @@
     [Fecha_UltAnu]          DATETIME     NULL,
     [rub_acumula]           BIT          NOT NULL,
     [rub_acumula_descuento] BIT          NOT NULL,
+    [rub_grupo_rep_gen]     VARCHAR (10) NULL,
+    [se_distribuye]         BIT          NOT NULL,
     CONSTRAINT [PK_ro_rubro_tipo] PRIMARY KEY CLUSTERED ([IdEmpresa] ASC, [IdRubro] ASC),
+    CONSTRAINT [FK_ro_rubro_tipo_ro_catalogo] FOREIGN KEY ([rub_grupo]) REFERENCES [dbo].[ro_catalogo] ([CodCatalogo]),
     CONSTRAINT [FK_ro_rubro_tipo_tb_empresa] FOREIGN KEY ([IdEmpresa]) REFERENCES [dbo].[tb_empresa] ([IdEmpresa])
 );
+
+
 
 
 
