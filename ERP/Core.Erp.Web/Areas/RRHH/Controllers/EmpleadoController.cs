@@ -818,41 +818,31 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return Json(retorno, JsonRequestBehavior.AllowGet);
         }
         #endregion
-        #region Metodos ComboBox bajo demanda
-        tb_persona_Bus bus_persona = new tb_persona_Bus();
-        public ActionResult CmbEmpleado_Jornada()
-        {
-            ro_empleado_x_jornada_Info model = new ro_empleado_x_jornada_Info();
-            return PartialView("_CmbEmpleado_Jornada", model);
-        }
-        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
-        }
-        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
-        {
-            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
-        }
-
-
-        #endregion
         #region Detalle de jornada
-
+        private void carga_combo()
+        {
+            ro_jornada_Bus bus_jor = new ro_jornada_Bus();
+            var lst_jor = bus_jor.get_list(GetIdEmpresa(), false);
+            ViewBag.lst_jor = lst_jor;
+        }
         [ValidateInput(false)]
         public ActionResult GridViewPartial_empleado_jornada_det()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = List_jornada_emp.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            carga_combo();
             return PartialView("_GridViewPartial_empleado_jornada_det", model);
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingAddNewJornada([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_x_jornada_Info info_det)
         {
+          
             if (ModelState.IsValid)
                 List_jornada_emp.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_jornada_emp.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            carga_combo();
             return PartialView("_GridViewPartial_empleado_jornada_det", model);
         }
 
@@ -863,12 +853,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (ModelState.IsValid)
                 List_jornada_emp.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_jornada_emp.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            carga_combo();
             return PartialView("_GridViewPartial_empleado_jornada_det", model);
         }
         public ActionResult EditingDeleteJornada(int Secuencia)
         {
             List_jornada_emp.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_jornada_emp.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            carga_combo();
             return PartialView("_GridViewPartial_empleado_jornada_det", model);
         }
         #endregion

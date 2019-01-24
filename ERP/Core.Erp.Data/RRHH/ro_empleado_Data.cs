@@ -442,7 +442,22 @@ namespace Core.Erp.Data.RRHH
                             }
                         }
                     }
-
+                    //int secuencia = 1;
+                    if(info.lst_det.Count()>0)
+                    {
+                        foreach (var item in info.lst_det)
+                        {
+                            Context.ro_empleado_x_jornada.Add(new ro_empleado_x_jornada
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdEmpleado = info.IdEmpleado,
+                                IdJornada = item.IdJornada,
+                                MaxNumHoras = item.MaxNumHoras,
+                                ValorHora = item.ValorHora,
+                                Secuencia = item.Secuencia
+                            });
+                        }
+                    }
                     Context.SaveChanges();
                 }
                 return true;
@@ -542,7 +557,24 @@ namespace Core.Erp.Data.RRHH
                             }
                         }
                     }
+                    var lst_det = Context.ro_empleado_x_jornada.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdEmpleado == info.IdEmpleado);
+                    Context.ro_empleado_x_jornada.RemoveRange(lst_det);
 
+                    if (info.lst_det.Count() > 0)
+                    {
+                        foreach (var item in info.lst_det)
+                        {
+                            Context.ro_empleado_x_jornada.Add(new ro_empleado_x_jornada
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdEmpleado = info.IdEmpleado,
+                                IdJornada = item.IdJornada,
+                                MaxNumHoras = item.MaxNumHoras,
+                                ValorHora = item.ValorHora,
+                                Secuencia = item.Secuencia
+                            });
+                        }
+                    }
                     Context.SaveChanges();
                 }
 
