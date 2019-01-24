@@ -161,6 +161,9 @@
             <li>
                 <a href="#tb_info_ingresos_compartidos" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Información ingresos compartidos</a>
             </li>
+            <li>
+                <a href="#tb_info_jornada" aria-controls="AdministracionPreBajas" role="tab" data-toggle="tab">Jornada por empleado</a>
+            </li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="padding-top: 20px">
@@ -784,6 +787,26 @@
                     </div>
                 </div>
             </div>
+
+
+
+            <div role="tabpanel" class="tab-pane" id="tb_info_jornada">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Detalle</label>
+                                @Html.Action("GridViewPartial_empleado_jornada_det")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        
         </div>
     </div>
     <div class="box-footer">

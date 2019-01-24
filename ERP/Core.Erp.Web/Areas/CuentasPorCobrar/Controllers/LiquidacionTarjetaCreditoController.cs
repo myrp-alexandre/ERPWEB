@@ -38,6 +38,25 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, IdSucursal, false);
             ViewBag.lst_banco_cuenta = lst_banco_cuenta;
         }
+        private bool Validar(cxc_LiquidacionTarjeta_Info i_validar, ref string msg)
+        {
+            i_validar.ListaDet = Lista_LiquidacionTarjetaDet.get_list(i_validar.IdTransaccionSession);
+            i_validar.ListaCobros = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(i_validar.IdTransaccionSession);
+
+            if (i_validar.ListaCobros.Count == 0)
+            {
+                msg = "Seleccione al menos un cobro por tarjeta de crédito para liquidar";
+                return false;
+            }
+
+            if (i_validar.ListaDet.Where(q=> q.Valor == 0).Count() > 0)
+            {
+                msg = "No pueden existir motivos con valor 0";
+                return false;
+            }
+
+            return true;
+        }
         #endregion
 
         #region Metodos ComboBox bajo demanda tarjeta
@@ -196,9 +215,21 @@ namespace Core.Erp.Web.Areas.CuentasPorCobrar.Controllers
             return View(model);
         }
 
+        [HttpPost]
         public ActionResult Nuevo(cxc_LiquidacionTarjeta_Info model)
         {
-            
+            if (!Validar(model,ref mensaje))
+            {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
+            if (!bus_LiquidacionTarjeta.guardarDB(model))
+            {
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
 
             return RedirectToAction("Index");
         }

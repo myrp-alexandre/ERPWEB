@@ -14,7 +14,6 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public decimal IdLiquidacion { get; set; }
         public string Lote { get; set; }
         public System.DateTime Fecha { get; set; }
-        public int IdTarjeta { get; set; }
         public int IdBanco { get; set; }
         public string Observacion { get; set; }
         public bool Estado { get; set; }
@@ -29,5 +28,8 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+
+        public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> ListaCobros { get; set; }
+        public List<cxc_LiquidacionTarjetaDet_Info> ListaDet { get; set; }
     }
 }

@@ -15,5 +15,10 @@ namespace Core.Erp.Info.CuentasPorCobrar
         public decimal IdMotivo { get; set; }
         public double Porcentaje { get; set; }
         public double Valor { get; set; }
+
+        #region Campos que no existen en la tabla
+        public string IdCtaCble { get; set; }
+        #endregion
+
     }
 }

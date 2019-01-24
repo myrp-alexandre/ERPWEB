@@ -1,4 +1,7 @@
-﻿using Core.Erp.Info;
+﻿using Core.Erp.Data.Banco;
+using Core.Erp.Info;
+using Core.Erp.Info.Banco;
+using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.CuentasPorCobrar;
 using System;
 using System.Collections.Generic;
@@ -10,6 +13,9 @@ namespace Core.Erp.Data.CuentasPorCobrar
 {
     public class cxc_LiquidacionTarjeta_Data
     {
+        #region Variables
+        ba_Cbte_Ban_Data data_cbteban = new ba_Cbte_Ban_Data();
+        #endregion
         public List<cxc_LiquidacionTarjeta_Info> get_list(int IdEmpresa, int IdSucursal, bool MostrarAnulados)
         {
             try
@@ -32,7 +38,6 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                      IdSucursal = q.IdSucursal,
                                      IdLiquidacion = q.IdLiquidacion,
                                      Fecha = q.Fecha,
-                                     IdTarjeta = q.IdTarjeta,
                                      Estado = q.Estado,
                                      IdBanco = q.IdBanco,
                                      Observacion = q.Observacion,
@@ -51,7 +56,6 @@ namespace Core.Erp.Data.CuentasPorCobrar
                                      IdSucursal = q.IdSucursal,
                                      IdLiquidacion = q.IdLiquidacion,
                                      Fecha = q.Fecha,
-                                     IdTarjeta = q.IdTarjeta,
                                      Estado = q.Estado,
                                      IdBanco = q.IdBanco,
                                      Observacion = q.Observacion,
@@ -105,7 +109,6 @@ namespace Core.Erp.Data.CuentasPorCobrar
                         IdSucursal = Entity.IdSucursal,
                         IdLiquidacion = Entity.IdSucursal,
                         IdBanco = Entity.IdBanco,
-                        IdTarjeta = Entity.IdTarjeta,
                         Valor = Entity.Valor,
                         Fecha = Entity.Fecha,
                         Estado = Entity.Estado
@@ -130,11 +133,131 @@ namespace Core.Erp.Data.CuentasPorCobrar
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdSucursal = info.IdSucursal,
-                        IdLiquidacion = info.IdLiquidacion = get_id(info.IdEmpresa,info.IdSucursal)
+                        IdLiquidacion = info.IdLiquidacion = get_id(info.IdEmpresa,info.IdSucursal),
+                        Lote = info.Lote,
+                        Fecha = info.Fecha,
+                        IdBanco = info.IdBanco,
+                        Observacion = info.Observacion,
+                        Estado = info.Estado = true,
+                        Valor = info.Valor
                     };
+                    int Secuencia = 1;
+                    foreach (var item in info.ListaCobros)
+                    {
+                        db.cxc_LiquidacionTarjeta_x_cxc_cobro.Add(new cxc_LiquidacionTarjeta_x_cxc_cobro
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdLiquidacion = info.IdLiquidacion,
+                            Secuencia = Secuencia++,
+                            Valor = item.Valor,
+                            IdCobro = item.IdCobro
+                        });
+                    }
+                    Secuencia = 1;
+                    foreach (var item in info.ListaDet)
+                    {
+                        var motivo = db.cxc_MotivoLiquidacionTarjeta_x_tb_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdMotivo == item.IdMotivo).FirstOrDefault();
+                        if(motivo != null)
+                            item.IdCtaCble = motivo.IdCtaCble;
+                        db.cxc_LiquidacionTarjetaDet.Add(new cxc_LiquidacionTarjetaDet
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdLiquidacion = info.IdLiquidacion,
+                            Secuencia = Secuencia++,
+                            IdMotivo = item.IdMotivo,
+                            Porcentaje = item.Porcentaje,
+                            Valor = item.Valor
+                        });
+                    }
+                    db.SaveChanges();
+                    var cobro_tipo = db.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro_tipo == "TARJ").FirstOrDefault();
+                    if (cobro_tipo != null)
+                    {
+                        var CbteBan = ArmarDiario(info,cobro_tipo.IdCtaCble);
+                        if (CbteBan != null)
+                            if (data_cbteban.guardarDB(CbteBan, Info.Helps.cl_enumeradores.eTipoCbteBancario.NCBA))
+                            {
+                                info.IdEmpresa_ct = CbteBan.IdEmpresa;
+                                info.IdTipoCbte_ct = CbteBan.IdTipocbte;
+                                info.IdCbteCble_ct = CbteBan.IdCbteCble;
+                                db.SaveChanges();
+                            }
+                    }
                 }
 
                 return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ba_Cbte_Ban_Info ArmarDiario(cxc_LiquidacionTarjeta_Info info, string IdCtaCble_tarjeta)
+        {
+            Entities_banco db_b = new Entities_banco();
+            
+            try
+            {
+                var TipoCbte = db_b.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo.Where(q => q.IdEmpresa == info.IdEmpresa && q.CodTipoCbteBan == "NCBA").FirstOrDefault();
+                if (TipoCbte == null)
+                    return null;
+
+                if (info.IdTipoCbte_ct == null)
+                    info.IdTipoCbte_ct = TipoCbte.IdTipoCbteCble;
+
+                ba_Cbte_Ban_Info diario = new ba_Cbte_Ban_Info
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdTipocbte = Convert.ToInt32(info.IdTipoCbte_ct),
+                    IdCbteCble = info.IdCbteCble_ct == null ? 0 : Convert.ToInt32(info.IdCbteCble_ct),
+                    cb_Fecha = info.Fecha,
+                    IdUsuario = info.IdUsuarioCreacion,
+                    IdUsuarioUltMod = info.IdUsuarioModificacion,
+                    Estado = "A",
+                    cb_Valor = Math.Round(info.ListaCobros.Sum(q=>q.Valor),2,MidpointRounding.AwayFromZero),
+                    IdSucursal = info.IdSucursal,
+                    cb_Observacion = "LIQUIDACION DE TARJETA #"+info.IdLiquidacion,
+                    lst_det_ct = new List<ct_cbtecble_det_Info>()
+                };
+                int Secuencia = 1;
+                var banco = db_b.ba_Banco_Cuenta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdBanco == info.IdBanco).FirstOrDefault();
+                diario.lst_det_ct.Add(new ct_cbtecble_det_Info
+                {
+                    secuencia = Secuencia++,
+                    IdCtaCble = banco.IdCtaCble,
+                    dc_Valor = Math.Round(diario.cb_Valor - info.ListaDet.Sum(q=> q.Valor),2,MidpointRounding.AwayFromZero),
+                    dc_para_conciliar = true,
+                    dc_para_conciliar_null = true,                    
+                });
+                foreach (var item in info.ListaDet)
+                {
+                    diario.lst_det_ct.Add(new ct_cbtecble_det_Info
+                    {
+                        secuencia = Secuencia++,
+                        IdCtaCble = item.IdCtaCble,
+                        dc_Valor = Math.Round(item.Valor,2,MidpointRounding.AwayFromZero),
+                    });
+                }
+                diario.lst_det_ct.Add(new ct_cbtecble_det_Info
+                {
+                    secuencia = Secuencia++,
+                    IdCtaCble = IdCtaCble_tarjeta,
+                    dc_Valor = Math.Round(info.Valor, 2, MidpointRounding.AwayFromZero),
+                });
+
+                diario.lst_det_canc_op = new List<Info.CuentasPorPagar.cp_orden_pago_cancelaciones_Info>();
+                diario.lst_det_ing = new List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info>();
+                
+                if (Math.Round(diario.lst_det_ct.Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero) != 0)
+                    return null;
+
+                if (diario.lst_det_ct.Where(q => string.IsNullOrEmpty(q.IdCtaCble)).Count() > 0)
+                    return null;
+                db_b.Dispose();
+                return diario;
             }
             catch (Exception)
             {
