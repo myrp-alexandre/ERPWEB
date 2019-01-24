@@ -88,11 +88,12 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public List<ro_area_Info> get_list_bajo_demanda_area(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false, 1);
+            
+            return bus_area.get_list_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), false, Convert.ToInt32(SessionFixed.IdDivision));
         }
         public ro_area_Info get_info_bajo_demanda_area(ListEditItemRequestedByValueEventArgs args)
         {
-            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), 1);
+            return bus_area.get_info_bajo_demanda_area(args, Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdDivision));
         }
         #endregion
 
@@ -628,7 +629,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSucursal=IdSucursal,
+                IdSucursal=IdSucursal == 0 ? Convert.ToInt32(SessionFixed.IdSucursal) : IdSucursal,
                 IdNomina=IdNomina_Tipo,
                 IdTipoNomina =IdNomina_TipoLiqui,
                 IdPeriodo=IdPeriodo,
@@ -641,6 +642,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
             report.p_IdPeriodo.Value = IdPeriodo;
             report.p_IdSucursal.Value = IdSucursal;
+            report.P_IdArea.Value = model.IdArea;
+            report.P_IdDivision.Value = model.IdDivision;
+            report.P_TipoRubro.Value = model.TipoRubro;
+            SessionFixed.IdDivision = model.IdDivision.ToString();
             cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
             ViewBag.Report = report;
             return View(model);
@@ -657,6 +662,9 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdPeriodo.Value = model.IdPeriodo;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.P_TipoRubro.Value = model.TipoRubro;
+            report.P_IdArea.Value = model.IdArea;
+            report.P_IdDivision.Value = model.IdDivision;
+            SessionFixed.IdDivision = model.IdDivision.ToString();
             ViewBag.Report = report;
             return View(model);
         }
@@ -681,6 +689,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSucursal.Value = model.IdSucursal;
             report.P_IdArea.Value = model.IdArea;
             report.P_IdDivision.Value = model.IdDivision;
+            SessionFixed.IdDivision = model.IdDivision.ToString();
             cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
             ViewBag.Report = report;
             return View(model);
@@ -697,6 +706,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdPeriodo.Value = model.IdPeriodo;
             report.p_IdSucursal.Value = model.IdSucursal;
             report.P_TipoRubro.Value = model.TipoRubro;
+            SessionFixed.IdDivision = model.IdDivision.ToString();
             report.P_IdArea.Value = model.IdArea;
             report.P_IdDivision.Value = model.IdDivision;
             ViewBag.Report = report;

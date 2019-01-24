@@ -138,16 +138,16 @@
         settings.Columns.Add("Contabilizado", "Contab.").Width = Unit.Percentage(5);
 
 
-        //settings.Columns.Add(column =>
-        //{
-        //    column.Caption = "General";
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "General";
 
-        //    column.SetDataItemTemplateContent(c =>
-        //    {
-        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_021", "RRHHReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdNomina_Tipo = DataBinder.Eval(c.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(c.DataItem, "IdPeriodo"), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal") }, Request.Url.Scheme) + "');\"></span>");
-        //    });
-        //    column.Width = System.Web.UI.WebControls.Unit.Percentage(6);
-        //});
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ROL_021", "RRHHReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdNomina_Tipo = DataBinder.Eval(c.DataItem, "IdNomina_Tipo"), IdNomina_TipoLiqui = DataBinder.Eval(c.DataItem, "IdNomina_TipoLiqui"), IdPeriodo = DataBinder.Eval(c.DataItem, "IdPeriodo"), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(6);
+        });
         settings.Columns.Add(column =>
         {
             column.Caption = "Individual";

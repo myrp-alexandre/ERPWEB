@@ -9744,6 +9744,8 @@
     <Content Include="Areas\RRHH\Views\Jornada\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\Jornada\_CmbEmpleado_Jornada.cshtml" />
     <Content Include="Areas\RRHH\Views\Jornada\_GridViewPartial_empleado_jornada_det.cshtml" />
+    <Content Include="Areas\RRHH\Views\Jornada\Modificar.cshtml" />
+    <Content Include="Areas\RRHH\Views\Jornada\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
