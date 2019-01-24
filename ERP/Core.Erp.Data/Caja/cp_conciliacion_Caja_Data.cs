@@ -217,7 +217,8 @@ namespace Core.Erp.Data.Caja
                         IdPeriodo = Convert.ToInt32(info.FechaOP.ToString("yyyyMM")),
                         IdSucursal = IdSucursal,
                         cb_FechaTransac = DateTime.Now,                        
-                        cb_Estado = "A"
+                        cb_Estado = "A",
+                        IdUsuario = info.IdUsuario
                     };
                     Context_ct.ct_cbtecble.Add(diario);
 
