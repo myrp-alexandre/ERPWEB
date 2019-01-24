@@ -85,7 +85,7 @@ namespace Core.Erp.Data.RRHH
                             IdNomina_TipoLiqui = info.IdNominaTipo,
                             IdEmpleado = item.IdEmpleado,
                             Fecha = info.FechaCarga.Date,
-
+                            IdSucursal=item.IdSucursal,
                             Observacion =item.ru_descripcion,
                             Estado = "A",
                             IdUsuario = info.IdUsuario,
