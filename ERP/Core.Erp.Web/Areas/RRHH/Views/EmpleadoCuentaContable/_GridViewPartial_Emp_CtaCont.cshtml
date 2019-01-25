@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_Emp_CtaCont";
-        settings.CallbackRouteValues = new { Controller = "Empleado", Action = "GridViewPartial_Emp_CtaCont" };
+        settings.CallbackRouteValues = new { Controller = "EmpleadoCuentaContable", Action = "GridViewPartial_Emp_CtaCont" };
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
 
@@ -41,42 +41,40 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdJornada";
-            column.Caption = "Jornada";
-            column.Width = Unit.Percentage(50);
-            column.EditorProperties().ComboBox(p =>
+            column.FieldName = "ru_descripcion";
+            column.Caption = "Rubro";
+            column.Width = Unit.Percentage(35);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdRubro";
+            column.Caption = "Rubro";
+            column.Width = Unit.Percentage(35);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                p.Columns.Add("Descripcion", "Descripción").Width = Unit.Percentage(100);
-                p.TextField = "Descripcion";
-                p.ValueField = "IdJornada";
-                p.ValueType = typeof(int);
-                p.DataSource = ViewBag.lst_jor;
+                Html.RenderPartial("_CmbRubro_Emp", DataBinder.Eval(c.DataItem, "IdRubro"));
             });
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "ValorHora";
-            column.Caption = "Valor hora";
-            column.Width = Unit.Percentage(15);
-            column.EditorProperties().SpinEdit(sp =>
-            {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-
-            });
+            column.FieldName = "pc_Cuenta";
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(35);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "MaxNumHoras";
-            column.Caption = "Máximo número de horas";
-            column.Width = Unit.Percentage(15);
-            column.EditorProperties().SpinEdit(sp =>
+            column.FieldName = "IdCtaCble";
+            column.Caption = "Cuenta";
+            column.Width = Unit.Percentage(35);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
             {
-                sp.MinValue = 0;
-                sp.MaxValue = 999999999;
-                sp.Width = Unit.Percentage(100);
-
+                Html.RenderPartial("_CmbCuenta_Empleado", DataBinder.Eval(c.DataItem, "IdCuentacon"));
             });
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";

@@ -55,18 +55,22 @@ namespace Core.Erp.Web.Reportes.RRHH
                     case "I":
                         lblNombreReporte.Text = "Reporte de rubros de ingresos";
                         xrPivotGrid1.OptionsView.ShowColumnTotals = true;
+                        pivotGridField5.Visible = false;
                         break;
                     case "E":
                         lblNombreReporte.Text = "Reporte de rubros de descuento";
                         xrPivotGrid1.OptionsView.ShowColumnTotals = false;
+                        pivotGridField5.Visible = false;
                         break;
                     case "A":
                         lblNombreReporte.Text = "Rol General";
                         xrPivotGrid1.OptionsView.ShowColumnTotals = false;
+                        pivotGridField5.Visible = true;
                         break;
                     default:
                         lblNombreReporte.Text = "Rol General";
                         xrPivotGrid1.OptionsView.ShowColumnTotals = false;
+                        pivotGridField5.Visible = true;
                         break;
                 }
                 ROL_021_Bus bus_rpt = new ROL_021_Bus();
@@ -79,5 +83,6 @@ namespace Core.Erp.Web.Reportes.RRHH
                 throw;
             }
         }
+        
     }
 }

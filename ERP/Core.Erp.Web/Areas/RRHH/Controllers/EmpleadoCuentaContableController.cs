@@ -1,5 +1,8 @@
 ﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.General;
+using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.Contabilidad;
+using Core.Erp.Info.General;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
@@ -29,16 +32,38 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
+
+        ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
+        public ActionResult CmbRubro_Emp()
+        {
+            ro_empleado_x_CuentaContable_Info model = new ro_empleado_x_CuentaContable_Info();
+            return PartialView("_CmbRubro_Emp", model);
+        }
+        public List<ro_rubro_tipo_Info> get_list_bajo_demanda_rubro(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_rubro.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public ro_rubro_tipo_Info get_info_bajo_demanda_rubro(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_rubro.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
+        }
         #endregion
         ro_empleado_x_CuentaContable_List List_Det = new ro_empleado_x_CuentaContable_List();
         public ActionResult Index()
         {
-            return View();
+            ro_empleado_x_CuentaContable_Info model = new ro_empleado_x_CuentaContable_Info
+            {
+                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
+            return View(model);
         }
 
         #region Detalle de jornada
         private void carga_combo()
         {
+            ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
+            var lst_rubro = bus_rubro.get_list(Convert.ToInt32(SessionFixed.IdEmpresa), false);
+            ViewBag.lst_rubro = lst_rubro;
         }
         [ValidateInput(false)]
         public ActionResult GridViewPartial_Emp_CtaCont()
@@ -46,14 +71,25 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
             carga_combo();
             return PartialView("_GridViewPartial_Emp_CtaCont", model);
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNewJornada([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_x_CuentaContable_Info info_det)
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_x_CuentaContable_Info info_det)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
+            if (info_det != null)
+                if (info_det.IdCuentacon != "")
+                {
+                    ct_plancta_Info info_TipoFlujo = bus_plancta.get_info(IdEmpresa, info_det.IdCuentacon);
+                    if (info_TipoFlujo != null)
+                    {
+                        info_det.pc_Cuenta = info_TipoFlujo.pc_Cuenta;
+                    }
+                }
             if (ModelState.IsValid)
                 List_Det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -62,7 +98,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdateJornada([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_x_CuentaContable_Info info_det)
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_x_CuentaContable_Info info_det)
         {
 
             if (ModelState.IsValid)
@@ -71,7 +107,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             carga_combo();
             return PartialView("_GridViewPartial_Emp_CtaCont", model);
         }
-        public ActionResult EditingDeleteJornada(int Secuencia)
+        public ActionResult EditingDelete(int Secuencia)
         {
             List_Det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
