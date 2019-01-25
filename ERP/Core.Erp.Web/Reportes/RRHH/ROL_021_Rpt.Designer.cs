@@ -109,9 +109,9 @@
             this.xrPivotGridField44 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
             this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField7 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
-            this.pivotGridField7 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -788,7 +788,9 @@
             this.xrPivotGridField44.FieldName = "pe_nombreCompleto";
             this.xrPivotGridField44.MinWidth = 100;
             this.xrPivotGridField44.Name = "xrPivotGridField44";
-            this.xrPivotGridField44.Width = 200;
+            this.xrPivotGridField44.Options.ShowGrandTotal = false;
+            this.xrPivotGridField44.Options.ShowTotals = false;
+            this.xrPivotGridField44.Width = 250;
             // 
             // xrPivotGrid1
             // 
@@ -854,7 +856,7 @@
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowTotalsForSingleValues = true;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(390.5F, 166.875F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(482.1667F, 166.875F);
             // 
             // pivotGridField5
             // 
@@ -867,6 +869,16 @@
             this.pivotGridField5.FieldName = "Descripcion";
             this.pivotGridField5.MinWidth = 100;
             this.pivotGridField5.Name = "pivotGridField5";
+            // 
+            // pivotGridField7
+            // 
+            this.pivotGridField7.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.pivotGridField7.AreaIndex = 2;
+            this.pivotGridField7.Caption = "Días";
+            this.pivotGridField7.FieldName = "Dias";
+            this.pivotGridField7.Name = "pivotGridField7";
+            this.pivotGridField7.Options.ShowGrandTotal = false;
+            this.pivotGridField7.Options.ShowTotals = false;
             // 
             // pivotGridField6
             // 
@@ -884,14 +896,6 @@
             this.xrPivotGrid1});
             this.GroupHeader1.HeightF = 166.875F;
             this.GroupHeader1.Name = "GroupHeader1";
-            // 
-            // pivotGridField7
-            // 
-            this.pivotGridField7.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.pivotGridField7.AreaIndex = 2;
-            this.pivotGridField7.Caption = "Días";
-            this.pivotGridField7.FieldName = "Dias";
-            this.pivotGridField7.Name = "pivotGridField7";
             // 
             // ROL_021_Rpt
             // 
