@@ -1657,6 +1657,9 @@
     <Compile Include="SPROL_017_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="SPROL_022_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="spROL_DecimosCSV_Result.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -2309,9 +2312,6 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="VWROL_021.cs">
-      <DependentUpon>Model_reportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VWROL_022.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="vwRo_ActaFiniquito.cs">
