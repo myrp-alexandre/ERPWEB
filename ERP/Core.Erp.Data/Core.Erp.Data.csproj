@@ -1239,6 +1239,7 @@
     <Compile Include="Reportes\RRHH\ROL_020_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_021_Data.cs" />
     <Compile Include="Reportes\RRHH\ROL_022_Data.cs" />
+    <Compile Include="Reportes\RRHH\ROL_023_Data.cs" />
     <Compile Include="ro_Acta_Finiquito.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1658,6 +1659,9 @@
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="SPROL_022_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPROL_023_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
     <Compile Include="spROL_DecimosCSV_Result.cs">

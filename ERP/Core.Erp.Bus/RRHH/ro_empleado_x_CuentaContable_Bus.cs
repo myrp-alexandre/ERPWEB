@@ -23,5 +23,31 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public ro_empleado_x_CuentaContable_Info GetInfo(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                return odata.GetInfo(IdEmpresa, IdEmpleado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool GuardarDB(ro_empleado_x_CuentaContable_Info info)
+        {
+            try
+            {
+                return odata.GuardarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

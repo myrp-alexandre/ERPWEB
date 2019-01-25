@@ -37,5 +37,60 @@ namespace Core.Erp.Data.RRHH
                 throw;
             }
         }
+
+        public ro_empleado_x_CuentaContable_Info GetInfo(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                ro_empleado_x_CuentaContable_Info info = new ro_empleado_x_CuentaContable_Info();
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_empleado_x_CuentaContable Entity = Context.ro_empleado_x_CuentaContable.Where(q => q.IdEmpresa == IdEmpresa && q.IdEmpleado == IdEmpleado).FirstOrDefault();
+                    if (Entity == null) return null;
+
+                    info = new ro_empleado_x_CuentaContable_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdEmpleado = Entity.IdEmpleado,
+                        IdCuentacon = Entity.IdCuentacon,
+                        IdRubro = Entity.IdRubro,
+                        Observacion = Entity.Observacion,
+                        Secuencia = Entity.Secuencia
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool GuardarDB(ro_empleado_x_CuentaContable_Info info)
+        {
+            try
+            {
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    Context.ro_empleado_x_CuentaContable.Add(new ro_empleado_x_CuentaContable
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdEmpleado = info.IdEmpleado,
+                        IdCuentacon = info.IdCuentacon,
+                        IdRubro = info.IdRubro,
+                        Observacion = info.Observacion,
+                        Secuencia = info.Secuencia
+                    });
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
