@@ -22,6 +22,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_catalogo_Bus bus_catalogo = new ro_catalogo_Bus();
         ro_contrato_Bus bus_contrato = new ro_contrato_Bus();
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
 
         int IdEmpresa = 0;
 
@@ -55,21 +56,50 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             return Bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
         }
+
+
+        public ActionResult CmbSucursal()
+        {
+            int model = new int();
+            return PartialView("_CmbSucursal", model);
+        }
+        public List<tb_sucursal_Info> get_list_bajo_demanda_sucursal(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_sucursal.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public tb_sucursal_Info get_info_bajo_demanda_sucursal(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_sucursal.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
+        }
         #endregion
 
 
         public ActionResult Index()
         {
-            return View();
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Index(cl_filtros_Info model)
+        {
+            return View(model);
+
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_contrato()
+        public ActionResult GridViewPartial_contrato(int IdSucursal = 0)
         {
             try
             {
                 IdEmpresa = GetIdEmpresa();
-                List<ro_contrato_Info> model = bus_contrato.get_list(IdEmpresa, true);
+                ViewBag.IdSucursal = IdSucursal;
+
+                List<ro_contrato_Info> model = bus_contrato.get_list(IdEmpresa, ViewBag.IdSucursal, true);
                 return PartialView("_GridViewPartial_contrato", model);
             }
             catch (Exception)

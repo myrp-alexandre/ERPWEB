@@ -6,7 +6,7 @@
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.CallbackRouteValues = new { Controller = "ImportacionNovedades", Action = "CmbSucursal", Area = "RRHH" };
+        settings.CallbackRouteValues = new { Controller = "Contrato", Action = "CmbSucursal", Area = "RRHH" };
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "Su_Descripcion";
@@ -17,7 +17,7 @@
         settings.Properties.Columns.Add("Su_Descripcion", "Sucursal", 90);
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
     })
-      .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.ImportacionNovedadesController().get_list_bajo_demanda_sucursal, new Core.Erp.Web.Areas.RRHH.Controllers.ImportacionNovedadesController().get_info_bajo_demanda_sucursal)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_EmpleadoNovedadCargaMasiva_Info) ? "" : (Model == 0 ? "" : Model));
+      .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.ContratoController().get_list_bajo_demanda_sucursal, new Core.Erp.Web.Areas.RRHH.Controllers.ContratoController().get_info_bajo_demanda_sucursal)
+    .Bind(Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_contrato_Info) ? "" : (Model == 0 ? "" : Model));
     }
 @comboBox.GetHtml()

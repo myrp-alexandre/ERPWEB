@@ -9,10 +9,12 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_contrato_Data
     {
-        public List<ro_contrato_Info> get_list(int IdEmpresa, bool mostrar_anulados)
+        public List<ro_contrato_Info> get_list(int IdEmpresa, int IdSucursal, bool mostrar_anulados)
         {
             try
             {
+                var IdSucursalIni = IdSucursal == 0 ? 0 : IdSucursal;
+                var IdSucursalfin = IdSucursal == 0 ? 9999 : IdSucursal;
                 List<ro_contrato_Info> Lista;
 
                 using (Entities_rrhh Context = new Entities_rrhh())
@@ -23,6 +25,8 @@ namespace Core.Erp.Data.RRHH
                                  join cat in Context.ro_catalogo
                                  on cont.IdContrato_Tipo equals cat.CodCatalogo
                                  where cont.IdEmpresa==IdEmpresa
+                                 && emp.IdSucursal >= IdSucursalIni
+                                 && emp.IdSucursal <= IdSucursalfin
                                  && emp.IdEmpresa==IdEmpresa
                                  select new ro_contrato_Info
                                  {

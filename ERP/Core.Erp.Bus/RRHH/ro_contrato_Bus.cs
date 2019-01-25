@@ -11,11 +11,11 @@ namespace Core.Erp.Bus.RRHH
         ro_contrato_Data odata = new ro_contrato_Data();
 
         ro_empleado_Data data_empleado = new ro_empleado_Data();
-        public List<ro_contrato_Info> get_list(int IdEmpresa, bool estado)
+        public List<ro_contrato_Info> get_list(int IdEmpresa, int IdSucursal, bool estado)
         {
             try
             {
-                return odata.get_list(IdEmpresa, estado);
+                return odata.get_list(IdEmpresa, IdSucursal, estado);
             }
             catch (Exception)
             {
