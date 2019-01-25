@@ -9773,6 +9773,7 @@
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_CmbTipoNota.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\Index.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_GridViewPartial_Emp_CtaCont.cshtml" />
+    <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_CmbCuenta_Empleado.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
