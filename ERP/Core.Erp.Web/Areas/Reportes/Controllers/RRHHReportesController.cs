@@ -684,8 +684,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdNomina = IdNomina_Tipo,
                 IdTipoNomina = IdNomina_TipoLiqui,
                 IdPeriodo = IdPeriodo,
-                IdPeriodoSet = IdPeriodo,
-                TipoRubro = "A"
+                IdPeriodoSet = IdPeriodo
             };
             ROL_022_Rpt report = new ROL_022_Rpt();
             report.p_IdEmpresa.Value = IdEmpresa == 0 ? Convert.ToInt32(SessionFixed.IdEmpresa) : IdEmpresa;
@@ -711,7 +710,6 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdNominaTipo.Value = model.IdTipoNomina;
             report.p_IdPeriodo.Value = model.IdPeriodo;
             report.p_IdSucursal.Value = model.IdSucursal;
-            report.P_TipoRubro.Value = model.TipoRubro;
             SessionFixed.IdDivision = model.IdDivision.ToString();
             report.P_IdArea.Value = model.IdArea;
             report.P_IdDivision.Value = model.IdDivision;

@@ -14,11 +14,11 @@ namespace Core.Erp.Bus.Reportes.RRHH
 
         ROL_022_Data odata = new ROL_022_Data();
         public List<ROL_022_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo, int IdSucursal,
-           int IdDivision, int IdArea, string tipoRubro)
+           int IdDivision, int IdArea)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea, tipoRubro);
+                return odata.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea);
             }
             catch (Exception)
             {
