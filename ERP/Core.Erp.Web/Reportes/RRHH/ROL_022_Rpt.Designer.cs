@@ -459,7 +459,7 @@
             this.xrPivotGridField44.FieldName = "empleado";
             this.xrPivotGridField44.MinWidth = 100;
             this.xrPivotGridField44.Name = "xrPivotGridField44";
-            this.xrPivotGridField44.Width = 250;
+            this.xrPivotGridField44.Width = 230;
             // 
             // pivotGridField6
             // 
