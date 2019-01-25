@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Erp.Bus.Reportes.RRHH
 {
-    class ROL_023_Bus
+    public class ROL_023_Bus
     {
         ROL_023_Data odata = new ROL_023_Data();
         public List<ROL_023_Info> GetList(int IdEmpresa, int IdSucursal, int IdNomina, int IdNominaTipoLiqui, int IdPeriodo, int IdDivision, int IdArea, int IdDepartamento)

@@ -323,6 +323,14 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 Su_Descripcion = "TODAS"
             }); ViewBag.lst_sucursal = lst_sucursal;
 
+            ro_departamento_Bus bus_dep = new ro_departamento_Bus();
+            var lst_dep = bus_dep.get_list(IdEmpresa, false);
+            lst_dep.Add(new ro_departamento_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdDepartamento = 0,
+                de_descripcion = "TODOS"
+            }); ViewBag.lst_dep = lst_dep;
 
         }
         public ActionResult ROL_012( )
@@ -716,5 +724,58 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+
+        public ActionResult ROL_023()
+        {
+
+
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = 0,
+                IdNomina = 0,
+                IdNominaTipoLiqui = 0, 
+                IdPeriodo = 0,
+                IdDivision = 0,
+                IdArea = 0, 
+                IdDepartamento = 0
+            };
+
+            ROL_023_Rpt report = new ROL_023_Rpt();
+
+            cargar_combos(model.IdEmpresa);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdNomina.Value = model.IdNomina;
+            report.p_IdNominaTipoLiqui.Value = model.IdTipoNomina;
+            report.p_IdPeriodo.Value = model.IdPeriodo;
+            report.p_IdDivision.Value = model.IdDivision;
+            report.p_IdArea.Value = model.IdArea;
+            report.p_IdDepartamento.Value = model.IdDepartamento;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ROL_023(cl_filtros_Info model)
+        {
+            ROL_023_Rpt report = new ROL_023_Rpt();
+            cargar_combos(model.IdEmpresa);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdNomina.Value = model.IdNomina;
+            report.p_IdNominaTipoLiqui.Value = model.IdTipoNomina;
+            report.p_IdPeriodo.Value = model.IdPeriodo;
+            report.p_IdDivision.Value = model.IdDivision;
+            report.p_IdArea.Value = model.IdArea;
+            report.p_IdDepartamento.Value = model.IdDepartamento;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = report;
+            return View(model);
+        }
+
     }
 }
