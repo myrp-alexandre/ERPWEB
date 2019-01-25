@@ -153,7 +153,7 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_empleado_Novedad Entity = Context.ro_empleado_Novedad.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado && q.IdNovedad==info.IdNovedad);
+                    ro_empleado_Novedad Entity = Context.ro_empleado_Novedad.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdNovedad==info.IdNovedad);
                     if (Entity == null)
                         return false;
                     Entity.IdEmpleado = info.IdEmpleado;
