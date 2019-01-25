@@ -440,7 +440,7 @@
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowTotalsForSingleValues = true;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(414.4583F, 126.0417F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(483.2083F, 126.0417F);
             // 
             // xrPivotGridField44
             // 
@@ -456,11 +456,10 @@
             this.xrPivotGridField44.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.xrPivotGridField44.AreaIndex = 0;
             this.xrPivotGridField44.Caption = "Empleado";
-            this.xrPivotGridField44.ColumnValueLineCount = 2;
             this.xrPivotGridField44.FieldName = "empleado";
             this.xrPivotGridField44.MinWidth = 100;
             this.xrPivotGridField44.Name = "xrPivotGridField44";
-            this.xrPivotGridField44.Width = 200;
+            this.xrPivotGridField44.Width = 250;
             // 
             // pivotGridField6
             // 
@@ -476,11 +475,10 @@
             this.pivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.pivotGridField6.AreaIndex = 1;
             this.pivotGridField6.Caption = "Horario";
-            this.pivotGridField6.ColumnValueLineCount = 2;
             this.pivotGridField6.FieldName = "Descripcion";
             this.pivotGridField6.MinWidth = 100;
             this.pivotGridField6.Name = "pivotGridField6";
-            this.pivotGridField6.Width = 120;
+            this.pivotGridField6.Width = 130;
             // 
             // pivotGridField4
             // 
@@ -490,7 +488,7 @@
             this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField4.AreaIndex = 0;
             this.pivotGridField4.Caption = "Tipo";
-            this.pivotGridField4.FieldName = "ru_tipo";
+            this.pivotGridField4.FieldName = "ca_descripcion";
             this.pivotGridField4.MinWidth = 100;
             this.pivotGridField4.Name = "pivotGridField4";
             // 
@@ -522,7 +520,7 @@
             this.pivotGridField3.Name = "pivotGridField3";
             this.pivotGridField3.Options.AllowExpand = DevExpress.Utils.DefaultBoolean.True;
             this.pivotGridField3.RowValueLineCount = 50;
-            this.pivotGridField3.Width = 75;
+            this.pivotGridField3.Width = 80;
             // 
             // pivotGridField1
             // 

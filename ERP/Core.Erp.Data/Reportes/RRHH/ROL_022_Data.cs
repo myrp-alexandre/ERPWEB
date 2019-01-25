@@ -56,7 +56,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                     IdPeriodo=q.IdPeriodo,
                                     Descripcion=q.Descripcion,
                                     ca_descripcion=q.ca_descripcion,
-                                    ru_descripcion=q.Descripcion,
+                                    ru_descripcion=q.ru_descripcion,
                                     empleado=q.empleado,
                                     ru_orden=q.ru_orden,
                                     Valor=q.Valor,
