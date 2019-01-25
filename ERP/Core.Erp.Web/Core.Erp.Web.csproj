@@ -9770,6 +9770,7 @@
     <Content Include="Areas\RRHH\Views\Contrato\_CmbSucursal.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbSucursal.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_CmbTipoNota.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\_CmbTipoNota.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
