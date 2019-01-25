@@ -14,5 +14,8 @@ namespace Core.Erp.Info.RRHH
         public string IdRubro { get; set; }
         public string IdCuentacon { get; set; }
         public string Observacion { get; set; }
+
+        //campos que no existen en la tabka
+        public string pc_Cuenta { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Cargos";
+    ViewBag.Title = "Cuenta contable";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm())
 {
-    @Html.Action("GridViewPartial_cargo")
+    @Html.Action("GridViewPartial_Emp_CtaCont")
 
 }
 
