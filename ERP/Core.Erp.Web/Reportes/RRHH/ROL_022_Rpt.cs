@@ -39,26 +39,10 @@ namespace Core.Erp.Web.Reportes.RRHH
                 int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
                 int IdDivision = P_IdDivision.Value == null ? 0 : Convert.ToInt32(P_IdDivision.Value);
                 int IdArea = P_IdArea.Value == null ? 0 : Convert.ToInt32(P_IdArea.Value);
-                string TipoRubro = P_TipoRubro.Value == null ? "" : Convert.ToString(P_TipoRubro.Value);
-
-                switch (TipoRubro)
-                {
-                    case "I":
-                        lblNombreReporte.Text = "Ingresos";
-                        break;
-                    case "E":
-                        lblNombreReporte.Text = "Egresos";
-                        break;
-                    case "A":
-                        lblNombreReporte.Text = "Rol General";
-                        break;
-                    default:
-                        lblNombreReporte.Text = "Rol General";
-                        break;
-                }
+                lblNombreReporte.Text = "Ingresos";
 
                 ROL_022_Bus bus_rpt = new ROL_022_Bus();
-                List<ROL_022_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea, TipoRubro);
+                List<ROL_022_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea);
                 this.DataSource = lst_rpt;
             }
             catch (Exception)

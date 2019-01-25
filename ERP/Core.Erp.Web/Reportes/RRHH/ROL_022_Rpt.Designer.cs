@@ -60,7 +60,6 @@
             this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
             this.P_IdDivision = new DevExpress.XtraReports.Parameters.Parameter();
             this.P_IdArea = new DevExpress.XtraReports.Parameters.Parameter();
-            this.P_TipoRubro = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
@@ -359,11 +358,6 @@
             this.P_IdArea.ValueInfo = "0";
             this.P_IdArea.Visible = false;
             // 
-            // P_TipoRubro
-            // 
-            this.P_TipoRubro.Name = "P_TipoRubro";
-            this.P_TipoRubro.Visible = false;
-            // 
             // objectDataSource1
             // 
             this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.RRHH.ROL_022_Info);
@@ -433,14 +427,13 @@
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
             this.xrPivotGrid1.OptionsView.ShowColumnHeaders = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnTotals = false;
             this.xrPivotGrid1.OptionsView.ShowCustomTotalsForSingleValues = true;
             this.xrPivotGrid1.OptionsView.ShowDataHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowTotalsForSingleValues = true;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(483.2083F, 126.0417F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(466.5417F, 126.0417F);
             // 
             // xrPivotGridField44
             // 
@@ -478,6 +471,8 @@
             this.pivotGridField6.FieldName = "Descripcion";
             this.pivotGridField6.MinWidth = 100;
             this.pivotGridField6.Name = "pivotGridField6";
+            this.pivotGridField6.Options.ShowGrandTotal = false;
+            this.pivotGridField6.Options.ShowTotals = false;
             this.pivotGridField6.Width = 130;
             // 
             // pivotGridField4
@@ -503,6 +498,8 @@
             this.pivotGridField2.FieldName = "ru_orden";
             this.pivotGridField2.MinWidth = 100;
             this.pivotGridField2.Name = "pivotGridField2";
+            this.pivotGridField2.Options.ShowGrandTotal = false;
+            this.pivotGridField2.Options.ShowTotals = false;
             // 
             // pivotGridField3
             // 
@@ -519,7 +516,10 @@
             this.pivotGridField3.MinWidth = 75;
             this.pivotGridField3.Name = "pivotGridField3";
             this.pivotGridField3.Options.AllowExpand = DevExpress.Utils.DefaultBoolean.True;
+            this.pivotGridField3.Options.ShowGrandTotal = false;
+            this.pivotGridField3.Options.ShowTotals = false;
             this.pivotGridField3.RowValueLineCount = 50;
+            this.pivotGridField3.TotalsVisibility = DevExpress.XtraPivotGrid.PivotTotalsVisibility.None;
             this.pivotGridField3.Width = 80;
             // 
             // pivotGridField1
@@ -571,8 +571,7 @@
             this.p_IdPeriodo,
             this.p_IdSucursal,
             this.P_IdDivision,
-            this.P_IdArea,
-            this.P_TipoRubro});
+            this.P_IdArea});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_022_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
@@ -611,7 +610,6 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdSucursal;
         public DevExpress.XtraReports.Parameters.Parameter P_IdDivision;
         public DevExpress.XtraReports.Parameters.Parameter P_IdArea;
-        public DevExpress.XtraReports.Parameters.Parameter P_TipoRubro;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
         private DevExpress.XtraReports.UI.XRPivotGrid xrPivotGrid1;

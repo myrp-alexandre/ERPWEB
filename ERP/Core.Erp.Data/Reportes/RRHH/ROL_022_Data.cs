@@ -12,7 +12,7 @@ namespace Core.Erp.Data.Reportes.RRHH
    public class ROL_022_Data
     {
         public List<ROL_022_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo,
-          int IdSucursal, int IdDivision, int IdArea, string tipoRubro)
+          int IdSucursal, int IdDivision, int IdArea)
         {
             try
             {
