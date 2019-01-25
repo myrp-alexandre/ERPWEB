@@ -8,6 +8,7 @@ namespace Core.Erp.Info.RRHH
 {
     public class ro_empleado_x_CuentaContable_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdEmpleado { get; set; }
         public int Secuencia { get; set; }
@@ -17,5 +18,6 @@ namespace Core.Erp.Info.RRHH
 
         //campos que no existen en la tabka
         public string pc_Cuenta { get; set; }
+        public string ru_descripcion { get; set; }
     }
 }

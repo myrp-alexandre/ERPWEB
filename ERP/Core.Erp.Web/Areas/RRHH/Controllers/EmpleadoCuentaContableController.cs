@@ -49,12 +49,23 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
         #endregion
         ro_empleado_x_CuentaContable_List List_Det = new ro_empleado_x_CuentaContable_List();
-        public ActionResult Index()
+        ro_empleado_x_CuentaContable_Bus bus_emple = new ro_empleado_x_CuentaContable_Bus();
+       public ActionResult Index(decimal IdEmpleado = 0)
         {
-            ro_empleado_x_CuentaContable_Info model = new ro_empleado_x_CuentaContable_Info
-            {
-                IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa)
-            };
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ro_empleado_x_CuentaContable_Info model = bus_emple.GetInfo(IdEmpresa, IdEmpleado);
+            if (model == null)
+                model = new ro_empleado_x_CuentaContable_Info { IdEmpresa = IdEmpresa};
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            List_Det.set_list(new List<ro_empleado_x_CuentaContable_Info>(), model.IdTransaccionSession);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(ro_empleado_x_CuentaContable_Info model)
+        {
+            List_Det.get_list(model.IdTransaccionSession);
+            if (!bus_emple.GuardarDB(model))
+                ViewBag.mensaje = "No se pudieron actualizar los registros";
             return View(model);
         }
 
@@ -84,10 +95,15 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (info_det != null)
                 if (info_det.IdCuentacon != "")
                 {
-                    ct_plancta_Info info_TipoFlujo = bus_plancta.get_info(IdEmpresa, info_det.IdCuentacon);
-                    if (info_TipoFlujo != null)
+                    ct_plancta_Info info_cuenta = bus_plancta.get_info(IdEmpresa, info_det.IdCuentacon);
+                    ro_rubro_tipo_Info info_rubro = bus_rubro.get_info(IdEmpresa, info_det.IdRubro);
+                    if (info_cuenta != null)
                     {
-                        info_det.pc_Cuenta = info_TipoFlujo.pc_Cuenta;
+                        info_det.pc_Cuenta = info_cuenta.pc_Cuenta;
+                    }
+                    if(info_rubro!= null)
+                    {
+                        info_det.ru_descripcion = info_rubro.ru_descripcion;
                     }
                 }
             if (ModelState.IsValid)
