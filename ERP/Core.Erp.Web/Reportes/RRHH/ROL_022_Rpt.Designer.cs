@@ -64,7 +64,6 @@
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
-            this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField44 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
@@ -374,7 +373,7 @@
             // 
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPivotGrid1});
-            this.GroupHeader1.HeightF = 104.1667F;
+            this.GroupHeader1.HeightF = 126.0417F;
             this.GroupHeader1.Name = "GroupHeader1";
             // 
             // xrPivotGrid1
@@ -412,7 +411,6 @@
             this.xrPivotGrid1.Appearance.TotalCell.Trimming = System.Drawing.StringTrimming.Word;
             this.xrPivotGrid1.Appearance.TotalCell.WordWrap = true;
             this.xrPivotGrid1.Fields.AddRange(new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField[] {
-            this.pivotGridField5,
             this.xrPivotGridField44,
             this.pivotGridField6,
             this.pivotGridField4,
@@ -442,19 +440,7 @@
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowTotalsForSingleValues = true;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(496.75F, 104.1667F);
-            // 
-            // pivotGridField5
-            // 
-            this.pivotGridField5.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.pivotGridField5.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.pivotGridField5.Appearance.Cell.WordWrap = true;
-            this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.pivotGridField5.AreaIndex = 0;
-            this.pivotGridField5.Caption = "Area";
-            this.pivotGridField5.FieldName = "Area";
-            this.pivotGridField5.MinWidth = 100;
-            this.pivotGridField5.Name = "pivotGridField5";
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(414.4583F, 126.0417F);
             // 
             // xrPivotGridField44
             // 
@@ -468,12 +454,13 @@
             this.xrPivotGridField44.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.xrPivotGridField44.Appearance.FieldValue.WordWrap = true;
             this.xrPivotGridField44.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.xrPivotGridField44.AreaIndex = 1;
+            this.xrPivotGridField44.AreaIndex = 0;
             this.xrPivotGridField44.Caption = "Empleado";
-            this.xrPivotGridField44.FieldName = "NombreCompleto";
+            this.xrPivotGridField44.ColumnValueLineCount = 2;
+            this.xrPivotGridField44.FieldName = "empleado";
             this.xrPivotGridField44.MinWidth = 100;
             this.xrPivotGridField44.Name = "xrPivotGridField44";
-            this.xrPivotGridField44.Width = 150;
+            this.xrPivotGridField44.Width = 200;
             // 
             // pivotGridField6
             // 
@@ -487,13 +474,13 @@
             this.pivotGridField6.Appearance.FieldValue.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.pivotGridField6.Appearance.FieldValue.WordWrap = true;
             this.pivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.pivotGridField6.AreaIndex = 2;
-            this.pivotGridField6.Caption = "RubroDescripcion";
-            this.pivotGridField6.ColumnValueLineCount = 3;
-            this.pivotGridField6.FieldName = "RubroDescripcion";
+            this.pivotGridField6.AreaIndex = 1;
+            this.pivotGridField6.Caption = "Horario";
+            this.pivotGridField6.ColumnValueLineCount = 2;
+            this.pivotGridField6.FieldName = "Descripcion";
             this.pivotGridField6.MinWidth = 100;
             this.pivotGridField6.Name = "pivotGridField6";
-            this.pivotGridField6.Width = 150;
+            this.pivotGridField6.Width = 120;
             // 
             // pivotGridField4
             // 
@@ -503,7 +490,7 @@
             this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField4.AreaIndex = 0;
             this.pivotGridField4.Caption = "Tipo";
-            this.pivotGridField4.FieldName = "Grupo";
+            this.pivotGridField4.FieldName = "ru_tipo";
             this.pivotGridField4.MinWidth = 100;
             this.pivotGridField4.Name = "pivotGridField4";
             // 
@@ -530,7 +517,7 @@
             this.pivotGridField3.Caption = "Rubros";
             this.pivotGridField3.ColumnValueLineCount = 5;
             this.pivotGridField3.ExpandedInFieldsGroup = false;
-            this.pivotGridField3.FieldName = "Rubro";
+            this.pivotGridField3.FieldName = "ru_descripcion";
             this.pivotGridField3.MinWidth = 75;
             this.pivotGridField3.Name = "pivotGridField3";
             this.pivotGridField3.Options.AllowExpand = DevExpress.Utils.DefaultBoolean.True;
@@ -635,7 +622,6 @@
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField2;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField3;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField4;
-        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField5;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
         private DevExpress.XtraReports.UI.XRTableCell lbl_usuario;

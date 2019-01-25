@@ -36,17 +36,15 @@ namespace Core.Erp.Data.Reportes.RRHH
                     
                         Lista = (from q in Context.SPROL_022(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo)
                                  where q.IdEmpresa == IdEmpresa
-                                 && q.IdPeriodo == IdPeriodo
                                  && q.IdDivision >= IdDivisionInicio
                                  && q.IdDivision <= IdDivisionFin
                                  && q.IdArea >= IdAreaInicio
-                                  && q.IdArea <= IdAreaFin
-                                 // && IdSucursalInicio <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
-                                  && q.IdArea >= IdAreaInicio
-                                  && q.IdArea <= IdAreaFin
+                                 && q.IdArea <= IdAreaFin
+                                 && q.IdSucursal >= IdSucursalInicio
+                                 && q.IdSucursal <= IdSucursalFin
                                  && q.IdNomina_Tipo == IdNomina
-                                 && q.IdNomina_Tipo == IdNominaTipo
-                                && q.Valor > 0
+                                 && q.IdNomina_TipoLiqui == IdNominaTipo
+                                 && q.Valor > 0
                                  select new ROL_022_Info
                                 {
                                     IdEmpresa = q.IdEmpresa,

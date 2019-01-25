@@ -9,6 +9,8 @@ namespace Core.Erp.Info.Reportes.RRHH
     public class ROL_022_Info
     {
         public int IdEmpresa { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
+        public int IdNomina_TipoLiqui { get; set; }
         public Nullable<int> IdDivision { get; set; }
         public Nullable<int> IdArea { get; set; }
         public decimal IdEmpleado { get; set; }
