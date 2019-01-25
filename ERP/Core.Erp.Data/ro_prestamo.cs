@@ -48,6 +48,9 @@ namespace Core.Erp.Data
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotiAnula { get; set; }
         public Nullable<double> cod_prestamo { get; set; }
+        public string IdTipo_Persona { get; set; }
+        public Nullable<decimal> IdEntidad { get; set; }
+        public Nullable<decimal> IdPersona { get; set; }
     
         public virtual ro_catalogo ro_catalogo { get; set; }
         public virtual ICollection<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }

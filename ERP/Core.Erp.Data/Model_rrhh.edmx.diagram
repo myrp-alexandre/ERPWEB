@@ -252,6 +252,8 @@
         <AssociationConnector Association="Model_rrhh.FK_ro_EmpleadoNovedadCargaMasiva_det_ro_empleado_Novedad" />
         <AssociationConnector Association="Model_rrhh.FK_ro_HorasProfesores_det_ro_empleado_Novedad" />
         <AssociationConnector Association="Model_rrhh.FK_ro_SancionesPorMarcaciones_x_novedad_ro_empleado_Novedad" />
+        <EntityTypeShape EntityType="Model_rrhh.ro_empleado_x_CuentaContable" Width="1.5" PointX="11.25" PointY="112.5" />
+        <AssociationConnector Association="Model_rrhh.FK_ro_empleado_x_CuentaContable_ro_rubro_tipo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

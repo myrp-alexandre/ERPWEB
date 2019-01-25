@@ -443,6 +443,7 @@
     <Compile Include="Areas\RRHH\Controllers\DepartamentoPorAreaController.cs" />
     <Compile Include="Areas\RRHH\Controllers\DivisionController.cs" />
     <Compile Include="Areas\RRHH\Controllers\EmpleadoController.cs" />
+    <Compile Include="Areas\RRHH\Controllers\EmpleadoCuentaContableController.cs" />
     <Compile Include="Areas\RRHH\Controllers\EmpleadoNovedadController.cs" />
     <Compile Include="Areas\RRHH\Controllers\EmpleadoPorRubroController.cs" />
     <Compile Include="Areas\RRHH\Controllers\EmpleadoRubroAcumuladoController.cs" />
@@ -9770,6 +9771,8 @@
     <Content Include="Areas\RRHH\Views\Contrato\_CmbSucursal.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbSucursal.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_CmbTipoNota.cshtml" />
+    <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\Index.cshtml" />
+    <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_GridViewPartial_Emp_CtaCont.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

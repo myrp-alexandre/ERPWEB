@@ -42,6 +42,7 @@ namespace Core.Erp.Data
             this.ro_rubros_calculados14 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados15 = new HashSet<ro_rubros_calculados>();
             this.ro_rubros_calculados16 = new HashSet<ro_rubros_calculados>();
+            this.ro_empleado_x_CuentaContable = new HashSet<ro_empleado_x_CuentaContable>();
         }
     
         public int IdEmpresa { get; set; }
@@ -96,5 +97,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados14 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados15 { get; set; }
         public virtual ICollection<ro_rubros_calculados> ro_rubros_calculados16 { get; set; }
+        public virtual ICollection<ro_empleado_x_CuentaContable> ro_empleado_x_CuentaContable { get; set; }
     }
 }
