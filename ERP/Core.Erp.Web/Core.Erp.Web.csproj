@@ -9782,6 +9782,7 @@
     <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_GridViewPartial_Emp_CtaCont.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_CmbCuenta_Empleado.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_CmbRubro_Emp.cshtml" />
+    <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_023.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -10264,6 +10265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_022_Rpt.resx">
       <DependentUpon>ROL_022_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_023_Rpt.resx">
+      <DependentUpon>ROL_023_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

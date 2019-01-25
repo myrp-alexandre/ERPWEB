@@ -45,6 +45,7 @@ namespace Core.Erp.Info.Helps
         public string TipoRubro { get; set; }
         public int IdArea { get; set; }
         public int IdDivision { get; set; }
+        public int IdDepartamento { get; set; }
 
         #endregion
 
