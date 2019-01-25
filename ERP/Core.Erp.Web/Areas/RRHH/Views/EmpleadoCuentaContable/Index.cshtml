@@ -15,10 +15,10 @@
     @Html.HiddenFor(w=>w.IdTransaccionSession)
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for=""></label>
-                    @Html.Action("GridViewPartial_Emp_CtaCont")
+                    @Html.Action("GridViewPartial_Emp_CtaCont", new { IdEmpleado = ViewBag.IdEmpleado })
                 </div>
             </div>
         </div>

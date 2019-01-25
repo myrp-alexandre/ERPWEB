@@ -77,12 +77,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             ViewBag.lst_rubro = lst_rubro;
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_Emp_CtaCont()
+        public ActionResult GridViewPartial_Emp_CtaCont(decimal IdEmpleado = 0)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
+            var mod = bus_emple.GetList(IdEmpresa, IdEmpleado);
             carga_combo();
             return PartialView("_GridViewPartial_Emp_CtaCont", model);
         }
@@ -116,7 +116,22 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ro_empleado_x_CuentaContable_Info info_det)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
+            if (info_det != null)
+                if (info_det.IdCuentacon != "")
+                {
+                    ct_plancta_Info info_cuenta = bus_plancta.get_info(IdEmpresa, info_det.IdCuentacon);
+                    ro_rubro_tipo_Info info_rubro = bus_rubro.get_info(IdEmpresa, info_det.IdRubro);
+                    if (info_cuenta != null)
+                    {
+                        info_det.pc_Cuenta = info_cuenta.pc_Cuenta;
+                    }
+                    if (info_rubro != null)
+                    {
+                        info_det.ru_descripcion = info_rubro.ru_descripcion;
+                    }
+                }
             if (ModelState.IsValid)
                 List_Det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));

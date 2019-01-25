@@ -12,6 +12,7 @@
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "EmpleadoCuentaContable", Action = "EditingUpdate", Area = "RRHH" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "EmpleadoCuentaContable", Action = "EditingDelete", Area = "RRHH" };
 
+
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
@@ -67,7 +68,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdCtaCble";
+            column.FieldName = "IdCuentacon";
             column.Caption = "Cuenta";
             column.Width = Unit.Percentage(50);
             column.Visible = false;
@@ -76,6 +77,13 @@
             {
                 Html.RenderPartial("_CmbCuenta_Empleado", DataBinder.Eval(c.DataItem, "IdCuentacon"));
             });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Observacion";
+            column.Caption = "Observación";
+            column.Width = Unit.Percentage(50);
+
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
 

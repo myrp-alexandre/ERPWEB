@@ -73,15 +73,18 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    Context.ro_empleado_x_CuentaContable.Add(new ro_empleado_x_CuentaContable
+                    foreach (var item in info.lstdet)
                     {
-                        IdEmpresa = info.IdEmpresa,
-                        IdEmpleado = info.IdEmpleado,
-                        IdCuentacon = info.IdCuentacon,
-                        IdRubro = info.IdRubro,
-                        Observacion = info.Observacion,
-                        Secuencia = info.Secuencia
-                    });
+                        Context.ro_empleado_x_CuentaContable.Add(new ro_empleado_x_CuentaContable
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdEmpleado = info.IdEmpleado,
+                            IdCuentacon = info.IdCuentacon,
+                            IdRubro = info.IdRubro,
+                            Observacion = info.Observacion,
+                            Secuencia = info.Secuencia
+                        });
+                    }
                     Context.SaveChanges();
                 }
                 return true;

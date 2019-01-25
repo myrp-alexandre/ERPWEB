@@ -81,7 +81,7 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        
+
         settings.Columns.Add("IdEmpleado","ID").Width=Unit.Percentage(10);
         settings.Columns.Add("em_codigo","Código").Width=Unit.Percentage(10);
         settings.Columns.Add("pe_cedulaRuc", "Cédula").Width = Unit.Percentage(10);
@@ -121,7 +121,23 @@
                 }).Render();
             });
         });
+        settings.Columns.Add(column =>
+        {
 
+            column.Caption = "Cuenta contable";
+            column.Name = "Cuenta contable";
+            //  settings.FormatConditions.AddColorScale("cargas", GridConditionColorScaleFormat.BlueWhiteRed);
+            column.Width = Unit.Percentage(10);
+            column.SetDataItemTemplateContent(container =>
+            {
+                Html.DevExpress().HyperLink(hyperlink =>
+                {
+                    var keyValue = DataBinder.Eval(container.DataItem, "IdEmpleado");
+                    hyperlink.Properties.Text = "Cuenta contable";
+                    hyperlink.NavigateUrl = Url.Action("Index", "EmpleadoCuentaContable", new { IdEmpresa = DataBinder.Eval(container.DataItem, " IdEmpresa"), IdEmpleado = keyValue });
+                }).Render();
+            });
+        });
 
     });
 }

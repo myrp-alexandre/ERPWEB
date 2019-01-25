@@ -51,7 +51,7 @@
                             @Html.Partial("_CmbArea_reportes",Model.IdArea)
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdTipoNomina">Departamento</label>
                             @Html.DevExpress().ComboBoxFor(q => q.IdDepartamento, settings =>
@@ -71,7 +71,6 @@
                     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                     settings.Properties.AllowNull = true;
                 }).BindList(ViewBag.lst_dep).GetHtml()
-                     @Html.ValidationMessageFor(q => q.IdDepartamento, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

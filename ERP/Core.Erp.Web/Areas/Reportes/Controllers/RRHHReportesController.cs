@@ -325,12 +325,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             ro_departamento_Bus bus_dep = new ro_departamento_Bus();
             var lst_dep = bus_dep.get_list(IdEmpresa, false);
-            lst_dep.Add(new ro_departamento_Info
-            {
-                IdEmpresa = IdEmpresa,
-                IdDepartamento = 0,
-                de_descripcion = "TODOS"
-            }); ViewBag.lst_dep = lst_dep;
+            ViewBag.lst_dep = lst_dep;
 
         }
         public ActionResult ROL_012( )
@@ -734,10 +729,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSucursal = 0,
-                IdNomina = 0,
-                IdNominaTipoLiqui = 0, 
-                IdPeriodo = 0,
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdDivision = 0,
                 IdArea = 0, 
                 IdDepartamento = 0
