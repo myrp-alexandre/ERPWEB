@@ -27,6 +27,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_contrato_Bus bus_contrato = new ro_contrato_Bus();
         List<ro_rubro_tipo_Info> lst_rubros = new List<ro_rubro_tipo_Info>();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        ro_jornada_Bus bus_jornada = new ro_jornada_Bus();
 
         int IdEmpresa = 0;
         #endregion
@@ -77,6 +78,20 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return bus_sucursal.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
         }
 
+
+        public ActionResult CmbJornada()
+        {
+            int model = new int();
+            return PartialView("_CmbJornada", model);
+        }
+        public List<ro_jornada_Info> get_list_bajo_demanda_jornada(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_jornada.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public ro_jornada_Info get_info_bajo_demanda_jornada(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_jornada.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
+        }
         #endregion
 
         #region Vistas
@@ -320,6 +335,19 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return PartialView("_GridViewPartial_empleado_novedad_det", model);
         }
         #endregion
+
+        #region Json
+        public JsonResult getTipoNominaEmpleado(int IdEmpresa = 0, int IdEmpleado = 0)
+        {
+            var IdNomina_Tipo = 0;
+
+            var info_empleado = bus_contrato.get_info_contrato_empleado(IdEmpresa, IdEmpleado);
+            IdNomina_Tipo = info_empleado== null ? 0 : Convert.ToInt32(info_empleado.IdNomina);
+       
+            return Json(IdNomina_Tipo, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         private void cargar_combos_detalle()
         {
             int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);

@@ -74,6 +74,7 @@ namespace Core.Erp.Data.RRHH
                         IdNovedad = Entity.IdNovedad ,
                         IdNomina_Tipo = Entity.IdNomina_Tipo,
                         IdNomina_TipoLiqui = Entity.IdNomina_TipoLiqui,
+                        IdJornada = Entity.IdJornada,
                         IdEmpleado = Entity.IdEmpleado,
                         Fecha = Entity.Fecha,
                         Estado = Entity.Estado,
@@ -127,6 +128,7 @@ namespace Core.Erp.Data.RRHH
                         IdNomina_Tipo = info.IdNomina_Tipo,
                         IdNomina_TipoLiqui=info.IdNomina_TipoLiqui,
                         IdEmpleado=info.IdEmpleado,
+                        IdJornada = info.IdJornada,
                         Fecha=info.Fecha.Date,
                         IdSucursal=IdSucursa,
                         Observacion=info.Observacion,                     
@@ -154,7 +156,9 @@ namespace Core.Erp.Data.RRHH
                     ro_empleado_Novedad Entity = Context.ro_empleado_Novedad.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado && q.IdNovedad==info.IdNovedad);
                     if (Entity == null)
                         return false;
+                    Entity.IdEmpleado = info.IdEmpleado;
                     Entity.IdNomina_Tipo = info.IdNomina_Tipo;
+                    Entity.IdJornada = info.IdJornada;
                     Entity.IdNomina_TipoLiqui = info.IdNomina_TipoLiqui;
                     Entity.Observacion =( info.Observacion)==null?"": info.Observacion;
                     Entity.Fecha = info.Fecha.Date;

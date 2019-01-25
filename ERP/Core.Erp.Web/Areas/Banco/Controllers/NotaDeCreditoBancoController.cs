@@ -67,6 +67,22 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         #endregion
 
+        #region Metodos ComboBox tipo de nota
+        public ActionResult CmbTipoNota()
+        {
+            ba_Cbte_Ban_Info model = new ba_Cbte_Ban_Info();
+            return PartialView("_CmbTipoNota", model);
+        }
+        public List<ba_tipo_nota_Info> get_list_bajo_TipoNota(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_tipo_nota.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public ba_tipo_nota_Info get_info_bajo_demanda_TipoNota(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_tipo_nota.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         #region Index
         public ActionResult Index()
         {

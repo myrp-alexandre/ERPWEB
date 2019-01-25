@@ -145,5 +145,17 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
+        public ro_contrato_Info get_info_contrato_empleado(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                return odata.get_info_contrato_empleado(IdEmpresa, IdEmpleado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -16,38 +16,59 @@
     @Html.HiddenFor(q => q.IdNovedad)
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="IdProveedor">Empleado</label>
                     @Html.Partial("_CmbEmpleado_novedades", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-2 col-md-offset-2">
+                <div class="form-group">
+                    <label for="Fecha">Fecha Novedad*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
+                        {
+                            settings.Name = "Fecha";
+                            settings.Properties.UseMaskBehavior = true;
+                            settings.Properties.EditFormat = EditFormat.Date;
+                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdContrato_Tipo">Nómina*</label>
                     @Html.DropDownListFor(q => q.IdNomina_Tipo, new SelectList(ViewBag.lst_nomina, "IdNomina_Tipo", "Descripcion"), new { @class = "form-control", @id = "IdNomina_Tipo" })
                     @Html.ValidationMessageFor(q => q.IdNomina_Tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdContrato_Tipo">Tipo liquidación de nómina*</label>
                     @Html.DropDownListFor(q => q.IdNomina_TipoLiqui, new SelectList(ViewBag.lst_nomina_tipo, "IdNomina_TipoLiqui", "DescripcionProcesoNomina"), new { @class = "form-control", @id = "IdNomina_TipoLiqui" })
                     @Html.ValidationMessageFor(q => q.IdNomina_TipoLiqui, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdNomina_TipoLiqui">Jornada</label>
+                    @Html.Partial("_CmbJornada", Model.IdJornada)
+                </div>
+            </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -55,30 +76,6 @@
                     <label for="cb_Observacion">Observación</label>
                     @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="pe_fechaNacimiento">Fecha Novedad*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q=> q.Fecha, settings =>
-                    {
-                        settings.Name = "Fecha";
-                        settings.Properties.UseMaskBehavior = true;
-                        settings.Properties.EditFormat = EditFormat.Date;
-                        settings.Properties.EditFormatString = "dd/MM/yyyy";
-                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                    }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
-                    </div>
                 </div>
             </div>
         </div>
@@ -104,15 +101,34 @@
 }
 
 <script>
-
-
             $("#IdNomina_Tipo").change(function () {
                 $("#IdNomina_TipoLiqui").empty();
                 cargar_tipo_liquidacion_nomina();
 
             });
 
+            function setTipoNominaEmpleado() {
+                var datos = {
+                    IdEmpresa: $('#IdEmpresa').val(),
+                    IdEmpleado: IdEmpleado.GetValue(),
+                }
 
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("getTipoNominaEmpleado", "EmpleadoNovedad", new { Area = "RRHH" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#IdNomina_Tipo").val(data);
+                    },
+                    error: function (error) {
+                    }
+                });
+            };
 
 
             function cargar_tipo_liquidacion_nomina() {

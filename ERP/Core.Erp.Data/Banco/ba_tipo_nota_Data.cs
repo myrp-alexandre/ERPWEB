@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.Banco;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -186,5 +187,92 @@ namespace Core.Erp.Data.Banco
             }
         }
 
+        public List<ba_tipo_nota_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<ba_tipo_nota_Info> Lista = new List<ba_tipo_nota_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+
+            return Lista;
+        }
+
+        public ba_tipo_nota_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info_demanda(IdEmpresa, Convert.ToDecimal(args.Value));
+        }
+
+        public ba_tipo_nota_Info get_info_demanda(int IdEmpresa, decimal IdTipoNota)
+        {
+            try
+            {
+                ba_tipo_nota_Info info = new ba_tipo_nota_Info();
+                using (Entities_banco Context = new Entities_banco())
+                {
+                    info = (from q in Context.ba_tipo_nota
+                            where q.IdEmpresa == IdEmpresa
+                            && q.IdTipoNota == IdTipoNota
+                            select new ba_tipo_nota_Info
+                            {
+                                Descripcion = q.Descripcion,
+                                IdTipoNota = q.IdTipoNota
+
+                            }).FirstOrDefault();
+                }
+
+                return info;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ba_tipo_nota_Info> get_list(int IdEmpresa, int skip, int take, string filter)
+        {
+            try
+            {
+                List<ba_tipo_nota_Info> Lista = new List<ba_tipo_nota_Info>();
+                Entities_banco Context = new Entities_banco();
+                var lst = (from
+                          p in Context.ba_tipo_nota
+                           where
+                            p.IdEmpresa == IdEmpresa
+                            && (p.IdTipoNota.ToString() + " " + p.Descripcion).Contains(filter)
+                           select new
+                           {
+                               p.IdEmpresa,
+                               p.IdTipoNota,
+                               p.IdCtaCble,
+                               p.Descripcion,
+                               p.Tipo,
+                               p.Estado
+                           })
+                             .OrderBy(p => p.IdTipoNota)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+                foreach (var q in lst)
+                {
+                    Lista.Add(new ba_tipo_nota_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdTipoNota = q.IdTipoNota,
+                        Descripcion = q.Descripcion
+                    });
+                }
+                Context.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

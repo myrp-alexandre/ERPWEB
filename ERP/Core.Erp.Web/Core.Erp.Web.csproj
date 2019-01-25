@@ -9766,8 +9766,10 @@
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Anular.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_007.cshtml" />
     <Content Include="Areas\RRHH\Views\ImportacionNovedades\_CmbSucursal.cshtml" />
-    <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbSucursal.cshtml" />
+    <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbJornada.cshtml" />
     <Content Include="Areas\RRHH\Views\Contrato\_CmbSucursal.cshtml" />
+    <Content Include="Areas\RRHH\Views\EmpleadoNovedad\_CmbSucursal.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\_CmbTipoNota.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

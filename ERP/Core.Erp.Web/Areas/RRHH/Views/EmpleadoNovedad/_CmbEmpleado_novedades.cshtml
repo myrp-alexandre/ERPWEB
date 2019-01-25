@@ -15,6 +15,7 @@
         settings.Properties.ValueField = "IdEntidad";
         settings.Properties.ValueType = typeof(decimal);
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){setTipoNominaEmpleado();}";
         settings.Properties.NullText = "== Seleccione ==";
 
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);

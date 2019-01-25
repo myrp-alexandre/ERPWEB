@@ -57,7 +57,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdTipoNota">Tipo de nota:*</label>
-                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "IdTipoNota", "Descripcion"), new { @class = "form-control", @id = "IdTipoNota" })
+                    @Html.Partial("_CmbTipoNota", Model.IdTipoNota)
                     @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -159,9 +159,7 @@
         $("#IdBanco").change(function () {
             armar_diario();
         });
-        $("#IdTipoNota").change(function () {
-            armar_diario();
-        });
+
         $("#cb_Valor").change(function () {
             armar_diario();
             actualizarGridDetFlujo();
@@ -275,7 +273,7 @@ function GetListBancoPorSucursal() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdBanco: $("#IdBanco").val(),
-            IdTipoNota: $("#IdTipoNota").val(),
+            IdTipoNota: IdTipoNota.GetValue(),
             IdTransaccionSession: $("#IdTransaccionSession").val(),
             Valor: $("#cb_Valor").val()
         }

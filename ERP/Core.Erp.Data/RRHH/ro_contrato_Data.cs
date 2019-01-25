@@ -402,6 +402,41 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
+        public ro_contrato_Info get_info_contrato_empleado(int IdEmpresa, decimal IdEmpleado)
+        {
+            try
+            {
+                ro_contrato_Info info = new ro_contrato_Info();
 
+                using (Entities_rrhh Context = new Entities_rrhh())
+                {
+                    ro_contrato Entity = Context.ro_contrato.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdEmpleado == IdEmpleado && q.Estado == "A");
+                    if (Entity == null) return null;
+
+                    info = new ro_contrato_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdEmpleado = Entity.IdEmpleado,
+                        IdContrato = Entity.IdContrato,
+                        IdContrato_Tipo = Entity.IdContrato_Tipo,
+                        Observacion = Entity.Observacion,
+                        FechaInicio = Entity.FechaInicio.Date,
+                        FechaFin = Entity.FechaFin.Date,
+                        NumDocumento = Entity.NumDocumento,
+                        EstadoContrato = Entity.EstadoContrato,
+                        Estado = Entity.Estado,
+                        Sueldo = Entity.Sueldo,
+                        IdNomina = Entity.IdNomina,
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
