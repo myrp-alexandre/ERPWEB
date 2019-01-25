@@ -1317,6 +1317,9 @@
     <Compile Include="ro_empleado_proyeccion_gastos_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
+    <Compile Include="ro_empleado_x_CuentaContable.cs">
+      <DependentUpon>Model_rrhh.tt</DependentUpon>
+    </Compile>
     <Compile Include="ro_empleado_x_division_x_area.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
@@ -1494,6 +1497,7 @@
     <Compile Include="RRHH\ro_empleado_novedad_Data.cs" />
     <Compile Include="RRHH\ro_empleado_novedad_det_Data.cs" />
     <Compile Include="RRHH\ro_empleado_proyeccion_gastos_det_Data.cs" />
+    <Compile Include="RRHH\ro_empleado_x_CuentaContable_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_division_x_area_Data.cs" />
     <Compile Include="RRHH\ro_empleado_x_horario_Data.cs" />
     <Compile Include="RRHH\ro_empleado_proyeccion_gastos_Data.cs" />
