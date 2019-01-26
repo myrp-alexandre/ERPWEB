@@ -92,6 +92,8 @@
             column.FieldName = "Valor";
             column.Caption = "Total";
             column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
@@ -105,6 +107,7 @@
         {
             column.FieldName = "ValorCancelado";
             column.Caption = "Total cancelado";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
@@ -120,6 +123,8 @@
             column.FieldName = "Saldo";
             column.Caption = "Saldo";
             column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
