@@ -167,7 +167,7 @@ namespace Core.Erp.Data.RRHH
                                     IdNomina_Tipo = info.IdNomina_Tipo,
                                     IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
                                     IdEmpleado =Convert.ToInt32( item.IdEmpleado),
-                                    Fecha = info.pe_FechaFin.Date,
+                                    Fecha = DateTime.Now.Date,
 
                                     Observacion = info.Observacion == null ? "" : info.Observacion,
                                     Estado = "A",
@@ -180,7 +180,7 @@ namespace Core.Erp.Data.RRHH
                                 {
                                     IdEmpresa = info.IdEmpresa,
                                     IdNovedad =IdNovedad,
-                                    FechaPago = info.pe_FechaFin.Date,
+                                    FechaPago = DateTime.Now.Date,
                                     IdRubro = info_rubros_calculados.IdRubro_novedad_proceso,
                                     Valor = item.Valor,
                                     Observacion = item.Observacion,
