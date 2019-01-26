@@ -9,6 +9,8 @@ namespace Core.Erp.Data.RRHH
 {
    public class ro_NominasPagosCheques_Data
     {
+        ro_empleado_novedad_Data odata_novedad = new ro_empleado_novedad_Data();
+
         public List<ro_NominasPagosCheques_Info> get_list(int IdEmpresa, DateTime Fechainicio, DateTime FechaFin, bool mostrar_anulados)
         {
             try
@@ -110,8 +112,9 @@ namespace Core.Erp.Data.RRHH
         {
             try
             {
-                int? orden = 0;
                 int secuencia = 1;
+                decimal IdNovedad = odata_novedad.get_id(info.IdEmpresa);
+
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
                     var info_rubros_calculados = Context.ro_rubros_calculados.Where(v => v.IdEmpresa == info.IdEmpresa).FirstOrDefault();
@@ -155,29 +158,40 @@ namespace Core.Erp.Data.RRHH
                         {
                             if (info_rubros_calculados.IdRubro_novedad_proceso != null)
                             {
-                                var info_rol = Context.ro_rol.Where(v => v.IdEmpresa == info.IdEmpresa
-                                  && v.IdNominaTipo == info.IdNomina_Tipo
-                                  && v.IdNominaTipoLiqui == info.IdNomina_TipoLiqui
-                                  && v.IdPeriodo == info.IdPeriodo
-                                  && v.IdSucursal == item.IdSucursal
-                                ).FirstOrDefault();
-                                if (info_rol != null)
+
+                                ro_empleado_Novedad Entity_nov = new ro_empleado_Novedad
                                 {
-                                    orden = Context.ro_rubro_tipo.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdRubro == info_rubros_calculados.IdRubro_novedad_proceso).FirstOrDefault().ru_orden;
-                                    ro_rol_detalle rol_det = new ro_rol_detalle
-                                    {
-                                        IdEmpresa=info.IdEmpresa,
-                                        IdRol=info_rol.IdRol,
-                                        IdEmpleado=Convert.ToDecimal( item.IdEmpleado),
-                                        IdRubro=info_rubros_calculados.IdRubro_novedad_proceso,
-                                        Orden=orden==null?0:Convert.ToInt32( orden),
-                                        Valor=item.Valor,
-                                        rub_visible_reporte=true,
-                                        Observacion="Valorpago en cheque",
-                                        IdSucursal = item.IdSucursal,
-                                    };
-                                    Context.ro_rol_detalle.Add(rol_det);
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdSucursal = item.IdSucursal,
+                                    IdNovedad  = IdNovedad,
+                                    IdNomina_Tipo = info.IdNomina_Tipo,
+                                    IdNomina_TipoLiqui = info.IdNomina_TipoLiqui,
+                                    IdEmpleado =Convert.ToInt32( item.IdEmpleado),
+                                    Fecha = info.pe_FechaFin.Date,
+
+                                    Observacion = info.Observacion == null ? "" : info.Observacion,
+                                    Estado = "A",
+                                    IdUsuario = info.IdUsuario,
+                                    Fecha_Transac  = DateTime.Now
                                 };
+                                Context.ro_empleado_Novedad.Add(Entity_nov);
+
+                                ro_empleado_novedad_det Entity_nov_det = new ro_empleado_novedad_det
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdNovedad =IdNovedad,
+                                    FechaPago = info.pe_FechaFin.Date,
+                                    IdRubro = info_rubros_calculados.IdRubro_novedad_proceso,
+                                    Valor = item.Valor,
+                                    Observacion = item.Observacion,
+                                    EstadoCobro = "PEN",
+                                    Secuencia = 1
+                                };
+                                Context.ro_empleado_novedad_det.Add(Entity_nov_det);
+                                IdNovedad++;
+
+
+
                             }
                         }
 
