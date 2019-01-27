@@ -191,6 +191,21 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <div class="form-group">
+                        <label for="rub_AplicaIR"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.rub_AplicaIR, settings =>
+                       {
+                           settings.Name = "rub_AplicaIR";
+                           settings.Text = "Aplica I.R";
+
+                       }).GetHtml()
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="form-group">
                         <label for="rub_acumula_descuento"></label>
                         @Html.DevExpress().CheckBoxFor(q => q.rub_acumula_descuento, settings =>
                        {
