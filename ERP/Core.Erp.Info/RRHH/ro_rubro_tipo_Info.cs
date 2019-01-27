@@ -47,6 +47,7 @@ namespace Core.Erp.Info.RRHH
         public bool se_distribuye { get; set; }
         public bool rub_AplicaIR { get; set; }
 
+        public string rub_GrupoResumen { get; set; }
 
     }
 }

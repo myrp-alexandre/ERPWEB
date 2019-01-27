@@ -18,6 +18,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_catalogo_Bus bus_catalogo = new ro_catalogo_Bus();
         ro_rubro_tipo_Bus bus_rubro = new ro_rubro_tipo_Bus();
         List<ct_plancta_Info> lst_plancuenta = new List<ct_plancta_Info>();
+        List<ro_catalogo_Info> lst_grupo_rep_gene = new List<ro_catalogo_Info>();
+
         Bus.Contabilidad.ct_plancta_Bus bus_plancuenta = new Bus.Contabilidad.ct_plancta_Bus();
         public ActionResult Index()
         {
@@ -162,10 +164,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 lst_tipo_campo = bus_catalogo.get_list_x_tipo(13);
                 lst_grupo = bus_catalogo.get_list_x_tipo(14);
                 lst_plancuenta = bus_plancuenta.get_list(GetIdEmpresa(), false, true);
+                lst_grupo_rep_gene = bus_catalogo.get_list_x_tipo(43);
 
                 ViewBag.lst_tipo_rubro = lst_tipo_rubro;
                 ViewBag.lst_tipo_campo = lst_tipo_campo;
                 ViewBag.lst_grupo = lst_grupo;
+                ViewBag.lst_grupo_rep_gene = lst_grupo_rep_gene;
                 ViewBag.lst_plancuenta = lst_plancuenta;
 
             }

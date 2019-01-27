@@ -111,7 +111,7 @@ namespace Core.Erp.Data.RRHH
                                     ru_estado = q.ru_estado,
                                      rub_acumula_descuento = q.rub_acumula_descuento,
                                      rub_AplicaIR=q.rub_AplicaIR,
-
+                                     rub_GrupoResumen=q.rub_GrupoResumen,
                                      EstadoBool = q.ru_estado == "A" ? true : false
                                  }).ToList();
                     else
@@ -134,6 +134,7 @@ namespace Core.Erp.Data.RRHH
                                      ru_estado = q.ru_estado,
                                      rub_acumula_descuento = q.rub_acumula_descuento,
                                      rub_AplicaIR = q.rub_AplicaIR,
+                                     rub_GrupoResumen = q.rub_GrupoResumen,
                                      EstadoBool = q.ru_estado == "A" ? true : false
 
                                  }).ToList();
@@ -258,7 +259,8 @@ namespace Core.Erp.Data.RRHH
                         rub_aplica_IESS=Entity.rub_aplica_IESS,
                         rub_acumula_descuento=Entity.rub_acumula_descuento,
                         se_distribuye = Entity.se_distribuye,
-                        rub_AplicaIR=Entity.rub_AplicaIR
+                        rub_AplicaIR=Entity.rub_AplicaIR,
+                        rub_GrupoResumen=Entity.rub_GrupoResumen
                         
                     };
                 }
@@ -321,7 +323,8 @@ namespace Core.Erp.Data.RRHH
                         ru_estado =  "A",
                         Fecha_Transac =  DateTime.Now,
                         se_distribuye = info.se_distribuye,
-                        rub_AplicaIR=info.rub_AplicaIR
+                        rub_AplicaIR=info.rub_AplicaIR,
+                        rub_GrupoResumen=info.rub_GrupoResumen,
                     };
                     Context.ro_rubro_tipo.Add(Entity);
                     Context.SaveChanges();
@@ -361,6 +364,7 @@ namespace Core.Erp.Data.RRHH
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
                     Entity.rub_AplicaIR = info.rub_AplicaIR;
+                    Entity.rub_GrupoResumen = info.rub_GrupoResumen;
                     Context.SaveChanges();
                 }
 
