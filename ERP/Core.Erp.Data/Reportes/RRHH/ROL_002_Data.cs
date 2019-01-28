@@ -47,12 +47,12 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  IdSucursal = q.IdSucursal,
                                  pe_apellido = q.pe_apellido,
                                  pe_nombre = q.pe_nombre,
-                                 ru_tipo = q.ru_tipo                        
+                                 ru_tipo = q.ru_tipo   ,
+                                 IdRubro=q.IdRubro                     
                                  
                              }).ToList();
                 }
 
-                Lista.ForEach(v => { if (v.Valor >= 0) v.Ingresos = v.Valor; else v.Egreso = v.Valor * -1; });
                 return Lista;
             }
             catch (Exception)

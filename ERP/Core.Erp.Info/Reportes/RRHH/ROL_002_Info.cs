@@ -34,6 +34,7 @@ namespace Core.Erp.Info.Reportes.RRHH
 
         public double Ingresos { get; set; }
         public double Egreso { get; set; }
+        public string IdRubro { get; set; }
 
         public string mes_nom { get; set; }
     }

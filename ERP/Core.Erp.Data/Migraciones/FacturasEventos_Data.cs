@@ -24,6 +24,7 @@ namespace Core.Erp.Data.Migraciones
                              where q.fecha>=Fi
                              && q.fecha<=ff
                              && q.estado_aprobacion==null
+                             && q.bd_est==1
                              select new FacturasEventos_Info
                              {
                                  cod_fact=q.cod_fact,
@@ -36,7 +37,8 @@ namespace Core.Erp.Data.Migraciones
                                  subtotal=q.subtotal,
                                  v_iva=q.v_iva,
                                  total=q.total,
-                                 fecha=q.fecha
+                                 fecha=q.fecha,
+                                 
                                  
                              }
                            ).ToList();

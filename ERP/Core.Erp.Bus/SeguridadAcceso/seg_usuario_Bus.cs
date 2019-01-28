@@ -83,6 +83,7 @@ namespace Core.Erp.Bus.SeguridadAcceso
         {
             try
             {
+                info.Contrasena = "1234";
                 info.Contrasena = cl_funciones.convertir_string_MD5Hash(info.Contrasena);
                 return odata.guardarDB(info);
             }

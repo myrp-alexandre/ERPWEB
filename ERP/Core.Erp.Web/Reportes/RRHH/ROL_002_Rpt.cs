@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Core.Erp.Bus.General;
 using System.Linq;
 using Core.Erp.Info.RRHH;
+using Core.Erp.Bus.RRHH;
 
 namespace Core.Erp.Web.Reportes.RRHH
 {
@@ -31,8 +32,9 @@ namespace Core.Erp.Web.Reportes.RRHH
                 lbl_empresa.Text = empresa;
                 lbl_usuario.Text = usuario;
                 ro_rubros_calculados_Info info_rubros_calculados = new ro_rubros_calculados_Info();
-
-                int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ro_rubros_calculados_Bus bus_rubros_calculados = new ro_rubros_calculados_Bus();
+            info_rubros_calculados = bus_rubros_calculados.get_info(Convert.ToInt32(Core.Erp.Web.Helps.SessionFixed.IdEmpresa));
+            int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
                 int IdNomina = p_IdNomina.Value == null ? 0 : Convert.ToInt32(p_IdNomina.Value);
                 int IdNominaTipo = p_IdNominaTipo.Value == null ? 0 : Convert.ToInt32(p_IdNominaTipo.Value);
                 int IdPeriodo = p_IdPeriodo.Value == null ? 0 : Convert.ToInt32(p_IdPeriodo.Value);
@@ -40,14 +42,14 @@ namespace Core.Erp.Web.Reportes.RRHH
 
                 ROL_002_Bus bus_rpt = new ROL_002_Bus();
                 List<ROL_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
-
+               lst_rpt = lst_rpt.Where(v =>v.IdRubro== info_rubros_calculados.IdRubro_tot_pagar).ToList();
                 tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
                 var emp = bus_empresa.get_info(IdEmpresa);
                 ImageConverter obj = new ImageConverter();
                 lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
 
                 Lista_ingreso = (from q in lst_rpt
-                                 where q.Ingresos > 0
+                                 where q.Valor > 0
                                  group q by new
                                  {
                                      q.IdEmpresa,
@@ -71,7 +73,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  }).ToList();
 
                 Lista_egreso = (from q in lst_rpt
-                               where q.Egreso > 0
+                               where q.Valor < 0
                                 group q by new
                                 {
                                     q.IdEmpresa,
