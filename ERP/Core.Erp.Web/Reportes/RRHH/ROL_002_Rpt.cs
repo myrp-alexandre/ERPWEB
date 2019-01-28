@@ -8,6 +8,7 @@ using Core.Erp.Bus.Reportes.RRHH;
 using System.Collections.Generic;
 using Core.Erp.Bus.General;
 using System.Linq;
+using Core.Erp.Info.RRHH;
 
 namespace Core.Erp.Web.Reportes.RRHH
 {
@@ -29,6 +30,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                 lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
                 lbl_empresa.Text = empresa;
                 lbl_usuario.Text = usuario;
+                ro_rubros_calculados_Info info_rubros_calculados = new ro_rubros_calculados_Info();
 
                 int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
                 int IdNomina = p_IdNomina.Value == null ? 0 : Convert.ToInt32(p_IdNomina.Value);
