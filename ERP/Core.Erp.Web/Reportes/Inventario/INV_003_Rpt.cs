@@ -38,5 +38,21 @@ namespace Core.Erp.Web.Reportes.Inventario
             List<INV_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdProducto, IdCategoria, IdLinea, IdGrupo, IdSubgrupo, fecha_corte, mostrar_stock_0, IdMarca);
             this.DataSource = lst_rpt;
         }
+
+        private void GroupHeader7_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (!Convert.ToBoolean(p_mostrar_agrupados.Value))
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void GroupFooter2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (!Convert.ToBoolean(p_mostrar_agrupados.Value))
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

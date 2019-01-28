@@ -192,6 +192,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdMarca.Value = model.IdMarca;
             report.p_fecha_corte.Value = model.fecha_fin;
             report.p_mostrar_stock_0.Value = model.mostrar_saldos_en_0;
+            report.p_mostrar_agrupados.Value = model.mostrar_agrupado;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
 
@@ -212,6 +213,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdSubgrupo.Value = model.IdSubGrupo;
             report.p_fecha_corte.Value = model.fecha_fin;
             report.p_mostrar_stock_0.Value = model.mostrar_saldos_en_0;
+            report.p_mostrar_agrupados.Value = model.mostrar_agrupado;
             report.p_IdMarca.Value = model.IdMarca;
             cargar_combos(model);
 
