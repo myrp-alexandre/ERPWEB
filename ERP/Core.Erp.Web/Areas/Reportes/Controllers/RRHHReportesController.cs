@@ -621,6 +621,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         public ActionResult ROL_020(int IdNominaTipo = 0, int IdNomina = 0, int IdPeriodo = 0, int IdSucursal=0)
         {
             cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ROL_020_Rpt reporte = new ROL_020_Rpt();
             reporte.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             reporte.p_IdNominaTipo.Value = IdNominaTipo;
