@@ -10,8 +10,9 @@
  as
  begin 
    declare @dias int
+
    if(@em_status='EST_ACT')
-   set @dias= iif(@fecha_ingreso<=@Fecha_inicio,DATEDIFF(day ,@Fecha_inicio, @Fecha_fin)+1, DATEDIFF(day ,@fecha_ingreso, @Fecha_fin)+1)
+   set @dias= iif(@fecha_ingreso<=@Fecha_inicio,DATEDIFF(day ,@Fecha_inicio, @Fecha_fin)+1, DATEDIFF(day ,@fecha_ingreso, @Fecha_fin))
    if(@em_status='EST_PLQ')
    set @dias= DATEDIFF(day ,@Fecha_inicio, @Fecha_salida)+1
 

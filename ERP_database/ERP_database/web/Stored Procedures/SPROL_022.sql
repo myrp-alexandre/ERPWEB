@@ -16,92 +16,99 @@ BEGIN
 --	@idperiodo int
 
 
---	set @idempresa =1
---	set @idnomina_tipo =1
---	set @idnomina_Tipo_liq =2
---	set @idperiodo =201901
-	
-	declare
-	@IdRubroTotalPagar int
+--set @idempresa =1
+--set @idnomina_tipo =1
+--set @idnomina_Tipo_liq =2
+--set @idperiodo =201901
 
-	select @IdRubroTotalPagar=IdRubro_tot_pagar from ro_rubros_calculados where IdEmpresa=@idempresa
+declare 
+@FechaInicio date,
+@FechaFin date,
+@IdRubroMatutino varchar(50),
+@IdRubroVespertino varchar(50)
 
-	delete web.ro_SPROL_022 where IdEmpresa=@idempresa and IdPeriodo=@idperiodo
+delete web.ro_SPROL_022 where IdEmpresa=@idempresa and IdPeriodo=@idperiodo
+select @IdRubroMatutino=IdRubro_horas_matutina, @IdRubroVespertino=IdRubro_horas_vespertina from ro_rubros_calculados where IdEmpresa=IdEmpresa 
 
-	insert  into web.ro_SPROL_022(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor,Idsucursal, IdArea,ru_descripcion)	
-	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor, D.IdSucursal,emp.IdArea,r.ru_descripcion
-	
-	FROM            dbo.ro_rol_detalle AS D INNER JOIN
-                         dbo.ro_empleado AS emp ON D.IdEmpresa = emp.IdEmpresa AND D.IdEmpleado = emp.IdEmpleado INNER JOIN
-                         dbo.ro_rol AS Ro ON D.IdEmpresa = Ro.IdEmpresa AND D.IdRol = Ro.IdRol INNER JOIN
-                         dbo.ro_rubro_tipo AS R ON D.IdEmpresa = R.IdEmpresa AND D.IdRubro = R.IdRubro
+select @FechaInicio=pe_FechaIni, @FechaFin=pe_FechaFin from ro_periodo where IdEmpresa=IdEmpresa and IdPeriodo=@idperiodo
+insert into web.ro_SPROL_022
+SELECT        nov_det.IdEmpresa, emp.IdDivision, nov.IdSucursal, nov.IdNomina_TipoLiqui, emp.IdArea, nov.IdEmpleado,  nov.IdJornada,nov.IdNomina_Tipo,hor.IdPeriodo,
+case when  jor.Descripcion=null then '' else jor.Descripcion+'-'+CAST( h_det.NumHoras as varchar) +'-'+CAST( h_det.ValorHora as varchar) end Descripcion, 
+case when  nov.IdJornada is null then rub.ru_descripcion else 'SUELDO POR HORA' end ru_descripcion,
 
-	  where D.IdEmpresa=@idempresa
-	  and IdNominaTipo=@idnomina_tipo
-	  and IdNominaTipoLiqui=@idnomina_Tipo_liq
-	  and IdPeriodo=@idperiodo
-	  and R.IdEmpresa=D.IdEmpresa
-	  and D.IdRubro=R.IdRubro
-	  and ro.IdEmpresa=D.IdEmpresa
-	  and ro.IdRol=D.IdRol
-	  And R.ru_tipo='I'
-	  and D.Valor>0
-	  and emp.Pago_por_horas=1
-
-	  -- inserto si tiene saldo zero a pagar 
-	insert  into web.ro_SPROL_022(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor,Idsucursal, IdArea, ru_descripcion)	
-	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor , D.IdSucursal,emp.IdArea, R.ru_descripcion
-
-	FROM            dbo.ro_rol_detalle AS D INNER JOIN
-                         dbo.ro_empleado AS emp ON D.IdEmpresa = emp.IdEmpresa AND D.IdEmpleado = emp.IdEmpleado INNER JOIN
-                         dbo.ro_rol AS Ro ON D.IdEmpresa = Ro.IdEmpresa AND D.IdRol = Ro.IdRol INNER JOIN
-                         dbo.ro_rubro_tipo AS R ON D.IdEmpresa = R.IdEmpresa AND D.IdRubro = R.IdRubro
-					
-
-	  where D.IdEmpresa=@idempresa
-	  and IdNominaTipo=@idnomina_tipo
-	  and IdNominaTipoLiqui=@idnomina_Tipo_liq
-	  and IdPeriodo=@idperiodo
-	  and R.IdEmpresa=D.IdEmpresa
-	  and D.IdRubro=R.IdRubro
-	  and ro.IdEmpresa=D.IdEmpresa
-	  and ro.IdRol=D.IdRol
-	  And R.ru_tipo='A'
-	  and D.Valor=0
-	  and D.IdRubro=@IdRubroTotalPagar
-	  and  emp.Pago_por_horas=1
+per.pe_apellido + ' ' + per.pe_nombre AS empleado, 
+cat.ca_descripcion, rub.ru_tipo,
+case when  nov.IdJornada is null then rub.ru_orden else '07' end ru_orden, 
 
 
-	insert  into web.ro_SPROL_022(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor ,Idsucursal, IdArea, ru_descripcion)	
-	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor*-1 ,D.IdSucursal,emp.IdArea, R.ru_descripcion
-	
-FROM            dbo.ro_rol_detalle AS D INNER JOIN
-                         dbo.ro_empleado AS emp ON D.IdEmpresa = emp.IdEmpresa AND D.IdEmpleado = emp.IdEmpleado INNER JOIN
-                         dbo.ro_rol AS Ro ON D.IdEmpresa = Ro.IdEmpresa AND D.IdRol = Ro.IdRol INNER JOIN
-                         dbo.ro_rubro_tipo AS R ON D.IdEmpresa = R.IdEmpresa AND D.IdRubro = R.IdRubro
+SUM(nov_det.Valor)Valor,
 
-	  where D.IdEmpresa=@idempresa
-	  and IdNominaTipo=@idnomina_tipo
-	  and IdNominaTipoLiqui=@idnomina_Tipo_liq
-	  and IdPeriodo=@idperiodo
-	  and R.IdEmpresa=D.IdEmpresa
-	  and D.IdRubro=R.IdRubro
-	  and ro.IdEmpresa=D.IdEmpresa
-	  and ro.IdRol=D.IdRol
-	  And R.ru_tipo='E'
-	  and D.Valor>0
-	  and  emp.Pago_por_horas=1
-	  ------**********************+actualizando concepto para roles.....................
-	  update web.ro_SPROL_022 set ru_descripcion=R.ru_descripcion+'-' + CAST(  CAST( Hd.NumHoras as numeric(10,2)) as varchar) + '-'+  CAST( CAST( Hd.ValorHora as numeric(10,2)) as varchar)
-	FROM            dbo.ro_HorasProfesores AS H INNER JOIN
-                         dbo.ro_HorasProfesores_det AS Hd ON H.IdEmpresa = Hd.IdEmpresa AND H.IdCarga = Hd.IdCarga INNER JOIN
-                         web.ro_SPROL_022 AS r_rmp ON Hd.IdEmpresa = r_rmp.IdEmpresa AND Hd.IdEmpresa_nov = r_rmp.IdEmpleado AND Hd.IdRubro = r_rmp.IdRubro INNER JOIN
-                         dbo.ro_rubro_tipo AS R ON Hd.IdEmpresa = R.IdEmpresa AND Hd.IdRubro = R.IdRubro AND Hd.IdEmpresa = R.IdEmpresa AND Hd.IdRubro = R.IdRubro
+ nov_det.IdRubro
+FROM            dbo.ro_empleado_Novedad AS nov INNER JOIN
+                         dbo.ro_empleado_novedad_det AS nov_det ON nov.IdEmpresa = nov_det.IdEmpresa AND nov.IdNovedad = nov_det.IdNovedad INNER JOIN
+                         dbo.ro_empleado AS emp ON nov.IdEmpresa = emp.IdEmpresa AND nov.IdEmpresa = emp.IdEmpresa AND nov.IdEmpleado = emp.IdEmpleado AND nov.IdEmpleado = emp.IdEmpleado INNER JOIN
+                         dbo.tb_persona AS per ON emp.IdPersona = per.IdPersona INNER JOIN
+                         dbo.ro_rubro_tipo AS rub ON nov_det.IdEmpresa = rub.IdEmpresa AND nov_det.IdRubro = rub.IdRubro INNER JOIN
+                         dbo.ro_HorasProfesores AS hor ON nov.IdEmpresa = hor.IdEmpresa LEFT OUTER JOIN
+                         dbo.ro_HorasProfesores_det AS h_det ON nov.IdEmpresa = h_det.IdEmpresa AND nov.IdNovedad = h_det.IdNovedad AND emp.IdEmpresa = h_det.IdEmpresa AND emp.IdEmpleado = h_det.IdEmpleado AND 
+                         rub.IdEmpresa = h_det.IdEmpresa AND rub.IdRubro = h_det.IdRubro AND hor.IdEmpresa = h_det.IdEmpresa AND hor.IdCarga = h_det.IdCarga LEFT OUTER JOIN
+                         dbo.ro_catalogo AS cat ON rub.rub_grupo = cat.CodCatalogo LEFT OUTER JOIN
+                         dbo.ro_jornada AS jor ON nov.IdEmpresa = jor.IdEmpresa AND nov.IdJornada = jor.IdJornada
+WHERE        (rub.ru_tipo = 'I') 
+and nov_det.FechaPago between @FechaInicio and @FechaFin
+and nov.IdEmpresa=@idempresa
+and nov.IdNomina_Tipo=@idnomina_tipo
+and IdNomina_TipoLiqui=@idnomina_Tipo_liq
+--nd per.pe_nombreCompleto like '%ACEVEDO%'
+--AND nov.IdJornada is not null
+group by  nov_det.IdEmpresa, nov.IdEmpleado, nov.IdJornada, 
+jor.Descripcion, rub.ru_descripcion,
+ per.pe_apellido,
+ per.pe_nombre, 
+ cat.ca_descripcion, rub.ru_tipo, h_det.NumHoras, h_det.ValorHora,
+ rub.ru_orden,
+ emp.IdDivision,emp.IdArea,nov.IdNomina_Tipo, hor.IdPeriodo,
+ nov.IdSucursal,
+ nov.IdNomina_TipoLiqui,
+ nov_det.idrubro
 
-						 where H.IdEmpresa=@idempresa
-						 and H.IdNomina=@idnomina_tipo
-						 and H.IdNominaTipo=@idnomina_Tipo_liq
-						 and h.IdPeriodo=@idperiodo
+ union all 
 
+ SELECT    r.IdEmpresa,emp.IdDivision,r_dt.IdSucursal, r.IdNominaTipoLiqui,  emp.IdArea,emp.IdEmpleado,1,r.IdNominaTipo,r.IdPeriodo, null, rub.ru_descripcion,pers.pe_apellido+' '+pers.pe_nombre, cate.ca_descripcion, rub.ru_tipo, rub.ru_orden, r_dt.Valor ,
+ r_dt.IdRubro  
+FROM            dbo.ro_rol AS r INNER JOIN
+                         dbo.ro_rol_detalle AS r_dt ON r.IdEmpresa = r_dt.IdEmpresa AND r.IdRol = r_dt.IdRol INNER JOIN
+                         dbo.ro_rubro_tipo AS rub ON r_dt.IdEmpresa = rub.IdEmpresa AND r_dt.IdRubro = rub.IdRubro INNER JOIN
+						 dbo.ro_catalogo as cate on cate.CodCatalogo = rub.rub_grupo INNER JOIN
+                         dbo.ro_empleado AS emp ON r_dt.IdEmpresa = emp.IdEmpresa AND r_dt.IdEmpleado = emp.IdEmpleado INNER JOIN
+                         dbo.tb_persona AS pers ON emp.IdPersona = pers.IdPersona
+						 
+						 WHERE  
+						  r_dt.IdEmpresa=@idempresa
+						 and r.IdNominaTipo=@idnomina_tipo
+						 and r.IdNominaTipoLiqui=@idnomina_Tipo_liq
+						 and r.IdPeriodo=@idperiodo
+						 and rub.ru_tipo='I'
+						 and r_dt.IdRubro not in(@IdRubroMatutino,@IdRubroVespertino)
+						 and not exists
+						 (
+						 select * from web.ro_SPROL_022  d
+
+						 where d.IdEmpresa=r_dt.IdEmpresa
+						 and d.IdNomina_Tipo=r.IdNominaTipo
+						 and d.IdNomina_TipoLiqui=r.IdNominaTipoLiqui
+						 and d.IdPeriodo=r.IdPeriodo
+						 and d.IdEmpleado=r_dt.IdEmpleado
+						 and d.IdRubro=r_dt.IdRubro
+
+						 and d.IdEmpresa=@idempresa
+						 and d.IdNomina_Tipo=@idnomina_tipo
+						 and d.IdNomina_TipoLiqui=@idnomina_Tipo_liq
+						 and d.IdPeriodo=@idperiodo
+						 
+						 )
+
+
+						 select * from web.ro_SPROL_022 
 
 END

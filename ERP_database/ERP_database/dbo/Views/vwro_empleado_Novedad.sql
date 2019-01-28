@@ -1,9 +1,8 @@
 ﻿CREATE VIEW dbo.vwro_empleado_Novedad
 AS
 SELECT        dbo.ro_empleado_Novedad.IdEmpresa, dbo.ro_empleado_Novedad.IdNovedad, dbo.ro_empleado_Novedad.IdEmpleado, dbo.ro_empleado_Novedad.IdNomina_Tipo, dbo.ro_empleado_Novedad.IdNomina_TipoLiqui, 
-                         dbo.ro_empleado_Novedad.Fecha, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, 
-                         dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_nombreCompleto, dbo.ro_Nomina_Tipo.Descripcion, dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, dbo.ro_empleado_Novedad.Estado, 
-                         dbo.ro_empleado_Novedad.Observacion
+                         dbo.ro_empleado_Novedad.Fecha, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_nombreCompleto, dbo.ro_Nomina_Tipo.Descripcion, 
+                         dbo.ro_Nomina_Tipoliqui.DescripcionProcesoNomina, dbo.ro_empleado_Novedad.Estado, dbo.ro_empleado_Novedad.Observacion, dbo.ro_empleado_Novedad.IdSucursal
 FROM            dbo.ro_empleado INNER JOIN
                          dbo.ro_empleado_Novedad ON dbo.ro_empleado.IdEmpresa = dbo.ro_empleado_Novedad.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_empleado_Novedad.IdEmpleado INNER JOIN
                          dbo.ro_Nomina_Tipoliqui ON dbo.ro_empleado_Novedad.IdEmpresa = dbo.ro_Nomina_Tipoliqui.IdEmpresa AND dbo.ro_empleado_Novedad.IdNomina_Tipo = dbo.ro_Nomina_Tipoliqui.IdNomina_Tipo AND 
@@ -17,7 +16,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[41] 4[5] 2[19] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -79,7 +78,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = -96
+         Top = 0
          Left = 0
       End
       Begin Tables = 
@@ -140,7 +139,7 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 10
+      Begin ColumnWidths = 15
          Width = 284
          Width = 1500
          Width = 1500
@@ -151,14 +150,21 @@ Begin DesignProperties =
          Width = 1500
          Width = 1500
          Width = 1500
-      End
-   End
-   Begin CriteriaPane = 
-      Begin ColumnWidt', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_Novedad';
+         Width = 1500
+         Width = 1500
+         Width = 1500', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_Novedad';
+
+
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'hs = 11
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'
+         Width = 1500
+         Width = 1500
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
          Table = 1170
@@ -176,6 +182,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'hs = 11
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_Novedad';
+
+
 
 
 GO

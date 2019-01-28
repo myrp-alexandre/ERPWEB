@@ -11,12 +11,14 @@ SELECT        dbo.ro_Departamento.IdDepartamento, dbo.ro_Departamento.de_descrip
                              (SELECT        RUBRO
                                FROM            dbo.vwro_rubros_acumulados_x_empleados AS D
                                WHERE        (IdEmpleado = dbo.ro_empleado.IdEmpleado) AND (IdEmpresa = dbo.ro_empleado.IdEmpresa) AND (IdRubro = 19)) AS Fondos_Reservas, dbo.ro_empleado.IdDivision, dbo.ro_empleado.IdEmpresa, 
-                         dbo.ro_empleado.IdEmpleado, dbo.ro_contrato.IdNomina AS IdTipoNomina, dbo.ro_contrato.EstadoContrato, dbo.ro_empleado.IdArea, dbo.ro_area.Descripcion
+                         dbo.ro_empleado.IdEmpleado, dbo.ro_contrato.IdNomina AS IdTipoNomina, dbo.ro_contrato.EstadoContrato, dbo.ro_empleado.IdArea, dbo.ro_area.Descripcion, dbo.ro_Division.Descripcion AS Division_Descripcion
 FROM            dbo.ro_empleado INNER JOIN
                          dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona INNER JOIN
                          dbo.ro_Departamento ON dbo.ro_empleado.IdEmpresa = dbo.ro_Departamento.IdEmpresa AND dbo.ro_empleado.IdDepartamento = dbo.ro_Departamento.IdDepartamento INNER JOIN
                          dbo.ro_contrato ON dbo.ro_empleado.IdEmpresa = dbo.ro_contrato.IdEmpresa AND dbo.ro_empleado.IdEmpleado = dbo.ro_contrato.IdEmpleado INNER JOIN
-                         dbo.ro_area ON dbo.ro_empleado.IdEmpresa = dbo.ro_area.IdEmpresa AND dbo.ro_empleado.IdArea = dbo.ro_area.IdArea
+                         dbo.ro_area ON dbo.ro_empleado.IdEmpresa = dbo.ro_area.IdEmpresa AND dbo.ro_empleado.IdArea = dbo.ro_area.IdArea INNER JOIN
+                         dbo.ro_Division ON dbo.ro_empleado.IdEmpresa = dbo.ro_Division.IdEmpresa AND dbo.ro_empleado.IdDivision = dbo.ro_Division.IdDivision AND dbo.ro_area.IdEmpresa = dbo.ro_Division.IdEmpresa AND 
+                         dbo.ro_area.IdDivision = dbo.ro_Division.IdDivision
 WHERE        (dbo.ro_empleado.em_status <> 'EST_LIQ') AND (dbo.ro_contrato.EstadoContrato = 'ECT_ACT')
 
 
@@ -25,7 +27,21 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'0
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
       End
    End
    Begin CriteriaPane = 
@@ -51,13 +67,15 @@ End
 
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[56] 4[5] 2[5] 3) )"
+         Configuration = "(H (1[57] 4[5] 2[19] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -119,7 +137,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = 0
+         Top = -192
          Left = 0
       End
       Begin Tables = 
@@ -155,10 +173,10 @@ Begin DesignProperties =
          End
          Begin Table = "ro_contrato"
             Begin Extent = 
-               Top = 0
-               Left = 554
-               Bottom = 275
-               Right = 733
+               Top = 5
+               Left = 705
+               Bottom = 280
+               Right = 884
             End
             DisplayFlags = 280
             TopColumn = 7
@@ -173,6 +191,16 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
+         Begin Table = "ro_Division"
+            Begin Extent = 
+               Top = 270
+               Left = 38
+               Bottom = 400
+               Right = 217
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
       End
    End
    Begin SQLPane = 
@@ -180,21 +208,12 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 14
+      Begin ColumnWidths = 17
          Width = 284
          Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 150', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_014';
+   ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_014';
+
+
 
 
 

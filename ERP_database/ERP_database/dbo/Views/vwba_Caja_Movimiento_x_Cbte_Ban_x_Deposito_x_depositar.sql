@@ -2,7 +2,8 @@
 AS
 SELECT dbo.caj_Caja_Movimiento_det.IdEmpresa, dbo.caj_Caja_Movimiento_det.IdTipocbte, dbo.caj_Caja_Movimiento_det.IdCbteCble, dbo.caj_Caja_Movimiento_det.Secuencia, dbo.cxc_cobro_tipo.tc_descripcion, 
                   dbo.caj_Caja_Movimiento_det.cr_Valor, dbo.caj_Caja_Movimiento.cm_fecha, dbo.caj_Caja_Movimiento.cm_observacion, dbo.caj_Caja_Movimiento_Tipo.tm_descripcion, dbo.caj_Caja_Movimiento.Estado, 
-                  dbo.tb_persona.pe_nombreCompleto, dbo.cxc_cobro.cr_NumDocumento, dbo.caj_Caja.IdCtaCble, dbo.caj_Caja.IdCaja, dbo.caj_Caja.ca_Descripcion, dbo.caj_Caja.IdSucursal cbr_IdSucursal 
+                  dbo.tb_persona.pe_nombreCompleto, dbo.cxc_cobro.cr_NumDocumento, dbo.caj_Caja.IdCtaCble, dbo.caj_Caja.IdCaja, dbo.caj_Caja.ca_Descripcion, ISNULL(dbo.cxc_cobro_x_ct_cbtecble.cbr_IdSucursal , dbo.caj_Caja.IdSucursal) AS cbr_IdSucursal
+                   
 FROM     dbo.caj_Caja_Movimiento_det INNER JOIN
                   dbo.cxc_cobro_tipo ON dbo.caj_Caja_Movimiento_det.IdCobro_tipo = dbo.cxc_cobro_tipo.IdCobro_tipo INNER JOIN
                   dbo.caj_Caja_Movimiento ON dbo.caj_Caja_Movimiento_det.IdEmpresa = dbo.caj_Caja_Movimiento.IdEmpresa AND dbo.caj_Caja_Movimiento_det.IdCbteCble = dbo.caj_Caja_Movimiento.IdCbteCble AND 
