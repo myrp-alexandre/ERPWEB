@@ -110,5 +110,31 @@ namespace Core.Erp.Bus.RRHH
                 throw;
             }
         }
+
+        public List<ro_area_Info> get_list_bajo_demanda_individual(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool MostrarAnulados)
+        {
+            try
+            {
+                return odata.get_list_bajo_demanda_individual(args, IdEmpresa, MostrarAnulados);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ro_area_Info get_info_bajo_demanda_individual(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_info_bajo_demanda_individual(args, IdEmpresa);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

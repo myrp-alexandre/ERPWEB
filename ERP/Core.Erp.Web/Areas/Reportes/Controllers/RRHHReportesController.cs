@@ -97,6 +97,22 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         #endregion
 
+        #region metodo bajo demanda Area Independiente
+        public ActionResult CmbArea_Individual()
+        {
+            SessionFixed.IdDivision = Request.Params["IdDivision"] != null ? Request.Params["IdDivision"].ToString() : SessionFixed.IdDivision;
+            int model = new int();
+            return PartialView("_CmbArea_reportes", model);
+        }
+        public List<ro_area_Info> get_list_bajo_demanda_individual(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_area.get_list_bajo_demanda_individual(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ro_area_Info get_info_bajo_demanda_individual(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_area.get_info_bajo_demanda_individual(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
 
         #region metodo bajo demanda sucursal
         public ActionResult CmbSucursalReportes_RRHH()
