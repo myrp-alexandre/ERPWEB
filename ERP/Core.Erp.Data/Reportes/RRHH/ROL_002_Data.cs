@@ -21,7 +21,12 @@ namespace Core.Erp.Data.Reportes.RRHH
 
                     Context.SPROL_002(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo);
                     Lista = (from q in Context.VWROL_002
-                             where (q.IdSucursal == 0 ? 1==1 : q.IdSucursal == IdSucursal)
+                             where (q.IdSucursal == 0 ? 1==1 : q.IdSucursal == IdSucursal
+                             && q.IdEmpresa == IdEmpresa
+                             && q.IdNominaTipo == IdNomina
+                             && q.IdNominaTipoLiqui == IdNominaTipo
+                             && q.IdPeriodo == IdPeriodo)                             
+                             orderby q.NombreCompleto
                              select new ROL_002_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

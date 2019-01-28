@@ -47,6 +47,7 @@
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.p_IdEmpleado = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -210,11 +211,13 @@
             // 
             this.xrTableCell4.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Valor])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "(sumSum([Valor]))")});
+            this.xrTableCell4.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
             this.xrTableCell4.SnapLineMargin = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
             this.xrTableCell4.StylePriority.UseBorders = false;
+            this.xrTableCell4.StylePriority.UseFont = false;
             this.xrTableCell4.StylePriority.UsePadding = false;
             this.xrTableCell4.StylePriority.UseTextAlignment = false;
             xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
@@ -223,6 +226,11 @@
             this.xrTableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell4.TextFormatString = "{0:n2}";
             this.xrTableCell4.Weight = 0.84594669703872438D;
+            // 
+            // p_IdEmpleado
+            // 
+            this.p_IdEmpleado.Name = "p_IdEmpleado";
+            this.p_IdEmpleado.Visible = false;
             // 
             // ROL_002_Egresos
             // 
@@ -239,6 +247,8 @@
             this.PageHeight = 1169;
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
+            this.p_IdEmpleado});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_002_Egresos_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
@@ -268,5 +278,6 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow2;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdEmpleado;
     }
 }

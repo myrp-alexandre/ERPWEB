@@ -37,5 +37,6 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string IdRubro { get; set; }
 
         public string mes_nom { get; set; }
+        public double TotalPagar { get; set; }
     }
 }
