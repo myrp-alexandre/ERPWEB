@@ -632,6 +632,22 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult ROL_020( cl_filtros_Info model)
+        {
+            ROL_020_Rpt report = new ROL_020_Rpt();
+            cargar_combos(model.IdEmpresa);
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdNomina.Value = model.IdNomina;
+            report.p_IdNominaTipo.Value = model.IdTipoNomina;
+            report.p_IdPeriodo.Value = model.IdPeriodo;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.P_IdArea.Value = model.IdArea;
+            report.P_IdDivision.Value = model.IdDivision;
+            SessionFixed.IdDivision = model.IdDivision.ToString();
+            ViewBag.Report = report;
+            return View(model);
+        }
+
         public ActionResult ROL_021(int IdEmpresa=0, int IdNomina_Tipo = 0, int IdNomina_TipoLiqui = 0,  int IdPeriodo = 0, int IdSucursal=0)
         {
             cl_filtros_Info model = new cl_filtros_Info

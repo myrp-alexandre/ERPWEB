@@ -92,6 +92,8 @@
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdProceso_bancario_tipo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.P_IdDivision = new DevExpress.XtraReports.Parameters.Parameter();
+            this.P_IdArea = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -696,6 +698,20 @@
             this.p_IdProceso_bancario_tipo.Name = "p_IdProceso_bancario_tipo";
             this.p_IdProceso_bancario_tipo.Visible = false;
             // 
+            // P_IdDivision
+            // 
+            this.P_IdDivision.Name = "P_IdDivision";
+            this.P_IdDivision.Type = typeof(short);
+            this.P_IdDivision.ValueInfo = "0";
+            this.P_IdDivision.Visible = false;
+            // 
+            // P_IdArea
+            // 
+            this.P_IdArea.Name = "P_IdArea";
+            this.P_IdArea.Type = typeof(short);
+            this.P_IdArea.ValueInfo = "0";
+            this.P_IdArea.Visible = false;
+            // 
             // ROL_020_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -719,7 +735,9 @@
             this.p_IdNomina,
             this.p_IdPeriodo,
             this.p_IdSucursal,
-            this.p_IdProceso_bancario_tipo});
+            this.p_IdProceso_bancario_tipo,
+            this.P_IdDivision,
+            this.P_IdArea});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_020_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -797,5 +815,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell29;
         public DevExpress.XtraReports.Parameters.Parameter p_IdSucursal;
         public DevExpress.XtraReports.Parameters.Parameter p_IdProceso_bancario_tipo;
+        public DevExpress.XtraReports.Parameters.Parameter P_IdDivision;
+        public DevExpress.XtraReports.Parameters.Parameter P_IdArea;
     }
 }

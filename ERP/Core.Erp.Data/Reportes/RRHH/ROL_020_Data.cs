@@ -10,16 +10,16 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_020_Data
     {
-        public List<ROL_020_Info> GetList(int IdEmpresa, int IdNominaTipo, int IdNomina, int IdPeriodo, int IdSucursal, string IdProceso_bancario_tipo)
+        public List<ROL_020_Info> GetList(int IdEmpresa, int IdNominaTipo, int IdNomina, int IdPeriodo, int IdSucursal, int IdDivision, int IdArea)
         {
             try
             {
 
-                string TipoCuenta = "";
-                if (IdProceso_bancario_tipo == cl_enumeradores.eTipoProcesoBancario.NCR.ToString())
-                    TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.AHO.ToString() + "," + cl_enumeradores.eTipoCuentaRRHH.COR.ToString();
-                else
-                    TipoCuenta = cl_enumeradores.eTipoCuentaRRHH.VRT.ToString();
+                int IdAreaInicio = IdArea;
+                int IdAreaFin = IdArea == 0 ? 9999 : IdArea;
+
+                int IdDivisionInicio = IdDivision;
+                int IdDivisionFin = IdDivision == 0 ? 9999 : IdDivision;
 
                 List<ROL_020_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
@@ -29,7 +29,11 @@ namespace Core.Erp.Data.Reportes.RRHH
                      && q.IdNominaTipo == IdNominaTipo
                      && q.IdNomina == IdNomina
                      && q.IdPeriodo == IdPeriodo
-                     && TipoCuenta.Contains(q.TipoCuenta)
+                     && q.IdDivision >= IdDivisionInicio
+                     && q.IdDivision <= IdDivisionFin
+                     && q.IdArea >= IdAreaInicio
+                     && q.IdArea <= IdAreaFin
+                               
                     ).Select(q => new ROL_020_Info
                     {
                         IdEmpresa = q.IdEmpresa,
