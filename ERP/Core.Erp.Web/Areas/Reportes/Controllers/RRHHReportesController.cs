@@ -620,14 +620,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         }
         public ActionResult ROL_020(int IdNominaTipo = 0, int IdNomina = 0, int IdPeriodo = 0, int IdSucursal=0)
         {
-            ROL_020_Rpt model = new ROL_020_Rpt();
-            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.p_IdNominaTipo.Value = IdNominaTipo;
-            model.p_IdNomina.Value = IdNomina;
-            model.p_IdPeriodo.Value = IdPeriodo;
-            model.p_IdSucursal.Value = IdSucursal;
-            model.usuario = SessionFixed.IdUsuario.ToString();
-            model.empresa = SessionFixed.NomEmpresa.ToString();
+            cl_filtros_Info model = new cl_filtros_Info();
+            ROL_020_Rpt reporte = new ROL_020_Rpt();
+            reporte.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            reporte.p_IdNominaTipo.Value = IdNominaTipo;
+            reporte.p_IdNomina.Value = IdNomina;
+            reporte.p_IdPeriodo.Value = IdPeriodo;
+            reporte.p_IdSucursal.Value = IdSucursal;
+            reporte.usuario = SessionFixed.IdUsuario.ToString();
+            reporte.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = reporte;
+            cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
             return View(model);
         }
         [HttpPost]
