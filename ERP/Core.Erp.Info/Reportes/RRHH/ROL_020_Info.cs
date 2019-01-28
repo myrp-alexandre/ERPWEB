@@ -26,5 +26,7 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string Descripcion { get; set; }
         public System.DateTime pe_FechaIni { get; set; }
         public System.DateTime pe_FechaFin { get; set; }
+        public string Area { get; set; }
+        public string Division { get; set; }
     }
 }

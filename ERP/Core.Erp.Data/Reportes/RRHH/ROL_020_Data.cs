@@ -53,7 +53,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                         Descripcion = q.Descripcion,
                         DescripcionProcesoNomina = q.DescripcionProcesoNomina,
                         pe_FechaFin = q.pe_FechaFin,
-                        pe_FechaIni = q.pe_FechaIni
+                        pe_FechaIni = q.pe_FechaIni,
+                        Area=q.Area,
+                        Division=q.Division
 
                     }).ToList();
                 }
