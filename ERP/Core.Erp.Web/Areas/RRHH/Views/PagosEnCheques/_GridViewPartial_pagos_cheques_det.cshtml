@@ -92,12 +92,12 @@
             column.FieldName = "Valor";
             column.Caption = "Total";
             column.Width = Unit.Percentage(10);
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
                 sp.MaxValue = 999999999;
                 sp.Width = Unit.Percentage(100);
+                column.PropertiesEdit.DisplayFormatString = "{0:n2}";
 
             });
         });
@@ -112,6 +112,7 @@
                 sp.MinValue = 0;
                 sp.MaxValue = 999999999;
                 sp.Width = Unit.Percentage(100);
+                column.PropertiesEdit.DisplayFormatString = "{0:n2}";
 
             });
         });
@@ -120,13 +121,13 @@
         {
             column.FieldName = "Saldo";
             column.Caption = "Saldo";
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
             column.EditorProperties().SpinEdit(sp =>
             {
                 sp.MinValue = 0;
                 sp.MaxValue = 999999999;
                 sp.Width = Unit.Percentage(100);
+                column.PropertiesEdit.DisplayFormatString = "{0:n2}";
 
             });
         });
