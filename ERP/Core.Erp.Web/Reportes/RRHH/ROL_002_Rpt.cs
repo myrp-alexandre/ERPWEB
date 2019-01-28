@@ -42,7 +42,6 @@ namespace Core.Erp.Web.Reportes.RRHH
 
                 ROL_002_Bus bus_rpt = new ROL_002_Bus();
                 List<ROL_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
-               lst_rpt = lst_rpt.Where(v =>v.IdRubro== info_rubros_calculados.IdRubro_tot_pagar).ToList();
                 tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
                 var emp = bus_empresa.get_info(IdEmpresa);
                 ImageConverter obj = new ImageConverter();
@@ -95,8 +94,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                     RubroDescripcion = egr.Key.RubroDescripcion,
                                     Valor = egr.Key.Valor
                                 }).ToList();
-
-                this.DataSource = lst_rpt;
+            lst_rpt = lst_rpt.Where(v => v.IdRubro == info_rubros_calculados.IdRubro_tot_pagar).ToList();
+            this.DataSource = lst_rpt;
                     }
         private void Subreporte_Ingresos_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
