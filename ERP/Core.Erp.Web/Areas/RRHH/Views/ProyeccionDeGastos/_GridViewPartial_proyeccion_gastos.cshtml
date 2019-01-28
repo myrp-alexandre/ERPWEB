@@ -2,8 +2,8 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridView_division";
-        settings.CallbackRouteValues = new { Controller = "ProyeccionDeGastos", Action = "GridViewPartial_proyeccion_gastos_personales" };
+        settings.Name = "GridView_proyeccion_gastos";
+        settings.CallbackRouteValues = new { Controller = "ProyeccionDeGastos", Action = "GridViewPartial_proyeccion_gastos" };
 
 
         settings.KeyFieldName = "IdEmpleado";

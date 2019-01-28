@@ -44,13 +44,13 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             return View();
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_proyeccion_gastos_personales()
+        public ActionResult GridViewPartial_proyeccion_gastos()
         {
             try
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 List<ro_empleado_proyeccion_gastos_Info> model = bus_proyeccion.get_list(IdEmpresa);
-                return PartialView("_GridViewPartial_proyeccion_gastos_personales", model);
+                return PartialView("_GridViewPartial_proyeccion_gastos", model);
             }
             catch (Exception)
             {
