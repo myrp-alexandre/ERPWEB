@@ -23,11 +23,11 @@ namespace Core.Erp.Web.Reportes.Facturacion
         private void FAC_003_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
 
-            int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
-            int IdBodega = p_IdBodega.Value == null ? 0 : Convert.ToInt32(p_IdBodega.Value);
-            decimal IdCbteVta = p_IdCbteVta.Value == null ? 0 : Convert.ToDecimal(p_IdCbteVta.Value);
-            bool mostrar_cuotas = p_mostrar_cuotas.Value == null ? false : Convert.ToBoolean(p_mostrar_cuotas.Value);
+            int IdEmpresa = String.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            int IdSucursal = String.IsNullOrEmpty(p_IdSucursal.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSucursal.Value);
+            int IdBodega = String.IsNullOrEmpty(p_IdBodega.Value.ToString()) ? 0 : Convert.ToInt32(p_IdBodega.Value);
+            decimal IdCbteVta = String.IsNullOrEmpty(p_IdCbteVta.Value.ToString())? 0 : Convert.ToDecimal(p_IdCbteVta.Value);
+            bool mostrar_cuotas = String.IsNullOrEmpty(p_mostrar_cuotas.Value.ToString()) ? false : Convert.ToBoolean(p_mostrar_cuotas.Value);
 
             FAC_003_Bus bus_rpt = new FAC_003_Bus();
             List<FAC_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, mostrar_cuotas);
@@ -39,10 +39,14 @@ namespace Core.Erp.Web.Reportes.Facturacion
             this.DataSource = lst_rpt;
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var empresa = bus_empresa.get_info(IdEmpresa);
-            lbl_empresa.Text = empresa.em_nombre;
-            lbl_direccion.Text = empresa.em_direccion;
-            lbl_telefono.Text = empresa.em_telefonos;
-            lbl_ruc.Text = empresa.em_ruc;
+
+            if(empresa != null)
+            { 
+                lbl_empresa.Text = empresa.em_nombre;
+                lbl_direccion.Text = empresa.em_direccion;
+                lbl_telefono.Text = empresa.em_telefonos;
+                lbl_ruc.Text = empresa.em_ruc;
+            }
         }
     }
 }
