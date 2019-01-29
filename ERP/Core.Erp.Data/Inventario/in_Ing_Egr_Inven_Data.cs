@@ -242,7 +242,8 @@ namespace Core.Erp.Data.Inventario
             try
             {
                 int sec = 1;
-                Reversar_Aprobacion(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi, "");
+                //Reversar_Aprobacion(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi, "");
+                ReversarAprobacion(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi);
 
                 using (Entities_inventario Context = new Entities_inventario())
                 {
@@ -432,10 +433,75 @@ namespace Core.Erp.Data.Inventario
             try
             {
                 var lst_det = db_i.in_Ing_Egr_Inven_det.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdMovi_inven_tipo == IdMovi_inve_tipo && q.IdNumMovi == IdNumMovi).ToList();
-                /*
-                var PK_movi = from a in lst_det
-                              join b in db_i.in_movi_inven
-                              */
+                if (lst_det.Where(q=> q.IdNumMovi_inv == null).Count() == 0)
+                {
+                    var PK_movi = lst_det.First();
+
+                    #region Elimino detalle de movi inve
+                    var lst_movi_d = db_i.in_movi_inve_detalle.Where(q => q.IdEmpresa == PK_movi.IdEmpresa_inv
+                                    && q.IdSucursal == PK_movi.IdSucursal_inv
+                                    && q.IdBodega == PK_movi.IdBodega_inv
+                                    && q.IdMovi_inven_tipo == PK_movi.IdMovi_inven_tipo_inv
+                                    && q.IdNumMovi == PK_movi.IdNumMovi_inv
+                                    ).ToList();
+
+                    db_i.in_movi_inve_detalle.RemoveRange(lst_movi_d);
+                    #endregion
+
+                    #region Elimino cabecera
+                    var movi = db_i.in_movi_inve.Where(q => q.IdEmpresa == PK_movi.IdEmpresa
+                               && q.IdSucursal == PK_movi.IdSucursal_inv
+                               && q.IdBodega == PK_movi.IdBodega_inv
+                               && q.IdMovi_inven_tipo == PK_movi.IdMovi_inven_tipo_inv
+                               && q.IdNumMovi == PK_movi.IdNumMovi_inv).FirstOrDefault();
+
+                    db_i.in_movi_inve.Remove(movi);
+                    #endregion
+
+                    #region Obtengo relacion contable y la elimino
+                    var PK_conta = db_i.in_movi_inve_x_ct_cbteCble.Where(q => q.IdEmpresa == PK_movi.IdEmpresa_inv
+                                    && q.IdSucursal == PK_movi.IdSucursal_inv
+                                    && q.IdBodega == PK_movi.IdBodega_inv
+                                    && q.IdMovi_inven_tipo == PK_movi.IdMovi_inven_tipo_inv
+                                    && q.IdNumMovi == PK_movi.IdNumMovi_inv
+                                    ).FirstOrDefault();
+                    db_i.in_movi_inve_x_ct_cbteCble.Remove(PK_conta);
+                    #endregion
+
+                    if (PK_conta != null)
+                    {
+                        #region Elimino diario contable
+                        var lst_conta = db_ct.ct_cbtecble_det.Where(q => q.IdEmpresa == PK_conta.IdEmpresa_ct 
+                                        && q.IdTipoCbte == PK_conta.IdTipoCbte 
+                                        && q.IdCbteCble == PK_conta.IdCbteCble
+                                        ).ToList();
+                        db_ct.ct_cbtecble_det.RemoveRange(lst_conta);
+
+                        var Conta = db_ct.ct_cbtecble.Where(q => q.IdEmpresa == PK_conta.IdEmpresa
+                                    && q.IdTipoCbte == PK_conta.IdTipoCbte
+                                    && q.IdCbteCble == PK_conta.IdCbteCble
+                                    ).FirstOrDefault();
+                        db_ct.ct_cbtecble.Remove(Conta);
+                        #endregion
+                    }
+                }
+                #region Seteo campos de aprobacion en null
+                lst_det.ForEach(q =>
+                {
+                    q.IdEmpresa_inv = null;
+                    q.IdSucursal_inv = null;
+                    q.IdBodega_inv = null;
+                    q.IdMovi_inven_tipo_inv = null;
+                    q.IdNumMovi_inv = null;
+                    q.IdEstadoAproba = "PEND";
+                });
+                #endregion
+
+                db_i.SaveChanges();
+                db_ct.SaveChanges();
+
+                db_ct.Dispose();
+                db_i.Dispose();
                 return true;
             }
             catch (Exception)
