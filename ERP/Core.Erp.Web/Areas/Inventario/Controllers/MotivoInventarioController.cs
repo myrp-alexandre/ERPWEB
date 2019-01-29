@@ -41,7 +41,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         #endregion
 
         #region Metodos ComboBox bajo demanda
-        public ActionResult CmbCuenta_comprobante_contable()
+        public ActionResult CmbCtaCble()
         {
             in_Motivo_Inven_Info model = new in_Motivo_Inven_Info();
             return PartialView("_CmbCtaCble", model);
