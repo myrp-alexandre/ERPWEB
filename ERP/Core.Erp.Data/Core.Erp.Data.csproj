@@ -1303,9 +1303,6 @@
     <Compile Include="ro_EmpleadoNovedadCargaMasiva_det.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
-    <Compile Include="ro_empleado_division_area_x_rol.cs">
-      <DependentUpon>Model_rrhh.tt</DependentUpon>
-    </Compile>
     <Compile Include="ro_empleado_Novedad.cs">
       <DependentUpon>Model_rrhh.tt</DependentUpon>
     </Compile>
