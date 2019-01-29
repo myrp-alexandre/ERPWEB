@@ -686,16 +686,7 @@ namespace Core.Erp.Web.Areas.Caja.Controllers
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
             List<cp_conciliacion_Caja_det_x_ValeCaja_Info> list = get_list(IdTransaccionSession);
-            var mov = list.Where(m => m.Secuencia == Secuencia).FirstOrDefault();
-            if (mov.IdCbteCble_movcaja != 0)
-            {
-                var egreso = bus_mov.get_info(mov.IdEmpresa, mov.IdTipocbte_movcaja, mov.IdCbteCble_movcaja);
-                if (bus_mov.anularDB(egreso))
-                {
-                    list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
-                }
-            }else
-                list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
 

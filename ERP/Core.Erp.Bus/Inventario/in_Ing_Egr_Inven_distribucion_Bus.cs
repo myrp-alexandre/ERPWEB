@@ -290,9 +290,9 @@ namespace Core.Erp.Bus.Inventario
                 }
                 else
                 {
-                    if (!bus_ing_egr.Reversar_Aprobacion(distribucion_sin_lote.IdEmpresa_dis, distribucion_sin_lote.IdSucursal_dis, distribucion_sin_lote.IdMovi_inven_tipo_dis, distribucion_sin_lote.IdNumMovi_dis, "S"))
+                   /* if (!bus_ing_egr.Reversar_Aprobacion(distribucion_sin_lote.IdEmpresa_dis, distribucion_sin_lote.IdSucursal_dis, distribucion_sin_lote.IdMovi_inven_tipo_dis, distribucion_sin_lote.IdNumMovi_dis, "S"))
                         return false;
-
+                        */
                     if (!bus_ing_egr.modificarDB(mov_sin_lote))
                         return false;
                 }
@@ -322,9 +322,10 @@ namespace Core.Erp.Bus.Inventario
                 }
                 else
                 {
+                    /*
                     if (!bus_ing_egr.Reversar_Aprobacion(distribucion_con_lote.IdEmpresa_dis, distribucion_con_lote.IdSucursal_dis, distribucion_con_lote.IdMovi_inven_tipo_dis, distribucion_con_lote.IdNumMovi_dis, "S"))
                         return false;
-
+                        */
                     if (!bus_ing_egr.modificarDB(mov_con_lote))
                         return false;
                 }
