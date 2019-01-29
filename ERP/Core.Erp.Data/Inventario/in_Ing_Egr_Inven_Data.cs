@@ -211,12 +211,13 @@ namespace Core.Erp.Data.Inventario
                             secuencia_inv = item.secuencia_inv,
 
                             dm_cantidad_sinConversion = Math.Abs(item.dm_cantidad_sinConversion) * (info.signo == "-" ? -1 : 1),
-                            dm_cantidad = Math.Abs(item.dm_cantidad) * (info.signo == "-" ? -1 : 1),
+                            dm_cantidad = Math.Abs(item.dm_cantidad_sinConversion) * (info.signo == "-" ? -1 : 1),
 
-                            IdUnidadMedida  = (item.IdUnidadMedida)==null? "UNID":item.IdUnidadMedida,
+                            IdUnidadMedida  = (item.IdUnidadMedida_sinConversion) ==null? "UNID":item.IdUnidadMedida_sinConversion,
                             IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
+
                             mv_costo_sinConversion = (item.mv_costo_sinConversion)==null ? 0 : item.mv_costo_sinConversion,
-                            mv_costo = item.mv_costo,
+                            mv_costo = (item.mv_costo_sinConversion) == null ? 0 : Convert.ToDouble(item.mv_costo_sinConversion),
 
                         };
                         Context.in_Ing_Egr_Inven_det.Add(entity_det);
@@ -295,12 +296,14 @@ namespace Core.Erp.Data.Inventario
                             IdNumMovi_inv = null,
                             secuencia_inv = null,
 
-                            IdUnidadMedida = (item.IdUnidadMedida) == null ? "UNID" : item.IdUnidadMedida,
-                            IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
                             dm_cantidad_sinConversion = Math.Abs(item.dm_cantidad_sinConversion) * (info.signo == "-" ? -1 : 1),
-                            dm_cantidad = Math.Abs(item.dm_cantidad) * (info.signo == "-" ? -1 : 1),
-                            mv_costo_sinConversion = item.mv_costo_sinConversion,
-                            mv_costo = item.mv_costo,
+                            dm_cantidad = Math.Abs(item.dm_cantidad_sinConversion) * (info.signo == "-" ? -1 : 1),
+
+                            IdUnidadMedida = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
+                            IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
+
+                            mv_costo_sinConversion = (item.mv_costo_sinConversion) == null ? 0 : item.mv_costo_sinConversion,
+                            mv_costo = (item.mv_costo_sinConversion) == null ? 0 : Convert.ToDouble(item.mv_costo_sinConversion),
                         });                        
                         sec++;
                     }
