@@ -12,16 +12,18 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class vwin_producto_hijo_combo
+    public partial class in_movi_inve_x_ct_cbteCble
     {
         public int IdEmpresa { get; set; }
-        public decimal IdProducto { get; set; }
-        public decimal IdProducto_padre { get; set; }
-        public string pr_descripcion { get; set; }
-        public string nom_presentacion { get; set; }
-        public string ca_Categoria { get; set; }
-        public string lote_num_lote { get; set; }
-        public Nullable<System.DateTime> lote_fecha_vcto { get; set; }
-        public string IdUnidadMedida { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
+        public int IdMovi_inven_tipo { get; set; }
+        public decimal IdNumMovi { get; set; }
+        public int IdTipoCbte { get; set; }
+        public decimal IdCbteCble { get; set; }
+        public string Observacion { get; set; }
+        public int IdEmpresa_ct { get; set; }
+    
+        public virtual in_movi_inve in_movi_inve { get; set; }
     }
 }

@@ -778,10 +778,19 @@
     <Compile Include="in_Motivo_Inven.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
+    <Compile Include="in_movi_inve.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
     <Compile Include="in_movi_inven_tipo.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="in_movi_inven_tipo_x_tb_bodega.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="in_movi_inve_detalle.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="in_movi_inve_x_ct_cbteCble.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
     <Compile Include="in_parametro.cs">
