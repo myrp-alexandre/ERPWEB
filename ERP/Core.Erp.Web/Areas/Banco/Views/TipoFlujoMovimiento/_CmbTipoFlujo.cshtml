@@ -14,10 +14,10 @@
         settings.Properties.ValueField = "IdTipoFlujo";
         settings.Properties.ValueType = typeof(decimal);
         settings.Properties.Columns.Add("IdTipoFlujo", "ID", 10);
-        settings.Properties.Columns.Add("Descricion", "Cuenta", 90);
-        settings.Properties.FilterMinLength = 3;
+        settings.Properties.Columns.Add("Descricion", "Descripción", 90);
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
     })
      .BindList(new Core.Erp.Web.Areas.Banco.Controllers.TipoFlujoMovimientoController().get_list_bajo_demanda_tipoflujo, new Core.Erp.Web.Areas.Banco.Controllers.TipoFlujoMovimientoController().get_info_bajo_demanda_tipoflujo)
-    .Bind((Model.GetType() == typeof(Core.Erp.Info.Banco.ba_TipoFlujo_Info) || Model.GetType() == typeof(Core.Erp.Info.Banco.ba_TipoFlujo_Movimiento_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Banco.ba_TipoFlujo_Movimiento_Info>)) ? "" : Model);
+    .Bind((Model.GetType() == typeof(Core.Erp.Info.Banco.ba_TipoFlujo_Info) || Model.GetType() == typeof(Core.Erp.Info.Banco.ba_TipoFlujo_Movimiento_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Banco.ba_TipoFlujo_Movimiento_Info>) || Model == 0) ? "" : Model);
     }
 @comboBox.GetHtml()

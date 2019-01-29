@@ -43,6 +43,13 @@
                     @Html.ValidationMessageFor(q => q.Tipo_Ing_Egr, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="Codigo">Cuenta Contable</label>
+                    @Html.Partial("_CmbCtaCble", Model.IdCtaCble)
+                    @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

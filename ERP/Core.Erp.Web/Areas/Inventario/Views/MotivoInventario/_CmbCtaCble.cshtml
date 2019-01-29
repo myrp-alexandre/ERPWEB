@@ -6,7 +6,7 @@
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.CallbackRouteValues = new { Controller = "MotivoInventario", Action = "CmbTipoFlujo", Area = "Banco" };
+        settings.CallbackRouteValues = new { Controller = "MotivoInventario", Action = "CmbCtaCble", Area = "Inventario" };
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "pc_Cuenta";
@@ -15,9 +15,9 @@
         settings.Properties.ValueType = typeof(string);
         settings.Properties.Columns.Add("IdCtaCble", "ID", 10);
         settings.Properties.Columns.Add("pc_Cuenta", "Cuenta", 90);
-        settings.Properties.FilterMinLength = 3;
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
     })
      .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.MotivoInventarioController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Inventario.Controllers.MotivoInventarioController().get_info_bajo_demanda)
-    .Bind((Model.GetType() == typeof(Core.Erp.Info.Inventario.in_Motivo_Inven_Info) || Model==0 ? "" : Model));
+    .Bind((Model.GetType() == typeof(Core.Erp.Info.Inventario.in_Motivo_Inven_Info) ? "" : Model));
     }
 @comboBox.GetHtml()
