@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="Model_inventario.in_Ing_Egr_Inven_distribucion" Width="1.5" PointX="17" PointY="50.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_inventario.in_linea" Width="1.5" PointX="7.25" PointY="28.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_inventario.in_Marca" Width="1.5" PointX="11.75" PointY="21.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model_inventario.in_Motivo_Inven" Width="1.5" PointX="12.5" PointY="43.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_inventario.in_movi_inven_tipo" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_inventario.in_movi_inven_tipo_x_tb_bodega" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_inventario.in_presentacion" Width="1.5" PointX="11.75" PointY="25.875" IsExpanded="true" />
@@ -38,7 +37,6 @@
         <EntityTypeShape EntityType="Model_inventario.vwin_producto_hijo_combo" Width="1.5" PointX="18.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_inventario.vwin_producto_padre_combo" Width="1.5" PointX="4.75" PointY="21.5" IsExpanded="true" />
         <AssociationConnector Association="Model_inventario.FK_in_Catalogo_in_CatalogoTipo" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_inventario.FK_in_Motivo_Inven_in_Catalogo1" ManuallyRouted="false" />
         <AssociationConnector Association="Model_inventario.FK_in_linea_in_categorias" ManuallyRouted="false" />
         <AssociationConnector Association="Model_inventario.FK_in_devolucion_inven_det_in_devolucion_inven" ManuallyRouted="false" />
         <AssociationConnector Association="Model_inventario.FK_in_devolucion_inven_in_Ing_Egr_Inven" ManuallyRouted="false" />
@@ -49,7 +47,6 @@
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_det_in_Ing_Egr_Inven" ManuallyRouted="false" />
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_distribucion_in_Ing_Egr_Inven" ManuallyRouted="false" />
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_distribucion_in_Ing_Egr_Inven1" ManuallyRouted="false" />
-        <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_in_Motivo_Inven" ManuallyRouted="false" />
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_det_in_UnidadMedida2" ManuallyRouted="false" />
         <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_det_in_UnidadMedida3" ManuallyRouted="false" />
         <AssociationConnector Association="Model_inventario.FK_in_movi_inven_tipo_x_tb_bodega_in_movi_inven_tipo" ManuallyRouted="false" />
@@ -109,6 +106,9 @@
         <AssociationConnector Association="Model_inventario.FK_in_transferencia_in_Ing_Egr_Inven1" />
         <AssociationConnector Association="Model_inventario.FK_in_transferencia_det_in_transferencia" />
         <EntityTypeShape EntityType="Model_inventario.vwin_Producto_PorSucursal" Width="1.5" PointX="23.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model_inventario.in_Motivo_Inven" Width="1.5" PointX="6" PointY="34.875" />
+        <AssociationConnector Association="Model_inventario.FK_in_Motivo_Inven_in_Catalogo1" />
+        <AssociationConnector Association="Model_inventario.FK_in_Ing_Egr_Inven_in_Motivo_Inven" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
