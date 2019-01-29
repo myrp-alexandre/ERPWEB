@@ -74,18 +74,6 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
-        public Boolean Reversar_Aprobacion(int IdEmpresa, int IdSucursal, int IdMovi_inve_tipo, decimal IdNumMovi, string Genera_movi_inven)
-        {
-            try
-            {
-                return odata.Reversar_Aprobacion(IdEmpresa, IdSucursal, IdMovi_inve_tipo, IdNumMovi, Genera_movi_inven);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
         public List<in_Ing_Egr_Inven_Info> get_list_por_devolver(int IdEmpresa, string signo, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try

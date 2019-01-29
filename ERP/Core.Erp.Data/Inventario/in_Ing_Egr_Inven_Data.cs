@@ -340,7 +340,8 @@ namespace Core.Erp.Data.Inventario
                     Entity.IdusuarioUltAnu = info.IdusuarioUltAnu;
                     Entity.Fecha_UltAnu = DateTime.Now;
                     Context.SaveChanges();
-                    Reversar_Aprobacion(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi, "");
+
+                    ReversarAprobacion(info.IdEmpresa, info.IdSucursal, info.IdMovi_inven_tipo, info.IdNumMovi);
                 }
 
                 return true;
@@ -352,41 +353,7 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
-        public Boolean Reversar_Aprobacion(int IdEmpresa, int IdSucursal, int IdMovi_inve_tipo, decimal IdNumMovi, string Genera_movi_inven)
-        {
-            try
-            {
-                using (Entities_inventario Context = new Entities_inventario())
-                {
-                    if (Genera_movi_inven == "")
-                    {
-                        in_movi_inven_tipo enti = Context.in_movi_inven_tipo.Where(q => q.IdEmpresa == IdEmpresa && q.IdMovi_inven_tipo == IdMovi_inve_tipo).FirstOrDefault();
-                        if (enti == null) return false;
-                        Genera_movi_inven = enti.Genera_Movi_Inven == true ? "S" : "N";
-                    }
-
-
-                    if (Genera_movi_inven == "S")
-                    {
-                        Context.spSys_inv_Reversar_aprobacion(IdEmpresa, IdSucursal, IdMovi_inve_tipo, IdNumMovi, true);
-                    }
-                    else
-                    {
-                        string comando = "update in_Ing_Egr_Inven_det set IdEstadoAproba = 'PEND' where IdEmpresa = " + IdEmpresa + " and IdSucursal = " + IdSucursal + " and IdMovi_inven_tipo = " + IdMovi_inve_tipo + " and IdNumMovi = " + IdNumMovi;
-                        Context.Database.ExecuteSqlCommand(comando);
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+        
         public List<in_Ing_Egr_Inven_Info> get_list_por_devolver(int IdEmpresa, string signo, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
@@ -425,7 +392,6 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
-
         public bool ReversarAprobacion(int IdEmpresa, int IdSucursal, int IdMovi_inve_tipo, decimal IdNumMovi)
         {
             Entities_inventario db_i = new Entities_inventario();
@@ -433,9 +399,15 @@ namespace Core.Erp.Data.Inventario
             try
             {
                 var lst_det = db_i.in_Ing_Egr_Inven_det.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdMovi_inven_tipo == IdMovi_inve_tipo && q.IdNumMovi == IdNumMovi).ToList();
-                if (lst_det.Where(q=> q.IdNumMovi_inv == null).Count() == 0)
+                if (lst_det.Where(q => q.IdNumMovi_inv == null).Count() == 0)
                 {
-                    var PK_movi = lst_det.First();
+                    var PK_movi = new {
+                        lst_det.First().IdEmpresa_inv,
+                        lst_det.First().IdSucursal_inv,
+                        lst_det.First().IdBodega_inv,
+                        lst_det.First().IdMovi_inven_tipo_inv,
+                        lst_det.First().IdNumMovi_inv
+                    };
 
                     #region Elimino detalle de movi inve
                     var lst_movi_d = db_i.in_movi_inve_detalle.Where(q => q.IdEmpresa == PK_movi.IdEmpresa_inv
@@ -449,7 +421,7 @@ namespace Core.Erp.Data.Inventario
                     #endregion
 
                     #region Elimino cabecera
-                    var movi = db_i.in_movi_inve.Where(q => q.IdEmpresa == PK_movi.IdEmpresa
+                    var movi = db_i.in_movi_inve.Where(q => q.IdEmpresa == PK_movi.IdEmpresa_inv
                                && q.IdSucursal == PK_movi.IdSucursal_inv
                                && q.IdBodega == PK_movi.IdBodega_inv
                                && q.IdMovi_inven_tipo == PK_movi.IdMovi_inven_tipo_inv
@@ -465,9 +437,8 @@ namespace Core.Erp.Data.Inventario
                                     && q.IdMovi_inven_tipo == PK_movi.IdMovi_inven_tipo_inv
                                     && q.IdNumMovi == PK_movi.IdNumMovi_inv
                                     ).FirstOrDefault();
-                    db_i.in_movi_inve_x_ct_cbteCble.Remove(PK_conta);
+                    
                     #endregion
-
                     if (PK_conta != null)
                     {
                         #region Elimino diario contable
@@ -483,6 +454,7 @@ namespace Core.Erp.Data.Inventario
                                     ).FirstOrDefault();
                         db_ct.ct_cbtecble.Remove(Conta);
                         #endregion
+                        db_i.in_movi_inve_x_ct_cbteCble.Remove(PK_conta);
                     }
                 }
                 #region Seteo campos de aprobacion en null
