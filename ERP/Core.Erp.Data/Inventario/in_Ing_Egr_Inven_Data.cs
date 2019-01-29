@@ -423,5 +423,27 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+
+
+        public bool ReversarAprobacion(int IdEmpresa, int IdSucursal, int IdMovi_inve_tipo, decimal IdNumMovi)
+        {
+            Entities_inventario db_i = new Entities_inventario();
+            Entities_contabilidad db_ct = new Entities_contabilidad();
+            try
+            {
+                var lst_det = db_i.in_Ing_Egr_Inven_det.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdMovi_inven_tipo == IdMovi_inve_tipo && q.IdNumMovi == IdNumMovi).ToList();
+                /*
+                var PK_movi = from a in lst_det
+                              join b in db_i.in_movi_inven
+                              */
+                return true;
+            }
+            catch (Exception)
+            {
+                db_ct.Dispose();
+                db_i.Dispose();
+                throw;
+            }
+        }
     }
 }

@@ -18,7 +18,6 @@ namespace Core.Erp.Data
         {
             this.ro_area_x_departamento = new HashSet<ro_area_x_departamento>();
             this.ro_Config_Param_contable = new HashSet<ro_Config_Param_contable>();
-            this.ro_empleado_division_area_x_rol = new HashSet<ro_empleado_division_area_x_rol>();
             this.ro_empleado_x_division_x_area = new HashSet<ro_empleado_x_division_x_area>();
         }
     
@@ -40,7 +39,6 @@ namespace Core.Erp.Data
         public virtual ro_Division ro_Division { get; set; }
         public virtual ICollection<ro_area_x_departamento> ro_area_x_departamento { get; set; }
         public virtual ICollection<ro_Config_Param_contable> ro_Config_Param_contable { get; set; }
-        public virtual ICollection<ro_empleado_division_area_x_rol> ro_empleado_division_area_x_rol { get; set; }
         public virtual ICollection<ro_empleado_x_division_x_area> ro_empleado_x_division_x_area { get; set; }
     }
 }

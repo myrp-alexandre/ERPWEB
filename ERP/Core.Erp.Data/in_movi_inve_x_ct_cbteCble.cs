@@ -12,19 +12,18 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ro_empleado_division_area_x_rol
+    public partial class in_movi_inve_x_ct_cbteCble
     {
         public int IdEmpresa { get; set; }
-        public decimal IdRol { get; set; }
-        public int Secuencia { get; set; }
-        public decimal IdEmpleado { get; set; }
-        public int IDividion { get; set; }
-        public int IdArea { get; set; }
-        public double Porcentaje { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
+        public int IdMovi_inven_tipo { get; set; }
+        public decimal IdNumMovi { get; set; }
+        public int IdTipoCbte { get; set; }
+        public decimal IdCbteCble { get; set; }
         public string Observacion { get; set; }
+        public int IdEmpresa_ct { get; set; }
     
-        public virtual ro_area ro_area { get; set; }
-        public virtual ro_empleado ro_empleado { get; set; }
-        public virtual ro_rol ro_rol { get; set; }
+        public virtual in_movi_inve in_movi_inve { get; set; }
     }
 }
