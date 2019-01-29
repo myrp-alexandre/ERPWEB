@@ -2,8 +2,8 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_TipoFlujoMovimiento";
-        settings.CallbackRouteValues = new { Controller = "TipoFlujoMovimiento", Action = "_GridViewPartial_TipoFlujoMovimiento" };
+        settings.Name = "GridView_TipoFlujoMovimiento";
+        settings.CallbackRouteValues = new { Controller = "TipoFlujoMovimiento", Action = "GridViewPartial_TipoFlujoMovimiento" };
         settings.KeyFieldName = "IdMovimiento";
         settings.Width = Unit.Percentage(100);
 
