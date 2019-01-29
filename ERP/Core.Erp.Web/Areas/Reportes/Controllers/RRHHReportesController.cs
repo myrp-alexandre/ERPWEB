@@ -634,27 +634,29 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
-        public ActionResult ROL_020(int IdNominaTipo = 0, int IdNomina = 0, int IdPeriodo = 0, int IdSucursal=0)
+        public ActionResult ROL_020()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+             
+            };
+            cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
             ROL_020_Rpt reporte = new ROL_020_Rpt();
-            reporte.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
-            reporte.p_IdNominaTipo.Value = IdNominaTipo;
-            reporte.p_IdNomina.Value = IdNomina;
-            reporte.p_IdPeriodo.Value = IdPeriodo;
-            reporte.p_IdSucursal.Value = IdSucursal;
+            reporte.p_IdEmpresa.Value = model.IdEmpresa;
+            reporte.p_IdNominaTipo.Value = model.IdTipoNomina;
+            reporte.p_IdNomina.Value = model.IdNomina;
+            reporte.p_IdPeriodo.Value = model.IdPeriodo;
+            reporte.p_IdSucursal.Value = model.IdSucursal;
             reporte.usuario = SessionFixed.IdUsuario.ToString();
             reporte.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = reporte;
-            cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
             return View(model);
         }
         [HttpPost]
         public ActionResult ROL_020( cl_filtros_Info model)
         {
             ROL_020_Rpt report = new ROL_020_Rpt();
-            cargar_combos(model.IdEmpresa);
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdNomina.Value = model.IdNomina;
             report.p_IdNominaTipo.Value = model.IdTipoNomina;
@@ -663,6 +665,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.P_IdArea.Value = model.IdArea;
             report.P_IdDivision.Value = model.IdDivision;
             SessionFixed.IdDivision = model.IdDivision.ToString();
+            cargar_combos(model.IdEmpresa);
             ViewBag.Report = report;
             return View(model);
         }

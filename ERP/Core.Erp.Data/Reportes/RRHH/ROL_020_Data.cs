@@ -10,10 +10,12 @@ namespace Core.Erp.Data.Reportes.RRHH
 {
     public class ROL_020_Data
     {
-        public List<ROL_020_Info> GetList(int IdEmpresa, int IdNominaTipo, int IdNomina, int IdPeriodo, int IdSucursal, int IdDivision, int IdArea)
+        public List<ROL_020_Info> GetList(int IdEmpresa, int IdSucursal, int IdNominaTipo, int IdNomina, int IdPeriodo,  int IdDivision, int IdArea)
         {
             try
             {
+                int IdSucursalInicio = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
 
                 int IdAreaInicio = IdArea;
                 int IdAreaFin = IdArea == 0 ? 9999 : IdArea;
@@ -25,15 +27,15 @@ namespace Core.Erp.Data.Reportes.RRHH
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = Context.VWROL_020.Where(q => q.IdEmpresa == IdEmpresa
-                     && (q.IdSucursal != 0 ? q.IdSucursal == IdSucursal : 1==1)
+                     && IdSucursalInicio <= q.IdSucursal
+                     && q.IdSucursal <= IdSucursalFin
                      && q.IdNominaTipo == IdNominaTipo
                      && q.IdNomina == IdNomina
                      && q.IdPeriodo == IdPeriodo
-                     && q.IdDivision >= IdDivisionInicio
+                     && IdDivisionInicio <= q.IdDivision
                      && q.IdDivision <= IdDivisionFin
-                     && q.IdArea >= IdAreaInicio
+                     && IdAreaInicio <= q.IdArea
                      && q.IdArea <= IdAreaFin
-                               
                     ).Select(q => new ROL_020_Info
                     {
                         IdEmpresa = q.IdEmpresa,

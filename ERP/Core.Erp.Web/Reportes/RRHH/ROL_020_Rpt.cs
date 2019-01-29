@@ -34,7 +34,7 @@ namespace Core.Erp.Web.Reportes.RRHH
             string IdProceso_bancario_tipo = string.IsNullOrEmpty(p_IdProceso_bancario_tipo.Value.ToString()) ? "" : Convert.ToString(p_IdProceso_bancario_tipo.Value);
 
             ROL_020_Bus bus_rpt = new ROL_020_Bus();
-            List<ROL_020_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdNominaTipo, IdNomina, IdPeriodo, IdSucursal,  IdDivision,IdArea);
+            List<ROL_020_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdSucursal, IdNominaTipo, IdNomina, IdPeriodo,   IdDivision,IdArea);
             this.DataSource = lst_rpt;
         }
     }
