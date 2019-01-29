@@ -53,7 +53,8 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                      IdCatalogo_FormaPago = q.IdCatalogo_FormaPago,
                                      vt_autorizacion = q.vt_autorizacion,
                                      vt_Cambio = q.vt_Cambio,
-                                     vt_ValorEfectivo = q.vt_ValorEfectivo
+                                     vt_ValorEfectivo = q.vt_ValorEfectivo,
+                                      vt_Observacion = q.vt_Observacion
                                  }).ToList();
                     
                     
