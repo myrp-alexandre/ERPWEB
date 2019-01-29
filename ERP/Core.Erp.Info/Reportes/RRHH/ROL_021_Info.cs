@@ -16,7 +16,7 @@ namespace Core.Erp.Info.Reportes.RRHH
         public int IdPeriodo { get; set; }
         public string IdRubro { get; set; }
         public int Orden { get; set; }
-        public double Valor { get; set; }
+        public Nullable<double> Valor { get; set; }
         public Nullable<bool> rub_visible_reporte { get; set; }
         public string Observacion { get; set; }
         public string ru_descripcion { get; set; }

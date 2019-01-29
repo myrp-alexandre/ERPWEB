@@ -14,13 +14,19 @@ namespace Core.Erp.Data
     
     public partial class VWROL_021
     {
+        public int IdEmpresa { get; set; }
         public Nullable<int> IdSucursal { get; set; }
         public int IdNominaTipo { get; set; }
         public int IdNominaTipoLiqui { get; set; }
+        public decimal IdEmpleado { get; set; }
+        public Nullable<int> IdArea { get; set; }
+        public Nullable<int> IdDivision { get; set; }
         public int IdPeriodo { get; set; }
         public string IdRubro { get; set; }
+        public bool se_distribuye { get; set; }
         public int Orden { get; set; }
-        public double Valor { get; set; }
+        public Nullable<double> Porcentaje { get; set; }
+        public Nullable<double> Valor { get; set; }
         public Nullable<bool> rub_visible_reporte { get; set; }
         public string Observacion { get; set; }
         public string ru_descripcion { get; set; }
@@ -31,13 +37,9 @@ namespace Core.Erp.Data
         public string ru_codRolGen { get; set; }
         public string ca_descripcion { get; set; }
         public string em_codigo { get; set; }
-        public decimal IdEmpleado { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
-        public Nullable<int> IdArea { get; set; }
-        public Nullable<int> IdDivision { get; set; }
         public decimal IdRol { get; set; }
-        public int IdEmpresa { get; set; }
         public string Descripcion { get; set; }
         public string rub_grupo { get; set; }
         public Nullable<double> Dias { get; set; }

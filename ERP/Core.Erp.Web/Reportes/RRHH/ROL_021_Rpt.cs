@@ -77,7 +77,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                 List<ROL_021_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea, TipoRubro);
                 this.DataSource = lst_rpt;
             }
-            catch (Exception)
+            catch (Exception EX)
             {
 
                 throw;

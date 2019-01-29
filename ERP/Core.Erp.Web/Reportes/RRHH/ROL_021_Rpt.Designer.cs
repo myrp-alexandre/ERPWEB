@@ -782,6 +782,7 @@
             this.xrPivotGridField44.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.xrPivotGridField44.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.xrPivotGridField44.Appearance.Cell.WordWrap = true;
+            this.xrPivotGridField44.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.xrPivotGridField44.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.xrPivotGridField44.AreaIndex = 1;
             this.xrPivotGridField44.Caption = "Empleado";
@@ -875,10 +876,11 @@
             this.pivotGridField7.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.pivotGridField7.AreaIndex = 2;
             this.pivotGridField7.Caption = "Días";
-            this.pivotGridField7.FieldName = "Dias";
+            this.pivotGridField7.FieldName = "Descripcion";
             this.pivotGridField7.Name = "pivotGridField7";
             this.pivotGridField7.Options.ShowGrandTotal = false;
             this.pivotGridField7.Options.ShowTotals = false;
+            this.pivotGridField7.Width = 120;
             // 
             // pivotGridField6
             // 
