@@ -43,7 +43,6 @@ namespace Core.Erp.Data
             this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
             this.ro_SancionesPorMarcaciones_det = new HashSet<ro_SancionesPorMarcaciones_det>();
             this.ro_Solicitud_Vacaciones_x_empleado = new HashSet<ro_Solicitud_Vacaciones_x_empleado>();
-            this.ro_empleado_division_area_x_rol = new HashSet<ro_empleado_division_area_x_rol>();
             this.ro_empleado_x_division_x_area = new HashSet<ro_empleado_x_division_x_area>();
             this.ro_empleado_x_jornada = new HashSet<ro_empleado_x_jornada>();
             this.ro_empleado_Novedad = new HashSet<ro_empleado_Novedad>();
@@ -153,7 +152,6 @@ namespace Core.Erp.Data
         public virtual ICollection<ro_SancionesPorMarcaciones_det> ro_SancionesPorMarcaciones_det { get; set; }
         public virtual ICollection<ro_Solicitud_Vacaciones_x_empleado> ro_Solicitud_Vacaciones_x_empleado { get; set; }
         public virtual ro_cargo ro_cargo { get; set; }
-        public virtual ICollection<ro_empleado_division_area_x_rol> ro_empleado_division_area_x_rol { get; set; }
         public virtual ICollection<ro_empleado_x_division_x_area> ro_empleado_x_division_x_area { get; set; }
         public virtual ICollection<ro_empleado_x_jornada> ro_empleado_x_jornada { get; set; }
         public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
