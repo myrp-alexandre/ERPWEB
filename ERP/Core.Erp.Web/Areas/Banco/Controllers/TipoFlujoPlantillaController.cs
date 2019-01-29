@@ -335,6 +335,8 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         {
             ba_TipoFlujo_PlantillaDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdTipoFlujo = info_det.IdTipoFlujo;
+            edited_info.Porcentaje = info_det.Porcentaje;
+            edited_info.Descricion = info_det.Descricion;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)

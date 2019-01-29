@@ -531,6 +531,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     mensaje = "El campo fecha nacimiento es obligatoria";
                 }
 
+                //if (info.lst_empleado_area.Count() > 0)
+                //{
+                //    if (Math.Round(info.lst_empleado_area.Sum(q => q.Porcentaje), 2, MidpointRounding.AwayFromZero) != 100)
+                //    {
+                //        mensaje = "La suma de los porcentajes debe ser igual a 100%";
+                //    }
+                //}
+
                 return mensaje;
             }
             catch (Exception)
