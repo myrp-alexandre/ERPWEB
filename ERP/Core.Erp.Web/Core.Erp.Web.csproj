@@ -9784,6 +9784,7 @@
     <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_CmbRubro_Emp.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\ROL_023.cshtml" />
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbArea_Individual.cshtml" />
+    <Content Include="Areas\Inventario\Views\MotivoInventario\_CmbCtaCble.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

@@ -28,7 +28,7 @@ namespace Core.Erp.Data.Inventario
                                      estado = q.estado,
                                      Genera_Movi_Inven = q.Genera_Movi_Inven,
                                      Tipo_Ing_Egr = q.Tipo_Ing_Egr,
-
+                                     IdCtaCble = q.IdCtaCble,
                                      EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                     else
@@ -44,7 +44,7 @@ namespace Core.Erp.Data.Inventario
                                      estado = q.estado,
                                      Genera_Movi_Inven = q.Genera_Movi_Inven,
                                      Tipo_Ing_Egr = q.Tipo_Ing_Egr,
-
+                                     IdCtaCble = q.IdCtaCble,
                                      EstadoBool = q.estado == "A" ? true : false
                                  }).ToList();
                 }
@@ -123,8 +123,8 @@ namespace Core.Erp.Data.Inventario
                         Desc_mov_inv = Entity.Desc_mov_inv,
                         estado = Entity.estado,
                         Genera_Movi_Inven_bool = Entity.Genera_Movi_Inven == "S" ? true : false,
-                        Tipo_Ing_Egr = Entity.Tipo_Ing_Egr
-
+                        Tipo_Ing_Egr = Entity.Tipo_Ing_Egr,
+                        IdCtaCble = Entity.IdCtaCble
                     };
                 }
                 return info;
@@ -151,7 +151,7 @@ namespace Core.Erp.Data.Inventario
                         estado = info.estado="A",
                         Genera_Movi_Inven = info.Genera_Movi_Inven_bool == true ? "S" : "N",
                         Tipo_Ing_Egr = info.Tipo_Ing_Egr,
-                        
+                        IdCtaCble = info.IdCtaCble,
                         Fecha_Transac = DateTime.Now
 
                     };
@@ -180,7 +180,7 @@ namespace Core.Erp.Data.Inventario
                     Entity.Desc_mov_inv = info.Desc_mov_inv;
                     Entity.Tipo_Ing_Egr = info.Tipo_Ing_Egr;
                     Entity.Genera_Movi_Inven = info.Genera_Movi_Inven_bool == true ? "S" : "N";
-
+                    Entity.IdCtaCble = info.IdCtaCble;
 
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;

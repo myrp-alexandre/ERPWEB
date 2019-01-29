@@ -1,8 +1,12 @@
-﻿using Core.Erp.Bus.Inventario;
+﻿using Core.Erp.Bus.Contabilidad;
+using Core.Erp.Bus.Inventario;
+using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.Helps;
 using Core.Erp.Info.Inventario;
 using Core.Erp.Web.Helps;
+using DevExpress.Web;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Core.Erp.Web.Areas.Inventario.Controllers
@@ -10,6 +14,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
     [SessionTimeout]
     public class MotivoInventarioController : Controller
     {
+        ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+
         #region Index /  Metodos
 
         in_Motivo_Inven_Bus bus_motivo = new Bus.Inventario.in_Motivo_Inven_Bus();
@@ -33,6 +39,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             ViewBag.lst_tipos = lst_tipo;
         }
         #endregion
+
+        #region Metodos ComboBox bajo demanda
+        public ActionResult CmbCuenta_comprobante_contable()
+        {
+            in_Motivo_Inven_Info model = new in_Motivo_Inven_Info();
+            return PartialView("_CmbCtaCble", model);
+        }
+        public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_plancta.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), false);
+        }
+        public ct_plancta_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_plancta.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
+
         #region Acciones
 
         public ActionResult Nuevo(int IdEmpresa = 0 )

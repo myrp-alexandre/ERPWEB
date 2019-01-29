@@ -27,7 +27,7 @@ namespace Core.Erp.Info.Inventario
         public Nullable<System.DateTime> FechaHoraAnul { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
-
+        public string IdCtaCble { get; set; }
         //Campos que no existen en la tabla
 
         public bool Genera_Movi_Inven_bool { get; set; }
