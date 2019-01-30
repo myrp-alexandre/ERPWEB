@@ -112,6 +112,7 @@
             this.pivotGridField7 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.pivotGridField8 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -834,7 +835,8 @@
             this.pivotGridField4,
             this.pivotGridField5,
             this.pivotGridField7,
-            this.pivotGridField6});
+            this.pivotGridField6,
+            this.pivotGridField8});
             this.xrPivotGrid1.KeepTogether = false;
             this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPivotGrid1.LockedInUserDesigner = true;
@@ -857,7 +859,7 @@
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowTotalsForSingleValues = true;
             this.xrPivotGrid1.Scripts.OnCustomRowHeight = "xrPivotGrid1_CustomRowHeight";
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(482.1667F, 166.875F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(622.7917F, 166.875F);
             // 
             // pivotGridField5
             // 
@@ -876,11 +878,11 @@
             this.pivotGridField7.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.pivotGridField7.AreaIndex = 2;
             this.pivotGridField7.Caption = "Días";
-            this.pivotGridField7.FieldName = "Descripcion";
+            this.pivotGridField7.FieldName = "Dias";
             this.pivotGridField7.Name = "pivotGridField7";
             this.pivotGridField7.Options.ShowGrandTotal = false;
             this.pivotGridField7.Options.ShowTotals = false;
-            this.pivotGridField7.Width = 120;
+            this.pivotGridField7.Width = 50;
             // 
             // pivotGridField6
             // 
@@ -898,6 +900,14 @@
             this.xrPivotGrid1});
             this.GroupHeader1.HeightF = 166.875F;
             this.GroupHeader1.Name = "GroupHeader1";
+            // 
+            // pivotGridField8
+            // 
+            this.pivotGridField8.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.pivotGridField8.AreaIndex = 3;
+            this.pivotGridField8.FieldName = "Descripcion";
+            this.pivotGridField8.Name = "pivotGridField8";
+            this.pivotGridField8.Width = 120;
             // 
             // ROL_021_Rpt
             // 
@@ -1018,5 +1028,6 @@
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField5;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField6;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField7;
+        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField8;
     }
 }
