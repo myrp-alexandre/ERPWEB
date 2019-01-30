@@ -39,11 +39,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdPeriodo == IdPeriodo
                                  && q.IdDivision >= IdDivisionInicio
                                  && q.IdDivision <= IdDivisionFin
-                                 && q.IdArea >= IdAreaInicio
-                                 && q.IdArea <= IdAreaFin
+                                 && q.IdAreaEmpleado >= IdAreaInicio
+                                 && q.IdAreaEmpleado <= IdAreaFin
                                  && IdSucursalInicio <= q.IdSucursal && q.IdSucursal  <= IdSucursalFin
-                                 && q.IdArea >= IdAreaInicio
-                                 && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui == IdNominaTipo
                                  && q.Valor > 0
@@ -87,11 +85,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdPeriodo == IdPeriodo
                                  && q.IdDivision >= IdDivisionInicio
                                  && q.IdDivision <= IdDivisionFin
-                                 && q.IdArea >= IdAreaInicio
-                                 && q.IdArea <= IdAreaFin
+                                 && q.IdAreaEmpleado >= IdAreaInicio
+                                 && q.IdAreaEmpleado <= IdAreaFin
                                  && IdSucursalInicio <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
-                                 && q.IdArea >= IdAreaInicio
-                                 && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui == IdNominaTipo
                                  && q.Valor > 0
@@ -135,11 +131,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdPeriodo == IdPeriodo
                                  && q.IdDivision >= IdDivisionInicio
                                  && q.IdDivision <= IdDivisionFin
-                                 && q.IdArea >= IdAreaInicio
-                                 && q.IdArea <= IdAreaFin
+                                 && q.IdAreaEmpleado >= IdAreaInicio
+                                 && q.IdAreaEmpleado <= IdAreaFin
                                  && IdSucursalInicio <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
-                                 && q.IdArea >= IdAreaInicio
-                                 && q.IdArea <= IdAreaFin
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui == IdNominaTipo
                                  && q.Valor > 0

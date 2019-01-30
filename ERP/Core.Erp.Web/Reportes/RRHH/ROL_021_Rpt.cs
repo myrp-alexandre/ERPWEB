@@ -7,6 +7,8 @@ using Core.Erp.Bus.Reportes.RRHH;
 using Core.Erp.Info.Reportes.RRHH;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Erp.Bus.General;
+
 namespace Core.Erp.Web.Reportes.RRHH
 {
     public partial class ROL_021_Rpt : DevExpress.XtraReports.UI.XtraReport
@@ -40,7 +42,7 @@ namespace Core.Erp.Web.Reportes.RRHH
 
                 lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
                 lbl_empresa.Text = empresa;
-                lbl_usuario.Text = usuario;
+                lbl_usuario.Text = usuario;                
 
                 int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
                 int IdNomina = p_IdNomina.Value == null ? 0 : Convert.ToInt32(p_IdNomina.Value);
@@ -76,8 +78,14 @@ namespace Core.Erp.Web.Reportes.RRHH
                 ROL_021_Bus bus_rpt = new ROL_021_Bus();
                 List<ROL_021_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea, TipoRubro);
                 this.DataSource = lst_rpt;
+
+                tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+                var emp = bus_empresa.get_info(IdEmpresa);
+                lbl_empresa.Text = emp.em_nombre;
+                ImageConverter obj = new ImageConverter();
+                lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
             }
-            catch (Exception EX)
+            catch (Exception)
             {
 
                 throw;
