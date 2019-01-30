@@ -1216,6 +1216,12 @@
     <Compile Include="Reportes\RRHH\ROL_022_Rpt.Designer.cs">
       <DependentUpon>ROL_022_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_023_Resumen_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_023_Resumen_Rpt.Designer.cs">
+      <DependentUpon>ROL_023_Resumen_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_023_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -10267,6 +10273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_022_Rpt.resx">
       <DependentUpon>ROL_022_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_023_Resumen_Rpt.resx">
+      <DependentUpon>ROL_023_Resumen_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_023_Rpt.resx">
       <DependentUpon>ROL_023_Rpt.cs</DependentUpon>

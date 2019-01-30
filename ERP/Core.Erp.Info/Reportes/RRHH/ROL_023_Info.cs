@@ -40,5 +40,8 @@ namespace Core.Erp.Info.Reportes.RRHH
 
         public string Descripcion { get; set; }
         public string DescripcionProcesoNomina { get; set; }
+
+        public int CantidadEmpleados { get; set; }
+        public Nullable<double> TotalResumen { get; set; }
     }
 }

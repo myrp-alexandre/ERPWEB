@@ -144,6 +144,7 @@
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.ROL_023_Resumen_Rpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow9 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell48 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -974,9 +975,18 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.ROL_023_Resumen_Rpt,
             this.xrTable5});
-            this.ReportFooter.HeightF = 20F;
+            this.ReportFooter.HeightF = 76.25002F;
             this.ReportFooter.Name = "ReportFooter";
+            // 
+            // ROL_023_Resumen_Rpt
+            // 
+            this.ROL_023_Resumen_Rpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 53.25002F);
+            this.ROL_023_Resumen_Rpt.Name = "ROL_023_Resumen_Rpt";
+            this.ROL_023_Resumen_Rpt.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_023_Resumen_Rpt();
+            this.ROL_023_Resumen_Rpt.SizeF = new System.Drawing.SizeF(1129F, 23F);
+            this.ROL_023_Resumen_Rpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_023_Resumen_Rpt_BeforePrint);
             // 
             // xrTable5
             // 
@@ -1322,7 +1332,7 @@
             // GroupHeader1
             // 
             this.GroupHeader1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
-            new DevExpress.XtraReports.UI.GroupField("IdDivision", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            new DevExpress.XtraReports.UI.GroupField("NombreDivision", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             this.GroupHeader1.HeightF = 0F;
             this.GroupHeader1.Level = 2;
             this.GroupHeader1.Name = "GroupHeader1";
@@ -1332,7 +1342,7 @@
             this.GroupHeader2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable7});
             this.GroupHeader2.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
-            new DevExpress.XtraReports.UI.GroupField("IdArea", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            new DevExpress.XtraReports.UI.GroupField("NombreArea", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             this.GroupHeader2.HeightF = 20F;
             this.GroupHeader2.Level = 1;
             this.GroupHeader2.Name = "GroupHeader2";
@@ -1376,7 +1386,7 @@
             this.GroupHeader3.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable11});
             this.GroupHeader3.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
-            new DevExpress.XtraReports.UI.GroupField("IdDepartamento", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            new DevExpress.XtraReports.UI.GroupField("NombreDepartamento", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             this.GroupHeader3.HeightF = 20F;
             this.GroupHeader3.Name = "GroupHeader3";
             // 
@@ -2078,5 +2088,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell88;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell89;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell90;
+        private DevExpress.XtraReports.UI.XRSubreport ROL_023_Resumen_Rpt;
     }
 }
