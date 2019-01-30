@@ -65,7 +65,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                               q.Area,
                               q.de_descripcion,
                               q.Cargo,
-                              q.pe_FechaFin,
+                              q.pe_FechaFin
                           } into rpte
                           select new ROL_002_Info
                           {
@@ -94,7 +94,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                      q.IdNominaTipoLiqui,
                                      q.IdEmpleado,
                                      q.RubroDescripcion,
-                                     q.Valor
+                                     q.Valor,
+                                     q.Grupo
                                  } into ing
                                  select new ROL_002_Info
                                  {
@@ -105,7 +106,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                      IdNominaTipoLiqui = ing.Key.IdNominaTipoLiqui,
                                      IdEmpleado = ing.Key.IdEmpleado,
                                      RubroDescripcion = ing.Key.RubroDescripcion,
-                                     Valor = ing.Key.Valor
+                                     Valor = ing.Key.Valor,
+                                     Grupo = ing.Key.Grupo
 
                                  }).ToList();
 
@@ -120,7 +122,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                     q.IdNominaTipoLiqui,
                                     q.IdEmpleado,
                                     q.RubroDescripcion,
-                                    q.Valor
+                                    q.Valor,
+                                    q.Grupo
 
                                 } into egr
                                 select new ROL_002_Info
@@ -132,7 +135,9 @@ namespace Core.Erp.Web.Reportes.RRHH
                                     IdNominaTipoLiqui = egr.Key.IdNominaTipoLiqui,
                                     IdEmpleado = egr.Key.IdEmpleado,
                                     RubroDescripcion = egr.Key.RubroDescripcion,
-                                    Valor = (egr.Key.Valor)*-1
+                                    Valor = (egr.Key.Valor)*-1,
+                                    Grupo=egr.Key.Grupo
+                                    
                                 }).ToList();
 
                 this.DataSource = Lista_Rpte;
