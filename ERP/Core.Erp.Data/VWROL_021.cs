@@ -21,6 +21,8 @@ namespace Core.Erp.Data
         public decimal IdEmpleado { get; set; }
         public Nullable<int> IdArea { get; set; }
         public Nullable<int> IdDivision { get; set; }
+        public Nullable<int> IdAreaEmpleado { get; set; }
+        public string AreaEmpleado { get; set; }
         public int IdPeriodo { get; set; }
         public string IdRubro { get; set; }
         public bool se_distribuye { get; set; }

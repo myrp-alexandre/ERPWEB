@@ -23,5 +23,6 @@ namespace Core.Erp.Data
         public double Valor { get; set; }
         public int IdSucursal { get; set; }
         public int IdArea { get; set; }
+        public string ru_descripcion { get; set; }
     }
 }

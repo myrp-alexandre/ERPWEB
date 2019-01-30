@@ -37,5 +37,8 @@ namespace Core.Erp.Info.Reportes.RRHH
         public Nullable<double> OTROING { get; set; }
         public Nullable<double> DIASTRABAJADOS { get; set; }
         public Nullable<double> NETO { get; set; }
+
+        public string Descripcion { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
     }
 }

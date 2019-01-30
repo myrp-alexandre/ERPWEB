@@ -38,5 +38,8 @@ namespace Core.Erp.Info.Reportes.RRHH
         public string Descripcion { get; set; }
         public string rub_grupo { get; set; }
         public double? Dias { get; set; }
+
+        public Nullable<int> IdAreaEmpleado { get; set; }
+        public string AreaEmpleado { get; set; }
     }
 }

@@ -14,8 +14,6 @@ namespace Core.Erp.Data
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-
-
     public partial class Entities_reportes : DbContext
     {
         public Entities_reportes()
@@ -987,6 +985,27 @@ namespace Core.Erp.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_012_Result>("SPROL_012", idEmpresaParameter, fecha_desdeParameter, fecha_hastaParameter, idRubroParameter);
         }
     
+        public virtual ObjectResult<SPROL_022_Result> SPROL_022(Nullable<int> idempresa, Nullable<int> idnomina_tipo, Nullable<int> idnomina_Tipo_liq, Nullable<int> idperiodo)
+        {
+            var idempresaParameter = idempresa.HasValue ?
+                new ObjectParameter("idempresa", idempresa) :
+                new ObjectParameter("idempresa", typeof(int));
+    
+            var idnomina_tipoParameter = idnomina_tipo.HasValue ?
+                new ObjectParameter("idnomina_tipo", idnomina_tipo) :
+                new ObjectParameter("idnomina_tipo", typeof(int));
+    
+            var idnomina_Tipo_liqParameter = idnomina_Tipo_liq.HasValue ?
+                new ObjectParameter("idnomina_Tipo_liq", idnomina_Tipo_liq) :
+                new ObjectParameter("idnomina_Tipo_liq", typeof(int));
+    
+            var idperiodoParameter = idperiodo.HasValue ?
+                new ObjectParameter("idperiodo", idperiodo) :
+                new ObjectParameter("idperiodo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_022_Result>("SPROL_022", idempresaParameter, idnomina_tipoParameter, idnomina_Tipo_liqParameter, idperiodoParameter);
+        }
+    
         public virtual ObjectResult<SPROL_023_Result> SPROL_023(Nullable<int> idEmpresa, Nullable<int> idSucursalIni, Nullable<int> idSucursalFin, Nullable<int> idNomina, Nullable<int> idNominaTipoLiqui, Nullable<int> idPeriodo, Nullable<int> idDivisionIni, Nullable<int> idDivisionFin, Nullable<int> idAreaIni, Nullable<int> idAreaFin, Nullable<int> idDepartamentoIni, Nullable<int> idDepartamentoFin)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
@@ -1038,27 +1057,6 @@ namespace Core.Erp.Data
                 new ObjectParameter("IdDepartamentoFin", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_023_Result>("SPROL_023", idEmpresaParameter, idSucursalIniParameter, idSucursalFinParameter, idNominaParameter, idNominaTipoLiquiParameter, idPeriodoParameter, idDivisionIniParameter, idDivisionFinParameter, idAreaIniParameter, idAreaFinParameter, idDepartamentoIniParameter, idDepartamentoFinParameter);
-        }
-    
-        public virtual ObjectResult<SPROL_022_Result> SPROL_022(Nullable<int> idempresa, Nullable<int> idnomina_tipo, Nullable<int> idnomina_Tipo_liq, Nullable<int> idperiodo)
-        {
-            var idempresaParameter = idempresa.HasValue ?
-                new ObjectParameter("idempresa", idempresa) :
-                new ObjectParameter("idempresa", typeof(int));
-    
-            var idnomina_tipoParameter = idnomina_tipo.HasValue ?
-                new ObjectParameter("idnomina_tipo", idnomina_tipo) :
-                new ObjectParameter("idnomina_tipo", typeof(int));
-    
-            var idnomina_Tipo_liqParameter = idnomina_Tipo_liq.HasValue ?
-                new ObjectParameter("idnomina_Tipo_liq", idnomina_Tipo_liq) :
-                new ObjectParameter("idnomina_Tipo_liq", typeof(int));
-    
-            var idperiodoParameter = idperiodo.HasValue ?
-                new ObjectParameter("idperiodo", idperiodo) :
-                new ObjectParameter("idperiodo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPROL_022_Result>("SPROL_022", idempresaParameter, idnomina_tipoParameter, idnomina_Tipo_liqParameter, idperiodoParameter);
         }
     }
 }
