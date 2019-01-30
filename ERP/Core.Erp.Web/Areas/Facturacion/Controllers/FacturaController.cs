@@ -204,6 +204,9 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             i_validar.IdCaja = pto_vta.IdCaja;
             #endregion
 
+            i_validar.info_resumen.SubtotalConDscto = i_validar.info_resumen.SubtotalIVAConDscto + i_validar.info_resumen.SubtotalSinIVAConDscto;
+            i_validar.info_resumen.SubtotalSinDscto = i_validar.info_resumen.SubtotalIVASinDscto + i_validar.info_resumen.SubtotalSinIVASinDscto;
+
             i_validar.IdUsuario = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltModi = SessionFixed.IdUsuario;
 
@@ -441,8 +444,25 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             {
                 mensaje = "Existen items con precio 0 en el detalle";
             }
-            double Total = Math.Round(lista.Sum(q => q.vt_Subtotal + q.vt_iva),2,MidpointRounding.AwayFromZero);
-            return Json(new { mensaje  = mensaje, Total = Total}, JsonRequestBehavior.AllowGet);
+
+            fa_factura_resumen_Info Resumen = new fa_factura_resumen_Info
+            {
+                SubtotalIVASinDscto = (decimal)Math.Round(lista.Where(q=>q.vt_por_iva != 0).Sum(q=>q.vt_cantidad * q.vt_Precio),2,MidpointRounding.AwayFromZero),
+                SubtotalSinIVASinDscto = (decimal)Math.Round(lista.Where(q => q.vt_por_iva != 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero),
+                
+                Descuento = (decimal)Math.Round(lista.Sum(q => q.vt_DescUnitario * q.vt_cantidad), 2, MidpointRounding.AwayFromZero),
+
+                SubtotalIVAConDscto = (decimal)Math.Round(lista.Where(q => q.vt_por_iva != 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero),
+                SubtotalSinIVAConDscto = (decimal)Math.Round(lista.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero),
+
+                ValorIVA = (decimal)Math.Round(lista.Sum(q => q.vt_iva), 2, MidpointRounding.AwayFromZero)
+            };
+            Resumen.SubtotalSinDscto = Resumen.SubtotalIVASinDscto + Resumen.SubtotalSinIVASinDscto;
+            Resumen.SubtotalConDscto = Resumen.SubtotalIVAConDscto + Resumen.SubtotalSinIVAConDscto;
+            Resumen.Total = Resumen.SubtotalConDscto + Resumen.ValorIVA;
+
+            double Total = (double)Resumen.Total;
+            return Json(Resumen, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ModificarLinea(int Secuencia = 0, decimal IdTransaccionSession = 0, double Precio = 0, double PorDescuento = 0, bool AplicarTodaFactura = false)
         {            
@@ -691,7 +711,8 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
                 vt_tipoDoc = "FACT",
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
                 DescuentoReadOnly = false,
-                IdCatalogo_FormaPago = "EFEC"
+                IdCatalogo_FormaPago = "EFEC",
+                info_resumen = new fa_factura_resumen_Info()
             };
             
             List_det.set_list(model.lst_det, model.IdTransaccionSession);

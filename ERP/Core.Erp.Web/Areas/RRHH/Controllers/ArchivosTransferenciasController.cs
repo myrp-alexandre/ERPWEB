@@ -361,7 +361,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 System.IO.File.Delete(rutafile + NombreArchivo + ".txt");
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
                 {
-                    foreach (var item in info.detalle)
+                    foreach (var item in info.detalle.Where(v=>v.Valor>0))
                     {
                         if(item.pe_cedulaRuc== "0912646684")
                         {
@@ -422,7 +422,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 }
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
                 {
-                    foreach (var item in info.detalle)
+                    foreach (var item in info.detalle.Where(v => v.Valor > 0))
                     {
                         if (item.pe_cedulaRuc == "0912646684")
                         {
@@ -492,7 +492,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
                 {
 
-                    foreach (var item in info.detalle)
+                    foreach (var item in info.detalle.Where(v => v.Valor > 0))
                     {
                         string linea = "";
                         if (item.em_tipoCta == "VRT")
