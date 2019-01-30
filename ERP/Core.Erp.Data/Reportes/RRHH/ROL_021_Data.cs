@@ -76,7 +76,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      IdDivision = q.IdDivision,
                                      Descripcion = q.Descripcion,
                                      rub_grupo = q.rub_grupo,
-                                     Dias = q.Dias
+                                     Dias = q.Dias,
+                                     AreaEmpleado = q.AreaEmpleado
                                  }).ToList();
                     }
                     else if(tipoRubro == "I")
@@ -123,7 +124,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      IdDivision = q.IdDivision,
                                      Descripcion = q.Descripcion,
                                      rub_grupo = q.rub_grupo,
-                                     Dias = q.Dias
+                                     Dias = q.Dias,
+                                     AreaEmpleado = q.AreaEmpleado
                                  }).ToList();
                     }
                     else
@@ -176,7 +178,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      IdDivision = q.IdDivision,
                                      Descripcion = q.Descripcion,
                                      rub_grupo = q.rub_grupo,
-                                     Dias = q.Dias
+                                     Dias = q.Dias,
+                                     AreaEmpleado = q.AreaEmpleado
                                  }).ToList();
                     }
 

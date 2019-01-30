@@ -59,7 +59,9 @@ namespace Core.Erp.Data.Reportes.RRHH
                         SUELDO = q.SUELDO,
                         Su_Descripcion = q.Su_Descripcion,
                         TOTALE = q.TOTALE,
-                        TOTALI = q.TOTALI
+                        TOTALI = q.TOTALI,
+                        Descripcion = q.Descripcion,
+                        DescripcionProcesoNomina = q.DescripcionProcesoNomina
                     }).ToList();
                 }
                 return Lista;

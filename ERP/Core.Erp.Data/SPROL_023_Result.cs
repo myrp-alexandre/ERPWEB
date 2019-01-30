@@ -21,7 +21,9 @@ namespace Core.Erp.Data
         public Nullable<int> IdDepartamento { get; set; }
         public Nullable<int> IdSucursal { get; set; }
         public int IdNominaTipo { get; set; }
+        public string Descripcion { get; set; }
         public int IdNominaTipoLiqui { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
         public int IdPeriodo { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string NombreDivision { get; set; }
@@ -42,5 +44,6 @@ namespace Core.Erp.Data
         public Nullable<double> OTROING { get; set; }
         public Nullable<double> DIASTRABAJADOS { get; set; }
         public Nullable<double> NETO { get; set; }
+        public string NombreCargo { get; set; }
     }
 }
