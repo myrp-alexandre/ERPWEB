@@ -63,7 +63,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  IdNominaTipoLiqui = Resumen.Key.IdNominaTipoLiqui,
                                  NombreDivision = Resumen.Key.NombreDivision,
                                  NombreArea = Resumen.Key.NombreArea,
-                                 NombreDepartamento = Resumen.Key.NombreDepartamento,                                 
+                                 NombreDepartamento = Resumen.Key.NombreDepartamento,
                                  CantidadEmpleados = Resumen.Count(),
                                  TOTALI = Resumen.Sum(q => q.TOTALI),
                                  DECIMOT = Resumen.Sum(q => q.DECIMOT),

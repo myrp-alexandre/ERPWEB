@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="45feb264d31948698a2f5f5b5c0e8cd1" Name="Diagram1" ZoomLevel="58">
+      <Diagram DiagramId="45feb264d31948698a2f5f5b5c0e8cd1" Name="Diagram1" ZoomLevel="60">
         <EntityTypeShape EntityType="Model_reportes.ro_SPROL_002" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_reportes.VWACTF_001" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model_reportes.VWACTF_002" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -87,8 +87,8 @@
         <EntityTypeShape EntityType="Model_reportes.VWFAC_003" Width="1.5" PointX="37.375" PointY="6.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_007" Width="1.5" PointX="37.375" PointY="16.75" />
         <EntityTypeShape EntityType="Model_reportes.VWFAC_013" Width="1.5" PointX="25.375" PointY="37.75" />
-        <EntityTypeShape EntityType="Model_reportes.VWROL_021" Width="1.5" PointX="17.375" PointY="21.75" />
         <EntityTypeShape EntityType="Model_reportes.VWROL_022" Width="1.5" PointX="9.375" PointY="36.75" />
+        <EntityTypeShape EntityType="Model_reportes.VWROL_021" Width="1.5" PointX="17.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
