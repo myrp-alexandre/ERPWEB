@@ -1,4 +1,5 @@
 ﻿using Core.Erp.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Core.Erp.Data.General
 {
     public class tb_bodega_Data
     {
+        #region Funciones
+
         public List<tb_bodega_Info> get_list(int IdEmpresa, int IdSucursal, bool mostrar_anulados)
         {
             try
@@ -254,5 +257,108 @@ namespace Core.Erp.Data.General
                 throw;
             }
         }
+        #endregion
+
+
+
+        public List<tb_bodega_Info> get_list(int IdEmpresa, int skip, int take, string filter, bool MostrarAnulados, int IdSucursal)
+        {
+            try
+            {
+                List<tb_bodega_Info> Lista;
+
+                using (Entities_general Context = new Entities_general())
+                {
+                    if (MostrarAnulados)
+                        Lista = (from q in Context.tb_bodega
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal == IdSucursal
+                                 && (q.IdBodega.ToString() + " " + q.bo_Descripcion).Contains(filter)
+                                 select new tb_bodega_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdSucursal = q.IdSucursal,
+                                     IdBodega = q.IdBodega,
+                                     bo_Descripcion = q.bo_Descripcion,
+                                     Estado = q.Estado,
+                                     EstadoBool = q.Estado == "A" ? true : false
+                                 })
+                                 .OrderBy(p => p.IdBodega)
+                                 .Skip(skip)
+                                 .Take(take)
+                                 .ToList();
+                    else
+                        Lista = (from q in Context.tb_bodega
+                                 where q.IdEmpresa == IdEmpresa
+                                 && q.IdSucursal == IdSucursal
+                                 && q.Estado == "A"
+                                 && (q.IdBodega.ToString() + " " + q.bo_Descripcion).Contains(filter)
+                                 select new tb_bodega_Info
+                                 {
+                                     IdEmpresa = q.IdEmpresa,
+                                     IdSucursal = q.IdSucursal,
+                                     IdBodega = q.IdBodega,
+                                     bo_Descripcion = q.bo_Descripcion,
+                                     Estado = q.Estado,
+                                     EstadoBool = q.Estado == "A" ? true : false
+                                 })
+                                 .OrderBy(p => p.IdBodega)
+                                 .Skip(skip)
+                                 .Take(take)
+                                 .ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<tb_bodega_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool estado, int IdSucursal)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<tb_bodega_Info> Lista = new List<tb_bodega_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter, estado, IdSucursal);
+            return Lista;
+        }
+
+
+        public tb_bodega_Info get_info_demanda(int IdEmpresa, int IdBodega, int IdSucursal)
+        {
+            try
+            {
+                tb_bodega_Info info = new tb_bodega_Info();
+
+                using (Entities_general Context = new Entities_general())
+                {
+                    tb_bodega Entity = Context.tb_bodega.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdBodega == IdBodega);
+                    if (Entity == null) return null;
+
+                    info = new tb_bodega_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdSucursal = Entity.IdSucursal,
+                        IdBodega = Entity.IdBodega,
+                        bo_Descripcion = Entity.bo_Descripcion,
+                        Estado = Entity.Estado,
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public tb_bodega_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, int IdSucursal)
+        {
+            return get_info(IdEmpresa, args.Value == null ? 0 : (int)args.Value, IdSucursal);
+        }
+
     }
 }

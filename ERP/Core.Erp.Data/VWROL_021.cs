@@ -20,9 +20,9 @@ namespace Core.Erp.Data
         public int IdNominaTipoLiqui { get; set; }
         public decimal IdEmpleado { get; set; }
         public Nullable<int> IdArea { get; set; }
-        public Nullable<int> IdDivision { get; set; }
+        public Nullable<int> IDividion { get; set; }
         public Nullable<int> IdAreaEmpleado { get; set; }
-        public string AreaEmpleado { get; set; }
+        public Nullable<int> IdDivisionEmpleado { get; set; }
         public int IdPeriodo { get; set; }
         public string IdRubro { get; set; }
         public bool se_distribuye { get; set; }
@@ -45,8 +45,10 @@ namespace Core.Erp.Data
         public string Descripcion { get; set; }
         public string rub_grupo { get; set; }
         public Nullable<double> Dias { get; set; }
-        public string Su_Descripcion { get; set; }
-        public string area { get; set; }
+        public string NominaTipo { get; set; }
+        public string NominaTipoLiqui { get; set; }
+        public string AreaEmpleado { get; set; }
         public string Division { get; set; }
+        public string su_Descripcion { get; set; }
     }
 }
