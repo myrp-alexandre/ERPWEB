@@ -29,8 +29,7 @@ namespace Core.Erp.Data.General
                                      Codigo_Empresa=q.Codigo_Empresa,
                                      ba_descripcion=q.ba_descripcion,
                                       CodigoLegal=q.CodigoLegal,
-                                      estado=q.estado,
-                                     IdProceso = q.IdProceso
+                                      estado=q.estado
 
                                  }).ToList();
                     else
