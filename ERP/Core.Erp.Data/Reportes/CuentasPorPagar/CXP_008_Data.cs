@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
 {
     public class CXP_008_Data
     {
-        public List<CXP_008_Info> get_list(int IdEmpresa,int IdSucursal, DateTime fecha, decimal IdProveedor, bool no_mostrar_en_conciliacion, bool no_mostrar_saldo_0)
+        public List<CXP_008_Info> get_list(int IdEmpresa, DateTime fecha, int IdSucursal, decimal IdProveedor, bool no_mostrar_en_conciliacion, bool no_mostrar_saldo_0)
         {
             try
             {
@@ -24,8 +24,8 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                 {
                     if (no_mostrar_en_conciliacion && no_mostrar_saldo_0)
                     {
-                        Lista = (from q in Context.SPCXP_008(IdEmpresa, fecha, IdProveedor_ini, IdProveedor_fin)
-                                 where q.Saldo > 0 && q.en_conciliacion == false
+                        Lista = (from q in Context.SPCXP_008(IdEmpresa, fecha, IdSucursalIni, IdSucursalFin, IdProveedor_ini, IdProveedor_fin)
+                                 where q.Saldo > 0 && q.en_conciliacion == 0
                                  select new CXP_008_Info
                                  {
                                      IdRow = q.IdRow,
@@ -62,7 +62,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                     else
                         if (!no_mostrar_en_conciliacion && no_mostrar_saldo_0)
                     {
-                        Lista = (from q in Context.SPCXP_008(IdEmpresa, fecha, IdProveedor_ini, IdProveedor_fin)
+                        Lista = (from q in Context.SPCXP_008(IdEmpresa, fecha, IdSucursalIni, IdSucursalFin, IdProveedor_ini, IdProveedor_fin)
                                  where q.Saldo > 0
                                  select new CXP_008_Info
                                  {
@@ -100,8 +100,8 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                     else
                         if (no_mostrar_en_conciliacion && !no_mostrar_saldo_0)
                     {
-                        Lista = (from q in Context.SPCXP_008(IdEmpresa, fecha, IdProveedor_ini, IdProveedor_fin)
-                                 where q.en_conciliacion = false
+                        Lista = (from q in Context.SPCXP_008(IdEmpresa, fecha, IdSucursalIni, IdSucursalFin, IdProveedor_ini, IdProveedor_fin)
+                                 where q.en_conciliacion == 0
                                  select new CXP_008_Info
                                  {
                                      IdRow = q.IdRow,
@@ -136,7 +136,7 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
                                  }).ToList();
                     }
                     else
-                    Lista = (from q in Context.SPCXP_008(IdEmpresa, fecha, IdProveedor_ini, IdProveedor_fin)
+                    Lista = (from q in Context.SPCXP_008(IdEmpresa, fecha, IdSucursalIni, IdSucursalFin, IdProveedor_ini, IdProveedor_fin)
                              select new CXP_008_Info
                              {
                                  IdRow = q.IdRow,

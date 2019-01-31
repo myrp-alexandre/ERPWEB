@@ -32,7 +32,7 @@ namespace Core.Erp.Web.Reportes.CuentasPorPagar
             bool no_mostrar_saldo_0 = string.IsNullOrEmpty(p_no_mostrar_saldo_0.ToString()) ? false : Convert.ToBoolean(p_no_mostrar_saldo_0.Value);
 
             CXP_008_Bus bus_rpt = new CXP_008_Bus();
-            List<CXP_008_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, fecha, IdProveedor, no_mostrar_en_conciliacion, no_mostrar_saldo_0);
+            List<CXP_008_Info> lst_rpt = bus_rpt.get_list(IdEmpresa,  fecha, IdSucursal, IdProveedor, no_mostrar_en_conciliacion, no_mostrar_saldo_0);
             this.DataSource = lst_rpt;
         }
     }

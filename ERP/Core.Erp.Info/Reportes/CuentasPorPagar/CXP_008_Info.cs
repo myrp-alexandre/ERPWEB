@@ -9,9 +9,9 @@ namespace Core.Erp.Info.Reportes.CuentasPorPagar
     public class CXP_008_Info
     {
         public long IdRow { get; set; }
-        public Nullable<int> IdEmpresa { get; set; }
+        public int IdEmpresa { get; set; }
         public Nullable<decimal> IdCbteCble_Ogiro { get; set; }
-        public Nullable<int> IdTipoCbte_Ogiro { get; set; }
+        public Nullable<decimal> IdTipoCbte_Ogiro { get; set; }
         public string IdOrden_giro_Tipo { get; set; }
         public string Documento { get; set; }
         public string nom_tipo_doc { get; set; }
@@ -25,9 +25,9 @@ namespace Core.Erp.Info.Reportes.CuentasPorPagar
         public string Ruc_Proveedor { get; set; }
         public string representante_legal { get; set; }
         public string Tipo_cbte { get; set; }
-        public Nullable<int> Plazo_fact { get; set; }
-        public Nullable<System.DateTime> co_fechaOg { get; set; }
-        public Nullable<System.DateTime> co_FechaFactura_vct { get; set; }
+        public int Plazo_fact { get; set; }
+        public System.DateTime co_fechaOg { get; set; }
+        public System.DateTime co_FechaFactura_vct { get; set; }
         public Nullable<int> Dias_Vcto { get; set; }
         public Nullable<System.DateTime> Fecha_corte { get; set; }
         public double x_Vencer { get; set; }
@@ -36,6 +36,7 @@ namespace Core.Erp.Info.Reportes.CuentasPorPagar
         public double Vencido_31_60 { get; set; }
         public double Vencido_60_90 { get; set; }
         public double Vencido_mayor_90 { get; set; }
-        public bool en_conciliacion { get; set; }
+        public int en_conciliacion { get; set; }
+        public string Su_Descripcion { get; set; }
     }
 }
