@@ -43,7 +43,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
                           } into Area
                           select new FAC_010_Info
                           {
-                              vt_total = Area.Sum(q=>q.vt_total),
+                              Total = Area.Sum(q=>q.Total),
                               IdEmpresa = Area.Key.IdEmpresa,
                               IdSucursal = Area.Key.IdSucursal,
                               IdCatalogo_FormaPago = Area.Key.IdCatalogo_FormaPago,
@@ -59,7 +59,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
                          q.NombreFormaPago,
                          q.vt_NumFactura,
                          q.vt_fecha,
-                         q.vt_total
+                         q.Total
                      } into Factura
                      select new FAC_010_Info
                      {
@@ -69,7 +69,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
                          NombreFormaPago = Factura.Key.NombreFormaPago,                         
                          vt_NumFactura = Factura.Key.vt_NumFactura,
                          vt_fecha = Factura.Key.vt_fecha,
-                         vt_total = Factura.Key.vt_total
+                         Total = Factura.Key.Total
                      }).ToList();
 
             this.DataSource = lst_rpt;

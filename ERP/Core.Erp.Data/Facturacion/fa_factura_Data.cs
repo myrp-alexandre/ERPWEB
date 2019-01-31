@@ -166,8 +166,7 @@ namespace Core.Erp.Data.Facturacion
                         esta_impresa = Entity.esta_impresa,
                         valor_abono = Entity.valor_abono,
                         IdNivel = Entity.IdNivel,
-                        IdCatalogo_FormaPago = Entity.IdCatalogo_FormaPago,
-                        vt_ValorEfectivo = Entity.vt_ValorEfectivo,                        
+                        IdCatalogo_FormaPago = Entity.IdCatalogo_FormaPago,                     
                     };
 
                     info.info_resumen = Context.fa_factura_resumen.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta).Select(q=> new fa_factura_resumen_Info
@@ -268,9 +267,6 @@ namespace Core.Erp.Data.Facturacion
                     esta_impresa = info.esta_impresa,
                     valor_abono = info.valor_abono,
                     IdUsuario = info.IdUsuario,
-                    vt_Total = info.vt_Total,
-                    vt_Cambio = info.vt_Cambio,
-                    vt_ValorEfectivo = info.vt_ValorEfectivo,
                     IdNivel = info.IdNivel,
 
                 };
@@ -776,9 +772,6 @@ namespace Core.Erp.Data.Facturacion
                 Entity.vt_tipo_venta = info.vt_tipo_venta;
                 Entity.fecha_primera_cuota = info.fecha_primera_cuota;
                 Entity.valor_abono = info.valor_abono;
-                Entity.vt_Total = info.vt_Total;
-                Entity.vt_Cambio = info.vt_Cambio;
-                Entity.vt_ValorEfectivo = info.vt_ValorEfectivo;
                 Entity.IdNivel = info.IdNivel;
                 Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                 Entity.Fecha_UltMod = DateTime.Now;

@@ -47,16 +47,26 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  Su_Direccion = q.Su_Direccion,
                                  Su_Telefonos = q.Su_Telefonos,
                                  vt_autorizacion = q.vt_autorizacion,
-                                 vt_Cambio = q.vt_Cambio,
+                                 Cambio = q.Cambio,
                                  vt_cantidad = q.vt_cantidad,
                                  vt_fecha = q.vt_fecha,
                                  vt_iva = q.vt_iva,
                                  vt_NumFactura = q.vt_NumFactura,
                                  vt_por_iva = q.vt_por_iva,
                                  vt_Precio = q.vt_Precio,
-                                 vt_Total = q.vt_Total,
-                                 vt_ValorEfectivo = q.vt_ValorEfectivo,
-                                 vt_Observacion = q.vt_Observacion
+                                 Total = q.Total,
+                                 ValorEfectivo = q.ValorEfectivo,
+                                 vt_Observacion = q.vt_Observacion,
+
+                                 Descuento = q.Descuento,
+                                 SubtotalIVAConDscto = q.SubtotalIVAConDscto,
+                                 SubtotalIVASinDscto = q.SubtotalIVASinDscto,
+                                 SubtotalSinIVAConDscto = q.SubtotalSinIVAConDscto,
+                                 SubtotalSinIVASinDscto = q.SubtotalSinIVASinDscto,
+                                 T_SubtotalConDscto=q.T_SubtotalConDscto,
+                                 T_SubtotalSinDscto = q.T_SubtotalSinDscto,
+                                 ValorIVA = q.ValorIVA,
+                                 vt_total = q.vt_total
                              }).ToList();
                 }
                 return Lista;

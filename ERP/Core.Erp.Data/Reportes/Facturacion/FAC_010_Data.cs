@@ -40,10 +40,11 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                  Su_Telefonos = q.Su_Telefonos,
                                  Su_Direccion = q.Su_Direccion,
                                  Su_Ruc = q.Su_Ruc,
-                                 SubtotalIVA = q.SubtotalIVA,
-                                 SubtotalSinIVA = q.SubtotalSinIVA,
-                                 vt_iva = q.vt_iva,
-                                 vt_total = q.vt_total
+                                 SubtotalIVAConDscto = q.SubtotalIVAConDscto,
+                                 SubtotalSinIVAConDscto = q.SubtotalSinIVAConDscto,
+                                 ValorIVA = q.ValorIVA,
+                                 Total = q.Total,
+                                 
                              }).ToList();
                 }
                 return Lista;

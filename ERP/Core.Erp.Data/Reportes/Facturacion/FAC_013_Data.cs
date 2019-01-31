@@ -59,7 +59,18 @@ namespace Core.Erp.Data.Reportes.Facturacion
                         vt_PrecioFinal = q.vt_PrecioFinal,
                         vt_Subtotal = q.vt_Subtotal,
                             pr_descripcion = q.pr_descripcion,
-                            vt_NumFactura = q.vt_NumFactura
+                            vt_NumFactura = q.vt_NumFactura,
+                            Cambio = q.Cambio,
+                            Descuento = q.Descuento,
+                            SubtotalConDscto = q.SubtotalConDscto,
+                            SubtotalIVAConDscto = q.SubtotalIVAConDscto,
+                            SubtotalIVASinDscto = q.SubtotalIVASinDscto,
+                            SubtotalSinDscto = q.SubtotalSinDscto,
+                            SubtotalSinIVAConDscto = q.SubtotalSinIVAConDscto,
+                            SubtotalSinIVASinDscto = q.SubtotalSinIVASinDscto,
+                            Total = q.Total,
+                            ValorEfectivo = q.ValorEfectivo,
+                            ValorIVA = q.ValorIVA
 
                         }).ToList();
                 }

@@ -21,7 +21,7 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public double DescuentoTotal { get; set; }
         public double SubtotalConDscto { get; set; }
         public double vt_iva { get; set; }
-        public double vt_Total { get; set; }
+        public double vt_total { get; set; }
         public double vt_por_iva { get; set; }
         public double SubtotalIVA { get; set; }
         public double SubtotalSinIVA { get; set; }
@@ -37,10 +37,19 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public string Su_Direccion { get; set; }
         public string FormaDePago { get; set; }
         public string IdCatalogo_FormaPago { get; set; }
-        public double vt_ValorEfectivo { get; set; }
-        public double vt_Cambio { get; set; }
         public string vt_autorizacion { get; set; }
         public Nullable<System.DateTime> Fecha_Autorizacion { get; set; }
         public string vt_Observacion { get; set; }
+        public Nullable<decimal> SubtotalIVASinDscto { get; set; }
+        public Nullable<decimal> SubtotalSinIVASinDscto { get; set; }
+        public Nullable<decimal> T_SubtotalSinDscto { get; set; }
+        public Nullable<decimal> Descuento { get; set; }
+        public Nullable<decimal> SubtotalIVAConDscto { get; set; }
+        public Nullable<decimal> SubtotalSinIVAConDscto { get; set; }
+        public Nullable<decimal> T_SubtotalConDscto { get; set; }
+        public Nullable<decimal> ValorIVA { get; set; }
+        public Nullable<decimal> Total { get; set; }
+        public Nullable<decimal> ValorEfectivo { get; set; }
+        public Nullable<decimal> Cambio { get; set; }
     }
 }
