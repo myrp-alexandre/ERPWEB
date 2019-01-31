@@ -12,7 +12,7 @@ namespace Core.Erp.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Factura
+    public partial class vwFacturas_sin_aprobar
     {
         public long cod_fact { get; set; }
         public int cod_evento { get; set; }
@@ -35,10 +35,10 @@ namespace Core.Erp.Data
         public string lider { get; set; }
         public Nullable<int> co_tarjeta { get; set; }
         public Nullable<int> @ref { get; set; }
-        public Nullable<int> lote { get; set; }
         public string recibos { get; set; }
-        public string estado_aprobacion { get; set; }
         public Nullable<int> co_pago { get; set; }
         public Nullable<int> cod_lide { get; set; }
+        public Nullable<int> lote { get; set; }
+        public string estado_aprobacion { get; set; }
     }
 }

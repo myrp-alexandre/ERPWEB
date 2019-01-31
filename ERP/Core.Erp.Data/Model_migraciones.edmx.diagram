@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9c2b60a1ddd04acb95fa6dfd2fe38a31" Name="Diagram1" ZoomLevel="98">
         <EntityTypeShape EntityType="Entity_evento.Factura" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Entity_evento.vwFacturas_sin_aprobar" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

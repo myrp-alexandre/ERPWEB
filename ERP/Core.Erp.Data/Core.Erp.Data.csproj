@@ -2051,6 +2051,9 @@
     <Compile Include="VWCXP_013.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwFacturas_sin_aprobar.cs">
+      <DependentUpon>Model_migraciones.tt</DependentUpon>
+    </Compile>
     <Compile Include="VWFAC_001.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>

@@ -20,7 +20,7 @@ namespace Core.Erp.Data.Migraciones
 
                 {
 
-                    lista = (from q in context.Facturas
+                    lista = (from q in context.vwFacturas_sin_aprobar
                              where q.fecha>=Fi
                              && q.fecha<=ff
                              && q.estado_aprobacion==null
