@@ -69,7 +69,11 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  DECIMOT = Resumen.Sum(q => q.DECIMOT),
                                  DECIMOC = Resumen.Sum(q => q.DECIMOC),
                                  FRESERVA = Resumen.Sum(q => q.FRESERVA),
-                                 TotalResumen = Resumen.Sum(q=> q.TOTALI+q.DECIMOT+q.DECIMOC+q.FRESERVA)
+                                 SUELDO = Resumen.Sum(q => q.SUELDO),
+                                 SOBRET = Resumen.Sum(q => q.SOBRET),
+                                 OTROING = Resumen.Sum(q => q.OTROING),
+
+                                 TotalResumen = Resumen.Sum(q=> q.SUELDO+q.DECIMOT+q.DECIMOC+q.FRESERVA+q.SOBRET+q.OTROING)
                              }).ToList();
 
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
