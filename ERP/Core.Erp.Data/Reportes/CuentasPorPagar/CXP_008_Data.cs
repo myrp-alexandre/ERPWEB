@@ -9,12 +9,15 @@ namespace Core.Erp.Data.Reportes.CuentasPorPagar
 {
     public class CXP_008_Data
     {
-        public List<CXP_008_Info> get_list(int IdEmpresa, DateTime fecha, decimal IdProveedor, bool no_mostrar_en_conciliacion, bool no_mostrar_saldo_0)
+        public List<CXP_008_Info> get_list(int IdEmpresa,int IdSucursal, DateTime fecha, decimal IdProveedor, bool no_mostrar_en_conciliacion, bool no_mostrar_saldo_0)
         {
             try
             {
                decimal IdProveedor_ini = IdProveedor;
                 decimal IdProveedor_fin = IdProveedor == 0 ? 9999 : IdProveedor;
+
+                int IdSucursalIni = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
                 fecha = fecha.Date;
                 List<CXP_008_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())

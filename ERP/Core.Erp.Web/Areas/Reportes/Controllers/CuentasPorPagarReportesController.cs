@@ -133,26 +133,24 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             ViewBag.lst_proveedor = lst_proveedor;
 
         }
-        public ActionResult CXP_008(DateTime? fecha,  bool no_mostrar_en_conciliacion = false, bool no_mostrar_saldo_en_0 = false, decimal IdProveedor = 0)
+        public ActionResult CXP_008()
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                fecha = fecha == null ? DateTime.Now : Convert.ToDateTime(fecha),
-                IdProveedor = IdProveedor,
-                no_mostrar_en_conciliacion = no_mostrar_en_conciliacion,
-                no_mostrar_saldo_en_0 = no_mostrar_saldo_en_0
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdProveedor = 0
             };
             cargar_combos();
             CXP_008_Rpt report = new CXP_008_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
             report.p_fecha.Value = model.fecha;
             report.p_IdProveedor.Value = model.IdProveedor;
             report.p_no_mostrar_en_conciliacion.Value = model.no_mostrar_en_conciliacion;
             report.p_no_mostrar_saldo_0.Value = model.no_mostrar_saldo_en_0;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
-            report.RequestParameters = false;
             ViewBag.Report = report;
             return View(model);
         }
@@ -161,6 +159,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             CXP_008_Rpt report = new CXP_008_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
             report.p_fecha.Value = model.fecha;
             report.p_IdProveedor.Value = model.IdProveedor;
             report.p_no_mostrar_en_conciliacion.Value = model.no_mostrar_en_conciliacion;
