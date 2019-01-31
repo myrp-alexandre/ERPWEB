@@ -438,17 +438,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
 
         public JsonResult ValidarGrid(decimal IdTransaccionSession = 0)
         {
-            string mensaje = "";
-            var lista = List_det.get_list(IdTransaccionSession);
-            if (lista.Where(q=>q.vt_Precio == 0).Count() > 0)
-            {
-                mensaje = "Existen items con precio 0 en el detalle";
-            }
+            var lista = List_det.get_list(IdTransaccionSession);            
 
             fa_factura_resumen_Info Resumen = new fa_factura_resumen_Info
             {
                 SubtotalIVASinDscto = (decimal)Math.Round(lista.Where(q=>q.vt_por_iva != 0).Sum(q=>q.vt_cantidad * q.vt_Precio),2,MidpointRounding.AwayFromZero),
-                SubtotalSinIVASinDscto = (decimal)Math.Round(lista.Where(q => q.vt_por_iva != 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero),
+                SubtotalSinIVASinDscto = (decimal)Math.Round(lista.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero),
                 
                 Descuento = (decimal)Math.Round(lista.Sum(q => q.vt_DescUnitario * q.vt_cantidad), 2, MidpointRounding.AwayFromZero),
 
@@ -461,7 +456,12 @@ namespace Core.Erp.Web.Areas.Facturacion.Controllers
             Resumen.SubtotalConDscto = Resumen.SubtotalIVAConDscto + Resumen.SubtotalSinIVAConDscto;
             Resumen.Total = Resumen.SubtotalConDscto + Resumen.ValorIVA;
 
-            double Total = (double)Resumen.Total;
+            if (lista.Where(q => q.vt_Precio == 0).Count() > 0)
+            {
+                Resumen.mensaje = "Existen items con precio 0 en el detalle";
+            }
+            Resumen.mensaje = Resumen.mensaje ?? "";
+
             return Json(Resumen, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ModificarLinea(int Secuencia = 0, decimal IdTransaccionSession = 0, double Precio = 0, double PorDescuento = 0, bool AplicarTodaFactura = false)

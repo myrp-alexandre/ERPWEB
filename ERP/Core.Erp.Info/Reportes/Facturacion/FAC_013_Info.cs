@@ -45,5 +45,16 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public decimal IdCbteVta { get; set; }
         public string pr_descripcion { get; set; }
         public string vt_NumFactura { get; set; }
+        public Nullable<decimal> SubtotalIVASinDscto { get; set; }
+        public Nullable<decimal> SubtotalSinIVASinDscto { get; set; }
+        public Nullable<decimal> SubtotalSinDscto { get; set; }
+        public Nullable<decimal> Descuento { get; set; }
+        public Nullable<decimal> SubtotalIVAConDscto { get; set; }
+        public Nullable<decimal> SubtotalSinIVAConDscto { get; set; }
+        public Nullable<decimal> SubtotalConDscto { get; set; }
+        public Nullable<decimal> ValorIVA { get; set; }
+        public Nullable<decimal> Total { get; set; }
+        public Nullable<decimal> ValorEfectivo { get; set; }
+        public Nullable<decimal> Cambio { get; set; }
     }
 }

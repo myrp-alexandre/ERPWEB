@@ -56,9 +56,6 @@ namespace Core.Erp.Info.Facturacion
         public Nullable<double> valor_abono { get; set; }
 
         public int IdNivel { get; set; }
-        public double vt_Total { get; set; }
-        public double vt_ValorEfectivo { get; set; }
-        public double vt_Cambio { get; set; }
 
         public fa_factura_resumen_Info info_resumen { get; set; }
 

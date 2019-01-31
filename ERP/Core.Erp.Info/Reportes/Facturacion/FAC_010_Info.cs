@@ -25,9 +25,9 @@ namespace Core.Erp.Info.Reportes.Facturacion
         public string Su_Telefonos { get; set; }
         public string Su_Direccion { get; set; }
         public string Su_Ruc { get; set; }
-        public Nullable<double> SubtotalIVA { get; set; }
-        public Nullable<double> SubtotalSinIVA { get; set; }
-        public Nullable<double> vt_iva { get; set; }
-        public Nullable<double> vt_total { get; set; }
+        public Nullable<decimal> SubtotalIVAConDscto { get; set; }
+        public Nullable<decimal> SubtotalSinIVAConDscto { get; set; }
+        public Nullable<decimal> ValorIVA { get; set; }
+        public Nullable<decimal> Total { get; set; }
     }
 }

@@ -31,20 +31,20 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                      vt_iva = q.vt_iva,
                                      vt_NumFactura = q.vt_NumFactura,
                                      vt_Precio = q.vt_Precio,
-                                     vt_por_iva = q.vt_por_iva,
+                                     
                                      cli_cedulaRuc = q.cli_cedulaRuc,
                                      cli_correo = q.cli_correo,
                                      cli_direccion = q.cli_direccion,
                                      cli_Nombre = q.cli_Nombre,
                                      cli_Telefonos = q.cli_Telefonos,
-                                     DescuentoTotal = q.DescuentoTotal,
+                                     
                                      FormaDePago = q.FormaDePago,
                                      pr_descripcion = q.pr_descripcion,
                                      Secuencia = q.Secuencia,
                                      SubtotalConDscto = q.SubtotalConDscto,
-                                     SubtotalIVA =  q.SubtotalIVA,
+                                     SubtotalIVAConDscto =  q.SubtotalIVAConDscto,
                                      SubtotalSinDscto = q.SubtotalSinDscto,
-                                     SubtotalSinIVA = q.SubtotalSinIVA,
+                                     SubtotalSinIVAConDscto = q.SubtotalSinIVAConDscto,
                                      Su_Descripcion = q.Su_Descripcion,
                                      Su_Direccion = q.Su_Direccion,
                                      Su_Telefonos = q.Su_Telefonos,
@@ -52,9 +52,16 @@ namespace Core.Erp.Data.Reportes.Facturacion
                                      Fecha_Autorizacion = q.Fecha_Autorizacion,
                                      IdCatalogo_FormaPago = q.IdCatalogo_FormaPago,
                                      vt_autorizacion = q.vt_autorizacion,
-                                     vt_Cambio = q.vt_Cambio,
-                                     vt_ValorEfectivo = q.vt_ValorEfectivo,
-                                      vt_Observacion = q.vt_Observacion
+                                     Cambio = q.Cambio,
+                                     ValorEfectivo = q.ValorEfectivo,
+                                      vt_Observacion = q.vt_Observacion,
+                                      Descuento = q.Descuento,
+                                      SubtotalIVASinDscto = q.SubtotalIVASinDscto,
+                                      SubtotalSinIVASinDscto = q.SubtotalSinIVASinDscto,
+                                      Total = q.Total,
+                                      T_SubtotalConDscto = q.T_SubtotalConDscto,
+                                      T_SubtotalSinDscto = q.T_SubtotalSinDscto,
+                                      ValorIVA = q.ValorIVA
                                  }).ToList();
                     
                     
