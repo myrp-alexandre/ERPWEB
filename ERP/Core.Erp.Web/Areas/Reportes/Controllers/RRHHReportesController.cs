@@ -671,6 +671,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.P_IdArea.Value = model.IdArea;
             report.P_IdDivision.Value = model.IdDivision;
             SessionFixed.IdDivision = model.IdDivision.ToString();
+            report.p_IdProceso.Value = model.IdProceso;
             cargar_combos(model.IdEmpresa);
             ViewBag.Report = report;
             return View(model);
