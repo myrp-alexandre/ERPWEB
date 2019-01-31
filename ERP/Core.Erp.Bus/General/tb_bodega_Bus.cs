@@ -1,5 +1,6 @@
 ﻿using Core.Erp.Data.General;
 using Core.Erp.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 
@@ -90,6 +91,48 @@ namespace Core.Erp.Bus.General
             try
             {
                 return odata.get_list_demanda(IdEmpresa, skip, take, filter, MostrarAnulados, IdSucursal);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<tb_bodega_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool estado, int IdSucursal)
+
+        {
+            try
+            {
+                return odata.get_list_bajo_demanda(args, IdEmpresa, estado, IdSucursal);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public tb_bodega_Info get_info_demanda(int IdEmpresa, int IdBodega, int IdSucursal)
+
+        {
+            try
+            {
+                return odata.get_info_demanda(IdEmpresa, IdBodega, IdSucursal);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public tb_bodega_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, int IdSucursal)
+
+        {
+            try
+            {
+                return odata.get_info_bajo_demanda(args, IdEmpresa, IdSucursal);
             }
             catch (Exception)
             {
