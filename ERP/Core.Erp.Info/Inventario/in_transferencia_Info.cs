@@ -10,6 +10,7 @@ namespace Core.Erp.Info.Inventario
 {
   public  class in_transferencia_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursalOrigen { get; set; }
         public int IdBodegaOrigen { get; set; }
@@ -38,10 +39,7 @@ namespace Core.Erp.Info.Inventario
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string motivo_anula { get; set; }
         public string IdEstadoAprobacion_cat { get; set; }
-
-
-
-
+        
         public string SucuOrigen { get; set; }
         public string BodegaORIG { get; set; }
         public string SucuDEST { get; set; }
