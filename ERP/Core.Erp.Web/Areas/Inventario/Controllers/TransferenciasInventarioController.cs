@@ -76,24 +76,27 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_transferencias_det(int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
+        public ActionResult GridViewPartial_transferencias_det()
         {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            in_transferencia_Info model = new in_transferencia_Info();
-            model.list_detalle = bus_tras_detalle.get_list(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
-            if (model.list_detalle.Count == 0)
-                model.list_detalle = List_in_transferencia_det.get_list();
+
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det", model.list_detalle);
+            var model = List_in_transferencia_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_transferencias_det");
         }
 
         #endregion
 
-
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
-            Session["in_transferencia_det_Info"] = null;
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             in_parametro_Info i_param = bus_in_param.get_info(IdEmpresa);
             if (i_param == null)
                 return RedirectToAction("Index");
@@ -103,8 +106,12 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 tr_fecha = DateTime.Now,
                 IdSucursalOrigen = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdMovi_inven_tipo_SucuOrig = i_param.IdMovi_inven_tipo_egresoBodegaOrigen,
-                IdMovi_inven_tipo_SucuDest = i_param.IdMovi_inven_tipo_ingresoBodegaDestino
+                IdMovi_inven_tipo_SucuDest = i_param.IdMovi_inven_tipo_ingresoBodegaDestino,
+                IdTransaccionSession = Convert.ToInt32(SessionFixed.IdTransaccionSessionActual),
+                list_detalle = new List<in_transferencia_det_Info>()
+
             };
+            model.list_detalle = List_in_transferencia_det.get_list(model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -112,7 +119,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Nuevo(in_transferencia_Info model)
         {
-            model.list_detalle = List_in_transferencia_det.get_list();
+            model.list_detalle = List_in_transferencia_det.get_list(model.IdTransaccionSession);
             string mensaje = bus_trnferencia.validar(model);
             if (mensaje != "")
             {
@@ -138,10 +145,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0, int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             in_transferencia_Info model = bus_trnferencia.get_info(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
-            Session["in_transferencia_det_Info"] = model.list_detalle;
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.list_detalle = bus_tras_detalle.get_list(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
+            List_in_transferencia_det.set_list(model.list_detalle, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -149,7 +164,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Modificar(in_transferencia_Info model)
         {
-            model.list_detalle = List_in_transferencia_det.get_list();
+            model.list_detalle = List_in_transferencia_det.get_list(model.IdTransaccionSession);
             string mensaje = bus_trnferencia.validar(model);
             if (mensaje != "")
             {
@@ -169,15 +184,23 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            List_in_transferencia_det.set_list(null);
+            List_in_transferencia_det.set_list(null, model.IdTransaccionSession);
             return RedirectToAction("Index");
         }
         public ActionResult Anular(int IdEmpresa = 0, int IdSucursalOrigen = 0, int IdBodegaOrigen = 0, decimal IdTransferencia = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             in_transferencia_Info model = bus_trnferencia.get_info(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
-            Session["in_transferencia_det_Info"] = model.list_detalle;
             if (model == null)
                 return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.list_detalle = bus_tras_detalle.get_list(IdEmpresa, IdSucursalOrigen, IdBodegaOrigen, IdTransferencia);
+            List_in_transferencia_det.set_list(model.list_detalle, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -185,7 +208,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         [HttpPost]
         public ActionResult Anular(in_transferencia_Info model)
         {
-            model.list_detalle = List_in_transferencia_det.get_list();
+            model.list_detalle = List_in_transferencia_det.get_list(model.IdTransaccionSession);
             string mensaje = bus_trnferencia.validar(model);
             if (mensaje != "")
             {
@@ -227,11 +250,10 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                 }
 
 
-            List_in_transferencia_det.AddRow(info_det);
-            in_transferencia_Info model = new in_transferencia_Info();
-            model.list_detalle = List_in_transferencia_det.get_list();
+            List_in_transferencia_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_in_transferencia_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det", model.list_detalle);
+            return PartialView("_GridViewPartial_transferencias_det");
         }
 
         [HttpPost, ValidateInput(false)]
@@ -249,20 +271,19 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
                     }
                 }
 
-            List_in_transferencia_det.UpdateRow(info_det);
-            in_transferencia_Info model = new in_transferencia_Info();
-            model.list_detalle = List_in_transferencia_det.get_list();
+            List_in_transferencia_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_in_transferencia_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det", model.list_detalle);
+            return PartialView("_GridViewPartial_transferencias_det");
         }
 
         public ActionResult EditingDelete(int Secuencia)
         {
-            List_in_transferencia_det.DeleteRow(Secuencia);
-            in_transferencia_Info model = new in_transferencia_Info();
-            model.list_detalle = List_in_transferencia_det.get_list();
+            List_in_transferencia_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_in_transferencia_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det", model.list_detalle);
+            return PartialView("_GridViewPartial_transferencias_det");
         }
         #endregion
 
@@ -304,7 +325,6 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
         #endregion
 
-
         #region Json
         public JsonResult CargarBodega(int IdEmpresa = 0, int IdSucursal = 0)
         {
@@ -319,25 +339,26 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
     public class in_transferencia_det_List
     {
-        public List<in_transferencia_det_Info> get_list()
+        string Variable = "in_transferencia_det_Info";
+        public List<in_transferencia_det_Info> get_list(decimal IdTransaccionSession)
         {
-            if (HttpContext.Current.Session["in_transferencia_det_Info"] == null)
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
                 List<in_transferencia_det_Info> list = new List<in_transferencia_det_Info>();
 
-                HttpContext.Current.Session["in_transferencia_det_Info"] = list;
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<in_transferencia_det_Info>)HttpContext.Current.Session["in_transferencia_det_Info"];
+            return (List<in_transferencia_det_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<in_transferencia_det_Info> list)
+        public void set_list(List<in_transferencia_det_Info> list, decimal IdTransaccionSession)
         {
-            HttpContext.Current.Session["in_transferencia_det_Info"] = list;
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void AddRow(in_transferencia_det_Info info_det)
+        public void AddRow(in_transferencia_det_Info info_det, decimal IdTransaccionSession)
         {
-            List<in_transferencia_det_Info> list = get_list();
+            List<in_transferencia_det_Info> list = get_list(IdTransaccionSession);
             info_det.dt_secuencia = list.Count == 0 ? 1 : list.Max(q => q.dt_secuencia) + 1;
             info_det.IdProducto = info_det.IdProducto;
             info_det.IdUnidadMedida = info_det.IdUnidadMedida;
@@ -345,18 +366,18 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             list.Add(info_det);
         }
 
-        public void UpdateRow(in_transferencia_det_Info info_det)
+        public void UpdateRow(in_transferencia_det_Info info_det, decimal IdTransaccionSession)
         {
-            in_transferencia_det_Info edited_info = get_list().Where(m => m.dt_secuencia == info_det.dt_secuencia).First();
+            in_transferencia_det_Info edited_info = get_list(IdTransaccionSession).Where(m => m.dt_secuencia == info_det.dt_secuencia).First();
             edited_info.IdProducto = info_det.IdProducto;
             edited_info.IdUnidadMedida = info_det.IdUnidadMedida;
             edited_info.dt_cantidad = info_det.dt_cantidad;
 
         }
 
-        public void DeleteRow(int dt_secuencia)
+        public void DeleteRow(int dt_secuencia, decimal IdTransaccionSession)
         {
-            List<in_transferencia_det_Info> list = get_list();
+            List<in_transferencia_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.dt_secuencia == dt_secuencia).First());
         }
 
