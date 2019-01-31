@@ -94,6 +94,7 @@
             this.p_IdProceso_bancario_tipo = new DevExpress.XtraReports.Parameters.Parameter();
             this.P_IdDivision = new DevExpress.XtraReports.Parameters.Parameter();
             this.P_IdArea = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdProceso = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -712,6 +713,11 @@
             this.P_IdArea.ValueInfo = "0";
             this.P_IdArea.Visible = false;
             // 
+            // p_IdProceso
+            // 
+            this.p_IdProceso.Name = "p_IdProceso";
+            this.p_IdProceso.Visible = false;
+            // 
             // ROL_020_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -737,7 +743,8 @@
             this.p_IdSucursal,
             this.p_IdProceso_bancario_tipo,
             this.P_IdDivision,
-            this.P_IdArea});
+            this.P_IdArea,
+            this.p_IdProceso});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ROL_020_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -817,5 +824,6 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdProceso_bancario_tipo;
         public DevExpress.XtraReports.Parameters.Parameter P_IdDivision;
         public DevExpress.XtraReports.Parameters.Parameter P_IdArea;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdProceso;
     }
 }

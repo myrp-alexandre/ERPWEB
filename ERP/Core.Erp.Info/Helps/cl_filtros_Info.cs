@@ -46,6 +46,7 @@ namespace Core.Erp.Info.Helps
         public int IdArea { get; set; }
         public int IdDivision { get; set; }
         public int IdDepartamento { get; set; }
+        public int IdProceso { get; set; }
 
         #endregion
 
