@@ -7,11 +7,13 @@ using Core.Erp.Bus.General;
 using Core.Erp.Info.Reportes.RRHH;
 using System.Collections.Generic;
 using Core.Erp.Bus.Reportes.RRHH;
+using System.Linq;
 
 namespace Core.Erp.Web.Reportes.RRHH
 {
     public partial class ROL_023_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
+        List<ROL_023_Info> ListaAgrupada = new List<ROL_023_Info>();
         public string usuario { get; set; }
         public string empresa { get; set; }
         public ROL_023_Rpt()
@@ -40,12 +42,48 @@ namespace Core.Erp.Web.Reportes.RRHH
             List<ROL_023_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdSucursal, IdNomina, IdNominaTipoLiqui, IdPeriodo, IdDivision, IdArea, IdDepartamento);
             this.DataSource = lst_rpt;
 
+            ListaAgrupada = (from q in lst_rpt
+                             group q by new
+                             {
+                                 q.IdEmpresa,
+                                 q.IdSucursal,
+                                 q.IdPeriodo,
+                                 q.IdNominaTipo,
+                                 q.IdNominaTipoLiqui,
+                                 q.NombreDivision,
+                                 q.NombreArea,
+                                 q.NombreDepartamento
+                             } into Resumen
+                             select new ROL_023_Info
+                             {
+                                 IdEmpresa = Resumen.Key.IdEmpresa,
+                                 IdSucursal = Resumen.Key.IdSucursal,
+                                 IdPeriodo = Resumen.Key.IdPeriodo,
+                                 IdNominaTipo = Resumen.Key.IdNominaTipo,
+                                 IdNominaTipoLiqui = Resumen.Key.IdNominaTipoLiqui,
+                                 NombreDivision = Resumen.Key.NombreDivision,
+                                 NombreArea = Resumen.Key.NombreArea,
+                                 NombreDepartamento = Resumen.Key.NombreDepartamento,                                 
+                                 CantidadEmpleados = Resumen.Count(),
+                                 TOTALI = Resumen.Sum(q => q.TOTALI),
+                                 DECIMOT = Resumen.Sum(q => q.DECIMOT),
+                                 DECIMOC = Resumen.Sum(q => q.DECIMOC),
+                                 FRESERVA = Resumen.Sum(q => q.FRESERVA),
+                                 TotalResumen = Resumen.Sum(q=> q.TOTALI+q.DECIMOT+q.DECIMOC+q.FRESERVA)
+                             }).ToList();
+
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
             lbl_empresa.Text = emp.em_nombre;
             ImageConverter obj = new ImageConverter();
             lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
             
+        }
+
+        private void ROL_023_Resumen_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            var Resumen = ListaAgrupada;
+            ((XRSubreport)sender).ReportSource.DataSource = Resumen;
         }
     }
 }

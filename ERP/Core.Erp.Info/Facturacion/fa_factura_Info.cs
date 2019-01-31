@@ -60,6 +60,8 @@ namespace Core.Erp.Info.Facturacion
         public double vt_ValorEfectivo { get; set; }
         public double vt_Cambio { get; set; }
 
+        public fa_factura_resumen_Info info_resumen { get; set; }
+
         #region Campos de auditoria
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transaccion { get; set; }

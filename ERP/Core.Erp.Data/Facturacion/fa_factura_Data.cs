@@ -169,6 +169,27 @@ namespace Core.Erp.Data.Facturacion
                         IdCatalogo_FormaPago = Entity.IdCatalogo_FormaPago,
                         vt_ValorEfectivo = Entity.vt_ValorEfectivo,                        
                     };
+
+                    info.info_resumen = Context.fa_factura_resumen.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta).Select(q=> new fa_factura_resumen_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdSucursal = q.IdSucursal,
+                        IdBodega = q.IdBodega,
+                        IdCbteVta = q.IdCbteVta,
+                        SubtotalConDscto = q.SubtotalConDscto,
+                        SubtotalIVAConDscto = q.SubtotalIVAConDscto,
+                        SubtotalIVASinDscto = q.SubtotalIVASinDscto,
+                        SubtotalSinDscto = q.SubtotalSinDscto,
+                        SubtotalSinIVAConDscto = q.SubtotalSinIVAConDscto,
+                        SubtotalSinIVASinDscto = q.SubtotalSinIVASinDscto,
+                        Total = q.Total,
+                        ValorEfectivo = q.ValorEfectivo,
+                        Descuento = q.Descuento,
+                        ValorIVA = q.ValorIVA,
+                        Cambio = q.Cambio
+                    }).FirstOrDefault();
+
+                    info.info_resumen = info.info_resumen ?? new fa_factura_resumen_Info();
                 }
                 return info;
             }
@@ -253,7 +274,29 @@ namespace Core.Erp.Data.Facturacion
                     IdNivel = info.IdNivel,
 
                 };
-                
+                #endregion
+
+                #region Resumen
+                db_f.fa_factura_resumen.Add(new fa_factura_resumen
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdSucursal = info.IdSucursal,
+                    IdBodega = info.IdBodega,
+                    IdCbteVta = info.IdCbteVta,
+
+                    SubtotalConDscto = info.info_resumen.SubtotalConDscto,
+                    SubtotalIVAConDscto = info.info_resumen.SubtotalIVAConDscto,
+                    SubtotalIVASinDscto = info.info_resumen.SubtotalIVASinDscto,
+                    SubtotalSinDscto = info.info_resumen.SubtotalSinDscto,
+                    SubtotalSinIVAConDscto = info.info_resumen.SubtotalSinIVAConDscto,
+                    SubtotalSinIVASinDscto = info.info_resumen.SubtotalSinIVASinDscto,
+
+                    Total = info.info_resumen.Total,
+                    Descuento = info.info_resumen.Descuento,
+                    ValorEfectivo = info.info_resumen.ValorEfectivo,
+                    ValorIVA = info.info_resumen.ValorIVA,
+                    Cambio = info.info_resumen.Cambio
+                });
                 #endregion
 
                 #region Detalle
@@ -392,7 +435,7 @@ namespace Core.Erp.Data.Facturacion
                 #endregion
 
                 #region Cobranza
-                if (info.IdCatalogo_FormaPago != "CRED")
+                if (info.IdCatalogo_FormaPago != "CRE")
                 {
                     var cobro = GenerarCobroEfectivo(info);
                     if (odata_cxc.guardarDB(cobro))
@@ -742,6 +785,34 @@ namespace Core.Erp.Data.Facturacion
 
                 #endregion
                 var contacto = db_f.fa_cliente_contactos.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente && q.IdContacto == info.IdContacto).FirstOrDefault();
+
+                #region Resumen
+                var resu = db_f.fa_factura_resumen.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCbteVta == info.IdCbteVta).FirstOrDefault();
+                if(resu != null)
+                    db_f.fa_factura_resumen.Remove(resu);
+
+                db_f.fa_factura_resumen.Add(new fa_factura_resumen
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdSucursal = info.IdSucursal,
+                    IdBodega = info.IdBodega,
+                    IdCbteVta = info.IdCbteVta,
+
+                    SubtotalConDscto = info.info_resumen.SubtotalConDscto,
+                    SubtotalIVAConDscto = info.info_resumen.SubtotalIVAConDscto,
+                    SubtotalIVASinDscto = info.info_resumen.SubtotalIVASinDscto,
+                    SubtotalSinDscto = info.info_resumen.SubtotalSinDscto,
+                    SubtotalSinIVAConDscto = info.info_resumen.SubtotalSinIVAConDscto,
+                    SubtotalSinIVASinDscto = info.info_resumen.SubtotalSinIVASinDscto,
+
+                    Total = info.info_resumen.Total,
+                    Descuento = info.info_resumen.Descuento,
+                    ValorEfectivo = info.info_resumen.ValorEfectivo,
+                    ValorIVA = info.info_resumen.ValorIVA,
+                    Cambio = info.info_resumen.Cambio
+                });
+                #endregion
+
                 #region Detalle
                 var lst_det = db_f.fa_factura_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCbteVta == info.IdCbteVta).ToList();
                 db_f.fa_factura_det.RemoveRange(lst_det);
@@ -933,7 +1004,7 @@ namespace Core.Erp.Data.Facturacion
 
                 #region Cobranza
                 db_f.SPFAC_EliminarCobroEfectivo(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdCbteVta);
-                if (info.IdCatalogo_FormaPago != "CRED")
+                if (info.IdCatalogo_FormaPago != "CRE")
                 {
                     var cobro = GenerarCobroEfectivo(info);
                     if (odata_cxc.guardarDB(cobro))

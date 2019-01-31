@@ -118,7 +118,7 @@
                 </ul>
                 <div class="tab-content" style="padding-top: 5px">
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_general">
-                        <<div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="IdCatalogo_FormaPago">Forma de pago*</label>
                                 @Html.DropDownListFor(q => q.IdCatalogo_FormaPago, new SelectList(ViewBag.lst_formapago, "IdCatalogo", "Nombre"), new { @class = "form-control", @id = "EnumeradorCobro" })
@@ -235,6 +235,68 @@
             </div>
         </div>
     </div>
+    <br />
+    <div class="row" id="DivEfectivo">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="SubtotalSinIVASinDscto">Base sin IVA</label>
+                    @Html.TextBoxFor(q => q.info_resumen.SubtotalSinIVASinDscto, new { @id = "SubtotalSinIVASinDscto", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="SubtotalIVASinDscto">Base con IVA</label>
+                    @Html.TextBoxFor(q => q.info_resumen.SubtotalIVASinDscto, new { @id = "SubtotalIVASinDscto", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Descuento">Descuento</label>
+                    @Html.TextBoxFor(q => q.info_resumen.Descuento, new { @id = "Descuento", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="SubtotalSinIVAConDscto">Subtotal Sin IVA</label>
+                    @Html.TextBoxFor(q => q.info_resumen.SubtotalSinIVAConDscto, new { @id = "SubtotalSinIVAConDscto", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="SubtotalIVAConDscto">Subtotal Con IVA</label>
+                    @Html.TextBoxFor(q => q.info_resumen.SubtotalIVAConDscto, new { @id = "SubtotalIVAConDscto", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="ValorIVA">IVA</label>
+                    @Html.TextBoxFor(q => q.info_resumen.ValorIVA, new { @id = "ValorIVA", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Total">Total</label>
+                    @Html.TextBoxFor(q => q.info_resumen.Total, new { @id = "Total", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="ValorEfectivo">Efectivo</label>
+                    @Html.TextBoxFor(q => q.info_resumen.ValorEfectivo, new { @id = "ValorEfectivo", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.info_resumen.ValorEfectivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Cambio">Cambio</label>
+                    @Html.TextBoxFor(q => q.info_resumen.Cambio, new { @id = "Cambio", @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
@@ -278,6 +340,9 @@
         });
         $("#valor_abono").change(function () {
             CargarCuotas();
+        });
+        $("#ValorEfectivo").keyup(function () {
+            CalcularCambio();
         });
     });
 
@@ -479,7 +544,7 @@ function CargarCuotas() {
             });
             GridView_factura_cuotas.PerformCallback();
     }
-    function ValidarGrid() {
+function ValidarGrid() {
         var datos = {
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
@@ -493,15 +558,32 @@ function CargarCuotas() {
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#txtMensaje").text(data);
-                if (data.length > 0) {
+                $("#txtMensaje").text(data.mensaje);
+
+                $("#SubtotalIVASinDscto").val(data.SubtotalIVASinDscto);
+                $("#SubtotalSinIVASinDscto").val(data.SubtotalSinIVASinDscto);
+                $("#Descuento").val(data.Descuento);
+
+                $("#SubtotalIVAConDscto").val(data.SubtotalIVAConDscto);
+                $("#SubtotalSinIVAConDscto").val(data.SubtotalSinIVAConDscto);
+                $("#ValorIVA").val(data.ValorIVA);
+                $("#Total").val(data.Total);
+
+                if (data.mensaje.length > 0) {
                     $("#divMensaje").show();
                 } else {
                     $("#divMensaje").hide();
                 }
+                CalcularCambio();
             },
             error: function (error) {
             }
         });
+    }
+
+    function CalcularCambio() {
+        var Total = Number($("#Total").val());
+        var Efectivo = Number($("#ValorEfectivo").val());
+        $("#Cambio").val((Efectivo - Total).toFixed(2));
     }
 </script>
