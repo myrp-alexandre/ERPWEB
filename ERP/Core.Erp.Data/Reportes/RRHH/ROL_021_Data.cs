@@ -37,8 +37,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                         Lista = (from q in Context.VWROL_021
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdPeriodo == IdPeriodo
-                                 && q.IdDivision >= IdDivisionInicio
-                                 && q.IdDivision <= IdDivisionFin
+                                 && q.IdDivisionEmpleado >= IdDivisionInicio
+                                 && q.IdDivisionEmpleado <= IdDivisionFin
                                  && q.IdAreaEmpleado >= IdAreaInicio
                                  && q.IdAreaEmpleado <= IdAreaFin
                                  && IdSucursalInicio <= q.IdSucursal && q.IdSucursal  <= IdSucursalFin
@@ -71,11 +71,21 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      pe_cedulaRuc = q.pe_cedulaRuc,
                                      pe_nombreCompleto = q.pe_nombreCompleto,
                                      IdArea = q.IdArea,
-                                     IdDivision = q.IdDivision,
+                                     IdDivisionEmpleado = q.IdDivisionEmpleado,
                                      Descripcion = q.Descripcion,
                                      rub_grupo = q.rub_grupo,
                                      Dias = q.Dias,
-                                     AreaEmpleado = q.AreaEmpleado
+                                     AreaEmpleado = q.AreaEmpleado,
+                                     Division = q.Division,
+                                     su_Descripcion = q.su_Descripcion,
+                                     IdAreaEmpleado = q.IdAreaEmpleado,
+                                     IDividion = q.IDividion,
+                                     NominaTipoLiqui = q.NominaTipoLiqui,
+                                     Porcentaje = q.Porcentaje,
+                                     se_distribuye =q.se_distribuye,
+                                     NominaTipo = q.NominaTipo,
+                                     
+
                                  }).ToList();
                     }
                     else if(tipoRubro == "I")
@@ -83,8 +93,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                         Lista = (from q in Context.VWROL_021
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdPeriodo == IdPeriodo
-                                 && q.IdDivision >= IdDivisionInicio
-                                 && q.IdDivision <= IdDivisionFin
+                                 && q.IdDivisionEmpleado >= IdDivisionInicio
+                                 && q.IdDivisionEmpleado <= IdDivisionFin
                                  && q.IdAreaEmpleado >= IdAreaInicio
                                  && q.IdAreaEmpleado <= IdAreaFin
                                  && IdSucursalInicio <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
@@ -117,11 +127,19 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      pe_cedulaRuc = q.pe_cedulaRuc,
                                      pe_nombreCompleto = q.pe_nombreCompleto,
                                      IdArea = q.IdArea,
-                                     IdDivision = q.IdDivision,
+                                     IdDivisionEmpleado = q.IdDivisionEmpleado,
                                      Descripcion = q.Descripcion,
                                      rub_grupo = q.rub_grupo,
                                      Dias = q.Dias,
-                                     AreaEmpleado = q.AreaEmpleado
+                                     AreaEmpleado = q.AreaEmpleado,
+                                     Division = q.Division,
+                                     su_Descripcion = q.su_Descripcion,
+                                     IdAreaEmpleado = q.IdAreaEmpleado,
+                                     IDividion = q.IDividion,
+                                     NominaTipoLiqui = q.NominaTipoLiqui,
+                                     Porcentaje = q.Porcentaje,
+                                     se_distribuye = q.se_distribuye,
+                                     NominaTipo = q.NominaTipo,
                                  }).ToList();
                     }
                     else
@@ -129,8 +147,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                         Lista = (from q in Context.VWROL_021
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdPeriodo == IdPeriodo
-                                 && q.IdDivision >= IdDivisionInicio
-                                 && q.IdDivision <= IdDivisionFin
+                                 && q.IdDivisionEmpleado >= IdDivisionInicio
+                                 && q.IdDivisionEmpleado <= IdDivisionFin
                                  && q.IdAreaEmpleado >= IdAreaInicio
                                  && q.IdAreaEmpleado <= IdAreaFin
                                  && IdSucursalInicio <= q.IdSucursal && q.IdSucursal <= IdSucursalFin
@@ -169,11 +187,19 @@ namespace Core.Erp.Data.Reportes.RRHH
                                      pe_cedulaRuc = q.pe_cedulaRuc,
                                      pe_nombreCompleto = q.pe_nombreCompleto,
                                      IdArea = q.IdArea,
-                                     IdDivision = q.IdDivision,
+                                     IdDivisionEmpleado = q.IdDivisionEmpleado,
                                      Descripcion = q.Descripcion,
                                      rub_grupo = q.rub_grupo,
                                      Dias = q.Dias,
-                                     AreaEmpleado = q.AreaEmpleado
+                                     AreaEmpleado = q.AreaEmpleado,
+                                     Division = q.Division,
+                                     su_Descripcion = q.su_Descripcion,
+                                     IdAreaEmpleado = q.IdAreaEmpleado,
+                                     IDividion = q.IDividion,
+                                     NominaTipoLiqui = q.NominaTipoLiqui,
+                                     Porcentaje = q.Porcentaje,
+                                     se_distribuye = q.se_distribuye,
+                                     NominaTipo = q.NominaTipo,
                                  }).ToList();
                     }
 
