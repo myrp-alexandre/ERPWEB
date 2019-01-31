@@ -482,7 +482,6 @@
             this.xrTableCell34.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdPeriodo]")});
             this.xrTableCell34.Name = "xrTableCell34";
-            this.xrTableCell34.TextFormatString = "{0:dd-MM-yy}";
             this.xrTableCell34.Weight = 1.4564515018132656D;
             // 
             // lbl_imagen

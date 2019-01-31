@@ -150,7 +150,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             CXP_008_Rpt report = new CXP_008_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSucursal.Value = model.IdSucursal;
-            report.p_fecha.Value = model.fecha;
+            report.p_fecha.Value = model.fecha_fin;
             report.p_IdProveedor.Value = model.IdProveedor;
             report.p_no_mostrar_en_conciliacion.Value = model.no_mostrar_en_conciliacion;
             report.p_no_mostrar_saldo_0.Value = model.no_mostrar_saldo_en_0;
@@ -165,7 +165,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             CXP_008_Rpt report = new CXP_008_Rpt();
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSucursal.Value = model.IdSucursal;
-            report.p_fecha.Value = model.fecha;
+            report.p_fecha.Value = model.fecha_fin;
             report.p_IdProveedor.Value = model.IdProveedor;
             report.p_no_mostrar_en_conciliacion.Value = model.no_mostrar_en_conciliacion;
             report.p_no_mostrar_saldo_0.Value = model.no_mostrar_saldo_en_0;
