@@ -261,7 +261,7 @@ namespace Core.Erp.Data.General
 
 
 
-        public List<tb_bodega_Info> get_list(int IdEmpresa, int skip, int take, string filter, bool MostrarAnulados, int IdSucursal)
+        public List<tb_bodega_Info> get_list_demanda(int IdEmpresa, int skip, int take, string filter, bool MostrarAnulados, int IdSucursal)
         {
             try
             {
@@ -315,14 +315,14 @@ namespace Core.Erp.Data.General
             }
         }
 
-        public List<tb_bodega_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool estado, int IdSucursal)
-        {
-            var skip = args.BeginIndex;
-            var take = args.EndIndex - args.BeginIndex + 1;
-            List<tb_bodega_Info> Lista = new List<tb_bodega_Info>();
-            Lista = get_list(IdEmpresa, skip, take, args.Filter, estado, IdSucursal);
-            return Lista;
-        }
+        //public List<tb_bodega_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, bool estado, int IdSucursal)
+        //{
+        //    var skip = args.BeginIndex;
+        //    var take = args.EndIndex - args.BeginIndex + 1;
+        //    List<tb_bodega_Info> Lista = new List<tb_bodega_Info>();
+        //    Lista = get_list(IdEmpresa, skip, take, args.Filter, estado, IdSucursal);
+        //    return Lista;
+        //}
 
 
         public tb_bodega_Info get_info_demanda(int IdEmpresa, int IdBodega, int IdSucursal)

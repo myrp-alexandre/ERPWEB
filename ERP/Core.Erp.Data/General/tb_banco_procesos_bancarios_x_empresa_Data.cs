@@ -29,8 +29,9 @@ namespace Core.Erp.Data.General
                                      Codigo_Empresa=q.Codigo_Empresa,
                                      ba_descripcion=q.ba_descripcion,
                                       CodigoLegal=q.CodigoLegal,
-                                      estado=q.estado
-                                     
+                                      estado=q.estado,
+                                     IdProceso = q.IdProceso
+
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwtb_banco_procesos_bancarios_x_empresa
@@ -44,8 +45,8 @@ namespace Core.Erp.Data.General
                                      NombreProceso = q.NombreProceso,
                                      Codigo_Empresa = q.Codigo_Empresa,
                                      CodigoLegal=q.CodigoLegal,
-                                     estado = q.estado
-
+                                     estado = q.estado,
+                                     IdProceso = q.IdProceso
 
 
                                  }).ToList();

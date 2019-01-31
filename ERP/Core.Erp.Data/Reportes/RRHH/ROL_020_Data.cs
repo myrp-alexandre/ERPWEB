@@ -23,9 +23,6 @@ namespace Core.Erp.Data.Reportes.RRHH
                 int IdDivisionInicio = IdDivision;
                 int IdDivisionFin = IdDivision == 0 ? 9999 : IdDivision;
 
-                int IdProcesoInicio = IdProceso;
-                int IdProcesoFin = IdProceso == 0 ? 9999 : IdProceso;
-
                 List<ROL_020_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
@@ -39,8 +36,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                      && q.IdDivision <= IdDivisionFin
                      && IdAreaInicio <= q.IdArea
                      && q.IdArea <= IdAreaFin
-                     && IdProcesoInicio <= q.IdProceso
-                     && q.IdProceso <= IdProcesoFin
+                     &&q.IdProceso == IdProceso
                     ).Select(q => new ROL_020_Info
                     {
                         IdEmpresa = q.IdEmpresa,

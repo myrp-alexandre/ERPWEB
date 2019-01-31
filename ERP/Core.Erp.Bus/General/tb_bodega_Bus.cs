@@ -80,5 +80,22 @@ namespace Core.Erp.Bus.General
                 throw;
             }
         }
+
+
+
+
+
+        public List<tb_bodega_Info> get_list_demanda(int IdEmpresa, int skip, int take, string filter, bool MostrarAnulados, int IdSucursal)
+        {
+            try
+            {
+                return odata.get_list_demanda(IdEmpresa, skip, take, filter, MostrarAnulados, IdSucursal);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
