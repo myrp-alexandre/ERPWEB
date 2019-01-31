@@ -23,17 +23,24 @@ namespace Core.Erp.Data.Reportes.RRHH
                 int IdDivisionInicio = IdDivision;
                 int IdDivisionFin = IdDivision == 0 ? 9999 : IdDivision;
 
+                int IdProcesoInicio = IdProceso;
+                int IdProcesoFin = IdProceso == 0 ? 9999 : IdProceso;
+
                 List<ROL_020_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = Context.VWROL_020.Where(q => q.IdEmpresa == IdEmpresa
-                     && q.IdSucursal == IdSucursal
+                     && IdSucursalInicio <= q.IdSucursal
+                     && q.IdSucursal <= IdSucursalFin
                      && q.IdNominaTipo == IdNominaTipo
                      && q.IdNomina == IdNomina
                      && q.IdPeriodo == IdPeriodo
-                     && q.IdDivision == IdDivision
-                     && q.IdArea == IdArea
-                     && q.IdProceso == IdProceso
+                     && IdDivisionInicio <= q.IdDivision
+                     && q.IdDivision <= IdDivisionFin
+                     && IdAreaInicio <= q.IdArea
+                     && q.IdArea <= IdAreaFin
+                     && IdProcesoInicio <= q.IdProceso
+                     && q.IdProceso <= IdProcesoFin
                     ).Select(q => new ROL_020_Info
                     {
                         IdEmpresa = q.IdEmpresa,

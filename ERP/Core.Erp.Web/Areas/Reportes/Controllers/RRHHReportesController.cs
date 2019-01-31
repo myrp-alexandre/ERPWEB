@@ -644,6 +644,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdProceso = 1
 
             };
             cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
@@ -654,6 +655,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             reporte.p_IdPeriodo.Value = model.IdPeriodo;
             reporte.p_IdSucursal.Value = model.IdSucursal;
             reporte.p_IdProceso.Value = model.IdProceso;
+            reporte.P_IdArea.Value = model.IdArea;
+            reporte.P_IdDivision.Value = model.IdDivision;
             reporte.usuario = SessionFixed.IdUsuario.ToString();
             reporte.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = reporte;
@@ -662,18 +665,17 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         [HttpPost]
         public ActionResult ROL_020( cl_filtros_Info model)
         {
-            ROL_020_Rpt report = new ROL_020_Rpt();
-            report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdNomina.Value = model.IdNomina;
-            report.p_IdNominaTipo.Value = model.IdTipoNomina;
-            report.p_IdPeriodo.Value = model.IdPeriodo;
-            report.p_IdSucursal.Value = model.IdSucursal;
-            report.P_IdArea.Value = model.IdArea;
-            report.P_IdDivision.Value = model.IdDivision;
-            SessionFixed.IdDivision = model.IdDivision.ToString();
-            report.p_IdProceso.Value = model.IdProceso;
+            ROL_020_Rpt reporte = new ROL_020_Rpt();
+            reporte.p_IdEmpresa.Value = model.IdEmpresa;
+            reporte.p_IdNomina.Value = model.IdNomina;
+            reporte.p_IdNominaTipo.Value = model.IdTipoNomina;
+            reporte.p_IdPeriodo.Value = model.IdPeriodo;
+            reporte.p_IdSucursal.Value = model.IdSucursal;
+            reporte.P_IdArea.Value = model.IdArea;
+            reporte.P_IdDivision.Value = model.IdDivision;
+            reporte.p_IdProceso.Value = model.IdProceso;
             cargar_combos(model.IdEmpresa);
-            ViewBag.Report = report;
+            ViewBag.Report = reporte;
             return View(model);
         }
 
@@ -701,6 +703,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             
             SessionFixed.IdDivision = model.IdDivision.ToString();
             cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
@@ -719,6 +723,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.P_IdArea.Value = model.IdArea;
             report.P_IdDivision.Value = model.IdDivision;
             SessionFixed.IdDivision = model.IdDivision.ToString();
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
@@ -744,6 +750,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.P_IdDivision.Value = model.IdDivision;
             SessionFixed.IdDivision = model.IdDivision.ToString();
             cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
@@ -761,6 +769,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             SessionFixed.IdDivision = model.IdDivision.ToString();
             report.P_IdArea.Value = model.IdArea;
             report.P_IdDivision.Value = model.IdDivision;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = report;
             return View(model);
         }
