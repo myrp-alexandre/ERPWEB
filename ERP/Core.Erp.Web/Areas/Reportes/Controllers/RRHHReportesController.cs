@@ -343,6 +343,10 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             var lst_dep = bus_dep.get_list(IdEmpresa, false);
             ViewBag.lst_dep = lst_dep;
 
+            tb_banco_procesos_bancarios_x_empresa_Bus bus_procesos = new tb_banco_procesos_bancarios_x_empresa_Bus();
+            var lst_proceso = bus_procesos.get_list(IdEmpresa, false);
+            ViewBag.lst_proceso = lst_proceso;
+
         }
         public ActionResult ROL_012( )
         {
@@ -639,7 +643,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-             
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+
             };
             cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
             ROL_020_Rpt reporte = new ROL_020_Rpt();
@@ -648,6 +653,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             reporte.p_IdNomina.Value = model.IdNomina;
             reporte.p_IdPeriodo.Value = model.IdPeriodo;
             reporte.p_IdSucursal.Value = model.IdSucursal;
+            reporte.p_IdProceso.Value = model.IdProceso;
             reporte.usuario = SessionFixed.IdUsuario.ToString();
             reporte.empresa = SessionFixed.NomEmpresa.ToString();
             ViewBag.Report = reporte;
