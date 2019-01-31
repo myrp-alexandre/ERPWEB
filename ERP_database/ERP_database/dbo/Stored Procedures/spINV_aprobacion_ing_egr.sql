@@ -1,4 +1,5 @@
-﻿--exec [dbo].[spINV_aprobacion_ing_egr] 1,1,1,1,358
+﻿
+--exec [dbo].[spINV_aprobacion_ing_egr] 2,8,1,7,11
 CREATE PROCEDURE [dbo].[spINV_aprobacion_ing_egr]
 (
 @IdEmpresa int,
@@ -33,31 +34,6 @@ AND IdMovi_inven_tipo = @IdMovi_inven_tipo
 SET @IdNumMovi_apro = ISNULL(@IdNumMovi_apro,1)
 END
 /*
-BEGIN --CORRECCION DE COSTO
-PRINT 'CORRECCION DE COSTO'
-SELECT @signo = signo, @fecha = cm_fecha
-FROM in_Ing_Egr_Inven
-where IdEmpresa = @IdEmpresa
-and IdSucursal = @IdSucursal
-and IdMovi_inven_tipo = @IdMovi_inven_tipo
-and IdNumMovi = @IdNumMovi
-
-IF(@signo = '-')
-	BEGIN
-		update in_Ing_Egr_Inven_det set mv_costo_sinConversion = C.costo
-		from(
-			SELECT det.IdEmpresa, det.IdSucursal, det.IdMovi_inven_tipo, det.IdNumMovi, det.Secuencia, ISNULL(costo_prom.costo,0) costo
-			FROM in_Ing_Egr_Inven_det det left join (
-			select fila, IdEmpresa,IdSucursal,IdBodega,IdProducto, costo from (
-			SELECT ROW_NUMBER() over(partition by IdEmpresa,IdSucursal,IdBodega,IdProducto order by IdEmpresa,IdSucursal,IdBodega,IdProducto,fecha DESC, Secuencia desc) as fila, IdEmpresa,IdSucursal,IdBodega,IdProducto, costo 
-			FROM in_producto_x_tb_bodega_Costo_Historico							
-			WHERE IdEmpresa = @IdEmpresa and IdSucursal = @IdSucursal and IdBodega = @IdBodega and fecha <= @fecha
-			) A where a.fila = 1
-			) costo_prom on det.IdEmpresa = costo_prom.IdEmpresa and costo_prom.IdSucursal = det.IdSucursal and det.IdBodega = costo_prom.IdBodega and det.IdProducto = costo_prom.IdProducto
-		) C where in_Ing_Egr_Inven_det.IdEmpresa = c.IdEmpresa and in_Ing_Egr_Inven_det.IdSucursal = C.IdSucursal and in_Ing_Egr_Inven_det.IdMovi_inven_tipo = c.IdMovi_inven_tipo and in_Ing_Egr_Inven_det.IdNumMovi = c.IdNumMovi and in_Ing_Egr_Inven_det.Secuencia = c.Secuencia
-	END
-END
-*/
 BEGIN --CONVERSION DE UNIDAD DE MEDIDA
 PRINT 'CONVERSION DE UNIDAD DE MEDIDA'
 update in_Ing_Egr_Inven_det set mv_costo = C.costo_convertido, dm_cantidad = C.cantidad_convertida
@@ -70,7 +46,7 @@ FROM            in_Ing_Egr_Inven_det AS det INNER JOIN
 			WHERE det.IdEmpresa = @IdEmpresa and det.IdSucursal = @IdSucursal and det.IdBodega = @IdBodega and IdMovi_inven_tipo = @IdMovi_inven_tipo and IdNumMovi = @IdNumMovi
 ) C where in_Ing_Egr_Inven_det.IdEmpresa = c.IdEmpresa and in_Ing_Egr_Inven_det.IdSucursal = C.IdSucursal and in_Ing_Egr_Inven_det.IdMovi_inven_tipo = c.IdMovi_inven_tipo and in_Ing_Egr_Inven_det.IdNumMovi = c.IdNumMovi and in_Ing_Egr_Inven_det.Secuencia = c.Secuencia
 END
-
+*/
 BEGIN --GENERAR IN_MOVI_INVE
 PRINT 'GENERAR IN_MOVI_INVE'
 INSERT INTO [dbo].[in_movi_inve]           
@@ -89,6 +65,7 @@ and det.IdSucursal = @IdSucursal
 and det.IdBodega = @IdBodega
 and det.IdMovi_inven_tipo = @IdMovi_inven_tipo
 and det.IdNumMovi = @IdNumMovi
+and cab.Estado = 'A'
 GROUP BY det.IdEmpresa				,det.IdSucursal			,det.IdBodega			,det.IdMovi_inven_tipo				
 ,cab.CodMoviInven			,cab.signo				,cab.cm_observacion		,cab.cm_fecha				
 ,DET.IdCentroCosto		,DET.IdCentroCosto_sub_centro_costo	,cab.IdMotivo_Inv
@@ -104,8 +81,8 @@ INSERT INTO [dbo].[in_movi_inve_detalle]
 ,[IdPunto_cargo_grupo]    ,[IdMotivo_Inv]	            ,[Costeado])
 SELECT        
 det.IdEmpresa			  ,det.IdSucursal				,det.IdBodega					,det.IdMovi_inven_tipo			,@IdNumMovi_apro	 ,det.Secuencia
-,cab.signo				  ,det.IdProducto				,det.dm_cantidad				
-,det.dm_observacion		  ,det.mv_costo													,det.IdCentroCosto				,det.IdCentroCosto_sub_centro_costo
+,cab.signo				  ,det.IdProducto				,isnull(det.dm_cantidad_sinConversion,0)				
+,det.dm_observacion		  ,isnull(det.mv_costo_sinConversion,0)													,det.IdCentroCosto				,det.IdCentroCosto_sub_centro_costo
 ,det.IdUnidadMedida		  ,det.dm_cantidad_sinConversion,det.IdUnidadMedida_sinConversion,det.mv_costo_sinConversion	,det.IdPunto_cargo
 ,det.IdPunto_cargo_grupo  ,det.IdMotivo_Inv				,0
 FROM            in_Ing_Egr_Inven AS cab INNER JOIN in_Ing_Egr_Inven_det AS det 

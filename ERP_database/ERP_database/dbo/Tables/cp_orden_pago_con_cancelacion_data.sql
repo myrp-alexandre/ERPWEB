@@ -2,8 +2,8 @@
     [IdUsuario]                 VARCHAR (20)  NOT NULL,
     [IdEmpresa]                 INT           NOT NULL,
     [IdTipo_op]                 VARCHAR (20)  NOT NULL,
-    [Referencia]                VARCHAR (523) NULL,
-    [Referencia2]               VARCHAR (523) NULL,
+    [Referencia]                VARCHAR (MAX) NULL,
+    [Referencia2]               VARCHAR (MAX) NULL,
     [IdOrdenPago]               NUMERIC (18)  NOT NULL,
     [Secuencia_OP]              INT           NOT NULL,
     [IdTipoPersona]             VARCHAR (20)  NULL,
@@ -12,7 +12,7 @@
     [Fecha_OP]                  DATETIME      NOT NULL,
     [Fecha_Fa_Prov]             DATETIME      NOT NULL,
     [Fecha_Venc_Fac_Prov]       DATETIME      NOT NULL,
-    [Observacion]               VARCHAR (500) NOT NULL,
+    [Observacion]               VARCHAR (MAX) NOT NULL,
     [Nom_Beneficiario]          VARCHAR (200) NULL,
     [Girar_Cheque_a]            VARCHAR (200) NULL,
     [Valor_a_pagar]             FLOAT (53)    NOT NULL,
@@ -34,4 +34,6 @@
     [IdBanco]                   INT           NULL,
     CONSTRAINT [PK_cp_orden_pago_con_cancelacion_data] PRIMARY KEY CLUSTERED ([IdUsuario] ASC, [IdEmpresa] ASC, [IdOrdenPago] ASC, [Secuencia_OP] ASC)
 );
+
+
 

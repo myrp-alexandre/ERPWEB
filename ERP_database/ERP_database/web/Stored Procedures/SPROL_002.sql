@@ -1,5 +1,4 @@
 ﻿
-
 CREATE  PROCEDURE [web].[SPROL_002]  
 	@idempresa int,
 	@idnomina_tipo int,
@@ -22,14 +21,17 @@ BEGIN
 --	set @idperiodo =201901
 	
 	declare
-	@IdRubroTotalPagar int
+	@IdRubroTotalPagar int,
+	@IdRubroVerper varchar(50),
+	@IdRubroMatutina varchar(50)
 
+	select @IdRubroVerper=IdRubro_horas_vespertina,@IdRubroMatutina=IdRubro_horas_matutina  from ro_rubros_calculados where IdEmpresa=@idempresa
 	select @IdRubroTotalPagar=IdRubro_tot_pagar from ro_rubros_calculados where IdEmpresa=@idempresa
 
-	delete web.ro_SPROL_002 where IdEmpresa=@idempresa and IdPeriodo=@idperiodo
+	delete web.ro_SPROL_002 where IdEmpresa=@idempresa --and IdPeriodo=@idperiodo
 
-	insert  into web.ro_SPROL_002(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor,Idsucursal, IdArea)	
-	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor, D.IdSucursal,emp.IdArea
+	insert  into web.ro_SPROL_002(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor,Idsucursal, IdArea,ru_descripcion)	
+	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor, D.IdSucursal,emp.IdArea,R.ru_descripcion
 	
 	FROM            dbo.ro_rol_detalle AS D INNER JOIN
                          dbo.ro_empleado AS emp ON D.IdEmpresa = emp.IdEmpresa AND D.IdEmpleado = emp.IdEmpleado INNER JOIN
@@ -49,8 +51,8 @@ BEGIN
 
 
 	  -- inserto si tiene saldo zero a pagar 
-	insert  into web.ro_SPROL_002(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor,Idsucursal, IdArea)	
-	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor , D.IdSucursal,emp.IdArea
+	insert  into web.ro_SPROL_002(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor,Idsucursal, IdArea,ru_descripcion)	
+	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor , D.IdSucursal,emp.IdArea, r.ru_descripcion
 
 	FROM            dbo.ro_rol_detalle AS D INNER JOIN
                          dbo.ro_empleado AS emp ON D.IdEmpresa = emp.IdEmpresa AND D.IdEmpleado = emp.IdEmpleado INNER JOIN
@@ -67,12 +69,12 @@ BEGIN
 	   and ro.IdRol=D.IdRol
 	  And R.ru_tipo='A'
 	  and D.Valor=0
-	  and D.IdRubro=950
+	  and D.IdRubro=24
 
 
 
-	insert  into web.ro_SPROL_002(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor ,Idsucursal, IdArea)	
-	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor*-1 ,D.IdSucursal,emp.IdArea
+	insert  into web.ro_SPROL_002(IdEmpresa,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,IdEmpleado,IdRubro,Valor ,Idsucursal, IdArea,ru_descripcion)	
+	select ro.IdEmpresa,ro.IdNominaTipo,ro.IdNominaTipoLiqui,ro.IdPeriodo,D.IdEmpleado,D.IdRubro,Valor*-1 ,D.IdSucursal,emp.IdArea,R.ru_descripcion
 	
 FROM            dbo.ro_rol_detalle AS D INNER JOIN
                          dbo.ro_empleado AS emp ON D.IdEmpresa = emp.IdEmpresa AND D.IdEmpleado = emp.IdEmpleado INNER JOIN
@@ -91,4 +93,16 @@ FROM            dbo.ro_rol_detalle AS D INNER JOIN
 	  and D.Valor>0
 
 
+	  -- actualizando rubros vespertina matutina
+
+update     web.ro_SPROL_002 set ru_descripcion  = ru_descripcion+  ' (' +CAST(ro_HorasProfesores_det.NumHoras as varchar)+')' 
+FROM            dbo.ro_HorasProfesores_det INNER JOIN
+                         dbo.ro_HorasProfesores ON dbo.ro_HorasProfesores_det.IdEmpresa = dbo.ro_HorasProfesores.IdEmpresa AND dbo.ro_HorasProfesores_det.IdCarga = dbo.ro_HorasProfesores.IdCarga INNER JOIN
+                         web.ro_SPROL_002 ON dbo.ro_HorasProfesores_det.IdEmpresa = web.ro_SPROL_002.IdEmpresa AND dbo.ro_HorasProfesores_det.IdRubro = web.ro_SPROL_002.IdRubro AND 
+                         dbo.ro_HorasProfesores_det.IdEmpleado = web.ro_SPROL_002.IdEmpleado
+			where --ro_HorasProfesores_det.IdRubro in(@IdRubroMatutina,@IdRubroVerper)
+			 ro_HorasProfesores_det.IdEmpresa=@idempresa
+			and ro_HorasProfesores.IdNomina=@idnomina_tipo
+			and ro_HorasProfesores.IdNominaTipo=@idnomina_Tipo_liq
+			and ro_HorasProfesores.IdPeriodo=@idperiodo
 END

@@ -116,22 +116,22 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "factura_detalle"
-            Begin Extent = 
-               Top = 6
-               Left = 283
-               Bottom = 136
-               Right = 471
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "factura"
             Begin Extent = 
                Top = 6
                Left = 38
                Bottom = 136
                Right = 270
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "factura_detalle"
+            Begin Extent = 
+               Top = 6
+               Left = 308
+               Bottom = 136
+               Right = 496
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -193,6 +193,8 @@ Begin DesignProperties =
          GroupBy = 1350
          Filter = 1350
          Or = 13', @level0type = N'SCHEMA', @level0name = N'EntidadRegulatoria', @level1type = N'VIEW', @level1name = N'vwfa_factura';
+
+
 
 
 

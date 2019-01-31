@@ -461,32 +461,15 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol, emp.IdSucursal				,rol_det.IdEmpleado		,@IdRubro_calculado	,'600'			,
+@IdEmpresa				,@IdRol, emp.IdSucursal				,emp.IdEmpleado		,@IdRubro_calculado	,'600'			, ISNULL( dbo.base_impuesto_renta(@IdEmpresa,@IdNomina,@IdNominaTipo,@IdPEriodo,emp.idempleado,@Anio),0),
+1						,'Provisión impuesto a la renta'	
 
-isnull( (
-select ISNULL(valor,0) from (
-select ROW_NUMBER() over(partition by FraccionBasica order by FraccionBasica) as IdRow, ( ((  ( (Valor*12) -(select Valor from ro_empleado_gatos_x_anio ga where ga.IdEmpresa=@IdEmpresa and ga.IdEmpleado=IdEmpleado and AnioFiscal=@Anio ) )   -FraccionBasica)*Por_ImpFraccion_Exce)+ImpFraccionBasica)/12 as valor
-from ro_tabla_Impu_Renta 
-where  (Valor*12) between FraccionBasica and ExcesoHasta and AnioFiscal=@Anio
-and FraccionBasica>0
-) a where a.IdRow = 1
+FROM            dbo.ro_empleado AS emp INNER JOIN
+                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado LEFT OUTER JOIN
+                         dbo.ro_empleado_proyeccion_gastos AS gast ON emp.IdEmpresa = gast.IdEmpresa AND emp.IdEmpleado = gast.IdEmpleado
 
-)
-
-,0)
-
-,1						,'Provisión impuesto a la renta'	
-FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
-                         dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
-                         dbo.ro_rol ON rol_det.IdEmpresa = dbo.ro_rol.IdEmpresa AND rol_det.IdRol = dbo.ro_rol.IdRol INNER JOIN
-                         dbo.ro_empleado AS emp ON rol_det.IdEmpresa = emp.IdEmpresa AND rol_det.IdEmpleado = emp.IdEmpleado INNER JOIN
-                         dbo.ro_contrato AS cont ON emp.IdEmpresa = cont.IdEmpresa AND emp.IdEmpleado = cont.IdEmpleado
-where ro_rol.IdEmpresa=@IdEmpresa
-and ro_rol.IdNominaTipo=@IdNomina
-and ro_rol.IdNominaTipoLiqui=@IdNominaTipo
-and ro_rol.IdPeriodo=@IdPEriodo
-and rol_det.IdRubro=22
-and rol_det.IdRol=@IdRol
+where emp.IdEmpresa=@IdEmpresa
+and cont.IdNomina=@IdNomina
 and emp.IdSucursal = @IdSucursalFin
 and cont.IdNomina=@IdNomina
 and cont.EstadoContrato!='ECT_LIQ'
@@ -837,11 +820,14 @@ group by rol_det.IdEmpresa,rol_det.IdEmpleado,ro_rol.IdNominaTipo,ro_rol.IdNomin
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 -------------insertado gastos distrbuidos----------------------------------------------------------------------------------------------<
-----------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------
 
---insert into  ro_empleado_division_area_x_rol
+insert into  ro_empleado_division_area_x_rol
 
---select IdEmpresa,@IdRol, ROW_NUMBER() OVER(ORDER BY idempresa ASC) AS Row ,IdEmpleado,IDividion,IdArea,Porcentaje, Observacion from ro_empleado_x_division_x_area 
-
+select ro_empleado_x_division_x_area.IdEmpresa,@IdRol, ROW_NUMBER() OVER(ORDER BY ro_empleado.idempresa ASC) AS Row ,ro_empleado.IdEmpleado,ro_empleado_x_division_x_area.IDividion,ro_empleado_x_division_x_area.IdArea,Porcentaje, Observacion 
+FROM            dbo.ro_empleado_x_division_x_area INNER JOIN
+                         dbo.ro_empleado ON dbo.ro_empleado_x_division_x_area.IdEmpresa = dbo.ro_empleado.IdEmpresa AND dbo.ro_empleado_x_division_x_area.IdEmpleado = dbo.ro_empleado.IdEmpleado
+WHERE ro_empleado_x_division_x_area.IdEmpresa=@IdEmpresa
+and ro_empleado.IdSucursal=@IdSucursalFin
 
 END
