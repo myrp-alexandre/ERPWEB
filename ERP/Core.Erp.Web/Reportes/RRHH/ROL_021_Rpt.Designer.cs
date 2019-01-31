@@ -755,7 +755,7 @@
             this.xrPivotGridField44.Name = "xrPivotGridField44";
             this.xrPivotGridField44.Options.ShowGrandTotal = false;
             this.xrPivotGridField44.Options.ShowTotals = false;
-            this.xrPivotGridField44.Width = 250;
+            this.xrPivotGridField44.Width = 220;
             // 
             // xrPivotGrid1
             // 
@@ -845,7 +845,7 @@
             this.pivotGridField7.Name = "pivotGridField7";
             this.pivotGridField7.Options.ShowGrandTotal = false;
             this.pivotGridField7.Options.ShowTotals = false;
-            this.pivotGridField7.Width = 50;
+            this.pivotGridField7.Width = 25;
             // 
             // pivotGridField6
             // 
