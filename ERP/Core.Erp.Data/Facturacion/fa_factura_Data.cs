@@ -1247,7 +1247,7 @@ namespace Core.Erp.Data.Facturacion
                     IdCobro = 0,
                     IdCobro_tipo = fac.IdCatalogo_FormaPago == "EFEC" ? "EFEC" : "TARJ",
                     IdCliente = fac.IdCliente,
-                    cr_TotalCobro = Math.Round(fac.lst_det.Sum(q => q.vt_Subtotal + q.vt_iva), 2, MidpointRounding.AwayFromZero),
+                    cr_TotalCobro = (double)fac.info_resumen.Total,
                     cr_fecha = fac.vt_fecha,
                     cr_fechaDocu = fac.vt_fecha,
                     cr_fechaCobro = fac.vt_fecha,

@@ -1065,7 +1065,7 @@ namespace Core.Erp.Data.Inventario
                           p in Context.vwin_Producto_para_composicion
                            where p.IdEmpresa == IdEmpresa
                             && p.Estado == "A"
-                            && (p.IdProducto.ToString() + " " + p.pr_descripcion + " " + p.lote_num_lote).Contains(filter)
+                            && (p.IdProducto.ToString() + " " + p.pr_descripcion).Contains(filter)
                            select new
                            {
                                p.IdEmpresa,
