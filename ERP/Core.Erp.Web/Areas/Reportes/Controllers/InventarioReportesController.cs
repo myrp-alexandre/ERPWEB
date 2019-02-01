@@ -752,6 +752,57 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.empresa = SessionFixed.NomEmpresa;
             return View(model);
         }
+
+
+        public ActionResult INV_015()
+        {
+
+            cl_filtros_inventario_Info model = new cl_filtros_inventario_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdProducto = 0,
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdLinea = 0,
+                IdGrupo = 0,
+                IdSubGrupo = 0
+            };
+
+            cargar_combos(model);
+            INV_015_Rpt report = new INV_015_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdBodega.Value = model.IdBodega;
+            report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
+            report.p_IdCategoria.Value = model.IdCategoria == null ? "" : model.IdCategoria;
+            report.p_IdLinea.Value = model.IdLinea;
+            report.p_IdGrupo.Value = model.IdGrupo;
+            report.p_IdSubgrupo.Value = model.IdSubGrupo;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult INV_015(cl_filtros_inventario_Info model)
+        {
+            INV_015_Rpt report = new INV_015_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdBodega.Value = model.IdBodega;
+            report.p_IdProducto.Value = model.IdProductoPadre == null ? 0 : model.IdProductoPadre;
+            report.p_IdCategoria.Value = model.IdCategoria;
+            report.p_IdLinea.Value = model.IdLinea;
+            report.p_IdGrupo.Value = model.IdGrupo;
+            report.p_IdSubgrupo.Value = model.IdSubGrupo;
+            cargar_combos(model);
+
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+
+            ViewBag.Report = report;
+            return View(model);
+        }
     }
 
 }
