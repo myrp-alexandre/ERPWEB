@@ -78,9 +78,9 @@ namespace Core.Erp.Bus.Banco
             }
         }
 
-        public List<ba_tipo_nota_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        public List<ba_tipo_nota_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string Tipo)
         {
-            return odata.get_list_bajo_demanda(args, IdEmpresa);
+            return odata.get_list_bajo_demanda(args, IdEmpresa,Tipo);
 
         }
 

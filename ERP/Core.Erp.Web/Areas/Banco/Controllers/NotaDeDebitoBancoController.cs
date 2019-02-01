@@ -80,7 +80,7 @@ namespace Core.Erp.Web.Areas.Banco.Controllers
         }
         public List<ba_tipo_nota_Info> get_list_bajo_TipoNota(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_tipo_nota.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+            return bus_tipo_nota.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoCbteBancario.NDBA.ToString());
         }
         public ba_tipo_nota_Info get_info_bajo_demanda_TipoNota(ListEditItemRequestedByValueEventArgs args)
         {

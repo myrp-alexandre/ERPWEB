@@ -84,7 +84,7 @@
         {
             column.FieldName = "Porcentaje";
             column.Caption = "Porcentaje";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(5);
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.EditorProperties().SpinEdit(sp =>
@@ -101,6 +101,18 @@
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
 
+        settings.Columns.Add(column =>
+        {
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.FieldName = "CargaGasto";
+            column.Caption = "Carga gasto";
+            column.Width = Unit.Percentage(10);
+            column.Visible = true;
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

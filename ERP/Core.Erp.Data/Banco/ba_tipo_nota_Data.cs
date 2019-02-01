@@ -187,12 +187,12 @@ namespace Core.Erp.Data.Banco
             }
         }
 
-        public List<ba_tipo_nota_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        public List<ba_tipo_nota_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string Tipo)
         {
             var skip = args.BeginIndex;
             var take = args.EndIndex - args.BeginIndex + 1;
             List<ba_tipo_nota_Info> Lista = new List<ba_tipo_nota_Info>();
-            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+            Lista = get_list(IdEmpresa, skip, take, args.Filter, Tipo);
 
             return Lista;
         }
@@ -233,7 +233,7 @@ namespace Core.Erp.Data.Banco
             }
         }
 
-        public List<ba_tipo_nota_Info> get_list(int IdEmpresa, int skip, int take, string filter)
+        public List<ba_tipo_nota_Info> get_list(int IdEmpresa, int skip, int take, string filter , string Tipo)
         {
             try
             {
@@ -243,6 +243,7 @@ namespace Core.Erp.Data.Banco
                           p in Context.ba_tipo_nota
                            where
                             p.IdEmpresa == IdEmpresa
+                            && p.Tipo == Tipo
                             && (p.IdTipoNota.ToString() + " " + p.Descripcion).Contains(filter)
                            select new
                            {

@@ -35,7 +35,8 @@ namespace Core.Erp.Data.RRHH
                                  IdArea_det = q.IdArea,
                                  IDividion_det = q.IDividion,
                                  Descripcion_Division = q.DivisionDescripcion,
-                                 Descripcion = q.AreaDescripcion,                                 
+                                 Descripcion = q.AreaDescripcion,     
+                                 CargaGasto = q.CargaGasto                            
                              }).ToList();
 
                 }

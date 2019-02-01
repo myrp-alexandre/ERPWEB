@@ -1,7 +1,7 @@
 ﻿@model Core.Erp.Info.RRHH.ro_empleado_x_CuentaContable_Info
 @{
     ViewBag.Title = "Cuenta contable";
-        if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
     }
@@ -10,25 +10,39 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 @using (Html.BeginForm("Index", "EmpleadoCuentaContable", FormMethod.Post, new { @class = "form", @role = "form" }))
 
-{ 
-    @Html.HiddenFor(w=>w.IdEmpresa)
-    @Html.HiddenFor(w=>w.IdTransaccionSession)
+{
+    @Html.HiddenFor(w => w.IdEmpresa)
+    @Html.HiddenFor(w => w.IdTransaccionSession)
+
+
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for=""></label>
-                    @Html.Action("GridViewPartial_Emp_CtaCont", new { IdEmpleado = ViewBag.IdEmpleado })
+                    <label for="IdProveedor">Empleado*</label>
+                    @Html.Partial("_CmbCuenta_Empleado", Model.IdEmpleado)
+                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-    <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for=""></label>
+                        @Html.Action("GridViewPartial_Emp_CtaCont", new { IdEmpleado = ViewBag.IdEmpleado })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
 }
 
 
