@@ -3,6 +3,7 @@ using Core.Erp.Bus.General;
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.Contabilidad;
 using Core.Erp.Info.General;
+using Core.Erp.Info.Helps;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Web.Helps;
 using DevExpress.Web;
@@ -47,15 +48,35 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             return bus_rubro.get_info_bajo_demanda(Convert.ToInt32(SessionFixed.IdEmpresa), args);
         }
+
+
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        public ActionResult CmbEmpleado_CtaCon()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbEmpleado_CtaCon", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda_empleado(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda_empleado(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.EMPLEA.ToString());
+        }
         #endregion
         ro_empleado_x_CuentaContable_List List_Det = new ro_empleado_x_CuentaContable_List();
         ro_empleado_x_CuentaContable_Bus bus_emple = new ro_empleado_x_CuentaContable_Bus();
+        ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
        public ActionResult Index(decimal IdEmpleado = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ro_empleado_x_CuentaContable_Info model = bus_emple.GetInfo(IdEmpresa, IdEmpleado);
             if (model == null)
                 model = new ro_empleado_x_CuentaContable_Info { IdEmpresa = IdEmpresa};
+           ro_empleado_Info mod = bus_empleado.get_info(IdEmpresa, IdEmpleado);
+            model.IdEmpleado = mod.IdEmpleado;
+            model.pe_nombre = mod.pe_nombre;
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             List_Det.set_list(new List<ro_empleado_x_CuentaContable_Info>(), model.IdTransaccionSession);
             return View(model);

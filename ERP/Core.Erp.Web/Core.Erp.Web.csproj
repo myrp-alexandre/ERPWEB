@@ -9805,6 +9805,7 @@
     <Content Include="Areas\Inventario\Views\MotivoInventario\_CmbCtaCble.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_015.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_014.cshtml" />
+    <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_CmbEmpleado_CtaCon.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

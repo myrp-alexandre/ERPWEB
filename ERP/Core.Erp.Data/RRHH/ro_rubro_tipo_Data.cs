@@ -307,24 +307,24 @@ namespace Core.Erp.Data.RRHH
                     ro_rubro_tipo Entity = new ro_rubro_tipo
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdRubro =get_id(info.IdEmpresa).ToString(),
-                        rub_codigo = info.rub_codigo,                        
+                        IdRubro = get_id(info.IdEmpresa).ToString(),
+                        rub_codigo = info.rub_codigo,
                         ru_codRolGen = info.ru_codRolGen,
                         ru_descripcion = info.ru_descripcion,
                         NombreCorto = info.NombreCorto,
                         ru_tipo = info.ru_tipo,
                         ru_orden = info.ru_orden,
-                        rub_grupo = info.rub_grupo,
+                        rub_grupo = info.rub_grupo == "" ? null : info.rub_grupo,
                         rub_concep = info.rub_concep,
                         rub_nocontab = info.rub_nocontab,
                         rub_ctacon = info.rub_ctacon,
                         IdUsuario = info.IdUsuario,
-                        rub_acumula_descuento=info.rub_acumula_descuento,
-                        ru_estado =  "A",
-                        Fecha_Transac =  DateTime.Now,
+                        rub_acumula_descuento = info.rub_acumula_descuento,
+                        ru_estado = "A",
+                        Fecha_Transac = DateTime.Now,
                         se_distribuye = info.se_distribuye,
-                        rub_AplicaIR=info.rub_AplicaIR,
-                        rub_GrupoResumen=info.rub_GrupoResumen,
+                        rub_AplicaIR = info.rub_AplicaIR,
+                        rub_GrupoResumen = info.rub_GrupoResumen == "" ? null : info.rub_GrupoResumen,
                     };
                     Context.ro_rubro_tipo.Add(Entity);
                     Context.SaveChanges();
@@ -353,7 +353,7 @@ namespace Core.Erp.Data.RRHH
                     Entity.NombreCorto = info.NombreCorto;
                     Entity.ru_tipo = info.ru_tipo;
                     Entity.ru_orden = info.ru_orden;
-                    Entity.rub_grupo = info.rub_grupo;
+                    Entity.rub_grupo = info.rub_grupo == "" ? null : info.rub_grupo;
                     Entity.rub_concep = info.rub_concep;
                     Entity.rub_nocontab = info.rub_nocontab;
                     Entity.rub_ctacon = info.rub_ctacon;
@@ -364,7 +364,7 @@ namespace Core.Erp.Data.RRHH
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
                     Entity.rub_AplicaIR = info.rub_AplicaIR;
-                    Entity.rub_GrupoResumen = info.rub_GrupoResumen;
+                    Entity.rub_GrupoResumen = info.rub_GrupoResumen == "" ? null : info.rub_GrupoResumen;
                     Context.SaveChanges();
                 }
 

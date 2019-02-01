@@ -70,7 +70,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                ro_rubro_tipo_Info info = new ro_rubro_tipo_Info();
+                ro_rubro_tipo_Info info = new ro_rubro_tipo_Info
+                {
+                    rub_GrupoResumen = "",
+                    rub_grupo = ""
+                };
                 cargar_combo();
                 return View(info);
 
@@ -161,12 +165,22 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 lst_tipo_rubro = bus_catalogo.get_list_x_tipo(22);
+                ViewBag.lst_tipo_rubro = lst_tipo_rubro;
                 lst_tipo_campo = bus_catalogo.get_list_x_tipo(13);
                 lst_grupo = bus_catalogo.get_list_x_tipo(14);
+                lst_grupo.Add(new ro_catalogo_Info
+                {
+                    IdCatalogo = 0,
+                    ca_descripcion = ""
+                });
                 lst_plancuenta = bus_plancuenta.get_list(GetIdEmpresa(), false, true);
                 lst_grupo_rep_gene = bus_catalogo.get_list_x_tipo(43);
+                lst_grupo_rep_gene.Add(new ro_catalogo_Info
+                {
+                    IdCatalogo = 0,
+                    ca_descripcion = ""
+                });
 
-                ViewBag.lst_tipo_rubro = lst_tipo_rubro;
                 ViewBag.lst_tipo_campo = lst_tipo_campo;
                 ViewBag.lst_grupo = lst_grupo;
                 ViewBag.lst_grupo_rep_gene = lst_grupo_rep_gene;

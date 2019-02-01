@@ -73,9 +73,10 @@ namespace Core.Erp.Data.RRHH
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    foreach (var item in info.lstdet)
+                    ro_empleado_x_CuentaContable Entity = Context.ro_empleado_x_CuentaContable.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado).FirstOrDefault();
+                    if(Entity == null)
                     {
-                        Context.ro_empleado_x_CuentaContable.Add(new ro_empleado_x_CuentaContable
+                        Entity = new ro_empleado_x_CuentaContable
                         {
                             IdEmpresa = info.IdEmpresa,
                             IdEmpleado = info.IdEmpleado,
@@ -83,7 +84,18 @@ namespace Core.Erp.Data.RRHH
                             IdRubro = info.IdRubro,
                             Observacion = info.Observacion,
                             Secuencia = info.Secuencia
-                        });
+                        };
+                        Context.ro_empleado_x_CuentaContable.Add(Entity);
+                    }
+                    else
+                    {
+                        Entity.IdEmpresa = info.IdEmpresa;
+                        Entity.IdEmpleado = info.IdEmpleado;
+                        Entity.IdCuentacon = info.IdCuentacon;
+                        Entity.IdRubro = info.IdRubro;
+                        Entity.Observacion = info.Observacion;
+                        Entity.Secuencia = info.Secuencia;
+
                     }
                     Context.SaveChanges();
                 }
