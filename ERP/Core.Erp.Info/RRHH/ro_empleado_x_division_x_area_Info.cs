@@ -16,6 +16,8 @@ namespace Core.Erp.Info.RRHH
         public double Porcentaje { get; set; }
         public string Observacion { get; set; }
 
+        public Nullable<bool> CargaGasto { get; set; }
+
         public string Descripcion_Division { get; set; }
         public string Descripcion { get; set; }
         public int IDividion_det { get; set; }

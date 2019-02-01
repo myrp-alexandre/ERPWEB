@@ -101,6 +101,18 @@
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
 
+        settings.Columns.Add(column =>
+        {
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.FieldName = "CargaGasto";
+            column.Caption = "Carga gasto";
+            column.Width = Unit.Percentage(10);
+            column.Visible = false;
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

@@ -1615,6 +1615,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             edited_info.Descripcion_Division = info_det.Descripcion_Division;
             edited_info.Porcentaje = info_det.Porcentaje;
             edited_info.Observacion = info_det.Observacion;
+            edited_info.CargaGasto = info_det.CargaGasto;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
