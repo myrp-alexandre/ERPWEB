@@ -115,10 +115,6 @@ namespace Core.Erp.WindowsService
                                 tool003.Print(Impresion.IPImpresora);
 
                         }
-                        if (string.IsNullOrEmpty(Impresion.IPImpresora))
-                            tool003.Print();
-                        else
-                            tool003.Print(Impresion.IPImpresora);
                         break;
                     case "FAC_013":
                         FAC_013_Rpt RPT_013 = new FAC_013_Rpt();
