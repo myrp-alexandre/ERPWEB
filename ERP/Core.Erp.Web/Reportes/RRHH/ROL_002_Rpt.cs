@@ -30,27 +30,17 @@ namespace Core.Erp.Web.Reportes.RRHH
 
         private void ROL_002_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-                lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-                lbl_empresa.Text = empresa;
+                lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");               
                 lbl_usuario.Text = usuario;
-                ro_rubros_calculados_Info info_rubros_calculados = new ro_rubros_calculados_Info();
-                ro_rubros_calculados_Bus bus_rubros_calculados = new ro_rubros_calculados_Bus();
-            
-                int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-                int IdNomina = p_IdNomina.Value == null ? 0 : Convert.ToInt32(p_IdNomina.Value);
-                int IdNominaTipo = p_IdNominaTipo.Value == null ? 0 : Convert.ToInt32(p_IdNominaTipo.Value);
-                int IdPeriodo = p_IdPeriodo.Value == null ? 0 : Convert.ToInt32(p_IdPeriodo.Value);
-                int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
-                info_rubros_calculados = bus_rubros_calculados.get_info(IdEmpresa);
 
-                ROL_002_Bus bus_rpt = new ROL_002_Bus();
-                List<ROL_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
-                tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
-                var emp = bus_empresa.get_info(IdEmpresa);
-                ImageConverter obj = new ImageConverter();
-                lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+            int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            int IdNomina = p_IdNomina.Value == null ? 0 : Convert.ToInt32(p_IdNomina.Value);
+            int IdNominaTipo = p_IdNominaTipo.Value == null ? 0 : Convert.ToInt32(p_IdNominaTipo.Value);
+            int IdPeriodo = p_IdPeriodo.Value == null ? 0 : Convert.ToInt32(p_IdPeriodo.Value);
+            int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
 
-            //lst_rpt = lst_rpt.Where(v => v.IdRubro == info_rubros_calculados.IdRubro_sueldo).ToList();
+            ROL_002_Bus bus_rpt = new ROL_002_Bus();
+            List<ROL_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
 
             Lista_Rpte = (from q in lst_rpt
                           group q by new
@@ -83,74 +73,17 @@ namespace Core.Erp.Web.Reportes.RRHH
                               pe_FechaFin = rpte.Key.pe_FechaFin
                           }).ToList();
 
-            Lista_ingreso = (from q in lst_rpt
-                                 where q.Valor > 0
-                                 group q by new
-                                 {
-                                     q.IdEmpresa,
-                                     q.IdSucursal,
-                                     q.IdPeriodo,
-                                     q.IdNominaTipo,
-                                     q.IdNominaTipoLiqui,
-                                     q.IdEmpleado,
-                                     q.RubroDescripcion,
-                                     q.Valor,
-                                     q.Grupo
-                                 } into ing
-                                 select new ROL_002_Info
-                                 {
-                                     IdEmpresa = ing.Key.IdEmpresa,
-                                     IdSucursal = ing.Key.IdSucursal,
-                                     IdPeriodo = ing.Key.IdPeriodo,
-                                     IdNominaTipo = ing.Key.IdNominaTipo,
-                                     IdNominaTipoLiqui = ing.Key.IdNominaTipoLiqui,
-                                     IdEmpleado = ing.Key.IdEmpleado,
-                                     RubroDescripcion = ing.Key.RubroDescripcion,
-                                     Valor = ing.Key.Valor,
-                                     Grupo = ing.Key.Grupo
-
-                                 }).ToList();
-
-                Lista_egreso = (from q in lst_rpt
-                               where q.Valor < 0
-                                group q by new
-                                {
-                                    q.IdEmpresa,
-                                    q.IdSucursal,
-                                    q.IdPeriodo,
-                                    q.IdNominaTipo,
-                                    q.IdNominaTipoLiqui,
-                                    q.IdEmpleado,
-                                    q.RubroDescripcion,
-                                    q.Valor,
-                                    q.Grupo
-
-                                } into egr
-                                select new ROL_002_Info
-                                {
-                                    IdEmpresa = egr.Key.IdEmpresa,
-                                    IdSucursal = egr.Key.IdSucursal,
-                                    IdPeriodo = egr.Key.IdPeriodo,
-                                    IdNominaTipo = egr.Key.IdNominaTipo,
-                                    IdNominaTipoLiqui = egr.Key.IdNominaTipoLiqui,
-                                    IdEmpleado = egr.Key.IdEmpleado,
-                                    RubroDescripcion = egr.Key.RubroDescripcion,
-                                    Valor = (egr.Key.Valor)*-1,
-                                    Grupo=egr.Key.Grupo
-                                    
-                                }).ToList();
-
-                this.DataSource = Lista_Rpte;
+            this.DataSource = Lista_Rpte;
         }
-        private void Subreporte_Ingresos_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+
+        private void SubReporte_RolPago_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            var ListaIngreso = Lista_ingreso.Where(q => q.IdEmpleado == Convert.ToDecimal(lbl_empleado.Text));
-            ((XRSubreport)sender).ReportSource.DataSource = ListaIngreso;
-        }
-        private void Subreporte_Egresos_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            var ListaEgreso = Lista_egreso.Where(q => q.IdEmpleado == Convert.ToDecimal(lbl_empleado.Text));
-            ((XRSubreport)sender).ReportSource.DataSource = ListaEgreso;
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdSucursal"].Value = p_IdSucursal.Value == null ? 0 : Convert.ToDecimal(p_IdSucursal.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdNomina"].Value = p_IdNomina.Value == null ? 0 : Convert.ToDecimal(p_IdNomina.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdNominaTipo"].Value = p_IdNominaTipo.Value == null ? 0 : Convert.ToDecimal(p_IdNominaTipo.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdPeriodo"].Value = p_IdPeriodo.Value == null ? 0 : Convert.ToDecimal(p_IdPeriodo.Value);
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
     }
 }
