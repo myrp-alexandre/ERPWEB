@@ -433,7 +433,8 @@ namespace Core.Erp.Data.RRHH
                                     IDividion=item.IDividion,
                                     Observacion=item.Observacion,
                                     Secuencia=item.Secuencia,
-                                    Porcentaje=item.Porcentaje
+                                    Porcentaje=item.Porcentaje,
+                                    CargaGasto = item.CargaGasto
                                 };
                                 Context.ro_empleado_x_division_x_area.Add(emp_div);
                             }
@@ -548,7 +549,8 @@ namespace Core.Erp.Data.RRHH
                                     IDividion = item.IDividion,
                                     Observacion = item.Observacion,
                                     Secuencia = item.Secuencia,
-                                    Porcentaje=item.Porcentaje
+                                    Porcentaje=item.Porcentaje,
+                                    CargaGasto = item.CargaGasto
                                 };
                                 Context.ro_empleado_x_division_x_area.Add(emp_div);
                             }
