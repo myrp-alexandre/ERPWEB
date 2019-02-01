@@ -762,6 +762,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdProducto = 0,
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdCategoria = "",
                 IdLinea = 0,
                 IdGrupo = 0,
                 IdSubGrupo = 0
@@ -777,6 +778,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdLinea.Value = model.IdLinea;
             report.p_IdGrupo.Value = model.IdGrupo;
             report.p_IdSubgrupo.Value = model.IdSubGrupo;
+            report.p_MostrarAgrupado.Value = model.mostrar_agrupado;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
 
@@ -795,6 +797,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdLinea.Value = model.IdLinea;
             report.p_IdGrupo.Value = model.IdGrupo;
             report.p_IdSubgrupo.Value = model.IdSubGrupo;
+            report.p_MostrarAgrupado.Value = model.mostrar_agrupado;
             cargar_combos(model);
 
             report.usuario = SessionFixed.IdUsuario.ToString();

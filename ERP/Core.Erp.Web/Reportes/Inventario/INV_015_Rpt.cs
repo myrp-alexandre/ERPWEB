@@ -32,9 +32,39 @@ namespace Core.Erp.Web.Reportes.Inventario
             int IdGrupo = string.IsNullOrEmpty(p_IdGrupo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdGrupo.Value);
             int IdSubGrupo = string.IsNullOrEmpty(p_IdSubgrupo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSubgrupo.Value);
 
+            if (!Convert.ToBoolean(p_MostrarAgrupado.Value))
+            {
+                Detail.SortFields.Add(new GroupField("IdCategoria", XRColumnSortOrder.None));
+                Detail.SortFields.Add(new GroupField("IdLinea", XRColumnSortOrder.None));
+                Detail.SortFields.Add(new GroupField("IdGrupo", XRColumnSortOrder.None));
+                Detail.SortFields.Add(new GroupField("IdSubgrupo", XRColumnSortOrder.None));
+            }
+            else
+            {
+                Detail.SortFields.Add(new GroupField("IdCategoria", XRColumnSortOrder.Ascending));
+                Detail.SortFields.Add(new GroupField("IdLinea", XRColumnSortOrder.Ascending));
+                Detail.SortFields.Add(new GroupField("IdGrupo", XRColumnSortOrder.Ascending));
+                Detail.SortFields.Add(new GroupField("IdSubgrupo", XRColumnSortOrder.Ascending));
+            }
             INV_015_Bus bus_rpt = new INV_015_Bus();
             List<INV_015_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdProducto, IdCategoria, IdLinea, IdGrupo, IdSubGrupo);
             this.DataSource = lst_rpt;
+        }
+
+        private void GroupHeader5_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (!Convert.ToBoolean(p_MostrarAgrupado.Value))
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void GroupFooter1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (!Convert.ToBoolean(p_MostrarAgrupado.Value))
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

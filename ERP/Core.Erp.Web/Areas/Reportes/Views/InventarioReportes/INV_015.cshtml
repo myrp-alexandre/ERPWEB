@@ -55,6 +55,11 @@
                             @Html.ValidationMessageFor(q => q.IdProductoPadre, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="mostrar_agrupado">@Html.CheckBoxFor(q => q.mostrar_agrupado) Mostrar agrupado</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
