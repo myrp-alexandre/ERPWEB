@@ -9,7 +9,7 @@ namespace Core.Erp.Data.Reportes.Inventario
 {
    public  class INV_015_Data
     {
-        public List<INV_015_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto, int IdCategoria, int IdLinea, int IdGrupo, int IdSubGrupo)
+        public List<INV_015_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto, int IdCategoria, int IdLinea, int IdGrupo, int IdSubGrupo, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
@@ -52,6 +52,8 @@ namespace Core.Erp.Data.Reportes.Inventario
                     && q.IdGrupo <= IdGrupo_fin
                     && IdSubgrupo_ini <= q.IdSubGrupo
                     && q.IdSubGrupo <= IdSubgrupo_fin
+                    && fecha_ini <= q.vt_fecha
+                    && q.vt_fecha <= fecha_fin
 
                     ).Select(q => new INV_015_Info
                     {

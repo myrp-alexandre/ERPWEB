@@ -128,9 +128,9 @@ namespace Core.Erp.Data.Facturacion
                     fa_NivelDescuento Entity = Context.fa_NivelDescuento.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdNivel == info.IdNivel).FirstOrDefault();
                     if (Entity == null) return false;
                     
-                       Entity.Descripcion = Entity.Descripcion;
-                       Entity.Observacion = Entity.Observacion;
-                       Entity.Porcentaje = Entity.Porcentaje;
+                       Entity.Descripcion = info.Descripcion;
+                       Entity.Observacion = info.Observacion;
+                       Entity.Porcentaje = info.Porcentaje;
                     Context.SaveChanges();
 
                 }

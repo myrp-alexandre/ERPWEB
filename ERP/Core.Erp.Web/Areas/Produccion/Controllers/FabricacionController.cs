@@ -90,7 +90,9 @@ namespace Core.Erp.Web.Areas.Produccion.Controllers
                 FechaIni = DateTime.Now.Date.AddMonths(-1),
                 FechaFin = DateTime.Now.Date,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
-                LstDet = new List<pro_FabricacionDet_Info>()
+                LstDet = new List<pro_FabricacionDet_Info>(),
+                egr_IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                ing_IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
 
 
             };

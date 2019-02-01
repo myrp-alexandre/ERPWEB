@@ -46,5 +46,7 @@ namespace Core.Erp.Data
         public Nullable<double> NETO { get; set; }
         public string NombreCargo { get; set; }
         public string JORNADA { get; set; }
+        public string UBUCACION { get; set; }
+        public double Porcentaje { get; set; }
     }
 }

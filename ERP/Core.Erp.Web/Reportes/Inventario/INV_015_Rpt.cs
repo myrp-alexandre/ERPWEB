@@ -31,6 +31,8 @@ namespace Core.Erp.Web.Reportes.Inventario
             int IdLinea = string.IsNullOrEmpty(p_IdLinea.Value.ToString()) ? 0 : Convert.ToInt32(p_IdLinea.Value);
             int IdGrupo = string.IsNullOrEmpty(p_IdGrupo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdGrupo.Value);
             int IdSubGrupo = string.IsNullOrEmpty(p_IdSubgrupo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSubgrupo.Value);
+            DateTime fecha_ini = string.IsNullOrEmpty(p_fecha_ini.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_ini.Value);
+            DateTime fecha_fin = string.IsNullOrEmpty(p_fecha_fin.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_fecha_fin.Value);
 
             if (!Convert.ToBoolean(p_MostrarAgrupado.Value))
             {
@@ -47,7 +49,7 @@ namespace Core.Erp.Web.Reportes.Inventario
                 Detail.SortFields.Add(new GroupField("IdSubgrupo", XRColumnSortOrder.Ascending));
             }
             INV_015_Bus bus_rpt = new INV_015_Bus();
-            List<INV_015_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdProducto, IdCategoria, IdLinea, IdGrupo, IdSubGrupo);
+            List<INV_015_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdProducto, IdCategoria, IdLinea, IdGrupo, IdSubGrupo, fecha_ini, fecha_fin);
             this.DataSource = lst_rpt;
         }
 

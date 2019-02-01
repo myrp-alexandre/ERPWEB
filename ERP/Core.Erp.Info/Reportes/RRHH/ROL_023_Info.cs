@@ -8,6 +8,7 @@ namespace Core.Erp.Info.Reportes.RRHH
 {
     public class ROL_023_Info
     {
+
         public int IdEmpresa { get; set; }
         public decimal IdRol { get; set; }
         public decimal IdEmpleado { get; set; }
@@ -16,7 +17,9 @@ namespace Core.Erp.Info.Reportes.RRHH
         public Nullable<int> IdDepartamento { get; set; }
         public Nullable<int> IdSucursal { get; set; }
         public int IdNominaTipo { get; set; }
+        public string Descripcion { get; set; }
         public int IdNominaTipoLiqui { get; set; }
+        public string DescripcionProcesoNomina { get; set; }
         public int IdPeriodo { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string NombreDivision { get; set; }
@@ -37,13 +40,11 @@ namespace Core.Erp.Info.Reportes.RRHH
         public Nullable<double> OTROING { get; set; }
         public Nullable<double> DIASTRABAJADOS { get; set; }
         public Nullable<double> NETO { get; set; }
-
-        public string Descripcion { get; set; }
-        public string DescripcionProcesoNomina { get; set; }
+        public string NombreCargo { get; set; }
+        public string JORNADA { get; set; }
+        public string UBUCACION { get; set; }
 
         public int CantidadEmpleados { get; set; }
         public Nullable<double> TotalResumen { get; set; }
-        public string JORNADA { get; set; }
-
     }
 }
