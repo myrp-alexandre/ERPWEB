@@ -8002,8 +8002,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           </FunctionImport>
           <EntitySet Name="VWROL_022" EntityType="Model_reportes.VWROL_022" />
           <EntitySet Name="VWINV_015" EntityType="Model_reportes.VWINV_015" />
-          <EntitySet Name="VWROL_021" EntityType="Model_reportes.VWROL_021" />
           <EntitySet Name="VWFAC_014" EntityType="Model_reportes.VWFAC_014" />
+          <EntitySet Name="VWROL_021" EntityType="Model_reportes.VWROL_021" />
           <FunctionImport Name="SPROL_023" ReturnType="Collection(Model_reportes.SPROL_023_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdSucursalIni" Mode="In" Type="Int32" />
@@ -10561,6 +10561,34 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="VWFAC_014">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdComprobante" />
+            <PropertyRef Name="IdTipoDocumento" />
+            <PropertyRef Name="IdEstado_cbte" />
+            <PropertyRef Name="Nom_Contribuyente" />
+            <PropertyRef Name="Evento" />
+            <PropertyRef Name="Factura" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdComprobante" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstado_cbte" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cedula_Ruc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Numero_Autorizacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAutorizacion" Type="DateTime" Precision="3" />
+          <Property Name="Nom_Contribuyente" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ValorUnitario" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Subtotal" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Iva" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Evento" Type="Int32" Nullable="false" />
+          <Property Name="Factura" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Emi_Fact" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_transaccion" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="VWROL_021">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -10617,34 +10645,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <Property Name="Division" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="VWFAC_014">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdComprobante" />
-            <PropertyRef Name="IdTipoDocumento" />
-            <PropertyRef Name="IdEstado_cbte" />
-            <PropertyRef Name="Nom_Contribuyente" />
-            <PropertyRef Name="Evento" />
-            <PropertyRef Name="Factura" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdComprobante" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdEstado_cbte" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Cedula_Ruc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Numero_Autorizacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAutorizacion" Type="DateTime" Precision="3" />
-          <Property Name="Nom_Contribuyente" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ValorUnitario" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Subtotal" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Iva" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Evento" Type="Int32" Nullable="false" />
-          <Property Name="Factura" Type="Int32" Nullable="false" />
-          <Property Name="Fecha_Emi_Fact" Type="DateTime" Precision="3" />
-          <Property Name="Fecha_transaccion" Type="DateTime" Precision="3" />
-        </EntityType>
         <ComplexType Name="SPROL_023_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Decimal" Name="IdRol" Nullable="false" Precision="18" Scale="0" />
@@ -10679,6 +10679,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <Property Type="Double" Name="NETO" Nullable="true" />
           <Property Type="String" Name="NombreCargo" Nullable="false" />
           <Property Type="String" Name="JORNADA" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="UBUCACION" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Porcentaje" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -13723,6 +13725,29 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VWFAC_014">
+            <EntityTypeMapping TypeName="Model_reportes.VWFAC_014">
+              <MappingFragment StoreEntitySet="VWFAC_014">
+                <ScalarProperty Name="Fecha_transaccion" ColumnName="Fecha_transaccion" />
+                <ScalarProperty Name="Fecha_Emi_Fact" ColumnName="Fecha_Emi_Fact" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+                <ScalarProperty Name="Evento" ColumnName="Evento" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Nom_Contribuyente" ColumnName="Nom_Contribuyente" />
+                <ScalarProperty Name="FechaAutorizacion" ColumnName="FechaAutorizacion" />
+                <ScalarProperty Name="Numero_Autorizacion" ColumnName="Numero_Autorizacion" />
+                <ScalarProperty Name="Cedula_Ruc" ColumnName="Cedula_Ruc" />
+                <ScalarProperty Name="IdEstado_cbte" ColumnName="IdEstado_cbte" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VWROL_021">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_021">
               <MappingFragment StoreEntitySet="VWROL_021">
@@ -13765,29 +13790,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VWFAC_014">
-            <EntityTypeMapping TypeName="Model_reportes.VWFAC_014">
-              <MappingFragment StoreEntitySet="VWFAC_014">
-                <ScalarProperty Name="Fecha_transaccion" ColumnName="Fecha_transaccion" />
-                <ScalarProperty Name="Fecha_Emi_Fact" ColumnName="Fecha_Emi_Fact" />
-                <ScalarProperty Name="Factura" ColumnName="Factura" />
-                <ScalarProperty Name="Evento" ColumnName="Evento" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Iva" ColumnName="Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Nom_Contribuyente" ColumnName="Nom_Contribuyente" />
-                <ScalarProperty Name="FechaAutorizacion" ColumnName="FechaAutorizacion" />
-                <ScalarProperty Name="Numero_Autorizacion" ColumnName="Numero_Autorizacion" />
-                <ScalarProperty Name="Cedula_Ruc" ColumnName="Cedula_Ruc" />
-                <ScalarProperty Name="IdEstado_cbte" ColumnName="IdEstado_cbte" />
-                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-                <ScalarProperty Name="IdComprobante" ColumnName="IdComprobante" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SPROL_023" FunctionName="Model_reportes.Store.SPROL_023">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model_reportes.SPROL_023_Result">
@@ -13824,6 +13826,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
                 <ScalarProperty Name="NETO" ColumnName="NETO" />
                 <ScalarProperty Name="NombreCargo" ColumnName="NombreCargo" />
                 <ScalarProperty Name="JORNADA" ColumnName="JORNADA" />
+                <ScalarProperty Name="UBUCACION" ColumnName="UBUCACION" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
