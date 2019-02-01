@@ -521,7 +521,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_VentasIVA,
-                        dc_Valor = string.IsNullOrEmpty(IdCtaCble_Dscto) ? (Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero) * -1) : (Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero) * -1)
+                        dc_Valor = string.IsNullOrEmpty(IdCtaCble_Dscto) ? Convert.ToDouble(info.info_resumen.SubtotalIVAConDscto) : Convert.ToDouble(info.info_resumen.SubtotalIVASinDscto * -1)
                     });
                 #endregion
 
@@ -534,7 +534,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_Ventas0,
-                        dc_Valor = string.IsNullOrEmpty(IdCtaCble_Dscto) ? (Math.Round(info.lst_det.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero) * -1) : (Math.Round(info.lst_det.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero) * -1)
+                        dc_Valor = string.IsNullOrEmpty(IdCtaCble_Dscto) ? Convert.ToDouble(info.info_resumen.SubtotalSinIVAConDscto * -1) : Convert.ToDouble(info.info_resumen.SubtotalSinIVASinDscto * -1)
                     });
                 #endregion
 
@@ -547,7 +547,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_IVA,
-                        dc_Valor = Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.vt_iva), 2, MidpointRounding.AwayFromZero) * -1
+                        dc_Valor = Convert.ToDouble(info.info_resumen.ValorIVA * -1)
                     });
                 #endregion
 
@@ -560,7 +560,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_Cliente,
-                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.vt_total), 2, MidpointRounding.AwayFromZero)
+                        dc_Valor = Convert.ToDouble(info.info_resumen.Total)
                     });
                 #endregion
 
@@ -573,7 +573,7 @@ namespace Core.Erp.Data.Facturacion
                         IdCbteCble = diario.IdCbteCble,
                         secuencia = secuencia++,
                         IdCtaCble = IdCtaCble_Dscto,
-                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.vt_cantidad * q.vt_DescUnitario), 2, MidpointRounding.AwayFromZero)
+                        dc_Valor = Convert.ToDouble(info.info_resumen.Descuento)
                     });
                 #endregion
 

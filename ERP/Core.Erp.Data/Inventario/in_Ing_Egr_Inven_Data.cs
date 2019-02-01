@@ -9,6 +9,7 @@ namespace Core.Erp.Data.Inventario
 {
     public class in_Ing_Egr_Inven_Data
     {
+        in_producto_x_tb_bodega_Costo_Historico_Data data_costo = new in_producto_x_tb_bodega_Costo_Historico_Data();
         public List<in_Ing_Egr_Inven_Info> get_list (int IdEmpresa, string signo,int IdSucursal, bool mostrar_anulados, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
@@ -86,7 +87,6 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
         public in_Ing_Egr_Inven_Info get_info(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo, decimal IdNumMovi)
         {
             try
@@ -120,7 +120,6 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
         private decimal get_id(int IdEmpresa, int IdSucursal, int IdMovi_inven_tipo)
         {
             try
@@ -144,12 +143,11 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
         public bool guardarDB(in_Ing_Egr_Inven_Info info, string signo)
         {
             try
             {
-                in_producto_x_tb_bodega_Costo_Historico_Data data_costo = new in_producto_x_tb_bodega_Costo_Historico_Data();
+                
                 int sec = 1;
                 using (Entities_inventario Context = new Entities_inventario())
                 {
@@ -176,7 +174,7 @@ namespace Core.Erp.Data.Inventario
                     foreach (var item in info.lst_in_Ing_Egr_Inven_det)
                     {
                         if (signo == "-")
-                            item.mv_costo = data_costo.get_ultimo_costo(info.IdEmpresa, info.IdSucursal, Convert.ToInt32(info.IdBodega), item.IdProducto, info.cm_fecha);
+                            item.mv_costo_sinConversion = data_costo.get_ultimo_costo(info.IdEmpresa, info.IdSucursal, Convert.ToInt32(info.IdBodega), item.IdProducto, info.cm_fecha);
                         in_Ing_Egr_Inven_det entity_det = new in_Ing_Egr_Inven_det
                         {
                             
@@ -216,7 +214,7 @@ namespace Core.Erp.Data.Inventario
                             IdUnidadMedida  = (item.IdUnidadMedida_sinConversion) ==null? "UNID":item.IdUnidadMedida_sinConversion,
                             IdUnidadMedida_sinConversion = (item.IdUnidadMedida_sinConversion) == null ? "UNID" : item.IdUnidadMedida_sinConversion,
 
-                            mv_costo_sinConversion = (item.mv_costo_sinConversion)==null ? 0 : item.mv_costo_sinConversion,
+                            mv_costo_sinConversion = (item.mv_costo_sinConversion) == null ? 0 : item.mv_costo_sinConversion,
                             mv_costo = (item.mv_costo_sinConversion) == null ? 0 : Convert.ToDouble(item.mv_costo_sinConversion),
 
                         };
@@ -236,7 +234,6 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
         public bool modificarDB(in_Ing_Egr_Inven_Info info)
         {
             try
@@ -264,6 +261,8 @@ namespace Core.Erp.Data.Inventario
 
                     foreach (var item in info.lst_in_Ing_Egr_Inven_det)
                     {
+                        if (info.signo == "-")
+                            item.mv_costo_sinConversion = data_costo.get_ultimo_costo(info.IdEmpresa, info.IdSucursal, Convert.ToInt32(info.IdBodega), item.IdProducto, info.cm_fecha);
                         Context.in_Ing_Egr_Inven_det.Add(new in_Ing_Egr_Inven_det
                         {
                             IdEmpresa = info.IdEmpresa,
@@ -313,7 +312,6 @@ namespace Core.Erp.Data.Inventario
                     Context.spINV_aprobacion_ing_egr(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdMovi_inven_tipo, info.IdNumMovi);
 
                     return true;
-
                 }
             }
             catch (Exception)
@@ -322,7 +320,6 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
         public bool anularDB(in_Ing_Egr_Inven_Info info)
         {
             try
@@ -352,8 +349,7 @@ namespace Core.Erp.Data.Inventario
 
                 throw;
             }
-        }
-        
+        }        
         public List<in_Ing_Egr_Inven_Info> get_list_por_devolver(int IdEmpresa, string signo, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
@@ -391,7 +387,6 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
-
         public bool ReversarAprobacion(int IdEmpresa, int IdSucursal, int IdMovi_inve_tipo, decimal IdNumMovi)
         {
             Entities_inventario db_i = new Entities_inventario();

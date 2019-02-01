@@ -76,6 +76,8 @@ namespace Core.Erp.Data
         public DbSet<in_movi_inve> in_movi_inve { get; set; }
         public DbSet<in_movi_inve_detalle> in_movi_inve_detalle { get; set; }
         public DbSet<in_movi_inve_x_ct_cbteCble> in_movi_inve_x_ct_cbteCble { get; set; }
+        public DbSet<in_movi_inve_detalle_x_ct_cbtecble_det> in_movi_inve_detalle_x_ct_cbtecble_det { get; set; }
+        public DbSet<vwin_Ing_Egr_Inven_PorContabilizar> vwin_Ing_Egr_Inven_PorContabilizar { get; set; }
     
         public virtual ObjectResult<spSys_inv_Reversar_aprobacion_Result> spSys_inv_Reversar_aprobacion(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi, Nullable<bool> borar)
         {
