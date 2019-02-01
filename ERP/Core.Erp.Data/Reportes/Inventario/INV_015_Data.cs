@@ -9,21 +9,49 @@ namespace Core.Erp.Data.Reportes.Inventario
 {
    public  class INV_015_Data
     {
-        public List<INV_015_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto, int IdCategoria, int IdLinea, int IdGrupo, int IdSubgrupo)
+        public List<INV_015_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdProducto, int IdCategoria, int IdLinea, int IdGrupo, int IdSubGrupo)
         {
             try
             {
+                int IdSucursal_ini = IdSucursal;
+                int IdSucursal_fin = IdSucursal == 0 ? 9999 : IdSucursal;
+                int IdBodega_ini = IdBodega;
+                int IdBodega_fin = IdBodega == 0 ? 9999 : IdBodega;
+                decimal IdProducto_ini = IdProducto;
+                decimal IdProducto_fin = IdProducto == 0 ? 9999 : IdProducto;
+
+                int IdCategoria_ini = IdCategoria;
+                int IdCategoria_fin = IdCategoria == 0 ? 9999 : IdCategoria;
+
+
+                int IdLinea_ini = IdLinea;
+                int IdLinea_fin = IdLinea == 0 ? 9999 : IdLinea;
+
+
+                int IdGrupo_ini = IdGrupo;
+                int IdGrupo_fin = IdGrupo == 0 ? 9999 : IdGrupo;
+
+
+                int IdSubgrupo_ini = IdSubGrupo;
+                int IdSubgrupo_fin = IdSubGrupo == 0 ? 9999 : IdSubGrupo;
                 List<INV_015_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
                     Lista = Context.VWINV_015.Where(q => q.IdEmpresa_fa == IdEmpresa
-                    && q.IdSucursal_fa == IdSucursal
-                    && q.IdBodega_fa == IdBodega
-                    && q.IdProducto == IdProducto
-                    && q.IdCategoria == IdCategoria
-                    && q.IdLinea == IdLinea
-                    && q.IdGrupo == IdGrupo
-                    && q.IdSubGrupo == IdSubgrupo
+                    && IdSucursal_ini <= q.IdSucursal_fa
+                    && q.IdSucursal_fa <= IdSucursal_fin
+                    && IdBodega_ini <= q.IdBodega_fa
+                    && q.IdBodega_fa <= IdBodega_fin
+                    && IdProducto_ini <= q.IdProducto
+                    && q.IdProducto <= IdProducto_fin
+                    && IdCategoria_ini <= q.IdCategoria
+                    && q.IdCategoria <= IdCategoria_fin
+                    && IdLinea_ini <= q.IdLinea
+                    && q.IdLinea <= IdLinea_fin
+                    && IdGrupo_ini <= q.IdGrupo
+                    && q.IdGrupo <= IdGrupo_fin
+                    && IdSubgrupo_ini <= q.IdSubGrupo
+                    && q.IdSubGrupo <= IdSubgrupo_fin
 
                     ).Select(q => new INV_015_Info
                     {
