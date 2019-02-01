@@ -14,6 +14,7 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransferencia)
     @Html.HiddenFor(q => q.IdSucursalOrigen)
+    @Html.HiddenFor(q => q.IdSucursalDest)
     @Html.HiddenFor(q => q.IdSucursal_Ing_Egr_Inven_Destino)
     @Html.HiddenFor(q => q.IdSucursal_Ing_Egr_Inven_Origen)
 
@@ -23,7 +24,7 @@
     @Html.HiddenFor(q => q.IdNumMovi_Ing_Egr_Inven_Origen)
 
 
-    @Html.HiddenFor(q => q.IdTransaccionSession)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     if (ViewBag.mensaje != null)
     {

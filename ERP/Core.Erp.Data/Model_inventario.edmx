@@ -939,6 +939,7 @@ warning 6002: The table/view 'DBERP.dbo.vwin_Ing_Egr_Inven_PorContabilizar' does
             <PropertyRef Name="IdMovi_inven_tipo" />
             <PropertyRef Name="IdNumMovi" />
             <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="P_IdCtaCble_transitoria_transf_inven" />
             <PropertyRef Name="Valor" />
             <PropertyRef Name="Estado" />
           </Key>
@@ -956,8 +957,10 @@ warning 6002: The table/view 'DBERP.dbo.vwin_Ing_Egr_Inven_PorContabilizar' does
           <Property Name="IdCtaCtble_Inve" Type="varchar" MaxLength="20" />
           <Property Name="IdCtaCtble_Costo" Type="varchar" MaxLength="20" />
           <Property Name="IdCtaCble_Motivo" Type="varchar" MaxLength="20" />
+          <Property Name="P_IdCtaCble_transitoria_transf_inven" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Valor" Type="float" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="EsTransferencia" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBERP.dbo.vwin_Producto_para_composicion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2435,8 +2438,10 @@ warning 6002: The table/view 'DBERP.web.vwin_producto_padre_combo' does not have
     [vwin_Ing_Egr_Inven_PorContabilizar].[IdCtaCtble_Inve] AS [IdCtaCtble_Inve], 
     [vwin_Ing_Egr_Inven_PorContabilizar].[IdCtaCtble_Costo] AS [IdCtaCtble_Costo], 
     [vwin_Ing_Egr_Inven_PorContabilizar].[IdCtaCble_Motivo] AS [IdCtaCble_Motivo], 
+    [vwin_Ing_Egr_Inven_PorContabilizar].[P_IdCtaCble_transitoria_transf_inven] AS [P_IdCtaCble_transitoria_transf_inven], 
     [vwin_Ing_Egr_Inven_PorContabilizar].[Valor] AS [Valor], 
-    [vwin_Ing_Egr_Inven_PorContabilizar].[Estado] AS [Estado]
+    [vwin_Ing_Egr_Inven_PorContabilizar].[Estado] AS [Estado], 
+    [vwin_Ing_Egr_Inven_PorContabilizar].[EsTransferencia] AS [EsTransferencia]
     FROM [dbo].[vwin_Ing_Egr_Inven_PorContabilizar] AS [vwin_Ing_Egr_Inven_PorContabilizar]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_Producto_para_composicion" EntityType="Self.vwin_Producto_para_composicion" store:Type="Views" store:Schema="dbo">
@@ -5618,6 +5623,7 @@ warning 6002: The table/view 'DBERP.web.vwin_producto_padre_combo' does not have
             <PropertyRef Name="IdMovi_inven_tipo" />
             <PropertyRef Name="IdNumMovi" />
             <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="P_IdCtaCble_transitoria_transf_inven" />
             <PropertyRef Name="Valor" />
             <PropertyRef Name="Estado" />
           </Key>
@@ -5635,8 +5641,10 @@ warning 6002: The table/view 'DBERP.web.vwin_producto_padre_combo' does not have
           <Property Name="IdCtaCtble_Inve" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdCtaCtble_Costo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdCtaCble_Motivo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="P_IdCtaCble_transitoria_transf_inven" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Valor" Type="Double" Nullable="false" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="EsTransferencia" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -6718,8 +6726,10 @@ warning 6002: The table/view 'DBERP.web.vwin_producto_padre_combo' does not have
           <EntitySetMapping Name="vwin_Ing_Egr_Inven_PorContabilizar">
             <EntityTypeMapping TypeName="Model_inventario.vwin_Ing_Egr_Inven_PorContabilizar">
               <MappingFragment StoreEntitySet="vwin_Ing_Egr_Inven_PorContabilizar">
+                <ScalarProperty Name="EsTransferencia" ColumnName="EsTransferencia" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="P_IdCtaCble_transitoria_transf_inven" ColumnName="P_IdCtaCble_transitoria_transf_inven" />
                 <ScalarProperty Name="IdCtaCble_Motivo" ColumnName="IdCtaCble_Motivo" />
                 <ScalarProperty Name="IdCtaCtble_Costo" ColumnName="IdCtaCtble_Costo" />
                 <ScalarProperty Name="IdCtaCtble_Inve" ColumnName="IdCtaCtble_Inve" />

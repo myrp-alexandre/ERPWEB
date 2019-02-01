@@ -83,7 +83,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             cargar_combos_detalle();
             var model = List_in_transferencia_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_transferencias_det");
+            return PartialView("_GridViewPartial_transferencias_det",model);
         }
 
         #endregion
@@ -253,7 +253,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List_in_transferencia_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_in_transferencia_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det");
+            return PartialView("_GridViewPartial_transferencias_det", model);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -275,7 +275,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             var model = List_in_transferencia_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det");
+            return PartialView("_GridViewPartial_transferencias_det", model);
         }
 
         public ActionResult EditingDelete(int Secuencia)
@@ -283,7 +283,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             List_in_transferencia_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = List_in_transferencia_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
-            return PartialView("_GridViewPartial_transferencias_det");
+            return PartialView("_GridViewPartial_transferencias_det", model);
         }
         #endregion
 

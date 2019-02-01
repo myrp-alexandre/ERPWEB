@@ -28,7 +28,9 @@ namespace Core.Erp.Data
         public string IdCtaCtble_Inve { get; set; }
         public string IdCtaCtble_Costo { get; set; }
         public string IdCtaCble_Motivo { get; set; }
+        public string P_IdCtaCble_transitoria_transf_inven { get; set; }
         public double Valor { get; set; }
         public string Estado { get; set; }
+        public Nullable<bool> EsTransferencia { get; set; }
     }
 }

@@ -337,7 +337,7 @@ namespace Core.Erp.Data.Contabilidad
                     IdSucursal = IdSucursal,
                     cb_Observacion = Observacion,
                     cb_Fecha = Fecha,
-                    cb_Valor = lista.Sum(q=>q.dc_Valor_debe)
+                    cb_Valor = lista.Where(q=>q.dc_Valor > 0).Sum(q=>q.dc_Valor)
                 };
                 info.lst_ct_cbtecble_det = lista;
                 info.lst_ct_cbtecble_det.ForEach(q => { q.IdEmpresa = IdEmpresa; q.IdTipoCbte = IdTipoCbte; q.IdCbteCble = IdCbteCble; });
