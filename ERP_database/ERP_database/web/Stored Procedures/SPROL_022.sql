@@ -28,7 +28,7 @@ declare
 @IdRubroVespertino varchar(50)
 
 delete web.ro_SPROL_022 where IdEmpresa=@idempresa and IdPeriodo=@idperiodo
-select @IdRubroMatutino=IdRubro_horas_matutina, @IdRubroVespertino=IdRubro_horas_vespertina from ro_rubros_calculados where IdEmpresa=IdEmpresa 
+select @IdRubroMatutino=IdRubro_horas_matutina, @IdRubroVespertino=IdRubro_horas_vespertina from ro_rubros_calculados where IdEmpresa=@idempresa 
 
 select @FechaInicio=pe_FechaIni, @FechaFin=pe_FechaFin from ro_periodo where IdEmpresa=IdEmpresa and IdPeriodo=@idperiodo
 insert into web.ro_SPROL_022
@@ -60,7 +60,7 @@ and nov.IdEmpresa=@idempresa
 and nov.IdNomina_Tipo=@idnomina_tipo
 and IdNomina_TipoLiqui=@idnomina_Tipo_liq
 --nd per.pe_nombreCompleto like '%ACEVEDO%'
---AND nov.IdJornada is not null
+AND nov.IdJornada is not null
 group by  nov_det.IdEmpresa, nov.IdEmpleado, nov.IdJornada, 
 jor.Descripcion, rub.ru_descripcion,
  per.pe_apellido,
@@ -109,6 +109,7 @@ FROM            dbo.ro_rol AS r INNER JOIN
 						 )
 
 
-						 select * from web.ro_SPROL_022 
+						 select * from web.ro_SPROL_022 order by empleado 
+
 
 END

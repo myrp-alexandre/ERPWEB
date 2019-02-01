@@ -1,23 +1,18 @@
-﻿CREATE view web. VWROL_021 as 
-SELECT        ing_comp.IdEmpresa, ing_comp.IdSucursal, ing_comp.IdNominaTipo, ing_comp.IdNominaTipoLiqui, ing_comp.IdEmpleado, ing_comp.IdArea, ing_comp.IDividion AS IdDivision, ing_comp.IdAreaEmpleado, 
-                         area.Descripcion AS AreaEmpleado, ing_comp.IdPeriodo, ing_comp.IdRubro, ing_comp.se_distribuye, ing_comp.Orden, ing_comp.Porcentaje, ing_comp.Valor, ing_comp.rub_visible_reporte, ing_comp.Observacion, 
-                         ing_comp.ru_descripcion, ing_comp.pe_FechaIni, pe_FechaFin, ing_comp.ru_tipo, ing_comp.rub_codigo, ing_comp.ru_codRolGen, ing_comp.ca_descripcion, ing_comp.em_codigo, ing_comp.pe_cedulaRuc, 
-                         ing_comp.pe_nombreCompleto, ing_comp.IdRol, ing_comp.Descripcion, ing_comp.rub_grupo, ing_comp.Dias
-FROM            (SELECT        rol_det.IdEmpresa, rol.IdSucursal, rol.IdNominaTipo, rol.IdNominaTipoLiqui, rol_det.IdEmpleado, emp_div.IdArea, emp_div.IDividion, dbo.ro_empleado.IdArea AS IdAreaEmpleado, rol.IdPeriodo, rol_det.IdRubro, 
-                                                    rubr.se_distribuye, rubr.ru_orden AS Orden, emp_div.Porcentaje, 
-													
-													 CASE WHEN rubr.se_distribuye = 1 THEN case when rubr.ru_tipo='I' then (rol_det.Valor * emp_div.Porcentaje) / 100  else rol_det.Valor end  ELSE   rol_det.Valor END AS Valor, 
-													
-													rol_det.rub_visible_reporte, 
+﻿CREATE view web.[VWROL_021] as 
+SELECT        data.IdEmpresa, data.IdSucursal, data.IdNominaTipo, data.IdNominaTipoLiqui, data.IdEmpleado, data.IdArea, data.IDividion, data.IdAreaEmpleado, data.IdDivisionEmpleado, data.IdPeriodo, data.IdRubro, data.se_distribuye, 
+                         data.Orden, data.Porcentaje, data.Valor, data.rub_visible_reporte, data.Observacion, data.ru_descripcion, data.pe_FechaIni, data.pe_FechaFin, data.ru_tipo, data.rub_codigo, data.ru_codRolGen, data.ca_descripcion, 
+                         data.em_codigo, data.pe_cedulaRuc, data.pe_nombreCompleto, data.IdRol, data.Descripcion, data.rub_grupo, data.Dias, nom_t.Descripcion AS NominaTipo, nom_tip.DescripcionProcesoNomina AS NominaTipoLiqui, 
+                         area.Descripcion AS AreaEmpleado, div.Descripcion AS Division, su.Su_Descripcion
+FROM            (SELECT        rol_det.IdEmpresa, rol.IdSucursal, rol.IdNominaTipo, rol.IdNominaTipoLiqui, rol_det.IdEmpleado, CASE WHEN rubr.se_distribuye = 1 THEN emp_div.IdArea ELSE NULL END AS IdArea, 
+                                                    CASE WHEN rubr.se_distribuye = 1 THEN emp_div.IDividion ELSE NULL END AS IDividion, dbo.ro_empleado.IdArea AS IdAreaEmpleado, dbo.ro_empleado.IdDivision AS IdDivisionEmpleado, rol.IdPeriodo, 
+                                                    rol_det.IdRubro, rubr.se_distribuye, rubr.ru_orden AS Orden, CASE WHEN rubr.se_distribuye = 1 THEN emp_div.Porcentaje ELSE NULL END AS Porcentaje, 
+                                                    CASE WHEN rubr.se_distribuye = 1 THEN CASE WHEN rubr.ru_tipo = 'I' THEN (rol_det.Valor * emp_div.Porcentaje) / 100 ELSE rol_det.Valor END ELSE rol_det.Valor END AS Valor, rol_det.rub_visible_reporte, 
                                                     rol_det.Observacion, CASE WHEN (rubr.se_distribuye = 1 AND (rub_cal.IdRubro_sueldo = rol_det.IdRubro OR
                                                     rub_cal.IdRubro_horas_matutina = rol_det.IdRubro OR
                                                     rub_cal.IdRubro_horas_vespertina = rol_det.IdRubro)) THEN 'SUELDOS POR HORA' ELSE rubr.ru_descripcion END AS ru_descripcion, perid.pe_FechaIni, perid.pe_FechaFin, rubr.ru_tipo, rubr.rub_codigo, 
                                                     rubr.ru_codRolGen, CASE WHEN ru_tipo = 'A' THEN '3 - TOTALES' WHEN ru_tipo = 'I' THEN '1 - INGRESOS' ELSE '2 - EGRESOS' END AS ca_descripcion, dbo.ro_empleado.em_codigo, 
-                                                    dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_nombreCompleto, rol_det.IdRol, 
-													
-													 CASe when rubr.ru_tipo='I' then dbo.ro_area.Descripcion + '-' + CAST(emp_div.Porcentaje AS varchar) else '' end  Descripcion, 
-													
-													cat.ca_descripcion AS rub_grupo, d .Dias
+                                                    dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_nombreCompleto, rol_det.IdRol, CASE WHEN rubr.ru_tipo = 'I' THEN dbo.ro_area.Descripcion + '-' + CAST(emp_div.Porcentaje AS varchar) 
+                                                    ELSE '' END AS Descripcion, cat.ca_descripcion AS rub_grupo, d.Dias
                           FROM            dbo.ro_area INNER JOIN
                                                     dbo.ro_empleado_division_area_x_rol AS emp_div ON dbo.ro_area.IdEmpresa = emp_div.IdEmpresa AND dbo.ro_area.IdArea = emp_div.IdArea RIGHT OUTER JOIN
                                                     dbo.ro_rol AS rol INNER JOIN
@@ -30,34 +25,61 @@ FROM            (SELECT        rol_det.IdEmpresa, rol.IdSucursal, rol.IdNominaTi
                                                     dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona ON rol_det.IdEmpresa = dbo.ro_empleado.IdEmpresa AND rol_det.IdEmpleado = dbo.ro_empleado.IdEmpleado ON 
                                                     emp_div.IdEmpresa = rol_det.IdEmpresa AND emp_div.IdEmpleado = rol_det.IdEmpleado AND emp_div.IdRol = rol_det.IdRol INNER JOIN
                                                     dbo.ro_catalogo AS cat ON rubr.rub_grupo = cat.CodCatalogo LEFT OUTER JOIN
-                                                    ro_rubros_calculados rub_cal ON rub_cal.IdEmpresa = dbo.ro_area.IdEmpresa LEFT OUTER JOIN
+                                                    dbo.ro_rubros_calculados AS rub_cal ON rub_cal.IdEmpresa = dbo.ro_area.IdEmpresa LEFT OUTER JOIN
                                                         (SELECT        det.IdEmpresa, det.IdRol, det.IdEmpleado, det.Valor AS Dias
                                                           FROM            dbo.ro_rol_detalle AS det INNER JOIN
-                                                                                    dbo.ro_rubros_calculados AS p ON p.IdEmpresa = det.IdEmpresa AND det.IdRubro = p.IdRubro_dias_trabajados) AS d ON d .IdEmpresa = rol_det.IdEmpresa AND d .IdRol = rol_det.IdRol AND 
-                                                    d .IdEmpleado = rol_det.IdEmpleado
-                          WHERE        ro_empleado.Tiene_ingresos_compartidos = 1) AS ing_comp LEFT OUTER JOIN
-                         ro_area area ON area.IdEmpresa = ing_comp.IdEmpresa AND area.IdArea = ing_comp.IdAreaEmpleado
-UNION ALL
-SELECT        rol_det.IdEmpresa, rol.IdSucursal, rol.IdNominaTipo, rol.IdNominaTipoLiqui, rol_det.IdEmpleado, dbo.ro_empleado.IdArea, dbo.ro_empleado.IdDivision, dbo.ro_empleado.IdArea, dbo.ro_area.Descripcion, rol.IdPeriodo, 
-                         rol_det.IdRubro, rubr.se_distribuye, rubr.ru_orden AS Orden, 0 AS Expr1, rol_det.Valor, rol_det.rub_visible_reporte, rol_det.Observacion, rubr.ru_descripcion, perid.pe_FechaIni, perid.pe_FechaFin, rubr.ru_tipo, rubr.rub_codigo, 
-                         rubr.ru_codRolGen, CASE WHEN ru_tipo = 'A' THEN '3 - TOTALES' WHEN ru_tipo = 'I' THEN '1 - INGRESOS' ELSE '2 - EGRESOS' END AS ca_descripcion, dbo.ro_empleado.em_codigo, dbo.tb_persona.pe_cedulaRuc, 
-                         dbo.tb_persona.pe_nombreCompleto, rol_det.IdRol, '' Descripcion, cat.ca_descripcion AS rub_grupo, d .Dias
-FROM            dbo.ro_rol AS rol INNER JOIN
-                         dbo.ro_periodo_x_ro_Nomina_TipoLiqui AS pe_x_nom ON rol.IdEmpresa = pe_x_nom.IdEmpresa AND rol.IdNominaTipo = pe_x_nom.IdNomina_Tipo AND rol.IdNominaTipoLiqui = pe_x_nom.IdNomina_TipoLiqui AND 
-                         rol.IdPeriodo = pe_x_nom.IdPeriodo INNER JOIN
-                         dbo.ro_periodo AS perid ON pe_x_nom.IdEmpresa = perid.IdEmpresa AND pe_x_nom.IdPeriodo = perid.IdPeriodo INNER JOIN
-                         dbo.ro_rubro_tipo AS rubr INNER JOIN
-                         dbo.ro_rol_detalle AS rol_det ON rubr.IdEmpresa = rol_det.IdEmpresa AND rubr.IdRubro = rol_det.IdRubro ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol LEFT OUTER JOIN
-                         dbo.ro_area INNER JOIN
-                         dbo.ro_empleado INNER JOIN
-                         dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona ON dbo.ro_area.IdArea = dbo.ro_empleado.IdArea AND dbo.ro_area.IdEmpresa = dbo.ro_empleado.IdEmpresa ON 
-                         rol_det.IdEmpresa = dbo.ro_empleado.IdEmpresa AND rol_det.IdEmpleado = dbo.ro_empleado.IdEmpleado LEFT OUTER JOIN
-                         dbo.ro_catalogo AS cat ON rubr.rub_grupo = cat.CodCatalogo LEFT OUTER JOIN
-                             (SELECT        det.IdEmpresa, det.IdRol, det.IdEmpleado, det.Valor AS Dias
-                               FROM            dbo.ro_rol_detalle AS det INNER JOIN
-                                                         dbo.ro_rubros_calculados AS p ON p.IdEmpresa = det.IdEmpresa AND det.IdRubro = p.IdRubro_dias_trabajados) AS d ON d .IdEmpresa = rol_det.IdEmpresa AND d .IdRol = rol_det.IdRol AND 
-                         d .IdEmpleado = rol_det.IdEmpleado
-WHERE        (dbo.ro_empleado.Tiene_ingresos_compartidos = 0)
+                                                                                    dbo.ro_rubros_calculados AS p ON p.IdEmpresa = det.IdEmpresa AND det.IdRubro = p.IdRubro_dias_trabajados) AS d ON d.IdEmpresa = rol_det.IdEmpresa AND d.IdRol = rol_det.IdRol AND 
+                                                    d.IdEmpleado = rol_det.IdEmpleado
+                          WHERE        (dbo.ro_empleado.Tiene_ingresos_compartidos = 1) AND (rubr.se_distribuye = 1)
+                          UNION ALL
+                          SELECT        rol_det.IdEmpresa, rol.IdSucursal, rol.IdNominaTipo, rol.IdNominaTipoLiqui, rol_det.IdEmpleado, NULL AS IdArea, NULL AS IDividion, dbo.ro_empleado.IdArea AS IdAreaEmpleado, 
+                                                   dbo.ro_empleado.IdDivision AS IdDivisionEmpleado, rol.IdPeriodo, rol_det.IdRubro, rubr.se_distribuye, rubr.ru_orden AS Orden, NULL AS Porcentaje, rol_det.Valor, rol_det.rub_visible_reporte, 
+                                                   rol_det.Observacion, CASE WHEN (rubr.se_distribuye = 1 AND (rub_cal.IdRubro_sueldo = rol_det.IdRubro OR
+                                                   rub_cal.IdRubro_horas_matutina = rol_det.IdRubro OR
+                                                   rub_cal.IdRubro_horas_vespertina = rol_det.IdRubro)) THEN 'SUELDOS POR HORA' ELSE rubr.ru_descripcion END AS ru_descripcion, perid.pe_FechaIni, perid.pe_FechaFin, rubr.ru_tipo, rubr.rub_codigo, 
+                                                   rubr.ru_codRolGen, CASE WHEN ru_tipo = 'A' THEN '3 - TOTALES' WHEN ru_tipo = 'I' THEN '1 - INGRESOS' ELSE '2 - EGRESOS' END AS ca_descripcion, dbo.ro_empleado.em_codigo, dbo.tb_persona.pe_cedulaRuc, 
+                                                   dbo.tb_persona.pe_nombreCompleto, rol_det.IdRol, '' AS Descripcion, cat.ca_descripcion AS rub_grupo, d.Dias
+                          FROM            dbo.ro_area INNER JOIN
+                                                   dbo.ro_rol AS rol INNER JOIN
+                                                   dbo.ro_periodo_x_ro_Nomina_TipoLiqui AS pe_x_nom ON rol.IdEmpresa = pe_x_nom.IdEmpresa AND rol.IdNominaTipo = pe_x_nom.IdNomina_Tipo AND rol.IdNominaTipoLiqui = pe_x_nom.IdNomina_TipoLiqui AND 
+                                                   rol.IdPeriodo = pe_x_nom.IdPeriodo INNER JOIN
+                                                   dbo.ro_periodo AS perid ON pe_x_nom.IdEmpresa = perid.IdEmpresa AND pe_x_nom.IdPeriodo = perid.IdPeriodo INNER JOIN
+                                                   dbo.ro_rubro_tipo AS rubr INNER JOIN
+                                                   dbo.ro_rol_detalle AS rol_det ON rubr.IdEmpresa = rol_det.IdEmpresa AND rubr.IdRubro = rol_det.IdRubro ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol LEFT OUTER JOIN
+                                                   dbo.ro_empleado INNER JOIN
+                                                   dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona ON rol_det.IdEmpresa = dbo.ro_empleado.IdEmpresa AND rol_det.IdEmpleado = dbo.ro_empleado.IdEmpleado ON 
+                                                   dbo.ro_area.IdEmpresa = dbo.ro_empleado.IdEmpresa AND dbo.ro_area.IdArea = dbo.ro_empleado.IdArea LEFT OUTER JOIN
+                                                   dbo.ro_catalogo AS cat ON rubr.rub_grupo = cat.CodCatalogo LEFT OUTER JOIN
+                                                   dbo.ro_rubros_calculados AS rub_cal ON dbo.ro_area.IdEmpresa = rub_cal.IdEmpresa LEFT OUTER JOIN
+                                                       (SELECT        det.IdEmpresa, det.IdRol, det.IdEmpleado, det.Valor AS Dias
+                                                         FROM            dbo.ro_rol_detalle AS det INNER JOIN
+                                                                                   dbo.ro_rubros_calculados AS p ON p.IdEmpresa = det.IdEmpresa AND det.IdRubro = p.IdRubro_dias_trabajados) AS d ON d.IdEmpresa = rol_det.IdEmpresa AND d.IdRol = rol_det.IdRol AND 
+                                                   d.IdEmpleado = rol_det.IdEmpleado
+                          WHERE        (dbo.ro_empleado.Tiene_ingresos_compartidos = 1) AND (rubr.se_distribuye = 0)
+                          UNION ALL
+                          SELECT        rol_det.IdEmpresa, rol.IdSucursal, rol.IdNominaTipo, rol.IdNominaTipoLiqui, rol_det.IdEmpleado, NULL AS Expr2, NULL AS Expr3, dbo.ro_empleado.IdArea, dbo.ro_empleado.IdDivision, rol.IdPeriodo, 
+                                                   rol_det.IdRubro, rubr.se_distribuye, rubr.ru_orden AS Orden, 0 AS Expr1, rol_det.Valor, rol_det.rub_visible_reporte, rol_det.Observacion, rubr.ru_descripcion, perid.pe_FechaIni, perid.pe_FechaFin, rubr.ru_tipo, 
+                                                   rubr.rub_codigo, rubr.ru_codRolGen, CASE WHEN ru_tipo = 'A' THEN '3 - TOTALES' WHEN ru_tipo = 'I' THEN '1 - INGRESOS' ELSE '2 - EGRESOS' END AS ca_descripcion, dbo.ro_empleado.em_codigo, 
+                                                   dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_nombreCompleto, rol_det.IdRol, '' AS Descripcion, cat.ca_descripcion AS rub_grupo, d.Dias
+                          FROM            dbo.ro_rol AS rol INNER JOIN
+                                                   dbo.ro_periodo_x_ro_Nomina_TipoLiqui AS pe_x_nom ON rol.IdEmpresa = pe_x_nom.IdEmpresa AND rol.IdNominaTipo = pe_x_nom.IdNomina_Tipo AND rol.IdNominaTipoLiqui = pe_x_nom.IdNomina_TipoLiqui AND 
+                                                   rol.IdPeriodo = pe_x_nom.IdPeriodo INNER JOIN
+                                                   dbo.ro_periodo AS perid ON pe_x_nom.IdEmpresa = perid.IdEmpresa AND pe_x_nom.IdPeriodo = perid.IdPeriodo INNER JOIN
+                                                   dbo.ro_rubro_tipo AS rubr INNER JOIN
+                                                   dbo.ro_rol_detalle AS rol_det ON rubr.IdEmpresa = rol_det.IdEmpresa AND rubr.IdRubro = rol_det.IdRubro ON rol.IdEmpresa = rol_det.IdEmpresa AND rol.IdRol = rol_det.IdRol LEFT OUTER JOIN
+                                                   dbo.ro_empleado INNER JOIN
+                                                   dbo.tb_persona ON dbo.ro_empleado.IdPersona = dbo.tb_persona.IdPersona ON rol_det.IdEmpresa = dbo.ro_empleado.IdEmpresa AND rol_det.IdEmpleado = dbo.ro_empleado.IdEmpleado LEFT OUTER JOIN
+                                                   dbo.ro_catalogo AS cat ON rubr.rub_grupo = cat.CodCatalogo LEFT OUTER JOIN
+                                                       (SELECT        det.IdEmpresa, det.IdRol, det.IdEmpleado, det.Valor AS Dias
+                                                         FROM            dbo.ro_rol_detalle AS det INNER JOIN
+                                                                                   dbo.ro_rubros_calculados AS p ON p.IdEmpresa = det.IdEmpresa AND det.IdRubro = p.IdRubro_dias_trabajados) AS d ON d.IdEmpresa = rol_det.IdEmpresa AND d.IdRol = rol_det.IdRol AND 
+                                                   d.IdEmpleado = rol_det.IdEmpleado
+                          WHERE        (dbo.ro_empleado.Tiene_ingresos_compartidos = 0)) AS data LEFT OUTER JOIN
+                         dbo.ro_area AS area ON area.IdEmpresa = data.IdEmpresa AND area.IdArea = data.IdAreaEmpleado LEFT OUTER JOIN
+                         dbo.ro_Division AS div ON div.IdEmpresa = data.IdEmpresa AND div.IdDivision = data.IdDivisionEmpleado LEFT OUTER JOIN
+                         dbo.tb_sucursal AS su ON su.IdEmpresa = data.IdEmpresa AND su.IdSucursal = data.IdSucursal LEFT OUTER JOIN
+                         dbo.ro_Nomina_Tipo AS nom_t ON nom_t.IdEmpresa = data.IdEmpresa AND nom_t.IdNomina_Tipo = data.IdNominaTipo LEFT OUTER JOIN
+                         dbo.ro_Nomina_Tipoliqui AS nom_tip ON nom_tip.IdEmpresa = data.IdEmpresa AND nom_tip.IdNomina_Tipo = data.IdNominaTipo AND nom_tip.IdNomina_TipoLiqui = data.IdNominaTipoLiqui
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_021';
 
@@ -74,7 +96,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[31] 4[5] 2[46] 3) )"
+         Configuration = "(H (1[8] 4[3] 2[84] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -136,7 +158,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = -511
+         Top = -223
          Left = 0
       End
       Begin Tables = 
@@ -200,6 +222,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'web', @level1type = N'VIEW', @level1name = N'VWROL_021';
+
+
 
 
 

@@ -1,6 +1,6 @@
 ﻿CREATE VIEW dbo.vwro_nomina_sin_percebir_sueldo
 AS
-SELECT        dbo.ro_rol_detalle.IdEmpresa, dbo.ro_rol_detalle.IdRol, dbo.ro_rol_detalle.IdEmpleado, dbo.ro_rol_detalle.IdRubro, CAST(dbo.ro_rol_detalle.Valor AS numeric(10, 1)) AS Valor, dbo.ro_rol_detalle.IdSucursal, 
+SELECT        dbo.ro_rol_detalle.IdEmpresa, dbo.ro_rol_detalle.IdRol, dbo.ro_rol_detalle.IdEmpleado, dbo.ro_rol_detalle.IdRubro, CAST(dbo.ro_rol_detalle.Valor AS numeric(10, 2)) AS Valor, dbo.ro_rol_detalle.IdSucursal, 
                          dbo.ro_empleado.em_codigo, dbo.tb_persona.pe_cedulaRuc, dbo.tb_persona.pe_apellido, dbo.tb_persona.pe_nombre, dbo.tb_persona.pe_nombreCompleto
 FROM            dbo.ro_rol_detalle INNER JOIN
                          dbo.ro_empleado ON dbo.ro_rol_detalle.IdEmpresa = dbo.ro_empleado.IdEmpresa AND dbo.ro_rol_detalle.IdEmpleado = dbo.ro_empleado.IdEmpleado INNER JOIN
@@ -16,7 +16,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[8] 4[5] 2[46] 3) )"
+         Configuration = "(H (1[8] 4[5] 2[12] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -153,6 +153,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_nomina_sin_percebir_sueldo';
+
+
 
 
 

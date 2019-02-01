@@ -2,7 +2,7 @@
 CREATE PROCEDURE [web].[SPFAC_002]
 	@IdEmpresa as int,
 	@SucursalIni as int,
-	@SucursalFin as int,
+	@SucursalFin as int,	
 	@IdClienteIni as numeric,
 	@IdClienteFin as numeric,
 	@fechaCorte as datetime,
@@ -33,21 +33,23 @@ select      Facturas_y_notas_deb.IdEmpresa ,Facturas_y_notas_deb.IdSucursal,Fact
 								F.CodCbteVta,F.vt_tipoDoc,F.vt_serie1,F.vt_serie2,F.vt_NumFactura, 
 								dbo.tb_sucursal.Su_Descripcion, LTRIM(dbo.tb_persona.pe_nombreCompleto) + '/'+ cast( fa_cliente.IdCliente as varchar(20)) as pe_nombreCompleto, dbo.tb_persona.pe_cedulaRuc, SUM( FD.vt_total) Valor_Original,F.vt_fech_venc,
 								F.vt_fecha,dbo.fa_cliente.Idtipo_cliente, '' +'/'+ dbo.tb_persona.pe_telfono_Contacto as pe_telefonoOfic,
-								F.vt_Observacion,F.vt_plazo, f.IdContacto, con.Nombres as NomContacto, con.Telefono + '/' + con.Celular TelefonoContacto
+								F.vt_Observacion,F.vt_plazo, f.IdContacto, p.pe_nombreCompleto as NomContacto, con.Telefono + '/' + con.Celular TelefonoContacto
 			FROM            fa_factura AS F INNER JOIN
                          fa_factura_det AS FD ON F.IdEmpresa = FD.IdEmpresa AND F.IdSucursal = FD.IdSucursal AND F.IdBodega = FD.IdBodega AND F.IdCbteVta = FD.IdCbteVta INNER JOIN
                          fa_cliente ON F.IdEmpresa = fa_cliente.IdEmpresa AND F.IdCliente = fa_cliente.IdCliente INNER JOIN
                          tb_persona ON fa_cliente.IdPersona = tb_persona.IdPersona INNER JOIN
                          tb_sucursal ON F.IdEmpresa = tb_sucursal.IdEmpresa AND F.IdSucursal = tb_sucursal.IdSucursal 
-						 INNER JOIN fa_cliente_contactos as con on F.IdEmpresa = con.IdEmpresa and f.IdCliente = con.IdCliente and f.IdContacto = con.IdContacto
+						 inner join tb_persona as p on fa_cliente.IdPersona = p.IdPersona
+						 inner join fa_cliente_contactos as con on fa_cliente.IdEmpresa = con.IdEmpresa and fa_cliente.IdCliente = con.IdCliente
 			WHERE				F.IdEmpresa = @IdEmpresa AND F.vt_fecha <= @fechaCorte and F.Estado='A' 
 			AND f.IdCliente between @IdClienteIni and @IdClienteFin
 			AND f.IdSucursal between @SucursalIni and @SucursalFin
 			GROUP BY            F.IdEmpresa,F.IdSucursal,F.IdBodega, dbo.fa_cliente.IdCliente, dbo.fa_cliente.Codigo,F.IdCbteVta, 
 								F.CodCbteVta,F.vt_tipoDoc,F.vt_serie1,F.vt_serie2,F.vt_NumFactura, 
 								dbo.tb_sucursal.Su_Descripcion, ltrim(dbo.tb_persona.pe_nombreCompleto) + '/'+ cast( fa_cliente.IdCliente as varchar(20)), dbo.tb_persona.pe_cedulaRuc,F.vt_fech_venc,F.vt_fecha,dbo.fa_cliente.Idtipo_cliente
-								,'' +'/'+ dbo.tb_persona.pe_telfono_Contacto, F.vt_Observacion,F.vt_plazo,f.IdContacto, con.Nombres,con.Telefono + '/' + con.Celular
-		
+								,'' +'/'+ dbo.tb_persona.pe_telfono_Contacto, F.vt_Observacion,F.vt_plazo,f.IdContacto, p.pe_nombreCompleto,con.Telefono + '/' + con.Celular
+
+			
 -- *******************************************************************************************************************************************
 -- notas de debito
 union 
@@ -90,15 +92,41 @@ GROUP BY		dbo.fa_notaCreDeb.IdEmpresa, dbo.fa_notaCreDeb.IdSucursal, dbo.fa_nota
 ) as  Facturas_y_notas_deb left join
 (
 
+SELECT A.IdEmpresa, A.IdSucursal, A.dc_TipoDocumento, A.IdBodega_Cbte, A.IdCbte_vta_nota, SUM(dc_ValorPago) dc_ValorPago
+FROM(
+		SELECT d.IdEmpresa, d.IdSucursal, d.dc_TipoDocumento, d.IdBodega_Cbte, d.IdCbte_vta_nota, 
+		case when C.IdCobro_tipo <> 'TARJ' then
+		d.dc_ValorPago
+		when C.IdCobro_tipo = 'TARJ' AND ISNULL(L.Fecha, DATEADD(DAY,1,@fechaCorte)) <= @fechaCorte then
+		d.dc_ValorPago
+		else 0 end as dc_ValorPago
+		FROM     cxc_LiquidacionTarjeta AS l INNER JOIN
+		cxc_LiquidacionTarjeta_x_cxc_cobro AS ld ON l.IdEmpresa = ld.IdEmpresa AND l.IdSucursal = ld.IdSucursal AND l.IdLiquidacion = ld.IdLiquidacion RIGHT OUTER JOIN
+		cxc_cobro AS c INNER JOIN
+		cxc_cobro_det AS d ON c.IdEmpresa = d.IdEmpresa AND c.IdSucursal = d.IdSucursal AND c.IdCobro = d.IdCobro ON ld.IdEmpresa = c.IdEmpresa AND ld.IdSucursal = c.IdSucursal AND ld.IdCobro = c.IdCobro
+		WHERE					 c.IdEmpresa = @IdEmpresa and cast(c.cr_fechaCobro as date)<= @fechaCorte and c.cr_estado='A'
+) A
+GROUP BY A.IdEmpresa, A.IdSucursal, A.dc_TipoDocumento, A.IdBodega_Cbte, A.IdCbte_vta_nota
+/*
+
 		SELECT                   dbo.cxc_cobro.IdEmpresa, dbo.cxc_cobro.IdSucursal,  dbo.cxc_cobro_det.dc_TipoDocumento, dbo.cxc_cobro_det.IdBodega_Cbte, 
-								 dbo.cxc_cobro_det.IdCbte_vta_nota, sum(dbo.cxc_cobro_det.dc_ValorPago) as dc_ValorPago 
+								 dbo.cxc_cobro_det.IdCbte_vta_nota, 
+								 
+								 sum(dbo.cxc_cobro_det.dc_ValorPago) as dc_ValorPago 
+
+
 		FROM                     dbo.cxc_cobro INNER JOIN
 								 dbo.cxc_cobro_det ON dbo.cxc_cobro.IdEmpresa = dbo.cxc_cobro_det.IdEmpresa AND dbo.cxc_cobro.IdSucursal = dbo.cxc_cobro_det.IdSucursal AND 
 								 dbo.cxc_cobro.IdCobro = dbo.cxc_cobro_det.IdCobro 
+
+								 
+
+
 		WHERE					 dbo.cxc_cobro.IdEmpresa = @IdEmpresa and cast(dbo.cxc_cobro.cr_fechaCobro as date)<= @fechaCorte and dbo.cxc_cobro.cr_estado='A'
+		
 		GROUP BY                 dbo.cxc_cobro.IdEmpresa, dbo.cxc_cobro.IdSucursal,  dbo.cxc_cobro_det.dc_TipoDocumento, dbo.cxc_cobro_det.IdBodega_Cbte, 
 								 dbo.cxc_cobro_det.IdCbte_vta_nota
-	
+*/	
 
 ) as Cobros_x_fac
 on Facturas_y_notas_deb.IdEmpresa=Cobros_x_fac.IdEmpresa

@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [web].[SPROL_023]
+﻿
+CREATE PROCEDURE [web].[SPROL_023]
 (
 @IdEmpresa int,
 @IdSucursalIni int,
@@ -15,8 +16,10 @@
 )
 AS
 
+
+
 SELECT IdEmpresa, IdRol,IdEmpleado,IdDivision,IdArea,IdDepartamento,IdSucursal,IdNominaTipo, Descripcion, IdNominaTipoLiqui,DescripcionProcesoNomina, IdPeriodo,pe_nombreCompleto,NombreDivision,NombreArea,NombreDepartamento,Su_Descripcion, SUM(SUELDO) SUELDO, SUM(ANTICIPO) ANTICIPO, SUM(DECIMOC) DECIMOC, SUM(DECIMOT) DECIMOT, SUM(FRESERVA)FRESERVA,SUM(IESS)IESS, SUM(PRESTAMO)PRESTAMO,SUM(SOBRET) SOBRET,
-SUM(TOTALE)TOTALE, SUM(TOTALI)TOTALI,SUM(OTROEGR)OTROEGR, SUM(OTROING) OTROING, SUM(DIASTRABAJADOS) DIASTRABAJADOS, ROUND(SUM(TOTALI) - SUM(TOTALE),2) NETO,NombreCargo
+SUM(TOTALE)TOTALE, SUM(TOTALI)TOTALI,SUM(OTROEGR)OTROEGR, SUM(OTROING) OTROING, SUM(DIASTRABAJADOS) DIASTRABAJADOS, (SUM(TOTALI) - SUM(TOTALE)) NETO,NombreCargo, JORNADA
 FROM (
 SELECT ro_rol_detalle.IdEmpresa, ro_rol_detalle.IdRol, ro_rol_detalle.IdEmpleado, ro_empleado.IdDivision, ro_empleado.IdArea, ro_empleado.IdDepartamento, ro_rol.IdSucursal, ro_rol.IdNominaTipo,ro_Nomina_Tipo.Descripcion, ro_rol.IdNominaTipoLiqui, ro_Nomina_Tipoliqui.DescripcionProcesoNomina, tb_sucursal.Su_Descripcion,
 ro_rol.IdPeriodo, tb_persona.pe_nombreCompleto, ro_Division.Descripcion AS NombreDivision, ro_area.Descripcion AS NombreArea, ro_Departamento.de_descripcion AS NombreDepartamento,
@@ -34,7 +37,8 @@ ro_cargo.ca_descripcion as NombreCargo,
 				  CASE WHEN ro_rubro_tipo.ru_tipo = 'I' THEN VALOR ELSE 0 END AS TOTALI,
 				  CASE WHEN ro_rubro_tipo.ru_tipo = 'E' AND ro_rubro_tipo.rub_GrupoResumen is null THEN VALOR ELSE 0 END AS OTROEGR,
 				  CASE WHEN ro_rubro_tipo.ru_tipo = 'I' AND ro_rubro_tipo.rub_GrupoResumen is null THEN VALOR ELSE 0 END AS OTROING,
-				  CASE WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_dias_trabajados then VALOR ELSE 0 END AS DIASTRABAJADOS
+				  CASE WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_dias_trabajados then VALOR ELSE 0 END AS DIASTRABAJADOS,
+				  CASE WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_horas_matutina  then 'HORAS MATUTINA' WHEN ro_rubro_tipo.IdRubro = ro_rubros_calculados.IdRubro_horas_vespertina THEN'HORAS VESPERTINA'  ELSE 'GENERAL' END AS JORNADA
 FROM            dbo.tb_persona INNER JOIN
                          dbo.ro_empleado ON dbo.tb_persona.IdPersona = dbo.ro_empleado.IdPersona INNER JOIN
                          dbo.ro_Departamento ON dbo.ro_empleado.IdEmpresa = dbo.ro_Departamento.IdEmpresa AND dbo.ro_empleado.IdDepartamento = dbo.ro_Departamento.IdDepartamento RIGHT OUTER JOIN
@@ -67,8 +71,11 @@ FROM            dbo.tb_persona INNER JOIN
 				  and ro_empleado.IdDivision>=@IdDivisionIni
 				  and ro_empleado.IdDivision<=@IdDivisionFin
 
-				   and ro_empleado.IdArea>=@IdAreaIni
+				  and ro_empleado.IdArea>=@IdAreaIni
 				  and ro_empleado.IdArea<=@IdAreaFin
 
+				  and ro_empleado.IdDepartamento>=@IdDepartamentoIni
+				  and ro_empleado.IdDepartamento<=@IdDepartamentoFin
+
 				  ) A
-				  GROUP BY IdEmpresa, IdRol,IdEmpleado,IdDivision,IdArea,Descripcion,DescripcionProcesoNomina,IdDepartamento,IdSucursal,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,pe_nombreCompleto,NombreDivision,NombreArea,NombreDepartamento,Su_Descripcion,NombreCargo
+				  GROUP BY IdEmpresa, IdRol,IdEmpleado,IdDivision,IdArea,Descripcion,DescripcionProcesoNomina,IdDepartamento,IdSucursal,IdNominaTipo,IdNominaTipoLiqui,IdPeriodo,pe_nombreCompleto,NombreDivision,NombreArea,NombreDepartamento,Su_Descripcion,NombreCargo, JORNADA
