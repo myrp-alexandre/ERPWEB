@@ -61,7 +61,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                         TOTALE = q.TOTALE,
                         TOTALI = q.TOTALI,
                         Descripcion = q.Descripcion,
-                        DescripcionProcesoNomina = q.DescripcionProcesoNomina
+                        DescripcionProcesoNomina = q.DescripcionProcesoNomina,
+                        JORNADA=q.JORNADA
                     }).ToList();
                 }
                 return Lista;

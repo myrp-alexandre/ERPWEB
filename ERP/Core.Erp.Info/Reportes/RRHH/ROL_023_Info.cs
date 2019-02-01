@@ -43,5 +43,7 @@ namespace Core.Erp.Info.Reportes.RRHH
 
         public int CantidadEmpleados { get; set; }
         public Nullable<double> TotalResumen { get; set; }
+        public string JORNADA { get; set; }
+
     }
 }
