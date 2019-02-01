@@ -940,6 +940,12 @@
     <Compile Include="Reportes\Facturacion\FAC_013_Rpt.Designer.cs">
       <DependentUpon>FAC_013_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_014_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_014_Rpt.Designer.cs">
+      <DependentUpon>FAC_014_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Importacion\IMP_002_gastos_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9798,6 +9804,7 @@
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbArea_Individual.cshtml" />
     <Content Include="Areas\Inventario\Views\MotivoInventario\_CmbCtaCble.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_015.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_015.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
