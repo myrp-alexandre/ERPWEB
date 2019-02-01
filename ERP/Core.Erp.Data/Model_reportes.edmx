@@ -7964,8 +7964,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
             <Parameter Name="IdDepartamentoIni" Mode="In" Type="Int32" />
             <Parameter Name="IdDepartamentoFin" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="VWROL_021" EntityType="Model_reportes.VWROL_021" />
           <EntitySet Name="VWINV_015" EntityType="Model_reportes.VWINV_015" />
+          <EntitySet Name="VWROL_021" EntityType="Model_reportes.VWROL_021" />
         </EntityContainer>
         <ComplexType Name="SPACTF_004_detalle_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -10489,6 +10489,61 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <Property Type="String" Name="NombreCargo" Nullable="false" />
           <Property Type="String" Name="JORNADA" Nullable="false" MaxLength="16" />
         </ComplexType>
+        <EntityType Name="VWINV_015">
+          <Key>
+            <PropertyRef Name="IdEmpresa_fa" />
+            <PropertyRef Name="IdSucursal_fa" />
+            <PropertyRef Name="IdBodega_fa" />
+            <PropertyRef Name="IdCbteVta_fa" />
+            <PropertyRef Name="Secuencia_fa" />
+            <PropertyRef Name="IdEmpresa_eg" />
+            <PropertyRef Name="IdSucursal_eg" />
+            <PropertyRef Name="IdMovi_inven_tipo_eg" />
+            <PropertyRef Name="IdNumMovi_eg" />
+            <PropertyRef Name="Secuencia_eg" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="CantidadFac" />
+            <PropertyRef Name="vt_PrecioFinal" />
+            <PropertyRef Name="TotalFac" />
+            <PropertyRef Name="CostoUni" />
+            <PropertyRef Name="Utilidad" />
+            <PropertyRef Name="IdLinea" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="IdSubGrupo" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdEmpresa_fa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal_fa" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega_fa" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta_fa" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia_fa" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_eg" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal_eg" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_eg" Type="Int32" Nullable="false" />
+          <Property Name="IdNumMovi_eg" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia_eg" Type="Int32" Nullable="false" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CantidadFac" Type="Double" Nullable="false" />
+          <Property Name="vt_PrecioFinal" Type="Double" Nullable="false" />
+          <Property Name="TotalFac" Type="Double" Nullable="false" />
+          <Property Name="CantidadInv" Type="Double" />
+          <Property Name="CostoUni" Type="Double" Nullable="false" />
+          <Property Name="TotalCosto" Type="Double" />
+          <Property Name="Utilidad" Type="Double" Nullable="false" />
+          <Property Name="IdCategoria" Type="Int32" />
+          <Property Name="IdLinea" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="IdSubGrupo" Type="Int32" Nullable="false" />
+          <Property Name="ca_Categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_linea" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="nom_grupo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="nom_subgrupo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
         <EntityType Name="VWROL_021">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -10544,61 +10599,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
           <Property Name="AreaEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Division" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="VWINV_015">
-          <Key>
-            <PropertyRef Name="IdEmpresa_fa" />
-            <PropertyRef Name="IdSucursal_fa" />
-            <PropertyRef Name="IdBodega_fa" />
-            <PropertyRef Name="IdCbteVta_fa" />
-            <PropertyRef Name="Secuencia_fa" />
-            <PropertyRef Name="IdEmpresa_eg" />
-            <PropertyRef Name="IdSucursal_eg" />
-            <PropertyRef Name="IdMovi_inven_tipo_eg" />
-            <PropertyRef Name="IdNumMovi_eg" />
-            <PropertyRef Name="Secuencia_eg" />
-            <PropertyRef Name="pr_descripcion" />
-            <PropertyRef Name="CantidadFac" />
-            <PropertyRef Name="vt_PrecioFinal" />
-            <PropertyRef Name="TotalFac" />
-            <PropertyRef Name="CostoUni" />
-            <PropertyRef Name="Utilidad" />
-            <PropertyRef Name="IdLinea" />
-            <PropertyRef Name="IdGrupo" />
-            <PropertyRef Name="IdSubGrupo" />
-            <PropertyRef Name="vt_fecha" />
-            <PropertyRef Name="IdProducto" />
-          </Key>
-          <Property Name="IdEmpresa_fa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal_fa" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega_fa" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteVta_fa" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia_fa" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpresa_eg" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal_eg" Type="Int32" Nullable="false" />
-          <Property Name="IdMovi_inven_tipo_eg" Type="Int32" Nullable="false" />
-          <Property Name="IdNumMovi_eg" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia_eg" Type="Int32" Nullable="false" />
-          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CantidadFac" Type="Double" Nullable="false" />
-          <Property Name="vt_PrecioFinal" Type="Double" Nullable="false" />
-          <Property Name="TotalFac" Type="Double" Nullable="false" />
-          <Property Name="CantidadInv" Type="Double" />
-          <Property Name="CostoUni" Type="Double" Nullable="false" />
-          <Property Name="TotalCosto" Type="Double" />
-          <Property Name="Utilidad" Type="Double" Nullable="false" />
-          <Property Name="IdCategoria" Type="Int32" />
-          <Property Name="IdLinea" Type="Int32" Nullable="false" />
-          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
-          <Property Name="IdSubGrupo" Type="Int32" Nullable="false" />
-          <Property Name="ca_Categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="nom_linea" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="nom_grupo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="nom_subgrupo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -13646,6 +13646,42 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWINV_015">
+            <EntityTypeMapping TypeName="Model_reportes.VWINV_015">
+              <MappingFragment StoreEntitySet="VWINV_015">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="nom_subgrupo" ColumnName="nom_subgrupo" />
+                <ScalarProperty Name="nom_grupo" ColumnName="nom_grupo" />
+                <ScalarProperty Name="nom_linea" ColumnName="nom_linea" />
+                <ScalarProperty Name="ca_Categoria" ColumnName="ca_Categoria" />
+                <ScalarProperty Name="IdSubGrupo" ColumnName="IdSubGrupo" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Utilidad" ColumnName="Utilidad" />
+                <ScalarProperty Name="TotalCosto" ColumnName="TotalCosto" />
+                <ScalarProperty Name="CostoUni" ColumnName="CostoUni" />
+                <ScalarProperty Name="CantidadInv" ColumnName="CantidadInv" />
+                <ScalarProperty Name="TotalFac" ColumnName="TotalFac" />
+                <ScalarProperty Name="vt_PrecioFinal" ColumnName="vt_PrecioFinal" />
+                <ScalarProperty Name="CantidadFac" ColumnName="CantidadFac" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="Secuencia_eg" ColumnName="Secuencia_eg" />
+                <ScalarProperty Name="IdNumMovi_eg" ColumnName="IdNumMovi_eg" />
+                <ScalarProperty Name="IdMovi_inven_tipo_eg" ColumnName="IdMovi_inven_tipo_eg" />
+                <ScalarProperty Name="IdSucursal_eg" ColumnName="IdSucursal_eg" />
+                <ScalarProperty Name="IdEmpresa_eg" ColumnName="IdEmpresa_eg" />
+                <ScalarProperty Name="Secuencia_fa" ColumnName="Secuencia_fa" />
+                <ScalarProperty Name="IdCbteVta_fa" ColumnName="IdCbteVta_fa" />
+                <ScalarProperty Name="IdBodega_fa" ColumnName="IdBodega_fa" />
+                <ScalarProperty Name="IdSucursal_fa" ColumnName="IdSucursal_fa" />
+                <ScalarProperty Name="IdEmpresa_fa" ColumnName="IdEmpresa_fa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VWROL_021">
             <EntityTypeMapping TypeName="Model_reportes.VWROL_021">
               <MappingFragment StoreEntitySet="VWROL_021">
@@ -13685,42 +13721,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWROL_022' no tiene definida ningu
                 <ScalarProperty Name="IdNominaTipo" ColumnName="IdNominaTipo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VWINV_015">
-            <EntityTypeMapping TypeName="Model_reportes.VWINV_015">
-              <MappingFragment StoreEntitySet="VWINV_015">
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
-                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
-                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
-                <ScalarProperty Name="nom_subgrupo" ColumnName="nom_subgrupo" />
-                <ScalarProperty Name="nom_grupo" ColumnName="nom_grupo" />
-                <ScalarProperty Name="nom_linea" ColumnName="nom_linea" />
-                <ScalarProperty Name="ca_Categoria" ColumnName="ca_Categoria" />
-                <ScalarProperty Name="IdSubGrupo" ColumnName="IdSubGrupo" />
-                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
-                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
-                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
-                <ScalarProperty Name="Utilidad" ColumnName="Utilidad" />
-                <ScalarProperty Name="TotalCosto" ColumnName="TotalCosto" />
-                <ScalarProperty Name="CostoUni" ColumnName="CostoUni" />
-                <ScalarProperty Name="CantidadInv" ColumnName="CantidadInv" />
-                <ScalarProperty Name="TotalFac" ColumnName="TotalFac" />
-                <ScalarProperty Name="vt_PrecioFinal" ColumnName="vt_PrecioFinal" />
-                <ScalarProperty Name="CantidadFac" ColumnName="CantidadFac" />
-                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
-                <ScalarProperty Name="Secuencia_eg" ColumnName="Secuencia_eg" />
-                <ScalarProperty Name="IdNumMovi_eg" ColumnName="IdNumMovi_eg" />
-                <ScalarProperty Name="IdMovi_inven_tipo_eg" ColumnName="IdMovi_inven_tipo_eg" />
-                <ScalarProperty Name="IdSucursal_eg" ColumnName="IdSucursal_eg" />
-                <ScalarProperty Name="IdEmpresa_eg" ColumnName="IdEmpresa_eg" />
-                <ScalarProperty Name="Secuencia_fa" ColumnName="Secuencia_fa" />
-                <ScalarProperty Name="IdCbteVta_fa" ColumnName="IdCbteVta_fa" />
-                <ScalarProperty Name="IdBodega_fa" ColumnName="IdBodega_fa" />
-                <ScalarProperty Name="IdSucursal_fa" ColumnName="IdSucursal_fa" />
-                <ScalarProperty Name="IdEmpresa_fa" ColumnName="IdEmpresa_fa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
