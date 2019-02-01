@@ -16,7 +16,10 @@ namespace Core.Erp.Data.Reportes.Facturacion
                 List<FAC_014_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
-                    Lista = Context.VWFAC_014.Where(q=>q.IdEmpresa == IdEmpresa).Select(q => new FAC_014_Info
+                    Lista = Context.VWFAC_014.Where(q=>q.IdEmpresa == IdEmpresa
+                    && fecha_ini <= q.FechaAutorizacion
+                    && q.FechaAutorizacion <= fecha_fin
+                    ).Select(q => new FAC_014_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdComprobante = q.IdComprobante,

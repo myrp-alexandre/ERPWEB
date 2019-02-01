@@ -1096,6 +1096,12 @@
     <Compile Include="Reportes\RRHH\ROL_002_Ingresos.Designer.cs">
       <DependentUpon>ROL_002_Ingresos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\RRHH\ROL_002_RolPago.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RRHH\ROL_002_RolPago.Designer.cs">
+      <DependentUpon>ROL_002_RolPago.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\RRHH\ROL_019_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9804,7 +9810,7 @@
     <Content Include="Areas\Reportes\Views\RRHHReportes\_CmbArea_Individual.cshtml" />
     <Content Include="Areas\Inventario\Views\MotivoInventario\_CmbCtaCble.cshtml" />
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_015.cshtml" />
-    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_015.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_014.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -10227,6 +10233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_002_Ingresos.resx">
       <DependentUpon>ROL_002_Ingresos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RRHH\ROL_002_RolPago.resx">
+      <DependentUpon>ROL_002_RolPago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RRHH\ROL_019_Rpt.resx">
       <DependentUpon>ROL_019_Rpt.cs</DependentUpon>
