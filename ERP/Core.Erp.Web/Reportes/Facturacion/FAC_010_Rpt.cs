@@ -32,6 +32,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
 
             FAC_010_Bus bus_rpt = new FAC_010_Bus();
             List<FAC_010_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, fecha_ini, fech_fin);
+            #region Grupo
 
             Lista = (from q in lst_rpt
                      group q by new
@@ -71,6 +72,7 @@ namespace Core.Erp.Web.Reportes.Facturacion
                          vt_fecha = Factura.Key.vt_fecha,
                          Total = Factura.Key.Total
                      }).ToList();
+            #endregion
 
             this.DataSource = lst_rpt;
         }

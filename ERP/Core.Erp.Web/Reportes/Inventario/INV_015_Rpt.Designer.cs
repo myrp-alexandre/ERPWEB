@@ -140,6 +140,8 @@
             this.xrTableCell52 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell53 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_MostrarAgrupado = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_fecha_ini = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_fecha_fin = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -1257,6 +1259,16 @@
             this.p_MostrarAgrupado.Name = "p_MostrarAgrupado";
             this.p_MostrarAgrupado.Visible = false;
             // 
+            // p_fecha_ini
+            // 
+            this.p_fecha_ini.Name = "p_fecha_ini";
+            this.p_fecha_ini.Visible = false;
+            // 
+            // p_fecha_fin
+            // 
+            this.p_fecha_fin.Name = "p_fecha_fin";
+            this.p_fecha_fin.Visible = false;
+            // 
             // INV_015_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1276,7 +1288,7 @@
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
             this.Font = new System.Drawing.Font("Verdana", 8F);
-            this.Margins = new System.Drawing.Printing.Margins(38, 38, 25, 40);
+            this.Margins = new System.Drawing.Printing.Margins(38, 38, 26, 40);
             this.PageHeight = 1169;
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
@@ -1289,7 +1301,9 @@
             this.p_IdLinea,
             this.p_IdGrupo,
             this.p_IdSubgrupo,
-            this.p_MostrarAgrupado});
+            this.p_MostrarAgrupado,
+            this.p_fecha_ini,
+            this.p_fecha_fin});
             this.Version = "17.2";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.INV_015_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -1406,5 +1420,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell52;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell53;
         public DevExpress.XtraReports.Parameters.Parameter p_MostrarAgrupado;
+        public DevExpress.XtraReports.Parameters.Parameter p_fecha_ini;
+        public DevExpress.XtraReports.Parameters.Parameter p_fecha_fin;
     }
 }

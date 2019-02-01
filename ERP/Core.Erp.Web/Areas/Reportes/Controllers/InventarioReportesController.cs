@@ -779,6 +779,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdGrupo.Value = model.IdGrupo;
             report.p_IdSubgrupo.Value = model.IdSubGrupo;
             report.p_MostrarAgrupado.Value = model.mostrar_agrupado;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario.ToString();
             report.empresa = SessionFixed.NomEmpresa.ToString();
 
@@ -798,6 +800,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             report.p_IdGrupo.Value = model.IdGrupo;
             report.p_IdSubgrupo.Value = model.IdSubGrupo;
             report.p_MostrarAgrupado.Value = model.mostrar_agrupado;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
             cargar_combos(model);
 
             report.usuario = SessionFixed.IdUsuario.ToString();
