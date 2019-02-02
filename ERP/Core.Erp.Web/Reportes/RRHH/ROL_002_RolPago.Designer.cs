@@ -66,6 +66,7 @@
             this.xrTableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.lbl_empleado = new DevExpress.XtraReports.UI.XRLabel();
             this.xrTableCell20 = new DevExpress.XtraReports.UI.XRTableCell();
             this.GroupFooter2 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
@@ -74,7 +75,12 @@
             this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdPeriodo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdEmpleado = new DevExpress.XtraReports.Parameters.Parameter();
-            this.lbl_empleado = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable9)).BeginInit();
@@ -413,6 +419,16 @@
             this.xrTableCell19.StylePriority.UseFont = false;
             this.xrTableCell19.Weight = 0.53333333333333321D;
             // 
+            // lbl_empleado
+            // 
+            this.lbl_empleado.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdEmpleado]")});
+            this.lbl_empleado.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.lbl_empleado.Name = "lbl_empleado";
+            this.lbl_empleado.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lbl_empleado.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.lbl_empleado.Text = "lbl_empleado";
+            // 
             // xrTableCell20
             // 
             this.xrTableCell20.Name = "xrTableCell20";
@@ -421,6 +437,12 @@
             // GroupFooter2
             // 
             this.GroupFooter2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel6,
+            this.xrLabel5,
+            this.xrLabel4,
+            this.xrLabel3,
+            this.xrLabel2,
+            this.xrLabel1,
             this.xrTable7,
             this.xrTable9});
             this.GroupFooter2.HeightF = 100F;
@@ -468,15 +490,66 @@
             this.p_IdEmpleado.ValueInfo = "0";
             this.p_IdEmpleado.Visible = false;
             // 
-            // lbl_empleado
+            // xrLabel1
             // 
-            this.lbl_empleado.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdEmpleado]")});
-            this.lbl_empleado.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.lbl_empleado.Name = "lbl_empleado";
-            this.lbl_empleado.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lbl_empleado.SizeF = new System.Drawing.SizeF(100F, 23F);
-            this.lbl_empleado.Text = "lbl_empleado";
+            this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdEmpleado]")});
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 76.99998F);
+            this.xrLabel1.Name = "xrLabel1";
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel1.Text = "xrLabel1";
+            this.xrLabel1.Visible = false;
+            // 
+            // xrLabel2
+            // 
+            this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdEmpresa]")});
+            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(100F, 76.99998F);
+            this.xrLabel2.Name = "xrLabel2";
+            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel2.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel2.Text = "xrLabel2";
+            // 
+            // xrLabel3
+            // 
+            this.xrLabel3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdNomina]")});
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(200F, 76.99998F);
+            this.xrLabel3.Name = "xrLabel3";
+            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel3.Text = "xrLabel3";
+            // 
+            // xrLabel4
+            // 
+            this.xrLabel4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdNominaTipo]")});
+            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(300F, 76.99998F);
+            this.xrLabel4.Name = "xrLabel4";
+            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel4.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel4.Text = "xrLabel4";
+            // 
+            // xrLabel5
+            // 
+            this.xrLabel5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdPeriodo]")});
+            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(400F, 77.00002F);
+            this.xrLabel5.Name = "xrLabel5";
+            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel5.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel5.Text = "xrLabel5";
+            // 
+            // xrLabel6
+            // 
+            this.xrLabel6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdSucursal]")});
+            this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(500F, 77.00002F);
+            this.xrLabel6.Name = "xrLabel6";
+            this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel6.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel6.Text = "xrLabel6";
             // 
             // ROL_002_RolPago
             // 
@@ -557,5 +630,11 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdPeriodo;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpleado;
         private DevExpress.XtraReports.UI.XRLabel lbl_empleado;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel6;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel5;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel4;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel3;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel2;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel1;
     }
 }
