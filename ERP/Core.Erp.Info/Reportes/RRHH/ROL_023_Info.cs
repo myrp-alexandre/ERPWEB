@@ -42,6 +42,7 @@ namespace Core.Erp.Info.Reportes.RRHH
         public Nullable<double> NETO { get; set; }
         public string NombreCargo { get; set; }
         public string JORNADA { get; set; }
+        public string UBUCACION { get; set; }
 
         public int CantidadEmpleados { get; set; }
         public Nullable<double> TotalResumen { get; set; }
