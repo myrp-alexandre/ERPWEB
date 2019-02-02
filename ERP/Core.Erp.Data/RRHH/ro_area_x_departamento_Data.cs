@@ -20,7 +20,7 @@ namespace Core.Erp.Data.RRHH
                              join divi in Context.ro_Division
                              on new { ad.IdEmpresa, ad.IdDivision } equals new { divi.IdEmpresa, divi.IdDivision }
                              join area in Context.ro_area
-                             on new { ad.IdEmpresa, ad.IdDivision } equals new { area.IdEmpresa, area.IdDivision }
+                             on new { ad.IdEmpresa, ad.IdDivision,ad.IdArea } equals new { area.IdEmpresa, area.IdDivision, area.IdArea }
                              join dep in Context.ro_Departamento
                              on new { ad.IdEmpresa, ad.IdDepartamento } equals new { dep.IdEmpresa, dep.IdDepartamento }
                              where ad.IdEmpresa == IdEmpresa
