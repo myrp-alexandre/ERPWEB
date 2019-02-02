@@ -31,7 +31,7 @@ namespace Core.Erp.Web.Reportes.RRHH
             lbl_empresa.Text = empresa;
             ro_rubros_calculados_Info info_rubros_calculados = new ro_rubros_calculados_Info();
             ro_rubros_calculados_Bus bus_rubros_calculados = new ro_rubros_calculados_Bus();
-
+           
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdNomina = p_IdNomina.Value == null ? 0 : Convert.ToInt32(p_IdNomina.Value);
             int IdNominaTipo = p_IdNominaTipo.Value == null ? 0 : Convert.ToInt32(p_IdNominaTipo.Value);
