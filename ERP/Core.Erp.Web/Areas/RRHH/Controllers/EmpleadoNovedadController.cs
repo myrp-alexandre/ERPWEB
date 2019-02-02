@@ -399,6 +399,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             edited_info.Valor = info_det.Valor;
             edited_info.Observacion = info_det.Observacion;
             edited_info.ru_descripcion = info_rubro.ru_descripcion;
+            edited_info.FechaPago = info_det.FechaPago;
         }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
