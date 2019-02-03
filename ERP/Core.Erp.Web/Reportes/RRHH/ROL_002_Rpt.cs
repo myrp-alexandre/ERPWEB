@@ -83,6 +83,20 @@ namespace Core.Erp.Web.Reportes.RRHH
             ((XRSubreport)sender).ReportSource.Parameters["p_IdNomina"].Value = p_IdNomina.Value == null ? 0 : Convert.ToDecimal(p_IdNomina.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdNominaTipo"].Value = p_IdNominaTipo.Value == null ? 0 : Convert.ToDecimal(p_IdNominaTipo.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdPeriodo"].Value = p_IdPeriodo.Value == null ? 0 : Convert.ToDecimal(p_IdPeriodo.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpleado"].Value = lb_empleado.Value == null ? 0 : Convert.ToDecimal(lb_empleado.Value);
+
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+        }
+
+        private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdSucursal"].Value = p_IdSucursal.Value == null ? 0 : Convert.ToDecimal(p_IdSucursal.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdNomina"].Value = p_IdNomina.Value == null ? 0 : Convert.ToDecimal(p_IdNomina.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdNominaTipo"].Value = p_IdNominaTipo.Value == null ? 0 : Convert.ToDecimal(p_IdNominaTipo.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdPeriodo"].Value = p_IdPeriodo.Value == null ? 0 : Convert.ToDecimal(p_IdPeriodo.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpleado"].Value = lb_empleado.Value == null ? 0 : Convert.ToDecimal(lb_empleado.Value);
+
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
     }

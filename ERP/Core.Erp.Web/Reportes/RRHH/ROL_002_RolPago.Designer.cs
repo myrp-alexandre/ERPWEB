@@ -33,8 +33,6 @@
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
-            this.SubRpte_Egresos = new DevExpress.XtraReports.UI.XRSubreport();
-            this.SubRpteIngresos = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_empresa = new DevExpress.XtraReports.UI.XRTableCell();
@@ -75,12 +73,8 @@
             this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdPeriodo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdEmpleado = new DevExpress.XtraReports.Parameters.Parameter();
-            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
+            this.SubRpte_Egresos = new DevExpress.XtraReports.UI.XRSubreport();
+            this.SubRpteIngresos = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable9)).BeginInit();
@@ -109,22 +103,6 @@
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            // 
-            // SubRpte_Egresos
-            // 
-            this.SubRpte_Egresos.LocationFloat = new DevExpress.Utils.PointFloat(416F, 134.5833F);
-            this.SubRpte_Egresos.Name = "SubRpte_Egresos";
-            this.SubRpte_Egresos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_Egresos();
-            this.SubRpte_Egresos.SizeF = new System.Drawing.SizeF(325F, 20F);
-            this.SubRpte_Egresos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubRpte_Egresos_BeforePrint);
-            // 
-            // SubRpteIngresos
-            // 
-            this.SubRpteIngresos.LocationFloat = new DevExpress.Utils.PointFloat(11.43749F, 134.5833F);
-            this.SubRpteIngresos.Name = "SubRpteIngresos";
-            this.SubRpteIngresos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_Ingresos();
-            this.SubRpteIngresos.SizeF = new System.Drawing.SizeF(325F, 20F);
-            this.SubRpteIngresos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubRpteIngresos_BeforePrint);
             // 
             // xrTable1
             // 
@@ -437,12 +415,6 @@
             // GroupFooter2
             // 
             this.GroupFooter2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrLabel6,
-            this.xrLabel5,
-            this.xrLabel4,
-            this.xrLabel3,
-            this.xrLabel2,
-            this.xrLabel1,
             this.xrTable7,
             this.xrTable9});
             this.GroupFooter2.HeightF = 100F;
@@ -490,66 +462,21 @@
             this.p_IdEmpleado.ValueInfo = "0";
             this.p_IdEmpleado.Visible = false;
             // 
-            // xrLabel1
+            // SubRpte_Egresos
             // 
-            this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdEmpleado]")});
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 76.99998F);
-            this.xrLabel1.Name = "xrLabel1";
-            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(100F, 23F);
-            this.xrLabel1.Text = "xrLabel1";
-            this.xrLabel1.Visible = false;
+            this.SubRpte_Egresos.LocationFloat = new DevExpress.Utils.PointFloat(416F, 134.5833F);
+            this.SubRpte_Egresos.Name = "SubRpte_Egresos";
+            this.SubRpte_Egresos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_Egresos();
+            this.SubRpte_Egresos.SizeF = new System.Drawing.SizeF(325F, 20F);
+            this.SubRpte_Egresos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubRpte_Egresos_BeforePrint);
             // 
-            // xrLabel2
+            // SubRpteIngresos
             // 
-            this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdEmpresa]")});
-            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(100F, 76.99998F);
-            this.xrLabel2.Name = "xrLabel2";
-            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel2.SizeF = new System.Drawing.SizeF(100F, 23F);
-            this.xrLabel2.Text = "xrLabel2";
-            // 
-            // xrLabel3
-            // 
-            this.xrLabel3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdNomina]")});
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(200F, 76.99998F);
-            this.xrLabel3.Name = "xrLabel3";
-            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(100F, 23F);
-            this.xrLabel3.Text = "xrLabel3";
-            // 
-            // xrLabel4
-            // 
-            this.xrLabel4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdNominaTipo]")});
-            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(300F, 76.99998F);
-            this.xrLabel4.Name = "xrLabel4";
-            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel4.SizeF = new System.Drawing.SizeF(100F, 23F);
-            this.xrLabel4.Text = "xrLabel4";
-            // 
-            // xrLabel5
-            // 
-            this.xrLabel5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdPeriodo]")});
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(400F, 77.00002F);
-            this.xrLabel5.Name = "xrLabel5";
-            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel5.SizeF = new System.Drawing.SizeF(100F, 23F);
-            this.xrLabel5.Text = "xrLabel5";
-            // 
-            // xrLabel6
-            // 
-            this.xrLabel6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Parameters].[p_IdSucursal]")});
-            this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(500F, 77.00002F);
-            this.xrLabel6.Name = "xrLabel6";
-            this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel6.SizeF = new System.Drawing.SizeF(100F, 23F);
-            this.xrLabel6.Text = "xrLabel6";
+            this.SubRpteIngresos.LocationFloat = new DevExpress.Utils.PointFloat(11.43749F, 134.5833F);
+            this.SubRpteIngresos.Name = "SubRpteIngresos";
+            this.SubRpteIngresos.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_Ingresos();
+            this.SubRpteIngresos.SizeF = new System.Drawing.SizeF(325F, 20F);
+            this.SubRpteIngresos.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubRpteIngresos_BeforePrint);
             // 
             // ROL_002_RolPago
             // 
@@ -630,11 +557,5 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdPeriodo;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpleado;
         private DevExpress.XtraReports.UI.XRLabel lbl_empleado;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel6;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel5;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel4;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel3;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel2;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel1;
     }
 }

@@ -30,8 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
+            this.SubReporte_RolPago = new DevExpress.XtraReports.UI.XRSubreport();
+            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
+            this.lb_empleado = new DevExpress.XtraReports.UI.XRLabel();
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdNomina = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdNominaTipo = new DevExpress.XtraReports.Parameters.Parameter();
@@ -47,9 +50,8 @@
             this.xrTableCell50 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
-            this.SubReporte_RolPago = new DevExpress.XtraReports.UI.XRSubreport();
-            this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -61,6 +63,22 @@
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
+            // SubReporte_RolPago
+            // 
+            this.SubReporte_RolPago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.SubReporte_RolPago.Name = "SubReporte_RolPago";
+            this.SubReporte_RolPago.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_RolPago();
+            this.SubReporte_RolPago.SizeF = new System.Drawing.SizeF(751F, 20F);
+            this.SubReporte_RolPago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubReporte_RolPago_BeforePrint);
+            // 
+            // xrSubreport1
+            // 
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 35.62501F);
+            this.xrSubreport1.Name = "xrSubreport1";
+            this.xrSubreport1.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_RolPago();
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(751F, 20F);
+            this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
+            // 
             // TopMargin
             // 
             this.TopMargin.HeightF = 38F;
@@ -70,10 +88,27 @@
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 43.62498F;
+            this.BottomMargin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.lb_empleado});
+            this.BottomMargin.HeightF = 65.625F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // lb_empleado
+            // 
+            this.lb_empleado.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdEmpleado]")});
+            this.lb_empleado.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_empleado.LocationFloat = new DevExpress.Utils.PointFloat(277.3751F, 23.125F);
+            this.lb_empleado.Name = "lb_empleado";
+            this.lb_empleado.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lb_empleado.SizeF = new System.Drawing.SizeF(196.2498F, 19.375F);
+            this.lb_empleado.StylePriority.UseFont = false;
+            this.lb_empleado.StylePriority.UseTextAlignment = false;
+            this.lb_empleado.Text = "IdEmpleado";
+            this.lb_empleado.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.lb_empleado.Visible = false;
             // 
             // p_IdEmpresa
             // 
@@ -231,28 +266,21 @@
             this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.RRHH.ROL_002_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
-            // xrSubreport1
+            // GroupHeader1
             // 
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 367.5F);
-            this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_RolPago();
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(751F, 20F);
+            this.GroupHeader1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("IdEmpleado", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            this.GroupHeader1.HeightF = 0F;
+            this.GroupHeader1.Name = "GroupHeader1";
+            this.GroupHeader1.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;
             // 
-            // SubReporte_RolPago
+            // PageHeader
             // 
-            this.SubReporte_RolPago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.SubReporte_RolPago.Name = "SubReporte_RolPago";
-            this.SubReporte_RolPago.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_RolPago();
-            this.SubReporte_RolPago.SizeF = new System.Drawing.SizeF(751F, 20F);
-            this.SubReporte_RolPago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubReporte_RolPago_BeforePrint);
-            // 
-            // ReportHeader
-            // 
-            this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.PageHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrSubreport1,
             this.SubReporte_RolPago});
-            this.ReportHeader.HeightF = 900F;
-            this.ReportHeader.Name = "ReportHeader";
+            this.PageHeader.HeightF = 56.24999F;
+            this.PageHeader.Name = "PageHeader";
             // 
             // ROL_002_Rpt
             // 
@@ -261,11 +289,12 @@
             this.TopMargin,
             this.BottomMargin,
             this.PageFooter,
-            this.ReportHeader});
+            this.GroupHeader1,
+            this.PageHeader});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
-            this.Margins = new System.Drawing.Printing.Margins(38, 38, 38, 44);
+            this.Margins = new System.Drawing.Printing.Margins(38, 38, 38, 66);
             this.PageHeight = 1169;
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
@@ -305,6 +334,8 @@
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
         private DevExpress.XtraReports.UI.XRSubreport SubReporte_RolPago;
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
-        private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
+        private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
+        private DevExpress.XtraReports.UI.PageHeaderBand PageHeader;
+        private DevExpress.XtraReports.UI.XRLabel lb_empleado;
     }
 }

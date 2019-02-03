@@ -31,12 +31,12 @@ namespace Core.Erp.Web.Reportes.RRHH
             lbl_empresa.Text = empresa;
             ro_rubros_calculados_Info info_rubros_calculados = new ro_rubros_calculados_Info();
             ro_rubros_calculados_Bus bus_rubros_calculados = new ro_rubros_calculados_Bus();
-           
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdNomina = p_IdNomina.Value == null ? 0 : Convert.ToInt32(p_IdNomina.Value);
             int IdNominaTipo = p_IdNominaTipo.Value == null ? 0 : Convert.ToInt32(p_IdNominaTipo.Value);
             int IdPeriodo = p_IdPeriodo.Value == null ? 0 : Convert.ToInt32(p_IdPeriodo.Value);
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
+            int IdEmpleado = p_IdEmpleado.Value == null ? 0 : Convert.ToInt32(p_IdEmpleado.Value);
 
             info_rubros_calculados = bus_rubros_calculados.get_info(IdEmpresa);
 
@@ -45,7 +45,7 @@ namespace Core.Erp.Web.Reportes.RRHH
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
             ImageConverter obj = new ImageConverter();
-            lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);          
+            //lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);          
 
             Lista_Rpte = (from q in lst_rpt
                           group q by new
@@ -140,13 +140,13 @@ namespace Core.Erp.Web.Reportes.RRHH
 
         private void SubRpteIngresos_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            var ListaIngreso = Lista_ingreso.Where(q => q.IdEmpleado == Convert.ToDecimal(lbl_empleado.Text));
+            var ListaIngreso = Lista_ingreso.Where(q => q.IdEmpleado == Convert.ToDecimal(p_IdEmpleado.Value));
             ((XRSubreport)sender).ReportSource.DataSource = ListaIngreso;
         }
 
         private void SubRpte_Egresos_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            var ListaEgreso = Lista_egreso.Where(q => q.IdEmpleado == Convert.ToDecimal(lbl_empleado.Text));
+            var ListaEgreso = Lista_egreso.Where(q => q.IdEmpleado == Convert.ToDecimal(p_IdEmpleado.Value));
             ((XRSubreport)sender).ReportSource.DataSource = ListaEgreso;
         }
     }
