@@ -8,6 +8,7 @@ using Core.Erp.Info.Reportes.RRHH;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Erp.Bus.General;
+using DevExpress.XtraPrinting;
 
 namespace Core.Erp.Web.Reportes.RRHH
 {
@@ -95,6 +96,16 @@ namespace Core.Erp.Web.Reportes.RRHH
                 throw;
             }
         }
-        
+
+        private void xrPivotGrid1_PrintFieldValue(object sender, DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs e)
+        {
+            if (e.Field != null && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
+            {
+                
+                LabelBrick lb = new LabelBrick();
+                lb.IsVisible = false;
+                e.Brick = lb;
+            }
+        }
     }
 }

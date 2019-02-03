@@ -13,27 +13,32 @@ namespace Core.Erp.Data.Reportes.Inventario
         {
             try
             {
+                fecha_ini = fecha_ini.Date;
+                fecha_fin = fecha_fin.Date;
+
                 int IdSucursal_ini = IdSucursal;
-                int IdSucursal_fin = IdSucursal == 0 ? 9999 : IdSucursal;
+                int IdSucursal_fin = IdSucursal == 0 ? 999999 : IdSucursal;
+
                 int IdBodega_ini = IdBodega;
-                int IdBodega_fin = IdBodega == 0 ? 9999 : IdBodega;
+                int IdBodega_fin = IdBodega == 0 ? 999999 : IdBodega;
+
                 decimal IdProducto_ini = IdProducto;
-                decimal IdProducto_fin = IdProducto == 0 ? 9999 : IdProducto;
+                decimal IdProducto_fin = IdProducto == 0 ? 999999 : IdProducto;
 
                 int IdCategoria_ini = IdCategoria;
-                int IdCategoria_fin = IdCategoria == 0 ? 9999 : IdCategoria;
+                int IdCategoria_fin = IdCategoria == 0 ? 999999 : IdCategoria;
 
 
                 int IdLinea_ini = IdLinea;
-                int IdLinea_fin = IdLinea == 0 ? 9999 : IdLinea;
+                int IdLinea_fin = IdLinea == 0 ? 999999 : IdLinea;
 
 
                 int IdGrupo_ini = IdGrupo;
-                int IdGrupo_fin = IdGrupo == 0 ? 9999 : IdGrupo;
+                int IdGrupo_fin = IdGrupo == 0 ? 999999 : IdGrupo;
 
 
                 int IdSubgrupo_ini = IdSubGrupo;
-                int IdSubgrupo_fin = IdSubGrupo == 0 ? 9999 : IdSubGrupo;
+                int IdSubgrupo_fin = IdSubGrupo == 0 ? 999999 : IdSubGrupo;
                 List<INV_015_Info> Lista;
                 using (Entities_reportes Context = new Entities_reportes())
                 {
