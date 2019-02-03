@@ -40,40 +40,10 @@ namespace Core.Erp.Web.Reportes.RRHH
             int IdSucursal = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
 
             ROL_002_Bus bus_rpt = new ROL_002_Bus();
-            List<ROL_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
+            List<ROL_002_Info> lst_rpt = bus_rpt.get_list_empleados(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
 
-            Lista_Rpte = (from q in lst_rpt
-                          group q by new
-                          {
-                              q.IdEmpresa,
-                              q.IdSucursal,
-                              q.IdPeriodo,
-                              q.IdNominaTipo,
-                              q.IdNominaTipoLiqui,
-                              q.IdEmpleado,
-                              q.NombreCompleto,
-                              q.Area,
-                              q.de_descripcion,
-                              q.Cargo,
-                              q.pe_FechaFin
-                          } into rpte
-                          select new ROL_002_Info
-                          {
-                              IdEmpresa = rpte.Key.IdEmpresa,
-                              IdSucursal = rpte.Key.IdSucursal,
-                              IdPeriodo = rpte.Key.IdPeriodo,
-                              IdNominaTipo = rpte.Key.IdNominaTipo,
-                              IdNominaTipoLiqui = rpte.Key.IdNominaTipoLiqui,
-                              IdEmpleado = rpte.Key.IdEmpleado,
-                              NombreCompleto = rpte.Key.NombreCompleto,
-                              Area = rpte.Key.Area,
-                              de_descripcion = rpte.Key.de_descripcion,
-                              Cargo = rpte.Key.Cargo,
-                              TotalPagar = rpte.Sum(q => q.Valor),
-                              pe_FechaFin = rpte.Key.pe_FechaFin
-                          }).ToList();
 
-            this.DataSource = Lista_Rpte;
+            this.DataSource = lst_rpt;
         }
 
         private void SubReporte_RolPago_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)

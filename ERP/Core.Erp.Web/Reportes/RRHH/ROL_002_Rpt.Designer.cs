@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
-            this.SubReporte_RolPago = new DevExpress.XtraReports.UI.XRSubreport();
-            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.lb_empleado = new DevExpress.XtraReports.UI.XRLabel();
@@ -52,6 +50,8 @@
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
+            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
+            this.SubReporte_RolPago = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -62,22 +62,6 @@
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            // 
-            // SubReporte_RolPago
-            // 
-            this.SubReporte_RolPago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.SubReporte_RolPago.Name = "SubReporte_RolPago";
-            this.SubReporte_RolPago.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_RolPago();
-            this.SubReporte_RolPago.SizeF = new System.Drawing.SizeF(751F, 20F);
-            this.SubReporte_RolPago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubReporte_RolPago_BeforePrint);
-            // 
-            // xrSubreport1
-            // 
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 35.62501F);
-            this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_RolPago();
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(751F, 20F);
-            this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
             // 
             // TopMargin
             // 
@@ -108,7 +92,6 @@
             this.lb_empleado.StylePriority.UseTextAlignment = false;
             this.lb_empleado.Text = "IdEmpleado";
             this.lb_empleado.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.lb_empleado.Visible = false;
             // 
             // p_IdEmpresa
             // 
@@ -268,19 +251,35 @@
             // 
             // GroupHeader1
             // 
+            this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrSubreport1,
+            this.SubReporte_RolPago});
             this.GroupHeader1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("IdEmpleado", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.GroupHeader1.HeightF = 0F;
+            this.GroupHeader1.HeightF = 73.95834F;
             this.GroupHeader1.Name = "GroupHeader1";
             this.GroupHeader1.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;
             // 
             // PageHeader
             // 
-            this.PageHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrSubreport1,
-            this.SubReporte_RolPago});
-            this.PageHeader.HeightF = 56.24999F;
+            this.PageHeader.HeightF = 0F;
             this.PageHeader.Name = "PageHeader";
+            // 
+            // xrSubreport1
+            // 
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 45.62502F);
+            this.xrSubreport1.Name = "xrSubreport1";
+            this.xrSubreport1.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_RolPago();
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(751F, 20F);
+            this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
+            // 
+            // SubReporte_RolPago
+            // 
+            this.SubReporte_RolPago.LocationFloat = new DevExpress.Utils.PointFloat(0F, 10.00001F);
+            this.SubReporte_RolPago.Name = "SubReporte_RolPago";
+            this.SubReporte_RolPago.ReportSource = new Core.Erp.Web.Reportes.RRHH.ROL_002_RolPago();
+            this.SubReporte_RolPago.SizeF = new System.Drawing.SizeF(751F, 20F);
+            this.SubReporte_RolPago.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SubReporte_RolPago_BeforePrint);
             // 
             // ROL_002_Rpt
             // 

@@ -8,11 +8,24 @@ namespace Core.Erp.Bus.Reportes.RRHH
     public class ROL_002_Bus
     {
         ROL_002_Data odata = new ROL_002_Data();
-        public List<ROL_002_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo, int IdSucursal)
+        public List<ROL_002_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo, int IdSucursal, decimal IdEmpleado)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
+                return odata.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdEmpleado);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ROL_002_Info> get_list_empleados(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo, int IdSucursal)
+        {
+            try
+            {
+                return odata.get_list_empleados(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
             }
             catch (Exception ex)
             {

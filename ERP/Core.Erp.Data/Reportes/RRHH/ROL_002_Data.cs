@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Erp.Info.Reportes.RRHH;
+using Core.Erp.Data.RRHH;
+
 namespace Core.Erp.Data.Reportes.RRHH
 {
    public class ROL_002_Data
     {
 
-        public List<ROL_002_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo, int IdSucursal)
+        public List<ROL_002_Info> get_list(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo, int IdSucursal, decimal Idempleado)
         {
             try
             {
@@ -25,7 +27,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdEmpresa == IdEmpresa
                              && q.IdNominaTipo == IdNomina
                              && q.IdNominaTipoLiqui == IdNominaTipo
-                             && q.IdPeriodo == IdPeriodo)                             
+                             && q.IdPeriodo == IdPeriodo
+                             && q.IdEmpleado==Idempleado)                             
                              orderby q.NombreCompleto
                              select new ROL_002_Info
                              {
@@ -66,6 +69,67 @@ namespace Core.Erp.Data.Reportes.RRHH
                 throw;
             }
         }
+
+        public List<ROL_002_Info> get_list_empleados(int IdEmpresa, int IdNomina, int IdNominaTipo, int IdPeriodo, int IdSucursal)
+        {
+            try
+            {
+                List<ROL_002_Info> Lista;
+                string mes_nom_ = mes(IdPeriodo);
+                ro_rubros_calculados_Data calculados_data = new ro_rubros_calculados_Data();
+                var info_rubros_calcu = calculados_data.get_info(IdEmpresa);
+                using (Entities_reportes Context = new Entities_reportes())
+                {
+
+                    Context.SPROL_002(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo);
+                    Lista = (from q in Context.VWROL_002
+                             where (q.IdSucursal == 0 ? 1 == 1 : q.IdSucursal == IdSucursal
+                             && q.IdEmpresa == IdEmpresa
+                             && q.IdNominaTipo == IdNomina
+                             && q.IdNominaTipoLiqui == IdNominaTipo
+                             && q.IdPeriodo == IdPeriodo
+                             && q.IdRubro==info_rubros_calcu.IdRubro_sueldo)
+                             orderby q.NombreCompleto
+                             select new ROL_002_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdEmpleado = q.IdEmpleado,
+                                 IdNominaTipoLiqui = q.IdNominaTipoLiqui,
+                                 IdPeriodo = q.IdPeriodo,
+                                 Ruc = q.Ruc,
+                                 em_ruc = "RUC #" + q.em_ruc,
+                                 ru_orden = q.ru_orden,
+                                 NombreCompleto = q.pe_apellido + " " + q.pe_nombre,
+                                 RubroDescripcion = q.RubroDescripcion,
+                                 Cargo = q.Cargo,
+                                 Valor = q.Valor,
+                                 pe_FechaIni = q.pe_FechaIni,
+                                 pe_FechaFin = q.pe_FechaFin,
+                                 IdNominaTipo = q.IdNominaTipo,
+                                 mes_nom = mes_nom_,
+                                 Area = q.Area,
+                                 de_descripcion = q.de_descripcion,
+                                 em_codigo = q.em_codigo,
+                                 em_status = q.em_status,
+                                 Grupo = q.Grupo,
+                                 IdSucursal = q.IdSucursal,
+                                 pe_apellido = q.pe_apellido,
+                                 pe_nombre = q.pe_nombre,
+                                 ru_tipo = q.ru_tipo,
+                                 IdRubro = q.IdRubro
+
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public string mes(int idperiodo)
         {
             try
