@@ -102,8 +102,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                 Grupo = egr.Key.Grupo
 
                             }).ToList();
-            var Total = Math.Round(lst_rpt.Sum(v => v.Valor));
-            lb_liquido.Text = Total == 0 ? "0.00" : Convert.ToString(lst_rpt.Sum(v => v.Valor));
+            
+            lb_liquido.Text = Convert.ToString( Convert.ToDecimal(string.Format("{0:F2}", (lst_rpt.Sum(v => v.Valor) ) ) ));
             this.DataSource = lst_rpt;
         }
 
