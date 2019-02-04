@@ -32,8 +32,6 @@ namespace Core.Erp.Web.Reportes.Banco
             BAN_008_Bus bus_rpt = new BAN_008_Bus();
             List<BAN_008_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin, IdBanco);
             
-            xrTableCell16.Visible = false;
-            xrTableCell34.Visible = false;
             this.DataSource = lst_rpt;
         }
     }
