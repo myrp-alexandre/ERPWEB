@@ -380,7 +380,8 @@ namespace Core.Erp.Data.Inventario
                         info_transferencia = Lista_CorregirTransferencia.OrderBy(q => q.IdEmpresa).ThenBy(q => q.IdSucursalOrigen).ThenBy(q => q.IdBodegaOrigen).ThenByDescending(q => q.tr_fecha).ToList().FirstOrDefault(q => q.IdSucursalOrigen == item.IdSucursalOrigen && q.IdBodegaOrigen == item.IdBodegaOrigen && q.tr_fecha < item.tr_fecha);
                         Fecha_ini = info_transferencia == null ? Convert.ToDateTime(fecha_ini) : info_transferencia.tr_fecha.Date;
 
-                        if (Lista_CorregirTransferencia.Count() >0)
+                        if(Lista_CorregirTransferencia.Count()>0)
+                        //if (contex.spSys_Inv_Recosteo_Inventario_x_rango_fechas(item.IdEmpresa, item.IdSucursalOrigen, item.IdBodegaOrigen, Fecha_ini, item.tr_fecha, 5))
                         {
                             //bus_costo_historico.Proceso_recosteo_y_correccion_contable_inv(param.IdEmpresa, item.IdSucursalOrigen, item.IdBodegaOrigen, Fecha_ini, item.tr_fecha, 5))
                             //item.Check = true;
