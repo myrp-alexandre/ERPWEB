@@ -19,7 +19,6 @@ namespace Core.Erp.Info.RRHH
         //campos que no existen en la tabka
         public string pc_Cuenta { get; set; }
         public string ru_descripcion { get; set; }
-        public List<ro_empleado_x_CuentaContable_Info> lstdet { get; set; }
         public string pe_nombre { get; set; }
     }
 }

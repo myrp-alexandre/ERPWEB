@@ -39,6 +39,15 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
         //Funcion para inicializar fila al presionar nuevo
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.FieldName = "Secuencia";
+            column.Width = Unit.Percentage(5);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
+        });
+
 
         settings.Columns.Add(column =>
         {

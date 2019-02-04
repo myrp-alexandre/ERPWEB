@@ -37,11 +37,11 @@ namespace Core.Erp.Bus.RRHH
             }
         }
 
-        public bool GuardarDB(ro_empleado_x_CuentaContable_Info info)
+        public bool GuardarDB(int IdEmpresa, decimal IdEmpleado,List<ro_empleado_x_CuentaContable_Info> info)
         {
             try
             {
-                return odata.GuardarDB(info);
+                return odata.GuardarDB( IdEmpresa,  IdEmpleado, info);
             }
             catch (Exception)
             {
