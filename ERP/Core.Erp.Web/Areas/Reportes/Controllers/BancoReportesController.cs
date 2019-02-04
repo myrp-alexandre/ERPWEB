@@ -237,5 +237,37 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
+        public ActionResult BAN_008()
+        {
+            cl_filtros_banco_Info model = new cl_filtros_banco_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdBanco = 0
+            };
+            cargar_banco(model.IdEmpresa);
+            BAN_008_Rpt report = new BAN_008_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdBanco.Value = model.IdBanco;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult BAN_008(cl_filtros_banco_Info model)
+        {
+            BAN_008_Rpt report = new BAN_008_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdBanco.Value = model.IdBanco;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa.ToString();
+            cargar_banco(model.IdEmpresa);
+            ViewBag.Report = report;
+            return View(model);
+        }
     }
 }

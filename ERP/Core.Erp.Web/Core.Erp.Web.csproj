@@ -9818,6 +9818,7 @@
     <Content Include="Areas\Reportes\Views\InventarioReportes\INV_015.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_014.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_CmbEmpleado_CtaCon.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\BAN_008.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -9988,6 +9989,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_007_Rpt.resx">
       <DependentUpon>BAN_007_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_008_Rpt.resx">
+      <DependentUpon>BAN_008_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>
