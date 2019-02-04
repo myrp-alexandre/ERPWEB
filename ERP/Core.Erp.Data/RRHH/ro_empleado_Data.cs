@@ -456,6 +456,8 @@ namespace Core.Erp.Data.RRHH
                             });
                         }
                     }
+
+             
                     Context.SaveChanges();
                 }
                 return true;

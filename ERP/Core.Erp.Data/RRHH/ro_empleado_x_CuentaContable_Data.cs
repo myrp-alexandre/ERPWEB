@@ -9,6 +9,7 @@ namespace Core.Erp.Data.RRHH
 {
     public class ro_empleado_x_CuentaContable_Data
     {
+        
         public List<ro_empleado_x_CuentaContable_Info> GetList(int IdEmpresa, decimal IdEmpleado)
         {
             try
@@ -67,35 +68,30 @@ namespace Core.Erp.Data.RRHH
             }
         }
 
-        public bool GuardarDB(ro_empleado_x_CuentaContable_Info info)
+        public bool GuardarDB(int IdEmpresa, decimal IdEmpleado, List<ro_empleado_x_CuentaContable_Info> info)
         {
             try
             {
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
-                    ro_empleado_x_CuentaContable Entity = Context.ro_empleado_x_CuentaContable.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdEmpleado == info.IdEmpleado).FirstOrDefault();
-                    if(Entity == null)
+                    var list = Context.ro_empleado_x_CuentaContable.Where(q => q.IdEmpresa == IdEmpresa && q.IdEmpleado == IdEmpleado).ToList();
+                    Context.ro_empleado_x_CuentaContable.RemoveRange(list);
+                    
+                    if(info.Count()>0)
                     {
-                        Entity = new ro_empleado_x_CuentaContable
+                        int Secuencia = 1;
+                        foreach (var item in info)
                         {
-                            IdEmpresa = info.IdEmpresa,
-                            IdEmpleado = info.IdEmpleado,
-                            IdCuentacon = info.IdCuentacon,
-                            IdRubro = info.IdRubro,
-                            Observacion = info.Observacion,
-                            Secuencia = info.Secuencia
-                        };
-                        Context.ro_empleado_x_CuentaContable.Add(Entity);
-                    }
-                    else
-                    {
-                        Entity.IdEmpresa = info.IdEmpresa;
-                        Entity.IdEmpleado = info.IdEmpleado;
-                        Entity.IdCuentacon = info.IdCuentacon;
-                        Entity.IdRubro = info.IdRubro;
-                        Entity.Observacion = info.Observacion;
-                        Entity.Secuencia = info.Secuencia;
-
+                            Context.ro_empleado_x_CuentaContable.Add(new ro_empleado_x_CuentaContable
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdEmpleado = IdEmpleado,
+                                IdCuentacon = item.IdCuentacon,
+                                IdRubro = item.IdRubro,
+                                Observacion = item.Observacion,
+                                Secuencia = Secuencia++
+                            });
+                        }
                     }
                     Context.SaveChanges();
                 }
@@ -103,7 +99,6 @@ namespace Core.Erp.Data.RRHH
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

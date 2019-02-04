@@ -70,22 +70,26 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         ro_empleado_Bus bus_empleado = new ro_empleado_Bus();
        public ActionResult Index(decimal IdEmpleado = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            ro_empleado_x_CuentaContable_Info model = bus_emple.GetInfo(IdEmpresa, IdEmpleado);
+            ro_empleado_Info model = bus_empleado.get_info(IdEmpresa, IdEmpleado);
             if (model == null)
-                model = new ro_empleado_x_CuentaContable_Info { IdEmpresa = IdEmpresa};
-           ro_empleado_Info mod = bus_empleado.get_info(IdEmpresa, IdEmpleado);
-            model.IdEmpleado = mod.IdEmpleado;
-            model.pe_nombre = mod.pe_nombre;
+                model = new ro_empleado_Info { IdEmpresa = IdEmpresa};
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            List_Det.set_list(new List<ro_empleado_x_CuentaContable_Info>(), model.IdTransaccionSession);
+            model.list_det = bus_emple.GetList(model.IdEmpresa, model.IdEmpleado);
+            List_Det.set_list(model.list_det, model.IdTransaccionSession);
             return View(model);
         }
         [HttpPost]
-        public ActionResult Index(ro_empleado_x_CuentaContable_Info model)
+        public ActionResult Index(ro_empleado_Info model)
         {
-            List_Det.get_list(model.IdTransaccionSession);
-            if (!bus_emple.GuardarDB(model))
+            var Lista =  List_Det.get_list(model.IdTransaccionSession);
+            if (!bus_emple.GuardarDB(model.IdEmpresa, model.IdEmpleado, Lista))
                 ViewBag.mensaje = "No se pudieron actualizar los registros";
             return View(model);
         }
@@ -103,8 +107,6 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = List_Det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var mod = bus_emple.GetList(IdEmpresa, IdEmpleado);
-            carga_combo();
             return PartialView("_GridViewPartial_Emp_CtaCont", model);
         }
 
@@ -120,11 +122,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     ro_rubro_tipo_Info info_rubro = bus_rubro.get_info(IdEmpresa, info_det.IdRubro);
                     if (info_cuenta != null)
                     {
-                        info_det.pc_Cuenta = info_cuenta.pc_Cuenta;
+                        info_det.pc_Cuenta = info_det.IdCuentacon + " - " + info_cuenta.pc_Cuenta;
+                     
                     }
                     if(info_rubro!= null)
                     {
-                        info_det.ru_descripcion = info_rubro.ru_descripcion;
+                        info_det.ru_descripcion = info_det.IdRubro + " - " + info_rubro.ru_descripcion;
                     }
                 }
             if (ModelState.IsValid)
@@ -194,7 +197,12 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             List<ro_empleado_x_CuentaContable_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-
+            info_det.IdEmpleado = info_det.IdEmpleado;
+            info_det.IdCuentacon = info_det.IdCuentacon;
+            info_det.Observacion = info_det.Observacion;
+            info_det.IdRubro = info_det.IdRubro;
+            info_det.pc_Cuenta = info_det.pc_Cuenta;
+            info_det.pe_nombre = info_det.pe_nombre;
 
             list.Add(info_det);
         }
@@ -203,7 +211,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             ro_empleado_x_CuentaContable_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
             edited_info.IdEmpleado = info_det.IdEmpleado;
-            edited_info.Secuencia = info_det.Secuencia;
+            edited_info.IdCuentacon = info_det.IdCuentacon;
+            edited_info.Observacion = info_det.Observacion;
+            edited_info.IdRubro = info_det.IdRubro;
+            edited_info.pc_Cuenta = info_det.pc_Cuenta;
+            edited_info.pe_nombre = info_det.pe_nombre;
 
 
         }

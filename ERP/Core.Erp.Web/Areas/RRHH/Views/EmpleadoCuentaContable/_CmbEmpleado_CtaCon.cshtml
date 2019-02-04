@@ -25,7 +25,7 @@
 
     })
     .BindList(new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoCuentaContableController().get_list_bajo_demanda_empleado, new Core.Erp.Web.Areas.RRHH.Controllers.EmpleadoCuentaContableController().get_info_bajo_demanda_empleado)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_x_CuentaContable_Info) ? "" : (Model == 0 ? "" : Model));
+    .Bind((Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_Info) || Model.GetType() == typeof(Core.Erp.Info.RRHH.ro_empleado_x_CuentaContable_Info) || Model.GetType() == typeof(List<Core.Erp.Info.RRHH.ro_empleado_x_CuentaContable_Info>)) ? "" : Model);
 
 }
 @comboBox.GetHtml()

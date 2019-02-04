@@ -1,4 +1,4 @@
-﻿@model Core.Erp.Info.RRHH.ro_empleado_x_CuentaContable_Info
+﻿@model Core.Erp.Info.RRHH.ro_empleado_Info
 @{
     ViewBag.Title = "Cuenta contable";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -12,16 +12,15 @@
 
 {
     @Html.HiddenFor(w => w.IdEmpresa)
+    @Html.HiddenFor(w => w.IdEmpleado)
     @Html.HiddenFor(w => w.IdTransaccionSession)
-
-
 
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdProveedor">Empleado*</label>
-                    @Html.Partial("_CmbCuenta_Empleado", Model.IdEmpleado)
+                    @Html.Partial("_CmbEmpleado_CtaCon", Model.IdEmpleado)
                     @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -32,14 +31,15 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for=""></label>
-                        @Html.Action("GridViewPartial_Emp_CtaCont", new { IdEmpleado = ViewBag.IdEmpleado })
+                        @Html.Action("GridViewPartial_Emp_CtaCont")
                     </div>
                 </div>
             </div>
         </div>
         <div class="box-footer">
             <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
+            <a class="btn btn-default" href="@Url.Action("Index","Empleado",new {Area = "RRHH" },null)">Volver</a>
+         </div>
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
         }
