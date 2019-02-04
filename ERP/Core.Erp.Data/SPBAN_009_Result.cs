@@ -10,19 +10,14 @@
 namespace Core.Erp.Data
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ro_SPROL_002
+    public partial class SPBAN_009_Result
     {
         public int IdEmpresa { get; set; }
-        public decimal IdEmpleado { get; set; }
-        public string IdRubro { get; set; }
-        public int IdPeriodo { get; set; }
-        public int IdNominaTipo { get; set; }
-        public int IdNominaTipoLiqui { get; set; }
-        public double Valor { get; set; }
-        public int IdSucursal { get; set; }
-        public int IdArea { get; set; }
-        public string ru_descripcion { get; set; }
+        public int IdBanco { get; set; }
+        public string ba_descripcion { get; set; }
+        public decimal IdTipoFlujo { get; set; }
+        public string NomFlujo { get; set; }
+        public Nullable<double> ValorFlujo { get; set; }
     }
 }

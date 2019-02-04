@@ -599,6 +599,12 @@
     <Compile Include="Reportes\Banco\BAN_008_Rpt.Designer.cs">
       <DependentUpon>BAN_008_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Banco\BAN_009_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_009_Rpt.Designer.cs">
+      <DependentUpon>BAN_009_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Caja\CAJ_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>

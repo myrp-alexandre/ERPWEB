@@ -16,8 +16,8 @@ namespace Core.Erp.Data.RRHH
                 List<ro_archivos_bancos_generacion_Info> Lista;
                 DateTime fi = Fechainicio.Date;
                 DateTime ff = FechaFin.Date;
-                int IdSucursalIni = (IdSucursal==0)?0: IdSucursal;
-                int IdSucursalFin = (IdSucursal == 0) ? 99999: IdSucursal;
+                int IdSucursalIni =  IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 9999 : IdSucursal;
 
                 using (Entities_rrhh Context = new Entities_rrhh())
                 {
@@ -25,7 +25,7 @@ namespace Core.Erp.Data.RRHH
                                  where q.IdEmpresa == IdEmpresa
                                  && q.pe_FechaIni>=fi
                                  && q.pe_FechaIni<=ff
-                                 && q.IdSucursal >= IdSucursalIni 
+                                 && IdSucursalIni <= q.IdSucursal
                                  && q.IdSucursal <= IdSucursalFin
                                  select new ro_archivos_bancos_generacion_Info
                                  {
