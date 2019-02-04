@@ -318,17 +318,34 @@ namespace Core.Erp.Data.Inventario
                 {
                     Lista = (from q in Context.vwin_transferencia_x_in_movi_inve_agrupada_para_recosteo
                              where q.IdEmpresa == IdEmpresa
-                             && q.tr_fecha <= FechaInicio
+                             && q.tr_fecha >= FechaInicio
+                             group q by new { q.IdEmpresa, q.IdSucursalOrigen, q.cod_sucursal, q.nom_sucursal, q.IdBodegaOrigen, q.cod_bodega, q.nom_bodega, q.tr_fecha }
+                                  into Lista_agrupada
+                             orderby Lista_agrupada.Key.IdEmpresa, Lista_agrupada.Key.tr_fecha, Lista_agrupada.Key.IdSucursalOrigen, Lista_agrupada.Key.IdBodegaOrigen
                              select new in_transferencia_Info
                              {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdSucursalOrigen = q.IdSucursalOrigen,
-                                 SucuOrigen = q.nom_sucursal,
-                                 IdBodegaOrigen = q.IdBodegaOrigen,
-                                 BodegaORIG = q.nom_bodega,
-                                 tr_fecha = q.tr_fecha,
+                                 IdEmpresa = Lista_agrupada.Key.IdEmpresa,,
+                                 IdSucursalOrigen = Lista_agrupada.Key.IdSucursalOrigen,
+                                 SucuOrigen = Lista_agrupada.Key.nom_sucursal,
+                                 IdBodegaOrigen = Lista_agrupada.Key.IdBodegaOrigen,
+                                 BodegaORIG = Lista_agrupada.Key.nom_bodega,
+                                 tr_fecha = Lista_agrupada.Key.tr_fecha,
                                 
                              }).ToList();
+
+                    foreach (var item in Lista)
+                    {
+                        in_transferencia_Info info = new in_transferencia_Info();
+
+                        info.IdEmpresa = item.IdEmpresa;
+                        info.IdSucursalOrigen = item.IdSucursalOrigen;
+                        info.SucuOrigen = item.SucuOrigen;
+                        info.IdBodegaOrigen = item.IdBodegaOrigen;
+                        info.BodegaORIG = item.BodegaORIG;
+                        info.tr_fecha = item.tr_fecha;
+
+                        Lista.Add(info);
+                    }
 
                 }
 
@@ -341,5 +358,49 @@ namespace Core.Erp.Data.Inventario
             }
         }
 
+
+        public string CorregirTransferencia(List<in_transferencia_Info> Lista_CorregirTransferencia, DateTime fecha_ini)
+        {
+            try
+            {
+                int c = 1;
+                using (Entities_inventario contex = new Entities_inventario())
+                {
+                    var mensaje = "";
+
+                    if (Lista_CorregirTransferencia.Count == 0)
+                    {
+                        mensaje = "No existen transferencias desde esa fecha";
+                    }
+
+                    DateTime Fecha_ini = DateTime.Now;
+                    in_transferencia_Info info_transferencia = new in_transferencia_Info();
+                    foreach (var item in Lista_CorregirTransferencia)
+                    {
+                        info_transferencia = Lista_CorregirTransferencia.OrderBy(q => q.IdEmpresa).ThenBy(q => q.IdSucursalOrigen).ThenBy(q => q.IdBodegaOrigen).ThenByDescending(q => q.tr_fecha).ToList().FirstOrDefault(q => q.IdSucursalOrigen == item.IdSucursalOrigen && q.IdBodegaOrigen == item.IdBodegaOrigen && q.tr_fecha < item.tr_fecha);
+                        Fecha_ini = info_transferencia == null ? Convert.ToDateTime(fecha_ini) : info_transferencia.tr_fecha.Date;
+
+                        if (Lista_CorregirTransferencia.Count() >0)
+                        {
+                            //bus_costo_historico.Proceso_recosteo_y_correccion_contable_inv(param.IdEmpresa, item.IdSucursalOrigen, item.IdBodegaOrigen, Fecha_ini, item.tr_fecha, 5))
+                            //item.Check = true;
+                        }
+
+                    }
+
+                    if (Lista_CorregirTransferencia.Count == Lista_CorregirTransferencia.Count)
+                        mensaje = "Corrección de transferencias completas";
+                    else
+                        mensaje = "No se puedieron corregir todas las transferencias";
+
+                    return mensaje;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -142,22 +142,21 @@
 <script type="text/javascript">
     function BuscarTransferencia() {
         IdEmpresa = $("#IdEmpresa").val();
-        Fecha = fecha_ini.GetValue();
-        GridViewPartial_RecosteoInventario.PerformCallback();
+        fecha_ini = fecha_ini.GetValue();
 
-        alert(IdEmpresa + ' - ' + Fecha);
+        GridViewPartial_RecosteoInventario.PerformCallback();
     }
 
-    @*function GuardarRecosteo() {
+    function CorregirTransferencia() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            Fecha: fecha_ini.GetValue(),
+            fecha_ini: fecha_ini.GetValue(),
             }
-        $("#btn_guardar_recosteo").attr("disabled", true);
+        $("#btn_corregir_transferencia").attr("disabled", true);
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("aprobar", "PrestamosAprobacion", new { Area = "RRHH" })',
+            url: '@Url.Action("CorregirTransferencia", "AuditoriaInventario", new { Area = "Inventario" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -174,5 +173,5 @@
             error: function (error) {
             }
         });
-    }*@
+    }
 </script>

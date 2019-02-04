@@ -234,5 +234,18 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+
+        public string CorregirTransferencia(List<in_transferencia_Info> Lista_CorregirTransferencia, DateTime fecha_ini)
+        {
+            try
+            {
+                return odata.CorregirTransferencia(Lista_CorregirTransferencia, fecha_ini);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
