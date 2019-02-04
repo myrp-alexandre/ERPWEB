@@ -378,6 +378,7 @@
     <Compile Include="Areas\Importacion\Controllers\PartidaArancelariaController.cs" />
     <Compile Include="Areas\Importacion\Controllers\RecepcionOrdenCompraController.cs" />
     <Compile Include="Areas\Importacion\ImportacionAreaRegistration.cs" />
+    <Compile Include="Areas\Inventario\Controllers\AuditoriaInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\CatalogoInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\CatalogoTipoInventarioController.cs" />
     <Compile Include="Areas\Inventario\Controllers\CategoriaController.cs" />
@@ -9819,6 +9820,8 @@
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_014.cshtml" />
     <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_CmbEmpleado_CtaCon.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_008.cshtml" />
+    <Content Include="Areas\Inventario\Views\AuditoriaInventario\Index.cshtml" />
+    <Content Include="Areas\Inventario\Views\AuditoriaInventario\_GridViewPartial_RecosteoInventario.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />

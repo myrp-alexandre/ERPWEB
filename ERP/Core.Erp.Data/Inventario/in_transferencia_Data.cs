@@ -307,5 +307,39 @@ namespace Core.Erp.Data.Inventario
         }
 
 
+        public List<in_transferencia_Info> GetListRecosteoInventario(int IdEmpresa, DateTime FechaInicio)
+        {
+            try
+            {
+                FechaInicio = FechaInicio.Date;
+                List<in_transferencia_Info> Lista = null;
+
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    Lista = (from q in Context.vwin_transferencia_x_in_movi_inve_agrupada_para_recosteo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.tr_fecha <= FechaInicio
+                             select new in_transferencia_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursalOrigen = q.IdSucursalOrigen,
+                                 SucuOrigen = q.nom_sucursal,
+                                 IdBodegaOrigen = q.IdBodegaOrigen,
+                                 BodegaORIG = q.nom_bodega,
+                                 tr_fecha = q.tr_fecha,
+                                
+                             }).ToList();
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

@@ -1,0 +1,178 @@
+﻿@model Core.Erp.Info.Helps.cl_filtros_Info
+@{
+    ViewBag.Title = "Recosteo de inventario";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Layout/_LayoutConsulta.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+@using (Html.BeginForm("Index", "AuditoriaInventario", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+{
+    @Html.HiddenFor(q=>q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTransaccionSession)
+    <div class="box ">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+                </div>
+            </div>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Fecha inicio*</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.DevExpress().DateEditFor(q=> q.fecha_ini, settings =>
+                                {
+                                    settings.Name = "fecha_ini";
+                                    settings.Properties.UseMaskBehavior = true;
+                                    settings.Properties.EditFormat = EditFormat.Date;
+                                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">@ViewBag.Title</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div id="Tabs" role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active">
+                        <a href="#tab_correccion_trans" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Corrección de transferencia</a>
+                    </li>
+                    <li>
+                        <a href="#tab_mov_x_contabilizar" aria-controls="Precios" role="tab" data-toggle="tab" id="link_precios">Movimientos por contabilizar</a>
+                    </li>
+                    <li hidden>
+                        <a href="#tab_recosteo_x_prod" aria-controls="Composicion" role="tab" data-toggle="tab" id="link_composicion">Recosteo de productos</a>
+                    </li>
+                </ul>
+                <div class="tab-content" style="padding-top: 20px">
+                    <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_correccion_trans">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @Html.Action("GridViewPartial_RecosteoInventario", new { fecha_ini = Model.fecha_ini })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-success" id="btn_buscar_transferencia" onclick="BuscarTransferencia();">Buscar transferencia</button>
+                                        <button type="button" class="btn btn-success" id="btn_corregir_transferencia" onclick="CorregirTransferencia();">Corregir transferencia</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_mov_x_contabilizar">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_recosteo_x_prod">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            [@Session["IdEmpresa"]] @Session["nom_empresa"]
+        </div>
+        <!-- /.box-footer-->
+    </div>
+}
+
+<script type="text/javascript">
+    function BuscarTransferencia() {
+        IdEmpresa = $("#IdEmpresa").val();
+        Fecha = fecha_ini.GetValue();
+        GridViewPartial_RecosteoInventario.PerformCallback();
+
+        alert(IdEmpresa + ' - ' + Fecha);
+    }
+
+    @*function GuardarRecosteo() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            Fecha: fecha_ini.GetValue(),
+            }
+        $("#btn_guardar_recosteo").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("aprobar", "PrestamosAprobacion", new { Area = "RRHH" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == false) {
+                    alert("Parametrizar cuentas contables en tipo de orden de pago por empresa");
+                }
+                else {
+                    $("#myform").submit();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }*@
+</script>

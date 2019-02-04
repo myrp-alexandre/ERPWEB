@@ -221,5 +221,18 @@ namespace Core.Erp.Bus.Inventario
             return mensaje;
 
         }
+
+        public List<in_transferencia_Info> GetListRecosteoInventario(int IdEmpresa, DateTime FechaInicio)
+        {
+            try
+            {
+                return odata.GetListRecosteoInventario(IdEmpresa, FechaInicio);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
