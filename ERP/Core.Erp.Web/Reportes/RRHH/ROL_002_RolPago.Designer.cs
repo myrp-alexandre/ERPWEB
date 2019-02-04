@@ -417,6 +417,7 @@
             this.lbl_empleado.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.lbl_empleado.SizeF = new System.Drawing.SizeF(100F, 23F);
             this.lbl_empleado.Text = "lbl_empleado";
+            this.lbl_empleado.Visible = false;
             // 
             // xrTableCell20
             // 

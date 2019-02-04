@@ -166,6 +166,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             model.p_IdNominaTipo.Value = IdNomina_TipoLiqui;
             model.p_IdPeriodo.Value = IdPeriodo;
             model.p_IdSucursal.Value = IdSucursal;
+            model.usuario = SessionFixed.IdUsuario.ToString();
             model.empresa = SessionFixed.NomEmpresa.ToString();
             return View(model);
         }

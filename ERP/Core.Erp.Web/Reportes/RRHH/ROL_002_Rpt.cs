@@ -30,8 +30,8 @@ namespace Core.Erp.Web.Reportes.RRHH
 
         private void ROL_002_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-                lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");               
-                lbl_usuario.Text = usuario;
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");               
+            lbl_usuario.Text = usuario;
 
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdNomina = p_IdNomina.Value == null ? 0 : Convert.ToInt32(p_IdNomina.Value);
@@ -41,7 +41,6 @@ namespace Core.Erp.Web.Reportes.RRHH
 
             ROL_002_Bus bus_rpt = new ROL_002_Bus();
             List<ROL_002_Info> lst_rpt = bus_rpt.get_list_empleados(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal);
-
 
             this.DataSource = lst_rpt;
         }
