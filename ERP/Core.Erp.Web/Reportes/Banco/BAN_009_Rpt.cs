@@ -30,9 +30,36 @@ namespace Core.Erp.Web.Reportes.Banco
             int IdBanco = string.IsNullOrEmpty(p_IdBanco.Value.ToString()) ? 0 : Convert.ToInt32(p_IdBanco.Value);
 
             BAN_009_Bus bus_rpt = new BAN_009_Bus();
+
+            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
+            {
+                Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.None));
+                Detail.SortFields.Add(new GroupField("IdBanco", XRColumnSortOrder.None));
+            }
+            else
+            {
+                Detail.SortFields.Add(new GroupField("IdTipoFlujo", XRColumnSortOrder.Ascending));
+                Detail.SortFields.Add(new GroupField("IdBanco", XRColumnSortOrder.Ascending));
+            }
             List<BAN_009_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdBanco, fecha_ini, fecha_fin);
             this.DataSource = lst_rpt;
 
+        }
+
+        private void GroupHeader2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void GroupFooter2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            if (!Convert.ToBoolean(p_mostrar_agrupado.Value))
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
