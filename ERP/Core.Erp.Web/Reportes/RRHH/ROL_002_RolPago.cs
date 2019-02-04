@@ -27,8 +27,7 @@ namespace Core.Erp.Web.Reportes.RRHH
         }
 
         private void ROL_002_RolPago_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            lbl_empresa.Text = empresa;
+        {            
             ro_rubros_calculados_Info info_rubros_calculados = new ro_rubros_calculados_Info();
             ro_rubros_calculados_Bus bus_rubros_calculados = new ro_rubros_calculados_Bus();
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
@@ -44,7 +43,8 @@ namespace Core.Erp.Web.Reportes.RRHH
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
             ImageConverter obj = new ImageConverter();
-            //lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);          
+            lbl_empresa.Text = emp.em_nombre;
+            lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);          
 
             Lista_ingreso = (from q in lst_rpt
                              where q.Valor > 0
@@ -102,8 +102,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                 Grupo = egr.Key.Grupo
 
                             }).ToList();
-
-            lb_liquido.Value = lst_rpt.Sum(v=>v.Valor);
+            var Total = Math.Round(lst_rpt.Sum(v => v.Valor));
+            lb_liquido.Text = Total == 0 ? "0.00" : Convert.ToString(lst_rpt.Sum(v => v.Valor));
             this.DataSource = lst_rpt;
         }
 
