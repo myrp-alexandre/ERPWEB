@@ -324,7 +324,7 @@ namespace Core.Erp.Data.Inventario
                              orderby Lista_agrupada.Key.IdEmpresa, Lista_agrupada.Key.tr_fecha, Lista_agrupada.Key.IdSucursalOrigen, Lista_agrupada.Key.IdBodegaOrigen
                              select new in_transferencia_Info
                              {
-                                 IdEmpresa = Lista_agrupada.Key.IdEmpresa,,
+                                 IdEmpresa = Lista_agrupada.Key.IdEmpresa,
                                  IdSucursalOrigen = Lista_agrupada.Key.IdSucursalOrigen,
                                  SucuOrigen = Lista_agrupada.Key.nom_sucursal,
                                  IdBodegaOrigen = Lista_agrupada.Key.IdBodegaOrigen,
