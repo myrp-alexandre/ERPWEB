@@ -1600,6 +1600,9 @@
     <Compile Include="SPBAN_004_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="SPBAN_008_Result.cs">
+      <DependentUpon>Model_reportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="SPCONTA_002_Result.cs">
       <DependentUpon>Model_reportes.tt</DependentUpon>
     </Compile>
