@@ -103,7 +103,8 @@ namespace Core.Erp.Web.Reportes.RRHH
 
                             }).ToList();
 
-            this.DataSource = Lista_Rpte;
+            lb_liquido.Value = lst_rpt.Sum(v=>v.Valor);
+            this.DataSource = lst_rpt;
         }
 
         private void SubRpteIngresos_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)

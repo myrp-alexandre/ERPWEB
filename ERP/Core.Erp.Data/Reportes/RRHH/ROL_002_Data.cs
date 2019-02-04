@@ -15,20 +15,23 @@ namespace Core.Erp.Data.Reportes.RRHH
         {
             try
             {
+                ro_rubros_calculados_Data calculados_data = new ro_rubros_calculados_Data();
+                var info_rubros_calcu = calculados_data.get_info(IdEmpresa);
                 List<ROL_002_Info> Lista;
                 string mes_nom_ = mes(IdPeriodo);
 
                 using (Entities_reportes Context = new Entities_reportes())
                 {
 
-                    Context.SPROL_002(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo);
+                  //  Context.SPROL_002(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo);
                     Lista = (from q in Context.VWROL_002
                              where (q.IdSucursal == 0 ? 1==1 : q.IdSucursal == IdSucursal
                              && q.IdEmpresa == IdEmpresa
                              && q.IdNominaTipo == IdNomina
                              && q.IdNominaTipoLiqui == IdNominaTipo
                              && q.IdPeriodo == IdPeriodo
-                             && q.IdEmpleado==Idempleado)                             
+                             && q.IdEmpleado==Idempleado
+                             && q.IdRubro!=info_rubros_calcu.IdRubro_dias_trabajados)                             
                              orderby q.NombreCompleto
                              select new ROL_002_Info
                              {
@@ -88,7 +91,8 @@ namespace Core.Erp.Data.Reportes.RRHH
                              && q.IdNominaTipo == IdNomina
                              && q.IdNominaTipoLiqui == IdNominaTipo
                              && q.IdPeriodo == IdPeriodo
-                             && q.IdRubro==info_rubros_calcu.IdRubro_sueldo)
+                             && q.IdRubro==info_rubros_calcu.IdRubro_dias_trabajados
+                             )
                              orderby q.NombreCompleto
                              select new ROL_002_Info
                              {
