@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_archivo_transferencia";
-        settings.CallbackRouteValues = new { Controller = "ArchivosTransferencias", Action = "GridViewPartial_archivo_transferencia",  Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin, IdSucursal = ViewBag.IdSucursal };
+        settings.Name = "GridView_archivo_transferencia";
+        settings.CallbackRouteValues = new { Controller = "ArchivosTransferencias", Action = "GridViewPartial_archivo_transferencia",  Fecha_ini = ViewBag.fecha_ini, Fecha_fin = ViewBag.fecha_fin, IdSucursal = ViewBag.IdSucursal, IdEmpresa = ViewBag.IdEmpresa };
 
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdArchivo";
@@ -73,7 +73,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Erp.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
