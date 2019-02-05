@@ -2292,6 +2292,13 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
           <Parameter Name="IdMovi_inven_tipo" Type="int" Mode="In" />
           <Parameter Name="IdNumMovi" Type="numeric" Mode="In" />
         </Function>
+        <Function Name="spSys_Inv_Recosteo_Inventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="IdBodega" Type="int" Mode="In" />
+          <Parameter Name="Fecha_ini" Type="datetime" Mode="In" />
+          <Parameter Name="cant_Decimales" Type="int" Mode="In" />
+        </Function>
         <Function Name="spSys_Inv_Recosteo_Inventario_x_rango_fechas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="IdSucursal" Type="int" Mode="In" />
@@ -4380,6 +4387,13 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
             <Parameter Name="IdBodega" Mode="In" Type="Int32" />
             <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
             <Parameter Name="Fecha_fin" Mode="In" Type="DateTime" />
+            <Parameter Name="cant_Decimales" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spSys_Inv_Recosteo_Inventario">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodega" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
             <Parameter Name="cant_Decimales" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -6829,6 +6843,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spSys_Inv_Recosteo_Inventario_x_rango_fechas" FunctionName="Model_inventario.Store.spSys_Inv_Recosteo_Inventario_x_rango_fechas" />
+          <FunctionImportMapping FunctionImportName="spSys_Inv_Recosteo_Inventario" FunctionName="Model_inventario.Store.spSys_Inv_Recosteo_Inventario" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

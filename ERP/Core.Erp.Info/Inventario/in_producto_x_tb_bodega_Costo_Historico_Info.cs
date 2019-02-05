@@ -19,5 +19,10 @@ namespace Core.Erp.Info.Inventario
         public double Stock_a_la_fecha { get; set; }
         public string Observacion { get; set; }
         public Nullable<System.DateTime> fecha_trans { get; set; }
+
+        #region Campos de recosteo por sucursal
+        public string nom_producto { get; set; }
+        public string cod_producto { get; set; }
+        #endregion
     }
 }

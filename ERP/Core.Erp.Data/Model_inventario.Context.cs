@@ -171,5 +171,30 @@ namespace Core.Erp.Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSys_Inv_Recosteo_Inventario_x_rango_fechas", idEmpresaParameter, idSucursalParameter, idBodegaParameter, fecha_iniParameter, fecha_finParameter, cant_DecimalesParameter);
         }
+    
+        public virtual int spSys_Inv_Recosteo_Inventario(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<System.DateTime> fecha_ini, Nullable<int> cant_Decimales)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idSucursalParameter = idSucursal.HasValue ?
+                new ObjectParameter("IdSucursal", idSucursal) :
+                new ObjectParameter("IdSucursal", typeof(int));
+    
+            var idBodegaParameter = idBodega.HasValue ?
+                new ObjectParameter("IdBodega", idBodega) :
+                new ObjectParameter("IdBodega", typeof(int));
+    
+            var fecha_iniParameter = fecha_ini.HasValue ?
+                new ObjectParameter("Fecha_ini", fecha_ini) :
+                new ObjectParameter("Fecha_ini", typeof(System.DateTime));
+    
+            var cant_DecimalesParameter = cant_Decimales.HasValue ?
+                new ObjectParameter("cant_Decimales", cant_Decimales) :
+                new ObjectParameter("cant_Decimales", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSys_Inv_Recosteo_Inventario", idEmpresaParameter, idSucursalParameter, idBodegaParameter, fecha_iniParameter, cant_DecimalesParameter);
+        }
     }
 }
