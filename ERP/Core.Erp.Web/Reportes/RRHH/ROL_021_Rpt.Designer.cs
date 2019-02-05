@@ -863,7 +863,6 @@
             this.pivotGridField4.Name = "pivotGridField4";
             this.pivotGridField4.Options.ShowGrandTotal = false;
             this.pivotGridField4.Options.ShowTotals = false;
-            this.pivotGridField4.Options.ShowValues = false;
             // 
             // pivotGridField3
             // 
@@ -897,7 +896,6 @@
             this.pivotGridField2.Name = "pivotGridField2";
             this.pivotGridField2.Options.ShowGrandTotal = false;
             this.pivotGridField2.Options.ShowTotals = false;
-            this.pivotGridField2.Options.ShowValues = false;
             // 
             // pivotGridField1
             // 
@@ -926,7 +924,6 @@
             this.xrPivotGridField44.Appearance.Cell.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.xrPivotGridField44.Appearance.Cell.TextVerticalAlignment = DevExpress.Utils.VertAlignment.Center;
             this.xrPivotGridField44.Appearance.Cell.WordWrap = true;
-            this.xrPivotGridField44.Appearance.FieldValue.TextHorizontalAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.xrPivotGridField44.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.xrPivotGridField44.AreaIndex = 1;
             this.xrPivotGridField44.Caption = "Empleado";
@@ -986,6 +983,7 @@
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OptionsChartDataSource.DataProvideMode = DevExpress.XtraPivotGrid.PivotChartDataProvideMode.UseCustomSettings;
             this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
+            this.xrPivotGrid1.OptionsPrint.MergeColumnFieldValues = false;
             this.xrPivotGrid1.OptionsPrint.PrintColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintDataHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
@@ -1038,7 +1036,6 @@
             this.pivotGridField6.GrandTotalCellFormat.FormatString = "n2";
             this.pivotGridField6.GrandTotalCellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField6.Name = "pivotGridField6";
-            this.pivotGridField6.Options.ShowValues = false;
             // 
             // pivotGridField8
             // 

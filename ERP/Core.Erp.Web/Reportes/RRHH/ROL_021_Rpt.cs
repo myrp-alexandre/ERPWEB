@@ -82,7 +82,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                 }
                 ROL_021_Bus bus_rpt = new ROL_021_Bus();
                 List<ROL_021_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea, TipoRubro);
-                this.DataSource = lst_rpt.OrderBy(q=>q.ru_tipo).ThenBy(q=>q.Orden);
+                               
+                this.DataSource = lst_rpt;
 
                 tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
                 var emp = bus_empresa.get_info(IdEmpresa);

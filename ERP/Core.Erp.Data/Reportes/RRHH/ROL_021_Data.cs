@@ -101,7 +101,7 @@ namespace Core.Erp.Data.Reportes.RRHH
                                  && q.IdNominaTipo == IdNomina
                                  && q.IdNominaTipoLiqui == IdNominaTipo
                                  && q.Valor > 0
-                                 && (q.IdRubro == info_rub_calculados.IdRubro_tot_ing || q.ru_tipo == "I" )
+                                 && (q.ru_tipo == "I" )
                                  select new ROL_021_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
