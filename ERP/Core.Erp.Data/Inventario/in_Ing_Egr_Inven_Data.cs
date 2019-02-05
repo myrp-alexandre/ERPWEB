@@ -440,6 +440,13 @@ namespace Core.Erp.Data.Inventario
                     if (PK_conta != null)
                     {
                         #region Elimino diario contable
+                        var lst_rel_det = db_i.in_movi_inve_detalle_x_ct_cbtecble_det.Where(q => q.IdEmpresa_inv == PK_movi.IdEmpresa_inv
+                                    && q.IdSucursal_inv == PK_movi.IdSucursal_inv
+                                    && q.IdBodega_inv == PK_movi.IdBodega_inv
+                                    && q.IdMovi_inven_tipo_inv == PK_movi.IdMovi_inven_tipo_inv
+                                    && q.IdNumMovi_inv == PK_movi.IdNumMovi_inv).ToList();
+                        db_i.in_movi_inve_detalle_x_ct_cbtecble_det.RemoveRange(lst_rel_det);
+
                         var lst_conta = db_ct.ct_cbtecble_det.Where(q => q.IdEmpresa == PK_conta.IdEmpresa_ct 
                                         && q.IdTipoCbte == PK_conta.IdTipoCbte 
                                         && q.IdCbteCble == PK_conta.IdCbteCble
