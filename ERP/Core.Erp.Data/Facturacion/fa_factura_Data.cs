@@ -1217,9 +1217,9 @@ namespace Core.Erp.Data.Facturacion
         {
             try
             {
-                using (Entities_cuentas_por_cobrar db = new Entities_cuentas_por_cobrar())
+                using (Entities_facturacion db = new Entities_facturacion())
                 {
-                    var obj = db.cxc_cobro_det.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega_Cbte == IdBodega && q.IdCbte_vta_nota == IdCbteVta && q.dc_TipoDocumento == vt_tipoDoc && q.estado == "A").Count();
+                    var obj = db.vwfa_factura_sin_automatico.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega_Cbte == IdBodega && q.IdCbte_vta_nota == IdCbteVta && q.dc_TipoDocumento == vt_tipoDoc && q.estado == "A").Count();
                     if (obj > 0)
                     {
                         mensaje = "El documento no puede ser anulado porque se encuentra parcial o totalmente cobrado";

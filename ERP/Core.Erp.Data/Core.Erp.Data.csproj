@@ -2127,6 +2127,9 @@
     <Compile Include="vwfa_factura_det.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwfa_factura_sin_automatico.cs">
+      <DependentUpon>Model_facturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwfa_factura_sin_guia.cs">
       <DependentUpon>Model_facturacion.tt</DependentUpon>
     </Compile>
