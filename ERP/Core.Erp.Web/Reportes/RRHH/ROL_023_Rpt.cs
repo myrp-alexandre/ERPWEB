@@ -69,7 +69,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  DECIMOT = Resumen.Sum(q => q.DECIMOT),
                                  DECIMOC = Resumen.Sum(q => q.DECIMOC),
                                  FRESERVA = Resumen.Sum(q => q.FRESERVA),
-                                 SUELDO = Resumen.Sum(q => q.SUELDO),
+                                 SUELDO = Resumen.Sum(q => q.SUELDO+q.SOBRET+q.OTROING),
                                  SOBRET = Resumen.Sum(q => q.SOBRET),
                                  OTROING = Resumen.Sum(q => q.OTROING),
 
