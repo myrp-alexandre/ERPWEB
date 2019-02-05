@@ -1,4 +1,5 @@
-﻿CREATE view web.[VWROL_021] as 
+﻿CREATE view [web].[VWROL_021]
+as
 SELECT        data.IdEmpresa, data.IdSucursal, data.IdNominaTipo, data.IdNominaTipoLiqui, data.IdEmpleado, data.IdArea, data.IDividion, data.IdAreaEmpleado, data.IdDivisionEmpleado, data.IdPeriodo, data.IdRubro, data.se_distribuye, 
                          data.Orden, data.Porcentaje, data.Valor, data.rub_visible_reporte, data.Observacion, data.ru_descripcion, data.pe_FechaIni, data.pe_FechaFin, data.ru_tipo, data.rub_codigo, data.ru_codRolGen, data.ca_descripcion, 
                          data.em_codigo, data.pe_cedulaRuc, data.pe_nombreCompleto, data.IdRol, data.Descripcion, data.rub_grupo, data.Dias, nom_t.Descripcion AS NominaTipo, nom_tip.DescripcionProcesoNomina AS NominaTipoLiqui, 
@@ -6,8 +7,8 @@ SELECT        data.IdEmpresa, data.IdSucursal, data.IdNominaTipo, data.IdNominaT
 FROM            (SELECT        rol_det.IdEmpresa, rol.IdSucursal, rol.IdNominaTipo, rol.IdNominaTipoLiqui, rol_det.IdEmpleado, CASE WHEN rubr.se_distribuye = 1 THEN emp_div.IdArea ELSE NULL END AS IdArea, 
                                                     CASE WHEN rubr.se_distribuye = 1 THEN emp_div.IDividion ELSE NULL END AS IDividion, dbo.ro_empleado.IdArea AS IdAreaEmpleado, dbo.ro_empleado.IdDivision AS IdDivisionEmpleado, rol.IdPeriodo, 
                                                     rol_det.IdRubro, rubr.se_distribuye, rubr.ru_orden AS Orden, CASE WHEN rubr.se_distribuye = 1 THEN emp_div.Porcentaje ELSE NULL END AS Porcentaje, 
-                                                    CASE WHEN rubr.se_distribuye = 1 THEN CASE WHEN rubr.ru_tipo = 'I' THEN (rol_det.Valor * emp_div.Porcentaje) / 100 ELSE rol_det.Valor END ELSE rol_det.Valor END AS Valor, rol_det.rub_visible_reporte, 
-                                                    rol_det.Observacion, CASE WHEN (rubr.se_distribuye = 1 AND (rub_cal.IdRubro_sueldo = rol_det.IdRubro OR
+                                                    CASE WHEN rubr.se_distribuye = 1 THEN CASE WHEN rubr.ru_tipo = 'I' THEN (rol_det.Valor * (emp_div.Porcentaje / 100)) ELSE rol_det.Valor END ELSE rol_det.Valor END AS Valor, 
+                                                    rol_det.rub_visible_reporte, rol_det.Observacion, CASE WHEN (rubr.se_distribuye = 1 AND (rub_cal.IdRubro_sueldo = rol_det.IdRubro OR
                                                     rub_cal.IdRubro_horas_matutina = rol_det.IdRubro OR
                                                     rub_cal.IdRubro_horas_vespertina = rol_det.IdRubro)) THEN 'SUELDOS POR HORA' ELSE rubr.ru_descripcion END AS ru_descripcion, perid.pe_FechaIni, perid.pe_FechaFin, rubr.ru_tipo, rubr.rub_codigo, 
                                                     rubr.ru_codRolGen, CASE WHEN ru_tipo = 'A' THEN '3 - TOTALES' WHEN ru_tipo = 'I' THEN '1 - INGRESOS' ELSE '2 - EGRESOS' END AS ca_descripcion, dbo.ro_empleado.em_codigo, 
@@ -33,8 +34,8 @@ FROM            (SELECT        rol_det.IdEmpresa, rol.IdSucursal, rol.IdNominaTi
                           WHERE        (dbo.ro_empleado.Tiene_ingresos_compartidos = 1) AND (rubr.se_distribuye = 1)
                           UNION ALL
                           SELECT        rol_det.IdEmpresa, rol.IdSucursal, rol.IdNominaTipo, rol.IdNominaTipoLiqui, rol_det.IdEmpleado, NULL AS IdArea, NULL AS IDividion, dbo.ro_empleado.IdArea AS IdAreaEmpleado, 
-                                                   dbo.ro_empleado.IdDivision AS IdDivisionEmpleado, rol.IdPeriodo, rol_det.IdRubro, rubr.se_distribuye, rubr.ru_orden AS Orden, NULL AS Porcentaje, rol_det.Valor, rol_det.rub_visible_reporte, 
-                                                   rol_det.Observacion, CASE WHEN (rubr.se_distribuye = 1 AND (rub_cal.IdRubro_sueldo = rol_det.IdRubro OR
+                                                   dbo.ro_empleado.IdDivision AS IdDivisionEmpleado, rol.IdPeriodo, rol_det.IdRubro, rubr.se_distribuye, rubr.ru_orden AS Orden, NULL AS Porcentaje, rol_det.Valor, rol_det.rub_visible_reporte, rol_det.Observacion, 
+                                                   CASE WHEN (rubr.se_distribuye = 1 AND (rub_cal.IdRubro_sueldo = rol_det.IdRubro OR
                                                    rub_cal.IdRubro_horas_matutina = rol_det.IdRubro OR
                                                    rub_cal.IdRubro_horas_vespertina = rol_det.IdRubro)) THEN 'SUELDOS POR HORA' ELSE rubr.ru_descripcion END AS ru_descripcion, perid.pe_FechaIni, perid.pe_FechaFin, rubr.ru_tipo, rubr.rub_codigo, 
                                                    rubr.ru_codRolGen, CASE WHEN ru_tipo = 'A' THEN '3 - TOTALES' WHEN ru_tipo = 'I' THEN '1 - INGRESOS' ELSE '2 - EGRESOS' END AS ca_descripcion, dbo.ro_empleado.em_codigo, dbo.tb_persona.pe_cedulaRuc, 

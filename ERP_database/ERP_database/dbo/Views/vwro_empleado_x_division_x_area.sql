@@ -2,7 +2,7 @@
 AS
 SELECT        dbo.ro_empleado_x_division_x_area.IdEmpresa, dbo.ro_empleado_x_division_x_area.IdEmpleado, dbo.ro_empleado_x_division_x_area.Secuencia, dbo.ro_empleado_x_division_x_area.IDividion, 
                          dbo.ro_empleado_x_division_x_area.IdArea, dbo.ro_empleado_x_division_x_area.Porcentaje, dbo.ro_empleado_x_division_x_area.Observacion, dbo.ro_area.Descripcion AS AreaDescripcion, 
-                         dbo.ro_Division.Descripcion AS DivisionDescripcion
+                         dbo.ro_Division.Descripcion AS DivisionDescripcion, dbo.ro_empleado_x_division_x_area.CargaGasto
 FROM            dbo.ro_empleado_x_division_x_area INNER JOIN
                          dbo.ro_area ON dbo.ro_empleado_x_division_x_area.IdEmpresa = dbo.ro_area.IdEmpresa AND dbo.ro_empleado_x_division_x_area.IDividion = dbo.ro_area.IdDivision AND 
                          dbo.ro_empleado_x_division_x_area.IdArea = dbo.ro_area.IdArea INNER JOIN
@@ -87,7 +87,7 @@ Begin DesignProperties =
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 136
+               Bottom = 202
                Right = 208
             End
             DisplayFlags = 280
@@ -152,4 +152,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vwro_empleado_x_division_x_area';
+
+
 

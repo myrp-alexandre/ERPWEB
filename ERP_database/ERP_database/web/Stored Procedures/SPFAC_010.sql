@@ -16,6 +16,7 @@ FROM            fa_factura AS c INNER JOIN
                          fa_Vendedor AS ve ON c.IdEmpresa = ve.IdEmpresa AND c.IdVendedor = ve.IdVendedor INNER JOIN
                          tb_sucursal ON c.IdEmpresa = tb_sucursal.IdEmpresa AND c.IdSucursal = tb_sucursal.IdSucursal LEFT OUTER JOIN
                          fa_catalogo AS cat ON c.IdCatalogo_FormaPago = cat.IdCatalogo
+
 						 
 						 /*left join(
 							SELECT        IdEmpresa, IdSucursal, IdBodega, IdCbteVta, ROUND(sum(SubtotalSinIVA),2) SubtotalSinIVA, round(sum(SubtotalIVA),2) SubtotalIVA, round(sum(vt_iva),2)vt_iva, ROUND(sum(SubtotalSinIVA),2) + round(sum(SubtotalIVA),2) + round(sum(vt_iva),2) vt_total
@@ -31,3 +32,4 @@ FROM            fa_factura AS c INNER JOIN
 						 */
 						 LEFT JOIN fa_factura_resumen AS R on c.IdEmpresa = r.IdEmpresa and c.IdSucursal = r.IdSucursal and c.IdBodega = r.IdBodega and c.IdCbteVta = r.IdCbteVta
 						 where c.IdEmpresa = @IdEmpresa and c.IdSucursal between @IdSucursalIni and @IdSucursalFin and c.vt_fecha between @FechaIni and @FechaFin
+						 and c.Estado='A'

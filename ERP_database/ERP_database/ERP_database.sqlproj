@@ -1079,7 +1079,6 @@
     <Build Include="web\Views\VWCXP_012.sql" />
     <Build Include="dbo\Views\vwcp_SolicitudPago.sql" />
     <Build Include="dbo\Tables\ro_empleado_x_division_x_area.sql" />
-    <Build Include="dbo\Tables\correos_.sql" />
     <Build Include="dbo\Tables\ba_TipoFlujo_PlantillaDet.sql" />
     <Build Include="dbo\Tables\ba_TipoFlujo_Plantilla.sql" />
     <Build Include="dbo\Tables\ba_Cbte_Ban_x_ba_TipoFlujo.sql" />
@@ -1119,6 +1118,10 @@
     <Build Include="dbo\Views\comparar_rol_archivo.sql" />
     <Build Include="web\Views\VWINV_015.sql" />
     <Build Include="dbo\Views\vwin_Ing_Egr_Inven_PorContabilizar.sql" />
+    <Build Include="web\Views\VWFAC_014.sql" />
+    <Build Include="dbo\Views\vwfa_factura_sin_automatico.sql" />
+    <Build Include="web\Stored Procedures\SPBAN_009.sql" />
+    <Build Include="web\Stored Procedures\SPBAN_008.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\ERP_database_20180907_23-41-21.dacpac" />

@@ -433,7 +433,7 @@ insert into ro_rol_detalle
 
 
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'500'			,ROUND( sum(rol_det.Valor),2)
+@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'500'			,ROUND(sum(ROUND(rol_det.Valor,2)),2)
 ,1						,'Total ingresos'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -484,7 +484,7 @@ insert into ro_rol_detalle
 ,rub_visible_reporte,	Observacion)
 
 select
-@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'1000'			,ROUND( sum(rol_det.Valor),2)
+@IdEmpresa				,@IdRol				,emp.IdSucursal							,rol_det.IdEmpleado		,@IdRubro_calculado	,'1000'			,ROUND( sum(ROUND(rol_det.Valor,2)),2)
 ,1						,'Total Egreso'	
 FROM            dbo.ro_rol_detalle AS rol_det INNER JOIN
                          dbo.ro_rubro_tipo AS rub ON rol_det.IdEmpresa = rub.IdEmpresa AND rol_det.IdRubro = rub.IdRubro INNER JOIN
@@ -700,6 +700,6 @@ WHERE ro_empleado_x_division_x_area.IdEmpresa=@IdEmpresa
 and ro_empleado.IdSucursal=@IdSucursalFin
 
 
-update ro_rol_detalle set Valor=CAST(Valor as numeric(10,2)) where IdEmpresa=@IdEmpresa and IdRol=@IdRol
-update ro_rol_detalle_x_rubro_acumulado set Valor=CAST(Valor as numeric(10,2)) where IdEmpresa=@IdEmpresa and IdRol=@IdRol
+update ro_rol_detalle set Valor=CAST(Valor as numeric(18,2)) where IdEmpresa=@IdEmpresa and IdRol=@IdRol
+update ro_rol_detalle_x_rubro_acumulado set Valor=CAST(Valor as numeric(18,2)) where IdEmpresa=@IdEmpresa and IdRol=@IdRol
 END
