@@ -16,11 +16,11 @@ namespace Core.Erp.Bus.RRHH
         ro_archivos_bancos_generacion_Data odata = new ro_archivos_bancos_generacion_Data();
         tb_empresa_Data odata_empresa = new tb_empresa_Data();
         ba_Banco_Cuenta_Data odata_cuenta = new ba_Banco_Cuenta_Data();
-        public List<ro_archivos_bancos_generacion_Info> get_list(int IdEmpresa, DateTime Fechainicio, DateTime fechafin, int IdSucursal, bool estado)
+        public List<ro_archivos_bancos_generacion_Info> get_list(int IdEmpresa, DateTime fecha_ini, DateTime fecha_fin, int IdSucursal, bool estado)
         {
             try
             {
-                return odata.get_list(IdEmpresa, Fechainicio, fechafin, IdSucursal, estado);
+                return odata.get_list(IdEmpresa, fecha_ini, fecha_fin, IdSucursal, estado);
             }
             catch (Exception)
             {

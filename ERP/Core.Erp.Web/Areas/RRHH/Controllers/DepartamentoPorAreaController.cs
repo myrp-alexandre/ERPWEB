@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
 using DevExpress.Web.Mvc;
+using Core.Erp.Web.Helps;
 
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
@@ -47,7 +48,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             if (model == null)
                 return View(model);
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"].ToString());
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (bus_area_x_departamento.guardarDB(model))
                 return RedirectToAction("Index");
             else
@@ -66,7 +67,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Modificar(ro_area_x_departamento_Info model)
         {
 
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (!bus_area_x_departamento.modificarDB(model))
             {
                 cargar_combos();
@@ -85,7 +86,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Anular(ro_area_x_departamento_Info model)
         {
 
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             if (!bus_area_x_departamento.anularDB(model))
             {
                 cargar_combos();

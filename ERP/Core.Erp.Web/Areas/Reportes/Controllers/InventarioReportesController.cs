@@ -334,7 +334,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_inventario_Info model = new cl_filtros_inventario_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
             };
             cargar_combos(model);
             if (mostrar_detallado)
@@ -426,6 +427,7 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
             cl_filtros_inventario_Info model = new cl_filtros_inventario_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdProducto = 0,
                 IdProductoPadre = 0
             };
@@ -536,7 +538,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_inventario_Info model = new cl_filtros_inventario_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             List_decimal.set_list(new List<in_Producto_Info>());
             cargar_combos(model);
@@ -571,7 +574,8 @@ namespace Core.Erp.Web.Areas.Reportes.Controllers
         {
             cl_filtros_inventario_Info model = new cl_filtros_inventario_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
             List_decimal.set_list(new List<in_Producto_Info>());
             cargar_combos(model);

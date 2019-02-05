@@ -365,7 +365,9 @@ namespace Core.Erp.Data.RRHH
                         Valor_maximo_horas_vesp = info.Valor_maximo_horas_vesp,
                        
                         DiasVacaciones = info.DiasVacaciones,
-                        GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones
+                        GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones,
+
+                        
                     };
                     Context.ro_empleado.Add(Entity);
 
@@ -534,6 +536,7 @@ namespace Core.Erp.Data.RRHH
                         Entity.Tiene_ingresos_compartidos = info.Tiene_ingresos_compartidos;
                         Entity.DiasVacaciones = info.DiasVacaciones;
                         Entity.GozaMasDeQuinceDiasVaciones = info.GozaMasDeQuinceDiasVaciones;
+                        Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
 
                     var lst_delete = Context.ro_empleado_x_division_x_area.Where(v => v.IdEmpresa == info.IdEmpresa && v.IdEmpleado == info.IdEmpleado);
                     Context.ro_empleado_x_division_x_area.RemoveRange(lst_delete);

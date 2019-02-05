@@ -102,7 +102,10 @@ namespace Core.Erp.Data.RRHH
                         IdRubro = info.IdRubro,
                         FechaInicio=info.FechaInicio,
                         FechaFin=info.FechaFin,
-                        es_indifinido =info.es_indifinido
+                        es_indifinido =info.es_indifinido,
+
+                        IdUsuario = info.IdUsuario,
+                        Fecha_Transac = DateTime.Now
                     };
                     Context.ro_empleado_x_ro_rubro.Add(Entity);
                     Context.SaveChanges();
@@ -125,6 +128,8 @@ namespace Core.Erp.Data.RRHH
                     && q.IdRubroFijo == info.IdRubroFijo);
                     if (Entity == null)
                         return false;
+                    Entity.IdUsuarioUltAnu= info.IdUsuarioUltAnu;
+                    Entity.Fecha_UltAnu = DateTime.Now;
                     Context.ro_empleado_x_ro_rubro.Remove(Entity);
                     Context.SaveChanges();
                 }
@@ -155,6 +160,9 @@ namespace Core.Erp.Data.RRHH
                     Entity.FechaFin = info.FechaFin;
                     Entity.FechaInicio = info.FechaInicio;
                     Entity.es_indifinido = info.es_indifinido;
+
+                    Entity.IdUsuarioUltMod= info.IdUsuarioUltMod;
+                    Entity.Fecha_UltMod = DateTime.Now;
                     Context.SaveChanges();
                 }
 

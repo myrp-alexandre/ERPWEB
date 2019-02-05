@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class CatalogoRRHHController : Controller
@@ -38,7 +40,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                
+
+                info.IdUsuario = SessionFixed.IdUsuario;
                 ViewBag.IdTipoCatalogo = info.IdTipoCatalogo;
                 cargar_combos();
                 if (ModelState.IsValid)
@@ -92,6 +95,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                info.IdUsuarioUltMod = SessionFixed.IdUsuario;
                 if (ModelState.IsValid)
                 {
                     info.Fecha_UltMod = DateTime.Now;
@@ -134,7 +138,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             try
             {
                 info.Fecha_UltAnu = DateTime.Now;
-                info.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+                info.IdUsuarioUltAnu = SessionFixed.IdUsuario;
                 if (!bus_cargo.anularDB(info))
                     return View(info);
                 else

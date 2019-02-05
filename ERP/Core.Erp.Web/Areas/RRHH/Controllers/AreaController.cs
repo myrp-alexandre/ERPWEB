@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class AreaController : Controller
@@ -40,6 +42,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+
+                info.IdUsuario = SessionFixed.IdUsuario;
                 if (ModelState.IsValid)
                 {
                     info.IdEmpresa = GetIdEmpresa();
@@ -78,6 +82,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                info.IdUsuarioUltMod = SessionFixed.IdUsuario;
                 if (ModelState.IsValid)
                 {
                     if (!bus_area.modificarDB(info))
@@ -116,8 +121,9 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         public ActionResult Anular(ro_area_Info info)
         {
             try
-            {               
-                    if (!bus_area.anularDB(info))
+            {
+                info.IdUsuario = SessionFixed.IdUsuario;
+                if (!bus_area.anularDB(info))
                         return View(info);
                     else
                         return RedirectToAction("Index");              

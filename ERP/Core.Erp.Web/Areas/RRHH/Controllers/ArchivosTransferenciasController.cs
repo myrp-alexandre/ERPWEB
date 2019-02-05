@@ -36,10 +36,11 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         #region Vistas
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
-            model.IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+            };
             cargar_combos_consulta();
             return View(model);
         }
@@ -52,16 +53,14 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_archivo_transferencia(DateTime? Fecha_ini, DateTime? Fecha_fin ,int? IdSucursal = 0)
+        public ActionResult GridViewPartial_archivo_transferencia(DateTime? fecha_ini, DateTime? fecha_fin, int IdSucursal = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
-            ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
-            ViewBag.IdSucursal = IdSucursal== null ? 0 : IdSucursal;
-            ViewBag.IdEmpresa = IdEmpresa;
-
-            var model = bus_archivo.get_list(IdEmpresa, ViewBag.Fecha_ini, ViewBag.Fecha_fin, ViewBag.IdSucursal, true);
+            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(fecha_ini);
+            ViewBag.fecha_fin = fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(fecha_fin);
+            ViewBag.IdSucursal = IdSucursal;
+            var model = bus_archivo.get_list(IdEmpresa, ViewBag.fecha_ini, ViewBag.fecha_fin, IdSucursal, true);
             return PartialView("_GridViewPartial_archivo_transferencia", model);
         }
 
@@ -155,8 +154,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_archivo.modificarDB(model))
             {
                 cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
@@ -187,8 +186,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(model.IdTransaccionSession);
 
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             model.Fecha_UltAnu = DateTime.Now;
             if (!bus_archivo.anularDB(model))
             {
