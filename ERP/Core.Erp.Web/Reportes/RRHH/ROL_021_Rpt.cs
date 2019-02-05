@@ -82,7 +82,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                 }
                 ROL_021_Bus bus_rpt = new ROL_021_Bus();
                 List<ROL_021_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdNomina, IdNominaTipo, IdPeriodo, IdSucursal, IdDivision, IdArea, TipoRubro);
-                this.DataSource = lst_rpt;
+                this.DataSource = lst_rpt.OrderBy(q=>q.ru_tipo).ThenBy(q=>q.Orden);
 
                 tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
                 var emp = bus_empresa.get_info(IdEmpresa);
@@ -99,6 +99,7 @@ namespace Core.Erp.Web.Reportes.RRHH
 
         private void xrPivotGrid1_PrintFieldValue(object sender, DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs e)
         {
+            /*
             if (e.Field != null && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
             {
                 
@@ -106,6 +107,7 @@ namespace Core.Erp.Web.Reportes.RRHH
                 lb.IsVisible = false;
                 e.Brick = lb;
             }
+            */
         }
     }
 }
