@@ -20,16 +20,17 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
         public ActionResult Index()
         {
-            cl_filtros_Info model = new cl_filtros_Info
+            in_transferencia_Info model = new in_transferencia_Info
             {
                 IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
+                fecha_correccion_transferencia = DateTime.Now.Date
             };
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Index(cl_filtros_Info model)
+        public ActionResult Index(in_transferencia_Info model)
         {            
             return View(model);
         }
@@ -47,16 +48,24 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
         }
 
         #region Json
+        public JsonResult BuscarTransferencia(DateTime fecha_ini, int IdEmpresa = 0)
+        {
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date : Convert.ToDateTime(fecha_ini);
+
+            var model = bus_transferencia.GetListRecosteoInventario(IdEmpresa, ViewBag.fecha_ini);
+            ListaCorregirTransferencia.set_list(model, IdTransaccionSession);
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult CorregirTransferencia(DateTime fecha_ini, int IdEmpresa = 0)
         {
             var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             Lista_CorregirTransferencia = ListaCorregirTransferencia.get_list(IdTransaccionSession);
 
-            //bus_transferencia.CorregirTransferencia(Lista_CorregirTransferencia);
             var Result = bus_transferencia.CorregirTransferencia(Lista_CorregirTransferencia, fecha_ini);
 
-
-            return Json(0, JsonRequestBehavior.AllowGet);
+            return Json(Result, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

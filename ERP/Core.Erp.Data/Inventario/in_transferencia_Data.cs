@@ -311,12 +311,13 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
+                
                 FechaInicio = FechaInicio.Date;
-                List<in_transferencia_Info> Lista = null;
+                List<in_transferencia_Info> Lista = new List<in_transferencia_Info>();
 
                 using (Entities_inventario Context = new Entities_inventario())
                 {
-                    Lista = (from q in Context.vwin_transferencia_x_in_movi_inve_agrupada_para_recosteo
+                    var lst = (from q in Context.vwin_transferencia_x_in_movi_inve_agrupada_para_recosteo
                              where q.IdEmpresa == IdEmpresa
                              && q.tr_fecha >= FechaInicio
                              group q by new { q.IdEmpresa, q.IdSucursalOrigen, q.cod_sucursal, q.nom_sucursal, q.IdBodegaOrigen, q.cod_bodega, q.nom_bodega, q.tr_fecha }
@@ -333,7 +334,7 @@ namespace Core.Erp.Data.Inventario
                                 
                              }).ToList();
 
-                    foreach (var item in Lista)
+                    foreach (var item in lst)
                     {
                         in_transferencia_Info info = new in_transferencia_Info();
 
@@ -351,7 +352,7 @@ namespace Core.Erp.Data.Inventario
 
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -363,7 +364,6 @@ namespace Core.Erp.Data.Inventario
         {
             try
             {
-                int c = 1;
                 using (Entities_inventario contex = new Entities_inventario())
                 {
                     var mensaje = "";
@@ -375,21 +375,18 @@ namespace Core.Erp.Data.Inventario
 
                     DateTime Fecha_ini = DateTime.Now;
                     in_transferencia_Info info_transferencia = new in_transferencia_Info();
+
+                    var cont = 1;
                     foreach (var item in Lista_CorregirTransferencia)
                     {
                         info_transferencia = Lista_CorregirTransferencia.OrderBy(q => q.IdEmpresa).ThenBy(q => q.IdSucursalOrigen).ThenBy(q => q.IdBodegaOrigen).ThenByDescending(q => q.tr_fecha).ToList().FirstOrDefault(q => q.IdSucursalOrigen == item.IdSucursalOrigen && q.IdBodegaOrigen == item.IdBodegaOrigen && q.tr_fecha < item.tr_fecha);
                         Fecha_ini = info_transferencia == null ? Convert.ToDateTime(fecha_ini) : info_transferencia.tr_fecha.Date;
 
-                        if(Lista_CorregirTransferencia.Count()>0)
-                        //if (contex.spSys_Inv_Recosteo_Inventario_x_rango_fechas(item.IdEmpresa, item.IdSucursalOrigen, item.IdBodegaOrigen, Fecha_ini, item.tr_fecha, 5))
-                        {
-                            //bus_costo_historico.Proceso_recosteo_y_correccion_contable_inv(param.IdEmpresa, item.IdSucursalOrigen, item.IdBodegaOrigen, Fecha_ini, item.tr_fecha, 5))
-                            //item.Check = true;
-                        }
-
+                        contex.spSys_Inv_Recosteo_Inventario_x_rango_fechas(item.IdEmpresa, item.IdSucursalOrigen, item.IdBodegaOrigen, Fecha_ini, item.tr_fecha, 5);
+                        cont++;
                     }
 
-                    if (Lista_CorregirTransferencia.Count == Lista_CorregirTransferencia.Count)
+                    if (Lista_CorregirTransferencia.Count == cont)
                         mensaje = "Corrección de transferencias completas";
                     else
                         mensaje = "No se puedieron corregir todas las transferencias";
@@ -397,7 +394,7 @@ namespace Core.Erp.Data.Inventario
                     return mensaje;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

@@ -243,7 +243,6 @@ namespace Core.Erp.Bus.Inventario
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
