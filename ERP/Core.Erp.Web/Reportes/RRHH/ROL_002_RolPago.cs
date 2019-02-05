@@ -58,7 +58,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  q.IdEmpleado,
                                  q.RubroDescripcion,
                                  q.Valor,
-                                 q.Grupo
+                                 q.Grupo,
+                                 q.ru_orden
                              } into ing
                              select new ROL_002_Info
                              {
@@ -70,8 +71,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                  IdEmpleado = ing.Key.IdEmpleado,
                                  RubroDescripcion = ing.Key.RubroDescripcion,
                                  Valor = ing.Key.Valor,
-                                 Grupo = ing.Key.Grupo
-
+                                 Grupo = ing.Key.Grupo,
+                                 ru_orden = ing.Key.ru_orden
                              }).ToList();
 
             Lista_egreso = (from q in lst_rpt
@@ -86,7 +87,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                 q.IdEmpleado,
                                 q.RubroDescripcion,
                                 q.Valor,
-                                q.Grupo
+                                q.Grupo,
+                                q.ru_orden
 
                             } into egr
                             select new ROL_002_Info
@@ -99,8 +101,8 @@ namespace Core.Erp.Web.Reportes.RRHH
                                 IdEmpleado = egr.Key.IdEmpleado,
                                 RubroDescripcion = egr.Key.RubroDescripcion,
                                 Valor = (egr.Key.Valor) * -1,
-                                Grupo = egr.Key.Grupo
-
+                                Grupo = egr.Key.Grupo,
+                                ru_orden = egr.Key.ru_orden
                             }).ToList();
             
             lb_liquido.Text = Convert.ToString( Convert.ToDecimal(string.Format("{0:F2}", (lst_rpt.Sum(v => v.Valor) ) ) ));
