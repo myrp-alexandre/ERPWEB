@@ -2268,6 +2268,9 @@
     <Compile Include="vwin_Producto_Stock.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>
+    <Compile Include="vwin_producto_x_tb_bodega_Costo_Historico.cs">
+      <DependentUpon>Model_inventario.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwin_producto_x_tb_bodega_stock_x_lote.cs">
       <DependentUpon>Model_inventario.tt</DependentUpon>
     </Compile>

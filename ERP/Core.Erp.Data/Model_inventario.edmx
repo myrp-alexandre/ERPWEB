@@ -1017,6 +1017,43 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_Producto_Stock' no tiene defi
           <Property Name="Stock" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_producto_x_tb_bodega_Costo_Historico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwin_producto_x_tb_bodega_Costo_Historico">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="nom_sucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="nom_bodega" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="cod_producto" />
+            <PropertyRef Name="nom_producto" />
+            <PropertyRef Name="IdFecha" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="costo" />
+            <PropertyRef Name="Stock_a_la_fecha" />
+            <PropertyRef Name="Observacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="cod_sucursal" Type="varchar" MaxLength="10" />
+          <Property Name="nom_sucursal" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="cod_bodega" Type="varchar" MaxLength="50" />
+          <Property Name="nom_bodega" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cod_producto" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="nom_producto" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdFecha" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="costo" Type="float" Nullable="false" />
+          <Property Name="Stock_a_la_fecha" Type="float" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_trans" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwin_producto_x_tb_bodega_stock_x_lote' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwin_producto_x_tb_bodega_stock_x_lote">
           <Key>
@@ -2514,6 +2551,27 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
     [vwin_Producto_Stock].[IdProducto] AS [IdProducto], 
     [vwin_Producto_Stock].[Stock] AS [Stock]
     FROM [dbo].[vwin_Producto_Stock] AS [vwin_Producto_Stock]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwin_producto_x_tb_bodega_Costo_Historico" EntityType="Self.vwin_producto_x_tb_bodega_Costo_Historico" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[IdEmpresa] AS [IdEmpresa], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[IdSucursal] AS [IdSucursal], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[cod_sucursal] AS [cod_sucursal], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[nom_sucursal] AS [nom_sucursal], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[IdBodega] AS [IdBodega], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[cod_bodega] AS [cod_bodega], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[nom_bodega] AS [nom_bodega], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[IdProducto] AS [IdProducto], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[cod_producto] AS [cod_producto], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[nom_producto] AS [nom_producto], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[IdFecha] AS [IdFecha], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[Secuencia] AS [Secuencia], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[fecha] AS [fecha], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[costo] AS [costo], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[Stock_a_la_fecha] AS [Stock_a_la_fecha], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[Observacion] AS [Observacion], 
+    [vwin_producto_x_tb_bodega_Costo_Historico].[fecha_trans] AS [fecha_trans]
+    FROM [dbo].[vwin_producto_x_tb_bodega_Costo_Historico] AS [vwin_producto_x_tb_bodega_Costo_Historico]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwin_producto_x_tb_bodega_stock_x_lote" EntityType="Self.vwin_producto_x_tb_bodega_stock_x_lote" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -4396,6 +4454,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
             <Parameter Name="Fecha_ini" Mode="In" Type="DateTime" />
             <Parameter Name="cant_Decimales" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="vwin_producto_x_tb_bodega_Costo_Historico" EntityType="Model_inventario.vwin_producto_x_tb_bodega_Costo_Historico" />
           </EntityContainer>
         <ComplexType Name="spSys_inv_Reversar_aprobacion_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -5727,6 +5786,41 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
           <Property Name="nom_bodega" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="tr_fecha" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="vwin_producto_x_tb_bodega_Costo_Historico">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="nom_sucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="nom_bodega" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="cod_producto" />
+            <PropertyRef Name="nom_producto" />
+            <PropertyRef Name="IdFecha" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="fecha" />
+            <PropertyRef Name="costo" />
+            <PropertyRef Name="Stock_a_la_fecha" />
+            <PropertyRef Name="Observacion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="cod_sucursal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="nom_sucursal" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="cod_bodega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_bodega" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="cod_producto" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="nom_producto" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdFecha" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="costo" Type="Double" Nullable="false" />
+          <Property Name="Stock_a_la_fecha" Type="Double" Nullable="false" />
+          <Property Name="Observacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_trans" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6844,6 +6938,29 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwin_producto_padre_combo' no tien
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spSys_Inv_Recosteo_Inventario_x_rango_fechas" FunctionName="Model_inventario.Store.spSys_Inv_Recosteo_Inventario_x_rango_fechas" />
           <FunctionImportMapping FunctionImportName="spSys_Inv_Recosteo_Inventario" FunctionName="Model_inventario.Store.spSys_Inv_Recosteo_Inventario" />
+          <EntitySetMapping Name="vwin_producto_x_tb_bodega_Costo_Historico">
+            <EntityTypeMapping TypeName="Model_inventario.vwin_producto_x_tb_bodega_Costo_Historico">
+              <MappingFragment StoreEntitySet="vwin_producto_x_tb_bodega_Costo_Historico">
+                <ScalarProperty Name="fecha_trans" ColumnName="fecha_trans" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Stock_a_la_fecha" ColumnName="Stock_a_la_fecha" />
+                <ScalarProperty Name="costo" ColumnName="costo" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdFecha" ColumnName="IdFecha" />
+                <ScalarProperty Name="nom_producto" ColumnName="nom_producto" />
+                <ScalarProperty Name="cod_producto" ColumnName="cod_producto" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="nom_bodega" ColumnName="nom_bodega" />
+                <ScalarProperty Name="cod_bodega" ColumnName="cod_bodega" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="nom_sucursal" ColumnName="nom_sucursal" />
+                <ScalarProperty Name="cod_sucursal" ColumnName="cod_sucursal" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

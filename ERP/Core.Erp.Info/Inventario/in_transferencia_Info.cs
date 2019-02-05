@@ -43,9 +43,7 @@ namespace Core.Erp.Info.Inventario
         public string SucuOrigen { get; set; }
         public string BodegaORIG { get; set; }
         public string SucuDEST { get; set; }
-        public string BodegDest { get; set; }
-
-        public System.DateTime fecha_correccion_transferencia { get; set; }
+        public string BodegDest { get; set; }        
 
         public List<in_transferencia_det_Info> list_detalle { get; set; }
         public in_Ing_Egr_Inven_Info info_ingreso { get; set; }
@@ -61,5 +59,12 @@ namespace Core.Erp.Info.Inventario
             info_egreso = new in_Ing_Egr_Inven_Info();
             info_movimiento = new in_movi_inven_tipo_Info();
         }
+
+        #region Campos Auditoria Inventario
+        public System.DateTime fecha_correccion_transferencia { get; set; }
+        public System.DateTime fecha_recosteo_sucursal { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
+        #endregion
     }
 }

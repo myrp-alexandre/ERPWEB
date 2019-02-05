@@ -72,7 +72,43 @@ namespace Core.Erp.Data.Inventario
            
         }
 
-    
+
+        public List<in_producto_x_tb_bodega_Costo_Historico_Info> Recosteo_x_Sucursal(int IdEmpresa, int IdSucursal, int IdBodega, DateTime fecha_ini)
+        {
+            try
+            {
+                List<in_producto_x_tb_bodega_Costo_Historico_Info> Lista = new List<in_producto_x_tb_bodega_Costo_Historico_Info>();
+
+                using (Entities_inventario contex = new Entities_inventario())
+                {                    
+                    contex.spSys_Inv_Recosteo_Inventario(IdEmpresa, IdSucursal, IdBodega, fecha_ini,5);
+
+                    Lista = contex.vwin_producto_x_tb_bodega_Costo_Historico.Where(q => 
+                    q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.fecha >= fecha_ini                    
+                    ).Select(q => new in_producto_x_tb_bodega_Costo_Historico_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdSucursal = q.IdSucursal,
+                        IdBodega = q.IdBodega,
+                        IdProducto = q.IdProducto,
+                        cod_producto = q.cod_producto,
+                        nom_producto = q.nom_producto,
+                        IdFecha = q.IdFecha,
+                        fecha = q.fecha,
+                        Secuencia = q.Secuencia,
+                        costo = q.costo,
+                        Stock_a_la_fecha = q.Stock_a_la_fecha
+
+                    }).ToList();                    
+                }
+
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
 
     }
 }

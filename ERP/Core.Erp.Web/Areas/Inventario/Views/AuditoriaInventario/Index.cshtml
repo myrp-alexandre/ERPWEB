@@ -16,13 +16,13 @@
         <div id="Tabs" role="tabpanel">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active">
-                    <a href="#tab_correccion_trans" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Corrección de transferencia</a>
+                    <a href="#tab_correccion_trans" aria-controls="Correccion" role="tab" data-toggle="tab">Corrección de transferencia</a>
                 </li>
                 <li>
-                    <a href="#tab_mov_x_contabilizar" aria-controls="Precios" role="tab" data-toggle="tab" id="link_precios">Movimientos por contabilizar</a>
+                    <a href="#tab_mov_x_contabilizar" aria-controls="Movimientos" role="tab" data-toggle="tab">Movimientos por contabilizar</a>
                 </li>
                 <li hidden>
-                    <a href="#tab_recosteo_x_prod" aria-controls="Composicion" role="tab" data-toggle="tab" id="link_composicion">Recosteo por sucursal</a>
+                    <a href="#tab_recosteo_x_sucursal" aria-controls="Recosteo" role="tab" data-toggle="tab">Recosteo por sucursal</a>
                 </li>
             </ul>
             <div class="tab-content" style="padding-top: 20px">
@@ -75,34 +75,89 @@
                         </div>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_mov_x_contabilizar">
-                    <div class="row">
-                        <div class="col-md-12">
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_mov_x_contabilizar">
+                        <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="form-group">
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_recosteo_x_sucursal">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="IdSucursal">Sucursal*</label>
+                                        @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                                        @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="IdBodega">Bodega</label>
+                                        @Html.DropDownListFor(q => q.IdBodega, new SelectList(ViewBag.lst_bodega, "IdBodega", "bo_Descripcion"), new { @class = "form-control", @id = "IdBodega" })
+                                        @Html.ValidationMessageFor(q => q.IdBodega, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="">Fecha inicio*</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            @Html.DevExpress().DateEditFor(q => q.fecha_recosteo_sucursal, settings =>
+                                        {
+                                            settings.Name = "fecha_recosteo_sucursal";
+                                            settings.Properties.UseMaskBehavior = true;
+                                            settings.Properties.EditFormat = EditFormat.Date;
+                                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                        }).GetHtml()
+                                            @Html.ValidationMessageFor(q => q.fecha_recosteo_sucursal, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for=""></label>
+                                        <div class="input-group">
+                                            <button type="button" title="Recostear por sucursal" class="btn btn-primary" id="btn_recosteo_x_sucursal" onclick="Recosteo_x_Sucursal();">
+                                                <i class="fa fa-refresh"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @Html.Action("GridViewPartial_Recosteo_x_Sucursal", new { IdSucursal = Model.IdSucursal, IdBodega = Model.IdBodega, fecha_ini = Model.fecha_recosteo_sucursal })
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_recosteo_x_prod">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-12">
-                                <div class="form-group">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>            
     </div>
 }
 
 <script type="text/javascript">
+    $(function () {
+        CargarBodega();
+        $("#IdSucursal").change(function () {
+            CargarBodega();
+        });
+    });
+
     function BuscarTransferencia() {
         var datos = {            
             fecha_ini: fecha_correccion_transferencia.GetValue(),
@@ -146,6 +201,57 @@
                 }
 
                 GridViewPartial_CorreccionTransferencias.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function CargarBodega() {
+        $("#IdBodega").empty();
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarBodega", "AuditoriaInventario", new { Area = "Inventario" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdBodega").append("<option value=" + row.IdBodega + ">" + row.bo_Descripcion + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+    function Recosteo_x_Sucursal() {
+        var datos = {
+            fecha_ini: fecha_recosteo_sucursal.GetValue(),
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
+            IdBodega: $("#IdBodega").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Recosteo_x_Sucursal", "AuditoriaInventario", new { Area = "Inventario" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_Recosteo_x_Sucursal.PerformCallback();
             },
             error: function (error) {
             }
