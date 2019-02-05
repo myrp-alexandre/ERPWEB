@@ -620,5 +620,66 @@ namespace Core.Erp.Data.Inventario
                 throw;
             }
         }
+
+
+        public List<in_Ing_Egr_Inven_Info> BuscarMovimientos(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin, string TipoMovimiento)
+        {
+            try
+            {
+                FechaInicio = FechaInicio.Date;
+                FechaFin = FechaFin.Date;
+
+                List<in_Ing_Egr_Inven_Info> Lista = new List<in_Ing_Egr_Inven_Info>();
+
+                using (Entities_inventario Context = new Entities_inventario())
+                {
+                    Lista = (from q in Context.vwin_movi_inve_x_estado_contabilizacion
+                               where q.IdEmpresa == IdEmpresa
+                               && q.cm_fecha >= FechaInicio && q.cm_fecha <= FechaFin
+                               && q.cm_tipo == TipoMovimiento
+                               orderby new { q.cm_fecha } ascending
+                               select new in_Ing_Egr_Inven_Info
+                               {
+                                   IdEmpresa = q.IdEmpresa,
+                                   IdSucursal = q.IdSucursal,
+                                   IdMovi_inven_tipo =  q.IdMovi_inven_tipo,
+                                   IdNumMovi = q.IdNumMovi,
+                                   Su_Descripcion = q.nom_sucursal,
+                                   nom_bodega = q.nom_bodega,
+                                   signo = q.cm_tipo,
+                                   cm_fecha = q.cm_fecha,
+                                   TotalModulo = q.TotalModulo,
+                                   TotalContabilidad = q.TotalContabilidad,
+                                   Diferencia = q.Diferencia,
+                                   Estado_contabilizacion = q.Estado_contabilizacion,
+                               }).ToList();
+
+                    Lista.ForEach(q => q.CodMoviInven = (q.IdEmpresa.ToString("00") + q.IdSucursal.ToString("00") + q.IdMovi_inven_tipo.ToString("0000") + q.IdNumMovi.ToString("00000000")));
+
+                    foreach (var item in Lista)
+                    {
+                        if(item.signo == "+")
+                        {
+                            item.signo = "INGRESO";
+                        }
+                        else if (item.signo == "-")
+                        {
+                            item.signo = "EGRESO";
+                        }
+                        else
+                        {
+                            item.signo = "";
+                        }
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

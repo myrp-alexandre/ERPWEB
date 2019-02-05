@@ -65,6 +65,9 @@ namespace Core.Erp.Info.Inventario
         public System.DateTime fecha_recosteo_sucursal { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
+        public System.DateTime fecha_inicio_mov { get; set; }
+        public System.DateTime fecha_fin_mov { get; set; }
+        public string TipoMovimiento { get; set; }
         #endregion
     }
 }

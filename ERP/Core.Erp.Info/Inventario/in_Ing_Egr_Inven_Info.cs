@@ -49,6 +49,13 @@ namespace Core.Erp.Info.Inventario
         public string SecuencialID { get; set; }
         #endregion
 
+        #region Campos Auditoria de inventario
+        public string nom_bodega { get; set; }        
+        public string Estado_contabilizacion { get; set; }
+        public Nullable<double> TotalModulo { get; set; }
+        public Nullable<double> TotalContabilidad { get; set; }
+        public Nullable<double> Diferencia { get; set; }
+        #endregion
         public in_Ing_Egr_Inven_Info()
         {
             lst_in_Ing_Egr_Inven_det = new List<in_Ing_Egr_Inven_det_Info>();

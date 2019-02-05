@@ -85,5 +85,30 @@ namespace Core.Erp.Bus.Inventario
                 throw;
             }
         }
+
+        public List<in_Ing_Egr_Inven_Info> BuscarMovimientos(int IdEmpresa, DateTime FechaInicio, DateTime FechaFin, string TipoMovimiento)
+        {
+            try
+            {
+                return odata.BuscarMovimientos(IdEmpresa, FechaInicio, FechaFin, TipoMovimiento);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string ContabilizarMovimientos(List<in_Ing_Egr_Inven_Info> Lista_Movimientos)
+        {
+            try
+            {
+                return "";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
