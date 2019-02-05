@@ -9829,6 +9829,7 @@
     <Content Include="Areas\Inventario\Views\AuditoriaInventario\Index.cshtml" />
     <Content Include="Areas\Inventario\Views\AuditoriaInventario\_GridViewPartial_CorreccionTransferencias.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_009.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\PlanDeCuentas\_CmbCuenta_PlanCta.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
