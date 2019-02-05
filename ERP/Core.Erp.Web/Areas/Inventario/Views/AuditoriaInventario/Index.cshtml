@@ -22,7 +22,7 @@
                     <a href="#tab_mov_x_contabilizar" aria-controls="Precios" role="tab" data-toggle="tab" id="link_precios">Movimientos por contabilizar</a>
                 </li>
                 <li hidden>
-                    <a href="#tab_recosteo_x_prod" aria-controls="Composicion" role="tab" data-toggle="tab" id="link_composicion">Recosteo de productos</a>
+                    <a href="#tab_recosteo_x_prod" aria-controls="Composicion" role="tab" data-toggle="tab" id="link_composicion">Recosteo por sucursal</a>
                 </li>
             </ul>
             <div class="tab-content" style="padding-top: 20px">
@@ -51,12 +51,16 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-primary" id="btn_buscar_transferencia" onclick="BuscarTransferencia();">Buscar transferencia</button>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">                                        
-                                    <button type="button" class="btn btn-primary" id="btn_corregir_transferencia" onclick="CorregirTransferencia();">Corregir transferencia</button>
+                                    <label for=""></label>
+                                    <div class="input-group">
+                                        <button type="button" title="Buscar transferencia"  class="btn btn-primary" id="btn_buscar_transferencia" onclick="BuscarTransferencia();">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                        &nbsp;&nbsp;
+                                        <button type="button" title="Corregir transferencia" class="btn btn-primary" id="btn_corregir_transferencia" onclick="CorregirTransferencia();">
+                                            <i class="fa fa-refresh"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +69,7 @@
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    @Html.Action("GridViewPartial_RecosteoInventario", new { fecha_ini = Model.fecha_correccion_transferencia })
+                                    @Html.Action("GridViewPartial_CorreccionTransferencias", new { fecha_ini = Model.fecha_correccion_transferencia })
                                 </div>
                             </div>
                         </div>
@@ -96,11 +100,6 @@
             </div>
         </div>            
     </div>
-    <!-- /.box-body -->
-    <div class="box-footer">
-        [@Session["IdEmpresa"]] @Session["nom_empresa"]
-    </div>
-    <!-- /.box-footer-->
 }
 
 <script type="text/javascript">
@@ -120,9 +119,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                console.log(data);
-                GridViewPartial_RecosteoInventario.PerformCallback();
-                
+                GridViewPartial_CorreccionTransferencias.PerformCallback();
             },
             error: function (error) {
             }
@@ -134,7 +131,6 @@
             fecha_ini: fecha_correccion_transferencia.GetValue(),
             IdEmpresa: $("#IdEmpresa").val()
             }
-        $("#btn_corregir_transferencia").attr("disabled", true);
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
@@ -148,6 +144,8 @@
                 if (data != "") {
                     alert(data);
                 }
+
+                GridViewPartial_CorreccionTransferencias.PerformCallback();
             },
             error: function (error) {
             }

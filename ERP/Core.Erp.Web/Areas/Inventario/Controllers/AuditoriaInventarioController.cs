@@ -35,7 +35,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             return View(model);
         }
 
-        public ActionResult GridViewPartial_RecosteoInventario(DateTime? fecha_ini)
+        public ActionResult GridViewPartial_CorreccionTransferencias(DateTime? fecha_ini)
         {
             var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -43,7 +43,7 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
 
             var model = ListaCorregirTransferencia.get_list(IdTransaccionSession);
 
-            return PartialView("_GridViewPartial_RecosteoInventario", model);
+            return PartialView("_GridViewPartial_CorreccionTransferencias", model);
         }
 
         #region Json
@@ -63,6 +63,9 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             Lista_CorregirTransferencia = ListaCorregirTransferencia.get_list(IdTransaccionSession);
 
             var Result = bus_transferencia.CorregirTransferencia(Lista_CorregirTransferencia, fecha_ini);
+
+            List<in_transferencia_Info> model = new List<in_transferencia_Info>();            
+            ListaCorregirTransferencia.set_list(model, IdTransaccionSession);
 
             return Json(Result, JsonRequestBehavior.AllowGet);
         }

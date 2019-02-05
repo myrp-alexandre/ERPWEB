@@ -376,7 +376,7 @@ namespace Core.Erp.Data.Inventario
                     DateTime Fecha_ini = DateTime.Now;
                     in_transferencia_Info info_transferencia = new in_transferencia_Info();
 
-                    var cont = 1;
+                    var cont = 0;
                     foreach (var item in Lista_CorregirTransferencia)
                     {
                         info_transferencia = Lista_CorregirTransferencia.OrderBy(q => q.IdEmpresa).ThenBy(q => q.IdSucursalOrigen).ThenBy(q => q.IdBodegaOrigen).ThenByDescending(q => q.tr_fecha).ToList().FirstOrDefault(q => q.IdSucursalOrigen == item.IdSucursalOrigen && q.IdBodegaOrigen == item.IdBodegaOrigen && q.tr_fecha < item.tr_fecha);
@@ -387,16 +387,15 @@ namespace Core.Erp.Data.Inventario
                     }
 
                     if (Lista_CorregirTransferencia.Count == cont)
-                        mensaje = "Corrección de transferencias completas";
+                        mensaje = "Corrección de transferencias completada";
                     else
-                        mensaje = "No se puedieron corregir todas las transferencias";
+                        mensaje = "No se pudieron corregir todas las transferencias";
 
                     return mensaje;
                 }
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
