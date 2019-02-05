@@ -41,9 +41,8 @@ namespace Core.Erp.Web.Areas.Inventario.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.fecha_ini = fecha_ini == null ? DateTime.Now.Date : Convert.ToDateTime(fecha_ini);
 
-            var model = bus_transferencia.GetListRecosteoInventario(IdEmpresa, ViewBag.fecha_ini);
-            ListaCorregirTransferencia.set_list(model, IdTransaccionSession);
-           
+            var model = ListaCorregirTransferencia.get_list(IdTransaccionSession);
+
             return PartialView("_GridViewPartial_RecosteoInventario", model);
         }
 
