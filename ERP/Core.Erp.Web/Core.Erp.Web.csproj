@@ -9827,7 +9827,7 @@
     <Content Include="Areas\RRHH\Views\EmpleadoCuentaContable\_CmbEmpleado_CtaCon.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_008.cshtml" />
     <Content Include="Areas\Inventario\Views\AuditoriaInventario\Index.cshtml" />
-    <Content Include="Areas\Inventario\Views\AuditoriaInventario\_GridViewPartial_RecosteoInventario.cshtml" />
+    <Content Include="Areas\Inventario\Views\AuditoriaInventario\_GridViewPartial_CorreccionTransferencias.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_009.cshtml" />
     <None Include="Properties\PublishProfiles\Erp_web.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />

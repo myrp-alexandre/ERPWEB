@@ -128,6 +128,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                info.IdUsuario = SessionFixed.IdUsuario;
                 if (ModelState.IsValid)
                 {
                     info.IdEmpresa = GetIdEmpresa();
@@ -172,6 +173,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                info.IdUsuarioUltMod = SessionFixed.IdUsuario;
                 if (ModelState.IsValid)
                 {
                     if (!bus_contrato.modificarDB(info))
@@ -214,8 +216,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-               
-                    if (!bus_contrato.anularDB(info))
+                info.IdUsuarioUltAnu = SessionFixed.IdUsuario;
+                if (!bus_contrato.anularDB(info))
                     {
                         cargar_combo();
                         return View(info);

@@ -190,10 +190,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     }
                 }
             }
-
-
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_novedad.guardarDB(model))
             {
                 cargar_combos(model.IdNomina_Tipo);
@@ -257,8 +255,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos(model.IdNomina_Tipo);
                 return View(model);
             }
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_novedad.modificarDB(model))
             {
                 cargar_combos(model.IdNomina_Tipo);
@@ -284,8 +282,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             model.lst_novedad_det = ro_empleado_novedad_det_lst.get_list(model.IdTransaccionSession);
 
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             model.Fecha_UltAnu = DateTime.Now;
             if (!bus_novedad.anularDB(model))
             {

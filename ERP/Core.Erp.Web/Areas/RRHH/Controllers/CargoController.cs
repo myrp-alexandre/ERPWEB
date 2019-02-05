@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Info.RRHH;
 using Core.Erp.Bus.RRHH;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class CargoController : Controller
@@ -37,7 +39,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-              if(ModelState.IsValid)
+                info.IdUsuario = SessionFixed.IdUsuario;
+                if (ModelState.IsValid)
                 {
                     info.IdEmpresa =  GetIdEmpresa();
                     if (!bus_cargo.guardarDB(info))
@@ -74,6 +77,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                info.IdUsuarioUltMod = SessionFixed.IdUsuario;
                 if (ModelState.IsValid)
                 {
                     if (!bus_cargo.modificarDB(info))
@@ -111,8 +115,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-               
-                    if (!bus_cargo.anularDB(info))
+                info.IdUsuarioUltMod = SessionFixed.IdUsuario;
+                if (!bus_cargo.anularDB(info))
                         return View(info);
                     else
                         return RedirectToAction("Index");

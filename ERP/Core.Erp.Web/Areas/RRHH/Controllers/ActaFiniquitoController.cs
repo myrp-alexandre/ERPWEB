@@ -111,8 +111,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos();
                 return View(model);
             }
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuario = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (!bus_acta_finiquito.guardarDB(model))
             {
                 cargar_combos();
@@ -142,8 +142,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos();
                 return View(model);
             }
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_acta_finiquito.modificarDB(model))
             {
                 cargar_combos();
@@ -168,8 +168,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             model.lst_detalle = lst_detalle.get_list();
 
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_acta_finiquito.anularDB(model))
             {
                 cargar_combos();

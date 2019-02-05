@@ -99,7 +99,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
             if (parametros == null)
                 parametros = new ro_Parametros_Info();
             model.detalle = ro_SancionesPorMarcaciones_det_Info_list.get_list(model.IdTransaccionSession);
-           
+            model.IdUsuario = SessionFixed.IdUsuario;
             if (model.detalle == null || model.detalle.Count() == 0)
             {
                 ViewBag.mensaje = "No existe detalle de marcaciones";
@@ -147,8 +147,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos(model.IdNomina_Tipo);
                 return View(model);
             }
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_sanciones.modificarDB(model))
             {
                 cargar_combos(model.IdNomina_Tipo);
@@ -180,8 +180,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             model.detalle = ro_SancionesPorMarcaciones_det_Info_list.get_list(model.IdTransaccionSession);
 
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             model.Fecha_UltAnu = DateTime.Now;
             if (!bus_sanciones.anularDB(model))
             {

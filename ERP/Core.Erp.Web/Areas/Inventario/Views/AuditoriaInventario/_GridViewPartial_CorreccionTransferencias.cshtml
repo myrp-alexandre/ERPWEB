@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_RecosteoInventario";
-        settings.CallbackRouteValues = new { Controller = "AuditoriaInventario", Action = "GridViewPartial_RecosteoInventario", fecha_ini = ViewBag.fecha_ini};
+        settings.Name = "GridViewPartial_CorreccionTransferencias";
+        settings.CallbackRouteValues = new { Controller = "AuditoriaInventario", Action = "GridViewPartial_CorreccionTransferencias", fecha_ini = ViewBag.fecha_ini};
         settings.KeyFieldName = "";
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
