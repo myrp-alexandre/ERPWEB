@@ -73,7 +73,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                 ViewBag.IdEmpleado = info.IdEmpleado;
                 info.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                info.UsuarioIngresa = Session["IdUsuario"].ToString();
+                info.UsuarioIngresa = SessionFixed.IdUsuario;
                if( bus_rubro_acumulados.si_existe(info))
                 {
                     ViewBag.mensaje = "El empleado tiene una solicitud vigente para el rubro seleccionado";

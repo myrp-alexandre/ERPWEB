@@ -154,8 +154,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltMod = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_archivo.modificarDB(model))
             {
                 cargar_combos(model.IdNomina, Convert.ToInt32(SessionFixed.IdSucursal));
@@ -186,8 +186,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             model.detalle = ro_archivos_bancos_generacion_x_empleado_list_Info.get_list(model.IdTransaccionSession);
 
-            model.IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            model.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             model.Fecha_UltAnu = DateTime.Now;
             if (!bus_archivo.anularDB(model))
             {

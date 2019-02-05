@@ -89,6 +89,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
 
                 IdEmpresa = GetIdEmpresa();
                 info.IdEmpresa = IdEmpresa;
+                info.IdUsuario = SessionFixed.IdUsuario;
                 if (ModelState.IsValid)
                 {
                     info.Valor = Math.Round(info.Valor,2);
@@ -136,6 +137,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                info.IdUsuarioUltMod = SessionFixed.IdUsuario;
                 if (ModelState.IsValid)
                 {
                     info.Valor = Math.Round(info.Valor,2);
@@ -183,6 +185,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
+                info.IdUsuarioUltAnu = SessionFixed.IdUsuario;
                 if (!bus_rubro_fijos.anularDB(info))
                 {
                     cargar_combos(info.IdNomina_Tipo);

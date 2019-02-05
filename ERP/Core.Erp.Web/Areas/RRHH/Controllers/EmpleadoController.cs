@@ -295,6 +295,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                 }
                 info.IdEmpresa = GetIdEmpresa();
                 var return_naturaleza = "";
+                info.IdUsuarioUltModi = SessionFixed.IdUsuario;
 
                 if (cl_funciones.ValidaIdentificacion(info.IdTipoDocumento, "", info.pe_cedulaRuc, ref return_naturaleza))
                 {
@@ -379,6 +380,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
                     cargar_combos();
                     return View(info);
                 }
+                info.IdUsuarioUltAnu = SessionFixed.IdUsuario;
                 info.IdEmpresa = GetIdEmpresa();
                 if (!bus_empleado.anularDB(info))
                 {

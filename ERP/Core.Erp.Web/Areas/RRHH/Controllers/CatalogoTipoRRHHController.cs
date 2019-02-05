@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Erp.Bus.RRHH;
 using Core.Erp.Info.RRHH;
+using Core.Erp.Web.Helps;
+
 namespace Core.Erp.Web.Areas.RRHH.Controllers
 {
     public class CatalogoTipoRRHHController : Controller
@@ -37,7 +39,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                info.IdUsuario = SessionFixed.IdUsuario; if (ModelState.IsValid)
                 {
                     info.IdUsuario = Session["IdUsuario"].ToString();
                     if (!bus_catalogoTipo.guardarDB(info))
@@ -74,7 +76,8 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                info.IdUsuarioUltMod = SessionFixed.IdUsuario;
+                    if (ModelState.IsValid)
                 {
                     info.IdUsuarioUltMod = Session["IdUsuario"].ToString();
                     info.Fecha_UltMod = DateTime.Now;
@@ -113,7 +116,7 @@ namespace Core.Erp.Web.Areas.RRHH.Controllers
         {
             try
             {
-                info.IdUsuarioUltAnu = Session["IdUsuario"].ToString();
+                info.IdUsuarioUltAnu = SessionFixed.IdUsuario;
                 info.Fecha_UltAnu = DateTime.Now;
                 if (!bus_catalogoTipo.anularDB(info))
                     return View(info);
